@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6DFB7C5E-7AC1-48EE-A065-2075921A7413}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VisioPS</RootNamespace>
+    <AssemblyName>VisioPS</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Reference Assemblies\Microsoft\WindowsPowerShell\v1.0\System.Management.Automation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\Reset_PageOrigin.cs" />
+    <Compile Include="Commands\Get_SectionResult.cs" />
+    <Compile Include="Commands\Get_SRCFormula.cs" />
+    <Compile Include="Commands\Set_Cells.cs" />
+    <Compile Include="Commands\New_CellSetter.cs" />
+    <Compile Include="Commands\Set_Style.cs" />
+    <Compile Include="DTUtil.cs" />
+    <Compile Include="Commands\Get_Point.cs" />
+    <Compile Include="Commands\Draw_Grid.cs" />
+    <Compile Include="Commands\New_Master.cs" />
+    <Compile Include="Commands\New_Stencil.cs" />
+    <Compile Include="Commands\Get_SectionFormula.cs" />
+    <Compile Include="Commands\Remove_UserDefinedCell.cs" />
+    <Compile Include="objects\VisioPSSessionOptions.cs" />
+    <Compile Include="enums\ResultType.cs" />
+    <Compile Include="Commands\Get_SRCResult.cs" />
+    <Compile Include="Commands\Get_SRC.cs" />
+    <Compile Include="Commands\Close_Drawing.cs" />
+    <Compile Include="Commands\Drop_Master.cs" />
+    <Compile Include="Commands\Duplicate_Shape.cs" />
+    <Compile Include="Commands\Export_PageAsSVGXHTML.cs" />
+    <Compile Include="Commands\Export_SelectionAsXAML.cs" />
+    <Compile Include="Commands\Redo_Visio.cs" />
+    <Compile Include="Commands\Save_Drawing.cs" />
+    <Compile Include="Commands\TestDrawing.cs" />
+    <Compile Include="Commands\TestSelectedShapes.cs" />
+    <Compile Include="Commands\Remove_Shape.cs" />
+    <Compile Include="Commands\Get_Layer.cs" />
+    <Compile Include="Commands\New_CustomField.cs" />
+    <Compile Include="Commands\Align_Shape.cs" />
+    <Compile Include="Commands\Connect_Shape.cs" />
+    <Compile Include="Commands\Distribute_Shape.cs" />
+    <Compile Include="Commands\Select_Shape.cs" />
+    <Compile Include="Commands\Set_Formula.cs" />
+    <Compile Include="Commands\Draw_Bezier.cs" />
+    <Compile Include="Commands\Draw_OrgChart.cs" />
+    <Compile Include="Commands\Draw_PieSlice.cs" />
+    <Compile Include="Commands\Draw_PieSlices.cs" />
+    <Compile Include="Commands\Draw_PolyLine.cs" />
+    <Compile Include="Commands\Export_Page.cs" />
+    <Compile Include="Commands\Export_Pages.cs" />
+    <Compile Include="enums\GetShapeFlags.cs" />
+    <Compile Include="Commands\Get_ConnectionPoint.cs" />
+    <Compile Include="Commands\Get_Control.cs" />
+    <Compile Include="Commands\Get_Drawing.cs" />
+    <Compile Include="Commands\Draw_FlowChart.cs" />
+    <Compile Include="Commands\Get_Master.cs" />
+    <Compile Include="Commands\Get_UserDefinedCell.cs" />
+    <Compile Include="enums\HorizontalAlignment.cs" />
+    <Compile Include="Commands\MoveTo_Page.cs" />
+    <Compile Include="Commands\New_Control.cs" />
+    <Compile Include="Commands\New_Drawing.cs" />
+    <Compile Include="enums\SelectionOperation.cs" />
+    <Compile Include="enums\TextBoxPosition.cs" />
+    <Compile Include="enums\PageSizeOperations.cs" />
+    <Compile Include="Commands\Open_Drawing.cs" />
+    <Compile Include="enums\PageOrientation.cs" />
+    <Compile Include="enums\ParagraphHorizontalAlignment.cs" />
+    <Compile Include="Commands\Remove_Control.cs" />
+    <Compile Include="Commands\Set_UserDefinedCell.cs" />
+    <Compile Include="Commands\Stack_Shape.cs" />
+    <Compile Include="enums\TextVerticalAlignment.cs" />
+    <Compile Include="Commands\Toogle_TextCase.cs" />
+    <Compile Include="Commands\Update_Size.cs" />
+    <Compile Include="Commands\Attach_VisioApplication.cs" />
+    <Compile Include="Commands\Get_DirectedEdge.cs" />
+    <Compile Include="Commands\Copy_Format.cs" />
+    <Compile Include="enums\ZoomLevel.cs" />
+    <Compile Include="Commands\New_Connection.cs" />
+    <Compile Include="Commands\Paste_Format.cs" />
+    <Compile Include="Commands\Remove_CustomProperty.cs" />
+    <Compile Include="Commands\Draw_Line.cs" />
+    <Compile Include="Commands\Draw_Oval.cs" />
+    <Compile Include="Commands\Draw_Rectangle.cs" />
+    <Compile Include="Commands\Draw_DataTable.cs" />
+    <Compile Include="Commands\Duplicate_Page.cs" />
+    <Compile Include="objects\FormatPainterState.cs" />
+    <Compile Include="Commands\Get_Edge.cs" />
+    <Compile Include="Commands\Get_Page.cs" />
+    <Compile Include="Commands\Get_CustomProperty.cs" />
+    <Compile Include="Commands\Get_Shape.cs" />
+    <Compile Include="Commands\Get_Text.cs" />
+    <Compile Include="Commands\Get_VisioApplication.cs" />
+    <Compile Include="Commands\New_Group.cs" />
+    <Compile Include="Commands\Move_TextBox.cs" />
+    <Compile Include="Commands\New_Page.cs" />
+    <Compile Include="Commands\New_VisioApplication.cs" />
+    <Compile Include="Commands\Move_Shape.cs" />
+    <Compile Include="objects\CmdletExtensions.cs" />
+    <Compile Include="Commands\Update_PageSize.cs" />
+    <Compile Include="Commands\Set_WindowSize.cs" />
+    <Compile Include="Commands\Set_Selection.cs" />
+    <Compile Include="enums\VerticalAlignment.cs" />
+    <Compile Include="objects\VisioPSCmdlet.cs" />
+    <Compile Include="Commands\Set_PageLayout.cs" />
+    <Compile Include="Commands\Set_CustomProperty.cs" />
+    <Compile Include="Commands\Set_Text.cs" />
+    <Compile Include="Commands\Set_ZoomLevel.cs" />
+    <Compile Include="Commands\Stop_VisioApplication.cs" />
+    <Compile Include="Commands\Undo_Visio.cs" />
+    <Compile Include="Commands\Remove_Group.cs" />
+    <Compile Include="Commands\Open_Stencil.cs" />
+    <Compile Include="Commands\Write_Version.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="objects\ModuleGlobals.cs" />
+    <Compile Include="Commands\Set_Zoom.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj">
+      <Project>{2BA6E51C-D975-49E3-B6B9-DF3D2D951057}</Project>
+      <Name>VisioAutomation.Scripting.XamlTune</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
+      <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
+      <Name>VisioAutomation.Scripting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
+      <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
+      <Name>VisioAutomation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="samples\flowcharts\flowchart-sample-1.xml" />
+    <Content Include="samples\flowcharts\flowchart-sample-2.xml" />
+    <Content Include="samples\flowcharts\flowchart-sample-3.xml" />
+    <Content Include="samples\flowcharts\flowchart-sample-4.xml" />
+    <Content Include="samples\orgcharts\orgchart-sample-1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="scripts\demo_2_draw_and_drop.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="scripts\demo_1_emptydoc.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="samples\scripts\batch-create-flowcharts.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

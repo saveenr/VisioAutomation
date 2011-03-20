@@ -1,0 +1,99 @@
+using VisioAutomation.Extensions;
+using VA=VisioAutomation;
+using IVisio=Microsoft.Office.Interop.Visio;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace VisioAutomation.Connections
+{
+    public static class ConnectorHelper
+    {
+        private readonly static VA.ShapeSheet.SRC src_beginx = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowXForm1D, IVisio.VisCellIndices.vis1DBeginX);
+        private readonly static VA.ShapeSheet.SRC src_endx = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowXForm1D, IVisio.VisCellIndices.vis1DEndX);
+
+        public static void ConnectShapes(IVisio.Shape connector_shape, IVisio.Shape from_shape, IVisio.Shape to_shape)
+        {
+            if (connector_shape == null)
+            {
+                throw new System.ArgumentNullException("connector_shape");
+            }
+
+            if (from_shape == null)
+            {
+                throw new System.ArgumentNullException("from_shape");
+            }
+
+            if (to_shape == null)
+            {
+                throw new System.ArgumentNullException("to_shape");
+            }
+
+            if (connector_shape == from_shape)
+            {
+                throw new System.ArgumentException("connector cannot be the FROM shape");
+            }
+
+            if (connector_shape == to_shape)
+            {
+                throw new System.ArgumentException("connector cannot be the TO shape");
+            }
+
+            var connector_beginx = connector_shape.GetCell(src_beginx);
+            var connector_endx = connector_shape.GetCell(src_endx);
+            var from_cell = from_shape.CellsSRC[1, 1, 0];
+            var to_cell = to_shape.CellsSRC[1, 1, 0];
+            connector_beginx.GlueTo(from_cell);
+            connector_endx.GlueTo(to_cell);
+        }
+
+
+        public static IList<IVisio.Shape> ConnectShapes(IVisio.Page page, IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
+        {
+            if (master == null)
+            {
+                throw new System.ArgumentNullException("master");
+            }
+
+            if (fromshapes == null)
+            {
+                throw new System.ArgumentNullException("fromshapes");
+            }
+
+            if (toshapes == null)
+            {
+                throw new System.ArgumentNullException("toshapes");
+            }
+
+            if (fromshapes.Count != toshapes.Count)
+            {
+                throw new System.ArgumentException("must have same number of from and to shapes");
+            }
+            
+            if (fromshapes.Count == 0)
+            {
+                return new List<IVisio.Shape>(0);
+            }
+
+            int num_connectors = fromshapes.Count;
+            var connectors = new List<IVisio.Shape>(num_connectors);
+
+            for (int i = 0; i < num_connectors; i++)
+            {
+                var from_shape = fromshapes[i];
+                var to_shape = toshapes[i];
+
+                // TODO: Instead of dropping connectors one at a time use DropMany
+
+                // Drop the connector - deliberately place it off the page so it avoids overlapping with any shapes
+                var connector = page.Drop(master, -2, -2);
+
+                // Connect from Shape 1 to Shape2
+                ConnectShapes(connector, from_shape, to_shape);
+
+                connectors.Add(connector);
+            }
+
+            return connectors;
+        }
+    }
+}
