@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static partial class SimpleGeometrySamples
+    public static class SimpleGeometrySamples
     {
         public static void BezierCircle()
         {

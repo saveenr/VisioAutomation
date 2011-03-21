@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomationSamples
 {
-    public static partial class PageSamples
+    public static class PageSamples
     {
         public static void CreateBackgroundPage()
         {

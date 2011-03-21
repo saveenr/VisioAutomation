@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VisioAutomationSamples
 {
-    public static partial class ConnectorSamples
+    public static class ConnectorSamples
     {
         public static void ConnectorsToBack()
         {

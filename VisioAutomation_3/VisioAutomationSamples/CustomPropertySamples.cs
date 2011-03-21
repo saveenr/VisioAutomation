@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace VisioAutomationSamples
 {
-    public static partial class CustomPropertySamples
+    public static class CustomPropertySamples
     {
         public static void SetCustomProperties()
         {

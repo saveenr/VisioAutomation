@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomationSamples
 {
-    public static partial class PathAnalysisSamples
+    public static class PathAnalysisSamples
     {
         public static void PathAnalysis()
         {

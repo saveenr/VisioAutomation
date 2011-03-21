@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static partial class SmartShapeSamples
+    public static class SmartShapeSamples
     {
         public static void ProgressBar()
         {

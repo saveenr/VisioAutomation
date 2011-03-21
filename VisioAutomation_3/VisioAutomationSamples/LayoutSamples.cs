@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static partial class LayoutSamples
+    public static class LayoutSamples
     {
         public static void BoxHierarchy()
         {

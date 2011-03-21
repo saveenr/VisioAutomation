@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static partial class EffectsSamples
+    public static class EffectsSamples
     {
         public static void SoftShadow()
         {

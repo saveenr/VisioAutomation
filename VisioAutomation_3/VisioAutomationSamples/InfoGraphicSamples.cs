@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static partial class InfoGraphicSamples
+    public static class InfoGraphicSamples
     {
         public static void BarChart()
         {

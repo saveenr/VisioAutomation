@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static partial class TextSamples
+    public static class TextSamples
     {
         private static string text1 =
             @"

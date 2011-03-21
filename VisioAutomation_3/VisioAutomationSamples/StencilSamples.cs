@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static partial class StencilSamples
+    public static class StencilSamples
     {
         public static void DrawGridOfMasters()
         {

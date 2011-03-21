@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace VisioAutomationSamples
 {
-    public static partial class PlaygroundSamples
+    public static class PlaygroundSamples
     {
         private static IVisio.Shape draw_leaf(IVisio.Page page, VA.Drawing.Point p0)
         {
