@@ -83,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoxHierarchyShared.cs" />
-    <Compile Include="ColorSamples.cs" />
+    <Compile Include="ColorSample.cs" />
     <Compile Include="ConnectorSamples.cs" />
     <Compile Include="InfoGraphicSamples.cs" />
     <Compile Include="LayoutSamples.cs" />

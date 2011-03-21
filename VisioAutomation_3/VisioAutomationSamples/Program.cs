@@ -32,8 +32,8 @@ namespace VisioAutomationSamples
             LayoutSamples.MSAGL();
             StencilSamples.DrawGridOfMasters();
             ConnectorSamples.ConnectorsToBack();
-            ColorSamples.ColorGrid();
-            ColorSamples.GetShapeColors();
+            ColorSample.ColorGrid();
+            ColorSample.GetShapeColors();
 
             //creates new docs
             SpecialDocumentSamples.OrgChart();
