@@ -27,10 +27,14 @@
     <RootNamespace>VisioPowerTools</RootNamespace>
     <AssemblyName>VisioPowerTools</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <ManifestCertificateThumbprint>E209A92B8CE1215D31B25B4A1568AC9F270F39B0</ManifestCertificateThumbprint>
     <ManifestKeyFile>VisioPowerTools_TemporaryKey_10Year.pfx</ManifestKeyFile>
     <SignManifests>true</SignManifests>
