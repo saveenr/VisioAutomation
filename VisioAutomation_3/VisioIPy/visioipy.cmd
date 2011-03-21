@@ -3,7 +3,7 @@ ECHO OFF
 REM ----------------------------------------
 REM Prepare the environment 
 
-REM Setting env var IRONPYTHONSTARTUP will make ip.exe launch and start this script automatically - very useful for interactive sessions
+REM Setting IRONPYTHONSTARTUP to make ip.exe start this script automatically - useful for interactive sessions
 REM because it saves the user from having to always import that module first
 SET IRONPYTHONSTARTUP=%~dp0visioipy.py
 
