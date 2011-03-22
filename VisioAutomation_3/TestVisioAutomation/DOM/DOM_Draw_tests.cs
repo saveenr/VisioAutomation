@@ -1,6 +1,5 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.CustomProperties;
 using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -157,8 +156,8 @@ namespace TestVisioAutomation
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
             Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
-            Assert.IsTrue(CustomPropertyHelper.HasCustomProperty(vrect1.VisioShape, "FOO"));
-            Assert.IsTrue(CustomPropertyHelper.HasCustomProperty(vrect1.VisioShape, "BAR"));
+            Assert.IsTrue(VA.CustomProperties.CustomPropertyHelper.HasCustomProperty(vrect1.VisioShape, "FOO"));
+            Assert.IsTrue(VA.CustomProperties.CustomPropertyHelper.HasCustomProperty(vrect1.VisioShape, "BAR"));
 
             doc.Close(true);
         }

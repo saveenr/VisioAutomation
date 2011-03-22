@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet;
-using VA=VisioAutomation;
+﻿using VA=VisioAutomation;
 
 namespace VisioAutomation.Format
 {
@@ -10,7 +9,7 @@ namespace VisioAutomation.Format
         public double? Result { get; set; }
         public string Formula { get; set; }
 
-        public FormatPaintCell(SRC src, FormatCategory category)
+        public FormatPaintCell(VA.ShapeSheet.SRC src, FormatCategory category)
         {
             this.Category = category;
             this.SRC = src;

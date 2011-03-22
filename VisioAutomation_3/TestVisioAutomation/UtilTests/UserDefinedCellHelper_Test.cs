@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation;
-using VisioAutomation.CustomProperties;
 using VisioAutomation.Extensions;
 using System.Linq;
 using VisioAutomation.UserDefinedCells;
@@ -30,7 +29,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(true, UserDefinedCellsHelper.HasUserDefinedCell(s1, "FOO1"));
 
             // Check that non-existent properties can't be found
-            Assert.AreEqual(false, CustomPropertyHelper.HasCustomProperty(s1, "FOOX"));
+            Assert.AreEqual(false, VA.CustomProperties.CustomPropertyHelper.HasCustomProperty(s1, "FOOX"));
 
             // Delete that custom property
             UserDefinedCellsHelper.DeleteUserDefinedCell(s1, "FOO1");
@@ -71,7 +70,7 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(0, VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(s1).Count);
 
             // Add the same one multiple times Custom Property
             UserDefinedCellsHelper.SetUserDefinedCell(s1, "FOO1", "BAR1", null);

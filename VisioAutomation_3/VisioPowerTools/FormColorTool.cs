@@ -1,7 +1,5 @@
 using System.Windows.Forms;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -128,12 +126,12 @@ namespace VisioPowerTools
 
             var fr = tablef.Rows[0];
             var rr = tabler.Rows[0];
-            shapecolors.FillForegroundColor = new CellData<int>(fr[fgord], (int) rr[fgord]);
-            shapecolors.FillBackgroundColor = new CellData<int>(fr[bgord], (int) rr[bgord]);
-            shapecolors.ShadowForegroundColor = new CellData<int>(fr[sfgord], (int) rr[sfgord]);
-            shapecolors.ShadowBackgroundColor = new CellData<int>(fr[bggord], (int) rr[bggord]);
-            shapecolors.LineColor = new CellData<int>(fr[lcord], (int) rr[lcord]);
-            shapecolors.CharacterColor = new CellData<int>(fr[ccord], (int) rr[ccord]);
+            shapecolors.FillForegroundColor = new VA.ShapeSheet.CellData<int>(fr[fgord], (int)rr[fgord]);
+            shapecolors.FillBackgroundColor = new VA.ShapeSheet.CellData<int>(fr[bgord], (int)rr[bgord]);
+            shapecolors.ShadowForegroundColor = new VA.ShapeSheet.CellData<int>(fr[sfgord], (int)rr[sfgord]);
+            shapecolors.ShadowBackgroundColor = new VA.ShapeSheet.CellData<int>(fr[bggord], (int)rr[bggord]);
+            shapecolors.LineColor = new VA.ShapeSheet.CellData<int>(fr[lcord], (int)rr[lcord]);
+            shapecolors.CharacterColor = new VA.ShapeSheet.CellData<int>(fr[ccord], (int)rr[ccord]);
 
             return shapecolors;
         }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.UserDefinedCells;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -27,7 +26,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
             var application = Application;
             var page = application.ActivePage;
-            var list_user_props = UserDefinedCellsHelper.GetUserDefinedCells(page, shapes);
+            var list_user_props = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCells(page, shapes);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -52,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var results = (from s in this.Session.Selection.EnumSelectedShapes().ToList()
-                           select UserDefinedCellsHelper.HasUserDefinedCell(s, name))
+                           select VA.UserDefinedCells.UserDefinedCellsHelper.HasUserDefinedCell(s, name))
                 .ToList();
 
             return results;
@@ -82,7 +81,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    UserDefinedCellsHelper.DeleteUserDefinedCell(shape, name);
+                    VA.UserDefinedCells.UserDefinedCellsHelper.DeleteUserDefinedCell(shape, name);
                 }
             }
         }
@@ -106,7 +105,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    UserDefinedCellsHelper.SetUserDefinedCell(shape, userprop.Name, userprop.Value, userprop.Prompt);
+                    VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(shape, userprop.Name, userprop.Value, userprop.Prompt);
                 }
             }
         }

@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Controls;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -12,7 +11,7 @@ namespace TestVisioAutomation
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ControlHelper.GetControlsCount(s1));
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
             page1.Delete(0);
         }
 
@@ -23,21 +22,21 @@ namespace TestVisioAutomation
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
 
-            Assert.AreEqual(0, ControlHelper.GetControlsCount(s1));
-            int ci1 = ControlHelper.AddControl(s1);
-            Assert.AreEqual(1, ControlHelper.GetControlsCount(s1));
-            int ci2 = ControlHelper.AddControl(s1);
-            Assert.AreEqual(2, ControlHelper.GetControlsCount(s1));
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci1 = VA.Controls.ControlHelper.AddControl(s1);
+            Assert.AreEqual(1, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci2 = VA.Controls.ControlHelper.AddControl(s1);
+            Assert.AreEqual(2, VA.Controls.ControlHelper.GetControlsCount(s1));
 
-            var controls = ControlHelper.GetControls(s1);
+            var controls = VA.Controls.ControlHelper.GetControls(s1);
             Assert.IsNotNull(controls);
             Assert.AreEqual(2, controls.Count);
             Assert.AreEqual("Width*0", controls[0].X.Formula);
             Assert.AreEqual("Controls.Row_1", controls[0].XDynamics.Formula);
-            ControlHelper.DeleteControl(s1, 0);
-            Assert.AreEqual(1, ControlHelper.GetControlsCount(s1));
-            ControlHelper.DeleteControl(s1, 0);
-            Assert.AreEqual(0, ControlHelper.GetControlsCount(s1));
+            VA.Controls.ControlHelper.DeleteControl(s1, 0);
+            Assert.AreEqual(1, VA.Controls.ControlHelper.GetControlsCount(s1));
+            VA.Controls.ControlHelper.DeleteControl(s1, 0);
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
 
             page1.Delete(0);
         }
@@ -49,20 +48,20 @@ namespace TestVisioAutomation
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
 
-            Assert.AreEqual(0, ControlHelper.GetControlsCount(s1));
-            int ci1 = ControlHelper.AddControl(s1);
-            Assert.AreEqual(1, ControlHelper.GetControlsCount(s1));
-            int ci2 = ControlHelper.AddControl(s1);
-            Assert.AreEqual(2, ControlHelper.GetControlsCount(s1));
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci1 = VA.Controls.ControlHelper.AddControl(s1);
+            Assert.AreEqual(1, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci2 = VA.Controls.ControlHelper.AddControl(s1);
+            Assert.AreEqual(2, VA.Controls.ControlHelper.GetControlsCount(s1));
 
-            var controls = ControlHelper.GetControls(s1);
+            var controls = VA.Controls.ControlHelper.GetControls(s1);
             Assert.IsNotNull(controls);
             Assert.AreEqual(2, controls.Count);
             Assert.AreEqual(0.0, controls[0].X.Result);
-            ControlHelper.DeleteControl(s1, 0);
-            Assert.AreEqual(1, ControlHelper.GetControlsCount(s1));
-            ControlHelper.DeleteControl(s1, 0);
-            Assert.AreEqual(0, ControlHelper.GetControlsCount(s1));
+            VA.Controls.ControlHelper.DeleteControl(s1, 0);
+            Assert.AreEqual(1, VA.Controls.ControlHelper.GetControlsCount(s1));
+            VA.Controls.ControlHelper.DeleteControl(s1, 0);
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
             page1.Delete(0);
         }
 
@@ -73,11 +72,11 @@ namespace TestVisioAutomation
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
 
-            Assert.AreEqual(0, ControlHelper.GetControlsCount(s1));
-            int ci1 = ControlHelper.AddControl(s1);
-            Assert.AreEqual(1, ControlHelper.GetControlsCount(s1));
-            int ci2 = ControlHelper.AddControl(s1);
-            Assert.AreEqual(2, ControlHelper.GetControlsCount(s1));
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci1 = VA.Controls.ControlHelper.AddControl(s1);
+            Assert.AreEqual(1, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci2 = VA.Controls.ControlHelper.AddControl(s1);
+            Assert.AreEqual(2, VA.Controls.ControlHelper.GetControlsCount(s1));
             page1.Delete(0);
         }
     }

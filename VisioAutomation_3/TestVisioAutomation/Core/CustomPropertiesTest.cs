@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.CustomProperties;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -10,13 +9,13 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ValidNames()
         {
-            Assert.IsFalse(CustomPropertyHelper.IsValidCustomPropertyName(null));
-            Assert.IsFalse(CustomPropertyHelper.IsValidCustomPropertyName(""));
-            Assert.IsFalse(CustomPropertyHelper.IsValidCustomPropertyName(" foo "));
-            Assert.IsFalse(CustomPropertyHelper.IsValidCustomPropertyName("foo "));
-            Assert.IsFalse(CustomPropertyHelper.IsValidCustomPropertyName("foo\t"));
-            Assert.IsFalse(CustomPropertyHelper.IsValidCustomPropertyName("fo bar"));
-            Assert.IsTrue(CustomPropertyHelper.IsValidCustomPropertyName("foobar"));
+            Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidCustomPropertyName(null));
+            Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidCustomPropertyName(""));
+            Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidCustomPropertyName(" foo "));
+            Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidCustomPropertyName("foo "));
+            Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidCustomPropertyName("foo\t"));
+            Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidCustomPropertyName("fo bar"));
+            Assert.IsTrue(VA.CustomProperties.CustomPropertyHelper.IsValidCustomPropertyName("foobar"));
         }
     }
 }

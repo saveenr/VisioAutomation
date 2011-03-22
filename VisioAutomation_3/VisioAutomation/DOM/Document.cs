@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Office.Interop.Visio;
-using VisioAutomation.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -135,7 +133,7 @@ namespace VisioAutomation.DOM
                 {
                     string cp_name = kv.Key;
                     VA.CustomProperties.CustomPropertyCells cp_cells = kv.Value;
-                    CustomPropertyHelper.SetCustomProperty(vshape, cp_name, cp_cells);
+                    VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(vshape, cp_name, cp_cells);
                 }
             }
 

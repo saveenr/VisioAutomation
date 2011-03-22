@@ -1,6 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.ShapeSheet;
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation

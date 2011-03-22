@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.CustomProperties;
-using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -217,7 +215,7 @@ namespace TestVisioAutomation
             var n1 = vdom.AddShape("n1", "", "basflo_u.vss",
                                    "Decision");
 
-            n1.ShapeCells = new ShapeCells();
+            n1.ShapeCells = new VA.DOM.ShapeCells();
             n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
             n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
             n1.ShapeCells.FillPattern = 40;
@@ -303,7 +301,7 @@ namespace TestVisioAutomation
             Assert.IsNotNull(n0.VisioShape);
 
 
-            var props_dic = CustomPropertyHelper.GetCustomProperties(n0.VisioShape);
+            var props_dic = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(n0.VisioShape);
             Assert.IsTrue(props_dic.Count>=3);
             Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Formula);
             Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Formula);

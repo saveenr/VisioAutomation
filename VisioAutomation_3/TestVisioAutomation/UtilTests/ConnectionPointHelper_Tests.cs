@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using VisioAutomation.Connections;
+using ConnectionPointHelper = VisioAutomation.Connections.ConnectionPointHelper;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation

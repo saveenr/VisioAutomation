@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.DOM;
 
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using MG = Microsoft.Msagl;
 using VA = VisioAutomation;
-
 
 namespace VisioAutomation.Layout.MSAGL
 {
@@ -15,7 +13,7 @@ namespace VisioAutomation.Layout.MSAGL
         private VA.Drawing.Rectangle msagl_bb;
         private VA.Drawing.Rectangle layout_bb;
 
-        public ShapeCells DefaultBezierConnectorShapeCells { get; set; }
+        public VA.DOM.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         public VA.Drawing.Size DefaultBezierConnectorLabelBoxSize { get; set; }
         public LayoutOptions LayoutOptions { get; set; }
 
@@ -437,8 +435,8 @@ namespace VisioAutomation.Layout.MSAGL
                 i.vconnector.Text = i.layout_connector.Label;
 
                 i.vconnector.ShapeCells = i.layout_connector.ShapeCells != null ? 
-                    i.layout_connector.ShapeCells.ShallowCopy() 
-                    : new ShapeCells();
+                    i.layout_connector.ShapeCells.ShallowCopy()
+                    : new VA.DOM.ShapeCells();
 
                 i.vconnector.ShapeCells.ConLineRouteExt = con_route_style;
                 i.vconnector.ShapeCells.ShapeRouteStyle = shape_route_style;

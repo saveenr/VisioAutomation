@@ -1,8 +1,4 @@
-﻿using VisioAutomation;
-using VisioAutomation.Scripting;
-using VisioAutomation.Scripting.Tree;
-using VAS = VisioAutomation.Scripting;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
 using System.Linq;

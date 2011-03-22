@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.CustomProperties;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -25,7 +24,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
             var application = Application;
             var page = application.ActivePage;
-            var list_custom_props = CustomPropertyHelper.GetCustomProperties(page, shapes);
+            var list_custom_props = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(page, shapes);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -50,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var results = (from s in this.Session.Selection.EnumSelectedShapes()
-                           select CustomPropertyHelper.HasCustomProperty(s, name))
+                           select VA.CustomProperties.CustomPropertyHelper.HasCustomProperty(s, name))
                 .ToList();
 
             return results;
@@ -80,7 +79,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    CustomPropertyHelper.DeleteCustomProperty(shape, name);
+                    VA.CustomProperties.CustomPropertyHelper.DeleteCustomProperty(shape, name);
                 }
             }
         }
@@ -104,7 +103,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    CustomPropertyHelper.SetCustomProperty(shape, name, customprop);
+                    VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape, name, customprop);
                 }
             }
         }

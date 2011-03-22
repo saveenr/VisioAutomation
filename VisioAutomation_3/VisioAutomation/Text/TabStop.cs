@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

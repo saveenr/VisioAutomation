@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -117,7 +116,7 @@ namespace VisioAutomation.UserDefinedCells
             }
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
-            var src = new SRC(UserDefinedCell.query.Section, cell.Row, (short)VisCellIndices.visUserValue);
+            var src = new VA.ShapeSheet.SRC(UserDefinedCell.query.Section, cell.Row, (short)VisCellIndices.visUserValue);
             update.SetFormula(src, val);
 
             update.Execute(shape);
@@ -147,14 +146,14 @@ namespace VisioAutomation.UserDefinedCells
             if (value != null)
             {
                 string value_formula = Convert.StringToFormulaString(value);
-                var src = new SRC(UserDefinedCell.query.Section, row, (short)VisCellIndices.visUserValue);
+                var src = new VA.ShapeSheet.SRC(UserDefinedCell.query.Section, row, (short)VisCellIndices.visUserValue);
                 update.SetFormula(src, value_formula);
             }
 
             if (prompt != null)
             {
                 string prompt_formula = Convert.StringToFormulaString(prompt);
-                var src = new SRC(UserDefinedCell.query.Section, row, (short)VisCellIndices.visUserPrompt);
+                var src = new VA.ShapeSheet.SRC(UserDefinedCell.query.Section, row, (short)VisCellIndices.visUserPrompt);
                 update.SetFormula(src, prompt_formula);
             }
 

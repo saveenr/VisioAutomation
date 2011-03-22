@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using VisioAutomation.DOM;
-using VAD = VisioAutomation.DOM;
 using VA = VisioAutomation;
 using VAS = VisioAutomation.Scripting;
-using VAL = VisioAutomation.Layout;
 using IVisio= Microsoft.Office.Interop.Visio;
 namespace VisioAutomation.Scripting.FlowChart
 {
@@ -123,7 +120,7 @@ namespace VisioAutomation.Scripting.FlowChart
                     var al_connector = drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
                                                        connectory_type);
 
-                    al_connector.ShapeCells = new ShapeCells();
+                    al_connector.ShapeCells = new VA.DOM.ShapeCells();
                     al_connector.ShapeCells.LineColor = VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
                     al_connector.ShapeCells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
                     al_connector.ShapeCells.EndArrow = def_end_arrow;
