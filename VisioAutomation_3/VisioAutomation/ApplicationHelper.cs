@@ -36,7 +36,7 @@ namespace VisioAutomation
             return visio_window_title;
         }
 
-        public static string GetXMLErrorLogFilename(Microsoft.Office.Interop.Visio.Application app)
+        public static string GetXMLErrorLogFilename(IVisio.Application app)
         {
             // the location of the xml error log file is specific to the user
             // we need to retrieve it from the registry
@@ -63,7 +63,7 @@ namespace VisioAutomation
             return System.IO.Path.Combine(folder, logfilename);
         }
 
-        private static string GetHKCUApplicationPath(Microsoft.Office.Interop.Visio.Application app)
+        private static string GetHKCUApplicationPath(IVisio.Application app)
         {
             return string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", app.Version);
         }
