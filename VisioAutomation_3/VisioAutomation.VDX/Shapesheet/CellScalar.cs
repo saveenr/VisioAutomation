@@ -2,7 +2,7 @@ namespace VisioAutomation.VDX.ShapeSheet
 {
     public class CellScalar<T> : CellBase where T : struct
     {
-        public T? Result;
+        public T? Result { get; set; }
 
         public CellScalar() :
             base()

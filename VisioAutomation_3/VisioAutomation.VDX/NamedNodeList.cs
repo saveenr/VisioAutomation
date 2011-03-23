@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.VDX.Elements;
 
 namespace VisioAutomation.VDX
 {
-    public class NamedNodeList<T> : Node where T : Node
+    public class NamedNodeList<T> : Elements.Node where T : Elements.Node
     {
         private Dictionary<string, T> dic;
         private List<T> items;

@@ -1,7 +1,9 @@
+using SXL=System.Xml.Linq;
 using System.Xml.Linq;
 using VisioAutomation.VDX.Elements;
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.Internal.Extensions;
+
 
 namespace VisioAutomation.VDX
 {
@@ -11,7 +13,7 @@ namespace VisioAutomation.VDX
         {
         }
 
-        public void CreateVDX(Drawing vdoc, XDocument vdx_xml_doc)
+        public void CreateVDX(Drawing vdoc, SXL.XDocument vdx_xml_doc)
         {
             if (vdoc == null)
             {
@@ -26,7 +28,7 @@ namespace VisioAutomation.VDX
             _ModifyTemplate(vdx_xml_doc, vdoc);
         }
 
-        public void CreateVDX(Drawing vdoc, XDocument vdx_xml_doc, string output_filename)
+        public void CreateVDX(Drawing vdoc, SXL.XDocument vdx_xml_doc, string output_filename)
         {
             if (output_filename == null)
             {
@@ -40,7 +42,7 @@ namespace VisioAutomation.VDX
             vdx_xml_doc.Save(output_filename, saveoptions);
         }
 
-        public static void CleanUpTemplate(XDocument vdx_xml_doc)
+        public static void CleanUpTemplate(SXL.XDocument vdx_xml_doc)
         {
             var root = vdx_xml_doc.Root;
 
@@ -65,7 +67,7 @@ namespace VisioAutomation.VDX
             var docsettings = root.ElementsVisioSchema2003("DocumentSettings");
             if (docsettings!=null)
             {
-                docsettings.Remove();
+                System.Xml.Linq.Extensions.Remove(docsettings);
             }
         }
 

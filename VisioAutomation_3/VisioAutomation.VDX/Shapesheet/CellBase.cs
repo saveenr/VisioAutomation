@@ -1,12 +1,16 @@
 using VisioAutomation.VDX.Internal;
+using SXL=System.Xml.Linq;
 
 namespace VisioAutomation.VDX.ShapeSheet
 {
     public abstract class CellBase
     {
-        public string Formula;
-        public bool InheritFormula;
-        public CellUnit Unit;
+        public string Formula { get; set; }
+        public bool InheritFormula { get; set; }
+        public CellUnit Unit { get; set; }
+
+        public abstract string GetResultString();
+        public abstract bool HasResult { get; }
 
         public CellBase()
         {
@@ -18,18 +22,17 @@ namespace VisioAutomation.VDX.ShapeSheet
             this.Unit = unit;
         }
 
-        public abstract string GetResultString();
-        public abstract bool HasResult { get; }
-
-        public System.Xml.Linq.XElement _ToXml(string elname)
+        private SXL.XElement _ToXml(string elname)
         {
             if (this.Formula != null || this.HasResult)
             {
-                var el = new System.Xml.Linq.XElement(elname);
+                var el = new SXL.XElement(elname);
+
                 if (this.HasResult)
                 {
                     el.Value = this.GetResultString();
                 }
+
                 if (this.Formula != null)
                 {
                     el.SetAttributeValue("F", this.Formula);
@@ -43,23 +46,24 @@ namespace VisioAutomation.VDX.ShapeSheet
                 {
                     el.SetAttributeValue("Unit", "PT");
                 }
+
                 return el;
             }
             return null;
         }
 
-
-        public System.Xml.Linq.XElement ToXml(string elname)
+        public SXL.XElement ToXml(string elname)
         {
             if (elname.StartsWith("{"))
             {
                 throw new System.ArgumentException();
             }
+
             var fullname = string.Format("{0}{1}",Constants.VisioXmlNamespace2003, elname);
             return this._ToXml(fullname);                
         }
 
-        public System.Xml.Linq.XElement ToXml2006(string elname)
+        public SXL.XElement ToXml2006(string elname)
         {
             if (elname.StartsWith("{"))
             {

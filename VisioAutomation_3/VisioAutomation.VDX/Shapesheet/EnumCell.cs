@@ -1,3 +1,5 @@
+using System;
+
 namespace VisioAutomation.VDX.ShapeSheet
 {
     public class EnumCell<T> : CellScalar<T> where T : struct
@@ -12,7 +14,14 @@ namespace VisioAutomation.VDX.ShapeSheet
 
         public override string GetResultString()
         {
-            return string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}", this.EnumToInt(this.Result.Value));
+            if (!this.Result.HasValue)
+            {
+                throw new ArgumentException("EnumCell does not have a value");
+            }
+
+            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
+            var the_int = this.EnumToInt(this.Result.Value);
+            return string.Format(invariant_culture, "{0}", the_int);
         }
     }
 }

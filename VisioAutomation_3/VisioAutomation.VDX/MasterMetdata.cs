@@ -2,9 +2,9 @@
 {
     public class MasterMetdata
     {
-        public string Name;
-        public int ID;
-        public bool IsGroup;
-        public int SubShapeCount;
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public bool IsGroup { get; set; }
+        public int SubShapeCount { get; set; }
     }
 }
