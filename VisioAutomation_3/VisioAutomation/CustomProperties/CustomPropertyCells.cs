@@ -1,24 +1,9 @@
-﻿using System;
-using Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
-using System.Collections.Generic;
-using System.Linq;
+﻿using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.CustomProperties
 {
-    public enum FormatShapeData
-    {
-        String = 0,
-        FixedList = 1,
-        Number = 2,
-        VariableList = 4,
-        DateOrTime = 5,
-        Duration = 6,
-        Currency = 7
-    }
-
     public class CustomPropertyCells
     {
         public VA.ShapeSheet.CellData<double> Value{ get; set; }
@@ -30,7 +15,7 @@ namespace VisioAutomation.CustomProperties
         public VA.ShapeSheet.CellData<int> Verify { get; set; }
         public VA.ShapeSheet.CellData<int> LangId { get; set; }
         public VA.ShapeSheet.CellData<int> Calendar { get; set; }
-        public VA.ShapeSheet.CellData<FormatShapeData> Type { get; set; }
+        public VA.ShapeSheet.CellData<Format> Type { get; set; }
 
         // CALENDAR
         // Western = IVisio.VisCellVals.visCalWestern,

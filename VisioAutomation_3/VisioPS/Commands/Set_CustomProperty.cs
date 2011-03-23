@@ -22,7 +22,7 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public int SortKey = -1;
 
         [SMA.Parameter(Mandatory = false)] public
-            VA.CustomProperties.FormatShapeData Type = VA.CustomProperties.FormatShapeData.String;
+            VA.CustomProperties.Format Type = VA.CustomProperties.Format.String;
 
         [SMA.Parameter(Mandatory = false)] public int Verify = -1;
 

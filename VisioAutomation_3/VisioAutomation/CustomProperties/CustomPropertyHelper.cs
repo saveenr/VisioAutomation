@@ -166,7 +166,7 @@ namespace VisioAutomation.CustomProperties
                 cp.LangId = qds.GetItem(row, CustomPropertyCells.custprop_query.LangID, v => (int)v);
                 cp.Prompt = qds.GetItem(row, CustomPropertyCells.custprop_query.Prompt);
                 cp.SortKey = qds.GetItem(row, CustomPropertyCells.custprop_query.SortKey, v => (int)v);
-                cp.Type = qds.GetItem(row, CustomPropertyCells.custprop_query.Type, v => (VA.CustomProperties.FormatShapeData)((int)v));
+                cp.Type = qds.GetItem(row, CustomPropertyCells.custprop_query.Type, v => (VA.CustomProperties.Format)((int)v));
 
                 custom_properties[prop_name] = cp;
 
@@ -319,7 +319,7 @@ namespace VisioAutomation.CustomProperties
             // create a new property
             var cp = new CustomPropertyCells();
             cp.Value = val;
-            cp.Type = (int)VA.CustomProperties.FormatShapeData.String;
+            cp.Type = (int)VA.CustomProperties.Format.String;
 
             SetCustomProperty(shape, name, cp);
         }
