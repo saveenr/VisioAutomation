@@ -4,10 +4,6 @@ using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Layout
-{
-}
-
 namespace VisioAutomation
 {
 
@@ -221,7 +217,7 @@ namespace VisioAutomation
             return new_page;
         }
 
-        public static void DuplicateToDoc(
+        public static void DuplicateToDocument(
             IVisio.Page src_page,
             IVisio.Document dest_doc,
             IVisio.Page dest_page,
@@ -285,7 +281,7 @@ namespace VisioAutomation
             }
         }
 
-        public static VA.Layout.PrintPageOrientation GetPageOrientation(IVisio.Page page)
+        public static VA.Layout.PrintPageOrientation GetOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -303,7 +299,7 @@ namespace VisioAutomation
         /// </summary>
         /// <param name="page"></param>
         /// <param name="orientation">1=portrait, 2=landscape</param>
-        public static void SetPageOrientation(IVisio.Page page, VA.Layout.PrintPageOrientation orientation)
+        public static void SetOrientation(IVisio.Page page, VA.Layout.PrintPageOrientation orientation)
         {
             if (page == null)
             {
@@ -315,7 +311,7 @@ namespace VisioAutomation
                 throw new System.ArgumentOutOfRangeException("orientation", "must be either Portrait or Landscape");
             }
 
-            var old_orientation = GetPageOrientation(page);
+            var old_orientation = GetOrientation(page);
 
             if (old_orientation == orientation)
             {
@@ -374,7 +370,7 @@ namespace VisioAutomation
             update.Execute(page_sheet);
         }
 
-        public static void NavigateToPage(IVisio.Pages pages, PageNavigation flags)
+        public static void NavigateTo(IVisio.Pages pages, PageNavigation flags)
         {
             if (pages == null)
             {
@@ -524,7 +520,7 @@ namespace VisioAutomation
             return outids;
         }
 
-        public static void ResetPageOrigin(IVisio.Page page)
+        public static void ResetOrigin(IVisio.Page page)
         {
             if (page == null)
             {
@@ -533,7 +529,7 @@ namespace VisioAutomation
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
 
-            update.SetFormula( VA.ShapeSheet.SRCConstants.XGridOrigin, "0.0");
+            update.SetFormula(VA.ShapeSheet.SRCConstants.XGridOrigin, "0.0");
             update.SetFormula(VA.ShapeSheet.SRCConstants.YGridOrigin, "0.0");
             update.SetFormula(VA.ShapeSheet.SRCConstants.XRulerOrigin, "0.0");
             update.SetFormula(VA.ShapeSheet.SRCConstants.YRulerOrigin, "0.0");

@@ -8,15 +8,13 @@ namespace VisioAutomation
         private bool old_livedynamics;
         private short old_screenupdating;
         private short old_deferrecalc;
+        private bool configured;
+        private IVisio.Application app;
 
         const short screen_updating_fast = 0; // disable screen updating
         const short defer_recalc_fast = 1; // defer recalc
         const bool enable_autoconnect_fast = false; // diable autoconnect
         const bool livedynamics_fast = false; // diable live dynamics
-
-        private bool configured;
-
-        private IVisio.Application app;
 
         public FastRenderingScope(IVisio.Application vis)
         {

@@ -56,12 +56,12 @@ namespace TestVisioAutomation
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
             Assert.AreEqual(VA.Layout.PrintPageOrientation.Portrait,
-                            VA.PageHelper.GetPageOrientation(page1));
+                            VA.PageHelper.GetOrientation(page1));
             Assert.AreEqual(new VA.Drawing.Size(4, 3), page1.GetSize());
 
-            VA.PageHelper.SetPageOrientation(page1, VA.Layout.PrintPageOrientation.Landscape);
+            VA.PageHelper.SetOrientation(page1, VA.Layout.PrintPageOrientation.Landscape);
             Assert.AreEqual(VA.Layout.PrintPageOrientation.Landscape,
-                            VA.PageHelper.GetPageOrientation(page1));
+                            VA.PageHelper.GetOrientation(page1));
             Assert.AreEqual(new VA.Drawing.Size(3, 4), page1.GetSize());
             page1.Delete(0);
         }

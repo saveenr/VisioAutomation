@@ -154,7 +154,7 @@ namespace VisioAutomation.Scripting.Commands
             string page_name = page_to_dupe.NameU;
             var destpages = dest_doc.Pages;
             var dest_page = destpages[1];
-            VA.PageHelper.DuplicateToDoc(active_page, dest_doc, dest_page, page_name, true);
+            VA.PageHelper.DuplicateToDocument(active_page, dest_doc, dest_page, page_name, true);
             dest_doc.Activate();
             dest_page.Activate();
         }
@@ -168,7 +168,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = Application;
             var active_page = application.ActivePage;
-            return VA.PageHelper.GetPageOrientation(active_page);
+            return VA.PageHelper.GetOrientation(active_page);
         }
 
         public void SetPageOrientation(VA.Layout.PrintPageOrientation orientation)
@@ -182,7 +182,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
-                VA.PageHelper.SetPageOrientation(active_page, orientation);
+                VA.PageHelper.SetOrientation(active_page, orientation);
             }
         }
 
@@ -216,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
-                VA.PageHelper.ResetPageOrigin(active_page);
+                VA.PageHelper.ResetOrigin(active_page);
             }
         }
 
@@ -278,7 +278,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var pages = docpages;
-            VA.PageHelper.NavigateToPage(pages, flags);
+            VA.PageHelper.NavigateTo(pages, flags);
         }
     }
 }
