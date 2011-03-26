@@ -18,13 +18,13 @@ namespace VisioAutomation.Scripting.Commands
         public IDictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>> GetUserDefinedCells()
         {
             var prop_dic = new Dictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>>();
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return prop_dic;
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             var list_user_props = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCells(page, shapes);
 
@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("name");
             }
 
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return new List<bool>();
             }
@@ -59,7 +59,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void DeleteUserDefinedCell(string name)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -88,7 +88,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetUserDefinedCell(VA.UserDefinedCells.UserDefinedCell userprop)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)

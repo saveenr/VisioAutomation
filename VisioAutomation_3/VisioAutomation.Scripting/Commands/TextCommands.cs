@@ -24,14 +24,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetText(IEnumerable<string> texts)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var values = texts.ToList();
@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<string> GetText()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return new List<string>(0);
             }
@@ -60,14 +60,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ToogleCase()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
             int rounding = 0;
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = Application;
+            var application = this.Session.Application;
             var src_charstyle = VA.ShapeSheet.SRCConstants.Char_Style;
 
             using (var undoscope = application.CreateUndoScope())
@@ -120,13 +120,13 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentOutOfRangeException("end", "must be greater than or equal to start");
             }
 
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -151,13 +151,13 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentOutOfRangeException("end", "must be greater than or equal to start");
             }
 
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -172,7 +172,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ClearCharacterFormat()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -182,7 +182,7 @@ namespace VisioAutomation.Scripting.Commands
             const int color = 0;
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 TextCommandsUtil.reset_character_formatting(shapes, fontid, fontsize, color);
@@ -191,14 +191,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetTextWrapping(bool wrap)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
             var selection = this.Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -208,13 +208,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public void FitShapeToText()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
             var shapes_2d = this.Session.Selection.EnumSelectedShapes2D().ToList();
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -226,12 +226,12 @@ namespace VisioAutomation.Scripting.Commands
         {
             // http://www.visguy.com/2007/11/07/text-to-the-bottom-of-the-shape/
 
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var active_window = application.ActiveWindow;
             var sel = active_window.Selection;
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
@@ -261,7 +261,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void StripWhiteSpace()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -281,21 +281,21 @@ namespace VisioAutomation.Scripting.Commands
 
         public void IncreaseTextSize()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
-            Application.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeUp);
+            this.Session.Application.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeUp);
         }
 
         public void SetStyleProperties(string stylename, string fontname)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var doc = this.Application.ActiveDocument;
+            var doc = this.Session.Application.ActiveDocument;
             var styles = doc.Styles;
             var style = styles.ItemU[stylename];
 
@@ -318,7 +318,7 @@ namespace VisioAutomation.Scripting.Commands
         public void SetTextFont(string fontname)
         {
             var fontnames = new string[] {fontname};
-            var application = Application;
+            var application = this.Session.Application;
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var fonts = fontnames.Select(v => active_doc_fonts[v]);
@@ -329,11 +329,11 @@ namespace VisioAutomation.Scripting.Commands
 
         public void DecreaseTextSize()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
-            Application.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
+            this.Session.Application.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
         }
     }
 }

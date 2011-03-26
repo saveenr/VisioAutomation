@@ -71,52 +71,52 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(VA.Drawing.AlignmentHorizontal halign)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
             var cmd = _map_halign_to_uicmd(halign);
 
-            Application.DoCmd((short)cmd);
+            this.Session.Application.DoCmd((short)cmd);
         }
 
         public void Distribute(VA.Drawing.AlignmentVertical valign)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
             var cmd = _map_valign_to_uicmd(valign);
 
-            Application.DoCmd((short)cmd); 
+            this.Session.Application.DoCmd((short)cmd); 
         }
 
         public void Distribute(VA.Drawing.Axis axis)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
             var cmd = _map_axis_to_uicmd(axis);
 
-            using (var undoscope = Application.CreateUndoScope())
+            using (var undoscope = this.Session.Application.CreateUndoScope())
             {
-                Application.DoCmd((short)cmd);
+                this.Session.Application.DoCmd((short)cmd);
             }
         }
 
         public void Distribute(VA.Drawing.Axis axis, double d)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
 
-            var application = Application;
+            var application = this.Session.Application;
             var selection = this.Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
@@ -128,12 +128,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Nudge(double dx, double dy)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var selection = this.Session.Selection.GetSelection();
@@ -146,14 +146,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapCorner(double w, double h, VA.Layout.SnapCornerPosition corner)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
             var shapes_2d = Session.Selection.EnumSelectedShapes2D().ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -163,7 +163,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapSize(double w, double h)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes_2d = this.Session.Selection.EnumSelectedShapes2D().ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -183,7 +183,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Stack(VA.Drawing.Axis axis, double space)
         {
-            if (!HasSelectedShapes(2))
+            if (!this.Session.HasSelectedShapes(2))
             {
                 return;
             }
@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
             }
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 if (axis == VA.Drawing.Axis.YAxis)
@@ -209,7 +209,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Send(ShapeSendDirection dir)
         {
 
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -241,14 +241,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(VA.Drawing.AlignmentHorizontal align)
         {
-            if (!HasSelectedShapes(2))
+            if (!this.Session.HasSelectedShapes(2))
             {
                 return;
             }
 
             var cmd = MiscScriptingUtil.halign_to_cmd[align];
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 bool glue_to_guide = false;
@@ -261,7 +261,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(VA.Drawing.AlignmentHorizontal align, double x)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -269,7 +269,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 VA.Layout.LayoutHelper.AlignTo(application.ActivePage, shapeids, align, x);
@@ -278,12 +278,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(VA.Drawing.AlignmentVertical align)
         {
-            if (!HasSelectedShapes(2))
+            if (!this.Session.HasSelectedShapes(2))
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 bool glue_to_guide = false;
@@ -298,7 +298,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(VA.Drawing.AlignmentVertical align, double y)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -306,7 +306,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 VA.Layout.LayoutHelper.AlignTo(application.ActivePage, shapeids,align,y);
@@ -315,7 +315,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public int GetSelectedShapeCount()
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return 0;
             }
@@ -326,7 +326,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Layout.XFormCells> GetXForm()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return new List<VA.Layout.XFormCells>(0);
             }
@@ -334,14 +334,14 @@ namespace VisioAutomation.Scripting.Commands
             var selection = Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
-            var page = this.Application.ActivePage;
+            var page = this.Session.Application.ActivePage;
             var data = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
             return data;
         }
 
         public IVisio.Shape Group()
         {
-            if (!HasSelectedShapes(2))
+            if (!this.Session.HasSelectedShapes(2))
             {
                 return null;
             }
@@ -353,12 +353,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Ungroup()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
-            Application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
+            this.Session.Application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }
 
         private static VA.ShapeSheet.SRC src_LockAspect = VA.ShapeSheet.SRCConstants.LockAspect;
@@ -408,7 +408,7 @@ namespace VisioAutomation.Scripting.Commands
 
         private void SetLockCells(VA.ShapeSheet.SRC[] srcs, double val)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -431,7 +431,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetWidth(double w)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -445,7 +445,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, w);
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -455,7 +455,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetHeight(double h)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -469,7 +469,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h);
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -479,7 +479,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(double w, double h)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -493,7 +493,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h);
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;

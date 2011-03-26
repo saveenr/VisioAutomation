@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <returns></returns>
         public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> GetConnectionPoints()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
             }
@@ -32,7 +32,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -57,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             VA.Connections.ConnectionPointType type)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return new List<int>(0);
             }
@@ -69,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var indices = new List<int>(shapes.Count);
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var cp = new VA.Connections.ConnectionPointCells();
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="index"></param>
         public void DeleteConnectionPoint(int index)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -107,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
                                 where ConnectionPointHelper.GetConnectionPointCount(shape) > index
                                 select shape;
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in target_shapes)

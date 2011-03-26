@@ -29,7 +29,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentException("layername");
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             IVisio.Layer layer = null;
             try
@@ -47,12 +47,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Layer> GetLayer()
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 new List<IVisio.Layer>(0);
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             return page.Layers.AsEnumerable().ToList();
         }

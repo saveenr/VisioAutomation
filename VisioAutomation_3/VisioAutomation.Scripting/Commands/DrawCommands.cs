@@ -47,8 +47,8 @@ namespace VisioAutomation.Scripting.Commands
             var stencildoc = this.Session.Document.OpenStencil(stencil);
             var stencildoc_masters = stencildoc.Masters;
             var masterobj = stencildoc_masters.ItemU[master];
-            
-            var application = this.Application;
+
+            var application = this.Session.Application;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
 
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             
             //Create a new page to hold the grid
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             
             using (var undoscope = application.CreateUndoScope())
@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
 
@@ -127,7 +127,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DrawRectangle(double x0, double y0, double x1, double y1)
         {
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -138,7 +138,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DrawLine(double x0, double y0, double x1, double y1)
         {
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -149,7 +149,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DrawOval(double x0, double y0, double x1, double y1)
         {
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -160,7 +160,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DrawOval(VA.Drawing.Point center, double radius)
         {
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var A = center.Add(-radius, -radius);
@@ -174,7 +174,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DrawBezier(IEnumerable<VA.Drawing.Point> points)
         {
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -185,7 +185,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DrawPolyLine(IList<VA.Drawing.Point> points)
         {
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -199,7 +199,7 @@ namespace VisioAutomation.Scripting.Commands
                                   double start_angle,
                                   double end_angle)
         {
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -210,7 +210,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -221,7 +221,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Copy()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -236,12 +236,12 @@ namespace VisioAutomation.Scripting.Commands
                                           double radius,
                                           IList<double> values)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return null;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             var shapes = VA.Layout.LayoutHelper.DrawPieSlices(page, center, radius, values);
             return shapes;

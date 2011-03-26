@@ -17,12 +17,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseDocument(bool force)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var doc = application.ActiveDocument;
 
             if (doc.Type == IVisio.VisDocumentTypes.visTypeDrawing)
@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseAllDocumentsWithoutSaving()
         {
-            var application = Application;
+            var application = this.Session.Application;
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).
                 ToList();
@@ -65,7 +65,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document NewDocument()
         {
             this.Session.Write(OutputStream.Verbose, "Creating Empty Drawing");
-            var application = Application;
+            var application = this.Session.Application;
             var documents = application.Documents;
             var doc = documents.Add(string.Empty);
             return doc;
@@ -73,25 +73,25 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SaveDocument()
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 this.Session.Write(OutputStream.Error, "No Drawing to Save");
                 return;
             }
-            var application = Application;
+            var application = this.Session.Application;
             var doc = application.ActiveDocument;
             doc.Save();
         }
 
         public void SaveDocumentAs(string filename)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 this.Session.Write(OutputStream.Error, "No Drawing to Save");
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var doc = application.ActiveDocument;
             doc.SaveAs(filename);
         }
@@ -99,7 +99,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document NewDocument(double w, double h)
         {
             var doc = NewDocument();
-            var page = Application.ActivePage;
+            var page = this.Session.Application.ActivePage;
             page.SetSize(w, h);
             return doc;
         }
@@ -118,7 +118,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Session.Write(OutputStream.Verbose, "Loading stencil \"{0}\"", name);
 
-            var application = Application;
+            var application = this.Session.Application;
             var documents = application.Documents;
             var doc = documents.OpenStencil(name);
 
@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document NewStencil()
         {
-            var application = Application;
+            var application = this.Session.Application;
             var documents = application.Documents;
             var doc = VA.DocumentHelper.NewStencil(documents);
             return doc;
@@ -156,7 +156,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("File does not exist", "filename");
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var documents = application.Documents;
             var doc = documents.Add(filename);
             return doc;
@@ -165,7 +165,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document GetDocument(string name)
         {
-            var application = Application;
+            var application = this.Session.Application;
             var documents = application.Documents;
             var doc = documents[name];
             return doc;

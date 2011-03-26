@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<int> AddControl()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return null;
             }
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<int> AddControl(VA.Controls.ControlCells ctrl)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return null;
             }
@@ -43,7 +43,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
             var control_indices = new List<int>();
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -58,14 +58,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void DeleteControl(int n)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -77,7 +77,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> GetControls()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>(0);
             }

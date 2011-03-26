@@ -19,13 +19,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> GetMasters()
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 this.Session.Write(OutputStream.Verbose,"No Active Document - 0 Masters");
                 new List<IVisio.Master>(0);
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var doc = application.ActiveDocument;
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
@@ -55,7 +55,7 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Master master = null;
             try
             {
-                var application = Application;
+                var application = this.Session.Application;
                 var active_document = application.ActiveDocument;
                 var masters = active_document.Masters;
                 master = masters.ItemU[name];
@@ -83,7 +83,7 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Document stencil_doc = null;
             try
             {
-                var application = Application;
+                var application = this.Session.Application;
                 var documents = application.Documents;
                 stencil_doc = documents[stencil];
             }
@@ -111,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DropMaster(IVisio.Master master, double x, double y)
         {
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             var shape = page.Drop(master, x, y);
             return shape;
@@ -129,12 +129,12 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("points");
             }
 
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 throw new AutomationException("No active page");
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;

@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         
         public IEnumerable<IVisio.Shape> EnumSelectedShapes()
         {
-            var app = this.Application;
+            var app = this.Session.Application;
             var activewin = app.ActiveWindow;
             var sel = activewin.Selection;
 
@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Selection GetSelection()
         {
-            var application = this.Application;
+            var application = this.Session.Application;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             return selection;
@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectAll()
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
@@ -52,12 +52,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectInvert()
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             if (shapes.Count < 1)
@@ -93,12 +93,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectNone()
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             active_window.DeselectAll();
@@ -111,12 +111,12 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shape");
             }
 
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var active_window = application.ActiveWindow;
             active_window.Select(shape, (short) IVisio.VisSelectArgs.visSelect);
         }
@@ -128,12 +128,12 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shapes");
             }
 
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var active_window = application.ActiveWindow;
             active_window.Select(shapes, IVisio.VisSelectArgs.visSelect);
         }
@@ -145,12 +145,12 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shapeids");
             }
 
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var active_window = application.ActiveWindow;
             var page = application.ActivePage;
             var page_shapes = page.Shapes;
@@ -165,22 +165,22 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shapes");
             }
 
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            Application.ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
+            this.Session.Application.ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
         }
 
         public void SelectShapesByMaster(IVisio.Master master)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
             // Get a selection of connectors, by master: 
             var selection = page.CreateSelection(
@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectShapesInLayer(string layername)
         {
-            if (!HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing())
             {
                 return;
             }
@@ -207,7 +207,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var layer = this.Session.Layer.GetLayer(layername);
-            var application = Application;
+            var application = this.Session.Application;
             var page = application.ActivePage;
 
             // Get a selection of connectors, by layer: 

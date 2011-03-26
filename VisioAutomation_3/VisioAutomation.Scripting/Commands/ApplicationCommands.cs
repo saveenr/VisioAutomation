@@ -17,12 +17,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public string GetApplicationWindowText()
         {
-            return VA.ApplicationHelper.GetApplicationWindowText(this.Application);
+            return VA.ApplicationHelper.GetApplicationWindowText(this.Session.Application);
         }
 
         public void BringApplicationWindowToFront()
         {
-            var app = this.Application;
+            var app = this.Session.Application;
 
             if (app == null)
             {
@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ForceApplicationClose()
         {
-            var application = Application;
+            var application = this.Session.Application;
             var documents = application.Documents;
             VA.DocumentHelper.ForceCloseAll(documents);
             application.Quit(true);
@@ -43,7 +43,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public System.Drawing.Size GetApplicationWindowSize()
         {
-            var rect = this.Application.Window.GetWindowRect();
+            var rect = this.Session.Application.Window.GetWindowRect();
             var size = new System.Drawing.Size(rect.Width, rect.Height);
             return size;
         }
@@ -68,10 +68,10 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var r = Application.Window.GetWindowRect();
+            var r = this.Session.Application.Window.GetWindowRect();
             r.Width = width;
             r.Height = height;
-            Application.Window.SetWindowRect(r);
+            this.Session.Application.Window.SetWindowRect(r);
         }
 
         public IVisio.Application AttachToRunningApplication()

@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetFormat(VA.Format.ShapeFormatCells format)
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
                 format.Apply(update, (short) shapeid);
             }
 
-            update.Execute(Application.ActivePage);            
+            update.Execute(this.Session.Application.ActivePage);            
         }
 
         public void Duplicate(int n)
@@ -42,7 +42,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new ArgumentOutOfRangeException("n");
             }
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var application = Application;
+            var application = this.Session.Application;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_window = application.ActiveWindow;
@@ -76,12 +76,12 @@ namespace VisioAutomation.Scripting.Commands
         /// </summary>
         public void CopySize()
         {
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
-            var application = Application;
+            var application = this.Session.Application;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var shape = selection[1];
@@ -104,7 +104,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="flags">Controls if either or both the width and height values are applied during the paste</param>
         public void PasteSize(SizeFlags flags)
         {
-            if (!this.HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
@@ -132,7 +132,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Application;
+            var application = this.Session.Application;
             var active_page = application.ActivePage;
             update.Execute(active_page);
         }
@@ -140,12 +140,12 @@ namespace VisioAutomation.Scripting.Commands
         public System.Xml.Linq.XElement GetXMLDescription()
         {
             var el_shapes = new System.Xml.Linq.XElement("Shapes");
-            if (!HasSelectedShapes())
+            if (!this.Session.HasSelectedShapes())
             {
                 return el_shapes;
             }
 
-            var page = this.Application.ActivePage;
+            var page = this.Session.Application.ActivePage;
             var shapes = page.Shapes.AsEnumerable().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
