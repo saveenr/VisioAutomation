@@ -89,10 +89,6 @@
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VisioIPy\VisioIPy.csproj">
-      <Project>{AC15BC61-236F-4F49-9F66-AD3C4234ACC8}</Project>
-      <Name>VisioIPy</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
