@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CellSetter.cs" />
+    <Compile Include="Commands\ApplicationCommands.cs" />
     <Compile Include="FlowChart\MySequenceNumberGenerator.cs" />
     <Compile Include="LayoutDirection.cs" />
     <Compile Include="SessionCommands.cs" />

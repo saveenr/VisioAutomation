@@ -1,4 +1,5 @@
-using VAS=VisioAutomation.Scripting;
+using VA = VisioAutomation;
+using VAS = VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
@@ -8,7 +9,7 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            var app = VAS.Session.AttachToRunningApplication();
+            var app = VA.ApplicationHelper.FindRunningApplication();
             Globals.Application = app;
             this.WriteObject(app);
         }

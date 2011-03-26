@@ -4,11 +4,12 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Scripting
 {
-    public partial class Session
+    public class Session
     {
         public IVisio.Application Application { get; set; }
         public SessionOptions Options { get; set; }
 
+        public VA.Scripting.Commands.ApplicationCommands ApplicationX { get; private set; }
         public VA.Scripting.Commands.ViewCommands View { get; private set; }
         public VA.Scripting.Commands.FormatCommands Format { get; private set; }
         public VA.Scripting.Commands.LayerCommands Layer { get; private set; }
@@ -26,18 +27,6 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.TextCommands Text { get; private set; }
         public VA.Scripting.Commands.UserDefinedCellCommands UserDefinedCell { get; private set; }
         public VA.Scripting.Commands.DocumentCommands Document { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        //public VA.Scripting.Commands.ControlCommands Control { get; private set; }
 
         public Session() :
             this(null)
@@ -48,6 +37,8 @@ namespace VisioAutomation.Scripting
         {
             this.Options = new SessionOptions();
             this.Application = app;
+
+            this.ApplicationX = new Commands.ApplicationCommands(this);
             this.View = new VA.Scripting.Commands.ViewCommands(this);
             this.Format = new Commands.FormatCommands(this);
             this.Layer = new Commands.LayerCommands(this);
@@ -65,18 +56,6 @@ namespace VisioAutomation.Scripting
             this.Text = new Commands.TextCommands(this);
             this.UserDefinedCell = new Commands.UserDefinedCellCommands(this);
             this.Document = new Commands.DocumentCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
-            //this.Control = new Commands.ControlCommands(this);
         }
         
         public void Write(OutputStream output, string s)
@@ -107,80 +86,6 @@ namespace VisioAutomation.Scripting
         {
             string s = string.Format(fmt, items);
             this.Write(output, s);
-        }
-
-        public System.Drawing.Size GetApplicationWindowSize()
-        {
-            var rect = Application.Window.GetWindowRect();
-            var size = new System.Drawing.Size(rect.Width, rect.Height);
-            return size;
-        }
-
-        /// <summary>
-        /// Sets the width and height (in pixels) of the attached Visio application window
-        /// </summary>
-        /// <param name="scripting_session"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void SetApplicationWindowSize(int width, int height)
-        {
-            if (width <= 0)
-            {
-                Write(OutputStream.Error, "width must be positive");
-                return;
-            }
-
-            if (height <= 0)
-            {
-                Write(OutputStream.Error, "height must be positive");
-                return;
-            }
-
-            var r = Application.Window.GetWindowRect();
-            r.Width = width;
-            r.Height = height;
-            Application.Window.SetWindowRect(r);
-        }
-
-        public static IVisio.Application AttachToRunningApplication()
-        {
-            var app = ApplicationHelper.FindRunningApplication();
-            if (app == null)
-            {
-                throw new AutomationException("Did not find a running instance of Visio 2007");
-            }
-
-            VA.UI.UserInterfaceHelper.BringApplicationWindowToFront(app);
-
-            return app;
-        }
-
-        public void ForceApplicationClose()
-        {
-            var application = Application;
-            var documents = application.Documents;
-            VA.DocumentHelper.ForceCloseAll(documents);
-            application.Quit(true);
-            Application = null;
-        }
-
-        public void BringApplicationWindowToFront()
-        {
-            var app = Application;
-
-            if (app == null)
-            {
-                return;
-            }
-
-            VA.UI.UserInterfaceHelper.BringApplicationWindowToFront(app);
-        }
-
-        public IVisio.Application StartNewApplication()
-        {
-            var app = new IVisio.ApplicationClass();
-            Application = app;
-            return app;
         }
 
         public bool HasSelectedShapes()
@@ -253,11 +158,5 @@ namespace VisioAutomation.Scripting
             var selection = active_window.Selection;
             selection.Duplicate();
         }
-
-        public string GetApplicationWindowText()
-        {
-            return VA.ApplicationHelper.GetApplicationWindowText(this.Application);
-        }
-
     }
 }

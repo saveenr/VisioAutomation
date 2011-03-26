@@ -68,7 +68,7 @@ namespace VisioAutomation.Scripting.Commands
                 edges = VA.Connections.PathAnalysis.GetEdges(Application.ActivePage);
             }
 
-            this.Session.Write(OutputStream.Verbose,"{0} Edges found", edges.Count);
+            this.Session.Write(OutputStream.Verbose, "{0} Edges found", edges.Count);
             return edges;
         }
 
@@ -136,14 +136,14 @@ namespace VisioAutomation.Scripting.Commands
                 count++;
             }
         }
-        
+
         public IList<IVisio.Shape> ConnectShapes(IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
         {
             if (!HasActiveDrawing())
             {
                 new List<IVisio.Shape>(0);
             }
-            
+
             var application = Application;
             var active_page = this.Application.ActivePage;
 
@@ -165,4 +165,5 @@ namespace VisioAutomation.Scripting.Commands
             return VA.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
         }
     }
+
 }
