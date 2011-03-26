@@ -76,32 +76,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cmd_style.cs" />
-    <Compile Include="VisioIPySessionOptions.cs" />
-    <Compile Include="cmd_connections.cs" />
-    <Compile Include="cmd_application.cs" />
-    <Compile Include="cmd_write.cs" />
-    <Compile Include="cmd_group.cs" />
-    <Compile Include="cmd_window.cs" />
-    <Compile Include="cmd_connectionpoint.cs" />
-    <Compile Include="cmd_customprop.cs" />
-    <Compile Include="cmd_userdefinedcells.cs" />
-    <Compile Include="cmd_masters.cs" />
-    <Compile Include="cmd_shapesheet.cs" />
-    <Compile Include="cmd_zoom.cs" />
-    <Compile Include="cmd_controls.cs" />
-    <Compile Include="cmd_export.cs" />
-    <Compile Include="cmd_draw.cs" />
-    <Compile Include="cmd_send.cs" />
-    <Compile Include="cmd_select.cs" />
-    <Compile Include="cmd_page.cs" />
-    <Compile Include="cmd_document.cs" />
-    <Compile Include="cmd_nudge.cs" />
-    <Compile Include="cmd_distribute.cs" />
-    <Compile Include="cmd_align.cs" />
-    <Compile Include="cmd_pathanalysis.cs" />
-    <Compile Include="cmd_text.cs" />
-    <Compile Include="VisioIPySession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,16 +91,6 @@
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="demo.ps1" />
-    <None Include="visioipy.cmd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <Content Include="Scripts\ListInstalledStencilsAndMasters.py" />
-    <Content Include="visioipy.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -29,16 +29,17 @@ import Microsoft.Office.Interop.Visio
 # Note: Adding this directory to syspath is needed for the imports of these DLLs to work
 sys.path.append( os.path.join( sys.path[0] ,"") ) 
 clr.AddReferenceToFileAndPath( System.IO.Path.Combine( visioipy_path, "VisioAutomation.dll" ) )
-clr.AddReferenceToFileAndPath( System.IO.Path.Combine( visioipy_path, "VisioIPy.dll") )
+clr.AddReferenceToFileAndPath( System.IO.Path.Combine( visioipy_path, "VisioAutomation.Scripting.dll" ) )
 
 import VisioAutomation
-import VisioIPy
+import VisioAutomation.Scripting
 
 # Create aliases
 IVisio = Microsoft.Office.Interop.Visio 
 VA = VisioAutomation
+VAS = VisioAutomation.Scripting
 
-# Start a new VisioIPy session
-if ( "vi" not in dir() ) : vi = VisioIPy.VisioIPySession()
-assert( vi != None )
+# Start a new Scripting session
+if ( "visio" not in dir() ) : visio = VAS.Session()
+assert( visio != None )
 
