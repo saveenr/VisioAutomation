@@ -159,7 +159,7 @@ namespace VisioAutomation.CustomProperties
                 var cp = new CustomPropertyCells();
 
                 cp.Value = qds.GetItem(row, CustomPropertyCells.custprop_query.Value);
-                cp.Calendar = qds.GetItem(row, CustomPropertyCells.custprop_query.Calendar, v => (int)v);
+                cp.Calendar = qds.GetItem(row, CustomPropertyCells.custprop_query.Calendar, v => (VA.CustomProperties.Calendar)v);
                 cp.Format = qds.GetItem(row, CustomPropertyCells.custprop_query.Format);
                 cp.Invisible = qds.GetItem(row, CustomPropertyCells.custprop_query.Invis, v => (int)v);
                 cp.Label = qds.GetItem(row, CustomPropertyCells.custprop_query.Label);

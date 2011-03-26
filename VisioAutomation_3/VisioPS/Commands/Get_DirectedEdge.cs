@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Get_DirectedEdge : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 1, Mandatory = false)]
-        public VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling TreatAsConnected { get; set; }
+        public VisioAutomation.Connections.ConnectorArrowEdgeHandling TreatAsConnected { get; set; }
 
         protected override void ProcessRecord()
         {

@@ -39,9 +39,9 @@ namespace VisioAutomationSamples
 
             var normal_edges = VA.Connections.PathAnalysis.GetEdges(page);
             var tc_edges_0 = VA.Connections.PathAnalysis.GetTransitiveClosure(page,
-                                                                  VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+                                                                  VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             var tc_edges_1 = VA.Connections.PathAnalysis.GetTransitiveClosure(page,
-                                                                  VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+                                                                  VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
         }
     }
 }

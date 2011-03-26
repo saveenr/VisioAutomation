@@ -1,4 +1,3 @@
-using Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -87,9 +86,9 @@ namespace VisioAutomation.Connections
                 throw new System.ArgumentException("Must provide an Y Formula");
             }
 
-            var n = shape.AddRow((short)VisSectionIndices.visSectionConnectionPts,
-                                 (short)VisRowIndices.visRowLast,
-                                 (short)VisRowTags.visTagCnnctPt);
+            var n = shape.AddRow((short)IVisio.VisSectionIndices.visSectionConnectionPts,
+                                 (short)IVisio.VisRowIndices.visRowLast,
+                                 (short)IVisio.VisRowTags.visTagCnnctPt);
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
             cp.Apply(update,n);

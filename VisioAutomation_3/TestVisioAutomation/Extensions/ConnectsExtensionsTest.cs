@@ -52,7 +52,7 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges = VA.Connections.PathAnalysis.GetEdges(page1, VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+            var edges = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(4, edges.Count);
 
             Assert.AreEqual(shapes[1], edges[0].From);
@@ -85,10 +85,10 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(0, edges0.Count);
 
-            var edges1 = VA.Connections.PathAnalysis.GetEdges(page1, VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+            var edges1 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(4, edges1.Count);
             page1.Delete(0);
         }
@@ -116,7 +116,7 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(0, edges0.Count);
 
             var src_beginarrow = VA.ShapeSheet.SRCConstants.BeginArrow;
@@ -127,7 +127,7 @@ namespace TestVisioAutomation
 
             cell_beginarrow.FormulaU = "1";
             cell_endarow.FormulaU = "1";
-            var edges1 = VA.Connections.PathAnalysis.GetEdges(page1, VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var edges1 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(2, edges1.Count);
             Assert.AreEqual("B", edges1[0].From.Text);
             Assert.AreEqual("A", edges1[0].To.Text);

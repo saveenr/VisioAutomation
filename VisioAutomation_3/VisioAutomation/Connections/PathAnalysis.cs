@@ -8,12 +8,6 @@ namespace VisioAutomation.Connections
 {
     public static class PathAnalysis
     {
-        public enum ConnectorArrowEdgeHandling
-        {
-            ExcludeNoArrowEdges,
-            TreatNoArrowEdgesAsBidirectional
-        }
-
         public static IList<ConnectorEdge> GetTransitiveClosure(
             IVisio.Page page,
             ConnectorArrowEdgeHandling flag)

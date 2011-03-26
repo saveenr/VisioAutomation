@@ -20,7 +20,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="scripting_session"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public IList<VA.Connections.ConnectorEdge> GetTransitiveClosure(VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling flag)
+        public IList<VA.Connections.ConnectorEdge> GetTransitiveClosure(Connections.ConnectorArrowEdgeHandling flag)
         {
             if (!HasActiveDrawing())
             {
@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="scripting_session"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public IList<VA.Connections.ConnectorEdge> GetDirectedEdges(VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling flag)
+        public IList<VA.Connections.ConnectorEdge> GetDirectedEdges(Connections.ConnectorArrowEdgeHandling flag)
         {
             if (!HasActiveDrawing())
             {

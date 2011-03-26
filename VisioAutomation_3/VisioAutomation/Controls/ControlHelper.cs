@@ -1,15 +1,13 @@
 using System;
-using Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace VisioAutomation.Controls
 {
     public static class ControlHelper
     {
-        public static int AddControl(Shape shape)
+        public static int AddControl(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -22,7 +20,7 @@ namespace VisioAutomation.Controls
         }
 
         public static int AddControl(
-            Shape shape,
+            IVisio.Shape shape,
             ControlCells ctrl)
         {
             if (shape == null)
@@ -30,9 +28,9 @@ namespace VisioAutomation.Controls
                 throw new ArgumentNullException("shape");
             }
 
-            short row = shape.AddRow((short)VisSectionIndices.visSectionControls,
-                                     (short)VisRowIndices.visRowLast,
-                                     (short)VisRowTags.visTagDefault);
+            short row = shape.AddRow((short)IVisio.VisSectionIndices.visSectionControls,
+                                     (short)IVisio.VisRowIndices.visRowLast,
+                                     (short)IVisio.VisRowTags.visTagDefault);
 
             SetControl(shape, row, ctrl);
 
@@ -40,7 +38,7 @@ namespace VisioAutomation.Controls
         }
 
         public static int SetControl(
-            Shape shape,
+            IVisio.Shape shape,
             short row,
             ControlCells ctrl)
         {
@@ -67,7 +65,7 @@ namespace VisioAutomation.Controls
             return row;
         }
 
-        public static void DeleteControl(Shape shape, int index)
+        public static void DeleteControl(IVisio.Shape shape, int index)
         {
             if (shape == null)
             {
@@ -79,11 +77,11 @@ namespace VisioAutomation.Controls
                 throw new ArgumentOutOfRangeException("index");
             }
 
-            var row = (VisRowIndices)index;
+            var row = (IVisio.VisRowIndices)index;
             shape.DeleteRow(ControlCells.query.Section, (short)row);
         }
 
-        public static int GetControlsCount(Shape shape)
+        public static int GetControlsCount(IVisio.Shape shape)
         {
             if (shape == null)
             {

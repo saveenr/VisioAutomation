@@ -39,11 +39,11 @@ namespace TestVisioAutomation
             var undirected_edges0 = ss.Connection.GetEdges();
             Assert.AreEqual(2, undirected_edges0.Count);
 
-            var directed_edges0 = ss.Connection.GetDirectedEdges(VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var directed_edges0 = ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(2, directed_edges0.Count);
 
             var directed_edges1 =
-                ss.Connection.GetDirectedEdges(VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+                ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(2, directed_edges1.Count);
 
             ss.Document.CloseDocument(true);
@@ -72,11 +72,11 @@ namespace TestVisioAutomation
             var master = ss.Master.GetMaster("Dynamic Connector", "basic_u.vss");
             var undirected_connectors = ss.Connection.ConnectShapes(master);
 
-            var directed_edges0 = ss.Connection.GetDirectedEdges(VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var directed_edges0 = ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(0, directed_edges0.Count);
 
             var directed_edges1 =
-                ss.Connection.GetDirectedEdges(VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+                ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(4, directed_edges1.Count);
 
             var undirected_edges0 = ss.Connection.GetEdges();

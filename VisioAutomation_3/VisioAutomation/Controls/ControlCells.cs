@@ -1,10 +1,5 @@
-using System;
-using Microsoft.Office.Interop.Visio;
-using VisioAutomation.ShapeSheet;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace VisioAutomation.Controls
 {

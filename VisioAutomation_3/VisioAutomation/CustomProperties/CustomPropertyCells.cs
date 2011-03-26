@@ -1,5 +1,4 @@
 ﻿using VA=VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.CustomProperties
@@ -14,20 +13,8 @@ namespace VisioAutomation.CustomProperties
         public VA.ShapeSheet.CellData<int> Invisible { get; set; }
         public VA.ShapeSheet.CellData<int> Verify { get; set; }
         public VA.ShapeSheet.CellData<int> LangId { get; set; }
-        public VA.ShapeSheet.CellData<int> Calendar { get; set; }
+        public VA.ShapeSheet.CellData<Calendar> Calendar { get; set; }
         public VA.ShapeSheet.CellData<Format> Type { get; set; }
-
-        // CALENDAR
-        // Western = IVisio.VisCellVals.visCalWestern,
-        // ArabicHijri = IVisio.VisCellVals.visCalArabicHijri,
-        // HebrewLunar = IVisio.VisCellVals.visCalHebrewLunar,
-        // TaiwanCalendar = IVisio.VisCellVals.visCalChineseTaiwan,
-        // JapaneseEmperorReign = IVisio.VisCellVals.visCalJapaneseEmperor,
-        // ThaiBuddhist = IVisio.VisCellVals.visCalThaiBuddhist,
-        // KoreanDanki = IVisio.VisCellVals.visCalKoreanDanki,
-        // SakaEra = IVisio.VisCellVals.visCalSakaEra,
-        // EnglishTransliterated = IVisio.VisCellVals.visCalTranslitEnglish,
-        // FrenchTransliterated = IVisio.VisCellVals.visCalTranslitFrench
 
         internal static readonly VA.CustomProperties.CustomPropertyQuery custprop_query = new VA.CustomProperties.CustomPropertyQuery();
 

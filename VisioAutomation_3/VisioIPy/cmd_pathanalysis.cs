@@ -10,8 +10,8 @@ namespace VisioIPy
         public IList<VA.Connections.ConnectorEdge> GetTransitiveClosure(bool treatasconnected)
         {
             var flag = treatasconnected
-                           ? VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional
-                           : VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
+                           ? VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional
+                           : VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
             return this.ScriptingSession.Connection.GetTransitiveClosure(flag);
         }
 
@@ -23,8 +23,8 @@ namespace VisioIPy
         public IList<VA.Connections.ConnectorEdge> GetDirectedEdgesFromConnections(bool treat_edges_as_bidirectional)
         {
             var flag = treat_edges_as_bidirectional
-                           ? VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional
-                           : VA.Connections.PathAnalysis.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
+                           ? VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional
+                           : VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
             var pairs = this.ScriptingSession.Connection.GetDirectedEdges(flag);
             return pairs;
         }
