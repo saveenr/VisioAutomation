@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = _map_halign_to_uicmd(halign);
 
-            this.Session.Application.DoCmd((short)cmd);
+            this.Session.VisioApplication.DoCmd((short)cmd);
         }
 
         public void Distribute(VA.Drawing.AlignmentVertical valign)
@@ -90,7 +90,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = _map_valign_to_uicmd(valign);
 
-            this.Session.Application.DoCmd((short)cmd); 
+            this.Session.VisioApplication.DoCmd((short)cmd); 
         }
 
         public void Distribute(VA.Drawing.Axis axis)
@@ -102,9 +102,9 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = _map_axis_to_uicmd(axis);
 
-            using (var undoscope = this.Session.Application.CreateUndoScope())
+            using (var undoscope = this.Session.VisioApplication.CreateUndoScope())
             {
-                this.Session.Application.DoCmd((short)cmd);
+                this.Session.VisioApplication.DoCmd((short)cmd);
             }
         }
 
@@ -116,7 +116,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var selection = this.Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var selection = this.Session.Selection.GetSelection();
@@ -153,7 +153,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes_2d = Session.Selection.EnumSelectedShapes2D().ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes_2d = this.Session.Selection.EnumSelectedShapes2D().ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
             }
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 if (axis == VA.Drawing.Axis.YAxis)
@@ -248,7 +248,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = MiscScriptingUtil.halign_to_cmd[align];
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 bool glue_to_guide = false;
@@ -269,7 +269,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 VA.Layout.LayoutHelper.AlignTo(application.ActivePage, shapeids, align, x);
@@ -283,7 +283,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 bool glue_to_guide = false;
@@ -306,7 +306,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 VA.Layout.LayoutHelper.AlignTo(application.ActivePage, shapeids,align,y);
@@ -334,7 +334,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
 
-            var page = this.Session.Application.ActivePage;
+            var page = this.Session.VisioApplication.ActivePage;
             var data = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
             return data;
         }
@@ -358,7 +358,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            this.Session.Application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
+            this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }
 
         private static VA.ShapeSheet.SRC src_LockAspect = VA.ShapeSheet.SRCConstants.LockAspect;
@@ -445,7 +445,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, w);
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -469,7 +469,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h);
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -493,7 +493,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h);
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;

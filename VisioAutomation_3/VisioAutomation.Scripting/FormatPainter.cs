@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting
 
             var selection = scriptingsession.Selection.GetSelection();
             var shapeids = selection.GetIDs();
-            var application = scriptingsession.Application;
+            var application = scriptingsession.VisioApplication;
             var active_page = application.ActivePage;
             
             this.cache.PasteFormat(active_page, shapeids, category);

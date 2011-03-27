@@ -9,7 +9,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var app = scriptingsession.ApplicationX.StartNewApplication();
+            var app = scriptingsession.Application.NewApplication();
             Globals.Application = app;
             //this.WriteObject(app); // TODO: investigate why calling write-object and returning app can cause the visio application to have an error when it shuts down
         }

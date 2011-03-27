@@ -192,7 +192,7 @@ namespace TestVisioAutomation
             ss.Document.OpenStencil("Basic_U.VSS");
             var master = ss.Master.GetMaster("Rectangle", "Basic_U.VSS");
             ss.Master.DropMaster(master, 2, 2);
-            var application = ss.Application;
+            var application = ss.VisioApplication;
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             Assert.AreEqual(1, shapes.Count);
@@ -215,7 +215,7 @@ namespace TestVisioAutomation
 
             ss.Master.DropMasters(masters, points);
             
-            Assert.AreEqual(4, ss.Application.ActivePage.Shapes.Count);
+            Assert.AreEqual(4, ss.VisioApplication.ActivePage.Shapes.Count);
             ss.Document.CloseDocument(true);
         }
     }

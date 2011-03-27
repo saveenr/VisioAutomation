@@ -46,7 +46,7 @@ namespace VisioPowerTools2
                     // do nothing
                 }
 
-                if (g_scripting_session.Application == null)
+                if (g_scripting_session.VisioApplication == null)
                 {
                     throw new VA.AutomationException("Internal Error: Unexpected null for visio application");
                 }

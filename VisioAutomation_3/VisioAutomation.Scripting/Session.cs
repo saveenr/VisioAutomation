@@ -6,10 +6,10 @@ namespace VisioAutomation.Scripting
 {
     public class Session
     {
-        public IVisio.Application Application { get; set; }
+        public IVisio.Application VisioApplication { get; set; }
         public SessionOptions Options { get; set; }
 
-        public VA.Scripting.Commands.ApplicationCommands ApplicationX { get; private set; }
+        public VA.Scripting.Commands.ApplicationCommands Application { get; private set; }
         public VA.Scripting.Commands.ViewCommands View { get; private set; }
         public VA.Scripting.Commands.FormatCommands Format { get; private set; }
         public VA.Scripting.Commands.LayerCommands Layer { get; private set; }
@@ -36,9 +36,9 @@ namespace VisioAutomation.Scripting
         public Session(IVisio.Application app)
         {
             this.Options = new SessionOptions();
-            this.Application = app;
+            this.VisioApplication = app;
 
-            this.ApplicationX = new Commands.ApplicationCommands(this);
+            this.Application = new Commands.ApplicationCommands(this);
             this.View = new VA.Scripting.Commands.ViewCommands(this);
             this.Format = new Commands.FormatCommands(this);
             this.Layer = new Commands.LayerCommands(this);
@@ -106,7 +106,7 @@ namespace VisioAutomation.Scripting
                 return false;
             }
 
-            var application = Application;
+            var application = VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             bool v = selection.Count >= min_items;
@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting
 
         public bool HasActiveDrawing()
         {
-            var application = Application;
+            var application = VisioApplication;
             var active_window = application.ActiveWindow;
 
             if (active_window == null)
@@ -140,12 +140,12 @@ namespace VisioAutomation.Scripting
 
         public void Undo()
         {
-            Application.Undo();
+            VisioApplication.Undo();
         }
 
         public void Redo()
         {
-            Application.Redo();
+            VisioApplication.Redo();
         }
 
         public void Duplicate()
@@ -157,6 +157,30 @@ namespace VisioAutomation.Scripting
             var active_window = this.View.GetActiveWindow();
             var selection = active_window.Selection;
             selection.Duplicate();
+        }
+
+        public void Delete()
+        {
+            if (!this.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var selection = this.Selection.GetSelection();
+            selection.Delete();
+        }
+
+        public void Copy()
+        {
+            if (!this.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var flags = IVisio.VisCutCopyPasteCodes.visCopyPasteNormal;
+
+            var selection = this.Selection.GetSelection();
+            selection.Copy(flags);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace VisioPowerTools
                 return;
             }
 
-            var application = scriptingsession.Application;
+            var application = scriptingsession.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var s1 = selection[1];

@@ -26,7 +26,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return new List<VA.Connections.ConnectorEdge>(0);
             }
-            var app = this.Session.Application;
+            var app = this.Session.VisioApplication;
             return VA.Connections.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (this.Session.HasActiveDrawing())
             {
-                var directed_edges = VA.Connections.PathAnalysis.GetEdges(this.Session.Application.ActivePage, flag);
+                var directed_edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage, flag);
                 return directed_edges;
             }
             else
@@ -65,7 +65,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (this.Session.HasActiveDrawing())
             {
-                edges = VA.Connections.PathAnalysis.GetEdges(this.Session.Application.ActivePage);
+                edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
             }
 
             this.Session.Write(OutputStream.Verbose, "{0} Edges found", edges.Count);
@@ -96,9 +96,9 @@ namespace VisioAutomation.Scripting.Commands
                 to_shapes.Add(edge.To);
             }
 
-            var active_page = this.Session.Application.ActivePage;
+            var active_page = this.Session.VisioApplication.ActivePage;
 
-            using (var undoscope = this.Session.Application.CreateUndoScope())
+            using (var undoscope = this.Session.VisioApplication.CreateUndoScope())
             {
                 var connectors = VA.Connections.ConnectorHelper.ConnectShapes(active_page, master, from_shapes, to_shapes);
                 return connectors;
@@ -144,8 +144,8 @@ namespace VisioAutomation.Scripting.Commands
                 new List<IVisio.Shape>(0);
             }
 
-            var application = this.Session.Application;
-            var active_page = this.Session.Application.ActivePage;
+            var application = this.Session.VisioApplication;
+            var active_page = this.Session.VisioApplication.ActivePage;
 
             using (var undoscope = application.CreateUndoScope())
             {
@@ -153,17 +153,5 @@ namespace VisioAutomation.Scripting.Commands
                 return connectors;
             }
         }
-
-        public IList<IVisio.Shape> GetSelectedShapes(ShapesEnumeration enumerationtype)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return new List<IVisio.Shape>(0);
-            }
-
-            var selection = this.Session.Selection.GetSelection();
-            return VA.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
-        }
     }
-
 }

@@ -101,7 +101,7 @@ namespace VisioPowerTools
                 format.Apply(update, (short)shapeid);
             }
 
-            update.Execute(ss.Application.ActivePage);    
+            update.Execute(ss.VisioApplication.ActivePage);    
         }
 
         private void buttonUpdateFill_Click(object sender, System.EventArgs e)
@@ -118,7 +118,7 @@ namespace VisioPowerTools
                 return;
             }
 
-            var application = app.Application;
+            var application = app.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var s1 = selection[1];

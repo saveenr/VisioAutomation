@@ -17,17 +17,17 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             if (this.Flags == GetShapeFlags.Selected)
             {
-                var shapes = scriptingsession.Connection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
+                var shapes = scriptingsession.Selection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
                 this.WriteObject(shapes);
             }
             else if (this.Flags == GetShapeFlags.SelectedNested)
             {
-                var shapes = scriptingsession.Connection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.ExpandGroups);
+                var shapes = scriptingsession.Selection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.ExpandGroups);
                 this.WriteObject(shapes);
             }
             else if (this.Flags == GetShapeFlags.Page)
             {
-                var application = scriptingsession.Application;
+                var application = scriptingsession.VisioApplication;
                 var active_page = application.ActivePage;
                 var shapes1 = active_page.Shapes;
                 var shapes = shapes1.AsEnumerable().ToList();

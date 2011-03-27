@@ -141,7 +141,7 @@ namespace VisioAutomation.Scripting.FlowChart
             IList<RenderItem> renderitems)
         {
             scriptingsession.Write(VAS.OutputStream.Verbose,"Start Rendering FlowChart");
-            var app = scriptingsession.Application;
+            var app = scriptingsession.VisioApplication;
 
 
             if (renderitems.Count < 1)

@@ -13,7 +13,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var application = scriptingsession.Application;
+            var application = scriptingsession.VisioApplication;
             if (Name=="*")
             {
                 var active_document = application.ActiveDocument;

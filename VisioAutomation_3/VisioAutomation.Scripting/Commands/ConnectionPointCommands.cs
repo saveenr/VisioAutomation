@@ -28,11 +28,11 @@ namespace VisioAutomation.Scripting.Commands
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
             }
 
-            var shapes = this.Session.Connection.GetSelectedShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
 
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -65,11 +65,11 @@ namespace VisioAutomation.Scripting.Commands
             int dirx = 0;
             int diry = 0;
 
-            var shapes = this.Session.Connection.GetSelectedShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
 
             var indices = new List<int>(shapes.Count);
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var cp = new VA.Connections.ConnectionPointCells();
@@ -101,13 +101,13 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = this.Session.Connection.GetSelectedShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
 
             var target_shapes = from shape in shapes
                                 where ConnectionPointHelper.GetConnectionPointCount(shape) > index
                                 select shape;
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in target_shapes)

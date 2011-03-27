@@ -43,7 +43,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
             var control_indices = new List<int>();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -65,7 +65,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -91,32 +91,6 @@ namespace VisioAutomation.Scripting.Commands
                 dic[shape] = controls;
             }
             return dic;
-        }
-
-        public IList<IVisio.Shape> GetSubSelectedShapes()
-        {
-            //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
-            var shapes = new List<IVisio.Shape>(0);
-            var sel = this.Session.Selection.GetSelection();
-            var original_itermode = sel.IterationMode;
-            
-            // normal selection
-            sel.IterationMode = ((short)IVisio.VisSelectMode.visSelModeSkipSub) + ((short)IVisio.VisSelectMode.visSelModeSkipSuper);
-
-            if (sel.Count > 0)
-            {
-                shapes.AddRange(sel.AsEnumerable());
-            }
-
-            // sub selection
-            sel.IterationMode = ((short)IVisio.VisSelectMode.visSelModeOnlySub) + ((short)IVisio.VisSelectMode.visSelModeSkipSuper);
-            if (sel.Count > 0)
-            {
-                shapes.AddRange(sel.AsEnumerable());
-            }
-
-            sel.IterationMode = original_itermode;
-            return shapes;
         }
     }
 }

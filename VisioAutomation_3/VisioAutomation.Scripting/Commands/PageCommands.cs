@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new AutomationException("No Drawing available");
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             return application.ActivePage;
         }
 
@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new AutomationException("No Drawing available");
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             return active_page.GetSize();
         }
@@ -55,7 +55,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentException("name must have at least one character");
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
             var pagenames = new HashSet<string>(pages.GetNamesU());
@@ -71,7 +71,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Page NewPage(VA.Drawing.Size? size, bool isbackgroundpage)
         {
             IVisio.Page page;
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
             page = pages.Add();
@@ -105,7 +105,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
             var names = new HashSet<string>(pages.GetNamesU());
@@ -131,7 +131,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 VA.PageHelper.Duplicate(application.ActivePage);
@@ -145,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             var page_to_dupe = active_page;
             var documents = application.Documents;
@@ -166,7 +166,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new AutomationException("No active page");
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             return VA.PageHelper.GetOrientation(active_page);
         }
@@ -178,7 +178,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -193,7 +193,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -212,7 +212,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -227,7 +227,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -248,7 +248,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             var old_size = active_page.GetSize();
             var w = width.GetValueOrDefault(old_size.Width);
@@ -269,7 +269,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void NavigateToPage(PageNavigation flags)
         {
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var docpages = active_document.Pages;
             if (docpages.Count < 2)

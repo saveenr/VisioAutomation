@@ -13,6 +13,7 @@ namespace VisioAutomation.Scripting.Commands
         {
 
         }
+
         public IDictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>> GetCustomProperties()
         {
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>>();
@@ -22,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var list_custom_props = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(page, shapes);
 
@@ -74,7 +75,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -98,7 +99,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)

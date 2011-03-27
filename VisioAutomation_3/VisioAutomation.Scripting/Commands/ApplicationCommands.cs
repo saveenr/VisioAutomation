@@ -15,14 +15,14 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public string GetApplicationWindowText()
+        public string GetWindowText()
         {
-            return VA.ApplicationHelper.GetApplicationWindowText(this.Session.Application);
+            return VA.ApplicationHelper.GetApplicationWindowText(this.Session.VisioApplication);
         }
 
-        public void BringApplicationWindowToFront()
+        public void WindowToFront()
         {
-            var app = this.Session.Application;
+            var app = this.Session.VisioApplication;
 
             if (app == null)
             {
@@ -32,18 +32,18 @@ namespace VisioAutomation.Scripting.Commands
             VA.UI.UserInterfaceHelper.BringApplicationWindowToFront(app);
         }
 
-        public void ForceApplicationClose()
+        public void ForceClose()
         {
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var documents = application.Documents;
             VA.DocumentHelper.ForceCloseAll(documents);
             application.Quit(true);
-            this.Session.Application = null;
+            this.Session.VisioApplication = null;
         }
 
-        public System.Drawing.Size GetApplicationWindowSize()
+        public System.Drawing.Size GetWindowSize()
         {
-            var rect = this.Session.Application.Window.GetWindowRect();
+            var rect = this.Session.VisioApplication.Window.GetWindowRect();
             var size = new System.Drawing.Size(rect.Width, rect.Height);
             return size;
         }
@@ -54,7 +54,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="scripting_session"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        public void SetApplicationWindowSize(int width, int height)
+        public void SetWindowSize(int width, int height)
         {
             if (width <= 0)
             {
@@ -68,10 +68,10 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var r = this.Session.Application.Window.GetWindowRect();
+            var r = this.Session.VisioApplication.Window.GetWindowRect();
             r.Width = width;
             r.Height = height;
-            this.Session.Application.Window.SetWindowRect(r);
+            this.Session.VisioApplication.Window.SetWindowRect(r);
         }
 
         public IVisio.Application AttachToRunningApplication()
@@ -82,17 +82,17 @@ namespace VisioAutomation.Scripting.Commands
                 throw new AutomationException("Did not find a running instance of Visio 2007");
             }
 
-            this.Session.Application = app;
+            this.Session.VisioApplication = app;
 
             VA.UI.UserInterfaceHelper.BringApplicationWindowToFront(app);
 
             return app;
         }
 
-        public IVisio.Application StartNewApplication()
+        public IVisio.Application NewApplication()
         {
             var app = new IVisio.ApplicationClass();
-            this.Session.Application = app;
+            this.Session.VisioApplication = app;
             return app;
         }
 

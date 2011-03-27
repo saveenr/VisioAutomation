@@ -24,7 +24,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var list_user_props = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCells(page, shapes);
 
@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)

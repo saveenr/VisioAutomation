@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
                 format.Apply(update, (short) shapeid);
             }
 
-            update.Execute(this.Session.Application.ActivePage);            
+            update.Execute(this.Session.VisioApplication.ActivePage);            
         }
 
         public void Duplicate(int n)
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_window = application.ActiveWindow;
@@ -81,7 +81,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var shape = selection[1];
@@ -132,7 +132,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             update.Execute(active_page);
         }
@@ -145,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
                 return el_shapes;
             }
 
-            var page = this.Session.Application.ActivePage;
+            var page = this.Session.VisioApplication.ActivePage;
             var shapes = page.Shapes.AsEnumerable().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 

@@ -22,7 +22,7 @@ namespace VisioPS.Commands
 
             var scriptingsession = this.ScriptingSession;
 
-            if (scriptingsession.Application == null)
+            if (scriptingsession.VisioApplication == null)
             {
 
                 this.WriteVerbose("ERROR: No Visio Application is attached");

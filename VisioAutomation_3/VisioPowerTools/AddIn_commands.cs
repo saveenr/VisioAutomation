@@ -62,7 +62,7 @@ namespace VisioPowerTools
         {
             this.CmdCloseDocumentsWithoutSaving();
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            var app = ss.Application;
+            var app = ss.VisioApplication;
 
             app.Quit(true);
 
@@ -72,7 +72,7 @@ namespace VisioPowerTools
         private void CmdCloseDocumentsWithoutSaving()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            var app = ss.Application;
+            var app = ss.VisioApplication;
             var docs = app.Documents;
             if (docs.Count<1)
             {

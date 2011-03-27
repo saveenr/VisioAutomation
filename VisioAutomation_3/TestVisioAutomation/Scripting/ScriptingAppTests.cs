@@ -13,15 +13,15 @@ namespace TestVisioAutomation
         {
             var ss = GetScriptingSession();
 
-            var old_size = ss.ApplicationX.GetApplicationWindowSize();
+            var old_size = ss.Application.GetWindowSize();
             var desired_size = new System.Drawing.Size(600, 800);
 
-            ss.ApplicationX.SetApplicationWindowSize(desired_size.Width, desired_size.Height);
+            ss.Application.SetWindowSize(desired_size.Width, desired_size.Height);
 
-            var actual_size = ss.ApplicationX.GetApplicationWindowSize();
+            var actual_size = ss.Application.GetWindowSize();
             Assert.AreEqual(desired_size, actual_size);
-            ss.ApplicationX.SetApplicationWindowSize(old_size.Width, old_size.Height);
-            actual_size = ss.ApplicationX.GetApplicationWindowSize();
+            ss.Application.SetWindowSize(old_size.Width, old_size.Height);
+            actual_size = ss.Application.GetWindowSize();
             Assert.AreEqual(old_size, actual_size);
         }
 
@@ -48,7 +48,7 @@ namespace TestVisioAutomation
         public void Scripting_Test_App_to_Front()
         {
             var ss = GetScriptingSession();
-            ss.ApplicationX.BringApplicationWindowToFront();
+            ss.Application.WindowToFront();
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace TestVisioAutomation
             ss.Document.CloseAllDocumentsWithoutSaving();
 
             Assert.IsFalse(ss.HasActiveDrawing());
-            var application = ss.Application;
+            var application = ss.VisioApplication;
             var documents = application.Documents;
             Assert.AreEqual(0, documents.Count);
         }

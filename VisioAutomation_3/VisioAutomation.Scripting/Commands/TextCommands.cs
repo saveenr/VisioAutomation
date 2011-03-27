@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var values = texts.ToList();
@@ -67,7 +67,7 @@ namespace VisioAutomation.Scripting.Commands
 
             int rounding = 0;
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var src_charstyle = VA.ShapeSheet.SRCConstants.Char_Style;
 
             using (var undoscope = application.CreateUndoScope())
@@ -126,7 +126,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -157,7 +157,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
@@ -182,7 +182,7 @@ namespace VisioAutomation.Scripting.Commands
             const int color = 0;
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 TextCommandsUtil.reset_character_formatting(shapes, fontid, fontsize, color);
@@ -198,7 +198,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this.Session.Selection.GetSelection();
             var shapeids = selection.GetIDs();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -214,7 +214,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapes_2d = this.Session.Selection.EnumSelectedShapes2D().ToList();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -231,7 +231,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var sel = active_window.Selection;
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
@@ -285,7 +285,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return;
             }
-            this.Session.Application.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeUp);
+            this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeUp);
         }
 
         public void SetStyleProperties(string stylename, string fontname)
@@ -295,7 +295,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var doc = this.Session.Application.ActiveDocument;
+            var doc = this.Session.VisioApplication.ActiveDocument;
             var styles = doc.Styles;
             var style = styles.ItemU[stylename];
 
@@ -318,7 +318,7 @@ namespace VisioAutomation.Scripting.Commands
         public void SetTextFont(string fontname)
         {
             var fontnames = new string[] {fontname};
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var fonts = fontnames.Select(v => active_doc_fonts[v]);
@@ -333,7 +333,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return;
             }
-            this.Session.Application.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
+            this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
         }
     }
 }

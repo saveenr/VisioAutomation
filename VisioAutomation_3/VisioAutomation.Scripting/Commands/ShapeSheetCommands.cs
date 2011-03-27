@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Query.Table<T> QueryResults<T>(IList<VA.ShapeSheet.SRC> srcs)
         {
-            var app = this.Session.Application;
+            var app = this.Session.VisioApplication;
             var page = app.ActivePage;
             var active_window = app.ActiveWindow;
             var selection = active_window.Selection;
@@ -50,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Query.Table<string> QueryFormulas(IList<VA.ShapeSheet.SRC> srcs)
         {
-            var app = this.Session.Application;
+            var app = this.Session.VisioApplication;
             var page = app.ActivePage;
             var active_window = app.ActiveWindow;
             var selection = active_window.Selection;
@@ -72,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Query.Table<T> QueryResults<T>(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
-            var app = this.Session.Application;
+            var app = this.Session.VisioApplication;
             var page = app.ActivePage;
             var active_window = app.ActiveWindow;
             var selection = active_window.Selection;
@@ -93,7 +93,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Query.Table<string> QueryFormulas(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
-            var app = this.Session.Application;
+            var app = this.Session.VisioApplication;
             var page = app.ActivePage;
             var active_window = app.ActiveWindow;
             var selection = active_window.Selection;
@@ -140,7 +140,7 @@ namespace VisioAutomation.Scripting.Commands
                 // In this case, we didn't find a SRC value for the name
                 // So we resort to setting the formulas, one-by-one
                 // This is very slow, but it should not occur in practice very often
-                var shapes = this.Session.Connection.GetSelectedShapes(ShapesEnumeration.Flat);
+                var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
                 foreach (var shape in shapes)
                 {
                     var cell = shape.Cells[cellname];
@@ -199,7 +199,7 @@ namespace VisioAutomation.Scripting.Commands
 
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -209,7 +209,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetCells(CellSetter cellsetter, bool blastguards, bool testcircular)
         {
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
@@ -243,7 +243,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;

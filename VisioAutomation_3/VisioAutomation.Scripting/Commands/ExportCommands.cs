@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
             var old_selection = this.Session.Selection.EnumSelectedShapes().ToList();
 
             this.Session.Selection.SelectNone();
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             active_page.Export(filename);
             var active_window = application.ActiveWindow;
@@ -61,7 +61,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("filename");
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var old_page = application.ActivePage;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages.AsEnumerable().ToList();

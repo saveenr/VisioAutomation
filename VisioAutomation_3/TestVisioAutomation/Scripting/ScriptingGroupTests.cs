@@ -20,19 +20,19 @@ namespace TestVisioAutomation
             var shape_oval2 = ss.Draw.DrawOval(new VA.Drawing.Point(2, 2), 0.5);
 
             ss.Selection.SelectAll();
-            var s0 = ss.Connection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
+            var s0 = ss.Selection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
             Assert.AreEqual(4, s0.Count);
 
             var g = ss.Layout.Group();
             ss.Selection.SelectNone();
             ss.Selection.SelectAll();
 
-            var s1 = ss.Connection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
+            var s1 = ss.Selection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
             Assert.AreEqual(1, s1.Count);
 
             ss.Layout.Ungroup();
             ss.Selection.SelectAll();
-            var s2 = ss.Connection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
+            var s2 = ss.Selection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
             Assert.AreEqual(4, s2.Count);
             ss.Document.CloseDocument(true);
         }

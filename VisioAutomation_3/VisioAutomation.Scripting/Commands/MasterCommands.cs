@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
                 new List<IVisio.Master>(0);
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
@@ -55,7 +55,7 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Master master = null;
             try
             {
-                var application = this.Session.Application;
+                var application = this.Session.VisioApplication;
                 var active_document = application.ActiveDocument;
                 var masters = active_document.Masters;
                 master = masters.ItemU[name];
@@ -83,7 +83,7 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Document stencil_doc = null;
             try
             {
-                var application = this.Session.Application;
+                var application = this.Session.VisioApplication;
                 var documents = application.Documents;
                 stencil_doc = documents[stencil];
             }
@@ -111,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape DropMaster(IVisio.Master master, double x, double y)
         {
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var shape = page.Drop(master, x, y);
             return shape;
@@ -134,7 +134,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new AutomationException("No active page");
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;

@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         
         public IEnumerable<IVisio.Shape> EnumSelectedShapes()
         {
-            var app = this.Session.Application;
+            var app = this.Session.VisioApplication;
             var activewin = app.ActiveWindow;
             var sel = activewin.Selection;
 
@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Selection GetSelection()
         {
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             return selection;
@@ -57,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             if (shapes.Count < 1)
@@ -98,7 +98,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             active_window.DeselectAll();
@@ -116,7 +116,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             active_window.Select(shape, (short) IVisio.VisSelectArgs.visSelect);
         }
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             active_window.Select(shapes, IVisio.VisSelectArgs.visSelect);
         }
@@ -150,7 +150,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var page = application.ActivePage;
             var page_shapes = page.Shapes;
@@ -170,7 +170,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            this.Session.Application.ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
+            this.Session.VisioApplication.ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
         }
 
         public void SelectShapesByMaster(IVisio.Master master)
@@ -180,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             // Get a selection of connectors, by master: 
             var selection = page.CreateSelection(
@@ -207,7 +207,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var layer = this.Session.Layer.GetLayer(layername);
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var page = application.ActivePage;
 
             // Get a selection of connectors, by layer: 
@@ -215,6 +215,43 @@ namespace VisioAutomation.Scripting.Commands
                 IVisio.VisSelectionTypes.visSelTypeByLayer,
                 IVisio.VisSelectMode.visSelModeSkipSub, 
                 layer);
+        }
+
+        public IList<IVisio.Shape> GetSelectedShapes(ShapesEnumeration enumerationtype)
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return new List<IVisio.Shape>(0);
+            }
+
+            var selection = this.Session.Selection.GetSelection();
+            return VA.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
+        }
+
+        public IList<IVisio.Shape> GetSubSelectedShapes()
+        {
+            //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
+            var shapes = new List<IVisio.Shape>(0);
+            var sel = this.Session.Selection.GetSelection();
+            var original_itermode = sel.IterationMode;
+
+            // normal selection
+            sel.IterationMode = ((short)IVisio.VisSelectMode.visSelModeSkipSub) + ((short)IVisio.VisSelectMode.visSelModeSkipSuper);
+
+            if (sel.Count > 0)
+            {
+                shapes.AddRange(sel.AsEnumerable());
+            }
+
+            // sub selection
+            sel.IterationMode = ((short)IVisio.VisSelectMode.visSelModeOnlySub) + ((short)IVisio.VisSelectMode.visSelModeSkipSuper);
+            if (sel.Count > 0)
+            {
+                shapes.AddRange(sel.AsEnumerable());
+            }
+
+            sel.IterationMode = original_itermode;
+            return shapes;
         }
     }
 }

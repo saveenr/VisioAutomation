@@ -105,7 +105,7 @@ namespace VisioAutomation.Scripting.OrgChart
         {
             scriptingsession.Write(VAS.OutputStream.Verbose,"Start OrgChart Rendering");
             var renderer = new VAL.OrgChart.OrgChartLayout();
-            var application = scriptingsession.Application;
+            var application = scriptingsession.VisioApplication;
             drawing.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();

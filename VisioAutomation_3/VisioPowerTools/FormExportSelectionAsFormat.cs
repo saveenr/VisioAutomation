@@ -50,7 +50,7 @@ namespace VisioPowerTools
                     }
             }
 
-            var application = ss.Application;
+            var application = ss.VisioApplication;
             var doc = application.ActiveDocument;           
             var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
             var page = application.ActivePage;

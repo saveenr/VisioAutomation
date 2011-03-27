@@ -15,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Window GetActiveWindow()
         {
-            var application = this.Session.Application;
+            var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             return active_window;
         }
