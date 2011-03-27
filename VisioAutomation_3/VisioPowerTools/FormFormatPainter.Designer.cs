@@ -47,7 +47,7 @@
             // 
             this.buttonCopyAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyAll.Location = new System.Drawing.Point(12, 145);
+            this.buttonCopyAll.Location = new System.Drawing.Point(12, 150);
             this.buttonCopyAll.Name = "buttonCopyAll";
             this.buttonCopyAll.Size = new System.Drawing.Size(60, 23);
             this.buttonCopyAll.TabIndex = 0;
@@ -58,26 +58,26 @@
             // labelCopy
             // 
             this.labelCopy.AutoSize = true;
-            this.labelCopy.Location = new System.Drawing.Point(9, 12);
+            this.labelCopy.Location = new System.Drawing.Point(27, 9);
             this.labelCopy.Name = "labelCopy";
-            this.labelCopy.Size = new System.Drawing.Size(34, 13);
+            this.labelCopy.Size = new System.Drawing.Size(31, 13);
             this.labelCopy.TabIndex = 1;
-            this.labelCopy.Text = "COPY";
+            this.labelCopy.Text = "Copy";
             // 
             // labelPaste
             // 
             this.labelPaste.AutoSize = true;
-            this.labelPaste.Location = new System.Drawing.Point(89, 12);
+            this.labelPaste.Location = new System.Drawing.Point(101, 9);
             this.labelPaste.Name = "labelPaste";
-            this.labelPaste.Size = new System.Drawing.Size(37, 13);
+            this.labelPaste.Size = new System.Drawing.Size(34, 13);
             this.labelPaste.TabIndex = 2;
-            this.labelPaste.Text = "PASTE";
+            this.labelPaste.Text = "Paste";
             // 
             // buttonPasteAll
             // 
             this.buttonPasteAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteAll.Location = new System.Drawing.Point(92, 145);
+            this.buttonPasteAll.Location = new System.Drawing.Point(88, 150);
             this.buttonPasteAll.Name = "buttonPasteAll";
             this.buttonPasteAll.Size = new System.Drawing.Size(60, 23);
             this.buttonPasteAll.TabIndex = 3;
@@ -89,7 +89,7 @@
             // 
             this.buttonPasteFill.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteFill.Location = new System.Drawing.Point(92, 29);
+            this.buttonPasteFill.Location = new System.Drawing.Point(88, 34);
             this.buttonPasteFill.Name = "buttonPasteFill";
             this.buttonPasteFill.Size = new System.Drawing.Size(60, 23);
             this.buttonPasteFill.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             this.buttonCopyFill.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyFill.Location = new System.Drawing.Point(12, 29);
+            this.buttonCopyFill.Location = new System.Drawing.Point(12, 34);
             this.buttonCopyFill.Name = "buttonCopyFill";
             this.buttonCopyFill.Size = new System.Drawing.Size(60, 23);
             this.buttonCopyFill.TabIndex = 4;
@@ -113,7 +113,7 @@
             // 
             this.buttonCopyLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyLine.Location = new System.Drawing.Point(12, 58);
+            this.buttonCopyLine.Location = new System.Drawing.Point(12, 63);
             this.buttonCopyLine.Name = "buttonCopyLine";
             this.buttonCopyLine.Size = new System.Drawing.Size(60, 23);
             this.buttonCopyLine.TabIndex = 6;
@@ -125,7 +125,7 @@
             // 
             this.buttonCopyShadow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyShadow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyShadow.Location = new System.Drawing.Point(12, 87);
+            this.buttonCopyShadow.Location = new System.Drawing.Point(12, 92);
             this.buttonCopyShadow.Name = "buttonCopyShadow";
             this.buttonCopyShadow.Size = new System.Drawing.Size(60, 23);
             this.buttonCopyShadow.TabIndex = 8;
@@ -137,7 +137,7 @@
             // 
             this.buttonCopyText.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyText.Location = new System.Drawing.Point(12, 116);
+            this.buttonCopyText.Location = new System.Drawing.Point(12, 121);
             this.buttonCopyText.Name = "buttonCopyText";
             this.buttonCopyText.Size = new System.Drawing.Size(60, 23);
             this.buttonCopyText.TabIndex = 10;
@@ -149,7 +149,7 @@
             // 
             this.buttonPasteText.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteText.Location = new System.Drawing.Point(92, 116);
+            this.buttonPasteText.Location = new System.Drawing.Point(88, 121);
             this.buttonPasteText.Name = "buttonPasteText";
             this.buttonPasteText.Size = new System.Drawing.Size(60, 23);
             this.buttonPasteText.TabIndex = 13;
@@ -161,7 +161,7 @@
             // 
             this.buttonPasteShadow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteShadow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteShadow.Location = new System.Drawing.Point(92, 87);
+            this.buttonPasteShadow.Location = new System.Drawing.Point(88, 92);
             this.buttonPasteShadow.Name = "buttonPasteShadow";
             this.buttonPasteShadow.Size = new System.Drawing.Size(60, 23);
             this.buttonPasteShadow.TabIndex = 12;
@@ -173,7 +173,7 @@
             // 
             this.buttonPasteLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteLine.Location = new System.Drawing.Point(92, 58);
+            this.buttonPasteLine.Location = new System.Drawing.Point(88, 63);
             this.buttonPasteLine.Name = "buttonPasteLine";
             this.buttonPasteLine.Size = new System.Drawing.Size(60, 23);
             this.buttonPasteLine.TabIndex = 11;
@@ -189,7 +189,7 @@
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(140, 23);
             this.buttonClear.TabIndex = 14;
-            this.buttonClear.Text = "Clear";
+            this.buttonClear.Text = "Reset format painter";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 

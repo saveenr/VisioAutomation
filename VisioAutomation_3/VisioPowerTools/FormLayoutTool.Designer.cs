@@ -50,9 +50,9 @@
             this.labelPage.AutoSize = true;
             this.labelPage.Location = new System.Drawing.Point(9, 10);
             this.labelPage.Name = "labelPage";
-            this.labelPage.Size = new System.Drawing.Size(34, 13);
+            this.labelPage.Size = new System.Drawing.Size(32, 13);
             this.labelPage.TabIndex = 1;
-            this.labelPage.Text = "PAGE";
+            this.labelPage.Text = "Page";
             // 
             // buttonDuplicatePage
             // 

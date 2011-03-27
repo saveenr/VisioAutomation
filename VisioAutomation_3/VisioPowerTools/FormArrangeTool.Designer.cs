@@ -54,9 +54,9 @@
             this.labelHorixontalAlign.AutoSize = true;
             this.labelHorixontalAlign.Location = new System.Drawing.Point(6, 8);
             this.labelHorixontalAlign.Name = "labelHorixontalAlign";
-            this.labelHorixontalAlign.Size = new System.Drawing.Size(38, 13);
+            this.labelHorixontalAlign.Size = new System.Drawing.Size(30, 13);
             this.labelHorixontalAlign.TabIndex = 0;
-            this.labelHorixontalAlign.Text = "ALIGN";
+            this.labelHorixontalAlign.Text = "Align";
             // 
             // buttonAlignLeft
             // 
@@ -136,9 +136,9 @@
             this.labelCopy.BackColor = System.Drawing.SystemColors.Control;
             this.labelCopy.Location = new System.Drawing.Point(6, 120);
             this.labelCopy.Name = "labelCopy";
-            this.labelCopy.Size = new System.Drawing.Size(34, 13);
+            this.labelCopy.Size = new System.Drawing.Size(31, 13);
             this.labelCopy.TabIndex = 11;
-            this.labelCopy.Text = "COPY";
+            this.labelCopy.Text = "Copy";
             // 
             // buttonCopySize
             // 
@@ -217,9 +217,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 60);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 13);
+            this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 20;
-            this.label3.Text = "DISTRIBUTE";
+            this.label3.Text = "Distribute";
             // 
             // buttonDistributeVCenter
             // 
@@ -251,9 +251,9 @@
             this.labelPaste.BackColor = System.Drawing.SystemColors.Control;
             this.labelPaste.Location = new System.Drawing.Point(6, 172);
             this.labelPaste.Name = "labelPaste";
-            this.labelPaste.Size = new System.Drawing.Size(37, 13);
+            this.labelPaste.Size = new System.Drawing.Size(34, 13);
             this.labelPaste.TabIndex = 30;
-            this.labelPaste.Text = "PASTE";
+            this.labelPaste.Text = "Paste";
             // 
             // FormArrangeTool
             // 

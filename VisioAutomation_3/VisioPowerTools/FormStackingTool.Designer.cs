@@ -41,9 +41,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(7, 63);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.Size = new System.Drawing.Size(130, 13);
             this.label2.TabIndex = 16;
-            this.label2.Text = "DISTANCE";
+            this.label2.Text = "Distance between shapes";
             // 
             // comboBoxSnapDelta
             // 
@@ -94,16 +94,16 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(7, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 13);
+            this.label4.Size = new System.Drawing.Size(86, 13);
             this.label4.TabIndex = 29;
-            this.label4.Text = "STACK SHAPES";
+            this.label4.Text = "Stack shapes as";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(128, 82);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
+            this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 31;
             this.label1.Text = "inches";
             // 

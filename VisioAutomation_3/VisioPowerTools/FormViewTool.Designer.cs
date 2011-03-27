@@ -118,18 +118,18 @@
             this.labelZoomTo.AutoSize = true;
             this.labelZoomTo.Location = new System.Drawing.Point(6, 4);
             this.labelZoomTo.Name = "labelZoomTo";
-            this.labelZoomTo.Size = new System.Drawing.Size(58, 13);
+            this.labelZoomTo.Size = new System.Drawing.Size(46, 13);
             this.labelZoomTo.TabIndex = 6;
-            this.labelZoomTo.Text = "ZOOM TO";
+            this.labelZoomTo.Text = "Zoom to";
             // 
             // labelPage
             // 
             this.labelPage.AutoSize = true;
             this.labelPage.Location = new System.Drawing.Point(7, 107);
             this.labelPage.Name = "labelPage";
-            this.labelPage.Size = new System.Drawing.Size(34, 13);
+            this.labelPage.Size = new System.Drawing.Size(84, 13);
             this.labelPage.TabIndex = 7;
-            this.labelPage.Text = "PAGE";
+            this.labelPage.Text = "Page navigation";
             // 
             // buttonPageLast
             // 
@@ -160,9 +160,9 @@
             this.labelZoomLevel.AutoSize = true;
             this.labelZoomLevel.Location = new System.Drawing.Point(6, 56);
             this.labelZoomLevel.Name = "labelZoomLevel";
-            this.labelZoomLevel.Size = new System.Drawing.Size(73, 13);
+            this.labelZoomLevel.Size = new System.Drawing.Size(59, 13);
             this.labelZoomLevel.TabIndex = 10;
-            this.labelZoomLevel.Text = "ZOOM LEVEL";
+            this.labelZoomLevel.Text = "Zoom level";
             // 
             // FormViewTool
             // 

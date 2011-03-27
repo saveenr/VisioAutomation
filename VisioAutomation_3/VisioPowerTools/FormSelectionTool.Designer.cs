@@ -114,27 +114,27 @@
             this.labelConnectors.AutoSize = true;
             this.labelConnectors.Location = new System.Drawing.Point(11, 79);
             this.labelConnectors.Name = "labelConnectors";
-            this.labelConnectors.Size = new System.Drawing.Size(79, 13);
+            this.labelConnectors.Size = new System.Drawing.Size(61, 13);
             this.labelConnectors.TabIndex = 6;
-            this.labelConnectors.Text = "CONNECTORS";
+            this.labelConnectors.Text = "Connectors";
             // 
             // labelFormatSelection
             // 
             this.labelFormatSelection.AutoSize = true;
             this.labelFormatSelection.Location = new System.Drawing.Point(11, 137);
             this.labelFormatSelection.Name = "labelFormatSelection";
-            this.labelFormatSelection.Size = new System.Drawing.Size(75, 13);
+            this.labelFormatSelection.Size = new System.Drawing.Size(39, 13);
             this.labelFormatSelection.TabIndex = 7;
-            this.labelFormatSelection.Text = "FORMATTING";
+            this.labelFormatSelection.Text = "Format";
             // 
             // labelSelect
             // 
             this.labelSelect.AutoSize = true;
             this.labelSelect.Location = new System.Drawing.Point(11, 13);
             this.labelSelect.Name = "labelSelect";
-            this.labelSelect.Size = new System.Drawing.Size(46, 13);
+            this.labelSelect.Size = new System.Drawing.Size(43, 13);
             this.labelSelect.TabIndex = 8;
-            this.labelSelect.Text = "SHAPES";
+            this.labelSelect.Text = "Shapes";
             // 
             // FormSelectionTool
             // 

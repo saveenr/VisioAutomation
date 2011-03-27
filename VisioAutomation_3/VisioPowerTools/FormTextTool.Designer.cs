@@ -59,7 +59,7 @@
             this.buttonTextToBottom.Name = "buttonTextToBottom";
             this.buttonTextToBottom.Size = new System.Drawing.Size(117, 23);
             this.buttonTextToBottom.TabIndex = 2;
-            this.buttonTextToBottom.Text = "To Below Shape";
+            this.buttonTextToBottom.Text = "Move below shape";
             this.buttonTextToBottom.UseVisualStyleBackColor = true;
             this.buttonTextToBottom.Click += new System.EventHandler(this.buttonTextToBottom_Click);
             // 
@@ -104,36 +104,36 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(10, 180);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.Size = new System.Drawing.Size(77, 13);
             this.label2.TabIndex = 7;
-            this.label2.Text = "WRAPPING";
+            this.label2.Text = "Text Wrapping";
             // 
             // labelText
             // 
             this.labelText.AutoSize = true;
             this.labelText.Location = new System.Drawing.Point(10, 11);
             this.labelText.Name = "labelText";
-            this.labelText.Size = new System.Drawing.Size(80, 13);
+            this.labelText.Size = new System.Drawing.Size(67, 13);
             this.labelText.TabIndex = 8;
-            this.labelText.Text = "TEXT CONTENT";
+            this.labelText.Text = "Text content";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 73);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 9;
-            this.label3.Text = "TEXT BOX";
+            this.label3.Text = "Text box";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(10, 124);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 10;
-            this.label4.Text = "SHAPE SIZE";
+            this.label4.Text = "Shape size";
             // 
             // FormTextTool
             // 
