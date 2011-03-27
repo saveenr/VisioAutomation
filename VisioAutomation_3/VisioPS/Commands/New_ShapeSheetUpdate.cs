@@ -4,13 +4,13 @@ using VA=VisioAutomation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "New_CellSetter")]
-    public class New_CellSetter : VisioPSCmdlet
+    [SMA.Cmdlet("New", "ShapeSheetUpdate")]
+    public class New_ShapeSheetUpdate : VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {
-            var setter = new VA.Scripting.CellSetter();
-            this.WriteObject(setter);
+            var update = new VA.Scripting.ShapeSheetUpdate();
+            this.WriteObject(update);
         }
     }
 }

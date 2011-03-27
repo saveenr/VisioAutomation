@@ -30,7 +30,7 @@ VA = VisioAutomation
 VAS = VisioAutomation.Scripting
 
 # Start a new Scripting session
-if ( "visio" not in dir() ) : 
-    visio = VAS.Session()
+if ( "vi" not in dir() ) : 
+    vi = VAS.Session()
 
-assert( visio != None )
+assert( vi != None )

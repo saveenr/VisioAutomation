@@ -206,7 +206,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Send(ShapeSendDirection dir)
+        public void Send( VA.Layout.ShapeSendDirection dir)
         {
 
             if (!this.Session.HasSelectedShapes())
@@ -215,28 +215,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = Session.Selection.GetSelection();
-
-
-            if (dir == ShapeSendDirection.ToBack)
-            {
-                selection.SendToBack();
-            }
-            else if (dir == ShapeSendDirection.Backward)
-            {
-                selection.SendBackward();
-            }
-            else if (dir == ShapeSendDirection.Forward)
-            {
-                selection.BringForward();
-            }
-            else if (dir == ShapeSendDirection.ToFront)
-            {
-                selection.BringToFront();
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("dir");
-            }
+            VA.Layout.LayoutHelper.SendShapes(selection, dir);
         }
 
         public void Align(VA.Drawing.AlignmentHorizontal align)

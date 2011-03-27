@@ -207,17 +207,16 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetCells(CellSetter cellsetter, bool blastguards, bool testcircular)
+        public void Update(ShapeSheetUpdate update, bool blastguards, bool testcircular)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
-                var update = cellsetter.update;
-                update.BlastGuards = blastguards;
-                update.TestCircular = testcircular;
-
-                update.Execute(active_page);                
+                var internal_update = update.update;
+                internal_update.BlastGuards = blastguards;
+                internal_update.TestCircular = testcircular;
+                internal_update.Execute(active_page);                
             }
         }
 
@@ -277,7 +276,7 @@ namespace VisioAutomation.Scripting.Commands
 
         private IList<VA.ShapeSheet.SRC> _CellNamesToSRCs(IList<string> cellnames)
         {
-            var srcs = cellnames.Select(s => VA.ShapeSheet.ShapeSheetHelper.GetSRCFromName(s)).ToList();
+            var srcs = cellnames.Select(VA.ShapeSheet.ShapeSheetHelper.GetSRCFromName).ToList();
             return srcs;
         }
     }

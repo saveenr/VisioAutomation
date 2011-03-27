@@ -86,7 +86,7 @@
     <Compile Include="Commands\Get_SectionResult.cs" />
     <Compile Include="Commands\Get_SRCFormula.cs" />
     <Compile Include="Commands\Set_Cells.cs" />
-    <Compile Include="Commands\New_CellSetter.cs" />
+    <Compile Include="Commands\New_ShapeSheetUpdate.cs" />
     <Compile Include="Commands\Set_Style.cs" />
     <Compile Include="DTUtil.cs" />
     <Compile Include="Commands\Get_Point.cs" />

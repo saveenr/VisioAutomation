@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting
 {
-    public static class DrawCommandsUtil
+    static class DrawCommandsUtil
     {
 
         private static VA.Drawing.Rectangle[] GetOuterBorderRects(VA.Drawing.Rectangle R, double w)

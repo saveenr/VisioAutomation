@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Set_Cells : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
-        public VA.Scripting.CellSetter CellSetter { get; set; }
+        public VA.Scripting.ShapeSheetUpdate Update { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards;
@@ -20,7 +20,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            scriptingsession.ShapeSheet.SetCells(this.CellSetter, this.BlastGuards, this.TestCircular);
+            scriptingsession.ShapeSheet.Update(this.Update, this.BlastGuards, this.TestCircular);
         }
     }
 }

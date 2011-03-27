@@ -427,5 +427,27 @@ namespace VisioAutomation.Layout
             xfrm.Angle = qds.GetItem(row, query.Angle);
             return xfrm;
         }
+
+
+        public static void SendShapes( IVisio.Selection selection, VA.Layout.ShapeSendDirection dir)
+        {
+
+            if (dir == VA.Layout.ShapeSendDirection.ToBack)
+            {
+                selection.SendToBack();
+            }
+            else if (dir == VA.Layout.ShapeSendDirection.Backward)
+            {
+                selection.SendBackward();
+            }
+            else if (dir == VA.Layout.ShapeSendDirection.Forward)
+            {
+                selection.BringForward();
+            }
+            else if (dir == VA.Layout.ShapeSendDirection.ToFront)
+            {
+                selection.BringToFront();
+            }
+        }
     }
 }

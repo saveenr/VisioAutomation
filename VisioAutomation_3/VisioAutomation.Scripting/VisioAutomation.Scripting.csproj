@@ -77,17 +77,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CellSetter.cs" />
+    <Compile Include="ShapeSheetUpdate.cs" />
     <Compile Include="Commands\ApplicationCommands.cs" />
     <Compile Include="FlowChart\MySequenceNumberGenerator.cs" />
-    <Compile Include="LayoutDirection.cs" />
     <Compile Include="SessionCommands.cs" />
     <Compile Include="Commands\SelectionCommands.cs" />
     <Compile Include="Commands\LayoutCommands.cs" />
     <Compile Include="Commands\FormatCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
-    <Compile Include="ConnectionDirectionType.cs" />
     <Compile Include="OutputStream.cs" />
     <Compile Include="SequenceNumberGenerator.cs" />
     <Compile Include="SessionOptions.cs" />
@@ -98,7 +96,6 @@
     <Compile Include="FlowChart\ShapeInfo.cs" />
     <Compile Include="FlowChart\XmlExtensions.cs" />
     <Compile Include="OrgChart\OrgChartBuilder.cs" />
-    <Compile Include="ShapeSendDirection.cs" />
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Commands\ConnectionPointCommands.cs" />
     <Compile Include="Commands\ControlCommands.cs" />
@@ -153,7 +150,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ListInstalledStencilsAndMasters.py" />
     <Content Include="visio.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

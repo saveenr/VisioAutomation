@@ -1,4 +1,4 @@
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Layout
 {
     public enum ShapeSendDirection
     {

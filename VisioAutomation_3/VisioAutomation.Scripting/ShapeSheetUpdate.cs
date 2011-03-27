@@ -3,11 +3,11 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Scripting
 {
-    public class CellSetter
+    public class ShapeSheetUpdate
     {
         internal readonly VA.ShapeSheet.Update.SIDSRCUpdate update;
 
-        public CellSetter()
+        public ShapeSheetUpdate()
         {
             this.update = new VA.ShapeSheet.Update.SIDSRCUpdate();
         }
