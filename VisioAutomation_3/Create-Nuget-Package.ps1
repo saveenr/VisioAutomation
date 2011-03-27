@@ -1,14 +1,11 @@
 
 # start package metadata
 $title = "VisioAutomation"
-$version = "3.2.x"
+$version = "3.9.0"
 $author = "Saveen Reddy"
-$description = "The VisioAutomation simplified the control of the Visio Application via .NET Languages"
+$description = "The VisioAutomation provides simplified the control of the Visio Application via .NET Languages"
 $projecturl = "http://visioautomation.codeplex.com"
 # end package metadata
-
-
-
 
 
 function make_directory( [string] $p )
