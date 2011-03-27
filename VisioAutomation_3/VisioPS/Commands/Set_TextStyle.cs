@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {    
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, "Style")]
-    public class Set_Style : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "TextStyle")]
+    public class Set_TextStyle : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position=0)] public string Name;
         [SMA.Parameter(Mandatory = false)] public string FontName;
