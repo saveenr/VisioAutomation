@@ -37,7 +37,6 @@
             // 
             this.buttonResizePageToFitContents.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonResizePageToFitContents.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonResizePageToFitContents.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonResizePageToFitContents.Location = new System.Drawing.Point(12, 28);
             this.buttonResizePageToFitContents.Name = "buttonResizePageToFitContents";
             this.buttonResizePageToFitContents.Size = new System.Drawing.Size(122, 23);
@@ -49,7 +48,6 @@
             // labelPage
             // 
             this.labelPage.AutoSize = true;
-            this.labelPage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPage.Location = new System.Drawing.Point(9, 10);
             this.labelPage.Name = "labelPage";
             this.labelPage.Size = new System.Drawing.Size(34, 13);
@@ -60,7 +58,6 @@
             // 
             this.buttonDuplicatePage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonDuplicatePage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDuplicatePage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDuplicatePage.Location = new System.Drawing.Point(12, 57);
             this.buttonDuplicatePage.Name = "buttonDuplicatePage";
             this.buttonDuplicatePage.Size = new System.Drawing.Size(122, 23);

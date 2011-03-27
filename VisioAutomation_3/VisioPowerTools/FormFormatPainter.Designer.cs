@@ -47,7 +47,6 @@
             // 
             this.buttonCopyAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyAll.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCopyAll.Location = new System.Drawing.Point(12, 145);
             this.buttonCopyAll.Name = "buttonCopyAll";
             this.buttonCopyAll.Size = new System.Drawing.Size(60, 23);
@@ -59,7 +58,6 @@
             // labelCopy
             // 
             this.labelCopy.AutoSize = true;
-            this.labelCopy.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCopy.Location = new System.Drawing.Point(9, 12);
             this.labelCopy.Name = "labelCopy";
             this.labelCopy.Size = new System.Drawing.Size(34, 13);
@@ -69,7 +67,6 @@
             // labelPaste
             // 
             this.labelPaste.AutoSize = true;
-            this.labelPaste.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPaste.Location = new System.Drawing.Point(89, 12);
             this.labelPaste.Name = "labelPaste";
             this.labelPaste.Size = new System.Drawing.Size(37, 13);
@@ -80,7 +77,6 @@
             // 
             this.buttonPasteAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteAll.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPasteAll.Location = new System.Drawing.Point(92, 145);
             this.buttonPasteAll.Name = "buttonPasteAll";
             this.buttonPasteAll.Size = new System.Drawing.Size(60, 23);
@@ -93,7 +89,6 @@
             // 
             this.buttonPasteFill.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteFill.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPasteFill.Location = new System.Drawing.Point(92, 29);
             this.buttonPasteFill.Name = "buttonPasteFill";
             this.buttonPasteFill.Size = new System.Drawing.Size(60, 23);
@@ -106,7 +101,6 @@
             // 
             this.buttonCopyFill.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyFill.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCopyFill.Location = new System.Drawing.Point(12, 29);
             this.buttonCopyFill.Name = "buttonCopyFill";
             this.buttonCopyFill.Size = new System.Drawing.Size(60, 23);
@@ -119,7 +113,6 @@
             // 
             this.buttonCopyLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyLine.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCopyLine.Location = new System.Drawing.Point(12, 58);
             this.buttonCopyLine.Name = "buttonCopyLine";
             this.buttonCopyLine.Size = new System.Drawing.Size(60, 23);
@@ -132,7 +125,6 @@
             // 
             this.buttonCopyShadow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyShadow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyShadow.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCopyShadow.Location = new System.Drawing.Point(12, 87);
             this.buttonCopyShadow.Name = "buttonCopyShadow";
             this.buttonCopyShadow.Size = new System.Drawing.Size(60, 23);
@@ -145,7 +137,6 @@
             // 
             this.buttonCopyText.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonCopyText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCopyText.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCopyText.Location = new System.Drawing.Point(12, 116);
             this.buttonCopyText.Name = "buttonCopyText";
             this.buttonCopyText.Size = new System.Drawing.Size(60, 23);
@@ -158,7 +149,6 @@
             // 
             this.buttonPasteText.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteText.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPasteText.Location = new System.Drawing.Point(92, 116);
             this.buttonPasteText.Name = "buttonPasteText";
             this.buttonPasteText.Size = new System.Drawing.Size(60, 23);
@@ -171,7 +161,6 @@
             // 
             this.buttonPasteShadow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteShadow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteShadow.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPasteShadow.Location = new System.Drawing.Point(92, 87);
             this.buttonPasteShadow.Name = "buttonPasteShadow";
             this.buttonPasteShadow.Size = new System.Drawing.Size(60, 23);
@@ -184,7 +173,6 @@
             // 
             this.buttonPasteLine.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPasteLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPasteLine.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPasteLine.Location = new System.Drawing.Point(92, 58);
             this.buttonPasteLine.Name = "buttonPasteLine";
             this.buttonPasteLine.Size = new System.Drawing.Size(60, 23);
@@ -197,7 +185,6 @@
             // 
             this.buttonClear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClear.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClear.Location = new System.Drawing.Point(12, 192);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(140, 23);

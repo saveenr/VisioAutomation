@@ -43,7 +43,6 @@
             // labelDoc
             // 
             this.labelDoc.AutoSize = true;
-            this.labelDoc.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDoc.Location = new System.Drawing.Point(22, 13);
             this.labelDoc.Name = "labelDoc";
             this.labelDoc.Size = new System.Drawing.Size(60, 13);
@@ -53,7 +52,6 @@
             // labelPage
             // 
             this.labelPage.AutoSize = true;
-            this.labelPage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPage.Location = new System.Drawing.Point(22, 30);
             this.labelPage.Name = "labelPage";
             this.labelPage.Size = new System.Drawing.Size(32, 13);
@@ -63,7 +61,6 @@
             // labelDocumentName
             // 
             this.labelDocumentName.AutoSize = true;
-            this.labelDocumentName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDocumentName.Location = new System.Drawing.Point(101, 13);
             this.labelDocumentName.Name = "labelDocumentName";
             this.labelDocumentName.Size = new System.Drawing.Size(106, 13);
@@ -73,7 +70,6 @@
             // labelPageName
             // 
             this.labelPageName.AutoSize = true;
-            this.labelPageName.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPageName.Location = new System.Drawing.Point(101, 30);
             this.labelPageName.Name = "labelPageName";
             this.labelPageName.Size = new System.Drawing.Size(80, 13);
@@ -83,7 +79,6 @@
             // labelOutputFile
             // 
             this.labelOutputFile.AutoSize = true;
-            this.labelOutputFile.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOutputFile.Location = new System.Drawing.Point(19, 88);
             this.labelOutputFile.Name = "labelOutputFile";
             this.labelOutputFile.Size = new System.Drawing.Size(66, 13);
@@ -93,7 +88,6 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.Location = new System.Drawing.Point(396, 322);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -105,7 +99,6 @@
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOK.Location = new System.Drawing.Point(315, 322);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
@@ -119,7 +112,6 @@
             this.filenamePicker1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.filenamePicker1.Filename = "";
-            this.filenamePicker1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.filenamePicker1.Location = new System.Drawing.Point(101, 88);
             this.filenamePicker1.Name = "filenamePicker1";
             this.filenamePicker1.ReadOnly = false;
@@ -129,7 +121,6 @@
             // labelFormat
             // 
             this.labelFormat.AutoSize = true;
-            this.labelFormat.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFormat.Location = new System.Drawing.Point(22, 47);
             this.labelFormat.Name = "labelFormat";
             this.labelFormat.Size = new System.Drawing.Size(79, 13);
@@ -139,7 +130,6 @@
             // labelFormatChoice
             // 
             this.labelFormatChoice.AutoSize = true;
-            this.labelFormatChoice.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFormatChoice.Location = new System.Drawing.Point(101, 47);
             this.labelFormatChoice.Name = "labelFormatChoice";
             this.labelFormatChoice.Size = new System.Drawing.Size(90, 13);

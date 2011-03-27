@@ -43,7 +43,6 @@
             // 
             this.buttonSelectAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonSelectAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelectAll.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSelectAll.Location = new System.Drawing.Point(11, 30);
             this.buttonSelectAll.Name = "buttonSelectAll";
             this.buttonSelectAll.Size = new System.Drawing.Size(50, 23);
@@ -56,7 +55,6 @@
             // 
             this.buttonSelectNone.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonSelectNone.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelectNone.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSelectNone.Location = new System.Drawing.Point(67, 30);
             this.buttonSelectNone.Name = "buttonSelectNone";
             this.buttonSelectNone.Size = new System.Drawing.Size(50, 23);
@@ -69,7 +67,6 @@
             // 
             this.buttonInvertSelection.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonInvertSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonInvertSelection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonInvertSelection.Location = new System.Drawing.Point(123, 30);
             this.buttonInvertSelection.Name = "buttonInvertSelection";
             this.buttonInvertSelection.Size = new System.Drawing.Size(50, 23);
@@ -82,7 +79,6 @@
             // 
             this.buttonSelectWithSameColor.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonSelectWithSameColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelectWithSameColor.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSelectWithSameColor.Location = new System.Drawing.Point(11, 154);
             this.buttonSelectWithSameColor.Name = "buttonSelectWithSameColor";
             this.buttonSelectWithSameColor.Size = new System.Drawing.Size(101, 23);
@@ -95,7 +91,6 @@
             // 
             this.buttonUnselectConnectors.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonUnselectConnectors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonUnselectConnectors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonUnselectConnectors.Location = new System.Drawing.Point(77, 96);
             this.buttonUnselectConnectors.Name = "buttonUnselectConnectors";
             this.buttonUnselectConnectors.Size = new System.Drawing.Size(60, 23);
@@ -107,7 +102,6 @@
             // 
             this.buttonSelectConnectors.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonSelectConnectors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelectConnectors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSelectConnectors.Location = new System.Drawing.Point(11, 96);
             this.buttonSelectConnectors.Name = "buttonSelectConnectors";
             this.buttonSelectConnectors.Size = new System.Drawing.Size(60, 23);
@@ -118,7 +112,6 @@
             // labelConnectors
             // 
             this.labelConnectors.AutoSize = true;
-            this.labelConnectors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelConnectors.Location = new System.Drawing.Point(11, 79);
             this.labelConnectors.Name = "labelConnectors";
             this.labelConnectors.Size = new System.Drawing.Size(79, 13);
@@ -128,7 +121,6 @@
             // labelFormatSelection
             // 
             this.labelFormatSelection.AutoSize = true;
-            this.labelFormatSelection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFormatSelection.Location = new System.Drawing.Point(11, 137);
             this.labelFormatSelection.Name = "labelFormatSelection";
             this.labelFormatSelection.Size = new System.Drawing.Size(75, 13);
@@ -138,7 +130,6 @@
             // labelSelect
             // 
             this.labelSelect.AutoSize = true;
-            this.labelSelect.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSelect.Location = new System.Drawing.Point(11, 13);
             this.labelSelect.Name = "labelSelect";
             this.labelSelect.Size = new System.Drawing.Size(46, 13);

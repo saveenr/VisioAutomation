@@ -42,7 +42,6 @@
             // buttonCancel
             // 
             this.buttonCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonCancel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.Location = new System.Drawing.Point(225, 120);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -54,7 +53,6 @@
             // buttonOK
             // 
             this.buttonOK.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonOK.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOK.Location = new System.Drawing.Point(144, 120);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
@@ -66,7 +64,6 @@
             // buttonSwapColors
             // 
             this.buttonSwapColors.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonSwapColors.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSwapColors.Location = new System.Drawing.Point(225, 27);
             this.buttonSwapColors.Name = "buttonSwapColors";
             this.buttonSwapColors.Size = new System.Drawing.Size(75, 23);
@@ -78,7 +75,6 @@
             // colorSelectorSmallForeground
             // 
             this.colorSelectorSmallForeground.Color = System.Drawing.SystemColors.Control;
-            this.colorSelectorSmallForeground.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.colorSelectorSmallForeground.Location = new System.Drawing.Point(19, 28);
             this.colorSelectorSmallForeground.Name = "colorSelectorSmallForeground";
             this.colorSelectorSmallForeground.Size = new System.Drawing.Size(42, 22);
@@ -87,7 +83,6 @@
             // colorSelectorSmallBackground
             // 
             this.colorSelectorSmallBackground.Color = System.Drawing.SystemColors.Control;
-            this.colorSelectorSmallBackground.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.colorSelectorSmallBackground.Location = new System.Drawing.Point(19, 75);
             this.colorSelectorSmallBackground.Name = "colorSelectorSmallBackground";
             this.colorSelectorSmallBackground.Size = new System.Drawing.Size(42, 22);
@@ -96,7 +91,6 @@
             // buttonCopyFgtoBg
             // 
             this.buttonCopyFgtoBg.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonCopyFgtoBg.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCopyFgtoBg.Location = new System.Drawing.Point(78, 75);
             this.buttonCopyFgtoBg.Name = "buttonCopyFgtoBg";
             this.buttonCopyFgtoBg.Size = new System.Drawing.Size(118, 23);
@@ -108,7 +102,6 @@
             // buttonCopyBgToFg
             // 
             this.buttonCopyBgToFg.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonCopyBgToFg.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCopyBgToFg.Location = new System.Drawing.Point(78, 28);
             this.buttonCopyBgToFg.Name = "buttonCopyBgToFg";
             this.buttonCopyBgToFg.Size = new System.Drawing.Size(118, 23);
@@ -120,7 +113,6 @@
             // labelfg
             // 
             this.labelfg.AutoSize = true;
-            this.labelfg.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelfg.Location = new System.Drawing.Point(16, 12);
             this.labelfg.Name = "labelfg";
             this.labelfg.Size = new System.Drawing.Size(69, 13);
@@ -130,7 +122,6 @@
             // labelbg
             // 
             this.labelbg.AutoSize = true;
-            this.labelbg.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelbg.Location = new System.Drawing.Point(16, 59);
             this.labelbg.Name = "labelbg";
             this.labelbg.Size = new System.Drawing.Size(70, 13);

@@ -92,7 +92,6 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(7, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 13);
@@ -119,7 +118,6 @@
             this.Controls.Add(this.buttonLayoutE2EH);
             this.Controls.Add(this.comboBoxSnapDelta);
             this.Controls.Add(this.label2);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormStackingTool";
             this.Text = "Arrange";

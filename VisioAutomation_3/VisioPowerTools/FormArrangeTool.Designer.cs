@@ -52,7 +52,6 @@
             // labelHorixontalAlign
             // 
             this.labelHorixontalAlign.AutoSize = true;
-            this.labelHorixontalAlign.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelHorixontalAlign.Location = new System.Drawing.Point(6, 8);
             this.labelHorixontalAlign.Name = "labelHorixontalAlign";
             this.labelHorixontalAlign.Size = new System.Drawing.Size(38, 13);
@@ -135,7 +134,6 @@
             // 
             this.labelCopy.AutoSize = true;
             this.labelCopy.BackColor = System.Drawing.SystemColors.Control;
-            this.labelCopy.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCopy.Location = new System.Drawing.Point(6, 120);
             this.labelCopy.Name = "labelCopy";
             this.labelCopy.Size = new System.Drawing.Size(34, 13);
@@ -217,7 +215,6 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(6, 60);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
@@ -252,7 +249,6 @@
             // 
             this.labelPaste.AutoSize = true;
             this.labelPaste.BackColor = System.Drawing.SystemColors.Control;
-            this.labelPaste.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPaste.Location = new System.Drawing.Point(6, 172);
             this.labelPaste.Name = "labelPaste";
             this.labelPaste.Size = new System.Drawing.Size(37, 13);
@@ -282,7 +278,6 @@
             this.Controls.Add(this.buttonCenter);
             this.Controls.Add(this.buttonAlignLeft);
             this.Controls.Add(this.labelHorixontalAlign);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormArrangeTool";
             this.Text = "Arrange";

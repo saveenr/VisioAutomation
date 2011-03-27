@@ -43,7 +43,6 @@
             // 
             this.buttonSwitchTextCase.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonSwitchTextCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSwitchTextCase.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSwitchTextCase.Location = new System.Drawing.Point(10, 28);
             this.buttonSwitchTextCase.Name = "buttonSwitchTextCase";
             this.buttonSwitchTextCase.Size = new System.Drawing.Size(80, 23);
@@ -56,7 +55,6 @@
             // 
             this.buttonTextToBottom.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonTextToBottom.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTextToBottom.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonTextToBottom.Location = new System.Drawing.Point(10, 90);
             this.buttonTextToBottom.Name = "buttonTextToBottom";
             this.buttonTextToBottom.Size = new System.Drawing.Size(117, 23);
@@ -69,7 +67,6 @@
             // 
             this.buttonResizeToFitText.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonResizeToFitText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonResizeToFitText.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonResizeToFitText.Location = new System.Drawing.Point(10, 141);
             this.buttonResizeToFitText.Name = "buttonResizeToFitText";
             this.buttonResizeToFitText.Size = new System.Drawing.Size(117, 23);
@@ -82,7 +79,6 @@
             // 
             this.buttonEnableTextWrapping.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonEnableTextWrapping.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEnableTextWrapping.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonEnableTextWrapping.Location = new System.Drawing.Point(10, 197);
             this.buttonEnableTextWrapping.Name = "buttonEnableTextWrapping";
             this.buttonEnableTextWrapping.Size = new System.Drawing.Size(60, 23);
@@ -95,7 +91,6 @@
             // 
             this.buttonDisableTextWrapping.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonDisableTextWrapping.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDisableTextWrapping.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDisableTextWrapping.Location = new System.Drawing.Point(76, 197);
             this.buttonDisableTextWrapping.Name = "buttonDisableTextWrapping";
             this.buttonDisableTextWrapping.Size = new System.Drawing.Size(60, 23);
@@ -107,7 +102,6 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(10, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
@@ -117,7 +111,6 @@
             // labelText
             // 
             this.labelText.AutoSize = true;
-            this.labelText.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelText.Location = new System.Drawing.Point(10, 11);
             this.labelText.Name = "labelText";
             this.labelText.Size = new System.Drawing.Size(80, 13);
@@ -127,7 +120,6 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(10, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 13);
@@ -137,7 +129,6 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(10, 124);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 13);

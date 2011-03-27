@@ -45,7 +45,6 @@
             // 
             this.buttonPreviousPage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPreviousPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPreviousPage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPreviousPage.Location = new System.Drawing.Point(45, 126);
             this.buttonPreviousPage.Name = "buttonPreviousPage";
             this.buttonPreviousPage.Size = new System.Drawing.Size(30, 23);
@@ -58,7 +57,6 @@
             // 
             this.buttonNextPage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNextPage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNextPage.Location = new System.Drawing.Point(81, 126);
             this.buttonNextPage.Name = "buttonNextPage";
             this.buttonNextPage.Size = new System.Drawing.Size(30, 23);
@@ -71,7 +69,6 @@
             // 
             this.buttonZoomToSelection.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonZoomToSelection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonZoomToSelection.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonZoomToSelection.Location = new System.Drawing.Point(64, 22);
             this.buttonZoomToSelection.Name = "buttonZoomToSelection";
             this.buttonZoomToSelection.Size = new System.Drawing.Size(70, 23);
@@ -84,7 +81,6 @@
             // 
             this.buttonZoomToPage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonZoomToPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonZoomToPage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonZoomToPage.Location = new System.Drawing.Point(8, 22);
             this.buttonZoomToPage.Name = "buttonZoomToPage";
             this.buttonZoomToPage.Size = new System.Drawing.Size(50, 23);
@@ -97,7 +93,6 @@
             // 
             this.buttonZoomOut.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonZoomOut.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonZoomOut.Location = new System.Drawing.Point(44, 74);
             this.buttonZoomOut.Name = "buttonZoomOut";
             this.buttonZoomOut.Size = new System.Drawing.Size(30, 23);
@@ -110,7 +105,6 @@
             // 
             this.buttonZoomIn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonZoomIn.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonZoomIn.Location = new System.Drawing.Point(8, 74);
             this.buttonZoomIn.Name = "buttonZoomIn";
             this.buttonZoomIn.Size = new System.Drawing.Size(30, 23);
@@ -122,7 +116,6 @@
             // labelZoomTo
             // 
             this.labelZoomTo.AutoSize = true;
-            this.labelZoomTo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelZoomTo.Location = new System.Drawing.Point(6, 4);
             this.labelZoomTo.Name = "labelZoomTo";
             this.labelZoomTo.Size = new System.Drawing.Size(58, 13);
@@ -132,7 +125,6 @@
             // labelPage
             // 
             this.labelPage.AutoSize = true;
-            this.labelPage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPage.Location = new System.Drawing.Point(7, 107);
             this.labelPage.Name = "labelPage";
             this.labelPage.Size = new System.Drawing.Size(34, 13);
@@ -143,7 +135,6 @@
             // 
             this.buttonPageLast.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonPageLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPageLast.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPageLast.Location = new System.Drawing.Point(117, 126);
             this.buttonPageLast.Name = "buttonPageLast";
             this.buttonPageLast.Size = new System.Drawing.Size(30, 23);
@@ -156,7 +147,6 @@
             // 
             this.buttonFirstPage.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonFirstPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFirstPage.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFirstPage.Location = new System.Drawing.Point(9, 126);
             this.buttonFirstPage.Name = "buttonFirstPage";
             this.buttonFirstPage.Size = new System.Drawing.Size(30, 23);
@@ -168,7 +158,6 @@
             // labelZoomLevel
             // 
             this.labelZoomLevel.AutoSize = true;
-            this.labelZoomLevel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelZoomLevel.Location = new System.Drawing.Point(6, 56);
             this.labelZoomLevel.Name = "labelZoomLevel";
             this.labelZoomLevel.Size = new System.Drawing.Size(73, 13);
