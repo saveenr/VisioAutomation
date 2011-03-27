@@ -4,8 +4,8 @@ using VA=VisioAutomation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Set", "Cells")]
-    public class Set_Cells : VisioPSCmdlet
+    [SMA.Cmdlet("Update", "ShapeSheet")]
+    public class Update_ShapeSheet : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public VA.Scripting.ShapeSheetUpdate Update { get; set; }
