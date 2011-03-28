@@ -32,7 +32,8 @@ namespace VisioAutomationSamples
 
             var master = stencil.Masters["Rectangle"];
 
-            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(1, 1), num_cols, num_rows);
+            var grid_origin = new VA.Drawing.Point(0, 0);
+            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(1, 1), num_cols, num_rows, grid_origin);
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             foreach (int i in Enumerable.Range(0, shapeids.Count()))
@@ -54,8 +55,8 @@ namespace VisioAutomationSamples
             var master = stencil.Masters["Rectangle"];
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
-            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(1.0, 1.0), 5, 5);
+            var grid_origin = new VA.Drawing.Point(0, 5);
+            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(1.0, 1.0), 5, 5, grid_origin);
 
             var srcs = new[]
                            {

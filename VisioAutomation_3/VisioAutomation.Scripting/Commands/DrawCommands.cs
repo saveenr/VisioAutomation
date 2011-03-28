@@ -92,7 +92,8 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Master masterobj,
             VA.Drawing.Size cell_size,
             int cols,
-            int rows)
+            int rows,
+            VA.Drawing.Point grid_origin)
         {
             
             //Create a new page to hold the grid
@@ -101,7 +102,8 @@ namespace VisioAutomation.Scripting.Commands
             
             using (var undoscope = application.CreateUndoScope())
             {
-                var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, masterobj, cell_size, cols, rows);
+                
+                var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, masterobj, cell_size, cols, rows, grid_origin);
                 return shapeids;
             }
         }

@@ -167,7 +167,8 @@ The indenting has ended.
             var sizes = new[] {"28.0pt", "18.0pt", "14.0pt", "12.0pt", "10.0pt"};
             var fontids = fonts.Select(f => page.Document.Fonts[f].ID).ToList();
 
-            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(3.0, 0.5), sizes.Length, fonts.Length);
+            var grid_origin = new VA.Drawing.Point(0, 8);
+            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(3.0, 0.5), sizes.Length, fonts.Length, grid_origin);
             var shapes = page.Shapes.GetShapesFromIDs(shapeids);
 
             var items = from fi in Enumerable.Range(0, fonts.Count())

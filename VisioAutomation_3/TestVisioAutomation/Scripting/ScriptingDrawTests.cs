@@ -59,7 +59,8 @@ namespace TestVisioAutomation
             string mastername = "Rectangle";
             var master = ss.Master.GetMaster(mastername, stencil);
 
-            var shapeids = ss.Draw.DrawGrid(master, cellsize, cols, rows);
+            var grid_origin = new VA.Drawing.Point(0, 4);
+            var shapeids = ss.Draw.DrawGrid(master, cellsize, cols, rows, grid_origin);
 
             Assert.AreEqual(cols*rows, shapeids.Count);
             ss.Document.CloseDocument(true);

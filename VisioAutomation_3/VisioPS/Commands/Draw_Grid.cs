@@ -22,11 +22,18 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 4, Mandatory = true)]
         public double CellHeight = 0.5;
 
+        [SMA.Parameter(Position = 3, Mandatory = true)]
+        public double X = 0.0;
+
+        [SMA.Parameter(Position = 4, Mandatory = true)]
+        public double Y = 0.0;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
             var cellsize = new VA.Drawing.Size(CellWidth, CellHeight);
-            var shapes = this.ScriptingSession.Draw.DrawGrid(Master, cellsize, Columns, Rows);
+            var grid_origin = new VA.Drawing.Point(this.X, this.Y);
+            var shapes = scriptingsession.Draw.DrawGrid(Master, cellsize, Columns, Rows, grid_origin);
             this.WriteObject(shapes,false);
         }
     }

@@ -211,6 +211,9 @@
     <Content Include="samples\orgcharts\orgchart-sample-1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="scripts\demo_3_draw_linegrid.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="scripts\demo_2_draw_and_drop.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

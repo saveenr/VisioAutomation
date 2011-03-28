@@ -69,10 +69,9 @@ namespace VisioAutomation.Layout
             IVisio.Master masterobj,
             VA.Drawing.Size cell_size,
             int cols,
-            int rows)
+            int rows,
+            VA.Drawing.Point grid_origin)
         {
-            var total_grid_size = cell_size.Multiply(cols, rows);
-            var grid_origin = new VA.Drawing.Point(0, total_grid_size.Height);
             var cellspacing = new VA.Drawing.Size(0, 0);
 
             //Create a new page to hold the grid
