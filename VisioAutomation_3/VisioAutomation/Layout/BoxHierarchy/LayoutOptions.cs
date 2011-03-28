@@ -2,17 +2,6 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation
 {
-    public enum DirectionVertical
-    {
-        Up,
-        Down
-    } ;
-
-    public enum DirectionHorizontal
-    {
-        Right,
-        Left
-    } ;
 }
 
 namespace VisioAutomation.Layout.BoxHierarchy

@@ -90,6 +90,8 @@
     <Compile Include="Format\FormatPaintCell.cs" />
     <Compile Include="Internal\CollectionUtil.cs" />
     <Compile Include="Format\ShapeFormatQuery.cs" />
+    <Compile Include="Layout\BoxHierarchy\DirectionHorizontal.cs" />
+    <Compile Include="Layout\BoxHierarchy\DirectionVertical.cs" />
     <Compile Include="Layout\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />
