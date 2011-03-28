@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\New_GridLayout.cs" />
     <Compile Include="Commands\Reset_PageOrigin.cs" />
     <Compile Include="Commands\Get_SectionResult.cs" />
     <Compile Include="Commands\Get_SRCFormula.cs" />

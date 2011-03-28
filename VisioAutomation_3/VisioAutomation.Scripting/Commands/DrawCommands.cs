@@ -108,6 +108,21 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        public void DrawGrid( VA.Layout.Grid.GridLayout grid, VA.Drawing.Point origin, VA.Drawing.Size cellspacing)
+        {
+
+            //Create a new page to hold the grid
+            var application = this.Session.VisioApplication;
+            var page = application.ActivePage;
+
+            grid.PerformLayout(origin, cellspacing);
+        
+            using (var undoscope = application.CreateUndoScope())
+            {
+                grid.Render(page);
+            }
+        }
+
         public IVisio.Shape DrawNURBSCurve(IList<VA.Drawing.Point> controlpoints,
                                     IList<double> knots,
                                     IList<double> weights, int degree)
