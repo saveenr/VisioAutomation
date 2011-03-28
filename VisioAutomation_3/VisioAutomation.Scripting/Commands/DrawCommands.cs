@@ -89,23 +89,17 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<short> DrawGrid(
-            IVisio.Master masterobj,
-            VA.Drawing.Size cell_size,
-            int cols,
-            int rows,
-            VA.Drawing.Point grid_origin)
+        public void DrawGrid( VA.Layout.Grid.GridLayout layout)
         {
             
             //Create a new page to hold the grid
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            
+            layout.PerformLayout();
+           
             using (var undoscope = application.CreateUndoScope())
             {
-                
-                var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, masterobj, cell_size, cols, rows, grid_origin);
-                return shapeids;
+                layout.Render(page);
             }
         }
 
