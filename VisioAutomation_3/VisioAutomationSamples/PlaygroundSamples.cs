@@ -104,8 +104,10 @@ namespace VisioAutomationSamples
 
             var layout = new VA.Layout.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            layout.Origin = page_rect.UpperLeft;
+            layout.CellSpacing = new VA.Drawing.Size(0, 0);
+            layout.PerformLayout();
 
-            layout.PerformLayout(page_rect.UpperLeft, new VA.Drawing.Size(0, 0));
             int max_grad_id = 40;
             int n = 0;
             foreach (var node in layout.Nodes)

@@ -77,7 +77,9 @@ namespace VisioAutomation.Layout
             //Create a new page to hold the grid
 
             var layout = new VA.Layout.Grid.GridLayout(cols, rows, cell_size, masterobj);
-            layout.PerformLayout(grid_origin, cellspacing);
+            layout.Origin = grid_origin;
+            layout.CellSpacing = cellspacing;
+            layout.PerformLayout();
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
 
             layout.Render(page);

@@ -172,9 +172,12 @@ The indenting has ended.
 
 
             var layout = new VA.Layout.Grid.GridLayout(sizes.Length, fonts.Length, new VA.Drawing.Size(3.0, 0.5), master);
-            layout.PerformLayout(grid_origin, new VA.Drawing.Size(0.5,0.5));
+            layout.Origin = new VA.Drawing.Point(0, 0);
+            layout.CellSpacing = new VA.Drawing.Size(0.5, 0.5);
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
-
+            
+            layout.PerformLayout();
+            
             layout.Render(page);
 
             var nodes = layout.Nodes.ToList();

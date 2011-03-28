@@ -30,12 +30,13 @@ namespace VisioAutomationSamples
 
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];
-            var grid_origin = new VA.Drawing.Point(0, 0);
-            var cellspacing = new VA.Drawing.Size(0, 0);
 
             var layout = new VA.Layout.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
-            layout.PerformLayout(grid_origin, cellspacing);
+            layout.Origin = new VA.Drawing.Point(0, 0);
+            layout.CellSpacing = new VA.Drawing.Size(0, 0);
             layout.RowDirection = VA.Layout.Grid.RowDirection.BottomToTop;
+
+            layout.PerformLayout();
             layout.Render(page);
 
             int i = 0;
@@ -60,11 +61,12 @@ namespace VisioAutomationSamples
             var master = stencil.Masters["Rectangle"];
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var grid_origin = new VA.Drawing.Point(0, 5);
 
             var layout = new VA.Layout.Grid.GridLayout(5, 5, new VA.Drawing.Size(1, 1), master);
-            layout.PerformLayout(grid_origin, new VA.Drawing.Size(0,0));
+            layout.Origin = new VA.Drawing.Point(0, 5);
+            layout.CellSpacing = new VA.Drawing.Size(0, 0);
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            layout.PerformLayout();
             layout.Render(page);
             
             var srcs = new[]

@@ -57,11 +57,12 @@ namespace VisioAutomation.Scripting.Commands
 
             var pagesize = page.GetSize();
             
-            var origin = new VA.Drawing.Point(0, pagesize.Height);
-
+            
             var layout = new VA.Layout.Grid.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VA.Drawing.Size(1,1), masterobj);
-            layout.PerformLayout(origin, cellspacing);
+            layout.Origin = new VA.Drawing.Point(0, pagesize.Height);
+            layout.CellSpacing = cellspacing;
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            layout.PerformLayout();
 
             foreach (var i in Enumerable.Range(0, datatable.Rows.Count))
             {
@@ -114,8 +115,9 @@ namespace VisioAutomation.Scripting.Commands
             //Create a new page to hold the grid
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-
-            grid.PerformLayout(origin, cellspacing);
+            grid.Origin = origin;
+            grid.CellSpacing = cellspacing;
+            grid.PerformLayout();
         
             using (var undoscope = application.CreateUndoScope())
             {
