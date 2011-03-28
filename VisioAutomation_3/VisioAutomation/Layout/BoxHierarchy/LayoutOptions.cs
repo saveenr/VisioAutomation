@@ -4,33 +4,19 @@ namespace VisioAutomation.Layout.BoxHierarchy
 {
     public class LayoutOptions
     {
-        private VA.DirectionVertical _directionVertical = VA.DirectionVertical.Up;
-        private VA.DirectionHorizontal _directionHorizontal = VA.DirectionHorizontal.Right;
-        private double _defaultWidth = 1.0;
-        private double _defaultHeight = 1.0;
+        public VA.Drawing.Point Origin { get; set; }
+        public DirectionVertical DirectionVertical { get; set; }
+        public DirectionHorizontal DirectionHorizontal { get; set; }
+        public double DefaultWidth { get; set; }
+        public double DefaultHeight { get; set; }
 
-        public VA.DirectionVertical DirectionVertical
+        public LayoutOptions()
         {
-            get { return _directionVertical; }
-            set { _directionVertical = value; }
-        }
-
-        public VA.DirectionHorizontal DirectionHorizontal
-        {
-            get { return _directionHorizontal; }
-            set { _directionHorizontal = value; }
-        }
-
-        public double DefaultWidth
-        {
-            get { return _defaultWidth; }
-            set { _defaultWidth = value; }
-        }
-
-        public double DefaultHeight
-        {
-            get { return _defaultHeight; }
-            set { _defaultHeight = value; }
+            this.DefaultHeight = 1.0;
+            this.DefaultWidth = 1.0;
+            this.DirectionHorizontal = VA.DirectionHorizontal.LeftToRight;
+            this.DirectionVertical = VA.DirectionVertical.BottomToTop;
+            this.Origin = new VA.Drawing.Point(0, 0);
         }
     }
 }

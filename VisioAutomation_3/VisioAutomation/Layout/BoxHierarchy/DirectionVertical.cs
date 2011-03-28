@@ -2,7 +2,7 @@
 {
     public enum DirectionVertical
     {
-        Up,
-        Down
+        BottomToTop,
+        TopToBottom
     } ;
 }

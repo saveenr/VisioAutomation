@@ -4,13 +4,14 @@ namespace VisioAutomation.Layout.BoxHierarchy
 {
     public class BoxHierarchyLayout<T>
     {
-        public LayoutOptions LayoutOptions = new LayoutOptions();
+        public LayoutOptions LayoutOptions;
 
         private Node<T> _root;
 
         public BoxHierarchyLayout() :
             this(LayoutDirection.Vertical)
         {
+            this.LayoutOptions = new LayoutOptions();
         }
 
         public BoxHierarchyLayout(LayoutDirection dir)
@@ -24,10 +25,10 @@ namespace VisioAutomation.Layout.BoxHierarchy
             set { _root = value; }
         }
 
-        public void PerformLayout(VA.Drawing.Point origin)
+        public void PerformLayout()
         {
             this.CalculateSizes();
-            this.Place(origin);
+            this.Place(this.LayoutOptions.Origin);
         }
 
         private void CalculateSizes()
@@ -65,7 +66,7 @@ namespace VisioAutomation.Layout.BoxHierarchy
             // Account for child separation
             int num_seps = System.Math.Max(0, node.ChildCount - 1);
             double total_sepy = (node.Direction == LayoutDirection.Vertical) ? num_seps*node.ChildSeparation : 0.0;
-            double total_sepx = (node.Direction == LayoutDirection.Horizontal) ? num_seps*node.ChildSeparation : 0.0;
+            double total_sepx = (node.Direction == LayoutDirection.Horizonal) ? num_seps*node.ChildSeparation : 0.0;
 
             child_height_sum += total_sepy;
             child_width_sum += total_sepx;
@@ -75,7 +76,7 @@ namespace VisioAutomation.Layout.BoxHierarchy
                 node.Height = System.Math.Max(h, child_height_sum);
                 node.Width = System.Math.Max(w, child_width_max);
             }
-            else if (node.Direction == LayoutDirection.Horizontal)
+            else if (node.Direction == LayoutDirection.Horizonal)
             {
                 node.Height = System.Math.Max(h, child_height_max);
                 node.Width = System.Math.Max(w, child_width_sum);
@@ -98,16 +99,16 @@ namespace VisioAutomation.Layout.BoxHierarchy
                 throw new System.ArgumentNullException("node");
             }
 
-            double signx = (LayoutOptions.DirectionHorizontal == VA.DirectionHorizontal.Right) ? 1.0 : -1.0;
-            double signy = (LayoutOptions.DirectionVertical == VA.DirectionVertical.Up) ? 1.0 : -1.0;
+            double signx = (LayoutOptions.DirectionHorizontal == VA.DirectionHorizontal.LeftToRight) ? 1.0 : -1.0;
+            double signy = (LayoutOptions.DirectionVertical == VA.DirectionVertical.BottomToTop) ? 1.0 : -1.0;
 
             // Calculate the final rectangle to place the current node
 
-            double miny = (LayoutOptions.DirectionVertical == VA.DirectionVertical.Down)
+            double miny = (LayoutOptions.DirectionVertical == VA.DirectionVertical.TopToBottom)
                               ? origin.Y - node.Height.Value
                               : origin.Y;
 
-            double minx = (LayoutOptions.DirectionHorizontal == VA.DirectionHorizontal.Right)
+            double minx = (LayoutOptions.DirectionHorizontal == VA.DirectionHorizontal.LeftToRight)
                               ? origin.X
                               : origin.X - node.Width.Value;
 
@@ -158,7 +159,7 @@ namespace VisioAutomation.Layout.BoxHierarchy
                     current_point = current_point.Add(0, signy*cur_el.Height.Value);
                     current_point = current_point.Add(0, signy*node.ChildSeparation);
                 }
-                else if (node.Direction == LayoutDirection.Horizontal)
+                else if (node.Direction == LayoutDirection.Horizonal)
                 {
                     current_point = current_point.Add(signx*cur_el.Width.Value, 0);
                     current_point = current_point.Add(signx*node.ChildSeparation, 0);

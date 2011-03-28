@@ -4,7 +4,7 @@ namespace VisioAutomation.Layout.BoxHierarchy
 {
     public enum LayoutDirection
     {
-        Horizontal,
+        Horizonal,
         Vertical
     }
 }

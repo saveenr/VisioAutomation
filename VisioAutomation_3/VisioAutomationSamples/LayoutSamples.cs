@@ -15,7 +15,9 @@ namespace VisioAutomationSamples
 
             // Ask the Layout to place the nodes
             var origin = new VA.Drawing.Point(0, 0);
-            layout.PerformLayout(origin);
+            layout.LayoutOptions.Origin = origin;
+
+            layout.PerformLayout();
 
             // Create a blank canvas in Visio 
             var app = SampleEnvironment.Application;
