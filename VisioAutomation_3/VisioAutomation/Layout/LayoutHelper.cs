@@ -64,30 +64,6 @@ namespace VisioAutomation.Layout
             return sorted_shape_ids;
         }
 
-        public static IList<short> DrawGrid(
-            IVisio.Page page,
-            IVisio.Master masterobj,
-            VA.Drawing.Size cell_size,
-            int cols,
-            int rows,
-            VA.Drawing.Point grid_origin)
-        {
-            var cellspacing = new VA.Drawing.Size(0, 0);
-
-            //Create a new page to hold the grid
-
-            var layout = new VA.Layout.Grid.GridLayout(cols, rows, cell_size, masterobj);
-            layout.Origin = grid_origin;
-            layout.CellSpacing = cellspacing;
-            layout.PerformLayout();
-            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
-
-            layout.Render(page);
-
-            var shapeids = layout.Nodes.Select(n => n.ShapeID).ToList();
-            return shapeids;
-        }
-
         public static IList<IVisio.Shape> DrawPieSlices(IVisio.Page page, VA.Drawing.Point center,
                                                         double radius,
                                                         IList<double> values)
