@@ -23,6 +23,9 @@ namespace TestVisioAutomation
             t.Render(page);
 
             TestUtil.AreEqual(3.0, 1.5, page.GetSize(), 0.05);
+
+            doc.Close(true);
+
         }
 
 
@@ -67,6 +70,9 @@ namespace TestVisioAutomation
 
             Assert.AreEqual("B1", nb1.VisioShape.Text);
             Assert.AreEqual("B2", nb2.VisioShape.Text);
+
+            doc.Close(true);
+
         }
 
 
@@ -114,6 +120,8 @@ namespace TestVisioAutomation
 
             Assert.AreEqual("B1", nb1.VisioShape.Text);
             Assert.AreEqual("B2", nb2.VisioShape.Text);
+
+            doc.Close(true);
         }
 
     }

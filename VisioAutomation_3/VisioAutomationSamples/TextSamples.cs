@@ -168,8 +168,16 @@ The indenting has ended.
             var fontids = fonts.Select(f => page.Document.Fonts[f].ID).ToList();
 
             var grid_origin = new VA.Drawing.Point(0, 8);
-            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(3.0, 0.5), sizes.Length, fonts.Length, grid_origin);
-            var shapes = page.Shapes.GetShapesFromIDs(shapeids);
+
+
+
+            var layout = new VA.Layout.Grid.GridLayout(sizes.Length, fonts.Length, new VA.Drawing.Size(3.0, 0.5), master);
+            layout.PerformLayout(grid_origin, new VA.Drawing.Size(0.5,0.5));
+            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+
+            layout.Render(page);
+
+            var nodes = layout.Nodes.ToList();
 
             var items = from fi in Enumerable.Range(0, fonts.Count())
                         from size in sizes
@@ -180,9 +188,9 @@ The indenting has ended.
             int i = 0;
             foreach (var item in items)
             {
-                var shape = shapes[i];
+                var shape = nodes[i].Shape;
                 shape.Text = item.font + " " + item.size;
-                var shapeid = shapeids[i];
+                var shapeid = nodes[i].ShapeID;
                 update.SetFormula(shapeid, VisioAutomation.ShapeSheet.SRCConstants.Char_Size, item.size);
                 update.SetFormula(shapeid, VisioAutomation.ShapeSheet.SRCConstants.Char_Font, item.fontid);
                 i++;

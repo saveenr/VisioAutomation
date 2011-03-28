@@ -490,7 +490,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, formats2[1].IndentLeft.Result);
             Assert.AreEqual(0, formats2[2].BulletIndex.Result);
 
-            //page1.Delete(0);
+            page1.Delete(0);
         }
 
     }

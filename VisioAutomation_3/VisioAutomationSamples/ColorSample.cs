@@ -29,18 +29,23 @@ namespace VisioAutomationSamples
             page.SetSize(10, 10);
 
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
-
             var master = stencil.Masters["Rectangle"];
-
             var grid_origin = new VA.Drawing.Point(0, 0);
-            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(1, 1), num_cols, num_rows, grid_origin);
+            var cellspacing = new VA.Drawing.Size(0, 0);
 
+            var layout = new VA.Layout.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
+            layout.PerformLayout(grid_origin, cellspacing);
+            layout.RowDirection = VA.Layout.Grid.RowDirection.BottomToTop;
+            layout.Render(page);
+
+            int i = 0;
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            foreach (int i in Enumerable.Range(0, shapeids.Count()))
+            foreach (var node in layout.Nodes)
             {
-                var shapeid = shapeids[i];
+                var shapeid = node.ShapeID;
                 var formula = color_formulas[i%color_formulas.Count];
                 update.SetFormula(shapeid, fill_foregnd, formula);
+                i++;
             }
 
             update.Execute(page);
@@ -56,8 +61,12 @@ namespace VisioAutomationSamples
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var grid_origin = new VA.Drawing.Point(0, 5);
-            var shapeids = VA.Layout.LayoutHelper.DrawGrid(page, master, new VA.Drawing.Size(1.0, 1.0), 5, 5, grid_origin);
 
+            var layout = new VA.Layout.Grid.GridLayout(5, 5, new VA.Drawing.Size(1, 1), master);
+            layout.PerformLayout(grid_origin, new VA.Drawing.Size(0,0));
+            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            layout.Render(page);
+            
             var srcs = new[]
                            {
                                VA.ShapeSheet.SRCConstants.FillForegnd,
@@ -83,7 +92,8 @@ namespace VisioAutomationSamples
                 query.AddColumn(src);
             }
 
-            var int_shapeids = shapeids.Select(i => (int) i).ToList();
+
+            var int_shapeids = layout.Nodes.Select( n => (int) n.ShapeID).ToList();
             var results = query.GetResults<double>(page, int_shapeids);
             var formulas = query.GetFormulas(page, int_shapeids);
             var f_and_r = query.GetFormulasAndResults<double>(page, int_shapeids);
