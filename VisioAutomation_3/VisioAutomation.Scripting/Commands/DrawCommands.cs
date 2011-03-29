@@ -103,22 +103,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void DrawGrid( VA.Layout.Grid.GridLayout grid, VA.Drawing.Point origin, VA.Drawing.Size cellspacing)
-        {
-
-            //Create a new page to hold the grid
-            var application = this.Session.VisioApplication;
-            var page = application.ActivePage;
-            grid.Origin = origin;
-            grid.CellSpacing = cellspacing;
-            grid.PerformLayout();
-        
-            using (var undoscope = application.CreateUndoScope())
-            {
-                grid.Render(page);
-            }
-        }
-
         public IVisio.Shape DrawNURBSCurve(IList<VA.Drawing.Point> controlpoints,
                                     IList<double> knots,
                                     IList<double> weights, int degree)
@@ -234,6 +218,17 @@ namespace VisioAutomation.Scripting.Commands
             var page = application.ActivePage;
             var shapes = VA.Layout.LayoutHelper.DrawPieSlices(page, center, radius, values);
             return shapes;
+        }
+
+        public void DrawOrgChart(VA.Layout.OrgChart.Drawing drawing)
+        {
+            this.Session.Write(VA.Scripting.OutputStream.Verbose, "Start OrgChart Rendering");
+            var renderer = new VA.Layout.OrgChart.OrgChartLayout();
+            var application = this.Session.VisioApplication;
+            drawing.Render(application);
+            var active_page = application.ActivePage;
+            active_page.ResizeToFitContents();
+            this.Session.Write(VA.Scripting.OutputStream.Verbose, "Finished OrgChart Rendering");
         }
     }
 }

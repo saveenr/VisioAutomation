@@ -178,7 +178,7 @@ namespace TestVisioAutomation
         {
             var xmldoc = System.Xml.Linq.XDocument.Parse(text);
             var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, xmldoc);
-            VA.Scripting.OrgChart.OrgChartBuilder.RenderDiagrams(scriptingsession, orgchart);
+            scriptingsession.Draw.DrawOrgChart(orgchart);
         }
 
 
