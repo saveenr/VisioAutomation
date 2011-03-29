@@ -149,17 +149,17 @@ namespace TestVisioAutomation
         public void Scripting_Flowchart()
         {
             var ss = GetScriptingSession();
-            drawfc(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
+            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
             ss.Document.CloseDocument(true);
-            drawfc(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
+            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
             ss.Document.CloseDocument(true);
-            drawfc(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
+            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
             ss.Document.CloseDocument(true);
-            drawfc(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
+            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
             ss.Document.CloseDocument(true);
         }
 
-        private void drawfc(VAS.Session scriptingsession, string t1)
+        private void draw_flowchart(VAS.Session scriptingsession, string t1)
         {
             var x1 = System.Xml.Linq.XDocument.Parse(t1);
             var fc1 = VA.Scripting.FlowChart.FlowChartBuilder.LoadFromXML(scriptingsession, x1);
