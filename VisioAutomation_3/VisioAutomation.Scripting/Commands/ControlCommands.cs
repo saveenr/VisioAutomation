@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Controls;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -48,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    int ci = ControlHelper.AddControl(shape, ctrl);
+                    int ci = VA.Controls.ControlHelper.AddControl(shape, ctrl);
                     control_indices.Add(ci);
                 }
             }
@@ -70,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    ControlHelper.DeleteControl(shape, n);
+                    VA.Controls.ControlHelper.DeleteControl(shape, n);
                 }
             }
         }
@@ -87,7 +86,7 @@ namespace VisioAutomation.Scripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>();
             foreach (var shape in shapes)
             {
-                var controls = ControlHelper.GetControls(shape);
+                var controls = VA.Controls.ControlHelper.GetControls(shape);
                 dic[shape] = controls;
             }
             return dic;

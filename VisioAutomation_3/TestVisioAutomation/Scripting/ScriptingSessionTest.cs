@@ -1,4 +1,3 @@
-using VAS = VisioAutomation.Scripting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestVisioAutomation

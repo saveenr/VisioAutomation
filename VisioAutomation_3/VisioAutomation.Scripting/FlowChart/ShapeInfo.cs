@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.FlowChart
@@ -19,13 +18,13 @@ namespace VisioAutomation.Scripting.FlowChart
         {
             var info = new ShapeInfo();
             info.ID = shape_el.Attribute("id").Value;
-            scriptingsession.Write(VAS.OutputStream.Verbose, "Reading shape id={0}", info.ID);
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Reading shape id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.Stencil = shape_el.Attribute("stencil").Value;
             info.Master = shape_el.Attribute("master").Value;
             info.Element = shape_el;
-            info.URL = VAS.XmlUtil.GetAttributeValue(shape_el,"url", null);
+            info.URL = VA.Scripting.XmlUtil.GetAttributeValue(shape_el, "url", null);
 
             info.custprops = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
             foreach (var customprop_el in shape_el.Elements("customprop"))

@@ -1,7 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using VisioAutomation;
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -159,7 +157,7 @@ namespace TestVisioAutomation
             ss.Document.CloseDocument(true);
         }
 
-        private void draw_flowchart(VAS.Session scriptingsession, string t1)
+        private void draw_flowchart(VA.Scripting.Session scriptingsession, string t1)
         {
             var x1 = System.Xml.Linq.XDocument.Parse(t1);
             var fc1 = VA.Scripting.FlowChart.FlowChartBuilder.LoadFromXML(scriptingsession, x1);
@@ -174,7 +172,7 @@ namespace TestVisioAutomation
             ss.Document.CloseDocument(true);
         }
 
-        private void draw_org_chart(VAS.Session scriptingsession, string text)
+        private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)
         {
             var xmldoc = System.Xml.Linq.XDocument.Parse(text);
             var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, xmldoc);

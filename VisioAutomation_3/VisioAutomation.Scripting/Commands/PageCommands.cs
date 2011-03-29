@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using VAS = VisioAutomation.Scripting;
 
 namespace VisioAutomation.Scripting.Commands
 {

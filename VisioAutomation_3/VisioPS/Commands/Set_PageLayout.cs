@@ -1,4 +1,3 @@
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -9,12 +8,8 @@ namespace VisioPS.Commands
     {
         [SMA.Parameter(Mandatory = false)] public double Width = 0;
         [SMA.Parameter(Mandatory = false)] public double Height = 0;
-
-        [SMA.Parameter(Mandatory = false)] public PageOrientation Orientation =
-            PageOrientation.None;
-
-        [SMA.Parameter(Mandatory = false)]
-        public string BackgroundPage = null;
+        [SMA.Parameter(Mandatory = false)] public PageOrientation Orientation = PageOrientation.None;
+        [SMA.Parameter(Mandatory = false)] public string BackgroundPage = null;
 
         protected override void ProcessRecord()
         {
@@ -33,7 +28,7 @@ namespace VisioPS.Commands
             }
         }
 
-        public static void set_page_size(VAS.Session scriptingsession, double width, double height)
+        public static void set_page_size(VA.Scripting.Session scriptingsession, double width, double height)
         {
             double? w = null;
             double? h = null; 

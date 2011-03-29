@@ -1,4 +1,4 @@
-using VAS = VisioAutomation.Scripting;
+using VA=VisioAutomation;
 
 namespace VisioAutomation.Scripting.FlowChart
 {
@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.FlowChart
         {
             var info = new ConnectorInfo();
             info.ID = shape_el.Attribute("id").Value;
-            scriptingsession.Write(VAS.OutputStream.Verbose,"Reading connector id={0}", info.ID);
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Reading connector id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.From = shape_el.Attribute("from").Value;

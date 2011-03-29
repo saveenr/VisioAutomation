@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using VA = VisioAutomation;
-using VAS = VisioAutomation.Scripting;
 
 namespace VisioAutomation.Scripting.XamlTune
 {

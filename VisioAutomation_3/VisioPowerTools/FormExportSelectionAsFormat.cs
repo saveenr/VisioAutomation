@@ -1,6 +1,4 @@
 ﻿using System.Windows.Forms;
-using VisioAutomation.Scripting;
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 
 namespace VisioPowerTools
@@ -79,7 +77,7 @@ namespace VisioPowerTools
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {
-                VAS.XamlTune.XamlTuneHelper.ExportSelectionAsXAML(ss,filename);
+                VA.Scripting.XamlTune.XamlTuneHelper.ExportSelectionAsXAML(ss,filename);
             }
             else
             {

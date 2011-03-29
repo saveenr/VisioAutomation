@@ -1,6 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation;
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -23,25 +21,25 @@ namespace TestVisioAutomation
 
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, ss.Page.GetPage());
-            ss.Page.NavigateToPage(PageNavigation.FirstPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.FirstPage);
             Assert.AreEqual(page1, ss.Page.GetPage());
-            ss.Page.NavigateToPage(PageNavigation.LastPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.LastPage);
             Assert.AreEqual(page3, ss.Page.GetPage());
-            ss.Page.NavigateToPage(PageNavigation.PreviousPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.PreviousPage);
             Assert.AreEqual(page2, ss.Page.GetPage());
-            ss.Page.NavigateToPage(PageNavigation.NextPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.NextPage);
             Assert.AreEqual(page3, ss.Page.GetPage());
 
             // move to last and try to go to next page
-            ss.Page.NavigateToPage(PageNavigation.LastPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.LastPage);
             Assert.AreEqual(page3, ss.Page.GetPage());
-            ss.Page.NavigateToPage(PageNavigation.NextPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.NextPage);
             Assert.AreEqual(page3, ss.Page.GetPage());
 
             // move to first and try to go to previous page
-            ss.Page.NavigateToPage(PageNavigation.FirstPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.FirstPage);
             Assert.AreEqual(page1, ss.Page.GetPage());
-            ss.Page.NavigateToPage(PageNavigation.PreviousPage);
+            ss.Page.NavigateToPage(VA.PageNavigation.PreviousPage);
             Assert.AreEqual(page1, ss.Page.GetPage());
 
             ss.Document.CloseDocument(true);

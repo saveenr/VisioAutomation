@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VAS = VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 

@@ -1,6 +1,5 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VAS = VisioAutomation.Scripting;
 using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation

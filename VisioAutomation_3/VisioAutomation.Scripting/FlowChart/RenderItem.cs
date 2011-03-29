@@ -1,4 +1,3 @@
-using VisioAutomation.Layout.MSAGL;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Scripting.FlowChart

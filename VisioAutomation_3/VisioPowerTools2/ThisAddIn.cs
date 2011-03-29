@@ -1,7 +1,6 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using MOC = Microsoft.Office.Core;
 using VA = VisioAutomation;
-using VAS = VisioAutomation.Scripting;
 
 namespace VisioPowerTools2
 {
@@ -30,16 +29,16 @@ namespace VisioPowerTools2
         #endregion
 
 
-        private static VAS.Session g_scripting_session;
+        private static VA.Scripting.Session g_scripting_session;
 
-        public static VAS.Session ScriptingSession
+        public static VA.Scripting.Session ScriptingSession
         {
             get
             {
                 if (g_scripting_session == null)
                 {
                     var application = Globals.ThisAddIn.Application;
-                    g_scripting_session = new VAS.Session(application);
+                    g_scripting_session = new VA.Scripting.Session(application);
                 }
                 else
                 {

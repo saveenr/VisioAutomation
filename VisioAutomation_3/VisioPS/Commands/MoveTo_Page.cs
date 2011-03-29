@@ -1,4 +1,3 @@
-using VisioAutomation;
 using VAS=VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
@@ -9,7 +8,7 @@ namespace VisioPS.Commands
     public class MoveTo_Page : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
-        public PageNavigation Flag { get; set; }
+        public VA.PageNavigation Flag { get; set; }
 
         protected override void ProcessRecord()
         {

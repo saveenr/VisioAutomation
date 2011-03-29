@@ -1,6 +1,4 @@
-﻿using VAS = VisioAutomation.Scripting;
-
-namespace VisioPowerTools
+﻿namespace VisioPowerTools
 {
     public partial class FormTextTool 
     {

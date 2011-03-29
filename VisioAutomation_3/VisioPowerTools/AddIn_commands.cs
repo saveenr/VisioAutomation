@@ -1,4 +1,3 @@
-using VAS = VisioAutomation.Scripting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using MOC = Microsoft.Office.Core;
 using VisioAutomation.Extensions;

@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation;
 using VisioAutomation.CustomProperties;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;

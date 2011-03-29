@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VAS = VisioAutomation.Scripting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 

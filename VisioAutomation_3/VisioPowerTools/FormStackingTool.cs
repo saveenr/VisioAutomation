@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using VAS = VisioAutomation.Scripting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 

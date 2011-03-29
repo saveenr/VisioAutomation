@@ -1,6 +1,5 @@
 ﻿using System.Windows.Forms;
 using VA=VisioAutomation;
-using VAS = VisioAutomation.Scripting;
 
 namespace VisioPowerTools
 {
@@ -11,7 +10,7 @@ namespace VisioPowerTools
         {
             InitializeComponent();
 
-            this.fp = new VAS.FormatPainter();
+            this.fp = new VA.Scripting.FormatPainter();
         }
 
         private void buttonCopyFill_Click(object sender, System.EventArgs e)
