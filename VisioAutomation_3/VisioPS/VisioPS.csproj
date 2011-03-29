@@ -192,6 +192,10 @@
     <Compile Include="Commands\Set_Zoom.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
+      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
+      <Name>VisioAutomation.Layout.MSAGL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj">
       <Project>{2BA6E51C-D975-49E3-B6B9-DF3D2D951057}</Project>
       <Name>VisioAutomation.Scripting.XamlTune</Name>

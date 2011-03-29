@@ -9,15 +9,15 @@ namespace VisioAutomation.Scripting.FlowChart
 {
     public class FlowChartBuilder
     {
-        public static IList<RenderItem> LoadFromXML(Session scriptingsession, string filename)
+        public static IList<VA.Layout.MSAGL.Drawing> LoadFromXML(Session scriptingsession, string filename)
         {
             var xmldoc = XDocument.Load(filename);
             return LoadFromXML(scriptingsession, xmldoc);
         }
 
-        public static IList<RenderItem> LoadFromXML(Session scriptingsession, XDocument xmldoc)
+        public static IList<VA.Layout.MSAGL.Drawing> LoadFromXML(Session scriptingsession, XDocument xmldoc)
         {
-            var renderitems = new List<RenderItem>();
+            var drawings = new List<VA.Layout.MSAGL.Drawing>();
             bool major_error = false;
             var page_els = xmldoc.Root.Elements("page");
             foreach (var page_el in page_els)
@@ -128,37 +128,35 @@ namespace VisioAutomation.Scripting.FlowChart
 
                 scriptingsession.Write(VAS.OutputStream.Verbose,"Rendering AutoLayout...");
 
-                var renderitem = new RenderItem(drawing, renderer);
-                renderitems.Add(renderitem);
+                drawings.Add(drawing);
                 scriptingsession.Write(VAS.OutputStream.Verbose,"Finished rendering AutoLayout");
             }
 
-            return renderitems;
+            return drawings;
         }
 
         public static void RenderDiagrams(
             VA.Scripting.Session scriptingsession,
-            IList<RenderItem> renderitems)
+            IList<VA.Layout.MSAGL.Drawing> drawings)
         {
             scriptingsession.Write(VAS.OutputStream.Verbose,"Start Rendering FlowChart");
             var app = scriptingsession.VisioApplication;
 
 
-            if (renderitems.Count < 1)
+            if (drawings.Count < 1)
             {
                 return;
             }
 
             var doc = scriptingsession.Document.NewDocument();
 
-            int num_expected_pages = renderitems.Count;
+            int num_expected_pages = drawings.Count;
 
             var seqnum = new VA.Scripting.SequenceNumberGenerator(1);
 
-            foreach (int i in Enumerable.Range(0, renderitems.Count))
+            foreach (int i in Enumerable.Range(0, drawings.Count))
             {
-                var diagram = renderitems[i].Drawing;
-                var renderer = renderitems[i].DirectedGraphLayout;
+                var diagram = drawings[i];
 
                 scriptingsession.Write(VAS.OutputStream.Verbose,"Rendering page: {0}", seqnum.Next());
 

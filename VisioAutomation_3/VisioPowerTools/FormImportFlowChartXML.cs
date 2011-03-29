@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using VA=VisioAutomation;
 
 namespace VisioPowerTools
 {
@@ -59,11 +60,10 @@ namespace VisioPowerTools
                 return;
             }
 
-            IList<VisioAutomation.Scripting.FlowChart.RenderItem> renderitems;
+            IList<VA.Layout.MSAGL.Drawing> drawings;
             try
             {
-                renderitems = VisioAutomation.Scripting.FlowChart.FlowChartBuilder.LoadFromXML(ss, xdoc);
-
+                drawings = VisioAutomation.Scripting.FlowChart.FlowChartBuilder.LoadFromXML(ss, xdoc);
             }
             catch (VisioAutomation.AutomationException)
             {
@@ -74,7 +74,7 @@ namespace VisioPowerTools
             bool close_form = false;
             try
             {
-                VisioAutomation.Scripting.FlowChart.FlowChartBuilder.RenderDiagrams(ss, renderitems);
+                VisioAutomation.Scripting.FlowChart.FlowChartBuilder.RenderDiagrams(ss, drawings);
             }
             catch(VisioAutomation.AutomationException)
             {
