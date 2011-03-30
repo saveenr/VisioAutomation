@@ -110,7 +110,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Commands\ShapeSheetCommands.cs" />
-    <Compile Include="ShapeSheetCommandsUtil.cs" />
     <Compile Include="Commands\TextCommands.cs" />
     <Compile Include="TextCommandsUtil.cs" />
     <Compile Include="MiscScriptingUtil.cs" />
