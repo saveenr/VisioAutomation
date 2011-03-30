@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Effects
 {
-    public class Glow
+    public class EdgeGlow
     {
         public double GlowWidth { get; set; }
         public VA.Drawing.ColorRGB GlowColor { get; set; }
