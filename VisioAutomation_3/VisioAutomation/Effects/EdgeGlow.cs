@@ -10,7 +10,7 @@ namespace VisioAutomation.Effects
     {
         public double GlowWidth { get; set; }
         public VA.Drawing.ColorRGB GlowColor { get; set; }
-        public int GlowTransparency { get; set; }
+        public double GlowTransparency { get; set; }
 
         private static Drawing.Rectangle[] GetInnerBorderRects(VA.Drawing.Rectangle R, double w)
         {
@@ -29,7 +29,7 @@ namespace VisioAutomation.Effects
 
 
 
-        public IVisio.Shape Draw(IVisio.Page page, VA.Drawing.Rectangle rect)
+        public IVisio.Shape DrawInner(IVisio.Page page, VA.Drawing.Rectangle rect)
         {
             var glow = this;
             double bg_trans = 1.0;
