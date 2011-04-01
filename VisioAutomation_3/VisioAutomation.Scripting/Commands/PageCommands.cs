@@ -37,6 +37,7 @@ namespace VisioAutomation.Scripting.Commands
             return active_page.GetSize();
         }
 
+        [Obsolete]
         public string GetPageName()
         {
             return GetPage().NameU;

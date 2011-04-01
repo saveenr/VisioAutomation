@@ -93,7 +93,6 @@
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
     <Compile Include="FlowChart\ConnectorInfo.cs" />
     <Compile Include="FlowChart\FlowChartBuilder.cs" />
-    <Compile Include="FlowChart\RenderItem.cs" />
     <Compile Include="FlowChart\ShapeInfo.cs" />
     <Compile Include="FlowChart\XmlExtensions.cs" />
     <Compile Include="OrgChart\OrgChartBuilder.cs" />

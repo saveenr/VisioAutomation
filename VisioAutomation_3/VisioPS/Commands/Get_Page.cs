@@ -29,8 +29,7 @@ namespace VisioPS.Commands
             }
             else if (Name==null)
             {
-                var active_page = application.ActivePage;
-                this.WriteObject(active_page);
+                this.WriteObject(scriptingsession.Page.GetPage());
             }
         }
     }
