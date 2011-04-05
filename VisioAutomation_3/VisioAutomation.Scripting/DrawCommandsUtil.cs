@@ -77,16 +77,6 @@ namespace VisioAutomation.Scripting
             return duplicated_shapes;
         }
 
-        public static IVisio.Shape DrawArcByThreePoints(
-            IVisio.Page page,
-            VA.Drawing.Point begin,
-            VA.Drawing.Point end,
-            VA.Drawing.Point control)
-        {
-            var shape = page.DrawArcByThreePoints(begin.X, begin.Y, end.X, end.Y, control.X, control.Y);
-            return shape;
-        }
-
         private static Drawing.Point GetPointAtRadius(Drawing.Point origin, double angle, double radius)
         {
             var new_point = new Drawing.Point(radius * System.Math.Cos(angle),
