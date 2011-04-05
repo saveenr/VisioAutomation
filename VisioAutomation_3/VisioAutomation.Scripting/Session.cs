@@ -27,6 +27,7 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.TextCommands Text { get; private set; }
         public VA.Scripting.Commands.UserDefinedCellCommands UserDefinedCell { get; private set; }
         public VA.Scripting.Commands.DocumentCommands Document { get; private set; }
+        public VA.Scripting.Commands.DeveloperCommands Developer { get; private set; }
 
         public Session() :
             this(null)
@@ -56,6 +57,7 @@ namespace VisioAutomation.Scripting
             this.Text = new Commands.TextCommands(this);
             this.UserDefinedCell = new Commands.UserDefinedCellCommands(this);
             this.Document = new Commands.DocumentCommands(this);
+            this.Developer = new Commands.DeveloperCommands(this);
         }
         
         public void Write(OutputStream output, string s)
