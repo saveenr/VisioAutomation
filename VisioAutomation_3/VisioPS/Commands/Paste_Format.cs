@@ -42,7 +42,7 @@ namespace VisioPS.Commands
                 category |= VA.Format.FormatCategory.Character;
             }
 
-            FormatPainterState.formatpainter.Paste(scriptingsession, category);
+            scriptingsession.Format.PasteFormat(category);
         }
     }
 }

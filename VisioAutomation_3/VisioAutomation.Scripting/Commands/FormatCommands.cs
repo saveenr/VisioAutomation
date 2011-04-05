@@ -136,5 +136,53 @@ namespace VisioAutomation.Scripting.Commands
             var active_page = application.ActivePage;
             update.Execute(active_page);
         }
+
+
+        private VA.Format.FormatPaintCache cache = new VA.Format.FormatPaintCache();
+
+        public void CopyFormat()
+        {
+            var allflags = this.cache.GetAllFormatPaintFlags();
+            this.CopyFormat(allflags);
+        }
+
+        public void CopyFormat(VA.Format.FormatCategory category)
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var selection = this.Session.Selection.GetSelection();
+            var shape = selection[1];
+            this.cache.CopyFormat(shape, category);
+        }
+
+        public void ClearFormatPaint()
+        {
+            this.cache.Clear();
+        }
+
+        public void PasteFormat()
+        {
+            var allflags = this.cache.GetAllFormatPaintFlags();
+
+            this.PasteFormat(allflags);
+        }
+
+        public void PasteFormat(VA.Format.FormatCategory category)
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var selection = this.Session.Selection.GetSelection();
+            var shapeids = selection.GetIDs();
+            var application = this.Session.VisioApplication;
+            var active_page = application.ActivePage;
+
+            this.cache.PasteFormat(active_page, shapeids, category);
+        }
     }
 }

@@ -39,8 +39,8 @@ namespace VisioPS.Commands
             {
                 category |= VA.Format.FormatCategory.Character;
             }
-
-            FormatPainterState.formatpainter.Copy(scriptingsession, category);
+            
+            scriptingsession.Format.CopyFormat(category);
         }
     }
 }

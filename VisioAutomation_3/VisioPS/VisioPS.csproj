@@ -162,7 +162,6 @@
     <Compile Include="Commands\Draw_Rectangle.cs" />
     <Compile Include="Commands\Draw_DataTable.cs" />
     <Compile Include="Commands\Duplicate_Page.cs" />
-    <Compile Include="objects\FormatPainterState.cs" />
     <Compile Include="Commands\Get_Edge.cs" />
     <Compile Include="Commands\Get_Page.cs" />
     <Compile Include="Commands\Get_CustomProperty.cs" />

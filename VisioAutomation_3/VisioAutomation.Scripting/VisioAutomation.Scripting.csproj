@@ -105,7 +105,6 @@
     <Compile Include="Commands\DrawCommands.cs" />
     <Compile Include="DrawCommandsUtil.cs" />
     <Compile Include="Commands\ExportCommands.cs" />
-    <Compile Include="FormatPainter.cs" />
     <Compile Include="Commands\PageCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session.cs" />
