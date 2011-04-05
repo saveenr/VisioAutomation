@@ -53,7 +53,7 @@ namespace VisioPowerTools
 
         private void buttonClear_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.ClearFormatPaint();
+            VisioPowerToolsAddIn.ScriptingSession.Format.ClearFormatCache();
         }
 
         private void buttonCopyAll_Click(object sender, System.EventArgs e)

@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.Commands
             this.cache.CopyFormat(shape, category);
         }
 
-        public void ClearFormatPaint()
+        public void ClearFormatCache()
         {
             this.cache.Clear();
         }
