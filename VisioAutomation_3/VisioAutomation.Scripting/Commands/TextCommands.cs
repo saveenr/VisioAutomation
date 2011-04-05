@@ -170,25 +170,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void ClearCharacterFormat()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            const int fontid = 0;
-            double fontsize = Convert.PointsToInches(12); //12 pt
-            const int color = 0;
-
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                TextCommandsUtil.reset_character_formatting(shapes, fontid, fontsize, color);
-            }
-        }
-
         public void SetTextWrapping(bool wrap)
         {
             if (!this.Session.HasSelectedShapes())

@@ -56,45 +56,5 @@ namespace VisioAutomation.Scripting
 
             update.Execute(page);
         }
-
-        /// <summary>
-        /// Clears the text formatting for a set of shapes
-        /// </summary>
-        /// <param name="shapes"></param>
-        /// <param name="fontid"></param>
-        /// <param name="size"></param>
-        /// <param name="color"></param>
-        internal static void reset_character_formatting(
-            IList<IVisio.Shape> shapes, 
-            int fontid, 
-            double size,
-            int color)
-        {
-            if (shapes.Count < 1)
-            {
-                return;
-            }
-
-            foreach (var shape in shapes)
-            {
-                string t = shape.Text;
-                shape.Text = t;
-            }
-
-            var first_shape = shapes[0];
-            var application = first_shape.Application;
-            var page = application.ActivePage;
-            var shapeids = shapes.Select(s => s.ID).ToList();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            
-            foreach (var shapeid in shapeids)
-            {
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Char_Font, fontid);
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Char_Size, size);
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Char_Color, color);
-            }
-
-            update.Execute(page);
-        }
     }
 }
