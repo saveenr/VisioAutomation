@@ -57,7 +57,7 @@ namespace VisioAutomation.ShapeSheet.Update
             this.FormulaData.Set(streamitem,literal);
         }
 
-        internal void SetFormulaIgnoreNull(TStream streamitem, ShapeSheet.FormulaLiteral f)
+        public void SetFormulaIgnoreNull(TStream streamitem, ShapeSheet.FormulaLiteral f)
         {
             if (f.HasValue)
             {

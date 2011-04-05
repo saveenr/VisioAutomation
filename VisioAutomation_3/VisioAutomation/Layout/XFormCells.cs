@@ -69,8 +69,6 @@ namespace VisioAutomation.Layout
             get { return new VA.Drawing.Rectangle(this.Pin - this.LocPin, this.Size); }
         }
 
-
-
         public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
         {
             this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));

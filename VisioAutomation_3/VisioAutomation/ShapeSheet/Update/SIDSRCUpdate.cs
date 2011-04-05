@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheet.Update
             this.SetFormula(streamitem, formula);
         }
 
-        internal void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral f)
+        public void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral f)
         {
             var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
             this.SetFormulaIgnoreNull(sidsrc,f);

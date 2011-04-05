@@ -340,72 +340,42 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }
 
-        private static VA.ShapeSheet.SRC src_LockAspect = VA.ShapeSheet.SRCConstants.LockAspect;
-        private static VA.ShapeSheet.SRC src_LockBegin = VA.ShapeSheet.SRCConstants.LockBegin;
-        private static VA.ShapeSheet.SRC src_LockCalcWH = VA.ShapeSheet.SRCConstants.LockCalcWH;
-        private static VA.ShapeSheet.SRC src_LockCrop = VA.ShapeSheet.SRCConstants.LockCrop;
-        private static VA.ShapeSheet.SRC src_LockCustProp = VA.ShapeSheet.SRCConstants.LockCustProp;
-        private static VA.ShapeSheet.SRC src_LockDelete = VA.ShapeSheet.SRCConstants.LockDelete;
-        private static VA.ShapeSheet.SRC src_LockEnd = VA.ShapeSheet.SRCConstants.LockEnd;
-        private static VA.ShapeSheet.SRC src_LockFormat = VA.ShapeSheet.SRCConstants.LockFormat;
-        private static VA.ShapeSheet.SRC src_LockFromGroupFormat = VA.ShapeSheet.SRCConstants.LockFromGroupFormat;
-        private static VA.ShapeSheet.SRC src_LockGroup = VA.ShapeSheet.SRCConstants.LockGroup;
-        private static VA.ShapeSheet.SRC src_LockHeight = VA.ShapeSheet.SRCConstants.LockHeight;
-        private static VA.ShapeSheet.SRC src_LockMoveX = VA.ShapeSheet.SRCConstants.LockMoveX;
-        private static VA.ShapeSheet.SRC src_LockMoveY = VA.ShapeSheet.SRCConstants.LockMoveY;
-        private static VA.ShapeSheet.SRC src_LockRotate = VA.ShapeSheet.SRCConstants.LockRotate;
-        private static VA.ShapeSheet.SRC src_LockSelect = VA.ShapeSheet.SRCConstants.LockSelect;
-        private static VA.ShapeSheet.SRC src_LockTextEdit = VA.ShapeSheet.SRCConstants.LockTextEdit;
-        private static VA.ShapeSheet.SRC src_LockThemeColors = VA.ShapeSheet.SRCConstants.LockThemeColors;
-        private static VA.ShapeSheet.SRC src_LockThemeEffects = VA.ShapeSheet.SRCConstants.LockThemeEffects;
-        private static VA.ShapeSheet.SRC src_LockVtxEdit = VA.ShapeSheet.SRCConstants.LockVtxEdit;
-        private static VA.ShapeSheet.SRC src_LockWidth = VA.ShapeSheet.SRCConstants.LockWidth;
-        private static VA.ShapeSheet.SRC[] lockcells = new[]
-                                                 {
-                                                     src_LockAspect,
-                                                     src_LockBegin,
-                                                     src_LockCalcWH,
-                                                     src_LockCrop,
-                                                     src_LockCustProp,
-                                                     src_LockDelete,
-                                                     src_LockEnd,
-                                                     src_LockFormat,
-                                                     src_LockFromGroupFormat,
-                                                     src_LockGroup,
-                                                     src_LockHeight,
-                                                     src_LockMoveX,
-                                                     src_LockMoveY,
-                                                     src_LockRotate,
-                                                     src_LockSelect,
-                                                     src_LockTextEdit,
-                                                     src_LockThemeColors,
-                                                     src_LockThemeEffects,
-                                                     src_LockVtxEdit,
-                                                     src_LockWidth
-
-                                                 };
-
-        private void SetLockCells(VA.ShapeSheet.SRC[] srcs, double val)
+        private void updatelock(LockCells lockcells)
         {
             if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
-            var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
-            var formula = val.ToString(invariant_culture);
-            var formulas = srcs.Select(src => formula).ToList();
-            IVisio.VisGetSetArgs flags = 0;
-            this.Session.ShapeSheet.SetFormula(lockcells, formulas, flags);
+
+            var selection = this.Session.Selection.GetSelection();
+            var shapeids = selection.GetIDs();
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+
+            foreach (int shapeid in shapeids)
+            {
+                lockcells.Apply(update, (short) shapeid);
+            }
+
+            var application = this.Session.VisioApplication;
+            using (var undoscope = application.CreateUndoScope())
+            {
+                var active_page = application.ActivePage;
+                update.Execute(active_page);
+            }
         }
 
         public void LockAll()
         {
-            SetLockCells(lockcells, 1.0);
+            var lockcells = new LockCells();
+            lockcells.SetAll("1");
+            this.updatelock(lockcells);
         }
 
         public void UnlockAll()
         {
-            SetLockCells(lockcells, 0.0);
+            var lockcells = new LockCells();
+            lockcells.SetAll("0");
+            this.updatelock(lockcells);
         }
 
         public void SetWidth(double w)
@@ -480,4 +450,5 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
     }
+
 }
