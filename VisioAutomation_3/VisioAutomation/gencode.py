@@ -15,7 +15,7 @@ double    |    Angle 	   |      Angle
 """
 
 CONTROLCELLS = """
-double |   Controls_Glue   |   Glue
+double |   Controls_CanGlue   |   Glue
 double |   Controls_Tip    |   Tip 
 int    |   Controls_X 	   |   X 
 int    |   Controls_Y  	   |   Y  
@@ -75,12 +75,12 @@ def x(text,classname,queryname,qt,si) :
         print """
                 public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id, short row)
                 {
-                    this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
+                    this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src.ForRow(row), f));
                 }
 
                 public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
                 {
-                    this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
+                    this._Apply((src, f) => update.SetFormulaIgnoreNull(src.ForRow(row), f));
                 }
         """
 
@@ -99,7 +99,7 @@ def x(text,classname,queryname,qt,si) :
         if (qt=="Cell") :
             print"            func(ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula);"
         elif (qt=="Section") :
-            print"            func(ShapeSheet.SRCConstants.", cellsrc , ".Cell , this." , cellname , ".Formula, row);"
+            print"            func(VA.ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula, row);"
 
     print "}"    
 
