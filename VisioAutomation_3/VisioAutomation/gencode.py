@@ -15,14 +15,17 @@ double    |    Angle 	   |      Angle
 """
 
 CONTROLCELLS = """
-double    |    PinX  	   |      PinX  	  
-double    |    PinY  	   |      PinY  	  
-double    |    LocPinX	   |      LocPinX	  
-double    |    LocPinY	   |      LocPinY	  
-double    |    Width 	   |      Width 	  
-double    |    Height 	   |      Height 	  
-double    |    Angle 	   |      Angle 	  
+double |   Controls_Glue   |   Glue
+double |   Controls_Tip    |   Tip 
+int    |   Controls_X 	   |   X 
+int    |   Controls_Y  	   |   Y  
+int    |   Controls_YCon   |   YCon
+int    |   Controls_XCon   |   XCon
+int    |   Controls_XDyn   |   XDyn
+int    |   Controls_YDyn   |   YDyn  
 """
+
+
 def printtop() :
     print """
 using System;
@@ -55,25 +58,49 @@ def x(text,classname,queryname,qt,si) :
         
         print "public VA.ShapeSheet.CellData<", celltype, ">" , cellname, "{ get; set; }"
 
-    print """
+    if (qt=="Cell") :
+        print """
+                public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
+                {
+                    this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
+                }
 
-            public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
-            {
-                this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
-            }
+                public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
+                {
+                    this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
+                }
+        """
+    elif (qt=="Section") :
+        
+        print """
+                public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id, short row)
+                {
+                    this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
+                }
 
-            public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
-            {
-                this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
-            }
-    """
+                public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
+                {
+                    this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
+                }
+        """
 
-    print "internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)"
+
+
+
+    if (qt=="Cell") :
+        print "internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)"
+    elif (qt=="Section") :
+        print "internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func, short row)"
+
 
     print "{"
 
     for celltype,cellsrc,cellname in data:
-        print"            func(ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula);"
+        if (qt=="Cell") :
+            print"            func(ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula);"
+        elif (qt=="Section") :
+            print"            func(ShapeSheet.SRCConstants.", cellsrc , ".Cell , this." , cellname , ".Formula, row);"
+
     print "}"    
 
     print "}"    
@@ -95,13 +122,13 @@ def x(text,classname,queryname,qt,si) :
         if (qt=="Cell"):
             print "    this.", cellname," = this.AddColumn(VA.ShapeSheet.SRCConstants.", cellsrc,", \""+cellname+"\");"
         elif (qt=="Section"):
-            print "    this.", cellname," = this.AddColumn(IVisio.VisCellIndices.", cellsrc,", \""+cellname+"\");"
+            print "    this.", cellname," = this.AddColumn(VA.ShapeSheet.SRCConstants.", cellsrc,".Cell, \""+cellname+"\");"
     print "}"    
 
     print 
     print "}"    
 
 x(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
-x(XFORMCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
+x(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
     
     
