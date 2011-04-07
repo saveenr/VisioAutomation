@@ -18,16 +18,25 @@ namespace VisioAutomation.Controls
 
         public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
         {
+            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
+        }
+
+        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id, short row )
+        {
+            this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f), row);
+        }
+
+        internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func, short row)
+        {
             var ctrldef = this;
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.X, row), ctrldef.X.Formula);
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.Y, row), ctrldef.Y.Formula);
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.Glue, row), ctrldef.CanGlue.Formula);
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.Tip, row), ctrldef.Tip.Formula);
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.XCon, row), ctrldef.XBehavior.Formula);
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.YCon, row), ctrldef.YBehavior.Formula);
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.XDyn, row), ctrldef.XDynamics.Formula);
-            update.SetFormulaIgnoreNull(query.GetCellSRCForRow(query.YDyn, row), ctrldef.YDynamics.Formula);
+            func(query.GetCellSRCForRow(query.X, row), ctrldef.X.Formula);
+            func(query.GetCellSRCForRow(query.Y, row), ctrldef.Y.Formula);
+            func(query.GetCellSRCForRow(query.Glue, row), ctrldef.CanGlue.Formula);
+            func(query.GetCellSRCForRow(query.Tip, row), ctrldef.Tip.Formula);
+            func(query.GetCellSRCForRow(query.XCon, row), ctrldef.XBehavior.Formula);
+            func(query.GetCellSRCForRow(query.YCon, row), ctrldef.YBehavior.Formula);
+            func(query.GetCellSRCForRow(query.XDyn, row), ctrldef.XDynamics.Formula);
+            func(query.GetCellSRCForRow(query.YDyn, row), ctrldef.YDynamics.Formula);
         }
     }
-
 }
