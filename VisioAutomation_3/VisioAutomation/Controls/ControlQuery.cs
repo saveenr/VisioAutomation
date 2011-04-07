@@ -3,28 +3,29 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Controls
 {
-    class ControlQuery : VA.ShapeSheet.Query.SectionQuery
+    public class ControlQuery : VA.ShapeSheet.Query.SectionQuery
     {
-        public VA.ShapeSheet.Query.SectionQueryColumn Glue { get; set; }
+        public VA.ShapeSheet.Query.SectionQueryColumn CanGlue { get; set; }
         public VA.ShapeSheet.Query.SectionQueryColumn Tip { get; set; }
         public VA.ShapeSheet.Query.SectionQueryColumn X { get; set; }
         public VA.ShapeSheet.Query.SectionQueryColumn Y { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn YCon { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn XCon { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn XDyn { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn YDyn { get; set; }
+        public VA.ShapeSheet.Query.SectionQueryColumn YBehavior { get; set; }
+        public VA.ShapeSheet.Query.SectionQueryColumn XBehavior { get; set; }
+        public VA.ShapeSheet.Query.SectionQueryColumn XDynamics { get; set; }
+        public VA.ShapeSheet.Query.SectionQueryColumn YDynamics { get; set; }
 
         public ControlQuery() :
             base(IVisio.VisSectionIndices.visSectionControls)
         {
-            Glue = AddColumn(IVisio.VisCellIndices.visCtlGlue, "Glue");
-            Tip = AddColumn(IVisio.VisCellIndices.visCtlTip, "Tip");
-            X = AddColumn(IVisio.VisCellIndices.visCtlX, "X");
-            Y = AddColumn(IVisio.VisCellIndices.visCtlY, "Y");
-            XDyn = AddColumn(IVisio.VisCellIndices.visCtlXDyn, "XDyn");
-            YDyn = AddColumn(IVisio.VisCellIndices.visCtlYDyn, "YDyn");
-            XCon = AddColumn(IVisio.VisCellIndices.visCtlXCon, "XCon");
-            YCon = AddColumn(IVisio.VisCellIndices.visCtlYCon, "YCon");
+            this.CanGlue = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_CanGlue.Cell, "CanGlue");
+            this.Tip = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_Tip.Cell, "Tip");
+            this.X = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_X.Cell, "X");
+            this.Y = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_Y.Cell, "Y");
+            this.YBehavior = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_YCon.Cell, "YBehavior");
+            this.XBehavior = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_XCon.Cell, "XBehavior");
+            this.XDynamics = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_XDyn.Cell, "XDynamics");
+            this.YDynamics = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_YDyn.Cell, "YDynamics");
         }
+
     }
 }

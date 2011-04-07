@@ -109,11 +109,11 @@ namespace VisioAutomation.Controls
 
                 cells.X = qds.GetItem(row, query.X);
                 cells.Y = qds.GetItem(row, query.Y);
-                cells.XDynamics = qds.GetItem(row, query.XDyn, v => (int)v);
-                cells.YDynamics = qds.GetItem(row, query.YDyn, v => (int)v);
-                cells.XBehavior = qds.GetItem(row, query.XCon, v => (int)v);
-                cells.YBehavior = qds.GetItem(row, query.YCon, v => (int)v);
-                cells.CanGlue = qds.GetItem(row, query.Glue, v => (int)v);
+                cells.XDynamics = qds.GetItem(row, query.XDynamics, v => (int)v);
+                cells.YDynamics = qds.GetItem(row, query.YDynamics, v => (int)v);
+                cells.XBehavior = qds.GetItem(row, query.XBehavior, v => (int)v);
+                cells.YBehavior = qds.GetItem(row, query.YBehavior, v => (int)v);
+                cells.CanGlue = qds.GetItem(row, query.CanGlue, v => (int)v);
                 cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
 
                 cells_list.Add(cells);
@@ -139,11 +139,11 @@ namespace VisioAutomation.Controls
 
                         cells.X = qds.GetItem(row, query.X);
                         cells.Y = qds.GetItem(row, query.Y);
-                        cells.XDynamics = qds.GetItem(row, query.XDyn, v => (int)v);
-                        cells.YDynamics = qds.GetItem(row, query.YDyn, v => (int)v);
-                        cells.XBehavior = qds.GetItem(row, query.XCon, v => (int)v);
-                        cells.YBehavior = qds.GetItem(row, query.YCon, v => (int)v);
-                        cells.CanGlue = qds.GetItem(row, query.Glue, v => (int)v);
+                        cells.XDynamics = qds.GetItem(row, query.XDynamics, v => (int)v);
+                        cells.YDynamics = qds.GetItem(row, query.YDynamics, v => (int)v);
+                        cells.XBehavior = qds.GetItem(row, query.XBehavior, v => (int)v);
+                        cells.YBehavior = qds.GetItem(row, query.YBehavior, v => (int)v);
+                        cells.CanGlue = qds.GetItem(row, query.CanGlue, v => (int)v);
                         cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
 
                         cells_list.Add(cells);

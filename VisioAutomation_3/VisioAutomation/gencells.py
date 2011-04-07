@@ -204,36 +204,48 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
     if (qt=="Section") :
         print
-        print "public static IList<", classname , "> GetCells(IVisio.Page page, IList<int> shapeids)"
+        print "public static IList<List<", classname , ">> GetCells(IVisio.Page page, IList<int> shapeids)"
         print "{"
         print "  var query = new ", queryname,"();"
         print "  var qds = query.GetFormulasAndResults<double>(page, shapeids);"
-        print "  var cells_list = new List<", classname,">(shapeids.Count);"
-        print "  for (int i = 0; i < qds.RowCount; i++)"
+        print "  var list = new List<List<ControlCells>>(shapeids.Count);"
+        print "  foreach (var group in qds.Groups)"
         print "  {"
-        print "     var cells = get_" + classname + "_from_row(query, qds, i);"
-        print "     cells_list.Add( cells );"
+        print "     var cells_list = new List<ControlCells>(group.Count);"
+        print "     if (group.Count>0)"
+        print "     {"
+        print "        for (int i = 0; i < qds.RowCount; i++)"
+        print "        {"
+        print "           var cells = get_" + classname + "_from_row(query, qds, i);"
+        print "           cells_list.Add( cells );"
+        print "        }"
+        print "     }"
+        print "     list.Add( cells_list );"
         print "  }"
-        print ""
+        print "  return list;"
+        print "}"
+        print
+
+        print
+        print "public static IList<List<", classname , ">> GetCells(IVisio.Shape shape)"
+        print "{"
+        print "  var query = new ", queryname,"();"
+        print "  var qds = query.GetFormulasAndResults<double>(shape);"
+        print "  var cells_list = get_" + classname + "_from_row(query, qds, 0);"
+        print "  for (int row = 0; row < qds.RowCount; row++)"
+        print "  {"
+        print "      var cells = get_" + classname + "_from_row(query, qds, i);"
+        print "      cells_list.Add(cells);"
+        print "  }"
         print "  return cells_list;"
         print "}"
         print
 
         print
-        print "public static ", classname , " GetCells(IVisio.Shape shape)"
-        print "{"
-        print "  var query = new ", queryname,"();"
-        print "  var qds = query.GetFormulasAndResults<double>(shape);"
-        print "  var cells = get_" + classname + "_from_row(query, qds, 0);"
-        print "  return cells;"
-        print "}"
-        print
-
-        print
         print "}"
 
-gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
-#gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
+#gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
+gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
 #gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
 
     
