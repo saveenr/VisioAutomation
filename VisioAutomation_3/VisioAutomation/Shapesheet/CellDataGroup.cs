@@ -46,20 +46,20 @@ namespace VisioAutomation.ShapeSheet
     public abstract class CellSectionDataGroup
     {
         protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
-        protected abstract void _Apply(ApplyFormula func);
-        protected delegate TCells row_to_cells<TCells, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.CellQuery;
+        protected abstract void _Apply(ApplyFormula func, short row);
+        protected delegate TCells row_to_cells<TCells, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.SectionQuery;
 
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid)
+        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid, short row)
         {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f));
+            this._Apply((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f), row);
         }
 
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
+        public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
         {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
+            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
         }
 
-        protected static IList<List<TCells>> _GetCells<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery query, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        protected static IList<List<TCells>> _GetCells<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery query, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
             var list = new List<List<TCells>>(shapeids.Count);
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeSheet
             return list;
         }
 
-        protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
             var cells_list = new List<TCells>(qds.RowCount);

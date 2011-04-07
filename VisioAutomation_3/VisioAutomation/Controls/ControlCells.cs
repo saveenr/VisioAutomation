@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Controls
 {
-    public class ControlCells
+    public class ControlCells : VA.ShapeSheet.CellSectionDataGroup
     {
         public VA.ShapeSheet.CellData<int> CanGlue { get; set; }
         public VA.ShapeSheet.CellData<int> Tip { get; set; }
@@ -15,17 +15,7 @@ namespace VisioAutomation.Controls
         public VA.ShapeSheet.CellData<int> XDynamics { get; set; }
         public VA.ShapeSheet.CellData<int> YDynamics { get; set; }
 
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f), row);
-        }
-
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id, short row)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f), row);
-        }
-
-        internal void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func, short row)
+        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Controls_CanGlue.ForRow(row), this.CanGlue.Formula);
             func(VA.ShapeSheet.SRCConstants.Controls_Tip.ForRow(row), this.Tip.Formula);
@@ -54,35 +44,13 @@ namespace VisioAutomation.Controls
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ControlQuery();
-            var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var list = new List<List<ControlCells>>(shapeids.Count);
-            foreach (var group in qds.Groups)
-            {
-                var cells_list = new List<ControlCells>(group.Count);
-                if (group.Count > 0)
-                {
-                    for (int i = 0; i < qds.RowCount; i++)
-                    {
-                        var cells = get_cells_from_row(query, qds, i);
-                        cells_list.Add(cells);
-                    }
-                }
-                list.Add(cells_list);
-            }
-            return list;
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
         }
 
         public static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = new ControlQuery();
-            var qds = query.GetFormulasAndResults<double>(shape);
-            var cells_list = new List<ControlCells>(qds.RowCount);
-            for (int row = 0; row < qds.RowCount; row++)
-            {
-                var cells = get_cells_from_row(query, qds, row);
-                cells_list.Add(cells);
-            }
-            return cells_list;
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
         }
     }
 }
