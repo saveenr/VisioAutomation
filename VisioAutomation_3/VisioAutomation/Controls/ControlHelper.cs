@@ -95,66 +95,12 @@ namespace VisioAutomation.Controls
 
         public static IList<ControlCells> GetControls(IVisio.Shape shape)
         {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
-            var qds = query.GetFormulasAndResults<double>(shape);
-            var cells_list = new List<ControlCells>(qds.RowCount);
-
-            for (int row = 0; row < qds.RowCount; row++)
-            {
-                var cells = new ControlCells();
-
-                cells.X = qds.GetItem(row, query.X);
-                cells.Y = qds.GetItem(row, query.Y);
-                cells.XDynamics = qds.GetItem(row, query.XDynamics, v => (int)v);
-                cells.YDynamics = qds.GetItem(row, query.YDynamics, v => (int)v);
-                cells.XBehavior = qds.GetItem(row, query.XBehavior, v => (int)v);
-                cells.YBehavior = qds.GetItem(row, query.YBehavior, v => (int)v);
-                cells.CanGlue = qds.GetItem(row, query.CanGlue, v => (int)v);
-                cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
-
-                cells_list.Add(cells);
-            }
-
-            return cells_list;
+            return ControlCells.GetCells(shape);
         }
 
         public static IList<List<ControlCells>> GetControls(IVisio.Page page, IList<int> shapeids)
         {
-            var qds = query.GetFormulasAndResults<double>(page, shapeids);
-
-            var list = new List<List<ControlCells>>(shapeids.Count);
-            foreach (var group in qds.Groups)
-            {
-                var cells_list = new List<ControlCells>(group.Count);
-
-                if (group.Count>0)
-                {
-                    for (int row = group.StartRow; row <= group.EndRow; row++)
-                    {
-                        var cells = new ControlCells();
-
-                        cells.X = qds.GetItem(row, query.X);
-                        cells.Y = qds.GetItem(row, query.Y);
-                        cells.XDynamics = qds.GetItem(row, query.XDynamics, v => (int)v);
-                        cells.YDynamics = qds.GetItem(row, query.YDynamics, v => (int)v);
-                        cells.XBehavior = qds.GetItem(row, query.XBehavior, v => (int)v);
-                        cells.YBehavior = qds.GetItem(row, query.YBehavior, v => (int)v);
-                        cells.CanGlue = qds.GetItem(row, query.CanGlue, v => (int)v);
-                        cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
-
-                        cells_list.Add(cells);
-                    }
-                    
-                }
-
-                list.Add(cells_list);
-            }
-
-            return list;
+            return ControlCells.GetCells(page,shapeids);
         }
     }
 }

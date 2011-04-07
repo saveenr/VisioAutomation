@@ -37,6 +37,55 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
+        private static ControlCells get_ControlCells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        {
+            var cells = new ControlCells();
+            cells.CanGlue = qds.GetItem(row, query.CanGlue, v => (int)v);
+            cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
+            cells.X = qds.GetItem(row, query.X);
+            cells.Y = qds.GetItem(row, query.Y);
+            cells.YBehavior = qds.GetItem(row, query.YBehavior, v => (int)v);
+            cells.XBehavior = qds.GetItem(row, query.XBehavior, v => (int)v);
+            cells.XDynamics = qds.GetItem(row, query.XDynamics, v => (int)v);
+            cells.YDynamics = qds.GetItem(row, query.YDynamics, v => (int)v);
+            return cells;
+        }
+
+        public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        {
+            var query = new ControlQuery();
+            var qds = query.GetFormulasAndResults<double>(page, shapeids);
+            var list = new List<List<ControlCells>>(shapeids.Count);
+            foreach (var group in qds.Groups)
+            {
+                var cells_list = new List<ControlCells>(group.Count);
+                if (group.Count > 0)
+                {
+                    for (int i = 0; i < qds.RowCount; i++)
+                    {
+                        var cells = get_ControlCells_from_row(query, qds, i);
+                        cells_list.Add(cells);
+                    }
+                }
+                list.Add(cells_list);
+            }
+            return list;
+        }
+
+
+
+        public static IList<ControlCells> GetCells(IVisio.Shape shape)
+        {
+            var query = new ControlQuery();
+            var qds = query.GetFormulasAndResults<double>(shape);
+            var cells_list = new List<ControlCells>(qds.RowCount);
+            for (int row = 0; row < qds.RowCount; row++)
+            {
+                var cells = get_ControlCells_from_row(query, qds, row);
+                cells_list.Add(cells);
+            }
+            return cells_list;
+        }
 
 
 

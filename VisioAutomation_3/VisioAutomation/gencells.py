@@ -166,8 +166,8 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     print "  var cells = new ", classname,"();"
     for celltype,cellsrc,cellname in data:
         x = ""
-        if ( celltype=="int") : x = "v => (int)v"
-        elif ( celltype=="bool") : x = "v => (bool)v"
+        if ( celltype=="int") : x = ",v => (int)v"
+        elif ( celltype=="bool") : x = ",v => (bool)v"
         print "   cells.", cellname, "= qds.GetItem(row, query." ,cellname, x ,");"
     print "return cells;"
     print "}"
@@ -211,7 +211,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
         print "  var list = new List<List<ControlCells>>(shapeids.Count);"
         print "  foreach (var group in qds.Groups)"
         print "  {"
-        print "     var cells_list = new List<ControlCells>(group.Count);"
+        print "     var cells_list = new List<",classname,">(group.Count);"
         print "     if (group.Count>0)"
         print "     {"
         print "        for (int i = 0; i < qds.RowCount; i++)"
@@ -227,14 +227,14 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
         print
 
         print
-        print "public static IList<List<", classname , ">> GetCells(IVisio.Shape shape)"
+        print "public static IList<", classname , "> GetCells(IVisio.Shape shape)"
         print "{"
         print "  var query = new ", queryname,"();"
         print "  var qds = query.GetFormulasAndResults<double>(shape);"
-        print "  var cells_list = get_" + classname + "_from_row(query, qds, 0);"
+        print "  var cells_list = new List<",classname,">(qds.RowCount);"
         print "  for (int row = 0; row < qds.RowCount; row++)"
         print "  {"
-        print "      var cells = get_" + classname + "_from_row(query, qds, i);"
+        print "      var cells = get_" + classname + "_from_row(query, qds, row);"
         print "      cells_list.Add(cells);"
         print "  }"
         print "  return cells_list;"
