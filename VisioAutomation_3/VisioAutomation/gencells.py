@@ -151,6 +151,55 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     print 
     print "}"    
 
+    print "----------------------------------"
+    printtop()
+
+    print
+    print "public static class", classname+"Helper"
+    print "{"
+    for celltype,cellsrc,cellname in data:
+        print"            public VA.ShapeSheet.Query." + qt + "QueryColumn", cellname , " {get; set;}"
+
+    print
+    print "public static", "get_" + classname + "_from_row","(" , classname, "query,VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)"
+    print "{"
+    print "  var cells = new ", classname,"();"
+    for celltype,cellsrc,cellname in data:
+        x = ""
+        if ( celltype=="int") : x = "v => (int)v"
+        elif ( celltype=="bool") : x = "v => (bool)v"
+        print "   cells.", cellname, "= qds.GetItem(row, query." ,cellname, x ,");"
+    print "}"
+
+    print
+    print "public static IList<", classname , "> Get" + classname,"(IVisio.Page page, IList<int> shapeids)"
+    print "{"
+    print "  var query = new ", queryname,"();"
+    print "  var qds = query.GetFormulasAndResults<double>(page, shapeids);"
+    print "  var cells_list = new List<", classname,">(shapeids.Count);"
+    print "  for (int i = 0; i < qds.RowCount; i++)"
+    print "  {"
+    print "     var cells = get_" + classname + "_for_row(query, qds, i);"
+    print "     cells_list.Add( cells );"
+    print "  }"
+    print ""
+    print "  return cells_list;"
+    print "}"
+    print
+
+    print
+    print "public static IList<", classname , "> Get" + classname,"(IVisio.Page shape)"
+    print "{"
+    print "  var query = new ", queryname,"();"
+    print "  var qds = query.GetFormulasAndResults<double>(shape);"
+    print "  var cells = get_" + classname + "_for_row(query, qds, 0);"
+    print "  return cells;"
+    print "}"
+    print
+
+    print
+    print "}"
+
 gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
 gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
 gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
