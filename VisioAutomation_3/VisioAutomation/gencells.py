@@ -101,7 +101,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     printtop()
 
     print "----------------------------------"
-    print "public class", classname
+    print "public partial class", classname
     print "{"
 
     data = []
