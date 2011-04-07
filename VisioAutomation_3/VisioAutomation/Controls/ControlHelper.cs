@@ -100,29 +100,61 @@ namespace VisioAutomation.Controls
                 throw new System.ArgumentNullException("shape");
             }
 
-            var r = query.GetFormulasAndResults<double>(shape);
-            var formulas = r.Formulas;
-            var results = r.Results;
+            var qds = query.GetFormulasAndResults<double>(shape);
+            var cells_list = new List<ControlCells>(qds.RowCount);
 
-            var controls = new List<ControlCells>(formulas.Rows.Count);
-
-            for (int row = 0; row < results.Rows.Count; row++)
+            for (int row = 0; row < qds.RowCount; row++)
             {
-                var control = new ControlCells();
+                var cells = new ControlCells();
 
-                control.X = r.GetItem(row, query.X);
-                control.Y = r.GetItem(row, query.Y);
-                control.XDynamics = r.GetItem(row, query.XDyn, v => (int)v);
-                control.YDynamics = r.GetItem(row, query.YDyn, v => (int)v);
-                control.XBehavior = r.GetItem(row, query.XCon, v => (int)v);
-                control.YBehavior = r.GetItem(row, query.YCon, v => (int)v);
-                control.CanGlue = r.GetItem(row, query.Glue, v => (int)v);
-                control.Tip = r.GetItem(row, query.Tip, v => (int)v);
+                cells.X = qds.GetItem(row, query.X);
+                cells.Y = qds.GetItem(row, query.Y);
+                cells.XDynamics = qds.GetItem(row, query.XDyn, v => (int)v);
+                cells.YDynamics = qds.GetItem(row, query.YDyn, v => (int)v);
+                cells.XBehavior = qds.GetItem(row, query.XCon, v => (int)v);
+                cells.YBehavior = qds.GetItem(row, query.YCon, v => (int)v);
+                cells.CanGlue = qds.GetItem(row, query.Glue, v => (int)v);
+                cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
 
-                controls.Add(control);
+                cells_list.Add(cells);
             }
 
-            return controls;
+            return cells_list;
+        }
+
+        public static IList<List<ControlCells>> GetControls(IVisio.Page page, IList<int> shapeids)
+        {
+            var qds = query.GetFormulasAndResults<double>(page, shapeids);
+
+            var list = new List<List<ControlCells>>(shapeids.Count);
+            foreach (var group in qds.Groups)
+            {
+                var cells_list = new List<ControlCells>(group.Count);
+
+                if (group.Count>0)
+                {
+                    for (int row = group.StartRow; row <= group.EndRow; row++)
+                    {
+                        var cells = new ControlCells();
+
+                        cells.X = qds.GetItem(row, query.X);
+                        cells.Y = qds.GetItem(row, query.Y);
+                        cells.XDynamics = qds.GetItem(row, query.XDyn, v => (int)v);
+                        cells.YDynamics = qds.GetItem(row, query.YDyn, v => (int)v);
+                        cells.XBehavior = qds.GetItem(row, query.XCon, v => (int)v);
+                        cells.YBehavior = qds.GetItem(row, query.YCon, v => (int)v);
+                        cells.CanGlue = qds.GetItem(row, query.Glue, v => (int)v);
+                        cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
+
+                        cells_list.Add(cells);
+                    }
+                    
+                }
+
+                list.Add(cells_list);
+            }
+
+            return list;
         }
     }
 }
