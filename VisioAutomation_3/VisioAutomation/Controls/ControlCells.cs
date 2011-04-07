@@ -37,7 +37,7 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
-        private static ControlCells get_ControlCells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new ControlCells();
             cells.CanGlue = qds.GetItem(row, query.CanGlue, v => (int)v);
@@ -63,7 +63,7 @@ namespace VisioAutomation.Controls
                 {
                     for (int i = 0; i < qds.RowCount; i++)
                     {
-                        var cells = get_ControlCells_from_row(query, qds, i);
+                        var cells = get_cells_from_row(query, qds, i);
                         cells_list.Add(cells);
                     }
                 }
@@ -72,8 +72,6 @@ namespace VisioAutomation.Controls
             return list;
         }
 
-
-
         public static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = new ControlQuery();
@@ -81,13 +79,10 @@ namespace VisioAutomation.Controls
             var cells_list = new List<ControlCells>(qds.RowCount);
             for (int row = 0; row < qds.RowCount; row++)
             {
-                var cells = get_ControlCells_from_row(query, qds, row);
+                var cells = get_cells_from_row(query, qds, row);
                 cells_list.Add(cells);
             }
             return cells_list;
         }
-
-
-
     }
 }

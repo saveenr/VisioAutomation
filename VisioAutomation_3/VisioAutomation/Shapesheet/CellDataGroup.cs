@@ -9,7 +9,9 @@ namespace VisioAutomation.ShapeSheet
 {
     public abstract class CellDataGroup
     {
-        public delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
+        protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
+        protected abstract void _Apply(ApplyFormula func);
+        protected delegate TCells row_to_cells<TCells, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.CellQuery;
 
         public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid)
         {
@@ -20,10 +22,6 @@ namespace VisioAutomation.ShapeSheet
         {
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
         }
-
-        protected abstract void _Apply(ApplyFormula func);
-
-        protected delegate TCells row_to_cells<TCells, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.CellQuery;
 
         protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery q, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
