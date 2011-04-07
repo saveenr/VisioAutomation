@@ -77,7 +77,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LockCells.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="XmlUtil.cs" />
     <Compile Include="ShapeSheetUpdate.cs" />

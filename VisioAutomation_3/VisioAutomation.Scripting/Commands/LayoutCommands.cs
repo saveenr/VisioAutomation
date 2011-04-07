@@ -340,7 +340,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }
 
-        private void updatelock(LockCells lockcells)
+        private void updatelock(VA.Layout.LockCells lockcells)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -366,14 +366,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void LockAll()
         {
-            var lockcells = new LockCells();
+            var lockcells = new VA.Layout.LockCells();
             lockcells.SetAll("1");
             this.updatelock(lockcells);
         }
 
         public void UnlockAll()
         {
-            var lockcells = new LockCells();
+            var lockcells = new VA.Layout.LockCells();
             lockcells.SetAll("0");
             this.updatelock(lockcells);
         }

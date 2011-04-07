@@ -1,48 +1,47 @@
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 using System.Collections.Generic;
 
 
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Layout
 {
-    class LockCells
+    public class LockCells
     {
-        public ShapeSheet.CellData<bool> LockAspect { get; set; }
-        public ShapeSheet.CellData<bool> LockBegin { get; set; }
-        public ShapeSheet.CellData<bool> LockCalcWH { get; set; }
-        public ShapeSheet.CellData<bool> LockCrop { get; set; }
-        public ShapeSheet.CellData<bool> LockCustProp { get; set; }
-        public ShapeSheet.CellData<bool> LockDelete { get; set; }
-        public ShapeSheet.CellData<bool> LockEnd { get; set; }
-        public ShapeSheet.CellData<bool> LockFormat { get; set; }
-        public ShapeSheet.CellData<bool> LockFromGroupFormat { get; set; }
-        public ShapeSheet.CellData<bool> LockGroup { get; set; }
-        public ShapeSheet.CellData<bool> LockHeight { get; set; }
-        public ShapeSheet.CellData<bool> LockMoveX { get; set; }
-        public ShapeSheet.CellData<bool> LockMoveY { get; set; }
-        public ShapeSheet.CellData<bool> LockRotate { get; set; }
-        public ShapeSheet.CellData<bool> LockSelect { get; set; }
-        public ShapeSheet.CellData<bool> LockTextEdit { get; set; }
-        public ShapeSheet.CellData<bool> LockThemeColors { get; set; }
-        public ShapeSheet.CellData<bool> LockThemeEffects { get; set; }
-        public ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
-        public ShapeSheet.CellData<bool> LockWidth { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockAspect { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockBegin { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockCalcWH { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockCrop { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockCustProp { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockDelete { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockEnd { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockFormat { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockFromGroupFormat { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockGroup { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockHeight { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockMoveX { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockMoveY { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockRotate { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockSelect { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockTextEdit { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockThemeColors { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockThemeEffects { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
+        public VA.ShapeSheet.CellData<bool> LockWidth { get; set; }
 
-        public void Apply(ShapeSheet.Update.SIDSRCUpdate update, short id)
+        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
         {
             this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
         }
 
-        public void Apply(ShapeSheet.Update.SRCUpdate update)
+        public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
         {
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
         }
 
-        internal void _Apply(System.Action<ShapeSheet.SRC, ShapeSheet.FormulaLiteral> func)
+        internal void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
         {
-
             func(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
             func(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);
             func(ShapeSheet.SRCConstants.LockCalcWH, this.LockCalcWH.Formula);
@@ -88,6 +87,5 @@ namespace VisioAutomation.Scripting
             LockVtxEdit = formula;
             LockWidth = formula;
         }
-
     }
 }

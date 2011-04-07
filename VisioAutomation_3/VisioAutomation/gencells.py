@@ -25,6 +25,29 @@ int    |   Controls_XDyn   |   XDynamics
 int    |   Controls_YDyn   |   YDynamics
 """
 
+LOCKCELLS = """
+bool   |  LockAspect			 |    LockAspect
+bool   |  LockBegin 			 |    LockBegin
+bool   |  LockCalcWH			 |    LockCalcWH
+bool   |  LockCrop 				 |    LockCrop
+bool   |  LockCustProp			 |    LockCustProp
+bool   |  LockDelete			 |    LockDelete
+bool   |  LockEnd 				 |    LockEnd
+bool   |  LockFormat			 |    LockFormat
+bool   |  LockFromGroupFormat	 |    LockFromGroupFormat
+bool   |  LockGroup 			 |    LockGroup
+bool   |  LockHeight			 |    LockHeight
+bool   |  LockMoveX 			 |    LockMoveX
+bool   |  LockMoveY 			 |    LockMoveY
+bool   |  LockRotate			 |    LockRotate
+bool   |  LockSelect			 |    LockSelect
+bool   |  LockTextEdit			 |    LockTextEdit
+bool   |  LockThemeColors 		 |    LockThemeColors
+bool   |  LockThemeEffects		 |    LockThemeEffects
+bool   |  LockVtxEdit			 |    LockVtxEdit
+bool   |  LockWidth 			 |    LockWidth
+"""
+
 
 def printtop() :
     print """
@@ -130,5 +153,6 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
 gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
 gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
-    
+gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
+
     
