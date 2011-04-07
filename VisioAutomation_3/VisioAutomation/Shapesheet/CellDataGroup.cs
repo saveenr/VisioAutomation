@@ -9,9 +9,11 @@ namespace VisioAutomation.ShapeSheet
 {
     public abstract class CellDataGroup
     {
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
+        public delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
+
+        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid)
         {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
+            this._Apply((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f));
         }
 
         public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
@@ -19,6 +21,6 @@ namespace VisioAutomation.ShapeSheet
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
         }
 
-        protected abstract void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func);
+        protected abstract void _Apply(ApplyFormula func);
     }
 }

@@ -40,7 +40,7 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
 
-        protected override void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
+        protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
             func(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
@@ -75,7 +75,7 @@ namespace VisioAutomation.Format
             func(ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
         }
 
-        private static ShapeFormatCells get_ShapeFormatCells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new ShapeFormatCells();
             cells.FillBkgnd = qds.GetItem(row, query.FillBkgnd, v => (int)v);
@@ -119,7 +119,7 @@ namespace VisioAutomation.Format
             var cells_list = new List<ShapeFormatCells>(shapeids.Count);
             for (int i = 0; i < qds.RowCount; i++)
             {
-                var cells = get_ShapeFormatCells_from_row(query, qds, i);
+                var cells = get_cells_from_row(query, qds, i);
                 cells_list.Add(cells);
             }
 
@@ -131,7 +131,7 @@ namespace VisioAutomation.Format
         {
             var query = new ShapeFormatQuery();
             var qds = query.GetFormulasAndResults<double>(shape);
-            var cells = get_ShapeFormatCells_from_row(query, qds, 0);
+            var cells = get_cells_from_row(query, qds, 0);
             return cells;
         }
 

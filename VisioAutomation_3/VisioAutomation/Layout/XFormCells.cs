@@ -17,7 +17,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<double> Height { get; set; }
         public VA.ShapeSheet.CellData<double> Angle { get; set; }
 
-        protected override void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)
+        protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)
         {
 
             func(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
@@ -29,7 +29,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
         }
 
-        private static XFormCells get_XFormCells_from_row(XFormQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        private static XFormCells get_cells_from_row(XFormQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new XFormCells();
             cells.PinX = qds.GetItem(row, query.PinX);
@@ -49,7 +49,7 @@ namespace VisioAutomation.Layout
             var cells_list = new List<XFormCells>(shapeids.Count);
             for (int i = 0; i < qds.RowCount; i++)
             {
-                var cells = get_XFormCells_from_row(query, qds, i);
+                var cells = get_cells_from_row(query, qds, i);
                 cells_list.Add(cells);
             }
 
@@ -60,7 +60,7 @@ namespace VisioAutomation.Layout
         {
             var query = new XFormQuery();
             var qds = query.GetFormulasAndResults<double>(shape);
-            var cells = get_XFormCells_from_row(query, qds, 0);
+            var cells = get_cells_from_row(query, qds, 0);
             return cells;
         }
 
