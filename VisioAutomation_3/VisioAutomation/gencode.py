@@ -15,14 +15,14 @@ double    |    Angle 	   |      Angle
 """
 
 CONTROLCELLS = """
-double |   Controls_CanGlue   |   Glue
-double |   Controls_Tip    |   Tip 
-int    |   Controls_X 	   |   X 
-int    |   Controls_Y  	   |   Y  
-int    |   Controls_YCon   |   YCon
-int    |   Controls_XCon   |   XCon
-int    |   Controls_XDyn   |   XDyn
-int    |   Controls_YDyn   |   YDyn  
+int |   Controls_CanGlue   |   CanGlue
+int |   Controls_Tip    |   Tip
+double    |   Controls_X 	   |   X
+double    |   Controls_Y  	   |   Y
+int    |   Controls_YCon   |   YBehavior
+int    |   Controls_XCon   |   XBehavior
+int    |   Controls_XDyn   |   XDynamics
+int    |   Controls_YDyn   |   YDynamics
 """
 
 
@@ -73,15 +73,15 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     elif (qt=="Section") :
         
         print """
-                public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id, short row)
-                {
-                    this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src.ForRow(row), f));
-                }
+            public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
+            {
+                this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
+            }
 
-                public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
-                {
-                    this._Apply((src, f) => update.SetFormulaIgnoreNull(src.ForRow(row), f));
-                }
+            public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id, short row )
+            {
+                this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f), row);
+            }
         """
 
 
@@ -99,7 +99,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
         if (qt=="Cell") :
             print"            func(ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula);"
         elif (qt=="Section") :
-            print"            func(VA.ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula, row);"
+            print"            func(VA.ShapeSheet.SRCConstants.", cellsrc , ".ForRow(row) , this." , cellname , ".Formula);"
 
     print "}"    
 

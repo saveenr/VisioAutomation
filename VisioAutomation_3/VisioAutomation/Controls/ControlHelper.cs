@@ -7,6 +7,8 @@ namespace VisioAutomation.Controls
 {
     public static class ControlHelper
     {
+        internal readonly static VA.Controls.ControlQuery query = new VA.Controls.ControlQuery();
+
         public static int AddControl(IVisio.Shape shape)
         {
             if (shape == null)
@@ -78,7 +80,7 @@ namespace VisioAutomation.Controls
             }
 
             var row = (IVisio.VisRowIndices)index;
-            shape.DeleteRow(ControlCells.query.Section, (short)row);
+            shape.DeleteRow(query.Section, (short)row);
         }
 
         public static int GetControlsCount(IVisio.Shape shape)
@@ -88,7 +90,7 @@ namespace VisioAutomation.Controls
                 throw new ArgumentNullException("shape");
             }
 
-            return shape.RowCount[ControlCells.query.Section];
+            return shape.RowCount[query.Section];
         }
 
         public static IList<ControlCells> GetControls(IVisio.Shape shape)
@@ -98,7 +100,7 @@ namespace VisioAutomation.Controls
                 throw new System.ArgumentNullException("shape");
             }
 
-            var r = ControlCells.query.GetFormulasAndResults<double>(shape);
+            var r = query.GetFormulasAndResults<double>(shape);
             var formulas = r.Formulas;
             var results = r.Results;
 
@@ -108,14 +110,14 @@ namespace VisioAutomation.Controls
             {
                 var control = new ControlCells();
 
-                control.X = r.GetItem(row, ControlCells.query.X);
-                control.Y = r.GetItem(row, ControlCells.query.Y);
-                control.XDynamics = r.GetItem(row, ControlCells.query.XDyn, v => (int)v);
-                control.YDynamics = r.GetItem(row, ControlCells.query.YDyn, v => (int)v);
-                control.XBehavior = r.GetItem(row, ControlCells.query.XCon, v => (int)v);
-                control.YBehavior = r.GetItem(row, ControlCells.query.YCon, v => (int)v);
-                control.CanGlue = r.GetItem(row, ControlCells.query.Glue, v => (int)v);
-                control.Tip = r.GetItem(row, ControlCells.query.Tip, v => (int)v);
+                control.X = r.GetItem(row, query.X);
+                control.Y = r.GetItem(row, query.Y);
+                control.XDynamics = r.GetItem(row, query.XDyn, v => (int)v);
+                control.YDynamics = r.GetItem(row, query.YDyn, v => (int)v);
+                control.XBehavior = r.GetItem(row, query.XCon, v => (int)v);
+                control.YBehavior = r.GetItem(row, query.YCon, v => (int)v);
+                control.CanGlue = r.GetItem(row, query.Glue, v => (int)v);
+                control.Tip = r.GetItem(row, query.Tip, v => (int)v);
 
                 controls.Add(control);
             }
