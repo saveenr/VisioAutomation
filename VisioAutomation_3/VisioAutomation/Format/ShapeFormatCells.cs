@@ -6,11 +6,12 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Format
 {
+
+
     public class ShapeFormatCells
     {
-        // Fill
         public VA.ShapeSheet.CellData<int> FillBkgnd { get; set; }
-        public VA.ShapeSheet.CellData<double>FillBkgndTrans { get; set; }
+        public VA.ShapeSheet.CellData<double> FillBkgndTrans { get; set; }
         public VA.ShapeSheet.CellData<int> FillForegnd { get; set; }
         public VA.ShapeSheet.CellData<double> FillForegndTrans { get; set; }
         public VA.ShapeSheet.CellData<int> FillPattern { get; set; }
@@ -24,8 +25,6 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> ShdwForegnd { get; set; }
         public VA.ShapeSheet.CellData<double> ShdwForegndTrans { get; set; }
         public VA.ShapeSheet.CellData<int> ShdwPattern { get; set; }
-
-        // Line
         public VA.ShapeSheet.CellData<int> BeginArrow { get; set; }
         public VA.ShapeSheet.CellData<double> BeginArrowSize { get; set; }
         public VA.ShapeSheet.CellData<int> EndArrow { get; set; }
@@ -36,15 +35,10 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> LinePattern { get; set; }
         public VA.ShapeSheet.CellData<double> LineWeight { get; set; }
         public VA.ShapeSheet.CellData<double> Rounding { get; set; }
-
-        // Char
         public VA.ShapeSheet.CellData<int> CharFont { get; set; }
         public VA.ShapeSheet.CellData<int> CharColor { get; set; }
         public VA.ShapeSheet.CellData<double> CharColorTrans { get; set; }
         public VA.ShapeSheet.CellData<double> CharSize { get; set; }
-
-        // Text
-
         public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
 
@@ -58,46 +52,101 @@ namespace VisioAutomation.Format
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
         }
 
-        public void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
+        internal void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
         {
-
-            // Fill
-            func(ShapeSheet.SRCConstants.FillBkgnd, FillBkgnd.Formula);
-            func(ShapeSheet.SRCConstants.FillBkgndTrans, FillBkgndTrans.Formula);
-            func(ShapeSheet.SRCConstants.FillForegnd, FillForegnd.Formula);
-            func(ShapeSheet.SRCConstants.FillForegndTrans, FillForegndTrans.Formula);
-            func(ShapeSheet.SRCConstants.FillPattern, FillPattern.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, ShapeShdwObliqueAngle.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwOffsetX, ShapeShdwOffsetX.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwOffsetY, ShapeShdwOffsetY.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwScaleFactor, ShapeShdwScaleFactor.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwType, ShapeShdwType.Formula);
-            func(ShapeSheet.SRCConstants.ShdwBkgnd, ShdwBkgnd.Formula);
-            func(ShapeSheet.SRCConstants.ShdwBkgndTrans, ShdwBkgndTrans.Formula);
-            func(ShapeSheet.SRCConstants.ShdwForegnd, ShdwForegnd.Formula);
-            func(ShapeSheet.SRCConstants.ShdwForegndTrans, ShdwForegndTrans.Formula);
-            func(ShapeSheet.SRCConstants.ShdwPattern, ShdwPattern.Formula);
-
-
-            // Line
-            func(ShapeSheet.SRCConstants.BeginArrow, BeginArrow.Formula);
-            func(ShapeSheet.SRCConstants.BeginArrowSize, BeginArrowSize.Formula);
-            func(ShapeSheet.SRCConstants.LineColor, LineColor.Formula);
-            func(ShapeSheet.SRCConstants.LineColorTrans, LineColorTrans.Formula);
-            func(ShapeSheet.SRCConstants.LinePattern, LinePattern.Formula);
-            func(ShapeSheet.SRCConstants.LineWeight, LineWeight.Formula);
-            func(ShapeSheet.SRCConstants.EndArrow, EndArrow.Formula);
-            func(ShapeSheet.SRCConstants.EndArrowSize, EndArrowSize.Formula);
-
-            // Char
-            func(ShapeSheet.SRCConstants.Char_Color, CharColor.Formula);
-            func(ShapeSheet.SRCConstants.Char_ColorTrans, CharColorTrans.Formula);
-            func(ShapeSheet.SRCConstants.Char_Font, CharFont.Formula);
-            func(ShapeSheet.SRCConstants.Char_Size, CharSize.Formula);
-
-            // Text
-            func(ShapeSheet.SRCConstants.TextBkgnd, TextBkgnd.Formula);
-            func(ShapeSheet.SRCConstants.TextBkgndTrans, TextBkgndTrans.Formula);
+            func(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
+            func(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
+            func(ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd.Formula);
+            func(ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans.Formula);
+            func(ShapeSheet.SRCConstants.FillPattern, this.FillPattern.Formula);
+            func(ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle.Formula);
+            func(ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX.Formula);
+            func(ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY.Formula);
+            func(ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor.Formula);
+            func(ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType.Formula);
+            func(ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd.Formula);
+            func(ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans.Formula);
+            func(ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd.Formula);
+            func(ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans.Formula);
+            func(ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern.Formula);
+            func(ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow.Formula);
+            func(ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize.Formula);
+            func(ShapeSheet.SRCConstants.EndArrow, this.EndArrow.Formula);
+            func(ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize.Formula);
+            func(ShapeSheet.SRCConstants.LineCap, this.LineCap.Formula);
+            func(ShapeSheet.SRCConstants.LineColor, this.LineColor.Formula);
+            func(ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans.Formula);
+            func(ShapeSheet.SRCConstants.LinePattern, this.LinePattern.Formula);
+            func(ShapeSheet.SRCConstants.LineWeight, this.LineWeight.Formula);
+            func(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
+            func(ShapeSheet.SRCConstants.Char_Font, this.CharFont.Formula);
+            func(ShapeSheet.SRCConstants.Char_Color, this.CharColor.Formula);
+            func(ShapeSheet.SRCConstants.Char_ColorTrans, this.CharColorTrans.Formula);
+            func(ShapeSheet.SRCConstants.Char_Size, this.CharSize.Formula);
+            func(ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd.Formula);
+            func(ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
         }
+
+        private static ShapeFormatCells get_ShapeFormatCells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        {
+            var cells = new ShapeFormatCells();
+            cells.FillBkgnd = qds.GetItem(row, query.FillBkgnd, v => (int)v);
+            cells.FillBkgndTrans = qds.GetItem(row, query.FillBkgndTrans);
+            cells.FillForegnd = qds.GetItem(row, query.FillForegnd, v => (int)v);
+            cells.FillForegndTrans = qds.GetItem(row, query.FillForegndTrans);
+            cells.FillPattern = qds.GetItem(row, query.FillPattern, v => (int)v);
+            cells.ShapeShdwObliqueAngle = qds.GetItem(row, query.ShapeShdwObliqueAngle);
+            cells.ShapeShdwOffsetX = qds.GetItem(row, query.ShapeShdwOffsetX);
+            cells.ShapeShdwOffsetY = qds.GetItem(row, query.ShapeShdwOffsetY);
+            cells.ShapeShdwScaleFactor = qds.GetItem(row, query.ShapeShdwScaleFactor);
+            cells.ShapeShdwType = qds.GetItem(row, query.ShapeShdwType, v => (int)v);
+            cells.ShdwBkgnd = qds.GetItem(row, query.ShdwBkgnd, v => (int)v);
+            cells.ShdwBkgndTrans = qds.GetItem(row, query.ShdwBkgndTrans);
+            cells.ShdwForegnd = qds.GetItem(row, query.ShdwForegnd, v => (int)v);
+            cells.ShdwForegndTrans = qds.GetItem(row, query.ShdwForegndTrans);
+            cells.ShdwPattern = qds.GetItem(row, query.ShdwPattern, v => (int)v);
+            cells.BeginArrow = qds.GetItem(row, query.BeginArrow, v => (int)v);
+            cells.BeginArrowSize = qds.GetItem(row, query.BeginArrowSize);
+            cells.EndArrow = qds.GetItem(row, query.EndArrow, v => (int)v);
+            cells.EndArrowSize = qds.GetItem(row, query.EndArrowSize);
+            cells.LineCap = qds.GetItem(row, query.LineCap, v => (int)v);
+            cells.LineColor = qds.GetItem(row, query.LineColor, v => (int)v);
+            cells.LineColorTrans = qds.GetItem(row, query.LineColorTrans);
+            cells.LinePattern = qds.GetItem(row, query.LinePattern, v => (int)v);
+            cells.LineWeight = qds.GetItem(row, query.LineWeight);
+            cells.Rounding = qds.GetItem(row, query.Rounding);
+            cells.CharFont = qds.GetItem(row, query.CharFont, v => (int)v);
+            cells.CharColor = qds.GetItem(row, query.CharColor, v => (int)v);
+            cells.CharColorTrans = qds.GetItem(row, query.CharColorTrans);
+            cells.CharSize = qds.GetItem(row, query.CharSize);
+            cells.TextBkgnd = qds.GetItem(row, query.TextBkgnd, v => (int)v);
+            cells.TextBkgndTrans = qds.GetItem(row, query.TextBkgndTrans);
+            return cells;
+        }
+
+        public static IList<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        {
+            var query = new ShapeFormatQuery();
+            var qds = query.GetFormulasAndResults<double>(page, shapeids);
+            var cells_list = new List<ShapeFormatCells>(shapeids.Count);
+            for (int i = 0; i < qds.RowCount; i++)
+            {
+                var cells = get_ShapeFormatCells_from_row(query, qds, i);
+                cells_list.Add(cells);
+            }
+
+            return cells_list;
+        }
+
+
+        public static ShapeFormatCells GetCells(IVisio.Shape shape)
+        {
+            var query = new ShapeFormatQuery();
+            var qds = query.GetFormulasAndResults<double>(shape);
+            var cells = get_ShapeFormatCells_from_row(query, qds, 0);
+            return cells;
+        }
+
     }
+
 }

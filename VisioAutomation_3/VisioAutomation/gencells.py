@@ -49,6 +49,39 @@ bool   |  LockWidth 			 |    LockWidth
 """
 
 
+SHAPEFORMAT="""
+int    |   FillBkgnd             |   FillBkgnd
+double |   FillBkgndTrans        |   FillBkgndTrans
+int    |   FillForegnd           |   FillForegnd
+double |   FillForegndTrans      |   FillForegndTrans
+int    |   FillPattern           |   FillPattern
+double |   ShapeShdwObliqueAngle |   ShapeShdwObliqueAngle
+double |   ShapeShdwOffsetX      |   ShapeShdwOffsetX
+double |   ShapeShdwOffsetY      |   ShapeShdwOffsetY
+double |   ShapeShdwScaleFactor  |   ShapeShdwScaleFactor
+int    |   ShapeShdwType         |   ShapeShdwType
+int    |   ShdwBkgnd             |   ShdwBkgnd
+double |   ShdwBkgndTrans        |   ShdwBkgndTrans
+int    |   ShdwForegnd           |   ShdwForegnd
+double |   ShdwForegndTrans      |   ShdwForegndTrans
+int    |   ShdwPattern           |   ShdwPattern
+int    |   BeginArrow            |   BeginArrow
+double |   BeginArrowSize        |   BeginArrowSize
+int    |   EndArrow              |   EndArrow
+double |   EndArrowSize          |   EndArrowSize
+int    |   LineCap               |   LineCap
+int    |   LineColor             |   LineColor
+double |   LineColorTrans        |   LineColorTrans
+int    |   LinePattern           |   LinePattern
+double |   LineWeight            |   LineWeight
+double |   Rounding              |   Rounding
+int    |   Char_Font              |   CharFont
+int    |   Char_Color             |   CharColor
+double |   Char_ColorTrans        |   CharColorTrans
+double |   Char_Size              |   CharSize
+int    |   TextBkgnd             |   TextBkgnd
+double |   TextBkgndTrans        |   TextBkgndTrans
+"""
 def printtop() :
     print """
 using System;
@@ -245,7 +278,8 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
         print "}"
 
 #gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
-gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
+#gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
 #gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
+gencode_for_cells(SHAPEFORMAT, "ShapeFormatCells", "ShapeFormatQuery","Cell","")
 
     
