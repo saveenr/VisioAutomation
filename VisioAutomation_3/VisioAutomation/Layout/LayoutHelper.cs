@@ -365,11 +365,7 @@ namespace VisioAutomation.Layout
                 throw new System.ArgumentNullException("shape");
             }
 
-            var query = new VA.Layout.XFormQuery();
-            var qds = query.GetFormulasAndResults<double>(shape);
-            var xfrm = get_xformdata_from_row(query, qds, 0);
-
-            return xfrm;
+            return XFormCells.GetCells(shape);
         }
 
         public static IList<VA.Layout.XFormCells> GetXForm(IVisio.Page page, IList<int> shapeids)
@@ -379,30 +375,7 @@ namespace VisioAutomation.Layout
                 throw new System.ArgumentNullException("page");
             }
 
-            var query = new VA.Layout.XFormQuery();
-            var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var xfrms = new List<VA.Layout.XFormCells>(shapeids.Count);
-            for (int i = 0; i < qds.RowCount; i++)
-            {
-                var xfrm = get_xformdata_from_row(query, qds, i);
-                xfrms.Add(xfrm);
-            }
-
-            return xfrms;
-        }
-
-        private static VA.Layout.XFormCells get_xformdata_from_row(VA.Layout.XFormQuery query,
-                                                              VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
-        {
-            var xfrm = new VA.Layout.XFormCells();
-            xfrm.PinX = qds.GetItem(row, query.PinX);
-            xfrm.PinY = qds.GetItem(row, query.PinY);
-            xfrm.LocPinX = qds.GetItem(row, query.LocPinX);
-            xfrm.LocPinY = qds.GetItem(row, query.LocPinY);
-            xfrm.Width = qds.GetItem(row, query.Width);
-            xfrm.Height = qds.GetItem(row, query.Height);
-            xfrm.Angle = qds.GetItem(row, query.Angle);
-            return xfrm;
+            return XFormCells.GetCells(page, shapeids);
         }
 
 
