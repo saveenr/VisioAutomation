@@ -115,26 +115,13 @@ namespace VisioAutomation.Format
         public static IList<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ShapeFormatQuery();
-            var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var cells_list = new List<ShapeFormatCells>(shapeids.Count);
-            for (int i = 0; i < qds.RowCount; i++)
-            {
-                var cells = get_cells_from_row(query, qds, i);
-                cells_list.Add(cells);
-            }
-
-            return cells_list;
+            return VA.ShapeSheet.CellDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
         }
-
 
         public static ShapeFormatCells GetCells(IVisio.Shape shape)
         {
             var query = new ShapeFormatQuery();
-            var qds = query.GetFormulasAndResults<double>(shape);
-            var cells = get_cells_from_row(query, qds, 0);
-            return cells;
+            return VA.ShapeSheet.CellDataGroup._GetCells(shape, query, get_cells_from_row);
         }
-
     }
-
 }

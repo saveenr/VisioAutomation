@@ -22,5 +22,26 @@ namespace VisioAutomation.ShapeSheet
         }
 
         protected abstract void _Apply(ApplyFormula func);
+
+        protected delegate TCells row_to_cells<TCells, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.CellQuery;
+
+        protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery q, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        {
+            var cells_list = new List<TCells>(shapeids.Count);
+            var qds = q.GetFormulasAndResults<double>(page, shapeids);
+            for (int i = 0; i < qds.RowCount; i++)
+            {
+                var cells = row_to_cells_func(q, qds, i);
+                cells_list.Add(cells);
+            }
+
+            return cells_list;
+        }
+
+        protected static TCells _GetCells<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        {
+            var qds = query.GetFormulasAndResults<double>(shape);
+            return row_to_cells_func(query, qds, 0);
+        }
     }
 }

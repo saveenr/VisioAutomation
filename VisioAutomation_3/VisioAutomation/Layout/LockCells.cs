@@ -53,5 +53,43 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.LockVtxEdit, this.LockVtxEdit.Formula);
             func(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
         }
+
+        private static LockCells get_cells_from_row(LockQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        {
+            var cells = new LockCells();
+            cells.LockAspect = qds.GetItem(row, query.LockAspect, v => VA.Convert.DoubleToBool(v));
+            cells.LockBegin = qds.GetItem(row, query.LockBegin, v => VA.Convert.DoubleToBool(v));
+            cells.LockCalcWH = qds.GetItem(row, query.LockCalcWH, v => VA.Convert.DoubleToBool(v));
+            cells.LockCrop = qds.GetItem(row, query.LockCrop, v => VA.Convert.DoubleToBool(v));
+            cells.LockCustProp = qds.GetItem(row, query.LockCustProp, v => VA.Convert.DoubleToBool(v));
+            cells.LockDelete = qds.GetItem(row, query.LockDelete, v => VA.Convert.DoubleToBool(v));
+            cells.LockEnd = qds.GetItem(row, query.LockEnd, v => VA.Convert.DoubleToBool(v));
+            cells.LockFormat = qds.GetItem(row, query.LockFormat, v => VA.Convert.DoubleToBool(v));
+            cells.LockFromGroupFormat = qds.GetItem(row, query.LockFromGroupFormat, v => VA.Convert.DoubleToBool(v));
+            cells.LockGroup = qds.GetItem(row, query.LockGroup, v => VA.Convert.DoubleToBool(v));
+            cells.LockHeight = qds.GetItem(row, query.LockHeight, v => VA.Convert.DoubleToBool(v));
+            cells.LockMoveX = qds.GetItem(row, query.LockMoveX, v => VA.Convert.DoubleToBool(v));
+            cells.LockMoveY = qds.GetItem(row, query.LockMoveY, v => VA.Convert.DoubleToBool(v));
+            cells.LockRotate = qds.GetItem(row, query.LockRotate, v => VA.Convert.DoubleToBool(v));
+            cells.LockSelect = qds.GetItem(row, query.LockSelect, v => VA.Convert.DoubleToBool(v));
+            cells.LockTextEdit = qds.GetItem(row, query.LockTextEdit, v => VA.Convert.DoubleToBool(v));
+            cells.LockThemeColors = qds.GetItem(row, query.LockThemeColors, v => VA.Convert.DoubleToBool(v));
+            cells.LockThemeEffects = qds.GetItem(row, query.LockThemeEffects, v => VA.Convert.DoubleToBool(v));
+            cells.LockVtxEdit = qds.GetItem(row, query.LockVtxEdit, v => VA.Convert.DoubleToBool(v));
+            cells.LockWidth = qds.GetItem(row, query.LockWidth, v => VA.Convert.DoubleToBool(v));
+            return cells;
+        }
+
+        public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        {
+            var query = new LockQuery();
+            return VA.ShapeSheet.CellDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
+        }
+
+        public static LockCells GetCells(IVisio.Shape shape)
+        {
+            var query = new LockQuery();
+            return VA.ShapeSheet.CellDataGroup._GetCells(shape, query, get_cells_from_row);
+        }
     }
 }

@@ -279,7 +279,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
 #gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
 #gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
-#gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
-gencode_for_cells(SHAPEFORMAT, "ShapeFormatCells", "ShapeFormatQuery","Cell","")
+gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
+#gencode_for_cells(SHAPEFORMAT, "ShapeFormatCells", "ShapeFormatQuery","Cell","")
 
     

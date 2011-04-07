@@ -34,6 +34,11 @@ namespace VisioAutomation
             return b ? "1" : "0";
         }
 
+        public static bool DoubleToBool(double d)
+        {
+            return d != 0 ? true : false;
+        }
+
         /// <summary>
         /// Converts a short value to bool
         /// </summary>
