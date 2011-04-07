@@ -56,5 +56,5 @@ lint.db
 *.orig
 [Pp]ackages/
 [Tt]est[Rr]esults/
-
+.idea/
 
