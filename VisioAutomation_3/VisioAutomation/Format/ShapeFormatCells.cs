@@ -6,9 +6,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Format
 {
-
-
-    public class ShapeFormatCells
+    public class ShapeFormatCells : VA.ShapeSheet.CellDataGroup
     {
         public VA.ShapeSheet.CellData<int> FillBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> FillBkgndTrans { get; set; }
@@ -42,17 +40,7 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
 
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
-        }
-
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
-        }
-
-        internal void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
+        protected override void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
         {
             func(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
             func(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);

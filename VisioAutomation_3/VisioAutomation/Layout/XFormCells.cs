@@ -7,7 +7,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
-    public partial class XFormCells
+    public partial class XFormCells : VA.ShapeSheet.CellDataGroup
     {
         public VA.ShapeSheet.CellData<double> PinX { get; set; }
         public VA.ShapeSheet.CellData<double> PinY { get; set; }
@@ -17,17 +17,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<double> Height { get; set; }
         public VA.ShapeSheet.CellData<double> Angle { get; set; }
 
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
-        }
-
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
-        }
-
-        internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)
+        protected override void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)
         {
 
             func(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);

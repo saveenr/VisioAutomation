@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Layout
 {
-    public partial class LockCells
+    public partial class LockCells : VA.ShapeSheet.CellDataGroup
     {
         public VA.ShapeSheet.CellData<bool> LockAspect { get; set; }
         public VA.ShapeSheet.CellData<bool> LockBegin { get; set; }
@@ -30,17 +30,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
         public VA.ShapeSheet.CellData<bool> LockWidth { get; set; }
 
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
-        }
-
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
-        {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
-        }
-
-        internal void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
+        protected override void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
         {
             func(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
             func(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);
