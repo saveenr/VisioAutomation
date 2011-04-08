@@ -51,7 +51,7 @@ namespace VisioAutomation.Connections
             }
 
             var row = (IVisio.VisRowIndices)index;
-            shape.DeleteRow(ConnectionPointCells.query.Section, (short)row);
+            shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionConnectionPts, (short)row);
         }
 
         public static int GetConnectionPointCount(IVisio.Shape shape)
@@ -61,7 +61,7 @@ namespace VisioAutomation.Connections
                 throw new System.ArgumentNullException("shape");
             }
 
-            return shape.RowCount[ConnectionPointCells.query.Section];
+            return shape.RowCount[ (short) IVisio.VisSectionIndices.visSectionConnectionPts];
         }
 
         public static int DeleteAllConnectionPoints(IVisio.Shape shape)

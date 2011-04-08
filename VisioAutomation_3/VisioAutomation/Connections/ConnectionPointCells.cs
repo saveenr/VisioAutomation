@@ -13,9 +13,6 @@ namespace VisioAutomation.Connections
         public VA.ShapeSheet.CellData<int> DirY { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }
 
-
-        internal readonly static VA.Connections.ConnectionPointQuery query = new VA.Connections.ConnectionPointQuery();
-
         [System.Obsolete]
         public static IList<ConnectionPointCells> GetConnectionPoints(IVisio.Shape shape)
         {
