@@ -9,8 +9,6 @@ namespace VisioAutomation.Text
 {
     public static class TextHelper
     {
-        private static readonly VA.Text.CharacterFormatQuery charquery = new VA.Text.CharacterFormatQuery();
-
         public static void SetTextFormatFields(IVisio.Shape shape, string fmt, params object[] fields)
         {
             if (shape == null)
@@ -346,33 +344,7 @@ namespace VisioAutomation.Text
         //TODO: Add Unit Test
         public static IList<ParagraphFormatCells> GetParagraphFormat(IVisio.Shape shape)
         {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
-            var qds = paraquery.GetFormulasAndResults<double>(shape);
-
-            var fmts = new List<ParagraphFormatCells>();
-            for (int row = 0; row < qds.RowCount; row++)
-            {
-                var fmt = new ParagraphFormatCells();
-
-                fmt.IndentFirst = qds.GetItem(row, paraquery.IndentFirst);
-                fmt.IndentLeft = qds.GetItem(row, paraquery.IndentLeft);
-                fmt.IndentRight = qds.GetItem(row, paraquery.IndentRight);
-                fmt.SpacingAfter = qds.GetItem(row, paraquery.SpaceAfter);
-                fmt.SpacingBefore = qds.GetItem(row, paraquery.SpaceBefore);
-                fmt.SpacingLine = qds.GetItem(row, paraquery.SpaceLine);
-                fmt.HorizontalAlign = qds.GetItem(row, paraquery.HorzAlign, v => (int) v);
-                fmt.BulletIndex = qds.GetItem(row, paraquery.BulletIndex, v => (int) v);
-                fmt.BulletFont = qds.GetItem(row, paraquery.BulletFont, v => (int) v);
-                fmt.BulletSize = qds.GetItem(row, paraquery.BulletFontSize, v => (int) v);
-
-                fmts.Add(fmt);
-            }
-
-            return fmts;
+            return ParagraphFormatCells.GetCells(shape);
         }
 
 

@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells
+    public class ParagraphFormatCells : VA.ShapeSheet.CellSectionDataGroup
     {
         ////public string BulletString;
         public VA.ShapeSheet.CellData<double> IndentFirst { get; set; }
@@ -18,30 +18,48 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> BulletFont { get; set; }
         public VA.ShapeSheet.CellData<int> BulletSize { get; set; }
 
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, int row, short id)
+        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
         {
-            short srow = (short) row;
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src.ForRow(srow), f));
+            func(VA.ShapeSheet.SRCConstants.Para_IndLeft.ForRow(row), this.IndentLeft.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_IndFirst.ForRow(row), this.IndentFirst.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_IndRight.ForRow(row), this.IndentRight.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_SpAfter.ForRow(row), this.SpacingAfter.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_SpBefore.ForRow(row), this.SpacingBefore.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_SpLine.ForRow(row), this.SpacingLine.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_HAlign.ForRow(row), this.HorizontalAlign.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_BulletFont.ForRow(row), this.BulletFont.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_BulletIndex.ForRow(row), this.BulletIndex.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_BulletSize.ForRow(row), this.BulletSize.Formula);
         }
 
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update, int row)
+        public static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            short srow = (short) row;
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(src.ForRow(srow), f));
+            var query = new ParagraphFormatQuery();
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
         }
 
-        private void _Apply(System.Action<VA.ShapeSheet.SRC, VA.ShapeSheet.FormulaLiteral> func)
+        public static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
-            func(VA.ShapeSheet.SRCConstants.Para_IndLeft, this.IndentLeft.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_IndFirst, this.IndentFirst.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_IndRight, this.IndentRight.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_SpAfter, this.SpacingAfter.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_SpBefore, this.SpacingBefore.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_SpLine, this.SpacingLine.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_HAlign, this.HorizontalAlign.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletFont, this.BulletFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletIndex, this.BulletIndex.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletSize, this.BulletSize.Formula);
+            var query = new ParagraphFormatQuery();
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
         }
+
+        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        {
+            var cells = new ParagraphFormatCells();
+            cells.IndentFirst = qds.GetItem(row, query.IndentFirst);
+            cells.IndentLeft = qds.GetItem(row, query.IndentLeft);
+            cells.IndentRight = qds.GetItem(row, query.IndentRight);
+            cells.SpacingAfter = qds.GetItem(row, query.SpaceAfter);
+            cells.SpacingBefore = qds.GetItem(row, query.SpaceBefore);
+            cells.SpacingLine = qds.GetItem(row, query.SpaceLine);
+            cells.HorizontalAlign = qds.GetItem(row, query.HorzAlign, v => (int)v);
+            cells.BulletIndex = qds.GetItem(row, query.BulletIndex, v => (int)v);
+            cells.BulletFont = qds.GetItem(row, query.BulletFont, v => (int)v);
+            cells.BulletSize = qds.GetItem(row, query.BulletFontSize, v => (int)v);
+
+            return cells;
+        }
+
     }
 }
