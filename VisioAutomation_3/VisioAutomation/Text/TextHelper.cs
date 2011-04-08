@@ -339,22 +339,23 @@ namespace VisioAutomation.Text
             }
         }
 
-        private static readonly VA.Text.ParagraphFormatQuery paraquery = new VA.Text.ParagraphFormatQuery();
+        public static IList<List<ParagraphFormatCells>> GetParagraphFormat(IVisio.Page page, IList<int> shapeids)
+        {
+            return ParagraphFormatCells.GetCells(page,shapeids);
+        }
 
-        //TODO: Add Unit Test
         public static IList<ParagraphFormatCells> GetParagraphFormat(IVisio.Shape shape)
         {
             return ParagraphFormatCells.GetCells(shape);
         }
 
+        public static IList<List<VA.Text.CharacterFormatCells>> GetCharacterFormat(IVisio.Page page, IList<int> shapeids)
+        {
+            return VA.Text.CharacterFormatCells.GetCells(page,shapeids);
+        }
 
         public static IList<VA.Text.CharacterFormatCells> GetCharacterFormat(IVisio.Shape shape)
         {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
             return VA.Text.CharacterFormatCells.GetCells(shape);
         }
 

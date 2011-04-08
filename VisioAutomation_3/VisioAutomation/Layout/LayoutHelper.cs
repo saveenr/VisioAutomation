@@ -360,24 +360,23 @@ namespace VisioAutomation.Layout
 
         public static VA.Layout.XFormCells GetXForm(IVisio.Shape shape)
         {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
             return XFormCells.GetCells(shape);
         }
 
         public static IList<VA.Layout.XFormCells> GetXForm(IVisio.Page page, IList<int> shapeids)
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException("page");
-            }
-
             return XFormCells.GetCells(page, shapeids);
         }
 
+        public static VA.Layout.LockCells GetLock(IVisio.Shape shape)
+        {
+            return LockCells.GetCells(shape);
+        }
+
+        public static IList<VA.Layout.LockCells> GetLock(IVisio.Page page, IList<int> shapeids)
+        {
+            return LockCells.GetCells(page, shapeids);
+        }
 
         public static void SendShapes( IVisio.Selection selection, VA.Layout.ShapeSendDirection dir)
         {
