@@ -41,13 +41,13 @@ namespace VisioAutomation.Controls
             return cells;
         }
 
-        public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        internal static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ControlQuery();
             return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
         }
 
-        public static IList<ControlCells> GetCells(IVisio.Shape shape)
+        internal static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = new ControlQuery();
             return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
