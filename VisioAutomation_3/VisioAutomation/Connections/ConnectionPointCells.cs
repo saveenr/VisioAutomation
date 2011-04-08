@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VisioAutomation.Connections
 {
-    public class ConnectionPointCells
+    public class ConnectionPointCells : VA.ShapeSheet.CellSectionDataGroup
     {
         public VA.ShapeSheet.CellData<double> X { get; set; }
         public VA.ShapeSheet.CellData<double> Y { get; set; }
@@ -16,45 +16,43 @@ namespace VisioAutomation.Connections
 
         internal readonly static VA.Connections.ConnectionPointQuery query = new VA.Connections.ConnectionPointQuery();
 
+        [System.Obsolete]
         public static IList<ConnectionPointCells> GetConnectionPoints(IVisio.Shape shape)
         {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
-            var qds = query.GetFormulasAndResults<double>(shape);
-
-            var connectionpoints = new List<ConnectionPointCells>(qds.RowCount);
-            for (int row = 0; row < qds.RowCount; row++)
-            {
-                var connectionpoint = new ConnectionPointCells();
-                connectionpoint.X = qds.GetItem(row, query.X);
-                connectionpoint.Y = qds.GetItem(row, query.Y);
-                connectionpoint.DirX = qds.GetItem(row, query.DirX, v => (int)v);
-                connectionpoint.DirY = qds.GetItem(row, query.DirY, v => (int)v);
-                connectionpoint.Type = qds.GetItem(row, query.Type, v => (int)v);
-                connectionpoints.Add(connectionpoint);
-            }
-
-            return connectionpoints;
+            return ConnectionPointCells.GetCells(shape);
         }
 
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short n)
+        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
         {
-            var cp = this;
-            var src_x = ConnectionPointCells.query.GetCellSRCForRow(ConnectionPointCells.query.X, n);
-            var src_y = ConnectionPointCells.query.GetCellSRCForRow(ConnectionPointCells.query.Y, n);
-            var src_dirx = ConnectionPointCells.query.GetCellSRCForRow(ConnectionPointCells.query.DirX, n);
-            var src_diry = ConnectionPointCells.query.GetCellSRCForRow(ConnectionPointCells.query.DirY, n);
-            var src_type = ConnectionPointCells.query.GetCellSRCForRow(ConnectionPointCells.query.Type, n);
-
-            update.SetFormula(src_x, cp.X.Formula);
-            update.SetFormula(src_y, cp.Y.Formula);
-            update.SetFormulaIgnoreNull(src_dirx, cp.DirX.Formula);
-            update.SetFormulaIgnoreNull(src_diry, cp.DirY.Formula);
-            update.SetFormulaIgnoreNull(src_type, cp.Type.Formula);
+            func(VA.ShapeSheet.SRCConstants.Connections_X.ForRow(row), this.X.Formula);
+            func(VA.ShapeSheet.SRCConstants.Connections_Y.ForRow(row), this.Y.Formula);
+            func(VA.ShapeSheet.SRCConstants.Connections_DirX.ForRow(row), this.DirX.Formula);
+            func(VA.ShapeSheet.SRCConstants.Connections_DirY.ForRow(row), this.DirY.Formula);
+            func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
         }
 
+        private static ConnectionPointCells get_cells_from_row(ConnectionPointQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        {
+            var cells = new ConnectionPointCells();
+            cells.X = qds.GetItem(row, query.X);
+            cells.Y = qds.GetItem(row, query.Y);
+            cells.DirX = qds.GetItem(row, query.DirX, v => (int)v);
+            cells.DirY = qds.GetItem(row, query.DirY, v => (int)v);
+            cells.Type = qds.GetItem(row, query.Type, v => (int)v);
+
+            return cells;
+        }
+
+        public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        {
+            var query = new ConnectionPointQuery();
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
+        }
+
+        public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
+        {
+            var query = new ConnectionPointQuery();
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
+        }
     }
 }
