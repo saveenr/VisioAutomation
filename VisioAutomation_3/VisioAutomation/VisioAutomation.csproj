@@ -75,6 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connections\ConnectorArrowEdgeHandling.cs" />
+    <Compile Include="Connections\ConnectionPointType.cs" />
+    <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="CustomProperties\Calendar.cs" />
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
