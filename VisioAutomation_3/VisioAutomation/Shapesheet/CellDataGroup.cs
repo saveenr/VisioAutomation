@@ -68,7 +68,7 @@ namespace VisioAutomation.ShapeSheet
                 var cells_list = new List<TCells>(group.Count);
                 if (group.Count > 0)
                 {
-                    for (int i = 0; i < qds.RowCount; i++)
+                    for (int i = group.StartRow; i <= group.EndRow; i++)
                     {
                         var cells = row_to_cells_func(query, qds, i);
                         cells_list.Add(cells);

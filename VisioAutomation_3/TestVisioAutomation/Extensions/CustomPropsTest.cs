@@ -165,8 +165,8 @@ namespace TestVisioAutomation
             CustomPropertyHelper.SetCustomProperty(s4, "FOO5", "5");
             CustomPropertyHelper.SetCustomProperty(s4, "FOO6", "6");
 
-            var shapeids = new[] {s1, s2, s3, s4};
-            var allprops = CustomPropertyHelper.GetCustomProperties(page1, shapeids);
+            var shapes = new[] {s1, s2, s3, s4};
+            var allprops = CustomPropertyHelper.GetCustomProperties(page1, shapes);
 
             Assert.AreEqual(4, allprops.Count);
             Assert.AreEqual(1, allprops[0].Count);

@@ -1,9 +1,11 @@
 ﻿using VA=VisioAutomation;
 using VisioAutomation.Extensions;
+using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.CustomProperties
 {
-    public class CustomPropertyCells
+    public class CustomPropertyCells : VA.ShapeSheet.CellSectionDataGroup
     {
         public VA.ShapeSheet.CellData<double> Value{ get; set; }
         public VA.ShapeSheet.CellData<double> Prompt { get; set; }
@@ -27,8 +29,8 @@ namespace VisioAutomation.CustomProperties
         {
             this.Value = value;
         }
-
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
+        
+        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
         {
             var cp = this;
 
@@ -37,16 +39,43 @@ namespace VisioAutomation.CustomProperties
             string str_format = cp.Format.Formula.HasValue ? cp.Format.Formula.Encode() : null;
             string str_prompt = cp.Prompt.Formula.HasValue ? cp.Prompt.Formula.Encode() : null;
 
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.Label, row), str_label);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.Value, row), str_value);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.Format, row), str_format);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.Prompt, row), str_prompt);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.Calendar, row), cp.Calendar.Formula);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.LangID, row), cp.LangId.Formula);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.SortKey, row), cp.SortKey.Formula);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.Invis, row), cp.Invisible.Formula);
-            update.SetFormulaIgnoreNull(CustomPropertyCells.custprop_query.GetCellSRCForRow(CustomPropertyCells.custprop_query.Type, row), cp.Type.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(row), str_label);
+            func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow( row), str_value);
+            func(VA.ShapeSheet.SRCConstants.Prop_Format.ForRow( row), str_format);
+            func(VA.ShapeSheet.SRCConstants.Prop_Prompt.ForRow( row), str_prompt);
+            func(VA.ShapeSheet.SRCConstants.Prop_Calendar.ForRow( row), cp.Calendar.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_LangID.ForRow( row), cp.LangId.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_SortKey.ForRow( row), cp.SortKey.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_Invisible.ForRow( row), cp.Invisible.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_Type.ForRow( row), cp.Type.Formula);
         }
 
+        public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        {
+            var query = new CustomPropertyQuery();
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
+        }
+
+        public static IList<CustomPropertyCells> GetCells(IVisio.Shape shape)
+        {
+            var query = new CustomPropertyQuery();
+            return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
+        }
+
+        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        {
+            var cells = new CustomPropertyCells();
+
+            cells.Value = qds.GetItem(row, CustomPropertyCells.custprop_query.Value);
+            cells.Calendar = qds.GetItem(row, CustomPropertyCells.custprop_query.Calendar, v => (VA.CustomProperties.Calendar)v);
+            cells.Format = qds.GetItem(row, CustomPropertyCells.custprop_query.Format);
+            cells.Invisible = qds.GetItem(row, CustomPropertyCells.custprop_query.Invis, v => (int)v);
+            cells.Label = qds.GetItem(row, CustomPropertyCells.custprop_query.Label);
+            cells.LangId = qds.GetItem(row, CustomPropertyCells.custprop_query.LangID, v => (int)v);
+            cells.Prompt = qds.GetItem(row, CustomPropertyCells.custprop_query.Prompt);
+            cells.SortKey = qds.GetItem(row, CustomPropertyCells.custprop_query.SortKey, v => (int)v);
+            cells.Type = qds.GetItem(row, CustomPropertyCells.custprop_query.Type, v => (VA.CustomProperties.Format)((int)v));
+            return cells;
+        }
     }
 }

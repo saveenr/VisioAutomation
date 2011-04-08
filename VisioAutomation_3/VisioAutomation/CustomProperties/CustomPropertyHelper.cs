@@ -92,22 +92,17 @@ namespace VisioAutomation.CustomProperties
         /// <returns>A list of custom properties</returns>
         public static IDictionary<string, CustomPropertyCells> GetCustomProperties(Shape shape)
         {
-            var qds = CustomPropertyCells.custprop_query.GetFormulasAndResults<double>(shape);
-
             var prop_names = GetCustomPropertyNames(shape);
-            if (prop_names.Count != qds.RowCount)
+            var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
+            var cells = CustomPropertyCells.GetCells(shape);
+
+            for (int prop_index = 0; prop_index < prop_names.Count(); prop_index++)
             {
-                throw new AutomationException("Unexpected number of prop names");
+                string prop_name = prop_names[prop_index];
+                dic[prop_name] = cells[prop_index];
             }
 
-            var rows = new List<int>(qds.RowCount);
-            for (int row = 0; row < qds.RowCount; row++)
-            {
-                rows.Add(row);
-            }
-            var custom_props = get_custom_props(prop_names, qds, rows);
-
-            return custom_props;
+            return dic;
         }
 
         public static IList<Dictionary<string, CustomPropertyCells>> GetCustomProperties(Page page, IList<Shape> shapes)
@@ -123,57 +118,37 @@ namespace VisioAutomation.CustomProperties
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-
-            var qds = CustomPropertyCells.custprop_query.GetFormulasAndResults<double>(page, shapeids);
-
             var customprops = new List<Dictionary<string, CustomPropertyCells>>(shapeids.Count);
+            var cells_list = CustomPropertyCells.GetCells(page, shapeids);
+            
+            if (cells_list.Count!=shapeids.Count)
+            {
+                throw new VA.AutomationException("1");
+            }
+
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
-                var group = qds.Formulas.Groups[shape_index];
-                var group_rows = group.RowIndices.ToList();
-                var shape = shapes.ElementAt(shape_index);
+                var shape = shapes[shape_index];
+                var cells = cells_list[shape_index];
                 var prop_names = GetCustomPropertyNames(shape);
-                var customprops_for_shape = get_custom_props(prop_names, qds, group_rows);
-                customprops.Add(customprops_for_shape);
+
+                if (cells.Count != prop_names.Count)
+                {
+                    throw new VA.AutomationException("2");
+                }
+
+                var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
+                
+                for (int prop_index=0; prop_index< prop_names.Count(); prop_index++)
+                {
+                    string prop_name = prop_names[prop_index];
+                    dic[prop_name] = cells[prop_index];
+                }
+
+                customprops.Add(dic);
             }
 
             return customprops;
-        }
-
-        public static Dictionary<string, CustomPropertyCells> get_custom_props(IList<string> prop_names, VA.ShapeSheet.Query.QueryDataSet<double> qds, IList<int> group_rows)
-        {
-            if (prop_names.Count != group_rows.Count)
-            {
-                throw new AutomationException("Different number of names and result rows");
-            }
-
-            int num_props = prop_names.Count;
-            var custom_properties = new Dictionary<string, CustomPropertyCells>(num_props);
-
-
-            int prop_index = 0;
-            foreach (int row in group_rows)
-            {
-                var prop_name = prop_names[prop_index];
-
-                var cp = new CustomPropertyCells();
-
-                cp.Value = qds.GetItem(row, CustomPropertyCells.custprop_query.Value);
-                cp.Calendar = qds.GetItem(row, CustomPropertyCells.custprop_query.Calendar, v => (VA.CustomProperties.Calendar)v);
-                cp.Format = qds.GetItem(row, CustomPropertyCells.custprop_query.Format);
-                cp.Invisible = qds.GetItem(row, CustomPropertyCells.custprop_query.Invis, v => (int)v);
-                cp.Label = qds.GetItem(row, CustomPropertyCells.custprop_query.Label);
-                cp.LangId = qds.GetItem(row, CustomPropertyCells.custprop_query.LangID, v => (int)v);
-                cp.Prompt = qds.GetItem(row, CustomPropertyCells.custprop_query.Prompt);
-                cp.SortKey = qds.GetItem(row, CustomPropertyCells.custprop_query.SortKey, v => (int)v);
-                cp.Type = qds.GetItem(row, CustomPropertyCells.custprop_query.Type, v => (VA.CustomProperties.Format)((int)v));
-
-                custom_properties[prop_name] = cp;
-
-                prop_index++;
-            }
-
-            return custom_properties;
         }
 
         public static int GetCustomPropertyCount(Shape shape)
