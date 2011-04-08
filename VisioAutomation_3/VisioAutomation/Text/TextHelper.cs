@@ -383,23 +383,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException("shape");
             }
 
-            var qds = charquery.GetFormulasAndResults<double>(shape);
-
-            var char_fmts = new List<CharacterFormatCells>();
-
-            for (int row = 0; row < qds.RowCount; row++)
-            {
-                var fmt = new CharacterFormatCells();
-
-                fmt.Color = qds.GetItem(row, charquery.Color, v => (int) v);
-                fmt.Transparency = qds.GetItem(row, charquery.Trans);
-                fmt.Font = qds.GetItem(row, charquery.Font, v => (int) v);
-                fmt.Size = qds.GetItem(row, charquery.Size);
-                fmt.Style = qds.GetItem(row, charquery.Style, v => (VA.Text.CharStyle) ((int) v));
-                char_fmts.Add(fmt);
-            }
-
-            return char_fmts;
+            return VA.Text.CharacterFormatCells.GetCells(shape);
         }
 
         private const short char_section = (short) IVisio.VisSectionIndices.visSectionCharacter;
