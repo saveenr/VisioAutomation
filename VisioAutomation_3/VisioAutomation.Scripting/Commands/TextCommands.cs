@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Text;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -315,6 +316,34 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
+        }
+
+        public IList<List<VA.Text.CharacterFormatCells>> GetCharacterFormat()
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return new List<List<CharacterFormatCells>>(0);
+            }
+
+            var selection = this.Session.Selection.GetSelection();
+            var shapeids = selection.GetIDs();
+            var application = this.Session.VisioApplication;
+            var formats = VA.Text.TextHelper.GetCharacterFormat(application.ActivePage, shapeids);
+            return formats;
+        }
+
+        public IList<List<VA.Text.ParagraphFormatCells>> GetParagraphFormat()
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return new List<List<ParagraphFormatCells>>(0);
+            }
+
+            var selection = this.Session.Selection.GetSelection();
+            var shapeids = selection.GetIDs();
+            var application = this.Session.VisioApplication;
+            var formats = VA.Text.TextHelper.GetParagraphFormat(application.ActivePage, shapeids);
+            return formats;
         }
     }
 }
