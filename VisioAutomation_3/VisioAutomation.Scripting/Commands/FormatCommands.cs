@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using VisioAutomation.Extensions;
 using System.Linq;
 using VA=VisioAutomation;
-
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -40,7 +38,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (n < 1)
             {
-                throw new ArgumentOutOfRangeException("n");
+                throw new System.ArgumentOutOfRangeException("n");
             }
             if (!this.Session.HasSelectedShapes())
             {

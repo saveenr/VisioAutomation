@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -37,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
                 var layers = page.Layers;
                 layer = layers.ItemU[layername];
             }
-            catch (COMException)
+            catch (System.Runtime.InteropServices.COMException)
             {
                 string msg = String.Format("No such layer \"{0}\"", layername);
                 throw new AutomationException(msg);

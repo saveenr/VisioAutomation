@@ -1,4 +1,3 @@
-using System;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VA =VisioAutomation;
@@ -36,12 +35,12 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (padding_scale < 0.0)
             {
-                throw new ArgumentOutOfRangeException("padding_scale");
+                throw new System.ArgumentOutOfRangeException("padding_scale");
             }
 
             if (padding_scale > 1.0)
             {
-                throw new ArgumentOutOfRangeException("padding_scale");
+                throw new System.ArgumentOutOfRangeException("padding_scale");
             }
 
             var app = window.Application;

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Text;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -293,7 +291,7 @@ namespace VisioAutomation.Scripting.Commands
                 var src_Char_Font = VA.ShapeSheet.SRCConstants.Char_Font;
 
                 var cell_font = style.CellsSRC[src_Char_Font.Section, src_Char_Font.Row, src_Char_Font.Cell];
-                cell_font.FormulaU = font.ID.ToString(CultureInfo.InvariantCulture);                
+                cell_font.FormulaU = font.ID.ToString(System.Globalization.CultureInfo.InvariantCulture);                
             }
         }
 
@@ -322,7 +320,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (!this.Session.HasSelectedShapes())
             {
-                return new List<List<CharacterFormatCells>>(0);
+                return new List<List<VA.Text.CharacterFormatCells>>(0);
             }
 
             var selection = this.Session.Selection.GetSelection();
@@ -336,7 +334,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (!this.Session.HasSelectedShapes())
             {
-                return new List<List<ParagraphFormatCells>>(0);
+                return new List<List<VA.Text.ParagraphFormatCells>>(0);
             }
 
             var selection = this.Session.Selection.GetSelection();

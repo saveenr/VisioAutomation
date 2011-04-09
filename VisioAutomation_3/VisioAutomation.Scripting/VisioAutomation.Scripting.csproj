@@ -81,7 +81,6 @@
     <Compile Include="XmlUtil.cs" />
     <Compile Include="ShapeSheetUpdate.cs" />
     <Compile Include="Commands\ApplicationCommands.cs" />
-    <Compile Include="FlowChart\MySequenceNumberGenerator.cs" />
     <Compile Include="SessionCommands.cs" />
     <Compile Include="Commands\SelectionCommands.cs" />
     <Compile Include="Commands\LayoutCommands.cs" />

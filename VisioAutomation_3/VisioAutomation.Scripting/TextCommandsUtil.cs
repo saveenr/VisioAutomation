@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -26,7 +25,7 @@ namespace VisioAutomation.Scripting
             }
             else if (input_string == t_lower)
             {
-                var cultureInfo = Thread.CurrentThread.CurrentCulture;
+                var cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
                 var textInfo = cultureInfo.TextInfo;
                 var t_case = textInfo.ToTitleCase(input_string);
 

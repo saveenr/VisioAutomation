@@ -1,6 +1,5 @@
-using System.Diagnostics;
 using System.Linq;
-using System.Xml.Linq;
+using SXL=System.Xml.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -100,8 +99,8 @@ namespace VisioAutomation.Scripting.Commands
             string svg_filename = SaveSelectionAsTemporarySVG();
 
             // Load temp SVG
-            var load_svg_timer = new Stopwatch();
-            var svg_doc = XDocument.Load(svg_filename);
+            var load_svg_timer = new System.Diagnostics.Stopwatch();
+            var svg_doc = SXL.XDocument.Load(svg_filename);
             load_svg_timer.Stop();
             this.Session.Write(OutputStream.Verbose, "Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds);
 
@@ -117,13 +116,13 @@ namespace VisioAutomation.Scripting.Commands
                 System.IO.File.Delete(filename);
             }
 
-            var xhtml_doc = new XDocument();
-            var xhtml_root = new XElement("{http://www.w3.org/1999/xhtml}html");
+            var xhtml_doc = new SXL.XDocument();
+            var xhtml_root = new SXL.XElement("{http://www.w3.org/1999/xhtml}html");
             xhtml_doc.Add(xhtml_root);
             var svg_node = svg_doc.Root;
             svg_node.Remove();
 
-            var body = new XElement("{http://www.w3.org/1999/xhtml}body");
+            var body = new SXL.XElement("{http://www.w3.org/1999/xhtml}body");
             xhtml_root.Add(body);
             body.Add(svg_node);
 
@@ -156,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
                 System.IO.File.Delete(svg_filename);
             }
 
-            var export_timer = new Stopwatch();
+            var export_timer = new new System.Diagnostics.Stopwatch();
 
             this.Session.Write(OutputStream.Verbose, "Started SVG export to \"{0}\"", svg_filename);
 

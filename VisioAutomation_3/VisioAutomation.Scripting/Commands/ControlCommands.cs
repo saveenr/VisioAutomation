@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -37,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (ctrl == null)
             {
-                throw new ArgumentNullException("ctrl");
+                throw new System.ArgumentNullException("ctrl");
             }
 
             var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
