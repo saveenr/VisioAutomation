@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioAutomation
+namespace VisioAutomation.Layout
 {
 
     public class PageQuery : VA.ShapeSheet.Query.CellQuery

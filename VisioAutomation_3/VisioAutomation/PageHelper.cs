@@ -10,77 +10,6 @@ namespace VisioAutomation
 
     public static class PageHelper
     {
-        private static VA.ShapeSheet.SRC src_rulergrid_prop(IVisio.VisCellIndices ci)
-        {
-            return new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowRulerGrid, ci);
-        }
-
-        private static VA.ShapeSheet.SRC src_page_prop(IVisio.VisCellIndices ci)
-        {
-            return new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowPage, ci);
-        }
-
-        private static VA.ShapeSheet.SRC src_pagelayout_prop(IVisio.VisCellIndices ci)
-        {
-            return new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowPageLayout, ci);
-        }
-
-        private static readonly VA.ShapeSheet.SRC[] page_cells_to_copy = new []
-            {
-                src_page_prop( IVisio.VisCellIndices.visPageDrawingScale),
-                src_page_prop( IVisio.VisCellIndices.visPageDrawScaleType),
-                src_page_prop( IVisio.VisCellIndices.visPageDrawSizeType),
-                src_page_prop( IVisio.VisCellIndices.visPageInhibitSnap),
-                src_page_prop( IVisio.VisCellIndices.visPageHeight),
-                src_page_prop( IVisio.VisCellIndices.visPageScale),
-                src_page_prop( IVisio.VisCellIndices.visPageWidth),
-                src_page_prop( IVisio.VisCellIndices.visPageShdwObliqueAngle ),
-                src_page_prop( IVisio.VisCellIndices.visPageShdwOffsetX),
-                src_page_prop( IVisio.VisCellIndices.visPageShdwOffsetY),
-                src_page_prop( IVisio.VisCellIndices.visPageShdwScaleFactor),
-                src_page_prop( IVisio.VisCellIndices.visPageShdwType),
-                src_page_prop( IVisio.VisCellIndices.visPageUIVisibility),
-
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOAvenueSizeX),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOAvenueSizeY),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOBlockSizeX),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOBlockSizeY),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOCtrlAsInput),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLODynamicsOff),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOEnableGrid),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOLineAdjustFrom),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOLineAdjustTo),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOJumpCode),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOJumpFactorX),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOJumpFactorY),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOJumpStyle),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOLineRouteExt),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOLineToLineX),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOLineToLineY),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOLineToNodeX),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOLineToNodeY),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOJumpDirX),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOJumpDirY),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOSplit),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOPlaceDepth),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOPlaceFlip),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOPlaceStyle),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOPlowCode),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLOResizePage),
-                src_pagelayout_prop( IVisio.VisCellIndices.visPLORouteStyle),
-
-                src_rulergrid_prop( IVisio.VisCellIndices.visXGridDensity),
-                src_rulergrid_prop( IVisio.VisCellIndices.visXGridOrigin),
-                src_rulergrid_prop( IVisio.VisCellIndices.visXGridSpacing),
-                src_rulergrid_prop( IVisio.VisCellIndices.visXRulerDensity),
-                src_rulergrid_prop( IVisio.VisCellIndices.visXRulerOrigin),
-                src_rulergrid_prop( IVisio.VisCellIndices.visYGridDensity),
-                src_rulergrid_prop( IVisio.VisCellIndices.visYGridOrigin),
-                src_rulergrid_prop( IVisio.VisCellIndices.visYGridSpacing),
-                src_rulergrid_prop( IVisio.VisCellIndices.visYRulerDensity),
-                src_rulergrid_prop( IVisio.VisCellIndices.visYRulerOrigin),
-            };
-
         public static void SetBackgroundPage(IVisio.Page fgpage, IVisio.Page bgpage)
         {
             if (fgpage == null)
@@ -128,25 +57,22 @@ namespace VisioAutomation
             }
 
             var src_pagesheet = src_page.PageSheet;
+            var dest_pagesheet = dest_page.PageSheet;
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            foreach (var src in page_cells_to_copy)
-            {
-                query.AddColumn(src);
-            }
+            // Collect the cells from the source page
+            var pagecells = VA.Layout.PageCells.GetCells(src_pagesheet);
 
-            var formulas = query.GetFormulas(src_pagesheet);
+            // Set them on the destination page
             var update = new VA.ShapeSheet.Update.SRCUpdate();
-            for (int row = 0; row < formulas.Rows.Count; row++)
-            {
-                for (int i = 0; i < formulas.Columns.Count; i++)
-                {
-                    var src = page_cells_to_copy[i];
-                    update.SetFormula(src, formulas[row, i]);
-                }
-            }
+            pagecells.Apply(update);
+            update.Execute(dest_pagesheet);
+        }
 
-            update.Execute(src_pagesheet);
+        public static VA.Layout.PageCells GetPageCells(IVisio.Page page)
+        {
+            var pagesheet = page.PageSheet;
+            var pagecells = VA.Layout.PageCells.GetCells(pagesheet);
+            return pagecells;
         }
 
         public static IVisio.Page Duplicate(IVisio.Page page)
