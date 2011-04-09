@@ -113,7 +113,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                throw new ArgumentOutOfRangeException("zoom");
+                throw new System.ArgumentOutOfRangeException("zoom");
             }            
         }
     }

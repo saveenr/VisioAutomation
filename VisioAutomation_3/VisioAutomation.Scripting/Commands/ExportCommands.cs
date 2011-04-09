@@ -155,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
                 System.IO.File.Delete(svg_filename);
             }
 
-            var export_timer = new new System.Diagnostics.Stopwatch();
+            var export_timer = new System.Diagnostics.Stopwatch();
 
             this.Session.Write(OutputStream.Verbose, "Started SVG export to \"{0}\"", svg_filename);
 

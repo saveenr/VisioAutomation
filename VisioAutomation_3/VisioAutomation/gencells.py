@@ -82,6 +82,75 @@ double |   Char_Size              |   CharSize
 int    |   TextBkgnd             |   TextBkgnd
 double |   TextBkgndTrans        |   TextBkgndTrans
 """
+
+PAGECELLS="""
+double| PageLeftMargin          | PageLeftMargin
+double| CenterX                 | CenterX
+double| CenterY                 | CenterY
+int   | OnPage                  | OnPage
+double| PageBottomMargin        | PageBottomMargin
+double| PageRightMargin         | PageRightMargin
+double| PagesX                  | PagesX
+double| PagesY                  | PagesY
+double| PageTopMargin           | PageTopMargin
+int   | PaperKind               | PaperKind
+int   | PrintGrid               | PrintGrid
+int   | PrintPageOrientation    | PrintPageOrientation
+double| ScaleX                  | ScaleX
+double| ScaleY                  | ScaleY
+int   | PaperSource             | PaperSource
+double| DrawingScale            | DrawingScale
+int   | DrawingScaleType        | DrawingScaleType
+int   | DrawingSizeType         | DrawingSizeType
+int   | InhibitSnap             | InhibitSnap
+double| PageHeight              | PageHeight
+double| PageScale               | PageScale
+double| PageWidth               | PageWidth
+double| ShdwObliqueAngle        | ShdwObliqueAngle
+double| ShdwOffsetX             | ShdwOffsetX
+double| ShdwOffsetY             | ShdwOffsetY
+double| ShdwScaleFactor         | ShdwScaleFactor
+int   | ShdwType                | ShdwType
+double| UIVisibility            | UIVisibility
+double| XGridDensity            | XGridDensity
+double| XGridOrigin             | XGridOrigin
+double| XGridSpacing            | XGridSpacing
+double| XRulerDensity           | XRulerDensity
+double| XRulerOrigin            | XRulerOrigin
+double| YGridDensity            | YGridDensity
+double| YGridOrigin             | YGridOrigin
+double| YGridSpacing            | YGridSpacing
+double| YRulerDensity           | YRulerDensity
+double| YRulerOrigin            | YRulerOrigin
+double| AvenueSizeX             | AvenueSizeX
+double| AvenueSizeY             | AvenueSizeY
+double| BlockSizeX              | BlockSizeX
+double| BlockSizeY              | BlockSizeY
+int   | CtrlAsInput             | CtrlAsInput
+int   | DynamicsOff             | DynamicsOff
+int   | EnableGrid              | EnableGrid
+int   | LineAdjustFrom          | LineAdjustFrom
+double| LineAdjustTo            | LineAdjustTo
+double| LineJumpCode            | LineJumpCode
+double| LineJumpFactorX         | LineJumpFactorX
+double| LineJumpFactorY         | LineJumpFactorY
+int   | LineJumpStyle           | LineJumpStyle
+double| LineRouteExt            | LineRouteExt
+double| LineToLineX             | LineToLineX
+double| LineToLineY             | LineToLineY
+double| LineToNodeX             | LineToNodeX
+double| LineToNodeY             | LineToNodeY
+double| PageLineJumpDirX        | PageLineJumpDirX
+double| PageLineJumpDirY        | PageLineJumpDirY
+int   | PageShapeSplit          | PageShapeSplit
+int   | PlaceDepth              | PlaceDepth
+int   | PlaceFlip               | PlaceFlip
+int   | PlaceStyle              | PlaceStyle
+int   | PlowCode                | PlowCode
+int   | ResizePage              | ResizePage
+int   | RouteStyle              | RouteStyle
+"""
+
 def printtop() :
     print """
 using System;
@@ -101,7 +170,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     printtop()
 
     if (qt=="Cell") :
-        baseclassname = "VA.ShapeSheet.DataGroup"
+        baseclassname = "VA.ShapeSheet.CellDataGroup"
     else :
         baseclassname = "VA.ShapeSheet.CellSectionDataGroup"
 
@@ -124,7 +193,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
     print
     if (qt=="Cell") :
-        print "    internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)"
+        print "    protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)"
     elif (qt=="Section") :
         print "    internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func, short row)"
     print "    {"
@@ -202,8 +271,9 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
 
 #gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
-gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
+#gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
 #gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
 #gencode_for_cells(SHAPEFORMAT, "ShapeFormatCells", "ShapeFormatQuery","Cell","")
+gencode_for_cells(PAGECELLS, "PageCells", "PageQuery","Cell","")
 
     
