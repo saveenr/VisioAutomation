@@ -100,9 +100,15 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
     printtop()
 
+    if (qt=="Cell") :
+        baseclassname = "VA.ShapeSheet.DataGroup"
+    else :
+        baseclassname = "VA.ShapeSheet.CellSectionDataGroup"
+
     print "----------------------------------"
-    print "public partial class", classname
+    print "public partial class " + classname + " : " + baseclassname
     print "{"
+
 
     data = []
     for line in lines :
@@ -112,52 +118,51 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
         cellname = tokens[2]
         data.append((celltype,cellsrc,cellname))
         
-        print "public VA.ShapeSheet.CellData<", celltype, ">" , cellname, "{ get; set; }"
+        print "    public VA.ShapeSheet.CellData<"+celltype+"> " + cellname + " { get; set; }"
 
+
+
+    print
     if (qt=="Cell") :
-        print """
-                public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
-                {
-                    this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f));
-                }
-
-                public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
-                {
-                    this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
-                }
-        """
+        print "    internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)"
     elif (qt=="Section") :
-        
-        print """
-            public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
-            {
-                this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
-            }
-
-            public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id, short row )
-            {
-                this._Apply((src, f) => update.SetFormulaIgnoreNull(id, src, f), row);
-            }
-        """
-
-
-
-
-    if (qt=="Cell") :
-        print "internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func)"
-    elif (qt=="Section") :
-        print "internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func, short row)"
-
-
-    print "{"
-
+        print "    internal void _Apply( System.Action<VA.ShapeSheet.SRC,VA.ShapeSheet.FormulaLiteral> func, short row)"
+    print "    {"
     for celltype,cellsrc,cellname in data:
         if (qt=="Cell") :
             print"            func(ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula);"
         elif (qt=="Section") :
             print"            func(VA.ShapeSheet.SRCConstants.", cellsrc , ".ForRow(row) , this." , cellname , ".Formula);"
 
-    print "}"    
+    print "    }"
+
+    print
+    print "   private static " + classname + " get_cells_from_row","(" , queryname, "query,VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)"
+    print "   {"
+    print "      var cells = new ", classname,"();"
+    for celltype,cellsrc,cellname in data:
+        x = ""
+        if ( celltype=="int") : x = ",v => (int)v"
+        elif ( celltype=="bool") : x = ",v => (bool)v"
+        print "      cells.", cellname, "= qds.GetItem(row, query." ,cellname, x ,");"
+    print "      return cells;"
+    print "   }"
+
+
+    print
+    print "    internal static IList<", classname , "> GetCells(IVisio.Page page, IList<int> shapeids)"
+    print "    {"
+    print "      var query = new ", queryname,"();"
+    print "      return " + baseclassname + "._GetCells(page, shapeids, query, get_cells_from_row);"
+    print "    }"
+    print
+
+    print "    internal static ", classname , " GetCells(IVisio.Shape shape)"
+    print "    {"
+    print "      var query = new ", queryname,"();"
+    print "      return " + baseclassname + "._GetCells(shape, query, get_cells_from_row);"
+    print "    }"
+    print
 
     print "}"    
 
@@ -168,18 +173,18 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     print "public class", queryname, ": VA.ShapeSheet.Query." + qt + "Query"
     print "{"
     for celltype,cellsrc,cellname in data:
-        print"            public VA.ShapeSheet.Query." + qt + "QueryColumn", cellname , " {get; set;}"
+        print"   public VA.ShapeSheet.Query." + qt + "QueryColumn", cellname , " {get; set;}"
 
     print
-    print "public ",queryname,"() :"
+    print "    public ",queryname,"() :"
     print "            base(IVisio.VisSectionIndices.",si,")"
-    print "{"    
+    print "    {"
     for celltype,cellsrc,cellname in data:
         if (qt=="Cell"):
-            print "    this.", cellname," = this.AddColumn(VA.ShapeSheet.SRCConstants.", cellsrc,", \""+cellname+"\");"
+            print "        this."+ cellname+" = this.AddColumn(VA.ShapeSheet.SRCConstants.", cellsrc,", \""+cellname+"\");"
         elif (qt=="Section"):
-            print "    this.", cellname," = this.AddColumn(VA.ShapeSheet.SRCConstants.", cellsrc,".Cell, \""+cellname+"\");"
-    print "}"    
+            print "        this."+ cellname+" = this.AddColumn(VA.ShapeSheet.SRCConstants.", cellsrc,".Cell, \""+cellname+"\");"
+    print "    }"
 
     print 
     print "}"    
@@ -193,93 +198,12 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     for celltype,cellsrc,cellname in data:
         print"            public VA.ShapeSheet.Query." + qt + "QueryColumn", cellname , " {get; set;}"
 
-    print
-    print "private static ",classname, " get_" + classname + "_from_row","(" , queryname, "query,VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)"
-    print "{"
-    print "  var cells = new ", classname,"();"
-    for celltype,cellsrc,cellname in data:
-        x = ""
-        if ( celltype=="int") : x = ",v => (int)v"
-        elif ( celltype=="bool") : x = ",v => (bool)v"
-        print "   cells.", cellname, "= qds.GetItem(row, query." ,cellname, x ,");"
-    print "return cells;"
-    print "}"
 
-    if (qt=="Cell") :
-        print
-        print "public static IList<", classname , "> GetCells(IVisio.Page page, IList<int> shapeids)"
-        print "{"
-        print "  var query = new ", queryname,"();"
-        print "  var qds = query.GetFormulasAndResults<double>(page, shapeids);"
-        print "  var cells_list = new List<", classname,">(shapeids.Count);"
-        print "  for (int i = 0; i < qds.RowCount; i++)"
-        print "  {"
-        print "     var cells = get_" + classname + "_from_row(query, qds, i);"
-        print "     cells_list.Add( cells );"
-        print "  }"
-        print ""
-        print "  return cells_list;"
-        print "}"
-        print
 
-        print
-        print "public static ", classname , " GetCells(IVisio.Shape shape)"
-        print "{"
-        print "  var query = new ", queryname,"();"
-        print "  var qds = query.GetFormulasAndResults<double>(shape);"
-        print "  var cells = get_" + classname + "_from_row(query, qds, 0);"
-        print "  return cells;"
-        print "}"
-        print
-
-        print
-        print "}"
-
-    if (qt=="Section") :
-        print
-        print "public static IList<List<", classname , ">> GetCells(IVisio.Page page, IList<int> shapeids)"
-        print "{"
-        print "  var query = new ", queryname,"();"
-        print "  var qds = query.GetFormulasAndResults<double>(page, shapeids);"
-        print "  var list = new List<List<ControlCells>>(shapeids.Count);"
-        print "  foreach (var group in qds.Groups)"
-        print "  {"
-        print "     var cells_list = new List<",classname,">(group.Count);"
-        print "     if (group.Count>0)"
-        print "     {"
-        print "        for (int i = 0; i < qds.RowCount; i++)"
-        print "        {"
-        print "           var cells = get_" + classname + "_from_row(query, qds, i);"
-        print "           cells_list.Add( cells );"
-        print "        }"
-        print "     }"
-        print "     list.Add( cells_list );"
-        print "  }"
-        print "  return list;"
-        print "}"
-        print
-
-        print
-        print "public static IList<", classname , "> GetCells(IVisio.Shape shape)"
-        print "{"
-        print "  var query = new ", queryname,"();"
-        print "  var qds = query.GetFormulasAndResults<double>(shape);"
-        print "  var cells_list = new List<",classname,">(qds.RowCount);"
-        print "  for (int row = 0; row < qds.RowCount; row++)"
-        print "  {"
-        print "      var cells = get_" + classname + "_from_row(query, qds, row);"
-        print "      cells_list.Add(cells);"
-        print "  }"
-        print "  return cells_list;"
-        print "}"
-        print
-
-        print
-        print "}"
 
 #gencode_for_cells(XFORMCELLS, "XFormCells", "XFormQuery","Cell","")
-#gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
-gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
+gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
+#gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
 #gencode_for_cells(SHAPEFORMAT, "ShapeFormatCells", "ShapeFormatQuery","Cell","")
 
     
