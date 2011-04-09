@@ -21,13 +21,13 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(row), this.Transparency.Formula);
         }
 
-        public static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        internal static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new CharacterFormatQuery();
             return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
         }
 
-        public static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
+        internal static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new CharacterFormatQuery();
             return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);

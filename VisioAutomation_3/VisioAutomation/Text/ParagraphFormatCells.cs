@@ -32,13 +32,13 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Para_BulletSize.ForRow(row), this.BulletSize.Formula);
         }
 
-        public static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ParagraphFormatQuery();
             return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
         }
 
-        public static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
+        internal static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new ParagraphFormatQuery();
             return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
