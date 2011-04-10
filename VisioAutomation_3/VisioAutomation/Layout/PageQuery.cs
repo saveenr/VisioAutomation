@@ -7,7 +7,7 @@ using VA=VisioAutomation;
 namespace VisioAutomation.Layout
 {
 
-    public class PageQuery : VA.ShapeSheet.Query.CellQuery
+    class PageQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQueryColumn PageLeftMargin { get; set; }
         public VA.ShapeSheet.Query.CellQueryColumn CenterX { get; set; }

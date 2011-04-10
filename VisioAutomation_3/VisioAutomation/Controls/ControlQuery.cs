@@ -3,7 +3,7 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Controls
 {
-    public class ControlQuery : VA.ShapeSheet.Query.SectionQuery
+    class ControlQuery : VA.ShapeSheet.Query.SectionQuery
     {
         public VA.ShapeSheet.Query.SectionQueryColumn CanGlue { get; set; }
         public VA.ShapeSheet.Query.SectionQueryColumn Tip { get; set; }

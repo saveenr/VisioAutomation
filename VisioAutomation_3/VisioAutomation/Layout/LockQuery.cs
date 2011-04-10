@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace VisioAutomation.Layout
 {
 
-    public class LockQuery : VA.ShapeSheet.Query.CellQuery
+    class LockQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQueryColumn LockAspect { get; set; }
         public VA.ShapeSheet.Query.CellQueryColumn LockBegin { get; set; }

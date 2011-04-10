@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Layout
 {
-    public class XFormQuery : VA.ShapeSheet.Query.CellQuery
+     class XFormQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQueryColumn Width { get; set; }
         public VA.ShapeSheet.Query.CellQueryColumn Height { get; set; }
