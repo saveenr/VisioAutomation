@@ -199,9 +199,9 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
     print "    {"
     for celltype,cellsrc,cellname in data:
         if (qt=="Cell") :
-            print"            func(ShapeSheet.SRCConstants.", cellsrc , " , this." , cellname , ".Formula);"
+            print"            func(ShapeSheet.SRCConstants." + cellsrc + " , this." + cellname + ".Formula);"
         elif (qt=="Section") :
-            print"            func(VA.ShapeSheet.SRCConstants.", cellsrc , ".ForRow(row) , this." , cellname , ".Formula);"
+            print"            func(VA.ShapeSheet.SRCConstants."+ cellsrc + ".ForRow(row) , this." + cellname + ".Formula);"
 
     print "    }"
 
@@ -213,7 +213,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
         x = ""
         if ( celltype=="int") : x = ",v => (int)v"
         elif ( celltype=="bool") : x = ",v => (bool)v"
-        print "      cells.", cellname, "= qds.GetItem(row, query." ,cellname, x ,");"
+        print "      cells." + cellname+ "= qds.GetItem(row, query." , cellname, x ,");"
     print "      return cells;"
     print "   }"
 
@@ -235,8 +235,11 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
     print "}"    
 
-    print "----------------------------------"
-    printtop()
+    print "// ----------------------------------"
+    print "// ----------------------------------"
+    print "// ----------------------------------"
+    print "// ----------------------------------"
+    print "// ----------------------------------"
 
     print
     print "public class", queryname, ": VA.ShapeSheet.Query." + qt + "Query"
@@ -257,15 +260,6 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 
     print 
     print "}"    
-
-    print "----------------------------------"
-    printtop()
-
-    print
-    print "public static class", classname+"Helper"
-    print "{"
-    for celltype,cellsrc,cellname in data:
-        print"            public VA.ShapeSheet.Query." + qt + "QueryColumn", cellname , " {get; set;}"
 
 
 
