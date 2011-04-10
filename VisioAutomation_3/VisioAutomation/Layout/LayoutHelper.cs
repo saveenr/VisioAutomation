@@ -5,8 +5,13 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
+
 namespace VisioAutomation.Layout
 {
+
+
+
+
     public static class LayoutHelper
     {
         private static double GetPosition(VA.Layout.XFormCells xform, XFormPosition pos)
@@ -371,6 +376,16 @@ namespace VisioAutomation.Layout
         public static VA.Layout.LockCells GetLock(IVisio.Shape shape)
         {
             return LockCells.GetCells(shape);
+        }
+
+        public static IList<VA.Layout.ShapeLayoutCells> GetShapeLayout(IVisio.Page page, IList<int> shapeids)
+        {
+            return ShapeLayoutCells.GetCells(page, shapeids);
+        }
+
+        public static VA.Layout.ShapeLayoutCells GetShapeLayout(IVisio.Shape shape)
+        {
+            return ShapeLayoutCells.GetCells(shape);
         }
 
         public static IList<VA.Layout.LockCells> GetLock(IVisio.Page page, IList<int> shapeids)

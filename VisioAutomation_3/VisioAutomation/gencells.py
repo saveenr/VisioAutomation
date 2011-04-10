@@ -149,7 +149,28 @@ int   | PlaceStyle              | PlaceStyle
 int   | PlowCode                | PlowCode
 int   | ResizePage              | ResizePage
 int   | RouteStyle              | RouteStyle
+
 """
+
+SHAPELAYOUTCELLS="""
+int |      ConFixedCode            |  ConFixedCode
+int |      ConLineJumpCode         |  ConLineJumpCode
+int |      ConLineJumpDirX         |  ConLineJumpDirX
+int |      ConLineJumpDirY         |  ConLineJumpDirY
+int |      ConLineJumpStyle        |  ConLineJumpStyle
+int |      ConLineRouteExt         |  ConLineRouteExt
+int |      ShapeFixedCode          |  ShapeFixedCode
+int |      ShapePermeablePlace     |  ShapePermeablePlace
+int |      ShapePermeableX         |  ShapePermeableX
+int |      ShapePermeableY         |  ShapePermeableY
+int |      ShapePlaceFlip          |  ShapePlaceFlip
+int |      ShapePlaceStyle         |  ShapePlaceStyle
+int |      ShapePlowCode           |  ShapePlowCode
+int |      ShapeRouteStyle         |  ShapeRouteStyle
+int |      ShapeSplit              |  ShapeSplit
+int |      ShapeSplittable         |  ShapeSplittable
+"""
+
 
 def printtop() :
     print """
@@ -274,6 +295,7 @@ def gencode_for_cells(text,classname,queryname,qt,si) :
 #gencode_for_cells(CONTROLCELLS, "ControlCells", "ControlQuery","Section","visSectionControls")
 #gencode_for_cells(LOCKCELLS, "LockCells", "LockQuery","Cell","")
 #gencode_for_cells(SHAPEFORMAT, "ShapeFormatCells", "ShapeFormatQuery","Cell","")
-gencode_for_cells(PAGECELLS, "PageCells", "PageQuery","Cell","")
+#gencode_for_cells(PAGECELLS, "PageCells", "PageQuery","Cell","")
+gencode_for_cells(SHAPELAYOUTCELLS, "ShapeLayoutCells", "ShapeLayoutQuery","Cell","")
 
     

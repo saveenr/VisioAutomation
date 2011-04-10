@@ -78,6 +78,8 @@
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
+    <Compile Include="Layout\ShapeLayoutQuery.cs" />
+    <Compile Include="Layout\ShapeLayoutCells.cs" />
     <Compile Include="Layout\PageQuery.cs" />
     <Compile Include="Layout\PageCells.cs" />
     <Compile Include="CustomProperties\Calendar.cs" />
