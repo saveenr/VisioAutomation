@@ -88,7 +88,6 @@
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
     <Compile Include="OutputStream.cs" />
-    <Compile Include="SequenceNumberGenerator.cs" />
     <Compile Include="SessionOptions.cs" />
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
     <Compile Include="FlowChart\ConnectorInfo.cs" />

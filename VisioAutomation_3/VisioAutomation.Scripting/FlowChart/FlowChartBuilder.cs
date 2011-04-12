@@ -150,13 +150,13 @@ namespace VisioAutomation.Scripting.FlowChart
 
             int num_expected_pages = drawings.Count;
 
-            var seqnum = new VA.Scripting.SequenceNumberGenerator(1);
 
             foreach (int i in Enumerable.Range(0, drawings.Count))
             {
                 var diagram = drawings[i];
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering page: {0}", seqnum.Next());
+
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering page: {0}", i+1);
 
                 var options = new Layout.MSAGL.LayoutOptions();
                 options.UseDynamicConnectors = false;
