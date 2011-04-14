@@ -117,7 +117,7 @@ namespace TestVisioAutomation
 
             vrect1.SetCustomProperty("FOO1", "bar");
             vrect1.SetCustomProperty("FOO2", "\"bar\"");
-            vrect1.SetCustomProperty("FOO3", "\"\"bar\"\"");
+            vrect1.SetCustomProperty("FOO3", "\"\"\"bar\"\"\"");
 
             var app = this.GetVisioApplication();
             var documents = app.Documents;

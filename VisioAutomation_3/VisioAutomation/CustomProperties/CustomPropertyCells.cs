@@ -29,15 +29,35 @@ namespace VisioAutomation.CustomProperties
         {
             this.Value = value;
         }
+
+        private string encode_if_needed(VA.ShapeSheet.FormulaLiteral f)
+        {
+            if (!f.HasValue)
+            {
+                return null;
+            }
+
+            if (f.Value.Length==0)
+            {
+                return VA.Convert.StringToFormulaString(f.Value);
+            }
+
+            if (f.Value[0]!='\"')
+            {
+                return VA.Convert.StringToFormulaString(f.Value);                
+            }
+
+            return f.Value;
+        }
         
         protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
         {
             var cp = this;
 
-            string str_label = cp.Label.Formula.HasValue ? cp.Label.Formula.Encode() : null;
-            string str_value = cp.Value.Formula.HasValue ? cp.Value.Formula.Encode() : null;
-            string str_format = cp.Format.Formula.HasValue ? cp.Format.Formula.Encode() : null;
-            string str_prompt = cp.Prompt.Formula.HasValue ? cp.Prompt.Formula.Encode() : null;
+            string str_label = encode_if_needed(cp.Label.Formula);
+            string str_value = encode_if_needed(cp.Value.Formula);
+            string str_format = encode_if_needed(cp.Format.Formula);
+            string str_prompt = encode_if_needed(cp.Prompt.Formula);
 
             func(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(row), str_label);
             func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow( row), str_value);
