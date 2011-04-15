@@ -59,6 +59,7 @@ namespace VisioAutomationSamples
             var n1 = vdom.AddShape("n1", "N1", "basflo_u.vss", "Decision");
 
             // Format Node 1
+            n1.ShapeCells = new VA.DOM.ShapeCells();
             n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
             n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
             n1.ShapeCells.FillPattern = 40;
@@ -83,14 +84,17 @@ namespace VisioAutomationSamples
             var c5 = vdom.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
             // Format connector 0 to point "back" 
+            c0.ShapeCells = new VA.DOM.ShapeCells();
             c0.ShapeCells.BeginArrow = 1;
             c0.ShapeCells.LineWeight = 0.10;
 
             // Format connector 1 to point "forward" 
+            c1.ShapeCells = new VA.DOM.ShapeCells();
             c1.ShapeCells.EndArrow = 1;
             c1.ShapeCells.LineWeight = 0.10;
 
             // Format connector 2 to point "back" and "forward"  
+            c2.ShapeCells = new VA.DOM.ShapeCells();
             c2.ShapeCells.EndArrow = 1;
             c2.ShapeCells.BeginArrow = 1;
             c2.ShapeCells.LineWeight = 0.10;

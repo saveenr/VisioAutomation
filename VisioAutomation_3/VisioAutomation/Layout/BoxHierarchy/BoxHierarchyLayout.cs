@@ -11,11 +11,11 @@ namespace VisioAutomation.Layout.BoxHierarchy
         public BoxHierarchyLayout() :
             this(LayoutDirection.Vertical)
         {
-            this.LayoutOptions = new LayoutOptions();
         }
 
         public BoxHierarchyLayout(LayoutDirection dir)
         {
+            this.LayoutOptions = new LayoutOptions(); 
             this._root = new Node<T>(dir);
         }
 
