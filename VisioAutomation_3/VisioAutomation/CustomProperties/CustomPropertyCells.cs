@@ -18,8 +18,6 @@ namespace VisioAutomation.CustomProperties
         public VA.ShapeSheet.CellData<Calendar> Calendar { get; set; }
         public VA.ShapeSheet.CellData<Format> Type { get; set; }
 
-        internal static readonly VA.CustomProperties.CustomPropertyQuery custprop_query = new VA.CustomProperties.CustomPropertyQuery();
-
         public CustomPropertyCells()
         {
             
@@ -86,15 +84,15 @@ namespace VisioAutomation.CustomProperties
         {
             var cells = new CustomPropertyCells();
 
-            cells.Value = qds.GetItem(row, CustomPropertyCells.custprop_query.Value);
-            cells.Calendar = qds.GetItem(row, CustomPropertyCells.custprop_query.Calendar, v => (VA.CustomProperties.Calendar)v);
-            cells.Format = qds.GetItem(row, CustomPropertyCells.custprop_query.Format);
-            cells.Invisible = qds.GetItem(row, CustomPropertyCells.custprop_query.Invis, v => (int)v);
-            cells.Label = qds.GetItem(row, CustomPropertyCells.custprop_query.Label);
-            cells.LangId = qds.GetItem(row, CustomPropertyCells.custprop_query.LangID, v => (int)v);
-            cells.Prompt = qds.GetItem(row, CustomPropertyCells.custprop_query.Prompt);
-            cells.SortKey = qds.GetItem(row, CustomPropertyCells.custprop_query.SortKey, v => (int)v);
-            cells.Type = qds.GetItem(row, CustomPropertyCells.custprop_query.Type, v => (VA.CustomProperties.Format)((int)v));
+            cells.Value = qds.GetItem(row, query.Value);
+            cells.Calendar = qds.GetItem(row,  query.Calendar, v => (VA.CustomProperties.Calendar)v);
+            cells.Format = qds.GetItem(row,    query.Format);
+            cells.Invisible = qds.GetItem(row, query.Invis, v => (int)v);
+            cells.Label = qds.GetItem(row,     query.Label);
+            cells.LangId = qds.GetItem(row,    query.LangID, v => (int)v);
+            cells.Prompt = qds.GetItem(row,    query.Prompt);
+            cells.SortKey = qds.GetItem(row,   query.SortKey, v => (int)v);
+            cells.Type = qds.GetItem(row,      query.Type, v => (VA.CustomProperties.Format)((int)v));
             return cells;
         }
     }

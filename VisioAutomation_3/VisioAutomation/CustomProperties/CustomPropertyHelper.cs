@@ -41,7 +41,7 @@ namespace VisioAutomation.CustomProperties
 
             short row = cell_propname.Row;
             var cell_propval =
-                shape.CellsSRC[CustomPropertyCells.custprop_query.Section, row, (short)VisCellIndices.visCustPropsValue];
+                shape.CellsSRC[(short)IVisio.VisSectionIndices.visSectionProp, row, (short)VisCellIndices.visCustPropsValue];
             cell_propval.FormulaU = val;
         }
 
@@ -64,7 +64,7 @@ namespace VisioAutomation.CustomProperties
             }
 
             short row = shape.AddNamedRow(
-                CustomPropertyCells.custprop_query.Section,
+                (short)IVisio.VisSectionIndices.visSectionProp,
                 name,
                 (short)VisRowIndices.visRowProp);
 
@@ -159,19 +159,19 @@ namespace VisioAutomation.CustomProperties
             }
 
             // If the Custom Property section does not exist then return zero immediately
-            if (0 == shape.SectionExists[CustomPropertyCells.custprop_query.Section, (short)VisExistsFlags.visExistsAnywhere])
+            if (0 == shape.SectionExists[(short)IVisio.VisSectionIndices.visSectionProp, (short)VisExistsFlags.visExistsAnywhere])
             {
                 return 0;
             }
 
-            var section = shape.Section[CustomPropertyCells.custprop_query.Section];
+            var section = shape.Section[(short)IVisio.VisSectionIndices.visSectionProp];
 
             if (section == null)
             {
                 throw new AutomationException("section is null");
             }
 
-            int row_count = section.Shape.RowCount[CustomPropertyCells.custprop_query.Section];
+            int row_count = section.Shape.RowCount[(short)IVisio.VisSectionIndices.visSectionProp];
 
             return row_count;
         }
@@ -191,7 +191,7 @@ namespace VisioAutomation.CustomProperties
             }
 
             var prop_names = new List<string>(custom_prop_row_count);
-            var prop_section = shape.Section[CustomPropertyCells.custprop_query.Section];
+            var prop_section = shape.Section[(short)IVisio.VisSectionIndices.visSectionProp];
             var query_names = prop_section.AsEnumerable().Select(row => row.NameU);
             prop_names.AddRange(query_names);
 
@@ -274,7 +274,7 @@ namespace VisioAutomation.CustomProperties
             string full_prop_name = GetRowName(name);
 
             short row = shape.CellsU[full_prop_name].Row;
-            shape.DeleteRow(CustomPropertyCells.custprop_query.Section, row);
+            shape.DeleteRow((short)IVisio.VisSectionIndices.visSectionProp, row);
         }
 
         public static void SetCustomProperty(IVisio.Shape shape, string name, string val)

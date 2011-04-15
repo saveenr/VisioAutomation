@@ -7,8 +7,6 @@ namespace VisioAutomation.Controls
 {
     public static class ControlHelper
     {
-        internal readonly static VA.Controls.ControlQuery query = new VA.Controls.ControlQuery();
-
         public static int AddControl(IVisio.Shape shape)
         {
             if (shape == null)
@@ -80,7 +78,7 @@ namespace VisioAutomation.Controls
             }
 
             var row = (IVisio.VisRowIndices)index;
-            shape.DeleteRow(query.Section, (short)row);
+            shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionControls, (short)row);
         }
 
         public static int GetControlsCount(IVisio.Shape shape)
@@ -90,7 +88,7 @@ namespace VisioAutomation.Controls
                 throw new ArgumentNullException("shape");
             }
 
-            return shape.RowCount[query.Section];
+            return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];
         }
 
         public static IList<ControlCells> GetControls(IVisio.Shape shape)
