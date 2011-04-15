@@ -68,7 +68,7 @@ namespace VisioAutomationSamples
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
             layout.PerformLayout();
             layout.Render(page);
-            
+
             var srcs = new[]
                            {
                                VA.ShapeSheet.SRCConstants.FillForegnd,
