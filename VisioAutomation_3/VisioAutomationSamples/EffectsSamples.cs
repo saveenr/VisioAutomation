@@ -13,6 +13,7 @@ namespace VisioAutomationSamples
             var baserect = new VA.Drawing.Rectangle(1, 1, 5, 5);
 
             var r = 0.25;
+
             var rects = new VA.Drawing.Rectangle[3,3];
 
             rects[0, 0] = new VA.Drawing.Rectangle(baserect.Left - r, baserect.Top, baserect.Left, baserect.Top + r);

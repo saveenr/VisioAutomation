@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.DOM;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace VisioAutomationSamples
 
             // Ask the Layout to place the nodes
             var origin = new VA.Drawing.Point(0, 0);
+            
             layout.LayoutOptions.Origin = origin;
 
             layout.PerformLayout();
@@ -57,7 +59,7 @@ namespace VisioAutomationSamples
             // Create Node 1
 
             var n1 = vdom.AddShape("n1", "N1", "basflo_u.vss", "Decision");
-
+            n1.ShapeCells = new ShapeCells();
             // Format Node 1
             n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
             n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
@@ -83,14 +85,17 @@ namespace VisioAutomationSamples
             var c5 = vdom.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
             // Format connector 0 to point "back" 
+            c0.ShapeCells = new ShapeCells();
             c0.ShapeCells.BeginArrow = 1;
             c0.ShapeCells.LineWeight = 0.10;
 
             // Format connector 1 to point "forward" 
+            c1.ShapeCells = new ShapeCells();
             c1.ShapeCells.EndArrow = 1;
             c1.ShapeCells.LineWeight = 0.10;
 
             // Format connector 2 to point "back" and "forward"  
+            c2.ShapeCells = new ShapeCells();
             c2.ShapeCells.EndArrow = 1;
             c2.ShapeCells.BeginArrow = 1;
             c2.ShapeCells.LineWeight = 0.10;
