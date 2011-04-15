@@ -44,6 +44,5 @@ namespace VisioAutomation.Text
 
             return cells;
         }
-
     }
 }

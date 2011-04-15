@@ -19,7 +19,6 @@ namespace VisioAutomation.Layout
 
         protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)
         {
-
             func(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
             func(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
             func(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);

@@ -60,6 +60,5 @@ namespace VisioAutomation.Layout
         {
             get { return new VA.Drawing.Rectangle(this.Pin - this.LocPin, this.Size); }
         }
-
     }
 }

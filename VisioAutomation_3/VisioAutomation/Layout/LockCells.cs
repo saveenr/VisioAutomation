@@ -4,7 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
 
-
 namespace VisioAutomation.Layout
 {
     public partial class LockCells : VA.ShapeSheet.CellDataGroup

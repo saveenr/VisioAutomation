@@ -6,7 +6,6 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Layout
 {
-
     public partial class PageCells : VA.ShapeSheet.CellDataGroup
     {
         public VA.ShapeSheet.CellData<double> PageLeftMargin { get; set; }
@@ -226,7 +225,5 @@ namespace VisioAutomation.Layout
             var query = new PageQuery();
             return VA.ShapeSheet.CellDataGroup._GetCells(shape, query, get_cells_from_row);
         }
-
     }
-
 }

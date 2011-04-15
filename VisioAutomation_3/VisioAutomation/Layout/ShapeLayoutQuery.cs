@@ -4,10 +4,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
 
-
 namespace VisioAutomation.Layout
 {
-
     public class ShapeLayoutQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQueryColumn ConFixedCode { get; set; }
@@ -47,6 +45,5 @@ namespace VisioAutomation.Layout
             this.ShapeSplit = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplit, "ShapeSplit");
             this.ShapeSplittable = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplittable, "ShapeSplittable");
         }
-
     }
 }
