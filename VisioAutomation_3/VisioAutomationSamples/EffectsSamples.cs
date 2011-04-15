@@ -10,135 +10,33 @@ namespace VisioAutomationSamples
     {
         public static void SoftShadow()
         {
+
             var baserect = new VA.Drawing.Rectangle(1, 1, 5, 5);
 
-            var r = 0.25;
-            var rects = new VA.Drawing.Rectangle[3,3];
-
-            rects[0, 0] = new VA.Drawing.Rectangle(baserect.Left - r, baserect.Top, baserect.Left, baserect.Top + r);
-            rects[0, 1] = new VA.Drawing.Rectangle(baserect.Left, baserect.Top, baserect.Right, baserect.Top + r);
-            rects[0, 2] = new VA.Drawing.Rectangle(baserect.Right, baserect.Top, baserect.Right + r, baserect.Top + r);
-
-            rects[1, 0] = new VA.Drawing.Rectangle(baserect.Left - r, baserect.Bottom, baserect.Left, baserect.Top);
-            rects[1, 1] = baserect;
-            rects[1, 2] = new VA.Drawing.Rectangle(baserect.Right, baserect.Bottom, baserect.Right + r, baserect.Top);
-
-            rects[2, 0] = new VA.Drawing.Rectangle(baserect.Left - r, baserect.Bottom - r, baserect.Left, baserect.Bottom);
-            rects[2, 1] = new VA.Drawing.Rectangle(baserect.Left, baserect.Bottom - r, baserect.Right, baserect.Bottom);
-            rects[2, 2] = new VA.Drawing.Rectangle(baserect.Right, baserect.Bottom - r, baserect.Right + r, baserect.Bottom);
-
-            var allrects = new[]
-                               {
-                                   rects[0, 0], rects[0, 1], rects[0, 2],
-                                   rects[1, 0], rects[1, 1], rects[1, 2],
-                                   rects[2, 0], rects[2, 1], rects[2, 2],
-                               };
+            var glow = new VA.Effects.EdgeGlow();
+            glow.GlowColor = new VA.Drawing.ColorRGB(0, 0, 0);
+            glow.GlowTransparency = 0.0;
+            glow.GlowWidth = 0.25;
 
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            var model_shapes = allrects.Select(rr => new VA.DOM.Master(master, rr.Center)).ToList();
-            var model = new VA.DOM.Document();
-            model.Shapes.Add(model_shapes);
 
-            foreach (int i in Enumerable.Range(0, allrects.Length))
-            {
-                var fmt = new VA.DOM.ShapeCells();
-                model_shapes[i].ShapeCells = fmt;
+            glow.DrawOuter(page, baserect);
+            var shape = page.Drop(master, baserect.Center);
 
-                fmt.Width = allrects[i].Width;
-                fmt.Height = allrects[i].Height;
-            }
+            var fmt = new VA.Format.ShapeFormatCells();
+            fmt.FillForegnd = "rgb(255,0,0)";
 
-            var shadowfils = new[]
-                                 {
-                                     39, 30, 38,
-                                     27, 1, 25,
-                                     37, 28, 36
-                                 };
+            var xfrm = new VA.Layout.XFormCells();
+            xfrm.Width = 4;
+            xfrm.Height = 4;
 
-            foreach (int i in Enumerable.Range(0, allrects.Length))
-            {
-                var fmt = model_shapes[i].ShapeCells;
-                fmt.FillPattern = string.Format("guard({0})", shadowfils[i]);
-                fmt.FillBkgndTrans = "guard(100%)";
-                fmt.FillForegnd = "rgb(0,0,0)";
-                fmt.LineWeight = "guard(0)";
-                fmt.LinePattern = "guard(0)";
-            }
-
-            model.Render(page);
-
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-            update.Execute(page);
-            /*
-            vi.SelectNone();
-            vi.Select(list(shape_ll, shape_bottom, shape_lr, shape_left, shape_middle, shape_right,
-                                  shape_ul,
-                                  shape_top,
-                                  shape_ur));
-            //vi.Format.FillCells.Pattern = list(37, 28, 36, 27, 1, 25, 39, 30, 38);
-            //vi.Format.LineCells.Pattern = list(0);
-            //vi.Format.LineCells.Weight = list(0.0);
-            vi.SetFormula("FillBkgndTrans", "guard(100%)");
-            vi.SetFormula("FillForegnd", "rgb(0,0,0)");
-            vi.SetFormula("ShdwPattern", "guard(0)");
-            vi.SetFormula("ShapeShdwType", "guard(0)");
-
-
-            var g = vi.Group();
-            vi.SetFormula("ShdwPattern", "guard(0)");
-            vi.SetFormula("ShapeShdwType", "guard(0)");
-
-            var indices = vi.AddControl();
-            var index = indices[0];
-            vi.SetFormula("Controls.Row_1.X", "Width*.25");
-            vi.SetFormula("Controls.Row_1.YCon", "2");
-
-            string corner_w = "GUARD(Sheet.10!Controls.Row_1.X)";
-
-            vi.SelectNone();
-            vi.Select(g);
-            //vi.SelectSubSelect(list(shape_ll, shape_bottom, shape_lr)); // bottom - row 
-            vi.SetFormula("Height", corner_w);
-            vi.SetFormula("PinY", "GUARD(Height*0.5)");
-
-            vi.SelectNone();
-            vi.Select(g);
-            //vi.SelectSubSelect(list(shape_left, shape_middle, shape_right)); // middle - row 
-            vi.SetFormula("Height", "GUARD(Sheet.10!Height-(Sheet.10!Controls.Row_1.X*2))");
-            vi.SetFormula("Piny", "GUARD(Sheet.10!Height*0.5)");
-
-            vi.SelectNone();
-            vi.Select(g);
-            //vi.Select.SubSelect(list(shape_ul, shape_top, shape_ur)); // top - row 
-            vi.SetFormula("Height", corner_w);
-            vi.SetFormula("PinY", "GUARD(Sheet.10!Height-(Sheet.10!Controls.Row_1.X*0.5))");
-
-            vi.SelectNone();
-            vi.Select(g);
-            //vi.Select.SubSelect(list(shape_ll, shape_left, shape_ul)); // left - col
-            vi.SetFormula("Width", corner_w);
-            vi.SetFormula("PinX", "GUARD(Width*0.5)");
-
-            vi.SelectNone();
-            vi.Select(g);
-            //vi.Select.SubSelect(list(shape_bottom, shape_middle, shape_top)); // middle - col
-            vi.SetFormula("Width", "GUARD(Sheet.10!Width-(Sheet.10!Controls.Row_1.X*2))");
-            vi.SetFormula("PinX", "GUARD(Sheet.10!Width*0.5)");
-
-            vi.SelectNone();
-            vi.Select(g);
-            //vi.Select.SubSelect(list(shape_lr, shape_right, shape_ur)); // left - col
-            vi.SetFormula("Width", corner_w);
-            vi.SetFormula("PinX", "GUARD(Sheet.10!Width-(Sheet.10!Controls.Row_1.X*0.5))");
-
-            vi.SelectNone();
-            vi.Select(g);
-            //vi.SelectMode = list(0);
-            */
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            fmt.Apply(update);
+            xfrm.Apply(update);
+            update.Execute(shape);
         }
 
         public static void GradientTransparencies()
