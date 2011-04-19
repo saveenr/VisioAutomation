@@ -13,7 +13,7 @@ namespace VisioAutomationSamples
 
             var s0 = page.DrawRectangle(0, 0, 1, 1);
             var s1 = page.DrawRectangle(3, 0, 4, 1);
-            var s2 = page.DrawRectangle(1, 1, 3, 3);
+            var s2 = page.DrawRectangle(1.5, 1.5, 2.5, 2.5);
             var s3 = page.DrawRectangle(0, 3, 1, 4);
             var s4 = page.DrawRectangle(3, 3, 4, 4);
             var s5 = page.DrawRectangle(3, 6, 4, 7);
@@ -42,6 +42,35 @@ namespace VisioAutomationSamples
                                                                   VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             var tc_edges_1 = VA.Connections.PathAnalysis.GetTransitiveClosure(page,
                                                                   VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+
+            var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
+            var sb0 = new System.Text.StringBuilder();
+            sb0.AppendLine("Connections");
+            foreach (var e in normal_edges)
+            {
+                if (e.From != e.To)
+                {
+                    string s = string.Format("{0} - {1}", e.From.Text, e.To.Text);
+                    sb0.AppendLine(s);
+
+                }
+            }
+            legend0.Text = sb0.ToString();
+
+            var legend1 = page.DrawRectangle(6.5, 0, 8.5, 6);
+            var sb1 = new System.Text.StringBuilder();
+            sb1.AppendLine("Transitive closure (treat edges as bidirectional)");
+            foreach (var e in tc_edges_1)
+            {
+                if (e.From != e.To)
+                {
+                    string s = string.Format("{0} -> {1}", e.From.Text, e.To.Text);
+                    sb1.AppendLine(s);
+                    
+                }
+            }
+            legend1.Text = sb1.ToString();
+
         }
     }
 }

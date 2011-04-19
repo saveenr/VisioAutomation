@@ -6,8 +6,6 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation
 {
-
-
     public static class PageHelper
     {
         public static void SetBackgroundPage(IVisio.Page fgpage, IVisio.Page bgpage)

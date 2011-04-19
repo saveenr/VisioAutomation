@@ -23,8 +23,8 @@ namespace VisioAutomationSamples
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Dynamic Connector"];
             var connector = page.Drop(master, 0, 0);
-            var r1 = page.DrawRectangle(1, 1, 2, 2);
-            var r2 = page.DrawRectangle(3, 3, 4, 4);
+            var r1 = page.DrawRectangle(0, 1, 2, 2);
+            var r2 = page.DrawRectangle(7, 7, 8, 8);
 
             VA.Connections.ConnectorHelper.ConnectShapes(connector, r1, r2);
 

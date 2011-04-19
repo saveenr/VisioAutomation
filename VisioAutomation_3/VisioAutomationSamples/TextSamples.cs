@@ -167,12 +167,8 @@ The indenting has ended.
             var sizes = new[] {"28.0pt", "18.0pt", "14.0pt", "12.0pt", "10.0pt"};
             var fontids = fonts.Select(f => page.Document.Fonts[f].ID).ToList();
 
-            var grid_origin = new VA.Drawing.Point(0, 8);
-
-
-
             var layout = new VA.Layout.Grid.GridLayout(sizes.Length, fonts.Length, new VA.Drawing.Size(3.0, 0.5), master);
-            layout.Origin = new VA.Drawing.Point(0, 0);
+            layout.Origin = new VA.Drawing.Point(0,  VA.PageHelper.GetSize(page).Height);
             layout.CellSpacing = new VA.Drawing.Size(0.5, 0.5);
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
             
@@ -180,6 +176,7 @@ The indenting has ended.
             
             layout.Render(page);
 
+            page.ResizeToFitContents(new VA.Drawing.Size(1.0,1.0));
             var nodes = layout.Nodes.ToList();
 
             var items = from fi in Enumerable.Range(0, fonts.Count())
@@ -188,16 +185,26 @@ The indenting has ended.
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
+            var charcells = new VA.Text.CharacterFormatCells();
+            var fmt = new VA.Format.ShapeFormatCells();
             int i = 0;
             foreach (var item in items)
             {
                 var shape = nodes[i].Shape;
                 shape.Text = item.font + " " + item.size;
                 var shapeid = nodes[i].ShapeID;
-                update.SetFormula(shapeid, VisioAutomation.ShapeSheet.SRCConstants.Char_Size, item.size);
-                update.SetFormula(shapeid, VisioAutomation.ShapeSheet.SRCConstants.Char_Font, item.fontid);
+                charcells.Size = item.size;
+                charcells.Font = item.fontid;
+                charcells.Apply(update, shapeid, 0);
+
+                fmt.FillForegnd = "rgb(250,250,250)";
+                fmt.LinePattern = 0;
+                fmt.LineWeight = 0;
+                fmt.Apply(update,shapeid);
                 i++;
             }
+
+            update.Execute(page);
         }
     }
 }

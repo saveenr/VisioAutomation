@@ -50,55 +50,8 @@ namespace VisioAutomationSamples
             }
 
             update.Execute(page);
-        }
 
-        public static void GetShapeColors()
-        {
-            // Demonstrates how to retrieve all the color formatting
-            // as formulas and results
-
-            var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
-            var master = stencil.Masters["Rectangle"];
-
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
-            var layout = new VA.Layout.Grid.GridLayout(5, 5, new VA.Drawing.Size(1, 1), master);
-            layout.Origin = new VA.Drawing.Point(0, 5);
-            layout.CellSpacing = new VA.Drawing.Size(0, 0);
-            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
-            layout.PerformLayout();
-            layout.Render(page);
-
-            var srcs = new[]
-                           {
-                               VA.ShapeSheet.SRCConstants.FillForegnd,
-                               VA.ShapeSheet.SRCConstants.FillForegndTrans,
-                               VA.ShapeSheet.SRCConstants.FillBkgnd,
-                               VA.ShapeSheet.SRCConstants.FillBkgndTrans,
-                               VA.ShapeSheet.SRCConstants.ShdwForegnd,
-                               VA.ShapeSheet.SRCConstants.ShdwForegndTrans,
-                               VA.ShapeSheet.SRCConstants.ShdwForegndTrans,
-                               VA.ShapeSheet.SRCConstants.ShdwBkgnd,
-                               VA.ShapeSheet.SRCConstants.ShdwBkgndTrans,
-                               VA.ShapeSheet.SRCConstants.LineColor,
-                               VA.ShapeSheet.SRCConstants.LineColorTrans,
-                               VA.ShapeSheet.SRCConstants.Char_Color,
-                               VA.ShapeSheet.SRCConstants.Char_ColorTrans,
-                               VA.ShapeSheet.SRCConstants.TextBkgnd,
-                               VA.ShapeSheet.SRCConstants.TextBkgndTrans
-                           };
-
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            foreach (var src in srcs)
-            {
-                query.AddColumn(src);
-            }
-
-
-            var int_shapeids = layout.Nodes.Select( n => (int) n.ShapeID).ToList();
-            var results = query.GetResults<double>(page, int_shapeids);
-            var formulas = query.GetFormulas(page, int_shapeids);
-            var f_and_r = query.GetFormulasAndResults<double>(page, int_shapeids);
+            page.ResizeToFitContents( new VA.Drawing.Size(1,1));
         }
     }
 }

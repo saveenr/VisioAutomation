@@ -23,6 +23,8 @@ namespace VisioAutomationSamples
             orgchart.Root = bob;
 
             orgchart.Render(SampleEnvironment.Application);
+
+            SampleEnvironment.Application.ActivePage.ResizeToFitContents( new VA.Drawing.Size(1,1));
         }
     }
 }
