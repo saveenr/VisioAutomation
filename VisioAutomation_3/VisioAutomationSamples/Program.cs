@@ -13,7 +13,6 @@ namespace VisioAutomationSamples
             PlaygroundSamples.Spirograph();
             SmartShapeSamples.ProgressBar();
             CustomPropertySamples.SetCustomProperties();
-            PageSamples.CreateBackgroundPage();
             PathAnalysisSamples.PathAnalysis();
             SimpleGeometrySamples.BezierCircle();
             SimpleGeometrySamples.BezierEllipse();
