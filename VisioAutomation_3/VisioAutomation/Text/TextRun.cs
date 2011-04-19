@@ -25,9 +25,5 @@ namespace VisioAutomation.Text
             var s = string.Format("(Begin={0},End={1},Text=\"{2}\")", this.Begin, this.End, t);
             return s;
         }
-
-
-
-
     }
 }

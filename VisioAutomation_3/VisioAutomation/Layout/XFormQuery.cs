@@ -25,5 +25,4 @@ namespace VisioAutomation.Layout
             Angle = this.AddColumn(VA.ShapeSheet.SRCConstants.Angle, "Angle");
         }
     }
-
 }

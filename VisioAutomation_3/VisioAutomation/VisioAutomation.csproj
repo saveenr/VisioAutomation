@@ -221,6 +221,7 @@
     <Compile Include="Connections\ConnectionPointCells.cs" />
     <Compile Include="Extensions\SectionMethods.cs" />
     <Compile Include="Shapesheet\Query\SectionQueryColumn.cs" />
+    <Compile Include="UserDefinedCells\UserDefinedCellHelper.cs" />
     <Compile Include="UserDefinedCells\UserDefinedCell.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

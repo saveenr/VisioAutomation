@@ -4,7 +4,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
 
-
 namespace VisioAutomation.Layout
 {
     public partial class ShapeLayoutCells : VA.ShapeSheet.CellDataGroup
@@ -79,6 +78,5 @@ namespace VisioAutomation.Layout
             var query = new ShapeLayoutQuery();
             return VA.ShapeSheet.CellDataGroup._GetCells(shape, query, get_cells_from_row);
         }
-
     }
 }

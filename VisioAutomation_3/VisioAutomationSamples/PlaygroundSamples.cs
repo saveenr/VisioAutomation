@@ -60,8 +60,7 @@ namespace VisioAutomationSamples
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-            var fmt = new VisioAutomation.Format.ShapeFormatCells();
+            var format = new VisioAutomation.Format.ShapeFormatCells();
             var xfrm = new VisioAutomation.Layout.XFormCells();
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
@@ -69,13 +68,13 @@ namespace VisioAutomationSamples
                 short shapeid = shapeids[i];
 
                 xfrm.Angle = angles_as_formulas[i];
-                fmt.FillForegnd = color_formulas[i];
-                fmt.LineWeight = 0;
-                fmt.LinePattern = 0;
-                fmt.FillForegndTrans = 0.5;
+                format.FillForegnd = color_formulas[i];
+                format.LineWeight = 0;
+                format.LinePattern = 0;
+                format.FillForegndTrans = 0.5;
 
                 xfrm.Apply(update, shapeid);
-                fmt.Apply(update, shapeid);
+                format.Apply(update, shapeid);
             }
 
             update.Execute(page);
@@ -120,22 +119,7 @@ namespace VisioAutomationSamples
             var color1 = new VA.Drawing.ColorRGB(0xffdddd);
             var color2 = new VA.Drawing.ColorRGB(0x00ffff);
 
-            var src_fillbg = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject,
-                                                   IVisio.VisRowIndices.visRowFill,
-                                                   IVisio.VisCellIndices.visFillBkgnd);
-            var src_fillfg = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject,
-                                                   IVisio.VisRowIndices.visRowFill,
-                                                   IVisio.VisCellIndices.visFillForegnd);
-            var src_fillpat = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject,
-                                                    IVisio.VisRowIndices.visRowFill,
-                                                    IVisio.VisCellIndices.visFillPattern);
-
-            var src_linepat = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject,
-                                                    IVisio.VisRowIndices.visRowLine,
-                                                    IVisio.VisCellIndices.visLinePattern);
-            var src_lineweight = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject,
-                                                       IVisio.VisRowIndices.visRowLine,
-                                                       IVisio.VisCellIndices.visLineWeight);
+            var format = new VisioAutomation.Format.ShapeFormatCells();
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
@@ -148,11 +132,13 @@ namespace VisioAutomationSamples
                 short shapeid = (short) node.ShapeID;
                 int grad_id = n%max_grad_id;
 
-                update.SetFormula(shapeid, src_fillpat, grad_id);
-                update.SetFormula(shapeid, src_fillfg, color1_formula);
-                update.SetFormula(shapeid, src_fillbg, color2_formula);
-                update.SetFormula(shapeid, src_linepat, 0);
-                update.SetFormula(shapeid, src_lineweight, 0);
+                format.FillPattern = grad_id;
+                format.FillForegnd = color1_formula;
+                format.FillBkgnd = color2_formula;
+                format.LinePattern = 0;
+                format.LineWeight = 0;
+                format.Apply(update, shapeid);
+
                 n++;
             }
 
