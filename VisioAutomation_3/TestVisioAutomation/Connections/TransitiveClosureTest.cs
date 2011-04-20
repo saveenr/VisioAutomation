@@ -54,7 +54,6 @@ namespace TestVisioAutomation
             int n = 0;
             foreach (string line in lines)
             {
-                System.Console.WriteLine(" {0} ", line);
                 string[] xseps = { "->" };
                 string[] tokens = line.Split(xseps, System.StringSplitOptions.RemoveEmptyEntries);
                 string from = tokens[0];
