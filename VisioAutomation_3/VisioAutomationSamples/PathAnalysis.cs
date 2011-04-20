@@ -48,12 +48,8 @@ namespace VisioAutomationSamples
             sb0.AppendLine("Connections");
             foreach (var e in normal_edges)
             {
-                if (e.From != e.To)
-                {
-                    string s = string.Format("{0} - {1}", e.From.Text, e.To.Text);
-                    sb0.AppendLine(s);
-
-                }
+                string s = string.Format("{0} - {1}", e.From.Text, e.To.Text);
+                sb0.AppendLine(s);
             }
             legend0.Text = sb0.ToString();
 
@@ -62,12 +58,8 @@ namespace VisioAutomationSamples
             sb1.AppendLine("Transitive closure (treat edges as bidirectional)");
             foreach (var e in tc_edges_1)
             {
-                if (e.From != e.To)
-                {
-                    string s = string.Format("{0} -> {1}", e.From.Text, e.To.Text);
-                    sb1.AppendLine(s);
-                    
-                }
+                string s = string.Format("{0} -> {1}", e.From.Text, e.To.Text);
+                sb1.AppendLine(s);
             }
             legend1.Text = sb1.ToString();
 
