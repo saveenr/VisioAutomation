@@ -5,6 +5,13 @@ using VA = VisioAutomation;
 
 namespace TestVisioAutomation
 {
+    class ParseResult
+    {
+        public List<VA.Connections.DirectedEdge<int, object>> Edges;
+        public IDictionary<string, int> NameToID;
+        public IDictionary<int, string> IDToName;
+    }
+
     [TestClass]
     public class TransitiveCLosure_Test
     {
@@ -20,11 +27,11 @@ namespace TestVisioAutomation
                 v4->v2  ";
 
             List<VA.Connections.DirectedEdge<int, object>> edges;
-            var parse = parse_graph(input, out edges);
+            var parse = parse_graph(input);
 
-            int num_vertices = parse.Count;
+            int num_vertices = parse.NameToID.Count();
             var adj_matrix = new VA.Internal.BitArray2D(num_vertices, num_vertices);
-            foreach (var e in edges)
+            foreach (var e in parse.Edges)
             {
                 adj_matrix[e.From, e.To] = true;
             }
@@ -33,14 +40,15 @@ namespace TestVisioAutomation
             VA.Connections.PathAnalysis.PerformWarshall(warshall_result);
         }
 
-        private static IDictionary<string, int> parse_graph(string input, out List<VA.Connections.DirectedEdge<int, object>> edges)
+        private static ParseResult parse_graph(string input)
         {
+            var pr = new ParseResult();
             char[] seps = { '\n' };
             string[] lines =
                 input.Trim().Split(seps, System.StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).Where(
                     s => s.Length > 0).ToArray();
 
-            edges = new List<VA.Connections.DirectedEdge<int, object>>();
+            pr.Edges = new List<VA.Connections.DirectedEdge<int, object>>();
             var dic_vname_to_vindex = new Dictionary<string, int>();
             var dic_vindex_to_vname = new Dictionary<int, string>();
             int n = 0;
@@ -65,9 +73,12 @@ namespace TestVisioAutomation
                 }
 
                 var new_edge = new VA.Connections.DirectedEdge<int, object>(dic_vname_to_vindex[from], dic_vname_to_vindex[to], null);
-                edges.Add(new_edge);
+                pr.Edges.Add(new_edge);
             }
-            return dic_vname_to_vindex;
+
+            pr.IDToName = dic_vindex_to_vname;
+            pr.NameToID = dic_vname_to_vindex;
+            return pr;
         }
     }
 }
