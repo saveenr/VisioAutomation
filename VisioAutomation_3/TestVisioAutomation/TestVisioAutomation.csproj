@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="Layout\LayoutHelperTests.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="Scripting\ScriptingCellSRCTest.cs" />

@@ -237,7 +237,7 @@ namespace VisioAutomation.Connections
             {
                 for (int col = 0; col < adj_matrix.Height; col++)
                 {
-                    if (warshall_result.Get(row, col))
+                    if (warshall_result.Get(row, col) && (row!=col))
                     {
                         var de = new DirectedEdge<A, object>(id_to_object[row], id_to_object[col], null);
                         yield return de;
