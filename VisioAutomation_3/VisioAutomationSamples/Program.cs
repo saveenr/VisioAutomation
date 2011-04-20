@@ -19,13 +19,8 @@ namespace VisioAutomationSamples
             SimpleGeometrySamples.BezierSimple();
             SimpleGeometrySamples.NURBS2();
             SimpleGeometrySamples.NURBS3();
-            
-            // TODO: Need to fix barchart
             InfoGraphicSamples.BarChart();
-
-            // TODO: Make PieChart look better
             InfoGraphicSamples.PieChart();
-            
             TextSamples.TextMarkup2();
             TextSamples.TextSizing();
             TextSamples.NonRotatingText();
@@ -36,12 +31,12 @@ namespace VisioAutomationSamples
             LayoutSamples.BoxHierarchy();
             LayoutSamples.MSAGL();
             StencilSamples.DrawGridOfMasters();
-
+            
             // TODO: make connector style a simple direct line
             ConnectorSamples.ConnectorsToBack();
-
+            
             ColorSample.ColorGrid();
-
+            
             //creates new docs
             SpecialDocumentSamples.OrgChart();
         }
