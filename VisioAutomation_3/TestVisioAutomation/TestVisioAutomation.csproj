@@ -101,9 +101,9 @@
     <Compile Include="Core\CustomPropertiesTest.cs" />
     <Compile Include="Extensions\SelectionExtensions.cs" />
     <Compile Include="UtilTests\BitArray2D.cs" />
-    <Compile Include="UtilTests\TransitiveClosureTest.cs" />
+    <Compile Include="Connections\TransitiveClosureTest.cs" />
     <Compile Include="UtilTests\DrawingHelper_Tests.cs" />
-    <Compile Include="UtilTests\UserDefinedCellHelper_Test.cs" />
+    <Compile Include="UserDefinedCells\UserDefinedCellHelper_Test.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />
     <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
     <Compile Include="Scripting\ScriptingConnectTests.cs" />
@@ -129,13 +129,13 @@
     <Compile Include="Extensions\PageDrawTests.cs" />
     <Compile Include="Extensions\PagesExtensions_Tests.cs" />
     <Compile Include="Text\Text_Tests.cs" />
-    <Compile Include="UtilTests\ConnectionPointHelper_Tests.cs" />
-    <Compile Include="UtilTests\ControlHelper_Tests.cs" />
+    <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
+    <Compile Include="Controls\ControlHelper_Tests.cs" />
     <Compile Include="UtilTests\PageHelper_Tests.cs" />
-    <Compile Include="UtilTests\ShapeSheet_Tests.cs" />
-    <Compile Include="UtilTests\ShapeHelper_Tests.cs" />
+    <Compile Include="Shapesheet\ShapeSheet_Tests.cs" />
+    <Compile Include="Shapesheet\ShapeHelper_Tests.cs" />
     <Compile Include="UtilTests\Stencil_Tests.cs" />
-    <Compile Include="UtilTests\TextHelper_Tests.cs" />
+    <Compile Include="Text\TextHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\CustomPropsTest.cs" />
     <Compile Include="Core\TabStop_Tests.cs" />
@@ -200,9 +200,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VA\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\template_router _vdx.txt" />
   </ItemGroup>
