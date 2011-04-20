@@ -36,8 +36,7 @@ namespace TestVisioAutomation
                                                  VA.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
 
 
-            int x = 1;
-            //page1.Delete(0);
+            page1.Delete(0);
         }
 
     }
