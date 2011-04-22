@@ -273,6 +273,7 @@
     <Compile Include="FormViewTool.Designer.cs">
       <DependentUpon>FormViewTool.cs</DependentUpon>
     </Compile>
+    <Compile Include="PowerToolsSessionOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
