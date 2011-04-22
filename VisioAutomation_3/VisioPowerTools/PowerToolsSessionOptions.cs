@@ -7,6 +7,10 @@ namespace VisioPowerTools
 {
     public class PowerToolsSessionOptions : VisioAutomation.Scripting.SessionOptions
     {
+        public delegate void WriteString(string s);
+
+        public event WriteString OnWriteString;
+
         public PowerToolsSessionOptions()
         {
 
@@ -31,13 +35,15 @@ namespace VisioPowerTools
 
         public override void WriteVerbose(string s)
         {
-            System.Console.WriteLine(s);
+           this.DefaultWriteString(s);
         }
 
         public override void DefaultWriteString(string s)
         {
-            System.Console.WriteLine(s);
+            if (this.OnWriteString != null)
+            {
+                this.OnWriteString(s);
+            }
         }
     }
-
 }

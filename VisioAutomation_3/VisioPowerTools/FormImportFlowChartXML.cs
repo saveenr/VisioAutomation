@@ -59,11 +59,13 @@ namespace VisioPowerTools
                 MessageBox.Show("Failed to load XML");
                 return;
             }
-
+            
             IList<VA.Layout.MSAGL.Drawing> drawings;
             try
             {
+                VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;
                 drawings = VisioAutomation.Scripting.FlowChart.FlowChartBuilder.LoadFromXML(ss, xdoc);
+                VisioPowerToolsAddIn.g_session_options.OnWriteString -= write_msg;
             }
             catch (VisioAutomation.AutomationException)
             {
@@ -74,7 +76,9 @@ namespace VisioPowerTools
             bool close_form = false;
             try
             {
+                VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;
                 VisioAutomation.Scripting.FlowChart.FlowChartBuilder.RenderDiagrams(ss, drawings);
+                VisioPowerToolsAddIn.g_session_options.OnWriteString -= write_msg;
             }
             catch(VisioAutomation.AutomationException)
             {
@@ -89,13 +93,7 @@ namespace VisioPowerTools
 
         private void write_msg(string s)
         {
-            this.textBoxOutput.AppendText(s);
-        }
-
-        private void write_msg(string fmt, params object [] items)
-        {
-            string s = string.Format(fmt, items);
-            this.write_msg(s);
+            this.textBoxOutput.AppendText(s+"\n");
         }
 
         private void buttonCancel_Click(object sender, System.EventArgs e)

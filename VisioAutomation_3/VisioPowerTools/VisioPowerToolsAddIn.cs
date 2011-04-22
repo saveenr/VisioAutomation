@@ -7,6 +7,8 @@ namespace VisioPowerTools
 {
     public partial class VisioPowerToolsAddIn
     {
+        private static VisioAutomation.Scripting.Session g_scripting_session;
+        internal static VisioPowerTools.PowerToolsSessionOptions g_session_options;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             try
@@ -28,17 +30,21 @@ namespace VisioPowerTools
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {           
         }
-
-        private static VisioAutomation.Scripting.Session g_scripting_session;
-
+        
         public static VisioAutomation.Scripting.Session ScriptingSession
         {
             get
             {
                 if (g_scripting_session == null)
                 {
+                    if ( g_session_options == null )
+                    {
+                        g_session_options = new PowerToolsSessionOptions();
+                    }
+
                     var application = Globals.VisioPowerToolsAddIn.Application;
                     g_scripting_session = new VisioAutomation.Scripting.Session(application);
+                    g_scripting_session.Options = g_session_options;
                 }
                 else
                 {
