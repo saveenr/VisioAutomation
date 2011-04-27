@@ -31,11 +31,9 @@
             this.buttonSelectAll = new System.Windows.Forms.Button();
             this.buttonSelectNone = new System.Windows.Forms.Button();
             this.buttonInvertSelection = new System.Windows.Forms.Button();
-            this.buttonSelectWithSameColor = new System.Windows.Forms.Button();
             this.buttonUnselectConnectors = new System.Windows.Forms.Button();
             this.buttonSelectConnectors = new System.Windows.Forms.Button();
             this.labelConnectors = new System.Windows.Forms.Label();
-            this.labelFormatSelection = new System.Windows.Forms.Label();
             this.labelSelect = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -75,18 +73,6 @@
             this.buttonInvertSelection.UseVisualStyleBackColor = true;
             this.buttonInvertSelection.Click += new System.EventHandler(this.buttonInvertSelection_Click);
             // 
-            // buttonSelectWithSameColor
-            // 
-            this.buttonSelectWithSameColor.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
-            this.buttonSelectWithSameColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSelectWithSameColor.Location = new System.Drawing.Point(11, 154);
-            this.buttonSelectWithSameColor.Name = "buttonSelectWithSameColor";
-            this.buttonSelectWithSameColor.Size = new System.Drawing.Size(101, 23);
-            this.buttonSelectWithSameColor.TabIndex = 3;
-            this.buttonSelectWithSameColor.Text = "with Same Color";
-            this.buttonSelectWithSameColor.UseVisualStyleBackColor = true;
-            this.buttonSelectWithSameColor.Click += new System.EventHandler(this.buttonSelectWithSameColor_Click);
-            // 
             // buttonUnselectConnectors
             // 
             this.buttonUnselectConnectors.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
@@ -118,15 +104,6 @@
             this.labelConnectors.TabIndex = 6;
             this.labelConnectors.Text = "Connectors";
             // 
-            // labelFormatSelection
-            // 
-            this.labelFormatSelection.AutoSize = true;
-            this.labelFormatSelection.Location = new System.Drawing.Point(11, 137);
-            this.labelFormatSelection.Name = "labelFormatSelection";
-            this.labelFormatSelection.Size = new System.Drawing.Size(39, 13);
-            this.labelFormatSelection.TabIndex = 7;
-            this.labelFormatSelection.Text = "Format";
-            // 
             // labelSelect
             // 
             this.labelSelect.AutoSize = true;
@@ -140,13 +117,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(187, 191);
+            this.ClientSize = new System.Drawing.Size(187, 137);
             this.Controls.Add(this.labelSelect);
-            this.Controls.Add(this.labelFormatSelection);
             this.Controls.Add(this.labelConnectors);
             this.Controls.Add(this.buttonSelectConnectors);
             this.Controls.Add(this.buttonUnselectConnectors);
-            this.Controls.Add(this.buttonSelectWithSameColor);
             this.Controls.Add(this.buttonInvertSelection);
             this.Controls.Add(this.buttonSelectNone);
             this.Controls.Add(this.buttonSelectAll);
@@ -163,11 +138,9 @@
         private System.Windows.Forms.Button buttonSelectAll;
         private System.Windows.Forms.Button buttonSelectNone;
         private System.Windows.Forms.Button buttonInvertSelection;
-        private System.Windows.Forms.Button buttonSelectWithSameColor;
         private System.Windows.Forms.Button buttonUnselectConnectors;
         private System.Windows.Forms.Button buttonSelectConnectors;
         private System.Windows.Forms.Label labelConnectors;
-        private System.Windows.Forms.Label labelFormatSelection;
         private System.Windows.Forms.Label labelSelect;
     }
 }

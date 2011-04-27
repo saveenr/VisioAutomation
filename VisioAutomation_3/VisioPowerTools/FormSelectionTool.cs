@@ -24,10 +24,5 @@ namespace VisioPowerTools
         {
             VisioPowerToolsAddIn.CmdInvertSelection();
         }
-
-        private void buttonSelectWithSameColor_Click(object sender, System.EventArgs e)
-        {
-            MessageBox.Show("Not Implemented");
-        }
     }
 }
