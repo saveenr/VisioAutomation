@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using VA=VisioAutomation;
 namespace VisioAutomation.ShapeSheet.Query
@@ -16,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public readonly Table<string> Formulas;
         public readonly Table<T> Results;
 
-        public QueryDataSet(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
+        internal QueryDataSet(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
                             int rowcount, IList<int> groupcounts)
         {
             if (formulas_array == null && results_array == null)
@@ -28,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 if (formulas_array.Length != results_array.Length)
                 {
-                    throw new AutomationException("Formulas and Results must have the same size");
+                    throw new AutomationException("Formula array and Result array must have the same length");
                 }
             }
 
@@ -65,7 +64,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.ColumnCount = columncount;
 
             this.GroupsArray = this.GetGrouping(shapeids, groupcounts);
-            this.Groups  = new ReadOnlyCollection<TableRowGroup>(this.GroupsArray);
+            this.Groups = new System.Collections.ObjectModel.ReadOnlyCollection<TableRowGroup>(this.GroupsArray);
 
             this.Formulas = formulas_array != null ? this.FromDataSet<string>(i => formulas_array[i]) : null;
             this.Results = results_array != null ? this.FromDataSet<T>(i => results_array[i]) : null;

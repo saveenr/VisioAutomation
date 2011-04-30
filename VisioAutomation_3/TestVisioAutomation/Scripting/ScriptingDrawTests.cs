@@ -170,6 +170,11 @@ namespace TestVisioAutomation
             var ss = GetScriptingSession();
             draw_org_chart(ss, TestVisioAutomation.Properties.Resources.sampleorgchart1);
             ss.Document.CloseDocument(true);
+
+            // Force all the documents close - this is to prevent a case
+            // where the only doc open was the orgchart stencil
+            // TODO: See if there is a cleaner way to avoid this problem
+            VA.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
         }
 
         private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)
