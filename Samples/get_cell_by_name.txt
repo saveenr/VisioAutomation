@@ -1,0 +1,14 @@
+// C# Visual Studio 2008 
+var cell = shape.get_CellsU( "Char.Style" ) 
+
+
+// C# Visual Studio 2008 
+var cell = shape.CellsU[ "Char.Style" ] 
+
+
+// IronPython 2.6
+cell = shape.CellsU[ "Char.Style" ] 
+
+
+// Boo 
+cell = shape.CellsU[ "Char.Style" ] 

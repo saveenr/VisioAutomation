@@ -1,0 +1,9 @@
+// C# 
+var rectangle = stencildoc.Masters["Rectangle" ]; 
+var shape = page.Drop(rectangle, 1.0, 2.0 ); 
+
+
+
+// IronPython 
+rectangle = stencildoc.Masters["Rectangle" ] 
+shape = page.Drop(rectangle, 1.0, 2.0 ) 
