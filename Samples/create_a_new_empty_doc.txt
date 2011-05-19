@@ -1,2 +1,0 @@
-// c# 
-doc = app.Documents.Add( “” ) 
