@@ -37,6 +37,7 @@ syntax: glob
 *DXCore.Solution 
 *_i.c 
 *_p.c 
+*.docstates
 Ankh.Load 
 Backup* 
 CVS/ 
