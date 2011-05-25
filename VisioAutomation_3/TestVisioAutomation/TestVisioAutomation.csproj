@@ -133,7 +133,7 @@
     <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
     <Compile Include="Controls\ControlHelper_Tests.cs" />
     <Compile Include="UtilTests\PageHelper_Tests.cs" />
-    <Compile Include="Shapesheet\ShapeSheet_Tests.cs" />
+    <Compile Include="Convert_Tests.cs" />
     <Compile Include="Shapesheet\ShapeHelper_Tests.cs" />
     <Compile Include="UtilTests\Stencil_Tests.cs" />
     <Compile Include="Text\TextHelper_Tests.cs" />

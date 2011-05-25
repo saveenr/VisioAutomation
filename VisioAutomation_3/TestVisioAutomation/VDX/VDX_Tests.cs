@@ -561,6 +561,12 @@ namespace TestVisioVDX
         {
             string logfilename = VA.ApplicationHelper.GetXMLErrorLogFilename(app);
 
+            if (logfilename == null)
+            {
+                // nothing to do
+                return;
+            }
+
             if (System.IO.File.Exists(logfilename))
             {
                 System.IO.File.Delete(logfilename);
@@ -570,6 +576,12 @@ namespace TestVisioVDX
         public static bool XmlErrorLogExists(IVisio.Application app)
         {
             string logfilename = VA.ApplicationHelper.GetXMLErrorLogFilename(app);
+
+            if (logfilename == null)
+            {
+                return false;
+            }
+
             return System.IO.File.Exists(logfilename);
         }
     }

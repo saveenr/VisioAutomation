@@ -4,6 +4,9 @@ namespace VisioAutomation
 {
     public static class Convert
     {
+        private const string quote = "\"";
+        private const string quotequote = "\"\"";
+
         public static double PointsToInches(double points)
         {
             return points / 72.0;
@@ -49,6 +52,7 @@ namespace VisioAutomation
             return (v == 0) ? false : true;
         }
 
+
         /// <summary>
         /// Properly quotes a string being used as a formula
         /// </summary>
@@ -61,11 +65,35 @@ namespace VisioAutomation
                 throw new System.ArgumentNullException("s");
             }
 
-            const string quote = "\"";
-            const string quotequote = "\"\"";
             string result = System.String.Format("\"{0}\"", s.Replace(quote, quotequote));
             return result;
         }
+
+        public static string FormulaStringToString(string formula)
+        {
+            if (formula == null)
+            {
+                throw new System.ArgumentNullException("formula");
+            }
+
+            // Initialize the converted formula from the value passed in.
+            string output_string = formula;
+
+            // Check if this formula value is a quoted string.
+            // If it is, remove extra quote characters.
+            if (output_string.StartsWith(quote) &&
+                output_string.EndsWith(quote))
+            {
+
+                // Remove the wrapping quote characters as well as any
+                // extra quote marks in the body of the string.
+                output_string = output_string.Substring(1, (output_string.Length - 2));
+                output_string = output_string.Replace(quotequote, quote);
+            }
+
+            return output_string;
+        }
+
 
         public static string ColorToFormulaRGB(System.Drawing.Color color)
         {

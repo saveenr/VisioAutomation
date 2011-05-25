@@ -1,5 +1,6 @@
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using System.Linq;
 
 namespace VisioAutomation
 {
@@ -50,6 +51,12 @@ namespace VisioAutomation
             {
                 // key doesn't exist - can't continue
                 throw new AutomationException("Could not find the key visio application key in hkcu");
+            }
+
+            var subkeynames = key_visio_application.GetValueNames();
+            if (!subkeynames.Contains("XMLErrorLogName"))
+            {
+                return null;
             }
 
             string logfilename = (string)key_visio_application.GetValue("XMLErrorLogName");
