@@ -25,10 +25,13 @@ namespace VisioAutomationSamples
             var doc = documents.Add(string.Empty);
             var page1 = doc.Pages[1];
 
-            layout.RenderAction += (node, rect) => BoxHierarchyShared.DrawBoxHierarchyDrawNode(node, rect, page1);
-            layout.Render();
-            // Now that the rendering is done, find one of the rendered objects
             // and tinker with it
+            // render
+            foreach (var node in layout.Nodes)
+            {
+                BoxHierarchyShared.DrawBoxHierarchyDrawNode(node, node.Rectangle, page1);
+            }
+
             var src_linepat = new VA.ShapeSheet.SRC(
                 IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowLine,
                 IVisio.VisCellIndices.visLinePattern);

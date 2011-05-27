@@ -172,24 +172,5 @@ namespace VisioAutomation.Layout.BoxHierarchy
         {
             get { return VA.Internal.TreeTraversal.PreOrder(this.Root, n => n.Children); }
         }
-
-
-        public void Render()
-        {
-            if (this.RenderAction == null)
-            {
-                return;
-            }
-
-            foreach (var node in this.Nodes)
-            {
-                this.RenderAction(node, node.Rectangle);
-            }
-        }
-
-        public delegate void OnRenderAction(Node<T> node,VA.Drawing.Rectangle rect);
-
-        public event OnRenderAction RenderAction;
-
     }
 }
