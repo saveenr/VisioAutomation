@@ -26,7 +26,7 @@ namespace VisioAutomationSamples
             var page1 = doc.Pages[1];
 
             var options = new VisioAutomation.Layout.BoxHierarchy.RenderOptions<IVisio.Shape>();
-            options.RenderAction = (node, rect) => BoxHierarchyShared.DrawBoxHierarchyDrawNode(node, rect, page1);
+            layout.RenderAction += (node, rect) => BoxHierarchyShared.DrawBoxHierarchyDrawNode(node, rect, page1);
             layout.Render(options);
             // Now that the rendering is done, find one of the rendered objects
             // and tinker with it

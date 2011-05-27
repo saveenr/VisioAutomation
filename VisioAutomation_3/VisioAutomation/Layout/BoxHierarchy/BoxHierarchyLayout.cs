@@ -180,12 +180,12 @@ namespace VisioAutomation.Layout.BoxHierarchy
                 throw new System.ArgumentException("renderoptions is null");
             }
 
-            if (options.RenderAction == null)
+            if (this.RenderAction == null)
             {
                 throw new System.ArgumentException("renderoptions contains a null function");
             }
 
-            options.RenderAction(node, node.Rectangle);
+            this.RenderAction(node, node.Rectangle);
 
             foreach (var cur_el in node.Children)
             {
@@ -197,5 +197,10 @@ namespace VisioAutomation.Layout.BoxHierarchy
         {
             this.internal_Render(this.Root, options);
         }
+
+        public delegate void OnRenderAction(Node<T> node,VA.Drawing.Rectangle rect);
+
+        public event OnRenderAction RenderAction;
+
     }
 }
