@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Layout.BoxHierarchy
@@ -167,30 +168,23 @@ namespace VisioAutomation.Layout.BoxHierarchy
             }
         }
 
-
-        private void internal_Render(Node<T> node)
+        public IEnumerable<Node<T>> Nodes
         {
-            if (node == null)
-            {
-                throw new System.ArgumentNullException("node");
-            }
-
-            if (this.RenderAction == null)
-            {
-                throw new System.ArgumentException("renderoptions contains a null function");
-            }
-
-            this.RenderAction(node, node.Rectangle);
-
-            foreach (var child in node.Children)
-            {
-                internal_Render(child);
-            }
+            get { return VA.Internal.TreeTraversal.PreOrder(this.Root, n => n.Children); }
         }
+
 
         public void Render()
         {
-            this.internal_Render(this.Root);
+            if (this.RenderAction == null)
+            {
+                return;
+            }
+
+            foreach (var node in this.Nodes)
+            {
+                this.RenderAction(node, node.Rectangle);
+            }
         }
 
         public delegate void OnRenderAction(Node<T> node,VA.Drawing.Rectangle rect);
