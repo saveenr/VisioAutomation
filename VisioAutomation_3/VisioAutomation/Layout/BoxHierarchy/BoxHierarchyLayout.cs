@@ -168,11 +168,34 @@ namespace VisioAutomation.Layout.BoxHierarchy
         }
 
 
+        private void internal_Render(Node<T> node, RenderOptions<T> options)
+        {
+            if (node == null)
+            {
+                throw new System.ArgumentNullException("node");
+            }
+
+            if (options== null)
+            {
+                throw new System.ArgumentException("renderoptions is null");
+            }
+
+            if (options.RenderAction == null)
+            {
+                throw new System.ArgumentException("renderoptions contains a null function");
+            }
+
+            options.RenderAction(node, node.Rectangle);
+
+            foreach (var cur_el in node.Children)
+            {
+                internal_Render(cur_el, options);
+            }
+        }
+
         public void Render(RenderOptions<T> options)
         {
-            var renderer = new VA.Layout.BoxHierarchy.Renderer<T>();
-            renderer.RenderOptions = options;
-            renderer.Render(this);
+            this.internal_Render(this.Root, options);
         }
     }
 }
