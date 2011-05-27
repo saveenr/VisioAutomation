@@ -25,9 +25,8 @@ namespace VisioAutomationSamples
             var doc = documents.Add(string.Empty);
             var page1 = doc.Pages[1];
 
-            var options = new VisioAutomation.Layout.BoxHierarchy.RenderOptions<IVisio.Shape>();
             layout.RenderAction += (node, rect) => BoxHierarchyShared.DrawBoxHierarchyDrawNode(node, rect, page1);
-            layout.Render(options);
+            layout.Render();
             // Now that the rendering is done, find one of the rendered objects
             // and tinker with it
             var src_linepat = new VA.ShapeSheet.SRC(

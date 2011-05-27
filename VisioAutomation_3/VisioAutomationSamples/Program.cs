@@ -7,38 +7,38 @@ namespace VisioAutomationSamples
     {
         private static void Main(string[] args)
         {
-            //EffectsSamples.SoftShadow();
-            //EffectsSamples.GradientTransparencies();
-            //PlaygroundSamples.DrawAllGradients();
-            //PlaygroundSamples.Spirograph();
-            //SmartShapeSamples.ProgressBar();
-            //CustomPropertySamples.SetCustomProperties();
-            //PathAnalysisSamples.PathAnalysis();
-            //SimpleGeometrySamples.BezierCircle();
-            //SimpleGeometrySamples.BezierEllipse();
-            //SimpleGeometrySamples.BezierSimple();
-            //SimpleGeometrySamples.NURBS2();
-            //SimpleGeometrySamples.NURBS3();
-            //InfoGraphicSamples.BarChart();
-            //InfoGraphicSamples.PieChart();
-            //TextSamples.TextMarkup2();
-            //TextSamples.TextSizing();
-            //TextSamples.NonRotatingText();
-            //TextSamples.TextFields();
-            //TextSamples.TextMarkup1();
-            //TextSamples.FontChart();
+            EffectsSamples.SoftShadow();
+            EffectsSamples.GradientTransparencies();
+            PlaygroundSamples.DrawAllGradients();
+            PlaygroundSamples.Spirograph();
+            SmartShapeSamples.ProgressBar();
+            CustomPropertySamples.SetCustomProperties();
+            PathAnalysisSamples.PathAnalysis();
+            SimpleGeometrySamples.BezierCircle();
+            SimpleGeometrySamples.BezierEllipse();
+            SimpleGeometrySamples.BezierSimple();
+            SimpleGeometrySamples.NURBS2();
+            SimpleGeometrySamples.NURBS3();
+            InfoGraphicSamples.BarChart();
+            InfoGraphicSamples.PieChart();
+            TextSamples.TextMarkup2();
+            TextSamples.TextSizing();
+            TextSamples.NonRotatingText();
+            TextSamples.TextFields();
+            TextSamples.TextMarkup1();
+            TextSamples.FontChart();
             
             LayoutSamples.BoxHierarchy();
-            //LayoutSamples.MSAGL();
-            //StencilSamples.DrawGridOfMasters();
+            LayoutSamples.MSAGL();
+            StencilSamples.DrawGridOfMasters();
             
             // TODO: make connector style a simple direct line
-            //ConnectorSamples.ConnectorsToBack();
+            ConnectorSamples.ConnectorsToBack();
             
-            //ColorSample.ColorGrid();
+            ColorSample.ColorGrid();
             
-            //creates new docs
-            //SpecialDocumentSamples.OrgChart();
+            // creates new docs
+            SpecialDocumentSamples.OrgChart();
         }
     }
 }

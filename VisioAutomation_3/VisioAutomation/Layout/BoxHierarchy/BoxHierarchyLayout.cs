@@ -168,16 +168,11 @@ namespace VisioAutomation.Layout.BoxHierarchy
         }
 
 
-        private void internal_Render(Node<T> node, RenderOptions<T> options)
+        private void internal_Render(Node<T> node)
         {
             if (node == null)
             {
                 throw new System.ArgumentNullException("node");
-            }
-
-            if (options== null)
-            {
-                throw new System.ArgumentException("renderoptions is null");
             }
 
             if (this.RenderAction == null)
@@ -187,15 +182,15 @@ namespace VisioAutomation.Layout.BoxHierarchy
 
             this.RenderAction(node, node.Rectangle);
 
-            foreach (var cur_el in node.Children)
+            foreach (var child in node.Children)
             {
-                internal_Render(cur_el, options);
+                internal_Render(child);
             }
         }
 
-        public void Render(RenderOptions<T> options)
+        public void Render()
         {
-            this.internal_Render(this.Root, options);
+            this.internal_Render(this.Root);
         }
 
         public delegate void OnRenderAction(Node<T> node,VA.Drawing.Rectangle rect);

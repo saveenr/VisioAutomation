@@ -139,7 +139,6 @@
     <Compile Include="Layout\BoxHierarchy\LayoutDirection.cs" />
     <Compile Include="Layout\BoxHierarchy\LayoutOptions.cs" />
     <Compile Include="Layout\BoxHierarchy\Node.cs" />
-    <Compile Include="Layout\BoxHierarchy\RenderOptions.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Layout\Grid\Column.cs" />
     <Compile Include="Layout\Grid\ColumnDirection.cs" />
