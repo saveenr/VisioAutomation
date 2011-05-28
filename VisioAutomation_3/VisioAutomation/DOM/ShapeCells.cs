@@ -80,7 +80,7 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral VerticalAlign { get; set; }
 
         // Paragraph
-        public ShapeSheet.FormulaLiteral Bullet { get; set; }
+        public ShapeSheet.FormulaLiteral BulletIndex { get; set; }
         public ShapeSheet.FormulaLiteral BulletFont { get; set; }
         public ShapeSheet.FormulaLiteral BulletSize { get; set; }
         public ShapeSheet.FormulaLiteral BulletString { get; set; }
@@ -181,6 +181,23 @@ namespace VisioAutomation.DOM
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.VerticalAlign, VerticalAlign);
 
             // Paragraph
+
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletIndex, BulletIndex);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, BulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletSize, BulletSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletString, BulletString);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, Flags);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HAlign, HAlign);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndFirst, IndFirst);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndLeft, IndLeft);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndRight, IndRight);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_LocBulletFont, LocBulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpAfter, SpAfter);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpBefore, SpBefore);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpLine, SpLine);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_TextPosAfterBullet, TextPosAfterBullet);
+
+            // TextXForm
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtAngle, TxtAngle);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtHeight, TxtHeight);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtLocPinX, TxtLocPinX);

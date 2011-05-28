@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.DOM;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -108,6 +109,17 @@ namespace VisioAutomationSamples
             fontname_cells.FillPattern = 0;
             fontname_cells.LinePattern = 0;
             fontname_cells.LineWeight = 0.0;
+            fontname_cells.HAlign = 0;
+            fontname_cells.CharSize = VA.Convert.PointsToInches(36.0);
+
+            var charbox_cells = new VA.DOM.ShapeCells();
+            charbox_cells.FillPattern = 0;
+            charbox_cells.LinePattern = 1;
+            charbox_cells.LineWeight = 0.0;
+            charbox_cells.LineColor= "rgb(150,150,150)";
+            charbox_cells.HAlign = 1;
+            charbox_cells.CharSize = VA.Convert.PointsToInches(24.0);
+
             foreach (string fontname in fontnames)
             {
                 var fontname_box = new_node(5, 0.5, fontname);
@@ -140,6 +152,7 @@ namespace VisioAutomationSamples
 
                         var cell_box = new_node(0.50, 0.50, curchar);
                         cell_box.Data.Font = fontname;
+                        cell_box.Data.Cells = charbox_cells;
                         row_box.AddNode(cell_box);
                     }
                 }
@@ -154,9 +167,7 @@ namespace VisioAutomationSamples
             var stencil = docs.OpenStencil("basic_u.vss");
             var rectmaster = stencil.Masters["Rectangle"];
 
-
-
-
+            
             var nodes = layout.Nodes.Where(n => n.Data.Render).ToList();
 
             var dom = new VA.DOM.Document();
@@ -167,21 +178,23 @@ namespace VisioAutomationSamples
             foreach (var node in nodes)
             {
                 var dom_shape = dom.Drop(rectmaster, node.Rectangle.Center);
-                if (node.Data.Cells != null)
+                var cells = node.Data.Cells;
+                if (cells == null)
                 {
-                    dom_shape.ShapeCells = node.Data.Cells;
-                    if (node.Data.Font != null)
-                    {
-                        dom_shape.ShapeCells.CharFont = font_to_id[node.Data.Font];
-                    }
+                    cells = new ShapeCells();
                 }
 
-                dom_shape.ShapeCells.Width = node.Rectangle.Width;
-                dom_shape.ShapeCells.Height = node.Rectangle.Height;
-                if (node.Data != null)
+                cells.Width = node.Rectangle.Width;
+                cells.Height = node.Rectangle.Height;
+
+                if (node.Data.Font != null)
                 {
-                    dom_shape.Text = node.Data.Text;
+                    cells.CharFont = font_to_id[node.Data.Font];
                 }
+                cells.CharFont = 15;
+
+                dom_shape.ShapeCells = cells;
+                dom_shape.Text = node.Data.Text;
             }
 
             dom.Render(page);

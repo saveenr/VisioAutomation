@@ -7,7 +7,7 @@ namespace VisioAutomationSamples
     {
         private static void Main(string[] args)
         {
-            bool debug = false;
+            bool debug = true;
 
             if (!debug)
             {
