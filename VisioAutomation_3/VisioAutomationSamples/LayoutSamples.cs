@@ -94,7 +94,7 @@ namespace VisioAutomationSamples
 
             var samplechars = sampletext.Select(c => new string( new char[] { c })).ToList();
 
-            var fontnames = new[] { "Calibri", "Arial" };
+            var fontnames = new[] { "Segoe", "Calibri", "Impact" };
 
             var layout = new BH.BoxHierarchyLayout<NodeData>();
             layout.LayoutOptions.DirectionVertical = VA.DirectionVertical.TopToBottom;
@@ -174,7 +174,8 @@ namespace VisioAutomationSamples
             dom.ResolveAllShapeObjects = true;
 
             var font_to_id = doc.Fonts.AsEnumerable().ToDictionary(f => f.Name, f => f.ID);
-
+            var unique_fonts = new HashSet<string>();
+            var unique_fontids = new HashSet<int>();
             foreach (var node in nodes)
             {
                 var dom_shape = dom.Drop(rectmaster, node.Rectangle.Center);
@@ -183,15 +184,21 @@ namespace VisioAutomationSamples
                 {
                     cells = new ShapeCells();
                 }
+                else
+                {
+                    cells = node.Data.Cells.ShallowCopy();
+                }
 
                 cells.Width = node.Rectangle.Width;
                 cells.Height = node.Rectangle.Height;
 
                 if (node.Data.Font != null)
                 {
-                    cells.CharFont = font_to_id[node.Data.Font];
+                    unique_fonts.Add(node.Data.Font);
+                    int font = font_to_id[node.Data.Font];
+                    unique_fontids.Add(font);
+                    cells.CharFont = font;
                 }
-                cells.CharFont = 15;
 
                 dom_shape.ShapeCells = cells;
                 dom_shape.Text = node.Data.Text;
