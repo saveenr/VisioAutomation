@@ -3,11 +3,53 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using BH = VisioAutomation.Layout.BoxHierarchy;
 
 namespace VisioAutomationSamples
 {
     public static class LayoutSamples
     {
+        public class NodeData
+        {
+            public IVisio.Shape VisioShape;
+            public string Text;
+            public bool Render;
+            public VA.DOM.ShapeCells Cells;
+            public string Font;
+
+            public NodeData()
+            {
+                this.Render = true;
+                this.Cells = new VA.DOM.ShapeCells();
+            }
+        }
+
+        public static BH.Node<NodeData> new_node()
+        {
+            return new_node(null);
+        }
+
+        public static BH.Node<NodeData> new_node(string s)
+        {
+            var box = new BH.Node<NodeData>();
+            box.Data = new NodeData();
+            box.Data.Text = s;
+            return box;
+        }
+
+        public static BH.Node<NodeData> new_node(double w, double h, string s)
+        {
+            var box = new BH.Node<NodeData>();
+            box.Width = w;
+            box.Height = h;
+            box.Data = new NodeData();
+            box.Data.Text = s;
+            return box;
+        }
+
+
+
+
         public static void BoxHierarchy()
         {
             // Create a layout
@@ -42,6 +84,111 @@ namespace VisioAutomationSamples
             // Make the page big enough to fit what was drawn + a small border
             var margin = new VA.Drawing.Size(0.5, 0.5);
             page1.ResizeToFitContents(margin);
+        }
+
+        public static void BoxHeirarchy_FontGlyphComparision()
+        {
+            var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
+                             "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
+
+            var samplechars = sampletext.Select(c => new string( new char[] { c })).ToList();
+
+            var fontnames = new[] { "Calibri", "Arial" };
+
+            var layout = new BH.BoxHierarchyLayout<NodeData>();
+            layout.LayoutOptions.DirectionVertical = VA.DirectionVertical.TopToBottom;
+
+            var root = layout.Root;
+            root.Direction = BH.LayoutDirection.Vertical;
+            root.ChildSeparation = 0.5;
+            root.Data = new NodeData();
+            root.Data.Render = false;
+
+            var fontname_cells = new VA.DOM.ShapeCells();
+            fontname_cells.FillPattern = 0;
+            fontname_cells.LinePattern = 0;
+            fontname_cells.LineWeight = 0.0;
+            foreach (string fontname in fontnames)
+            {
+                var fontname_box = new_node(5, 0.5, fontname);
+                fontname_box.Data.Cells = fontname_cells;
+                root.AddNode(fontname_box);
+
+                var font_box = new_node();
+                font_box.Direction = BH.LayoutDirection.Vertical;
+                font_box.ChildSeparation = 0.25;
+                font_box.Data.Render = false;
+                root.AddNode(font_box);
+
+                int numcols = 17;
+                int numrows = 5;
+                int numcells = numcols*numrows;
+
+
+                foreach (int row in Enumerable.Range(0, numrows))
+                {
+                    var row_box = new_node();
+                    row_box.Direction = BH.LayoutDirection.Horizonal;
+                    row_box.ChildSeparation = 0.25;
+                    row_box.Data.Render = false;
+                    font_box.AddNode(row_box);
+
+                    foreach (int col in Enumerable.Range(0, numcols))
+                    {
+                        int charindex = (col + (numcols*row))%numcells;
+                        string curchar = samplechars[charindex];
+
+                        var cell_box = new_node(0.50, 0.50, curchar);
+                        cell_box.Data.Font = fontname;
+                        row_box.AddNode(cell_box);
+                    }
+                }
+            }
+
+            layout.PerformLayout();
+
+            var visapp = new IVisio.Application();
+            var doc = visapp.Documents.Add("");
+            var page = visapp.ActivePage;
+            var docs = visapp.Documents;
+            var stencil = docs.OpenStencil("basic_u.vss");
+            var rectmaster = stencil.Masters["Rectangle"];
+
+
+
+
+            var nodes = layout.Nodes.Where(n => n.Data.Render).ToList();
+
+            var dom = new VA.DOM.Document();
+            dom.ResolveAllShapeObjects = true;
+
+            var font_to_id = doc.Fonts.AsEnumerable().ToDictionary(f => f.Name, f => f.ID);
+
+            foreach (var node in nodes)
+            {
+                var dom_shape = dom.Drop(rectmaster, node.Rectangle.Center);
+                if (node.Data.Cells != null)
+                {
+                    dom_shape.ShapeCells = node.Data.Cells;
+                    if (node.Data.Font != null)
+                    {
+                        dom_shape.ShapeCells.CharFont = font_to_id[node.Data.Font];
+                    }
+                }
+
+                dom_shape.ShapeCells.Width = node.Rectangle.Width;
+                dom_shape.ShapeCells.Height = node.Rectangle.Height;
+                if (node.Data != null)
+                {
+                    dom_shape.Text = node.Data.Text;
+                }
+            }
+
+            dom.Render(page);
+
+
+            page.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));
+
         }
 
         public static void MSAGL()
@@ -111,4 +258,6 @@ namespace VisioAutomationSamples
             vdom.Render(page1, options);
         }
     }
+
+    
 }
