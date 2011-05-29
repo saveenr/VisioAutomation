@@ -3,6 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using GRID = VisioAutomation.Layout.Grid;
 
 namespace VisioAutomationSamples
 {
@@ -63,6 +64,48 @@ namespace VisioAutomationSamples
             }
             update.Execute(page);
             page.ResizeToFitContents(new VA.Drawing.Size(1, 1));
+        }
+
+        public static void PercentGrid()
+        {
+            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+
+            var highlighted_cells = new VA.DOM.ShapeCells();
+            highlighted_cells.FillForegnd = "rgb(255,0,0)";
+            highlighted_cells.LinePattern = 0;
+            highlighted_cells.LineWeight = 0;
+
+            var dimmed_cells = new VA.DOM.ShapeCells();
+            dimmed_cells.FillForegnd = "rgb(240,240,240)";
+            dimmed_cells.LinePattern = 0;
+            dimmed_cells.LineWeight = 0;
+
+            var visapp = page.Application;
+            var docs = visapp.Documents;
+            var stencil = docs.OpenStencil("basic_u.vss");
+            var rectmaster = stencil.Masters["Rectangle"];
+
+            var cellsize = new VA.Drawing.Size(0.5, 0.5);
+            var layout = new GRID.GridLayout(10, 10, cellsize, rectmaster);
+            layout.CellSpacing = new VA.Drawing.Size(0.25, 0.25);
+
+            layout.PerformLayout();
+
+            int num_highlighted = 2;
+            for (int row = 0; row < 10; row++)
+            {
+                for (int col = 0; col < 10; col++)
+                {
+                    var node = layout.GetNode(col, row);
+                    int i = (row * 10) + col;
+                    var fmt = i < num_highlighted ? highlighted_cells : dimmed_cells;
+                    node.ShapeCells = fmt;
+                }
+            }
+
+            layout.Render(page);
+            page.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));
+
         }
     }
 }

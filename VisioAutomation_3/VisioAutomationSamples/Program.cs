@@ -7,7 +7,8 @@ namespace VisioAutomationSamples
     {
         private static void Main(string[] args)
         {
-            bool debug = true;
+            bool debug = false;
+            //bool debug = true;
 
             if (!debug)
             {
@@ -42,7 +43,7 @@ namespace VisioAutomationSamples
             }
             else
             {
-                LayoutSamples.BoxHeirarchy_FontGlyphComparision();
+                InfoGraphicSamples.PercentGrid();
             }
         }
     }
