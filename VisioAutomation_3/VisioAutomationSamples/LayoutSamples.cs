@@ -25,7 +25,7 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static BH.Node<NodeData> new_node()
+        private static BH.Node<NodeData> new_node()
         {
             return new_node(null);
         }

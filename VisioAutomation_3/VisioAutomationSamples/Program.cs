@@ -7,6 +7,12 @@ namespace VisioAutomationSamples
     {
         private static void Main(string[] args)
         {
+            var form = new FormSampleRunner();
+            form.ShowDialog();
+        }
+
+        void old_code()
+        {
             bool debug = false;
             //bool debug = true;
 
@@ -45,6 +51,8 @@ namespace VisioAutomationSamples
             {
                 InfoGraphicSamples.PercentGrid();
             }
+
         }
+
     }
 }

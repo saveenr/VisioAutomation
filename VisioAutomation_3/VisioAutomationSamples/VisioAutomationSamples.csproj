@@ -85,6 +85,12 @@
     <Compile Include="BoxHierarchyShared.cs" />
     <Compile Include="ColorSample.cs" />
     <Compile Include="ConnectorSamples.cs" />
+    <Compile Include="FormSampleRunner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSampleRunner.Designer.cs">
+      <DependentUpon>FormSampleRunner.cs</DependentUpon>
+    </Compile>
     <Compile Include="InfoGraphicSamples.cs" />
     <Compile Include="LayoutSamples.cs" />
     <Compile Include="PageSamples.cs" />
@@ -131,7 +137,11 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="FormSampleRunner.resx">
+      <DependentUpon>FormSampleRunner.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
