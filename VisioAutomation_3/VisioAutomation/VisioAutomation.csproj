@@ -78,6 +78,7 @@
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
+    <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Layout\ShapeLayoutQuery.cs" />
     <Compile Include="Layout\ShapeLayoutCells.cs" />
