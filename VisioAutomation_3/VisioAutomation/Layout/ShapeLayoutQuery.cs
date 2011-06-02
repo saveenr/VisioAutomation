@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Layout
 {
-    public class ShapeLayoutQuery : VA.ShapeSheet.Query.CellQuery
+    class ShapeLayoutQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQueryColumn ConFixedCode { get; set; }
         public VA.ShapeSheet.Query.CellQueryColumn ConLineJumpCode { get; set; }

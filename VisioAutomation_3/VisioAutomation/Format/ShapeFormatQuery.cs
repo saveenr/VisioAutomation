@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Format
 {
-    public class ShapeFormatQuery : VA.ShapeSheet.Query.CellQuery
+    class ShapeFormatQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQueryColumn FillBkgnd { get; set; }
         public VA.ShapeSheet.Query.CellQueryColumn FillBkgndTrans { get; set; }

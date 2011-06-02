@@ -4,10 +4,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
 
-
 namespace VisioAutomation.Layout
 {
-
     class LockQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQueryColumn LockAspect { get; set; }
