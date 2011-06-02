@@ -42,7 +42,7 @@
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(13, 47);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(359, 499);
+            this.checkedListBox1.Size = new System.Drawing.Size(559, 394);
             this.checkedListBox1.TabIndex = 0;
             // 
             // buttonRun
@@ -79,13 +79,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 562);
+            this.ClientSize = new System.Drawing.Size(584, 462);
             this.Controls.Add(this.buttonSelectNone);
             this.Controls.Add(this.buttonSelectAll);
             this.Controls.Add(this.buttonRun);
             this.Controls.Add(this.checkedListBox1);
+            this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FormSampleRunner";
             this.Text = "VisioAutomation Samples";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSampleRunner_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormSampleRunner_FormClosed);
             this.ResumeLayout(false);
 
         }

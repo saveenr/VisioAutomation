@@ -85,6 +85,7 @@
     <Compile Include="BoxHierarchyShared.cs" />
     <Compile Include="ColorSample.cs" />
     <Compile Include="ConnectorSamples.cs" />
+    <Compile Include="DebugSamples.cs" />
     <Compile Include="FormSampleRunner.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +95,12 @@
     <Compile Include="InfoGraphicSamples.cs" />
     <Compile Include="LayoutSamples.cs" />
     <Compile Include="PageSamples.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SampleMethod.cs" />
     <Compile Include="SimpleGeometrySamples.cs" />
     <Compile Include="SmartShapeSamples.cs" />
     <Compile Include="SpecialDocumentSamples.cs" />
@@ -136,6 +143,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormSampleRunner.resx">
