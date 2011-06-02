@@ -102,7 +102,6 @@ namespace VisioPowerTools
 
     internal static class ShapeFormatHelper
     {
-        private static VA.Format.ShapeFormatQuery _format_query = new VA.Format.ShapeFormatQuery();
 
         public static ShapeColors GetColorsFromShape(IVisio.Shape shape)
         {
@@ -111,27 +110,15 @@ namespace VisioPowerTools
                 throw new System.ArgumentNullException("shape");
             }
 
-            var r = _format_query.GetFormulasAndResults<double>(shape);
-
+            var format = VisioAutomation.Format.FormatHelper.GetShapeFormat(shape);
             var shapecolors = new ShapeFormatHelper.ShapeColors();
-            var fgord = _format_query.FillForegnd;
-            var bgord = _format_query.FillBkgnd;
-            var sfgord = _format_query.ShdwForegnd;
-            var bggord = _format_query.ShdwBkgnd;
-            var lcord = _format_query.LineColor;
-            var ccord = _format_query.CharColor;
 
-            var tablef = r.Formulas;
-            var tabler = r.Results;
-
-            var fr = tablef.Rows[0];
-            var rr = tabler.Rows[0];
-            shapecolors.FillForegroundColor = new VA.ShapeSheet.CellData<int>(fr[fgord], (int)rr[fgord]);
-            shapecolors.FillBackgroundColor = new VA.ShapeSheet.CellData<int>(fr[bgord], (int)rr[bgord]);
-            shapecolors.ShadowForegroundColor = new VA.ShapeSheet.CellData<int>(fr[sfgord], (int)rr[sfgord]);
-            shapecolors.ShadowBackgroundColor = new VA.ShapeSheet.CellData<int>(fr[bggord], (int)rr[bggord]);
-            shapecolors.LineColor = new VA.ShapeSheet.CellData<int>(fr[lcord], (int)rr[lcord]);
-            shapecolors.CharacterColor = new VA.ShapeSheet.CellData<int>(fr[ccord], (int)rr[ccord]);
+            shapecolors.FillForegroundColor = format.FillForegnd;
+            shapecolors.FillBackgroundColor = format.FillBkgnd;
+            shapecolors.ShadowForegroundColor = format.ShdwForegnd;
+            shapecolors.ShadowBackgroundColor = format.ShdwBkgnd;
+            shapecolors.LineColor = format.LineColor;
+            shapecolors.CharacterColor = format.CharColor;
 
             return shapecolors;
         }

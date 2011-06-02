@@ -46,7 +46,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>d:\saveenr\code\publish\VisioPowerTools\</PublishUrl>
+    <PublishUrl>\saveenr\code\publish\VisioPowerTools\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
     <ApplicationVersion>1.0.0.64</ApplicationVersion>
