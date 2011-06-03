@@ -36,7 +36,7 @@ namespace VisioAutomationSamples
                 shapes[i].Text = labels[i];
             }
 
-            page.ResizeToFitContents(new VA.Drawing.Size(1,1));
+            page.ResizeToFitContents(1,1);
         }
 
         public static void PieChart()
@@ -63,7 +63,7 @@ namespace VisioAutomationSamples
                 fmt.Apply(update,shape.ID16);
             }
             update.Execute(page);
-            page.ResizeToFitContents(new VA.Drawing.Size(1, 1));
+            page.ResizeToFitContents(1,1);
         }
 
         public static void PercentGrid()
@@ -104,7 +104,7 @@ namespace VisioAutomationSamples
             }
 
             layout.Render(page);
-            page.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));
+            page.ResizeToFitContents(0.5, 0.5);
 
         }
     }

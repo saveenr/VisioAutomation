@@ -51,7 +51,7 @@ namespace VisioAutomationSamples
 
             update.Execute(page);
 
-            page.ResizeToFitContents( new VA.Drawing.Size(1,1));
+            page.ResizeToFitContents(1,1);
         }
     }
 }

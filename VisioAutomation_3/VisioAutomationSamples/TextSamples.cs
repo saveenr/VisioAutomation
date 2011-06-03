@@ -176,7 +176,7 @@ The indenting has ended.
             
             layout.Render(page);
 
-            page.ResizeToFitContents(new VA.Drawing.Size(1.0,1.0));
+            page.ResizeToFitContents(1.0,1.0);
             var nodes = layout.Nodes.ToList();
 
             var items = from fi in Enumerable.Range(0, fonts.Count())

@@ -34,16 +34,14 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             page.Name = "Spirograph";
 
-            var colors =
-                new[]
+            var colors = new[]
                     {
-                        0xf26420, 0xf7931c, 0xfec20d, 0xfff200, 0xcada28, 0x8cc63e, 0x6c9d30,
-                        0x288f39,
-                        0x6f3a, 0x6f71,
-                        0x8eb0, 0xadee, 0x8ed3, 0x71bb, 0x53a6, 0x2e3091, 0x5b57a6, 0x652d91,
-                        0x92278e,
-                        0xbd198c, 0xec008b,
-                        0xec1c23, 0xc1272c, 0x981a1e
+                        0xf26420, 0xf7931c, 0xfec20d, 0xfff200, 
+                        0xcada28, 0x8cc63e, 0x6c9d30, 0x288f39,
+                        0x006f3a, 0x006f71, 0x008eb0, 0x00adee, 
+                        0x008ed3, 0x0071bb, 0x0053a6, 0x2e3091, 
+                        0x5b57a6, 0x652d91, 0x92278e, 0xbd198c, 
+                        0xec008b, 0xec1c23, 0xc1272c, 0x981a1e
                     };
 
             var origin = new VA.Drawing.Point(4, 4);
@@ -87,7 +85,6 @@ namespace VisioAutomationSamples
             var docs = app.Documents;
             var stencil = docs.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];
-
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             int num_cols = 7;
@@ -108,12 +105,14 @@ namespace VisioAutomationSamples
 
             int max_grad_id = 40;
             int n = 0;
+            
             foreach (var node in layout.Nodes)
             {
                 int grad_id = n%max_grad_id;
                 node.Text = grad_id.ToString();
                 n++;
             }
+
             layout.Render(page);
 
             var color1 = new VA.Drawing.ColorRGB(0xffdddd);
@@ -127,9 +126,10 @@ namespace VisioAutomationSamples
             string color2_formula = color2.ToFormula();
 
             n = 0;
+
             foreach (var node in layout.Nodes)
             {
-                short shapeid = (short) node.ShapeID;
+                short shapeid = node.ShapeID;
                 int grad_id = n%max_grad_id;
 
                 format.FillPattern = grad_id;
@@ -143,7 +143,7 @@ namespace VisioAutomationSamples
             }
 
             update.Execute(page);
-            page.ResizeToFitContents(new VA.Drawing.Size(1, 1));
+            page.ResizeToFitContents(1, 1);
         }
     }
 }

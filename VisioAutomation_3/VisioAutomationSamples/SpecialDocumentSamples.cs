@@ -24,7 +24,7 @@ namespace VisioAutomationSamples
 
             orgchart.Render(SampleEnvironment.Application);
 
-            SampleEnvironment.Application.ActivePage.ResizeToFitContents( new VA.Drawing.Size(1,1));
+            SampleEnvironment.Application.ActivePage.ResizeToFitContents(1,1);
         }
     }
 }

@@ -11,6 +11,12 @@ namespace VisioAutomation.Extensions
             VA.PageHelper.Activate(page);
         }
 
+        public static void ResizeToFitContents(this IVisio.Page page, double borderwidth, double borderheight)
+        {
+            var bordersize = new VA.Drawing.Size(borderwidth, borderheight);
+            VA.PageHelper.ResizeToFitContents(page, bordersize);
+        }
+
         public static void ResizeToFitContents(this IVisio.Page page, VA.Drawing.Size bordersize)
         {
             VA.PageHelper.ResizeToFitContents(page,bordersize);

@@ -19,13 +19,9 @@ namespace VisioAutomationSamples
             page.SetSize(page_size);
 
             // Load the Stencil
-            short flags = (short) IVisio.VisOpenSaveArgs.visOpenRO |
-                          (short) IVisio.VisOpenSaveArgs.visOpenDocked;
             var application = page.Application;
             var documents = application.Documents;
-            var stencil = documents.OpenEx("basic_u.vss", flags);
-
-            // Find the Rectangle master
+            var stencil = documents.OpenStencil("basic_u.vss");
             var stencil_masters = stencil.Masters;
             var master = stencil_masters["Rectangle"];
 
@@ -42,7 +38,7 @@ namespace VisioAutomationSamples
             // Draw the masters
             var shapeids = page.DropManyU(masters, centerpoints);
 
-            page.ResizeToFitContents(new VA.Drawing.Size(1,1));
+            page.ResizeToFitContents(1,1);
         }
     }
 }

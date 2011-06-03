@@ -23,8 +23,8 @@ namespace VisioAutomationSamples
             VA.CustomProperties.CustomPropertyHelper.DeleteCustomProperty(s1, "FOO2");
 
             // Set the value of an existing properties
-            VA.CustomProperties.CustomPropertyHelper.UpdateCustomProperty(s1, "FOO3",
-                                                         VA.Convert.StringToFormulaString("BAR3updated"));
+            string formula = VA.Convert.StringToFormulaString("BAR3updated");
+            VA.CustomProperties.CustomPropertyHelper.UpdateCustomProperty(s1, "FOO3", formula);
 
             // retrieve all the properties
             var props = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(s1);

@@ -48,8 +48,6 @@ namespace VisioAutomationSamples
         }
 
 
-
-
         public static void BoxHierarchy()
         {
             // Create a layout
@@ -89,9 +87,9 @@ namespace VisioAutomationSamples
             var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
 
-            var samplechars = sampletext.Select(c => new string( new char[] { c })).ToList();
+            var samplechars = sampletext.Select(c => new string(new char[] {c})).ToList();
 
-            var fontnames = new[] { "Segoe", "Calibri", "Impact" };
+            var fontnames = new[] {"Segoe", "Calibri", "Impact"};
 
             var layout = new BH.BoxHierarchyLayout<NodeData>();
             layout.LayoutOptions.DirectionVertical = VA.DirectionVertical.TopToBottom;
@@ -113,7 +111,7 @@ namespace VisioAutomationSamples
             charbox_cells.FillPattern = 0;
             charbox_cells.LinePattern = 1;
             charbox_cells.LineWeight = 0.0;
-            charbox_cells.LineColor= "rgb(150,150,150)";
+            charbox_cells.LineColor = "rgb(150,150,150)";
             charbox_cells.HAlign = 1;
             charbox_cells.CharSize = VA.Convert.PointsToInches(24.0);
 
@@ -163,16 +161,15 @@ namespace VisioAutomationSamples
             var docs = visapp.Documents;
             var stencil = docs.OpenStencil("basic_u.vss");
             var rectmaster = stencil.Masters["Rectangle"];
-
             
             var nodes = layout.Nodes.Where(n => n.Data.Render).ToList();
-
             var dom = new VA.DOM.Document();
             dom.ResolveAllShapeObjects = true;
 
             var font_to_id = doc.Fonts.AsEnumerable().ToDictionary(f => f.Name, f => f.ID);
             var unique_fonts = new HashSet<string>();
             var unique_fontids = new HashSet<int>();
+            
             foreach (var node in nodes)
             {
                 var dom_shape = dom.Drop(rectmaster, node.Rectangle.Center);
@@ -204,14 +201,12 @@ namespace VisioAutomationSamples
             dom.Render(page);
 
 
-            page.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));
-
+            page.ResizeToFitContents(0.5, 0.5);
         }
 
         public static void MSAGL()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
             var vdom = new VA.Layout.MSAGL.Drawing();
 
             // Create a Node 0
@@ -221,7 +216,6 @@ namespace VisioAutomationSamples
             n0.Size = new VA.Drawing.Size(3, 2);
 
             // Create Node 1
-
             var n1 = vdom.AddShape("n1", "N1", "basflo_u.vss", "Decision");
 
             // Format Node 1
@@ -275,6 +269,4 @@ namespace VisioAutomationSamples
             vdom.Render(page1, options);
         }
     }
-
-    
 }

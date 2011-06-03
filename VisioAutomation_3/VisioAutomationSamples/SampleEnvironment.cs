@@ -13,28 +13,39 @@ namespace VisioAutomationSamples
             {
                 if (app== null)
                 {
-                    app = new IVisio.ApplicationClass();
-                    var documents = app.Documents;
-                    documents.Add("");
+                    // there is no application object associated with
+                    // this session, so create one
+                    create_new_app_instance();
                 }
                 else
                 {
+                    // there is an application object associated with this session
+
+                    // before we continue we should try to validate that the
+                    // application is valid - the user might have closed the application
+                    // leaving us with an application object that is invalid
+
                     try
                     {
-                        // check if we the app is still around (user might have closed it)
-                        var docs = app.Documents;
+                        // try to do something simple, read-only, and fast with the application object
+                        var app_version = app.Version;
                     }
                     catch (System.Runtime.InteropServices.COMException ce)
                     {
-                        // try restarting the application
-                        app = new IVisio.ApplicationClass();
-                        var documents = app.Documents;
-                        documents.Add("");
-                    }
-                    
+                        // If a COMException is thrown, this indicates that the
+                        // application object is invalid, so create a new one
+                        create_new_app_instance();
+                    }                   
                 }
                 return app;
             }
+        }
+
+        private static void create_new_app_instance()
+        {
+            app = new IVisio.ApplicationClass();
+            var documents = app.Documents;
+            documents.Add("");
         }
     }
 }

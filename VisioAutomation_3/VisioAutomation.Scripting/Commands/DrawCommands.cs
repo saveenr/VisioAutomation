@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 layout.Render(page);
-                page.ResizeToFitContents(new VA.Drawing.Size(0,0));
+                page.ResizeToFitContents();
             }
 
             var page_shapes = page.Shapes;
