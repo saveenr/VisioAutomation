@@ -31,38 +31,42 @@ namespace VisioAutomationSamples
             var connector = stencil.Masters["Dynamic Connector"];
 
             // connect shapes - but leave s0 alone
-            s1.AutoConnect(s2, IVisio.VisAutoConnectDir.visAutoConnectDirNone, null);
-            s2.AutoConnect(s3, IVisio.VisAutoConnectDir.visAutoConnectDirNone, null);
-            s3.AutoConnect(s2, IVisio.VisAutoConnectDir.visAutoConnectDirNone, null);
-            s3.AutoConnect(s4, IVisio.VisAutoConnectDir.visAutoConnectDirNone, null);
-            s5.AutoConnect(s6, IVisio.VisAutoConnectDir.visAutoConnectDirNone, null);
+            var dir = IVisio.VisAutoConnectDir.visAutoConnectDirNone;
+            s1.AutoConnect(s2, dir, null);
+            s2.AutoConnect(s3, dir, null);
+            s3.AutoConnect(s2, dir, null);
+            s3.AutoConnect(s4, dir, null);
+            s5.AutoConnect(s6, dir, null);
 
             var normal_edges = VA.Connections.PathAnalysis.GetEdges(page);
-            var tc_edges_0 = VA.Connections.PathAnalysis.GetTransitiveClosure(page,
-                                                                  VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
-            var tc_edges_1 = VA.Connections.PathAnalysis.GetTransitiveClosure(page,
-                                                                  VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+            var edge_handling_0 = VA.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
+            var edge_handling_1 = VA.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional;
+            var tc_edges_0 = VA.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_0);
+            var tc_edges_1 = VA.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_1);
 
             var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
             var sb0 = new System.Text.StringBuilder();
             sb0.AppendLine("Connections");
+            
             foreach (var e in normal_edges)
             {
                 string s = string.Format("{0} - {1}", e.From.Text, e.To.Text);
                 sb0.AppendLine(s);
             }
+
             legend0.Text = sb0.ToString();
 
             var legend1 = page.DrawRectangle(6.5, 0, 8.5, 6);
             var sb1 = new System.Text.StringBuilder();
             sb1.AppendLine("Transitive closure (treat edges as bidirectional)");
+            
             foreach (var e in tc_edges_1)
             {
                 string s = string.Format("{0} -> {1}", e.From.Text, e.To.Text);
                 sb1.AppendLine(s);
             }
-            legend1.Text = sb1.ToString();
 
+            legend1.Text = sb1.ToString();
         }
     }
 }

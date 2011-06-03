@@ -10,7 +10,7 @@ namespace VisioAutomationSamples
     {
         public static void ColorGrid()
         {
-            var fill_foregnd = VisioAutomation.ShapeSheet.SRCConstants.FillForegnd;
+            var fill_foregnd = VA.ShapeSheet.SRCConstants.FillForegnd;
 
             int[] vista_desktop_colors = {
                                              0x0A3B76, 0x4395D1, 0x99D9EA, 0x0D686B, 0x00A99D, 0x7ACCC8, 0x82CA9C,

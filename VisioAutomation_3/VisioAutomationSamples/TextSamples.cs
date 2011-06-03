@@ -76,7 +76,7 @@ The indenting has ended.
             var s0 = page.DrawRectangle(1, 1, 4, 4);
             s0.Text = "Hello World";
 
-            s0.GetCell(VisioAutomation.ShapeSheet.SRCConstants.TxtAngle).Formula = "-Angle";
+            s0.GetCell(VA.ShapeSheet.SRCConstants.TxtAngle).Formula = "-Angle";
         }
 
         public static void TextFields()
@@ -84,9 +84,9 @@ The indenting has ended.
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var s0 = page.DrawRectangle(1, 1, 4, 4);
 
-            VA.Text.TextHelper.SetTextFormatFields(s0, "{0} ({1} of {2})", VisioAutomation.Text.Markup.Fields.NumberOfPages,
-                                              VisioAutomation.Text.Markup.Fields.PageNumber,
-                                              VisioAutomation.Text.Markup.Fields.PageName);
+            VA.Text.TextHelper.SetTextFormatFields(s0, "{0} ({1} of {2})", VA.Text.Markup.Fields.NumberOfPages,
+                                              VA.Text.Markup.Fields.PageNumber,
+                                              VA.Text.Markup.Fields.PageName);
         }
 
         public static void TextMarkup1()
@@ -123,7 +123,7 @@ The indenting has ended.
             page.DrawRectangle(1, 1, 4, 4);
 
             var tokens = new[] {"The ", "Quick ", "Brown ", "Fox"};
-            var e1 = new VisioAutomation.Text.Markup.TextElement();
+            var e1 = new VA.Text.Markup.TextElement();
             foreach (var token in tokens)
             {
                 e1.AppendText(token);
@@ -140,20 +140,20 @@ The indenting has ended.
             // Alignment Box fits to accomodate text
             s0.Text = "Alignment Box fits to accomodate text";
 
-            s0.GetCell(VisioAutomation.ShapeSheet.SRCConstants.Width).Formula = "2.0";
-            s0.GetCell(VisioAutomation.ShapeSheet.SRCConstants.Height).Formula = "GUARD(TxtHeight)";
-            s0.GetCell(VisioAutomation.ShapeSheet.SRCConstants.TxtWidth).Formula = "Width*1";
-            s0.GetCell(VisioAutomation.ShapeSheet.SRCConstants.TxtHeight).Formula = "TEXTHEIGHT(TheText,TxtWidth)";
+            s0.GetCell(VA.ShapeSheet.SRCConstants.Width).Formula = "2.0";
+            s0.GetCell(VA.ShapeSheet.SRCConstants.Height).Formula = "GUARD(TxtHeight)";
+            s0.GetCell(VA.ShapeSheet.SRCConstants.TxtWidth).Formula = "Width*1";
+            s0.GetCell(VA.ShapeSheet.SRCConstants.TxtHeight).Formula = "TEXTHEIGHT(TheText,TxtWidth)";
 
             // Text Scales Proportional to Shape Height
             var s1 = page.DrawRectangle(0, 4, 8, 8);
             s1.Text = "Text Scales Proportional to Shape Height";
-            s0.GetCell(VisioAutomation.ShapeSheet.SRCConstants.Char_Size).Formula = "Height*0.25";
+            s0.GetCell(VA.ShapeSheet.SRCConstants.Char_Size).Formula = "Height*0.25";
 
             // Text scales smaller to fit more text
             var s2 = page.DrawRectangle(4, 0, 8, 4);
             s2.Text = "Text scales smaller to fit more text";
-            s2.GetCell(VisioAutomation.ShapeSheet.SRCConstants.Char_Size).Formula =
+            s2.GetCell(VA.ShapeSheet.SRCConstants.Char_Size).Formula =
                 "11pt * 10/SQRT(LEN(SHAPETEXT(TheText)))";
         }
 

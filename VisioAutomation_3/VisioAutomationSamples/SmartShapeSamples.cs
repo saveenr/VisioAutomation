@@ -33,11 +33,11 @@ namespace VisioAutomationSamples
             page.Application.ActiveWindow.SelectAll();
             var group = page.Application.ActiveWindow.Selection.Group();
 
-            VisioAutomation.Text.TextHelper.SetTextFormatFields(group,
+            VA.Text.TextHelper.SetTextFormatFields(group,
                                                            "{0} ( {1} of {2} )",
-                                                           VisioAutomation.Text.Markup.Fields.PageName,
-                                                           VisioAutomation.Text.Markup.Fields.PageNumber,
-                                                           VisioAutomation.Text.Markup.Fields.NumberOfPages);
+                                                           VA.Text.Markup.Fields.PageName,
+                                                           VA.Text.Markup.Fields.PageNumber,
+                                                           VA.Text.Markup.Fields.NumberOfPages);
         }
     }
 }

@@ -215,7 +215,7 @@ namespace VisioAutomationSamples
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            var vdom = new VisioAutomation.Layout.MSAGL.Drawing();
+            var vdom = new VA.Layout.MSAGL.Drawing();
 
             // Create a Node 0
             var n0 = vdom.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
@@ -269,10 +269,10 @@ namespace VisioAutomationSamples
             c2.ShapeCells.LineWeight = 0.10;
 
             // Perform the rendering
-            var renderer = new VisioAutomation.Layout.MSAGL.DirectedGraphLayout();
+            var renderer = new VA.Layout.MSAGL.DirectedGraphLayout();
             renderer.LayoutOptions.UseDynamicConnectors = true;
 
-            var options = new VisioAutomation.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.MSAGL.LayoutOptions();
             options.UseDynamicConnectors = false;
 
             vdom.Render(page1, options);
