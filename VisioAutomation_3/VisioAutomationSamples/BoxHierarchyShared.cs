@@ -1,13 +1,14 @@
 ﻿using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using BH = VisioAutomation.Layout.BoxHierarchy;
 
 namespace VisioAutomationSamples
 {
     public class BoxHierarchyShared
     {
         public static void DrawBoxHierarchyDrawNode(
-            VA.Layout.BoxHierarchy.Node<IVisio.Shape> node,
+            BH.Node<IVisio.Shape> node,
             VA.Drawing.Rectangle rect, IVisio.Page page)
         {
             var src_fillfg = VA.ShapeSheet.SRCConstants.FillForegnd;
@@ -27,20 +28,20 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static VA.Layout.BoxHierarchy.BoxHierarchyLayout<IVisio.Shape>
+        public static BH.BoxHierarchyLayout<IVisio.Shape>
             CreateSampleBoxHierarchyLayout()
         {
             // Create a new layout
             var layout =
-                new VA.Layout.BoxHierarchy.BoxHierarchyLayout<IVisio.Shape>(
-                    VA.Layout.BoxHierarchy.LayoutDirection.Vertical);
+                new BH.BoxHierarchyLayout<IVisio.Shape>(
+                    BH.LayoutDirection.Vertical);
 
             // Add the nodes and specify their sizes and in what direction to draw them
             var g0 = layout.Root;
             g0.AlignmentHorizontal = VA.Drawing.AlignmentHorizontal.Right;
             g0.Padding = 0.5;
 
-            var g1 = g0.AddNode(VA.Layout.BoxHierarchy.LayoutDirection.Vertical);
+            var g1 = g0.AddNode(BH.LayoutDirection.Vertical);
             g1.AlignmentHorizontal = VA.Drawing.AlignmentHorizontal.Center;
             g1.Padding = 0.25;
             g1.ChildSeparation = 0.25;
@@ -50,7 +51,7 @@ namespace VisioAutomationSamples
             g1.AddNode(1.75, 0.25);
             g1.AddNode(2, 0.25);
 
-            var g2 = g0.AddNode(VA.Layout.BoxHierarchy.LayoutDirection.Horizonal);
+            var g2 = g0.AddNode(BH.LayoutDirection.Horizonal);
             g2.AlignmentVertical = VA.Drawing.AlignmentVertical.Center;
             g2.Padding = 0.10;
             g2.ChildSeparation = 0.05;
@@ -61,7 +62,7 @@ namespace VisioAutomationSamples
             g2.AddNode(0.5, 0.7);
             g2.AddNode(0.5, 0.8);
 
-            var g3 = g2.AddNode(VA.Layout.BoxHierarchy.LayoutDirection.Vertical);
+            var g3 = g2.AddNode(BH.LayoutDirection.Vertical);
             g3.Padding = 0.25;
             g3.ChildSeparation = 0.20;
             g3.AddNode(0.30, 0.25, VA.Drawing.AlignmentHorizontal.Right);

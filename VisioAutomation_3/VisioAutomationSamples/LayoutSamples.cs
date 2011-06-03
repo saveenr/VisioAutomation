@@ -1,5 +1,4 @@
-﻿using VisioAutomation.DOM;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -75,9 +74,7 @@ namespace VisioAutomationSamples
                 BoxHierarchyShared.DrawBoxHierarchyDrawNode(node, node.Rectangle, page1);
             }
 
-            var src_linepat = new VA.ShapeSheet.SRC(
-                IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowLine,
-                IVisio.VisCellIndices.visLinePattern);
+            var src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
             var root_shape = layout.Root.Data;
             var cell_linepat = root_shape.GetCell(src_linepat);
             cell_linepat.FormulaU = "7";
@@ -182,7 +179,7 @@ namespace VisioAutomationSamples
                 var cells = node.Data.Cells;
                 if (cells == null)
                 {
-                    cells = new ShapeCells();
+                    cells = new VA.DOM.ShapeCells();
                 }
                 else
                 {
