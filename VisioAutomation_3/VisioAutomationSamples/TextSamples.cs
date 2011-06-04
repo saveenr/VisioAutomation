@@ -84,33 +84,32 @@ The indenting has ended.
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var s0 = page.DrawRectangle(1, 1, 4, 4);
 
-            VA.Text.TextHelper.SetTextFormatFields(s0, "{0} ({1} of {2})", VA.Text.Markup.Fields.NumberOfPages,
-                                              VA.Text.Markup.Fields.PageNumber,
-                                              VA.Text.Markup.Fields.PageName);
+            VA.Text.TextHelper.SetTextFormatFields(s0, "{0} ({1} of {2})", 
+                VA.Text.Markup.Fields.NumberOfPages,
+                VA.Text.Markup.Fields.PageNumber,
+                VA.Text.Markup.Fields.PageName);
         }
 
         public static void TextMarkup1()
         {
-            // the backspace char \b is not valid text in XML, that is why it is not included above
-
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            //vi.Page.Name = "14orgchart"; 
-
+            // Create the Shapes that will hold the text
             var s1 = page.DrawRectangle(0, 0, 8, 8);
             var s2 = page.DrawRectangle(8, 0, 16, 8);
             var s3 = page.DrawRectangle(0, 8, 8, 16);
             var s4 = page.DrawRectangle(8, 8, 16, 16);
+            var shapes = new[] { s1, s2, s3, s4 };
 
-            var markup_doms = new[] {text1, text2, text3, text4}
-                .Select(s => VA.Text.Markup.TextElement.FromXml(s, true))
-                .ToList();
-            var shapes = new[] {s1, s2, s3, s4};
-
+            // Create Text Markup XML documents for each string
+            var markup_strings = new[] {text1, text2, text3, text4};
+            
+            // Set the Text Markup for each shape
             for (int i = 0; i < shapes.Length; i++)
             {
                 var shape = shapes[i];
-                var markup_dom = markup_doms[i%markup_doms.Count];
+                var markup_string = markup_strings[i];
+                var markup_dom = VA.Text.Markup.TextElement.FromXml(markup_string, true);
                 markup_dom.SetShapeText(shape);
             }
         }
