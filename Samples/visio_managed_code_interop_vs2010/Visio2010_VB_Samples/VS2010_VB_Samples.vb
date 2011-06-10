@@ -1,8 +1,4 @@
-﻿Imports IVisio_VisSectionIndices = Microsoft.Office.Interop.Visio.VisSectionIndices
-Imports IVisio_VisRowIndices = Microsoft.Office.Interop.Visio.VisRowIndices
-Imports IVisio_VisCellIndices = Microsoft.Office.Interop.Visio.VisCellIndices
-Imports IVisio_VisUnitCodes = Microsoft.Office.Interop.Visio.VisUnitCodes
-Imports IVisio_VisGetSetArgs = Microsoft.Office.Interop.Visio.VisGetSetArgs
+﻿Imports IVisio = Microsoft.Office.Interop.Visio
 
 
 Public Class VS2010_VB_Samples
@@ -12,7 +8,7 @@ Public Class VS2010_VB_Samples
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "SGF")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
         Dim request = VisioInterop.Util.Create_SGF_Request()
-        
+
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 3)
         For i = 0 To request.Length - 1
@@ -35,7 +31,7 @@ Public Class VS2010_VB_Samples
 
     End Sub
 
-    
+
     Shared Sub Shape_GetResults(ByVal doc As Microsoft.Office.Interop.Visio.Document)
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "SGR")
@@ -85,7 +81,7 @@ Public Class VS2010_VB_Samples
         Next i
 
         ' EXECUTE THE REQUEST
-        Dim flags = CShort(IVisio_VisGetSetArgs.visSetBlastGuards Or IVisio_VisGetSetArgs.visSetUniversalSyntax)
+        Dim flags = CShort(IVisio.VisGetSetArgs.visSetBlastGuards Or IVisio.VisGetSetArgs.visSetUniversalSyntax)
         Dim count = shape.SetFormulas(SRCStream, formulas, flags)
 
         ' DISPLAY THE INFORMATION
@@ -192,7 +188,7 @@ Public Class VS2010_VB_Samples
         Dim request = VisioInterop.Util.Create_PSF_Request(shape)
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
-        Dim flags = CShort(IVisio_VisGetSetArgs.visSetBlastGuards Or IVisio_VisGetSetArgs.visSetUniversalSyntax)
+        Dim flags = CShort(IVisio.VisGetSetArgs.visSetBlastGuards Or IVisio.VisGetSetArgs.visSetUniversalSyntax)
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 4)
         Dim formulas = VS2010_VB_Samples.CreateObjectArray(request.Length)
         For i = 0 To request.Length - 1
