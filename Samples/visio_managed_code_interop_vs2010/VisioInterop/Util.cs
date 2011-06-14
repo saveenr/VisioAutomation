@@ -1,8 +1,28 @@
 ﻿using Microsoft.Office.Interop.Visio;
 using IVisio = Microsoft.Office.Interop.Visio;
+using System.Collections.Generic;
 
 namespace VisioInterop
 {
+    public static class ListExtensions
+    {
+        public static void Set3(this short[] list, int index, short section, short row, short cell)
+        {
+            list[(index * 3) + 0] = section;
+            list[(index * 3) + 1] = row;
+            list[(index * 3) + 2] = cell;
+        }
+
+        public static void Set4(this short[] list, int index, short shapeid, short section, short row, short cell)
+        {
+            list[(index * 4) + 0] = shapeid;
+            list[(index * 4) + 1] = section;
+            list[(index * 4) + 2] = row;
+            list[(index * 4) + 3] = cell;
+        }
+
+    }
+
     public static class Util
     {
         public static Shape CreateStandardShape(Page page)

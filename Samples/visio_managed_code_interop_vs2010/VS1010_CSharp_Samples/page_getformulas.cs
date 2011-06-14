@@ -1,5 +1,6 @@
 ﻿using VisioInterop;
 using IVisio = Microsoft.Office.Interop.Visio;
+using System.Collections.Generic;
 
 public static partial class VS2010_CSharp_Samples
 {
@@ -13,11 +14,9 @@ public static partial class VS2010_CSharp_Samples
         var SID_SRCStream = new short[request.Length*4];
         for (int i = 0; i < request.Length; i++)
         {
-            SID_SRCStream[i*4 + 0] = request[i].ShapeID;
-            SID_SRCStream[i*4 + 1] = request[i].CellSRC.SectionIndex;
-            SID_SRCStream[i*4 + 2] = request[i].CellSRC.RowIndex;
-            SID_SRCStream[i*4 + 3] = request[i].CellSRC.CellIndex;
+            SID_SRCStream.Set4(i, request[i].ShapeID, request[i].CellSRC.SectionIndex, request[i].CellSRC.RowIndex, request[i].CellSRC.CellIndex);
         }
+
 
         // EXECUTE THE REQUEST
         System.Array formulas_sa;

@@ -1,4 +1,5 @@
-﻿using VisioInterop;
+﻿using System.Collections.Generic;
+using VisioInterop;
 using IVisio = Microsoft.Office.Interop.Visio;
 public static partial class VS2010_CSharp_Samples
 {
@@ -9,13 +10,12 @@ public static partial class VS2010_CSharp_Samples
         var request = Util.Create_ShapeGetResults_Request();
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
-        var SRCStream = new short[request.Length*3];
+
+        var SRCStream = new short[request.Length * 3];
         var unitcodes = new object[request.Length];
         for (int i = 0; i < request.Length; i++)
         {
-            SRCStream[i*3 + 0] = request[i].CellSRC.SectionIndex;
-            SRCStream[i*3 + 1] = request[i].CellSRC.RowIndex;
-            SRCStream[i*3 + 2] = request[i].CellSRC.CellIndex;
+            SRCStream.Set3(i, request[i].CellSRC.SectionIndex, request[i].CellSRC.RowIndex, request[i].CellSRC.CellIndex);
             unitcodes[i] = request[i].UnitCode;
         }
 

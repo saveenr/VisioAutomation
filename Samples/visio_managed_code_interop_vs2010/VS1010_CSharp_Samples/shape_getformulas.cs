@@ -1,5 +1,6 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-
+﻿using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
+using VisioInterop;
 public static partial class VS2010_CSharp_Samples
 {
     public static void Shape_GetFormulas(IVisio.Document doc)
@@ -9,12 +10,10 @@ public static partial class VS2010_CSharp_Samples
         var request = VisioInterop.Util.Create_ShapeGetFormulas_Request();
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
-        var SRCStream = new short[request.Length*3];
+        var SRCStream = new short[request.Length * 3];
         for (int i = 0; i < request.Length; i++)
         {
-            SRCStream[i*3 + 0] = request[i].CellSRC.SectionIndex;
-            SRCStream[i*3 + 1] = request[i].CellSRC.RowIndex;
-            SRCStream[i*3 + 2] = request[i].CellSRC.CellIndex;
+            SRCStream.Set3(i,request[i].CellSRC.SectionIndex, request[i].CellSRC.RowIndex, request[i].CellSRC.CellIndex);
         }
 
         // EXECUTE THE REQUEST
