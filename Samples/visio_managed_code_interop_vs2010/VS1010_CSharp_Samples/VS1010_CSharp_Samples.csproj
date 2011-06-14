@@ -51,6 +51,7 @@
     <Compile Include="shape_getresults.cs" />
     <Compile Include="shape_setformulas.cs" />
     <Compile Include="shape_setresults.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Interop.Visio">
@@ -71,12 +72,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\VisioInterop\VisioInterop.csproj">
-      <Project>{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}</Project>
-      <Name>VisioInterop</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

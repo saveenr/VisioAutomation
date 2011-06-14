@@ -3,8 +3,8 @@
 
 Partial Public Class VS2010_VB_Samples
     Shared Sub Page_GetFormulas(ByVal doc As Microsoft.Office.Interop.Visio.Document)
-        Dim page = VisioInterop.Util.CreateStandardPage(doc, "PGF")
-        Dim shape = VisioInterop.Util.CreateStandardShape(page)
+        Dim page = Util.CreateStandardPage(doc, "PGF")
+        Dim shape = Util.CreateStandardShape(page)
 
         ' CREATE REQUEST
         Dim request = {New With { _

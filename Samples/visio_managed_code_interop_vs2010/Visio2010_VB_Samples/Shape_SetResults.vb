@@ -4,8 +4,8 @@
 Partial Public Class VS2010_VB_Samples
 
     Shared Sub Shape_SetResults(ByVal doc As Microsoft.Office.Interop.Visio.Document)
-        Dim page = VisioInterop.Util.CreateStandardPage(doc, "SSR")
-        Dim shape = VisioInterop.Util.CreateStandardShape(page)
+        Dim page = Util.CreateStandardPage(doc, "SSR")
+        Dim shape = Util.CreateStandardShape(page)
 
         ' CREATE REQUEST
         Dim request = {New With { _

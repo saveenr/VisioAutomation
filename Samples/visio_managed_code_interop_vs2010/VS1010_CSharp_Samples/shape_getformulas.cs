@@ -4,8 +4,8 @@ public static partial class VS2010_CSharp_Samples
 {
     public static void Shape_GetFormulas(IVisio.Document doc)
     {
-        var page = VisioInterop.Util.CreateStandardPage(doc, "SGF");
-        var shape = VisioInterop.Util.CreateStandardShape(page);
+        var page = Util.CreateStandardPage(doc, "SGF");
+        var shape = Util.CreateStandardShape(page);
 
         // CREATE REQUEST
         var request = new[]

@@ -4,8 +4,8 @@ public static partial class VS2010_CSharp_Samples
 {
 	public static void Shape_SetResults(IVisio.Document doc)
 	{
-        var page = VisioInterop.Util.CreateStandardPage(doc, "SSR");
-        var shape = VisioInterop.Util.CreateStandardShape(page);
+        var page = Util.CreateStandardPage(doc, "SSR");
+        var shape = Util.CreateStandardShape(page);
 
         // CREATE REQUEST
         var request = new[]
