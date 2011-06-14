@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VS1010_CSharp_Samples", "VS
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Visio2010_VB_Samples", "Visio2010_VB_Samples\Visio2010_VB_Samples.vbproj", "{6D38A067-62F7-4D77-BCA2-6D4507793384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioInterop", "VisioInterop\VisioInterop.csproj", "{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}"
-EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "VS2010_IronPython_Samples", "VS2010_IronPython_Samples\VS2010_IronPython_Samples.pyproj", "{14DD87DA-60E8-4377-9C6D-C28F87484168}"
 EndProject
 Global
@@ -39,16 +37,6 @@ Global
 		{6D38A067-62F7-4D77-BCA2-6D4507793384}.Release|Mixed Platforms.Build.0 = Release|x86
 		{6D38A067-62F7-4D77-BCA2-6D4507793384}.Release|x86.ActiveCfg = Release|x86
 		{6D38A067-62F7-4D77-BCA2-6D4507793384}.Release|x86.Build.0 = Release|x86
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{8E12D42E-57BD-4E13-8BB4-2EDAD484422C}.Release|x86.ActiveCfg = Release|Any CPU
 		{14DD87DA-60E8-4377-9C6D-C28F87484168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14DD87DA-60E8-4377-9C6D-C28F87484168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14DD87DA-60E8-4377-9C6D-C28F87484168}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
