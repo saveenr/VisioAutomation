@@ -24,4 +24,16 @@
   <ItemGroup>
     <None Include="Program.py" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Page_SetResults.py" />
+    <Compile Include="Page_SetFormulas.py" />
+    <Compile Include="Page_GetResults.py" />
+    <Compile Include="Page_GetFormulas.py" />
+    <Compile Include="Shape_SetResults.py" />
+    <Compile Include="Shape_SetFormulas.py" />
+    <Compile Include="Shape_GetResults.py" />
+    <Compile Include="Util.py" />
+    <Compile Include="Records.py" />
+    <Compile Include="Shape_GetFormulas.py" />
+  </ItemGroup>
 </Project>
