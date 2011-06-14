@@ -68,6 +68,9 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Shape_SetFormulas.vb" />
+    <Compile Include="Shape_GetResults.vb" />
+    <Compile Include="Shape_GetFormulas.vb" />
     <Compile Include="Page_SetFormulas.vb" />
     <Compile Include="Page_SetResults.vb" />
     <Compile Include="Page_GetResults.vb" />

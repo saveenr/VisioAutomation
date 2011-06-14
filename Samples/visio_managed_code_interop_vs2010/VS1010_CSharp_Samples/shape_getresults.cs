@@ -39,7 +39,7 @@ public static partial class VS2010_CSharp_Samples
 
         // EXECUTE THE REQUEST
         short flags = (short)IVisio.VisGetSetArgs.visGetFloats;
-        System.Array results_sa;
+        System.Array results_sa = null;
         shape.GetResults(SRCStream, flags, unitcodes, out results_sa);
 
         // MAP OUTPUT BACK TO SOMETHING USEFUL 

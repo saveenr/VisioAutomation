@@ -37,7 +37,7 @@ public static partial class VS2010_CSharp_Samples
         }
 
         // EXECUTE THE REQUEST
-        System.Array formulas_sa;
+        System.Array formulas_sa = null;
         page.GetFormulasU(SID_SRCStream, out formulas_sa);
 
         // MAP OUTPUT BACK TO SOMETHING USEFUL 

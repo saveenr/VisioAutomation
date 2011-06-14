@@ -35,7 +35,7 @@ Partial Public Class VS2010_VB_Samples
 
         ' EXECUTE THE REQUEST
         Dim flags = CShort(IVisio.VisGetSetArgs.visGetFloats)
-        Dim results_sa As System.Array
+        Dim results_sa As System.Array = Nothing
         page.GetResults(SID_SRCStream, flags, unitcodes, results_sa)
 
         ' MAP OUTPUT BACK TO SOMETHING USEFUL 

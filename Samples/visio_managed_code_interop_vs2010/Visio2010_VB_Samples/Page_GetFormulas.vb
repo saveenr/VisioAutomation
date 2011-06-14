@@ -29,7 +29,7 @@ Partial Public Class VS2010_VB_Samples
         Next
 
         ' EXECUTE THE REQUEST
-        Dim formulas_sa As System.Array
+        Dim formulas_sa As System.Array = Nothing
         page.GetFormulasU(SID_SRCStream, formulas_sa)
 
         ' MAP OUTPUT BACK TO SOMETHING USEFUL 
