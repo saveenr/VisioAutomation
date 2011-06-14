@@ -22,7 +22,7 @@ public static partial class VS2010_CSharp_Samples
                       ID=shape.ID16, 
                       Section = (short)IVisio.VisSectionIndices.visSectionObject, 
                       Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
-                      Cell=(short)IVisio.VisCellIndices.visXFormWidth
+                      Cell=(short)IVisio.VisCellIndices.visXFormHeight,
                   }                        
         };
 
@@ -30,7 +30,10 @@ public static partial class VS2010_CSharp_Samples
         var SID_SRCStream = new short[request.Length*4];
         for (int i = 0; i < request.Length; i++)
         {
-            SID_SRCStream.Set4(i, request[i].ID, request[i].Section, request[i].Row, request[i].Cell);
+            SID_SRCStream[(i * 4) + 0] = request[i].ID;
+            SID_SRCStream[(i * 4) + 1] = request[i].Section;
+            SID_SRCStream[(i * 4) + 2] = request[i].Row;
+            SID_SRCStream[(i * 4) + 3] = request[i].Cell;
         }
 
         // EXECUTE THE REQUEST

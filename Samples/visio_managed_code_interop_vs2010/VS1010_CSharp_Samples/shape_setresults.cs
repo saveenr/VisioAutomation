@@ -7,16 +7,35 @@ public static partial class VS2010_CSharp_Samples
 	{
         var page = VisioInterop.Util.CreateStandardPage(doc, "SSR");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = VisioInterop.Util.Create_ShapeSetResults_Request();
+        var request = new[]
+        {
+              new
+                  {
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormWidth,
+                      UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
+                      Result=8.2
+                  },                        
+              new
+                  {
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormHeight,
+                      UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
+                      Result=1.3
+                  }                        
+        };
 
 		// MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
-
         var SRCStream = new short[request.Length * 3];
         var results_objects = new object[request.Length];
         var unitcodes = new object[request.Length];
         for (int i = 0; i < request.Length; i++)
         {
-            SRCStream.Set3(i,request[i].CellSRC.Section, request[i].CellSRC.Row, request[i].CellSRC.Cell);
+            SRCStream[(i * 3) + 0] = request[i].Section;
+            SRCStream[(i * 3) + 1] = request[i].Row;
+            SRCStream[(i * 3) + 2] = request[i].Cell;
             results_objects[i] = request[i].Result;
             unitcodes[i] = request[i].UnitCode;
         }

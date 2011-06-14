@@ -8,7 +8,27 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "PSR");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = Util.Create_PageSetResults_Request(shape);
+        var request = new[]
+        {
+              new
+                  {
+                      ID=shape.ID16, 
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormWidth,
+                      UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
+                      Result=8.0
+                  },                        
+              new
+                  {
+                      ID=shape.ID16, 
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormHeight,
+                      UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
+                      Result=1.3
+                  }                        
+        };
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
 
@@ -18,7 +38,10 @@ public static partial class VS2010_CSharp_Samples
         var unitcodes = new object[request.Length];
         for (int i = 0; i < request.Length; i++)
         {
-            SID_SRCStream.Set4(i,request[i].ShapeID, request[i].CellSRC.Section, request[i].CellSRC.Row, request[i].CellSRC.Cell);
+            SID_SRCStream[(i * 4) + 0] = request[i].ID;
+            SID_SRCStream[(i * 4) + 1] = request[i].Section;
+            SID_SRCStream[(i * 4) + 2] = request[i].Row;
+            SID_SRCStream[(i * 4) + 3] = request[i].Cell;
             results_objects[i] = request[i].Result;
             unitcodes[i] = request[i].UnitCode;
         }

@@ -7,13 +7,29 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "SGF");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = VisioInterop.Util.Create_ShapeGetFormulas_Request();
+        var request = new[]
+        {
+              new
+                  {
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormWidth
+                  },                        
+              new
+                  {
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormHeight,
+                  }                        
+        };
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         var SRCStream = new short[request.Length * 3];
         for (int i = 0; i < request.Length; i++)
         {
-            SRCStream.Set3(i,request[i].CellSRC.Section, request[i].CellSRC.Row, request[i].CellSRC.Cell);
+            SRCStream[(i * 3) + 0] = request[i].Section;
+            SRCStream[(i * 3) + 1] = request[i].Row;
+            SRCStream[(i * 3) + 2] = request[i].Cell;
         }
 
         // EXECUTE THE REQUEST

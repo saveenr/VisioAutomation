@@ -8,7 +8,23 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "SSF");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = VisioInterop.Util.Create_ShapeSetFormulas_Request();
+        var request = new[]
+        {
+              new
+                  {
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormWidth,
+                      Formula="2.0"
+                  },                        
+              new
+                  {
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormHeight,
+                      Formula="3.0"
+                  }                        
+        };
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
 
@@ -16,7 +32,9 @@ public static partial class VS2010_CSharp_Samples
         var formulas_objects = new object[request.Length];
         for (int i = 0; i < request.Length; i++)
         {
-            SRCStream.Set3(i, request[i].CellSRC.Section, request[i].CellSRC.Row, request[i].CellSRC.Cell);
+            SRCStream[(i * 3) + 0] = request[i].Section;
+            SRCStream[(i * 3) + 1] = request[i].Row;
+            SRCStream[(i * 3) + 2] = request[i].Cell;
             formulas_objects[i] = request[i].Formula;
         }
 
