@@ -31,7 +31,7 @@ namespace VisioInterop
                                                         (short)VisRowIndices.visRowXFormOut,
                                                         (short)VisCellIndices.visXFormHeight);
 
-        public static SIDSRCGetFormulaItem[] Create_PGF_Request(Shape shape)
+        public static SIDSRCGetFormulaItem[] Create_PageGetFormulas_Request(Shape shape)
         {
             var shapeid = (short) shape.ID;
             return new[]
@@ -41,7 +41,7 @@ namespace VisioInterop
                        };
         }
 
-        public static SIDSRCSetResultItem[] Create_PSR_Request(Shape shape)
+        public static SIDSRCSetResultItem[] Create_PageSetResults_Request(Shape shape)
         {
             var shapeid = (short) shape.ID;
             return new[]
@@ -51,7 +51,7 @@ namespace VisioInterop
                        };
         }
 
-        public static SIDSRCSetFormulaItem[] Create_PSF_Request(Shape shape)
+        public static SIDSRCSetFormulaItem[] Create_PageSetFormulas_Request(Shape shape)
         {
             var shapeid = (short) shape.ID;
             return new[]
@@ -61,7 +61,7 @@ namespace VisioInterop
                        };
         }
 
-        public static SIDSRCGetResultItem[] Create_PGR_Request(Shape shape)
+        public static SIDSRCGetResultItem[] Create_PageGetResults_Request(Shape shape)
         {
             var shapeid = (short) shape.ID;
 
@@ -72,7 +72,7 @@ namespace VisioInterop
                        };
         }
 
-        public static SRCGetResultItem[] Create_SGR_Request()
+        public static SRCGetResultItem[] Create_ShapeGetResults_Request()
         {
             return new[]
                        {
@@ -81,7 +81,7 @@ namespace VisioInterop
                        };
         }
 
-        public static SRCSetFormulaItem[] Create_SSF_Request()
+        public static SRCSetFormulaItem[] Create_ShapeSetFormulas_Request()
         {
             return new[]
                        {
@@ -90,7 +90,7 @@ namespace VisioInterop
                        };
         }
 
-        public static SRCSetResultItem[] Create_SSR_Request()
+        public static SRCSetResultItem[] Create_ShapeSetResults_Request()
         {
             return new[]
                        {
@@ -99,7 +99,7 @@ namespace VisioInterop
                        };
         }
 
-        public static SRCGetFormulaItem[] Create_SGF_Request()
+        public static SRCGetFormulaItem[] Create_ShapeGetFormulas_Request()
         {
             return new[]
                        {

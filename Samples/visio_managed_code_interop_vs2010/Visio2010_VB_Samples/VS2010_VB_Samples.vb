@@ -7,7 +7,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "SGF")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_SGF_Request()
+        Dim request = VisioInterop.Util.Create_ShapeGetFormulas_Request()
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 3)
@@ -36,7 +36,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "SGR")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_SGR_Request()
+        Dim request = VisioInterop.Util.Create_ShapeGetResults_Request()
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 3)
@@ -67,7 +67,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "SSF")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_SSF_Request()
+        Dim request = VisioInterop.Util.Create_ShapeSetFormulas_Request()
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 3)
@@ -93,7 +93,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "SSR")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_SSR_Request()
+        Dim request = VisioInterop.Util.Create_ShapeSetResults_Request()
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 3)
@@ -122,7 +122,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "PGF")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_PGF_Request(shape)
+        Dim request = VisioInterop.Util.Create_PageGetFormulas_Request(shape)
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 4)
@@ -151,7 +151,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "PGR")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_PGR_Request(shape)
+        Dim request = VisioInterop.Util.Create_PageGetResults_Request(shape)
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 4)
@@ -185,7 +185,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "PSF")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_PSF_Request(shape)
+        Dim request = VisioInterop.Util.Create_PageSetFormulas_Request(shape)
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim flags = CShort(IVisio.VisGetSetArgs.visSetBlastGuards Or IVisio.VisGetSetArgs.visSetUniversalSyntax)
@@ -213,7 +213,7 @@ Public Class VS2010_VB_Samples
 
         Dim page = VisioInterop.Util.CreateStandardPage(doc, "PSR")
         Dim shape = VisioInterop.Util.CreateStandardShape(page)
-        Dim request = VisioInterop.Util.Create_PSR_Request(shape)
+        Dim request = VisioInterop.Util.Create_PageSetResults_Request(shape)
 
         ' MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 4)

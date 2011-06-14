@@ -7,7 +7,7 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "PGF");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = Util.Create_PGF_Request(shape);
+        var request = Util.Create_PageGetFormulas_Request(shape);
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         var SID_SRCStream = new short[request.Length*4];

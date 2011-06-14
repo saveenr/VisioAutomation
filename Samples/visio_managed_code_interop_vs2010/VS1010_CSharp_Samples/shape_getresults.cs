@@ -6,7 +6,7 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "SGR");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = Util.Create_SGR_Request();
+        var request = Util.Create_ShapeGetResults_Request();
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         var SRCStream = new short[request.Length*3];

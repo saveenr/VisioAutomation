@@ -7,7 +7,7 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "PSF");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = Util.Create_PSF_Request(shape);
+        var request = Util.Create_PageSetFormulas_Request(shape);
 
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
