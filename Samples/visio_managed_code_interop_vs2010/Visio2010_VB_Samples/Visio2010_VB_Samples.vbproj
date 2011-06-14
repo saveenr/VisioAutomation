@@ -68,6 +68,11 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Page_SetFormulas.vb" />
+    <Compile Include="Page_SetResults.vb" />
+    <Compile Include="Page_GetResults.vb" />
+    <Compile Include="Page_GetFormulas.vb" />
+    <Compile Include="Shape_SetResults.vb" />
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
