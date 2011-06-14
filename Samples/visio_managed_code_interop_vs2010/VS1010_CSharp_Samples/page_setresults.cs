@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using VisioInterop;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 public static partial class VS2010_CSharp_Samples
 {
@@ -8,31 +6,31 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "PSR");
         var shape = VisioInterop.Util.CreateStandardShape(page);
+
+        // CREATE REQUEST
         var request = new[]
         {
               new
                   {
-                      ID=shape.ID16, 
+                      ID=(short)shape.ID16, 
                       Section = (short)IVisio.VisSectionIndices.visSectionObject, 
                       Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
                       Cell=(short)IVisio.VisCellIndices.visXFormWidth,
                       UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
-                      Result=8.0
+                      Result=(double)8.0
                   },                        
               new
                   {
-                      ID=shape.ID16, 
+                      ID=(short)shape.ID16, 
                       Section = (short)IVisio.VisSectionIndices.visSectionObject, 
                       Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
                       Cell=(short)IVisio.VisCellIndices.visXFormHeight,
                       UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
-                      Result=1.3
+                      Result=(double)1.3
                   }                        
         };
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
-
-
         var SID_SRCStream = new short[request.Length * 4];
         var results_objects = new object[request.Length];
         var unitcodes = new object[request.Length];

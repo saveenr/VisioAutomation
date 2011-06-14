@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using VisioInterop;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
+
 public static partial class VS2010_CSharp_Samples
 {
     public static void Shape_GetResults(IVisio.Document doc)
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "SGR");
         var shape = VisioInterop.Util.CreateStandardShape(page);
+
+        // CREATE REQUEST
         var request = new[]
         {
               new
@@ -26,7 +27,6 @@ public static partial class VS2010_CSharp_Samples
         };
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
-
         var SRCStream = new short[request.Length * 3];
         var unitcodes = new object[request.Length];
         for (int i = 0; i < request.Length; i++)

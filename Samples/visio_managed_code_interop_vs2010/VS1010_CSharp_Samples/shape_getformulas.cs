@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VisioInterop;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
+
 public static partial class VS2010_CSharp_Samples
 {
     public static void Shape_GetFormulas(IVisio.Document doc)
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "SGF");
         var shape = VisioInterop.Util.CreateStandardShape(page);
+
+        // CREATE REQUEST
         var request = new[]
         {
               new

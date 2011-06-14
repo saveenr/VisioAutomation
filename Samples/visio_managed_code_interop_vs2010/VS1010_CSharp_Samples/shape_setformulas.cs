@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VisioInterop;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 public static partial class VS2010_CSharp_Samples
 {
@@ -8,6 +6,8 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "SSF");
         var shape = VisioInterop.Util.CreateStandardShape(page);
+
+        // CREATE REQUEST
         var request = new[]
         {
               new

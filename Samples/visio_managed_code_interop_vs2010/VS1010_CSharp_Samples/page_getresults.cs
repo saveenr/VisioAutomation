@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using VisioInterop;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 
 public static partial class VS2010_CSharp_Samples
 {
@@ -8,11 +6,13 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "PGR");
         var shape = VisioInterop.Util.CreateStandardShape(page);
+
+        // CREATE REQUEST
         var request = new[]
         {
               new
                   {
-                      ID=shape.ID16, 
+                      ID=(short)shape.ID16, 
                       Section = (short)IVisio.VisSectionIndices.visSectionObject, 
                       Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
                       Cell=(short)IVisio.VisCellIndices.visXFormWidth,
@@ -20,7 +20,7 @@ public static partial class VS2010_CSharp_Samples
                   },                        
               new
                   {
-                      ID=shape.ID16, 
+                      ID=(short)shape.ID16, 
                       Section = (short)IVisio.VisSectionIndices.visSectionObject, 
                       Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
                       Cell=(short)IVisio.VisCellIndices.visXFormHeight,

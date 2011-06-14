@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VisioInterop;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
+
 public static partial class VS2010_CSharp_Samples
 {
 	public static void Shape_SetResults(IVisio.Document doc)
 	{
         var page = VisioInterop.Util.CreateStandardPage(doc, "SSR");
         var shape = VisioInterop.Util.CreateStandardShape(page);
+
+        // CREATE REQUEST
         var request = new[]
         {
               new
@@ -15,7 +16,7 @@ public static partial class VS2010_CSharp_Samples
                       Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
                       Cell=(short)IVisio.VisCellIndices.visXFormWidth,
                       UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
-                      Result=8.2
+                      Result=(double)8.2
                   },                        
               new
                   {
@@ -23,7 +24,7 @@ public static partial class VS2010_CSharp_Samples
                       Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
                       Cell=(short)IVisio.VisCellIndices.visXFormHeight,
                       UnitCode=(short) IVisio.VisUnitCodes.visNoCast,
-                      Result=1.3
+                      Result=(double)1.3
                   }                        
         };
 
