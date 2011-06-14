@@ -2,12 +2,12 @@
 {
     public struct SIDSRCGetFormulaItem
     {
-        public short ShapeID;
+        public short ID;
         public CellSRC CellSRC;
 
         public SIDSRCGetFormulaItem(short shapeid, CellSRC cellsrc)
         {
-            this.ShapeID = shapeid;
+            this.ID = shapeid;
             this.CellSRC = cellsrc;
         }
     }

@@ -8,15 +8,30 @@ public static partial class VS2010_CSharp_Samples
     {
         var page = VisioInterop.Util.CreateStandardPage(doc, "PGF");
         var shape = VisioInterop.Util.CreateStandardShape(page);
-        var request = Util.Create_PageGetFormulas_Request(shape);
+        var request = new []
+        {
+              new
+                  {
+                      ID=shape.ID16, 
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormWidth
+                  },                        
+              new
+                  {
+                      ID=shape.ID16, 
+                      Section = (short)IVisio.VisSectionIndices.visSectionObject, 
+                      Row=(short)IVisio.VisRowIndices.visRowXFormOut, 
+                      Cell=(short)IVisio.VisCellIndices.visXFormWidth
+                  }                        
+        };
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         var SID_SRCStream = new short[request.Length*4];
         for (int i = 0; i < request.Length; i++)
         {
-            SID_SRCStream.Set4(i, request[i].ShapeID, request[i].CellSRC.SectionIndex, request[i].CellSRC.RowIndex, request[i].CellSRC.CellIndex);
+            SID_SRCStream.Set4(i, request[i].ID, request[i].Section, request[i].Row, request[i].Cell);
         }
-
 
         // EXECUTE THE REQUEST
         System.Array formulas_sa;

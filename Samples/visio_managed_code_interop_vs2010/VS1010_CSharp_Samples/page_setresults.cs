@@ -18,7 +18,7 @@ public static partial class VS2010_CSharp_Samples
         var unitcodes = new object[request.Length];
         for (int i = 0; i < request.Length; i++)
         {
-            SID_SRCStream.Set4(i,request[i].ShapeID, request[i].CellSRC.SectionIndex, request[i].CellSRC.RowIndex, request[i].CellSRC.CellIndex);
+            SID_SRCStream.Set4(i,request[i].ShapeID, request[i].CellSRC.Section, request[i].CellSRC.Row, request[i].CellSRC.Cell);
             results_objects[i] = request[i].Result;
             unitcodes[i] = request[i].UnitCode;
         }

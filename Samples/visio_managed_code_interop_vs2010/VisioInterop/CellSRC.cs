@@ -2,15 +2,15 @@
 {
     public struct CellSRC
     {
-        public short SectionIndex;
-        public short RowIndex;
-        public short CellIndex;
+        public short Section;
+        public short Row;
+        public short Cell;
 
         public CellSRC(short section, short row, short cell)
         {
-            this.SectionIndex = section;
-            this.RowIndex = row;
-            this.CellIndex = cell;
+            this.Section = section;
+            this.Row = row;
+            this.Cell = cell;
         }
     }
 }

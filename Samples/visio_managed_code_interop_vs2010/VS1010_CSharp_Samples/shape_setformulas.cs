@@ -16,7 +16,7 @@ public static partial class VS2010_CSharp_Samples
         var formulas_objects = new object[request.Length];
         for (int i = 0; i < request.Length; i++)
         {
-            SRCStream.Set3(i, request[i].CellSRC.SectionIndex, request[i].CellSRC.RowIndex, request[i].CellSRC.CellIndex);
+            SRCStream.Set3(i, request[i].CellSRC.Section, request[i].CellSRC.Row, request[i].CellSRC.Cell);
             formulas_objects[i] = request[i].Formula;
         }
 

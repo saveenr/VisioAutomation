@@ -13,7 +13,7 @@ public static partial class VS2010_CSharp_Samples
         var SRCStream = new short[request.Length * 3];
         for (int i = 0; i < request.Length; i++)
         {
-            SRCStream.Set3(i,request[i].CellSRC.SectionIndex, request[i].CellSRC.RowIndex, request[i].CellSRC.CellIndex);
+            SRCStream.Set3(i,request[i].CellSRC.Section, request[i].CellSRC.Row, request[i].CellSRC.Cell);
         }
 
         // EXECUTE THE REQUEST

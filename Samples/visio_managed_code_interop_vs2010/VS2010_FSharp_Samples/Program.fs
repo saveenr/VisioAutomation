@@ -5,7 +5,7 @@ type FSharp_Samples =
 
         let page = VisioInterop.Util.CreateStandardPage(doc,"SGF");
         let shape= VisioInterop.Util.CreateStandardShape(page);
-        let request= VisioInterop.Util.Create_SGF_Request();
+        let request= VisioInterop.Util.Create_ShapeGetFormulas_Request();
 
         // MAP THE REQUEST TO THE STRUCTURES VISIO EXPECTS
         let SRCStream  = FSharp_Samples.CreateShortArray(request.Length*3)

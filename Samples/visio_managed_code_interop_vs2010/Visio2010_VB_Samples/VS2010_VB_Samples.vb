@@ -13,9 +13,9 @@ Public Class VS2010_VB_Samples
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 3)
         For i = 0 To request.Length - 1
             Dim item = request(i)
-            SRCStream(i * 3 + 0) = item.CellSRC.SectionIndex
-            SRCStream(i * 3 + 1) = item.CellSRC.RowIndex
-            SRCStream(i * 3 + 2) = item.CellSRC.CellIndex
+            SRCStream(i * 3 + 0) = item.CellSRC.Section
+            SRCStream(i * 3 + 1) = item.CellSRC.Row
+            SRCStream(i * 3 + 2) = item.CellSRC.Cell
         Next i
 
         ' EXECUTE THE REQUEST
@@ -43,9 +43,9 @@ Public Class VS2010_VB_Samples
         Dim unitcodes = VS2010_VB_Samples.CreateObjectArray(request.Length)
         For i = 0 To request.Length - 1
             Dim item = request(i)
-            SRCStream(i * 3 + 0) = item.CellSRC.SectionIndex
-            SRCStream(i * 3 + 1) = item.CellSRC.RowIndex
-            SRCStream(i * 3 + 2) = item.CellSRC.CellIndex
+            SRCStream(i * 3 + 0) = item.CellSRC.Section
+            SRCStream(i * 3 + 1) = item.CellSRC.Row
+            SRCStream(i * 3 + 2) = item.CellSRC.Cell
             unitcodes(i) = item.UnitCode
         Next i
 
@@ -74,9 +74,9 @@ Public Class VS2010_VB_Samples
         Dim formulas = VS2010_VB_Samples.CreateObjectArray(request.Length)
         For i = 0 To request.Length - 1
             Dim item = request(i)
-            SRCStream(i * 3 + 0) = item.CellSRC.SectionIndex
-            SRCStream(i * 3 + 1) = item.CellSRC.RowIndex
-            SRCStream(i * 3 + 2) = item.CellSRC.CellIndex
+            SRCStream(i * 3 + 0) = item.CellSRC.Section
+            SRCStream(i * 3 + 1) = item.CellSRC.Row
+            SRCStream(i * 3 + 2) = item.CellSRC.Cell
             formulas(i) = item.Formula
         Next i
 
@@ -101,9 +101,9 @@ Public Class VS2010_VB_Samples
         Dim unitcodes = VS2010_VB_Samples.CreateObjectArray(request.Length)
         For i = 0 To request.Length - 1
             Dim item = request(i)
-            SRCStream(i * 3 + 0) = item.CellSRC.SectionIndex
-            SRCStream(i * 3 + 1) = item.CellSRC.RowIndex
-            SRCStream(i * 3 + 2) = item.CellSRC.CellIndex
+            SRCStream(i * 3 + 0) = item.CellSRC.Section
+            SRCStream(i * 3 + 1) = item.CellSRC.Row
+            SRCStream(i * 3 + 2) = item.CellSRC.Cell
             results(i) = item.Result
             unitcodes(i) = item.Result
         Next i
@@ -128,10 +128,10 @@ Public Class VS2010_VB_Samples
         Dim SRCStream = VS2010_VB_Samples.CreateShortArray(request.Length * 4)
         For i = 0 To request.Length - 1
             Dim item = request(i)
-            SRCStream(i * 4 + 0) = item.ShapeID
-            SRCStream(i * 4 + 1) = item.CellSRC.SectionIndex
-            SRCStream(i * 4 + 2) = item.CellSRC.RowIndex
-            SRCStream(i * 4 + 3) = item.CellSRC.CellIndex
+            SRCStream(i * 4 + 0) = item.ID
+            SRCStream(i * 4 + 1) = item.CellSRC.Section
+            SRCStream(i * 4 + 2) = item.CellSRC.Row
+            SRCStream(i * 4 + 3) = item.CellSRC.Cell
         Next i
 
         ' EXECUTE THE REQUEST
@@ -159,9 +159,9 @@ Public Class VS2010_VB_Samples
         For i = 0 To request.Length - 1
             Dim item = request(i)
             SRCStream(i * 4 + 0) = item.ShapeID
-            SRCStream(i * 4 + 1) = item.CellSRC.SectionIndex
-            SRCStream(i * 4 + 2) = item.CellSRC.RowIndex
-            SRCStream(i * 4 + 3) = item.CellSRC.CellIndex
+            SRCStream(i * 4 + 1) = item.CellSRC.Section
+            SRCStream(i * 4 + 2) = item.CellSRC.Row
+            SRCStream(i * 4 + 3) = item.CellSRC.Cell
             unitcodes(i) = item.UnitCode
         Next i
 
@@ -194,9 +194,9 @@ Public Class VS2010_VB_Samples
         For i = 0 To request.Length - 1
             Dim item = request(i)
             SRCStream(i * 4 + 0) = item.ShapeID
-            SRCStream(i * 4 + 1) = item.CellSRC.SectionIndex
-            SRCStream(i * 4 + 2) = item.CellSRC.RowIndex
-            SRCStream(i * 4 + 3) = item.CellSRC.CellIndex
+            SRCStream(i * 4 + 1) = item.CellSRC.Section
+            SRCStream(i * 4 + 2) = item.CellSRC.Row
+            SRCStream(i * 4 + 3) = item.CellSRC.Cell
             formulas(i) = item.Formula
         Next i
 
@@ -222,9 +222,9 @@ Public Class VS2010_VB_Samples
         For i = 0 To request.Length - 1
             Dim item = request(i)
             SRCStream(i * 4 + 0) = item.ShapeID
-            SRCStream(i * 4 + 1) = item.CellSRC.SectionIndex
-            SRCStream(i * 4 + 2) = item.CellSRC.RowIndex
-            SRCStream(i * 4 + 3) = item.CellSRC.CellIndex
+            SRCStream(i * 4 + 1) = item.CellSRC.Section
+            SRCStream(i * 4 + 2) = item.CellSRC.Row
+            SRCStream(i * 4 + 3) = item.CellSRC.Cell
             results(i) = item.Result
             unitcodes(i) = item.Result
         Next i
