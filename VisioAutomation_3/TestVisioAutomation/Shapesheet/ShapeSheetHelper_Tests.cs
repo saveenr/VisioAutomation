@@ -41,7 +41,7 @@ namespace TestVisioAutomation
             s1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
 
 
-            var sections = new[] { 
+            var common_section_indices = new[] { 
             
     (short) IVisio.VisSectionIndices.visSectionAction, 
     (short) IVisio.VisSectionIndices.visSectionAnnotation,
@@ -62,7 +62,7 @@ namespace TestVisioAutomation
     (short) IVisio.VisSectionIndices.visSectionObject  
             };
 
-            foreach (short si in sections)
+            foreach (short si in common_section_indices)
             {
                 Debug.WriteLine(TryGetSectionName((short)si) ?? "UNKNOWN SECTION");
                 Debug.WriteLine("--------------------");
@@ -81,7 +81,6 @@ namespace TestVisioAutomation
                                                                             { (short) IVisio.VisSectionIndices.visSectionCharacter, "Character" },
                                                                             { (short) IVisio.VisSectionIndices.visSectionConnectionPts, "ConnectionPts" },
                                                                             { (short) IVisio.VisSectionIndices.visSectionControls, "Controls" },
-                                                                            //{ (short) IVisio.VisSectionIndices.visSectionExport, "Export" },
                                                                             { (short) IVisio.VisSectionIndices.visSectionHyperlink, "Hyperlink" },
                                                                             { (short) IVisio.VisSectionIndices.visSectionLayer, "Layer" },
                                                                             { (short) IVisio.VisSectionIndices.visSectionParagraph, "Paragraph" },
