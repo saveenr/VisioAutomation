@@ -30,8 +30,50 @@ namespace TestVisioAutomation
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(c2, c1);
         }
 
+        static short[] common_section_indices = new[] 
+            {     
+                (short) IVisio.VisSectionIndices.visSectionAction, 
+                (short) IVisio.VisSectionIndices.visSectionAnnotation,
+                (short) IVisio.VisSectionIndices.visSectionCharacter,
+                (short) IVisio.VisSectionIndices.visSectionConnectionPts,
+                (short) IVisio.VisSectionIndices.visSectionControls,
+                (short) IVisio.VisSectionIndices.visSectionExport, 
+                (short) IVisio.VisSectionIndices.visSectionHyperlink,
+                (short) IVisio.VisSectionIndices.visSectionLayer, 
+                (short) IVisio.VisSectionIndices.visSectionParagraph,
+                (short) IVisio.VisSectionIndices.visSectionProp, 
+                (short) IVisio.VisSectionIndices.visSectionReviewer,
+                (short) IVisio.VisSectionIndices.visSectionScratch, 
+                (short) IVisio.VisSectionIndices.visSectionSmartTag,
+                (short) IVisio.VisSectionIndices.visSectionTab, 
+                (short) IVisio.VisSectionIndices.visSectionTextField,
+                (short) IVisio.VisSectionIndices.visSectionUser, 
+                (short) IVisio.VisSectionIndices.visSectionObject  
+            };
+
+        static Dictionary<short, string> section_to_name = new Dictionary<short, string>
+            {
+                { (short) IVisio.VisSectionIndices.visSectionAction, "Action" },
+                { (short) IVisio.VisSectionIndices.visSectionAnnotation, "Annotation" },
+                { (short) IVisio.VisSectionIndices.visSectionCharacter, "Character" },
+                { (short) IVisio.VisSectionIndices.visSectionConnectionPts, "ConnectionPts" },
+                { (short) IVisio.VisSectionIndices.visSectionControls, "Controls" },
+                { (short) IVisio.VisSectionIndices.visSectionHyperlink, "Hyperlink" },
+                { (short) IVisio.VisSectionIndices.visSectionLayer, "Layer" },
+                { (short) IVisio.VisSectionIndices.visSectionParagraph, "Paragraph" },
+                { (short) IVisio.VisSectionIndices.visSectionProp, "Prop" },
+                { (short) IVisio.VisSectionIndices.visSectionReviewer, "Reviewer" },
+                { (short) IVisio.VisSectionIndices.visSectionScratch, "Scratch" },
+                { (short) IVisio.VisSectionIndices.visSectionSmartTag, "SmartTag" },
+                { (short) IVisio.VisSectionIndices.visSectionTab, "Tab" },
+                { (short) IVisio.VisSectionIndices.visSectionTextField, "TextField" },
+                { (short) IVisio.VisSectionIndices.visSectionUser, "User" },
+                { (short) IVisio.VisSectionIndices.visSectionObject , "Object"}
+
+            };
+
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
-        public void SpotCheck2()
+        public void CheckCellNames()
         {
             var app = GetVisioApplication();
             var documents = app.Documents;
@@ -39,29 +81,7 @@ namespace TestVisioAutomation
             var page1 = doc1.Pages[1];
             var s1 = page1.DrawRectangle(0.3, 0, 2.5, 1.7);
             s1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
-
-
-            var common_section_indices = new[] { 
             
-    (short) IVisio.VisSectionIndices.visSectionAction, 
-    (short) IVisio.VisSectionIndices.visSectionAnnotation,
-    (short) IVisio.VisSectionIndices.visSectionCharacter,
-    (short) IVisio.VisSectionIndices.visSectionConnectionPts,
-    (short) IVisio.VisSectionIndices.visSectionControls,
-    (short) IVisio.VisSectionIndices.visSectionExport, 
-    (short) IVisio.VisSectionIndices.visSectionHyperlink,
-    (short) IVisio.VisSectionIndices.visSectionLayer, 
-    (short) IVisio.VisSectionIndices.visSectionParagraph,
-    (short) IVisio.VisSectionIndices.visSectionProp, 
-    (short) IVisio.VisSectionIndices.visSectionReviewer,
-    (short) IVisio.VisSectionIndices.visSectionScratch, 
-    (short) IVisio.VisSectionIndices.visSectionSmartTag,
-    (short) IVisio.VisSectionIndices.visSectionTab, 
-    (short) IVisio.VisSectionIndices.visSectionTextField,
-    (short) IVisio.VisSectionIndices.visSectionUser, 
-    (short) IVisio.VisSectionIndices.visSectionObject  
-            };
-
             foreach (short si in common_section_indices)
             {
                 Debug.WriteLine(TryGetSectionName((short)si) ?? "UNKNOWN SECTION");
@@ -74,32 +94,12 @@ namespace TestVisioAutomation
             }
         }
 
-        private Dictionary<short, string> sdic = new Dictionary<short, string>
-                                                                        {
-                                                                            { (short) IVisio.VisSectionIndices.visSectionAction, "Action" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionAnnotation, "Annotation" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionCharacter, "Character" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionConnectionPts, "ConnectionPts" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionControls, "Controls" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionHyperlink, "Hyperlink" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionLayer, "Layer" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionParagraph, "Paragraph" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionProp, "Prop" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionReviewer, "Reviewer" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionScratch, "Scratch" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionSmartTag, "SmartTag" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionTab, "Tab" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionTextField, "TextField" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionUser, "User" },
-                                                                            { (short) IVisio.VisSectionIndices.visSectionObject , "Object"}
-
-                                                                        };
 
         private string TryGetSectionName(short si)
         {
-            if (sdic.ContainsKey((short)si))
+            if (section_to_name.ContainsKey((short)si))
             {
-                return sdic[(short)si];
+                return section_to_name[(short)si];
             }
             return null;
         }
