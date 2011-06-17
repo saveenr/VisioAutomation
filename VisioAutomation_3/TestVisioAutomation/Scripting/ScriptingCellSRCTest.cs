@@ -37,7 +37,9 @@ namespace TestVisioAutomation
             var documents = app.Documents;
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            var s1 = page1.DrawRectangle(0, 0, 1, 1);
+            var s1 = page1.DrawRectangle(0.3, 0, 2.5, 1.7);
+            s1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
+
 
             var sections = new[] { 
             
@@ -63,9 +65,10 @@ namespace TestVisioAutomation
             foreach (short si in sections)
             {
                 Debug.WriteLine(TryGetSectionName((short)si) ?? "UNKNOWN SECTION");
+                Debug.WriteLine("--------------------");
                 foreach (var ci in EnumCellsInSection(s1, si))
                 {
-                    Debug.WriteLine("{0} {1} : {2} {3} // {4} {5}", ci.RealName, ci.SRC.ToString(), ci.XName, ci.XSRC.ToString(), ci.Formula, ci.Result);
+                    Debug.WriteLine("{0} {1} : {2} {3} // (\"{4}\", {5})", ci.RealName, ci.SRC.ToString(), ci.XName, ci.XSRC.ToString(), ci.Formula, ci.Result);
 
                 }                
             }
