@@ -86,7 +86,14 @@ namespace TestVisioAutomation
             {
                 shape1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
                 shape1.CellsU["FillBkgnd"].FormulaU = "rgb(255,134,98)";
-                VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1, "custprop1", "value1");                
+                VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1, "custprop1", "value1");
+                VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(shape1, "UserDefinedCell1", "Value1", "Prompt1");
+                var ctrl = new VA.Controls.ControlCells();
+                ctrl.X = "Width*0.5";
+                ctrl.Y = "Width*0.75";
+                VA.Controls.ControlHelper.AddControl(shape1, ctrl);
+                var h1 = shape1.Hyperlinks.Add();
+                h1.Address = "http://microsoft/com";
             }
 
             System.Threading.Thread.Sleep(1000);
