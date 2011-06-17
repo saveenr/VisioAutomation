@@ -105,6 +105,9 @@ namespace VisioAutomation.ShapeSheet
                                                  {"Char.Size",SRCConstants.Char_Size},
                                                  {"Char.Strikethru",SRCConstants.Char_Strikethru},
                                                  {"Char.Style",SRCConstants.Char_Style},
+                                                 {"Char.Pos",SRCConstants.Char_Pos},
+                                                 {"Char.RTLText",SRCConstants.RTLText},
+                                                 {"Char.UseVertical",SRCConstants.UseVertical},
 
                                                  //glueinfo                                                                      {"Char.Style",VA.ShapeSheet.CellSRCConstants.Char_Style},
                                                  {"BegTrigger",SRCConstants.BegTrigger},

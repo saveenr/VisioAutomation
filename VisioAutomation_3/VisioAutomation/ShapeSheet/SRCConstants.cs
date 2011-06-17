@@ -57,6 +57,7 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC Char_Strikethru = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStrikethru);
         public readonly static SRC Char_Style = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStyle);
         public readonly static SRC Char_ColorTrans = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColorTrans);
+        
         public readonly static SRC UseVertical = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical);
 
         // Connections

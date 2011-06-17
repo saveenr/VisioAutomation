@@ -94,6 +94,21 @@ namespace TestVisioAutomation
                 VA.Controls.ControlHelper.AddControl(shape1, ctrl);
                 var h1 = shape1.Hyperlinks.Add();
                 h1.Address = "http://microsoft/com";
+
+                var t0 = new VA.Text.Markup.TextElement();
+                t0.TextFormat.FontSize = VA.Convert.PointsToInches(36);
+                var t01 = t0.AppendText("HELLO");
+                var t1 = t0.AppendNewElement("W\nO\nR\nL\nD");
+                t1.TextFormat.Indent = 1.0;
+                t1.TextFormat.FontSize = VA.Convert.PointsToInches(15.0);
+                t0.AppendText("FOOBR");
+
+                //t0.SetShapeText(shape1);
+                shape1.Text = "0123456789001234567890012345678900123456789001234567890";
+                var fmt1 = new VA.Text.CharacterFormatCells();
+                fmt1.Transparency = 0.5;
+                VA.Text.TextHelper.SetFormat(shape1,fmt1,5,10);
+
             }
 
             System.Threading.Thread.Sleep(1000);
@@ -181,7 +196,10 @@ namespace TestVisioAutomation
             int num_rows = shape.RowCount[section_index];
             if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
             {
-                num_rows += 1;
+                if (num_rows < 3)
+                {
+                    num_rows += 1;                    
+                }
             }
             return num_rows;
         }
