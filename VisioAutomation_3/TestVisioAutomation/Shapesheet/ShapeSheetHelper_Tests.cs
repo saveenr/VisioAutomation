@@ -79,16 +79,24 @@ namespace TestVisioAutomation
             var documents = app.Documents;
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            var s1 = page1.DrawRectangle(0.3, 0, 2.5, 1.7);
-            s1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
-            
-            foreach (short si in common_section_indices)
+            var shape1 = page1.DrawRectangle(0.3, 0, 2.5, 1.7);
+
+            using (var s = app.CreateUndoScope())
             {
-                Debug.WriteLine(TryGetSectionName((short)si) ?? "UNKNOWN SECTION");
+                shape1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
+                shape1.CellsU["FillBkgnd"].FormulaU = "rgb(255,134,98)";
+                VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1, "custprop1", "value1");                
+            }
+
+            System.Threading.Thread.Sleep(1000);
+
+            foreach (short section_index in common_section_indices)
+            {
+                Debug.WriteLine(TryGetSectionName(section_index) ?? "UNKNOWN SECTION");
                 Debug.WriteLine("--------------------");
-                foreach (var ci in EnumCellsInSection(s1, si))
+                foreach (var cellinfo in EnumCellsInSection(shape1, section_index))
                 {
-                    Debug.WriteLine("{0} {1} : {2} {3} // (\"{4}\", {5})", ci.RealName, ci.SRC.ToString(), ci.XName, ci.XSRC.ToString(), ci.Formula, ci.Result);
+                    Debug.WriteLine("{0} {1} : {2} {3} // (\"{4}\", {5})", cellinfo.RealName, cellinfo.SRC.ToString(), cellinfo.XName, cellinfo.XSRC.ToString(), cellinfo.Formula, cellinfo.Result);
 
                 }
             }
@@ -111,17 +119,28 @@ namespace TestVisioAutomation
                 yield break;
             }
             var sec = shape.Section[section_index];
-            int num_rows = sec.Count;
+
+            int num_rows = shape.RowCount[section_index];
+            if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
+            {
+                num_rows += 1;
+            }
+            Debug.WriteLine("Num Rows={0}",num_rows);
             for (int r = 0; r < num_rows; r++)
             {
-                short row_index = (short)(r + 1);
+                short row_index = (short)(r + 0);
+
+                if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
+                {
+                    row_index += 1;
+                }
+
                 var row = sec[row_index];
-                int num_cells = row.Count;
+                int num_cells = shape.RowsCellCount[section_index,row_index];
                 for (int c = 0; c < num_cells; c++)
                 {
                     var cell = row[c];
                     var cell_name = cell.Name;
-                    //var cellsrc = new VA.ShapeSheet.SRC(section_index, (short)row_index, (short)c);
                     var cell_src = new VA.ShapeSheet.SRC(cell.Section, cell.Row, cell.Column);
 
                     var xcellsrc = VA.ShapeSheet.ShapeSheetHelper.TryGetSRCFromName(cell_name);
