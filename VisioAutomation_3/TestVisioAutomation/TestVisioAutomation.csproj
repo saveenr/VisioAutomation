@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="Layout\LayoutHelperTests.cs" />
+    <Compile Include="Shapesheet\ShapeSheetHelper_Tests.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="Scripting\ScriptingCellSRCTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -134,7 +135,7 @@
     <Compile Include="Controls\ControlHelper_Tests.cs" />
     <Compile Include="UtilTests\PageHelper_Tests.cs" />
     <Compile Include="Convert_Tests.cs" />
-    <Compile Include="Shapesheet\ShapeHelper_Tests.cs" />
+    <Compile Include="ShapeHelper_Tests.cs" />
     <Compile Include="UtilTests\Stencil_Tests.cs" />
     <Compile Include="Text\TextHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

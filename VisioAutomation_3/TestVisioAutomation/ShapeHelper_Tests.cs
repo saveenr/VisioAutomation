@@ -107,5 +107,7 @@ namespace TestVisioAutomation
             Assert.IsTrue(shapes.Contains(group1));
             page.Delete(0);
         }
+
+
     }
 }
