@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -120,20 +121,11 @@ namespace TestVisioAutomation
             }
             var sec = shape.Section[section_index];
 
-            int num_rows = shape.RowCount[section_index];
-            if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
-            {
-                num_rows += 1;
-            }
+            int num_rows = GetCorrectedRowCount(shape, section_index);
             Debug.WriteLine("Num Rows={0}",num_rows);
             for (int r = 0; r < num_rows; r++)
             {
-                short row_index = (short)(r + 0);
-
-                if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
-                {
-                    row_index += 1;
-                }
+                short row_index = GetCorrectedRowIndex(section_index, r);
 
                 var row = sec[row_index];
                 int num_cells = shape.RowsCellCount[section_index,row_index];
@@ -164,6 +156,27 @@ namespace TestVisioAutomation
 
                 }
             }
+        }
+
+        private short GetCorrectedRowIndex(short section_index, int r)
+        {
+            short row_index = (short)(r + 0);
+
+            if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
+            {
+                row_index += 1;
+            }
+            return row_index;
+        }
+
+        private int GetCorrectedRowCount(Shape shape, short section_index)
+        {
+            int num_rows = shape.RowCount[section_index];
+            if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
+            {
+                num_rows += 1;
+            }
+            return num_rows;
         }
     }
 }
