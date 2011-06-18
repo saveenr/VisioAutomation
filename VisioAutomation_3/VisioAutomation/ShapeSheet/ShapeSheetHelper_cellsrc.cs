@@ -18,10 +18,50 @@ namespace VisioAutomation.ShapeSheet
             {
                 return src;
             }
-            else
+
+            int dot_pos = name.IndexOf('.');
+            if (dot_pos >= 0)
             {
-                return null;
+                string left_of_dot = name.Substring(0, dot_pos);
+
+                int left_bracket_pos = name.IndexOf('[');
+                if (left_bracket_pos >= 0)
+                {
+                    string unbracketed_name = name.Substring(0, left_bracket_pos);
+                    int len = left_bracket_pos - dot_pos - 1;
+                    string between = name.Substring(dot_pos+1, len);
+
+                    int right_bracket_pos = name.IndexOf(']');
+                    if (right_bracket_pos > 0)
+                    {
+                        int between_brackets_len = right_bracket_pos - left_bracket_pos - 1;
+                        string between_brackets_str = name.Substring(left_bracket_pos + 1, between_brackets_len);
+
+                        if ((left_of_dot == "Char") || (left_of_dot == "Para"))
+                        {
+                            var x = TryGetSRCFromName(unbracketed_name);
+                            if (x.HasValue)
+                            {
+                                int bracket_int = int.Parse(between_brackets_str);
+                                var y = x.Value.ForRow((short) (bracket_int -1) );
+                                return y;
+
+                            }
+                        }
+
+                    }
+
+
+
+
+                }
+
+                if (left_of_dot == "Para")
+                {
+                }
             }
+
+            return null;
         }
 
         public static SRC GetSRCFromName(string name)
@@ -143,12 +183,12 @@ namespace VisioAutomation.ShapeSheet
 
 
 
-                                                 {"Para.BulletIndex",SRCConstants.Para_BulletIndex},
+                                                 {"Para.Bullet",SRCConstants.Para_BulletIndex},
                                                  {"Para.BulletFont",SRCConstants.Para_BulletFont},
                                                  {"Para.BulletSize",SRCConstants.Para_BulletSize},
-                                                 {"Para.BulletString",SRCConstants.Para_BulletString},
+                                                 {"Para.BulletStr",SRCConstants.Para_BulletString},
                                                  {"Para.Flags",SRCConstants.Para_Flags},
-                                                 {"Para.HAlign",SRCConstants.Para_HAlign},
+                                                 {"Para.HorzAlign",SRCConstants.Para_HAlign},
                                                  {"Para.IndFirst",SRCConstants.Para_IndFirst},
                                                  {"Para.IndLeft",SRCConstants.Para_IndLeft},
                                                  {"Para.IndRight",SRCConstants.Para_IndRight},

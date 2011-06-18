@@ -104,10 +104,23 @@ namespace TestVisioAutomation
                 t0.AppendText("FOOBR");
 
                 //t0.SetShapeText(shape1);
-                shape1.Text = "0123456789001234567890012345678900123456789001234567890";
+                shape1.Text = "0123456789\n0123456789\n0123456789\n0123456789\n01234567890";
                 var fmt1 = new VA.Text.CharacterFormatCells();
                 fmt1.Transparency = 0.5;
                 VA.Text.TextHelper.SetFormat(shape1,fmt1,5,10);
+
+                var fmt2 = new VA.Text.ParagraphFormatCells();
+                fmt2.IndentLeft = 1.0;
+                VA.Text.TextHelper.SetFormat(shape1,fmt2,1,10);
+                VA.Text.TextHelper.SetFormat(shape1, fmt2,20, 30);
+
+                var stops = new[]
+                                {
+                                    new VA.Text.TabStop(0.1, VA.Text.TabStopAlignment.Left),
+                                    new VA.Text.TabStop(0.2, VA.Text.TabStopAlignment.Right)
+                                };
+
+                VA.Text.TextHelper.SetTabStops(shape1,stops);
 
             }
 
