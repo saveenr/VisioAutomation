@@ -182,12 +182,12 @@ namespace VisioAutomation.DOM
 
             // Paragraph
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletIndex, BulletIndex);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Bullet, BulletIndex);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, BulletFont);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletSize, BulletSize);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletString, BulletString);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletStr, BulletString);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, Flags);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HAlign, HAlign);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HorzAlign, HAlign);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndFirst, IndFirst);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndLeft, IndLeft);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndRight, IndRight);

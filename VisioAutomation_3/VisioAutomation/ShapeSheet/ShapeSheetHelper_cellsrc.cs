@@ -183,12 +183,12 @@ namespace VisioAutomation.ShapeSheet
 
 
 
-                                                 {"Para.Bullet",SRCConstants.Para_BulletIndex},
+                                                 {"Para.Bullet",SRCConstants.Para_Bullet},
                                                  {"Para.BulletFont",SRCConstants.Para_BulletFont},
                                                  {"Para.BulletSize",SRCConstants.Para_BulletSize},
-                                                 {"Para.BulletStr",SRCConstants.Para_BulletString},
+                                                 {"Para.BulletStr",SRCConstants.Para_BulletStr},
                                                  {"Para.Flags",SRCConstants.Para_Flags},
-                                                 {"Para.HorzAlign",SRCConstants.Para_HAlign},
+                                                 {"Para.HorzAlign",SRCConstants.Para_HorzAlign},
                                                  {"Para.IndFirst",SRCConstants.Para_IndFirst},
                                                  {"Para.IndLeft",SRCConstants.Para_IndLeft},
                                                  {"Para.IndRight",SRCConstants.Para_IndRight},

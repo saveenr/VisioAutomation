@@ -276,12 +276,12 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC UIVisibility = new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageUIVisibility);
 
         // paragraph
-        public readonly static SRC Para_BulletIndex = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex);
+        public readonly static SRC Para_Bullet = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex);
         public readonly static SRC Para_BulletFont = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFont);
         public readonly static SRC Para_BulletSize = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFontSize);
-        public readonly static SRC Para_BulletString = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletString);
+        public readonly static SRC Para_BulletStr = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletString);
         public readonly static SRC Para_Flags = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visFlags);
-        public readonly static SRC Para_HAlign = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visHorzAlign);
+        public readonly static SRC Para_HorzAlign = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visHorzAlign);
         public readonly static SRC Para_IndFirst = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentFirst);
         public readonly static SRC Para_IndLeft = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentLeft);
         public readonly static SRC Para_IndRight = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentRight);
