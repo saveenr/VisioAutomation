@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.Visio;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Update
@@ -24,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Update
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
-        public VisGetSetArgs ResultFlags
+        public IVisio.VisGetSetArgs ResultFlags
         {
             get
             {
@@ -32,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        public VisGetSetArgs FormulaFlags
+        public IVisio.VisGetSetArgs FormulaFlags
         {
             get
             {
@@ -43,7 +42,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        private VisGetSetArgs get_common_flags()
+        private IVisio.VisGetSetArgs get_common_flags()
         {
             IVisio.VisGetSetArgs f_bg = this.BlastGuards ? IVisio.VisGetSetArgs.visSetBlastGuards : 0;
             IVisio.VisGetSetArgs f_tc = this.TestCircular ? IVisio.VisGetSetArgs.visSetTestCircular : 0;
