@@ -36,10 +36,5 @@ namespace VisioAutomation.Extensions
             shape.XYToPage(xy.X, xy.Y, out xprime, out yprime);
             return new VA.Drawing.Point(xprime, yprime);
         }
-        
-        public static IEnumerable<IVisio.Shape> AsEnumerable(this IVisio.Shape shape)
-        {
-            return shape.Shapes.Cast<IVisio.Shape>();
-        }
     }
 }
