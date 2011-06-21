@@ -8,7 +8,10 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Layer> AsEnumerable(this IVisio.Layers layers)
         {
-            return layers.Cast<IVisio.Layer>();
+            for (int i = 0; i < layers.Count; i++)
+            {
+                yield return layers[i + 1];
+            }
         }
     }
 }
