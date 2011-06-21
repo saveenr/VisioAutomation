@@ -9,7 +9,10 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Document> AsEnumerable(this IVisio.Documents docs)
         {
-            return docs.Cast<IVisio.Document>();
+            for (int i = 0; i < docs.Count; i++)
+            {
+                yield return docs[i + 1];
+            }
         }
 
         public static IVisio.Document OpenStencil(this IVisio.Documents docs, string filename)

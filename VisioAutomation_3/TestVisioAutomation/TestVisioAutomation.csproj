@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
+    <Compile Include="Extensions\DocumentsExtensions_Tests.cs" />
     <Compile Include="Extensions\MastersExtensions_Tests.cs" />
     <Compile Include="Extensions\SectionExtensions_Tests.cs" />
     <Compile Include="Layout\LayoutHelperTests.cs" />
