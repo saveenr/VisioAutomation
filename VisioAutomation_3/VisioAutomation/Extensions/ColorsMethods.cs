@@ -8,7 +8,10 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Color> AsEnumerable(this IVisio.Colors colors)
         {
-            return colors.Cast<IVisio.Color>();
+            for (int i = 0; i < colors.Count; i++)
+            {
+                yield return colors[i];
+            }
         }
     }
 }
