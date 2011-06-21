@@ -11,31 +11,27 @@ namespace TestVisioAutomation
         [TestMethod]
         public void SetCharacterSize()
         {
+            double input_text_size = VA.Convert.PointsToInches(50);
+            
             // Create a simple shape with no text and set the size to a specific value
-
             var page1 = GetNewPage();
             var shape0 = page1.DrawRectangle(1, 1, 3, 3);
 
-
-            double input_text_size = VA.Convert.PointsToInches(50);
-
+            // set the text size
             var incharformat = new VA.Text.CharacterFormatCells();
             incharformat.Size = input_text_size;
-            // set the text size
             VisioAutomation.Text.TextHelper.SetFormat(incharformat, shape0);
 
             // retrieve the text size
-
             var query = new VA.ShapeSheet.Query.CellQuery();
             var col_charsize = query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Size);
             var results = query.GetResults<double>(shape0);
+            
             // before & after sizes should be the same
             Assert.AreEqual(input_text_size, results[0,col_charsize], 0.005);
-
             page1.Delete(0);
         }
-
-
+        
         [TestMethod]
         public void SetMultipleCharacterSizes()
         {
@@ -66,8 +62,7 @@ namespace TestVisioAutomation
             VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt0 );
             VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt1 , 10, 20);
             VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt2 , 30, 40);
-
-
+            
             // retrieve the text size
             var query = new VA.ShapeSheet.Query.SectionQuery(IVisio.VisSectionIndices.visSectionCharacter);
             query.AddColumn(IVisio.VisCellIndices.visCharacterSize);
@@ -109,12 +104,9 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
-
-
-
-
+        
         [TestMethod]
-        public void Test_Color()
+        public void CheckTextRuns()
         {
             var page1 = GetNewPage();
 
@@ -158,7 +150,5 @@ namespace TestVisioAutomation
             Assert.AreEqual("psum dolor sit amet", textruns2[2].Text);
             page1.Delete(0);
         }
-
-
     }
 }

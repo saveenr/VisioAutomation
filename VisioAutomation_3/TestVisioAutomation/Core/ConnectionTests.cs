@@ -9,14 +9,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class ConnectionTests : VisioAutomationTest
     {
-        public static VA.Drawing.Point GetPointAtRadius(VA.Drawing.Point origin, double angle, double radius)
-        {
-            var new_point = new VA.Drawing.Point(radius * System.Math.Cos(angle),
-                                      radius * System.Math.Sin(angle));
-            new_point = origin + new_point;
-            return new_point;
-        }
-
         [TestMethod]
         public void ConnectShapes()
         {
@@ -29,7 +21,8 @@ namespace TestVisioAutomation
             foreach (var i in Enumerable.Range(0, num))
             {
                 double theta = i*(2*System.Math.PI)/num;
-                var p = GetPointAtRadius(center, theta, radius);
+                var p = new VA.Drawing.Point(radius * System.Math.Cos(theta),
+                                      radius * System.Math.Sin(theta)) + center;
                 var rect = VA.Drawing.Rectangle.FromCenterPoint(p, 0.5, 0.5);
                 page1.DrawOval(rect);
             }
