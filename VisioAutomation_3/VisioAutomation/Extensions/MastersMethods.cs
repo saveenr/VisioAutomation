@@ -8,7 +8,10 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Master> AsEnumerable(this IVisio.Masters masters)
         {
-            return masters.Cast<IVisio.Master>();
+            for (int i = 0; i < masters.Count; i++)
+            {
+                yield return masters[i + 1];
+            }
         }
 
         public static string[] GetNamesU(this IVisio.Masters masters)
