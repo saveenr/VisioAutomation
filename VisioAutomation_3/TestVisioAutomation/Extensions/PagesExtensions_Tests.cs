@@ -1,6 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
+using System.Linq;
+using System.Collections.Generic;
+using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace TestVisioAutomation
 {
@@ -69,5 +72,29 @@ namespace TestVisioAutomation
             Assert.AreEqual(new VA.Drawing.Size(6, 3), page1.GetSize());
             page1.Delete(0);
         }
+
+        [TestMethod]
+        public void TestAsEnumerable()
+        {
+            var doc1 = this.GetNewDoc();
+            var page1 = doc1.Pages[1];
+            var page2 = doc1.Pages.Add();
+            var page3 = doc1.Pages.Add();
+
+            page1.NameU = "P1";
+            page2.NameU = "P2";
+            page3.NameU = "P3";
+            var pages = doc1.Pages;
+            var expected = doc1.Pages.Cast<IVisio.Page>().ToList();
+            var actual = doc1.Pages.AsEnumerable().ToList();
+
+            Assert.AreEqual(expected.Count,actual.Count);
+            Assert.AreEqual(pages[1].NameU, actual[0].NameU);
+            Assert.AreEqual(pages[2].NameU, actual[1].NameU);
+            Assert.AreEqual(pages[3].NameU, actual[2].NameU);
+
+            doc1.Close(true);
+        }
+
     }
 }
