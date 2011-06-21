@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -206,7 +205,7 @@ namespace TestVisioAutomation
             return row_index;
         }
 
-        private int GetCorrectedRowCount(Shape shape, short section_index)
+        private int GetCorrectedRowCount(IVisio.Shape shape, short section_index)
         {
             int num_rows = shape.RowCount[section_index];
             if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)

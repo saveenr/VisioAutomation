@@ -1,13 +1,13 @@
-﻿using Microsoft.Office.Interop.Visio;
+﻿using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Text
 {
     public enum TabStopAlignment
     {
-        Left = VisCellVals.visTabStopLeft,
-        Center = VisCellVals.visTabStopCenter,
-        Right = VisCellVals.visTabStopRight,
-        Decimal = VisCellVals.visTabStopDecimal,
-        Comma = VisCellVals.visTabStopComma
+        Left = IVisio.VisCellVals.visTabStopLeft,
+        Center = IVisio.VisCellVals.visTabStopCenter,
+        Right = IVisio.VisCellVals.visTabStopRight,
+        Decimal = IVisio.VisCellVals.visTabStopDecimal,
+        Comma = IVisio.VisCellVals.visTabStopComma
     }
 }

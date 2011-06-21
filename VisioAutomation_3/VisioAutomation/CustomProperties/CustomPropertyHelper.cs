@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace VisioAutomation.CustomProperties
 {
     public static class CustomPropertyHelper
     {
-        public static void UpdateCustomProperty(Shape shape, string name, string val)
+        public static void UpdateCustomProperty(IVisio.Shape shape, string name, string val)
         {
             if (shape == null)
             {
@@ -41,13 +40,13 @@ namespace VisioAutomation.CustomProperties
 
             short row = cell_propname.Row;
             var cell_propval =
-                shape.CellsSRC[(short)IVisio.VisSectionIndices.visSectionProp, row, (short)VisCellIndices.visCustPropsValue];
+                shape.CellsSRC[(short)IVisio.VisSectionIndices.visSectionProp, row, (short)IVisio.VisCellIndices.visCustPropsValue];
             cell_propval.FormulaU = val;
         }
 
 
         public static void SetCustomProperty(
-            Shape shape,
+            IVisio.Shape shape,
             string name,
             VA.CustomProperties.CustomPropertyCells cp)
         {
@@ -66,12 +65,12 @@ namespace VisioAutomation.CustomProperties
             short row = shape.AddNamedRow(
                 (short)IVisio.VisSectionIndices.visSectionProp,
                 name,
-                (short)VisRowIndices.visRowProp);
+                (short)IVisio.VisRowIndices.visRowProp);
 
             SetCustomProperty(shape, row, cp);
         }
 
-        public static void SetCustomProperty( Shape shape, short row, VA.CustomProperties.CustomPropertyCells cp)
+        public static void SetCustomProperty(IVisio.Shape shape, short row, VA.CustomProperties.CustomPropertyCells cp)
         {
             if (shape == null)
             {
@@ -90,7 +89,7 @@ namespace VisioAutomation.CustomProperties
         /// If there are no custom properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of custom properties</returns>
-        public static IDictionary<string, CustomPropertyCells> GetCustomProperties(Shape shape)
+        public static IDictionary<string, CustomPropertyCells> GetCustomProperties(IVisio.Shape shape)
         {
             var prop_names = GetCustomPropertyNames(shape);
             var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
@@ -105,7 +104,7 @@ namespace VisioAutomation.CustomProperties
             return dic;
         }
 
-        public static IList<Dictionary<string, CustomPropertyCells>> GetCustomProperties(Page page, IList<Shape> shapes)
+        public static IList<Dictionary<string, CustomPropertyCells>> GetCustomProperties(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -151,7 +150,7 @@ namespace VisioAutomation.CustomProperties
             return customprops;
         }
 
-        public static int GetCustomPropertyCount(Shape shape)
+        public static int GetCustomPropertyCount(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -159,7 +158,7 @@ namespace VisioAutomation.CustomProperties
             }
 
             // If the Custom Property section does not exist then return zero immediately
-            if (0 == shape.SectionExists[(short)IVisio.VisSectionIndices.visSectionProp, (short)VisExistsFlags.visExistsAnywhere])
+            if (0 == shape.SectionExists[(short)IVisio.VisSectionIndices.visSectionProp, (short)IVisio.VisExistsFlags.visExistsAnywhere])
             {
                 return 0;
             }
@@ -176,7 +175,7 @@ namespace VisioAutomation.CustomProperties
             return row_count;
         }
 
-        public static IList<string> GetCustomPropertyNames(Shape shape)
+        public static IList<string> GetCustomPropertyNames(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -248,7 +247,7 @@ namespace VisioAutomation.CustomProperties
 
             string full_prop_name = GetRowName(name);
 
-            var exists = (short)VisExistsFlags.visExistsAnywhere;
+            var exists = (short)IVisio.VisExistsFlags.visExistsAnywhere;
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
 
