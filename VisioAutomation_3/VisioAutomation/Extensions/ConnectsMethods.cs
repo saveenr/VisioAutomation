@@ -8,7 +8,10 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Connect> AsEnumerable(this IVisio.Connects connects)
         {
-            return connects.Cast<IVisio.Connect>();
+            for (int i = 0; i < connects.Count; i++)
+            {
+                yield return connects[i+1];
+            }
         }
     }
 }
