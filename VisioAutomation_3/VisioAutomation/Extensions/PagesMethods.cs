@@ -8,7 +8,10 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Page> AsEnumerable(this IVisio.Pages pages)
         {
-            return pages.Cast<IVisio.Page>();
+            for (int i = 0; i < pages.Count; i++)
+            {
+                yield return pages[i + 1];
+            }
         }
 
         public static string[] GetNamesU(this IVisio.Pages pages)
