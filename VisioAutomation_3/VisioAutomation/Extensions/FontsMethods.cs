@@ -8,7 +8,10 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Font> AsEnumerable(this IVisio.Fonts fonts)
         {
-            return fonts.Cast<IVisio.Font>();
+            for (int i = 0; i < fonts.Count; i++)
+            {
+                yield return fonts[i + 1];
+            }
         }
     }
 }
