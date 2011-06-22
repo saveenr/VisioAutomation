@@ -8,7 +8,8 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Color> AsEnumerable(this IVisio.Colors colors)
         {
-            for (int i = 0; i < colors.Count; i++)
+            int count = colors.Count;
+            for (int i = 0; i < count; i++)
             {
                 yield return colors[i];
             }

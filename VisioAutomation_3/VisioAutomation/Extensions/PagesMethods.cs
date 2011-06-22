@@ -8,7 +8,8 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Page> AsEnumerable(this IVisio.Pages pages)
         {
-            for (int i = 0; i < pages.Count; i++)
+            short count = pages.Count;
+            for (int i = 0; i < count; i++)
             {
                 yield return pages[i + 1];
             }

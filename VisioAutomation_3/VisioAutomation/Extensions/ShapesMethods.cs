@@ -9,7 +9,8 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Shape> AsEnumerable(this IVisio.Shapes shapes)
         {
-            for (int i = 0; i < shapes.Count; i++)
+            int count = shapes.Count;
+            for (int i = 0; i < count; i++)
             {
                 yield return shapes[i + 1];
             }

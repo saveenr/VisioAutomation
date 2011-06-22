@@ -8,7 +8,8 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Font> AsEnumerable(this IVisio.Fonts fonts)
         {
-            for (int i = 0; i < fonts.Count; i++)
+            short count = fonts.Count;
+            for (int i = 0; i < count; i++)
             {
                 yield return fonts[i + 1];
             }

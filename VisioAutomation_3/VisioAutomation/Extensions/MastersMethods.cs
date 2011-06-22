@@ -8,7 +8,8 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Master> AsEnumerable(this IVisio.Masters masters)
         {
-            for (int i = 0; i < masters.Count; i++)
+            short count = masters.Count;
+            for (int i = 0; i < count; i++)
             {
                 yield return masters[i + 1];
             }

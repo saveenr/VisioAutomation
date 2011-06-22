@@ -9,7 +9,8 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Document> AsEnumerable(this IVisio.Documents docs)
         {
-            for (int i = 0; i < docs.Count; i++)
+            short count = docs.Count;
+            for (int i = 0; i < count; i++)
             {
                 yield return docs[i + 1];
             }

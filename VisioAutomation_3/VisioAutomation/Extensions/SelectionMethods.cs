@@ -17,12 +17,13 @@ namespace VisioAutomation.Extensions
 
         public static IEnumerable<IVisio.Shape> AsEnumerable(this IVisio.Selection selection)
         {
-            for (short i = 0; i < selection.Count16; i++)
+            short count16 = selection.Count16;
+            for (short i = 0; i < count16; i++)
             {
                 yield return selection[i + 1];
             }
         }
-        
+
         public static int[] GetIDs(this IVisio.Selection selection)
         {
             System.Array ids_sa;

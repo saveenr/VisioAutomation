@@ -8,7 +8,8 @@ namespace VisioAutomation.Extensions
     {
         public static IEnumerable<IVisio.Window> AsEnumerable(this IVisio.Windows windows)
         {
-            for (int i = 0; i < windows.Count; i++)
+            short count = windows.Count;
+            for (int i = 0; i < count; i++)
             {
                 yield return windows[(short)(i + 1)];
             }
