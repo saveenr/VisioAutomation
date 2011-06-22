@@ -72,6 +72,36 @@ namespace TestVisioAutomation
 
             };
 
+        private static short[] SectionObject_RowIndices = new short[]
+                                                              {
+(short) IVisio.VisRowIndices.visRowAlign,
+(short) IVisio.VisRowIndices.visRowDoc,
+(short) IVisio.VisRowIndices.visRowEvent,
+(short) IVisio.VisRowIndices.visRowForeign,
+(short) IVisio.VisRowIndices.visRowFill,
+(short) IVisio.VisRowIndices.visRowMisc,
+(short) IVisio.VisRowIndices.visRowGroup,
+
+(short) IVisio.VisRowIndices.visRowImage,
+(short) IVisio.VisRowIndices.visRowLine,
+(short) IVisio.VisRowIndices.visRowMisc,
+(short) IVisio.VisRowIndices.visRowXForm1D,
+(short) IVisio.VisRowIndices.visRowPageLayout,
+(short) IVisio.VisRowIndices.visRowPrintProperties,
+
+(short) IVisio.VisRowIndices.visRowPage,
+(short) IVisio.VisRowIndices.visRowParagraph,
+(short) IVisio.VisRowIndices.visRowLock,
+
+(short) IVisio.VisRowIndices.visRowRulerGrid,
+(short) IVisio.VisRowIndices.visRowXFormOut,
+(short) IVisio.VisRowIndices.visRowTextXForm,                                                                  
+
+(short) IVisio.VisRowIndices.visRowText,
+(short) IVisio.VisRowIndices.visRowStyle,
+(short) IVisio.VisRowIndices.visRowShapeLayout,                                                                  
+
+    };
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void CheckCellNames()
         {
