@@ -11,16 +11,9 @@ namespace TestVisioAutomation
     [TestClass]
     public class ShapeSheetHelperTests_Query : VisioAutomationTest
     {
-        public class CellInfo
-        {
-            public string RealName;
-            public VA.ShapeSheet.SRC SRC;
-            public string XName;
-            public VA.ShapeSheet.SRC XSRC;
-            public string Formula;
-            public double Result;
 
-        }
+        private static ShapeSheetMetadata md = new TestVisioAutomation.ShapeSheetMetadata();
+
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void SpotCheck1()
         {
@@ -30,78 +23,6 @@ namespace TestVisioAutomation
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(c2, c1);
         }
 
-        static short[] common_section_indices = new[] 
-            {     
-                (short) IVisio.VisSectionIndices.visSectionAction, 
-                (short) IVisio.VisSectionIndices.visSectionAnnotation,
-                (short) IVisio.VisSectionIndices.visSectionCharacter,
-                (short) IVisio.VisSectionIndices.visSectionConnectionPts,
-                (short) IVisio.VisSectionIndices.visSectionControls,
-                (short) IVisio.VisSectionIndices.visSectionExport, 
-                (short) IVisio.VisSectionIndices.visSectionHyperlink,
-                (short) IVisio.VisSectionIndices.visSectionLayer, 
-                (short) IVisio.VisSectionIndices.visSectionParagraph,
-                (short) IVisio.VisSectionIndices.visSectionProp, 
-                (short) IVisio.VisSectionIndices.visSectionReviewer,
-                (short) IVisio.VisSectionIndices.visSectionScratch, 
-                (short) IVisio.VisSectionIndices.visSectionSmartTag,
-                (short) IVisio.VisSectionIndices.visSectionTab, 
-                (short) IVisio.VisSectionIndices.visSectionTextField,
-                (short) IVisio.VisSectionIndices.visSectionUser, 
-                (short) IVisio.VisSectionIndices.visSectionObject  
-            };
-
-        static Dictionary<short, string> section_to_name = new Dictionary<short, string>
-            {
-                { (short) IVisio.VisSectionIndices.visSectionAction, "Action" },
-                { (short) IVisio.VisSectionIndices.visSectionAnnotation, "Annotation" },
-                { (short) IVisio.VisSectionIndices.visSectionCharacter, "Character" },
-                { (short) IVisio.VisSectionIndices.visSectionConnectionPts, "ConnectionPts" },
-                { (short) IVisio.VisSectionIndices.visSectionControls, "Controls" },
-                { (short) IVisio.VisSectionIndices.visSectionHyperlink, "Hyperlink" },
-                { (short) IVisio.VisSectionIndices.visSectionLayer, "Layer" },
-                { (short) IVisio.VisSectionIndices.visSectionParagraph, "Paragraph" },
-                { (short) IVisio.VisSectionIndices.visSectionProp, "Prop" },
-                { (short) IVisio.VisSectionIndices.visSectionReviewer, "Reviewer" },
-                { (short) IVisio.VisSectionIndices.visSectionScratch, "Scratch" },
-                { (short) IVisio.VisSectionIndices.visSectionSmartTag, "SmartTag" },
-                { (short) IVisio.VisSectionIndices.visSectionTab, "Tab" },
-                { (short) IVisio.VisSectionIndices.visSectionTextField, "TextField" },
-                { (short) IVisio.VisSectionIndices.visSectionUser, "User" },
-                { (short) IVisio.VisSectionIndices.visSectionObject , "Object"}
-
-            };
-
-        private static short[] SectionObject_RowIndices = new short[]
-                                                              {
-(short) IVisio.VisRowIndices.visRowAlign,
-(short) IVisio.VisRowIndices.visRowDoc,
-(short) IVisio.VisRowIndices.visRowEvent,
-(short) IVisio.VisRowIndices.visRowForeign,
-(short) IVisio.VisRowIndices.visRowFill,
-(short) IVisio.VisRowIndices.visRowMisc,
-(short) IVisio.VisRowIndices.visRowGroup,
-
-(short) IVisio.VisRowIndices.visRowImage,
-(short) IVisio.VisRowIndices.visRowLine,
-(short) IVisio.VisRowIndices.visRowMisc,
-(short) IVisio.VisRowIndices.visRowXForm1D,
-(short) IVisio.VisRowIndices.visRowPageLayout,
-(short) IVisio.VisRowIndices.visRowPrintProperties,
-
-(short) IVisio.VisRowIndices.visRowPage,
-(short) IVisio.VisRowIndices.visRowParagraph,
-(short) IVisio.VisRowIndices.visRowLock,
-
-(short) IVisio.VisRowIndices.visRowRulerGrid,
-(short) IVisio.VisRowIndices.visRowXFormOut,
-(short) IVisio.VisRowIndices.visRowTextXForm,                                                                  
-
-(short) IVisio.VisRowIndices.visRowText,
-(short) IVisio.VisRowIndices.visRowStyle,
-(short) IVisio.VisRowIndices.visRowShapeLayout,                                                                  
-
-    };
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void CheckCellNames()
         {
@@ -155,7 +76,7 @@ namespace TestVisioAutomation
 
             System.Threading.Thread.Sleep(1000);
 
-            foreach (short section_index in common_section_indices)
+            foreach (short section_index in md.CommonSectionIndices)
             {
                 Debug.WriteLine(TryGetSectionName(section_index) ?? "UNKNOWN SECTION");
                 Debug.WriteLine("--------------------");
@@ -172,9 +93,9 @@ namespace TestVisioAutomation
 
         private string TryGetSectionName(short si)
         {
-            if (section_to_name.ContainsKey((short)si))
+            if (md.SectionToName.ContainsKey((short)si))
             {
-                return section_to_name[(short)si];
+                return md.SectionToName[(short)si];
             }
             return null;
         }
