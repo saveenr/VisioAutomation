@@ -8,6 +8,74 @@ namespace VisioAutomation.ShapeSheet
 {
     public static partial class ShapeSheetHelper
     {
+        public static string TryGetNameFromSRC(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Section)
+            {
+                case ((short)IVisio.VisSectionIndices.visSectionObject):
+                    {
+                        return TryGetNameFromSRC_Section_Object(src);
+                    }
+                default:
+                    break;
+            }
+            return null;
+        }
+
+        private static string TryGetNameFromSRC_Section_Object(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowFill):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visFillBkgnd): return "FillBkgnd";
+                            case ((short)IVisio.VisCellIndices.visFillBkgndTrans): return "BkgndTrans";
+                            case ((short)IVisio.VisCellIndices.visFillForegnd): return "FillForegnd";
+                            case ((short)IVisio.VisCellIndices.visFillForegndTrans): return "ForegndTrans";
+                            case ((short)IVisio.VisCellIndices.visFillPattern): return "FillPattern";
+                            case ((short)IVisio.VisCellIndices.visFillShdwBkgnd): return "ShdwBkgnd";
+                            case ((short)IVisio.VisCellIndices.visFillShdwBkgndTrans): return "ShdwBkgndTrans";
+                            case ((short)IVisio.VisCellIndices.visFillShdwForegnd): return "ShdwForegnd";
+                            case ((short)IVisio.VisCellIndices.visFillShdwForegndTrans): return "ShdwForegndTrans";
+                            case ((short)IVisio.VisCellIndices.visFillShdwObliqueAngle): return "ShdwObliqueAngle";
+                            case ((short)IVisio.VisCellIndices.visFillShdwOffsetX): return "ShdwOffsetX";
+                            case ((short)IVisio.VisCellIndices.visFillShdwOffsetY): return "ShdwOffsetY";
+                            case ((short)IVisio.VisCellIndices.visFillShdwPattern): return "ShdwPattern";
+                            case ((short)IVisio.VisCellIndices.visFillShdwScaleFactor): return "ShdwScaleFactor";
+                            case ((short)IVisio.VisCellIndices.visFillShdwType): return "visFillShdwType";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowLine):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visLineBeginArrow): return "BeginArrow";
+                            case ((short)IVisio.VisCellIndices.visLineBeginArrowSize): return "BeginArrowSize";
+                            case ((short)IVisio.VisCellIndices.visLineColor): return "LineColor";
+                            case ((short)IVisio.VisCellIndices.visLineColorTrans): return "LineColorTrans";
+                            case ((short)IVisio.VisCellIndices.visLineEndArrow): return "LineEndArrow";
+                            case ((short)IVisio.VisCellIndices.visLineEndArrowSize): return "LineEndArrowSize";
+                            case ((short)IVisio.VisCellIndices.visLineEndCap): return "LineEndCap";
+                            case ((short)IVisio.VisCellIndices.visLinePattern): return "LinePattern";
+                            case ((short)IVisio.VisCellIndices.visLineRounding): return "LineRounding";
+                            case ((short)IVisio.VisCellIndices.visLineWeight): return "LineWeight";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
         public static SRC? TryGetSRCFromName(string name)
         {
             var dic = NameToSRCDictionary;
