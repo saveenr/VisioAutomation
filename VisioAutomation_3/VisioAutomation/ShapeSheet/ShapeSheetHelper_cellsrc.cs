@@ -69,6 +69,38 @@ namespace VisioAutomation.ShapeSheet
                         }
                         break;
                     }
+                case ((short)IVisio.VisRowIndices.visRowXFormOut):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visXFormAngle): return "Angle";
+                            case ((short)IVisio.VisCellIndices.visXFormFlipX): return "FlipX";
+                            case ((short)IVisio.VisCellIndices.visXFormFlipY): return "FlipY";
+                            case ((short)IVisio.VisCellIndices.visXFormHeight): return "Height";
+                            case ((short)IVisio.VisCellIndices.visXFormLocPinX): return "LocPinX";
+                            case ((short)IVisio.VisCellIndices.visXFormLocPinY): return "LocPinY";
+                            case ((short)IVisio.VisCellIndices.visXFormPinX): return "PinX";
+                            case ((short)IVisio.VisCellIndices.visXFormPinY): return "PinY";
+                            case ((short)IVisio.VisCellIndices.visXFormResizeMode): return "ResizeMode";
+                            case ((short)IVisio.VisCellIndices.visXFormWidth): return "FormWidth";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowXForm1D):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.vis1DBeginX): return "BeginX";
+                            case ((short)IVisio.VisCellIndices.vis1DBeginY): return "BeginY";
+                            case ((short)IVisio.VisCellIndices.vis1DEndX): return "EndX";
+                            case ((short)IVisio.VisCellIndices.vis1DEndY): return "EndY";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
                 default:
                     break;
             }
@@ -187,6 +219,7 @@ namespace VisioAutomation.ShapeSheet
                                                  {"ShdwForegnd",SRCConstants.ShdwForegnd},
                                                  {"ShdwForegndTrans",SRCConstants.ShdwForegndTrans},
                                                  {"ShdwPattern",SRCConstants.ShdwPattern},
+
                                                  {"LineCap",SRCConstants.LineCap},
                                                  {"LineColor",SRCConstants.LineColor},
                                                  {"LineColorTrans",SRCConstants.LineColorTrans},
@@ -197,10 +230,12 @@ namespace VisioAutomation.ShapeSheet
                                                  {"BeginArrowSize",SRCConstants.BeginArrowSize},
                                                  {"EndArrow",SRCConstants.EndArrow},
                                                  {"EndArrowSize",SRCConstants.EndArrowSize},
+
                                                  {"BeginX",SRCConstants.BeginX},
                                                  {"BeginY",SRCConstants.BeginY},
                                                  {"EndX",SRCConstants.EndX},
                                                  {"EndY",SRCConstants.EndY},
+                                                 
                                                  {"Char.Case",SRCConstants.Char_Case},
                                                  {"Char.Color",SRCConstants.Char_Color},
                                                  {"Char.ColorTrans",SRCConstants.Char_ColorTrans},
@@ -217,7 +252,7 @@ namespace VisioAutomation.ShapeSheet
                                                  {"Char.RTLText",SRCConstants.RTLText},
                                                  {"Char.UseVertical",SRCConstants.UseVertical},
 
-                                                 //glueinfo                                                                      {"Char.Style",VA.ShapeSheet.CellSRCConstants.Char_Style},
+                                                 //glueinfo
                                                  {"BegTrigger",SRCConstants.BegTrigger},
                                                  {"EndTrigger",SRCConstants.EndTrigger},
                                                  {"GlueType",SRCConstants.GlueType},
