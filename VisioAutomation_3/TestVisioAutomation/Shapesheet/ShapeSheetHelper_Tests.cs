@@ -76,11 +76,11 @@ namespace TestVisioAutomation
 
             System.Threading.Thread.Sleep(1000);
 
-            foreach (short section_index in md.CommonSectionIndices)
+            foreach (var sectiondef in md.CommonSections)
             {
-                Debug.WriteLine(TryGetSectionName(section_index) ?? "UNKNOWN SECTION");
+                Debug.WriteLine(sectiondef.DisplayName);
                 Debug.WriteLine("--------------------");
-                foreach (var cellinfo in EnumCellsInSection(shape1, section_index))
+                foreach (var cellinfo in EnumCellsInSection(shape1, sectiondef.EnumValue))
                 {
                     Debug.WriteLine("{0} {1} : {2} {3} // (\"{4}\", {5})", cellinfo.RealName, cellinfo.SRC.ToString(), cellinfo.XName, cellinfo.XSRC.ToString(), cellinfo.Formula, cellinfo.Result);
 
