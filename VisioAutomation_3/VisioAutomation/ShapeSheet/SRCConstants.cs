@@ -136,7 +136,7 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC ShdwPattern = new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwPattern);
 
         // GlueInfo
-        public readonly static SRC BegTrigger = new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visBegTrigger);
+        public readonly static SRC BegTrigger = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visBegTrigger);
         public readonly static SRC EndTrigger = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visEndTrigger);
         public readonly static SRC GlueType = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visGlueType);
         public readonly static SRC WalkPreference = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visWalkPref);

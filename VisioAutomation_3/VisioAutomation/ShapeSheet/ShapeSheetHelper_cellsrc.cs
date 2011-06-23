@@ -88,14 +88,304 @@ namespace VisioAutomation.ShapeSheet
                         }
                         break;
                     }
-                case ((short)IVisio.VisRowIndices.visRowXForm1D):
+                case ((short)IVisio.VisRowIndices.visRowAlign):
                     {
                         switch (src.Cell)
                         {
-                            case ((short)IVisio.VisCellIndices.vis1DBeginX): return "BeginX";
-                            case ((short)IVisio.VisCellIndices.vis1DBeginY): return "BeginY";
-                            case ((short)IVisio.VisCellIndices.vis1DEndX): return "EndX";
-                            case ((short)IVisio.VisCellIndices.vis1DEndY): return "EndY";
+                            case ((short)IVisio.VisCellIndices.visAlignBottom): return "AlignBottom";
+                            case ((short)IVisio.VisCellIndices.visAlignCenter): return "AlignCenter";
+                            case ((short)IVisio.VisCellIndices.visAlignLeft): return "AlignLeft";
+                            case ((short)IVisio.VisCellIndices.visAlignRight): return "AlignRight";
+                            case ((short)IVisio.VisCellIndices.visAlignTop): return "AlignTop";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowDoc):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visDocAddMarkup): return "AddMarkup";
+                            case ((short)IVisio.VisCellIndices.visDocLangID): return "DocLangID";
+                            case ((short)IVisio.VisCellIndices.visDocLockPreview): return "LockPreview";
+                            case ((short)IVisio.VisCellIndices.visDocOutputFormat): return "OutputFormat";
+                            case ((short)IVisio.VisCellIndices.visDocPreviewQuality): return "PreviewQuality";
+                            case ((short)IVisio.VisCellIndices.visDocPreviewScope): return "PreviewScope";
+                            case ((short)IVisio.VisCellIndices.visDocViewMarkup): return "PreviewScope";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowForeign):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visFrgnImgHeight): return "ImgHeight";
+                            case ((short)IVisio.VisCellIndices.visFrgnImgOffsetX): return "ImgOffsetX";
+                            case ((short)IVisio.VisCellIndices.visFrgnImgOffsetY): return "ImgOffsetY";
+                            case ((short)IVisio.VisCellIndices.visFrgnImgWidth): return "ImgWidth";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowEvent):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visEvtCellDblClick): return "EventDblClick";
+                            case ((short)IVisio.VisCellIndices.visEvtCellDrop): return "EventDrop";
+                            case ((short)IVisio.VisCellIndices.visEvtCellMultiDrop): return "EventMultiDrop";
+                            case ((short)IVisio.VisCellIndices.visEvtCellXFMod): return "EventXFMod";
+                            case ((short)IVisio.VisCellIndices.visEvtCellTheText): return "TheText";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowMisc):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visBegTrigger): return "BegTrigger";
+                            case ((short)IVisio.VisCellIndices.visEndTrigger): return "EndTrigger";
+                            case ((short)IVisio.VisCellIndices.visGlueType): return "GlueType";
+                            case ((short)IVisio.VisCellIndices.visWalkPref): return "WalkPreference";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowGroup):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visGroupDisplayMode): return "DisplayMode";
+                            case ((short)IVisio.VisCellIndices.visGroupDontMoveChildren): return "DontMoveChildren";
+                            case ((short)IVisio.VisCellIndices.visGroupIsDropTarget): return "IsDropTarget";
+                            case ((short)IVisio.VisCellIndices.visGroupIsSnapTarget): return "IsSnapTarget";
+                            case ((short)IVisio.VisCellIndices.visGroupIsTextEditTarget): return "IsTextEditTarget";
+                            case ((short)IVisio.VisCellIndices.visGroupSelectMode): return "SelectMode";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowImage):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visImageBlur): return "Blur";
+                            case ((short)IVisio.VisCellIndices.visImageBrightness): return "Brightness";
+                            case ((short)IVisio.VisCellIndices.visImageContrast): return "Contrast";
+                            case ((short)IVisio.VisCellIndices.visImageDenoise): return "Denoise";
+                            case ((short)IVisio.VisCellIndices.visImageGamma): return "Gamma";
+                            case ((short)IVisio.VisCellIndices.visImageSharpen): return "Sharpen";
+                            case ((short)IVisio.VisCellIndices.visImageTransparency): return "Transparency";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowPageLayout):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visPLOAvenueSizeX): return "AvenueSizeX";
+                            case ((short)IVisio.VisCellIndices.visPLOAvenueSizeY): return "AvenueSizeY";
+                            case ((short)IVisio.VisCellIndices.visPLOBlockSizeX): return "BlockSizeX";
+                            case ((short)IVisio.VisCellIndices.visPLOBlockSizeY): return "BlockSizeY";
+                            case ((short)IVisio.VisCellIndices.visPLOCtrlAsInput): return "CtrlAsInput";
+                            case ((short)IVisio.VisCellIndices.visPLODynamicsOff): return "DynamicsOff";
+                            case ((short)IVisio.VisCellIndices.visPLOEnableGrid): return "EnableGrid";
+                            case ((short)IVisio.VisCellIndices.visPLOLineAdjustFrom): return "LineAdjustFrom";
+                            case ((short)IVisio.VisCellIndices.visPLOLineAdjustTo): return "LineAdjustTo";
+                            case ((short)IVisio.VisCellIndices.visPLOJumpCode): return "LineJumpCode";
+                            case ((short)IVisio.VisCellIndices.visPLOJumpFactorX): return "LineJumpFactorX";
+                            case ((short)IVisio.VisCellIndices.visPLOJumpFactorY): return "LineJumpFactorY";
+                            case ((short)IVisio.VisCellIndices.visPLOJumpStyle): return "LineJumpStyle";
+                            case ((short)IVisio.VisCellIndices.visPLOLineRouteExt): return "LineRouteExt";
+                            case ((short)IVisio.VisCellIndices.visPLOLineToLineX): return "LineToLineX";
+                            case ((short)IVisio.VisCellIndices.visPLOLineToLineY): return "LineToLineY";
+                            case ((short)IVisio.VisCellIndices.visPLOLineToNodeX): return "LineToNodeX";
+                            case ((short)IVisio.VisCellIndices.visPLOLineToNodeY): return "LineToNodeY";
+                            case ((short)IVisio.VisCellIndices.visPLOJumpDirX): return "PageLineJumpDirX";
+                            case ((short)IVisio.VisCellIndices.visPLOJumpDirY): return "PageLineJumpDirY";
+                            case ((short)IVisio.VisCellIndices.visPLOSplit): return "PageShapeSplit";
+                            case ((short)IVisio.VisCellIndices.visPLOPlaceDepth): return "PlaceDepth";
+                            case ((short)IVisio.VisCellIndices.visPLOPlaceFlip): return "PlaceFlip";
+                            case ((short)IVisio.VisCellIndices.visPLOPlaceStyle): return "PlaceStyle";
+                            case ((short)IVisio.VisCellIndices.visPLOPlowCode): return "PlowCode";
+                            case ((short)IVisio.VisCellIndices.visPLOResizePage): return "ResizePage";
+                            case ((short)IVisio.VisCellIndices.visPLORouteStyle): return "RouteStyle";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowPrintProperties):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesLeftMargin): return "PageLeftMargin";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesCenterX): return "CenterX";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesCenterY): return "CenterY";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesOnPage): return "OnPage";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesBottomMargin): return "PageBottomMargin";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesRightMargin): return "PageRightMargin";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesPagesX): return "PagesX";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesPagesY): return "PagesY";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesTopMargin): return "PageTopMargin";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesPaperKind): return "PaperKind";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesPrintGrid): return "PrintGrid";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesPageOrientation): return "PrintPageOrientation";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesScaleX): return "ScaleX";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesScaleY): return "ScaleY";
+                            case ((short)IVisio.VisCellIndices.visPrintPropertiesPaperSource): return "PaperSource";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowPage):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visPageDrawingScale): return "DrawingScale";
+                            case ((short)IVisio.VisCellIndices.visPageDrawScaleType): return "DrawingScaleType";
+                            case ((short)IVisio.VisCellIndices.visPageDrawSizeType): return "DrawingSizeType";
+                            case ((short)IVisio.VisCellIndices.visPageInhibitSnap): return "InhibitSnap";
+                            case ((short)IVisio.VisCellIndices.visPageHeight): return "PageHeight";
+                            case ((short)IVisio.VisCellIndices.visPageScale): return "PageScale";
+                            case ((short)IVisio.VisCellIndices.visPageWidth): return "PageWidth";
+                            case ((short)IVisio.VisCellIndices.visPageShdwObliqueAngle): return "ShdwObliqueAngle";
+                            case ((short)IVisio.VisCellIndices.visPageShdwOffsetX): return "ShdwOffsetX";
+                            case ((short)IVisio.VisCellIndices.visPageShdwOffsetY): return "ShdwOffsetY";
+                            case ((short)IVisio.VisCellIndices.visPageShdwScaleFactor): return "ShdwScaleFactor";
+                            case ((short)IVisio.VisCellIndices.visPageShdwType): return "ShdwType";
+                            case ((short)IVisio.VisCellIndices.visPageUIVisibility): return "UIVisibility";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowLock):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visLockAspect): return "LockAspect";
+                            case ((short)IVisio.VisCellIndices.visLockBegin): return "LockBegin";
+                            case ((short)IVisio.VisCellIndices.visLockCalcWH): return "LockCalcWH";
+                            case ((short)IVisio.VisCellIndices.visLockCrop): return "LockCrop";
+                            case ((short)IVisio.VisCellIndices.visLockCustProp): return "LockCustProp";
+                            case ((short)IVisio.VisCellIndices.visLockDelete): return "LockDelete";
+                            case ((short)IVisio.VisCellIndices.visLockEnd): return "LockEnd";
+                            case ((short)IVisio.VisCellIndices.visLockFormat): return "LockFormat";
+                            case ((short)IVisio.VisCellIndices.visLockFromGroupFormat): return "LockFromGroupFormat";
+                            case ((short)IVisio.VisCellIndices.visLockGroup): return "LockGroup";
+                            case ((short)IVisio.VisCellIndices.visLockHeight): return "LockHeight";
+                            case ((short)IVisio.VisCellIndices.visLockMoveX): return "LockMoveX";
+                            case ((short)IVisio.VisCellIndices.visLockMoveY): return "LockMoveY";
+                            case ((short)IVisio.VisCellIndices.visLockRotate): return "LockRotate";
+                            case ((short)IVisio.VisCellIndices.visLockSelect): return "LockSelect";
+                            case ((short)IVisio.VisCellIndices.visLockTextEdit): return "LockTextEdit";
+                            case ((short)IVisio.VisCellIndices.visLockThemeColors): return "LockThemeColors";
+                            case ((short)IVisio.VisCellIndices.visLockThemeEffects): return "LockThemeEffects";
+                            case ((short)IVisio.VisCellIndices.visLockVtxEdit): return "LockVtxEdit";
+                            case ((short)IVisio.VisCellIndices.visLockWidth): return "LockWidth";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowRulerGrid):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visXGridDensity): return "XGridDensity";
+                            case ((short)IVisio.VisCellIndices.visXGridOrigin): return "XGridOrigin";
+                            case ((short)IVisio.VisCellIndices.visXGridSpacing): return "XGridSpacing";
+                            case ((short)IVisio.VisCellIndices.visXRulerDensity): return "XRulerDensity";
+                            case ((short)IVisio.VisCellIndices.visXRulerOrigin): return "XRulerOrigin";
+                            case ((short)IVisio.VisCellIndices.visYGridDensity): return "YGridDensity";
+                            case ((short)IVisio.VisCellIndices.visYGridOrigin): return "YGridOrigin";
+                            case ((short)IVisio.VisCellIndices.visYGridSpacing): return "YGridSpacing";
+                            case ((short)IVisio.VisCellIndices.visYRulerDensity): return "YRulerDensity";
+                            case ((short)IVisio.VisCellIndices.visYRulerOrigin): return "YRulerOrigin";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowTextXForm):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visXFormAngle): return "TxtAngle";
+                            case ((short)IVisio.VisCellIndices.visXFormHeight): return "TxtHeight";
+                            case ((short)IVisio.VisCellIndices.visXFormLocPinX): return "TxtLocPinX";
+                            case ((short)IVisio.VisCellIndices.visXFormLocPinY): return "TxtLocPinY";
+                            case ((short)IVisio.VisCellIndices.visXFormPinX): return "TxtPinX";
+                            case ((short)IVisio.VisCellIndices.visXFormPinY): return "TxtPinY";
+                            case ((short)IVisio.VisCellIndices.visXFormWidth): return "TxtWidth";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowText):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visTxtBlkBottomMargin): return "BottomMargin";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkDefaultTabStop): return "DefaultTabstop";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkLeftMargin): return "LeftMargin";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkRightMargin): return "RightMargin";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkBkgnd): return "TextBkgnd";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkBkgndTrans): return "TextBkgndTrans";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkDirection): return "TextDirection";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkTopMargin): return "TopMargin";
+                            case ((short)IVisio.VisCellIndices.visTxtBlkVerticalAlign): return "VerticalAlign";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowStyle):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visStyleIncludesFill): return "EnableFillProps";
+                            case ((short)IVisio.VisCellIndices.visStyleIncludesLine): return "EnableLineProps";
+                            case ((short)IVisio.VisCellIndices.visStyleIncludesText): return "EnableTextProps";
+                            case ((short)IVisio.VisCellIndices.visStyleHidden): return "HideForApply";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowShapeLayout):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visSLOConFixedCode): return "ConFixedCode";
+                            case ((short)IVisio.VisCellIndices.visSLOJumpCode): return "ConLineJumpCode";
+                            case ((short)IVisio.VisCellIndices.visSLOJumpDirX): return "ConLineJumpDirX";
+                            case ((short)IVisio.VisCellIndices.visSLOJumpDirY): return "ConLineJumpDirY";
+                            case ((short)IVisio.VisCellIndices.visSLOJumpStyle): return "ConLineJumpStyle";
+                            case ((short)IVisio.VisCellIndices.visSLOLineRouteExt): return "ConLineRouteExt";
+                            case ((short)IVisio.VisCellIndices.visSLOFixedCode): return "ShapeFixedCode";
+                            case ((short)IVisio.VisCellIndices.visSLOPermeablePlace): return "ShapePermeablePlace";
+                            case ((short)IVisio.VisCellIndices.visSLOPermX): return "ShapePermeableX";
+                            case ((short)IVisio.VisCellIndices.visSLOPermY): return "ShapePermeableY";
+                            case ((short)IVisio.VisCellIndices.visSLOPlaceFlip): return "ShapePlaceFlip";
+                            case ((short)IVisio.VisCellIndices.visSLOPlaceStyle): return "ShapePlaceStyle";
+                            case ((short)IVisio.VisCellIndices.visSLOPlowCode): return "ShapePlowCode";
+                            case ((short)IVisio.VisCellIndices.visSLORouteStyle): return "ShapeRouteStyle";
+                            case ((short)IVisio.VisCellIndices.visSLOSplit): return "ShapeSplit";
+                            case ((short)IVisio.VisCellIndices.visSLOSplittable): return "ShapeSplittable";
                             default:
                                 break;
                         }
