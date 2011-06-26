@@ -89,6 +89,7 @@
     <Compile Include="Extensions\MastersExtensions_Tests.cs" />
     <Compile Include="Extensions\SectionExtensions_Tests.cs" />
     <Compile Include="Layout\LayoutHelperTests.cs" />
+    <Compile Include="Metadata\MetadataTests.cs" />
     <Compile Include="Shapesheet\ShapeSheetMetadata.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper_Tests.cs" />
     <Compile Include="TestHelper.cs" />
@@ -154,6 +155,10 @@
     <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
       <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
       <Name>VisioAutomation.Layout.MSAGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.Metadata\VisioAutomation.Metadata.csproj">
+      <Project>{6F0813C8-DBA0-4F93-BF96-55012DA737A3}</Project>
+      <Name>VisioAutomation.Metadata</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>

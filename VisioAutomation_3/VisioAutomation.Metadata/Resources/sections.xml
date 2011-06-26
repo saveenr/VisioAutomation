@@ -1,0 +1,341 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40"
+ xmlns:x2="http://schemas.microsoft.com/office/excel/2003/xml">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>saveenr</Author>
+  <LastAuthor>saveenr</LastAuthor>
+  <Created>2011-06-24T15:06:19Z</Created>
+  <Version>14.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>13830</WindowHeight>
+  <WindowWidth>27555</WindowWidth>
+  <WindowTopX>600</WindowTopX>
+  <WindowTopY>375</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+  <FutureVer>11</FutureVer>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <NumberFormat ss:Format="@"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="41" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Column ss:Width="123.75"/>
+   <Column ss:Width="149.25"/>
+   <Column ss:AutoFitWidth="0" ss:Width="114.75"/>
+   <Row>
+    <Cell><Data ss:Type="String">ID</Data></Cell>
+    <Cell><Data ss:Type="String">DisplayName</Data></Cell>
+    <Cell><Data ss:Type="String">Name</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_1dendpoints</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">1D Endpoints</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">OneDEndpoints</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_actions</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Actions</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Actions</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_alignment</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Alignment</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Alignment</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_annotation</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Annotation</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Annotation</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_character</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Character</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Character</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_connectionpoints</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Connection Points</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">ConnectionPoints</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_controls</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Controls</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Controls</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_customproperties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Custom Properties Cells</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">CustomPropertiesCells</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_documentproperties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Document Properties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">DocumentProperties</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_events</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Events</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Events</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_fillformat</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Fill Format</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">FillFormat</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_foreignimageinfo</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Foreign Image Info</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">ForeignImageInfo</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_geometry</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Geometry</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Geometry</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_glueinfo</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Glue Info</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">GlueInfo</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_groupproperties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Group Properties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">GroupProperties</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_hyperlinks</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Hyperlinks</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Hyperlinks</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_imageproperties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Image Properties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">ImageProperties</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_layermembership</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Layer Membership</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">LayerMembership</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_layers</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Layers</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Layers</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_lineformat</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Line Format</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">LineFormat</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_miscellaneous</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Miscellaneous</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Miscellaneous</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_onedendpoints</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">1D Endpoints Cells</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">OneDEndPointsCells</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_pagelayout</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Page Layout</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">PageLayout</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_pageproperties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Page Properties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">PageProperties</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_paragraph</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Paragraph</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Paragraph</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_printproperties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Print Properties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">PrintProperties</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_protection</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Protection</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Protection</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_reviewer</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Reviewer</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Reviewer</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_rulerandgrid</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Ruler &amp; Grid</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">RulerAndGrid</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_scratch</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Scratch</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Scratch</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_shapedata</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Shape Data</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">ShapeData</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_shapelayout</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Shape Layout</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">ShapeLayout</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_shapetransform</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Shape Transform</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">ShapeTransform</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_smarttags</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">SmartTags</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">SmartTags</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_styleproperties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Style Properties</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">StyleProperties</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_tabs</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Tabs</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Tabs</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_textblockformat</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">TextBlock Format</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">TextBlockFormat</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_textfields</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Text Fields</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">TextFields</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_texttransform</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Text Transform</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">TextTransform</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">sec_userdefinedcells</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">User-Defined Cells</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">UserDefinedCells</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>1</ActiveRow>
+     <ActiveCol>2</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet2">
+  <Table ss:ExpandedColumnCount="1" ss:ExpandedRowCount="1" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <Worksheet ss:Name="Sheet3">
+  <Table ss:ExpandedColumnCount="1" ss:ExpandedRowCount="1" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+ <x2:MapInfo x2:HideInactiveListBorder="false">
+  <x2:Schema x2:ID="Schema1" x2:Namespace=""><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"><xsd:element nillable="true" name="Table"><xsd:complexType><xsd:sequence minOccurs="0"><xsd:element minOccurs="0" maxOccurs="unbounded" nillable="true" name="Row" form="unqualified"><xsd:complexType><xsd:attribute name="ID" form="unqualified" type="xsd:string"></xsd:attribute><xsd:attribute name="Name" form="unqualified" type="xsd:string"></xsd:attribute></xsd:complexType></xsd:element></xsd:sequence></xsd:complexType></xsd:element></xsd:schema></x2:Schema>
+  <x2:Map x2:ID="Table_Map" x2:SchemaID="Schema1" x2:RootElement="Table">
+   <x2:Entry x2:Type="table" x2:ID="1" x2:ShowTotals="false">
+    <x2:Range>Sheet1!R2C1:R41C3</x2:Range>
+    <x2:HeaderRange>R1C1</x2:HeaderRange>
+    <x:FilterOn>True</x:FilterOn>
+    <x2:XPath>/Table/Row</x2:XPath>
+    <x2:Field x2:ID="ID">
+     <x2:Range>RC</x2:Range>
+     <x2:XPath>@ID</x2:XPath>
+     <x2:XSDType>string</x2:XSDType>
+     <ss:Cell>
+     </ss:Cell>
+     <x2:Aggregate>None</x2:Aggregate>
+    </x2:Field>
+    <x2:Field x2:ID="DisplayName">
+     <x2:Range>RC[1]</x2:Range>
+     <ss:Cell>
+     </ss:Cell>
+     <x2:Aggregate>None</x2:Aggregate>
+    </x2:Field>
+    <x2:Field x2:ID="Name">
+     <x2:Range>RC[2]</x2:Range>
+     <x2:XPath>@Name</x2:XPath>
+     <x2:XSDType>string</x2:XSDType>
+     <ss:Cell>
+     </ss:Cell>
+     <x2:Aggregate>None</x2:Aggregate>
+    </x2:Field>
+   </x2:Entry>
+  </x2:Map>
+ </x2:MapInfo>
+ <x2:Binding x2:ID="Binding1" x2:LoadMode="normal">
+  <x2:MapID>Table_Map</x2:MapID>
+<udc:DataSource MajorVersion="1" MinorVersion="0" xmlns:udc="http://schemas.microsoft.com/data/udc">
+  <udc:Type Type="XMLFile" MajorVersion="1" MinorVersion="0"/>
+  <udc:Name>Binding1</udc:Name>
+  <udc:ConnectionInfo Purpose="Query">
+    <udcxf:File xmlns:udcxf="http://schemas.microsoft.com/data/udc/xmlfile">D:\saveenr\live-mesh-work\projects\visio\visio-metadata\sections.xml</udcxf:File>
+  </udc:ConnectionInfo>
+</udc:DataSource>
+ </x2:Binding>
+</Workbook>
