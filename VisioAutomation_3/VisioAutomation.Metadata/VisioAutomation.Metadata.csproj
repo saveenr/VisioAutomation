@@ -55,7 +55,7 @@
     <Compile Include="RowData.cs" />
     <Compile Include="ColumnDefinition.cs" />
     <Compile Include="ExcelXmlToDataSetConverter.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MetadataDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

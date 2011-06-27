@@ -4,11 +4,13 @@
     {
         public string[] Value { get; private set; }
         public string[] Type { get; private set; }
+        public ColumnDefinition[] Column { get; private set; }
 
         public RowData(int capacity)
         {
             this.Value = new string[capacity];
             this.Type = new string[capacity];
+            this.Column = new ColumnDefinition[capacity];
         }
 
         public int Length
@@ -22,6 +24,7 @@
             {
                 this.Value[i] = null;
                 this.Type[i] = null;
+                this.Column[i] = null;
             }
         }
     }
