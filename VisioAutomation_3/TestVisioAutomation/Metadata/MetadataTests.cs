@@ -29,6 +29,42 @@ namespace TestVisioAutomation
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
             Assert.AreEqual(344, visio_2007_cells.Count());
 
+            no_dupes( allcells.Select(c=>c.ID));
+
+        }
+
+        [TestMethod]
+        public void Constants()
+        {
+            var db = new VA.Metadata.MetadataDB();
+
+            var constants = db.GetAutomationEnums();
+
+            // There are 3003 known constants in the Visio PIA
+            Assert.AreEqual(3003, constants.Count);
+}
+
+
+        [TestMethod]
+        public void Sections()
+        {
+            var db = new VA.Metadata.MetadataDB();
+
+            var sections = db.GetSections();
+
+            // There are 40 known sections in the Visio PIA
+            Assert.AreEqual(40, sections.Count);
+        }
+
+        [TestMethod]
+        public void CellValues()
+        {
+            var db = new VA.Metadata.MetadataDB();
+
+            var cellvals = db.GetCellValues();
+
+            // There are 40 known sections in the Visio PIA
+            Assert.AreEqual(397, cellvals.Count);
         }
 
         public List<T> get_dupes<T>(IEnumerable<T> items)

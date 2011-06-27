@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Resources\automationenums.xml" />
+    <None Include="Resources\automationconstants.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cells.xml" />

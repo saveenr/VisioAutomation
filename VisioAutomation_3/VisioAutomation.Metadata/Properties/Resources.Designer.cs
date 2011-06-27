@@ -73,9 +73,9 @@ namespace VisioAutomation.Metadata.Properties {
         ///  &lt;Author&gt;saveenr&lt;/Author&gt;
         ///  &lt;LastAuth [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string automationenums {
+        internal static string automationconstants {
             get {
-                return ResourceManager.GetString("automationenums", resourceCulture);
+                return ResourceManager.GetString("automationconstants", resourceCulture);
             }
         }
         
