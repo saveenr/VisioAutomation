@@ -147,15 +147,18 @@ namespace TestVisioAutomation
 
             var fields_name_to_value = this.GetSRCDictionary();
 
-            
+
+            var srcs_without_names = new List<VA.ShapeSheet.SRC>();
             foreach (var src_field_name in fields_name_to_value.Keys)
             {
                 var src = fields_name_to_value[src_field_name];
 
                 var src_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
+                if (src_cellname == null)
+                {
+                    srcs_without_names.Add(src);
+                }
             }
-
-            int x = 1;
         }
 
         public Dictionary<string, VA.ShapeSheet.SRC> GetSRCDictionary()

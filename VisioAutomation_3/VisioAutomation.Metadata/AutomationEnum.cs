@@ -20,7 +20,7 @@ namespace VisioAutomation.Metadata
         public List<AutomationEnumItem> Items;
         private Dictionary<string, int> _dic;
 
-        public AutomationEnum(string name)
+        internal AutomationEnum(string name)
         {
             this.Name = name;
         }

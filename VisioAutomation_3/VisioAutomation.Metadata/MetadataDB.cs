@@ -15,38 +15,52 @@ namespace VisioAutomation.Metadata
         private List<Section> _sections;
         private List<AutomationConstant> _constants;
         private List<AutomationEnum> _autoenums;
+        private Dictionary<string,AutomationEnum> _autoenums_dic;
 
         private ExcelXmlToDataSetConverter converter = new ExcelUtil.ExcelXmlToDataSetConverter();
+
+        public AutomationEnum GetAutomationEnum(string name)
+        {
+            this.check_autoenum_real();
+            return this._autoenums_dic[name];
+        }
 
         public List<AutomationEnum> AutomationEnums
         {
             get
             {
-                if (this._autoenums == null)
-                {
-                    var dic = new Dictionary<string, AutomationEnum>();
-                    this._autoenums = new List<AutomationEnum>();
-                    foreach (var constant in _constants)
-                    {
-                        AutomationEnum ae;
-                        if (!dic.ContainsKey(constant.Enum))
-                        {
-                            ae = new AutomationEnum(constant.Enum);
-                            dic.Add(constant.Enum,ae);
-                        }
-                        else
-                        {
-                            ae = dic[constant.Enum];
-                        }
-
-                        ae.Add(constant.Name,constant.Value);
-                    }
-
-                    this._autoenums = dic.Values.ToList();
-                }
+                check_autoenum_real();
                 return this._autoenums;
             }
         }
+
+        private void check_autoenum_real()
+        {
+            if (this._autoenums == null)
+            {
+                
+                this._autoenums_dic = new Dictionary<string, AutomationEnum>();
+                this._autoenums = new List<AutomationEnum>();
+                foreach (var constant in this.Constants)
+                {
+                    AutomationEnum ae;
+                    if (!this._autoenums_dic.ContainsKey(constant.Enum))
+                    {
+                        ae = new AutomationEnum(constant.Enum);
+                        this._autoenums_dic.Add(constant.Enum, ae);
+                    }
+                    else
+                    {
+                        ae = this._autoenums_dic[constant.Enum];
+                    }
+
+                    ae.Add(constant.Name, constant.Value);
+                }
+
+                this._autoenums = this._autoenums_dic.Values.ToList();
+            }
+        }
+
 
         public List<Cell> Cells
         {
