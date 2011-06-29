@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -35,10 +36,80 @@ namespace TestVisioAutomation
         {
             var db = new VA.Metadata.MetadataDB();
 
-            var constants = db.AutomationEnums;
+            var md_constants = db.Constants;
 
             // There are 3003 known constants in the Visio PIA
-            Assert.AreEqual(3003, constants.Count);
+            Assert.AreEqual(3003, md_constants.Count);
+
+            //Check that each constant maps to what is actually in the Visio PIO
+
+            var pia_enum_types = VisioAutomation.Interop.InteropHelper.GetEnumTypes();
+
+            // Visio 2007 has 116 enum types
+            // Visio 2010 has ??? enum types
+
+            var pia_name_to_enum = pia_enum_types.ToDictionary(i => i.Name, i => i);
+            var md_names = new HashSet<string>(md_constants.Select(i => i.Enum));
+
+            foreach (var md_constant in md_constants)
+            {
+                if (!pia_name_to_enum.ContainsKey(md_constant.Enum))
+                {
+                    Assert.Fail("metadata is missing a PIA enum");
+                }
+            }
+
+            foreach (var enum_type in pia_enum_types)
+            {
+                if (!md_names.Contains(enum_type.Name))
+                {
+                    Assert.Fail("Metadata has a enum that is not in the PIA");
+                }
+            }
+
+            var md_enums = db.AutomationEnums;
+
+            foreach (var md_enum in md_enums)
+            {
+                var pia_enum = pia_name_to_enum[md_enum.Name];
+                var pia_value_dic = GetEnumValues<int>(pia_enum);
+
+                foreach (string pia_vname in pia_value_dic.Keys)
+                {
+                    if (!md_enum.HasItem(pia_vname))
+                    {
+                        Assert.Fail("DB missing enum value");                        
+                    }
+                }
+
+                foreach (string md_vname in md_enum.Items.Select(i=>i.Name))
+                {
+                    if (!pia_value_dic.ContainsKey(md_vname))
+                    {
+                        Assert.Fail("DB has a value that PIA does not");
+                    }
+                }
+
+            }
+
+            
+
+            int x = 1;
+
+        }
+
+        public IDictionary<string,T> GetEnumValues<T>(System.Type t )
+        {
+            var values = System.Enum.GetValues(t);
+            var names = System.Enum.GetNames(t);
+            var dic = new Dictionary<string, T>(names.Length);
+            var typed_values = new T[values.Length];
+            for (int i = 0; i < typed_values.Length; i++)
+            {
+                dic[names[i]] = (T) values.GetValue(i);
+            }
+
+            return dic;
         }
 
 

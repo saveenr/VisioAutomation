@@ -14,8 +14,39 @@ namespace VisioAutomation.Metadata
         private List<CellValue> _cellvals;
         private List<Section> _sections;
         private List<AutomationConstant> _constants;
+        private List<AutomationEnum> _autoenums;
 
         private ExcelXmlToDataSetConverter converter = new ExcelUtil.ExcelXmlToDataSetConverter();
+
+        public List<AutomationEnum> AutomationEnums
+        {
+            get
+            {
+                if (this._autoenums == null)
+                {
+                    var dic = new Dictionary<string, AutomationEnum>();
+                    this._autoenums = new List<AutomationEnum>();
+                    foreach (var constant in _constants)
+                    {
+                        AutomationEnum ae;
+                        if (!dic.ContainsKey(constant.Enum))
+                        {
+                            ae = new AutomationEnum(constant.Enum);
+                            dic.Add(constant.Enum,ae);
+                        }
+                        else
+                        {
+                            ae = dic[constant.Enum];
+                        }
+
+                        ae.Add(constant.Name,constant.Value);
+                    }
+
+                    this._autoenums = dic.Values.ToList();
+                }
+                return this._autoenums;
+            }
+        }
 
         public List<Cell> Cells
         {
@@ -75,7 +106,7 @@ namespace VisioAutomation.Metadata
             }
         }
 
-        public List<AutomationConstant> AutomationEnums
+        public List<AutomationConstant> Constants
         {
             get
             {
