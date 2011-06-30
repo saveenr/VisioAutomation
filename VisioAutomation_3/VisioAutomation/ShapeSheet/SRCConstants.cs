@@ -1,7 +1,11 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using IVisio = Microsoft.Office.Interop.Visio;
 using SEC=Microsoft.Office.Interop.Visio.VisSectionIndices;
 using ROW= Microsoft.Office.Interop.Visio.VisRowIndices;
 using CEL= Microsoft.Office.Interop.Visio.VisCellIndices;
+using VA=VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet
 {
@@ -412,7 +416,6 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC VerticalAlign = new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkVerticalAlign);
 
         // Action tags
-
         public readonly static SRC SmartTags_ButtonFace = new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagButtonFace);
         public readonly static SRC SmartTags_Description = new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagDescription);
         public readonly static SRC SmartTags_Disabled = new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagDisabled);
@@ -424,7 +427,6 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC SmartTags_YJustify = new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagYJustify);
 
         // style
-
         public readonly static SRC EnableFillProps = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesFill);
         public readonly static SRC EnableLineProps = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesLine);
         public readonly static SRC EnableTextProps = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesText);
@@ -437,7 +439,6 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC Tabs_StopCount = new SRC(SEC.visSectionTab, ROW.visRowTab, CEL.visTabStopCount);
 
         // shape layout
-
         public readonly static SRC ConFixedCode = new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOConFixedCode);
         public readonly static SRC ConLineJumpCode = new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOJumpCode);
         public readonly static SRC ConLineJumpDirX = new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOJumpDirX);
@@ -454,5 +455,31 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC ShapeRouteStyle = new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORouteStyle);
         public readonly static SRC ShapeSplit = new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplit);
         public readonly static SRC ShapeSplittable = new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplittable);
+
+        // Static Methods
+
+        public static Dictionary<string, VA.ShapeSheet.SRC> GetSRCDictionary()
+        {
+            var fields = GetSRCFields();
+
+            var fields_name_to_value = new Dictionary<string, VA.ShapeSheet.SRC>();
+            foreach (var field in fields)
+            {
+                fields_name_to_value[field.Name] = (VA.ShapeSheet.SRC)field.GetValue(null);
+            }
+
+            return fields_name_to_value;
+        }
+
+        private static List<FieldInfo> GetSRCFields()
+        {
+            var srcconstants_t = typeof(VA.ShapeSheet.SRCConstants);
+            var fields = srcconstants_t.GetFields()
+                .Where(m => m.FieldType == typeof(VA.ShapeSheet.SRC))
+                .Where(m => m.IsPublic)
+                .Where(m => m.IsStatic)
+                .ToList();
+            return fields;
+        }
     }
 }

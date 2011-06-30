@@ -2,9 +2,9 @@ namespace VisioAutomation.Metadata
 {
     public class Section
     {
-        public string ID;
-        public string Name;
-        public string DisplayName;
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
         
     }
 }

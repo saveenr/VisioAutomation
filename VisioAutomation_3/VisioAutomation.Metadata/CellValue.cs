@@ -2,10 +2,10 @@ namespace VisioAutomation.Metadata
 {
     public class CellValue
     {
-        public string ID;
-        public string Enum;
-        public string Name;
-        public int? Value;
-        public string AutomationConstant;
+        public string ID { get; set; }
+        public string Enum { get; set; }
+        public string Name { get; set; }
+        public int? Value { get; set; }
+        public string AutomationConstant { get; set; }
     }
 }

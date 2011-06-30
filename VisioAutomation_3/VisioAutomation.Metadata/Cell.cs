@@ -2,19 +2,19 @@ namespace VisioAutomation.Metadata
 {
     public class Cell
     {
-        public string ID;
-        public string Name;
-        public string NameFormatString;
-        public string Object;
-        public string NameType;
-        public string DataType;
-        public string ContentType;
-        public string Unit;
-        public string SectionIndex;
-        public string RowIndex;
-        public string MinVersion;
-        public string MaxVersion;
-        public string CellIndex;
-        public string MSDN;
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string NameFormatString { get; set; }
+        public string Object { get; set; }
+        public string NameType { get; set; }
+        public string DataType { get; set; }
+        public string ContentType { get; set; }
+        public string Unit { get; set; }
+        public string SectionIndex { get; set; }
+        public string RowIndex { get; set; }
+        public string MinVersion { get; set; }
+        public string MaxVersion { get; set; }
+        public string CellIndex { get; set; }
+        public string MSDN { get; set; }
     }
 }

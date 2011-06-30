@@ -40,8 +40,7 @@ namespace TestVisioAutomation
             // There are 3003 known constants in the Visio PIA
             Assert.AreEqual(3003, constants.Count);
         }
-
-
+        
         [TestMethod]
         public void Sections()
         {
@@ -70,45 +69,18 @@ namespace TestVisioAutomation
             var db = new VA.Metadata.MetadataDB();
 
             var cellvals = db.CellValues;
-
             var allcells = db.Cells;
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
 
-            var fields_name_to_value = this.GetSRCDictionary();
-
+            var fields_name_to_value = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
             
             foreach (var src_field_name in fields_name_to_value.Keys)
             {
                 var src = fields_name_to_value[src_field_name];
-
                 var src_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
             }
 
             int x = 1;
-        }
-
-        public Dictionary<string, VA.ShapeSheet.SRC> GetSRCDictionary()
-        {
-            var fields = GetSRCFields();
-
-            var fields_name_to_value = new Dictionary<string, VA.ShapeSheet.SRC>();
-            foreach (var field in fields)
-            {
-                fields_name_to_value[field.Name] = (VA.ShapeSheet.SRC)field.GetValue(null);
-            }
-
-            return fields_name_to_value;
-        }
-
-        public List<FieldInfo> GetSRCFields()
-        {
-            var srcconstants_t = typeof (VA.ShapeSheet.SRCConstants);
-            var fields = srcconstants_t.GetFields()
-                .Where(m => m.FieldType == typeof (VA.ShapeSheet.SRC))
-                .Where(m => m.IsPublic)
-                .Where(m => m.IsStatic)
-                .ToList();
-            return fields;
         }
 
         public List<T> get_dupes<T>(IEnumerable<T> items)
@@ -153,7 +125,5 @@ namespace TestVisioAutomation
                 Assert.Fail(string.Format("Duplicated {0}", dupes.Count));
             }
         }
-
-
     }
 }
