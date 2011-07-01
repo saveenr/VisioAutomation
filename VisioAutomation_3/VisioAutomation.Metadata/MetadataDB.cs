@@ -15,6 +15,7 @@ namespace VisioAutomation.Metadata
         private Dictionary<string,AutomationEnum> _name_to_autoenums;
         private List<AutomationConstant> _constants;
         private ExcelXmlToDataSetConverter converter;
+        private Dictionary<string, AutomationConstant> _name_to_constants;
         
         public MetadataDB()
         {
@@ -49,6 +50,11 @@ namespace VisioAutomation.Metadata
         public AutomationEnum GetAutomationEnumByName(string name)
         {
             return this._name_to_autoenums[name];
+        }
+
+        public AutomationConstant GetAutomationConstantByName(string name)
+        {
+            return this._name_to_constants[name];
         }
 
         public List<CellValue> CellValues
@@ -128,14 +134,19 @@ namespace VisioAutomation.Metadata
             var automationenums_table = converter.DataSet.Tables[0];
 
             this._constants = new List<AutomationConstant>();
+            this._name_to_constants = new Dictionary<string, AutomationConstant>();
             foreach (var item in automationenums_table.AsEnumerable())
             {
                 var c = new AutomationConstant();
                 this._constants.Add(c);
+
+
                 c.ID = item.Field<string>("ID");
                 c.Enum = item.Field<string>("EnumName");
                 c.Name = item.Field<string>("ValueName");
                 c.Value = int.Parse(item.Field<string>("ValueInt"));
+
+                this._name_to_constants[c.Name] = c;
             }
         }
 
