@@ -577,7 +577,7 @@ namespace VisioAutomation.ShapeSheet
 
 
                                                  {"Para.Bullet",SRCConstants.Para_Bullet},
-                                                 {"Para.BulletFont",SRCConstants.Para_BulletFont},
+                                                 {"Para.BulletFont",SRCConstants.Para_BulletFontSize},
                                                  {"Para.BulletSize",SRCConstants.Para_BulletSize},
                                                  {"Para.BulletStr",SRCConstants.Para_BulletStr},
                                                  {"Para.Flags",SRCConstants.Para_Flags},

@@ -27,7 +27,7 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Para_SpBefore.ForRow(row), this.SpacingBefore.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_SpLine.ForRow(row), this.SpacingLine.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_HorzAlign.ForRow(row), this.HorizontalAlign.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletFont.ForRow(row), this.BulletFont.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_BulletFontSize.ForRow(row), this.BulletFont.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_Bullet.ForRow(row), this.BulletIndex.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_BulletSize.ForRow(row), this.BulletSize.Formula);
         }

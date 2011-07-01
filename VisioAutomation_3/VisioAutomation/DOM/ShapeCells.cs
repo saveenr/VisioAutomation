@@ -183,7 +183,7 @@ namespace VisioAutomation.DOM
             // Paragraph
 
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Bullet, BulletIndex);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, BulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFontSize, BulletFont);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletSize, BulletSize);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletStr, BulletString);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, Flags);

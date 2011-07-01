@@ -281,7 +281,7 @@ namespace VisioAutomation.ShapeSheet
 
         // paragraph
         public readonly static SRC Para_Bullet = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex);
-        public readonly static SRC Para_BulletFont = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFont);
+        public readonly static SRC Para_BulletFontSize = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFont);
         public readonly static SRC Para_BulletSize = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFontSize);
         public readonly static SRC Para_BulletStr = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletString);
         public readonly static SRC Para_Flags = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visFlags);
@@ -370,7 +370,7 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC Layers_Active = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerActive);
         public readonly static SRC Layers_Color = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerColor);
         public readonly static SRC Layers_Glue = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerGlue);
-        public readonly static SRC Layers_Lock = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerLock);
+        public readonly static SRC Layers_Locked = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerLock);
         public readonly static SRC Layers_Print = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visDocPreviewScope);
         public readonly static SRC Layers_Snap = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerSnap);
         public readonly static SRC Layers_Transparency = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerColorTrans);

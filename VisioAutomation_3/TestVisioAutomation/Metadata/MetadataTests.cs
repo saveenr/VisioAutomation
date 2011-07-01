@@ -164,6 +164,25 @@ namespace TestVisioAutomation
 
         }
 
+        [TestMethod]
+        public void CheckSRCConstantIndices()
+        {
+            var db = new VA.Metadata.MetadataDB();
+            var all_cells = db.Cells;
+            var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
+            var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
+
+            foreach (var db_cell in visio_2007_cells)
+            {
+                if (!va_name_to_src.ContainsKey(db_cell.NameCode))
+                {
+                    Assert.Fail("DB does not contain sll with namecode " + db_cell.NameCode);
+                }
+                //var va_src = va_name_to_src[db_cell.NameCode];
+            }
+
+
+        }
         public Dictionary<string,T> GetNameToValueMap<T>( System.Type t)
         {
             var dic = new Dictionary<string, T>();
