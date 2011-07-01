@@ -16,7 +16,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> HorizontalAlign { get; set; }
         public VA.ShapeSheet.CellData<int> BulletIndex { get; set; }
         public VA.ShapeSheet.CellData<int> BulletFont { get; set; }
-        public VA.ShapeSheet.CellData<int> BulletSize { get; set; }
+        public VA.ShapeSheet.CellData<int> BulletFontSize { get; set; }
 
         protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
         {
@@ -27,9 +27,9 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Para_SpBefore.ForRow(row), this.SpacingBefore.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_SpLine.ForRow(row), this.SpacingLine.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_HorzAlign.ForRow(row), this.HorizontalAlign.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletFontSize.ForRow(row), this.BulletFont.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_BulletFont.ForRow(row), this.BulletFont.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_Bullet.ForRow(row), this.BulletIndex.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletSize.ForRow(row), this.BulletSize.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_BulletFontSize.ForRow(row), this.BulletFontSize.Formula);
         }
 
         internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
@@ -56,7 +56,7 @@ namespace VisioAutomation.Text
             cells.HorizontalAlign = qds.GetItem(row, query.HorzAlign, v => (int)v);
             cells.BulletIndex = qds.GetItem(row, query.BulletIndex, v => (int)v);
             cells.BulletFont = qds.GetItem(row, query.BulletFont, v => (int)v);
-            cells.BulletSize = qds.GetItem(row, query.BulletFontSize, v => (int)v);
+            cells.BulletFontSize = qds.GetItem(row, query.BulletFontSize, v => (int)v);
 
             return cells;
         }

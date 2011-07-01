@@ -281,15 +281,15 @@ namespace VisioAutomation.ShapeSheet
 
         // paragraph
         public readonly static SRC Para_Bullet = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex);
-        public readonly static SRC Para_BulletFontSize = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFont);
-        public readonly static SRC Para_BulletSize = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFontSize);
+        public readonly static SRC Para_BulletFont = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFont);
+        public readonly static SRC Para_BulletFontSize = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFontSize);
         public readonly static SRC Para_BulletStr = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletString);
         public readonly static SRC Para_Flags = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visFlags);
         public readonly static SRC Para_HorzAlign = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visHorzAlign);
         public readonly static SRC Para_IndFirst = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentFirst);
         public readonly static SRC Para_IndLeft = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentLeft);
         public readonly static SRC Para_IndRight = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentRight);
-        public readonly static SRC Para_LocBulletFont = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visLocalizeBulletFont);
+        public readonly static SRC Para_LocalizeBulletFont = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visLocalizeBulletFont);
         public readonly static SRC Para_SpAfter = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visSpaceAfter);
         public readonly static SRC Para_SpBefore = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visSpaceBefore);
         public readonly static SRC Para_SpLine = new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visSpaceLine);
@@ -373,7 +373,7 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC Layers_Locked = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerLock);
         public readonly static SRC Layers_Print = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visDocPreviewScope);
         public readonly static SRC Layers_Snap = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerSnap);
-        public readonly static SRC Layers_Transparency = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerColorTrans);
+        public readonly static SRC Layers_ColorTrans = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerColorTrans);
         public readonly static SRC Layers_Visible = new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerVisible);
 
 
@@ -388,8 +388,8 @@ namespace VisioAutomation.ShapeSheet
 
 
         // user defined cells
-        public readonly static SRC UserPrompt = new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserPrompt);
-        public readonly static SRC UserValue = new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserValue);
+        public readonly static SRC User_Prompt = new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserPrompt);
+        public readonly static SRC User_Value = new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserValue);
 
 
         // Fields

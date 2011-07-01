@@ -82,7 +82,7 @@ namespace VisioAutomation.DOM
         // Paragraph
         public ShapeSheet.FormulaLiteral BulletIndex { get; set; }
         public ShapeSheet.FormulaLiteral BulletFont { get; set; }
-        public ShapeSheet.FormulaLiteral BulletSize { get; set; }
+        public ShapeSheet.FormulaLiteral BulletFontSize { get; set; }
         public ShapeSheet.FormulaLiteral BulletString { get; set; }
         public ShapeSheet.FormulaLiteral Flags { get; set; }
         public ShapeSheet.FormulaLiteral HAlign { get; set; }
@@ -183,15 +183,15 @@ namespace VisioAutomation.DOM
             // Paragraph
 
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Bullet, BulletIndex);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFontSize, BulletFont);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletSize, BulletSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, BulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFontSize, BulletFontSize);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletStr, BulletString);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, Flags);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HorzAlign, HAlign);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndFirst, IndFirst);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndLeft, IndLeft);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndRight, IndRight);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_LocBulletFont, LocBulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_LocalizeBulletFont, LocBulletFont);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpAfter, SpAfter);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpBefore, SpBefore);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpLine, SpLine);

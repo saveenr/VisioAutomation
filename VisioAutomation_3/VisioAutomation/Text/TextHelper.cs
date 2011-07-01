@@ -319,7 +319,7 @@ namespace VisioAutomation.Text
             VA.Text.TextHelper.SetRangeProps(shape, format.BulletIndex, IVisio.VisCellIndices.visBulletIndex,
                                              temp_bulletindex, begin, end, ref rownum, ref chars,
                                              VA.Text.TextHelper.rangetype.Paragraph);
-            VA.Text.TextHelper.SetRangeProps(shape, format.BulletSize, IVisio.VisCellIndices.visBulletFontSize,
+            VA.Text.TextHelper.SetRangeProps(shape, format.BulletFontSize, IVisio.VisCellIndices.visBulletFontSize,
                                              temp_bulletsize, begin, end, ref rownum, ref chars,
                                              VA.Text.TextHelper.rangetype.Paragraph);
             VA.Text.TextHelper.SetRangeProps(shape, format.BulletFont, IVisio.VisCellIndices.visBulletFont,
