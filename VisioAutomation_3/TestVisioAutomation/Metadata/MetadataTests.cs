@@ -25,7 +25,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(346, allcells.Count);
 
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
-            Assert.AreEqual(344, visio_2007_cells.Count());
+            Assert.AreEqual(343, visio_2007_cells.Count());
 
             no_dupes(allcells.Select(c => c.ID));
         }
@@ -198,10 +198,14 @@ namespace TestVisioAutomation
                     Assert.Fail(db_cell.Name);
                 }
 
-                //int s = sectioindexname_to_int[db_cell.SectionIndex];
-                //int r = rowindexname_to_int[db_cell.RowIndex];
-                //int c = cellindexname_to_int[db_cell.CellIndex];
-                //var va_src = va_name_to_src[db_cell.NameCode];
+                int s = sectioindexname_to_int[db_cell.SectionIndex];
+                int r = rowindexname_to_int[db_cell.RowIndex];
+                int c = cellindexname_to_int[db_cell.CellIndex];
+
+                if (!va_name_to_src.ContainsKey(db_cell.NameCode))
+                {
+                    Assert.Fail(db_cell.NameCode);
+                }
             }
 
 
