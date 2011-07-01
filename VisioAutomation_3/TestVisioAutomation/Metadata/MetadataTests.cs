@@ -65,7 +65,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ValidateSRCConstants()
+        public void ValidateCellNameCode()
         {
             var db = new VA.Metadata.MetadataDB();
 
@@ -92,7 +92,7 @@ namespace TestVisioAutomation
 
             if (unfound.Count > 0)
             {
-                string message = string.Format(" didn't find in sb cells " + string.Join(",", unfound));
+                string message = string.Format(" didn't find in DB cells " + string.Join(",", unfound));
                 
             }
 
