@@ -4,6 +4,7 @@ namespace VisioAutomation.Metadata
     {
         public string ID { get; set; }
         public string Name { get; set; }
+        public string NameCode { get; set; }
         public string NameFormatString { get; set; }
         public string Object { get; set; }
         public string NameType { get; set; }

@@ -87,6 +87,11 @@ namespace VisioAutomation.Metadata
                 _cells.Add(c);
                 c.ID = item.Field<string>("ID");
                 c.Name = item.Field<string>("Name");
+                c.NameCode = item.Field<string>("NameCode");
+                if (c.NameCode == null || c.NameCode.Length == 0)
+                {
+                    c.NameCode = c.Name;
+                }
                 c.NameFormatString = item.Field<string>("NameFormatString");
                 c.Object = item.Field<string>("Object");
                 c.NameType = item.Field<string>("NameType");

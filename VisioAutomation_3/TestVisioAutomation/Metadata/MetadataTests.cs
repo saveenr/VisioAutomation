@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using System.Linq;
+using VisioAutomation.Metadata;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -72,13 +73,45 @@ namespace TestVisioAutomation
             var allcells = db.Cells;
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
 
-            var fields_name_to_value = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
-            
-            foreach (var src_field_name in fields_name_to_value.Keys)
+            var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
+
+            no_dupes(visio_2007_cells.Select(i=>i.NameCode));
+
+            var db_codename_to_cell = visio_2007_cells.ToDictionary(i => i.NameCode, i => i);
+
+            var unfound = new List<string>();
+
+            // verify that all the fields in SRCConstants are corrected represented in the metadata
+            foreach (var va_name in va_name_to_src.Keys)
             {
-                var src = fields_name_to_value[src_field_name];
-                var src_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
+                if (!db_codename_to_cell.ContainsKey(va_name))
+                {
+                    unfound.Add(va_name);
+                }
             }
+
+            if (unfound.Count > 0)
+            {
+                string message = string.Format(" didn't find in sb cells " + string.Join(",", unfound));
+                
+            }
+
+            unfound.Clear();
+            // verify that all the fields in db are corrected represented in the VA srcconstants
+            foreach (var db_name in db_codename_to_cell.Keys)
+            {
+                if (!va_name_to_src.ContainsKey(db_name))
+                {
+                    unfound.Add(db_name);
+                }
+            }
+
+            if (unfound.Count > 0)
+            {
+                string message = string.Format(" didn't find in src constants " + string.Join(",", unfound));
+
+            }
+
 
             int x = 1;
         }
