@@ -171,13 +171,17 @@ namespace TestVisioAutomation
             var all_cells = db.Cells;
             var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
             var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
-
+            var db_name_to_cell = visio_2007_cells.ToDictionary(c => c.NameCode, c => c);
+            foreach (string name in va_name_to_src.Keys)
+            {
+                if (!db_name_to_cell.ContainsKey(name))
+                {
+                    Assert.Fail("DB does not contain sll with namecode " + name);
+                }
+                
+            }
             foreach (var db_cell in visio_2007_cells)
             {
-                if (!va_name_to_src.ContainsKey(db_cell.NameCode))
-                {
-                    Assert.Fail("DB does not contain sll with namecode " + db_cell.NameCode);
-                }
                 //var va_src = va_name_to_src[db_cell.NameCode];
             }
 
