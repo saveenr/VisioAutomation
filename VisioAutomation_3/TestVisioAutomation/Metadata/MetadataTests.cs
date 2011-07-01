@@ -35,7 +35,7 @@ namespace TestVisioAutomation
         {
             var db = new VA.Metadata.MetadataDB();
 
-            var constants = db.AutomationEnums;
+            var constants = db.Constants;
 
             // There are 3003 known constants in the Visio PIA
             Assert.AreEqual(3003, constants.Count);
@@ -83,6 +83,68 @@ namespace TestVisioAutomation
             int x = 1;
         }
 
+        [TestMethod]
+        public void CheckPIA()
+        {
+            var db = new VA.Metadata.MetadataDB();
+            var db_autoenums = db.AutomationEnums;
+
+            var pia_enums = VA.Interop.InteropHelper.GetEnumTypes();
+
+            var db_name_to_enum = db_autoenums.ToDictionary(i => i.Name, i=>i);
+            foreach (var pia_enum in pia_enums)
+            {
+
+
+                Assert.IsTrue( db_name_to_enum.ContainsKey(pia_enum.Name));
+            }
+
+            // verify that everying in the metadatadb is int the PIA 
+
+            foreach (var pia_enum in pia_enums)
+            {
+                var pia_enum_values = GetNameToValueMap<int>(pia_enum);
+                var db_enum = db.GetAutomationEnumByName(pia_enum.Name);
+                foreach (string pia_value_name in pia_enum_values.Keys)
+                {
+                    Assert.IsTrue(db_enum.HasItem(pia_value_name));
+                    Assert.AreEqual(pia_enum_values[pia_value_name],db_enum[pia_value_name]);
+                }
+            }
+
+
+            // verify that everying in the PIA is int the metadatadb
+
+            var name_to_pia_type = pia_enums.ToDictionary(i => i.Name, i => i);
+
+            foreach (var md_enum  in db.AutomationEnums)
+            {
+                var pia_type = name_to_pia_type[md_enum.Name];
+                var pia_dic = GetNameToValueMap<int>(pia_type);
+                foreach (string md_value_name in md_enum.Items.Select(i=>i.Name))
+                {
+
+                    Assert.IsTrue(pia_dic.ContainsKey(md_value_name));
+                    Assert.AreEqual(md_enum[md_value_name],pia_dic[md_value_name]);
+                }
+            }
+
+        }
+
+        public Dictionary<string,T> GetNameToValueMap<T>( System.Type t)
+        {
+            var dic = new Dictionary<string, T>();
+            string[] names = System.Enum.GetNames(t);
+            System.Array avalues = System.Enum.GetValues(t);
+            for (int i = 0; i < avalues.Length; i++)
+            {
+                
+                dic[names[i]] = (T)avalues.GetValue(i);
+            }
+
+            return dic;
+
+        }
         public List<T> get_dupes<T>(IEnumerable<T> items)
         {
             var set = new HashSet<T>();

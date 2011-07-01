@@ -11,13 +11,16 @@ namespace VisioAutomation.Metadata
         private List<Cell> _cells;
         private List<CellValue> _cellvals;
         private List<Section> _sections;
+        private List<AutomationEnum> _autoenums;
+        private Dictionary<string,AutomationEnum> _name_to_autoenums;
         private List<AutomationConstant> _constants;
         private ExcelXmlToDataSetConverter converter;
- 
+        
         public MetadataDB()
         {
             this.converter = new ExcelUtil.ExcelXmlToDataSetConverter();
             initconstants();
+            this.initautoenums();
             initcellvalues();
             initcells();
             initsections();
@@ -33,14 +36,44 @@ namespace VisioAutomation.Metadata
             get { return this._sections; }
         }
 
-        public List<AutomationConstant> AutomationEnums
+        public List<AutomationConstant> Constants
         {
             get { return this._constants; }
+        }
+
+        public List<AutomationEnum> AutomationEnums
+        {
+            get { return this._autoenums; }
+        }
+
+        public AutomationEnum GetAutomationEnumByName(string name)
+        {
+            return this._name_to_autoenums[name];
         }
 
         public List<CellValue> CellValues
         {
             get { return this._cellvals; }
+        }
+
+        private void initautoenums()
+        {
+            this._autoenums = new List<AutomationEnum>();
+            this._name_to_autoenums = new Dictionary<string, AutomationEnum>();
+            foreach (var constant in this.Constants)
+            {
+                var enum_name = constant.Enum;
+                AutomationEnum a_enum=null;
+                this._name_to_autoenums.TryGetValue(constant.Enum, out a_enum);
+                if (a_enum ==null)
+                {
+                    a_enum = new AutomationEnum(constant.Enum);
+                    this._name_to_autoenums[a_enum.Name] = a_enum;
+                    this._autoenums.Add(a_enum);
+                }
+
+                a_enum.Add(constant.Name,constant.Value);
+            }
         }
 
         private void initcells()
