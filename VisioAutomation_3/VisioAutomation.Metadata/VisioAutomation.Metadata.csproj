@@ -50,6 +50,7 @@
     <Compile Include="BaseExcelXmlReader.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="CellValue.cs" />
+    <Compile Include="AutomationEnum.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

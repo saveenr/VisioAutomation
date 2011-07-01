@@ -80,6 +80,7 @@
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
+    <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Layout\ShapeLayoutQuery.cs" />
     <Compile Include="Layout\ShapeLayoutCells.cs" />
     <Compile Include="Layout\PageQuery.cs" />
