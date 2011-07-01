@@ -16,6 +16,7 @@ namespace VisioAutomation.Metadata
         private List<AutomationConstant> _constants;
         private ExcelXmlToDataSetConverter converter;
         private Dictionary<string, AutomationConstant> _name_to_constants;
+        private Dictionary<int, Section> _int_to_section;
         
         public MetadataDB()
         {
@@ -55,6 +56,11 @@ namespace VisioAutomation.Metadata
         public AutomationConstant GetAutomationConstantByName(string name)
         {
             return this._name_to_constants[name];
+        }
+
+        public Section GetSectionBySectionIndex(int sectionindex)
+        {
+            return this._int_to_section[sectionindex];
         }
 
         public List<CellValue> CellValues
@@ -125,6 +131,16 @@ namespace VisioAutomation.Metadata
                 c.ID = item.Field<string>("ID");
                 c.DisplayName = item.Field<string>("DisplayName");
                 c.Name = item.Field<string>("Name");
+                c.Enum = item.Field<string>("Enum");
+            }
+
+            this._int_to_section = new Dictionary<int, Section>();
+            foreach (var section in this.Sections)
+            {
+                string secindex_name = section.Enum;
+                int secindex_int = this.GetAutomationConstantByName(secindex_name).Value;
+
+                this._int_to_section[secindex_int] = section;
             }
         }
 

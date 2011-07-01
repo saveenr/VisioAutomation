@@ -207,9 +207,76 @@ namespace TestVisioAutomation
                     Assert.Fail(db_cell.NameCode);
                 }
             }
+        }
 
+
+
+        [TestMethod]
+        public void CheckSectionIndices()
+        {
+            var db = new VA.Metadata.MetadataDB();
+
+            // verify that each section has an sectioindex enum that is found in the database
+            foreach (var section in db.Sections)
+            {
+                string secindex_name = section.Enum;
+                int secindex_int = db.GetAutomationConstantByName(secindex_name).Value;
+            }
+           
 
         }
+
+
+
+        [TestMethod]
+        public void CheckRealCellNames()
+        {
+            var app = new IVisio.Application();
+            var docs = app.Documents;
+            var doc = docs.Add("");
+            var page = doc.Pages[1];
+
+            var shape = page.DrawRectangle(2,2 ,5,6);
+
+            var db = new VA.Metadata.MetadataDB();
+            var all_cells = db.Cells;
+            var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
+
+            var secobj = db.GetSectionBySectionIndex((int) IVisio.VisSectionIndices.visSectionObject);
+            var secobj_cells = visio_2007_cells.Where(c => c.SectionIndex == secobj.Enum).Where(c => c.Object.Contains("shape")).ToList();
+            foreach (var db_cell in secobj_cells)
+            {
+                var s = (short) db.GetAutomationConstantByName(db_cell.SectionIndex).Value;
+                var r = (short) db.GetAutomationConstantByName(db_cell.RowIndex).Value;
+                var c = (short) db.GetAutomationConstantByName(db_cell.CellIndex).Value;
+                var src = new VA.ShapeSheet.SRC(s, r, c);
+
+                var va_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
+                if (va_cellname == null)
+                {
+                    Assert.Fail("could not find for " + db_cell.Name + " " + db.GetAutomationConstantByName(db_cell.SectionIndex).Name + " " + db.GetAutomationConstantByName(db_cell.RowIndex).Name
+                        + " " + db.GetAutomationConstantByName(db_cell.CellIndex).Name);
+                }
+                else
+                {
+                    var pia_cell = shape.CellsSRC[s, r, c];
+                    string piacellname = pia_cell.Name;
+                    if (db_cell.Name != piacellname)
+                    {
+                        if (r != (short)IVisio.VisRowIndices.visRow1stHyperlink)
+                        {
+                            Assert.Fail("Names don't match db=\"" + db_cell.Name+ "\" actual cell = \"" + piacellname + "\"");
+                        }
+                        for (int i = 0; i < va_cellname.Length; i++)
+                        {
+                            //Assert.AreEqual(piacellname[i],va_cellname[i]);
+                        }
+                    }
+                }
+            }
+
+        }
+
         public Dictionary<string,T> GetNameToValueMap<T>( System.Type t)
         {
             var dic = new Dictionary<string, T>();

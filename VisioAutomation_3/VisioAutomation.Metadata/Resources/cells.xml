@@ -13,7 +13,7 @@
   <Author>saveenr</Author>
   <LastAuthor>Saveen Reddy</LastAuthor>
   <Created>2011-06-24T15:01:35Z</Created>
-  <LastSaved>2011-06-27T21:48:23Z</LastSaved>
+  <LastSaved>2011-07-01T18:18:14Z</LastSaved>
   <Version>12.00</Version>
  </DocumentProperties>
  <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
@@ -46,6 +46,14 @@
   </Style>
   <Style ss:ID="s65" ss:Parent="s62">
    <NumberFormat ss:Format="@"/>
+  </Style>
+  <Style ss:ID="s66">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="7.7" ss:Color="#000000"
+    ss:Bold="1"/>
+  </Style>
+  <Style ss:ID="s68">
+   <Font ss:FontName="Segoe UI" x:Family="Swiss" ss:Size="7.7" ss:Color="#000000"
+    ss:Bold="1"/>
   </Style>
  </Styles>
  <Worksheet ss:Name="Sheet1">
@@ -580,7 +588,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesOnPage</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406434(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406434(loband).aspx</Data></Cell>
    </Row>
@@ -598,7 +606,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesBottomMargin</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406437(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406437(loband).aspx</Data></Cell>
    </Row>
@@ -616,7 +624,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageHeight</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406438(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406438(loband).aspx</Data></Cell>
    </Row>
@@ -634,7 +642,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesLeftMargin</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406439(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406439(loband).aspx</Data></Cell>
    </Row>
@@ -652,7 +660,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesRightMargin</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406442(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406442(loband).aspx</Data></Cell>
    </Row>
@@ -670,7 +678,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageScale</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406443(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406443(loband).aspx</Data></Cell>
    </Row>
@@ -688,7 +696,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesPagesX</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406446(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406446(loband).aspx</Data></Cell>
    </Row>
@@ -706,7 +714,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesPagesY</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406447(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406447(loband).aspx</Data></Cell>
    </Row>
@@ -724,7 +732,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesTopMargin</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406448(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406448(loband).aspx</Data></Cell>
    </Row>
@@ -742,7 +750,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageWidth</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406449(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406449(loband).aspx</Data></Cell>
    </Row>
@@ -760,7 +768,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesPaperKind</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406450(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406450(loband).aspx</Data></Cell>
    </Row>
@@ -778,7 +786,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesPaperSource</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406451(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406451(loband).aspx</Data></Cell>
    </Row>
@@ -796,7 +804,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesPrintGrid</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406464(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406464(loband).aspx</Data></Cell>
    </Row>
@@ -814,7 +822,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesPageOrientation</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406465(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406465(loband).aspx</Data></Cell>
    </Row>
@@ -832,7 +840,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesScaleX</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406476(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406476(loband).aspx</Data></Cell>
    </Row>
@@ -850,7 +858,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPrintProperties</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPrintPropertiesScaleY</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406477(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406477(loband).aspx</Data></Cell>
    </Row>
@@ -868,7 +876,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageShdwObliqueAngle</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406498(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406498(loband).aspx</Data></Cell>
    </Row>
@@ -886,7 +894,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageShdwOffsetX</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406499(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406499(loband).aspx</Data></Cell>
    </Row>
@@ -904,7 +912,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageShdwOffsetY</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406500(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406500(loband).aspx</Data></Cell>
    </Row>
@@ -922,7 +930,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageShdwScaleFactor</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406502(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406502(loband).aspx</Data></Cell>
    </Row>
@@ -940,7 +948,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowPage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visPageShdwType</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406503(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406503(loband).aspx</Data></Cell>
    </Row>
@@ -1912,7 +1920,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowMisc</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visObjLocalizeMerge</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406396(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406396(loband).aspx</Data></Cell>
    </Row>
@@ -1930,7 +1938,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowMisc</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visNoAlignBox</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406423(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406423(loband).aspx</Data></Cell>
    </Row>
@@ -1948,7 +1956,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowMisc</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visNoCtlHandles</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406424(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406424(loband).aspx</Data></Cell>
    </Row>
@@ -1966,7 +1974,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowMisc</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visNoLiveDynamics</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406427(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406427(loband).aspx</Data></Cell>
    </Row>
@@ -1984,7 +1992,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowMisc</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visNonPrinting</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406428(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406428(loband).aspx</Data></Cell>
    </Row>
@@ -2002,7 +2010,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowMisc</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visNoObjHandles</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406429(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406429(loband).aspx</Data></Cell>
    </Row>
@@ -2020,7 +2028,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowMisc</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visLOFlags</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406433(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406433(loband).aspx</Data></Cell>
    </Row>
@@ -3442,7 +3450,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowImage</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visImageSharpen</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406493(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406493(loband).aspx</Data></Cell>
    </Row>
@@ -3586,7 +3594,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOFixedCode</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406479(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406479(loband).aspx</Data></Cell>
    </Row>
@@ -3604,7 +3612,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOPermeablePlace</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406480(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406480(loband).aspx</Data></Cell>
    </Row>
@@ -3622,7 +3630,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOPermX</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406481(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406481(loband).aspx</Data></Cell>
    </Row>
@@ -3640,7 +3648,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOPermY</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406482(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406482(loband).aspx</Data></Cell>
    </Row>
@@ -3658,7 +3666,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOPlaceFlip</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406483(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406483(loband).aspx</Data></Cell>
    </Row>
@@ -3676,7 +3684,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOPlaceStyle</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/aa342307(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/aa342307(loband).aspx</Data></Cell>
    </Row>
@@ -3694,7 +3702,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOPlowCode</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406484(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406484(loband).aspx</Data></Cell>
    </Row>
@@ -3712,7 +3720,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLORouteStyle</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406485(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406485(loband).aspx</Data></Cell>
    </Row>
@@ -3730,7 +3738,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOSplit</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406491(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406491(loband).aspx</Data></Cell>
    </Row>
@@ -3748,7 +3756,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowShapeLayout</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSLOSplittable</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406492(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406492(loband).aspx</Data></Cell>
    </Row>
@@ -3810,7 +3818,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">cell_endarrowsize_sec_lineformat</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">EndArrowSize</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">EndArrowSize</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">LineEndArrowSize</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">shape-line</Data></Cell>
     <Cell ss:StyleID="s63"/>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Int</Data></Cell>
@@ -5697,9 +5705,9 @@
    </Row>
    <Row ss:AutoFitHeight="0">
     <Cell ss:StyleID="s63"><Data ss:Type="String">cell_defaulttabstop_sec_textblockformat</Data></Cell>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">DefaultTabstop</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">DefaultTabStop</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">DefaultTabstop</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">DefaultTabStop</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">shape-text</Data></Cell>
     <Cell ss:StyleID="s63"/>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Double</Data></Cell>
@@ -5763,7 +5771,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowText</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">visTxtBlkRightMargin</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406472(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406472(loband).aspx</Data></Cell>
    </Row>
@@ -5798,7 +5806,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowText</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">visTxtBlkBkgnd</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406518(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406518(loband).aspx</Data></Cell>
    </Row>
@@ -5816,7 +5824,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowText</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">visTxtBlkBkgndTrans</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406519(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406519(loband).aspx</Data></Cell>
    </Row>
@@ -5834,7 +5842,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowText</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s66"><Data ss:Type="String">visTxtBlkDirection</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406520(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406520(loband).aspx</Data></Cell>
    </Row>
@@ -6122,7 +6130,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowXFormOut</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">visXFormLocPinX</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406417(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406417(loband).aspx</Data></Cell>
    </Row>
@@ -6140,7 +6148,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowXFormOut</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">visXFormLocPinY</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406418(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406418(loband).aspx</Data></Cell>
    </Row>
@@ -6158,7 +6166,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowXFormOut</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">visXFormPinX</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406453(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406453(loband).aspx</Data></Cell>
    </Row>
@@ -6176,7 +6184,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowXFormOut</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">visXFormPinY</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406454(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406454(loband).aspx</Data></Cell>
    </Row>
@@ -6194,7 +6202,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowXFormOut</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visCharacterLocale</Data></Cell>
+    <Cell ss:StyleID="s68"><Data ss:Type="String">visXFormResizeMode</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406470(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406470(loband).aspx</Data></Cell>
    </Row>
@@ -6320,13 +6328,13 @@
     <VerticalResolution>600</VerticalResolution>
    </Print>
    <Selected/>
-   <TopRowVisible>119</TopRowVisible>
+   <TopRowVisible>315</TopRowVisible>
    <LeftColumnVisible>7</LeftColumnVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>142</ActiveRow>
-     <ActiveCol>12</ActiveCol>
+     <ActiveRow>340</ActiveRow>
+     <ActiveCol>13</ActiveCol>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
