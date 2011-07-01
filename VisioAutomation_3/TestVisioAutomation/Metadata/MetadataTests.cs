@@ -21,7 +21,6 @@ namespace TestVisioAutomation
 
             var dupe_cell_names = get_dupes(allcells.Select(c => c.Name));
             Assert.IsTrue(dupe_cell_names.Contains("Tabs"));
-            Assert.IsTrue(dupe_cell_names.Contains("HideForApply"));
 
             Assert.AreEqual(346, allcells.Count);
 
