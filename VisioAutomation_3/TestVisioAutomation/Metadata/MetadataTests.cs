@@ -179,8 +179,28 @@ namespace TestVisioAutomation
                 }
                 
             }
+
+            var sectioindexname_to_int = GetNameToValueMap<int>(typeof (IVisio.VisSectionIndices));
+            var rowindexname_to_int = GetNameToValueMap<int>(typeof(IVisio.VisRowIndices));
+            var cellindexname_to_int = GetNameToValueMap<int>(typeof(IVisio.VisCellIndices));
             foreach (var db_cell in visio_2007_cells)
             {
+                if (!sectioindexname_to_int.ContainsKey(db_cell.SectionIndex))
+                {
+                    Assert.Fail(db_cell.Name);
+                }
+                if (!rowindexname_to_int.ContainsKey(db_cell.RowIndex))
+                {
+                    Assert.Fail(db_cell.Name);
+                }
+                if (!cellindexname_to_int.ContainsKey(db_cell.CellIndex))
+                {
+                    Assert.Fail(db_cell.Name);
+                }
+
+                //int s = sectioindexname_to_int[db_cell.SectionIndex];
+                //int r = rowindexname_to_int[db_cell.RowIndex];
+                //int c = cellindexname_to_int[db_cell.CellIndex];
                 //var va_src = va_name_to_src[db_cell.NameCode];
             }
 

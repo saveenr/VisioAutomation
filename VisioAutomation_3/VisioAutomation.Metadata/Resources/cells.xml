@@ -2632,7 +2632,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowEvent</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"/>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visEvtCellTheData</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406522(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406522(loband).aspx</Data></Cell>
    </Row>
@@ -4378,7 +4378,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowLock</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visLockTextEdir</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visLockTextEdit</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406414(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406414(loband).aspx</Data></Cell>
    </Row>
@@ -4504,7 +4504,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowReviewer</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visReviewerN</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visReviewerName</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406421(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406421(loband).aspx</Data></Cell>
    </Row>
@@ -4792,7 +4792,7 @@
     <Cell ss:StyleID="s63"><Data ss:Type="String">visRowSmartTag</Data></Cell>
     <Cell ss:StyleID="s63"><Data ss:Type="String">Visio2007</Data></Cell>
     <Cell ss:StyleID="s63"/>
-    <Cell ss:StyleID="s63"><Data ss:Type="String">visSmartTag</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="String">visSmartTagX</Data></Cell>
     <Cell ss:StyleID="s65" ss:HRef="http://msdn.microsoft.com/en-us/library/ms406558(loband).aspx"><Data
       ss:Type="String">http://msdn.microsoft.com/en-us/library/ms406558(loband).aspx</Data></Cell>
    </Row>
@@ -6320,14 +6320,13 @@
     <VerticalResolution>600</VerticalResolution>
    </Print>
    <Selected/>
-   <TopRowVisible>205</TopRowVisible>
+   <TopRowVisible>218</TopRowVisible>
    <LeftColumnVisible>6</LeftColumnVisible>
    <Panes>
     <Pane>
      <Number>3</Number>
-     <ActiveRow>228</ActiveRow>
+     <ActiveRow>263</ActiveRow>
      <ActiveCol>13</ActiveCol>
-     <RangeSelection>R229C14:R296C14</RangeSelection>
     </Pane>
    </Panes>
    <ProtectObjects>False</ProtectObjects>
