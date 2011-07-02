@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
-using ExcelUtil;
+using VA=VisioAutomation;
 
 namespace VisioAutomation.Metadata
 {
@@ -16,7 +16,7 @@ namespace VisioAutomation.Metadata
         private Dictionary<string, AutomationEnum> _name_to_autoenums;
         private Dictionary<string, CellValueEnum> _name_to_cellvalueenums;
         private List<AutomationConstant> _constants;
-        private ExcelXmlToDataSetConverter converter;
+        private ExcelUtil.ExcelXmlToDataSetConverter converter;
         private Dictionary<string, AutomationConstant> _name_to_constants;
         private Dictionary<int, Section> _int_to_section;
         private Dictionary<string, Cell> _namecode_to_cell;
@@ -104,7 +104,7 @@ namespace VisioAutomation.Metadata
 
         private void initcells()
         {
-            converter.Parse(VisioAutomation.Metadata.Properties.Resources.cells);
+            converter.Parse(VA.Metadata.Properties.Resources.cells);
             var cells_table = converter.DataSet.Tables[0];
             _cells = new List<Cell>();
             foreach (var item in cells_table.AsEnumerable())
@@ -138,7 +138,7 @@ namespace VisioAutomation.Metadata
 
         private void initsections()
         {
-            converter.Parse(VisioAutomation.Metadata.Properties.Resources.sections);
+            converter.Parse(VA.Metadata.Properties.Resources.sections);
             var sections_table = converter.DataSet.Tables[0];
             this._sections = new List<Section>();
             foreach (var item in sections_table.AsEnumerable())
@@ -163,7 +163,7 @@ namespace VisioAutomation.Metadata
 
         private void initconstants()
         {
-            converter.Parse(VisioAutomation.Metadata.Properties.Resources.automationconstants);
+            converter.Parse(VA.Metadata.Properties.Resources.automationconstants);
             var automationenums_table = converter.DataSet.Tables[0];
 
             this._constants = new List<AutomationConstant>();
@@ -186,7 +186,7 @@ namespace VisioAutomation.Metadata
 
         private void initcellvalues()
         {
-            converter.Parse(VisioAutomation.Metadata.Properties.Resources.cellvalues);
+            converter.Parse(VA.Metadata.Properties.Resources.cellvalues);
             var cellvalues_table = converter.DataSet.Tables[0];
             this._cellvals = new List<CellValue>();
             foreach (var item in cellvalues_table.AsEnumerable())
