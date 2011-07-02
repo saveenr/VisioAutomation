@@ -12,12 +12,20 @@ namespace VisioAutomation.Metadata
         private List<CellValue> _cellvals;
         private List<Section> _sections;
         private List<AutomationEnum> _autoenums;
-        private Dictionary<string,AutomationEnum> _name_to_autoenums;
+        private List<CellValueEnum> _cellvalueenum;
+        private Dictionary<string, AutomationEnum> _name_to_autoenums;
+        private Dictionary<string, CellValueEnum> _name_to_cellvalueenums;
         private List<AutomationConstant> _constants;
         private ExcelXmlToDataSetConverter converter;
         private Dictionary<string, AutomationConstant> _name_to_constants;
         private Dictionary<int, Section> _int_to_section;
-        
+        private Dictionary<string, Cell> _namecode_to_cell;
+
+        /*
+         * NOTES
+         * - Cell Names are not unique - use Cell.NameCode instead
+         */
+
         public MetadataDB()
         {
             this.converter = new ExcelUtil.ExcelXmlToDataSetConverter();
@@ -26,6 +34,7 @@ namespace VisioAutomation.Metadata
             initcellvalues();
             initcells();
             initsections();
+            initcellvalueenums();
         }
 
         public List<Cell> Cells
@@ -46,6 +55,11 @@ namespace VisioAutomation.Metadata
         public List<AutomationEnum> AutomationEnums
         {
             get { return this._autoenums; }
+        }
+
+        public Cell GetCellByNameCode(string name)
+        {
+            return this._namecode_to_cell[name];
         }
 
         public AutomationEnum GetAutomationEnumByName(string name)
@@ -117,6 +131,9 @@ namespace VisioAutomation.Metadata
                 c.CellIndex = item.Field<string>("CellIndex");
                 c.MSDN = item.Field<string>("MSDN");
             }
+
+            //this._name_to_cell = this.Cells.ToDictionary(i => i.Name, i => i);
+            this._namecode_to_cell = this.Cells.ToDictionary(i => i.NameCode, i => i);
         }
 
         private void initsections()
@@ -193,6 +210,31 @@ namespace VisioAutomation.Metadata
                 }
 
                 c.AutomationConstant = item.Field<string>("AutomationConstant");
+            }
+        }
+
+        private void initcellvalueenums()
+        {
+
+            this._name_to_cellvalueenums = new Dictionary<string, CellValueEnum>();
+            
+            foreach (var c in this.CellValues)
+            {
+                string enum_name = c.Enum;
+
+                bool s;
+                CellValueEnum cve;
+                s= this._name_to_cellvalueenums.TryGetValue(enum_name, out cve);
+                if (!s)
+                {
+                    cve = new CellValueEnum();
+                    cve.Name = enum_name;
+                    cve.Items = new List<CellValue>();
+                    this._name_to_cellvalueenums[enum_name] = cve;
+                }
+
+                cve.Items.Add(c);
+
             }
         }
     }
