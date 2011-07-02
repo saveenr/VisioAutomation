@@ -406,7 +406,7 @@ namespace VisioAutomation.ShapeSheet
         // text block format
 
         public readonly static SRC BottomMargin = new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkBottomMargin);
-        public readonly static SRC DefaultTabstop = new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkDefaultTabStop);
+        public readonly static SRC DefaultTabStop = new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkDefaultTabStop);
         public readonly static SRC LeftMargin = new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkLeftMargin);
         public readonly static SRC RightMargin = new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkRightMargin);
         public readonly static SRC TextBkgnd = new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkBkgnd);

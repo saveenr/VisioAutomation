@@ -171,7 +171,7 @@ namespace VisioAutomation.DOM
 
             // Text
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.BottomMargin, BottomMargin);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.DefaultTabstop, DefaultTabstop);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.DefaultTabStop, DefaultTabstop);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LeftMargin, LeftMargin);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.RightMargin, RightMargin);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TextBkgnd, TextBkgnd);
