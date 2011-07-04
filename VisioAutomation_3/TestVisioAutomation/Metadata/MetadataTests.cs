@@ -266,7 +266,10 @@ namespace TestVisioAutomation
             var secchar = db.GetSectionBySectionIndex((int)IVisio.VisSectionIndices.visSectionCharacter);
             var secchar_cells = visio_2007_cells.Where(c => c.SectionIndex == secchar.Enum).Where(c => c.Object.Contains("shape")).ToList();
 
-            var target_cells = secobj_cells.Concat(secchar_cells).ToList();
+            var secpara = db.GetSectionBySectionIndex((int)IVisio.VisSectionIndices.visSectionParagraph);
+            var secpara_cells = visio_2007_cells.Where(c => c.SectionIndex == secpara.Enum).Where(c => c.Object.Contains("shape")).ToList();
+
+            var target_cells = secobj_cells.Concat(secchar_cells).Concat(secpara_cells).ToList();
 
             var shapes = new[] {shape1, page.PageSheet};
 

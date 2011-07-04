@@ -20,6 +20,10 @@ namespace VisioAutomation.ShapeSheet
                     {
                         return TryGetNameFromSRC_Character_Object(src);
                     }
+                case ((short)IVisio.VisSectionIndices.visSectionParagraph):
+                    {
+                        return TryGetNameFromSRC_Paragraph_Object(src);
+                    }
                 default:
                     break;
             }
@@ -482,6 +486,41 @@ namespace VisioAutomation.ShapeSheet
             return null;
 
         }
+
+        private static string TryGetNameFromSRC_Paragraph_Object(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowParagraph):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visBulletIndex): return "Para.Bullet";
+                            case ((short)IVisio.VisCellIndices.visBulletFont): return "Para.BulletFont";
+                            case ((short)IVisio.VisCellIndices.visBulletFontSize): return "Para.BulletFontSize";
+                            case ((short)IVisio.VisCellIndices.visBulletString): return "Para.BulletStr";
+                            case ((short)IVisio.VisCellIndices.visHorzAlign): return "Para.HorzAlign";
+                            case ((short)IVisio.VisCellIndices.visFlags): return "Para.Flags";
+                            case ((short)IVisio.VisCellIndices.visIndentFirst): return "Para.IndFirst";
+                            case ((short)IVisio.VisCellIndices.visIndentLeft): return "Para.IndLeft";
+                            case ((short)IVisio.VisCellIndices.visIndentRight): return "Para.IndRight";
+                            case ((short)IVisio.VisCellIndices.visLocalizeBulletFont): return "Para.LocBulletFont";
+                            case ((short)IVisio.VisCellIndices.visSpaceAfter): return "Para.SpAfter";
+                            case ((short)IVisio.VisCellIndices.visSpaceBefore): return "Para.SpBefore";
+                            case ((short)IVisio.VisCellIndices.visSpaceLine): return "Para.SpLine";
+                            case ((short)IVisio.VisCellIndices.visTextPosAfterBullet): return "Para.TextPosAfterBullet";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
 
         public static SRC? TryGetSRCFromName(string name)
         {
