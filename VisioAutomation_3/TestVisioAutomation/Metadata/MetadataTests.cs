@@ -249,6 +249,12 @@ namespace TestVisioAutomation
             var page = doc.Pages[1];
 
             var shape1 = page.DrawRectangle(2,2 ,5,6);
+            shape1.Text = "0123456789\n" + "0123456789\n" + "0123456789\n" + "0123456789\n" + "0123456789\n" + "0123456789\n" +
+                          "0123456789\n";
+            var fmt1 = new VA.Text.CharacterFormatCells();
+            fmt1.Color = 3;
+            VA.Text.TextHelper.SetFormat( shape1, fmt1, 10 , 20);
+            VA.Text.TextHelper.SetFormat( shape1, fmt1, 35, 45);
 
             var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
@@ -257,11 +263,16 @@ namespace TestVisioAutomation
             var secobj = db.GetSectionBySectionIndex((int) IVisio.VisSectionIndices.visSectionObject);
             var secobj_cells = visio_2007_cells.Where(c => c.SectionIndex == secobj.Enum).Where(c => c.Object.Contains("shape")).ToList();
 
+            var secchar = db.GetSectionBySectionIndex((int)IVisio.VisSectionIndices.visSectionCharacter);
+            var secchar_cells = visio_2007_cells.Where(c => c.SectionIndex == secchar.Enum).Where(c => c.Object.Contains("shape")).ToList();
+
+            var target_cells = secobj_cells.Concat(secchar_cells).ToList();
+
             var shapes = new[] {shape1, page.PageSheet};
 
             foreach (var shape in shapes)
             {
-                foreach (var db_cell in secobj_cells)
+                foreach (var db_cell in target_cells)
                 {
                     var s = (short)db.GetAutomationConstantByName(db_cell.SectionIndex).GetValueAsInt();
                     var r = (short)db.GetAutomationConstantByName(db_cell.RowIndex).GetValueAsInt();
@@ -283,10 +294,6 @@ namespace TestVisioAutomation
                             if (r != (short)IVisio.VisRowIndices.visRow1stHyperlink)
                             {
                                 Assert.Fail("Names don't match db=\"" + db_cell.Name + "\" actual cell = \"" + piacellname + "\"");
-                            }
-                            for (int i = 0; i < va_cellname.Length; i++)
-                            {
-                                //Assert.AreEqual(piacellname[i],va_cellname[i]);
                             }
                         }
                     }

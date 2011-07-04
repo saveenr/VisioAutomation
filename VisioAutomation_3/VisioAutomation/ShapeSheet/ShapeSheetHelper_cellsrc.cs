@@ -16,6 +16,10 @@ namespace VisioAutomation.ShapeSheet
                     {
                         return TryGetNameFromSRC_Section_Object(src);
                     }
+                case ((short)IVisio.VisSectionIndices.visSectionCharacter):
+                    {
+                        return TryGetNameFromSRC_Character_Object(src);
+                    }
                 default:
                     break;
             }
@@ -425,6 +429,48 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visSLORouteStyle): return "ShapeRouteStyle";
                             case ((short)IVisio.VisCellIndices.visSLOSplit): return "ShapeSplit";
                             case ((short)IVisio.VisCellIndices.visSLOSplittable): return "ShapeSplittable";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+        private static string TryGetNameFromSRC_Character_Object(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowCharacter):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visCharacterAsianFont): return "Char.AsianFont";
+                            case ((short)IVisio.VisCellIndices.visCharacterCase): return "Char.Case";
+                            case ((short)IVisio.VisCellIndices.visCharacterColor): return "Char.Color";
+                            case ((short)IVisio.VisCellIndices.visCharacterColorTrans): return "Char.ColorTrans";
+                            case ((short)IVisio.VisCellIndices.visCharacterComplexScriptFont): return "Char.ComplexScriptFont";
+                            case ((short)IVisio.VisCellIndices.visCharacterComplexScriptSize): return "Char.ComplexScriptSize";
+                            case ((short)IVisio.VisCellIndices.visCharacterDblUnderline): return "Char.DblUnderline";
+                            case ((short)IVisio.VisCellIndices.visCharacterDoubleStrikethrough): return "Char.DoubleStrikethrough";
+                            case ((short)IVisio.VisCellIndices.visCharacterFont): return "Char.Font";
+                            case ((short)IVisio.VisCellIndices.visCharacterFontScale): return "Char.FontScale";
+                            case ((short)IVisio.VisCellIndices.visCharacterLangID): return "Char.LangID";
+                            case ((short)IVisio.VisCellIndices.visCharacterLetterspace): return "Char.Letterspace";
+                            case ((short)IVisio.VisCellIndices.visCharacterLocale): return "Char.Locale";
+                            case ((short)IVisio.VisCellIndices.visCharacterLocalizeFont): return "Char.LocalizeFont";
+                            case ((short)IVisio.VisCellIndices.visCharacterOverline): return "Char.Overline";
+                            case ((short)IVisio.VisCellIndices.visCharacterPos): return "Char.Pos";
+                            case ((short)IVisio.VisCellIndices.visCharacterRTLText): return "Char.RTLText";
+                            case ((short)IVisio.VisCellIndices.visCharacterSize): return "Char.Size";
+                            case ((short)IVisio.VisCellIndices.visCharacterStrikethru): return "Char.Strikethru";
+                            case ((short)IVisio.VisCellIndices.visCharacterStyle): return "Char.Style";
+                            case ((short)IVisio.VisCellIndices.visCharacterUseVertical): return "Char.UseVertical";
+                            case ((short)IVisio.VisCellIndices.visCharacterPerpendicular): return "Char.Perpendicular";
                             default:
                                 break;
                         }
