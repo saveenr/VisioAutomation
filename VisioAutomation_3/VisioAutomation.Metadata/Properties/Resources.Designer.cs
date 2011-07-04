@@ -61,36 +61,10 @@ namespace VisioAutomation.Metadata.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
-        ///&lt;?mso-application progid=&quot;Excel.Sheet&quot;?&gt;
-        ///&lt;Workbook xmlns=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot;
-        /// xmlns:x=&quot;urn:schemas-microsoft-com:office:excel&quot;
-        /// xmlns:ss=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:html=&quot;http://www.w3.org/TR/REC-html40&quot;
-        /// xmlns:x2=&quot;http://schemas.microsoft.com/office/excel/2003/xml&quot;&gt;
-        /// &lt;DocumentProperties xmlns=&quot;urn:schemas-microsoft-com:office:office&quot;&gt;
-        ///  &lt;Author&gt;saveenr&lt;/Author&gt;
-        ///  &lt;LastAuth [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string automationconstants {
-            get {
-                return ResourceManager.GetString("automationconstants", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
-        ///&lt;?mso-application progid=&quot;Excel.Sheet&quot;?&gt;
-        ///&lt;Workbook xmlns=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot;
-        /// xmlns:x=&quot;urn:schemas-microsoft-com:office:excel&quot;
-        /// xmlns:ss=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:html=&quot;http://www.w3.org/TR/REC-html40&quot;
-        /// xmlns:x2=&quot;http://schemas.microsoft.com/office/excel/2003/xml&quot;
-        /// xmlns:udc=&quot;http://schemas.microsoft.com/data/udc&quot;
-        /// xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot;
-        /// xmlns:udcxf [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;table&gt;
+        ///  &lt;row ID=&quot;cell_action_sec_actions&quot; Name=&quot;Actions.Action&quot; NameCode=&quot;Actions_Action&quot; NameFormatString=&quot;Actions.{0}.Action&quot; Object=&quot;shape-action&quot; NameType=&quot;named&quot; DataType=&quot;String&quot; ContentType=&quot;Formula&quot; Unit=&quot;Formula&quot; SectionIndex=&quot;visSectionAction&quot; RowIndex=&quot;visRowAction&quot; MinVersion=&quot;Visio2007&quot; MaxVersion=&quot;&quot; CellIndex=&quot;visActionAction&quot; MSDN=&quot;http://msdn.microsoft.com/en-us/library/ms406240(loband).aspx&quot; /&gt;
+        ///  &lt;row ID=&quot;cell_begingroup_sec_actions&quot; Name=&quot;Actions [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string cells {
             get {
@@ -99,17 +73,12 @@ namespace VisioAutomation.Metadata.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
-        ///&lt;?mso-application progid=&quot;Excel.Sheet&quot;?&gt;
-        ///&lt;Workbook xmlns=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot;
-        /// xmlns:x=&quot;urn:schemas-microsoft-com:office:excel&quot;
-        /// xmlns:ss=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:html=&quot;http://www.w3.org/TR/REC-html40&quot;
-        /// xmlns:x2=&quot;http://schemas.microsoft.com/office/excel/2003/xml&quot;&gt;
-        /// &lt;DocumentProperties xmlns=&quot;urn:schemas-microsoft-com:office:office&quot;&gt;
-        ///  &lt;Author&gt;saveenr&lt;/Author&gt;
-        ///  &lt;LastAuth [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;table&gt;
+        ///  &lt;row ID=&quot;cellvalueenum_alignment_tabs&quot; Enum=&quot;TabAlignment&quot; Name=&quot;Left&quot; Value=&quot;&quot; AutomationConstant=&quot;visTabStopLeft&quot; /&gt;
+        ///  &lt;row ID=&quot;cellvalueenum_alignment_tabs&quot; Enum=&quot;TabAlignment&quot; Name=&quot;Center&quot; Value=&quot;&quot; AutomationConstant=&quot;visTabStopCenter&quot; /&gt;
+        ///  &lt;row ID=&quot;cellvalueenum_alignment_tabs&quot; Enum=&quot;TabAlignment&quot; Name=&quot;Right&quot; Value=&quot;&quot; AutomationConstant=&quot;visTabStopRight&quot; /&gt;
+        ///  &lt;row ID=&quot;cellvalueenum_alignment_tabs&quot; Enum=&quot;TabAlignment&quot; Name=&quot;Decimal&quot; Value=&quot;&quot; Automa [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string cellvalues {
             get {
@@ -118,17 +87,28 @@ namespace VisioAutomation.Metadata.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
-        ///&lt;?mso-application progid=&quot;Excel.Sheet&quot;?&gt;
-        ///&lt;Workbook xmlns=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:o=&quot;urn:schemas-microsoft-com:office:office&quot;
-        /// xmlns:x=&quot;urn:schemas-microsoft-com:office:excel&quot;
-        /// xmlns:ss=&quot;urn:schemas-microsoft-com:office:spreadsheet&quot;
-        /// xmlns:html=&quot;http://www.w3.org/TR/REC-html40&quot;
-        /// xmlns:x2=&quot;http://schemas.microsoft.com/office/excel/2003/xml&quot;&gt;
-        /// &lt;DocumentProperties xmlns=&quot;urn:schemas-microsoft-com:office:office&quot;&gt;
-        ///  &lt;Author&gt;saveenr&lt;/Author&gt;
-        ///  &lt;LastAuth [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;table&gt;
+        ///  &lt;row ID=&quot;automationenum_visarcsweepflags&quot; Enum=&quot;VisArcSweepFlags&quot; Name=&quot;visArcSweepFlagConcave&quot; Value=&quot;0&quot; /&gt;
+        ///  &lt;row ID=&quot;automationenum_visarcsweepflags&quot; Enum=&quot;VisArcSweepFlags&quot; Name=&quot;visArcSweepFlagConvex&quot; Value=&quot;1&quot; /&gt;
+        ///  &lt;row ID=&quot;automationenum_visautoconnectdir&quot; Enum=&quot;VisAutoConnectDir&quot; Name=&quot;visAutoConnectDirNone&quot; Value=&quot;0&quot; /&gt;
+        ///  &lt;row ID=&quot;automationenum_visautoconnectdir&quot; Enum=&quot;VisAutoConnectDir&quot; Name=&quot;visAutoConnectDirUp&quot; Value=&quot;1&quot; /&gt;
+        ///  &lt;row ID=&quot;autom [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string constants {
+            get {
+                return ResourceManager.GetString("constants", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;table&gt;
+        ///  &lt;row ID=&quot;sec_1dendpoints&quot; Name=&quot;OneDEndpoints&quot; DisplayName=&quot;1D Endpoints&quot; Enum=&quot;visSectionObject&quot; /&gt;
+        ///  &lt;row ID=&quot;sec_actions&quot; Name=&quot;Actions&quot; DisplayName=&quot;Actions&quot; Enum=&quot;visSectionAction&quot; /&gt;
+        ///  &lt;row ID=&quot;sec_alignment&quot; Name=&quot;Alignment&quot; DisplayName=&quot;Alignment&quot; Enum=&quot;visSectionObject&quot; /&gt;
+        ///  &lt;row ID=&quot;sec_annotation&quot; Name=&quot;Annotation&quot; DisplayName=&quot;Annotation&quot; Enum=&quot;visSectionAnnotation&quot; /&gt;
+        ///  &lt;row ID=&quot;sec_character&quot; Name=&quot;Character&quot; DisplayName=&quot;Character&quot; Enum=&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sections {
             get {

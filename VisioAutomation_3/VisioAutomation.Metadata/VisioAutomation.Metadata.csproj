@@ -83,6 +83,9 @@
     <None Include="Resources\cellvalues.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\constants.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\sections.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
