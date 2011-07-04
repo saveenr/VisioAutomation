@@ -15,10 +15,10 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckPersistance()
         {
+            string path = "c:\\users\\saveenr\\Documents";
             var db = new VA.Metadata.MetadataDB();
-
-            db.Save();
-            db.Load();
+            db.Save(path);
+            db.Load(path);
         }
 
         [TestMethod]

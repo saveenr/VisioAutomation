@@ -10,42 +10,13 @@ namespace VisioAutomation.Metadata
 {
     public class XmlTable
     {
-        public class XmlColumn
-        {
-            public string Name;
-            public int Ordinal;
-            public System.Reflection.PropertyInfo PropertyInfo;
-
-            public string GetValue<T>(T o)
-            {
-                object v = this.PropertyInfo.GetValue(o, null);
-                System.Type t = this.PropertyInfo.PropertyType;
-                string vs = null;
-
-                if (t == typeof(string))
-                {
-                    vs = (string)v;
-                }
-
-                return vs;
-            }
-
-            public XmlColumn(System.Reflection.PropertyInfo p)
-            {
-                this.Name = p.Name;
-                this.PropertyInfo = p;
-            }
-        }
-
-        public static void Persist<T>(IEnumerable<T> items, string filename)
+        public static void SaveToFile<T>(IEnumerable<T> items, string filename)
         {
             var xo = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8);
             xo.Formatting = System.Xml.Formatting.Indented;
             xo.WriteStartDocument();
 
-
             var target_props = GetTargetProperties<T>();
-
             var cols = target_props.Select(p => new XmlColumn(p)).ToList();
 
             xo.WriteStartElement("table"); // <table>
@@ -55,8 +26,7 @@ namespace VisioAutomation.Metadata
                 xo.WriteStartElement("row"); // <row>
                 foreach (var col in cols)
                 {
-                    xo.WriteAttributeString(col.Name, col.GetValue(item));
-                    
+                    xo.WriteAttributeString(col.Name, col.GetStringValue(item));
                 }
                 xo.WriteEndElement();  // </row>
                 
@@ -77,35 +47,67 @@ namespace VisioAutomation.Metadata
             return target_props;
         }
 
-        public static IEnumerable<T> Unpersist<T>(string filename) where T : new()
+        public static IEnumerable<T> LoadFromFile<T>(string filename) where T : new()
         {
             var target_props = GetTargetProperties<T>();
+            var cols = target_props.Select(p => new XmlColumn(p)).ToList();
+
             var doc = System.Xml.Linq.XDocument.Load(filename);
             var root = doc.Root;
             int n = 0;
             foreach (var row in root.Elements("row"))
             {
-                var no = new T();
-                foreach (var propertyInfo in target_props)
+                var new_item = new T();
+                foreach (var col in cols)
                 {
-                    var attr = row.Attribute(propertyInfo.Name);
+                    var attr = row.Attribute(col.Name);
                     if (attr == null)
                     {
                         // do nothing
                         continue;
                     }
 
-                    if (propertyInfo.PropertyType != typeof(string))
+                    if (col.PropertyInfo.PropertyType != typeof(string))
                     {
                         throw new Exception("Unsupported datatype");
                     }
-                    string vs = attr.Value;
-                    propertyInfo.SetValue(no, vs, null);
 
-
+                    string prop_string_val = attr.Value;
+                    col.SetStringValue(new_item, prop_string_val);
                 }
-                yield return no;
+                yield return new_item;
                 n++;
+            }
+        }
+    }
+
+    public class XmlColumn
+    {
+        public string Name;
+        public int Ordinal;
+        public System.Reflection.PropertyInfo PropertyInfo;
+
+        public string GetStringValue<T>(T o)
+        {
+            object v = this.PropertyInfo.GetValue(o, null);
+            string vs = (string)v;
+            return vs;
+        }
+
+        public void SetStringValue<T>(T o, string val)
+        {
+            this.PropertyInfo.SetValue( o, val, null);
+        }
+
+        public XmlColumn(System.Reflection.PropertyInfo propinfo)
+        {
+            this.Name = propinfo.Name;
+            this.PropertyInfo = propinfo;
+
+            if (propinfo.PropertyType != typeof(string))
+            {
+                string msg = string.Format("Property \"{0}\" has unsupported type \"{1}\" Only strings ar allowed."
+                                           , propinfo.Name, propinfo.PropertyType.FullName);
             }
         }
     }
@@ -126,19 +128,24 @@ namespace VisioAutomation.Metadata
         private Dictionary<int, Section> _int_to_section;
         private Dictionary<string, Cell> _namecode_to_cell;
 
-        public void Save()
+        public void Save(string path)
         {
-            string path = "c:\\users\\saveenr\\Documents";
-
-            XmlTable.Persist(this.Cells, System.IO.Path.Combine(path,"cells.xml"));
-            XmlTable.Persist(this.CellValues, System.IO.Path.Combine(path,"cellvalues.xml"));
-            XmlTable.Persist(this.Sections, System.IO.Path.Combine(path,"sections.xml"));
-            XmlTable.Persist(this.Constants, System.IO.Path.Combine(path,"constants.xml"));
+            XmlTable.SaveToFile(this.Cells, System.IO.Path.Combine(path,"cells.xml"));
+            XmlTable.SaveToFile(this.CellValues, System.IO.Path.Combine(path,"cellvalues.xml"));
+            XmlTable.SaveToFile(this.Sections, System.IO.Path.Combine(path,"sections.xml"));
+            XmlTable.SaveToFile(this.Constants, System.IO.Path.Combine(path,"constants.xml"));
         }
 
-        public void Load()
+        public void Load(string path)
         {
-            var zcells = XmlTable.Unpersist<Cell>("c:\\users\\saveenr\\Documents\\cells.xml").ToList();
+            List<Cell> xcells;
+            List<CellValue> xcellvalues;
+            List<Section> xsections;
+            List<AutomationConstant> xautomationconstants;
+            xcells = XmlTable.LoadFromFile<Cell>(System.IO.Path.Combine(path, "cells.xml")).ToList();
+            xcellvalues = XmlTable.LoadFromFile<CellValue>(System.IO.Path.Combine(path, "cellvalues.xml")).ToList();
+            xsections = XmlTable.LoadFromFile<Section>(System.IO.Path.Combine(path, "sections.xml")).ToList();
+            xautomationconstants = XmlTable.LoadFromFile<AutomationConstant>(System.IO.Path.Combine(path, "constants.xml")).ToList();
 
             int x = 1;
         }
