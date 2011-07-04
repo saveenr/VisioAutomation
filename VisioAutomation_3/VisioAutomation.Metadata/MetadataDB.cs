@@ -150,19 +150,19 @@ namespace VisioAutomation.Metadata
             List<CellValue> xcellvalues;
             List<Section> xsections;
             List<AutomationConstant> xautomationconstants;
-            xcells = XmlTable.LoadFromFile<Cell>(System.IO.Path.Combine(path, "cells.xml")).ToList();
-            xcellvalues = XmlTable.LoadFromFile<CellValue>(System.IO.Path.Combine(path, "cellvalues.xml")).ToList();
-            xsections = XmlTable.LoadFromFile<Section>(System.IO.Path.Combine(path, "sections.xml")).ToList();
-            xautomationconstants = XmlTable.LoadFromFile<AutomationConstant>(System.IO.Path.Combine(path, "constants.xml")).ToList();
 
-            int x = 1;
+            xautomationconstants = XmlTable.LoadFromFile<AutomationConstant>(System.IO.Path.Combine(path, "constants.xml")).ToList();
+            xcellvalues = XmlTable.LoadFromFile<CellValue>(System.IO.Path.Combine(path, "cellvalues.xml")).ToList();
+            xcells = XmlTable.LoadFromFile<Cell>(System.IO.Path.Combine(path, "cells.xml")).ToList();
+            xsections = XmlTable.LoadFromFile<Section>(System.IO.Path.Combine(path, "sections.xml")).ToList();
+
         }
         /*
          * NOTES
          * - Cell Names are not unique - use Cell.NameCode instead
          */
 
-        public MetadataDB()
+        private MetadataDB()
         {
             this.converter = new ExcelUtil.ExcelXmlToDataSetConverter();
             initconstants();
@@ -171,6 +171,12 @@ namespace VisioAutomation.Metadata
             initcells();
             initsections();
             initcellvalueenums();
+        }
+
+        public static MetadataDB Load()
+        {
+            var db = new MetadataDB();
+            return db;
         }
 
         public List<Cell> Cells

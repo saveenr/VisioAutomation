@@ -16,7 +16,7 @@ namespace TestVisioAutomation
         public void CheckPersistance()
         {
             string path = "c:\\users\\saveenr\\Documents";
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
             db.Save(path);
             db.Load(path);
         }
@@ -24,7 +24,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void VerifyMetadaDBCreation()
         {
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
 
             var allcells = db.Cells;
 
@@ -42,7 +42,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Constants()
         {
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
 
             var constants = db.Constants;
 
@@ -53,7 +53,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Sections()
         {
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
 
             var sections = db.Sections;
 
@@ -64,8 +64,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CellValues()
         {
-            var db = new VA.Metadata.MetadataDB();
-
+            var db = VA.Metadata.MetadataDB.Load();
             var cellvals = db.CellValues;
 
             // There are 40 known sections in the Visio PIA
@@ -75,7 +74,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ValidateCellNameCode()
         {
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
 
             var cellvals = db.CellValues;
             var allcells = db.Cells;
@@ -127,7 +126,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckPIA()
         {
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
             var db_autoenums = db.AutomationEnums;
 
             var pia_enums = VA.Interop.InteropHelper.GetEnumTypes();
@@ -175,7 +174,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckSRCConstantIndices()
         {
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
             var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
             var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
@@ -223,7 +222,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckSectionIndices()
         {
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
 
             // verify that each section has an sectioindex enum that is found in the database
             foreach (var section in db.Sections)
@@ -247,7 +246,7 @@ namespace TestVisioAutomation
 
             var shape1 = page.DrawRectangle(2,2 ,5,6);
 
-            var db = new VA.Metadata.MetadataDB();
+            var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
             var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
 
