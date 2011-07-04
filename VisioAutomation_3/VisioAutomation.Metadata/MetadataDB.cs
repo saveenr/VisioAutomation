@@ -6,52 +6,30 @@ using System.Reflection;
 using System.Xml;
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Metadata
+namespace XmlPersist
 {
-    public class XmlTable
+    public class XmlTableReader<T> where T : new()
     {
-        public static void SaveToFile<T>(IEnumerable<T> items, string filename) where T : new()
+        public XmlTableReader()
         {
-            var xo = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8);
-            xo.Formatting = System.Xml.Formatting.Indented;
-            xo.WriteStartDocument();
-
-            var cols = GetColumnsForType<T>();
-
-            xo.WriteStartElement("table"); // <table>
-
-            foreach (var item in items)
-            {
-                xo.WriteStartElement("row"); // <row>
-                foreach (var col in cols)
-                {
-                    xo.WriteAttributeString(col.Name, col.GetStringValue(item));
-                }
-                xo.WriteEndElement();  // </row>
-                
-            }
-            xo.WriteEndElement();  // </table>
-
-            xo.WriteEndDocument();
-            xo.Flush();
-            xo.Close();
+            
         }
 
-        public static IEnumerable<T> LoadFromFile<T>(string filename) where T : new()
+        public IEnumerable<T> LoadFromFile(string filename) 
         {
             var doc = System.Xml.Linq.XDocument.Load(filename);
-            return Load<T>(doc);
+            return Load(doc);
         }
 
-        public static IEnumerable<T> LoadFromString<T>(string text) where T : new()
+        public IEnumerable<T> LoadFromString(string text) 
         {
             var doc = System.Xml.Linq.XDocument.Parse(text);
-            return Load<T>(doc);
+            return Load(doc);
         }
 
-        public static IEnumerable<T> Load<T>(System.Xml.Linq.XDocument doc) where T : new()
+        public IEnumerable<T> Load(System.Xml.Linq.XDocument doc) 
         {
-            var cols = GetColumnsForType<T>();
+            var cols = XmlTable.GetColumnsForType<T>();
 
             var root_el = doc.Root;
             foreach (var row_el in root_el.Elements("row"))
@@ -77,8 +55,39 @@ namespace VisioAutomation.Metadata
                 yield return new_item;
             }
         }
+    }
 
-        private static List<XmlColumn> GetColumnsForType<T>() where T : new()
+    public class XmlTable
+    {
+        public static void SaveToFile<T>(IEnumerable<T> items, string filename) where T : new()
+        {
+            var xo = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8);
+            xo.Formatting = System.Xml.Formatting.Indented;
+            xo.WriteStartDocument();
+
+            var cols = GetColumnsForType<T>();
+
+            xo.WriteStartElement("table"); // <table>
+
+            foreach (var item in items)
+            {
+                xo.WriteStartElement("row"); // <row>
+                foreach (var col in cols)
+                {
+                    xo.WriteAttributeString(col.Name, col.GetStringValue(item));
+                }
+                xo.WriteEndElement();  // </row>
+
+            }
+            xo.WriteEndElement();  // </table>
+
+            xo.WriteEndDocument();
+            xo.Flush();
+            xo.Close();
+        }
+
+
+        public static List<XmlColumn> GetColumnsForType<T>() where T : new()
         {
             var bf = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;
             var item_type = typeof(T);
@@ -104,7 +113,7 @@ namespace VisioAutomation.Metadata
 
         public void SetStringValue<T>(T o, string val)
         {
-            this.PropertyInfo.SetValue( o, val, null);
+            this.PropertyInfo.SetValue(o, val, null);
         }
 
         public XmlColumn(System.Reflection.PropertyInfo propinfo)
@@ -119,6 +128,10 @@ namespace VisioAutomation.Metadata
             }
         }
     }
+    
+}
+namespace VisioAutomation.Metadata
+{
 
 
     public class MetadataDB
@@ -138,10 +151,10 @@ namespace VisioAutomation.Metadata
 
         public void Save(string path)
         {
-            XmlTable.SaveToFile(this.Cells, System.IO.Path.Combine(path,"cells.xml"));
-            XmlTable.SaveToFile(this.CellValues, System.IO.Path.Combine(path,"cellvalues.xml"));
-            XmlTable.SaveToFile(this.Sections, System.IO.Path.Combine(path,"sections.xml"));
-            XmlTable.SaveToFile(this.Constants, System.IO.Path.Combine(path,"constants.xml"));
+            XmlPersist.XmlTable.SaveToFile(this.Cells, System.IO.Path.Combine(path,"cells.xml"));
+            XmlPersist.XmlTable.SaveToFile(this.CellValues, System.IO.Path.Combine(path, "cellvalues.xml"));
+            XmlPersist.XmlTable.SaveToFile(this.Sections, System.IO.Path.Combine(path, "sections.xml"));
+            XmlPersist.XmlTable.SaveToFile(this.Constants, System.IO.Path.Combine(path, "constants.xml"));
         }
 
         public void Load(string path)
@@ -151,10 +164,15 @@ namespace VisioAutomation.Metadata
             List<Section> xsections;
             List<AutomationConstant> xautomationconstants;
 
-            xautomationconstants = XmlTable.LoadFromFile<AutomationConstant>(System.IO.Path.Combine(path, "constants.xml")).ToList();
-            xcellvalues = XmlTable.LoadFromFile<CellValue>(System.IO.Path.Combine(path, "cellvalues.xml")).ToList();
-            xcells = XmlTable.LoadFromFile<Cell>(System.IO.Path.Combine(path, "cells.xml")).ToList();
-            xsections = XmlTable.LoadFromFile<Section>(System.IO.Path.Combine(path, "sections.xml")).ToList();
+            var cellreader = new XmlPersist.XmlTableReader<Cell>();
+            var cvreader = new XmlPersist.XmlTableReader<CellValue>();
+            var secreader = new XmlPersist.XmlTableReader<Section>();
+            var conreader = new XmlPersist.XmlTableReader<AutomationConstant>();
+
+            xautomationconstants = conreader.LoadFromFile(System.IO.Path.Combine(path, "constants.xml")).ToList();
+            xcellvalues = cvreader.LoadFromFile(System.IO.Path.Combine(path, "cellvalues.xml")).ToList();
+            xcells = cellreader.LoadFromFile(System.IO.Path.Combine(path, "cells.xml")).ToList();
+            xsections = secreader.LoadFromFile(System.IO.Path.Combine(path, "sections.xml")).ToList();
 
         }
         /*
