@@ -51,6 +51,9 @@
     <Compile Include="Cell.cs" />
     <Compile Include="CellValue.cs" />
     <Compile Include="AutomationEnum.cs" />
+    <Compile Include="XmlPersist\XmlColumn.cs" />
+    <Compile Include="XmlPersist\XmlTableWriter.cs" />
+    <Compile Include="XmlPersist\XmlTableReader.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

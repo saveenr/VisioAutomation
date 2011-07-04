@@ -6,130 +6,6 @@ using System.Reflection;
 using System.Xml;
 using VA=VisioAutomation;
 
-namespace XmlPersist
-{
-    public class XmlTableReader<T> where T : new()
-    {
-        public XmlTableReader()
-        {
-            
-        }
-
-        public IEnumerable<T> LoadFromFile(string filename) 
-        {
-            var doc = System.Xml.Linq.XDocument.Load(filename);
-            return Load(doc);
-        }
-
-        public IEnumerable<T> LoadFromString(string text) 
-        {
-            var doc = System.Xml.Linq.XDocument.Parse(text);
-            return Load(doc);
-        }
-
-        public IEnumerable<T> Load(System.Xml.Linq.XDocument doc) 
-        {
-            var cols = XmlTable.GetColumnsForType<T>();
-
-            var root_el = doc.Root;
-            foreach (var row_el in root_el.Elements("row"))
-            {
-                var new_item = new T();
-                foreach (var col in cols)
-                {
-                    var attr = row_el.Attribute(col.Name);
-                    if (attr == null)
-                    {
-                        // do nothing
-                        continue;
-                    }
-
-                    if (col.PropertyInfo.PropertyType != typeof(string))
-                    {
-                        throw new Exception("Unsupported datatype");
-                    }
-
-                    string prop_string_val = attr.Value;
-                    col.SetStringValue(new_item, prop_string_val);
-                }
-                yield return new_item;
-            }
-        }
-    }
-
-    public class XmlTable
-    {
-        public static void SaveToFile<T>(IEnumerable<T> items, string filename) where T : new()
-        {
-            var xo = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8);
-            xo.Formatting = System.Xml.Formatting.Indented;
-            xo.WriteStartDocument();
-
-            var cols = GetColumnsForType<T>();
-
-            xo.WriteStartElement("table"); // <table>
-
-            foreach (var item in items)
-            {
-                xo.WriteStartElement("row"); // <row>
-                foreach (var col in cols)
-                {
-                    xo.WriteAttributeString(col.Name, col.GetStringValue(item));
-                }
-                xo.WriteEndElement();  // </row>
-
-            }
-            xo.WriteEndElement();  // </table>
-
-            xo.WriteEndDocument();
-            xo.Flush();
-            xo.Close();
-        }
-
-
-        public static List<XmlColumn> GetColumnsForType<T>() where T : new()
-        {
-            var bf = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;
-            var item_type = typeof(T);
-            var properties = item_type.GetProperties(bf);
-            var target_props = properties.Where(p => p.CanRead).Where(p => p.PropertyType == typeof(string)).ToList();
-            var cols = target_props.Select(p => new XmlColumn(p)).ToList();
-            return cols;
-        }
-    }
-
-    public class XmlColumn
-    {
-        public string Name;
-        public int Ordinal;
-        public System.Reflection.PropertyInfo PropertyInfo;
-
-        public string GetStringValue<T>(T o)
-        {
-            object v = this.PropertyInfo.GetValue(o, null);
-            string vs = (string)v;
-            return vs;
-        }
-
-        public void SetStringValue<T>(T o, string val)
-        {
-            this.PropertyInfo.SetValue(o, val, null);
-        }
-
-        public XmlColumn(System.Reflection.PropertyInfo propinfo)
-        {
-            this.Name = propinfo.Name;
-            this.PropertyInfo = propinfo;
-
-            if (propinfo.PropertyType != typeof(string))
-            {
-                string msg = string.Format("Property \"{0}\" has unsupported type \"{1}\" Only strings ar allowed."
-                                           , propinfo.Name, propinfo.PropertyType.FullName);
-            }
-        }
-    }
-    
-}
 namespace VisioAutomation.Metadata
 {
 
@@ -151,10 +27,15 @@ namespace VisioAutomation.Metadata
 
         public void Save(string path)
         {
-            XmlPersist.XmlTable.SaveToFile(this.Cells, System.IO.Path.Combine(path,"cells.xml"));
-            XmlPersist.XmlTable.SaveToFile(this.CellValues, System.IO.Path.Combine(path, "cellvalues.xml"));
-            XmlPersist.XmlTable.SaveToFile(this.Sections, System.IO.Path.Combine(path, "sections.xml"));
-            XmlPersist.XmlTable.SaveToFile(this.Constants, System.IO.Path.Combine(path, "constants.xml"));
+            var cell_writer = new XmlPersist.XmlTableWriter<Cell>();
+            var cv_writer = new XmlPersist.XmlTableWriter<CellValue>();
+            var sec_writer = new XmlPersist.XmlTableWriter<Section>();
+            var con_writer = new XmlPersist.XmlTableWriter<AutomationConstant>();
+
+            cell_writer.SaveToFile(this.Cells, System.IO.Path.Combine(path, "cells.xml"));
+            cv_writer.SaveToFile(this.CellValues, System.IO.Path.Combine(path, "cellvalues.xml"));
+            sec_writer.SaveToFile(this.Sections, System.IO.Path.Combine(path, "sections.xml"));
+            con_writer.SaveToFile(this.Constants, System.IO.Path.Combine(path, "constants.xml"));
         }
 
         public void Load(string path)
