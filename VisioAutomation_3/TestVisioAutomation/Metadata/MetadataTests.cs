@@ -13,14 +13,12 @@ namespace TestVisioAutomation
     public class MetadataTests : VisioAutomationTest
     {
         [TestMethod]
-        public void XPersits()
+        public void CheckPersistance()
         {
             var db = new VA.Metadata.MetadataDB();
 
-            db.XPersist();
-
-
-            db.XUnPersist();
+            db.Save();
+            db.Load();
         }
 
         [TestMethod]

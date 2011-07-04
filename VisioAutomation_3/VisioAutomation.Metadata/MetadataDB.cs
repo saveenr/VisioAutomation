@@ -126,15 +126,17 @@ namespace VisioAutomation.Metadata
         private Dictionary<int, Section> _int_to_section;
         private Dictionary<string, Cell> _namecode_to_cell;
 
-        public void XPersist()
+        public void Save()
         {
-            XmlTable.Persist(this.Cells,"c:\\users\\saveenr\\Documents\\cells.xml");
-            XmlTable.Persist(this.CellValues, "c:\\users\\saveenr\\Documents\\cellvalues.xml");
-            XmlTable.Persist(this.Sections, "c:\\users\\saveenr\\Documents\\sections.xml");
-            XmlTable.Persist(this.Constants, "c:\\users\\saveenr\\Documents\\constants.xml");
+            string path = "c:\\users\\saveenr\\Documents";
+
+            XmlTable.Persist(this.Cells, System.IO.Path.Combine(path,"cells.xml"));
+            XmlTable.Persist(this.CellValues, System.IO.Path.Combine(path,"cellvalues.xml"));
+            XmlTable.Persist(this.Sections, System.IO.Path.Combine(path,"sections.xml"));
+            XmlTable.Persist(this.Constants, System.IO.Path.Combine(path,"constants.xml"));
         }
 
-        public void XUnPersist()
+        public void Load()
         {
             var zcells = XmlTable.Unpersist<Cell>("c:\\users\\saveenr\\Documents\\cells.xml").ToList();
 
