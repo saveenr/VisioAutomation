@@ -15,9 +15,14 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckPersistance()
         {
-            string path = "c:\\users\\saveenr\\Documents";
+            string output_path = VisioTestCommon.Helper.GetTestMethodOutputFilename();
+
+            if (!System.IO.Directory.Exists(output_path))
+            {
+                System.IO.Directory.CreateDirectory(output_path);
+            }
             var db = VA.Metadata.MetadataDB.Load();
-            db.Save(path);
+            db.Save(output_path);
         }
 
         [TestMethod]

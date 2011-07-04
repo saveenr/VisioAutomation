@@ -28,6 +28,13 @@ namespace TestVisioAutomation
             return abs_filename;
         }
 
+        public string GetTestMethodOutputFilename()
+        {
+            string abs_path = this.OutputPath;
+            string abs_filename = System.IO.Path.Combine(abs_path, GetMethodName(2));
+            return abs_filename;
+        }
+
         private void PrepareOutputPath()
         {
             if (!System.IO.Directory.Exists(this.OutputPath))
