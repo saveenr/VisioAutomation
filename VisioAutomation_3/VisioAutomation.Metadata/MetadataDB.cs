@@ -2,10 +2,115 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using System.Reflection;
+using System.Xml;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Metadata
 {
+    public class XmlTable
+    {
+        public class XmlColumn
+        {
+            public string Name;
+            public int Ordinal;
+            public System.Reflection.PropertyInfo PropertyInfo;
+
+            public string GetValue<T>(T o)
+            {
+                object v = this.PropertyInfo.GetValue(o, null);
+                System.Type t = this.PropertyInfo.PropertyType;
+                string vs = null;
+
+                if (t == typeof(string))
+                {
+                    vs = (string)v;
+                }
+
+                return vs;
+            }
+
+            public XmlColumn(System.Reflection.PropertyInfo p)
+            {
+                this.Name = p.Name;
+                this.PropertyInfo = p;
+            }
+        }
+
+        public static void Persist<T>(IEnumerable<T> items, string filename)
+        {
+            var xo = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8);
+            xo.Formatting = System.Xml.Formatting.Indented;
+            xo.WriteStartDocument();
+
+
+            var target_props = GetTargetProperties<T>();
+
+            var cols = target_props.Select(p => new XmlColumn(p)).ToList();
+
+            xo.WriteStartElement("table"); // <table>
+
+            foreach (var item in items)
+            {
+                xo.WriteStartElement("row"); // <row>
+                foreach (var col in cols)
+                {
+                    xo.WriteAttributeString(col.Name, col.GetValue(item));
+                    
+                }
+                xo.WriteEndElement();  // </row>
+                
+            }
+            xo.WriteEndElement();  // </table>
+
+            xo.WriteEndDocument();
+            xo.Flush();
+            xo.Close();
+        }
+
+        private static List<PropertyInfo> GetTargetProperties<T>()
+        {
+            var bf = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;
+            var t = typeof (T);
+            var properties = t.GetProperties();
+            var target_props = properties.Where(p => p.CanRead).Where(p=>p.PropertyType==typeof(string)).ToList();
+            return target_props;
+        }
+
+        public static IEnumerable<T> Unpersist<T>(string filename) where T : new()
+        {
+            var target_props = GetTargetProperties<T>();
+            var doc = System.Xml.Linq.XDocument.Load(filename);
+            var root = doc.Root;
+            int n = 0;
+            foreach (var row in root.Elements("row"))
+            {
+                var no = new T();
+                foreach (var propertyInfo in target_props)
+                {
+                    var attr = row.Attribute(propertyInfo.Name);
+                    if (attr == null)
+                    {
+                        // do nothing
+                        continue;
+                    }
+
+                    if (propertyInfo.PropertyType != typeof(string))
+                    {
+                        throw new Exception("Unsupported datatype");
+                    }
+                    string vs = attr.Value;
+                    propertyInfo.SetValue(no, vs, null);
+
+
+                }
+                yield return no;
+                n++;
+            }
+        }
+    }
+
+
     public class MetadataDB
     {
         private List<Cell> _cells;
@@ -21,6 +126,20 @@ namespace VisioAutomation.Metadata
         private Dictionary<int, Section> _int_to_section;
         private Dictionary<string, Cell> _namecode_to_cell;
 
+        public void XPersist()
+        {
+            XmlTable.Persist(this.Cells,"c:\\users\\saveenr\\Documents\\cells.xml");
+            XmlTable.Persist(this.CellValues, "c:\\users\\saveenr\\Documents\\cellvalues.xml");
+            XmlTable.Persist(this.Sections, "c:\\users\\saveenr\\Documents\\sections.xml");
+            XmlTable.Persist(this.Constants, "c:\\users\\saveenr\\Documents\\constants.xml");
+        }
+
+        public void XUnPersist()
+        {
+            var zcells = XmlTable.Unpersist<Cell>("c:\\users\\saveenr\\Documents\\cells.xml").ToList();
+
+            int x = 1;
+        }
         /*
          * NOTES
          * - Cell Names are not unique - use Cell.NameCode instead

@@ -13,6 +13,17 @@ namespace TestVisioAutomation
     public class MetadataTests : VisioAutomationTest
     {
         [TestMethod]
+        public void XPersits()
+        {
+            var db = new VA.Metadata.MetadataDB();
+
+            db.XPersist();
+
+
+            db.XUnPersist();
+        }
+
+        [TestMethod]
         public void VerifyMetadaDBCreation()
         {
             var db = new VA.Metadata.MetadataDB();
