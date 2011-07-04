@@ -324,19 +324,7 @@ namespace VisioAutomation.Metadata
                 c.ID = item.Field<string>("ID");
                 c.Enum = item.Field<string>("Enum");
                 c.Name = item.Field<string>("Name");
-
-                bool s;
-                int v;
-                s = int.TryParse(item.Field<string>("Value"), out v);
-                if (s)
-                {
-                    c.Value = v;
-                }
-                else
-                {
-                    c.Value = null;
-                }
-
+                c.AutomationConstant = item.Field<string>("Value");
                 c.AutomationConstant = item.Field<string>("AutomationConstant");
             }
         }
