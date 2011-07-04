@@ -18,7 +18,6 @@ namespace TestVisioAutomation
             string path = "c:\\users\\saveenr\\Documents";
             var db = VA.Metadata.MetadataDB.Load();
             db.Save(path);
-            db.Load(path);
         }
 
         [TestMethod]

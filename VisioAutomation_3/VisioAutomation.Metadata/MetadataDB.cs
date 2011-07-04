@@ -32,34 +32,17 @@ namespace VisioAutomation.Metadata
             var sec_writer = new XmlPersist.XmlTableWriter<Section>();
             var con_writer = new XmlPersist.XmlTableWriter<AutomationConstant>();
 
-            cell_writer.SaveToFile(this.Cells, System.IO.Path.Combine(path, "cells.xml"));
-            cv_writer.SaveToFile(this.CellValues, System.IO.Path.Combine(path, "cellvalues.xml"));
-            sec_writer.SaveToFile(this.Sections, System.IO.Path.Combine(path, "sections.xml"));
-            con_writer.SaveToFile(this.Constants, System.IO.Path.Combine(path, "constants.xml"));
-        }
-
-        public void Load(string path)
-        {
-            List<Cell> xcells;
-            List<CellValue> xcellvalues;
-            List<Section> xsections;
-            List<AutomationConstant> xautomationconstants;
-
             string cells_filename = System.IO.Path.Combine(path, "cells.xml");
             string cv_filename = System.IO.Path.Combine(path, "cellvalues.xml");
             string sec_filename = System.IO.Path.Combine(path, "sections.xml");
             string con_filename = System.IO.Path.Combine(path, "constants.xml");
 
-            var cellreader = new XmlPersist.XmlTableReader<Cell>();
-            var cvreader = new XmlPersist.XmlTableReader<CellValue>();
-            var secreader = new XmlPersist.XmlTableReader<Section>();
-            var conreader = new XmlPersist.XmlTableReader<AutomationConstant>();
-
-            xcells = cellreader.LoadFromFile(cells_filename).ToList();
-            xcellvalues = cvreader.LoadFromFile(cv_filename).ToList();
-            xsections = secreader.LoadFromFile(sec_filename).ToList();
-            xautomationconstants = conreader.LoadFromFile(con_filename).ToList();
+            cell_writer.SaveToFile(this.Cells, cells_filename);
+            cv_writer.SaveToFile(this.CellValues, cv_filename);
+            sec_writer.SaveToFile(this.Sections, sec_filename);
+            con_writer.SaveToFile(this.Constants, con_filename);
         }
+
         /*
          * NOTES
          * - Cell Names are not unique - use Cell.NameCode instead
@@ -68,11 +51,6 @@ namespace VisioAutomation.Metadata
         private MetadataDB()
         {
 
-            var dom_constants = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.constants);
-            var dom_cells = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.cells);
-            var dom_cv = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.cells);
-            var dom_sec = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.sections);
-            init_from_doms(dom_cells, dom_sec, dom_constants, dom_cv);
         }
 
         private void init_from_doms(XDocument dom_cells, XDocument dom_sec, XDocument dom_constants, XDocument dom_cv)
@@ -151,6 +129,33 @@ namespace VisioAutomation.Metadata
         public static MetadataDB Load()
         {
             var db = new MetadataDB();
+            var dom_constants = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.constants);
+            var dom_cells = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.cells);
+            var dom_cv = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.cellvalues);
+            var dom_sec = System.Xml.Linq.XDocument.Parse(VA.Metadata.Properties.Resources.sections);
+            db.init_from_doms(dom_cells, dom_sec, dom_constants, dom_cv);
+            return db;
+        }
+
+        public static MetadataDB Load(string path)
+        {
+            string cells_filename = System.IO.Path.Combine(path, "cells.xml");
+            string cv_filename = System.IO.Path.Combine(path, "cellvalues.xml");
+            string sec_filename = System.IO.Path.Combine(path, "sections.xml");
+            string con_filename = System.IO.Path.Combine(path, "constants.xml");
+
+            var cellreader = new XmlPersist.XmlTableReader<Cell>();
+            var cvreader = new XmlPersist.XmlTableReader<CellValue>();
+            var secreader = new XmlPersist.XmlTableReader<Section>();
+            var conreader = new XmlPersist.XmlTableReader<AutomationConstant>();
+
+            var dom_constants = System.Xml.Linq.XDocument.Load(con_filename);
+            var dom_cells = System.Xml.Linq.XDocument.Load(cells_filename);
+            var dom_cv = System.Xml.Linq.XDocument.Load(cv_filename);
+            var dom_sec = System.Xml.Linq.XDocument.Load(sec_filename);
+
+            var db = new MetadataDB();
+            db.init_from_doms(dom_cells, dom_sec, dom_constants, dom_cv);
             return db;
         }
 
