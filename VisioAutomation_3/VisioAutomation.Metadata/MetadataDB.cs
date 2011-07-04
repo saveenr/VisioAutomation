@@ -10,14 +10,13 @@ namespace VisioAutomation.Metadata
 {
     public class XmlTable
     {
-        public static void SaveToFile<T>(IEnumerable<T> items, string filename)
+        public static void SaveToFile<T>(IEnumerable<T> items, string filename) where T : new()
         {
             var xo = new System.Xml.XmlTextWriter(filename, System.Text.Encoding.UTF8);
             xo.Formatting = System.Xml.Formatting.Indented;
             xo.WriteStartDocument();
 
-            var target_props = GetTargetProperties<T>();
-            var cols = target_props.Select(p => new XmlColumn(p)).ToList();
+            var cols = GetColumnsForType<T>();
 
             xo.WriteStartElement("table"); // <table>
 
@@ -38,29 +37,29 @@ namespace VisioAutomation.Metadata
             xo.Close();
         }
 
-        private static List<PropertyInfo> GetTargetProperties<T>()
-        {
-            var bf = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;
-            var t = typeof (T);
-            var properties = t.GetProperties();
-            var target_props = properties.Where(p => p.CanRead).Where(p=>p.PropertyType==typeof(string)).ToList();
-            return target_props;
-        }
-
         public static IEnumerable<T> LoadFromFile<T>(string filename) where T : new()
         {
-            var target_props = GetTargetProperties<T>();
-            var cols = target_props.Select(p => new XmlColumn(p)).ToList();
-
             var doc = System.Xml.Linq.XDocument.Load(filename);
-            var root = doc.Root;
-            int n = 0;
-            foreach (var row in root.Elements("row"))
+            return Load<T>(doc);
+        }
+
+        public static IEnumerable<T> LoadFromString<T>(string text) where T : new()
+        {
+            var doc = System.Xml.Linq.XDocument.Parse(text);
+            return Load<T>(doc);
+        }
+
+        public static IEnumerable<T> Load<T>(System.Xml.Linq.XDocument doc) where T : new()
+        {
+            var cols = GetColumnsForType<T>();
+
+            var root_el = doc.Root;
+            foreach (var row_el in root_el.Elements("row"))
             {
                 var new_item = new T();
                 foreach (var col in cols)
                 {
-                    var attr = row.Attribute(col.Name);
+                    var attr = row_el.Attribute(col.Name);
                     if (attr == null)
                     {
                         // do nothing
@@ -76,8 +75,17 @@ namespace VisioAutomation.Metadata
                     col.SetStringValue(new_item, prop_string_val);
                 }
                 yield return new_item;
-                n++;
             }
+        }
+
+        private static List<XmlColumn> GetColumnsForType<T>() where T : new()
+        {
+            var bf = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;
+            var item_type = typeof(T);
+            var properties = item_type.GetProperties(bf);
+            var target_props = properties.Where(p => p.CanRead).Where(p => p.PropertyType == typeof(string)).ToList();
+            var cols = target_props.Select(p => new XmlColumn(p)).ToList();
+            return cols;
         }
     }
 
