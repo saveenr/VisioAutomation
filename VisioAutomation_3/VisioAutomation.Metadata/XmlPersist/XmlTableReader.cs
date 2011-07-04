@@ -41,7 +41,11 @@ namespace XmlPersist
 
                     if (col.PropertyInfo.PropertyType != typeof (string))
                     {
-                        throw new System.Exception("Unsupported datatype");
+                        string msg =
+                            string.Format(
+                                "class {0} has unsupported property datatype. Property {1} has datatype {2}.",
+                                typeof (T).FullName, col.PropertyInfo.Name, col.PropertyInfo.PropertyType.FullName);
+                        throw new System.Exception(msg);
                     }
 
                     string prop_string_val = attr.Value;
