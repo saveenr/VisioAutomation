@@ -228,7 +228,7 @@ namespace TestVisioAutomation
             foreach (var section in db.Sections)
             {
                 string secindex_name = section.Enum;
-                int secindex_int = db.GetAutomationConstantByName(secindex_name).Value;
+                int secindex_int = db.GetAutomationConstantByName(secindex_name).GetValueAsInt();
             }
            
 
@@ -259,9 +259,9 @@ namespace TestVisioAutomation
             {
                 foreach (var db_cell in secobj_cells)
                 {
-                    var s = (short)db.GetAutomationConstantByName(db_cell.SectionIndex).Value;
-                    var r = (short)db.GetAutomationConstantByName(db_cell.RowIndex).Value;
-                    var c = (short)db.GetAutomationConstantByName(db_cell.CellIndex).Value;
+                    var s = (short)db.GetAutomationConstantByName(db_cell.SectionIndex).GetValueAsInt();
+                    var r = (short)db.GetAutomationConstantByName(db_cell.RowIndex).GetValueAsInt();
+                    var c = (short)db.GetAutomationConstantByName(db_cell.CellIndex).GetValueAsInt();
                     var src = new VA.ShapeSheet.SRC(s, r, c);
 
                     var va_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);

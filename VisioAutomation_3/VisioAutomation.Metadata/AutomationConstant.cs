@@ -5,6 +5,11 @@ namespace VisioAutomation.Metadata
         public string ID { get; set; }
         public string Enum { get; set; }
         public string Name { get; set; }
-        public int Value { get; set; }
+        public string Value { get; set; }
+
+        public int GetValueAsInt()
+        {
+            return int.Parse(this.Value);
+        }
     }
 }

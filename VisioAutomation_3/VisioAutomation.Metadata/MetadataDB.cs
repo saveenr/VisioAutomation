@@ -240,7 +240,7 @@ namespace VisioAutomation.Metadata
                     this._autoenums.Add(a_enum);
                 }
 
-                a_enum.Add(constant.Name,constant.Value);
+                a_enum.Add(constant.Name,constant.GetValueAsInt());
             }
         }
 
@@ -297,7 +297,7 @@ namespace VisioAutomation.Metadata
             foreach (var section in this.Sections)
             {
                 string secindex_name = section.Enum;
-                int secindex_int = this.GetAutomationConstantByName(secindex_name).Value;
+                int secindex_int = this.GetAutomationConstantByName(secindex_name).GetValueAsInt();
 
                 this._int_to_section[secindex_int] = section;
             }
@@ -319,7 +319,7 @@ namespace VisioAutomation.Metadata
                 c.ID = item.Field<string>("ID");
                 c.Enum = item.Field<string>("EnumName");
                 c.Name = item.Field<string>("ValueName");
-                c.Value = int.Parse(item.Field<string>("ValueInt"));
+                c.Value = item.Field<string>("ValueInt");
 
                 this._name_to_constants[c.Name] = c;
             }
