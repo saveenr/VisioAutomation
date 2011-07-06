@@ -61,10 +61,10 @@ namespace VisioAutomation.Metadata.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;
         ///&lt;table&gt;
-        ///  &lt;row ID=&quot;cell_action_sec_actions&quot; Name=&quot;Actions.Action&quot; NameCode=&quot;Actions_Action&quot; NameFormatString=&quot;Actions.{0}.Action&quot; Object=&quot;shape-action&quot; NameType=&quot;named&quot; DataType=&quot;String&quot; ContentType=&quot;Formula&quot; Unit=&quot;Formula&quot; SectionIndex=&quot;visSectionAction&quot; RowIndex=&quot;visRowAction&quot; MinVersion=&quot;Visio2007&quot; MaxVersion=&quot;&quot; CellIndex=&quot;visActionAction&quot; MSDN=&quot;http://msdn.microsoft.com/en-us/library/ms406240(loband).aspx&quot; /&gt;
-        ///  &lt;row ID=&quot;cell_begingroup_sec_actions&quot; Name=&quot;Actions [rest of string was truncated]&quot;;.
+        ///	&lt;row ID=&quot;cell_action_sec_actions&quot; Name=&quot;Actions.Action&quot; NameCode=&quot;Actions_Action&quot; NameFormatString=&quot;Actions.{0}.Action&quot; Object=&quot;shape-action&quot; NameType=&quot;named&quot; DataType=&quot;String&quot; ContentType=&quot;Formula&quot; Unit=&quot;Formula&quot; SectionIndex=&quot;visSectionAction&quot; RowIndex=&quot;visRowAction&quot; MinVersion=&quot;Visio2007&quot; CellIndex=&quot;visActionAction&quot; MSDN=&quot;http://msdn.microsoft.com/en-us/library/ms406240(loband).aspx&quot;/&gt;
+        ///	&lt;row ID=&quot;cell_begingroup_sec_actions&quot; Name=&quot;Actions [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string cells {
             get {

@@ -256,25 +256,28 @@ namespace TestVisioAutomation
             VA.Text.TextHelper.SetFormat( shape1, fmt1, 10 , 20);
             VA.Text.TextHelper.SetFormat( shape1, fmt1, 35, 45);
 
+            var fmt2 = new VA.Text.ParagraphFormatCells();
+            VA.Text.TextHelper.SetFormat(shape1, fmt2, 30, 40);
+
             var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
             var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
 
-            var secobj = db.GetSectionBySectionIndex((int) IVisio.VisSectionIndices.visSectionObject);
-            var secobj_cells = visio_2007_cells.Where(c => c.SectionIndex == secobj.Enum).Where(c => c.Object.Contains("shape")).ToList();
+            var data = new[]
+                           {
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionObject, obj="shape"},
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionCharacter, obj="shape"},
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionParagraph, obj="shape"},
+                               new {shape = page.PageSheet, sec=IVisio.VisSectionIndices.visSectionObject, obj="page"}
+                           };
 
-            var secchar = db.GetSectionBySectionIndex((int)IVisio.VisSectionIndices.visSectionCharacter);
-            var secchar_cells = visio_2007_cells.Where(c => c.SectionIndex == secchar.Enum).Where(c => c.Object.Contains("shape")).ToList();
 
-            var secpara = db.GetSectionBySectionIndex((int)IVisio.VisSectionIndices.visSectionParagraph);
-            var secpara_cells = visio_2007_cells.Where(c => c.SectionIndex == secpara.Enum).Where(c => c.Object.Contains("shape")).ToList();
-
-            var target_cells = secobj_cells.Concat(secchar_cells).Concat(secpara_cells).ToList();
-
-            var shapes = new[] {shape1, page.PageSheet};
-
-            foreach (var shape in shapes)
+            foreach (var datum in data)
             {
+                var shape = datum.shape;
+                var secobj = db.GetSectionBySectionIndex((int)datum.sec);
+                var target_cells = visio_2007_cells.Where(c => c.SectionIndex == secobj.Enum).Where(c => c.Object.Contains(datum.obj)).ToList();
+
                 foreach (var db_cell in target_cells)
                 {
                     var s = (short)db.GetAutomationConstantByName(db_cell.SectionIndex).GetValueAsInt();
@@ -285,7 +288,7 @@ namespace TestVisioAutomation
                     var va_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
                     if (va_cellname == null)
                     {
-                        Assert.Fail("could not find for " + db_cell.Name + " " + db.GetAutomationConstantByName(db_cell.SectionIndex).Name + " " + db.GetAutomationConstantByName(db_cell.RowIndex).Name
+                        Assert.Fail("could not find cell with name \"" + db_cell.Name + "\" " + db.GetAutomationConstantByName(db_cell.SectionIndex).Name + " " + db.GetAutomationConstantByName(db_cell.RowIndex).Name
                             + " " + db.GetAutomationConstantByName(db_cell.CellIndex).Name);
                     }
                     else
