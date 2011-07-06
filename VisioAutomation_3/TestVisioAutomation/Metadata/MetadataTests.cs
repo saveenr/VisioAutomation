@@ -207,7 +207,7 @@ namespace TestVisioAutomation
                 }
                 if (!cellindexname_to_int.ContainsKey(db_cell.CellIndex))
                 {
-                    Assert.Fail(db_cell.Name);
+                    Assert.Fail(db_cell.CellIndex + " " + db_cell.Name);
                 }
 
                 int s = sectioindexname_to_int[db_cell.SectionIndex];
