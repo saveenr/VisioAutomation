@@ -391,10 +391,13 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void WriteCode()
+        public void ExportMetadataCode()
         {
             var db = VA.Metadata.MetadataDB.Load();
-            db.WriteCode("D:\\code.txt");
+
+            string filename = VisioTestCommon.Helper.GetTestMethodOutputFilename(".txt");
+
+            db.ExportCode(filename);
 
         }
     }

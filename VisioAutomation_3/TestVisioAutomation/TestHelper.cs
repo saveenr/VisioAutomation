@@ -8,6 +8,7 @@ namespace TestVisioAutomation
     public class TestHelper
     {
         public readonly string OutputPath;
+
         public TestHelper(string name)
         {
             if (string.IsNullOrEmpty(name))
