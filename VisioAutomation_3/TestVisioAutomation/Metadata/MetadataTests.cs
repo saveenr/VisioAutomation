@@ -264,10 +264,14 @@ namespace TestVisioAutomation
             cp1.Y = "Height*0.5";
 
             VA.Connections.ConnectionPointHelper.AddConnectionPoint(shape1, cp1);
+            VA.Controls.ControlHelper.AddControl(shape1);
 
+            
             var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
             var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
+
+
 
             var data = new[]
                            {
@@ -275,7 +279,8 @@ namespace TestVisioAutomation
                                new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionCharacter, obj="shape"},
                                new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionParagraph, obj="shape"},
                                new {shape = page.PageSheet, sec=IVisio.VisSectionIndices.visSectionObject, obj="page"},
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionConnectionPts, obj="shape"}
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionConnectionPts, obj="shape"},
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionControls, obj="shape"}
                            };
 
 

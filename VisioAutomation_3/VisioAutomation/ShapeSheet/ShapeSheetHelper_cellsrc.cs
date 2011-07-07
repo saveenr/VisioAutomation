@@ -28,10 +28,42 @@ namespace VisioAutomation.ShapeSheet
                     {
                         return TryGetNameFromSRC_ConnectionPoints(src);
                     }
+                case ((short)IVisio.VisSectionIndices.visSectionControls):
+                    {
+                        return TryGetNameFromSRC_Controls(src);
+                    }
                 default:
                     break;
             }
             return null;
+        }
+
+        private static string TryGetNameFromSRC_Controls(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowControl):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visCtlGlue): return "Controls.CanGlue";
+                            case ((short)IVisio.VisCellIndices.visCtlTip): return "Controls.Tip";
+                            case ((short)IVisio.VisCellIndices.visCtlX): return "Controls.X";
+                            case ((short)IVisio.VisCellIndices.visCtlXCon): return "Controls.XCon";
+                            case ((short)IVisio.VisCellIndices.visCtlXDyn): return "Controls.XDyn";
+                            case ((short)IVisio.VisCellIndices.visCtlY): return "Controls.Y";
+                            case ((short)IVisio.VisCellIndices.visCtlYCon): return "Controls.YCon";
+                            case ((short)IVisio.VisCellIndices.visCtlYDyn): return "Controls.YDyn";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
         }
 
         private static string TryGetNameFromSRC_Section_Object(VA.ShapeSheet.SRC src)
