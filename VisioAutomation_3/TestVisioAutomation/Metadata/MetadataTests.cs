@@ -265,7 +265,7 @@ namespace TestVisioAutomation
 
             VA.Connections.ConnectionPointHelper.AddConnectionPoint(shape1, cp1);
             VA.Controls.ControlHelper.AddControl(shape1);
-
+            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1,"p1", "V1");
             
             var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
@@ -280,7 +280,8 @@ namespace TestVisioAutomation
                                new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionParagraph, obj="shape"},
                                new {shape = page.PageSheet, sec=IVisio.VisSectionIndices.visSectionObject, obj="page"},
                                new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionConnectionPts, obj="shape"},
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionControls, obj="shape"}
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionControls, obj="shape"},
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionProp, obj="shape"}
                            };
 
 

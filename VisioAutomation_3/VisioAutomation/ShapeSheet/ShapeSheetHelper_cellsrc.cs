@@ -32,11 +32,46 @@ namespace VisioAutomation.ShapeSheet
                     {
                         return TryGetNameFromSRC_Controls(src);
                     }
+                case ((short)IVisio.VisSectionIndices.visSectionProp):
+                    {
+                        return TryGetNameFromSRC_Props(src);
+                    }
                 default:
                     break;
             }
             return null;
         }
+
+        private static string TryGetNameFromSRC_Props(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowProp):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visCustPropsAsk): return "Prop.Ask";
+                            case ((short)IVisio.VisCellIndices.visCustPropsCalendar): return "Prop.Calendar";
+                            case ((short)IVisio.VisCellIndices.visCustPropsFormat): return "Prop.Format";
+                            case ((short)IVisio.VisCellIndices.visCustPropsInvis): return "Prop.Invis";
+                            case ((short)IVisio.VisCellIndices.visCustPropsLabel): return "Prop.Label";
+                            case ((short)IVisio.VisCellIndices.visCustPropsLangID): return "Prop.LangID";
+                            case ((short)IVisio.VisCellIndices.visCustPropsPrompt): return "Prop.Prompt";
+                            case ((short)IVisio.VisCellIndices.visCustPropsSortKey): return "Prop.SortKey";
+                            case ((short)IVisio.VisCellIndices.visCustPropsValue): return "Prop.Value";
+                            case ((short)IVisio.VisCellIndices.visCustPropsType): return "Prop.Type";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
 
         private static string TryGetNameFromSRC_Controls(VA.ShapeSheet.SRC src)
         {
