@@ -317,10 +317,11 @@ namespace TestVisioAutomation
                     {
                         if (r != (short)IVisio.VisRowIndices.visRow1stHyperlink)
                         {
-
-                            string msg = string.Format("Names don't match. DB Cell Name =\"{0}\" but Actual Cell Name = \"{1}\"",
+                            string msg0 = string.Format("Names don't match. DB Cell Name =\"{0}\" but Actual Cell Name = \"{1}\"",
                                                        db_cell.Name, piacellname);
-                            Assert.Fail(msg);
+
+                            Assert.Fail(msg0);
+
                         }
                     }
                 }
@@ -387,6 +388,14 @@ namespace TestVisioAutomation
             {
                 Assert.Fail(string.Format("Duplicated {0}", dupes.Count));
             }
+        }
+
+        [TestMethod]
+        public void WriteCode()
+        {
+            var db = VA.Metadata.MetadataDB.Load();
+            db.WriteCode("D:\\code.txt");
+
         }
     }
 }

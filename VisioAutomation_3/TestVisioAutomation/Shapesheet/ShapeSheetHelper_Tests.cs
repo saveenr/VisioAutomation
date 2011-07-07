@@ -64,6 +64,7 @@ namespace TestVisioAutomation
                 VA.Text.TextHelper.SetFormat(shape1,fmt2,1,10);
                 VA.Text.TextHelper.SetFormat(shape1, fmt2,20, 30);
 
+                var hlink1=shape1.Hyperlinks.Add();
                 var stops = new[]
                                 {
                                     new VA.Text.TabStop(0.1, VA.Text.TabStopAlignment.Left),

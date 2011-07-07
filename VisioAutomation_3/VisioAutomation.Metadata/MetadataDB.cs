@@ -203,5 +203,58 @@ namespace VisioAutomation.Metadata
         {
             get { return this._cellvals; }
         }
+
+        public void WriteCode(string filename)
+        {
+            var fp = System.IO.File.CreateText(filename);
+            var types = new[]
+                            {
+                                new { type=typeof (VA.Metadata.Cell), col=this.Cells.Cast<object>().ToList()},
+                                new { type=typeof (VA.Metadata.CellValue), col=this.CellValues.Cast<object>().ToList()},
+                                new { type=typeof (VA.Metadata.Section), col=this.Sections.Cast<object>().ToList()},
+                                new { type=typeof (VA.Metadata.AutomationConstant), col=this.Constants.Cast<object>().ToList()}
+                            };
+
+            foreach (var t in types)
+            {
+                fp.WriteLine();
+                fp.WriteLine();
+                fp.WriteLine();
+                fp.WriteLine("// " +t.type.FullName );
+                fp.WriteLine();
+                fp.WriteLine("var items = new List<{0}>();",t.type.FullName);
+                var cell_props = this.get_props(t.type);
+                foreach (var cell in t.col)
+                {
+                    fp.Write("items.Add(");
+                    var x = get_ctor(t.type, cell, cell_props);
+                    fp.Write(x);
+                    fp.Write(");");
+                    fp.Write("\r\n");
+                    fp.Flush();
+                }
+                
+            }
+
+            fp.Close();
+        }
+
+        private static string get_ctor(Type itemType, object cell, List<PropertyInfo> cell_props)
+        {
+            var names = cell_props.Select(p => p.Name).ToList();
+            var values = cell_props.Select(p => p.GetValue(cell, null) ?? "").ToList();
+            var pairs = Enumerable.Range(0, names.Count).Select(i => names[i] + "=\"" + values[i] + "\"").ToArray();
+            string ctor_string = string.Format("new {0}({1})", itemType.FullName, string.Join(", ", pairs));
+            return ctor_string;
+        }
+
+        public List<System.Reflection.PropertyInfo> get_props(System.Type item_type)
+        {
+            var bf = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance;;
+            var properties = item_type.GetProperties(bf);
+            var target_props = properties.Where(p => p.CanRead).Where(p => p.PropertyType == typeof(string)).ToList();
+            return target_props;
+
+        }
     }
 }
