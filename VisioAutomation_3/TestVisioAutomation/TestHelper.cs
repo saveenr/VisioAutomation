@@ -81,36 +81,6 @@ namespace TestVisioAutomation
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(y, p.Height, delta);
         }
 
-        public static void SetFormulasU<T>(
-            IVisio.Shape shape,
-            IEnumerable<T> items,
-            System.Func<T, bool> hasformula,
-            System.Func<T, VA.ShapeSheet.SRC> getsrc,
-            System.Func<T, string> getformula,
-            IVisio.VisGetSetArgs flags)
-        {
-            if (items == null)
-            {
-                throw new System.ArgumentNullException("items");
-            }
-
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
-            update.BlastGuards = ((short) flags & (short) IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
-            update.TestCircular = ((short) flags & (short) IVisio.VisGetSetArgs.visSetTestCircular) != 0;
-
-            foreach (var item in items.Where(hasformula))
-            {
-                update.SetFormula(getsrc(item), getformula(item));
-            }
-
-            update.Execute(shape);
-        }
-
         public static VA.ShapeSheet.Query.CellQuery BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
         {
             var query = new VA.ShapeSheet.Query.CellQuery();
