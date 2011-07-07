@@ -32,7 +32,7 @@ namespace TestVisioAutomation
 
             var allcells = db.Cells;
 
-            var dupe_cell_names = get_dupes(allcells.Select(c => c.Name));
+            var dupe_cell_names = TestHelper.GetDuplicates(allcells.Select(c => c.Name));
             Assert.IsTrue(dupe_cell_names.Contains("Tabs"));
 
             Assert.AreEqual(346, allcells.Count);
@@ -40,7 +40,7 @@ namespace TestVisioAutomation
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
             Assert.AreEqual(343, visio_2007_cells.Count());
 
-            no_dupes(allcells.Select(c => c.ID));
+            TestHelper.AssertNoDuplicates(allcells.Select(c => c.ID));
         }
 
         [TestMethod]
@@ -86,7 +86,7 @@ namespace TestVisioAutomation
 
             var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
 
-            no_dupes(visio_2007_cells.Select(i=>i.NameCode));
+            TestHelper.AssertNoDuplicates(visio_2007_cells.Select(i => i.NameCode));
 
             var db_codename_to_cell = visio_2007_cells.ToDictionary(i => i.NameCode, i => i);
 
@@ -147,7 +147,7 @@ namespace TestVisioAutomation
 
             foreach (var pia_enum in pia_enums)
             {
-                var pia_enum_values = GetNameToValueMap<int>(pia_enum);
+                var pia_enum_values = TestHelper.EnumToDictionary<int>(pia_enum);
                 var db_enum = db.GetAutomationEnumByName(pia_enum.Name);
                 foreach (string pia_value_name in pia_enum_values.Keys)
                 {
@@ -164,7 +164,7 @@ namespace TestVisioAutomation
             foreach (var md_enum  in db.AutomationEnums)
             {
                 var pia_type = name_to_pia_type[md_enum.Name];
-                var pia_dic = GetNameToValueMap<int>(pia_type);
+                var pia_dic = TestHelper.EnumToDictionary<int>(pia_type);
                 foreach (string md_value_name in md_enum.Items.Select(i=>i.Name))
                 {
 
@@ -192,9 +192,9 @@ namespace TestVisioAutomation
                 
             }
 
-            var sectioindexname_to_int = GetNameToValueMap<int>(typeof (IVisio.VisSectionIndices));
-            var rowindexname_to_int = GetNameToValueMap<int>(typeof(IVisio.VisRowIndices));
-            var cellindexname_to_int = GetNameToValueMap<int>(typeof(IVisio.VisCellIndices));
+            var sectioindexname_to_int = TestHelper.EnumToDictionary<int>(typeof(IVisio.VisSectionIndices));
+            var rowindexname_to_int = TestHelper.EnumToDictionary<int>(typeof(IVisio.VisRowIndices));
+            var cellindexname_to_int = TestHelper.EnumToDictionary<int>(typeof(IVisio.VisCellIndices));
             foreach (var db_cell in visio_2007_cells)
             {
                 if (!sectioindexname_to_int.ContainsKey(db_cell.SectionIndex))
@@ -331,63 +331,6 @@ namespace TestVisioAutomation
             /// end
             app.Quit(true);
 
-        }
-
-        public Dictionary<string,T> GetNameToValueMap<T>( System.Type t)
-        {
-            var dic = new Dictionary<string, T>();
-            string[] names = System.Enum.GetNames(t);
-            System.Array avalues = System.Enum.GetValues(t);
-            for (int i = 0; i < avalues.Length; i++)
-            {
-                
-                dic[names[i]] = (T)avalues.GetValue(i);
-            }
-
-            return dic;
-
-        }
-        public List<T> get_dupes<T>(IEnumerable<T> items)
-        {
-            var set = new HashSet<T>();
-            var dupes = new List<T>();
-
-            foreach (var item in items)
-            {
-                if (set.Contains(item))
-                {
-                    dupes.Add(item);
-                }
-                else
-                {
-                    set.Add(item);
-                }
-            }
-
-            return dupes;
-        }
-
-        public void no_dupes<T>(IEnumerable<T> items)
-        {
-            var set = new HashSet<T>();
-            var dupes = new List<T>();
-
-            foreach (var item in items)
-            {
-                if (set.Contains(item))
-                {
-                    dupes.Add(item);
-                }
-                else
-                {
-                    set.Add(item);
-                }
-            }
-
-            if (dupes.Count > 0)
-            {
-                Assert.Fail(string.Format("Duplicated {0}", dupes.Count));
-            }
         }
 
         [TestMethod]

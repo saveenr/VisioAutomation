@@ -97,5 +97,63 @@ namespace TestVisioAutomation
             shapecells.Apply(update, shape.ID16);
             update.Execute(page);
         }
+
+        public static Dictionary<string, T> EnumToDictionary<T>(System.Type t)
+        {
+            var dic = new Dictionary<string, T>();
+            string[] names = System.Enum.GetNames(t);
+            System.Array avalues = System.Enum.GetValues(t);
+            for (int i = 0; i < avalues.Length; i++)
+            {
+
+                dic[names[i]] = (T)avalues.GetValue(i);
+            }
+
+            return dic;
+
+        }
+        public static List<T> GetDuplicates<T>(IEnumerable<T> items)
+        {
+            var set = new HashSet<T>();
+            var dupes = new List<T>();
+
+            foreach (var item in items)
+            {
+                if (set.Contains(item))
+                {
+                    dupes.Add(item);
+                }
+                else
+                {
+                    set.Add(item);
+                }
+            }
+
+            return dupes;
+        }
+
+        public static void AssertNoDuplicates<T>(IEnumerable<T> items)
+        {
+            var set = new HashSet<T>();
+            var dupes = new List<T>();
+
+            foreach (var item in items)
+            {
+                if (set.Contains(item))
+                {
+                    dupes.Add(item);
+                }
+                else
+                {
+                    set.Add(item);
+                }
+            }
+
+            if (dupes.Count > 0)
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail(string.Format("Duplicated {0}", dupes.Count));
+            }
+        }
+
     }
 }
