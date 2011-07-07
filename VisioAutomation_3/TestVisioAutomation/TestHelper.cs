@@ -19,7 +19,6 @@ namespace TestVisioAutomation
             this.OutputPath = GetOutputPathEx(name);
 
             PrepareOutputPath();
-
         }
 
         public string GetTestMethodOutputFilename(string ext)
@@ -70,6 +69,63 @@ namespace TestVisioAutomation
             return GetMethodName(2) + ext;
         }
 
+        public static void AreEqual(double x, double y, VA.Drawing.Point p, double delta)
+        {
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(x, p.X, delta);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(y, p.Y, delta);
+        }
+
+        public static void AreEqual(double x, double y, VA.Drawing.Size p, double delta)
+        {
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(x, p.Width, delta);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(y, p.Height, delta);
+        }
+
+        public static void SetFormulasU<T>(
+            IVisio.Shape shape,
+            IEnumerable<T> items,
+            System.Func<T, bool> hasformula,
+            System.Func<T, VA.ShapeSheet.SRC> getsrc,
+            System.Func<T, string> getformula,
+            IVisio.VisGetSetArgs flags)
+        {
+            if (items == null)
+            {
+                throw new System.ArgumentNullException("items");
+            }
+
+            if (shape == null)
+            {
+                throw new System.ArgumentNullException("shape");
+            }
+
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            update.BlastGuards = ((short) flags & (short) IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
+            update.TestCircular = ((short) flags & (short) IVisio.VisGetSetArgs.visSetTestCircular) != 0;
+
+            foreach (var item in items.Where(hasformula))
+            {
+                update.SetFormula(getsrc(item), getformula(item));
+            }
+
+            update.Execute(shape);
+        }
+
+        public static VA.ShapeSheet.Query.CellQuery BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
+        {
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            foreach (var src in srcs)
+            {
+                query.AddColumn(src);
+            }
+            return query;
+        }
+
+        public static void setformulas(VA.DOM.ShapeCells shapecells, IVisio.Page page, IVisio.Shape shape)
+        {
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            shapecells.Apply(update, shape.ID16);
+            update.Execute(page);
+        }
     }
 }
-

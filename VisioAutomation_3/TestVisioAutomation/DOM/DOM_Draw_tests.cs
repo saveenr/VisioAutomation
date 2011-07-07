@@ -54,7 +54,7 @@ namespace TestVisioAutomation
             doc1.Render(app.ActivePage);
 
             Assert.AreEqual(1, visdoc.Pages.Count);
-            TestUtil.AreEqual(5, 5, app.ActivePage.GetSize(), 0.005);
+            TestHelper.AreEqual(5, 5, app.ActivePage.GetSize(), 0.005);
 
             app.ActiveDocument.Close(true);
         }

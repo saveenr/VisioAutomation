@@ -22,7 +22,7 @@ namespace TestVisioAutomation
 
             t.Render(page);
 
-            TestUtil.AreEqual(3.0, 1.5, page.GetSize(), 0.05);
+            TestHelper.AreEqual(3.0, 1.5, page.GetSize(), 0.05);
 
             doc.Close(true);
 
@@ -59,7 +59,7 @@ namespace TestVisioAutomation
 
             t.Render(page);
 
-            TestUtil.AreEqual(8.25, 6.0, page.GetSize(), 0.05);
+            TestHelper.AreEqual(8.25, 6.0, page.GetSize(), 0.05);
 
             Assert.AreEqual("Root", t.Root.VisioShape.Text);
             Assert.AreEqual("A", na.VisioShape.Text);
@@ -109,7 +109,7 @@ namespace TestVisioAutomation
 
             t.Render(page);
 
-            TestUtil.AreEqual(5.25, 8.0, page.GetSize(), 0.05);
+            TestHelper.AreEqual(5.25, 8.0, page.GetSize(), 0.05);
 
             Assert.AreEqual("Root", t.Root.VisioShape.Text);
             Assert.AreEqual("A", na.VisioShape.Text);

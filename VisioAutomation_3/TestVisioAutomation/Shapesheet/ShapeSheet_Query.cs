@@ -373,7 +373,7 @@ namespace TestVisioAutomation
             // now retrieve the formulas with GetFormulas
 
 
-            var query = VisioTestCommon.BuildCellQuery(new[] { cell_fg, cell_bg, cell_pat });
+            var query = TestHelper.BuildCellQuery(new[] { cell_fg, cell_bg, cell_pat });
             var formulas = query.GetFormulas(s1);
 
             // now verify that the formulas were actually set

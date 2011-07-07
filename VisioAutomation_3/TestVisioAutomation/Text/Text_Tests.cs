@@ -312,7 +312,7 @@ namespace TestVisioAutomation
 
             var c0 = new VA.DOM.ShapeCells();
             c0.CharSize = 0.6;
-            VisioTestCommon.setformulas(c0, page1, s1);
+            TestHelper.setformulas(c0, page1, s1);
 
             var c1 = new VA.Text.CharacterFormatCells();
             c1.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
