@@ -241,7 +241,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void CheckRealCellNames()
+        public void CheckDBCellNames()
         {
             var app = new IVisio.Application();
             var docs = app.Documents;
@@ -259,6 +259,12 @@ namespace TestVisioAutomation
             var fmt2 = new VA.Text.ParagraphFormatCells();
             VA.Text.TextHelper.SetFormat(shape1, fmt2, 30, 40);
 
+            var cp1 = new VA.Connections.ConnectionPointCells();
+            cp1.X = "Width";
+            cp1.Y = "Height*0.5";
+
+            VA.Connections.ConnectionPointHelper.AddConnectionPoint(shape1, cp1);
+
             var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
             var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
@@ -268,7 +274,8 @@ namespace TestVisioAutomation
                                new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionObject, obj="shape"},
                                new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionCharacter, obj="shape"},
                                new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionParagraph, obj="shape"},
-                               new {shape = page.PageSheet, sec=IVisio.VisSectionIndices.visSectionObject, obj="page"}
+                               new {shape = page.PageSheet, sec=IVisio.VisSectionIndices.visSectionObject, obj="page"},
+                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionConnectionPts, obj="shape"}
                            };
 
 
@@ -280,27 +287,40 @@ namespace TestVisioAutomation
 
                 foreach (var db_cell in target_cells)
                 {
-                    var s = (short)db.GetAutomationConstantByName(db_cell.SectionIndex).GetValueAsInt();
-                    var r = (short)db.GetAutomationConstantByName(db_cell.RowIndex).GetValueAsInt();
-                    var c = (short)db.GetAutomationConstantByName(db_cell.CellIndex).GetValueAsInt();
+                    var md_section = db.GetAutomationConstantByName(db_cell.SectionIndex);
+                    var md_row = db.GetAutomationConstantByName(db_cell.RowIndex);
+                    var md_cell = db.GetAutomationConstantByName(db_cell.CellIndex);
+
+                    var s = (short)md_section.GetValueAsInt();
+                    var r = (short)md_row.GetValueAsInt();
+                    var c = (short)md_cell.GetValueAsInt();
                     var src = new VA.ShapeSheet.SRC(s, r, c);
 
+                    // Verify that the VisioAutomation library can find this cell
                     var va_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
                     if (va_cellname == null)
                     {
-                        Assert.Fail("could not find cell with name \"" + db_cell.Name + "\" " + db.GetAutomationConstantByName(db_cell.SectionIndex).Name + " " + db.GetAutomationConstantByName(db_cell.RowIndex).Name
-                            + " " + db.GetAutomationConstantByName(db_cell.CellIndex).Name);
+                        string msg = string.Format(@" DB Cell not found in VisioAutomation: ""{0}"" ({1},{2},{3}) ",
+                                                   db_cell.Name,
+                                                   md_section.Name,
+                                                   md_row.Name,
+                                                   md_cell.Name
+                            );
+                        Assert.Fail(msg);
+
                     }
-                    else
+
+                    // Verify that the Visio application can find this cell naame
+                    var pia_cell = shape.CellsSRC[s, r, c];
+                    string piacellname = pia_cell.Name;
+                    if (db_cell.Name != piacellname)
                     {
-                        var pia_cell = shape.CellsSRC[s, r, c];
-                        string piacellname = pia_cell.Name;
-                        if (db_cell.Name != piacellname)
+                        if (r != (short)IVisio.VisRowIndices.visRow1stHyperlink)
                         {
-                            if (r != (short)IVisio.VisRowIndices.visRow1stHyperlink)
-                            {
-                                Assert.Fail("Names don't match db=\"" + db_cell.Name + "\" actual cell = \"" + piacellname + "\"");
-                            }
+
+                            string msg = string.Format("Names don't match. DB Cell Name =\"{0}\" but Actual Cell Name = \"{1}\"",
+                                                       db_cell.Name, piacellname);
+                            Assert.Fail(msg);
                         }
                     }
                 }

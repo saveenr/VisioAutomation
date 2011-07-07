@@ -24,6 +24,10 @@ namespace VisioAutomation.ShapeSheet
                     {
                         return TryGetNameFromSRC_Paragraph_Object(src);
                     }
+                case ((short)IVisio.VisSectionIndices.visSectionConnectionPts):
+                    {
+                        return TryGetNameFromSRC_ConnectionPoints(src);
+                    }
                 default:
                     break;
             }
@@ -475,6 +479,36 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visCharacterStyle): return "Char.Style";
                             case ((short)IVisio.VisCellIndices.visCharacterUseVertical): return "Char.UseVertical";
                             case ((short)IVisio.VisCellIndices.visCharacterPerpendicular): return "Char.Perpendicular";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+        private static string TryGetNameFromSRC_ConnectionPoints(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowConnectionPts):
+                    {
+                        switch (src.Cell)
+                        {
+                            //case ((short)IVisio.VisCellIndices.visCnnctA): return "Connections.A";
+                            //case ((short)IVisio.VisCellIndices.visCnnctAutoGen): return "Connections.AutoGen";
+                            //case ((short)IVisio.VisCellIndices.visCnnctB): return "Connections.B";
+                            //case ((short)IVisio.VisCellIndices.visCnnctC): return "Connections.C";
+                            case ((short)IVisio.VisCellIndices.visCnnctD): return "Connections.D";
+                            case ((short)IVisio.VisCellIndices.visCnnctDirX): return "Connections.DirX";
+                            case ((short)IVisio.VisCellIndices.visCnnctDirY): return "Connections.DirY";
+                            case ((short)IVisio.VisCellIndices.visCnnctType): return "Connections.Type";
+                            case ((short)IVisio.VisCellIndices.visCnnctX): return "Connections.X";
+                            case ((short)IVisio.VisCellIndices.visCnnctY): return "Connections.Y";
                             default:
                                 break;
                         }
