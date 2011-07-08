@@ -13,9 +13,9 @@ namespace TestVisioAutomation
 
     public class CellInfo
     {
-        public string RealName;
+        public string NameVisioInterop;
         public VisioAutomation.ShapeSheet.SRC SRC;
-        public string XName;
+        public string NameFromVisioAutomation;
         public VisioAutomation.ShapeSheet.SRC XSRC;
         public string Formula;
         public double Result;

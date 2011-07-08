@@ -195,7 +195,6 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC Comment = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visComment);
         public readonly static SRC DropOnPageScale = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visObjDropOnPageScale);
         public readonly static SRC DynFeedback = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visDynFeedback);
-        public readonly static SRC HideText = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visHideText);
         public readonly static SRC IsDropSource = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visDropSource);
         public readonly static SRC LangID = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visObjLangID);
         public readonly static SRC LocalizeMerge = new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visObjLocalizeMerge);
@@ -430,7 +429,7 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC EnableFillProps = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesFill);
         public readonly static SRC EnableLineProps = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesLine);
         public readonly static SRC EnableTextProps = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesText);
-        public readonly static SRC HideForApply = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleHidden);
+        public readonly static SRC HideText = new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleHidden);
 
 
         //tabs

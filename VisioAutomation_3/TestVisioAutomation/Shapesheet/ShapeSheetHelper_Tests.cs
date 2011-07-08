@@ -23,7 +23,7 @@ namespace TestVisioAutomation
         }
 
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
-        public void CheckCellNames()
+        public void CheckAutomationCellNamesAgainstVA()
         {
             var app = GetVisioApplication();
             var documents = app.Documents;
@@ -76,6 +76,8 @@ namespace TestVisioAutomation
 
             System.Threading.Thread.Sleep(1000);
 
+            var failures = new List<string>();
+
             foreach (var md_sec in mdx.Sections)
             {
                 short sec_index = (short) mdx.GetAutomationConstantByName(md_sec.Enum).GetValueAsInt();
@@ -83,8 +85,21 @@ namespace TestVisioAutomation
                 var cells = mdx.Cells.Where(c => c.SectionIndex == md_sec.Enum).Where( c=>c.Object.Contains("shape")).ToList();
                 foreach (var cellinfo in EnumCellsInSection(shape1, sec_index))
                 {
-                    
+
+                    if (cellinfo.NameVisioInterop != cellinfo.NameFromVisioAutomation)
+                    {
+                        string msg = string.Format(" {0}!={1}  {2}", cellinfo.NameVisioInterop,
+                                                   cellinfo.NameFromVisioAutomation, cellinfo.SRC.ToString());
+                        failures.Add(msg);
+                       
+                    }
                 }
+            }
+
+            if (failures.Count > 0)
+            {
+                string s = string.Join("\r\n", failures.ToArray());
+                //Assert.Fail(s);
             }
 
             doc1.Close(true);
@@ -114,17 +129,23 @@ namespace TestVisioAutomation
                     var cell_src = new VA.ShapeSheet.SRC(cell.Section, cell.Row, cell.Column);
 
                     var xcellsrc = VA.ShapeSheet.ShapeSheetHelper.TryGetSRCFromName(cell_name);
+
+                    var ci = new CellInfo();
+
                     if (!xcellsrc.HasValue)
                     {
                         xcellsrc = new VA.ShapeSheet.SRC(-1, -1, -1);
+                        ci.NameFromVisioAutomation = "TBD";
+                    }
+                    else
+                    {
+                        ci.NameFromVisioAutomation = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(cell_src);
                     }
 
 
-                    var ci = new CellInfo();
-                    ci.RealName = cell_name;
+                    ci.NameVisioInterop = cell_name;
                     ci.SRC = cell_src;
 
-                    ci.XName = "TBD";
                     ci.XSRC = xcellsrc.Value;
 
                     ci.Formula = cell.FormulaU;

@@ -35,10 +35,10 @@ namespace TestVisioAutomation
             var dupe_cell_names = TestHelper.GetDuplicates(allcells.Select(c => c.Name));
             Assert.IsTrue(dupe_cell_names.Contains("Tabs"));
 
-            Assert.AreEqual(346, allcells.Count);
+            Assert.AreEqual(345, allcells.Count);
 
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
-            Assert.AreEqual(343, visio_2007_cells.Count());
+            Assert.AreEqual(342, visio_2007_cells.Count());
 
             TestHelper.AssertNoDuplicates(allcells.Select(c => c.ID));
         }
