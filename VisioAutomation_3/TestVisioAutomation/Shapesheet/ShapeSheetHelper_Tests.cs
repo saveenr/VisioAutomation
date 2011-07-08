@@ -79,14 +79,14 @@ namespace TestVisioAutomation
 
             System.Threading.Thread.Sleep(1000);
 
-            foreach (var sectiondef in md.CommonSections)
+            foreach (var md_sec in mdx.Sections)
             {
-                Debug.WriteLine(sectiondef.DisplayName);
-                Debug.WriteLine("--------------------");
-                foreach (var cellinfo in EnumCellsInSection(shape1, sectiondef.EnumValue))
+                short sec_index = (short) mdx.GetAutomationConstantByName(md_sec.Enum).GetValueAsInt();
+                Debug.WriteLine(md_sec.DisplayName);
+                var cells = mdx.Cells.Where(c => c.SectionIndex == md_sec.Enum).Where( c=>c.Object.Contains("shape")).ToList();
+                foreach (var cellinfo in EnumCellsInSection(shape1, sec_index))
                 {
-                    Debug.WriteLine("{0} {1} : {2} {3} // (\"{4}\", {5})", cellinfo.RealName, cellinfo.SRC.ToString(), cellinfo.XName, cellinfo.XSRC.ToString(), cellinfo.Formula, cellinfo.Result);
-
+                    
                 }
             }
 
