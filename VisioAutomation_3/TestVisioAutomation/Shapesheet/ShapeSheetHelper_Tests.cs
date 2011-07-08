@@ -13,6 +13,8 @@ namespace TestVisioAutomation
     {
 
         private static ShapeSheetMetadata md = new TestVisioAutomation.ShapeSheetMetadata();
+        private static VA.Metadata.MetadataDB mdx = VA.Metadata.MetadataDB.Load();
+
 
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void SpotCheck1()
@@ -89,6 +91,7 @@ namespace TestVisioAutomation
             }
 
             doc1.Close(true);
+            app.Quit(true);
         }
 
 
