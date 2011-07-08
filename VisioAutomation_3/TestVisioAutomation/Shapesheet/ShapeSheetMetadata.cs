@@ -11,7 +11,6 @@ namespace TestVisioAutomation
 {
     public class ShapeSheetMetadata
     {
-        public Rows Rows = new Rows();
         public Sections Sections = new Sections();
 
         public Dictionary<short, string> SectionToName;
@@ -50,20 +49,6 @@ namespace TestVisioAutomation
         public List<SectionDef> CommonSections;
     }
 
-    public class RowDef
-    {
-        public readonly string DisplayName;
-        public readonly string EnumName;
-        public readonly short EnumValue;
-
-        public RowDef(string displayname, string enumname, IVisio.VisRowIndices enumvalue)
-        {
-            this.DisplayName = displayname;
-            this.EnumName = enumname;
-            this.EnumValue = (short) enumvalue;
-        }
-    }
-
     public class SectionDef
     {
         public readonly string DisplayName;
@@ -89,57 +74,6 @@ namespace TestVisioAutomation
 
     }
 
-    public class Rows
-    {
-            public RowDef Doc = new RowDef( "Doc", "visRowDoc" ,ROW.visRowDoc );
-            public RowDef Event =new RowDef( "Event", "visRowEvent" ,ROW.visRowEvent );
-            public RowDef Foreign =new RowDef( "Foreign", "visRowForeign" ,ROW.visRowForeign );
-            public RowDef Fill = new RowDef( "Fill", "visRowFill" ,ROW.visRowFill );
-            public RowDef Misc = new RowDef( "Misc", "visRowMisc" ,ROW.visRowMisc );
-            public RowDef Group = new RowDef( "Group", "visRowGroup" ,ROW.visRowGroup );
-            public RowDef Image = new RowDef( "Image", "visRowImage" ,ROW.visRowImage );
-            public RowDef Line = new RowDef( "Line", "visRowLine" ,ROW.visRowLine );
-            public RowDef XForm1D = new RowDef( "XForm1D", "visRowXForm1D" ,ROW.visRowXForm1D );
-            public RowDef PageLayout = new RowDef( "PageLayout", "visRowPageLayout" ,ROW.visRowPageLayout );
-            public RowDef PrintProperties = new RowDef( "PrintProperties", "visRowPrintProperties" ,ROW.visRowPrintProperties );
-            public RowDef Page = new RowDef( "Page", "visRowPage" ,ROW.visRowPage );
-            public RowDef Paragraph = new RowDef( "Paragraph", "visRowParagraph" ,ROW.visRowParagraph );
-            public RowDef Lock = new RowDef( "Lock", "visRowLock" ,ROW.visRowLock );
-            public RowDef RulerGrid = new RowDef( "RulerGrid", "visRowRulerGrid" ,ROW.visRowRulerGrid );
-            public RowDef XFormOut = new RowDef( "XFormOut", "visRowXFormOut" ,ROW.visRowXFormOut );
-            public RowDef TextXForm = new RowDef( "TextXForm", "visRowTextXForm" ,ROW.visRowTextXForm );
-            public RowDef Text = new RowDef( "Text", "visRowText" ,ROW.visRowText );
-            public RowDef Style = new RowDef( "Style", "visRowStyle" ,ROW.visRowStyle );
-            public RowDef ShapeLayout = new RowDef("ShapeLayout", "visRowShapeLayout", ROW.visRowShapeLayout);
-
-            public IEnumerable<RowDef> Items
-            {
-                get
-                {
-                    yield return this.Doc;
-                    yield return this.Event;
-                    yield return this.Foreign;
-                    yield return this.Fill;
-                    yield return this.Misc;
-                    yield return this.Group;
-                    yield return this.Image;
-                    yield return this.Line;
-                    yield return this.XForm1D;
-                    yield return this.PageLayout;
-                    yield return this.PrintProperties;
-                    yield return this.Page;
-                    yield return this.Paragraph;
-                    yield return this.Lock;
-                    yield return this.RulerGrid;
-                    yield return this.XFormOut;
-                    yield return this.TextXForm;
-                    yield return this.Text;
-                    yield return this.Style;
-                    yield return this.ShapeLayout;                
-                }
-            }
-            
-    }
 
     public class Sections
     {
