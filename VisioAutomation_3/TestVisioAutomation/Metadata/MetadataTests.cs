@@ -241,58 +241,14 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void CheckDBCellNames()
+        public void CheckDBCellsAgainstVACode()
         {
-            var app = new IVisio.Application();
-            var docs = app.Documents;
-            var doc = docs.Add("");
-            var page = doc.Pages[1];
-
-            var shape1 = page.DrawRectangle(2,2 ,5,6);
-            shape1.Text = "0123456789\n" + "0123456789\n" + "0123456789\n" + "0123456789\n" + "0123456789\n" + "0123456789\n" +
-                          "0123456789\n";
-            var fmt1 = new VA.Text.CharacterFormatCells();
-            fmt1.Color = 3;
-            VA.Text.TextHelper.SetFormat( shape1, fmt1, 10 , 20);
-            VA.Text.TextHelper.SetFormat( shape1, fmt1, 35, 45);
-
-            var fmt2 = new VA.Text.ParagraphFormatCells();
-            VA.Text.TextHelper.SetFormat(shape1, fmt2, 30, 40);
-
-            var cp1 = new VA.Connections.ConnectionPointCells();
-            cp1.X = "Width";
-            cp1.Y = "Height*0.5";
-
-            VA.Connections.ConnectionPointHelper.AddConnectionPoint(shape1, cp1);
-            VA.Controls.ControlHelper.AddControl(shape1);
-            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1,"p1", "V1");
-            
             var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
             var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
 
-
-
-            var data = new[]
-                           {
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionObject, obj="shape"},
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionCharacter, obj="shape"},
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionParagraph, obj="shape"},
-                               new {shape = page.PageSheet, sec=IVisio.VisSectionIndices.visSectionObject, obj="page"},
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionConnectionPts, obj="shape"},
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionControls, obj="shape"},
-                               new {shape = shape1, sec=IVisio.VisSectionIndices.visSectionProp, obj="shape"}
-                           };
-
-
-            foreach (var datum in data)
+            foreach (var db_cell in visio_2007_cells)
             {
-                var shape = datum.shape;
-                var secobj = db.GetSectionBySectionIndex((int)datum.sec);
-                var target_cells = visio_2007_cells.Where(c => c.SectionIndex == secobj.Enum).Where(c => c.Object.Contains(datum.obj)).ToList();
-
-                foreach (var db_cell in target_cells)
-                {
                     var md_section = db.GetAutomationConstantByName(db_cell.SectionIndex);
                     var md_row = db.GetAutomationConstantByName(db_cell.RowIndex);
                     var md_cell = db.GetAutomationConstantByName(db_cell.CellIndex);
@@ -300,7 +256,28 @@ namespace TestVisioAutomation
                     var s = (short)md_section.GetValueAsInt();
                     var r = (short)md_row.GetValueAsInt();
                     var c = (short)md_cell.GetValueAsInt();
-                    var src = new VA.ShapeSheet.SRC(s, r, c);
+
+                    if (s == (short)IVisio.VisSectionIndices.visSectionTab)
+                    {
+                        continue;
+                    }
+
+                    if (s == (short)IVisio.VisSectionIndices.visSectionUser)
+                    {
+                        continue;
+                    }
+
+                    if (s == (short)IVisio.VisSectionIndices.visSectionFirstComponent)
+                    {
+                        continue;
+                    }
+
+                    if (s == (short)IVisio.VisSectionIndices.visSectionLayer)
+                    {
+                        continue;
+                    }
+
+                var src = new VA.ShapeSheet.SRC(s, r, c);
 
                     // Verify that the VisioAutomation library can find this cell
                     var va_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
@@ -316,27 +293,21 @@ namespace TestVisioAutomation
 
                     }
 
-                    // Verify that the Visio application can find this cell naame
-                    var pia_cell = shape.CellsSRC[s, r, c];
-                    string piacellname = pia_cell.Name;
-                    if (db_cell.Name != piacellname)
+                    if (va_cellname != db_cell.Name)
                     {
-                        if (r != (short)IVisio.VisRowIndices.visRow1stHyperlink)
-                        {
-                            string msg0 = string.Format("Names don't match. DB Cell Name =\"{0}\" but Actual Cell Name = \"{1}\"",
-                                                       db_cell.Name, piacellname);
-
-                            Assert.Fail(msg0);
-
-                        }
+                        string msg0 = string.Format(@" ""{0}"" ({1},{2},{3}) ",
+                                                   db_cell.Name,
+                                                   md_section.Name,
+                                                   md_row.Name,
+                                                   md_cell.Name);
+                        string msg = string.Format(@" DB Cell has different name than in VisioAutomation: ""{0}"" ""{1}"" ",
+                                                   db_cell.Name,va_cellname
+                            );
+                        Assert.Fail(msg + msg0);
+                        
                     }
                 }
-
-            }
-
-            /// end
-            app.Quit(true);
-
+            // end
         }
 
         [TestMethod]

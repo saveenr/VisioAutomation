@@ -36,10 +36,291 @@ namespace VisioAutomation.ShapeSheet
                     {
                         return TryGetNameFromSRC_Props(src);
                     }
+                case ((short)IVisio.VisSectionIndices.visSectionAction):
+                    {
+                        return TryGetNameFromSRC_Action(src);
+                    }
+                case ((short)IVisio.VisSectionIndices.visSectionAnnotation):
+                    {
+                        return TryGetNameFromSRC_Annotation(src);
+                    }
+                case ((short)IVisio.VisSectionIndices.visSectionTextField):
+                    {
+                        return TryGetNameFromSRC_TextField(src);
+                    }
+                case ((short)IVisio.VisSectionIndices.visSectionFirstComponent):
+                    {
+                        return TryGetNameFromSRC_Geometry(src);
+                    }
+                case ((short)IVisio.VisSectionIndices.visSectionHyperlink):
+                    {
+                        return TryGetNameFromSRC_Hyperlink(src);
+                    }
+                case ((short)IVisio.VisSectionIndices.visSectionLayer):
+                    {
+                        return TryGetNameFromSRC_Layers(src);
+                    }
+                case ((short)IVisio.VisSectionIndices.visSectionReviewer):
+                    {
+                        return TryGetNameFromSRC_Reviewer(src);
+                    }
+                case ((short)IVisio.VisSectionIndices.visSectionSmartTag):
+                    {
+                        return TryGetNameFromSRC_SmartTag(src);
+                    }
                 default:
                     break;
             }
             return null;
+        }
+
+        private static string TryGetNameFromSRC_SmartTag(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowSmartTag):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visSmartTagButtonFace): return "SmartTags.ButtonFace";
+                            case ((short)IVisio.VisCellIndices.visSmartTagDescription): return "SmartTags.Description";
+                            case ((short)IVisio.VisCellIndices.visSmartTagDisabled): return "SmartTags.Disabled";
+                            case ((short)IVisio.VisCellIndices.visSmartTagDisplayMode): return "SmartTags.DisplayMode";
+                            case ((short)IVisio.VisCellIndices.visSmartTagName): return "SmartTags.TagName";
+                            case ((short)IVisio.VisCellIndices.visSmartTagX): return "SmartTags.X";
+                            case ((short)IVisio.VisCellIndices.visSmartTagXJustify): return "SmartTags.XJustify";
+                            case ((short)IVisio.VisCellIndices.visSmartTagY): return "SmartTags.Y";
+                            case ((short)IVisio.VisCellIndices.visSmartTagYJustify): return "SmartTags.YJustify";
+
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+        private static string TryGetNameFromSRC_Reviewer(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowReviewer):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visReviewerColor): return "Reviewer.Color";
+                            case ((short)IVisio.VisCellIndices.visReviewerCurrentIndex): return "Reviewer.CurrentIndex";
+                            case ((short)IVisio.VisCellIndices.visReviewerInitials): return "Reviewer.Initials";
+                            case ((short)IVisio.VisCellIndices.visReviewerName): return "Reviewer.Name";
+                            case ((short)IVisio.VisCellIndices.visReviewerReviewerID): return "Reviewer.ReviewerID";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+        private static string TryGetNameFromSRC_Layers(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowLayer):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visLayerActive): return "Layers.Active";
+                            case ((short)IVisio.VisCellIndices.visLayerColor): return "Layers.Color";
+                            case ((short)IVisio.VisCellIndices.visLayerColorTrans): return "Layers.ColorTrans";
+                            case ((short)IVisio.VisCellIndices.visLayerGlue): return "Layers.Glue";
+                            case ((short)IVisio.VisCellIndices.visLayerLock): return "Layers.Locked";
+                            //case ((short)IVisio.VisCellIndices.visLayerMember): return "Layer.Address";
+                            case ((short)IVisio.VisCellIndices.visLayerName): return "Layers.Name";
+                            case ((short)IVisio.VisCellIndices.visLayerNameUniv): return "Layers.NameU";
+                            case ((short)IVisio.VisCellIndices.visLayerPrint): return "Layers.Print";
+                            case ((short)IVisio.VisCellIndices.visLayerSnap): return "Layers.Snap";
+                            case ((short)IVisio.VisCellIndices.visLayerStatus): return "Layers.Status";
+                            case ((short)IVisio.VisCellIndices.visLayerVisible): return "Layers.Visible";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+        private static string TryGetNameFromSRC_Hyperlink(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRow1stHyperlink):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visHLinkAddress): return "Hyperlink.Address";
+                            case ((short)IVisio.VisCellIndices.visHLinkDefault): return "Hyperlink.Default";
+                            case ((short)IVisio.VisCellIndices.visHLinkDescription): return "Hyperlink.Description";
+                            case ((short)IVisio.VisCellIndices.visHLinkExtraInfo): return "Hyperlink.ExtraInfo";
+                            case ((short)IVisio.VisCellIndices.visHLinkFrame): return "Hyperlink.Frame";
+                            case ((short)IVisio.VisCellIndices.visHLinkInvisible): return "Hyperlink.Invisible";
+                            case ((short)IVisio.VisCellIndices.visHLinkNewWin): return "Hyperlink.NewWindow";
+                            case ((short)IVisio.VisCellIndices.visHLinkSortKey): return "Hyperlink.SortKey";
+                            case ((short)IVisio.VisCellIndices.visHLinkSubAddress): return "Hyperlink.SubAddress";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+
+        private static string TryGetNameFromSRC_Geometry(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowComponent):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visCompNoFill): return "Geometry.NoFill";
+                            case ((short)IVisio.VisCellIndices.visCompNoLine): return "Geometry.NoLine";
+                            case ((short)IVisio.VisCellIndices.visCompNoShow): return "Geometry.NoShow";
+                            case ((short)IVisio.VisCellIndices.visCompNoSnap): return "Geometry.NoSnap";
+  
+
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                case ((short)IVisio.VisRowIndices.visRowVertex):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visBow): return "Geometryi.A";
+                            case ((short)IVisio.VisCellIndices.visEccentricityAngle): return "Geometryi.C";
+                            case ((short)IVisio.VisCellIndices.visAspectRatio): return "Geometryi.D";
+                            case ((short)IVisio.VisCellIndices.visNURBSData): return "Geometryi.E";
+                            case ((short)IVisio.VisCellIndices.visX): return "Geometryi.X";
+                            case ((short)IVisio.VisCellIndices.visY): return "Geometryi.Y";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+        private static string TryGetNameFromSRC_TextField(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowField):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visFieldCalendar): return "Fields.Calendar";
+                            case ((short)IVisio.VisCellIndices.visFieldCell): return "Fields.Value";
+                            case ((short)IVisio.VisCellIndices.visFieldEditMode): return "Fields.EditMode";
+                            case ((short)IVisio.VisCellIndices.visFieldFormat): return "Fields.Format";
+                            case ((short)IVisio.VisCellIndices.visFieldObjectKind): return "Fields.ObjectKind";
+                            case ((short)IVisio.VisCellIndices.visFieldType): return "Fields.Type";
+                            case ((short)IVisio.VisCellIndices.visFieldUICategory): return "Fields.UICat";
+                            case ((short)IVisio.VisCellIndices.visFieldUICode): return "Fields.UICod";
+                            case ((short)IVisio.VisCellIndices.visFieldUIFormat): return "Fields.UIFmt";
+
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+
+        private static string TryGetNameFromSRC_Annotation(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowAnnotation):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visAnnotationComment): return "Annotation.Comment";
+                            case ((short)IVisio.VisCellIndices.visAnnotationDate): return "Annotation.Date";
+                            case ((short)IVisio.VisCellIndices.visAnnotationLangID): return "Annotation.LangID";
+                            case ((short)IVisio.VisCellIndices.visAnnotationMarkerIndex): return "Annotation.MarkerIndex";
+                            case ((short)IVisio.VisCellIndices.visAnnotationReviewerID): return "Annotation.ReviewerID";
+                            case ((short)IVisio.VisCellIndices.visAnnotationX): return "Annotation.X";
+                            case ((short)IVisio.VisCellIndices.visAnnotationY): return "Annotation.Y";
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
+        }
+
+        private static string TryGetNameFromSRC_Action(VA.ShapeSheet.SRC src)
+        {
+            switch (src.Row)
+            {
+                case ((short)IVisio.VisRowIndices.visRowAction):
+                    {
+                        switch (src.Cell)
+                        {
+                            case ((short)IVisio.VisCellIndices.visActionAction): return "Actions.Action";
+                            case ((short)IVisio.VisCellIndices.visActionBeginGroup): return "Actions.BeginGroup";
+                            case ((short)IVisio.VisCellIndices.visActionButtonFace): return "Actions.ButtonFace";
+                            case ((short)IVisio.VisCellIndices.visActionChecked): return "Actions.Checked";
+                            case ((short)IVisio.VisCellIndices.visActionDisabled): return "Actions.Disabled";
+                            case ((short)IVisio.VisCellIndices.visActionHelp): return "Actions.Help";
+                            case ((short)IVisio.VisCellIndices.visActionInvisible): return "Actions.Invisible";
+                            case ((short)IVisio.VisCellIndices.visActionMenu): return "Actions.Menu";
+                            case ((short)IVisio.VisCellIndices.visActionPrompt): return "Actions.Prompt";
+                            case ((short)IVisio.VisCellIndices.visActionReadOnly): return "Actions.ReadOnly";
+                            case ((short)IVisio.VisCellIndices.visActionSortKey): return "Actions.SortKey";
+                            case ((short)IVisio.VisCellIndices.visActionTagName): return "Actions.TagName";
+
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+            return null;
+
         }
 
         private static string TryGetNameFromSRC_Props(VA.ShapeSheet.SRC src)
@@ -53,7 +334,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visCustPropsAsk): return "Prop.Ask";
                             case ((short)IVisio.VisCellIndices.visCustPropsCalendar): return "Prop.Calendar";
                             case ((short)IVisio.VisCellIndices.visCustPropsFormat): return "Prop.Format";
-                            case ((short)IVisio.VisCellIndices.visCustPropsInvis): return "Prop.Invis";
+                            case ((short)IVisio.VisCellIndices.visCustPropsInvis): return "Prop.Invisible";
                             case ((short)IVisio.VisCellIndices.visCustPropsLabel): return "Prop.Label";
                             case ((short)IVisio.VisCellIndices.visCustPropsLangID): return "Prop.LangID";
                             case ((short)IVisio.VisCellIndices.visCustPropsPrompt): return "Prop.Prompt";
@@ -118,12 +399,12 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visFillShdwBkgndTrans): return "ShdwBkgndTrans";
                             case ((short)IVisio.VisCellIndices.visFillShdwForegnd): return "ShdwForegnd";
                             case ((short)IVisio.VisCellIndices.visFillShdwForegndTrans): return "ShdwForegndTrans";
-                            case ((short)IVisio.VisCellIndices.visFillShdwObliqueAngle): return "ShdwObliqueAngle";
-                            case ((short)IVisio.VisCellIndices.visFillShdwOffsetX): return "ShdwOffsetX";
-                            case ((short)IVisio.VisCellIndices.visFillShdwOffsetY): return "ShdwOffsetY";
+                            case ((short)IVisio.VisCellIndices.visFillShdwObliqueAngle): return "ShapeShdwObliqueAngle";
+                            case ((short)IVisio.VisCellIndices.visFillShdwOffsetX): return "ShapeShdwOffsetX";
+                            case ((short)IVisio.VisCellIndices.visFillShdwOffsetY): return "ShapeShdwOffsetY";
                             case ((short)IVisio.VisCellIndices.visFillShdwPattern): return "ShdwPattern";
-                            case ((short)IVisio.VisCellIndices.visFillShdwScaleFactor): return "ShdwScaleFactor";
-                            case ((short)IVisio.VisCellIndices.visFillShdwType): return "FillShdwType";
+                            case ((short)IVisio.VisCellIndices.visFillShdwScaleFactor): return "ShapeShdwScaleFactor";
+                            case ((short)IVisio.VisCellIndices.visFillShdwType): return "ShapeShdwType";
                             default:
                                 break;
                         }
@@ -137,11 +418,11 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visLineBeginArrowSize): return "BeginArrowSize";
                             case ((short)IVisio.VisCellIndices.visLineColor): return "LineColor";
                             case ((short)IVisio.VisCellIndices.visLineColorTrans): return "LineColorTrans";
-                            case ((short)IVisio.VisCellIndices.visLineEndArrow): return "LineEndArrow";
-                            case ((short)IVisio.VisCellIndices.visLineEndArrowSize): return "LineEndArrowSize";
-                            case ((short)IVisio.VisCellIndices.visLineEndCap): return "LineEndCap";
+                            case ((short)IVisio.VisCellIndices.visLineEndArrow): return "EndArrow";
+                            case ((short)IVisio.VisCellIndices.visLineEndArrowSize): return "EndArrowSize";
+                            case ((short)IVisio.VisCellIndices.visLineEndCap): return "LineCap";
                             case ((short)IVisio.VisCellIndices.visLinePattern): return "LinePattern";
-                            case ((short)IVisio.VisCellIndices.visLineRounding): return "LineRounding";
+                            case ((short)IVisio.VisCellIndices.visLineRounding): return "Rounding";
                             case ((short)IVisio.VisCellIndices.visLineWeight): return "LineWeight";
                             default:
                                 break;
@@ -161,7 +442,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visXFormPinX): return "PinX";
                             case ((short)IVisio.VisCellIndices.visXFormPinY): return "PinY";
                             case ((short)IVisio.VisCellIndices.visXFormResizeMode): return "ResizeMode";
-                            case ((short)IVisio.VisCellIndices.visXFormWidth): return "FormWidth";
+                            case ((short)IVisio.VisCellIndices.visXFormWidth): return "Width";
                             default:
                                 break;
                         }
@@ -192,7 +473,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visDocOutputFormat): return "OutputFormat";
                             case ((short)IVisio.VisCellIndices.visDocPreviewQuality): return "PreviewQuality";
                             case ((short)IVisio.VisCellIndices.visDocPreviewScope): return "PreviewScope";
-                            case ((short)IVisio.VisCellIndices.visDocViewMarkup): return "PreviewScope";
+                            case ((short)IVisio.VisCellIndices.visDocViewMarkup): return "ViewMarkup";
                             default:
                                 break;
                         }
@@ -465,7 +746,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visStyleIncludesFill): return "EnableFillProps";
                             case ((short)IVisio.VisCellIndices.visStyleIncludesLine): return "EnableLineProps";
                             case ((short)IVisio.VisCellIndices.visStyleIncludesText): return "EnableTextProps";
-                            case ((short)IVisio.VisCellIndices.visStyleHidden): return "HideForApply";
+                            case ((short)IVisio.VisCellIndices.visStyleHidden): return "HideText";
                             default:
                                 break;
                         }
@@ -540,11 +821,11 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visCharacterLocalizeFont): return "Char.LocalizeFont";
                             case ((short)IVisio.VisCellIndices.visCharacterOverline): return "Char.Overline";
                             case ((short)IVisio.VisCellIndices.visCharacterPos): return "Char.Pos";
-                            case ((short)IVisio.VisCellIndices.visCharacterRTLText): return "Char.RTLText";
+                            case ((short)IVisio.VisCellIndices.visCharacterRTLText): return "RTLText";
                             case ((short)IVisio.VisCellIndices.visCharacterSize): return "Char.Size";
                             case ((short)IVisio.VisCellIndices.visCharacterStrikethru): return "Char.Strikethru";
                             case ((short)IVisio.VisCellIndices.visCharacterStyle): return "Char.Style";
-                            case ((short)IVisio.VisCellIndices.visCharacterUseVertical): return "Char.UseVertical";
+                            case ((short)IVisio.VisCellIndices.visCharacterUseVertical): return "UseVertical";
                             case ((short)IVisio.VisCellIndices.visCharacterPerpendicular): return "Char.Perpendicular";
                             default:
                                 break;
@@ -605,7 +886,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visIndentFirst): return "Para.IndFirst";
                             case ((short)IVisio.VisCellIndices.visIndentLeft): return "Para.IndLeft";
                             case ((short)IVisio.VisCellIndices.visIndentRight): return "Para.IndRight";
-                            case ((short)IVisio.VisCellIndices.visLocalizeBulletFont): return "Para.LocBulletFont";
+                            case ((short)IVisio.VisCellIndices.visLocalizeBulletFont): return "Para.LocalizeBulletFont";
                             case ((short)IVisio.VisCellIndices.visSpaceAfter): return "Para.SpAfter";
                             case ((short)IVisio.VisCellIndices.visSpaceBefore): return "Para.SpBefore";
                             case ((short)IVisio.VisCellIndices.visSpaceLine): return "Para.SpLine";

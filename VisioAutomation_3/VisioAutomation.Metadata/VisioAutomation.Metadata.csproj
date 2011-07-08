@@ -86,7 +86,9 @@
     <None Include="Resources\sections.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cells.xml" />
+    <None Include="Resources\cells.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
