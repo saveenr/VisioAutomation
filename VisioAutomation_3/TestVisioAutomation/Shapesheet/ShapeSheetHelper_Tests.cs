@@ -11,10 +11,7 @@ namespace TestVisioAutomation
     [TestClass]
     public class ShapeSheetHelperTests_Query : VisioAutomationTest
     {
-
-        private static ShapeSheetMetadata md = new TestVisioAutomation.ShapeSheetMetadata();
         private static VA.Metadata.MetadataDB mdx = VA.Metadata.MetadataDB.Load();
-
 
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
         public void SpotCheck1()
