@@ -94,16 +94,6 @@ namespace TestVisioAutomation
             app.Quit(true);
         }
 
-
-        private string TryGetSectionName(short si)
-        {
-            if (md.SectionToName.ContainsKey((short)si))
-            {
-                return md.SectionToName[(short)si];
-            }
-            return null;
-        }
-
         private IEnumerable<CellInfo> EnumCellsInSection(IVisio.Shape shape, short section_index)
         {
             if (0 == shape.SectionExists[section_index, 1])
