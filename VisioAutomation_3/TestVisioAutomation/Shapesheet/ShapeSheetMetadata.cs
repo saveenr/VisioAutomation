@@ -11,13 +11,4 @@ using ROW = Microsoft.Office.Interop.Visio.VisRowIndices;
 namespace TestVisioAutomation
 {
 
-    public class CellInfo
-    {
-        public string NameVisioInterop;
-        public VisioAutomation.ShapeSheet.SRC SRC;
-        public string NameFromVisioAutomation;
-        public VisioAutomation.ShapeSheet.SRC XSRC;
-        public string Formula;
-        public double Result;
-    }
 }

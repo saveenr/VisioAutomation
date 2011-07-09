@@ -14,11 +14,10 @@ namespace TestVisioAutomation
         private static VA.Metadata.MetadataDB mdx = VA.Metadata.MetadataDB.Load();
 
         [TestMethod]
-        public void SpotCheck1()
+        public void SpotCheckNameToSRCMapping()
         {
             var c1 = VA.ShapeSheet.ShapeSheetHelper.TryGetSRCFromName("EndArrow").Value;
             var c2 = VA.ShapeSheet.SRCConstants.EndArrow;
-
             Assert.AreEqual(c2, c1);
         }
 
@@ -77,7 +76,9 @@ namespace TestVisioAutomation
             System.Threading.Thread.Sleep(1000);
 
             var failures = new List<string>();
+            var success = new List<string>();
 
+            /*
             foreach (var md_sec in mdx.Sections)
             {
                 short sec_index = (short) mdx.GetAutomationConstantByName(md_sec.Enum).GetValueAsInt();
@@ -94,8 +95,44 @@ namespace TestVisioAutomation
                        
                     }
                 }
+            }*/
+
+            short[] section_indexes = new short[] { 
+                (short)IVisio.VisSectionIndices.visSectionObject, 
+                //(short)IVisio.VisSectionIndices.visSectionCharacter 
+            };
+
+            foreach (var section_index in section_indexes)
+            {
+                
+                var cellinfos = EnumCellsInSection(shape1, section_index).ToList();
+                foreach (var cellinfo_src in cellinfos)
+                {
+                    // what does VA think the cell name is
+                    var predicted_cell_name = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(cellinfo_src);
+
+                    if (predicted_cell_name == "Char.Locale")
+                    {
+                        continue;
+                    }
+                    // based on the name VA determines retrieve the cell
+                    var found_cell = shape1.CellsU[predicted_cell_name];
+
+                    // verify that the found cell matches the initial SRC
+                    var found_cell_src = new VA.ShapeSheet.SRC(found_cell.Section, found_cell.Row, found_cell.Column);
+
+                    if (!cellinfo_src.AreEqual(found_cell_src))
+                    {
+                           Assert.Fail("cells don't match");
+                    }
+                    else
+                    {
+                        success.Add(predicted_cell_name + " " + found_cell.Name);
+                    }
+                }
             }
 
+            Debug.WriteLine( string.Join("\r\n",success.ToArray()));
             if (failures.Count > 0)
             {
                 string s = string.Join("\r\n", failures.ToArray());
@@ -105,7 +142,7 @@ namespace TestVisioAutomation
             doc1.Close(true);
         }
 
-        private IEnumerable<CellInfo> EnumCellsInSection(IVisio.Shape shape, short section_index)
+        private IEnumerable<VA.ShapeSheet.SRC> EnumCellsInSection(IVisio.Shape shape, short section_index)
         {
             if (0 == shape.SectionExists[section_index, 1])
             {
@@ -126,32 +163,7 @@ namespace TestVisioAutomation
                     var cell = row[c];
                     var cell_name = cell.Name;
                     var cell_src = new VA.ShapeSheet.SRC(cell.Section, cell.Row, cell.Column);
-
-                    var xcellsrc = VA.ShapeSheet.ShapeSheetHelper.TryGetSRCFromName(cell_name);
-
-                    var ci = new CellInfo();
-
-                    if (!xcellsrc.HasValue)
-                    {
-                        xcellsrc = new VA.ShapeSheet.SRC(-1, -1, -1);
-                        ci.NameFromVisioAutomation = "TBD";
-                    }
-                    else
-                    {
-                        ci.NameFromVisioAutomation = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(cell_src);
-                    }
-
-
-                    ci.NameVisioInterop = cell_name;
-                    ci.SRC = cell_src;
-
-                    ci.XSRC = xcellsrc.Value;
-
-                    ci.Formula = cell.FormulaU;
-                    ci.Result = cell.Result[IVisio.tagVisUnitCodes.visNoCast];
-
-                    yield return ci;
-
+                    yield return cell_src;
                 }
             }
         }
