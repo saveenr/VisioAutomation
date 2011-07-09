@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -18,6 +19,19 @@ namespace TestVisioAutomation
             {
                 app = new IVisio.ApplicationClass();
             }
+            else
+            {
+                // we have an instance, but it may nto be valid
+                try
+                {
+                    string s = app.Name;
+                }
+                catch (System.Runtime.InteropServices.COMException e)
+                {
+                    app = new IVisio.ApplicationClass();
+                }
+            }
+
             return app;
         }
 
