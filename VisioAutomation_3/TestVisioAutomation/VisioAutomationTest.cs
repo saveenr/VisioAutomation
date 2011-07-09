@@ -6,32 +6,45 @@ using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
-    [TestClass]
-    public class VisioAutomationTest
+    public class VisioApplicationSafeReference
     {
-        private static IVisio.Application app;
-        public readonly VA.Drawing.Size StandardPageSize = new VA.Drawing.Size(8.5, 11);
-        public readonly VA.Drawing.Rectangle StandardPageSizeRect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), new VA.Drawing.Size(8.5, 11));
+        // this class ensures that a valid application instance is always available
+
+        private IVisio.Application app;
 
         public IVisio.Application GetVisioApplication()
         {
-            if (app == null)
+            if (this.app == null)
             {
-                app = new IVisio.ApplicationClass();
+                this.app = new IVisio.ApplicationClass();
             }
             else
             {
-                // we have an instance, but it may nto be valid
+                // we have an instance, but it may not be valid
                 try
                 {
                     string s = app.Name;
                 }
                 catch (System.Runtime.InteropServices.COMException e)
                 {
-                    app = new IVisio.ApplicationClass();
+                    this.app = new IVisio.ApplicationClass();
                 }
             }
 
+            return this.app;
+        }
+    }
+
+    [TestClass]
+    public class VisioAutomationTest
+    {
+        private static VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();
+        public readonly VA.Drawing.Size StandardPageSize = new VA.Drawing.Size(8.5, 11);
+        public readonly VA.Drawing.Rectangle StandardPageSizeRect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), new VA.Drawing.Size(8.5, 11));
+
+        public IVisio.Application GetVisioApplication()
+        {
+            var app = app_ref.GetVisioApplication();
             return app;
         }
 
@@ -55,7 +68,7 @@ namespace TestVisioAutomation
 
         public IVisio.Page GetNewPage(VA.Drawing.Size s)
         {
-            app = GetVisioApplication();
+            var app = GetVisioApplication();
             var documents = app.Documents;
             if (documents.Count < 1)
             {
@@ -72,7 +85,7 @@ namespace TestVisioAutomation
 
         public IVisio.Document GetNewDoc()
         {
-            app = GetVisioApplication();
+            var app = GetVisioApplication();
             var documents = app.Documents;
             var doc = documents.Add("");
 
@@ -89,7 +102,7 @@ namespace TestVisioAutomation
 
         public VA.Scripting.Session GetScriptingSession()
         {
-            app = GetVisioApplication();
+            var app = GetVisioApplication();
             var scriptingsession = new VA.Scripting.Session(app);
             return scriptingsession;
         }

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using System.Linq;
-using VisioAutomation.Metadata;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -53,7 +51,7 @@ namespace TestVisioAutomation
             // There are 3003 known constants in the Visio PIA
             Assert.AreEqual(3003, constants.Count);
         }
-        
+
         [TestMethod]
         public void Sections()
         {
@@ -104,7 +102,6 @@ namespace TestVisioAutomation
             if (unfound.Count > 0)
             {
                 string message = string.Format(" didn't find in DB cells " + string.Join(",", unfound));
-                
             }
 
             unfound.Clear();
@@ -120,7 +117,6 @@ namespace TestVisioAutomation
             if (unfound.Count > 0)
             {
                 string message = string.Format(" didn't find in src constants " + string.Join(",", unfound));
-
             }
 
 
@@ -135,12 +131,10 @@ namespace TestVisioAutomation
 
             var pia_enums = VA.Interop.InteropHelper.GetEnumTypes();
 
-            var db_name_to_enum = db_autoenums.ToDictionary(i => i.Name, i=>i);
+            var db_name_to_enum = db_autoenums.ToDictionary(i => i.Name, i => i);
             foreach (var pia_enum in pia_enums)
             {
-
-
-                Assert.IsTrue( db_name_to_enum.ContainsKey(pia_enum.Name));
+                Assert.IsTrue(db_name_to_enum.ContainsKey(pia_enum.Name));
             }
 
             // verify that everying in the metadatadb is int the PIA 
@@ -152,7 +146,7 @@ namespace TestVisioAutomation
                 foreach (string pia_value_name in pia_enum_values.Keys)
                 {
                     Assert.IsTrue(db_enum.HasItem(pia_value_name));
-                    Assert.AreEqual(pia_enum_values[pia_value_name],db_enum[pia_value_name]);
+                    Assert.AreEqual(pia_enum_values[pia_value_name], db_enum[pia_value_name]);
                 }
             }
 
@@ -165,14 +159,12 @@ namespace TestVisioAutomation
             {
                 var pia_type = name_to_pia_type[md_enum.Name];
                 var pia_dic = TestHelper.EnumToDictionary<int>(pia_type);
-                foreach (string md_value_name in md_enum.Items.Select(i=>i.Name))
+                foreach (string md_value_name in md_enum.Items.Select(i => i.Name))
                 {
-
                     Assert.IsTrue(pia_dic.ContainsKey(md_value_name));
-                    Assert.AreEqual(md_enum[md_value_name],pia_dic[md_value_name]);
+                    Assert.AreEqual(md_enum[md_value_name], pia_dic[md_value_name]);
                 }
             }
-
         }
 
         [TestMethod]
@@ -189,12 +181,11 @@ namespace TestVisioAutomation
                 {
                     Assert.Fail("DB does not contain sll with namecode " + name);
                 }
-                
             }
 
-            var sectioindexname_to_int = TestHelper.EnumToDictionary<int>(typeof(IVisio.VisSectionIndices));
-            var rowindexname_to_int = TestHelper.EnumToDictionary<int>(typeof(IVisio.VisRowIndices));
-            var cellindexname_to_int = TestHelper.EnumToDictionary<int>(typeof(IVisio.VisCellIndices));
+            var sectioindexname_to_int = TestHelper.EnumToDictionary<int>(typeof (IVisio.VisSectionIndices));
+            var rowindexname_to_int = TestHelper.EnumToDictionary<int>(typeof (IVisio.VisRowIndices));
+            var cellindexname_to_int = TestHelper.EnumToDictionary<int>(typeof (IVisio.VisCellIndices));
             foreach (var db_cell in visio_2007_cells)
             {
                 if (!sectioindexname_to_int.ContainsKey(db_cell.SectionIndex))
@@ -222,7 +213,6 @@ namespace TestVisioAutomation
         }
 
 
-
         [TestMethod]
         public void CheckSectionIndices()
         {
@@ -234,11 +224,7 @@ namespace TestVisioAutomation
                 string secindex_name = section.Enum;
                 int secindex_int = db.GetAutomationConstantByName(secindex_name).GetValueAsInt();
             }
-           
-
         }
-
-
 
         [TestMethod]
         public void CheckDBCellsAgainstVACode()
@@ -249,64 +235,62 @@ namespace TestVisioAutomation
 
             foreach (var db_cell in visio_2007_cells)
             {
-                    var md_section = db.GetAutomationConstantByName(db_cell.SectionIndex);
-                    var md_row = db.GetAutomationConstantByName(db_cell.RowIndex);
-                    var md_cell = db.GetAutomationConstantByName(db_cell.CellIndex);
+                var md_section = db.GetAutomationConstantByName(db_cell.SectionIndex);
+                var md_row = db.GetAutomationConstantByName(db_cell.RowIndex);
+                var md_cell = db.GetAutomationConstantByName(db_cell.CellIndex);
 
-                    var s = (short)md_section.GetValueAsInt();
-                    var r = (short)md_row.GetValueAsInt();
-                    var c = (short)md_cell.GetValueAsInt();
+                var s = (short) md_section.GetValueAsInt();
+                var r = (short) md_row.GetValueAsInt();
+                var c = (short) md_cell.GetValueAsInt();
 
-                    if (s == (short)IVisio.VisSectionIndices.visSectionTab)
-                    {
-                        continue;
-                    }
+                if (s == (short) IVisio.VisSectionIndices.visSectionTab)
+                {
+                    continue;
+                }
 
-                    if (s == (short)IVisio.VisSectionIndices.visSectionUser)
-                    {
-                        continue;
-                    }
+                if (s == (short) IVisio.VisSectionIndices.visSectionUser)
+                {
+                    continue;
+                }
 
-                    if (s == (short)IVisio.VisSectionIndices.visSectionFirstComponent)
-                    {
-                        continue;
-                    }
+                if (s == (short) IVisio.VisSectionIndices.visSectionFirstComponent)
+                {
+                    continue;
+                }
 
-                    if (s == (short)IVisio.VisSectionIndices.visSectionLayer)
-                    {
-                        continue;
-                    }
+                if (s == (short) IVisio.VisSectionIndices.visSectionLayer)
+                {
+                    continue;
+                }
 
                 var src = new VA.ShapeSheet.SRC(s, r, c);
 
-                    // Verify that the VisioAutomation library can find this cell
-                    var va_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
-                    if (va_cellname == null)
-                    {
-                        string msg = string.Format(@" DB Cell not found in VisioAutomation: ""{0}"" ({1},{2},{3}) ",
-                                                   db_cell.Name,
-                                                   md_section.Name,
-                                                   md_row.Name,
-                                                   md_cell.Name
-                            );
-                        Assert.Fail(msg);
-
-                    }
-
-                    if (va_cellname != db_cell.Name)
-                    {
-                        string msg0 = string.Format(@" ""{0}"" ({1},{2},{3}) ",
-                                                   db_cell.Name,
-                                                   md_section.Name,
-                                                   md_row.Name,
-                                                   md_cell.Name);
-                        string msg = string.Format(@" DB Cell has different name than in VisioAutomation: ""{0}"" ""{1}"" ",
-                                                   db_cell.Name,va_cellname
-                            );
-                        Assert.Fail(msg + msg0);
-                        
-                    }
+                // Verify that the VisioAutomation library can find this cell
+                var va_cellname = VA.ShapeSheet.ShapeSheetHelper.TryGetNameFromSRC(src);
+                if (va_cellname == null)
+                {
+                    string msg = string.Format(@" DB Cell not found in VisioAutomation: ""{0}"" ({1},{2},{3}) ",
+                                               db_cell.Name,
+                                               md_section.Name,
+                                               md_row.Name,
+                                               md_cell.Name
+                        );
+                    Assert.Fail(msg);
                 }
+
+                if (va_cellname != db_cell.Name)
+                {
+                    string msg0 = string.Format(@" ""{0}"" ({1},{2},{3}) ",
+                                                db_cell.Name,
+                                                md_section.Name,
+                                                md_row.Name,
+                                                md_cell.Name);
+                    string msg = string.Format(@" DB Cell has different name than in VisioAutomation: ""{0}"" ""{1}"" ",
+                                               db_cell.Name, va_cellname
+                        );
+                    Assert.Fail(msg + msg0);
+                }
+            }
             // end
         }
 
@@ -318,7 +302,6 @@ namespace TestVisioAutomation
             string filename = VisioTestCommon.Helper.GetTestMethodOutputFilename(".txt");
 
             db.ExportCode(filename);
-
         }
     }
 }

@@ -13,16 +13,16 @@ namespace TestVisioAutomation
     {
         private static VA.Metadata.MetadataDB mdx = VA.Metadata.MetadataDB.Load();
 
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        [TestMethod]
         public void SpotCheck1()
         {
             var c1 = VA.ShapeSheet.ShapeSheetHelper.TryGetSRCFromName("EndArrow").Value;
             var c2 = VA.ShapeSheet.SRCConstants.EndArrow;
 
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(c2, c1);
+            Assert.AreEqual(c2, c1);
         }
 
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        [TestMethod]
         public void CheckAutomationCellNamesAgainstVA()
         {
             var app = GetVisioApplication();
@@ -103,7 +103,6 @@ namespace TestVisioAutomation
             }
 
             doc1.Close(true);
-            app.Quit(true);
         }
 
         private IEnumerable<CellInfo> EnumCellsInSection(IVisio.Shape shape, short section_index)
