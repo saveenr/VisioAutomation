@@ -8,8 +8,8 @@ namespace TestVisioAutomation
     [TestClass]
     public class TextHelper_Tests : VisioAutomationTest
     {
-        private static VA.Text.Markup.Field field_title = new VA.Text.Markup.Field(IVisio.VisFieldCategories.visFCatDocument, IVisio.VisFieldCodes.visFCodePrintDate, IVisio.VisFieldFormats.visFmtNumGenNoUnits);
-        private static VA.Text.Markup.Field field_shapewidth = new VA.Text.Markup.Field(IVisio.VisFieldCategories.visFCatGeometry, IVisio.VisFieldCodes.visFCodeBackgroundName, IVisio.VisFieldFormats.visFmtNumGenNoUnits);
+        private static readonly VA.Text.Markup.Field field_title = new VA.Text.Markup.Field(IVisio.VisFieldCategories.visFCatDocument, IVisio.VisFieldCodes.visFCodePrintDate, IVisio.VisFieldFormats.visFmtNumGenNoUnits);
+        private static readonly VA.Text.Markup.Field field_shapewidth = new VA.Text.Markup.Field(IVisio.VisFieldCategories.visFCatGeometry, IVisio.VisFieldCodes.visFCodeBackgroundName, IVisio.VisFieldFormats.visFmtNumGenNoUnits);
  
         [TestMethod]
         public void Fields_Scenario_1()
@@ -92,15 +92,7 @@ namespace TestVisioAutomation
             var src_charfont = VisioAutomation.ShapeSheet.SRCConstants.Char_Font;
             var cell_charfont = s1.CellsSRC[src_charfont.Section, src_charfont.Row, src_charfont.Cell];
             cell_charfont.FormulaU = font.ID.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            s1.Text =
-                @"Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-Duis aute irure dolor in reprehenderit in voluptate velit 
-esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-occaecat cupidatat non proident, sunt in culpa qui officia
-deserunt mollit anim id est laborum";
+            s1.Text = TestVisioAutomation.TestHelper.LoremIpsumText;
 
             VisioAutomation.Text.TextHelper.FitShapeToText(page1, new[] { s1 });
 

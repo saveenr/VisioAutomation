@@ -21,7 +21,7 @@ namespace TestVisioAutomation
 
             var shape0 = page1.DrawRectangle(1, 1, 3, 3);
 
-            shape0.Text = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789";
+            shape0.Text = TestVisioAutomation.TestHelper.LoremIpsumText;
 
             var fmt0 = new VA.Text.CharacterFormatCells();
             var pts_10 = VA.Convert.PointsToInches(10);
