@@ -150,12 +150,9 @@ namespace TestVisioAutomation
             }
             var sec = shape.Section[section_index];
 
-            int num_rows = GetCorrectedRowCount(shape, section_index);
-            Debug.WriteLine("Num Rows={0}",num_rows);
-            for (int r = 0; r < num_rows; r++)
-            {
-                short row_index = GetCorrectedRowIndex(section_index, r);
 
+            foreach (short row_index in EnumRowIndicesForSection(shape,section_index))
+            {
                 var row = sec[row_index];
                 int num_cells = shape.RowsCellCount[section_index,row_index];
                 for (int c = 0; c < num_cells; c++)
@@ -168,28 +165,33 @@ namespace TestVisioAutomation
             }
         }
 
-        private short GetCorrectedRowIndex(short section_index, int r)
-        {
-            short row_index = (short)(r + 0);
+        private short[] section_obj_rows = new short[]
+                                               {
+                                                    (short) IVisio.VisRowIndices.visRowFill,
+                                                    (short) IVisio.VisRowIndices.visRowLine,
+                                                    (short)IVisio.VisRowIndices.visRowXFormOut };
 
+        private IEnumerable<short> EnumRowIndicesForSection(IVisio.Shape shape, short section_index)
+        {
             if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
             {
-                row_index += 1;
-            }
-            return row_index;
-        }
-
-        private int GetCorrectedRowCount(IVisio.Shape shape, short section_index)
-        {
-            int num_rows = shape.RowCount[section_index];
-            if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
-            {
-                if (num_rows < 3)
+                foreach (var row_index in section_obj_rows)
                 {
-                    num_rows += 1;                    
+                    if (shape.RowExists[(short)section_index, (short)row_index, (short)0] != 0)
+                    {
+                        yield return row_index;
+                    }
                 }
             }
-            return num_rows;
+            else
+            {
+                short num_rows = shape.RowCount[section_index];
+                for (short row_index = 0; row_index < num_rows; row_index++)
+                {
+                    yield return row_index;
+                }
+            }
         }
+
     }
 }
