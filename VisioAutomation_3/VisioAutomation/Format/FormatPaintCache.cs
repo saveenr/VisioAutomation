@@ -49,12 +49,12 @@ namespace VisioAutomation.Format
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_Style);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_Font);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_ColorTrans);
-            this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.UseVertical);
+            this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_UseVertical);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_Case);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_Color);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_ComplexScriptFont);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_ComplexScriptSize);
-            this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.RTLText);
+            this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_RTLText);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_Perpendicular);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_Overline);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_DoubleStrikethrough);

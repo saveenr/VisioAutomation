@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC Char_Overline = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterOverline);
         public readonly static SRC Char_Perpendicular = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPerpendicular);
         public readonly static SRC Char_Pos = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPos);
-        public readonly static SRC RTLText = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterRTLText);
+        public readonly static SRC Char_RTLText = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterRTLText);
         public readonly static SRC Char_FontScale = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFontScale);
         public readonly static SRC Char_Size = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterSize);
         public readonly static SRC Char_Letterspace = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLetterspace);
@@ -62,7 +62,7 @@ namespace VisioAutomation.ShapeSheet
         public readonly static SRC Char_Style = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStyle);
         public readonly static SRC Char_ColorTrans = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColorTrans);
         
-        public readonly static SRC UseVertical = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical);
+        public readonly static SRC Char_UseVertical = new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical);
 
         // Connections
         public readonly static SRC Connections_D = new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visCnnctD);

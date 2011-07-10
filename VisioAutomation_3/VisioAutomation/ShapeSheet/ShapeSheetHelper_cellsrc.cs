@@ -821,11 +821,11 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visCharacterLocalizeFont): return "Char.LocalizeFont";
                             case ((short)IVisio.VisCellIndices.visCharacterOverline): return "Char.Overline";
                             case ((short)IVisio.VisCellIndices.visCharacterPos): return "Char.Pos";
-                            case ((short)IVisio.VisCellIndices.visCharacterRTLText): return "RTLText";
+                            case ((short)IVisio.VisCellIndices.visCharacterRTLText): return "Char.RTLText";
                             case ((short)IVisio.VisCellIndices.visCharacterSize): return "Char.Size";
                             case ((short)IVisio.VisCellIndices.visCharacterStrikethru): return "Char.Strikethru";
                             case ((short)IVisio.VisCellIndices.visCharacterStyle): return "Char.Style";
-                            case ((short)IVisio.VisCellIndices.visCharacterUseVertical): return "UseVertical";
+                            case ((short)IVisio.VisCellIndices.visCharacterUseVertical): return "Char.UseVertical";
                             case ((short)IVisio.VisCellIndices.visCharacterPerpendicular): return "Char.Perpendicular";
                             default:
                                 break;
@@ -1093,8 +1093,8 @@ namespace VisioAutomation.ShapeSheet
                                                  {"Char.Strikethru",SRCConstants.Char_Strikethru},
                                                  {"Char.Style",SRCConstants.Char_Style},
                                                  {"Char.Pos",SRCConstants.Char_Pos},
-                                                 {"Char.RTLText",SRCConstants.RTLText},
-                                                 {"Char.UseVertical",SRCConstants.UseVertical},
+                                                 {"Char.RTLText",SRCConstants.Char_RTLText},
+                                                 {"Char.UseVertical",SRCConstants.Char_UseVertical},
 
                                                  //glueinfo
                                                  {"BegTrigger",SRCConstants.BegTrigger},
