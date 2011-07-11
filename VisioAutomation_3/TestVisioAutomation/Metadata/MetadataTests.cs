@@ -129,7 +129,7 @@ namespace TestVisioAutomation
             var db = VA.Metadata.MetadataDB.Load();
             var db_autoenums = db.AutomationEnums;
 
-            var pia_enums = VA.Interop.InteropHelper.GetEnumTypes();
+            var pia_enums = VA.Interop.InteropHelper.GetEnums().Select(i=>i.Type);
 
             var db_name_to_enum = db_autoenums.ToDictionary(i => i.Name, i => i);
             foreach (var pia_enum in pia_enums)
