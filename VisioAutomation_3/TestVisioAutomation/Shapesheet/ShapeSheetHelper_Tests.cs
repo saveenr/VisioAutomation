@@ -12,12 +12,6 @@ namespace TestVisioAutomation
     public class ShapeSheetHelperTests_Query : VisioAutomationTest
     {
         private static VA.Metadata.MetadataDB mdx = VA.Metadata.MetadataDB.Load();
-        private static short[] _secObjectRowIndices = new[]
-                                           {
-                                               (short) IVisio.VisRowIndices.visRowFill,
-                                               (short) IVisio.VisRowIndices.visRowLine,
-                                               (short) IVisio.VisRowIndices.visRowLock,
-                                           };
 
         [TestMethod]
         public void SpotCheckNameToSRCMapping()
@@ -84,6 +78,25 @@ namespace TestVisioAutomation
             var failures = new List<string>();
             var success = new List<string>();
 
+            /*
+            foreach (var md_sec in mdx.Sections)
+            {
+                short sec_index = (short) mdx.GetAutomationConstantByName(md_sec.Enum).GetValueAsInt();
+                Debug.WriteLine(md_sec.DisplayName);
+                var cells = mdx.Cells.Where(c => c.SectionIndex == md_sec.Enum).Where( c=>c.Object.Contains("shape")).ToList();
+                foreach (var cellinfo in EnumCellsInSection(shape1, sec_index))
+                {
+
+                    if (cellinfo.NameVisioInterop != cellinfo.NameFromVisioAutomation)
+                    {
+                        string msg = string.Format(" {0}!={1}  {2}", cellinfo.NameVisioInterop,
+                                                   cellinfo.NameFromVisioAutomation, cellinfo.SRC.ToString());
+                        failures.Add(msg);
+                       
+                    }
+                }
+            }*/
+
             short[] section_indexes = new short[] { 
                 (short)IVisio.VisSectionIndices.visSectionObject, 
                 //(short)IVisio.VisSectionIndices.visSectionCharacter 
@@ -92,7 +105,7 @@ namespace TestVisioAutomation
             foreach (var section_index in section_indexes)
             {
                 
-                var cellinfos = EnumSRCsInSection(shape1, section_index).ToList();
+                var cellinfos = EnumCellsInSection(shape1, section_index).ToList();
                 foreach (var cellinfo_src in cellinfos)
                 {
                     // what does VA think the cell name is
@@ -129,52 +142,56 @@ namespace TestVisioAutomation
             doc1.Close(true);
         }
 
-        public IEnumerable<VA.ShapeSheet.SRC> EnumSRCsInSection(IVisio.Shape shape, short section_index)
+        private IEnumerable<VA.ShapeSheet.SRC> EnumCellsInSection(IVisio.Shape shape, short section_index)
         {
-            // if the section doesn't exist then stop
             if (0 == shape.SectionExists[section_index, 1])
             {
                 yield break;
             }
-
-
             var sec = shape.Section[section_index];
 
+
+            foreach (short row_index in EnumRowIndicesForSection(shape,section_index))
+            {
+                var row = sec[row_index];
+                int num_cells = shape.RowsCellCount[section_index,row_index];
+                for (int c = 0; c < num_cells; c++)
+                {
+                    var cell = row[c];
+                    var cell_name = cell.Name;
+                    var cell_src = new VA.ShapeSheet.SRC(cell.Section, cell.Row, cell.Column);
+                    yield return cell_src;
+                }
+            }
+        }
+
+        private short[] section_obj_rows = new short[]
+                                               {
+                                                    (short) IVisio.VisRowIndices.visRowFill,
+                                                    (short) IVisio.VisRowIndices.visRowLine,
+                                                    (short)IVisio.VisRowIndices.visRowXFormOut };
+
+        private IEnumerable<short> EnumRowIndicesForSection(IVisio.Shape shape, short section_index)
+        {
             if (section_index == (short)IVisio.VisSectionIndices.visSectionObject)
             {
-                foreach (var ri in _secObjectRowIndices)
+                foreach (var row_index in section_obj_rows)
                 {
-                    foreach (var src in EnumSRCsInRow(shape, sec, section_index, ri))
+                    if (shape.RowExists[(short)section_index, (short)row_index, (short)0] != 0)
                     {
-                        yield return src;
+                        yield return row_index;
                     }
                 }
             }
             else
             {
                 short num_rows = shape.RowCount[section_index];
-                for (short r = 0; r < num_rows; r++)
+                for (short row_index = 0; row_index < num_rows; row_index++)
                 {
-                    foreach (var src in EnumSRCsInRow(shape, sec, section_index, r))
-                    {
-                        yield return src;
-                    }
+                    yield return row_index;
                 }
-
             }
         }
 
-        public IEnumerable<VA.ShapeSheet.SRC> EnumSRCsInRow(IVisio.Shape shape, IVisio.Section sec, short section_index, short row_index)
-        {
-            var row = sec[row_index];
-            int num_cells = shape.RowsCellCount[section_index, row_index];
-            for (int c = 0; c < num_cells; c++)
-            {
-                var cell = row[c];
-                var cell_name = cell.Name;
-                var cell_src = new VA.ShapeSheet.SRC(cell.Section, cell.Row, cell.Column);
-                yield return cell_src;
-            }
-        }
     }
 }
