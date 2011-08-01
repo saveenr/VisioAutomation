@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -74,14 +75,11 @@ namespace VisioAutomation.Scripting.Commands
 
             var lines = new List<string>();
 
-            var cmd_types = typeof (VA.Scripting.Session).GetProperties()
-                .Where(
-                p => typeof (VA.Scripting.SessionCommands).IsAssignableFrom(p.PropertyType))
-                .Select(p=>p.PropertyType)
-                .ToList();
+            var cmdst_props = GetCmdsetPropeties();
 
-            foreach (var cmd_type in cmd_types)
+            foreach (var cmdset_prop in cmdst_props)
             {
+                var cmdset_type = cmdset_prop.PropertyType;
                 lines.Clear();
                 
                 var page = doc.Pages.Add();
@@ -89,7 +87,7 @@ namespace VisioAutomation.Scripting.Commands
                 var pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), pagesize);
                 VA.PageHelper.SetSize(page, pagesize);
 
-                var methods = this.get_command_methods(cmd_type);
+                var methods = this.get_command_methods(cmdset_type);
 
                 var sb = new System.Text.StringBuilder();
                 foreach (var method in methods)
@@ -114,7 +112,7 @@ namespace VisioAutomation.Scripting.Commands
                          pagerect.UpperRight.Subtract(0.5, 0.5));
 
                 var titleshape = page.DrawRectangle(titlerect);
-                titleshape.Text = cmd_type.FullName;
+                titleshape.Text = cmdset_prop.Name;
                 short titleshape_id = titleshape.ID16;
 
                 var bodyrect = new VA.Drawing.Rectangle(pagerect.LowerLeft.Add(0.5, 0.5),
@@ -146,6 +144,15 @@ namespace VisioAutomation.Scripting.Commands
 
 
             return doc;
+        }
+
+        private static List<System.Reflection.PropertyInfo> GetCmdsetPropeties()
+        {
+            var props = typeof(VA.Scripting.Session).GetProperties()
+                .Where(
+                    p => typeof(VA.Scripting.SessionCommands).IsAssignableFrom(p.PropertyType))
+                .ToList();
+            return props;
         }
     }
 
