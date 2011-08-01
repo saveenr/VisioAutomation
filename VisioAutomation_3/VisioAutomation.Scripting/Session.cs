@@ -93,27 +93,12 @@ namespace VisioAutomation.Scripting
 
         internal bool HasSelectedShapes()
         {
-            return HasSelectedShapes(1);
+            return this.Selection.HasSelectedShapes();
         }
 
         internal bool HasSelectedShapes(int min_items)
         {
-            Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
-            if (min_items <= 0)
-            {
-                throw new System.ArgumentOutOfRangeException("min_items");
-            }
-
-            if (!HasActiveDrawing())
-            {
-                return false;
-            }
-
-            var application = VisioApplication;
-            var active_window = application.ActiveWindow;
-            var selection = active_window.Selection;
-            bool v = selection.Count >= min_items;
-            return v;
+            return this.Selection.HasSelectedShapes(min_items);
         }
 
         public bool HasActiveDrawing()
