@@ -1,3 +1,4 @@
+using VisioAutomation.Scripting.Commands;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
@@ -28,6 +29,7 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.UserDefinedCellCommands UserDefinedCell { get; private set; }
         public VA.Scripting.Commands.DocumentCommands Document { get; private set; }
         public VA.Scripting.Commands.DeveloperCommands Developer { get; private set; }
+        public VA.Scripting.Commands.OutputCommands Output { get; private set; }
 
         public Session() :
             this(null)
@@ -58,9 +60,10 @@ namespace VisioAutomation.Scripting
             this.UserDefinedCell = new Commands.UserDefinedCellCommands(this);
             this.Document = new Commands.DocumentCommands(this);
             this.Developer = new Commands.DeveloperCommands(this);
+            this.Output = new OutputCommands(this);
         }
 
-        public void Write(OutputStream output, string s)
+        internal void Write(OutputStream output, string s)
         {
             if (output == OutputStream.User)
             {
@@ -84,13 +87,12 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        public void Write(OutputStream output, string fmt, params object[] items)
+        internal void Write(OutputStream output, string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
             this.Write(output, s);
         }
-
-
+        
         internal bool HasSelectedShapes()
         {
             return this.Selection.HasSelectedShapes();

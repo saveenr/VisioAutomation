@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="XmlUtil.cs" />
     <Compile Include="ShapeSheetUpdate.cs" />
