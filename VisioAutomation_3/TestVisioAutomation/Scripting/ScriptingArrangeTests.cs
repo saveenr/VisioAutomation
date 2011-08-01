@@ -83,7 +83,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(new VA.Drawing.Point(1.125, 3.75), xforms1[1].Pin);
             Assert.AreEqual(new VA.Drawing.Point(1.125, 2.5), xforms1[2].Pin);
 
-            ss.Undo();
+            ss.Application.Undo();
 
             ss.Layout.Stack(VA.Drawing.Axis.XAxis, 0.20);
 

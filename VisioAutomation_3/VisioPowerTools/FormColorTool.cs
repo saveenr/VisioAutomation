@@ -44,7 +44,7 @@ namespace VisioPowerTools
         private void buttonRead_Click(object sender, System.EventArgs e)
         {
             var scriptingsession = VisioPowerToolsAddIn.ScriptingSession;
-            if (!scriptingsession.HasSelectedShapes())
+            if (!scriptingsession.Selection.HasSelectedShapes())
             {
                 return;
             }

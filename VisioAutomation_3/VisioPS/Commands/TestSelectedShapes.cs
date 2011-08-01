@@ -10,7 +10,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            this.WriteObject(scriptingsession.HasSelectedShapes());
+            this.WriteObject(scriptingsession.Selection.HasSelectedShapes());
         }
     }
 }

@@ -21,9 +21,9 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.DrawCommands Draw { get; private set; }
         public VA.Scripting.Commands.MasterCommands Master { get; private set; }
         public VA.Scripting.Commands.LayoutCommands Layout { get; private set; }
-        public VA.Scripting.Commands.PageCommands Page{ get; private set; }
+        public VA.Scripting.Commands.PageCommands Page { get; private set; }
         public VA.Scripting.Commands.SelectionCommands Selection { get; private set; }
-        public VA.Scripting.Commands.ShapeSheetCommands ShapeSheet{ get; private set; }
+        public VA.Scripting.Commands.ShapeSheetCommands ShapeSheet { get; private set; }
         public VA.Scripting.Commands.TextCommands Text { get; private set; }
         public VA.Scripting.Commands.UserDefinedCellCommands UserDefinedCell { get; private set; }
         public VA.Scripting.Commands.DocumentCommands Document { get; private set; }
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting
             this.Connection = new Commands.ConnectionCommands(this);
             this.ConnectionPoint = new Commands.ConnectionPointCommands(this);
             this.Draw = new Commands.DrawCommands(this);
-            this.Master= new Commands.MasterCommands(this);
+            this.Master = new Commands.MasterCommands(this);
             this.Layout = new Commands.LayoutCommands(this);
             this.Page = new Commands.PageCommands(this);
             this.Selection = new Commands.SelectionCommands(this);
@@ -59,7 +59,7 @@ namespace VisioAutomation.Scripting
             this.Document = new Commands.DocumentCommands(this);
             this.Developer = new Commands.DeveloperCommands(this);
         }
-        
+
         public void Write(OutputStream output, string s)
         {
             if (output == OutputStream.User)
@@ -90,12 +90,13 @@ namespace VisioAutomation.Scripting
             this.Write(output, s);
         }
 
-        public bool HasSelectedShapes()
+
+        internal bool HasSelectedShapes()
         {
             return HasSelectedShapes(1);
         }
 
-        public bool HasSelectedShapes(int min_items)
+        internal bool HasSelectedShapes(int min_items)
         {
             Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
             if (min_items <= 0)
@@ -132,57 +133,12 @@ namespace VisioAutomation.Scripting
             {
                 return false;
             }
-            if (active_window.Type != (int)IVisio.VisWinTypes.visDrawing)
+            if (active_window.Type != (int) IVisio.VisWinTypes.visDrawing)
             {
                 return false;
             }
 
             return true;
-        }
-
-        public void Undo()
-        {
-            VisioApplication.Undo();
-        }
-
-        public void Redo()
-        {
-            VisioApplication.Redo();
-        }
-
-        public void Duplicate()
-        {
-            if (!HasSelectedShapes())
-            {
-                return;
-            }
-            var active_window = this.View.GetActiveWindow();
-            var selection = active_window.Selection;
-            selection.Duplicate();
-        }
-
-        public void Delete()
-        {
-            if (!this.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var selection = this.Selection.GetSelection();
-            selection.Delete();
-        }
-
-        public void Copy()
-        {
-            if (!this.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var flags = IVisio.VisCutCopyPasteCodes.visCopyPasteNormal;
-
-            var selection = this.Selection.GetSelection();
-            selection.Copy(flags);
         }
     }
 }

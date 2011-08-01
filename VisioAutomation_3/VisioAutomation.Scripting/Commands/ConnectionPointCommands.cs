@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <returns></returns>
         public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> GetConnectionPoints()
         {
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Session.Selection.HasSelectedShapes())
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
             }
@@ -57,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             VA.Connections.ConnectionPointType type)
         {
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Session.Selection.HasSelectedShapes())
             {
                 return new List<int>(0);
             }
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="index"></param>
         public void DeleteConnectionPoint(int index)
         {
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Session.Selection.HasSelectedShapes())
             {
                 return;
             }

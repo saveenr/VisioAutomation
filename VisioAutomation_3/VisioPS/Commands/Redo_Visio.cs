@@ -9,7 +9,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            scriptingsession.Redo();
+            scriptingsession.Application.Redo();
         }
     }
 }

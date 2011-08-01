@@ -95,5 +95,15 @@ namespace VisioAutomation.Scripting.Commands
             return app;
         }
 
+        public void Undo()
+        {
+            this.Session.VisioApplication.Undo();
+        }
+
+        public void Redo()
+        {
+            this.Session.VisioApplication.Redo();
+        }
+
     }
 }

@@ -253,5 +253,65 @@ namespace VisioAutomation.Scripting.Commands
             sel.IterationMode = original_itermode;
             return shapes;
         }
+
+        public void Delete()
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var selection = this.GetSelection();
+            selection.Delete();
+        }
+
+        public void Copy()
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var flags = IVisio.VisCutCopyPasteCodes.visCopyPasteNormal;
+
+            var selection = this.GetSelection();
+            selection.Copy(flags);
+        }
+
+        public void Duplicate()
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return;
+            }
+            var active_window = this.Session.View.GetActiveWindow();
+            var selection = active_window.Selection;
+            selection.Duplicate();
+        }
+
+        public bool HasSelectedShapes()
+        {
+            return HasSelectedShapes(1);
+        }
+
+        public bool HasSelectedShapes(int min_items)
+        {
+            this.Session.Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
+            if (min_items <= 0)
+            {
+                throw new System.ArgumentOutOfRangeException("min_items");
+            }
+
+            if (!this.Session.HasActiveDrawing())
+            {
+                return false;
+            }
+
+            var application = this.Session.VisioApplication;
+            var active_window = application.ActiveWindow;
+            var selection = active_window.Selection;
+            bool v = selection.Count >= min_items;
+            return v;
+        }
     }
 }

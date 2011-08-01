@@ -217,7 +217,7 @@ namespace VisioPowerTools
         {
             var addin = Globals.VisioPowerToolsAddIn;
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            if (!ss.HasSelectedShapes())
+            if (!ss.Selection.HasSelectedShapes())
             {
                 return;
             }

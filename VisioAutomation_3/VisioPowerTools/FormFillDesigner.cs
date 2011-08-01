@@ -113,7 +113,7 @@ namespace VisioPowerTools
         {
             var app = VisioPowerToolsAddIn.ScriptingSession;
 
-            if (!app.HasSelectedShapes())
+            if (!app.Selection.HasSelectedShapes())
             {
                 return;
             }
