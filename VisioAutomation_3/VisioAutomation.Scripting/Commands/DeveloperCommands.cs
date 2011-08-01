@@ -64,6 +64,11 @@ namespace VisioAutomation.Scripting.Commands
 
         public virtual IVisio.Document DrawDocumentation()
         {
+            var pagesize = new VA.Drawing.Size(8.5, 11);
+            var pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), pagesize);
+            var titlerect = new VA.Drawing.Rectangle(pagerect.UpperLeft.Add(0.5, -1.0), pagerect.UpperRight.Subtract(0.5, 0.5));
+            var bodyrect = new VA.Drawing.Rectangle(pagerect.LowerLeft.Add(0.5, 0.5), pagerect.UpperRight.Subtract(0.5, 1.0));
+
             var app = this.Session.VisioApplication;
             var docs = app.Documents;
             var doc = docs.Add("");
@@ -73,72 +78,63 @@ namespace VisioAutomation.Scripting.Commands
             doc.Creator = "";
             doc.Company = "";
 
+            var textblockformat = new VA.Text.TextBlockFormatCells();
+            textblockformat.VerticalAlign = 0;
+
+            var title_para_fmt = new VA.Text.ParagraphFormatCells();
+            title_para_fmt.HorizontalAlign = 0;
+
+            var body_para_fmt = new VA.Text.ParagraphFormatCells();
+            body_para_fmt.HorizontalAlign = 0;
+            body_para_fmt.SpacingAfter = VA.Convert.PointsToInches(6.0);
+
             var lines = new List<string>();
 
             var cmdst_props = GetCmdsetPropeties();
+            var sb = new System.Text.StringBuilder();
+            var helpstr = new System.Text.StringBuilder();
 
             foreach (var cmdset_prop in cmdst_props)
             {
                 var cmdset_type = cmdset_prop.PropertyType;
-                lines.Clear();
                 
                 var page = doc.Pages.Add();
-                var pagesize = new VA.Drawing.Size(8.5, 11);
-                var pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), pagesize);
+                page.NameU = cmdset_prop.Name + " commands";
                 VA.PageHelper.SetSize(page, pagesize);
 
+                // Calculate the text
                 var methods = this.get_command_methods(cmdset_type);
-
-                var sb = new System.Text.StringBuilder();
+                lines.Clear();
                 foreach (var method in methods)
                 {
                     sb.Length = 0;
                     var method_params = method.GetParameters();
                     TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("[{0}] {1}", param.ParameterType.Name, param.Name)));
-                    string line = string.Format("{0}({1})", method.Name, sb.ToString());
-                    lines.Add(line.ToString());
+                    string line = string.Format("{0}({1})", method.Name, sb);
+                    lines.Add(line);
                 }
 
                 lines.Sort();
+                
+                helpstr.Length = 0;
+                TextUtil.Join(helpstr,"\r\n",lines);
 
-                var helpstr = new System.Text.StringBuilder(lines.Select(s => s.Length + 2).Sum());
-                foreach (var line in lines)
-                {
-                    helpstr.Append(line);
-                    helpstr.Append("\r\n");
-                }
-
-                var titlerect = new VA.Drawing.Rectangle(pagerect.UpperLeft.Add(0.5, -1.0),
-                         pagerect.UpperRight.Subtract(0.5, 0.5));
-
+                // Draw the shapes
                 var titleshape = page.DrawRectangle(titlerect);
                 titleshape.Text = cmdset_prop.Name;
-                short titleshape_id = titleshape.ID16;
-
-                var bodyrect = new VA.Drawing.Rectangle(pagerect.LowerLeft.Add(0.5, 0.5),
-                                                     pagerect.UpperRight.Subtract(0.5, 1.0));
 
                 var bodyshape = page.DrawRectangle(bodyrect);
                 bodyshape.Text = helpstr.ToString();
-                short bodyshapeid = bodyshape.ID16;
 
-                var textblockformat = new VA.Text.TextBlockFormatCells();
-                textblockformat.VerticalAlign = 0;
-
-                var title_para_fmt = new VA.Text.ParagraphFormatCells();
-                title_para_fmt.HorizontalAlign = 0;
-
-                var body_para_fmt = new VA.Text.ParagraphFormatCells();
-                body_para_fmt.HorizontalAlign = 0;
-                body_para_fmt.SpacingAfter = VA.Convert.PointsToInches(6.0);
                 var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
+                // Set the ShapeSheet props
+                short bodyshapeid = bodyshape.ID16;
+                short titleshape_id = titleshape.ID16;
                 textblockformat.Apply(update, titleshape_id);
                 textblockformat.Apply(update, bodyshapeid);
-
                 title_para_fmt.Apply(update, titleshape_id, 0);
                 body_para_fmt.Apply(update, bodyshapeid, 0);
-
                 update.Execute(page);
             }
 
@@ -153,29 +149,6 @@ namespace VisioAutomation.Scripting.Commands
                     p => typeof(VA.Scripting.SessionCommands).IsAssignableFrom(p.PropertyType))
                 .ToList();
             return props;
-        }
-    }
-
-    internal static class TextUtil
-    {
-        public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)
-        {
-            int n = tokens.Count();
-            int c = tokens.Select(t => t.Length).Sum();
-            c += (n > 1) ? s.Length*n : 0;
-            c += sb.Length;
-            sb.EnsureCapacity(c);
-
-            int i = 0;
-            foreach (string t in tokens)
-            {
-                if (i > 0)
-                {
-                    sb.Append(s);
-                }
-                sb.Append(t);
-                i++;
-            }
         }
     }
 }

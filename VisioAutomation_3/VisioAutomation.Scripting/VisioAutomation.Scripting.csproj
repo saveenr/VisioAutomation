@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
+    <Compile Include="Commands\TextUtil.cs" />
     <Compile Include="XmlUtil.cs" />
     <Compile Include="ShapeSheetUpdate.cs" />
     <Compile Include="Commands\ApplicationCommands.cs" />
