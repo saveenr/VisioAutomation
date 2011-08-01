@@ -14,7 +14,7 @@ namespace TestVisioAutomation
 
             string t1 = ss.Document.GetHelp();
             string t2 = ss.CustomProp.GetHelp();
-
+            ss.Developer.DrawDocumentationX();
 
         }
 
