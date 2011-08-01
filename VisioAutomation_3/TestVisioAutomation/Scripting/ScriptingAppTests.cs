@@ -12,9 +12,7 @@ namespace TestVisioAutomation
         {
             var ss = GetScriptingSession();
 
-            string t1 = ss.Document.GetHelp();
-            string t2 = ss.CustomProp.GetHelp();
-            ss.Developer.DrawDocumentationX();
+            ss.Developer.DrawDocumentation();
 
         }
 
