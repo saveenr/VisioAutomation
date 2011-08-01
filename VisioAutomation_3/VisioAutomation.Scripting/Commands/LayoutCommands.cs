@@ -71,7 +71,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(VA.Drawing.AlignmentHorizontal halign)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -83,7 +83,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(VA.Drawing.AlignmentVertical valign)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -95,7 +95,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(VA.Drawing.Axis axis)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -110,7 +110,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(VA.Drawing.Axis axis, double d)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -294,7 +294,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public int GetSelectedShapeCount()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return 0;
             }

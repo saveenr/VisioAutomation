@@ -209,7 +209,7 @@ namespace VisioAutomation.Scripting.Commands
                                           double radius,
                                           IList<double> values)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return null;
             }

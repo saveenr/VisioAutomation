@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public double GetActiveZoom()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("Has no active drawing");
             }
@@ -56,7 +56,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ZoomToPercentage(double amount)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;   
             }
@@ -72,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Zoom(Zoom zoom)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }

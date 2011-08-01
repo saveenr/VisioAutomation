@@ -19,7 +19,7 @@ namespace VisioPowerTools
 
             var ss = VisioPowerToolsAddIn.ScriptingSession;
 
-            if (!ss.HasActiveDrawing())
+            if (!ss.HasActiveDrawing)
             {
                 MessageBox.Show("There is no drawing open to export");
             }

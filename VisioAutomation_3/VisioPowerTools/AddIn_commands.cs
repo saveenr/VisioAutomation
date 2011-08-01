@@ -288,7 +288,7 @@ namespace VisioPowerTools
         public static void CmdExportAsSVGXHTML()
         {
             var ss = ScriptingSession;
-            if (!ss.HasActiveDrawing())
+            if (!ss.HasActiveDrawing)
             {
                 System.Windows.Forms.MessageBox.Show("Open or create a new Drawing to export it.");
                 return;
@@ -301,7 +301,7 @@ namespace VisioPowerTools
         public static void CmdExportAsXAML()
         {
             var ss = ScriptingSession;
-            if (!ss.HasActiveDrawing())
+            if (!ss.HasActiveDrawing)
             {
                 System.Windows.Forms.MessageBox.Show("Open or create a new Drawing to export it.");
                 return;

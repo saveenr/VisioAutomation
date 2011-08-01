@@ -101,29 +101,32 @@ namespace VisioAutomation.Scripting
             return this.Selection.HasSelectedShapes(min_items);
         }
 
-        public bool HasActiveDrawing()
+        public bool HasActiveDrawing
         {
-            var application = VisioApplication;
-            var active_window = application.ActiveWindow;
+            get
+            {
+                var application = VisioApplication;
+                var active_window = application.ActiveWindow;
 
-            if (active_window == null)
-            {
-                return false;
-            }
-            if (application.ActiveDocument == null)
-            {
-                return false;
-            }
-            if (application.ActivePage == null)
-            {
-                return false;
-            }
-            if (active_window.Type != (int) IVisio.VisWinTypes.visDrawing)
-            {
-                return false;
-            }
+                if (active_window == null)
+                {
+                    return false;
+                }
+                if (application.ActiveDocument == null)
+                {
+                    return false;
+                }
+                if (application.ActivePage == null)
+                {
+                    return false;
+                }
+                if (active_window.Type != (int) IVisio.VisWinTypes.visDrawing)
+                {
+                    return false;
+                }
 
-            return true;
+                return true;
+            }
         }
     }
 }

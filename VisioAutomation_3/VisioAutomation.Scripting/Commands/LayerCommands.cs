@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Layer> GetLayers()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 new List<IVisio.Layer>(0);
             }

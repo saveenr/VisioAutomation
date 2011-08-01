@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseDocument(bool force)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -72,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SaveDocument()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 this.Session.Write(OutputStream.Error, "No Drawing to Save");
                 return;
@@ -84,7 +84,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SaveDocumentAs(string filename)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 this.Session.Write(OutputStream.Error, "No Drawing to Save");
                 return;

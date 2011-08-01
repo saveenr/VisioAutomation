@@ -270,7 +270,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetStyleProperties(string stylename, string fontname)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }

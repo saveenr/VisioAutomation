@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectAll()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectInvert()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -93,7 +93,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectNone()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -111,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shape");
             }
 
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shapes");
             }
 
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -145,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shapeids");
             }
 
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -165,7 +165,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("shapes");
             }
 
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -175,7 +175,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectShapesByMaster(IVisio.Master master)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectShapesInLayer(string layername)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -302,7 +302,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException("min_items");
             }
 
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return false;
             }

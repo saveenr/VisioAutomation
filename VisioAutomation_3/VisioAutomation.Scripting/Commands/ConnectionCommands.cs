@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <returns></returns>
         public IList<VA.Connections.ConnectorEdge> GetTransitiveClosure(Connections.ConnectorArrowEdgeHandling flag)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return new List<VA.Connections.ConnectorEdge>(0);
             }
@@ -37,12 +37,12 @@ namespace VisioAutomation.Scripting.Commands
         /// <returns></returns>
         public IList<VA.Connections.ConnectorEdge> GetDirectedEdges(Connections.ConnectorArrowEdgeHandling flag)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return new List<VA.Connections.ConnectorEdge>(0);
             }
 
-            if (this.Session.HasActiveDrawing())
+            if (this.Session.HasActiveDrawing)
             {
                 var directed_edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage, flag);
                 return directed_edges;
@@ -62,7 +62,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             IList<VA.Connections.ConnectorEdge> edges = new List<VA.Connections.ConnectorEdge>(0);
 
-            if (this.Session.HasActiveDrawing())
+            if (this.Session.HasActiveDrawing)
             {
                 edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
             }
@@ -138,7 +138,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> ConnectShapes(IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 new List<IVisio.Shape>(0);
             }

@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page GetPage()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("No Drawing available");
             }
@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Drawing.Size GetPageSize()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("No Drawing available");
             }
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("background_page_name");
             }
 
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -126,7 +126,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void DuplicatePage()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -140,7 +140,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void DuplicatePageToNewDocument()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -161,7 +161,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Layout.PrintPageOrientation GetPageOrientation()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("No active page");
             }
@@ -173,7 +173,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetPageOrientation(VA.Layout.PrintPageOrientation orientation)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -188,7 +188,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ResizeToFitContents(VA.Drawing.Size bordersize, bool zoom_to_page)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -207,7 +207,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ResetPageOrigin()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -222,7 +222,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetPageSize(VA.Drawing.Size new_size)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
@@ -237,7 +237,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetPageSize(double? width, double? height)
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 return;
             }

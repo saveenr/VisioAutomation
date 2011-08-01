@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> GetMasters()
         {
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 this.Session.Write(OutputStream.Verbose,"No Active Document - 0 Masters");
                 new List<IVisio.Master>(0);
@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("points");
             }
 
-            if (!this.Session.HasActiveDrawing())
+            if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("No active page");
             }
