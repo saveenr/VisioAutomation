@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Drawing;
 using VisioAutomation.Extensions;
 using VisioAutomation.Format;
@@ -94,7 +95,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public virtual IVisio.Document DrawDocumentation()
         {
-            var dd = new DocDoc(this.Session.VisioApplication);
+            var dd = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication);
             var lines = new List<string>();
 
             var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
@@ -124,7 +125,7 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextUtil.Join(helpstr,"\r\n",lines);
 
-                var xpage = new DocPage();
+                var xpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
                 xpage.Title = cmdset_prop.Name + " commands";
                 xpage.Body = helpstr.ToString();
                 xpage.Name = cmdset_prop.Name + " commands";
@@ -146,15 +147,18 @@ namespace VisioAutomation.Scripting.Commands
             return props;
         }
     }
+}
 
-    internal class DocPage
+namespace VisioAutomation.Experimental.SimpleTextDoc
+{
+    internal class TextPage
     {
         public string Title;
         public string Body;
         public string Name;
     }
 
-    internal class DocDoc
+    internal class TextDocumentBuilder
     {
         public IVisio.Document doc;
         private Size _pagesize;
@@ -170,7 +174,7 @@ namespace VisioAutomation.Scripting.Commands
         private CharacterFormatCells _bodyCharFmt;
         private ShapeFormatCells _bodyFormat;
 
-        public DocDoc(IVisio.Application app)
+        public TextDocumentBuilder(IVisio.Application app)
         {
             _pagesize = new VA.Drawing.Size(8.5, 11);
             _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), _pagesize);
@@ -184,7 +188,7 @@ namespace VisioAutomation.Scripting.Commands
             doc.Title = "VisioAutomation.Scripting Documenation";
             doc.Creator = "";
             doc.Company = "";
-            
+
             var font = doc.Fonts["Segoe UI"];
             _fontid = font.ID;
 
@@ -215,7 +219,7 @@ namespace VisioAutomation.Scripting.Commands
             _bodyFormat.LinePattern = 0;
         }
 
-        public void Draw(DocPage xpage)
+        public void Draw(TextPage xpage)
         {
             var page = doc.Pages.Add();
             page.NameU = xpage.Name;
@@ -243,22 +247,25 @@ namespace VisioAutomation.Scripting.Commands
             this._bodyParaFmt.Apply(update, bodyshape_id, 0);
             this._bodyFormat.Apply(update, bodyshape_id);
             update.Execute(page);
-            
+
         }
 
         public void Finish()
+        {
+            DeleteFirstPage();
+
+            // set the new first page
+            var first_page = doc.Pages[1];
+            first_page.Activate();
+        }
+
+        private void DeleteFirstPage()
         {
             // Delete the empty first page
             var first_page = doc.Pages[1];
             first_page.Delete(1);
             first_page = null;
-
-            // set the new first page
-            first_page = doc.Pages[1];
-            first_page.Activate();
-
         }
-
     }
 
 }
