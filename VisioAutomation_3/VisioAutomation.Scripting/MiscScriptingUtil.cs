@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -8,20 +9,35 @@ namespace VisioAutomation.Scripting
 {
     internal static class MiscScriptingUtil
     {
-        internal static Dictionary<VA.Drawing.AlignmentHorizontal, IVisio.VisUICmds> halign_to_cmd = new Dictionary
-            <VA.Drawing.AlignmentHorizontal, IVisio.VisUICmds>
-                    {
-                        { VA.Drawing.AlignmentHorizontal.Left, IVisio.VisUICmds.visCmdAlignObjectLeft},
-                        { VA.Drawing.AlignmentHorizontal.Center, IVisio.VisUICmds.visCmdAlignObjectCenter },
-                        { VA.Drawing.AlignmentHorizontal.Right, IVisio.VisUICmds.visCmdAlignObjectRight }
-                    };
+        public static IVisio.VisUICmds AlignmentToUICmd(VA.Drawing.AlignmentHorizontal a)
+        {
+            if (a==VA.Drawing.AlignmentHorizontal.Left)
+            {
+                return IVisio.VisUICmds.visCmdAlignObjectLeft;
+            }
+            if (a==VA.Drawing.AlignmentHorizontal.Center)
+            {
+                return IVisio.VisUICmds.visCmdAlignObjectCenter;
+            }
+            if (a == VA.Drawing.AlignmentHorizontal.Right)
+            {
+                return IVisio.VisUICmds.visCmdAlignObjectRight;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
 
-        internal static Dictionary<VA.Drawing.AlignmentVertical, IVisio.VisUICmds> valign_to_cmd = new Dictionary
-            <VA.Drawing.AlignmentVertical, IVisio.VisUICmds>
-                    {
-                        { VA.Drawing.AlignmentVertical.Top, IVisio.VisUICmds.visCmdAlignObjectTop },
-                        { VA.Drawing.AlignmentVertical.Center, IVisio.VisUICmds.visCmdAlignObjectMiddle },
-                        { VA.Drawing.AlignmentVertical.Bottom, IVisio.VisUICmds.visCmdAlignObjectBottom }
-                    };
+        public static IVisio.VisUICmds AlignmentToUICmd(VA.Drawing.AlignmentVertical a)
+        {
+            if (a == VA.Drawing.AlignmentVertical.Top) { return IVisio.VisUICmds.visCmdAlignObjectTop; }
+            if (a==VA.Drawing.AlignmentVertical.Center) {   return IVisio.VisUICmds.visCmdAlignObjectMiddle; }
+            if (a == VA.Drawing.AlignmentVertical.Bottom) { return IVisio.VisUICmds.visCmdAlignObjectBottom; }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }

@@ -225,7 +225,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var cmd = MiscScriptingUtil.halign_to_cmd[align];
+            var cmd = MiscScriptingUtil.AlignmentToUICmd(align);
 
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())

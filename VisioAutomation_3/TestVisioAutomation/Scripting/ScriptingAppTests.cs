@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class ScriptingSessionTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Test_GetWindowText()
+        public void Scripting_DevDocumentation()
         {
             var ss = GetScriptingSession();
             var doc= ss.Developer.DrawDocumentation();
