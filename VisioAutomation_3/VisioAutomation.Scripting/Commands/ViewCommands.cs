@@ -4,7 +4,7 @@ using VA =VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class ViewCommands : SessionCommands
+    public class ViewCommands : CommandSet
     {
         public ViewCommands(Session session) :
             base(session)
@@ -31,7 +31,8 @@ namespace VisioAutomation.Scripting.Commands
         }
 
         private static void SetViewRectToSelection(IVisio.Window window,
-                                                   IVisio.VisBoundingBoxArgs bbargs, double padding_scale)
+                                                   IVisio.VisBoundingBoxArgs bbargs, 
+                                                   double padding_scale)
         {
             if (padding_scale < 0.0)
             {

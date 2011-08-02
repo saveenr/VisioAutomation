@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class UserDefinedCellCommands : SessionCommands
+    public class UserDefinedCellCommands : CommandSet
     {
         public UserDefinedCellCommands(Session session) :
             base(session)

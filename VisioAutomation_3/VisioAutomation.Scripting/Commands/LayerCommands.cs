@@ -8,7 +8,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class LayerCommands : SessionCommands
+    public class LayerCommands : CommandSet
     {
         public LayerCommands(Session session) :
             base(session)

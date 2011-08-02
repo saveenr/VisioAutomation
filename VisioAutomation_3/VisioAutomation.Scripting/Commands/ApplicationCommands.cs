@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class ApplicationCommands : SessionCommands
+    public class ApplicationCommands : CommandSet
     {
         public ApplicationCommands(Session session) :
             base(session)

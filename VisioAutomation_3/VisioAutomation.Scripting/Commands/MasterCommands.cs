@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class MasterCommands : SessionCommands
+    public class MasterCommands : CommandSet
     {
         public MasterCommands(Session session) :
             base(session)
@@ -59,7 +58,7 @@ namespace VisioAutomation.Scripting.Commands
                 var masters = active_document.Masters;
                 master = masters.ItemU[name];
             }
-            catch (COMException)
+            catch (System.Runtime.InteropServices.COMException)
             {
                 string msg = String.Format("No such master \"{0}\"", name);
                 throw new AutomationException(msg);
@@ -79,27 +78,18 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentNullException("stencil");
             }
 
-            IVisio.Document stencil_doc = null;
-            try
-            {
-                var application = this.Session.VisioApplication;
-                var documents = application.Documents;
-                stencil_doc = documents[stencil];
-            }
-            catch (COMException)
+            var application = this.Session.VisioApplication;
+            var documents = application.Documents;
+            IVisio.Document stencil_doc = VA.DocumentHelper.TryGetDocument(documents,stencil);
+            if (stencil_doc==null)
             {
                 string msg = String.Format("No such stencil \"{0}\"", stencil);
                 throw new AutomationException(msg);
             }
 
-
-            IVisio.Master masterobj = null;
-            try
-            {
-                var masters = stencil_doc.Masters;
-                masterobj = masters.ItemU[master];
-            }
-            catch (COMException)
+            var masters = stencil_doc.Masters;
+            IVisio.Master masterobj = VA.MasterHelper.TryGetMaster(masters,master);
+            if (masterobj==null)
             {
                 string msg = String.Format("No such master \"{0}\" in \"{1}\"", master, stencil);
                 throw new AutomationException(msg);

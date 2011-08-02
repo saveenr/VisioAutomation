@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class OutputCommands : SessionCommands
+    public class OutputCommands : CommandSet
     {
         public OutputCommands(Session session) :
             base(session)

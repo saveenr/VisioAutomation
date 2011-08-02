@@ -100,5 +100,18 @@ namespace VisioAutomation
                                       0);
             return doc;
         }
+
+        public static IVisio.Document TryGetDocument(IVisio.Documents documents, string name)
+        {
+            try
+            {
+                var stencil_doc = documents[name];
+                return stencil_doc;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                return null;
+            }
+        }
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Connections;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -10,7 +9,7 @@ namespace VisioAutomation.Scripting.Commands
 {
 
 
-    public class ConnectionPointCommands : SessionCommands
+    public class ConnectionPointCommands : CommandSet
     {
         public ConnectionPointCommands(Session session) :
             base(session)
@@ -82,7 +81,7 @@ namespace VisioAutomation.Scripting.Commands
                 foreach (var shape in shapes)
                 {
 
-                    int index = ConnectionPointHelper.AddConnectionPoint(shape, cp);
+                    int index = VA.Connections.ConnectionPointHelper.AddConnectionPoint(shape, cp);
                     indices.Add(index);
                 }
             }
@@ -104,7 +103,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
 
             var target_shapes = from shape in shapes
-                                where ConnectionPointHelper.GetConnectionPointCount(shape) > index
+                                where VA.Connections.ConnectionPointHelper.GetConnectionPointCount(shape) > index
                                 select shape;
 
             var application = this.Session.VisioApplication;
@@ -112,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in target_shapes)
                 {
-                    ConnectionPointHelper.DeleteConnectionPoint(shape, index);
+                    VA.Connections.ConnectionPointHelper.DeleteConnectionPoint(shape, index);
                 }
             }
         }

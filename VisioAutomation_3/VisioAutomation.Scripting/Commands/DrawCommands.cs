@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -9,7 +8,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class DrawCommands : SessionCommands
+    public class DrawCommands : CommandSet
     {
         public DrawCommands(Session session) :
             base(session)
@@ -17,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<IVisio.Shape> DrawDataTable(DataTable datatable,
+        public IList<IVisio.Shape> DrawDataTable(System.Data.DataTable datatable,
                                           IList<double> widths,
                                           IList<double> heights,
                                           VA.Drawing.Size cellspacing)

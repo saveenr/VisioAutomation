@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class DeveloperCommands : SessionCommands
+    public class DeveloperCommands : CommandSet
     {
         public DeveloperCommands(Session session) :
             base(session)
@@ -49,6 +49,7 @@ namespace VisioAutomation.Scripting.Commands
             return el_shapes;
         }
 
+
         private IEnumerable<System.Reflection.MethodInfo> get_command_methods(System.Type mytype) 
         {
             var methods = mytype.GetMethods().Where(m => m.IsPublic).Where(m => !m.IsStatic);
@@ -78,21 +79,41 @@ namespace VisioAutomation.Scripting.Commands
             doc.Creator = "";
             doc.Company = "";
 
+            var font = doc.Fonts["Segoe UI"];
+            int fontid = font.ID;
+
             var textblockformat = new VA.Text.TextBlockFormatCells();
             textblockformat.VerticalAlign = 0;
 
             var title_para_fmt = new VA.Text.ParagraphFormatCells();
             title_para_fmt.HorizontalAlign = 0;
 
+            var title_format = new VA.Format.ShapeFormatCells();
+            title_format.LineWeight = 0;
+            title_format.LinePattern= 0;
+
+            var title_char_fmt = new VA.Text.CharacterFormatCells();
+            title_char_fmt.Font = fontid;
+            title_char_fmt.Size = VA.Convert.PointsToInches(15.0);
+
             var body_para_fmt = new VA.Text.ParagraphFormatCells();
             body_para_fmt.HorizontalAlign = 0;
             body_para_fmt.SpacingAfter = VA.Convert.PointsToInches(6.0);
 
+            var body_char_fmt = new VA.Text.CharacterFormatCells();
+            body_char_fmt.Font = fontid;
+            body_char_fmt.Size = VA.Convert.PointsToInches(8.0);
+
+            var body_format = new VA.Format.ShapeFormatCells();
+            body_format.LineWeight = 0;
+            body_format.LinePattern = 0;
+
             var lines = new List<string>();
 
-            var cmdst_props = GetCmdsetPropeties();
+            var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
+
 
             foreach (var cmdset_prop in cmdst_props)
             {
@@ -121,7 +142,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 // Draw the shapes
                 var titleshape = page.DrawRectangle(titlerect);
-                titleshape.Text = cmdset_prop.Name;
+                titleshape.Text = cmdset_prop.Name + " commands";
 
                 var bodyshape = page.DrawRectangle(bodyrect);
                 bodyshape.Text = helpstr.ToString();
@@ -129,15 +150,28 @@ namespace VisioAutomation.Scripting.Commands
                 var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
                 // Set the ShapeSheet props
-                short bodyshapeid = bodyshape.ID16;
+                short bodyshape_id = bodyshape.ID16;
                 short titleshape_id = titleshape.ID16;
                 textblockformat.Apply(update, titleshape_id);
-                textblockformat.Apply(update, bodyshapeid);
                 title_para_fmt.Apply(update, titleshape_id, 0);
-                body_para_fmt.Apply(update, bodyshapeid, 0);
+                title_char_fmt.Apply(update,titleshape_id,0);
+                title_format.Apply(update,titleshape_id);
+
+                textblockformat.Apply(update, bodyshape_id);
+                body_para_fmt.Apply(update, bodyshape_id, 0);
+                body_char_fmt.Apply(update, bodyshape_id, 0);
+                body_format.Apply(update, bodyshape_id);
                 update.Execute(page);
             }
 
+            // Delete the empty first page
+            var first_page = doc.Pages[1];
+            first_page.Delete(1);
+            first_page = null;
+
+            // set the new first page
+            first_page = doc.Pages[1];
+            first_page.Activate();
 
             return doc;
         }
@@ -146,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             var props = typeof(VA.Scripting.Session).GetProperties()
                 .Where(
-                    p => typeof(VA.Scripting.SessionCommands).IsAssignableFrom(p.PropertyType))
+                    p => typeof(VA.Scripting.CommandSet).IsAssignableFrom(p.PropertyType))
                 .ToList();
             return props;
         }

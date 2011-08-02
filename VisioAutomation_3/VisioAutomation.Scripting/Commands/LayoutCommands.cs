@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class LayoutCommands : SessionCommands
+    public class LayoutCommands : CommandSet
     {
         public LayoutCommands(Session session) :
             base(session)

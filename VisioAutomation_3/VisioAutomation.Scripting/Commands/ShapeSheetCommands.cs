@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class ShapeSheetCommands : SessionCommands
+    public class ShapeSheetCommands : CommandSet
     {
         public ShapeSheetCommands(Session session) :
             base(session)

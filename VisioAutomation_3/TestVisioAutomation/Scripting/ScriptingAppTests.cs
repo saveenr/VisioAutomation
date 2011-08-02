@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -11,10 +12,8 @@ namespace TestVisioAutomation
         public void Scripting_Test_GetWindowText()
         {
             var ss = GetScriptingSession();
-
-            ss.Developer.DrawDocumentation();
-
+            var doc= ss.Developer.DrawDocumentation();
+            doc.Close(true);
         }
-
     }
 }

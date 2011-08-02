@@ -40,5 +40,12 @@ namespace VisioAutomationSamples
 
             page.ResizeToFitContents(1,1);
         }
+
+        public static void DrawDevDocs()
+        {
+            var app = SampleEnvironment.Application;
+            var ss = new VisioAutomation.Scripting.Session(app);
+            var doc = ss.Developer.DrawDocumentation();
+        }
     }
 }

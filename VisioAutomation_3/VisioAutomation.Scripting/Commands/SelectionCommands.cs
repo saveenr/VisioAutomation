@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class SelectionCommands : SessionCommands
+    public class SelectionCommands : CommandSet
     {
         public SelectionCommands(Session session) :
             base(session)
