@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void QuickStart()
+        public void HelloWorld()
         {
             if (this.Session.VisioApplication == null)
             {
@@ -23,7 +23,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var doc = this.Session.Document.NewDocument(8.5, 11);
             var pages = doc.Pages;
-            pages.Add();
+            var page = pages.Add();
+
+            var s0 = page.DrawRectangle(2, 2, 6, 6);
+            s0.Text = "Hello World";
         }
 
         public System.Xml.Linq.XElement GetXMLDescription()

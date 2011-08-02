@@ -97,6 +97,7 @@
     <Compile Include="BoxHierarchyShared.cs" />
     <Compile Include="ColorSample.cs" />
     <Compile Include="ConnectorSamples.cs" />
+    <Compile Include="DeveloperSamples.cs" />
     <Compile Include="DebugSamples.cs" />
     <Compile Include="FormSampleRunner.cs">
       <SubType>Form</SubType>
