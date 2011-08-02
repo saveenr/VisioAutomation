@@ -63,6 +63,32 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        private string get_nice_typename(System.Type t)
+        {
+            if (t == typeof(int))
+            {
+                return "int";
+            }
+            else if (t == typeof(string))
+            {
+                return "string";
+            }
+            else if (t == typeof(double))
+            {
+                return "double";
+            }
+            else if (t == typeof(bool))
+            {
+                return "bool";
+            }
+            else if (t == typeof(short))
+            {
+                return "short";
+            }
+
+            return t.Name;
+        }
+
         public virtual IVisio.Document DrawDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
@@ -130,7 +156,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     sb.Length = 0;
                     var method_params = method.GetParameters();
-                    TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("[{0}] {1}", param.ParameterType.Name, param.Name)));
+                    TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", get_nice_typename(param.ParameterType), param.Name)));
                     string line = string.Format("{0}({1})", method.Name, sb);
                     lines.Add(line);
                 }
