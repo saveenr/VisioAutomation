@@ -90,7 +90,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public virtual IVisio.Document DrawDocumentation()
         {
-            var dd = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication);
+            var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication);
             var lines = new List<string>();
 
             var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
@@ -125,12 +125,16 @@ namespace VisioAutomation.Scripting.Commands
                 xpage.Body = helpstr.ToString();
                 xpage.Name = cmdset_prop.Name + " commands";
 
-                dd.Draw(xpage);
+                docbuilder.Draw(xpage);
             }
 
-            dd.Finish();
+            docbuilder.Finish();
+            docbuilder.VisioDocument.Subject = "VisioAutomation.Scripting Documenation";
+            docbuilder.VisioDocument.Title = "VisioAutomation.Scripting Documenation";
+            docbuilder.VisioDocument.Creator = "";
+            docbuilder.VisioDocument.Company = "";
 
-            return dd.doc;
+            return docbuilder.VisioDocument;
         }
 
         private static List<System.Reflection.PropertyInfo> GetCmdsetPropeties()

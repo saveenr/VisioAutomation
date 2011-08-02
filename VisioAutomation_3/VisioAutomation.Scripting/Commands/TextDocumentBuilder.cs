@@ -1,3 +1,4 @@
+using Microsoft.Office.Interop.Visio;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -13,7 +14,8 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
 
     public class TextDocumentBuilder
     {
-        public IVisio.Document doc;
+        private IVisio.Document _visioDocument;
+
         private VA.Drawing.Size _pagesize;
         private VA.Drawing.Rectangle _pagerect;
         private VA.Drawing.Rectangle _titlerect;
@@ -35,14 +37,9 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             _bodyrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5), _pagerect.UpperRight.Subtract(0.5, 1.0));
 
             var docs = app.Documents;
-            doc = docs.Add("");
+            _visioDocument = docs.Add("");
 
-            doc.Subject = "VisioAutomation.Scripting Documenation";
-            doc.Title = "VisioAutomation.Scripting Documenation";
-            doc.Creator = "";
-            doc.Company = "";
-
-            var font = doc.Fonts["Segoe UI"];
+            var font = _visioDocument.Fonts["Segoe UI"];
             _fontid = font.ID;
 
             _textblockformat = new VA.Text.TextBlockFormatCells();
@@ -72,9 +69,14 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             _bodyFormat.LinePattern = 0;
         }
 
+        public Document VisioDocument
+        {
+            get { return _visioDocument; }
+        }
+
         public void Draw(VA.Experimental.SimpleTextDoc.TextPage xpage)
         {
-            var page = doc.Pages.Add();
+            var page = _visioDocument.Pages.Add();
             page.NameU = xpage.Name;
             VA.PageHelper.SetSize(page, this._pagesize);
 
@@ -108,14 +110,14 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             DeleteFirstPage();
 
             // set the new first page
-            var first_page = doc.Pages[1];
+            var first_page = _visioDocument.Pages[1];
             first_page.Activate();
         }
 
         private void DeleteFirstPage()
         {
             // Delete the empty first page
-            var first_page = doc.Pages[1];
+            var first_page = _visioDocument.Pages[1];
             first_page.Delete(1);
             first_page = null;
         }
