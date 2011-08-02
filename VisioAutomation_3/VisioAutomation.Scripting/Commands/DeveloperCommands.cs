@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing;
 using VisioAutomation.Extensions;
+using VisioAutomation.Format;
+using VisioAutomation.Text;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -91,63 +94,18 @@ namespace VisioAutomation.Scripting.Commands
 
         public virtual IVisio.Document DrawDocumentation()
         {
-            var pagesize = new VA.Drawing.Size(8.5, 11);
-            var pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), pagesize);
-            var titlerect = new VA.Drawing.Rectangle(pagerect.UpperLeft.Add(0.5, -1.0), pagerect.UpperRight.Subtract(0.5, 0.5));
-            var bodyrect = new VA.Drawing.Rectangle(pagerect.LowerLeft.Add(0.5, 0.5), pagerect.UpperRight.Subtract(0.5, 1.0));
-
-            var app = this.Session.VisioApplication;
-            var docs = app.Documents;
-            var doc = docs.Add("");
-
-            doc.Subject = "VisioAutomation.Scripting Documenation";
-            doc.Title = "VisioAutomation.Scripting Documenation";
-            doc.Creator = "";
-            doc.Company = "";
-
-            var font = doc.Fonts["Segoe UI"];
-            int fontid = font.ID;
-
-            var textblockformat = new VA.Text.TextBlockFormatCells();
-            textblockformat.VerticalAlign = 0;
-
-            var title_para_fmt = new VA.Text.ParagraphFormatCells();
-            title_para_fmt.HorizontalAlign = 0;
-
-            var title_format = new VA.Format.ShapeFormatCells();
-            title_format.LineWeight = 0;
-            title_format.LinePattern= 0;
-
-            var title_char_fmt = new VA.Text.CharacterFormatCells();
-            title_char_fmt.Font = fontid;
-            title_char_fmt.Size = VA.Convert.PointsToInches(15.0);
-
-            var body_para_fmt = new VA.Text.ParagraphFormatCells();
-            body_para_fmt.HorizontalAlign = 0;
-            body_para_fmt.SpacingAfter = VA.Convert.PointsToInches(6.0);
-
-            var body_char_fmt = new VA.Text.CharacterFormatCells();
-            body_char_fmt.Font = fontid;
-            body_char_fmt.Size = VA.Convert.PointsToInches(8.0);
-
-            var body_format = new VA.Format.ShapeFormatCells();
-            body_format.LineWeight = 0;
-            body_format.LinePattern = 0;
-
+            var dd = new DocDoc(this.Session.VisioApplication);
             var lines = new List<string>();
 
             var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 
-
             foreach (var cmdset_prop in cmdst_props)
             {
                 var cmdset_type = cmdset_prop.PropertyType;
-                
-                var page = doc.Pages.Add();
-                page.NameU = cmdset_prop.Name + " commands";
-                VA.PageHelper.SetSize(page, pagesize);
+
+              
 
                 // Calculate the text
                 var methods = this.get_command_methods(cmdset_type);
@@ -166,40 +124,17 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextUtil.Join(helpstr,"\r\n",lines);
 
-                // Draw the shapes
-                var titleshape = page.DrawRectangle(titlerect);
-                titleshape.Text = cmdset_prop.Name + " commands";
+                var xpage = new DocPage();
+                xpage.Title = cmdset_prop.Name + " commands";
+                xpage.Body = helpstr.ToString();
+                xpage.Name = cmdset_prop.Name + " commands";
 
-                var bodyshape = page.DrawRectangle(bodyrect);
-                bodyshape.Text = helpstr.ToString();
-
-                var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-                // Set the ShapeSheet props
-                short bodyshape_id = bodyshape.ID16;
-                short titleshape_id = titleshape.ID16;
-                textblockformat.Apply(update, titleshape_id);
-                title_para_fmt.Apply(update, titleshape_id, 0);
-                title_char_fmt.Apply(update,titleshape_id,0);
-                title_format.Apply(update,titleshape_id);
-
-                textblockformat.Apply(update, bodyshape_id);
-                body_para_fmt.Apply(update, bodyshape_id, 0);
-                body_char_fmt.Apply(update, bodyshape_id, 0);
-                body_format.Apply(update, bodyshape_id);
-                update.Execute(page);
+                dd.Draw(xpage);
             }
 
-            // Delete the empty first page
-            var first_page = doc.Pages[1];
-            first_page.Delete(1);
-            first_page = null;
+            dd.Finish();
 
-            // set the new first page
-            first_page = doc.Pages[1];
-            first_page.Activate();
-
-            return doc;
+            return dd.doc;
         }
 
         private static List<System.Reflection.PropertyInfo> GetCmdsetPropeties()
@@ -211,4 +146,119 @@ namespace VisioAutomation.Scripting.Commands
             return props;
         }
     }
+
+    internal class DocPage
+    {
+        public string Title;
+        public string Body;
+        public string Name;
+    }
+
+    internal class DocDoc
+    {
+        public IVisio.Document doc;
+        private Size _pagesize;
+        private Rectangle _pagerect;
+        private Rectangle _titlerect;
+        private Rectangle _bodyrect;
+        private int _fontid;
+        private TextBlockFormatCells _textblockformat;
+        private ParagraphFormatCells _titleParaFmt;
+        private ShapeFormatCells _titleFormat;
+        private CharacterFormatCells _titleCharFmt;
+        private ParagraphFormatCells _bodyParaFmt;
+        private CharacterFormatCells _bodyCharFmt;
+        private ShapeFormatCells _bodyFormat;
+
+        public DocDoc(IVisio.Application app)
+        {
+            _pagesize = new VA.Drawing.Size(8.5, 11);
+            _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), _pagesize);
+            _titlerect = new VA.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pagerect.UpperRight.Subtract(0.5, 0.5));
+            _bodyrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5), _pagerect.UpperRight.Subtract(0.5, 1.0));
+
+            var docs = app.Documents;
+            doc = docs.Add("");
+
+            doc.Subject = "VisioAutomation.Scripting Documenation";
+            doc.Title = "VisioAutomation.Scripting Documenation";
+            doc.Creator = "";
+            doc.Company = "";
+            
+            var font = doc.Fonts["Segoe UI"];
+            _fontid = font.ID;
+
+            _textblockformat = new VA.Text.TextBlockFormatCells();
+            _textblockformat.VerticalAlign = 0;
+
+            _titleParaFmt = new VA.Text.ParagraphFormatCells();
+            _titleParaFmt.HorizontalAlign = 0;
+
+            _titleFormat = new VA.Format.ShapeFormatCells();
+            _titleFormat.LineWeight = 0;
+            _titleFormat.LinePattern = 0;
+
+            _titleCharFmt = new VA.Text.CharacterFormatCells();
+            _titleCharFmt.Font = _fontid;
+            _titleCharFmt.Size = VA.Convert.PointsToInches(15.0);
+
+            _bodyParaFmt = new VA.Text.ParagraphFormatCells();
+            _bodyParaFmt.HorizontalAlign = 0;
+            _bodyParaFmt.SpacingAfter = VA.Convert.PointsToInches(6.0);
+
+            _bodyCharFmt = new VA.Text.CharacterFormatCells();
+            _bodyCharFmt.Font = _fontid;
+            _bodyCharFmt.Size = VA.Convert.PointsToInches(8.0);
+
+            _bodyFormat = new VA.Format.ShapeFormatCells();
+            _bodyFormat.LineWeight = 0;
+            _bodyFormat.LinePattern = 0;
+        }
+
+        public void Draw(DocPage xpage)
+        {
+            var page = doc.Pages.Add();
+            page.NameU = xpage.Name;
+            VA.PageHelper.SetSize(page, this._pagesize);
+
+            // Draw the shapes
+            var titleshape = page.DrawRectangle(_titlerect);
+            titleshape.Text = xpage.Title;
+
+            var bodyshape = page.DrawRectangle(_bodyrect);
+            bodyshape.Text = xpage.Body;
+
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+
+            // Set the ShapeSheet props
+            short bodyshape_id = bodyshape.ID16;
+            short titleshape_id = titleshape.ID16;
+            _textblockformat.Apply(update, titleshape_id);
+            this._titleParaFmt.Apply(update, titleshape_id, 0);
+            this._titleCharFmt.Apply(update, titleshape_id, 0);
+            this._titleFormat.Apply(update, titleshape_id);
+
+            _textblockformat.Apply(update, bodyshape_id);
+            this._bodyCharFmt.Apply(update, bodyshape_id, 0);
+            this._bodyParaFmt.Apply(update, bodyshape_id, 0);
+            this._bodyFormat.Apply(update, bodyshape_id);
+            update.Execute(page);
+            
+        }
+
+        public void Finish()
+        {
+            // Delete the empty first page
+            var first_page = doc.Pages[1];
+            first_page.Delete(1);
+            first_page = null;
+
+            // set the new first page
+            first_page = doc.Pages[1];
+            first_page.Activate();
+
+        }
+
+    }
+
 }
