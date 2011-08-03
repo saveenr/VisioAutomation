@@ -88,6 +88,12 @@ namespace VisioAutomation.Scripting.Commands
                 return "short";
             }
 
+            if (IsNullableType(t))
+            {
+                var actualtype = t.GetGenericArguments()[0];
+                return get_nice_typename(actualtype)+"?";
+            }
+
             if (t.IsGenericType)
             {
                 var sb = new System.Text.StringBuilder();
@@ -106,7 +112,22 @@ namespace VisioAutomation.Scripting.Commands
             return t.Name;
         }
 
-        public virtual IVisio.Document DrawDocumentation()
+        private bool IsNullableType(System.Type colType)
+        {
+            if (
+            (colType.IsGenericType) &&
+            (colType.GetGenericTypeDefinition() == typeof(System.Nullable<>)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public virtual IVisio.Document Documentation()
         {
             var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication);
             var lines = new List<string>();
