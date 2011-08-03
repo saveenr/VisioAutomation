@@ -88,6 +88,21 @@ namespace VisioAutomation.Scripting.Commands
                 return "short";
             }
 
+            if (t.IsGenericType)
+            {
+                var sb = new System.Text.StringBuilder();
+                var tokens = t.Name.Split(new[] {'`'});
+                
+                sb.Append(tokens[0]);
+                var gas = t.GetGenericArguments();
+                var ga_names = gas.Select(i => i.Name).ToList();
+
+                sb.Append("<");
+                TextUtil.Join(sb,", ",ga_names);
+                sb.Append(">");
+                return sb.ToString();
+            }
+
             return t.Name;
         }
 
