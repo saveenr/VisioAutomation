@@ -101,7 +101,7 @@ namespace VisioAutomation.Scripting.Commands
                 
                 sb.Append(tokens[0]);
                 var gas = t.GetGenericArguments();
-                var ga_names = gas.Select(i => i.Name).ToList();
+                var ga_names = gas.Select(i => get_nice_typename(i));
 
                 sb.Append("<");
                 TextUtil.Join(sb,", ",ga_names);
@@ -140,8 +140,6 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var cmdset_type = cmdset_prop.PropertyType;
 
-              
-
                 // Calculate the text
                 var methods = this.get_command_methods(cmdset_type);
                 lines.Clear();
@@ -150,8 +148,17 @@ namespace VisioAutomation.Scripting.Commands
                     sb.Length = 0;
                     var method_params = method.GetParameters();
                     TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", get_nice_typename(param.ParameterType), param.Name)));
-                    string line = string.Format("{0}({1})", method.Name, sb);
-                    lines.Add(line);
+
+                    if (method.ReturnType != typeof(void))
+                    {
+                        string line = string.Format("{0}({1}) -> {2}", method.Name, sb, get_nice_typename(method.ReturnType));
+                        lines.Add(line);
+                    }
+                    else
+                    {
+                        string line = string.Format("{0}({1})", method.Name, sb);
+                        lines.Add(line);
+                    }
                 }
 
                 lines.Sort();
