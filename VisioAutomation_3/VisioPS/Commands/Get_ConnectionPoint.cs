@@ -9,7 +9,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var dic = scriptingsession.ConnectionPoint.GetConnectionPoints();
+            var dic = scriptingsession.ConnectionPoint.Get();
             this.WriteObject(dic);
         }
     }

@@ -140,7 +140,7 @@ namespace VisioAutomation.Scripting.Commands
                 // In this case, we didn't find a SRC value for the name
                 // So we resort to setting the formulas, one-by-one
                 // This is very slow, but it should not occur in practice very often
-                var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
+                var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
                 foreach (var shape in shapes)
                 {
                     var cell = shape.Cells[cellname];
@@ -184,7 +184,7 @@ namespace VisioAutomation.Scripting.Commands
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             update.BlastGuards  = ((short) flags & (short) IVisio.VisGetSetArgs.visSetBlastGuards)!=0;
             update.TestCircular = ((short) flags & (short) IVisio.VisGetSetArgs.visSetTestCircular) != 0;
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
 
             int num_formulas = formulas.Count;
@@ -225,7 +225,7 @@ namespace VisioAutomation.Scripting.Commands
             Func<T, VA.ShapeSheet.SRC> get_src,
             Func<T, string> get_formula)
         {
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 

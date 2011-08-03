@@ -24,7 +24,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.DrawingUtil.DoublesToPoints(this.ControlPoints).ToList();
-            var shape = scriptingsession.Draw.DrawNURBSCurve(points,this.Knots,this.Weights,this.Degree);
+            var shape = scriptingsession.Draw.NURBSCurve(points,this.Knots,this.Weights,this.Degree);
             this.WriteObject(shape);
         }
     }

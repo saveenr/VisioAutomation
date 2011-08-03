@@ -14,7 +14,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, this.Filename);
-            scriptingsession.Draw.DrawOrgChart(oc);
+            scriptingsession.Draw.OrgChart(oc);
         }
     }
 }

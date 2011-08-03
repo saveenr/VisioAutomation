@@ -13,7 +13,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Page.NavigateToPage(this.Flag);
+            scriptingsession.Page.GoTo(this.Flag);
         }
     }
 }

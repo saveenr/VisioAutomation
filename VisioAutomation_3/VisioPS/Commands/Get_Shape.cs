@@ -16,12 +16,12 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             if (this.Flags == GetShapeFlags.Selected)
             {
-                var shapes = scriptingsession.Selection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.Flat);
+                var shapes = scriptingsession.Selection.GetShapes(VisioAutomation.ShapesEnumeration.Flat);
                 this.WriteObject(shapes);
             }
             else if (this.Flags == GetShapeFlags.SelectedNested)
             {
-                var shapes = scriptingsession.Selection.GetSelectedShapes(VisioAutomation.ShapesEnumeration.ExpandGroups);
+                var shapes = scriptingsession.Selection.GetShapes(VisioAutomation.ShapesEnumeration.ExpandGroups);
                 this.WriteObject(shapes);
             }
             else if (this.Flags == GetShapeFlags.Page)

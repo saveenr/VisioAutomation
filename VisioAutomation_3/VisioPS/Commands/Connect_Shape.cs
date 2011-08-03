@@ -14,7 +14,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            scriptingsession.Connection.ConnectShapes(master);                
+            scriptingsession.Connection.Connect(master);                
         }
     }
 }

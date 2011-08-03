@@ -20,14 +20,14 @@ namespace VisioAutomation.Scripting.Commands
         /// Retrieves the connection points for elected shapes
         /// </summary>
         /// <returns></returns>
-        public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> GetConnectionPoints()
+        public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> Get()
         {
-            if (!this.Session.Selection.HasSelectedShapes())
+            if (!this.Session.Selection.HasShapes())
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
             }
 
-            var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
 
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
 
@@ -51,12 +51,12 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="fy"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public IList<int> AddConnectionPoint(
+        public IList<int> Add(
             string fx,
             string fy,
             VA.Connections.ConnectionPointType type)
         {
-            if (!this.Session.Selection.HasSelectedShapes())
+            if (!this.Session.Selection.HasShapes())
             {
                 return new List<int>(0);
             }
@@ -64,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
             int dirx = 0;
             int diry = 0;
 
-            var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
 
             var indices = new List<int>(shapes.Count);
 
@@ -93,14 +93,14 @@ namespace VisioAutomation.Scripting.Commands
         /// Deletes the connection point on the seleected shapes
         /// </summary>
         /// <param name="index"></param>
-        public void DeleteConnectionPoint(int index)
+        public void Delete(int index)
         {
-            if (!this.Session.Selection.HasSelectedShapes())
+            if (!this.Session.Selection.HasShapes())
             {
                 return;
             }
 
-            var shapes = this.Session.Selection.GetSelectedShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
 
             var target_shapes = from shape in shapes
                                 where VA.Connections.ConnectionPointHelper.GetConnectionPointCount(shape) > index

@@ -15,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<IVisio.Master> GetMasters()
+        public IList<IVisio.Master> Get()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -30,14 +30,14 @@ namespace VisioAutomation.Scripting.Commands
             return masters;
         }
 
-        public IList<IVisio.Master> GetMasters(IVisio.Document doc)
+        public IList<IVisio.Master> Get(IVisio.Document doc)
         {
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
             return masters;
         }
 
-        public IVisio.Master GetMaster(string name)
+        public IVisio.Master Get(string name)
         {
             if (name == null)
             {
@@ -66,7 +66,7 @@ namespace VisioAutomation.Scripting.Commands
             return master;
         }
 
-        public IVisio.Master GetMaster(string master, string stencil)
+        public IVisio.Master Get(string master, string stencil)
         {
             if (master == null)
             {
@@ -98,7 +98,7 @@ namespace VisioAutomation.Scripting.Commands
             return masterobj;
         }
 
-        public IVisio.Shape DropMaster(IVisio.Master master, double x, double y)
+        public IVisio.Shape Drop(IVisio.Master master, double x, double y)
         {
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
@@ -106,7 +106,7 @@ namespace VisioAutomation.Scripting.Commands
             return shape;
         }
 
-        public short[] DropMasters(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
+        public short[] Drop(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
         {
             if (masters == null)
             {
@@ -129,7 +129,7 @@ namespace VisioAutomation.Scripting.Commands
             return shapeids;
         }
 
-        public IVisio.Master NewMaster(IVisio.Document stencil, string name)
+        public IVisio.Master New(IVisio.Document stencil, string name)
         {
 
             var masters = stencil.Masters;

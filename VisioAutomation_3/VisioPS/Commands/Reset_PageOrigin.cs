@@ -9,7 +9,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            ScriptingSession.Page.ResetPageOrigin();
+            ScriptingSession.Page.ResetOrigin();
         }
     }
 }

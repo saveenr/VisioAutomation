@@ -13,7 +13,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Draw.DrawGrid(this.GridLayout);
+            scriptingsession.Draw.Grid(this.GridLayout);
         }
     }
 }

@@ -95,12 +95,12 @@ namespace VisioAutomation.Scripting
         
         internal bool HasSelectedShapes()
         {
-            return this.Selection.HasSelectedShapes();
+            return this.Selection.HasShapes();
         }
 
         internal bool HasSelectedShapes(int min_items)
         {
-            return this.Selection.HasSelectedShapes(min_items);
+            return this.Selection.HasShapes(min_items);
         }
 
         public bool HasActiveDrawing

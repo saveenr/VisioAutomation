@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
                 return prop_dic;
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var list_user_props = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCells(page, shapes);
@@ -38,7 +38,7 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> HasUserDefinedCell(string name)
+        public IList<bool> Contains(string name)
         {
             if (name == null)
             {
@@ -50,14 +50,14 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<bool>();
             }
 
-            var results = (from s in this.Session.Selection.EnumSelectedShapes().ToList()
+            var results = (from s in this.Session.Selection.EnumShapes().ToList()
                            select VA.UserDefinedCells.UserDefinedCellsHelper.HasUserDefinedCell(s, name))
                 .ToList();
 
             return results;
         }
 
-        public void DeleteUserDefinedCell(string name)
+        public void Delete(string name)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new ArgumentException("name");
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -86,26 +86,26 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetUserDefinedCell(VA.UserDefinedCells.UserDefinedCell userprop)
+        public void Set(VA.UserDefinedCells.UserDefinedCell userdefinedcell)
         {
             if (!this.Session.HasSelectedShapes())
             {
                 return;
             }
 
-            if (userprop == null)
+            if (userdefinedcell == null)
             {
-                throw new ArgumentNullException("userprop");
+                throw new ArgumentNullException("userdefinedcell");
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
                 foreach (var shape in shapes)
                 {
-                    VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(shape, userprop.Name, userprop.Value, userprop.Prompt);
+                    VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(shape, userdefinedcell.Name, userdefinedcell.Value, userdefinedcell.Prompt);
                 }
             }
         }

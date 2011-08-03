@@ -15,7 +15,7 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-            var master = this.ScriptingSession.Master.NewMaster(this.Stencil, this.Name);
+            var master = this.ScriptingSession.Master.New(this.Stencil, this.Name);
             this.WriteObject(master);
         }
     }

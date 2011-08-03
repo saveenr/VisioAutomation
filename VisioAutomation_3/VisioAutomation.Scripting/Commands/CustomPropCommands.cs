@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
                 return prop_dic;
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var list_custom_props = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(page, shapes);
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<bool>();
             }
 
-            var results = (from s in this.Session.Selection.EnumSelectedShapes()
+            var results = (from s in this.Session.Selection.EnumShapes()
                            select VA.CustomProperties.CustomPropertyHelper.HasCustomProperty(s, name))
                 .ToList();
 
@@ -73,7 +73,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -97,7 +97,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("customprop");
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -125,7 +125,7 @@ namespace VisioAutomation.Scripting.Commands
             foreach (var shape in shapes)
             {
                 this.Session.Selection.SelectNone();
-                this.Session.Selection.SelectShape(shape);
+                this.Session.Selection.Select(shape);
                 yield return shape;
             }
         }

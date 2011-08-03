@@ -94,13 +94,13 @@ namespace VisioPowerTools
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    ss.Document.CloseAllDocumentsWithoutSaving();
+                    ss.Document.CloseAllWithoutSaving();
                 }
             }
             else
             {
                 // all the docs are saved - go ahead and close everything
-                ss.Document.CloseAllDocumentsWithoutSaving();
+                ss.Document.CloseAllWithoutSaving();
             }
 
         }
@@ -217,7 +217,7 @@ namespace VisioPowerTools
         {
             var addin = Globals.VisioPowerToolsAddIn;
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            if (!ss.Selection.HasSelectedShapes())
+            if (!ss.Selection.HasShapes())
             {
                 return;
             }
@@ -276,13 +276,13 @@ namespace VisioPowerTools
         public static void CmdPageDuplicate()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Page.DuplicatePage();
+            ss.Page.Duplicate();
         }
 
         public static void CmdPageResetOrigin()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Page.ResetPageOrigin();
+            ss.Page.ResetOrigin();
         }
 
         public static void CmdExportAsSVGXHTML()

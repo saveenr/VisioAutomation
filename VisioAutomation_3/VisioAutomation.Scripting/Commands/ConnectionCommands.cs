@@ -71,14 +71,14 @@ namespace VisioAutomation.Scripting.Commands
             return edges;
         }
 
-        public IList<IVisio.Shape> ConnectShapes(IVisio.Master master)
+        public IList<IVisio.Shape> Connect(IVisio.Master master)
         {
             if (!this.Session.HasSelectedShapes(2))
             {
                 return new List<IVisio.Shape>(0);
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             if (shapes.Count <= 1)
             {
@@ -136,7 +136,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<IVisio.Shape> ConnectShapes(IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
+        public IList<IVisio.Shape> Connect(IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
         {
             if (!this.Session.HasActiveDrawing)
             {

@@ -18,7 +18,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.DrawingUtil.DoublesToPoints(Points).ToList();
-            var r = scriptingsession.Master.DropMasters(Masters, points);
+            var r = scriptingsession.Master.Drop(Masters, points);
             this.WriteObject(r);
         }
     }

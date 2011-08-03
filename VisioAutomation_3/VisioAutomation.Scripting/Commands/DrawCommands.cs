@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<IVisio.Shape> DrawDataTable(System.Data.DataTable datatable,
+        public IList<IVisio.Shape> Table(System.Data.DataTable datatable,
                                           IList<double> widths,
                                           IList<double> heights,
                                           VA.Drawing.Size cellspacing)
@@ -88,7 +88,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void DrawGrid( VA.Layout.Grid.GridLayout layout)
+        public void Grid( VA.Layout.Grid.GridLayout layout)
         {
             
             //Create a new page to hold the grid
@@ -102,7 +102,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawNURBSCurve(IList<VA.Drawing.Point> controlpoints,
+        public IVisio.Shape NURBSCurve(IList<VA.Drawing.Point> controlpoints,
                                     IList<double> knots,
                                     IList<double> weights, int degree)
         {
@@ -121,7 +121,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawRectangle(double x0, double y0, double x1, double y1)
+        public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -132,7 +132,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawLine(double x0, double y0, double x1, double y1)
+        public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -143,7 +143,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawOval(double x0, double y0, double x1, double y1)
+        public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -154,7 +154,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawOval(VA.Drawing.Point center, double radius)
+        public IVisio.Shape Oval(VA.Drawing.Point center, double radius)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -168,7 +168,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawBezier(IEnumerable<VA.Drawing.Point> points)
+        public IVisio.Shape Bezier(IEnumerable<VA.Drawing.Point> points)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -179,7 +179,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawPolyLine(IList<VA.Drawing.Point> points)
+        public IVisio.Shape PolyLine(IList<VA.Drawing.Point> points)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -190,7 +190,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Shape DrawPieSlice(VA.Drawing.Point center,
+        public IVisio.Shape PieSlice(VA.Drawing.Point center,
                                   double radius,
                                   double start_angle,
                                   double end_angle)
@@ -204,7 +204,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<IVisio.Shape> DrawPieSlices(VA.Drawing.Point center,
+        public IList<IVisio.Shape> PieSlices(VA.Drawing.Point center,
                                           double radius,
                                           IList<double> values)
         {
@@ -219,7 +219,7 @@ namespace VisioAutomation.Scripting.Commands
             return shapes;
         }
 
-        public void DrawOrgChart(VA.Layout.OrgChart.Drawing drawing)
+        public void OrgChart(VA.Layout.OrgChart.Drawing drawing)
         {
             this.Session.Write(VA.Scripting.OutputStream.Verbose, "Start OrgChart Rendering");
             var renderer = new VA.Layout.OrgChart.OrgChartLayout();

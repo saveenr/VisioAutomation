@@ -13,11 +13,11 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             if (!NewDoc.ToBool())
             {
-                scriptingsession.Page.DuplicatePage();
+                scriptingsession.Page.Duplicate();
             }
             else
             {
-                scriptingsession.Page.DuplicatePageToNewDocument();
+                scriptingsession.Page.DuplicateToNewDocument();
             }
         }
     }

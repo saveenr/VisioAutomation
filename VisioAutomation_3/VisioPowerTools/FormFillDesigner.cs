@@ -69,7 +69,7 @@ namespace VisioPowerTools
         private void buttonSetFillGradient_Click(object sender, System.EventArgs e)
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            var selection = ss.Selection.GetSelection();
+            var selection = ss.Selection.Get();
             if (selection.Count < 1)
             {
                 return;
@@ -93,7 +93,7 @@ namespace VisioPowerTools
 
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            var shapes = ss.Selection.EnumSelectedShapes().ToList();
+            var shapes = ss.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -113,7 +113,7 @@ namespace VisioPowerTools
         {
             var app = VisioPowerToolsAddIn.ScriptingSession;
 
-            if (!app.Selection.HasSelectedShapes())
+            if (!app.Selection.HasShapes())
             {
                 return;
             }

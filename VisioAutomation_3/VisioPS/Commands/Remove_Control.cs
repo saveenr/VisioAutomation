@@ -12,7 +12,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            this.ScriptingSession.Control.DeleteControl(this.ControlIndex);
+            this.ScriptingSession.Control.Delete(this.ControlIndex);
         }
     }
 }

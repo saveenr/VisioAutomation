@@ -12,7 +12,7 @@ namespace TestVisioAutomation
         {
             var ss = GetScriptingSession();
 
-            var doc = ss.Document.NewDocument(10, 5);
+            var doc = ss.Document.New(10, 5);
 
             var page1 = doc.Pages[1];
             var app = page1.Application;
@@ -46,7 +46,7 @@ namespace TestVisioAutomation
             var x4 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
             Assert.AreEqual(0, x4.Count);
 
-            ss.Document.CloseDocument(true);
+            ss.Document.Close(true);
         }
     }
 }

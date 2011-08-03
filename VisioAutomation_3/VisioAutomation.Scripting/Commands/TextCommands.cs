@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<string>(0);
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var texts = shapes.Select(s => s.Text).ToList();
             return texts;
         }
@@ -65,7 +65,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             int rounding = 0;
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
             var src_charstyle = VA.ShapeSheet.SRCConstants.Char_Style;
 
@@ -124,7 +124,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
@@ -155,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
@@ -176,7 +176,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -193,7 +193,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes_2d = this.Session.Selection.EnumSelectedShapes2D().ToList();
+            var shapes_2d = this.Session.Selection.EnumShapes2D().ToList();
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
@@ -214,7 +214,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var sel = active_window.Selection;
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
             foreach (var shape in shapes)
@@ -246,7 +246,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var all_shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var all_shapes = this.Session.Selection.EnumShapes().ToList();
 
             foreach (var shape in all_shapes)
             {
@@ -323,7 +323,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<List<VA.Text.CharacterFormatCells>>(0);
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
             var formats = VA.Text.TextHelper.GetCharacterFormat(application.ActivePage, shapeids);
@@ -337,7 +337,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<List<VA.Text.ParagraphFormatCells>>(0);
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
             var formats = VA.Text.TextHelper.GetParagraphFormat(application.ActivePage, shapeids);

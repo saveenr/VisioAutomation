@@ -44,7 +44,7 @@ namespace VisioPS.Commands
                 ctrl.CanGlue = VA.Convert.BoolToFormula(this.CanGlue);
                 ctrl.Tip = this.Tip;
 
-                scriptingsession.Control.AddControl(ctrl);
+                scriptingsession.Control.Add(ctrl);
         }
     }
 }

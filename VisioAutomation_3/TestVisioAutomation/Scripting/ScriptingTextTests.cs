@@ -10,10 +10,10 @@ namespace TestVisioAutomation
         public void Scripting_Text_ToggleCase_1()
         {
             var scriptingsession = GetScriptingSession();
-            scriptingsession.Document.NewDocument();
-            scriptingsession.Page.NewPage(new VA.Drawing.Size(4, 4), false);
+            scriptingsession.Document.New();
+            scriptingsession.Page.New(new VA.Drawing.Size(4, 4), false);
 
-            var shape_rect = scriptingsession.Draw.DrawRectangle(1, 1, 3, 3);
+            var shape_rect = scriptingsession.Draw.Rectangle(1, 1, 3, 3);
 
             scriptingsession.Text.SetText("Hello World");
             Assert.AreEqual("Hello World", scriptingsession.Text.GetText()[0]);
@@ -27,7 +27,7 @@ namespace TestVisioAutomation
             scriptingsession.Text.ToogleCase();
             Assert.AreEqual("Hello World", scriptingsession.Text.GetText()[0]);
 
-            scriptingsession.Document.CloseDocument(true);
+            scriptingsession.Document.Close(true);
         }
     }
 }

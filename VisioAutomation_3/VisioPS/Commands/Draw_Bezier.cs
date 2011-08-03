@@ -14,7 +14,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.DrawingUtil.DoublesToPoints(this.Doubles).ToList();
-            var shape = scriptingsession.Draw.DrawBezier(points);
+            var shape = scriptingsession.Draw.Bezier(points);
             this.WriteObject(shape);
         }
     }

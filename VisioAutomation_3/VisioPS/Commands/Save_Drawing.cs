@@ -15,11 +15,11 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             if (Filename!=null)
             {
-                scriptingsession.Document.SaveDocumentAs(this.Filename);
+                scriptingsession.Document.SaveAs(this.Filename);
             }
             else
             {
-                scriptingsession.Document.SaveDocument();
+                scriptingsession.Document.Save();
             }
         }
     }

@@ -146,7 +146,7 @@ namespace VisioAutomation.Scripting.FlowChart
                 return;
             }
 
-            var doc = scriptingsession.Document.NewDocument();
+            var doc = scriptingsession.Document.New();
 
             int num_expected_pages = drawings.Count;
 

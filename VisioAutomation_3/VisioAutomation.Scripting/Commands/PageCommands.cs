@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IVisio.Page GetPage()
+        public IVisio.Page Get()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
             return application.ActivePage;
         }
 
-        public VA.Drawing.Size GetPageSize()
+        public VA.Drawing.Size GetSize()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -38,12 +38,12 @@ namespace VisioAutomation.Scripting.Commands
         }
 
         [Obsolete]
-        public string GetPageName()
+        public string GetName()
         {
-            return GetPage().NameU;
+            return Get().NameU;
         }
 
-        public void SetPageName(string name)
+        public void SetName(string name)
         {
             if (name == null)
             {
@@ -64,11 +64,11 @@ namespace VisioAutomation.Scripting.Commands
                 throw new AutomationException("Page already exists with this name");
             }
 
-            var page = GetPage();
+            var page = Get();
             page.NameU = name;
         }
 
-        public IVisio.Page NewPage(VA.Drawing.Size? size, bool isbackgroundpage)
+        public IVisio.Page New(VA.Drawing.Size? size, bool isbackgroundpage)
         {
             IVisio.Page page;
             var application = this.Session.VisioApplication;
@@ -124,7 +124,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void DuplicatePage()
+        public void Duplicate()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -138,7 +138,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void DuplicatePageToNewDocument()
+        public void DuplicateToNewDocument()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -159,7 +159,7 @@ namespace VisioAutomation.Scripting.Commands
             dest_page.Activate();
         }
 
-        public VA.Layout.PrintPageOrientation GetPageOrientation()
+        public VA.Layout.PrintPageOrientation GetOrientation()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
             return VA.PageHelper.GetOrientation(active_page);
         }
 
-        public void SetPageOrientation(VA.Layout.PrintPageOrientation orientation)
+        public void SetOrientation(VA.Layout.PrintPageOrientation orientation)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -205,7 +205,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void ResetPageOrigin()
+        public void ResetOrigin()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -220,7 +220,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetPageSize(VA.Drawing.Size new_size)
+        public void SetSize(VA.Drawing.Size new_size)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -235,7 +235,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetPageSize(double? width, double? height)
+        public void SetSize(double? width, double? height)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -254,20 +254,20 @@ namespace VisioAutomation.Scripting.Commands
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VA.Drawing.Size(w, h);
-            SetPageSize(new_size);
+            SetSize(new_size);
         }
 
-        public void SetPageHeight(double height)
+        public void SetHeight(double height)
         {
-            SetPageSize(null, height);
+            SetSize(null, height);
         }
 
-        public void SetPageWidth(double width)
+        public void SetWidth(double width)
         {
-            SetPageSize(width, null);
+            SetSize(width, null);
         }
 
-        public void NavigateToPage(PageNavigation flags)
+        public void GoTo(PageNavigation flags)
         {
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;

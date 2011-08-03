@@ -29,7 +29,7 @@ namespace VisioPS.Commands
             }
             else if (Name==null)
             {
-                this.WriteObject(scriptingsession.Page.GetPage());
+                this.WriteObject(scriptingsession.Page.Get());
             }
         }
     }

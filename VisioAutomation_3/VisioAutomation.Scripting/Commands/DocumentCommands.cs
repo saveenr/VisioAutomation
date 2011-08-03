@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void CloseDocument(bool force)
+        public void Close(bool force)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -43,7 +43,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void CloseAllDocumentsWithoutSaving()
+        public void CloseAllWithoutSaving()
         {
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
@@ -61,7 +61,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Document NewDocument()
+        public IVisio.Document New()
         {
             this.Session.Write(OutputStream.Verbose, "Creating Empty Drawing");
             var application = this.Session.VisioApplication;
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-        public void SaveDocument()
+        public void Save()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -82,7 +82,7 @@ namespace VisioAutomation.Scripting.Commands
             doc.Save();
         }
 
-        public void SaveDocumentAs(string filename)
+        public void SaveAs(string filename)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -95,9 +95,9 @@ namespace VisioAutomation.Scripting.Commands
             doc.SaveAs(filename);
         }
 
-        public IVisio.Document NewDocument(double w, double h)
+        public IVisio.Document New(double w, double h)
         {
-            var doc = NewDocument();
+            var doc = New();
             var page = this.Session.VisioApplication.ActivePage;
             page.SetSize(w, h);
             return doc;
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-        public IVisio.Document OpenDocument(string filename)
+        public IVisio.Document Open(string filename)
         {
             if (filename == null)
             {
@@ -162,7 +162,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public IVisio.Document GetDocument(string name)
+        public IVisio.Document Get(string name)
         {
             var application = this.Session.VisioApplication;
             var documents = application.Documents;

@@ -11,7 +11,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.UserDefinedCell.DeleteUserDefinedCell(Name);
+            scriptingsession.UserDefinedCell.Delete(Name);
         }
     }
 }

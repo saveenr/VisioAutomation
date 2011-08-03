@@ -18,10 +18,10 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (this.Session.VisioApplication == null)
             {
-                this.Session.Application.NewApplication();
+                this.Session.Application.New();
             }
 
-            var doc = this.Session.Document.NewDocument(8.5, 11);
+            var doc = this.Session.Document.New(8.5, 11);
             var pages = doc.Pages;
             var page = pages.Add();
 

@@ -15,11 +15,11 @@ namespace VisioPS.Commands
 
             if ( Shape !=null)
             {
-                scriptingsession.Selection.SelectShapes(Shape);
+                scriptingsession.Selection.Select(Shape);
             }
             if (ID!=null)
             {
-                scriptingsession.Selection.SelectShapes(Shape);
+                scriptingsession.Selection.Select(Shape);
             }
         }
     }

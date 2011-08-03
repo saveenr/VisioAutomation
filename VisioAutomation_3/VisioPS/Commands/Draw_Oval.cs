@@ -20,7 +20,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var shape = scriptingsession.Draw.DrawOval(X0, Y0, X1, Y1);
+            var shape = scriptingsession.Draw.Oval(X0, Y0, X1, Y1);
             this.WriteObject(shape);
         }
     }

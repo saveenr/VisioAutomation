@@ -21,7 +21,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var center = new VA.Drawing.Point(this.X0, this.Y0);
-            var shapes = scriptingsession.Draw.DrawPieSlices(center, this.Radius, this.Values);
+            var shapes = scriptingsession.Draw.PieSlices(center, this.Radius, this.Values);
             this.WriteObject(shapes);
         }
     }

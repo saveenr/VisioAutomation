@@ -26,7 +26,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var old_selection = this.Session.Selection.EnumSelectedShapes().ToList();
+            var old_selection = this.Session.Selection.EnumShapes().ToList();
 
             this.Session.Selection.SelectNone();
             var application = this.Session.VisioApplication;
@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             selection.Export(filename);
         }
 
@@ -159,7 +159,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Session.Write(OutputStream.Verbose, "Started SVG export to \"{0}\"", svg_filename);
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             selection.Export(svg_filename);
             export_timer.Stop();
 

@@ -20,7 +20,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var connectors = scriptingsession.Connection.ConnectShapes(Master, new[] { From }, new[] { To });
+            var connectors = scriptingsession.Connection.Connect(Master, new[] { From }, new[] { To });
             this.WriteObject(connectors);
         }
     }

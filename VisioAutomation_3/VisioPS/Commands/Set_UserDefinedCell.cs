@@ -23,7 +23,7 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.UserDefinedCell.SetUserDefinedCell(userprop);
+            scriptingsession.UserDefinedCell.Set(userprop);
         }
     }
 }

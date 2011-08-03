@@ -26,7 +26,7 @@ namespace VisioPS.Commands
             var widths = Enumerable.Repeat<double>(CellWidth, DataTable.Columns.Count).ToList();
             var heights = Enumerable.Repeat<double>(CellHeight, DataTable.Rows.Count).ToList();
             var spacing = new VA.Drawing.Size(CellSpacing, CellSpacing);
-            var shapes = scriptingsession.Draw.DrawDataTable(DataTable, widths, heights, spacing);
+            var shapes = scriptingsession.Draw.Table(DataTable, widths, heights, spacing);
             this.WriteObject(shapes);
         }
     }

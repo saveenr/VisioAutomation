@@ -11,38 +11,38 @@ namespace TestVisioAutomation
         {
             var page_size = new VA.Drawing.Size(8.5, 11);
             var ss = GetScriptingSession();
-            var doc = ss.Document.NewDocument(page_size.Width, page_size.Height);
+            var doc = ss.Document.New(page_size.Width, page_size.Height);
 
-            var page1 = ss.Page.GetPage();
-            ss.Page.NewPage(page_size, false);
-            var page2 = ss.Page.GetPage();
-            ss.Page.NewPage(page_size, false);
-            var page3 = ss.Page.GetPage();
+            var page1 = ss.Page.Get();
+            ss.Page.New(page_size, false);
+            var page2 = ss.Page.Get();
+            ss.Page.New(page_size, false);
+            var page3 = ss.Page.Get();
 
             Assert.AreEqual(3,doc.Pages.Count);
-            Assert.AreEqual(page3, ss.Page.GetPage());
-            ss.Page.NavigateToPage(VA.PageNavigation.FirstPage);
-            Assert.AreEqual(page1, ss.Page.GetPage());
-            ss.Page.NavigateToPage(VA.PageNavigation.LastPage);
-            Assert.AreEqual(page3, ss.Page.GetPage());
-            ss.Page.NavigateToPage(VA.PageNavigation.PreviousPage);
-            Assert.AreEqual(page2, ss.Page.GetPage());
-            ss.Page.NavigateToPage(VA.PageNavigation.NextPage);
-            Assert.AreEqual(page3, ss.Page.GetPage());
+            Assert.AreEqual(page3, ss.Page.Get());
+            ss.Page.GoTo(VA.PageNavigation.FirstPage);
+            Assert.AreEqual(page1, ss.Page.Get());
+            ss.Page.GoTo(VA.PageNavigation.LastPage);
+            Assert.AreEqual(page3, ss.Page.Get());
+            ss.Page.GoTo(VA.PageNavigation.PreviousPage);
+            Assert.AreEqual(page2, ss.Page.Get());
+            ss.Page.GoTo(VA.PageNavigation.NextPage);
+            Assert.AreEqual(page3, ss.Page.Get());
 
             // move to last and try to go to next page
-            ss.Page.NavigateToPage(VA.PageNavigation.LastPage);
-            Assert.AreEqual(page3, ss.Page.GetPage());
-            ss.Page.NavigateToPage(VA.PageNavigation.NextPage);
-            Assert.AreEqual(page3, ss.Page.GetPage());
+            ss.Page.GoTo(VA.PageNavigation.LastPage);
+            Assert.AreEqual(page3, ss.Page.Get());
+            ss.Page.GoTo(VA.PageNavigation.NextPage);
+            Assert.AreEqual(page3, ss.Page.Get());
 
             // move to first and try to go to previous page
-            ss.Page.NavigateToPage(VA.PageNavigation.FirstPage);
-            Assert.AreEqual(page1, ss.Page.GetPage());
-            ss.Page.NavigateToPage(VA.PageNavigation.PreviousPage);
-            Assert.AreEqual(page1, ss.Page.GetPage());
+            ss.Page.GoTo(VA.PageNavigation.FirstPage);
+            Assert.AreEqual(page1, ss.Page.Get());
+            ss.Page.GoTo(VA.PageNavigation.PreviousPage);
+            Assert.AreEqual(page1, ss.Page.Get());
 
-            ss.Document.CloseDocument(true);
+            ss.Document.Close(true);
         }
     }
 }

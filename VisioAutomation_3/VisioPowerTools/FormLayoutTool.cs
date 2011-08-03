@@ -16,7 +16,7 @@ namespace VisioPowerTools
 
         private void buttonDuplicatePage_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Page.DuplicatePage();
+            VisioPowerToolsAddIn.ScriptingSession.Page.Duplicate();
         }
     }
 }

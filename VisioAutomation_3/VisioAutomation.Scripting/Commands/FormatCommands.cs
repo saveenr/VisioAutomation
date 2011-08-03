@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -114,7 +114,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
-            var shapes = this.Session.Selection.EnumSelectedShapes().ToList();
+            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
@@ -151,7 +151,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shape = selection[1];
             this.cache.CopyFormat(shape, category);
         }
@@ -175,7 +175,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;

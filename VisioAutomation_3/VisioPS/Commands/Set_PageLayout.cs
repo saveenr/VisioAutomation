@@ -19,7 +19,7 @@ namespace VisioPS.Commands
 
             if (this.Orientation != PageOrientation.None)
             {
-                scriptingsession.Page.SetPageOrientation((VA.Layout.PrintPageOrientation)Orientation);
+                scriptingsession.Page.SetOrientation((VA.Layout.PrintPageOrientation)Orientation);
             }
 
             if (this.BackgroundPage != null)
@@ -45,7 +45,7 @@ namespace VisioPS.Commands
 
             if (w.HasValue || h.HasValue)
             {
-                scriptingsession.Page.SetPageSize(w, h);
+                scriptingsession.Page.SetSize(w, h);
             }
         }
     }

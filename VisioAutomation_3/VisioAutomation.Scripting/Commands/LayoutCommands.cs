@@ -117,7 +117,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
             var application = this.Session.VisioApplication;
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
 
             using (var undoscope = application.CreateUndoScope())
@@ -136,7 +136,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
-                var selection = this.Session.Selection.GetSelection();
+                var selection = this.Session.Selection.Get();
                 var unitcode = IVisio.VisUnitCodes.visInches;
 
                 // Move method: http://msdn.microsoft.com/en-us/library/ms367549.aspx   
@@ -150,7 +150,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return;
             }
-            var shapes_2d = Session.Selection.EnumSelectedShapes2D().ToList();
+            var shapes_2d = Session.Selection.EnumShapes2D().ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
             var application = this.Session.VisioApplication;
@@ -168,7 +168,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes_2d = this.Session.Selection.EnumSelectedShapes2D().ToList();
+            var shapes_2d = this.Session.Selection.EnumShapes2D().ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
             var application = this.Session.VisioApplication;
@@ -214,7 +214,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = Session.Selection.GetSelection();
+            var selection = Session.Selection.Get();
             VA.Layout.LayoutHelper.SendShapes(selection, dir);
         }
 
@@ -231,7 +231,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 bool glue_to_guide = false;
-                var selection = Session.Selection.GetSelection();
+                var selection = Session.Selection.Get();
                 var halign = _map_isd_halign_to_visio_halign(align);
                 var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
                 selection.Align(halign, valign, glue_to_guide);
@@ -245,7 +245,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = Session.Selection.GetSelection();
+            var selection = Session.Selection.Get();
             var shapeids = selection.GetIDs();
 
             var application = this.Session.VisioApplication;
@@ -266,7 +266,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 bool glue_to_guide = false;
-                var selection = Session.Selection.GetSelection();
+                var selection = Session.Selection.Get();
                 var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
 
                 var valign = _map_isd_valign_to_visio_valign(align);
@@ -282,7 +282,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = Session.Selection.GetSelection();
+            var selection = Session.Selection.Get();
             var shapeids = selection.GetIDs();
 
             var application = this.Session.VisioApplication;
@@ -299,7 +299,7 @@ namespace VisioAutomation.Scripting.Commands
                 return 0;
             }
 
-            var selection = Session.Selection.GetSelection();
+            var selection = Session.Selection.Get();
             return selection.Count;
         }
 
@@ -310,7 +310,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<VA.Layout.XFormCells>(0);
             }
 
-            var selection = Session.Selection.GetSelection();
+            var selection = Session.Selection.Get();
             var shapeids = selection.GetIDs();
 
             var page = this.Session.VisioApplication.ActivePage;
@@ -325,7 +325,7 @@ namespace VisioAutomation.Scripting.Commands
                 return null;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var g = selection.Group();
             return g;
         }
@@ -347,7 +347,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
@@ -385,7 +385,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
@@ -409,7 +409,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
@@ -433,7 +433,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = this.Session.Selection.GetSelection();
+            var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             foreach (int shapeid in shapeids)
