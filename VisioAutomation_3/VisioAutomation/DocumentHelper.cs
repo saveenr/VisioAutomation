@@ -90,7 +90,6 @@ namespace VisioAutomation
             }
         }
 
-
         public static IVisio.Document NewStencil(IVisio.Documents documents)
         {
 

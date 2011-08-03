@@ -1,25 +1,21 @@
 using Microsoft.Office.Interop.Visio;
+using VisioAutomation.Drawing;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Experimental.SimpleTextDoc
 {
-    public class TextPage
-    {
-        public string Title;
-        public string Body;
-        public string Name;
-    }
-
     public class TextDocumentBuilder
     {
         private IVisio.Document _visioDocument;
 
-        private VA.Drawing.Size _pagesize;
+        private VA.Drawing.Size _pageSize;
         private VA.Drawing.Rectangle _pagerect;
+        private VA.Drawing.Rectangle _pageintrect;
         private VA.Drawing.Rectangle _titlerect;
-        private VA.Drawing.Rectangle _bodyrect;
+        private VA.Drawing.Rectangle _bodywith_title_rect;
+        private VA.Drawing.Rectangle _bodywithout_title_rect;
         private int _fontid;
         private VA.Text.TextBlockFormatCells _textblockformat;
         private VA.Text.ParagraphFormatCells _titleParaFmt;
@@ -29,12 +25,16 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
         private VA.Text.CharacterFormatCells _bodyCharFmt;
         private VA.Format.ShapeFormatCells _bodyFormat;
 
-        public TextDocumentBuilder(IVisio.Application app)
+        public TextDocumentBuilder(IVisio.Application app, VA.Drawing.Size size)
         {
-            _pagesize = new VA.Drawing.Size(8.5, 11);
-            _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), _pagesize);
-            _titlerect = new VA.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pagerect.UpperRight.Subtract(0.5, 0.5));
-            _bodyrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5), _pagerect.UpperRight.Subtract(0.5, 1.0));
+            _pageSize = size;
+            _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), PageSize);
+            _pageintrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5),
+                                                    _pagerect.UpperRight.Subtract(0.5, 0.5));
+
+            _titlerect = new VA.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pageintrect.UpperRight);
+            _bodywith_title_rect = new VA.Drawing.Rectangle(_pageintrect.LowerLeft, _pagerect.UpperRight.Subtract(0.5, 1.0));
+            _bodywithout_title_rect = _pageintrect;
 
             var docs = app.Documents;
             _visioDocument = docs.Add("");
@@ -74,17 +74,22 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             get { return _visioDocument; }
         }
 
+        public Size PageSize
+        {
+            get { return _pageSize; }
+        }
+
         public void Draw(VA.Experimental.SimpleTextDoc.TextPage xpage)
         {
             var page = _visioDocument.Pages.Add();
             page.NameU = xpage.Name;
-            VA.PageHelper.SetSize(page, this._pagesize);
+            VA.PageHelper.SetSize(page, this.PageSize);
 
             // Draw the shapes
             var titleshape = page.DrawRectangle(_titlerect);
             titleshape.Text = xpage.Title;
 
-            var bodyshape = page.DrawRectangle(_bodyrect);
+            var bodyshape = page.DrawRectangle(_bodywith_title_rect);
             bodyshape.Text = xpage.Body;
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();

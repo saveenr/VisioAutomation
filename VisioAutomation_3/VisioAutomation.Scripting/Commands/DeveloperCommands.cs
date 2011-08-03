@@ -51,24 +51,10 @@ namespace VisioAutomation.Scripting.Commands
             return el_shapes;
         }
 
-
-        private IEnumerable<System.Reflection.MethodInfo> get_command_methods(System.Type mytype) 
-        {
-            var methods = mytype.GetMethods().Where(m => m.IsPublic).Where(m => !m.IsStatic);
-            foreach (var method in methods)
-            {
-                if (method.Name == "ToString" || method.Name == "GetHashCode" || method.Name == "GetType" || method.Name == "Equals")
-                {
-                    continue;
-                }
-                yield return method;
-            }
-        }
-
-
         public virtual IVisio.Document Documentation()
         {
-            var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication);
+            var pagesize = new VA.Drawing.Size(8.5, 11);
+            var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             var lines = new List<string>();
 
             var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
@@ -80,7 +66,7 @@ namespace VisioAutomation.Scripting.Commands
                 var cmdset_type = cmdset_prop.PropertyType;
 
                 // Calculate the text
-                var methods = this.get_command_methods(cmdset_type);
+                var methods = CommandSet.GetCommandMethods(cmdset_type);
                 lines.Clear();
                 foreach (var method in methods)
                 {
