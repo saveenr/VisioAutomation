@@ -65,67 +65,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        private string get_nice_typename(System.Type t)
-        {
-            if (t == typeof(int))
-            {
-                return "int";
-            }
-            else if (t == typeof(string))
-            {
-                return "string";
-            }
-            else if (t == typeof(double))
-            {
-                return "double";
-            }
-            else if (t == typeof(bool))
-            {
-                return "bool";
-            }
-            else if (t == typeof(short))
-            {
-                return "short";
-            }
-
-            if (IsNullableType(t))
-            {
-                var actualtype = t.GetGenericArguments()[0];
-                return get_nice_typename(actualtype)+"?";
-            }
-
-            if (t.IsGenericType)
-            {
-                var sb = new System.Text.StringBuilder();
-                var tokens = t.Name.Split(new[] {'`'});
-                
-                sb.Append(tokens[0]);
-                var gas = t.GetGenericArguments();
-                var ga_names = gas.Select(i => get_nice_typename(i));
-
-                sb.Append("<");
-                TextUtil.Join(sb,", ",ga_names);
-                sb.Append(">");
-                return sb.ToString();
-            }
-
-            return t.Name;
-        }
-
-        private bool IsNullableType(System.Type colType)
-        {
-            if (
-            (colType.IsGenericType) &&
-            (colType.GetGenericTypeDefinition() == typeof(System.Nullable<>)))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
 
         public virtual IVisio.Document Documentation()
         {
@@ -147,11 +86,11 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     sb.Length = 0;
                     var method_params = method.GetParameters();
-                    TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", get_nice_typename(param.ParameterType), param.Name)));
+                    TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
 
                     if (method.ReturnType != typeof(void))
                     {
-                        string line = string.Format("{0}({1}) -> {2}", method.Name, sb, get_nice_typename(method.ReturnType));
+                        string line = string.Format("{0}({1}) -> {2}", method.Name, sb, ReflectionUtil.GetNiceTypeName(method.ReturnType));
                         lines.Add(line);
                     }
                     else
@@ -191,5 +130,124 @@ namespace VisioAutomation.Scripting.Commands
                 .ToList();
             return props;
         }
+    }
+
+    internal class ReflectionUtil
+    {
+        public static string GetCSharpTypeAlias(System.Type type)
+        {
+            if (type == typeof(int))
+            {
+                return "int";
+            }
+            else if (type == typeof(string))
+            {
+                return "string";
+            }
+            else if (type == typeof(double))
+            {
+                return "double";
+            }
+            else if (type == typeof(bool))
+            {
+                return "bool";
+            }
+            else if (type == typeof(short))
+            {
+                return "short";
+            }
+            else if (type == typeof(ushort))
+            {
+                return "ushort";
+            }
+            else if (type == typeof(decimal))
+            {
+                return "decimal";
+            }
+            else if (type == typeof(double))
+            {
+                return "double";
+            }
+            else if (type == typeof(float))
+            {
+                return "float";
+            }
+            else if (type == typeof(char))
+            {
+                return "char";
+            }
+            else if (type == typeof(uint))
+            {
+                return "uint";
+            }
+            else if (type == typeof(long))
+            {
+                return "long";
+            }
+            else if (type == typeof(ulong))
+            {
+                return "ulong";
+            }
+            else if (type == typeof(byte))
+            {
+                return "byte";
+            }
+            else if (type == typeof(sbyte))
+            {
+                return "sbyte";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static string GetNiceTypeName(System.Type type)
+        {
+            return GetNiceTypeName(type, GetCSharpTypeAlias);
+        }
+
+        public static string GetNiceTypeName(System.Type type, System.Func<System.Type,string> overridefunc)
+        {
+            if (overridefunc != null)
+            {
+                string s = overridefunc(type);
+                if (s != null)
+                {
+                    return s;
+                }
+            }
+
+            if (IsNullableType(type))
+            {
+                var actualtype = type.GetGenericArguments()[0];
+                return GetNiceTypeName(actualtype, overridefunc) + "?";
+            }
+
+            if (type.IsGenericType)
+            {
+                var sb = new System.Text.StringBuilder();
+                var tokens = type.Name.Split(new[] { '`' });
+
+                sb.Append(tokens[0]);
+                var gas = type.GetGenericArguments();
+                var ga_names = gas.Select(i => GetNiceTypeName(i, overridefunc));
+
+                sb.Append("<");
+                TextUtil.Join(sb, ", ", ga_names);
+                sb.Append(">");
+                return sb.ToString();
+            }
+
+            return type.Name;
+        }
+
+
+        public static bool IsNullableType(System.Type colType)
+        {
+            return ((colType.IsGenericType) &&
+                    (colType.GetGenericTypeDefinition() == typeof (System.Nullable<>)));
+        }
+   
     }
 }
