@@ -9,6 +9,7 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
     public class TextDocumentBuilder
     {
         private IVisio.Document _visioDocument;
+        private IVisio.Application _app;
 
         private VA.Drawing.Size _pageSize;
         private VA.Drawing.Rectangle _pagerect;
@@ -25,8 +26,14 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
         private VA.Text.CharacterFormatCells _bodyCharFmt;
         private VA.Format.ShapeFormatCells _bodyFormat;
 
+        private double _titleTextSize = 15.0;
+        private double _bodyParaSpacingAfter = 0.0;
+        private double _bodyTextSize = 8.0;
+        private string _defaultFont = "Segoe UI";
+
         public TextDocumentBuilder(IVisio.Application app, VA.Drawing.Size size)
         {
+            _app = app;
             _pageSize = size;
             _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), PageSize);
             _pageintrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5),
@@ -36,10 +43,48 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             _bodywith_title_rect = new VA.Drawing.Rectangle(_pageintrect.LowerLeft, _pagerect.UpperRight.Subtract(0.5, 1.0));
             _bodywithout_title_rect = _pageintrect;
 
-            var docs = app.Documents;
+        }
+
+        public Document VisioDocument
+        {
+            get { return _visioDocument; }
+        }
+
+        public Size PageSize
+        {
+            get { return _pageSize; }
+        }
+
+        public double TitleTextSize
+        {
+            get { return _titleTextSize; }
+            set { _titleTextSize = value; }
+        }
+
+        public double BodyParaSpacingAfter
+        {
+            get { return _bodyParaSpacingAfter; }
+            set { _bodyParaSpacingAfter = value; }
+        }
+
+        public double BodyTextSize
+        {
+            get { return _bodyTextSize; }
+            set { _bodyTextSize = value; }
+        }
+
+        public string DefaultFont
+        {
+            get { return _defaultFont; }
+            set { _defaultFont = value; }
+        }
+
+        public void Start()
+        {
+            var docs = _app.Documents;
             _visioDocument = docs.Add("");
 
-            var font = _visioDocument.Fonts["Segoe UI"];
+            var font = _visioDocument.Fonts[this.DefaultFont];
             _fontid = font.ID;
 
             _textblockformat = new VA.Text.TextBlockFormatCells();
@@ -54,29 +99,20 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
 
             _titleCharFmt = new VA.Text.CharacterFormatCells();
             _titleCharFmt.Font = _fontid;
-            _titleCharFmt.Size = VA.Convert.PointsToInches(15.0);
+            _titleCharFmt.Size = VA.Convert.PointsToInches(_titleTextSize);
 
             _bodyParaFmt = new VA.Text.ParagraphFormatCells();
             _bodyParaFmt.HorizontalAlign = 0;
-            _bodyParaFmt.SpacingAfter = VA.Convert.PointsToInches(6.0);
+            _bodyParaFmt.SpacingAfter = VA.Convert.PointsToInches(_bodyParaSpacingAfter);
 
             _bodyCharFmt = new VA.Text.CharacterFormatCells();
             _bodyCharFmt.Font = _fontid;
-            _bodyCharFmt.Size = VA.Convert.PointsToInches(8.0);
+            _bodyCharFmt.Size = VA.Convert.PointsToInches(_bodyTextSize);
 
             _bodyFormat = new VA.Format.ShapeFormatCells();
             _bodyFormat.LineWeight = 0;
             _bodyFormat.LinePattern = 0;
-        }
-
-        public Document VisioDocument
-        {
-            get { return _visioDocument; }
-        }
-
-        public Size PageSize
-        {
-            get { return _pageSize; }
+            
         }
 
         public void Draw(VA.Experimental.SimpleTextDoc.TextPage xpage)

@@ -55,12 +55,14 @@ namespace VisioAutomation.Scripting.Commands
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
             var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
+            docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
             var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 
+            docbuilder.Start();
             foreach (var cmdset_prop in cmdst_props)
             {
                 var cmdset_type = cmdset_prop.PropertyType;
