@@ -21,32 +21,9 @@ namespace VisioAutomation.Drawing
             _l = l;
         }
 
-        private static void IsValidVisioHSL(byte h, byte s, byte l)
+        private void CheckValidVisioHSL()
         {
-            if (h < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("h", "h must be >=0");
-            }
-            if (s < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("s", "s must be >=0");
-            }
-            if (l < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("l", "l must be >=0");
-            }
-            if (h > 255)
-            {
-                throw new System.ArgumentOutOfRangeException("h", "h must be <=255");
-            }
-            if (s > 240)
-            {
-                throw new System.ArgumentOutOfRangeException("s", "s must be <=240");
-            }
-            if (l > 240)
-            {
-                throw new System.ArgumentOutOfRangeException("l", "l must be <=240");
-            }
+            VA.Convert.CheckValidVisioHSL(this.H,this.S,this.L);
         }
 
         public ColorHSL(short h, short s, short l) :
@@ -111,7 +88,7 @@ namespace VisioAutomation.Drawing
 
         public string ToFormula()
         {
-            IsValidVisioHSL(this.H, this.S, this.L);
+            this.CheckValidVisioHSL();
             return VA.Convert.ColorToFormulaHSL(this.H, this.S, this.L);
         }
 

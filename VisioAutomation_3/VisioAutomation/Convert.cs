@@ -122,5 +122,33 @@ namespace VisioAutomation
             string formula = System.String.Format("HSL({0},{1},{2})", h, s, l);
             return formula;
         }
+
+        internal static void CheckValidVisioHSL(byte h, byte s, byte l)
+        {
+            if (h < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("h", "h must be >=0");
+            }
+            if (s < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("s", "s must be >=0");
+            }
+            if (l < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("l", "l must be >=0");
+            }
+            if (h > 255)
+            {
+                throw new System.ArgumentOutOfRangeException("h", "h must be <=255");
+            }
+            if (s > 240)
+            {
+                throw new System.ArgumentOutOfRangeException("s", "s must be <=240");
+            }
+            if (l > 240)
+            {
+                throw new System.ArgumentOutOfRangeException("l", "l must be <=240");
+            }
+        }
     }
 }
