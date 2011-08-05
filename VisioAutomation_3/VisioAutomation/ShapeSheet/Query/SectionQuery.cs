@@ -56,6 +56,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return AddColumn((short) cell);
         }
 
+        public SectionQueryColumn AddColumn(VA.ShapeSheet.SRC cell)
+        {
+            return AddColumn(cell.Cell);
+        }
+
         public SectionQueryColumn AddColumn(IVisio.VisCellIndices cell, string name)
         {
             return AddColumn((short)cell, name);
