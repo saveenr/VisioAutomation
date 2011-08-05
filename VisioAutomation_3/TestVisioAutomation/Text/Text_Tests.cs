@@ -493,5 +493,33 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
+        public void TextBlock()
+        {
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 4);
+            var s2 = page1.DrawRectangle(5, 5, 7, 7);
+
+            var tb0 = VA.Text.TextHelper.GetTextBlockFormat(s1);
+            Assert.AreEqual("4 pt",tb0.BottomMargin.Formula);
+
+            var tb1 = new VA.Text.TextBlockFormatCells();
+            tb1.BottomMargin = "8 pt";
+
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            tb1.Apply(update,s1.ID16);
+            update.Execute(page1);
+
+            var tb2 = VA.Text.TextHelper.GetTextBlockFormat(s1);
+            Assert.AreEqual("8 pt", tb2.BottomMargin.Formula);
+
+            var tbs = VA.Text.TextHelper.GetTextBlockFormat(page1, new[] {s1.ID, s2.ID});
+            Assert.AreEqual("8 pt", tbs[0].BottomMargin.Formula);
+            Assert.AreEqual("4 pt", tbs[1].BottomMargin.Formula);
+
+
+            page1.Delete(0);
+        }
+
     }
 }
