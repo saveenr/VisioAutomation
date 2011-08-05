@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
@@ -36,9 +37,9 @@ namespace VisioAutomation.Text
         private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new CharacterFormatCells();
-            cells.Color = qds.GetItem(row, query.Color).Cast(v => (int)v);
+            cells.Color = qds.GetItem(row, query.Color).ToInt();
             cells.Transparency = qds.GetItem(row, query.Trans);
-            cells.Font = qds.GetItem(row, query.Font).Cast(v => (int)v);
+            cells.Font = qds.GetItem(row, query.Font).ToInt();
             cells.Size = qds.GetItem(row, query.Size);
             cells.Style = qds.GetItem(row, query.Style).Cast(v => (VA.Text.CharStyle) ((int) v));
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
@@ -53,10 +54,10 @@ namespace VisioAutomation.Text
             cells.SpacingAfter = qds.GetItem(row, query.SpaceAfter);
             cells.SpacingBefore = qds.GetItem(row, query.SpaceBefore);
             cells.SpacingLine = qds.GetItem(row, query.SpaceLine);
-            cells.HorizontalAlign = qds.GetItem(row, query.HorzAlign).Cast(v => (int)v);
-            cells.BulletIndex = qds.GetItem(row, query.BulletIndex).Cast(v => (int)v);
-            cells.BulletFont = qds.GetItem(row, query.BulletFont).Cast(v => (int)v);
-            cells.BulletFontSize = qds.GetItem(row, query.BulletFontSize).Cast(v => (int)v);
+            cells.HorizontalAlign = qds.GetItem(row, query.HorzAlign).ToInt();
+            cells.BulletIndex = qds.GetItem(row, query.BulletIndex).ToInt();
+            cells.BulletFont = qds.GetItem(row, query.BulletFont).ToInt();
+            cells.BulletFontSize = qds.GetItem(row, query.BulletFontSize).ToInt();
 
             return cells;
         }

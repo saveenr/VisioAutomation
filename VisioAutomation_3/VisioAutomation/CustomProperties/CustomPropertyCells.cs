@@ -87,11 +87,11 @@ namespace VisioAutomation.CustomProperties
             cells.Value = qds.GetItem(row, query.Value);
             cells.Calendar = qds.GetItem(row,  query.Calendar).Cast( v => (VA.CustomProperties.Calendar)v);
             cells.Format = qds.GetItem(row,    query.Format);
-            cells.Invisible = qds.GetItem(row, query.Invis).Cast(v => (int)v);
+            cells.Invisible = qds.GetItem(row, query.Invis).ToInt();
             cells.Label = qds.GetItem(row,     query.Label);
-            cells.LangId = qds.GetItem(row, query.LangID).Cast(v => (int)v);
+            cells.LangId = qds.GetItem(row, query.LangID).ToInt();
             cells.Prompt = qds.GetItem(row,    query.Prompt);
-            cells.SortKey = qds.GetItem(row, query.SortKey).Cast(v => (int)v);
+            cells.SortKey = qds.GetItem(row, query.SortKey).ToInt();
             cells.Type = qds.GetItem(row,      query.Type).Cast(v => (VA.CustomProperties.Format)((int)v));
             return cells;
         }

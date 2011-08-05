@@ -2,6 +2,7 @@ using VA=VisioAutomation;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Connections
 {
@@ -33,9 +34,9 @@ namespace VisioAutomation.Connections
             var cells = new ConnectionPointCells();
             cells.X = qds.GetItem(row, query.X);
             cells.Y = qds.GetItem(row, query.Y);
-            cells.DirX = qds.GetItem(row, query.DirX).Cast(v => (int)v);
-            cells.DirY = qds.GetItem(row, query.DirY).Cast(v => (int)v);
-            cells.Type = qds.GetItem(row, query.Type).Cast(v => (int)v);
+            cells.DirX = qds.GetItem(row, query.DirX).ToInt();
+            cells.DirY = qds.GetItem(row, query.DirY).ToInt();
+            cells.Type = qds.GetItem(row, query.Type).ToInt();
 
             return cells;
         }

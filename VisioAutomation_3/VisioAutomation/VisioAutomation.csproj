@@ -80,6 +80,7 @@
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="Experimental\SimpleTextDoc\TextDocumentBuilder.cs" />
     <Compile Include="Experimental\SimpleTextDoc\TextPage.cs" />
+    <Compile Include="Extensions\CellDataMethods.cs" />
     <Compile Include="MasterHelper.cs" />
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
