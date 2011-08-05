@@ -53,12 +53,12 @@ namespace VisioAutomation.Text
             cells.SpacingAfter = qds.GetItem(row, query.SpaceAfter);
             cells.SpacingBefore = qds.GetItem(row, query.SpaceBefore);
             cells.SpacingLine = qds.GetItem(row, query.SpaceLine);
-            cells.HorizontalAlign = qds.GetItem(row, query.HorzAlign, v => (int)v);
-            cells.BulletIndex = qds.GetItem(row, query.BulletIndex, v => (int)v);
-            cells.BulletFont = qds.GetItem(row, query.BulletFont, v => (int)v);
-            cells.BulletFontSize = qds.GetItem(row, query.BulletFontSize, v => (int)v);
+            cells.HorizontalAlign = qds.GetItem(row, query.HorzAlign).Cast(v => (int)v);
+            cells.BulletIndex = qds.GetItem(row, query.BulletIndex).Cast(v => (int)v);
+            cells.BulletFont = qds.GetItem(row, query.BulletFont).Cast(v => (int)v);
+            cells.BulletFontSize = qds.GetItem(row, query.BulletFontSize).Cast(v => (int)v);
 
             return cells;
         }
     }
-}
+} 

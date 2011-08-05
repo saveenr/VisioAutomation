@@ -36,11 +36,11 @@ namespace VisioAutomation.Text
         private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new CharacterFormatCells();
-            cells.Color = qds.GetItem(row, query.Color, v => (int) v);
+            cells.Color = qds.GetItem(row, query.Color).Cast(v => (int)v);
             cells.Transparency = qds.GetItem(row, query.Trans);
-            cells.Font = qds.GetItem(row, query.Font, v => (int) v);
+            cells.Font = qds.GetItem(row, query.Font).Cast(v => (int)v);
             cells.Size = qds.GetItem(row, query.Size);
-            cells.Style = qds.GetItem(row, query.Style, v => (VA.Text.CharStyle) ((int) v));
+            cells.Style = qds.GetItem(row, query.Style).Cast(v => (VA.Text.CharStyle) ((int) v));
 
             return cells;
         }

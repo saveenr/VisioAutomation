@@ -148,6 +148,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return cd;
         }
 
+        [System.Obsolete]
         public VA.ShapeSheet.CellData<TResult> GetItem<TResult>(int row, VA.ShapeSheet.Query.QueryColumn col, System.Func<T, TResult> xfrm) 
         {
             string formula = this.Formulas[row, col];

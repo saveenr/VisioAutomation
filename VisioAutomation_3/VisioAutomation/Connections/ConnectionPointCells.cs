@@ -33,9 +33,9 @@ namespace VisioAutomation.Connections
             var cells = new ConnectionPointCells();
             cells.X = qds.GetItem(row, query.X);
             cells.Y = qds.GetItem(row, query.Y);
-            cells.DirX = qds.GetItem(row, query.DirX, v => (int)v);
-            cells.DirY = qds.GetItem(row, query.DirY, v => (int)v);
-            cells.Type = qds.GetItem(row, query.Type, v => (int)v);
+            cells.DirX = qds.GetItem(row, query.DirX).Cast(v => (int)v);
+            cells.DirY = qds.GetItem(row, query.DirY).Cast(v => (int)v);
+            cells.Type = qds.GetItem(row, query.Type).Cast(v => (int)v);
 
             return cells;
         }

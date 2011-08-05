@@ -53,10 +53,10 @@ namespace VisioAutomation.Text
             cells.RightMargin = qds.GetItem(row, query.RightMargin);
             cells.TopMargin = qds.GetItem(row, query.TopMargin);
             cells.DefaultTabStop = qds.GetItem(row, query.DefaultTabStop);
-            cells.TextBkgnd = qds.GetItem(row, query.TextBkgnd, v => (int)v);
+            cells.TextBkgnd = qds.GetItem(row, query.TextBkgnd).Cast(v => (int)v);
             cells.TextBkgndTrans = qds.GetItem(row, query.TextBkgndTrans);
-            cells.TextDirection = qds.GetItem(row, query.TextDirection, v => (int)v);
-            cells.VerticalAlign = qds.GetItem(row, query.VerticalAlign, v => (int)v);
+            cells.TextDirection = qds.GetItem(row, query.TextDirection).Cast(v => (int)v);
+            cells.VerticalAlign = qds.GetItem(row, query.VerticalAlign).Cast(v => (int)v);
             return cells;
         }
     }

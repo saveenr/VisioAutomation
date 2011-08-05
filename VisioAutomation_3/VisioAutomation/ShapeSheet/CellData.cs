@@ -69,5 +69,9 @@ namespace VisioAutomation.ShapeSheet
             return new CellData<TResult>(formula, default(TResult));
         }
 
+        public CellData<X> Cast<X>(System.Func<TResult,X> f)
+        {
+            return new CellData<X>(this.Formula,f(this.Result));
+        }
     }
 }
