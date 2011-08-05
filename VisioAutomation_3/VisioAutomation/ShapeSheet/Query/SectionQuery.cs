@@ -61,6 +61,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return AddColumn((short)cell, name);
         }
 
+        public SectionQueryColumn AddColumn(VA.ShapeSheet.SRC cell, string name)
+        {
+            return AddColumn(cell.Cell, name);
+        }
+
         private int [] get_group_counts(IVisio.Page page, IList<int> shapeids)
         {
             int num_shapes = shapeids.Count;

@@ -19,16 +19,16 @@ namespace VisioAutomation.CustomProperties
         public CustomPropertyQuery() :
             base(IVisio.VisSectionIndices.visSectionProp)
         {
-            SortKey = this.AddColumn(IVisio.VisCellIndices.visCustPropsSortKey, "SortKey");
-            Ask = this.AddColumn(IVisio.VisCellIndices.visCustPropsAsk, "Ask");
-            Calendar = this.AddColumn(IVisio.VisCellIndices.visCustPropsCalendar, "Calendar");
-            Format = this.AddColumn(IVisio.VisCellIndices.visCustPropsFormat, "Format");
-            Invis = this.AddColumn(IVisio.VisCellIndices.visCustPropsInvis, "Invis");
-            Label = this.AddColumn(IVisio.VisCellIndices.visCustPropsLabel, "Label");
-            LangID = this.AddColumn(IVisio.VisCellIndices.visCustPropsLangID, "LangID");
-            Prompt = this.AddColumn(IVisio.VisCellIndices.visCustPropsPrompt, "Prompt");
-            Type = this.AddColumn(IVisio.VisCellIndices.visCustPropsType, "Type");
-            Value = this.AddColumn(IVisio.VisCellIndices.visCustPropsValue, "Value");
+            SortKey = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
+            Ask = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
+            Calendar = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Calendar");
+            Format = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Format, "Format");
+            Invis = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Invis");
+            Label = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
+            LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
+            Prompt = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
+            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Type");
+            Value = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
         }
     }
 }
