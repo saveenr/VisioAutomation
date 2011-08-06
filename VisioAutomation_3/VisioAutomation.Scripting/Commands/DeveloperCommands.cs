@@ -93,12 +93,12 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextUtil.Join(helpstr,"\r\n",lines);
 
-                var xpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
-                xpage.Title = cmdset_prop.Name + " commands";
-                xpage.Body = helpstr.ToString();
-                xpage.Name = cmdset_prop.Name + " commands";
+                var docpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
+                docpage.Title = cmdset_prop.Name + " commands";
+                docpage.Body = helpstr.ToString();
+                docpage.Name = cmdset_prop.Name + " commands";
 
-                docbuilder.Draw(xpage);
+                docbuilder.Draw(docpage);
             }
 
             docbuilder.Finish();
