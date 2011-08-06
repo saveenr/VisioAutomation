@@ -58,7 +58,7 @@ namespace VisioAutomation.Scripting.Commands
             docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
-            var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
+            var cmdst_props = VA.Scripting.Session.GetCommandSetProperties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 
@@ -108,15 +108,6 @@ namespace VisioAutomation.Scripting.Commands
             docbuilder.VisioDocument.Company = "";
 
             return docbuilder.VisioDocument;
-        }
-
-        private static List<System.Reflection.PropertyInfo> GetCmdsetPropeties()
-        {
-            var props = typeof(VA.Scripting.Session).GetProperties()
-                .Where(
-                    p => typeof(VA.Scripting.CommandSet).IsAssignableFrom(p.PropertyType))
-                .ToList();
-            return props;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace VisioAutomation.Scripting
             this.Session = session;
         }
 
+
         internal static IEnumerable<System.Reflection.MethodInfo> GetCommandMethods(System.Type mytype)
         {
             var cmdsettype = typeof(VA.Scripting.CommandSet);

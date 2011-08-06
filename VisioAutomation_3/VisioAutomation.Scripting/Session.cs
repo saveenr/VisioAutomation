@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using VisioAutomation.Scripting.Commands;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
@@ -10,26 +14,26 @@ namespace VisioAutomation.Scripting
         public IVisio.Application VisioApplication { get; set; }
         public SessionOptions Options { get; set; }
 
-        public VA.Scripting.Commands.ApplicationCommands Application { get; private set; }
-        public VA.Scripting.Commands.ViewCommands View { get; private set; }
-        public VA.Scripting.Commands.FormatCommands Format { get; private set; }
-        public VA.Scripting.Commands.LayerCommands Layer { get; private set; }
-        public VA.Scripting.Commands.ControlCommands Control { get; private set; }
-        public VA.Scripting.Commands.CustomPropCommands CustomProp { get; private set; }
-        public VA.Scripting.Commands.ExportCommands Export { get; private set; }
-        public VA.Scripting.Commands.ConnectionCommands Connection { get; private set; }
-        public VA.Scripting.Commands.ConnectionPointCommands ConnectionPoint { get; private set; }
-        public VA.Scripting.Commands.DrawCommands Draw { get; private set; }
-        public VA.Scripting.Commands.MasterCommands Master { get; private set; }
-        public VA.Scripting.Commands.LayoutCommands Layout { get; private set; }
-        public VA.Scripting.Commands.PageCommands Page { get; private set; }
-        public VA.Scripting.Commands.SelectionCommands Selection { get; private set; }
-        public VA.Scripting.Commands.ShapeSheetCommands ShapeSheet { get; private set; }
-        public VA.Scripting.Commands.TextCommands Text { get; private set; }
-        public VA.Scripting.Commands.UserDefinedCellCommands UserDefinedCell { get; private set; }
-        public VA.Scripting.Commands.DocumentCommands Document { get; private set; }
-        public VA.Scripting.Commands.DeveloperCommands Developer { get; private set; }
-        public VA.Scripting.Commands.OutputCommands Output { get; private set; }
+        public ApplicationCommands Application { get; private set; }
+        public ViewCommands View { get; private set; }
+        public FormatCommands Format { get; private set; }
+        public LayerCommands Layer { get; private set; }
+        public ControlCommands Control { get; private set; }
+        public CustomPropCommands CustomProp { get; private set; }
+        public ExportCommands Export { get; private set; }
+        public ConnectionCommands Connection { get; private set; }
+        public ConnectionPointCommands ConnectionPoint { get; private set; }
+        public DrawCommands Draw { get; private set; }
+        public MasterCommands Master { get; private set; }
+        public LayoutCommands Layout { get; private set; }
+        public PageCommands Page { get; private set; }
+        public SelectionCommands Selection { get; private set; }
+        public ShapeSheetCommands ShapeSheet { get; private set; }
+        public TextCommands Text { get; private set; }
+        public UserDefinedCellCommands UserDefinedCell { get; private set; }
+        public DocumentCommands Document { get; private set; }
+        public DeveloperCommands Developer { get; private set; }
+        public OutputCommands Output { get; private set; }
 
         public Session() :
             this(null)
@@ -41,25 +45,25 @@ namespace VisioAutomation.Scripting
             this.Options = new SessionOptions();
             this.VisioApplication = app;
 
-            this.Application = new Commands.ApplicationCommands(this);
-            this.View = new VA.Scripting.Commands.ViewCommands(this);
-            this.Format = new Commands.FormatCommands(this);
-            this.Layer = new Commands.LayerCommands(this);
-            this.Control = new Commands.ControlCommands(this);
-            this.CustomProp = new Commands.CustomPropCommands(this);
-            this.Export = new Commands.ExportCommands(this);
-            this.Connection = new Commands.ConnectionCommands(this);
-            this.ConnectionPoint = new Commands.ConnectionPointCommands(this);
-            this.Draw = new Commands.DrawCommands(this);
-            this.Master = new Commands.MasterCommands(this);
-            this.Layout = new Commands.LayoutCommands(this);
-            this.Page = new Commands.PageCommands(this);
-            this.Selection = new Commands.SelectionCommands(this);
-            this.ShapeSheet = new Commands.ShapeSheetCommands(this);
-            this.Text = new Commands.TextCommands(this);
-            this.UserDefinedCell = new Commands.UserDefinedCellCommands(this);
-            this.Document = new Commands.DocumentCommands(this);
-            this.Developer = new Commands.DeveloperCommands(this);
+            this.Application = new ApplicationCommands(this);
+            this.View = new ViewCommands(this);
+            this.Format = new FormatCommands(this);
+            this.Layer = new LayerCommands(this);
+            this.Control = new ControlCommands(this);
+            this.CustomProp = new CustomPropCommands(this);
+            this.Export = new ExportCommands(this);
+            this.Connection = new ConnectionCommands(this);
+            this.ConnectionPoint = new ConnectionPointCommands(this);
+            this.Draw = new DrawCommands(this);
+            this.Master = new MasterCommands(this);
+            this.Layout = new LayoutCommands(this);
+            this.Page = new PageCommands(this);
+            this.Selection = new SelectionCommands(this);
+            this.ShapeSheet = new ShapeSheetCommands(this);
+            this.Text = new TextCommands(this);
+            this.UserDefinedCell = new UserDefinedCellCommands(this);
+            this.Document = new DocumentCommands(this);
+            this.Developer = new DeveloperCommands(this);
             this.Output = new OutputCommands(this);
         }
 
@@ -83,13 +87,13 @@ namespace VisioAutomation.Scripting
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException("output");
+                throw new ArgumentOutOfRangeException("output");
             }
         }
 
         internal void Write(OutputStream output, string fmt, params object[] items)
         {
-            string s = string.Format(fmt, items);
+            string s = String.Format(fmt, items);
             this.Write(output, s);
         }
         
@@ -114,21 +118,33 @@ namespace VisioAutomation.Scripting
                 {
                     return false;
                 }
+                
                 if (application.ActiveDocument == null)
                 {
                     return false;
                 }
+                
                 if (application.ActivePage == null)
                 {
                     return false;
                 }
-                if (active_window.Type != (int) IVisio.VisWinTypes.visDrawing)
+
+                if (active_window.Type != (int)IVisio.VisWinTypes.visDrawing)
                 {
                     return false;
                 }
 
                 return true;
             }
+        }
+
+        internal static List<System.Reflection.PropertyInfo> GetCommandSetProperties()
+        {
+            var props = typeof(Scripting.Session).GetProperties()
+                .Where(
+                    p => typeof(Scripting.CommandSet).IsAssignableFrom(p.PropertyType))
+                .ToList();
+            return props;
         }
     }
 }
