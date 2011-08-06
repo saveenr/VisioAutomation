@@ -7,51 +7,9 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Interop
 {
-    public class EnumValue
-    {
-        public string Name { get; private set; }
-        public int Value { get; private set; }
-
-        public EnumValue(string name, int value)
-        {
-            this.Name = name;
-            this.Value = value;
-        }
-    }
-
-    public class EnumType
-    {
-        public System.Type Type { get; private set; }
-        public string Name { get; private set; }
-        public List<EnumValue> Values { get; private set; }
-        public Dictionary<string,int> NameToValue { get; private set; }
-        
-
-        internal EnumType(System.Type t)
-        {
-            this.Type = t;
-            this.Name = t.Name;
-            this.Values = this.GetEnumValues().ToList();
-            this.NameToValue = this.Values.ToDictionary(i => i.Name, i => i.Value);
-        }
-
-        public IEnumerable<EnumValue> GetEnumValues()
-        {
-            string[] names = System.Enum.GetNames(this.Type);
-            System.Array avalues = System.Enum.GetValues(this.Type);
-            for (int i = 0; i < avalues.Length; i++)
-            {
-                var item = new EnumValue(names[i],(int) avalues.GetValue(i));
-                yield return item;
-            }
-        }
-
-    }
-
     public static class InteropHelper
     {
-
-        private static bool inited=false;
+        private static bool initialized=false;
         private static Dictionary<string, EnumType> g_name_to_enum;
         private static List<System.Type> g_types; 
 
@@ -61,10 +19,9 @@ namespace VisioAutomation.Interop
             return g_types;
         }
 
-
         public static void init()
         {
-            if (!inited)
+            if (!initialized)
             {
                 g_types = typeof(IVisio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
@@ -74,7 +31,7 @@ namespace VisioAutomation.Interop
                     .Where(t => t.IsEnum)
                     .Select(i => new EnumType(i))
                     .ToDictionary(i => i.Name, i => i);
-                inited = true;
+                initialized = true;
             }
         }
 
