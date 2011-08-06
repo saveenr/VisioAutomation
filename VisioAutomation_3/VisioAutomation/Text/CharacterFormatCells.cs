@@ -10,7 +10,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> Color { get; set; }
         public VA.ShapeSheet.CellData<int> Font { get; set; }
         public VA.ShapeSheet.CellData<double> Size { get; set; }
-        public VA.ShapeSheet.CellData<VA.Text.CharStyle> Style { get; set; }
+        public VA.ShapeSheet.CellData<int> Style { get; set; }
         public VA.ShapeSheet.CellData<double> Transparency { get; set; }
 
         protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
@@ -41,7 +41,7 @@ namespace VisioAutomation.Text
             cells.Transparency = qds.GetItem(row, query.Trans);
             cells.Font = qds.GetItem(row, query.Font).ToInt();
             cells.Size = qds.GetItem(row, query.Size);
-            cells.Style = qds.GetItem(row, query.Style).Cast(v => (VA.Text.CharStyle) ((int) v));
+            cells.Style = qds.GetItem(row, query.Style).ToInt();
 
             return cells;
         }
