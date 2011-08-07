@@ -27,6 +27,7 @@ namespace VisioAutomationSamples
                 data.Select(d => new IG.DataPoint(d.value, string.Format("{0} ({1})", d.cat, d.value))).ToList();
 
             var g = new VA.Infographics.SingleValuePieChartGrid();
+            g.FontName = "Segoe UI";
             g.DataPoints = datapoints;
 
             g.Draw(page);

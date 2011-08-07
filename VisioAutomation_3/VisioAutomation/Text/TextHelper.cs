@@ -552,5 +552,17 @@ namespace VisioAutomation.Text
             update.Execute(shape);
         }
 
+        public static IVisio.Font TryGetFont(IVisio.Fonts fonts, string name)
+        {
+            try
+            {
+                var font = fonts[name];
+                return font;
+            }
+            catch (System.Runtime.InteropServices.COMException comexc)
+            {
+                return null;
+            }
+        }
     }
 }

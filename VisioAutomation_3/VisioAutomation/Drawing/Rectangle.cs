@@ -158,11 +158,37 @@ namespace VisioAutomation.Drawing
             return r2;
         }
 
+        public Rectangle Add(Size s)
+        {
+            var r2 = new Rectangle(Left + s.Width, Bottom + s.Height, Right + s.Width, Top + s.Height);
+            return r2;
+        }
+
+        public Rectangle Add(Point s)
+        {
+            var r2 = new Rectangle(Left + s.X, Bottom + s.Y, Right + s.X, Top + s.Y);
+            return r2;
+        }
+
+
         public Rectangle Subtract(double dx, double dy)
         {
             var r2 = new Rectangle(Left - dx, Bottom - dy, Right - dx, Top - dy);
             return r2;
         }
+
+        public Rectangle Subtract(Size s)
+        {
+            var r2 = new Rectangle(Left - s.Width, Bottom - s.Height, Right - s.Width, Top - s.Height);
+            return r2;
+        }
+
+        public Rectangle Subtract(Point s)
+        {
+            var r2 = new Rectangle(Left - s.X, Bottom - s.Y, Right - s.X, Top - s.Y);
+            return r2;
+        }
+
 
         public Rectangle Multiply(double sx, double sy)
         {
