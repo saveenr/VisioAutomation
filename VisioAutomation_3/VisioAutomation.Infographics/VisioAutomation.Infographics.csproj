@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Block.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DataPoint.cs" />
+    <Compile Include="InfoGraphic.cs" />
+    <Compile Include="InfographicDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
