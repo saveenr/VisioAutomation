@@ -58,7 +58,7 @@ namespace VisioAutomation.Scripting.Commands
             docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
-            var cmdst_props = GetCmdsetPropeties().OrderBy(i=>i.Name).ToList();
+            var cmdst_props = VA.Scripting.Session.GetCommandSetProperties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 
@@ -93,12 +93,12 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextUtil.Join(helpstr,"\r\n",lines);
 
-                var xpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
-                xpage.Title = cmdset_prop.Name + " commands";
-                xpage.Body = helpstr.ToString();
-                xpage.Name = cmdset_prop.Name + " commands";
+                var docpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
+                docpage.Title = cmdset_prop.Name + " commands";
+                docpage.Body = helpstr.ToString();
+                docpage.Name = cmdset_prop.Name + " commands";
 
-                docbuilder.Draw(xpage);
+                docbuilder.Draw(docpage);
             }
 
             docbuilder.Finish();
@@ -108,15 +108,6 @@ namespace VisioAutomation.Scripting.Commands
             docbuilder.VisioDocument.Company = "";
 
             return docbuilder.VisioDocument;
-        }
-
-        private static List<System.Reflection.PropertyInfo> GetCmdsetPropeties()
-        {
-            var props = typeof(VA.Scripting.Session).GetProperties()
-                .Where(
-                    p => typeof(VA.Scripting.CommandSet).IsAssignableFrom(p.PropertyType))
-                .ToList();
-            return props;
         }
     }
 }

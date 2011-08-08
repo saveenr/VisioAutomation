@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Format
 {
@@ -78,36 +79,36 @@ namespace VisioAutomation.Format
         private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new ShapeFormatCells();
-            cells.FillBkgnd = qds.GetItem(row, query.FillBkgnd, v => (int)v);
+            cells.FillBkgnd = qds.GetItem(row, query.FillBkgnd).ToInt();
             cells.FillBkgndTrans = qds.GetItem(row, query.FillBkgndTrans);
-            cells.FillForegnd = qds.GetItem(row, query.FillForegnd, v => (int)v);
+            cells.FillForegnd = qds.GetItem(row, query.FillForegnd).ToInt();
             cells.FillForegndTrans = qds.GetItem(row, query.FillForegndTrans);
-            cells.FillPattern = qds.GetItem(row, query.FillPattern, v => (int)v);
+            cells.FillPattern = qds.GetItem(row, query.FillPattern).ToInt();
             cells.ShapeShdwObliqueAngle = qds.GetItem(row, query.ShapeShdwObliqueAngle);
             cells.ShapeShdwOffsetX = qds.GetItem(row, query.ShapeShdwOffsetX);
             cells.ShapeShdwOffsetY = qds.GetItem(row, query.ShapeShdwOffsetY);
             cells.ShapeShdwScaleFactor = qds.GetItem(row, query.ShapeShdwScaleFactor);
-            cells.ShapeShdwType = qds.GetItem(row, query.ShapeShdwType, v => (int)v);
-            cells.ShdwBkgnd = qds.GetItem(row, query.ShdwBkgnd, v => (int)v);
+            cells.ShapeShdwType = qds.GetItem(row, query.ShapeShdwType).ToInt();
+            cells.ShdwBkgnd = qds.GetItem(row, query.ShdwBkgnd).ToInt();
             cells.ShdwBkgndTrans = qds.GetItem(row, query.ShdwBkgndTrans);
-            cells.ShdwForegnd = qds.GetItem(row, query.ShdwForegnd, v => (int)v);
+            cells.ShdwForegnd = qds.GetItem(row, query.ShdwForegnd).ToInt();
             cells.ShdwForegndTrans = qds.GetItem(row, query.ShdwForegndTrans);
-            cells.ShdwPattern = qds.GetItem(row, query.ShdwPattern, v => (int)v);
-            cells.BeginArrow = qds.GetItem(row, query.BeginArrow, v => (int)v);
+            cells.ShdwPattern = qds.GetItem(row, query.ShdwPattern).ToInt();
+            cells.BeginArrow = qds.GetItem(row, query.BeginArrow).ToInt();
             cells.BeginArrowSize = qds.GetItem(row, query.BeginArrowSize);
-            cells.EndArrow = qds.GetItem(row, query.EndArrow, v => (int)v);
+            cells.EndArrow = qds.GetItem(row, query.EndArrow).ToInt();
             cells.EndArrowSize = qds.GetItem(row, query.EndArrowSize);
-            cells.LineCap = qds.GetItem(row, query.LineCap, v => (int)v);
-            cells.LineColor = qds.GetItem(row, query.LineColor, v => (int)v);
+            cells.LineCap = qds.GetItem(row, query.LineCap).ToInt();
+            cells.LineColor = qds.GetItem(row, query.LineColor).ToInt();
             cells.LineColorTrans = qds.GetItem(row, query.LineColorTrans);
-            cells.LinePattern = qds.GetItem(row, query.LinePattern, v => (int)v);
+            cells.LinePattern = qds.GetItem(row, query.LinePattern).ToInt();
             cells.LineWeight = qds.GetItem(row, query.LineWeight);
             cells.Rounding = qds.GetItem(row, query.Rounding);
-            cells.CharFont = qds.GetItem(row, query.CharFont, v => (int)v);
-            cells.CharColor = qds.GetItem(row, query.CharColor, v => (int)v);
+            cells.CharFont = qds.GetItem(row, query.CharFont).ToInt();
+            cells.CharColor = qds.GetItem(row, query.CharColor).ToInt();
             cells.CharColorTrans = qds.GetItem(row, query.CharColorTrans);
             cells.CharSize = qds.GetItem(row, query.CharSize);
-            cells.TextBkgnd = qds.GetItem(row, query.TextBkgnd, v => (int)v);
+            cells.TextBkgnd = qds.GetItem(row, query.TextBkgnd).ToInt();
             cells.TextBkgndTrans = qds.GetItem(row, query.TextBkgndTrans);
             return cells;
         }

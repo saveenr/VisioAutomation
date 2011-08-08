@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Controls
 {
@@ -30,14 +31,14 @@ namespace VisioAutomation.Controls
         private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new ControlCells();
-            cells.CanGlue = qds.GetItem(row, query.CanGlue, v => (int)v);
-            cells.Tip = qds.GetItem(row, query.Tip, v => (int)v);
+            cells.CanGlue = qds.GetItem(row, query.CanGlue).ToInt();
+            cells.Tip = qds.GetItem(row, query.Tip).ToInt();
             cells.X = qds.GetItem(row, query.X);
             cells.Y = qds.GetItem(row, query.Y);
-            cells.YBehavior = qds.GetItem(row, query.YBehavior, v => (int)v);
-            cells.XBehavior = qds.GetItem(row, query.XBehavior, v => (int)v);
-            cells.XDynamics = qds.GetItem(row, query.XDynamics, v => (int)v);
-            cells.YDynamics = qds.GetItem(row, query.YDynamics, v => (int)v);
+            cells.YBehavior = qds.GetItem(row, query.YBehavior).ToInt();
+            cells.XBehavior = qds.GetItem(row, query.XBehavior).ToInt();
+            cells.XDynamics = qds.GetItem(row, query.XDynamics).ToInt();
+            cells.YDynamics = qds.GetItem(row, query.YDynamics).ToInt();
             return cells;
         }
 

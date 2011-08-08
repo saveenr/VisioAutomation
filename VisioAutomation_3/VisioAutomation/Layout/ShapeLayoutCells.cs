@@ -48,22 +48,22 @@ namespace VisioAutomation.Layout
         private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new ShapeLayoutCells();
-            cells.ConFixedCode = qds.GetItem(row, query.ConFixedCode, v => (int)v);
-            cells.ConLineJumpCode = qds.GetItem(row, query.ConLineJumpCode, v => (int)v);
-            cells.ConLineJumpDirX = qds.GetItem(row, query.ConLineJumpDirX, v => (int)v);
-            cells.ConLineJumpDirY = qds.GetItem(row, query.ConLineJumpDirY, v => (int)v);
-            cells.ConLineJumpStyle = qds.GetItem(row, query.ConLineJumpStyle, v => (int)v);
-            cells.ConLineRouteExt = qds.GetItem(row, query.ConLineRouteExt, v => (int)v);
-            cells.ShapeFixedCode = qds.GetItem(row, query.ShapeFixedCode, v => (int)v);
-            cells.ShapePermeablePlace = qds.GetItem(row, query.ShapePermeablePlace, v => (int)v);
-            cells.ShapePermeableX = qds.GetItem(row, query.ShapePermeableX, v => (int)v);
-            cells.ShapePermeableY = qds.GetItem(row, query.ShapePermeableY, v => (int)v);
-            cells.ShapePlaceFlip = qds.GetItem(row, query.ShapePlaceFlip, v => (int)v);
-            cells.ShapePlaceStyle = qds.GetItem(row, query.ShapePlaceStyle, v => (int)v);
-            cells.ShapePlowCode = qds.GetItem(row, query.ShapePlowCode, v => (int)v);
-            cells.ShapeRouteStyle = qds.GetItem(row, query.ShapeRouteStyle, v => (int)v);
-            cells.ShapeSplit = qds.GetItem(row, query.ShapeSplit, v => (int)v);
-            cells.ShapeSplittable = qds.GetItem(row, query.ShapeSplittable, v => (int)v);
+            cells.ConFixedCode = qds.GetItem(row, query.ConFixedCode).ToInt();
+            cells.ConLineJumpCode = qds.GetItem(row, query.ConLineJumpCode).ToInt();
+            cells.ConLineJumpDirX = qds.GetItem(row, query.ConLineJumpDirX).ToInt();
+            cells.ConLineJumpDirY = qds.GetItem(row, query.ConLineJumpDirY).ToInt();
+            cells.ConLineJumpStyle = qds.GetItem(row, query.ConLineJumpStyle).ToInt();
+            cells.ConLineRouteExt = qds.GetItem(row, query.ConLineRouteExt).ToInt();
+            cells.ShapeFixedCode = qds.GetItem(row, query.ShapeFixedCode).ToInt();
+            cells.ShapePermeablePlace = qds.GetItem(row, query.ShapePermeablePlace).ToInt();
+            cells.ShapePermeableX = qds.GetItem(row, query.ShapePermeableX).ToInt();
+            cells.ShapePermeableY = qds.GetItem(row, query.ShapePermeableY).ToInt();
+            cells.ShapePlaceFlip = qds.GetItem(row, query.ShapePlaceFlip).ToInt();
+            cells.ShapePlaceStyle = qds.GetItem(row, query.ShapePlaceStyle).ToInt();
+            cells.ShapePlowCode = qds.GetItem(row, query.ShapePlowCode).ToInt();
+            cells.ShapeRouteStyle = qds.GetItem(row, query.ShapeRouteStyle).ToInt();
+            cells.ShapeSplit = qds.GetItem(row, query.ShapeSplit).ToInt();
+            cells.ShapeSplittable = qds.GetItem(row, query.ShapeSplittable).ToInt();
             return cells;
         }
 

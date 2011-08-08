@@ -14,11 +14,11 @@ namespace VisioAutomation.Connections
         public ConnectionPointQuery() :
             base(IVisio.VisSectionIndices.visSectionConnectionPts)
         {
-            DirX = this.AddColumn(IVisio.VisCellIndices.visCnnctDirX,"DirX");
-            DirY = this.AddColumn(IVisio.VisCellIndices.visCnnctDirY,"DirY");
-            Type = this.AddColumn(IVisio.VisCellIndices.visCnnctType,"Type");
-            X = this.AddColumn(IVisio.VisCellIndices.visX, "X");
-            Y = this.AddColumn(IVisio.VisCellIndices.visY, "Y");
+            DirX = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_DirX,"DirX");
+            DirY = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_DirY, "DirY");
+            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_Type, "Type");
+            X = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_X, "X");
+            Y = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_Y, "Y");
         }
     }
 }

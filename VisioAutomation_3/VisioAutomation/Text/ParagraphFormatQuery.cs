@@ -23,20 +23,20 @@ namespace VisioAutomation.Text
         public ParagraphFormatQuery() :
             base(IVisio.VisSectionIndices.visSectionParagraph)
         {
-            BulletIndex = this.AddColumn(IVisio.VisCellIndices.visBulletIndex, "BulletIndex");
-            BulletFont = this.AddColumn(IVisio.VisCellIndices.visBulletFont, "BulletFont");
-            BulletFontSize = this.AddColumn(IVisio.VisCellIndices.visBulletFontSize, "BulletFontSize");
-            BulletString = this.AddColumn(IVisio.VisCellIndices.visBulletString, "BulletString");
-            Flags = this.AddColumn(IVisio.VisCellIndices.visFlags, "Flags");
-            HorzAlign = this.AddColumn(IVisio.VisCellIndices.visHorzAlign, "HorzAlign");
-            IndentFirst = this.AddColumn(IVisio.VisCellIndices.visIndentFirst, "IndentFirst");
-            IndentLeft = this.AddColumn(IVisio.VisCellIndices.visIndentLeft, "IndentLeft");
-            IndentRight = this.AddColumn(IVisio.VisCellIndices.visIndentRight, "IndentRight");
-            LocalizeBulletFont = this.AddColumn(IVisio.VisCellIndices.visLocalizeBulletFont, "LocalizeBulletFont");
-            SpaceAfter = this.AddColumn(IVisio.VisCellIndices.visSpaceAfter, "SpaceAfter");
-            SpaceBefore = this.AddColumn(IVisio.VisCellIndices.visSpaceBefore, "SpaceBefore");
-            SpaceLine = this.AddColumn(IVisio.VisCellIndices.visSpaceLine, "SpaceLine");
-            TextPosAfterBullet = this.AddColumn(IVisio.VisCellIndices.visTextPosAfterBullet, "TextPosAfterBullet");
+            BulletIndex = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
+            BulletFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletFont, "BulletFont");
+            BulletFontSize = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, "BulletFontSize");
+            BulletString = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletStr, "BulletString");
+            Flags = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_Flags, "Flags");
+            HorzAlign = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_HorzAlign, "HorzAlign");
+            IndentFirst = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_IndFirst, "IndentFirst");
+            IndentLeft = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_IndLeft, "IndentLeft");
+            IndentRight = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_IndRight, "IndentRight");
+            LocalizeBulletFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont, "LocalizeBulletFont");
+            SpaceAfter = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_SpAfter, "SpaceAfter");
+            SpaceBefore = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_SpBefore, "SpaceBefore");
+            SpaceLine = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_SpLine, "SpaceLine");
+            TextPosAfterBullet = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "TextPosAfterBullet");
         }
     }
 }

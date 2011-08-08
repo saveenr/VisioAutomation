@@ -225,7 +225,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var cmd = MiscScriptingUtil.AlignmentToUICmd(align);
+            var cmd = LayoutCommands.AlignmentToUICmd(align);
 
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
@@ -449,6 +449,36 @@ namespace VisioAutomation.Scripting.Commands
                 update.Execute(active_page);
             }
         }
-    }
 
+        private static IVisio.VisUICmds AlignmentToUICmd(VA.Drawing.AlignmentHorizontal a)
+        {
+            if (a == VA.Drawing.AlignmentHorizontal.Left)
+            {
+                return IVisio.VisUICmds.visCmdAlignObjectLeft;
+            }
+            if (a == VA.Drawing.AlignmentHorizontal.Center)
+            {
+                return IVisio.VisUICmds.visCmdAlignObjectCenter;
+            }
+            if (a == VA.Drawing.AlignmentHorizontal.Right)
+            {
+                return IVisio.VisUICmds.visCmdAlignObjectRight;
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+        }
+
+        private static IVisio.VisUICmds AlignmentToUICmd(VA.Drawing.AlignmentVertical a)
+        {
+            if (a == VA.Drawing.AlignmentVertical.Top) { return IVisio.VisUICmds.visCmdAlignObjectTop; }
+            if (a == VA.Drawing.AlignmentVertical.Center) { return IVisio.VisUICmds.visCmdAlignObjectMiddle; }
+            if (a == VA.Drawing.AlignmentVertical.Bottom) { return IVisio.VisUICmds.visCmdAlignObjectBottom; }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+        }
+    }
 }

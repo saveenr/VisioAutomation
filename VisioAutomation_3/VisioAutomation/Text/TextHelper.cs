@@ -564,5 +564,17 @@ namespace VisioAutomation.Text
                 return null;
             }
         }
+
+                public static IList<VA.Text.TextBlockFormatCells> GetTextBlockFormat(IVisio.Page page, IList<int> shapeids)
+        {
+            return VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
+        }
+
+        public static VA.Text.TextBlockFormatCells GetTextBlockFormat(IVisio.Shape shape)
+        {
+            return VA.Text.TextBlockFormatCells.GetCells(shape);
+        }
+
+
     }
 }

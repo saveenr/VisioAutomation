@@ -112,7 +112,6 @@
     <Compile Include="Commands\ShapeSheetCommands.cs" />
     <Compile Include="Commands\TextCommands.cs" />
     <Compile Include="TextCommandsUtil.cs" />
-    <Compile Include="MiscScriptingUtil.cs" />
     <Compile Include="Commands\ViewCommands.cs" />
     <Compile Include="Zoom.cs" />
   </ItemGroup>

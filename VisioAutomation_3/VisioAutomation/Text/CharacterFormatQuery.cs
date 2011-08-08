@@ -14,11 +14,11 @@ namespace VisioAutomation.Text
         public CharacterFormatQuery() :
             base(IVisio.VisSectionIndices.visSectionCharacter)
         {
-            Color = this.AddColumn(IVisio.VisCellIndices.visCharacterColor, "Color");
-            Trans = this.AddColumn(IVisio.VisCellIndices.visCharacterColorTrans, "Trans");
-            Font = this.AddColumn(IVisio.VisCellIndices.visCharacterFont, "Font");
-            Size = this.AddColumn(IVisio.VisCellIndices.visCharacterSize, "Size");
-            Style = this.AddColumn(IVisio.VisCellIndices.visCharacterStyle, "Style");
+            Color = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Color, "Color");
+            Trans = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_ColorTrans, "Trans");
+            Font = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Font, "Font");
+            Size = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Size, "Size");
+            Style = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Style, "Style");
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
@@ -9,7 +10,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> Color { get; set; }
         public VA.ShapeSheet.CellData<int> Font { get; set; }
         public VA.ShapeSheet.CellData<double> Size { get; set; }
-        public VA.ShapeSheet.CellData<VA.Text.CharStyle> Style { get; set; }
+        public VA.ShapeSheet.CellData<int> Style { get; set; }
         public VA.ShapeSheet.CellData<double> Transparency { get; set; }
 
         protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
@@ -36,11 +37,11 @@ namespace VisioAutomation.Text
         private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
         {
             var cells = new CharacterFormatCells();
-            cells.Color = qds.GetItem(row, query.Color, v => (int) v);
+            cells.Color = qds.GetItem(row, query.Color).ToInt();
             cells.Transparency = qds.GetItem(row, query.Trans);
-            cells.Font = qds.GetItem(row, query.Font, v => (int) v);
+            cells.Font = qds.GetItem(row, query.Font).ToInt();
             cells.Size = qds.GetItem(row, query.Size);
-            cells.Style = qds.GetItem(row, query.Style, v => (VA.Text.CharStyle) ((int) v));
+            cells.Style = qds.GetItem(row, query.Style).ToInt();
 
             return cells;
         }

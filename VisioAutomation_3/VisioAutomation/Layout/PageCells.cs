@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
@@ -147,22 +148,22 @@ namespace VisioAutomation.Layout
             cells.PageLeftMargin = qds.GetItem(row, query.PageLeftMargin);
             cells.CenterX = qds.GetItem(row, query.CenterX);
             cells.CenterY = qds.GetItem(row, query.CenterY);
-            cells.OnPage = qds.GetItem(row, query.OnPage, v => (int)v);
+            cells.OnPage = qds.GetItem(row, query.OnPage).ToInt();
             cells.PageBottomMargin = qds.GetItem(row, query.PageBottomMargin);
             cells.PageRightMargin = qds.GetItem(row, query.PageRightMargin);
             cells.PagesX = qds.GetItem(row, query.PagesX);
             cells.PagesY = qds.GetItem(row, query.PagesY);
             cells.PageTopMargin = qds.GetItem(row, query.PageTopMargin);
-            cells.PaperKind = qds.GetItem(row, query.PaperKind, v => (int)v);
-            cells.PrintGrid = qds.GetItem(row, query.PrintGrid, v => (int)v);
-            cells.PrintPageOrientation = qds.GetItem(row, query.PrintPageOrientation, v => (int)v);
+            cells.PaperKind = qds.GetItem(row, query.PaperKind).ToInt();
+            cells.PrintGrid = qds.GetItem(row, query.PrintGrid).ToInt();
+            cells.PrintPageOrientation = qds.GetItem(row, query.PrintPageOrientation).ToInt();
             cells.ScaleX = qds.GetItem(row, query.ScaleX);
             cells.ScaleY = qds.GetItem(row, query.ScaleY);
-            cells.PaperSource = qds.GetItem(row, query.PaperSource, v => (int)v);
+            cells.PaperSource = qds.GetItem(row, query.PaperSource).ToInt();
             cells.DrawingScale = qds.GetItem(row, query.DrawingScale);
-            cells.DrawingScaleType = qds.GetItem(row, query.DrawingScaleType, v => (int)v);
-            cells.DrawingSizeType = qds.GetItem(row, query.DrawingSizeType, v => (int)v);
-            cells.InhibitSnap = qds.GetItem(row, query.InhibitSnap, v => (int)v);
+            cells.DrawingScaleType = qds.GetItem(row, query.DrawingScaleType).ToInt();
+            cells.DrawingSizeType = qds.GetItem(row, query.DrawingSizeType).ToInt();
+            cells.InhibitSnap = qds.GetItem(row, query.InhibitSnap).ToInt();
             cells.PageHeight = qds.GetItem(row, query.PageHeight);
             cells.PageScale = qds.GetItem(row, query.PageScale);
             cells.PageWidth = qds.GetItem(row, query.PageWidth);
@@ -170,7 +171,7 @@ namespace VisioAutomation.Layout
             cells.ShdwOffsetX = qds.GetItem(row, query.ShdwOffsetX);
             cells.ShdwOffsetY = qds.GetItem(row, query.ShdwOffsetY);
             cells.ShdwScaleFactor = qds.GetItem(row, query.ShdwScaleFactor);
-            cells.ShdwType = qds.GetItem(row, query.ShdwType, v => (int)v);
+            cells.ShdwType = qds.GetItem(row, query.ShdwType).ToInt();
             cells.UIVisibility = qds.GetItem(row, query.UIVisibility);
             cells.XGridDensity = qds.GetItem(row, query.XGridDensity);
             cells.XGridOrigin = qds.GetItem(row, query.XGridOrigin);
@@ -186,15 +187,15 @@ namespace VisioAutomation.Layout
             cells.AvenueSizeY = qds.GetItem(row, query.AvenueSizeY);
             cells.BlockSizeX = qds.GetItem(row, query.BlockSizeX);
             cells.BlockSizeY = qds.GetItem(row, query.BlockSizeY);
-            cells.CtrlAsInput = qds.GetItem(row, query.CtrlAsInput, v => (int)v);
-            cells.DynamicsOff = qds.GetItem(row, query.DynamicsOff, v => (int)v);
-            cells.EnableGrid = qds.GetItem(row, query.EnableGrid, v => (int)v);
-            cells.LineAdjustFrom = qds.GetItem(row, query.LineAdjustFrom, v => (int)v);
+            cells.CtrlAsInput = qds.GetItem(row, query.CtrlAsInput).ToInt();
+            cells.DynamicsOff = qds.GetItem(row, query.DynamicsOff).ToInt();
+            cells.EnableGrid = qds.GetItem(row, query.EnableGrid).ToInt();
+            cells.LineAdjustFrom = qds.GetItem(row, query.LineAdjustFrom).ToInt();
             cells.LineAdjustTo = qds.GetItem(row, query.LineAdjustTo);
             cells.LineJumpCode = qds.GetItem(row, query.LineJumpCode);
             cells.LineJumpFactorX = qds.GetItem(row, query.LineJumpFactorX);
             cells.LineJumpFactorY = qds.GetItem(row, query.LineJumpFactorY);
-            cells.LineJumpStyle = qds.GetItem(row, query.LineJumpStyle, v => (int)v);
+            cells.LineJumpStyle = qds.GetItem(row, query.LineJumpStyle).ToInt();
             cells.LineRouteExt = qds.GetItem(row, query.LineRouteExt);
             cells.LineToLineX = qds.GetItem(row, query.LineToLineX);
             cells.LineToLineY = qds.GetItem(row, query.LineToLineY);
@@ -202,13 +203,13 @@ namespace VisioAutomation.Layout
             cells.LineToNodeY = qds.GetItem(row, query.LineToNodeY);
             cells.PageLineJumpDirX = qds.GetItem(row, query.PageLineJumpDirX);
             cells.PageLineJumpDirY = qds.GetItem(row, query.PageLineJumpDirY);
-            cells.PageShapeSplit = qds.GetItem(row, query.PageShapeSplit, v => (int)v);
-            cells.PlaceDepth = qds.GetItem(row, query.PlaceDepth, v => (int)v);
-            cells.PlaceFlip = qds.GetItem(row, query.PlaceFlip, v => (int)v);
-            cells.PlaceStyle = qds.GetItem(row, query.PlaceStyle, v => (int)v);
-            cells.PlowCode = qds.GetItem(row, query.PlowCode, v => (int)v);
-            cells.ResizePage = qds.GetItem(row, query.ResizePage, v => (int)v);
-            cells.RouteStyle = qds.GetItem(row, query.RouteStyle, v => (int)v);
+            cells.PageShapeSplit = qds.GetItem(row, query.PageShapeSplit).ToInt();
+            cells.PlaceDepth = qds.GetItem(row, query.PlaceDepth).ToInt();
+            cells.PlaceFlip = qds.GetItem(row, query.PlaceFlip).ToInt();
+            cells.PlaceStyle = qds.GetItem(row, query.PlaceStyle).ToInt();
+            cells.PlowCode = qds.GetItem(row, query.PlowCode).ToInt();
+            cells.ResizePage = qds.GetItem(row, query.ResizePage).ToInt();
+            cells.RouteStyle = qds.GetItem(row, query.RouteStyle).ToInt();
             return cells;
         }
 
