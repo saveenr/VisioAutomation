@@ -75,8 +75,8 @@ namespace VisioAutomation.Infographics
 
             var margin = new VA.Drawing.Size(0.25, 0.25);
 
-            int allocrows = System.Math.Max(1, datapoints.Count / gb.ColumnCount);
-            int alloccols = System.Math.Max(1, gb.RowCount);
+            int allocrows = System.Math.Max(1, (int)(datapoints.Count *1.0 / gb.ColumnCount + 0.5));
+            int alloccols = System.Math.Max(1, gb.ColumnCount);
 
             var cellsize = new VA.Drawing.Size(2.0, 1.5);
 

@@ -15,10 +15,10 @@ namespace VisioAutomationSamples
         {
             var ig = new IG.InfographicDocument();
 
-            var header1 = new IG.Header("JS");
+            var header1 = new IG.Header("Infographic Document Sampler");
             ig.Blocks.Add(header1);
 
-            var header2 = new IG.Header("JS2");
+            var header2 = new IG.Header(typeof(IG.SingleValuePieChartGrid).Name);
             ig.Blocks.Add(header2);
 
             var data = new[] {0.0, 0.25, 0.3, 0.80, 1.0};
