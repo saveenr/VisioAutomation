@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Drawing;
@@ -8,6 +9,39 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Infographics
 {
+    public class GridBuilder
+    {
+        public int RowCount { get; private set; }
+        public int ColumnCount { get; private set; }
+
+        public GridBuilder(int rows, int cols)
+        {
+            if (cols<1)
+            {
+                throw new System.ArgumentOutOfRangeException("cols");
+            }
+
+            if (rows<1)
+            {
+                throw new System.ArgumentOutOfRangeException("rows");
+            }
+            
+            this.RowCount = rows;
+            this.ColumnCount = cols;
+        }
+
+        public int Count
+        {
+            get { return this.RowCount*this.ColumnCount; }
+        }
+
+    }
+
+    public class RenderContext
+    {
+        public IVisio.Page Page;
+    }
+
     public class SingleValuePieChartGrid : Block
     {
         public IList<DataPoint> DataPoints;
@@ -18,16 +52,17 @@ namespace VisioAutomation.Infographics
         public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
         public VA.Drawing.ColorRGB BKColor = new ColorRGB(0xf0f0f0);
 
-        public override Size Render(Page page, Point upperleft)
+        public override Size Render(RenderContext rc, Point upperleft)
         {
+            var page = rc.Page;
             var datapoints = this.DataPoints;
 
-            int rows = 2;
-            int cols = 3;
-            // ensure rows and colums >= 1
+            var gb = new GridBuilder(2, 3);
 
-            int max_items = rows * cols;
-            // ensure max_items >= datapoints
+            if (datapoints.Count>gb.Count)
+            {
+                throw new System.ArgumentOutOfRangeException("Too many datapoints to fit into grid");
+            }
 
             var doc = page.Document;
             var fonts = doc.Fonts;
@@ -40,8 +75,9 @@ namespace VisioAutomation.Infographics
 
             var margin = new VA.Drawing.Size(0.25, 0.25);
 
-            int allocrows = System.Math.Max(1, datapoints.Count / cols);
-            int alloccols = System.Math.Max(1, cols);
+            int allocrows = System.Math.Max(1, datapoints.Count / gb.ColumnCount);
+            int alloccols = System.Math.Max(1, gb.RowCount);
+
             var cellsize = new VA.Drawing.Size(2.0, 1.5);
 
             var bkrect = new VA.Drawing.Rectangle(0, -(allocrows * cellsize.Height + margin.Height + margin.Height), alloccols * cellsize.Width + margin.Width + margin.Width, 0).Add(upperleft);
@@ -84,11 +120,11 @@ namespace VisioAutomation.Infographics
             var value_shapes = new List<IVisio.Shape>(datapoints.Count());
             var nonvalue_shapes = new List<IVisio.Shape>(datapoints.Count());
 
-            foreach (int row in Enumerable.Range(0, rows))
+            foreach (int row in Enumerable.Range(0, gb.RowCount))
             {
-                foreach (int col in Enumerable.Range(0, cols))
+                foreach (int col in Enumerable.Range(0, gb.ColumnCount))
                 {
-                    int dp_index = (row * cols) + col;
+                    int dp_index = (row * gb.ColumnCount) + col;
                     if (dp_index < datapoints.Count())
                     {
                         // Get datapoint
@@ -106,7 +142,7 @@ namespace VisioAutomation.Infographics
                         // draw background
                         var piecenter = cellrect.Center;
                         var pieradius = System.Math.Min(cellrect.Width, cellrect.Height) / 4.0;
-                        var piedata = new[] { dp.Value, 100.0 - dp.Value };
+                        var piedata = new[] { dp.Value, 1.0 - dp.Value };
                         var shapes = VA.Layout.LayoutHelper.DrawPieSlices(page, piecenter, pieradius, piedata);
                         var value_shape = shapes[0];
                         var nonvalue_shape = shapes[1];

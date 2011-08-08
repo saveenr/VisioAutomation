@@ -4,11 +4,34 @@ using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using GRID = VisioAutomation.Layout.Grid;
+using IG = VisioAutomation.Infographics;
 
 namespace VisioAutomationSamples
 {
     public static class InfoGraphicSamples
     {
+
+        public static void DOC()
+        {
+            var ig = new IG.InfographicDocument();
+
+            var header1 = new IG.Header("JS");
+            ig.Blocks.Add(header1);
+
+            var header2 = new IG.Header("JS2");
+            ig.Blocks.Add(header2);
+
+            var data = new[] {0.0, 0.25, 0.3, 0.80, 1.0};
+            var datapoints = data.Select(i => new IG.DataPoint(i, i.ToString())).ToList();
+            var g1 = new IG.SingleValuePieChartGrid();
+            g1.DataPoints  = datapoints;
+            ig.Blocks.Add(g1);
+
+            var app = SampleEnvironment.Application;
+            var doc = app.ActiveDocument;
+            ig.RenderPage(doc);
+        }
+
         public static void BarChart()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
