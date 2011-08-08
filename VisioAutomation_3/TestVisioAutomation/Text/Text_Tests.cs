@@ -215,9 +215,9 @@ namespace TestVisioAutomation
 
             var fmts = VA.Text.TextHelper.GetCharacterFormat(s1);
             Assert.AreEqual(3, fmts.Count);
-            Assert.AreEqual(VA.Text.CharStyle.Bold, fmts[0].Style.Result);
-            Assert.AreEqual(VA.Text.CharStyle.Italic, fmts[1].Style.Result);
-            Assert.AreEqual(VA.Text.CharStyle.None, fmts[2].Style.Result);
+            Assert.AreEqual((int)VA.Text.CharStyle.Bold, fmts[0].Style.Result);
+            Assert.AreEqual((int)VA.Text.CharStyle.Italic, fmts[1].Style.Result);
+            Assert.AreEqual((int)VA.Text.CharStyle.None, fmts[2].Style.Result);
 
             page1.Delete(0);
         }
