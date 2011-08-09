@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Drawing;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
@@ -9,39 +8,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Infographics
 {
-    public class GridBuilder
-    {
-        public int RowCount { get; private set; }
-        public int ColumnCount { get; private set; }
-
-        public GridBuilder(int rows, int cols)
-        {
-            if (cols<1)
-            {
-                throw new System.ArgumentOutOfRangeException("cols");
-            }
-
-            if (rows<1)
-            {
-                throw new System.ArgumentOutOfRangeException("rows");
-            }
-            
-            this.RowCount = rows;
-            this.ColumnCount = cols;
-        }
-
-        public int Count
-        {
-            get { return this.RowCount*this.ColumnCount; }
-        }
-
-    }
-
-    public class RenderContext
-    {
-        public IVisio.Page Page;
-    }
-
     public class SingleValuePieChartGrid : Block
     {
         public IList<DataPoint> DataPoints;
@@ -52,7 +18,7 @@ namespace VisioAutomation.Infographics
         public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
         public VA.Drawing.ColorRGB BKColor = new ColorRGB(0xf0f0f0);
 
-        public override Size Render(RenderContext rc, Point upperleft)
+        public override Size Render(RenderContext rc)
         {
             var page = rc.Page;
             var datapoints = this.DataPoints;
@@ -75,12 +41,8 @@ namespace VisioAutomation.Infographics
 
             var margin = new VA.Drawing.Size(0.25, 0.25);
 
-            int allocrows = System.Math.Max(1, (int)(datapoints.Count *1.0 / gb.ColumnCount + 0.5));
-            int alloccols = System.Math.Max(1, gb.ColumnCount);
-
-            var cellsize = new VA.Drawing.Size(2.0, 1.5);
-
-            var bkrect = new VA.Drawing.Rectangle(0, -(allocrows * cellsize.Height + margin.Height + margin.Height), alloccols * cellsize.Width + margin.Width + margin.Width, 0).Add(upperleft);
+            var grid_size = gb.Size;
+            var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, grid_size.Add(margin).Add(margin));
 
             var bkshape = page.DrawRectangle(bkrect);
 
@@ -131,10 +93,7 @@ namespace VisioAutomation.Infographics
                         var dp = datapoints[dp_index];
 
                         // Handle background cell
-                        var ul = origin.Add(col * cellsize.Width, -row * cellsize.Height);
-                        var ll = ul.Add(0, -cellsize.Height);
-                        var ur = ll.Add(cellsize.Width, cellsize.Height);
-                        var cellrect = new VA.Drawing.Rectangle(ll, ur);
+                        var cellrect = gb.GetCellRect(origin, row,col);
                         var cellshape = page.DrawRectangle(cellrect);
                         cellshape.Text = dp.Label;
                         rect_shapes.Add(cellshape);

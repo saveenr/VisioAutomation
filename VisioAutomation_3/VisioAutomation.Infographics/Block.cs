@@ -8,7 +8,7 @@ namespace VisioAutomation.Infographics
 {
     public abstract class Block
     {
-        public abstract VA.Drawing.Size Render(RenderContext rc, VA.Drawing.Point pos);
+        public abstract VA.Drawing.Size Render(RenderContext rc);
     }
 
 
@@ -21,11 +21,11 @@ namespace VisioAutomation.Infographics
             this.Text = text;
         }
 
-        public override Size Render(RenderContext rc, Point pos)
+        public override Size Render(RenderContext rc)
         {
             var pagesize = rc.Page.GetSize();
             var size = new VA.Drawing.Size(pagesize.Width,1.0);
-            var rect = DocUtil.buildrect(pos, size);
+            var rect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, size);
 
             var s = rc.Page.DrawRectangle(rect);
             if (this.Text != null)
@@ -39,7 +39,7 @@ namespace VisioAutomation.Infographics
 
     public static class DocUtil
     {
-        public static VA.Drawing.Rectangle buildrect(VA.Drawing.Point upperleft, VA.Drawing.Size s)
+        public static VA.Drawing.Rectangle BuildFromUpperLeft(VA.Drawing.Point upperleft, VA.Drawing.Size s)
         {
             var rect = new VA.Drawing.Rectangle(upperleft.X, upperleft.Y - s.Height, upperleft.X + s.Width, upperleft.Y);
             return rect;

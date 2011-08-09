@@ -42,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Block.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="RenderContent.cs" />
+    <Compile Include="SingleValuePieChartGrid.cs" />
+    <Compile Include="GridBuilder.cs" />
     <Compile Include="DataPoint.cs" />
     <Compile Include="InfographicDocument.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

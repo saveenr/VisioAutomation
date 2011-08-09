@@ -19,14 +19,15 @@ namespace VisioAutomation.Infographics
             var page = pages.Add();
 
             var pagesize = page.GetSize();
-            var curpos = new VA.Drawing.Point(0, pagesize.Height);
 
             var rendercontext = new RenderContext();
+            rendercontext.CurrentUpperLeft = new VA.Drawing.Point(0, pagesize.Height);
+
             rendercontext.Page = page;
             foreach (var block in this.Blocks)
             {
-                var blocksize = block.Render(rendercontext,curpos);
-                curpos = curpos.Add(0.0, -blocksize.Height);
+                var blocksize = block.Render(rendercontext);
+                rendercontext.CurrentUpperLeft = rendercontext.CurrentUpperLeft.Add(0.0, -blocksize.Height);
             }
 
             //page.ResizeToFitContents(0.5,0.5);
