@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Block.cs" />
+    <Compile Include="DocUtil.cs" />
+    <Compile Include="Header.cs" />
     <Compile Include="RenderContent.cs" />
     <Compile Include="SingleValuePieChartGrid.cs" />
     <Compile Include="GridBuilder.cs" />
