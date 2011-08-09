@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Drawing;
+using VisioAutomation.Format;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -11,12 +12,10 @@ namespace VisioAutomation.Infographics
     public class SingleValuePieChartGrid : Block
     {
         public IList<DataPoint> DataPoints;
-        public string FontName;
         public VA.Drawing.ColorRGB CellRectColor = new ColorRGB(0xe0e0e0);
         public VA.Drawing.ColorRGB LineColor = new ColorRGB(0xc0c0c0);
         public VA.Drawing.ColorRGB ValueColor = new ColorRGB(0xa0a0a0);
         public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
-        public VA.Drawing.ColorRGB BKColor = new ColorRGB(0xf0f0f0);
 
         public override Size Render(RenderContext rc)
         {
@@ -33,24 +32,17 @@ namespace VisioAutomation.Infographics
             var doc = page.Document;
             var fonts = doc.Fonts;
 
-            var myfont = VA.Text.TextHelper.TryGetFont(fonts, this.FontName);
-            if (myfont == null)
-            {
-                myfont = fonts["Arial"];
-            }
 
             var margin = new VA.Drawing.Size(0.25, 0.25);
 
             var grid_size = gb.Size;
-            var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, grid_size.Add(margin).Add(margin));
+            var grid_size_actual = grid_size.Add(margin).Add(margin);
+            var max_width = System.Math.Max(grid_size.Width, rc.PageWidth);
+            var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, new VA.Drawing.Size(max_width,grid_size_actual.Height));
 
             var bkshape = page.DrawRectangle(bkrect);
 
-            var bkfmt = new VA.Format.ShapeFormatCells();
-            bkfmt.FillForegnd = this.BKColor.ToFormula();
-            bkfmt.LinePattern = 0;
-            bkfmt.LineWeight = 0;//  VA.Convert.PointsToInches(1.0);
-            bkfmt.LineColor = 0; //this.LineColor.ToFormula();
+            var bkfmt = rc.GetDefaultBkfmt();
 
             var tb_fmt = new VA.Text.TextBlockFormatCells();
             tb_fmt.VerticalAlign = 0;
@@ -62,7 +54,7 @@ namespace VisioAutomation.Infographics
             cellfmt.LineWeight = 0.0;
 
             var cellcharfmt = new VA.Text.CharacterFormatCells();
-            cellcharfmt.Font = myfont.ID;
+            cellcharfmt.Font = rc.GetFontID(rc.DefaultFont);
 
             var valfmt = new VA.Format.ShapeFormatCells();
             valfmt.FillForegnd = this.ValueColor.ToFormula();

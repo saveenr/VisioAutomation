@@ -13,23 +13,30 @@ namespace VisioAutomationSamples
 
         public static void DOC()
         {
-            var ig = new IG.InfographicDocument();
+            var infodoc = new IG.Document();
 
-            var header1 = new IG.Header("Infographic Document Sampler");
-            ig.Blocks.Add(header1);
+            var header1 = new IG.Header("Example Infographic Document");
+            header1.FontSize = 20.0;
+            header1.Bold = true;
+            infodoc.Blocks.Add(header1);
 
-            var header2 = new IG.Header(typeof(IG.SingleValuePieChartGrid).Name);
-            ig.Blocks.Add(header2);
+            var header2 = new IG.Header("Single Value Pie Chart Grid");
+            infodoc.Blocks.Add(header2);
 
-            var data = new[] {0.0, 0.25, 0.3, 0.80, 1.0};
-            var datapoints = data.Select(i => new IG.DataPoint(i, i.ToString())).ToList();
-            var g1 = new IG.SingleValuePieChartGrid();
-            g1.DataPoints  = datapoints;
-            ig.Blocks.Add(g1);
+            var datapoints = new List<IG.DataPoint>();
+            datapoints.Add( new IG.DataPoint(0.0,"alpha"));
+            datapoints.Add( new IG.DataPoint(0.25, "beta"));
+            datapoints.Add( new IG.DataPoint(0.3, "gamma"));
+            datapoints.Add( new IG.DataPoint(0.8, "delta"));
+            datapoints.Add( new IG.DataPoint(1.0, "epsilon"));
+            var piechartgrid = new IG.SingleValuePieChartGrid();
+
+            piechartgrid.DataPoints  = datapoints;
+            infodoc.Blocks.Add(piechartgrid);
 
             var app = SampleEnvironment.Application;
             var doc = app.ActiveDocument;
-            ig.RenderPage(doc);
+            infodoc.RenderPage(doc);
         }
 
         public static void BarChart()
