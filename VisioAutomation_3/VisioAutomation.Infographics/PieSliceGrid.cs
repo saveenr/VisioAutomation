@@ -142,6 +142,11 @@ namespace VisioAutomation.Infographics
         public VA.Drawing.ColorRGB ValueColor = new ColorRGB(0xa0a0a0);
         public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
 
+        public BarChart()
+        {
+            this.DataPoints = new List<DataPoint>();
+        }
+
         public override Size Render(RenderContext rc)
         {
 
@@ -174,13 +179,6 @@ namespace VisioAutomation.Infographics
             tilerect.ShapeCells.LineWeight = 0;
             tilerect.ShapeCells.LinePattern = 0;
 
-
-            this.DataPoints = new List<DataPoint>();
-            this.DataPoints.Add( new DataPoint(100.0,"A"));
-            this.DataPoints.Add(new DataPoint(90.0, "B"));
-            this.DataPoints.Add(new DataPoint(150.0, "C"));
-            this.DataPoints.Add(new DataPoint(130.0, "D"));
-            this.DataPoints.Add(new DataPoint(46.0, "E"));
 
 
             for (int i = 0; i < this.DataPoints.Count; i++)

@@ -39,6 +39,13 @@ namespace VisioAutomationSamples
 
 
             var barchart1 = new IG.BarChart();
+
+            barchart1.DataPoints.Add(new IG.DataPoint(100.0, "A"));
+            barchart1.DataPoints.Add(new IG.DataPoint(90.0, "B"));
+            barchart1.DataPoints.Add(new IG.DataPoint(150.0, "C"));
+            barchart1.DataPoints.Add(new IG.DataPoint(130.0, "D"));
+            barchart1.DataPoints.Add(new IG.DataPoint(46.0, "E"));
+
             infodoc.Blocks.Add(barchart1);
 
             var app = SampleEnvironment.Application;
