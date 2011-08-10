@@ -575,6 +575,30 @@ namespace VisioAutomation.Text
             return VA.Text.TextBlockFormatCells.GetCells(shape);
         }
 
+        public static VA.Text.CharStyle GetCharStyle(bool bold, bool italic, bool underline, bool smallcaps)
+        {
+            VA.Text.CharStyle cs = 0;
+            if (bold)
+            {
+                cs |= VA.Text.CharStyle.Bold;
+            }
 
+            if (italic)
+            {
+                cs |= VA.Text.CharStyle.Italic;
+            }
+
+            if (underline)
+            {
+                cs |= VA.Text.CharStyle.UnderLine;
+            }
+
+            if (smallcaps)
+            {
+                cs |= VA.Text.CharStyle.SmallCaps;
+            }
+
+            return cs;
+        }
     }
 }

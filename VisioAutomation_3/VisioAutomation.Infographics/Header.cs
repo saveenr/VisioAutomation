@@ -30,14 +30,7 @@ namespace VisioAutomation.Infographics
             tile.ShapeCells.CharSize = VA.Convert.PointsToInches(this.FontSize);
             tile.ShapeCells.CharFont = rc.GetFontID(rc.DefaultFont);
 
-            VA.Text.CharStyle cs = 0;
-
-            if (this.Bold)
-            {
-                cs |= VA.Text.CharStyle.Bold;
-            }
-
-            tile.ShapeCells.CharStyle = (int) cs;
+            tile.ShapeCells.CharStyle = (int)VA.Text.TextHelper.GetCharStyle(this.Bold, false, false, false); ;
             tile.ShapeCells.HAlign = 0;
             tile.ShapeCells.FillForegnd = rc.BKColor.ToFormula();
             tile.ShapeCells.LinePattern = 0;
