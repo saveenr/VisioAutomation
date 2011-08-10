@@ -46,36 +46,6 @@ namespace VisioAutomationSamples
             infodoc.RenderPage(doc);
         }
 
-        public static void BarChart()
-        {
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
-            // get the data and the labels to use
-            var data = new[] {1, 1.5, 2.0, 1.7, 1.1};
-            var labels = new[] {"a", "b", "c", "d", "e"};
-
-            // draw a rectangle for each value
-            // all the rectangles will be drawn on top of each other
-            var width = 1.0;
-
-            double curx = 0;
-            var rects = new List<VA.Drawing.Rectangle>(data.Count());
-            for (int i = 0; i < data.Count(); i++)
-            {
-                var rect = new VA.Drawing.Rectangle(curx,0,curx+width,data[i]);
-                rects.Add(rect);
-                curx += width + 0.5;
-            }
-            var shapes = rects.Select(d => page.DrawRectangle(d)).ToList();
-
-            foreach (int i in Enumerable.Range(0, labels.Count()))
-            {
-                shapes[i].Text = labels[i];
-            }
-
-            page.ResizeToFitContents(1,1);
-        }
-
         public static void PieChart()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
