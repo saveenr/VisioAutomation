@@ -22,17 +22,13 @@ namespace VisioAutomation.Infographics
             var size = new VA.Drawing.Size(rc.PageWidth, height);
             var rect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, size);
 
-            var s = rc.Page.DrawRectangle(rect);
-            if (this.Text != null)
-            {
-                s.Text = this.Text;                
-            }
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var xdoc = new VA.DOM.Document();
+            var tile = xdoc.DrawRectangle(rect);
+            tile.Text = this.Text;
 
-            var charfmt = new VA.Text.CharacterFormatCells();
-            charfmt.Size = VA.Convert.PointsToInches(this.FontSize);
-            charfmt.Font = rc.GetFontID(rc.DefaultFont);
+            tile.ShapeCells.CharSize = VA.Convert.PointsToInches(this.FontSize);
+            tile.ShapeCells.CharFont = rc.GetFontID(rc.DefaultFont);
 
             VA.Text.CharStyle cs = 0;
 
@@ -41,19 +37,15 @@ namespace VisioAutomation.Infographics
                 cs |= VA.Text.CharStyle.Bold;
             }
 
-            charfmt.Style = (int) cs;
+            tile.ShapeCells.CharStyle = (int) cs;
+            tile.ShapeCells.HAlign = 0;
+            tile.ShapeCells.FillForegnd = rc.BKColor.ToFormula();
+            tile.ShapeCells.LinePattern = 0;
+            tile.ShapeCells.LineWeight = 0;
+            tile.ShapeCells.LineColor = 0;
 
-            var parafmt = new VA.Text.ParagraphFormatCells();
-            parafmt.HorizontalAlign = 0;
+            xdoc.Render(rc.Page);
 
-            var bkfmt = rc.GetDefaultBkfmt();
-
-            var s_id = s.ID16;
-            charfmt.Apply(update,s_id,0);
-            bkfmt.Apply(update,s_id);
-            parafmt.Apply(update,s_id,0);
-
-            update.Execute(rc.Page);
             return rect.Size;
         }
     }
