@@ -45,7 +45,7 @@
     <Compile Include="DocUtil.cs" />
     <Compile Include="Header.cs" />
     <Compile Include="RenderContent.cs" />
-    <Compile Include="SingleValuePieChartGrid.cs" />
+    <Compile Include="PieSliceGrid.cs" />
     <Compile Include="GridBuilder.cs" />
     <Compile Include="DataPoint.cs" />
     <Compile Include="Document.cs" />

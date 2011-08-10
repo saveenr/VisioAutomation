@@ -9,7 +9,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Infographics
 {
-    public class SingleValuePieChartGrid : Block
+    public class PieSliceGrid : Block
     {
         public IList<DataPoint> DataPoints;
         public VA.Drawing.ColorRGB ValueColor = new ColorRGB(0xa0a0a0);

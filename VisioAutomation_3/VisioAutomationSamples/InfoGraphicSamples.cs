@@ -29,7 +29,7 @@ namespace VisioAutomationSamples
             datapoints.Add( new IG.DataPoint(0.3, "gamma"));
             datapoints.Add( new IG.DataPoint(0.8, "delta"));
             datapoints.Add( new IG.DataPoint(1.0, "epsilon"));
-            var piechartgrid = new IG.SingleValuePieChartGrid();
+            var piechartgrid = new IG.PieSliceGrid();
 
             piechartgrid.DataPoints  = datapoints;
             infodoc.Blocks.Add(piechartgrid);
