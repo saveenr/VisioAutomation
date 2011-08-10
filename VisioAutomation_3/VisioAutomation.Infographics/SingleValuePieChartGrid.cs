@@ -12,8 +12,6 @@ namespace VisioAutomation.Infographics
     public class SingleValuePieChartGrid : Block
     {
         public IList<DataPoint> DataPoints;
-        public VA.Drawing.ColorRGB CellRectColor = new ColorRGB(0xe0e0e0);
-        public VA.Drawing.ColorRGB LineColor = new ColorRGB(0xc0c0c0);
         public VA.Drawing.ColorRGB ValueColor = new ColorRGB(0xa0a0a0);
         public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
 
@@ -49,7 +47,7 @@ namespace VisioAutomation.Infographics
             var origin = bkrect.UpperLeft.Add(margin.Width, -margin.Height);
 
             var cellfmt = new VA.Format.ShapeFormatCells();
-            cellfmt.FillForegnd = this.CellRectColor.ToFormula();
+            cellfmt.FillForegnd = rc.TileColor.ToFormula();
             cellfmt.LinePattern = 0;
             cellfmt.LineWeight = 0.0;
 
@@ -60,13 +58,13 @@ namespace VisioAutomation.Infographics
             valfmt.FillForegnd = this.ValueColor.ToFormula();
             valfmt.LinePattern = 1;
             valfmt.LineWeight = VA.Convert.PointsToInches(1.0);
-            valfmt.LineColor = this.LineColor.ToFormula();
+            valfmt.LineColor = rc.LineColor.ToFormula();
 
             var nonvalfmt = new VA.Format.ShapeFormatCells();
             nonvalfmt.FillForegnd = this.NonValueColor.ToFormula();
             nonvalfmt.LinePattern = 1;
             nonvalfmt.LineWeight = VA.Convert.PointsToInches(1.0);
-            nonvalfmt.LineColor = this.LineColor.ToFormula();
+            nonvalfmt.LineColor = rc.LineColor.ToFormula();
 
             var rect_shapes = new List<IVisio.Shape>(datapoints.Count());
 
@@ -136,4 +134,32 @@ namespace VisioAutomation.Infographics
 
         }
     }
+
+
+    public class BarChart : Block
+    {
+        public IList<DataPoint> DataPoints;
+        public VA.Drawing.ColorRGB ValueColor = new ColorRGB(0xa0a0a0);
+        public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
+
+        public override Size Render(RenderContext rc)
+        {
+            var page = rc.Page;
+            var datapoints = this.DataPoints;
+
+
+
+            var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, new VA.Drawing.Size(rc.PageWidth,2.0));
+
+            var xdoc = new VA.DOM.Document();
+
+            var tilerect = xdoc.DrawRectangle(bkrect);
+
+            xdoc.Render(rc.Page);
+
+            return bkrect.Size;
+
+        }
+    }
+
 }

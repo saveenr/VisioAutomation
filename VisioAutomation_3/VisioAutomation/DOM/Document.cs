@@ -368,6 +368,13 @@ namespace VisioAutomation.DOM
             return rectangle;
         }
 
+        public Rectangle DrawRectangle(VA.Drawing.Rectangle r)
+        {
+            var rectangle = new Rectangle(r);
+            this.Shapes.Add(rectangle);
+            return rectangle;
+        }
+
         public BezierCurve DrawBezier(IEnumerable<VA.Drawing.Point> points)
         {
             var bezier = new BezierCurve(points);

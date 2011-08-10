@@ -34,6 +34,13 @@ namespace VisioAutomationSamples
             piechartgrid.DataPoints  = datapoints;
             infodoc.Blocks.Add(piechartgrid);
 
+            var header3 = new IG.Header("Bar Chart");
+            infodoc.Blocks.Add(header3);
+
+
+            var barchart1 = new IG.BarChart();
+            infodoc.Blocks.Add(barchart1);
+
             var app = SampleEnvironment.Application;
             var doc = app.ActiveDocument;
             infodoc.RenderPage(doc);
