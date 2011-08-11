@@ -10,7 +10,6 @@ namespace VisioAutomation.Infographics
 {
     public class RenderContext
     {
-        private IVisio.Fonts Fonts;
         public IVisio.Page Page;
         public VA.Drawing.Point CurrentUpperLeft;
         public double PageWidth;
