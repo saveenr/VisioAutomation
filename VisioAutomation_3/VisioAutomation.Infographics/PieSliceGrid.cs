@@ -163,7 +163,7 @@ namespace VisioAutomation.Infographics
             var xdoc = new VA.DOM.Document();
 
             var tilerect = xdoc.DrawRectangle(bkrect);
-            tilerect.ShapeCells.FillForegnd = rc.TileColorReal.ToFormula();
+            tilerect.ShapeCells.FillForegnd = rc.TileReal.ToFormula();
             tilerect.ShapeCells.LineWeight = 0;
             tilerect.ShapeCells.LinePattern = 0;
             
