@@ -11,6 +11,8 @@ namespace VisioAutomation.Infographics
         public bool AutoResizePage { get; set; }
         public VA.Drawing.Size AutoResizeMargin { get; set; }
 
+        private bool DeselectAfterDrawing=true;
+
         public Document()
         {
             this.Blocks = new List<Block>();
@@ -38,6 +40,13 @@ namespace VisioAutomation.Infographics
             if (this.AutoResizePage)
             {
                 page.ResizeToFitContents(this.AutoResizeMargin);
+            }
+
+            if (this.DeselectAfterDrawing)
+            {
+                var app = page.Application;
+                var window = app.ActiveWindow;
+                window.DeselectAll();
             }
 
             return page;

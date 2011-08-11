@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -14,11 +13,11 @@ namespace VisioAutomation.Infographics
         public VA.Drawing.Point CurrentUpperLeft;
         public double PageWidth;
         public string DefaultFont = "Segoe UI";
-        public VA.Drawing.ColorRGB LineColor = new ColorRGB(0xc0c0c0);
+        public VA.Drawing.ColorRGB LineColor = new VA.Drawing.ColorRGB(0xc0c0c0);
 
         private IDictionary<string, short> map_name_to_fontid;
- 
-        public VA.Drawing.ColorRGB TileReal = new ColorRGB(0xf0f0f0);
+
+        public VA.Drawing.ColorRGB TileReal = new VA.Drawing.ColorRGB(0xf0f0f0);
 
         public RenderContext()
         {
