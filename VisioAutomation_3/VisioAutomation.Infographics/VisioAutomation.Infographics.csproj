@@ -44,7 +44,7 @@
     <Compile Include="Block.cs" />
     <Compile Include="DocUtil.cs" />
     <Compile Include="Header.cs" />
-    <Compile Include="RenderContent.cs" />
+    <Compile Include="RenderContext.cs" />
     <Compile Include="PieSliceGrid.cs" />
     <Compile Include="GridBuilder.cs" />
     <Compile Include="DataPoint.cs" />

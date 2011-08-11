@@ -20,7 +20,7 @@ namespace VisioAutomation.Infographics
 
         private IDictionary<string, short> map_name_to_fontid;
  
-        public VA.Drawing.ColorRGB BKColor = new ColorRGB(0xf0f0f0);
+        public VA.Drawing.ColorRGB TileColorReal = new ColorRGB(0xf0f0f0);
 
         public RenderContext()
         {
@@ -30,7 +30,7 @@ namespace VisioAutomation.Infographics
         public VA.Format.ShapeFormatCells GetDefaultBkfmt()
         {
             var bkfmt = new VA.Format.ShapeFormatCells();
-            bkfmt.FillForegnd = this.BKColor.ToFormula();
+            bkfmt.FillForegnd = this.TileColorReal.ToFormula();
             bkfmt.LinePattern = 0;
             bkfmt.LineWeight = 0; //  VA.Convert.PointsToInches(1.0);
             bkfmt.LineColor = 0; //this.LineColor.ToFormula();

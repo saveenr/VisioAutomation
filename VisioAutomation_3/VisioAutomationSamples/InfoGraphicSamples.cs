@@ -20,7 +20,7 @@ namespace VisioAutomationSamples
             header1.Bold = true;
             infodoc.Blocks.Add(header1);
 
-            var header2 = new IG.Header("Single Value Pie Chart Grid");
+            var header2 = new IG.Header("Pie Chart Grid");
             infodoc.Blocks.Add(header2);
 
             var datapoints = new List<IG.DataPoint>();

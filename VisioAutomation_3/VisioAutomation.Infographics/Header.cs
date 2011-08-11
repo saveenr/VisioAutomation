@@ -32,7 +32,7 @@ namespace VisioAutomation.Infographics
 
             tile.ShapeCells.CharStyle = (int)VA.Text.TextHelper.GetCharStyle(this.Bold, false, false, false); ;
             tile.ShapeCells.HAlign = 0;
-            tile.ShapeCells.FillForegnd = rc.BKColor.ToFormula();
+            tile.ShapeCells.FillForegnd = rc.TileColorReal.ToFormula();
             tile.ShapeCells.LinePattern = 0;
             tile.ShapeCells.LineWeight = 0;
             tile.ShapeCells.LineColor = 0;

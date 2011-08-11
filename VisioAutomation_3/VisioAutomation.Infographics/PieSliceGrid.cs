@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
-using VisioAutomation.Format;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -12,28 +10,24 @@ namespace VisioAutomation.Infographics
     public class PieSliceGrid : Block
     {
         public IList<DataPoint> DataPoints;
-        public VA.Drawing.ColorRGB ValueColor = new ColorRGB(0xa0a0a0);
-        public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
+        public VA.Drawing.ColorRGB ValueColor = new VA.Drawing.ColorRGB(0xa0a0a0);
+        public VA.Drawing.ColorRGB NonValueColor = new VA.Drawing.ColorRGB(0xffffff);
 
-        public override Size Render(RenderContext rc)
+        public override VA.Drawing.Size Render(RenderContext rc)
         {
             var page = rc.Page;
             var datapoints = this.DataPoints;
 
-            var gb = new GridBuilder(2, 3);
+            var grid = new GridBuilder(2, 3);
 
-            if (datapoints.Count>gb.Count)
+            if (datapoints.Count>grid.Count)
             {
                 throw new System.ArgumentOutOfRangeException("Too many datapoints to fit into grid");
             }
 
-            var doc = page.Document;
-            var fonts = doc.Fonts;
-
-
             var margin = new VA.Drawing.Size(0.25, 0.25);
 
-            var grid_size = gb.Size;
+            var grid_size = grid.Size;
             var grid_size_actual = grid_size.Add(margin).Add(margin);
             var max_width = System.Math.Max(grid_size.Width, rc.PageWidth);
             var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, new VA.Drawing.Size(max_width,grid_size_actual.Height));
@@ -47,7 +41,7 @@ namespace VisioAutomation.Infographics
             var origin = bkrect.UpperLeft.Add(margin.Width, -margin.Height);
 
             var cellfmt = new VA.Format.ShapeFormatCells();
-            cellfmt.FillForegnd = rc.TileColor.ToFormula();
+            cellfmt.FillPattern = 0;
             cellfmt.LinePattern = 0;
             cellfmt.LineWeight = 0.0;
 
@@ -66,27 +60,27 @@ namespace VisioAutomation.Infographics
             nonvalfmt.LineWeight = VA.Convert.PointsToInches(1.0);
             nonvalfmt.LineColor = rc.LineColor.ToFormula();
 
-            var rect_shapes = new List<IVisio.Shape>(datapoints.Count());
+            var cell_shapes = new List<IVisio.Shape>(datapoints.Count());
 
 
             var value_shapes = new List<IVisio.Shape>(datapoints.Count());
             var nonvalue_shapes = new List<IVisio.Shape>(datapoints.Count());
 
-            foreach (int row in Enumerable.Range(0, gb.RowCount))
+            foreach (int row in Enumerable.Range(0, grid.RowCount))
             {
-                foreach (int col in Enumerable.Range(0, gb.ColumnCount))
+                foreach (int col in Enumerable.Range(0, grid.ColumnCount))
                 {
-                    int dp_index = (row * gb.ColumnCount) + col;
+                    int dp_index = (row * grid.ColumnCount) + col;
                     if (dp_index < datapoints.Count())
                     {
                         // Get datapoint
                         var dp = datapoints[dp_index];
 
                         // Handle background cell
-                        var cellrect = gb.GetCellRect(origin, row,col);
+                        var cellrect = grid.GetCellRect(origin, row,col);
                         var cellshape = page.DrawRectangle(cellrect);
                         cellshape.Text = dp.Label;
-                        rect_shapes.Add(cellshape);
+                        cell_shapes.Add(cellshape);
 
                         // draw background
                         var piecenter = cellrect.Center;
@@ -106,9 +100,9 @@ namespace VisioAutomation.Infographics
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
             // format cells rects
-            foreach (var shape in rect_shapes)
+            foreach (var cell_shape in cell_shapes)
             {
-                short shapeid = shape.ID16;
+                short shapeid = cell_shape.ID16;
                 tb_fmt.Apply(update, shapeid);
                 cellfmt.Apply(update, shapeid);
                 cellcharfmt.Apply(update, shapeid, 0);
@@ -139,24 +133,19 @@ namespace VisioAutomation.Infographics
     public class BarChart : Block
     {
         public IList<DataPoint> DataPoints;
-        public VA.Drawing.ColorRGB ValueColor = new ColorRGB(0xa0a0a0);
-        public VA.Drawing.ColorRGB NonValueColor = new ColorRGB(0xffffff);
-
+        public VA.Drawing.ColorRGB ValueColor = new VA.Drawing.ColorRGB(0xa0a0a0);
+        public VA.Drawing.ColorRGB NonValueColor = new VA.Drawing.ColorRGB(0xffffff);
+        double TileHeight = 3.0;
         public BarChart()
         {
             this.DataPoints = new List<DataPoint>();
         }
 
-        public override Size Render(RenderContext rc)
+        public override VA.Drawing.Size Render(RenderContext rc)
         {
+            var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, new VA.Drawing.Size(rc.PageWidth,TileHeight));
 
-            double tile_height = 3.0;
-            var page = rc.Page;
-            
-
-            var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, new VA.Drawing.Size(rc.PageWidth,tile_height));
-
-                        double bar_width = 0.5;
+            double bar_width = 0.5;
             double bar_distance = 0.0125;
             double lower_y = bkrect.LowerLeft.Y;
             double maxval = 180.0;
@@ -170,16 +159,14 @@ namespace VisioAutomation.Infographics
             var bararea_ll = innerrect.LowerLeft.Add(0, label_height);
             var bararea_ur = innerrect.UpperRight;
             var bararea_rect = new VA.Drawing.Rectangle(bararea_ll, bararea_ur);
-
-
+            
             var xdoc = new VA.DOM.Document();
 
             var tilerect = xdoc.DrawRectangle(bkrect);
-            tilerect.ShapeCells.FillForegnd = rc.TileColor.ToFormula();
+            tilerect.ShapeCells.FillForegnd = rc.TileColorReal.ToFormula();
             tilerect.ShapeCells.LineWeight = 0;
             tilerect.ShapeCells.LinePattern = 0;
-
-
+            
 
             for (int i = 0; i < this.DataPoints.Count; i++)
             {
@@ -196,7 +183,7 @@ namespace VisioAutomation.Infographics
                 bar_shape.Text = dp.Value.ToString();
                 bar_shape.ShapeCells.LinePattern = 0;
                 bar_shape.ShapeCells.LineWeight = 0.0;
-                bar_shape.ShapeCells.FillForegnd = "rgb(180,180,180)";
+                bar_shape.ShapeCells.FillForegnd = ValueColor.ToFormula();
                 bar_shape.ShapeCells.VerticalAlign = 0;
                 bar_shape.ShapeCells.CharFont = rc.GetFontID(rc.DefaultFont);
 
