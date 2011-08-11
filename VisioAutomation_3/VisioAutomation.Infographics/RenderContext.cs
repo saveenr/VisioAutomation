@@ -15,7 +15,6 @@ namespace VisioAutomation.Infographics
         public VA.Drawing.Point CurrentUpperLeft;
         public double PageWidth;
         public string DefaultFont = "Segoe UI";
-        public VA.Drawing.ColorRGB TileColor = new ColorRGB(0xe0e0e0);
         public VA.Drawing.ColorRGB LineColor = new ColorRGB(0xc0c0c0);
 
         private IDictionary<string, short> map_name_to_fontid;
