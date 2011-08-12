@@ -83,6 +83,7 @@
     <Compile Include="Extensions\CellDataMethods.cs" />
     <Compile Include="Interop\EnumType.cs" />
     <Compile Include="Interop\EnumValue.cs" />
+    <Compile Include="Layout\PieSlice.cs" />
     <Compile Include="MasterHelper.cs" />
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />

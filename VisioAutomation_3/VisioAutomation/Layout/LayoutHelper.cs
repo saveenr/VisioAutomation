@@ -78,7 +78,8 @@ namespace VisioAutomation.Layout
                 double cur_val_norm = cur_val/sum;
                 double cur_angle_size_deg = cur_val_norm*360;
                 double end_angle = start_angle + cur_angle_size_deg;
-                var shape = DrawPieSlice(page, center, radius, start_angle, end_angle);
+                var pieslice = new VA.Layout.PieSlice(center, radius, start_angle, end_angle);
+                var shape = DrawPieSlice(page, pieslice);
                 start_angle += cur_angle_size_deg;
 
                 shapes.Add(shape);
@@ -87,6 +88,7 @@ namespace VisioAutomation.Layout
             return shapes;
         }
 
+        [System.Obsolete]
         public static IVisio.Shape DrawPieSlice(
             IVisio.Page page,
             VA.Drawing.Point center,
@@ -94,16 +96,25 @@ namespace VisioAutomation.Layout
             double start_angle,
             double end_angle)
         {
-            double total_angle = end_angle - start_angle;
+            var pieslice = new VA.Layout.PieSlice(center, radius, start_angle, end_angle);
+            return DrawPieSlice(page,pieslice);
+        }
+
+        public static IVisio.Shape DrawPieSlice(
+            IVisio.Page page,
+            PieSlice pieslice)
+        {
+            double total_angle = pieslice.EndAngle - pieslice.StartAngle;
 
             if (total_angle == 0.0)
             {
-                return page.DrawLine(center, GetPointAtRadius(center, start_angle, radius));
+                var p1 = GetPointAtRadius(pieslice.Center, pieslice.StartAngle, pieslice.Radius);
+                return page.DrawLine(pieslice.Center, p1);
             }
             else if (total_angle >= 360)
             {
-                var A = center.Add(-radius, -radius);
-                var B = center.Add(radius, radius);
+                var A = pieslice.Center.Add(-pieslice.Radius, -pieslice.Radius);
+                var B = pieslice.Center.Add(pieslice.Radius, pieslice.Radius);
                 var rect = new VA.Drawing.Rectangle(A, B);
                 var shape = page.DrawOval(rect);
                 return shape;
@@ -112,26 +123,27 @@ namespace VisioAutomation.Layout
             {
                 int degree;
                 var sub_arcs = VA.Drawing.BezierSegment.FromArc(
-                    Convert.DegreesToRadians(start_angle),
-                    Convert.DegreesToRadians(end_angle));
+                    Convert.DegreesToRadians(pieslice.StartAngle),
+                    Convert.DegreesToRadians(pieslice.EndAngle));
 
                 var arc_bez_points = (from p in VA.Drawing.BezierSegment.Merge(sub_arcs, out degree)
-                                      select p.Multiply(radius) + center).ToList();
+                                      select p.Multiply(pieslice.Radius) + pieslice.Center).ToList();
 
                 var pie_points = new List<VA.Drawing.Point>();
-                pie_points.Add(center);
-                pie_points.Add(center);
+                pie_points.Add(pieslice.Center);
+                pie_points.Add(pieslice.Center);
                 pie_points.Add(arc_bez_points[0]);
                 pie_points.AddRange(arc_bez_points);
                 pie_points.Add(arc_bez_points[arc_bez_points.Count - 1]);
-                pie_points.Add(center);
-                pie_points.Add(center);
+                pie_points.Add(pieslice.Center);
+                pie_points.Add(pieslice.Center);
 
                 var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(pie_points).ToArray();
-                var pie_slice = page.DrawBezier(doubles_array, (short) degree, 0);
+                var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }
         }
+
 
         private static VA.Drawing.Point GetPointAtRadius(VA.Drawing.Point origin, double angle, double radius)
         {
