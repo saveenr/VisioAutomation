@@ -21,16 +21,14 @@ namespace TestVisioAutomation
             double radius = 1.0;
             double cx = 0.0;
             double cy = 2.0;
-            foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * (360.0 / (n-1))))
+            double angle_step = (360.0 / (n-1));
+
+            foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
             {
                 var center = new VA.Drawing.Point(cx, cy);
-
                 var pieslice = new VA.Layout.PieSlice(center, radius, start_angle, end_angle);
-
                 VA.Layout.LayoutHelper.DrawPieSlice(page,pieslice);
-
                 cx += 2.5;
-
             }
 
             page.ResizeToFitContents(1,1);

@@ -108,7 +108,7 @@ namespace VisioAutomation.Layout
 
             if (total_angle == 0.0)
             {
-                var p1 = GetPointAtRadius(pieslice.Center, pieslice.StartAngle, pieslice.Radius);
+                var p1 = GetPointAtRadius_Deg(pieslice.Center, pieslice.StartAngle, pieslice.Radius);
                 return page.DrawLine(pieslice.Center, p1);
             }
             else if (total_angle >= 360)
@@ -145,10 +145,12 @@ namespace VisioAutomation.Layout
         }
 
 
-        private static VA.Drawing.Point GetPointAtRadius(VA.Drawing.Point origin, double angle, double radius)
+        private static VA.Drawing.Point GetPointAtRadius_Deg(VA.Drawing.Point origin, double angle, double radius)
         {
-            var new_point = new VA.Drawing.Point(radius*System.Math.Cos(angle),
-                                      radius*System.Math.Sin(angle));
+            double theta = VA.Convert.DegreesToRadians(angle);
+            double x = radius * System.Math.Cos(theta);
+            double y = radius * System.Math.Sin(theta);
+            var new_point = new VA.Drawing.Point( x, y);
             new_point = origin + new_point;
             return new_point;
         }
