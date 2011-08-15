@@ -116,6 +116,10 @@
     <Compile Include="Zoom.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.Infographics\VisioAutomation.Infographics.csproj">
+      <Project>{A4E14F52-9455-4D2A-A71D-332E736512DF}</Project>
+      <Name>VisioAutomation.Infographics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
       <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
       <Name>VisioAutomation.Layout.MSAGL</Name>
