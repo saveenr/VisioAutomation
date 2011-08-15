@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Block.cs" />
     <Compile Include="BarChart.cs" />
+    <Compile Include="SquareChart.cs" />
     <Compile Include="DocUtil.cs" />
     <Compile Include="Header.cs" />
     <Compile Include="RenderContext.cs" />

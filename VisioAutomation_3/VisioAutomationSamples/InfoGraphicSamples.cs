@@ -11,14 +11,18 @@ namespace VisioAutomationSamples
     public static class InfoGraphicSamples
     {
 
-        public static void DOC()
+        public static void IngoGraphicDoc1()
         {
             var infodoc = new IG.Document();
+
+            // TITLE
 
             var header1 = new IG.Header("Example Infographic Document");
             header1.FontSize = 20.0;
             header1.Bold = true;
             infodoc.Blocks.Add(header1);
+
+            // CHART
 
             var header2 = new IG.Header("Pie Chart Grid");
             infodoc.Blocks.Add(header2);
@@ -37,6 +41,7 @@ namespace VisioAutomationSamples
             var header3 = new IG.Header("Bar Chart");
             infodoc.Blocks.Add(header3);
 
+            // CHART
 
             var barchart1 = new IG.BarChart();
 
@@ -48,6 +53,19 @@ namespace VisioAutomationSamples
 
             infodoc.Blocks.Add(barchart1);
 
+            // CHART
+
+            var squarechart1 = new IG.SquareChart();
+
+            squarechart1.DataPoints.Add(new IG.DataPoint(100.0, "A"));
+            squarechart1.DataPoints.Add(new IG.DataPoint(90.0, "B"));
+            squarechart1.DataPoints.Add(new IG.DataPoint(150.0, "C"));
+            squarechart1.DataPoints.Add(new IG.DataPoint(130.0, "D"));
+            squarechart1.DataPoints.Add(new IG.DataPoint(46.0, "E"));
+
+            infodoc.Blocks.Add(squarechart1);
+
+            // Render the document
             var app = SampleEnvironment.Application;
             var doc = app.ActiveDocument;
             infodoc.RenderPage(doc);
