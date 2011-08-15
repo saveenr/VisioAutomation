@@ -1,0 +1,28 @@
+
+References
+----------
+http://support.microsoft.com/kb/300594
+
+
+
+
+----------------------------------------
+
+
+Private Declare Function ShowWindow Lib "user32" _
+    (ByVal hwnd As Long, _
+    ByVal nCmdShow As Long) As Long
+
+Private Const SW_SHOWMINIMIZED = 2
+Private Const SW_SHOWMAXIMIZED = 3
+
+Public Sub MaxVisioApplicationWindow()
+    ShowWindow Visio.Application.WindowHandle32, SW_SHOWMAXIMIZED
+End Sub
+
+Public Sub MinVisioApplicationWindow()
+    ShowWindow Visio.Application.WindowHandle32, SW_SHOWMINIMIZED
+End Sub
+	
+
+----------------------------------------
