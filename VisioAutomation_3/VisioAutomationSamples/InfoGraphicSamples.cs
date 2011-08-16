@@ -44,6 +44,7 @@ namespace VisioAutomationSamples
             // CHART
 
             var barchart1 = new IG.BarChart();
+            barchart1.Direction = IG.BarDirection.Horizontal;
 
             barchart1.DataPoints.Add(new IG.DataPoint(100.0, "A"));
             barchart1.DataPoints.Add(new IG.DataPoint(90.0, "B"));
