@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarDirection.cs" />
+    <Compile Include="BaseBarChart.cs" />
     <Compile Include="Block.cs" />
-    <Compile Include="BarChart.cs" />
+    <Compile Include="VerticalBarChart.cs" />
     <Compile Include="SquareChart.cs" />
     <Compile Include="DocUtil.cs" />
     <Compile Include="Header.cs" />

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Drawing;
 using VA=VisioAutomation;
@@ -8,41 +7,15 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Infographics
 {
-    public enum BarDirection
+    public class VerticalBarChart : BaseBarChart
     {
-        Vertical,
-        Horizontal
-    }
-
-    public abstract class BaseBarChart : Block
-    {
-        public IList<DataPoint> DataPoints;
-        public VA.Drawing.ColorRGB ValueColor = new VA.Drawing.ColorRGB(0xa0a0a0);
-        public VA.Drawing.ColorRGB NonValueColor = new VA.Drawing.ColorRGB(0xffffff);
-        protected double TileHeight = 3.0;
-        protected VA.Drawing.Size margin = new VA.Drawing.Size(0.25, 0.25);
-        protected double _labelHeight = 0.5;
-        protected double _barDistance = 0.0125;
-        protected double bar_thickness = 0.5;       
-
-        public BaseBarChart()
-        {
-            this.DataPoints = new List<DataPoint>();           
-        }
-    }
-
-    public class BarChart : BaseBarChart
-    {
-        public BarChart()
+        public VerticalBarChart()
         {
         }
 
         public override VA.Drawing.Size Render(RenderContext rc)
         {
             var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, new VA.Drawing.Size(rc.PageWidth,TileHeight));
-
-            double maxval = 180.0;
-
             var inner_ll = bkrect.LowerLeft.Add(margin);
             var inner_ur = bkrect.UpperRight.Subtract(margin);
             var innerrect = new VA.Drawing.Rectangle(inner_ll, inner_ur);
@@ -128,18 +101,15 @@ namespace VisioAutomation.Infographics
         }
     }
 
-    public class HorBarChart : BaseBarChart
+    public class HorizontalBarChart : BaseBarChart
     {
-        public HorBarChart()
+        public HorizontalBarChart()
         {
         }
 
         public override VA.Drawing.Size Render(RenderContext rc)
         {
             var bkrect = DocUtil.BuildFromUpperLeft(rc.CurrentUpperLeft, new VA.Drawing.Size(rc.PageWidth, TileHeight));
-
-            double maxval = 180.0;
-
             var inner_ll = bkrect.LowerLeft.Add(margin);
             var inner_ur = bkrect.UpperRight.Subtract(margin);
             var innerrect = new VA.Drawing.Rectangle(inner_ll, inner_ur);
@@ -154,17 +124,24 @@ namespace VisioAutomation.Infographics
             tilerect.ShapeCells.FillForegnd = rc.TileReal.ToFormula();
             tilerect.ShapeCells.LineWeight = 0;
             tilerect.ShapeCells.LinePattern = 0;
-
-
+            
             for (int i = 0; i < this.DataPoints.Count; i++)
             {
                 var dp = this.DataPoints[i];
 
-                double startpos = 0;
-                startpos = bkrect.UpperLeft.X;
+                double max_left = bkrect.UpperLeft.X + margin.Width; // need to account for labels
+                double top = bkrect.UpperLeft.Y - margin.Height - bar_thickness;
 
-                var bar_rect = GetBarRect(i, startpos, maxval, bararea_rect, dp);
+                // calc bar rect
+                double bar_length = dp.Value / maxval * bararea_rect.Width;
 
+                double skip = (bar_thickness + _barDistance);
+                var bar_ll = new VA.Drawing.Point(max_left, top).Add(1, -i * skip);
+                var bar_ur = bar_ll.Add(bar_length, bar_thickness);
+
+                var bar_rect = new VA.Drawing.Rectangle(bar_ll, bar_ur);
+                
+                // draw bar shapt
                 var bar_shape = xdoc.DrawRectangle(bar_rect);
                 bar_shape.Text = dp.Value.ToString();
 
@@ -213,16 +190,6 @@ namespace VisioAutomation.Infographics
             bar_shape.ShapeCells.HAlign = 1;
         }
 
-        private Rectangle GetBarRect(int i, double start_pos, double maxval, Rectangle bararea_rect, DataPoint dp)
-        {
-            double bar_length = dp.Value / maxval * bararea_rect.Width;
-
-            var bar_ll = new VA.Drawing.Point(start_pos, bar_thickness + _barDistance).Multiply(1, -i).Add(margin.Width, margin.Height + _labelHeight);
-            var bar_ur = bar_ll.Add(bar_length, bar_thickness);
-
-            var bar_rect = new VA.Drawing.Rectangle(bar_ll, bar_ur);
-            return bar_rect;
-        }
     }
 
 }

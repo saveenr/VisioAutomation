@@ -43,7 +43,7 @@ namespace VisioAutomationSamples
 
             // CHART VERTICAL BARS
 
-            var barchart1 = new IG.BarChart();
+            var barchart1 = new IG.VerticalBarChart();
             barchart1.DataPoints.Add(new IG.DataPoint(100.0, "A"));
             barchart1.DataPoints.Add(new IG.DataPoint(90.0, "B"));
             barchart1.DataPoints.Add(new IG.DataPoint(150.0, "C"));
@@ -54,7 +54,7 @@ namespace VisioAutomationSamples
 
             // CHART HOR BARS
 
-            var barchart2 = new IG.HorBarChart();
+            var barchart2 = new IG.HorizontalBarChart();
             barchart2.DataPoints.Add(new IG.DataPoint(100.0, "A"));
             barchart2.DataPoints.Add(new IG.DataPoint(90.0, "B"));
             barchart2.DataPoints.Add(new IG.DataPoint(150.0, "C"));
