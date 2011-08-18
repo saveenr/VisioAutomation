@@ -56,6 +56,12 @@ namespace VisioAutomationSamples
                 bool ischecked = prev_names.Contains(name);
                 this.checkedListBox1.Items.Add(name, ischecked);
             }
+
+            bool autorun = false;
+            if (autorun)
+            {
+                this.RunSelectedSamples();
+            }
         }
 
         private HashSet<string> GetPreviouslySelectedSamples()
@@ -76,6 +82,11 @@ namespace VisioAutomationSamples
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
+        {
+            RunSelectedSamples();
+        }
+
+        private void RunSelectedSamples()
         {
             var selected_names = GetSelectedNames();
 

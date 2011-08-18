@@ -41,11 +41,9 @@ namespace VisioAutomationSamples
             var header3 = new IG.Header("Bar Chart");
             infodoc.Blocks.Add(header3);
 
-            // CHART
+            // CHART VERTICAL BARS
 
             var barchart1 = new IG.BarChart();
-            barchart1.Direction = IG.BarDirection.Horizontal;
-
             barchart1.DataPoints.Add(new IG.DataPoint(100.0, "A"));
             barchart1.DataPoints.Add(new IG.DataPoint(90.0, "B"));
             barchart1.DataPoints.Add(new IG.DataPoint(150.0, "C"));
@@ -53,6 +51,17 @@ namespace VisioAutomationSamples
             barchart1.DataPoints.Add(new IG.DataPoint(46.0, "E"));
 
             infodoc.Blocks.Add(barchart1);
+
+            // CHART HOR BARS
+
+            var barchart2 = new IG.HorBarChart();
+            barchart2.DataPoints.Add(new IG.DataPoint(100.0, "A"));
+            barchart2.DataPoints.Add(new IG.DataPoint(90.0, "B"));
+            barchart2.DataPoints.Add(new IG.DataPoint(150.0, "C"));
+            barchart2.DataPoints.Add(new IG.DataPoint(130.0, "D"));
+            barchart2.DataPoints.Add(new IG.DataPoint(46.0, "E"));
+
+            infodoc.Blocks.Add(barchart2);
 
             // CHART
 
@@ -64,7 +73,7 @@ namespace VisioAutomationSamples
             squarechart1.DataPoints.Add(new IG.DataPoint(130.0, "D"));
             squarechart1.DataPoints.Add(new IG.DataPoint(46.0, "E"));
 
-            infodoc.Blocks.Add(squarechart1);
+            //infodoc.Blocks.Add(squarechart1);
 
             // Render the document
             var app = SampleEnvironment.Application;
