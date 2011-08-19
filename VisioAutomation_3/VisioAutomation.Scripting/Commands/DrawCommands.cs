@@ -215,7 +215,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var shapes = VA.Layout.LayoutHelper.DrawPieSlices(page, center, radius, values);
+            var shapes = VA.Layout.DrawingtHelper.DrawPieSlices(page, center, radius, values);
             return shapes;
         }
 

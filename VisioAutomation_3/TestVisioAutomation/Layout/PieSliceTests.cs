@@ -27,7 +27,7 @@ namespace TestVisioAutomation
             {
                 var center = new VA.Drawing.Point(cx, cy);
                 var pieslice = new VA.Layout.PieSlice(center, radius, start_angle, end_angle);
-                VA.Layout.LayoutHelper.DrawPieSlice(page,pieslice);
+                VA.Layout.DrawingtHelper.DrawPieSlice(page, pieslice);
                 cx += 2.5;
             }
 

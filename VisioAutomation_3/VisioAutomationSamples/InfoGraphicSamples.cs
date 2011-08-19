@@ -81,7 +81,7 @@ namespace VisioAutomationSamples
             var colors = new string[] { "rgb(239,233,195)", "rgb(200,233,167)", "rgb(172,208,180)", "rgb(113,121,118)", "rgb(93,70,51)"};
             var radius = 3.0;
             var center = new VA.Drawing.Point(4, 4);
-            var shapes = VA.Layout.LayoutHelper.DrawPieSlices(page, center, radius, data);
+            var shapes = VA.Layout.DrawingtHelper.DrawPieSlices(page, center, radius, data);
 
             var fmt = new VA.Format.ShapeFormatCells();
 

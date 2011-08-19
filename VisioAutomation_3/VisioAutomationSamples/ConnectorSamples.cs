@@ -16,7 +16,7 @@ namespace VisioAutomationSamples
 
             var radius = 3.0;
             var center = new VA.Drawing.Point(4, 4);
-            VA.Layout.LayoutHelper.DrawPieSlices(page, center, radius, data);
+            VA.Layout.DrawingtHelper.DrawPieSlices(page, center, radius, data);
 
             // based on this example: http://www.visguy.com/2009/06/17/send-all-connectors-to-back/
 
