@@ -38,7 +38,7 @@ namespace VisioAutomation.Infographics
 
             var tb_fmt = new VA.Text.TextBlockFormatCells();
             tb_fmt.VerticalAlign = 0;
-            var origin = bkrect.UpperLeft.Add(margin.Width, -margin.Height);
+            var origin = rc.CurrentUpperLeft.Add(margin.Width, -margin.Height);
 
             var cellfmt = new VA.Format.ShapeFormatCells();
             cellfmt.FillPattern = 0;
