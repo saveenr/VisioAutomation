@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -55,22 +56,39 @@ namespace VisioAutomation.Layout
             else
             {
                 int degree;
+
+                // split apart the arc into distinct bezier segments (will end up with at least 1 segment)
+                // the segments will "fit" end to end
                 var sub_arcs = VA.Drawing.BezierSegment.FromArc(
                     Convert.DegreesToRadians(pieslice.StartAngle),
                     Convert.DegreesToRadians(pieslice.EndAngle));
 
-                var arc_bez_points = (from p in VA.Drawing.BezierSegment.Merge(sub_arcs, out degree)
-                                      select p.Multiply(pieslice.Radius) + pieslice.Center).ToList();
+                // merge bezier segments together into a list of points
+                var merged_points = VA.Drawing.BezierSegment.Merge(sub_arcs, out degree);
 
-                var pie_points = new List<VA.Drawing.Point>();
+                var arc_bez_points = new List<VA.Drawing.Point>(merged_points.Count);
+                foreach (var p in merged_points)
+                {
+                    var np = p.Multiply(pieslice.Radius) + pieslice.Center;
+                    arc_bez_points.Add(np);
+                }
+
+                // Create one big bezier that accounts for the entire pie shape. This includes the arc
+                // calculated above and the sides of the pie slice
+                var pie_points = new List<VA.Drawing.Point>(3+arc_bez_points.Count+3);
+
+                var first_point_in_arc = arc_bez_points[0];
+                var last_point_in_arc = arc_bez_points[arc_bez_points.Count - 1];
+
                 pie_points.Add(pieslice.Center);
                 pie_points.Add(pieslice.Center);
-                pie_points.Add(arc_bez_points[0]);
+                pie_points.Add(first_point_in_arc);             
                 pie_points.AddRange(arc_bez_points);
-                pie_points.Add(arc_bez_points[arc_bez_points.Count - 1]);
+                pie_points.Add(last_point_in_arc);
                 pie_points.Add(pieslice.Center);
                 pie_points.Add(pieslice.Center);
 
+                // Render the bezier
                 var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(pie_points).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
