@@ -6,6 +6,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
+
 namespace VisioAutomation.Layout
 {
     public static class DrawingtHelper
