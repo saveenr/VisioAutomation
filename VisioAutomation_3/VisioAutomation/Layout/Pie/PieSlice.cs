@@ -8,5 +8,7 @@ namespace VisioAutomation.Layout.Pie
         public Shape VisioShape { get; set; }
         public object Data { get; set; }
         public string Text { get; set; }
+        public double EndAngle { get; set; }
+        public double StartAngle { get; set; }
     }
 }

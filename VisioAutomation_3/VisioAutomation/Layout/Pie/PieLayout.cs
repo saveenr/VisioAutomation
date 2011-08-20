@@ -62,8 +62,31 @@ namespace VisioAutomation.Layout.Pie
 
         public void Render(IVisio.Page page)
         {
-            var values = this._slices.Select(s=>s.Value).ToArray();
-            var shapes = VisioAutomation.Layout.DrawingtHelper.DrawPieSlices(page, this.Center, this._radius, values);
+            double sum = this._slices.Select(s => s.Value).Sum();
+            var shapes = new List<IVisio.Shape>();
+            double start_angle = 0;
+
+            // Draw each slice
+            for (int i = 0; i < this.Slices.Count; i++)
+            {
+                var slice = this.Slices[i];
+                double cur_val = slice.Value;
+                double cur_val_norm = cur_val / sum;
+                double cur_angle_size_deg = cur_val_norm * 360;
+                double end_angle = start_angle + cur_angle_size_deg;
+
+
+                slice.StartAngle = start_angle;
+                slice.EndAngle = end_angle;
+
+                var pieslice_other = new VA.Layout.PieSlice(this.Center, this.Radius, start_angle, end_angle);
+                var shape = VA.Layout.DrawingtHelper.DrawPieSlice(page, pieslice_other);
+                start_angle += cur_angle_size_deg;
+
+                shapes.Add(shape);
+            }
+
+
             for (int i = 0; i < shapes.Count; i++)
             {
                 var shape = shapes[i];
