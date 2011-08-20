@@ -93,7 +93,7 @@ namespace VisioAutomation.Infographics
 
                         foreach (var dat in piedata)
                         {
-                            var slice = pielayout.Add(dat);
+                            var slice = pielayout.Add(dat,null);
                         }
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -12,6 +13,8 @@ namespace VisioAutomation.Layout.Pie
         private List<PieSlice> _slices;
         public VA.Drawing.Point Center;
         private double _radius;
+        public bool DrawBackground { get; set; }
+        private IVisio.Shape _backgroundVisioShape;
 
         public PieLayout()
         {
@@ -28,7 +31,19 @@ namespace VisioAutomation.Layout.Pie
         public double Radius
         {
             get { return _radius; }
-            set { _radius = value; }
+            set
+            {
+                if (value <= 0)
+                {
+                    throw new System.ArgumentOutOfRangeException("value");
+                }
+                _radius = value;
+            }
+        }
+
+        public Shape BackgroundCircle
+        {
+            get { return _backgroundVisioShape; }
         }
 
         public void Add(PieSlice slice)
@@ -36,10 +51,11 @@ namespace VisioAutomation.Layout.Pie
             this._slices.Add(slice);
         }
 
-        public PieSlice Add(double value)
+        public PieSlice Add(double value, string text)
         {
             var slice = new PieSlice();
             slice.Value = value;
+            slice.Text = text;
             this._slices.Add(slice);
             return slice;
         }
@@ -57,6 +73,14 @@ namespace VisioAutomation.Layout.Pie
                 {
                     shape.Text = slice.Text;
                 }
+            }
+
+            if (this.DrawBackground)
+            {
+                var ll = this.Center.Subtract(this.Radius, this.Radius);
+                var ur = this.Center.Add(this.Radius, this.Radius);
+                var rect = new VA.Drawing.Rectangle(ll, ur);
+                this._backgroundVisioShape = page.DrawOval(rect);
             }
         }
     }

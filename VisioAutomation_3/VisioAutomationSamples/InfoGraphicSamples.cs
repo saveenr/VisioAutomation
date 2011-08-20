@@ -97,8 +97,7 @@ namespace VisioAutomationSamples
 
             foreach (var dat in data)
             {
-                var slice = pielayout.Add(dat);
-                slice.Text = dat.ToString();
+                var slice = pielayout.Add(dat,dat.ToString());
             }
 
             pielayout.Render(page);
