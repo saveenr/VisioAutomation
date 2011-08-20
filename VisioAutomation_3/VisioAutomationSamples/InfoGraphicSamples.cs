@@ -90,19 +90,31 @@ namespace VisioAutomationSamples
             var colors = new string[] { "rgb(239,233,195)", "rgb(200,233,167)", "rgb(172,208,180)", "rgb(113,121,118)", "rgb(93,70,51)"};
             var radius = 3.0;
             var center = new VA.Drawing.Point(4, 4);
-            var shapes = VA.Layout.DrawingtHelper.DrawPieSlices(page, center, radius, data);
+
+            var pielayout = new VA.Layout.Pie.PieLayout();
+            pielayout.Radius = radius;
+            pielayout.Center = center;
+
+            foreach (var dat in data)
+            {
+                var slice = pielayout.Add(dat);
+                slice.Text = dat.ToString();
+            }
+
+            pielayout.Render(page);
 
             var fmt = new VA.Format.ShapeFormatCells();
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             for (int i = 0; i < data.Count(); i++)
             {
-                var shape = shapes[i];
+                var shape = pielayout.Slices[i].VisioShape;
+                short shapeid = shape.ID16;
                 var color = colors[i];
                 fmt.FillForegnd = color;
                 fmt.LinePattern = 0;
                 fmt.LineWeight = 0;
-                fmt.Apply(update,shape.ID16);
+                fmt.Apply(update,shapeid);
             }
             update.Execute(page);
             page.ResizeToFitContents(1,1);

@@ -86,12 +86,25 @@ namespace VisioAutomation.Infographics
                         var piecenter = cellrect.Center;
                         var pieradius = System.Math.Min(cellrect.Width, cellrect.Height) / 4.0;
                         var piedata = new[] { dp.Value, 1.0 - dp.Value };
-                        var shapes = VA.Layout.DrawingtHelper.DrawPieSlices(page, piecenter, pieradius, piedata);
-                        var value_shape = shapes[0];
-                        var nonvalue_shape = shapes[1];
 
-                        value_shapes.Add(value_shape);
-                        nonvalue_shapes.Add(nonvalue_shape);
+                        var pielayout = new VA.Layout.Pie.PieLayout();
+                        pielayout.Radius = pieradius;
+                        pielayout.Center = cellrect.Center;
+
+                        foreach (var dat in piedata)
+                        {
+                            var slice = pielayout.Add(dat);
+                        }
+
+
+                        pielayout.Render(page);
+
+                        var value_slice= pielayout.Slices[0];
+                        var nonvalue_slice = pielayout.Slices[1];
+
+
+                        value_shapes.Add(value_slice.VisioShape);
+                        nonvalue_shapes.Add(nonvalue_slice.VisioShape);
 
                     }
                 }
