@@ -44,6 +44,7 @@
     <Compile Include="BarDirection.cs" />
     <Compile Include="BaseBarChart.cs" />
     <Compile Include="Block.cs" />
+    <Compile Include="HorizontalBarChart.cs" />
     <Compile Include="VerticalBarChart.cs" />
     <Compile Include="SquareChart.cs" />
     <Compile Include="DocUtil.cs" />
