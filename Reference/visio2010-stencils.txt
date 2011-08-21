@@ -1,0 +1,345 @@
+INTANN_U.VSS |  | Initiation and Annunciation
+NETSYM_U.VSS |  | Network Symbols
+PTSCLD_M.VSS |  | Custom Patterns - Scaled
+SDL_U.VSS | SDL_U.VST | SDL Diagram Shapes
+DRAWTL_M.VSS |  | Drawing Tool Shapes
+SSFLOW_U.VSS |  | Six Sigma Flowchart Shapes
+PEPIPE_M.VSS | PEPIPE_M.VST | Pipelines
+SSHOQ_U.VSS |  | Six Sigma House of Quality Shapes
+UMLACT_M.VSS |  | UML Activity
+NETRM_M.VSS |  | Network Room Elements
+DATFLO_U.VSS | DATFLO_U.VST | Data Flow Diagram Shapes
+ELETEL_M.VSS | ELETEL_M.VST | Electrical and Telecom
+EMBELL_M.VSS |  | Embellishments
+EXCOBJ_U.VSS |  | Exchange Objects
+GARDEN_U.VSS |  | Garden Accessories
+NETLOC_M.VSS |  | Network Locations
+BPMNC_M.VSS |  | BPMN Connecting Objects (Metric)
+PEINST_M.VSS |  | Instruments
+BPMNA_M.VSS |  | BPMN Activities (Metric)
+DRILLD_M.VSS | DRILLD_M.VST | PivotDiagram Shapes
+BPMNG_M.VSS |  | BPMN Gateways (Metric)
+COMPS_M.VSS |  | Computers and Monitors
+BPMNE_M.VSS |  | BPMN Event Shapes (Metric)
+FLOSHP_U.VSS |  | Miscellaneous Flowchart Shapes
+PLUMB_M.VSS |  | Plumbing
+PLUMB_U.VSS |  | Plumbing
+BTHKT_M.VSS |  | Bath and Kitchen Plan
+AUDIT_M.VSS | AUDIT_M.VST | Audit Diagram Shapes
+COMPLN_M.VSS |  | Compliance Shapes
+FASTN1_M.VSS |  | Fasteners 1
+BLOCK_M.VSS | BLOCK_M.VST | Blocks
+ITIL_M.VSS | ITIL_M.VST | ITIL Shapes
+PTUSCL_M.VSS |  | Custom Patterns - Unscaled
+SPWT_M.VSS |  | SharePoint Workflow Terminators
+SHPMCH_U.VSS |  | Shop Floor - Machines and Equipment
+UMLSEQ_U.VSS |  | UML Sequence
+IDEF0_M.VSS | IDEF0_M.VST | IDEF0 Diagram Shapes
+UMLSTA_M.VSS |  | UML Statechart
+VALVE2_M.VSS |  | Pipes and Valves - Valves 2
+RECSHP_U.VSS |  | Recreation Shapes
+LANGLV_U.VSS |  | Language Level Shapes
+APPL_M.VSS |  | Appliances
+WADOWI_U.VSS |  | Walls, Doors and Windows
+EESWCH_U.VSS |  | Switches and Relays
+FAULT_M.VSS | FAULT_M.VST | Fault Tree Analysis Shapes
+EECHIP_M.VSS | EECHIP_M.VST | Integrated Circuit Components
+HVACD_M.VSS |  | HVAC Ductwork
+OFFEQP_U.VSS |  | Office Equipment
+WFTLBR_M.VSS |  | Toolbars and Menus
+DVCALL_U.VSS |  | Data Graphics
+HVACC_M.VSS |  | HVAC Controls
+FAULT_U.VSS | FAULT_U.VST | Fault Tree Analysis Shapes
+PERIPH_M.VSS |  | Networks and Peripherals
+RCKSVR_U.VSS |  | Rack Mounted Servers (US Units)
+SERVER_U.VSS |  | Servers
+MAP3D_M.VSS | MAP3D_M.VST | Directional Map Shapes 3D
+VIDSUR_M.VSS |  | Video Surveillance
+WFWICN_M.VSS |  | Web and Media Icons
+DRAWTL_U.VSS |  | Drawing Tool Shapes
+ADO_U.VSS |  | Active Directory Objects
+DIMENG_M.VSS |  | Dimensioning - Engineering
+PTSINT_U.VSS |  | Points of Interest
+MAP3D_U.VSS | MAP3D_U.VST | Directional Map Shapes 3D
+TIMELN_M.VSS | TIMELN_M.VST | Timeline Shapes
+WFDEP_U.VSS |  | Workflow Departments
+WADOWI_M.VSS |  | Walls, Doors and Windows
+ADO_M.VSS |  | Active Directory Objects
+EECOMP_U.VSS |  | Composite Assemblies
+GARDEN_M.VSS |  | Garden Accessories
+LNDMRK_M.VSS |  | Landmark Shapes
+NETLOC_U.VSS |  | Network Locations
+PEEQP_M.VSS |  | Equipment - General
+RCKEQP_U.VSS |  | Rack-mounted Equipment
+UMLSTR_U.VSS |  | UML Static Structure
+WFWICN_U.VSS |  | Web and Media Icons
+EEFUND_U.VSS |  | Fundamental Items
+ALARM_U.VSS |  | Alarm and Access Control
+EETERM_U.VSS |  | Terminals and Connectors
+FASTN2_M.VSS |  | Fasteners 2
+SHPREC_M.VSS |  | Warehouse - Shipping and Receiving
+SPWC_M.VSS |  | SharePoint Workflow Conditions
+BASFLO_M.VSS | BASFLO_M.VST | Basic Flowchart Shapes
+VALVE1_U.VSS |  | Pipes and Valves - Valves 1
+WFTLBR_U.VSS |  | Toolbars and Menus
+HVACCE_U.VSS |  | HVAC Controls Equipment
+ARROWS_M.VSS |  | Arrows
+BPMNC_U.VSS |  | BPMN Connecting Objects (US units)
+BPMNA_U.VSS |  | BPMN Activities (US units)
+BPMNG_U.VSS |  | BPMN Gateways (US units)
+COMPS_U.VSS |  | Computers and Monitors
+BPMNE_U.VSS |  | BPMN Event Shapes (US units)
+ELETEL_U.VSS | ELETEL_U.VST | Electrical and Telecom
+LGND_M.VSS |  | Legend
+DVCALL_M.VSS |  | Data Graphics
+EEMAPS_U.VSS |  | Maps and Charts
+OFFEQP_M.VSS |  | Office Equipment
+UMLUSE_M.VSS |  | UML Use Case
+PEHEAT_M.VSS |  | Equipment - Heat Exchangers
+ORGCH_M.VSS | ORGCH_M.VST | Organization Chart Shapes
+PEANNT_M.VSS |  | Process Annotations
+WEBMAP_U.VSS | WEBMAP_U.VST | Web Site Map Shapes (US units)
+TITLE_M.VSS |  | Title Blocks
+PTUSCL_U.VSS |  | Custom Patterns - Unscaled
+OFFFRN_U.VSS |  | Office Furniture
+BLOCKP_M.VSS | BLOCKP_M.VST | Blocks with Perspective
+COMPLN_U.VSS |  | Compliance Shapes
+EETRAN_M.VSS |  | Transformers and Windings
+CALNDR_M.VSS | CALNDR_M.VST | Calendar Shapes
+FASTN1_U.VSS |  | Fasteners 1
+PEVESS_M.VSS |  | Equipment - Vessels
+UMLSTA_U.VSS |  | UML Statechart
+LINPAT_M.VSS |  | Custom Line Patterns
+LOGIC_U.VSS |  | Analog and Digital Logic
+VALVE2_U.VSS |  | Pipes and Valves - Valves 2
+LANGLV_M.VSS |  | Language Level Shapes
+PERT_M.VSS | PERT_M.VST | PERT Chart Shapes
+PRKRD_M.VSS |  | Parking and Roads
+WRKFLO_U.VSS | WRKFLO_U.VST | Work Flow Diagram Shapes
+DGICON_U.VSS |  | Icon Sets
+HVACCE_M.VSS |  | HVAC Controls Equipment
+WFDEP_M.VSS |  | Workflow Departments
+VIDSUR_U.VSS |  | Video Surveillance
+WFDLGS_M.VSS |  | Forms and Dialogs
+WFSTEP_M.VSS |  | Workflow Steps
+TRANSP_U.VSS |  | Transportation Shapes
+ALARM_M.VSS |  | Alarm and Access Control
+BPMN_U.VSS | BPMN_U.VST | BPMN Basic Shapes (US units)
+UMLDEP_U.VSS |  | UML Deployment
+WELD_M.VSS |  | Welding Symbols
+FASTN2_U.VSS |  | Fasteners 2
+MRKTDG_U.VSS | MRKTDG_U.VST | Marketing Diagrams
+SHPREC_U.VSS |  | Warehouse - Shipping and Receiving
+BASIC_M.VSS |  | Basic Shapes
+UMLCOL_M.VSS |  | UML Collaboration
+PEVALV_M.VSS |  | Valves and Fittings
+BLOCK_U.VSS | BLOCK_U.VST | Blocks
+PIPE1_U.VSS |  | Pipes and Valves - Pipes 1
+OFFACC_U.VSS |  | Office Accessories
+DIMARC_U.VSS |  | Dimensioning - Architectural
+FPVALV_M.VSS |  | Fluid Power - Valves
+PERT_U.VSS | PERT_U.VST | PERT Chart Shapes
+CUBICL_U.VSS |  | Cubicles
+PIPE2_U.VSS |  | Pipes and Valves - Pipes 2
+SITACC_M.VSS |  | Site Accessories
+SPRBR_M.VSS |  | Springs and Bearings
+EPC_U.VSS | EPC_U.VST | EPC Diagram Shapes
+CAUSEF_M.VSS | CAUSEF_M.VST | Cause and Effect Diagram Shapes
+IRRIG_U.VSS |  | Irrigation
+METRO_M.VSS |  | Metro Shapes
+GANESA_U.VSS |  | Gane-Sarson
+SPRBR_U.VSS |  | Springs and Bearings
+UMLUSE_U.VSS |  | UML Use Case
+LEGEND_M.VSS |  | Legend
+EPC_M.VSS | EPC_M.VST | EPC Diagram Shapes
+WFDLGS_U.VSS |  | Forms and Dialogs
+LDAPOB_U.VSS |  | LDAP Objects
+PLANT_U.VSS |  | Planting
+ROAD_M.VSS |  | Road Shapes
+SPWA_U.VSS |  | SharePoint Workflow Actions
+PEPUMP_M.VSS |  | Equipment - Pumps
+EETRAN_U.VSS |  | Transformers and Windings
+PRKRD_U.VSS |  | Parking and Roads
+VEHICL_U.VSS |  | Vehicles
+LINPAT_U.VSS |  | Custom Line Patterns
+WELD_U.VSS |  | Welding Symbols
+BPRES_U.VSS |  | Resources
+UMLCOM_U.VSS |  | UML Component
+CABNT_U.VSS |  | Cabinets
+EESEMI_U.VSS |  | Semiconductors and Electron Tubes
+FLOSHP_M.VSS |  | Miscellaneous Flowchart Shapes
+EEMECH_U.VSS |  | Rotating Equip and Mech Functions
+OFFACC_M.VSS |  | Office Accessories
+WFSTEP_U.VSS |  | Workflow Steps
+WFCTRL_M.VSS |  | Controls
+NETRM_U.VSS |  | Network Room Elements
+PTSCLD_U.VSS |  | Custom Patterns - Scaled
+EEMAIN_M.VSS |  | Maintenance Symbols
+BLOCK3_M.VSS |  | Blocks Raised
+CALOUT_M.VSS |  | Callouts
+ENTAPP_M.VSS | ENTAPP_M.VST | Enterprise Application
+GANESA_M.VSS |  | Gane-Sarson
+LGND_U.VSS |  | Legend
+ROAD_U.VSS |  | Road Shapes
+SSFLOW_M.VSS |  | Six Sigma Flowchart Shapes
+EMBELL_U.VSS |  | Embellishments
+SDCONT_M.VSS |  | Containers
+SYMBOL_M.VSS |  | Symbols
+CONNEC_U.VSS |  | Connectors
+UMLACT_U.VSS |  | UML Activity
+HVACEQ_U.VSS |  | HVAC Equipment
+EEQUAL_M.VSS |  | Qualifying Symbols
+INTANN_M.VSS |  | Initiation and Annunciation
+DTLNET_U.VSS | DTLNET_U.VST | Detailed Network
+SHPMCH_M.VSS |  | Shop Floor - Machines and Equipment
+BORDRS_U.VSS |  | Borders & Titles Gallery
+CAUSEF_U.VSS | CAUSEF_U.VST | Cause and Effect Diagram Shapes
+MEMOBJ_U.VSS |  | Memory Objects
+PLANT_M.VSS |  | Planting
+PEPIPE_U.VSS | PEPIPE_U.VST | Pipelines
+EESWCH_M.VSS |  | Switches and Relays
+DATFLO_M.VSS | DATFLO_M.VST | Data Flow Diagram Shapes
+EXCOBJ_M.VSS |  | Exchange Objects
+WEBSIT_M.VSS | WEBSIT_M.VST | Conceptual Web Site Shapes
+PEINST_U.VSS |  | Instruments
+PEPUMP_U.VSS |  | Equipment - Pumps
+BSTORM_U.VSS | BSTORM_U.VST | Brainstorming
+DRILLD_U.VSS | DRILLD_U.VST | PivotDiagram Shapes
+CABNT_M.VSS |  | Cabinets
+PTSINT_M.VSS |  | Points of Interest
+DIMENG_U.VSS |  | Dimensioning - Engineering
+TIMELN_U.VSS | TIMELN_U.VST | Timeline Shapes (US units)
+BPMN_M.VSS | BPMN_M.VST | BPMN Basic Shapes (Metric)
+TQM_M.VSS | TQM_M.VST | TQM Diagram Shapes
+HVACEQ_M.VSS |  | HVAC Equipment
+EECHIP_U.VSS | EECHIP_U.VST | Integrated Circuit Components
+BASFLO_U.VSS | BASFLO_U.VST | Basic Flowchart Shapes
+FREEQP_U.VSS |  | Free-standing Rack Equipment
+WFCTRL_U.VSS |  | Controls
+PERIPH_U.VSS |  | Networks and Peripherals
+BORDRS_M.VSS |  | Borders & Titles Gallery
+BCKGRN_U.VSS |  | Backgrounds Gallery
+ARROWS_U.VSS |  | Arrows
+EEVHF_M.VSS |  | VHF-UHF-SHF
+FPEQP_U.VSS |  | Fluid Power - Equipment
+MEMOBJ_M.VSS |  | Memory Objects
+RECRT_U.VSS |  | Sport Fields and Recreation
+TQM_U.VSS | TQM_U.VST | TQM Diagram Shapes
+TITLE_U.VSS |  | Title Blocks
+LNDMRK_U.VSS |  | Landmark Shapes
+EECOMP_M.VSS |  | Composite Assemblies
+PEHEAT_U.VSS |  | Equipment - Heat Exchangers
+BSTORM_M.VSS | BSTORM_M.VST | Brainstorming
+RCKEQP_M.VSS |  | Rack-mounted Equipment
+REGSTR_M.VSS |  | Registers, Grilles and Diffusers
+SPWA_M.VSS |  | SharePoint Workflow Actions
+WEBMAP_M.VSS | WEBMAP_M.VST | Web Site Map Shapes
+EETERM_M.VSS |  | Terminals and Connectors
+LOGIC_M.VSS |  | Analog and Digital Logic
+BLOCKP_U.VSS | BLOCKP_U.VST | Blocks with Perspective
+COMOLE_U.VSS | COMOLE_U.VST | COM and OLE
+EEQUAL_U.VSS |  | Qualifying Symbols
+PEVESS_U.VSS |  | Equipment - Vessels
+FURN_U.VSS |  | Furniture
+EETCOM_U.VSS |  | Telecom Switch and Peripheral Equip
+MRKTDG_M.VSS | MRKTDG_M.VST | Marketing Diagrams
+OBJREL_M.VSS |  | Object Relational
+FREEQP_M.VSS |  | Free-standing Rack Equipment
+ANNOT_U.VSS |  | Annotations
+EEMAPS_M.VSS |  | Maps and Charts
+SHPSTR_M.VSS |  | Shop Floor - Storage and Distribution
+SPWT_U.VSS |  | SharePoint Workflow Terminators
+ENTITY_M.VSS |  | Entity Relationship
+WEBSIT_U.VSS | WEBSIT_U.VST | Conceptual Web Site Shapes
+PEANNT_U.VSS |  | Process Annotations
+SDCALL_U.VSS |  | Callouts
+OFFFRN_M.VSS |  | Office Furniture
+TRANSP_M.VSS |  | Transportation Shapes
+BLDCOR_U.VSS |  | Building Core
+XFUNC_M.VSS | XFUNC_M.VST | Cross-Functional Flowchart Shapes
+CALNDR_U.VSS | CALNDR_U.VST | Calendar Shapes (US units)
+ITIL_U.VSS | ITIL_U.VST | ITIL Shapes
+ORGCH_U.VSS | ORGCH_U.VST | Organization Chart Shapes
+BTHKT_U.VSS |  | Bath and Kitchen Plan
+BASIC_U.VSS |  | Basic Shapes
+VSM_M.VSS | VSM_M.VST | Value Stream Map Shapes
+XFUNC_U.VSS | XFUNC_U.VST | Cross-Functional Flowchart Shapes
+VSM_U.VSS | VSM_U.VST | Value Stream Map Shapes
+LDAPOB_M.VSS |  | LDAP Objects
+APPL_U.VSS |  | Appliances
+CHART_U.VSS | CHART_U.VST | Charting Shapes
+EEVHF_U.VSS |  | VHF-UHF-SHF
+COMOLE_M.VSS | COMOLE_M.VST | COM and OLE
+DGICON_M.VSS |  | Icon Sets
+FPEQP_M.VSS |  | Fluid Power - Equipment
+PEVALV_U.VSS |  | Valves and Fittings
+RECRT_M.VSS |  | Sport Fields and Recreation
+UMLCOL_U.VSS |  | UML Collaboration
+WFOBJ_U.VSS |  | Workflow Objects
+WRKFLO_M.VSS | WRKFLO_M.VST | Work Flow Diagram Shapes
+BCKGRN_M.VSS |  | Backgrounds Gallery
+FPVALV_U.VSS |  | Fluid Power - Valves
+METRO_U.VSS |  | Metro Shapes
+CUBICL_M.VSS |  | Cubicles
+SITACC_U.VSS |  | Site Accessories
+NETSYM_M.VSS |  | Network Symbols
+EETCOM_M.VSS |  | Telecom Switch and Peripheral Equip
+WFCICN_M.VSS |  | Common Icons
+FPASSM_M.VSS |  | Fluid Power - Valve Assembly
+EEPATH_U.VSS |  | Transmission Paths
+WFCRS_U.VSS |  | Cursors
+ENTITY_U.VSS |  | Entity Relationship
+UMLDEP_M.VSS |  | UML Deployment
+GANTT_U.VSS | GANTT_U.VST | Gantt Chart Shapes
+LEGEND_U.VSS |  | Legend
+REGSTR_U.VSS |  | Registers, Grilles and Diffusers
+SDCALL_M.VSS |  | Callouts
+UMLSEQ_M.VSS |  | UML Sequence
+WALL_M.VSS |  | Walls, Shell and Structure
+GDT_U.VSS |  | Geometric Dimensioning and Tolerancing
+SPWC_U.VSS |  | SharePoint Workflow Conditions
+BLDCOR_M.VSS |  | Building Core
+SSHOQ_M.VSS |  | Six Sigma House of Quality Shapes
+VEHICL_M.VSS |  | Vehicles
+ANNOT_M.VSS |  | Annotations
+OBJREL_U.VSS |  | Object Relational
+PIPE1_M.VSS |  | Pipes and Valves - Pipes 1
+GDT_M.VSS |  | Geometric Dimensioning and Tolerancing
+PIPE2_M.VSS |  | Pipes and Valves - Pipes 2
+AUDIT_U.VSS | AUDIT_U.VST | Audit Diagram Shapes
+ADS_U.VSS |  | Active Directory Sites and Services
+RECSHP_M.VSS |  | Recreation Shapes
+SHPSTR_U.VSS |  | Shop Floor - Storage and Distribution
+ADS_M.VSS |  | Active Directory Sites and Services
+IDEF0_U.VSS | IDEF0_U.VST | IDEF0 Diagram Shapes
+IRRIG_M.VSS |  | Irrigation
+RCKSVR_M.VSS |  | Rack Mounted Servers
+SERVER_M.VSS |  | Servers
+WFCICN_U.VSS |  | Common Icons
+EEMAIN_U.VSS |  | Maintenance Symbols
+EEPATH_M.VSS |  | Transmission Paths
+CHART_M.VSS | CHART_M.VST | Charting Shapes
+HVACD_U.VSS |  | HVAC Ductwork
+BLOCK3_U.VSS |  | Blocks Raised
+CALOUT_U.VSS |  | Callouts
+ENTAPP_U.VSS | ENTAPP_U.VST | Enterprise Application
+HVACC_U.VSS |  | HVAC Controls
+WALL_U.VSS |  | Walls, Shell and Structure
+WFOBJ_M.VSS |  | Workflow Objects
+SYMBOL_U.VSS |  | Symbols
+SDCONT_U.VSS |  | Containers
+SDL_M.VSS | SDL_M.VST | SDL Diagram Shapes
+CONNEC_M.VSS |  | Connectors
+UMLCOM_M.VSS |  | UML Component
+UMLSTR_M.VSS |  | UML Static Structure
+EESEMI_M.VSS |  | Semiconductors and Electron Tubes
+EEFUND_M.VSS |  | Fundamental Items
+BPRES_M.VSS |  | Resources
+EEMECH_M.VSS |  | Rotating Equip and Mech Functions
+VALVE1_M.VSS |  | Pipes and Valves - Valves 1
+WFCRS_M.VSS |  | Cursors
+PEEQP_U.VSS |  | Equipment - General
+GANTT_M.VSS | GANTT_M.VST | Gantt Chart Shapes
+FURN_M.VSS |  | Furniture
+DTLNET_M.VSS | DTLNET_M.VST | Detailed Network
+FPASSM_U.VSS |  | Fluid Power - Valve Assembly
