@@ -79,8 +79,7 @@ namespace VisioAutomation.Layout.Pie
                 slice.StartAngle = start_angle;
                 slice.EndAngle = end_angle;
 
-                var pieslice_other = new VA.Layout.PieSlice(this.Center, this.Radius, start_angle, end_angle);
-                var shape = VA.Layout.DrawingtHelper.DrawPieSlice(page, pieslice_other);
+                var shape = VA.Layout.DrawingtHelper.DrawPieSlice(page, this.Center, this.Radius, start_angle, end_angle);
                 start_angle += cur_angle_size_deg;
 
                 shapes.Add(shape);
