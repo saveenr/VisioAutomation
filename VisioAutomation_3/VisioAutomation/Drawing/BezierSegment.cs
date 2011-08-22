@@ -67,6 +67,11 @@ namespace VisioAutomation.Drawing
 
         public static BezierSegment[] FromArc(double startangle, double endangle)
         {
+            if (endangle < startangle)
+            {
+                throw new System.ArgumentOutOfRangeException("endangle must be >= startangle");
+            }
+
             double min_angle = 0;
             double max_angle = System.Math.PI*2;
 
@@ -74,7 +79,12 @@ namespace VisioAutomation.Drawing
 
             if (total_angle == min_angle)
             {
-                return null;
+                var arr = new BezierSegment[1];
+                double cos_theta = System.Math.Cos(startangle);
+                double sin_theta = System.Math.Sin(startangle);
+                var p0 = new VA.Drawing.Point(cos_theta, -sin_theta);
+                var p1 = RotateAroundOrigin( p0, startangle);
+                arr[0] = new BezierSegment(p1,p1,p1,p1);
             }
 
             if (total_angle > max_angle)
