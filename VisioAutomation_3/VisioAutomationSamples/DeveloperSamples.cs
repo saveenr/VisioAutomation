@@ -12,7 +12,14 @@ namespace VisioAutomationSamples
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.Documentation();
+            var doc = ss.Developer.DrawScriptingDocumentation();
+        }
+
+        public static void InteropDocumentation()
+        {
+            var app = SampleEnvironment.Application;
+            var ss = new VisioAutomation.Scripting.Session(app);
+            var doc = ss.Developer.DrawInteropDocumentation();
         }
     }
 }

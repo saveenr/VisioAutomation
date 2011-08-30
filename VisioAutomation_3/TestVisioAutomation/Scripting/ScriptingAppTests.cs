@@ -12,7 +12,7 @@ namespace TestVisioAutomation
         public void Scripting_DevDocumentation()
         {
             var ss = GetScriptingSession();
-            var doc= ss.Developer.Documentation();
+            var doc= ss.Developer.DrawScriptingDocumentation();
             doc.Close(true);
         }
     }
