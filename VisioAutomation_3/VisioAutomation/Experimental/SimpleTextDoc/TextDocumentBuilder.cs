@@ -115,18 +115,18 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             
         }
 
-        public void Draw(VA.Experimental.SimpleTextDoc.TextPage xpage)
+        public void Draw(VA.Experimental.SimpleTextDoc.TextPage textpage)
         {
             var page = _visioDocument.Pages.Add();
-            page.NameU = xpage.Name;
+            page.NameU = textpage.Name;
             VA.PageHelper.SetSize(page, this.PageSize);
 
             // Draw the shapes
             var titleshape = page.DrawRectangle(_titlerect);
-            titleshape.Text = xpage.Title;
+            titleshape.Text = textpage.Title;
 
             var bodyshape = page.DrawRectangle(_bodywith_title_rect);
-            bodyshape.Text = xpage.Body;
+            bodyshape.Text = textpage.Body;
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
@@ -144,6 +144,9 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             this._bodyFormat.Apply(update, bodyshape_id);
             update.Execute(page);
 
+            textpage.VisioBodyShape = bodyshape;
+            textpage.VisioTitleShape = titleshape;
+            textpage.VisioPage = page;
         }
 
         public void Finish()

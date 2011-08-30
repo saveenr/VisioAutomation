@@ -15,11 +15,11 @@ namespace VisioAutomationSamples
             var doc = ss.Developer.DrawScriptingDocumentation();
         }
 
-        public static void InteropDocumentation()
+        public static void InteropEnumDocumentation()
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawInteropDocumentation();
+            var doc = ss.Developer.DrawInteropEnumDocumentation();
         }
     }
 }

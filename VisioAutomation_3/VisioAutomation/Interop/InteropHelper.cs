@@ -26,6 +26,7 @@ namespace VisioAutomation.Interop
                 g_types = typeof(IVisio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
                     .Where(t => !t.Name.StartsWith("tag"))
+                    .OrderBy(t=>t.Name)
                     .ToList();
                 g_name_to_enum = g_types
                     .Where(t => t.IsEnum)

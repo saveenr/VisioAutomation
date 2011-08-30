@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             return el_shapes;
         }
 
-        public virtual IVisio.Document DrawScriptingDocumentation()
+        public IVisio.Document DrawScriptingDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
             var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
@@ -110,55 +110,78 @@ namespace VisioAutomation.Scripting.Commands
             return docbuilder.VisioDocument;
         }
 
-        public virtual IVisio.Document DrawInteropDocumentation()
+        public IVisio.Document DrawInteropEnumDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
             var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             //docbuilder.BodyParaSpacingAfter = 2.0;
             docbuilder.BodyTextSize = 8.0;
             var helpstr = new System.Text.StringBuilder();
+            int chunksize = 70;
 
-            var i_enums = VA.Interop.InteropHelper.GetEnums().OrderBy(i => i.Name).ToList();
+            var interop_enums = VA.Interop.InteropHelper.GetEnums();
             docbuilder.Start();
             int pagecount = 0;
-            foreach (var enum_ in i_enums)
+            foreach (var enum_ in interop_enums)
             {
 
 
-                int chunksize = 70;
                 int chunkcount = 0;
 
                 var values = enum_.Values.OrderBy(i => i.Name).ToList();
                 foreach (var chunk in Chunk(values, chunksize))
                 {
-                    chunkcount = 0;
                     helpstr.Length = 0;
                     foreach (var val in chunk)
                     {
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
 
                     }
+
                     var docpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
                     docpage.Title = enum_.Name;
                     docpage.Body = helpstr.ToString();
-                    docpage.Name = string.Format("{0} ({1})", enum_.Name, pagecount + 1);
+                    if (chunkcount == 0)
+                    {
+                        docpage.Name = string.Format("{0}", enum_.Name);
+                        
+                    }
+                    else
+                    {
+                        docpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
+                    }
 
                     docbuilder.Draw(docpage);
 
+                    var tabstops = new[]
+                                 {
+                                     new VA.Text.TabStop(1.5, VA.Text.TabStopAlignment.Left)
+                                 };
+                    VA.Text.TextHelper.SetTabStops(docpage.VisioBodyShape, tabstops);
+                    
                     chunkcount++;
-
                     pagecount++;
                 }
 
             }
 
             docbuilder.Finish();
-            docbuilder.VisioDocument.Subject = "VisioAutomation.Scripting Documenation";
-            docbuilder.VisioDocument.Title = "VisioAutomation.Scripting Documenation";
+            docbuilder.VisioDocument.Subject = "Visio Interop Enum Documenation";
+            docbuilder.VisioDocument.Title = "Visio Interop Enum Documenation";
             docbuilder.VisioDocument.Creator = "";
             docbuilder.VisioDocument.Company = "";
 
             return docbuilder.VisioDocument;
+        }
+
+        public IList<VA.Interop.EnumType> GetInteropEnums()
+        {
+            return VA.Interop.InteropHelper.GetEnums();
+        }
+
+        public VA.Interop.EnumType GetInteropEnum(string name)
+        {
+            return VA.Interop.InteropHelper.GetEnum(name);
         }
 
         private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)
