@@ -1,4 +1,4 @@
-
+import ironvisio
 import math
 from geometry import *
 
@@ -31,6 +31,8 @@ class VerticalBarChart :
         catshapes = drawrects( page, bottom_row_rects )
         settext( catshapes, self.Categories )
 
+        format_basic( page, barshapes , catshapes )
+
 
 
 class CircleChart :
@@ -60,6 +62,22 @@ class CircleChart :
         # draw category textboxes
         catshapes = drawrects( page, bottom_row_rects )
         settext( catshapes, self.Categories )
+    
+        format_basic( page, circleshapes , catshapes )
+ 
+
+def format_basic(page, valueshapes, labelshapes) :
+        setfdata = []
+        for shape in valueshapes :
+            setfdata.append( (shape.ID16, ironvisio.SRCConstants.FillForegnd, "rgb(230,225,225)" ) )
+            setfdata.append( (shape.ID16, ironvisio.SRCConstants.LinePattern, "0" ) )
+            setfdata.append( (shape.ID16, ironvisio.SRCConstants.LineWeight, "0" ) )
+        for shape in labelshapes :
+            setfdata.append( (shape.ID16, ironvisio.SRCConstants.FillPattern, "0" ) )
+            setfdata.append( (shape.ID16, ironvisio.SRCConstants.LinePattern, "0" ) )
+            setfdata.append( (shape.ID16, ironvisio.SRCConstants.LineWeight, "0" ) )
+ 
+        ironvisio.set_formulas(page, setfdata)
 
 def drawrects( page, rects ) :
     shapes = []
