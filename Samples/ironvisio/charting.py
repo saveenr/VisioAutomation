@@ -20,8 +20,9 @@ class VerticalBarChart :
         numpoints = len(self.DataPoints)
         heights = normalize_to( (p.Value for p in self.DataPoints), self.MaxHeight)
         top_row_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
+        bottom_row_origin = self.Origin
         top_row_rects = get_rects_horiz_vary_heights( top_row_origin, self.BarWidth, heights, self.HorizontalDistance, numpoints )
-        bottom_row_rects = get_rects_horiz( self.Origin , Size(self.BarWidth,self.CategoryHeight), self.HorizontalDistance, numpoints )
+        bottom_row_rects = get_rects_horiz( bottom_row_origin , Size(self.BarWidth,self.CategoryHeight), self.HorizontalDistance, numpoints )
 
         # draw bars
         barshapes = drawrects( page, top_row_rects )
@@ -46,16 +47,17 @@ class CircleChart :
     def Draw(self, page) :
         # Calculate Geometry
         numpoints = len(self.DataPoints)
-                
+        top_row_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
+        bottom_row_origin = self.Origin
+        top_row_rects = get_rects_horiz( top_row_origin, Size(self.MaxHeight, self.MaxHeight), self.HorizontalDistance, numpoints )
+        bottom_row_rects = get_rects_horiz( bottom_row_origin , Size(self.MaxHeight,self.CategoryHeight), self.HorizontalDistance, numpoints )
+
         normalized_values = normalize( (p.Value for p in self.DataPoints) )
         radii = [ math.sqrt(v/math.pi) for v in normalized_values]
         radii = normalize_to( radii, self.MaxHeight/2.0 )
 
-        top_row_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
-        top_row_rects = get_rects_horiz( top_row_origin, Size(self.MaxHeight, self.MaxHeight), self.HorizontalDistance, numpoints )
         centers = [ r.Center for r in top_row_rects ]
         circlerects = [ Rectangle.FromPointAndRadius(c,r) for (c,r) in zip(centers,radii) ]
-        bottom_row_rects = get_rects_horiz( self.Origin , Size(self.MaxHeight,self.CategoryHeight), self.HorizontalDistance, numpoints )
 
         # draw circle
         circleshapes = drawovals(page, circlerects)
