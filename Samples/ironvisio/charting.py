@@ -11,14 +11,14 @@ class VerticalBarChart :
         self.BarWidth=1.0
         self.HorizontalDistance=0.5
         self.CategoryHeight = 0.5
-        self.CategoryDistance=0.0
+        self.VerticalDistance=0.0
         self.Origin = Point(0,0)
 
     def Draw(self, page) :
 
         # Calculate Geometry
         numpoints = len(self.DataPoints)
-        bottom_row_rects, top_row_rects = get_top_bottom_rects( self.Origin, self.BarWidth, self.CategoryHeight, self.MaxHeight, self.HorizontalDistance, self.CategoryDistance, numpoints)
+        bottom_row_rects, top_row_rects = get_top_bottom_rects( self.Origin, self.BarWidth, self.CategoryHeight, self.MaxHeight, self.HorizontalDistance, self.VerticalDistance, numpoints)
 
         heights = normalize_to( (p.Value for p in self.DataPoints), self.MaxHeight)
         bar_rects = [ Rectangle.FromPointAndSize(r.LowerLeft,Size(self.BarWidth, h)) for (r,h) in zip(top_row_rects,heights) ]
@@ -41,13 +41,13 @@ class CircleChart :
         self.MaxHeight = 1.0
         self.HorizontalDistance=0.5
         self.CategoryHeight = 0.5
-        self.CategoryDistance=0.0
+        self.VerticalDistance=0.0
         self.Origin = Point(0,0)
 
     def Draw(self, page) :
         # Calculate Geometry
         numpoints = len(self.DataPoints)
-        bottom_row_rects, top_row_rects = get_top_bottom_rects( self.Origin, self.MaxHeight, self.CategoryHeight, self.MaxHeight, self.HorizontalDistance, self.CategoryDistance, numpoints)
+        bottom_row_rects, top_row_rects = get_top_bottom_rects( self.Origin, self.MaxHeight, self.CategoryHeight, self.MaxHeight, self.HorizontalDistance, self.VerticalDistance, numpoints)
 
         centers = [ r.Center for r in top_row_rects ]
         radii = normalize_areas_to_radii( (p.Value for p in self.DataPoints) , self.MaxHeight/2.0)
