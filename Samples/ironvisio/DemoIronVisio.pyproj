@@ -25,6 +25,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="geometry.py" />
     <Compile Include="charting.py" />
     <Compile Include="demo.py" />
     <Compile Include="ironvisio.py" />
