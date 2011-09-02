@@ -18,14 +18,9 @@ class VerticalBarChart :
 
         # Calculate Geometry
         numpoints = len(self.DataPoints)
-        heights = normalize_to( (p.Value for p in self.DataPoints), self.MaxHeight)
-        top_row_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
-        bottom_row_origin = self.Origin
-        top_row_cell_size = Size(self.BarWidth, self.MaxHeight)
-        bottom_row_cell_size = Size(self.BarWidth,self.CategoryHeight)
-        top_row_rects = get_rects_horiz( top_row_origin, top_row_cell_size , self.HorizontalDistance, numpoints )
-        bottom_row_rects = get_rects_horiz( bottom_row_origin , bottom_row_cell_size , self.HorizontalDistance, numpoints )
+        bottom_row_rects, top_row_rects = get_top_bottom_rects( self.Origin, self.BarWidth, self.CategoryHeight, self.MaxHeight, self.HorizontalDistance, self.CategoryDistance, numpoints)
 
+        heights = normalize_to( (p.Value for p in self.DataPoints), self.MaxHeight)
         bar_rects = [ Rectangle.FromPointAndSize(r.LowerLeft,Size(self.BarWidth, h)) for (r,h) in zip(top_row_rects,heights) ]
 
         # draw bars
@@ -35,6 +30,7 @@ class VerticalBarChart :
         # draw category textboxes
         catshapes = drawrects( page, bottom_row_rects )
         settext( catshapes, self.Categories )
+
 
 
 class CircleChart :
@@ -51,19 +47,10 @@ class CircleChart :
     def Draw(self, page) :
         # Calculate Geometry
         numpoints = len(self.DataPoints)
-        top_row_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
-        bottom_row_origin = self.Origin
-        top_row_cell_size = Size(self.MaxHeight, self.MaxHeight)
-        bottom_row_cell_size = Size(self.MaxHeight,self.CategoryHeight)
-
-        top_row_rects = get_rects_horiz( top_row_origin,top_row_cell_size , self.HorizontalDistance, numpoints )
-        bottom_row_rects = get_rects_horiz( bottom_row_origin , bottom_row_cell_size, self.HorizontalDistance, numpoints )
-
-        normalized_values = normalize( (p.Value for p in self.DataPoints) )
-        radii = [ math.sqrt(v/math.pi) for v in normalized_values]
-        radii = normalize_to( radii, self.MaxHeight/2.0 )
+        bottom_row_rects, top_row_rects = get_top_bottom_rects( self.Origin, self.MaxHeight, self.CategoryHeight, self.MaxHeight, self.HorizontalDistance, self.CategoryDistance, numpoints)
 
         centers = [ r.Center for r in top_row_rects ]
+        radii = normalize_areas_to_radii( (p.Value for p in self.DataPoints) , self.MaxHeight/2.0)
         circlerects = [ Rectangle.FromPointAndRadius(c,r) for (c,r) in zip(centers,radii) ]
 
         # draw circle
@@ -102,3 +89,18 @@ def normalize_to( seq , s) :
     m = max( items )
     return [ float(v)/m*s for v in items ]
 
+def normalize_areas_to_radii( seq , s) :
+    normalized_areas = normalize( seq )
+    radii = [ math.sqrt(v/math.pi) for v in normalized_areas]
+    radii = normalize_to( radii, s )
+    return radii
+
+def get_top_bottom_rects(bottom_row_origin, cellwidth, bottom_size, top_size, hdist, vdist, numpoints) :
+        bottom_row_cell_size = Size(cellwidth, bottom_size)
+        bottom_row_rects = get_rects_horiz( bottom_row_origin , bottom_row_cell_size , hdist, numpoints )
+
+        top_row_origin = bottom_row_origin.AddSize( Size(0, vdist+bottom_size) )
+        top_row_cell_size = Size(cellwidth, top_size)
+        top_row_rects = get_rects_horiz( top_row_origin, top_row_cell_size , hdist, numpoints )
+
+        return (bottom_row_rects, top_row_rects)
