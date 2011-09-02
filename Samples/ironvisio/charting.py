@@ -21,11 +21,15 @@ class VerticalBarChart :
         heights = normalize_to( (p.Value for p in self.DataPoints), self.MaxHeight)
         top_row_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
         bottom_row_origin = self.Origin
-        top_row_rects = get_rects_horiz_vary_heights( top_row_origin, self.BarWidth, heights, self.HorizontalDistance, numpoints )
-        bottom_row_rects = get_rects_horiz( bottom_row_origin , Size(self.BarWidth,self.CategoryHeight), self.HorizontalDistance, numpoints )
+        top_row_cell_size = Size(self.BarWidth, self.MaxHeight)
+        bottom_row_cell_size = Size(self.BarWidth,self.CategoryHeight)
+        top_row_rects = get_rects_horiz( top_row_origin, top_row_cell_size , self.HorizontalDistance, numpoints )
+        bottom_row_rects = get_rects_horiz( bottom_row_origin , bottom_row_cell_size , self.HorizontalDistance, numpoints )
+
+        bar_rects = [ Rectangle.FromPointAndSize(r.LowerLeft,Size(self.BarWidth, h)) for (r,h) in zip(top_row_rects,heights) ]
 
         # draw bars
-        barshapes = drawrects( page, top_row_rects )
+        barshapes = drawrects( page, bar_rects )
         settext( barshapes, [ p.Label for p in self.DataPoints ] )
 
         # draw category textboxes
@@ -49,8 +53,11 @@ class CircleChart :
         numpoints = len(self.DataPoints)
         top_row_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
         bottom_row_origin = self.Origin
-        top_row_rects = get_rects_horiz( top_row_origin, Size(self.MaxHeight, self.MaxHeight), self.HorizontalDistance, numpoints )
-        bottom_row_rects = get_rects_horiz( bottom_row_origin , Size(self.MaxHeight,self.CategoryHeight), self.HorizontalDistance, numpoints )
+        top_row_cell_size = Size(self.MaxHeight, self.MaxHeight)
+        bottom_row_cell_size = Size(self.MaxHeight,self.CategoryHeight)
+
+        top_row_rects = get_rects_horiz( top_row_origin,top_row_cell_size , self.HorizontalDistance, numpoints )
+        bottom_row_rects = get_rects_horiz( bottom_row_origin , bottom_row_cell_size, self.HorizontalDistance, numpoints )
 
         normalized_values = normalize( (p.Value for p in self.DataPoints) )
         radii = [ math.sqrt(v/math.pi) for v in normalized_values]
