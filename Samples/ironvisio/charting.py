@@ -9,7 +9,7 @@ class VerticalBarChart :
         self.Categories = []
         self.MaxHeight = 3.0
         self.BarWidth=1.0
-        self.BarDistance=0.5
+        self.HorizontalDistance=0.5
         self.CategoryHeight = 0.5
         self.CategoryDistance=0.0
         self.Origin = Point(0,0)
@@ -19,8 +19,8 @@ class VerticalBarChart :
         numpoints = len(self.DataPoints)
         heights = normalize_to( (p.Value for p in self.DataPoints), self.MaxHeight)
         bar_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
-        bar_rects = get_rects_horiz_vary_heights( bar_origin, self.BarWidth, heights, self.BarDistance, numpoints )
-        cat_rects = get_rects_horiz( self.Origin , Size(self.BarWidth,self.CategoryHeight), self.BarDistance, numpoints )
+        bar_rects = get_rects_horiz_vary_heights( bar_origin, self.BarWidth, heights, self.HorizontalDistance, numpoints )
+        cat_rects = get_rects_horiz( self.Origin , Size(self.BarWidth,self.CategoryHeight), self.HorizontalDistance, numpoints )
 
         # draw bars
         barshapes = drawrects( page, bar_rects )
@@ -37,7 +37,7 @@ class CircleChart :
         self.DataPoints = []
         self.Categories = []
         self.MaxRadius= 0.5
-        self.CircleDistance=0.5
+        self.HorizontalDistance=0.5
         self.CategoryHeight = 0.5
         self.CategoryDistance=0.0
         self.Origin = Point(0,0)
@@ -51,10 +51,10 @@ class CircleChart :
         radii = normalize_to( radii, self.MaxRadius )
 
         bar_origin = self.Origin.AddSize( Size(0, self.CategoryDistance+self.CategoryHeight) )
-        bar_rects = get_rects_horiz( bar_origin, Size(self.MaxRadius*2, self.MaxRadius*2), self.CircleDistance, numpoints )
+        bar_rects = get_rects_horiz( bar_origin, Size(self.MaxRadius*2, self.MaxRadius*2), self.HorizontalDistance, numpoints )
         centers = [ r.Center for r in bar_rects ]
         circlerects = [ Rectangle.FromPointAndRadius(c,r) for (c,r) in zip(centers,radii) ]
-        cat_rects = get_rects_horiz( self.Origin , Size(2*self.MaxRadius,self.CategoryHeight), self.CircleDistance, numpoints )
+        cat_rects = get_rects_horiz( self.Origin , Size(2*self.MaxRadius,self.CategoryHeight), self.HorizontalDistance, numpoints )
 
         # draw circle
         circleshapes = drawovals(page, circlerects)
