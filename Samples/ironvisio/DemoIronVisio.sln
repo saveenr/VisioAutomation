@@ -5,6 +5,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DemoIronVisio", "DemoIronVi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisUtil", "VisUtil\VisUtil.csproj", "{451CE5C6-6962-4B75-8580-8B7FC036E4CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoGraphicsPy", "InfoGraphicsPy\InfoGraphicsPy.csproj", "{6B44004C-019C-4169-BFC1-A610D1453DEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{451CE5C6-6962-4B75-8580-8B7FC036E4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{451CE5C6-6962-4B75-8580-8B7FC036E4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{451CE5C6-6962-4B75-8580-8B7FC036E4CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B44004C-019C-4169-BFC1-A610D1453DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B44004C-019C-4169-BFC1-A610D1453DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B44004C-019C-4169-BFC1-A610D1453DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B44004C-019C-4169-BFC1-A610D1453DEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
