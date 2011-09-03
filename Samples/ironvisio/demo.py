@@ -1,3 +1,14 @@
+import sys
+import clr
+import System
+import os
+
+script_path = System.IO.Path.GetDirectoryName(__file__)
+visutildll_file = System.IO.Path.Combine( script_path, r"VisUtil/bin/Debug/VisUtil.Dll" )
+clr.AddReferenceToFileAndPath( visutildll_file )
+import VisUtil
+
+
 from ironvisio import *
 import charting
 
@@ -6,19 +17,6 @@ docs = app.Documents
 doc = docs.Add("")
 page = app.ActivePage
 
-values = [5,2,3,7,4]
-category_labels = ["A", "B", "C", "D", "E"]
+VisUtil.DrawUtil.DrawCircleFromCenter( page, 2, 4, 1.5)
 
-chart1= charting.VerticalBarChart()
-chart1.DataPoints = [ charting.DataPoint(v) for v in values ]
-chart1.Categories = category_labels 
-chart1.Origin = charting.Point(0.5,0)
-
-chart2= charting.CircleChart()
-chart2.DataPoints = [ charting.DataPoint(v) for v in values ]
-chart2.Categories = category_labels 
-chart2.Origin = charting.Point(0.5,4)
-
-
-chart1.Draw(page)
-chart2.Draw(page)
+System.Console.ReadKey()
