@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
 using SEC = Microsoft.Office.Interop.Visio.VisSectionIndices;
 using ROW = Microsoft.Office.Interop.Visio.VisRowIndices;
 using CEL = Microsoft.Office.Interop.Visio.VisCellIndices;
@@ -81,7 +80,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Controls_YDyn { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlYDyn); } }
 
         // Document Properties
-
         public static SRC AddMarkup { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocAddMarkup); } }
         public static SRC DocLangID { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocLangID); } }
         public static SRC LockPreview { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocLockPreview); } }
@@ -89,8 +87,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC PreviewQuality { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocPreviewQuality); } }
         public static SRC PreviewScope { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocPreviewScope); } }
         public static SRC ViewMarkup { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocViewMarkup); } }
-
-
+        
         // Events
         public static SRC EventDblClick { get { return new SRC(SEC.visSectionObject, ROW.visRowEvent, CEL.visEvtCellDblClick); } }
         public static SRC EventDrop { get { return new SRC(SEC.visSectionObject, ROW.visRowEvent, CEL.visEvtCellDrop); } }
@@ -104,23 +101,20 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ImgOffsetY { get { return new SRC(SEC.visSectionObject, ROW.visRowForeign, CEL.visFrgnImgOffsetY); } }
         public static SRC ImgWidth { get { return new SRC(SEC.visSectionObject, ROW.visRowForeign, CEL.visFrgnImgWidth); } }
 
-
         // Geometry
         public static SRC Geometry_A { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visBow); } }
         public static SRC Geometry_B { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visControlX); } }
         public static SRC Geometry_C { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visEccentricityAngle); } }
         public static SRC Geometry_D { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visAspectRatio); } }
         public static SRC Geometry_E { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visNURBSData); } }
+        public static SRC Geometry_X { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visX); } }
+        public static SRC Geometry_Y { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visY); } }
         public static SRC Geometry_NoFill { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoFill); } }
         public static SRC Geometry_NoLine { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoLine); } }
         public static SRC Geometry_NoShow { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoShow); } }
         public static SRC Geometry_NoSnap { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoSnap); } }
-        public static SRC Geometry_X { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visX); } }
-        public static SRC Geometry_Y { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visY); } }
-
 
         // Fill Format
-
         public static SRC FillBkgnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillBkgnd); } }
         public static SRC FillBkgndTrans { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillBkgndTrans); } }
         public static SRC FillForegnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillForegnd); } }
@@ -144,7 +138,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC WalkPreference { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visWalkPref); } }
 
         // GroupProperties
-
         public static SRC DisplayMode { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupDisplayMode); } }
         public static SRC DontMoveChildren { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupDontMoveChildren); } }
         public static SRC IsDropTarget { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupIsDropTarget); } }
@@ -153,7 +146,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC SelectMode { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupSelectMode); } }
 
         // Hyperlinks
-
         public static SRC Hyperlink_Address { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkAddress); } }
         public static SRC Hyperlink_Default { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkDefault); } }
         public static SRC Hyperlink_Description { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkDescription); } }
@@ -172,7 +164,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Gamma { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageGamma); } }
         public static SRC Sharpen { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageSharpen); } }
         public static SRC Transparency { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageTransparency); } }
-
 
         // Line format
         public static SRC BeginArrow { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineBeginArrow); } }
@@ -371,7 +362,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC User_Prompt { get { return new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserPrompt); } }
         public static SRC User_Value { get { return new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserValue); } }
 
-
         // Fields
         public static SRC Fields_Calendar { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldCalendar); } }
         public static SRC Fields_Format { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldFormat); } }
@@ -432,8 +422,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ShapeRouteStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORouteStyle); } }
         public static SRC ShapeSplit { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplit); } }
         public static SRC ShapeSplittable { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplittable); } }
-
-        // Static Methods
 
         public static Dictionary<string, SRC> GetSRCDictionary()
         {
