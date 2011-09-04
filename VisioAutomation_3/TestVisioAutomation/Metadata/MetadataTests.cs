@@ -83,6 +83,7 @@ namespace TestVisioAutomation
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
 
             var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
+            Assert.IsTrue(va_name_to_src.Count>300);
 
             TestHelper.AssertNoDuplicates(visio_2007_cells.Select(i => i.NameCode));
 

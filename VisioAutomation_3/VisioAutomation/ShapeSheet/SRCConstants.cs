@@ -11,515 +11,447 @@ namespace VisioAutomation.ShapeSheet
 {
     public static class SRCConstants
     {
-        private static SRC.SRCFromCellIndex align = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowAlign);
-        private static SRC.SRCFromCellIndex doc = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowDoc);
-        private static SRC.SRCFromCellIndex event_ = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowEvent);
-        private static SRC.SRCFromCellIndex foreign = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowForeign);
-        private static SRC.SRCFromCellIndex fill = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowFill);
-        private static SRC.SRCFromCellIndex misc = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowMisc);
-        private static SRC.SRCFromCellIndex group_ = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowGroup);
-        private static SRC.SRCFromCellIndex image = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowImage);
-        private static SRC.SRCFromCellIndex line = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowLine);
-        private static SRC.SRCFromCellIndex calendar = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowMisc);
-        private static SRC.SRCFromCellIndex oned = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowXForm1D);
-        private static SRC.SRCFromCellIndex pagelayout = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowPageLayout);
-        private static SRC.SRCFromCellIndex printprops = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowPrintProperties);
-        private static SRC.SRCFromCellIndex page = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowPage);
-        private static SRC.SRCFromCellIndex lock_ = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowLock);
-        private static SRC.SRCFromCellIndex rulergrid = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowRulerGrid);
-        private static SRC.SRCFromCellIndex xformout = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowXFormOut);
-        private static SRC.SRCFromCellIndex textxfrm = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowTextXForm);
-        private static SRC.SRCFromCellIndex text = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowText);
-        private static SRC.SRCFromCellIndex style = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowStyle);
-        private static SRC.SRCFromCellIndex shapelayout = SRC.GetSRCFactory(SEC.visSectionObject, ROW.visRowShapeLayout);
-
-
-        private static SRC.SRCFromCellIndex action = SRC.GetSRCFactory(SEC.visSectionAction, ROW.visRowAction);
-        private static SRC.SRCFromCellIndex annotation = SRC.GetSRCFactory(SEC.visSectionAnnotation, ROW.visRowAnnotation);
-        private static SRC.SRCFromCellIndex char_ = SRC.GetSRCFactory(SEC.visSectionCharacter, ROW.visRowCharacter);
-        private static SRC.SRCFromCellIndex connections = SRC.GetSRCFactory(SEC.visSectionConnectionPts, ROW.visRowConnectionPts);
-        private static SRC.SRCFromCellIndex controls = SRC.GetSRCFactory(SEC.visSectionControls, ROW.visRowControl);
-        private static SRC.SRCFromCellIndex geomvertex = SRC.GetSRCFactory(SEC.visSectionFirstComponent, ROW.visRowVertex);
-        private static SRC.SRCFromCellIndex geomcomponent = SRC.GetSRCFactory(SEC.visSectionFirstComponent, ROW.visRowComponent);
-        private static SRC.SRCFromCellIndex hyperlink_ = SRC.GetSRCFactory(SEC.visSectionHyperlink, ROW.visRow1stHyperlink);
-        private static SRC.SRCFromCellIndex para = SRC.GetSRCFactory(SEC.visSectionParagraph, ROW.visRowParagraph);
-        private static SRC.SRCFromCellIndex reviewer = SRC.GetSRCFactory(SEC.visSectionReviewer, ROW.visRowReviewer);
-        private static SRC.SRCFromCellIndex prop = SRC.GetSRCFactory(SEC.visSectionProp, ROW.visRowProp);
-        private static SRC.SRCFromCellIndex layer = SRC.GetSRCFactory(SEC.visSectionLayer, ROW.visRowLayer);
-        private static SRC.SRCFromCellIndex user = SRC.GetSRCFactory(SEC.visSectionUser, ROW.visRowUser);
-        private static SRC.SRCFromCellIndex field = SRC.GetSRCFactory(SEC.visSectionTextField, ROW.visRowField);
-        private static SRC.SRCFromCellIndex smarttag = SRC.GetSRCFactory(SEC.visSectionSmartTag, ROW.visRowSmartTag);
-        private static SRC.SRCFromCellIndex tab = SRC.GetSRCFactory(SEC.visSectionTab, ROW.visRowTab);
-
         // Actions
-        public static readonly SRC Actions_Action = action(CEL.visActionAction);
-        public static readonly SRC Actions_BeginGroup = action(CEL.visActionBeginGroup);
-        public static readonly SRC Actions_ButtonFace = action(CEL.visActionButtonFace);
-        public static readonly SRC Actions_Checked = action(CEL.visActionChecked);
-        public static readonly SRC Actions_Disabled = action(CEL.visActionDisabled);
-        public static readonly SRC Actions_Invisible = action(CEL.visActionInvisible);
-        public static readonly SRC Actions_Menu = action(CEL.visActionMenu);
-        public static readonly SRC Actions_ReadOnly = action(CEL.visActionReadOnly);
-        public static readonly SRC Actions_SortKey = action(CEL.visActionSortKey);
-        public static readonly SRC Actions_TagName = action(CEL.visActionTagName);
+        public static SRC Actions_Action { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionAction); } }
+        public static SRC Actions_BeginGroup { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionBeginGroup); } }
+        public static SRC Actions_ButtonFace { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionButtonFace); } }
+        public static SRC Actions_Checked { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionChecked); } }
+        public static SRC Actions_Disabled { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionDisabled); } }
+        public static SRC Actions_Invisible { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionInvisible); } }
+        public static SRC Actions_Menu { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionMenu); } }
+        public static SRC Actions_ReadOnly { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionReadOnly); } }
+        public static SRC Actions_SortKey { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionSortKey); } }
+        public static SRC Actions_TagName { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionTagName); } }
 
         // Alignment
-        public static readonly SRC AlignBottom = align(CEL.visAlignBottom);
-        public static readonly SRC AlignCenter = align(CEL.visAlignCenter);
-        public static readonly SRC AlignLeft = align(CEL.visAlignLeft);
-        public static readonly SRC AlignMiddle = align(CEL.visAlignMiddle);
-        public static readonly SRC AlignRight = align(CEL.visAlignRight);
-        public static readonly SRC AlignTop = align(CEL.visAlignTop);
+        public static SRC AlignBottom { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignBottom); } }
+        public static SRC AlignCenter { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignCenter); } }
+        public static SRC AlignLeft { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignLeft); } }
+        public static SRC AlignMiddle { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignMiddle); } }
+        public static SRC AlignRight { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignRight); } }
+        public static SRC AlignTop { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignTop); } }
 
         // Annotation
-        public static readonly SRC Annotation_Comment = annotation(CEL.visAnnotationComment);
-        public static readonly SRC Annotation_Date = annotation(CEL.visAnnotationDate);
-        public static readonly SRC Annotation_LangID = annotation(CEL.visAnnotationLangID);
-        public static readonly SRC Annotation_MarkerIndex = annotation(CEL.visAnnotationMarkerIndex);
-        public static readonly SRC Annotation_X = annotation(CEL.visAnnotationX);
-        public static readonly SRC Annotation_Y = annotation(CEL.visAnnotationY);
+        public static SRC Annotation_Comment { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationComment); } }
+        public static SRC Annotation_Date { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationDate); } }
+        public static SRC Annotation_LangID { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationLangID); } }
+        public static SRC Annotation_MarkerIndex { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationMarkerIndex); } }
+        public static SRC Annotation_X { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationX); } }
+        public static SRC Annotation_Y { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationY); } }
 
         // Character
-        public static readonly SRC Char_AsianFont = char_(CEL.visCharacterAsianFont);
-        public static readonly SRC Char_Case = char_(CEL.visCharacterCase);
-        public static readonly SRC Char_Color = char_(CEL.visCharacterColor);
-        public static readonly SRC Char_ComplexScriptFont = char_(CEL.visCharacterComplexScriptFont);
-        public static readonly SRC Char_ComplexScriptSize = char_(CEL.visCharacterComplexScriptSize);
-        public static readonly SRC Char_DoubleStrikethrough = char_(CEL.visCharacterDoubleStrikethrough);
-        public static readonly SRC Char_DblUnderline = char_(CEL.visCharacterDblUnderline);
-        public static readonly SRC Char_Font = char_(CEL.visCharacterFont);
-        public static readonly SRC Char_LangID = char_(CEL.visCharacterLangID);
-        public static readonly SRC Char_Locale = char_(CEL.visCharacterLocale);
-        public static readonly SRC Char_LocalizeFont = char_(CEL.visCharacterLocalizeFont);
-        public static readonly SRC Char_Overline = char_(CEL.visCharacterOverline);
-        public static readonly SRC Char_Perpendicular = char_(CEL.visCharacterPerpendicular);
-        public static readonly SRC Char_Pos = char_(CEL.visCharacterPos);
-        public static readonly SRC Char_RTLText = char_(CEL.visCharacterRTLText);
-        public static readonly SRC Char_FontScale = char_(CEL.visCharacterFontScale);
-        public static readonly SRC Char_Size = char_(CEL.visCharacterSize);
-        public static readonly SRC Char_Letterspace = char_(CEL.visCharacterLetterspace);
-        public static readonly SRC Char_Strikethru = char_(CEL.visCharacterStrikethru);
-        public static readonly SRC Char_Style = char_(CEL.visCharacterStyle);
-        public static readonly SRC Char_ColorTrans = char_(CEL.visCharacterColorTrans);
-
-        public static readonly SRC Char_UseVertical = char_(CEL.visCharacterUseVertical);
+        public static SRC Char_AsianFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterAsianFont); } }
+        public static SRC Char_Case { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterCase); } }
+        public static SRC Char_Color { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColor); } }
+        public static SRC Char_ComplexScriptFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptFont); } }
+        public static SRC Char_ComplexScriptSize { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptSize); } }
+        public static SRC Char_DoubleStrikethrough { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDoubleStrikethrough); } }
+        public static SRC Char_DblUnderline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDblUnderline); } }
+        public static SRC Char_Font { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFont); } }
+        public static SRC Char_LangID { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLangID); } }
+        public static SRC Char_Locale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocale); } }
+        public static SRC Char_LocalizeFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocalizeFont); } }
+        public static SRC Char_Overline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterOverline); } }
+        public static SRC Char_Perpendicular { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPerpendicular); } }
+        public static SRC Char_Pos { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPos); } }
+        public static SRC Char_RTLText { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterRTLText); } }
+        public static SRC Char_FontScale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFontScale); } }
+        public static SRC Char_Size { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterSize); } }
+        public static SRC Char_Letterspace { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLetterspace); } }
+        public static SRC Char_Strikethru { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStrikethru); } }
+        public static SRC Char_Style { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStyle); } }
+        public static SRC Char_ColorTrans { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColorTrans); } }
+        public static SRC Char_UseVertical { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical); } }
 
         // Connections
-        public static readonly SRC Connections_D = connections(CEL.visCnnctD);
-        public static readonly SRC Connections_DirX = connections(CEL.visCnnctDirX);
-        public static readonly SRC Connections_DirY = connections(CEL.visCnnctDirY);
-        public static readonly SRC Connections_Type = connections(CEL.visCnnctType);
-        public static readonly SRC Connections_X = connections(CEL.visX);
-        public static readonly SRC Connections_Y = connections(CEL.visY);
+        public static SRC Connections_D { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visCnnctD); } }
+        public static SRC Connections_DirX { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visCnnctDirX); } }
+        public static SRC Connections_DirY { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visCnnctDirY); } }
+        public static SRC Connections_Type { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visCnnctType); } }
+        public static SRC Connections_X { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visX); } }
+        public static SRC Connections_Y { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visY); } }
 
         // Controls
-        public static readonly SRC Controls_CanGlue = controls(CEL.visCtlGlue);
-        public static readonly SRC Controls_Tip = controls(CEL.visCtlTip);
-        public static readonly SRC Controls_XCon = controls(CEL.visCtlXCon);
-        public static readonly SRC Controls_X = controls(CEL.visCtlX);
-        public static readonly SRC Controls_XDyn = controls(CEL.visCtlXDyn);
-        public static readonly SRC Controls_YCon = controls(CEL.visCtlYCon);
-        public static readonly SRC Controls_Y = controls(CEL.visCtlY);
-        public static readonly SRC Controls_YDyn = controls(CEL.visCtlYDyn);
+        public static SRC Controls_CanGlue { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlGlue); } }
+        public static SRC Controls_Tip { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlTip); } }
+        public static SRC Controls_XCon { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlXCon); } }
+        public static SRC Controls_X { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlX); } }
+        public static SRC Controls_XDyn { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlXDyn); } }
+        public static SRC Controls_YCon { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlYCon); } }
+        public static SRC Controls_Y { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlY); } }
+        public static SRC Controls_YDyn { get { return new SRC(SEC.visSectionControls, ROW.visRowControl, CEL.visCtlYDyn); } }
 
         // Document Properties
 
-        public static readonly SRC AddMarkup = doc(CEL.visDocAddMarkup);
-        public static readonly SRC DocLangID = doc(CEL.visDocLangID);
-        public static readonly SRC LockPreview = doc(CEL.visDocLockPreview);
-        public static readonly SRC OutputFormat = doc(CEL.visDocOutputFormat);
-        public static readonly SRC PreviewQuality = doc(CEL.visDocPreviewQuality);
-        public static readonly SRC PreviewScope = doc(CEL.visDocPreviewScope);
-        public static readonly SRC ViewMarkup = doc(CEL.visDocViewMarkup);
+        public static SRC AddMarkup { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocAddMarkup); } }
+        public static SRC DocLangID { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocLangID); } }
+        public static SRC LockPreview { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocLockPreview); } }
+        public static SRC OutputFormat { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocOutputFormat); } }
+        public static SRC PreviewQuality { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocPreviewQuality); } }
+        public static SRC PreviewScope { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocPreviewScope); } }
+        public static SRC ViewMarkup { get { return new SRC(SEC.visSectionObject, ROW.visRowDoc, CEL.visDocViewMarkup); } }
 
 
         // Events
-        public static readonly SRC EventDblClick = event_(CEL.visEvtCellDblClick);
-        public static readonly SRC EventDrop = event_(CEL.visEvtCellDrop);
-        public static readonly SRC EventMultiDrop = event_(CEL.visEvtCellMultiDrop);
-        public static readonly SRC EventXFMod = event_(CEL.visEvtCellXFMod);
-        public static readonly SRC TheText = event_(CEL.visEvtCellTheText);
+        public static SRC EventDblClick { get { return new SRC(SEC.visSectionObject, ROW.visRowEvent, CEL.visEvtCellDblClick); } }
+        public static SRC EventDrop { get { return new SRC(SEC.visSectionObject, ROW.visRowEvent, CEL.visEvtCellDrop); } }
+        public static SRC EventMultiDrop { get { return new SRC(SEC.visSectionObject, ROW.visRowEvent, CEL.visEvtCellMultiDrop); } }
+        public static SRC EventXFMod { get { return new SRC(SEC.visSectionObject, ROW.visRowEvent, CEL.visEvtCellXFMod); } }
+        public static SRC TheText { get { return new SRC(SEC.visSectionObject, ROW.visRowEvent, CEL.visEvtCellTheText); } }
 
         // ForeignImageInfo
-        public static readonly SRC ImgHeight = foreign(CEL.visFrgnImgHeight);
-        public static readonly SRC ImgOffsetX = foreign(CEL.visFrgnImgOffsetX);
-        public static readonly SRC ImgOffsetY = foreign(CEL.visFrgnImgOffsetY);
-        public static readonly SRC ImgWidth = foreign(CEL.visFrgnImgWidth);
+        public static SRC ImgHeight { get { return new SRC(SEC.visSectionObject, ROW.visRowForeign, CEL.visFrgnImgHeight); } }
+        public static SRC ImgOffsetX { get { return new SRC(SEC.visSectionObject, ROW.visRowForeign, CEL.visFrgnImgOffsetX); } }
+        public static SRC ImgOffsetY { get { return new SRC(SEC.visSectionObject, ROW.visRowForeign, CEL.visFrgnImgOffsetY); } }
+        public static SRC ImgWidth { get { return new SRC(SEC.visSectionObject, ROW.visRowForeign, CEL.visFrgnImgWidth); } }
 
 
         // Geometry
-        public static readonly SRC Geometry_A = geomvertex(CEL.visBow);
-        public static readonly SRC Geometry_B = geomvertex(CEL.visControlX);
-        public static readonly SRC Geometry_C = geomvertex(CEL.visEccentricityAngle);
-        public static readonly SRC Geometry_D = geomvertex(CEL.visAspectRatio);
-        public static readonly SRC Geometry_E = geomvertex(CEL.visNURBSData);
-        public static readonly SRC Geometry_X = geomvertex(CEL.visX);
-        public static readonly SRC Geometry_Y = geomvertex(CEL.visY);
-
-        public static readonly SRC Geometry_NoFill = geomcomponent(CEL.visCompNoFill);
-        public static readonly SRC Geometry_NoLine = geomcomponent(CEL.visCompNoLine);
-        public static readonly SRC Geometry_NoShow = geomcomponent(CEL.visCompNoShow);
-        public static readonly SRC Geometry_NoSnap = geomcomponent(CEL.visCompNoSnap);
+        public static SRC Geometry_A { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visBow); } }
+        public static SRC Geometry_B { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visControlX); } }
+        public static SRC Geometry_C { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visEccentricityAngle); } }
+        public static SRC Geometry_D { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visAspectRatio); } }
+        public static SRC Geometry_E { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visNURBSData); } }
+        public static SRC Geometry_NoFill { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoFill); } }
+        public static SRC Geometry_NoLine { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoLine); } }
+        public static SRC Geometry_NoShow { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoShow); } }
+        public static SRC Geometry_NoSnap { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoSnap); } }
+        public static SRC Geometry_X { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visX); } }
+        public static SRC Geometry_Y { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowVertex, CEL.visY); } }
 
 
         // Fill Format
 
-        public static readonly SRC FillBkgnd = fill(CEL.visFillBkgnd);
-        public static readonly SRC FillBkgndTrans = fill(CEL.visFillBkgndTrans);
-        public static readonly SRC FillForegnd = fill(CEL.visFillForegnd);
-        public static readonly SRC FillForegndTrans = fill(CEL.visFillForegndTrans);
-        public static readonly SRC FillPattern = fill(CEL.visFillPattern);
-        public static readonly SRC ShapeShdwObliqueAngle = fill(CEL.visFillShdwObliqueAngle);
-        public static readonly SRC ShapeShdwOffsetX = fill(CEL.visFillShdwOffsetX);
-        public static readonly SRC ShapeShdwOffsetY = fill(CEL.visFillShdwOffsetY);
-        public static readonly SRC ShapeShdwScaleFactor = fill(CEL.visFillShdwScaleFactor);
-        public static readonly SRC ShapeShdwType = fill(CEL.visFillShdwType);
-        public static readonly SRC ShdwBkgnd = fill(CEL.visFillShdwBkgnd);
-        public static readonly SRC ShdwBkgndTrans = fill(CEL.visFillShdwBkgndTrans);
-        public static readonly SRC ShdwForegnd = fill(CEL.visFillShdwForegnd);
-        public static readonly SRC ShdwForegndTrans = fill(CEL.visFillShdwForegndTrans);
-        public static readonly SRC ShdwPattern = fill(CEL.visFillShdwPattern);
+        public static SRC FillBkgnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillBkgnd); } }
+        public static SRC FillBkgndTrans { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillBkgndTrans); } }
+        public static SRC FillForegnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillForegnd); } }
+        public static SRC FillForegndTrans { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillForegndTrans); } }
+        public static SRC FillPattern { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillPattern); } }
+        public static SRC ShapeShdwObliqueAngle { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwObliqueAngle); } }
+        public static SRC ShapeShdwOffsetX { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwOffsetX); } }
+        public static SRC ShapeShdwOffsetY { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwOffsetY); } }
+        public static SRC ShapeShdwScaleFactor { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwScaleFactor); } }
+        public static SRC ShapeShdwType { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwType); } }
+        public static SRC ShdwBkgnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwBkgnd); } }
+        public static SRC ShdwBkgndTrans { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwBkgndTrans); } }
+        public static SRC ShdwForegnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwForegnd); } }
+        public static SRC ShdwForegndTrans { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwForegndTrans); } }
+        public static SRC ShdwPattern { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillShdwPattern); } }
 
         // GlueInfo
-        public static readonly SRC BegTrigger = misc(CEL.visBegTrigger);
-        public static readonly SRC EndTrigger = misc(CEL.visEndTrigger);
-        public static readonly SRC GlueType = misc(CEL.visGlueType);
-        public static readonly SRC WalkPreference = misc(CEL.visWalkPref);
+        public static SRC BegTrigger { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visBegTrigger); } }
+        public static SRC EndTrigger { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visEndTrigger); } }
+        public static SRC GlueType { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visGlueType); } }
+        public static SRC WalkPreference { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visWalkPref); } }
 
         // GroupProperties
 
-        public static readonly SRC DisplayMode = group_(CEL.visGroupDisplayMode);
-        public static readonly SRC DontMoveChildren = group_(CEL.visGroupDontMoveChildren);
-        public static readonly SRC IsDropTarget = group_(CEL.visGroupIsDropTarget);
-        public static readonly SRC IsSnapTarget = group_(CEL.visGroupIsSnapTarget);
-        public static readonly SRC IsTextEditTarget = group_(CEL.visGroupIsTextEditTarget);
-        public static readonly SRC SelectMode = group_(CEL.visGroupSelectMode);
+        public static SRC DisplayMode { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupDisplayMode); } }
+        public static SRC DontMoveChildren { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupDontMoveChildren); } }
+        public static SRC IsDropTarget { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupIsDropTarget); } }
+        public static SRC IsSnapTarget { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupIsSnapTarget); } }
+        public static SRC IsTextEditTarget { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupIsTextEditTarget); } }
+        public static SRC SelectMode { get { return new SRC(SEC.visSectionObject, ROW.visRowGroup, CEL.visGroupSelectMode); } }
 
         // Hyperlinks
 
-        public static readonly SRC Hyperlink_Address = hyperlink_(CEL.visHLinkAddress);
-        public static readonly SRC Hyperlink_Default = hyperlink_(CEL.visHLinkDefault);
-        public static readonly SRC Hyperlink_Description = hyperlink_(CEL.visHLinkDescription);
-        public static readonly SRC Hyperlink_ExtraInfo = hyperlink_(CEL.visHLinkExtraInfo);
-        public static readonly SRC Hyperlink_Frame = hyperlink_(CEL.visHLinkFrame);
-        public static readonly SRC Hyperlink_Invisible = hyperlink_(CEL.visHLinkInvisible);
-        public static readonly SRC Hyperlink_NewWindow = hyperlink_(CEL.visHLinkNewWin);
-        public static readonly SRC Hyperlink_SortKey = hyperlink_(CEL.visHLinkSortKey);
-        public static readonly SRC Hyperlink_SubAddress = hyperlink_(CEL.visHLinkSubAddress);
+        public static SRC Hyperlink_Address { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkAddress); } }
+        public static SRC Hyperlink_Default { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkDefault); } }
+        public static SRC Hyperlink_Description { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkDescription); } }
+        public static SRC Hyperlink_ExtraInfo { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkExtraInfo); } }
+        public static SRC Hyperlink_Frame { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkFrame); } }
+        public static SRC Hyperlink_Invisible { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkInvisible); } }
+        public static SRC Hyperlink_NewWindow { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkNewWin); } }
+        public static SRC Hyperlink_SortKey { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkSortKey); } }
+        public static SRC Hyperlink_SubAddress { get { return new SRC(SEC.visSectionHyperlink, ROW.visRow1stHyperlink, CEL.visHLinkSubAddress); } }
 
         // Image Properties
-        public static readonly SRC Blur = image(CEL.visImageBlur);
-        public static readonly SRC Brightness = image(CEL.visImageBrightness);
-        public static readonly SRC Contrast = image(CEL.visImageContrast);
-        public static readonly SRC Denoise = image(CEL.visImageDenoise);
-        public static readonly SRC Gamma = image(CEL.visImageGamma);
-        public static readonly SRC Sharpen = image(CEL.visImageSharpen);
-        public static readonly SRC Transparency = image(CEL.visImageTransparency);
+        public static SRC Blur { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageBlur); } }
+        public static SRC Brightness { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageBrightness); } }
+        public static SRC Contrast { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageContrast); } }
+        public static SRC Denoise { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageDenoise); } }
+        public static SRC Gamma { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageGamma); } }
+        public static SRC Sharpen { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageSharpen); } }
+        public static SRC Transparency { get { return new SRC(SEC.visSectionObject, ROW.visRowImage, CEL.visImageTransparency); } }
 
 
         // Line format
-        public static readonly SRC BeginArrow = line(CEL.visLineBeginArrow);
-        public static readonly SRC BeginArrowSize = line(CEL.visLineBeginArrowSize);
-        public static readonly SRC EndArrow = line(CEL.visLineEndArrow);
-        public static readonly SRC EndArrowSize = line(CEL.visLineEndArrowSize);
-        public static readonly SRC LineCap = line(CEL.visLineEndCap);
-        public static readonly SRC LineColor = line(CEL.visLineColor);
-        public static readonly SRC LineColorTrans = line(CEL.visLineColorTrans);
-        public static readonly SRC LinePattern = line(CEL.visLinePattern);
-        public static readonly SRC LineWeight = line(CEL.visLineWeight);
-        public static readonly SRC Rounding = line(CEL.visLineRounding);
-
+        public static SRC BeginArrow { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineBeginArrow); } }
+        public static SRC BeginArrowSize { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineBeginArrowSize); } }
+        public static SRC EndArrow { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineEndArrow); } }
+        public static SRC EndArrowSize { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineEndArrowSize); } }
+        public static SRC LineCap { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineEndCap); } }
+        public static SRC LineColor { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineColor); } }
+        public static SRC LineColorTrans { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineColorTrans); } }
+        public static SRC LinePattern { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLinePattern); } }
+        public static SRC LineWeight { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineWeight); } }
+        public static SRC Rounding { get { return new SRC(SEC.visSectionObject, ROW.visRowLine, CEL.visLineRounding); } }
 
         // Miscellaneous
-
-        public static readonly SRC Calendar = calendar(CEL.visObjCalendar);
-        public static readonly SRC Comment = calendar(CEL.visComment);
-        public static readonly SRC DropOnPageScale = calendar(CEL.visObjDropOnPageScale);
-        public static readonly SRC DynFeedback = calendar(CEL.visDynFeedback);
-        public static readonly SRC IsDropSource = calendar(CEL.visDropSource);
-        public static readonly SRC LangID = calendar(CEL.visObjLangID);
-        public static readonly SRC LocalizeMerge = calendar(CEL.visObjLocalizeMerge);
-        public static readonly SRC NoAlignBox = calendar(CEL.visNoAlignBox);
-        public static readonly SRC NoCtlHandles = calendar(CEL.visNoCtlHandles);
-        public static readonly SRC NoLiveDynamics = calendar(CEL.visNoLiveDynamics);
-        public static readonly SRC NonPrinting = calendar(CEL.visNonPrinting);
-        public static readonly SRC NoObjHandles = calendar(CEL.visNoObjHandles);
-        public static readonly SRC ObjType = calendar(CEL.visLOFlags);
-        public static readonly SRC UpdateAlignBox = calendar(CEL.visUpdateAlignBox);
+        public static SRC Calendar { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visObjCalendar); } }
+        public static SRC Comment { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visComment); } }
+        public static SRC DropOnPageScale { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visObjDropOnPageScale); } }
+        public static SRC DynFeedback { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visDynFeedback); } }
+        public static SRC IsDropSource { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visDropSource); } }
+        public static SRC LangID { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visObjLangID); } }
+        public static SRC LocalizeMerge { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visObjLocalizeMerge); } }
+        public static SRC NoAlignBox { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visNoAlignBox); } }
+        public static SRC NoCtlHandles { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visNoCtlHandles); } }
+        public static SRC NoLiveDynamics { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visNoLiveDynamics); } }
+        public static SRC NonPrinting { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visNonPrinting); } }
+        public static SRC NoObjHandles { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visNoObjHandles); } }
+        public static SRC ObjType { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visLOFlags); } }
+        public static SRC UpdateAlignBox { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visUpdateAlignBox); } }
 
         // 1d endpoints
-
-        public static readonly SRC BeginX = oned(CEL.vis1DBeginX);
-        public static readonly SRC BeginY = oned(CEL.vis1DBeginY);
-        public static readonly SRC EndX = oned(CEL.vis1DEndX);
-        public static readonly SRC EndY = oned(CEL.vis1DEndY);
-
+        public static SRC BeginX { get { return new SRC(SEC.visSectionObject, ROW.visRowXForm1D, CEL.vis1DBeginX); } }
+        public static SRC BeginY { get { return new SRC(SEC.visSectionObject, ROW.visRowXForm1D, CEL.vis1DBeginY); } }
+        public static SRC EndX { get { return new SRC(SEC.visSectionObject, ROW.visRowXForm1D, CEL.vis1DEndX); } }
+        public static SRC EndY { get { return new SRC(SEC.visSectionObject, ROW.visRowXForm1D, CEL.vis1DEndY); } }
 
         // page layout
-        public static readonly SRC AvenueSizeX = pagelayout(CEL.visPLOAvenueSizeX);
-        public static readonly SRC AvenueSizeY = pagelayout(CEL.visPLOAvenueSizeY);
-        public static readonly SRC BlockSizeX = pagelayout(CEL.visPLOBlockSizeX);
-        public static readonly SRC BlockSizeY = pagelayout(CEL.visPLOBlockSizeY);
-        public static readonly SRC CtrlAsInput = pagelayout(CEL.visPLOCtrlAsInput);
-        public static readonly SRC DynamicsOff = pagelayout(CEL.visPLODynamicsOff);
-        public static readonly SRC EnableGrid = pagelayout(CEL.visPLOEnableGrid);
-        public static readonly SRC LineAdjustFrom = pagelayout(CEL.visPLOLineAdjustFrom);
-        public static readonly SRC LineAdjustTo = pagelayout(CEL.visPLOLineAdjustTo);
-        public static readonly SRC LineJumpCode = pagelayout(CEL.visPLOJumpCode);
-        public static readonly SRC LineJumpFactorX = pagelayout(CEL.visPLOJumpFactorX);
-        public static readonly SRC LineJumpFactorY = pagelayout(CEL.visPLOJumpFactorY);
-        public static readonly SRC LineJumpStyle = pagelayout(CEL.visPLOJumpStyle);
-        public static readonly SRC LineRouteExt = pagelayout(CEL.visPLOLineRouteExt);
-        public static readonly SRC LineToLineX = pagelayout(CEL.visPLOLineToLineX);
-        public static readonly SRC LineToLineY = pagelayout(CEL.visPLOLineToLineY);
-        public static readonly SRC LineToNodeX = pagelayout(CEL.visPLOLineToNodeX);
-        public static readonly SRC LineToNodeY = pagelayout(CEL.visPLOLineToNodeY);
-        public static readonly SRC PageLineJumpDirX = pagelayout(CEL.visPLOJumpDirX);
-        public static readonly SRC PageLineJumpDirY = pagelayout(CEL.visPLOJumpDirY);
-        public static readonly SRC PageShapeSplit = pagelayout(CEL.visPLOSplit);
-        public static readonly SRC PlaceDepth = pagelayout(CEL.visPLOPlaceDepth);
-        public static readonly SRC PlaceFlip = pagelayout(CEL.visPLOPlaceFlip);
-        public static readonly SRC PlaceStyle = pagelayout(CEL.visPLOPlaceStyle);
-        public static readonly SRC PlowCode = pagelayout(CEL.visPLOPlowCode);
-        public static readonly SRC ResizePage = pagelayout(CEL.visPLOResizePage);
-        public static readonly SRC RouteStyle = pagelayout(CEL.visPLORouteStyle);
-
+        public static SRC AvenueSizeX { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOAvenueSizeX); } }
+        public static SRC AvenueSizeY { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOAvenueSizeY); } }
+        public static SRC BlockSizeX { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOBlockSizeX); } }
+        public static SRC BlockSizeY { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOBlockSizeY); } }
+        public static SRC CtrlAsInput { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOCtrlAsInput); } }
+        public static SRC DynamicsOff { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLODynamicsOff); } }
+        public static SRC EnableGrid { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOEnableGrid); } }
+        public static SRC LineAdjustFrom { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOLineAdjustFrom); } }
+        public static SRC LineAdjustTo { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOLineAdjustTo); } }
+        public static SRC LineJumpCode { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOJumpCode); } }
+        public static SRC LineJumpFactorX { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOJumpFactorX); } }
+        public static SRC LineJumpFactorY { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOJumpFactorY); } }
+        public static SRC LineJumpStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOJumpStyle); } }
+        public static SRC LineRouteExt { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOLineRouteExt); } }
+        public static SRC LineToLineX { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOLineToLineX); } }
+        public static SRC LineToLineY { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOLineToLineY); } }
+        public static SRC LineToNodeX { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOLineToNodeX); } }
+        public static SRC LineToNodeY { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOLineToNodeY); } }
+        public static SRC PageLineJumpDirX { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOJumpDirX); } }
+        public static SRC PageLineJumpDirY { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOJumpDirY); } }
+        public static SRC PageShapeSplit { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOSplit); } }
+        public static SRC PlaceDepth { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOPlaceDepth); } }
+        public static SRC PlaceFlip { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOPlaceFlip); } }
+        public static SRC PlaceStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOPlaceStyle); } }
+        public static SRC PlowCode { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOPlowCode); } }
+        public static SRC ResizePage { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOResizePage); } }
+        public static SRC RouteStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLORouteStyle); } }
 
         // print properties
-
-        public static readonly SRC PageLeftMargin = printprops(CEL.visPrintPropertiesLeftMargin);
-        public static readonly SRC CenterX = printprops(CEL.visPrintPropertiesCenterX);
-        public static readonly SRC CenterY = printprops(CEL.visPrintPropertiesCenterY);
-        public static readonly SRC OnPage = printprops(CEL.visPrintPropertiesOnPage);
-        public static readonly SRC PageBottomMargin = printprops(CEL.visPrintPropertiesBottomMargin);
-        public static readonly SRC PageRightMargin = printprops(CEL.visPrintPropertiesRightMargin);
-        public static readonly SRC PagesX = printprops(CEL.visPrintPropertiesPagesX);
-        public static readonly SRC PagesY = printprops(CEL.visPrintPropertiesPagesY);
-        public static readonly SRC PageTopMargin = printprops(CEL.visPrintPropertiesTopMargin);
-        public static readonly SRC PaperKind = printprops(CEL.visPrintPropertiesPaperKind);
-        public static readonly SRC PrintGrid = printprops(CEL.visPrintPropertiesPrintGrid);
-        public static readonly SRC PrintPageOrientation = printprops(CEL.visPrintPropertiesPageOrientation);
-        public static readonly SRC ScaleX = printprops(CEL.visPrintPropertiesScaleX);
-        public static readonly SRC ScaleY = printprops(CEL.visPrintPropertiesScaleY);
-        public static readonly SRC PaperSource = printprops(CEL.visPrintPropertiesPaperSource);
+        public static SRC PageLeftMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesLeftMargin); } }
+        public static SRC CenterX { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesCenterX); } }
+        public static SRC CenterY { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesCenterY); } }
+        public static SRC OnPage { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesOnPage); } }
+        public static SRC PageBottomMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesBottomMargin); } }
+        public static SRC PageRightMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesRightMargin); } }
+        public static SRC PagesX { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesPagesX); } }
+        public static SRC PagesY { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesPagesY); } }
+        public static SRC PageTopMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesTopMargin); } }
+        public static SRC PaperKind { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesPaperKind); } }
+        public static SRC PrintGrid { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesPrintGrid); } }
+        public static SRC PrintPageOrientation { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesPageOrientation); } }
+        public static SRC ScaleX { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesScaleX); } }
+        public static SRC ScaleY { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesScaleY); } }
+        public static SRC PaperSource { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesPaperSource); } }
 
         // page properties
-
-        public static readonly SRC DrawingScale = page(CEL.visPageDrawingScale);
-        public static readonly SRC DrawingScaleType = page(CEL.visPageDrawScaleType);
-        public static readonly SRC DrawingSizeType = page(CEL.visPageDrawSizeType);
-        public static readonly SRC InhibitSnap = page(CEL.visPageInhibitSnap);
-        public static readonly SRC PageHeight = page(CEL.visPageHeight);
-        public static readonly SRC PageScale = page(CEL.visPageScale);
-        public static readonly SRC PageWidth = page(CEL.visPageWidth);
-        public static readonly SRC ShdwObliqueAngle = page(CEL.visPageShdwObliqueAngle);
-        public static readonly SRC ShdwOffsetX = page(CEL.visPageShdwOffsetX);
-        public static readonly SRC ShdwOffsetY = page(CEL.visPageShdwOffsetY);
-        public static readonly SRC ShdwScaleFactor = page(CEL.visPageShdwScaleFactor);
-        public static readonly SRC ShdwType = page(CEL.visPageShdwType);
-        public static readonly SRC UIVisibility = page(CEL.visPageUIVisibility);
+        public static SRC DrawingScale { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageDrawingScale); } }
+        public static SRC DrawingScaleType { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageDrawScaleType); } }
+        public static SRC DrawingSizeType { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageDrawSizeType); } }
+        public static SRC InhibitSnap { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageInhibitSnap); } }
+        public static SRC PageHeight { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageHeight); } }
+        public static SRC PageScale { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageScale); } }
+        public static SRC PageWidth { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageWidth); } }
+        public static SRC ShdwObliqueAngle { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwObliqueAngle); } }
+        public static SRC ShdwOffsetX { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwOffsetX); } }
+        public static SRC ShdwOffsetY { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwOffsetY); } }
+        public static SRC ShdwScaleFactor { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwScaleFactor); } }
+        public static SRC ShdwType { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwType); } }
+        public static SRC UIVisibility { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageUIVisibility); } }
 
         // paragraph
-        public static readonly SRC Para_Bullet = para(CEL.visBulletIndex);
-        public static readonly SRC Para_BulletFont = para(CEL.visBulletFont);
-        public static readonly SRC Para_BulletFontSize = para(CEL.visBulletFontSize);
-        public static readonly SRC Para_BulletStr = para(CEL.visBulletString);
-        public static readonly SRC Para_Flags = para(CEL.visFlags);
-        public static readonly SRC Para_HorzAlign = para(CEL.visHorzAlign);
-        public static readonly SRC Para_IndFirst = para(CEL.visIndentFirst);
-        public static readonly SRC Para_IndLeft = para(CEL.visIndentLeft);
-        public static readonly SRC Para_IndRight = para(CEL.visIndentRight);
-        public static readonly SRC Para_LocalizeBulletFont = para(CEL.visLocalizeBulletFont);
-        public static readonly SRC Para_SpAfter = para(CEL.visSpaceAfter);
-        public static readonly SRC Para_SpBefore = para(CEL.visSpaceBefore);
-        public static readonly SRC Para_SpLine = para(CEL.visSpaceLine);
-        public static readonly SRC Para_TextPosAfterBullet = para(CEL.visTextPosAfterBullet);
+        public static SRC Para_Bullet { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex); } }
+        public static SRC Para_BulletFont { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFont); } }
+        public static SRC Para_BulletFontSize { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletFontSize); } }
+        public static SRC Para_BulletStr { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletString); } }
+        public static SRC Para_Flags { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visFlags); } }
+        public static SRC Para_HorzAlign { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visHorzAlign); } }
+        public static SRC Para_IndFirst { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentFirst); } }
+        public static SRC Para_IndLeft { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentLeft); } }
+        public static SRC Para_IndRight { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visIndentRight); } }
+        public static SRC Para_LocalizeBulletFont { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visLocalizeBulletFont); } }
+        public static SRC Para_SpAfter { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visSpaceAfter); } }
+        public static SRC Para_SpBefore { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visSpaceBefore); } }
+        public static SRC Para_SpLine { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visSpaceLine); } }
+        public static SRC Para_TextPosAfterBullet { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visTextPosAfterBullet); } }
 
         // protection
-
-        public static readonly SRC LockAspect = lock_(CEL.visLockAspect);
-        public static readonly SRC LockBegin = lock_(CEL.visLockBegin);
-        public static readonly SRC LockCalcWH = lock_(CEL.visLockCalcWH);
-        public static readonly SRC LockCrop = lock_(CEL.visLockCrop);
-        public static readonly SRC LockCustProp = lock_(CEL.visLockCustProp);
-        public static readonly SRC LockDelete = lock_(CEL.visLockDelete);
-        public static readonly SRC LockEnd = lock_(CEL.visLockEnd);
-        public static readonly SRC LockFormat = lock_(CEL.visLockFormat);
-        public static readonly SRC LockFromGroupFormat = lock_(CEL.visLockFromGroupFormat);
-        public static readonly SRC LockGroup = lock_(CEL.visLockGroup);
-        public static readonly SRC LockHeight = lock_(CEL.visLockHeight);
-        public static readonly SRC LockMoveX = lock_(CEL.visLockMoveX);
-        public static readonly SRC LockMoveY = lock_(CEL.visLockMoveY);
-        public static readonly SRC LockRotate = lock_(CEL.visLockRotate);
-        public static readonly SRC LockSelect = lock_(CEL.visLockSelect);
-        public static readonly SRC LockTextEdit = lock_(CEL.visLockTextEdit);
-        public static readonly SRC LockThemeColors = lock_(CEL.visLockThemeColors);
-        public static readonly SRC LockThemeEffects = lock_(CEL.visLockThemeEffects);
-        public static readonly SRC LockVtxEdit = lock_(CEL.visLockVtxEdit);
-        public static readonly SRC LockWidth = lock_(CEL.visLockWidth);
-
+        public static SRC LockAspect { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockAspect); } }
+        public static SRC LockBegin { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockBegin); } }
+        public static SRC LockCalcWH { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockCalcWH); } }
+        public static SRC LockCrop { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockCrop); } }
+        public static SRC LockCustProp { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockCustProp); } }
+        public static SRC LockDelete { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockDelete); } }
+        public static SRC LockEnd { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockEnd); } }
+        public static SRC LockFormat { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockFormat); } }
+        public static SRC LockFromGroupFormat { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockFromGroupFormat); } }
+        public static SRC LockGroup { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockGroup); } }
+        public static SRC LockHeight { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockHeight); } }
+        public static SRC LockMoveX { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockMoveX); } }
+        public static SRC LockMoveY { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockMoveY); } }
+        public static SRC LockRotate { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockRotate); } }
+        public static SRC LockSelect { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockSelect); } }
+        public static SRC LockTextEdit { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockTextEdit); } }
+        public static SRC LockThemeColors { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockThemeColors); } }
+        public static SRC LockThemeEffects { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockThemeEffects); } }
+        public static SRC LockVtxEdit { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockVtxEdit); } }
+        public static SRC LockWidth { get { return new SRC(SEC.visSectionObject, ROW.visRowLock, CEL.visLockWidth); } }
 
         // ruler and grid
-
-        public static readonly SRC XGridDensity = rulergrid(CEL.visXGridDensity);
-        public static readonly SRC XGridOrigin = rulergrid(CEL.visXGridOrigin);
-        public static readonly SRC XGridSpacing = rulergrid(CEL.visXGridSpacing);
-        public static readonly SRC XRulerDensity = rulergrid(CEL.visXRulerDensity);
-        public static readonly SRC XRulerOrigin = rulergrid(CEL.visXRulerOrigin);
-        public static readonly SRC YGridDensity = rulergrid(CEL.visYGridDensity);
-        public static readonly SRC YGridOrigin = rulergrid(CEL.visYGridOrigin);
-        public static readonly SRC YGridSpacing = rulergrid(CEL.visYGridSpacing);
-        public static readonly SRC YRulerDensity = rulergrid(CEL.visYRulerDensity);
-        public static readonly SRC YRulerOrigin = rulergrid(CEL.visYRulerOrigin);
-
+        public static SRC XGridDensity { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visXGridDensity); } }
+        public static SRC XGridOrigin { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visXGridOrigin); } }
+        public static SRC XGridSpacing { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visXGridSpacing); } }
+        public static SRC XRulerDensity { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visXRulerDensity); } }
+        public static SRC XRulerOrigin { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visXRulerOrigin); } }
+        public static SRC YGridDensity { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visYGridDensity); } }
+        public static SRC YGridOrigin { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visYGridOrigin); } }
+        public static SRC YGridSpacing { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visYGridSpacing); } }
+        public static SRC YRulerDensity { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visYRulerDensity); } }
+        public static SRC YRulerOrigin { get { return new SRC(SEC.visSectionObject, ROW.visRowRulerGrid, CEL.visYRulerOrigin); } }
 
         // Shape Tranform
-
-        public static readonly SRC Angle = xformout(CEL.visXFormAngle);
-        public static readonly SRC FlipX = xformout(CEL.visXFormFlipX);
-        public static readonly SRC FlipY = xformout(CEL.visXFormFlipY);
-        public static readonly SRC Height = xformout(CEL.visXFormHeight);
-        public static readonly SRC LocPinX = xformout(CEL.visXFormLocPinX);
-        public static readonly SRC LocPinY = xformout(CEL.visXFormLocPinY);
-        public static readonly SRC PinX = xformout(CEL.visXFormPinX);
-        public static readonly SRC PinY = xformout(CEL.visXFormPinY);
-        public static readonly SRC ResizeMode = xformout(CEL.visXFormResizeMode);
-        public static readonly SRC Width = xformout(CEL.visXFormWidth);
+        public static SRC Angle { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormAngle); } }
+        public static SRC FlipX { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormFlipX); } }
+        public static SRC FlipY { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormFlipY); } }
+        public static SRC Height { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormHeight); } }
+        public static SRC LocPinX { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormLocPinX); } }
+        public static SRC LocPinY { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormLocPinY); } }
+        public static SRC PinX { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormPinX); } }
+        public static SRC PinY { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormPinY); } }
+        public static SRC ResizeMode { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormResizeMode); } }
+        public static SRC Width { get { return new SRC(SEC.visSectionObject, ROW.visRowXFormOut, CEL.visXFormWidth); } }
 
         // reviewer
-
-        public static readonly SRC Reviewer_Color = reviewer(CEL.visReviewerColor);
-        public static readonly SRC Reviewer_Initials = reviewer(CEL.visReviewerInitials);
-        public static readonly SRC Reviewer_Name = reviewer(CEL.visReviewerName);
+        public static SRC Reviewer_Color { get { return new SRC(SEC.visSectionReviewer, ROW.visRowReviewer, CEL.visReviewerColor); } }
+        public static SRC Reviewer_Initials { get { return new SRC(SEC.visSectionReviewer, ROW.visRowReviewer, CEL.visReviewerInitials); } }
+        public static SRC Reviewer_Name { get { return new SRC(SEC.visSectionReviewer, ROW.visRowReviewer, CEL.visReviewerName); } }
 
         // shape data
-
-        public static readonly SRC Prop_SortKey = prop(CEL.visCustPropsSortKey);
-        public static readonly SRC Prop_Ask = prop(CEL.visCustPropsAsk);
-        public static readonly SRC Prop_Calendar = prop(CEL.visCustPropsCalendar);
-        public static readonly SRC Prop_Format = prop(CEL.visCustPropsFormat);
-        public static readonly SRC Prop_Invisible = prop(CEL.visCustPropsInvis);
-        public static readonly SRC Prop_Label = prop(CEL.visCustPropsLabel);
-        public static readonly SRC Prop_LangID = prop(CEL.visCustPropsLangID);
-        public static readonly SRC Prop_Prompt = prop(CEL.visCustPropsPrompt);
-        public static readonly SRC Prop_Type = prop(CEL.visCustPropsType);
-        public static readonly SRC Prop_Value = prop(CEL.visCustPropsValue);
+        public static SRC Prop_SortKey { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsSortKey); } }
+        public static SRC Prop_Ask { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsAsk); } }
+        public static SRC Prop_Calendar { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsCalendar); } }
+        public static SRC Prop_Format { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsFormat); } }
+        public static SRC Prop_Invisible { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsInvis); } }
+        public static SRC Prop_Label { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsLabel); } }
+        public static SRC Prop_LangID { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsLangID); } }
+        public static SRC Prop_Prompt { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsPrompt); } }
+        public static SRC Prop_Type { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsType); } }
+        public static SRC Prop_Value { get { return new SRC(SEC.visSectionProp, ROW.visRowProp, CEL.visCustPropsValue); } }
 
         // Layers
-
-        public static readonly SRC Layers_Active = layer(CEL.visLayerActive);
-        public static readonly SRC Layers_Color = layer(CEL.visLayerColor);
-        public static readonly SRC Layers_Glue = layer(CEL.visLayerGlue);
-        public static readonly SRC Layers_Locked = layer(CEL.visLayerLock);
-        public static readonly SRC Layers_Print = layer(CEL.visDocPreviewScope);
-        public static readonly SRC Layers_Snap = layer(CEL.visLayerSnap);
-        public static readonly SRC Layers_ColorTrans = layer(CEL.visLayerColorTrans);
-        public static readonly SRC Layers_Visible = layer(CEL.visLayerVisible);
-
+        public static SRC Layers_Active { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerActive); } }
+        public static SRC Layers_Color { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerColor); } }
+        public static SRC Layers_Glue { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerGlue); } }
+        public static SRC Layers_Locked { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerLock); } }
+        public static SRC Layers_Print { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visDocPreviewScope); } }
+        public static SRC Layers_Snap { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerSnap); } }
+        public static SRC Layers_ColorTrans { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerColorTrans); } }
+        public static SRC Layers_Visible { get { return new SRC(SEC.visSectionLayer, ROW.visRowLayer, CEL.visLayerVisible); } }
 
         //text transform
-        public static readonly SRC TxtAngle = textxfrm(CEL.visXFormAngle);
-        public static readonly SRC TxtHeight = textxfrm(CEL.visXFormHeight);
-        public static readonly SRC TxtLocPinX = textxfrm(CEL.visXFormLocPinX);
-        public static readonly SRC TxtLocPinY = textxfrm(CEL.visXFormLocPinY);
-        public static readonly SRC TxtPinX = textxfrm(CEL.visXFormPinX);
-        public static readonly SRC TxtPinY = textxfrm(CEL.visXFormPinY);
-        public static readonly SRC TxtWidth = textxfrm(CEL.visXFormWidth);
-
+        public static SRC TxtAngle { get { return new SRC(SEC.visSectionObject, ROW.visRowTextXForm, CEL.visXFormAngle); } }
+        public static SRC TxtHeight { get { return new SRC(SEC.visSectionObject, ROW.visRowTextXForm, CEL.visXFormHeight); } }
+        public static SRC TxtLocPinX { get { return new SRC(SEC.visSectionObject, ROW.visRowTextXForm, CEL.visXFormLocPinX); } }
+        public static SRC TxtLocPinY { get { return new SRC(SEC.visSectionObject, ROW.visRowTextXForm, CEL.visXFormLocPinY); } }
+        public static SRC TxtPinX { get { return new SRC(SEC.visSectionObject, ROW.visRowTextXForm, CEL.visXFormPinX); } }
+        public static SRC TxtPinY { get { return new SRC(SEC.visSectionObject, ROW.visRowTextXForm, CEL.visXFormPinY); } }
+        public static SRC TxtWidth { get { return new SRC(SEC.visSectionObject, ROW.visRowTextXForm, CEL.visXFormWidth); } }
 
         // user defined cells
-        public static readonly SRC User_Prompt = user(CEL.visUserPrompt);
-        public static readonly SRC User_Value = user(CEL.visUserValue);
+        public static SRC User_Prompt { get { return new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserPrompt); } }
+        public static SRC User_Value { get { return new SRC(SEC.visSectionUser, ROW.visRowUser, CEL.visUserValue); } }
 
 
         // Fields
-        public static readonly SRC Fields_Calendar = field(CEL.visFieldCalendar);
-        public static readonly SRC Fields_Format = field(CEL.visFieldFormat);
-        public static readonly SRC Fields_ObjectKind = field(CEL.visFieldObjectKind);
-        public static readonly SRC Fields_Type = field(CEL.visFieldType);
-        public static readonly SRC Fields_UICat = field(CEL.visFieldUICategory);
-        public static readonly SRC Fields_UICod = field(CEL.visFieldUICode);
-        public static readonly SRC Fields_UIFmt = field(CEL.visFieldUIFormat);
-        public static readonly SRC Fields_Value = field(CEL.visFieldCell);
-
+        public static SRC Fields_Calendar { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldCalendar); } }
+        public static SRC Fields_Format { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldFormat); } }
+        public static SRC Fields_ObjectKind { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldObjectKind); } }
+        public static SRC Fields_Type { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldType); } }
+        public static SRC Fields_UICat { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldUICategory); } }
+        public static SRC Fields_UICod { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldUICode); } }
+        public static SRC Fields_UIFmt { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldUIFormat); } }
+        public static SRC Fields_Value { get { return new SRC(SEC.visSectionTextField, ROW.visRowField, CEL.visFieldCell); } }
 
         // text block format
-
-        public static readonly SRC BottomMargin = text(CEL.visTxtBlkBottomMargin);
-        public static readonly SRC DefaultTabStop = text(CEL.visTxtBlkDefaultTabStop);
-        public static readonly SRC LeftMargin = text(CEL.visTxtBlkLeftMargin);
-        public static readonly SRC RightMargin = text(CEL.visTxtBlkRightMargin);
-        public static readonly SRC TextBkgnd = text(CEL.visTxtBlkBkgnd);
-        public static readonly SRC TextBkgndTrans = text(CEL.visTxtBlkBkgndTrans);
-        public static readonly SRC TextDirection = text(CEL.visTxtBlkDirection);
-        public static readonly SRC TopMargin = text(CEL.visTxtBlkTopMargin);
-        public static readonly SRC VerticalAlign = text(CEL.visTxtBlkVerticalAlign);
+        public static SRC BottomMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkBottomMargin); } }
+        public static SRC DefaultTabStop { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkDefaultTabStop); } }
+        public static SRC LeftMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkLeftMargin); } }
+        public static SRC RightMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkRightMargin); } }
+        public static SRC TextBkgnd { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkBkgnd); } }
+        public static SRC TextBkgndTrans { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkBkgndTrans); } }
+        public static SRC TextDirection { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkDirection); } }
+        public static SRC TopMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkTopMargin); } }
+        public static SRC VerticalAlign { get { return new SRC(SEC.visSectionObject, ROW.visRowText, CEL.visTxtBlkVerticalAlign); } }
 
         // Action tags
-        public static readonly SRC SmartTags_ButtonFace = smarttag(CEL.visSmartTagButtonFace);
-        public static readonly SRC SmartTags_Description = smarttag(CEL.visSmartTagDescription);
-        public static readonly SRC SmartTags_Disabled = smarttag(CEL.visSmartTagDisabled);
-        public static readonly SRC SmartTags_DisplayMode = smarttag(CEL.visSmartTagDisplayMode);
-        public static readonly SRC SmartTags_TagName = smarttag(CEL.visSmartTagName);
-        public static readonly SRC SmartTags_X = smarttag(CEL.visSmartTagX);
-        public static readonly SRC SmartTags_XJustify = smarttag(CEL.visSmartTagXJustify);
-        public static readonly SRC SmartTags_Y = smarttag(CEL.visSmartTagY);
-        public static readonly SRC SmartTags_YJustify = smarttag(CEL.visSmartTagYJustify);
+        public static SRC SmartTags_ButtonFace { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagButtonFace); } }
+        public static SRC SmartTags_Description { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagDescription); } }
+        public static SRC SmartTags_Disabled { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagDisabled); } }
+        public static SRC SmartTags_DisplayMode { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagDisplayMode); } }
+        public static SRC SmartTags_TagName { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagName); } }
+        public static SRC SmartTags_X { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagX); } }
+        public static SRC SmartTags_XJustify { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagXJustify); } }
+        public static SRC SmartTags_Y { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagY); } }
+        public static SRC SmartTags_YJustify { get { return new SRC(SEC.visSectionSmartTag, ROW.visRowSmartTag, CEL.visSmartTagYJustify); } }
 
         // style
-        public static readonly SRC EnableFillProps = style(CEL.visStyleIncludesFill);
-        public static readonly SRC EnableLineProps = style(CEL.visStyleIncludesLine);
-        public static readonly SRC EnableTextProps = style(CEL.visStyleIncludesText);
-        public static readonly SRC HideText = style(CEL.visStyleHidden);
-
+        public static SRC EnableFillProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesFill); } }
+        public static SRC EnableLineProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesLine); } }
+        public static SRC EnableTextProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesText); } }
+        public static SRC HideText { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleHidden); } }
 
         //tabs
-        public static readonly SRC Tabs_Alignment = tab(CEL.visTabAlign);
-        public static readonly SRC Tabs_Position = tab(CEL.visTabPos);
-        public static readonly SRC Tabs_StopCount = tab(CEL.visTabStopCount);
+        public static SRC Tabs_Alignment { get { return new SRC(SEC.visSectionTab, ROW.visRowTab, CEL.visTabAlign); } }
+        public static SRC Tabs_Position { get { return new SRC(SEC.visSectionTab, ROW.visRowTab, CEL.visTabPos); } }
+        public static SRC Tabs_StopCount { get { return new SRC(SEC.visSectionTab, ROW.visRowTab, CEL.visTabStopCount); } }
 
         // shape layout
-        public static readonly SRC ConFixedCode = shapelayout(CEL.visSLOConFixedCode);
-        public static readonly SRC ConLineJumpCode = shapelayout(CEL.visSLOJumpCode);
-        public static readonly SRC ConLineJumpDirX = shapelayout(CEL.visSLOJumpDirX);
-        public static readonly SRC ConLineJumpDirY = shapelayout(CEL.visSLOJumpDirY);
-        public static readonly SRC ConLineJumpStyle = shapelayout(CEL.visSLOJumpStyle);
-        public static readonly SRC ConLineRouteExt = shapelayout(CEL.visSLOLineRouteExt);
-        public static readonly SRC ShapeFixedCode = shapelayout(CEL.visSLOFixedCode);
-        public static readonly SRC ShapePermeablePlace = shapelayout(CEL.visSLOPermeablePlace);
-        public static readonly SRC ShapePermeableX = shapelayout(CEL.visSLOPermX);
-        public static readonly SRC ShapePermeableY = shapelayout(CEL.visSLOPermY);
-        public static readonly SRC ShapePlaceFlip = shapelayout(CEL.visSLOPlaceFlip);
-        public static readonly SRC ShapePlaceStyle = shapelayout(CEL.visSLOPlaceStyle);
-        public static readonly SRC ShapePlowCode = shapelayout(CEL.visSLOPlowCode);
-        public static readonly SRC ShapeRouteStyle = shapelayout(CEL.visSLORouteStyle);
-        public static readonly SRC ShapeSplit = shapelayout(CEL.visSLOSplit);
-        public static readonly SRC ShapeSplittable = shapelayout(CEL.visSLOSplittable);
+        public static SRC ConFixedCode { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOConFixedCode); } }
+        public static SRC ConLineJumpCode { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOJumpCode); } }
+        public static SRC ConLineJumpDirX { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOJumpDirX); } }
+        public static SRC ConLineJumpDirY { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOJumpDirY); } }
+        public static SRC ConLineJumpStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOJumpStyle); } }
+        public static SRC ConLineRouteExt { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOLineRouteExt); } }
+        public static SRC ShapeFixedCode { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOFixedCode); } }
+        public static SRC ShapePermeablePlace { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOPermeablePlace); } }
+        public static SRC ShapePermeableX { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOPermX); } }
+        public static SRC ShapePermeableY { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOPermY); } }
+        public static SRC ShapePlaceFlip { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOPlaceFlip); } }
+        public static SRC ShapePlaceStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOPlaceStyle); } }
+        public static SRC ShapePlowCode { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOPlowCode); } }
+        public static SRC ShapeRouteStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORouteStyle); } }
+        public static SRC ShapeSplit { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplit); } }
+        public static SRC ShapeSplittable { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplittable); } }
 
         // Static Methods
 
         public static Dictionary<string, VA.ShapeSheet.SRC> GetSRCDictionary()
         {
-            var fields = GetSRCFields();
+            var srcconstants_t = typeof(VA.ShapeSheet.SRCConstants);
+
+            var props = srcconstants_t.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static)
+                .Where(p => p.PropertyType == typeof (VA.ShapeSheet.SRC));
 
             var fields_name_to_value = new Dictionary<string, VA.ShapeSheet.SRC>();
-            foreach (var field in fields)
+            foreach (var propinfo in props)
             {
-                fields_name_to_value[field.Name] = (VA.ShapeSheet.SRC) field.GetValue(null);
+                var src = (VA.ShapeSheet.SRC) propinfo.GetValue(null,null);
+                var name = propinfo.Name;
+                fields_name_to_value[name] = src;
             }
 
             return fields_name_to_value;
-        }
-
-        private static List<FieldInfo> GetSRCFields()
-        {
-            var srcconstants_t = typeof (VA.ShapeSheet.SRCConstants);
-            var fields = srcconstants_t.GetFields()
-                .Where(m => m.FieldType == typeof (VA.ShapeSheet.SRC))
-                .Where(m => m.IsPublic)
-                .Where(m => m.IsStatic)
-                .ToList();
-            return fields;
         }
     }
 }
