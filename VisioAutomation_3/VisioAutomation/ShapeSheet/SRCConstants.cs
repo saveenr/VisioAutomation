@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SEC = Microsoft.Office.Interop.Visio.VisSectionIndices;
 using ROW = Microsoft.Office.Interop.Visio.VisRowIndices;
@@ -436,17 +435,21 @@ namespace VisioAutomation.ShapeSheet
 
         // Static Methods
 
-        public static Dictionary<string, VA.ShapeSheet.SRC> GetSRCDictionary()
+        public static Dictionary<string, SRC> GetSRCDictionary()
         {
-            var srcconstants_t = typeof(VA.ShapeSheet.SRCConstants);
+            var srcconstants_t = typeof(SRCConstants);
 
-            var props = srcconstants_t.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static)
-                .Where(p => p.PropertyType == typeof (VA.ShapeSheet.SRC));
+            var binding_flags = System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Static;
 
-            var fields_name_to_value = new Dictionary<string, VA.ShapeSheet.SRC>();
+            // find all the static properties that return SRC types
+            var src_type = typeof (SRC);
+            var props = srcconstants_t.GetProperties(binding_flags)
+                .Where(p => p.PropertyType == src_type);
+
+            var fields_name_to_value = new Dictionary<string, SRC>();
             foreach (var propinfo in props)
             {
-                var src = (VA.ShapeSheet.SRC) propinfo.GetValue(null,null);
+                var src = (SRC) propinfo.GetValue(null,null);
                 var name = propinfo.Name;
                 fields_name_to_value[name] = src;
             }
