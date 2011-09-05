@@ -1,322 +1,214 @@
-﻿using IVisio=Microsoft.Office.Interop.Visio;
-
+﻿using System;
+using System.Collections.Generic;
+using IVisio=Microsoft.Office.Interop.Visio;
 using IG=InfoGraphicsPy;
+using System.Linq;
+using VA=VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace InfoGraphicsPy
 {
-    public struct Point
+    public class Session
     {
-        private double _x;
-        private double _y;
-
-        public Point (double x, double y)
+        public IVisio.Application app;
+        
+        public Session()
         {
-            _x = x;
-            _y = y;
+            this.app = new IVisio.ApplicationClass();
+
+
         }
 
-        public double X
+        public void NewDocument()
         {
-            get { return _x; }
+            var docs = this.Application.Documents;
+            var doc = docs.Add("");
         }
 
-        public double Y
+        public void NewPage()
         {
-            get { return _y; }
+            var doc = this.Application.ActiveDocument;
+            doc.Pages.Add();
         }
 
-        public IG.Point Add( double x, double y)
+        public IVisio.Application Application
         {
-            return new IG.Point(this.X+x,this.Y+y);
+            get { return this.app; }
         }
+
+        public void TestDraw()
+        {
+            var page = this.Page;
+            page.DrawRectangle(0, 0, 8.5, 11.0);
+
+            double barwidth = 0.5;
+            double hsep = 0.10;
+            double vsep = 0.10;
+            double maxbarheight = 4;
+            double catheight = 0.5;
+            var values = new double[] {1.0, 2.0, 3.0, 4.0, 5.0};
+
+            var widths = ConstructPositions(values.Count(), barwidth, hsep);
+            var heights = ConstructPositions(new[] { catheight, maxbarheight}, vsep);
+
+            var grid = new GridLayout(widths, heights);
+
+
+            int catrow = 0;
+            int barrow = 2;
+
+            var bar_rects = this.SkipOdd(grid.GetRectsInRow(barrow)).ToList();
+            var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
+
+            var bar_shapes = this.DrawRects(bar_rects);
+            var cat_shapes = this.DrawRects(cat_rects);
+
+
+        }
+
+        public List<IVisio.Shape> DrawRects(IEnumerable<VA.Drawing.Rectangle> rects)
+        {
+            var shapes = rects.Select(r => Page.DrawRectangle(r)).ToList();
+            return shapes;
+        }
+
+        public static List<double> ConstructPositions(int numcols, double width, double sep)
+        {
+            var iwidths = new List<double>();
+            for (int i = 0; i < numcols; i++)
+            {
+                iwidths.Add(width);
+            }
+            var widths = ConstructPositions(iwidths, sep);
+            return widths;
+        }
+
+        public static List<double> ConstructPositions(IList<double> iwidths, double sep)
+        {
+            int numcols = iwidths.Count;
+            var widths = new List<double>();
+           
+            for (int i = 0; i < numcols; i++)
+            {
+                widths.Add(iwidths[i]);
+                if (i < numcols - 1)
+                {
+                    widths.Add(sep);
+                }
+            }
+            return widths;
+        }
+
+        public IEnumerable<T> SkipOdd<T>(IEnumerable<T> items)
+        {
+            int i = 0;
+            foreach (var item in items)
+            {
+                if (i % 2 == 1)
+                {
+                    //
+                }
+                else
+                {
+                    yield return item;
+                }
+                i++;
+            }
+            
+        }
+
+
+        public IVisio.Page Page
+        {
+            get { return this.Application.ActivePage; }
+        }
+
+
+        
+        
     }
 
-    public struct Rectangle
+    public class GridLayout
     {
-        public double Left { get; private set; }
-        public double Bottom { get; private set; }
-        public double Right { get; private set; }
-        public double Top { get; private set; }
-
-        public Rectangle(double left, double bottom, double right, double top)
-            : this()
+        public readonly List<double> Widths;
+        public readonly List<double> Heights;
+        public readonly List<double> Bottoms;
+        public readonly List<double> Lefts;
+        public readonly int ColumnCount;
+        public readonly int RowCount;
+            
+        public GridLayout(IList<double> widths, IList<double> heights)
         {
-            if (right < left)
+            this.ColumnCount = widths.Count();
+            this.RowCount = heights.Count();
+
+            this.Widths = widths.ToList();
+            this.Heights = heights.ToList();
+
+            this.Bottoms = get_inc_pos(heights);
+            this.Lefts = get_inc_pos(widths);
+
+            if (this.Widths.Count() != this.Lefts.Count)
             {
-                throw new System.ArgumentException("left must be <=right");
+                throw new Exception();
             }
 
-            if (top < bottom)
+            if (this.Heights.Count() != this.Bottoms.Count)
             {
-                throw new System.ArgumentException("bottom must be <= top");
+                throw new Exception();
             }
-
-            Left = left;
-            Bottom = bottom;
-            Right = right;
-            Top = top;
         }
 
-        public Rectangle(Point lowerleft, Point upperright)
-            : this()
+        public VA.Drawing.Rectangle GetRectangle(int row, int col)
         {
-            if (upperright.X < lowerleft.X)
+            var bottom = this.GetBottom(row);
+            var left = this.GetLeft(col);
+            var right = this.GetRight(col);
+            var top = this.GetTop(row);
+
+            return new VA.Drawing.Rectangle(left,bottom,right,top);
+        }
+
+        public IEnumerable<VA.Drawing.Rectangle> GetRectsInRow(int row)
+        {
+            for (int c = 0; c < this.ColumnCount; c++)
             {
-                throw new System.ArgumentException("left must be <=right");
+                yield return this.GetRectangle(row, c);
             }
+        }
 
-            if (upperright.Y < lowerleft.Y)
+        public double GetBottom(int row)
+        {
+            return this.Bottoms[row];
+        }
+
+        public double GetTop(int row)
+        {
+            return this.GetBottom(row) + this.Heights[row];
+        }
+        
+        public double GetLeft(int col)
+        {
+            return this.Lefts[col];
+        }
+
+        public double GetRight(int col)
+        {
+            return this.GetLeft(col) + this.Widths[col];
+        }
+
+        private List<double> get_inc_pos(IList<double> lengths)
+        {
+
+            var positions = new List<double>();
+            double curpos = 0.0;
+
+            for (int i = 0; i < lengths.Count(); i++)
             {
-                throw new System.ArgumentException("bottom must be <= top");
+                positions.Add(curpos);
+                curpos += lengths[i];
             }
-
-            Left = lowerleft.X;
-            Bottom = lowerleft.Y;
-            Right = upperright.X;
-            Top = upperright.Y;
-        }
-
-        public Rectangle(Point lowerleft, Size s)
-            : this()
-        {
-            if (s.Width < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("s", "width must be non-negative");
-            }
-
-            if (s.Height < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("s", "height must be non-negative");
-            }
-
-            Left = lowerleft.X;
-            Bottom = lowerleft.Y;
-            Right = lowerleft.X + s.Width;
-            Top = lowerleft.Y + s.Height;
-        }
-
-        public static Rectangle FromCenterPoint(double x, double y, double w, double h)
-        {
-            if (w < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("w", "width must be non-negative");
-            }
-
-            if (h < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("h", "height must be non-negative");
-            }
-
-            var xradius = w / 2.0;
-            var yradius = h / 2.0;
-            var r = new Rectangle(x - xradius, y - yradius, x + xradius, y + yradius);
-            return r;
-        }
-
-        public static Rectangle FromCenterPoint(Point p, double width, double height)
-        {
-            return FromCenterPoint(p.X, p.Y, width, height);
-        }
-
-        public override string ToString()
-        {
-            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####},{1:0.#####},{2:0.#####},{3:0.#####})",
-                                     Left, Bottom, Right, Top);
-            return s;
-        }
-
-        public Point LowerLeft
-        {
-            get { return new Point(Left, Bottom); }
-        }
-
-        public Point LowerRight
-        {
-            get { return new Point(Right, Bottom); }
-        }
-
-        public Point UpperLeft
-        {
-            get { return new Point(Left, Top); }
-        }
-
-        public Point UpperRight
-        {
-            get { return new Point(Right, Top); }
-        }
-
-        public Size Size
-        {
-            get { return new Size(Width, Height); }
-        }
-
-        public double Width
-        {
-            get { return Right - Left; }
-        }
-
-        public double Height
-        {
-            get { return Top - Bottom; }
-        }
-
-        public Point Center
-        {
-            get { return new Point((Left + Right) / 2.0, (Bottom + Top) / 2.0); }
-        }
-
-        public static Rectangle operator +(Rectangle r, Point p)
-        {
-            return r.Add(p.X, p.Y);
-        }
-
-        public static Rectangle operator -(Rectangle r, Point p)
-        {
-            return r.Subtract(p.X, p.Y);
-        }
-
-        public static Rectangle operator *(Rectangle r, double s)
-        {
-            return r.Multiply(s, s);
-        }
-
-        public Rectangle Add(double dx, double dy)
-        {
-            var r2 = new Rectangle(Left + dx, Bottom + dy, Right + dx, Top + dy);
-            return r2;
-        }
-
-        public Rectangle Add(Size s)
-        {
-            var r2 = new Rectangle(Left + s.Width, Bottom + s.Height, Right + s.Width, Top + s.Height);
-            return r2;
-        }
-
-        public Rectangle Add(Point s)
-        {
-            var r2 = new Rectangle(Left + s.X, Bottom + s.Y, Right + s.X, Top + s.Y);
-            return r2;
-        }
-
-
-        public Rectangle Subtract(double dx, double dy)
-        {
-            var r2 = new Rectangle(Left - dx, Bottom - dy, Right - dx, Top - dy);
-            return r2;
-        }
-
-        public Rectangle Subtract(Size s)
-        {
-            var r2 = new Rectangle(Left - s.Width, Bottom - s.Height, Right - s.Width, Top - s.Height);
-            return r2;
-        }
-
-        public Rectangle Subtract(Point s)
-        {
-            var r2 = new Rectangle(Left - s.X, Bottom - s.Y, Right - s.X, Top - s.Y);
-            return r2;
-        }
-
-
-        public Rectangle Multiply(double sx, double sy)
-        {
-            var r2 = new Rectangle(Left * sx, Bottom * sy, Right * sx, Top * sy);
-            return r2;
-        }
-    }
-
-    public struct Size
-    {
-        public double Width { get; private set; }
-        public double Height { get; private set; }
-
-        public Size(double width, double height)
-            : this()
-        {
-            if (width < 0.0)
-            {
-                throw new System.ArgumentOutOfRangeException("width");
-            }
-            if (height < 0.0)
-            {
-                throw new System.ArgumentOutOfRangeException("height");
-            }
-            Width = width;
-            Height = height;
-        }
-
-
-        public override string ToString()
-        {
-            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####}, {1:0.#####})", Width, Height);
-            return s;
-        }
-
-        public Size Multiply(double amount)
-        {
-            return new Size(Width * amount, Height * amount);
-        }
-
-        public Size Multiply(double width, double height)
-        {
-            return new Size(Width * width, Height * height);
-        }
-
-        public Size Divide(double amount)
-        {
-            return new Size(Width / amount, Height / amount);
-        }
-
-        public static Size operator *(Size left_size, double right_size)
-        {
-            return left_size.Multiply(right_size);
-        }
-
-        public static Size operator /(Size left_size, double right_size)
-        {
-            return left_size.Divide(right_size);
-        }
-
-        public Size Add(Point point)
-        {
-            return new Size(Width + point.X, Height + point.Y);
-        }
-
-        public Size Add(Size size)
-        {
-            return new Size(Width + size.Width, Height + size.Height);
-        }
-
-        public Size Add(double width, double height)
-        {
-            return new Size(Width + width, Height + height);
-        }
-
-        public static Size operator +(Size size, Point point)
-        {
-            return size.Add(point);
-        }
-
-        public static Size operator +(Size left_size, Size right_size)
-        {
-            return left_size.Add(right_size);
-        }
-    }
-
-    public static class DrawUtil
-    {
-        public static IVisio.Shape DrawCircleFromCenter(IVisio.Page page, IG.Point center, double r)
-        {
-            var lowerleft = center.Add(-r, -r);
-            var upperright = center.Add(r, r);
-            var shape = page.DrawOval( lowerleft.X, lowerleft.Y, upperright.X, upperright.Y);
-            return shape;
-        }
-
-        public static IVisio.Shape DrawCircleFromCenter(IVisio.Page page, double x, double y, double r)
-        {
-            var shape = page.DrawOval(x - r, y - r, x + r, y + r);
-            return shape;
+            return positions;
         }
     }
 }
