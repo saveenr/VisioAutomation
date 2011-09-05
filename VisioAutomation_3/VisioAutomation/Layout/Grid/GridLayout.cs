@@ -172,7 +172,7 @@ namespace VisioAutomation.Layout.Grid
                 var dom_shape = dom_shapes[i];
 
                 node.Shape = dom_shape.VisioShape;
-                node.ShapeID = dom_shape.ShapeID;
+                node.ShapeID = dom_shape.VisioShapeID;
             }
         }
     }

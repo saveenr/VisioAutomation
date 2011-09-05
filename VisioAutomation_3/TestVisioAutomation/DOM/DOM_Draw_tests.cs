@@ -82,6 +82,27 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
+        [TestMethod]
+        public void Draw_DropShapes()
+        {
+            // Render it
+            var app = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var stencil = app.Documents.OpenStencil("basic_u.vss");
+            var rectmaster = stencil.Masters["Rectangle"];
+
+            // Create the doc
+            var vdoc = new VA.DOM.Document();
+            
+            vdoc.DrawRectangle(0, 0, 1, 1);
+            vdoc.Drop(rectmaster, 3, 3);
+
+            vdoc.Render(app.ActivePage);
+
+            app.ActiveDocument.Close(true);
+        }
+
+
 
         [TestMethod]
         public void MarkupText1()

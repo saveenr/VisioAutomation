@@ -37,7 +37,7 @@ namespace TestVisioAutomation
             dom.Render(page);
 
             Assert.AreEqual(1, page.Shapes.Count);
-            Assert.AreNotEqual(0, dom_line_0.ShapeID);
+            Assert.AreNotEqual(0, dom_line_0.VisioShapeID);
             Assert.IsNotNull(dom_line_0.VisioShape);
             Assert.AreEqual(2.0, dom_line_0.VisioShape.CellsU["PinX"].Result[IVisio.VisUnitCodes.visNoCast]);
             page.Delete(0);
@@ -55,7 +55,7 @@ namespace TestVisioAutomation
             dom.Render(page);
 
             Assert.AreEqual(1, page.Shapes.Count);
-            Assert.AreNotEqual(0, dom_bez_0.ShapeID);
+            Assert.AreNotEqual(0, dom_bez_0.VisioShapeID);
             Assert.IsNotNull(dom_bez_0.VisioShape);
             page.Delete(0);
         }
@@ -77,8 +77,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(2, page.Shapes.Count);
 
             // Unless overriden, Dropped masters don't have their shapes collected, only their shapeids
-            Assert.AreNotEqual(0, dom_master_0.ShapeID);
-            Assert.AreNotEqual(0, dom_master_1.ShapeID);
+            Assert.AreNotEqual(0, dom_master_0.VisioShapeID);
+            Assert.AreNotEqual(0, dom_master_1.VisioShapeID);
             Assert.IsNull(dom_master_0.VisioShape);
             Assert.IsNull(dom_master_1.VisioShape);
             page.Delete(0);
