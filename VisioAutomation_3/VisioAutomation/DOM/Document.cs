@@ -25,16 +25,6 @@ namespace VisioAutomation.DOM
             get { return Shapes.Items.Cast<Node>(); }
         }
 
-        private IEnumerable<Master> enum_masters
-        {
-            get { return this.Shapes.Items.Where(s => s is Master).Cast<Master>(); }
-        }
-
-        private IEnumerable<Shape> enum_nonmasters
-        {
-            get { return this.Shapes.Items.Where(s => !(s is Master)); }
-        }
-
         public void Render(IVisio.Page page)
         {
             if (page == null)
@@ -63,8 +53,92 @@ namespace VisioAutomation.DOM
 
             // ----------------------------------------
             // Draw shapes
-            _draw_masters(ctx);
-            _draw_non_masters(ctx);
+
+            var dom_masters = new List<Master>();
+            var dom_nonmasters = new List<Shape>();
+
+            int state = 0;
+            foreach (var shape in this.Shapes.Items)
+            {
+                if (shape is Master)
+                {
+                    if (state == 0)
+                    {
+                        // in start state -> go to master state
+                        state = 1;
+                        dom_masters.Clear();
+                        dom_masters.Add( (Master) shape);
+                    }
+                    else if (state == 1)
+                    {
+                        // in master state -> stay there
+                        dom_masters.Add((Master)shape);                        
+                    }
+                    else if (state == 2)
+                    {
+                        // in nonmaster state -> go to nonmaster state
+                        state = 1;
+
+                        // finish drawing the non masters
+                        _draw_non_masters(ctx,dom_nonmasters);
+                        dom_nonmasters.Clear();
+
+                        // store this master
+                        dom_masters.Clear();
+                        dom_masters.Add((Master)shape);
+
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+                }
+                else
+                {
+                    if (state == 0)
+                    {
+                        // in start state -> go to nonmaster state
+                        state = 2;
+                        dom_nonmasters.Clear();
+                        dom_nonmasters.Add(shape);
+                    }
+                    else if (state == 1)
+                    {
+                        // in master state -> go to nonmaster state
+                        state = 2;
+                        _draw_masters(ctx, dom_masters);
+                        dom_masters.Clear();
+
+                        dom_nonmasters.Clear();
+                        dom_nonmasters.Add(shape);
+                    }
+                    else if (state == 2)
+                    {
+                        // in nonmaster state -> stay there
+                        dom_nonmasters.Add(shape);
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+            if (dom_masters.Count > 0 && dom_nonmasters.Count > 0)
+            {
+                throw new Exception();
+            }
+            if (dom_masters.Count > 0)
+            {
+                _draw_masters(ctx, dom_masters);
+                dom_masters.Clear();
+            }
+            if (dom_nonmasters.Count > 0)
+            {
+                _draw_non_masters(ctx, dom_nonmasters);
+                dom_nonmasters.Clear();
+            }
+
 
             // verify that all non-connectors have an associated shape id
             check_valid_shape_ids();
@@ -178,7 +252,8 @@ namespace VisioAutomation.DOM
                 {
                     if (shape.VisioShapeID < 1)
                     {
-                        throw new AutomationException();
+                        string msg = "A Shape drawn is missing its VisioShapeID";
+                        throw new AutomationException(msg);
                     }
                 }
             }
@@ -254,13 +329,12 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_masters(RenderContext ctx)
+        private void _draw_masters(RenderContext ctx, List<Master> dom_masters)
         {
-            var dom_masters = this.enum_masters.ToList();
             var masters = dom_masters.Select(m => m.MasterObject).ToList();
 
             var points = new List<VA.Drawing.Point>(masters.Count);
-            points.AddRange(this.enum_masters.Select(s => s.DropPosition));
+            points.AddRange(dom_masters.Select(s => s.DropPosition));
             var shapeids = ctx.VisioPage.DropManyU(masters, points);
             
             for (int i = 0; i < dom_masters.Count; i++)
@@ -271,10 +345,9 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_non_masters(RenderContext ctx)
+        private void _draw_non_masters(RenderContext ctx, List<Shape> non_masters)
         {
-            var nonmasters = this.enum_nonmasters.ToList();
-            foreach (var shape in nonmasters)
+            foreach (var shape in non_masters)
             {
                 if (shape is Line)
                 {
