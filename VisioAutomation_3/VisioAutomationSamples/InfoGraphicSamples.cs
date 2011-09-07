@@ -4,10 +4,10 @@ using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using GRID = VisioAutomation.Layout.Grid;
-using IG = VisioAutomation.Infographics;
 
 namespace VisioAutomationSamples
 {
+    /*
     public static class InfoGraphicSamples
     {
 
@@ -161,4 +161,5 @@ namespace VisioAutomationSamples
 
         }
     }
+     * */
 }
