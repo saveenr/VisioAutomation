@@ -35,6 +35,97 @@ namespace VisioAutomation.DOM
             this._Render(page);
         }
 
+        private IEnumerable<IList<T>> GetSequencesOfBool<T>( IEnumerable<T> items, System.Func<T,bool> func_categorize )
+        {
+            var true_col = new List<T>();
+            var false_col = new List<T>();
+
+            int state = 0;
+            foreach (var item in items)
+            {
+                bool item_category = func_categorize(item);
+                if (item_category)
+                {
+                    if (state == 0)
+                    {
+                        // in start state -> go to true state
+                        state = 1;
+                        true_col.Clear();
+                        true_col.Add(item);
+                    }
+                    else if (state == 1)
+                    {
+                        // in true state -> stay there
+                        true_col.Add(item);
+                    }
+                    else if (state == 2)
+                    {
+                        // in false state -> go to true state
+                        state = 1;
+
+                        yield return false_col;
+                        false_col.Clear();
+
+                        // store this master
+                        true_col.Clear();
+                        true_col.Add(item);
+
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+                }
+                else
+                {
+                    if (state == 0)
+                    {
+                        // in start state -> go to false state
+                        state = 2;
+                        false_col.Clear();
+                        false_col.Add(item);
+                    }
+                    else if (state == 1)
+                    {
+                        // in true state -> go to false state
+                        state = 2;
+                        yield return true_col;
+                        true_col.Clear();
+
+                        false_col.Clear();
+                        false_col.Add(item);
+                    }
+                    else if (state == 2)
+                    {
+                        // in false state -> stay there
+                        false_col.Add(item);
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+            }
+
+            if (true_col.Count > 0 && false_col.Count > 0)
+            {
+                throw new Exception();
+            }
+
+            if (true_col.Count > 0)
+            {
+                yield return true_col;
+                true_col.Clear();
+            }
+
+            if (false_col.Count > 0)
+            {
+                yield return false_col;
+                false_col.Clear();
+            }
+        }
+
         public void _Render(IVisio.Page page)
         {
             // ----------------------------------------
@@ -54,89 +145,28 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            var dom_masters = new List<Master>();
-            var dom_nonmasters = new List<Shape>();
-
-            int state = 0;
-            foreach (var shape in this.Shapes.Items)
+            foreach (var shapes in this.GetSequencesOfBool(this.Shapes.Items, s=>s is Master))
             {
-                if (shape is Master)
+                var masters_col = new List<Master>();
+                var shapes_col = new List<Shape>();
+                if (shapes.Count > 0)
                 {
-                    if (state == 0)
+                    var first_shape = shapes[0];
+                    if (first_shape is Master)
                     {
-                        // in start state -> go to master state
-                        state = 1;
-                        dom_masters.Clear();
-                        dom_masters.Add( (Master) shape);
-                    }
-                    else if (state == 1)
-                    {
-                        // in master state -> stay there
-                        dom_masters.Add((Master)shape);                        
-                    }
-                    else if (state == 2)
-                    {
-                        // in nonmaster state -> go to nonmaster state
-                        state = 1;
-
-                        // finish drawing the non masters
-                        _draw_non_masters(ctx,dom_nonmasters);
-                        dom_nonmasters.Clear();
-
-                        // store this master
-                        dom_masters.Clear();
-                        dom_masters.Add((Master)shape);
-
+                        masters_col.Clear();
+                        masters_col.AddRange( shapes.Cast<Master>());
+                        _draw_masters(ctx,masters_col);
+                        masters_col.Clear();
                     }
                     else
                     {
-                        throw new Exception();
-                    }
-
-                }
-                else
-                {
-                    if (state == 0)
-                    {
-                        // in start state -> go to nonmaster state
-                        state = 2;
-                        dom_nonmasters.Clear();
-                        dom_nonmasters.Add(shape);
-                    }
-                    else if (state == 1)
-                    {
-                        // in master state -> go to nonmaster state
-                        state = 2;
-                        _draw_masters(ctx, dom_masters);
-                        dom_masters.Clear();
-
-                        dom_nonmasters.Clear();
-                        dom_nonmasters.Add(shape);
-                    }
-                    else if (state == 2)
-                    {
-                        // in nonmaster state -> stay there
-                        dom_nonmasters.Add(shape);
-                    }
-                    else
-                    {
-                        throw new Exception();
+                        shapes_col.Clear();
+                        shapes_col.AddRange(shapes);
+                        _draw_non_masters(ctx,shapes_col);
+                        shapes_col.Clear();
                     }
                 }
-            }
-            if (dom_masters.Count > 0 && dom_nonmasters.Count > 0)
-            {
-                throw new Exception();
-            }
-            if (dom_masters.Count > 0)
-            {
-                _draw_masters(ctx, dom_masters);
-                dom_masters.Clear();
-            }
-            if (dom_nonmasters.Count > 0)
-            {
-                _draw_non_masters(ctx, dom_nonmasters);
-                dom_nonmasters.Clear();
             }
 
 
