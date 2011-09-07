@@ -147,10 +147,10 @@ namespace InfoGraphicsPy
 
         public void TestDraw()
         {
-            this.TestDraw2();
+            this.TestDrawPieSlices();
         }
 
-        public void TestDraw2()
+        public void TestDrawPieSlices()
         {
             var page = this.Page;
 
@@ -175,7 +175,8 @@ namespace InfoGraphicsPy
 
             var dom = new VA.DOM.Document();
             dom.ResolveAllShapeObjects = true;
-            var bar_shapes = new List<VA.DOM.PieSlice>();
+            var circle_shapes = new List<VA.DOM.Oval>();
+            var slice_shapes = new List<VA.DOM.PieSlice>();
             for (int i = 0; i < datapoints.Count; i++)
             {
                 var dp = datapoints[i];
@@ -183,18 +184,30 @@ namespace InfoGraphicsPy
                 double end = 360*normalized_values[i];
                 double radius = top_rects[i].Width/2.0;
 
+                var circle_shape = dom.DrawOval(top_rects[i]);
+                circle_shapes.Add(circle_shape);
+
                 var dom_shape = dom.DrawPieSlice(top_rects[i].Center, radius, start, end);
-                bar_shapes.Add(dom_shape);
+                slice_shapes.Add(dom_shape);
             }
             var cat_shapes = this.DrawRects(dom, cat_rects);
 
             for (int i = 0; i < datapoints.Count; i++)
             {
-                bar_shapes[i].Text = datapoints[i].Text.ToString();
+                slice_shapes[i].Text = datapoints[i].Text.ToString();
                 cat_shapes[i].Text = cats[i];
             }
 
-            foreach (var shape in bar_shapes)
+            foreach (var shape in circle_shapes)
+            {
+                var cells = shape.ShapeCells;
+
+                cells.FillForegnd = "rgb(255,255,255)";
+                cells.LineColor = "rgb(220,220,220)";
+
+            }
+
+            foreach (var shape in slice_shapes)
             {
                 var cells = shape.ShapeCells;
 
