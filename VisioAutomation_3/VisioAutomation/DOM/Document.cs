@@ -35,97 +35,6 @@ namespace VisioAutomation.DOM
             this._Render(page);
         }
 
-        private IEnumerable<IList<T>> GetSequencesOfBool<T>( IEnumerable<T> items, System.Func<T,bool> func_categorize )
-        {
-            var true_col = new List<T>();
-            var false_col = new List<T>();
-
-            int state = 0;
-            foreach (var item in items)
-            {
-                bool item_category = func_categorize(item);
-                if (item_category)
-                {
-                    if (state == 0)
-                    {
-                        // in start state -> go to true state
-                        state = 1;
-                        true_col.Clear();
-                        true_col.Add(item);
-                    }
-                    else if (state == 1)
-                    {
-                        // in true state -> stay there
-                        true_col.Add(item);
-                    }
-                    else if (state == 2)
-                    {
-                        // in false state -> go to true state
-                        state = 1;
-
-                        yield return false_col;
-                        false_col.Clear();
-
-                        // store this master
-                        true_col.Clear();
-                        true_col.Add(item);
-
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-
-                }
-                else
-                {
-                    if (state == 0)
-                    {
-                        // in start state -> go to false state
-                        state = 2;
-                        false_col.Clear();
-                        false_col.Add(item);
-                    }
-                    else if (state == 1)
-                    {
-                        // in true state -> go to false state
-                        state = 2;
-                        yield return true_col;
-                        true_col.Clear();
-
-                        false_col.Clear();
-                        false_col.Add(item);
-                    }
-                    else if (state == 2)
-                    {
-                        // in false state -> stay there
-                        false_col.Add(item);
-                    }
-                    else
-                    {
-                        throw new Exception();
-                    }
-                }
-            }
-
-            if (true_col.Count > 0 && false_col.Count > 0)
-            {
-                throw new Exception();
-            }
-
-            if (true_col.Count > 0)
-            {
-                yield return true_col;
-                true_col.Clear();
-            }
-
-            if (false_col.Count > 0)
-            {
-                yield return false_col;
-                false_col.Clear();
-            }
-        }
-
         public void _Render(IVisio.Page page)
         {
             // ----------------------------------------
@@ -145,7 +54,7 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            foreach (var shapes in this.GetSequencesOfBool(this.Shapes.Items, s=>s is Master))
+            foreach (var shapes in VA.DOM.LinqUtil.ChunkByBool(this.Shapes.Items, s=>s is Master))
             {
                 var masters_col = new List<Master>();
                 var shapes_col = new List<Shape>();
