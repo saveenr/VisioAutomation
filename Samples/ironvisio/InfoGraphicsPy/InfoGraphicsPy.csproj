@@ -35,7 +35,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="GridLayout.cs" />
+    <Compile Include="DataPoints.cs" />
+    <Compile Include="DataPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
