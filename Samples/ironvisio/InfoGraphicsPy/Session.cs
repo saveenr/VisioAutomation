@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Office.Interop.Visio;
 using IVisio=Microsoft.Office.Interop.Visio;
 using IG=InfoGraphicsPy;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace InfoGraphicsPy
         private IVisio.Application app;
         private IVisio.Document doc;
         private IVisio.Document stencil;
-        private IVisio.Master rectmaster;
+
+        private IVisio.Master _masterRectangle;
         
         public Session()
         {
@@ -28,7 +30,7 @@ namespace InfoGraphicsPy
             this.doc = docs.Add("");
             this.stencil = docs.OpenStencil("basic_u.vss");
             var masters = stencil.Masters;
-            this.rectmaster = masters["Rectangle"];
+            this._masterRectangle = masters["Rectangle"];
         }
 
         public void NewDocument(double w, double h)
@@ -62,8 +64,11 @@ namespace InfoGraphicsPy
 
         public void TestDraw()
         {
-            var chart = new PieSliceChart();
-            chart.Draw(this.Page, this.rectmaster);
+            string [] CategoryLabels = new[] { "A", "B", "C", "D", "E" };
+            DataPoints DataPoints = new DataPoints(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 });
+
+            var chart = new PieSliceChart(DataPoints,CategoryLabels);
+            chart.Draw(this);
         }
 
         public void TestDrawPieSlices()
@@ -228,7 +233,7 @@ namespace InfoGraphicsPy
             var dom_shapes = new List<VA.DOM.Master>();
             foreach (var rect in rects)
             {
-                var dom_shape = dom.Drop(this.rectmaster, rect.Center);
+                var dom_shape = dom.Drop(this._masterRectangle, rect.Center);
                 dom_shape.ShapeCells.Width = rect.Width;
                 dom_shape.ShapeCells.Height = rect.Height;
                 dom_shapes.Add(dom_shape);
@@ -243,7 +248,7 @@ namespace InfoGraphicsPy
             var dom = new VA.DOM.Document();
             foreach (var rect in rects)
             {
-                var dom_shape = dom.Drop(this.rectmaster, rect.Center);
+                var dom_shape = dom.Drop(this._masterRectangle, rect.Center);
                 dom_shape.ShapeCells.Width = rect.Width;
                 dom_shape.ShapeCells.Height= rect.Height;
                 dom_shapes.Add(dom_shape);
@@ -312,8 +317,9 @@ namespace InfoGraphicsPy
             get { return this.Application.ActivePage; }
         }
 
-
-        
-        
+        public Master MasterRectangle
+        {
+            get { return _masterRectangle; }
+        }
     }
 }
