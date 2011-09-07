@@ -62,7 +62,8 @@ namespace InfoGraphicsPy
 
         public void TestDraw()
         {
-            this.TestDrawPieSlices();
+            var chart = new PieSliceChart();
+            chart.Draw(this.Page, this.rectmaster);
         }
 
         public void TestDrawPieSlices()
