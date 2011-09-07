@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Chart.cs" />
     <Compile Include="BarChart.cs" />
+    <Compile Include="GridChart.cs" />
     <Compile Include="PieSliceChart.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="GridLayout.cs" />

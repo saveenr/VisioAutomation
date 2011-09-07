@@ -9,14 +9,8 @@ using VisioAutomation.Extensions;
 
 namespace InfoGraphicsPy
 {
-    public class BarChart : Chart
+    public class BarChart : GridChart
     {
-        private double cellwidth = 0.5;
-        public double HorizontalSeparation = 0.10;
-        public double VerticalSeparation = 0.10;
-        public double CellHeight = 0.5;
-        public double CategoryLabelHeight = 0.5;
-
         public string[] CategoryLabels;
         public DataPoints DataPoints;
 
@@ -27,24 +21,13 @@ namespace InfoGraphicsPy
 
         }
 
-        public double CellWidth
-        {
-            get { return cellwidth; }
-            set { cellwidth = value; }
-        }
-
         public void Draw(Session session)
         {
-            double cellwidth = 0.5;
-            double hsep = 0.10;
-            double vsep = 0.10;
-            double cellheight = 4;
-            double catheight = 0.5;
             var cats = new[] { "A", "B", "C", "D", "E" };
             var datapoints = new DataPoints(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 });
             var normalized_values = datapoints.GetNormalizedValues();
-            var widths = ConstructPositions(datapoints.Count(), cellwidth, hsep);
-            var heights = ConstructPositions(new[] { catheight, cellheight }, vsep);
+            var widths = ConstructPositions(datapoints.Count(), CellWidth , this.HorizontalSeparation);
+            var heights = ConstructPositions(new[] { this.CategoryLabelHeight, this.CellHeight }, this.VerticalSeparation);
             var grid = new GridLayout(widths, heights);
 
             int catrow = 0;
@@ -56,7 +39,7 @@ namespace InfoGraphicsPy
             for (int i = 0; i < top_rects.Count; i++)
             {
                 var r = top_rects[i];
-                var size = new VA.Drawing.Size(r.Width, normalized_values[i] * cellheight);
+                var size = new VA.Drawing.Size(r.Width, normalized_values[i] * this.CellHeight);
                 var bar_rect = new VA.Drawing.Rectangle(r.LowerLeft, size);
                 bar_rects.Add(bar_rect);
             }
@@ -77,8 +60,8 @@ namespace InfoGraphicsPy
             {
                 var cells = shape.ShapeCells;
 
-                cells.FillForegnd = "rgb(240,240,240)";
-                cells.LineColor = "rgb(220,220,220)";
+                cells.FillForegnd = this.ValueFillColor;
+                cells.LineColor = this.LineLightBorder;
 
             }
 
@@ -86,9 +69,9 @@ namespace InfoGraphicsPy
             {
                 var cells = shape.ShapeCells;
 
-                cells.FillPattern = "0";
-                cells.LineWeight = "0.0";
-                cells.LinePattern = "0";
+                cells.FillPattern = this.CategoryFillPattern;
+                cells.LineWeight = this.CategoryLineWeight;
+                cells.LinePattern = this.CategoryLinePattern;
             }
             dom.Render(session.Page);
         }

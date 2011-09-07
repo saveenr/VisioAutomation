@@ -9,23 +9,11 @@ using VisioAutomation.Extensions;
 
 namespace InfoGraphicsPy
 {
-    public class PieSliceChart: Chart
+    public class PieSliceChart: GridChart
     {
-        private double cellwidth = 0.5;
-        public double HorizontalSeparation = 0.10;
-        public double VerticalSeparation = 0.10;
-        public double CellHeight = 0.5;
-        public double CategoryLabelHeight = 0.5;
-        
         public string [] CategoryLabels;
         public DataPoints DataPoints;
 
-        string def_line_light_border = "rgb(220,220,220)";
-        string pie_slice_fill_color = "rgb(240,240,240)";
-        string pie_slice_bk_color = "rgb(255,255,255)";
-        string cat_fill_path = "0";
-        string cat_line_weight = "0.0";
-        string cat_line_pattern = "0";
 
         public PieSliceChart(DataPoints dps, string [] cats)
         {
@@ -34,17 +22,11 @@ namespace InfoGraphicsPy
 
         }
 
-        public double CellWidth
-        {
-            get { return cellwidth; }
-            set { cellwidth = value; }
-        }
-
         public void Draw(Session session)
         {
 
             var normalized_values = DataPoints.GetNormalizedValues();
-            var widths = ConstructPositions(DataPoints.Count(), cellwidth, HorizontalSeparation);
+            var widths = ConstructPositions(DataPoints.Count(), this.CellWidth , HorizontalSeparation);
             var heights = ConstructPositions(new[] { CategoryLabelHeight, CellHeight }, VerticalSeparation);
             var grid = new GridLayout(widths, heights);
 
@@ -85,8 +67,8 @@ namespace InfoGraphicsPy
             {
                 var cells = shape.ShapeCells;
 
-                cells.FillForegnd = pie_slice_bk_color;
-                cells.LineColor = def_line_light_border;
+                cells.FillForegnd = NonValueColor;
+                cells.LineColor = LineLightBorder;
 
             }
 
@@ -94,8 +76,8 @@ namespace InfoGraphicsPy
             {
                 var cells = shape.ShapeCells;
 
-                cells.FillForegnd = pie_slice_fill_color;
-                cells.LineColor = def_line_light_border;
+                cells.FillForegnd = ValueFillColor;
+                cells.LineColor = LineLightBorder;
 
             }
 
@@ -103,10 +85,11 @@ namespace InfoGraphicsPy
             {
                 var cells = shape.ShapeCells;
 
-                cells.FillPattern = cat_fill_path;
-                cells.LineWeight = cat_line_weight;
-                cells.LinePattern = cat_line_pattern;
+                cells.FillPattern = CategoryFillPattern;
+                cells.LineWeight = CategoryLineWeight;
+                cells.LinePattern = CategoryLinePattern;
             }
+
             dom.Render(session.Page);
         }
     }
