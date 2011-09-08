@@ -111,13 +111,14 @@ namespace VisioAutomation.Layout
             }
             else if (total_angle >= 360)
             {
-
-                var C = center.Add(-outer_radius, -outer_radius);
-                var D = center.Add(outer_radius, outer_radius);
+                var outer_radius_point = new VA.Drawing.Point(outer_radius, outer_radius);
+                var C = center - outer_radius_point;
+                var D = center + outer_radius_point;
                 var outer_rect = new VA.Drawing.Rectangle(C, D);
 
-                var A = center.Add(-inner_radius, -inner_radius).Subtract(C);
-                var B = center.Add(inner_radius, inner_radius).Subtract(C);
+                var inner_radius_point = new VA.Drawing.Point(inner_radius, inner_radius);
+                var A = center - inner_radius_point - C;
+                var B = center + inner_radius_point - C;
                 var inner_rect = new VA.Drawing.Rectangle(A, B);
 
                 var shape = page.DrawOval(outer_rect);
