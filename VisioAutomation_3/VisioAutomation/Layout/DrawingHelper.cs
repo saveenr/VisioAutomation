@@ -99,6 +99,58 @@ namespace VisioAutomation.Layout
             return arc_bez;
         }
 
+        public static IVisio.Shape DrawArc(
+    IVisio.Page page, VA.Drawing.Point center, double radius, double start_angle, double end_angle)
+        {
+            double total_angle = end_angle - start_angle;
+
+            if (total_angle == 0.0)
+            {
+                var p1 = GetPointAtRadius_Deg(center, start_angle, radius);
+                return page.DrawLine(center, p1);
+            }
+            else if (total_angle >= 360)
+            {
+                var A = center.Add(-radius, -radius);
+                var B = center.Add(radius, radius);
+                var rect = new VA.Drawing.Rectangle(A, B);
+                var shape = page.DrawOval(rect);
+                return shape;
+            }
+            else
+            {
+                int degree;
+                var arc_bez_inner = GetArcBez(center, radius, start_angle, end_angle, out degree);
+                var arc_bez_outer = GetArcBez(center, radius + 0.2, start_angle, end_angle, out degree);
+                arc_bez_outer.Reverse();
+
+                // Create one big bezier that accounts for the entire pie shape. This includes the arc
+                // calculated above and the sides of the pie slice
+                var pie_bez = new List<VA.Drawing.Point>(3 + arc_bez_inner.Count + 3);
+
+                var point_first = arc_bez_inner[0];
+                var point_last = arc_bez_inner[arc_bez_inner.Count - 1];
+                var point_last2 = arc_bez_outer[arc_bez_inner.Count - 1];
+
+                pie_bez.AddRange(arc_bez_inner);
+
+                pie_bez.Add(point_last);
+                pie_bez.Add(point_last);
+
+                pie_bez.AddRange(arc_bez_outer);
+
+                pie_bez.Add(point_last2);
+                pie_bez.Add(point_first);
+                pie_bez.Add(point_first);
+
+                // Render the bezier
+                var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(pie_bez).ToArray();
+                var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
+                return pie_slice;
+            }
+        }
+
+
         private static VA.Drawing.Point GetPointAtRadius_Deg(VA.Drawing.Point origin, double angle, double radius)
         {
             double theta = VA.Convert.DegreesToRadians(angle);

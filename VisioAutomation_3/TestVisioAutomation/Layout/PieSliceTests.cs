@@ -33,5 +33,31 @@ namespace TestVisioAutomation
             page.ResizeToFitContents(1,1);
             doc.Close(true);
         }
+
+        [TestMethod]
+        public void DrawThickArcRanges()
+        {
+            var app = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = app.ActivePage;
+
+            int n = 36;
+            double start_angle = 0.0;
+            double radius = 1.0;
+            double cx = 0.0;
+            double cy = 2.0;
+            double angle_step = (360.0 / (n - 1));
+
+            foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
+            {
+                var center = new VA.Drawing.Point(cx, cy);
+                VA.Layout.DrawingtHelper.DrawArc(page, center, radius, start_angle, end_angle);
+                cx += 2.5;
+            }
+
+            page.ResizeToFitContents(1, 1);
+            doc.Close(true);
+        }
+
     }
 }
