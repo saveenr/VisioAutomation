@@ -1,9 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DOM
 {
-    public class NodeList<T> where T : Node
+    public class NodeList<T> : IEnumerable<T> where T : Node
     {
         private List<T> items;
 
@@ -15,23 +16,29 @@ namespace VisioAutomation.DOM
             this.items = null;
         }
 
-        /// <summary>
-        /// Enumerates through all the child nodes
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<T> Items
+        public IEnumerator<T> GetEnumerator()
         {
-            get
+            foreach (var i in this.GetItems())
             {
-                if (this.items == null)
-                {
-                    yield break;
-                }
+                yield return i;
+            }
+        }
 
-                foreach (T n in this.items)
-                {
-                    yield return n;
-                }
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
+        }
+
+        private IEnumerable<T> GetItems()
+        {
+            if (this.items == null)
+            {
+                yield break;
+            }
+
+            foreach (T n in this.items)
+            {
+                yield return n;
             }
         }
 

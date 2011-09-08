@@ -22,7 +22,7 @@ namespace VisioAutomation.DOM
 
         public override IEnumerable<Node> Children
         {
-            get { return Shapes.Items.Cast<Node>(); }
+            get { return Shapes.Cast<Node>(); }
         }
 
         public void Render(IVisio.Page page)
@@ -54,7 +54,7 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            foreach (var shapes in VA.DOM.LinqUtil.ChunkByBool(this.Shapes.Items, s=>s is Master))
+            foreach (var shapes in VA.LinqUtil.ChunkByBool(this.Shapes, s=>s is Master))
             {
                 var masters_col = new List<Master>();
                 var shapes_col = new List<Shape>();
@@ -88,7 +88,7 @@ namespace VisioAutomation.DOM
             // If needed get all shape objects
             if (this.ResolveAllShapeObjects)
             {
-                foreach (var shape in this.Shapes.Items)
+                foreach (var shape in this.Shapes)
                 {
                     if (shape.VisioShape == null)
                     {
@@ -100,7 +100,7 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Set Shape format on all shapes
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            var shapes_with_formatting = this.Shapes.Items.Where(s => s.ShapeCells != null);
+            var shapes_with_formatting = this.Shapes.Where(s => s.ShapeCells != null);
             foreach (var shape in shapes_with_formatting)
             {
                 var fmt = shape.ShapeCells;
@@ -111,7 +111,7 @@ namespace VisioAutomation.DOM
 
             // ----------------------------------------
             // set the shape text
-            var shapes_with_text = this.Shapes.Items.Where(s => s.Text != null);
+            var shapes_with_text = this.Shapes.Where(s => s.Text != null);
             foreach (var shape in shapes_with_text)
             {
                 var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
@@ -138,7 +138,7 @@ namespace VisioAutomation.DOM
 
             // ----------------------------------------
             // Apply Custom Properties
-            var shapes_with_custom_props = this.Shapes.Items.Where(s => s.CustomProperties != null);
+            var shapes_with_custom_props = this.Shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
             {
                 var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
@@ -152,7 +152,7 @@ namespace VisioAutomation.DOM
 
             // ----------------------------------------
             // Apply Hyperlinks Properties
-            var shapes_with_hyperlinks = this.Shapes.Items.Where(s => s.Hyperlinks != null);
+            var shapes_with_hyperlinks = this.Shapes.Where(s => s.Hyperlinks != null);
             foreach (var shape in shapes_with_hyperlinks)
             {
                 var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
@@ -181,7 +181,7 @@ namespace VisioAutomation.DOM
 
         private void check_valid_shape_ids()
         {
-            foreach (var shape in this.Shapes.Items)
+            foreach (var shape in this.Shapes)
             {
                 if (shape is DynamicConnector)
                 {
@@ -200,7 +200,7 @@ namespace VisioAutomation.DOM
 
         private void LoadMastersDeferred(RenderContext ctx)
         {
-            var deferred_shapes = this.Shapes.Items
+            var deferred_shapes = this.Shapes
                 .Where(shape => shape is ShapeFromMaster)
                 .Cast<ShapeFromMaster>()
                 .Where(shape => shape.MasterObject == null);
@@ -344,7 +344,7 @@ namespace VisioAutomation.DOM
 
         private void _draw_dynamic_connectors(RenderContext ctx)
         {
-            var dyncon_shapes = this.Shapes.Items.Where(s => s is DynamicConnector).Cast<DynamicConnector>().ToList();
+            var dyncon_shapes = this.Shapes.Where(s => s is DynamicConnector).Cast<DynamicConnector>().ToList();
             if (dyncon_shapes.Count > 0)
             {
                 var masterobjects = dyncon_shapes.Select(i => i.MasterObject).ToArray();

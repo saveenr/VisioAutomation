@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.DOM
+namespace VisioAutomation
 {
     internal static class LinqUtil
     {
@@ -113,12 +113,12 @@ namespace VisioAutomation.DOM
         }
 
 
-        public static IEnumerable<IList<T>> ChunkByBool<T>( IEnumerable<T> items, System.Func<T,bool> func_categorize )
+        public static IEnumerable<IList<T>> ChunkByBool<T>( IEnumerable<T> items, System.Func<T,bool> func_categorize)
         {
             var true_col = new List<T>();
             var false_col = new List<T>();
 
-            foreach (var cmd in ChunkByCategory(items, i => i is Master, (a, b) => a == b))
+            foreach (var cmd in ChunkByCategory(items, i => func_categorize(i), (a, b) => a == b))
             {
                 if (cmd.Command == ChunkCommand.Start)
                 {
