@@ -10,8 +10,7 @@ namespace VisioAutomation.DOM
     public class Document : Node
     {
         public NodeList<Shape> Shapes { get; private set; }
-        public PageSettings PageSettings;
-
+        public PageSettings PageSettings { get; set; }
         public bool ResolveAllShapeObjects { get; set; }
 
         public Document()
