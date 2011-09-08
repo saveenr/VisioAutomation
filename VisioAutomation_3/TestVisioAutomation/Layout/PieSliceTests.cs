@@ -51,12 +51,12 @@ namespace TestVisioAutomation
             foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
             {
                 var center = new VA.Drawing.Point(cx, cy);
-                VA.Layout.DrawingtHelper.DrawArc(page, center, radius, start_angle, end_angle);
+                VA.Layout.DrawingtHelper.DrawArc(page, center, radius-0.2, radius, start_angle, end_angle );
                 cx += 2.5;
             }
 
             page.ResizeToFitContents(1, 1);
-            doc.Close(true);
+            //doc.Close(true);
         }
 
     }

@@ -100,19 +100,19 @@ namespace VisioAutomation.Layout
         }
 
         public static IVisio.Shape DrawArc(
-    IVisio.Page page, VA.Drawing.Point center, double radius, double start_angle, double end_angle)
+    IVisio.Page page, VA.Drawing.Point center, double inner_radius,  double outer_radius, double start_angle, double end_angle)
         {
             double total_angle = end_angle - start_angle;
 
             if (total_angle == 0.0)
             {
-                var p1 = GetPointAtRadius_Deg(center, start_angle, radius);
+                var p1 = GetPointAtRadius_Deg(center, start_angle, inner_radius);
                 return page.DrawLine(center, p1);
             }
             else if (total_angle >= 360)
             {
-                var A = center.Add(-radius, -radius);
-                var B = center.Add(radius, radius);
+                var A = center.Add(-inner_radius, -inner_radius);
+                var B = center.Add(inner_radius, inner_radius);
                 var rect = new VA.Drawing.Rectangle(A, B);
                 var shape = page.DrawOval(rect);
                 return shape;
@@ -120,8 +120,8 @@ namespace VisioAutomation.Layout
             else
             {
                 int degree;
-                var arc_bez_inner = GetArcBez(center, radius, start_angle, end_angle, out degree);
-                var arc_bez_outer = GetArcBez(center, radius + 0.2, start_angle, end_angle, out degree);
+                var arc_bez_inner = GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
+                var arc_bez_outer = GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
                 arc_bez_outer.Reverse();
 
                 // Create one big bezier that accounts for the entire pie shape. This includes the arc
