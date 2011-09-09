@@ -65,6 +65,15 @@ namespace InfoGraphicsPy
             }
         }
 
+        public IEnumerable<VA.Drawing.Rectangle> GetRectsInCol(int col)
+        {
+            for (int r = 0; r < this.RowCount; r++)
+            {
+                yield return this.GetRectangle(r,col);
+            }
+        }
+
+
         public double GetBottom(int row)
         {
             return this.Bottoms[row];

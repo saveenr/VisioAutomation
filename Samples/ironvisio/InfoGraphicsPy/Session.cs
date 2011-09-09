@@ -62,22 +62,6 @@ namespace InfoGraphicsPy
             get { return this.app; }
         }
 
-        public void TestDraw()
-        {
-            var CategoryLabels = new[] { "A", "B", "C", "D", "E" };
-            var DataPoints = new DataPoints(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 });
-
-            //var chart = new PieSliceChart(DataPoints,CategoryLabels);
-            //chart.Draw(this);
-
-            //var chart2 = new BarChart(DataPoints, CategoryLabels);
-            //chart2.Draw(this);
-
-            var chart3 = new DoughnutSliceChart(DataPoints, CategoryLabels);
-            chart3.Draw(this);
-
-        }
-
         public IVisio.Page Page
         {
             get { return this.Application.ActivePage; }
