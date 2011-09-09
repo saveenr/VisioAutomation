@@ -29,9 +29,15 @@ namespace VisioAutomationSamples
             int num_cols = 10;
             int num_rows = 10;
 
-            var centerpoints = from row in System.Linq.Enumerable.Range(0, num_rows)
-                               from col in Enumerable.Range(0, num_cols)
-                               select new VA.Drawing.Point(row*1.0, col*1.0);
+            var centerpoints = new List<VA.Drawing.Point>(num_rows*num_cols);
+            foreach (var row in Enumerable.Range(0, num_rows))
+            {
+                foreach (var col in Enumerable.Range(0, num_cols))
+                {
+                    var p = new VA.Drawing.Point(row*1.0, col*1.0);
+                    centerpoints.Add(p);
+                }
+            }
 
             var masters = new[] {master};
 

@@ -105,7 +105,6 @@
     <Compile Include="FormSampleRunner.Designer.cs">
       <DependentUpon>FormSampleRunner.cs</DependentUpon>
     </Compile>
-    <Compile Include="InfoGraphicSamples.cs" />
     <Compile Include="LayoutSamples.cs" />
     <Compile Include="PageSamples.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

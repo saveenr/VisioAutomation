@@ -11,12 +11,8 @@ namespace VisioAutomationSamples
         public static void ProgressBar()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
             var bk = page.DrawRectangle(0, 0, 5, 1);
-
             var fg = page.DrawRectangle(0, 0, 1, 1);
-
-            var fmt = new VA.DOM.ShapeCells();
 
             string bkname = bk.NameID;
 
@@ -33,11 +29,12 @@ namespace VisioAutomationSamples
             page.Application.ActiveWindow.SelectAll();
             var group = page.Application.ActiveWindow.Selection.Group();
 
-            VA.Text.TextHelper.SetTextFormatFields(group,
-                                                           "{0} ( {1} of {2} )",
-                                                           VA.Text.Markup.Fields.PageName,
-                                                           VA.Text.Markup.Fields.PageNumber,
-                                                           VA.Text.Markup.Fields.NumberOfPages);
+            VA.Text.TextHelper.SetTextFormatFields(
+                group,
+                "{0} ( {1} of {2} )",
+                VA.Text.Markup.Fields.PageName,
+                VA.Text.Markup.Fields.PageNumber,
+                VA.Text.Markup.Fields.NumberOfPages);
         }
     }
 }
