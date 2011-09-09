@@ -308,6 +308,13 @@ namespace VisioAutomation.DOM
                     oval.VisioShapeID = oval_shape.ID16;
                     oval.VisioShape = oval_shape;
                 }
+                else if (shape is Arc)
+                {
+                    var ps = (Arc)shape;
+                    var ps_shape = VA.Layout.DrawingtHelper.DrawArc(ctx.VisioPage, ps.Center, ps.InnerRadius, ps.OuterRadius, ps.StartAngle, ps.EndAngle);
+                    ps.VisioShapeID = ps_shape.ID16;
+                    ps.VisioShape = ps_shape;
+                }
                 else if (shape is PieSlice)
                 {
                     var ps = (PieSlice)shape;
@@ -414,6 +421,12 @@ namespace VisioAutomation.DOM
             return pieslice;
         }
 
+        public Arc DrawArc(VA.Drawing.Point center, double inner_radius, double outer_radius, double start, double end)
+        {
+            var arc = new Arc(center, inner_radius, outer_radius, start, end);
+            this.Shapes.Add(arc);
+            return arc;
+        }
         public Rectangle DrawRectangle(VA.Drawing.Rectangle r)
         {
             var rectangle = new Rectangle(r);
