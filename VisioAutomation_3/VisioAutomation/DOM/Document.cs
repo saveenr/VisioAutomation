@@ -336,7 +336,8 @@ namespace VisioAutomation.DOM
 
                 else
                 {
-                    throw new AutomationException("Unhandled type");
+                    string msg = string.Format("Unhandled Node Type: {0}", shape.GetType());
+                    throw new AutomationException(msg);
                 }
             }
         }

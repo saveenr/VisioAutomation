@@ -107,7 +107,9 @@ namespace VisioAutomation.Layout
             if (total_angle == 0.0)
             {
                 var p1 = GetPointAtRadius_Deg(center, start_angle, inner_radius);
-                return page.DrawLine(center, p1);
+                var p2 = GetPointAtRadius_Deg(center, start_angle, outer_radius);
+                var shape = page.DrawLine(p1, p2);
+                return shape;
             }
             else if (total_angle >= 360)
             {
