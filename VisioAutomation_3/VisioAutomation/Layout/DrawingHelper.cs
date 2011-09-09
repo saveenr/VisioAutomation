@@ -55,28 +55,34 @@ namespace VisioAutomation.Layout
             else
             {
                 int degree;
-                var arc_bez = GetArcBez(center, radius, start_angle, end_angle, out degree);
-
-                // Create one big bezier that accounts for the entire pie shape. This includes the arc
-                // calculated above and the sides of the pie slice
-                var pie_bez  = new List<VA.Drawing.Point>(3+arc_bez.Count+3);
-
-                var point_first = arc_bez[0];
-                var point_last = arc_bez[arc_bez.Count - 1];
-
-                pie_bez.Add(center);
-                pie_bez.Add(center);
-                pie_bez.Add(point_first);             
-                pie_bez.AddRange(arc_bez);
-                pie_bez.Add(point_last);
-                pie_bez.Add(center);
-                pie_bez.Add(center);
+                var pie_bez = GetPieSliceBezier(center, radius, start_angle, end_angle, out degree);
 
                 // Render the bezier
                 var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(pie_bez).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }
+        }
+
+        private static List<Point> GetPieSliceBezier(Point center, double radius, double start_angle, double end_angle, out int degree)
+        {
+            var arc_bez = GetArcBez(center, radius, start_angle, end_angle, out degree);
+
+            // Create one big bezier that accounts for the entire pie shape. This includes the arc
+            // calculated above and the sides of the pie slice
+            var pie_bez = new List<VA.Drawing.Point>(3 + arc_bez.Count + 3);
+
+            var point_first = arc_bez[0];
+            var point_last = arc_bez[arc_bez.Count - 1];
+
+            pie_bez.Add(center);
+            pie_bez.Add(center);
+            pie_bez.Add(point_first);
+            pie_bez.AddRange(arc_bez);
+            pie_bez.Add(point_last);
+            pie_bez.Add(center);
+            pie_bez.Add(center);
+            return pie_bez;
         }
 
         private static List<Point> GetArcBez(Point center, double radius, double start_angle, double end_angle, out int degree)
@@ -100,7 +106,7 @@ namespace VisioAutomation.Layout
         }
 
         public static IVisio.Shape DrawArc(
-    IVisio.Page page, VA.Drawing.Point center, double inner_radius,  double outer_radius, double start_angle, double end_angle)
+            IVisio.Page page, VA.Drawing.Point center, double inner_radius,  double outer_radius, double start_angle, double end_angle)
         {
             double total_angle = end_angle - start_angle;
 
@@ -131,34 +137,40 @@ namespace VisioAutomation.Layout
             else
             {
                 int degree;
-                var arc_bez_inner = GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
-                var arc_bez_outer = GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
-                arc_bez_outer.Reverse();
-
-                // Create one big bezier that accounts for the entire pie shape. This includes the arc
-                // calculated above and the sides of the pie slice
-                var pie_bez = new List<VA.Drawing.Point>(3 + arc_bez_inner.Count + 3);
-
-                var point_first = arc_bez_inner[0];
-                var point_last = arc_bez_inner[arc_bez_inner.Count - 1];
-                var point_last2 = arc_bez_outer[arc_bez_inner.Count - 1];
-
-                pie_bez.AddRange(arc_bez_inner);
-
-                pie_bez.Add(point_last);
-                pie_bez.Add(point_last);
-
-                pie_bez.AddRange(arc_bez_outer);
-
-                pie_bez.Add(point_last2);
-                pie_bez.Add(point_first);
-                pie_bez.Add(point_first);
+                var thickarc = GetThinkArcBezier(center, inner_radius, outer_radius, start_angle, end_angle, out degree);
 
                 // Render the bezier
-                var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(pie_bez).ToArray();
+                var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(thickarc).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }
+        }
+
+        private static List<Point> GetThinkArcBezier(Point center, double inner_radius, double outer_radius, double start_angle, double end_angle, out int degree)
+        {
+            var bez_inner = GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
+            var bez_outer = GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
+            bez_outer.Reverse();
+
+            // Create one big bezier that accounts for the entire pie shape. This includes the arc
+            // calculated above and the sides of the pie slice
+            var bez = new List<VA.Drawing.Point>(3 + bez_inner.Count + 3);
+
+            var point_first = bez_inner[0];
+            var point_last = bez_inner[bez_inner.Count - 1];
+            var point_last2 = bez_outer[bez_inner.Count - 1];
+
+            bez.AddRange(bez_inner);
+
+            bez.Add(point_last);
+            bez.Add(point_last);
+
+            bez.AddRange(bez_outer);
+
+            bez.Add(point_last2);
+            bez.Add(point_first);
+            bez.Add(point_first);
+            return bez;
         }
 
 
