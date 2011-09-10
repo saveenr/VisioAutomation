@@ -12,7 +12,7 @@ namespace VisioAutomation
     {
         private double theta_rad;
 
-        public Angle(double v)
+        private Angle(double v)
         {
             this.theta_rad = v;
         }
@@ -41,6 +41,11 @@ namespace VisioAutomation
         {
             return new VA.Angle(x.Radians - y.Radians);
         }
+
+        public static implicit operator Angle (double r)
+        {
+            return new Angle(r);
+        }
     }
 }
 
@@ -55,14 +60,14 @@ namespace VisioAutomation.Layout
         {
             double sum = values.Sum();
             var shapes = new List<IVisio.Shape>();
-            Angle start_angle = new VA.Angle(0);
+            Angle start_angle = 0;
 
             foreach (int i in Enumerable.Range(0, values.Count))
             {
                 double cur_val = values[i];
                 double cur_val_norm = cur_val/sum;
-                Angle cur_angle = new VA.Angle(cur_val_norm * System.Math.PI * 2.0);
-                Angle end_angle = new VA.Angle(start_angle.Radians + cur_angle.Radians);
+                Angle cur_angle = cur_val_norm * System.Math.PI * 2.0;
+                Angle end_angle = start_angle.Radians + cur_angle.Radians;
                 var shape = DrawPieSlice(page, center, radius, start_angle, end_angle);
                 start_angle += cur_angle;
 

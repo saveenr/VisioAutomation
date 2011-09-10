@@ -44,8 +44,8 @@ namespace InfoGraphicsPy
             for (int i = 0; i < DataPoints.Count; i++)
             {
                 var dp = DataPoints[i];
-                var start = new VA.Angle(0);
-                var end = new VA.Angle(System.Math.PI * 2.0 * normalized_values[i]);
+                VA.Angle start = 0.0;
+                VA.Angle end = System.Math.PI * 2.0 * normalized_values[i];
                 double radius = top_rects[i].Width/2.0;
 
                 var circle_shape = dom.DrawOval(top_rects[i]);
@@ -130,11 +130,11 @@ namespace InfoGraphicsPy
             for (int i = 0; i < DataPoints.Count; i++)
             {
                 var dp = DataPoints[i];
-                var start = new VA.Angle(0);
-                var end = new VA.Angle(System.Math.PI * 2.0 * normalized_values[i]);
+                var start = 0.0;
+                var end = System.Math.PI * 2.0 * normalized_values[i];
                 double radius = top_rects[i].Width / 2.0;
 
-                var circle_shape = dom.DrawArc(top_rects[i].Center, radius * 0.7, radius, start, new VA.Angle(System.Math.PI * 2.0));
+                var circle_shape = dom.DrawArc(top_rects[i].Center, radius * 0.7, radius, start, System.Math.PI * 2.0);
                 circle_shapes.Add(circle_shape);
 
                 var dom_shape = dom.DrawArc(top_rects[i].Center, radius*0.7, radius, start, end);

@@ -72,8 +72,8 @@ namespace VisioAutomation.Drawing
                 throw new System.ArgumentOutOfRangeException("endangle must be >= startangle");
             }
 
-            VA.Angle min_angle = new VA.Angle(0);
-            VA.Angle max_angle = new VA.Angle(System.Math.PI * 2);
+            VA.Angle min_angle = 0;
+            VA.Angle max_angle = System.Math.PI * 2;
 
             VA.Angle  total_angle = endangle - startangle;
 
