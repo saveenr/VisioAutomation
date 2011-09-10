@@ -64,7 +64,7 @@ namespace VisioAutomation.Layout.Pie
         {
             double sum = this._slices.Select(s => s.Value).Sum();
             var shapes = new List<IVisio.Shape>();
-            Angle start_angle = 0.0;
+            double start_angle = 0.0;
 
             // Draw each slice
             for (int i = 0; i < this.Slices.Count; i++)
@@ -72,8 +72,8 @@ namespace VisioAutomation.Layout.Pie
                 var slice = this.Slices[i];
                 double cur_val = slice.Value;
                 double cur_val_norm = cur_val / sum;
-                Angle cur_angle = cur_val_norm * System.Math.PI * 2.0;
-                Angle end_angle = start_angle+ cur_angle;
+                double cur_angle = cur_val_norm * System.Math.PI * 2.0;
+                double end_angle = start_angle + cur_angle;
 
 
                 slice.StartAngle = start_angle;

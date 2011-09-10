@@ -65,34 +65,33 @@ namespace VisioAutomation.Drawing
             return points;
         }
 
-        public static BezierSegment[] FromArc(VA.Angle startangle, VA.Angle endangle)
+        public static BezierSegment[] FromArc(double startangle, double endangle)
         {
-            if (endangle.Radians < startangle.Radians)
+            if (endangle < startangle)
             {
                 throw new System.ArgumentOutOfRangeException("endangle must be >= startangle");
             }
 
-            VA.Angle min_angle = 0;
-            VA.Angle max_angle = System.Math.PI * 2;
+            double min_angle = 0;
+            double max_angle = System.Math.PI * 2;
+            double  total_angle = endangle - startangle;
 
-            VA.Angle  total_angle = endangle - startangle;
-
-            if (total_angle.Radians == min_angle.Radians)
+            if (total_angle == min_angle)
             {
                 var arr = new BezierSegment[1];
-                double cos_theta = System.Math.Cos(startangle.Radians);
-                double sin_theta = System.Math.Sin(startangle.Radians);
+                double cos_theta = System.Math.Cos(startangle);
+                double sin_theta = System.Math.Sin(startangle);
                 var p0 = new VA.Drawing.Point(cos_theta, -sin_theta);
-                var p1 = RotateAroundOrigin( p0, startangle.Radians);
+                var p1 = RotateAroundOrigin( p0, startangle);
                 arr[0] = new BezierSegment(p1,p1,p1,p1);
             }
 
-            if (total_angle.Radians > max_angle.Radians)
+            if (total_angle > max_angle)
             {
                 endangle = startangle + max_angle;
             }
 
-            var bez_arr = subdivide_arc_nicely(startangle.Radians, endangle.Radians)
+            var bez_arr = subdivide_arc_nicely(startangle, endangle)
                 .Select(a => get_bezier_points_for_small_arc(a.begin, a.end))
                 .ToArray();
 

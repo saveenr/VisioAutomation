@@ -414,14 +414,14 @@ namespace VisioAutomation.DOM
             return oval;
         }
 
-        public PieSlice DrawPieSlice(VA.Drawing.Point center, double radius, VA.Angle start, VA.Angle end)
+        public PieSlice DrawPieSlice(VA.Drawing.Point center, double radius, double start, double end)
         {
             var pieslice = new PieSlice(center,radius,start,end);
             this.Shapes.Add(pieslice);
             return pieslice;
         }
 
-        public Arc DrawArc(VA.Drawing.Point center, double inner_radius, double outer_radius, VA.Angle start, VA.Angle end)
+        public Arc DrawArc(VA.Drawing.Point center, double inner_radius, double outer_radius, double start, double end)
         {
             var arc = new Arc(center, inner_radius, outer_radius, start, end);
             this.Shapes.Add(arc);

@@ -44,8 +44,8 @@ namespace InfoGraphicsPy
             for (int i = 0; i < DataPoints.Count; i++)
             {
                 var dp = DataPoints[i];
-                VA.Angle start = 0.0;
-                VA.Angle end = System.Math.PI * 2.0 * normalized_values[i];
+                double start = 0.0;
+                double end = System.Math.PI * 2.0 * normalized_values[i];
                 double radius = top_rects[i].Width/2.0;
 
                 var circle_shape = dom.DrawOval(top_rects[i]);

@@ -8,10 +8,10 @@ namespace VisioAutomation.DOM
         public VA.Drawing.Point Center { get; private set; }
         public double InnerRadius { get; private set; }
         public double OuterRadius { get; private set; }
-        public VA.Angle StartAngle { get; private set; }
-        public VA.Angle EndAngle  { get; private set; }
+        public double StartAngle { get; private set; }
+        public double EndAngle  { get; private set; }
 
-        public Arc(double x0, double y0, double ri, double ro, VA.Angle start, VA.Angle end)
+        public Arc(double x0, double y0, double ri, double ro, double start, double end)
         {
             this.Center = new VA.Drawing.Point(x0, y0);
             this.InnerRadius= ri;
@@ -20,7 +20,7 @@ namespace VisioAutomation.DOM
             this.EndAngle = end;
         }
 
-        public Arc(VA.Drawing.Point p0, double ri, double ro, VA.Angle start, VA.Angle end)
+        public Arc(VA.Drawing.Point p0, double ri, double ro, double start, double end)
         {
             this.Center = p0;
             this.InnerRadius = ri;
