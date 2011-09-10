@@ -6,6 +6,50 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
+namespace VisioAutomation
+{
+    public struct Angle
+    {
+        private double theta_rad;
+
+        private Angle(double v)
+        {
+            this.theta_rad = v;
+        }
+
+        public static Angle FromRadians(double v)
+        {
+            return new Angle(v);
+        }
+
+        public static Angle FromDegrees(double v)
+        {
+            double rad = VA.Convert.DegreesToRadians(v);
+            return new Angle(rad);
+        }
+
+        public double Radians
+        {
+            get { return this.theta_rad; }
+        }
+
+        public double Degrees
+        {
+            get { return VA.Convert.RadiansToDegrees(this.theta_rad); }
+        }
+
+        public static Angle operator +(Angle x, Angle y)
+        {
+            return Angle.FromRadians(x.Radians + y.Radians);
+        }
+
+        public static Angle operator -(Angle x, Angle y)
+        {
+            return Angle.FromRadians(x.Radians - y.Radians);
+        }
+    }
+}
+
 
 namespace VisioAutomation.Layout
 {
@@ -17,16 +61,16 @@ namespace VisioAutomation.Layout
         {
             double sum = values.Sum();
             var shapes = new List<IVisio.Shape>();
-            double start_angle = 0;
+            Angle start_angle = Angle.FromRadians(0);
 
             foreach (int i in Enumerable.Range(0, values.Count))
             {
                 double cur_val = values[i];
                 double cur_val_norm = cur_val/sum;
-                double cur_angle_size_deg = cur_val_norm*360;
-                double end_angle = start_angle + cur_angle_size_deg;
+                Angle cur_angle = Angle.FromRadians(cur_val_norm*System.Math.PI*2.0);
+                Angle end_angle = Angle.FromRadians(start_angle.Radians + cur_angle.Radians);
                 var shape = DrawPieSlice(page, center, radius, start_angle, end_angle);
-                start_angle += cur_angle_size_deg;
+                start_angle += cur_angle;
 
                 shapes.Add(shape);
             }
@@ -35,9 +79,9 @@ namespace VisioAutomation.Layout
         }
 
         public static IVisio.Shape DrawPieSlice(
-            IVisio.Page page, VA.Drawing.Point center, double radius, double start_angle, double end_angle)
+            IVisio.Page page, VA.Drawing.Point center, double radius, VA.Angle start_angle, VA.Angle end_angle)
         {
-            double total_angle = end_angle - start_angle;
+            double total_angle = end_angle.Radians - start_angle.Radians;
 
             if (total_angle == 0.0)
             {
@@ -64,7 +108,7 @@ namespace VisioAutomation.Layout
             }
         }
 
-        private static List<Point> GetPieSliceBezier(Point center, double radius, double start_angle, double end_angle, out int degree)
+        private static List<Point> GetPieSliceBezier(Point center, double radius, VA.Angle start_angle, VA.Angle end_angle, out int degree)
         {
             var arc_bez = GetArcBez(center, radius, start_angle, end_angle, out degree);
 
@@ -85,13 +129,13 @@ namespace VisioAutomation.Layout
             return pie_bez;
         }
 
-        private static List<Point> GetArcBez(Point center, double radius, double start_angle, double end_angle, out int degree)
+        private static List<Point> GetArcBez(Point center, double radius, VA.Angle start_angle, VA.Angle end_angle, out int degree)
         {
             // split apart the arc into distinct bezier segments (will end up with at least 1 segment)
             // the segments will "fit" end to end
             var sub_arcs = VA.Drawing.BezierSegment.FromArc(
-                Convert.DegreesToRadians(start_angle),
-                Convert.DegreesToRadians(end_angle));
+                start_angle,
+                end_angle);
 
             // merge bezier segments together into a list of points
             var merged_points = VA.Drawing.BezierSegment.Merge(sub_arcs, out degree);
@@ -106,18 +150,18 @@ namespace VisioAutomation.Layout
         }
 
         public static IVisio.Shape DrawArc(
-            IVisio.Page page, VA.Drawing.Point center, double inner_radius,  double outer_radius, double start_angle, double end_angle)
+            IVisio.Page page, VA.Drawing.Point center, double inner_radius, double outer_radius, VA.Angle start_angle, VA.Angle end_angle)
         {
-            double total_angle = end_angle - start_angle;
+            VA.Angle total_angle = end_angle - start_angle;
 
-            if (total_angle == 0.0)
+            if (total_angle.Radians == 0.0)
             {
                 var p1 = GetPointAtRadius_Deg(center, start_angle, inner_radius);
                 var p2 = GetPointAtRadius_Deg(center, start_angle, outer_radius);
                 var shape = page.DrawLine(p1, p2);
                 return shape;
             }
-            else if (total_angle >= 360)
+            else if (total_angle.Radians >= 360)
             {
                 var outer_radius_point = new VA.Drawing.Point(outer_radius, outer_radius);
                 var C = center - outer_radius_point;
@@ -146,7 +190,7 @@ namespace VisioAutomation.Layout
             }
         }
 
-        private static List<Point> GetThinkArcBezier(Point center, double inner_radius, double outer_radius, double start_angle, double end_angle, out int degree)
+        private static List<Point> GetThinkArcBezier(Point center, double inner_radius, double outer_radius, VA.Angle start_angle, VA.Angle end_angle, out int degree)
         {
             var bez_inner = GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
             var bez_outer = GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
@@ -174,9 +218,9 @@ namespace VisioAutomation.Layout
         }
 
 
-        private static VA.Drawing.Point GetPointAtRadius_Deg(VA.Drawing.Point origin, double angle, double radius)
+        private static VA.Drawing.Point GetPointAtRadius_Deg(VA.Drawing.Point origin, VA.Angle angle, double radius)
         {
-            double theta = VA.Convert.DegreesToRadians(angle);
+            double theta = angle.Radians;
             double x = radius * System.Math.Cos(theta);
             double y = radius * System.Math.Sin(theta);
             var new_point = new VA.Drawing.Point(x, y);

@@ -25,7 +25,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var shape = scriptingsession.Draw.PieSlice(new VA.Drawing.Point(this.X0, this.Y0), this.Radius, this.StartAngle, this.EndAngle);
+            var shape = scriptingsession.Draw.PieSlice(new VA.Drawing.Point(this.X0, this.Y0), this.Radius, VA.Angle.FromRadians(this.StartAngle), VA.Angle.FromRadians(this.EndAngle));
 
             this.WriteObject(shape);
         }

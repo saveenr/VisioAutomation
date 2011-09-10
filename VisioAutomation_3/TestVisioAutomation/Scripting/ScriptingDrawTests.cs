@@ -114,8 +114,8 @@ namespace TestVisioAutomation
 
             var center = new VA.Drawing.Point(2, 2);
             double radius = 1.0;
-            double start_angle = 0;
-            double end_angle = System.Math.PI;
+            var start_angle = VA.Angle.FromRadians(0);
+            VA.Angle end_angle = VA.Angle.FromRadians(System.Math.PI);
 
             var shape = ss.Draw.PieSlice(center, radius, start_angle, end_angle);
             ss.Document.Close(true);

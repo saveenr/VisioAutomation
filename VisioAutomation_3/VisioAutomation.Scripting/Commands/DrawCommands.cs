@@ -192,8 +192,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape PieSlice(VA.Drawing.Point center,
                                   double radius,
-                                  double start_angle,
-                                  double end_angle)
+                                  VA.Angle start_angle,
+                                  VA.Angle end_angle)
         {
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
