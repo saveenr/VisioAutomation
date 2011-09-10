@@ -104,14 +104,6 @@ namespace TestVisioAutomation
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
-            var points = new[]
-                             {
-                                 new VA.Drawing.Point(0, 0),
-                                 new VA.Drawing.Point(2, 0.5),
-                                 new VA.Drawing.Point(2, 2),
-                                 new VA.Drawing.Point(3, 0.5),
-                             };
-
             var center = new VA.Drawing.Point(2, 2);
             double radius = 1.0;
             double start_angle = 0;
@@ -127,14 +119,6 @@ namespace TestVisioAutomation
             var ss = GetScriptingSession();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
-
-            var points = new[]
-                             {
-                                 new VA.Drawing.Point(0, 0),
-                                 new VA.Drawing.Point(2, 0.5),
-                                 new VA.Drawing.Point(2, 2),
-                                 new VA.Drawing.Point(3, 0.5),
-                             };
 
             var center = new VA.Drawing.Point(2, 2);
             double radius = 1.0;
