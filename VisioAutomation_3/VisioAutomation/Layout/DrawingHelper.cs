@@ -12,7 +12,7 @@ namespace VisioAutomation
     {
         private double theta_rad;
 
-        private Angle(double v)
+        public Angle(double v)
         {
             this.theta_rad = v;
         }
@@ -20,12 +20,6 @@ namespace VisioAutomation
         public static Angle FromRadians(double v)
         {
             return new Angle(v);
-        }
-
-        public static Angle FromDegrees(double v)
-        {
-            double rad = VA.Convert.DegreesToRadians(v);
-            return new Angle(rad);
         }
 
         public double Radians
@@ -40,12 +34,12 @@ namespace VisioAutomation
 
         public static Angle operator +(Angle x, Angle y)
         {
-            return Angle.FromRadians(x.Radians + y.Radians);
+            return new VA.Angle(x.Radians + y.Radians);
         }
 
         public static Angle operator -(Angle x, Angle y)
         {
-            return Angle.FromRadians(x.Radians - y.Radians);
+            return new VA.Angle(x.Radians - y.Radians);
         }
     }
 }
@@ -61,14 +55,14 @@ namespace VisioAutomation.Layout
         {
             double sum = values.Sum();
             var shapes = new List<IVisio.Shape>();
-            Angle start_angle = Angle.FromRadians(0);
+            Angle start_angle = new VA.Angle(0);
 
             foreach (int i in Enumerable.Range(0, values.Count))
             {
                 double cur_val = values[i];
                 double cur_val_norm = cur_val/sum;
-                Angle cur_angle = Angle.FromRadians(cur_val_norm*System.Math.PI*2.0);
-                Angle end_angle = Angle.FromRadians(start_angle.Radians + cur_angle.Radians);
+                Angle cur_angle = new VA.Angle(cur_val_norm * System.Math.PI * 2.0);
+                Angle end_angle = new VA.Angle(start_angle.Radians + cur_angle.Radians);
                 var shape = DrawPieSlice(page, center, radius, start_angle, end_angle);
                 start_angle += cur_angle;
 
