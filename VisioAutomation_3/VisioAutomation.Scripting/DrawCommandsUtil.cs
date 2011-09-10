@@ -77,10 +77,10 @@ namespace VisioAutomation.Scripting
             return duplicated_shapes;
         }
 
-        private static Drawing.Point GetPointAtRadius(Drawing.Point origin, VA.Angle angle, double radius)
+        private static Drawing.Point GetPointAtRadius(Drawing.Point origin, double angle, double radius)
         {
-            double x = radius*System.Math.Cos(angle.Radians);
-            double y = radius*System.Math.Sin(angle.Radians);
+            double x = radius*System.Math.Cos(angle);
+            double y = radius*System.Math.Sin(angle);
             var new_point = new Drawing.Point(x,y);
             new_point = origin + new_point;
             return new_point;
@@ -90,16 +90,16 @@ namespace VisioAutomation.Scripting
             IVisio.Page page,
             VA.Drawing.Point center,
             double radius,
-            VA.Angle start_angle,
-            VA.Angle end_angle)
+            double start_angle,
+            double end_angle)
         {
-            VA.Angle total_angle = end_angle - start_angle;
+            double total_angle = end_angle - start_angle;
 
-            if (total_angle.Radians == 0.0)
+            if (total_angle == 0.0)
             {
                 return page.DrawLine(center, GetPointAtRadius(center, start_angle, radius));
             }
-            else if (total_angle.Radians >= System.Math.PI*2.0)
+            else if (total_angle >= System.Math.PI*2.0)
             {
                 var A = center.Add(-radius, -radius);
                 var B = center.Add(radius, radius);
