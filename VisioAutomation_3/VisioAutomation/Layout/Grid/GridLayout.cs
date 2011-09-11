@@ -141,7 +141,7 @@ namespace VisioAutomation.Layout.Grid
             var nodes_to_draw = this.Nodes.Where(n => n.Draw).ToList();
 
             var dom_doc = new VA.DOM.Document();
-            dom_doc.ResolveAllShapeObjects = true;
+            dom_doc.ResolveVisioShapeObjects = true;
 
             var dom_shapes = new List<VA.DOM.Master>(nodes_to_draw.Count);
             foreach (var node in nodes_to_draw)

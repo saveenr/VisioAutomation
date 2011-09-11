@@ -164,7 +164,7 @@ namespace VisioAutomationSamples
             
             var nodes = layout.Nodes.Where(n => n.Data.Render).ToList();
             var dom = new VA.DOM.Document();
-            dom.ResolveAllShapeObjects = true;
+            dom.ResolveVisioShapeObjects = true;
 
             var font_to_id = doc.Fonts.AsEnumerable().ToDictionary(f => f.Name, f => f.ID);
             var unique_fonts = new HashSet<string>();

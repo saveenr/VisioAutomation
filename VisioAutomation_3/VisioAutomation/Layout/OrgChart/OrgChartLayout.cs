@@ -76,7 +76,7 @@ namespace VisioAutomation.Layout.OrgChart
             var doc = documents.AddEx(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS, 0, 0);
 
             var vdom = new VA.DOM.Document();
-            vdom.ResolveAllShapeObjects = true;
+            vdom.ResolveVisioShapeObjects = true;
             
             // fixup the nodes so that they render on the page
             foreach (var i in treenodes)

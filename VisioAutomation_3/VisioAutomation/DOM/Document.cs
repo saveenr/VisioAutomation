@@ -11,7 +11,7 @@ namespace VisioAutomation.DOM
     {
         public NodeList<Shape> Shapes { get; private set; }
         public PageSettings PageSettings { get; set; }
-        public bool ResolveAllShapeObjects { get; set; }
+        public bool ResolveVisioShapeObjects { get; set; }
 
         public Document()
         {
@@ -85,7 +85,7 @@ namespace VisioAutomation.DOM
             _draw_dynamic_connectors(ctx);
 
             // If needed get all shape objects
-            if (this.ResolveAllShapeObjects)
+            if (this.ResolveVisioShapeObjects)
             {
                 foreach (var shape in this.Shapes)
                 {
