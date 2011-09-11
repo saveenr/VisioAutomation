@@ -59,7 +59,13 @@ namespace VisioAutomation.Layout
             var xforms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
 
             // Then, sort the shapeids pased on the corresponding value in the results
-            var sorted_shape_ids = VA.Internal.CollectionUtil.GetSortedItemsIndexed(shapeids, i=> GetPosition(xforms[i],pos), (a, b) => a.CompareTo(b)).ToList();
+
+
+            var sorted_shape_ids = Enumerable.Range(0, shapeids.Count)
+                .Select(i => new {index = i, shapeid = shapeids[i], pos = GetPosition(xforms[i], pos)})
+                .OrderBy(i => i.pos)
+                .Select(i=>i.shapeid)
+                .ToList();
 
             return sorted_shape_ids;
         }

@@ -103,5 +103,39 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
+        [TestMethod]
+        public void Sort1()
+        {
+            var app = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = app.ActivePage;
+
+            var s1 = page.DrawRectangle(2, 2, 3, 3);
+            var s2 = page.DrawRectangle(1, 1, 2, 2);
+            var s3 = page.DrawRectangle(4, 4, 4, 4);
+            var s4 = page.DrawRectangle(3, 3, 3, 3);
+
+            s1.Text = "A";
+            s2.Text = "B";
+            s3.Text = "C";
+            s4.Text = "D";
+
+            var shapes = new[] {s1, s2, s3, s4};
+            var shapeids = shapes.Select(s=>s.ID).ToList();
+
+            var sorted_shapeids = VA.Layout.LayoutHelper.SortShapesByPosition(page, shapeids, VA.Layout.XFormPosition.PinX);
+
+            var sorted_shapes = sorted_shapeids.Select(id => page.Shapes.get_ItemFromID(id)).ToList();
+            var text = string.Join("", sorted_shapes.Select(s => s.Text));
+            Assert.AreEqual("BADC",text);
+
+            sorted_shapeids = VA.Layout.LayoutHelper.SortShapesByPosition(page, shapeids, VA.Layout.XFormPosition.PinY);
+            sorted_shapes = sorted_shapeids.Select(id => page.Shapes.get_ItemFromID(id)).ToList();
+            text = string.Join("", sorted_shapes.Select(s => s.Text));
+            Assert.AreEqual("BADC",text);
+
+            doc.Close(true);
+        }
+
     }
 }

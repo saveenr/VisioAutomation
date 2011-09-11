@@ -16,26 +16,5 @@ namespace VisioAutomation.Internal
                 this.Key = k;
             }
         }
-
-        // Schwartzian transform where the key comes from another collection
-        public static IEnumerable<T> GetSortedItemsIndexed<T, TSortBy>(
-            IList<T> list,
-            Func<int, TSortBy> get_sortby,
-            Comparison<TSortBy> comparison) where TSortBy : IComparable
-        {
-            var temp_list = new List<TempSortData<T, TSortBy>>(list.Count);
-            for (int i = 0; i < list.Count; i++)
-            {
-                var temp_rec = new TempSortData<T, TSortBy>(list[i], get_sortby(i));
-                temp_list.Add(temp_rec);
-            }
-
-            temp_list.Sort((a, b) => comparison(a.Key, b.Key));
-
-            foreach (var item in temp_list)
-            {
-                yield return item.Value;
-            }
-        }
     }
 }
