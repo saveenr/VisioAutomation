@@ -175,14 +175,14 @@ namespace VisioAutomation.Layout.InternalTree
             }
             var nodes = this.Nodes.ToList();
 
-            var bb = VA.Drawing.DrawingUtil.TryGetBoundingBox(nodes.Select(n => n.Rect));
+            var bb = new VA.Drawing.BoundingBox(nodes.Select(n => n.Rect));
             if (!bb.HasValue)
             {
                 throw new System.InvalidOperationException("Internal Error: Could not compute bounding box");
             }
             else
             {
-                return bb.Value;
+                return bb.Rectangle;
             }
         }
 

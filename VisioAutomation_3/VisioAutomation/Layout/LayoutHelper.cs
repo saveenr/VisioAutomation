@@ -130,14 +130,14 @@ namespace VisioAutomation.Layout
 
         public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Layout.XFormCells> xfrms)
         {
-            var bb = VA.Drawing.DrawingUtil.TryGetBoundingBox(xfrms.Select(i => i.Rect));
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => i.Rect));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
             }
             else
             {
-                return bb.Value;
+                return bb.Rectangle;
             }
         }
 
@@ -154,7 +154,7 @@ namespace VisioAutomation.Layout
                 var shapeid = shapeids[i];
                 var old_layout = layout_info[i];
                 var old_bb = old_layout.Rect;
-                var new_corner_pos = VA.Drawing.DrawingUtil.Round(
+                var new_corner_pos = VA.Drawing.MathUtil.Round(
                     old_bb.LowerLeft,
                     snapsize.Width,
                     snapsize.Height);
@@ -220,7 +220,7 @@ namespace VisioAutomation.Layout
             {
                 int shapeid = shapeids[i];
                 var old_size = layout_info[i].Size;
-                var new_size = VA.Drawing.DrawingUtil.Max(VA.Drawing.DrawingUtil.SnapToNearestValue(old_size, snapsize), minsize);
+                var new_size = VA.Drawing.MathUtil.Max(VA.Drawing.MathUtil.SnapToNearestValue(old_size, snapsize), minsize);
 
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, new_size.Width);
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, new_size.Height);

@@ -79,6 +79,7 @@
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="DOM\Arc.cs" />
+    <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="LinqUtil.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
@@ -215,7 +216,7 @@
     <Compile Include="Drawing\BezierSegment.cs" />
     <Compile Include="Internal\BitArray2D.cs" />
     <Compile Include="Drawing\ColorRGB.cs" />
-    <Compile Include="Drawing\DrawingUtil.cs" />
+    <Compile Include="Drawing\MathUtil.cs" />
     <Compile Include="Text\FormatStringSegment.cs" />
     <Compile Include="Internal\MathUtil.cs" />
     <Compile Include="Drawing\Point.cs" />
