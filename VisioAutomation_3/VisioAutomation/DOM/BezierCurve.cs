@@ -19,7 +19,7 @@ namespace VisioAutomation.DOM
         public BezierCurve(IEnumerable<double> pts)
         {
             Degree = 3;
-            this.ControlPoints = VA.Drawing.DrawingUtil.DoublesToPoints(pts).ToList();
+            this.ControlPoints = VA.Drawing.Point.FromDoubles(pts).ToList();
         }
     }
 }

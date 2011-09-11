@@ -435,7 +435,7 @@ namespace VisioAutomation
 
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = VA.Drawing.DrawingUtil.PointsToDoubles(points).ToArray();
+            var xy_array = VA.Drawing.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 

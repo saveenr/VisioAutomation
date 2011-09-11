@@ -126,7 +126,7 @@ namespace VisioAutomation.Scripting
                 pie_points.Add(center);
                 pie_points.Add(center);
 
-                var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(pie_points).ToArray();
+                var doubles_array = VA.Drawing.Point.ToDoubles(pie_points).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }

@@ -37,7 +37,7 @@ namespace TestVisioAutomation
                                  new VA.Drawing.Point(2, 0)
                              };
 
-            var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(points).ToArray();
+            var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
             var s0 = page1.DrawSpline(doubles_array, 0, 0);
 
             page1.Delete(0);

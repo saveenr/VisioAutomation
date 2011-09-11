@@ -57,7 +57,7 @@ namespace VisioAutomation.Layout
                 var pie_bez = GetPieSliceBezier(center, radius, start_angle, end_angle, out degree);
 
                 // Render the bezier
-                var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(pie_bez).ToArray();
+                var doubles_array = VA.Drawing.Point.ToDoubles(pie_bez).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }
@@ -139,7 +139,7 @@ namespace VisioAutomation.Layout
                 var thickarc = GetThinkArcBezier(center, inner_radius, outer_radius, start_angle, end_angle, out degree);
 
                 // Render the bezier
-                var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(thickarc).ToArray();
+                var doubles_array = VA.Drawing.Point.ToDoubles(thickarc).ToArray();
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }

@@ -23,7 +23,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var points = VA.Drawing.DrawingUtil.DoublesToPoints(this.ControlPoints).ToList();
+            var points = VA.Drawing.Point.FromDoubles(this.ControlPoints).ToList();
             var shape = scriptingsession.Draw.NURBSCurve(points,this.Knots,this.Weights,this.Degree);
             this.WriteObject(shape);
         }

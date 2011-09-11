@@ -11,7 +11,7 @@ namespace VisioAutomation.DOM
 
         public PolyLine(params double[] doubles)
         {
-            this.Points = VA.Drawing.DrawingUtil.DoublesToPoints(doubles).ToList();
+            this.Points = VA.Drawing.Point.FromDoubles(doubles).ToList();
         }
 
         public PolyLine(IEnumerable<VA.Drawing.Point> pts)

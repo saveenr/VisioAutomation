@@ -116,6 +116,37 @@ namespace VisioAutomation.Drawing
             return Divide(s, s);
         }
 
+        public static IEnumerable<Drawing.Point> FromDoubles(IEnumerable<double> doubles)
+        {
+            if (doubles == null)
+            {
+                throw new System.ArgumentNullException("doubles");
+            }
+
+            int count = 0;
+            double even_value = default(double);
+            foreach (var value in doubles)
+            {
+                if ((count % 2) == 0)
+                {
+                    even_value = value;
+                }
+                else
+                {
+                    yield return new Drawing.Point(even_value, value);
+                }
+                count++;
+            }
+        }
+
+        public static IEnumerable<double> ToDoubles(IEnumerable<Drawing.Point> points)
+        {
+            foreach (var p in points)
+            {
+                yield return p.X;
+                yield return p.Y;
+            }
+        }
 
     }
 }

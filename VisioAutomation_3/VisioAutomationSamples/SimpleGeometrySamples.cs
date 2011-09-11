@@ -36,7 +36,7 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var points = new[] {0.0, 0.0, 1.0, 2.0, 3.0, 0.5, 4.0, 0.5};
-            var cpoints = VA.Drawing.DrawingUtil.DoublesToPoints(points).ToList();
+            var cpoints = VA.Drawing.Point.FromDoubles(points).ToList();
             var s0 = page.DrawBezier(cpoints);
             s0.Text = "Bezier curve";
             foreach (var p in cpoints)

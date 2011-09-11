@@ -13,7 +13,7 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-            var points = VA.Drawing.DrawingUtil.DoublesToPoints(this.Doubles).ToList();
+            var points = VA.Drawing.Point.FromDoubles(this.Doubles).ToList();
             this.WriteObject(points);
         }
     }

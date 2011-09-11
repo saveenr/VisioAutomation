@@ -197,7 +197,7 @@ namespace TestVisioAutomation
             var m2 = ss.Master.Get("Ellipse", "Basic_U.VSS");
 
             var masters = new[] {m1, m2};
-            var points = VA.Drawing.DrawingUtil.DoublesToPoints( new [] { 1.0, 2.0, 3.0, 4.0 ,1.5,4.5, 5.7, 2.4}).ToList();
+            var points = VA.Drawing.Point.FromDoubles(new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 }).ToList();
 
             ss.Master.Drop(masters, points);
             

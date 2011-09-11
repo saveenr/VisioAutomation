@@ -27,14 +27,14 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<VA.Drawing.Point> points)
         {
-            var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(points).ToArray();
+            var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
             var shape = page.DrawBezier(doubles_array, 3, 0);
             return shape;
         }
 
         public static IVisio.Shape DrawPolyline(this IVisio.Page page, IList<VA.Drawing.Point> points)
         {
-            var doubles_array = VA.Drawing.DrawingUtil.PointsToDoubles(points).ToArray();
+            var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
             var shape = page.DrawPolyline(doubles_array, 0);
             return shape;
         }
@@ -49,7 +49,7 @@ namespace VisioAutomation.Extensions
             // IVisio.VisDrawSplineFlags.visSpline1D
 
             var flags = 0;
-            double[] pts_dbl_a = VA.Drawing.DrawingUtil.PointsToDoubles(controlpoints).ToArray();
+            double[] pts_dbl_a = VA.Drawing.Point.ToDoubles(controlpoints).ToArray();
                 double[] kts_dbl_a = knots.ToArray();
                 double[] weights_dbl_a = weights.ToArray();
 

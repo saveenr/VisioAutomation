@@ -17,7 +17,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var points = VA.Drawing.DrawingUtil.DoublesToPoints(Points).ToList();
+            var points = VA.Drawing.Point.FromDoubles(Points).ToList();
             var r = scriptingsession.Master.Drop(Masters, points);
             this.WriteObject(r);
         }

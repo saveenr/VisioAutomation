@@ -36,36 +36,16 @@ namespace VisioAutomation.Drawing
                             VA.Internal.MathUtil.Round(size.Height, snapsize.Height));
         }
 
+        [Obsolete]
         public static IEnumerable<Drawing.Point> DoublesToPoints(IEnumerable<double> doubles)
         {
-            if (doubles == null)
-            {
-                throw new ArgumentNullException("doubles");
-            }
-
-            int count = 0;
-            double even_value = default(double);
-            foreach (var value in doubles)
-            {
-                if ((count%2) == 0)
-                {
-                    even_value = value;
-                }
-                else
-                {
-                    yield return new Drawing.Point(even_value, value);
-                }
-                count++;
-            }
+            return VA.Drawing.Point.FromDoubles(doubles);
         }
 
+        [Obsolete]
         public static IEnumerable<double> PointsToDoubles(IEnumerable<Drawing.Point> points)
         {
-            foreach (var p in points)
-            {
-                yield return p.X;
-                yield return p.Y;
-            }
+            return VA.Drawing.Point.ToDoubles(points);
         }
 
         public static VA.Drawing.Point Round(VA.Drawing.Point p, double xd, double yd)
