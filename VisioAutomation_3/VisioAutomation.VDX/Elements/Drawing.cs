@@ -140,7 +140,7 @@ namespace VisioAutomation.VDX.Elements
 
         public static string DefaultTemplateXML
         {
-            get { return VisioAutomation.VDX.Properties.Resources.DefaultVDXTemplate; }
+            get { return VA.VDX.Properties.Resources.DefaultVDXTemplate; }
         }
 
         internal void AccountForMasteSubshapes(int n)

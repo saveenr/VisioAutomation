@@ -54,7 +54,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document DrawScriptingDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
+            var docbuilder = new VA.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
@@ -113,7 +113,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document DrawInteropEnumDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VisioAutomation.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
+            var docbuilder = new VA.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             //docbuilder.BodyParaSpacingAfter = 2.0;
             docbuilder.BodyTextSize = 8.0;
             var helpstr = new System.Text.StringBuilder();
@@ -138,7 +138,7 @@ namespace VisioAutomation.Scripting.Commands
 
                     }
 
-                    var docpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
+                    var docpage = new VA.Experimental.SimpleTextDoc.TextPage();
                     docpage.Title = enum_.Name;
                     docpage.Body = helpstr.ToString();
                     if (chunkcount == 0)

@@ -54,7 +54,7 @@ namespace VisioAutomation.Layout.OrgChart
                 (p, c) => p.AddChild(c));
 
             // Perform the layout
-            var layout = new VisioAutomation.Layout.InternalTree.TreeLayout<object>();
+            var layout = new VA.Layout.InternalTree.TreeLayout<object>();
 
 
            layout.Options.Direction = map_direction2(this.LayoutOptions.Direction);

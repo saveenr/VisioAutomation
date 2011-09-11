@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using MG = Microsoft.Msagl;
@@ -64,12 +63,12 @@ namespace VisioAutomation.Layout.MSAGL
             {
                 if (layout_connector.From == null)
                 {
-                    throw new VisioAutomation.AutomationException("Connector's From node is null");
+                    throw new VA.AutomationException("Connector's From node is null");
                 }
 
                 if (layout_connector.To == null)
                 {
-                    throw new VisioAutomation.AutomationException("Connector's From node is null");
+                    throw new VA.AutomationException("Connector's From node is null");
                 }
             }
 
@@ -148,7 +147,7 @@ namespace VisioAutomation.Layout.MSAGL
             var dom_doc = CreateDOMDocument(layout_diagram, app);
             dom_doc.ResolveAllShapeObjects = true;
 
-            using (var speed = new VisioAutomation.FastRenderingScope(app))
+            using (var speed = new VA.FastRenderingScope(app))
             {
                 dom_doc.Render(page);                    
             }
@@ -278,13 +277,13 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        public VisioAutomation.DOM.Document CreateDOMDocument(Drawing layout_diagram, IVisio.Application vis)
+        public VA.DOM.Document CreateDOMDocument(Drawing layout_diagram, IVisio.Application vis)
         {
             StoreMetadataForMasters(layout_diagram, vis);
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
 
-            var vdoc = new VisioAutomation.DOM.Document();
+            var vdoc = new VA.DOM.Document();
 
             vdoc.PageSettings.Size = this.layout_bb.Size;
             vdoc.PageSettings.PageCells.PlaceStyle = 1;
@@ -311,7 +310,7 @@ namespace VisioAutomation.Layout.MSAGL
             return vdoc;
         }
 
-        private void CreateDOMShapes(VisioAutomation.DOM.Document dom_doc, MG.GeometryGraph msagl_graph, IVisio.Application app)
+        private void CreateDOMShapes(VA.DOM.Document dom_doc, MG.GeometryGraph msagl_graph, IVisio.Application app)
         {
             var node_centerpoints = msagl_graph.NodeMap.Values
                     .Select(n => ToDocumentCoordinates(MSAGLUtil.ToVAPoint(n.Center)))
@@ -352,7 +351,7 @@ namespace VisioAutomation.Layout.MSAGL
             {
                 var key = layout_shape.StencilName.ToLower() + "+" + layout_shape.MasterName;
                 var master = master_map[key];
-                var dom_master = new VisioAutomation.DOM.Master(master, node_centerpoints[count]);
+                var dom_master = new VA.DOM.Master(master, node_centerpoints[count]);
                 layout_shape.DOMNode = dom_master;
                 dom_doc.Shapes.Add(dom_master);
                 count++;
@@ -360,7 +359,7 @@ namespace VisioAutomation.Layout.MSAGL
 
             var shape_pairs = from n in msagl_graph.NodeMap.Values
                               let ls = (Shape) n.UserData
-                              let vs = (VisioAutomation.DOM.Shape) ls.DOMNode
+                              let vs = (VA.DOM.Shape) ls.DOMNode
                               select new {layout_shape = ls, dom_shape = vs};
 
             // FORMAT EACH SHAPE
@@ -370,7 +369,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private void CreateBezierEdges(VisioAutomation.DOM.Document vdoc, MG.GeometryGraph msagl_graph)
+        private void CreateBezierEdges(VA.DOM.Document vdoc, MG.GeometryGraph msagl_graph)
         {
 // DRAW EDGES WITH BEZIERS 
             foreach (var msagl_edge in msagl_graph.Edges)
@@ -385,7 +384,7 @@ namespace VisioAutomation.Layout.MSAGL
                              let lc = (Connector) n.UserData
                              select new { msagl_edge = n, 
                                  layout_connector = lc, 
-                                 dom_bezier = (VisioAutomation.DOM.BezierCurve)lc.DOMNode };
+                                 dom_bezier = (VA.DOM.BezierCurve)lc.DOMNode };
 
             foreach (var i in edge_pairs)
             {
@@ -400,7 +399,7 @@ namespace VisioAutomation.Layout.MSAGL
                 // this is a bezier connector
                 // draw a manual box instead
                 var label_bb = ToDocumentCoordinates(MSAGLUtil.ToVARectangle(i.msagl_edge.Label.BoundingBox));
-                var vshape = new VisioAutomation.DOM.Rectangle(label_bb);
+                var vshape = new VA.DOM.Rectangle(label_bb);
                 vdoc.Shapes.Add(vshape);
 
                 vshape.ShapeCells = DefaultBezierConnectorShapeCells.ShallowCopy();
@@ -409,15 +408,15 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private void CreateDynamicConnectorEdges(VisioAutomation.DOM.Document vdoc, MG.GeometryGraph msagl_graph)
+        private void CreateDynamicConnectorEdges(VA.DOM.Document vdoc, MG.GeometryGraph msagl_graph)
         {
 // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
             {
                 var layoutconnector = (Connector) i.UserData;
-                var vconnector = new VisioAutomation.DOM.DynamicConnector(
-                    (VisioAutomation.DOM.Shape)layoutconnector.From.DOMNode,
-                    (VisioAutomation.DOM.Shape) layoutconnector.To.DOMNode, "Dynamic Connector", "basic_u.vss");
+                var vconnector = new VA.DOM.DynamicConnector(
+                    (VA.DOM.Shape)layoutconnector.From.DOMNode,
+                    (VA.DOM.Shape) layoutconnector.To.DOMNode, "Dynamic Connector", "basic_u.vss");
                 layoutconnector.DOMNode = vconnector;
                 vdoc.Shapes.Add(vconnector);
             }
@@ -425,7 +424,7 @@ namespace VisioAutomation.Layout.MSAGL
             var edge_pairs = from n in msagl_graph.Edges
                              let lc = (Connector) n.UserData
                              select
-                                 new { msagl_edge = n, layout_connector = lc, vconnector = (VisioAutomation.DOM.DynamicConnector)lc.DOMNode };
+                                 new { msagl_edge = n, layout_connector = lc, vconnector = (VA.DOM.DynamicConnector)lc.DOMNode };
 
             foreach (var i in edge_pairs)
             {
@@ -444,7 +443,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private void format_shape(Shape layout_shape, VisioAutomation.DOM.Shape dom_shape)
+        private void format_shape(Shape layout_shape, VA.DOM.Shape dom_shape)
         {
             layout_shape.VisioShape = dom_shape.VisioShape;
 
@@ -503,15 +502,15 @@ namespace VisioAutomation.Layout.MSAGL
                 };
 
 
-        public VisioAutomation.DOM.BezierCurve draw_edge_bezier(
-            VisioAutomation.DOM.Document page,
+        public VA.DOM.BezierCurve draw_edge_bezier(
+            VA.DOM.Document page,
                                             Connector fc,
                                             MG.Edge edge)
         {
             var final_bez_points =
                 MSAGLUtil.ToVAPoints(edge).Select(p => ToDocumentCoordinates(p)).ToList();
 
-            var bez_shape = new VisioAutomation.DOM.BezierCurve(final_bez_points);
+            var bez_shape = new VA.DOM.BezierCurve(final_bez_points);
             return bez_shape;
         }
     }

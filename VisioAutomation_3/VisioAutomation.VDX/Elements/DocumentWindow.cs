@@ -39,9 +39,9 @@ namespace VisioAutomation.VDX.Elements
 
         public override void AddToElement(System.Xml.Linq.XElement parent)
         {
-            string ns_2003 = VisioAutomation.VDX.Internal.Constants.VisioXmlNamespace2003;
+            string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;
 
-            var window_el = VisioAutomation.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Window");
+            var window_el = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Window");
             window_el.SetAttributeValue("ID", this.ID);
             window_el.SetAttributeValue("WindowType", "Drawing");
             window_el.SetAttributeValue("ContainerType", "Page");

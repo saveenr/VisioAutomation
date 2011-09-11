@@ -607,7 +607,7 @@ namespace VisioAutomation.Layout.InternalTree
                         layout_root = layout_node;
                     }
                 }
-                else if (walkevent.Type == VisioAutomation.Internal.WalkEvent<TA>.WalkEventType.Exit)
+                else if (walkevent.Type == VA.Internal.WalkEvent<TA>.WalkEventType.Exit)
                 {
                     var layout_node = stack.Pop();
                 }
