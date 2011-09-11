@@ -47,7 +47,7 @@ namespace InfoGraphicsPy
             var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
 
             var dom = new VA.DOM.Document();
-            dom.ResolveAllShapeObjects = true;
+            dom.ResolveVisioShapeObjects = true;
             var bar_shapes = this.DrawRects(dom, bar_rects, session.MasterRectangle);
             var cat_shapes = this.DrawRects(dom, cat_rects, session.MasterRectangle);
 
@@ -117,7 +117,7 @@ namespace InfoGraphicsPy
             var cat_rects = this.SkipOdd(grid.GetRectsInCol(catcol)).ToList();
 
             var dom = new VA.DOM.Document();
-            dom.ResolveAllShapeObjects = true;
+            dom.ResolveVisioShapeObjects = true;
             var bar_shapes = this.DrawRects(dom, bar_rects, session.MasterRectangle);
             var cat_shapes = this.DrawRects(dom, cat_rects, session.MasterRectangle);
 

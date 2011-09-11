@@ -6,8 +6,7 @@
     <ProjectGuid>{9cd80c41-7de5-4024-b01d-19b76d326d00}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>demo.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <SearchPath>D:\saveenr\code\visioautomation\Samples\ironvisio\InfoGraphicsPy\bin\Debug</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <AssemblyName>DemoIronVisio</AssemblyName>
     <Name>DemoIronVisio</Name>
@@ -25,8 +24,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="geometry.py" />
-    <Compile Include="charting.py" />
     <Compile Include="demo.py" />
     <Compile Include="ironvisio.py" />
   </ItemGroup>
