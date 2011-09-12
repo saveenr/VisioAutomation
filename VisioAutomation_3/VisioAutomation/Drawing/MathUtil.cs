@@ -6,28 +6,10 @@ namespace VisioAutomation.Drawing
 {
     public static class MathUtil
     {
-        public static VA.Drawing.Point Max(VA.Drawing.Point a, VA.Drawing.Point b)
-        {
-            return new Drawing.Point(Math.Max(a.X, b.X),
-                             Math.Max(a.Y, b.Y));
-        }
-
-        public static VA.Drawing.Point Min(VA.Drawing.Point a, VA.Drawing.Point b)
-        {
-            return new VA.Drawing.Point(Math.Min(a.X, b.X),
-                             Math.Min(a.Y, b.Y));
-        }
-
         public static VA.Drawing.Size Max(VA.Drawing.Size a, VA.Drawing.Size b)
         {
             return new VA.Drawing.Size(Math.Max(a.Width, b.Width),
                             Math.Max(a.Height, b.Height));
-        }
-
-        public static VA.Drawing.Size Min(VA.Drawing.Size a, VA.Drawing.Size b)
-        {
-            return new VA.Drawing.Size(Math.Min(a.Width, b.Width),
-                            Math.Min(a.Height, b.Height));
         }
 
         public static VA.Drawing.Size SnapToNearestValue(VA.Drawing.Size size, VA.Drawing.Size snapsize)
