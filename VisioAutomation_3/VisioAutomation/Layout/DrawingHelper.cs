@@ -136,7 +136,7 @@ namespace VisioAutomation.Layout
             else
             {
                 int degree;
-                var thickarc = GetThinkArcBezier(center, inner_radius, outer_radius, start_angle, end_angle, out degree);
+                var thickarc = GetThinArcBezier(center, inner_radius, outer_radius, start_angle, end_angle, out degree);
 
                 // Render the bezier
                 var doubles_array = VA.Drawing.Point.ToDoubles(thickarc).ToArray();
@@ -145,7 +145,7 @@ namespace VisioAutomation.Layout
             }
         }
 
-        private static List<Point> GetThinkArcBezier(Point center, double inner_radius, double outer_radius, double start_angle, double  end_angle, out int degree)
+        private static List<Point> GetThinArcBezier(Point center, double inner_radius, double outer_radius, double start_angle, double  end_angle, out int degree)
         {
             var bez_inner = GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
             var bez_outer = GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
@@ -170,13 +170,6 @@ namespace VisioAutomation.Layout
             bez.Add(point_first);
             bez.Add(point_first);
             return bez;
-        }
-
-
-        private static VA.Drawing.Point GetPointAtRadius_Deg(VA.Drawing.Point origin, double angle, double radius)
-        {
-            double theta = VA.Convert.DegreesToRadians(angle);
-            return GetPointAtRadius(origin, theta, radius);
         }
 
         private static VA.Drawing.Point GetPointAtRadius(VA.Drawing.Point origin, double angle, double radius)
