@@ -82,6 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
+    <Compile Include="Drawing\AssertX.cs" />
+    <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Extensions\ColorsExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Extensions\LayersExtensions.cs" />
