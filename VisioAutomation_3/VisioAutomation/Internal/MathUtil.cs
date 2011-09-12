@@ -16,20 +16,12 @@
         /// <returns>the rounded value</returns>
         public static double Round(double val, System.MidpointRounding rounding, double frac)
         {
-            /*
             if (frac <= 0)
             {
-                throw new ArgumentOutOfRangeException("frac","must be greater than or equal to 0.0");
-            }*/
+                throw new System.ArgumentOutOfRangeException("frac","must be greater than or equal to 0.0");
+            }
             double retval = System.Math.Round((val / frac), rounding) * frac;
             return retval;
-        }
-
-        public static double RoundUp(double v, double amount)
-        {
-            const System.MidpointRounding rounding = System.MidpointRounding.ToEven;
-            var result = Round(v + (amount / 2.0), rounding, amount);
-            return result;
         }
     }
 }

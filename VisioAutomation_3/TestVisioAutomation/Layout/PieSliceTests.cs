@@ -56,7 +56,7 @@ namespace TestVisioAutomation
             }
 
             page.ResizeToFitContents(1, 1);
-            //doc.Close(true);
+            doc.Close(true);
         }
 
     }
