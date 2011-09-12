@@ -91,6 +91,7 @@
     <Compile Include="Extensions\MastersExtensions_Tests.cs" />
     <Compile Include="Extensions\SectionExtensions_Tests.cs" />
     <Compile Include="Drawing\BezierTests.cs" />
+    <Compile Include="Layout\DrawingHelperTests.cs" />
     <Compile Include="Layout\PieSliceTests.cs" />
     <Compile Include="Layout\LayoutHelperTests.cs" />
     <Compile Include="Metadata\MetadataTests.cs" />
