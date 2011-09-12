@@ -216,12 +216,13 @@ namespace VisioAutomation.Layout
         {
             var layout_info = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var grid = new VA.Drawing.SnappingGrid(snapsize);
 
             for (int i = 0; i < shapeids.Count; i++)
             {
                 int shapeid = shapeids[i];
                 var old_size = layout_info[i].Size;
-                var snapped_size = VA.Drawing.MathUtil.SnapToNearestValue(old_size, snapsize);
+                var snapped_size = grid.Snap(old_size);
                 double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
                 double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
                 var new_size = new VA.Drawing.Size(max_w, max_h);
