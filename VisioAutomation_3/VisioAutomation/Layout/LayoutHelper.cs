@@ -220,7 +220,10 @@ namespace VisioAutomation.Layout
             {
                 int shapeid = shapeids[i];
                 var old_size = layout_info[i].Size;
-                var new_size = VA.Drawing.MathUtil.Max(VA.Drawing.MathUtil.SnapToNearestValue(old_size, snapsize), minsize);
+                var snapped_size = VA.Drawing.MathUtil.SnapToNearestValue(old_size, snapsize);
+                double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
+                double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
+                var new_size = new VA.Drawing.Size(max_w, max_h);
 
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, new_size.Width);
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, new_size.Height);
