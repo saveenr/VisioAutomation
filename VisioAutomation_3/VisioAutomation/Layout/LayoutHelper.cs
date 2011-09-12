@@ -154,10 +154,11 @@ namespace VisioAutomation.Layout
                 var shapeid = shapeids[i];
                 var old_layout = layout_info[i];
                 var old_bb = old_layout.Rect;
-                var new_corner_pos = VA.Drawing.MathUtil.Round(
-                    old_bb.LowerLeft,
-                    snapsize.Width,
-                    snapsize.Height);
+
+                var ncp_x = VA.Internal.MathUtil.Round(old_bb.LowerLeft.X, snapsize.Width);
+                var ncp_y = VA.Internal.MathUtil.Round(old_bb.LowerLeft.Y, snapsize.Height);
+                var new_corner_pos = new Drawing.Point(ncp_x, ncp_y);
+
                 var new_pin_position = GetPinPositionForCorner(
                     old_layout.Pin,
                     old_layout.Size,
