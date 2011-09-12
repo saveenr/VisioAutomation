@@ -218,7 +218,6 @@
     <Compile Include="Drawing\ColorRGB.cs" />
     <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Text\FormatStringSegment.cs" />
-    <Compile Include="Internal\MathUtil.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />

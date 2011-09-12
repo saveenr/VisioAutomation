@@ -148,16 +148,16 @@ namespace VisioAutomation.Layout
         {
             var layout_info = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {
                 var shapeid = shapeids[i];
                 var old_layout = layout_info[i];
                 var old_bb = old_layout.Rect;
+                var old_bb_pos = old_bb.LowerLeft;
 
-                var ncp_x = VA.Internal.MathUtil.Round(old_bb.LowerLeft.X, snapsize.Width);
-                var ncp_y = VA.Internal.MathUtil.Round(old_bb.LowerLeft.Y, snapsize.Height);
-                var new_corner_pos = new Drawing.Point(ncp_x, ncp_y);
+                var new_corner_pos = snap_grid.Snap(old_bb_pos);
 
                 var new_pin_position = GetPinPositionForCorner(
                     old_layout.Pin,
