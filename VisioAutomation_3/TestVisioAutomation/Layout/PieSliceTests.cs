@@ -26,7 +26,8 @@ namespace TestVisioAutomation
             foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
             {
                 var center = new VA.Drawing.Point(cx, cy);
-                VA.Layout.DrawingtHelper.DrawPieSlice(page, center, radius, start_angle, end_angle);
+                var ps = new VA.Layout.PieSlice(center, radius, start_angle, end_angle);
+                ps.Render(page);
                 cx += 2.5;
             }
 
@@ -51,7 +52,8 @@ namespace TestVisioAutomation
             foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
             {
                 var center = new VA.Drawing.Point(cx, cy);
-                VA.Layout.DrawingtHelper.DrawArc(page, center, radius - 0.2, radius, start_angle, end_angle);
+                var slice = new VA.Layout.ArcSlice(center, radius - 0.2, radius, start_angle, end_angle);
+                slice.Render(page);
                 cx += 2.5;
             }
 
