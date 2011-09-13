@@ -8,27 +8,19 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
-    public class ArcSlice
-    {
-        public VA.Drawing.Point Center;
-        public double StartAngle;
-        public double EndAndle;
-        public double InnerRadius;
-        public double OuterRadius;
 
-        public ArcSlice(VA.Drawing.Point center, double innerRadius, double outerRadius, double start, double end)
+    public class ArcSlice : RadialSlice
+    {
+        public double InnerRadius { get; private set; }
+        public double OuterRadius { get; private set; }
+
+        public ArcSlice(Point center, double start, double end, double innerRadius, double outerRadius) :
+            base(center,start,end)
         {
-            this.Center = center;
             this.InnerRadius = innerRadius;
             this.OuterRadius = outerRadius;
-            this.StartAngle = start;
-            this.EndAndle = end;
         }
 
-        public double Angle
-        {
-            get { return this.EndAndle - this.StartAngle; }
-        }
 
         public IVisio.Shape Render(IVisio.Page page)
         {
@@ -72,8 +64,8 @@ namespace VisioAutomation.Layout
 
         static List<Point> GetThinArcBezier(Point center, double inner_radius, double outer_radius, double start_angle, double end_angle, out int degree)
         {
-            var bez_inner = VA.Layout.ArcSlice.GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
-            var bez_outer = VA.Layout.ArcSlice.GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
+            var bez_inner = GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
+            var bez_outer = GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
             bez_outer.Reverse();
 
             // Create one big bezier that accounts for the entire pie shape. This includes the arc
@@ -95,35 +87,6 @@ namespace VisioAutomation.Layout
             bez.Add(point_first);
             bez.Add(point_first);
             return bez;
-        }
-
-        internal static List<Point> GetArcBez(Point center, double radius, double start_angle, double end_angle, out int degree)
-        {
-            // split apart the arc into distinct bezier segments (will end up with at least 1 segment)
-            // the segments will "fit" end to end
-            var sub_arcs = VA.Drawing.BezierSegment.FromArc(
-                start_angle,
-                end_angle);
-
-            // merge bezier segments together into a list of points
-            var merged_points = VA.Drawing.BezierSegment.Merge(sub_arcs, out degree);
-
-            var arc_bez = new List<VA.Drawing.Point>(merged_points.Count);
-            foreach (var p in merged_points)
-            {
-                var np = p.Multiply(radius) + center;
-                arc_bez.Add(np);
-            }
-            return arc_bez;
-        }
-
-        VA.Drawing.Point GetPointAtRadius(VA.Drawing.Point origin, double angle, double radius)
-        {
-            double x = radius * System.Math.Cos(angle);
-            double y = radius * System.Math.Sin(angle);
-            var new_point = new VA.Drawing.Point(x, y);
-            new_point = origin + new_point;
-            return new_point;
         }
 
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -215,7 +216,13 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var shapes = VA.Layout.PieSlice.DrawPieSlices(page, center, radius, values);
+            var slices = VA.Layout.PieSlice.GetSlicesFromValues(center, radius, values);
+            var shapes = new List<Shape>(slices.Count);
+            foreach (var slice in slices)
+            {
+                var shape = slice.Render(page);
+                shapes.Add(shape);
+            }
             return shapes;
         }
 

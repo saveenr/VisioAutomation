@@ -81,6 +81,7 @@
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Layout\ArcSlice.cs" />
+    <Compile Include="Layout\RadialSlice.cs" />
     <Compile Include="Layout\PieSlice.cs" />
     <Compile Include="LinqUtil.cs" />
     <Compile Include="DOM\PieSlice.cs" />

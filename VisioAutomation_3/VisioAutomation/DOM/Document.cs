@@ -311,8 +311,8 @@ namespace VisioAutomation.DOM
                 else if (shape is Arc)
                 {
                     var ps = (Arc)shape;
-                    var vad_arcslice = new VA.Layout.ArcSlice(ps.Center, ps.InnerRadius, ps.OuterRadius, ps.StartAngle,
-                                                              ps.EndAngle);
+                    var vad_arcslice = new VA.Layout.ArcSlice(ps.Center, ps.StartAngle,
+                                                              ps.EndAngle, ps.InnerRadius, ps.OuterRadius);
                     var ps_shape = vad_arcslice.Render(ctx.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
                     ps.VisioShape = ps_shape;
@@ -321,7 +321,7 @@ namespace VisioAutomation.DOM
                 {
                     var ps = (PieSlice)shape;
 
-                    var vad_ps = new VA.Layout.PieSlice(ps.Center, ps.Radius, ps.Start, ps.End);
+                    var vad_ps = new VA.Layout.PieSlice(ps.Center, ps.Start, ps.End, ps.Radius);
                     var ps_shape = vad_ps.Render(ctx.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
                     ps.VisioShape = ps_shape;
