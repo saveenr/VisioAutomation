@@ -39,12 +39,12 @@ namespace VisioAutomation.Layout.Radial
 
         public IVisio.Shape Render(IVisio.Page page)
         {
-            double total_angle = this.Angle;
+            double total_angle = this.Sector.Angle;
 
             if (total_angle == 0.0)
             {
-                var p1 = this.GetPointAtRadius(this.Center, this.StartAngle, this.InnerRadius);
-                var p2 = this.GetPointAtRadius(this.Center, this.StartAngle, this.OuterRadius);
+                var p1 = this.GetPointAtRadius(this.Center, this.Sector.StartAngle, this.InnerRadius);
+                var p2 = this.GetPointAtRadius(this.Center, this.Sector.StartAngle, this.OuterRadius);
                 var shape = page.DrawLine(p1, p2);
                 return shape;
             }

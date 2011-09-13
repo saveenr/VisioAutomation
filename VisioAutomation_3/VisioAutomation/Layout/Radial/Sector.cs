@@ -39,5 +39,10 @@ namespace VisioAutomation.Layout.Radial
             }
             return slices;
         }
+
+        public double Angle
+        {
+            get { return this.EndAngle - this.StartAngle; }
+        }
     }
 }
