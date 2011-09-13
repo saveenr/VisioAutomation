@@ -6,9 +6,8 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout
+namespace VisioAutomation.Layout.Radial
 {
-
     public class RadialSlice
     {
         public VA.Drawing.Point Center { get; private set; }
@@ -17,6 +16,11 @@ namespace VisioAutomation.Layout
 
         public RadialSlice(VA.Drawing.Point center, double start, double end)
         {
+            if (end < start)
+            {
+                throw new System.ArgumentException("end","end angle must be greater than or equal to start angle");
+            }
+
             this.Center = center;
             this.StartAngle = start;
             this.EndAndle = end;            
@@ -36,13 +40,13 @@ namespace VisioAutomation.Layout
             return new_point;
         }
 
-        protected static List<Point> GetArcBez(Point center, double radius, double start_angle, double end_angle, out int degree)
+        protected List<Point> GetArcBez(double radius, out int degree)
         {
             // split apart the arc into distinct bezier segments (will end up with at least 1 segment)
             // the segments will "fit" end to end
             var sub_arcs = VA.Drawing.BezierSegment.FromArc(
-                start_angle,
-                end_angle);
+                this.StartAngle,
+                this.EndAndle);
 
             // merge bezier segments together into a list of points
             var merged_points = VA.Drawing.BezierSegment.Merge(sub_arcs, out degree);
@@ -50,29 +54,32 @@ namespace VisioAutomation.Layout
             var arc_bez = new List<VA.Drawing.Point>(merged_points.Count);
             foreach (var p in merged_points)
             {
-                var np = p.Multiply(radius) + center;
+                var np = p.Multiply(radius) + this.Center;
                 arc_bez.Add(np);
             }
             return arc_bez;
         }
 
-
         protected static List<RadialSlice> GetSlicesFromValues(Point center, IList<double> values)
         {
-            double sum = values.Sum();
-            var slices = new List<VA.Layout.RadialSlice>(values.Count);
-            double start_angle = 0;
-            foreach (int i in Enumerable.Range(0, values.Count))
+            var sectors = VA.Layout.Radial.Sector.GetSectorsFromValues(values);
+            var slices = new List<VA.Layout.Radial.RadialSlice>(values.Count);
+            foreach (var sector in sectors)
             {
-                double cur_val = values[i];
-                double cur_val_norm = cur_val / sum;
-                double cur_angle = cur_val_norm * System.Math.PI * 2.0;
-                double end_angle = start_angle + cur_angle;
-
-                var ps = new VA.Layout.RadialSlice(center, start_angle, end_angle);
+                var ps = new VA.Layout.Radial.RadialSlice(center, sector.StartAngle, sector.EndAngle);
                 slices.Add(ps);
+            }
+            return slices;
+        }
 
-                start_angle += cur_angle;
+        protected static List<T> GetSlicesFromValues<T>(Point center, IList<double> values, System.Func<Sector,T> make_slice)
+        {
+            var sectors = VA.Layout.Radial.Sector.GetSectorsFromValues(values);
+            var slices = new List<T>(values.Count);
+            foreach (var sector in sectors)
+            {
+                var s = make_slice(sector);
+                slices.Add(s);
             }
             return slices;
         }

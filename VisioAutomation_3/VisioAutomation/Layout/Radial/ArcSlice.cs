@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout
+namespace VisioAutomation.Layout.Radial
 {
 
     public class ArcSlice : RadialSlice
@@ -14,11 +14,26 @@ namespace VisioAutomation.Layout
         public double InnerRadius { get; private set; }
         public double OuterRadius { get; private set; }
 
-        public ArcSlice(Point center, double start, double end, double innerRadius, double outerRadius) :
+        public ArcSlice(Point center, double start, double end, double inner_radius, double outer_radius) :
             base(center,start,end)
         {
-            this.InnerRadius = innerRadius;
-            this.OuterRadius = outerRadius;
+            if (inner_radius < 0.0)
+            {
+                throw new System.ArgumentException("inner_radius", "must be non-negative");
+            }
+
+            if (outer_radius < 0.0)
+            {
+                throw new System.ArgumentException("outer_radius", "must be non-negative");
+            }
+
+            if (inner_radius > outer_radius)
+            {
+                throw new System.ArgumentException("inner_radius", "must be less than or equal to outer_radius");                
+            }
+
+            this.InnerRadius = inner_radius;
+            this.OuterRadius = inner_radius;
         }
 
 
@@ -53,7 +68,7 @@ namespace VisioAutomation.Layout
             else
             {
                 int degree;
-                var thickarc = GetThinArcBezier(this.Center, this.InnerRadius, this.OuterRadius, this.StartAngle, this.EndAndle, out degree);
+                var thickarc = this.GetShapeBezier(out degree);
 
                 // Render the bezier
                 var doubles_array = VA.Drawing.Point.ToDoubles(thickarc).ToArray();
@@ -62,10 +77,10 @@ namespace VisioAutomation.Layout
             }
         }
 
-        static List<Point> GetThinArcBezier(Point center, double inner_radius, double outer_radius, double start_angle, double end_angle, out int degree)
+        List<Point> GetShapeBezier(out int degree)
         {
-            var bez_inner = GetArcBez(center, inner_radius, start_angle, end_angle, out degree);
-            var bez_outer = GetArcBez(center, outer_radius, start_angle, end_angle, out degree);
+            var bez_inner = this.GetArcBez(this.InnerRadius, out degree);
+            var bez_outer = this.GetArcBez(this.OuterRadius, out degree);
             bez_outer.Reverse();
 
             // Create one big bezier that accounts for the entire pie shape. This includes the arc

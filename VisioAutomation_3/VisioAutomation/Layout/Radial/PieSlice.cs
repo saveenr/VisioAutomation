@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout
+namespace VisioAutomation.Layout.Radial
 {
     public class PieSlice : RadialSlice
     {
@@ -15,12 +15,17 @@ namespace VisioAutomation.Layout
         public PieSlice(Point center, double start, double end, double radius) :
             base(center,start,end)
         {
+            if (radius < 0.0)
+            {
+                throw new System.ArgumentException("radius","must be non-negative");
+            }
+
             this.Radius = radius;
         }
 
-        internal static List<Point> GetPieSliceBezier(Point center, double radius, double start_angle, double end_angle, out int degree)
+        internal List<Point> GetShapeBezier(out int degree)
         {
-            var arc_bez = RadialSlice.GetArcBez(center, radius, start_angle, end_angle, out degree);
+            var arc_bez = this.GetArcBez(this.Radius, out degree);
 
             // Create one big bezier that accounts for the entire pie shape. This includes the arc
             // calculated above and the sides of the pie slice
@@ -29,13 +34,13 @@ namespace VisioAutomation.Layout
             var point_first = arc_bez[0];
             var point_last = arc_bez[arc_bez.Count - 1];
 
-            pie_bez.Add(center);
-            pie_bez.Add(center);
+            pie_bez.Add(this.Center);
+            pie_bez.Add(this.Center);
             pie_bez.Add(point_first);
             pie_bez.AddRange(arc_bez);
             pie_bez.Add(point_last);
-            pie_bez.Add(center);
-            pie_bez.Add(center);
+            pie_bez.Add(this.Center);
+            pie_bez.Add(this.Center);
             return pie_bez;
         }
 
@@ -58,7 +63,7 @@ namespace VisioAutomation.Layout
             else
             {
                 int degree;
-                var pie_bez = GetPieSliceBezier(this.Center, this.Radius, this.StartAngle, this.EndAndle, out degree);
+                var pie_bez = this.GetShapeBezier(out degree);
 
                 // Render the bezier
                 var doubles_array = VA.Drawing.Point.ToDoubles(pie_bez).ToArray();
@@ -83,13 +88,9 @@ namespace VisioAutomation.Layout
 
         public static List<PieSlice> GetSlicesFromValues(Point center, double radius, IList<double> values)
         {
-            var base_slices = RadialSlice.GetSlicesFromValues(center, values);
-            var slices = new List<VA.Layout.PieSlice>(values.Count);
-            foreach (var base_slice in base_slices)
-            {
-                var slice = new PieSlice(base_slice.Center, base_slice.StartAngle, base_slice.EndAndle, radius);
-                slices.Add(slice);
-            }
+            var slices = RadialSlice.GetSlicesFromValues(center, values,
+                                                         sector =>
+                                                         new PieSlice(center, sector.StartAngle, sector.EndAngle, radius));
             return slices;
         }
     }

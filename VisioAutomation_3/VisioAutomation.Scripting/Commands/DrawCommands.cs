@@ -216,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var slices = VA.Layout.PieSlice.GetSlicesFromValues(center, radius, values);
+            var slices = VA.Layout.Radial.PieSlice.GetSlicesFromValues(center, radius, values);
             var shapes = new List<Shape>(slices.Count);
             foreach (var slice in slices)
             {
