@@ -148,16 +148,17 @@ namespace VisioAutomation.Layout
         {
             var layout_info = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {
                 var shapeid = shapeids[i];
                 var old_layout = layout_info[i];
                 var old_bb = old_layout.Rect;
-                var new_corner_pos = VA.Drawing.MathUtil.Round(
-                    old_bb.LowerLeft,
-                    snapsize.Width,
-                    snapsize.Height);
+                var old_bb_pos = old_bb.LowerLeft;
+
+                var new_corner_pos = snap_grid.Snap(old_bb_pos);
+
                 var new_pin_position = GetPinPositionForCorner(
                     old_layout.Pin,
                     old_layout.Size,
@@ -215,12 +216,16 @@ namespace VisioAutomation.Layout
         {
             var layout_info = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var grid = new VA.Drawing.SnappingGrid(snapsize);
 
             for (int i = 0; i < shapeids.Count; i++)
             {
                 int shapeid = shapeids[i];
                 var old_size = layout_info[i].Size;
-                var new_size = VA.Drawing.MathUtil.Max(VA.Drawing.MathUtil.SnapToNearestValue(old_size, snapsize), minsize);
+                var snapped_size = grid.Snap(old_size);
+                double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
+                double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
+                var new_size = new VA.Drawing.Size(max_w, max_h);
 
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, new_size.Width);
                 update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, new_size.Height);

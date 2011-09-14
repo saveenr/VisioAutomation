@@ -9,6 +9,36 @@ using VisioAutomation.Extensions;
 
 namespace InfoGraphicsPy
 {
+
+    public class PieChart
+    {
+        public string[] CategoryLabels;
+        public DataPoints DataPoints;
+
+
+        public PieChart(DataPoints dps, string [] cats)
+        {
+            this.DataPoints = dps;
+            this.CategoryLabels = cats;
+        }
+
+        public void Draw(Session session)
+        {
+            var pc = new VA.Layout.Pie.PieLayout();
+            foreach (var dp in this.DataPoints)
+            {
+                pc.Add(dp.Value, dp.Text);
+            }
+
+            pc.DrawBackground = true;
+
+            pc.Radius = 2.0;
+            pc.Center = new VA.Drawing.Point(3,3);
+
+            pc.Render(session.Page);
+        }
+    }
+
     public class PieSliceChart: GridChart
     {
         public string [] CategoryLabels;
@@ -19,8 +49,8 @@ namespace InfoGraphicsPy
         {
             this.DataPoints = dps;
             this.CategoryLabels = cats;
-
         }
+
 
         public void Draw(Session session)
         {

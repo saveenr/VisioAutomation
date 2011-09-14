@@ -144,7 +144,10 @@ namespace VisioAutomation.Text
             {
                 var text_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightText).Size;
                 var wh_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightWH).Size;
-                var max_size = VA.Drawing.MathUtil.Max(text_bounding_box, wh_bounding_box);
+
+                double max_w = System.Math.Max(text_bounding_box.Width, wh_bounding_box.Width);
+                double max_h = System.Math.Max(text_bounding_box.Height, wh_bounding_box.Height);
+                var max_size = new VA.Drawing.Size(max_w, max_h);
                 new_sizes.Add(max_size);
             }
 

@@ -60,13 +60,4 @@ namespace TestVisioAutomation
             Assert.AreEqual(4, s8.Count());
         }
     }
-
-    public static class AssertX
-    {
-        public static void AreEqual(VA.Drawing.Point p1, VA.Drawing.Point p2, double delta)
-        {
-            Assert.AreEqual(p1.X,p2.X,delta);
-            Assert.AreEqual(p1.Y, p2.Y, delta);
-        }
-    }
 }

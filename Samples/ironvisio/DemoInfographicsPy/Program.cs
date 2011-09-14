@@ -44,6 +44,13 @@ namespace DemoInfographicsPy
             var chart4 = new IG.HorizontalBarChart(DataPoints, CategoryLabels);
             chart4.Draw(session);
             session.ResizePageToFit(0.5, 0.5);
+
+            session.NewPage();
+            var chart5 = new IG.BarChart(DataPoints, CategoryLabels);
+            chart5.Draw(session);
+            session.ResizePageToFit(0.5, 0.5);
+
+            
         }
 
         

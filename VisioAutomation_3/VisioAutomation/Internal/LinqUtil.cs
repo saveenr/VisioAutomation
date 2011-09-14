@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation
+namespace VisioAutomation.Internal
 {
     internal static class LinqUtil
     {
@@ -15,6 +15,18 @@ namespace VisioAutomation
             Start,
             Add,
             End
+        }
+
+        public struct ChunkedList<T,TCat>
+        {
+            public readonly TCat Category;
+            public readonly List<T> Items;
+
+            public ChunkedList(List<T> items, TCat cat)
+            {
+                Items = items;
+                Category = cat;
+            }
         }
 
         public struct ChunkRecord<T,TCat>
@@ -113,7 +125,7 @@ namespace VisioAutomation
         }
 
 
-        public static IEnumerable<IList<T>> ChunkByBool<T>( IEnumerable<T> items, System.Func<T,bool> func_categorize)
+        public static IEnumerable<ChunkedList<T,bool>> ChunkByBool<T>( IEnumerable<T> items, System.Func<T,bool> func_categorize)
         {
             var true_col = new List<T>();
             var false_col = new List<T>();
@@ -146,12 +158,12 @@ namespace VisioAutomation
                 {
                     if (cmd.Category == true)
                     {
-                        yield return true_col;
+                        yield return new ChunkedList<T,bool>(true_col,true);
                         true_col.Clear();
                     }
                     else if (cmd.Category == false)
                     {
-                        yield return false_col;
+                        yield return new ChunkedList<T,bool>(false_col,false);
                         false_col.Clear();
                     }
                 }

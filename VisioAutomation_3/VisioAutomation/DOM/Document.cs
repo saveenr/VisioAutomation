@@ -53,24 +53,24 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            foreach (var shapes in VA.LinqUtil.ChunkByBool(this.Shapes, s=>s is Master))
+            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(this.Shapes, s=>s is Master))
             {
                 var masters_col = new List<Master>();
                 var shapes_col = new List<Shape>();
-                if (shapes.Count > 0)
+                if (cat_shapes.Items.Count > 0)
                 {
-                    var first_shape = shapes[0];
-                    if (first_shape is Master)
+                    if (cat_shapes.Category == true)
                     {
+                        // true means this is a master
                         masters_col.Clear();
-                        masters_col.AddRange( shapes.Cast<Master>());
+                        masters_col.AddRange( cat_shapes.Items.Cast<Master>());
                         _draw_masters(ctx,masters_col);
                         masters_col.Clear();
                     }
                     else
                     {
                         shapes_col.Clear();
-                        shapes_col.AddRange(shapes);
+                        shapes_col.AddRange( cat_shapes.Items);
                         _draw_non_masters(ctx,shapes_col);
                         shapes_col.Clear();
                     }
@@ -311,14 +311,18 @@ namespace VisioAutomation.DOM
                 else if (shape is Arc)
                 {
                     var ps = (Arc)shape;
-                    var ps_shape = VA.Layout.DrawingtHelper.DrawArc(ctx.VisioPage, ps.Center, ps.InnerRadius, ps.OuterRadius, ps.StartAngle, ps.EndAngle);
+                    var vad_arcslice = new VA.Layout.Radial.DoughnutSlice(ps.Center, ps.StartAngle,
+                                                              ps.EndAngle, ps.InnerRadius, ps.OuterRadius);
+                    var ps_shape = vad_arcslice.Render(ctx.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
                     ps.VisioShape = ps_shape;
                 }
                 else if (shape is PieSlice)
                 {
                     var ps = (PieSlice)shape;
-                    var ps_shape = VA.Layout.DrawingtHelper.DrawPieSlice(ctx.VisioPage,ps.Center, ps.Radius, ps.Start, ps.End);
+
+                    var vad_ps = new VA.Layout.Radial.PieSlice(ps.Center, ps.Start, ps.End, ps.Radius);
+                    var ps_shape = vad_ps.Render(ctx.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
                     ps.VisioShape = ps_shape;
                 }
