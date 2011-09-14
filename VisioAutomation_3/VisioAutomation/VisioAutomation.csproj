@@ -84,7 +84,7 @@
     <Compile Include="Layout\Radial\Sector.cs" />
     <Compile Include="Layout\Radial\RadialSlice.cs" />
     <Compile Include="Layout\Radial\PieSlice.cs" />
-    <Compile Include="LinqUtil.cs" />
+    <Compile Include="Internal\LinqUtil.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
     <Compile Include="Experimental\SimpleTextDoc\TextDocumentBuilder.cs" />
