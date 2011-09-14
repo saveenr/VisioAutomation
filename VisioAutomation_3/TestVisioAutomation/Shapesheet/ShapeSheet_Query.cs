@@ -403,5 +403,96 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
+        public void Verify_SectionQuery_With_NonExistentSections()
+        {
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 2, 2);
+            var s2 = page1.DrawRectangle(2, 1, 3, 3);
+            var s3 = page1.DrawRectangle(3, 1, 4, 2);
+            var s4 = page1.DrawRectangle(4, -1, 5, 1);
+
+            var shapes = new[] {s1, s2, s3, s4};
+            var shapeids = shapes.Select(s => s.ID).ToList();
+
+            // First verify that none of the shapes have the controls section locally or otherwise
+            foreach (var s in shapes)
+            {
+                Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
+                Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
+            }
+
+            // Try to retrieve the control cells rows for each shape, every shape should return zero rows
+            foreach (var s in shapes)
+            {
+                var r1 = VA.Controls.ControlCells.GetCells(s);
+                Assert.AreEqual(0,r1.Count);
+            }
+
+            // Try to retrieve the control cells rows for all shapes at once, every shape should return a collection of zero rows
+            var r2 = VA.Controls.ControlCells.GetCells(page1, shapeids);
+            Assert.AreEqual(shapes.Count(),r2.Count);
+            for (int i = 0; i < shapes.Count();i++)
+            {
+                Assert.AreEqual(0,r2[i].Count);
+            }
+
+            // Add a Controls row to shape2
+            var cc = new VA.Controls.ControlCells();
+            VA.Controls.ControlHelper.AddControl(s2, cc);
+
+            // Now verify that none of the shapes *except s2* have the controls section locally or otherwise
+            foreach (var s in shapes)
+            {
+                if (s != s2)
+                {
+                    Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
+                    Assert.AreEqual(0, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
+                }
+                else
+                {
+                    Assert.AreEqual(-1, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 1]);
+                    Assert.AreEqual(-1, s.SectionExists[(short)IVisio.VisSectionIndices.visSectionControls, 0]);
+                }
+            }
+
+
+
+            // Try to retrieve the control cells rows for each shape, every shape should return zero rows *except for s2*
+            foreach (var s in shapes)
+            {
+                if (s != s2)
+                {
+                    var r1 = VA.Controls.ControlCells.GetCells(s);
+                    Assert.AreEqual(0, r1.Count);
+                }
+                else
+                {
+                    var r1 = VA.Controls.ControlCells.GetCells(s);
+                    Assert.AreEqual(1, r1.Count);
+                }
+            }
+
+            // Try to retrieve the control cells rows for all shapes at once, every shape *except s2* should return a collection of zero rows
+            var r3 = VA.Controls.ControlCells.GetCells(page1, shapeids);
+            Assert.AreEqual(shapes.Count(), r3.Count);
+            for (int i = 0; i < shapes.Count(); i++)
+            {
+                if (shapes[i] != s2)
+                {
+                    Assert.AreEqual(0, r3[i].Count);
+                }
+                else
+                {
+                    Assert.AreEqual(1, r3[i].Count);
+                }
+            }
+
+
+           
+
+            page1.Delete(0);
+        }
+
     }
 }
