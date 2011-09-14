@@ -23,8 +23,11 @@ namespace VisioAutomation.Layout.Radial
             this.Radius = radius;
         }
 
+
         internal List<Point> GetShapeBezier(out int degree)
         {
+            this.check_normal_angle();
+
             var arc_bez = this.GetArcBez(this.Radius, out degree);
 
             // Create one big bezier that accounts for the entire pie shape. This includes the arc
@@ -70,20 +73,6 @@ namespace VisioAutomation.Layout.Radial
                 var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
                 return pie_slice;
             }
-        }
-
-        public static IList<IVisio.Shape> DrawPieSlices(IVisio.Page page, VA.Drawing.Point center, double radius, IList<double> values)
-        {
-            var slices = GetSlicesFromValues(center, radius, values);
-            var shapes = new List<IVisio.Shape>(slices.Count);
-
-            foreach (var slice in slices)
-            {
-                var shape = slice.Render(page);
-                shapes.Add(shape);
-            }
-
-            return shapes;
         }
 
         public static List<PieSlice> GetSlicesFromValues(Point center, double radius, IList<double> values)

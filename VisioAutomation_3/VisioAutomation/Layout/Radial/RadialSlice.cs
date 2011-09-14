@@ -64,5 +64,16 @@ namespace VisioAutomation.Layout.Radial
             return slices;
         }
 
+
+        protected void check_normal_angle()
+        {
+            if ((this.Sector.Angle <= 0.0) || (this.Sector.Angle > System.Math.PI * 2.0))
+            {
+                string msg = string.Format("Angle of sector must be greater than zero and less than 2*PI");
+                throw new System.ArgumentException(msg);
+            }
+        }
+
+
     }
 }

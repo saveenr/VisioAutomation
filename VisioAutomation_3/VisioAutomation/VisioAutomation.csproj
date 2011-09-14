@@ -80,7 +80,7 @@
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
-    <Compile Include="Layout\Radial\ArcSlice.cs" />
+    <Compile Include="Layout\Radial\DoughnutSlice.cs" />
     <Compile Include="Layout\Radial\Sector.cs" />
     <Compile Include="Layout\Radial\RadialSlice.cs" />
     <Compile Include="Layout\Radial\PieSlice.cs" />

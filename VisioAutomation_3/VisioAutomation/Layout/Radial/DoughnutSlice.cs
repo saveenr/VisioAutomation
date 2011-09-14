@@ -9,12 +9,12 @@ using VisioAutomation.Extensions;
 namespace VisioAutomation.Layout.Radial
 {
 
-    public class ArcSlice : RadialSlice
+    public class DoughnutSlice : RadialSlice
     {
         public double InnerRadius { get; private set; }
         public double OuterRadius { get; private set; }
 
-        public ArcSlice(Point center, double start, double end, double inner_radius, double outer_radius) :
+        public DoughnutSlice(Point center, double start, double end, double inner_radius, double outer_radius) :
             base(center,start,end)
         {
             if (inner_radius < 0.0)
@@ -79,6 +79,8 @@ namespace VisioAutomation.Layout.Radial
 
         List<Point> GetShapeBezier(out int degree)
         {
+            this.check_normal_angle();
+
             var bez_inner = this.GetArcBez(this.InnerRadius, out degree);
             var bez_outer = this.GetArcBez(this.OuterRadius, out degree);
             bez_outer.Reverse();
