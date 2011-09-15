@@ -47,7 +47,7 @@ namespace VisioAutomation.Layout.OrgChart
 
 
             // Construct a layout tree from the hierarchy
-            var treenodes = VA.Internal.TreeUtil.TransformTree(
+            var treenodes = VA.Internal.TreeUtil.CopyTree(
                 orgchartdrawing.Root,
                 n => n.Children.Items,
                 n => node_to_layout_node(n),
