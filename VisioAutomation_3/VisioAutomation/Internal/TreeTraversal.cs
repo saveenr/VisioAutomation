@@ -98,17 +98,6 @@ namespace VisioAutomation.Internal
             }
         }
 
-        public static IEnumerable<T> PostOrder<T>(T root, EnumerateChildren<T> enum_children)
-        {
-            foreach (var walkevent in TreeTraversal.Walk<T>(root, enum_children, x => true))
-            {
-                if (walkevent.HasExitedNode)
-                {
-                    yield return walkevent.Node;
-                }
-            }
-        }
-
         internal static IEnumerable<T> efficient_reverse<T>(IEnumerable<T> items)
         {
             if (items is IList<T>)

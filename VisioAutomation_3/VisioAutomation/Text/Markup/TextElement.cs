@@ -65,9 +65,8 @@ namespace VisioAutomation.Text.Markup
 
         public static TextElement FromXml(string input_xml, bool preserve_whitespace)
         {
-            
-
             System.Xml.Linq.LoadOptions lo = System.Xml.Linq.LoadOptions.None;
+
             if (preserve_whitespace)
             {
                 lo = lo & System.Xml.Linq.LoadOptions.PreserveWhitespace;
@@ -99,7 +98,7 @@ namespace VisioAutomation.Text.Markup
 
         private static IEnumerable<VA.Internal.WalkEvent<System.Xml.Linq.XNode>> walk_xml_node(System.Xml.Linq.XNode node)
         {
-            return VA.Internal.TreeTraversal.Walk(node, n => get_child_nodes(n), n => true);
+            return VA.Internal.TreeTraversal.Walk(node, n => get_child_nodes(n));
         }
 
         private static Node create_va_text_node_from_xml_node(System.Xml.Linq.XNode node, bool preserve_whitespace)
