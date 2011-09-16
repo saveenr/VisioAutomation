@@ -65,7 +65,7 @@ namespace VisioAutomation.Text.Markup
 
         public static TextElement FromXml(string input_xml, bool preserve_whitespace)
         {
-            System.Xml.Linq.LoadOptions lo = System.Xml.Linq.LoadOptions.None;
+            var lo = System.Xml.Linq.LoadOptions.None;
 
             if (preserve_whitespace)
             {
@@ -73,10 +73,14 @@ namespace VisioAutomation.Text.Markup
             }
 
             var xml_doc = System.Xml.Linq.XDocument.Parse(input_xml, lo);
+            var text_el = TextElement.FromXml(xml_doc,preserve_whitespace);
 
-            var text_el =
-                (TextElement)create_va_text_node_from_xml_node(xml_doc.Root, preserve_whitespace);
+            return text_el;
+        }
 
+        private static TextElement FromXml(System.Xml.Linq.XDocument xml_doc, bool preserve_whitespace)
+        {
+            var text_el = (TextElement)create_va_text_node_from_xml_node(xml_doc.Root, preserve_whitespace);
             return text_el;
         }
 
