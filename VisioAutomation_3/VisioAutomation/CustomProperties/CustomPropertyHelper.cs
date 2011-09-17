@@ -202,31 +202,48 @@ namespace VisioAutomation.CustomProperties
             return prop_names;
         }
 
-        public static bool IsValidCustomPropertyName(string name)
+        private static bool IsValidCustomPropertyName(string name, out string errmsg)
         {
             if (name == null)
             {
+                errmsg = "The Custom Property name cannot be null";
                 return false;
             }
 
             if (name.Length < 1)
             {
+                errmsg = "The Custom Property name cannot have zero length";
                 return false;
             }
 
             if (name.Contains(" ") || name.Contains("\t") || name.Contains("\r") || name.Contains("\n"))
             {
+                errmsg = "The Custom Property name cannot contain any whitespace";
                 return false;
             }
 
+            if (name.StartsWith("Prop."))
+            {
+                errmsg = "The Custom Property name cannot begin with \"Prop.\".";
+                return false;
+            }
+
+            errmsg = null;
             return true;
+        }
+
+        public static bool IsValidCustomPropertyName(string name)
+        {
+            string errmsg;
+            return IsValidCustomPropertyName(name, out errmsg);
         }
 
         public static void CheckValidCustomPropertyName(string name)
         {
-            if (!IsValidCustomPropertyName(name))
+            string errmsg;
+            if (!IsValidCustomPropertyName(name, out errmsg))
             {
-                string msg = String.Format("Invalid Property Name: \"{0}\"", name);
+                string msg = String.Format("Invalid Property Name: \"{0}\". {1}", name,errmsg);
                 throw new VA.AutomationException(msg);
             }
         }
