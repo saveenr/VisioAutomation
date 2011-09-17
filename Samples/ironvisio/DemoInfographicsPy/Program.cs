@@ -31,7 +31,7 @@ namespace DemoInfographicsPy
             session.ResizePageToFit(0.5,0.5);
 
             session.NewPage();
-            var chart2 = new IG.BarChart(DataPoints, CategoryLabels);
+            var chart2 = new IG.VerticalBarChart(DataPoints, CategoryLabels);
             chart2.Draw(session);
             session.ResizePageToFit(0.5, 0.5);
 
@@ -46,7 +46,7 @@ namespace DemoInfographicsPy
             session.ResizePageToFit(0.5, 0.5);
 
             session.NewPage();
-            var chart5 = new IG.BarChart(DataPoints, CategoryLabels);
+            var chart5 = new IG.VerticalBarChart(DataPoints, CategoryLabels);
             chart5.Draw(session);
             session.ResizePageToFit(0.5, 0.5);
 
