@@ -50,37 +50,37 @@ namespace VisioAutomation.ShapeGeometry
 
         public void MoveTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            var row = new VA.ShapeGeometry.MoveToRow(x, y);
+            var row = VA.ShapeGeometry.GeometryRow.CreateMoveTo(x, y);
             this.Rows.Add(row);
         }
 
         public void LineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            var row = new VA.ShapeGeometry.LineToRow(x, y);
+            var row = VA.ShapeGeometry.GeometryRow.CreateLineTo(x, y);
             this.Rows.Add(row);
         }
 
         public void ArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
         {
-            var row = new VA.ShapeGeometry.ArcToRow(x, y, a );
+            var row = VA.ShapeGeometry.GeometryRow.CreateArcTo(x, y, a);
             this.Rows.Add(row);
         }
 
         public void EllipticalArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
         {
-            var row = new VA.ShapeGeometry.EllipticalArcToRow(x, y, a, b, c, d);
+            var row = VA.ShapeGeometry.GeometryRow.CreateEllipticalArcTo(x, y, a,b,c,d);
             this.Rows.Add(row);
         }
 
         public void Ellipse(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
         {
-            var row = new VA.ShapeGeometry.EllipseRow(x, y, a, b, c, d);
+            var row = VA.ShapeGeometry.GeometryRow.CreateEllipse(x, y, a,b,c,d);
             this.Rows.Add(row);
         }
 
         public void NURBSTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d, VA.ShapeSheet.FormulaLiteral e)
         {
-            var row = new EllipseRow.NURBSToRow(x, y, a, b, c, d, e);
+            var row = VA.ShapeGeometry.GeometryRow.CreateNURBSTo(x, y, a,b,c,d,e);
             this.Rows.Add(row);
         }
 

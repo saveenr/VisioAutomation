@@ -3,23 +3,33 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.ShapeGeometry
 {
-    public abstract class GeometryRow
+    public class GeometryRow
     {
-        public VA.ShapeSheet.FormulaLiteral X { get; protected set; }
-        public VA.ShapeSheet.FormulaLiteral Y { get; protected set; }
-        public VA.ShapeSheet.FormulaLiteral A { get; protected set; }
-        public VA.ShapeSheet.FormulaLiteral B { get; protected set; }
-        public VA.ShapeSheet.FormulaLiteral C { get; protected set; }
-        public VA.ShapeSheet.FormulaLiteral D { get; protected set; }
-        public VA.ShapeSheet.FormulaLiteral E { get; protected set; }
+        public VA.ShapeSheet.FormulaLiteral X { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Y { get; set; }
+        public VA.ShapeSheet.FormulaLiteral A { get; set; }
+        public VA.ShapeSheet.FormulaLiteral B { get; set; }
+        public VA.ShapeSheet.FormulaLiteral C { get; set; }
+        public VA.ShapeSheet.FormulaLiteral D { get; set; }
+        public VA.ShapeSheet.FormulaLiteral E { get; set; }
+        public IVisio.VisRowTags RowTag { get; set; }
 
-        public abstract IVisio.VisRowTags GetRowTagType();
+        public GeometryRow(IVisio.VisRowTags tag)
+        {
+            this.RowTag = tag;
+        }
+        
+        public virtual IVisio.VisRowTags GetRowTagType()
+        {
+            return this.RowTag;
+        }
 
         public void AddTo(IVisio.Shape shape, VA.ShapeSheet.Update.SRCUpdate update, short row, short section)
         {
             short row_index = shape.AddRow(section, row, (short) this.GetRowTagType());
             this.Update(section,row_index,update);
         }
+        
 
         private void Update(short section, short row_index, VA.ShapeSheet.Update.SRCUpdate update)
         {
@@ -37,125 +47,86 @@ namespace VisioAutomation.ShapeGeometry
             update.SetFormulaIgnoreNull(c_src, this.C);
             update.SetFormulaIgnoreNull(d_src, this.D);
             update.SetFormulaIgnoreNull(e_src, this.E);
-
         }
-    }
 
-    public class MoveToRow : VA.ShapeGeometry.GeometryRow
-    {
-        internal MoveToRow(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
+        public static GeometryRow CreateLineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            this.X = x;
-            this.Y = y;
+            var row = new VA.ShapeGeometry.GeometryRow(IVisio.VisRowTags.visTagLineTo);
+            row.X = x;
+            row.Y = y;
+            return row;
         }
 
-        public override IVisio.VisRowTags  GetRowTagType()
+        public static GeometryRow CreateMoveTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            return IVisio.VisRowTags.visTagMoveTo;
+            var row = new VA.ShapeGeometry.GeometryRow(IVisio.VisRowTags.visTagMoveTo);
+            row.X = x;
+            row.Y = y;
+            return row;
         }
-    }
 
-    public class LineToRow : VA.ShapeGeometry.GeometryRow
-    {
-        internal LineToRow(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
+        public static GeometryRow CreateArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
         {
-            this.X = x;
-            this.Y = y;
+            var row = new VA.ShapeGeometry.GeometryRow(IVisio.VisRowTags.visTagArcTo);
+            row.X = x;
+            row.Y = y;
+            row.A = a;
+            return row;
         }
 
-        public override IVisio.VisRowTags GetRowTagType()
-        {
-            return IVisio.VisRowTags.visTagLineTo;
-        }
-    }
-
-    public class ArcToRow : VA.ShapeGeometry.GeometryRow
-    {
-        internal ArcToRow(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
-        {
-            this.X = x;
-            this.Y = y;
-            this.A = a;
-        }
-
-        public override IVisio.VisRowTags GetRowTagType()
-        {
-            return IVisio.VisRowTags.visTagArcTo;
-        }
-    }
-
-    public class EllipticalArcToRow : VA.ShapeGeometry.GeometryRow
-    {
-        internal EllipticalArcToRow(
-             VA.ShapeSheet.FormulaLiteral x, 
+        public static GeometryRow CreateEllipticalArcTo(VA.ShapeSheet.FormulaLiteral x, 
              VA.ShapeSheet.FormulaLiteral y, 
              VA.ShapeSheet.FormulaLiteral a,
              VA.ShapeSheet.FormulaLiteral b,
              VA.ShapeSheet.FormulaLiteral c,
              VA.ShapeSheet.FormulaLiteral d)
         {
-            this.X = x;
-            this.Y = y;
-            this.A = a;
-            this.B = b;
-            this.C = c;
-            this.D = d;
+            var row = new VA.ShapeGeometry.GeometryRow(IVisio.VisRowTags.visTagEllipticalArcTo);
+            row.X = x;
+            row.Y = y;
+            row.A = a;
+            row.B = b;
+            row.C = c;
+            row.D = d;
+            return row;
         }
 
-        public override IVisio.VisRowTags GetRowTagType()
+        public static GeometryRow CreateEllipse(VA.ShapeSheet.FormulaLiteral x,
+     VA.ShapeSheet.FormulaLiteral y,
+     VA.ShapeSheet.FormulaLiteral a,
+     VA.ShapeSheet.FormulaLiteral b,
+     VA.ShapeSheet.FormulaLiteral c,
+     VA.ShapeSheet.FormulaLiteral d)
         {
-            return IVisio.VisRowTags.visTagEllipticalArcTo;
+            var row = new VA.ShapeGeometry.GeometryRow(IVisio.VisRowTags.visTagEllipse);
+            row.X = x;
+            row.Y = y;
+            row.A = a;
+            row.B = b;
+            row.C = c;
+            row.D = d;
+            return row;
         }
-    }
 
-    public class EllipseRow : VA.ShapeGeometry.GeometryRow
-    {
-
-        internal EllipseRow(
-             VA.ShapeSheet.FormulaLiteral x,
-             VA.ShapeSheet.FormulaLiteral y,
-             VA.ShapeSheet.FormulaLiteral a,
-             VA.ShapeSheet.FormulaLiteral b,
-             VA.ShapeSheet.FormulaLiteral c,
-             VA.ShapeSheet.FormulaLiteral d)
+                public static GeometryRow CreateNURBSTo(VA.ShapeSheet.FormulaLiteral x,
+     VA.ShapeSheet.FormulaLiteral y,
+     VA.ShapeSheet.FormulaLiteral a,
+     VA.ShapeSheet.FormulaLiteral b,
+     VA.ShapeSheet.FormulaLiteral c,
+     VA.ShapeSheet.FormulaLiteral d,
+        VA.ShapeSheet.FormulaLiteral e)
         {
-            this.X = x;
-            this.Y = y;
-            this.A = a;
-            this.B = b;
-            this.C = c;
-            this.D = d;
+            var row = new VA.ShapeGeometry.GeometryRow(IVisio.VisRowTags.visTagEllipse);
+            row.X = x;
+            row.Y = y;
+            row.A = a;
+            row.B = b;
+            row.C = c;
+            row.D = d;
+            row.E = e;
+            return row;
         }
 
-        public override IVisio.VisRowTags GetRowTagType()
-        {
-            return IVisio.VisRowTags.visTagEllipse;
-        }
-
-        public class NURBSToRow : VA.ShapeGeometry.GeometryRow
-        {
-            internal NURBSToRow(
-                 VA.ShapeSheet.FormulaLiteral x,
-                 VA.ShapeSheet.FormulaLiteral y,
-                 VA.ShapeSheet.FormulaLiteral a,
-                 VA.ShapeSheet.FormulaLiteral b,
-                 VA.ShapeSheet.FormulaLiteral c,
-                 VA.ShapeSheet.FormulaLiteral d,
-                 VA.ShapeSheet.FormulaLiteral e)
-            {
-                this.X = x;
-                this.Y = y;
-                this.A = a;
-                this.B = b;
-                this.C = c;
-                this.D = d;
-            }
-
-            public override IVisio.VisRowTags GetRowTagType()
-            {
-                return IVisio.VisRowTags.visTagNURBSTo;
-            }
-        }
     }
 
 }
