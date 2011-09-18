@@ -117,11 +117,11 @@ namespace TestVisioAutomation
 
             var geom1 = new VA.ShapeGeometry.GeometrySection();
             geom1.NoFill = "true";
-            geom1.MoveTo("-1", "-1");
-            geom1.LineTo("1", "0");
-            geom1.LineTo("1", "1");
-            geom1.LineTo("0", "1");
-            geom1.LineTo("0", "0");
+            geom1.AddMoveTo("-1", "-1");
+            geom1.AddLineTo("1", "0");
+            geom1.AddLineTo("1", "1");
+            geom1.AddLineTo("0", "1");
+            geom1.AddLineTo("0", "0");
 
             geom1.Render(shape);
 
@@ -149,11 +149,11 @@ namespace TestVisioAutomation
 
             var geom1 = new VA.ShapeGeometry.GeometrySection();
             geom1.NoFill = "true";
-            geom1.MoveTo("-1", "-1");
-            geom1.LineTo("1", "0");
-            geom1.LineTo("1", "1");
-            geom1.LineTo("0", "1");
-            geom1.LineTo("0", "0");
+            geom1.AddMoveTo("-1", "-1");
+            geom1.AddLineTo("1", "0");
+            geom1.AddLineTo("1", "1");
+            geom1.AddLineTo("0", "1");
+            geom1.AddLineTo("0", "0");
             geom1.Render(shape2);
             Assert.AreEqual(2, shape2.GeometryCount);
 
