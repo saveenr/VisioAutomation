@@ -77,5 +77,12 @@ namespace VisioAutomation.ShapeGeometry
             var row = new VA.ShapeGeometry.EllipseRow(x, y, a, b, c, d);
             this.Rows.Add(row);
         }
+
+        public void NURBSTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d, VA.ShapeSheet.FormulaLiteral e)
+        {
+            var row = new EllipseRow.NURBSToRow(x, y, a, b, c, d, e);
+            this.Rows.Add(row);
+        }
+
     }
 }
