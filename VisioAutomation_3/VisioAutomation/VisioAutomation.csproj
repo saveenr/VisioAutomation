@@ -128,7 +128,7 @@
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />
     <Compile Include="Layout\PrintPageOrientation.cs" />
-    <Compile Include="ShapeGeometry\ShapeHelper.cs" />
+    <Compile Include="ShapeGeometry\ShapeGeometryHelper.cs" />
     <Compile Include="ShapesEnumeration.cs" />
     <Compile Include="Shapesheet\CellDataGroup.cs" />
     <Compile Include="Shapesheet\CellSectionDataGroup.cs" />
