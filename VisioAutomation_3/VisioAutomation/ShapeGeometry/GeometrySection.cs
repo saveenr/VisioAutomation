@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeGeometry
 
             foreach (var row in this.Rows)
             {
-                row.AddToShape(shape, update, row_count, sec_index);
+                row.AddTo(shape, update, row_count, sec_index);
                 row_count++;
             }
 
