@@ -116,10 +116,14 @@ namespace TestVisioAutomation
             Assert.AreEqual(1,shape.GeometryCount);
 
             var geom1 = new VA.ShapeGeometry.GeometrySection();
-            geom1.MoveTo("0","0");
+            geom1.NoFill = "true";
+            geom1.MoveTo("-1", "-1");
+            geom1.LineTo("1", "0");
             geom1.LineTo("1", "1");
+            geom1.LineTo("0", "1");
+            geom1.LineTo("0", "0");
 
-            geom1.AddTo(shape);
+            geom1.Render(shape);
 
             //page.Delete(0);
         }
