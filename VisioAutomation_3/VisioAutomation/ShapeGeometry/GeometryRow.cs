@@ -9,12 +9,12 @@ namespace VisioAutomation.ShapeGeometry
 
     }
 
-    public class RowMoveTo : VA.ShapeGeometry.GeometryRow
+    public class MoveToRow : VA.ShapeGeometry.GeometryRow
     {
         public VA.ShapeSheet.FormulaLiteral X { get; private set; }
         public VA.ShapeSheet.FormulaLiteral Y { get; private set; }
 
-        internal RowMoveTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
+        internal MoveToRow(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
             this.X = x;
             this.Y = y;
@@ -30,12 +30,12 @@ namespace VisioAutomation.ShapeGeometry
         }
     }
 
-    public class RowLineTo : VA.ShapeGeometry.GeometryRow
+    public class LineToRow : VA.ShapeGeometry.GeometryRow
     {
         public VA.ShapeSheet.FormulaLiteral X { get; private set; }
         public VA.ShapeSheet.FormulaLiteral Y { get; private set; }
 
-        internal RowLineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
+        internal LineToRow(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
             this.X = x;
             this.Y = y;
@@ -53,13 +53,13 @@ namespace VisioAutomation.ShapeGeometry
 
     }
 
-    public class RowArcTo : VA.ShapeGeometry.GeometryRow
+    public class ArcToRow : VA.ShapeGeometry.GeometryRow
     {
         public VA.ShapeSheet.FormulaLiteral X { get; private set; }
         public VA.ShapeSheet.FormulaLiteral Y { get; private set; }
         public VA.ShapeSheet.FormulaLiteral A { get; private set; }
 
-        internal RowArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
+        internal ArcToRow(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
         {
             this.X = x;
             this.Y = y;
@@ -78,7 +78,7 @@ namespace VisioAutomation.ShapeGeometry
         }
     }
 
-    public class RowEllipticalArcTo : VA.ShapeGeometry.GeometryRow
+    public class EllipticalArcToRow : VA.ShapeGeometry.GeometryRow
     {
         public VA.ShapeSheet.FormulaLiteral X { get; private set; }
         public VA.ShapeSheet.FormulaLiteral Y { get; private set; }
@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeGeometry
         public VA.ShapeSheet.FormulaLiteral C { get; private set; }
         public VA.ShapeSheet.FormulaLiteral D { get; private set; }
 
-        internal RowEllipticalArcTo(
+        internal EllipticalArcToRow(
              VA.ShapeSheet.FormulaLiteral x, 
              VA.ShapeSheet.FormulaLiteral y, 
              VA.ShapeSheet.FormulaLiteral a,

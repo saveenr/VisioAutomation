@@ -50,25 +50,25 @@ namespace VisioAutomation.ShapeGeometry
 
         public void MoveTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            var row = new VA.ShapeGeometry.RowMoveTo(x, y);
+            var row = new VA.ShapeGeometry.MoveToRow(x, y);
             this.Rows.Add(row);
         }
 
         public void LineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            var row = new VA.ShapeGeometry.RowLineTo(x, y);
+            var row = new VA.ShapeGeometry.LineToRow(x, y);
             this.Rows.Add(row);
         }
 
         public void ArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
         {
-            var row = new VA.ShapeGeometry.RowArcTo(x, y, a );
+            var row = new VA.ShapeGeometry.ArcToRow(x, y, a );
             this.Rows.Add(row);
         }
 
         public void EllipticalArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
         {
-            var row = new VA.ShapeGeometry.RowEllipticalArcTo(x, y, a, b, c, d);
+            var row = new VA.ShapeGeometry.EllipticalArcToRow(x, y, a, b, c, d);
             this.Rows.Add(row);
         }
     }
