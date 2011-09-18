@@ -59,6 +59,36 @@ namespace VisioAutomation.ShapeGeometry
                     update.SetFormulaIgnoreNull(y_src, lineto_row.Y);
                     row_count++;
                 }
+                else if (row is RowArcTo)
+                {
+                    var arcto_row = (RowArcTo)row;
+                    short row_index = shape.AddRow(sec_index, row_count, (short)IVisio.VisRowTags.visTagArcTo);
+                    var x_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_X.Cell);
+                    var y_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_Y.Cell);
+                    var a_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_A.Cell);
+                    update.SetFormulaIgnoreNull(x_src, arcto_row.X);
+                    update.SetFormulaIgnoreNull(y_src, arcto_row.Y);
+                    update.SetFormulaIgnoreNull(a_src, arcto_row.A);
+                    row_count++;
+                }
+                else if (row is RowEllipticalArcTo)
+                {
+                    var arcto_row = (RowEllipticalArcTo)row;
+                    short row_index = shape.AddRow(sec_index, row_count, (short)IVisio.VisRowTags.visTagArcTo);
+                    var x_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_X.Cell);
+                    var y_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_Y.Cell);
+                    var a_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_A.Cell);
+                    var b_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_B.Cell);
+                    var c_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_C.Cell);
+                    var d_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_D.Cell);
+                    update.SetFormulaIgnoreNull(x_src, arcto_row.X);
+                    update.SetFormulaIgnoreNull(y_src, arcto_row.Y);
+                    update.SetFormulaIgnoreNull(a_src, arcto_row.A);
+                    update.SetFormulaIgnoreNull(b_src, arcto_row.B);
+                    update.SetFormulaIgnoreNull(c_src, arcto_row.C);
+                    update.SetFormulaIgnoreNull(d_src, arcto_row.D);
+                    row_count++;
+                }
                 else
                 {
                     string msg = string.Format("Unsupported row type \"{0}\"", row.GetType().Name);
@@ -79,6 +109,18 @@ namespace VisioAutomation.ShapeGeometry
         public void LineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
             var row = new VA.ShapeGeometry.RowLineTo(x, y);
+            this.Rows.Add(row);
+        }
+
+        public void ArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
+        {
+            var row = new VA.ShapeGeometry.RowArcTo(x, y, a );
+            this.Rows.Add(row);
+        }
+
+        public void EllipticalArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
+        {
+            var row = new VA.ShapeGeometry.RowEllipticalArcTo(x, y, a, b, c, d);
             this.Rows.Add(row);
         }
     }
