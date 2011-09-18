@@ -36,6 +36,11 @@ namespace VisioAutomation.ShapeSheet
             return new SRC((short)this.Section, (short)row, (short)this.Cell);
         }
 
+        public SRC ForSectionAndRow(short section, short row)
+        {
+            return new SRC(section , (short)row, (short)this.Cell);
+        }
+
         public bool AreEqual(SRC other)
         {
             return ((this.Section == other.Section) && (this.Row == other.Row) && (this.Cell == other.Cell));

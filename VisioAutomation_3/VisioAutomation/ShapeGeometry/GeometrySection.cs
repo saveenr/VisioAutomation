@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Update;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -8,8 +10,7 @@ namespace VisioAutomation.ShapeGeometry
 {
     public class GeometrySection
     {
-        private List<VA.ShapeGeometry.GeometryRow> Rows;
-
+        public List<GeometryRow> Rows { get; private set; }
         public VA.ShapeSheet.FormulaLiteral NoFill { get; set; }
         public VA.ShapeSheet.FormulaLiteral NoLine { get; set; }
         public VA.ShapeSheet.FormulaLiteral NoShow { get; set; }
@@ -27,10 +28,10 @@ namespace VisioAutomation.ShapeGeometry
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
 
-            var src_nofill = new VA.ShapeSheet.SRC(sec_index, 0, VA.ShapeSheet.SRCConstants.Geometry_NoFill.Cell);
-            var src_noline = new VA.ShapeSheet.SRC(sec_index, 0, VA.ShapeSheet.SRCConstants.Geometry_NoLine.Cell);
-            var src_noshow = new VA.ShapeSheet.SRC(sec_index, 0, VA.ShapeSheet.SRCConstants.Geometry_NoShow.Cell);
-            var src_nosnap = new VA.ShapeSheet.SRC(sec_index, 0, VA.ShapeSheet.SRCConstants.Geometry_NoSnap.Cell);
+            var src_nofill = VA.ShapeSheet.SRCConstants.Geometry_NoFill.ForSectionAndRow(sec_index, 0);
+            var src_noline = VA.ShapeSheet.SRCConstants.Geometry_NoLine.ForSectionAndRow(sec_index, 0);
+            var src_noshow = VA.ShapeSheet.SRCConstants.Geometry_NoShow.ForSectionAndRow(sec_index, 0);
+            var src_nosnap = VA.ShapeSheet.SRCConstants.Geometry_NoSnap.ForSectionAndRow(sec_index, 0);
 
             update.SetFormulaIgnoreNull(src_nofill, this.NoFill);
             update.SetFormulaIgnoreNull(src_noline, this.NoLine);
@@ -42,62 +43,79 @@ namespace VisioAutomation.ShapeGeometry
                 if (row is RowMoveTo)
                 {
                     var moveto_row = (RowMoveTo) row;
-                    short row_index = shape.AddRow(sec_index, row_count, (short)IVisio.VisRowTags.visTagMoveTo);
-                    var x_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_X.Cell);
-                    var y_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_Y.Cell);
-                    update.SetFormulaIgnoreNull(x_src, moveto_row.X);
-                    update.SetFormulaIgnoreNull(y_src, moveto_row.Y);
-                    row_count++;
+                    CreateMoveToRow(moveto_row, shape, update, row_count, sec_index);
                 }
                 else if (row is RowLineTo)
                 {
                     var lineto_row = (RowLineTo)row;
-                    short row_index = shape.AddRow(sec_index, row_count, (short)IVisio.VisRowTags.visTagLineTo);
-                    var x_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_X.Cell);
-                    var y_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_Y.Cell);
-                    update.SetFormulaIgnoreNull(x_src, lineto_row.X);
-                    update.SetFormulaIgnoreNull(y_src, lineto_row.Y);
-                    row_count++;
+                    CreateLineToRow(lineto_row, shape, update, row_count, sec_index);
                 }
                 else if (row is RowArcTo)
                 {
                     var arcto_row = (RowArcTo)row;
-                    short row_index = shape.AddRow(sec_index, row_count, (short)IVisio.VisRowTags.visTagArcTo);
-                    var x_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_X.Cell);
-                    var y_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_Y.Cell);
-                    var a_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_A.Cell);
-                    update.SetFormulaIgnoreNull(x_src, arcto_row.X);
-                    update.SetFormulaIgnoreNull(y_src, arcto_row.Y);
-                    update.SetFormulaIgnoreNull(a_src, arcto_row.A);
-                    row_count++;
+                    CreateArcToRow(arcto_row, shape, update, row_count, sec_index);
                 }
                 else if (row is RowEllipticalArcTo)
                 {
-                    var arcto_row = (RowEllipticalArcTo)row;
-                    short row_index = shape.AddRow(sec_index, row_count, (short)IVisio.VisRowTags.visTagArcTo);
-                    var x_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_X.Cell);
-                    var y_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_Y.Cell);
-                    var a_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_A.Cell);
-                    var b_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_B.Cell);
-                    var c_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_C.Cell);
-                    var d_src = new VA.ShapeSheet.SRC(sec_index, row_index, VA.ShapeSheet.SRCConstants.Geometry_D.Cell);
-                    update.SetFormulaIgnoreNull(x_src, arcto_row.X);
-                    update.SetFormulaIgnoreNull(y_src, arcto_row.Y);
-                    update.SetFormulaIgnoreNull(a_src, arcto_row.A);
-                    update.SetFormulaIgnoreNull(b_src, arcto_row.B);
-                    update.SetFormulaIgnoreNull(c_src, arcto_row.C);
-                    update.SetFormulaIgnoreNull(d_src, arcto_row.D);
-                    row_count++;
+                    var ellipticalarcto_row = (RowEllipticalArcTo)row;
+                    CreateEllipticalArcToRow(ellipticalarcto_row, shape, update, row_count, sec_index);
                 }
                 else
                 {
                     string msg = string.Format("Unsupported row type \"{0}\"", row.GetType().Name);
                     throw new AutomationException(msg);
                 }
+                row_count++;
             }
 
             update.Execute(shape);
             return 0;
+        }
+
+        private static void CreateEllipticalArcToRow(RowEllipticalArcTo rowdef, Shape shape, SRCUpdate update, short row, short section)
+        {
+            short row_index = shape.AddRow(section, row, (short) IVisio.VisRowTags.visTagArcTo);
+            var x_src = VA.ShapeSheet.SRCConstants.Geometry_X.ForSectionAndRow(section, row_index);
+            var y_src = VA.ShapeSheet.SRCConstants.Geometry_Y.ForSectionAndRow(section, row_index);
+            var a_src = VA.ShapeSheet.SRCConstants.Geometry_A.ForSectionAndRow(section, row_index);
+            var b_src = VA.ShapeSheet.SRCConstants.Geometry_B.ForSectionAndRow(section, row_index);
+            var c_src = VA.ShapeSheet.SRCConstants.Geometry_C.ForSectionAndRow(section, row_index);
+            var d_src = VA.ShapeSheet.SRCConstants.Geometry_D.ForSectionAndRow(section, row_index);
+            update.SetFormulaIgnoreNull(x_src, rowdef.X);
+            update.SetFormulaIgnoreNull(y_src, rowdef.Y);
+            update.SetFormulaIgnoreNull(a_src, rowdef.A);
+            update.SetFormulaIgnoreNull(b_src, rowdef.B);
+            update.SetFormulaIgnoreNull(c_src, rowdef.C);
+            update.SetFormulaIgnoreNull(d_src, rowdef.D);
+        }
+
+        private static void CreateArcToRow(RowArcTo rowdef, Shape shape, SRCUpdate update, short row, short section)
+        {
+            short row_index = shape.AddRow(section, row, (short) IVisio.VisRowTags.visTagArcTo);
+            var x_src = VA.ShapeSheet.SRCConstants.Geometry_X.ForSectionAndRow(section, row_index);
+            var y_src = VA.ShapeSheet.SRCConstants.Geometry_Y.ForSectionAndRow(section, row_index);
+            var a_src = VA.ShapeSheet.SRCConstants.Geometry_A.ForSectionAndRow(section, row_index);
+            update.SetFormulaIgnoreNull(x_src, rowdef.X);
+            update.SetFormulaIgnoreNull(y_src, rowdef.Y);
+            update.SetFormulaIgnoreNull(a_src, rowdef.A);
+        }
+
+        private static void CreateLineToRow(RowLineTo rowdef, Shape shape, SRCUpdate update, short row, short section)
+        {
+            short row_index = shape.AddRow(section, row, (short) IVisio.VisRowTags.visTagLineTo);
+            var x_src = VA.ShapeSheet.SRCConstants.Geometry_X.ForSectionAndRow(section, row_index);
+            var y_src = VA.ShapeSheet.SRCConstants.Geometry_Y.ForSectionAndRow(section, row_index);
+            update.SetFormulaIgnoreNull(x_src, rowdef.X);
+            update.SetFormulaIgnoreNull(y_src, rowdef.Y);
+        }
+
+        private static void CreateMoveToRow(RowMoveTo rowdef, Shape shape, SRCUpdate update, short row, short section)
+        {
+            short row_index = shape.AddRow(section, row, (short) IVisio.VisRowTags.visTagMoveTo);
+            var x_src = VA.ShapeSheet.SRCConstants.Geometry_X.ForSectionAndRow(section, row_index);
+            var y_src = VA.ShapeSheet.SRCConstants.Geometry_Y.ForSectionAndRow(section, row_index);
+            update.SetFormulaIgnoreNull(x_src, rowdef.X);
+            update.SetFormulaIgnoreNull(y_src, rowdef.Y);
         }
 
         public void MoveTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
