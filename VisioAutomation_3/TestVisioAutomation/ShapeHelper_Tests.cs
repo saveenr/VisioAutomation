@@ -114,17 +114,12 @@ namespace TestVisioAutomation
             var page = this.GetNewPage();
             var shape = page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1,shape.GeometryCount);
-            short sec_index1 = VA.ShapeGeometry.ShapeGeometryHelper.AddGeometrySection(shape);
-            Assert.AreEqual(2, shape.GeometryCount);
-            Assert.AreEqual(1,shape.RowCount[sec_index1]);
 
-            VA.ShapeGeometry.ShapeGeometryHelper.AddGeometryMoveToRow(shape, sec_index1);
-            Assert.AreEqual(2, shape.GeometryCount);
-            Assert.AreEqual(2, shape.RowCount[sec_index1]);
+            var geom1 = new VA.ShapeGeometry.GeometrySection();
+            geom1.MoveTo("0","0");
+            geom1.LineTo("1", "1");
 
-            short sec_index2 = VA.ShapeGeometry.ShapeGeometryHelper.AddGeometrySection(shape);
-            Assert.AreEqual(3, shape.GeometryCount);
-            Assert.AreEqual(1, shape.RowCount[sec_index2]);
+            geom1.AddTo(shape);
 
             //page.Delete(0);
         }
