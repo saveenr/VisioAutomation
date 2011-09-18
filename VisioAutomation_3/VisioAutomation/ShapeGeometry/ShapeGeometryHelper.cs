@@ -33,15 +33,23 @@ namespace VisioAutomation.ShapeGeometry
             return new_sec_index;
         }
 
-        public static void DeleteGeometrySection(IVisio.Shape shape, short section_index)
+        public static void DeleteGeometry(IVisio.Shape shape)
+        {
+            int num = shape.GeometryCount;
+            for (int i = num-1; i >=0; i--)
+            {
+                VA.ShapeGeometry.ShapeGeometryHelper.DeleteGeometrySection(shape,(short)i);                
+            }
+        }
+
+        public static void DeleteGeometrySection(IVisio.Shape shape, short index)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
             }
 
-            int num_geometry_sections = shape.GeometryCount;
-            short target_section_index = GetGeometrySectionIndex((short)num_geometry_sections);
+            short target_section_index = GetGeometrySectionIndex(index);
             shape.DeleteSection(target_section_index);
         }
     }
