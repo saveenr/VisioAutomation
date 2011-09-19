@@ -50,6 +50,10 @@ namespace DemoInfographicsPy
             chart5.Draw(session);
             session.ResizePageToFit(0.5, 0.5);
 
+            session.NewPage();
+            var chart6 = new IG.MonthGrid(2011,09);
+            chart6.Render(session.Page);
+            session.ResizePageToFit(0.5, 0.5);
             
         }
 
