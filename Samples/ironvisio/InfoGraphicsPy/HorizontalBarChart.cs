@@ -24,10 +24,8 @@ namespace InfoGraphicsPy
 
         public void Draw(Session session)
         {
-            var cats = new[] { "A", "B", "C", "D", "E" };
-            var datapoints = new DataPoints(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 });
-            var normalized_values = datapoints.GetNormalizedValues();
-            var heights = ConstructPositions(datapoints.Count(), CellHeight, this.VerticalSeparation);
+            var normalized_values = this.DataPoints.GetNormalizedValues();
+            var heights = ConstructPositions(this.DataPoints.Count(), CellHeight, this.VerticalSeparation);
             var widths = ConstructPositions(new[] { this.CategoryLabelHeight, this.CellWidth}, this.HorizontalSeparation);
             var grid = new GridLayout(widths, heights);
 
@@ -54,10 +52,10 @@ namespace InfoGraphicsPy
             var bar_shapes = this.DrawRects(dom, bar_rects, session.MasterRectangle);
             var cat_shapes = this.DrawRects(dom, cat_rects, session.MasterRectangle);
 
-            for (int i = 0; i < datapoints.Count; i++)
+            for (int i = 0; i < this.DataPoints.Count; i++)
             {
-                bar_shapes[i].Text = datapoints[i].Text.ToString();
-                cat_shapes[i].Text = cats[i];
+                bar_shapes[i].Text = this.DataPoints[i].Text.ToString();
+                cat_shapes[i].Text = this.CategoryLabels[i];
             }
 
             foreach (var shape in bar_shapes)

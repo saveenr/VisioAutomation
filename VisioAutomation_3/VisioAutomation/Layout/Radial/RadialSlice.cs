@@ -15,6 +15,8 @@ namespace VisioAutomation.Layout.Radial
 
         public RadialSlice(VA.Drawing.Point center, double start, double end)
         {
+            this.Center = center;
+
             if (end < start)
             {
                 throw new System.ArgumentException("end","end angle must be greater than or equal to start angle");
