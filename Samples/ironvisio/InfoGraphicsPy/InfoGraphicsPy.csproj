@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chart.cs" />
+    <Compile Include="DOMUtil.cs" />
     <Compile Include="VerticalBarChart.cs" />
     <Compile Include="HorizontalBarChart.cs" />
     <Compile Include="GridChart.cs" />
