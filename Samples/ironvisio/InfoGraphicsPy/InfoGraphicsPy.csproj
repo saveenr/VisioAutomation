@@ -37,7 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chart.cs" />
+    <Compile Include="DoughnutSliceChart.cs" />
+    <Compile Include="PieChart.cs" />
     <Compile Include="DOMUtil.cs" />
+    <Compile Include="MonthGrid.cs" />
+    <Compile Include="MonthYear.cs" />
     <Compile Include="VerticalBarChart.cs" />
     <Compile Include="HorizontalBarChart.cs" />
     <Compile Include="GridChart.cs" />

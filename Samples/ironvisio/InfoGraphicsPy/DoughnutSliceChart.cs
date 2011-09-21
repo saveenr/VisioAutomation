@@ -9,16 +9,15 @@ using VisioAutomation.Extensions;
 
 namespace InfoGraphicsPy
 {
-    public class PieSliceChart: GridChart
+    public class DoughnutSliceChart : GridChart
     {
-        public PieSliceChart(DataPoints dps, string [] cats) :
+        public DoughnutSliceChart(DataPoints dps, string[] cats) :
             base(dps,cats)
         {
         }
 
         public void Draw(Session session)
         {
-
             var normalized_values = DataPoints.GetNormalizedValues();
             var widths = DOMUTil.ConstructPositions(DataPoints.Count(), this.CellWidth, HorizontalSeparation);
             var heights = DOMUTil.ConstructPositions(new[] { CategoryLabelHeight, CellHeight }, VerticalSeparation);
@@ -33,19 +32,19 @@ namespace InfoGraphicsPy
 
             var dom = new VA.DOM.Document();
             dom.ResolveVisioShapeObjects = true;
-            var circle_shapes = new List<VA.DOM.Oval>();
-            var slice_shapes = new List<VA.DOM.PieSlice>();
+            var circle_shapes = new List<VA.DOM.Arc>();
+            var slice_shapes = new List<VA.DOM.Arc>();
             for (int i = 0; i < DataPoints.Count; i++)
             {
                 var dp = DataPoints[i];
-                double start = 0.0;
-                double end = System.Math.PI * 2.0 * normalized_values[i];
-                double radius = top_rects[i].Width/2.0;
+                var start = 0.0;
+                var end = System.Math.PI * 2.0 * normalized_values[i];
+                double radius = top_rects[i].Width / 2.0;
 
-                var circle_shape = dom.DrawOval(top_rects[i]);
+                var circle_shape = dom.DrawArc(top_rects[i].Center, radius * 0.7, radius, start, System.Math.PI * 2.0);
                 circle_shapes.Add(circle_shape);
 
-                var dom_shape = dom.DrawPieSlice(top_rects[i].Center, radius, start, end);
+                var dom_shape = dom.DrawArc(top_rects[i].Center, radius*0.7, radius, start, end);
                 slice_shapes.Add(dom_shape);
             }
 
@@ -87,4 +86,5 @@ namespace InfoGraphicsPy
             dom.Render(session.Page);
         }
     }
+
 }

@@ -11,14 +11,9 @@ namespace InfoGraphicsPy
 {
     public class VerticalBarChart : GridChart
     {
-        public string[] CategoryLabels;
-        public DataPoints DataPoints;
-
-        public VerticalBarChart(DataPoints dps, string[] cats)
+        public VerticalBarChart(DataPoints dps, string[] cats) :
+            base(dps,cats)
         {
-            this.DataPoints = dps;
-            this.CategoryLabels = cats;
-
         }
 
         public void Draw(Session session)

@@ -9,8 +9,21 @@ using VisioAutomation.Extensions;
 
 namespace InfoGraphicsPy
 {
-    public class Chart
+    public abstract class Chart
     {
+        public string[] CategoryLabels;
+        public DataPoints DataPoints;
+
+        private Chart()
+        {
+        }
+
+        protected Chart(DataPoints dps, string[] cats)
+        {
+            this.DataPoints = dps;
+            this.CategoryLabels = cats;
+        }
+
         public IEnumerable<T> SkipOdd<T>(IEnumerable<T> items)
         {
             int i = 0;
@@ -28,7 +41,6 @@ namespace InfoGraphicsPy
             }
 
         }
-       
     }
 
 }
