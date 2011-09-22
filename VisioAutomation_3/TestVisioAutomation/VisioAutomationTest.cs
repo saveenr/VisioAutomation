@@ -16,7 +16,7 @@ namespace TestVisioAutomation
         {
             if (this.app == null)
             {
-                this.app = new IVisio.ApplicationClass();
+                this.app = new IVisio.Application();
             }
             else
             {
@@ -27,7 +27,7 @@ namespace TestVisioAutomation
                 }
                 catch (System.Runtime.InteropServices.COMException e)
                 {
-                    this.app = new IVisio.ApplicationClass();
+                    this.app = new IVisio.Application();
                 }
             }
 

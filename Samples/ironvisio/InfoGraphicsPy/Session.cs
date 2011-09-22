@@ -20,7 +20,7 @@ namespace InfoGraphicsPy
         
         public Session()
         {
-            this.app = new IVisio.ApplicationClass();
+            this.app = new IVisio.Application();
             this.NewDocument();
         }
 

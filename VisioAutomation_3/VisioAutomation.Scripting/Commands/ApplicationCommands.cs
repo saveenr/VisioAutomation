@@ -90,7 +90,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application New()
         {
-            var app = new IVisio.ApplicationClass();
+            var app = new IVisio.Application();
             this.Session.VisioApplication = app;
             return app;
         }

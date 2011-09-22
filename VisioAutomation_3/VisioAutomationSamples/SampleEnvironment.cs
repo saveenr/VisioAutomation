@@ -43,7 +43,7 @@ namespace VisioAutomationSamples
 
         private static void create_new_app_instance()
         {
-            app = new IVisio.ApplicationClass();
+            app = new IVisio.Application();
             var documents = app.Documents;
             documents.Add("");
         }
