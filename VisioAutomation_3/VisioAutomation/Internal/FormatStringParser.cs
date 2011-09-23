@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation
+namespace VisioAutomation.Internal
 {
     internal class FormatStringParser
     {

@@ -43,7 +43,7 @@ namespace VisioAutomation.Text
                 }
             }
 
-            var fmtparse = new VA.FormatStringParser(fmt);
+            var fmtparse = new VA.Internal.FormatStringParser(fmt);
             var unique_indices = fmtparse.Segments.Select(f => f.Index).Distinct().ToList();
             if (unique_indices.Count > fields.Length)
             {
