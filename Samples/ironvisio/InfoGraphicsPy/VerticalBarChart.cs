@@ -20,8 +20,8 @@ namespace InfoGraphicsPy
         {
             var normalized_values = this.DataPoints.GetNormalizedValues();
 
-            var widths = DOMUTil.ConstructPositions(this.DataPoints.Count, CellWidth, this.HorizontalSeparation);
-            var heights = DOMUTil.ConstructPositions(new[] { this.CategoryLabelHeight, this.CellHeight }, this.VerticalSeparation);
+            var widths = DOMUtil.ConstructPositions(this.DataPoints.Count, CellWidth, this.HorizontalSeparation);
+            var heights = DOMUtil.ConstructPositions(new[] { this.CategoryLabelHeight, this.CellHeight }, this.VerticalSeparation);
             var grid = new GridLayout(widths, heights);
 
             int catrow = 0;
@@ -41,8 +41,8 @@ namespace InfoGraphicsPy
 
             var dom = new VA.DOM.Document();
             dom.ResolveVisioShapeObjects = true;
-            var bar_shapes = DOMUTil.DrawRects(dom, bar_rects, session.MasterRectangle);
-            var cat_shapes = DOMUTil.DrawRects(dom, cat_rects, session.MasterRectangle);
+            var bar_shapes = DOMUtil.DrawRects(dom, bar_rects, session.MasterRectangle);
+            var cat_shapes = DOMUtil.DrawRects(dom, cat_rects, session.MasterRectangle);
 
             for (int i = 0; i < this.DataPoints.Count; i++)
             {

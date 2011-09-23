@@ -9,7 +9,7 @@ using VisioAutomation.Extensions;
 
 namespace InfoGraphicsPy
 {
-    public static class DOMUTil
+    internal static class DOMUtil
     {
         public static List<VA.DOM.Shape> DrawOvals(VA.DOM.Document dom, IList<VA.Drawing.Rectangle> rects)
         {

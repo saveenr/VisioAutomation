@@ -19,8 +19,8 @@ namespace InfoGraphicsPy
         public void Draw(Session session)
         {
             var normalized_values = this.DataPoints.GetNormalizedValues();
-            var heights = DOMUTil.ConstructPositions(this.DataPoints.Count(), CellHeight, this.VerticalSeparation);
-            var widths = DOMUTil.ConstructPositions(new[] { this.CategoryLabelHeight, this.CellWidth }, this.HorizontalSeparation);
+            var heights = DOMUtil.ConstructPositions(this.DataPoints.Count(), CellHeight, this.VerticalSeparation);
+            var widths = DOMUtil.ConstructPositions(new[] { this.CategoryLabelHeight, this.CellWidth }, this.HorizontalSeparation);
             var grid = new GridLayout(widths, heights);
 
             int catcol = 0;
@@ -43,8 +43,8 @@ namespace InfoGraphicsPy
 
             var cat_rects = this.SkipOdd(grid.GetRectsInCol(catcol)).ToList();
 
-            var bar_shapes = DOMUTil.DrawRects(dom, bar_rects, session.MasterRectangle);
-            var cat_shapes = DOMUTil.DrawRects(dom, cat_rects, session.MasterRectangle);
+            var bar_shapes = DOMUtil.DrawRects(dom, bar_rects, session.MasterRectangle);
+            var cat_shapes = DOMUtil.DrawRects(dom, cat_rects, session.MasterRectangle);
 
             for (int i = 0; i < this.DataPoints.Count; i++)
             {
