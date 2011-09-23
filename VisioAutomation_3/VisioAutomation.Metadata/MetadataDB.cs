@@ -15,7 +15,6 @@ namespace VisioAutomation.Metadata
         private List<CellValue> _cellvals;
         private List<Section> _sections;
         private List<AutomationEnum> _autoenums;
-        private List<CellValueEnum> _cellvalueenum;
         private Dictionary<string, AutomationEnum> _name_to_autoenums;
         private Dictionary<string, CellValueEnum> _name_to_cellvalueenums;
         private List<AutomationConstant> _constants;
