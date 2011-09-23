@@ -244,24 +244,17 @@ namespace VisioAutomation
                 return;
             }
 
-            var srcs = new[] { VA.ShapeSheet.SRCConstants.PageWidth, VA.ShapeSheet.SRCConstants.PageHeight };
-            var stream = VA.ShapeSheet.SRCStream.FromItems(srcs);
-            var unitcodes = new[] { IVisio.VisUnitCodes.visNoCast, IVisio.VisUnitCodes.visNoCast };
-            var page_sheet = page.PageSheet;
-            var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<double>(page_sheet, stream, unitcodes);
+            var old_size = VA.PageHelper.GetSize(page);
 
-            double old_width = results[0];
-            double old_height = results[1];
-
-            double new_height = old_width;
-            double new_width = old_height;
+            double new_height = old_size.Width;
+            double new_width = old_size.Height;
 
             var update = new VA.ShapeSheet.Update.SRCUpdate(3, 0);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, new_width);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, new_height);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
 
-            update.Execute(page_sheet);
+            update.Execute(page.PageSheet);
         }
 
         public static VA.Drawing.Size GetSize(IVisio.Page page)
@@ -271,12 +264,13 @@ namespace VisioAutomation
                 throw new System.ArgumentNullException("page");
             }
 
-            var srcs = new[] { VA.ShapeSheet.SRCConstants.PageWidth, VA.ShapeSheet.SRCConstants.PageHeight };
-            var stream = VA.ShapeSheet.SRCStream.FromItems(srcs);
-            var unitcodes = new[] { IVisio.VisUnitCodes.visNoCast, IVisio.VisUnitCodes.visNoCast };
-            var pagesheet = page.PageSheet;
-            var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<double>(pagesheet, stream, unitcodes);
-            var s = new VA.Drawing.Size(results[0], results[1]);
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_height = query.AddColumn(VA.ShapeSheet.SRCConstants.PageHeight);
+            var col_width = query.AddColumn(VA.ShapeSheet.SRCConstants.PageWidth);
+            var results = query.GetResults<double>(page.PageSheet);
+            double height = results[0, col_height];
+            double width = results[0, col_width];
+            var s = new VA.Drawing.Size(width, height);
             return s;
         }
 
