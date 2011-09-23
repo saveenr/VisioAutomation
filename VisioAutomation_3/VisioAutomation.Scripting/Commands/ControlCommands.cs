@@ -73,7 +73,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IDictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get()
+        public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get()
         {
             if (!this.Session.HasSelectedShapes())
             {

@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Controls;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -25,6 +28,7 @@ namespace TestVisioAutomation
             ss.Selection.Select(s3);
 
             var controls0 = ss.Control.Get();
+            int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
             Assert.AreEqual(0, controls0[s2].Count);
