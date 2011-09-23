@@ -84,6 +84,7 @@
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
+    <Compile Include="Format\ShapeFormatCells.cs" />
     <Compile Include="Layout\Radial\DoughnutSlice.cs" />
     <Compile Include="Layout\Radial\Sector.cs" />
     <Compile Include="Layout\Radial\RadialSlice.cs" />
@@ -102,9 +103,7 @@
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
-    <Compile Include="Layout\ShapeLayoutQuery.cs" />
     <Compile Include="Layout\ShapeLayoutCells.cs" />
-    <Compile Include="Layout\PageQuery.cs" />
     <Compile Include="Layout\PageCells.cs" />
     <Compile Include="CustomProperties\Calendar.cs" />
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
@@ -121,12 +120,10 @@
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
     <Compile Include="Internal\CollectionUtil.cs" />
-    <Compile Include="Format\ShapeFormatQuery.cs" />
     <Compile Include="Layout\BoxHierarchy\DirectionHorizontal.cs" />
     <Compile Include="Layout\BoxHierarchy\DirectionVertical.cs" />
     <Compile Include="Layout\LockCells_ext.cs" />
     <Compile Include="Layout\XFormCells_ext.cs" />
-    <Compile Include="Layout\LockQuery.cs" />
     <Compile Include="Layout\LockCells.cs" />
     <Compile Include="Layout\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
@@ -139,7 +136,6 @@
     <Compile Include="Shapesheet\CellDataGroup.cs" />
     <Compile Include="Shapesheet\CellSectionDataGroup.cs" />
     <Compile Include="Text\CharStyle.cs" />
-    <Compile Include="Text\TextBlockFormatQuery.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="UI\AlertResponseCode.cs" />
@@ -148,7 +144,6 @@
     <Compile Include="Effects\GradientStop.cs" />
     <Compile Include="Effects\GradientFillDefinition.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
-    <Compile Include="Format\ShapeFormatCells.cs" />
     <Compile Include="Effects\MultiStopGradient.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
     <Compile Include="DOM\ShapeFromMaster.cs" />
@@ -161,7 +156,6 @@
     <Compile Include="DOM\Hyperlink.cs" />
     <Compile Include="DOM\PageSettings.cs" />
     <Compile Include="FastRenderingScope.cs" />
-    <Compile Include="Layout\XFormQuery.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
     <Compile Include="Layout\BoxHierarchy\BoxHierarchyLayout.cs" />
     <Compile Include="Layout\BoxHierarchy\LayoutDirection.cs" />
@@ -268,16 +262,11 @@
     <Compile Include="Text\Markup\Literal.cs" />
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />
-    <Compile Include="Connections\ConnectionPointQuery.cs" />
     <Compile Include="Connections\ConnectorHelper.cs" />
-    <Compile Include="Controls\ControlQuery.cs" />
     <Compile Include="Shapesheet\Query\Table.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
-    <Compile Include="Text\ParagraphFormatQuery.cs" />
-    <Compile Include="CustomProperties\CustomPropertyQuery.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Shapesheet\Query\SectionQuery.cs" />
-    <Compile Include="Text\CharacterFormatQuery.cs" />
     <Compile Include="Internal\TreeUtil.cs" />
     <Compile Include="Drawing\DirectionRelative.cs" />
     <Compile Include="UI\UserInterfaceHelper.cs" />
@@ -315,7 +304,6 @@
     <Compile Include="Extensions\SelectionMethods.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
-    <Compile Include="UserDefinedCells\UserDefinedCellQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="stdole">
