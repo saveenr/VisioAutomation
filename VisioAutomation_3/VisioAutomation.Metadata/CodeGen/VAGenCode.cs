@@ -19,7 +19,7 @@ namespace VisioAutomation.Metadata.CodeGen
         public string GetCode()
         {
 
-            string text =
+            string shape_format =
                 @"
 int    |   FillBkgnd             |   FillBkgnd
 double |   FillBkgndTrans        |   FillBkgndTrans
@@ -53,21 +53,53 @@ double |   Char_Size              |   CharSize
 int    |   TextBkgnd             |   TextBkgnd
 double |   TextBkgndTrans        |   TextBkgndTrans";
 
-            var cg = new VA.Metadata.CodeGen.CellGroup("ShapeFormatCells");
 
-            var lines = text.Split(new[] {'\n'}).Select(s => s.Trim()).Where(s => s.Length > 0);
+            string CONTROLCELLS =
+                @"
+int |   Controls_CanGlue   |   CanGlue
+int |   Controls_Tip    |   Tip
+double    |   Controls_X        |   X
+double    |   Controls_Y         |   Y
+int    |   Controls_YCon   |   YBehavior
+int    |   Controls_XCon   |   XBehavior
+int    |   Controls_XDyn   |   XDynamics
+int    |   Controls_YDyn   |   YDynamics";
+
+
+            var cg_shapeformat = create_from_text(shape_format, "ShapeFormatCells");
+            var cg_controls = create_from_text(CONTROLCELLS, "ControlCells");
+
+            var cgs = new[]
+                          {
+                              cg_shapeformat,
+                              cg_controls
+                          };
+
+            var sb = new System.Text.StringBuilder();
+            foreach (var cg in cgs)
+            {
+                string cg_code = cg.GenCode();
+                sb.Append(cg_code);
+                sb.Append("\r\n");
+            }
+            return sb.ToString();
+        }
+
+        public VA.Metadata.CodeGen.CellGroup create_from_text(string shape_format, string name)
+        {
+            var cg_shapeformat = new VA.Metadata.CodeGen.CellGroup(name);
+            var lines = shape_format.Split(new[] { '\n' }).Select(s => s.Trim()).Where(s => s.Length > 0);
             foreach (string line in lines)
             {
-                var tokens = line.Split(new [] {'|'}).Select(t=>t.Trim()).ToArray();
+                var tokens = line.Split(new[] { '|' }).Select(t => t.Trim()).ToArray();
                 string dt = tokens[0];
                 string cellname = tokens[1];
                 string propname = tokens[2];
 
-                cg.Add(propname, this.db.GetCellByNameCode(cellname),dt);
+                cg_shapeformat.Add(propname, this.db.GetCellByNameCode(cellname), dt);
             }
 
-            string code = cg.GenCode();
-            return code;
+            return cg_shapeformat;
         }
 
         public IEnumerable<VA.Metadata.Cell> CellsInSection(IVisio.VisSectionIndices sec)

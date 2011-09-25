@@ -10,7 +10,7 @@ namespace VisioAutomation.Metadata.CodeGen
         public string Name;
         public string Parent;
         public Type DataType;
-
+        private bool ForSection;
         public List<VA.Metadata.CodeGen.CellGroupMember> Cells;
 
         public CellGroup(string name)
@@ -18,6 +18,7 @@ namespace VisioAutomation.Metadata.CodeGen
             this.Name=name;
             this.Parent = "X";
             this.Cells = new List<CellGroupMember>();
+            this.ForSection = false;
         }
 
         public string GenCode()
