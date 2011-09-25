@@ -200,6 +200,17 @@ namespace VisioAutomation.Metadata
             get { return this._cellvals; }
         }
 
+        public IEnumerable<VA.Metadata.Cell> CellsInSection(Section sec)
+        {
+            foreach (var cell in this.Cells)
+            {
+                if (cell.SectionIndex == sec.Enum)
+                {
+                    yield return cell;
+                }
+            }
+        }
+
         public void ExportCode(string filename)
         {
             var fp = System.IO.File.CreateText(filename);

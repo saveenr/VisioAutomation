@@ -10,5 +10,6 @@ namespace VisioAutomation.Metadata.CodeGen
     {
         public string MemberName;
         public VA.Metadata.Cell Cell;
+        public string DataTypeName;
     }
 }
