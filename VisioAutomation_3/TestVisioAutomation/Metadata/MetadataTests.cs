@@ -304,5 +304,16 @@ namespace TestVisioAutomation
 
             db.ExportCode(filename);
         }
+
+        [TestMethod]
+        public void XExportMetadataCode()
+        {
+            var db = VA.Metadata.MetadataDB.Load();
+
+            var s = VA.Metadata.CodeGen.VAGenCode.GetCode();
+
+            int x = 1;
+        }
+
     }
 }
