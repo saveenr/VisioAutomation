@@ -156,5 +156,31 @@ namespace VisioAutomation.ShapeSheet.Query
             var cd = new VA.ShapeSheet.CellData<TResult>(formula, result);
             return cd;
         }
+
+        internal IEnumerable<QueryDataRow<T>> EnumRows()
+        {
+            for (int row = 0; row < this.RowCount; row++)
+            {
+                yield return  new QueryDataRow<T>(this,row);
+            }
+        }
+
+    }
+
+    public struct QueryDataRow<T>
+    {
+        private QueryDataSet<T> QueryDataSet;
+        public int RowIndex;
+        
+        public QueryDataRow(QueryDataSet<T> qds, int row)
+        {
+            this.QueryDataSet = qds;
+            this.RowIndex = row;
+        }
+
+        public VA.ShapeSheet.CellData<T> GetItem(VA.ShapeSheet.Query.QueryColumn col)
+        {
+            return this.QueryDataSet.GetItem(this.RowIndex, col);
+        }
     }
 }
