@@ -10,19 +10,20 @@ namespace VisioAutomation.Metadata.CodeGen
         public string Name;
         public string Parent;
         public Type DataType;
-        private bool ForSection;
+        public bool ForSection;
         public List<VA.Metadata.CodeGen.CellGroupMember> Cells;
 
         public CellGroup(string name)
         {
             this.Name=name;
-            this.Parent = "X";
+
             this.Cells = new List<CellGroupMember>();
             this.ForSection = false;
         }
 
         public string GenCode()
         {
+            this.Parent = this.ForSection ? "CellSectionDataGroup" : "CellDataGroup";
             var sb = new System.Text.StringBuilder();
             this.Start(sb);
             sb.AppendFormat("\r\n");
@@ -30,6 +31,34 @@ namespace VisioAutomation.Metadata.CodeGen
             sb.AppendFormat("\r\n");
             this.CellsFromRow(sb);
             sb.AppendFormat("\r\n");
+
+            string rt_a;
+            string rt_b;
+
+
+            if (this.ForSection)
+            {
+                rt_a = string.Format("IList< List<{0}>>", this.Name);
+                rt_b = string.Format("List<{0}>", this.Name);
+            }
+            else
+            {
+                rt_a = string.Format("IList<{0}>", this.Name);
+                rt_b = string.Format("{0}", this.Name);
+            }
+            
+            sb.AppendFormat("\tinternal static {0} GetCells(IVisio.Page page, IList<int> shapeids)\r\n", rt_a);
+            sb.AppendFormat("\t{{\r\n");
+            sb.AppendFormat("\tvar query = new ShapeFormatQuery();\r\n");
+            sb.AppendFormat("\treturn {0}._GetCells(page, shapeids, query, get_cells_from_row);\r\n", this.Parent);
+            sb.AppendFormat("\t}}\r\n");
+
+            sb.AppendFormat("\tinternal static {0} GetCells(IVisio.Shape shape)\r\n", rt_b);
+            sb.AppendFormat("\t{{\r\n");
+            sb.AppendFormat("\tvar query = new ShapeFormatQuery();\r\n");
+            sb.AppendFormat("\treturn {0}._GetCells(page, shapeids, query, get_cells_from_row);\r\n", this.Parent);
+            sb.AppendFormat("\t}}\r\n");                
+
             this.Query(sb);
             this.End(sb);
 
@@ -54,11 +83,27 @@ namespace VisioAutomation.Metadata.CodeGen
 
         private void ApplyFunc(System.Text.StringBuilder sb)
         {
-            sb.AppendFormat("\tprotected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)\r\n");
+            if (this.ForSection)
+            {
+                sb.AppendFormat("\tprotected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func, short row)\r\n");
+                
+            }
+            else
+            {
+                sb.AppendFormat("\tprotected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)\r\n");
+            }
             sb.AppendFormat("\t{{\r\n");
             foreach (var cell in this.Cells)
             {
-                sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}, this.{1}.Formula);\r\n", cell.Cell.NameCode,  cell.MemberName);
+                if (this.ForSection)
+                {
+                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}.ForRow(row), this.{1}.Formula);\r\n", cell.Cell.NameCode, cell.MemberName);
+                    
+                }
+                else
+                {
+                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}, this.{1}.Formula);\r\n", cell.Cell.NameCode,  cell.MemberName);
+                }
             }
             sb.AppendFormat("\t}}\r\n");
         }

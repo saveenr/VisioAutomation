@@ -68,6 +68,7 @@ int    |   Controls_YDyn   |   YDynamics";
 
             var cg_shapeformat = create_from_text(shape_format, "ShapeFormatCells");
             var cg_controls = create_from_text(CONTROLCELLS, "ControlCells");
+            cg_controls.ForSection = true;
 
             var cgs = new[]
                           {
