@@ -1,18 +1,14 @@
 using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
-
 
 namespace VisioAutomation.ShapeSheet
 {
     public abstract class CellDataGroup
     {
         protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
-
         protected abstract void _Apply(ApplyFormula func);
-
         protected delegate TCells row_to_cells<TCells, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.CellQuery;
 
         public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid)
@@ -27,11 +23,11 @@ namespace VisioAutomation.ShapeSheet
 
         protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery q, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
-            var cells_list = new List<TCells>(shapeids.Count);
             var qds = q.GetFormulasAndResults<double>(page, shapeids);
-            for (int i = 0; i < qds.RowCount; i++)
+            var cells_list = new List<TCells>(qds.RowCount);
+            for (int row = 0; row < qds.RowCount; row++)
             {
-                var cells = row_to_cells_func(q, qds, i);
+                var cells = row_to_cells_func(q, qds, row);
                 cells_list.Add(cells);
             }
 
@@ -88,5 +84,4 @@ namespace VisioAutomation.ShapeSheet
                 || (p.PropertyType == typeof(VA.ShapeSheet.CellData<bool>)));
         }
     }
-
 }
