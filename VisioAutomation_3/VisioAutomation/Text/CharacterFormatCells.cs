@@ -31,17 +31,17 @@ namespace VisioAutomation.Text
         internal static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new CharacterFormatQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qdr)
         {
             var cells = new CharacterFormatCells();
-            cells.Color = qds.GetItem(row, query.Color).ToInt();
-            cells.Transparency = qds.GetItem(row, query.Trans);
-            cells.Font = qds.GetItem(row, query.Font).ToInt();
-            cells.Size = qds.GetItem(row, query.Size);
-            cells.Style = qds.GetItem(row, query.Style).ToInt();
+            cells.Color = qdr.GetItem(query.Color).ToInt();
+            cells.Transparency = qdr.GetItem(query.Trans);
+            cells.Font = qdr.GetItem(query.Font).ToInt();
+            cells.Size = qdr.GetItem(query.Size);
+            cells.Style = qdr.GetItem(query.Style).ToInt();
 
             return cells;
         }

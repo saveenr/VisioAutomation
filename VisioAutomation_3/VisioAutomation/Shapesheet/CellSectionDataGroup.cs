@@ -10,8 +10,7 @@ namespace VisioAutomation.ShapeSheet
     {
         // Delegates
         protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
-        protected delegate TObj row_to_cells<TObj, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.SectionQuery;
-        protected delegate TObj row_to_cells2<TObj, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
+        protected delegate TObj RowToObject<TObj, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
 
         protected abstract void _Apply(ApplyFormula func, short row);
 
@@ -25,7 +24,7 @@ namespace VisioAutomation.ShapeSheet
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
         }
 
-        protected static IList<List<TCells>> _GetObjectsFromRowsGrouped<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery query, row_to_cells<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<List<TCells>> _GetObjectsFromRowsGrouped<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
             var list_of_lists = new List<List<TCells>>(shapeids.Count);
@@ -36,7 +35,8 @@ namespace VisioAutomation.ShapeSheet
                 {
                     for (int i = group.StartRow; i <= group.EndRow; i++)
                     {
-                        var obj = row_to_obj_func(query, qds, i);
+                        var qdr = new VA.ShapeSheet.Query.QueryDataRow<double>(qds, i);
+                        var obj = row_to_obj_func(query, qdr);
                         objs.Add(obj);
                     }
                 }
@@ -45,20 +45,7 @@ namespace VisioAutomation.ShapeSheet
             return list_of_lists;
         }
 
-        protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
-        {
-            var qds = query.GetFormulasAndResults<double>(shape);
-            var objs = new List<TCells>(qds.RowCount);
-
-            for (int row = 0; row < qds.RowCount; row++)
-            {
-                var obj = row_to_cells_func(query, qds, row);
-                objs.Add(obj);
-            }
-            return objs;
-        }
-
-        protected static IList<TCells> _GetObjectsFromRows<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells2<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<TCells> _GetObjectsFromRows<TCells, TQuery>(IVisio.Shape shape, TQuery query, RowToObject<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
             var objs = new List<TCells>(qds.RowCount);

@@ -29,18 +29,6 @@ namespace VisioAutomation.Connections
             func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
         }
 
-        private static ConnectionPointCells get_cells_from_row(ConnectionPointQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
-        {
-            var cells = new ConnectionPointCells();
-            cells.X = qds.GetItem(row, query.X);
-            cells.Y = qds.GetItem(row, query.Y);
-            cells.DirX = qds.GetItem(row, query.DirX).ToInt();
-            cells.DirY = qds.GetItem(row, query.DirY).ToInt();
-            cells.Type = qds.GetItem(row, query.Type).ToInt();
-
-            return cells;
-        }
-
         private static ConnectionPointCells get_cells_from_row2(ConnectionPointQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qdr)
         {
             var cells = new ConnectionPointCells();
@@ -56,7 +44,7 @@ namespace VisioAutomation.Connections
         internal static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row2);
         }
 
         internal static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)

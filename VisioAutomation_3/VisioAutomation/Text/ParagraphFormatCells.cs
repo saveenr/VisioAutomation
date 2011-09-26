@@ -42,22 +42,22 @@ namespace VisioAutomation.Text
         internal static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new ParagraphFormatQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds)
         {
             var cells = new ParagraphFormatCells();
-            cells.IndentFirst = qds.GetItem(row, query.IndentFirst);
-            cells.IndentLeft = qds.GetItem(row, query.IndentLeft);
-            cells.IndentRight = qds.GetItem(row, query.IndentRight);
-            cells.SpacingAfter = qds.GetItem(row, query.SpaceAfter);
-            cells.SpacingBefore = qds.GetItem(row, query.SpaceBefore);
-            cells.SpacingLine = qds.GetItem(row, query.SpaceLine);
-            cells.HorizontalAlign = qds.GetItem(row, query.HorzAlign).ToInt();
-            cells.BulletIndex = qds.GetItem(row, query.BulletIndex).ToInt();
-            cells.BulletFont = qds.GetItem(row, query.BulletFont).ToInt();
-            cells.BulletFontSize = qds.GetItem(row, query.BulletFontSize).ToInt();
+            cells.IndentFirst = qds.GetItem(query.IndentFirst);
+            cells.IndentLeft = qds.GetItem(query.IndentLeft);
+            cells.IndentRight = qds.GetItem(query.IndentRight);
+            cells.SpacingAfter = qds.GetItem(query.SpaceAfter);
+            cells.SpacingBefore = qds.GetItem(query.SpaceBefore);
+            cells.SpacingLine = qds.GetItem(query.SpaceLine);
+            cells.HorizontalAlign = qds.GetItem(query.HorzAlign).ToInt();
+            cells.BulletIndex = qds.GetItem(query.BulletIndex).ToInt();
+            cells.BulletFont = qds.GetItem(query.BulletFont).ToInt();
+            cells.BulletFontSize = qds.GetItem(query.BulletFontSize).ToInt();
 
             return cells;
         }
