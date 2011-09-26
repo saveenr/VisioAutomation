@@ -85,6 +85,9 @@
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
+    <Compile Include="CodeGen\CellGroup.cs" />
+    <Compile Include="CodeGen\CellGroupMember.cs" />
+    <Compile Include="CodeGen\VAGenCode.cs" />
     <Compile Include="Layout\Radial\DoughnutSlice.cs" />
     <Compile Include="Layout\Radial\Sector.cs" />
     <Compile Include="Layout\Radial\RadialSlice.cs" />

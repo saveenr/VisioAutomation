@@ -5,15 +5,12 @@ using System.Text;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Metadata.CodeGen
+namespace VisioAutomation.CodeGen
 {
     public class VAGenCode
     {
-        private VA.Metadata.MetadataDB db;
-
         public VAGenCode()
         {
-            this.db = VA.Metadata.MetadataDB.Load();
         }
 
         public string GetCode()
@@ -86,9 +83,9 @@ int    |   Controls_YDyn   |   YDynamics";
             return sb.ToString();
         }
 
-        public VA.Metadata.CodeGen.CellGroup create_from_text(string shape_format, string name)
+        public VA.CodeGen.CellGroup create_from_text(string shape_format, string name)
         {
-            var cg_shapeformat = new VA.Metadata.CodeGen.CellGroup(name);
+            var cg_shapeformat = new VA.CodeGen.CellGroup(name);
             var lines = shape_format.Split(new[] { '\n' }).Select(s => s.Trim()).Where(s => s.Length > 0);
             foreach (string line in lines)
             {
@@ -97,16 +94,10 @@ int    |   Controls_YDyn   |   YDynamics";
                 string cellname = tokens[1];
                 string propname = tokens[2];
 
-                cg_shapeformat.Add(propname, this.db.GetCellByNameCode(cellname), dt);
+                cg_shapeformat.Add(propname, cellname, dt);
             }
 
             return cg_shapeformat;
-        }
-
-        public IEnumerable<VA.Metadata.Cell> CellsInSection(IVisio.VisSectionIndices sec)
-        {
-            var target_section = db.GetSectionBySectionIndex((int)sec);
-            return db.CellsInSection(target_section);
         }
     }
 }

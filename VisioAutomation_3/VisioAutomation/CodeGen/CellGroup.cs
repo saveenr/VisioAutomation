@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Metadata.CodeGen
+namespace VisioAutomation.CodeGen
 {
     public class CellGroup
     {
@@ -11,7 +11,7 @@ namespace VisioAutomation.Metadata.CodeGen
         public string Parent;
         public Type DataType;
         public bool ForSection;
-        public List<VA.Metadata.CodeGen.CellGroupMember> Cells;
+        public List<VA.CodeGen.CellGroupMember> Cells;
 
         public CellGroup(string name)
         {
@@ -97,12 +97,12 @@ namespace VisioAutomation.Metadata.CodeGen
             {
                 if (this.ForSection)
                 {
-                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}.ForRow(row), this.{1}.Formula);\r\n", cell.Cell.NameCode, cell.MemberName);
+                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}.ForRow(row), this.{1}.Formula);\r\n", cell.Cell, cell.MemberName);
                     
                 }
                 else
                 {
-                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}, this.{1}.Formula);\r\n", cell.Cell.NameCode,  cell.MemberName);
+                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}, this.{1}.Formula);\r\n", cell.Cell,  cell.MemberName);
                 }
             }
             sb.AppendFormat("\t}}\r\n");
@@ -121,18 +121,18 @@ namespace VisioAutomation.Metadata.CodeGen
             sb.AppendFormat("\t}}\r\n");
         }
 
-        public void Add(string name, VA.Metadata.Cell cell, string datatype)
+        public void Add(string name, string cell, string datatype)
         {
-            var m = new VA.Metadata.CodeGen.CellGroupMember();
+            var m = new VA.CodeGen.CellGroupMember();
             m.MemberName = name;
             m.Cell = cell;
             m.DataTypeName = datatype;
             this.Cells.Add(m);
         }
 
-        public void Add(VA.Metadata.Cell cell, string datatype)
+        public void Add(string cell, string datatype)
         {
-            this.Add(cell.NameCode,cell,datatype);
+            this.Add(cell,cell,datatype);
         }
 
         private void Query(System.Text.StringBuilder sb)
@@ -149,7 +149,7 @@ namespace VisioAutomation.Metadata.CodeGen
             foreach (var cell in this.Cells)
             {
                 sb.AppendFormat("\t\t\tthis.{0} = this.AddColumn(VA.ShapeSheet.SRCConstants.{1}, \"{2}\" );\r\n", cell.MemberName,
-                                cell.Cell.NameCode, cell.MemberName);
+                                cell.Cell, cell.MemberName);
 
             }
             sb.AppendFormat("\t\t}}\r\n");

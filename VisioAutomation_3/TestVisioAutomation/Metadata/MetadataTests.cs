@@ -308,7 +308,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void XExportMetadataCode()
         {
-            var gencode = new VA.Metadata.CodeGen.VAGenCode();
+            var gencode = new VA.CodeGen.VAGenCode();
             var s = gencode.GetCode();
 
             var fp = System.IO.File.CreateText("D:\\code.txt");

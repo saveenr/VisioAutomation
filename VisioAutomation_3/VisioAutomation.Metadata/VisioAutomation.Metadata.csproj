@@ -38,9 +38,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Visio, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,9 +51,6 @@
     <Compile Include="Cell.cs" />
     <Compile Include="CellValue.cs" />
     <Compile Include="AutomationEnum.cs" />
-    <Compile Include="CodeGen\CellGroup.cs" />
-    <Compile Include="CodeGen\CellGroupMember.cs" />
-    <Compile Include="CodeGen\VAGenCode.cs" />
     <Compile Include="XmlPersist\XmlColumn.cs" />
     <Compile Include="XmlPersist\XmlTableWriter.cs" />
     <Compile Include="XmlPersist\XmlTableReader.cs" />
