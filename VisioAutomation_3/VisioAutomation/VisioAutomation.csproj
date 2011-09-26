@@ -139,7 +139,7 @@
     <Compile Include="ShapesEnumeration.cs" />
     <Compile Include="Shapesheet\CellDataGroup.cs" />
     <Compile Include="Shapesheet\CellSectionDataGroup.cs" />
-    <Compile Include="Shapesheet\Query\QueryDataRow.cs" />
+    <Compile Include="Shapesheet\Data\QueryDataRow.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
@@ -196,15 +196,15 @@
     <Compile Include="CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="UndoCommitFlag.cs" />
     <Compile Include="PageNavigation.cs" />
-    <Compile Include="Shapesheet\Query\TableColumnList.cs" />
+    <Compile Include="Shapesheet\Data\TableColumnList.cs" />
     <Compile Include="Shapesheet\Query\QueryColumnList.cs" />
     <Compile Include="Shapesheet\Update\FormulaData.cs" />
     <Compile Include="Shapesheet\Query\QueryBase.cs" />
     <Compile Include="Shapesheet\Query\QueryColumn.cs" />
     <Compile Include="Shapesheet\Update\ResultData.cs" />
-    <Compile Include="Shapesheet\Query\TableRow.cs" />
-    <Compile Include="Shapesheet\Query\TableRowList.cs" />
-    <Compile Include="Shapesheet\Query\TableRowGroup.cs" />
+    <Compile Include="Shapesheet\Data\TableRow.cs" />
+    <Compile Include="Shapesheet\Data\TableRowList.cs" />
+    <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
     <Compile Include="DOM\Shape.cs" />
     <Compile Include="DOM\Document.cs" />
     <Compile Include="DOM\Node.cs" />
@@ -232,7 +232,7 @@
     <Compile Include="Shapesheet\SIDSRC.cs" />
     <Compile Include="Shapesheet\Query\CellQueryColumn.cs" />
     <Compile Include="Shapesheet\Update\SIDSRCUpdate.cs" />
-    <Compile Include="Shapesheet\Query\QueryDataSet.cs" />
+    <Compile Include="Shapesheet\Data\QueryDataSet.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Connections\DirectedEdge.cs" />
     <Compile Include="Internal\Interop\COMInterop.cs" />
@@ -268,7 +268,7 @@
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />
     <Compile Include="Connections\ConnectorHelper.cs" />
-    <Compile Include="Shapesheet\Query\Table.cs" />
+    <Compile Include="Shapesheet\Data\Table.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Shapesheet\Query\SectionQuery.cs" />
