@@ -25,12 +25,14 @@ namespace VisioAutomation.CodeGen
         {
             this.Parent = this.ForSection ? "CellSectionDataGroup" : "CellDataGroup";
             var sb = new System.Text.StringBuilder();
-            this.Start(sb);
-            sb.AppendFormat("\r\n");
-            this.ApplyFunc(sb);
-            sb.AppendFormat("\r\n");
-            this.CellsFromRow(sb);
-            sb.AppendFormat("\r\n");
+            var cs = new VA.CodeGen.CSharpWriter(sb);
+
+            this.Start(cs);
+            cs.WriteLine();
+            this.ApplyFunc(cs);
+            cs.WriteLine();
+            this.CellsFromRow(cs);
+            cs.WriteLine();
 
             string rt_a;
             string rt_b;
@@ -47,78 +49,78 @@ namespace VisioAutomation.CodeGen
                 rt_b = string.Format("{0}", this.Name);
             }
             
-            sb.AppendFormat("\tinternal static {0} GetCells(IVisio.Page page, IList<int> shapeids)\r\n", rt_a);
-            sb.AppendFormat("\t{{\r\n");
-            sb.AppendFormat("\tvar query = new ShapeFormatQuery();\r\n");
-            sb.AppendFormat("\treturn {0}._GetCells(page, shapeids, query, get_cells_from_row);\r\n", this.Parent);
-            sb.AppendFormat("\t}}\r\n");
+            cs.WriteLine("internal static {0} GetCells(IVisio.Page page, IList<int> shapeids)", rt_a);
+            cs.StartBlock();
+            cs.WriteLine("var query = new ShapeFormatQuery();");
+            cs.WriteLine("return {0}._GetCells(page, shapeids, query, get_cells_from_row);", this.Parent);
+            cs.EndBlock();
 
-            sb.AppendFormat("\tinternal static {0} GetCells(IVisio.Shape shape)\r\n", rt_b);
-            sb.AppendFormat("\t{{\r\n");
-            sb.AppendFormat("\tvar query = new ShapeFormatQuery();\r\n");
-            sb.AppendFormat("\treturn {0}._GetCells(page, shapeids, query, get_cells_from_row);\r\n", this.Parent);
-            sb.AppendFormat("\t}}\r\n");                
+            cs.WriteLine("internal static {0} GetCells(IVisio.Shape shape)", rt_b);
+            cs.StartBlock();
+            cs.WriteLine("var query = new ShapeFormatQuery();");
+            cs.WriteLine("return {0}._GetCells(page, shapeids, query, get_cells_from_row);", this.Parent);
+            cs.EndBlock();
 
-            this.Query(sb);
-            this.End(sb);
+            this.Query(cs);
+            this.End(cs);
 
             return sb.ToString();
         }
         //        public VA.ShapeSheet.CellData<int> FillBkgnd { get; set; }
 
-        private void Start(System.Text.StringBuilder sb)
+        private void Start(VA.CodeGen.CSharpWriter sb)
         {
-            sb.AppendFormat("public class {0} : {1}\r\n", this.Name, this.Parent);
-            sb.AppendFormat("{{\r\n");
+            sb.WriteLine("public class {0} : {1}", this.Name, this.Parent);
+            sb.StartBlock();
             foreach (var cell in this.Cells)
             {
-                sb.AppendFormat("\tpublic VA.ShapeSheet.CellData<{0}> {1} {{get;set;}}\r\n",cell.DataTypeName,cell.MemberName);
+                sb.WriteLine("public VA.ShapeSheet.CellData<{0}> {1} {{get;set;}}",cell.DataTypeName,cell.MemberName);
             }
         }
 
-        private void End(System.Text.StringBuilder sb)
+        private void End(VA.CodeGen.CSharpWriter sb)
         {
-            sb.AppendFormat("}}\r\n");
+            sb.EndBlock();
         }
 
-        private void ApplyFunc(System.Text.StringBuilder sb)
+        private void ApplyFunc(VA.CodeGen.CSharpWriter sb)
         {
             if (this.ForSection)
             {
-                sb.AppendFormat("\tprotected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func, short row)\r\n");
+                sb.WriteLine("protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func, short row)");
                 
             }
             else
             {
-                sb.AppendFormat("\tprotected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)\r\n");
+                sb.WriteLine("protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)");
             }
-            sb.AppendFormat("\t{{\r\n");
+            sb.StartBlock();
             foreach (var cell in this.Cells)
             {
                 if (this.ForSection)
                 {
-                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}.ForRow(row), this.{1}.Formula);\r\n", cell.Cell, cell.MemberName);
+                    sb.WriteLine("func(ShapeSheet.SRCConstants.{0}.ForRow(row), this.{1}.Formula);", cell.Cell, cell.MemberName);
                     
                 }
                 else
                 {
-                    sb.AppendFormat("\t\tfunc(ShapeSheet.SRCConstants.{0}, this.{1}.Formula);\r\n", cell.Cell,  cell.MemberName);
+                    sb.WriteLine("func(ShapeSheet.SRCConstants.{0}, this.{1}.Formula);", cell.Cell, cell.MemberName);
                 }
             }
-            sb.AppendFormat("\t}}\r\n");
+            sb.EndBlock();
         }
 
-        private void CellsFromRow(System.Text.StringBuilder sb)
+        private void CellsFromRow(VA.CodeGen.CSharpWriter sb)
         {
-            sb.AppendFormat("\tprivate static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)\r\n");
-            sb.AppendFormat("\t{{\r\n");
-            sb.AppendFormat("\t\tvar cells = new {0}();;\r\n", this.Name);
+            sb.WriteLine("private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)");
+            sb.StartBlock();
+            sb.WriteLine("var cells = new {0}();;", this.Name);
             foreach (var cell in this.Cells)
             {
                 string to = "To"+cell.DataTypeName.Substring(0, 1).ToUpper() + cell.DataTypeName.Substring(1);
-                sb.AppendFormat("\t\tcells.{0}= qds.GetItem(row, query.{0}).{1}();\r\n", cell.MemberName,to);
+                sb.WriteLine("cells.{0}= qds.GetItem(row, query.{0}).{1}();", cell.MemberName, to);
             }
-            sb.AppendFormat("\t}}\r\n");
+            sb.EndBlock();
         }
 
         public void Add(string name, string cell, string datatype)
@@ -135,26 +137,28 @@ namespace VisioAutomation.CodeGen
             this.Add(cell,cell,datatype);
         }
 
-        private void Query(System.Text.StringBuilder sb)
+        private void Query(VA.CodeGen.CSharpWriter csw)
         {
+            csw.WriteLine();
+            csw.WriteLine();
             string Queryname = this.Name + "Query";
-            sb.AppendFormat("\tclass {0}{{\r\n",Queryname);
-            sb.AppendFormat("\t{{\r\n");
+            csw.WriteLine("class {0}", Queryname);
+            csw.StartBlock();
             foreach (var cell in this.Cells)
             {
-                sb.AppendFormat("\t\tpublic VA.ShapeSheet.Query.CellQueryColumn {0} {{ get; set; }};\r\n", cell.MemberName);
+                csw.WriteLine("public VA.ShapeSheet.Query.CellQueryColumn {0} {{ get; set; }};", cell.MemberName);
             }
-            sb.AppendFormat("\t\r\n");
-            sb.AppendFormat("\t\tpublic {0}() : base()\r\n\t\t{{\r\n", Queryname);
+            csw.WriteLine();
+            csw.WriteLine("public {0}()", Queryname);
+            csw.StartBlock();
             foreach (var cell in this.Cells)
             {
-                sb.AppendFormat("\t\t\tthis.{0} = this.AddColumn(VA.ShapeSheet.SRCConstants.{1}, \"{2}\" );\r\n", cell.MemberName,
+                csw.WriteLine("this.{0} = this.AddColumn(VA.ShapeSheet.SRCConstants.{1}, \"{2}\" );", cell.MemberName,
                                 cell.Cell, cell.MemberName);
 
             }
-            sb.AppendFormat("\t\t}}\r\n");
-
-            sb.AppendFormat("\t}}\r\n");
+            csw.EndBlock();
+            csw.EndBlock();
         }
 
     }

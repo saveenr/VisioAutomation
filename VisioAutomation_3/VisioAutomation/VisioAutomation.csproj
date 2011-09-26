@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeGen\CSharpWriter.cs" />
     <Compile Include="Connections\ConnectorArrowEdgeHandling.cs" />
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
