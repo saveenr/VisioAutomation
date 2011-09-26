@@ -58,7 +58,7 @@ namespace VisioAutomation.ShapeSheet
             return objs;
         }
 
-        protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells2<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<TCells> _GetObjectsFromRows<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells2<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
             var objs = new List<TCells>(qds.RowCount);

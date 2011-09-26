@@ -62,7 +62,7 @@ namespace VisioAutomation.Connections
         internal static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetCells(shape, query, get_cells_from_row2);
+            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row2);
         }
 
         class ConnectionPointQuery : VA.ShapeSheet.Query.SectionQuery
