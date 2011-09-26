@@ -24,14 +24,14 @@ namespace VisioAutomation.ShapeSheet
         protected static IList<TCells> _GetCells<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery q, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
             var qds = q.GetFormulasAndResults<double>(page, shapeids);
-            var cells_list = new List<TCells>(qds.RowCount);
+            var objs = new List<TCells>(qds.RowCount);
             for (int row = 0; row < qds.RowCount; row++)
             {
-                var cells = row_to_cells_func(q, qds, row);
-                cells_list.Add(cells);
+                var obj = row_to_cells_func(q, qds, row);
+                objs.Add(obj);
             }
 
-            return cells_list;
+            return objs;
         }
 
         protected static TCells _GetCells<TCells, TQuery>(IVisio.Shape shape, TQuery query, row_to_cells<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
