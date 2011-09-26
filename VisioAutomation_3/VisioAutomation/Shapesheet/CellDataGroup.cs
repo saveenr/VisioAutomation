@@ -23,16 +23,13 @@ namespace VisioAutomation.ShapeSheet
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f));
         }
 
-        protected static IList<TObj> _GetObjectsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery q, RowToObject<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        protected static IList<TObj> _GetObjectsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
-            var qds = q.GetFormulasAndResults<double>(page, shapeids);
+            var qds = query.GetFormulasAndResults<double>(page, shapeids);
+            var rows = qds.EnumRows();
+            var objs = rows.Select(r => row_to_cells_func(query, r));
             var obj_list = new List<TObj>(qds.RowCount);
-            foreach (var row in qds.EnumRows())
-            {
-                var obj = row_to_cells_func(q, row);
-                obj_list.Add(obj);                
-            }
-
+            obj_list.AddRange(objs);
             return obj_list;
         }
 

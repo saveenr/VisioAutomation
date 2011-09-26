@@ -32,15 +32,10 @@ namespace VisioAutomation.ShapeSheet
             for (int group_index = 0; group_index < qds.Groups.Count; group_index++)
             {
                 var group = qds.Groups[group_index];
-                var rows_in_group = qds.EnumRowsInGroup(group_index);
-
+                var rows = qds.EnumRowsInGroup(group_index);
+                var objs = rows.Select(r => row_to_obj_func(query, r));
                 var obj_list = new List<TObj>(group.Count);
-                foreach (var row in rows_in_group)
-                {
-                    var obj = row_to_obj_func(query, row);
-                    obj_list.Add(obj);
-                }
-
+                obj_list.AddRange(objs);
                 list_of_lists.Add(obj_list);
             }
 
@@ -50,15 +45,10 @@ namespace VisioAutomation.ShapeSheet
         protected static IList<TObj> _GetObjectsFromRows<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
-            var rows_in_group = qds.EnumRows();
-
+            var rows = qds.EnumRows();
+            var objs = rows.Select(r => row_to_obj_func(query, r));
             var obj_list = new List<TObj>(qds.RowCount);
-            foreach (var row in rows_in_group)
-            {
-                var obj = row_to_obj_func(query, row);
-                obj_list.Add(obj);
-            }
-
+            obj_list.AddRange(objs);
             return obj_list;
         }
 
