@@ -7,7 +7,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Format
 {
-    public class ShapeFormatCells : VA.ShapeSheet.CellDataGroup
+    public class ShapeFormatCells : VA.ShapeSheet.CellGroup
     {
         public VA.ShapeSheet.CellData<int> FillBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> FillBkgndTrans { get; set; }
@@ -41,7 +41,7 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)
+        protected override void _Apply(VA.ShapeSheet.CellGroup.ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
             func(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
@@ -117,13 +117,13 @@ namespace VisioAutomation.Format
         internal static IList<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ShapeFormatQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static ShapeFormatCells GetCells(IVisio.Shape shape)
         {
             var query = new ShapeFormatQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
         }
 
         class ShapeFormatQuery : VA.ShapeSheet.Query.CellQuery

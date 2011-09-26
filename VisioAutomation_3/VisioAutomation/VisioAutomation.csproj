@@ -137,8 +137,8 @@
     <Compile Include="ShapeGeometry\GeometryRow.cs" />
     <Compile Include="ShapeGeometry\ShapeGeometryHelper.cs" />
     <Compile Include="ShapesEnumeration.cs" />
-    <Compile Include="Shapesheet\CellDataGroup.cs" />
-    <Compile Include="Shapesheet\CellSectionDataGroup.cs" />
+    <Compile Include="Shapesheet\CellGroup.cs" />
+    <Compile Include="Shapesheet\CellGroupForSection.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />

@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells : VA.ShapeSheet.CellSectionDataGroup
+    public class ParagraphFormatCells : VA.ShapeSheet.CellGroupForSection
     {
         ////public string BulletString;
         public VA.ShapeSheet.CellData<double> IndentFirst { get; set; }
@@ -19,7 +19,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> BulletFont { get; set; }
         public VA.ShapeSheet.CellData<int> BulletFontSize { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
+        protected override void _Apply(VA.ShapeSheet.CellGroupForSection.ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Para_IndLeft.ForRow(row), this.IndentLeft.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_IndFirst.ForRow(row), this.IndentFirst.Formula);
@@ -36,13 +36,13 @@ namespace VisioAutomation.Text
         internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ParagraphFormatQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new ParagraphFormatQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
         private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)

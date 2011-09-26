@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.CustomProperties
 {
-    public class CustomPropertyCells : VA.ShapeSheet.CellSectionDataGroup
+    public class CustomPropertyCells : VA.ShapeSheet.CellGroupForSection
     {
         public VA.ShapeSheet.CellData<double> Value{ get; set; }
         public VA.ShapeSheet.CellData<double> Prompt { get; set; }
@@ -48,7 +48,7 @@ namespace VisioAutomation.CustomProperties
             return f.Value;
         }
         
-        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
+        protected override void _Apply(VA.ShapeSheet.CellGroupForSection.ApplyFormula func, short row)
         {
             var cp = this;
 
@@ -71,13 +71,13 @@ namespace VisioAutomation.CustomProperties
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new CustomPropertyQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         public static IList<CustomPropertyCells> GetCells(IVisio.Shape shape)
         {
             var query = new CustomPropertyQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
         private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)

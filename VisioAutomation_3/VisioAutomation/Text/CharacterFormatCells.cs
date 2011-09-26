@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterFormatCells: VA.ShapeSheet.CellSectionDataGroup
+    public class CharacterFormatCells: VA.ShapeSheet.CellGroupForSection
     {
         public VA.ShapeSheet.CellData<int> Color { get; set; }
         public VA.ShapeSheet.CellData<int> Font { get; set; }
@@ -13,7 +13,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> Style { get; set; }
         public VA.ShapeSheet.CellData<double> Transparency { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
+        protected override void _Apply(VA.ShapeSheet.CellGroupForSection.ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(row), this.Color.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(row), this.Font.Formula);
@@ -25,13 +25,13 @@ namespace VisioAutomation.Text
         internal static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new CharacterFormatQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new CharacterFormatQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
         private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)

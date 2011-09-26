@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public abstract class CellDataGroup
+    public abstract class CellGroup
     {
         // Delegates
         protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);

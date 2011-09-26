@@ -7,7 +7,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
-    public partial class XFormCells : VA.ShapeSheet.CellDataGroup
+    public partial class XFormCells : VA.ShapeSheet.CellGroup
     {
         public VA.ShapeSheet.CellData<double> PinX { get; set; }
         public VA.ShapeSheet.CellData<double> PinY { get; set; }
@@ -17,7 +17,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<double> Height { get; set; }
         public VA.ShapeSheet.CellData<double> Angle { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)
+        protected override void _Apply(VA.ShapeSheet.CellGroup.ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
             func(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
@@ -44,13 +44,13 @@ namespace VisioAutomation.Layout
         internal static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new XFormQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static XFormCells GetCells(IVisio.Shape shape)
         {
             var query = new XFormQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
         }
 
         class XFormQuery : VA.ShapeSheet.Query.CellQuery

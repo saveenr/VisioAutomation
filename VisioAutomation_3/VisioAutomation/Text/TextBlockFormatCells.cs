@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class TextBlockFormatCells : VA.ShapeSheet.CellDataGroup
+    public class TextBlockFormatCells : VA.ShapeSheet.CellGroup
     {
         public VA.ShapeSheet.CellData<double> BottomMargin { get; set; }
         public VA.ShapeSheet.CellData<double> LeftMargin { get; set; }
@@ -21,7 +21,7 @@ namespace VisioAutomation.Text
         
         public VA.ShapeSheet.CellData<int> VerticalAlign { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)
+        protected override void _Apply(VA.ShapeSheet.CellGroup.ApplyFormula func)
         {
             func(VA.ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
             func(VA.ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);
@@ -37,13 +37,13 @@ namespace VisioAutomation.Text
         internal static IList<TextBlockFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new TextBlockFormatQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static TextBlockFormatCells GetCells(IVisio.Shape shape)
         {
             var query = new TextBlockFormatQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
         }
 
         private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)

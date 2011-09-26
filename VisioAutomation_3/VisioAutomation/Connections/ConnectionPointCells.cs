@@ -6,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Connections
 {
-    public class ConnectionPointCells : VA.ShapeSheet.CellSectionDataGroup
+    public class ConnectionPointCells : VA.ShapeSheet.CellGroupForSection
     {
         public VA.ShapeSheet.CellData<double> X { get; set; }
         public VA.ShapeSheet.CellData<double> Y { get; set; }
@@ -20,7 +20,7 @@ namespace VisioAutomation.Connections
             return ConnectionPointCells.GetCells(shape);
         }
 
-        protected override void _Apply(VA.ShapeSheet.CellSectionDataGroup.ApplyFormula func, short row)
+        protected override void _Apply(VA.ShapeSheet.CellGroupForSection.ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Connections_X.ForRow(row), this.X.Formula);
             func(VA.ShapeSheet.SRCConstants.Connections_Y.ForRow(row), this.Y.Formula);
@@ -44,13 +44,13 @@ namespace VisioAutomation.Connections
         internal static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row2);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row2);
         }
 
         internal static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row2);
+            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row2);
         }
 
         class ConnectionPointQuery : VA.ShapeSheet.Query.SectionQuery
