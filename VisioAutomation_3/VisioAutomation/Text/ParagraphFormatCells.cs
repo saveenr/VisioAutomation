@@ -48,16 +48,16 @@ namespace VisioAutomation.Text
         private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new ParagraphFormatCells();
-            cells.IndentFirst = row.GetItem(query.IndentFirst);
-            cells.IndentLeft = row.GetItem(query.IndentLeft);
-            cells.IndentRight = row.GetItem(query.IndentRight);
-            cells.SpacingAfter = row.GetItem(query.SpaceAfter);
-            cells.SpacingBefore = row.GetItem(query.SpaceBefore);
-            cells.SpacingLine = row.GetItem(query.SpaceLine);
-            cells.HorizontalAlign = row.GetItem(query.HorzAlign).ToInt();
-            cells.BulletIndex = row.GetItem(query.BulletIndex).ToInt();
-            cells.BulletFont = row.GetItem(query.BulletFont).ToInt();
-            cells.BulletFontSize = row.GetItem(query.BulletFontSize).ToInt();
+            cells.IndentFirst = row[query.IndentFirst];
+            cells.IndentLeft = row[query.IndentLeft];
+            cells.IndentRight = row[query.IndentRight];
+            cells.SpacingAfter = row[query.SpaceAfter];
+            cells.SpacingBefore = row[query.SpaceBefore];
+            cells.SpacingLine = row[query.SpaceLine];
+            cells.HorizontalAlign = row[query.HorzAlign].ToInt();
+            cells.BulletIndex = row[query.BulletIndex].ToInt();
+            cells.BulletFont = row[query.BulletFont].ToInt();
+            cells.BulletFontSize = row[query.BulletFontSize].ToInt();
 
             return cells;
         }

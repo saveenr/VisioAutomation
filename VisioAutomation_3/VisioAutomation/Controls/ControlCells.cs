@@ -31,14 +31,14 @@ namespace VisioAutomation.Controls
         private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new ControlCells();
-            cells.CanGlue = row.GetItem(query.CanGlue).ToInt();
-            cells.Tip = row.GetItem(query.Tip).ToInt();
-            cells.X = row.GetItem(query.X);
-            cells.Y = row.GetItem(query.Y);
-            cells.YBehavior = row.GetItem(query.YBehavior).ToInt();
-            cells.XBehavior = row.GetItem(query.XBehavior).ToInt();
-            cells.XDynamics = row.GetItem(query.XDynamics).ToInt();
-            cells.YDynamics = row.GetItem(query.YDynamics).ToInt();
+            cells.CanGlue = row[query.CanGlue].ToInt();
+            cells.Tip = row[query.Tip].ToInt();
+            cells.X = row[query.X];
+            cells.Y = row[query.Y];
+            cells.YBehavior = row[query.YBehavior].ToInt();
+            cells.XBehavior = row[query.XBehavior].ToInt();
+            cells.XDynamics = row[query.XDynamics].ToInt();
+            cells.YDynamics = row[query.YDynamics].ToInt();
             return cells;
         }
 

@@ -200,9 +200,14 @@ namespace VisioAutomation.ShapeSheet.Query
             this.RowIndex = row;
         }
 
-        public VA.ShapeSheet.CellData<T> GetItem(VA.ShapeSheet.Query.QueryColumn col)
+        private VA.ShapeSheet.CellData<T> GetItem(VA.ShapeSheet.Query.QueryColumn col)
         {
             return this.QueryDataSet.GetItem(this.RowIndex, col);
+        }
+
+        public VA.ShapeSheet.CellData<T> this[VA.ShapeSheet.Query.QueryColumn col]
+        {
+            get { return this.GetItem(col); }
         }
     }
 }

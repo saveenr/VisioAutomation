@@ -48,22 +48,22 @@ namespace VisioAutomation.Layout
         private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new ShapeLayoutCells();
-            cells.ConFixedCode = row.GetItem(query.ConFixedCode).ToInt();
-            cells.ConLineJumpCode = row.GetItem(query.ConLineJumpCode).ToInt();
-            cells.ConLineJumpDirX = row.GetItem(query.ConLineJumpDirX).ToInt();
-            cells.ConLineJumpDirY = row.GetItem(query.ConLineJumpDirY).ToInt();
-            cells.ConLineJumpStyle = row.GetItem(query.ConLineJumpStyle).ToInt();
-            cells.ConLineRouteExt = row.GetItem(query.ConLineRouteExt).ToInt();
-            cells.ShapeFixedCode = row.GetItem(query.ShapeFixedCode).ToInt();
-            cells.ShapePermeablePlace = row.GetItem(query.ShapePermeablePlace).ToInt();
-            cells.ShapePermeableX = row.GetItem(query.ShapePermeableX).ToInt();
-            cells.ShapePermeableY = row.GetItem(query.ShapePermeableY).ToInt();
-            cells.ShapePlaceFlip = row.GetItem(query.ShapePlaceFlip).ToInt();
-            cells.ShapePlaceStyle = row.GetItem(query.ShapePlaceStyle).ToInt();
-            cells.ShapePlowCode = row.GetItem(query.ShapePlowCode).ToInt();
-            cells.ShapeRouteStyle = row.GetItem(query.ShapeRouteStyle).ToInt();
-            cells.ShapeSplit = row.GetItem(query.ShapeSplit).ToInt();
-            cells.ShapeSplittable = row.GetItem(query.ShapeSplittable).ToInt();
+            cells.ConFixedCode = row[query.ConFixedCode].ToInt();
+            cells.ConLineJumpCode = row[query.ConLineJumpCode].ToInt();
+            cells.ConLineJumpDirX = row[query.ConLineJumpDirX].ToInt();
+            cells.ConLineJumpDirY = row[query.ConLineJumpDirY].ToInt();
+            cells.ConLineJumpStyle = row[query.ConLineJumpStyle].ToInt();
+            cells.ConLineRouteExt = row[query.ConLineRouteExt].ToInt();
+            cells.ShapeFixedCode = row[query.ShapeFixedCode].ToInt();
+            cells.ShapePermeablePlace = row[query.ShapePermeablePlace].ToInt();
+            cells.ShapePermeableX = row[query.ShapePermeableX].ToInt();
+            cells.ShapePermeableY = row[query.ShapePermeableY].ToInt();
+            cells.ShapePlaceFlip = row[query.ShapePlaceFlip].ToInt();
+            cells.ShapePlaceStyle = row[query.ShapePlaceStyle].ToInt();
+            cells.ShapePlowCode = row[query.ShapePlowCode].ToInt();
+            cells.ShapeRouteStyle = row[query.ShapeRouteStyle].ToInt();
+            cells.ShapeSplit = row[query.ShapeSplit].ToInt();
+            cells.ShapeSplittable = row[query.ShapeSplittable].ToInt();
             return cells;
         }
 

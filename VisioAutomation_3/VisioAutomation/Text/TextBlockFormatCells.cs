@@ -49,15 +49,15 @@ namespace VisioAutomation.Text
         private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new TextBlockFormatCells();
-            cells.BottomMargin = row.GetItem(query.BottomMargin);
-            cells.LeftMargin= row.GetItem(query.LeftMargin);
-            cells.RightMargin = row.GetItem(query.RightMargin);
-            cells.TopMargin = row.GetItem(query.TopMargin);
-            cells.DefaultTabStop = row.GetItem(query.DefaultTabStop);
-            cells.TextBkgnd = row.GetItem(query.TextBkgnd).ToInt();
-            cells.TextBkgndTrans = row.GetItem(query.TextBkgndTrans);
-            cells.TextDirection = row.GetItem(query.TextDirection).ToInt();
-            cells.VerticalAlign = row.GetItem(query.VerticalAlign).ToInt();
+            cells.BottomMargin = row[query.BottomMargin];
+            cells.LeftMargin= row[query.LeftMargin];
+            cells.RightMargin = row[query.RightMargin];
+            cells.TopMargin = row[query.TopMargin];
+            cells.DefaultTabStop = row[query.DefaultTabStop];
+            cells.TextBkgnd = row[query.TextBkgnd].ToInt();
+            cells.TextBkgndTrans = row[query.TextBkgndTrans];
+            cells.TextDirection = row[query.TextDirection].ToInt();
+            cells.VerticalAlign = row[query.VerticalAlign].ToInt();
             return cells;
         }
 

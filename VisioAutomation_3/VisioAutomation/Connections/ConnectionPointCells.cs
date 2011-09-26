@@ -32,11 +32,11 @@ namespace VisioAutomation.Connections
         private static ConnectionPointCells get_cells_from_row2(ConnectionPointQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new ConnectionPointCells();
-            cells.X = row.GetItem(query.X);
-            cells.Y = row.GetItem(query.Y);
-            cells.DirX = row.GetItem(query.DirX).ToInt();
-            cells.DirY = row.GetItem(query.DirY).ToInt();
-            cells.Type = row.GetItem(query.Type).ToInt();
+            cells.X = row[query.X];
+            cells.Y = row[query.Y];
+            cells.DirX = row[query.DirX].ToInt();
+            cells.DirY = row[query.DirY].ToInt();
+            cells.Type = row[query.Type].ToInt();
 
             return cells;
         }

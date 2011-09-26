@@ -84,15 +84,15 @@ namespace VisioAutomation.CustomProperties
         {
             var cells = new CustomPropertyCells();
 
-            cells.Value = row.GetItem(query.Value);
-            cells.Calendar = row.GetItem(query.Calendar).ToInt();
-            cells.Format = row.GetItem(query.Format);
-            cells.Invisible = row.GetItem(query.Invis).ToInt();
-            cells.Label = row.GetItem(query.Label);
-            cells.LangId = row.GetItem(query.LangID).ToInt();
-            cells.Prompt = row.GetItem(query.Prompt);
-            cells.SortKey = row.GetItem(query.SortKey).ToInt();
-            cells.Type = row.GetItem(query.Type).ToInt();
+            cells.Value = row[query.Value];
+            cells.Calendar = row[query.Calendar].ToInt();
+            cells.Format = row[query.Format];
+            cells.Invisible = row[query.Invis].ToInt();
+            cells.Label = row[query.Label];
+            cells.LangId = row[query.LangID].ToInt();
+            cells.Prompt = row[query.Prompt];
+            cells.SortKey = row[query.SortKey].ToInt();
+            cells.Type = row[query.Type].ToInt();
             return cells;
         }
     }
