@@ -140,6 +140,11 @@ namespace VisioAutomation.ShapeSheet.Query
             return table;
         }
 
+        public QueryDataRow<T> GetRow(int row)
+        {
+            return new QueryDataRow<T>(this, row);
+        }
+
         public VA.ShapeSheet.CellData<T> GetItem(int row, VA.ShapeSheet.Query.QueryColumn col)
         {
             string formula = this.Formulas[row, col];
@@ -161,7 +166,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             for (int row = 0; row < this.RowCount; row++)
             {
-                yield return  new QueryDataRow<T>(this,row);
+                yield return this.GetRow(row);
             }
         }
 

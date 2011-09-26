@@ -28,16 +28,16 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
         }
 
-        private static XFormCells get_cells_from_row(XFormQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        private static XFormCells get_cells_from_row(XFormQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds)
         {
             var cells = new XFormCells();
-            cells.PinX = qds.GetItem(row, query.PinX);
-            cells.PinY = qds.GetItem(row, query.PinY);
-            cells.LocPinX = qds.GetItem(row, query.LocPinX);
-            cells.LocPinY = qds.GetItem(row, query.LocPinY);
-            cells.Width = qds.GetItem(row, query.Width);
-            cells.Height = qds.GetItem(row, query.Height);
-            cells.Angle = qds.GetItem(row, query.Angle);
+            cells.PinX = qds.GetItem(query.PinX);
+            cells.PinY = qds.GetItem(query.PinY);
+            cells.LocPinX = qds.GetItem(query.LocPinX);
+            cells.LocPinY = qds.GetItem(query.LocPinY);
+            cells.Width = qds.GetItem(query.Width);
+            cells.Height = qds.GetItem(query.Height);
+            cells.Angle = qds.GetItem(query.Angle);
             return cells;
         }
 

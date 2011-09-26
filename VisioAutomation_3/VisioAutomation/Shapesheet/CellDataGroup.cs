@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet
     {
         // Delegates
         protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
-        protected delegate TObj RowToObject<TObj, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row) where TQuery : VA.ShapeSheet.Query.CellQuery;
+        protected delegate TObj RowToObject<TObj, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
         
         protected abstract void _Apply(ApplyFormula func);
 
@@ -26,20 +26,21 @@ namespace VisioAutomation.ShapeSheet
         protected static IList<TCells> _GetObjectsFromRows<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery q, RowToObject<TCells, TQuery> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
             var qds = q.GetFormulasAndResults<double>(page, shapeids);
-            var objs = new List<TCells>(qds.RowCount);
-            for (int row = 0; row < qds.RowCount; row++)
+            var obj_list = new List<TCells>(qds.RowCount);
+            foreach (var row in qds.EnumRows())
             {
-                var obj = row_to_cells_func(q, qds, row);
-                objs.Add(obj);
+                var obj = row_to_cells_func(q, row);
+                obj_list.Add(obj);                
             }
 
-            return objs;
+            return obj_list;
         }
 
         protected static TCells _GetObjectFromSingleRow<TCells, TQuery>(IVisio.Shape shape, TQuery query, RowToObject<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
-            return row_to_obj_func(query, qds, 0);
+            var qdr = qds.GetRow(0);
+            return row_to_obj_func(query, qdr);
         }
 
         public class CellMember

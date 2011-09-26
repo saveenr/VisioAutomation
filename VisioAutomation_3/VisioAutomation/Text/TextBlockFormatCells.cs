@@ -46,18 +46,18 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellDataGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
         }
 
-        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Query.QueryDataSet<double> qds, int row)
+        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds)
         {
             var cells = new TextBlockFormatCells();
-            cells.BottomMargin = qds.GetItem(row, query.BottomMargin);
-            cells.LeftMargin= qds.GetItem(row, query.LeftMargin);
-            cells.RightMargin = qds.GetItem(row, query.RightMargin);
-            cells.TopMargin = qds.GetItem(row, query.TopMargin);
-            cells.DefaultTabStop = qds.GetItem(row, query.DefaultTabStop);
-            cells.TextBkgnd = qds.GetItem(row, query.TextBkgnd).ToInt();
-            cells.TextBkgndTrans = qds.GetItem(row, query.TextBkgndTrans);
-            cells.TextDirection = qds.GetItem(row, query.TextDirection).ToInt();
-            cells.VerticalAlign = qds.GetItem(row, query.VerticalAlign).ToInt();
+            cells.BottomMargin = qds.GetItem(query.BottomMargin);
+            cells.LeftMargin= qds.GetItem(query.LeftMargin);
+            cells.RightMargin = qds.GetItem(query.RightMargin);
+            cells.TopMargin = qds.GetItem(query.TopMargin);
+            cells.DefaultTabStop = qds.GetItem(query.DefaultTabStop);
+            cells.TextBkgnd = qds.GetItem(query.TextBkgnd).ToInt();
+            cells.TextBkgndTrans = qds.GetItem(query.TextBkgndTrans);
+            cells.TextDirection = qds.GetItem(query.TextDirection).ToInt();
+            cells.VerticalAlign = qds.GetItem(query.VerticalAlign).ToInt();
             return cells;
         }
 
