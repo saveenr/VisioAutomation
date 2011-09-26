@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet
     {
         // Delegates
         protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
-        protected delegate TObj RowToObject<TObj, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
+        protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
 
         protected abstract void _Apply(ApplyFormula func, short row);
 
@@ -24,7 +24,7 @@ namespace VisioAutomation.ShapeSheet
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
         }
 
-        protected static IList<List<TObj>> _GetObjectsFromRowsGrouped<TObj, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TObj, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<List<TObj>> _GetObjectsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
             var list_of_lists = new List<List<TObj>>(shapeids.Count);
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet
             return list_of_lists;
         }
 
-        protected static IList<TObj> _GetObjectsFromRows<TObj, TQuery>(IVisio.Shape shape, TQuery query, RowToObject<TObj, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<TObj> _GetObjectsFromRows<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
             var rows_in_group = qds.EnumRows();
