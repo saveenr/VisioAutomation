@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -27,7 +28,7 @@ namespace VisioAutomation.ShapeSheet
         protected static IList<List<TObj>> _GetObjectsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var list_of_lists = new List<List<TObj>>(shapeids.Count);
+            var list_of_lists = new List<List<TObj>>(qds.Groups.Count);
 
             for (int group_index = 0; group_index < qds.Groups.Count; group_index++)
             {
