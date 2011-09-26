@@ -28,34 +28,38 @@ namespace VisioAutomation.ShapeSheet
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
             var list_of_lists = new List<List<TCells>>(shapeids.Count);
-            foreach (var group in qds.Groups)
+
+            for (int group_index = 0; group_index < qds.Groups.Count; group_index++)
             {
-                var objs = new List<TCells>(group.Count);
-                if (group.Count > 0)
+                var group = qds.Groups[group_index];
+                var rows_in_group = qds.EnumRowsInGroup(group_index);
+
+                var obj_list = new List<TCells>(group.Count);
+                foreach (var row in rows_in_group)
                 {
-                    for (int i = group.StartRow; i <= group.EndRow; i++)
-                    {
-                        var qdr = new VA.ShapeSheet.Query.QueryDataRow<double>(qds, i);
-                        var obj = row_to_obj_func(query, qdr);
-                        objs.Add(obj);
-                    }
+                    var obj = row_to_obj_func(query, row);
+                    obj_list.Add(obj);
                 }
-                list_of_lists.Add(objs);
+
+                list_of_lists.Add(obj_list);
             }
+
             return list_of_lists;
         }
 
         protected static IList<TCells> _GetObjectsFromRows<TCells, TQuery>(IVisio.Shape shape, TQuery query, RowToObject<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
-            var objs = new List<TCells>(qds.RowCount);
-            foreach (var row in qds.EnumRows())
+            var rows_in_group = qds.EnumRows();
+
+            var obj_list = new List<TCells>(qds.RowCount);
+            foreach (var row in rows_in_group)
             {
                 var obj = row_to_obj_func(query, row);
-                objs.Add(obj);
-                
+                obj_list.Add(obj);
             }
-            return objs;
+
+            return obj_list;
         }
 
     }

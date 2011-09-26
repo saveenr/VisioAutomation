@@ -165,6 +165,23 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
+        internal IEnumerable<QueryDataRow<T>> EnumRowsInGroup(int index)
+        {
+            var group = this.Groups[index];
+
+            if (group.Count == 0)
+            {
+                yield break;
+            }
+            else
+            {
+                for (int i = group.StartRow; i <= group.EndRow; i++)
+                {
+                    var qdr = new VA.ShapeSheet.Query.QueryDataRow<T>(this, i);
+                    yield return qdr;
+                }                
+            }
+        }
     }
 
     public struct QueryDataRow<T>
