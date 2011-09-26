@@ -25,7 +25,7 @@ namespace VisioAutomation.Text
         internal static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new CharacterFormatQuery();
-            return VA.ShapeSheet.CellSectionDataGroup._GetCells(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
