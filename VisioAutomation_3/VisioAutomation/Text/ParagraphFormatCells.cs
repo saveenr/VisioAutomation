@@ -45,19 +45,19 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds)
+        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new ParagraphFormatCells();
-            cells.IndentFirst = qds.GetItem(query.IndentFirst);
-            cells.IndentLeft = qds.GetItem(query.IndentLeft);
-            cells.IndentRight = qds.GetItem(query.IndentRight);
-            cells.SpacingAfter = qds.GetItem(query.SpaceAfter);
-            cells.SpacingBefore = qds.GetItem(query.SpaceBefore);
-            cells.SpacingLine = qds.GetItem(query.SpaceLine);
-            cells.HorizontalAlign = qds.GetItem(query.HorzAlign).ToInt();
-            cells.BulletIndex = qds.GetItem(query.BulletIndex).ToInt();
-            cells.BulletFont = qds.GetItem(query.BulletFont).ToInt();
-            cells.BulletFontSize = qds.GetItem(query.BulletFontSize).ToInt();
+            cells.IndentFirst = row.GetItem(query.IndentFirst);
+            cells.IndentLeft = row.GetItem(query.IndentLeft);
+            cells.IndentRight = row.GetItem(query.IndentRight);
+            cells.SpacingAfter = row.GetItem(query.SpaceAfter);
+            cells.SpacingBefore = row.GetItem(query.SpaceBefore);
+            cells.SpacingLine = row.GetItem(query.SpaceLine);
+            cells.HorizontalAlign = row.GetItem(query.HorzAlign).ToInt();
+            cells.BulletIndex = row.GetItem(query.BulletIndex).ToInt();
+            cells.BulletFont = row.GetItem(query.BulletFont).ToInt();
+            cells.BulletFontSize = row.GetItem(query.BulletFontSize).ToInt();
 
             return cells;
         }

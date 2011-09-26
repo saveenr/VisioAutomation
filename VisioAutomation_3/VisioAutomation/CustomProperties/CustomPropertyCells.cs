@@ -80,19 +80,19 @@ namespace VisioAutomation.CustomProperties
             return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds)
+        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new CustomPropertyCells();
 
-            cells.Value = qds.GetItem(query.Value);
-            cells.Calendar = qds.GetItem(query.Calendar).ToInt();
-            cells.Format = qds.GetItem(query.Format);
-            cells.Invisible = qds.GetItem(query.Invis).ToInt();
-            cells.Label = qds.GetItem(query.Label);
-            cells.LangId = qds.GetItem(query.LangID).ToInt();
-            cells.Prompt = qds.GetItem(query.Prompt);
-            cells.SortKey = qds.GetItem(query.SortKey).ToInt();
-            cells.Type = qds.GetItem(query.Type).ToInt();
+            cells.Value = row.GetItem(query.Value);
+            cells.Calendar = row.GetItem(query.Calendar).ToInt();
+            cells.Format = row.GetItem(query.Format);
+            cells.Invisible = row.GetItem(query.Invis).ToInt();
+            cells.Label = row.GetItem(query.Label);
+            cells.LangId = row.GetItem(query.LangID).ToInt();
+            cells.Prompt = row.GetItem(query.Prompt);
+            cells.SortKey = row.GetItem(query.SortKey).ToInt();
+            cells.Type = row.GetItem(query.Type).ToInt();
             return cells;
         }
     }

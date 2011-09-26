@@ -29,14 +29,14 @@ namespace VisioAutomation.Connections
             func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
         }
 
-        private static ConnectionPointCells get_cells_from_row2(ConnectionPointQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qdr)
+        private static ConnectionPointCells get_cells_from_row2(ConnectionPointQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new ConnectionPointCells();
-            cells.X = qdr.GetItem(query.X);
-            cells.Y = qdr.GetItem(query.Y);
-            cells.DirX = qdr.GetItem(query.DirX).ToInt();
-            cells.DirY = qdr.GetItem(query.DirY).ToInt();
-            cells.Type = qdr.GetItem(query.Type).ToInt();
+            cells.X = row.GetItem(query.X);
+            cells.Y = row.GetItem(query.Y);
+            cells.DirX = row.GetItem(query.DirX).ToInt();
+            cells.DirY = row.GetItem(query.DirY).ToInt();
+            cells.Type = row.GetItem(query.Type).ToInt();
 
             return cells;
         }

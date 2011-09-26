@@ -34,14 +34,14 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qdr)
+        private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new CharacterFormatCells();
-            cells.Color = qdr.GetItem(query.Color).ToInt();
-            cells.Transparency = qdr.GetItem(query.Trans);
-            cells.Font = qdr.GetItem(query.Font).ToInt();
-            cells.Size = qdr.GetItem(query.Size);
-            cells.Style = qdr.GetItem(query.Style).ToInt();
+            cells.Color = row.GetItem(query.Color).ToInt();
+            cells.Transparency = row.GetItem(query.Trans);
+            cells.Font = row.GetItem(query.Font).ToInt();
+            cells.Size = row.GetItem(query.Size);
+            cells.Style = row.GetItem(query.Style).ToInt();
 
             return cells;
         }

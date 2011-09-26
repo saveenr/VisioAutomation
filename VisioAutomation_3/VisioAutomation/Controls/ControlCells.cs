@@ -28,17 +28,17 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
-        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qds)
+        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
         {
             var cells = new ControlCells();
-            cells.CanGlue = qds.GetItem(query.CanGlue).ToInt();
-            cells.Tip = qds.GetItem(query.Tip).ToInt();
-            cells.X = qds.GetItem(query.X);
-            cells.Y = qds.GetItem(query.Y);
-            cells.YBehavior = qds.GetItem(query.YBehavior).ToInt();
-            cells.XBehavior = qds.GetItem(query.XBehavior).ToInt();
-            cells.XDynamics = qds.GetItem(query.XDynamics).ToInt();
-            cells.YDynamics = qds.GetItem(query.YDynamics).ToInt();
+            cells.CanGlue = row.GetItem(query.CanGlue).ToInt();
+            cells.Tip = row.GetItem(query.Tip).ToInt();
+            cells.X = row.GetItem(query.X);
+            cells.Y = row.GetItem(query.Y);
+            cells.YBehavior = row.GetItem(query.YBehavior).ToInt();
+            cells.XBehavior = row.GetItem(query.XBehavior).ToInt();
+            cells.XDynamics = row.GetItem(query.XDynamics).ToInt();
+            cells.YDynamics = row.GetItem(query.YDynamics).ToInt();
             return cells;
         }
 
