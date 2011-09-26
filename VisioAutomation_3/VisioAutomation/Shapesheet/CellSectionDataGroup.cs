@@ -24,17 +24,17 @@ namespace VisioAutomation.ShapeSheet
             this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
         }
 
-        protected static IList<List<TCells>> _GetObjectsFromRowsGrouped<TCells, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<List<TObj>> _GetObjectsFromRowsGrouped<TObj, TQuery>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TObj, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var list_of_lists = new List<List<TCells>>(shapeids.Count);
+            var list_of_lists = new List<List<TObj>>(shapeids.Count);
 
             for (int group_index = 0; group_index < qds.Groups.Count; group_index++)
             {
                 var group = qds.Groups[group_index];
                 var rows_in_group = qds.EnumRowsInGroup(group_index);
 
-                var obj_list = new List<TCells>(group.Count);
+                var obj_list = new List<TObj>(group.Count);
                 foreach (var row in rows_in_group)
                 {
                     var obj = row_to_obj_func(query, row);
@@ -47,12 +47,12 @@ namespace VisioAutomation.ShapeSheet
             return list_of_lists;
         }
 
-        protected static IList<TCells> _GetObjectsFromRows<TCells, TQuery>(IVisio.Shape shape, TQuery query, RowToObject<TCells, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<TObj> _GetObjectsFromRows<TObj, TQuery>(IVisio.Shape shape, TQuery query, RowToObject<TObj, TQuery> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
             var rows_in_group = qds.EnumRows();
 
-            var obj_list = new List<TCells>(qds.RowCount);
+            var obj_list = new List<TObj>(qds.RowCount);
             foreach (var row in rows_in_group)
             {
                 var obj = row_to_obj_func(query, row);
