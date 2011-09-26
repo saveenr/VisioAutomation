@@ -153,15 +153,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return cd;
         }
 
-        [System.Obsolete]
-        public VA.ShapeSheet.CellData<TResult> GetItem<TResult>(int row, VA.ShapeSheet.Query.QueryColumn col, System.Func<T, TResult> xfrm) 
-        {
-            string formula = this.Formulas[row, col];
-            TResult result = xfrm(this.Results[row, col]);
-            var cd = new VA.ShapeSheet.CellData<TResult>(formula, result);
-            return cd;
-        }
-
         internal IEnumerable<QueryDataRow<T>> EnumRows()
         {
             for (int row = 0; row < this.RowCount; row++)
@@ -186,28 +177,6 @@ namespace VisioAutomation.ShapeSheet.Query
                     yield return qdr;
                 }                
             }
-        }
-    }
-
-    public struct QueryDataRow<T>
-    {
-        private QueryDataSet<T> QueryDataSet;
-        public int RowIndex;
-        
-        public QueryDataRow(QueryDataSet<T> qds, int row)
-        {
-            this.QueryDataSet = qds;
-            this.RowIndex = row;
-        }
-
-        private VA.ShapeSheet.CellData<T> GetItem(VA.ShapeSheet.Query.QueryColumn col)
-        {
-            return this.QueryDataSet.GetItem(this.RowIndex, col);
-        }
-
-        public VA.ShapeSheet.CellData<T> this[VA.ShapeSheet.Query.QueryColumn col]
-        {
-            get { return this.GetItem(col); }
         }
     }
 }
