@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheet.Streams
 {
     public abstract class BaseStream<T>
     {

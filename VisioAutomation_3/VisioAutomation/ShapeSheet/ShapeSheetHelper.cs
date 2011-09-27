@@ -111,7 +111,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static TResult[] GetResults<TResult>(
             IVisio.Shape shape,
-            VA.ShapeSheet.SRCStream stream,
+            VA.ShapeSheet.Streams.SRCStream stream,
             IList<IVisio.VisUnitCodes> unitcodes)
         {
             if (stream.Count < 1)
@@ -149,7 +149,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static string[] GetFormulasU(
             IVisio.Shape shape,
-            VA.ShapeSheet.SRCStream stream)
+            VA.ShapeSheet.Streams.SRCStream stream)
         {
             if (stream.Count < 1)
             {
@@ -178,7 +178,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static short SetFormulas(
             IVisio.Page page,
-            VA.ShapeSheet.SIDSRCStream stream,
+            VA.ShapeSheet.Streams.SIDSRCStream stream,
             IList<string> formulas,
             short flags)
         {
@@ -197,7 +197,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static string[] GetFormulasU(
             IVisio.Page page,
-            VA.ShapeSheet.SIDSRCStream stream)
+            VA.ShapeSheet.Streams.SIDSRCStream stream)
         {
             if (stream.Count == 0)
             {
@@ -229,7 +229,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static short SetFormulas(
             IVisio.Shape shape,
-            VA.ShapeSheet.SRCStream stream,
+            VA.ShapeSheet.Streams.SRCStream stream,
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
@@ -255,7 +255,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static short SetResults(
             IVisio.Shape shape,
-            VA.ShapeSheet.SRCStream stream,
+            VA.ShapeSheet.Streams.SRCStream stream,
             IList<double> results,
             IList<IVisio.VisUnitCodes> unit_codes,
             IVisio.VisGetSetArgs flags)
@@ -289,7 +289,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static short SetResults(
             IVisio.Page page,
-            VA.ShapeSheet.SIDSRCStream stream,
+            VA.ShapeSheet.Streams.SIDSRCStream stream,
             IList<double> results,
             IList<IVisio.VisUnitCodes> unitcodes,
             IVisio.VisGetSetArgs flags)
@@ -315,7 +315,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static TResult[] GetResults<TResult>(
             IVisio.Page page,
-            VA.ShapeSheet.SIDSRCStream stream,
+            VA.ShapeSheet.Streams.SIDSRCStream stream,
             IList<IVisio.VisUnitCodes> unitcodes)
         {
             if (stream.Count == 0)

@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Update
                 return 0;
             }
 
-            var stream = VA.ShapeSheet.SIDSRCStream.FromItems(this.ResultData.Items, r => r.StreamItem);
+            var stream = VA.ShapeSheet.Streams.SIDSRCStream.FromItems(this.ResultData.Items, r => r.StreamItem);
             var unitcodes = this.ResultData.GetUnitCodesArray();
             double[] results = this.ResultData.GetResultsArray();
             var flags = this.ResultFlags;
@@ -62,7 +62,7 @@ namespace VisioAutomation.ShapeSheet.Update
                 return 0;
             }
 
-            var stream = VA.ShapeSheet.SIDSRCStream.FromItems(this.FormulaData.Items, r => r.StreamItem);
+            var stream = VA.ShapeSheet.Streams.SIDSRCStream.FromItems(this.FormulaData.Items, r => r.StreamItem);
             var formulas = this.FormulaData.GetFormulasArray();
             var flags = this.FormulaFlags;
 

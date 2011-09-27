@@ -1,7 +1,7 @@
 ﻿using VA=VisioAutomation;
 using System.Collections.Generic;
 
-namespace VisioAutomation.ShapeSheet
+namespace VisioAutomation.ShapeSheet.Streams
 {
     public class SIDSRCStream : BaseStream<SIDSRC>
     {

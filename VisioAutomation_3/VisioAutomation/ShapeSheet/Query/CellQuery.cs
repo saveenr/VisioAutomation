@@ -66,7 +66,7 @@ namespace VisioAutomation.ShapeSheet.Query
             
             // Build the Stream
             var srcs = this.Columns.Items.Select(col => col.SRC).ToList();
-            var stream = SRCStream.FromItems(srcs);
+            var stream = VA.ShapeSheet.Streams.SRCStream.FromItems(srcs);
 
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
@@ -131,7 +131,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int total_cells = rowcount * this.Columns.Count;
 
             // Build the Stream
-            var stream = new VA.ShapeSheet.SIDSRCStream(total_cells);
+            var stream = new VA.ShapeSheet.Streams.SIDSRCStream(total_cells);
             foreach (var id in shapeids)
             {
                 foreach (var src in srcs)

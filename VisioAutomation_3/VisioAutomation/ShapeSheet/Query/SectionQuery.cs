@@ -133,7 +133,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int total_cells = rowcount * this.Columns.Count;
 
             // Build the Stream
-            var stream = new VA.ShapeSheet.SIDSRCStream(total_cells);
+            var stream = new VA.ShapeSheet.Streams.SIDSRCStream(total_cells);
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 short shapeid = (short)shapeids[shape_index];
@@ -196,10 +196,9 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 validate_unitcodes(all_unitcodes, total_cells);
             }
-
-
+            
             // prepare the Stream
-            var stream = new VA.ShapeSheet.SRCStream(total_cells);
+            var stream = new VA.ShapeSheet.Streams.SRCStream(total_cells);
             for (short row = 0; row < rowcount; row++)
             {
                 foreach (var cell in cells)
