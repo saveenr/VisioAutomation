@@ -41,7 +41,7 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
 
-        protected override void ApplyFormula(ApplyFormula func)
+        protected override void ApplyFormulas(ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
             func(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);

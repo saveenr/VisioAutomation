@@ -48,7 +48,7 @@ namespace VisioAutomation.CustomProperties
             return f.Value;
         }
         
-        protected override void _Apply(ApplyFormula func, short row)
+        protected override void ApplyFormulas(ApplyFormula func, short row)
         {
             var cp = this;
 

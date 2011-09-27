@@ -17,7 +17,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> TextDirection { get; set; }
         public VA.ShapeSheet.CellData<int> VerticalAlign { get; set; }
 
-        protected override void ApplyFormula(ApplyFormula func)
+        protected override void ApplyFormulas(ApplyFormula func)
         {
             func(VA.ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
             func(VA.ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);

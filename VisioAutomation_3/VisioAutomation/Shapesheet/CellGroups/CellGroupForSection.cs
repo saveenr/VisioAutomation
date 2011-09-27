@@ -12,16 +12,16 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         // Delegates
         protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
 
-        protected abstract void _Apply(ApplyFormula func, short row);
+        protected abstract void ApplyFormulas(ApplyFormula func, short row);
 
         public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid, short row)
         {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f), row);
+            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f), row);
         }
 
         public void Apply(VA.ShapeSheet.Update.SRCUpdate update, short row)
         {
-            this._Apply((src, f) => update.SetFormulaIgnoreNull(src, f),row);
+            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f),row);
         }
 
         protected static IList<List<TObj>> _GetObjectsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
