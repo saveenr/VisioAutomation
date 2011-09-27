@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
-    public partial class PageCells : VA.ShapeSheet.CellGroup
+    public partial class PageCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> PageLeftMargin { get; set; }
         public VA.ShapeSheet.CellData<double> CenterX { get; set; }
@@ -73,7 +73,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<int> ResizePage { get; set; }
         public VA.ShapeSheet.CellData<int> RouteStyle { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellGroup.ApplyFormula func)
+        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroup.ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.PageLeftMargin, this.PageLeftMargin.Formula);
             func(ShapeSheet.SRCConstants.CenterX, this.CenterX.Formula);
@@ -217,13 +217,13 @@ namespace VisioAutomation.Layout
         internal static IList<PageCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new PageQuery();
-            return VA.ShapeSheet.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static PageCells GetCells(IVisio.Shape shape)
         {
             var query = new PageQuery();
-            return VA.ShapeSheet.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
         }
 
         class PageQuery : VA.ShapeSheet.Query.CellQuery

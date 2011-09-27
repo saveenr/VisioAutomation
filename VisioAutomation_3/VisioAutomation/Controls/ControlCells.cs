@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Controls
 {
-    public class ControlCells : VA.ShapeSheet.CellGroupForSection
+    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupForSection
     {
         public VA.ShapeSheet.CellData<int> CanGlue { get; set; }
         public VA.ShapeSheet.CellData<int> Tip { get; set; }
@@ -16,7 +16,7 @@ namespace VisioAutomation.Controls
         public VA.ShapeSheet.CellData<int> XDynamics { get; set; }
         public VA.ShapeSheet.CellData<int> YDynamics { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellGroupForSection.ApplyFormula func, short row)
+        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroupForSection.ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Controls_CanGlue.ForRow(row), this.CanGlue.Formula);
             func(VA.ShapeSheet.SRCConstants.Controls_Tip.ForRow(row), this.Tip.Formula);
@@ -45,13 +45,13 @@ namespace VisioAutomation.Controls
         internal static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ControlQuery();
-            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = new ControlQuery();
-            return VA.ShapeSheet.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
         class ControlQuery : VA.ShapeSheet.Query.SectionQuery
@@ -77,8 +77,6 @@ namespace VisioAutomation.Controls
                 this.XDynamics = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_XDyn.Cell, "XDynamics");
                 this.YDynamics = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_YDyn.Cell, "YDynamics");
             }
-
         }
-
     }
 }
