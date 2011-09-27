@@ -14,6 +14,46 @@ namespace TestVisioAutomation
         private static VA.Metadata.MetadataDB mdx = VA.Metadata.MetadataDB.Load();
 
         [TestMethod]
+        public void CellNameParsing()
+        {
+            var p1 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("EndArrow");
+            Assert.AreEqual("EndArrow", p1.FullName);
+            Assert.AreEqual("EndArrow", p1.FullNameWithoutIndex);
+            Assert.AreEqual(false, p1.ContansDot);
+            Assert.AreEqual(null,p1.NameLeftOfDot);
+            Assert.AreEqual(null, p1.NameRightOfDot);
+            Assert.AreEqual(false, p1.IsIndexed);
+            Assert.AreEqual(null, p1.IndexValueString);
+            
+            var p2 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo.Bar");
+            Assert.AreEqual("Foo.Bar", p2.FullName);
+            Assert.AreEqual("Foo.Bar", p2.FullNameWithoutIndex);
+            Assert.AreEqual(true, p2.ContansDot);
+            Assert.AreEqual("Foo", p2.NameLeftOfDot);
+            //Assert.AreEqual("Bar", p2.NameRightOfDot);
+            Assert.AreEqual(false, p2.IsIndexed);
+            Assert.AreEqual(null, p2.IndexValueString);
+
+            var p3 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo[1]");
+            Assert.AreEqual("Foo[1]", p3.FullName);
+            Assert.AreEqual("Foo", p3.FullNameWithoutIndex);
+            Assert.AreEqual(false, p3.ContansDot);
+            Assert.AreEqual(null, p3.NameLeftOfDot);
+            Assert.AreEqual(null, p3.NameRightOfDot);
+            Assert.AreEqual(true, p3.IsIndexed);
+            Assert.AreEqual("1", p3.IndexValueString);
+
+            var p4 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo.Bar[1]");
+            Assert.AreEqual("Foo.Bar[1]", p4.FullName);
+            Assert.AreEqual("Foo.Bar", p4.FullNameWithoutIndex);
+            Assert.AreEqual(true, p4.ContansDot);
+            Assert.AreEqual("Foo", p4.NameLeftOfDot);
+            Assert.AreEqual("Bar", p4.NameRightOfDot);
+            Assert.AreEqual(true, p4.IsIndexed);
+            Assert.AreEqual("1", p4.IndexValueString);
+
+        }
+        [TestMethod]
         public void SpotCheckNameToSRCMapping()
         {
             var c1 = VA.ShapeSheet.ShapeSheetHelper.TryGetSRCFromName("EndArrow").Value;
@@ -34,7 +74,7 @@ namespace TestVisioAutomation
             {
                 shape1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
                 shape1.CellsU["FillBkgnd"].FormulaU = "rgb(255,134,98)";
-                VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1, "custprop1", "value1");
+                VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1, "custprop2", "value1");
                 VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(shape1, "UserDefinedCell1", "Value1", "Prompt1");
                 var ctrl = new VA.Controls.ControlCells();
                 ctrl.X = "Width*0.5";
@@ -192,6 +232,7 @@ namespace TestVisioAutomation
                 }
             }
         }
+
 
     }
 }

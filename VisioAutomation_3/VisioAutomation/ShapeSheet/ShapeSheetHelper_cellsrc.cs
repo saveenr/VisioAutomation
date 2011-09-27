@@ -903,6 +903,51 @@ namespace VisioAutomation.ShapeSheet
 
         }
 
+        public struct CellNameParse
+        {
+            public string FullName;
+            public string FullNameWithoutIndex;
+            public bool ContansDot;
+            public string NameLeftOfDot;
+            public string NameRightOfDot;
+            public bool IsIndexed;
+            public string IndexValueString;
+        }
+
+        public static CellNameParse ParseCellName(string name)
+        {
+            var p = new CellNameParse();
+            p.FullName = name;
+
+            int left_bracket_pos = name.IndexOf('[');
+            if (left_bracket_pos >= 0)
+            {
+                p.IsIndexed = true;
+                p.FullNameWithoutIndex = name.Substring(0, left_bracket_pos);
+
+                int right_bracket_pos = name.IndexOf(']');
+                if (right_bracket_pos > 0)
+                {
+                    int between_brackets_len = right_bracket_pos - left_bracket_pos - 1;
+                    p.IndexValueString = name.Substring(left_bracket_pos + 1, between_brackets_len);
+
+                }
+            }
+            else
+            {
+                p.FullNameWithoutIndex = name;                
+            }
+
+            int dot_pos = p.FullNameWithoutIndex.IndexOf('.');
+            if (dot_pos >= 0)
+            {
+                p.ContansDot = true;
+                p.NameLeftOfDot = p.FullNameWithoutIndex.Substring(0, dot_pos);
+                p.NameRightOfDot = p.FullNameWithoutIndex.Substring(dot_pos+1);
+
+            }
+            return p;
+        }
 
         public static SRC? TryGetSRCFromName(string name)
         {
