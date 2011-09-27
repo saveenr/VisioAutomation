@@ -58,6 +58,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public SectionQueryColumn AddColumn(VA.ShapeSheet.SRC cell)
         {
+            if (cell.Section != this.Section)
+            {
+                string msg = string.Format("Cell's section index {0} does not match the query's section indec {1}",
+                                           cell.Section, this.Section);
+                throw new VA.AutomationException(msg);
+            }
             return AddColumn(cell.Cell);
         }
 

@@ -165,17 +165,10 @@ namespace VisioAutomation.ShapeSheet.Data
         {
             var group = this.Groups[index];
 
-            if (group.Count == 0)
+            foreach (int i in group.RowIndices)
             {
-                yield break;
-            }
-            else
-            {
-                for (int i = group.StartRow; i <= group.EndRow; i++)
-                {
-                    var qdr = new VA.ShapeSheet.Data.QueryDataRow<T>(this, i);
-                    yield return qdr;
-                }                
+                var qdr = new VA.ShapeSheet.Data.QueryDataRow<T>(this, i);
+                yield return qdr;
             }
         }
     }
