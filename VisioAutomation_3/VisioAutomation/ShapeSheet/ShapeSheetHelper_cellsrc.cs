@@ -961,43 +961,20 @@ namespace VisioAutomation.ShapeSheet
                 return src;
             }
 
-            // It wasn't found there but maybe it is an indexed version of something 
-            int dot_pos = name.IndexOf('.');
-            if (dot_pos >= 0)
+            // It wasn't found immediately so let's parse it and figure it out
+            var p = ParseCellName(name);
+            if (p.ContansDot)
             {
-                // There is a dot
-                string left_of_dot = name.Substring(0, dot_pos);
-
-                int left_bracket_pos = name.IndexOf('[');
-                if (left_bracket_pos >= 0)
+                if ((p.NameLeftOfDot== "Char") || (p.NameLeftOfDot== "Para"))
                 {
-                    // Found the left bracket
-
-                    string unbracketed_name = name.Substring(0, left_bracket_pos);
-                    int len = left_bracket_pos - dot_pos - 1;
-                    string between = name.Substring(dot_pos+1, len);
-
-                    int right_bracket_pos = name.IndexOf(']');
-                    if (right_bracket_pos > 0)
+                    var x = TryGetSRCFromName(p.FullNameWithoutIndex);
+                    if (x.HasValue)
                     {
-                        int between_brackets_len = right_bracket_pos - left_bracket_pos - 1;
-                        string between_brackets_str = name.Substring(left_bracket_pos + 1, between_brackets_len);
-
-                        if ((left_of_dot == "Char") || (left_of_dot == "Para"))
-                        {
-                            var x = TryGetSRCFromName(unbracketed_name);
-                            if (x.HasValue)
-                            {
-                                int bracket_int = int.Parse(between_brackets_str);
-                                var y = x.Value.ForRow((short) (bracket_int -1) );
-                                return y;
-
-                            }
-                        }
-
+                        int bracket_int = int.Parse(p.IndexValueString);
+                        var y = x.Value.ForRow((short)(bracket_int - 1));
+                        return y;
                     }
                 }
-                // end of finding first dot
             }
 
             return null;
