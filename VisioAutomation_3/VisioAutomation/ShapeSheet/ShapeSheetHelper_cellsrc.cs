@@ -903,50 +903,73 @@ namespace VisioAutomation.ShapeSheet
 
         }
 
-        public struct CellNameParse
+        public class CellNameParseResult
         {
-            public string FullName;
-            public string FullNameWithoutIndex;
-            public bool ContansDot;
-            public string NameLeftOfDot;
-            public string NameRightOfDot;
-            public bool IsIndexed;
-            public string IndexValueString;
+            public string FullName { get; set; }
+            public string FullNameWithoutIndex { get; set; }
+            
+            public bool IsDotted { get; set; }
+            public string NameLeftOfDot { get; set; }
+            public string NameRightOfDot { get; set; }
+
+            public bool IsIndexed { get; set; }
+            public string Index { get; set; }
         }
 
-        public static CellNameParse ParseCellName(string name)
+        public static CellNameParseResult ParseCellName(string name)
         {
-            var p = new CellNameParse();
-            p.FullName = name;
+            if (name == null)
+            {
+                throw new System.ArgumentNullException("name");
+            }
 
+            var result = new CellNameParseResult();
+            result.FullName = name;
+
+            // First separate out the index if it exists
             int left_bracket_pos = name.IndexOf('[');
             if (left_bracket_pos >= 0)
             {
-                p.IsIndexed = true;
-                p.FullNameWithoutIndex = name.Substring(0, left_bracket_pos);
+                // the left bracket was found
+                result.IsIndexed = true;
+                result.FullNameWithoutIndex = name.Substring(0, left_bracket_pos);
 
                 int right_bracket_pos = name.IndexOf(']');
                 if (right_bracket_pos > 0)
                 {
+                    // the right bracket was found
                     int between_brackets_len = right_bracket_pos - left_bracket_pos - 1;
-                    p.IndexValueString = name.Substring(left_bracket_pos + 1, between_brackets_len);
-
+                    result.Index = name.Substring(left_bracket_pos + 1, between_brackets_len);
+                }
+                else
+                {
+                    // didn't find the right bracket
+                    string msg = string.Format("Cell Name \"{0}\" is missing a matching right bracket",name);
+                    throw new VA.AutomationException(msg);
                 }
             }
             else
             {
-                p.FullNameWithoutIndex = name;                
+                // left bracket not found 
+                result.FullNameWithoutIndex = result.FullName;                
             }
 
-            int dot_pos = p.FullNameWithoutIndex.IndexOf('.');
+            // No check check for dotted names left of the index (if there was a index )
+            int dot_pos = result.FullNameWithoutIndex.IndexOf('.');
             if (dot_pos >= 0)
             {
-                p.ContansDot = true;
-                p.NameLeftOfDot = p.FullNameWithoutIndex.Substring(0, dot_pos);
-                p.NameRightOfDot = p.FullNameWithoutIndex.Substring(dot_pos+1);
-
+                // dot was found
+                result.IsDotted = true;
+                result.NameLeftOfDot = result.FullNameWithoutIndex.Substring(0, dot_pos);
+                result.NameRightOfDot = result.FullNameWithoutIndex.Substring(dot_pos+1);
             }
-            return p;
+            else
+            {
+                // no dot found
+                // no need to do anything, the defaults work
+            }
+
+            return result;
         }
 
         public static SRC? TryGetSRCFromName(string name)
@@ -963,14 +986,14 @@ namespace VisioAutomation.ShapeSheet
 
             // It wasn't found immediately so let's parse it and figure it out
             var p = ParseCellName(name);
-            if (p.ContansDot)
+            if (p.IsDotted)
             {
                 if ((p.NameLeftOfDot== "Char") || (p.NameLeftOfDot== "Para"))
                 {
                     var x = TryGetSRCFromName(p.FullNameWithoutIndex);
                     if (x.HasValue)
                     {
-                        int bracket_int = int.Parse(p.IndexValueString);
+                        int bracket_int = int.Parse(p.Index);
                         var y = x.Value.ForRow((short)(bracket_int - 1));
                         return y;
                     }

@@ -19,40 +19,58 @@ namespace TestVisioAutomation
             var p1 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("EndArrow");
             Assert.AreEqual("EndArrow", p1.FullName);
             Assert.AreEqual("EndArrow", p1.FullNameWithoutIndex);
-            Assert.AreEqual(false, p1.ContansDot);
+            Assert.AreEqual(false, p1.IsDotted);
             Assert.AreEqual(null,p1.NameLeftOfDot);
             Assert.AreEqual(null, p1.NameRightOfDot);
             Assert.AreEqual(false, p1.IsIndexed);
-            Assert.AreEqual(null, p1.IndexValueString);
+            Assert.AreEqual(null, p1.Index);
             
             var p2 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo.Bar");
             Assert.AreEqual("Foo.Bar", p2.FullName);
             Assert.AreEqual("Foo.Bar", p2.FullNameWithoutIndex);
-            Assert.AreEqual(true, p2.ContansDot);
+            Assert.AreEqual(true, p2.IsDotted);
             Assert.AreEqual("Foo", p2.NameLeftOfDot);
             //Assert.AreEqual("Bar", p2.NameRightOfDot);
             Assert.AreEqual(false, p2.IsIndexed);
-            Assert.AreEqual(null, p2.IndexValueString);
+            Assert.AreEqual(null, p2.Index);
 
             var p3 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo[1]");
             Assert.AreEqual("Foo[1]", p3.FullName);
             Assert.AreEqual("Foo", p3.FullNameWithoutIndex);
-            Assert.AreEqual(false, p3.ContansDot);
+            Assert.AreEqual(false, p3.IsDotted);
             Assert.AreEqual(null, p3.NameLeftOfDot);
             Assert.AreEqual(null, p3.NameRightOfDot);
             Assert.AreEqual(true, p3.IsIndexed);
-            Assert.AreEqual("1", p3.IndexValueString);
+            Assert.AreEqual("1", p3.Index);
 
             var p4 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo.Bar[1]");
             Assert.AreEqual("Foo.Bar[1]", p4.FullName);
             Assert.AreEqual("Foo.Bar", p4.FullNameWithoutIndex);
-            Assert.AreEqual(true, p4.ContansDot);
+            Assert.AreEqual(true, p4.IsDotted);
             Assert.AreEqual("Foo", p4.NameLeftOfDot);
             Assert.AreEqual("Bar", p4.NameRightOfDot);
             Assert.AreEqual(true, p4.IsIndexed);
-            Assert.AreEqual("1", p4.IndexValueString);
+            Assert.AreEqual("1", p4.Index);
 
+            var p5 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo[1.2]");
+            Assert.AreEqual("Foo[1.2]", p5.FullName);
+            Assert.AreEqual("Foo", p5.FullNameWithoutIndex);
+            Assert.AreEqual(false, p5.IsDotted);
+            Assert.AreEqual(null, p5.NameLeftOfDot);
+            Assert.AreEqual(null, p5.NameRightOfDot);
+            Assert.AreEqual(true, p5.IsIndexed);
+            Assert.AreEqual("1.2", p5.Index);
+
+            var p6 = VA.ShapeSheet.ShapeSheetHelper.ParseCellName("Foo.Bar[1.2]");
+            Assert.AreEqual("Foo.Bar[1.2]", p6.FullName);
+            Assert.AreEqual("Foo.Bar", p6.FullNameWithoutIndex);
+            Assert.AreEqual(true, p6.IsDotted);
+            Assert.AreEqual("Foo", p6.NameLeftOfDot);
+            Assert.AreEqual("Bar", p6.NameRightOfDot);
+            Assert.AreEqual(true, p6.IsIndexed);
+            Assert.AreEqual("1.2", p6.Index);
         }
+
         [TestMethod]
         public void SpotCheckNameToSRCMapping()
         {
