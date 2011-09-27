@@ -139,6 +139,7 @@
     <Compile Include="ShapesEnumeration.cs" />
     <Compile Include="Shapesheet\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroupForSection.cs" />
+    <Compile Include="Shapesheet\BaseCellGroup.cs" />
     <Compile Include="Shapesheet\Data\QueryDataRow.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />

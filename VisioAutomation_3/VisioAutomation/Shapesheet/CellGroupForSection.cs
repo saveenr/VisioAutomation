@@ -7,10 +7,9 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public abstract class CellGroupForSection
+    public abstract class CellGroupForSection : BaseCellGroup
     {
         // Delegates
-        protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
         protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
 
         protected abstract void _Apply(ApplyFormula func, short row);
