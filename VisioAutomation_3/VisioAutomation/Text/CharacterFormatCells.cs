@@ -34,7 +34,7 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
             var cells = new CharacterFormatCells();
             cells.Color = row[query.Color].ToInt();

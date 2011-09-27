@@ -28,7 +28,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
         }
 
-        private static XFormCells get_cells_from_row(XFormQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static XFormCells get_cells_from_row(XFormQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
             var cells = new XFormCells();
             cells.PinX = row[query.PinX];

@@ -4,7 +4,7 @@ namespace VisioPS
 {
     internal class DTUtil
     {
-        public static System.Data.DataTable ToDataTable<T>(VA.ShapeSheet.Query.Table<T> table)
+        public static System.Data.DataTable ToDataTable<T>(VA.ShapeSheet.Data.Table<T> table)
         {
             int extra_columns = 1;
             var datatable = new System.Data.DataTable();

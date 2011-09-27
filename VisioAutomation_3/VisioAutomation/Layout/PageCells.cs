@@ -142,7 +142,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.RouteStyle, this.RouteStyle.Formula);
         }
 
-        private static PageCells get_cells_from_row(PageQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static PageCells get_cells_from_row(PageQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
 
             var cells = new PageCells();

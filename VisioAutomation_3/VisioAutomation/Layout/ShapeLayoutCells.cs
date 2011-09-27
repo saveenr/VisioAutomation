@@ -45,7 +45,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
         }
 
-        private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
             var cells = new ShapeLayoutCells();
             cells.ConFixedCode = row[query.ConFixedCode].ToInt();

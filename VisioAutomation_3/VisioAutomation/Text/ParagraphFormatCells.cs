@@ -45,7 +45,7 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellSectionDataGroup._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
             var cells = new ParagraphFormatCells();
             cells.IndentFirst = row[query.IndentFirst];

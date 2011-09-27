@@ -26,25 +26,25 @@ namespace VisioAutomation.ShapeSheet.Query
             return col;
         }
 
-        public QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
             var qds = this._Execute<T>(shape, true, true);
             return qds;
         }
 
-        public Table<string> GetFormulas(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Shape shape)
         {
             var qds = this._Execute<double>(shape, true, false);
             return qds.Formulas;
         }
 
-        public Table<T> GetResults<T>(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.Table<T> GetResults<T>(IVisio.Shape shape)
         {
             var qds = this._Execute<T>(shape, false, true);
             return qds.Results;
         }
 
-        private QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
+        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
         {
             if (shape == null)
             {
@@ -71,12 +71,12 @@ namespace VisioAutomation.ShapeSheet.Query
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
 
-            var qds = new QueryDataSet<T>(formulas,results,shapeids,this.Columns.Count, rowcount, group_counts);
+            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, group_counts);
 
             return qds;
         }
 
-        public QueryDataSet<T> GetFormulasAndResults<T>(
+        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(
                 IVisio.Page page,
                 IList<int> shapeids)
         {
@@ -84,7 +84,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds;
         }
 
-        public Table<string> GetFormulas(
+        public VA.ShapeSheet.Data.Table<string> GetFormulas(
             IVisio.Page page,
             IList<int> shapeids)
         {
@@ -92,7 +92,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds.Formulas;
         }
 
-        public Table<T> GetResults<T>(
+        public VA.ShapeSheet.Data.Table<T> GetResults<T>(
             IVisio.Page page,
             IList<int> shapeids)
         {
@@ -100,7 +100,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds.Results;
         }
 
-        private QueryDataSet<T> _Execute<T>(
+        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(
             IVisio.Page page,
             IList<int> shapeids, bool getformulas, bool getresults)
         {
@@ -143,7 +143,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes) : null;
 
-            var qds = new QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
+            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
 
             return qds;
         }

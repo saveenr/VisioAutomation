@@ -85,26 +85,26 @@ namespace VisioAutomation.ShapeSheet.Query
             return group_counts;
         }
 
-        public QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
+        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             var qds = this._Execute<T>(page, shapeids,true, true);
             return qds;
         }
 
-        public Table<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
+        public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var qds = this._Execute<double>(page, shapeids, true, true);
             return qds.Formulas;
         }
 
-        public Table<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
+        public VA.ShapeSheet.Data.Table<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             var qds = this._Execute<T>(page, shapeids, true, true);
             return qds.Results;
         }
 
 
-        private QueryDataSet<T> _Execute<T>(IVisio.Page page, IList<int> shapeids, bool getformulas, bool getresults)
+        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Page page, IList<int> shapeids, bool getformulas, bool getresults)
         {
             if (page == null)
             {
@@ -153,31 +153,31 @@ namespace VisioAutomation.ShapeSheet.Query
             var unitcodes_for_rows = getresults ? ShapeSheetHelper.get_unitcodes_for_rows(unitcodes,rowcount) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes_for_rows) : null;
 
-            var qds = new QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
+            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
             return qds;
 
         }
 
 
-        public QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
             var qds =  this._Execute<T>(shape,true,true);
             return qds;
         }
 
-        public Table<string> GetFormulas(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Shape shape)
         {
             var qds = this._Execute<double>(shape,true,false);
             return qds.Formulas;
         }
 
-        public Table<T> GetResults<T>(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.Table<T> GetResults<T>(IVisio.Shape shape)
         {
             var qds =this._Execute<T>(shape,false,true);
             return qds.Results;
         }
 
-        private QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
+        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
         {
             if (shape == null)
             {
@@ -212,7 +212,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, all_unitcodes) : null;
 
             var shape_ids = new[] { shape.ID };
-            var qds = new QueryDataSet<T>(formulas, results, shape_ids, this.Columns.Count, rowcount, groupcounts);
+            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shape_ids, this.Columns.Count, rowcount, groupcounts);
 
             return qds;
         }

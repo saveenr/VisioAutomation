@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet
     {
         // Delegates
         protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
-        protected delegate TObj RowToObject<TObj, TQuery>(TQuery query, VA.ShapeSheet.Query.QueryDataRow<double> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
+        protected delegate TObj RowToObject<TObj, TQuery>(TQuery query, VA.ShapeSheet.Data.QueryDataRow<double> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
         
         protected abstract void _Apply(ApplyFormula func);
 

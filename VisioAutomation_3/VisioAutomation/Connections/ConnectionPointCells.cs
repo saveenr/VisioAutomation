@@ -29,7 +29,7 @@ namespace VisioAutomation.Connections
             func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
         }
 
-        private static ConnectionPointCells get_cells_from_row2(ConnectionPointQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static ConnectionPointCells get_cells_from_row2(ConnectionPointQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
             var cells = new ConnectionPointCells();
             cells.X = row[query.X];

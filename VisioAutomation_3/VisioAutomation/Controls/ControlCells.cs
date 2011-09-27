@@ -28,7 +28,7 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
-        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
             var cells = new ControlCells();
             cells.CanGlue = row[query.CanGlue].ToInt();

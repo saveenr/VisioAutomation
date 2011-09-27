@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.ShapeSheet.Query
+﻿namespace VisioAutomation.ShapeSheet.Data
 {
     public class TableColumnList<T>
     {

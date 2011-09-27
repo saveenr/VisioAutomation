@@ -15,13 +15,13 @@ namespace TestVisioAutomation
         public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
 
 
-        public static List<T[]> GetRowsInGroup<T>(VA.ShapeSheet.Query.Table<T> table, int group)
+        public static List<T[]> GetRowsInGroup<T>(VA.ShapeSheet.Data.Table<T> table, int group)
         {
             var g = table.Groups[group];
             return g.RowIndices.Select(i => GetRow(table, i)).ToList();
         }
 
-        public static T[] GetRow<T>(VA.ShapeSheet.Query.Table<T> table, int row)
+        public static T[] GetRow<T>(VA.ShapeSheet.Data.Table<T> table, int row)
         {
             var a = new T[table.Columns.Count];
             for (int i = 0; i < table.Columns.Count; i++)

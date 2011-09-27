@@ -180,7 +180,7 @@ namespace VisioAutomation.UserDefinedCells
 
         public static List<UserDefinedCell> create_userdefined_cell_list(
             IList<string> prop_names,
-            VA.ShapeSheet.Query.Table<string> formulas,
+            VA.ShapeSheet.Data.Table<string> formulas,
             IList<int> rows)
         {
             var custom_props = new List<UserDefinedCell>();

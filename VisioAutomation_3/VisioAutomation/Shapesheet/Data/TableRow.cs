@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.ShapeSheet.Query
+﻿using VA=VisioAutomation;
+
+namespace VisioAutomation.ShapeSheet.Data
 {
     public struct TableRow<T>
     {
@@ -28,7 +30,7 @@
             set { this.Table[this.Index, column] = value; }
         }
 
-        public T this[QueryColumn column]
+        public T this[VA.ShapeSheet.Query.QueryColumn column]
         {
             get { return this.Table[this.Index, column]; }
             set { this.Table[this.Index, column] = value; }

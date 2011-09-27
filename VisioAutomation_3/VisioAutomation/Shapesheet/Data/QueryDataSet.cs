@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VA=VisioAutomation;
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Data
 {
     public class QueryDataSet<T>
     {
@@ -173,7 +173,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 for (int i = group.StartRow; i <= group.EndRow; i++)
                 {
-                    var qdr = new VA.ShapeSheet.Query.QueryDataRow<T>(this, i);
+                    var qdr = new VA.ShapeSheet.Data.QueryDataRow<T>(this, i);
                     yield return qdr;
                 }                
             }

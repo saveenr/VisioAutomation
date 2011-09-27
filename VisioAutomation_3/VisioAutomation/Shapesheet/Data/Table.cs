@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using VA=VisioAutomation;
 
-namespace VisioAutomation.ShapeSheet.Query
+namespace VisioAutomation.ShapeSheet.Data
 {
 
     /// <summary>
@@ -37,7 +38,7 @@ namespace VisioAutomation.ShapeSheet.Query
             set { this._values[row, column] = value; }
         }
 
-        public T this[int row, QueryColumn column]
+        public T this[int row, VA.ShapeSheet.Query.QueryColumn column]
         {
             get
             {

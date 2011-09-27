@@ -76,7 +76,7 @@ namespace VisioAutomation.Format
             func(ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
         }
 
-        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Query.QueryDataRow<double> row)
+        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
         {
 
             var cells = new ShapeFormatCells();

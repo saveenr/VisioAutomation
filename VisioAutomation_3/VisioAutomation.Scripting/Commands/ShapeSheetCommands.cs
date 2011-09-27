@@ -15,13 +15,13 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public VA.ShapeSheet.Query.Table<T> QueryResults<T>(VA.ShapeSheet.SRC src)
+        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(VA.ShapeSheet.SRC src)
         {
             var srcs = new[] { src };
             return QueryResults<T>(srcs);
         }
 
-        public VA.ShapeSheet.Query.Table<T> QueryResults<T>(IList<VA.ShapeSheet.SRC> srcs)
+        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<VA.ShapeSheet.SRC> srcs)
         {
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
@@ -42,13 +42,13 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public VA.ShapeSheet.Query.Table<string> QueryFormulas(VA.ShapeSheet.SRC src)
+        public VA.ShapeSheet.Data.Table<string> QueryFormulas(VA.ShapeSheet.SRC src)
         {
             var srcs = new[] { src };
             return QueryFormulas(srcs);
         }
 
-        public VA.ShapeSheet.Query.Table<string> QueryFormulas(IList<VA.ShapeSheet.SRC> srcs)
+        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<VA.ShapeSheet.SRC> srcs)
         {
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public VA.ShapeSheet.Query.Table<T> QueryResults<T>(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
@@ -91,7 +91,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public VA.ShapeSheet.Query.Table<string> QueryFormulas(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
@@ -250,7 +250,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public VA.ShapeSheet.Query.Table<string> QueryFormulas(IList<string> cellnames)
+        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<string> cellnames)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -262,7 +262,7 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public VA.ShapeSheet.Query.Table<T> QueryResults<T>(IList<string> cellnames)
+        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<string> cellnames)
         {
             if (!this.Session.HasSelectedShapes())
             {
