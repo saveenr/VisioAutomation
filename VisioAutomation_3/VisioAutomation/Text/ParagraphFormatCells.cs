@@ -19,7 +19,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> BulletFont { get; set; }
         public VA.ShapeSheet.CellData<int> BulletFontSize { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroupForSection.ApplyFormula func, short row)
+        protected override void _Apply(ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Para_IndLeft.ForRow(row), this.IndentLeft.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_IndFirst.ForRow(row), this.IndentFirst.Formula);

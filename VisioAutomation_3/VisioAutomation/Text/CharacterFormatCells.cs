@@ -13,7 +13,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> Style { get; set; }
         public VA.ShapeSheet.CellData<double> Transparency { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroupForSection.ApplyFormula func, short row)
+        protected override void _Apply(ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(row), this.Color.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(row), this.Font.Formula);

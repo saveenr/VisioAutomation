@@ -20,7 +20,7 @@ namespace VisioAutomation.Connections
             return ConnectionPointCells.GetCells(shape);
         }
 
-        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroupForSection.ApplyFormula func, short row)
+        protected override void _Apply(ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Connections_X.ForRow(row), this.X.Formula);
             func(VA.ShapeSheet.SRCConstants.Connections_Y.ForRow(row), this.Y.Formula);

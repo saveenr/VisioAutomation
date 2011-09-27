@@ -48,7 +48,7 @@ namespace VisioAutomation.CustomProperties
             return f.Value;
         }
         
-        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroupForSection.ApplyFormula func, short row)
+        protected override void _Apply(ApplyFormula func, short row)
         {
             var cp = this;
 

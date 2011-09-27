@@ -73,7 +73,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<int> ResizePage { get; set; }
         public VA.ShapeSheet.CellData<int> RouteStyle { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroup.ApplyFormula func)
+        protected override void ApplyFormula(ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.PageLeftMargin, this.PageLeftMargin.Formula);
             func(ShapeSheet.SRCConstants.CenterX, this.CenterX.Formula);

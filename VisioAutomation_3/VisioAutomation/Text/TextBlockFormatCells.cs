@@ -11,17 +11,13 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<double> LeftMargin { get; set; }
         public VA.ShapeSheet.CellData<double> RightMargin { get; set; }
         public VA.ShapeSheet.CellData<double> TopMargin { get; set; }
-
         public VA.ShapeSheet.CellData<double> DefaultTabStop { get; set; }
-        
         public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
-        
         public VA.ShapeSheet.CellData<int> TextDirection { get; set; }
-        
         public VA.ShapeSheet.CellData<int> VerticalAlign { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellGroups.CellGroup.ApplyFormula func)
+        protected override void ApplyFormula(ApplyFormula func)
         {
             func(VA.ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
             func(VA.ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);
