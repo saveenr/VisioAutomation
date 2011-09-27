@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Layout
 {
-    public partial class ShapeLayoutCells : VA.ShapeSheet.CellDataGroup
+    public partial class ShapeLayoutCells : VA.ShapeSheet.CellGroup
     {
         public VA.ShapeSheet.CellData<int> ConFixedCode { get; set; }
         public VA.ShapeSheet.CellData<int> ConLineJumpCode { get; set; }
@@ -25,7 +25,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<int> ShapeSplit { get; set; }
         public VA.ShapeSheet.CellData<int> ShapeSplittable { get; set; }
 
-        protected override void _Apply(VA.ShapeSheet.CellDataGroup.ApplyFormula func)
+        protected override void _Apply(VA.ShapeSheet.CellGroup.ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
             func(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
@@ -70,13 +70,13 @@ namespace VisioAutomation.Layout
         internal static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ShapeLayoutQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static ShapeLayoutCells GetCells(IVisio.Shape shape)
         {
             var query = new ShapeLayoutQuery();
-            return VA.ShapeSheet.CellDataGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
         }
 
         class ShapeLayoutQuery : VA.ShapeSheet.Query.CellQuery
