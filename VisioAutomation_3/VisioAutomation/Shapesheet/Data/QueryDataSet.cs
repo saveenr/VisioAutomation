@@ -9,8 +9,7 @@ namespace VisioAutomation.ShapeSheet.Data
         internal readonly int RowCount;
         internal readonly int ColumnCount;
         
-        public readonly TableRowGroup[] GroupsArray;
-        public readonly System.Collections.ObjectModel.ReadOnlyCollection<TableRowGroup> Groups;
+        public readonly TableRowGroupList Groups;
 
         public readonly Table<string> Formulas;
         public readonly Table<T> Results;
@@ -63,8 +62,11 @@ namespace VisioAutomation.ShapeSheet.Data
             this.RowCount = rowcount;
             this.ColumnCount = columncount;
 
-            this.GroupsArray = this.GetGrouping(shapeids, groupcounts);
-            this.Groups = new System.Collections.ObjectModel.ReadOnlyCollection<TableRowGroup>(this.GroupsArray);
+            this.Groups = new TableRowGroupList();
+            foreach (var g in this.GetGrouping(shapeids, groupcounts))
+            {
+                this.Groups.Add(g);
+            }
 
             this.Formulas = formulas_array != null ? this.FromDataSet<string>(i => formulas_array[i]) : null;
             this.Results = results_array != null ? this.FromDataSet<T>(i => results_array[i]) : null;
@@ -163,7 +165,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
         internal IEnumerable<QueryDataRow<T>> EnumRowsInGroup(int index)
         {
-            var group = this.GroupsArray[index];
+            var group = this.Groups[index];
 
             foreach (int i in group.RowIndices)
             {
