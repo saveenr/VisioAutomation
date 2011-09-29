@@ -138,8 +138,8 @@ namespace VisioAutomation.UserDefinedCells
 
             var formulas = UserDefinedCell.query.GetFormulas(shape);
 
-            var rows = new List<int>(formulas.Rows.Count);
-            for (int row = 0; row < formulas.Rows.Count; row++)
+            var rows = new List<int>(formulas.Count);
+            for (int row = 0; row < formulas.Count; row++)
             {
                 rows.Add(row);
             }

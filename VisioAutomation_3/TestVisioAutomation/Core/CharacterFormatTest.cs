@@ -70,7 +70,7 @@ namespace TestVisioAutomation
             var table1 = query.GetResults<double>(shape0);
 
             // veriy all the sizes are present
-            Assert.AreEqual(5,table1.Rows.Count);
+            Assert.AreEqual(5,table1.Count);
             Assert.AreEqual(pts_10, table1[0, 0], 0.000000005);
             Assert.AreEqual(pts_6,  table1[1, 0], 0.000000005);
             Assert.AreEqual(pts_10, table1[2, 0], 0.000000005);
@@ -82,7 +82,7 @@ namespace TestVisioAutomation
             VisioAutomation.Text.TextHelper.SetFormat(fmt3, shape0);
             var table2 = query.GetResults<double>(shape0);
 
-            Assert.AreEqual(5, table2.Rows.Count);
+            Assert.AreEqual(5, table2.Count);
             Assert.AreEqual(pts_9, table2[0, 0], 0.000000005);
             Assert.AreEqual(pts_9, table2[1, 0], 0.000000005);
             Assert.AreEqual(pts_9, table2[2, 0], 0.000000005);
@@ -95,7 +95,7 @@ namespace TestVisioAutomation
             query.Columns[0].UnitCode = IVisio.VisUnitCodes.visPoints;
             var table3 = query.GetResults<double>(shape0);
 
-            Assert.AreEqual(5, table3.Rows.Count);
+            Assert.AreEqual(5, table3.Count);
             Assert.AreEqual(9.0, table3[0, 0], 0.000000005);
             Assert.AreEqual(9.0, table3[1, 0], 0.000000005);
             Assert.AreEqual(9.0, table3[2, 0], 0.000000005);

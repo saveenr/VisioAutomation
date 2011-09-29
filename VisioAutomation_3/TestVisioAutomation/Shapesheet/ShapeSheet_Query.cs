@@ -181,9 +181,9 @@ namespace TestVisioAutomation
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
             // Check the grouping
-            Assert.AreEqual(shapeids.Count(), r.Formulas.Rows.Count); // the total number of rows should match the number of shapeids
+            Assert.AreEqual(shapeids.Count(), r.Formulas.Count); // the total number of rows should match the number of shapeids
             Assert.AreEqual(shapeids.Count(), r.Formulas.Groups.Count); // the total number of groups should be the number of shapes we asked for
-            Assert.AreEqual(shapeids.Count(), r.Results.Rows.Count); // the total number of rows should match the number of shapeids
+            Assert.AreEqual(shapeids.Count(), r.Results.Count); // the total number of rows should match the number of shapeids
             Assert.AreEqual(shapeids.Count(), r.Results.Groups.Count); // the total number of groups should be the number of shapes we asked for
 
             var expected_pinpos = new List<VA.Drawing.Point>
@@ -193,8 +193,8 @@ namespace TestVisioAutomation
                                           new VA.Drawing.Point(6, 6)
                                       };
 
-            var actual_pinpos = new List<VA.Drawing.Point>(r.Results.Rows.Count);
-            foreach (var row in Enumerable.Range(0, r.Results.Rows.Count))
+            var actual_pinpos = new List<VA.Drawing.Point>(r.Results.Count);
+            foreach (var row in Enumerable.Range(0, r.Results.Count))
             {
                  var p = new VA.Drawing.Point(
                     r.Results[row, col_pinx],
@@ -243,7 +243,7 @@ namespace TestVisioAutomation
                                       };
 
 
-            for (int row = 0; row < r.Formulas.Rows.Count; row++)
+            for (int row = 0; row < r.Formulas.Count; row++)
             {
                 for (int col = 0; col < r.Formulas.Columns.Count; col++)
                 {

@@ -139,7 +139,7 @@ namespace VisioPowerTools
             var table = query.GetResults<double>(s1);
             var colors = doc.Colors;
 
-            var row = table.Rows[0];
+            var row = table[0];
             this.fillGradient1.FillDef.ForegroundColor = (System.Drawing.Color) colors[(int)row[col_fg]].ToColorRGB();
             this.fillGradient1.FillDef.BackgroundColor = (System.Drawing.Color)colors[(int)row[col_bg]].ToColorRGB();
             this.fillGradient1.FillDef.ForegroundTransparency = (int)(100.0 * row[col_fgtrans]);
