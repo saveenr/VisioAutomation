@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected static IList<TObj> _GetObjectsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var rows = qds.EnumRows();
+            var rows = EnumRows(qds);
             var objs = rows.Select(r => row_to_cells_func(query, r));
             var obj_list = new List<TObj>(qds.RowCount);
             obj_list.AddRange(objs);

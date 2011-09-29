@@ -125,19 +125,19 @@ namespace VisioAutomation.ShapeSheet.Data
             return groups;
         }
 
-        private Table<X> FromDataSet<X>(System.Func<int, X> get_data_at_position)
+        private Table<X> FromDataSet<X>(System.Func<int, X> func_getdata)
         {
-            var vals = new X[this.RowCount,this.ColumnCount];
+            var values = new X[this.RowCount,this.ColumnCount];
             for (int r = 0; r < this.RowCount; r++)
             {
                 for (int c = 0; c < this.ColumnCount; c++)
                 {
                     int i = (r * this.ColumnCount) + c;
-                    vals[r, c] = get_data_at_position(i);
+                    values[r, c] = func_getdata(i);
                 }
             }
 
-            var table = new Table<X>(this.RowCount, this.ColumnCount, this.Groups, vals);
+            var table = new Table<X>(this.RowCount, this.ColumnCount, this.Groups, values);
             return table;
         }
 
@@ -152,14 +152,6 @@ namespace VisioAutomation.ShapeSheet.Data
             T result = this.Results[row, col];
             var cd = new VA.ShapeSheet.CellData<T>(formula, result);
             return cd;
-        }
-
-        internal IEnumerable<QueryDataRow<T>> EnumRows()
-        {
-            for (int row = 0; row < this.RowCount; row++)
-            {
-                yield return this.GetRow(row);
-            }
         }
     }
 }

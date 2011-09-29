@@ -53,5 +53,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 || (p.PropertyType == typeof(VA.ShapeSheet.CellData<string>))
                 || (p.PropertyType == typeof(VA.ShapeSheet.CellData<bool>)));
         }
+
+        protected static IEnumerable<VA.ShapeSheet.Data.QueryDataRow<T>> EnumRows<T>(VA.ShapeSheet.Data.QueryDataSet<T> qds)
+        {
+            for (int row = 0; row < qds.RowCount; row++)
+            {
+                yield return qds.GetRow(row);
+            }
+        }
     }
 }
