@@ -163,7 +163,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
         internal IEnumerable<QueryDataRow<T>> EnumRowsInGroup(int index)
         {
-            var group = this.Groups[index];
+            var group = this.GroupsArray[index];
 
             foreach (int i in group.RowIndices)
             {
