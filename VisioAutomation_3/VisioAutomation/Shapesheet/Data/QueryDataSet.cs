@@ -67,8 +67,8 @@ namespace VisioAutomation.ShapeSheet.Data
                 this.Groups.Add(g);
             }
 
-            this.Formulas = formulas_array != null ? this.FromDataSet<string>(i => formulas_array[i]) : null;
-            this.Results = results_array != null ? this.FromDataSet<T>(i => results_array[i]) : null;
+            this.Formulas = formulas_array != null ? this.BuildTableFromArray(formulas_array) : null;
+            this.Results = results_array != null ? this.BuildTableFromArray(results_array) : null;
         }
 
         private TableRowGroup[] GetGrouping(IList<int> shape_ids, IList<int> group_counts)
@@ -125,7 +125,7 @@ namespace VisioAutomation.ShapeSheet.Data
             return groups;
         }
 
-        private Table<X> FromDataSet<X>(System.Func<int, X> func_getdata)
+        private Table<X> BuildTableFromArray<X>(X[] array)
         {
             var values = new X[this.RowCount,this.ColumnCount];
             for (int r = 0; r < this.RowCount; r++)
@@ -133,7 +133,7 @@ namespace VisioAutomation.ShapeSheet.Data
                 for (int c = 0; c < this.ColumnCount; c++)
                 {
                     int i = (r * this.ColumnCount) + c;
-                    values[r, c] = func_getdata(i);
+                    values[r, c] = array[i];
                 }
             }
 
