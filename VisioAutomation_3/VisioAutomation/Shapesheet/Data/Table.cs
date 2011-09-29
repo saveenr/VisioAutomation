@@ -19,14 +19,10 @@ namespace VisioAutomation.ShapeSheet.Data
 
         public TableRowGroupList Groups { get; private set; }
 
-        internal Table(int rows, int cols, IEnumerable<TableRowGroup> groups, T[,] vals)
+        internal Table(int rows, int cols, TableRowGroupList groups, T[,] values)
         {
-            this._values = vals;
-            this.Groups = new TableRowGroupList();
-            foreach (var g in groups)
-            {
-                this.Groups.Add(g);
-            }
+            this._values = values;
+            this.Groups = groups;
             this._rows = new TableRowList<T>(this,rows);
             this._cols = new TableColumnList<T>(this, cols);
         }
