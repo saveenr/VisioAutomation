@@ -2,20 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using VA=VisioAutomation;
+using System.Collections;
+
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class QueryDataRowList<T>
+    public class QueryDataRowList<T> : IEnumerable<QueryDataRow<T>>
     {
         private int count ;
+        private QueryDataSet<T> qds; 
 
-        public QueryDataRowList(int count)
+        public QueryDataRowList(int count, QueryDataSet<T> qds)
         {
             this.count = count;
+            this.qds = qds;
         }
     
         public int Count
         {
             get { return this.count; }
+        }
+
+
+        public IEnumerator<QueryDataRow<T>> GetEnumerator()
+        {
+            for (int i = 0; i < this.count; i++)
+            {
+                yield return qds.GetRow(i);
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
         }
     }
 
@@ -73,7 +91,7 @@ namespace VisioAutomation.ShapeSheet.Data
                 }
             }
 
-            this.Rows = new QueryDataRowList<T>(rowcount);
+            this.Rows = new QueryDataRowList<T>(rowcount,this);
             this.ColumnCount = columncount;
 
             this.Groups = new TableRowGroupList();
