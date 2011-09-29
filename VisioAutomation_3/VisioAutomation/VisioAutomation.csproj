@@ -140,6 +140,7 @@
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupForSection.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
+    <Compile Include="Shapesheet\Data\TableRowGroupList.cs" />
     <Compile Include="Shapesheet\Data\QueryDataRow.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
