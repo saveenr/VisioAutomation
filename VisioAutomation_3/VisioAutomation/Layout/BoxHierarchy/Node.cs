@@ -88,16 +88,6 @@ namespace VisioAutomation.Layout.BoxHierarchy
             return node;
         }
 
-        public Node<T> AddNode()
-        {
-            var node = new Node<T>();
-            node.parent = this;
-
-            this.AddNode(node);
-
-            return node;
-        }
-
         public Node<T> AddNode(Node<T> node)
         {
             if (node == null)

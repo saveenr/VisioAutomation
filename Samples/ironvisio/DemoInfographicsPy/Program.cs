@@ -54,7 +54,18 @@ namespace DemoInfographicsPy
             var chart6 = new IG.MonthGrid(2011,09);
             chart6.Render(session.Page);
             session.ResizePageToFit(0.5, 0.5);
-            
+
+            session.NewPage();
+            var chart7 = new IG.StripeGrid();
+            chart7.Add("Feature1", "Theme1", "Scenario1");
+            chart7.Add("Feature1", "Theme2", "Scenario1");
+            chart7.Add("Feature1", "Theme3", "Scenario1");
+            chart7.Add("Feature1", "Theme1", "Scenario2");
+            chart7.Add("Feature1", "Theme2", "Scenario2");
+            chart7.Add("Feature1", "Theme3", "Scenario2");
+            chart7.Render(session.Page);
+            session.ResizePageToFit(0.5, 0.5);
+ 
         }
 
         
