@@ -161,16 +161,5 @@ namespace VisioAutomation.ShapeSheet.Data
                 yield return this.GetRow(row);
             }
         }
-
-        internal IEnumerable<QueryDataRow<T>> EnumRowsInGroup(int index)
-        {
-            var group = this.Groups[index];
-
-            foreach (int i in group.RowIndices)
-            {
-                var qdr = new VA.ShapeSheet.Data.QueryDataRow<T>(this, i);
-                yield return qdr;
-            }
-        }
     }
 }

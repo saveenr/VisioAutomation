@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             for (int group_index = 0; group_index < qds.Groups.Count; group_index++)
             {
                 var group = qds.Groups[group_index];
-                var rows = qds.EnumRowsInGroup(group_index);
+                var rows = group.RowIndices.Select(ri => qds.GetRow(ri));
                 var objs = rows.Select(r => row_to_obj_func(query, r));
                 var obj_list = new List<TObj>(group.Count);
                 obj_list.AddRange(objs);
