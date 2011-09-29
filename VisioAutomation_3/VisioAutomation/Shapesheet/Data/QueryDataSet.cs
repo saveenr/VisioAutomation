@@ -4,11 +4,26 @@ using System.Linq;
 using VA=VisioAutomation;
 namespace VisioAutomation.ShapeSheet.Data
 {
+    public class QueryDataRowList<T>
+    {
+        private int count ;
+
+        public QueryDataRowList(int count)
+        {
+            this.count = count;
+        }
+    
+        public int Count
+        {
+            get { return this.count; }
+        }
+    }
+
     public class QueryDataSet<T>
     {
-        internal readonly int RowCount;
         internal readonly int ColumnCount;
 
+        public QueryDataRowList<T> Rows { get; private set; }
         public TableRowGroupList Groups { get; private set; }
         public Table<string> Formulas { get; private set; }
         public Table<T> Results { get; private set; }
@@ -58,7 +73,7 @@ namespace VisioAutomation.ShapeSheet.Data
                 }
             }
 
-            this.RowCount = rowcount;
+            this.Rows = new QueryDataRowList<T>(rowcount);
             this.ColumnCount = columncount;
 
             this.Groups = new TableRowGroupList();
@@ -73,7 +88,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
         private TableRowGroup[] GetGrouping(IList<int> shape_ids, IList<int> group_counts)
         {
-            var table_total_rows = this.RowCount;
+            var table_total_rows = this.Rows.Count;
 
             if (group_counts == null)
             {
@@ -127,8 +142,8 @@ namespace VisioAutomation.ShapeSheet.Data
 
         private Table<X> BuildTableFromArray<X>(X[] array)
         {
-            var values = new X[this.RowCount,this.ColumnCount];
-            for (int r = 0; r < this.RowCount; r++)
+            var values = new X[this.Rows.Count, this.ColumnCount];
+            for (int r = 0; r < this.Rows.Count; r++)
             {
                 for (int c = 0; c < this.ColumnCount; c++)
                 {
@@ -137,7 +152,7 @@ namespace VisioAutomation.ShapeSheet.Data
                 }
             }
 
-            var table = new Table<X>(this.RowCount, this.ColumnCount, this.Groups, values);
+            var table = new Table<X>(this.Rows.Count, this.ColumnCount, this.Groups, values);
             return table;
         }
 

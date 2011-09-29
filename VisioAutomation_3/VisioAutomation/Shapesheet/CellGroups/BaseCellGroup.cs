@@ -56,7 +56,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected static IEnumerable<VA.ShapeSheet.Data.QueryDataRow<T>> EnumRows<T>(VA.ShapeSheet.Data.QueryDataSet<T> qds)
         {
-            for (int row = 0; row < qds.RowCount; row++)
+            for (int row = 0; row < qds.Rows.Count; row++)
             {
                 yield return qds.GetRow(row);
             }

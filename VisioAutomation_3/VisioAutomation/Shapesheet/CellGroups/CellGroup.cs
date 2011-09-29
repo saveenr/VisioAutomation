@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
             var rows = EnumRows(qds);
             var objs = rows.Select(r => row_to_cells_func(query, r));
-            var obj_list = new List<TObj>(qds.RowCount);
+            var obj_list = new List<TObj>(qds.Rows.Count);
             obj_list.AddRange(objs);
             return obj_list;
         }
