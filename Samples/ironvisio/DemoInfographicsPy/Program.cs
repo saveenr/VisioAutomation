@@ -57,12 +57,15 @@ namespace DemoInfographicsPy
 
             session.NewPage();
             var chart7 = new IG.StripeGrid();
-            chart7.Add("Feature1", "Theme1", "Scenario1");
-            chart7.Add("Feature1", "Theme2", "Scenario1");
-            chart7.Add("Feature1", "Theme3", "Scenario1");
-            chart7.Add("Feature1", "Theme1", "Scenario2");
-            chart7.Add("Feature1", "Theme2", "Scenario2");
-            chart7.Add("Feature1", "Theme3", "Scenario2");
+            chart7.Add("Multi-Format Export", "Productivity", "Batch");
+            chart7.Add("Save/Reload Batch Settings", "Productivity", "Batch");
+            chart7.Add("Improved Gradient Designer", "Compelling Graphics", "Colors");
+            chart7.Add("2-Color Glow", "Compelling Graphics", "Effects");
+            chart7.Add("Add Noise", "Compelling Graphics", "Effects");
+            chart7.Add("Bleach", "Compelling Graphics", "Effects");
+            chart7.Add("FeatureC", "Theme3", "Scenario1");
+            chart7.Add("FeatureE", "Theme2", "Scenario2");
+            chart7.Add("FeatureF", "Theme3", "Scenario2");
             chart7.Render(session.Page);
             session.ResizePageToFit(0.5, 0.5);
  
