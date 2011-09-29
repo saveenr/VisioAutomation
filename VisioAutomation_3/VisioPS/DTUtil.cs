@@ -23,7 +23,7 @@ namespace VisioPS
             
             // Fill in the rows
             datatable.BeginLoadData();
-            foreach (var group in table.Groups)
+            foreach (var group in table.Groups.items)
             {
                 foreach (int i in group.RowIndices)
                 {

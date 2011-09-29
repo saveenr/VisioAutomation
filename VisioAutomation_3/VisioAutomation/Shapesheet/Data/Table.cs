@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Data
         private readonly TableRowList<T> _rows;
         private readonly TableColumnList<T> _cols;
 
-        public ReadOnlyCollection<TableRowGroup> Groups { get; private set; }
+        public TableRowGroupList Groups { get; private set; }
 
         internal Table(int rows, int cols, ReadOnlyCollection<TableRowGroup> groups) :
             this( rows, cols, groups, new T[rows,cols])
@@ -27,7 +27,11 @@ namespace VisioAutomation.ShapeSheet.Data
         internal Table(int rows, int cols, ReadOnlyCollection<TableRowGroup> groups, T[,] vals)
         {
             this._values = vals;
-            this.Groups = groups;
+            this.Groups = new TableRowGroupList();
+            foreach (var g in groups)
+            {
+                this.Groups.Add(g);
+            }
             this._rows = new TableRowList<T>(this,rows);
             this._cols = new TableColumnList<T>(this, cols);
         }

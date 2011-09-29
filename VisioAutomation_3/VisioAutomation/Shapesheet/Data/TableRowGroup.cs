@@ -2,6 +2,31 @@
 
 namespace VisioAutomation.ShapeSheet.Data
 {
+    public class TableRowGroupList
+    {
+        public List<TableRowGroup> items;
+
+        public TableRowGroupList()
+        {
+            this.items = new List<TableRowGroup>();
+        }
+
+        public void Add(TableRowGroup g)
+        {
+            this.items.Add(g);
+        }
+
+        public TableRowGroup this[int index]
+        {
+            get { return this.items[index]; }
+        }
+
+        public int Count
+        {
+            get { return this.items.Count; }
+        }
+    }
+
     public struct TableRowGroup
     {
         private readonly int _shapeid;
