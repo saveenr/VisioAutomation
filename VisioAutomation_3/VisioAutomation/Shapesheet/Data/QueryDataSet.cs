@@ -6,42 +6,11 @@ using System.Collections;
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class QueryDataRowList<T> : IEnumerable<QueryDataRow<T>>
-    {
-        private int count ;
-        private QueryDataSet<T> qds; 
-
-        public QueryDataRowList(int count, QueryDataSet<T> qds)
-        {
-            this.count = count;
-            this.qds = qds;
-        }
-    
-        public int Count
-        {
-            get { return this.count; }
-        }
-
-
-        public IEnumerator<QueryDataRow<T>> GetEnumerator()
-        {
-            for (int i = 0; i < this.count; i++)
-            {
-                yield return qds.GetRow(i);
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
-            return GetEnumerator();
-        }
-    }
-
-    public class QueryDataSet<T>
+    public class QueryDataSet<T> : IEnumerable<QueryDataRow<T>>
     {
         internal readonly int ColumnCount;
+        internal readonly int RowCount;
 
-        public QueryDataRowList<T> Rows { get; private set; }
         public TableRowGroupList Groups { get; private set; }
         public Table<string> Formulas { get; private set; }
         public Table<T> Results { get; private set; }
@@ -91,7 +60,7 @@ namespace VisioAutomation.ShapeSheet.Data
                 }
             }
 
-            this.Rows = new QueryDataRowList<T>(rowcount,this);
+            this.RowCount = rowcount;
             this.ColumnCount = columncount;
 
             this.Groups = new TableRowGroupList();
@@ -106,7 +75,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
         private TableRowGroup[] GetGrouping(IList<int> shape_ids, IList<int> group_counts)
         {
-            var table_total_rows = this.Rows.Count;
+            var table_total_rows = this.Count;
 
             if (group_counts == null)
             {
@@ -160,8 +129,8 @@ namespace VisioAutomation.ShapeSheet.Data
 
         private Table<X> BuildTableFromArray<X>(X[] array)
         {
-            var values = new X[this.Rows.Count, this.ColumnCount];
-            for (int r = 0; r < this.Rows.Count; r++)
+            var values = new X[this.Count, this.ColumnCount];
+            for (int r = 0; r < this.Count; r++)
             {
                 for (int c = 0; c < this.ColumnCount; c++)
                 {
@@ -170,13 +139,13 @@ namespace VisioAutomation.ShapeSheet.Data
                 }
             }
 
-            var table = new Table<X>(this.Rows.Count, this.ColumnCount, this.Groups, values);
+            var table = new Table<X>(this.Count, this.ColumnCount, this.Groups, values);
             return table;
         }
 
-        public QueryDataRow<T> GetRow(int row)
+        public QueryDataRow<T> this[int index]
         {
-            return new QueryDataRow<T>(this, row);
+            get { return new QueryDataRow<T>(this, index); }
         }
 
         public VA.ShapeSheet.CellData<T> GetItem(int row, VA.ShapeSheet.Query.QueryColumn col)
@@ -185,6 +154,24 @@ namespace VisioAutomation.ShapeSheet.Data
             T result = this.Results[row, col];
             var cd = new VA.ShapeSheet.CellData<T>(formula, result);
             return cd;
+        }
+
+        public IEnumerator<QueryDataRow<T>> GetEnumerator()
+        {
+            for (int i = 0; i < this.RowCount; i++)
+            {
+                yield return this[i];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
+        }
+
+        public int Count
+        {
+            get { return this.RowCount; }
         }
     }
 }

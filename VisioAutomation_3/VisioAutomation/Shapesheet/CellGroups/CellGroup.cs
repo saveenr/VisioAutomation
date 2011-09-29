@@ -25,8 +25,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected static IList<TObj> _GetObjectsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var objs = qds.Rows.Select(r => row_to_cells_func(query, r));
-            var obj_list = new List<TObj>(qds.Rows.Count);
+            var objs = qds.Select(r => row_to_cells_func(query, r));
+            var obj_list = new List<TObj>(qds.Count);
             obj_list.AddRange(objs);
             return obj_list;
         }
@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected static TObj _GetObjectFromSingleRow<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
             var qds = query.GetFormulasAndResults<double>(shape);
-            var qdr = qds.GetRow(0);
+            var qdr = qds[0];
             return row_to_obj_func(query, qdr);
         }
     }
