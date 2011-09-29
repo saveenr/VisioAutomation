@@ -8,11 +8,10 @@ namespace VisioAutomation.ShapeSheet.Data
     {
         internal readonly int RowCount;
         internal readonly int ColumnCount;
-        
-        public readonly TableRowGroupList Groups;
 
-        public readonly Table<string> Formulas;
-        public readonly Table<T> Results;
+        public TableRowGroupList Groups { get; private set; }
+        public Table<string> Formulas { get; private set; }
+        public Table<T> Results { get; private set; }
 
         internal QueryDataSet(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
                             int rowcount, IList<int> groupcounts)
