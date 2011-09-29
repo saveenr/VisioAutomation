@@ -205,7 +205,6 @@
     <Compile Include="Shapesheet\Query\QueryColumn.cs" />
     <Compile Include="Shapesheet\Update\ResultData.cs" />
     <Compile Include="Shapesheet\Data\TableRow.cs" />
-    <Compile Include="Shapesheet\Data\TableRowList.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
     <Compile Include="DOM\Shape.cs" />
     <Compile Include="DOM\Document.cs" />
