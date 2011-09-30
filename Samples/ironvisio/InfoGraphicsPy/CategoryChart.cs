@@ -12,14 +12,14 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace InfoGraphicsPy
 {
-    public class StripGridItem
+    public class CategoryCell
     {
         public string Text;
         public string XCategory;
         public string YCategory;
         public IList<string> SubTexts;
  
-        public StripGridItem(string text, string x, string y)
+        public CategoryCell(string text, string x, string y)
         {
             this.Text = text;
             this.XCategory = x;
@@ -28,9 +28,9 @@ namespace InfoGraphicsPy
         }
     }
 
-    public class RenderItem
+    class RenderItem
     {
-        public StripGridItem StripGridItem;
+        public CategoryCell StripGridItem;
         public string Text ;
         public VA.DOM.ShapeCells ShapeCells;
         public bool Underline;
@@ -38,7 +38,7 @@ namespace InfoGraphicsPy
 
     public class CategoryChart
     {
-        public List<StripGridItem> Items;
+        public List<CategoryCell> Items;
 
         public string Font="Segoe UI";
         public bool ToUpper;
@@ -65,7 +65,7 @@ namespace InfoGraphicsPy
 
         public CategoryChart()
         {
-            this.Items = new List<StripGridItem>();
+            this.Items = new List<CategoryCell>();
 
             titleformat.VerticalAlign = 0;
             titleformat.HAlign = 0;
@@ -103,16 +103,16 @@ namespace InfoGraphicsPy
 
         }
 
-        public StripGridItem Add(string text, string xcat, string ycat)
+        public CategoryCell Add(string text, string xcat, string ycat)
         {
-            var item = new StripGridItem(text,xcat,ycat);
+            var item = new CategoryCell(text,xcat,ycat);
             this.Items.Add(item);
             return item;
         }
 
-        public StripGridItem Add(string text, string xcat, string ycat, IList<string> subitems)
+        public CategoryCell Add(string text, string xcat, string ycat, IList<string> subitems)
         {
-            var item = new StripGridItem(text, xcat, ycat);
+            var item = new CategoryCell(text, xcat, ycat);
             item.SubTexts = subitems;
             this.Items.Add(item);
             return item;
