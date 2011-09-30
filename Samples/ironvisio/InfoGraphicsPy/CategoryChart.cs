@@ -271,8 +271,8 @@ namespace InfoGraphicsPy
 
         public static CategoryChart FromCSV(string title, string text)
         {
-            var chart7 = new CategoryChart();
-            chart7.Title = title;
+            var chart = new CategoryChart();
+            chart.Title = title;
             foreach (var line in text.Split(new char[] { '\n' }))
             {
                 var sline = line.Trim();
@@ -296,15 +296,15 @@ namespace InfoGraphicsPy
                                         : null;
                 if (subitems == null)
                 {
-                    chart7.Add(item, xcat, ycat);
+                    chart.Add(item, xcat, ycat);
                 }
                 else
                 {
-                    chart7.Add(item, xcat, ycat, subitems);
+                    chart.Add(item, xcat, ycat, subitems);
                 }
             }
 
-            return chart7;
+            return chart;
         }
 
     }
