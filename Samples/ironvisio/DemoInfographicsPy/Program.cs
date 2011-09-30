@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using InfoGraphicsPy;
 using IG = InfoGraphicsPy;
 using VA=VisioAutomation;
 
@@ -57,29 +57,67 @@ namespace DemoInfographicsPy
             session.ResizePageToFit(0.5, 0.5);
             */
             session.NewPage();
-            var chart7 = new IG.StripeGrid();
-            chart7.Title = "PHDDraw Feature Map";
+
+            var text = @"
+Productivity, Batch,Multi-Format Export,
+Productivity, Batch,Save/Reload Batch Settings,
+Compelling Graphics, Colors,Improved Gradient Designer,
+Compelling Graphics, Effects,2-Color Glow,
+Compelling Graphics, Effects,Add Noise,
+Compelling Graphics, Effects,Bleach,
+Compelling Graphics, Effects,Burn,
+Compelling Graphics, Effects,Tint,
+Compelling Graphics, Effects,Blur, Motion|Gaussian
+Compelling Graphics, Effects,Emboss,
+Basics, Setup,Faster Install,
+Basics, Setup,Updated Splash Screen,
+Basics, Supportability,Logging During Batch,
+
+";
+            var chart7 = CreateStripeChart("PHDDraw Feature Map",text);
             chart7.ToUpper = true;
-            chart7.Add("Multi-Format Export", "Productivity", "Batch");
-            chart7.Add("Save/Reload Batch Settings", "Productivity", "Batch");
-            chart7.Add("Improved Gradient Designer", "Compelling Graphics", "Colors");
- 
-            chart7.Add("2-Color Glow", "Compelling Graphics", "Effects");
-            chart7.Add("Add Noise", "Compelling Graphics", "Effects");
-            chart7.Add("Bleach", "Compelling Graphics", "Effects");
-            chart7.Add("Burn", "Compelling Graphics", "Effects");
-            chart7.Add("Tint", "Compelling Graphics", "Effects");
-            chart7.Add("Blur", "Compelling Graphics", "Effects", new[] { "Motion", "Gaussian" });
-            chart7.Add("Emboss", "Compelling Graphics", "Effects");
-            
-            chart7.Add("Faster Install", "Basics", "Setup");
-            chart7.Add("Updated Splash Screen", "Basics", "Setup");
-            chart7.Add("Logging During Batch", "Basics", "Supportability");
+
             chart7.Render(session.Page);
             session.ResizePageToFit(0.5, 0.5);
  
         }
 
-        
+        public static IG.StripeGrid CreateStripeChart(string title, string text)
+        {
+            var chart7 = new IG.StripeGrid();
+            chart7.Title = title;
+            foreach (var line in text.Split(new char[] { '\n' }))
+            {
+                var sline = line.Trim();
+                if (sline.Length < 1)
+                {
+                    continue;
+                }
+
+                var tokens = line.Split(new char[] {','});
+                if (tokens.Length < 3)
+                {
+                    throw new System.Exception("Not enough tokens in line");
+                }
+
+                string xcat = tokens[0];
+                string ycat = tokens[1];
+                string item = tokens[2];
+                string[] subitems = tokens.Length >= 4
+                                        ? tokens[3].Split(new char[] {'|'}).Select(s => s.Trim()).Where(s => s.Length > 0).
+                                              ToArray()
+                                        : null;
+                if (subitems == null)
+                {
+                    chart7.Add(item, xcat, ycat);
+                }
+                else
+                {
+                    chart7.Add(item, xcat, ycat, subitems);
+                }
+            }
+
+            return chart7;
+        }
     }
 }
