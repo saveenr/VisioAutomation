@@ -69,7 +69,7 @@ namespace DemoInfographicsPy
             chart7.Add("Bleach", "Compelling Graphics", "Effects");
             chart7.Add("Burn", "Compelling Graphics", "Effects");
             chart7.Add("Tint", "Compelling Graphics", "Effects");
-            chart7.Add("Twirl", "Compelling Graphics", "Effects");
+            chart7.Add("Blur", "Compelling Graphics", "Effects", new[] { "Motion", "Gaussian" });
             chart7.Add("Emboss", "Compelling Graphics", "Effects");
             
             chart7.Add("Faster Install", "Basics", "Setup");

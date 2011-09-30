@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Office.Interop.Visio;
+using VisioAutomation.DOM;
 using VisioAutomation.Drawing;
+using VisioAutomation.Layout.BoxHierarchy;
 using BoxHierarchy=VisioAutomation.Layout.BoxHierarchy;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -14,12 +17,14 @@ namespace InfoGraphicsPy
         public string Text;
         public string XCategory;
         public string YCategory;
-
+        public IList<string> SubTexts;
+ 
         public StripGridItem(string text, string x, string y)
         {
             this.Text = text;
             this.XCategory = x;
             this.YCategory = y;
+            this.SubTexts = null;
         }
     }
 
@@ -34,6 +39,8 @@ namespace InfoGraphicsPy
     public class StripeGrid
     {
         public List<StripGridItem> Items;
+
+        public string Font="Segoe UI";
         public bool ToUpper;
         public string Title = "Untitled";
         double titlefontsize = 24;
@@ -47,30 +54,25 @@ namespace InfoGraphicsPy
         double YCatTitleHeight = 0.5;
         double colsep = 0.25;
 
-        private string cellfill = "rgb(240,240,240)";
-        
+        public string cellfill = "rgb(240,240,240)";
+        public string subcellfill = "rgb(220,220,220)";
+
+        ShapeCells titleformat = new VA.DOM.ShapeCells();
+        ShapeCells cellformat = new VA.DOM.ShapeCells();
+        ShapeCells subcellformat = new VA.DOM.ShapeCells();
+        ShapeCells xcatformat = new VA.DOM.ShapeCells();
+        ShapeCells ycatformat = new VA.DOM.ShapeCells();
+
         public StripeGrid()
         {
             this.Items = new List<StripGridItem>();
-        }
 
-        public StripGridItem Add(string text, string x, string y)
-        {
-            var item = new StripGridItem(text,x,y);
-            this.Items.Add(item);
-            return item;
-        }
-
-        public void Render(IVisio.Page page)
-        {
-            var titleformat = new VA.DOM.ShapeCells();
             titleformat.VerticalAlign = 0;
             titleformat.HAlign = 0;
             titleformat.CharSize = VA.Convert.PointsToInches(titlefontsize);
             titleformat.LinePattern = 0;
             titleformat.LineWeight = 0;
 
-            var cellformat = new VA.DOM.ShapeCells();
             cellformat.VerticalAlign = 0;
             cellformat.HAlign = 0;
             cellformat.CharSize = VA.Convert.PointsToInches(cellfontsize);
@@ -78,7 +80,13 @@ namespace InfoGraphicsPy
             cellformat.LineWeight = 0;
             cellformat.FillForegnd = cellfill;
 
-            var xcatformat = new VA.DOM.ShapeCells();
+            subcellformat.VerticalAlign = 0;
+            subcellformat.HAlign = 0;
+            subcellformat.CharSize = VA.Convert.PointsToInches(cellfontsize);
+            subcellformat.LinePattern = 0;
+            subcellformat.LineWeight = 0;
+            subcellformat.FillForegnd = subcellfill;
+
             xcatformat.VerticalAlign = 0;
             xcatformat.HAlign = 0;
             xcatformat.CharSize = VA.Convert.PointsToInches(catfontsize);
@@ -86,7 +94,6 @@ namespace InfoGraphicsPy
             xcatformat.LineWeight = 0;
             xcatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
-            var ycatformat = new VA.DOM.ShapeCells();
             ycatformat.VerticalAlign = 2;
             ycatformat.HAlign = 0;
             ycatformat.CharSize = VA.Convert.PointsToInches(catfontsize);
@@ -94,6 +101,24 @@ namespace InfoGraphicsPy
             ycatformat.LineWeight = 0;
             ycatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
+        }
+
+        public StripGridItem Add(string text, string xcat, string ycat)
+        {
+            var item = new StripGridItem(text,xcat,ycat);
+            this.Items.Add(item);
+            return item;
+        }
+
+        public StripGridItem Add(string text, string xcat, string ycat, IList<string> subitems)
+        {
+            var item = new StripGridItem(text, xcat, ycat);
+            item.SubTexts = subitems;
+            this.Items.Add(item);
+            return item;
+        }
+        public void Render(IVisio.Page page)
+        {
             var xcats = this.Items.Select(i => i.XCategory).Distinct().ToList();
             var ycats = this.Items.Select(i => i.YCategory).Distinct().ToList();
 
@@ -134,6 +159,24 @@ namespace InfoGraphicsPy
                         cell_data.Text = cell_item.Text;
                         cell_data.ShapeCells = cellformat;
                         n_cell.Data = cell_data;
+
+                        if (cell_item.SubTexts != null)
+                        {
+                            foreach (var subtexts in cell_item.SubTexts.Reverse())
+                            {
+                                var subn_cell = n_cell.AddNode(cell_width, cell_height);
+                                var subcell_data = new RenderItem();
+                                subcell_data.StripGridItem = null;
+                                subcell_data.Text = subtexts;
+                                subcell_data.ShapeCells = subcellformat;
+                                subn_cell.Data = subcell_data;
+
+                            }
+                            n_cell.AddNode(null, 0.25);
+                        }
+
+
+
                     }
                 }
 
@@ -171,8 +214,17 @@ namespace InfoGraphicsPy
             title_data.Text = this.Title;
             title_data.ShapeCells = titleformat;
             n_title.Data = title_data;
-            layout.PerformLayout();
 
+            Render(page, layout);
+        }
+
+        private void Render(Page page, BoxHierarchyLayout<RenderItem> layout)
+        {
+            layout.PerformLayout();
+            var doc = page.Document;
+            var fonts = doc.Fonts;
+            var default_font = fonts[this.Font];
+            int default_font_id = default_font.ID;
             // Perform Rendering
             var dom = new VA.DOM.Document();
             foreach (var n in layout.Nodes)
@@ -180,9 +232,9 @@ namespace InfoGraphicsPy
                 if (n.Data != null)
                 {
                     var s = dom.DrawRectangle(n.Rectangle);
-                    
+
                     // Set Text
-                    if (n.Data.Text !=null)
+                    if (n.Data.Text != null)
                     {
                         s.Text = this.ToUpper ? n.Data.Text.ToUpper() : n.Data.Text;
                     }
@@ -198,10 +250,11 @@ namespace InfoGraphicsPy
                     {
                         var u = dom.DrawLine(n.Rectangle.LowerLeft, n.Rectangle.LowerRight);
                     }
+
+                    n.Data.ShapeCells.CharFont = default_font_id;
                 }
             }
             dom.Render(page);
-
         }
     }
 }
