@@ -12,16 +12,25 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace InfoGraphicsPy
 {
-    public class CategoryCell
+
+    public class CategoryItem
     {
         public string Text;
+        public CategoryItem(string s)
+        {
+            this.Text = s;
+        }
+    }
+    public class CategoryCell
+    {
+        public CategoryItem Item;
         public string XCategory;
         public string YCategory;
         public IList<string> SubTexts;
  
         public CategoryCell(string text, string x, string y)
         {
-            this.Text = text;
+            this.Item = new CategoryItem(text);
             this.XCategory = x;
             this.YCategory = y;
             this.SubTexts = null;
@@ -156,7 +165,7 @@ namespace InfoGraphicsPy
                         var n_cell = n_row_col.AddNode(CellWidth, CellHeight);
                         var cell_data = new RenderItem();
                         cell_data.StripGridItem = cell_item;
-                        cell_data.Text = cell_item.Text;
+                        cell_data.Text = cell_item.Item.Text;
                         cell_data.ShapeCells = cellformat;
                         n_cell.Data = cell_data;
 
