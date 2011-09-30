@@ -127,7 +127,7 @@ namespace VisioAutomation.Layout.BoxHierarchy
             foreach (var cur_el in node.Children)
             {
                 // Calculate where the child will be placed, taking into account the direction and alignment
-                var child_rect = current_point;
+                var child_origin = current_point;
 
                 if (node.Direction == LayoutDirection.Vertical)
                 {
@@ -137,7 +137,7 @@ namespace VisioAutomation.Layout.BoxHierarchy
                     double deltax = (halign == VA.Drawing.AlignmentHorizontal.Left) ? 0.0 : deltawidth;
                     double factorx = (halign == VA.Drawing.AlignmentHorizontal.Center) ? 0.5 : 1.0;
 
-                    child_rect = current_point.Add(signx*factorx*deltax, 0);
+                    child_origin = current_point.Add(signx*factorx*deltax, 0);
                 }
                 else
                 {
@@ -146,13 +146,13 @@ namespace VisioAutomation.Layout.BoxHierarchy
                     double deltaheight = node.Height.Value - (2*pady) - cur_el.Height.Value;
                     double deltay = (valign == VA.Drawing.AlignmentVertical.Bottom) ? 0.0 : deltaheight;
                     double factory = (valign == VA.Drawing.AlignmentVertical.Center) ? 0.5 : 1.0;
-                    child_rect = current_point.Add(0, signy*factory*deltay);
+                    child_origin = current_point.Add(0, signy*factory*deltay);
                 }
 
-                child_rect = child_rect.Add(signx*padx, signy*pady);
+                child_origin = child_origin.Add(signx*padx, signy*pady);
 
                 // render the child
-                _PlaceNode(cur_el, child_rect);
+                _PlaceNode(cur_el, child_origin);
 
                 // move to the next place to start placing a child
                 if (node.Direction == LayoutDirection.Vertical)
