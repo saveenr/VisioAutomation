@@ -95,8 +95,8 @@ namespace InfoGraphicsPy
             subcellformat.LineWeight = 0;
             subcellformat.FillForegnd = SubCellFill;
 
-            xcatformat.VerticalAlign = 0;
-            xcatformat.HAlign = 0;
+            xcatformat.VerticalAlign = 2;
+            xcatformat.HAlign = 1;
             xcatformat.CharSize = VA.Convert.PointsToInches(CategoryFontSize);
             xcatformat.LinePattern = 0;
             xcatformat.LineWeight = 0;
@@ -175,8 +175,7 @@ namespace InfoGraphicsPy
                 n_ycat_title.Data = ycat_data;
             }
 
-            var n_xcatlabels = root.AddNode(null, 1.0);
-            n_xcatlabels.Direction = BoxHierarchy.LayoutDirection.Horizonal;
+            var n_xcatlabels = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
             n_xcatlabels.ChildSeparation = CellHorizontalSeparation;
 
             // Add indent
@@ -243,7 +242,7 @@ namespace InfoGraphicsPy
             {
                 if (n.Data != null)
                 {
-                    var s = dom.DrawRectangle(n.Rectangle);
+                    var s = dom.DrawRectangle(n.ReservedRectangle);
 
                     // Set Text
                     if (n.Data.Text != null)

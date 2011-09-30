@@ -129,6 +129,12 @@ namespace VisioAutomation.Layout.BoxHierarchy
                 // Calculate where the child will be placed, taking into account the direction and alignment
                 var child_origin = current_point;
 
+                var reserved_width = node.Direction == LayoutDirection.Vertical ? node.Width.Value - 2*node.Padding: cur_el.Width.Value;
+                var reserved_height = node.Direction == LayoutDirection.Horizonal? node.Height.Value - 2*node.Padding: cur_el.Height.Value;
+                var reserved_size = new VA.Drawing.Size(reserved_width, reserved_height);
+                
+                cur_el.ReservedRectangle = new VA.Drawing.Rectangle(child_origin,reserved_size);
+
                 if (node.Direction == LayoutDirection.Vertical)
                 {
                     var halign = cur_el.AlignmentHorizontal;
