@@ -36,26 +36,26 @@ namespace InfoGraphicsPy
         public bool Underline;
     }
 
-    public class StripeGrid
+    public class CategoryChart
     {
         public List<StripGridItem> Items;
 
         public string Font="Segoe UI";
         public bool ToUpper;
         public string Title = "Untitled";
-        double titlefontsize = 24;
-        double cellfontsize = 8;
-        double catfontsize = 14;
+        double TitleFontSize = 24;
+        double CellFontSize = 8;
+        double CategoryFontSize = 14;
 
-        double cell_width = 3.0;
-        double cell_vsep = 0.125;
-        double cell_height = 0.25;
-        double indent = 2.0;
-        double YCatTitleHeight = 0.5;
-        double colsep = 0.25;
+        double CellWidth = 3.0;
+        double CellVerticalSeparation = 0.125;
+        double CellHeight = 0.25;
+        double Indent = 2.0;
+        double CategoryHeight = 0.5;
+        double CellHorizontalSeparation = 0.25;
 
-        public string cellfill = "rgb(240,240,240)";
-        public string subcellfill = "rgb(220,220,220)";
+        public string CellFill = "rgb(240,240,240)";
+        public string SubCellFill = "rgb(220,220,220)";
 
         ShapeCells titleformat = new VA.DOM.ShapeCells();
         ShapeCells cellformat = new VA.DOM.ShapeCells();
@@ -63,40 +63,40 @@ namespace InfoGraphicsPy
         ShapeCells xcatformat = new VA.DOM.ShapeCells();
         ShapeCells ycatformat = new VA.DOM.ShapeCells();
 
-        public StripeGrid()
+        public CategoryChart()
         {
             this.Items = new List<StripGridItem>();
 
             titleformat.VerticalAlign = 0;
             titleformat.HAlign = 0;
-            titleformat.CharSize = VA.Convert.PointsToInches(titlefontsize);
+            titleformat.CharSize = VA.Convert.PointsToInches(TitleFontSize);
             titleformat.LinePattern = 0;
             titleformat.LineWeight = 0;
 
             cellformat.VerticalAlign = 0;
             cellformat.HAlign = 0;
-            cellformat.CharSize = VA.Convert.PointsToInches(cellfontsize);
+            cellformat.CharSize = VA.Convert.PointsToInches(CellFontSize);
             cellformat.LinePattern = 0;
             cellformat.LineWeight = 0;
-            cellformat.FillForegnd = cellfill;
+            cellformat.FillForegnd = CellFill;
 
             subcellformat.VerticalAlign = 0;
             subcellformat.HAlign = 0;
-            subcellformat.CharSize = VA.Convert.PointsToInches(cellfontsize);
+            subcellformat.CharSize = VA.Convert.PointsToInches(CellFontSize);
             subcellformat.LinePattern = 0;
             subcellformat.LineWeight = 0;
-            subcellformat.FillForegnd = subcellfill;
+            subcellformat.FillForegnd = SubCellFill;
 
             xcatformat.VerticalAlign = 0;
             xcatformat.HAlign = 0;
-            xcatformat.CharSize = VA.Convert.PointsToInches(catfontsize);
+            xcatformat.CharSize = VA.Convert.PointsToInches(CategoryFontSize);
             xcatformat.LinePattern = 0;
             xcatformat.LineWeight = 0;
             xcatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
             ycatformat.VerticalAlign = 2;
             ycatformat.HAlign = 0;
-            ycatformat.CharSize = VA.Convert.PointsToInches(catfontsize);
+            ycatformat.CharSize = VA.Convert.PointsToInches(CategoryFontSize);
             ycatformat.LinePattern = 0;
             ycatformat.LineWeight = 0;
             ycatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
@@ -124,7 +124,7 @@ namespace InfoGraphicsPy
 
             int cols = xcats.Count();
             int rows = ycats.Count();
-            double pwidth = cols * cell_width + (System.Math.Max(0, cols - 1) * 0.25) + indent + 0.25;
+            double pwidth = cols * CellWidth + (System.Math.Max(0, cols - 1) * 0.25) + Indent + 0.25;
 
             var layout = new BoxHierarchy.BoxHierarchyLayout<RenderItem>();
             layout.LayoutOptions.Origin = new VA.Drawing.Point(0,10);
@@ -137,23 +137,23 @@ namespace InfoGraphicsPy
             {
 
                 var n_ycat_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
-                n_ycat_row.ChildSeparation = colsep;
+                n_ycat_row.ChildSeparation = CellHorizontalSeparation;
 
                 // -- add indent
-                n_ycat_row.AddNode(indent, 0.25);
+                n_ycat_row.AddNode(Indent, 0.25);
 
                 foreach (int col in Enumerable.Range(0, cols))
                 {
-                    var n_row_col = n_ycat_row.AddNode(cell_width, 0.25);
+                    var n_row_col = n_ycat_row.AddNode(CellWidth, 0.25);
 
                     // ---
                     n_row_col.Direction = BoxHierarchy.LayoutDirection.Vertical;
                     n_row_col.AlignmentVertical = AlignmentVertical.Top;
-                    n_row_col.ChildSeparation = cell_vsep;
+                    n_row_col.ChildSeparation = CellVerticalSeparation;
                     var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
                     foreach (var cell_item in items_for_cells)
                     {
-                        var n_cell = n_row_col.AddNode(cell_width, cell_height);
+                        var n_cell = n_row_col.AddNode(CellWidth, CellHeight);
                         var cell_data = new RenderItem();
                         cell_data.StripGridItem = cell_item;
                         cell_data.Text = cell_item.Text;
@@ -164,7 +164,7 @@ namespace InfoGraphicsPy
                         {
                             foreach (var subtexts in cell_item.SubTexts.Reverse())
                             {
-                                var subn_cell = n_cell.AddNode(cell_width, cell_height);
+                                var subn_cell = n_cell.AddNode(CellWidth, CellHeight);
                                 var subcell_data = new RenderItem();
                                 subcell_data.StripGridItem = null;
                                 subcell_data.Text = subtexts;
@@ -180,7 +180,7 @@ namespace InfoGraphicsPy
                     }
                 }
 
-                var n_ycat_title = root.AddNode(pwidth, YCatTitleHeight);
+                var n_ycat_title = root.AddNode(pwidth, CategoryHeight);
                 var ycat_data = new RenderItem();
                 ycat_data.StripGridItem = null;
                 ycat_data.Text = ycats[row];
@@ -191,15 +191,15 @@ namespace InfoGraphicsPy
 
             var n_xcatlabels = root.AddNode(null, 1.0);
             n_xcatlabels.Direction = BoxHierarchy.LayoutDirection.Horizonal;
-            n_xcatlabels.ChildSeparation = colsep;
+            n_xcatlabels.ChildSeparation = CellHorizontalSeparation;
 
             // Add indent
-            n_xcatlabels.AddNode(indent, 0.25);
+            n_xcatlabels.AddNode(Indent, 0.25);
 
             // Add XCategory labels
             foreach (int col in Enumerable.Range(0, cols))
             {
-                var n = n_xcatlabels.AddNode(cell_width, 0.5);
+                var n = n_xcatlabels.AddNode(CellWidth, 0.5);
                 var xcat_data = new RenderItem();
                 xcat_data.StripGridItem = null;
                 xcat_data.Text = xcats[col];
@@ -256,5 +256,44 @@ namespace InfoGraphicsPy
             }
             dom.Render(page);
         }
+
+        public static CategoryChart FromCSV(string title, string text)
+        {
+            var chart7 = new CategoryChart();
+            chart7.Title = title;
+            foreach (var line in text.Split(new char[] { '\n' }))
+            {
+                var sline = line.Trim();
+                if (sline.Length < 1)
+                {
+                    continue;
+                }
+
+                var tokens = line.Split(new char[] { ',' });
+                if (tokens.Length < 3)
+                {
+                    throw new System.Exception("Not enough tokens in line");
+                }
+
+                string xcat = tokens[0];
+                string ycat = tokens[1];
+                string item = tokens[2];
+                string[] subitems = tokens.Length >= 4
+                                        ? tokens[3].Split(new char[] { '|' }).Select(s => s.Trim()).Where(s => s.Length > 0).
+                                              ToArray()
+                                        : null;
+                if (subitems == null)
+                {
+                    chart7.Add(item, xcat, ycat);
+                }
+                else
+                {
+                    chart7.Add(item, xcat, ycat, subitems);
+                }
+            }
+
+            return chart7;
+        }
+
     }
 }

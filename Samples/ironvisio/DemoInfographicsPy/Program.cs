@@ -25,7 +25,6 @@ namespace DemoInfographicsPy
             var CategoryLabels = new[] { "A", "B", "C", "D", "E" };
             var DataPoints = new IG.DataPoints(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 });
 
-            /*
             session.NewPage();
             var chart1 = new IG.PieSliceChart(DataPoints,CategoryLabels);
             chart1.Draw(session);
@@ -55,9 +54,8 @@ namespace DemoInfographicsPy
             var chart6 = new IG.MonthGrid(2011,09);
             chart6.Render(session.Page);
             session.ResizePageToFit(0.5, 0.5);
-            */
-            session.NewPage();
 
+            session.NewPage();
             var text = @"
 Productivity, Batch,Multi-Format Export,
 Productivity, Batch,Save/Reload Batch Settings,
@@ -74,7 +72,7 @@ Basics, Setup,Updated Splash Screen,
 Basics, Supportability,Logging During Batch,
 
 ";
-            var chart7 = CreateStripeChart("PHDDraw Feature Map",text);
+            var chart7 = IG.CategoryChart.FromCSV("PHDDraw Feature Map",text);
             chart7.ToUpper = true;
 
             chart7.Render(session.Page);
@@ -82,42 +80,5 @@ Basics, Supportability,Logging During Batch,
  
         }
 
-        public static IG.StripeGrid CreateStripeChart(string title, string text)
-        {
-            var chart7 = new IG.StripeGrid();
-            chart7.Title = title;
-            foreach (var line in text.Split(new char[] { '\n' }))
-            {
-                var sline = line.Trim();
-                if (sline.Length < 1)
-                {
-                    continue;
-                }
-
-                var tokens = line.Split(new char[] {','});
-                if (tokens.Length < 3)
-                {
-                    throw new System.Exception("Not enough tokens in line");
-                }
-
-                string xcat = tokens[0];
-                string ycat = tokens[1];
-                string item = tokens[2];
-                string[] subitems = tokens.Length >= 4
-                                        ? tokens[3].Split(new char[] {'|'}).Select(s => s.Trim()).Where(s => s.Length > 0).
-                                              ToArray()
-                                        : null;
-                if (subitems == null)
-                {
-                    chart7.Add(item, xcat, ycat);
-                }
-                else
-                {
-                    chart7.Add(item, xcat, ycat, subitems);
-                }
-            }
-
-            return chart7;
-        }
     }
 }
