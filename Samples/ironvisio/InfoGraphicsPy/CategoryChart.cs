@@ -162,30 +162,7 @@ namespace InfoGraphicsPy
                     var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
                     foreach (var cell_item in items_for_cells)
                     {
-                        var n_cell = n_row_col.AddNode(CellWidth, CellHeight);
-                        var cell_data = new RenderItem();
-                        cell_data.StripGridItem = cell_item;
-                        cell_data.Text = cell_item.Item.Text;
-                        cell_data.ShapeCells = cellformat;
-                        n_cell.Data = cell_data;
-
-                        if (cell_item.Item.Items != null)
-                        {
-                            foreach (var sub_cat_items in cell_item.Item.Items)
-                            {
-                                var subn_cell = n_cell.AddNode(CellWidth, CellHeight);
-                                var subcell_data = new RenderItem();
-                                subcell_data.StripGridItem = null;
-                                subcell_data.Text = sub_cat_items.Text;
-                                subcell_data.ShapeCells = subcellformat;
-                                subn_cell.Data = subcell_data;
-
-                            }
-                            n_cell.AddNode(null, 0.25);
-                        }
-
-
-
+                        draw_cell(cell_item, n_row_col);
                     }
                 }
 
@@ -225,6 +202,32 @@ namespace InfoGraphicsPy
             n_title.Data = title_data;
 
             Render(page, layout);
+        }
+
+        private void draw_cell(CategoryCell cell_item, Node<RenderItem> n_row_col)
+        {
+            var n_cell = n_row_col.AddNode(CellWidth, CellHeight);
+            n_cell.ChildSeparation = CellVerticalSeparation/2;
+            
+            var cell_data = new RenderItem();
+            cell_data.StripGridItem = cell_item;
+            cell_data.Text = cell_item.Item.Text;
+            cell_data.ShapeCells = cellformat;
+            n_cell.Data = cell_data;
+            
+            if (cell_item.Item.Items != null)
+            {
+                foreach (var sub_cat_items in cell_item.Item.Items)
+                {
+                    var subn_cell = n_cell.AddNode(CellWidth, CellHeight);
+                    var subcell_data = new RenderItem();
+                    subcell_data.StripGridItem = null;
+                    subcell_data.Text = sub_cat_items.Text;
+                    subcell_data.ShapeCells = subcellformat;
+                    subn_cell.Data = subcell_data;
+                }
+                n_cell.AddNode(null, 0.25);
+            }
         }
 
         private void Render(Page page, BoxHierarchyLayout<RenderItem> layout)
