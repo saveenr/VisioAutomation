@@ -60,12 +60,18 @@ namespace DemoInfographicsPy
             chart7.Add("Multi-Format Export", "Productivity", "Batch");
             chart7.Add("Save/Reload Batch Settings", "Productivity", "Batch");
             chart7.Add("Improved Gradient Designer", "Compelling Graphics", "Colors");
+ 
             chart7.Add("2-Color Glow", "Compelling Graphics", "Effects");
             chart7.Add("Add Noise", "Compelling Graphics", "Effects");
             chart7.Add("Bleach", "Compelling Graphics", "Effects");
-            chart7.Add("FeatureC", "Theme3", "Scenario1");
-            chart7.Add("FeatureE", "Theme2", "Scenario2");
-            chart7.Add("FeatureF", "Theme3", "Scenario2");
+            chart7.Add("Burn", "Compelling Graphics", "Effects");
+            chart7.Add("Tint", "Compelling Graphics", "Effects");
+            chart7.Add("Twirl", "Compelling Graphics", "Effects");
+            chart7.Add("Emboss", "Compelling Graphics", "Effects");
+            
+            chart7.Add("Faster Install", "Basics", "Setup");
+            chart7.Add("Updated Splash Screen", "Basics", "Setup");
+            chart7.Add("Logging During Batch", "Basics", "Supportability");
             chart7.Render(session.Page);
             session.ResizePageToFit(0.5, 0.5);
  
