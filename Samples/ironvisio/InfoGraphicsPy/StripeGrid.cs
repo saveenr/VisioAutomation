@@ -28,11 +28,14 @@ namespace InfoGraphicsPy
         public StripGridItem StripGridItem;
         public string Text ;
         public VA.DOM.ShapeCells ShapeCells;
+        public bool Underline;
     }
 
     public class StripeGrid
     {
         public List<StripGridItem> Items;
+        public bool ToUpper;
+        public string Title = "Untitled";
 
         public StripeGrid()
         {
@@ -69,14 +72,16 @@ namespace InfoGraphicsPy
             xcatformat.CharSize = VA.Convert.PointsToInches(14);
             xcatformat.LinePattern = 0;
             xcatformat.LineWeight = 0;
+            xcatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
             var ycatformat = new VA.DOM.ShapeCells();
-            ycatformat.VerticalAlign = 0;
+            ycatformat.VerticalAlign = 2;
             ycatformat.HAlign = 0;
             ycatformat.CharSize = VA.Convert.PointsToInches(14);
             ycatformat.LinePattern = 0;
             ycatformat.LineWeight = 0;
-            ycatformat.FillForegnd = "rgb(220,230,255)";
+            //ycatformat.FillForegnd = "rgb(220,230,255)";
+            ycatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
             var xcats = this.Items.Select(i => i.XCategory).Distinct().ToList();
             var ycats = this.Items.Select(i => i.YCategory).Distinct().ToList();
@@ -89,6 +94,8 @@ namespace InfoGraphicsPy
             double cell_height = 0.25;
             double indent = 2.0;
             double pwidth = cols * cell_width + (System.Math.Max(0, cols - 1) * 0.25) + indent + 0.25;
+            double YCatTitleHeight = 0.5;
+            double colsep = 0.25;
 
             var layout = new BoxHierarchy.BoxHierarchyLayout<RenderItem>();
             layout.LayoutOptions.Origin = new VA.Drawing.Point(0,10);
@@ -101,7 +108,7 @@ namespace InfoGraphicsPy
             {
 
                 var n_ycat_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
-                n_ycat_row.ChildSeparation = 0.25;
+                n_ycat_row.ChildSeparation = colsep;
 
                 // -- add indent
                 n_ycat_row.AddNode(indent, 0.25);
@@ -126,21 +133,23 @@ namespace InfoGraphicsPy
                     }
                 }
 
-                var n_ycat_title = root.AddNode(pwidth, 0.5);
+                var n_ycat_title = root.AddNode(pwidth, YCatTitleHeight);
                 var ycat_data = new RenderItem();
                 ycat_data.StripGridItem = null;
                 ycat_data.Text = ycats[row];
                 ycat_data.ShapeCells = ycatformat;
+                ycat_data.Underline = true;
                 n_ycat_title.Data = ycat_data;
             }
 
             var n_xcatlabels = root.AddNode(null, 1.0);
             n_xcatlabels.Direction = BoxHierarchy.LayoutDirection.Horizonal;
-            n_xcatlabels.ChildSeparation = 0.25;
+            n_xcatlabels.ChildSeparation = colsep;
 
-            // -- add indent
+            // Add indent
             n_xcatlabels.AddNode(indent, 0.25);
 
+            // Add XCategory labels
             foreach (int col in Enumerable.Range(0, cols))
             {
                 var n = n_xcatlabels.AddNode(cell_width, 0.5);
@@ -151,24 +160,39 @@ namespace InfoGraphicsPy
                 n.Data = xcat_data;
             }
 
+            // Add Title for Chart
             var n_title = root.AddNode(pwidth,0.5);
             var title_data = new RenderItem();
             title_data.StripGridItem = null;
-            title_data.Text = "Untitled";
+            title_data.Text = this.Title;
             title_data.ShapeCells = titleformat;
             n_title.Data = title_data;
             layout.PerformLayout();
 
+            // Perform Rendering
             var dom = new VA.DOM.Document();
             foreach (var n in layout.Nodes)
             {
                 if (n.Data != null)
                 {
                     var s = dom.DrawRectangle(n.Rectangle);
-                    s.Text = n.Data.Text;
+                    
+                    // Set Text
+                    if (n.Data.Text !=null)
+                    {
+                        s.Text = this.ToUpper ? n.Data.Text.ToUpper() : n.Data.Text;
+                    }
+
+                    // Set Cells
                     if (n.Data.ShapeCells != null)
                     {
                         s.ShapeCells = n.Data.ShapeCells;
+                    }
+
+                    // draw Underline
+                    if (n.Data.Underline)
+                    {
+                        var u = dom.DrawLine(n.Rectangle.LowerLeft, n.Rectangle.LowerRight);
                     }
                 }
             }

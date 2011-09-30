@@ -25,6 +25,7 @@ namespace DemoInfographicsPy
             var CategoryLabels = new[] { "A", "B", "C", "D", "E" };
             var DataPoints = new IG.DataPoints(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 });
 
+            /*
             session.NewPage();
             var chart1 = new IG.PieSliceChart(DataPoints,CategoryLabels);
             chart1.Draw(session);
@@ -54,9 +55,11 @@ namespace DemoInfographicsPy
             var chart6 = new IG.MonthGrid(2011,09);
             chart6.Render(session.Page);
             session.ResizePageToFit(0.5, 0.5);
-
+            */
             session.NewPage();
             var chart7 = new IG.StripeGrid();
+            chart7.Title = "PHDDraw Feature Map";
+            chart7.ToUpper = true;
             chart7.Add("Multi-Format Export", "Productivity", "Batch");
             chart7.Add("Save/Reload Batch Settings", "Productivity", "Batch");
             chart7.Add("Improved Gradient Designer", "Compelling Graphics", "Colors");
