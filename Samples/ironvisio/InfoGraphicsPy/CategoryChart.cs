@@ -16,6 +16,7 @@ namespace InfoGraphicsPy
     public class CategoryItem
     {
         public string Text;
+        public List<CategoryItem> Items; 
         public CategoryItem(string s)
         {
             this.Text = s;
@@ -26,14 +27,12 @@ namespace InfoGraphicsPy
         public CategoryItem Item;
         public string XCategory;
         public string YCategory;
-        public IList<string> SubTexts;
  
         public CategoryCell(string text, string x, string y)
         {
             this.Item = new CategoryItem(text);
             this.XCategory = x;
             this.YCategory = y;
-            this.SubTexts = null;
         }
     }
 
@@ -122,7 +121,8 @@ namespace InfoGraphicsPy
         public CategoryCell Add(string text, string xcat, string ycat, IList<string> subitems)
         {
             var item = new CategoryCell(text, xcat, ycat);
-            item.SubTexts = subitems;
+
+            item.Item.Items = subitems.Select(t=>new CategoryItem(t)).ToList();
             this.Items.Add(item);
             return item;
         }
@@ -169,14 +169,14 @@ namespace InfoGraphicsPy
                         cell_data.ShapeCells = cellformat;
                         n_cell.Data = cell_data;
 
-                        if (cell_item.SubTexts != null)
+                        if (cell_item.Item.Items != null)
                         {
-                            foreach (var subtexts in cell_item.SubTexts.Reverse())
+                            foreach (var sub_cat_items in cell_item.Item.Items)
                             {
                                 var subn_cell = n_cell.AddNode(CellWidth, CellHeight);
                                 var subcell_data = new RenderItem();
                                 subcell_data.StripGridItem = null;
-                                subcell_data.Text = subtexts;
+                                subcell_data.Text = sub_cat_items.Text;
                                 subcell_data.ShapeCells = subcellformat;
                                 subn_cell.Data = subcell_data;
 
