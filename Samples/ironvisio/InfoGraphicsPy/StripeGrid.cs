@@ -11,9 +11,9 @@ namespace InfoGraphicsPy
 {
     public class StripGridItem
     {
-        public  string Text;
-        public  string XCategory;
-        public  string YCategory;
+        public string Text;
+        public string XCategory;
+        public string YCategory;
 
         public StripGridItem(string text, string x, string y)
         {
@@ -27,6 +27,7 @@ namespace InfoGraphicsPy
     {
         public StripGridItem StripGridItem;
         public string Text ;
+        public VA.DOM.ShapeCells ShapeCells;
     }
 
     public class StripeGrid
@@ -47,11 +48,47 @@ namespace InfoGraphicsPy
 
         public void Render(IVisio.Page page)
         {
+            var titleformat = new VA.DOM.ShapeCells();
+            titleformat.VerticalAlign = 0;
+            titleformat.HAlign = 0;
+            titleformat.CharSize = VA.Convert.PointsToInches(24);
+            titleformat.LinePattern = 0;
+            titleformat.LineWeight = 0;
+
+            var cellformat = new VA.DOM.ShapeCells();
+            cellformat.VerticalAlign = 0;
+            cellformat.HAlign = 0;
+            cellformat.CharSize = VA.Convert.PointsToInches(8);
+            cellformat.LinePattern = 0;
+            cellformat.LineWeight = 0;
+            cellformat.FillForegnd = "rgb(240,240,240)";
+
+            var xcatformat = new VA.DOM.ShapeCells();
+            xcatformat.VerticalAlign = 0;
+            xcatformat.HAlign = 0;
+            xcatformat.CharSize = VA.Convert.PointsToInches(14);
+            xcatformat.LinePattern = 0;
+            xcatformat.LineWeight = 0;
+
+            var ycatformat = new VA.DOM.ShapeCells();
+            ycatformat.VerticalAlign = 0;
+            ycatformat.HAlign = 0;
+            ycatformat.CharSize = VA.Convert.PointsToInches(14);
+            ycatformat.LinePattern = 0;
+            ycatformat.LineWeight = 0;
+            ycatformat.FillForegnd = "rgb(220,230,255)";
+
             var xcats = this.Items.Select(i => i.XCategory).Distinct().ToList();
             var ycats = this.Items.Select(i => i.YCategory).Distinct().ToList();
 
             int cols = xcats.Count();
             int rows = ycats.Count();
+
+            double cell_width = 3.0;
+            double cell_vsep = 0.125;
+            double cell_height = 0.25;
+            double indent = 2.0;
+            double pwidth = cols * cell_width + (System.Math.Max(0, cols - 1) * 0.25) + indent + 0.25;
 
             var layout = new BoxHierarchy.BoxHierarchyLayout<RenderItem>();
             layout.LayoutOptions.Origin = new VA.Drawing.Point(0,10);
@@ -60,57 +97,66 @@ namespace InfoGraphicsPy
             root.Direction = BoxHierarchy.LayoutDirection.Vertical;
             root.ChildSeparation = 0.125;
 
-
-
             foreach (int row in Enumerable.Range(0, rows))
             {
 
                 var n_ycat_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
-                //n_ycat_row.Direction = LayoutDirection.Horizonal;
                 n_ycat_row.ChildSeparation = 0.25;
+
+                // -- add indent
+                n_ycat_row.AddNode(indent, 0.25);
 
                 foreach (int col in Enumerable.Range(0, cols))
                 {
-                    var n_row_col = n_ycat_row.AddNode(2.0, 0.25);
+                    var n_row_col = n_ycat_row.AddNode(cell_width, 0.25);
 
+                    // ---
                     n_row_col.Direction = BoxHierarchy.LayoutDirection.Vertical;
                     n_row_col.AlignmentVertical = AlignmentVertical.Top;
+                    n_row_col.ChildSeparation = cell_vsep;
                     var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
-                    foreach (var zz in items_for_cells)
+                    foreach (var cell_item in items_for_cells)
                     {
-                        var n_cell = n_row_col.AddNode(2.0, 0.25);
-                        var ri = new RenderItem();
-                        ri.StripGridItem = zz;
-                        ri.Text = zz.Text;
-                        n_cell.Data = ri;
+                        var n_cell = n_row_col.AddNode(cell_width, cell_height);
+                        var cell_data = new RenderItem();
+                        cell_data.StripGridItem = cell_item;
+                        cell_data.Text = cell_item.Text;
+                        cell_data.ShapeCells = cellformat;
+                        n_cell.Data = cell_data;
                     }
                 }
 
-                var n_ycat_title = root.AddNode(8.0, 0.5);
-                var ri2 = new RenderItem();
-                ri2.StripGridItem = null;
-                ri2.Text = ycats[row];
-                n_ycat_title.Data = ri2;
+                var n_ycat_title = root.AddNode(pwidth, 0.5);
+                var ycat_data = new RenderItem();
+                ycat_data.StripGridItem = null;
+                ycat_data.Text = ycats[row];
+                ycat_data.ShapeCells = ycatformat;
+                n_ycat_title.Data = ycat_data;
             }
 
             var n_xcatlabels = root.AddNode(null, 1.0);
             n_xcatlabels.Direction = BoxHierarchy.LayoutDirection.Horizonal;
             n_xcatlabels.ChildSeparation = 0.25;
 
+            // -- add indent
+            n_xcatlabels.AddNode(indent, 0.25);
+
             foreach (int col in Enumerable.Range(0, cols))
             {
-                var n = n_xcatlabels.AddNode(2.0, 0.5);
-                var ri2 = new RenderItem();
-                ri2.StripGridItem = null;
-                ri2.Text = xcats[col];
-                n.Data = ri2;
+                var n = n_xcatlabels.AddNode(cell_width, 0.5);
+                var xcat_data = new RenderItem();
+                xcat_data.StripGridItem = null;
+                xcat_data.Text = xcats[col];
+                xcat_data.ShapeCells = xcatformat;
+                n.Data = xcat_data;
             }
 
-            var n_title = root.AddNode(8.0,0.5);
-            var ri3 = new RenderItem();
-            ri3.StripGridItem = null;
-            ri3.Text = "Untitled";
-            n_title.Data = ri3;
+            var n_title = root.AddNode(pwidth,0.5);
+            var title_data = new RenderItem();
+            title_data.StripGridItem = null;
+            title_data.Text = "Untitled";
+            title_data.ShapeCells = titleformat;
+            n_title.Data = title_data;
             layout.PerformLayout();
 
             var dom = new VA.DOM.Document();
@@ -120,7 +166,10 @@ namespace InfoGraphicsPy
                 {
                     var s = dom.DrawRectangle(n.Rectangle);
                     s.Text = n.Data.Text;
-                    s.ShapeCells.VerticalAlign = 0;                    
+                    if (n.Data.ShapeCells != null)
+                    {
+                        s.ShapeCells = n.Data.ShapeCells;
+                    }
                 }
             }
             dom.Render(page);
