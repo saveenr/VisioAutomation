@@ -36,7 +36,12 @@ namespace InfoGraphicsPy
         public List<StripGridItem> Items;
         public bool ToUpper;
         public string Title = "Untitled";
+        double titlefontsize = 24;
+        double cellfontsize = 8;
+        double catfontsize = 14;
 
+        private string cellfill = "rgb(240,240,240)";
+        
         public StripeGrid()
         {
             this.Items = new List<StripGridItem>();
@@ -54,22 +59,22 @@ namespace InfoGraphicsPy
             var titleformat = new VA.DOM.ShapeCells();
             titleformat.VerticalAlign = 0;
             titleformat.HAlign = 0;
-            titleformat.CharSize = VA.Convert.PointsToInches(24);
+            titleformat.CharSize = VA.Convert.PointsToInches(titlefontsize);
             titleformat.LinePattern = 0;
             titleformat.LineWeight = 0;
 
             var cellformat = new VA.DOM.ShapeCells();
             cellformat.VerticalAlign = 0;
             cellformat.HAlign = 0;
-            cellformat.CharSize = VA.Convert.PointsToInches(8);
+            cellformat.CharSize = VA.Convert.PointsToInches(cellfontsize);
             cellformat.LinePattern = 0;
             cellformat.LineWeight = 0;
-            cellformat.FillForegnd = "rgb(240,240,240)";
+            cellformat.FillForegnd = cellfill;
 
             var xcatformat = new VA.DOM.ShapeCells();
             xcatformat.VerticalAlign = 0;
             xcatformat.HAlign = 0;
-            xcatformat.CharSize = VA.Convert.PointsToInches(14);
+            xcatformat.CharSize = VA.Convert.PointsToInches(catfontsize);
             xcatformat.LinePattern = 0;
             xcatformat.LineWeight = 0;
             xcatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
@@ -77,10 +82,9 @@ namespace InfoGraphicsPy
             var ycatformat = new VA.DOM.ShapeCells();
             ycatformat.VerticalAlign = 2;
             ycatformat.HAlign = 0;
-            ycatformat.CharSize = VA.Convert.PointsToInches(14);
+            ycatformat.CharSize = VA.Convert.PointsToInches(catfontsize);
             ycatformat.LinePattern = 0;
             ycatformat.LineWeight = 0;
-            //ycatformat.FillForegnd = "rgb(220,230,255)";
             ycatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
             var xcats = this.Items.Select(i => i.XCategory).Distinct().ToList();
