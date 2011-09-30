@@ -40,6 +40,13 @@ namespace InfoGraphicsPy
         double cellfontsize = 8;
         double catfontsize = 14;
 
+        double cell_width = 3.0;
+        double cell_vsep = 0.125;
+        double cell_height = 0.25;
+        double indent = 2.0;
+        double YCatTitleHeight = 0.5;
+        double colsep = 0.25;
+
         private string cellfill = "rgb(240,240,240)";
         
         public StripeGrid()
@@ -92,14 +99,7 @@ namespace InfoGraphicsPy
 
             int cols = xcats.Count();
             int rows = ycats.Count();
-
-            double cell_width = 3.0;
-            double cell_vsep = 0.125;
-            double cell_height = 0.25;
-            double indent = 2.0;
             double pwidth = cols * cell_width + (System.Math.Max(0, cols - 1) * 0.25) + indent + 0.25;
-            double YCatTitleHeight = 0.5;
-            double colsep = 0.25;
 
             var layout = new BoxHierarchy.BoxHierarchyLayout<RenderItem>();
             layout.LayoutOptions.Origin = new VA.Drawing.Point(0,10);
