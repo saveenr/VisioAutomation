@@ -37,6 +37,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chart.cs" />
+    <Compile Include="CategoryItem.cs" />
+    <Compile Include="CategoryCell.cs" />
     <Compile Include="DoughnutSliceChart.cs" />
     <Compile Include="PieChart.cs" />
     <Compile Include="DOMUtil.cs" />

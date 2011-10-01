@@ -12,34 +12,10 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace InfoGraphicsPy
 {
-
-    public class CategoryItem
-    {
-        public string Text;
-        public List<CategoryItem> Items; 
-        public CategoryItem(string s)
-        {
-            this.Text = s;
-        }
-    }
-    public class CategoryCell
-    {
-        public CategoryItem Item;
-        public string XCategory;
-        public string YCategory;
- 
-        public CategoryCell(string text, string x, string y)
-        {
-            this.Item = new CategoryItem(text);
-            this.XCategory = x;
-            this.YCategory = y;
-        }
-    }
-
     class RenderItem
     {
-        public CategoryCell StripGridItem;
-        public string Text ;
+        public CategoryCell CategoryCell;
+        public string ShapeText ;
         public VA.DOM.ShapeCells ShapeCells;
         public bool Underline;
     }
@@ -126,6 +102,7 @@ namespace InfoGraphicsPy
             this.Items.Add(item);
             return item;
         }
+
         public void Render(IVisio.Page page)
         {
             var xcats = this.Items.Select(i => i.XCategory).Distinct().ToList();
@@ -164,8 +141,8 @@ namespace InfoGraphicsPy
             {
                 var n_label = n_row.AddNode(CellWidth, 0.5);
                 var info = new RenderItem();
-                info.StripGridItem = null;
-                info.Text = xcats[col];
+                info.CategoryCell = null;
+                info.ShapeText = xcats[col];
                 info.ShapeCells = xcatformat;
                 n_label.Data = info;
             }
@@ -196,8 +173,8 @@ namespace InfoGraphicsPy
 
             var n_row_label = root.AddNode(pwidth, CategoryHeight);
             var info = new RenderItem();
-            info.StripGridItem = null;
-            info.Text = ycats[row];
+            info.CategoryCell = null;
+            info.ShapeText = ycats[row];
             info.ShapeCells = ycatformat;
             info.Underline = true;
             n_row_label.Data = info;
@@ -218,8 +195,8 @@ namespace InfoGraphicsPy
         {
             var n_title = root.AddNode(2.0, 0.5);
             var title_data = new RenderItem();
-            title_data.StripGridItem = null;
-            title_data.Text = this.Title;
+            title_data.CategoryCell = null;
+            title_data.ShapeText = this.Title;
             title_data.ShapeCells = titleformat;
             n_title.Data = title_data;
         }
@@ -230,8 +207,8 @@ namespace InfoGraphicsPy
             n_cell.ChildSeparation = CellVerticalSeparation/2;
             
             var cell_data = new RenderItem();
-            cell_data.StripGridItem = cell_item;
-            cell_data.Text = cell_item.Item.Text;
+            cell_data.CategoryCell = cell_item;
+            cell_data.ShapeText = cell_item.Item.Text;
             cell_data.ShapeCells = cellformat;
             n_cell.Data = cell_data;
             
@@ -241,8 +218,8 @@ namespace InfoGraphicsPy
                 {
                     var subn_cell = n_cell.AddNode(CellWidth, CellHeight);
                     var subcell_data = new RenderItem();
-                    subcell_data.StripGridItem = null;
-                    subcell_data.Text = sub_cat_items.Text;
+                    subcell_data.CategoryCell = null;
+                    subcell_data.ShapeText = sub_cat_items.Text;
                     subcell_data.ShapeCells = subcellformat;
                     subn_cell.Data = subcell_data;
                 }
@@ -266,9 +243,9 @@ namespace InfoGraphicsPy
                     var s = dom.DrawRectangle(n.ReservedRectangle);
 
                     // Set Text
-                    if (n.Data.Text != null)
+                    if (n.Data.ShapeText != null)
                     {
-                        s.Text = this.ToUpper ? n.Data.Text.ToUpper() : n.Data.Text;
+                        s.Text = this.ToUpper ? n.Data.ShapeText.ToUpper() : n.Data.ShapeText;
                     }
 
                     // Set Cells
