@@ -135,72 +135,93 @@ namespace InfoGraphicsPy
             int rows = ycats.Count();
             double pwidth = cols * CellWidth + (System.Math.Max(0, cols - 1) * 0.25) + Indent + 0.25;
 
-            var layout = new BoxHierarchy.BoxHierarchyLayout<RenderItem>();
-            layout.LayoutOptions.Origin = new VA.Drawing.Point(0,10);
-            layout.LayoutOptions.DefaultHeight = 0.25;
-            var root = layout.Root;
-            root.Direction = BoxHierarchy.LayoutDirection.Vertical;
-            root.ChildSeparation = 0.125;
+            Node<RenderItem> root;
+            var layout = create_layout(out root);
 
             foreach (int row in Enumerable.Range(0, rows))
             {
-
-                var n_ycat_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
-                n_ycat_row.ChildSeparation = CellHorizontalSeparation;
-
-                // -- add indent
-                n_ycat_row.AddNode(Indent, 0.25);
-
-                foreach (int col in Enumerable.Range(0, cols))
-                {
-                    var n_row_col = n_ycat_row.AddNode(CellWidth, 0.25);
-
-                    // ---
-                    n_row_col.Direction = BoxHierarchy.LayoutDirection.Vertical;
-                    n_row_col.AlignmentVertical = AlignmentVertical.Top;
-                    n_row_col.ChildSeparation = CellVerticalSeparation;
-                    var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
-                    foreach (var cell_item in items_for_cells)
-                    {
-                        draw_cell(cell_item, n_row_col);
-                    }
-                }
-
-                var n_ycat_title = root.AddNode(pwidth, CategoryHeight);
-                var ycat_data = new RenderItem();
-                ycat_data.StripGridItem = null;
-                ycat_data.Text = ycats[row];
-                ycat_data.ShapeCells = ycatformat;
-                ycat_data.Underline = true;
-                n_ycat_title.Data = ycat_data;
+                AddMajorRow(ycats, row, pwidth, root, xcats, cols);
             }
 
-            var n_xcatlabels = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
-            n_xcatlabels.ChildSeparation = CellHorizontalSeparation;
+            AddXCatLabels(xcats, cols, root);
+
+            // Add Title for Chart
+            add_title(root, pwidth);
+
+            Render(page, layout);
+        }
+
+        private void AddXCatLabels(List<string> xcats, int cols, Node<RenderItem> root)
+        {
+            var n_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
+            n_row.ChildSeparation = CellHorizontalSeparation;
 
             // Add indent
-            n_xcatlabels.AddNode(Indent, 0.25);
+            n_row.AddNode(Indent, 0.25);
 
             // Add XCategory labels
             foreach (int col in Enumerable.Range(0, cols))
             {
-                var n = n_xcatlabels.AddNode(CellWidth, 0.5);
-                var xcat_data = new RenderItem();
-                xcat_data.StripGridItem = null;
-                xcat_data.Text = xcats[col];
-                xcat_data.ShapeCells = xcatformat;
-                n.Data = xcat_data;
+                var n_label = n_row.AddNode(CellWidth, 0.5);
+                var info = new RenderItem();
+                info.StripGridItem = null;
+                info.Text = xcats[col];
+                info.ShapeCells = xcatformat;
+                n_label.Data = info;
+            }
+        }
+
+        private void AddMajorRow(List<string> ycats, int row, double pwidth, Node<RenderItem> root, List<string> xcats, int cols)
+        {
+            var n_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
+            n_row.ChildSeparation = CellHorizontalSeparation;
+
+            // -- add indent
+            n_row.AddNode(Indent, 0.25);
+
+            foreach (int col in Enumerable.Range(0, cols))
+            {
+                var n_cell = n_row.AddNode(CellWidth, 0.25);
+
+                // ---
+                n_cell.Direction = BoxHierarchy.LayoutDirection.Vertical;
+                n_cell.AlignmentVertical = AlignmentVertical.Top;
+                n_cell.ChildSeparation = CellVerticalSeparation;
+                var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
+                foreach (var cell_item in items_for_cells)
+                {
+                    draw_cell(cell_item, n_cell);
+                }
             }
 
-            // Add Title for Chart
-            var n_title = root.AddNode(pwidth,0.5);
+            var n_row_label = root.AddNode(pwidth, CategoryHeight);
+            var info = new RenderItem();
+            info.StripGridItem = null;
+            info.Text = ycats[row];
+            info.ShapeCells = ycatformat;
+            info.Underline = true;
+            n_row_label.Data = info;
+        }
+
+        private BoxHierarchyLayout<RenderItem> create_layout(out Node<RenderItem> root)
+        {
+            var layout = new BoxHierarchy.BoxHierarchyLayout<RenderItem>();
+            layout.LayoutOptions.Origin = new VA.Drawing.Point(0, 10);
+            layout.LayoutOptions.DefaultHeight = 0.25;
+            root = layout.Root;
+            root.Direction = BoxHierarchy.LayoutDirection.Vertical;
+            root.ChildSeparation = 0.125;
+            return layout;
+        }
+
+        private void add_title(Node<RenderItem> root, double pwidth)
+        {
+            var n_title = root.AddNode(2.0, 0.5);
             var title_data = new RenderItem();
             title_data.StripGridItem = null;
             title_data.Text = this.Title;
             title_data.ShapeCells = titleformat;
             n_title.Data = title_data;
-
-            Render(page, layout);
         }
 
         private void draw_cell(CategoryCell cell_item, Node<RenderItem> n_row_col)
