@@ -95,7 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoxHierarchyShared.cs" />
+    <Compile Include="BoxLayoutShared.cs" />
     <Compile Include="ColorSample.cs" />
     <Compile Include="ConnectorSamples.cs" />
     <Compile Include="DeveloperSamples.cs" />

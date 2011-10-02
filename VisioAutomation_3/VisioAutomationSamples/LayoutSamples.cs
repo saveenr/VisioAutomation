@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BH = VisioAutomation.Layout.BoxHierarchy;
+using BH = VisioAutomation.Layout.BoxLayout;
 
 namespace VisioAutomationSamples
 {
@@ -48,10 +48,10 @@ namespace VisioAutomationSamples
         }
 
 
-        public static void BoxHierarchy()
+        public static void BoxLayout()
         {
             // Create a layout
-            var layout = BoxHierarchyShared.CreateSampleBoxHierarchyLayout();
+            var layout = BoxLayoutShared.CreateSampleLayout();
 
             // Ask the Layout to place the nodes
             var origin = new VA.Drawing.Point(0, 0);
@@ -69,7 +69,7 @@ namespace VisioAutomationSamples
             // render
             foreach (var node in layout.Nodes)
             {
-                BoxHierarchyShared.DrawBoxHierarchyDrawNode(node, node.Rectangle, page1);
+                BoxLayoutShared.DrawNode(node, node.Rectangle, page1);
             }
 
             var src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
@@ -82,7 +82,7 @@ namespace VisioAutomationSamples
             page1.ResizeToFitContents(margin);
         }
 
-        public static void BoxHeirarchy_FontGlyphComparision()
+        public static void FontGlyphComparision()
         {
             var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
@@ -91,7 +91,7 @@ namespace VisioAutomationSamples
 
             var fontnames = new[] {"Segoe", "Calibri", "Impact"};
 
-            var layout = new BH.BoxHierarchyLayout<NodeData>();
+            var layout = new BH.BoxLayout<NodeData>();
             layout.LayoutOptions.DirectionVertical = VA.DirectionVertical.TopToBottom;
 
             var root = layout.Root;

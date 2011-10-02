@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Layout.BoxHierarchy
+namespace VisioAutomation.Layout.BoxLayout
 {
-    public class BoxHierarchyLayout<T>
+    public class BoxLayout<T>
     {
         public LayoutOptions LayoutOptions;
 
         private Node<T> _root;
 
-        public BoxHierarchyLayout() :
+        public BoxLayout() :
             this(LayoutDirection.Vertical)
         {
         }
 
-        public BoxHierarchyLayout(LayoutDirection dir)
+        public BoxLayout(LayoutDirection dir)
         {
             this.LayoutOptions = new LayoutOptions(); 
             this._root = new Node<T>(dir);

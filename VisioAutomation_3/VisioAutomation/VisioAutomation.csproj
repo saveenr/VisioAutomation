@@ -164,7 +164,7 @@
     <Compile Include="DOM\PageSettings.cs" />
     <Compile Include="FastRenderingScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
-    <Compile Include="Layout\BoxHierarchy\BoxHierarchyLayout.cs" />
+    <Compile Include="Layout\BoxHierarchy\BoxLayout.cs" />
     <Compile Include="Layout\BoxHierarchy\LayoutDirection.cs" />
     <Compile Include="Layout\BoxHierarchy\LayoutOptions.cs" />
     <Compile Include="Layout\BoxHierarchy\Node.cs" />

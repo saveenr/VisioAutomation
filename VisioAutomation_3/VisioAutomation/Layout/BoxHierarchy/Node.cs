@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Layout.BoxHierarchy
+namespace VisioAutomation.Layout.BoxLayout
 {
     public class Node<T>
     {

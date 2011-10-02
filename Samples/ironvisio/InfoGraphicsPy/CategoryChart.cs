@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.Office.Interop.Visio;
 using VisioAutomation.DOM;
 using VisioAutomation.Drawing;
-using VisioAutomation.Layout.BoxHierarchy;
-using BoxHierarchy=VisioAutomation.Layout.BoxHierarchy;
+using VisioAutomation.Layout.BoxLayout;
+using BL = VisioAutomation.Layout.BoxLayout;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -130,7 +130,7 @@ namespace InfoGraphicsPy
 
         private void AddXCatLabels(List<string> xcats, int cols, Node<RenderItem> root)
         {
-            var n_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
+            var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // Add indent
@@ -150,7 +150,7 @@ namespace InfoGraphicsPy
 
         private void AddMajorRow(List<string> ycats, int row, double pwidth, Node<RenderItem> root, List<string> xcats, int cols)
         {
-            var n_row = root.AddNode(BoxHierarchy.LayoutDirection.Horizonal);
+            var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // -- add indent
@@ -161,7 +161,7 @@ namespace InfoGraphicsPy
                 var n_cell = n_row.AddNode(CellWidth, 0.25);
 
                 // ---
-                n_cell.Direction = BoxHierarchy.LayoutDirection.Vertical;
+                n_cell.Direction = BL.LayoutDirection.Vertical;
                 n_cell.AlignmentVertical = AlignmentVertical.Top;
                 n_cell.ChildSeparation = CellVerticalSeparation;
                 var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
@@ -180,13 +180,13 @@ namespace InfoGraphicsPy
             n_row_label.Data = info;
         }
 
-        private BoxHierarchyLayout<RenderItem> create_layout(out Node<RenderItem> root)
+        private BoxLayout<RenderItem> create_layout(out Node<RenderItem> root)
         {
-            var layout = new BoxHierarchy.BoxHierarchyLayout<RenderItem>();
+            var layout = new BL.BoxLayout<RenderItem>();
             layout.LayoutOptions.Origin = new VA.Drawing.Point(0, 10);
             layout.LayoutOptions.DefaultHeight = 0.25;
             root = layout.Root;
-            root.Direction = BoxHierarchy.LayoutDirection.Vertical;
+            root.Direction = BL.LayoutDirection.Vertical;
             root.ChildSeparation = 0.125;
             return layout;
         }
@@ -227,7 +227,7 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void Render(Page page, BoxHierarchyLayout<RenderItem> layout)
+        private void Render(Page page, BoxLayout<RenderItem> layout)
         {
             layout.PerformLayout();
             var doc = page.Document;

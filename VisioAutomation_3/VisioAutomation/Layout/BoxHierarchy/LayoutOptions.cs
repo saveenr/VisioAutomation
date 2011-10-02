@@ -1,6 +1,6 @@
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Layout.BoxHierarchy
+namespace VisioAutomation.Layout.BoxLayout
 {
     public class LayoutOptions
     {

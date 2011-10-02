@@ -1,6 +1,6 @@
 
 
-namespace VisioAutomation.Layout.BoxHierarchy
+namespace VisioAutomation.Layout.BoxLayout
 {
     public enum LayoutDirection
     {

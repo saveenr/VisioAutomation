@@ -1,13 +1,13 @@
 ﻿using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using BH = VisioAutomation.Layout.BoxHierarchy;
+using BH = VisioAutomation.Layout.BoxLayout;
 
 namespace VisioAutomationSamples
 {
-    public class BoxHierarchyShared
+    public class BoxLayoutShared
     {
-        public static void DrawBoxHierarchyDrawNode(
+        public static void DrawNode(
             BH.Node<IVisio.Shape> node,
             VA.Drawing.Rectangle rect, IVisio.Page page)
         {
@@ -28,12 +28,12 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static BH.BoxHierarchyLayout<IVisio.Shape>
-            CreateSampleBoxHierarchyLayout()
+        public static BH.BoxLayout<IVisio.Shape>
+            CreateSampleLayout()
         {
             // Create a new layout
             var layout =
-                new BH.BoxHierarchyLayout<IVisio.Shape>(
+                new BH.BoxLayout<IVisio.Shape>(
                     BH.LayoutDirection.Vertical);
 
             // Add the nodes and specify their sizes and in what direction to draw them
