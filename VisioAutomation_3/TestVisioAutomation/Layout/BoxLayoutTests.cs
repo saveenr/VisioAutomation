@@ -69,5 +69,21 @@ namespace TestVisioAutomation
 
         }
 
+        [TestMethod]
+        public void Test_two_nodes()
+        {
+            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var root = layout.Root;
+            var n1 = root.AddNode(1, 2);
+            var n2 = root.AddNode(2, 3);
+
+            root.Padding = 1.0;
+            layout.PerformLayout();
+            double delta = 0.00000001;
+            AssertX.AreEqual(1, 1, 2, 3, n1.ReservedRectangle, delta);
+            AssertX.AreEqual(1, 4, 3, 7, n1.Rectangle, delta);
+        }
+
+
     }
 }
