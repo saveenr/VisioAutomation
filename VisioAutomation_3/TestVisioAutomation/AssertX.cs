@@ -11,10 +11,18 @@ namespace TestVisioAutomation
             Assert.AreEqual(p1.Y, p2.Y, delta);
         }
 
-        public static void AreEqual(double x, double y, Point p2, double delta)
+        public static void AreEqual(double x, double y, Point p, double delta)
         {
-            Assert.AreEqual(x, p2.X, delta);
-            Assert.AreEqual(y, p2.Y, delta);
+            Assert.AreEqual(x, p.X, delta);
+            Assert.AreEqual(y, p.Y, delta);
+        }
+
+        public static void AreEqual(double left, double bottom, double right, double top, Rectangle r, double delta)
+        {
+            Assert.AreEqual(left, r.Left, delta);
+            Assert.AreEqual(bottom, r.Bottom, delta);
+            Assert.AreEqual(right, r.Right, delta);
+            Assert.AreEqual(top, r.Top, delta);
         }
     }
 }

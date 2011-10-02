@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertX.cs" />
+    <Compile Include="Layout\BoxLayoutTests.cs" />
     <Compile Include="ShapeGeometryHelper_Tests.cs" />
     <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Extensions\ColorsExtensions.cs" />
