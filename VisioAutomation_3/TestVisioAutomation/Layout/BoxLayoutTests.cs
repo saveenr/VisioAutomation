@@ -111,6 +111,19 @@ namespace TestVisioAutomation
             double delta = 0.00000001;
 
 
+            var doc = draw_layout(layout);
+            //doc.Close(true);
+
+            AssertX.AreEqual(1, 1, 3, 3, n1.ReservedRectangle, delta);
+            AssertX.AreEqual(2, 1, 3, 3, n1.Rectangle, delta);
+
+            AssertX.AreEqual(1, 3, 3, 6, n2.ReservedRectangle, delta);
+            AssertX.AreEqual(1, 3, 3, 6, n2.Rectangle, delta);
+
+        }
+
+        private IVisio.Document draw_layout(BoxLayout<string> layout)
+        {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page = app.ActivePage;
@@ -127,14 +140,7 @@ namespace TestVisioAutomation
 
             dom.Render(page);
             page.ResizeToFitContents(1, 1);
-            //doc.Close(true);
-
-            AssertX.AreEqual(1, 1, 3, 3, n1.ReservedRectangle, delta);
-            AssertX.AreEqual(2, 1, 3, 3, n1.Rectangle, delta);
-
-            AssertX.AreEqual(1,1,3,3, n2.ReservedRectangle, delta);
-            AssertX.AreEqual(1, 3, 3, 6, n2.Rectangle, delta);
-
+            return doc;
         }
 
 
@@ -203,26 +209,6 @@ namespace TestVisioAutomation
             root.Padding = 1.0;
             layout.PerformLayout();
             double delta = 0.00000001;
-
-
-            var app = this.GetVisioApplication();
-            var doc = this.GetNewDoc();
-            var page = app.ActivePage;
-            var dom = new VA.DOM.Document();
-            foreach (var node in layout.Nodes)
-            {
-                var dom_n0 = dom.DrawRectangle(node.ReservedRectangle);
-                dom_n0.ShapeCells.FillForegnd = "rgb(255,0,0)";
-                var dom_n1 = dom.DrawRectangle(node.Rectangle);
-                dom_n1.ShapeCells.FillForegnd = "rgb(255,190,0)";
-
-                dom_n1.Text = string.Format("{0}\n{1}\n{2}", node.Data, node.ReservedRectangle.ToString(), node.Rectangle.ToString());
-            }
-
-
-            dom.Render(page);
-            page.ResizeToFitContents(1, 1);
-            //doc.Close(true);
 
             AssertX.AreEqual(1, 1, 2, 4, n1.ReservedRectangle, delta);
             AssertX.AreEqual(1, 2, 2, 4, n1.Rectangle, delta);
