@@ -137,21 +137,21 @@ namespace VisioAutomation.Layout.BoxLayout
             double pad_x = node.Padding;
             double pad_y = node.Padding;
 
-            foreach (var cur_el in node.Children)
+            foreach (var child_node in node.Children)
             {
                 // Calculate where the child will be placed, taking into account the direction and alignment
                 var child_origin = current_point;
 
-                var reserved_width = node.Direction == LayoutDirection.Vertical ? node.Width.Value - 2*node.Padding: cur_el.Width.Value;
-                var reserved_height = node.Direction == LayoutDirection.Horizonal? node.Height.Value - 2*node.Padding: cur_el.Height.Value;
+                var reserved_width = node.Direction == LayoutDirection.Vertical ? node.Width.Value - 2*node.Padding: child_node.Width.Value;
+                var reserved_height = node.Direction == LayoutDirection.Horizonal? node.Height.Value - 2*node.Padding: child_node.Height.Value;
                 var reserved_size = new VA.Drawing.Size(reserved_width, reserved_height);
-                cur_el.ReservedRectangle = new VA.Drawing.Rectangle(child_origin.Add(pad_x,pad_y),reserved_size);
+                child_node.ReservedRectangle = new VA.Drawing.Rectangle(child_origin.Add(pad_x,pad_y),reserved_size);
 
                 if (node.Direction == LayoutDirection.Vertical)
                 {
-                    var halign = cur_el.AlignmentHorizontal;
+                    var halign = child_node.AlignmentHorizontal;
 
-                    double delta_width = node.Width.Value - (2*pad_x) - cur_el.Width.Value;
+                    double delta_width = node.Width.Value - (2*pad_x) - child_node.Width.Value;
                     double align_delta_x = (halign == VA.Drawing.AlignmentHorizontal.Left) ? 0.0 : delta_width;
                     double align_factor_x = (halign == VA.Drawing.AlignmentHorizontal.Center) ? 0.5 : 1.0;
 
@@ -159,9 +159,9 @@ namespace VisioAutomation.Layout.BoxLayout
                 }
                 else
                 {
-                    var valign = cur_el.AlignmentVertical;
+                    var valign = child_node.AlignmentVertical;
 
-                    double delta_height = node.Height.Value - (2*pad_y) - cur_el.Height.Value;
+                    double delta_height = node.Height.Value - (2*pad_y) - child_node.Height.Value;
                     double align_delta_y = (valign == VA.Drawing.AlignmentVertical.Bottom) ? 0.0 : delta_height;
                     double align_factor_y = (valign == VA.Drawing.AlignmentVertical.Center) ? 0.5 : 1.0;
                     child_origin = current_point.Add(0, sign_y*align_factor_y*align_delta_y);
@@ -170,17 +170,17 @@ namespace VisioAutomation.Layout.BoxLayout
                 child_origin = child_origin.Add(sign_x*pad_x, sign_y*pad_y);
 
                 // render the child
-                _PlaceNode(cur_el, child_origin);
+                _PlaceNode(child_node, child_origin);
 
                 // move to the next place to start placing a child
                 if (node.Direction == LayoutDirection.Vertical)
                 {
-                    current_point = current_point.Add(0, sign_y*cur_el.Height.Value);
+                    current_point = current_point.Add(0, sign_y*child_node.Height.Value);
                     current_point = current_point.Add(0, sign_y*node.ChildSeparation);
                 }
                 else if (node.Direction == LayoutDirection.Horizonal)
                 {
-                    current_point = current_point.Add(sign_x*cur_el.Width.Value, 0);
+                    current_point = current_point.Add(sign_x*child_node.Width.Value, 0);
                     current_point = current_point.Add(sign_x*node.ChildSeparation, 0);
                 }
             }
