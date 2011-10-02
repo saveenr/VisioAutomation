@@ -92,7 +92,7 @@ namespace VisioAutomationSamples
             var fontnames = new[] {"Segoe", "Calibri", "Impact"};
 
             var layout = new BH.BoxLayout<NodeData>();
-            layout.LayoutOptions.DirectionVertical = VA.DirectionVertical.TopToBottom;
+            layout.LayoutOptions.DirectionVertical = VA.Layout.BoxLayout.DirectionVertical.TopToBottom;
 
             var root = layout.Root;
             root.Direction = BH.LayoutDirection.Vertical;

@@ -14,8 +14,8 @@ namespace VisioAutomation.Layout.BoxLayout
         {
             this.DefaultHeight = 1.0;
             this.DefaultWidth = 1.0;
-            this.DirectionHorizontal = VA.DirectionHorizontal.LeftToRight;
-            this.DirectionVertical = VA.DirectionVertical.BottomToTop;
+            this.DirectionHorizontal = DirectionHorizontal.LeftToRight;
+            this.DirectionVertical = DirectionVertical.BottomToTop;
             this.Origin = new VA.Drawing.Point(0, 0);
         }
     }

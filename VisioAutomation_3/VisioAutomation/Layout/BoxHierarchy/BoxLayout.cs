@@ -100,16 +100,16 @@ namespace VisioAutomation.Layout.BoxLayout
                 throw new System.ArgumentNullException("node");
             }
 
-            double signx = (LayoutOptions.DirectionHorizontal == VA.DirectionHorizontal.LeftToRight) ? 1.0 : -1.0;
-            double signy = (LayoutOptions.DirectionVertical == VA.DirectionVertical.BottomToTop) ? 1.0 : -1.0;
+            double signx = (LayoutOptions.DirectionHorizontal == VA.Layout.BoxLayout.DirectionHorizontal.LeftToRight) ? 1.0 : -1.0;
+            double signy = (LayoutOptions.DirectionVertical == VA.Layout.BoxLayout.DirectionVertical.BottomToTop) ? 1.0 : -1.0;
 
             // Calculate the final rectangle to place the current node
 
-            double miny = (LayoutOptions.DirectionVertical == VA.DirectionVertical.TopToBottom)
+            double miny = (LayoutOptions.DirectionVertical == VA.Layout.BoxLayout.DirectionVertical.TopToBottom)
                               ? origin.Y - node.Height.Value
                               : origin.Y;
 
-            double minx = (LayoutOptions.DirectionHorizontal == VA.DirectionHorizontal.LeftToRight)
+            double minx = (LayoutOptions.DirectionHorizontal == VA.Layout.BoxLayout.DirectionHorizontal.LeftToRight)
                               ? origin.X
                               : origin.X - node.Width.Value;
 

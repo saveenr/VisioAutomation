@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation
+﻿namespace VisioAutomation.Layout.BoxLayout
 {
     public enum DirectionHorizontal
     {
