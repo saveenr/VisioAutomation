@@ -37,7 +37,11 @@ namespace VisioAutomation.Layout.BoxLayout
             this.CalculateSizes();
 
             // having that, we then use the layout options to put them in the correct positions
-            this.Place(this.LayoutOptions.Origin);
+
+            var root_size = new VA.Drawing.Size(this.Root.Width.Value, this.Root.Height.Value);
+
+            var rr = new VA.Drawing.Rectangle(this.LayoutOptions.Origin,root_size);
+            this.Place(this.LayoutOptions.Origin, rr);
 
             // Place doesn't calculate the reserved rectangle of the root node
             // so we do it here. because the root contains "everything" the Reserved Rectangle
@@ -100,13 +104,13 @@ namespace VisioAutomation.Layout.BoxLayout
             node.Width = node.Width.Value + (2*padx);
         }
 
-        private void Place(VA.Drawing.Point origin)
+        private void Place(VA.Drawing.Point origin,VA.Drawing.Rectangle rr)
         {
             // this method calculates the positions on nodes
-            _PlaceNode(_root, origin);
+            _PlaceNode(_root, origin,rr);
         }
 
-        private void _PlaceNode(Node<T> node, VA.Drawing.Point origin)
+        private void _PlaceNode(Node<T> node, VA.Drawing.Point origin,VA.Drawing.Rectangle rr)
         {
             if (node == null)
             {
@@ -121,29 +125,28 @@ namespace VisioAutomation.Layout.BoxLayout
             var node_height = node.Height.Value;
             var node_width = node.Width.Value;
 
-            double miny = (LayoutOptions.DirectionVertical == VA.Layout.BoxLayout.DirectionVertical.TopToBottom)
+            double node_bottom = (LayoutOptions.DirectionVertical == VA.Layout.BoxLayout.DirectionVertical.TopToBottom)
                               ? origin.Y - node_height
                               : origin.Y;
 
-            double minx = (LayoutOptions.DirectionHorizontal == VA.Layout.BoxLayout.DirectionHorizontal.LeftToRight)
+            double node_left = (LayoutOptions.DirectionHorizontal == VA.Layout.BoxLayout.DirectionHorizontal.LeftToRight)
                               ? origin.X
                               : origin.X - node_width;
 
-            double maxx = minx + node_width;
+            double node_right = node_left + node_width;
 
-            double maxy = miny + node_height;
+            double node_top = node_bottom + node_height;
 
-            var rect = new VA.Drawing.Rectangle(minx, miny, maxx, maxy);
-            node.Rectangle = rect;
+            node.Rectangle = new VA.Drawing.Rectangle(node_left, node_bottom, node_right, node_top); ;
 
-            var current_point = origin;
+            var cur_origin = origin;
             double pad_x = node.Padding;
             double pad_y = node.Padding;
 
             foreach (var child_node in node.Children)
             {
                 // Calculate where the child will be placed, taking into account the direction and alignment
-                var child_origin = current_point;
+                var child_origin = cur_origin;
 
                 var child_width = child_node.Width.Value;
                 var child_height = child_node.Height.Value;
@@ -151,7 +154,6 @@ namespace VisioAutomation.Layout.BoxLayout
                 var reserved_width = node.Direction == LayoutDirection.Vertical ? node_width - 2 * node.Padding : child_width;
                 var reserved_height = node.Direction == LayoutDirection.Horizonal? node_height - 2*node.Padding: child_height;
                 var reserved_size = new VA.Drawing.Size(reserved_width, reserved_height);
-                child_node.ReservedRectangle = new VA.Drawing.Rectangle(child_origin.Add(pad_x,pad_y),reserved_size);
 
                 if (node.Direction == LayoutDirection.Vertical)
                 {
@@ -161,7 +163,7 @@ namespace VisioAutomation.Layout.BoxLayout
                     double align_delta_x = (halign == VA.Drawing.AlignmentHorizontal.Left) ? 0.0 : delta_width;
                     double align_factor_x = (halign == VA.Drawing.AlignmentHorizontal.Center) ? 0.5 : 1.0;
 
-                    child_origin = current_point.Add(sign_x*align_factor_x*align_delta_x, 0);
+                    child_origin = cur_origin.Add(sign_x*align_factor_x*align_delta_x, 0);
                 }
                 else
                 {
@@ -170,24 +172,26 @@ namespace VisioAutomation.Layout.BoxLayout
                     double delta_height = node_height - (2*pad_y) - child_height;
                     double align_delta_y = (valign == VA.Drawing.AlignmentVertical.Bottom) ? 0.0 : delta_height;
                     double align_factor_y = (valign == VA.Drawing.AlignmentVertical.Center) ? 0.5 : 1.0;
-                    child_origin = current_point.Add(0, sign_y*align_factor_y*align_delta_y);
+                    child_origin = cur_origin.Add(0, sign_y*align_factor_y*align_delta_y);
                 }
+                var child_rr = new VA.Drawing.Rectangle(child_origin.Add(pad_x, pad_y), reserved_size);
+                child_node.ReservedRectangle = child_rr;
 
                 child_origin = child_origin.Add(sign_x*pad_x, sign_y*pad_y);
 
                 // render the child
-                _PlaceNode(child_node, child_origin);
+                _PlaceNode(child_node, child_origin,child_node.ReservedRectangle);
 
                 // move to the next place to start placing a child
                 if (node.Direction == LayoutDirection.Vertical)
                 {
-                    current_point = current_point.Add(0, sign_y*child_height);
-                    current_point = current_point.Add(0, sign_y*node.ChildSeparation);
+                    cur_origin = cur_origin.Add(0, sign_y*child_height);
+                    cur_origin = cur_origin.Add(0, sign_y*node.ChildSeparation);
                 }
                 else if (node.Direction == LayoutDirection.Horizonal)
                 {
-                    current_point = current_point.Add(sign_x*child_width, 0);
-                    current_point = current_point.Add(sign_x*node.ChildSeparation, 0);
+                    cur_origin = cur_origin.Add(sign_x*child_width, 0);
+                    cur_origin = cur_origin.Add(sign_x*node.ChildSeparation, 0);
                 }
             }
         }
