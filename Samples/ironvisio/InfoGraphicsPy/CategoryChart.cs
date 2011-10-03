@@ -111,20 +111,19 @@ namespace InfoGraphicsPy
 
             int cols = xcats.Count();
             int rows = ycats.Count();
-            double pwidth = cols * CellWidth + (System.Math.Max(0, cols - 1) * 0.25) + Indent + 0.25;
 
             Node<RenderItem> root;
             var layout = create_layout(out root);
 
             foreach (int row in Enumerable.Range(0, rows))
             {
-                AddMajorRow(ycats, row, pwidth, root, xcats, cols);
+                AddMajorRow(ycats, row, root, xcats, cols);
             }
 
             AddXCatLabels(xcats, cols, root);
 
             // Add Title for Chart
-            add_title(root, pwidth);
+            add_title(root);
 
             Render(page, layout);
         }
@@ -149,7 +148,7 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void AddMajorRow(List<string> ycats, int row, double pwidth, Node<RenderItem> root, List<string> xcats, int cols)
+        private void AddMajorRow(List<string> ycats, int row, Node<RenderItem> root, List<string> xcats, int cols)
         {
             var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
             n_row.ChildSeparation = CellHorizontalSeparation;
@@ -172,12 +171,13 @@ namespace InfoGraphicsPy
                 }
             }
 
-            var n_row_label = root.AddNode(pwidth, CategoryHeight);
+            var n_row_label = root.AddNode(null, CategoryHeight);
             var info = new RenderItem();
             info.CategoryCell = null;
             info.ShapeText = ycats[row];
             info.ShapeCells = ycatformat;
             info.Underline = true;
+            info.FitWidthToParent = true;
             n_row_label.Data = info;
         }
 
@@ -192,7 +192,7 @@ namespace InfoGraphicsPy
             return layout;
         }
 
-        private void add_title(Node<RenderItem> root, double pwidth)
+        private void add_title(Node<RenderItem> root)
         {
             var n_title = root.AddNode(2.0, 0.5);
             var node_data = new RenderItem();
