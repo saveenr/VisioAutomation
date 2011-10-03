@@ -35,8 +35,6 @@ namespace TestVisioAutomation
             {
                 Assert.Fail();
             }
-
-            int x = 1;
         }
 
         [TestMethod]
