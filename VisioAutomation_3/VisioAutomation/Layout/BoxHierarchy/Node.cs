@@ -15,7 +15,6 @@ namespace VisioAutomation.Layout.BoxLayout
 
         public T Data { get; set; }
         public VA.Drawing.Rectangle Rectangle { get; set; }
-        public VA.Drawing.Rectangle ReservedRectangle { get; set; }
         public LayoutDirection Direction;
         public VA.Drawing.AlignmentHorizontal AlignmentHorizontal { get; set; }
         public VA.Drawing.AlignmentVertical AlignmentVertical { get; set; }

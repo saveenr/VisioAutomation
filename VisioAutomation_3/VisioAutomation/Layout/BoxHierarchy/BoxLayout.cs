@@ -36,18 +36,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
             // The first stage is to figure out how big the boxes need to be
             this.CalculateSizes();
-
-            // having that, we then use the layout options to put them in the correct positions
-
-            var root_size = new VA.Drawing.Size(this.Root.Width.Value, this.Root.Height.Value);
-
-            var rr = new VA.Drawing.Rectangle(this.LayoutOptions.Origin,root_size);
-            this.Place(this.LayoutOptions.Origin, rr);
-
-            // Place doesn't calculate the reserved rectangle of the root node
-            // so we do it here. because the root contains "everything" the Reserved Rectangle
-            // is the same is its rectangle calculated by Place
-            this.Root.ReservedRectangle = this.Root.Rectangle;
+            this.Place(this.LayoutOptions.Origin);
         }
 
         private void CalculateSizes()
@@ -105,13 +94,13 @@ namespace VisioAutomation.Layout.BoxLayout
             node.Width = node.Width.Value + (2*padx);
         }
 
-        private void Place(VA.Drawing.Point origin,VA.Drawing.Rectangle rr)
+        private void Place(VA.Drawing.Point origin)
         {
             // this method calculates the positions on nodes
-            _PlaceNode(_root, origin,rr);
+            _PlaceNode(_root, origin);
         }
 
-        private void _PlaceNode(Node<T> node, VA.Drawing.Point origin,VA.Drawing.Rectangle rr)
+        private void _PlaceNode(Node<T> node, VA.Drawing.Point origin)
         {
             if (node == null)
             {
@@ -174,12 +163,11 @@ namespace VisioAutomation.Layout.BoxLayout
                     child_origin = cur_origin.Add(0, sign_y*align_factor_y*align_delta_y);
                 }
                 var child_rr = new VA.Drawing.Rectangle(child_origin.Add(pad_x, pad_y), child_reserved_size);
-                child_node.ReservedRectangle = child_rr;
 
                 child_origin = child_origin.Add(sign_x*pad_x, sign_y*pad_y);
 
                 // render the child
-                _PlaceNode(child_node, child_origin,child_node.ReservedRectangle);
+                _PlaceNode(child_node, child_origin);
 
                 // move to the next place to start placing a child
                 if (node.Direction == LayoutDirection.Vertical)

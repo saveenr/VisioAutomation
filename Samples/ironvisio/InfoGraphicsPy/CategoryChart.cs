@@ -240,7 +240,7 @@ namespace InfoGraphicsPy
             {
                 if (n.Data != null)
                 {
-                    var s = dom.DrawRectangle(n.ReservedRectangle);
+                    var s = dom.DrawRectangle(n.Rectangle);
 
                     // Set Text
                     if (n.Data.ShapeText != null)
