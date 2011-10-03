@@ -18,6 +18,7 @@ namespace InfoGraphicsPy
         public string ShapeText ;
         public VA.DOM.ShapeCells ShapeCells;
         public bool Underline;
+        public bool FitWidthToParent;
     }
 
     public class CategoryChart
@@ -194,11 +195,12 @@ namespace InfoGraphicsPy
         private void add_title(Node<RenderItem> root, double pwidth)
         {
             var n_title = root.AddNode(2.0, 0.5);
-            var title_data = new RenderItem();
-            title_data.CategoryCell = null;
-            title_data.ShapeText = this.Title;
-            title_data.ShapeCells = titleformat;
-            n_title.Data = title_data;
+            var node_data = new RenderItem();
+            node_data.CategoryCell = null;
+            node_data.ShapeText = this.Title;
+            node_data.ShapeCells = titleformat;
+            node_data.FitWidthToParent = true;
+            n_title.Data = node_data;
         }
 
         private void draw_cell(CategoryCell cell_item, Node<RenderItem> n_row_col)
@@ -240,7 +242,14 @@ namespace InfoGraphicsPy
             {
                 if (n.Data != null)
                 {
-                    var s = dom.DrawRectangle(n.Rectangle);
+                    var r = n.Rectangle;
+
+                    if (n.Data.FitWidthToParent == true)
+                    {
+                       r = new VA.Drawing.Rectangle(r.LowerLeft, new VA.Drawing.Size(n.Parent.Width.Value-2*n.Padding,r.Height));
+                    }
+
+                    var s = dom.DrawRectangle(r);
 
                     // Set Text
                     if (n.Data.ShapeText != null)
@@ -257,7 +266,7 @@ namespace InfoGraphicsPy
                     // draw Underline
                     if (n.Data.Underline)
                     {
-                        var u = dom.DrawLine(n.Rectangle.LowerLeft, n.Rectangle.LowerRight);
+                        var u = dom.DrawLine(r.LowerLeft, r.LowerRight);
                     }
 
                     n.Data.ShapeCells.CharFont = default_font_id;
