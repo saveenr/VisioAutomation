@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Drawing;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Layout.BoxLayout
@@ -151,9 +152,7 @@ namespace VisioAutomation.Layout.BoxLayout
                 var child_width = child_node.Width.Value;
                 var child_height = child_node.Height.Value;
 
-                var reserved_width = node.Direction == LayoutDirection.Vertical ? node_width - 2 * node.Padding : child_width;
-                var reserved_height = node.Direction == LayoutDirection.Horizonal? node_height - 2*node.Padding: child_height;
-                var reserved_size = new VA.Drawing.Size(reserved_width, reserved_height);
+                var child_reserved_size = GetReservedSizeForChild(node, pad_y, pad_x, child_node);
 
                 if (node.Direction == LayoutDirection.Vertical)
                 {
@@ -174,7 +173,7 @@ namespace VisioAutomation.Layout.BoxLayout
                     double align_factor_y = (valign == VA.Drawing.AlignmentVertical.Center) ? 0.5 : 1.0;
                     child_origin = cur_origin.Add(0, sign_y*align_factor_y*align_delta_y);
                 }
-                var child_rr = new VA.Drawing.Rectangle(child_origin.Add(pad_x, pad_y), reserved_size);
+                var child_rr = new VA.Drawing.Rectangle(child_origin.Add(pad_x, pad_y), child_reserved_size);
                 child_node.ReservedRectangle = child_rr;
 
                 child_origin = child_origin.Add(sign_x*pad_x, sign_y*pad_y);
@@ -194,6 +193,14 @@ namespace VisioAutomation.Layout.BoxLayout
                     cur_origin = cur_origin.Add(sign_x*node.ChildSeparation, 0);
                 }
             }
+        }
+
+        private static Size GetReservedSizeForChild(Node<T> node, double pad_y, double pad_x, Node<T> child_node)
+        {
+            var reserved_width = node.Direction == LayoutDirection.Vertical ? node.Width.Value - 2*pad_x : child_node.Width.Value;
+            var reserved_height = node.Direction == LayoutDirection.Horizonal ? node.Height.Value - 2*pad_y : child_node.Height.Value;
+            var reserved_size = new VA.Drawing.Size(reserved_width, reserved_height);
+            return reserved_size;
         }
 
         public IEnumerable<Node<T>> Nodes
