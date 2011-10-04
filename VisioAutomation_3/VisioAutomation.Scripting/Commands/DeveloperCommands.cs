@@ -238,7 +238,7 @@ namespace VisioAutomation.Scripting.Commands
             
             var tree_layout = new VA.Layout.Tree.Drawing();
             tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Right;
-            tree_layout.LayoutOptions.UseDynamicConnectors = true;
+            tree_layout.LayoutOptions.UseDynamicConnectors = false;
             var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
 
             // create nodes for every namespace

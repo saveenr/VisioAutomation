@@ -442,7 +442,7 @@ namespace VisioAutomation.Layout.InternalTree
                     }
                 case (LayoutDirection.Right):
                     {
-                        return r.Top;
+                        return r.Right;
                     }
                 default:
                     {
@@ -480,30 +480,34 @@ namespace VisioAutomation.Layout.InternalTree
 
         public VA.Drawing.LineSegment GetConnectionLine(ParentChildConnection<Node<T>> connection)
         {
-            var pr = connection.Parent.Rect;
-            var cr = connection.Child.Rect;
-            double pax, pay;
-            double cax, cay;
+            var parent_rect = connection.Parent.Rect;
+            var child_rect = connection.Child.Rect;
+
+            double parent_x, parent_y;
+            double child_x, child_y;
 
             if (IsVertical(this.Options.Direction))
             {
-                pax = pr.Center.X;
-                cax = cr.Center.X;
+                parent_x = parent_rect.Center.X;
+                child_x = child_rect.Center.X;
 
-                pay = GetSide(pr, this.Options.Direction);
-                cay = GetSide(cr, GetOpposite(this.Options.Direction));
+                parent_y = GetSide(parent_rect, this.Options.Direction);
+                child_y = GetSide(child_rect, GetOpposite(this.Options.Direction));
             }
             else
             {
-                pax = GetSide(pr, this.Options.Direction);
-                cax = GetSide(cr, GetOpposite(this.Options.Direction));
+                var parent_dir = this.Options.Direction;
+                var child_dir = GetOpposite(parent_dir);
 
-                pay = pr.Center.Y;
-                cay = cr.Center.Y;
+                parent_x = GetSide(parent_rect, parent_dir);
+                child_x = GetSide(child_rect, child_dir);
+
+                parent_y = parent_rect.Center.Y;
+                child_y = child_rect.Center.Y;
             }
 
-            var parent_attach_point = new VA.Drawing.Point(pax, pay);
-            var child_attach_point = new VA.Drawing.Point(cax, cay);
+            var parent_attach_point = new VA.Drawing.Point(parent_x, parent_y);
+            var child_attach_point = new VA.Drawing.Point(child_x, child_y);
 
             return new VA.Drawing.LineSegment(parent_attach_point, child_attach_point);
         }
@@ -547,13 +551,14 @@ namespace VisioAutomation.Layout.InternalTree
         {
             var lineseg = this.GetConnectionLine(connection);
 
-            VA.Drawing.Point parent_attach_point = lineseg.Start,
-                          child_attach_point = lineseg.End,
-                          h1,
-                          h2;
+            VA.Drawing.Point parent_attach_point = lineseg.Start;
+            VA.Drawing.Point child_attach_point = lineseg.End;
+            VA.Drawing.Point h1;
+            VA.Drawing.Point h2;
 
             double scale = 0.5;
             var dif = (child_attach_point - parent_attach_point)*scale;
+
 
             var handle_displacement = IsVertical(this.Options.Direction)
                                           ? new VA.Drawing.Point(0, dif.Y)
