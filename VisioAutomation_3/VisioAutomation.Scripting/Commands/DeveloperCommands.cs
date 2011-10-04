@@ -176,56 +176,65 @@ namespace VisioAutomation.Scripting.Commands
 
         private class PathTreeBuilder
         {
-            public Dictionary<string, string> dic;
-            public string root;
+            public Dictionary<string, string> PathToParentPath;
+            public List<string> Roots;
+            public string Separator;
+            public string[] seps;
+            private System.StringSplitOptions options = System.StringSplitOptions.None;
 
             public PathTreeBuilder()
             {
-                this.dic = new Dictionary<string, string>();
+                this.PathToParentPath = new Dictionary<string, string>();
+                this.Roots = new List<string>();
+                this.Separator = ".";
+                this.seps = new[] {this.Separator};
             }
 
             public void Add(string path)
             {
-                if (this.dic.ContainsKey(path))
+                if (this.PathToParentPath.ContainsKey(path))
                 {
                     return;
                 }
 
-                var seps = new char[] { '.' };
-                var tokens = path.Split(seps);
+                var tokens = path.Split(seps,options);
+
                 if (tokens.Length == 0)
                 {
                     throw new VA.AutomationException();
                 }
                 else if (tokens.Length == 1)
                 {
-                    this.root = tokens[0];
-                    this.dic[this.root] = null;
-
+                    string first = tokens[0];
+                    this.Roots.Add(first);
+                    this.PathToParentPath[first] = null;
                 }
                 else
                 {
-                    string ps = string.Join(".", tokens.Take(tokens.Length - 1));
-                    this.Add(ps);
-                    this.dic[path] = ps;
-                }
-                
+                    string parent_path = string.Join(this.Separator, tokens.Take(tokens.Length - 1));
+                    this.Add(parent_path);
+                    this.PathToParentPath[path] = parent_path;
+                }   
             }
 
+            public List<string> GetPaths()
+            {
+                return this.PathToParentPath.Keys.ToList();
+            }
         }
 
         public IVisio.Document DrawVANamespaces()
         {
             var doc = this.Session.Document.New(8.5,11);
 
-            var namespaces_1 = GetVANamespaces();
-            var pb = new PathTreeBuilder();
-            foreach (string ns in namespaces_1)
+            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
+            var pathbuilder = new PathTreeBuilder();
+            foreach (var type in types)
             {
-                pb.Add(ns);
+                pathbuilder.Add(type.Namespace);
             }
 
-            var namespaces_2 = pb.dic.Keys.ToList();
+            var namespaces_2 = pathbuilder.GetPaths();
 
             var msagl_drawing = new VA.Layout.MSAGL.Drawing();
             var ns_shape_map = new Dictionary<string, VA.Layout.MSAGL.Shape>(namespaces_2.Count);
@@ -243,11 +252,15 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (string ns in namespaces_2)
             {
-                var pns = pb.dic[ns];
-                if (pns != null)
+                var parent_ns = pathbuilder.PathToParentPath[ns];
+                if (parent_ns != null)
                 {
-                    msagl_drawing.Connect(pns+"_to_"+ns,ns_shape_map[pns], ns_shape_map[ns],null, VA.Connections.ConnectorType.Straight);
-                    
+
+                    msagl_drawing.Connect(parent_ns+"_to_"+ns,ns_shape_map[parent_ns], ns_shape_map[ns],null, VA.Connections.ConnectorType.Straight);
+                }
+                else
+                {
+                    // that means this namespace is a root, forget about it
                 }
             }
 
@@ -257,16 +270,6 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-        private static HashSet<string> GetVANamespaces()
-        {
-            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
-            var namespaces = new HashSet<string>();
-            foreach (var type in types)
-            {
-                namespaces.Add(type.Namespace);
-            }
-            return namespaces;
-        }
 
         public IList<VA.Interop.EnumType> GetInteropEnums()
         {
