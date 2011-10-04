@@ -234,29 +234,40 @@ namespace VisioAutomation.Scripting.Commands
                 pathbuilder.Add(type.Namespace);
             }
 
-            var namespaces_2 = pathbuilder.GetPaths();
+            var namespaces = pathbuilder.GetPaths();
+            
+            var tree_layout = new VA.Layout.Tree.Drawing();
+            tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Right;
+            tree_layout.LayoutOptions.UseDynamicConnectors = true;
+            var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
 
-            var msagl_drawing = new VA.Layout.MSAGL.Drawing();
-            var ns_shape_map = new Dictionary<string, VA.Layout.MSAGL.Shape>(namespaces_2.Count);
-            foreach (string ns in namespaces_2)
+            // create nodes for every namespace
+            foreach (string ns in namespaces)
             {
                 string label = ns;
-                int n = ns.LastIndexOf(".");
-                if (n > 0)
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator);
+                if (index_of_last_sep > 0)
                 {
-                    label = ns.Substring(n+1);
+                    label = ns.Substring(index_of_last_sep+1);
                 }
-                var s = msagl_drawing.AddShape(ns,label,"basic_u.vss","Rectangle");
-                ns_shape_map[ns] = s;
+
+                var node = new VA.Layout.Tree.Node(ns);
+                node.Text = label;
+                node.Size = new VA.Drawing.Size(2.0, 0.25);
+                ns_node_map[ns] = node;
             }
 
-            foreach (string ns in namespaces_2)
+            // add children to nodes
+            foreach (string ns in namespaces)
             {
                 var parent_ns = pathbuilder.PathToParentPath[ns];
+
                 if (parent_ns != null)
                 {
-
-                    msagl_drawing.Connect(parent_ns+"_to_"+ns,ns_shape_map[parent_ns], ns_shape_map[ns],null, VA.Connections.ConnectorType.Straight);
+                    // the current namespace has a parent
+                    var parent_node = ns_node_map[parent_ns];
+                    var child_node = ns_node_map[ns];
+                    parent_node.Children.Add(child_node);
                 }
                 else
                 {
@@ -264,9 +275,31 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var layout_options = new VA.Layout.MSAGL.LayoutOptions();
-            msagl_drawing.Render(doc.Application.ActivePage,layout_options);
+            if (pathbuilder.Roots.Count == 0)
+            {
+                
+            }
+            else if (pathbuilder.Roots.Count == 1)
+            {
+                // when there is exactly one root namespace, then that node will be the tree's root node
+                var first_root = pathbuilder.Roots[0];
+                var root_n = ns_node_map[first_root];
+                tree_layout.Root = root_n;
+            }
+            else
+            {
+                // if there are multiple root namespaces, inject an empty placeholder root
+                var root_n = new VA.Layout.Tree.Node();
+                tree_layout.Root = root_n;
 
+                foreach (var root_ns in pathbuilder.Roots)
+                {
+                    var node = ns_node_map[root_ns];
+                    tree_layout.Root.Children.Add(node);
+                }
+            }
+
+            tree_layout.Render(doc.Application.ActivePage);
             return doc;
         }
 
