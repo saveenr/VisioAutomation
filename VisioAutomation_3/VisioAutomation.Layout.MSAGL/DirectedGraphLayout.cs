@@ -502,7 +502,7 @@ namespace VisioAutomation.Layout.MSAGL
                 };
 
 
-        public VA.DOM.BezierCurve draw_edge_bezier(
+        private VA.DOM.BezierCurve draw_edge_bezier(
             VA.DOM.Document page,
                                             Connector fc,
                                             MG.Edge edge)

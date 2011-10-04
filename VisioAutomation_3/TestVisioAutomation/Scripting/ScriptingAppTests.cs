@@ -15,5 +15,13 @@ namespace TestVisioAutomation
             var doc= ss.Developer.DrawScriptingDocumentation();
             doc.Close(true);
         }
+
+        [TestMethod]
+        public void Scripting_DevDocumentation2()
+        {
+            var ss = GetScriptingSession();
+            var doc = ss.Developer.DrawVANamespaces();
+            //doc.Close(true);
+        }
     }
 }

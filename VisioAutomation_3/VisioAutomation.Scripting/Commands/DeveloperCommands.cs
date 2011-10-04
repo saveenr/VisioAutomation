@@ -174,6 +174,100 @@ namespace VisioAutomation.Scripting.Commands
             return docbuilder.VisioDocument;
         }
 
+        private class PathTreeBuilder
+        {
+            public Dictionary<string, string> dic;
+            public string root;
+
+            public PathTreeBuilder()
+            {
+                this.dic = new Dictionary<string, string>();
+            }
+
+            public void Add(string path)
+            {
+                if (this.dic.ContainsKey(path))
+                {
+                    return;
+                }
+
+                var seps = new char[] { '.' };
+                var tokens = path.Split(seps);
+                if (tokens.Length == 0)
+                {
+                    throw new VA.AutomationException();
+                }
+                else if (tokens.Length == 1)
+                {
+                    this.root = tokens[0];
+                    this.dic[this.root] = null;
+
+                }
+                else
+                {
+                    string ps = string.Join(".", tokens.Take(tokens.Length - 1));
+                    this.Add(ps);
+                    this.dic[path] = ps;
+                }
+                
+            }
+
+        }
+
+        public IVisio.Document DrawVANamespaces()
+        {
+            var doc = this.Session.Document.New(8.5,11);
+
+            var namespaces_1 = GetVANamespaces();
+            var pb = new PathTreeBuilder();
+            foreach (string ns in namespaces_1)
+            {
+                pb.Add(ns);
+            }
+
+            var namespaces_2 = pb.dic.Keys.ToList();
+
+            var msagl_drawing = new VA.Layout.MSAGL.Drawing();
+            var ns_shape_map = new Dictionary<string, VA.Layout.MSAGL.Shape>(namespaces_2.Count);
+            foreach (string ns in namespaces_2)
+            {
+                string label = ns;
+                int n = ns.LastIndexOf(".");
+                if (n > 0)
+                {
+                    label = ns.Substring(n+1);
+                }
+                var s = msagl_drawing.AddShape(ns,label,"basic_u.vss","Rectangle");
+                ns_shape_map[ns] = s;
+            }
+
+            foreach (string ns in namespaces_2)
+            {
+                var pns = pb.dic[ns];
+                if (pns != null)
+                {
+                    msagl_drawing.Connect(pns+"_to_"+ns,ns_shape_map[pns], ns_shape_map[ns],null, VA.Connections.ConnectorType.Straight);
+                    
+                }
+            }
+
+            var layout_options = new VA.Layout.MSAGL.LayoutOptions();
+            msagl_drawing.Render(doc.Application.ActivePage,layout_options);
+
+            return doc;
+        }
+
+        private static HashSet<string> GetVANamespaces()
+        {
+            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
+            var namespaces = new HashSet<string>();
+            foreach (var type in types)
+            {
+                namespaces.Add(type.Namespace);
+            }
+            return namespaces;
+        }
+
         public IList<VA.Interop.EnumType> GetInteropEnums()
         {
             return VA.Interop.InteropHelper.GetEnums();
@@ -192,5 +286,34 @@ namespace VisioAutomation.Scripting.Commands
                 source = source.Skip(chunksize);
             }
         }
+    }
+}
+
+
+namespace VisioAutomation.Experimental.Developer
+{
+    public class DeveloperHelper
+    {
+        public static List<System.Type> GetTypes()
+        {
+            // find the VA assembly
+            var vat = typeof (VisioAutomation.ApplicationHelper);
+            var asm = vat.Assembly;
+
+            // TODO: Consider filtering out types that should *not* be exposed despite being public
+            var types = asm.GetExportedTypes().Where(t => t.IsPublic).ToList();
+            return types;
+        }
+
+        public static List<System.Type> GetAllTypes()
+        {
+            // find the VA assembly
+            var vat = typeof(VisioAutomation.ApplicationHelper);
+            var asm = vat.Assembly;
+
+            var types = asm.GetExportedTypes().ToList();
+            return types;
+        }
+
     }
 }
