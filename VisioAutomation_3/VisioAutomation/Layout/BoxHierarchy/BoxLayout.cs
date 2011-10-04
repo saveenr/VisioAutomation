@@ -162,7 +162,6 @@ namespace VisioAutomation.Layout.BoxLayout
                     double align_factor_y = (valign == VA.Drawing.AlignmentVertical.Center) ? 0.5 : 1.0;
                     child_origin = cur_origin.Add(0, sign_y*align_factor_y*align_delta_y);
                 }
-                var child_rr = new VA.Drawing.Rectangle(child_origin.Add(pad_x, pad_y), child_reserved_size);
 
                 child_origin = child_origin.Add(sign_x*pad_x, sign_y*pad_y);
 
