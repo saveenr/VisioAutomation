@@ -13,7 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_With_Bezier_Connectors()
         {
-            var msagl_drawing = new VA.Layout.MSAGL.Drawing();
+            var msagl_drawing = new VA.Layout.DirectedGraph.Drawing();
 
             var flowchart_stencil = "basflo_u.vss";
             var server_stencil = "server_u.vss";
@@ -33,7 +33,7 @@ namespace TestVisioAutomation
             var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.DirectedGraph.LayoutOptions();
             options.UseDynamicConnectors = false;
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -207,7 +207,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_With_Dynamic_Connectors()
         {
-            var msagl_drawing = new VisioAutomation.Layout.MSAGL.Drawing();
+            var msagl_drawing = new VA.Layout.DirectedGraph.Drawing();
 
             var n0 = msagl_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -233,7 +233,7 @@ namespace TestVisioAutomation
             var c5 = msagl_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
             var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.DirectedGraph.LayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
@@ -280,7 +280,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_Shape_with_Custom_Props()
         {
-            var vdom = new VA.Layout.MSAGL.Drawing();
+            var vdom = new VA.Layout.DirectedGraph.Drawing();
 
             var n0 = vdom.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -290,7 +290,7 @@ namespace TestVisioAutomation
             n0.CustomProperties["p2"] = new VA.CustomProperties.CustomPropertyCells("v2");
             n0.CustomProperties["p3"] = new VA.CustomProperties.CustomPropertyCells("v3");
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.DirectedGraph.LayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();

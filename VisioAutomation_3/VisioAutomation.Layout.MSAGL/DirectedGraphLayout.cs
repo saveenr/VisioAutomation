@@ -14,7 +14,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public VA.DOM.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         public VA.Drawing.Size DefaultBezierConnectorLabelBoxSize { get; set; }
-        public LayoutOptions LayoutOptions { get; set; }
+        public VA.Layout.DirectedGraph.LayoutOptions LayoutOptions { get; set; }
 
         private double ScaleToMSAGL
         {
@@ -28,7 +28,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public DirectedGraphLayout()
         {
-            this.LayoutOptions = new LayoutOptions();
+            this.LayoutOptions = new VA.Layout.DirectedGraph.LayoutOptions();
 
             this.DefaultBezierConnectorShapeCells = new VA.DOM.ShapeCells();
             DefaultBezierConnectorShapeCells.LinePattern = 0;
@@ -56,7 +56,7 @@ namespace VisioAutomation.Layout.MSAGL
             return s.Multiply(ScaleToMSAGL, ScaleToMSAGL);
         }
 
-        private bool validate_connectors(Drawing layout_diagram)
+        private bool validate_connectors(VA.Layout.DirectedGraph.Drawing layout_diagram)
         {
             bool success = true;
             foreach (var layout_connector in layout_diagram.Connectors)
@@ -75,7 +75,7 @@ namespace VisioAutomation.Layout.MSAGL
             return success;
         }
 
-        private MG.GeometryGraph CreateMSAGLGraph(Drawing layout_diagram)
+        private MG.GeometryGraph CreateMSAGLGraph(VA.Layout.DirectedGraph.Drawing layout_diagram)
         {
             var msagl_graph = new MG.GeometryGraph();
             var defsize = new VA.Drawing.Size(this.LayoutOptions.DefaultShapeSize.Width,
@@ -132,14 +132,14 @@ namespace VisioAutomation.Layout.MSAGL
         }
 
         // Given the MSAGL node, this function returns the Shape object
-        private static Shape get_shape(MG.Node msagl_node)
+        private static VA.Layout.DirectedGraph.Shape get_shape(MG.Node msagl_node)
         {
-            var shape = (Shape) msagl_node.UserData;
+            var shape = (VA.Layout.DirectedGraph.Shape)msagl_node.UserData;
             return shape;
         }
 
         internal void  _render(
-            Drawing layout_diagram, 
+            VA.Layout.DirectedGraph.Drawing layout_diagram, 
             IVisio.Page page)
         {        
             // Create A DOM and render it to the page
@@ -217,7 +217,7 @@ namespace VisioAutomation.Layout.MSAGL
         }
 
 
-        private static void StoreMetadataForMasters(Drawing layout_diagram, IVisio.Application app)
+        private static void StoreMetadataForMasters(VA.Layout.DirectedGraph.Drawing layout_diagram, IVisio.Application app)
         {
             var documents = app.Documents;
 
@@ -277,7 +277,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        public VA.DOM.Document CreateDOMDocument(Drawing layout_diagram, IVisio.Application vis)
+        public VA.DOM.Document CreateDOMDocument(VA.Layout.DirectedGraph.Drawing layout_diagram, IVisio.Application vis)
         {
             StoreMetadataForMasters(layout_diagram, vis);
 
@@ -358,7 +358,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
 
             var shape_pairs = from n in msagl_graph.NodeMap.Values
-                              let ls = (Shape) n.UserData
+                              let ls = (VA.Layout.DirectedGraph.Shape)n.UserData
                               let vs = (VA.DOM.Shape) ls.DOMNode
                               select new {layout_shape = ls, dom_shape = vs};
 
@@ -374,14 +374,14 @@ namespace VisioAutomation.Layout.MSAGL
 // DRAW EDGES WITH BEZIERS 
             foreach (var msagl_edge in msagl_graph.Edges)
             {
-                var layoutconnector = (Connector) msagl_edge.UserData;
+                var layoutconnector = (VA.Layout.DirectedGraph.Connector)msagl_edge.UserData;
                 var vconnector = draw_edge_bezier(vdoc, layoutconnector, msagl_edge);
                 layoutconnector.DOMNode = vconnector;
                 vdoc.Shapes.Add(vconnector);
             }
 
             var edge_pairs = from n in msagl_graph.Edges
-                             let lc = (Connector) n.UserData
+                             let lc = (VA.Layout.DirectedGraph.Connector)n.UserData
                              select new { msagl_edge = n, 
                                  layout_connector = lc, 
                                  dom_bezier = (VA.DOM.BezierCurve)lc.DOMNode };
@@ -413,7 +413,7 @@ namespace VisioAutomation.Layout.MSAGL
 // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
             {
-                var layoutconnector = (Connector) i.UserData;
+                var layoutconnector = (VA.Layout.DirectedGraph.Connector)i.UserData;
                 var vconnector = new VA.DOM.DynamicConnector(
                     (VA.DOM.Shape)layoutconnector.From.DOMNode,
                     (VA.DOM.Shape) layoutconnector.To.DOMNode, "Dynamic Connector", "basic_u.vss");
@@ -422,7 +422,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
 
             var edge_pairs = from n in msagl_graph.Edges
-                             let lc = (Connector) n.UserData
+                             let lc = (VA.Layout.DirectedGraph.Connector)n.UserData
                              select
                                  new { msagl_edge = n, layout_connector = lc, vconnector = (VA.DOM.DynamicConnector)lc.DOMNode };
 
@@ -443,7 +443,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private void format_shape(Shape layout_shape, VA.DOM.Shape dom_shape)
+        private void format_shape(VA.Layout.DirectedGraph.Shape layout_shape, VA.DOM.Shape dom_shape)
         {
             layout_shape.VisioShape = dom_shape.VisioShape;
 
@@ -504,7 +504,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         private VA.DOM.BezierCurve draw_edge_bezier(
             VA.DOM.Document page,
-                                            Connector fc,
+                                            VA.Layout.DirectedGraph.Connector fc,
                                             MG.Edge edge)
         {
             var final_bez_points =

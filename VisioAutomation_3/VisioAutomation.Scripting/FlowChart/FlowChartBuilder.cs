@@ -7,15 +7,15 @@ namespace VisioAutomation.Scripting.FlowChart
 {
     public class FlowChartBuilder
     {
-        public static IList<VA.Layout.MSAGL.Drawing> LoadFromXML(Session scriptingsession, string filename)
+        public static IList<VA.Layout.DirectedGraph.Drawing> LoadFromXML(Session scriptingsession, string filename)
         {
             var xmldoc = XDocument.Load(filename);
             return LoadFromXML(scriptingsession, xmldoc);
         }
 
-        public static IList<VA.Layout.MSAGL.Drawing> LoadFromXML(Session scriptingsession, XDocument xmldoc)
+        public static IList<VA.Layout.DirectedGraph.Drawing> LoadFromXML(Session scriptingsession, XDocument xmldoc)
         {
-            var drawings = new List<VA.Layout.MSAGL.Drawing>();
+            var drawings = new List<VA.Layout.DirectedGraph.Drawing>();
             bool major_error = false;
             var page_els = xmldoc.Root.Elements("page");
             foreach (var page_el in page_els)
@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.FlowChart
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, renderer);
 
-                var drawing = new Layout.MSAGL.Drawing();
+                var drawing = new VA.Layout.DirectedGraph.Drawing();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
@@ -135,7 +135,7 @@ namespace VisioAutomation.Scripting.FlowChart
 
         public static void RenderDiagrams(
             VA.Scripting.Session scriptingsession,
-            IList<VA.Layout.MSAGL.Drawing> drawings)
+            IList<VA.Layout.DirectedGraph.Drawing> drawings)
         {
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Start Rendering FlowChart");
             var app = scriptingsession.VisioApplication;
@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.FlowChart
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering page: {0}", i+1);
 
-                var options = new Layout.MSAGL.LayoutOptions();
+                var options = new VA.Layout.DirectedGraph.LayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 IVisio.Page page = null;

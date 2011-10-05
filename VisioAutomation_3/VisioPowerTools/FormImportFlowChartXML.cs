@@ -59,8 +59,8 @@ namespace VisioPowerTools
                 MessageBox.Show("Failed to load XML");
                 return;
             }
-            
-            IList<VA.Layout.MSAGL.Drawing> drawings;
+
+            IList<VA.Layout.DirectedGraph.Drawing> drawings;
             try
             {
                 VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;

@@ -207,7 +207,7 @@ namespace VisioAutomationSamples
         public static void MSAGL()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var msagl_drawing = new VA.Layout.MSAGL.Drawing();
+            var msagl_drawing = new VA.Layout.DirectedGraph.Drawing();
 
             // Create a Node 0
             var n0 = msagl_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
@@ -260,7 +260,7 @@ namespace VisioAutomationSamples
             c2.ShapeCells.LineWeight = 0.10;
 
             // Perform the rendering
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.DirectedGraph.LayoutOptions();
             options.UseDynamicConnectors = false;
 
             msagl_drawing.Render(page1, options);

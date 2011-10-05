@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout.MSAGL
+namespace VisioAutomation.Layout.DirectedGraph
 {
     public class Drawing
     {
@@ -83,7 +83,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public void Render(IVisio.Page page, LayoutOptions options)
         {
-            var renderer = new DirectedGraphLayout();
+            var renderer = new VA.Layout.MSAGL.DirectedGraphLayout();
             renderer.LayoutOptions = options;
             renderer._render(this, page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);

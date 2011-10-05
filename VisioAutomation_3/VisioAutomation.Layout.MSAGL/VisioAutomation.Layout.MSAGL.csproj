@@ -66,13 +66,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connector.cs" />
+    <Compile Include="DirectedGraph\Connector.cs" />
     <Compile Include="DirectedGraphLayout.cs" />
-    <Compile Include="Drawing.cs" />
-    <Compile Include="LayoutOptions.cs" />
+    <Compile Include="DirectedGraph\Drawing.cs" />
+    <Compile Include="DirectedGraph\LayoutOptions.cs" />
     <Compile Include="MSAGLUtil.cs" />
-    <Compile Include="Node.cs" />
-    <Compile Include="Shape.cs" />
+    <Compile Include="DirectedGraph\Node.cs" />
+    <Compile Include="DirectedGraph\Shape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
