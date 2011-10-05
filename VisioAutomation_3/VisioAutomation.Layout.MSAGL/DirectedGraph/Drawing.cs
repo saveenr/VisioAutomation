@@ -11,17 +11,6 @@ namespace VisioAutomation.Layout.DirectedGraph
         private Dictionary<string, Shape> shapes;
         private Dictionary<string, Connector> connectors;
 
-        public Shape AddShape(string id)
-        {
-            var s0 = new Shape(id);
-            s0.Label = id.ToString();
-            s0.StencilName = "basic_u.vss";
-            s0.MasterName = "Rectangle";
-
-            this.shapes.Add(id, s0);
-            return s0;
-        }
-
         public Shape AddShape(string id, string label, string stencil_name, string master_name)
         {
             var s0 = new Shape(id);
