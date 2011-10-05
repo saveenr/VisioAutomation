@@ -217,8 +217,11 @@ namespace VisioAutomation.Layout.MSAGL
         }
 
 
-        private static void StoreMetadataForMasters(VA.Layout.DirectedGraph.Drawing layout_diagram, IVisio.Application app)
+        private static void ResolveMasters(VA.Layout.DirectedGraph.Drawing layout_diagram, IVisio.Application app)
         {
+            // for masters that are identified by their name and stencil, go find the actual master objects by
+            // loading the specified stenciles
+
             var documents = app.Documents;
 
             var name_to_stencil = new Dictionary<string, IVisio.Document>();
@@ -279,7 +282,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public VA.DOM.Document CreateDOMDocument(VA.Layout.DirectedGraph.Drawing layout_diagram, IVisio.Application vis)
         {
-            StoreMetadataForMasters(layout_diagram, vis);
+            ResolveMasters(layout_diagram, vis);
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
 
