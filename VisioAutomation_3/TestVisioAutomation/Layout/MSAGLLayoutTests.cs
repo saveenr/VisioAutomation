@@ -13,24 +13,24 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_With_Bezier_Connectors()
         {
-            var vdom = new VA.Layout.MSAGL.Drawing();
+            var msagl_drawing = new VA.Layout.MSAGL.Drawing();
 
             var flowchart_stencil = "basflo_u.vss";
             var server_stencil = "server_u.vss";
 
-            var n0 = vdom.AddShape("n0", "Untitled Node", flowchart_stencil, "Decision");
+            var n0 = msagl_drawing.AddShape("n0", "Untitled Node", flowchart_stencil, "Decision");
             n0.Size = new VA.Drawing.Size(3, 2);
-            var n1 = vdom.AddShape("n1", "", flowchart_stencil, "Decision");
-            var n2 = vdom.AddShape("n2", "MailServer", server_stencil, "Server");
-            var n3 = vdom.AddShape("n3", null, flowchart_stencil, "Data");
-            var n4 = vdom.AddShape("n4", "Alone", flowchart_stencil, "Data");
+            var n1 = msagl_drawing.AddShape("n1", "", flowchart_stencil, "Decision");
+            var n2 = msagl_drawing.AddShape("n2", "MailServer", server_stencil, "Server");
+            var n3 = msagl_drawing.AddShape("n3", null, flowchart_stencil, "Data");
+            var n4 = msagl_drawing.AddShape("n4", "Alone", flowchart_stencil, "Data");
 
-            var c0 = vdom.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
-            var c1 = vdom.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
-            var c3 = vdom.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
-            var c4 = vdom.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
-            var c5 = vdom.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
-            var c6 = vdom.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+            var c0 = msagl_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
+            var c1 = msagl_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
+            var c3 = msagl_drawing.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
+            var c4 = msagl_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
+            var c5 = msagl_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
+            var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
 
             var options = new VA.Layout.MSAGL.LayoutOptions();
@@ -39,7 +39,7 @@ namespace TestVisioAutomation
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
 
-            vdom.Render(page, options);
+            msagl_drawing.Render(page, options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -207,31 +207,31 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_With_Dynamic_Connectors()
         {
-            var vdom = new VisioAutomation.Layout.MSAGL.Drawing();
+            var msagl_drawing = new VisioAutomation.Layout.MSAGL.Drawing();
 
-            var n0 = vdom.AddShape("n0", "Untitled Node", "basflo_u.vss",
+            var n0 = msagl_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
             n0.Size = new VA.Drawing.Size(3, 2);
-            var n1 = vdom.AddShape("n1", "", "basflo_u.vss",
+            var n1 = msagl_drawing.AddShape("n1", "", "basflo_u.vss",
                                    "Decision");
 
             n1.ShapeCells = new VA.DOM.ShapeCells();
             n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
             n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
             n1.ShapeCells.FillPattern = 40;
-            var n2 = vdom.AddShape("n2", "MailServer", "server_u.vss",
+            var n2 = msagl_drawing.AddShape("n2", "MailServer", "server_u.vss",
                                    "Email Server");
-            var n3 = vdom.AddShape("n3", null, "basflo_u.vss",
+            var n3 = msagl_drawing.AddShape("n3", null, "basflo_u.vss",
                                    "Data");
-            var n4 = vdom.AddShape("n4", "Alone", "basflo_u.vss",
+            var n4 = msagl_drawing.AddShape("n4", "Alone", "basflo_u.vss",
                                    "Data");
 
-            var c0 = vdom.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
-            var c1 = vdom.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
-            var c3 = vdom.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
-            var c4 = vdom.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
-            var c5 = vdom.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
-            var c6 = vdom.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+            var c0 = msagl_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
+            var c1 = msagl_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
+            var c3 = msagl_drawing.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
+            var c4 = msagl_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
+            var c5 = msagl_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
+            var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
             var options = new VA.Layout.MSAGL.LayoutOptions();
             options.UseDynamicConnectors = true;
@@ -239,7 +239,7 @@ namespace TestVisioAutomation
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            vdom.Render(page1, options);
+            msagl_drawing.Render(page1, options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
