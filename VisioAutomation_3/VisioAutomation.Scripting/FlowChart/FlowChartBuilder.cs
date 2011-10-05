@@ -109,8 +109,8 @@ namespace VisioAutomation.Scripting.FlowChart
                     var def_connector_type = VA.Connections.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
-                    var from_shape = drawing.FindShape(con_info.From);
-                    var to_shape = drawing.FindShape(con_info.To);
+                    var from_shape = drawing.Shapes.Find(con_info.From);
+                    var to_shape = drawing.Shapes.Find(con_info.To);
 
                     var def_con_color = new VA.Drawing.ColorRGB(0x000000);
                     var def_con_weight = 1.0 / 72.0;

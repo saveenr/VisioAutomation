@@ -7,7 +7,7 @@ using System.Collections;
 
 namespace VisioAutomation.Layout.DirectedGraph
 {
-    public class IDList<T> : IEnumerable<T>
+    public class IDList<T> : IEnumerable<T> where T : class
     {
         private Dictionary<string, T> items;
 
@@ -61,7 +61,16 @@ namespace VisioAutomation.Layout.DirectedGraph
             }
         }
 
-        
+        public T Find(string id)
+        {
+            T item = null;
+            if (this.items.TryGetValue(id, out item))
+            {
+                return item;
+            }
+
+            return null;
+        }        
     }
 
     public class ShapeList : IDList<Shape>
@@ -72,10 +81,19 @@ namespace VisioAutomation.Layout.DirectedGraph
         }
     }
 
+    public class ConnectorList : IDList<Connector>
+    {
+        public ConnectorList()
+            : base()
+        {
+        }
+    }
+
+
     public class Drawing
     {
         public ShapeList Shapes;
-        private Dictionary<string, Connector> connectors;
+        public ConnectorList Connectors;
 
         public Shape AddShape(string id, string label, string stencil_name, string master_name)
         {
@@ -104,25 +122,14 @@ namespace VisioAutomation.Layout.DirectedGraph
             new_connector.Label = label;
             new_connector.ConnectorType = type;
 
-            this.connectors.Add(id, new_connector);
+            this.Connectors.Add(id, new_connector);
             return new_connector;
-        }
-
-        public IEnumerable<Connector> Connectors
-        {
-            get
-            {
-                foreach (var kv in this.connectors)
-                {
-                    yield return kv.Value;
-                }
-            }
         }
 
         public Drawing()
         {
             this.Shapes = new ShapeList();
-            this.connectors = new Dictionary<string, Connector>();
+            this.Connectors = new ConnectorList();
         }
 
         public void Render(IVisio.Page page, MSAGLLayoutOptions options)
@@ -131,87 +138,6 @@ namespace VisioAutomation.Layout.DirectedGraph
             renderer.LayoutOptions = options;
             renderer._render(this, page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
-        }
-
-        private bool try_get_shape(string id, ref Shape shape)
-        {
-            if (this.Shapes.ContainsKey(id))
-            {
-                shape = this.Shapes[id];
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public Shape GetShape(string id)
-        {
-            Shape shape = null;
-            if (this.try_get_shape(id, ref shape))
-            {
-                return shape;
-            }
-
-            string msg = string.Format("Could not find shape with id '{0}'", id);
-            throw new System.InvalidOperationException(msg);
-        }
-
-        public Shape FindShape(string id)
-        {
-            Shape shape = null;
-            if (this.try_get_shape(id, ref shape))
-            {
-                return shape;
-            }
-
-            return null;
-        }
-
-        private bool try_get_connector(string id, ref Connector connector)
-        {
-            if (this.connectors.ContainsKey(id))
-            {
-                connector = this.connectors[id];
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public Connector GetConnector(string id)
-        {
-            Connector c = null;
-            if (this.try_get_connector(id, ref c))
-            {
-                return c;
-            }
-
-            string msg = string.Format("Could not find connector with id '{0}'", id);
-            throw new System.InvalidOperationException(msg);
-        }
-
-        public Connector FindConnector(string id)
-        {
-            Connector c = null;
-
-            if (this.try_get_connector(id, ref c))
-            {
-                return c;
-            }
-
-            return null;
-        }
-
-        public IEnumerable<string> ShapeIDs
-        {
-            get
-            {
-                return this.Shapes.IDs;
-            }
         }
     }
 }
