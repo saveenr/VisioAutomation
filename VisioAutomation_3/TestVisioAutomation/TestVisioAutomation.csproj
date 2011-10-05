@@ -112,7 +112,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Scripting\ScriptingPageTests.cs" />
-    <Compile Include="Layout\AutoLayoutTests.cs" />
+    <Compile Include="Layout\MSAGLLayoutTests.cs" />
     <Compile Include="Layout\TreeTests.cs" />
     <Compile Include="DOM\DOM_Draw_tests.cs" />
     <Compile Include="Layout\OrgChartTests.cs" />
