@@ -197,6 +197,99 @@ namespace VisioAutomation.DOM
             }
         }
 
+        internal class MasterLoader
+        {
+            public class MasterRef
+            {
+                public string StencilName;
+                public string MasterName;
+                public IVisio.Master VisioMaster;
+            }
+
+            private Dictionary<string, MasterRef> dic;
+
+            public MasterLoader()
+            {
+                this.dic = new Dictionary<string, MasterRef>();
+            }
+
+            public void Add(string mastername, string stencilname)
+            {
+                var item = new MasterRef();
+                item.MasterName = mastername;
+                item.StencilName = stencilname;
+                item.VisioMaster = null;
+
+                string key = this.getkey(mastername, stencilname);
+                this.dic[key] = item;
+            }
+
+            private string getkey(string mastername, string stencilname)
+            {
+                return mastername + "+" + stencilname;
+            }
+
+            public MasterRef Get(string mastername, string stencilname)
+            {
+                string key = this.getkey(mastername, stencilname);
+                return this.dic[key];
+            }
+
+            public bool Contains(string mastername, string stencilname)
+            {
+                string key = this.getkey(mastername, stencilname);
+                return this.dic.ContainsKey(key);
+            }
+
+
+            public void Resolve(IVisio.Documents docs)
+            {
+                var unique_stencils = new HashSet<string>();
+                foreach (var kv in this.dic)
+                {
+                    string mr = kv.Value.StencilName;
+                    unique_stencils.Add(mr);
+                }
+                var name_to_stencildoc = new Dictionary<string, IVisio.Document>();
+                foreach (var stencil in unique_stencils)
+                {
+                    try
+                    {
+                        var stencil_doc = docs.OpenStencil(stencil);
+                        name_to_stencildoc[stencil] = stencil_doc;
+                    }
+                    catch (Exception)
+                    {
+                        string msg = string.Format("No such Stencil \"{0}\"", stencil);
+                        throw new AutomationException(msg);
+                    }
+                }
+
+                // identify real master objects for all deferred shapes
+                foreach (var mr in this.dic.Values)
+                {
+                    if (mr.VisioMaster == null)
+                    {
+                        var stencildoc = name_to_stencildoc[mr.StencilName];
+                        var stencilmasters = stencildoc.Masters;
+
+                        try
+                        {
+                            var master_object = stencilmasters[mr.MasterName];
+                            mr.VisioMaster= master_object;
+                        }
+                        catch (Exception)
+                        {
+                            string msg = string.Format("No such Master \"{0}\" in Stencil \"{1}\"",
+                                                       mr.MasterName, mr.StencilName);
+                            throw new AutomationException(msg);
+                        }
+                    }
+                }               
+            }
+
+        }
+
         private void LoadMastersDeferred(RenderContext ctx)
         {
             var deferred_shapes = this.Shapes
@@ -204,57 +297,20 @@ namespace VisioAutomation.DOM
                 .Cast<ShapeFromMaster>()
                 .Where(shape => shape.MasterObject == null);
 
-            var unique_stencils = deferred_shapes
-                .Select(shape => shape.StencilName)
-                .Distinct()
-                .ToList();
+            var mres = new MasterLoader();
+            foreach (var s in deferred_shapes)
+            {
+                mres.Add(s.MasterName,s.StencilName);
+            }
 
             var application = ctx.VisioPage.Application;
             var docs = application.Documents;
+            mres.Resolve(docs);
 
-            var name_to_stencildoc = new Dictionary<string, IVisio.Document>();
-            foreach (var stencil in unique_stencils)
+            foreach (var s in deferred_shapes)
             {
-                try
-                {
-                    var stencil_doc = docs.OpenStencil(stencil);
-                    name_to_stencildoc[stencil] = stencil_doc;
-                }
-                catch (Exception)
-                {
-                    string msg = string.Format("No such Stencil \"{0}\"", stencil);
-                    throw new AutomationException(msg);
-                }
-            }
-
-            var name_to_master = new Dictionary<string, IVisio.Master>();
-
-            // identify real master objects for all deferred shapes
-            foreach (var deferred_shape in deferred_shapes)
-            {
-                string key = string.Format("{0}+{1}", deferred_shape.MasterName, deferred_shape.StencilName);
-                if (name_to_master.ContainsKey(key))
-                {
-                    deferred_shape.MasterObject = name_to_master[key];
-                }
-                else
-                {
-                    var stencildoc = name_to_stencildoc[deferred_shape.StencilName];
-                    var stencilmasters = stencildoc.Masters;
-
-                    try
-                    {
-                        var master_object = stencilmasters[deferred_shape.MasterName];
-                        name_to_master[key] = master_object;
-                        deferred_shape.MasterObject = master_object;
-                    }
-                    catch (Exception)
-                    {
-                        string msg = string.Format("No such Master \"{0}\" in Stencil \"{1}\"",
-                                                   deferred_shape.MasterName, deferred_shape.StencilName);
-                        throw new AutomationException(msg);
-                    }
-                }
+                var mref = mres.Get(s.MasterName, s.StencilName);
+                s.MasterObject = mref.VisioMaster;
             }
 
             // Ensure that all masters have objects now
