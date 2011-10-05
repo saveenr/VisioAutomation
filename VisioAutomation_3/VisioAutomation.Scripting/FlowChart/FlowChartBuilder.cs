@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.FlowChart
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering page: {0}", i+1);
 
-                var options = new VA.Layout.DirectedGraph.LayoutOptions();
+                var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 IVisio.Page page = null;

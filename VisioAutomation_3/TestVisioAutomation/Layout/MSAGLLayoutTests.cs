@@ -33,7 +33,7 @@ namespace TestVisioAutomation
             var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
 
-            var options = new VA.Layout.DirectedGraph.LayoutOptions();
+            var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = false;
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -233,7 +233,7 @@ namespace TestVisioAutomation
             var c5 = msagl_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
             var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
-            var options = new VA.Layout.DirectedGraph.LayoutOptions();
+            var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
@@ -290,7 +290,7 @@ namespace TestVisioAutomation
             n0.CustomProperties["p2"] = new VA.CustomProperties.CustomPropertyCells("v2");
             n0.CustomProperties["p3"] = new VA.CustomProperties.CustomPropertyCells("v3");
 
-            var options = new VA.Layout.DirectedGraph.LayoutOptions();
+            var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();

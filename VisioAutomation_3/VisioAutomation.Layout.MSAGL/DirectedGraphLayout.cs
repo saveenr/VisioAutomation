@@ -14,7 +14,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public VA.DOM.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         public VA.Drawing.Size DefaultBezierConnectorLabelBoxSize { get; set; }
-        public VA.Layout.DirectedGraph.LayoutOptions LayoutOptions { get; set; }
+        public VA.Layout.DirectedGraph.MSAGLLayoutOptions LayoutOptions { get; set; }
 
         private double ScaleToMSAGL
         {
@@ -28,7 +28,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public DirectedGraphLayout()
         {
-            this.LayoutOptions = new VA.Layout.DirectedGraph.LayoutOptions();
+            this.LayoutOptions = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
 
             this.DefaultBezierConnectorShapeCells = new VA.DOM.ShapeCells();
             DefaultBezierConnectorShapeCells.LinePattern = 0;

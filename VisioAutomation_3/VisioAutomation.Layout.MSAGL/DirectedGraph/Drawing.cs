@@ -81,7 +81,7 @@ namespace VisioAutomation.Layout.DirectedGraph
             this.connectors = new Dictionary<string, Connector>();
         }
 
-        public void Render(IVisio.Page page, LayoutOptions options)
+        public void Render(IVisio.Page page, MSAGLLayoutOptions options)
         {
             var renderer = new VA.Layout.MSAGL.DirectedGraphLayout();
             renderer.LayoutOptions = options;

@@ -69,7 +69,7 @@
     <Compile Include="DirectedGraph\Connector.cs" />
     <Compile Include="DirectedGraphLayout.cs" />
     <Compile Include="DirectedGraph\Drawing.cs" />
-    <Compile Include="DirectedGraph\LayoutOptions.cs" />
+    <Compile Include="DirectedGraph\MSAGLLayoutOptions.cs" />
     <Compile Include="MSAGLUtil.cs" />
     <Compile Include="DirectedGraph\Node.cs" />
     <Compile Include="DirectedGraph\Shape.cs" />
