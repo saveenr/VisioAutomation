@@ -138,7 +138,7 @@ namespace VisioAutomation.Layout.MSAGL
             return shape;
         }
 
-        internal void  _render(
+        public void  Render(
             VA.Layout.DirectedGraph.Drawing layout_diagram, 
             IVisio.Page page)
         {        

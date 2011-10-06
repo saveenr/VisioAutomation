@@ -136,7 +136,7 @@ namespace VisioAutomation.Layout.DirectedGraph
         {
             var renderer = new VA.Layout.MSAGL.DirectedGraphRenderer();
             renderer.LayoutOptions = options;
-            renderer._render(this, page);
+            renderer.Render(this, page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
         }
     }
