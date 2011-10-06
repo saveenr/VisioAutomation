@@ -260,10 +260,10 @@ namespace VisioAutomationSamples
             c2.ShapeCells.LineWeight = 0.10;
 
             // Perform the rendering
-            var options = new VA.Layout.MSAGL.MSAGLLayoutOptions();
+            var options = new VA.Layout.MSAGL.LayoutOptions();
             options.UseDynamicConnectors = false;
 
-            VA.Layout.MSAGL.DirectedGraphRenderer.Render(page1, directed_graph_drawing, options);
+            VA.Layout.MSAGL.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
         }
     }
 }

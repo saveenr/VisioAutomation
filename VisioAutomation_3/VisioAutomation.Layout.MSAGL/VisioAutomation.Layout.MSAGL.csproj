@@ -66,8 +66,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectedGraphRenderer.cs" />
-    <Compile Include="MSAGLLayoutOptions.cs" />
+    <Compile Include="MSAGLRenderer.cs" />
+    <Compile Include="LayoutOptions.cs" />
     <Compile Include="MSAGLUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

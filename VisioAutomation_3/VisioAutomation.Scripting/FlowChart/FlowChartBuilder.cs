@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.FlowChart
                 var node_ids = new HashSet<string>();
                 var con_ids = new HashSet<string>();
 
-                var renderer = new Layout.MSAGL.DirectedGraphRenderer();
+                var renderer = new Layout.MSAGL.MSAGLRenderer();
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, renderer);
 
@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.FlowChart
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering page: {0}", i+1);
 
-                var options = new VA.Layout.MSAGL.MSAGLLayoutOptions();
+                var options = new VA.Layout.MSAGL.LayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 IVisio.Page page = null;
@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.FlowChart
                     page = doc.Pages.Add();
                 }
 
-                VA.Layout.MSAGL.DirectedGraphRenderer.Render(page, directed_graph_drawing, options);
+                VA.Layout.MSAGL.MSAGLRenderer.Render(page, directed_graph_drawing, options);
 
                 scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
                 scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
@@ -183,7 +183,7 @@ namespace VisioAutomation.Scripting.FlowChart
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering flowchart.");
         }
 
-        private static void GetRenderOptionsFromXml(XElement el, Layout.MSAGL.DirectedGraphRenderer directed_graph_layout)
+        private static void GetRenderOptionsFromXml(XElement el, Layout.MSAGL.MSAGLRenderer directed_graph_layout)
         {
             System.Func<string, bool> bool_converter = s => bool.Parse(s);
             System.Func<string, int> int_converter = s => int.Parse(s);
