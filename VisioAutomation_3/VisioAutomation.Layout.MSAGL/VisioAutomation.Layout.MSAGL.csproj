@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DirectedGraph\Connector.cs" />
-    <Compile Include="DirectedGraphLayout.cs" />
+    <Compile Include="DirectedGraphRenderer.cs" />
     <Compile Include="DirectedGraph\Drawing.cs" />
     <Compile Include="DirectedGraph\MSAGLLayoutOptions.cs" />
     <Compile Include="MSAGLUtil.cs" />

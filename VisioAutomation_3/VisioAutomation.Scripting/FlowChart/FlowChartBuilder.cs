@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.FlowChart
                 var node_ids = new HashSet<string>();
                 var con_ids = new HashSet<string>();
 
-                var renderer = new Layout.MSAGL.DirectedGraphLayout();
+                var renderer = new Layout.MSAGL.DirectedGraphRenderer();
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, renderer);
 
@@ -182,7 +182,7 @@ namespace VisioAutomation.Scripting.FlowChart
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering flowchart.");
         }
 
-        private static void GetRenderOptionsFromXml(XElement el, Layout.MSAGL.DirectedGraphLayout directed_graph_layout)
+        private static void GetRenderOptionsFromXml(XElement el, Layout.MSAGL.DirectedGraphRenderer directed_graph_layout)
         {
             System.Func<string, bool> bool_converter = s => bool.Parse(s);
             System.Func<string, int> int_converter = s => int.Parse(s);

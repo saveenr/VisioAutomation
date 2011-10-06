@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Layout.MSAGL
 {
-    public class DirectedGraphLayout
+    public class DirectedGraphRenderer
     {
         private VA.Drawing.Rectangle msagl_bb;
         private VA.Drawing.Rectangle layout_bb;
@@ -26,7 +26,7 @@ namespace VisioAutomation.Layout.MSAGL
             get { return 1.0/this.LayoutOptions.ScalingFactor; }
         }
 
-        public DirectedGraphLayout()
+        public DirectedGraphRenderer()
         {
             this.LayoutOptions = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
 
@@ -376,8 +376,8 @@ namespace VisioAutomation.Layout.MSAGL
 
             foreach (var i in edge_pairs)
             {
-                int con_route_style = (int) dic_ct_to_appearance[i.layout_connector.ConnectorType];
-                int shape_route_style = (int) dic_ct_to_style[i.layout_connector.ConnectorType];
+                int con_route_style = (int)  ConnectorTypeToCellVal_Appearance(i.layout_connector.ConnectorType);
+                int shape_route_style = (int) ConnectorTypeToCellVal_Style(i.layout_connector.ConnectorType);
 
                 i.vconnector.Text = i.layout_connector.Label;
 
@@ -432,24 +432,6 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private static readonly Dictionary<VA.Connections.ConnectorType, IVisio.VisCellVals> dic_ct_to_appearance
-            =
-            new Dictionary<VA.Connections.ConnectorType, IVisio.VisCellVals>
-                {
-                    { VA.Connections.ConnectorType.Curved, IVisio.VisCellVals.visLORouteExtNURBS},
-                    { VA.Connections.ConnectorType.Straight, IVisio.VisCellVals.visLORouteExtStraight},
-                    { VA.Connections.ConnectorType.RightAngle, IVisio.VisCellVals.visLORouteExtDefault}
-                };
-
-        private static readonly Dictionary<VA.Connections.ConnectorType, IVisio.VisCellVals> dic_ct_to_style =
-            new Dictionary<VA.Connections.ConnectorType, IVisio.VisCellVals>
-                {
-                    { VA.Connections.ConnectorType.Curved, IVisio.VisCellVals.visLORouteRightAngle},
-                    { VA.Connections.ConnectorType.Straight, IVisio.VisCellVals.visLORouteCenterToCenter},
-                    { VA.Connections.ConnectorType.RightAngle, IVisio.VisCellVals.visLORouteDefault}
-                };
-
-
         private VA.DOM.BezierCurve draw_edge_bezier(
             VA.DOM.Document page,
                                             VA.Layout.DirectedGraph.Connector fc,
@@ -461,5 +443,52 @@ namespace VisioAutomation.Layout.MSAGL
             var bez_shape = new VA.DOM.BezierCurve(final_bez_points);
             return bez_shape;
         }
+
+        public IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(VA.Connections.ConnectorType ct)
+        {
+            switch (ct)
+            {
+                case (VA.Connections.ConnectorType.Curved):
+                    {
+                        return IVisio.VisCellVals.visLORouteExtNURBS;
+                    }
+                case (VA.Connections.ConnectorType.Straight):
+                    {
+                        return IVisio.VisCellVals.visLORouteExtStraight;
+                    }
+                case (VA.Connections.ConnectorType.RightAngle):
+                    {
+                        return IVisio.VisCellVals.visLORouteExtDefault;
+                    }
+                default:
+                    {
+                        throw new System.ArgumentOutOfRangeException();
+                    }
+            }
+        }
+
+        public IVisio.VisCellVals ConnectorTypeToCellVal_Style(VA.Connections.ConnectorType ct)
+        {
+            switch (ct)
+            {
+                case (VA.Connections.ConnectorType.Curved):
+                    {
+                        return IVisio.VisCellVals.visLORouteRightAngle;
+                    }
+                case (VA.Connections.ConnectorType.Straight):
+                    {
+                        return IVisio.VisCellVals.visLORouteCenterToCenter;
+                    }
+                case (VA.Connections.ConnectorType.RightAngle):
+                    {
+                        return IVisio.VisCellVals.visLORouteDefault;
+                    }
+                default:
+                    {
+                        throw new System.ArgumentOutOfRangeException();
+                    }
+            }
+        }
+
     }
 }
