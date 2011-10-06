@@ -260,7 +260,7 @@ namespace VisioAutomationSamples
             c2.ShapeCells.LineWeight = 0.10;
 
             // Perform the rendering
-            var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
+            var options = new VA.Layout.MSAGL.MSAGLLayoutOptions();
             options.UseDynamicConnectors = false;
 
             VA.Layout.MSAGL.DirectedGraphRenderer.Render(page1, directed_graph_drawing, options);

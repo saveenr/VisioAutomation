@@ -14,7 +14,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public VA.DOM.ShapeCells DefaultBezierConnectorShapeCells { get; set; }
         public VA.Drawing.Size DefaultBezierConnectorLabelBoxSize { get; set; }
-        public VA.Layout.DirectedGraph.MSAGLLayoutOptions LayoutOptions { get; set; }
+        public VA.Layout.MSAGL.MSAGLLayoutOptions LayoutOptions { get; set; }
 
         private double ScaleToMSAGL
         {
@@ -28,7 +28,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public DirectedGraphRenderer()
         {
-            this.LayoutOptions = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
+            this.LayoutOptions = new VA.Layout.MSAGL.MSAGLLayoutOptions();
 
             this.DefaultBezierConnectorShapeCells = new VA.DOM.ShapeCells();
             DefaultBezierConnectorShapeCells.LinePattern = 0;
@@ -490,7 +490,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        public static void Render(IVisio.Page page, VisioAutomation.Layout.DirectedGraph.Drawing drawing, VA.Layout.DirectedGraph.MSAGLLayoutOptions options)
+        public static void Render(IVisio.Page page, VisioAutomation.Layout.DirectedGraph.Drawing drawing, VA.Layout.MSAGL.MSAGLLayoutOptions options)
         {
             var renderer = new VA.Layout.MSAGL.DirectedGraphRenderer();
             renderer.LayoutOptions = options;
