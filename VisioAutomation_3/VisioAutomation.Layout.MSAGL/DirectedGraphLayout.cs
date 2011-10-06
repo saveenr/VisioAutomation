@@ -224,59 +224,31 @@ namespace VisioAutomation.Layout.MSAGL
 
             var documents = app.Documents;
 
-            var name_to_stencil = new Dictionary<string, IVisio.Document>();
             var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
 
             // Load and cache all the masters
-            var comparer = System.StringComparer.CurrentCultureIgnoreCase;
-            var master_dic = new Dictionary<string, IVisio.Master>(comparer);
-            var all_layout_shapes = layout_diagram.Shapes
-                .Select( layout_shape => new {layout_shape, masterkey = string.Format("{0}/{1}", layout_shape.StencilName, layout_shape.MasterName)});
-
-            // Cache all the masters based on a combinarion of their parent stencil name and the master name
-            foreach (var layoutshape in all_layout_shapes)
+            var masterloader = new VA.Internal.MasterLoader();
+            foreach (var layout_shape in layout_diagram.Shapes)
             {
-                if (!master_dic.ContainsKey(layoutshape.masterkey))
-                {
-                    string stencilname = layoutshape.layout_shape.StencilName.ToLower();
-                    
-                    var stencil = GetValueOrDefaultClass(name_to_stencil,stencilname);
-                    if (stencil==null)
-                    {
-                        stencil = OpenStencil(documents, stencilname);
-                        name_to_stencil[stencilname] = stencil;
-                    }
-
-                    IVisio.Master master = null;
-                    try
-                    {
-                        master = stencil.Masters.ItemU[layoutshape.layout_shape.MasterName];
-                    }
-                    catch (System.Runtime.InteropServices.COMException)
-                    {
-                        string msg = string.Format("Stencil \"{0}\" does not have a Master called \"{1}\"",
-                                                    stencil.Name, layoutshape.layout_shape.MasterName);
-                        throw new AutomationException(msg);
-                    }
-
-                    master_dic[layoutshape.masterkey] = master;
-                }
+                masterloader.Add(layout_shape.MasterName,layout_shape.StencilName);                
             }
+            masterloader.Resolve(documents);
+
 
             // If no size was provided for the shape, then set the size based on the master
-            var layoutshapes_without_size_info = all_layout_shapes.Where(s => s.layout_shape.Size == null);
+            var layoutshapes_without_size_info = layout_diagram.Shapes.Where(s => s.Size == null);
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
-                var master = master_dic[layoutshape.masterkey];
+                var master = masterloader.Get(layoutshape.MasterName,layoutshape.StencilName);
 
-                var size = GetValueOrDefaulStruct(master_to_size,master);
+                var size = GetValueOrDefaulStruct(master_to_size,master.VisioMaster);
                 if (!size.HasValue)
                 {
-                    var master_bb = master.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightWH);
+                    var master_bb = master.VisioMaster.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightWH);
                     size = master_bb.Size;
-                    master_to_size[master] = size.Value;
+                    master_to_size[master.VisioMaster] = size.Value;
                 }
-                layoutshape.layout_shape.Size = size.Value;
+                layoutshape.Size = size.Value;
             }
         }
 

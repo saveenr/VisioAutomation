@@ -7,7 +7,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Internal
 {
-    internal class MasterLoader
+    public class MasterLoader
     {
         public class MasterRef
         {
