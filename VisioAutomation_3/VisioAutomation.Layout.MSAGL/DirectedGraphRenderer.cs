@@ -444,7 +444,7 @@ namespace VisioAutomation.Layout.MSAGL
             return bez_shape;
         }
 
-        public IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(VA.Connections.ConnectorType ct)
+        private IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(VA.Connections.ConnectorType ct)
         {
             switch (ct)
             {
@@ -467,7 +467,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        public IVisio.VisCellVals ConnectorTypeToCellVal_Style(VA.Connections.ConnectorType ct)
+        private IVisio.VisCellVals ConnectorTypeToCellVal_Style(VA.Connections.ConnectorType ct)
         {
             switch (ct)
             {
