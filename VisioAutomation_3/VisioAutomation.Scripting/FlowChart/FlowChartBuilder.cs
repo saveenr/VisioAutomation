@@ -153,7 +153,7 @@ namespace VisioAutomation.Scripting.FlowChart
 
             foreach (int i in Enumerable.Range(0, drawings.Count))
             {
-                var diagram = drawings[i];
+                var directed_graph_drawing = drawings[i];
 
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering page: {0}", i+1);
@@ -171,7 +171,8 @@ namespace VisioAutomation.Scripting.FlowChart
                     page = doc.Pages.Add();
                 }
 
-                diagram.Render(page, options);
+                VA.Layout.MSAGL.DirectedGraphRenderer.Render(page, directed_graph_drawing, options);
+
                 scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
                 scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
 

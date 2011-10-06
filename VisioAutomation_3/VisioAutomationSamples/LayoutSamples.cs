@@ -207,16 +207,16 @@ namespace VisioAutomationSamples
         public static void MSAGL()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var msagl_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 
             // Create a Node 0
-            var n0 = msagl_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
+            var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
 
             // Format Node 0
             n0.Size = new VA.Drawing.Size(3, 2);
 
             // Create Node 1
-            var n1 = msagl_drawing.AddShape("n1", "N1", "basflo_u.vss", "Decision");
+            var n1 = directed_graph_drawing.AddShape("n1", "N1", "basflo_u.vss", "Decision");
 
             // Format Node 1
             n1.ShapeCells = new VA.DOM.ShapeCells();
@@ -225,23 +225,23 @@ namespace VisioAutomationSamples
             n1.ShapeCells.FillPattern = 40;
 
             // Create Node 2
-            var n2 = msagl_drawing.AddShape("n2", "N2 MailServer", "server_u.vss", "Server");
+            var n2 = directed_graph_drawing.AddShape("n2", "N2 MailServer", "server_u.vss", "Server");
 
             // Create Node 3
 
-            var n3 = msagl_drawing.AddShape("n3", "N3", "basflo_u.vss", "Data");
+            var n3 = directed_graph_drawing.AddShape("n3", "N3", "basflo_u.vss", "Data");
 
             // Create Node 4
-            var n4 = msagl_drawing.AddShape("n4", "N4", "basflo_u.vss", "Data");
+            var n4 = directed_graph_drawing.AddShape("n4", "N4", "basflo_u.vss", "Data");
 
             // Create the connectors to join the nodes
             // Note that Node 4 is deliberately not connected to any other node
-            var c0 = msagl_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
-            var c1 = msagl_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
-            var c2 = msagl_drawing.Connect("c2", n3, n4, "NO", VA.Connections.ConnectorType.Curved);
-            var c3 = msagl_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
-            var c4 = msagl_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
-            var c5 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
+            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
+            var c2 = directed_graph_drawing.Connect("c2", n3, n4, "NO", VA.Connections.ConnectorType.Curved);
+            var c3 = directed_graph_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
+            var c4 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
+            var c5 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
             // Format connector 0 to point "back" 
             c0.ShapeCells = new VA.DOM.ShapeCells();
@@ -263,7 +263,7 @@ namespace VisioAutomationSamples
             var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = false;
 
-            msagl_drawing.Render(page1, options);
+            VA.Layout.MSAGL.DirectedGraphRenderer.Render(page1, directed_graph_drawing, options);
         }
     }
 }

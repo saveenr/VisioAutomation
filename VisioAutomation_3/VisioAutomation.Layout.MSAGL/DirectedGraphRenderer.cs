@@ -490,5 +490,12 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
+        public static void Render(IVisio.Page page, VisioAutomation.Layout.DirectedGraph.Drawing drawing, VA.Layout.DirectedGraph.MSAGLLayoutOptions options)
+        {
+            var renderer = new VA.Layout.MSAGL.DirectedGraphRenderer();
+            renderer.LayoutOptions = options;
+            renderer.Render(drawing,page);
+            page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
+        }
     }
 }

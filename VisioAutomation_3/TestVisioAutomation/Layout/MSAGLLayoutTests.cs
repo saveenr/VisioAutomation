@@ -13,24 +13,24 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_With_Bezier_Connectors()
         {
-            var msagl_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 
             var flowchart_stencil = "basflo_u.vss";
             var server_stencil = "server_u.vss";
 
-            var n0 = msagl_drawing.AddShape("n0", "Untitled Node", flowchart_stencil, "Decision");
+            var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", flowchart_stencil, "Decision");
             n0.Size = new VA.Drawing.Size(3, 2);
-            var n1 = msagl_drawing.AddShape("n1", "", flowchart_stencil, "Decision");
-            var n2 = msagl_drawing.AddShape("n2", "MailServer", server_stencil, "Server");
-            var n3 = msagl_drawing.AddShape("n3", null, flowchart_stencil, "Data");
-            var n4 = msagl_drawing.AddShape("n4", "Alone", flowchart_stencil, "Data");
+            var n1 = directed_graph_drawing.AddShape("n1", "", flowchart_stencil, "Decision");
+            var n2 = directed_graph_drawing.AddShape("n2", "MailServer", server_stencil, "Server");
+            var n3 = directed_graph_drawing.AddShape("n3", null, flowchart_stencil, "Data");
+            var n4 = directed_graph_drawing.AddShape("n4", "Alone", flowchart_stencil, "Data");
 
-            var c0 = msagl_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
-            var c1 = msagl_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
-            var c3 = msagl_drawing.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
-            var c4 = msagl_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
-            var c5 = msagl_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
-            var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
+            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
+            var c3 = directed_graph_drawing.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
+            var c4 = directed_graph_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
+            var c5 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
+            var c6 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
 
             var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
@@ -39,7 +39,7 @@ namespace TestVisioAutomation
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
 
-            msagl_drawing.Render(page, options);
+            VA.Layout.MSAGL.DirectedGraphRenderer.Render(page, directed_graph_drawing, options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -207,31 +207,31 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_With_Dynamic_Connectors()
         {
-            var msagl_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 
-            var n0 = msagl_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
+            var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
             n0.Size = new VA.Drawing.Size(3, 2);
-            var n1 = msagl_drawing.AddShape("n1", "", "basflo_u.vss",
+            var n1 = directed_graph_drawing.AddShape("n1", "", "basflo_u.vss",
                                    "Decision");
 
             n1.ShapeCells = new VA.DOM.ShapeCells();
             n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
             n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
             n1.ShapeCells.FillPattern = 40;
-            var n2 = msagl_drawing.AddShape("n2", "MailServer", "server_u.vss",
+            var n2 = directed_graph_drawing.AddShape("n2", "MailServer", "server_u.vss",
                                    "Email Server");
-            var n3 = msagl_drawing.AddShape("n3", null, "basflo_u.vss",
+            var n3 = directed_graph_drawing.AddShape("n3", null, "basflo_u.vss",
                                    "Data");
-            var n4 = msagl_drawing.AddShape("n4", "Alone", "basflo_u.vss",
+            var n4 = directed_graph_drawing.AddShape("n4", "Alone", "basflo_u.vss",
                                    "Data");
 
-            var c0 = msagl_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
-            var c1 = msagl_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
-            var c3 = msagl_drawing.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
-            var c4 = msagl_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
-            var c5 = msagl_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
-            var c6 = msagl_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
+            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
+            var c3 = directed_graph_drawing.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
+            var c4 = directed_graph_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
+            var c5 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
+            var c6 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
             var options = new VA.Layout.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
@@ -239,7 +239,7 @@ namespace TestVisioAutomation
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            msagl_drawing.Render(page1, options);
+            VA.Layout.MSAGL.DirectedGraphRenderer.Render(page1, directed_graph_drawing, options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -280,9 +280,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_Shape_with_Custom_Props()
         {
-            var vdom = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 
-            var n0 = vdom.AddShape("n0", "Untitled Node", "basflo_u.vss",
+            var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
             n0.Size = new VA.Drawing.Size(3, 2);
             n0.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
@@ -296,7 +296,7 @@ namespace TestVisioAutomation
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            vdom.Render(page1, options);
+            VA.Layout.MSAGL.DirectedGraphRenderer.Render(page1, directed_graph_drawing, options);
             
             Assert.IsNotNull(n0.VisioShape);
 

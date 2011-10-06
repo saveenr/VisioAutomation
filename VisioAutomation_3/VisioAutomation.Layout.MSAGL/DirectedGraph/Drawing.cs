@@ -88,8 +88,7 @@ namespace VisioAutomation.Layout.DirectedGraph
         {
         }
     }
-
-
+    
     public class Drawing
     {
         public ShapeList Shapes;
@@ -130,14 +129,6 @@ namespace VisioAutomation.Layout.DirectedGraph
         {
             this.Shapes = new ShapeList();
             this.Connectors = new ConnectorList();
-        }
-
-        public void Render(IVisio.Page page, MSAGLLayoutOptions options)
-        {
-            var renderer = new VA.Layout.MSAGL.DirectedGraphRenderer();
-            renderer.LayoutOptions = options;
-            renderer.Render(this, page);
-            page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);
         }
     }
 }
