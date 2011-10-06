@@ -176,9 +176,9 @@ namespace VisioAutomation.Layout.MSAGL
             return t;
         }
 
-        private static TOut? TryGetValue<TIn, TOut>(Dictionary<TIn, TOut> dic, TIn t) where TOut : struct 
+        private static U? TryGetValue<T, U>(Dictionary<T, U> dic, T t) where U : struct 
         {
-            TOut outval;
+            U outval;
             bool r = dic.TryGetValue(t, out outval);
             if (r)
             {
