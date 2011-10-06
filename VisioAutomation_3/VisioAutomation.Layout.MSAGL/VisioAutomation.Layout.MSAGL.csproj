@@ -66,14 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DirectedGraph\Connector.cs" />
     <Compile Include="DirectedGraphRenderer.cs" />
-    <Compile Include="DirectedGraph\LayoutOptions.cs" />
-    <Compile Include="DirectedGraph\Drawing.cs" />
     <Compile Include="MSAGLLayoutOptions.cs" />
     <Compile Include="MSAGLUtil.cs" />
-    <Compile Include="DirectedGraph\Node.cs" />
-    <Compile Include="DirectedGraph\Shape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -84,6 +84,11 @@
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="DOM\Arc.cs" />
+    <Compile Include="Layout\DirectedGraph\Connector.cs" />
+    <Compile Include="Layout\DirectedGraph\Drawing.cs" />
+    <Compile Include="Layout\DirectedGraph\LayoutOptions.cs" />
+    <Compile Include="Layout\DirectedGraph\Node.cs" />
+    <Compile Include="Layout\DirectedGraph\Shape.cs" />
     <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
