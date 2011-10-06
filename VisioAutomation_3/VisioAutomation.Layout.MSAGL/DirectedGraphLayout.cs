@@ -176,7 +176,7 @@ namespace VisioAutomation.Layout.MSAGL
             return t;
         }
 
-        private static TOut? GetValueOrDefaulStruct<TIn, TOut>(Dictionary<TIn, TOut> dic, TIn t) where TOut : struct 
+        private static TOut? TryGetValue<TIn, TOut>(Dictionary<TIn, TOut> dic, TIn t) where TOut : struct 
         {
             TOut outval;
             bool r = dic.TryGetValue(t, out outval);
@@ -214,7 +214,7 @@ namespace VisioAutomation.Layout.MSAGL
             {
                 var master = loader.Get(layoutshape.MasterName,layoutshape.StencilName);
 
-                var size = GetValueOrDefaulStruct(master_to_size,master.VisioMaster);
+                var size = TryGetValue(master_to_size,master.VisioMaster);
                 if (!size.HasValue)
                 {
                     var master_bb = master.VisioMaster.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightWH);
