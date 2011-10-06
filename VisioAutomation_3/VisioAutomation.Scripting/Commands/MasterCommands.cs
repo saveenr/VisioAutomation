@@ -88,7 +88,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var masters = stencil_doc.Masters;
-            IVisio.Master masterobj = VA.MasterHelper.TryGetMaster(masters,master);
+            IVisio.Master masterobj = VA.Masters.MasterHelper.TryGetMaster(masters,master);
             if (masterobj==null)
             {
                 string msg = String.Format("No such master \"{0}\" in \"{1}\"", master, stencil);

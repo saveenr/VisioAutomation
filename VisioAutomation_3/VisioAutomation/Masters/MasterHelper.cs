@@ -2,7 +2,7 @@
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioAutomation
+namespace VisioAutomation.Masters
 {
     public static class MasterHelper
     {

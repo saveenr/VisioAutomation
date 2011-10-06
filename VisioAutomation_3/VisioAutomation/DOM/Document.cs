@@ -204,19 +204,19 @@ namespace VisioAutomation.DOM
                 .Cast<ShapeFromMaster>()
                 .Where(shape => shape.MasterObject == null);
 
-            var mres = new VA.Internal.MasterLoader();
+            var loader = new VA.Masters.MasterLoader();
             foreach (var s in deferred_shapes)
             {
-                mres.Add(s.MasterName,s.StencilName);
+                loader.Add(s.MasterName,s.StencilName);
             }
 
             var application = ctx.VisioPage.Application;
             var docs = application.Documents;
-            mres.Resolve(docs);
+            loader.Resolve(docs);
 
             foreach (var s in deferred_shapes)
             {
-                var mref = mres.Get(s.MasterName, s.StencilName);
+                var mref = loader.Get(s.MasterName, s.StencilName);
                 s.MasterObject = mref.VisioMaster;
             }
 

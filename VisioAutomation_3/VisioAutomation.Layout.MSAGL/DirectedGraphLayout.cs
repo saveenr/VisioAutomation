@@ -227,19 +227,19 @@ namespace VisioAutomation.Layout.MSAGL
             var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
 
             // Load and cache all the masters
-            var masterloader = new VA.Internal.MasterLoader();
+            var loader = new VA.Masters.MasterLoader();
             foreach (var layout_shape in layout_diagram.Shapes)
             {
-                masterloader.Add(layout_shape.MasterName,layout_shape.StencilName);                
+                loader.Add(layout_shape.MasterName,layout_shape.StencilName);                
             }
-            masterloader.Resolve(documents);
+            loader.Resolve(documents);
 
 
             // If no size was provided for the shape, then set the size based on the master
             var layoutshapes_without_size_info = layout_diagram.Shapes.Where(s => s.Size == null);
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
-                var master = masterloader.Get(layoutshape.MasterName,layoutshape.StencilName);
+                var master = loader.Get(layoutshape.MasterName,layoutshape.StencilName);
 
                 var size = GetValueOrDefaulStruct(master_to_size,master.VisioMaster);
                 if (!size.HasValue)

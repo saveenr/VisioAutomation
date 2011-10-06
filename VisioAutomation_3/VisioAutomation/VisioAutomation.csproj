@@ -84,7 +84,7 @@
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="DOM\Arc.cs" />
-    <Compile Include="DOM\MasterLoader.cs" />
+    <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
     <Compile Include="CodeGen\CellGroup.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="Interop\EnumValue.cs" />
     <Compile Include="Layout\Pie\PieLayout.cs" />
     <Compile Include="Layout\Pie\PieSlice.cs" />
-    <Compile Include="MasterHelper.cs" />
+    <Compile Include="Masters\MasterHelper.cs" />
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
