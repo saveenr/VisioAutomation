@@ -176,32 +176,6 @@ namespace VisioAutomation.Layout.MSAGL
             return t;
         }
 
-        private static IVisio.Document OpenStencil(IVisio.Documents docs, string filename)
-        {
-            if (filename == null)
-            {
-                throw new System.ArgumentNullException("filename");
-            }
-
-            short flags = (short) IVisio.VisOpenSaveArgs.visOpenRO | (short) IVisio.VisOpenSaveArgs.visOpenDocked;
-            var doc = docs.OpenEx(filename, flags);
-            return doc;
-        }
-
-        private static TOut GetValueOrDefaultClass<TIn,TOut>(Dictionary<TIn,TOut> dic, TIn t) where TOut: class
-        {
-            TOut outval;
-            bool r = dic.TryGetValue(t, out outval);
-            if (r)
-            {
-                return outval;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
         private static TOut? GetValueOrDefaulStruct<TIn, TOut>(Dictionary<TIn, TOut> dic, TIn t) where TOut : struct 
         {
             TOut outval;
@@ -215,7 +189,6 @@ namespace VisioAutomation.Layout.MSAGL
                 return null;
             }
         }
-
 
         private static void ResolveMasters(VA.Layout.DirectedGraph.Drawing layout_diagram, IVisio.Application app)
         {
