@@ -297,12 +297,18 @@ namespace VisioAutomationSamples
             var fontname = "Segoe UI";
             var font = doc.Fonts[fontname];
 
-            t.Root.ShapeCells = new ShapeCells();
-            t.Root.ShapeCells.HAlign = 0; // align text to left
-            t.Root.ShapeCells.VerticalAlign = 0; // align text block to top
-            t.Root.ShapeCells.CharFont = font.ID;
-            t.Root.ShapeCells.CharSize = "10pt";
-            t.Root.ShapeCells.FillForegnd = "rgb(255,250,200)";
+            foreach (var tn in t.Nodes)
+            {
+                var cells = new ShapeCells();
+                tn.ShapeCells = cells;
+
+                cells.HAlign = 0; // align text to left
+                cells.VerticalAlign = 0; // align text block to top
+                cells.CharFont = font.ID;
+                cells.CharSize = "10pt";
+                cells.FillForegnd = "rgb(255,250,200)";
+                
+            }
             t.LayoutOptions.DefaultNodeSize = new VA.Drawing.Size(2.0, 0.25);
             t.Render(page1);
         }

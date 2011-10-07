@@ -1,4 +1,5 @@
-﻿using VA=VisioAutomation;
+﻿using System.Collections.Generic;
+using VA=VisioAutomation;
 using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Layout.Tree
@@ -21,6 +22,12 @@ namespace VisioAutomation.Layout.Tree
                 renderer.LayoutOptions = this.LayoutOptions;                
             }
             renderer.RenderToVisio(this, page);
+        }
+
+        
+        public IEnumerable<Node> Nodes
+        {
+            get { return VA.Internal.TreeTraversal.PreOrder(this.Root, n => n.Children.Items); }
         }
     }
 }
