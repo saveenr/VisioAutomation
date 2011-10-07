@@ -310,6 +310,7 @@ namespace VisioAutomationSamples
                 
             }
             t.LayoutOptions.DefaultNodeSize = new VA.Drawing.Size(2.0, 0.25);
+            t.LayoutOptions.UseDynamicConnectors = false;
             t.Render(page1);
         }
     }
