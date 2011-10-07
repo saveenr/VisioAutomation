@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Collections;
+
 
 namespace VisioAutomation.Layout.Tree
 {
-    public class NodeList
+    public class NodeList  : IEnumerable<Node>
     {
         private readonly Node parent;
         private List<Node> items;
@@ -11,17 +13,6 @@ namespace VisioAutomation.Layout.Tree
         {
             this.parent = parentnode;
             this.items = new List<Node>(0);
-        }
-
-        public IEnumerable<Node> Items
-        {
-            get
-            {
-                foreach (var i in this.items)
-                {
-                    yield return i;
-                }
-            }
         }
 
         public void Add(Node item)
@@ -61,5 +52,19 @@ namespace VisioAutomation.Layout.Tree
         {
             get { return this.items.Count; }
         }
+
+        public IEnumerator<Node> GetEnumerator()
+        {
+            foreach (var i in this.items)
+            {
+                yield return i;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
+        }
+
     }
 }
