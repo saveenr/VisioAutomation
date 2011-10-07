@@ -8,7 +8,11 @@ namespace VisioAutomation.Layout.Tree
 {
     public class TreeLayout
     {
-        public LayoutOptions LayoutOptions;
+        const string stencil_name = "basic_u.vss";
+        string master_name = "Rectangle";
+        private string dc_name = "Dynamic Connector";
+
+        public LayoutOptions LayoutOptions { get; set; }
 
         public TreeLayout()
         {
@@ -21,10 +25,6 @@ namespace VisioAutomation.Layout.Tree
             var newnode = new VA.Layout.InternalTree.Node<object>(nodesize, n);
             return newnode;
         }
-
-        const string stencil_name = "basic_u.vss";
-        string master_name = "Rectangle";
-        private string dc_name = "Dynamic Connector";
 
         internal void RenderToVisio(Drawing drawing, IVisio.Page page)
         {
@@ -97,7 +97,7 @@ namespace VisioAutomation.Layout.Tree
 
                 if (tree_node.ShapeCells!=null)
                 {
-                    dom_master.ShapeCells = tree_node.ShapeCells;
+                    dom_master.ShapeCells = tree_node.ShapeCells.ShallowCopy();
                 }
 
                 dom_master.ShapeCells.Width = treenodes[i].Size.Width;
@@ -127,16 +127,6 @@ namespace VisioAutomation.Layout.Tree
                     var shape = dom_doc.DrawBezier(bez);
                 }
             }
-
-            /*
-            // Set the Text Labels on each Org node
-            foreach (int i in Enumerable.Range(0, treenodes.Count))
-            {
-                var orgnode = (Node) treenodes[i].Data;
-                var shape = (VA.DOM.Shape)orgnode.DOMNode;
-                shape.Text = orgnode.Text;
-            }*/
-
 
             dom_doc.Render(page);
 
