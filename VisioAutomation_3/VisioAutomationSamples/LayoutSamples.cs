@@ -307,7 +307,8 @@ namespace VisioAutomationSamples
                 cells.CharFont = font.ID;
                 cells.CharSize = "10pt";
                 cells.FillForegnd = "rgb(255,250,200)";
-                
+                cells.CharColor = "rgb(255,0,0)";
+
             }
             t.LayoutOptions.DefaultNodeSize = new VA.Drawing.Size(2.0, 0.25);
             t.LayoutOptions.UseDynamicConnectors = false;
