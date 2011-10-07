@@ -95,6 +95,10 @@ namespace VisioAutomation.Layout.Tree
                 DOM.Master dom_master = dom_masters[i];
                 tree_node.DOMNode = dom_master;
 
+                if (tree_node.ShapeCells!=null)
+                {
+                    dom_master.ShapeCells = tree_node.ShapeCells;
+                }
 
                 dom_master.ShapeCells.Width = treenodes[i].Size.Width;
                 dom_master.ShapeCells.Height = treenodes[i].Size.Height;

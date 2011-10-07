@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.DOM;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -204,7 +205,7 @@ namespace VisioAutomationSamples
             page.ResizeToFitContents(0.5, 0.5);
         }
 
-        public static void MSAGL()
+        public static void DirectedGraphViaMSAGL()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
@@ -264,6 +265,46 @@ namespace VisioAutomationSamples
             options.UseDynamicConnectors = false;
 
             VA.Layout.MSAGL.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+        }
+
+        public static void TreeWithTwoPassLayoutAndFormatting()
+        {
+            var doc = SampleEnvironment.Application.ActiveDocument;
+            var page1 = doc.Pages.Add();
+
+            var t = new VA.Layout.Tree.Drawing();
+
+            t.Root = new VA.Layout.Tree.Node("Root");
+
+            var na = new VA.Layout.Tree.Node("A");
+            var nb = new VA.Layout.Tree.Node("B");
+
+            var na1 = new VA.Layout.Tree.Node("A1");
+            var na2 = new VA.Layout.Tree.Node("A2");
+
+            var nb1 = new VA.Layout.Tree.Node("B1");
+            var nb2 = new VA.Layout.Tree.Node("B2");
+
+            t.Root.Children.Add(na);
+            t.Root.Children.Add(nb);
+
+            na.Children.Add(na1);
+            na.Children.Add(na2);
+
+            nb.Children.Add(nb1);
+            nb1.Children.Add(nb2);
+
+            var fontname = "Segoe UI";
+            var font = doc.Fonts[fontname];
+
+            t.Root.ShapeCells = new ShapeCells();
+            t.Root.ShapeCells.HAlign = 0; // align text to left
+            t.Root.ShapeCells.VerticalAlign = 0; // align text block to top
+            t.Root.ShapeCells.CharFont = font.ID;
+            t.Root.ShapeCells.CharSize = "10pt";
+            t.Root.ShapeCells.FillForegnd = "rgb(255,250,200)";
+            t.LayoutOptions.DefaultNodeSize = new VA.Drawing.Size(2.0, 0.25);
+            t.Render(page1);
         }
     }
 }

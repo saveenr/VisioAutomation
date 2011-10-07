@@ -2,7 +2,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Layout.Tree
-
 {
     public class Node
     {
@@ -23,7 +22,7 @@ namespace VisioAutomation.Layout.Tree
         public IVisio.Shape VisioShape { get; set; }
         public VA.DOM.Node DOMNode { get; set; }
         public VA.Drawing.Size? Size { get; set; }
-
+        public VA.DOM.ShapeCells ShapeCells { get; set; }
 
         public Node()
         {
