@@ -3,7 +3,7 @@ using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout
+namespace VisioAutomation.Pages
 {
     public partial class PageCells : VA.ShapeSheet.CellGroups.CellGroup
     {

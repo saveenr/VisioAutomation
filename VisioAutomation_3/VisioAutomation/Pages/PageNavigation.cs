@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation
+﻿namespace VisioAutomation.Pages
 {
     public enum PageNavigation
     {

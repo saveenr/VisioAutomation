@@ -76,7 +76,7 @@ namespace VisioAutomationSamples
             }
 
             update.Execute(page);
-            VA.PageHelper.ResizeToFitContents(page, new VA.Drawing.Size(1.0, 1.0));
+            VA.Pages.PageHelper.ResizeToFitContents(page, new VA.Drawing.Size(1.0, 1.0));
         }
 
         public static void DrawAllGradients()

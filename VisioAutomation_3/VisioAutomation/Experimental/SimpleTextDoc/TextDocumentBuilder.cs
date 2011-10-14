@@ -119,7 +119,7 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
         {
             var page = _visioDocument.Pages.Add();
             page.NameU = textpage.Name;
-            VA.PageHelper.SetSize(page, this.PageSize);
+            VA.Pages.PageHelper.SetSize(page, this.PageSize);
 
             // Draw the shapes
             var titleshape = page.DrawRectangle(_titlerect);

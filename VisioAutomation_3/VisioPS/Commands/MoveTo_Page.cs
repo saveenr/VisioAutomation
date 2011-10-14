@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class MoveTo_Page : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
-        public VA.PageNavigation Flag { get; set; }
+        public VA.Pages.PageNavigation Flag { get; set; }
 
         protected override void ProcessRecord()
         {

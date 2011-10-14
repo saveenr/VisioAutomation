@@ -29,7 +29,7 @@ namespace TestVisioAutomation
 
             // set the fg to have the other back as a background
 
-            VA.PageHelper.SetBackgroundPage(page1, page2);
+            VA.Pages.PageHelper.SetBackgroundPage(page1, page2);
             Assert.AreEqual(page2, page1.BackPage);
 
             // create a new page now
@@ -42,7 +42,7 @@ namespace TestVisioAutomation
 
             // Unassign the bg page from the fg page
 
-            VA.PageHelper.SetBackgroundPage(page1, null);
+            VA.Pages.PageHelper.SetBackgroundPage(page1, null);
 
             // clean-up - delete all the pages
 
@@ -55,13 +55,13 @@ namespace TestVisioAutomation
         public void PageOrientation()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
-            Assert.AreEqual(VA.Layout.PrintPageOrientation.Portrait,
-                            VA.PageHelper.GetOrientation(page1));
+            Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait,
+                            VA.Pages.PageHelper.GetOrientation(page1));
             Assert.AreEqual(new VA.Drawing.Size(4, 3), page1.GetSize());
 
-            VA.PageHelper.SetOrientation(page1, VA.Layout.PrintPageOrientation.Landscape);
-            Assert.AreEqual(VA.Layout.PrintPageOrientation.Landscape,
-                            VA.PageHelper.GetOrientation(page1));
+            VA.Pages.PageHelper.SetOrientation(page1, VA.Pages.PrintPageOrientation.Landscape);
+            Assert.AreEqual(VA.Pages.PrintPageOrientation.Landscape,
+                            VA.Pages.PageHelper.GetOrientation(page1));
             Assert.AreEqual(new VA.Drawing.Size(3, 4), page1.GetSize());
             page1.Delete(0);
         }
@@ -72,7 +72,7 @@ namespace TestVisioAutomation
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
             var s1 = page1.DrawRectangle(1, 1, 3, 3);
 
-            var page2 = VA.PageHelper.Duplicate(page1);
+            var page2 = VA.Pages.PageHelper.Duplicate(page1);
 
             Assert.AreEqual(new VA.Drawing.Size(4, 3), page2.GetSize() );
             Assert.AreEqual(1, page2.Shapes.Count);

@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioAutomation
+namespace VisioAutomation.Pages
 {
     public static class PageHelper
     {
@@ -58,7 +58,7 @@ namespace VisioAutomation
             var dest_pagesheet = dest_page.PageSheet;
 
             // Collect the cells from the source page
-            var pagecells = VA.Layout.PageCells.GetCells(src_pagesheet);
+            var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
 
             // Set them on the destination page
             var update = new VA.ShapeSheet.Update.SRCUpdate();
@@ -66,10 +66,10 @@ namespace VisioAutomation
             update.Execute(dest_pagesheet);
         }
 
-        public static VA.Layout.PageCells GetPageCells(IVisio.Page page)
+        public static VA.Pages.PageCells GetPageCells(IVisio.Page page)
         {
             var pagesheet = page.PageSheet;
-            var pagecells = VA.Layout.PageCells.GetCells(pagesheet);
+            var pagecells = VA.Pages.PageCells.GetCells(pagesheet);
             return pagecells;
         }
 
@@ -206,7 +206,7 @@ namespace VisioAutomation
             }
         }
 
-        public static VA.Layout.PrintPageOrientation GetOrientation(IVisio.Page page)
+        public static VA.Pages.PrintPageOrientation GetOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -216,7 +216,7 @@ namespace VisioAutomation
             var page_sheet = page.PageSheet;
             var orientationcell = page_sheet.GetCell(VA.ShapeSheet.SRCConstants.PrintPageOrientation);
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNoCast, 0];
-            return (VA.Layout.PrintPageOrientation)value;
+            return (VA.Pages.PrintPageOrientation)value;
         }
 
         /// <summary>
@@ -224,14 +224,14 @@ namespace VisioAutomation
         /// </summary>
         /// <param name="page"></param>
         /// <param name="orientation">1=portrait, 2=landscape</param>
-        public static void SetOrientation(IVisio.Page page, VA.Layout.PrintPageOrientation orientation)
+        public static void SetOrientation(IVisio.Page page, VA.Pages.PrintPageOrientation orientation)
         {
             if (page == null)
             {
                 throw new System.ArgumentNullException("page");
             }
 
-            if (orientation != VA.Layout.PrintPageOrientation.Landscape && orientation != VA.Layout.PrintPageOrientation.Portrait)
+            if (orientation != VA.Pages.PrintPageOrientation.Landscape && orientation != VA.Pages.PrintPageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException("orientation", "must be either Portrait or Landscape");
             }
@@ -244,7 +244,7 @@ namespace VisioAutomation
                 return;
             }
 
-            var old_size = VA.PageHelper.GetSize(page);
+            var old_size = VA.Pages.PageHelper.GetSize(page);
 
             double new_height = old_size.Width;
             double new_width = old_size.Height;

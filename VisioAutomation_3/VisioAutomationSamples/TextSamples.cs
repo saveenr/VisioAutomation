@@ -167,7 +167,7 @@ The indenting has ended.
             var fontids = fonts.Select(f => page.Document.Fonts[f].ID).ToList();
 
             var layout = new VA.Layout.Grid.GridLayout(sizes.Length, fonts.Length, new VA.Drawing.Size(3.0, 0.5), master);
-            layout.Origin = new VA.Drawing.Point(0,  VA.PageHelper.GetSize(page).Height);
+            layout.Origin = new VA.Drawing.Point(0, VA.Pages.PageHelper.GetSize(page).Height);
             layout.CellSpacing = new VA.Drawing.Size(0.5, 0.5);
             layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
             

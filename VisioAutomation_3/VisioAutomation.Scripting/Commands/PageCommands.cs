@@ -120,7 +120,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = application.CreateUndoScope())
             {
-                VA.PageHelper.SetBackgroundPage(fgpage, bgpage);
+                VA.Pages.PageHelper.SetBackgroundPage(fgpage, bgpage);
             }
         }
 
@@ -134,7 +134,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope())
             {
-                VA.PageHelper.Duplicate(application.ActivePage);
+                VA.Pages.PageHelper.Duplicate(application.ActivePage);
             }
         }
 
@@ -154,12 +154,12 @@ namespace VisioAutomation.Scripting.Commands
             string page_name = page_to_dupe.NameU;
             var destpages = dest_doc.Pages;
             var dest_page = destpages[1];
-            VA.PageHelper.DuplicateToDocument(active_page, dest_doc, dest_page, page_name, true);
+            VA.Pages.PageHelper.DuplicateToDocument(active_page, dest_doc, dest_page, page_name, true);
             dest_doc.Activate();
             dest_page.Activate();
         }
 
-        public VA.Layout.PrintPageOrientation GetOrientation()
+        public VA.Pages.PrintPageOrientation GetOrientation()
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -168,10 +168,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
-            return VA.PageHelper.GetOrientation(active_page);
+            return VA.Pages.PageHelper.GetOrientation(active_page);
         }
 
-        public void SetOrientation(VA.Layout.PrintPageOrientation orientation)
+        public void SetOrientation(VA.Pages.PrintPageOrientation orientation)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -182,7 +182,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
-                VA.PageHelper.SetOrientation(active_page, orientation);
+                VA.Pages.PageHelper.SetOrientation(active_page, orientation);
             }
         }
 
@@ -216,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 var active_page = application.ActivePage;
-                VA.PageHelper.ResetOrigin(active_page);
+                VA.Pages.PageHelper.ResetOrigin(active_page);
             }
         }
 
@@ -267,7 +267,7 @@ namespace VisioAutomation.Scripting.Commands
             SetSize(width, null);
         }
 
-        public void GoTo(PageNavigation flags)
+        public void GoTo(Pages.PageNavigation flags)
         {
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
@@ -278,7 +278,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var pages = docpages;
-            VA.PageHelper.NavigateTo(pages, flags);
+            VA.Pages.PageHelper.NavigateTo(pages, flags);
         }
     }
 }

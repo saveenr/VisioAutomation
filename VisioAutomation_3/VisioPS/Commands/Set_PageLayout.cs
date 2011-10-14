@@ -19,7 +19,7 @@ namespace VisioPS.Commands
 
             if (this.Orientation != PageOrientation.None)
             {
-                scriptingsession.Page.SetOrientation((VA.Layout.PrintPageOrientation)Orientation);
+                scriptingsession.Page.SetOrientation((VA.Pages.PrintPageOrientation)Orientation);
             }
 
             if (this.BackgroundPage != null)

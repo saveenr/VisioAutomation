@@ -24,8 +24,8 @@ namespace VisioAutomation.Extensions
             this IVisio.Page page, 
             IList<IVisio.Master> masters,
             IEnumerable<VA.Drawing.Point> points)
-        { 
-            short [] shapeids = PageHelper.DropManyU(page, masters, points);
+        {
+            short[] shapeids = VA.Pages.PageHelper.DropManyU(page, masters, points);
             return shapeids;
         }
     }

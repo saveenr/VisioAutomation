@@ -114,7 +114,7 @@
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Layout\ShapeLayoutCells.cs" />
-    <Compile Include="Layout\PageCells.cs" />
+    <Compile Include="Pages\PageCells.cs" />
     <Compile Include="CustomProperties\Calendar.cs" />
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="CustomProperties\Format.cs" />
@@ -138,7 +138,7 @@
     <Compile Include="Layout\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />
-    <Compile Include="Layout\PrintPageOrientation.cs" />
+    <Compile Include="Pages\PrintPageOrientation.cs" />
     <Compile Include="ShapeGeometry\GeometrySection.cs" />
     <Compile Include="ShapeGeometry\GeometryRow.cs" />
     <Compile Include="ShapeGeometry\ShapeGeometryHelper.cs" />
@@ -203,7 +203,7 @@
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="UndoCommitFlag.cs" />
-    <Compile Include="PageNavigation.cs" />
+    <Compile Include="Pages\PageNavigation.cs" />
     <Compile Include="Shapesheet\Data\TableColumnList.cs" />
     <Compile Include="Shapesheet\Query\QueryColumnList.cs" />
     <Compile Include="Shapesheet\Update\FormulaData.cs" />
@@ -284,7 +284,7 @@
     <Compile Include="UI\UserInterfaceHelper.cs" />
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />
-    <Compile Include="PageHelper.cs" />
+    <Compile Include="Pages\PageHelper.cs" />
     <Compile Include="SelectionHelper.cs" />
     <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Extensions\PageMethods_draw.cs" />
