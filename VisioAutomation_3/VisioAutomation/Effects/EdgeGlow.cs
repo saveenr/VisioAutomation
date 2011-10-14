@@ -72,7 +72,7 @@ namespace VisioAutomation.Effects
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             var group = VA.SelectionHelper.SelectAndGroup(active_window, shapes);
-            VA.ShapeHelper.SetGroupSelectMode(group, IVisio.VisCellVals.visGrpSelModeGroupOnly);
+            VA.ShapeHelper.SetGroupSelectMode(group, VA.GroupSelectMode.GroupOnly);
 
             return group;
         }
@@ -121,7 +121,7 @@ namespace VisioAutomation.Effects
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             var group = VA.SelectionHelper.SelectAndGroup(active_window, shapes);
-            VA.ShapeHelper.SetGroupSelectMode(group, IVisio.VisCellVals.visGrpSelModeGroupOnly);
+            VA.ShapeHelper.SetGroupSelectMode(group, VA.GroupSelectMode.GroupOnly);
 
             return group;
         }
