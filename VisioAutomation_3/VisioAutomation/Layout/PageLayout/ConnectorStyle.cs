@@ -5,11 +5,12 @@ namespace VisioAutomation.Layout.PageLayout
         RightAngle,
         Straight,
         CenterToCenter,
+        Network,
+        SimpleHorizontalVertical,
+        SimpleVerticalHorizontal,
         Flowchart,
         Tree,
         OrganizationChart,
         Simple,
-        SimpleHorizontalVertical,
-        SimpleVerticalHorizontal
     }
 }

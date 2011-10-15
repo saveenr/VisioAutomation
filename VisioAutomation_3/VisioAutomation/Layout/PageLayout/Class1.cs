@@ -9,6 +9,7 @@ namespace VisioAutomation.Layout.PageLayout
             base()
         {
             this.LayoutStyle = VA.Layout.PageLayout.PageLayoutStyle.Radial;
+            this.ConnectorStyle = VA.Layout.PageLayout.ConnectorStyle.RightAngle;
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
@@ -26,6 +27,7 @@ namespace VisioAutomation.Layout.PageLayout
             base()
         {
             this.LayoutStyle = VA.Layout.PageLayout.PageLayoutStyle.Flowchart;
+            this.ConnectorStyle = VA.Layout.PageLayout.ConnectorStyle.Flowchart;
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
@@ -57,6 +59,77 @@ namespace VisioAutomation.Layout.PageLayout
                 throw new VA.AutomationException();
             }
         }
+
+        protected override IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
+        {
+            var rs = base.ConnectorsStyleToRouteStyle();
+            if (!rs.HasValue)
+            {
+                var cs = this.ConnectorStyle;
+                if (cs == VA.Layout.PageLayout.ConnectorStyle.Flowchart)
+                {
+                    if (this.Direction == FlowchartDirection.BottomToTop)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartSN;
+                    }
+                    else if (this.Direction == FlowchartDirection.TopToBottom)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartNS;
+                    }
+                    else if (this.Direction == FlowchartDirection.LeftToRight)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartWE;
+                    }
+                    else if (this.Direction == FlowchartDirection.RightToLeft)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartEW;
+                    }
+                }
+                else if (cs == VA.Layout.PageLayout.ConnectorStyle.OrganizationChart)
+                {
+                    if (this.Direction == FlowchartDirection.BottomToTop)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartSN;
+                    }
+                    else if (this.Direction == FlowchartDirection.TopToBottom)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartNS;
+                    }
+                    else if (this.Direction == FlowchartDirection.LeftToRight)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartWE;
+                    }
+                    else if (this.Direction == FlowchartDirection.RightToLeft)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartEW;
+                    }
+                    
+                }
+                else if (cs == VA.Layout.PageLayout.ConnectorStyle.Simple)
+                {
+                    if (this.Direction == FlowchartDirection.BottomToTop)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleSN;
+                    }
+                    else if (this.Direction == FlowchartDirection.TopToBottom)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleNS;
+                    }
+                    else if (this.Direction == FlowchartDirection.LeftToRight)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleWE;
+                    }
+                    else if (this.Direction == FlowchartDirection.RightToLeft)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleEW;
+                    }
+
+                }
+            }
+            return null;
+        }
+
+
     }
 
     public class CircularConfiguration : BasePageLayoutConfiguration
@@ -65,6 +138,8 @@ namespace VisioAutomation.Layout.PageLayout
             base()
         {
             this.LayoutStyle = VA.Layout.PageLayout.PageLayoutStyle.Circular;
+            this.ConnectorStyle = VA.Layout.PageLayout.ConnectorStyle.CenterToCenter;
+
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
@@ -72,6 +147,8 @@ namespace VisioAutomation.Layout.PageLayout
             base.SetPageCells(pagecells);
             pagecells.PlaceStyle = (int) IVisio.VisCellVals.visPLOPlaceCircular;
         }
+
+
     }
 
     public class CompactTreeConfiguration : BasePageLayoutConfiguration
@@ -82,6 +159,8 @@ namespace VisioAutomation.Layout.PageLayout
             base()
         {
             this.LayoutStyle = VA.Layout.PageLayout.PageLayoutStyle.CompactTree;
+            this.ConnectorStyle = VA.Layout.PageLayout.ConnectorStyle.OrganizationChart;
+
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
@@ -129,6 +208,8 @@ namespace VisioAutomation.Layout.PageLayout
                 throw new VA.AutomationException();
             }
         }
+
+
     }
 
     public class HierarchyConfiguration : BasePageLayoutConfiguration
@@ -141,6 +222,7 @@ namespace VisioAutomation.Layout.PageLayout
             base()
         {
             this.LayoutStyle = VA.Layout.PageLayout.PageLayoutStyle.Hierarchy;
+            this.ConnectorStyle = VA.Layout.PageLayout.ConnectorStyle.OrganizationChart;
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
@@ -148,6 +230,7 @@ namespace VisioAutomation.Layout.PageLayout
             base.SetPageCells(pagecells);
             pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);
         }
+
 
         private static IVisio.VisCellVals GetPlaceStyle(HierarchyDirection dir, HierarchyHorizontalAlignment halign, HierarchyVerticalAlignment valign)
         {
@@ -217,5 +300,75 @@ namespace VisioAutomation.Layout.PageLayout
             }
             throw new VA.AutomationException();
         }
+
+        protected override IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
+        {
+            var rs = base.ConnectorsStyleToRouteStyle();
+            if (!rs.HasValue)
+            {
+                var cs = this.ConnectorStyle;
+                if (cs == VA.Layout.PageLayout.ConnectorStyle.Flowchart)
+                {
+                    if (this.Direction == HierarchyDirection.BottomToTop)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartSN;
+                    }
+                    else if (this.Direction == HierarchyDirection.TopToBottom)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartNS;
+                    }
+                    else if (this.Direction == HierarchyDirection.LeftToRight)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartWE;
+                    }
+                    else if (this.Direction == HierarchyDirection.RightToLeft)
+                    {
+                        return IVisio.VisCellVals.visLORouteFlowchartEW;
+                    }
+                }
+                else if (cs == VA.Layout.PageLayout.ConnectorStyle.OrganizationChart)
+                {
+                    if (this.Direction == HierarchyDirection.BottomToTop)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartSN;
+                    }
+                    else if (this.Direction == HierarchyDirection.TopToBottom)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartNS;
+                    }
+                    else if (this.Direction == HierarchyDirection.LeftToRight)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartWE;
+                    }
+                    else if (this.Direction == HierarchyDirection.RightToLeft)
+                    {
+                        return IVisio.VisCellVals.visLORouteOrgChartEW;
+                    }
+
+                }
+                else if (cs == VA.Layout.PageLayout.ConnectorStyle.Simple)
+                {
+                    if (this.Direction == HierarchyDirection.BottomToTop)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleSN;
+                    }
+                    else if (this.Direction == HierarchyDirection.TopToBottom)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleNS;
+                    }
+                    else if (this.Direction == HierarchyDirection.LeftToRight)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleWE;
+                    }
+                    else if (this.Direction == HierarchyDirection.RightToLeft)
+                    {
+                        return IVisio.VisCellVals.visLORouteSimpleEW;
+                    }
+
+                }
+            }
+            return null;
+        }
+
     }
 }

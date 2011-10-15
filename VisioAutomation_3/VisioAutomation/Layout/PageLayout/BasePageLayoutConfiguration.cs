@@ -24,6 +24,12 @@ namespace VisioAutomation.Layout.PageLayout
             pagecells.AvenueSizeX = this.AvenueSize.Width;
             pagecells.AvenueSizeY = this.AvenueSize.Height;
             pagecells.LineRouteExt = (int)ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
+
+            var rs = this.ConnectorsStyleToRouteStyle();
+            if (rs.HasValue)
+            {
+                pagecells.RouteStyle = (int)rs.Value;                
+            }
         }
 
         private static IVisio.VisCellVals ConnectorAppearanceToLineRouteExt( ConnectorAppearance ca)
@@ -45,6 +51,32 @@ namespace VisioAutomation.Layout.PageLayout
                 throw new VA.AutomationException();
             }
         }
+
+        protected virtual IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
+        {
+            var cs = this.ConnectorStyle;
+            if (cs == VA.Layout.PageLayout.ConnectorStyle.RightAngle)
+            {
+                return IVisio.VisCellVals.visLORouteRightAngle;
+            }
+            else if (cs == VA.Layout.PageLayout.ConnectorStyle.Straight)
+            {
+                return IVisio.VisCellVals.visLORouteStraight;
+            }
+            else if (cs == VA.Layout.PageLayout.ConnectorStyle.CenterToCenter)
+            {
+                return IVisio.VisCellVals.visLORouteCenterToCenter;
+            }
+            else if (cs == VA.Layout.PageLayout.ConnectorStyle.Network)
+            {
+                return IVisio.VisCellVals.visLORouteNetwork;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         public void Apply(Page page)
         {
