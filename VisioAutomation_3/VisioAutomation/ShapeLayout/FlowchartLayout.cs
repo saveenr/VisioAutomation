@@ -5,13 +5,14 @@ namespace VisioAutomation.ShapeLayout
 {
     public class FlowchartLayout : Layout
     {
-        public Direction Direction;
+        public Direction Direction { get; set; }
 
         public FlowchartLayout() :
             base()
         {
             this.LayoutStyle = LayoutStyle.Flowchart;
             this.ConnectorStyle = ConnectorStyle.Flowchart;
+            this.Direction = Direction.TopToBottom;
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)

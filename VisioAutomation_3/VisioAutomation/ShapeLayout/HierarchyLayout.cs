@@ -5,21 +5,23 @@ namespace VisioAutomation.ShapeLayout
 {
     public class HierarchyLayout : Layout
     {
-        public Direction Direction;
-        public HorizontalAlignment HorizontalAlignment;
-        public VerticalAlignment VerticalAlignment;
+        public Direction Direction { get; set; }
+        public HorizontalAlignment HorizontalAlignment { get; set; }
+        public VerticalAlignment VerticalAlignment { get; set; }
 
         public HierarchyLayout() :
             base()
         {
             this.LayoutStyle = LayoutStyle.Hierarchy;
             this.ConnectorStyle = ConnectorStyle.OrganizationChart;
+            this.HorizontalAlignment = HorizontalAlignment.Center;
+            this.VerticalAlignment = VerticalAlignment.Middle;
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
         {
             base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int)GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);
+            pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);
         }
 
 

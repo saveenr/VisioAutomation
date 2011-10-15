@@ -10,13 +10,12 @@ namespace VisioAutomation.ShapeLayout
         {
             this.LayoutStyle = LayoutStyle.Circular;
             this.ConnectorStyle = ConnectorStyle.CenterToCenter;
-
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
         {
             base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCircular;
+            pagecells.PlaceStyle = (int) IVisio.VisCellVals.visPLOPlaceCircular;
         }
     }
 }

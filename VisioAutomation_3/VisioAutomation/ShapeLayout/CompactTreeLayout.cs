@@ -5,14 +5,14 @@ namespace VisioAutomation.ShapeLayout
 {
     public class CompactTreeLayout : Layout
     {
-        public CompactTreeDirection Direction;
+        public CompactTreeDirection Direction { get; set; }
 
         public CompactTreeLayout() :
             base()
         {
             this.LayoutStyle = LayoutStyle.CompactTree;
             this.ConnectorStyle = ConnectorStyle.OrganizationChart;
-
+            this.Direction = CompactTreeDirection.DownThenRight;
         }
 
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
