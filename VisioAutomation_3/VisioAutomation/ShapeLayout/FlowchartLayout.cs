@@ -1,0 +1,57 @@
+﻿using VA = VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
+
+namespace VisioAutomation.ShapeLayout
+{
+    public class FlowchartLayout : Layout
+    {
+        public Direction Direction;
+
+        public FlowchartLayout() :
+            base()
+        {
+            this.LayoutStyle = LayoutStyle.Flowchart;
+            this.ConnectorStyle = ConnectorStyle.Flowchart;
+        }
+
+        public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
+        {
+            base.SetPageCells(pagecells);
+            pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction);
+        }
+
+        private static IVisio.VisCellVals GetPlaceStyle(Direction dir)
+        {
+            if (dir == Direction.TopToBottom)
+            {
+                return IVisio.VisCellVals.visPLOPlaceTopToBottom;
+            }
+            else if (dir == Direction.LeftToRight)
+            {
+                return IVisio.VisCellVals.visPLOPlaceLeftToRight;
+            }
+            else if (dir == Direction.BottomToTop)
+            {
+                return IVisio.VisCellVals.visPLOPlaceBottomToTop;
+            }
+            else if (dir == Direction.RightToLeft)
+            {
+                return IVisio.VisCellVals.visPLOPlaceRightToLeft;
+            }
+            else
+            {
+                throw new VA.AutomationException();
+            }
+        }
+
+        protected override IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
+        {
+            var rs = base.ConnectorsStyleToRouteStyle();
+            if (rs.HasValue)
+            {
+                return rs;
+            }
+            return this.ConnectorsStyleAndDirectionToRouteStyle(this.ConnectorStyle, this.Direction);
+        }
+    }
+}

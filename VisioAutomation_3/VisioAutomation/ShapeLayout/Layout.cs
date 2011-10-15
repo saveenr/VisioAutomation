@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.ShapeLayout
 {
-    public class LayoutOptions
+    public abstract class Layout
     {
         public LayoutStyle LayoutStyle;
         public ConnectorStyle ConnectorStyle;
@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeLayout
         public VA.Drawing.Size Border = new VA.Drawing.Size(0.5,0.5);
         public VA.Drawing.Size AvenueSize = new VA.Drawing.Size(0.375, 0.375);
 
-        protected LayoutOptions()
+        protected Layout()
         {
             
         }

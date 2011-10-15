@@ -328,7 +328,7 @@ namespace VisioAutomationSamples
 
             directed_graph_drawing.Render(page1);
 
-            var layout_config = new VA.ShapeLayout.HierarchyLayoutOptions();
+            var layout_config = new VA.ShapeLayout.HierarchyLayout();
             layout_config.Direction = VA.ShapeLayout.Direction.BottomToTop;
             layout_config.HorizontalAlignment = VA.ShapeLayout.HorizontalAlignment.Center;
             layout_config.ResizePageToFit = true;

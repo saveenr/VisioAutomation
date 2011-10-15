@@ -89,8 +89,12 @@
     <Compile Include="Layout\DirectedGraph\LayoutOptions.cs" />
     <Compile Include="Layout\DirectedGraph\Node.cs" />
     <Compile Include="Layout\DirectedGraph\Shape.cs" />
-    <Compile Include="ShapeLayout\LayoutOptions.cs" />
-    <Compile Include="ShapeLayout\Class1.cs" />
+    <Compile Include="ShapeLayout\CompactTreeLayout.cs" />
+    <Compile Include="ShapeLayout\CircularLayout.cs" />
+    <Compile Include="ShapeLayout\HierarchyLayout.cs" />
+    <Compile Include="ShapeLayout\RadialLayout.cs" />
+    <Compile Include="ShapeLayout\Layout.cs" />
+    <Compile Include="ShapeLayout\FlowchartLayout.cs" />
     <Compile Include="ShapeLayout\CompactTreeDirection.cs" />
     <Compile Include="ShapeLayout\ConnectorAppearance.cs" />
     <Compile Include="ShapeLayout\ConnectorStyle.cs" />
