@@ -330,7 +330,7 @@ namespace VisioAutomationSamples
             directed_graph_drawing.Render(page1);
 
             var layout_config = new VA.Layout.PageLayout.HierarchyConfiguration();
-            layout_config.Direction = VA.Layout.PageLayout.Direction.TopToBottom;
+            layout_config.Direction = VA.Layout.PageLayout.Direction.BottomToTop;
             layout_config.HorizontalAlignment = VA.Layout.PageLayout.HierarchyHorizontalAlignment.Center;
             layout_config.ResizePageToFit = true;
             layout_config.AvenueSize = new VA.Drawing.Size(1,1);
