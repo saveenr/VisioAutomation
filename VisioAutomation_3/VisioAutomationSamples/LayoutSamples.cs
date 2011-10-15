@@ -1,4 +1,5 @@
 ﻿using VisioAutomation.DOM;
+using VisioAutomation.Layout.PageLayout;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -310,9 +311,7 @@ namespace VisioAutomationSamples
                 cells.CharColor = "rgb(255,0,0)";
 
             }
-            t.LayoutOptions.DefaultNodeSize = new VA.Drawing.Size(2.0, 0.25);
-            t.LayoutOptions.UseDynamicConnectors = false;
-            t.Render(page1);
+
         }
     }
 }
