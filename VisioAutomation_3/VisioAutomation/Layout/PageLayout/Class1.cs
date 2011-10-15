@@ -94,6 +94,7 @@ namespace VisioAutomation.Layout.PageLayout
             pagecells.Apply(update);
             var pagesheet = page.PageSheet;
             update.Execute(pagesheet);
+            page.Layout();
         }
     }
 
