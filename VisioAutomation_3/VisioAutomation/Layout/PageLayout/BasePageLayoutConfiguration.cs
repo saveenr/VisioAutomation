@@ -7,12 +7,17 @@ namespace VisioAutomation.Layout.PageLayout
 {
     public class BasePageLayoutConfiguration
     {
-        public double Spacing;
+        public VA.Layout.PageLayout.PageLayoutStyle LayoutStyle;
         public ConnectorStyle ConnectorStyle;
         public ConnectorAppearance ConnectorAppearance;
         public bool ResizePageToFit;
         public VA.Drawing.Size Border = new VA.Drawing.Size(0.5,0.5);
         public VA.Drawing.Size AvenueSize = new VA.Drawing.Size(0.375, 0.375);
+
+        protected BasePageLayoutConfiguration()
+        {
+            
+        }
 
         public virtual void SetPageCells( VisioAutomation.Pages.PageCells pagecells)
         {
