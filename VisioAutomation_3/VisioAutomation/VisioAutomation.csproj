@@ -89,7 +89,16 @@
     <Compile Include="Layout\DirectedGraph\LayoutOptions.cs" />
     <Compile Include="Layout\DirectedGraph\Node.cs" />
     <Compile Include="Layout\DirectedGraph\Shape.cs" />
+    <Compile Include="Layout\PageLayout\BasePageLayoutConfiguration.cs" />
     <Compile Include="Layout\PageLayout\Class1.cs" />
+    <Compile Include="Layout\PageLayout\CompactTreeDirection.cs" />
+    <Compile Include="Layout\PageLayout\ConnectorAppearance.cs" />
+    <Compile Include="Layout\PageLayout\ConnectorStyle.cs" />
+    <Compile Include="Layout\PageLayout\FlowchartDirection.cs" />
+    <Compile Include="Layout\PageLayout\HierarchyDirection.cs" />
+    <Compile Include="Layout\PageLayout\HierarchyHorizontalAlignment.cs" />
+    <Compile Include="Layout\PageLayout\HierarchyVerticalAlignment.cs" />
+    <Compile Include="Layout\PageLayout\PageLayoutStyle.cs" />
     <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />

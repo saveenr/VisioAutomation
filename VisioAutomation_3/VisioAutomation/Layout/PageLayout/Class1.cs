@@ -1,103 +1,8 @@
-﻿
-using VA=VisioAutomation;
+﻿using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Layout.PageLayout
 {
-    public enum PageLayoutStyle
-    {
-        Radial,
-        Flowchart,
-        Circular,
-        CompactTree,
-        Hierarchy
-    }
-
-    public enum FlowchartDirection
-    {
-        TopToBottom,
-        BottomToTop,
-        LeftToRight,
-        RightToLeft
-    }
-
-    public enum HierarchyDirection
-    {
-        TopToBottom,
-        BottomToTop,
-        LeftToRight,
-        RightToLeft
-    }
-
-    public enum CompactTreeDirection
-    {
-        DownThenRight,
-        RightThenDown,
-        RightThenUp,
-        UpThenRigtht,
-        UpThenLeft,
-        LeftThenUp,
-        LeftThenDown,
-        DownThenLeft
-    }
-
-    public enum HierarchyHorizontalAlignment
-    {
-        Left,
-        Center,
-        Right
-    }
-
-    public enum HierarchyVerticalAlignment
-    {
-        Top,
-        Middle,
-        Bottom
-    }
-
-
-    public enum ConnectorStyle
-    {
-        RightAngle,
-        Straight,
-        CenterToCenter,
-        Flowchart,
-        Tree,
-        OrganizationChart,
-        Simple,
-        SimpleHorizontalVertical,
-        SimpleVerticalHorizontal
-    }
-
-    public enum ConnectorAppearance
-    {
-        Straight,
-        Curved
-    }
-
-    public class BasePageLayoutConfiguration
-    {
-        public double Spacing;
-        public ConnectorStyle ConnectorStyle;
-        public ConnectorAppearance ConnectorAppearance;
-
-        public virtual void SetPageCells( VisioAutomation.Pages.PageCells pagecells)
-        {
-        }
-
-        public void Apply(IVisio.Page page)
-        {
-            var pagecells = new VA.Pages.PageCells();
-            this.SetPageCells(pagecells);
-
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
-            pagecells.Apply(update);
-            var pagesheet = page.PageSheet;
-            update.Execute(pagesheet);
-            page.Layout();
-        }
-    }
-
     public class RadialConfiguration : BasePageLayoutConfiguration
     {
         public override void SetPageCells( VisioAutomation.Pages.PageCells pagecells)
@@ -114,27 +19,33 @@ namespace VisioAutomation.Layout.PageLayout
         public override void SetPageCells( VisioAutomation.Pages.PageCells pagecells)
         {
             base.SetPageCells(pagecells);
-            if (this.Direction == FlowchartDirection.TopToBottom)
+            pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction);                
+        }        
+
+        private static IVisio.VisCellVals GetPlaceStyle(FlowchartDirection dir)
+        {
+            if (dir == FlowchartDirection.TopToBottom)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceTopToBottom;                
+                return IVisio.VisCellVals.visPLOPlaceTopToBottom;
             }
-            else if (this.Direction == FlowchartDirection.LeftToRight)
+            else if (dir == FlowchartDirection.LeftToRight)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceLeftToRight;
+                return IVisio.VisCellVals.visPLOPlaceLeftToRight;
             }
-            else if (this.Direction == FlowchartDirection.BottomToTop)
+            else if (dir == FlowchartDirection.BottomToTop)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceBottomToTop;
+                return IVisio.VisCellVals.visPLOPlaceBottomToTop;
             }
-            else if (this.Direction == FlowchartDirection.RightToLeft)
+            else if (dir == FlowchartDirection.RightToLeft)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceRightToLeft;
+                return IVisio.VisCellVals.visPLOPlaceRightToLeft;
             }
             else
             {
                 throw new VA.AutomationException();
             }
-        }        
+            
+        }
 
     }
 
@@ -155,44 +66,48 @@ namespace VisioAutomation.Layout.PageLayout
         public override void SetPageCells( VisioAutomation.Pages.PageCells pagecells)
         {
             base.SetPageCells(pagecells);
-            if (this.Direction == CompactTreeDirection.DownThenRight)
+            pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction);
+        }
+
+        private static IVisio.VisCellVals GetPlaceStyle(CompactTreeDirection dir)
+        {
+            if (dir == CompactTreeDirection.DownThenRight)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactDownRight;
+                return IVisio.VisCellVals.visPLOPlaceCompactDownRight;
             }
-            else if (this.Direction == CompactTreeDirection.RightThenDown)
+            else if (dir == CompactTreeDirection.RightThenDown)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactRightDown;
+                return IVisio.VisCellVals.visPLOPlaceCompactRightDown;
             }
-            else if (this.Direction == CompactTreeDirection.RightThenUp)
+            else if (dir == CompactTreeDirection.RightThenUp)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactRightUp;
+                return IVisio.VisCellVals.visPLOPlaceCompactRightUp;
             }
-            else if (this.Direction == CompactTreeDirection.UpThenRigtht)
+            else if (dir == CompactTreeDirection.UpThenRigtht)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactUpRight;
+                return IVisio.VisCellVals.visPLOPlaceCompactUpRight;
             }
-            else if (this.Direction == CompactTreeDirection.UpThenLeft)
+            else if (dir == CompactTreeDirection.UpThenLeft)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactUpLeft;
+                return IVisio.VisCellVals.visPLOPlaceCompactUpLeft;
             }
-            else if (this.Direction == CompactTreeDirection.LeftThenUp)
+            else if (dir == CompactTreeDirection.LeftThenUp)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactLeftUp;
+                return IVisio.VisCellVals.visPLOPlaceCompactLeftUp;
             }
-            else if (this.Direction == CompactTreeDirection.LeftThenDown)
+            else if (dir == CompactTreeDirection.LeftThenDown)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactLeftDown;
+                return IVisio.VisCellVals.visPLOPlaceCompactLeftDown;
             }
-            else if (this.Direction == CompactTreeDirection.DownThenLeft)
+            else if (dir == CompactTreeDirection.DownThenLeft)
             {
-                pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceCompactDownLeft;
+                return IVisio.VisCellVals.visPLOPlaceCompactDownLeft;
             }
             else
             {
                 throw new VA.AutomationException();
             }
-        }        
-
+        }
     }
 
     public class HierarchyConfiguration : BasePageLayoutConfiguration
@@ -204,64 +119,70 @@ namespace VisioAutomation.Layout.PageLayout
         public override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
         {
             base.SetPageCells(pagecells);
-            if (this.Direction == HierarchyDirection.BottomToTop)
+            pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);                    
+
+        }
+
+        private static IVisio.VisCellVals GetPlaceStyle(HierarchyDirection dir, HierarchyHorizontalAlignment halign , HierarchyVerticalAlignment valign)
+        {
+            if (dir == HierarchyDirection.BottomToTop)
             {
-                if (this.HorizontalAlignment == HierarchyHorizontalAlignment.Left)
+                if (halign == HierarchyHorizontalAlignment.Left)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopLeft;                    
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopLeft;
                 }
-                else if (this.HorizontalAlignment == HierarchyHorizontalAlignment.Center)
+                else if (halign == HierarchyHorizontalAlignment.Center)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopCenter;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopCenter;
                 }
-                else if (this.HorizontalAlignment == HierarchyHorizontalAlignment.Right)
+                else if (halign == HierarchyHorizontalAlignment.Right)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopRight;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopRight;
                 }
             }
-            else if (this.Direction == HierarchyDirection.TopToBottom)
+            else if (dir == HierarchyDirection.TopToBottom)
             {
-                if (this.HorizontalAlignment== HierarchyHorizontalAlignment.Left)
+                if (halign == HierarchyHorizontalAlignment.Left)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomLeft;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomLeft;
                 }
-                else if (this.HorizontalAlignment == HierarchyHorizontalAlignment.Center)
+                else if (halign == HierarchyHorizontalAlignment.Center)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomCenter;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomCenter;
                 }
-                else if (this.HorizontalAlignment == HierarchyHorizontalAlignment.Right)
+                else if (halign == HierarchyHorizontalAlignment.Right)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomRight;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomRight;
                 }
             }
-            else if (this.Direction == HierarchyDirection.LeftToRight)
+            else if (dir == HierarchyDirection.LeftToRight)
             {
-                if (this.VerticalAlignment == HierarchyVerticalAlignment.Top)
+                if (valign == HierarchyVerticalAlignment.Top)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightTop;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightTop;
                 }
-                else if (this.VerticalAlignment == HierarchyVerticalAlignment.Middle)
+                else if (valign == HierarchyVerticalAlignment.Middle)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightMiddle;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightMiddle;
                 }
-                else if (this.VerticalAlignment == HierarchyVerticalAlignment.Bottom)
+                else if (valign == HierarchyVerticalAlignment.Bottom)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightBottom;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightBottom;
                 }
             }
-            else if (this.Direction == HierarchyDirection.RightToLeft)
+            else if (dir == HierarchyDirection.RightToLeft)
             {
-                if (this.VerticalAlignment == HierarchyVerticalAlignment.Top)
+                if (valign == HierarchyVerticalAlignment.Top)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyRightToLeftTop;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyRightToLeftTop;
                 }
-                else if (this.VerticalAlignment == HierarchyVerticalAlignment.Middle)
+                else if (valign == HierarchyVerticalAlignment.Middle)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyRightToLeftMiddle;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyRightToLeftMiddle;
                 }
-                else if (this.VerticalAlignment == HierarchyVerticalAlignment.Bottom)
+                else if (valign == HierarchyVerticalAlignment.Bottom)
                 {
-                    pagecells.PlaceStyle = (int)IVisio.VisCellVals.visPLOPlaceHierarchyRightToLeftBottom;
+                    return  IVisio.VisCellVals.visPLOPlaceHierarchyRightToLeftBottom;
                 }
             }
             else
@@ -269,7 +190,8 @@ namespace VisioAutomation.Layout.PageLayout
                 throw new VA.AutomationException();
             }
 
-        }        
+        }
+
 
     }
 
