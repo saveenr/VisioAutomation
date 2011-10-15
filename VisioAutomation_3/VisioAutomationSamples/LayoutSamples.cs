@@ -333,6 +333,7 @@ namespace VisioAutomationSamples
             layout_config.Direction = VA.Layout.PageLayout.HierarchyDirection.TopToBottom;
             layout_config.HorizontalAlignment = VA.Layout.PageLayout.HierarchyHorizontalAlignment.Center;
             layout_config.ResizePageToFit = true;
+            layout_config.AvenueSize = new VA.Drawing.Size(1,1);
             layout_config.Apply(page1);
         }
 

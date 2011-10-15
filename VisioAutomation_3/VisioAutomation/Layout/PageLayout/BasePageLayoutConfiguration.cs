@@ -11,8 +11,12 @@ namespace VisioAutomation.Layout.PageLayout
         public ConnectorAppearance ConnectorAppearance;
         public bool ResizePageToFit;
         public VA.Drawing.Size Border = new VA.Drawing.Size(0.5,0.5);
+        public VA.Drawing.Size AvenueSize = new VA.Drawing.Size(0.375, 0.375);
+
         public virtual void SetPageCells( VisioAutomation.Pages.PageCells pagecells)
         {
+            pagecells.AvenueSizeX = this.AvenueSize.Width;
+            pagecells.AvenueSizeY = this.AvenueSize.Height;
         }
 
         public void Apply(Page page)
