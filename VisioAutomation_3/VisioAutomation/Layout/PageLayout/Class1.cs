@@ -184,11 +184,12 @@ namespace VisioAutomation.Layout.PageLayout
                 {
                     return  IVisio.VisCellVals.visPLOPlaceHierarchyRightToLeftBottom;
                 }
+                else
+                {
+                    throw new VA.AutomationException();
+                }
             }
-            else
-            {
-                throw new VA.AutomationException();
-            }
+            throw new VA.AutomationException();
 
         }
 
