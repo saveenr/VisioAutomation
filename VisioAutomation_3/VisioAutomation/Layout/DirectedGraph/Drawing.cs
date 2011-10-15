@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VA = VisioAutomation;
 using IVisio=Microsoft.Office.Interop.Visio;
@@ -129,6 +130,34 @@ namespace VisioAutomation.Layout.DirectedGraph
         {
             this.Shapes = new ShapeList();
             this.Connectors = new ConnectorList();
+        }
+
+        public void Render(IVisio.Page page)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException("page");
+            }
+
+            var dom = new VA.DOM.Document();
+            double x = 0;
+            double y = 1;
+            foreach (var shape in this.Shapes)
+            {
+                var dom_node = dom.Drop(shape.MasterName, shape.StencilName, x, y);
+                shape.DOMNode = dom_node; 
+                x += 1.0;
+            }
+
+            foreach (var connector in this.Connectors)
+            {
+                
+                var dom_node = dom.Connect( "Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
+                connector.DOMNode = dom_node; 
+            }
+
+            dom.ResolveVisioShapeObjects = true;
+            dom.Render(page);
         }
     }
 }
