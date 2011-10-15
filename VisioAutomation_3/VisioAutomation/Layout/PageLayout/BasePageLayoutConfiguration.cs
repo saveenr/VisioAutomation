@@ -77,6 +77,68 @@ namespace VisioAutomation.Layout.PageLayout
             }
         }
 
+        protected IVisio.VisCellVals ConnectorsStyleAndDirectionToRouteStyle(ConnectorStyle cs, Direction dir)
+        {
+            if (cs == VA.Layout.PageLayout.ConnectorStyle.Flowchart)
+            {
+                if (dir  == Direction.BottomToTop)
+                {
+                    return IVisio.VisCellVals.visLORouteFlowchartSN;
+                }
+                else if (dir  == Direction.TopToBottom)
+                {
+                    return IVisio.VisCellVals.visLORouteFlowchartNS;
+                }
+                else if (dir  == Direction.LeftToRight)
+                {
+                    return IVisio.VisCellVals.visLORouteFlowchartWE;
+                }
+                else if (dir  == Direction.RightToLeft)
+                {
+                    return IVisio.VisCellVals.visLORouteFlowchartEW;
+                }
+            }
+            else if (cs == VA.Layout.PageLayout.ConnectorStyle.OrganizationChart)
+            {
+                if (dir  == Direction.BottomToTop)
+                {
+                    return IVisio.VisCellVals.visLORouteOrgChartSN;
+                }
+                else if (dir  == Direction.TopToBottom)
+                {
+                    return IVisio.VisCellVals.visLORouteOrgChartNS;
+                }
+                else if (dir  == Direction.LeftToRight)
+                {
+                    return IVisio.VisCellVals.visLORouteOrgChartWE;
+                }
+                else if (dir  == Direction.RightToLeft)
+                {
+                    return IVisio.VisCellVals.visLORouteOrgChartEW;
+                }
+
+            }
+            else if (cs == VA.Layout.PageLayout.ConnectorStyle.Simple)
+            {
+                if (dir  == Direction.BottomToTop)
+                {
+                    return IVisio.VisCellVals.visLORouteSimpleSN;
+                }
+                else if (dir  == Direction.TopToBottom)
+                {
+                    return IVisio.VisCellVals.visLORouteSimpleNS;
+                }
+                else if (dir  == Direction.LeftToRight)
+                {
+                    return IVisio.VisCellVals.visLORouteSimpleWE;
+                }
+                else if (dir  == Direction.RightToLeft)
+                {
+                    return IVisio.VisCellVals.visLORouteSimpleEW;
+                }
+            }
+            throw new VA.AutomationException();
+        }
 
         public void Apply(Page page)
         {

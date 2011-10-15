@@ -94,8 +94,7 @@
     <Compile Include="Layout\PageLayout\CompactTreeDirection.cs" />
     <Compile Include="Layout\PageLayout\ConnectorAppearance.cs" />
     <Compile Include="Layout\PageLayout\ConnectorStyle.cs" />
-    <Compile Include="Layout\PageLayout\FlowchartDirection.cs" />
-    <Compile Include="Layout\PageLayout\HierarchyDirection.cs" />
+    <Compile Include="Layout\PageLayout\Direction.cs" />
     <Compile Include="Layout\PageLayout\HierarchyHorizontalAlignment.cs" />
     <Compile Include="Layout\PageLayout\HierarchyVerticalAlignment.cs" />
     <Compile Include="Layout\PageLayout\PageLayoutStyle.cs" />

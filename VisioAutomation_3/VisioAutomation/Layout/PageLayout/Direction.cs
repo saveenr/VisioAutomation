@@ -1,6 +1,6 @@
 namespace VisioAutomation.Layout.PageLayout
 {
-    public enum FlowchartDirection
+    public enum Direction
     {
         TopToBottom,
         BottomToTop,

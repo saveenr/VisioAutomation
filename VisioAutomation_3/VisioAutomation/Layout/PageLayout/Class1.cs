@@ -21,7 +21,7 @@ namespace VisioAutomation.Layout.PageLayout
 
     public class FlowChartConfiguration : BasePageLayoutConfiguration
     {
-        public FlowchartDirection Direction;
+        public Direction Direction;
 
         public FlowChartConfiguration() :
             base()
@@ -36,21 +36,21 @@ namespace VisioAutomation.Layout.PageLayout
             pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction);
         }
 
-        private static IVisio.VisCellVals GetPlaceStyle(FlowchartDirection dir)
+        private static IVisio.VisCellVals GetPlaceStyle(Direction dir)
         {
-            if (dir == FlowchartDirection.TopToBottom)
+            if (dir == Direction.TopToBottom)
             {
                 return IVisio.VisCellVals.visPLOPlaceTopToBottom;
             }
-            else if (dir == FlowchartDirection.LeftToRight)
+            else if (dir == Direction.LeftToRight)
             {
                 return IVisio.VisCellVals.visPLOPlaceLeftToRight;
             }
-            else if (dir == FlowchartDirection.BottomToTop)
+            else if (dir == Direction.BottomToTop)
             {
                 return IVisio.VisCellVals.visPLOPlaceBottomToTop;
             }
-            else if (dir == FlowchartDirection.RightToLeft)
+            else if (dir == Direction.RightToLeft)
             {
                 return IVisio.VisCellVals.visPLOPlaceRightToLeft;
             }
@@ -63,70 +63,11 @@ namespace VisioAutomation.Layout.PageLayout
         protected override IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
         {
             var rs = base.ConnectorsStyleToRouteStyle();
-            if (!rs.HasValue)
+            if (rs.HasValue)
             {
-                var cs = this.ConnectorStyle;
-                if (cs == VA.Layout.PageLayout.ConnectorStyle.Flowchart)
-                {
-                    if (this.Direction == FlowchartDirection.BottomToTop)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartSN;
-                    }
-                    else if (this.Direction == FlowchartDirection.TopToBottom)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartNS;
-                    }
-                    else if (this.Direction == FlowchartDirection.LeftToRight)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartWE;
-                    }
-                    else if (this.Direction == FlowchartDirection.RightToLeft)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartEW;
-                    }
-                }
-                else if (cs == VA.Layout.PageLayout.ConnectorStyle.OrganizationChart)
-                {
-                    if (this.Direction == FlowchartDirection.BottomToTop)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartSN;
-                    }
-                    else if (this.Direction == FlowchartDirection.TopToBottom)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartNS;
-                    }
-                    else if (this.Direction == FlowchartDirection.LeftToRight)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartWE;
-                    }
-                    else if (this.Direction == FlowchartDirection.RightToLeft)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartEW;
-                    }
-                    
-                }
-                else if (cs == VA.Layout.PageLayout.ConnectorStyle.Simple)
-                {
-                    if (this.Direction == FlowchartDirection.BottomToTop)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleSN;
-                    }
-                    else if (this.Direction == FlowchartDirection.TopToBottom)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleNS;
-                    }
-                    else if (this.Direction == FlowchartDirection.LeftToRight)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleWE;
-                    }
-                    else if (this.Direction == FlowchartDirection.RightToLeft)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleEW;
-                    }
-
-                }
+                return rs;
             }
-            return null;
+            return this.ConnectorsStyleAndDirectionToRouteStyle(this.ConnectorStyle, this.Direction);
         }
 
 
@@ -214,7 +155,7 @@ namespace VisioAutomation.Layout.PageLayout
 
     public class HierarchyConfiguration : BasePageLayoutConfiguration
     {
-        public HierarchyDirection Direction;
+        public Direction Direction;
         public HierarchyHorizontalAlignment HorizontalAlignment;
         public HierarchyVerticalAlignment VerticalAlignment;
 
@@ -232,9 +173,9 @@ namespace VisioAutomation.Layout.PageLayout
         }
 
 
-        private static IVisio.VisCellVals GetPlaceStyle(HierarchyDirection dir, HierarchyHorizontalAlignment halign, HierarchyVerticalAlignment valign)
+        private static IVisio.VisCellVals GetPlaceStyle(Direction dir, HierarchyHorizontalAlignment halign, HierarchyVerticalAlignment valign)
         {
-            if (dir == HierarchyDirection.BottomToTop)
+            if (dir == Direction.BottomToTop)
             {
                 if (halign == HierarchyHorizontalAlignment.Left)
                 {
@@ -249,7 +190,7 @@ namespace VisioAutomation.Layout.PageLayout
                     return IVisio.VisCellVals.visPLOPlaceHierarchyBottomToTopRight;
                 }
             }
-            else if (dir == HierarchyDirection.TopToBottom)
+            else if (dir == Direction.TopToBottom)
             {
                 if (halign == HierarchyHorizontalAlignment.Left)
                 {
@@ -264,7 +205,7 @@ namespace VisioAutomation.Layout.PageLayout
                     return IVisio.VisCellVals.visPLOPlaceHierarchyTopToBottomRight;
                 }
             }
-            else if (dir == HierarchyDirection.LeftToRight)
+            else if (dir == Direction.LeftToRight)
             {
                 if (valign == HierarchyVerticalAlignment.Top)
                 {
@@ -279,7 +220,7 @@ namespace VisioAutomation.Layout.PageLayout
                     return IVisio.VisCellVals.visPLOPlaceHierarchyLeftToRightBottom;
                 }
             }
-            else if (dir == HierarchyDirection.RightToLeft)
+            else if (dir == Direction.RightToLeft)
             {
                 if (valign == HierarchyVerticalAlignment.Top)
                 {
@@ -304,71 +245,11 @@ namespace VisioAutomation.Layout.PageLayout
         protected override IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
         {
             var rs = base.ConnectorsStyleToRouteStyle();
-            if (!rs.HasValue)
+            if (rs.HasValue)
             {
-                var cs = this.ConnectorStyle;
-                if (cs == VA.Layout.PageLayout.ConnectorStyle.Flowchart)
-                {
-                    if (this.Direction == HierarchyDirection.BottomToTop)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartSN;
-                    }
-                    else if (this.Direction == HierarchyDirection.TopToBottom)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartNS;
-                    }
-                    else if (this.Direction == HierarchyDirection.LeftToRight)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartWE;
-                    }
-                    else if (this.Direction == HierarchyDirection.RightToLeft)
-                    {
-                        return IVisio.VisCellVals.visLORouteFlowchartEW;
-                    }
-                }
-                else if (cs == VA.Layout.PageLayout.ConnectorStyle.OrganizationChart)
-                {
-                    if (this.Direction == HierarchyDirection.BottomToTop)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartSN;
-                    }
-                    else if (this.Direction == HierarchyDirection.TopToBottom)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartNS;
-                    }
-                    else if (this.Direction == HierarchyDirection.LeftToRight)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartWE;
-                    }
-                    else if (this.Direction == HierarchyDirection.RightToLeft)
-                    {
-                        return IVisio.VisCellVals.visLORouteOrgChartEW;
-                    }
-
-                }
-                else if (cs == VA.Layout.PageLayout.ConnectorStyle.Simple)
-                {
-                    if (this.Direction == HierarchyDirection.BottomToTop)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleSN;
-                    }
-                    else if (this.Direction == HierarchyDirection.TopToBottom)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleNS;
-                    }
-                    else if (this.Direction == HierarchyDirection.LeftToRight)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleWE;
-                    }
-                    else if (this.Direction == HierarchyDirection.RightToLeft)
-                    {
-                        return IVisio.VisCellVals.visLORouteSimpleEW;
-                    }
-
-                }
+                return rs;
             }
-            return null;
+            return this.ConnectorsStyleAndDirectionToRouteStyle(this.ConnectorStyle, this.Direction);
         }
-
     }
 }
