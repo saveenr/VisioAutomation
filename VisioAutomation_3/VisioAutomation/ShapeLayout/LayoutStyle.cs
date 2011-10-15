@@ -1,6 +1,6 @@
-namespace VisioAutomation.Layout.PageLayout
+namespace VisioAutomation.ShapeLayout
 {
-    public enum PageLayoutStyle
+    public enum LayoutStyle
     {
         Radial,
         Flowchart,

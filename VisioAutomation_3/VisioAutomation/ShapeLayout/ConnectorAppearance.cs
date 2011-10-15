@@ -1,4 +1,4 @@
-namespace VisioAutomation.Layout.PageLayout
+namespace VisioAutomation.ShapeLayout
 {
     public enum ConnectorAppearance
     {
