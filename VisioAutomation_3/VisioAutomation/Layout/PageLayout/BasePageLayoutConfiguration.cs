@@ -1,4 +1,5 @@
 using Microsoft.Office.Interop.Visio;
+using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
@@ -17,6 +18,27 @@ namespace VisioAutomation.Layout.PageLayout
         {
             pagecells.AvenueSizeX = this.AvenueSize.Width;
             pagecells.AvenueSizeY = this.AvenueSize.Height;
+            pagecells.LineRouteExt = (int)ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
+        }
+
+        private static IVisio.VisCellVals ConnectorAppearanceToLineRouteExt( ConnectorAppearance ca)
+        {
+            if (ca == VA.Layout.PageLayout.ConnectorAppearance.Default)
+            {
+                return IVisio.VisCellVals.visLORouteExtDefault;
+            }
+            else if (ca == VA.Layout.PageLayout.ConnectorAppearance.Straight)
+            {
+                return IVisio.VisCellVals.visLORouteExtStraight;
+            }
+            else if (ca == VA.Layout.PageLayout.ConnectorAppearance.Curved)
+            {
+                return IVisio.VisCellVals.visLORouteExtNURBS;
+            }
+            else
+            {
+                throw new VA.AutomationException();
+            }
         }
 
         public void Apply(Page page)
