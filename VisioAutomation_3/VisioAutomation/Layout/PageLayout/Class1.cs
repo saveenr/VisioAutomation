@@ -84,6 +84,17 @@ namespace VisioAutomation.Layout.PageLayout
         public virtual void SetPageCells( VisioAutomation.Pages.PageCells pagecells)
         {
         }
+
+        public void Apply(IVisio.Page page)
+        {
+            var pagecells = new VA.Pages.PageCells();
+            this.SetPageCells(pagecells);
+
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            pagecells.Apply(update);
+            var pagesheet = page.PageSheet;
+            update.Execute(pagesheet);
+        }
     }
 
     public class RadialConfiguration : BasePageLayoutConfiguration
