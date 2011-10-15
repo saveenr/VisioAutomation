@@ -89,6 +89,7 @@
     <Compile Include="Layout\DirectedGraph\LayoutOptions.cs" />
     <Compile Include="Layout\DirectedGraph\Node.cs" />
     <Compile Include="Layout\DirectedGraph\Shape.cs" />
+    <Compile Include="Layout\PageLayout\Class1.cs" />
     <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
