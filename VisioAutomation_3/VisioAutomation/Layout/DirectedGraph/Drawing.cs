@@ -158,6 +158,8 @@ namespace VisioAutomation.Layout.DirectedGraph
 
             dom.ResolveVisioShapeObjects = true;
             dom.Render(page);
+
+            page.ResizeToFitContents(0.5,0.5);
         }
     }
 }
