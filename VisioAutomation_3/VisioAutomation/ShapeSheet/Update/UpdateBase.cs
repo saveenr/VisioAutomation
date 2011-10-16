@@ -3,21 +3,21 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class UpdateBase<TStream> where TStream : struct
+    public class UpdateBase<T> where T : struct
     {
-        protected FormulaData<TStream> FormulaData { get; private set; }
-        protected ResultData<TStream> ResultData { get; private set; }
+        protected FormulaData<T> FormulaData { get; private set; }
+        protected ResultData<T> ResultData { get; private set; }
 
         protected UpdateBase()
         {
-            this.FormulaData = new FormulaData<TStream>();
-            this.ResultData = new ResultData<TStream>();
+            this.FormulaData = new FormulaData<T>();
+            this.ResultData = new ResultData<T>();
         }
 
         protected UpdateBase(int fcapacity, int rcapacity)
         {
-            this.FormulaData = new FormulaData<TStream>(fcapacity);
-            this.ResultData = new ResultData<TStream>(rcapacity);
+            this.FormulaData = new FormulaData<T>(fcapacity);
+            this.ResultData = new ResultData<T>(rcapacity);
         }
 
         public bool BlastGuards { get; set; }
@@ -51,12 +51,12 @@ namespace VisioAutomation.ShapeSheet.Update
             return (IVisio.VisGetSetArgs)flags;
         }
 
-        public void SetFormula(TStream streamitem, FormulaLiteral literal)
+        public void SetFormula(T streamitem, FormulaLiteral literal)
         {
             this.FormulaData.Set(streamitem,literal);
         }
 
-        public void SetFormulaIgnoreNull(TStream streamitem, ShapeSheet.FormulaLiteral f)
+        public void SetFormulaIgnoreNull(T streamitem, ShapeSheet.FormulaLiteral f)
         {
             if (f.HasValue)
             {
@@ -64,7 +64,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        public void SetResult(TStream streamitem, double value, IVisio.VisUnitCodes unitcode)
+        public void SetResult(T streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             this.ResultData.Set(streamitem,value,unitcode);
         }
