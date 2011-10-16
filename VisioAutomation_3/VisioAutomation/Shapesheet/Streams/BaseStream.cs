@@ -6,14 +6,16 @@ namespace VisioAutomation.ShapeSheet.Streams
 {
     public abstract class BaseStream<T>
     {
+        protected readonly ChunkedArray chunked_array;
+
         protected class ChunkedArray
         {
-            public short[] array;
+            public short[] RawArray { get; private set; }
             public int chunksize;
 
             public ChunkedArray(int capacity, int chunksize)
             {
-                this.array = new short[capacity*chunksize];
+                this.RawArray = new short[capacity*chunksize];
                 this.chunksize = chunksize;
             }
 
@@ -30,9 +32,9 @@ namespace VisioAutomation.ShapeSheet.Streams
                 }
 
                 int pos = this.GetIndex(i);
-                this.array[pos + 0] = a;
-                this.array[pos + 1] = b;
-                this.array[pos + 2] = c;
+                this.RawArray[pos + 0] = a;
+                this.RawArray[pos + 1] = b;
+                this.RawArray[pos + 2] = c;
             }
 
             public void SetItem(int i, short a, short b, short c, short d)
@@ -42,23 +44,22 @@ namespace VisioAutomation.ShapeSheet.Streams
                     throw new VA.AutomationException("Incorrect chunksize");
                 }
                 int pos = this.GetIndex(i);
-                this.array[pos + 0] = a;
-                this.array[pos + 1] = b;
-                this.array[pos + 2] = c;
-                this.array[pos + 3] = d;
+                this.RawArray[pos + 0] = a;
+                this.RawArray[pos + 1] = b;
+                this.RawArray[pos + 2] = c;
+                this.RawArray[pos + 3] = d;
             }
         }
 
-        protected readonly ChunkedArray shortarray;
-        public readonly int ItemSize;
         private int count;
+        public int ItemSize { get; private set; }
 
         protected BaseStream(int capacity, int itemsize)
         {
             this.ItemSize = itemsize;
             this.Capacity = capacity;
             this.count = 0;
-            this.shortarray = new ChunkedArray(capacity,itemsize);
+            this.chunked_array = new ChunkedArray(capacity,itemsize);
         }
 
         public void Add(T item)
@@ -90,7 +91,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         {
             get
             {
-                return this.shortarray.array;
+                return this.chunked_array.RawArray;
             }
         }
 
@@ -102,13 +103,5 @@ namespace VisioAutomation.ShapeSheet.Streams
         }
 
         protected abstract void set_item_at_pos(int pos, T item);
-
-        protected void Fill<X>(IList<X> items, System.Func<X, T> get_streamitem)
-        {
-            foreach (var item in items)
-            {
-                this.Add(get_streamitem(item));
-            }
-        }
     }
 }

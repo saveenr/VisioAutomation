@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         protected override void set_item_at_pos(int index, SIDSRC item)
         {
-            this.shortarray.SetItem(index, item.ID, item.Section, item.Row, item.Cell);
+            this.chunked_array.SetItem(index, item.ID, item.Section, item.Row, item.Cell);
         }
 
         public void Add(short shapeid, short section, short row, short cell)

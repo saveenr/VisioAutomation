@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected override void set_item_at_pos(int index, SRC item)
         {
 
-            this.shortarray.SetItem(index, item.Section, item.Row, item.Cell);
+            this.chunked_array.SetItem(index, item.Section, item.Row, item.Cell);
         }
 
         public void AddRange(IEnumerable<SRC> items)
