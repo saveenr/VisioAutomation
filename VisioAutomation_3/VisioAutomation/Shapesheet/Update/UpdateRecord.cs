@@ -28,11 +28,4 @@ namespace VisioAutomation.ShapeSheet.Update
             this.UpdateType = UpdateType.Result;
         }
     }
-
-    public enum UpdateType
-    {
-        Formula,
-        Result
-    }
-
 }

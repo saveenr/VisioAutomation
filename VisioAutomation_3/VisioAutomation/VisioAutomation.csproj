@@ -161,6 +161,7 @@
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroupList.cs" />
     <Compile Include="Shapesheet\Data\QueryDataRow.cs" />
+    <Compile Include="Shapesheet\Update\UpdateType.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
@@ -231,7 +232,7 @@
     <Compile Include="DOM\ShapeCells.cs" />
     <Compile Include="Internal\WalkEvent.cs" />
     <Compile Include="Shapesheet\Update\UpdateBase.cs" />
-    <Compile Include="Shapesheet\Update\FormulaItem.cs" />
+    <Compile Include="Shapesheet\Update\UpdateRecord.cs" />
     <Compile Include="Shapesheet\FormulaLiteral.cs" />
     <Compile Include="Shapesheet\Streams\SIDSRCStream.cs" />
     <Compile Include="Shapesheet\Streams\SRCStream.cs" />
