@@ -66,7 +66,12 @@ namespace VisioAutomation.ShapeSheet.Query
             
             // Build the Stream
             var srcs = this.Columns.Items.Select(col => col.SRC).ToList();
-            var stream = VA.ShapeSheet.Streams.SRCStream.FromItems(srcs);
+
+            var stream = new VA.ShapeSheet.Streams.SRCStream(srcs.Count);
+            foreach (var src in srcs)
+            {
+                stream.Add(src);
+            }
 
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;

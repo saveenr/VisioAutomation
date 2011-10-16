@@ -17,18 +17,6 @@ namespace VisioAutomation.ShapeSheet.Streams
             this.shortarray.SetItem(index, item.Section, item.Row, item.Cell);
         }
 
-        public static SRCStream FromItems<T>(IList<T> items, System.Func<T, SRC> get_streamitem)
-        {
-            var s = new SRCStream(items.Count);
-            s.Fill(items, get_streamitem);
-            return s;
-        }
-
-        public static SRCStream FromItems(IList<SRC> items)
-        {
-            return FromItems(items, c => c);
-        }
-
         public void Add(short section, short row, short cell)
         {
             var streamitem = new VA.ShapeSheet.SRC(section, row, cell);

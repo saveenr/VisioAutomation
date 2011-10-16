@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class ResultData<TStream> where TStream : struct
+    public class ResultData<TStream> : IEnumerable<ResultItem<TStream>> where TStream : struct
     {
         private readonly List<ResultItem<TStream>> items;
 
@@ -38,9 +39,17 @@ namespace VisioAutomation.ShapeSheet.Update
             return ShapeSheetHelper.MapCollectionToArray(this.items, r => r.UnitCode);
         }
 
-        public IList<ResultItem<TStream>> Items
+        public IEnumerator<ResultItem<TStream>> GetEnumerator()
         {
-            get { return this.items; }
+            foreach (var i in this.items)
+            {
+                yield return i;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
         }
     }
 }

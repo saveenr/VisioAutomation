@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class FormulaData<TStream> where TStream : struct
+    public class FormulaData<TStream> : IEnumerable<FormulaItem<TStream>> where TStream : struct 
     {
         private readonly List<FormulaItem<TStream>> items;
 
@@ -33,9 +34,17 @@ namespace VisioAutomation.ShapeSheet.Update
             return ShapeSheetHelper.MapCollectionToArray(this.items, r => r.Formula);
         }
 
-        public IList<FormulaItem<TStream>> Items
+        public IEnumerator<FormulaItem<TStream>> GetEnumerator()
         {
-            get { return this.items; }
+            foreach (var i in this.items)
+            {
+                yield return i;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
         }
     }
 }
