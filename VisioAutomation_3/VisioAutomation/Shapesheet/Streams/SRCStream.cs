@@ -17,6 +17,14 @@ namespace VisioAutomation.ShapeSheet.Streams
             this.shortarray.SetItem(index, item.Section, item.Row, item.Cell);
         }
 
+        public void AddRange(IEnumerable<SRC> items)
+        {
+            foreach (var src in items)
+            {
+                this.Add(src);
+            }
+        }
+
         public void Add(short section, short row, short cell)
         {
             var streamitem = new VA.ShapeSheet.SRC(section, row, cell);

@@ -48,10 +48,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
 
             var stream = new VA.ShapeSheet.Streams.SIDSRCStream(this.ResultData.Count);
-            foreach (var item in this.ResultData)
-            {
-                stream.Add(item.StreamItem);
-            }
+            stream.AddRange(this.ResultData.Select(i=>i.StreamItem));
             var unitcodes = this.ResultData.GetUnitCodesArray();
             double[] results = this.ResultData.GetResultsArray();
             var flags = this.ResultFlags;
@@ -67,10 +64,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
 
             var stream = new VA.ShapeSheet.Streams.SIDSRCStream(this.FormulaData.Count);
-            foreach (var item in this.FormulaData)
-            {
-                stream.Add(item.StreamItem);
-            }
+            stream.AddRange(this.FormulaData.Select(i => i.StreamItem));
             var formulas = this.FormulaData.GetFormulasArray();
             var flags = this.FormulaFlags;
 

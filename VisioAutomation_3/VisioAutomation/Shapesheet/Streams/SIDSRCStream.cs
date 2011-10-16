@@ -22,6 +22,14 @@ namespace VisioAutomation.ShapeSheet.Streams
             this.Add(streamitem);
         }
 
+        public void AddRange(IEnumerable<SIDSRC> items)
+        {
+            foreach (var sidsrc in items)
+            {
+                this.Add(sidsrc);
+            }
+        }
+
         public void Add(short shapeid, SRC src)
         {
             var streamitem = new VA.ShapeSheet.SIDSRC(shapeid, src);
