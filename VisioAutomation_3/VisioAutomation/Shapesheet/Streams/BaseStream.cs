@@ -97,11 +97,14 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         public int Capacity { get; private set; }
 
-        protected void SetItem(int index, T item)
-        {
-            this.set_item_at_pos(index,item);
-        }
+        protected abstract void SetItem(int index, T item);
 
-        protected abstract void set_item_at_pos(int pos, T item);
+        public void AddRange(IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                this.Add(item);
+            }
+        }
     }
 }

@@ -11,18 +11,9 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         }
 
-        protected override void set_item_at_pos(int index, SRC item)
+        protected override void SetItem(int index, SRC item)
         {
-
             this.chunked_array.SetItem(index, item.Section, item.Row, item.Cell);
-        }
-
-        public void AddRange(IEnumerable<SRC> items)
-        {
-            foreach (var src in items)
-            {
-                this.Add(src);
-            }
         }
 
         public void Add(short section, short row, short cell)
