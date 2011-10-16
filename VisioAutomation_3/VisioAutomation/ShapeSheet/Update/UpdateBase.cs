@@ -89,12 +89,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         public IEnumerable<UpdateRecord<T>> ResultRecords
         {
-            get { return this.UpdateData.Where(i => !i.containsformula); }
+            get { return this.UpdateData.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Result); }
         }
 
         public IEnumerable<UpdateRecord<T>> FormulaRecords
         {
-            get { return this.UpdateData.Where(i => i.containsformula); }
+            get { return this.UpdateData.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Formula); }
         }
 
         public string[] GetFormulasArray()

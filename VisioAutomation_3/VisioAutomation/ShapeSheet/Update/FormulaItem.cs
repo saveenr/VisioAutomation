@@ -8,8 +8,7 @@ namespace VisioAutomation.ShapeSheet.Update
         public readonly string Formula;
         public readonly double Result;
         public readonly IVisio.VisUnitCodes UnitCode;
-
-        public bool containsformula;
+        public readonly UpdateType UpdateType;
 
         public UpdateRecord(TStream streamitem, string formula)
         {
@@ -17,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Update
             this.Formula = formula;
             this.Result = 0.0;
             this.UnitCode = IVisio.VisUnitCodes.visNoCast;
-            this.containsformula = true;
+            this.UpdateType  = UpdateType.Formula;
         }
 
         public UpdateRecord(TStream streamitem, double result, IVisio.VisUnitCodes unit_code)
@@ -26,8 +25,14 @@ namespace VisioAutomation.ShapeSheet.Update
             this.Formula = null;
             this.UnitCode = unit_code;
             this.Result = result;
-            this.containsformula = false;
+            this.UpdateType = UpdateType.Result;
         }
+    }
+
+    public enum UpdateType
+    {
+        Formula,
+        Result
     }
 
 }
