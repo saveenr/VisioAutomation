@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.Streams;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
