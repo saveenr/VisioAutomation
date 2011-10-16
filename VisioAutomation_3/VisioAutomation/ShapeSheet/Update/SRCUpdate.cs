@@ -12,11 +12,11 @@ namespace VisioAutomation.ShapeSheet.Update
         {
         }
 
-        public SRCUpdate(int fcapacity,int rcapacity)
-            :base(fcapacity,rcapacity)
+        public SRCUpdate(int capacity) :
+            base(capacity)
         {
         }
-        
+
         public void Execute(IVisio.Shape shape)
         {
             this.SetResults(shape);
@@ -26,29 +26,29 @@ namespace VisioAutomation.ShapeSheet.Update
         private short SetResults(
             IVisio.Shape shape)
         {
-            if (this.ResultData.Count== 0)
+            if (this.ResultCount== 0)
             {
                 return 0;
             }
 
-            var stream = new VA.ShapeSheet.Streams.SRCStream(this.ResultData.Count);
-            stream.AddRange(this.ResultData.Select(i => i.StreamItem));
-            var unitcodes = this.ResultData.GetUnitCodesArray();
-            var results = this.ResultData.GetResultsArray();
+            var stream = new VA.ShapeSheet.Streams.SRCStream(this.ResultCount);
+            stream.AddRange(this.ResultRecords.Select(i => i.StreamItem));
+            var unitcodes = this.GetUnitCodesArray();
+            var results = this.GetResultsArray();
             var flags = this.ResultFlags;
             return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
         }
 
         private short SetFormulas(IVisio.Shape shape)
         {
-            if (this.FormulaData.Count == 0)
+            if (this.FormulaCount == 0)
             {
                 return 0;
             }
 
-            var stream = new VA.ShapeSheet.Streams.SRCStream(this.FormulaData.Count);
-            stream.AddRange(this.FormulaData.Select(i => i.StreamItem));
-            var formulas = this.FormulaData.GetFormulasArray();
+            var stream = new VA.ShapeSheet.Streams.SRCStream(this.FormulaCount);
+            stream.AddRange(this.FormulaRecords.Select(i => i.StreamItem));
+            var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
             return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
         }

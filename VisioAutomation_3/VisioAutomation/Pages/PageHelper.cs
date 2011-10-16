@@ -249,7 +249,7 @@ namespace VisioAutomation.Pages
             double new_height = old_size.Width;
             double new_width = old_size.Height;
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate(3, 0);
+            var update = new VA.ShapeSheet.Update.SRCUpdate(3);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, new_width);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, new_height);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
@@ -283,7 +283,7 @@ namespace VisioAutomation.Pages
 
             var page_sheet = page.PageSheet;
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate(2, 0);
+            var update = new VA.ShapeSheet.Update.SRCUpdate(2);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, size.Width);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, size.Height);
             update.Execute(page_sheet);

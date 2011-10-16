@@ -11,11 +11,11 @@ namespace VisioAutomation.ShapeSheet.Update
         {
         }
 
-        public SIDSRCUpdate(int fcapacity,int rcapacity) :
-            base(fcapacity,rcapacity)
+        public SIDSRCUpdate(int capacity) :
+            base(capacity)
         {
         }
-
+        
         public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             var streamitem = new SIDSRC(shapeid,src);
@@ -42,15 +42,15 @@ namespace VisioAutomation.ShapeSheet.Update
 
         private short SetResults( IVisio.Page page)
         {
-            if (this.ResultData.Count== 0)
+            if (this.ResultCount== 0)
             {
                 return 0;
             }
 
-            var stream = new VA.ShapeSheet.Streams.SIDSRCStream(this.ResultData.Count);
-            stream.AddRange(this.ResultData.Select(i=>i.StreamItem));
-            var unitcodes = this.ResultData.GetUnitCodesArray();
-            double[] results = this.ResultData.GetResultsArray();
+            var stream = new VA.ShapeSheet.Streams.SIDSRCStream(this.ResultCount);
+            stream.AddRange(this.ResultRecords.Select(i=>i.StreamItem));
+            var unitcodes = this.GetUnitCodesArray();
+            double[] results = this.GetResultsArray();
             var flags = this.ResultFlags;
 
             return VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
@@ -58,14 +58,14 @@ namespace VisioAutomation.ShapeSheet.Update
 
         private short SetFormulas(IVisio.Page page)
         {
-            if (this.FormulaData.Count == 0)
+            if (this.FormulaCount == 0)
             {
                 return 0;
             }
 
-            var stream = new VA.ShapeSheet.Streams.SIDSRCStream(this.FormulaData.Count);
-            stream.AddRange(this.FormulaData.Select(i => i.StreamItem));
-            var formulas = this.FormulaData.GetFormulasArray();
+            var stream = new VA.ShapeSheet.Streams.SIDSRCStream(this.FormulaCount);
+            stream.AddRange(this.FormulaRecords.Select(i => i.StreamItem));
+            var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
 
             return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(page, stream, formulas, (short)flags);

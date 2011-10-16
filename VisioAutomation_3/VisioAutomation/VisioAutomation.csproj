@@ -219,10 +219,8 @@
     <Compile Include="Pages\PageNavigation.cs" />
     <Compile Include="Shapesheet\Data\TableColumnList.cs" />
     <Compile Include="Shapesheet\Query\QueryColumnList.cs" />
-    <Compile Include="Shapesheet\Update\FormulaData.cs" />
     <Compile Include="Shapesheet\Query\QueryBase.cs" />
     <Compile Include="Shapesheet\Query\QueryColumn.cs" />
-    <Compile Include="Shapesheet\Update\ResultData.cs" />
     <Compile Include="Shapesheet\Data\TableRow.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
     <Compile Include="DOM\Shape.cs" />
@@ -235,7 +233,6 @@
     <Compile Include="Shapesheet\Update\UpdateBase.cs" />
     <Compile Include="Shapesheet\Update\FormulaItem.cs" />
     <Compile Include="Shapesheet\FormulaLiteral.cs" />
-    <Compile Include="Shapesheet\Update\ResultItem.cs" />
     <Compile Include="Shapesheet\Streams\SIDSRCStream.cs" />
     <Compile Include="Shapesheet\Streams\SRCStream.cs" />
     <Compile Include="Internal\TreeTraversal.cs" />
