@@ -1,11 +1,55 @@
 using System.Collections.Generic;
 using System.Linq;
+using VA=VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Streams
 {
     public abstract class BaseStream<T>
     {
-        protected readonly short[] shortarray;
+        protected class ChunkedArray
+        {
+            public short[] array;
+            public int chunksize;
+
+            public ChunkedArray(int capacity, int chunksize)
+            {
+                this.array = new short[capacity*chunksize];
+                this.chunksize = chunksize;
+            }
+
+            public int GetIndex(int chunk_index)
+            {
+                return chunk_index*this.chunksize;
+            }
+
+            public void SetItem(int i, short a, short b, short c)
+            {
+                if (this.chunksize != 3)
+                {
+                    throw new VA.AutomationException("Incorrect chunksize");
+                }
+
+                int pos = this.GetIndex(i);
+                this.array[pos + 0] = a;
+                this.array[pos + 1] = b;
+                this.array[pos + 2] = c;
+            }
+
+            public void SetItem(int i, short a, short b, short c, short d)
+            {
+                if (this.chunksize != 4)
+                {
+                    throw new VA.AutomationException("Incorrect chunksize");
+                }
+                int pos = this.GetIndex(i);
+                this.array[pos + 0] = a;
+                this.array[pos + 1] = b;
+                this.array[pos + 2] = c;
+                this.array[pos + 3] = d;
+            }
+        }
+
+        protected readonly ChunkedArray shortarray;
         public readonly int ItemSize;
         private int count;
 
@@ -14,7 +58,7 @@ namespace VisioAutomation.ShapeSheet.Streams
             this.ItemSize = itemsize;
             this.Capacity = capacity;
             this.count = 0;
-            this.shortarray = new short[this.ItemSize * this.Capacity];
+            this.shortarray = new ChunkedArray(capacity,itemsize);
         }
 
         public void Add(T item)
@@ -46,7 +90,7 @@ namespace VisioAutomation.ShapeSheet.Streams
         {
             get
             {
-                return this.shortarray;
+                return this.shortarray.array;
             }
         }
 
@@ -54,8 +98,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         protected void SetItem(int index, T item)
         {
-            int pos = this.ItemSize*index;
-            this.set_item_at_pos(pos,item);
+            this.set_item_at_pos(index,item);
         }
 
         protected abstract void set_item_at_pos(int pos, T item);

@@ -11,12 +11,9 @@ namespace VisioAutomation.ShapeSheet.Streams
 
         }
 
-        protected override void set_item_at_pos(int pos, SIDSRC item)
+        protected override void set_item_at_pos(int index, SIDSRC item)
         {
-            this.shortarray[pos + 0] = item.ID;
-            this.shortarray[pos + 1] = item.Section;
-            this.shortarray[pos + 2] = item.Row;
-            this.shortarray[pos + 3] = item.Cell;
+            this.shortarray.SetItem(index, item.ID, item.Section, item.Row, item.Cell);
         }
 
         public static SIDSRCStream FromItems<T>(IList<T> items, System.Func<T, SIDSRC> get_streamitem)
