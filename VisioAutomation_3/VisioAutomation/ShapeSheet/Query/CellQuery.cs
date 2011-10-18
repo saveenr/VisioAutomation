@@ -141,7 +141,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 foreach (var src in srcs)
                 {
-                    stream.Add((short) id, src);
+                    var sidsrc = new VA.ShapeSheet.SIDSRC((short) id, src);
+                    stream.Add(sidsrc);
                 }
             }
 

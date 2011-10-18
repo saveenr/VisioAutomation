@@ -149,7 +149,8 @@ namespace VisioAutomation.ShapeSheet.Query
                 {
                     foreach (var cell in cells)
                     {
-                        stream.Add(shapeid, Section, row, cell);
+                        var sidsrc = new VA.ShapeSheet.SIDSRC(shapeid, Section, row, cell);
+                        stream.Add(sidsrc);
                     }
                 }
             }
@@ -209,7 +210,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 foreach (var cell in cells)
                 {
-                    stream.Add(this.Section, row, cell);
+                    var src = new VA.ShapeSheet.SRC(this.Section, row, cell);
+                    stream.Add(src);
                 }
             }
 

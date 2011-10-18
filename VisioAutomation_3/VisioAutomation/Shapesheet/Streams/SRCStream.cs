@@ -15,11 +15,5 @@ namespace VisioAutomation.ShapeSheet.Streams
         {
             this.chunked_array.SetItem(index, item.Section, item.Row, item.Cell);
         }
-
-        public void Add(short section, short row, short cell)
-        {
-            var streamitem = new VA.ShapeSheet.SRC(section, row, cell);
-            this.Add(streamitem);
-        }
     }
 }
