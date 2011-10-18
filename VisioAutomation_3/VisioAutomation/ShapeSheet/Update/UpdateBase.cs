@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Update
     public class UpdateBase<T> : IEnumerable<UpdateRecord<T>>
         where T : struct
     {
-        protected List<UpdateRecord<T>> UpdateData { get; private set; }
+        private List<UpdateRecord<T>> items;
         public int ResultCount { get; private set; }
         public int FormulaCount { get; private set; }
         public bool BlastGuards { get; set; }
@@ -17,12 +17,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         protected UpdateBase()
         {
-            this.UpdateData = new List<UpdateRecord<T>>();
+            this.items = new List<UpdateRecord<T>>();
         }
 
         protected UpdateBase(int capacity)
         {
-            this.UpdateData = new List<UpdateRecord<T>>(capacity);
+            this.items = new List<UpdateRecord<T>>(capacity);
         }
 
         public IVisio.VisGetSetArgs ResultFlags
@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet.Update
         {
             ShapeSheetHelper.CheckFormulaIsNotNull(literal.Value);
             var rec = new UpdateRecord<T>(streamitem, literal.Value);
-            this.UpdateData.Add(rec);
+            this.items.Add(rec);
             this.FormulaCount++;
         }
 
@@ -69,13 +69,13 @@ namespace VisioAutomation.ShapeSheet.Update
         public void SetResult(T streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             var rec = new UpdateRecord<T>(streamitem, value, unitcode);
-            this.UpdateData.Add(rec);
+            this.items.Add(rec);
             this.ResultCount++;
         }
 
         public IEnumerator<UpdateRecord<T>> GetEnumerator()
         {
-            foreach (var i in this.UpdateData)
+            foreach (var i in this.items)
             {
                 yield return i;
             }
@@ -89,12 +89,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         public IEnumerable<UpdateRecord<T>> ResultRecords
         {
-            get { return this.UpdateData.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Result); }
+            get { return this.items.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Result); }
         }
 
         public IEnumerable<UpdateRecord<T>> FormulaRecords
         {
-            get { return this.UpdateData.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Formula); }
+            get { return this.items.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Formula); }
         }
 
         public string[] GetFormulasArray()
