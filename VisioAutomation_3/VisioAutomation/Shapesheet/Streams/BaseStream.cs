@@ -11,22 +11,22 @@ namespace VisioAutomation.ShapeSheet.Streams
         protected class ChunkedArray
         {
             public short[] RawArray { get; private set; }
-            public int chunksize;
+            public int ChunkSize { get; private set; }
 
             public ChunkedArray(int capacity, int chunksize)
             {
                 this.RawArray = new short[capacity*chunksize];
-                this.chunksize = chunksize;
+                this.ChunkSize = chunksize;
             }
 
             public int GetIndex(int chunk_index)
             {
-                return chunk_index*this.chunksize;
+                return chunk_index*this.ChunkSize;
             }
 
             public void SetItem(int i, short a, short b, short c)
             {
-                if (this.chunksize != 3)
+                if (this.ChunkSize != 3)
                 {
                     throw new VA.AutomationException("Incorrect chunksize");
                 }
@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.Streams
 
             public void SetItem(int i, short a, short b, short c, short d)
             {
-                if (this.chunksize != 4)
+                if (this.ChunkSize != 4)
                 {
                     throw new VA.AutomationException("Incorrect chunksize");
                 }
