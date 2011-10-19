@@ -57,13 +57,14 @@ namespace VisioAutomation.ShapeSheet
 
         public static short[] ToStream(IList<SRC> srcs)
         {
-            var s = new short[4 * srcs.Count];
+            var s = new short[3 * srcs.Count];
             for (int i = 0; i < srcs.Count; i++)
             {
                 var sidsrc = srcs[i];
-                s[i + 0] = sidsrc.Section;
-                s[i + 1] = sidsrc.Row;
-                s[i + 2] = sidsrc.Cell;
+                int pos = i*3;
+                s[pos + 0] = sidsrc.Section;
+                s[pos + 1] = sidsrc.Row;
+                s[pos + 2] = sidsrc.Cell;
             }
             return s;
         }

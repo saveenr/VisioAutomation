@@ -111,11 +111,11 @@ namespace VisioAutomation.ShapeSheet
 
         internal static TResult[] GetResults<TResult>(
             IVisio.Shape shape,
-            VA.ShapeSheet.Streams.SRCStream stream,
+            List<VA.ShapeSheet.SRC> stream,
             IList<IVisio.VisUnitCodes> unitcodes)
         {
-
-            return GetResults<TResult>(shape, stream.Array, unitcodes, stream.Count);
+            var array = VA.ShapeSheet.SRC.ToStream(stream);
+            return GetResults<TResult>(shape, array, unitcodes, stream.Count);
         }
 
         internal static TResult[] GetResults<TResult>(
@@ -224,9 +224,10 @@ namespace VisioAutomation.ShapeSheet
 
         internal static string[] GetFormulasU(
             IVisio.Page page,
-            VA.ShapeSheet.Streams.SIDSRCStream stream)
+            IList<SIDSRC> stream)
         {
-            return GetFormulasU(page, stream.Array, stream.Count);
+            var array = VA.ShapeSheet.SIDSRC.ToStream(stream);
+            return GetFormulasU(page, array, stream.Count);
         }
 
 

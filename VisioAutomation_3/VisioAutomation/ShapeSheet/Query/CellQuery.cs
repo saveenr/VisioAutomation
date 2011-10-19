@@ -67,14 +67,9 @@ namespace VisioAutomation.ShapeSheet.Query
             // Build the Stream
             var srcs = this.Columns.Items.Select(col => col.SRC).ToList();
 
-            var stream = new VA.ShapeSheet.Streams.SRCStream(srcs.Count);
-            foreach (var src in srcs)
-            {
-                stream.Add(src);
-            }
-
-            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
-            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
+            var stream = VA.ShapeSheet.SRC.ToStream(srcs);
+            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream, srcs.Count) : null;
+            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes, srcs.Count) : null;
 
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, group_counts);
 
@@ -136,18 +131,19 @@ namespace VisioAutomation.ShapeSheet.Query
             int total_cells = rowcount * this.Columns.Count;
 
             // Build the Stream
-            var stream = new VA.ShapeSheet.Streams.SIDSRCStream(total_cells);
+            var sidsrcs = new List<VA.ShapeSheet.SIDSRC>(total_cells);
             foreach (var id in shapeids)
             {
                 foreach (var src in srcs)
                 {
                     var sidsrc = new VA.ShapeSheet.SIDSRC((short) id, src);
-                    stream.Add(sidsrc);
+                    sidsrcs.Add(sidsrc);
                 }
             }
+            var stream = VA.ShapeSheet.SIDSRC.ToStream(sidsrcs);
 
-            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
-            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes) : null;
+            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream, sidsrcs.Count) : null;
+            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes, sidsrcs.Count) : null;
 
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
 

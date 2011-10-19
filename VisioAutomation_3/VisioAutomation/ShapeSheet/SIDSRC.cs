@@ -48,10 +48,11 @@ namespace VisioAutomation.ShapeSheet
             for (int i = 0; i < sidsrcs.Count; i++)
             {
                 var sidsrc = sidsrcs[i];
-                s[i + 0] = sidsrc.ID;
-                s[i + 1] = sidsrc.Section;
-                s[i + 2] = sidsrc.Row;
-                s[i + 3] = sidsrc.Cell;
+                int pos = i*4;
+                s[pos + 0] = sidsrc.ID;
+                s[pos + 1] = sidsrc.Section;
+                s[pos + 2] = sidsrc.Row;
+                s[pos + 3] = sidsrc.Cell;
             }
             return s;
         }
