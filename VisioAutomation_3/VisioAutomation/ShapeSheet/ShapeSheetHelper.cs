@@ -114,7 +114,16 @@ namespace VisioAutomation.ShapeSheet
             VA.ShapeSheet.Streams.SRCStream stream,
             IList<IVisio.VisUnitCodes> unitcodes)
         {
-            if (stream.Count < 1)
+
+            return GetResults<TResult>(shape, stream.Array, unitcodes, stream.Count);
+        }
+
+        internal static TResult[] GetResults<TResult>(
+            IVisio.Shape shape,
+            short [] stream,
+            IList<IVisio.VisUnitCodes> unitcodes, int numitems)
+        {
+            if (numitems < 1)
             {
                 return new TResult[0];
             }
@@ -125,18 +134,18 @@ namespace VisioAutomation.ShapeSheet
 
             Array results_sa;
             shape.GetResults(
-                stream.Array,
+                stream,
                 (short)flags,
                 unitcodes_obj_array,
                 out results_sa);
 
             object[] results_obj_array = (object[])results_sa;
 
-            if (results_obj_array.Length != stream.Count)
+            if (results_obj_array.Length != numitems)
             {
                 string msg = String.Format(
                     "Expected {0} items from GetResults but only received {1}",
-                    stream.Count,
+                    numitems,
                     results_obj_array.Length);
                 throw new AutomationException(msg);
             }
@@ -151,21 +160,28 @@ namespace VisioAutomation.ShapeSheet
             IVisio.Shape shape,
             VA.ShapeSheet.Streams.SRCStream stream)
         {
-            if (stream.Count < 1)
+            return GetFormulasU(shape, stream.Array, stream.Count);
+        }
+
+        internal static string[] GetFormulasU(
+    IVisio.Shape shape,
+    short [] stream, int numitems)
+        {
+            if (numitems< 1)
             {
                 return new string[0];
             }
 
             Array formulas_sa;
-            shape.GetFormulasU(stream.Array, out formulas_sa);
+            shape.GetFormulasU(stream, out formulas_sa);
 
             object[] formulas_obj_array = (object[])formulas_sa;
 
-            if (formulas_obj_array.Length != stream.Count)
+            if (formulas_obj_array.Length != numitems)
             {
                 string msg = String.Format(
                     "Expected {0} items from GetFormulas but only received {1}",
-                    stream.Count,
+                    numitems,
                     formulas_obj_array.Length);
                 throw new AutomationException(msg);
             }
@@ -177,12 +193,23 @@ namespace VisioAutomation.ShapeSheet
         }
 
         internal static short SetFormulas(
-            IVisio.Page page,
-            VA.ShapeSheet.Streams.SIDSRCStream stream,
-            IList<string> formulas,
-            short flags)
+    IVisio.Page page,
+    VA.ShapeSheet.Streams.SIDSRCStream stream,
+    IList<string> formulas,
+    short flags)
         {
-            if (stream.Count < 1)
+            return SetFormulas(page, stream.Array, formulas, flags, stream.Count);
+        }
+
+
+        internal static short SetFormulas(
+            IVisio.Page page,
+            short[] stream,
+            IList<string> formulas,
+            short flags,
+            int numitems)
+        {
+            if (numitems< 1)
             {
                 return 0;
             }
@@ -192,14 +219,22 @@ namespace VisioAutomation.ShapeSheet
             // Force UniversalSyntax 
             flags |= (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;
 
-            return page.SetFormulas(stream.Array, formula_obj_array, flags);
+            return page.SetFormulas(stream, formula_obj_array, flags);
         }
 
         internal static string[] GetFormulasU(
             IVisio.Page page,
             VA.ShapeSheet.Streams.SIDSRCStream stream)
         {
-            if (stream.Count == 0)
+            return GetFormulasU(page, stream.Array, stream.Count);
+        }
+
+
+        internal static string[] GetFormulasU(
+            IVisio.Page page,
+            short [] stream, int numitems)
+        {
+            if (numitems == 0)
             {
                 return new string[0];
             }
@@ -207,25 +242,26 @@ namespace VisioAutomation.ShapeSheet
             Array formulas_sa;
 
             page.GetFormulasU(
-                stream.Array,
+                stream,
                 out formulas_sa);
 
             object[] formulas_obj_array = (object[])formulas_sa;
 
-            if (formulas_obj_array.Length != stream.Count)
+            if (formulas_obj_array.Length != numitems)
             {
                 string msg = String.Format(
                     "Expected {0} items from GetFormulas but only received {1}",
-                    stream.Count,
+                    numitems,
                     formulas_obj_array.Length);
                 throw new AutomationException(msg);
             }
 
-            string [] formulas = new string[formulas_obj_array.Length];
-            formulas_obj_array.CopyTo(formulas,0);
+            string[] formulas = new string[formulas_obj_array.Length];
+            formulas_obj_array.CopyTo(formulas, 0);
 
             return formulas;
         }
+
 
         internal static short SetFormulas(
             IVisio.Shape shape,
@@ -233,13 +269,23 @@ namespace VisioAutomation.ShapeSheet
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
-            if (formulas.Count != stream.Count)
+            return SetFormulas(shape, stream.Array, formulas, flags, stream.Count);
+        }
+
+        internal static short SetFormulas(
+    IVisio.Shape shape,
+    short [] stream,
+    IList<string> formulas,
+    IVisio.VisGetSetArgs flags,
+            int numitems)
+        {
+            if (formulas.Count != numitems)
             {
-                string msg = String.Format("Expected {0} formulas, instead have {1}", stream.Count, formulas.Count);
+                string msg = String.Format("Expected {0} formulas, instead have {1}", numitems, formulas.Count);
                 throw new AutomationException(msg);
             }
 
-            if (stream.Count == 0)
+            if (numitems == 0)
             {
                 return 0;
             }
@@ -250,8 +296,9 @@ namespace VisioAutomation.ShapeSheet
             // Force UniversalSyntax 
             short short_flags = (short)(((short)flags) | ((short)IVisio.VisGetSetArgs.visSetUniversalSyntax));
 
-            return shape.SetFormulas(stream.Array, formula_obj_array, short_flags);
+            return shape.SetFormulas(stream, formula_obj_array, short_flags);
         }
+
 
         internal static short SetResults(
             IVisio.Shape shape,
@@ -260,19 +307,30 @@ namespace VisioAutomation.ShapeSheet
             IList<IVisio.VisUnitCodes> unit_codes,
             IVisio.VisGetSetArgs flags)
         {
-            if (unit_codes.Count != stream.Count)
+            return SetResults(shape, stream.Array, results, unit_codes, flags, stream.Count);
+        }
+
+        internal static short SetResults(
+    IVisio.Shape shape,
+    short [] stream,
+    IList<double> results,
+    IList<IVisio.VisUnitCodes> unit_codes,
+    IVisio.VisGetSetArgs flags,
+            int numitems)
+        {
+            if (unit_codes.Count != numitems)
             {
-                string msg = String.Format("Expected {0} unit_codes, instead have {1}", stream.Count, unit_codes.Count);
+                string msg = String.Format("Expected {0} unit_codes, instead have {1}", numitems, unit_codes.Count);
                 throw new AutomationException(msg);
             }
 
-            if (results.Count != stream.Count)
+            if (results.Count != numitems)
             {
-                string msg = String.Format("Expected {0} results, instead have {1}", stream.Count, results.Count);
+                string msg = String.Format("Expected {0} results, instead have {1}", numitems, results.Count);
                 throw new AutomationException(msg);
             }
 
-            if (stream.Count < 1)
+            if (numitems< 1)
             {
                 return 0;
             }
@@ -282,10 +340,11 @@ namespace VisioAutomation.ShapeSheet
 
             flags = _CheckSetResultsFlags(flags);
 
-            short num_set = shape.SetResults(stream.Array, unitcodes_obj_array, results_obj_array, (short)flags);
+            short num_set = shape.SetResults(stream, unitcodes_obj_array, results_obj_array, (short)flags);
 
             return num_set;
         }
+
 
         internal static short SetResults(
             IVisio.Page page,
@@ -294,13 +353,24 @@ namespace VisioAutomation.ShapeSheet
             IList<IVisio.VisUnitCodes> unitcodes,
             IVisio.VisGetSetArgs flags)
         {
-            if (results.Count != stream.Count)
+            return SetResults(page, stream.Array, results, unitcodes, flags, stream.Count);
+        }
+
+        internal static short SetResults(
+    IVisio.Page page,
+    short[] stream,
+    IList<double> results,
+    IList<IVisio.VisUnitCodes> unitcodes,
+    IVisio.VisGetSetArgs flags,
+            int numitems)
+        {
+            if (results.Count != numitems)
             {
-                string msg = String.Format("Expected {0} results, instead have {1}", stream.Count, results.Count);
+                string msg = String.Format("Expected {0} results, instead have {1}", numitems, results.Count);
                 throw new AutomationException(msg);
             }
 
-            if (stream.Count == 0)
+            if (numitems == 0)
             {
                 return 0;
             }
@@ -310,8 +380,9 @@ namespace VisioAutomation.ShapeSheet
 
             flags = _CheckSetResultsFlags(flags);
 
-            return page.SetResults(stream.Array, unitcodes_obj_array, results_obj_array, (short)flags);
+            return page.SetResults(stream , unitcodes_obj_array, results_obj_array, (short)flags);
         }
+
 
         internal static TResult[] GetResults<TResult>(
             IVisio.Page page,
@@ -351,6 +422,47 @@ namespace VisioAutomation.ShapeSheet
 
             return results;
         }
+
+        internal static TResult[] GetResults<TResult>(
+    IVisio.Page page,
+    short[] stream,
+    IList<IVisio.VisUnitCodes> unitcodes,
+            int numitems)
+        {
+            if (numitems== 0)
+            {
+                return new TResult[0];
+            }
+
+            var result_type = typeof(TResult);
+            var flags = _GetResultsFlagForResultType(result_type);
+            var unitcodes_obj_array = UnitCodesToObjectArray(unitcodes);
+
+            Array results_sa;
+
+            page.GetResults(
+                stream,
+                (short)flags,
+                unitcodes_obj_array,
+                out results_sa);
+
+            object[] results_obj_array = (object[])results_sa;
+
+            if (results_obj_array.Length != numitems)
+            {
+                string msg = String.Format(
+                    "Expected {0} items from GetResults but only received {1}",
+                    numitems,
+                    results_obj_array.Length);
+                throw new AutomationException(msg);
+            }
+
+            TResult[] results = new TResult[results_obj_array.Length];
+            results_obj_array.CopyTo(results, 0);
+
+            return results;
+        }
+
 
         internal static IList<IVisio.VisUnitCodes> get_unitcodes_for_rows(IList<IVisio.VisUnitCodes> unitcodes, int rows)
         {
