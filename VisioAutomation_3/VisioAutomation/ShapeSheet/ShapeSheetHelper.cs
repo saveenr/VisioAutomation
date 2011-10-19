@@ -8,8 +8,6 @@ namespace VisioAutomation.ShapeSheet
 {
     public static partial class ShapeSheetHelper
     {
-
-
         internal static object[] UnitCodesToObjectArray(IList<IVisio.VisUnitCodes> unitcodes)
         {
             if (unitcodes == null)
@@ -17,11 +15,14 @@ namespace VisioAutomation.ShapeSheet
                 return null;
             }
 
-            return MapCollectionToArray(unitcodes, uc => (object)uc);
+            int num_items = unitcodes.Count;
+            var destination_array = new object[num_items];
+            for (int i = 0; i < num_items; i++)
+            {
+                destination_array[i] = unitcodes[i];
+            }
+            return destination_array;
         }
-
-
-
 
         internal static void CheckValidDataTypeForResult(Type result_type)
         {
@@ -31,23 +32,5 @@ namespace VisioAutomation.ShapeSheet
                 throw new ArgumentException(msg);
             }
         }
-
-
-
-
-        internal static TB[] MapCollectionToArray<TA, TB>(IList<TA> source_collection, Func<TA, TB> xfrm)
-        {
-            int num_items = source_collection.Count;
-            TB[] destination_array = new TB[num_items];
-            for (int i = 0; i < num_items; i++)
-            {
-                destination_array[i] = xfrm(source_collection[i]);
-            }
-
-            return destination_array;
-        }
- 
-
-
     }
 }

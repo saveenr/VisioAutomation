@@ -33,7 +33,13 @@ namespace VisioAutomation.ShapeSheet.Update
                 return null;
             }
 
-            return VA.ShapeSheet.ShapeSheetHelper.MapCollectionToArray(strings, uc => (object)uc);
+            int num_items = strings.Count;
+            var destination_array = new object[num_items];
+            for (int i = 0; i < num_items; i++)
+            {
+                destination_array[i] = strings[i];
+            }
+            return destination_array;
         }
 
 
@@ -44,7 +50,13 @@ namespace VisioAutomation.ShapeSheet.Update
                 return null;
             }
 
-            return VA.ShapeSheet.ShapeSheetHelper.MapCollectionToArray(doubles, uc => (object)uc);
+            int num_items = doubles.Count;
+            var destination_array = new object[num_items];
+            for (int i = 0; i < num_items; i++)
+            {
+                destination_array[i] = doubles[i];
+            }
+            return destination_array;
         }
 
         internal static short SetFormulas(
