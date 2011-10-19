@@ -157,13 +157,6 @@ namespace VisioAutomation.ShapeSheet
         }
 
         internal static string[] GetFormulasU(
-            IVisio.Shape shape,
-            VA.ShapeSheet.Streams.SRCStream stream)
-        {
-            return GetFormulasU(shape, stream.Array, stream.Count);
-        }
-
-        internal static string[] GetFormulasU(
     IVisio.Shape shape,
     short [] stream, int numitems)
         {
@@ -191,16 +184,6 @@ namespace VisioAutomation.ShapeSheet
 
             return formulas;
         }
-
-        internal static short SetFormulas(
-    IVisio.Page page,
-    VA.ShapeSheet.Streams.SIDSRCStream stream,
-    IList<string> formulas,
-    short flags)
-        {
-            return SetFormulas(page, stream.Array, formulas, flags, stream.Count);
-        }
-
 
         internal static short SetFormulas(
             IVisio.Page page,
@@ -263,16 +246,6 @@ namespace VisioAutomation.ShapeSheet
             return formulas;
         }
 
-
-        internal static short SetFormulas(
-            IVisio.Shape shape,
-            VA.ShapeSheet.Streams.SRCStream stream,
-            IList<string> formulas,
-            IVisio.VisGetSetArgs flags)
-        {
-            return SetFormulas(shape, stream.Array, formulas, flags, stream.Count);
-        }
-
         internal static short SetFormulas(
     IVisio.Shape shape,
     short [] stream,
@@ -298,17 +271,6 @@ namespace VisioAutomation.ShapeSheet
             short short_flags = (short)(((short)flags) | ((short)IVisio.VisGetSetArgs.visSetUniversalSyntax));
 
             return shape.SetFormulas(stream, formula_obj_array, short_flags);
-        }
-
-
-        internal static short SetResults(
-            IVisio.Shape shape,
-            VA.ShapeSheet.Streams.SRCStream stream,
-            IList<double> results,
-            IList<IVisio.VisUnitCodes> unit_codes,
-            IVisio.VisGetSetArgs flags)
-        {
-            return SetResults(shape, stream.Array, results, unit_codes, flags, stream.Count);
         }
 
         internal static short SetResults(
@@ -346,17 +308,6 @@ namespace VisioAutomation.ShapeSheet
             return num_set;
         }
 
-
-        internal static short SetResults(
-            IVisio.Page page,
-            VA.ShapeSheet.Streams.SIDSRCStream stream,
-            IList<double> results,
-            IList<IVisio.VisUnitCodes> unitcodes,
-            IVisio.VisGetSetArgs flags)
-        {
-            return SetResults(page, stream.Array, results, unitcodes, flags, stream.Count);
-        }
-
         internal static short SetResults(
     IVisio.Page page,
     short[] stream,
@@ -382,46 +333,6 @@ namespace VisioAutomation.ShapeSheet
             flags = _CheckSetResultsFlags(flags);
 
             return page.SetResults(stream , unitcodes_obj_array, results_obj_array, (short)flags);
-        }
-
-
-        internal static TResult[] GetResults<TResult>(
-            IVisio.Page page,
-            VA.ShapeSheet.Streams.SIDSRCStream stream,
-            IList<IVisio.VisUnitCodes> unitcodes)
-        {
-            if (stream.Count == 0)
-            {
-                return new TResult[0];
-            }
-
-            var result_type = typeof(TResult);
-            var flags = _GetResultsFlagForResultType(result_type);
-            var unitcodes_obj_array = UnitCodesToObjectArray(unitcodes);
-
-            Array results_sa;
-
-            page.GetResults(
-                stream.Array,
-                (short)flags,
-                unitcodes_obj_array,
-                out results_sa);
-
-            object[] results_obj_array = (object[])results_sa;
-
-            if (results_obj_array.Length != stream.Count)
-            {
-                string msg = String.Format(
-                    "Expected {0} items from GetResults but only received {1}",
-                    stream.Count,
-                    results_obj_array.Length);
-                throw new AutomationException(msg);
-            }
-
-            TResult[] results = new TResult[results_obj_array.Length];
-            results_obj_array.CopyTo(results, 0);
-
-            return results;
         }
 
         internal static TResult[] GetResults<TResult>(

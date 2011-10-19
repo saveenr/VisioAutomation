@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VisioAutomation.ShapeSheet.Streams;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -35,14 +36,14 @@ namespace VisioAutomation.ShapeSheet.Update
             var unitcodes = this.GetUnitCodesArray();
             var results = this.GetResultsArray();
             var flags = this.ResultFlags;
-            return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
+            return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags, this.ResultCount);
         }
 
-        private SRCStream GetResultStream()
+        private short [] GetResultStream()
         {
-            var stream = new VA.ShapeSheet.Streams.SRCStream(this.ResultCount);
+            var stream = new List<SRC>(this.ResultCount);
             stream.AddRange(this.ResultRecords.Select(i => i.StreamItem));
-            return stream;
+            return SRC.ToStream(stream);
         }
 
         private short SetFormulas(IVisio.Shape shape)
@@ -55,14 +56,14 @@ namespace VisioAutomation.ShapeSheet.Update
             var stream = GetFormulaStream();
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
-            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
+            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags, this.FormulaCount);
         }
 
-        private SRCStream GetFormulaStream()
+        private short [] GetFormulaStream()
         {
-            var stream = new VA.ShapeSheet.Streams.SRCStream(this.FormulaCount);
+            var stream = new List<SRC>(this.FormulaCount);
             stream.AddRange(this.FormulaRecords.Select(i => i.StreamItem));
-            return stream;
+            return SRC.ToStream(stream);
         }
     }
 }

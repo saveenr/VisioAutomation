@@ -234,8 +234,6 @@
     <Compile Include="Shapesheet\Update\UpdateBase.cs" />
     <Compile Include="Shapesheet\Update\UpdateRecord.cs" />
     <Compile Include="Shapesheet\FormulaLiteral.cs" />
-    <Compile Include="Shapesheet\Streams\SIDSRCStream.cs" />
-    <Compile Include="Shapesheet\Streams\SRCStream.cs" />
     <Compile Include="Internal\TreeTraversal.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper_cellsrc.cs" />
     <Compile Include="Internal\ArcSegment.cs" />
@@ -273,7 +271,6 @@
     </Compile>
     <Compile Include="Shapesheet\Update\SRCUpdate.cs" />
     <Compile Include="Shapesheet\CellData.cs" />
-    <Compile Include="Shapesheet\Streams\BaseStream.cs" />
     <Compile Include="Text\Markup\Field.cs" />
     <Compile Include="Text\Markup\Fields.cs" />
     <Compile Include="Text\Markup\MarkupInfo.cs" />
