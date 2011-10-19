@@ -142,7 +142,6 @@
     <Compile Include="Format\FormatPaintCache.cs" />
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
-    <Compile Include="Internal\CollectionUtil.cs" />
     <Compile Include="Layout\BoxHierarchy\DirectionHorizontal.cs" />
     <Compile Include="Layout\BoxHierarchy\DirectionVertical.cs" />
     <Compile Include="Layout\LockCells_ext.cs" />
