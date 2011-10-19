@@ -157,9 +157,9 @@ namespace VisioAutomation.ShapeSheet.Query
             var stream = VA.ShapeSheet.SIDSRC.ToStream(sidsrcs);
 
             // Retrieve Formulas
-            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream, sidsrcs.Count) : null;
-            var unitcodes_for_rows = getresults ? ShapeSheetHelper.get_unitcodes_for_rows(unitcodes,rowcount) : null;
-            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes_for_rows, sidsrcs.Count) : null;
+            var formulas = getformulas ? VA.ShapeSheet.Query.QueryUtil.GetFormulasU(page, stream, sidsrcs.Count) : null;
+            var unitcodes_for_rows = getresults ? VA.ShapeSheet.Query.QueryUtil.get_unitcodes_for_rows(unitcodes, rowcount) : null;
+            var results = getresults ? VA.ShapeSheet.Query.QueryUtil.GetResults<T>(page, stream, unitcodes_for_rows, sidsrcs.Count) : null;
 
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
             return qds;
@@ -199,7 +199,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int total_cells = rowcount * Columns.Count;
 
 
-            var all_unitcodes = getresults ? ShapeSheetHelper.get_unitcodes_for_rows(CreateUnitCodeArray(), rowcount) : null;
+            var all_unitcodes = getresults ? VA.ShapeSheet.Query.QueryUtil.get_unitcodes_for_rows(CreateUnitCodeArray(), rowcount) : null;
             if (getresults)
             {
                 validate_unitcodes(all_unitcodes, total_cells);
@@ -217,8 +217,8 @@ namespace VisioAutomation.ShapeSheet.Query
             }
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
 
-            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream, srcs.Count) : null;
-            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, all_unitcodes, srcs.Count) : null;
+            var formulas = getformulas ? VA.ShapeSheet.Query.QueryUtil.GetFormulasU(shape, stream, srcs.Count) : null;
+            var results = getresults ? VA.ShapeSheet.Query.QueryUtil.GetResults<T>(shape, stream, all_unitcodes, srcs.Count) : null;
 
             var shape_ids = new[] { shape.ID };
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shape_ids, this.Columns.Count, rowcount, groupcounts);

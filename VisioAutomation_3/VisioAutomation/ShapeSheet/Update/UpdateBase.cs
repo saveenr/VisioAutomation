@@ -6,6 +6,158 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
+    public static class UpdateUtil
+    {
+        internal static IVisio.VisGetSetArgs _CheckSetResultsFlags(IVisio.VisGetSetArgs flags)
+        {
+            if ((flags & IVisio.VisGetSetArgs.visSetUniversalSyntax) > 0)
+            {
+                string msg = string.Format("visSetUniversalSyntax allowed only with visSetFormulas");
+                throw new AutomationException(msg);
+            }
+
+            // force universal syntax if strings are set as formulas
+            // if SetResults will fail if UniversalSyntax flag is used alone
+            if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
+            {
+                flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
+            }
+
+            return flags;
+        }
+        
+        internal static object[] StringsToObjectArray(IList<string> strings)
+        {
+            if (strings == null)
+            {
+                return null;
+            }
+
+            return VA.ShapeSheet.ShapeSheetHelper.MapCollectionToArray(strings, uc => (object)uc);
+        }
+
+
+        internal static object[] DoublesToObjectArray(IList<double> doubles)
+        {
+            if (doubles == null)
+            {
+                return null;
+            }
+
+            return VA.ShapeSheet.ShapeSheetHelper.MapCollectionToArray(doubles, uc => (object)uc);
+        }
+
+        internal static short SetFormulas(
+    IVisio.Page page,
+    short[] stream,
+    IList<string> formulas,
+    short flags,
+    int numitems)
+        {
+            if (numitems < 1)
+            {
+                return 0;
+            }
+
+            var formula_obj_array = UpdateUtil.StringsToObjectArray(formulas);
+
+            // Force UniversalSyntax 
+            flags |= (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;
+
+            return page.SetFormulas(stream, formula_obj_array, flags);
+        }
+
+
+        internal static short SetFormulas(
+    IVisio.Shape shape,
+    short[] stream,
+    IList<string> formulas,
+    IVisio.VisGetSetArgs flags,
+            int numitems)
+        {
+            if (formulas.Count != numitems)
+            {
+                string msg = string.Format("Expected {0} formulas, instead have {1}", numitems, formulas.Count);
+                throw new AutomationException(msg);
+            }
+
+            if (numitems == 0)
+            {
+                return 0;
+            }
+
+
+            var formula_obj_array = UpdateUtil.StringsToObjectArray(formulas);
+
+            // Force UniversalSyntax 
+            short short_flags = (short)(((short)flags) | ((short)IVisio.VisGetSetArgs.visSetUniversalSyntax));
+
+            return shape.SetFormulas(stream, formula_obj_array, short_flags);
+        }
+
+        internal static short SetResults(
+    IVisio.Shape shape,
+    short[] stream,
+    IList<double> results,
+    IList<IVisio.VisUnitCodes> unit_codes,
+    IVisio.VisGetSetArgs flags,
+            int numitems)
+        {
+            if (unit_codes.Count != numitems)
+            {
+                string msg = string.Format("Expected {0} unit_codes, instead have {1}", numitems, unit_codes.Count);
+                throw new AutomationException(msg);
+            }
+
+            if (results.Count != numitems)
+            {
+                string msg = string.Format("Expected {0} results, instead have {1}", numitems, results.Count);
+                throw new AutomationException(msg);
+            }
+
+            if (numitems < 1)
+            {
+                return 0;
+            }
+
+            var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unit_codes);
+            var results_obj_array = UpdateUtil.DoublesToObjectArray(results);
+
+            flags = UpdateUtil._CheckSetResultsFlags(flags);
+
+            short num_set = shape.SetResults(stream, unitcodes_obj_array, results_obj_array, (short)flags);
+
+            return num_set;
+        }
+
+        internal static short SetResults(
+    IVisio.Page page,
+    short[] stream,
+    IList<double> results,
+    IList<IVisio.VisUnitCodes> unitcodes,
+    IVisio.VisGetSetArgs flags,
+            int numitems)
+        {
+            if (results.Count != numitems)
+            {
+                string msg = string.Format("Expected {0} results, instead have {1}", numitems, results.Count);
+                throw new AutomationException(msg);
+            }
+
+            if (numitems == 0)
+            {
+                return 0;
+            }
+
+            var results_obj_array = UpdateUtil.DoublesToObjectArray(results);
+            var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
+
+            flags = UpdateUtil._CheckSetResultsFlags(flags);
+
+            return page.SetResults(stream, unitcodes_obj_array, results_obj_array, (short)flags);
+        }
+
+    }
     public class UpdateBase<T> : IEnumerable<UpdateRecord<T>>
         where T : struct
     {
@@ -50,9 +202,18 @@ namespace VisioAutomation.ShapeSheet.Update
             return (IVisio.VisGetSetArgs) flags;
         }
 
+
+        void CheckFormulaIsNotNull(string formula)
+        {
+            if (formula == null)
+            {
+                throw new AutomationException("Null not allowed for formula");
+            }
+        }
+
         public void SetFormula(T streamitem, FormulaLiteral literal)
         {
-            ShapeSheetHelper.CheckFormulaIsNotNull(literal.Value);
+            this.CheckFormulaIsNotNull(literal.Value);
             var rec = new UpdateRecord<T>(streamitem, literal.Value);
             this.items.Add(rec);
             this.FormulaCount++;

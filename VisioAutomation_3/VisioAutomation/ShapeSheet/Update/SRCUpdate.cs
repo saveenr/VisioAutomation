@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Streams;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.Update
             var unitcodes = this.GetUnitCodesArray();
             var results = this.GetResultsArray();
             var flags = this.ResultFlags;
-            return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags, this.ResultCount);
+            return VA.ShapeSheet.Update.UpdateUtil.SetResults(shape, stream, results, unitcodes, flags, this.ResultCount);
         }
 
         private short [] GetResultStream()
@@ -56,7 +55,7 @@ namespace VisioAutomation.ShapeSheet.Update
             var stream = GetFormulaStream();
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
-            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags, this.FormulaCount);
+            return VA.ShapeSheet.Update.UpdateUtil.SetFormulas(shape, stream, formulas, flags, this.FormulaCount);
         }
 
         private short [] GetFormulaStream()
