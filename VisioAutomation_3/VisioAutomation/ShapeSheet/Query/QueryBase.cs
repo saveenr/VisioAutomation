@@ -8,12 +8,9 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     internal static class QueryUtil
     {
-
-
-
         internal static IList<IVisio.VisUnitCodes> get_unitcodes_for_rows(IList<IVisio.VisUnitCodes> unitcodes, int rows)
         {
-            var all_unitcodes = new List<IVisio.VisUnitCodes>(rows * unitcodes.Count);
+            var all_unitcodes = new List<IVisio.VisUnitCodes>(rows*unitcodes.Count);
             for (short row = 0; row < rows; row++)
             {
                 all_unitcodes.AddRange(unitcodes);
@@ -25,15 +22,15 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             IVisio.VisGetSetArgs flags = 0;
 
-            if (result_type == typeof(int))
+            if (result_type == typeof (int))
             {
                 flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
             }
-            else if (result_type == typeof(double))
+            else if (result_type == typeof (double))
             {
                 flags = IVisio.VisGetSetArgs.visGetFloats;
             }
-            else if (result_type == typeof(string))
+            else if (result_type == typeof (string))
             {
                 flags = IVisio.VisGetSetArgs.visGetStrings;
             }
@@ -46,8 +43,8 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         internal static string[] GetFormulasU(
-    IVisio.Page page,
-    IList<SIDSRC> stream)
+            IVisio.Page page,
+            IList<SIDSRC> stream)
         {
             var array = VA.ShapeSheet.SIDSRC.ToStream(stream);
             return GetFormulasU(page, array, stream.Count);
@@ -69,7 +66,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 stream,
                 out formulas_sa);
 
-            object[] formulas_obj_array = (object[])formulas_sa;
+            object[] formulas_obj_array = (object[]) formulas_sa;
 
             if (formulas_obj_array.Length != numitems)
             {
@@ -87,8 +84,8 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         internal static string[] GetFormulasU(
-IVisio.Shape shape,
-short[] stream, int numitems)
+            IVisio.Shape shape,
+            short[] stream, int numitems)
         {
             if (numitems < 1)
             {
@@ -98,7 +95,7 @@ short[] stream, int numitems)
             Array formulas_sa;
             shape.GetFormulasU(stream, out formulas_sa);
 
-            object[] formulas_obj_array = (object[])formulas_sa;
+            object[] formulas_obj_array = (object[]) formulas_sa;
 
             if (formulas_obj_array.Length != numitems)
             {
@@ -116,19 +113,18 @@ short[] stream, int numitems)
         }
 
 
-
         internal static TResult[] GetResults<TResult>(
-IVisio.Page page,
-short[] stream,
-IList<IVisio.VisUnitCodes> unitcodes,
-    int numitems)
+            IVisio.Page page,
+            short[] stream,
+            IList<IVisio.VisUnitCodes> unitcodes,
+            int numitems)
         {
             if (numitems == 0)
             {
                 return new TResult[0];
             }
 
-            var result_type = typeof(TResult);
+            var result_type = typeof (TResult);
             var flags = VA.ShapeSheet.Query.QueryUtil._GetResultsFlagForResultType(result_type);
             var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
 
@@ -136,11 +132,11 @@ IList<IVisio.VisUnitCodes> unitcodes,
 
             page.GetResults(
                 stream,
-                (short)flags,
+                (short) flags,
                 unitcodes_obj_array,
                 out results_sa);
 
-            object[] results_obj_array = (object[])results_sa;
+            object[] results_obj_array = (object[]) results_sa;
 
             if (results_obj_array.Length != numitems)
             {
@@ -159,9 +155,9 @@ IList<IVisio.VisUnitCodes> unitcodes,
 
 
         internal static TResult[] GetResults<TResult>(
-IVisio.Shape shape,
-List<VA.ShapeSheet.SRC> stream,
-IList<IVisio.VisUnitCodes> unitcodes)
+            IVisio.Shape shape,
+            List<VA.ShapeSheet.SRC> stream,
+            IList<IVisio.VisUnitCodes> unitcodes)
         {
             var array = VA.ShapeSheet.SRC.ToStream(stream);
             return GetResults<TResult>(shape, array, unitcodes, stream.Count);
@@ -177,18 +173,18 @@ IList<IVisio.VisUnitCodes> unitcodes)
                 return new TResult[0];
             }
 
-            var result_type = typeof(TResult);
+            var result_type = typeof (TResult);
             var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
             var flags = VA.ShapeSheet.Query.QueryUtil._GetResultsFlagForResultType(result_type);
 
             Array results_sa;
             shape.GetResults(
                 stream,
-                (short)flags,
+                (short) flags,
                 unitcodes_obj_array,
                 out results_sa);
 
-            object[] results_obj_array = (object[])results_sa;
+            object[] results_obj_array = (object[]) results_sa;
 
             if (results_obj_array.Length != numitems)
             {
@@ -204,12 +200,12 @@ IList<IVisio.VisUnitCodes> unitcodes)
 
             return results;
         }
-
     }
+
     public class QueryBase<TCol> where TCol : QueryColumn
     {
         private QueryColumnList<TCol> _columns;
-        
+
         internal QueryBase()
         {
             this._columns = new QueryColumnList<TCol>();
@@ -254,7 +250,5 @@ IList<IVisio.VisUnitCodes> unitcodes)
                 throw new AutomationException(msg);
             }
         }
-
-
     }
 }
