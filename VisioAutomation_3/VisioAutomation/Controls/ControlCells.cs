@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Controls
 {
-    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupForSection
+    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupRow
     {
         public VA.ShapeSheet.CellData<int> CanGlue { get; set; }
         public VA.ShapeSheet.CellData<int> Tip { get; set; }
@@ -45,13 +45,13 @@ namespace VisioAutomation.Controls
         internal static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ControlQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = new ControlQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
         class ControlQuery : VA.ShapeSheet.Query.SectionQuery

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class CellGroupForSection : BaseCellGroup
+    public abstract class CellGroupRow : BaseCellGroup
     {
         // Delegates
         protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;

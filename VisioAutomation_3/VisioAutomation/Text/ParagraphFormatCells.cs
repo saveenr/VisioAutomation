@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells : VA.ShapeSheet.CellGroups.CellGroupForSection
+    public class ParagraphFormatCells : VA.ShapeSheet.CellGroups.CellGroupRow
     {
         ////public string BulletString;
         public VA.ShapeSheet.CellData<double> IndentFirst { get; set; }
@@ -36,13 +36,13 @@ namespace VisioAutomation.Text
         internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ParagraphFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupForSection._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new ParagraphFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupForSection._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
         private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
