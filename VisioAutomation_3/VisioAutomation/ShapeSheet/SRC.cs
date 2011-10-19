@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -53,5 +54,19 @@ namespace VisioAutomation.ShapeSheet
             SRCFromCellIndex new_func = (IVisio.VisCellIndices cell) => new VA.ShapeSheet.SRC(sec, row, cell);
             return new_func;
         }
+
+        public static short[] ToStream(IList<SRC> srcs)
+        {
+            var s = new short[4 * srcs.Count];
+            for (int i = 0; i < srcs.Count; i++)
+            {
+                var sidsrc = srcs[i];
+                s[i + 0] = sidsrc.Section;
+                s[i + 1] = sidsrc.Row;
+                s[i + 2] = sidsrc.Cell;
+            }
+            return s;
+        }
+
     }
 }

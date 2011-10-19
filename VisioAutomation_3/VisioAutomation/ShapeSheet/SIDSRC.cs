@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -39,6 +40,20 @@ namespace VisioAutomation.ShapeSheet
         public override string ToString()
         {
             return System.String.Format("({0},{1},{2},{3})", this.ID, this.Section, this.Row, this.Cell);
+        }
+
+        public static short [] ToStream(IList<SIDSRC> sidsrcs)
+        {
+            var s = new short[4*sidsrcs.Count];
+            for (int i = 0; i < sidsrcs.Count; i++)
+            {
+                var sidsrc = sidsrcs[i];
+                s[i + 0] = sidsrc.ID;
+                s[i + 1] = sidsrc.Section;
+                s[i + 2] = sidsrc.Row;
+                s[i + 3] = sidsrc.Cell;
+            }
+            return s;
         }
     }
 }
