@@ -167,10 +167,6 @@ namespace VisioAutomationSamples
             var dom = new VA.DOM.Document();
             dom.ResolveVisioShapeObjects = true;
 
-            var font_to_id = doc.Fonts.AsEnumerable().ToDictionary(f => f.Name, f => f.ID);
-            var unique_fonts = new HashSet<string>();
-            var unique_fontids = new HashSet<int>();
-            
             foreach (var node in nodes)
             {
                 var dom_shape = dom.Drop(rectmaster, node.Rectangle.Center);
@@ -189,10 +185,7 @@ namespace VisioAutomationSamples
 
                 if (node.Data.Font != null)
                 {
-                    unique_fonts.Add(node.Data.Font);
-                    int font = font_to_id[node.Data.Font];
-                    unique_fontids.Add(font);
-                    cells.CharFont = font;
+                    dom_shape.CharFontName = node.Data.Font;
                 }
 
                 dom_shape.ShapeCells = cells;
@@ -215,10 +208,7 @@ namespace VisioAutomationSamples
             var visapp = new IVisio.Application();
             var doc = visapp.Documents.Add("");
 
-            var fonts = fontnames.Select(s => doc.Fonts[s]).ToList();
-            var fontids = fonts.Select(f => f.ID16).ToList();
-
-                        double w = 2.0;
+            double w = 2.0;
             double h = 1 ;
             double th = 1;
 
@@ -268,7 +258,7 @@ namespace VisioAutomationSamples
                         {
                             // empty
                         }
-                        n1.ShapeCells.CharFont = fontids[j];
+                        n1.CharFontName = fontnames[j];
                         n1.ShapeCells.CharSize = VA.Convert.PointsToInches(36);
                         n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
                         n1.ShapeCells.LineWeight = 0.0;
@@ -334,7 +324,7 @@ namespace VisioAutomationSamples
                         {
                             // empty
                         }
-                        n1.ShapeCells.CharFont = fontids[j];
+                        n1.CharFontName = fontnames[j];
                         n1.ShapeCells.CharColor = colors[j];
                         n1.ShapeCells.CharTransparency = 0.7;
                         n1.ShapeCells.CharSize = VA.Convert.PointsToInches(36);
@@ -529,9 +519,7 @@ namespace VisioAutomationSamples
                 cells.CharSize = "10pt";
                 cells.FillForegnd = "rgb(255,250,200)";
                 cells.CharColor = "rgb(255,0,0)";
-
             }
-
         }
     }
 

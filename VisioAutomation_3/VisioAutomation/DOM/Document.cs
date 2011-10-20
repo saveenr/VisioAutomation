@@ -42,8 +42,10 @@ namespace VisioAutomation.DOM
             var ctx = new RenderContext(page);
 
             // Resolve all the masters
-
             LoadMastersDeferred(ctx);
+
+            // Resolve all the Character Font Name Cells
+            ResolveCharFonts(ctx);
 
             // ----------------------------------------
             // Handle the initial page settings
@@ -162,6 +164,45 @@ namespace VisioAutomation.DOM
                     h.Address = hyperlink.Address; // Address of Hyperlink
                 }
             }
+        }
+
+        private void ResolveCharFonts(RenderContext ctx)
+        {
+            var unique_names = new HashSet<string>();
+            foreach (var shape in this.Shapes)
+            {
+                if (shape.CharFontName != null)
+                {
+                    if (!shape.ShapeCells.CharFont.HasValue)
+                    {
+                        unique_names.Add(shape.CharFontName);
+                    }
+                }
+            }
+
+            var doc = ctx.VisioPage.Document;
+            var fonts = doc.Fonts;
+
+            var name_to_id = new Dictionary<string, int>(unique_names.Count);
+            foreach (var name in unique_names)
+            {
+                // TOOD: handle exception when font is specified that does not exist
+                var font = fonts[name];
+                name_to_id[name] = font.ID;
+            }
+
+
+            foreach (var shape in this.Shapes)
+            {
+                if (shape.CharFontName != null)
+                {
+                    if (!shape.ShapeCells.CharFont.HasValue)
+                    {
+                        shape.ShapeCells.CharFont = name_to_id[shape.CharFontName];
+                    }
+                }
+            }
+
         }
 
         private void initialize_page(RenderContext ctx)

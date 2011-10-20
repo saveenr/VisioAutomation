@@ -16,7 +16,8 @@ namespace VisioAutomation.DOM
         public List<VA.Text.TabStop> TabStops { get; set; }
         public IVisio.Shape VisioShape;
         public short VisioShapeID { get; internal set; }
-
+        public string CharFontName { get; set; }
+        
         protected Shape()
         {
             this.ShapeCells = new ShapeCells();
