@@ -88,7 +88,7 @@ namespace VisioAutomationSamples
             var visapp = new IVisio.Application();
             var doc = visapp.Documents.Add("");
 
-            var fontnames = new[] {"Consolas", "Ubuntu Mono"};
+            var fontnames = new[] {"Arial", "Roboto"};
 
             var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
