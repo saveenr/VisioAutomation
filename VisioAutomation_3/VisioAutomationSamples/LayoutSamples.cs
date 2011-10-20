@@ -201,8 +201,158 @@ namespace VisioAutomationSamples
 
             dom.Render(page);
 
-
             page.ResizeToFitContents(0.5, 0.5);
+
+        }
+
+        public static void FontGlyphComparision2()
+        {
+            var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
+                             "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
+            var samplechars = sampletext.Select(c => new string(new char[] { c })).ToList();
+            var fontnames = new[] { "Consolas", "Ubuntu Mono" };
+
+            var visapp = new IVisio.Application();
+            var doc = visapp.Documents.Add("");
+
+            var fonts = fontnames.Select(s => doc.Fonts[s]).ToList();
+            var fontids = fonts.Select(f => f.ID16).ToList();
+
+                        double w = 2.0;
+            double h = 1 ;
+            double th = 1;
+
+            int chunksize = 12;
+            var chunks = LinqUtil.Split(samplechars, chunksize);
+
+
+            foreach (var chunk in chunks)
+            {
+                var p = doc.Pages.Add();
+                var dom = new VA.DOM.Document();
+
+
+                for (int j = 0; j < fontnames.Count(); j++)
+                {
+                    string fontname = fontnames[j];
+                    double x0 = j * w;
+
+                    var r = new VA.Drawing.Rectangle(x0, 0 - th, x0 + w, 0);
+                    var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
+                    n1.ShapeCells.Width = r.Width;
+                    n1.ShapeCells.Height = th;
+                    n1.Text = fontname.ToUpper();
+                    n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
+                    n1.ShapeCells.LineWeight = 0.0;
+                    n1.ShapeCells.LinePattern= 0;
+                    n1.ShapeCells.CharSize = VA.Convert.PointsToInches(16);
+                }
+
+
+                for (int j = 0; j < fontnames.Count(); j++)
+                {
+                    for (int i = 0; i < chunksize; i++)
+                    {
+                        double x0 = j * w;
+                        double y0 = i * h * -1 - th - h;
+
+                        var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
+                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
+                        n1.ShapeCells.Width = r.Width;
+                        n1.ShapeCells.Height = r.Height;
+                        if (i < chunk.Count)
+                        {
+                            n1.Text = chunk[i];
+                        }
+                        else
+                        {
+                            // empty
+                        }
+                        n1.ShapeCells.CharFont = fontids[j];
+                        n1.ShapeCells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
+                        n1.ShapeCells.LineWeight = 0.0;
+                        n1.ShapeCells.LinePattern = 0;
+                    }
+
+                }
+
+                var page = visapp.ActivePage;
+
+                dom.Render(page);
+
+                page.ResizeToFitContents(0.5, 0.5);
+
+                
+            }
+        }
+
+        public static void FontGlyphComparision3()
+        {
+            var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
+                             "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
+            var samplechars = sampletext.Select(c => new string(new char[] { c })).ToList();
+            var fontnames = new[] { "Consolas", "Ubuntu Mono" };
+            var colors = new[] {"rgb(0,0,0)", "rgb(255,0,0)"}; 
+
+            var visapp = new IVisio.Application();
+            var doc = visapp.Documents.Add("");
+
+            var fonts = fontnames.Select(s => doc.Fonts[s]).ToList();
+            var fontids = fonts.Select(f => f.ID16).ToList();
+
+            double w = 2.0;
+            double h = 1;
+            double th = 1;
+
+            int chunksize = 12;
+            var chunks = LinqUtil.Split(samplechars, chunksize);
+
+
+            foreach (var chunk in chunks)
+            {
+                var p = doc.Pages.Add();
+                var dom = new VA.DOM.Document();
+
+
+                for (int j = 0; j < fontnames.Count(); j++)
+                {
+                    for (int i = 0; i < chunksize; i++)
+                    {
+                        double x0 = 0;
+                        double y0 = i * h * -1 ;
+
+                        var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
+                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
+                        n1.ShapeCells.Width = r.Width;
+                        n1.ShapeCells.Height = r.Height;
+                        if (i < chunk.Count)
+                        {
+                            n1.Text = chunk[i];
+                        }
+                        else
+                        {
+                            // empty
+                        }
+                        n1.ShapeCells.CharFont = fontids[j];
+                        n1.ShapeCells.CharColor = colors[j];
+                        n1.ShapeCells.CharTransparency = 0.7;
+                        n1.ShapeCells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.ShapeCells.FillPattern = 0;
+                        n1.ShapeCells.LineWeight = 0.0;
+                        n1.ShapeCells.LinePattern = 0;
+                    }
+
+                }
+
+                var page = visapp.ActivePage;
+
+                dom.Render(page);
+
+                page.ResizeToFitContents(0.5, 0.5);
+
+
+            }
         }
 
         public static void DirectedGraphViaMSAGL()
@@ -384,4 +534,18 @@ namespace VisioAutomationSamples
 
         }
     }
+
+    internal static class LinqUtil
+    {
+
+        public static List<List<T>> Split<T>(List<T> source, int chunksize)
+        {
+            return source
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / chunksize)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
+        }
+    }
+
 }
