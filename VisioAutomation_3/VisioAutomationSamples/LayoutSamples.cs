@@ -83,15 +83,24 @@ namespace VisioAutomationSamples
             page1.ResizeToFitContents(margin);
         }
 
-        public static void FontGlyphComparision()
+        public static void FontCompare()
         {
+            var visapp = new IVisio.Application();
+            var doc = visapp.Documents.Add("");
+
+            var fontnames = new[] {"Consolas", "Ubuntu Mono"};
+
             var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
-
             var samplechars = sampletext.Select(c => new string(new char[] {c})).ToList();
 
-            var fontnames = new[] {"Segoe", "Calibri", "Impact"};
+            FontGlyphComparision(doc, fontnames, samplechars);
+            FontGlyphComparision2(doc, fontnames, samplechars);
+            FontGlyphComparision3(doc, fontnames, samplechars);
+        }
 
+        public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)
+        {
             var layout = new BH.BoxLayout<NodeData>();
             layout.LayoutOptions.DirectionVertical = VA.Layout.BoxLayout.DirectionVertical.TopToBottom;
 
@@ -156,20 +165,15 @@ namespace VisioAutomationSamples
 
             layout.PerformLayout();
 
-            var visapp = new IVisio.Application();
-            var doc = visapp.Documents.Add("");
-            var page = visapp.ActivePage;
-            var docs = visapp.Documents;
-            var stencil = docs.OpenStencil("basic_u.vss");
-            var rectmaster = stencil.Masters["Rectangle"];
-            
+            var page = doc.Pages.Add();
+
             var nodes = layout.Nodes.Where(n => n.Data.Render).ToList();
             var dom = new VA.DOM.Document();
             dom.ResolveVisioShapeObjects = true;
 
             foreach (var node in nodes)
             {
-                var dom_shape = dom.Drop(rectmaster, node.Rectangle.Center);
+                var dom_shape = dom.Drop("Rectangle", "basic_u.vss", node.Rectangle.Center);
                 var cells = node.Data.Cells;
                 if (cells == null)
                 {
@@ -193,39 +197,26 @@ namespace VisioAutomationSamples
             }
 
             dom.Render(page);
-
             page.ResizeToFitContents(0.5, 0.5);
-
         }
 
-        public static void FontGlyphComparision2()
+        public static void FontGlyphComparision2(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
-                             "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
-            var samplechars = sampletext.Select(c => new string(new char[] { c })).ToList();
-            var fontnames = new[] { "Consolas", "Ubuntu Mono" };
-
-            var visapp = new IVisio.Application();
-            var doc = visapp.Documents.Add("");
-
             double w = 2.0;
-            double h = 1 ;
+            double h = 1;
             double th = 1;
 
             int chunksize = 12;
             var chunks = LinqUtil.Split(samplechars, chunksize);
 
-
             foreach (var chunk in chunks)
             {
-                var p = doc.Pages.Add();
                 var dom = new VA.DOM.Document();
-
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {
                     string fontname = fontnames[j];
-                    double x0 = j * w;
+                    double x0 = j*w;
 
                     var r = new VA.Drawing.Rectangle(x0, 0 - th, x0 + w, 0);
                     var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
@@ -234,7 +225,7 @@ namespace VisioAutomationSamples
                     n1.Text = fontname.ToUpper();
                     n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
                     n1.ShapeCells.LineWeight = 0.0;
-                    n1.ShapeCells.LinePattern= 0;
+                    n1.ShapeCells.LinePattern = 0;
                     n1.ShapeCells.CharSize = VA.Convert.PointsToInches(16);
                 }
 
@@ -243,8 +234,8 @@ namespace VisioAutomationSamples
                 {
                     for (int i = 0; i < chunksize; i++)
                     {
-                        double x0 = j * w;
-                        double y0 = i * h * -1 - th - h;
+                        double x0 = j*w;
+                        double y0 = i*h*-1 - th - h;
 
                         var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
                         var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
@@ -264,32 +255,17 @@ namespace VisioAutomationSamples
                         n1.ShapeCells.LineWeight = 0.0;
                         n1.ShapeCells.LinePattern = 0;
                     }
-
                 }
 
-                var page = visapp.ActivePage;
-
+                var page = doc.Pages.Add();
                 dom.Render(page);
-
                 page.ResizeToFitContents(0.5, 0.5);
-
-                
             }
         }
 
-        public static void FontGlyphComparision3()
+        public static void FontGlyphComparision3(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
-                             "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
-            var samplechars = sampletext.Select(c => new string(new char[] { c })).ToList();
-            var fontnames = new[] { "Consolas", "Ubuntu Mono" };
-            var colors = new[] {"rgb(0,0,0)", "rgb(255,0,0)"}; 
-
-            var visapp = new IVisio.Application();
-            var doc = visapp.Documents.Add("");
-
-            var fonts = fontnames.Select(s => doc.Fonts[s]).ToList();
-            var fontids = fonts.Select(f => f.ID16).ToList();
+            var colors = new[] {"rgb(0,0,255)", "rgb(255,0,0)"};
 
             double w = 2.0;
             double h = 1;
@@ -301,16 +277,14 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var p = doc.Pages.Add();
                 var dom = new VA.DOM.Document();
-
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {
                     for (int i = 0; i < chunksize; i++)
                     {
                         double x0 = 0;
-                        double y0 = i * h * -1 ;
+                        double y0 = i*h*-1;
 
                         var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
                         var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
@@ -332,16 +306,13 @@ namespace VisioAutomationSamples
                         n1.ShapeCells.LineWeight = 0.0;
                         n1.ShapeCells.LinePattern = 0;
                     }
-
                 }
 
-                var page = visapp.ActivePage;
+                var page = doc.Pages.Add();
 
                 dom.Render(page);
 
                 page.ResizeToFitContents(0.5, 0.5);
-
-
             }
         }
 
@@ -472,7 +443,7 @@ namespace VisioAutomationSamples
             layout_config.Direction = VA.ShapeLayout.Direction.BottomToTop;
             layout_config.HorizontalAlignment = VA.ShapeLayout.HorizontalAlignment.Center;
             layout_config.ResizePageToFit = true;
-            layout_config.AvenueSize = new VA.Drawing.Size(1,1);
+            layout_config.AvenueSize = new VA.Drawing.Size(1, 1);
             layout_config.ConnectorAppearance = VA.ShapeLayout.ConnectorAppearance.Curved;
             layout_config.Apply(page1);
         }
@@ -525,15 +496,13 @@ namespace VisioAutomationSamples
 
     internal static class LinqUtil
     {
-
         public static List<List<T>> Split<T>(List<T> source, int chunksize)
         {
             return source
-                .Select((x, i) => new { Index = i, Value = x })
-                .GroupBy(x => x.Index / chunksize)
+                .Select((x, i) => new {Index = i, Value = x})
+                .GroupBy(x => x.Index/chunksize)
                 .Select(x => x.Select(v => v.Value).ToList())
                 .ToList();
         }
     }
-
 }
