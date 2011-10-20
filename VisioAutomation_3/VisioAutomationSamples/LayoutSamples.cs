@@ -173,7 +173,7 @@ namespace VisioAutomationSamples
 
             foreach (var node in nodes)
             {
-                var dom_shape = dom.Drop("Rectangle", "basic_u.vss", node.Rectangle.Center);
+                var dom_shape = dom.Drop("Rectangle", "basic_u.vss", node.Rectangle);
                 var cells = node.Data.Cells;
                 if (cells == null)
                 {
@@ -183,9 +183,6 @@ namespace VisioAutomationSamples
                 {
                     cells = node.Data.Cells.ShallowCopy();
                 }
-
-                cells.Width = node.Rectangle.Width;
-                cells.Height = node.Rectangle.Height;
 
                 if (node.Data.Font != null)
                 {
@@ -219,9 +216,7 @@ namespace VisioAutomationSamples
                     double x0 = j*w;
 
                     var r = new VA.Drawing.Rectangle(x0, 0 - th, x0 + w, 0);
-                    var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
-                    n1.ShapeCells.Width = r.Width;
-                    n1.ShapeCells.Height = th;
+                    var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
                     n1.Text = fontname.ToUpper();
                     n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
                     n1.ShapeCells.LineWeight = 0.0;
@@ -238,9 +233,7 @@ namespace VisioAutomationSamples
                         double y0 = i*h*-1 - th - h;
 
                         var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
-                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
-                        n1.ShapeCells.Width = r.Width;
-                        n1.ShapeCells.Height = r.Height;
+                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
                             n1.Text = chunk[i];
@@ -287,9 +280,7 @@ namespace VisioAutomationSamples
                         double y0 = i*h*-1;
 
                         var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
-                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r.Center);
-                        n1.ShapeCells.Width = r.Width;
-                        n1.ShapeCells.Height = r.Height;
+                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
                             n1.Text = chunk[i];

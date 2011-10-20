@@ -44,6 +44,9 @@ namespace VisioAutomation.DOM
             // Resolve all the masters
             LoadMastersDeferred(ctx);
 
+            // Handle sizes for shapes that were dropped using rects
+            SetDroppedSizes(ctx);
+
             // Resolve all the Character Font Name Cells
             ResolveCharFonts(ctx);
 
@@ -271,6 +274,29 @@ namespace VisioAutomation.DOM
             }
         }
 
+        private void SetDroppedSizes(RenderContext ctx)
+        {
+            var masters = this.Shapes
+                .Where(shape => shape is Master).Cast<Master>();
+
+            foreach (var master in masters)
+            {
+                if (master.DroppedSize.HasValue)
+                {
+                    if (!master.ShapeCells.Width.HasValue)
+                    {
+                        master.ShapeCells.Width = master.DroppedSize.Value.Width;
+                    }
+
+                    if (!master.ShapeCells.Height.HasValue)
+                    {
+                        master.ShapeCells.Height = master.DroppedSize.Value.Height;
+                    }
+                }
+            }
+        }
+
+
         private void _draw_masters(RenderContext ctx, List<Master> dom_masters)
         {
             var masters = dom_masters.Select(m => m.MasterObject).ToList();
@@ -473,6 +499,13 @@ namespace VisioAutomation.DOM
         public Master Drop(string master, string stencil, VA.Drawing.Point pos)
         {
             var m = new Master(master, stencil, pos);
+            this.Shapes.Add(m);
+            return m;
+        }
+
+        public Master Drop(string master, string stencil, VA.Drawing.Rectangle rect)
+        {
+            var m = new Master(master, stencil, rect);
             this.Shapes.Add(m);
             return m;
         }
