@@ -94,9 +94,8 @@ namespace VisioAutomation.Masters
                         var master_object = stencilmasters[master_ref.MasterName];
                         master_ref.VisioMaster = master_object;
                     }
-                    catch (Exception)
+                    catch (System.Runtime.InteropServices.COMException comexc)
                     {
-                        // TODO: Check for a more specific exception above
                         string msg = string.Format("No such master \"{0}\" in stencil \"{1}\"",
                                                    master_ref.MasterName, master_ref.StencilName);
                         throw new AutomationException(msg);
