@@ -77,15 +77,16 @@ namespace VisioAutomation.Connections
             int num_connectors = fromshapes.Count;
             var connectors = new List<IVisio.Shape>(num_connectors);
 
+            var masters = Enumerable.Repeat(master, num_connectors).ToList();
+            var points = Enumerable.Range(0, num_connectors).Select(i => new VA.Drawing.Point(i*2.0, -2)).ToList();
+            short [] con_shapeids = page.DropManyU(masters, points);
+            var con_shapes = page.Shapes.GetShapesFromIDs(con_shapeids);
+
             for (int i = 0; i < num_connectors; i++)
             {
                 var from_shape = fromshapes[i];
                 var to_shape = toshapes[i];
-
-                // TODO: Instead of dropping connectors one at a time use DropMany
-
-                // Drop the connector - deliberately place it off the page so it avoids overlapping with any shapes
-                var connector = page.Drop(master, -2, -2);
+                var connector = con_shapes[i];
 
                 // Connect from Shape 1 to Shape2
                 ConnectShapes(connector, from_shape, to_shape);
