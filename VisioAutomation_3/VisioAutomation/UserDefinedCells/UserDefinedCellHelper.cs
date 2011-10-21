@@ -115,8 +115,6 @@ namespace VisioAutomation.UserDefinedCells
         /// If there are no user properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of user  properties</returns>
-        /// 
-        // TODO: Add Unit Test
         public static IList<UserDefinedCell> GetUserDefinedCells(IVisio.Shape shape)
         {
             if (shape == null)

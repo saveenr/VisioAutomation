@@ -100,7 +100,7 @@ namespace VisioAutomation.VDX
 
             if (vdoc.Windows != null && vdoc.Windows.Count > 0)
             {
-                var xwindows = XMLUtil.CreateVisioSchema2003Element("Windows");
+                var xwindows = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Windows");
                 root.Add(xwindows);
 
                 foreach (var window in vdoc.Windows)

@@ -197,5 +197,28 @@ namespace TestVisioAutomation
             Assert.AreEqual("\"6\"", allprops[3][2].Value);
             page1.Delete(0);
         }
+
+        [TestMethod]
+        public void GetProps1()
+        {
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 2, 2);
+
+            var p1 = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCells(s1);
+            Assert.AreEqual(0, p1.Count);
+
+            VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(s1, "FOO1", "1", null);
+            VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(s1, "FOO2", "2", null);
+
+            var p2 = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCells(s1);
+            Assert.AreEqual(2, p2.Count);
+            Assert.AreEqual("FOO1",p2[0].Name);
+            Assert.AreEqual("\"1\"", p2[0].Value);
+            Assert.AreEqual("FOO2", p2[1].Name);
+            Assert.AreEqual("\"2\"", p2[1].Value);
+
+            page1.Delete(0);
+        }
+
     }
 }
