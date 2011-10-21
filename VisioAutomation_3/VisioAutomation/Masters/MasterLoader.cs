@@ -68,16 +68,15 @@ namespace VisioAutomation.Masters
             var name_to_stencildoc = new Dictionary<string, IVisio.Document>(comparer);
             foreach (var stencil in unique_stencils)
             {
-                try
+                var stencil_doc = docs.OpenStencil(stencil);
+                if (stencil_doc == null)
                 {
-                    var stencil_doc = docs.OpenStencil(stencil);
-                    name_to_stencildoc[stencil] = stencil_doc;
-                }
-                catch (Exception)
-                {
-                    // TODO: Check for a more specific exception above
                     string msg = string.Format("Failed to Open Stencil \"{0}\"", stencil);
-                    throw new AutomationException(msg);
+                    throw new AutomationException(msg);                    
+                }
+                else
+                {
+                    name_to_stencildoc[stencil] = stencil_doc;
                 }
             }
 

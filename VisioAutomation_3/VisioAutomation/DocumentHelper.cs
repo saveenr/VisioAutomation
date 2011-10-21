@@ -1,4 +1,5 @@
-﻿using VisioAutomation.Extensions;
+﻿using System;
+using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -27,15 +28,34 @@ namespace VisioAutomation
 
         public static IVisio.Document OpenStencil(IVisio.Documents docs, string filename)
         {
+            var stencil = TryOpenStencil(docs, filename);
+            if (stencil == null)
+            {
+                string msg = string.Format("Could not open stencil \"{0}\"",filename);
+                throw new VA.AutomationException(msg);
+            }
+            return stencil;
+        }
+
+        public static IVisio.Document TryOpenStencil(IVisio.Documents docs, string filename)
+        {
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
             }
 
             short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;
-            var doc = docs.OpenEx(filename, flags);
-            return doc;
+            try
+            {
+                var doc = docs.OpenEx(filename, flags);
+                return doc;
+            }
+            catch (System.Runtime.InteropServices.COMException comexc)
+            {
+                return null;
+            }
         }
+
 
         public static void Activate(IVisio.Document doc)
         {
