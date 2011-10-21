@@ -28,5 +28,13 @@ namespace VisioAutomationSamples
             var ss = new VisioAutomation.Scripting.Session(app);
             var doc = ss.Developer.DrawVANamespaces();
         }
+
+        public static void VANamespacesAndClasses()
+        {
+            var app = SampleEnvironment.Application;
+            var ss = new VisioAutomation.Scripting.Session(app);
+            var doc = ss.Developer.DrawVANamespacesAndClasses();
+        }
+
     }
 }

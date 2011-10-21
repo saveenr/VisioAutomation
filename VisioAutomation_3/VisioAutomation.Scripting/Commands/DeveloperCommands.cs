@@ -346,6 +346,113 @@ namespace VisioAutomation.Scripting.Commands
                 source = source.Skip(chunksize);
             }
         }
+
+        public IVisio.Document DrawVANamespacesAndClasses()
+        {
+            var doc = this.Session.Document.New(8.5, 11);
+            var fonts = doc.Fonts;
+            var font = fonts["Segoe UI"];
+            int fontid = font.ID16;
+
+            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
+            var pathbuilder = new PathTreeBuilder();
+            foreach (var type in types)
+            {
+                pathbuilder.Add(type.Namespace);
+            }
+
+            var namespaces = pathbuilder.GetPaths();
+
+            var tree_layout = new VA.Layout.Tree.Drawing();
+            tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Down;
+            tree_layout.LayoutOptions.UseDynamicConnectors = false;
+            var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
+
+            // create nodes for every namespace
+            foreach (string ns in namespaces)
+            {
+                string label = ns;
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator);
+                if (index_of_last_sep > 0)
+                {
+                    label = ns.Substring(index_of_last_sep + 1);
+                }
+
+                var types_in_namespace = types.Where(t => t.Namespace == ns).Select(t=>t.Name);
+                var node = new VA.Layout.Tree.Node(ns);
+                node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace);
+                node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
+
+                ns_node_map[ns] = node;
+            }
+
+            // add children to nodes
+            foreach (string ns in namespaces)
+            {
+                var parent_ns = pathbuilder.PathToParentPath[ns];
+
+                if (parent_ns != null)
+                {
+                    // the current namespace has a parent
+                    var parent_node = ns_node_map[parent_ns];
+                    var child_node = ns_node_map[ns];
+                    parent_node.Children.Add(child_node);
+                }
+                else
+                {
+                    // that means this namespace is a root, forget about it
+                }
+            }
+
+            if (pathbuilder.Roots.Count == 0)
+            {
+
+            }
+            else if (pathbuilder.Roots.Count == 1)
+            {
+                // when there is exactly one root namespace, then that node will be the tree's root node
+                var first_root = pathbuilder.Roots[0];
+                var root_n = ns_node_map[first_root];
+                tree_layout.Root = root_n;
+            }
+            else
+            {
+                // if there are multiple root namespaces, inject an empty placeholder root
+                var root_n = new VA.Layout.Tree.Node();
+                tree_layout.Root = root_n;
+
+                foreach (var root_ns in pathbuilder.Roots)
+                {
+                    var node = ns_node_map[root_ns];
+                    tree_layout.Root.Children.Add(node);
+                }
+            }
+
+            // format the shapes
+            foreach (var node in tree_layout.Nodes)
+            {
+                if (node.ShapeCells == null)
+                {
+                    node.ShapeCells = new ShapeCells();
+                }
+                node.ShapeCells.FillForegnd = "rgb(240,240,240)";
+                node.ShapeCells.CharFont = fontid;
+                //node.ShapeCells.LineWeight = "0";
+                //node.ShapeCells.LinePattern = "0";
+                node.ShapeCells.LineColor = "rgb(140,140,140)";
+                node.ShapeCells.HAlign = "0";
+                node.ShapeCells.VerticalAlign = "0";
+            }
+
+            var cxn_cells = new VA.DOM.ShapeCells();
+            cxn_cells.LineColor = "rgb(140,140,140)";
+            tree_layout.LayoutOptions.ConnectorShapeCells = cxn_cells;
+
+
+            tree_layout.Render(doc.Application.ActivePage);
+            return doc;
+        }
+
     }
 }
 
