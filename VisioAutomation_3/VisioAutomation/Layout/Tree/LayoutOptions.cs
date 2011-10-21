@@ -14,5 +14,7 @@ namespace VisioAutomation.Layout.Tree
         public bool UseDynamicConnectors { get; set; }      
         public LayoutDirection Direction { get; set; }
         public VA.Drawing.Size DefaultNodeSize { get; set; }
+
+        public VA.DOM.ShapeCells ConnectorShapeCells { get; set; }
     }
 }

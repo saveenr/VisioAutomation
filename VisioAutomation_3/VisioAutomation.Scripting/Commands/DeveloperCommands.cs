@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -226,6 +227,9 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document DrawVANamespaces()
         {
             var doc = this.Session.Document.New(8.5,11);
+            var fonts = doc.Fonts;
+            var font = fonts["Segoe UI"];
+            int fontid = font.ID16;
 
             var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
             var pathbuilder = new PathTreeBuilder();
@@ -298,6 +302,26 @@ namespace VisioAutomation.Scripting.Commands
                     tree_layout.Root.Children.Add(node);
                 }
             }
+
+            // format the shapes
+            foreach (var node in tree_layout.Nodes)
+            {
+                if (node.ShapeCells==null)
+                {
+                    node.ShapeCells = new ShapeCells();                    
+                }
+                node.ShapeCells.FillForegnd = "rgb(240,240,240)";
+                node.ShapeCells.CharFont = fontid;
+                //node.ShapeCells.LineWeight = "0";
+                //node.ShapeCells.LinePattern = "0";
+                node.ShapeCells.LineColor = "rgb(140,140,140)";
+                node.ShapeCells.HAlign = "0";
+            }
+
+            var cxn_cells = new VA.DOM.ShapeCells();
+            cxn_cells.LineColor = "rgb(140,140,140)";
+            tree_layout.LayoutOptions.ConnectorShapeCells = cxn_cells;
+
 
             tree_layout.Render(doc.Application.ActivePage);
             return doc;

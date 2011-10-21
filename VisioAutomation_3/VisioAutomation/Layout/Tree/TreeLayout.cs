@@ -116,6 +116,7 @@ namespace VisioAutomation.Layout.Tree
                         var parent_shape = (VA.DOM.Shape)parent.DOMNode;
                         var child_shape = (VA.DOM.Shape)child.DOMNode;
                         var connector = dom_doc.Connect(connector_master, parent_shape, child_shape);
+                        connector.ShapeCells = this.LayoutOptions.ConnectorShapeCells;
                     }
                 }
             }
@@ -125,6 +126,7 @@ namespace VisioAutomation.Layout.Tree
                 {
                     var bez = layout.GetConnectionBezier(connection);
                     var shape = dom_doc.DrawBezier(bez);
+                    shape.ShapeCells = this.LayoutOptions.ConnectorShapeCells;
                 }
             }
 
