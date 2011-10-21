@@ -10,8 +10,8 @@ namespace VisioAutomation.VDX.Sections
         public string Company = string.Empty;
         public int? BuildNumberCreated = 805312791;
         public int? BuildNumberEdited = 805312791;
-        // TODO: PreviewPicture
-        // TODO: CustomProps
+        // TODO: Add support for PreviewPicture
+        // TODO: Add support for CustomProps
         public System.DateTimeOffset? TimeCreated;
         public System.DateTimeOffset? TimeSaved;
         public System.DateTimeOffset? TimeEdited;

@@ -1,7 +1,5 @@
 using SXL=System.Xml.Linq;
-using System.Xml.Linq;
-using VisioAutomation.VDX.Elements;
-using VisioAutomation.VDX.Internal;
+using VA=VisioAutomation;
 using VisioAutomation.VDX.Internal.Extensions;
 
 
@@ -13,7 +11,7 @@ namespace VisioAutomation.VDX
         {
         }
 
-        public void CreateVDX(Drawing vdoc, SXL.XDocument vdx_xml_doc)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument vdx_xml_doc)
         {
             if (vdoc == null)
             {
@@ -28,7 +26,7 @@ namespace VisioAutomation.VDX
             _ModifyTemplate(vdx_xml_doc, vdoc);
         }
 
-        public void CreateVDX(Drawing vdoc, SXL.XDocument vdx_xml_doc, string output_filename)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument vdx_xml_doc, string output_filename)
         {
             if (output_filename == null)
             {
@@ -38,7 +36,7 @@ namespace VisioAutomation.VDX
             this.CreateVDX(vdoc,vdx_xml_doc);
 
             // important to use DisableFormatting - Visio is very sensitive to whitespace in the <Text> element when there is complex formatting
-            var saveoptions = System.Xml.Linq.SaveOptions.DisableFormatting;
+            var saveoptions = SXL.SaveOptions.DisableFormatting;
             vdx_xml_doc.Save(output_filename, saveoptions);
         }
 
@@ -46,7 +44,7 @@ namespace VisioAutomation.VDX
         {
             var root = vdx_xml_doc.Root;
 
-            string ns_2003 = Constants.VisioXmlNamespace2003;
+            string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;
 
             // set document properties
             var docprops = root.ElementVisioSchema2003("DocumentProperties");
@@ -63,15 +61,15 @@ namespace VisioAutomation.VDX
             root.RemoveElement(ns_2003 + "DocumentProperties");
 
 
-            // TODO Add DocumentSettings
+            // TODO Add DocumentSettings to VDX
             var docsettings = root.ElementsVisioSchema2003("DocumentSettings");
             if (docsettings!=null)
             {
-                System.Xml.Linq.Extensions.Remove(docsettings);
+                SXL.Extensions.Remove(docsettings);
             }
         }
 
-        private void _ModifyTemplate(System.Xml.Linq.XDocument vdx_xml_doc, Elements.Drawing vdoc)
+        private void _ModifyTemplate(SXL.XDocument vdx_xml_doc, Elements.Drawing vdoc)
         {
             var root = vdx_xml_doc.Root;
             root.AddFirst(vdoc.DocumentProperties.ToXml());

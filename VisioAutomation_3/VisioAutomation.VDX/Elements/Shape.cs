@@ -113,7 +113,7 @@ namespace VisioAutomation.VDX.Elements
 
             WriteCharFormats(shape_el);
             WriteParaFormats(shape_el);
-            // TODO: Tabs
+            // TODO: Add support for Tab Stops in VDX
             WriteProps(shape_el);
             WriteGeom(shape_el);
             WriteText(shape_el);

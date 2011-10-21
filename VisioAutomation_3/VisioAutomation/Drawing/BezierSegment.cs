@@ -101,7 +101,6 @@ namespace VisioAutomation.Drawing
         private static IEnumerable<VA.Internal.ArcSegment> subdivide_arc_nicely(double start_angle, double end_angle)
         {
             // TODO: Should calculate number of subarcs without resorting to an enumeration
-            // TODO: add test cases
 
             if (start_angle > end_angle)
             {
