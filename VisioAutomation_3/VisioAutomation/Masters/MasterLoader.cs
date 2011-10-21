@@ -89,17 +89,14 @@ namespace VisioAutomation.Masters
                     var stencildoc = name_to_stencildoc[master_ref.StencilName];
                     var stencilmasters = stencildoc.Masters;
 
-                    try
-                    {
-                        var master_object = stencilmasters[master_ref.MasterName];
-                        master_ref.VisioMaster = master_object;
-                    }
-                    catch (System.Runtime.InteropServices.COMException comexc)
+                    var master_object = VA.Masters.MasterHelper.TryGetMaster(stencilmasters,master_ref.MasterName);
+                    if (master_object==null)
                     {
                         string msg = string.Format("No such master \"{0}\" in stencil \"{1}\"",
                                                    master_ref.MasterName, master_ref.StencilName);
                         throw new AutomationException(msg);
                     }
+                    master_ref.VisioMaster = master_object;
                 }
             }
         }
