@@ -11,6 +11,7 @@
     public enum ConnectorType
     {
         DynamicConnectors,
-        CurvedBezier
+        CurvedBezier,
+        PolyLine
     }
 }

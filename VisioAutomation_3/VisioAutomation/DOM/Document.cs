@@ -412,6 +412,14 @@ namespace VisioAutomation.DOM
             }
         }
 
+
+        public PolyLine DrawPolyLine(IList<VA.Drawing.Point> points)
+        {
+            var pl = new PolyLine(points);
+            this.Shapes.Add(pl);
+            return pl;
+        }
+
         public Line DrawLine(double x0, double y0, double x1, double y1)
         {
             var line = new Line(x0, y0, x1, y1);

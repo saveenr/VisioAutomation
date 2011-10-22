@@ -119,7 +119,7 @@ namespace VisioAutomation.Layout.Tree
                     }
                 }
             }
-            else
+            else if  (this.LayoutOptions.ConnectorType == ConnectorType.CurvedBezier)
             {
                 foreach (var connection in layout.EnumConnections())
                 {
@@ -128,6 +128,21 @@ namespace VisioAutomation.Layout.Tree
                     shape.ShapeCells = this.LayoutOptions.ConnectorShapeCells;
                 }
             }
+            else if (this.LayoutOptions.ConnectorType == ConnectorType.PolyLine)
+            {
+                foreach (var connection in layout.EnumConnections())
+                {
+                    var polyline = layout.GetConnectionPolyline(connection);
+                    var shape = dom_doc.DrawPolyLine(polyline);
+                    shape.ShapeCells = this.LayoutOptions.ConnectorShapeCells;
+                }
+            }
+            else
+            {
+                string msg = "Unsupported Connector Type";
+                throw new VA.AutomationException(msg);
+            }
+
 
             dom_doc.Render(page);
 
