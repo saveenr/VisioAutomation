@@ -368,8 +368,8 @@ namespace VisioAutomation.Scripting.Commands
             tree_layout.LayoutOptions.UseDynamicConnectors = false;
             var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
             var node_to_nslabel= new Dictionary<VA.Layout.Tree.Node,string>(namespaces.Count);
-
-
+            var typenamer = new TypeNamer();
+            typenamer.ShowTypeCategory = true;
             // create nodes for every namespace
             foreach (string ns in namespaces)
             {
@@ -380,7 +380,7 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep + 1);
                 }
 
-                var types_in_namespace = types.Where(t => t.Namespace == ns).Select(t=> RefUtil.get_nice_type_name(t));
+                var types_in_namespace = types.Where(t => t.Namespace == ns).Select(t=> typenamer.GetDisplayString(t));
                 var node = new VA.Layout.Tree.Node(ns);
                 node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace);
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
@@ -467,9 +467,25 @@ namespace VisioAutomation.Scripting.Commands
 
     }
 
-    internal static class RefUtil
+    internal class TypeNamer
     {
-        public   static string get_nice_type_name(System.Type type)
+        public bool ShowTypeCategory = true;
+        
+        public string GetDisplayString(System.Type t)
+        {
+            string tn = get_nice_type_name(t);
+            if (this.ShowTypeCategory==false)
+            {
+                return tn;
+            }
+            else
+            {
+                string tk = get_type_category_name(get_type_kindEx(t));
+                return string.Format("{0} {1}", tk, tn);
+            }
+        }
+
+        private static string get_nice_type_name(System.Type type)
         {
             if (type.IsGenericType)
             {
@@ -490,29 +506,29 @@ namespace VisioAutomation.Scripting.Commands
             return type.Name;
         }
 
-        public static string get_type_kindname(TypeKind type)
+        private static string get_type_category_name(TypeCategory type)
         {
-            if (type == TypeKind.StaticClass)
+            if (type == TypeCategory.StaticClass)
             {
                 return "static class";
             }
-            else if (type ==TypeKind.AbstractClass)
+            else if (type ==TypeCategory.AbstractClass)
             {
                 return "abstract class";
             }
-            else if( type ==TypeKind.Class)
+            else if( type ==TypeCategory.Class)
             {
                 return "class";
             }
-            else if (type == TypeKind.Enum)
+            else if (type == TypeCategory.Enum)
             {
                 return "enum";
             }
-            else if (type == TypeKind.Interface)
+            else if (type == TypeCategory.Interface)
             {
                 return "interface";
             }
-            else if (type == TypeKind.Struct)
+            else if (type == TypeCategory.Struct)
             {
                 return "struct";
             }
@@ -522,61 +538,60 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public static TypeKind get_type_kindEx(System.Type type)
+        private static TypeCategory get_type_kindEx(System.Type type)
         {
             if (type.IsClass)
             {
                 if (TypeIsStaticClass(type))
                 {
-                    return TypeKind.StaticClass;
+                    return TypeCategory.StaticClass;
                 }
                 else if (type.IsAbstract)
                 {
-                    return TypeKind.AbstractClass;
+                    return TypeCategory.AbstractClass;
                 }
-                return TypeKind.Class;
+                return TypeCategory.Class;
             }
             else if (type.IsEnum)
             {
-                return TypeKind.Enum;
+                return TypeCategory.Enum;
             }
             else if (type.IsInterface)
             {
-                return TypeKind.Interface;
+                return TypeCategory.Interface;
             }
             else if (TypeIsStruct(type))
             {
-                return TypeKind.Struct;
+                return TypeCategory.Struct;
             }
             else
             {
-                return TypeKind.Other;
+                return TypeCategory.Other;
             }
         }
 
 
-        public static bool TypeIsStruct(System.Type type)
+        private static bool TypeIsStruct(System.Type type)
         {
             return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
         }
 
-        public static bool TypeIsStaticClass(System.Type type)
+        private static bool TypeIsStaticClass(System.Type type)
         {
             return (type.IsAbstract && type.IsSealed);
         }
-    }
 
-    public enum TypeKind
-    {
-        StaticClass,
-        Class,
-        AbstractClass,
-        Interface,
-        Struct,
-        Enum,
-        Other
+        public enum TypeCategory
+        {
+            StaticClass,
+            Class,
+            AbstractClass,
+            Interface,
+            Struct,
+            Enum,
+            Other
+        }
     }
-
 }
 
 
