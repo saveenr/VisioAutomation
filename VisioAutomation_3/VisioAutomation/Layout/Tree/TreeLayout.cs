@@ -104,7 +104,7 @@ namespace VisioAutomation.Layout.Tree
                 dom_master.Text = tree_node.Text;
             }
 
-            if (this.LayoutOptions.ConnectorType  == ConnectorType.DynamicConnectors)
+            if (this.LayoutOptions.ConnectorType  == ConnectorType.DynamicConnector)
             {
                 var orgchart_nodes = treenodes.Select(tn => tn.Data).Cast<Node>();
 

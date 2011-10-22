@@ -8,7 +8,7 @@ namespace VisioAutomation.Layout.Tree
         {
             DefaultNodeSize = new VA.Drawing.Size(2, 0.5);
             Direction = LayoutDirection.Down;
-            this.ConnectorType = ConnectorType.DynamicConnectors;
+            this.ConnectorType = ConnectorType.DynamicConnector;
         }
 
         public ConnectorType ConnectorType { get; set; }      

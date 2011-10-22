@@ -10,7 +10,7 @@
 
     public enum ConnectorType
     {
-        DynamicConnectors,
+        DynamicConnector,
         CurvedBezier,
         PolyLine
     }
