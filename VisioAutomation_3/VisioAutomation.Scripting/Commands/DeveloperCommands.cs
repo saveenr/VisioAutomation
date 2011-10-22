@@ -367,6 +367,8 @@ namespace VisioAutomation.Scripting.Commands
             tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Down;
             tree_layout.LayoutOptions.UseDynamicConnectors = false;
             var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
+            var node_to_nslabel= new Dictionary<VA.Layout.Tree.Node,string>(namespaces.Count);
+
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -384,6 +386,7 @@ namespace VisioAutomation.Scripting.Commands
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
                 ns_node_map[ns] = node;
+                node_to_nslabel[node] = label;
             }
 
             // add children to nodes
@@ -450,6 +453,15 @@ namespace VisioAutomation.Scripting.Commands
 
 
             tree_layout.Render(doc.Application.ActivePage);
+
+            var charcells = new VA.Text.CharacterFormatCells();
+            charcells.Style = (int) VA.Text.CharStyle.Bold;
+            charcells.Size = VA.Convert.PointsToInches(12);
+            foreach (var node in tree_layout.Nodes)
+            {
+                string label = node_to_nslabel[node];
+                VA.Text.TextHelper.SetFormat(node.VisioShape, charcells, 0, label.Length);
+            }
             return doc;
         }
 
