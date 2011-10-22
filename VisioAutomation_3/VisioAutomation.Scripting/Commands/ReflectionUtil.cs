@@ -5,6 +5,97 @@ namespace VisioAutomation.Scripting.Commands
 {
     internal class ReflectionUtil
     {
+        public static string GetTypeCategoryDisplayString(ReflectionUtil.TypeCategory type)
+        {
+            if (type == ReflectionUtil.TypeCategory.StaticClass)
+            {
+                return "static class";
+            }
+            else if (type == ReflectionUtil.TypeCategory.AbstractClass)
+            {
+                return "abstract class";
+            }
+            else if (type == ReflectionUtil.TypeCategory.Class)
+            {
+                return "class";
+            }
+            else if (type == ReflectionUtil.TypeCategory.Enum)
+            {
+                return "enum";
+            }
+            else if (type == ReflectionUtil.TypeCategory.Interface)
+            {
+                return "interface";
+            }
+            else if (type == ReflectionUtil.TypeCategory.Struct)
+            {
+                return "struct";
+            }
+            else
+            {
+                return "";
+            }
+        }
+        
+        public static string GetTypeCategoryDisplayString(System.Type type)
+        {
+            var cat = GetTypeCategory(type);
+            return GetTypeCategoryDisplayString(cat);
+        }
+
+        private static bool TypeIsStruct(System.Type type)
+        {
+            return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
+        }
+
+        private static bool TypeIsStaticClass(System.Type type)
+        {
+            return (type.IsAbstract && type.IsSealed);
+        }
+        
+        public enum TypeCategory
+        {
+            StaticClass,
+            Class,
+            AbstractClass,
+            Interface,
+            Struct,
+            Enum,
+            Other
+        }
+ 
+        public static TypeCategory GetTypeCategory(System.Type type)
+        {
+            if (type.IsClass)
+            {
+                if (TypeIsStaticClass(type))
+                {
+                    return TypeCategory.StaticClass;
+                }
+                else if (type.IsAbstract)
+                {
+                    return TypeCategory.AbstractClass;
+                }
+                return TypeCategory.Class;
+            }
+            else if (type.IsEnum)
+            {
+                return TypeCategory.Enum;
+            }
+            else if (type.IsInterface)
+            {
+                return TypeCategory.Interface;
+            }
+            else if (TypeIsStruct(type))
+            {
+                return TypeCategory.Struct;
+            }
+            else
+            {
+                return TypeCategory.Other;
+            }
+        }
+
 
         public static string GetCSharpTypeAlias(System.Type type)
         {
@@ -78,16 +169,23 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public static string GetNiceTypeName(System.Type type)
+        public class NamingOptions
         {
-            return GetNiceTypeName(type, GetCSharpTypeAlias);
+            public System.Func<System.Type, string> NameOverrideFunc;
         }
 
-        public static string GetNiceTypeName(System.Type type, System.Func<System.Type, string> overridefunc)
+        public static string GetNiceTypeName(System.Type type)
         {
-            if (overridefunc != null)
+            var options = new NamingOptions();
+            options.NameOverrideFunc = GetCSharpTypeAlias;
+            return GetNiceTypeName(type, options);
+        }
+
+        public static string GetNiceTypeName(System.Type type, NamingOptions options)
+        {
+            if (options != null && options.NameOverrideFunc !=null)
             {
-                string s = overridefunc(type);
+                string s = options.NameOverrideFunc(type);
                 if (s != null)
                 {
                     return s;
@@ -97,13 +195,13 @@ namespace VisioAutomation.Scripting.Commands
             if (IsNullableType(type))
             {
                 var actualtype = type.GetGenericArguments()[0];
-                return GetNiceTypeName(actualtype, overridefunc) + "?";
+                return GetNiceTypeName(actualtype, options) + "?";
             }
 
             if (type.IsArray)
             {
                 var at = type.GetElementType();
-                return string.Format("{0}[]", GetNiceTypeName(at, overridefunc));
+                return string.Format("{0}[]", GetNiceTypeName(at, options));
             }
 
             if (type.IsGenericType)
@@ -113,7 +211,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 sb.Append(tokens[0]);
                 var gas = type.GetGenericArguments();
-                var ga_names = gas.Select(i => GetNiceTypeName(i, overridefunc));
+                var ga_names = gas.Select(i => GetNiceTypeName(i, options));
 
                 sb.Append("<");
                 Join(sb, ", ", ga_names);

@@ -347,18 +347,35 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        private class TypeInfo
+        {
+            public System.Type Type;
+            public ReflectionUtil.TypeCategory TypeCategory ;
+            public string Label;
+
+            public TypeInfo(System.Type type)
+            {
+                this.Type = type;
+                this.TypeCategory = ReflectionUtil.GetTypeCategory(type);
+                this.Label = ReflectionUtil.GetTypeCategoryDisplayString(type) + " " + ReflectionUtil.GetNiceTypeName(type);
+
+            }
+        }
+
         public IVisio.Document DrawVANamespacesAndClasses()
         {
+
             var doc = this.Session.Document.New(8.5, 11);
             var fonts = doc.Fonts;
             var font = fonts["Segoe UI"];
             int fontid = font.ID16;
 
-            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
+            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes().Select(t=>new TypeInfo(t));
+
             var pathbuilder = new PathTreeBuilder();
             foreach (var type in types)
             {
-                pathbuilder.Add(type.Namespace);
+                pathbuilder.Add(type.Type.Namespace);
             }
 
             var namespaces = pathbuilder.GetPaths();
@@ -368,8 +385,7 @@ namespace VisioAutomation.Scripting.Commands
             tree_layout.LayoutOptions.UseDynamicConnectors = false;
             var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
             var node_to_nslabel= new Dictionary<VA.Layout.Tree.Node,string>(namespaces.Count);
-            var typenamer = new TypeNamer();
-            typenamer.ShowTypeCategory = true;
+
             // create nodes for every namespace
             foreach (string ns in namespaces)
             {
@@ -380,7 +396,9 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep + 1);
                 }
 
-                var types_in_namespace = types.Where(t => t.Namespace == ns).Select(t=> typenamer.GetDisplayString(t));
+                var types_in_namespace = types.Where(t => t.Type.Namespace == ns)
+                    .OrderBy(t=>t.Type.Name)
+                    .Select(t=> t.Label);
                 var node = new VA.Layout.Tree.Node(ns);
                 node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace);
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
@@ -465,132 +483,6 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-    }
-
-    internal class TypeNamer
-    {
-        public bool ShowTypeCategory = true;
-        
-        public string GetDisplayString(System.Type t)
-        {
-            string tn = get_nice_type_name(t);
-            if (this.ShowTypeCategory==false)
-            {
-                return tn;
-            }
-            else
-            {
-                string tk = get_type_category_name(get_type_kindEx(t));
-                return string.Format("{0} {1}", tk, tn);
-            }
-        }
-
-        private static string get_nice_type_name(System.Type type)
-        {
-            if (type.IsGenericType)
-            {
-                var sb = new System.Text.StringBuilder();
-                var tokens = type.Name.Split(new[] {'`'});
-
-
-                sb.Append(tokens[0]);
-                var gas = type.GetGenericArguments();
-                var ga_names = gas.Select(i => i.Name).ToList();
-
-                sb.Append("<");
-                sb.Append(string.Join(", ", ga_names));
-                sb.Append(">");
-                return sb.ToString();
-            }
-
-            return type.Name;
-        }
-
-        private static string get_type_category_name(TypeCategory type)
-        {
-            if (type == TypeCategory.StaticClass)
-            {
-                return "static class";
-            }
-            else if (type ==TypeCategory.AbstractClass)
-            {
-                return "abstract class";
-            }
-            else if( type ==TypeCategory.Class)
-            {
-                return "class";
-            }
-            else if (type == TypeCategory.Enum)
-            {
-                return "enum";
-            }
-            else if (type == TypeCategory.Interface)
-            {
-                return "interface";
-            }
-            else if (type == TypeCategory.Struct)
-            {
-                return "struct";
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        private static TypeCategory get_type_kindEx(System.Type type)
-        {
-            if (type.IsClass)
-            {
-                if (TypeIsStaticClass(type))
-                {
-                    return TypeCategory.StaticClass;
-                }
-                else if (type.IsAbstract)
-                {
-                    return TypeCategory.AbstractClass;
-                }
-                return TypeCategory.Class;
-            }
-            else if (type.IsEnum)
-            {
-                return TypeCategory.Enum;
-            }
-            else if (type.IsInterface)
-            {
-                return TypeCategory.Interface;
-            }
-            else if (TypeIsStruct(type))
-            {
-                return TypeCategory.Struct;
-            }
-            else
-            {
-                return TypeCategory.Other;
-            }
-        }
-
-
-        private static bool TypeIsStruct(System.Type type)
-        {
-            return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
-        }
-
-        private static bool TypeIsStaticClass(System.Type type)
-        {
-            return (type.IsAbstract && type.IsSealed);
-        }
-
-        public enum TypeCategory
-        {
-            StaticClass,
-            Class,
-            AbstractClass,
-            Interface,
-            Struct,
-            Enum,
-            Other
-        }
     }
 }
 
