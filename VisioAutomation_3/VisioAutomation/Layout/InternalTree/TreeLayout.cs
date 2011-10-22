@@ -531,7 +531,7 @@ namespace VisioAutomation.Layout.InternalTree
                 {
                     b = -b;
                 }
-                m0 = new VA.Drawing.Point(lineseg.Start.X, lineseg.Start.Y - b);
+                m0 = new VA.Drawing.Point(lineseg.Start.X, lineseg.End.Y + b);
                 m1 = new VA.Drawing.Point(lineseg.End.X, lineseg.End.Y + b);
             }
             else

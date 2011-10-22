@@ -381,7 +381,7 @@ namespace VisioAutomation.Scripting.Commands
             var namespaces = pathbuilder.GetPaths();
 
             var tree_layout = new VA.Layout.Tree.Drawing();
-            tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Down;
+            tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Up;
             tree_layout.LayoutOptions.ConnectorType= VA.Layout.Tree.ConnectorType.PolyLine;
             var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
             var node_to_nslabel= new Dictionary<VA.Layout.Tree.Node,string>(namespaces.Count);
