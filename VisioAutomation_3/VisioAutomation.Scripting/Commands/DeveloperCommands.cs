@@ -380,7 +380,7 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep + 1);
                 }
 
-                var types_in_namespace = types.Where(t => t.Namespace == ns).Select(t=>t.Name);
+                var types_in_namespace = types.Where(t => t.Namespace == ns).Select(t=> RefUtil.get_nice_type_name(t));
                 var node = new VA.Layout.Tree.Node(ns);
                 node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace);
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
@@ -466,6 +466,117 @@ namespace VisioAutomation.Scripting.Commands
         }
 
     }
+
+    internal static class RefUtil
+    {
+        public   static string get_nice_type_name(System.Type type)
+        {
+            if (type.IsGenericType)
+            {
+                var sb = new System.Text.StringBuilder();
+                var tokens = type.Name.Split(new[] {'`'});
+
+
+                sb.Append(tokens[0]);
+                var gas = type.GetGenericArguments();
+                var ga_names = gas.Select(i => i.Name).ToList();
+
+                sb.Append("<");
+                sb.Append(string.Join(", ", ga_names));
+                sb.Append(">");
+                return sb.ToString();
+            }
+
+            return type.Name;
+        }
+
+        public static string get_type_kindname(TypeKind type)
+        {
+            if (type == TypeKind.StaticClass)
+            {
+                return "static class";
+            }
+            else if (type ==TypeKind.AbstractClass)
+            {
+                return "abstract class";
+            }
+            else if( type ==TypeKind.Class)
+            {
+                return "class";
+            }
+            else if (type == TypeKind.Enum)
+            {
+                return "enum";
+            }
+            else if (type == TypeKind.Interface)
+            {
+                return "interface";
+            }
+            else if (type == TypeKind.Struct)
+            {
+                return "struct";
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public static TypeKind get_type_kindEx(System.Type type)
+        {
+            if (type.IsClass)
+            {
+                if (TypeIsStaticClass(type))
+                {
+                    return TypeKind.StaticClass;
+                }
+                else if (type.IsAbstract)
+                {
+                    return TypeKind.AbstractClass;
+                }
+                return TypeKind.Class;
+            }
+            else if (type.IsEnum)
+            {
+                return TypeKind.Enum;
+            }
+            else if (type.IsInterface)
+            {
+                return TypeKind.Interface;
+            }
+            else if (TypeIsStruct(type))
+            {
+                return TypeKind.Struct;
+            }
+            else
+            {
+                return TypeKind.Other;
+            }
+        }
+
+
+        public static bool TypeIsStruct(System.Type type)
+        {
+            return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
+        }
+
+        public static bool TypeIsStaticClass(System.Type type)
+        {
+            return (type.IsAbstract && type.IsSealed);
+        }
+    }
+
+    public enum TypeKind
+    {
+        StaticClass,
+        Class,
+        AbstractClass,
+        Interface,
+        Struct,
+        Enum,
+        Other
+    }
+
 }
 
 
