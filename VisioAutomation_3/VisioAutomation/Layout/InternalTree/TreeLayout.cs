@@ -522,6 +522,8 @@ namespace VisioAutomation.Layout.InternalTree
             var lineseg = this.GetConnectionLine(connection);
             VA.Drawing.Point m0, m1;
 
+            VA.Drawing.Point parent_attach_point = lineseg.Start;
+            VA.Drawing.Point child_attach_point = lineseg.End;
             VA.Drawing.Point dif = lineseg.End - lineseg.Start;
             double a = (this.Options.LevelSeparation/2.0);
             double b = (this.Options.LevelSeparation/2.0);
@@ -556,8 +558,8 @@ namespace VisioAutomation.Layout.InternalTree
             VA.Drawing.Point h1;
             VA.Drawing.Point h2;
 
-            double scale = 0.5;
-            var dif = (child_attach_point - parent_attach_point)*scale;
+            double scale = this.Options.LevelSeparation/2.0;
+            var dif = child_attach_point.Subtract(parent_attach_point).Multiply(scale);
 
 
             var handle_displacement = IsVertical(this.Options.Direction)
