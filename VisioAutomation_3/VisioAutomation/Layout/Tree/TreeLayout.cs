@@ -84,7 +84,6 @@ namespace VisioAutomation.Layout.Tree
                 i.Position = i.Position.Add(border_width, border_width);
             }
 
-            // TODO: Add support for Left to right , Right to Left, and Bottom to Top Layouts
             var centerpoints = treenodes.Select(tn => tn.Rect.Center).ToList();
             var dom_masters = centerpoints.Select(cp => dom_doc.Drop(node_master, cp)).ToList();
 
