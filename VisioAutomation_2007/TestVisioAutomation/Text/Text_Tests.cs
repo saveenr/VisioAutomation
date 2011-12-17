@@ -12,6 +12,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_Xml_To_TextElement_Whitespace()
         {
+            // Validate that creating a markup structure from a string doesn't lose any whitespace
+            // added to the special whitespace characters
+
             string text =
                 @"
 <text>
@@ -31,6 +34,8 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_Xml_To_TextElement()
         {
+            // Check that basic text formatting still works.
+
             string text =
                 @"
 <text>
@@ -102,86 +107,80 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Test_Element_To_Region_1()
+        public void ValidateFormattingRegions()
         {
-            var el = new VA.Text.Markup.TextElement();
-            var markup = el.GetMarkupInfo();
-            var regions = markup.FormatRegions;
-            Assert.AreEqual(1, markup.FormatRegions.Count);
-            Assert.AreEqual(0, regions[0].TextLength);
-            Assert.AreEqual(0, regions[0].TextStartPos);
-            Assert.AreEqual(0, regions[0].TextEndPos);
+            // Check that the formatting regions are correctly
+            // mapped given a number of Text structures
+
+            var el1 = new VA.Text.Markup.TextElement();
+            var markup1 = el1.GetMarkupInfo();
+            var regions1 = markup1.FormatRegions;
+            Assert.AreEqual(1, markup1.FormatRegions.Count);
+            Assert.AreEqual(0, regions1[0].TextLength);
+            Assert.AreEqual(0, regions1[0].TextStartPos);
+            Assert.AreEqual(0, regions1[0].TextEndPos);
+
+
+            var el2 = new VA.Text.Markup.TextElement("HELLO");
+            var markup2 = el2.GetMarkupInfo();
+            var regions2 = markup2.FormatRegions;
+            Assert.AreEqual(1, markup2.FormatRegions.Count);
+            Assert.AreEqual(5, regions2[0].TextLength);
+            Assert.AreEqual(0, regions2[0].TextStartPos);
+            Assert.AreEqual(5, regions2[0].TextEndPos);
+
+            var el3 = new VA.Text.Markup.TextElement("HELLO");
+            el3.AppendText(" WORLD");
+            var markup3 = el3.GetMarkupInfo();
+            var regions3 = markup3.FormatRegions;
+            Assert.AreEqual(1, markup3.FormatRegions.Count);
+            Assert.AreEqual(11, regions3[0].TextLength);
+            Assert.AreEqual(0, regions3[0].TextStartPos);
+            Assert.AreEqual(11, regions3[0].TextEndPos);
+
+            var el4 = new VA.Text.Markup.TextElement();
+            el4.AppendNewElement("HELLO");
+            el4.AppendNewElement(" WORLD");
+            var markup4 = el4.GetMarkupInfo();
+            var regions4 = markup4.FormatRegions;
+            Assert.AreEqual(3, markup4.FormatRegions.Count);
+            Assert.AreEqual(11, regions4[0].TextLength);
+            Assert.AreEqual(0, regions4[0].TextStartPos);
+            Assert.AreEqual(11, regions4[0].TextEndPos);
+            Assert.AreEqual(5, regions4[1].TextLength);
+            Assert.AreEqual(0, regions4[1].TextStartPos);
+            Assert.AreEqual(5, regions4[1].TextEndPos);
+            Assert.AreEqual(6, regions4[2].TextLength);
+            Assert.AreEqual(5, regions4[2].TextStartPos);
+            Assert.AreEqual(11, regions4[2].TextEndPos);
+
+
+            var el5 = new VA.Text.Markup.TextElement();
+            var el5_a = el5.AppendNewElement("HELLO");
+            var el5_b = el5_a.AppendNewElement(" WORLD");
+
+            var markup5 = el5.GetMarkupInfo();
+            var regions5 = markup5.FormatRegions;
+            Assert.AreEqual(3, markup5.FormatRegions.Count);
+            Assert.AreEqual(11, regions5[0].TextLength);
+            Assert.AreEqual(0, regions5[0].TextStartPos);
+            Assert.AreEqual(11, regions5[0].TextEndPos);
+            Assert.AreEqual(11, regions5[1].TextLength);
+            Assert.AreEqual(0, regions5[1].TextStartPos);
+            Assert.AreEqual(11, regions5[1].TextEndPos);
+            Assert.AreEqual(6, regions5[2].TextLength);
+            Assert.AreEqual(5, regions5[2].TextStartPos);
+            Assert.AreEqual(11, regions5[2].TextEndPos);
+
         }
 
-        [TestMethod]
-        public void Test_Element_To_Region_2()
-        {
-            var el = new VA.Text.Markup.TextElement("HELLO");
-            var markup = el.GetMarkupInfo();
-            var regions = markup.FormatRegions;
-            Assert.AreEqual(1, markup.FormatRegions.Count);
-            Assert.AreEqual(5, regions[0].TextLength);
-            Assert.AreEqual(0, regions[0].TextStartPos);
-            Assert.AreEqual(5, regions[0].TextEndPos);
-        }
-
-        [TestMethod]
-        public void Test_Element_To_Region_3()
-        {
-            var el = new VA.Text.Markup.TextElement("HELLO");
-            el.AppendText(" WORLD");
-            var markup = el.GetMarkupInfo();
-            var regions = markup.FormatRegions;
-            Assert.AreEqual(1, markup.FormatRegions.Count);
-            Assert.AreEqual(11, regions[0].TextLength);
-            Assert.AreEqual(0, regions[0].TextStartPos);
-            Assert.AreEqual(11, regions[0].TextEndPos);
-        }
-
-        [TestMethod]
-        public void Test_Element_To_Region_4()
-        {
-            var el = new VA.Text.Markup.TextElement();
-            el.AppendNewElement("HELLO");
-            el.AppendNewElement(" WORLD");
-            var markup = el.GetMarkupInfo();
-            var regions = markup.FormatRegions;
-            Assert.AreEqual(3, markup.FormatRegions.Count);
-            Assert.AreEqual(11, regions[0].TextLength);
-            Assert.AreEqual(0, regions[0].TextStartPos);
-            Assert.AreEqual(11, regions[0].TextEndPos);
-            Assert.AreEqual(5, regions[1].TextLength);
-            Assert.AreEqual(0, regions[1].TextStartPos);
-            Assert.AreEqual(5, regions[1].TextEndPos);
-            Assert.AreEqual(6, regions[2].TextLength);
-            Assert.AreEqual(5, regions[2].TextStartPos);
-            Assert.AreEqual(11, regions[2].TextEndPos);
-        }
-
-        [TestMethod]
-        public void Test_Element_To_Region_5()
-        {
-            var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.AppendNewElement("HELLO");
-            var el2 = el1.AppendNewElement(" WORLD");
-
-            var markup = el0.GetMarkupInfo();
-            var regions = markup.FormatRegions;
-            Assert.AreEqual(3, markup.FormatRegions.Count);
-            Assert.AreEqual(11, regions[0].TextLength);
-            Assert.AreEqual(0, regions[0].TextStartPos);
-            Assert.AreEqual(11, regions[0].TextEndPos);
-            Assert.AreEqual(11, regions[1].TextLength);
-            Assert.AreEqual(0, regions[1].TextStartPos);
-            Assert.AreEqual(11, regions[1].TextEndPos);
-            Assert.AreEqual(6, regions[2].TextLength);
-            Assert.AreEqual(5, regions[2].TextStartPos);
-            Assert.AreEqual(11, regions[2].TextEndPos);
-        }
 
         [TestMethod]
         public void TextElement_with_multiple_text_nodes()
         {
+            // Validate that multiple text elements in the structure
+            // all make it into a real visio shep when the text is render
+
             var el0 = new VA.Text.Markup.TextElement();
             var el1 = el0.AppendNewElement("HELLO");
             var el2 = el0.AppendNewElement(" WORLD");
@@ -200,6 +199,8 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Element_with_bold_and_italic_text()
         {
+            // Validate that basic formatting works when rendering
+
             var el0 = new VA.Text.Markup.TextElement();
             var el1 = el0.AppendNewElement("HELLO");
             var el2 = el0.AppendNewElement(" WORLD");
@@ -225,14 +226,18 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Style_inheritance()
         {
+            // Validate that sub elements inherit the formatting of parent elements
+
             var el0 = new VA.Text.Markup.TextElement();
             var el1 = el0.AppendNewElement("HELLO");
             var el2 = el1.AppendNewElement(" WORLD");
 
-            el0.TextFormat.FontSize = 7;
-            el1.TextFormat.Font = "Impact";
             el0.TextFormat.FontSize = 14;
+            el0.TextFormat.FontSize = 7;
+            
+            el1.TextFormat.Font = "Impact";
             el1.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
+            
             el2.TextFormat.Font = "Courier New";
             el2.TextFormat.FontSize = 20;
             el2.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
@@ -269,6 +274,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_Format_Text_field()
         {
+            // Now account for field insertion
+            // TODO: Consider changing the replacement string from X to something else
+
             var el0 = new VA.Text.Markup.TextElement();
             el0.AppendText("HELLO ");
             el0.AppendField(VA.Text.Markup.Fields.Height);
@@ -292,7 +300,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void CharacterFormat1()
+        public void CharacterFormatCells_Check_SetFormat_1()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
             var s1 = page1.DrawRectangle(0, 0, 10, 10);
@@ -305,7 +313,6 @@ namespace TestVisioAutomation
                     int n = (y * 10 + x) % 5;
                     sb.Append(n.ToString());
                 }
-                //sb.AppendLine();                
             }
             s1.Text = sb.ToString();
 
@@ -346,7 +353,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Test_SetCharacterFormat2()
+        public void CharacterFormatCells_Check_SetFormat_2()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
             IVisio.Shape s1;
@@ -444,7 +451,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Paragraph_formatting()
+        public void ParagraphFormatCells_Check_SetFormat_1()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
 
@@ -494,7 +501,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void TextBlock()
+        public void TextBlockFormatCells_Check_SetFormat_1()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
