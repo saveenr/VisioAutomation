@@ -4,7 +4,7 @@ namespace VisioAutomation.Text.Markup
 {
     public class Field : Node
     {
-        private const string placeholder_string = "X";
+        private const string placeholder_string = "[FIELD]";
 
         public IVisio.VisFieldCategories Category { get; set; }
         public IVisio.VisFieldCodes Code { get; set; }

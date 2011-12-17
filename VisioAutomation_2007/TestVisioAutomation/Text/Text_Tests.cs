@@ -275,7 +275,6 @@ namespace TestVisioAutomation
         public void Test_Format_Text_field()
         {
             // Now account for field insertion
-            // TODO: Consider changing the replacement string from X to something else
 
             var el0 = new VA.Text.Markup.TextElement();
             el0.AppendText("HELLO ");
