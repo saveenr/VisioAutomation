@@ -163,6 +163,10 @@
     <Compile Include="Core\CharacterFormatTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestCommon\TestCommon.csproj">
+      <Project>{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6}</Project>
+      <Name>TestCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
       <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
       <Name>VisioAutomation.Layout.MSAGL</Name>

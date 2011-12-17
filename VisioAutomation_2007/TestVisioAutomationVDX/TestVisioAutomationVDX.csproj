@@ -57,12 +57,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="TestHelper.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="VDX_Tests.cs" />
-    <Compile Include="VisioTestCommon.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestCommon\TestCommon.csproj">
+      <Project>{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6}</Project>
+      <Name>TestCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.VDX\VisioAutomation.VDX.csproj">
       <Project>{A2BD039F-38EB-4E19-A1A4-8E6730CBC4E9}</Project>
       <Name>VisioAutomation.VDX</Name>
