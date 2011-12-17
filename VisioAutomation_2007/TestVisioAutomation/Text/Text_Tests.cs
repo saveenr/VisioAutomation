@@ -287,7 +287,7 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
             string it = el0.GetInnerText();
-            Assert.AreEqual("HELLO X WORLD", it);
+            Assert.AreEqual("HELLO " + VA.Text.Markup.Fields.Height.PlaceholderText + " WORLD", it);
             el0.SetShapeText(s1);
 
             var shape_size = VisioAutomationTest.GetSize(s1);
