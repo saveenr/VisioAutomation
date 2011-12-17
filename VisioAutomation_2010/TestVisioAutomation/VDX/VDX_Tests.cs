@@ -28,6 +28,7 @@ namespace TestVisioVDX
                 Assert.Fail("XML Error Log Error Was Created when opening the VDX file");
             }
 
+            VA.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
@@ -530,6 +531,7 @@ namespace TestVisioVDX
             {
                 Assert.Fail("Error log exists and we did not expect it");
             }
+            VA.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
@@ -554,6 +556,7 @@ namespace TestVisioVDX
                 System.Windows.Forms.MessageBox.Show("Error log does not exist even though we expected it to");
             }
             Assert.AreEqual(1, app.Documents.Count);
+            VA.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
