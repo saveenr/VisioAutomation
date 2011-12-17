@@ -76,7 +76,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\VisioAutomation_2007\VisioAutomation\VisioAutomation.csproj">
+    <ProjectReference Include="..\..\..\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj">
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
     </ProjectReference>
