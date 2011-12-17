@@ -11,7 +11,7 @@ namespace TestVisioAutomation
     public class AutoLayoutTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Render_With_Bezier_Connectors()
+        public void RenderDirectedGraphWithBezierConnectors()
         {
             var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 
@@ -205,7 +205,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Render_With_Dynamic_Connectors()
+        public void RenderDirectedGraphWithDynamicConnectors()
         {
             var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 
@@ -278,7 +278,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Render_Shape_with_Custom_Props()
+        public void RenderDirectedGraphWithCustomProps()
         {
             var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 

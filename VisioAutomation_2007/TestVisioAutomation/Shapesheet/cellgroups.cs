@@ -11,7 +11,7 @@ namespace TestVisioAutomation
     public class CellGroups : VisioAutomationTest
     {
         [TestMethod]
-        public void X()
+        public void VerifyCellGroupMembers()
         {
             var cells = new VA.Format.ShapeFormatCells();
             var members = cells.GetCellMembers().ToDictionary(i=>i.Name);

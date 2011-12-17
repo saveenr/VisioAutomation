@@ -31,7 +31,7 @@ namespace TestVisioAutomation
         */
 
         [TestMethod]
-        public void UndoScope()
+        public void SimpleUndoScope()
         {
             var page1 = GetNewPage();
             var app = page1.Application;
@@ -113,7 +113,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void AbortScope()
+        public void AbortUndoScope()
         {
 
             var page1 = GetNewPage();
@@ -139,7 +139,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void AbortNestedScope()
+        public void AbortNestedUndoScope()
         {
 
             var page1 = GetNewPage();
@@ -168,7 +168,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void AbortOuterScope()
+        public void AbortOuterUndoScope()
         {
 
             var page1 = GetNewPage();
