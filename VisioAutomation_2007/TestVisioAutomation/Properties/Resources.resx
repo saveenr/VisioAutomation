@@ -119,22 +119,22 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="sampleflowchart1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sampleflowchart1.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\sampleflowchart1.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="sampleflowchart2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sampleflowchart2.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\sampleflowchart2.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="sampleflowchart3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sampleflowchart3.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\sampleflowchart3.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="sampleflowchart4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sampleflowchart4.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\sampleflowchart4.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="sampleorgchart1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sampleorgchart1.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\sampleorgchart1.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="template_router__vdx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\template_router _vdx.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\template_router _vdx.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;iso-8859-1</value>
   </data>
   <data name="vdx_with_errors_1_vdx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vdx_with_errors_1_vdx.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
