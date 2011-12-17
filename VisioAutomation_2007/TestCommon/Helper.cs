@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace TestCommon
 {
-    public class TestHelper
+    public class Helper
     {
-        public readonly string OutputPath;
+        private readonly string OutputPath;
 
-        public TestHelper(string name)
+        public Helper(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -80,8 +80,8 @@ namespace TestCommon
             }
 
             return dic;
-
         }
+
         public static List<T> GetDuplicates<T>(IEnumerable<T> items)
         {
             var set = new HashSet<T>();

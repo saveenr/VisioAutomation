@@ -34,7 +34,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void CreateSampleVDX1()
         {
-            string output_filename = TestCommon.VisioTestCommon.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
             // First load a starter VDX (a.k.a "the template") - we will build a new VDX from this one
             //var template_dom = System.Xml.Linq.XDocument.Load(template_filename);
@@ -448,7 +448,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void CreateSampleVDX2()
         {
-            string output_filename = TestCommon.VisioTestCommon.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
             const string shapeMasterName = "Router";
 
@@ -513,7 +513,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void CheckNoErrorOnLoad1()
         {
-            string output_filename = TestCommon.VisioTestCommon.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
 
             var app = new IVisio.Application();
@@ -537,7 +537,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void CheckErrorOnLoad1()
         {
-            string output_filename = TestCommon.VisioTestCommon.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.vdx_with_errors_1_vdx);
 
             var app = new IVisio.Application();

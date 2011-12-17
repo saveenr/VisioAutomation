@@ -13,7 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckPersistance()
         {
-            string output_path = TestCommon.VisioTestCommon.Helper.GetTestMethodOutputFilename();
+            string output_path = TestCommon.Globals.Helper.GetTestMethodOutputFilename();
 
             if (!System.IO.Directory.Exists(output_path))
             {
@@ -30,7 +30,7 @@ namespace TestVisioAutomation
 
             var allcells = db.Cells;
 
-            var dupe_cell_names = TestCommon.TestHelper.GetDuplicates(allcells.Select(c => c.Name));
+            var dupe_cell_names = TestCommon.Helper.GetDuplicates(allcells.Select(c => c.Name));
             Assert.IsTrue(dupe_cell_names.Contains("Tabs"));
 
             Assert.AreEqual(345, allcells.Count);
@@ -38,7 +38,7 @@ namespace TestVisioAutomation
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
             Assert.AreEqual(342, visio_2007_cells.Count());
 
-            TestCommon.TestHelper.AssertNoDuplicates(allcells.Select(c => c.ID));
+            TestCommon.Helper.AssertNoDuplicates(allcells.Select(c => c.ID));
         }
 
         [TestMethod]
@@ -85,7 +85,7 @@ namespace TestVisioAutomation
             var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
             Assert.IsTrue(va_name_to_src.Count>300);
 
-            TestCommon.TestHelper.AssertNoDuplicates(visio_2007_cells.Select(i => i.NameCode));
+            TestCommon.Helper.AssertNoDuplicates(visio_2007_cells.Select(i => i.NameCode));
 
             var db_codename_to_cell = visio_2007_cells.ToDictionary(i => i.NameCode, i => i);
 
@@ -142,7 +142,7 @@ namespace TestVisioAutomation
 
             foreach (var pia_enum in pia_enums)
             {
-                var pia_enum_values = TestCommon.TestHelper.EnumToDictionary<int>(pia_enum);
+                var pia_enum_values = TestCommon.Helper.EnumToDictionary<int>(pia_enum);
                 var db_enum = db.GetAutomationEnumByName(pia_enum.Name);
                 foreach (string pia_value_name in pia_enum_values.Keys)
                 {
@@ -159,7 +159,7 @@ namespace TestVisioAutomation
             foreach (var md_enum  in db.AutomationEnums)
             {
                 var pia_type = name_to_pia_type[md_enum.Name];
-                var pia_dic = TestCommon.TestHelper.EnumToDictionary<int>(pia_type);
+                var pia_dic = TestCommon.Helper.EnumToDictionary<int>(pia_type);
                 foreach (string md_value_name in md_enum.Items.Select(i => i.Name))
                 {
                     Assert.IsTrue(pia_dic.ContainsKey(md_value_name));
@@ -184,9 +184,9 @@ namespace TestVisioAutomation
                 }
             }
 
-            var sectioindexname_to_int = TestCommon.TestHelper.EnumToDictionary<int>(typeof(IVisio.VisSectionIndices));
-            var rowindexname_to_int = TestCommon.TestHelper.EnumToDictionary<int>(typeof(IVisio.VisRowIndices));
-            var cellindexname_to_int = TestCommon.TestHelper.EnumToDictionary<int>(typeof(IVisio.VisCellIndices));
+            var sectioindexname_to_int = TestCommon.Helper.EnumToDictionary<int>(typeof(IVisio.VisSectionIndices));
+            var rowindexname_to_int = TestCommon.Helper.EnumToDictionary<int>(typeof(IVisio.VisRowIndices));
+            var cellindexname_to_int = TestCommon.Helper.EnumToDictionary<int>(typeof(IVisio.VisCellIndices));
             foreach (var db_cell in visio_2007_cells)
             {
                 if (!sectioindexname_to_int.ContainsKey(db_cell.SectionIndex))
@@ -300,7 +300,7 @@ namespace TestVisioAutomation
         {
             var db = VA.Metadata.MetadataDB.Load();
 
-            string filename = TestCommon.VisioTestCommon.Helper.GetTestMethodOutputFilename(".txt");
+            string filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".txt");
 
             db.ExportCode(filename);
         }

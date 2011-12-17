@@ -92,7 +92,7 @@ namespace TestVisioAutomation
             var src_charfont = VisioAutomation.ShapeSheet.SRCConstants.Char_Font;
             var cell_charfont = s1.CellsSRC[src_charfont.Section, src_charfont.Row, src_charfont.Cell];
             cell_charfont.FormulaU = font.ID.ToString(System.Globalization.CultureInfo.InvariantCulture);
-            s1.Text = TestCommon.TestHelper.LoremIpsumText;
+            s1.Text = TestCommon.Helper.LoremIpsumText;
 
             VisioAutomation.Text.TextHelper.FitShapeToText(page1, new[] { s1 });
 
