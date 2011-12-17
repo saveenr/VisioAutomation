@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<table>
+  <row ID="sec_1dendpoints" Name="OneDEndpoints" DisplayName="1D Endpoints" Enum="visSectionObject" />
+  <row ID="sec_actions" Name="Actions" DisplayName="Actions" Enum="visSectionAction" />
+  <row ID="sec_alignment" Name="Alignment" DisplayName="Alignment" Enum="visSectionObject" />
+  <row ID="sec_annotation" Name="Annotation" DisplayName="Annotation" Enum="visSectionAnnotation" />
+  <row ID="sec_character" Name="Character" DisplayName="Character" Enum="visSectionCharacter" />
+  <row ID="sec_connectionpoints" Name="ConnectionPoints" DisplayName="Connection Points" Enum="visSectionConnectionPts" />
+  <row ID="sec_controls" Name="Controls" DisplayName="Controls" Enum="visSectionControls" />
+  <row ID="sec_customproperties" Name="CustomPropertiesCells" DisplayName="Custom Properties Cells" Enum="visSectionProp" />
+  <row ID="sec_documentproperties" Name="DocumentProperties" DisplayName="Document Properties" Enum="visSectionObject" />
+  <row ID="sec_events" Name="Events" DisplayName="Events" Enum="visSectionObject" />
+  <row ID="sec_fillformat" Name="FillFormat" DisplayName="Fill Format" Enum="visSectionObject" />
+  <row ID="sec_foreignimageinfo" Name="ForeignImageInfo" DisplayName="Foreign Image Info" Enum="visSectionObject" />
+  <row ID="sec_geometry" Name="Geometry" DisplayName="Geometry" Enum="visSectionFirstComponent" />
+  <row ID="sec_glueinfo" Name="GlueInfo" DisplayName="Glue Info" Enum="visSectionObject" />
+  <row ID="sec_groupproperties" Name="GroupProperties" DisplayName="Group Properties" Enum="visSectionObject" />
+  <row ID="sec_hyperlinks" Name="Hyperlinks" DisplayName="Hyperlinks" Enum="visSectionHyperlink" />
+  <row ID="sec_imageproperties" Name="ImageProperties" DisplayName="Image Properties" Enum="visSectionObject" />
+  <row ID="sec_layermembership" Name="LayerMembership" DisplayName="Layer Membership" Enum="visSectionObject" />
+  <row ID="sec_layers" Name="Layers" DisplayName="Layers" Enum="visSectionLayer" />
+  <row ID="sec_lineformat" Name="LineFormat" DisplayName="Line Format" Enum="visSectionObject" />
+  <row ID="sec_miscellaneous" Name="Miscellaneous" DisplayName="Miscellaneous" Enum="visSectionObject" />
+  <row ID="sec_onedendpoints" Name="OneDEndPointsCells" DisplayName="1D Endpoints Cells" Enum="visSectionObject" />
+  <row ID="sec_pagelayout" Name="PageLayout" DisplayName="Page Layout" Enum="visSectionObject" />
+  <row ID="sec_pageproperties" Name="PageProperties" DisplayName="Page Properties" Enum="visSectionObject" />
+  <row ID="sec_paragraph" Name="Paragraph" DisplayName="Paragraph" Enum="visSectionParagraph" />
+  <row ID="sec_printproperties" Name="PrintProperties" DisplayName="Print Properties" Enum="visSectionObject" />
+  <row ID="sec_protection" Name="Protection" DisplayName="Protection" Enum="visSectionObject" />
+  <row ID="sec_reviewer" Name="Reviewer" DisplayName="Reviewer" Enum="visSectionReviewer" />
+  <row ID="sec_rulerandgrid" Name="RulerAndGrid" DisplayName="Ruler &amp; Grid" Enum="visSectionObject" />
+  <row ID="sec_scratch" Name="Scratch" DisplayName="Scratch" Enum="visSectionObject" />
+  <row ID="sec_shapedata" Name="ShapeData" DisplayName="Shape Data" Enum="visSectionObject" />
+  <row ID="sec_shapelayout" Name="ShapeLayout" DisplayName="Shape Layout" Enum="visSectionObject" />
+  <row ID="sec_shapetransform" Name="ShapeTransform" DisplayName="Shape Transform" Enum="visSectionObject" />
+  <row ID="sec_smarttags" Name="SmartTags" DisplayName="SmartTags" Enum="visSectionSmartTag" />
+  <row ID="sec_styleproperties" Name="StyleProperties" DisplayName="Style Properties" Enum="visSectionObject" />
+  <row ID="sec_tabs" Name="Tabs" DisplayName="Tabs" Enum="visSectionTab" />
+  <row ID="sec_textblockformat" Name="TextBlockFormat" DisplayName="TextBlock Format" Enum="visSectionObject" />
+  <row ID="sec_textfields" Name="TextFields" DisplayName="Text Fields" Enum="visSectionTextField" />
+  <row ID="sec_texttransform" Name="TextTransform" DisplayName="Text Transform" Enum="visSectionObject" />
+  <row ID="sec_userdefinedcells" Name="UserDefinedCells" DisplayName="User-Defined Cells" Enum="visSectionUser" />
+</table>

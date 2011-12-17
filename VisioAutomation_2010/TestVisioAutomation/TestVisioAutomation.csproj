@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F04E9277-48D2-4822-9AE6-E7E6ADB262C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestVisioAutomation</RootNamespace>
+    <AssemblyName>TestVisioAutomation</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Visio, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Windows\assembly\GAC\stdole\7.0.3300.0__b03f5f7f11d50a3a\stdole.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Connections\PathAnalysis_Tests.cs" />
+    <Compile Include="AssertVA.cs" />
+    <Compile Include="Layout\BoxLayoutTests.cs" />
+    <Compile Include="ShapeGeometryHelper_Tests.cs" />
+    <Compile Include="Drawing\SnappingGrid.cs" />
+    <Compile Include="Extensions\ColorsExtensions.cs" />
+    <Compile Include="Extensions\WindowsExtensions.cs" />
+    <Compile Include="Extensions\LayersExtensions.cs" />
+    <Compile Include="Extensions\DocumentsExtensions_Tests.cs" />
+    <Compile Include="Extensions\MastersExtensions_Tests.cs" />
+    <Compile Include="Extensions\SectionExtensions_Tests.cs" />
+    <Compile Include="Drawing\BezierTests.cs" />
+    <Compile Include="Layout\DrawingHelperTests.cs" />
+    <Compile Include="Layout\PieSliceTests.cs" />
+    <Compile Include="Layout\LayoutHelperTests.cs" />
+    <Compile Include="Metadata\MetadataTests.cs" />
+    <Compile Include="Scripting\ScriptingSessionTests.cs" />
+    <Compile Include="Shapesheet\CellGroups.cs" />
+    <Compile Include="Shapesheet\ShapeSheetMetadata.cs" />
+    <Compile Include="Shapesheet\ShapeSheetHelper_Tests.cs" />
+    <Compile Include="TestHelper.cs" />
+    <Compile Include="Scripting\ScriptingCellSRCTest.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Scripting\ScriptingPageTests.cs" />
+    <Compile Include="Layout\MSAGLLayoutTests.cs" />
+    <Compile Include="Layout\TreeTests.cs" />
+    <Compile Include="DOM\DOM_Draw_tests.cs" />
+    <Compile Include="Layout\OrgChartTests.cs" />
+    <Compile Include="DOM\DOM_Basic_Tests.cs" />
+    <Compile Include="VDX\VDX_Tests.cs" />
+    <Compile Include="VisioTestCommon.cs" />
+    <Compile Include="Core\PerfTests.cs" />
+    <Compile Include="Core\CustomPropertiesTest.cs" />
+    <Compile Include="Extensions\SelectionExtensions.cs" />
+    <Compile Include="UtilTests\BitArray2D.cs" />
+    <Compile Include="Connections\TransitiveClosureTest.cs" />
+    <Compile Include="UtilTests\DrawingHelper_Tests.cs" />
+    <Compile Include="UserDefinedCells\UserDefinedCellHelper_Test.cs" />
+    <Compile Include="Scripting\ScriptingArrangeTests.cs" />
+    <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
+    <Compile Include="Scripting\ScriptingConnectTests.cs" />
+    <Compile Include="Scripting\ScriptingControlTests.cs" />
+    <Compile Include="Scripting\ScriptingCustomPropTests.cs" />
+    <Compile Include="Scripting\ScriptingDrawTests.cs" />
+    <Compile Include="Scripting\ScriptingGroupTests.cs" />
+    <Compile Include="Scripting\ScriptingAppTests.cs" />
+    <Compile Include="Scripting\ScriptingSessionTest.cs" />
+    <Compile Include="Scripting\ScriptingSelectionTests.cs" />
+    <Compile Include="Scripting\ScriptingTextTests.cs" />
+    <Compile Include="Core\Struct_Sizes.cs" />
+    <Compile Include="Shapesheet\ShapeSheet_Update.cs" />
+    <Compile Include="Core\ConnectionTests.cs" />
+    <Compile Include="Extensions\ApplicationExtensionsTests.cs" />
+    <Compile Include="Shapesheet\ShapeSheet_Query.cs" />
+    <Compile Include="Core\ShapeEnumerationTests.cs" />
+    <Compile Include="Extensions\ConnectsExtensionsTest.cs" />
+    <Compile Include="Extensions\DocumentExtensions_Tests.cs" />
+    <Compile Include="Core\DocumentTests.cs" />
+    <Compile Include="Extensions\FontsExtensions_Tests.cs" />
+    <Compile Include="VisioAutomationTest.cs" />
+    <Compile Include="Extensions\PageDrawTests.cs" />
+    <Compile Include="Extensions\PagesExtensions_Tests.cs" />
+    <Compile Include="Text\Text_Tests.cs" />
+    <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
+    <Compile Include="Controls\ControlHelper_Tests.cs" />
+    <Compile Include="UtilTests\PageHelper_Tests.cs" />
+    <Compile Include="Convert_Tests.cs" />
+    <Compile Include="ShapeHelper_Tests.cs" />
+    <Compile Include="UtilTests\Stencil_Tests.cs" />
+    <Compile Include="Text\TextHelper_Tests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extensions\CustomPropsTest.cs" />
+    <Compile Include="Core\TabStop_Tests.cs" />
+    <Compile Include="Core\CharacterFormatTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
+      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
+      <Name>VisioAutomation.Layout.MSAGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.Metadata\VisioAutomation.Metadata.csproj">
+      <Project>{6F0813C8-DBA0-4F93-BF96-55012DA737A3}</Project>
+      <Name>VisioAutomation.Metadata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
+      <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
+      <Name>VisioAutomation.Scripting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.VDX\VisioAutomation.VDX.csproj">
+      <Project>{A2BD039F-38EB-4E19-A1A4-8E6730CBC4E9}</Project>
+      <Name>VisioAutomation.VDX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
+      <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
+      <Name>VisioAutomation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Shadow Include="Test References\VisioAutomation.accessor" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sampleflowchart1.txt" />
+    <None Include="Resources\sampleflowchart2.txt" />
+    <None Include="Resources\sampleflowchart3.txt" />
+    <None Include="Resources\sampleflowchart4.txt" />
+    <None Include="Resources\template_router.vdx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sampleorgchart1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\template_router _vdx.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vdx_with_errors_1_vdx.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
