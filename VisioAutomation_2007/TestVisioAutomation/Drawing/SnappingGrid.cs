@@ -39,7 +39,7 @@ namespace TestVisioAutomation
 
         private void AssertSnap(double ex, double ey, VA.Drawing.SnappingGrid g1, double ix, double iy, double delta)
         {
-            AssertX.AreEqual(ex, ey, g1.Snap(ix, iy), delta);            
+            AssertVA.AreEqual(ex, ey, g1.Snap(ix, iy), delta);            
         }
 
     }

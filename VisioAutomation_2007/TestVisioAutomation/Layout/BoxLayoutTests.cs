@@ -45,9 +45,9 @@ namespace TestVisioAutomation
             var n1 = root.AddNode(10, 5);
             layout.PerformLayout();
             double delta = 0.00000001;
-            AssertX.AreEqual(0, 0, 10, 5, n1.Rectangle, delta);
+            AssertVA.AreEqual(0, 0, 10, 5, n1.Rectangle, delta);
 
-            AssertX.AreEqual(0, 0, 10, 5, root.Rectangle, delta);
+            AssertVA.AreEqual(0, 0, 10, 5, root.Rectangle, delta);
             
         }
 
@@ -61,7 +61,7 @@ namespace TestVisioAutomation
             root.Padding = 1.0;
             layout.PerformLayout();
             double delta = 0.00000001;
-            AssertX.AreEqual(1.0, 1.0, 11, 6, n1.Rectangle, delta);
+            AssertVA.AreEqual(1.0, 1.0, 11, 6, n1.Rectangle, delta);
 
 
         }
@@ -81,8 +81,8 @@ namespace TestVisioAutomation
             layout.PerformLayout();
             double delta = 0.00000001;
 
-            AssertX.AreEqual(1, 1, 2, 3, n1.Rectangle, delta);
-            AssertX.AreEqual(1, 3, 3, 6, n2.Rectangle, delta);
+            AssertVA.AreEqual(1, 1, 2, 3, n1.Rectangle, delta);
+            AssertVA.AreEqual(1, 3, 3, 6, n2.Rectangle, delta);
         }
 
 
@@ -106,8 +106,8 @@ namespace TestVisioAutomation
             var doc = draw_layout(layout);
             //doc.Close(true);
 
-            AssertX.AreEqual(2, 1, 3, 3, n1.Rectangle, delta);
-            AssertX.AreEqual(1, 3, 3, 6, n2.Rectangle, delta);
+            AssertVA.AreEqual(2, 1, 3, 3, n1.Rectangle, delta);
+            AssertVA.AreEqual(1, 3, 3, 6, n2.Rectangle, delta);
 
         }
 
@@ -153,9 +153,9 @@ namespace TestVisioAutomation
             layout.PerformLayout();
             double delta = 0.00000001;
 
-            AssertX.AreEqual(1, 2, 2, 4, n1.Rectangle, delta);
+            AssertVA.AreEqual(1, 2, 2, 4, n1.Rectangle, delta);
 
-            AssertX.AreEqual(2, 1, 4, 4, n2.Rectangle, delta);
+            AssertVA.AreEqual(2, 1, 4, 4, n2.Rectangle, delta);
         }
 
         [TestMethod]

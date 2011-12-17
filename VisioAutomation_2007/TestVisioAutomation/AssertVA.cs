@@ -3,7 +3,7 @@ using VisioAutomation.Drawing;
 
 namespace TestVisioAutomation
 {
-    public static class AssertX
+    public static class AssertVA
     {
         public static void AreEqual(Point p1, Point p2, double delta)
         {
