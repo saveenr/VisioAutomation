@@ -104,7 +104,6 @@
     <Compile Include="Shapesheet\CellGroups.cs" />
     <Compile Include="Shapesheet\ShapeSheetMetadata.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper_Tests.cs" />
-    <Compile Include="TestHelper.cs" />
     <Compile Include="Scripting\ScriptingCellSRCTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

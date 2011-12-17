@@ -352,6 +352,15 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        private static VA.ShapeSheet.Query.CellQuery BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
+        {
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            foreach (var src in srcs)
+            {
+                query.AddColumn(src);
+            }
+            return query;
+        }
 
         [TestMethod]
         public void Verify_CellQuery_Results_for_multiple_types()
@@ -373,7 +382,7 @@ namespace TestVisioAutomation
             // now retrieve the formulas with GetFormulas
 
 
-            var query = TestHelper.BuildCellQuery(new[] { cell_fg, cell_bg, cell_pat });
+            var query = BuildCellQuery(new[] { cell_fg, cell_bg, cell_pat });
             var formulas = query.GetFormulas(s1);
 
             // now verify that the formulas were actually set

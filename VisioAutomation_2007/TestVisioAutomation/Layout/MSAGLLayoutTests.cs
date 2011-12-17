@@ -308,7 +308,7 @@ namespace TestVisioAutomation
             Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Formula);
 
             var pagesize = page1.GetSize();
-            TestHelper.AreEqual(4.00 , 3.00, pagesize, 0.05);
+            AssertVA.AreEqual(4.00, 3.00, pagesize, 0.05);
 
             doc.Close(true);
         }

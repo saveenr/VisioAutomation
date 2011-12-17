@@ -24,5 +24,11 @@ namespace TestVisioAutomation
             Assert.AreEqual(right, r.Right, delta);
             Assert.AreEqual(top, r.Top, delta);
         }
+
+        public static void AreEqual(double x, double y, Size p, double delta)
+        {
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(x, p.Width, delta);
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(y, p.Height, delta);
+        }
     }
 }

@@ -318,7 +318,9 @@ namespace TestVisioAutomation
 
             var c0 = new VA.DOM.ShapeCells();
             c0.CharSize = 0.6;
-            TestHelper.setformulas(c0, page1, s1);
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            c0.Apply(update, s1.ID16);
+            update.Execute(page1);
 
             var c1 = new VA.Text.CharacterFormatCells();
             c1.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
