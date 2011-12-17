@@ -95,7 +95,7 @@
     <Compile Include="Commands\Update_ShapeSheet.cs" />
     <Compile Include="Commands\New_ShapeSheetUpdate.cs" />
     <Compile Include="Commands\Set_TextStyle.cs" />
-    <Compile Include="DTUtil.cs" />
+    <Compile Include="DataUtil.cs" />
     <Compile Include="Commands\Get_Point.cs" />
     <Compile Include="Commands\Draw_Grid.cs" />
     <Compile Include="Commands\New_Master.cs" />

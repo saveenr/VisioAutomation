@@ -16,7 +16,7 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
 
             System.Data.DataTable dt = null;
-            dt = DTUtil.ToDataTable<string>(scriptingsession.ShapeSheet.QueryFormulas(this.SRC));
+            dt = DataUtil.ToDataTable<string>(scriptingsession.ShapeSheet.QueryFormulas(this.SRC));
             this.WriteObject(dt);
         }
     }

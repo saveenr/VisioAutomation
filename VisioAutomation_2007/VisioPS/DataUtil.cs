@@ -2,7 +2,7 @@
 
 namespace VisioPS
 {
-    internal class DTUtil
+    internal class DataUtil
     {
         public static System.Data.DataTable ToDataTable<T>(VA.ShapeSheet.Data.Table<T> table)
         {

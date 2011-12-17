@@ -23,7 +23,7 @@ namespace VisioPS.Commands
 
             System.Data.DataTable dt = null;
 
-            dt = DTUtil.ToDataTable<string>(scriptingsession.ShapeSheet.QueryFormulas(this.Section, this.Cells));
+            dt = DataUtil.ToDataTable<string>(scriptingsession.ShapeSheet.QueryFormulas(this.Section, this.Cells));
             this.WriteObject(dt);
         }
     }
