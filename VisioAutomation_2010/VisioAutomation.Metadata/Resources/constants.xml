@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <table>
+
+  H
   <row ID="automationenum_visarcsweepflags" Enum="VisArcSweepFlags" Name="visArcSweepFlagConcave" Value="0" />
   <row ID="automationenum_visarcsweepflags" Enum="VisArcSweepFlags" Name="visArcSweepFlagConvex" Value="1" />
   <row ID="automationenum_visautoconnectdir" Enum="VisAutoConnectDir" Name="visAutoConnectDirNone" Value="0" />
@@ -40,6 +42,11 @@
   <row ID="automationenum_visboundingboxargs" Enum="VisBoundingBoxArgs" Name="visBBoxIncludeGuides" Value="4096" />
   <row ID="automationenum_visboundingboxargs" Enum="VisBoundingBoxArgs" Name="visBBoxDrawingCoords" Value="8192" />
   <row ID="automationenum_visboundingboxargs" Enum="VisBoundingBoxArgs" Name="visBBoxNoNonPrint" Value="16384" />
+  <row ID="automationenum_visbuiltinstenciltypes" Enum="VisBuiltInStencilTypes" Name="visBuiltInStencilBackgrounds" Value="0" />
+  <row ID="automationenum_visbuiltinstenciltypes" Enum="VisBuiltInStencilTypes" Name="visBuiltInStencilBorders" Value="1" />
+  <row ID="automationenum_visbuiltinstenciltypes" Enum="VisBuiltInStencilTypes" Name="visBuiltInStencilContainers" Value="2" />
+  <row ID="automationenum_visbuiltinstenciltypes" Enum="VisBuiltInStencilTypes" Name="visBuiltInStencilCallouts" Value="3" />
+  <row ID="automationenum_visbuiltinstenciltypes" Enum="VisBuiltInStencilTypes" Name="visBuiltInStencilLegends" Value="4" />
   <row ID="automationenum_viscellerror" Enum="VisCellError" Name="visErrorSuccess" Value="0" />
   <row ID="automationenum_viscellerror" Enum="VisCellError" Name="visErrorDivideByZero" Value="39" />
   <row ID="automationenum_viscellerror" Enum="VisCellError" Name="visErrorValue" Value="47" />
@@ -47,11 +54,11 @@
   <row ID="automationenum_viscellerror" Enum="VisCellError" Name="visErrorName" Value="61" />
   <row ID="automationenum_viscellerror" Enum="VisCellError" Name="visErrorNumber" Value="68" />
   <row ID="automationenum_viscellerror" Enum="VisCellError" Name="visErrorNotAvailable" Value="74" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterFont" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPermX" Value="0" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesLeftMargin" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOResizePage" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormPinX" Value="0" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterFont" Value="0" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCellFirst" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillForegnd" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visIndentFirst" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellTheData" Value="0" />
@@ -68,7 +75,7 @@
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompNoFill" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageGamma" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visX" Value="0" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCellFirst" Value="0" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesLeftMargin" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visInfiniteLineX1" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="vis1DBeginX" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseCenterX" Value="0" />
@@ -89,349 +96,358 @@
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerMember" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagX" Value="0" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterColor" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visIndentLeft" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesRightMargin" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillBkgnd" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visStyleIncludesFill" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTabPos" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageHeight" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormPinY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineColor" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldEditMode" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCopyright" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkRightMargin" Value="1" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYRulerDensity" Value="1" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompNoLine" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageContrast" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPermY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visInfiniteLineY1" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellTheText" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseCenterY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkRightMargin" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionPrompt" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockHeight" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visUserPrompt" Value="1" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocLockPreview" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsPrompt" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOEnableGrid" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkAddress" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignCenter" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visReviewerInitials" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visY" Value="1" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupDisplayMode" Value="1" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="vis1DBeginY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNonPrinting" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPermY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visInfiniteLineY1" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillBkgnd" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignCenter" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visIndentLeft" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseCenterY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionPrompt" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockHeight" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormPinY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visUserPrompt" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesRightMargin" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsPrompt" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visStyleIncludesFill" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineColor" Value="1" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFrgnImgOffsetY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkAddress" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageHeight" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCopyright" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visReviewerInitials" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOEnableGrid" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellTheText" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldEditMode" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationY" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTabPos" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNonPrinting" Value="1" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageContrast" Value="1" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagY" Value="1" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchA" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkTopMargin" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesTopMargin" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visInfiniteLineX2" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPermeablePlace" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGuideFlags" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLODynamicsOff" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMajorX" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormWidth" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visControlX" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignRight" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineKnot" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillPattern" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPolylineData" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctDirX" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSKnot" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockMoveX" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNoCtlHandles" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellDblClick" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="vis1DEndX" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlXDyn" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionHelp" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompNoShow" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerColor" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupIsDropTarget" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageShdwOffsetX" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterStyle" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillPattern" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkTopMargin" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLinePattern" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBow" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockMoveX" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visIndentRight" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchA" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFrgnImgWidth" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsLabel" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTabAlign" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMajorX" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPermeablePlace" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineKnot" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visStyleIncludesText" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSKnot" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkSubAddress" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTabAlign" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctDirX" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesTopMargin" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctA" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocMetric" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLinePattern" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visReviewerColor" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visStyleIncludesText" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellDblClick" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFrgnImgWidth" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationReviewerID" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBow" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="vis1DEndX" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldFormat" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visInfiniteLineX2" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageShdwOffsetX" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visControlX" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageBrightness" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visIndentRight" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignRight" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationReviewerID" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompNoShow" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldFormat" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGuideFlags" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLODynamicsOff" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionHelp" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagName" Value="2" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineRounding" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsFormat" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageShdwOffsetY" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMajorY" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupIsSnapTarget" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visControlY" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkExtraInfo" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineKnot2" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormHeight" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkBottomMargin" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellXFMod" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignTop" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompNoSnap" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionAction" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visReviewerReviewerID" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerStatus" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocAddMarkup" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPolylineData" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNoCtlHandles" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupIsDropTarget" Value="2" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormWidth" Value="2" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterCase" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFrgnImgHeight" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOCtrlAsInput" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesBottomMargin" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSpaceLine" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationMarkerIndex" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSWeight" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchB" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockMoveY" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwForegnd" Value="3" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlYDyn" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visInfiniteLineY2" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctB" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagXJustify" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNoAlignBox" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="vis1DEndY" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldType" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageSharpen" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctDirY" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesBottomMargin" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockMoveY" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocAddMarkup" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompNoSnap" Value="3" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visStyleHidden" Value="3" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchC" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineEndArrowSize" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visInfiniteLineY2" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLORelationships" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMajorY" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwForegnd" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visControlY" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageShdwOffsetY" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineKnot2" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkBottomMargin" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSWeight" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctDirY" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormHeight" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignTop" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionAction" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellXFMod" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="vis1DEndY" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupIsSnapTarget" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerStatus" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOCtrlAsInput" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNoAlignBox" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchB" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsFormat" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldType" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkExtraInfo" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFrgnImgHeight" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visReviewerReviewerID" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctB" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationMarkerIndex" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSpaceLine" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineRounding" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageSharpen" Value="3" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagXJustify" Value="3" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlXCon" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMinorX" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocViewMarkup" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visReviewerCurrentIndex" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerVisible" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctC" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompPath" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwBkgnd" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockAspect" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellDrop" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineArrowSize" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEccentricityAngle" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterPos" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSpaceBefore" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkVerticalAlign" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationDate" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctType" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormLocPinX" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionChecked" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineKnot3" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visUpdateAlignBox" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOAvoidPageBreaks" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMinorX" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageScale" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupIsTextEditTarget" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSpaceBefore" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEccentricityAngle" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkVerticalAlign" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineKnot3" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctType" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSKnotPrev" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageBlur" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionChecked" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignMiddle" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormLocPinX" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocViewMarkup" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerVisible" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterPos" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visUpdateAlignBox" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchC" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsSortKey" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldUICategory" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkFrame" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwBkgnd" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visReviewerCurrentIndex" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctC" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationDate" Value="4" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineEndArrowSize" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagYJustify" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellDrop" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageScale" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageBlur" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSKnotPrev" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesScaleX" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignMiddle" Value="4" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXRulerOrigin" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockAspect" Value="4" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSpaceAfter" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSWeightPrev" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageDenoise" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesScaleY" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupDontMoveChildren" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignBottom" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMinorY" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYRulerOrigin" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAspectRatio" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctD" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineDegree" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldUICode" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHideText" Value="5" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockDelete" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionDisabled" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineBeginArrow" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageDrawingScale" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormLocPinY" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerPrint" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkBkgnd" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsType" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlYCon" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkNewWin" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctAutoGen" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterFontScale" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGroupDontMoveChildren" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesScaleY" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSplineDegree" Value="5" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visScratchD" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationComment" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSWeightPrev" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctD" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkBkgnd" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageDenoise" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSpaceAfter" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAlignBottom" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionDisabled" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCompNoQuickDrag" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerPrint" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEllipseMinorY" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHideText" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineBeginArrow" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsType" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterFontScale" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkNewWin" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlYCon" Value="5" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwPattern" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAspectRatio" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationComment" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldUICode" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormLocPinY" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCnnctAutoGen" Value="5" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagDisplayMode" Value="5" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormAngle" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionReadOnly" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPagesX" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visVerticalText" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldUIFormat" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerActive" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlGlue" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsInvis" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageTransparency" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageDrawSizeType" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageDrawingScale" Value="5" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYRulerOrigin" Value="5" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNURBSData" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterLocale" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockBegin" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationLangID" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineEndArrow" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXGridDensity" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillForegndTrans" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagButtonFace" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkDefaultTabStop" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerActive" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionReadOnly" Value="6" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHorzAlign" Value="6" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionInvisible" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsAsk" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPagesY" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkDefault" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockBegin" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visVerticalText" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageDrawSizeType" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsInvis" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterLocale" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visImageTransparency" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldUIFormat" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillForegndTrans" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkDefaultTabStop" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visAnnotationLangID" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormAngle" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlGlue" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineEndArrow" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagButtonFace" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPagesX" Value="6" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXGridDensity" Value="6" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineEndCap" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBulletIndex" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldCalendar" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageDrawScaleType" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockEnd" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormFlipX" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYGridDensity" Value="7" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterSize" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillBkgndTrans" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlType" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPagesY" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsAsk" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormFlipX" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkDefault" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBulletIndex" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYGridDensity" Value="7" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerLock" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageDrawScaleType" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionInvisible" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillBkgndTrans" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockEnd" Value="7" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagDisabled" Value="7" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOPlaceStyle" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkInvisible" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDynFeedback" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesCenterX" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXGridSpacing" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockRotate" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOFixedCode" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerSnap" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterDblUnderline" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionBeginGroup" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlTip" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldCalendar" Value="7" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlType" Value="7" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBulletString" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormFlipY" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkInvisible" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionBeginGroup" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerSnap" Value="8" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwForegndTrans" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockRotate" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXGridSpacing" Value="8" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineBeginArrowSize" Value="8" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineColorTrans" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerGlue" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormResizeMode" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGlueType" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPlowCode" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYGridSpacing" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOFixedCode" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDynFeedback" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormFlipY" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesCenterX" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCtlTip" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOPlaceStyle" Value="8" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterDblUnderline" Value="8" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocPreviewQuality" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesCenterY" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterOverline" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockCrop" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBulletFont" Value="9" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwBkgndTrans" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYGridSpacing" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPlowCode" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLineColorTrans" Value="9" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLORouteStyle" Value="9" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocPreviewScope" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockVtxEdit" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwType" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerNameUniv" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldObjectKind" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterStrikethru" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visWalkPref" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBulletFont" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockCrop" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterOverline" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visGlueType" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerGlue" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesCenterY" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionFlyoutChild" Value="9" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXFormResizeMode" Value="9" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLORouteStyle" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOPlaceDepth" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXGridOrigin" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkDirection" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocPreviewScope" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerNameUniv" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwType" Value="10" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesOnPage" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOPlaceDepth" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkDirection" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFieldObjectKind" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visWalkPref" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visXGridOrigin" Value="10" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLocalizeBulletFont" Value="10" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwOffsetX" Value="11" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYGridOrigin" Value="11" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterStrikethru" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockVtxEdit" Value="10" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockTextEdit" Value="11" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPrintGrid" Value="11" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerColorTrans" Value="11" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visYGridOrigin" Value="11" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBegTrigger" Value="11" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOPlowCode" Value="11" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwOffsetX" Value="11" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBulletFontSize" Value="11" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTxtBlkBkgndTrans" Value="11" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPlaceStyle" Value="11" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visBulletFontSize" Value="11" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockTextEdit" Value="11" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLayerColorTrans" Value="11" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwOffsetY" Value="12" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockFormat" Value="12" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEndTrigger" Value="12" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOPlowCode" Value="11" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOConFixedCode" Value="12" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwOffsetY" Value="12" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterPerpendicular" Value="12" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTextPosAfterBullet" Value="12" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEndTrigger" Value="12" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpCode" Value="12" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockFormat" Value="12" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visTextPosAfterBullet" Value="12" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOJumpCode" Value="13" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwObliqueAngle" Value="13" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLOFlags" Value="13" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpStyle" Value="13" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFlags" Value="13" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterDoubleStrikethrough" Value="13" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockGroup" Value="13" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFlags" Value="13" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwObliqueAngle" Value="13" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOJumpCode" Value="13" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpDirX" Value="14" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwScaleFactor" Value="14" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsLangID" Value="14" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLOInteraction" Value="14" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionTagName" Value="14" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visFillShdwScaleFactor" Value="14" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterRTLText" Value="14" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockCalcWH" Value="14" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOJumpStyle" Value="14" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpDirX" Value="14" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterRTLText" Value="14" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionTagName" Value="14" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockCalcWH" Value="14" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionButtonFace" Value="15" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsCalendar" Value="15" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpDirY" Value="15" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterUseVertical" Value="15" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSmartTagDescription" Value="15" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCustPropsCalendar" Value="15" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLOBehavior" Value="15" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockSelect" Value="15" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visHLinkSortKey" Value="15" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterLetterspace" Value="16" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockSelect" Value="15" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterUseVertical" Value="15" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpDirY" Value="15" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOJumpDirX" Value="16" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockCustProp" Value="16" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPageOrientation" Value="16" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionSortKey" Value="16" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineToNodeX" Value="16" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOJumpDirX" Value="16" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visComment" Value="16" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDropSource" Value="17" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visActionSortKey" Value="16" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterLetterspace" Value="16" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOJumpDirY" Value="17" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDropSource" Value="17" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockFromGroupFormat" Value="17" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterColorTrans" Value="17" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineToNodeY" Value="17" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPaperKind" Value="17" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterColorTrans" Value="17" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockThemeColors" Value="18" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOPlaceFlip" Value="18" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPaperSource" Value="18" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visNoLiveDynamics" Value="18" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOBlockSizeX" Value="18" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockThemeColors" Value="18" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPrintPropertiesPaperSource" Value="18" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visLockThemeEffects" Value="19" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOBlockSizeY" Value="19" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visDocLangID" Value="19" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjLocalizeMerge" Value="19" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOLineRouteExt" Value="19" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOBlockSizeY" Value="19" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOAvenueSizeX" Value="20" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOSplit" Value="20" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOAvenueSizeY" Value="21" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOSplittable" Value="21" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineToLineX" Value="22" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLODisplayLevel" Value="22" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visEvtCellMultiDrop" Value="22" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineToLineX" Value="22" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLORelChanged" Value="23" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineToLineY" Value="23" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visSLOCategoryChanged" Value="24" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpFactorX" Value="24" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjCalendar" Value="25" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOJumpFactorY" Value="25" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjLangID" Value="26" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageInhibitSnap" Value="26" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineAdjustFrom" Value="26" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjKeywords" Value="27" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineAdjustTo" Value="27" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjKeywords" Value="27" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjDropOnPageScale" Value="28" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOPlaceFlip" Value="28" />
-  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjTheme" Value="29" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOLineRouteExt" Value="29" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visObjTheme" Value="29" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPLOSplit" Value="30" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageUIVisibility" Value="34" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageShdwType" Value="35" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageShdwObliqueAngle" Value="36" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageShdwScaleFactor" Value="37" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageDrawResizeType" Value="38" />
+  <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visPageZOrderChanged" Value="39" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterAsianFont" Value="51" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterComplexScriptFont" Value="52" />
   <row ID="automationenum_viscellindices" Enum="VisCellIndices" Name="visCharacterLocalizeFont" Value="53" />
@@ -779,11 +795,48 @@
   <row ID="automationenum_viscellvals" Enum="VisCellVals" Name="visGuideXActive" Value="1024" />
   <row ID="automationenum_viscellvals" Enum="VisCellVals" Name="visLOBRouteManual" Value="1024" />
   <row ID="automationenum_viscellvals" Enum="VisCellVals" Name="visGuideYActive" Value="2048" />
+  <row ID="automationenum_viscenterviewflags" Enum="VisCenterViewFlags" Name="visCenterViewDefault" Value="0" />
+  <row ID="automationenum_viscenterviewflags" Enum="VisCenterViewFlags" Name="visCenterViewIfOffScreen" Value="1" />
+  <row ID="automationenum_viscenterviewflags" Enum="VisCenterViewFlags" Name="visCenterViewSelectShape" Value="2" />
   <row ID="automationenum_vischarsbias" Enum="VisCharsBias" Name="visBiasLetVisioChoose" Value="0" />
   <row ID="automationenum_vischarsbias" Enum="VisCharsBias" Name="visBiasLeft" Value="1" />
   <row ID="automationenum_vischarsbias" Enum="VisCharsBias" Name="visBiasRight" Value="2" />
+  <row ID="automationenum_visconnectedshapesflags" Enum="VisConnectedShapesFlags" Name="visConnectedShapesAllNodes" Value="0" />
+  <row ID="automationenum_visconnectedshapesflags" Enum="VisConnectedShapesFlags" Name="visConnectedShapesIncomingNodes" Value="1" />
+  <row ID="automationenum_visconnectedshapesflags" Enum="VisConnectedShapesFlags" Name="visConnectedShapesOutgoingNodes" Value="2" />
+  <row ID="automationenum_visconnectorends" Enum="VisConnectorEnds" Name="visConnectorBeginpoint" Value="0" />
+  <row ID="automationenum_visconnectorends" Enum="VisConnectorEnds" Name="visConnectorEndPoint" Value="1" />
+  <row ID="automationenum_visconnectorends" Enum="VisConnectorEnds" Name="visConnectorBothEnds" Value="2" />
+  <row ID="automationenum_viscontainerautoresize" Enum="VisContainerAutoResize" Name="visContainerAutoResizeNone" Value="0" />
+  <row ID="automationenum_viscontainerautoresize" Enum="VisContainerAutoResize" Name="visContainerAutoResizeExpand" Value="1" />
+  <row ID="automationenum_viscontainerautoresize" Enum="VisContainerAutoResize" Name="visContainerAutoResizeExpandContract" Value="2" />
+  <row ID="automationenum_viscontainerflags" Enum="VisContainerFlags" Name="visContainerFlagsDefault" Value="0" />
+  <row ID="automationenum_viscontainerflags" Enum="VisContainerFlags" Name="visContainerFlagsExcludeContainers" Value="1" />
+  <row ID="automationenum_viscontainerflags" Enum="VisContainerFlags" Name="visContainerFlagsExcludeConnectors" Value="2" />
+  <row ID="automationenum_viscontainerflags" Enum="VisContainerFlags" Name="visContainerFlagsExcludeCallouts" Value="4" />
+  <row ID="automationenum_viscontainerflags" Enum="VisContainerFlags" Name="visContainerFlagsExcludeElements" Value="8" />
+  <row ID="automationenum_viscontainerflags" Enum="VisContainerFlags" Name="visContainerFlagsExcludeNested" Value="16" />
+  <row ID="automationenum_viscontainerflags" Enum="VisContainerFlags" Name="visContainerFlagsExcludeListMembers" Value="32" />
+  <row ID="automationenum_viscontainerformattype" Enum="VisContainerFormatType" Name="visContainerFormatLockMembership" Value="0" />
+  <row ID="automationenum_viscontainerformattype" Enum="VisContainerFormatType" Name="visContainerFormatContainerAutoResize" Value="1" />
+  <row ID="automationenum_viscontainerformattype" Enum="VisContainerFormatType" Name="visContainerFormatFitToContents" Value="2" />
+  <row ID="automationenum_viscontainermemberstate" Enum="VisContainerMemberState" Name="visContainerMemberNotAMember" Value="0" />
+  <row ID="automationenum_viscontainermemberstate" Enum="VisContainerMemberState" Name="visContainerMemberInterior" Value="1" />
+  <row ID="automationenum_viscontainermemberstate" Enum="VisContainerMemberState" Name="visContainerMemberOnBoundary" Value="2" />
+  <row ID="automationenum_viscontainermemberstate" Enum="VisContainerMemberState" Name="visContainerMemberOutside" Value="3" />
+  <row ID="automationenum_viscontainermemberstate" Enum="VisContainerMemberState" Name="visContainerMemberInList" Value="4" />
+  <row ID="automationenum_viscontainernested" Enum="VisContainerNested" Name="visContainerIncludeNested" Value="0" />
+  <row ID="automationenum_viscontainernested" Enum="VisContainerNested" Name="visContainerExcludeNested" Value="1" />
+  <row ID="automationenum_viscontainertypes" Enum="VisContainerTypes" Name="visContainerTypeNormal" Value="0" />
+  <row ID="automationenum_viscontainertypes" Enum="VisContainerTypes" Name="visContainerTypeList" Value="1" />
   <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteNormal" Value="0" />
   <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteNoTranslate" Value="1" />
+  <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteCenter" Value="2" />
+  <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteNoHealConnectors" Value="4" />
+  <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteNoContainerMembers" Value="8" />
+  <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteNoAssociatedCallouts" Value="16" />
+  <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteDontAddToContainers" Value="32" />
+  <row ID="automationenum_viscutcopypastecodes" Enum="VisCutCopyPasteCodes" Name="visCopyPasteNoCascade" Value="64" />
   <row ID="automationenum_visdatacolumnproperties" Enum="VisDataColumnProperties" Name="visDataColumnPropertyType" Value="1" />
   <row ID="automationenum_visdatacolumnproperties" Enum="VisDataColumnProperties" Name="visDataColumnPropertyLangID" Value="2" />
   <row ID="automationenum_visdatacolumnproperties" Enum="VisDataColumnProperties" Name="visDataColumnPropertyCalendar" Value="3" />
@@ -826,6 +879,17 @@
   <row ID="automationenum_visdefaultsaveformats" Enum="VisDefaultSaveFormats" Name="visDefaultSaveCurrentBinary" Value="0" />
   <row ID="automationenum_visdefaultsaveformats" Enum="VisDefaultSaveFormats" Name="visDefaultSavePreviousBinary" Value="1" />
   <row ID="automationenum_visdefaultsaveformats" Enum="VisDefaultSaveFormats" Name="visDefaultSaveCurrentXML" Value="2" />
+  <row ID="automationenum_visdeleteflags" Enum="VisDeleteFlags" Name="visDeleteNormal" Value="0" />
+  <row ID="automationenum_visdeleteflags" Enum="VisDeleteFlags" Name="visDeleteHealConnectors" Value="1" />
+  <row ID="automationenum_visdeleteflags" Enum="VisDeleteFlags" Name="visDeleteNoHealConnectors" Value="2" />
+  <row ID="automationenum_visdeleteflags" Enum="VisDeleteFlags" Name="visDeleteNoContainerMembers" Value="4" />
+  <row ID="automationenum_visdeleteflags" Enum="VisDeleteFlags" Name="visDeleteNoAssociatedCallouts" Value="8" />
+  <row ID="automationenum_visdiagramservices" Enum="VisDiagramServices" Name="visServiceNone" Value="0" />
+  <row ID="automationenum_visdiagramservices" Enum="VisDiagramServices" Name="visServiceAutoSizePage" Value="1" />
+  <row ID="automationenum_visdiagramservices" Enum="VisDiagramServices" Name="visServiceStructureBasic" Value="2" />
+  <row ID="automationenum_visdiagramservices" Enum="VisDiagramServices" Name="visServiceStructureFull" Value="4" />
+  <row ID="automationenum_visdiagramservices" Enum="VisDiagramServices" Name="visServiceVersion140" Value="7" />
+  <row ID="automationenum_visdiagramservices" Enum="VisDiagramServices" Name="visServiceAll" Value="-1" />
   <row ID="automationenum_visdistributetypes" Enum="VisDistributeTypes" Name="visDistHorzSpace" Value="0" />
   <row ID="automationenum_visdistributetypes" Enum="VisDistributeTypes" Name="visDistHorzLeft" Value="1" />
   <row ID="automationenum_visdistributetypes" Enum="VisDistributeTypes" Name="visDistHorzCenter" Value="2" />
@@ -879,6 +943,7 @@
   <row ID="automationenum_visdocversions" Enum="VisDocVersions" Name="visVersion100" Value="393216" />
   <row ID="automationenum_visdocversions" Enum="VisDocVersions" Name="visVersion110" Value="720896" />
   <row ID="automationenum_visdocversions" Enum="VisDocVersions" Name="visVersion120" Value="720896" />
+  <row ID="automationenum_visdocversions" Enum="VisDocVersions" Name="visVersion140" Value="720896" />
   <row ID="automationenum_visdrawregionflags" Enum="VisDrawRegionFlags" Name="visDrawRegionDeleteInput" Value="4" />
   <row ID="automationenum_visdrawregionflags" Enum="VisDrawRegionFlags" Name="visDrawRegionIncludeHidden" Value="16" />
   <row ID="automationenum_visdrawregionflags" Enum="VisDrawRegionFlags" Name="visDrawRegionIgnoreVisible" Value="32" />
@@ -889,18 +954,21 @@
   <row ID="automationenum_visdrawsplineflags" Enum="VisDrawSplineFlags" Name="visSpline1D" Value="8" />
   <row ID="automationenum_visdrawsplineflags" Enum="VisDrawSplineFlags" Name="visPolyline1D" Value="8" />
   <row ID="automationenum_visdrawsplineflags" Enum="VisDrawSplineFlags" Name="visPolyarcs" Value="256" />
+  <row ID="automationenum_visedition" Enum="VisEdition" Name="visEditionStandard" Value="0" />
+  <row ID="automationenum_visedition" Enum="VisEdition" Name="visEditionProfessional" Value="1" />
+  <row ID="automationenum_visedition" Enum="VisEdition" Name="visEditionPremium" Value="2" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtIdMostRecent" Value="0" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeInval" Value="0" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visActCodeRunAddon" Value="1" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeDocCreate" Value="1" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtWindow" Value="1" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCreate" Value="1" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtAppActivate" Value="1" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visActCodeAdvise" Value="2" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeDocOpen" Value="2" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCreate" Value="1" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeDocCreate" Value="1" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visActCodeRunAddon" Value="1" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtDoc" Value="2" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtAppDeactivate" Value="2" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeDocOpen" Value="2" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeOpen" Value="2" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visActCodeAdvise" Value="2" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeDocSave" Value="3" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtObjActivate" Value="4" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtStyle" Value="4" />
@@ -908,21 +976,23 @@
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeDocRunning" Value="5" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeDocDesign" Value="6" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeBefDocSave" Value="7" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtMaster" Value="8" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtObjDeactivate" Value="8" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeBefDocSaveAs" Value="8" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtMaster" Value="8" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeQueryCancelDocClose" Value="9" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCancelDocClose" Value="10" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtRemoveHiddenInformation" Value="11" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtPage" Value="16" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeSelectionMovedToSubprocess" Value="12" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeRuleSetValidated" Value="13" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtBeforeQuit" Value="16" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtPage" Value="16" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtLayer" Value="32" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtBeforeModal" Value="32" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtDataRecordset" Value="32" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtLayer" Value="32" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtAfterModal" Value="64" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtShape" Value="64" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtWinActivate" Value="128" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtAfterModal" Value="64" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtText" Value="128" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtWinActivate" Value="128" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeBefForcedFlush" Value="200" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeAfterForcedFlush" Value="201" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeEnterScope" Value="202" />
@@ -937,14 +1007,18 @@
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCancelSuspendEvents" Value="211" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeBeforeSuspendEvents" Value="212" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeAfterResumeEvents" Value="213" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtConnect" Value="256" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtMarker" Value="256" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtConnect" Value="256" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeQueryCancelStyleDel" Value="300" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCancelStyleDel" Value="301" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeQueryCancelMasterDel" Value="400" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCancelMasterDel" Value="401" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeQueryCancelPageDel" Value="500" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCancelPageDel" Value="501" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeContainerRelationshipAdded" Value="502" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeContainerRelationshipDeleted" Value="503" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCalloutRelationshipAdded" Value="504" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeCalloutRelationshipDeleted" Value="505" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtNonePending" Value="512" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtSection" Value="512" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeWinSelChange" Value="701" />
@@ -981,15 +1055,15 @@
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtRow" Value="1024" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtIdle" Value="1024" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCell" Value="2048" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtFormula" Value="4096" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtApp" Value="4096" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtFormula" Value="4096" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtMod" Value="8192" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtDel" Value="16384" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCode1stUser" Value="28672" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtCodeLastUser" Value="32767" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtAdd" Value="32768" />
-  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtIDInval" Value="-1" />
   <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visScopeIDInval" Value="-1" />
+  <row ID="automationenum_viseventcodes" Enum="VisEventCodes" Name="visEvtIDInval" Value="-1" />
   <row ID="automationenum_visexistsflags" Enum="VisExistsFlags" Name="visExistsAnywhere" Value="0" />
   <row ID="automationenum_visexistsflags" Enum="VisExistsFlags" Name="visExistsLocally" Value="1" />
   <row ID="automationenum_visfieldcategories" Enum="VisFieldCategories" Name="visFCatCustom" Value="0" />
@@ -1189,6 +1263,12 @@
   <row ID="automationenum_visgetsetargs" Enum="VisGetSetArgs" Name="visSetTestCircular" Value="4" />
   <row ID="automationenum_visgetsetargs" Enum="VisGetSetArgs" Name="visGetFormulasU" Value="5" />
   <row ID="automationenum_visgetsetargs" Enum="VisGetSetArgs" Name="visSetUniversalSyntax" Value="8" />
+  <row ID="automationenum_visgluedshapesflags" Enum="VisGluedShapesFlags" Name="visGluedShapesAll1D" Value="0" />
+  <row ID="automationenum_visgluedshapesflags" Enum="VisGluedShapesFlags" Name="visGluedShapesIncoming1D" Value="1" />
+  <row ID="automationenum_visgluedshapesflags" Enum="VisGluedShapesFlags" Name="visGluedShapesOutgoing1D" Value="2" />
+  <row ID="automationenum_visgluedshapesflags" Enum="VisGluedShapesFlags" Name="visGluedShapesAll2D" Value="3" />
+  <row ID="automationenum_visgluedshapesflags" Enum="VisGluedShapesFlags" Name="visGluedShapesIncoming2D" Value="4" />
+  <row ID="automationenum_visgluedshapesflags" Enum="VisGluedShapesFlags" Name="visGluedShapesOutgoing2D" Value="5" />
   <row ID="automationenum_visgluesettings" Enum="VisGlueSettings" Name="visGlueToNone" Value="0" />
   <row ID="automationenum_visgluesettings" Enum="VisGlueSettings" Name="visGlueToGuides" Value="1" />
   <row ID="automationenum_visgluesettings" Enum="VisGlueSettings" Name="visGlueToHandles" Value="2" />
@@ -1238,9 +1318,36 @@
   <row ID="automationenum_viskeybuttonflags" Enum="VisKeyButtonFlags" Name="visKeyShift" Value="4" />
   <row ID="automationenum_viskeybuttonflags" Enum="VisKeyButtonFlags" Name="visKeyControl" Value="8" />
   <row ID="automationenum_viskeybuttonflags" Enum="VisKeyButtonFlags" Name="visMouseMiddle" Value="16" />
+  <row ID="automationenum_vislangflags" Enum="VisLangFlags" Name="visLangLocal" Value="0" />
+  <row ID="automationenum_vislangflags" Enum="VisLangFlags" Name="visLangUniversal" Value="1" />
+  <row ID="automationenum_vislayoutdirection" Enum="VisLayoutDirection" Name="visLayoutDirRotateRight" Value="0" />
+  <row ID="automationenum_vislayoutdirection" Enum="VisLayoutDirection" Name="visLayoutDirRotateLeft" Value="1" />
+  <row ID="automationenum_vislayoutdirection" Enum="VisLayoutDirection" Name="visLayoutDirFlipVert" Value="2" />
+  <row ID="automationenum_vislayoutdirection" Enum="VisLayoutDirection" Name="visLayoutDirFlipHorz" Value="3" />
+  <row ID="automationenum_vislayouthorzaligntype" Enum="VisLayoutHorzAlignType" Name="visLayoutHorzAlignNone" Value="0" />
+  <row ID="automationenum_vislayouthorzaligntype" Enum="VisLayoutHorzAlignType" Name="visLayoutHorzAlignDefault" Value="1" />
+  <row ID="automationenum_vislayouthorzaligntype" Enum="VisLayoutHorzAlignType" Name="visLayoutHorzAlignLeft" Value="2" />
+  <row ID="automationenum_vislayouthorzaligntype" Enum="VisLayoutHorzAlignType" Name="visLayoutHorzAlignCenter" Value="3" />
+  <row ID="automationenum_vislayouthorzaligntype" Enum="VisLayoutHorzAlignType" Name="visLayoutHorzAlignRight" Value="4" />
+  <row ID="automationenum_vislayoutincrementaltype" Enum="VisLayoutIncrementalType" Name="visLayoutIncrAlign" Value="1" />
+  <row ID="automationenum_vislayoutincrementaltype" Enum="VisLayoutIncrementalType" Name="visLayoutIncrSpace" Value="2" />
+  <row ID="automationenum_vislayoutvertaligntype" Enum="VisLayoutVertAlignType" Name="visLayoutVertAlignNone" Value="0" />
+  <row ID="automationenum_vislayoutvertaligntype" Enum="VisLayoutVertAlignType" Name="visLayoutVertAlignDefault" Value="1" />
+  <row ID="automationenum_vislayoutvertaligntype" Enum="VisLayoutVertAlignType" Name="visLayoutVertAlignTop" Value="2" />
+  <row ID="automationenum_vislayoutvertaligntype" Enum="VisLayoutVertAlignType" Name="visLayoutVertAlignMiddle" Value="3" />
+  <row ID="automationenum_vislayoutvertaligntype" Enum="VisLayoutVertAlignType" Name="visLayoutVertAlignBottom" Value="4" />
+  <row ID="automationenum_vislegendflags" Enum="VisLegendFlags" Name="visLegendPopulate" Value="0" />
+  <row ID="automationenum_vislegendflags" Enum="VisLegendFlags" Name="visLegendNoContents" Value="1" />
   <row ID="automationenum_vislinkreplacebehavior" Enum="VisLinkReplaceBehavior" Name="visLinkReplaceNever" Value="0" />
   <row ID="automationenum_vislinkreplacebehavior" Enum="VisLinkReplaceBehavior" Name="visLinkReplaceAlways" Value="1" />
   <row ID="automationenum_vislinkreplacebehavior" Enum="VisLinkReplaceBehavior" Name="visLinkReplacePrompt" Value="2" />
+  <row ID="automationenum_vislistalignment" Enum="VisListAlignment" Name="visListAlignLeftOrTop" Value="0" />
+  <row ID="automationenum_vislistalignment" Enum="VisListAlignment" Name="visListAlignCenterOrMiddle" Value="1" />
+  <row ID="automationenum_vislistalignment" Enum="VisListAlignment" Name="visListAlignRightOrBottom" Value="2" />
+  <row ID="automationenum_vislistdirection" Enum="VisListDirection" Name="visListDirLeftToRight" Value="0" />
+  <row ID="automationenum_vislistdirection" Enum="VisListDirection" Name="visListDirRightToLeft" Value="1" />
+  <row ID="automationenum_vislistdirection" Enum="VisListDirection" Name="visListDirTopToBottom" Value="2" />
+  <row ID="automationenum_vislistdirection" Enum="VisListDirection" Name="visListDirBottomToTop" Value="3" />
   <row ID="automationenum_vismasterproperties" Enum="VisMasterProperties" Name="visManual" Value="0" />
   <row ID="automationenum_vismasterproperties" Enum="VisMasterProperties" Name="visMasFPTile" Value="0" />
   <row ID="automationenum_vismasterproperties" Enum="VisMasterProperties" Name="visIconFormatVisio" Value="0" />
@@ -1277,6 +1384,9 @@
   <row ID="automationenum_vismeasurementsystem" Enum="VisMeasurementSystem" Name="visMSDefault" Value="0" />
   <row ID="automationenum_vismeasurementsystem" Enum="VisMeasurementSystem" Name="visMSMetric" Value="1" />
   <row ID="automationenum_vismeasurementsystem" Enum="VisMeasurementSystem" Name="visMSUS" Value="2" />
+  <row ID="automationenum_vismemberaddoptions" Enum="VisMemberAddOptions" Name="visMemberAddUseResizeSetting" Value="0" />
+  <row ID="automationenum_vismemberaddoptions" Enum="VisMemberAddOptions" Name="visMemberAddExpandContainer" Value="1" />
+  <row ID="automationenum_vismemberaddoptions" Enum="VisMemberAddOptions" Name="visMemberAddDoNotExpand" Value="2" />
   <row ID="automationenum_vismousemovedragstates" Enum="VisMouseMoveDragStates" Name="visMouseMoveDragStatesNone" Value="0" />
   <row ID="automationenum_vismousemovedragstates" Enum="VisMouseMoveDragStates" Name="visMouseMoveDragStatesBegin" Value="1" />
   <row ID="automationenum_vismousemovedragstates" Enum="VisMouseMoveDragStates" Name="visMouseMoveDragStatesEnter" Value="2" />
@@ -1336,6 +1446,17 @@
   <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeDataRecordsetChangedEvent" Value="57" />
   <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeGraphicItems" Value="58" />
   <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeGraphicItem" Value="59" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeContainerProperties" Value="60" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeRelatedShapePairEvent" Value="61" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeMovedSelectionEvent" Value="62" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeServerPublishOptions" Value="63" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeValidation" Value="64" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeValidationRuleSets" Value="65" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeValidationRuleSet" Value="66" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeValidationRules" Value="67" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeValidationRule" Value="68" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeValidationIssues" Value="69" />
+  <row ID="automationenum_visobjecttypes" Enum="VisObjectTypes" Name="visObjTypeValidationIssue" Value="70" />
   <row ID="automationenum_visoncomponententercodes" Enum="VisOnComponentEnterCodes" Name="visComponentStateModal" Value="1" />
   <row ID="automationenum_visoncomponententercodes" Enum="VisOnComponentEnterCodes" Name="visModalDeferEvents" Value="65536" />
   <row ID="automationenum_visoncomponententercodes" Enum="VisOnComponentEnterCodes" Name="visModalNoBeforeAfter" Value="131072" />
@@ -1419,6 +1540,55 @@
   <row ID="automationenum_visprotection" Enum="VisProtection" Name="visProtectMasters" Value="4" />
   <row ID="automationenum_visprotection" Enum="VisProtection" Name="visProtectBackgrounds" Value="8" />
   <row ID="automationenum_visprotection" Enum="VisProtection" Name="visProtectPreviews" Value="16" />
+  <row ID="automationenum_vispublishdatarecordsets" Enum="VisPublishDataRecordsets" Name="visPublishDataRecordsetAll" Value="0" />
+  <row ID="automationenum_vispublishdatarecordsets" Enum="VisPublishDataRecordsets" Name="visPublishDataRecordsetNone" Value="1" />
+  <row ID="automationenum_vispublishdatarecordsets" Enum="VisPublishDataRecordsets" Name="visPublishDataRecordsetSelect" Value="2" />
+  <row ID="automationenum_vispublishpages" Enum="VisPublishPages" Name="visPublishPageAll" Value="0" />
+  <row ID="automationenum_vispublishpages" Enum="VisPublishPages" Name="visPublishPageSelect" Value="1" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRasterBiLevel" Value="0" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRaster16Color" Value="1" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRaster256Color" Value="2" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRaster24Bit" Value="3" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRasterRGB" Value="4" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRasterYCC" Value="5" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRasterGrayScale" Value="6" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRasterCMYK" Value="7" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRaster16ColorGrayScale" Value="8" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRaster256ColorGrayScale" Value="9" />
+  <row ID="automationenum_visrasterexportcolorformat" Enum="VisRasterExportColorFormat" Name="visRaster16Bit" Value="10" />
+  <row ID="automationenum_visrasterexportcolorreduction" Enum="VisRasterExportColorReduction" Name="visRasterAdaptive" Value="0" />
+  <row ID="automationenum_visrasterexportcolorreduction" Enum="VisRasterExportColorReduction" Name="visRasterDiffusion" Value="1" />
+  <row ID="automationenum_visrasterexportcolorreduction" Enum="VisRasterExportColorReduction" Name="visRasterHalftone" Value="2" />
+  <row ID="automationenum_visrasterexportdatacompression" Enum="VisRasterExportDataCompression" Name="visRasterNone" Value="0" />
+  <row ID="automationenum_visrasterexportdatacompression" Enum="VisRasterExportDataCompression" Name="visRasterRLE" Value="1" />
+  <row ID="automationenum_visrasterexportdatacompression" Enum="VisRasterExportDataCompression" Name="visRasterGroup3" Value="2" />
+  <row ID="automationenum_visrasterexportdatacompression" Enum="VisRasterExportDataCompression" Name="visRasterPackbits" Value="3" />
+  <row ID="automationenum_visrasterexportdatacompression" Enum="VisRasterExportDataCompression" Name="visRasterGroup4" Value="4" />
+  <row ID="automationenum_visrasterexportdatacompression" Enum="VisRasterExportDataCompression" Name="visRasterLZW" Value="5" />
+  <row ID="automationenum_visrasterexportdatacompression" Enum="VisRasterExportDataCompression" Name="visRasterModifiedHuffman" Value="6" />
+  <row ID="automationenum_visrasterexportdataformat" Enum="VisRasterExportDataFormat" Name="visRasterInterlace" Value="0" />
+  <row ID="automationenum_visrasterexportdataformat" Enum="VisRasterExportDataFormat" Name="visRasterNonInterlace" Value="1" />
+  <row ID="automationenum_visrasterexportflip" Enum="VisRasterExportFlip" Name="visRasterNoFlip" Value="0" />
+  <row ID="automationenum_visrasterexportflip" Enum="VisRasterExportFlip" Name="visRasterFlipHorizontal" Value="1" />
+  <row ID="automationenum_visrasterexportflip" Enum="VisRasterExportFlip" Name="visRasterFlipVertical" Value="2" />
+  <row ID="automationenum_visrasterexportoperation" Enum="VisRasterExportOperation" Name="visRasterBaseline" Value="0" />
+  <row ID="automationenum_visrasterexportoperation" Enum="VisRasterExportOperation" Name="visRasterProgressive" Value="1" />
+  <row ID="automationenum_visrasterexportresolution" Enum="VisRasterExportResolution" Name="visRasterUseScreenResolution" Value="0" />
+  <row ID="automationenum_visrasterexportresolution" Enum="VisRasterExportResolution" Name="visRasterUsePrinterResolution" Value="1" />
+  <row ID="automationenum_visrasterexportresolution" Enum="VisRasterExportResolution" Name="visRasterUseSourceResolution" Value="2" />
+  <row ID="automationenum_visrasterexportresolution" Enum="VisRasterExportResolution" Name="visRasterUseCustomResolution" Value="3" />
+  <row ID="automationenum_visrasterexportresolutionunits" Enum="VisRasterExportResolutionUnits" Name="visRasterPixelsPerInch" Value="0" />
+  <row ID="automationenum_visrasterexportresolutionunits" Enum="VisRasterExportResolutionUnits" Name="visRasterPixelsPerCm" Value="1" />
+  <row ID="automationenum_visrasterexportrotation" Enum="VisRasterExportRotation" Name="visRasterNoRotation" Value="0" />
+  <row ID="automationenum_visrasterexportrotation" Enum="VisRasterExportRotation" Name="visRasterRotateLeft" Value="1" />
+  <row ID="automationenum_visrasterexportrotation" Enum="VisRasterExportRotation" Name="visRasterRotateRight" Value="2" />
+  <row ID="automationenum_visrasterexportsize" Enum="VisRasterExportSize" Name="visRasterFitToScreenSize" Value="0" />
+  <row ID="automationenum_visrasterexportsize" Enum="VisRasterExportSize" Name="visRasterFitToPrinterSize" Value="1" />
+  <row ID="automationenum_visrasterexportsize" Enum="VisRasterExportSize" Name="visRasterFitToSourceSize" Value="2" />
+  <row ID="automationenum_visrasterexportsize" Enum="VisRasterExportSize" Name="visRasterFitToCustomSize" Value="3" />
+  <row ID="automationenum_visrasterexportsizeunits" Enum="VisRasterExportSizeUnits" Name="visRasterPixel" Value="0" />
+  <row ID="automationenum_visrasterexportsizeunits" Enum="VisRasterExportSizeUnits" Name="visRasterCm" Value="1" />
+  <row ID="automationenum_visrasterexportsizeunits" Enum="VisRasterExportSizeUnits" Name="visRasterInch" Value="2" />
   <row ID="automationenum_visrefreshsettings" Enum="VisRefreshSettings" Name="visRefreshOverwriteAll" Value="1" />
   <row ID="automationenum_visrefreshsettings" Enum="VisRefreshSettings" Name="visRefreshNoReconcilationUI" Value="2" />
   <row ID="automationenum_visregionaluioptions" Enum="VisRegionalUIOptions" Name="VisRegionalUIOptionsHide" Value="0" />
@@ -1430,6 +1600,22 @@
   <row ID="automationenum_visremovehiddeninfoitems" Enum="VisRemoveHiddenInfoItems" Name="visRHIMasters" Value="4" />
   <row ID="automationenum_visremovehiddeninfoitems" Enum="VisRemoveHiddenInfoItems" Name="visRHIStyles" Value="8" />
   <row ID="automationenum_visremovehiddeninfoitems" Enum="VisRemoveHiddenInfoItems" Name="visRHIDataRecordsets" Value="16" />
+  <row ID="automationenum_visremovehiddeninfoitems" Enum="VisRemoveHiddenInfoItems" Name="visRHIValidationRules" Value="32" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirE" Value="0" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirNE" Value="1" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirN" Value="2" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirNW" Value="3" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirW" Value="4" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirSW" Value="5" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirS" Value="6" />
+  <row ID="automationenum_visresizedirection" Enum="VisResizeDirection" Name="visResizeDirSE" Value="7" />
+  <row ID="automationenum_visribbonxmodes" Enum="VisRibbonXModes" Name="visRXModeNone" Value="0" />
+  <row ID="automationenum_visribbonxmodes" Enum="VisRibbonXModes" Name="visRXModeDrawing" Value="1" />
+  <row ID="automationenum_visribbonxmodes" Enum="VisRibbonXModes" Name="visRXModeStencil" Value="2" />
+  <row ID="automationenum_visribbonxmodes" Enum="VisRibbonXModes" Name="visRXModePrintPreview" Value="4" />
+  <row ID="automationenum_visroleselectiontypes" Enum="VisRoleSelectionTypes" Name="visRoleSelConnector" Value="1" />
+  <row ID="automationenum_visroleselectiontypes" Enum="VisRoleSelectionTypes" Name="visRoleSelContainer" Value="2" />
+  <row ID="automationenum_visroleselectiontypes" Enum="VisRoleSelectionTypes" Name="visRoleSelCallout" Value="4" />
   <row ID="automationenum_visrotationtypes" Enum="VisRotationTypes" Name="visRotateSelection" Value="0" />
   <row ID="automationenum_visrotationtypes" Enum="VisRotationTypes" Name="visRotateSelectionWithPin" Value="1" />
   <row ID="automationenum_visrotationtypes" Enum="VisRotationTypes" Name="visRotateShapes" Value="2" />
@@ -1510,6 +1696,11 @@
   <row ID="automationenum_visrowtags" Enum="VisRowTags" Name="visTagPolylineTo" Value="193" />
   <row ID="automationenum_visrowtags" Enum="VisRowTags" Name="visTagNURBSTo" Value="195" />
   <row ID="automationenum_visrowtags" Enum="VisRowTags" Name="visTagInvalid" Value="-1" />
+  <row ID="automationenum_visrulesetflags" Enum="VisRuleSetFlags" Name="visRuleSetDefault" Value="0" />
+  <row ID="automationenum_visrulesetflags" Enum="VisRuleSetFlags" Name="visRuleSetHidden" Value="1" />
+  <row ID="automationenum_visruletargets" Enum="VisRuleTargets" Name="visRuleTargetShape" Value="0" />
+  <row ID="automationenum_visruletargets" Enum="VisRuleTargets" Name="visRuleTargetPage" Value="1" />
+  <row ID="automationenum_visruletargets" Enum="VisRuleTargets" Name="visRuleTargetDocument" Value="2" />
   <row ID="automationenum_visruntypes" Enum="VisRunTypes" Name="visCharPropRow" Value="1" />
   <row ID="automationenum_visruntypes" Enum="VisRunTypes" Name="visParaPropRow" Value="2" />
   <row ID="automationenum_visruntypes" Enum="VisRunTypes" Name="visTabPropRow" Value="3" />
@@ -1562,6 +1753,7 @@
   <row ID="automationenum_visselectiontypes" Enum="VisSelectionTypes" Name="visSelTypeByType" Value="4" />
   <row ID="automationenum_visselectiontypes" Enum="VisSelectionTypes" Name="visSelTypeByMaster" Value="5" />
   <row ID="automationenum_visselectiontypes" Enum="VisSelectionTypes" Name="visSelTypeByDataGraphic" Value="6" />
+  <row ID="automationenum_visselectiontypes" Enum="VisSelectionTypes" Name="visSelTypeByRole" Value="7" />
   <row ID="automationenum_visselectitemstatus" Enum="VisSelectItemStatus" Name="visSelIsPrimaryItem" Value="1" />
   <row ID="automationenum_visselectitemstatus" Enum="VisSelectItemStatus" Name="visSelIsSubItem" Value="2" />
   <row ID="automationenum_visselectitemstatus" Enum="VisSelectItemStatus" Name="visSelIsSuperItem" Value="4" />
@@ -1621,6 +1813,7 @@
   <row ID="automationenum_visspatialrelationflags" Enum="VisSpatialRelationFlags" Name="visSpatialIncludeHidden" Value="16" />
   <row ID="automationenum_visspatialrelationflags" Enum="VisSpatialRelationFlags" Name="visSpatialIgnoreVisible" Value="32" />
   <row ID="automationenum_visspatialrelationflags" Enum="VisSpatialRelationFlags" Name="visSpatialIncludeDataGraphics" Value="64" />
+  <row ID="automationenum_visspatialrelationflags" Enum="VisSpatialRelationFlags" Name="visSpatialIncludeContainerShapes" Value="128" />
   <row ID="automationenum_visstatcodes" Enum="VisStatCodes" Name="visStatNormal" Value="0" />
   <row ID="automationenum_visstatcodes" Enum="VisStatCodes" Name="visStatAppHasShutdown" Value="1" />
   <row ID="automationenum_visstatcodes" Enum="VisStatCodes" Name="visStatDeleted" Value="2" />
@@ -1666,6 +1859,27 @@
   <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsEquityDark" Value="33" />
   <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsVerveLight" Value="34" />
   <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsVerveDark" Value="35" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsBasic" Value="36" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsAdjacency" Value="37" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsAngles" Value="38" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsApothecary" Value="39" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsAustin" Value="40" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsEssential" Value="41" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsBlackTie" Value="42" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsComposite" Value="43" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsClarity" Value="44" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsElemental" Value="45" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsExecutive" Value="46" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsGrid" Value="47" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsHardcover" Value="48" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsHorizon" Value="49" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsNewsprint" Value="50" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsCouture" Value="51" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsPerspective" Value="52" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsPushpin" Value="53" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsSlipstream" Value="54" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsThatch" Value="55" />
+  <row ID="automationenum_visthemecolors" Enum="VisThemeColors" Name="visThemeColorsWaveform" Value="56" />
   <row ID="automationenum_visthemeeffects" Enum="VisThemeEffects" Name="visThemeEffectsNone" Value="0" />
   <row ID="automationenum_visthemeeffects" Enum="VisThemeEffects" Name="visThemeEffectsSubdued" Value="1" />
   <row ID="automationenum_visthemeeffects" Enum="VisThemeEffects" Name="visThemeEffectsSimpleShadow" Value="2" />
@@ -1682,6 +1896,7 @@
   <row ID="automationenum_visthemeeffects" Enum="VisThemeEffects" Name="visThemeEffectsStripes" Value="13" />
   <row ID="automationenum_visthemeeffects" Enum="VisThemeEffects" Name="visThemeEffectsOblique" Value="14" />
   <row ID="automationenum_visthemeeffects" Enum="VisThemeEffects" Name="visThemeEffectsToy" Value="15" />
+  <row ID="automationenum_visthemeeffects" Enum="VisThemeEffects" Name="visThemeEffectsBasicShadow" Value="16" />
   <row ID="automationenum_visthemetypes" Enum="VisThemeTypes" Name="visThemeTypeColor" Value="1" />
   <row ID="automationenum_visthemetypes" Enum="VisThemeTypes" Name="visThemeTypeEffect" Value="2" />
   <row ID="automationenum_vistoolbarflavors" Enum="VisToolbarFlavors" Name="visToolBarOn" Value="0" />
@@ -2198,8 +2413,8 @@
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdImageProperties" Value="1887" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSetLanguageDlg" Value="1888" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSpellingChange" Value="1889" />
-  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDetectAndRepair" Value="1890" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdOfficeDiagnostics" Value="1890" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDetectAndRepair" Value="1890" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdExportDatabaseAddOn" Value="1891" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdStenIconAndDetail" Value="1892" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSetDynConnAppearanceDefault" Value="1893" />
@@ -2242,8 +2457,8 @@
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdContactUs" Value="1964" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdResearchLookUp" Value="1967" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdResearchTranslate" Value="1968" />
-  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdResearchPaneToggle" Value="1969" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdTaskPaneResearch" Value="1969" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdResearchPaneToggle" Value="1969" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInkEraser" Value="1970" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInkReviewPen" Value="1971" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSharedWorkspacePaneToggle" Value="1972" />
@@ -2311,6 +2526,132 @@
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDeleteForwardWord" Value="2114" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSaveAsFixedFormatDlg" Value="2117" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdRemoveThemeFromSel" Value="2119" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile10" Value="2127" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile11" Value="2128" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile12" Value="2129" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile13" Value="2130" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile14" Value="2131" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile15" Value="2132" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile16" Value="2133" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile17" Value="2134" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile18" Value="2135" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile19" Value="2136" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileLastFile20" Value="2137" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdOfficeCenterOptions" Value="2141" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertLabelControl" Value="2144" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInserTextBoxControl" Value="2145" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertSpinControl" Value="2146" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertPushButtonControl" Value="2147" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertImageControl" Value="2148" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertScrollBarControl" Value="2149" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertCheckBoxControl" Value="2150" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertRadioButtonControl" Value="2151" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertComboBoxControl" Value="2152" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertListBoxControl" Value="2153" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertToggleButtonControl" Value="2154" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertNewBackgroundPage" Value="2165" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdShowShapeSheetShape" Value="2167" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdShowShapeSheetPage" Value="2168" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdShowShapeSheetDocument" Value="2169" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSetPageOrientation" Value="2170" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSetPageSize" Value="2171" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDropAndContain" Value="2172" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAddMemberToContainer" Value="2173" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertMemberIntoList" Value="2174" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdRemoveMemberFromContainer" Value="2175" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPageSizeDlg" Value="2176" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdResearchThesaurus" Value="2178" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPreviousCommentMarkup" Value="2179" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdNextCommentMarkup" Value="2180" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSetContainerProperties" Value="2181" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdApplyThemeColors" Value="2188" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdApplyThemeEffects" Value="2189" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdEditThemeColors" Value="2190" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdEditThemeEffects" Value="2191" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFitContainerToContents" Value="2195" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDropAndInsertIntoList" Value="2196" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdReorderList" Value="2197" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDeleteConnectors" Value="2199" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdMultipleFileImport" Value="2201" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertPageTab" Value="2202" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDisbandContainer" Value="2204" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFormatPictureAutobalance" Value="2205" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFormatPictureCompressionDlg" Value="2212" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdCloseInkToolsRibbonTab" Value="2213" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSelectContainerMembers" Value="2219" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdLockContainer" Value="2220" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPasteToLocation" Value="2221" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAutoAlignAndSpace" Value="2222" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAutoAlign" Value="2223" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAutoSpace" Value="2224" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdMoveOffPageBreaks" Value="2225" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDiagramRotateRight" Value="2226" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDiagramRotateLeft" Value="2227" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDiagramFlipVertical" Value="2228" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDiagramFlipHorizontal" Value="2229" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdShowLineJumpsToggle" Value="2231" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdMinimizeRibbonToggle" Value="2232" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdLayoutSpacingDlg" Value="2233" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdCOMAddinsDlg" Value="2238" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdNewSubProcess" Value="2245" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdCreateSubProcessFromSel" Value="2249" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAddToAllContainers" Value="2251" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdRemoveFromAllContainers" Value="2252" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidateDiagram" Value="2253" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdIgnoreValidationIssue" Value="2254" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdReinstateValidationIssue" Value="2255" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdIgnoreValidationRule" Value="2256" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdStopIgnoringValidationRule" Value="2257" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdShowIgnoredIssuesToggle" Value="2258" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidationIssuesWindowToggle" Value="2263" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSetDiagramServices" Value="2265" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSetAutoSize" Value="2266" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAutoSizeDrawing" Value="2267" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAddToNewContainer" Value="2268" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdCollapseShapesWindow" Value="2269" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdListInsertBefore" Value="2270" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdListInsertAfter" Value="2271" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidationIssuesArrangeByRule" Value="2278" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidationIssuesArrangeByCategory" Value="2279" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidationIssuesArrangeByPage" Value="2280" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidationIssuesArrangeByIgnored" Value="2281" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidationIssuesArrangeOriginalOrder" Value="2282" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdApplyMainTheme" Value="2285" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdDropCallout" Value="2286" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdAssociateCallout" Value="2287" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdApplyMainThemeToPage" Value="2289" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdActivateQuickShapesWnd" Value="2290" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdHideMoreShapes" Value="2291" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPublishToVisioServices" Value="2293" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPublishToProcessRepository" Value="2294" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdEditRedoOrRepeat" Value="2295" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdApplyMainThemeToDocument" Value="2296" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdApplyThemeToNewShapesToggle" Value="2297" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsDrawingPreviousFileFormat" Value="2298" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsTemplate" Value="2299" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsPNG" Value="2300" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsJPG" Value="2301" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsEMF" Value="2302" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsSVG" Value="2303" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsVDX" Value="2304" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsDWG" Value="2305" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdFileSaveAsDrawing" Value="2306" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdValidationIssueNavigateToShape" Value="2326" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertLegendHorizontal" Value="2331" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPageSizeToFitDrawing" Value="2332" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPageAutoSizeToggle" Value="2333" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertLegendVertical1" Value="2335" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdPostDrag" Value="2337" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdSpaceShapesAvoidPageBreaksToggle" Value="2340" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdShapeSearchWindowToggle" Value="2344" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdInsertClipArtDlg" Value="2345" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdRemoveMemberFromList" Value="2346" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdContainerAutoResizeOff" Value="2347" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdContainerAutoResizeExpandOnly" Value="2348" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdContainerAutoResizeExpandContract" Value="2349" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdTranslateOptions" Value="2352" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdNewForegroundPage" Value="2361" />
+  <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdLanguagePreferencesDlg" Value="2363" />
   <row ID="automationenum_visuicmds" Enum="VisUICmds" Name="visCmdLast" Value="65535" />
   <row ID="automationenum_visuictrlatts" Enum="VisUICtrlAtts" Name="visCtrlAlignmentLEFT" Value="1" />
   <row ID="automationenum_visuictrlatts" Enum="VisUICtrlAtts" Name="visCtrlAlignmentCENTER" Value="2" />
@@ -2819,8 +3160,8 @@
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetActiveXDoc" Value="18" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_Debug" Value="19" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_StencilRW" Value="20" />
-  <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_StencilDocked" Value="21" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_Stencil" Value="21" />
+  <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_StencilDocked" Value="21" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetHostingInPlace" Value="22" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_Hyperlink" Value="23" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetPal_LineColors" Value="24" />
@@ -2869,6 +3210,9 @@
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_AnchorBar_Shapes" Value="69" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_DataExplorerTabs" Value="70" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_DataExplorerList" Value="71" />
+  <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_PageTabNavigation" Value="74" />
+  <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_Page" Value="75" />
+  <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_Issues" Value="76" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_AddCommands" Value="1000" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_BuiltinMenus" Value="1010" />
   <row ID="automationenum_visuiobjsets" Enum="VisUIObjSets" Name="visUIObjSetCntx_ShortcutMenus" Value="1011" />
@@ -2932,6 +3276,8 @@
   <row ID="automationenum_visunitcodes" Enum="VisUnitCodes" Name="visUnitsColor" Value="251" />
   <row ID="automationenum_visunitcodes" Enum="VisUnitCodes" Name="visNoCast" Value="252" />
   <row ID="automationenum_visunitcodes" Enum="VisUnitCodes" Name="visUnitsInval" Value="255" />
+  <row ID="automationenum_visvalidationflags" Enum="VisValidationFlags" Name="visValidationDefault" Value="0" />
+  <row ID="automationenum_visvalidationflags" Enum="VisValidationFlags" Name="visValidationNoOpenWindow" Value="1" />
   <row ID="automationenum_visverticalaligntypes" Enum="VisVerticalAlignTypes" Name="visVertAlignNone" Value="0" />
   <row ID="automationenum_visverticalaligntypes" Enum="VisVerticalAlignTypes" Name="visVertAlignTop" Value="1" />
   <row ID="automationenum_visverticalaligntypes" Enum="VisVerticalAlignTypes" Name="visVertAlignMiddle" Value="2" />
@@ -2998,9 +3344,12 @@
   <row ID="automationenum_viswintypes" Enum="VisWinTypes" Name="visWinIDStencilExplorer" Value="1796" />
   <row ID="automationenum_viswintypes" Enum="VisWinTypes" Name="visWinIDMasterExplorer" Value="1916" />
   <row ID="automationenum_viswintypes" Enum="VisWinTypes" Name="visWinIDExternalData" Value="2044" />
+  <row ID="automationenum_viswintypes" Enum="VisWinTypes" Name="visWinIDValidationIssues" Value="2263" />
   <row ID="automationenum_viswintypes" Enum="VisWinTypes" Name="visInvalWinID" Value="-1" />
   <row ID="automationenum_viszoombehavior" Enum="VisZoomBehavior" Name="visZoomNone" Value="0" />
   <row ID="automationenum_viszoombehavior" Enum="VisZoomBehavior" Name="visZoomInPlaceContainer" Value="1" />
   <row ID="automationenum_viszoombehavior" Enum="VisZoomBehavior" Name="visZoomVisio" Value="2" />
   <row ID="automationenum_viszoombehavior" Enum="VisZoomBehavior" Name="visZoomVisioExact" Value="4" />
+
+
 </table>
