@@ -280,8 +280,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
-            // TODO: Re-enable this unit test
-            /*var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
 
             var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -309,9 +308,9 @@ namespace TestVisioAutomation
             Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Formula);
 
             var pagesize = page1.GetSize();
-            TestHelper.AreEqual(4.00 , 3.00, pagesize, 0.05);
+            AssertVA.AreEqual(4.00, 3.00, pagesize, 0.05);
 
-            doc.Close(true);*/
+            doc.Close(true);
         }
     }
 }

@@ -1,0 +1,30 @@
+<autolayoutdrawing>
+  <page>
+
+    <renderoptions
+        usedynamicconnectors="true"
+        scalingfactor="5"
+    />
+  <shapes>
+    <shape id="n1" label="Decision1" stencil="basflo_u.vss" master="Decision" />
+    <shape id="n2" label="Process2" stencil="basflo_u.vss" master="Process" />
+    <shape id="n3" label="Data3" stencil="basflo_u.vss" master="Data" />
+    <shape id="n4" label="Porcess4" stencil="basflo_u.vss" master="Process" />
+    <shape id="n5" label="Data5" stencil="basflo_u.vss" master="Data" />
+  </shapes>
+
+  <connectors>
+    <connector id="c1"  from="n1" to="n2" label="LABEL1" />
+    <connector id="c2" from="n2" to="n3" label="LABEL2" />
+    <connector id="c3" from="n3" to="n4" label="LABEL3" />
+    <connector id="c4" from="n3" to="n1" label=""/>
+    <connector id="c5" from="n4" to="n1" label=""/>
+    <connector id="c6" from="n4" to="n2" label=""/>
+    <connector id="c7" from="n1" to="n5" label="LABEL7"/>
+  </connectors>
+
+  </page>
+
+</autolayoutdrawing>
+
+

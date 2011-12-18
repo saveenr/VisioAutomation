@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 using System.Linq;
 
-namespace TestVisioAutomation
+namespace TestCommon
 {
-    public class TestHelper
+    public class Helper
     {
-        public readonly string OutputPath;
+        private readonly string OutputPath;
 
-        public TestHelper(string name)
+        public Helper(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -69,34 +67,6 @@ namespace TestVisioAutomation
             return GetMethodName(2) + ext;
         }
 
-        public static void AreEqual(double x, double y, VA.Drawing.Point p, double delta)
-        {
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(x, p.X, delta);
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(y, p.Y, delta);
-        }
-
-        public static void AreEqual(double x, double y, VA.Drawing.Size p, double delta)
-        {
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(x, p.Width, delta);
-            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(y, p.Height, delta);
-        }
-
-        public static VA.ShapeSheet.Query.CellQuery BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
-        {
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            foreach (var src in srcs)
-            {
-                query.AddColumn(src);
-            }
-            return query;
-        }
-
-        public static void setformulas(VA.DOM.ShapeCells shapecells, IVisio.Page page, IVisio.Shape shape)
-        {
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            shapecells.Apply(update, shape.ID16);
-            update.Execute(page);
-        }
 
         public static Dictionary<string, T> EnumToDictionary<T>(System.Type t)
         {
@@ -110,8 +80,8 @@ namespace TestVisioAutomation
             }
 
             return dic;
-
         }
+
         public static List<T> GetDuplicates<T>(IEnumerable<T> items)
         {
             var set = new HashSet<T>();

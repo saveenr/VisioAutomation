@@ -104,7 +104,6 @@
     <Compile Include="Shapesheet\CellGroups.cs" />
     <Compile Include="Shapesheet\ShapeSheetMetadata.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper_Tests.cs" />
-    <Compile Include="TestHelper.cs" />
     <Compile Include="Scripting\ScriptingCellSRCTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -117,7 +116,6 @@
     <Compile Include="DOM\DOM_Draw_tests.cs" />
     <Compile Include="Layout\OrgChartTests.cs" />
     <Compile Include="DOM\DOM_Basic_Tests.cs" />
-    <Compile Include="VDX\VDX_Tests.cs" />
     <Compile Include="VisioTestCommon.cs" />
     <Compile Include="Core\PerfTests.cs" />
     <Compile Include="Core\CustomPropertiesTest.cs" />
@@ -164,6 +162,10 @@
     <Compile Include="Core\CharacterFormatTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestCommon\TestCommon.csproj">
+      <Project>{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6}</Project>
+      <Name>TestCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
       <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
       <Name>VisioAutomation.Layout.MSAGL</Name>

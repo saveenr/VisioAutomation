@@ -110,7 +110,7 @@ namespace TestVisioAutomation
                 t0.AppendText("FOOBR");
 
                 //t0.SetShapeText(shape1);
-                shape1.Text = TestVisioAutomation.TestHelper.LoremIpsumText;
+                shape1.Text = TestCommon.Helper.LoremIpsumText;
                 var fmt1 = new VA.Text.CharacterFormatCells();
                 fmt1.Transparency = 0.5;
                 VA.Text.TextHelper.SetFormat(shape1,fmt1,5,10);
