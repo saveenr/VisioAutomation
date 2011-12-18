@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutomationConstant.cs" />
+    <Compile Include="AutomationEnumItem.cs" />
     <Compile Include="BaseExcelXmlReader.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="CellValue.cs" />
