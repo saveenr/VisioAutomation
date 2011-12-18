@@ -49,7 +49,7 @@ namespace TestVisioAutomation
             var constants = db.Constants;
 
             // There are 3003 known constants in the Visio PIA
-            Assert.AreEqual(3003, constants.Count);
+            Assert.AreEqual(3348, constants.Count);
         }
 
         [TestMethod]
@@ -129,7 +129,6 @@ namespace TestVisioAutomation
         {
             // TODO: Fix Metadata to work with Visio 2010
 
-            /*
             var db = VA.Metadata.MetadataDB.Load();
             var db_autoenums = db.AutomationEnums;
 
@@ -169,8 +168,6 @@ namespace TestVisioAutomation
                     Assert.AreEqual(md_enum[md_value_name], pia_dic[md_value_name]);
                 }
             }
-             * 
-             * */
         }
 
         [TestMethod]
