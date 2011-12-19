@@ -18,8 +18,10 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.Point.FromDoubles(Points).ToList();
-            var r = scriptingsession.Master.Drop(Masters, points);
-            this.WriteObject(r);
+            var shape_ids = scriptingsession.Master.Drop(Masters, points);
+            var page = scriptingsession.Page.Get();
+            var shape_objects = VA.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
+            this.WriteObject(shape_objects);
         }
     }
 }

@@ -17,9 +17,10 @@ namespace VisioPS.Commands
             {
                 scriptingsession.Selection.Select(Shape);
             }
+
             if (ID!=null)
             {
-                scriptingsession.Selection.Select(Shape);
+                scriptingsession.Selection.Select(ID);
             }
         }
     }
