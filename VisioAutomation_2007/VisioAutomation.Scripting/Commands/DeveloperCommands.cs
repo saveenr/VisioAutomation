@@ -212,7 +212,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
                 else
                 {
-                    string parent_path = string.Join(this.Separator, tokens.Take(tokens.Length - 1));
+                    string parent_path = string.Join(this.Separator, tokens.Take(tokens.Length - 1).ToArray());
                     this.Add(parent_path);
                     this.PathToParentPath[path] = parent_path;
                 }   
@@ -400,7 +400,7 @@ namespace VisioAutomation.Scripting.Commands
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new VA.Layout.Tree.Node(ns);
-                node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace);
+                node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace.ToArray());
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
                 ns_node_map[ns] = node;
