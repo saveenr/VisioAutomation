@@ -104,7 +104,7 @@ namespace TestVisioAutomation
                 var t0 = new VA.Text.Markup.TextElement();
                 t0.TextFormat.FontSize = VA.Convert.PointsToInches(36);
                 var t01 = t0.AppendText("HELLO");
-                var t1 = t0.AppendNewElement("W\nO\nR\nL\nD");
+                var t1 = t0.AppendElement("W\nO\nR\nL\nD");
                 t1.TextFormat.Indent = 1.0;
                 t1.TextFormat.FontSize = VA.Convert.PointsToInches(15.0);
                 t0.AppendText("FOOBR");

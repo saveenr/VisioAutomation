@@ -102,56 +102,6 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
-
-
-        [TestMethod]
-        public void MarkupText1()
-        {
-            var vdoc = new VA.DOM.Document();
-            vdoc.PageSettings.Size = new VA.Drawing.Size(10,10);
-
-            var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
-            vdoc.Shapes.Add(vrect1);
-
-            string text =
-                @"
-<text>
-    Normal text
-        <br/>
-
-    <text font=""Courier New"">
-        Courier new at default size
-        <br/>
-
-        <text size=""20"">
-            Now at 20pt 
-        <br/>
-                <text bold=""1"">and this text is bold</text>
-                <text italic=""1"">and this text is italic</text>
-        </text>
-    </text>
-
-</text> ";
-
-            var text_markup = VA.Text.Markup.TextElement.FromXml(text, false);
-            vrect1.TextElement = text_markup;
-
-            vrect1.SetCustomProperty("FOO1", "bar");
-            vrect1.SetCustomProperty("FOO2", "\"bar\"");
-            vrect1.SetCustomProperty("FOO3", "\"\"\"bar\"\"\"");
-
-            var app = this.GetVisioApplication();
-            var documents = app.Documents;
-            var visdoc = this.GetNewDoc();
-            vdoc.Render(app.ActivePage);
-
-            var activepagesize = app.ActivePage.GetSize();
-            Assert.AreEqual(10, activepagesize.Width);
-            Assert.AreEqual(10, activepagesize.Height);
-
-            visdoc.Close(true);
-        }
-
         [TestMethod]
         public void Set_Custom_Props()
         {
@@ -183,159 +133,81 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
-        public void MarkupText22()
-        {
-            string text =
-                @"
-<text>
-    Normal text
-        <br/>
 
-    <text font=""Courier New"">
-        Courier new at default size
-        <br/>
-
-        <text size=""20"">
-            Now at 20pt 
-        <br/>
-                <text bold=""1"">and this text is bold</text>
-                <text italic=""1"">and this text is italic</text>
-        </text>
-    </text>
-
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
-
-            Assert.AreEqual(1, root_el.Children.Count);
-            var root_elements = root_el.Elements.ToList();
-
-            var n0 = root_el.Children[0];
-            Assert.AreEqual(3, n0.Children.Count);
-            var n1 = n0.Children[0];
-            var n2 = n0.Children[1];
-            var n3 = n0.Children[2];
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n1.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n2.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Element, n3.NodeType);
-
-            Assert.AreEqual("Normal text", n1.GetInnerText());
-            Assert.AreEqual("\n", n2.GetInnerText());
-            Assert.AreEqual(3, n3.Children.Count);
-
-            var n4 = n3.Children[0];
-            var n5 = n3.Children[1];
-            var n6 = n3.Children[2];
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n4.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n5.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Element, n6.NodeType);
-
-            Assert.AreEqual("Courier new at default size", n4.GetInnerText());
-            Assert.AreEqual("\n", n5.GetInnerText());
-            Assert.AreEqual("Now at 20pt\nand this text is boldand this text is italic", n6.GetInnerText());
-        }
 
         [TestMethod]
         public void Markup_Simple_Plain()
         {
-            string text =
-                @"
-<text>
-    Normal Text
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
+            var m = new VA.Text.Markup.TextElement("Normal Text");
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            root_el.SetShapeText(s0);
+            m.SetShapeText(s0);
             page1.Delete(0);
         }
 
         [TestMethod]
         public void Markup_Simple_Bold()
         {
-            string text =
-                @"
-<text bold=""1"">
-    Bold Text
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
+            var m = new VA.Text.Markup.TextElement("Normal Text");
+            m.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            root_el.SetShapeText(s0);
+            m.SetShapeText(s0);
             page1.Delete(0);
         }
 
         [TestMethod]
         public void Markup_Simple_Italic()
         {
-            string text =
-                @"
-<text italic=""1"">
-    Italic Text
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
+            var m = new VA.Text.Markup.TextElement("Normal Text");
+            m.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            root_el.SetShapeText(s0);
+            m.SetShapeText(s0);
             page1.Delete(0);
         }
 
         [TestMethod]
         public void Markup_Simple_Font()
         {
-            string text =
-                @"
-<text font=""Impact"">
-    Italic Text
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
+            var m = new VA.Text.Markup.TextElement("Normal Text");
+            m.TextFormat.Font = "Impact";
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            root_el.SetShapeText(s0);
+            m.SetShapeText(s0);
             page1.Delete(0);
         }
 
         [TestMethod]
         public void Render_Markup_Simple_Font_Multiple()
         {
-            string text =
-                @"
-<text font=""Impact"" color=""#ff0000"">
-    Impact font red
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
+            var m = new VA.Text.Markup.TextElement("Normal Text");
+            m.TextFormat.Font = "Impact";
+            m.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            root_el.SetShapeText(s0);
+            m.SetShapeText(s0);
             page1.Delete(0);
         }
 
         [TestMethod]
         public void Markup_Overlap_Multiple()
         {
-            string text =
-                @"
-<text>
-    plain
-    <text italic=""1"" >
-        italic
-        <text bold=""1"" >
-            bold
-        </text>
-    </text>
-</text> ";
+            var t1 = new VA.Text.Markup.TextElement("Normal Text");
+            t1.TextFormat.Font = "Segoe UI";
+            var t2 = t1.AppendElement("Italic");
+            t2.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
 
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
+            var t3 = t2.AppendElement("Italic");
+            t3.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
+
+            var t4 = t2.AppendElement("Bold Italic");
+            t4.TextFormat.CharStyle = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
+
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            root_el.SetShapeText(s0);
-            page1.Delete(0);
+            t1.SetShapeText(s0);
+            //page1.Delete(0);
         }
     }
 }

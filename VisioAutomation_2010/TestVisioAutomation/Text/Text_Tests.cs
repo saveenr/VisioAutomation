@@ -10,103 +10,6 @@ namespace TestVisioAutomation
     public class Text_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void Test_Xml_To_TextElement_Whitespace()
-        {
-            // Validate that creating a markup structure from a string doesn't lose any whitespace
-            // added to the special whitespace characters
-
-            string text =
-                @"
-<text>
-    <space/>
-    <tab/>
-    <newline/>
-    Normal text
-    <br/>
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
-
-            var actual = root_el.GetInnerText();
-            Assert.AreEqual(" \t\nNormal text\n", actual);
-        }
-
-        [TestMethod]
-        public void Test_Xml_To_TextElement()
-        {
-            // Check that basic text formatting still works.
-
-            string text =
-                @"
-<text>
-    Normal text
-        <br/>
-
-    <text font=""Courier New"">
-        Courier new at default size
-        <br/>
-
-        <text size=""20"">
-            Now at 20pt 
-        <br/>
-                <text bold=""1"">and this text is bold</text>
-                <text italic=""1"">and this text is italic</text>
-        </text>
-    </text>
-
-</text> ";
-
-            var root_el = VA.Text.Markup.TextElement.FromXml(text, false);
-
-            Assert.AreEqual(1, root_el.Children.Count);
-            var root_elements = root_el.Elements.ToList();
-
-            var n0 = root_el.Children[0];
-            Assert.AreEqual(3, n0.Children.Count);
-            var n1 = (VA.Text.Markup.Literal)n0.Children[0];
-            var n2 = (VA.Text.Markup.Literal)n0.Children[1];
-            var n3 = (VA.Text.Markup.TextElement)n0.Children[2];
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n1.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n2.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Element, n3.NodeType);
-
-            Assert.AreEqual("Normal text", n1.GetInnerText());
-            Assert.AreEqual("\n", n2.GetInnerText());
-            Assert.AreEqual(3, n3.Children.Count);
-
-            var n4 = (VA.Text.Markup.Literal)n3.Children[0];
-            var n5 = (VA.Text.Markup.Literal)n3.Children[1];
-            var n6 = (VA.Text.Markup.TextElement)n3.Children[2];
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n4.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n5.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Element, n6.NodeType);
-
-            Assert.AreEqual("Courier new at default size", n4.GetInnerText());
-            Assert.AreEqual("\n", n5.GetInnerText());
-            Assert.AreEqual("Now at 20pt\nand this text is boldand this text is italic", n6.GetInnerText());
-
-            Assert.AreEqual(4, n6.Children.Count);
-            var n7 = (VA.Text.Markup.Literal) n6.Children[0];
-            var n8 = (VA.Text.Markup.Literal) n6.Children[1];
-            var n9 = (VA.Text.Markup.TextElement) n6.Children[2];
-            var n10 = (VA.Text.Markup.TextElement) n6.Children[3];
-
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n7.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Literal, n8.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Element, n9.NodeType);
-            Assert.AreEqual(VA.Text.Markup.NodeType.Element, n10.NodeType);
-            Assert.AreEqual("Now at 20pt", n7.GetInnerText());
-            Assert.AreEqual("\n", n8.GetInnerText());
-            Assert.AreEqual("and this text is bold", n9.GetInnerText());
-            Assert.AreEqual("and this text is italic", n10.GetInnerText());
-
-            Assert.AreEqual("Courier New", n3.TextFormat.Font);
-            Assert.AreEqual(20, n6.TextFormat.FontSize);
-            Assert.AreEqual(VA.Text.CharStyle.Bold, n9.TextFormat.CharStyle.Value);
-            Assert.AreEqual(VA.Text.CharStyle.Italic, n10.TextFormat.CharStyle.Value);
-        }
-
-        [TestMethod]
         public void ValidateFormattingRegions()
         {
             // Check that the formatting regions are correctly
@@ -139,8 +42,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(11, regions3[0].TextEndPos);
 
             var el4 = new VA.Text.Markup.TextElement();
-            el4.AppendNewElement("HELLO");
-            el4.AppendNewElement(" WORLD");
+            el4.AppendElement("HELLO");
+            el4.AppendElement(" WORLD");
             var markup4 = el4.GetMarkupInfo();
             var regions4 = markup4.FormatRegions;
             Assert.AreEqual(3, markup4.FormatRegions.Count);
@@ -156,8 +59,8 @@ namespace TestVisioAutomation
 
 
             var el5 = new VA.Text.Markup.TextElement();
-            var el5_a = el5.AppendNewElement("HELLO");
-            var el5_b = el5_a.AppendNewElement(" WORLD");
+            var el5_a = el5.AppendElement("HELLO");
+            var el5_b = el5_a.AppendElement(" WORLD");
 
             var markup5 = el5.GetMarkupInfo();
             var regions5 = markup5.FormatRegions;
@@ -182,8 +85,8 @@ namespace TestVisioAutomation
             // all make it into a real visio shep when the text is render
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.AppendNewElement("HELLO");
-            var el2 = el0.AppendNewElement(" WORLD");
+            var el1 = el0.AppendElement("HELLO");
+            var el2 = el0.AppendElement(" WORLD");
 
             var page1 = GetNewPage();
 
@@ -202,8 +105,8 @@ namespace TestVisioAutomation
             // Validate that basic formatting works when rendering
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.AppendNewElement("HELLO");
-            var el2 = el0.AppendNewElement(" WORLD");
+            var el1 = el0.AppendElement("HELLO");
+            var el2 = el0.AppendElement(" WORLD");
 
             el1.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
             el2.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
@@ -229,8 +132,8 @@ namespace TestVisioAutomation
             // Validate that sub elements inherit the formatting of parent elements
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.AppendNewElement("HELLO");
-            var el2 = el1.AppendNewElement(" WORLD");
+            var el1 = el0.AppendElement("HELLO");
+            var el2 = el1.AppendElement(" WORLD");
 
             el0.TextFormat.FontSize = 14;
             el0.TextFormat.FontSize = 7;
