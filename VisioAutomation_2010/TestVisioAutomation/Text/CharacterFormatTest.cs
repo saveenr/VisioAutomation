@@ -87,40 +87,40 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 5, 5);
             s1.Text = original_text;
 
-            var textruns0 = VA.Text.TextFormat.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
-            Assert.AreEqual(1, textruns0.Count);
-            Assert.AreEqual(0, textruns0[0].Begin);
-            Assert.AreEqual(original_text.Length + 1, textruns0[0].End);
-            Assert.AreEqual(original_text, textruns0[0].Text);
+            var textruns0 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(1, textruns0.CharacterTextRun.Count);
+            Assert.AreEqual(0, textruns0.CharacterTextRun[0].Begin);
+            Assert.AreEqual(original_text.Length + 1, textruns0.CharacterTextRun[0].End);
+            Assert.AreEqual(original_text, textruns0.CharacterTextRun[0].Text);
 
             var charfmt1 = new VA.Text.CharacterFormatCells();
             charfmt1.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
             VA.Text.TextFormat.SetFormat(s1, charfmt1, 0, 5);
 
-            var textruns1 = VA.Text.TextFormat.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
-            Assert.AreEqual(2, textruns1.Count);
-            Assert.AreEqual(0, textruns1[0].Begin);
-            Assert.AreEqual(5, textruns1[0].End);
-            Assert.AreEqual("Lorem", textruns1[0].Text);
-            Assert.AreEqual(5, textruns1[1].Begin);
-            Assert.AreEqual(27, textruns1[1].End);
-            Assert.AreEqual(" ipsum dolor sit amet", textruns1[1].Text);
+            var textruns1 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(2, textruns1.CharacterTextRun.Count);
+            Assert.AreEqual(0, textruns1.CharacterTextRun[0].Begin);
+            Assert.AreEqual(5, textruns1.CharacterTextRun[0].End);
+            Assert.AreEqual("Lorem", textruns1.CharacterTextRun[0].Text);
+            Assert.AreEqual(5, textruns1.CharacterTextRun[1].Begin);
+            Assert.AreEqual(27, textruns1.CharacterTextRun[1].End);
+            Assert.AreEqual(" ipsum dolor sit amet", textruns1.CharacterTextRun[1].Text);
 
             var charfmt2 = new VA.Text.CharacterFormatCells();
             charfmt2.Style = (int)(VA.Text.CharStyle.Italic | VA.Text.CharStyle.UnderLine);
             VA.Text.TextFormat.SetFormat(s1, charfmt2, 5, 7);
 
-            var textruns2 = VA.Text.TextFormat.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
-            Assert.AreEqual(3, textruns2.Count);
-            Assert.AreEqual(0, textruns2[0].Begin);
-            Assert.AreEqual(5, textruns2[0].End);
-            Assert.AreEqual("Lorem", textruns2[0].Text);
-            Assert.AreEqual(5, textruns2[1].Begin);
-            Assert.AreEqual(7, textruns2[1].End);
-            Assert.AreEqual(" i", textruns2[1].Text);
-            Assert.AreEqual(7, textruns2[2].Begin);
-            Assert.AreEqual(27, textruns2[2].End);
-            Assert.AreEqual("psum dolor sit amet", textruns2[2].Text);
+            var textruns2 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(3, textruns2.CharacterTextRun.Count);
+            Assert.AreEqual(0, textruns2.CharacterTextRun[0].Begin);
+            Assert.AreEqual(5, textruns2.CharacterTextRun[0].End);
+            Assert.AreEqual("Lorem", textruns2.CharacterTextRun[0].Text);
+            Assert.AreEqual(5, textruns2.CharacterTextRun[1].Begin);
+            Assert.AreEqual(7, textruns2.CharacterTextRun[1].End);
+            Assert.AreEqual(" i", textruns2.CharacterTextRun[1].Text);
+            Assert.AreEqual(7, textruns2.CharacterTextRun[2].Begin);
+            Assert.AreEqual(27, textruns2.CharacterTextRun[2].End);
+            Assert.AreEqual("psum dolor sit amet", textruns2.CharacterTextRun[2].Text);
             page1.Delete(0);
         }
     }

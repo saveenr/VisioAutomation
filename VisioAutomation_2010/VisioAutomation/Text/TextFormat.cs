@@ -3,6 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 using System;
+using System.Linq;
 
 namespace VisioAutomation.Text
 {
@@ -10,7 +11,9 @@ namespace VisioAutomation.Text
     {
         public IList<CharacterFormatCells> Character;
         public IList<ParagraphFormatCells> Paragraph;
-        public TextBlockFormatCells TextBlock; 
+        public TextBlockFormatCells TextBlock;
+        public IList<TextRun> CharacterTextRun;
+        public IList<TextRun> ParagraphTextRun; 
 
         internal static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, short cell, int value, int begin,
                                                          int end)
@@ -62,7 +65,7 @@ namespace VisioAutomation.Text
         }
 
 
-        public static IList<TextRun> GetTextRuns(
+        private static IList<TextRun> GetTextRuns(
             IVisio.Shape shape,
             IVisio.VisRunTypes runtype,
             bool collect_text)
@@ -378,6 +381,8 @@ namespace VisioAutomation.Text
             t.Character = VA.Text.CharacterFormatCells.GetCells(shape);
             t.Paragraph = VA.Text.ParagraphFormatCells.GetCells(shape);
             t.TextBlock = VA.Text.TextBlockFormatCells.GetCells(shape);
+            t.CharacterTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            t.ParagraphTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             return t;
         }
 
@@ -386,7 +391,7 @@ namespace VisioAutomation.Text
             var c = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
             var p = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
             var b = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
-
+            var page_shapes = page.Shapes;
             var l = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
             {
@@ -395,8 +400,12 @@ namespace VisioAutomation.Text
                 t.Paragraph = p[i];
                 t.TextBlock = b[i];
                 l.Add(t);
-                
+
+                var shape = page_shapes.get_ItemFromID(shapeids[i]);
+                t.CharacterTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                t.ParagraphTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             }
+
             return l;
         }
 
