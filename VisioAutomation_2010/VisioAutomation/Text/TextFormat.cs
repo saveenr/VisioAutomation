@@ -167,7 +167,7 @@ namespace VisioAutomation.Text
         }
 
 
-        public static void Format(IVisio.Shape shape, VA.Text.ParagraphFormatCells format, int begin, int end)
+        public static void FormatRange(IVisio.Shape shape, VA.Text.ParagraphFormatCells format, int begin, int end)
         {
             if (shape == null)
             {
@@ -232,7 +232,7 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static void Format(IVisio.Shape shape, VA.Text.CharacterFormatCells format, int begin, int end)
+        public static void FormatRange(IVisio.Shape shape, VA.Text.CharacterFormatCells format, int begin, int end)
         {
             if (shape == null)
             {

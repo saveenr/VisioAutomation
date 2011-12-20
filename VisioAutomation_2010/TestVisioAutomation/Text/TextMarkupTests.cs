@@ -227,23 +227,23 @@ namespace TestVisioAutomation
 
             var c1 = new VA.Text.CharacterFormatCells();
             c1.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
-            VA.Text.TextFormat.Format(s1, c1, 0, 5);
+            VA.Text.TextFormat.FormatRange(s1, c1, 0, 5);
 
             var c2 = new VA.Text.CharacterFormatCells();
             c2.Size = 0.5;
-            VA.Text.TextFormat.Format(s1, c2, 5, 10);
+            VA.Text.TextFormat.FormatRange(s1, c2, 5, 10);
 
             var c3 = new VA.Text.CharacterFormatCells();
             c3.Font = page1.Document.Fonts["Impact"].ID;
-            VA.Text.TextFormat.Format(s1, c3, 10, 15);
+            VA.Text.TextFormat.FormatRange(s1, c3, 10, 15);
 
             var c4 = new VA.Text.CharacterFormatCells();
             c4.Style = (int) (VA.Text.CharStyle.Italic | VA.Text.CharStyle.UnderLine);
-            VA.Text.TextFormat.Format(s1, c4, 15, 20);
+            VA.Text.TextFormat.FormatRange(s1, c4, 15, 20);
 
             var c5 = new VA.Text.CharacterFormatCells();
             c5.Transparency = 0.5;
-            VA.Text.TextFormat.Format(s1, c5, 20, 25);
+            VA.Text.TextFormat.FormatRange(s1, c5, 20, 25);
 
             var formatting = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual("RGB(255,0,0)", formatting.CharacterFormats[0].Color.Formula);
@@ -372,8 +372,8 @@ namespace TestVisioAutomation
             cfmt1.Color = "RGB(255,0,0)";
 
 
-            VA.Text.TextFormat.Format(s1, cfmt1, 2, 3);
-            VA.Text.TextFormat.Format(s1, fmt1, 2, 3);
+            VA.Text.TextFormat.FormatRange(s1, cfmt1, 2, 3);
+            VA.Text.TextFormat.FormatRange(s1, fmt1, 2, 3);
 
             var formats1 = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(2, formats1.ParagraphFormats.Count);
@@ -384,8 +384,8 @@ namespace TestVisioAutomation
             var cfmt2 = new VA.Text.CharacterFormatCells();
             cfmt2.Color = "RGB(0,255,0)";
 
-            VA.Text.TextFormat.Format(s1, cfmt2, 13, 14);
-            VA.Text.TextFormat.Format(s1, fmt2, 13, 14);
+            VA.Text.TextFormat.FormatRange(s1, cfmt2, 13, 14);
+            VA.Text.TextFormat.FormatRange(s1, fmt2, 13, 14);
 
             var formats2 = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(4, formats2.ParagraphFormats.Count);

@@ -113,12 +113,12 @@ namespace TestVisioAutomation
                 shape1.Text = TestCommon.Helper.LoremIpsumText;
                 var fmt1 = new VA.Text.CharacterFormatCells();
                 fmt1.Transparency = 0.5;
-                VA.Text.TextFormat.Format(shape1, fmt1, 5, 10);
+                VA.Text.TextFormat.FormatRange(shape1, fmt1, 5, 10);
 
                 var fmt2 = new VA.Text.ParagraphFormatCells();
                 fmt2.IndentLeft = 1.0;
-                VA.Text.TextFormat.Format(shape1, fmt2, 1, 10);
-                VA.Text.TextFormat.Format(shape1, fmt2, 20, 30);
+                VA.Text.TextFormat.FormatRange(shape1, fmt2, 1, 10);
+                VA.Text.TextFormat.FormatRange(shape1, fmt2, 20, 30);
 
                 var hlink1=shape1.Hyperlinks.Add();
                 var stops = new[]

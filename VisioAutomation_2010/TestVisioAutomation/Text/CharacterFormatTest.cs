@@ -36,8 +36,8 @@ namespace TestVisioAutomation
             fmt3.Size = pts_9;
 
             VisioAutomation.Text.TextFormat.Format(shape0, fmt0);
-            VisioAutomation.Text.TextFormat.Format(shape0, fmt1, 10, 20);
-            VisioAutomation.Text.TextFormat.Format(shape0, fmt2, 30, 40);
+            VisioAutomation.Text.TextFormat.FormatRange(shape0, fmt1, 10, 20);
+            VisioAutomation.Text.TextFormat.FormatRange(shape0, fmt2, 30, 40);
 
             // retrieve the text size
             var out_formats1 = VA.Text.TextFormat.GetFormat(shape0);
@@ -95,7 +95,7 @@ namespace TestVisioAutomation
 
             var charfmt1 = new VA.Text.CharacterFormatCells();
             charfmt1.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
-            VA.Text.TextFormat.Format(s1, charfmt1, 0, 5);
+            VA.Text.TextFormat.FormatRange(s1, charfmt1, 0, 5);
 
             var textruns1 = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(2, textruns1.CharacterTextRuns.Count);
@@ -108,7 +108,7 @@ namespace TestVisioAutomation
 
             var charfmt2 = new VA.Text.CharacterFormatCells();
             charfmt2.Style = (int)(VA.Text.CharStyle.Italic | VA.Text.CharStyle.UnderLine);
-            VA.Text.TextFormat.Format(s1, charfmt2, 5, 7);
+            VA.Text.TextFormat.FormatRange(s1, charfmt2, 5, 7);
 
             var textruns2 = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(3, textruns2.CharacterTextRuns.Count);

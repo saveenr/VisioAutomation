@@ -289,7 +289,7 @@ namespace VisioAutomation.Text.Markup
                 fmt.Transparency = markup_region.Element.TextFormat.Transparency.Value/100.0;
             }
 
-            VA.Text.TextFormat.Format(shape, fmt, startpos, endpos);
+            VA.Text.TextFormat.FormatRange(shape, fmt, startpos, endpos);
         }
     }
 }
