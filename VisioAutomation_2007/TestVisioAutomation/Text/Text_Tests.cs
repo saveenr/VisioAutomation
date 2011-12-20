@@ -368,85 +368,85 @@ namespace TestVisioAutomation
             s1 = page1.DrawRectangle(1,1,2,2);
             s1.Text = "Bold";
             fmt.Style = (int) VA.Text.CharStyle.Bold;
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(2,2,3,3);
             s1.Text = "Italic";
             fmt.Style = (int)VA.Text.CharStyle.Italic;
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(3,3,4,4);
             s1.Text = "Underline";
             fmt.Style = (int)VA.Text.CharStyle.UnderLine;
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(4,4,5,5);
             s1.Text = "Smallcaps";
             fmt.Style = (int)VA.Text.CharStyle.SmallCaps;
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(5,5,6,6);
             s1.Text = "Red";
             fmt.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(6,6,7,7);
             s1.Text = "#ec35a7";
             fmt.Color = new VA.Drawing.ColorRGB(0xec35a7).ToFormula();
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(7,7,8,8);
             s1.Text = "#34f178";
             fmt.Color = new VA.Drawing.ColorRGB(0x34f178).ToFormula();
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(8,8,9,9);
             s1.Text = "Calibri";
             fmt.Font = page1.Document.Fonts["Calibri"].ID;
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(9,9,10,10);
             s1.Text = "Impact";
             fmt.Font = page1.Document.Fonts["Impact"].ID;
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(10,10,11,11);
             s1.Text = "Segoe UI";
             fmt.Font = page1.Document.Fonts["Segoe UI"].ID;
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(11,11,12,12);
             s1.Text = "6pt";
             fmt.Size = VA.Convert.PointsToInches(6);
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(12,12,13,13);
             s1.Text = "8pt";
             fmt.Size = VA.Convert.PointsToInches(8);
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(13,13,14,14);
             s1.Text = "11pt";
             fmt.Size = VA.Convert.PointsToInches(8);
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             fmt = new VA.Text.CharacterFormatCells();
             s1 = page1.DrawRectangle(14,14,15,15);
             s1.Text = "15pt";
             fmt.Size = VA.Convert.PointsToInches(15);
-            VA.Text.TextHelper.SetFormat(fmt, s1);
+            VA.Text.TextHelper.SetFormat(s1, fmt);
 
             page1.Delete(0);
         }

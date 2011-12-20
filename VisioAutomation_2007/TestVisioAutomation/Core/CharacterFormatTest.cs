@@ -20,7 +20,7 @@ namespace TestVisioAutomation
             // set the text size
             var incharformat = new VA.Text.CharacterFormatCells();
             incharformat.Size = input_text_size;
-            VisioAutomation.Text.TextHelper.SetFormat(incharformat, shape0);
+            VisioAutomation.Text.TextHelper.SetFormat(shape0, incharformat);
 
             // retrieve the text size
             var query = new VA.ShapeSheet.Query.CellQuery();
@@ -79,7 +79,7 @@ namespace TestVisioAutomation
 
             // new replaces all the sizes with a single specific sizes
             // all the ranges will still exist but will all have the same size
-            VisioAutomation.Text.TextHelper.SetFormat(fmt3, shape0);
+            VisioAutomation.Text.TextHelper.SetFormat(shape0, fmt3);
             var table2 = query.GetResults<double>(shape0);
 
             Assert.AreEqual(5, table2.Count);
