@@ -9,12 +9,42 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        public IList<CharacterFormatCells> Character;
-        public IList<ParagraphFormatCells> Paragraph;
-        public TextBlockFormatCells TextBlock;
-        public IList<TextRun> CharacterTextRun;
-        public IList<TextRun> ParagraphTextRun;
-        public IList<TabStop> TabStop; 
+        private IList<CharacterFormatCells> _characterFormats;
+        private IList<ParagraphFormatCells> _paragraphFormats;
+        private TextBlockFormatCells _textBlocks;
+        private IList<TextRun> _characterTextRuns;
+        private IList<TextRun> _paragraphTextRuns;
+        private IList<TabStop> _tabStops;
+
+        public IList<CharacterFormatCells> CharacterFormats
+        {
+            get { return _characterFormats; }
+        }
+
+        public IList<ParagraphFormatCells> ParagraphFormats
+        {
+            get { return _paragraphFormats; }
+        }
+
+        public TextBlockFormatCells TextBlocks
+        {
+            get { return _textBlocks; }
+        }
+
+        public IList<TextRun> CharacterTextRuns
+        {
+            get { return _characterTextRuns; }
+        }
+
+        public IList<TextRun> ParagraphTextRuns
+        {
+            get { return _paragraphTextRuns; }
+        }
+
+        public IList<TabStop> TabStops
+        {
+            get { return _tabStops; }
+        }
 
         internal static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, short cell, int value, int begin,
                                                          int end)
@@ -120,7 +150,7 @@ namespace VisioAutomation.Text
         }
 
 
-        public static void SetFormat(IVisio.Shape shape, VA.Text.CharacterFormatCells fmt)
+        public static void Format(IVisio.Shape shape, VA.Text.CharacterFormatCells fmt)
         {
             if (shape == null)
             {
@@ -137,7 +167,7 @@ namespace VisioAutomation.Text
         }
 
 
-        public static void SetFormat(IVisio.Shape shape, VA.Text.ParagraphFormatCells format, int begin, int end)
+        public static void Format(IVisio.Shape shape, VA.Text.ParagraphFormatCells format, int begin, int end)
         {
             if (shape == null)
             {
@@ -202,7 +232,7 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static void SetFormat(IVisio.Shape shape, VA.Text.CharacterFormatCells format, int begin, int end)
+        public static void Format(IVisio.Shape shape, VA.Text.CharacterFormatCells format, int begin, int end)
         {
             if (shape == null)
             {
@@ -379,7 +409,7 @@ namespace VisioAutomation.Text
             return tagtab;
         }
 
-        public static int GetTabStopCount(IVisio.Shape shape)
+        private static int GetTabStopCount(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -395,7 +425,7 @@ namespace VisioAutomation.Text
         /// Remove all tab stops on the shape
         /// </summary>
         /// <param name="shape"></param>
-        public static void ClearTabStops(IVisio.Shape shape)
+        private static void ClearTabStops(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -428,12 +458,12 @@ namespace VisioAutomation.Text
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
             var t = new TextFormat();
-            t.Character = VA.Text.CharacterFormatCells.GetCells(shape);
-            t.Paragraph = VA.Text.ParagraphFormatCells.GetCells(shape);
-            t.TextBlock = VA.Text.TextBlockFormatCells.GetCells(shape);
-            t.CharacterTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            t.ParagraphTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
-            t.TabStop = VA.Text.TextFormat.GetTabStops(shape);
+            t._characterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
+            t._paragraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
+            t._textBlocks = VA.Text.TextBlockFormatCells.GetCells(shape);
+            t._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            t._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            t._tabStops = VA.Text.TextFormat.GetTabStops(shape);
             return t;
         }
 
@@ -447,16 +477,16 @@ namespace VisioAutomation.Text
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var t = new TextFormat();
-                t.Character = c[i];
-                t.Paragraph = p[i];
-                t.TextBlock = b[i];
+                t._characterFormats = c[i];
+                t._paragraphFormats = p[i];
+                t._textBlocks = b[i];
                 l.Add(t);
 
                 var shape = page_shapes.get_ItemFromID(shapeids[i]);
-                t.CharacterTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-                t.ParagraphTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+                t._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                t._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
-                t.TabStop = VA.Text.TextFormat.GetTabStops(shape);
+                t._tabStops = VA.Text.TextFormat.GetTabStops(shape);
             }
 
             return l;

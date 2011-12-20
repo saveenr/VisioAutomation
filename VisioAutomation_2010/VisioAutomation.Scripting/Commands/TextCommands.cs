@@ -75,7 +75,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     var s = shape; // to prevent Access to Modified Closure warning
                     var m = VA.Text.TextFormat.GetFormat(s);
-                    var textruns = m.CharacterTextRun;
+                    var textruns = m.CharacterTextRuns;
 
                     var nocast = (short)IVisio.VisUnitCodes.visNoCast;
                     var textstyles = textruns

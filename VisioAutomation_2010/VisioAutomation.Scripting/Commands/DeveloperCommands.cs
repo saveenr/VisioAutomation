@@ -478,7 +478,7 @@ namespace VisioAutomation.Scripting.Commands
             foreach (var node in tree_layout.Nodes)
             {
                 string label = node_to_nslabel[node];
-                VA.Text.TextFormat.SetFormat(node.VisioShape, charcells, 0, label.Length);
+                VA.Text.TextFormat.Format(node.VisioShape, charcells, 0, label.Length);
             }
             return doc;
         }

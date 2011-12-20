@@ -39,9 +39,9 @@ namespace TestVisioAutomation
             var pts_9 = VA.Convert.PointsToInches(9);
             fmt3.Size = pts_9;
 
-            VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt0);
-            VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt1, 10, 20);
-            VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt2, 30, 40);
+            VisioAutomation.Text.TextFormat.Format(shape0, fmt0);
+            VisioAutomation.Text.TextFormat.Format(shape0, fmt1, 10, 20);
+            VisioAutomation.Text.TextFormat.Format(shape0, fmt2, 30, 40);
 
 
             var section = shape0.Section[(short) IVisio.VisSectionIndices.visSectionCharacter];
