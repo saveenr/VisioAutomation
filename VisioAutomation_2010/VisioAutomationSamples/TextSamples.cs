@@ -8,28 +8,55 @@ namespace VisioAutomationSamples
 {
     public static class TextSamples
     {
-        private static string text1 =
-            @"
-<text font=""Calibri"" size=""15"" color=""#ff0000"">
+        public static VA.Text.Markup.TextElement AddElementEx( this VA.Text.Markup.TextElement p, string text, string font, double? size, int? color, VA.Drawing.AlignmentHorizontal? halign, VA.Text.CharStyle? cs)
+        {
+            var el = p.AppendElement(text);
+            if (font != null)
+            {
+                el.TextFormat.Font = font;
+            }
+            if (size.HasValue)
+            {
+                el.TextFormat.FontSize = size.Value;
+            }
+            if (color.HasValue)
+            {
+                el.TextFormat.Color = new VA.Drawing.ColorRGB(color.Value);
+            }
+            if (halign.HasValue)
+            {
+                el.TextFormat.HAlign = halign.Value;
+            }
 
-    <text>Hello World [Calibri 15pt red]</text>
-    <br/><br/><br/><br/>
-    <text font=""Segoe UI"" size=""20"" color=""#0000ff"">
-        Hello World [Segoe UI 20 pt blue]
-        <text italic=""1"" bold=""1"" halign=""left"" color=""#505050"">
-            Hello World [ left italic gray ]
-            <text bold=""1"" italic=""1"" halign=""right"">
-                Hello World [ bold,italic right]
-            </text>
-            <text bold=""0"" italic=""0"" halign=""center"">
-                Hello World [ nobold,noitalic,center]
-            </text>
-            Hello World [ left italic gray ]
-        </text>
-        Hello World [Segoe UI 20 pt blue]
-    </text>
-    Hello World [Calibri 15pt red]
-</text>";
+            if (cs.HasValue)
+            {
+                el.TextFormat.CharStyle = cs;
+            }
+
+            return el;
+        }
+
+        public static VA.Text.Markup.TextElement get_markup_1()
+        {
+            var e1 = new VA.Text.Markup.TextElement();
+            e1.AppendText("E1Calibri 15pt red\n");
+            e1.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
+            e1.TextFormat.Font = "Calibri";
+            e1.TextFormat.FontSize = 15;
+
+            var e2 = e1.AddElementEx("Segoe UI 20 pt blue]\n","Segoe UI",20,0x0000ff,null,null);
+            var e3 = e2.AddElementEx("E3 left italic gray\n",null,null,0xa0a0a0,VA.Drawing.AlignmentHorizontal.Left,null);
+            var e4 = e3.AddElementEx("E4 bold italic right\n", null, null, null, VA.Drawing.AlignmentHorizontal.Right, VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic);
+            var e5 = e3.AddElementEx("E5 nobold, noitalic, Center]\n", null, null, null, VA.Drawing.AlignmentHorizontal.Center, VA.Text.CharStyle.None);
+
+            e3.AppendElement("E3 FFF\n");
+            e2.AppendElement("E2 [left italic gray\n");
+            e1.AppendElement("E1 [Calibri 15pt red]\n");
+
+            return e1;
+
+        }
+
 
         private static string text2 =
             @"
@@ -90,7 +117,7 @@ The indenting has ended.
                 VA.Text.Markup.Fields.PageName);
         }
 
-        public static void TextMarkup1()
+        public static void TextMarkup11()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
@@ -99,35 +126,9 @@ The indenting has ended.
             var s2 = page.DrawRectangle(8, 0, 16, 8);
             var s3 = page.DrawRectangle(0, 8, 8, 16);
             var s4 = page.DrawRectangle(8, 8, 16, 16);
-            var shapes = new[] { s1, s2, s3, s4 };
 
-            // Create Text Markup XML documents for each string
-            var markup_strings = new[] {text1, text2, text3, text4};
-            
-            // Set the Text Markup for each shape
-            for (int i = 0; i < shapes.Length; i++)
-            {
-                var shape = shapes[i];
-                var markup_string = markup_strings[i];
-                var markup_dom = VA.Text.Markup.TextElement.FromXml(markup_string, true);
-                markup_dom.SetShapeText(shape);
-            }
-        }
-
-        public static void TextMarkup2()
-        {
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var s0 = page.DrawRectangle(1, 1, 4, 4);
-
-            page.DrawRectangle(1, 1, 4, 4);
-
-            var tokens = new[] {"The ", "Quick ", "Brown ", "Fox"};
-            var e1 = new VA.Text.Markup.TextElement();
-            foreach (var token in tokens)
-            {
-                e1.AppendText(token);
-            }
-            //vi.Text.Markup = e1;
+            var m1 = get_markup_1();
+            m1.SetShapeText(s1);
         }
 
         public static void TextSizing()
