@@ -13,7 +13,8 @@ namespace VisioAutomation.Text
         public IList<ParagraphFormatCells> Paragraph;
         public TextBlockFormatCells TextBlock;
         public IList<TextRun> CharacterTextRun;
-        public IList<TextRun> ParagraphTextRun; 
+        public IList<TextRun> ParagraphTextRun;
+        public IList<TabStop> TabStop; 
 
         internal static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, short cell, int value, int begin,
                                                          int end)
@@ -252,6 +253,55 @@ namespace VisioAutomation.Text
         private static readonly short unitcode_nocast = (short)IVisio.VisUnitCodes.visNoCast;
         private const short tab_section = (short)IVisio.VisSectionIndices.visSectionTab;
 
+        private static IList<TabStop> GetTabStops(IVisio.Shape shape)
+        {
+            if (shape == null)
+            {
+                throw new ArgumentNullException("shape");
+            }
+
+            int num_stops = VA.Text.TextFormat.GetTabStopCount(shape);
+
+            if (num_stops < 1)
+            {
+                return new List<TabStop>(0);
+            }
+
+            const short row = 0;
+
+
+            var cellsrcs = new List<VA.ShapeSheet.SRC>(num_stops*3);
+            for (int stop_index = 0; stop_index < num_stops; stop_index++)
+            {
+                int i = stop_index * 3;
+
+
+                var src_tabpos = new VA.ShapeSheet.SRC(tab_section, row, (short)(i + 1));
+                var src_tabalign = new VA.ShapeSheet.SRC(tab_section, row, (short)(i + 2));
+                var src_tabother = new VA.ShapeSheet.SRC(tab_section, row, (short)(i + 3));
+
+                cellsrcs.Add(src_tabpos);
+                cellsrcs.Add(src_tabalign );
+                cellsrcs.Add(src_tabother);
+            }
+
+            var stream = VA.ShapeSheet.SRC.ToStream(cellsrcs);
+            var formulas = VA.ShapeSheet.Query.QueryUtil.GetFormulasU(shape, stream, num_stops*3);
+            var unitcodes = cellsrcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
+            var results = VA.ShapeSheet.Query.QueryUtil.GetResults<double>(shape, stream, unitcodes, num_stops*3);
+
+            var stops_list = new List<TabStop>(num_stops);
+            for (int stop_index = 0; stop_index < num_stops; stop_index++)
+            {
+                var pos = results[(stop_index*3) + 1];
+                var align = (VA.Text.TabStopAlignment) ((int)results[(stop_index*3) + 2]);
+                var ts = new VA.Text.TabStop(pos, align);
+                stops_list.Add(ts);
+            }
+
+            return stops_list;
+        }
+
         public static void SetTabStops(IVisio.Shape shape, IList<TabStop> stops)
         {
             if (shape == null)
@@ -383,6 +433,7 @@ namespace VisioAutomation.Text
             t.TextBlock = VA.Text.TextBlockFormatCells.GetCells(shape);
             t.CharacterTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             t.ParagraphTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            t.TabStop = VA.Text.TextFormat.GetTabStops(shape);
             return t;
         }
 
@@ -404,6 +455,8 @@ namespace VisioAutomation.Text
                 var shape = page_shapes.get_ItemFromID(shapeids[i]);
                 t.CharacterTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
                 t.ParagraphTextRun = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+
+                t.TabStop = VA.Text.TextFormat.GetTabStops(shape);
             }
 
             return l;

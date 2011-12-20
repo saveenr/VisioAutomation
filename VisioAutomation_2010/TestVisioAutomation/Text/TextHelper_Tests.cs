@@ -124,17 +124,20 @@ namespace TestVisioAutomation
 
             // clearing tab stops shoudl work even if there are no tab stops
             VA.Text.TextFormat.SetTabStops(s1, no_tab_stops);
-            Assert.AreEqual(0, VA.Text.TextFormat.GetTabStopCount(s1));
+            var m1 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(0, m1.TabStop.Count);
 
             // set the 3 tab stops
             VA.Text.TextFormat.SetTabStops(s1, tabstops);
 
             // should have exactly the same number we set
-            Assert.AreEqual(tabstops.Length, VA.Text.TextFormat.GetTabStopCount(s1));
+            var m2 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(tabstops.Length, m2.TabStop.Count);
 
             // clear the tab stops
             VA.Text.TextFormat.SetTabStops(s1, no_tab_stops);
-            Assert.AreEqual(0, VA.Text.TextFormat.GetTabStopCount(s1));
+            var m3 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(0, m3.TabStop.Count);
 
             page1.Delete(0);
         }
