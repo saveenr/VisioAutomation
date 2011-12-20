@@ -218,11 +218,11 @@ namespace VisioAutomation.Text.Markup
         {
             if (markup_region.Element.TextFormat.Indent.HasValue)
             {
-                var chars0 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars0 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentFirst,
                                                                   0, markup_region.TextStartPos, markup_region.TextEndPos);
 
-                var chars1 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars1 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentLeft,
                                                                   (int)
                                                                   markup_region.Element.TextFormat.Indent.Value, markup_region.TextStartPos, markup_region.TextEndPos);
@@ -231,7 +231,7 @@ namespace VisioAutomation.Text.Markup
             if (markup_region.Element.TextFormat.HAlign.HasValue)
             {
                 int int_halign = (int) markup_region.Element.TextFormat.HAlign.Value;
-                VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                      (short) IVisio.VisCellIndices.visHorzAlign,
                                                      int_halign, markup_region.TextStartPos, markup_region.TextEndPos);
             }
@@ -245,13 +245,13 @@ namespace VisioAutomation.Text.Markup
                 int indent_first = -base_indent_size;
                 int indent_left = base_indent_size;
 
-                var chars0 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars0 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentFirst,
                                                                   indent_first, markup_region.TextStartPos, markup_region.TextEndPos);
-                var chars1 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars1 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentLeft,
                                                                   indent_left, markup_region.TextStartPos, markup_region.TextEndPos);
-                var chars2 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars2 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visBulletIndex,
                                                                   bullet_type, markup_region.TextStartPos, markup_region.TextEndPos);
             }
@@ -289,7 +289,7 @@ namespace VisioAutomation.Text.Markup
                 fmt.Transparency = markup_region.Element.TextFormat.Transparency.Value/100.0;
             }
 
-            VA.Text.TextHelper.SetFormat(shape, fmt, startpos, endpos);
+            VA.Text.TextFormat.SetFormat(shape, fmt, startpos, endpos);
         }
     }
 }

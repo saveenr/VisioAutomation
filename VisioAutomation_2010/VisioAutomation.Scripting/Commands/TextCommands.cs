@@ -75,7 +75,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     var s = shape; // to prevent Access to Modified Closure warning
                     var textruns =
-                        VA.Text.TextHelper.GetTextRuns(s, IVisio.VisRunTypes.visCharPropRow, false)
+                        VA.Text.TextFormat.GetTextRuns(s, IVisio.VisRunTypes.visCharPropRow, false)
                             .ToList();
 
                     var nocast = (short)IVisio.VisUnitCodes.visNoCast;
@@ -326,7 +326,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
-            var formats = VA.Text.TextHelper.GetCharacterFormat(application.ActivePage, shapeids);
+            var formats = VA.Text.TextFormat.GetCharacterFormat(application.ActivePage, shapeids);
             return formats;
         }
 
@@ -340,7 +340,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
-            var formats = VA.Text.TextHelper.GetParagraphFormat(application.ActivePage, shapeids);
+            var formats = VA.Text.TextFormat.GetParagraphFormat(application.ActivePage, shapeids);
             return formats;
         }
     }

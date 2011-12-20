@@ -120,21 +120,21 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
             // shapes shoould not have any tab stops by default
-            Assert.AreEqual(0, VA.Text.TextHelper.GetTabStopCount(s1));
+            Assert.AreEqual(0, VA.Text.TextFormat.GetTabStopCount(s1));
 
             // clearing tab stops shoudl work even if there are no tab stops
-            VA.Text.TextHelper.SetTabStops(s1, no_tab_stops);
-            Assert.AreEqual(0, VA.Text.TextHelper.GetTabStopCount(s1));
+            VA.Text.TextFormat.SetTabStops(s1, no_tab_stops);
+            Assert.AreEqual(0, VA.Text.TextFormat.GetTabStopCount(s1));
 
             // set the 3 tab stops
-            VA.Text.TextHelper.SetTabStops(s1, tabstops);
+            VA.Text.TextFormat.SetTabStops(s1, tabstops);
 
             // should have exactly the same number we set
-            Assert.AreEqual(tabstops.Length, VA.Text.TextHelper.GetTabStopCount(s1));
+            Assert.AreEqual(tabstops.Length, VA.Text.TextFormat.GetTabStopCount(s1));
 
             // clear the tab stops
-            VA.Text.TextHelper.SetTabStops(s1, no_tab_stops);
-            Assert.AreEqual(0, VA.Text.TextHelper.GetTabStopCount(s1));
+            VA.Text.TextFormat.SetTabStops(s1, no_tab_stops);
+            Assert.AreEqual(0, VA.Text.TextFormat.GetTabStopCount(s1));
 
             page1.Delete(0);
         }

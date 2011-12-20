@@ -35,12 +35,12 @@ namespace TestVisioAutomation
             var pts_9 = VA.Convert.PointsToInches(9);
             fmt3.Size = pts_9;
 
-            VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt0 );
-            VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt1 , 10, 20);
-            VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt2 , 30, 40);
+            VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt0);
+            VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt1, 10, 20);
+            VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt2, 30, 40);
 
             // retrieve the text size
-            var out_formats1 = VA.Text.TextHelper.GetCharacterFormat(shape0);
+            var out_formats1 = VA.Text.TextFormat.GetCharacterFormat(shape0);
 
 
             // veriy all the sizes are present
@@ -53,8 +53,8 @@ namespace TestVisioAutomation
 
             // new replaces all the sizes with a single specific sizes
             // all the ranges will still exist but will all have the same size
-            VisioAutomation.Text.TextHelper.SetFormat(shape0, fmt3);
-            var out_formats2 = VA.Text.TextHelper.GetCharacterFormat(shape0);
+            VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt3);
+            var out_formats2 = VA.Text.TextFormat.GetCharacterFormat(shape0);
 
             Assert.AreEqual(5, out_formats2.Count);
             Assert.AreEqual(pts_9, out_formats2[0].Size.Result, 0.000000005);
@@ -66,7 +66,7 @@ namespace TestVisioAutomation
 
             // now retrieve with unit codes to verify that
             // our conversion of points and inches matches reality
-            var out_formats3 = VA.Text.TextHelper.GetCharacterFormat(shape0);
+            var out_formats3 = VA.Text.TextFormat.GetCharacterFormat(shape0);
             var inches_for_9pts = VA.Convert.PointsToInches(9.0);
             Assert.AreEqual(5, out_formats3.Count);
             Assert.AreEqual(inches_for_9pts, out_formats3[0].Size.Result, 0.000000005);
@@ -87,7 +87,7 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 5, 5);
             s1.Text = original_text;
 
-            var textruns0 = VA.Text.TextHelper.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
+            var textruns0 = VA.Text.TextFormat.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
             Assert.AreEqual(1, textruns0.Count);
             Assert.AreEqual(0, textruns0[0].Begin);
             Assert.AreEqual(original_text.Length + 1, textruns0[0].End);
@@ -95,9 +95,9 @@ namespace TestVisioAutomation
 
             var charfmt1 = new VA.Text.CharacterFormatCells();
             charfmt1.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
-            VA.Text.TextHelper.SetFormat(s1,  charfmt1, 0, 5);
+            VA.Text.TextFormat.SetFormat(s1, charfmt1, 0, 5);
 
-            var textruns1 = VA.Text.TextHelper.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
+            var textruns1 = VA.Text.TextFormat.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
             Assert.AreEqual(2, textruns1.Count);
             Assert.AreEqual(0, textruns1[0].Begin);
             Assert.AreEqual(5, textruns1[0].End);
@@ -108,9 +108,9 @@ namespace TestVisioAutomation
 
             var charfmt2 = new VA.Text.CharacterFormatCells();
             charfmt2.Style = (int)(VA.Text.CharStyle.Italic | VA.Text.CharStyle.UnderLine);
-            VA.Text.TextHelper.SetFormat(s1, charfmt2, 5, 7);
+            VA.Text.TextFormat.SetFormat(s1, charfmt2, 5, 7);
 
-            var textruns2 = VA.Text.TextHelper.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
+            var textruns2 = VA.Text.TextFormat.GetTextRuns(s1, IVisio.VisRunTypes.visCharPropRow, true);
             Assert.AreEqual(3, textruns2.Count);
             Assert.AreEqual(0, textruns2[0].Begin);
             Assert.AreEqual(5, textruns2[0].End);
