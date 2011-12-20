@@ -164,6 +164,7 @@
     <Compile Include="Shapesheet\Update\UpdateUtil.cs" />
     <Compile Include="Shapesheet\Update\UpdateType.cs" />
     <Compile Include="Text\CharStyle.cs" />
+    <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="UI\AlertResponseCode.cs" />
