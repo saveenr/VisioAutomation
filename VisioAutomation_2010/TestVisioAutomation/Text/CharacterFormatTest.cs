@@ -7,33 +7,9 @@ namespace TestVisioAutomation
 {
     [TestClass]
     public class CharacterFormatTest : VisioAutomationTest
-    {
+    {       
         [TestMethod]
-        public void SetCharacterSize()
-        {
-            double input_text_size = VA.Convert.PointsToInches(50);
-            
-            // Create a simple shape with no text and set the size to a specific value
-            var page1 = GetNewPage();
-            var shape0 = page1.DrawRectangle(1, 1, 3, 3);
-
-            // set the text size
-            var incharformat = new VA.Text.CharacterFormatCells();
-            incharformat.Size = input_text_size;
-            VisioAutomation.Text.TextHelper.SetFormat(incharformat, shape0);
-
-            // retrieve the text size
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_charsize = query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Size);
-            var results = query.GetResults<double>(shape0);
-            
-            // before & after sizes should be the same
-            Assert.AreEqual(input_text_size, results[0,col_charsize], 0.005);
-            page1.Delete(0);
-        }
-        
-        [TestMethod]
-        public void SetMultipleCharacterSizes()
+        public void SetCharacterSizeMultupleRegions()
         {
             // Create a simple shape with text that has multiple character formatting rows
             // Then format the text and all character rows should be altered
@@ -62,51 +38,48 @@ namespace TestVisioAutomation
             VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt0 );
             VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt1 , 10, 20);
             VisioAutomation.Text.TextHelper.SetFormat(shape0,fmt2 , 30, 40);
-            
-            // retrieve the text size
-            var query = new VA.ShapeSheet.Query.SectionQuery(IVisio.VisSectionIndices.visSectionCharacter);
-            query.AddColumn(IVisio.VisCellIndices.visCharacterSize);
 
-            var table1 = query.GetResults<double>(shape0);
+            // retrieve the text size
+            var out_formats1 = VA.Text.TextHelper.GetCharacterFormat(shape0);
+
 
             // veriy all the sizes are present
-            Assert.AreEqual(5,table1.Count);
-            Assert.AreEqual(pts_10, table1[0, 0], 0.000000005);
-            Assert.AreEqual(pts_6,  table1[1, 0], 0.000000005);
-            Assert.AreEqual(pts_10, table1[2, 0], 0.000000005);
-            Assert.AreEqual(pts_18, table1[3, 0], 0.000000005);
-            Assert.AreEqual(pts_10, table1[4, 0], 0.000000005);
+            Assert.AreEqual(5,out_formats1.Count);
+            Assert.AreEqual(pts_10, out_formats1[0].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_6, out_formats1[1].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_10, out_formats1[2].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_18, out_formats1[3].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_10, out_formats1[4].Size.Result, 0.000000005);
 
             // new replaces all the sizes with a single specific sizes
             // all the ranges will still exist but will all have the same size
             VisioAutomation.Text.TextHelper.SetFormat(fmt3, shape0);
-            var table2 = query.GetResults<double>(shape0);
+            var out_formats2 = VA.Text.TextHelper.GetCharacterFormat(shape0);
 
-            Assert.AreEqual(5, table2.Count);
-            Assert.AreEqual(pts_9, table2[0, 0], 0.000000005);
-            Assert.AreEqual(pts_9, table2[1, 0], 0.000000005);
-            Assert.AreEqual(pts_9, table2[2, 0], 0.000000005);
-            Assert.AreEqual(pts_9, table2[3, 0], 0.000000005);
-            Assert.AreEqual(pts_9, table2[4, 0], 0.000000005);
+            Assert.AreEqual(5, out_formats2.Count);
+            Assert.AreEqual(pts_9, out_formats2[0].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2[1].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2[2].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2[3].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2[4].Size.Result, 0.000000005);
 
 
             // now retrieve with unit codes to verify that
             // our conversion of points and inches matches reality
-            query.Columns[0].UnitCode = IVisio.VisUnitCodes.visPoints;
-            var table3 = query.GetResults<double>(shape0);
-
-            Assert.AreEqual(5, table3.Count);
-            Assert.AreEqual(9.0, table3[0, 0], 0.000000005);
-            Assert.AreEqual(9.0, table3[1, 0], 0.000000005);
-            Assert.AreEqual(9.0, table3[2, 0], 0.000000005);
-            Assert.AreEqual(9.0, table3[3, 0], 0.000000005);
-            Assert.AreEqual(9.0, table3[4, 0], 0.000000005);
+            var out_formats3 = VA.Text.TextHelper.GetCharacterFormat(shape0);
+            var inches_for_9pts = VA.Convert.PointsToInches(9.0);
+            Assert.AreEqual(5, out_formats3.Count);
+            Assert.AreEqual(inches_for_9pts, out_formats3[0].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3[1].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3[2].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3[3].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3[4].Size.Result, 0.000000005);
 
             page1.Delete(0);
         }
         
         [TestMethod]
-        public void CheckTextRuns()
+        public void FormatCharactersAndCheckTextRuns()
         {
             var page1 = GetNewPage();
 

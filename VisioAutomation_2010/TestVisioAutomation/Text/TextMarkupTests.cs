@@ -7,7 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class Text_Tests : VisioAutomationTest
+    public class TextMarkupTests : VisioAutomationTest
     {
         [TestMethod]
         public void ValidateFormattingRegions()
