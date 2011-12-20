@@ -8,6 +8,10 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
+        public IList<CharacterFormatCells> Character;
+        public IList<ParagraphFormatCells> Paragraph;
+        public TextBlockFormatCells TextBlock; 
+
         internal static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, short cell, int value, int begin,
                                                          int end)
         {
@@ -194,28 +198,6 @@ namespace VisioAutomation.Text
             }
         }
 
-        public static IList<List<ParagraphFormatCells>> GetParagraphFormat(IVisio.Page page, IList<int> shapeids)
-        {
-            return ParagraphFormatCells.GetCells(page, shapeids);
-        }
-
-        public static IList<ParagraphFormatCells> GetParagraphFormat(IVisio.Shape shape)
-        {
-            return ParagraphFormatCells.GetCells(shape);
-        }
-
-        public static IList<List<VA.Text.CharacterFormatCells>> GetCharacterFormat(IVisio.Page page, IList<int> shapeids)
-        {
-            return VA.Text.CharacterFormatCells.GetCells(page, shapeids);
-        }
-
-        public static IList<VA.Text.CharacterFormatCells> GetCharacterFormat(IVisio.Shape shape)
-        {
-            return VA.Text.CharacterFormatCells.GetCells(shape);
-        }
-
-        private const short char_section = (short)IVisio.VisSectionIndices.visSectionCharacter;
-
         public static void SetFormat(IVisio.Shape shape, VA.Text.CharacterFormatCells format, int begin, int end)
         {
             if (shape == null)
@@ -390,14 +372,32 @@ namespace VisioAutomation.Text
             update.Execute(shape);
         }
 
-        public static IList<VA.Text.TextBlockFormatCells> GetTextBlockFormat(IVisio.Page page, IList<int> shapeids)
+        public static TextFormat GetFormat(IVisio.Shape shape)
         {
-            return VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
+            var t = new TextFormat();
+            t.Character = VA.Text.CharacterFormatCells.GetCells(shape);
+            t.Paragraph = VA.Text.ParagraphFormatCells.GetCells(shape);
+            t.TextBlock = VA.Text.TextBlockFormatCells.GetCells(shape);
+            return t;
         }
 
-        public static VA.Text.TextBlockFormatCells GetTextBlockFormat(IVisio.Shape shape)
+        public static IList<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
         {
-            return VA.Text.TextBlockFormatCells.GetCells(shape);
+            var c = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
+            var p = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
+            var b = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
+
+            var l = new List<TextFormat>(shapeids.Count);
+            for (int i = 0; i < shapeids.Count; i++)
+            {
+                var t = new TextFormat();
+                t.Character = c[i];
+                t.Paragraph = p[i];
+                t.TextBlock = b[i];
+                l.Add(t);
+                
+            }
+            return l;
         }
 
         public static VA.Text.CharStyle GetCharStyle(bool bold, bool italic, bool underline, bool smallcaps)

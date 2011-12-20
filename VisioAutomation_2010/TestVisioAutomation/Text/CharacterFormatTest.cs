@@ -40,40 +40,40 @@ namespace TestVisioAutomation
             VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt2, 30, 40);
 
             // retrieve the text size
-            var out_formats1 = VA.Text.TextFormat.GetCharacterFormat(shape0);
+            var out_formats1 = VA.Text.TextFormat.GetFormat(shape0);
 
 
             // veriy all the sizes are present
-            Assert.AreEqual(5,out_formats1.Count);
-            Assert.AreEqual(pts_10, out_formats1[0].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_6, out_formats1[1].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_10, out_formats1[2].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_18, out_formats1[3].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_10, out_formats1[4].Size.Result, 0.000000005);
+            Assert.AreEqual(5,out_formats1.Character.Count);
+            Assert.AreEqual(pts_10, out_formats1.Character[0].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_6, out_formats1.Character[1].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_10, out_formats1.Character[2].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_18, out_formats1.Character[3].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_10, out_formats1.Character[4].Size.Result, 0.000000005);
 
             // new replaces all the sizes with a single specific sizes
             // all the ranges will still exist but will all have the same size
             VisioAutomation.Text.TextFormat.SetFormat(shape0, fmt3);
-            var out_formats2 = VA.Text.TextFormat.GetCharacterFormat(shape0);
+            var out_formats2 = VA.Text.TextFormat.GetFormat(shape0);
 
-            Assert.AreEqual(5, out_formats2.Count);
-            Assert.AreEqual(pts_9, out_formats2[0].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_9, out_formats2[1].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_9, out_formats2[2].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_9, out_formats2[3].Size.Result, 0.000000005);
-            Assert.AreEqual(pts_9, out_formats2[4].Size.Result, 0.000000005);
+            Assert.AreEqual(5, out_formats2.Character.Count);
+            Assert.AreEqual(pts_9, out_formats2.Character[0].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2.Character[1].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2.Character[2].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2.Character[3].Size.Result, 0.000000005);
+            Assert.AreEqual(pts_9, out_formats2.Character[4].Size.Result, 0.000000005);
 
 
             // now retrieve with unit codes to verify that
             // our conversion of points and inches matches reality
-            var out_formats3 = VA.Text.TextFormat.GetCharacterFormat(shape0);
+            var out_formats3 = VA.Text.TextFormat.GetFormat(shape0);
             var inches_for_9pts = VA.Convert.PointsToInches(9.0);
-            Assert.AreEqual(5, out_formats3.Count);
-            Assert.AreEqual(inches_for_9pts, out_formats3[0].Size.Result, 0.000000005);
-            Assert.AreEqual(inches_for_9pts, out_formats3[1].Size.Result, 0.000000005);
-            Assert.AreEqual(inches_for_9pts, out_formats3[2].Size.Result, 0.000000005);
-            Assert.AreEqual(inches_for_9pts, out_formats3[3].Size.Result, 0.000000005);
-            Assert.AreEqual(inches_for_9pts, out_formats3[4].Size.Result, 0.000000005);
+            Assert.AreEqual(5, out_formats3.Character.Count);
+            Assert.AreEqual(inches_for_9pts, out_formats3.Character[0].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3.Character[1].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3.Character[2].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3.Character[3].Size.Result, 0.000000005);
+            Assert.AreEqual(inches_for_9pts, out_formats3.Character[4].Size.Result, 0.000000005);
 
             page1.Delete(0);
         }

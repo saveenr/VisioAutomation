@@ -316,32 +316,19 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
         }
 
-        public IList<List<VA.Text.CharacterFormatCells>> GetCharacterFormat()
+        public IList<VA.Text.TextFormat> GetFormat()
         {
             if (!this.Session.HasSelectedShapes())
             {
-                return new List<List<VA.Text.CharacterFormatCells>>(0);
+                return new List<VA.Text.TextFormat>(0);
             }
 
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
-            var formats = VA.Text.TextFormat.GetCharacterFormat(application.ActivePage, shapeids);
+            var formats = VA.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
         }
 
-        public IList<List<VA.Text.ParagraphFormatCells>> GetParagraphFormat()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return new List<List<VA.Text.ParagraphFormatCells>>(0);
-            }
-
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var application = this.Session.VisioApplication;
-            var formats = VA.Text.TextFormat.GetParagraphFormat(application.ActivePage, shapeids);
-            return formats;
-        }
     }
 }

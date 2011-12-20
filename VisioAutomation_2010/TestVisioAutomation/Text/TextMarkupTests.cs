@@ -117,11 +117,11 @@ namespace TestVisioAutomation
 
             el0.SetShapeText(s1);
 
-            var fmts = VA.Text.TextFormat.GetCharacterFormat(s1);
-            Assert.AreEqual(3, fmts.Count);
-            Assert.AreEqual((int)VA.Text.CharStyle.Bold, fmts[0].Style.Result);
-            Assert.AreEqual((int)VA.Text.CharStyle.Italic, fmts[1].Style.Result);
-            Assert.AreEqual((int)VA.Text.CharStyle.None, fmts[2].Style.Result);
+            var fmts = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(3, fmts.Character.Count);
+            Assert.AreEqual((int)VA.Text.CharStyle.Bold, fmts.Character[0].Style.Result);
+            Assert.AreEqual((int)VA.Text.CharStyle.Italic, fmts.Character[1].Style.Result);
+            Assert.AreEqual((int)VA.Text.CharStyle.None, fmts.Character[2].Style.Result);
 
             page1.Delete(0);
         }
@@ -168,8 +168,8 @@ namespace TestVisioAutomation
 
             el0.SetShapeText(s1);
 
-            var fmts = VA.Text.TextFormat.GetCharacterFormat(s1);
-            Assert.AreEqual(3, fmts.Count);
+            var fmts = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(3, fmts.Character.Count);
 
             page1.Delete(0);
         }
@@ -245,13 +245,13 @@ namespace TestVisioAutomation
             c5.Transparency = 0.5;
             VA.Text.TextFormat.SetFormat(s1, c5, 20, 25);
 
-            var formatting = VA.Text.TextFormat.GetCharacterFormat(s1);
-            Assert.AreEqual("RGB(255,0,0)", formatting[0].Color.Formula);
-            Assert.AreEqual(0.5, formatting[1].Size.Result);
-            Assert.AreEqual(page1.Document.Fonts["Impact"].ID, formatting[2].Font.Result);
-            Assert.AreEqual("6", formatting[3].Style.Formula);
-            Assert.AreEqual("50%", formatting[4].Transparency.Formula);
-            Assert.AreEqual(0.6, formatting[5].Size.Result);
+            var formatting = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual("RGB(255,0,0)", formatting.Character[0].Color.Formula);
+            Assert.AreEqual(0.5, formatting.Character[1].Size.Result);
+            Assert.AreEqual(page1.Document.Fonts["Impact"].ID, formatting.Character[2].Font.Result);
+            Assert.AreEqual("6", formatting.Character[3].Style.Formula);
+            Assert.AreEqual("50%", formatting.Character[4].Transparency.Formula);
+            Assert.AreEqual(0.6, formatting.Character[5].Size.Result);
 
             //page1.Delete(0);
         }
@@ -362,8 +362,8 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0,0,5,5);
             s1.Text = "Line1\nLine2\nLine3\nLine4\nLine5\nLine6";
 
-            var formats0 = VA.Text.TextFormat.GetParagraphFormat(s1);
-            Assert.AreEqual(1, formats0.Count);
+            var formats0 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(1, formats0.Paragraph.Count);
 
             var fmt1 = new VA.Text.ParagraphFormatCells();
             fmt1.IndentLeft = 0.25;
@@ -375,8 +375,8 @@ namespace TestVisioAutomation
             VA.Text.TextFormat.SetFormat(s1, cfmt1, 2, 3);
             VA.Text.TextFormat.SetFormat(s1, fmt1, 2, 3);
 
-            var formats1 = VA.Text.TextFormat.GetParagraphFormat(s1);
-            Assert.AreEqual(2, formats1.Count);
+            var formats1 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(2, formats1.Paragraph.Count);
 
             var fmt2 = new VA.Text.ParagraphFormatCells();
             fmt2.BulletIndex = 2;
@@ -387,19 +387,19 @@ namespace TestVisioAutomation
             VA.Text.TextFormat.SetFormat(s1, cfmt2, 13, 14);
             VA.Text.TextFormat.SetFormat(s1, fmt2, 13, 14);
 
-            var formats2 = VA.Text.TextFormat.GetParagraphFormat(s1);
-            Assert.AreEqual(4, formats2.Count);
+            var formats2 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(4, formats2.Paragraph.Count);
 
-            Assert.AreEqual(0.25, formats2[0].IndentLeft.Result);
-            Assert.AreEqual(0, formats2[0].IndentFirst.Result);
+            Assert.AreEqual(0.25, formats2.Paragraph[0].IndentLeft.Result);
+            Assert.AreEqual(0, formats2.Paragraph[0].IndentFirst.Result);
 
-            Assert.AreEqual(0, formats2[2].IndentLeft.Result);
-            Assert.AreEqual(0, formats2[2].IndentFirst.Result);
+            Assert.AreEqual(0, formats2.Paragraph[2].IndentLeft.Result);
+            Assert.AreEqual(0, formats2.Paragraph[2].IndentFirst.Result);
 
-            Assert.AreEqual(2, formats2[1].BulletIndex.Result);
+            Assert.AreEqual(2, formats2.Paragraph[1].BulletIndex.Result);
 
-            Assert.AreEqual(0, formats2[1].IndentLeft.Result);
-            Assert.AreEqual(0, formats2[2].BulletIndex.Result);
+            Assert.AreEqual(0, formats2.Paragraph[1].IndentLeft.Result);
+            Assert.AreEqual(0, formats2.Paragraph[2].BulletIndex.Result);
 
             page1.Delete(0);
         }
@@ -411,8 +411,8 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
             var s2 = page1.DrawRectangle(5, 5, 7, 7);
 
-            var tb0 = VA.Text.TextFormat.GetTextBlockFormat(s1);
-            Assert.AreEqual("4 pt",tb0.BottomMargin.Formula);
+            var tf0 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual("4 pt",tf0.TextBlock.BottomMargin.Formula);
 
             var tb1 = new VA.Text.TextBlockFormatCells();
             tb1.BottomMargin = "8 pt";
@@ -421,12 +421,12 @@ namespace TestVisioAutomation
             tb1.Apply(update,s1.ID16);
             update.Execute(page1);
 
-            var tb2 = VA.Text.TextFormat.GetTextBlockFormat(s1);
-            Assert.AreEqual("8 pt", tb2.BottomMargin.Formula);
+            var tf2 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual("8 pt", tf2.TextBlock.BottomMargin.Formula);
 
-            var tbs = VA.Text.TextFormat.GetTextBlockFormat(page1, new[] { s1.ID, s2.ID });
-            Assert.AreEqual("8 pt", tbs[0].BottomMargin.Formula);
-            Assert.AreEqual("4 pt", tbs[1].BottomMargin.Formula);
+            var tfs = VA.Text.TextFormat.GetFormat(page1, new[] { s1.ID, s2.ID });
+            Assert.AreEqual("8 pt", tfs[0].TextBlock.BottomMargin.Formula);
+            Assert.AreEqual("4 pt", tfs[1].TextBlock.BottomMargin.Formula);
 
 
             page1.Delete(0);
