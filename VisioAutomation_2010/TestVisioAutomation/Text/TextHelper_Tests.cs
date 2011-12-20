@@ -120,7 +120,8 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
             // shapes shoould not have any tab stops by default
-            Assert.AreEqual(0, VA.Text.TextFormat.GetTabStopCount(s1));
+            var m0 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(0, m0.TabStop.Count);
 
             // clearing tab stops shoudl work even if there are no tab stops
             VA.Text.TextFormat.SetTabStops(s1, no_tab_stops);
