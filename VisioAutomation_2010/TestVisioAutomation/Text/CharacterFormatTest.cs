@@ -53,7 +53,7 @@ namespace TestVisioAutomation
 
             // new replaces all the sizes with a single specific sizes
             // all the ranges will still exist but will all have the same size
-            VisioAutomation.Text.TextHelper.SetFormat(fmt3, shape0);
+            VisioAutomation.Text.TextHelper.SetFormat(shape0, fmt3);
             var out_formats2 = VA.Text.TextHelper.GetCharacterFormat(shape0);
 
             Assert.AreEqual(5, out_formats2.Count);

@@ -268,7 +268,7 @@ namespace VisioAutomation.Text
             }
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
-            int rowcount = shape.RowCount[(short) IVisio.VisSectionIndices.visSectionParagraph];
+            int rowcount = shape.RowCount[(short) IVisio.VisSectionIndices.visSectionCharacter];
             for (int row = 0; row < rowcount; row++)
             {
                 fmt.Apply(update, (short) row);
@@ -363,23 +363,6 @@ namespace VisioAutomation.Text
         }
 
         private const short char_section = (short) IVisio.VisSectionIndices.visSectionCharacter;
-
-        public static void SetFormat(CharacterFormatCells format, IVisio.Shape shape)
-        {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
-            int rowcount = shape.RowCount[char_section];
-            for (int row = 0; row < rowcount; row++)
-            {
-                format.Apply(update, (short) row);
-            }
-
-            update.Execute(shape);
-        }
 
         public static void SetFormat(IVisio.Shape shape, VA.Text.CharacterFormatCells format, int begin, int end)
         {
