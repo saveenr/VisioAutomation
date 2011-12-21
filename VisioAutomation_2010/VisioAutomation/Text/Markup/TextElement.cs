@@ -66,7 +66,7 @@ namespace VisioAutomation.Text.Markup
         public TextFormat TextFormat { get; set; }
 
 
-        public MarkupInfo GetMarkupInfo()
+        internal MarkupInfo GetMarkupInfo()
         {
             var markupinfo = new MarkupInfo();
 
