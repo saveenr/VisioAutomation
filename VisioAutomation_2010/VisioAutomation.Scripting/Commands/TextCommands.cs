@@ -280,7 +280,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (fontname != null)
             {
-                var font = VA.Text.TextHelper.FindFontWithName(doc.Fonts, fontname);
+                var font = VA.Text.TextHelper.TryGetFont(doc.Fonts, fontname);
 
                 if (font == null)
                 {

@@ -61,36 +61,6 @@ namespace VisioAutomation.Text
         }
 
 
-        /// <summary>
-        /// Tests whether a font is available to the Visio application. The method is not case sensitive
-        /// </summary>
-        /// <param name="fonts">Visio Fonts Object</param>
-        /// <param name="fontname">the name of the font to find.</param>
-        /// <returns>null if the font cannot be found, otherwise the font object</returns>
-        public static IVisio.Font FindFontWithName(IVisio.Fonts fonts, string fontname)
-        {
-            if (fontname == null)
-            {
-                throw new ArgumentNullException("fontname");
-            }
-
-            if (String.IsNullOrEmpty(fontname))
-            {
-                throw new ArgumentException("fontname");
-            }
-
-            foreach (var f in fonts.AsEnumerable())
-            {
-                if (String.Compare(f.Name, fontname, StringComparison.CurrentCultureIgnoreCase) == 0)
-                {
-                    return f;
-                }
-            }
-
-            return null;
-        }
-
-
         public static void FitShapeToText(IVisio.Page page, IEnumerable<IVisio.Shape> shapes)
         {
             if (page == null)
