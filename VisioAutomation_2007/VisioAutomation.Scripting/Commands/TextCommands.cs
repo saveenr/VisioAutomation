@@ -74,10 +74,8 @@ namespace VisioAutomation.Scripting.Commands
                 foreach (var shape in shapes)
                 {
                     var s = shape; // to prevent Access to Modified Closure warning
-                    var textruns =
-                        VA.Text.TextHelper.GetTextRuns(s, IVisio.VisRunTypes.visCharPropRow, false)
-                            .ToList();
-
+                    var tf = VA.Text.TextFormat.GetFormat(s);
+                    var textruns = tf.CharacterTextRuns;
                     var nocast = (short)IVisio.VisUnitCodes.visNoCast;
                     var textstyles = textruns
                         .Select(
@@ -281,7 +279,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (fontname != null)
             {
-                var font = VA.Text.TextHelper.FindFontWithName(doc.Fonts, fontname);
+                var font = VA.Text.TextHelper.TryGetFont(doc.Fonts, fontname);
 
                 if (font == null)
                 {
@@ -316,32 +314,20 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
         }
 
-        public IList<List<VA.Text.CharacterFormatCells>> GetCharacterFormat()
+        public IList<VA.Text.TextFormat> GetCharacterFormat()
         {
             if (!this.Session.HasSelectedShapes())
             {
-                return new List<List<VA.Text.CharacterFormatCells>>(0);
+                return new List<VA.Text.TextFormat>(0);
             }
 
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
-            var formats = VA.Text.TextHelper.GetCharacterFormat(application.ActivePage, shapeids);
+            var formats = VA.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
         }
 
-        public IList<List<VA.Text.ParagraphFormatCells>> GetParagraphFormat()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return new List<List<VA.Text.ParagraphFormatCells>>(0);
-            }
 
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var application = this.Session.VisioApplication;
-            var formats = VA.Text.TextHelper.GetParagraphFormat(application.ActivePage, shapeids);
-            return formats;
-        }
     }
 }

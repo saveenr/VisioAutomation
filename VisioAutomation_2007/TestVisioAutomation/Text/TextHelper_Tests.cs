@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Text.Markup;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -8,9 +9,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class TextHelper_Tests : VisioAutomationTest
     {
-        private static readonly VA.Text.Markup.Field field_title = new VA.Text.Markup.Field(IVisio.VisFieldCategories.visFCatDocument, IVisio.VisFieldCodes.visFCodePrintDate, IVisio.VisFieldFormats.visFmtNumGenNoUnits);
-        private static readonly VA.Text.Markup.Field field_shapewidth = new VA.Text.Markup.Field(IVisio.VisFieldCategories.visFCatGeometry, IVisio.VisFieldCodes.visFCodeBackgroundName, IVisio.VisFieldFormats.visFmtNumGenNoUnits);
- 
         [TestMethod]
         public void Fields_Scenario_1()
         {
@@ -19,15 +17,15 @@ namespace TestVisioAutomation
             doc1.Title = "Fields_Scenario_1";
 
             var s0 = page1.DrawRectangle(0, 0, 4, 1);
-            VA.Text.TextHelper.SetTextFormatFields(s0, "DOCNAME: {0}", field_title);
+            VA.Text.TextHelper.SetText(s0, "DOCNAME: {0}", VA.Text.Markup.Fields.Title);
 
             var s1 = page1.DrawRectangle(0, 1, 4, 2);
-            VA.Text.TextHelper.SetTextFormatFields(s1, "SHAPE WIDTH: {0}", field_shapewidth);
+            VA.Text.TextHelper.SetText(s1, "SHAPE WIDTH: {0}", VA.Text.Markup.Fields.Width);
 
             var s1_shape_size = VisioAutomationTest.GetSize(s1);
 
             var shape_area = page1.DrawRectangle(4, 1, 8, 2);
-            VA.Text.TextHelper.SetTextFormatFields(shape_area, "SHAPEAREA: {0}", "Width*Height");
+            VA.Text.TextHelper.SetText(shape_area, "SHAPEAREA: {0}", new CustomField("Width*Height", IVisio.VisFieldFormats.visFmtNumGenNoUnits));
 
             var s0_characters = s0.Characters;
             Assert.AreEqual("DOCNAME: Fields_Scenario_1", s0_characters.Text);
@@ -48,7 +46,7 @@ namespace TestVisioAutomation
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
             doc1.Title = "Fields_Scenario_2";
-            VA.Text.TextHelper.SetTextFormatFields(s1, "DOCNAME: ", field_title);
+            VA.Text.TextHelper.SetText(s1, "DOCNAME: ", VA.Text.Markup.Fields.Title);
 
             page1.Delete(0);
         }
@@ -64,7 +62,7 @@ namespace TestVisioAutomation
             doc1.Title = "Fields_Scenario_3";
             try
             {
-                VA.Text.TextHelper.SetTextFormatFields(s1, "DOCNAME: {0} {1}", field_title);
+                VA.Text.TextHelper.SetText(s1, "DOCNAME: {0} {1}", VA.Text.Markup.Fields.Title);
             }
             catch (System.ArgumentOutOfRangeException )
             {
@@ -102,5 +100,6 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
+
     }
 }

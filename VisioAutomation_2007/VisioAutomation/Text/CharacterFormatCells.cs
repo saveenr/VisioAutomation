@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterFormatCells: VA.ShapeSheet.CellGroups.CellGroupRow
+    public class CharacterFormatCells : VA.ShapeSheet.CellGroups.CellGroupRow
     {
         public VA.ShapeSheet.CellData<int> Color { get; set; }
         public VA.ShapeSheet.CellData<int> Font { get; set; }

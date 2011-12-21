@@ -62,7 +62,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Office.Interop.Visio, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -116,6 +115,7 @@
     <Compile Include="DOM\DOM_Draw_tests.cs" />
     <Compile Include="Layout\OrgChartTests.cs" />
     <Compile Include="DOM\DOM_Basic_Tests.cs" />
+    <Compile Include="Text\TextFormat_Tests.cs" />
     <Compile Include="VisioTestCommon.cs" />
     <Compile Include="Core\PerfTests.cs" />
     <Compile Include="Core\CustomPropertiesTest.cs" />
@@ -148,7 +148,7 @@
     <Compile Include="VisioAutomationTest.cs" />
     <Compile Include="Extensions\PageDrawTests.cs" />
     <Compile Include="Extensions\PagesExtensions_Tests.cs" />
-    <Compile Include="Text\Text_Tests.cs" />
+    <Compile Include="Text\TextMarkupTests.cs" />
     <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
     <Compile Include="Controls\ControlHelper_Tests.cs" />
     <Compile Include="UtilTests\PageHelper_Tests.cs" />
@@ -158,8 +158,7 @@
     <Compile Include="Text\TextHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\CustomPropsTest.cs" />
-    <Compile Include="Core\TabStop_Tests.cs" />
-    <Compile Include="Core\CharacterFormatTest.cs" />
+    <Compile Include="Text\CharacterFormatTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestCommon\TestCommon.csproj">
