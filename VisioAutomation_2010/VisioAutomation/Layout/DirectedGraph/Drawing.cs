@@ -145,7 +145,8 @@ namespace VisioAutomation.Layout.DirectedGraph
             foreach (var shape in this.Shapes)
             {
                 var dom_node = dom.Drop(shape.MasterName, shape.StencilName, x, y);
-                shape.DOMNode = dom_node; 
+                shape.DOMNode = dom_node;
+                shape.DOMNode.Text = shape.Label;
                 x += 1.0;
             }
 
@@ -153,7 +154,8 @@ namespace VisioAutomation.Layout.DirectedGraph
             {
                 
                 var dom_node = dom.Connect( "Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
-                connector.DOMNode = dom_node; 
+                connector.DOMNode = dom_node;
+                connector.DOMNode.Text = connector.Label;
             }
 
             dom.ResolveVisioShapeObjects = true;
