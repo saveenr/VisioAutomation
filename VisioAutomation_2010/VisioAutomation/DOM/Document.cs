@@ -123,7 +123,7 @@ namespace VisioAutomation.DOM
 
                 if (shape.TextElement != null)
                 {
-                    shape.TextElement.SetShapeText(shape.VisioShape);
+                    shape.TextElement.SetText(shape.VisioShape);
                 }
                 else if (shape.Text != null)
                 {

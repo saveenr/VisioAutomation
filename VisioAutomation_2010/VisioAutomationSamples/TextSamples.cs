@@ -128,7 +128,7 @@ The indenting has ended.
             var s4 = page.DrawRectangle(8, 8, 16, 16);
 
             var m1 = get_markup_1();
-            m1.SetShapeText(s1);
+            m1.SetText(s1);
         }
 
         public static void TextSizing()

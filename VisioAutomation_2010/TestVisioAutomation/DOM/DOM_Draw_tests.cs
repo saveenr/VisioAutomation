@@ -141,7 +141,7 @@ namespace TestVisioAutomation
             var m = new VA.Text.Markup.TextElement("Normal Text");
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetShapeText(s0);
+            m.SetText(s0);
             page1.Delete(0);
         }
 
@@ -152,7 +152,7 @@ namespace TestVisioAutomation
             m.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetShapeText(s0);
+            m.SetText(s0);
             page1.Delete(0);
         }
 
@@ -163,7 +163,7 @@ namespace TestVisioAutomation
             m.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetShapeText(s0);
+            m.SetText(s0);
             page1.Delete(0);
         }
 
@@ -174,7 +174,7 @@ namespace TestVisioAutomation
             m.TextFormat.Font = "Impact";
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetShapeText(s0);
+            m.SetText(s0);
             page1.Delete(0);
         }
 
@@ -186,7 +186,7 @@ namespace TestVisioAutomation
             m.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetShapeText(s0);
+            m.SetText(s0);
             page1.Delete(0);
         }
 
@@ -206,7 +206,7 @@ namespace TestVisioAutomation
 
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            t1.SetShapeText(s0);
+            t1.SetText(s0);
             //page1.Delete(0);
         }
     }

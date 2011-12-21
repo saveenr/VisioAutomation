@@ -92,7 +92,7 @@ namespace TestVisioAutomation
 
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
-            el0.SetShapeText(s1);
+            el0.SetText(s1);
 
             Assert.AreEqual("HELLO WORLD", s1.Text);
 
@@ -115,7 +115,7 @@ namespace TestVisioAutomation
 
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
-            el0.SetShapeText(s1);
+            el0.SetText(s1);
 
             var fmts = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(3, fmts.CharacterFormats.Count);
@@ -166,7 +166,7 @@ namespace TestVisioAutomation
 
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
-            el0.SetShapeText(s1);
+            el0.SetText(s1);
 
             var fmts = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(3, fmts.CharacterFormats.Count);
@@ -190,7 +190,7 @@ namespace TestVisioAutomation
 
             string it = el0.GetInnerText();
             Assert.AreEqual("HELLO " + VA.Text.Markup.Fields.Height.PlaceholderText + " WORLD", it);
-            el0.SetShapeText(s1);
+            el0.SetText(s1);
 
             var shape_size = VisioAutomationTest.GetSize(s1);
 
