@@ -57,46 +57,6 @@ namespace VisioAutomationSamples
 
         }
 
-
-        private static string text2 =
-            @"
-    <text size=""20"" font=""Segoe UI""> The lines underneath should be bulleted 
-
-<text bullets=""1"" halign=""left""> This a demonstration of <text bold=""1"">bold</text> text
-A demonstration of <text italic=""1"">italic</text> text
-CellsPackage can be combined to form <text bold=""1"" italic=""1"">bold italic</text>
-This word is <text underline=""1"" >under<text underline=""0"" >lined</text></text>
-This word is <text smallcaps=""1"" >smallcaps</text>
-</text>
-
-The bullets have ended.
-</text> ";
-
-        private static string text3 =
-            @"
-    <text size=""20"" font=""Segoe UI"" halign=""left""> The lines below should be indented. And they should get increasingly more transparent.
-
-<text indent=""25"" transparency=""25"">
-indent 25
-</text>
-<text indent=""50"" transparency=""45"">
-indent 50
-</text>
-<text indent=""75"" transparency=""65"">
-indent 75
-</text>
-<text indent=""100"" transparency=""85"">
-indent 100
-</text>
-
-The indenting has ended.
-
-
-</text> ";
-
-        private static string text4 =
-            "<text size=\"30\"> This tests special characters <text> Carriage return [\r] </text> <text> Line feed [\n] </text> </text> ";
-
         public static void NonRotatingText()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
