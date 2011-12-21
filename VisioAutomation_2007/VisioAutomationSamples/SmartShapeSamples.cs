@@ -29,7 +29,7 @@ namespace VisioAutomationSamples
             page.Application.ActiveWindow.SelectAll();
             var group = page.Application.ActiveWindow.Selection.Group();
 
-            VA.Text.TextHelper.SetTextFormatFields(
+            VA.Text.TextHelper.SetText(
                 group,
                 "{0} ( {1} of {2} )",
                 VA.Text.Markup.Fields.PageName,

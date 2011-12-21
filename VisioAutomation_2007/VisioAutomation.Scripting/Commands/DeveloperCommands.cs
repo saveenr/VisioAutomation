@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.Commands
                                  {
                                      new VA.Text.TabStop(1.5, VA.Text.TabStopAlignment.Left)
                                  };
-                    VA.Text.TextHelper.SetTabStops(docpage.VisioBodyShape, tabstops);
+                    VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
                     
                     chunkcount++;
                     pagecount++;
@@ -478,7 +478,7 @@ namespace VisioAutomation.Scripting.Commands
             foreach (var node in tree_layout.Nodes)
             {
                 string label = node_to_nslabel[node];
-                VA.Text.TextHelper.SetFormat(node.VisioShape, charcells, 0, label.Length);
+                VA.Text.TextFormat.FormatRange(node.VisioShape, charcells, 0, label.Length);
             }
             return doc;
         }

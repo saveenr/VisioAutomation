@@ -123,7 +123,7 @@ namespace VisioAutomation.DOM
 
                 if (shape.TextElement != null)
                 {
-                    shape.TextElement.SetShapeText(shape.VisioShape);
+                    shape.TextElement.SetText(shape.VisioShape);
                 }
                 else if (shape.Text != null)
                 {
@@ -136,7 +136,7 @@ namespace VisioAutomation.DOM
 
                 if (shape.TabStops != null)
                 {
-                    VA.Text.TextHelper.SetTabStops(shape.VisioShape, shape.TabStops);
+                    VA.Text.TextFormat.SetTabStops(shape.VisioShape, shape.TabStops);
                 }
             }
 

@@ -104,7 +104,7 @@ namespace TestVisioAutomation
                 var t0 = new VA.Text.Markup.TextElement();
                 t0.TextFormat.FontSize = VA.Convert.PointsToInches(36);
                 var t01 = t0.AppendText("HELLO");
-                var t1 = t0.AppendNewElement("W\nO\nR\nL\nD");
+                var t1 = t0.AppendElement("W\nO\nR\nL\nD");
                 t1.TextFormat.Indent = 1.0;
                 t1.TextFormat.FontSize = VA.Convert.PointsToInches(15.0);
                 t0.AppendText("FOOBR");
@@ -113,12 +113,12 @@ namespace TestVisioAutomation
                 shape1.Text = TestCommon.Helper.LoremIpsumText;
                 var fmt1 = new VA.Text.CharacterFormatCells();
                 fmt1.Transparency = 0.5;
-                VA.Text.TextHelper.SetFormat(shape1,fmt1,5,10);
+                VA.Text.TextFormat.FormatRange(shape1, fmt1, 5, 10);
 
                 var fmt2 = new VA.Text.ParagraphFormatCells();
                 fmt2.IndentLeft = 1.0;
-                VA.Text.TextHelper.SetFormat(shape1,fmt2,1,10);
-                VA.Text.TextHelper.SetFormat(shape1, fmt2,20, 30);
+                VA.Text.TextFormat.FormatRange(shape1, fmt2, 1, 10);
+                VA.Text.TextFormat.FormatRange(shape1, fmt2, 20, 30);
 
                 var hlink1=shape1.Hyperlinks.Add();
                 var stops = new[]
@@ -127,7 +127,7 @@ namespace TestVisioAutomation
                                     new VA.Text.TabStop(0.2, VA.Text.TabStopAlignment.Right)
                                 };
 
-                VA.Text.TextHelper.SetTabStops(shape1,stops);
+                VA.Text.TextFormat.SetTabStops(shape1, stops);
 
             }
 

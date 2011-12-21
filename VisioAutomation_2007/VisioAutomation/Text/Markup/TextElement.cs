@@ -34,22 +34,14 @@ namespace VisioAutomation.Text.Markup
             return f;
         }
 
-        public Field AppendField(IVisio.VisFieldCategories category, IVisio.VisFieldCodes code,
-                                 IVisio.VisFieldFormats format)
-        {
-            var f = new Field(category, code, format);
-            this.Children.Add(f);
-            return f;
-        }
-
-        public TextElement AppendNewElement()
+        public TextElement AppendElement()
         {
             var el = new TextElement();
             this.Children.Add(el);
             return el;
         }
 
-        public TextElement AppendNewElement(string text)
+        public TextElement AppendElement(string text)
         {
             var el = new TextElement(text);
             this.Children.Add(el);
@@ -63,152 +55,8 @@ namespace VisioAutomation.Text.Markup
 
         public TextFormat TextFormat { get; set; }
 
-        public static TextElement FromXml(string input_xml, bool preserve_whitespace)
-        {
-            var lo = System.Xml.Linq.LoadOptions.None;
 
-            if (preserve_whitespace)
-            {
-                lo = lo & System.Xml.Linq.LoadOptions.PreserveWhitespace;
-            }
-
-            var xml_doc = System.Xml.Linq.XDocument.Parse(input_xml, lo);
-            var text_el = TextElement.FromXml(xml_doc,preserve_whitespace);
-
-            return text_el;
-        }
-
-        private static TextElement FromXml(System.Xml.Linq.XDocument xml_doc, bool preserve_whitespace)
-        {
-            var text_el = (TextElement)create_va_text_node_from_xml_node(xml_doc.Root, preserve_whitespace);
-            return text_el;
-        }
-
-        private static IEnumerable<System.Xml.Linq.XNode> get_child_nodes(System.Xml.Linq.XNode node)
-        {
-            if (node is System.Xml.Linq.XElement)
-            {
-                var node_el = (System.Xml.Linq.XElement) node;
-                foreach (var i in node_el.Nodes())
-                {
-                    yield return i;
-                }
-            }
-            else
-            {
-                yield break;
-            }
-        }
-
-        private static IEnumerable<VA.Internal.WalkEvent<System.Xml.Linq.XNode>> walk_xml_node(System.Xml.Linq.XNode node)
-        {
-            return VA.Internal.TreeTraversal.Walk(node, n => get_child_nodes(n));
-        }
-
-        private static Node create_va_text_node_from_xml_node(System.Xml.Linq.XNode node, bool preserve_whitespace)
-        {
-            var root_el = new TextElement();
-
-            var stack = new Stack<TextElement>();
-            stack.Push(root_el);
-
-            foreach (var walkevent in walk_xml_node(node))
-            {
-                if (walkevent.HasEnteredNode)
-                {
-                    fromxml_enter_node(walkevent.Node, stack, preserve_whitespace);
-                }
-                else if (walkevent.HasExitedNode)
-                {
-                    fromxml_exit_node(walkevent.Node, stack);
-                }
-            }
-
-            return root_el;
-        }
-
-        private static void fromxml_enter_node(System.Xml.Linq.XNode node, Stack<TextElement> stack,
-                                               bool preserve_whitespace)
-        {
-
-            if (node is System.Xml.Linq.XElement)
-            {
-                var node_el = (System.Xml.Linq.XElement) node;
-
-                if (node_el.Name == "text")
-                {
-                    var current_el = new TextElement();
-                    current_el.TextFormat.LoadAttributesFromXml(node_el);
-                    stack.Push(current_el);
-                }
-                else if ((node_el.Name == "br") || (node_el.Name == "newline"))
-                {
-                    var parent = stack.Peek();
-                    parent.AppendText("\n");
-                }
-                else if (node_el.Name == "tab")
-                {
-                    var parent = stack.Peek();
-                    parent.AppendText("\t");
-                }
-                else if (node_el.Name == "space")
-                {
-                    var parent = stack.Peek();
-                    parent.AppendText(" ");
-                }
-                else
-                {
-                    string msg = string.Format("unsupported element {0}", node_el.Name);
-                    throw new System.ArgumentException("node", msg);
-                }
-            }
-            else if (node is System.Xml.Linq.XText)
-            {
-                // These nodes contribute text, so update the current region
-                var parent = stack.Peek();
-
-                var node_text = (System.Xml.Linq.XText) node;
-                string t = node_text.Value;
-                if (!preserve_whitespace)
-                {
-                    t = t.Trim();
-                }
-
-                parent.AppendText(t);
-            }
-            else if (node is System.Xml.Linq.XComment)
-            {
-                //do nothing
-            }
-            else if (node is System.Xml.Linq.XProcessingInstruction)
-            {
-                //do nothing
-            }
-            else
-            {
-                string msg = string.Format("Unhandled node type {0}", node.GetType());
-                throw new System.ArgumentOutOfRangeException("Node", msg);
-            }
-        }
-
-
-        private static void fromxml_exit_node(System.Xml.Linq.XNode node, Stack<TextElement> stack)
-        {
-            if (node is System.Xml.Linq.XElement)
-            {
-                var node_el = (System.Xml.Linq.XElement)node;
-
-                if (node_el.Name == "text")
-                {
-                    var current_el = stack.Pop();
-                    var parent_el = stack.Peek();
-                    parent_el.Children.Add(current_el);
-                }
-                
-            }
-        }
-
-        public MarkupInfo GetMarkupInfo()
+        internal MarkupInfo GetMarkupInfo()
         {
             var markupinfo = new MarkupInfo();
 
@@ -294,7 +142,7 @@ namespace VisioAutomation.Text.Markup
             return markupinfo;
         }
 
-        public void SetShapeText(IVisio.Shape shape)
+        public void SetText(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -340,11 +188,11 @@ namespace VisioAutomation.Text.Markup
         {
             if (markup_region.Element.TextFormat.Indent.HasValue)
             {
-                var chars0 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars0 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentFirst,
                                                                   0, markup_region.TextStartPos, markup_region.TextEndPos);
 
-                var chars1 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars1 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentLeft,
                                                                   (int)
                                                                   markup_region.Element.TextFormat.Indent.Value, markup_region.TextStartPos, markup_region.TextEndPos);
@@ -353,7 +201,7 @@ namespace VisioAutomation.Text.Markup
             if (markup_region.Element.TextFormat.HAlign.HasValue)
             {
                 int int_halign = (int) markup_region.Element.TextFormat.HAlign.Value;
-                VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                      (short) IVisio.VisCellIndices.visHorzAlign,
                                                      int_halign, markup_region.TextStartPos, markup_region.TextEndPos);
             }
@@ -367,13 +215,13 @@ namespace VisioAutomation.Text.Markup
                 int indent_first = -base_indent_size;
                 int indent_left = base_indent_size;
 
-                var chars0 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars0 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentFirst,
                                                                   indent_first, markup_region.TextStartPos, markup_region.TextEndPos);
-                var chars1 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars1 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentLeft,
                                                                   indent_left, markup_region.TextStartPos, markup_region.TextEndPos);
-                var chars2 = VA.Text.TextHelper.SetRangeParagraphProps(shape,
+                var chars2 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visBulletIndex,
                                                                   bullet_type, markup_region.TextStartPos, markup_region.TextEndPos);
             }
@@ -411,7 +259,7 @@ namespace VisioAutomation.Text.Markup
                 fmt.Transparency = markup_region.Element.TextFormat.Transparency.Value/100.0;
             }
 
-            VA.Text.TextHelper.SetFormat(shape, fmt, startpos, endpos);
+            VA.Text.TextFormat.FormatRange(shape, fmt, startpos, endpos);
         }
     }
 }

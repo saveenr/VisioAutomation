@@ -299,16 +299,13 @@ namespace TestVisioAutomation
             VA.Layout.MSAGL.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
             
             Assert.IsNotNull(n0.VisioShape);
-
-
             var props_dic = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(n0.VisioShape);
             Assert.IsTrue(props_dic.Count>=3);
             Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Formula);
             Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Formula);
             Assert.AreEqual("\"v3\"", props_dic["p3"].Value.Formula);
 
-            var pagesize = page1.GetSize();
-            AssertVA.AreEqual(4.00, 3.00, pagesize, 0.05);
+            page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 
             doc.Close(true);
         }
