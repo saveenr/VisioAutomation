@@ -9,7 +9,7 @@ namespace VisioAutomation.Text
 {
     public static class TextHelper
     {
-        public static void SetTextFormatFields(IVisio.Shape shape, string fmt, params object[] fields)
+        public static void SetText(IVisio.Shape shape, string fmt, params VA.Text.Markup.FieldBase[] fields)
         {
             if (shape == null)
             {
@@ -19,28 +19,6 @@ namespace VisioAutomation.Text
             if (fields == null)
             {
                 throw new ArgumentNullException("fields");
-            }
-
-            var t_string = typeof (string);
-            var t_field_element = typeof (VA.Text.Markup.Field);
-
-            for (int i = 0; i < fields.Length; i++)
-            {
-                object field = fields[i];
-                if (field == null)
-                {
-                    string msg = String.Format("Field value {0} is null", i);
-                    throw new ArgumentException(msg);
-                }
-
-                var ft = field.GetType();
-
-                if ((ft != t_string) && (ft != t_field_element))
-                {
-                    string msg = String.Format("Field value {0} is must be {1} or {2}. Instead it is {3}", i,
-                                               t_string.Name, t_field_element.Name, ft.Name);
-                    throw new ArgumentException(msg);
-                }
             }
 
             var fmtparse = new VA.Internal.FormatStringParser(fmt);
@@ -53,32 +31,30 @@ namespace VisioAutomation.Text
             // Set the text
             shape.Text = fmt;
 
-            // then Insert the fields from back to front
+            // then Insert the fields from last to first (makes it easier to keep track of positions this way)
             for (int i = (fmtparse.Segments.Count - 1); i >= 0; i--)
             {
                 var fmt_seg = fmtparse.Segments[i];
                 var field_index = fmt_seg.Index;
-                object field = fields[field_index];
+                var field = fields[field_index];
 
                 var chars = shape.Characters;
                 chars.Begin = fmt_seg.Start;
                 chars.End = fmt_seg.End;
 
-                var ft = field.GetType();
-                if (t_string == ft)
+                if (field is VA.Text.Markup.CustomField)
                 {
-                    // it must be a formula
-                    string formula = (string) field;
-                    chars.AddCustomFieldU(formula, (short) IVisio.VisFieldFormats.visFmtNumGenNoUnits);
+                    var customfield = (VA.Text.Markup.CustomField) field;
+                    chars.AddCustomFieldU(customfield.Formula, (short) customfield.Format);
                 }
-                else if (t_field_element == ft)
+                else if (field is VA.Text.Markup.Field)
                 {
-                    var field_f = (VA.Text.Markup.Field) field;
+                    var field_f = (VA.Text.Markup.Field)field;
                     chars.AddField((short) field_f.Category, (short) field_f.Code, (short) field_f.Format);
                 }
                 else
                 {
-                    string msg = String.Format("Unsupported field type {0} for field {1}", ft.Name, i);
+                    string msg = String.Format("Unsupported field type {0} for field {1}", field.GetType(), i);
                     throw new AutomationException(msg);
                 }
             }
