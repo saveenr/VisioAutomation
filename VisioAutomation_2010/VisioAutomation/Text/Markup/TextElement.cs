@@ -34,22 +34,12 @@ namespace VisioAutomation.Text.Markup
             return f;
         }
 
-        public Field AppendField(IVisio.VisFieldCategories category, IVisio.VisFieldCodes code,
-                                 IVisio.VisFieldFormats format)
-        {
-            var f = new Field(category, code, format);
-            this.Children.Add(f);
-            return f;
-        }
-
         public TextElement AppendElement()
         {
             var el = new TextElement();
             this.Children.Add(el);
             return el;
         }
-
-
 
         public TextElement AppendElement(string text)
         {
