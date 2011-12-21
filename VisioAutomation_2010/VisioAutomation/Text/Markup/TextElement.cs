@@ -65,26 +65,6 @@ namespace VisioAutomation.Text.Markup
 
         public TextFormat TextFormat { get; set; }
 
-        private static IEnumerable<System.Xml.Linq.XNode> get_child_nodes(System.Xml.Linq.XNode node)
-        {
-            if (node is System.Xml.Linq.XElement)
-            {
-                var node_el = (System.Xml.Linq.XElement) node;
-                foreach (var i in node_el.Nodes())
-                {
-                    yield return i;
-                }
-            }
-            else
-            {
-                yield break;
-            }
-        }
-
-        private static IEnumerable<VA.Internal.WalkEvent<System.Xml.Linq.XNode>> walk_xml_node(System.Xml.Linq.XNode node)
-        {
-            return VA.Internal.TreeTraversal.Walk(node, n => get_child_nodes(n));
-        }
 
         public MarkupInfo GetMarkupInfo()
         {
