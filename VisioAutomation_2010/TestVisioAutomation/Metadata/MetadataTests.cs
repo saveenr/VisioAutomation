@@ -296,19 +296,5 @@ namespace TestVisioAutomation
 
             db.ExportCode(filename);
         }
-
-        [TestMethod]
-        public void XExportMetadataCode()
-        {
-            var gencode = new VA.CodeGen.VAGenCode();
-            var s = gencode.GetCode();
-
-            var fp = System.IO.File.CreateText("D:\\code.txt");
-            fp.WriteLine(s);
-            fp.Close();
-                   
-            int x = 1;
-        }
-
     }
 }
