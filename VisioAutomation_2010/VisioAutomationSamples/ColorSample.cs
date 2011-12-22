@@ -8,16 +8,6 @@ namespace VisioAutomationSamples
 {
     public static class ColorSample
     {
-        public static void TEST()
-        {
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            page.SetSize(10, 10);
-            var loader = new VA.Masters.MasterLoader();
-            loader.Add("rectanglex","basic_u.vss");
-            loader.Resolve(SampleEnvironment.Application.Documents);
-
-        }
-
         public static void ColorGrid()
         {
             var fill_foregnd = VA.ShapeSheet.SRCConstants.FillForegnd;
