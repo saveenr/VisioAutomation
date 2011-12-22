@@ -280,7 +280,7 @@
     <Compile Include="Text\Markup\NodeList.cs" />
     <Compile Include="Text\Markup\NodeType.cs" />
     <Compile Include="Text\Markup\TextElement.cs" />
-    <Compile Include="Text\Markup\TextFormat.cs" />
+    <Compile Include="Text\Markup\TextCharFormat.cs" />
     <Compile Include="Text\Markup\Literal.cs" />
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />

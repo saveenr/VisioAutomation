@@ -17,24 +17,24 @@ namespace VisioAutomationSamples
             var el = p.AppendElement(text);
             if (font != null)
             {
-                el.TextFormat.Font = font;
+                el.TextCharFormat.Font = font;
             }
             if (size.HasValue)
             {
-                el.TextFormat.FontSize = size.Value;
+                el.TextCharFormat.FontSize = size.Value;
             }
             if (color.HasValue)
             {
-                el.TextFormat.Color = new VA.Drawing.ColorRGB(color.Value);
+                el.TextCharFormat.Color = new VA.Drawing.ColorRGB(color.Value);
             }
             if (halign.HasValue)
             {
-                el.TextFormat.HAlign = halign.Value;
+                el.TextParaFormat.HAlign = halign.Value;
             }
 
             if (cs.HasValue)
             {
-                el.TextFormat.CharStyle = cs;
+                el.TextCharFormat.CharStyle = cs;
             }
 
             return el;
@@ -69,9 +69,9 @@ namespace VisioAutomationSamples
         private static TextElement get_markup_1()
         {
             var e1 = new VA.Text.Markup.TextElement();
-            e1.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.TextFormat.Font = "Times New Roman";
-            e1.TextFormat.FontSize = 20;
+            e1.TextCharFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
+            e1.TextCharFormat.Font = "Times New Roman";
+            e1.TextCharFormat.FontSize = 20;
             e1.AppendText("Hello World");
             return e1;
         }
@@ -79,9 +79,9 @@ namespace VisioAutomationSamples
         private static TextElement get_markup_2()
         {
             var e1 = new VA.Text.Markup.TextElement();
-            e1.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.TextFormat.Font = "Times New Roman";
-            e1.TextFormat.FontSize = 20;
+            e1.TextCharFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
+            e1.TextCharFormat.Font = "Times New Roman";
+            e1.TextCharFormat.FontSize = 20;
             e1.AppendText("Hello ");
 
             var e2 = e1.AddElementEx("World", null, null, null, null, VA.Text.CharStyle.Italic);

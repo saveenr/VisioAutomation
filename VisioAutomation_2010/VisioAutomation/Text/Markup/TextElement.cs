@@ -11,13 +11,15 @@ namespace VisioAutomation.Text.Markup
         public TextElement() :
             base(NodeType.Element)
         {
-            this.TextFormat = new TextFormat();
+            this.TextCharFormat = new TextCharFormat();
+            this.TextParaFormat  = new TextParaFormat();
         }
 
         public TextElement(string text) :
             base(NodeType.Element)
         {
-            this.TextFormat = new TextFormat();
+            this.TextCharFormat = new TextCharFormat();
+            this.TextParaFormat = new TextParaFormat();
             this.AppendText(text);
         }
 
@@ -53,7 +55,8 @@ namespace VisioAutomation.Text.Markup
             get { return this.Children.Items.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
         }
 
-        public TextFormat TextFormat { get; set; }
+        public TextCharFormat TextCharFormat { get; set; }
+        public TextParaFormat TextParaFormat { get; set; }
 
 
         internal MarkupInfo GetMarkupInfo()
@@ -186,7 +189,7 @@ namespace VisioAutomation.Text.Markup
 
         private static void set_text_range_para_fmt(TextRegion markup_region, IVisio.Shape shape)
         {
-            if (markup_region.Element.TextFormat.Indent.HasValue)
+            if (markup_region.Element.TextParaFormat.Indent.HasValue)
             {
                 var chars0 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentFirst,
@@ -195,20 +198,20 @@ namespace VisioAutomation.Text.Markup
                 var chars1 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                                   (short) IVisio.VisCellIndices.visIndentLeft,
                                                                   (int)
-                                                                  markup_region.Element.TextFormat.Indent.Value, markup_region.TextStartPos, markup_region.TextEndPos);
+                                                                  markup_region.Element.TextParaFormat.Indent.Value, markup_region.TextStartPos, markup_region.TextEndPos);
             }
 
-            if (markup_region.Element.TextFormat.HAlign.HasValue)
+            if (markup_region.Element.TextParaFormat.HAlign.HasValue)
             {
-                int int_halign = (int) markup_region.Element.TextFormat.HAlign.Value;
+                int int_halign = (int)markup_region.Element.TextParaFormat.HAlign.Value;
                 VA.Text.TextFormat.SetRangeParagraphProps(shape,
                                                      (short) IVisio.VisCellIndices.visHorzAlign,
                                                      int_halign, markup_region.TextStartPos, markup_region.TextEndPos);
             }
 
             // Handle bullets
-            if (markup_region.Element.TextFormat.Bullets.HasValue &&
-                markup_region.Element.TextFormat.Bullets.Value)
+            if (markup_region.Element.TextParaFormat.Bullets.HasValue &&
+                markup_region.Element.TextParaFormat.Bullets.Value)
             {
                 const int bullet_type = 1;
                 const int base_indent_size = 25;
@@ -234,29 +237,29 @@ namespace VisioAutomation.Text.Markup
 
             var fmt = new VA.Text.CharacterFormatCells();
 
-            if (markup_region.Element.TextFormat.FontSize.HasValue)
+            if (markup_region.Element.TextCharFormat.FontSize.HasValue)
             {
-                fmt.Size = Convert.PointsToInches(markup_region.Element.TextFormat.FontSize.Value);
+                fmt.Size = Convert.PointsToInches(markup_region.Element.TextCharFormat.FontSize.Value);
             }
 
-            if (markup_region.Element.TextFormat.Color.HasValue)
+            if (markup_region.Element.TextCharFormat.Color.HasValue)
             {
-                fmt.Color = markup_region.Element.TextFormat.Color.Value.ToFormula();
+                fmt.Color = markup_region.Element.TextCharFormat.Color.Value.ToFormula();
             }
 
-            if (markup_region.Element.TextFormat.Font!=null)
+            if (markup_region.Element.TextCharFormat.Font!=null)
             {
-                fmt.Font = shape.Document.Fonts[markup_region.Element.TextFormat.Font].ID;
+                fmt.Font = shape.Document.Fonts[markup_region.Element.TextCharFormat.Font].ID;
             }
 
-            if (markup_region.Element.TextFormat.CharStyle.HasValue)
+            if (markup_region.Element.TextCharFormat.CharStyle.HasValue)
             {
-                fmt.Style = (int) markup_region.Element.TextFormat.CharStyle.Value;
+                fmt.Style = (int) markup_region.Element.TextCharFormat.CharStyle.Value;
             }
 
-            if (markup_region.Element.TextFormat.Transparency.HasValue)
+            if (markup_region.Element.TextCharFormat.Transparency.HasValue)
             {
-                fmt.Transparency = markup_region.Element.TextFormat.Transparency.Value/100.0;
+                fmt.Transparency = markup_region.Element.TextCharFormat.Transparency.Value/100.0;
             }
 
             VA.Text.TextFormat.FormatRange(shape, fmt, startpos, endpos);
