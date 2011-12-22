@@ -10,7 +10,14 @@ namespace VisioAutomationSamples
     {
         public static void ColorGrid()
         {
-            var fill_foregnd = VA.ShapeSheet.SRCConstants.FillForegnd;
+            // Draws a grid rectangles and then formats the shapes
+            // with different colors
+
+            // Demonstrates:
+            // How use the GridLayout object to quickly drop a grid
+            // How to use ShapeFormatCells to apply formatting to shapes
+            // How SIDSRCUpdate can be used to modfiy multiple shapes at once
+
             int[] colors = {
                     0x0A3B76, 0x4395D1, 0x99D9EA, 0x0D686B, 0x00A99D, 0x7ACCC8, 0x82CA9C,
                     0x74A402,
@@ -36,6 +43,7 @@ namespace VisioAutomationSamples
             layout.PerformLayout();
             layout.Render(page);
 
+            var fmtcells = new VA.Format.ShapeFormatCells();
             int i = 0;
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             foreach (var node in layout.Nodes)
@@ -43,8 +51,10 @@ namespace VisioAutomationSamples
                 var shapeid = node.ShapeID;
                 int color_index = i%colors.Length;
                 var color = colors[color_index];
-                var formula = new VA.Drawing.ColorRGB(color).ToFormula();
-                update.SetFormula(shapeid, fill_foregnd, formula);
+                fmtcells.FillForegnd = new VA.Drawing.ColorRGB(color).ToFormula();
+                fmtcells.LinePattern = 0;
+                fmtcells.LineWeight = 0;
+                fmtcells.Apply(update, shapeid);
                 i++;
             }
 
