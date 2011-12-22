@@ -33,7 +33,7 @@ namespace TestVisioAutomation
             var dupe_cell_names = TestCommon.Helper.GetDuplicates(allcells.Select(c => c.Name));
             Assert.IsTrue(dupe_cell_names.Contains("Tabs"));
 
-            Assert.AreEqual(345, allcells.Count);
+            Assert.AreEqual(351, allcells.Count);
 
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
             Assert.AreEqual(342, visio_2007_cells.Count());
@@ -167,27 +167,35 @@ namespace TestVisioAutomation
                 }
             }
         }
+        [TestMethod]
+        public void CheckV2010()
+        {
+            var db = VA.Metadata.MetadataDB.Load();
+            var visio_2010_cells = db.Cells.Where(c => c.MinVersion.Contains("Visio2010")).ToList();
+            Assert.AreEqual(6,visio_2010_cells.Count);
+        }
 
         [TestMethod]
         public void CheckSRCConstantIndices()
         {
             var db = VA.Metadata.MetadataDB.Load();
             var all_cells = db.Cells;
-            var visio_2007_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
+            var visio_cells = all_cells.Where(c => c.MinVersion.Contains("Visio2007") || c.MinVersion.Contains("Visio2010")).ToList();
             var va_name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
-            var db_name_to_cell = visio_2007_cells.ToDictionary(c => c.NameCode, c => c);
+            var db_name_to_cell = visio_cells.ToDictionary(c => c.NameCode, c => c);
             foreach (string name in va_name_to_src.Keys)
             {
                 if (!db_name_to_cell.ContainsKey(name))
                 {
-                    Assert.Fail("DB does not contain sll with namecode " + name);
+                    string msg = string.Format("DB does not contain cell with namecode \"{0}\"", name);
+                    Assert.Fail(msg);
                 }
             }
 
             var sectioindexname_to_int = TestCommon.Helper.EnumToDictionary<int>(typeof(IVisio.VisSectionIndices));
             var rowindexname_to_int = TestCommon.Helper.EnumToDictionary<int>(typeof(IVisio.VisRowIndices));
             var cellindexname_to_int = TestCommon.Helper.EnumToDictionary<int>(typeof(IVisio.VisCellIndices));
-            foreach (var db_cell in visio_2007_cells)
+            foreach (var db_cell in visio_cells)
             {
                 if (!sectioindexname_to_int.ContainsKey(db_cell.SectionIndex))
                 {

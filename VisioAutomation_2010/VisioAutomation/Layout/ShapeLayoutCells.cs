@@ -24,6 +24,9 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<int> ShapeRouteStyle { get; set; }
         public VA.ShapeSheet.CellData<int> ShapeSplit { get; set; }
         public VA.ShapeSheet.CellData<int> ShapeSplittable { get; set; }
+        public VA.ShapeSheet.CellData<int> DisplayLevel { get; set; } // new in visio 2010
+        public VA.ShapeSheet.CellData<int> Relationships { get; set; } // new in visio 2010
+
 
         protected override void ApplyFormulas(ApplyFormula func)
         {
@@ -43,6 +46,8 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
             func(ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit.Formula);
             func(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
+            func(ShapeSheet.SRCConstants.DisplayLevel, this.DisplayLevel.Formula);
+            func(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
         }
 
         private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
@@ -64,6 +69,8 @@ namespace VisioAutomation.Layout
             cells.ShapeRouteStyle = row[query.ShapeRouteStyle].ToInt();
             cells.ShapeSplit = row[query.ShapeSplit].ToInt();
             cells.ShapeSplittable = row[query.ShapeSplittable].ToInt();
+            cells.DisplayLevel= row[query.DisplayLevel].ToInt();
+            cells.Relationships = row[query.Relationships].ToInt();
             return cells;
         }
 
@@ -97,6 +104,8 @@ namespace VisioAutomation.Layout
             public VA.ShapeSheet.Query.CellQueryColumn ShapeRouteStyle { get; set; }
             public VA.ShapeSheet.Query.CellQueryColumn ShapeSplit { get; set; }
             public VA.ShapeSheet.Query.CellQueryColumn ShapeSplittable { get; set; }
+            public VA.ShapeSheet.Query.CellQueryColumn DisplayLevel { get; set; }
+            public VA.ShapeSheet.Query.CellQueryColumn Relationships { get; set; }
 
             public ShapeLayoutQuery() :
                 base()
@@ -117,6 +126,8 @@ namespace VisioAutomation.Layout
                 this.ShapeRouteStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeRouteStyle, "ShapeRouteStyle");
                 this.ShapeSplit = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplit, "ShapeSplit");
                 this.ShapeSplittable = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplittable, "ShapeSplittable");
+                this.DisplayLevel= this.AddColumn(VA.ShapeSheet.SRCConstants.DisplayLevel, "DisplayLevel");
+                this.Relationships = this.AddColumn(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
             }
         }
 

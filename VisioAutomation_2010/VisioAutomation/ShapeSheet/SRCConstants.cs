@@ -20,6 +20,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Actions_ReadOnly { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionReadOnly); } }
         public static SRC Actions_SortKey { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionSortKey); } }
         public static SRC Actions_TagName { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionTagName); } }
+        public static SRC Actions_FlyoutChild { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionFlyoutChild); } } // new for visio 2010
 
         // Alignment
         public static SRC AlignBottom { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignBottom); } }
@@ -113,6 +114,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Geometry_NoLine { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoLine); } }
         public static SRC Geometry_NoShow { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoShow); } }
         public static SRC Geometry_NoSnap { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoSnap); } }
+        public static SRC Geometry_NoQuickDrag { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoQuickDrag); } }
 
         // Fill Format
         public static SRC FillBkgnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillBkgnd); } }
@@ -228,6 +230,8 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ResizePage { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOResizePage); } }
         public static SRC RouteStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLORouteStyle); } }
 
+        public static SRC AvoidPageBreaks { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOAvoidPageBreaks); } } // new in Visio 2010
+
         // print properties
         public static SRC PageLeftMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesLeftMargin); } }
         public static SRC CenterX { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesCenterX); } }
@@ -259,6 +263,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ShdwScaleFactor { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwScaleFactor); } }
         public static SRC ShdwType { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwType); } }
         public static SRC UIVisibility { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageUIVisibility); } }
+        public static SRC DrawingResizeType { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageDrawResizeType); } } // new in Visio 2010
 
         // paragraph
         public static SRC Para_Bullet { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex); } }
@@ -422,6 +427,8 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ShapeRouteStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORouteStyle); } }
         public static SRC ShapeSplit { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplit); } }
         public static SRC ShapeSplittable { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplittable); } }
+        public static SRC DisplayLevel { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLODisplayLevel); } } // new in Visio 2010
+        public static SRC Relationships { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORelationships); } } // new in Visio 2010
 
         public static Dictionary<string, SRC> GetSRCDictionary()
         {

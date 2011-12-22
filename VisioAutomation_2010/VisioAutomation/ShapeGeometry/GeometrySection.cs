@@ -14,6 +14,7 @@ namespace VisioAutomation.ShapeGeometry
         public VA.ShapeSheet.FormulaLiteral NoLine { get; set; }
         public VA.ShapeSheet.FormulaLiteral NoShow { get; set; }
         public VA.ShapeSheet.FormulaLiteral NoSnap { get; set; }
+        public VA.ShapeSheet.FormulaLiteral NoQuickDrag { get; set; }
 
         public GeometrySection()
         {
@@ -49,11 +50,13 @@ namespace VisioAutomation.ShapeGeometry
             var src_noline = VA.ShapeSheet.SRCConstants.Geometry_NoLine.ForSectionAndRow(sec_index, 0);
             var src_noshow = VA.ShapeSheet.SRCConstants.Geometry_NoShow.ForSectionAndRow(sec_index, 0);
             var src_nosnap = VA.ShapeSheet.SRCConstants.Geometry_NoSnap.ForSectionAndRow(sec_index, 0);
+            var src_noquickdrag = VA.ShapeSheet.SRCConstants.Geometry_NoQuickDrag.ForSectionAndRow(sec_index, 0);
 
             update.SetFormulaIgnoreNull(src_nofill, this.NoFill);
             update.SetFormulaIgnoreNull(src_noline, this.NoLine);
             update.SetFormulaIgnoreNull(src_noshow, this.NoShow);
             update.SetFormulaIgnoreNull(src_nosnap, this.NoSnap);
+            update.SetFormulaIgnoreNull(src_noquickdrag, this.NoQuickDrag);
 
             foreach (var row in this.Rows)
             {

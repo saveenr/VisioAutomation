@@ -17,5 +17,10 @@ namespace VisioAutomation.Metadata
         public string MaxVersion { get; set; }
         public string CellIndex { get; set; }
         public string MSDN { get; set; }
+
+        public override string ToString()
+        {
+            return this.NameCode;
+        }
     }
 }

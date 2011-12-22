@@ -72,6 +72,8 @@ namespace VisioAutomation.Pages
         public VA.ShapeSheet.CellData<int> PlowCode { get; set; }
         public VA.ShapeSheet.CellData<int> ResizePage { get; set; }
         public VA.ShapeSheet.CellData<int> RouteStyle { get; set; }
+        public VA.ShapeSheet.CellData<int> AvoidPageBreaks { get; set; } // new in visio 2010
+        public VA.ShapeSheet.CellData<int> DrawingResizeType { get; set; } // new in visio 2010
 
         protected override void ApplyFormulas(ApplyFormula func)
         {
@@ -140,6 +142,8 @@ namespace VisioAutomation.Pages
             func(ShapeSheet.SRCConstants.PlowCode, this.PlowCode.Formula);
             func(ShapeSheet.SRCConstants.ResizePage, this.ResizePage.Formula);
             func(ShapeSheet.SRCConstants.RouteStyle, this.RouteStyle.Formula);
+            func(ShapeSheet.SRCConstants.AvoidPageBreaks, this.AvoidPageBreaks.Formula);
+            func(ShapeSheet.SRCConstants.DrawingResizeType, this.DrawingResizeType.Formula);
         }
 
         private static PageCells get_cells_from_row(PageQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
@@ -211,6 +215,8 @@ namespace VisioAutomation.Pages
             cells.PlowCode = row[query.PlowCode].ToInt();
             cells.ResizePage = row[query.ResizePage].ToInt();
             cells.RouteStyle = row[query.RouteStyle].ToInt();
+            cells.AvoidPageBreaks = row[query.AvoidPageBreaks].ToInt();
+            cells.DrawingResizeType = row[query.DrawingResizeType].ToInt();
             return cells;
         }
 
@@ -293,6 +299,8 @@ namespace VisioAutomation.Pages
             public VA.ShapeSheet.Query.CellQueryColumn PlowCode { get; set; }
             public VA.ShapeSheet.Query.CellQueryColumn ResizePage { get; set; }
             public VA.ShapeSheet.Query.CellQueryColumn RouteStyle { get; set; }
+            public VA.ShapeSheet.Query.CellQueryColumn AvoidPageBreaks { get; set; }
+            public VA.ShapeSheet.Query.CellQueryColumn DrawingResizeType { get; set; }
 
             public PageQuery() :
                 base()
@@ -362,6 +370,8 @@ namespace VisioAutomation.Pages
                 this.PlowCode = this.AddColumn(VA.ShapeSheet.SRCConstants.PlowCode, "PlowCode");
                 this.ResizePage = this.AddColumn(VA.ShapeSheet.SRCConstants.ResizePage, "ResizePage");
                 this.RouteStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.RouteStyle, "RouteStyle");
+                this.AvoidPageBreaks = this.AddColumn(VA.ShapeSheet.SRCConstants.AvoidPageBreaks, "AvoidPageBreaks");
+                this.DrawingResizeType = this.AddColumn(VA.ShapeSheet.SRCConstants.DrawingResizeType, "DrawingResizeType");
             }
 
         }
