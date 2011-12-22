@@ -202,26 +202,6 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Test_Fields_temp()
-        {
-            var page1 = GetNewPage();
-
-
-            var shape = page1.DrawRectangle(0, 0, 4, 2);
-            // case 1 - markup is just a single field element
-
-            // case 3 - markup contains a single literal surrounded by two fields
-            var markup3 = new VA.Text.Markup.TextElement();
-            markup3.AppendField(VA.Text.Markup.Fields.Height);
-            markup3.AppendText(" HELLO ");
-            markup3.AppendField(VA.Text.Markup.Fields.Width);
-            markup3.AppendField(VA.Text.Markup.Fields.Width);
-            markup3.SetText(shape);
-            Assert.AreEqual("2 HELLO 44", shape.Characters.Text);
-
-        }
-
-        [TestMethod]
         public void Test_Fields1()
         {
             var page1 = GetNewPage();
@@ -249,6 +229,14 @@ namespace TestVisioAutomation
             markup3.AppendField(VA.Text.Markup.Fields.Width);
             markup3.SetText(shape);
             Assert.AreEqual("2 HELLO 4", shape.Characters.Text);
+
+            var markup4 = new VA.Text.Markup.TextElement();
+            markup4.AppendField(VA.Text.Markup.Fields.Height);
+            markup4.AppendText(" HELLO ");
+            markup4.AppendField(VA.Text.Markup.Fields.Width);
+            markup4.AppendField(VA.Text.Markup.Fields.Width);
+            markup4.SetText(shape);
+            Assert.AreEqual("2 HELLO 44", shape.Characters.Text);
 
             page1.Delete(0);
         }
