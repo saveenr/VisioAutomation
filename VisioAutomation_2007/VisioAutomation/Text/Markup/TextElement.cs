@@ -90,23 +90,26 @@ namespace VisioAutomation.Text.Markup
                     }
                     else if (walkevent.Node is Field)
                     {
-                        var f = (Field) walkevent.Node;
-                        if (!string.IsNullOrEmpty(f.PlaceholderText))
+                        var field = (Field) walkevent.Node;
+                        if (field.PlaceholderText == null)
                         {
-                            var field_region = new TextRegion();
-                            field_region.Field = f;
-                            field_region.TextStartPos = start_pos;
-                            field_region.TextLength = f.PlaceholderText.Length;
-
-                            markupinfo.FieldRegions.Add(field_region);
-
-                            // Add text length to parent
-                            var nparent = region_stack.Peek();
-                            nparent.TextLength += f.PlaceholderText.Length;
-
-                            // update the start position with the length
-                            start_pos += f.PlaceholderText.Length;
+                            string msg = "Placeholder text cannot be null";
+                            throw new VA.AutomationException(msg);
                         }
+
+                        var field_region = new TextRegion();
+                        field_region.Field = field;
+                        field_region.TextStartPos = start_pos;
+                        field_region.TextLength = field.PlaceholderText.Length;
+
+                        markupinfo.FieldRegions.Add(field_region);
+
+                        // Add text length to parent
+                        var nparent = region_stack.Peek();
+                        nparent.TextLength += field.PlaceholderText.Length;
+
+                        // update the start position with the length
+                        start_pos += field.PlaceholderText.Length;
                     }
                     else
                     {
@@ -162,7 +165,8 @@ namespace VisioAutomation.Text.Markup
             }
 
             // Insert the fields
-            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.TextLength >= 1))
+            // NOTE - to keep it simpler the fields are added backwards - last to first
+            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.TextLength >= 1).Reverse())
             {
                 var chars = shape.Characters;
                 chars.Begin = field_region.TextStartPos;
