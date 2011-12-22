@@ -165,7 +165,8 @@ namespace VisioAutomation.Text.Markup
             }
 
             // Insert the fields
-            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.TextLength >= 1))
+            // note: Fields are added in reverse because it is simpler to keep track of the insertion positions
+            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.TextLength >= 1).Reverse())
             {
                 var chars = shape.Characters;
                 chars.Begin = field_region.TextStartPos;

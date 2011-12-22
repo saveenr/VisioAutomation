@@ -201,6 +201,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+
         [TestMethod]
         public void CharacterFormatCells_Check_SetFormat_1()
         {
@@ -428,6 +429,48 @@ namespace TestVisioAutomation
             Assert.AreEqual("8 pt", tfs[0].TextBlocks.BottomMargin.Formula);
             Assert.AreEqual("4 pt", tfs[1].TextBlocks.BottomMargin.Formula);
 
+
+            page1.Delete(0);
+        }
+
+ 
+
+        [TestMethod]
+        public void Test_Fields1()
+        {
+            var page1 = GetNewPage();
+            var shape = page1.DrawRectangle(0, 0, 4, 2);
+
+
+            // case 1 - markup is just a single field element
+            var markup_1 = new VA.Text.Markup.TextElement();
+            markup_1.AppendField(VA.Text.Markup.Fields.Height);
+            markup_1.SetText(shape);
+            Assert.AreEqual("2", shape.Characters.Text);
+
+            // case 2 - markup contains a single field surrounded by literal text
+            var markup2 = new VA.Text.Markup.TextElement();
+            markup2.AppendText("HELLO ");
+            markup2.AppendField(VA.Text.Markup.Fields.Height);
+            markup2.AppendText(" WORLD");
+            markup2.SetText(shape);
+            Assert.AreEqual("HELLO 2 WORLD", shape.Characters.Text);
+
+            // case 3 - markup contains a single literal surrounded by two fields
+            var markup3 = new VA.Text.Markup.TextElement();
+            markup3.AppendField(VA.Text.Markup.Fields.Height);
+            markup3.AppendText(" HELLO ");
+            markup3.AppendField(VA.Text.Markup.Fields.Width);
+            markup3.SetText(shape);
+            Assert.AreEqual("2 HELLO 4", shape.Characters.Text);
+
+            var markup4 = new VA.Text.Markup.TextElement();
+            markup4.AppendField(VA.Text.Markup.Fields.Height);
+            markup4.AppendText(" HELLO ");
+            markup4.AppendField(VA.Text.Markup.Fields.Width);
+            markup4.AppendField(VA.Text.Markup.Fields.Width);
+            markup4.SetText(shape);
+            Assert.AreEqual("2 HELLO 44", shape.Characters.Text);
 
             page1.Delete(0);
         }

@@ -1,76 +1,22 @@
-﻿using System.Xml.Linq;
+﻿using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
-using System.Collections.Generic;
 
 namespace VisioAutomation.Text.Markup
 {
-    public class ParagraphFormat
-    {
-        private bool? _bullets;
-        private double? _indent;
-        private VA.Drawing.AlignmentHorizontal? _h_align;
-
-        public VA.Drawing.AlignmentHorizontal? HAlign
-        {
-            get { return _h_align; }
-            set { _h_align = value; }
-        }
-
-        public double? Indent
-        {
-            get { return _indent; }
-            set { _indent = value; }
-        }
-
-        public bool? Bullets
-        {
-            get { return _bullets; }
-            set { _bullets = value; }
-        }
-
-        public void UpdateFrom(ParagraphFormat other)
-        {
-            this.HAlign =  other.HAlign;
-            this.Indent =  other.Indent;
-            this.Bullets = other.Bullets;
-        }
-
-        public ParagraphFormat Duplicate()
-        {
-            var fmt = new ParagraphFormat();
-            fmt.UpdateFrom(this);
-            return fmt;
-        }
-    }
-
     public class CharacterFormat
     {
-        private string _font;
         private double? _font_size;
-        private VA.Drawing.ColorRGB? _color;
         private int? _transparency;
-        private VA.Text.CharStyle? _char_style;
+
+        public CharStyle? CharStyle { get; set; }
+        public string Font { get; set; }
+        public ColorRGB? Color { get; set; }
 
         public CharacterFormat()
         {
         }
-
-        public string Font
-        {
-            get { return _font; }
-            set
-            {
-                _font = value;
-            }
-        }
-
-        public VA.Drawing.ColorRGB? Color
-        {
-            get { return _color; }
-            set { _color = value; }
-        }
-
+        
         public double? FontSize
         {
             get { return _font_size; }
@@ -114,18 +60,12 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
-        public VA.Text.CharStyle? CharStyle
-        {
-            get { return _char_style; }
-            set { _char_style = value; }
-        }
-
         public void UpdateFrom(CharacterFormat other)
         {
-            this._font = other._font;
+            this.Font = other.Font;
             this._font_size = other._font_size;
-            this._char_style = other._char_style;
-            this._color = other._color;
+            this.CharStyle = other.CharStyle;
+            this.Color = other.Color;
             this._transparency = other._transparency;
         }
 
