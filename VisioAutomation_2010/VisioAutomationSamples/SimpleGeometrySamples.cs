@@ -10,6 +10,8 @@ namespace VisioAutomationSamples
     {
         public static void BezierCircle()
         {
+            // Draw an approximation of a circle using Bezier Curves
+
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var curve0 = VA.Drawing.BezierCurve.FromEllipse(
@@ -22,6 +24,8 @@ namespace VisioAutomationSamples
 
         public static void BezierEllipse()
         {
+            // Draw an approximation of an ellipse using Bezier Curves
+
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var curve0 = VA.Drawing.BezierCurve.FromEllipse(
@@ -33,6 +37,8 @@ namespace VisioAutomationSamples
 
         public static void BezierSimple()
         {
+            // Draw a Simple Bezier curve
+
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var points = new[] {0.0, 0.0, 1.0, 2.0, 3.0, 0.5, 4.0, 0.5};
@@ -47,11 +53,13 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static void NURBS2()
+        public static void NURBS1()
         {
+            // Draw a simple NURBS
+            // Example from this page:http://www.robthebloke.org/opengl_programming.html
+
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
-            //found in the nurbs curve example on this page:http://www.robthebloke.org/opengl_programming.html
             var points = new[]
                              {
                                  new VA.Drawing.Point(10, 10),
@@ -66,20 +74,21 @@ namespace VisioAutomationSamples
             var origin = new VA.Drawing.Point(4, 4);
             var scale = new VA.Drawing.Size(1.0/4.0, 1.0/4.0);
 
-            var ControlPoints = points.Select(x => (x*scale) + origin).ToList();
-            var Knots = new double[] {0, 0, 0, 0, 1, 2, 3, 4, 4, 4, 4};
-            var Degree = 3;
-            var Weights = ControlPoints.Select(i => 1.0).ToList();
+            var controlpoints = points.Select(x => (x*scale) + origin).ToList();
+            var knots = new double[] {0, 0, 0, 0, 1, 2, 3, 4, 4, 4, 4};
+            var degree = 3;
+            var weights = controlpoints.Select(i => 1.0).ToList();
 
-            var s0 = page.DrawNURBS(ControlPoints, Knots, Weights, Degree);
+            var s0 = page.DrawNURBS(controlpoints, knots, weights, degree);
             s0.Text = "Generic NURBS shape";
         }
 
-        public static void NURBS3()
+        public static void NURBS2()
         {
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+            // Draw a simple NURBS
+            // Example from Graham Wideman's book
 
-            // from graham wideman's book
+            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var points = new[]
                              {
