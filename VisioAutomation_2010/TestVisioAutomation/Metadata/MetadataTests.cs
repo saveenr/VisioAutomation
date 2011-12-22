@@ -24,7 +24,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void VerifyMetadaDBCreation()
+        public void VerifyItemCounts()
         {
             var db = VA.Metadata.MetadataDB.Load();
 
@@ -39,42 +39,26 @@ namespace TestVisioAutomation
             Assert.AreEqual(342, visio_2007_cells.Count());
 
             TestCommon.Helper.AssertNoDuplicates(allcells.Select(c => c.ID));
-        }
-
-        [TestMethod]
-        public void Constants()
-        {
-            var db = VA.Metadata.MetadataDB.Load();
 
             var constants = db.Constants;
 
-            // There are 3003 known constants in the Visio PIA
+            // There are 3003 known constants in the Visio 2007 PIA
+            // There are 3048 known constants in the Visio 2007 PIA
             Assert.AreEqual(3348, constants.Count);
-        }
-
-        [TestMethod]
-        public void Sections()
-        {
-            var db = VA.Metadata.MetadataDB.Load();
 
             var sections = db.Sections;
 
             // There are 40 known sections in the Visio PIA
             Assert.AreEqual(40, sections.Count);
-        }
 
-        [TestMethod]
-        public void CellValues()
-        {
-            var db = VA.Metadata.MetadataDB.Load();
             var cellvals = db.CellValues;
 
-            // There are 40 known sections in the Visio PIA
+            // There are 397 known sections in the Visio 2010 PIA
             Assert.AreEqual(397, cellvals.Count);
         }
 
         [TestMethod]
-        public void ValidateCellNameCode()
+        public void ValidateCellNameCodes()
         {
             var db = VA.Metadata.MetadataDB.Load();
 
