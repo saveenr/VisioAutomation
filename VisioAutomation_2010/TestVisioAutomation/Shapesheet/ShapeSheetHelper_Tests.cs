@@ -102,11 +102,11 @@ namespace TestVisioAutomation
                 h1.Address = "http://microsoft/com";
 
                 var t0 = new VA.Text.Markup.TextElement();
-                t0.TextCharFormat.FontSize = VA.Convert.PointsToInches(36);
+                t0.CharacterFormat.FontSize = VA.Convert.PointsToInches(36);
                 var t01 = t0.AppendText("HELLO");
                 var t1 = t0.AppendElement("W\nO\nR\nL\nD");
-                t1.TextParaFormat.Indent = 1.0;
-                t1.TextCharFormat.FontSize = VA.Convert.PointsToInches(15.0);
+                t1.ParagraphFormat.Indent = 1.0;
+                t1.CharacterFormat.FontSize = VA.Convert.PointsToInches(15.0);
                 t0.AppendText("FOOBR");
 
                 //t0.SetShapeText(shape1);

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Text.Markup
 {
-    public class TextParaFormat
+    public class ParagraphFormat
     {
         private bool? _bullets;
         private double? _indent;
@@ -29,22 +29,22 @@ namespace VisioAutomation.Text.Markup
             set { _bullets = value; }
         }
 
-        public void UpdateFrom(TextParaFormat other)
+        public void UpdateFrom(ParagraphFormat other)
         {
             this.HAlign =  other.HAlign;
             this.Indent =  other.Indent;
             this.Bullets = other.Bullets;
         }
 
-        public TextParaFormat Duplicate()
+        public ParagraphFormat Duplicate()
         {
-            var fmt = new TextParaFormat();
+            var fmt = new ParagraphFormat();
             fmt.UpdateFrom(this);
             return fmt;
         }
     }
 
-    public class TextCharFormat
+    public class CharacterFormat
     {
         private string _font;
         private double? _font_size;
@@ -52,7 +52,7 @@ namespace VisioAutomation.Text.Markup
         private int? _transparency;
         private VA.Text.CharStyle? _char_style;
 
-        public TextCharFormat()
+        public CharacterFormat()
         {
         }
 
@@ -120,7 +120,7 @@ namespace VisioAutomation.Text.Markup
             set { _char_style = value; }
         }
 
-        public void UpdateFrom(TextCharFormat other)
+        public void UpdateFrom(CharacterFormat other)
         {
             this._font = other._font;
             this._font_size = other._font_size;
@@ -129,9 +129,9 @@ namespace VisioAutomation.Text.Markup
             this._transparency = other._transparency;
         }
 
-        public TextCharFormat Duplicate()
+        public CharacterFormat Duplicate()
         {
-            var fmt = new TextCharFormat();
+            var fmt = new CharacterFormat();
             fmt.UpdateFrom(this);
             return fmt;
         }

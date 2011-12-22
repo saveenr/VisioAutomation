@@ -108,8 +108,8 @@ namespace TestVisioAutomation
             var el1 = el0.AppendElement("HELLO");
             var el2 = el0.AppendElement(" WORLD");
 
-            el1.TextCharFormat.CharStyle = VA.Text.CharStyle.Bold;
-            el2.TextCharFormat.CharStyle = VA.Text.CharStyle.Italic;
+            el1.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
+            el2.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
 
             var page1 = GetNewPage();
 
@@ -135,15 +135,15 @@ namespace TestVisioAutomation
             var el1 = el0.AppendElement("HELLO");
             var el2 = el1.AppendElement(" WORLD");
 
-            el0.TextCharFormat.FontSize = 14;
-            el0.TextCharFormat.FontSize = 7;
+            el0.CharacterFormat.FontSize = 14;
+            el0.CharacterFormat.FontSize = 7;
             
-            el1.TextCharFormat.Font = "Impact";
-            el1.TextCharFormat.CharStyle = VA.Text.CharStyle.Bold;
+            el1.CharacterFormat.Font = "Impact";
+            el1.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
             
-            el2.TextCharFormat.Font = "Courier New";
-            el2.TextCharFormat.FontSize = 20;
-            el2.TextCharFormat.CharStyle = VA.Text.CharStyle.Italic;
+            el2.CharacterFormat.Font = "Courier New";
+            el2.CharacterFormat.FontSize = 20;
+            el2.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
 
             var markup = el0.GetMarkupInfo();
             var regions = markup.FormatRegions;

@@ -17,24 +17,24 @@ namespace VisioAutomationSamples
             var el = p.AppendElement(text);
             if (font != null)
             {
-                el.TextCharFormat.Font = font;
+                el.CharacterFormat.Font = font;
             }
             if (size.HasValue)
             {
-                el.TextCharFormat.FontSize = size.Value;
+                el.CharacterFormat.FontSize = size.Value;
             }
             if (color.HasValue)
             {
-                el.TextCharFormat.Color = new VA.Drawing.ColorRGB(color.Value);
+                el.CharacterFormat.Color = new VA.Drawing.ColorRGB(color.Value);
             }
             if (halign.HasValue)
             {
-                el.TextParaFormat.HAlign = halign.Value;
+                el.ParagraphFormat.HAlign = halign.Value;
             }
 
             if (cs.HasValue)
             {
-                el.TextCharFormat.CharStyle = cs;
+                el.CharacterFormat.CharStyle = cs;
             }
 
             return el;
@@ -69,9 +69,9 @@ namespace VisioAutomationSamples
         private static TextElement get_markup_1()
         {
             var e1 = new VA.Text.Markup.TextElement();
-            e1.TextCharFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.TextCharFormat.Font = "Times New Roman";
-            e1.TextCharFormat.FontSize = 20;
+            e1.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
+            e1.CharacterFormat.Font = "Times New Roman";
+            e1.CharacterFormat.FontSize = 20;
             e1.AppendText("Hello World");
             return e1;
         }
@@ -79,9 +79,9 @@ namespace VisioAutomationSamples
         private static TextElement get_markup_2()
         {
             var e1 = new VA.Text.Markup.TextElement();
-            e1.TextCharFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.TextCharFormat.Font = "Times New Roman";
-            e1.TextCharFormat.FontSize = 20;
+            e1.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
+            e1.CharacterFormat.Font = "Times New Roman";
+            e1.CharacterFormat.FontSize = 20;
             e1.AppendText("Hello ");
 
             var e2 = e1.AddElementEx("World", null, null, null, null, VA.Text.CharStyle.Italic);
@@ -94,7 +94,7 @@ namespace VisioAutomationSamples
             e1.AppendText("When, from behind that craggy steep\n");
             e1.AppendText("till then the horizon’s bound\n");
             var e2 = e1.AddElementEx("a huge peak, black and huge\n", null, null, null, VA.Drawing.AlignmentHorizontal.Left, VA.Text.CharStyle.Italic);
-            var e3 = e1.AddElementEx("As if with voluntary power instinct\n", null, null, null, VA.Drawing.AlignmentHorizontal.Center, VA.Text.CharStyle.Italic);
+            var e3 = e1.AddElementEx("As if with voluntary power instinct\n", "Segoe UI", null, null, VA.Drawing.AlignmentHorizontal.Center, VA.Text.CharStyle.Bold);
             var e4 = e1.AddElementEx("Upreared its head.\n", null, null, null, VA.Drawing.AlignmentHorizontal.Right, VA.Text.CharStyle.Italic);
             e1.AppendText("-William Wordsworth, the Prelude");
             return e1;
