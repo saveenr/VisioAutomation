@@ -39,20 +39,35 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Fields_Scenario_2()
+        public void TestSimpleField()
         {
             var page1 = GetNewPage();
             var doc1 = page1.Document;
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            doc1.Title = "Fields_Scenario_2";
-            VA.Text.TextHelper.SetText(s1, "DOCNAME: ", VA.Text.Markup.Fields.Title);
+            doc1.Title = "My Document";
+            VA.Text.TextHelper.SetText(s1, "DOCNAME: {0}", VA.Text.Markup.Fields.Title);
 
+            Assert.AreEqual("DOCNAME: My Document", s1.Characters.Text);
             page1.Delete(0);
         }
 
         [TestMethod]
-        public void Fields_Scenario_3()
+        public void TestTwoSimpleFields()
+        {
+            var page1 = GetNewPage();
+            var doc1 = page1.Document;
+
+            var s1 = page1.DrawRectangle(0, 0, 4, 1);
+            doc1.Title = "My Document";
+            VA.Text.TextHelper.SetText(s1, "BEGIN {0} MIDDLE {1} END", VA.Text.Markup.Fields.Title, VA.Text.Markup.Fields.Title);
+
+            Assert.AreEqual("BEGIN My Document MIDDLE My Document END", s1.Characters.Text);
+            page1.Delete(0);
+        }
+
+        [TestMethod]
+        public void CheckInvalidFormatStringWith()
         {
             bool caught = false;
             var page1 = GetNewPage();
