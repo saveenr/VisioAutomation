@@ -10,7 +10,6 @@ namespace VisioAutomationSamples
     {
         public static void SoftShadow()
         {
-
             var baserect = new VA.Drawing.Rectangle(1, 1, 5, 5);
 
             var glow = new VA.Effects.EdgeGlow();

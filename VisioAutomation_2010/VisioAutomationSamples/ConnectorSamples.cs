@@ -9,7 +9,9 @@ namespace VisioAutomationSamples
     {
         public static void ConnectorsToBack()
         {
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+            var doc = SampleEnvironment.Application.ActiveDocument;
+            var pages = doc.Pages;
+            var page = pages.Add();
 
             // get the data and the labels to use
             var data = new double[] {1, 2, 3, 4, 5, 6};

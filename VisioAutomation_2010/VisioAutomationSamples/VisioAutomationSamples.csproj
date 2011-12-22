@@ -105,7 +105,6 @@
       <DependentUpon>FormSampleRunner.cs</DependentUpon>
     </Compile>
     <Compile Include="LayoutSamples.cs" />
-    <Compile Include="PageSamples.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

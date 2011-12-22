@@ -22,14 +22,14 @@ namespace VisioAutomationSamples
             var doc = ss.Developer.DrawInteropEnumDocumentation();
         }
 
-        public static void VANamespaces()
+        public static void VisioAutomationNamespaces()
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
             var doc = ss.Developer.DrawVANamespaces();
         }
 
-        public static void VANamespacesAndClasses()
+        public static void VisioAutomationNamespacesAndClasses()
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
