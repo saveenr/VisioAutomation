@@ -1,8 +1,5 @@
-﻿using System.Xml.Linq;
-using VisioAutomation.Drawing;
+﻿using VisioAutomation.Drawing;
 using VA = VisioAutomation;
-using SXL = System.Xml.Linq;
-using System.Collections.Generic;
 
 namespace VisioAutomation.Text.Markup
 {

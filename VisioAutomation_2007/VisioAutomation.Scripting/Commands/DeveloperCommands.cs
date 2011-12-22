@@ -30,28 +30,6 @@ namespace VisioAutomation.Scripting.Commands
             s0.Text = "Hello World";
         }
 
-        public System.Xml.Linq.XElement GetXMLDescription()
-        {
-            var el_shapes = new System.Xml.Linq.XElement("Shapes");
-            if (!this.Session.HasSelectedShapes())
-            {
-                return el_shapes;
-            }
-
-            var page = this.Session.VisioApplication.ActivePage;
-            var shapes = page.Shapes.AsEnumerable().ToList();
-            var shapeids = shapes.Select(s => s.ID).ToList();
-
-            var el_shape = VA.ShapeHelper.GetShapeDescriptionXML(page, shapeids);
-
-            foreach (var x in el_shape)
-            {
-                el_shapes.Add(x);
-            }
-
-            return el_shapes;
-        }
-
         public IVisio.Document DrawScriptingDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);

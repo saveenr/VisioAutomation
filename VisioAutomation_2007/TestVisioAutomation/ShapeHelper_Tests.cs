@@ -10,17 +10,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class ShapeHelper_Tests : VisioAutomationTest
     {
-
-        [TestMethod]
-        public void Test_GetXML()
-        {
-            var page = this.GetNewPage();
-            var shape = page.DrawRectangle(1, 1, 3, 3);
-            var shapeids = page.Shapes.AsEnumerable().Select(s => s.ID).ToList();
-            var xml = VA.ShapeHelper.GetShapeDescriptionXML(page,shapeids);
-            page.Delete(0);
-        }
-
         [TestMethod]
         public void Test_GetXForm()
         {
