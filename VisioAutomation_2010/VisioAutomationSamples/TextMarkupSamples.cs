@@ -53,6 +53,7 @@ namespace VisioAutomationSamples
             var s1 = page.DrawRectangle(0, 0, 8.5, 1);
             var s2 = page.DrawRectangle(0, 1, 8.5, 2);
             var s3 = page.DrawRectangle(0, 2, 8.5, 4);
+            var s4 = page.DrawRectangle(0, 4, 8.5, 4.5);
 
             var e1 = get_markup_1();
             e1.SetText(s1);
@@ -63,6 +64,9 @@ namespace VisioAutomationSamples
 
             var e3 = get_markup_3();
             e3.SetText(s3);
+
+            var e4 = get_markup_4();
+            e4.SetText(s4);
 
         }
 
@@ -97,6 +101,17 @@ namespace VisioAutomationSamples
             var e3 = e1.AddElementEx("As if with voluntary power instinct\n", "Segoe UI", null, null, VA.Drawing.AlignmentHorizontal.Center, VA.Text.CharStyle.Bold);
             var e4 = e1.AddElementEx("Upreared its head.\n", null, null, null, VA.Drawing.AlignmentHorizontal.Right, VA.Text.CharStyle.Italic);
             e1.AppendText("-William Wordsworth, the Prelude");
+            return e1;
+        }
+
+        private static TextElement get_markup_4()
+        {
+            var e1 = new VA.Text.Markup.TextElement();
+            e1.AppendText("This shape is ");
+            e1.AppendField(VA.Text.Markup.Fields.Width);
+            e1.AppendText("inches wide by ");
+            e1.AppendField(VA.Text.Markup.Fields.Height);
+            e1.AppendText("inches tall.");
             return e1;
         }
 
