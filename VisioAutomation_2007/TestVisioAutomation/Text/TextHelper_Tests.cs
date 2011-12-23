@@ -10,85 +10,6 @@ namespace TestVisioAutomation
     public class TextHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void Fields_Scenario_1()
-        {
-            var doc1 = this.GetNewDoc();
-            var page1 = this.GetVisioApplication().ActivePage;
-            doc1.Title = "Fields_Scenario_1";
-
-            var s0 = page1.DrawRectangle(0, 0, 4, 1);
-            VA.Text.TextHelper.SetText(s0, "DOCNAME: {0}", VA.Text.Markup.Fields.Title);
-
-            var s1 = page1.DrawRectangle(0, 1, 4, 2);
-            VA.Text.TextHelper.SetText(s1, "SHAPE WIDTH: {0}", VA.Text.Markup.Fields.Width);
-
-            var s1_shape_size = VisioAutomationTest.GetSize(s1);
-
-            var shape_area = page1.DrawRectangle(4, 1, 8, 2);
-            VA.Text.TextHelper.SetText(shape_area, "SHAPEAREA: {0}", new CustomField("Width*Height", IVisio.VisFieldFormats.visFmtNumGenNoUnits));
-
-            var s0_characters = s0.Characters;
-            Assert.AreEqual("DOCNAME: Fields_Scenario_1", s0_characters.Text);
-            var s1_characters = s1.Characters;
-            Assert.AreEqual(string.Format("SHAPE WIDTH: {0}", s1_shape_size.Width),s1_characters.Text);
-            var s3_characters = shape_area.Characters;
-            Assert.AreEqual("SHAPEAREA: 4", s3_characters.Text);
-
-            page1.Delete(0);
-            doc1.Close(true);
-        }
-
-        [TestMethod]
-        public void TestSimpleField()
-        {
-            var page1 = GetNewPage();
-            var doc1 = page1.Document;
-            doc1.Title = "My Document";
-
-            // Case 2 - text with a field
-            var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            VA.Text.TextHelper.SetText(s1, "DOCNAME: {0}", VA.Text.Markup.Fields.Title);
-            Assert.AreEqual("DOCNAME: My Document", s1.Characters.Text);
-
-            // Case 3
-            VA.Text.TextHelper.SetText(s1, "BEGIN {0} MIDDLE {1} END", VA.Text.Markup.Fields.Title, VA.Text.Markup.Fields.Title);
-            Assert.AreEqual("BEGIN My Document MIDDLE My Document END", s1.Characters.Text);
-
-            // Case 4
-            VA.Text.TextHelper.SetText(s1, "{0} MIDDLE {1}", VA.Text.Markup.Fields.Title, VA.Text.Markup.Fields.Title);
-            Assert.AreEqual("My Document MIDDLE My Document", s1.Characters.Text);
-
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void CheckInvalidFormatStringWith()
-        {
-            bool caught = false;
-            var page1 = GetNewPage();
-            var doc1 = page1.Document;
-
-            var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            doc1.Title = "Fields_Scenario_3";
-            try
-            {
-                VA.Text.TextHelper.SetText(s1, "DOCNAME: {0} {1}", VA.Text.Markup.Fields.Title);
-            }
-            catch (System.ArgumentOutOfRangeException )
-            {
-                // this is expected
-                page1.Delete(0);
-                caught = true;
-            }
-
-            if (!caught)
-            {
-                Assert.Fail("Did not catch expected exception");
-            }
-
-        }
-
-        [TestMethod]
         public void FitShapeToText_Scenario_1()
         {
             var page1 = GetNewPage();
@@ -110,6 +31,5 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
-
     }
 }

@@ -1,8 +1,6 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
@@ -16,25 +14,27 @@ namespace VisioAutomationSamples
 
             string bkname = bk.NameID;
 
-            string pinyf = string.Format("GUARD({0}!PinY)", bkname);
-            string pinxf = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
-            string heightf = string.Format("GUARD({0}!Height)", bkname);
-            string widthf = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
-
-            fg.CellsU["PinY"].Formula = pinyf;
-            fg.CellsU["PinX"].Formula = pinxf;
-            fg.CellsU["Height"].Formula = heightf;
-            fg.CellsU["Width"].Formula = widthf;
-
+            var xform  = new VA.Layout.XFormCells();
+            xform.PinX =  string.Format("GUARD({0}!PinY)", bkname);
+            xform.PinY = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
+            xform.Width = string.Format("GUARD({0}!Height)", bkname);
+            xform.Height = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
+            
             page.Application.ActiveWindow.SelectAll();
             var group = page.Application.ActiveWindow.Selection.Group();
 
-            VA.Text.TextHelper.SetText(
-                group,
-                "{0} ( {1} of {2} )",
-                VA.Text.Markup.Fields.PageName,
-                VA.Text.Markup.Fields.PageNumber,
-                VA.Text.Markup.Fields.NumberOfPages);
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            xform.Apply(update);
+            update.Execute(group);
+            
+            var markup1 = new VA.Text.Markup.TextElement();
+            markup1.AppendField(VA.Text.Markup.Fields.PageName);
+            markup1.AppendText(" (");
+            markup1.AppendField(VA.Text.Markup.Fields.PageNumber);
+            markup1.AppendText(" of ");
+            markup1.AppendField(VA.Text.Markup.Fields.NumberOfPages);
+            markup1.AppendText(") ");
+            markup1.SetText(group);
         }
     }
 }
