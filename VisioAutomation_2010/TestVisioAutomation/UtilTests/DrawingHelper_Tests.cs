@@ -33,7 +33,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(2, shapes.Count);
 
             var shapeids = shapes.Select(s => s.ID).ToArray();
-            var formats = VA.Format.ShapeFormatCells.GetCells(page1, shapeids);
+            var formats = VA.Format.FormatHelper.GetShapeFormat(page1, shapeids);
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(5, shapes.Count);
 
             var shapeids = shapes.Select(s=>s.ID).ToArray();
-            var formats = VA.Format.ShapeFormatCells.GetCells(page1, shapeids);
+            var formats = VA.Format.FormatHelper.GetShapeFormat(page1, shapeids);
         }
     }
 }
