@@ -52,6 +52,7 @@
     <Compile Include="Cell.cs" />
     <Compile Include="CellValue.cs" />
     <Compile Include="AutomationEnum.cs" />
+    <Compile Include="CellValueEnum.cs" />
     <Compile Include="XmlPersist\XmlColumn.cs" />
     <Compile Include="XmlPersist\XmlTableWriter.cs" />
     <Compile Include="XmlPersist\XmlTableReader.cs" />
@@ -62,7 +63,6 @@
     </Compile>
     <Compile Include="RowData.cs" />
     <Compile Include="ColumnDefinition.cs" />
-    <Compile Include="ExcelXmlToDataSetConverter.cs" />
     <Compile Include="MetadataDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Section.cs" />

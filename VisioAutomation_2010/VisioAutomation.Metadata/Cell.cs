@@ -1,8 +1,14 @@
 namespace VisioAutomation.Metadata
 {
+    [System.AttributeUsage(System.AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    sealed class XMLIgnore : System.Attribute
+    {
+        public XMLIgnore()
+        {
+        }
+    }
     public class Cell
     {
-        public string ID { get; set; }
         public string Name { get; set; }
         public string NameCode { get; set; }
         public string NameFormatString { get; set; }

@@ -164,6 +164,7 @@
     <Compile Include="Shapesheet\Update\UpdateUtil.cs" />
     <Compile Include="Shapesheet\Update\UpdateType.cs" />
     <Compile Include="Text\CharStyle.cs" />
+    <Compile Include="Text\Markup\ParagraphFormat.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
@@ -244,7 +245,6 @@
     <Compile Include="Internal\BitArray2D.cs" />
     <Compile Include="Drawing\ColorRGB.cs" />
     <Compile Include="Drawing\SnappingGrid.cs" />
-    <Compile Include="Internal\FormatStringSegment.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />
@@ -255,7 +255,6 @@
     <Compile Include="Connections\DirectedEdge.cs" />
     <Compile Include="Internal\Interop\COMInterop.cs" />
     <Compile Include="Convert.cs" />
-    <Compile Include="Internal\FormatStringParser.cs" />
     <Compile Include="Extensions\LayersMethods.cs" />
     <Compile Include="Extensions\WindowsMethods.cs" />
     <Compile Include="Shapesheet\SRCConstants.cs" />
@@ -280,7 +279,7 @@
     <Compile Include="Text\Markup\NodeList.cs" />
     <Compile Include="Text\Markup\NodeType.cs" />
     <Compile Include="Text\Markup\TextElement.cs" />
-    <Compile Include="Text\Markup\TextFormat.cs" />
+    <Compile Include="Text\Markup\CharacterFormat.cs" />
     <Compile Include="Text\Markup\Literal.cs" />
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />

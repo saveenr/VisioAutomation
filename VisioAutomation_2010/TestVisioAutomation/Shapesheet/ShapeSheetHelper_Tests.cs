@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
@@ -82,45 +83,52 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckAutomationCellNamesAgainstVA()
         {
+            // Validate that we are able to compute the correct name for a cell
+            // given only, its SRC values
+            // to do this: first build up an object with a lot of sections and then try finding 
+            // each cell and checking against the name predicted by the code
+
             var app = GetVisioApplication();
             var documents = app.Documents;
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            var shape1 = page1.DrawRectangle(0.3, 0, 2.5, 1.7);
 
+            // Create a shape manipulate it to have a lot of sections
+            var shape1 = page1.DrawRectangle(0.3, 0, 2.5, 5);
             using (var s = app.CreateUndoScope())
             {
+                // set basic formatting
                 shape1.CellsU["FillForegnd"].FormulaU = "rgb(255,134,78)";
                 shape1.CellsU["FillBkgnd"].FormulaU = "rgb(255,134,98)";
+
+                // add custom properties
                 VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(shape1, "custprop2", "value1");
+
+                // add user defined cells
                 VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(shape1, "UserDefinedCell1", "Value1", "Prompt1");
                 var ctrl = new VA.Controls.ControlCells();
                 ctrl.X = "Width*0.5";
                 ctrl.Y = "Width*0.75";
+
+                // add controls
                 VA.Controls.ControlHelper.AddControl(shape1, ctrl);
+
+                // add hyperlinks
                 var h1 = shape1.Hyperlinks.Add();
+                var h2 = shape1.Hyperlinks.Add();
                 h1.Address = "http://microsoft/com";
 
+                // add character and paragraph formatting
                 var t0 = new VA.Text.Markup.TextElement();
-                t0.TextFormat.FontSize = VA.Convert.PointsToInches(36);
+                t0.CharacterFormat.FontSize = 36;
                 var t01 = t0.AppendText("HELLO");
                 var t1 = t0.AppendElement("W\nO\nR\nL\nD");
-                t1.TextFormat.Indent = 1.0;
-                t1.TextFormat.FontSize = VA.Convert.PointsToInches(15.0);
+                t1.ParagraphFormat.Indent = 1.0;
+                t1.CharacterFormat.FontSize = 15.0;
                 t0.AppendText("FOOBR");
+                t0.SetText(shape1);
 
-                //t0.SetShapeText(shape1);
-                shape1.Text = TestCommon.Helper.LoremIpsumText;
-                var fmt1 = new VA.Text.CharacterFormatCells();
-                fmt1.Transparency = 0.5;
-                VA.Text.TextFormat.FormatRange(shape1, fmt1, 5, 10);
-
-                var fmt2 = new VA.Text.ParagraphFormatCells();
-                fmt2.IndentLeft = 1.0;
-                VA.Text.TextFormat.FormatRange(shape1, fmt2, 1, 10);
-                VA.Text.TextFormat.FormatRange(shape1, fmt2, 20, 30);
-
-                var hlink1=shape1.Hyperlinks.Add();
+                // add tab stops
                 var stops = new[]
                                 {
                                     new VA.Text.TabStop(0.1, VA.Text.TabStopAlignment.Left),
@@ -131,6 +139,7 @@ namespace TestVisioAutomation
 
             }
 
+            // Pause a moment
             System.Threading.Thread.Sleep(1000);
 
             var failures = new List<string>();
@@ -155,9 +164,10 @@ namespace TestVisioAutomation
                 }
             }*/
 
+            // these are the section indices to validate
             short[] section_indexes = new short[] { 
                 (short)IVisio.VisSectionIndices.visSectionObject, 
-                //(short)IVisio.VisSectionIndices.visSectionCharacter 
+                (short)IVisio.VisSectionIndices.visSectionCharacter 
             };
 
             foreach (var section_index in section_indexes)
@@ -173,20 +183,41 @@ namespace TestVisioAutomation
                     {
                         continue;
                     }
-                    // based on the name VA determines retrieve the cell
-                    var found_cell = shape1.CellsU[predicted_cell_name];
 
-                    // verify that the found cell matches the initial SRC
-                    var found_cell_src = new VA.ShapeSheet.SRC(found_cell.Section, found_cell.Row, found_cell.Column);
-
-                    if (!cellinfo_src.AreEqual(found_cell_src))
+                    if (predicted_cell_name != null)
                     {
-                           Assert.Fail("cells don't match");
+                        // based on the name VA determines retrieve the cell
+                        var found_cell = TryGetCellsU(shape1, predicted_cell_name);
+
+                        if (found_cell!=null)
+                        {
+                            // verify that the found cell matches the initial SRC
+                            var found_cell_src = new VA.ShapeSheet.SRC(found_cell.Section, found_cell.Row, found_cell.Column);
+
+                            if (!cellinfo_src.AreEqual(found_cell_src))
+                            {
+                                Assert.Fail("cells don't match");
+                            }
+                            else
+                            {
+                                success.Add(predicted_cell_name + " " + found_cell.Name);
+                            }                        
+                            
+                        }
+                        else
+                        {
+                            failures.Add(string.Format("Could not find cell with predicted name {0}",predicted_cell_name));
+                        }
                     }
                     else
                     {
-                        success.Add(predicted_cell_name + " " + found_cell.Name);
+                        var unfound_cell_src = new VA.ShapeSheet.SRC(cellinfo_src.Section, cellinfo_src.Row, cellinfo_src.Cell);
+                        var actual_cell =
+                            shape1.CellsSRC[
+                                (short) cellinfo_src.Section, (short) cellinfo_src.Row, (short) cellinfo_src.Cell];
+                        failures.Add(string.Format("Missing predicted name for {0} - actual shapesheet name is {1} ", cellinfo_src.ToString(), actual_cell.Name));
                     }
+                    
                 }
             }
 
@@ -198,6 +229,19 @@ namespace TestVisioAutomation
             }
 
             doc1.Close(true);
+        }
+
+        public IVisio.Cell TryGetCellsU(IVisio.Shape s, string n)
+        {
+            try
+            {
+                return s.CellsU[n];
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         private IEnumerable<VA.ShapeSheet.SRC> EnumCellsInSection(IVisio.Shape shape, short section_index)

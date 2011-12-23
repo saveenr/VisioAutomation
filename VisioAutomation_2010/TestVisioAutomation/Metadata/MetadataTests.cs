@@ -38,7 +38,7 @@ namespace TestVisioAutomation
             var visio_2007_cells = allcells.Where(c => c.MinVersion.Contains("Visio2007")).ToList();
             Assert.AreEqual(342, visio_2007_cells.Count());
 
-            TestCommon.Helper.AssertNoDuplicates(allcells.Select(c => c.ID));
+            TestCommon.Helper.AssertNoDuplicates(allcells.Select(c => c.NameCode + c.SectionIndex));
 
             var constants = db.Constants;
 

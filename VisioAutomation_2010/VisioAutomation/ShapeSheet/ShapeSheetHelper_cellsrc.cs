@@ -203,7 +203,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visCompNoLine): return "Geometry.NoLine";
                             case ((short)IVisio.VisCellIndices.visCompNoShow): return "Geometry.NoShow";
                             case ((short)IVisio.VisCellIndices.visCompNoSnap): return "Geometry.NoSnap";
-  
+                            case ((short)IVisio.VisCellIndices.visCompNoQuickDrag): return "Geometry.NoQuickDrag"; 
 
                             default:
                                 break;
@@ -310,6 +310,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visActionReadOnly): return "Actions.ReadOnly";
                             case ((short)IVisio.VisCellIndices.visActionSortKey): return "Actions.SortKey";
                             case ((short)IVisio.VisCellIndices.visActionTagName): return "Actions.TagName";
+                            case ((short)IVisio.VisCellIndices.visActionFlyoutChild): return "Actions.FlyoutChild";
 
                             default:
                                 break;
@@ -605,6 +606,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visPLOPlowCode): return "PlowCode";
                             case ((short)IVisio.VisCellIndices.visPLOResizePage): return "ResizePage";
                             case ((short)IVisio.VisCellIndices.visPLORouteStyle): return "RouteStyle";
+                            case ((short)IVisio.VisCellIndices.visPLOAvoidPageBreaks): return "AvoidPageBreaks";
                             default:
                                 break;
                         }
@@ -651,6 +653,7 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visPageShdwScaleFactor): return "ShdwScaleFactor";
                             case ((short)IVisio.VisCellIndices.visPageShdwType): return "ShdwType";
                             case ((short)IVisio.VisCellIndices.visPageUIVisibility): return "UIVisibility";
+                            case ((short)IVisio.VisCellIndices.visPageDrawResizeType): return "DrawResizeType";
                             default:
                                 break;
                         }
@@ -785,6 +788,8 @@ namespace VisioAutomation.ShapeSheet
                             case ((short)IVisio.VisCellIndices.visSLORouteStyle): return "ShapeRouteStyle";
                             case ((short)IVisio.VisCellIndices.visSLOSplit): return "ShapeSplit";
                             case ((short)IVisio.VisCellIndices.visSLOSplittable): return "ShapeSplittable";
+                            case ((short)IVisio.VisCellIndices.visSLODisplayLevel): return "DisplayLevel";
+                            case ((short)IVisio.VisCellIndices.visSLORelationships): return "Relationships";
                             default:
                                 break;
                         }

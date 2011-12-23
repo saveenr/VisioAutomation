@@ -8,55 +8,6 @@ namespace VisioAutomationSamples
 {
     public static class TextSamples
     {
-        public static VA.Text.Markup.TextElement AddElementEx( this VA.Text.Markup.TextElement p, string text, string font, double? size, int? color, VA.Drawing.AlignmentHorizontal? halign, VA.Text.CharStyle? cs)
-        {
-            var el = p.AppendElement(text);
-            if (font != null)
-            {
-                el.TextFormat.Font = font;
-            }
-            if (size.HasValue)
-            {
-                el.TextFormat.FontSize = size.Value;
-            }
-            if (color.HasValue)
-            {
-                el.TextFormat.Color = new VA.Drawing.ColorRGB(color.Value);
-            }
-            if (halign.HasValue)
-            {
-                el.TextFormat.HAlign = halign.Value;
-            }
-
-            if (cs.HasValue)
-            {
-                el.TextFormat.CharStyle = cs;
-            }
-
-            return el;
-        }
-
-        public static VA.Text.Markup.TextElement get_markup_1()
-        {
-            var e1 = new VA.Text.Markup.TextElement();
-            e1.AppendText("E1Calibri 15pt red\n");
-            e1.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.TextFormat.Font = "Calibri";
-            e1.TextFormat.FontSize = 15;
-
-            var e2 = e1.AddElementEx("Segoe UI 20 pt blue]\n","Segoe UI",20,0x0000ff,null,null);
-            var e3 = e2.AddElementEx("E3 left italic gray\n",null,null,0xa0a0a0,VA.Drawing.AlignmentHorizontal.Left,null);
-            var e4 = e3.AddElementEx("E4 bold italic right\n", null, null, null, VA.Drawing.AlignmentHorizontal.Right, VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic);
-            var e5 = e3.AddElementEx("E5 nobold, noitalic, Center]\n", null, null, null, VA.Drawing.AlignmentHorizontal.Center, VA.Text.CharStyle.None);
-
-            e3.AppendElement("E3 FFF\n");
-            e2.AppendElement("E2 [left italic gray\n");
-            e1.AppendElement("E1 [Calibri 15pt red]\n");
-
-            return e1;
-
-        }
-
         public static void NonRotatingText()
         {
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
@@ -71,24 +22,14 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var s0 = page.DrawRectangle(1, 1, 4, 4);
 
-            VA.Text.TextHelper.SetText(s0, "{0} ({1} of {2})", 
-                VA.Text.Markup.Fields.NumberOfPages,
-                VA.Text.Markup.Fields.PageNumber,
-                VA.Text.Markup.Fields.PageName);
-        }
-
-        public static void TextMarkup11()
-        {
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
-            // Create the Shapes that will hold the text
-            var s1 = page.DrawRectangle(0, 0, 8, 8);
-            var s2 = page.DrawRectangle(8, 0, 16, 8);
-            var s3 = page.DrawRectangle(0, 8, 8, 16);
-            var s4 = page.DrawRectangle(8, 8, 16, 16);
-
-            var m1 = get_markup_1();
-            m1.SetText(s1);
+            var markup1 = new VA.Text.Markup.TextElement();
+            markup1.AppendField(VA.Text.Markup.Fields.PageName);
+            markup1.AppendText(" (");
+            markup1.AppendField(VA.Text.Markup.Fields.PageNumber);
+            markup1.AppendText(" of ");
+            markup1.AppendField(VA.Text.Markup.Fields.NumberOfPages);
+            markup1.AppendText(") ");
+            markup1.SetText(s0);
         }
 
         public static void TextSizing()

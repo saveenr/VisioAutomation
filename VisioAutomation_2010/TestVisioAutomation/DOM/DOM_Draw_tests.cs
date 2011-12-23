@@ -149,7 +149,7 @@ namespace TestVisioAutomation
         public void Markup_Simple_Bold()
         {
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
+            m.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -160,7 +160,7 @@ namespace TestVisioAutomation
         public void Markup_Simple_Italic()
         {
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
+            m.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -171,7 +171,7 @@ namespace TestVisioAutomation
         public void Markup_Simple_Font()
         {
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.Font = "Impact";
+            m.CharacterFormat.Font = "Impact";
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -182,8 +182,8 @@ namespace TestVisioAutomation
         public void Render_Markup_Simple_Font_Multiple()
         {
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.Font = "Impact";
-            m.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
+            m.CharacterFormat.Font = "Impact";
+            m.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -194,15 +194,15 @@ namespace TestVisioAutomation
         public void Markup_Overlap_Multiple()
         {
             var t1 = new VA.Text.Markup.TextElement("Normal Text");
-            t1.TextFormat.Font = "Segoe UI";
+            t1.CharacterFormat.Font = "Segoe UI";
             var t2 = t1.AppendElement("Italic");
-            t2.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
+            t2.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
 
             var t3 = t2.AppendElement("Italic");
-            t3.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
+            t3.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
 
             var t4 = t2.AppendElement("Bold Italic");
-            t4.TextFormat.CharStyle = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
+            t4.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
 
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);

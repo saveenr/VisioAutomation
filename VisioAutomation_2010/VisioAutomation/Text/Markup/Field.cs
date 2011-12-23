@@ -1,4 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
+using System;
+using VA=VisioAutomation;
+using System.Linq;
 
 namespace VisioAutomation.Text.Markup
 {
