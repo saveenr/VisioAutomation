@@ -13,5 +13,4 @@ namespace ExcelUtil
             this.Type = type;
         }
     }
-
 }
