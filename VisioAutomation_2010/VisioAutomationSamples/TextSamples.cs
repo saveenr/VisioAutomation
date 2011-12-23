@@ -22,10 +22,14 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var s0 = page.DrawRectangle(1, 1, 4, 4);
 
-            VA.Text.Markup.Field.SetText(s0, "{0} ({1} of {2})", 
-                VA.Text.Markup.Fields.NumberOfPages,
-                VA.Text.Markup.Fields.PageNumber,
-                VA.Text.Markup.Fields.PageName);
+            var markup1 = new VA.Text.Markup.TextElement();
+            markup1.AppendField(VA.Text.Markup.Fields.PageName);
+            markup1.AppendText(" (");
+            markup1.AppendField(VA.Text.Markup.Fields.PageNumber);
+            markup1.AppendText(" of ");
+            markup1.AppendField(VA.Text.Markup.Fields.NumberOfPages);
+            markup1.AppendText(") ");
+            markup1.SetText(s0);
         }
 
         public static void TextSizing()

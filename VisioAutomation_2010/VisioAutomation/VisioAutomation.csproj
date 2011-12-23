@@ -245,7 +245,6 @@
     <Compile Include="Internal\BitArray2D.cs" />
     <Compile Include="Drawing\ColorRGB.cs" />
     <Compile Include="Drawing\SnappingGrid.cs" />
-    <Compile Include="Internal\FormatStringSegment.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />
@@ -256,7 +255,6 @@
     <Compile Include="Connections\DirectedEdge.cs" />
     <Compile Include="Internal\Interop\COMInterop.cs" />
     <Compile Include="Convert.cs" />
-    <Compile Include="Internal\FormatStringParser.cs" />
     <Compile Include="Extensions\LayersMethods.cs" />
     <Compile Include="Extensions\WindowsMethods.cs" />
     <Compile Include="Shapesheet\SRCConstants.cs" />
