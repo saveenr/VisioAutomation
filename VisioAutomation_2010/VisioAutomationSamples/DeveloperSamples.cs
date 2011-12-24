@@ -36,5 +36,12 @@ namespace VisioAutomationSamples
             var doc = ss.Developer.DrawVANamespacesAndClasses();
         }
 
+
+        public static void VADrawContainers()
+        {
+            var app = SampleEnvironment.Application;
+            var ss = new VisioAutomation.Scripting.Session(app);
+            var doc = ss.Developer.DrawContainer();
+        }
     }
 }
