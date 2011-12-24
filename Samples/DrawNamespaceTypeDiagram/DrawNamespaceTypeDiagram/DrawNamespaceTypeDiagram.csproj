@@ -46,18 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerLayout\ContainerModel.cs" />
-    <Compile Include="ContainerLayout\ContainerUtil.cs" />
-    <Compile Include="ContainerLayout\ContainerItem.cs" />
-    <Compile Include="ContainerLayout\Container.cs" />
-    <Compile Include="ContainerLayout\LayoutOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomationMin\VisioAutomationMin.csproj">
-      <Project>{2E898748-C824-42DE-BA03-EF7735250BF9}</Project>
-      <Name>VisioAutomationMin</Name>
+    <ProjectReference Include="..\..\..\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj">
+      <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
+      <Name>VisioAutomation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

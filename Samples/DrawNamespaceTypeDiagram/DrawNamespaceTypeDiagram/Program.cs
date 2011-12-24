@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VAM=VisioAutomationMin;
+using VA=VisioAutomation;
 
 namespace DrawNamespaceTypeDiagram
 {
@@ -26,7 +26,7 @@ namespace DrawNamespaceTypeDiagram
             om_containers.Render(app);
         }
 
-        private static ContainerLayout.ContainerModel CreateContainerModelFromAssembly(System.Reflection.Assembly asm)
+        private static VA.Layout.ContainerLayout.ContainerModel CreateContainerModelFromAssembly(System.Reflection.Assembly asm)
         {
             var types = asm.GetExportedTypes().Where(t => t.IsPublic);
 
@@ -49,7 +49,7 @@ namespace DrawNamespaceTypeDiagram
 
             bool show_type_kind = true;
 
-            var om_containers = new ContainerLayout.ContainerModel();
+            var om_containers = new VA.Layout.ContainerLayout.ContainerModel();
 
             var sorted_namespaces = ns_dic.Keys.OrderBy(i => i).ToList();
 
