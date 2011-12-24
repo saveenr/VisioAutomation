@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout.ContainerLayout
 {
@@ -89,11 +90,18 @@ namespace VisioAutomation.Layout.ContainerLayout
 
         public void Render(IVisio.Application app)
         {
-            var container_model = this;
             var docs = app.Documents;
+            var doc = docs.Add("");
+            doc.DiagramServicesEnabled = (int) IVisio.VisDiagramServices.visServiceVersion140;
+
 
             // load the special container stencil
-            var container_stencil = Layout.ContainerLayout.ContainerUtil.LoadContainerStencil(docs);
+            var measurement = IVisio.VisMeasurementSystem.visMSUS;
+            var stenciltype = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
+            string stencilfile = app.GetBuiltInStencilFile(stenciltype, measurement);
+            short flags = (short) IVisio.VisOpenSaveArgs.visAddDocked;
+            var container_stencil = docs.OpenEx(stencilfile, flags);
+
             var container_stencil_masters = container_stencil.Masters;
             var container_master = container_stencil_masters["Container 1"];
 
@@ -102,19 +110,15 @@ namespace VisioAutomation.Layout.ContainerLayout
             var basic_stencil_masters = basic_stencil.Masters;
             var basic_master = basic_stencil_masters["Rounded Rectangle"];
 
-
             // create a new drawing
-            var doc = docs.Add("");
             var page = doc.Pages[1];
 
-            container_model.PerformLayout();
-
-
+            this.PerformLayout();
 
             // Render containers withou using container API
             if (this.LayoutOptions.RenderWithShapes == true )
             {
-                var ct_items = container_model.Containers.ToList();
+                var ct_items = this.Containers.ToList();
                 var ct_rects = ct_items.Select(item => item.Rectangle).ToList();
                 var masters = ct_items.Select(i => basic_master).ToList();
                 short[] ct_shapeids = DropManyU(page, masters, ct_rects);
@@ -130,7 +134,7 @@ namespace VisioAutomation.Layout.ContainerLayout
                 }
             }
 
-            var items = container_model.ContainerItems.ToList();
+            var items = this.ContainerItems.ToList();
             var rects = items.Select(item => item.Rectangle).ToList();
             var masters2 = items.Select(i => basic_master).ToList();
             short[] shapeids = DropManyU(page, masters2, rects);
@@ -155,7 +159,7 @@ namespace VisioAutomation.Layout.ContainerLayout
             // Render containers using container API
             if (this.LayoutOptions.RenderWithShapes==false)
             {
-                foreach (var ct in container_model.Containers)
+                foreach (var ct in this.Containers)
                 {
 
                     window.DeselectAll();
@@ -170,16 +174,15 @@ namespace VisioAutomation.Layout.ContainerLayout
                 }                
             }
 
-
             // Set the Container Text
-            foreach (var ct in container_model.Containers)
+            foreach (var ct in this.Containers)
             {
                 ct.VisioShape.Text = ct.Text;
             }
             
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
-            foreach (var ct in container_model.ContainerItems)
+            foreach (var ct in this.ContainerItems)
             {
                 if (ct.CharacterFormatCells != null)
                 {
@@ -206,6 +209,7 @@ namespace VisioAutomation.Layout.ContainerLayout
             update.Execute(page);
 
             page.ResizeToFitContents();
+            app.ActiveWindow.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
         }
 
         private static short[] DropManyU(
