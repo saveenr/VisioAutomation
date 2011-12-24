@@ -76,8 +76,6 @@ namespace DrawNamespaceTypeDiagram
                 Console.WriteLine("{0}", ns);
 
                 var om_container = om_containers.AddContainer(ns);
-                om_container.ShapeFormatCells = om_container_fmt;
-                om_container.TextBlockFormatCells = om_container_tb;
 
                 foreach (var i in sorted_items)
                 {

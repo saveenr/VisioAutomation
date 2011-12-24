@@ -178,25 +178,6 @@ namespace VisioAutomation.Layout.ContainerLayout
             }
             
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            foreach (var ct in container_model.Containers)
-            {
-                if (ct.CharacterFormatCells != null)
-                {
-                    ct.CharacterFormatCells.Apply(update,ct.ShapeID,0);
-                }
-                if (ct.ParagraphFormatCells != null)
-                {
-                    ct.ParagraphFormatCells.Apply(update, ct.ShapeID, 0);
-                }
-                if (ct.ShapeFormatCells!= null)
-                {
-                    ct.ShapeFormatCells.Apply(update, ct.ShapeID);
-                }
-                if (ct.TextBlockFormatCells!= null)
-                {
-                    ct.TextBlockFormatCells.Apply(update, ct.ShapeID);
-                }
-            }
 
             foreach (var ct in container_model.ContainerItems)
             {
