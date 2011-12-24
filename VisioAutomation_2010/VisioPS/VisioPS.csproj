@@ -116,7 +116,6 @@
     <Compile Include="Commands\TestSelectedShapes.cs" />
     <Compile Include="Commands\Remove_Shape.cs" />
     <Compile Include="Commands\Get_Layer.cs" />
-    <Compile Include="Commands\New_CustomField.cs" />
     <Compile Include="Commands\Align_Shape.cs" />
     <Compile Include="Commands\Connect_Shape.cs" />
     <Compile Include="Commands\Distribute_Shape.cs" />

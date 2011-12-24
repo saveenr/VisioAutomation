@@ -106,68 +106,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void InsertField(VA.Text.Markup.Field field, int start, int end)
-        {
-            if (start < 0)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to zero");
-            }
-
-            if (end < start)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to start");
-            }
-
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                foreach (var shape in shapes)
-                {
-                    var c = shape.Characters;
-                    c.Begin = start;
-                    c.End = end;
-                    c.AddField((short)field.Category, (short)field.Code, (short)field.Format);
-                }
-            }
-        }
-
-        public void InsertCustomField(int start, int end, string formula, IVisio.VisFieldFormats format)
-        {
-            if (start < 0)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to zero");
-            }
-
-            if (end < start)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to start");
-            }
-
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                foreach (var shape in shapes)
-                {
-                    var c = shape.Characters;
-                    c.Begin = start;
-                    c.End = end;
-                    c.AddCustomFieldU(formula,(short)format);
-                }
-            }
-        }
-
         public void SetTextWrapping(bool wrap)
         {
             if (!this.Session.HasSelectedShapes())
