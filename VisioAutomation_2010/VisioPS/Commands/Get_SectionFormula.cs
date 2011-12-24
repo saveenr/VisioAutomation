@@ -20,11 +20,8 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-
-            System.Data.DataTable dt = null;
-
-            dt = DataUtil.ToDataTable<string>(scriptingsession.ShapeSheet.QueryFormulas(this.Section, this.Cells));
-            this.WriteObject(dt);
+            var formulas = scriptingsession.ShapeSheet.QueryFormulas(this.Section, this.Cells);
+            this.WriteObject(formulas);
         }
     }
 }

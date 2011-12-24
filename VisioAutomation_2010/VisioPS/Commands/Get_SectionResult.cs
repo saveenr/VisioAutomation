@@ -20,28 +20,28 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            System.Data.DataTable dt = null;
+            object results = null;
             if (this.ResultType == ResultType.Double)
             {
-                dt = DataUtil.ToDataTable<double>(scriptingsession.ShapeSheet.QueryResults<double>(this.Section, this.Cells));
+                results = scriptingsession.ShapeSheet.QueryResults<double>(this.Section, this.Cells);
             }
             else if (this.ResultType == ResultType.Integer)
             {
-                dt = DataUtil.ToDataTable<int>(scriptingsession.ShapeSheet.QueryResults<int>(this.Section, this.Cells));
+                results = scriptingsession.ShapeSheet.QueryResults<int>(this.Section, this.Cells);
             }
             else if (this.ResultType == ResultType.Boolean)
             {
-                dt = DataUtil.ToDataTable<bool>(scriptingsession.ShapeSheet.QueryResults<bool>(this.Section, this.Cells));
+                results = scriptingsession.ShapeSheet.QueryResults<bool>(this.Section, this.Cells);
             }
             else if (this.ResultType == ResultType.String)
             {
-                dt = DataUtil.ToDataTable<string>(scriptingsession.ShapeSheet.QueryResults<string>(this.Section, this.Cells));
+                results = scriptingsession.ShapeSheet.QueryResults<string>(this.Section, this.Cells);
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException("ResultType");
+                results = scriptingsession.ShapeSheet.QueryResults<double>(this.Section, this.Cells);
             }
-            this.WriteObject(dt);
+            this.WriteObject(results);
 
         }
     }
