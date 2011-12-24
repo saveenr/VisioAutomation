@@ -84,6 +84,11 @@
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="DOM\Arc.cs" />
+    <Compile Include="Layout\Container\Container.cs" />
+    <Compile Include="Layout\Container\ContainerItem.cs" />
+    <Compile Include="Layout\Container\ContainerModel.cs" />
+    <Compile Include="Layout\Container\ContainerUtil.cs" />
+    <Compile Include="Layout\Container\LayoutOptions.cs" />
     <Compile Include="Layout\DirectedGraph\Connector.cs" />
     <Compile Include="Layout\DirectedGraph\Drawing.cs" />
     <Compile Include="Layout\DirectedGraph\LayoutOptions.cs" />

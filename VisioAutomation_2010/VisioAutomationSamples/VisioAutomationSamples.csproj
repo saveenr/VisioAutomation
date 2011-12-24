@@ -96,6 +96,8 @@
     <Compile Include="BoxLayoutShared.cs" />
     <Compile Include="ColorSample.cs" />
     <Compile Include="ConnectorSamples.cs" />
+    <Compile Include="BoxLayoutSamples.cs" />
+    <Compile Include="ContiainerLayoutSamples.cs" />
     <Compile Include="TextMarkupSamples.cs" />
     <Compile Include="DeveloperSamples.cs" />
     <Compile Include="DebugSamples.cs" />
@@ -105,7 +107,7 @@
     <Compile Include="FormSampleRunner.Designer.cs">
       <DependentUpon>FormSampleRunner.cs</DependentUpon>
     </Compile>
-    <Compile Include="LayoutSamples.cs" />
+    <Compile Include="DirectGraphLayoutSamples.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

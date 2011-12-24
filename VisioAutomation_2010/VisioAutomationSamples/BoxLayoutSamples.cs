@@ -4,11 +4,11 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BH = VisioAutomation.Layout.BoxLayout;
+using BoxL = VisioAutomation.Layout.BoxLayout;
 
 namespace VisioAutomationSamples
 {
-    public static class LayoutSamples
+    public static class BoxLayoutSamples
     {
         public class NodeData
         {
@@ -25,22 +25,22 @@ namespace VisioAutomationSamples
             }
         }
 
-        private static BH.Node<NodeData> new_node()
+        private static BoxL.Node<NodeData> new_node()
         {
             return new_node(null);
         }
 
-        public static BH.Node<NodeData> new_node(string s)
+        public static BoxL.Node<NodeData> new_node(string s)
         {
-            var box = new BH.Node<NodeData>();
+            var box = new BoxL.Node<NodeData>();
             box.Data = new NodeData();
             box.Data.Text = s;
             return box;
         }
 
-        public static BH.Node<NodeData> new_node(double w, double h, string s)
+        public static BoxL.Node<NodeData> new_node(double w, double h, string s)
         {
-            var box = new BH.Node<NodeData>();
+            var box = new BoxL.Node<NodeData>();
             box.Width = w;
             box.Height = h;
             box.Data = new NodeData();
@@ -101,11 +101,11 @@ namespace VisioAutomationSamples
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var layout = new BH.BoxLayout<NodeData>();
+            var layout = new BoxL.BoxLayout<NodeData>();
             layout.LayoutOptions.DirectionVertical = VA.Layout.BoxLayout.DirectionVertical.TopToBottom;
 
             var root = layout.Root;
-            root.Direction = BH.LayoutDirection.Vertical;
+            root.Direction = BoxL.LayoutDirection.Vertical;
             root.ChildSeparation = 0.5;
             root.Data = new NodeData();
             root.Data.Render = false;
@@ -132,7 +132,7 @@ namespace VisioAutomationSamples
                 root.AddNode(fontname_box);
 
                 var font_box = new_node();
-                font_box.Direction = BH.LayoutDirection.Vertical;
+                font_box.Direction = BoxL.LayoutDirection.Vertical;
                 font_box.ChildSeparation = 0.25;
                 font_box.Data.Render = false;
                 root.AddNode(font_box);
@@ -145,7 +145,7 @@ namespace VisioAutomationSamples
                 foreach (int row in Enumerable.Range(0, numrows))
                 {
                     var row_box = new_node();
-                    row_box.Direction = BH.LayoutDirection.Horizonal;
+                    row_box.Direction = BoxL.LayoutDirection.Horizonal;
                     row_box.ChildSeparation = 0.25;
                     row_box.Data.Render = false;
                     font_box.AddNode(row_box);
