@@ -169,6 +169,8 @@
     <Compile Include="Shapesheet\Update\UpdateUtil.cs" />
     <Compile Include="Shapesheet\Update\UpdateType.cs" />
     <Compile Include="Text\CharStyle.cs" />
+    <Compile Include="Text\Markup\CustomField.cs" />
+    <Compile Include="Text\Markup\FieldBase.cs" />
     <Compile Include="Text\Markup\ParagraphFormat.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
@@ -278,8 +280,8 @@
     <Compile Include="Shapesheet\Update\SRCUpdate.cs" />
     <Compile Include="Shapesheet\CellData.cs" />
     <Compile Include="Text\Markup\Field.cs" />
-    <Compile Include="Text\Markup\Fields.cs" />
-    <Compile Include="Text\Markup\MarkupInfo.cs" />
+    <Compile Include="Text\Markup\FieldConstants.cs" />
+    <Compile Include="Text\Markup\MarkupRegions.cs" />
     <Compile Include="Text\Markup\Node.cs" />
     <Compile Include="Text\Markup\NodeList.cs" />
     <Compile Include="Text\Markup\NodeType.cs" />

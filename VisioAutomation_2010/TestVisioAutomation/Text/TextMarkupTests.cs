@@ -181,7 +181,7 @@ namespace TestVisioAutomation
 
             var el0 = new VA.Text.Markup.TextElement();
             el0.AppendText("HELLO ");
-            el0.AppendField(VA.Text.Markup.Fields.Height);
+            el0.AppendField(VA.Text.Markup.FieldConstants.Height);
             el0.AppendText(" WORLD");
 
             var page1 = GetNewPage();
@@ -189,7 +189,7 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 
             string it = el0.GetInnerText();
-            Assert.AreEqual("HELLO " + VA.Text.Markup.Fields.Height.PlaceholderText + " WORLD", it);
+            Assert.AreEqual("HELLO " + VA.Text.Markup.FieldConstants.Height.PlaceholderText + " WORLD", it);
             el0.SetText(s1);
 
             var shape_size = VisioAutomationTest.GetSize(s1);
@@ -444,31 +444,31 @@ namespace TestVisioAutomation
 
             // case 1 - markup is just a single field element
             var markup_1 = new VA.Text.Markup.TextElement();
-            markup_1.AppendField(VA.Text.Markup.Fields.Height);
+            markup_1.AppendField(VA.Text.Markup.FieldConstants.Height);
             markup_1.SetText(shape);
             Assert.AreEqual("2", shape.Characters.Text);
 
             // case 2 - markup contains a single field surrounded by literal text
             var markup2 = new VA.Text.Markup.TextElement();
             markup2.AppendText("HELLO ");
-            markup2.AppendField(VA.Text.Markup.Fields.Height);
+            markup2.AppendField(VA.Text.Markup.FieldConstants.Height);
             markup2.AppendText(" WORLD");
             markup2.SetText(shape);
             Assert.AreEqual("HELLO 2 WORLD", shape.Characters.Text);
 
             // case 3 - markup contains a single literal surrounded by two fields
             var markup3 = new VA.Text.Markup.TextElement();
-            markup3.AppendField(VA.Text.Markup.Fields.Height);
+            markup3.AppendField(VA.Text.Markup.FieldConstants.Height);
             markup3.AppendText(" HELLO ");
-            markup3.AppendField(VA.Text.Markup.Fields.Width);
+            markup3.AppendField(VA.Text.Markup.FieldConstants.Width);
             markup3.SetText(shape);
             Assert.AreEqual("2 HELLO 4", shape.Characters.Text);
 
             var markup4 = new VA.Text.Markup.TextElement();
-            markup4.AppendField(VA.Text.Markup.Fields.Height);
+            markup4.AppendField(VA.Text.Markup.FieldConstants.Height);
             markup4.AppendText(" HELLO ");
-            markup4.AppendField(VA.Text.Markup.Fields.Width);
-            markup4.AppendField(VA.Text.Markup.Fields.Width);
+            markup4.AppendField(VA.Text.Markup.FieldConstants.Width);
+            markup4.AppendField(VA.Text.Markup.FieldConstants.Width);
             markup4.SetText(shape);
             Assert.AreEqual("2 HELLO 44", shape.Characters.Text);
 

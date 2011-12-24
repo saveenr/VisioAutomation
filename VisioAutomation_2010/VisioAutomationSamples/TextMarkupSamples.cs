@@ -108,9 +108,9 @@ namespace VisioAutomationSamples
         {
             var e1 = new VA.Text.Markup.TextElement();
             e1.AppendText("This shape is ");
-            e1.AppendField(VA.Text.Markup.Fields.Width);
+            e1.AppendField(VA.Text.Markup.FieldConstants.Width);
             e1.AppendText("inches wide by ");
-            e1.AppendField(VA.Text.Markup.Fields.Height);
+            e1.AppendField(VA.Text.Markup.FieldConstants.Height);
             e1.AppendText("inches tall.");
             return e1;
         }

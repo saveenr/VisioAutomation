@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Text.Markup
 {
-    internal class MarkupInfo
+    class MarkupRegions
     {
         public IList<TextRegion> FormatRegions { get; private set; }
         public IList<TextRegion> FieldRegions { get; private set; }
 
-        public MarkupInfo()
+        public MarkupRegions()
         {
             this.FormatRegions = new List<TextRegion>();
             this.FieldRegions = new List<TextRegion>();

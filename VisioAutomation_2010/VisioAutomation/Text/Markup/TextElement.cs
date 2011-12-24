@@ -8,6 +8,9 @@ namespace VisioAutomation.Text.Markup
 {
     public class TextElement : Node
     {
+        public CharacterFormat CharacterFormat { get; set; }
+        public ParagraphFormat ParagraphFormat { get; set; }
+
         public TextElement() :
             base(NodeType.Element)
         {
@@ -30,10 +33,10 @@ namespace VisioAutomation.Text.Markup
             return text_node;
         }
 
-        public Field AppendField(VA.Text.Markup.Field f)
+        public Field AppendField(VA.Text.Markup.Field field)
         {
-            this.Children.Add(f);
-            return f;
+            this.Children.Add(field);
+            return field;
         }
 
         public TextElement AppendElement()
@@ -54,14 +57,10 @@ namespace VisioAutomation.Text.Markup
         {
             get { return this.Children.Items.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
         }
-
-        public CharacterFormat CharacterFormat { get; set; }
-        public ParagraphFormat ParagraphFormat { get; set; }
-
-
-        internal MarkupInfo GetMarkupInfo()
+        
+        internal MarkupRegions GetMarkupInfo()
         {
-            var markupinfo = new MarkupInfo();
+            var markupinfo = new MarkupRegions();
 
             int start_pos = 0;
             var region_stack = new Stack<TextRegion>();
@@ -113,7 +112,8 @@ namespace VisioAutomation.Text.Markup
                     }
                     else
                     {
-                        // do nothing
+                        string msg = "Unhandled node";
+                        throw new AutomationException(msg);
                     }
                 }
                 else if (walkevent.HasExitedNode)

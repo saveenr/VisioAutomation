@@ -1,6 +1,6 @@
 namespace VisioAutomation.Text.Markup
 {
-    public class TextRegion
+    class TextRegion
     {
         public TextRegion()
         {

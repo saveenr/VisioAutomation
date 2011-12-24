@@ -23,11 +23,11 @@ namespace VisioAutomationSamples
             var s0 = page.DrawRectangle(1, 1, 4, 4);
 
             var markup1 = new VA.Text.Markup.TextElement();
-            markup1.AppendField(VA.Text.Markup.Fields.PageName);
+            markup1.AppendField(VA.Text.Markup.FieldConstants.PageName);
             markup1.AppendText(" (");
-            markup1.AppendField(VA.Text.Markup.Fields.PageNumber);
+            markup1.AppendField(VA.Text.Markup.FieldConstants.PageNumber);
             markup1.AppendText(" of ");
-            markup1.AppendField(VA.Text.Markup.Fields.NumberOfPages);
+            markup1.AppendField(VA.Text.Markup.FieldConstants.NumberOfPages);
             markup1.AppendText(") ");
             markup1.SetText(s0);
         }

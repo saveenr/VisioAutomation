@@ -69,10 +69,9 @@ namespace VisioAutomation.Text.Markup
             return VA.Internal.TreeTraversal.Walk<Node>(this, enumchildren, enternode);
         }
 
-        public IEnumerable<Node> WalkNodes()
+        private IEnumerable<Node> WalkNodes()
         {
             return VA.Internal.TreeTraversal.PreOrder<Node>(this,n=>n.Children.Items);
         }
-
     }
 }

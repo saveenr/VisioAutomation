@@ -16,7 +16,7 @@ namespace VisioAutomation.Text.Markup
         public CharacterFormat()
         {
         }
-        
+
         public double? FontSize
         {
             get { return _font_size; }

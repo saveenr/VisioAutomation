@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Text.Markup
 {
-    public static class Fields
+    public static class FieldConstants
     {
         public static Field ObjectName
         {
