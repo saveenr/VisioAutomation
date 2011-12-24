@@ -26,7 +26,7 @@ namespace DrawNamespaceTypeDiagram
             om_containers.Render(app);
         }
 
-        private static VA.Layout.ContainerLayout.ContainerModel CreateContainerModelFromAssembly(System.Reflection.Assembly asm)
+        private static VA.Layout.ContainerLayout.ContainerLayout CreateContainerModelFromAssembly(System.Reflection.Assembly asm)
         {
             var types = asm.GetExportedTypes().Where(t => t.IsPublic);
 
@@ -49,9 +49,16 @@ namespace DrawNamespaceTypeDiagram
 
             bool show_type_kind = true;
 
-            var om_containers = new VA.Layout.ContainerLayout.ContainerModel();
+            var om_containers = new VA.Layout.ContainerLayout.ContainerLayout();
 
             var sorted_namespaces = ns_dic.Keys.OrderBy(i => i).ToList();
+
+            var om_container_fmt = new VA.Format.ShapeFormatCells();
+            var om_container_tb = new VA.Text.TextBlockFormatCells();
+            om_container_fmt.FillForegnd = "rgb(240,240,240)";
+            om_container_fmt.LineWeight = "0";
+            om_container_fmt.LinePattern = "0";
+            om_container_tb.VerticalAlign = "0";
 
             foreach (string ns in sorted_namespaces)
             {
@@ -69,24 +76,21 @@ namespace DrawNamespaceTypeDiagram
                 Console.WriteLine("{0}", ns);
 
                 var om_container = om_containers.AddContainer(ns);
-
-                om_container.FillForegnd = "rgb(240,240,240)";
-                om_container.LineWeight = "0";
-                om_container.LinePattern = "0";
-                om_container.VerticalAlign = "0";
+                om_container.ShapeFormatCells = om_container_fmt;
+                om_container.TextBlockFormatCells = om_container_tb;
 
                 foreach (var i in sorted_items)
                 {
                     Console.WriteLine("    {0}", i.name);
                     var item = om_container.Add( get_type_kindname(i.kind) + " " + i.name);
 
-                    item.FillForegnd = "rgb(255,255,255)";
-                    item.LineWeight = "0";
-                    item.LinePattern = "0";
+                    //item.FillForegnd = "rgb(255,255,255)";
+                    //item.LineWeight = "0";
+                    //item.LinePattern = "0";
 
                     if (i.kind == TypeKind.Enum)
                     {
-                        item.FillForegnd = "rgb(220,240,245)";
+                        //item.FillForegnd = "rgb(220,240,245)";
                     }
                 }
             }

@@ -15,10 +15,10 @@ namespace VisioAutomation.Layout.ContainerLayout
         public Shape VisioShape { get; set; }
         public short ShapeID { get; set; }
 
-        public VA.ShapeSheet.FormulaLiteral FillForegnd;
-        public VA.ShapeSheet.FormulaLiteral LineWeight;
-        public VA.ShapeSheet.FormulaLiteral LinePattern;
-        public VA.ShapeSheet.FormulaLiteral VerticalAlign;
+        public VA.Format.ShapeFormatCells ShapeFormatCells;
+        public VA.Text.CharacterFormatCells CharacterFormatCells;
+        public VA.Text.ParagraphFormatCells ParagraphFormatCells;
+        public VA.Text.TextBlockFormatCells TextBlockFormatCells;
 
         public ContainerItem(string text)
         {

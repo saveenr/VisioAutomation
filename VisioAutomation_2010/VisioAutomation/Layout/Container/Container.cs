@@ -16,10 +16,11 @@ namespace VisioAutomation.Layout.ContainerLayout
         public VA.Drawing.Rectangle Rectangle;
         public short ShapeID;
 
-        public VA.ShapeSheet.FormulaLiteral FillForegnd;
-        public VA.ShapeSheet.FormulaLiteral LineWeight;
-        public VA.ShapeSheet.FormulaLiteral LinePattern;
-        public VA.ShapeSheet.FormulaLiteral VerticalAlign;
+        public VA.Format.ShapeFormatCells ShapeFormatCells;
+        public VA.Text.CharacterFormatCells CharacterFormatCells;
+        public VA.Text.ParagraphFormatCells ParagraphFormatCells;
+        public VA.Text.TextBlockFormatCells TextBlockFormatCells;
+
 
         public Container(string text)
         {

@@ -6,12 +6,12 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Layout.ContainerLayout
 {
-    public class ContainerModel
+    public class ContainerLayout
     {
         public List<Container> Containers { get; private set; }
         public LayoutOptions LayoutOptions = new LayoutOptions();
 
-        public ContainerModel()
+        public ContainerLayout()
         {
             this.Containers = new List<Container>();
         }
@@ -93,7 +93,7 @@ namespace VisioAutomation.Layout.ContainerLayout
             var docs = app.Documents;
 
             // load the special container stencil
-            var container_stencil = ContainerLayout.ContainerUtil.LoadContainerStencil(docs);
+            var container_stencil = Layout.ContainerLayout.ContainerUtil.LoadContainerStencil(docs);
             var container_stencil_masters = container_stencil.Masters;
             var container_master = container_stencil_masters["Container 1"];
 
@@ -116,7 +116,6 @@ namespace VisioAutomation.Layout.ContainerLayout
             {
                 var ct_items = container_model.Containers.ToList();
                 var ct_rects = ct_items.Select(item => item.Rectangle).ToList();
-                var ct_points = ct_items.Select(item => item.Rectangle).ToList();
                 var masters = ct_items.Select(i => basic_master).ToList();
                 short[] ct_shapeids = DropManyU(page, masters, ct_rects);
                 var xpage_shapes = page.Shapes;
@@ -181,26 +180,54 @@ namespace VisioAutomation.Layout.ContainerLayout
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             foreach (var ct in container_model.Containers)
             {
-                //update.SetFormulaChecked(ct.ShapeID, VAM.SRCConstants.FillForegnd, ct.FillForegnd);
-                //update.SetFormulaChecked(ct.ShapeID, VAM.SRCConstants.LineWeight, ct.LineWeight);
-                //update.SetFormulaChecked(ct.ShapeID, VAM.SRCConstants.LinePattern, ct.LinePattern);
-                //update.SetFormulaChecked(ct.ShapeID, VAM.SRCConstants.VerticalAlign, ct.VerticalAlign);
+                if (ct.CharacterFormatCells != null)
+                {
+                    ct.CharacterFormatCells.Apply(update,ct.ShapeID,0);
+                }
+                if (ct.ParagraphFormatCells != null)
+                {
+                    ct.ParagraphFormatCells.Apply(update, ct.ShapeID, 0);
+                }
+                if (ct.ShapeFormatCells!= null)
+                {
+                    ct.ShapeFormatCells.Apply(update, ct.ShapeID);
+                }
+                if (ct.TextBlockFormatCells!= null)
+                {
+                    ct.TextBlockFormatCells.Apply(update, ct.ShapeID);
+                }
             }
 
-            foreach (var ct_item in container_model.ContainerItems)
+            foreach (var ct in container_model.ContainerItems)
             {
-                //update.SetFormulaChecked(ct_item.ShapeID, VAM.SRCConstants.FillForegnd, ct_item.FillForegnd);
-                //update.SetFormulaChecked(ct_item.ShapeID, VAM.SRCConstants.LineWeight, ct_item.LineWeight);
-                //update.SetFormulaChecked(ct_item.ShapeID, VAM.SRCConstants.LinePattern, ct_item.LineWeight);
+                if (ct.CharacterFormatCells != null)
+                {
+                    ct.CharacterFormatCells.Apply(update, ct.ShapeID, 0);
+                }
+                if (ct.ParagraphFormatCells != null)
+                {
+                    ct.ParagraphFormatCells.Apply(update, ct.ShapeID, 0);
+                }
+                if (ct.ShapeFormatCells != null)
+                {
+                    ct.ShapeFormatCells.Apply(update, ct.ShapeID);
+                }
+                if (ct.TextBlockFormatCells != null)
+                {
+                    ct.TextBlockFormatCells.Apply(update, ct.ShapeID);
+                }
             }
 
+            // Unless we do this application of these properties will fail
+            // because some cells are guarded by default
+            update.BlastGuards = true;
 
             update.Execute(page);
 
             page.ResizeToFitContents();
         }
 
-        public static short[] DropManyU(
+        private static short[] DropManyU(
             IVisio.Page page,
             IList<IVisio.Master> masters,
             IList<VA.Drawing.Rectangle> rects)
