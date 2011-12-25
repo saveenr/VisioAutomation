@@ -22,7 +22,8 @@ namespace DrawNamespaceTypeDiagram
             var asm = System.Reflection.Assembly.LoadFile(filename);
             var app = new IVisio.ApplicationClass();
             var om_containers = CreateContainerModelFromAssembly(asm);
-            om_containers.LayoutOptions.RenderWithShapes = true;
+            om_containers.LayoutOptions.Style = VA.Layout.ContainerLayout.RenderStyle.UseVisioContainers;
+            om_containers.PerformLayout();
             om_containers.Render(app);
         }
 

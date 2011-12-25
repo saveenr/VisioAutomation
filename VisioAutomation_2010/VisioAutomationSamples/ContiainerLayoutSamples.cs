@@ -40,7 +40,8 @@ namespace VisioAutomationSamples
             c2.Add("3");
 
             m.LayoutOptions = new LayoutOptions();
-            m.LayoutOptions.RenderWithShapes = false;
+            m.LayoutOptions.Style = VA.Layout.ContainerLayout.RenderStyle.UseShapes;
+            m.PerformLayout();
             m.Render(SampleEnvironment.Application);
 
         }

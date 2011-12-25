@@ -1,14 +1,25 @@
 ﻿namespace VisioAutomation.Layout.ContainerLayout
 {
+    public enum RenderStyle
+    {
+        UseVisioContainers,
+        UseShapes
+    }
+
     public class LayoutOptions
     {
+
         private double _itemWidth = 2.0;
         private double _containerHorizontalDistance = 1.0;
         private double _itemHeight = 0.25;
         private double _itemVerticalSpacing = 0.25/2.0;
         private double _padding = 0.25;
-        private bool _renderWithShapes=false;
         private double _containerHeaderHeight = 0.5;
+
+        public LayoutOptions()
+        {
+            Style = RenderStyle.UseVisioContainers;
+        }
 
         public double ItemWidth
         {
@@ -40,11 +51,7 @@
             set { _padding = value; }
         }
 
-        public bool RenderWithShapes
-        {
-            get { return _renderWithShapes; }
-            set { _renderWithShapes = value; }
-        }
+        public RenderStyle Style { get; set; }
 
         public double ContainerHeaderHeight
         {

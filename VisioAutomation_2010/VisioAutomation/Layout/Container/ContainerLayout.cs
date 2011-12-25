@@ -85,25 +85,28 @@ namespace VisioAutomation.Layout.ContainerLayout
                 
                 ct.Rectangle = new VA.Drawing.Rectangle(min_left, min_bottom, max_right, max_top);
             }
-
         }
 
         public void Render(IVisio.Application app)
         {
             var docs = app.Documents;
             var doc = docs.Add("");
-            doc.DiagramServicesEnabled = (int) IVisio.VisDiagramServices.visServiceVersion140;
 
+            IVisio.Master container_master=null;
 
-            // load the special container stencil
-            var measurement = IVisio.VisMeasurementSystem.visMSUS;
-            var stenciltype = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
-            string stencilfile = app.GetBuiltInStencilFile(stenciltype, measurement);
-            short flags = (short) IVisio.VisOpenSaveArgs.visAddDocked;
-            var container_stencil = docs.OpenEx(stencilfile, flags);
+            if (this.LayoutOptions.Style == RenderStyle.UseVisioContainers)
+            {
+                doc.DiagramServicesEnabled = (int)IVisio.VisDiagramServices.visServiceVersion140;
+                // load the special container stencil
+                var measurement = IVisio.VisMeasurementSystem.visMSUS;
+                var stenciltype = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
+                string stencilfile = app.GetBuiltInStencilFile(stenciltype, measurement);
+                short flags = (short)IVisio.VisOpenSaveArgs.visAddDocked;
+                var container_stencil = docs.OpenEx(stencilfile, flags);
 
-            var container_stencil_masters = container_stencil.Masters;
-            var container_master = container_stencil_masters["Container 1"];
+                var container_stencil_masters = container_stencil.Masters;
+                container_master = container_stencil_masters["Container 1"];               
+            }
 
             // load the special container stencil
             var basic_stencil = VA.DocumentHelper.OpenStencil(docs, "basic_u.vss");
@@ -113,33 +116,38 @@ namespace VisioAutomation.Layout.ContainerLayout
             // create a new drawing
             var page = doc.Pages[1];
 
-            this.PerformLayout();
+            var page_shapes = page.Shapes;
 
             // Render containers withou using container API
-            if (this.LayoutOptions.RenderWithShapes == true )
+            if (this.LayoutOptions.Style == VA.Layout.ContainerLayout.RenderStyle.UseShapes)
             {
+                // Drop the container shapes
                 var ct_items = this.Containers.ToList();
                 var ct_rects = ct_items.Select(item => item.Rectangle).ToList();
                 var masters = ct_items.Select(i => basic_master).ToList();
                 short[] ct_shapeids = DropManyU(page, masters, ct_rects);
-                var xpage_shapes = page.Shapes;
 
+                // associate each container with the corresponding shape oject and shape id
                 for (int i = 0; i < ct_items.Count; i++)
                 {
                     var ct_item = ct_items[i];
                     var ct_shapeid = ct_shapeids[i];
-                    var shape = xpage_shapes[ct_shapeid];
+                    var shape = page_shapes[ct_shapeid];
                     ct_item.VisioShape = shape;
                     ct_item.ShapeID = ct_shapeid;
                 }
+
+                // Often useful to show everthing because these diagrams can get large
+                app.ActiveWindow.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
             }
 
+            // Render the items
             var items = this.ContainerItems.ToList();
-            var rects = items.Select(item => item.Rectangle).ToList();
-            var masters2 = items.Select(i => basic_master).ToList();
-            short[] shapeids = DropManyU(page, masters2, rects);
-            var page_shapes = page.Shapes;
+            var item_rects = items.Select(item => item.Rectangle).ToList();
+            var item_master = items.Select(i => basic_master).ToList();
+            short[] shapeids = DropManyU(page, item_master, item_rects);
 
+            // Associate each item with the corresponding shape object and shape id
             for (int i = 0; i < items.Count; i++)
             {
                 var item = items[i];
@@ -149,6 +157,7 @@ namespace VisioAutomation.Layout.ContainerLayout
                 item.ShapeID = shapeid;
             }
 
+            // Set the items
             foreach (var item in items.Where(i => i.Text != null))
             {
                 item.VisioShape.Text = item.Text;
@@ -157,11 +166,10 @@ namespace VisioAutomation.Layout.ContainerLayout
             var window = app.ActiveWindow;
 
             // Render containers using container API
-            if (this.LayoutOptions.RenderWithShapes==false)
+            if (this.LayoutOptions.Style == VA.Layout.ContainerLayout.RenderStyle.UseVisioContainers)
             {
                 foreach (var ct in this.Containers)
                 {
-
                     window.DeselectAll();
                     foreach (var item in ct.ContainerItems)
                     {
@@ -179,26 +187,26 @@ namespace VisioAutomation.Layout.ContainerLayout
             {
                 ct.VisioShape.Text = ct.Text;
             }
-            
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
-            foreach (var ct in this.ContainerItems)
+            // Format the containers and shapes
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            foreach (var item in this.ContainerItems)
             {
-                if (ct.CharacterFormatCells != null)
+                if (item.CharacterFormatCells != null)
                 {
-                    ct.CharacterFormatCells.Apply(update, ct.ShapeID, 0);
+                    item.CharacterFormatCells.Apply(update, item.ShapeID, 0);
                 }
-                if (ct.ParagraphFormatCells != null)
+                if (item.ParagraphFormatCells != null)
                 {
-                    ct.ParagraphFormatCells.Apply(update, ct.ShapeID, 0);
+                    item.ParagraphFormatCells.Apply(update, item.ShapeID, 0);
                 }
-                if (ct.ShapeFormatCells != null)
+                if (item.ShapeFormatCells != null)
                 {
-                    ct.ShapeFormatCells.Apply(update, ct.ShapeID);
+                    item.ShapeFormatCells.Apply(update, item.ShapeID);
                 }
-                if (ct.TextBlockFormatCells != null)
+                if (item.TextBlockFormatCells != null)
                 {
-                    ct.TextBlockFormatCells.Apply(update, ct.ShapeID);
+                    item.TextBlockFormatCells.Apply(update, item.ShapeID);
                 }
             }
 
@@ -227,10 +235,8 @@ namespace VisioAutomation.Layout.ContainerLayout
             {
                 xfrm.Width = rects[i].Width;
                 xfrm.Height = rects[i].Height;
-
-                xfrm.Apply(update, shapeids[i]);
+                xfrm.Apply(update,shapeids[i]);
             }
-
             update.Execute(page);
 
             return shapeids;

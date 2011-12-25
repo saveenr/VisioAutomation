@@ -207,9 +207,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var asm = typeof (VA.ShapeSheet.ShapeSheetHelper).Assembly;
             var app = new IVisio.ApplicationClass();
-            var om_containers = CreateContainerModelFromAssembly(asm);
-            om_containers.LayoutOptions.RenderWithShapes = true;
-            om_containers.Render(this.Session.VisioApplication);
+            var drawing = CreateContainerModelFromAssembly(asm);
+            drawing.LayoutOptions.Style = VA.Layout.ContainerLayout.RenderStyle.UseShapes;
+            drawing.PerformLayout();
+            drawing.Render(this.Session.VisioApplication);
             return this.Session.VisioApplication.ActiveDocument;
         }
 
