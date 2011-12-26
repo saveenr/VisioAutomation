@@ -42,7 +42,6 @@ namespace VisioAutomation.Layout.ContainerLayout
         {
             var origin = new VA.Drawing.Point(0, 0);
 
-
             var col_lefts =
                 Enumerable.Range(0, this.Containers.Count).Select(i => i * (this.LayoutOptions.ItemWidth + this.LayoutOptions.ContainerHorizontalDistance + (2 * this.LayoutOptions.Padding))).ToList();
 
@@ -101,7 +100,6 @@ namespace VisioAutomation.Layout.ContainerLayout
             {
                 // only load the special Container stencil if needed.
                 
-                doc.DiagramServicesEnabled = (int)IVisio.VisDiagramServices.visServiceVersion140;
                 // load the special container stencil
                 var measurement = IVisio.VisMeasurementSystem.visMSUS;
                 var stenciltype = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
@@ -173,6 +171,9 @@ namespace VisioAutomation.Layout.ContainerLayout
             // Render containers using container API
             if (this.LayoutOptions.Style == VA.Layout.ContainerLayout.RenderStyle.UseVisioContainers)
             {
+                var old_dse = doc.DiagramServicesEnabled;
+                doc.DiagramServicesEnabled = (int)IVisio.VisDiagramServices.visServiceVersion140;
+
                 foreach (var ct in this.Containers)
                 {
                     window.DeselectAll();
@@ -184,7 +185,9 @@ namespace VisioAutomation.Layout.ContainerLayout
 
                     ct.VisioShape = page.DropContainer(special_container_master, sel);
                     ct.ShapeID = ct.VisioShape.ID16;
-                }                
+                }
+
+                doc.DiagramServicesEnabled = old_dse;
             }
 
             // Set the Container Text
@@ -195,6 +198,38 @@ namespace VisioAutomation.Layout.ContainerLayout
 
             // Format the containers and shapes
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+
+            if (this.LayoutOptions.Style == RenderStyle.UseShapes)
+            {
+                var ct_char = new VA.Text.CharacterFormatCells();
+                ct_char.Font = 27;
+                var ct_para = new VA.Text.ParagraphFormatCells();
+                ct_para.HorizontalAlign = "0";
+                var ct_tb = new VA.Text.TextBlockFormatCells();
+                ct_tb.VerticalAlign = "0";
+
+                foreach (var item in this.Containers)
+                {
+                    ct_char.Apply(update, item.ShapeID, 0);
+                    ct_para.Apply(update, item.ShapeID, 0);
+                    ct_tb.Apply(update, item.ShapeID);
+                }
+            }
+            else
+            {
+                var ct_char = new VA.Text.CharacterFormatCells();
+                ct_char.Font = 27;
+                foreach (var item in this.Containers)
+                {
+                    var st_shapes = item.VisioShape.Shapes;
+                    var shapex = st_shapes[2];
+                    var t = shapex.Text;
+
+                    ct_char.Apply(update,shapex.ID16,0);
+                }
+
+            }
+
             foreach (var item in this.ContainerItems)
             {
                 if (item.CharacterFormatCells != null)
@@ -213,12 +248,10 @@ namespace VisioAutomation.Layout.ContainerLayout
                 {
                     item.TextBlockFormatCells.Apply(update, item.ShapeID);
                 }
-            }
+            }     
 
-            // Unless we do this application of these properties will fail
-            // because some cells are guarded by default
+
             update.BlastGuards = true;
-
             update.Execute(page);
 
             page.ResizeToFitContents();

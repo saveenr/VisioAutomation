@@ -6,9 +6,9 @@
         private double _itemWidth = 2.0;
         private double _containerHorizontalDistance = 1.0;
         private double _itemHeight = 0.25;
-        private double _itemVerticalSpacing = 0.25/2.0;
-        private double _padding = 0.25;
-        private double _containerHeaderHeight = 0.5;
+        private double _itemVerticalSpacing = 0.125;
+        private double _padding = 0.125;
+        private double _containerHeaderHeight = 0.25;
         public string ManualItemStencil = "basic_u.vss";
         public string ManualItemMaster = "Rounded Rectangle";
         public string ManualContainerMaster = "Rectangle";
