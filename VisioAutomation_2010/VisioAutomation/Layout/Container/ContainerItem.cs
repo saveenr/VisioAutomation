@@ -14,12 +14,7 @@ namespace VisioAutomation.Layout.ContainerLayout
         public VA.Drawing.Rectangle Rectangle { get; set; }
         public Shape VisioShape { get; set; }
         public short ShapeID { get; set; }
-
-        public VA.Format.ShapeFormatCells ShapeFormatCells;
-        public VA.Text.CharacterFormatCells CharacterFormatCells;
-        public VA.Text.ParagraphFormatCells ParagraphFormatCells;
-        public VA.Text.TextBlockFormatCells TextBlockFormatCells;
-
+        
         public ContainerItem(string text)
         {
             this.Text = text;

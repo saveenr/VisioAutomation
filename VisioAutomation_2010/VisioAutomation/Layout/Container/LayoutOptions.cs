@@ -1,4 +1,6 @@
-﻿namespace VisioAutomation.Layout.ContainerLayout
+﻿using VisioAutomation.Text;
+
+namespace VisioAutomation.Layout.ContainerLayout
 {
     public class LayoutOptions
     {
@@ -17,6 +19,7 @@
         public LayoutOptions()
         {
             Style = RenderStyle.UseVisioContainers;
+            this.ContainerFormatting.TextBlockFormatCells.VerticalAlign = "0";
         }
 
         public double ItemWidth
@@ -56,5 +59,9 @@
             get { return _containerHeaderHeight; }
             set { _containerHeaderHeight = value; }
         }
+
+        public Formatting ContainerFormatting = new Formatting();
+        public Formatting ContainerItemFormatting = new Formatting();
+
     }
 }

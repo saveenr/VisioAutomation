@@ -1,4 +1,5 @@
 ﻿using VisioAutomation.DOM;
+using VisioAutomation.Format;
 using VisioAutomation.Layout.ContainerLayout;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -14,16 +15,6 @@ namespace VisioAutomationSamples
         public static void SimpleContainer()
         {
 
-            var cont_fmt = new VA.Format.ShapeFormatCells();
-            cont_fmt.FillForegnd = "rgb(150,180,240)";
-            cont_fmt.FillBkgnd= "rgb(150,180,240)";
-            cont_fmt.FillPattern = "40";
-            cont_fmt.LinePattern = "0";
-            var cont_tb = new VA.Text.TextBlockFormatCells();
-            cont_tb.VerticalAlign = "0";
-
-            var cont_char = new VA.Text.CharacterFormatCells();
-            cont_char.Font= "10";
 
             var m = new VA.Layout.ContainerLayout.ContainerLayout();
 
@@ -41,6 +32,10 @@ namespace VisioAutomationSamples
 
             m.LayoutOptions = new LayoutOptions();
             m.LayoutOptions.Style = VA.Layout.ContainerLayout.RenderStyle.UseVisioContainers;
+            m.LayoutOptions.ContainerFormatting.ShapeFormatCells.FillForegnd = "rgb(0,176,240)";
+            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.FillForegnd = "rgb(250,250,250)";
+            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern= "0";
+
             m.PerformLayout();
             m.Render(SampleEnvironment.Application.ActiveDocument);
 

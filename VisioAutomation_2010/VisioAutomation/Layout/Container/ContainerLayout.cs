@@ -201,55 +201,31 @@ namespace VisioAutomation.Layout.ContainerLayout
 
             if (this.LayoutOptions.Style == RenderStyle.UseShapes)
             {
-                var ct_char = new VA.Text.CharacterFormatCells();
-                ct_char.Font = 27;
-                var ct_para = new VA.Text.ParagraphFormatCells();
-                ct_para.HorizontalAlign = "0";
-                var ct_tb = new VA.Text.TextBlockFormatCells();
-                ct_tb.VerticalAlign = "0";
-
                 foreach (var item in this.Containers)
                 {
-                    ct_char.Apply(update, item.ShapeID, 0);
-                    ct_para.Apply(update, item.ShapeID, 0);
-                    ct_tb.Apply(update, item.ShapeID);
+                    this.LayoutOptions.ContainerFormatting.Apply(update, item.ShapeID,item.ShapeID);
                 }
             }
             else
             {
-                var ct_char = new VA.Text.CharacterFormatCells();
-                ct_char.Font = 27;
                 foreach (var item in this.Containers)
                 {
-                    var st_shapes = item.VisioShape.Shapes;
-                    var shapex = st_shapes[2];
-                    var t = shapex.Text;
+                    var subshapes = item.VisioShape.Shapes;
+                    var title_shape = subshapes[2];
+                    var background_shape = subshapes[1];
 
-                    ct_char.Apply(update,shapex.ID16,0);
+                    var title_shape_id = title_shape.ID16;
+                    var background_shape_id = background_shape.ID16;
+
+                    this.LayoutOptions.ContainerFormatting.Apply(update, title_shape_id, background_shape_id);
                 }
 
             }
 
             foreach (var item in this.ContainerItems)
             {
-                if (item.CharacterFormatCells != null)
-                {
-                    item.CharacterFormatCells.Apply(update, item.ShapeID, 0);
-                }
-                if (item.ParagraphFormatCells != null)
-                {
-                    item.ParagraphFormatCells.Apply(update, item.ShapeID, 0);
-                }
-                if (item.ShapeFormatCells != null)
-                {
-                    item.ShapeFormatCells.Apply(update, item.ShapeID);
-                }
-                if (item.TextBlockFormatCells != null)
-                {
-                    item.TextBlockFormatCells.Apply(update, item.ShapeID);
-                }
+                this.LayoutOptions.ContainerItemFormatting.Apply(update, item.ShapeID, item.ShapeID);
             }     
-
 
             update.BlastGuards = true;
             update.Execute(page);
