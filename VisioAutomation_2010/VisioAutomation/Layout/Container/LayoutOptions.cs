@@ -1,11 +1,5 @@
 ﻿namespace VisioAutomation.Layout.ContainerLayout
 {
-    public enum RenderStyle
-    {
-        UseVisioContainers,
-        UseShapes
-    }
-
     public class LayoutOptions
     {
 
@@ -15,6 +9,10 @@
         private double _itemVerticalSpacing = 0.25/2.0;
         private double _padding = 0.25;
         private double _containerHeaderHeight = 0.5;
+        public string ManualItemStencil = "basic_u.vss";
+        public string ManualItemMaster = "Rounded Rectangle";
+        public string ManualContainerMaster = "Rectangle";
+        public string ContainerMaster = "Container 1";
 
         public LayoutOptions()
         {

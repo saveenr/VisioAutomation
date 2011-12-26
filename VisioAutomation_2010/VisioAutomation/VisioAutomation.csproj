@@ -88,6 +88,7 @@
     <Compile Include="Layout\Container\ContainerItem.cs" />
     <Compile Include="Layout\Container\ContainerLayout.cs" />
     <Compile Include="Layout\Container\LayoutOptions.cs" />
+    <Compile Include="Layout\Container\RenderStyle.cs" />
     <Compile Include="Layout\DirectedGraph\Connector.cs" />
     <Compile Include="Layout\DirectedGraph\Drawing.cs" />
     <Compile Include="Layout\DirectedGraph\LayoutOptions.cs" />

@@ -210,7 +210,7 @@ namespace VisioAutomation.Scripting.Commands
             var drawing = CreateContainerModelFromAssembly(asm);
             drawing.LayoutOptions.Style = VA.Layout.ContainerLayout.RenderStyle.UseShapes;
             drawing.PerformLayout();
-            drawing.Render(this.Session.VisioApplication);
+            drawing.Render(this.Session.VisioApplication.ActiveDocument);
             return this.Session.VisioApplication.ActiveDocument;
         }
 

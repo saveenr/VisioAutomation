@@ -11,7 +11,7 @@ namespace VisioAutomation.Layout.ContainerLayout
     {
         public List<Container> Containers { get; private set; }
         public LayoutOptions LayoutOptions = new LayoutOptions();
-
+        
         public ContainerLayout()
         {
             this.Containers = new List<Container>();
@@ -87,10 +87,13 @@ namespace VisioAutomation.Layout.ContainerLayout
             }
         }
 
-        public void Render(IVisio.Application app)
+        public void Render(IVisio.Document doc)
         {
+            // create a new drawing
+            var app = doc.Application;
             var docs = app.Documents;
-            var doc = docs.Add("");
+            var pages = doc.Pages;
+            var page = pages.Add();
 
             IVisio.Master special_container_master=null;
 
@@ -107,17 +110,15 @@ namespace VisioAutomation.Layout.ContainerLayout
                 var container_stencil = docs.OpenEx(stencilfile, flags);
 
                 var container_stencil_masters = container_stencil.Masters;
-                special_container_master = container_stencil_masters["Container 1"];               
+                special_container_master = container_stencil_masters[this.LayoutOptions.ContainerMaster];               
             }
 
             // load the stencil used to draw the items
-            var item_stencil = VA.DocumentHelper.OpenStencil(docs, "basic_u.vss");
+            var item_stencil = VA.DocumentHelper.OpenStencil(docs, this.LayoutOptions.ManualItemStencil);
             var item_stencil_masters = item_stencil.Masters;
-            var item_master = item_stencil_masters["Rounded Rectangle"];
-            var plain_container_master = item_stencil_masters["Rectangle"];
+            var item_master = item_stencil_masters[this.LayoutOptions.ManualItemMaster];
+            var plain_container_master = item_stencil_masters[this.LayoutOptions.ManualContainerMaster];
 
-            // create a new drawing
-            var page = doc.Pages[1];
 
             var page_shapes = page.Shapes;
 

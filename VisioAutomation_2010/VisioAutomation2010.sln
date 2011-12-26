@@ -46,8 +46,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVisioAutomation", "Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVisioAutomationVDX", "TestVisioAutomationVDX\TestVisioAutomationVDX.csproj", "{0522B05C-4FF2-47A5-B6AB-D4379C907814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawNamespaceTypeDiagram", "..\Samples\DrawNamespaceTypeDiagram\DrawNamespaceTypeDiagram\DrawNamespaceTypeDiagram.csproj", "{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = VisioAutomation.vsmdi
@@ -231,18 +229,6 @@ Global
 		{0522B05C-4FF2-47A5-B6AB-D4379C907814}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0522B05C-4FF2-47A5-B6AB-D4379C907814}.Release|Win32.ActiveCfg = Release|Any CPU
 		{0522B05C-4FF2-47A5-B6AB-D4379C907814}.Release|x86.ActiveCfg = Release|Any CPU
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Debug|Win32.ActiveCfg = Debug|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Debug|x86.ActiveCfg = Debug|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Debug|x86.Build.0 = Debug|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Release|Any CPU.ActiveCfg = Release|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Release|Mixed Platforms.Build.0 = Release|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Release|Win32.ActiveCfg = Release|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Release|x86.ActiveCfg = Release|x86
-		{6FD1D2F9-5182-41CD-A9DF-1CFBD5B7619F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
