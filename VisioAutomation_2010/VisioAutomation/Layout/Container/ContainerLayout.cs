@@ -92,10 +92,12 @@ namespace VisioAutomation.Layout.ContainerLayout
             var docs = app.Documents;
             var doc = docs.Add("");
 
-            IVisio.Master container_master=null;
+            IVisio.Master special_container_master=null;
 
             if (this.LayoutOptions.Style == RenderStyle.UseVisioContainers)
             {
+                // only load the special Container stencil if needed.
+                
                 doc.DiagramServicesEnabled = (int)IVisio.VisDiagramServices.visServiceVersion140;
                 // load the special container stencil
                 var measurement = IVisio.VisMeasurementSystem.visMSUS;
@@ -105,13 +107,14 @@ namespace VisioAutomation.Layout.ContainerLayout
                 var container_stencil = docs.OpenEx(stencilfile, flags);
 
                 var container_stencil_masters = container_stencil.Masters;
-                container_master = container_stencil_masters["Container 1"];               
+                special_container_master = container_stencil_masters["Container 1"];               
             }
 
-            // load the special container stencil
-            var basic_stencil = VA.DocumentHelper.OpenStencil(docs, "basic_u.vss");
-            var basic_stencil_masters = basic_stencil.Masters;
-            var basic_master = basic_stencil_masters["Rounded Rectangle"];
+            // load the stencil used to draw the items
+            var item_stencil = VA.DocumentHelper.OpenStencil(docs, "basic_u.vss");
+            var item_stencil_masters = item_stencil.Masters;
+            var item_master = item_stencil_masters["Rounded Rectangle"];
+            var plain_container_master = item_stencil_masters["Rectangle"];
 
             // create a new drawing
             var page = doc.Pages[1];
@@ -124,7 +127,7 @@ namespace VisioAutomation.Layout.ContainerLayout
                 // Drop the container shapes
                 var ct_items = this.Containers.ToList();
                 var ct_rects = ct_items.Select(item => item.Rectangle).ToList();
-                var masters = ct_items.Select(i => basic_master).ToList();
+                var masters = ct_items.Select(i => plain_container_master).ToList();
                 short[] ct_shapeids = DropManyU(page, masters, ct_rects);
 
                 // associate each container with the corresponding shape oject and shape id
@@ -137,15 +140,13 @@ namespace VisioAutomation.Layout.ContainerLayout
                     ct_item.ShapeID = ct_shapeid;
                 }
 
-                // Often useful to show everthing because these diagrams can get large
-                app.ActiveWindow.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
             }
 
             // Render the items
             var items = this.ContainerItems.ToList();
             var item_rects = items.Select(item => item.Rectangle).ToList();
-            var item_master = items.Select(i => basic_master).ToList();
-            short[] shapeids = DropManyU(page, item_master, item_rects);
+            var item_masters = items.Select(i => item_master).ToList();
+            short[] shapeids = DropManyU(page, item_masters, item_rects);
 
             // Associate each item with the corresponding shape object and shape id
             for (int i = 0; i < items.Count; i++)
@@ -156,6 +157,9 @@ namespace VisioAutomation.Layout.ContainerLayout
                 item.VisioShape = shape;
                 item.ShapeID = shapeid;
             }
+
+            // Often useful to show everthing because these diagrams can get large
+            app.ActiveWindow.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
 
             // Set the items
             foreach (var item in items.Where(i => i.Text != null))
@@ -177,7 +181,7 @@ namespace VisioAutomation.Layout.ContainerLayout
                     }
                     var sel = window.Selection;
 
-                    ct.VisioShape = page.DropContainer(container_master, sel);
+                    ct.VisioShape = page.DropContainer(special_container_master, sel);
                     ct.ShapeID = ct.VisioShape.ID16;
                 }                
             }
