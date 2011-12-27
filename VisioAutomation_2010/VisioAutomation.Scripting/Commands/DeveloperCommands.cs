@@ -204,11 +204,34 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawContainer()
         {
+            var doc = this.Session.Document.New(8.5, 11);
 
             var asm = typeof (VA.ShapeSheet.ShapeSheetHelper).Assembly;
-            var app = new IVisio.ApplicationClass();
+            var app = doc.Application;
             var drawing = CreateContainerModelFromAssembly(asm);
+
+            var fonts = doc.Fonts;
+            var font = fonts["Segoe UI"];
+            var fontid = font.ID16;
+
             drawing.LayoutOptions.Style = VA.Layout.ContainerLayout.RenderStyle.UseShapes;
+            drawing.LayoutOptions.ContainerFormatting.ShapeFormatCells.FillForegnd = "rgb(173,27,92)";
+            drawing.LayoutOptions.ContainerFormatting.ShapeFormatCells.LinePattern = "0";
+            drawing.LayoutOptions.ContainerFormatting.ShapeFormatCells.LineWeight= "0";
+            drawing.LayoutOptions.ContainerFormatting.CharacterFormatCells.Color = "rgb(255,255,255)";
+            drawing.LayoutOptions.ContainerFormatting.CharacterFormatCells.Style= (short) VA.Text.CharStyle.Bold;
+            drawing.LayoutOptions.ContainerFormatting.CharacterFormatCells.Font= fontid;
+
+            drawing.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.FillForegnd = "rgb(173,27,92)";
+            drawing.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern = "0";
+            drawing.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LineWeight = "0";
+            drawing.LayoutOptions.ContainerItemFormatting.CharacterFormatCells.Color= "rgb(255,255,255)";
+            drawing.LayoutOptions.ContainerItemFormatting.CharacterFormatCells.Font = fontid;
+            drawing.LayoutOptions.ContainerItemFormatting.ParagraphFormatCells.HorizontalAlign = "0";
+
+            drawing.LayoutOptions.ItemHeight = 0.125;
+            drawing.LayoutOptions.ItemVerticalSpacing= 0.125/2.0;
+
             drawing.PerformLayout();
             drawing.Render(this.Session.VisioApplication.ActiveDocument);
             return this.Session.VisioApplication.ActiveDocument;
