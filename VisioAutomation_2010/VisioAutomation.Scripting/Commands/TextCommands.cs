@@ -176,26 +176,6 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(active_page);
         }
 
-        public void StripWhiteSpace()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var all_shapes = this.Session.Selection.EnumShapes().ToList();
-
-            foreach (var shape in all_shapes)
-            {
-                var original_text = shape.Text;
-                var stripped_text = original_text.Trim();
-                if (original_text.Length != stripped_text.Length)
-                {
-                    shape.Text = stripped_text;
-                }
-            }
-        }
-
         public void IncreaseTextSize()
         {
             if (!this.Session.HasSelectedShapes())
@@ -232,14 +212,13 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetTextFont(string fontname)
+        public void SetFont(string fontname)
         {
-            var fontnames = new string[] {fontname};
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
-            var fonts = fontnames.Select(v => active_doc_fonts[v]);
-            var fontids = fonts.Select(f => f.ID.ToString()).ToList();
+            var font = active_doc_fonts[fontname];
+            var fontids = new[] {font.ID.ToString()};
             IVisio.VisGetSetArgs flags=0;
             this.Session.ShapeSheet.SetFormula(new[] { VA.ShapeSheet.SRCConstants.Char_Font }, fontids, flags);
         }
@@ -266,6 +245,5 @@ namespace VisioAutomation.Scripting.Commands
             var formats = VA.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
         }
-
     }
 }
