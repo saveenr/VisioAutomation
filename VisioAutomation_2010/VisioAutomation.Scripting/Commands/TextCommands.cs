@@ -71,36 +71,53 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = application.CreateUndoScope())
             {
+                var shapeids = shapes.Select(s => s.ID).ToList();
+                
+                // Store all the formatting
+                var formats = VA.Text.TextFormat.GetFormat(this.Session.VisioApplication.ActivePage, shapeids);
+
+                // Change the text - this will wipe out all the character and paragraph formatting
                 foreach (var shape in shapes)
                 {
-                    var s = shape; // to prevent Access to Modified Closure warning
-                    var m = VA.Text.TextFormat.GetFormat(s);
-                    var textruns = m.CharacterTextRuns;
-
-                    var nocast = (short)IVisio.VisUnitCodes.visNoCast;
-                    var textstyles = textruns
-                        .Select(
-                            tr =>
-                                {
-                                    var c = s.GetCell(src_charstyle);
-                                    return (short) c.ResultInt[nocast, (short) rounding];
-                                }
-                        ).ToList();
-
-                    string t = s.Text;
+                    string t = shape.Text;
                     if (t.Length < 1)
                     {
                         continue;
                     }
-                    s.Text = TextCommandsUtil.toggle_case(t);
+                    shape.Text = TextCommandsUtil.toggle_case(t);
+                }
 
-                    foreach (var tr in textruns)
+                for (int i = 0; i < shapes.Count;i++ )
+                {
+                    var shape = shapes[i];
+                    var format = formats[i];
+                    foreach (var run in format.CharacterTextRuns)
                     {
-                        var chars = s.Characters;
-                        chars.Begin = tr.Begin;
-                        chars.End = tr.End;
-                        var cellindex = src_charstyle.Cell;
-                        chars.CharProps[cellindex] =  textstyles[tr.Index];
+                        var chars = shape.Characters;
+                        chars.Begin = run.Begin;
+                        chars.End = run.End;
+                        chars.CharProps[src_charstyle.Cell] = (short) format.CharacterFormats[i].Style.Result;
+                    }
+                }
+
+                // Now restore all the formatting
+
+                var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+                for (int i = 0; i < shapes.Count; i++)
+                {
+                    var shape = shapes[i];
+                    var format = formats[i];
+
+                    for (int j=0;j<format.CharacterFormats.Count;j++)
+                    {
+                        var fmt = format.CharacterFormats[j];
+                        fmt.Apply(update,(short) shapeids[i],(short)j);
+                    }
+
+                    for (int j = 0; j < format.ParagraphFormats.Count; j++)
+                    {
+                        var fmt = format.ParagraphFormats[j];
+                        fmt.Apply(update, (short)shapeids[i], (short)j);
                     }
                 }
             }

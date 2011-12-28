@@ -296,7 +296,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public bool HasShapes(int min_items)
         {
-            this.Session.Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
+            // this.Session.Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException("min_items");
