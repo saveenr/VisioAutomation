@@ -15,6 +15,22 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
+        public static List<System.Type> GetTypes()
+        {
+            // TODO: Consider filtering out types that should *not* be exposed despite being public
+            var va_type = typeof (VisioAutomation.ApplicationHelper);
+            var vas_type = typeof (VisioAutomation.Scripting.CommandSet);
+
+            var va_types = va_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
+            var vas_types = vas_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
+            
+            var types = new List<System.Type>();
+            types.AddRange(va_types);
+            types.AddRange(vas_types);
+            
+            return types;
+        }       
+
         public void HelloWorld()
         {
             if (this.Session.VisioApplication == null)
@@ -244,7 +260,7 @@ namespace VisioAutomation.Scripting.Commands
             var font = fonts["Segoe UI"];
             int fontid = font.ID16;
 
-            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
+            var types = VA.Scripting.Commands.DeveloperCommands.GetTypes();
             var pathbuilder = new PathTreeBuilder();
             foreach (var type in types)
             {
@@ -383,7 +399,7 @@ namespace VisioAutomation.Scripting.Commands
             var font = fonts["Segoe UI"];
             int fontid = font.ID16;
 
-            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes().Select(t=>new TypeInfo(t));
+            var types = VA.Scripting.Commands.DeveloperCommands.GetTypes().Select(t=>new TypeInfo(t));
 
             var pathbuilder = new PathTreeBuilder();
             foreach (var type in types)
@@ -659,7 +675,8 @@ namespace VisioAutomation.Scripting.Commands
             return (type.IsAbstract && type.IsSealed);
         }
 
-        public enum TypeKind
+
+        private enum TypeKind
         {
             StaticClass,
             Class,
@@ -669,35 +686,5 @@ namespace VisioAutomation.Scripting.Commands
             Enum,
             Other
         }
-
-    }
-}
-
-
-namespace VisioAutomation.Experimental.Developer
-{
-    public class DeveloperHelper
-    {
-        public static List<System.Type> GetTypes()
-        {
-            // find the VA assembly
-            var vat = typeof (VisioAutomation.ApplicationHelper);
-            var asm = vat.Assembly;
-
-            // TODO: Consider filtering out types that should *not* be exposed despite being public
-            var types = asm.GetExportedTypes().Where(t => t.IsPublic).ToList();
-            return types;
-        }
-
-        public static List<System.Type> GetAllTypes()
-        {
-            // find the VA assembly
-            var vat = typeof(VisioAutomation.ApplicationHelper);
-            var asm = vat.Assembly;
-
-            var types = asm.GetExportedTypes().ToList();
-            return types;
-        }
-
     }
 }
