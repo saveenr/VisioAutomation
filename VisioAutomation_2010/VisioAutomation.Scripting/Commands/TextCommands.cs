@@ -88,45 +88,23 @@ namespace VisioAutomation.Scripting.Commands
                     shape.Text = TextCommandsUtil.toggle_case(t);
                 }
 
-                for (int i = 0; i < shapes.Count;i++ )
-                {
-                    var shape = shapes[i];
-                    var format = formats[i];
-                    foreach (var run in format.CharacterTextRuns)
-                    {
-                        var chars = shape.Characters;
-                        chars.Begin = run.Begin;
-                        chars.End = run.End;
-                        chars.CharProps[src_charstyle.Cell] = (short) format.CharacterFormats[i].Style.Result;
-                    }
-
-                    foreach (var run in format.ParagraphTextRuns)
-                    {
-                        var chars = shape.Characters;
-                        chars.Begin = run.Begin;
-                        chars.End = run.End;
-                        chars.ParaProps[VA.ShapeSheet.SRCConstants.Para_IndLeft.Cell] = (short)format.ParagraphFormats[i].IndentLeft.Result;
-                    }
-                }
-
-                // Now restore all the formatting
+                // Now restore all the formatting - based on any initial formatting from the text
 
                 var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
                 for (int i = 0; i < shapes.Count; i++)
                 {
-                    var shape = shapes[i];
                     var format = formats[i];
 
-                    for (int j=0;j<format.CharacterFormats.Count;j++)
+                    if (format.CharacterFormats.Count>0)
                     {
-                        var fmt = format.CharacterFormats[j];
-                        fmt.Apply(update,(short) shapeids[i],(short)j);
+                        var fmt = format.CharacterFormats[0];
+                        fmt.Apply(update,(short) shapeids[i],(short)0);
                     }
 
-                    for (int j = 0; j < format.ParagraphFormats.Count; j++)
+                    if (format.ParagraphFormats.Count > 0)
                     {
-                        var fmt = format.ParagraphFormats[j];
-                        fmt.Apply(update, (short)shapeids[i], (short)j);
+                        var fmt = format.ParagraphFormats[0];
+                        fmt.Apply(update, (short)shapeids[i], (short)0);
                     }
                 }
 
