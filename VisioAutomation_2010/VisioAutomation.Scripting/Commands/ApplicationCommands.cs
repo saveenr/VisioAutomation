@@ -73,7 +73,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.Window.SetWindowRect(r);
         }
 
-        public IVisio.Application AttachToRunningApplication()
+        public IVisio.Application Attach()
         {
             var app = ApplicationHelper.FindRunningApplication();
             if (app == null)

@@ -72,9 +72,10 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope())
             {
                 var shapeids = shapes.Select(s => s.ID).ToList();
-                
+
+                var page = this.Session.VisioApplication.ActivePage;
                 // Store all the formatting
-                var formats = VA.Text.TextFormat.GetFormat(this.Session.VisioApplication.ActivePage, shapeids);
+                var formats = VA.Text.TextFormat.GetFormat(page, shapeids);
 
                 // Change the text - this will wipe out all the character and paragraph formatting
                 foreach (var shape in shapes)
@@ -98,6 +99,14 @@ namespace VisioAutomation.Scripting.Commands
                         chars.End = run.End;
                         chars.CharProps[src_charstyle.Cell] = (short) format.CharacterFormats[i].Style.Result;
                     }
+
+                    foreach (var run in format.ParagraphTextRuns)
+                    {
+                        var chars = shape.Characters;
+                        chars.Begin = run.Begin;
+                        chars.End = run.End;
+                        chars.ParaProps[VA.ShapeSheet.SRCConstants.Para_IndLeft.Cell] = (short)format.ParagraphFormats[i].IndentLeft.Result;
+                    }
                 }
 
                 // Now restore all the formatting
@@ -120,6 +129,8 @@ namespace VisioAutomation.Scripting.Commands
                         fmt.Apply(update, (short)shapeids[i], (short)j);
                     }
                 }
+
+                update.Execute(page);
             }
         }
 
