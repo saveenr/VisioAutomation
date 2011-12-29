@@ -100,83 +100,72 @@ namespace VisioAutomation.UI
 
         public static void HSVToRGB(double H, double S, double V, out double R, out double G, out double B)
         {
-            // CREDITS
-            // Based on code by Eugene Vishnevsky found at:
-            // http://www.cs.rit.edu/~ncs/color/t_convert.html
-            // 
-            // Returns the RGBColor version of this HSVColor
-
-            if (S == 0.0)
+            if (H == 1.0)
             {
-                // Make it some kind of gray
-                R = V;
-                G = V;
-                B = V;
+                H = 0.0;
             }
-            else
+
+            double step = 1.0 / 6.0;
+            double vh = H / step;
+
+            int i = (int)System.Math.Floor(vh);
+
+            double f = vh - i;
+            double p = V * (1.0 - S);
+            double q = V * (1.0 - (S * f));
+            double t = V * (1.0 - (S * (1.0 - f)));
+
+            switch (i)
             {
-                if (H >= 1.0)
-                {
-                    H = 0.0;
-                }
-
-                double step = 1.0 / 6.0;
-
-                double vh = H / step;
-                int vi = (int)System.Math.Floor(vh);
-                double v0 = vh - vi;
-                double v1 = V * (1.0 - S);
-                double v2 = V * (1.0 - (S * v0));
-                double v3 = V * (1.0 - (S * (1.0 - v0)));
-
-                switch (vi)
-                {
-                    case 0:
-                        {
-                            R = V;
-                            G = v3;
-                            B = v1;
-                            break;
-                        }
-                    case 1:
-                        {
-                            R = v2;
-                            G = V;
-                            B = v1;
-                            break;
-                        }
-                    case 2:
-                        {
-                            R = v1;
-                            G = V;
-                            B = v3;
-                            break;
-                        }
-                    case 3:
-                        {
-                            R = v1;
-                            G = v2;
-                            B = V;
-                            break;
-                        }
-                    case 4:
-                        {
-                            R = v3;
-                            G = v1;
-                            B = V;
-                            break;
-                        }
-                    default:
-                        {
-                            R = V;
-                            G = v1;
-                            B = v2;
-                            break;
-                        }
-                }
+                case 0:
+                    {
+                        R = V;
+                        G = t;
+                        B = p;
+                        break;
+                    }
+                case 1:
+                    {
+                        R = q;
+                        G = V;
+                        B = p;
+                        break;
+                    }
+                case 2:
+                    {
+                        R = p;
+                        G = V;
+                        B = t;
+                        break;
+                    }
+                case 3:
+                    {
+                        R = p;
+                        G = q;
+                        B = V;
+                        break;
+                    }
+                case 4:
+                    {
+                        R = t;
+                        G = p;
+                        B = V;
+                        break;
+                    }
+                case 5:
+                    {
+                        R = V;
+                        G = p;
+                        B = q;
+                        break;
+                    }
+                default:
+                    {
+                        // not possible - if we get here it is an internal error
+                        throw new ArgumentException();
+                    }
             }
         }
-
         public static System.Drawing.Color HSVToSystemDrawingColor(double H, double S, double V)
         {
             double R;
@@ -189,7 +178,5 @@ namespace VisioAutomation.UI
             DeNormalize24BitRGB(R, G, B, out r, out g, out b);
             return System.Drawing.Color.FromArgb(r, g, b);
         }
-
-
     }
 }
