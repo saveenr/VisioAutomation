@@ -36,8 +36,11 @@
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.tab2 = this.Factory.CreateRibbonTab();
+            this.group1 = this.Factory.CreateRibbonGroup();
+            this.buttonHelp = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
+            this.group1.SuspendLayout();
             // 
             // tab1
             // 
@@ -47,8 +50,21 @@
             // 
             // tab2
             // 
+            this.tab2.Groups.Add(this.group1);
             this.tab2.Label = "Power Tools";
             this.tab2.Name = "tab2";
+            // 
+            // group1
+            // 
+            this.group1.Items.Add(this.buttonHelp);
+            this.group1.Label = "group1";
+            this.group1.Name = "group1";
+            // 
+            // buttonHelp
+            // 
+            this.buttonHelp.Label = "Help";
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonHelp_Click_1);
             // 
             // VPTRibbon
             // 
@@ -61,6 +77,8 @@
             this.tab1.PerformLayout();
             this.tab2.ResumeLayout(false);
             this.tab2.PerformLayout();
+            this.group1.ResumeLayout(false);
+            this.group1.PerformLayout();
 
         }
 
@@ -68,6 +86,8 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         private Microsoft.Office.Tools.Ribbon.RibbonTab tab2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonHelp;
     }
 
     partial class ThisRibbonCollection

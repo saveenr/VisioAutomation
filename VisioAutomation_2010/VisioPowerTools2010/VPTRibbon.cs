@@ -12,5 +12,11 @@ namespace VisioPowerTools2010
         {
 
         }
+
+        private void buttonHelp_Click_1(object sender, RibbonControlEventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show("Hello World");
+
+        }
     }
 }
