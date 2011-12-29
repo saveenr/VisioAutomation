@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace VisioPowerTools2010.Properties {
+    using System;
     
     
     /// <summary>
