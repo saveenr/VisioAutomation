@@ -25,12 +25,12 @@ namespace VisioAutomation.ShapeSheet.Update
             this.items = new List<UpdateRecord<T>>(capacity);
         }
 
-        public IVisio.VisGetSetArgs ResultFlags
+        protected IVisio.VisGetSetArgs ResultFlags
         {
             get { return get_common_flags(); }
         }
 
-        public IVisio.VisGetSetArgs FormulaFlags
+        protected IVisio.VisGetSetArgs FormulaFlags
         {
             get
             {
@@ -106,7 +106,7 @@ namespace VisioAutomation.ShapeSheet.Update
             get { return this.items.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Formula); }
         }
 
-        public string[] GetFormulasArray()
+        protected string[] GetFormulasArray()
         {
             var a = new string[this.FormulaCount];
             int i = 0;
@@ -118,7 +118,7 @@ namespace VisioAutomation.ShapeSheet.Update
             return a;
         }
 
-        public double[] GetResultsArray()
+        protected double[] GetResultsArray()
         {
             var a = new double[this.ResultCount];
             int i = 0;
@@ -130,7 +130,7 @@ namespace VisioAutomation.ShapeSheet.Update
             return a;
         }
 
-        public IVisio.VisUnitCodes[] GetUnitCodesArray()
+        protected IVisio.VisUnitCodes[] GetUnitCodesArray()
         {
             var a = new IVisio.VisUnitCodes[this.ResultCount];
             int i = 0;
