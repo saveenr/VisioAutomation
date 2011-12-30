@@ -56,7 +56,6 @@ namespace VisioAutomation
             }
         }
 
-
         public static void Activate(IVisio.Document doc)
         {
             bool found_window = false;

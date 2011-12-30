@@ -112,7 +112,7 @@ namespace VisioAutomation.Layout.ContainerLayout
             }
 
             // load the stencil used to draw the items
-            var item_stencil = VA.DocumentHelper.OpenStencil(docs, this.LayoutOptions.ManualItemStencil);
+            var item_stencil = docs.OpenStencil(this.LayoutOptions.ManualItemStencil);
             var item_stencil_masters = item_stencil.Masters;
             var item_master = item_stencil_masters[this.LayoutOptions.ManualItemMaster];
             var plain_container_master = item_stencil_masters[this.LayoutOptions.ManualContainerMaster];
