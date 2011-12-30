@@ -218,41 +218,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Document DrawContainer()
-        {
-            var doc = this.Session.Document.New(8.5, 11);
-
-            var asm = typeof (VA.ShapeSheet.ShapeSheetHelper).Assembly;
-            var app = doc.Application;
-            var drawing = CreateContainerModelFromAssembly(asm);
-
-            var fonts = doc.Fonts;
-            var font = fonts["Segoe UI"];
-            var fontid = font.ID16;
-
-            drawing.LayoutOptions.Style = VA.Layout.ContainerLayout.RenderStyle.UseShapes;
-            drawing.LayoutOptions.ContainerFormatting.ShapeFormatCells.FillForegnd = "rgb(173,27,92)";
-            drawing.LayoutOptions.ContainerFormatting.ShapeFormatCells.LinePattern = "0";
-            drawing.LayoutOptions.ContainerFormatting.ShapeFormatCells.LineWeight= "0";
-            drawing.LayoutOptions.ContainerFormatting.CharacterFormatCells.Color = "rgb(255,255,255)";
-            drawing.LayoutOptions.ContainerFormatting.CharacterFormatCells.Style= (short) VA.Text.CharStyle.Bold;
-            drawing.LayoutOptions.ContainerFormatting.CharacterFormatCells.Font= fontid;
-
-            drawing.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.FillForegnd = "rgb(173,27,92)";
-            drawing.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern = "0";
-            drawing.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LineWeight = "0";
-            drawing.LayoutOptions.ContainerItemFormatting.CharacterFormatCells.Color= "rgb(255,255,255)";
-            drawing.LayoutOptions.ContainerItemFormatting.CharacterFormatCells.Font = fontid;
-            drawing.LayoutOptions.ContainerItemFormatting.ParagraphFormatCells.HorizontalAlign = "0";
-
-            drawing.LayoutOptions.ItemHeight = 0.125;
-            drawing.LayoutOptions.ItemVerticalSpacing= 0.125/2.0;
-
-            drawing.PerformLayout();
-            drawing.Render(this.Session.VisioApplication.ActiveDocument);
-            return this.Session.VisioApplication.ActiveDocument;
-        }
-
         public IVisio.Document DrawVANamespaces()
         {
             var doc = this.Session.Document.New(8.5,11);
@@ -510,73 +475,6 @@ namespace VisioAutomation.Scripting.Commands
                 VA.Text.TextFormat.FormatRange(node.VisioShape, charcells, 0, label.Length);
             }
             return doc;
-        }
-
-
-        private static VA.Layout.ContainerLayout.ContainerLayout CreateContainerModelFromAssembly(System.Reflection.Assembly asm)
-        {
-            var types = asm.GetExportedTypes().Where(t => t.IsPublic);
-
-            var ns_dic = new Dictionary<string, List<System.Type>>();
-            foreach (var t in types)
-            {
-                List<System.Type> list;
-                string ns = t.Namespace;
-                if (ns_dic.ContainsKey(ns))
-                {
-                    list = ns_dic[ns];
-                }
-                else
-                {
-                    list = new List<System.Type>();
-                    ns_dic[ns] = list;
-                }
-                list.Add(t);
-            }
-
-            bool show_type_kind = true;
-
-            var om_containers = new VA.Layout.ContainerLayout.ContainerLayout();
-
-            var sorted_namespaces = ns_dic.Keys.OrderBy(i => i).ToList();
-
-            var om_container_fmt = new VA.Format.ShapeFormatCells();
-            var om_container_tb = new VA.Text.TextBlockFormatCells();
-            om_container_fmt.FillForegnd = "rgb(240,240,240)";
-            om_container_fmt.LineWeight = "0";
-            om_container_fmt.LinePattern = "0";
-            om_container_tb.VerticalAlign = "0";
-
-            foreach (string ns in sorted_namespaces)
-            {
-                var nstypes = ns_dic[ns];
-
-                var sorted_items =
-                    nstypes.Select(t => new
-                    {
-                        type = t,
-                        kind = get_type_kindEx(t),
-                        name = get_nice_type_name(t)
-                    }).OrderBy(i => i.kind).
-                        ThenBy(i => i.name).ToList();
-
-                var om_container = om_containers.AddContainer(ns);
-
-                foreach (var i in sorted_items)
-                {
-                    var item = om_container.Add(get_type_kindname(i.kind) + " " + i.name);
-
-                    //item.FillForegnd = "rgb(255,255,255)";
-                    //item.LineWeight = "0";
-                    //item.LinePattern = "0";
-
-                    if (i.kind == TypeKind.Enum)
-                    {
-                        //item.FillForegnd = "rgb(220,240,245)";
-                    }
-                }
-            }
-            return om_containers;
         }
 
         private static string get_nice_type_name(System.Type type)
