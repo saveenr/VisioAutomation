@@ -394,8 +394,18 @@ namespace VisioAutomation.Scripting.Commands
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new VA.Layout.Tree.Node(ns);
-                node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace);
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
+
+
+                var markup = new VA.Text.Markup.TextElement();
+                var m1 = markup.AppendElement(label+"\n");
+                m1.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
+                m1.CharacterFormat.FontSize = 12.0;
+                var m2 = markup.AppendElement();
+                m2.AppendText(string.Join("\n", types_in_namespace));
+                //m2.ParagraphFormat.Indent = 0.25;
+
+                node.TextElement = markup;
 
                 ns_node_map[ns] = node;
                 node_to_nslabel[node] = label;
@@ -466,14 +476,6 @@ namespace VisioAutomation.Scripting.Commands
 
             tree_layout.Render(doc.Application.ActivePage);
 
-            var charcells = new VA.Text.CharacterFormatCells();
-            charcells.Style = (int) VA.Text.CharStyle.Bold;
-            charcells.Size = VA.Convert.PointsToInches(12);
-            foreach (var node in tree_layout.Nodes)
-            {
-                string label = node_to_nslabel[node];
-                VA.Text.TextFormat.FormatRange(node.VisioShape, charcells, 0, label.Length);
-            }
             return doc;
         }
 

@@ -19,6 +19,7 @@ namespace VisioAutomation.Layout.Tree
         }
 
         public string Text { get; set; }
+        public VA.Text.Markup.TextElement TextElement { get; set;}
         public IVisio.Shape VisioShape { get; set; }
         public VA.DOM.Node DOMNode { get; set; }
         public VA.Drawing.Size? Size { get; set; }
