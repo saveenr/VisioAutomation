@@ -34,12 +34,6 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> LinePattern { get; set; }
         public VA.ShapeSheet.CellData<double> LineWeight { get; set; }
         public VA.ShapeSheet.CellData<double> Rounding { get; set; }
-        public VA.ShapeSheet.CellData<int> CharFont { get; set; }
-        public VA.ShapeSheet.CellData<int> CharColor { get; set; }
-        public VA.ShapeSheet.CellData<double> CharColorTrans { get; set; }
-        public VA.ShapeSheet.CellData<double> CharSize { get; set; }
-        public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
-        public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
 
         protected override void ApplyFormulas(ApplyFormula func)
         {
@@ -68,12 +62,6 @@ namespace VisioAutomation.Format
             func(ShapeSheet.SRCConstants.LinePattern, this.LinePattern.Formula);
             func(ShapeSheet.SRCConstants.LineWeight, this.LineWeight.Formula);
             func(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
-            func(ShapeSheet.SRCConstants.Char_Font, this.CharFont.Formula);
-            func(ShapeSheet.SRCConstants.Char_Color, this.CharColor.Formula);
-            func(ShapeSheet.SRCConstants.Char_ColorTrans, this.CharColorTrans.Formula);
-            func(ShapeSheet.SRCConstants.Char_Size, this.CharSize.Formula);
-            func(ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd.Formula);
-            func(ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
         }
 
         private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
@@ -105,12 +93,6 @@ namespace VisioAutomation.Format
             cells.LinePattern = row[query.LinePattern].ToInt();
             cells.LineWeight = row[query.LineWeight];
             cells.Rounding = row[query.Rounding];
-            cells.CharFont = row[query.CharFont].ToInt();
-            cells.CharColor = row[query.CharColor].ToInt();
-            cells.CharColorTrans = row[query.CharColorTrans];
-            cells.CharSize = row[query.CharSize];
-            cells.TextBkgnd = row[query.TextBkgnd].ToInt();
-            cells.TextBkgndTrans = row[query.TextBkgndTrans];
             return cells;
         }
 
@@ -155,14 +137,6 @@ namespace VisioAutomation.Format
             public VA.ShapeSheet.Query.CellQueryColumn LineWeight { get; set; }
             public VA.ShapeSheet.Query.CellQueryColumn Rounding { get; set; }
 
-            public VA.ShapeSheet.Query.CellQueryColumn CharColor { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn CharColorTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn CharSize { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn CharFont { get; set; }
-
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgndTrans { get; set; }
-
             public ShapeFormatQuery() :
                 base()
             {
@@ -192,16 +166,7 @@ namespace VisioAutomation.Format
                 this.LinePattern = this.AddColumn(VA.ShapeSheet.SRCConstants.LinePattern, "LinePattern");
                 this.LineWeight = this.AddColumn(VA.ShapeSheet.SRCConstants.LineWeight, "LineWeight");
                 this.Rounding = this.AddColumn(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
-
-                this.CharColor = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Color, "CharColor");
-                this.CharColorTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_ColorTrans, "CharColorTrans");
-                this.CharSize = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Size, "CharSize");
-                this.CharFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Font, "CharFont");
-
-                this.TextBkgnd = this.AddColumn(VA.ShapeSheet.SRCConstants.TextBkgnd, "TextBkgnd");
-                this.TextBkgndTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.TextBkgndTrans, "TextBkgndTrans");
             }
         }
-
     }
 }
