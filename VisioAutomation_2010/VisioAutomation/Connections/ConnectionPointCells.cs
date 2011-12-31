@@ -6,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Connections
 {
-    public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupRow
+    public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<double> X { get; set; }
         public VA.ShapeSheet.CellData<double> Y { get; set; }
@@ -38,13 +38,13 @@ namespace VisioAutomation.Connections
         internal static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
         class ConnectionPointQuery : VA.ShapeSheet.Query.SectionQuery

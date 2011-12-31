@@ -7,11 +7,17 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
-    public abstract class CellGroupRow : BaseCellGroup
+    public abstract class CellGroupMultiRow : BaseCellGroup
     {
+        // This class is meant for those cell groups that appear as multiple rows in a section
+        // for example the character section or the paragraph section
+
         // Delegates
         protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.QueryDataRow<double> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
 
+        // descendants must implement this method.
+        // the implementation should be this: run the "func" on each formula in the cell
+        // group (even in the formula is null) 
         protected abstract void ApplyFormulas(ApplyFormula func, short row);
 
         public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid, short row)
@@ -50,6 +56,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             obj_list.AddRange(objs);
             return obj_list;
         }
-
     }
 }
