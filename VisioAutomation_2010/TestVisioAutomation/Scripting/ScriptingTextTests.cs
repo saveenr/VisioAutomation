@@ -15,17 +15,22 @@ namespace TestVisioAutomation
 
             var shape_rect = scriptingsession.Draw.Rectangle(1, 1, 3, 3);
 
+            shape_rect.Text = "Hello World";
+            var t0 = scriptingsession.Text.GetText()[0];
             scriptingsession.Text.SetText("Hello World");
-            Assert.AreEqual("Hello World", scriptingsession.Text.GetText()[0]);
+            Assert.AreEqual("Hello World", t0);
 
             scriptingsession.Text.ToogleCase();
-            Assert.AreEqual("HELLO WORLD", scriptingsession.Text.GetText()[0]);
+            var t1 = scriptingsession.Text.GetText()[0];
+            Assert.AreEqual("HELLO WORLD", t1);
 
             scriptingsession.Text.ToogleCase();
-            Assert.AreEqual("hello world", scriptingsession.Text.GetText()[0]);
+            var t2 = scriptingsession.Text.GetText()[0];
+            Assert.AreEqual("hello world", t2);
 
             scriptingsession.Text.ToogleCase();
-            Assert.AreEqual("Hello World", scriptingsession.Text.GetText()[0]);
+            var t3 = scriptingsession.Text.GetText()[0];
+            Assert.AreEqual("Hello World", t3);
 
             scriptingsession.Document.Close(true);
         }

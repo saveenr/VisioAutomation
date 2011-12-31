@@ -18,7 +18,7 @@ namespace TestVisioAutomation
 
             var fillforegnd = members["FillForegnd"];
             Assert.AreEqual(typeof(int),fillforegnd.DataType);
-            Assert.AreEqual(31,members.Count);
+            Assert.AreEqual(25,members.Count);
         }
 
     }
