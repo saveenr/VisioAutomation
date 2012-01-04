@@ -69,7 +69,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_1()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<string>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
             var root = layout.Root;
             root.Data = "Root";
             var n1 = root.AddNode(1, 2);
@@ -89,7 +89,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_2()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<string>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
             var root = layout.Root;
             root.Data = "Root";
             var n1 = root.AddNode(1, 2);
@@ -111,14 +111,14 @@ namespace TestVisioAutomation
 
         }
 
-        private IVisio.Document draw_layout(BoxLayout<string> layout)
+        private IVisio.Document draw_layout(BoxLayout<object> layout)
         {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page = app.ActivePage;
             var dom = new VA.DOM.Document();
 
-            var list = new List<VA.Layout.BoxLayout.Node<string>>();
+            var list = new List<VA.Layout.BoxLayout.Node<object>>();
             list.Add(layout.Root);
             list.AddRange(layout.Nodes);
             foreach (var node in list)
@@ -138,7 +138,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_3()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<string>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
             var root = layout.Root;
             root.Data = "Root";
             root.Direction = LayoutDirection.Horizonal;
@@ -161,7 +161,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_4()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<string>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
             layout.LayoutOptions.DirectionHorizontal = DirectionHorizontal.RightToLeft;
             var root = layout.Root;
 
