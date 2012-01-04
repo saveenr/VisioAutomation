@@ -53,7 +53,7 @@ namespace VisioAutomation.Layout.BoxLayout
             }
         }
 
-        public Node AddNode(double? width, double? height)
+        public Node AddBox(double? width, double? height)
         {
             var node = new Node();
             node.Width = width;
@@ -98,7 +98,7 @@ namespace VisioAutomation.Layout.BoxLayout
             return node;
         }
 
-        public Node AddNode(Node node)
+        private Node AddNode(Node node)
         {
             if (node == null)
             {

@@ -25,33 +25,14 @@ namespace VisioAutomationSamples
             }
         }
 
-        private static BoxL.Node new_node()
+        public static BoxL.Node AddNodeEx(this BoxL.Node p, double w, double h, string s)
         {
-            return new_node(null);
-        }
-
-        public static BoxL.Node new_node(string s)
-        {
-            var box = new BoxL.Node();
-
-            var nd = new NodeData();
-            box.Data = nd;
-            nd.Text = s;
-            return box;
-        }
-
-        public static BoxL.Node new_node(double w, double h, string s)
-        {
-            var box = new BoxL.Node();
-            box.Width = w;
-            box.Height = h;
-
+            var box = p.AddBox(w, h);
             var node_data = new NodeData();
-            box.Data = node_data;
             node_data.Text = s;
+            box.Data = node_data;
             return box;
         }
-
 
         public static void BoxLayout()
         {
@@ -133,18 +114,18 @@ namespace VisioAutomationSamples
 
             foreach (string fontname in fontnames)
             {
-                var fontname_box = new_node(5, 0.5, fontname);
+                var fontname_box = root.AddNodeEx(5, 0.5, fontname);
                 var fontname_box_data = (NodeData) fontname_box.Data;
                 fontname_box_data.Cells = fontname_cells;
-                root.AddNode(fontname_box);
 
-                var font_box = new_node();
+                var font_box = root.AddBox(1.0,1.0);
                 font_box.Direction = BoxL.LayoutDirection.Vertical;
                 font_box.ChildSeparation = 0.25;
-
                 var font_vox_data = (NodeData) font_box.Data;
-                font_vox_data.Render = false;
-                root.AddNode(font_box);
+                if (font_vox_data != null)
+                {
+                    font_vox_data.Render = false;                   
+                }
 
                 int numcols = 17;
                 int numrows = 5;
@@ -153,25 +134,20 @@ namespace VisioAutomationSamples
 
                 foreach (int row in Enumerable.Range(0, numrows))
                 {
-                    var row_box = new_node();
+                    var row_box = font_box.AddNodeEx(1.0,1.0,null);
                     row_box.Direction = BoxL.LayoutDirection.Horizonal;
                     row_box.ChildSeparation = 0.25;
-
                     var row_box_data = (NodeData) row_box.Data;
                     row_box_data.Render = false;
-                    font_box.AddNode(row_box);
 
                     foreach (int col in Enumerable.Range(0, numcols))
                     {
                         int charindex = (col + (numcols*row))%numcells;
                         string curchar = samplechars[charindex];
-
-                        var cell_box = new_node(0.50, 0.50, curchar);
-
+                        var cell_box = row_box.AddNodeEx(0.50, 0.50, curchar);
                         var cell_box_data = (NodeData) cell_box.Data;
                         cell_box_data.Font = fontname;
                         cell_box_data.Cells = charbox_cells;
-                        row_box.AddNode(cell_box);
                     }
                 }
             }
@@ -185,6 +161,10 @@ namespace VisioAutomationSamples
 
             foreach (var node in layout.Nodes)
             {
+                if (node.Data == null)
+                {
+                    continue;
+                }
                 var node_data = (NodeData)node.Data;
 
                 if (node_data.Render == false)

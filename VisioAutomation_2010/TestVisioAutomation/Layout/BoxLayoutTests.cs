@@ -42,7 +42,7 @@ namespace TestVisioAutomation
         {
             var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
-            var n1 = root.AddNode(10, 5);
+            var n1 = root.AddBox(10, 5);
             layout.PerformLayout();
             double delta = 0.00000001;
             AssertVA.AreEqual(0, 0, 10, 5, n1.Rectangle, delta);
@@ -56,7 +56,7 @@ namespace TestVisioAutomation
         {
             var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
-            var n1 = root.AddNode(10, 5);
+            var n1 = root.AddBox(10, 5);
 
             root.Padding = 1.0;
             layout.PerformLayout();
@@ -72,9 +72,9 @@ namespace TestVisioAutomation
             var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
             root.Data = "Root";
-            var n1 = root.AddNode(1, 2);
+            var n1 = root.AddBox(1, 2);
             n1.Data = "n1";
-            var n2 = root.AddNode(2, 3);
+            var n2 = root.AddBox(2, 3);
             n2.Data = "n2";
 
             root.Padding = 1.0;
@@ -92,10 +92,10 @@ namespace TestVisioAutomation
             var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
             root.Data = "Root";
-            var n1 = root.AddNode(1, 2);
+            var n1 = root.AddBox(1, 2);
             n1.Data = "n1";
             n1.AlignmentHorizontal = AlignmentHorizontal.Right;
-            var n2 = root.AddNode(2, 3);
+            var n2 = root.AddBox(2, 3);
             n2.Data = "n2";
 
             root.Padding = 1.0;
@@ -142,11 +142,11 @@ namespace TestVisioAutomation
             var root = layout.Root;
             root.Data = "Root";
             root.Direction = LayoutDirection.Horizonal;
-            var n1 = root.AddNode(1, 2);
+            var n1 = root.AddBox(1, 2);
             n1.Data = "n1";
 
             n1.AlignmentVertical = AlignmentVertical.Top;
-            var n2 = root.AddNode(2, 3);
+            var n2 = root.AddBox(2, 3);
             n2.Data = "n2";
 
             root.Padding = 1.0;
@@ -167,11 +167,11 @@ namespace TestVisioAutomation
 
             root.Data = "Root";
             root.Direction = LayoutDirection.Horizonal;
-            var n1 = root.AddNode(1, 2);
+            var n1 = root.AddBox(1, 2);
             n1.Data = "n1";
 
             n1.AlignmentVertical = AlignmentVertical.Top;
-            var n2 = root.AddNode(2, 3);
+            var n2 = root.AddBox(2, 3);
             n2.Data = "n2";
 
             root.Padding = 1.0;

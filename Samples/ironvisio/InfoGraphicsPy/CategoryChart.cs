@@ -134,12 +134,12 @@ namespace InfoGraphicsPy
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // Add indent
-            n_row.AddNode(Indent, 0.25);
+            n_row.AddBox(Indent, 0.25);
 
             // Add XCategory labels
             foreach (int col in Enumerable.Range(0, cols))
             {
-                var n_label = n_row.AddNode(CellWidth, 0.5);
+                var n_label = n_row.AddBox(CellWidth, 0.5);
                 var info = new RenderItem();
                 info.CategoryCell = null;
                 info.ShapeText = xcats[col];
@@ -154,11 +154,11 @@ namespace InfoGraphicsPy
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // -- add indent
-            n_row.AddNode(Indent, 0.25);
+            n_row.AddBox(Indent, 0.25);
 
             foreach (int col in Enumerable.Range(0, cols))
             {
-                var n_cell = n_row.AddNode(CellWidth, 0.25);
+                var n_cell = n_row.AddBox(CellWidth, 0.25);
 
                 // ---
                 n_cell.Direction = BL.LayoutDirection.Vertical;
@@ -171,7 +171,7 @@ namespace InfoGraphicsPy
                 }
             }
 
-            var n_row_label = root.AddNode(null, CategoryHeight);
+            var n_row_label = root.AddBox(null, CategoryHeight);
             var info = new RenderItem();
             info.CategoryCell = null;
             info.ShapeText = ycats[row];
@@ -194,7 +194,7 @@ namespace InfoGraphicsPy
 
         private void add_title(VA.Layout.BoxLayout.Node root)
         {
-            var n_title = root.AddNode(2.0, 0.5);
+            var n_title = root.AddBox(2.0, 0.5);
             var node_data = new RenderItem();
             node_data.CategoryCell = null;
             node_data.ShapeText = this.Title;
@@ -205,7 +205,7 @@ namespace InfoGraphicsPy
 
         private void draw_cell(CategoryCell cell_item, VA.Layout.BoxLayout.Node n_row_col)
         {
-            var n_cell = n_row_col.AddNode(CellWidth, CellHeight);
+            var n_cell = n_row_col.AddBox(CellWidth, CellHeight);
             n_cell.ChildSeparation = CellVerticalSeparation/2;
             
             var cell_data = new RenderItem();
@@ -218,14 +218,14 @@ namespace InfoGraphicsPy
             {
                 foreach (var sub_cat_items in cell_item.Item.Items)
                 {
-                    var subn_cell = n_cell.AddNode(CellWidth, CellHeight);
+                    var subn_cell = n_cell.AddBox(CellWidth, CellHeight);
                     var subcell_data = new RenderItem();
                     subcell_data.CategoryCell = null;
                     subcell_data.ShapeText = sub_cat_items.Text;
                     subcell_data.ShapeCells = subcellformat;
                     subn_cell.Data = subcell_data;
                 }
-                n_cell.AddNode(null, 0.25);
+                n_cell.AddBox(null, 0.25);
             }
         }
 
