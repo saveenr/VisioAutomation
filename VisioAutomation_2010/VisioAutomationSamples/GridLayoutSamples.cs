@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
-    public static class ColorSample
+    public static class GridLayoutSamples
     {
         public static void ColorGrid()
         {

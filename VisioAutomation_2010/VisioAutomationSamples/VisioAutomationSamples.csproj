@@ -94,7 +94,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoxLayoutShared.cs" />
-    <Compile Include="ColorSample.cs" />
+    <Compile Include="extensions.cs" />
+    <Compile Include="GridLayoutSamples.cs" />
     <Compile Include="ConnectorSamples.cs" />
     <Compile Include="BoxLayoutSamples.cs" />
     <Compile Include="ContiainerLayoutSamples.cs" />
