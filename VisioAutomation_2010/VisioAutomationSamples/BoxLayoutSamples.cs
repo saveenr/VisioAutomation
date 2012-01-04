@@ -25,26 +25,30 @@ namespace VisioAutomationSamples
             }
         }
 
-        private static BoxL.Node<NodeData> new_node()
+        private static BoxL.Node<object> new_node()
         {
             return new_node(null);
         }
 
-        public static BoxL.Node<NodeData> new_node(string s)
+        public static BoxL.Node<object> new_node(string s)
         {
-            var box = new BoxL.Node<NodeData>();
-            box.Data = new NodeData();
-            box.Data.Text = s;
+            var box = new BoxL.Node<object>();
+
+            var nd = new NodeData();
+            box.Data = nd;
+            nd.Text = s;
             return box;
         }
 
-        public static BoxL.Node<NodeData> new_node(double w, double h, string s)
+        public static BoxL.Node<object> new_node(double w, double h, string s)
         {
-            var box = new BoxL.Node<NodeData>();
+            var box = new BoxL.Node<object>();
             box.Width = w;
             box.Height = h;
-            box.Data = new NodeData();
-            box.Data.Text = s;
+
+            var node_data = new NodeData();
+            box.Data = node_data;
+            node_data.Text = s;
             return box;
         }
 
@@ -101,14 +105,16 @@ namespace VisioAutomationSamples
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var layout = new BoxL.BoxLayout<NodeData>();
+            var layout = new BoxL.BoxLayout<object>();
             layout.LayoutOptions.DirectionVertical = VA.Layout.BoxLayout.DirectionVertical.TopToBottom;
 
             var root = layout.Root;
             root.Direction = BoxL.LayoutDirection.Vertical;
             root.ChildSeparation = 0.5;
-            root.Data = new NodeData();
-            root.Data.Render = false;
+
+            var nodedata = new NodeData();
+            nodedata.Render = false;
+            root.Data = nodedata;
 
             var fontname_cells = new VA.DOM.ShapeCells();
             fontname_cells.FillPattern = 0;
@@ -128,13 +134,16 @@ namespace VisioAutomationSamples
             foreach (string fontname in fontnames)
             {
                 var fontname_box = new_node(5, 0.5, fontname);
-                fontname_box.Data.Cells = fontname_cells;
+                var fontname_box_data = (NodeData) fontname_box.Data;
+                fontname_box_data.Cells = fontname_cells;
                 root.AddNode(fontname_box);
 
                 var font_box = new_node();
                 font_box.Direction = BoxL.LayoutDirection.Vertical;
                 font_box.ChildSeparation = 0.25;
-                font_box.Data.Render = false;
+
+                var font_vox_data = (NodeData) font_box.Data;
+                font_vox_data.Render = false;
                 root.AddNode(font_box);
 
                 int numcols = 17;
@@ -147,7 +156,9 @@ namespace VisioAutomationSamples
                     var row_box = new_node();
                     row_box.Direction = BoxL.LayoutDirection.Horizonal;
                     row_box.ChildSeparation = 0.25;
-                    row_box.Data.Render = false;
+
+                    var row_box_data = (NodeData) row_box.Data;
+                    row_box_data.Render = false;
                     font_box.AddNode(row_box);
 
                     foreach (int col in Enumerable.Range(0, numcols))
@@ -156,8 +167,10 @@ namespace VisioAutomationSamples
                         string curchar = samplechars[charindex];
 
                         var cell_box = new_node(0.50, 0.50, curchar);
-                        cell_box.Data.Font = fontname;
-                        cell_box.Data.Cells = charbox_cells;
+
+                        var cell_box_data = (NodeData) cell_box.Data;
+                        cell_box_data.Font = fontname;
+                        cell_box_data.Cells = charbox_cells;
                         row_box.AddNode(cell_box);
                     }
                 }
@@ -167,30 +180,37 @@ namespace VisioAutomationSamples
 
             var page = doc.Pages.Add();
 
-            var nodes = layout.Nodes.Where(n => n.Data.Render).ToList();
             var dom = new VA.DOM.Document();
             dom.ResolveVisioShapeObjects = true;
 
-            foreach (var node in nodes)
+            foreach (var node in layout.Nodes)
             {
+                var node_data = (NodeData)node.Data;
+
+                if (node_data.Render == false)
+                {
+                    continue;
+                }
+
                 var dom_shape = dom.Drop("Rectangle", "basic_u.vss", node.Rectangle);
-                var cells = node.Data.Cells;
+       
+                var cells = node_data.Cells;
                 if (cells == null)
                 {
                     cells = new VA.DOM.ShapeCells();
                 }
                 else
                 {
-                    cells = node.Data.Cells.ShallowCopy();
+                    cells = node_data.Cells.ShallowCopy();
                 }
 
-                if (node.Data.Font != null)
+                if (node_data.Font != null)
                 {
-                    dom_shape.CharFontName = node.Data.Font;
+                    dom_shape.CharFontName = node_data.Font;
                 }
 
                 dom_shape.ShapeCells = cells;
-                dom_shape.Text = node.Data.Text;
+                dom_shape.Text = node_data.Text;
             }
 
             dom.Render(page);
