@@ -94,6 +94,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoxLayoutShared.cs" />
+    <Compile Include="LinqUtil.cs" />
+    <Compile Include="TreeLayoutSamples.cs" />
     <Compile Include="extensions.cs" />
     <Compile Include="GridLayoutSamples.cs" />
     <Compile Include="ConnectorSamples.cs" />
