@@ -17,7 +17,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_empty()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout();
             Assert.IsNotNull(layout.Root);
 
             bool thrown = false;
@@ -40,7 +40,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_single_node()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
             var n1 = root.AddNode(10, 5);
             layout.PerformLayout();
@@ -54,7 +54,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_single_node_padding()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
             var n1 = root.AddNode(10, 5);
 
@@ -69,7 +69,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_1()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
             root.Data = "Root";
             var n1 = root.AddNode(1, 2);
@@ -89,7 +89,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_2()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
             root.Data = "Root";
             var n1 = root.AddNode(1, 2);
@@ -111,14 +111,14 @@ namespace TestVisioAutomation
 
         }
 
-        private IVisio.Document draw_layout(BoxLayout<object> layout)
+        private IVisio.Document draw_layout(BoxLayout layout)
         {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page = app.ActivePage;
             var dom = new VA.DOM.Document();
 
-            var list = new List<VA.Layout.BoxLayout.Node<object>>();
+            var list = new List<VA.Layout.BoxLayout.Node>();
             list.Add(layout.Root);
             list.AddRange(layout.Nodes);
             foreach (var node in list)
@@ -138,7 +138,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_3()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout();
             var root = layout.Root;
             root.Data = "Root";
             root.Direction = LayoutDirection.Horizonal;
@@ -161,7 +161,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Test_two_nodes_4()
         {
-            var layout = new VA.Layout.BoxLayout.BoxLayout<object>();
+            var layout = new VA.Layout.BoxLayout.BoxLayout();
             layout.LayoutOptions.DirectionHorizontal = DirectionHorizontal.RightToLeft;
             var root = layout.Root;
 

@@ -3,17 +3,17 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Layout.BoxLayout
 {
-    public class Node<T>
+    public class Node
     {
-        private List<Node<T>> m_children;
-        internal Node<T> parent;
+        private List<Node> m_children;
+        internal Node parent;
 
         public double? Width { get; set; }
         public double? Height { get; set; }
         public double Padding { get; set; }
         public double ChildSeparation { get; set; }
 
-        public T Data { get; set; }
+        public object Data { get; set; }
         public VA.Drawing.Rectangle Rectangle { get; set; }
         public LayoutDirection Direction;
         public VA.Drawing.AlignmentHorizontal AlignmentHorizontal { get; set; }
@@ -30,12 +30,12 @@ namespace VisioAutomation.Layout.BoxLayout
             this.m_children = null;
         }
 
-        public Node<T> Parent
+        public Node Parent
         {
             get { return this.parent; }
         }
 
-        public IEnumerable<Node<T>> Children
+        public IEnumerable<Node> Children
         {
             get
             {
@@ -53,9 +53,9 @@ namespace VisioAutomation.Layout.BoxLayout
             }
         }
 
-        public Node<T> AddNode(double? width, double? height)
+        public Node AddNode(double? width, double? height)
         {
-            var node = new Node<T>();
+            var node = new Node();
             node.Width = width;
             node.Height = height;
 
@@ -64,9 +64,9 @@ namespace VisioAutomation.Layout.BoxLayout
             return node;
         }
 
-        public Node<T> AddNode(double? width, double? height, VA.Drawing.AlignmentHorizontal halign)
+        public Node AddNode(double? width, double? height, VA.Drawing.AlignmentHorizontal halign)
         {
-            var node = new Node<T>();
+            var node = new Node();
             node.Width = width;
             node.Height = height;
             node.AlignmentHorizontal = halign;
@@ -76,9 +76,9 @@ namespace VisioAutomation.Layout.BoxLayout
             return node;
         }
 
-        public Node<T> AddNode(double? width, double? height, VA.Drawing.AlignmentVertical valign)
+        public Node AddNode(double? width, double? height, VA.Drawing.AlignmentVertical valign)
         {
-            var node = new Node<T>();
+            var node = new Node();
             node.Width = width;
             node.Height = height;
             node.AlignmentVertical = valign;
@@ -88,7 +88,7 @@ namespace VisioAutomation.Layout.BoxLayout
             return node;
         }
 
-        public Node<T> AddNode(Node<T> node)
+        public Node AddNode(Node node)
         {
             if (node == null)
             {
@@ -107,7 +107,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
             if (this.m_children == null)
             {
-                this.m_children = new List<Node<T>>();
+                this.m_children = new List<Node>();
             }
             this.m_children.Add(node);
             node.parent = this;
@@ -115,9 +115,9 @@ namespace VisioAutomation.Layout.BoxLayout
             return node;
         }
 
-        public Node<T> AddNode(LayoutDirection dir)
+        public Node AddNode(LayoutDirection dir)
         {
-            var node = new Node<T>();
+            var node = new Node();
             node.Direction = dir;
 
             return this.AddNode(node);

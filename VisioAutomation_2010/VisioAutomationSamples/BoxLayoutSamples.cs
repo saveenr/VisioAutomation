@@ -25,14 +25,14 @@ namespace VisioAutomationSamples
             }
         }
 
-        private static BoxL.Node<object> new_node()
+        private static BoxL.Node new_node()
         {
             return new_node(null);
         }
 
-        public static BoxL.Node<object> new_node(string s)
+        public static BoxL.Node new_node(string s)
         {
-            var box = new BoxL.Node<object>();
+            var box = new BoxL.Node();
 
             var nd = new NodeData();
             box.Data = nd;
@@ -40,9 +40,9 @@ namespace VisioAutomationSamples
             return box;
         }
 
-        public static BoxL.Node<object> new_node(double w, double h, string s)
+        public static BoxL.Node new_node(double w, double h, string s)
         {
-            var box = new BoxL.Node<object>();
+            var box = new BoxL.Node();
             box.Width = w;
             box.Height = h;
 
@@ -105,7 +105,7 @@ namespace VisioAutomationSamples
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var layout = new BoxL.BoxLayout<object>();
+            var layout = new BoxL.BoxLayout();
             layout.LayoutOptions.DirectionVertical = VA.Layout.BoxLayout.DirectionVertical.TopToBottom;
 
             var root = layout.Root;

@@ -4,11 +4,11 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Layout.BoxLayout
 {
-    public class BoxLayout<T>
+    public class BoxLayout
     {
         public LayoutOptions LayoutOptions;
 
-        private Node<T> _root;
+        private Node _root;
 
         public BoxLayout() :
             this(LayoutDirection.Vertical)
@@ -18,10 +18,10 @@ namespace VisioAutomation.Layout.BoxLayout
         public BoxLayout(LayoutDirection dir)
         {
             this.LayoutOptions = new LayoutOptions(); 
-            this._root = new Node<T>(dir);
+            this._root = new Node(dir);
         }
 
-        public Node<T> Root
+        public Node Root
         {
             get { return _root; }
             set { _root = value; }
@@ -45,7 +45,7 @@ namespace VisioAutomation.Layout.BoxLayout
             _CalculateSizeNode(_root);
         }
 
-        private void _CalculateSizeNode(Node<T> node)
+        private void _CalculateSizeNode(Node node)
         {
             //calculate the size of the children
             foreach (var child_el in node.Children)
@@ -100,7 +100,7 @@ namespace VisioAutomation.Layout.BoxLayout
             _PlaceNode(_root, origin);
         }
 
-        private void _PlaceNode(Node<T> node, VA.Drawing.Point origin)
+        private void _PlaceNode(Node node, VA.Drawing.Point origin)
         {
             if (node == null)
             {
@@ -182,7 +182,7 @@ namespace VisioAutomation.Layout.BoxLayout
             }
         }
 
-        private static Size GetReservedSizeForChild(Node<T> node, double pad_y, double pad_x, Node<T> child_node)
+        private static Size GetReservedSizeForChild(Node node, double pad_y, double pad_x, Node child_node)
         {
             var reserved_width = node.Direction == LayoutDirection.Vertical ? node.Width.Value - 2*pad_x : child_node.Width.Value;
             var reserved_height = node.Direction == LayoutDirection.Horizonal ? node.Height.Value - 2*pad_y : child_node.Height.Value;
@@ -190,7 +190,7 @@ namespace VisioAutomation.Layout.BoxLayout
             return reserved_size;
         }
 
-        public IEnumerable<Node<T>> Nodes
+        public IEnumerable<Node> Nodes
         {
             get { return VA.Internal.TreeTraversal.PreOrder(this.Root, n => n.Children); }
         }

@@ -112,7 +112,7 @@ namespace InfoGraphicsPy
             int cols = xcats.Count();
             int rows = ycats.Count();
 
-            Node<object> root;
+            VA.Layout.BoxLayout.Node root;
             var layout = create_layout(out root);
 
             foreach (int row in Enumerable.Range(0, rows))
@@ -128,7 +128,7 @@ namespace InfoGraphicsPy
             Render(page, layout);
         }
 
-        private void AddXCatLabels(List<string> xcats, int cols, Node<object> root)
+        private void AddXCatLabels(List<string> xcats, int cols, VA.Layout.BoxLayout.Node root)
         {
             var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
             n_row.ChildSeparation = CellHorizontalSeparation;
@@ -148,7 +148,7 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void AddMajorRow(List<string> ycats, int row, Node<object> root, List<string> xcats, int cols)
+        private void AddMajorRow(List<string> ycats, int row, VA.Layout.BoxLayout.Node root, List<string> xcats, int cols)
         {
             var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
             n_row.ChildSeparation = CellHorizontalSeparation;
@@ -181,9 +181,9 @@ namespace InfoGraphicsPy
             n_row_label.Data = info;
         }
 
-        private BoxLayout<object> create_layout(out Node<object> root)
+        private BoxLayout create_layout(out VA.Layout.BoxLayout.Node root)
         {
-            var layout = new BL.BoxLayout<object>();
+            var layout = new BL.BoxLayout();
             layout.LayoutOptions.Origin = new VA.Drawing.Point(0, 10);
             layout.LayoutOptions.DefaultHeight = 0.25;
             root = layout.Root;
@@ -192,7 +192,7 @@ namespace InfoGraphicsPy
             return layout;
         }
 
-        private void add_title(Node<object> root)
+        private void add_title(VA.Layout.BoxLayout.Node root)
         {
             var n_title = root.AddNode(2.0, 0.5);
             var node_data = new RenderItem();
@@ -203,7 +203,7 @@ namespace InfoGraphicsPy
             n_title.Data = node_data;
         }
 
-        private void draw_cell(CategoryCell cell_item, Node<object> n_row_col)
+        private void draw_cell(CategoryCell cell_item, VA.Layout.BoxLayout.Node n_row_col)
         {
             var n_cell = n_row_col.AddNode(CellWidth, CellHeight);
             n_cell.ChildSeparation = CellVerticalSeparation/2;
@@ -229,7 +229,7 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void Render(Page page, BoxLayout<object> layout)
+        private void Render(Page page, BoxLayout layout)
         {
             layout.PerformLayout();
             var doc = page.Document;
