@@ -78,7 +78,7 @@ namespace VisioAutomationSamples
             }
 
             var src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
-            var root_shape = layout.Root.Data;
+            var root_shape = (IVisio.Shape) layout.Root.Data;
             var cell_linepat = root_shape.GetCell(src_linepat);
             cell_linepat.FormulaU = "7";
 

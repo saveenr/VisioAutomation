@@ -8,7 +8,7 @@ namespace VisioAutomationSamples
     public class BoxLayoutShared
     {
         public static void DrawNode(
-            BH.Node<IVisio.Shape> node,
+            BH.Node<object> node,
             VA.Drawing.Rectangle rect, IVisio.Page page)
         {
             var src_fillfg = VA.ShapeSheet.SRCConstants.FillForegnd;
@@ -28,12 +28,12 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static BH.BoxLayout<IVisio.Shape>
+        public static BH.BoxLayout<object>
             CreateSampleLayout()
         {
             // Create a new layout
             var layout =
-                new BH.BoxLayout<IVisio.Shape>(
+                new BH.BoxLayout<object>(
                     BH.LayoutDirection.Vertical);
 
             // Add the nodes and specify their sizes and in what direction to draw them
