@@ -112,7 +112,7 @@ namespace InfoGraphicsPy
             int cols = xcats.Count();
             int rows = ycats.Count();
 
-            Node<RenderItem> root;
+            Node<object> root;
             var layout = create_layout(out root);
 
             foreach (int row in Enumerable.Range(0, rows))
@@ -128,7 +128,7 @@ namespace InfoGraphicsPy
             Render(page, layout);
         }
 
-        private void AddXCatLabels(List<string> xcats, int cols, Node<RenderItem> root)
+        private void AddXCatLabels(List<string> xcats, int cols, Node<object> root)
         {
             var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
             n_row.ChildSeparation = CellHorizontalSeparation;
@@ -148,7 +148,7 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void AddMajorRow(List<string> ycats, int row, Node<RenderItem> root, List<string> xcats, int cols)
+        private void AddMajorRow(List<string> ycats, int row, Node<object> root, List<string> xcats, int cols)
         {
             var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
             n_row.ChildSeparation = CellHorizontalSeparation;
@@ -181,9 +181,9 @@ namespace InfoGraphicsPy
             n_row_label.Data = info;
         }
 
-        private BoxLayout<RenderItem> create_layout(out Node<RenderItem> root)
+        private BoxLayout<object> create_layout(out Node<object> root)
         {
-            var layout = new BL.BoxLayout<RenderItem>();
+            var layout = new BL.BoxLayout<object>();
             layout.LayoutOptions.Origin = new VA.Drawing.Point(0, 10);
             layout.LayoutOptions.DefaultHeight = 0.25;
             root = layout.Root;
@@ -192,7 +192,7 @@ namespace InfoGraphicsPy
             return layout;
         }
 
-        private void add_title(Node<RenderItem> root)
+        private void add_title(Node<object> root)
         {
             var n_title = root.AddNode(2.0, 0.5);
             var node_data = new RenderItem();
@@ -203,7 +203,7 @@ namespace InfoGraphicsPy
             n_title.Data = node_data;
         }
 
-        private void draw_cell(CategoryCell cell_item, Node<RenderItem> n_row_col)
+        private void draw_cell(CategoryCell cell_item, Node<object> n_row_col)
         {
             var n_cell = n_row_col.AddNode(CellWidth, CellHeight);
             n_cell.ChildSeparation = CellVerticalSeparation/2;
@@ -229,7 +229,7 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void Render(Page page, BoxLayout<RenderItem> layout)
+        private void Render(Page page, BoxLayout<object> layout)
         {
             layout.PerformLayout();
             var doc = page.Document;
@@ -243,8 +243,8 @@ namespace InfoGraphicsPy
                 if (n.Data != null)
                 {
                     var r = n.Rectangle;
-
-                    if (n.Data.FitWidthToParent == true)
+                    var n_data = (RenderItem) n.Data;
+                    if (n_data.FitWidthToParent == true)
                     {
                        r = new VA.Drawing.Rectangle(r.LowerLeft, new VA.Drawing.Size(n.Parent.Width.Value-2*n.Padding,r.Height));
                     }
@@ -252,24 +252,24 @@ namespace InfoGraphicsPy
                     var s = dom.DrawRectangle(r);
 
                     // Set Text
-                    if (n.Data.ShapeText != null)
+                    if (n_data.ShapeText != null)
                     {
-                        s.Text = this.ToUpper ? n.Data.ShapeText.ToUpper() : n.Data.ShapeText;
+                        s.Text = this.ToUpper ? n_data.ShapeText.ToUpper() : n_data.ShapeText;
                     }
 
                     // Set Cells
-                    if (n.Data.ShapeCells != null)
+                    if (n_data.ShapeCells != null)
                     {
-                        s.ShapeCells = n.Data.ShapeCells;
+                        s.ShapeCells = n_data.ShapeCells;
                     }
 
                     // draw Underline
-                    if (n.Data.Underline)
+                    if (n_data.Underline)
                     {
                         var u = dom.DrawLine(r.LowerLeft, r.LowerRight);
                     }
 
-                    n.Data.ShapeCells.CharFont = default_font_id;
+                    n_data.ShapeCells.CharFont = default_font_id;
                 }
             }
             dom.Render(page);
