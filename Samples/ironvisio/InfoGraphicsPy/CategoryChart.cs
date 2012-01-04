@@ -130,7 +130,7 @@ namespace InfoGraphicsPy
 
         private void AddXCatLabels(List<string> xcats, int cols, VA.Layout.BoxLayout.Node root)
         {
-            var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
+            var n_row = root.AddRow();
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // Add indent
@@ -150,7 +150,7 @@ namespace InfoGraphicsPy
 
         private void AddMajorRow(List<string> ycats, int row, VA.Layout.BoxLayout.Node root, List<string> xcats, int cols)
         {
-            var n_row = root.AddNode(BL.LayoutDirection.Horizonal);
+            var n_row = root.AddRow();
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // -- add indent

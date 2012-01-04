@@ -64,24 +64,34 @@ namespace VisioAutomation.Layout.BoxLayout
             return node;
         }
 
-        public Node AddNode(double? width, double? height, VA.Drawing.AlignmentHorizontal halign)
+        public Node AddRow()
+        {
+            return this.AddNode(LayoutDirection.Horizonal);
+        }
+
+        public Node AddRow(double? width, double? height, VA.Drawing.AlignmentVertical valign)
         {
             var node = new Node();
             node.Width = width;
             node.Height = height;
-            node.AlignmentHorizontal = halign;
+            node.AlignmentVertical = valign;
 
             this.AddNode(node);
 
             return node;
         }
 
-        public Node AddNode(double? width, double? height, VA.Drawing.AlignmentVertical valign)
+        public Node AddColumn()
+        {
+            return this.AddNode(LayoutDirection.Vertical);
+        }
+
+        public Node AddColumn(double? width, double? height, VA.Drawing.AlignmentHorizontal halign)
         {
             var node = new Node();
             node.Width = width;
             node.Height = height;
-            node.AlignmentVertical = valign;
+            node.AlignmentHorizontal = halign;
 
             this.AddNode(node);
 
@@ -115,7 +125,7 @@ namespace VisioAutomation.Layout.BoxLayout
             return node;
         }
 
-        public Node AddNode(LayoutDirection dir)
+        private Node AddNode(LayoutDirection dir)
         {
             var node = new Node();
             node.Direction = dir;
