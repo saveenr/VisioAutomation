@@ -27,6 +27,27 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void Markup2()
+        {
+            // Validate that setting text with no values works
+            var el0 = new VA.Text.Markup.TextElement("HELLO");
+            el0.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff,0,0);
+
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 4);
+            el0.SetText(s1);
+
+            var fmts = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(1, fmts.CharacterFormats.Count);
+            Assert.AreEqual(1, fmts.ParagraphFormats.Count);
+
+            Assert.AreEqual("RGB(255,0,0)", fmts.CharacterFormats[0].Color.Formula);
+
+            page1.Delete(0);
+        }
+
+
+        [TestMethod]
         public void ValidateFormattingRegions()
         {
             // Check that the formatting regions are correctly
