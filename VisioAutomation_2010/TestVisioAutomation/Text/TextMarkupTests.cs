@@ -168,6 +168,10 @@ namespace TestVisioAutomation
         public void Style_inheritance()
         {
             // Validate that sub elements inherit the formatting of parent elements
+            var page1 = GetNewPage();
+            var courier = page1.Document.Fonts["Courier New"];
+            var impact = page1.Document.Fonts["Impact"];
+
 
             var el0 = new VA.Text.Markup.TextElement();
             var el1 = el0.AppendElement("HELLO");
@@ -176,10 +180,10 @@ namespace TestVisioAutomation
             el0.CharacterFormat.FontSize = 14;
             el0.CharacterFormat.FontSize = 7;
             
-            el1.CharacterFormat.Font = "Impact";
+            el1.CharacterFormat.Font = impact.Name;
             el1.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
             
-            el2.CharacterFormat.Font = "Courier New";
+            el2.CharacterFormat.Font = courier.Name;
             el2.CharacterFormat.FontSize = 20;
             el2.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
 
@@ -200,7 +204,6 @@ namespace TestVisioAutomation
             Assert.AreEqual(el1, regions[1].Element);
             Assert.AreEqual(el2, regions[2].Element);
 
-            var page1 = GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 

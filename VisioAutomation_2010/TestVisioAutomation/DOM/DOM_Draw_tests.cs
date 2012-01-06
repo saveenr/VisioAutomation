@@ -170,9 +170,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Markup_Simple_Font()
         {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.CharacterFormat.Font = "Impact";
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
+
+            var impact = page1.Document.Fonts["Impact"];
+            var m = new VA.Text.Markup.TextElement("Normal Text");
+            m.CharacterFormat.Font = impact.Name;
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
             page1.Delete(0);
@@ -181,10 +183,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Render_Markup_Simple_Font_Multiple()
         {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.CharacterFormat.Font = "Impact";
-            m.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
+            var impact = page1.Document.Fonts["Impact"];
+            var m = new VA.Text.Markup.TextElement("Normal Text");
+            m.CharacterFormat.Font = impact.Name;
+            m.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
             page1.Delete(0);
@@ -193,8 +196,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Markup_Overlap_Multiple()
         {
+            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
+            var segoeui = page1.Document.Fonts["Segoe UI"];
+
             var t1 = new VA.Text.Markup.TextElement("Normal Text");
-            t1.CharacterFormat.Font = "Segoe UI";
+            t1.CharacterFormat.Font = segoeui.Name;
             var t2 = t1.AppendElement("Italic");
             t2.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
 
@@ -204,7 +210,6 @@ namespace TestVisioAutomation
             var t4 = t2.AppendElement("Bold Italic");
             t4.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
 
-            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             t1.SetText(s0);
             //page1.Delete(0);
