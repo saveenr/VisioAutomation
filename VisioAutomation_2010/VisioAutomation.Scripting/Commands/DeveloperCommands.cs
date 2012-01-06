@@ -250,7 +250,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
 
                 var node = new VA.Layout.Tree.Node(ns);
-                node.Text = label;
+                node.TextElement = new VA.Text.Markup.TextElement(label);
                 node.Size = new VA.Drawing.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }

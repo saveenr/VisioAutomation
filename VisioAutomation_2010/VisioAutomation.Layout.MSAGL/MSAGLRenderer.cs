@@ -351,7 +351,7 @@ namespace VisioAutomation.Layout.MSAGL
                 vdoc.Shapes.Add(vshape);
 
                 vshape.ShapeCells = DefaultBezierConnectorShapeCells.ShallowCopy();
-                vshape.Text = i.layout_connector.Label;
+                vshape.TextElement = new VA.Text.Markup.TextElement(i.layout_connector.Label);
 
             }
         }
@@ -379,7 +379,7 @@ namespace VisioAutomation.Layout.MSAGL
                 int con_route_style = (int)  ConnectorTypeToCellVal_Appearance(i.layout_connector.ConnectorType);
                 int shape_route_style = (int) ConnectorTypeToCellVal_Style(i.layout_connector.ConnectorType);
 
-                i.vconnector.Text = i.layout_connector.Label;
+                i.vconnector.TextElement = new VA.Text.Markup.TextElement(i.layout_connector.Label);
 
                 i.vconnector.ShapeCells = i.layout_connector.ShapeCells != null ? 
                     i.layout_connector.ShapeCells.ShallowCopy()
@@ -398,7 +398,7 @@ namespace VisioAutomation.Layout.MSAGL
             // SET TEXT
             if (!string.IsNullOrEmpty(layout_shape.Label))
             {
-                dom_shape.Text = handle_multiline_labels(layout_shape.Label);
+                dom_shape.TextElement = new VA.Text.Markup.TextElement( handle_multiline_labels(layout_shape.Label) ) ;
             }
 
             // SET SIZE

@@ -135,7 +135,7 @@ namespace VisioAutomation.Layout.OrgChart
             {
                 var orgnode = (Node) treenodes[i].Data;
                 var shape = (VA.DOM.Shape)orgnode.DOMNode;
-                shape.Text = orgnode.Text;
+                shape.TextElement = new VA.Text.Markup.TextElement(orgnode.Text);
             }
 
             var page = doc.Pages.Add();

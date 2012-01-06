@@ -66,7 +66,7 @@ namespace TestVisioAutomation
             var vdoc = new VA.DOM.Document();
             vdoc.PageSettings.Size = new VA.Drawing.Size(10,10);
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
-            vrect1.Text = "HELLO WORLD";
+            vrect1.TextElement = new VA.Text.Markup.TextElement("HELLO WORLD");
             vrect1.ShapeCells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
             vdoc.Shapes.Add(vrect1);
 
@@ -110,7 +110,7 @@ namespace TestVisioAutomation
             // Create the doc
             var vdoc = new VA.DOM.Document();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
-            vrect1.Text = "HELLO WORLD";
+            vrect1.TextElement = new VA.Text.Markup.TextElement("HELLO WORLD");
 
             var cp1 = vrect1.SetCustomProperty("FOO", "FOOVALUE");
             cp1.Label = "Foo Label";

@@ -115,24 +115,11 @@ namespace VisioAutomation.DOM
 
             // ----------------------------------------
             // set the shape text
-            var shapes_with_text = this.Shapes.Where(s => s.Text != null);
+            var shapes_with_text = this.Shapes.Where(s => s.TextElement!= null);
             foreach (var shape in shapes_with_text)
             {
                 var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
-                vshape.Text = shape.Text;
-
-                if (shape.TextElement != null)
-                {
-                    shape.TextElement.SetText(shape.VisioShape);
-                }
-                else if (shape.Text != null)
-                {
-                    vshape.Text = shape.Text;
-                }
-                else
-                {
-                    // do nothing there is no text
-                }
+                shape.TextElement.SetText(shape.VisioShape);
 
                 if (shape.TabStops != null)
                 {

@@ -158,7 +158,7 @@ namespace VisioAutomation.Layout.Grid
 
                 if (!string.IsNullOrEmpty(node.Text))
                 {
-                    dom_shape.Text = node.Text;
+                    dom_shape.TextElement = new VA.Text.Markup.TextElement( node.Text );
                 }
 
                 dom_shapes.Add(dom_shape);

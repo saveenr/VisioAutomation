@@ -18,7 +18,6 @@ namespace VisioAutomation.Layout.Tree
             get { return _children; }
         }
 
-        public string Text { get; set; }
         public VA.Text.Markup.TextElement TextElement { get; set;}
         public IVisio.Shape VisioShape { get; set; }
         public VA.DOM.Node DOMNode { get; set; }
@@ -33,7 +32,7 @@ namespace VisioAutomation.Layout.Tree
         public Node(string name)
             : this()
         {
-            this.Text = name;
+            this.TextElement = new VA.Text.Markup.TextElement(name);
         }
     }
 }
