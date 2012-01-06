@@ -46,56 +46,6 @@ namespace VisioAutomation.Text
             get { return _tabStops; }
         }
 
-        internal static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, short cell, int value, int begin,
-                                                         int end)
-        {
-            var chars = shape.Characters;
-            chars.Begin = begin;
-            chars.End = end;
-            chars.ParaProps[cell] = (short)value;
-            return chars;
-        }
-
-        internal enum rangetype
-        {
-            Paragraph,
-            Character
-        }
-
-        internal static void SetRangeProps<T>(IVisio.Shape shape, VA.ShapeSheet.CellData<T> f,
-                                              IVisio.VisCellIndices cell, int value, int begin, int end,
-                                              ref short rownum, ref IVisio.Characters chars, rangetype rt)
-        {
-            if (f.Formula.HasValue)
-            {
-                var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
-                chars = shape.Characters;
-                chars.Begin = begin;
-                chars.End = end;
-
-                if (rt == rangetype.Character)
-                {
-                    chars.CharProps[(short)cell] = (short)value;
-                    rownum = chars.CharPropsRow[(short)default_chars_bias];
-                }
-                else if (rt == rangetype.Paragraph)
-                {
-                    chars.ParaProps[(short)cell] = (short)value;
-                    rownum = chars.ParaPropsRow[(short)default_chars_bias];
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("rangetype");
-                }
-
-                if (rownum < 0)
-                {
-                    throw new VA.AutomationException("Failed to set CharPropsRow");
-                }
-            }
-        }
-
-
         private static IList<TextRun> GetTextRuns(
             IVisio.Shape shape,
             IVisio.VisRunTypes runtype,
