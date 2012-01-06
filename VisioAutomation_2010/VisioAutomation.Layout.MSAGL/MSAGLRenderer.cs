@@ -145,7 +145,6 @@ namespace VisioAutomation.Layout.MSAGL
             // Create A DOM and render it to the page
             var app = page.Application;
             var dom_doc = CreateDOMDocument(layout_diagram, app);
-            dom_doc.ResolveVisioShapeObjects = true;
 
             using (var speed = new VA.FastRenderingScope(app))
             {

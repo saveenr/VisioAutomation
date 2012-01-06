@@ -76,11 +76,11 @@ namespace TestVisioAutomation
 
             Assert.AreEqual(2, page.Shapes.Count);
 
-            // Unless overriden, Dropped masters don't have their shapes collected, only their shapeids
+            // Verify that the shapes created both have IDs and shape objects associated with them
             Assert.AreNotEqual(0, dom_master_0.VisioShapeID);
             Assert.AreNotEqual(0, dom_master_1.VisioShapeID);
-            Assert.IsNull(dom_master_0.VisioShape);
-            Assert.IsNull(dom_master_1.VisioShape);
+            Assert.IsNotNull(dom_master_0.VisioShape);
+            Assert.IsNotNull(dom_master_1.VisioShape);
             page.Delete(0);
         }
 

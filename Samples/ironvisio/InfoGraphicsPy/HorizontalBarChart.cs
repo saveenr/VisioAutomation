@@ -29,7 +29,6 @@ namespace InfoGraphicsPy
             var content_rects = this.SkipOdd(grid.GetRectsInCol(barcol)).ToList();
 
             var dom = new VA.DOM.Document();
-            dom.ResolveVisioShapeObjects = true;
 
             var bar_rects = new List<VA.Drawing.Rectangle>(content_rects.Count);
             for (int i = 0; i < content_rects.Count; i++)

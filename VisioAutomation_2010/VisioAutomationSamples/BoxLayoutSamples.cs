@@ -157,7 +157,6 @@ namespace VisioAutomationSamples
             var page = doc.Pages.Add();
 
             var dom = new VA.DOM.Document();
-            dom.ResolveVisioShapeObjects = true;
 
             foreach (var node in layout.Nodes)
             {

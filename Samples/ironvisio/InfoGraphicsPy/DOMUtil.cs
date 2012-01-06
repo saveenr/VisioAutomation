@@ -51,7 +51,6 @@ namespace InfoGraphicsPy
                 dom_shapes.Add(dom_shape);
             }
 
-            dom.ResolveVisioShapeObjects = true;
             dom.Render(page);
 
             var shapes = new List<IVisio.Shape>();

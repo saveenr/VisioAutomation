@@ -89,15 +89,12 @@ namespace VisioAutomation.DOM
             // Draw Connectors
             _draw_dynamic_connectors(ctx);
 
-            // If needed get all shape objects
-            if (this.ResolveVisioShapeObjects)
+            // Get all the shape objects
+            foreach (var shape in this.Shapes)
             {
-                foreach (var shape in this.Shapes)
+                if (shape.VisioShape == null)
                 {
-                    if (shape.VisioShape == null)
-                    {
-                        shape.VisioShape = ctx.GetShapeObjectForID(shape.VisioShapeID);
-                    }
+                    shape.VisioShape = ctx.GetShapeObjectForID(shape.VisioShapeID);
                 }
             }
 

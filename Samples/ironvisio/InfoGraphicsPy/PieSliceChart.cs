@@ -32,7 +32,6 @@ namespace InfoGraphicsPy
             var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
 
             var dom = new VA.DOM.Document();
-            dom.ResolveVisioShapeObjects = true;
             var circle_shapes = new List<VA.DOM.Oval>();
             var slice_shapes = new List<VA.DOM.PieSlice>();
             for (int i = 0; i < DataPoints.Count; i++)

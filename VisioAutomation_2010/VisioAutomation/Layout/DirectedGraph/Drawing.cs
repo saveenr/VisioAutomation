@@ -158,7 +158,6 @@ namespace VisioAutomation.Layout.DirectedGraph
                 connector.DOMNode.TextElement = new VA.Text.Markup.TextElement( connector.Label );
             }
 
-            dom.ResolveVisioShapeObjects = true;
             dom.Render(page);
 
             page.ResizeToFitContents(0.5,0.5);

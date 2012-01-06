@@ -74,7 +74,6 @@ namespace VisioAutomation.Layout.Tree
             var connector_master = masters[dc_name];
 
             var dom_doc = new VA.DOM.Document();
-            dom_doc.ResolveVisioShapeObjects = true;
 
             var page_size = bb.Size.Add(border_width*2, border_width*2.0);
 

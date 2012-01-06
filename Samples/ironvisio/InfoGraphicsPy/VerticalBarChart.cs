@@ -40,7 +40,6 @@ namespace InfoGraphicsPy
             var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
 
             var dom = new VA.DOM.Document();
-            dom.ResolveVisioShapeObjects = true;
             var bar_shapes = DOMUtil.DrawRects(dom, bar_rects, session.MasterRectangle);
             var cat_shapes = DOMUtil.DrawRects(dom, cat_rects, session.MasterRectangle);
 
