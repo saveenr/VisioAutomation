@@ -275,11 +275,11 @@ namespace VisioAutomation.Text.Markup
                 fmt.Color = region.Element.CharacterFormat.Color.Value.ToFormula();
             }
 
-            if (region.Element.CharacterFormat.Font!=null)
+            if (region.Element.CharacterFormat.FontID!=null)
             {
                 var doc = shape.Document;
                 var fonts = doc.Fonts;
-                var font = fonts[region.Element.CharacterFormat.Font];
+                var font = fonts[region.Element.CharacterFormat.FontID];
                 fmt.Font = font.ID;
             }
 

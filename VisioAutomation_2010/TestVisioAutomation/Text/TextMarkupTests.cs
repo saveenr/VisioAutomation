@@ -180,10 +180,10 @@ namespace TestVisioAutomation
             el0.CharacterFormat.FontSize = 14;
             el0.CharacterFormat.FontSize = 7;
             
-            el1.CharacterFormat.Font = impact.Name;
+            el1.CharacterFormat.FontID = impact.ID;
             el1.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
             
-            el2.CharacterFormat.Font = courier.Name;
+            el2.CharacterFormat.FontID = courier.ID;
             el2.CharacterFormat.FontSize = 20;
             el2.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
 

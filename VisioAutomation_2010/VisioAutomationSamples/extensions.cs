@@ -7,14 +7,14 @@ namespace VisioAutomationSamples
     public static class extensions
     {
         public static TextElement AddElementEx(this TextElement p, string text,
-                                                              string font, double? size, int? color,
+                                                              int? font, double? size, int? color,
                                                               AlignmentHorizontal? halign,
                                                               CharStyle? cs)
         {
             var el = p.AppendElement(text);
             if (font != null)
             {
-                el.CharacterFormat.Font = font;
+                el.CharacterFormat.FontID = font;
             }
             if (size.HasValue)
             {

@@ -10,7 +10,7 @@ namespace VisioAutomation.Text.Markup
         private int? _transparency;
 
         public CharStyle? CharStyle { get; set; }
-        public string Font { get; set; }
+        public int? FontID { get; set; }
         public ColorRGB? Color { get; set; }
 
         public CharacterFormat()
@@ -62,7 +62,7 @@ namespace VisioAutomation.Text.Markup
 
         public void UpdateFrom(CharacterFormat other)
         {
-            this.Font = other.Font;
+            this.FontID = other.FontID;
             this._font_size = other._font_size;
             this.CharStyle = other.CharStyle;
             this.Color = other.Color;
