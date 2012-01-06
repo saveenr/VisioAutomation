@@ -1,14 +1,14 @@
 ﻿using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using BH = VisioAutomation.Layout.BoxLayout;
+using BoxL = VisioAutomation.Layout.BoxLayout;
 
 namespace VisioAutomationSamples
 {
     public class BoxLayoutShared
     {
         public static void DrawNode(
-            BH.Node node,
+            BoxL.Node node,
             VA.Drawing.Rectangle rect, IVisio.Page page)
         {
             var src_fillfg = VA.ShapeSheet.SRCConstants.FillForegnd;
@@ -28,13 +28,12 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static BH.BoxLayout
+        public static BoxL.BoxLayout
             CreateSampleLayout()
         {
             // Create a new layout
             var layout =
-                new BH.BoxLayout(
-                    BH.LayoutDirection.Vertical);
+                new BoxL.BoxLayout(BoxL.LayoutDirection.Vertical);
 
             // Add the nodes and specify their sizes and in what direction to draw them
             var g0 = layout.Root;
