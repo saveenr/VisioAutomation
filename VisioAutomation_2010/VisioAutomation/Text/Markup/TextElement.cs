@@ -234,10 +234,9 @@ namespace VisioAutomation.Text.Markup
         }
 
         internal static void SetRangeProps<T>(IVisio.Shape shape, VA.ShapeSheet.CellData<T> f,
-                                      IVisio.VisCellIndices cell, int value, Markup.TextRegion region,
-                                      ref short rownum, ref IVisio.Characters chars, rangetype rt)
+                                      VA.ShapeSheet.SRC src, int value, Markup.TextRegion region,
+                                      ref short rownum, ref IVisio.Characters chars)
         {
-
             // http://office.microsoft.com/en-us/visio-help/HV080350454.aspx
 
             if (!f.Formula.HasValue)
@@ -250,14 +249,14 @@ namespace VisioAutomation.Text.Markup
             chars.Begin = region.TextStartPos;
             chars.End = region.TextEndPos;
 
-            if (rt == rangetype.Character)
+            if (src.Section == (short)IVisio.VisSectionIndices.visSectionCharacter)
             {
-                chars.CharProps[(short)cell] = (short)value;
+                chars.CharProps[src.Cell] = (short)value;
                 rownum = chars.CharPropsRow[(short)default_chars_bias];
             }
-            else if (rt == rangetype.Paragraph)
+            else if (src.Section == (short)IVisio.VisSectionIndices.visSectionParagraph)
             {
-                chars.ParaProps[(short)cell] = (short)value;
+                chars.ParaProps[src.Cell] = (short)value;
                 rownum = chars.ParaPropsRow[(short)default_chars_bias];
             }
             else
@@ -315,11 +314,11 @@ namespace VisioAutomation.Text.Markup
             const int temp_style = 0;
             const int temp_trans = 0;
 
-            SetRangeProps(shape, fmt.Color, IVisio.VisCellIndices.visCharacterColor, temp_color,             region, ref rownum, ref chars, rangetype.Character);
-            SetRangeProps(shape, fmt.Size, IVisio.VisCellIndices.visCharacterSize, temp_size,                region, ref rownum, ref chars, rangetype.Character);
-            SetRangeProps(shape, fmt.Font, IVisio.VisCellIndices.visCharacterFont, temp_font,                region, ref rownum, ref chars, rangetype.Character);
-            SetRangeProps(shape, fmt.Style, IVisio.VisCellIndices.visCharacterStyle, temp_style,             region, ref rownum, ref chars, rangetype.Character);
-            SetRangeProps(shape, fmt.Transparency, IVisio.VisCellIndices.visCharacterColorTrans, temp_trans, region, ref rownum, ref chars, rangetype.Character);
+            SetRangeProps(shape, fmt.Color, VA.ShapeSheet.SRCConstants.Char_Color, temp_color, region, ref rownum, ref chars);
+            SetRangeProps(shape, fmt.Size, VA.ShapeSheet.SRCConstants.Char_Size, temp_size, region, ref rownum, ref chars);
+            SetRangeProps(shape, fmt.Font, VA.ShapeSheet.SRCConstants.Char_Font, temp_font, region, ref rownum, ref chars);
+            SetRangeProps(shape, fmt.Style, VA.ShapeSheet.SRCConstants.Char_Style, temp_style, region, ref rownum, ref chars);
+            SetRangeProps(shape, fmt.Transparency, VA.ShapeSheet.SRCConstants.Char_ColorTrans, temp_trans, region, ref rownum, ref chars);
 
             if (chars != null)
             {
