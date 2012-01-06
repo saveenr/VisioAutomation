@@ -189,7 +189,7 @@ namespace VisioAutomationSamples
                 }
 
                 dom_shape.ShapeCells = cells;
-                dom_shape.TextElement = new VA.Text.Markup.TextElement( node_data.Text );
+                dom_shape.Text = new VA.Text.Markup.TextElement( node_data.Text );
             }
 
             dom.Render(page);
@@ -216,7 +216,7 @@ namespace VisioAutomationSamples
 
                     var r = new VA.Drawing.Rectangle(x0, 0 - th, x0 + w, 0);
                     var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
-                    n1.TextElement = new VA.Text.Markup.TextElement( fontname.ToUpper() ) ;
+                    n1.Text = new VA.Text.Markup.TextElement( fontname.ToUpper() ) ;
                     n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
                     n1.ShapeCells.LineWeight = 0.0;
                     n1.ShapeCells.LinePattern = 0;
@@ -235,7 +235,7 @@ namespace VisioAutomationSamples
                         var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
-                            n1.TextElement = new VA.Text.Markup.TextElement(chunk[i]);
+                            n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
                         }
                         else
                         {
@@ -282,7 +282,7 @@ namespace VisioAutomationSamples
                         var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
-                            n1.TextElement = new VA.Text.Markup.TextElement(chunk[i]);
+                            n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
                         }
                         else
                         {

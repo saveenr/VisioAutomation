@@ -45,8 +45,8 @@ namespace InfoGraphicsPy
 
             for (int i = 0; i < this.DataPoints.Count; i++)
             {
-                bar_shapes[i].TextElement = new VA.Text.Markup.TextElement( this.DataPoints[i].Text);
-                cat_shapes[i].TextElement = new VA.Text.Markup.TextElement(this.CategoryLabels[i]);
+                bar_shapes[i].Text = new VA.Text.Markup.TextElement( this.DataPoints[i].Text);
+                cat_shapes[i].Text = new VA.Text.Markup.TextElement(this.CategoryLabels[i]);
             }
 
             foreach (var shape in bar_shapes)

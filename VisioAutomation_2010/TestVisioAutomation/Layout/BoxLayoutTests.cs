@@ -126,7 +126,7 @@ namespace TestVisioAutomation
                 var dom_n1 = dom.DrawRectangle(node.Rectangle);
                 dom_n1.ShapeCells.FillForegnd = "rgb(255,190,0)";
 
-                dom_n1.TextElement = new VA.Text.Markup.TextElement(string.Format("{0}\n{1}", node.Data, node.Rectangle.ToString()));
+                dom_n1.Text = new VA.Text.Markup.TextElement(string.Format("{0}\n{1}", node.Data, node.Rectangle.ToString()));
             }
 
             dom.Render(page);

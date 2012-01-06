@@ -254,7 +254,7 @@ namespace InfoGraphicsPy
                     // Set Text
                     if (n_data.ShapeText != null)
                     {
-                        s.TextElement = new VA.Text.Markup.TextElement(this.ToUpper ? n_data.ShapeText.ToUpper() : n_data.ShapeText);
+                        s.Text = new VA.Text.Markup.TextElement(this.ToUpper ? n_data.ShapeText.ToUpper() : n_data.ShapeText);
                     }
 
                     // Set Cells

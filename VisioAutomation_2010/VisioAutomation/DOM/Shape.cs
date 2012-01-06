@@ -7,7 +7,7 @@ namespace VisioAutomation.DOM
 {
     public class Shape : Node
     {
-        public VA.Text.Markup.TextElement TextElement { get; set; }
+        public VA.Text.Markup.TextElement Text { get; set; }
 
         public Dictionary<string, VA.CustomProperties.CustomPropertyCells> CustomProperties { get; set; }
         public List<Hyperlink> Hyperlinks { get; set; }

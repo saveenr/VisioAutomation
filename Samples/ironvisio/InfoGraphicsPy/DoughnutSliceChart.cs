@@ -51,8 +51,8 @@ namespace InfoGraphicsPy
 
             for (int i = 0; i < DataPoints.Count; i++)
             {
-                slice_shapes[i].TextElement = new VA.Text.Markup.TextElement(DataPoints[i].Text);
-                cat_shapes[i].TextElement = new VA.Text.Markup.TextElement(CategoryLabels[i]);
+                slice_shapes[i].Text = new VA.Text.Markup.TextElement(DataPoints[i].Text);
+                cat_shapes[i].Text = new VA.Text.Markup.TextElement(CategoryLabels[i]);
             }
 
             foreach (var shape in circle_shapes)

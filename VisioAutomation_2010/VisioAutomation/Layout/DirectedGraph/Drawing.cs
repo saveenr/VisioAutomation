@@ -146,7 +146,7 @@ namespace VisioAutomation.Layout.DirectedGraph
             {
                 var dom_node = dom.Drop(shape.MasterName, shape.StencilName, x, y);
                 shape.DOMNode = dom_node;
-                shape.DOMNode.TextElement = new VA.Text.Markup.TextElement( shape.Label ) ;
+                shape.DOMNode.Text = new VA.Text.Markup.TextElement( shape.Label ) ;
                 x += 1.0;
             }
 
@@ -155,7 +155,7 @@ namespace VisioAutomation.Layout.DirectedGraph
                 
                 var dom_node = dom.Connect( "Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
                 connector.DOMNode = dom_node;
-                connector.DOMNode.TextElement = new VA.Text.Markup.TextElement( connector.Label );
+                connector.DOMNode.Text = new VA.Text.Markup.TextElement( connector.Label );
             }
 
             dom.Render(page);

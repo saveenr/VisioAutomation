@@ -100,7 +100,7 @@ namespace VisioAutomation.Layout.Tree
 
                 dom_master.ShapeCells.Width = treenodes[i].Size.Width;
                 dom_master.ShapeCells.Height = treenodes[i].Size.Height;
-                dom_master.TextElement = tree_node.TextElement;
+                dom_master.Text = tree_node.Text;
             }
 
             if (this.LayoutOptions.ConnectorType  == ConnectorType.DynamicConnector)
