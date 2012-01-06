@@ -10,6 +10,23 @@ namespace TestVisioAutomation
     public class TextMarkupTests : VisioAutomationTest
     {
         [TestMethod]
+        public void Markup1()
+        {
+            // Validate that setting text with no values works
+            var el0 = new VA.Text.Markup.TextElement("HELLO");
+
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 4);
+            el0.SetText(s1);
+
+            var fmts = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(1, fmts.CharacterFormats.Count);
+            Assert.AreEqual(1, fmts.ParagraphFormats.Count);
+
+            page1.Delete(0);
+        }
+
+        [TestMethod]
         public void ValidateFormattingRegions()
         {
             // Check that the formatting regions are correctly
@@ -203,209 +220,6 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void CharacterFormatCells_Check_SetFormat_1()
-        {
-            var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
-            var s1 = page1.DrawRectangle(0, 0, 10, 10);
-
-            var sb = new System.Text.StringBuilder();
-            for (int y = 0; y < 10; y++)
-            {
-                for (int x = 0; x < 10; x++)
-                {
-                    int n = (y * 10 + x) % 5;
-                    sb.Append(n.ToString());
-                }
-            }
-            s1.Text = sb.ToString();
-
-
-            var c0 = new VA.DOM.ShapeCells();
-            c0.CharSize = 0.6;
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            c0.Apply(update, s1.ID16);
-            update.Execute(page1);
-
-            var c1 = new VA.Text.CharacterFormatCells();
-            c1.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
-            VA.Text.TextFormat.FormatRange(s1, c1, 0, 5);
-
-            var c2 = new VA.Text.CharacterFormatCells();
-            c2.Size = 0.5;
-            VA.Text.TextFormat.FormatRange(s1, c2, 5, 10);
-
-            var c3 = new VA.Text.CharacterFormatCells();
-            c3.Font = page1.Document.Fonts["Impact"].ID;
-            VA.Text.TextFormat.FormatRange(s1, c3, 10, 15);
-
-            var c4 = new VA.Text.CharacterFormatCells();
-            c4.Style = (int) (VA.Text.CharStyle.Italic | VA.Text.CharStyle.UnderLine);
-            VA.Text.TextFormat.FormatRange(s1, c4, 15, 20);
-
-            var c5 = new VA.Text.CharacterFormatCells();
-            c5.Transparency = 0.5;
-            VA.Text.TextFormat.FormatRange(s1, c5, 20, 25);
-
-            var formatting = VA.Text.TextFormat.GetFormat(s1);
-            Assert.AreEqual("RGB(255,0,0)", formatting.CharacterFormats[0].Color.Formula);
-            Assert.AreEqual(0.5, formatting.CharacterFormats[1].Size.Result);
-            Assert.AreEqual(page1.Document.Fonts["Impact"].ID, formatting.CharacterFormats[2].Font.Result);
-            Assert.AreEqual("6", formatting.CharacterFormats[3].Style.Formula);
-            Assert.AreEqual("50%", formatting.CharacterFormats[4].Transparency.Formula);
-            Assert.AreEqual(0.6, formatting.CharacterFormats[5].Size.Result);
-
-            //page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void CharacterFormatCells_Check_SetFormat_2()
-        {
-            var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
-            IVisio.Shape s1;
-
-            var fmt = new VA.Text.CharacterFormatCells();
-
-            s1 = page1.DrawRectangle(0,0,1,1);
-            s1.Text = "Plain";
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(1,1,2,2);
-            s1.Text = "Bold";
-            fmt.Style = (int) VA.Text.CharStyle.Bold;
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(2,2,3,3);
-            s1.Text = "Italic";
-            fmt.Style = (int)VA.Text.CharStyle.Italic;
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(3,3,4,4);
-            s1.Text = "Underline";
-            fmt.Style = (int)VA.Text.CharStyle.UnderLine;
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(4,4,5,5);
-            s1.Text = "Smallcaps";
-            fmt.Style = (int)VA.Text.CharStyle.SmallCaps;
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(5,5,6,6);
-            s1.Text = "Red";
-            fmt.Color = new VA.Drawing.ColorRGB(0xff0000).ToFormula();
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(6,6,7,7);
-            s1.Text = "#ec35a7";
-            fmt.Color = new VA.Drawing.ColorRGB(0xec35a7).ToFormula();
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(7,7,8,8);
-            s1.Text = "#34f178";
-            fmt.Color = new VA.Drawing.ColorRGB(0x34f178).ToFormula();
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(8,8,9,9);
-            s1.Text = "Calibri";
-            fmt.Font = page1.Document.Fonts["Calibri"].ID;
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(9,9,10,10);
-            s1.Text = "Impact";
-            fmt.Font = page1.Document.Fonts["Impact"].ID;
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(10,10,11,11);
-            s1.Text = "Segoe UI";
-            fmt.Font = page1.Document.Fonts["Segoe UI"].ID;
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(11,11,12,12);
-            s1.Text = "6pt";
-            fmt.Size = VA.Convert.PointsToInches(6);
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(12,12,13,13);
-            s1.Text = "8pt";
-            fmt.Size = VA.Convert.PointsToInches(8);
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(13,13,14,14);
-            s1.Text = "11pt";
-            fmt.Size = VA.Convert.PointsToInches(8);
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            fmt = new VA.Text.CharacterFormatCells();
-            s1 = page1.DrawRectangle(14,14,15,15);
-            s1.Text = "15pt";
-            fmt.Size = VA.Convert.PointsToInches(15);
-            VA.Text.TextFormat.Format(s1, fmt);
-
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void ParagraphFormatCells_Check_SetFormat_1()
-        {
-            var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
-
-            var s1 = page1.DrawRectangle(0,0,5,5);
-            s1.Text = "Line1\nLine2\nLine3\nLine4\nLine5\nLine6";
-
-            var formats0 = VA.Text.TextFormat.GetFormat(s1);
-            Assert.AreEqual(1, formats0.ParagraphFormats.Count);
-
-            var fmt1 = new VA.Text.ParagraphFormatCells();
-            fmt1.IndentLeft = 0.25;
-
-            var cfmt1 = new VA.Text.CharacterFormatCells();
-            cfmt1.Color = "RGB(255,0,0)";
-
-
-            VA.Text.TextFormat.FormatRange(s1, cfmt1, 2, 3);
-            VA.Text.TextFormat.FormatRange(s1, fmt1, 2, 3);
-
-            var formats1 = VA.Text.TextFormat.GetFormat(s1);
-            Assert.AreEqual(2, formats1.ParagraphFormats.Count);
-
-            var fmt2 = new VA.Text.ParagraphFormatCells();
-            fmt2.BulletIndex = 2;
-
-            var cfmt2 = new VA.Text.CharacterFormatCells();
-            cfmt2.Color = "RGB(0,255,0)";
-
-            VA.Text.TextFormat.FormatRange(s1, cfmt2, 13, 14);
-            VA.Text.TextFormat.FormatRange(s1, fmt2, 13, 14);
-
-            var formats2 = VA.Text.TextFormat.GetFormat(s1);
-            Assert.AreEqual(4, formats2.ParagraphFormats.Count);
-
-            Assert.AreEqual(0.25, formats2.ParagraphFormats[0].IndentLeft.Result);
-            Assert.AreEqual(0, formats2.ParagraphFormats[0].IndentFirst.Result);
-
-            Assert.AreEqual(0, formats2.ParagraphFormats[2].IndentLeft.Result);
-            Assert.AreEqual(0, formats2.ParagraphFormats[2].IndentFirst.Result);
-
-            Assert.AreEqual(2, formats2.ParagraphFormats[1].BulletIndex.Result);
-
-            Assert.AreEqual(0, formats2.ParagraphFormats[1].IndentLeft.Result);
-            Assert.AreEqual(0, formats2.ParagraphFormats[2].BulletIndex.Result);
-
-            page1.Delete(0);
-        }
-
-        [TestMethod]
         public void TextBlockFormatCells_Check_SetFormat_1()
         {
             var page1 = GetNewPage();
@@ -429,11 +243,8 @@ namespace TestVisioAutomation
             Assert.AreEqual("8 pt", tfs[0].TextBlocks.BottomMargin.Formula);
             Assert.AreEqual("4 pt", tfs[1].TextBlocks.BottomMargin.Formula);
 
-
             page1.Delete(0);
         }
-
- 
 
         [TestMethod]
         public void Test_Fields1()

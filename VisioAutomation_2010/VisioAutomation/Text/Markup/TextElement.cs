@@ -263,7 +263,47 @@ namespace VisioAutomation.Text.Markup
                 fmt.Transparency = markup_region.Element.CharacterFormat.Transparency.Value/100.0;
             }
 
-            VA.Text.TextFormat.FormatRange(shape, fmt, startpos, endpos);
+            if (shape == null)
+            {
+                throw new System.ArgumentNullException("shape");
+            }
+
+
+            short rownum = -1;
+            IVisio.Characters chars = null;
+
+            const int temp_color = 13;
+            const int temp_size = 10;
+            const int temp_font = 0;
+            const int temp_style = 0;
+            const int temp_trans = 0;
+
+            VA.Text.TextFormat.SetRangeProps(shape, fmt.Color, IVisio.VisCellIndices.visCharacterColor, temp_color,
+                                             startpos, endpos, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
+            VA.Text.TextFormat.SetRangeProps(shape, fmt.Size, IVisio.VisCellIndices.visCharacterSize, temp_size,
+                                             startpos, endpos, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
+            VA.Text.TextFormat.SetRangeProps(shape, fmt.Font, IVisio.VisCellIndices.visCharacterFont, temp_font,
+                                             startpos, endpos, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
+            VA.Text.TextFormat.SetRangeProps(shape, fmt.Style, IVisio.VisCellIndices.visCharacterStyle, temp_style,
+                                             startpos, endpos, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
+            VA.Text.TextFormat.SetRangeProps(shape, fmt.Transparency, IVisio.VisCellIndices.visCharacterColorTrans,
+                                             temp_trans, startpos, endpos, ref rownum, ref chars,
+                                             VA.Text.TextFormat.rangetype.Character);
+            if (chars != null)
+            {
+                if (rownum < 0)
+                {
+                    throw new AutomationException("Internal Error");
+                }
+
+                var update = new VA.ShapeSheet.Update.SRCUpdate();
+                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(rownum), fmt.Color.Formula);
+                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Size.ForRow(rownum), fmt.Size.Formula);
+                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(rownum), fmt.Font.Formula);
+                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Style.ForRow(rownum), fmt.Style.Formula);
+                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(rownum), fmt.Transparency.Formula);
+                update.Execute(shape);
+            }
         }
     }
 }
