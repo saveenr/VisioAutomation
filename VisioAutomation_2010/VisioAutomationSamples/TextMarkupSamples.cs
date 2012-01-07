@@ -94,6 +94,5 @@ namespace VisioAutomationSamples
 
             e1.SetText(s1);
         }
-
     }
 }
