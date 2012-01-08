@@ -74,7 +74,7 @@ namespace VisioAutomation.Layout.BoxLayout
             // Account for child separation
             int num_seps = System.Math.Max(0, node.ChildCount - 1);
             double total_sepy = (node.Direction == LayoutDirection.Vertical) ? num_seps*node.ChildSeparation : 0.0;
-            double total_sepx = (node.Direction == LayoutDirection.Horizonal) ? num_seps*node.ChildSeparation : 0.0;
+            double total_sepx = (node.Direction == LayoutDirection.Horizontal) ? num_seps*node.ChildSeparation : 0.0;
 
             child_height_sum += total_sepy;
             child_width_sum += total_sepx;
@@ -84,7 +84,7 @@ namespace VisioAutomation.Layout.BoxLayout
                 node.Height = System.Math.Max(h, child_height_sum);
                 node.Width = System.Math.Max(w, child_width_max);
             }
-            else if (node.Direction == LayoutDirection.Horizonal)
+            else if (node.Direction == LayoutDirection.Horizontal)
             {
                 node.Height = System.Math.Max(h, child_height_max);
                 node.Width = System.Math.Max(w, child_width_sum);
@@ -174,7 +174,7 @@ namespace VisioAutomation.Layout.BoxLayout
                     cur_origin = cur_origin.Add(0, sign_y*child_height);
                     cur_origin = cur_origin.Add(0, sign_y*node.ChildSeparation);
                 }
-                else if (node.Direction == LayoutDirection.Horizonal)
+                else if (node.Direction == LayoutDirection.Horizontal)
                 {
                     cur_origin = cur_origin.Add(sign_x*child_width, 0);
                     cur_origin = cur_origin.Add(sign_x*node.ChildSeparation, 0);
@@ -185,7 +185,7 @@ namespace VisioAutomation.Layout.BoxLayout
         private static Size GetReservedSizeForChild(Node<T> node, double pad_y, double pad_x, Node<T> child_node)
         {
             var reserved_width = node.Direction == LayoutDirection.Vertical ? node.Width.Value - 2*pad_x : child_node.Width.Value;
-            var reserved_height = node.Direction == LayoutDirection.Horizonal ? node.Height.Value - 2*pad_y : child_node.Height.Value;
+            var reserved_height = node.Direction == LayoutDirection.Horizontal ? node.Height.Value - 2*pad_y : child_node.Height.Value;
             var reserved_size = new VA.Drawing.Size(reserved_width, reserved_height);
             return reserved_size;
         }

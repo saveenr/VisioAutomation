@@ -145,7 +145,7 @@ namespace VisioAutomationSamples
                 foreach (int row in Enumerable.Range(0, numrows))
                 {
                     var row_box = new_node();
-                    row_box.Direction = BH.LayoutDirection.Horizonal;
+                    row_box.Direction = BH.LayoutDirection.Horizontal;
                     row_box.ChildSeparation = 0.25;
                     row_box.Data.Render = false;
                     font_box.AddNode(row_box);

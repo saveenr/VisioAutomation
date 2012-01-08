@@ -51,7 +51,7 @@ namespace VisioAutomationSamples
             g1.AddNode(1.75, 0.25);
             g1.AddNode(2, 0.25);
 
-            var g2 = g0.AddNode(BH.LayoutDirection.Horizonal);
+            var g2 = g0.AddNode(BH.LayoutDirection.Horizontal);
             g2.AlignmentVertical = VA.Drawing.AlignmentVertical.Center;
             g2.Padding = 0.10;
             g2.ChildSeparation = 0.05;

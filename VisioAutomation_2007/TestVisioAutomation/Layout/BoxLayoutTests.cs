@@ -141,7 +141,7 @@ namespace TestVisioAutomation
             var layout = new VA.Layout.BoxLayout.BoxLayout<string>();
             var root = layout.Root;
             root.Data = "Root";
-            root.Direction = LayoutDirection.Horizonal;
+            root.Direction = LayoutDirection.Horizontal;
             var n1 = root.AddNode(1, 2);
             n1.Data = "n1";
 
@@ -166,7 +166,7 @@ namespace TestVisioAutomation
             var root = layout.Root;
 
             root.Data = "Root";
-            root.Direction = LayoutDirection.Horizonal;
+            root.Direction = LayoutDirection.Horizontal;
             var n1 = root.AddNode(1, 2);
             n1.Data = "n1";
 
