@@ -150,7 +150,7 @@
     <Compile Include="Extensions\PagesExtensions_Tests.cs" />
     <Compile Include="Text\TextMarkupTests.cs" />
     <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
-    <Compile Include="Controls\ControlHelper_Tests.cs" />
+    <Compile Include="Connections\Controls\ControlHelper_Tests.cs" />
     <Compile Include="UtilTests\PageHelper_Tests.cs" />
     <Compile Include="Convert_Tests.cs" />
     <Compile Include="ShapeHelper_Tests.cs" />

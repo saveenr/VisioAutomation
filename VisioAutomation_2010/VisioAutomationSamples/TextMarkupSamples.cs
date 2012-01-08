@@ -74,5 +74,25 @@ namespace VisioAutomationSamples
             e1.AppendText("inches tall.");
             e1.SetText(s1);
         }
+
+        public static void TextMarkup5()
+        {
+            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+
+            // Create the Shapes that will hold the text
+            var s1 = page.DrawRectangle(0, 0, 8.5, 11);
+            var tnr = page.Document.Fonts["Times New Roman"];
+
+            var e1 = new VA.Text.Markup.TextElement();
+            e1.ParagraphFormat.HAlign = 0;
+            var e2 = e1.AppendElement("Hello Worldline1\nline2\nline3\n");
+            e2.ParagraphFormat.IndentFirst = 0.5;
+            e2.ParagraphFormat.IndentLeft = 0.25;
+            var e3 = e1.AppendElement("Goodbye\nline1\nline2\nline3");
+            e3.ParagraphFormat.IndentFirst = 1.0;
+            e3.ParagraphFormat.IndentLeft = 0.75;
+
+            e1.SetText(s1);
+        }
     }
 }

@@ -123,7 +123,7 @@ namespace TestVisioAutomation
                 t0.CharacterFormat.FontSize = 36;
                 var t01 = t0.AppendText("HELLO");
                 var t1 = t0.AppendElement("W\nO\nR\nL\nD");
-                t1.ParagraphFormat.Indent = 1.0;
+                t1.ParagraphFormat.IndentLeft = 1.0;
                 t1.CharacterFormat.FontSize = 15.0;
                 t0.AppendText("FOOBR");
                 t0.SetText(shape1);

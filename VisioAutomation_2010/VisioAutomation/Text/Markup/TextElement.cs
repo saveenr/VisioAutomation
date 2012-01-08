@@ -180,32 +180,38 @@ namespace VisioAutomation.Text.Markup
         }
 
 
-        private static void set_text_range_para_fmt(TextRegion markup_region, IVisio.Shape shape)
+        private static void set_text_range_para_fmt(TextRegion region, IVisio.Shape shape)
         {
-            if (markup_region.Element.ParagraphFormat.Indent.HasValue)
+            if (region.Element.ParagraphFormat.IndentFirst.HasValue)
             {
-                var chars0 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndFirst, 0, markup_region);
-                var chars1 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndLeft, (int)markup_region.Element.ParagraphFormat.Indent.Value, markup_region);
+                int indent_first_points = (int)VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentFirst.Value);
+                var chars0 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndFirst, indent_first_points, region);
             }
 
-            if (markup_region.Element.ParagraphFormat.HAlign.HasValue)
+            if (region.Element.ParagraphFormat.IndentLeft.HasValue)
             {
-                int int_halign = (int)markup_region.Element.ParagraphFormat.HAlign.Value;
-                SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_HorzAlign, int_halign, markup_region);
+                int indent_left_points = (int) VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentLeft.Value);
+                var chars1 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndLeft, indent_left_points, region);
+            }
+
+            if (region.Element.ParagraphFormat.HAlign.HasValue)
+            {
+                int int_halign = (int)region.Element.ParagraphFormat.HAlign.Value;
+                SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_HorzAlign, int_halign, region);
             }
 
             // Handle bullets
-            if (markup_region.Element.ParagraphFormat.Bullets.HasValue &&
-                markup_region.Element.ParagraphFormat.Bullets.Value)
+            if (region.Element.ParagraphFormat.Bullets.HasValue &&
+                region.Element.ParagraphFormat.Bullets.Value)
             {
                 const int bullet_type = 1;
                 const int base_indent_size = 25;
                 int indent_first = -base_indent_size;
                 int indent_left = base_indent_size;
 
-                var chars0 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndFirst, indent_first, markup_region);
-                var chars1 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndLeft, indent_left, markup_region);
-                var chars2 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_Bullet, bullet_type, markup_region);
+                var chars0 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndFirst, indent_first, region);
+                var chars1 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndLeft, indent_left, region);
+                var chars2 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_Bullet, bullet_type, region);
             }
         }
 
@@ -298,22 +304,22 @@ namespace VisioAutomation.Text.Markup
                 throw new System.ArgumentNullException("shape");
             }
 
-
+            // Initialize the properties with temp values
             short rownum = -1;
-            IVisio.Characters chars = null;
-
             const int temp_color = 0;
             const int temp_size = 10;
             const int temp_font = 0;
             const int temp_style = 0;
             const int temp_trans = 0;
 
+            IVisio.Characters chars = null;
             SetRangeProps(shape, fmt.Color, VA.ShapeSheet.SRCConstants.Char_Color, temp_color, region, ref rownum, ref chars);
             SetRangeProps(shape, fmt.Size, VA.ShapeSheet.SRCConstants.Char_Size, temp_size, region, ref rownum, ref chars);
             SetRangeProps(shape, fmt.Font, VA.ShapeSheet.SRCConstants.Char_Font, temp_font, region, ref rownum, ref chars);
             SetRangeProps(shape, fmt.Style, VA.ShapeSheet.SRCConstants.Char_Style, temp_style, region, ref rownum, ref chars);
             SetRangeProps(shape, fmt.Transparency, VA.ShapeSheet.SRCConstants.Char_ColorTrans, temp_trans, region, ref rownum, ref chars);
 
+            // if any text region was created then set the formula values
             if (chars != null)
             {
                 if (rownum < 0)
@@ -322,13 +328,11 @@ namespace VisioAutomation.Text.Markup
                 }
 
                 var update = new VA.ShapeSheet.Update.SRCUpdate();
-
                 update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(rownum), fmt.Color.Formula);
                 update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Size.ForRow(rownum), fmt.Size.Formula);
                 update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(rownum), fmt.Font.Formula);
                 update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Style.ForRow(rownum), fmt.Style.Formula);
                 update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(rownum), fmt.Transparency.Formula);
-
                 update.Execute(shape);
             }
         }
