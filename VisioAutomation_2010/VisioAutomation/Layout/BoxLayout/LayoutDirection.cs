@@ -4,7 +4,7 @@ namespace VisioAutomation.Layout.BoxLayout
 {
     public enum LayoutDirection
     {
-        Horizonal,
+        Horizontal,
         Vertical
     }
 }
