@@ -115,7 +115,7 @@ namespace VisioAutomation.DOM
 
             // ----------------------------------------
             // set the shape text
-            var shapes_with_text = this.Shapes.Where(s => s.Text != null);
+            var shapes_with_text = this.Shapes.Where(s => (s.Text != null) || (s.TextElement!=null));
             foreach (var shape in shapes_with_text)
             {
                 var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
