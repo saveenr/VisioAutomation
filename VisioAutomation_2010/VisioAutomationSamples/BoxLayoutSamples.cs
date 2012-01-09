@@ -5,8 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BoxL = VisioAutomation.Layout.BoxLayout;
-using BoxL2 = VisioAutomation.Layout.BoxLayout2;
+using BoxL = VisioAutomation.Layout.BoxLayout2;
 
 namespace VisioAutomationSamples
 {
@@ -27,7 +26,7 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static BoxL2.Node AddNodeEx(this BoxL2.Container p, double w, double h, string s)
+        public static BoxL.Node AddNodeEx(this BoxL.Container p, double w, double h, string s)
         {
             var box = p.AddBox(w, h);
             var node_data = new NodeData();
@@ -42,9 +41,6 @@ namespace VisioAutomationSamples
             var layout = BoxLayoutShared.CreateSampleLayout();
 
             // Ask the Layout to place the nodes
-            var origin = new VA.Drawing.Point(0, 0);
-            layout.LayoutOptions.Origin = origin;
-
             layout.PerformLayout();
 
             // Create a blank canvas in Visio 
@@ -75,7 +71,7 @@ namespace VisioAutomationSamples
             var visapp = new IVisio.Application();
             var doc = visapp.Documents.Add("");
 
-            var fontnames = new[] {"Arial", "Roboto"};
+            var fontnames = new[] {"Arial", "Calibri"};
 
             var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
@@ -88,10 +84,10 @@ namespace VisioAutomationSamples
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)
         {
-            var layout = new BoxL2.BoxLayout();
+            var layout = new BoxL.BoxLayout();
 
-            var root = new Container( BoxL2.ContainerDirection.Vertical);
-            root.ChildVerticalDirection = BoxL2.DirectionVertical.TopToBottom;
+            var root = new Container( BoxL.ContainerDirection.Vertical);
+            root.ChildVerticalDirection = BoxL.DirectionVertical.TopToBottom;
 
             layout.Root = root;
             root.ChildSeparation = 0.5;
@@ -121,7 +117,7 @@ namespace VisioAutomationSamples
                 var fontname_box_data = (NodeData) fontname_box.Data;
                 fontname_box_data.Cells = fontname_cells;
 
-                var font_box = root.AddColumnContainer(BoxL2.DirectionVertical.TopToBottom);
+                var font_box = root.AddColumnContainer(BoxL.DirectionVertical.TopToBottom);
                 font_box.ChildSeparation = 0.25;
                 var font_vox_data = (NodeData) font_box.Data;
                 if (font_vox_data != null)
@@ -136,7 +132,7 @@ namespace VisioAutomationSamples
 
                 foreach (int row in Enumerable.Range(0, numrows))
                 {
-                    var row_box = font_box.AddRowContainer(BoxL2.DirectionHorizontal.LeftToRight);
+                    var row_box = font_box.AddRowContainer(BoxL.DirectionHorizontal.LeftToRight);
                     row_box.ChildSeparation = 0.25;
                     var row_box_data = new NodeData();
                     row_box_data.Render = false;
