@@ -9,7 +9,7 @@ namespace VisioAutomation.Layout.BoxLayout2
         private Container _root;
 
         public BoxLayout()         
-        {
+{
         }
 
         public Container Root
