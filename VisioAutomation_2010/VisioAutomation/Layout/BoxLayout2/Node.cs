@@ -226,11 +226,11 @@ namespace VisioAutomation.Layout.BoxLayout2
                     else 
                     {
                         // RIGHT TO LEFT
-                        c._place(new VA.Drawing.Point(x, y));
-                        x += c.Size.Width;
-                        x += this.ChildSeparation;
+                        c._place(new VA.Drawing.Point(x-c.Size.Width, y));
+                        x -= c.Size.Width;
+                        x -= this.ChildSeparation;
 
-                        var reserved_rect = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
+                        var reserved_rect = new VA.Drawing.Rectangle(x-c.Size.Width, y, x , y + reserved_height);
                     }
 
                 }
