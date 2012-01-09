@@ -77,11 +77,25 @@ namespace VisioAutomationSamples
             b52.HAlignToParent = AlignmentHorizontal.Center;
             b53.HAlignToParent = AlignmentHorizontal.Right;
 
+            // For Rows , you can tell the children how to vertially align
+            var layout6 = new BoxL.BoxLayout();
+            layout6.Root = new BoxL.Container(BoxL.ContainerDirection.Horizontal);
+            layout6.Root.Padding = 0.25;
+            layout6.Root.ChildSeparation = 0.25;
+            layout6.Root.MinHeight = 5;
+            var b61 = layout6.Root.AddBox(1, 2);
+            var b62 = layout6.Root.AddBox(1, 1);
+            var b63 = layout6.Root.AddBox(0.5, 0.5);
+            b61.VAlignToParent = AlignmentVertical.Bottom;
+            b62.VAlignToParent = AlignmentVertical.Center;
+            b63.VAlignToParent = AlignmentVertical.Top;
+
             Util.Render(layout1, doc);
             Util.Render(layout2, doc);
             Util.Render(layout3, doc);
             Util.Render(layout4, doc);
             Util.Render(layout5, doc);
+            Util.Render(layout6, doc);
 
         }
     }

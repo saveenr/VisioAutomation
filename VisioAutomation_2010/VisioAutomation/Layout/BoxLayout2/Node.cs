@@ -194,11 +194,15 @@ namespace VisioAutomation.Layout.BoxLayout2
                 {
                     double excess_width = reserved_width - c.Size.Width;
                     double align_delta_x = 0.0;
-                    if (c.Size.Width < reserved_width)
+
+                    // If there is any excess width then we need to adjust
+                    // for anyalignment
+                    if (excess_width>0)
                     {
+                        
                         if (c.HAlignToParent == AlignmentHorizontal.Left)
                         {
-                            // do nothing
+                            align_delta_x = 0;
                         }
                         else if (c.HAlignToParent == AlignmentHorizontal.Right)
                         {
@@ -209,6 +213,7 @@ namespace VisioAutomation.Layout.BoxLayout2
                             align_delta_x = excess_width / 2;
                         }
                     }
+
 
                     if (this.ChildVerticalDirection == DirectionVertical.BottomToTop)
                     {
@@ -233,12 +238,32 @@ namespace VisioAutomation.Layout.BoxLayout2
                 }
                 else
                 {
+                    double excess_height = reserved_height - c.Size.Height;
+                    double align_delta_y = 0.0;
+                    // If there is any excess height then we need to adjust
+                    // for any alignment
+                    if (excess_height > 0)
+                    {
+                        if (c.VAlignToParent == AlignmentVertical.Bottom)
+                        {
+                            align_delta_y = 0;
+                        }
+                        else if (c.VAlignToParent == AlignmentVertical.Top)
+                        {
+                            align_delta_y = excess_height;
+                        }
+                        else if (c.VAlignToParent == AlignmentVertical.Center)
+                        {
+                            align_delta_y = excess_height / 2;
+                        }
+                    }
+
                     if (this.ChildHorizontalDirection == DirectionHorizontal.LeftToRight)
                     {
                         // LEFT TO RIGHT
                         c.ReservedRectangle = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
 
-                        c._place(new VA.Drawing.Point(x, y));
+                        c._place(new VA.Drawing.Point(x, y+align_delta_y));
                         x += c.Size.Width;
                         x += this.ChildSeparation;
 
@@ -248,7 +273,7 @@ namespace VisioAutomation.Layout.BoxLayout2
                         // RIGHT TO LEFT
                         c.ReservedRectangle = new VA.Drawing.Rectangle(x - c.Size.Width, y, x, y + reserved_height);
 
-                        c._place(new VA.Drawing.Point(x - c.Size.Width, y));
+                        c._place(new VA.Drawing.Point(x - c.Size.Width, y+align_delta_y));
                         x -= c.Size.Width;
                         x -= this.ChildSeparation;
 
