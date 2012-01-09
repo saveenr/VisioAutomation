@@ -1,4 +1,5 @@
 ﻿using VisioAutomation.DOM;
+using VisioAutomation.Drawing;
 using VisioAutomation.Layout.BoxLayout2;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -25,6 +26,7 @@ namespace VisioAutomationSamples
             layout1.Root.ChildSeparation = 0.25;
             layout1.Root.AddBox(1,2);
             layout1.Root.AddBox(1,1);
+            layout1.Root.AddBox(0.5, 0.5);
 
             // You can set the min height and width of a container
             var layout2 = new VA.Layout.BoxLayout2.BoxLayout();
@@ -35,6 +37,7 @@ namespace VisioAutomationSamples
             layout2.Root.ChildSeparation = 0.25;
             layout2.Root.AddBox(1, 2);
             layout2.Root.AddBox(1, 1);
+            layout2.Root.AddBox(0.5, 0.5);
 
             // For vertical containers, you can layout shapes bottom-to-top or top-to-bottom
             var layout3 = new BoxL.BoxLayout();
@@ -46,6 +49,7 @@ namespace VisioAutomationSamples
             layout3.Root.ChildSeparation = 0.25;
             layout3.Root.AddBox(1, 2);
             layout3.Root.AddBox(1, 1);
+            layout3.Root.AddBox(0.5, 0.5);
 
             // Now switch to horizontal containers
             var layout4 = new BoxL.BoxLayout();
@@ -57,13 +61,27 @@ namespace VisioAutomationSamples
             layout4.Root.ChildSeparation = 0.25;
             layout4.Root.AddBox(1, 2);
             layout4.Root.AddBox(1, 1);
+            layout4.Root.AddBox(0.5, 0.5);
 
+
+            // For Columns, you can tell the children how to horizontally align
+            var layout5 = new BoxL.BoxLayout();
+            layout5.Root = new BoxL.Container(BoxL.ContainerDirection.Vertical);
+            layout5.Root.Padding = 0.25;
+            layout5.Root.ChildSeparation = 0.25;
+            layout5.Root.MinWidth = 3;
+            var b51 = layout5.Root.AddBox(1, 2);
+            var b52 = layout5.Root.AddBox(1, 1);
+            var b53 = layout5.Root.AddBox(0.5, 0.5);
+            b51.HAlignToParent = AlignmentHorizontal.Left;
+            b52.HAlignToParent = AlignmentHorizontal.Center;
+            b53.HAlignToParent = AlignmentHorizontal.Right;
 
             Util.Render(layout1, doc);
             Util.Render(layout2, doc);
             Util.Render(layout3, doc);
             Util.Render(layout4, doc);
-
+            Util.Render(layout5, doc);
 
         }
     }

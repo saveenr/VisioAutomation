@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using System.Linq;
 
@@ -186,30 +187,48 @@ namespace VisioAutomation.Layout.BoxLayout2
 
             double reserved_width = this.Size.Width - (2 * this.Padding);
             double reserved_height = this.Size.Height - (2 * this.Padding);
-
             foreach (var c in this.Children)
             {
 
                 if (this.Direction == ContainerDirection.Vertical)
                 {
+                    double excess_width = reserved_width - c.Size.Width;
+                    double align_delta_x = 0.0;
+                    if (c.Size.Width < reserved_width)
+                    {
+                        if (c.HAlignToParent == AlignmentHorizontal.Left)
+                        {
+                            // do nothing
+                        }
+                        else if (c.HAlignToParent == AlignmentHorizontal.Right)
+                        {
+                            align_delta_x = excess_width;
+                        }
+                        else if (c.HAlignToParent == AlignmentHorizontal.Center)
+                        {
+                            align_delta_x = excess_width / 2;
+                        }
+                    }
 
                     if (this.ChildVerticalDirection == DirectionVertical.BottomToTop)
                     {
                         // BOTTOM TO TOP
-                        c._place(new VA.Drawing.Point(x, y));
+                        c.ReservedRectangle = new VA.Drawing.Rectangle(x, y, x + reserved_width, y + c.Size.Height);
+
+                        c._place(new VA.Drawing.Point(x+align_delta_x, y));
                         y += c.Size.Height;
                         y += this.ChildSeparation;
 
-                        var reserved_rect = new VA.Drawing.Rectangle(x, y, x+reserved_width, y+c.Size.Height);
                     }
                     else
                     {
                         // TOP TO BOTTOM
-                        c._place(new VA.Drawing.Point(x, y-c.Size.Height));
+                        c.ReservedRectangle = new VA.Drawing.Rectangle(x, y - c.Size.Height, x + reserved_width, y);
+
+                        c._place(new VA.Drawing.Point(x+align_delta_x, y - c.Size.Height));
                         y -= c.Size.Height;
                         y -= this.ChildSeparation;
 
-                        var reserved_rect = new VA.Drawing.Rectangle(x, y - c.Size.Height, x+ reserved_width, y);
                     }
                 }
                 else
@@ -217,20 +236,22 @@ namespace VisioAutomation.Layout.BoxLayout2
                     if (this.ChildHorizontalDirection == DirectionHorizontal.LeftToRight)
                     {
                         // LEFT TO RIGHT
+                        c.ReservedRectangle = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
+
                         c._place(new VA.Drawing.Point(x, y));
                         x += c.Size.Width;
                         x += this.ChildSeparation;
 
-                        var reserved_rect = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
                     }
                     else 
                     {
                         // RIGHT TO LEFT
-                        c._place(new VA.Drawing.Point(x-c.Size.Width, y));
+                        c.ReservedRectangle = new VA.Drawing.Rectangle(x - c.Size.Width, y, x, y + reserved_height);
+
+                        c._place(new VA.Drawing.Point(x - c.Size.Width, y));
                         x -= c.Size.Width;
                         x -= this.ChildSeparation;
 
-                        var reserved_rect = new VA.Drawing.Rectangle(x-c.Size.Width, y, x , y + reserved_height);
                     }
 
                 }
