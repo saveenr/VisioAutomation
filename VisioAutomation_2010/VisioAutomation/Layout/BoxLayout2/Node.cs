@@ -59,11 +59,16 @@ namespace VisioAutomation.Layout.BoxLayout2
         public double Padding { get; set; }
         public double ChildSeparation { get; set; }
         public ContainerDirection Direction;
+        public DirectionVertical ChildVerticalDirection;
+        public DirectionHorizontal ChildHorizontalDirection;
         public double MinWidth;
         public double MinHeight;
 
-        public Container()
+        public Container(ContainerDirection dir)
         {
+            this.Direction = dir;
+            this.ChildVerticalDirection = DirectionVertical.BottomToTop;
+            this.ChildHorizontalDirection = DirectionHorizontal.LeftToRight;
         }
 
         public IEnumerable<Node> Children

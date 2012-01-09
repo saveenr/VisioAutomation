@@ -8,16 +8,8 @@ namespace VisioAutomation.Layout.BoxLayout2
     {
         private Container _root;
 
-        public BoxLayout() :
-            this(ContainerDirection.Vertical)
+        public BoxLayout()         
         {
-        }
-
-        public BoxLayout(ContainerDirection dir)
-        {
-            var c = new Container();
-            c.Direction = dir;
-            this._root = c;
         }
 
         public Container Root
