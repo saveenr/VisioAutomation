@@ -22,7 +22,6 @@ namespace VisioAutomationSamples
             var layout1 = new BoxL.BoxLayout();
             layout1.Root = new BoxL.Container( BoxL.ContainerDirection.Vertical );
             layout1.Root.Padding = 0.25;
-            layout1.Root.Direction = BoxL.ContainerDirection.Vertical;
             layout1.Root.ChildSeparation = 0.25;
             layout1.Root.AddBox(1,2);
             layout1.Root.AddBox(1,1);
@@ -33,7 +32,6 @@ namespace VisioAutomationSamples
             layout2.Root.MinHeight = 5;
             layout2.Root.MinWidth = 3;
             layout2.Root.Padding = 0.25;
-            layout2.Root.Direction = BoxL.ContainerDirection.Vertical;
             layout2.Root.ChildSeparation = 0.25;
             layout2.Root.AddBox(1, 2);
             layout2.Root.AddBox(1, 1);
@@ -45,14 +43,26 @@ namespace VisioAutomationSamples
             layout3.Root.MinWidth = 3;
             layout3.Root.ChildVerticalDirection = DirectionVertical.TopToBottom;
             layout3.Root.Padding = 0.25;
-            layout3.Root.Direction = BoxL.ContainerDirection.Vertical;
             layout3.Root.ChildSeparation = 0.25;
             layout3.Root.AddBox(1, 2);
             layout3.Root.AddBox(1, 1);
 
+            // Now switch to horizontal containers
+            var layout4 = new BoxL.BoxLayout();
+            layout4.Root = new BoxL.Container(BoxL.ContainerDirection.Horizontal);
+            layout4.Root.MinHeight = 5;
+            layout4.Root.MinWidth = 3;
+            layout4.Root.ChildHorizontalDirection = DirectionHorizontal.RightToLeft;
+            layout4.Root.Padding = 0.25;
+            layout4.Root.ChildSeparation = 0.25;
+            layout4.Root.AddBox(1, 2);
+            layout4.Root.AddBox(1, 1);
+
+
             Util.Render(layout1, doc);
             Util.Render(layout2, doc);
             Util.Render(layout3, doc);
+            Util.Render(layout4, doc);
 
 
         }

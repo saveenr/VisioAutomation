@@ -10,6 +10,7 @@ namespace VisioAutomation.Layout.BoxLayout2
         internal Node parent;
         public object Data { get; set; }
         public VA.Drawing.Rectangle Rectangle { get; set; }
+        public VA.Drawing.Rectangle ReservedRectangle { get; set; }
         public VA.Drawing.Size Size { get; set; }
         public VA.Drawing.AlignmentHorizontal HAlignToParent;
         public VA.Drawing.AlignmentVertical VAlignToParent;
@@ -175,21 +176,63 @@ namespace VisioAutomation.Layout.BoxLayout2
         {
             this.Rectangle = new VA.Drawing.Rectangle(origin, this.Size);
 
-            double x = origin.X + this.Padding;
-            double y = origin.Y + this.Padding;
+            double x = this.ChildHorizontalDirection == DirectionHorizontal.LeftToRight ? 
+                origin.X + this.Padding 
+                : origin.Y + this.Size.Width -Padding;
+
+            double y = this.ChildVerticalDirection == DirectionVertical.BottomToTop ? 
+                origin.Y + this.Padding 
+                : origin.Y + this.Size.Height - this.Padding;
+
+            double reserved_width = this.Size.Width - (2 * this.Padding);
+            double reserved_height = this.Size.Height - (2 * this.Padding);
+
             foreach (var c in this.Children)
             {
-                c._place( new VA.Drawing.Point(x,y));
 
                 if (this.Direction == ContainerDirection.Vertical)
                 {
-                    y += c.Size.Height;
-                    y += this.ChildSeparation;
+
+                    if (this.ChildVerticalDirection == DirectionVertical.BottomToTop)
+                    {
+                        // BOTTOM TO TOP
+                        c._place(new VA.Drawing.Point(x, y));
+                        y += c.Size.Height;
+                        y += this.ChildSeparation;
+
+                        var reserved_rect = new VA.Drawing.Rectangle(x, y, x+reserved_width, y+c.Size.Height);
+                    }
+                    else
+                    {
+                        // TOP TO BOTTOM
+                        c._place(new VA.Drawing.Point(x, y-c.Size.Height));
+                        y -= c.Size.Height;
+                        y -= this.ChildSeparation;
+
+                        var reserved_rect = new VA.Drawing.Rectangle(x, y - c.Size.Height, x+ reserved_width, y);
+                    }
                 }
                 else
                 {
-                    x += c.Size.Width;
-                    x += this.ChildSeparation;
+                    if (this.ChildHorizontalDirection == DirectionHorizontal.LeftToRight)
+                    {
+                        // LEFT TO RIGHT
+                        c._place(new VA.Drawing.Point(x, y));
+                        x += c.Size.Width;
+                        x += this.ChildSeparation;
+
+                        var reserved_rect = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
+                    }
+                    else 
+                    {
+                        // RIGHT TO LEFT
+                        c._place(new VA.Drawing.Point(x, y));
+                        x += c.Size.Width;
+                        x += this.ChildSeparation;
+
+                        var reserved_rect = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
+                    }
+
                 }
             }
         }
