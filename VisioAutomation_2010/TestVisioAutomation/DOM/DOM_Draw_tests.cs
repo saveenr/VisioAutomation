@@ -212,7 +212,7 @@ namespace TestVisioAutomation
 
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             t1.SetText(s0);
-            //page1.Delete(0);
+            page1.Delete(0);
         }
     }
 }
