@@ -35,37 +35,6 @@ namespace VisioAutomationSamples
             return box;
         }
 
-        public static void BoxLayout()
-        {
-            // Create a layout
-            var layout = BoxLayoutShared.CreateSampleLayout();
-
-            // Ask the Layout to place the nodes
-            layout.PerformLayout();
-
-            // Create a blank canvas in Visio 
-            var app = SampleEnvironment.Application;
-            var documents = app.Documents;
-            var doc = documents.Add(string.Empty);
-            var page1 = doc.Pages[1];
-
-            // and tinker with it
-            // render
-            foreach (var node in layout.Nodes)
-            {
-                BoxLayoutShared.DrawNode(node, node.Rectangle, page1);
-            }
-
-            var src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
-            var root_shape = (IVisio.Shape) layout.Root.Data;
-            var cell_linepat = root_shape.GetCell(src_linepat);
-            cell_linepat.FormulaU = "7";
-
-            // Make the page big enough to fit what was drawn + a small border
-            var margin = new VA.Drawing.Size(0.5, 0.5);
-            page1.ResizeToFitContents(margin);
-        }
-
         public static void FontCompare()
         {
             var visapp = new IVisio.Application();
