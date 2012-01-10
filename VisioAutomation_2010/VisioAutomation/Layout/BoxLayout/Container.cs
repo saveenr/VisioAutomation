@@ -13,11 +13,16 @@ namespace VisioAutomation.Layout.BoxLayout
         public double PaddingRight{ get; set; }
         public double PaddingBottom { get; set; }
         public double ChildSpacing { get; set; }
-        public Direction Direction;
-        public double MinWidth;
-        public double MinHeight;
+        public Direction Direction { get; set; }
+        public double MinWidth { get; set; }
+        public double MinHeight { get; set; }
 
         public Container(Direction dir)
+            : this(dir, 0,0)
+        {
+        }
+
+        public Container(Direction dir, double minwidth, double minheight)
         {
             this.Direction = dir;
             this.PaddingLeft = 0.125;
@@ -25,8 +30,10 @@ namespace VisioAutomation.Layout.BoxLayout
             this.PaddingTop = 0.125;
             this.PaddingBottom = 0.125;
             this.ChildSpacing = 0.125;
+            this.MinWidth = minwidth;
+            this.MinHeight = minheight;
         }
-
+        
         public IEnumerable<Node> Children
         {
             get
@@ -52,10 +59,15 @@ namespace VisioAutomation.Layout.BoxLayout
             return n;
         }
 
-        public Container AddContainer(Direction hdir)
+        public Container AddContainer(Direction dir)
         {
-            var n = new Container(hdir);
-            n.Direction = hdir;
+            return this.AddContainer(dir,0,0);
+        }
+
+        public Container AddContainer(Direction dir, double minwidth, double minheight)
+        {
+            var n = new Container(dir,minwidth,minheight);
+            n.Direction = dir;
             this.AddNode(n);
             return n;
         }

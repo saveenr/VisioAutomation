@@ -199,9 +199,7 @@ namespace InfoGraphicsPy
 
         private void draw_cell(CategoryCell cell_item, BL.Container n_row_col)
         {
-            var n_cell = n_row_col.AddContainer(BL.Direction.LeftToRight);
-            n_cell.MinWidth = CellWidth;
-            n_cell.MinHeight = CellHeight;
+            var n_cell = n_row_col.AddContainer(BL.Direction.LeftToRight, CellWidth, CellHeight);
             n_cell.ChildSpacing = CellVerticalSeparation/2;
             
             var cell_data = new RenderItem();
