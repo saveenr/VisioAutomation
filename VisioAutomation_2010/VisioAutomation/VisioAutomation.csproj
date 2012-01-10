@@ -87,7 +87,7 @@
     <Compile Include="Layout\BoxLayout2\BoxLayout.cs" />
     <Compile Include="Layout\BoxLayout2\Box.cs" />
     <Compile Include="Layout\BoxLayout2\Container.cs" />
-    <Compile Include="Layout\BoxLayout2\DirectionHorizontal.cs" />
+    <Compile Include="Layout\BoxLayout2\Direction.cs" />
     <Compile Include="Layout\BoxLayout2\DirectionVertical.cs" />
     <Compile Include="Layout\BoxLayout2\Orientation.cs" />
     <Compile Include="Layout\BoxLayout2\Node.cs" />

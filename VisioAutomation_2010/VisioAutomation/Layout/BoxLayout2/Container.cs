@@ -10,17 +10,14 @@ namespace VisioAutomation.Layout.BoxLayout2
         private List<Node> m_children;
         public double Padding { get; set; }
         public double ChildSeparation { get; set; }
-        public Orientation Orientation;
-        public DirectionVertical ChildVerticalDirection;
-        public DirectionHorizontal ChildHorizontalDirection;
+        public Direction Direction;
         public double MinWidth;
         public double MinHeight;
 
-        public Container(Orientation dir)
+        public Container(Direction dir)
         {
-            this.Orientation = dir;
-            this.ChildVerticalDirection = DirectionVertical.BottomToTop;
-            this.ChildHorizontalDirection = DirectionHorizontal.LeftToRight;
+            this.Direction = dir;
+            this.Padding = 0.125;
         }
 
         public IEnumerable<Node> Children
@@ -48,18 +45,10 @@ namespace VisioAutomation.Layout.BoxLayout2
             return n;
         }
 
-        public Container AddColumnContainer(DirectionVertical vdir)
+        public Container AddContainer(Direction hdir)
         {
-            var n = new Container(Orientation.Vertical);
-            n.ChildVerticalDirection = vdir;
-            this.AddNode(n);
-            return n;
-        }
-
-        public Container AddRowContainer(DirectionHorizontal hdir)
-        {
-            var n = new Container(Orientation.Horizontal);
-            n.ChildHorizontalDirection = hdir;
+            var n = new Container(hdir);
+            n.Direction = hdir;
             this.AddNode(n);
             return n;
         }
@@ -94,6 +83,16 @@ namespace VisioAutomation.Layout.BoxLayout2
             }
         }
 
+        private bool is_hor()
+        {
+            return (this.Direction == Direction.LeftToRight) || (this.Direction == Direction.RightToLeft);
+        }
+
+        private bool is_ver()
+        {
+            return (this.Direction == Direction.TopToBottom) || (this.Direction == Direction.BottomToTop);
+        }
+
         public override VA.Drawing.Size  CalculateSize()
         {
             double w = this.MinWidth;
@@ -113,7 +112,7 @@ namespace VisioAutomation.Layout.BoxLayout2
                 total_child_width += s.Width;
             }
 
-            if (Orientation == Orientation.Horizontal)
+            if ( this.is_hor())
             {
                 w = System.Math.Max(w, total_child_width);
                 h = System.Math.Max(h, max_child_height);
@@ -129,8 +128,8 @@ namespace VisioAutomation.Layout.BoxLayout2
 
             // Account for child separation
             int num_seps = System.Math.Max(0, this.Count - 1);
-            double total_sepy = (this.Orientation == Orientation.Vertical) ? num_seps * this.ChildSeparation : 0.0;
-            double total_sepx = (this.Orientation == Orientation.Horizontal) ? num_seps * this.ChildSeparation : 0.0;
+            double total_sepy = (this.is_ver()) ? num_seps * this.ChildSeparation : 0.0;
+            double total_sepx = (this.is_hor()) ? num_seps * this.ChildSeparation : 0.0;
 
             w += total_sepx;
             h += total_sepy;
@@ -143,20 +142,34 @@ namespace VisioAutomation.Layout.BoxLayout2
         {
             this.Rectangle = new VA.Drawing.Rectangle(origin, this.Size);
 
-            double x = this.ChildHorizontalDirection == DirectionHorizontal.LeftToRight ? 
-                origin.X + this.Padding 
-                : origin.Y + this.Size.Width -Padding;
+            double x;
+            double y;
 
-            double y = this.ChildVerticalDirection == DirectionVertical.BottomToTop ? 
-                origin.Y + this.Padding 
-                : origin.Y + this.Size.Height - this.Padding;
+            if (this.Direction == Direction.RightToLeft)
+            {
+                x = origin.Y + this.Size.Width - Padding;
+            }
+            else
+            {
+                x = origin.X + this.Padding;                
+            }
+
+
+            if (this.Direction == Direction.TopToBottom)
+            {
+                y = origin.Y + this.Size.Height - this.Padding;
+            }
+            else
+            {
+                y = origin.Y + this.Padding;
+            }
 
             double reserved_width = this.Size.Width - (2 * this.Padding);
             double reserved_height = this.Size.Height - (2 * this.Padding);
             foreach (var c in this.Children)
             {
 
-                if (this.Orientation == Orientation.Vertical)
+                if (this.is_ver())
                 {
                     double excess_width = reserved_width - c.Size.Width;
                     double align_delta_x = 0.0;
@@ -181,7 +194,7 @@ namespace VisioAutomation.Layout.BoxLayout2
                     }
 
 
-                    if (this.ChildVerticalDirection == DirectionVertical.BottomToTop)
+                    if (this.Direction == Direction.BottomToTop)
                     {
                         // BOTTOM TO TOP
                         c.ReservedRectangle = new VA.Drawing.Rectangle(x, y, x + reserved_width, y + c.Size.Height);
@@ -224,7 +237,7 @@ namespace VisioAutomation.Layout.BoxLayout2
                         }
                     }
 
-                    if (this.ChildHorizontalDirection == DirectionHorizontal.LeftToRight)
+                    if (this.Direction == Direction.LeftToRight)
                     {
                         // LEFT TO RIGHT
                         c.ReservedRectangle = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);

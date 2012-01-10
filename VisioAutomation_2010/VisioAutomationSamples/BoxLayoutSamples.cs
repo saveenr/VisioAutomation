@@ -55,8 +55,7 @@ namespace VisioAutomationSamples
         {
             var layout = new BoxL.BoxLayout();
 
-            var root = new Container( BoxL.Orientation.Vertical);
-            root.ChildVerticalDirection = BoxL.DirectionVertical.TopToBottom;
+            var root = new Container( BoxL.Direction.TopToBottom);
 
             layout.Root = root;
             root.ChildSeparation = 0.5;
@@ -86,7 +85,7 @@ namespace VisioAutomationSamples
                 var fontname_box_data = (NodeData) fontname_box.Data;
                 fontname_box_data.Cells = fontname_cells;
 
-                var font_box = root.AddColumnContainer(BoxL.DirectionVertical.TopToBottom);
+                var font_box = root.AddContainer(BoxL.Direction.TopToBottom);
                 font_box.ChildSeparation = 0.25;
                 var font_vox_data = (NodeData) font_box.Data;
                 if (font_vox_data != null)
@@ -101,7 +100,7 @@ namespace VisioAutomationSamples
 
                 foreach (int row in Enumerable.Range(0, numrows))
                 {
-                    var row_box = font_box.AddRowContainer(BoxL.DirectionHorizontal.LeftToRight);
+                    var row_box = font_box.AddContainer(BoxL.Direction.LeftToRight);
                     row_box.ChildSeparation = 0.25;
                     var row_box_data = new NodeData();
                     row_box_data.Render = false;
