@@ -10,15 +10,15 @@ namespace VisioAutomation.Layout.BoxLayout2
         private List<Node> m_children;
         public double Padding { get; set; }
         public double ChildSeparation { get; set; }
-        public ContainerDirection Direction;
+        public Orientation Orientation;
         public DirectionVertical ChildVerticalDirection;
         public DirectionHorizontal ChildHorizontalDirection;
         public double MinWidth;
         public double MinHeight;
 
-        public Container(ContainerDirection dir)
+        public Container(Orientation dir)
         {
-            this.Direction = dir;
+            this.Orientation = dir;
             this.ChildVerticalDirection = DirectionVertical.BottomToTop;
             this.ChildHorizontalDirection = DirectionHorizontal.LeftToRight;
         }
@@ -50,7 +50,7 @@ namespace VisioAutomation.Layout.BoxLayout2
 
         public Container AddColumnContainer(DirectionVertical vdir)
         {
-            var n = new Container(ContainerDirection.Vertical);
+            var n = new Container(Orientation.Vertical);
             n.ChildVerticalDirection = vdir;
             this.AddNode(n);
             return n;
@@ -58,7 +58,7 @@ namespace VisioAutomation.Layout.BoxLayout2
 
         public Container AddRowContainer(DirectionHorizontal hdir)
         {
-            var n = new Container(ContainerDirection.Horizontal);
+            var n = new Container(Orientation.Horizontal);
             n.ChildHorizontalDirection = hdir;
             this.AddNode(n);
             return n;
@@ -113,7 +113,7 @@ namespace VisioAutomation.Layout.BoxLayout2
                 total_child_width += s.Width;
             }
 
-            if (Direction == ContainerDirection.Horizontal)
+            if (Orientation == Orientation.Horizontal)
             {
                 w = System.Math.Max(w, total_child_width);
                 h = System.Math.Max(h, max_child_height);
@@ -129,8 +129,8 @@ namespace VisioAutomation.Layout.BoxLayout2
 
             // Account for child separation
             int num_seps = System.Math.Max(0, this.Count - 1);
-            double total_sepy = (this.Direction == ContainerDirection.Vertical) ? num_seps * this.ChildSeparation : 0.0;
-            double total_sepx = (this.Direction == ContainerDirection.Horizontal) ? num_seps * this.ChildSeparation : 0.0;
+            double total_sepy = (this.Orientation == Orientation.Vertical) ? num_seps * this.ChildSeparation : 0.0;
+            double total_sepx = (this.Orientation == Orientation.Horizontal) ? num_seps * this.ChildSeparation : 0.0;
 
             w += total_sepx;
             h += total_sepy;
@@ -156,7 +156,7 @@ namespace VisioAutomation.Layout.BoxLayout2
             foreach (var c in this.Children)
             {
 
-                if (this.Direction == ContainerDirection.Vertical)
+                if (this.Orientation == Orientation.Vertical)
                 {
                     double excess_width = reserved_width - c.Size.Width;
                     double align_delta_x = 0.0;

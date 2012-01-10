@@ -55,7 +55,7 @@ namespace VisioAutomationSamples
         {
             var layout = new BoxL.BoxLayout();
 
-            var root = new Container( BoxL.ContainerDirection.Vertical);
+            var root = new Container( BoxL.Orientation.Vertical);
             root.ChildVerticalDirection = BoxL.DirectionVertical.TopToBottom;
 
             layout.Root = root;

@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Layout.BoxLayout2
 {
-    public enum ContainerDirection
+    public enum Orientation
     {
         Horizontal,
         Vertical
