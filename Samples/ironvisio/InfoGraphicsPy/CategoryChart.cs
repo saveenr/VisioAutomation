@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Office.Interop.Visio;
 using VisioAutomation.DOM;
-using VisioAutomation.Drawing;
-using VisioAutomation.Layout.BoxLayout;
-using BL = VisioAutomation.Layout.BoxLayout;
+using BL = VisioAutomation.Layout.BoxLayout2;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -112,7 +108,7 @@ namespace InfoGraphicsPy
             int cols = xcats.Count();
             int rows = ycats.Count();
 
-            VA.Layout.BoxLayout.Node root;
+            BL.Container root;
             var layout = create_layout(out root);
 
             foreach (int row in Enumerable.Range(0, rows))
@@ -128,9 +124,9 @@ namespace InfoGraphicsPy
             Render(page, layout);
         }
 
-        private void AddXCatLabels(List<string> xcats, int cols, VA.Layout.BoxLayout.Node root)
+        private void AddXCatLabels(List<string> xcats, int cols, BL.Container root)
         {
-            var n_row = root.AddRow();
+            var n_row = root.AddContainer(BL.Direction.LeftToRight);
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // Add indent
@@ -148,9 +144,9 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void AddMajorRow(List<string> ycats, int row, VA.Layout.BoxLayout.Node root, List<string> xcats, int cols)
+        private void AddMajorRow(List<string> ycats, int row, BL.Container root, List<string> xcats, int cols)
         {
-            var n_row = root.AddRow();
+            var n_row = root.AddContainer(BL.Direction.LeftToRight);
             n_row.ChildSeparation = CellHorizontalSeparation;
 
             // -- add indent
@@ -158,11 +154,10 @@ namespace InfoGraphicsPy
 
             foreach (int col in Enumerable.Range(0, cols))
             {
-                var n_cell = n_row.AddBox(CellWidth, 0.25);
+                var n_cell = n_row.AddContainer(BL.Direction.LeftToRight);
 
                 // ---
-                n_cell.Direction = BL.LayoutDirection.Vertical;
-                n_cell.AlignmentVertical = AlignmentVertical.Top;
+                n_cell.Direction = BL.Direction.LeftToRight;
                 n_cell.ChildSeparation = CellVerticalSeparation;
                 var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
                 foreach (var cell_item in items_for_cells)
@@ -171,7 +166,7 @@ namespace InfoGraphicsPy
                 }
             }
 
-            var n_row_label = root.AddBox(null, CategoryHeight);
+            var n_row_label = root.AddBox(0.25, CategoryHeight);
             var info = new RenderItem();
             info.CategoryCell = null;
             info.ShapeText = ycats[row];
@@ -181,18 +176,17 @@ namespace InfoGraphicsPy
             n_row_label.Data = info;
         }
 
-        private BoxLayout create_layout(out VA.Layout.BoxLayout.Node root)
+        private BL.BoxLayout create_layout(out BL.Container root)
         {
             var layout = new BL.BoxLayout();
-            layout.LayoutOptions.Origin = new VA.Drawing.Point(0, 10);
-            layout.LayoutOptions.DefaultHeight = 0.25;
+            //layout.LayoutOptions.Origin = new VA.Drawing.Point(0, 10);
+            // layout.LayoutOptions.DefaultHeight = 0.25;
+            layout.Root = new BL.Container(BL.Direction.TopToBottom);
             root = layout.Root;
-            root.Direction = BL.LayoutDirection.Vertical;
-            root.ChildSeparation = 0.125;
             return layout;
         }
 
-        private void add_title(VA.Layout.BoxLayout.Node root)
+        private void add_title(BL.Container root)
         {
             var n_title = root.AddBox(2.0, 0.5);
             var node_data = new RenderItem();
@@ -203,9 +197,11 @@ namespace InfoGraphicsPy
             n_title.Data = node_data;
         }
 
-        private void draw_cell(CategoryCell cell_item, VA.Layout.BoxLayout.Node n_row_col)
+        private void draw_cell(CategoryCell cell_item, BL.Container n_row_col)
         {
-            var n_cell = n_row_col.AddBox(CellWidth, CellHeight);
+            var n_cell = n_row_col.AddContainer(BL.Direction.LeftToRight);
+            n_cell.MinWidth = CellWidth;
+            n_cell.MinHeight = CellHeight;
             n_cell.ChildSeparation = CellVerticalSeparation/2;
             
             var cell_data = new RenderItem();
@@ -225,11 +221,11 @@ namespace InfoGraphicsPy
                     subcell_data.ShapeCells = subcellformat;
                     subn_cell.Data = subcell_data;
                 }
-                n_cell.AddBox(null, 0.25);
+                n_cell.AddBox(0.25, 0.25);
             }
         }
 
-        private void Render(Page page, BoxLayout layout)
+        private void Render(Page page, BL.BoxLayout layout)
         {
             layout.PerformLayout();
             var doc = page.Document;
@@ -246,7 +242,7 @@ namespace InfoGraphicsPy
                     var n_data = (RenderItem) n.Data;
                     if (n_data.FitWidthToParent == true)
                     {
-                       r = new VA.Drawing.Rectangle(r.LowerLeft, new VA.Drawing.Size(n.Parent.Width.Value-2*n.Padding,r.Height));
+                       r = new VA.Drawing.Rectangle(r.LowerLeft, new VA.Drawing.Size(n.Parent.Size.Width-2,r.Height));
                     }
 
                     var s = dom.DrawRectangle(r);
