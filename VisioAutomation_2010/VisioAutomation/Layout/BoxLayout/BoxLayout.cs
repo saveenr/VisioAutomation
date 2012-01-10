@@ -26,6 +26,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
             this._root.CalculateSize();
             this.Place(new VA.Drawing.Point(0,0));
+            this._root.ReservedRectangle = this._root.Rectangle;
         }
 
         private void Place(VA.Drawing.Point origin)
