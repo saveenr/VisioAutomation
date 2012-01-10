@@ -12,8 +12,7 @@ namespace VisioAutomation.Layout.BoxLayout
         public double PaddingLeft { get; set; }
         public double PaddingRight{ get; set; }
         public double PaddingBottom { get; set; }
-
-        public double ChildSeparation { get; set; }
+        public double ChildSpacing { get; set; }
         public Direction Direction;
         public double MinWidth;
         public double MinHeight;
@@ -25,7 +24,7 @@ namespace VisioAutomation.Layout.BoxLayout
             this.PaddingRight = 0.125;
             this.PaddingTop = 0.125;
             this.PaddingBottom = 0.125;
-            this.ChildSeparation = 0.125;
+            this.ChildSpacing = 0.125;
         }
 
         public IEnumerable<Node> Children
@@ -136,8 +135,8 @@ namespace VisioAutomation.Layout.BoxLayout
 
             // Account for child separation
             int num_seps = System.Math.Max(0, this.Count - 1);
-            double total_sepy = (this.is_ver()) ? num_seps * this.ChildSeparation : 0.0;
-            double total_sepx = (this.is_hor()) ? num_seps * this.ChildSeparation : 0.0;
+            double total_sepy = (this.is_ver()) ? num_seps * this.ChildSpacing : 0.0;
+            double total_sepx = (this.is_hor()) ? num_seps * this.ChildSpacing : 0.0;
 
             w += total_sepx;
             h += total_sepy;
@@ -209,7 +208,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
                         c._place(new VA.Drawing.Point(x+align_delta_x, y));
                         y += c.Size.Height;
-                        y += this.ChildSeparation;
+                        y += this.ChildSpacing;
 
                     }
                     else
@@ -219,7 +218,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
                         c._place(new VA.Drawing.Point(x+align_delta_x, y - c.Size.Height));
                         y -= c.Size.Height;
-                        y -= this.ChildSeparation;
+                        y -= this.ChildSpacing;
 
                     }
                 }
@@ -252,7 +251,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
                         c._place(new VA.Drawing.Point(x, y+align_delta_y));
                         x += c.Size.Width;
-                        x += this.ChildSeparation;
+                        x += this.ChildSpacing;
 
                     }
                     else 
@@ -262,7 +261,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
                         c._place(new VA.Drawing.Point(x - c.Size.Width, y+align_delta_y));
                         x -= c.Size.Width;
-                        x -= this.ChildSeparation;
+                        x -= this.ChildSpacing;
 
                     }
 

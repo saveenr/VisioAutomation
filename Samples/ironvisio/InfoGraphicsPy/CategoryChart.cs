@@ -127,7 +127,7 @@ namespace InfoGraphicsPy
         private void AddXCatLabels(List<string> xcats, int cols, BL.Container root)
         {
             var n_row = root.AddContainer(BL.Direction.LeftToRight);
-            n_row.ChildSeparation = CellHorizontalSeparation;
+            n_row.ChildSpacing = CellHorizontalSeparation;
 
             // Add indent
             n_row.AddBox(Indent, 0.25);
@@ -147,7 +147,7 @@ namespace InfoGraphicsPy
         private void AddMajorRow(List<string> ycats, int row, BL.Container root, List<string> xcats, int cols)
         {
             var n_row = root.AddContainer(BL.Direction.LeftToRight);
-            n_row.ChildSeparation = CellHorizontalSeparation;
+            n_row.ChildSpacing = CellHorizontalSeparation;
 
             // -- add indent
             n_row.AddBox(Indent, 0.25);
@@ -158,7 +158,7 @@ namespace InfoGraphicsPy
 
                 // ---
                 n_cell.Direction = BL.Direction.LeftToRight;
-                n_cell.ChildSeparation = CellVerticalSeparation;
+                n_cell.ChildSpacing = CellVerticalSeparation;
                 var items_for_cells = this.Items.Where(i => i.XCategory == xcats[col] && i.YCategory == ycats[row]);
                 foreach (var cell_item in items_for_cells)
                 {
@@ -202,7 +202,7 @@ namespace InfoGraphicsPy
             var n_cell = n_row_col.AddContainer(BL.Direction.LeftToRight);
             n_cell.MinWidth = CellWidth;
             n_cell.MinHeight = CellHeight;
-            n_cell.ChildSeparation = CellVerticalSeparation/2;
+            n_cell.ChildSpacing = CellVerticalSeparation/2;
             
             var cell_data = new RenderItem();
             cell_data.CategoryCell = cell_item;
