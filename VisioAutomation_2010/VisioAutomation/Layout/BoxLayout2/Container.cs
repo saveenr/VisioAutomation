@@ -8,7 +8,11 @@ namespace VisioAutomation.Layout.BoxLayout2
     public class Container : Node
     {
         private List<Node> m_children;
-        public double Padding { get; set; }
+        public double PaddingTop { get; set; }
+        public double PaddingLeft { get; set; }
+        public double PaddingRight{ get; set; }
+        public double PaddingBottom { get; set; }
+
         public double ChildSeparation { get; set; }
         public Direction Direction;
         public double MinWidth;
@@ -17,7 +21,11 @@ namespace VisioAutomation.Layout.BoxLayout2
         public Container(Direction dir)
         {
             this.Direction = dir;
-            this.Padding = 0.125;
+            this.PaddingLeft = 0.125;
+            this.PaddingRight = 0.125;
+            this.PaddingTop = 0.125;
+            this.PaddingBottom = 0.125;
+            this.ChildSeparation = 0.125;
         }
 
         public IEnumerable<Node> Children
@@ -123,8 +131,8 @@ namespace VisioAutomation.Layout.BoxLayout2
                 h = System.Math.Max(h, total_child_height);
             }
             
-            w += (2 * this.Padding);
-            h += (2 * this.Padding);
+            w += this.PaddingLeft + this.PaddingRight;
+            h += this.PaddingTop + this.PaddingBottom;
 
             // Account for child separation
             int num_seps = System.Math.Max(0, this.Count - 1);
@@ -147,25 +155,25 @@ namespace VisioAutomation.Layout.BoxLayout2
 
             if (this.Direction == Direction.RightToLeft)
             {
-                x = origin.Y + this.Size.Width - Padding;
+                x = origin.Y + this.Size.Width - this.PaddingRight;
             }
             else
             {
-                x = origin.X + this.Padding;                
+                x = origin.X + this.PaddingLeft;                
             }
 
 
             if (this.Direction == Direction.TopToBottom)
             {
-                y = origin.Y + this.Size.Height - this.Padding;
+                y = origin.Y + this.Size.Height - this.PaddingTop;
             }
             else
             {
-                y = origin.Y + this.Padding;
+                y = origin.Y + this.PaddingBottom;
             }
 
-            double reserved_width = this.Size.Width - (2 * this.Padding);
-            double reserved_height = this.Size.Height - (2 * this.Padding);
+            double reserved_width = this.Size.Width - (this.PaddingLeft + this.PaddingRight);
+            double reserved_height = this.Size.Height - (this.PaddingTop + this.PaddingBottom);
             foreach (var c in this.Children)
             {
 
@@ -269,7 +277,5 @@ namespace VisioAutomation.Layout.BoxLayout2
                 yield return c;
             }
         }
-
     }
-
 }

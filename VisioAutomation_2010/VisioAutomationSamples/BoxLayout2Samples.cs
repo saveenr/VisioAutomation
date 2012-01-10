@@ -22,7 +22,6 @@ namespace VisioAutomationSamples
             // Create a simple Column
             var layout1 = new BoxL.BoxLayout();
             layout1.Root = new BoxL.Container( BoxL.Direction.BottomToTop);
-            layout1.Root.ChildSeparation = 0.25;
             layout1.Root.AddBox(1,2);
             layout1.Root.AddBox(1,1);
             layout1.Root.AddBox(0.5, 0.5);
@@ -32,8 +31,6 @@ namespace VisioAutomationSamples
             layout2.Root = new BoxL.Container(BoxL.Direction.BottomToTop);
             layout2.Root.MinHeight = 5;
             layout2.Root.MinWidth = 3;
-            layout2.Root.Padding = 0.25;
-            layout2.Root.ChildSeparation = 0.25;
             layout2.Root.AddBox(1, 2);
             layout2.Root.AddBox(1, 1);
             layout2.Root.AddBox(0.5, 0.5);
@@ -43,8 +40,6 @@ namespace VisioAutomationSamples
             layout3.Root = new BoxL.Container(BoxL.Direction.TopToBottom);
             layout3.Root.MinHeight = 5;
             layout3.Root.MinWidth = 3;
-            layout3.Root.Padding = 0.25;
-            layout3.Root.ChildSeparation = 0.25;
             layout3.Root.AddBox(1, 2);
             layout3.Root.AddBox(1, 1);
             layout3.Root.AddBox(0.5, 0.5);
@@ -54,8 +49,6 @@ namespace VisioAutomationSamples
             layout4.Root = new BoxL.Container(BoxL.Direction.RightToLeft);
             layout4.Root.MinHeight = 5;
             layout4.Root.MinWidth = 3;
-            layout4.Root.Padding = 0.25;
-            layout4.Root.ChildSeparation = 0.25;
             layout4.Root.AddBox(1, 2);
             layout4.Root.AddBox(1, 1);
             layout4.Root.AddBox(0.5, 0.5);
@@ -64,8 +57,6 @@ namespace VisioAutomationSamples
             // For Columns, you can tell the children how to horizontally align
             var layout5 = new BoxL.BoxLayout();
             layout5.Root = new BoxL.Container(BoxL.Direction.BottomToTop);
-            layout5.Root.Padding = 0.25;
-            layout5.Root.ChildSeparation = 0.25;
             layout5.Root.MinWidth = 3;
             var b51 = layout5.Root.AddBox(1, 2);
             var b52 = layout5.Root.AddBox(1, 1);
@@ -77,8 +68,6 @@ namespace VisioAutomationSamples
             // For Rows , you can tell the children how to vertially align
             var layout6 = new BoxL.BoxLayout();
             layout6.Root = new BoxL.Container(BoxL.Direction.LeftToRight);
-            layout6.Root.Padding = 0.25;
-            layout6.Root.ChildSeparation = 0.25;
             layout6.Root.MinHeight = 5;
             var b61 = layout6.Root.AddBox(1, 2);
             var b62 = layout6.Root.AddBox(1, 1);
