@@ -3,7 +3,7 @@ using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using System.Linq;
 
-namespace VisioAutomation.Layout.BoxLayout2
+namespace VisioAutomation.Layout.BoxLayout
 {
     public abstract class Node
     {

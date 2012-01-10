@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using VisioAutomation.Drawing;
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Layout.BoxLayout2
+namespace VisioAutomation.Layout.BoxLayout
 {
     public class BoxLayout
     {

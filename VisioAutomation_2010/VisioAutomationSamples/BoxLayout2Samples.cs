@@ -1,12 +1,11 @@
 ﻿using VisioAutomation.DOM;
 using VisioAutomation.Drawing;
-using VisioAutomation.Layout.BoxLayout2;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BoxL = VisioAutomation.Layout.BoxLayout2;
+using BoxL = VisioAutomation.Layout.BoxLayout;
 
 namespace VisioAutomationSamples
 {
@@ -27,7 +26,7 @@ namespace VisioAutomationSamples
             layout1.Root.AddBox(0.5, 0.5);
 
             // You can set the min height and width of a container
-            var layout2 = new VA.Layout.BoxLayout2.BoxLayout();
+            var layout2 = new BoxL.BoxLayout();
             layout2.Root = new BoxL.Container(BoxL.Direction.BottomToTop);
             layout2.Root.MinHeight = 5;
             layout2.Root.MinWidth = 3;

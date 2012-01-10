@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Office.Interop.Visio;
 using VisioAutomation.DOM;
-using BL = VisioAutomation.Layout.BoxLayout2;
+using BL = VisioAutomation.Layout.BoxLayout;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 

@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Layout.BoxLayout2
+﻿namespace VisioAutomation.Layout.BoxLayout
 {
     public enum Direction
     {

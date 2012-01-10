@@ -1,11 +1,9 @@
-﻿using VisioAutomation.DOM;
-using VisioAutomation.Layout.BoxLayout2;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BoxL = VisioAutomation.Layout.BoxLayout2;
+using BoxL = VisioAutomation.Layout.BoxLayout;
 
 namespace VisioAutomationSamples
 {
@@ -26,7 +24,7 @@ namespace VisioAutomationSamples
             }
         }
 
-        public static BoxL.Node AddNodeEx(this BoxL.Container p, double w, double h, string s)
+        public static BoxL.Box AddNodeEx(this BoxL.Container p, double w, double h, string s)
         {
             var box = p.AddBox(w, h);
             var node_data = new NodeData();
@@ -55,7 +53,7 @@ namespace VisioAutomationSamples
         {
             var layout = new BoxL.BoxLayout();
 
-            var root = new Container( BoxL.Direction.TopToBottom);
+            var root = new BoxL.Container( BoxL.Direction.TopToBottom);
 
             layout.Root = root;
             root.ChildSeparation = 0.5;

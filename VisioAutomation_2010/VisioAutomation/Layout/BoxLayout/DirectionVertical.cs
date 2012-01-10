@@ -1,0 +1,3 @@
+﻿namespace VisioAutomation.Layout.BoxLayout
+{
+}
