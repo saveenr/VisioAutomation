@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using System.Linq;
 
@@ -198,15 +197,15 @@ namespace VisioAutomation.Layout.BoxLayout
                     if (excess_width>0)
                     {
                         
-                        if (c.HAlignToParent == AlignmentHorizontal.Left)
+                        if (c.HAlignToParent == VA.Layout.BoxLayout.AlignmentHorizontal.Left)
                         {
                             align_delta_x = 0;
                         }
-                        else if (c.HAlignToParent == AlignmentHorizontal.Right)
+                        else if (c.HAlignToParent == VA.Layout.BoxLayout.AlignmentHorizontal.Right)
                         {
                             align_delta_x = excess_width;
                         }
-                        else if (c.HAlignToParent == AlignmentHorizontal.Center)
+                        else if (c.HAlignToParent == VA.Layout.BoxLayout.AlignmentHorizontal.Center)
                         {
                             align_delta_x = excess_width / 2;
                         }
@@ -242,15 +241,15 @@ namespace VisioAutomation.Layout.BoxLayout
                     // for any alignment
                     if (excess_height > 0)
                     {
-                        if (c.VAlignToParent == AlignmentVertical.Bottom)
+                        if (c.VAlignToParent == VA.Layout.BoxLayout.AlignmentVertical.Bottom)
                         {
                             align_delta_y = 0;
                         }
-                        else if (c.VAlignToParent == AlignmentVertical.Top)
+                        else if (c.VAlignToParent == VA.Layout.BoxLayout.AlignmentVertical.Top)
                         {
                             align_delta_y = excess_height;
                         }
-                        else if (c.VAlignToParent == AlignmentVertical.Center)
+                        else if (c.VAlignToParent == VA.Layout.BoxLayout.AlignmentVertical.Center)
                         {
                             align_delta_y = excess_height / 2;
                         }

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
-using System.Linq;
 
 namespace VisioAutomation.Layout.BoxLayout
 {
@@ -12,8 +10,8 @@ namespace VisioAutomation.Layout.BoxLayout
         public VA.Drawing.Rectangle Rectangle { get; set; }
         public VA.Drawing.Rectangle ReservedRectangle { get; set; }
         public VA.Drawing.Size Size { get; set; }
-        public VA.Drawing.AlignmentHorizontal HAlignToParent;
-        public VA.Drawing.AlignmentVertical VAlignToParent;
+        public VA.Layout.BoxLayout.AlignmentHorizontal HAlignToParent;
+        public VA.Layout.BoxLayout.AlignmentVertical VAlignToParent;
 
         public Node Parent
         {
