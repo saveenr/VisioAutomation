@@ -154,8 +154,6 @@
     <Compile Include="Format\FormatPaintCache.cs" />
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
-    <Compile Include="Layout\BoxLayout\DirectionHorizontal.cs" />
-    <Compile Include="Layout\BoxLayout\DirectionVertical.cs" />
     <Compile Include="Layout\LockCells_ext.cs" />
     <Compile Include="Layout\XFormCells_ext.cs" />
     <Compile Include="Layout\LockCells.cs" />
@@ -201,10 +199,6 @@
     <Compile Include="DOM\PageSettings.cs" />
     <Compile Include="FastRenderingScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
-    <Compile Include="Layout\BoxLayout\BoxLayout.cs" />
-    <Compile Include="Layout\BoxLayout\LayoutDirection.cs" />
-    <Compile Include="Layout\BoxLayout\LayoutOptions.cs" />
-    <Compile Include="Layout\BoxLayout\Node.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Layout\Grid\Column.cs" />
     <Compile Include="Layout\Grid\ColumnDirection.cs" />

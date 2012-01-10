@@ -1,12 +1,7 @@
-﻿using VisioAutomation.DOM;
-using VisioAutomation.Format;
-using VisioAutomation.Layout.ContainerLayout;
+﻿using VisioAutomation.Layout.ContainerLayout;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using System.Linq;
-using System.Collections.Generic;
-using BH = VisioAutomation.Layout.BoxLayout;
 
 namespace VisioAutomationSamples
 {
