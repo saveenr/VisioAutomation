@@ -361,8 +361,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var doc = this.Session.Document.New(8.5, 11);
             var fonts = doc.Fonts;
-            var font = fonts["Segoe UI"];
-            int fontid = font.ID16;
+            var font_segoe = fonts["Segoe UI"];
+            var font_segoelight = fonts["Segoe UI Light"];
+            int fontid_segoe = font_segoe.ID16;
+            int fontid_segoelight = font_segoelight.ID16;
 
             var types = VA.Scripting.Commands.DeveloperCommands.GetTypes().Select(t=>new TypeInfo(t));
 
@@ -376,7 +378,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var tree_layout = new VA.Layout.Tree.Drawing();
             tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Down;
-            tree_layout.LayoutOptions.ConnectorType= VA.Layout.Tree.ConnectorType.CurvedBezier;
+            tree_layout.LayoutOptions.ConnectorType= VA.Layout.Tree.ConnectorType.PolyLine;
             var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
             var node_to_nslabel= new Dictionary<VA.Layout.Tree.Node,string>(namespaces.Count);
 
@@ -399,11 +401,11 @@ namespace VisioAutomation.Scripting.Commands
 
                 var markup = new VA.Text.Markup.TextElement();
                 var m1 = markup.AppendElement(label+"\n");
-                m1.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
+                m1.CharacterFormat.FontID = fontid_segoe;
                 m1.CharacterFormat.FontSize = 12.0;
                 var m2 = markup.AppendElement();
                 m2.AppendText(string.Join("\n", types_in_namespace));
-                m2.ParagraphFormat.Bullets = true;
+                m2.ParagraphFormat.Bullets = false;
 
                 node.Text = markup;
 
@@ -453,6 +455,8 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
+            string linecolor = "rgb(180,180,180)";
+
             // format the shapes
             foreach (var node in tree_layout.Nodes)
             {
@@ -460,17 +464,16 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     node.ShapeCells = new ShapeCells();
                 }
-                node.ShapeCells.FillForegnd = "rgb(240,240,240)";
-                node.ShapeCells.CharFont = fontid;
+                node.ShapeCells.FillForegnd = "rgb(245,245,245)";
                 //node.ShapeCells.LineWeight = "0";
                 //node.ShapeCells.LinePattern = "0";
-                node.ShapeCells.LineColor = "rgb(140,140,140)";
+                node.ShapeCells.LineColor = linecolor;
                 node.ShapeCells.HAlign = "0";
                 node.ShapeCells.VerticalAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
-            cxn_cells.LineColor = "rgb(140,140,140)";
+            cxn_cells.LineColor = linecolor;
             tree_layout.LayoutOptions.ConnectorShapeCells = cxn_cells;
 
 
