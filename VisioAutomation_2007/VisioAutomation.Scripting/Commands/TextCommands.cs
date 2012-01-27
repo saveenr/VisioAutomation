@@ -314,7 +314,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
         }
 
-        public IList<VA.Text.TextFormat> GetCharacterFormat()
+        public IList<VA.Text.TextFormat> GetTextFormat()
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -328,6 +328,35 @@ namespace VisioAutomation.Scripting.Commands
             return formats;
         }
 
+        public void SetTextFormat(VA.Text.CharacterFormatCells charfmt, VA.Text.ParagraphFormatCells parafmt)
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return ;
+            }
 
+            var selection = this.Session.Selection.Get();
+            var shapeids = selection.GetIDs();
+            var application = this.Session.VisioApplication;
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+
+            if (charfmt != null)
+            {
+                foreach (int shapeid in shapeids)
+                {
+                    charfmt.Apply(update,(short)shapeid,0);
+                }
+            }
+
+            if (parafmt != null)
+            {
+                foreach (int shapeid in shapeids)
+                {
+                    parafmt.Apply(update, (short)shapeid, 0);
+                }
+            }
+
+            update.Execute(application.ActivePage);
+        }
     }
 }
