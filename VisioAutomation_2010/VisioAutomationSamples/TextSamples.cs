@@ -107,5 +107,114 @@ namespace VisioAutomationSamples
 
             update.Execute(page);
         }
+
+        public static void FontCompare()
+        {
+            var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
+            var master = stencil.Masters["Rectangle"];
+            var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+
+            var text1 =
+                @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890!@#$%^&*()``_-+=[]{}\|;:'"",.<>/?";
+            var fonts = new[] { "Calibri", "Arial" };
+            var sizes = new[] { "8.pt", "10.0pt", "12.0pt", "14.0pt", "18.0pt", "28.0pt"};
+            var fontids = fonts.Select(f => page1.Document.Fonts[f].ID).ToList();
+
+            var r = new System.Random();
+            double left=1;
+            double vs = 0.25;
+            double cell1_w = 2.0;
+            double cell1_h = 2.0;
+            double cell1_top = 8.5;
+            double cell2_h = 0.5;
+            double cell2_w = 4.0;
+            double cell_sep = 0.5;
+
+            var char1 = new VA.Text.CharacterFormatCells();
+            char1.Font = 0;
+            char1.Size = "30pt";
+
+            var fmt1 = new VA.Format.ShapeFormatCells();
+            fmt1.LineWeight = 0;
+            fmt1.LinePattern = 0;
+
+            var fmt2 = new VA.Format.ShapeFormatCells();
+            fmt2.LineWeight = 0;
+            fmt2.LinePattern = 0;
+
+            var fmt3 = new VA.Format.ShapeFormatCells();
+            fmt3.LineWeight = 0;
+            fmt3.LinePattern = 0;
+
+
+            foreach (var size in sizes)
+            {
+                var shape1 = page1.DrawRectangle(left, cell1_top - cell1_h, left + cell1_w, cell1_top);
+                shape1.Text = string.Format("{0}", size);
+
+                double cell2_top = cell1_top;
+                for (int i = 0; i < fonts.Count(); i++)
+                {
+                    double cell2_bottom = cell2_top - cell2_h;
+                    var fontname = fonts[i];
+                    double cell2_left = left + cell1_w + cell_sep;
+                    var shape2 = page1.DrawRectangle(cell2_left, cell2_bottom, cell2_left + cell2_w, cell2_top);
+                    shape2.Text = string.Format("{0}", fontname);
+
+                    double cell3_h = r.NextDouble()*3.0 + 0.5;
+                    var cell3_top = cell2_bottom;
+                    var cell3_bottom = cell3_top - cell3_h;
+
+                    var shape_3 = page1.DrawRectangle(cell2_left, cell3_bottom, cell2_left + cell2_w, cell3_top);
+                    shape_3.Text = text1;
+
+
+                    var char3 = new VA.Text.CharacterFormatCells();
+                    char3.Font = fontids[i];
+                    char3.Size = size;
+
+                    var para3 = new VA.Text.ParagraphFormatCells();
+                    para3.HorizontalAlign = 0;
+                    var tb3 = new VA.Text.TextBlockFormatCells();
+                    tb3.VerticalAlign = 0;
+
+                    var update3 = new VA.ShapeSheet.Update.SRCUpdate();
+                    para3.Apply(update3,0);
+                    tb3.Apply(update3);
+                    char3.Apply(update3,0);
+                    fmt3.Apply(update3);
+                    update3.Execute(shape_3);
+
+                    var update1 = new VA.ShapeSheet.Update.SRCUpdate();
+                    //para1.Apply(update1, 0);
+                    //tb1.Apply(update1);
+                    char1.Apply(update1, 0);
+                    fmt1.Apply(update1);
+                    update1.Execute(shape1);
+
+                    var update2 = new VA.ShapeSheet.Update.SRCUpdate();
+                    //para1.Apply(update2, 0);
+                    //tb1.Apply(update2);
+                    //char2.Apply(update2, 0);
+                    fmt2.Apply(update2);
+                    update1.Execute(shape2);
+
+
+                    shape_3.CellsU["Height"].FormulaU = "TEXTHEIGHT(TheText,TxtWidth)";
+                    var cell3_real_size = new VA.Drawing.Size(shape_3.CellsU["Width"].get_Result(null),
+                                                              shape_3.CellsU["Height"].get_Result(null));
+                    shape_3.CellsU["PinY"].FormulaU = (cell2_bottom - (cell3_real_size.Height/2.0)).ToString();
+
+                    cell2_top -= cell2_h + cell3_real_size.Height + vs;
+                }
+                cell1_top = cell2_top ;
+
+            }
+
+
+            page1.ResizeToFitContents(1.0, 1.0);
+
+        }
+
     }
 }
