@@ -110,110 +110,163 @@ namespace VisioAutomationSamples
 
         public static void FontCompare()
         {
-            var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
-            var master = stencil.Masters["Rectangle"];
-            var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
+            var doc = SampleEnvironment.Application.ActiveDocument;
+            var dfonts = doc.Fonts;
             var text1 =
                 @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890!@#$%^&*()``_-+=[]{}\|;:'"",.<>/?";
+            var text2 =
+@"When from behind that craggy steep till then The horizon’s bound, a huge peak, black and huge, As if with voluntary power instinct, Upreared its head. I struck and struck again, And growing still in stature the grim shape Towered up between me and the stars, and still, for so it seemed with purpose of its own And measured motion like a living thing, Strode after me.
+
+-William Wordsworth 
+The Prelude, lines 381-389";
+
+            var text3 =
+@"int function_x( int[] a)
+{
+    string s = ""hello"";
+    char c = s[3];
+    var o = new SomeObject();
+    return 27 * 2;
+}
+";
+
+            var text4 =
+@"<html>
+    <head>
+        <title>Untitled</title>
+    <head>
+    <body>
+        <p>Hello World</p>
+    </body>
+</html>
+";
+
+            var texts = new[] { text1, text2, text3 , text4 };
             var fonts = new[] { "Calibri", "Arial" };
-            var sizes = new[] { "8.pt", "10.0pt", "12.0pt", "14.0pt", "18.0pt", "28.0pt"};
-            var fontids = fonts.Select(f => page1.Document.Fonts[f].ID).ToList();
+            var sizes = new[] { "8pt", "10pt", "12pt", "14pt", "18pt", "28pt"};
+            var labelfont = "Segoe UI Light";
+
+            // retrieve the font ids for later use
+            var labelfontid = dfonts[labelfont].ID;
+            var fontids = fonts.Select(f => dfonts[f].ID).ToList();
 
             var r = new System.Random();
             double left=1;
             double vs = 0.25;
-            double cell1_w = 2.0;
+            double cell1_w = 1.0;
             double cell1_h = 2.0;
             double cell1_top = 8.5;
             double cell2_h = 0.5;
-            double cell2_w = 4.0;
+            double cell2_w = 8.0;
             double cell_sep = 0.5;
+            string labeltextcolor = "rgb(0,176,240)";
 
             var char1 = new VA.Text.CharacterFormatCells();
-            char1.Font = 0;
+            char1.Font = labelfontid;
             char1.Size = "30pt";
+            char1.Color = labeltextcolor;
+
+            var char2 = new VA.Text.CharacterFormatCells();
+            char2.Font = labelfontid;
+            char2.Size = "16pt";
+            char2.Color = labeltextcolor;
 
             var fmt1 = new VA.Format.ShapeFormatCells();
             fmt1.LineWeight = 0;
             fmt1.LinePattern = 0;
+            fmt1.FillPattern = 0;
 
             var fmt2 = new VA.Format.ShapeFormatCells();
             fmt2.LineWeight = 0;
             fmt2.LinePattern = 0;
+            fmt2.FillPattern = 0;
 
             var fmt3 = new VA.Format.ShapeFormatCells();
             fmt3.LineWeight = 0;
             fmt3.LinePattern = 0;
+            fmt3.FillPattern = 0;
 
+            var tb1 = new VA.Text.TextBlockFormatCells();
+            tb1.VerticalAlign = 0;
 
-            foreach (var size in sizes)
+            var para1= new VA.Text.ParagraphFormatCells();
+            para1.HorizontalAlign= 2;
+
+            var para2 = new VA.Text.ParagraphFormatCells();
+            para2.HorizontalAlign = 0;
+
+            foreach (string text in texts)
             {
-                var shape1 = page1.DrawRectangle(left, cell1_top - cell1_h, left + cell1_w, cell1_top);
-                shape1.Text = string.Format("{0}", size);
-
-                double cell2_top = cell1_top;
-                for (int i = 0; i < fonts.Count(); i++)
+                var curpage = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+                foreach (var size in sizes)
                 {
-                    double cell2_bottom = cell2_top - cell2_h;
-                    var fontname = fonts[i];
-                    double cell2_left = left + cell1_w + cell_sep;
-                    var shape2 = page1.DrawRectangle(cell2_left, cell2_bottom, cell2_left + cell2_w, cell2_top);
-                    shape2.Text = string.Format("{0}", fontname);
-
-                    double cell3_h = r.NextDouble()*3.0 + 0.5;
-                    var cell3_top = cell2_bottom;
-                    var cell3_bottom = cell3_top - cell3_h;
-
-                    var shape_3 = page1.DrawRectangle(cell2_left, cell3_bottom, cell2_left + cell2_w, cell3_top);
-                    shape_3.Text = text1;
-
-
-                    var char3 = new VA.Text.CharacterFormatCells();
-                    char3.Font = fontids[i];
-                    char3.Size = size;
-
-                    var para3 = new VA.Text.ParagraphFormatCells();
-                    para3.HorizontalAlign = 0;
-                    var tb3 = new VA.Text.TextBlockFormatCells();
-                    tb3.VerticalAlign = 0;
-
-                    var update3 = new VA.ShapeSheet.Update.SRCUpdate();
-                    para3.Apply(update3,0);
-                    tb3.Apply(update3);
-                    char3.Apply(update3,0);
-                    fmt3.Apply(update3);
-                    update3.Execute(shape_3);
+                    var shape1 = curpage.DrawRectangle(left, cell1_top - cell1_h, left + cell1_w, cell1_top);
+                    shape1.Text = string.Format("{0}", size);
 
                     var update1 = new VA.ShapeSheet.Update.SRCUpdate();
-                    //para1.Apply(update1, 0);
-                    //tb1.Apply(update1);
+                    para1.Apply(update1, 0);
+                    tb1.Apply(update1);
                     char1.Apply(update1, 0);
                     fmt1.Apply(update1);
                     update1.Execute(shape1);
 
-                    var update2 = new VA.ShapeSheet.Update.SRCUpdate();
-                    //para1.Apply(update2, 0);
-                    //tb1.Apply(update2);
-                    //char2.Apply(update2, 0);
-                    fmt2.Apply(update2);
-                    update1.Execute(shape2);
+                    double cell2_top = cell1_top;
+                    for (int i = 0; i < fonts.Count(); i++)
+                    {
+                        double cell2_bottom = cell2_top - cell2_h;
+                        var fontname = fonts[i];
+                        double cell2_left = left + cell1_w + cell_sep;
+                        var shape2 = curpage.DrawRectangle(cell2_left, cell2_bottom, cell2_left + cell2_w, cell2_top);
+                        shape2.Text = string.Format("{0}", fontname);
+
+                        double cell3_h = r.NextDouble() * 3.0 + 0.5;
+                        var cell3_top = cell2_bottom;
+                        var cell3_bottom = cell3_top - cell3_h;
+
+                        var shape_3 = curpage.DrawRectangle(cell2_left, cell3_bottom, cell2_left + cell2_w, cell3_top);
+                        shape_3.Text = text;
 
 
-                    shape_3.CellsU["Height"].FormulaU = "TEXTHEIGHT(TheText,TxtWidth)";
-                    var cell3_real_size = new VA.Drawing.Size(shape_3.CellsU["Width"].get_Result(null),
-                                                              shape_3.CellsU["Height"].get_Result(null));
-                    shape_3.CellsU["PinY"].FormulaU = (cell2_bottom - (cell3_real_size.Height/2.0)).ToString();
+                        var char3 = new VA.Text.CharacterFormatCells();
+                        char3.Font = fontids[i];
+                        char3.Size = size;
 
-                    cell2_top -= cell2_h + cell3_real_size.Height + vs;
+                        var para3 = new VA.Text.ParagraphFormatCells();
+                        para3.HorizontalAlign = 0;
+                        var tb3 = new VA.Text.TextBlockFormatCells();
+                        tb3.VerticalAlign = 0;
+
+                        var update3 = new VA.ShapeSheet.Update.SRCUpdate();
+                        para3.Apply(update3, 0);
+                        tb3.Apply(update3);
+                        char3.Apply(update3, 0);
+                        fmt3.Apply(update3);
+                        update3.Execute(shape_3);
+
+
+
+                        char2.Font = fontids[i];
+                        var update2 = new VA.ShapeSheet.Update.SRCUpdate();
+                        para2.Apply(update2, 0);
+                        //tb1.Apply(update2);
+                        char2.Apply(update2, 0);
+                        fmt2.Apply(update2);
+                        update2.Execute(shape2);
+
+
+                        shape_3.CellsU["Height"].FormulaU = "TEXTHEIGHT(TheText,TxtWidth)";
+                        var cell3_real_size = new VA.Drawing.Size(shape_3.CellsU["Width"].get_Result(null),
+                                                                  shape_3.CellsU["Height"].get_Result(null));
+                        shape_3.CellsU["PinY"].FormulaU = (cell2_bottom - (cell3_real_size.Height / 2.0)).ToString();
+
+                        cell2_top -= cell2_h + cell3_real_size.Height + vs;
+                    }
+                    cell1_top = cell2_top;
+
                 }
-                cell1_top = cell2_top ;
 
+                curpage.ResizeToFitContents(1.0, 1.0);
             }
-
-
-            page1.ResizeToFitContents(1.0, 1.0);
-
         }
 
     }
