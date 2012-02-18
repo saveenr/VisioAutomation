@@ -115,13 +115,13 @@ namespace VisioAutomationSamples
             var text1 =
                 @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890!@#$%^&*()``_-+=[]{}\|;:'"",.<>/?";
             var text2 =
-@"When from behind that craggy steep till then The horizon’s bound, a huge peak, black and huge, As if with voluntary power instinct, Upreared its head. I struck and struck again, And growing still in stature the grim shape Towered up between me and the stars, and still, for so it seemed with purpose of its own And measured motion like a living thing, Strode after me.
+                @"When from behind that craggy steep till then The horizon’s bound, a huge peak, black and huge, As if with voluntary power instinct, Upreared its head. I struck and struck again, And growing still in stature the grim shape Towered up between me and the stars, and still, for so it seemed with purpose of its own And measured motion like a living thing, Strode after me.
 
 -William Wordsworth 
 The Prelude, lines 381-389";
 
             var text3 =
-@"int function_x( int[] a)
+                @"int function_x( int[] a)
 {
     string s = ""hello"";
     char c = s[3];
@@ -131,7 +131,7 @@ The Prelude, lines 381-389";
 ";
 
             var text4 =
-@"<html>
+                @"<html>
     <head>
         <title>Untitled</title>
     <head>
@@ -141,9 +141,9 @@ The Prelude, lines 381-389";
 </html>
 ";
 
-            var texts = new[] { text1, text2, text3 , text4 };
-            var fonts = new[] { "Calibri", "Arial" };
-            var sizes = new[] { "8pt", "10pt", "12pt", "14pt", "18pt", "28pt"};
+            var texts = new[] {text1, text2, text3, text4};
+            var fonts = new[] {"Calibri", "Arial"};
+            var sizes = new[] {"8pt", "10pt", "12pt", "14pt", "18pt", "28pt"};
             var labelfont = "Segoe UI Light";
 
             // retrieve the font ids for later use
@@ -151,7 +151,7 @@ The Prelude, lines 381-389";
             var fontids = fonts.Select(f => dfonts[f].ID).ToList();
 
             var r = new System.Random();
-            double left=1;
+            double left = 1;
             double vs = 0.25;
             double cell1_w = 1.0;
             double cell1_h = 2.0;
@@ -189,11 +189,19 @@ The Prelude, lines 381-389";
             var tb1 = new VA.Text.TextBlockFormatCells();
             tb1.VerticalAlign = 0;
 
-            var para1= new VA.Text.ParagraphFormatCells();
-            para1.HorizontalAlign= 2;
+            var para1 = new VA.Text.ParagraphFormatCells();
+            para1.HorizontalAlign = 2;
 
             var para2 = new VA.Text.ParagraphFormatCells();
             para2.HorizontalAlign = 0;
+
+            var char3 = new VA.Text.CharacterFormatCells();
+
+            var para3 = new VA.Text.ParagraphFormatCells();
+            para3.HorizontalAlign = 0;
+
+            var tb3 = new VA.Text.TextBlockFormatCells();
+            tb3.VerticalAlign = 0;
 
             foreach (string text in texts)
             {
@@ -219,7 +227,7 @@ The Prelude, lines 381-389";
                         var shape2 = curpage.DrawRectangle(cell2_left, cell2_bottom, cell2_left + cell2_w, cell2_top);
                         shape2.Text = string.Format("{0}", fontname);
 
-                        double cell3_h = r.NextDouble() * 3.0 + 0.5;
+                        double cell3_h = r.NextDouble()*3.0 + 0.5;
                         var cell3_top = cell2_bottom;
                         var cell3_bottom = cell3_top - cell3_h;
 
@@ -227,14 +235,9 @@ The Prelude, lines 381-389";
                         shape_3.Text = text;
 
 
-                        var char3 = new VA.Text.CharacterFormatCells();
                         char3.Font = fontids[i];
                         char3.Size = size;
 
-                        var para3 = new VA.Text.ParagraphFormatCells();
-                        para3.HorizontalAlign = 0;
-                        var tb3 = new VA.Text.TextBlockFormatCells();
-                        tb3.VerticalAlign = 0;
 
                         var update3 = new VA.ShapeSheet.Update.SRCUpdate();
                         para3.Apply(update3, 0);
@@ -257,7 +260,7 @@ The Prelude, lines 381-389";
                         shape_3.CellsU["Height"].FormulaU = "TEXTHEIGHT(TheText,TxtWidth)";
                         var cell3_real_size = new VA.Drawing.Size(shape_3.CellsU["Width"].get_Result(null),
                                                                   shape_3.CellsU["Height"].get_Result(null));
-                        shape_3.CellsU["PinY"].FormulaU = (cell2_bottom - (cell3_real_size.Height / 2.0)).ToString();
+                        shape_3.CellsU["PinY"].FormulaU = (cell2_bottom - (cell3_real_size.Height/2.0)).ToString();
 
                         cell2_top -= cell2_h + cell3_real_size.Height + vs;
                     }
@@ -267,6 +270,41 @@ The Prelude, lines 381-389";
 
                 curpage.ResizeToFitContents(1.0, 1.0);
             }
+
+
+            var text1_x =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvqxyz\n1234567890!@#$%^&*()\n`~_-+=[]{}\\|;:'\",.<>/?";
+            var text1_x_lines = text1_x.Split(new char[] {'\n'});
+            var max_cols = text1_x_lines.Select(s => s.Length).Max();
+            // Now block by block comparisons
+            var curpage1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+            var dom = new VA.DOM.Document();
+
+            double cy = 8.0;
+            for (int fi =0 ;fi <fonts.Length; fi++)
+            {
+                var font = fonts[fi];
+
+
+                for (int ri = 0; ri < text1_x_lines.Length; ri++)
+                {
+                    var curline = text1_x_lines[ri];
+                    for (int c = 0; c < curline.Length; c++)
+                    {
+                        double x = 0 + (1.0)*c;
+                        var shape = dom.DrawRectangle(x, cy, x+0.5,cy+0.5);
+                        shape.Text = new VA.Text.Markup.TextElement(curline[c].ToString());
+                    }
+                    cy -= 1.0;
+
+                }
+
+                cy -= 2.0;
+
+            }
+            dom.Render(curpage1);
+            curpage1.ResizeToFitContents(1.0, 1.0);
+
         }
 
     }
