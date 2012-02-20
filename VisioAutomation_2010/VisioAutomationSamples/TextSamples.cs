@@ -285,6 +285,10 @@ The Prelude, lines 381-389";
             {
                 var font = fonts[fi];
 
+                var tshape = dom.DrawRectangle(0, cy-1.0, 10, cy );
+                tshape.Text = new VA.Text.Markup.TextElement(font);
+
+                cy -= 2.0;
 
                 for (int ri = 0; ri < text1_x_lines.Length; ri++)
                 {
@@ -299,7 +303,7 @@ The Prelude, lines 381-389";
 
                 }
 
-                cy -= 2.0;
+                //cy -= 2.0;
 
             }
             dom.Render(curpage1);
