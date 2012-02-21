@@ -230,10 +230,10 @@ The Prelude, lines 381-389";
                     update1.Execute(shape1);
 
                     double cell2_top = cell1_top;
-                    for (int i = 0; i < fonts.Count(); i++)
+                    for (int font_index = 0; font_index < fonts.Count(); font_index++)
                     {
                         double cell2_bottom = cell2_top - cell2_h;
-                        var fontname = fonts[i];
+                        var fontname = fonts[font_index];
                         double cell2_left = left + cell1_w + cell_sep;
                         var shape2 = curpage.DrawRectangle(cell2_left, cell2_bottom, cell2_left + cell2_w, cell2_top);
                         shape2.Text = string.Format("{0}", fontname);
@@ -244,29 +244,25 @@ The Prelude, lines 381-389";
 
                         var shape_3 = curpage.DrawRectangle(cell2_left, cell3_bottom, cell2_left + cell2_w, cell3_top);
                         shape_3.Text = text;
-
-
-                        char3.Font = fontids[i];
+                        
+                        char3.Font = fontids[font_index];
                         char3.Size = size;
-
-
+                        
                         var update3 = new VA.ShapeSheet.Update.SRCUpdate();
                         para3.Apply(update3, 0);
                         tb3.Apply(update3);
                         char3.Apply(update3, 0);
                         fmt3.Apply(update3);
                         update3.Execute(shape_3);
-
-
-                        char2.Font = fontids[i];
+                        
+                        char2.Font = fontids[font_index];
                         var update2 = new VA.ShapeSheet.Update.SRCUpdate();
                         para2.Apply(update2, 0);
                         //tb1.Apply(update2);
                         char2.Apply(update2, 0);
                         fmt2.Apply(update2);
                         update2.Execute(shape2);
-
-
+                        
                         shape_3.CellsU["Height"].FormulaU = "TEXTHEIGHT(TheText,TxtWidth)";
                         var cell3_real_size = new VA.Drawing.Size(shape_3.CellsU["Width"].get_Result(null),
                                                                   shape_3.CellsU["Height"].get_Result(null));
@@ -290,26 +286,29 @@ The Prelude, lines 381-389";
             var page = activeDocument.Pages.Add();
             var dom = new VA.DOM.Document();
 
-            double cy = 8.0;
-            for (int fi = 0; fi < fonts.Length; fi++)
+            double cur_top = 8.0;
+            for (int font_index = 0; font_index < fonts.Length; font_index++)
             {
-                var font = fonts[fi];
+                var font = fonts[font_index];
 
-                var tshape = dom.DrawRectangle(0, cy - 1.0, 10, cy);
-                tshape.Text = new VA.Text.Markup.TextElement(font);
+                var shape0 = dom.DrawRectangle(0, cur_top - 1.0, 10, cur_top);
+                shape0.Text = new VA.Text.Markup.TextElement(font);
 
-                cy -= 2.0;
+                cur_top -= 2.0;
 
                 for (int ri = 0; ri < text1_x_lines.Length; ri++)
                 {
                     var curline = text1_x_lines[ri];
                     for (int c = 0; c < curline.Length; c++)
                     {
-                        double x = 0 + (1.0)*c;
-                        var shape = dom.DrawRectangle(x, cy, x + 0.5, cy + 0.5);
-                        shape.Text = new VA.Text.Markup.TextElement(curline[c].ToString());
+                        double left = 0 + (1.0)*c;
+                        double right = left + 0.5;
+                        double cur_top_correct = cur_top + 0.5;
+                        var shape1 = dom.DrawRectangle(left, cur_top, right, cur_top_correct);
+                        string cur_char = curline[c].ToString();
+                        shape1.Text = new VA.Text.Markup.TextElement(cur_char);
                     }
-                    cy -= 1.0;
+                    cur_top -= 1.0;
                 }
             }
             dom.Render(page);
@@ -326,7 +325,7 @@ The Prelude, lines 381-389";
             var colors = colorints.Select(i => new VA.Drawing.ColorRGB(i)).Select(c => c.ToFormula()).ToArray();
 
             var text =
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890«»ßäüöĆćŚśŹźŻżĄąĘę!@#$%^&*()`~_-+=[]{}\\|;:'\",.<>/?";
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890!@#$%^&*()`~_-+=[]{}\\|;:'\",.<>/?";
             var texts = Split(text, 10);
 
             var pages = activeDocument.Pages;
@@ -334,28 +333,30 @@ The Prelude, lines 381-389";
             {
                 var page = pages.Add();
                 var dom = new VA.DOM.Document();
+                double bigchar_w = 3.0;
+                double bigchar_h = 3.0;
+                double label_h = 0.25;
 
-                int z = 0;
-                double cy = 8.0;
+                double cur_top = 8.0;
                 for (int j = 0; j < texts[i].Count; j++)
                 {
                     for (int k = 0; k < fonts.Count(); k++)
                     {
-                        double w = 3.0;
-                        double h = 0.25;
-                        double x0 = 0 + (k * w);
-                        double x1 = x0 + w;
-                        double y0 = cy - h;
-                        double y1 = cy;
-                        var char_sample_title_shape = dom.DrawRectangle(x0, y0, x1, y1);
+                        double left = 0 + (k * bigchar_w);
+                        double right = left + bigchar_w;
+                        double bottom = cur_top - label_h;
+                        var char_sample_title_shape = dom.DrawRectangle(left, bottom, right, cur_top);
                         char_sample_title_shape.Text = new VA.Text.Markup.TextElement(fonts[k]);
                         char_sample_title_shape.ShapeCells.LinePattern = 0;
                         char_sample_title_shape.ShapeCells.LineWeight = 0;
                         char_sample_title_shape.ShapeCells.CharFont = fontids[k];
                         char_sample_title_shape.ShapeCells.CharColor = "rgb(0,176,240)";
-
                     }
-                    var overlay_title_shape = dom.DrawRectangle(fonts.Count()*3.0, cy-0.25, (fonts.Count()+1)*3.1, cy);
+
+                    double label_left = fonts.Count() * bigchar_w;
+                    double label_bottom = cur_top - label_h;
+                    double label_right = (fonts.Count() + 1) * bigchar_w;
+                    var overlay_title_shape = dom.DrawRectangle(label_left, label_bottom, label_right, cur_top);
                     overlay_title_shape.ShapeCells.LinePattern = 0;
                     overlay_title_shape.ShapeCells.LineWeight = 0;
                     overlay_title_shape.Text = new VA.Text.Markup.TextElement();
@@ -366,44 +367,44 @@ The Prelude, lines 381-389";
                         el.CharacterFormat.Color = new ColorRGB(colorints[k % colorints.Count()]);
                         el.CharacterFormat.FontID = fontids[k];
                     }
-                    cy -= 0.25;
+                    cur_top -= label_h;
 
                     var cur_char = texts[i][j].ToString();
                     var bigcharsize = "190pt";
-                    for (int k = 0; k < fonts.Count(); k++)
+                    for (int font_index = 0; font_index < fonts.Count(); font_index++)
                     {
-                        double w = 3.0;
-                        double h = 3.0;
-                        double x0 = 0 + (k * w);
-                        double x1 = x0 + w;
-                        double y0 = cy - h;
-                        double y1 = cy;
-                        var char_sample_shape = dom.DrawRectangle(x0, y0, x1, y1);
+                        double left = 0 + (font_index * bigchar_w);
+                        double right = left + bigchar_w;
+                        double bottom = cur_top - bigchar_h;
+                        var char_sample_shape = dom.DrawRectangle(left, bottom, right, cur_top);
                         char_sample_shape.Text = new VA.Text.Markup.TextElement(cur_char );
                         char_sample_shape.ShapeCells.LinePattern = 0;
                         char_sample_shape.ShapeCells.LineWeight = 0;
                         char_sample_shape.ShapeCells.CharSize = bigcharsize;
-                        char_sample_shape.ShapeCells.CharFont = fontids[k];
+                        char_sample_shape.ShapeCells.CharFont = fontids[font_index];
                     }
 
-                    for (int k = 0; k < fonts.Count(); k++)
+                    for (int font_index = 0; font_index < fonts.Count(); font_index++)
                     {
-                        var overlay_shape = dom.DrawRectangle(fonts.Count() * 3.0, cy - 3.0, (fonts.Count() + 1) * 3.1, cy);
+                        double left = fonts.Count()*bigchar_w;
+                        double bottom = cur_top - bigchar_h;
+                        double right = (fonts.Count() + 1)*bigchar_w;
+                        var overlay_shape = dom.DrawRectangle(left, bottom, right, cur_top);
                         overlay_shape.ShapeCells.LinePattern = 0;
                         overlay_shape.ShapeCells.LineWeight = 0;
                         overlay_shape.Text = new VA.Text.Markup.TextElement(cur_char);
                         overlay_shape.ShapeCells.LinePattern = 0;
                         overlay_shape.ShapeCells.LineWeight = 0;
                         overlay_shape.ShapeCells.CharSize = bigcharsize;
-                        overlay_shape.ShapeCells.CharFont = fontids[k];
+                        overlay_shape.ShapeCells.CharFont = fontids[font_index];
                         overlay_shape.ShapeCells.FillPattern = 0;
                         overlay_shape.ShapeCells.CharTransparency = "0.7";
-                        overlay_shape.ShapeCells.CharColor = colors[k%colors.Count()];
+                        overlay_shape.ShapeCells.CharColor = colors[font_index%colors.Count()];
                     }
 
-                    cy -= 3.0;
+                    cur_top -= bigchar_h;
 
-                    cy -= 1.0; // extra spacing
+                    cur_top -= 1.0; // extra spacing
                 }
                 dom.Render(page);
                 page.ResizeToFitContents(1.0, 1.0);
