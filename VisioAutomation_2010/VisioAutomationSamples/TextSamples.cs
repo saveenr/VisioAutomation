@@ -317,6 +317,10 @@ The Prelude, lines 381-389";
 
         private static void draw_fontcompare_3(string[] fonts, Document activeDocument, List<int> fontids)
         {
+            var colors = new[]
+                             {
+                                    "rgb(0,176,240)", "rgb(255,0,0)", "rgb(0,176,80)"
+                             };
             var text =
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890!@#$%^&*()`~_-+=[]{}\\|;:'\",.<>/?";
             var texts = Split(text, 10);
@@ -349,6 +353,7 @@ The Prelude, lines 381-389";
                     shape2.ShapeCells.LineWeight = 0;
                     cy -= 0.25;
 
+                    var cur_char = texts[i][j].ToString();
                     for (int k = 0; k < fonts.Count(); k++)
                     {
                         double w = 3.0;
@@ -358,15 +363,28 @@ The Prelude, lines 381-389";
                         double y0 = cy - h;
                         double y1 = cy;
                         var shape1 = dom.DrawRectangle(x0, y0, x1, y1);
-                        shape1.Text = new VA.Text.Markup.TextElement(texts[i][j].ToString());
+                        shape1.Text = new VA.Text.Markup.TextElement(cur_char );
                         shape1.ShapeCells.LinePattern = 0;
                         shape1.ShapeCells.LineWeight = 0;
                         shape1.ShapeCells.CharSize = "120pt";
                         shape1.ShapeCells.CharFont = fontids[k];
                     }
-                    var shape3 = dom.DrawRectangle(fonts.Count() * 3.0, cy - 3.0, (fonts.Count() + 1) * 3.1, cy);
-                    shape3.ShapeCells.LinePattern = 0;
-                    shape3.ShapeCells.LineWeight = 0;
+
+                    for (int k = 0; k < fonts.Count(); k++)
+                    {
+                        var shape3 = dom.DrawRectangle(fonts.Count() * 3.0, cy - 3.0, (fonts.Count() + 1) * 3.1, cy);
+                        shape3.ShapeCells.LinePattern = 0;
+                        shape3.ShapeCells.LineWeight = 0;
+                        shape3.Text = new VA.Text.Markup.TextElement(cur_char);
+                        shape3.ShapeCells.LinePattern = 0;
+                        shape3.ShapeCells.LineWeight = 0;
+                        shape3.ShapeCells.CharSize = "120pt";
+                        shape3.ShapeCells.CharFont = fontids[k];
+                        shape3.ShapeCells.FillPattern = 0;
+                        shape3.ShapeCells.CharTransparency = "0.7";
+                        shape3.ShapeCells.CharColor = colors[k%colors.Count()];
+                    }
+
                     cy -= 3.0;
 
                 }
