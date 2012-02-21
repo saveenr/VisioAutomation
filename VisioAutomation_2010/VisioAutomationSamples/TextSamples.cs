@@ -317,6 +317,15 @@ The Prelude, lines 381-389";
 
         private static void draw_fontcompare_3(string[] fonts, Document activeDocument, List<int> fontids)
         {
+            double bigchar_w = 3.0;
+            double bigchar_h = 3.0;
+            double label_h = 0.25;
+            var bigcharsize = "190pt";
+            string label_transparency = "0.5";
+            string labelcolor = "rgb(0,176,240)";
+            string sample_transparency = "0.7";
+            double sample_vspace = 1.0;
+
             var colorints = new[]
                              {
                                     0x00B0F0, 0xff0000, 0x00B050
@@ -333,9 +342,6 @@ The Prelude, lines 381-389";
             {
                 var page = pages.Add();
                 var dom = new VA.DOM.Document();
-                double bigchar_w = 3.0;
-                double bigchar_h = 3.0;
-                double label_h = 0.25;
 
                 double cur_top = 8.0;
                 for (int j = 0; j < texts[i].Count; j++)
@@ -350,7 +356,7 @@ The Prelude, lines 381-389";
                         char_sample_title_shape.ShapeCells.LinePattern = 0;
                         char_sample_title_shape.ShapeCells.LineWeight = 0;
                         char_sample_title_shape.ShapeCells.CharFont = fontids[k];
-                        char_sample_title_shape.ShapeCells.CharColor = "rgb(0,176,240)";
+                        char_sample_title_shape.ShapeCells.CharColor = labelcolor;
                     }
 
                     double label_left = fonts.Count() * bigchar_w;
@@ -360,7 +366,7 @@ The Prelude, lines 381-389";
                     overlay_title_shape.ShapeCells.LinePattern = 0;
                     overlay_title_shape.ShapeCells.LineWeight = 0;
                     overlay_title_shape.Text = new VA.Text.Markup.TextElement();
-                    overlay_title_shape.ShapeCells.CharTransparency = "0.5";
+                    overlay_title_shape.ShapeCells.CharTransparency = label_transparency;
                     for (int k = 0; k < fonts.Count(); k++)
                     {
                         var el = overlay_title_shape.Text.AppendElement(fonts[k] + "  ");
@@ -370,7 +376,6 @@ The Prelude, lines 381-389";
                     cur_top -= label_h;
 
                     var cur_char = texts[i][j].ToString();
-                    var bigcharsize = "190pt";
                     for (int font_index = 0; font_index < fonts.Count(); font_index++)
                     {
                         double left = 0 + (font_index * bigchar_w);
@@ -398,13 +403,12 @@ The Prelude, lines 381-389";
                         overlay_shape.ShapeCells.CharSize = bigcharsize;
                         overlay_shape.ShapeCells.CharFont = fontids[font_index];
                         overlay_shape.ShapeCells.FillPattern = 0;
-                        overlay_shape.ShapeCells.CharTransparency = "0.7";
+                        overlay_shape.ShapeCells.CharTransparency = sample_transparency;
                         overlay_shape.ShapeCells.CharColor = colors[font_index%colors.Count()];
                     }
 
                     cur_top -= bigchar_h;
-
-                    cur_top -= 1.0; // extra spacing
+                    cur_top -= sample_vspace; // extra spacing
                 }
                 dom.Render(page);
                 page.ResizeToFitContents(1.0, 1.0);
