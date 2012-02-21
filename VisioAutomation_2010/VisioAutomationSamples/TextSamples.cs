@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using Microsoft.Office.Interop.Visio;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -110,7 +111,8 @@ namespace VisioAutomationSamples
 
         public static void FontCompare()
         {
-            var doc = SampleEnvironment.Application.ActiveDocument;
+            Document activeDocument = SampleEnvironment.Application.ActiveDocument;
+            var doc = activeDocument;
             var dfonts = doc.Fonts;
             var text1 =
                 @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890!@#$%^&*()``_-+=[]{}\|;:'"",.<>/?";
@@ -150,6 +152,14 @@ The Prelude, lines 381-389";
             var labelfontid = dfonts[labelfont].ID;
             var fontids = fonts.Select(f => dfonts[f].ID).ToList();
 
+            //draw_fontcompare_1(fonts, activeDocument, texts, sizes, fontids, labelfontid);
+            //draw_fontcompare_2(fonts, activeDocument);
+            draw_fontcompare_3(fonts, activeDocument, fontids);
+        }
+
+        private static void draw_fontcompare_1(string[] fonts, Document activeDocument, string[] texts, string[] sizes,
+                                               List<int> fontids, int labelfontid)
+        {
             var r = new System.Random();
             double left = 1;
             double vs = 0.25;
@@ -205,7 +215,7 @@ The Prelude, lines 381-389";
 
             foreach (string text in texts)
             {
-                var curpage = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+                var curpage = activeDocument.Pages.Add();
                 foreach (var size in sizes)
                 {
                     var shape1 = curpage.DrawRectangle(left, cell1_top - cell1_h, left + cell1_w, cell1_top);
@@ -247,7 +257,6 @@ The Prelude, lines 381-389";
                         update3.Execute(shape_3);
 
 
-
                         char2.Font = fontids[i];
                         var update2 = new VA.ShapeSheet.Update.SRCUpdate();
                         para2.Apply(update2, 0);
@@ -265,27 +274,27 @@ The Prelude, lines 381-389";
                         cell2_top -= cell2_h + cell3_real_size.Height + vs;
                     }
                     cell1_top = cell2_top;
-
                 }
 
                 curpage.ResizeToFitContents(1.0, 1.0);
             }
+        }
 
+        private static void draw_fontcompare_2(string[] fonts, Document activeDocument)
+        {
+            var text =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvqxyz\n1234567890!@#$%^&*()\n`~_-+=[]{}\\|;:'\",.<>/?";
+            var text1_x_lines = text.Split(new char[] {'\n'});
 
-            var text1_x =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvqxyz\n1234567890!@#$%^&*()\n`~_-+=[]{}\\|;:'\",.<>/?";
-            var text1_x_lines = text1_x.Split(new char[] {'\n'});
-            var max_cols = text1_x_lines.Select(s => s.Length).Max();
-            // Now block by block comparisons
-            var curpage1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+            var page = activeDocument.Pages.Add();
             var dom = new VA.DOM.Document();
 
             double cy = 8.0;
-            for (int fi =0 ;fi <fonts.Length; fi++)
+            for (int fi = 0; fi < fonts.Length; fi++)
             {
                 var font = fonts[fi];
 
-                var tshape = dom.DrawRectangle(0, cy-1.0, 10, cy );
+                var tshape = dom.DrawRectangle(0, cy - 1.0, 10, cy);
                 tshape.Text = new VA.Text.Markup.TextElement(font);
 
                 cy -= 2.0;
@@ -296,20 +305,86 @@ The Prelude, lines 381-389";
                     for (int c = 0; c < curline.Length; c++)
                     {
                         double x = 0 + (1.0)*c;
-                        var shape = dom.DrawRectangle(x, cy, x+0.5,cy+0.5);
+                        var shape = dom.DrawRectangle(x, cy, x + 0.5, cy + 0.5);
                         shape.Text = new VA.Text.Markup.TextElement(curline[c].ToString());
                     }
                     cy -= 1.0;
+                }
+            }
+            dom.Render(page);
+            page.ResizeToFitContents(1.0, 1.0);
+        }
+
+        private static void draw_fontcompare_3(string[] fonts, Document activeDocument, List<int> fontids)
+        {
+            var text =
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvqxyz1234567890!@#$%^&*()`~_-+=[]{}\\|;:'\",.<>/?";
+            var texts = Split(text, 10);
+
+            for (int i = 0; i < texts.Count; i++)
+            {
+                var page = activeDocument.Pages.Add();
+                var dom = new VA.DOM.Document();
+
+                int z = 0;
+                double cy = 8.0;
+                for (int j = 0; j < texts[i].Count; j++)
+                {
+                    for (int k = 0; k < fonts.Count(); k++)
+                    {
+                        double w = 3.0;
+                        double h = 0.25;
+                        double x0 = 0 + (k * w);
+                        double x1 = x0 + w;
+                        double y0 = cy - h;
+                        double y1 = cy;
+                        var shape1 = dom.DrawRectangle(x0, y0, x1, y1);
+                        shape1.Text = new VA.Text.Markup.TextElement(fonts[k]);
+                        shape1.ShapeCells.LinePattern = 0;
+                        shape1.ShapeCells.LineWeight = 0;
+
+                    }
+                    var shape2 = dom.DrawRectangle(fonts.Count()*3.0, cy-0.25, (fonts.Count()+1)*3.1, cy);
+                    shape2.ShapeCells.LinePattern = 0;
+                    shape2.ShapeCells.LineWeight = 0;
+                    cy -= 0.25;
+
+                    for (int k = 0; k < fonts.Count(); k++)
+                    {
+                        double w = 3.0;
+                        double h = 3.0;
+                        double x0 = 0 + (k * w);
+                        double x1 = x0 + w;
+                        double y0 = cy - h;
+                        double y1 = cy;
+                        var shape1 = dom.DrawRectangle(x0, y0, x1, y1);
+                        shape1.Text = new VA.Text.Markup.TextElement(texts[i][j].ToString());
+                        shape1.ShapeCells.LinePattern = 0;
+                        shape1.ShapeCells.LineWeight = 0;
+                        shape1.ShapeCells.CharSize = "120pt";
+                        shape1.ShapeCells.CharFont = fontids[k];
+                    }
+                    var shape3 = dom.DrawRectangle(fonts.Count() * 3.0, cy - 3.0, (fonts.Count() + 1) * 3.1, cy);
+                    shape3.ShapeCells.LinePattern = 0;
+                    shape3.ShapeCells.LineWeight = 0;
+                    cy -= 3.0;
 
                 }
-
-                //cy -= 2.0;
+                dom.Render(page);
+                page.ResizeToFitContents(1.0, 1.0);
 
             }
-            dom.Render(curpage1);
-            curpage1.ResizeToFitContents(1.0, 1.0);
 
         }
 
+
+        public static List<List<T>> Split<T>(IEnumerable<T> source, int n)
+        {
+            return source
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / n)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
+        }
     }
 }
