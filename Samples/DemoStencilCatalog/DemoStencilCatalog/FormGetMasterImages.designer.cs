@@ -121,6 +121,7 @@
             // 
             // linkLabelOpenOutput
             // 
+            this.linkLabelOpenOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabelOpenOutput.AutoSize = true;
             this.linkLabelOpenOutput.Location = new System.Drawing.Point(22, 493);
             this.linkLabelOpenOutput.Name = "linkLabelOpenOutput";
@@ -158,6 +159,7 @@
             this.Controls.Add(this.buttonRun);
             this.Name = "FormGetMasterImages";
             this.Text = "Create Catalog";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormGetMasterImages_FormClosing);
             this.Load += new System.EventHandler(this.FormGetMasterImages_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -259,8 +259,9 @@ namespace DemoStencilCatalog
 
         private void FormGetMasterImages_Load(object sender, EventArgs e)
         {
-            this.textBoxStencilFolder.Text = @"D:\visio2010-stencils-us";
-            this.textBoxOutputFolder.Text  = @"d:\stencil-catalog-output";
+            this.textBoxStencilFolder.Text = DemoStencilCatalog.Properties.Settings.Default.InputFolder;
+            this.textBoxOutputFolder.Text  = DemoStencilCatalog.Properties.Settings.Default.OutputFolder;
+
         }
 
         private void linkLabelOpenOutput_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -281,7 +282,19 @@ namespace DemoStencilCatalog
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
+
+            SaveSettings();
         }
 
+        private void SaveSettings()
+        {
+            DemoStencilCatalog.Properties.Settings.Default.InputFolder = this.textBoxStencilFolder.Text;
+            DemoStencilCatalog.Properties.Settings.Default.OutputFolder = this.textBoxOutputFolder.Text;
+        }
+
+        private void FormGetMasterImages_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.SaveSettings();
+        }
     }
 }
