@@ -17,8 +17,8 @@ namespace VisioAutomation.DOM
             this.To = to;
         }
 
-        public DynamicConnector(Shape from, Shape to, string master, string stencil) :
-            base(master, stencil)
+        public DynamicConnector(Shape from, Shape to, string mastername, string stencilname) :
+            base(mastername, stencilname)
         {
             this.From = from;
             this.To = to;

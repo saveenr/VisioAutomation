@@ -23,31 +23,31 @@ namespace VisioAutomation.DOM
             this.StencilName = null;
         }
 
-        public ShapeFromMaster(string master, string stencil)
+        public ShapeFromMaster(string mastername, string stencilname)
         {
-            if (master == null)
+            if (mastername == null)
             {
-                throw new System.ArgumentNullException("master");
+                throw new System.ArgumentNullException("mastername");
             }
 
-            if (stencil == null)
+            if (stencilname == null)
             {
-                throw new System.ArgumentNullException("stencil");
+                throw new System.ArgumentNullException("stencilname");
             }
 
-            if (master.ToLower().EndsWith(".vss"))
+            if (mastername.ToLower().EndsWith(".vss"))
             {
                 throw new AutomationException("Master name ends with .VSS");
             }
 
-            if (!stencil.ToLower().EndsWith(".vss"))
+            if (!stencilname.ToLower().EndsWith(".vss"))
             {
                 throw new AutomationException("Stencile name does not end with .VSS");
             }
 
             this.MasterObject = null;
-            this.MasterName = master;
-            this.StencilName = stencil;
+            this.MasterName = mastername;
+            this.StencilName = stencilname;
         }
     }
 }

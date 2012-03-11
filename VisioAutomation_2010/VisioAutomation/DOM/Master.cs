@@ -24,14 +24,14 @@ namespace VisioAutomation.DOM
             this.DroppedSize = rect.Size;
         }
 
-        public Master(string master, string stencil, VA.Drawing.Point dropposition) :
-            base(master, stencil)
+        public Master(string mastername, string stencilname, VA.Drawing.Point dropposition) :
+            base(mastername, stencilname)
         {
             this.DropPosition = dropposition;
         }
 
-        public Master(string master, string stencil, VA.Drawing.Rectangle rect) :
-            base(master, stencil)
+        public Master(string mastername, string stencilname, VA.Drawing.Rectangle rect) :
+            base(mastername, stencilname)
         {
             this.DropPosition = rect.Center;
             this.DroppedSize = rect.Size;
