@@ -42,7 +42,7 @@ namespace VisioAutomation.DOM
 
             if (!stencilname.ToLower().EndsWith(".vss"))
             {
-                throw new AutomationException("Stencile name does not end with .VSS");
+                throw new AutomationException("Stencil name does not end with .VSS");
             }
 
             this.MasterObject = null;
