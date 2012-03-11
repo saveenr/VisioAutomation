@@ -34,7 +34,7 @@
     <PublishUrl>D:\saveenr\code\publish\DemoStencilCatalog\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.2</ApplicationVersion>
+    <ApplicationVersion>1.0.0.3</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
@@ -138,10 +138,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>DemoStencilCatalog_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>DemoStencilCatalog_TemporaryKey100Years.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>25B326BDC27AA9AC774A13B5C105B175B277E398</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A16AA63665A8E36FB8E1FF10DDF91B80D528CD7C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
