@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Collections;
 
 namespace VisioAutomation.Layout.OrgChart
 {
-    public class NodeList
+    public class NodeList : IEnumerable<Node>
     {
         private readonly Node parent;
         private List<Node> items;
@@ -13,15 +14,17 @@ namespace VisioAutomation.Layout.OrgChart
             this.items = new List<Node>(0);
         }
 
-        public IEnumerable<Node> Items
+        public IEnumerator<Node> GetEnumerator()
         {
-            get
+            foreach (var i in this.items)
             {
-                foreach (var i in this.items)
-                {
-                    yield return i;
-                }
+                yield return i;
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
         }
 
         public void Add(Node item)
