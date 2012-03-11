@@ -21,19 +21,5 @@ namespace VisioAutomation.DOM
         {
             this.ShapeCells = new ShapeCells();
         }
-
-        public VA.CustomProperties.CustomPropertyCells SetCustomProperty(string name, string value)
-        {
-            var cp = new VA.CustomProperties.CustomPropertyCells();
-            cp.Value = value;
-
-            if (this.CustomProperties == null)
-            {
-                this.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
-            }
-
-            this.CustomProperties[name] = cp;
-            return cp;
-        }
     }
 }
