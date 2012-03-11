@@ -13,7 +13,7 @@ namespace VisioAutomation.Extensions
 
         public static UndoScope CreateUndoScope(this IVisio.Application app)
         {
-            return new UndoScope(app, "Untitled", VA.UndoCommitFlag.AcceptChanges);
+            return new UndoScope(app, "Untitled");
         }
 
         public static VA.UI.AlertResponseScope CreateAlertResponseScope(this IVisio.Application app, VA.UI.AlertResponseCode code)

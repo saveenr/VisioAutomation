@@ -130,7 +130,7 @@ namespace TestVisioAutomation
                 Assert.AreEqual(3, page1.Shapes.Count);
 
                 Assert.AreEqual(3, page1.Shapes.Count);
-                undoscope0.CommitFlag = VA.UndoCommitFlag.CancelChanges;
+                undoscope0.Commit = false;
 
             }
             Assert.AreEqual(0, page1.Shapes.Count);
@@ -158,7 +158,7 @@ namespace TestVisioAutomation
                     var s3 = page1.DrawRectangle(2, 2, 3, 3);
                     Assert.AreEqual(3, page1.Shapes.Count);
 
-                    undoscope1.CommitFlag = VA.UndoCommitFlag.CancelChanges;
+                    undoscope1.Commit = false;
                 }
 
             }
@@ -190,7 +190,7 @@ namespace TestVisioAutomation
                 }
                 Assert.AreEqual(3, page1.Shapes.Count);
 
-                undoscope0.CommitFlag = VA.UndoCommitFlag.CancelChanges;
+                undoscope0.Commit = false;
             }
             Assert.AreEqual(0, page1.Shapes.Count);
 

@@ -16,7 +16,7 @@ namespace VisioAutomation.DOM
             this.pageshapes = visio_page.Shapes;
         }
 
-        public IVisio.Shape GetShapeObjectForID(short id)
+        public IVisio.Shape GetShape(short id)
         {
             IVisio.Shape vshape;
             if (this.id_to_shape.TryGetValue(id, out vshape))

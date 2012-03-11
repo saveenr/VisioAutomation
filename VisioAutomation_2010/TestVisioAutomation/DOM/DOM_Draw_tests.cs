@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.CustomProperties;
 using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -112,10 +114,18 @@ namespace TestVisioAutomation
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
 
-            var cp1 = vrect1.SetCustomProperty("FOO", "FOOVALUE");
+            vrect1.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+
+            var cp1 = new VA.CustomProperties.CustomPropertyCells();
+            cp1.Value = "FOOVALUE";
             cp1.Label = "Foo Label";
-            var cp2 = vrect1.SetCustomProperty("BAR", "BARVALUE");
+
+            var cp2 = new VA.CustomProperties.CustomPropertyCells();
+            cp2.Value = "BARVALUE";
             cp2.Label = "Bar Label";
+
+            vrect1.CustomProperties["FOO"] = cp1;
+            vrect1.CustomProperties["BAR"] = cp2;
 
             vdoc.Shapes.Add(vrect1);
 

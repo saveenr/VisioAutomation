@@ -94,7 +94,7 @@ namespace VisioAutomation.DOM
             {
                 if (shape.VisioShape == null)
                 {
-                    shape.VisioShape = ctx.GetShapeObjectForID(shape.VisioShapeID);
+                    shape.VisioShape = ctx.GetShape(shape.VisioShapeID);
                 }
             }
 
@@ -115,7 +115,7 @@ namespace VisioAutomation.DOM
             var shapes_with_text = this.Shapes.Where(s => s.Text!= null);
             foreach (var shape in shapes_with_text)
             {
-                var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
+                var vshape = ctx.GetShape(shape.VisioShapeID);
                 shape.Text.SetText(shape.VisioShape);
 
                 if (shape.TabStops != null)
@@ -129,7 +129,7 @@ namespace VisioAutomation.DOM
             var shapes_with_custom_props = this.Shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
             {
-                var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
+                var vshape = ctx.GetShape(shape.VisioShapeID);
                 foreach (var kv in shape.CustomProperties)
                 {
                     string cp_name = kv.Key;
@@ -143,7 +143,7 @@ namespace VisioAutomation.DOM
             var shapes_with_hyperlinks = this.Shapes.Where(s => s.Hyperlinks != null);
             foreach (var shape in shapes_with_hyperlinks)
             {
-                var vshape = ctx.GetShapeObjectForID(shape.VisioShapeID);
+                var vshape = ctx.GetShape(shape.VisioShapeID);
                 foreach (var hyperlink in shape.Hyperlinks)
                 {
                     var h = vshape.Hyperlinks.Add();
@@ -370,32 +370,36 @@ namespace VisioAutomation.DOM
         private void _draw_dynamic_connectors(RenderContext ctx)
         {
             var dyncon_shapes = this.Shapes.Where(s => s is DynamicConnector).Cast<DynamicConnector>().ToList();
-            if (dyncon_shapes.Count > 0)
+
+            // if no dynamic connectors then do nothing
+            if (dyncon_shapes.Count < 1)
             {
-                var masterobjects = dyncon_shapes.Select(i => i.MasterObject).ToArray();
-                var origin = new VA.Drawing.Point(-2, -2);
-                var points = Enumerable.Range(0, dyncon_shapes.Count)
-                    .Select(i => origin + new VA.Drawing.Point(1.10, 0))
-                    .ToList();
+                return;
+            }
 
-                var shapeids = ctx.VisioPage.DropManyU(masterobjects, points);
+            // Drop the number of connectors needed somewhere on the page
+            var masterobjects = dyncon_shapes.Select(i => i.MasterObject).ToArray();
+            var origin = new VA.Drawing.Point(-2, -2);
+            var points = Enumerable.Range(0, dyncon_shapes.Count)
+                .Select(i => origin + new VA.Drawing.Point(1.10, 0))
+                .ToList();
+            var shapeids = ctx.VisioPage.DropManyU(masterobjects, points);
 
-                for (int i = 0; i < shapeids.Length; i++)
-                {
-                    var connector_id = shapeids[i];
-                    var page_shapes = ctx.VisioPage.Shapes;
-                    var vis_connector = page_shapes.ItemFromID[connector_id];
-                    var dyncon_shape = dyncon_shapes[i];
+            // Perform the connection
+            for (int i = 0; i < shapeids.Length; i++)
+            {
+                var connector_id = shapeids[i];
+                var page_shapes = ctx.VisioPage.Shapes;
+                var vis_connector = page_shapes.ItemFromID[connector_id];
+                var dyncon_shape = dyncon_shapes[i];
 
-                    var from_shape = ctx.GetShapeObjectForID(dyncon_shape.From.VisioShapeID);
-                    var to_shape = ctx.GetShapeObjectForID(dyncon_shape.To.VisioShapeID);
-                    VA.Connections.ConnectorHelper.ConnectShapes(vis_connector, from_shape, to_shape);
-                    dyncon_shape.VisioShape = vis_connector;
-                    dyncon_shape.VisioShapeID = shapeids[i];
-                }
+                var from_shape = ctx.GetShape(dyncon_shape.From.VisioShapeID);
+                var to_shape = ctx.GetShape(dyncon_shape.To.VisioShapeID);
+                VA.Connections.ConnectorHelper.ConnectShapes(vis_connector, from_shape, to_shape);
+                dyncon_shape.VisioShape = vis_connector;
+                dyncon_shape.VisioShapeID = shapeids[i];
             }
         }
-
 
         public PolyLine DrawPolyLine(IList<VA.Drawing.Point> points)
         {
