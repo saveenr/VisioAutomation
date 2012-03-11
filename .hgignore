@@ -58,4 +58,4 @@ lint.db
 [Pp]ackages/
 [Tt]est[Rr]esults/
 .idea/
-
+app.config
