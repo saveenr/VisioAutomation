@@ -13,16 +13,10 @@ namespace VisioAutomation
         public int SequenceNumber { get; private set; }
         public string Name { get; private set; }
         public bool IsOpen { get; private set; }
-        public DateTimeOffset TimeOpened { get; private set; }
-        public UndoCommitFlag CommitFlag { get; set; }
+        public DateTimeOffset OpenedOn { get; private set; }
+        public bool Commit { get; set; }
 
-        /// <summary>
-        /// Internal constructor. Consumers can not directly create this object.
-        /// </summary>
-        /// <param name="app"></param>
-        /// <param name="name"></param>
-        /// <param name="commit"></param>
-        internal UndoScope(IVisio.Application app, string name, UndoCommitFlag commit)
+        internal UndoScope(IVisio.Application app, string name, bool commit)
         {
             if (app == null)
             {
@@ -37,32 +31,23 @@ namespace VisioAutomation
             this.Application = app;
             this.Name = name;
             this.ScopeID = this.Application.BeginUndoScope(name);
-            this.CommitFlag = commit;
-            this.TimeOpened = System.DateTimeOffset.UtcNow;
+            this.Commit = commit;
+            this.OpenedOn = System.DateTimeOffset.UtcNow;
             this.SequenceNumber = scope_count;
             scope_count++;
             this.IsOpen = true;
         }
 
-        private bool CommitFlagAsBool 
-        {
-            get
-            {
-                return this.CommitFlag == UndoCommitFlag.AcceptChanges ? true : false;
-            }
-        }
-
-
         /// <summary>
         /// When the scope was closed
         /// </summary>
-        public System.DateTimeOffset TimeClosed
+        public System.DateTimeOffset ClosedOn
         {
             get
             {
                 if (this.IsOpen)
                 {
-                    throw new AutomationException("Undo scope is not closed");
+                    throw new AutomationException("Scope is not closed");
                 }
 
                 return time_closed;
@@ -76,7 +61,7 @@ namespace VisioAutomation
         {
             if (this.IsOpen)
             {
-                this.Application.EndUndoScope(this.ScopeID, this.CommitFlagAsBool );
+                this.Application.EndUndoScope(this.ScopeID, this.Commit );
                 this.IsOpen = false;
                 this.time_closed = System.DateTimeOffset.UtcNow;
             }
@@ -96,12 +81,12 @@ namespace VisioAutomation
         /// <returns></returns>
         public override string ToString()
         {
-            string start = this.TimeOpened.ToString();
+            string start = this.OpenedOn.ToString();
 
             string end = "NA";
             if (!IsOpen)
             {
-                end = this.TimeClosed.ToString();
+                end = this.ClosedOn.ToString();
             }
 
             string s = string.Format("UndoScope({0},Begin={1},End={2})", this.Name, start, end);
