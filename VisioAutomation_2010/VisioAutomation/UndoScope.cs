@@ -16,7 +16,7 @@ namespace VisioAutomation
         public DateTimeOffset OpenedOn { get; private set; }
         public bool Commit { get; set; }
 
-        internal UndoScope(IVisio.Application app, string name, bool commit)
+        internal UndoScope(IVisio.Application app, string name)
         {
             if (app == null)
             {
@@ -31,7 +31,7 @@ namespace VisioAutomation
             this.Application = app;
             this.Name = name;
             this.ScopeID = this.Application.BeginUndoScope(name);
-            this.Commit = commit;
+            this.Commit = true;
             this.OpenedOn = System.DateTimeOffset.UtcNow;
             this.SequenceNumber = scope_count;
             scope_count++;
