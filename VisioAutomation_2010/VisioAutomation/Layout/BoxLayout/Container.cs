@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using System.Collections;
 using VA = VisioAutomation;
 using System.Linq;
 
 namespace VisioAutomation.Layout.BoxLayout
 {
-    public class Container : Node
+    public class Container : Node, IEnumerable<Node>
     {
         private List<Node> m_children;
         public double PaddingTop { get; set; }
@@ -32,23 +33,25 @@ namespace VisioAutomation.Layout.BoxLayout
             this.MinWidth = minwidth;
             this.MinHeight = minheight;
         }
-        
-        public IEnumerable<Node> Children
+
+        public IEnumerator<Node> GetEnumerator()
         {
-            get
+            if (this.m_children == null)
             {
-                if (this.m_children == null)
+                yield break;
+            }
+            else
+            {
+                foreach (var c in this.m_children)
                 {
-                    yield break;
-                }
-                else
-                {
-                    foreach (var c in this.m_children)
-                    {
-                        yield return c;
-                    }
+                    yield return c;
                 }
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
         }
 
         public Box AddBox(double w, double h)
@@ -121,7 +124,7 @@ namespace VisioAutomation.Layout.BoxLayout
             double total_child_width = 0;
             double total_child_height = 0;
 
-            foreach (var c in this.Children)
+            foreach (var c in this)
             {
                 var s = c.CalculateSize();
                 max_child_width = System.Math.Max(max_child_width , s.Width);
@@ -184,7 +187,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
             double reserved_width = this.Size.Width - (this.PaddingLeft + this.PaddingRight);
             double reserved_height = this.Size.Height - (this.PaddingTop + this.PaddingBottom);
-            foreach (var c in this.Children)
+            foreach (var c in this)
             {
 
                 if (this.is_ver())
@@ -282,7 +285,7 @@ namespace VisioAutomation.Layout.BoxLayout
 
         public override IEnumerable<Node> GetChildren()
         {
-            foreach (var c in this.Children)
+            foreach (var c in this)
             {
                 yield return c;
             }
