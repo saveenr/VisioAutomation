@@ -31,9 +31,27 @@ namespace VisioAutomation.ShapeSheet.Query
 
             return flags;
         }
+
+        private static void check_stream_size(short[] stream, int chunksize)
+        {
+            if ((chunksize != 3) && (chunksize != 4))
+            {
+                throw new VA.AutomationException("Chunksize must be 3 or 4");
+            }
+
+            int remainder = stream.Length%chunksize;
+
+            if (remainder != 0)
+            {
+                string msg = string.Format("stream must have a multiple of {0} elements", chunksize);
+                throw new VA.AutomationException( msg );
+            }
+        }
         
         public static string[] GetFormulasU( IVisio.Page page, short[] stream, int numitems)
         {
+            check_stream_size(stream,4);
+
             if (numitems == 0)
             {
                 return new string[0];
@@ -62,6 +80,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public static string[] GetFormulasU( IVisio.Shape shape, short[] stream, int numitems)
         {
+            check_stream_size(stream, 3);
+
             if (numitems < 1)
             {
                 return new string[0];
@@ -89,6 +109,8 @@ namespace VisioAutomation.ShapeSheet.Query
         
         public static TResult[] GetResults<TResult>( IVisio.Page page, short[] stream, IList<IVisio.VisUnitCodes> unitcodes, int numitems)
         {
+            check_stream_size(stream, 4);
+
             if (numitems == 0)
             {
                 return new TResult[0];
@@ -125,6 +147,8 @@ namespace VisioAutomation.ShapeSheet.Query
         
         public static TResult[] GetResults<TResult>( IVisio.Shape shape, short[] stream, IList<IVisio.VisUnitCodes> unitcodes, int numitems)
         {
+            check_stream_size(stream, 3);
+
             if (numitems < 1)
             {
                 return new TResult[0];
