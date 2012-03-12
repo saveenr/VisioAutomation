@@ -136,9 +136,9 @@ namespace VisioAutomation.Text
             }
 
             var stream = VA.ShapeSheet.SRC.ToStream(cellsrcs);
-            var formulas = VA.ShapeSheet.Query.QueryUtil.GetFormulasU(shape, stream, num_stops*3);
+            var formulas = VA.ShapeSheet.Query.QueryUtil.GetFormulasU(shape, stream);
             var unitcodes = cellsrcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
-            var results = VA.ShapeSheet.Query.QueryUtil.GetResults<double>(shape, stream, unitcodes, num_stops*3);
+            var results = VA.ShapeSheet.Query.QueryUtil.GetResults<double>(shape, stream, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)

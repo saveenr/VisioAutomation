@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return flags;
         }
 
-        private static void check_stream_size(short[] stream, int chunksize)
+        private static int check_stream_size(short[] stream, int chunksize)
         {
             if ((chunksize != 3) && (chunksize != 4))
             {
@@ -46,11 +46,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 string msg = string.Format("stream must have a multiple of {0} elements", chunksize);
                 throw new VA.AutomationException( msg );
             }
+
+            return stream.Length/chunksize;
         }
         
-        public static string[] GetFormulasU( IVisio.Page page, short[] stream, int numitems)
+        public static string[] GetFormulasU( IVisio.Page page, short[] stream)
         {
-            check_stream_size(stream,4);
+            int numitems = check_stream_size(stream,4);
 
             if (numitems == 0)
             {
@@ -78,9 +80,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return formulas;
         }
 
-        public static string[] GetFormulasU( IVisio.Shape shape, short[] stream, int numitems)
+        public static string[] GetFormulasU( IVisio.Shape shape, short[] stream)
         {
-            check_stream_size(stream, 3);
+            int numitems = check_stream_size(stream, 3);
 
             if (numitems < 1)
             {
@@ -107,9 +109,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return formulas;
         }
         
-        public static TResult[] GetResults<TResult>( IVisio.Page page, short[] stream, IList<IVisio.VisUnitCodes> unitcodes, int numitems)
+        public static TResult[] GetResults<TResult>( IVisio.Page page, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            check_stream_size(stream, 4);
+            int numitems = check_stream_size(stream, 4);
 
             if (numitems == 0)
             {
@@ -145,9 +147,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return results;
         }
         
-        public static TResult[] GetResults<TResult>( IVisio.Shape shape, short[] stream, IList<IVisio.VisUnitCodes> unitcodes, int numitems)
+        public static TResult[] GetResults<TResult>( IVisio.Shape shape, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            check_stream_size(stream, 3);
+            int numitems = check_stream_size(stream, 3);
 
             if (numitems < 1)
             {
