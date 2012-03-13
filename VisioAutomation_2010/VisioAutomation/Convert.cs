@@ -39,7 +39,7 @@ namespace VisioAutomation
 
         public static bool DoubleToBool(double d)
         {
-            return d != 0 ? true : false;
+            return d != 0;
         }
 
         /// <summary>
