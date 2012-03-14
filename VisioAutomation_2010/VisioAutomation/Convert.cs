@@ -49,10 +49,11 @@ namespace VisioAutomation
         /// <returns></returns>
         public static bool ShortToBool(short v)
         {
-            return (v == 0) ? false : true;
+            // if v is 0 then false
+            // if v != 0 then true
+            return v != 0;
         }
-
-
+        
         /// <summary>
         /// Properly quotes a string being used as a formula
         /// </summary>
