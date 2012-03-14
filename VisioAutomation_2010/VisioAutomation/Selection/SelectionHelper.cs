@@ -50,11 +50,10 @@ namespace VisioAutomation.Selection
             
             if (enumerationtype == ShapesEnumeration.ExpandGroups)
             {
-                var shapes_in_groups = from s in VA.ShapeHelper.GetNestedShapes(shapes)
-                                       where s.Type != (short)IVisio.VisShapeTypes.visTypeGroup
-                                       select s;
-
-                return shapes_in_groups.ToList();
+                var shapes_in_groups = VA.ShapeHelper.GetNestedShapes(shapes)
+                    .Where(s => s.Type != (short) IVisio.VisShapeTypes.visTypeGroup)
+                    .ToList();
+                return shapes_in_groups;
             }
 
             throw new System.ArgumentOutOfRangeException("enumerationtype");
