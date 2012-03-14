@@ -83,7 +83,7 @@
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
-    <Compile Include="GroupSelectMode.cs" />
+    <Compile Include="Selection\GroupSelectMode.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Layout\BoxLayout\AlignmentHorizontal.cs" />
     <Compile Include="Layout\BoxLayout\AlignmentVertical.cs" />
@@ -166,7 +166,7 @@
     <Compile Include="ShapeGeometry\GeometrySection.cs" />
     <Compile Include="ShapeGeometry\GeometryRow.cs" />
     <Compile Include="ShapeGeometry\ShapeGeometryHelper.cs" />
-    <Compile Include="ShapesEnumeration.cs" />
+    <Compile Include="Selection\ShapesEnumeration.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
@@ -303,7 +303,7 @@
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />
     <Compile Include="Pages\PageHelper.cs" />
-    <Compile Include="SelectionHelper.cs" />
+    <Compile Include="Selection\SelectionHelper.cs" />
     <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Extensions\PageMethods_draw.cs" />
     <Compile Include="Extensions\ShapeMethods_draw.cs" />

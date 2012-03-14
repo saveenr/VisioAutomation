@@ -35,7 +35,7 @@ namespace VisioAutomationSamples
             VA.Connections.ConnectorHelper.ConnectShapes(connector, r1, r2);
 
             var con_layer = page.Layers["Connector"];
-            var sel = VA.SelectionHelper.SelectShapesInLayer(page, con_layer);
+            var sel = VA.Selection.SelectionHelper.SelectShapesInLayer(page, con_layer);
             sel.SendToBack();
         }
     }

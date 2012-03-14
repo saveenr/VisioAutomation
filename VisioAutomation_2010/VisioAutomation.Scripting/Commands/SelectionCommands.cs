@@ -217,7 +217,7 @@ namespace VisioAutomation.Scripting.Commands
                 layer);
         }
 
-        public IList<IVisio.Shape> GetShapes(ShapesEnumeration enumerationtype)
+        public IList<IVisio.Shape> GetShapes( VA.Selection.ShapesEnumeration enumerationtype)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -225,7 +225,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Session.Selection.Get();
-            return VA.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
+            return VA.Selection.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
         }
 
         public IList<IVisio.Shape> GetSubSelectedShapes()

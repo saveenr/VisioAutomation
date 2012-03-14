@@ -140,7 +140,7 @@ namespace VisioAutomation.Scripting.Commands
                 // In this case, we didn't find a SRC value for the name
                 // So we resort to setting the formulas, one-by-one
                 // This is very slow, but it should not occur in practice very often
-                var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
+                var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
                 foreach (var shape in shapes)
                 {
                     var cell = shape.Cells[cellname];

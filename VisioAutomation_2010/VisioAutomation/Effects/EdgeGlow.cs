@@ -71,8 +71,8 @@ namespace VisioAutomation.Effects
             var application = page.Application;
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
-            var group = VA.SelectionHelper.SelectAndGroup(active_window, shapes);
-            VA.ShapeHelper.SetGroupSelectMode(group, VA.GroupSelectMode.GroupOnly);
+            var group = VA.Selection.SelectionHelper.SelectAndGroup(active_window, shapes);
+            VA.ShapeHelper.SetGroupSelectMode(group, VA.Selection.GroupSelectMode.GroupOnly);
 
             return group;
         }
@@ -120,8 +120,8 @@ namespace VisioAutomation.Effects
             var application = page.Application;
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
-            var group = VA.SelectionHelper.SelectAndGroup(active_window, shapes);
-            VA.ShapeHelper.SetGroupSelectMode(group, VA.GroupSelectMode.GroupOnly);
+            var group = VA.Selection.SelectionHelper.SelectAndGroup(active_window, shapes);
+            VA.ShapeHelper.SetGroupSelectMode(group, VA.Selection.GroupSelectMode.GroupOnly);
 
             return group;
         }

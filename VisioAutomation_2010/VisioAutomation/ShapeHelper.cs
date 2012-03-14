@@ -70,7 +70,7 @@ namespace VisioAutomation
             select_mode_cell.FormulaU = ((int)mode).ToString();
         }
 
-        public static void SetGroupSelectMode(IVisio.Shape shape, GroupSelectMode mode)
+        public static void SetGroupSelectMode(IVisio.Shape shape, VA.Selection.GroupSelectMode mode)
         {
             var src_selectmode = VA.ShapeSheet.SRCConstants.SelectMode;
             var select_mode_cell = shape.CellsSRC[src_selectmode.Section, src_selectmode.Row, src_selectmode.Cell];

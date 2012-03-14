@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
             }
 
-            var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetShapes( VA.Selection.ShapesEnumeration.Flat);
 
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
 
@@ -64,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
             int dirx = 0;
             int diry = 0;
 
-            var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
 
             var indices = new List<int>(shapes.Count);
 
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var shapes = this.Session.Selection.GetShapes(ShapesEnumeration.Flat);
+            var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
 
             var target_shapes = from shape in shapes
                                 where VA.Connections.ConnectionPointHelper.GetConnectionPointCount(shape) > index

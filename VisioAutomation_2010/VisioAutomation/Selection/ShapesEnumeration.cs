@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation
+﻿namespace VisioAutomation.Selection
 {
     public enum ShapesEnumeration
     {
