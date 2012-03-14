@@ -1,19 +1,10 @@
 using System.Collections.Generic;
-using System.Xml.Linq;
-using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VisioAutomation
 {
-    public enum GroupSelectMode
-    {
-        GroupFirst = IVisio.VisCellVals.visGrpSelModeGroup1st,
-        GroupOnly = IVisio.VisCellVals.visGrpSelModeGroupOnly,
-        MembersFirst = IVisio.VisCellVals.visGrpSelModeMembers1st
-    }
-
     public static class ShapeHelper
     {
         /// <summary>

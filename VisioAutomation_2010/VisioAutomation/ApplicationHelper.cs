@@ -14,7 +14,7 @@ namespace VisioAutomation
         /// <returns>null if an instance cannot be found, otherwise returns the instance</returns>
         public static IVisio.Application FindRunningApplication()
         {
-            const string progid = VA.Constants.VisioApplication_ProgID;
+            const string progid = VA.Internal.Constants.VisioApplication_ProgID;
             return VA.Internal.Interop.COMInterop.FindActiveObjectTyped<IVisio.Application>(progid);
         }
 
