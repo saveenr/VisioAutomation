@@ -59,15 +59,5 @@ namespace VisioAutomation.Selection
 
             throw new System.ArgumentOutOfRangeException("enumerationtype");
         }
-
-        public static IVisio.Selection SelectShapesInLayer(IVisio.Page page, IVisio.Layer layer)
-        {
-            // Get a selection of connectors, by layer: 
-            var selection = page.CreateSelection(
-                IVisio.VisSelectionTypes.visSelTypeByLayer,
-                IVisio.VisSelectMode.visSelModeSkipSub,
-                layer);
-            return selection;
-        }
     }
 }
