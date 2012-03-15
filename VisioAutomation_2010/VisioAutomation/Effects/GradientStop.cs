@@ -5,7 +5,7 @@ namespace VisioAutomation.Effects
 {
     public class GradientStop
     {
-        public Drawing.ColorRGB Color { get; set; }
+        public VA.Drawing.ColorRGB Color { get; set; }
         public VA.Drawing.Transparency Transparency { get; set; }
         public double Position { get; set; }
 
@@ -14,6 +14,11 @@ namespace VisioAutomation.Effects
             this.Color = color;
             this.Transparency = transparency;
             this.Position= pos;
+
+            if (this.Position < 0.0)
+            {
+                throw new System.ArgumentOutOfRangeException("pos","must be positive");
+            }
         }
     }
 }
