@@ -38,6 +38,7 @@
             this.tab2 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.buttonHelp = this.Factory.CreateRibbonButton();
+            this.buttonImportColors = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
@@ -57,6 +58,7 @@
             // group1
             // 
             this.group1.Items.Add(this.buttonHelp);
+            this.group1.Items.Add(this.buttonImportColors);
             this.group1.Label = "group1";
             this.group1.Name = "group1";
             // 
@@ -65,6 +67,12 @@
             this.buttonHelp.Label = "Help";
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonHelp_Click_1);
+            // 
+            // buttonImportColors
+            // 
+            this.buttonImportColors.Label = "Import colors";
+            this.buttonImportColors.Name = "buttonImportColors";
+            this.buttonImportColors.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonImportColors_Click);
             // 
             // VPTRibbon
             // 
@@ -88,6 +96,7 @@
         private Microsoft.Office.Tools.Ribbon.RibbonTab tab2;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonHelp;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonImportColors;
     }
 
     partial class ThisRibbonCollection
