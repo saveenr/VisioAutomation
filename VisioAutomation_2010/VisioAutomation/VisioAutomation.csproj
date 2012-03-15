@@ -84,7 +84,6 @@
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="Internal\ShapeUtil.cs" />
-    <Compile Include="Internal\GroupSelectMode.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Layout\BoxLayout\AlignmentHorizontal.cs" />
     <Compile Include="Layout\BoxLayout\AlignmentVertical.cs" />
