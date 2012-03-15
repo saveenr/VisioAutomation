@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Effects
 {
-    public class GradientFillDefinition
+    public class GradientFill
     {
         public VA.ShapeSheet.FormulaLiteral FillPattern;
         public VA.ShapeSheet.FormulaLiteral StartColor;

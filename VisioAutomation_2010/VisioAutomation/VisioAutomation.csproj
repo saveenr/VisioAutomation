@@ -186,7 +186,7 @@
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
     <Compile Include="Effects\GradientStop.cs" />
-    <Compile Include="Effects\GradientFillDefinition.cs" />
+    <Compile Include="Effects\GradientFill.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
     <Compile Include="Effects\MultiStopGradient.cs" />
     <Compile Include="DOM\BezierCurve.cs" />

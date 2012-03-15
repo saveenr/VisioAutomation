@@ -131,7 +131,7 @@ namespace VisioAutomation.Effects
 
                 int linepat = 0;
 
-                var gradfil = new VA.Effects.GradientFillDefinition();
+                var gradfil = new VA.Effects.GradientFill();
                 gradfil.StartColor = prev_stop.Color.ToFormula();
                 gradfil.EndColor = next_stop.Color.ToFormula();
                 gradfil.StartTransparency = prev_stop.Transparency.Value;
