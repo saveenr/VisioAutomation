@@ -147,7 +147,7 @@ namespace VisioAutomation.Effects
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             var group = VA.Selection.SelectionHelper.SelectAndGroup(active_window, grad_shapes);
-            VA.Selection.SelectionHelper.SetGroupSelectMode(group, VA.Selection.GroupSelectMode.GroupOnly);
+            VA.Internal.ShapeUtil.SetSelectGroupFirst(group);
 
             return group;
         }
