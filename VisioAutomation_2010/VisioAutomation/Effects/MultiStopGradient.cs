@@ -131,14 +131,14 @@ namespace VisioAutomation.Effects
 
                 int linepat = 0;
 
-                var gf = new VA.Effects.GradientFillDefinition();
-                gf.StartColor = prev_stop.Color.ToFormula();
-                gf.EndColor = next_stop.Color.ToFormula();
-                gf.StartTransparency = prev_stop.Transparency.Value;
-                gf.EndTransparency = next_stop.Transparency.Value;
-                gf.FillPattern = (int)fillpat;
+                var gradfil = new VA.Effects.GradientFillDefinition();
+                gradfil.StartColor = prev_stop.Color.ToFormula();
+                gradfil.EndColor = next_stop.Color.ToFormula();
+                gradfil.StartTransparency = prev_stop.Transparency.Value;
+                gradfil.EndTransparency = next_stop.Transparency.Value;
+                gradfil.FillPattern = (int)fillpat;
 
-                gf.Apply(update, shapeid);
+                gradfil.Apply(update, shapeid);
                 update.SetFormula(shapeid, VA.ShapeSheet.SRCConstants.LinePattern, linepat);
             }
             update.Execute(page);
@@ -147,10 +147,9 @@ namespace VisioAutomation.Effects
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             var group = VA.Selection.SelectionHelper.SelectAndGroup(active_window, grad_shapes);
-            VA.ShapeHelper.SetGroupSelectMode(group, VA.Selection.GroupSelectMode.GroupOnly);
+            VA.Selection.SelectionHelper.SetGroupSelectMode(group, VA.Selection.GroupSelectMode.GroupOnly);
 
             return group;
         }
-
     }
 }

@@ -58,5 +58,12 @@ namespace VisioAutomation.Selection
 
             throw new System.ArgumentOutOfRangeException("enumerationtype");
         }
+
+        public static void SetGroupSelectMode(IVisio.Shape shape, VA.Selection.GroupSelectMode mode)
+        {
+            var src_selectmode = VA.ShapeSheet.SRCConstants.SelectMode;
+            var select_mode_cell = shape.CellsSRC[src_selectmode.Section, src_selectmode.Row, src_selectmode.Cell];
+            select_mode_cell.FormulaU = ((int)mode).ToString(System.Globalization.CultureInfo.InvariantCulture);
+        }
     }
 }
