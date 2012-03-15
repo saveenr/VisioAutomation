@@ -105,14 +105,14 @@ namespace VisioAutomation.Effects
 
             for (int i = 0; i < shapes.Length; i++)
             {
-                int shapeid = shapes[i].ID;
+                short shapeid = (short)shapes[i].ID;
 
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.FillPattern, (int)grads[i]);
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.FillForegnd, VA.Convert.ColorToFormulaRGB(glow.GlowColor));
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.FillBkgnd, VA.Convert.ColorToFormulaRGB(bg_color));
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.FillForegndTrans, glow.GlowTransparency);
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.FillBkgndTrans, bg_trans);
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.LinePattern, 0);
+                update.SetFormula(shapeid, VA.ShapeSheet.SRCConstants.FillPattern, (int)grads[i]);
+                update.SetFormula(shapeid, VA.ShapeSheet.SRCConstants.FillForegnd, VA.Convert.ColorToFormulaRGB(glow.GlowColor));
+                update.SetFormula(shapeid, VA.ShapeSheet.SRCConstants.FillBkgnd, VA.Convert.ColorToFormulaRGB(bg_color));
+                update.SetFormula(shapeid, VA.ShapeSheet.SRCConstants.FillForegndTrans, glow.GlowTransparency);
+                update.SetFormula(shapeid, VA.ShapeSheet.SRCConstants.FillBkgndTrans, bg_trans);
+                update.SetFormula(shapeid, VA.ShapeSheet.SRCConstants.LinePattern, 0);
             }
 
             update.Execute(page);
