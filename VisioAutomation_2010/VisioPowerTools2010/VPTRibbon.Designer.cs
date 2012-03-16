@@ -57,9 +57,9 @@
             // 
             // group1
             // 
-            this.group1.Items.Add(this.buttonHelp);
             this.group1.Items.Add(this.buttonImportColors);
-            this.group1.Label = "group1";
+            this.group1.Items.Add(this.buttonHelp);
+            this.group1.Label = "Tools";
             this.group1.Name = "group1";
             // 
             // buttonHelp
