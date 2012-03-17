@@ -43,6 +43,8 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(475, 454);
             this.textBox1.TabIndex = 0;
+            this.textBox1.Text = "// basic rgb\r\n239, 62, 54\r\n13,117,144\r\n// basic argb\r\n128, 13,117,144\r\n//webcolor" +
+    "\r\n#ff0000\r\n//webcolor with alpha\r\n#80ff0000\r\n\r\n";
             // 
             // buttonCancel
             // 

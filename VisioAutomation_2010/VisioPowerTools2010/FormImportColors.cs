@@ -13,34 +13,69 @@ namespace VisioPowerTools2010
 {
     public partial class FormImportColors : Form
     {
-        public List<VA.Drawing.ColorRGB> Colors; 
+        public List<System.Drawing.Color> Colors; 
         public FormImportColors()
         {
             InitializeComponent();
-            this.Colors = new List<ColorRGB>();
+            this.Colors = new List<System.Drawing.Color>();
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            var seps = new[] {','};
+            var sso = System.StringSplitOptions.RemoveEmptyEntries;
+
+            var seps = new[] {',',' '};
+            int linenum = 1;
             foreach (string line in this.textBox1.Lines)
             {
                 var tline = line.Trim();
                 if (tline.Length > 0)
                 {
-                    var tokens = tline.Split(seps);
-                    if (tokens.Length >= 3)
+                    if (tline.StartsWith("//"))
                     {
-                        var r = getcomp(tokens[0]);
-                        var g = getcomp(tokens[1]);
-                        var b = getcomp(tokens[2]);
-
-                        var rgb = new VA.Drawing.ColorRGB(r, g, b);
-
+                        // skip comments
+                        continue;
+                    }
+                    else if (tline.StartsWith("#") && tline.Length==1)
+                    {
+                        // skip comments
+                        continue;
+                    }
+                    else if (tline.StartsWith("#"))
+                    {
+                        var rgb = System.Drawing.ColorTranslator.FromHtml(tline);
                         this.Colors.Add(rgb);
+                    }
+                    else
+                    {
+                        var tokens = tline.Split(seps,sso);
+                        if (tokens.Length >= 3)
+                        {
 
+                            var components = tokens.Select(v => getcomp(v)).ToArray();
+
+                            bool has_alpha = components.Length > 3;
+                            int i = has_alpha ? 1 : 0;
+                            var a = components[0];
+                            var r = components[i + 0];
+                            var g = components[i + 1];
+                            var b = components[i + 2];
+
+                            if (has_alpha)
+                            {
+                                var rgb = System.Drawing.Color.FromArgb(a, r, g, b);
+                                this.Colors.Add(rgb);
+                            }
+                            else
+                            {
+                                var rgb = System.Drawing.Color.FromArgb(r, g, b);
+                                this.Colors.Add(rgb);
+                            }
+                        }
                     }
                 }
+
+                linenum++;
             }
 
             this.DialogResult = DialogResult.OK;
