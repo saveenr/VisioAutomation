@@ -176,6 +176,12 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="FormGetMasterImages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGetMasterImages.designer.cs">
+      <DependentUpon>FormGetMasterImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormImportColors.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,12 +191,16 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SimpleHTML5Writer.cs" />
     <Compile Include="VPTRibbon.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VPTRibbon.Designer.cs">
       <DependentUpon>VPTRibbon.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormGetMasterImages.resx">
+      <DependentUpon>FormGetMasterImages.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormImportColors.resx">
       <DependentUpon>FormImportColors.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +217,7 @@
     <EmbeddedResource Include="VPTRibbon.resx">
       <DependentUpon>VPTRibbon.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

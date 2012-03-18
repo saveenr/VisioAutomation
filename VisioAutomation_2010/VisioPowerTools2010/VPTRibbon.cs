@@ -113,5 +113,11 @@ namespace VisioPowerTools2010
             }
 
         }
+
+        private void buttonCreateStencilCatalog_Click(object sender, RibbonControlEventArgs e)
+        {
+            var form = new FormGetMasterImages();
+            form.ShowDialog();
+        }
     }
 }
