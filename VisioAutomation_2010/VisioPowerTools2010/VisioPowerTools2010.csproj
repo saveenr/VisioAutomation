@@ -118,13 +118,19 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>VisioPowerTools2010_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>VisioPowerTools2010_100years_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>00714BA30E0FB7AE8833AE8F55A0D11529314141</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>DBDC1EF470238FE76CA3541C4582F853AF7B0448</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -217,7 +223,6 @@
     <EmbeddedResource Include="VPTRibbon.resx">
       <DependentUpon>VPTRibbon.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -237,7 +242,7 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
-    <None Include="VisioPowerTools2010_TemporaryKey.pfx" />
+    <None Include="VisioPowerTools2010_100years_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
