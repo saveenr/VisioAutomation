@@ -217,7 +217,6 @@
     <EmbeddedResource Include="RibbonStencilCatalog.resx">
       <DependentUpon>RibbonStencilCatalog.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="DemoStencilCatalog_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
