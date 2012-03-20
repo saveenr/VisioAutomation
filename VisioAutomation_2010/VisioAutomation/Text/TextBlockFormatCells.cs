@@ -59,15 +59,15 @@ namespace VisioAutomation.Text
 
         class TextBlockFormatQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQueryColumn BottomMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LeftMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn RightMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TopMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn DefaultTabStop { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextDirection { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn VerticalAlign { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BottomMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LeftMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn RightMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TopMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn DefaultTabStop { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TextBkgnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TextBkgndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TextDirection { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn VerticalAlign { get; set; }
 
             public TextBlockFormatQuery() :
                 base()

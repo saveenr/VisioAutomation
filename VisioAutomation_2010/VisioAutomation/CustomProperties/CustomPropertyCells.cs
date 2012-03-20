@@ -99,16 +99,16 @@ namespace VisioAutomation.CustomProperties
 
     class CustomPropertyQuery : VA.ShapeSheet.Query.SectionQuery
     {
-        public VA.ShapeSheet.Query.SectionQueryColumn SortKey { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Ask { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Calendar { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Format { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Invis { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Label { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn LangID { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Prompt { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Value { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Type { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn SortKey { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Ask { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Calendar { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Format { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Invis { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Label { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn LangID { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Prompt { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Value { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Type { get; set; }
 
         public CustomPropertyQuery() :
             base(IVisio.VisSectionIndices.visSectionProp)

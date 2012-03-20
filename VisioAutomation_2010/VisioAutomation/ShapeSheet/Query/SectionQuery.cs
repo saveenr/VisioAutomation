@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : QueryBase<SectionQueryColumn>
+    public class SectionQuery : QueryBase<QueryColumn>
     {
         private readonly short _section;
         private SectionQuery() :
@@ -31,32 +31,32 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return _section; }
         }
 
-        public VA.ShapeSheet.SRC GetCellSRCForRow( SectionQueryColumn col, short row)
+        public VA.ShapeSheet.SRC GetCellSRCForRow( QueryColumn col, short row)
         {
-            var src = new VA.ShapeSheet.SRC(this.Section, row, col.Cell);
+            var src = new VA.ShapeSheet.SRC(this.Section, row, col.SRC.Cell);
             return src;
         }
 
-        public SectionQueryColumn AddColumn(short cell)
+        public QueryColumn AddColumn(short cell)
         {
-            var col = new SectionQueryColumn(this.Columns.Count, cell, null);
+            var col = new QueryColumn(this.Columns.Count, cell, null);
             this.AddColumn(col);
             return col;
         }
 
-        public SectionQueryColumn AddColumn(short cell, string name)
+        public QueryColumn AddColumn(short cell, string name)
         {
-            var col = new SectionQueryColumn(this.Columns.Count, cell, name);
+            var col = new QueryColumn(this.Columns.Count, cell, name);
             this.AddColumn(col);
             return col;
         }
 
-        public SectionQueryColumn AddColumn(IVisio.VisCellIndices cell)
+        public QueryColumn AddColumn(IVisio.VisCellIndices cell)
         {
             return AddColumn((short) cell);
         }
 
-        public SectionQueryColumn AddColumn(VA.ShapeSheet.SRC cell)
+        public QueryColumn AddColumn(VA.ShapeSheet.SRC cell)
         {
             if (cell.Section != this.Section)
             {
@@ -67,12 +67,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return AddColumn(cell.Cell);
         }
 
-        public SectionQueryColumn AddColumn(IVisio.VisCellIndices cell, string name)
+        public QueryColumn AddColumn(IVisio.VisCellIndices cell, string name)
         {
             return AddColumn((short)cell, name);
         }
 
-        public SectionQueryColumn AddColumn(VA.ShapeSheet.SRC cell, string name)
+        public QueryColumn AddColumn(VA.ShapeSheet.SRC cell, string name)
         {
             return AddColumn(cell.Cell, name);
         }
@@ -122,7 +122,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new ArgumentNullException("shapeids");
             }
 
-            var cells = Columns.Items.Select(c => c.Cell).ToList();
+            var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
             var unitcodes = CreateUnitCodeArray();
 
             // Find out how many rows are in each shape for the given section id
@@ -201,7 +201,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new ArgumentNullException("shape");
             }
 
-            var cells = Columns.Items.Select(c => c.Cell).ToList();
+            var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
 
             int rowcount = shape.RowCount[Section];
             var groupcounts = new[] { rowcount };

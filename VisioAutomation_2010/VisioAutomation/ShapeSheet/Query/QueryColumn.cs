@@ -7,6 +7,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         public string Name { get; private set; }
         public IVisio.VisUnitCodes UnitCode { get; set; }
+        public SRC SRC { get; protected set; }
 
         protected QueryColumn(int ordinal, string name)
         {
@@ -17,5 +18,18 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
         public int Ordinal { get; private set; }
+
+        internal QueryColumn(int ordinal, short cell, string name) :
+            this(ordinal,name)
+        {
+            this.SRC = new VA.ShapeSheet.SRC(-1,-1,cell);
+        }
+
+        internal QueryColumn(int ordinal, SRC src, string name) :
+            this(ordinal,name)
+        {
+            this.SRC = src;
+        }
+
     }
 }

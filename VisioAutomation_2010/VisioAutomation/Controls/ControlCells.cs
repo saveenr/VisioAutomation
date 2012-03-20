@@ -56,14 +56,14 @@ namespace VisioAutomation.Controls
 
         class ControlQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.SectionQueryColumn CanGlue { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Tip { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn X { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Y { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn YBehavior { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn XBehavior { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn XDynamics { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn YDynamics { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn CanGlue { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Tip { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn X { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Y { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn YBehavior { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn XBehavior { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn XDynamics { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn YDynamics { get; set; }
 
             public ControlQuery() :
                 base(IVisio.VisSectionIndices.visSectionControls)

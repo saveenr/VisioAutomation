@@ -55,13 +55,13 @@ namespace VisioAutomation.Layout
 
         class XFormQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQueryColumn Width { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn Height { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn PinX { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn PinY { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LocPinX { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LocPinY { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn Angle { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Width { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Height { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn PinX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn PinY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LocPinX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LocPinY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Angle { get; set; }
 
             public XFormQuery() :
                 base()

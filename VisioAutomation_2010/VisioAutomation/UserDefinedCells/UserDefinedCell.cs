@@ -59,8 +59,8 @@ namespace VisioAutomation.UserDefinedCells
 
         internal class UserDefinedCellQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.SectionQueryColumn Value { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Prompt { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Value { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Prompt { get; set; }
 
             public UserDefinedCellQuery() :
                 base(IVisio.VisSectionIndices.visSectionUser)

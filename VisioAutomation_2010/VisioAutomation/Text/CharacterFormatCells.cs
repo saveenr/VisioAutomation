@@ -48,11 +48,11 @@ namespace VisioAutomation.Text
 
         class CharacterFormatQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.SectionQueryColumn Font { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Style { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Color { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Size { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Trans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Font { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Style { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Color { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Size { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Trans { get; set; }
 
             public CharacterFormatQuery() :
                 base(IVisio.VisSectionIndices.visSectionCharacter)

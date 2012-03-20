@@ -64,20 +64,20 @@ namespace VisioAutomation.Text
 
         class ParagraphFormatQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.SectionQueryColumn BulletIndex { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn BulletFont { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn BulletFontSize { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn BulletString { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Flags { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn HorzAlign { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn IndentFirst { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn IndentLeft { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn IndentRight { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn LocalizeBulletFont { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn SpaceAfter { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn SpaceBefore { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn SpaceLine { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn TextPosAfterBullet { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BulletIndex { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BulletFont { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BulletFontSize { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BulletString { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Flags { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn HorzAlign { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn IndentFirst { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn IndentLeft { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn IndentRight { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LocalizeBulletFont { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn SpaceAfter { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn SpaceBefore { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn SpaceLine { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TextPosAfterBullet { get; set; }
 
             public ParagraphFormatQuery() :
                 base(IVisio.VisSectionIndices.visSectionParagraph)

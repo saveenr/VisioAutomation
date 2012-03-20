@@ -49,11 +49,11 @@ namespace VisioAutomation.Connections
 
         class ConnectionPointQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.SectionQueryColumn DirX { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn DirY { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Type { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn X { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Y { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn DirX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn DirY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Type { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn X { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Y { get; set; }
 
             public ConnectionPointQuery() :
                 base(IVisio.VisSectionIndices.visSectionConnectionPts)

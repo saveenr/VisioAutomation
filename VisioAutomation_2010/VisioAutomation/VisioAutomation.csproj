@@ -257,7 +257,6 @@
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />
-    <Compile Include="Shapesheet\Query\CellQueryColumn.cs" />
     <Compile Include="Shapesheet\Update\SIDSRCUpdate.cs" />
     <Compile Include="Shapesheet\Data\QueryDataSet.cs" />
     <Compile Include="Drawing\Size.cs" />
@@ -271,7 +270,6 @@
     <Compile Include="Shapesheet\SRC.cs" />
     <Compile Include="Connections\ConnectionPointCells.cs" />
     <Compile Include="Extensions\SectionMethods.cs" />
-    <Compile Include="Shapesheet\Query\SectionQueryColumn.cs" />
     <Compile Include="UserDefinedCells\UserDefinedCellHelper.cs" />
     <Compile Include="UserDefinedCells\UserDefinedCell.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

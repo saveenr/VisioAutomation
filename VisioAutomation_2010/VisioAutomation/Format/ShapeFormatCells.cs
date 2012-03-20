@@ -110,32 +110,32 @@ namespace VisioAutomation.Format
 
         class ShapeFormatQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQueryColumn FillBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillBkgndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillForegnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillForegndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillPattern { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwObliqueAngle { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwOffsetX { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwOffsetY { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwScaleFactor { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwType { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwBkgndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwForegnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwForegndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwPattern { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillBkgnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillBkgndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillForegnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillForegndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillPattern { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwObliqueAngle { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwOffsetX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwOffsetY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwScaleFactor { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwType { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwBkgnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwBkgndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwForegnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwForegndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwPattern { get; set; }
 
-            public VA.ShapeSheet.Query.CellQueryColumn BeginArrow { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn BeginArrowSize { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn EndArrow { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn EndArrowSize { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineColor { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineCap { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineColorTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LinePattern { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineWeight { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn Rounding { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BeginArrow { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BeginArrowSize { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn EndArrow { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn EndArrowSize { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineColor { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineCap { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineColorTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LinePattern { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineWeight { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Rounding { get; set; }
 
             public ShapeFormatQuery() :
                 base()

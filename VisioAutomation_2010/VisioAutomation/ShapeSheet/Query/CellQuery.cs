@@ -5,23 +5,23 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class CellQuery : QueryBase<CellQueryColumn>
+    public class CellQuery : QueryBase<QueryColumn>
     {
         public CellQuery() :
             base()
         {
         }
 
-        public CellQueryColumn AddColumn(SRC src)
+        public QueryColumn AddColumn(SRC src)
         {
-            var col = new CellQueryColumn(this.Columns.Count, src, null);
+            var col = new QueryColumn(this.Columns.Count, src, null);
             this.AddColumn(col);
             return col;
         }
 
-        public CellQueryColumn AddColumn(SRC src, string name)
+        public QueryColumn AddColumn(SRC src, string name)
         {
-            var col = new CellQueryColumn(this.Columns.Count, src, name);
+            var col = new QueryColumn(this.Columns.Count, src, name);
             this.AddColumn(col);
             return col;
         }
