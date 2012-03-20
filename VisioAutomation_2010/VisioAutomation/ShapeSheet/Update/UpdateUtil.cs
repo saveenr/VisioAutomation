@@ -63,9 +63,10 @@ namespace VisioAutomation.ShapeSheet.Update
             IVisio.Page page,
             short[] stream,
             IList<string> formulas,
-            short flags,
-            int numitems)
+            short flags)
         {
+            int numitems = VisioAutomation.ShapeSheet.Query.QueryUtil.check_stream_size(stream, 4);
+
             if (numitems < 1)
             {
                 return 0;
@@ -84,9 +85,10 @@ namespace VisioAutomation.ShapeSheet.Update
             IVisio.Shape shape,
             short[] stream,
             IList<string> formulas,
-            IVisio.VisGetSetArgs flags,
-            int numitems)
+            IVisio.VisGetSetArgs flags)
         {
+            int numitems = VisioAutomation.ShapeSheet.Query.QueryUtil.check_stream_size(stream, 3);
+
             if (formulas.Count != numitems)
             {
                 string msg = string.Format("Expected {0} formulas, instead have {1}", numitems, formulas.Count);
@@ -112,9 +114,10 @@ namespace VisioAutomation.ShapeSheet.Update
             short[] stream,
             IList<double> results,
             IList<IVisio.VisUnitCodes> unit_codes,
-            IVisio.VisGetSetArgs flags,
-            int numitems)
+            IVisio.VisGetSetArgs flags)
         {
+            int numitems = VisioAutomation.ShapeSheet.Query.QueryUtil.check_stream_size(stream, 3);
+
             if (unit_codes.Count != numitems)
             {
                 string msg = string.Format("Expected {0} unit_codes, instead have {1}", numitems, unit_codes.Count);
@@ -147,9 +150,10 @@ namespace VisioAutomation.ShapeSheet.Update
             short[] stream,
             IList<double> results,
             IList<IVisio.VisUnitCodes> unitcodes,
-            IVisio.VisGetSetArgs flags,
-            int numitems)
+            IVisio.VisGetSetArgs flags)
         {
+            int numitems = VisioAutomation.ShapeSheet.Query.QueryUtil.check_stream_size(stream, 4);
+
             if (results.Count != numitems)
             {
                 string msg = string.Format("Expected {0} results, instead have {1}", numitems, results.Count);

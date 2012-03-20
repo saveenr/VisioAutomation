@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return flags;
         }
 
-        private static int check_stream_size(short[] stream, int chunksize)
+        internal static int check_stream_size(short[] stream, int chunksize)
         {
             if ((chunksize != 3) && (chunksize != 4))
             {
