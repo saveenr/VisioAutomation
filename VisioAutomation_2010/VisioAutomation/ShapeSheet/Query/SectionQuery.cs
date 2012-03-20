@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : QueryBase<QueryColumn>
+    public class SectionQuery : QueryBase
     {
         private readonly short _section;
         private SectionQuery() :

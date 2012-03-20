@@ -6,21 +6,21 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class QueryBase<TCol> where TCol : QueryColumn
+    public class QueryBase
     {
-        private QueryColumnList<TCol> _columns;
+        private QueryColumnList _columns;
 
         internal QueryBase()
         {
-            this._columns = new QueryColumnList<TCol>();
+            this._columns = new QueryColumnList();
         }
 
-        public QueryColumnList<TCol> Columns
+        public QueryColumnList Columns
         {
             get { return this._columns; }
         }
 
-        protected void AddColumn(TCol column)
+        protected void AddColumn(QueryColumn column)
         {
             if (column == null)
             {
