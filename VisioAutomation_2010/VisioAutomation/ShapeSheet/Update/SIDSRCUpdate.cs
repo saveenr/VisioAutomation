@@ -53,7 +53,7 @@ namespace VisioAutomation.ShapeSheet.Update
             double[] results = this.GetResultsArray();
             var flags = this.ResultFlags;
 
-            return VA.ShapeSheet.Update.UpdateUtil.SetResults(page, stream, results, unitcodes, flags);
+            return VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
         }
 
         private short [] GetResultStream()
@@ -74,7 +74,7 @@ namespace VisioAutomation.ShapeSheet.Update
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
 
-            return VA.ShapeSheet.Update.UpdateUtil.SetFormulas(page, stream, formulas, (short)flags);
+            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(page, stream, formulas, (short)flags);
         }
 
         private short [] GetFormulaStream()

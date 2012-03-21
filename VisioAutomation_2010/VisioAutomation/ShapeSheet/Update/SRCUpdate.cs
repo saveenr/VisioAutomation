@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.Update
             var unitcodes = this.GetUnitCodesArray();
             var results = this.GetResultsArray();
             var flags = this.ResultFlags;
-            return VA.ShapeSheet.Update.UpdateUtil.SetResults(shape, stream, results, unitcodes, flags);
+            return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
         }
 
         private short [] GetResultStream()
@@ -55,7 +55,7 @@ namespace VisioAutomation.ShapeSheet.Update
             var stream = GetFormulaStream();
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
-            return VA.ShapeSheet.Update.UpdateUtil.SetFormulas(shape, stream, formulas, flags);
+            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
         }
 
         private short [] GetFormulaStream()

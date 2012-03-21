@@ -68,8 +68,8 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcs = this.Columns.Items.Select(col => col.SRC).ToList();
 
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
-            var formulas = getformulas ? VA.ShapeSheet.Query.QueryUtil.GetFormulasU(shape, stream) : null;
-            var results = getresults ? VA.ShapeSheet.Query.QueryUtil.GetResults<T>(shape, stream, unitcodes) : null;
+            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
+            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
 
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, group_counts);
 
@@ -142,8 +142,8 @@ namespace VisioAutomation.ShapeSheet.Query
             }
             var stream = VA.ShapeSheet.SIDSRC.ToStream(sidsrcs);
 
-            var formulas = getformulas ? VA.ShapeSheet.Query.QueryUtil.GetFormulasU(page, stream) : null;
-            var results = getresults ? VA.ShapeSheet.Query.QueryUtil.GetResults<T>(page, stream, unitcodes) : null;
+            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
+            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes) : null;
 
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
 
