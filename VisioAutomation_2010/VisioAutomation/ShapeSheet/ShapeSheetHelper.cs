@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet
 {
     public static partial class ShapeSheetHelper
     {
-        internal static object[] UnitCodesToObjectArray(IList<IVisio.VisUnitCodes> unitcodes)
+        private static object[] UnitCodesToObjectArray(IList<IVisio.VisUnitCodes> unitcodes)
         {
             if (unitcodes == null)
             {
@@ -24,16 +24,7 @@ namespace VisioAutomation.ShapeSheet
             return destination_array;
         }
 
-        internal static void CheckValidDataTypeForResult(Type result_type)
-        {
-            if (!((result_type == typeof(string)) || (result_type == typeof(int) || (result_type == typeof(double)))))
-            {
-                string msg = "type must be int, string or double";
-                throw new ArgumentException(msg);
-            }
-        }
-
-        public static IVisio.VisGetSetArgs CheckSetResultsFlags(IVisio.VisGetSetArgs flags)
+        private static IVisio.VisGetSetArgs CheckSetResultsFlags(IVisio.VisGetSetArgs flags)
         {
             if ((flags & IVisio.VisGetSetArgs.visSetUniversalSyntax) > 0)
             {
@@ -51,7 +42,7 @@ namespace VisioAutomation.ShapeSheet
             return flags;
         }
 
-        public static object[] StringsToObjectArray(IList<string> strings)
+        private static object[] StringsToObjectArray(IList<string> strings)
         {
             if (strings == null)
             {
@@ -68,7 +59,7 @@ namespace VisioAutomation.ShapeSheet
         }
 
 
-        public static object[] DoublesToObjectArray(IList<double> doubles)
+        private static object[] DoublesToObjectArray(IList<double> doubles)
         {
             if (doubles == null)
             {
@@ -84,6 +75,24 @@ namespace VisioAutomation.ShapeSheet
             return destination_array;
         }
 
+        private static void CheckSetFormulasCount(IList<string> formulas, int numitems)
+        {
+            if (formulas.Count != numitems)
+            {
+                string msg = string.Format("Expected {0} formulas, instead have {1}", numitems, formulas.Count);
+                throw new AutomationException(msg);
+            }
+        }
+
+        private static void CheckSetResultsCount(IList<double> results, int numitems)
+        {
+            if (results.Count != numitems)
+            {
+                string msg = string.Format("Expected {0} results, instead have {1}", numitems, results.Count);
+                throw new AutomationException(msg);
+            }
+        }
+        
         public static short SetFormulas(
             IVisio.Page page,
             short[] stream,
@@ -97,6 +106,13 @@ namespace VisioAutomation.ShapeSheet
                 return 0;
             }
 
+            CheckSetFormulasCount(formulas, numitems);
+
+            if (numitems == 0)
+            {
+                return 0;
+            }
+
             var formula_obj_array = VA.ShapeSheet.ShapeSheetHelper.StringsToObjectArray(formulas);
 
             // Force UniversalSyntax 
@@ -104,8 +120,6 @@ namespace VisioAutomation.ShapeSheet
 
             return page.SetFormulas(stream, formula_obj_array, flags);
         }
-
-
         public static short SetFormulas(
             IVisio.Shape shape,
             short[] stream,
@@ -114,17 +128,12 @@ namespace VisioAutomation.ShapeSheet
         {
             int numitems = VA.ShapeSheet.ShapeSheetHelper.check_stream_size(stream, 3);
 
-            if (formulas.Count != numitems)
-            {
-                string msg = string.Format("Expected {0} formulas, instead have {1}", numitems, formulas.Count);
-                throw new AutomationException(msg);
-            }
+            CheckSetFormulasCount(formulas,numitems);
 
             if (numitems == 0)
             {
                 return 0;
             }
-
 
             var formula_obj_array = VA.ShapeSheet.ShapeSheetHelper.StringsToObjectArray(formulas);
 
@@ -143,15 +152,11 @@ namespace VisioAutomation.ShapeSheet
         {
             int numitems = VA.ShapeSheet.ShapeSheetHelper.check_stream_size(stream, 3);
 
+            CheckSetResultsCount(results, numitems);
+            
             if (unit_codes.Count != numitems)
             {
                 string msg = string.Format("Expected {0} unit_codes, instead have {1}", numitems, unit_codes.Count);
-                throw new AutomationException(msg);
-            }
-
-            if (results.Count != numitems)
-            {
-                string msg = string.Format("Expected {0} results, instead have {1}", numitems, results.Count);
                 throw new AutomationException(msg);
             }
 
@@ -179,11 +184,7 @@ namespace VisioAutomation.ShapeSheet
         {
             int numitems = VA.ShapeSheet.ShapeSheetHelper.check_stream_size(stream, 4);
 
-            if (results.Count != numitems)
-            {
-                string msg = string.Format("Expected {0} results, instead have {1}", numitems, results.Count);
-                throw new AutomationException(msg);
-            }
+            CheckSetResultsCount(results, numitems);
 
             if (numitems == 0)
             {
@@ -198,7 +199,7 @@ namespace VisioAutomation.ShapeSheet
             return page.SetResults(stream, unitcodes_obj_array, results_obj_array, (short)flags);
         }
 
-        public static IVisio.VisGetSetArgs ResultTypeToGetResultsFlag(Type result_type)
+        private static IVisio.VisGetSetArgs ResultTypeToGetResultsFlag(Type result_type)
         {
             IVisio.VisGetSetArgs flags = 0;
 
@@ -222,7 +223,7 @@ namespace VisioAutomation.ShapeSheet
             return flags;
         }
 
-        internal static int check_stream_size(short[] stream, int chunksize)
+        private static int check_stream_size(short[] stream, int chunksize)
         {
             if ((chunksize != 3) && (chunksize != 4))
             {
