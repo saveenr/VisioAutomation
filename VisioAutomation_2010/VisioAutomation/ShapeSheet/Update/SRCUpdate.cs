@@ -38,14 +38,14 @@ namespace VisioAutomation.ShapeSheet.Update
             return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
         }
          
-        public void SetFormula(SRC streamitem, FormulaLiteral literal)
+        public void SetFormula(SRC streamitem, FormulaLiteral formula)
         {
-            this._SetFormula(new SIDSRC(-1,streamitem), literal);
+            this._SetFormula(new SIDSRC(-1,streamitem), formula);
         }
 
-        public void SetFormulaIgnoreNull(SRC streamitem, ShapeSheet.FormulaLiteral f)
+        public void SetFormulaIgnoreNull(SRC streamitem, ShapeSheet.FormulaLiteral formula)
         {
-            this._SetFormulaIgnoreNull(new SIDSRC(-1,streamitem),f );
+            this._SetFormulaIgnoreNull(new SIDSRC(-1,streamitem),formula );
         }
 
         public void SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
@@ -56,7 +56,7 @@ namespace VisioAutomation.ShapeSheet.Update
         private short [] GetResultStream()
         {
             var stream = new List<SRC>(this.ResultCount);
-            stream.AddRange(this.ResultRecords.Select(i => i.StreamItem.SRC));
+            stream.AddRange(this.ResultRecords.Select(i => i.SIDSRC.SRC));
             return SRC.ToStream(stream);
         }
 
@@ -76,7 +76,7 @@ namespace VisioAutomation.ShapeSheet.Update
         private short [] GetFormulaStream()
         {
             var stream = new List<SRC>(this.FormulaCount);
-            stream.AddRange(this.FormulaRecords.Select(i => i.StreamItem.SRC));
+            stream.AddRange(this.FormulaRecords.Select(i => i.SIDSRC.SRC));
             return SRC.ToStream(stream);
         }
     }

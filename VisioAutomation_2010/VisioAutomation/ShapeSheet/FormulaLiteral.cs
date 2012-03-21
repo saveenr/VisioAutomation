@@ -29,9 +29,9 @@ namespace VisioAutomation.ShapeSheet
             get { return this.formula_string != null; }
         }
             
-        public static implicit operator FormulaLiteral(string s)
+        public static implicit operator FormulaLiteral(string value)
         {
-            return new FormulaLiteral(s);
+            return new FormulaLiteral(value);
         }
 
         public static implicit operator FormulaLiteral(int value)

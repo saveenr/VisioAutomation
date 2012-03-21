@@ -28,24 +28,24 @@ namespace VisioAutomation.CustomProperties
             this.Value = value;
         }
 
-        private string encode_if_needed(VA.ShapeSheet.FormulaLiteral f)
+        private string encode_if_needed(VA.ShapeSheet.FormulaLiteral formula)
         {
-            if (!f.HasValue)
+            if (!formula.HasValue)
             {
                 return null;
             }
 
-            if (f.Value.Length==0)
+            if (formula.Value.Length==0)
             {
-                return VA.Convert.StringToFormulaString(f.Value);
+                return VA.Convert.StringToFormulaString(formula.Value);
             }
 
-            if (f.Value[0]!='\"')
+            if (formula.Value[0]!='\"')
             {
-                return VA.Convert.StringToFormulaString(f.Value);                
+                return VA.Convert.StringToFormulaString(formula.Value);                
             }
 
-            return f.Value;
+            return formula.Value;
         }
         
         protected override void ApplyFormulas(ApplyFormula func, short row)

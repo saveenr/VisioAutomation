@@ -39,10 +39,10 @@ namespace VisioAutomation.ShapeSheet.Update
             this._SetFormula(streamitem, formula);
         }
 
-        public void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral f)
+        public void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
         {
             var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
-            this._SetFormulaIgnoreNull(sidsrc,f);
+            this._SetFormulaIgnoreNull(sidsrc,formula);
         }
         
         public void Execute(IVisio.Page page)
@@ -69,7 +69,7 @@ namespace VisioAutomation.ShapeSheet.Update
         private short [] GetResultStream()
         {
             var stream = new List<SIDSRC>(this.ResultCount);
-            stream.AddRange(this.ResultRecords.Select(i => i.StreamItem));
+            stream.AddRange(this.ResultRecords.Select(i => i.SIDSRC));
             return SIDSRC.ToStream(stream);
         }
 
@@ -90,7 +90,7 @@ namespace VisioAutomation.ShapeSheet.Update
         private short [] GetFormulaStream()
         {
             var stream = new List<SIDSRC>(this.FormulaCount);
-            stream.AddRange(this.FormulaRecords.Select(i => i.StreamItem));
+            stream.AddRange(this.FormulaRecords.Select(i => i.SIDSRC));
             return SIDSRC.ToStream(stream);
         }
     }
