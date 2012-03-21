@@ -6,10 +6,9 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class UpdateBase<T> : IEnumerable<UpdateRecord<T>>
-        where T : struct
+    public class UpdateBase : IEnumerable<UpdateRecord>
     {
-        private List<UpdateRecord<T>> items;
+        private List<UpdateRecord> items;
         public int ResultCount { get; private set; }
         public int FormulaCount { get; private set; }
         public bool BlastGuards { get; set; }
@@ -17,12 +16,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         protected UpdateBase()
         {
-            this.items = new List<UpdateRecord<T>>();
+            this.items = new List<UpdateRecord>();
         }
 
         protected UpdateBase(int capacity)
         {
-            this.items = new List<UpdateRecord<T>>(capacity);
+            this.items = new List<UpdateRecord>(capacity);
         }
 
         protected IVisio.VisGetSetArgs ResultFlags
@@ -59,30 +58,30 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        public void SetFormula(T streamitem, FormulaLiteral literal)
+        protected void _SetFormula(SIDSRC streamitem, FormulaLiteral literal)
         {
             this.CheckFormulaIsNotNull(literal.Value);
-            var rec = new UpdateRecord<T>(streamitem, literal.Value);
+            var rec = new UpdateRecord(streamitem, literal.Value);
             this.items.Add(rec);
             this.FormulaCount++;
         }
 
-        public void SetFormulaIgnoreNull(T streamitem, ShapeSheet.FormulaLiteral f)
+        protected void _SetFormulaIgnoreNull(SIDSRC streamitem, ShapeSheet.FormulaLiteral f)
         {
             if (f.HasValue)
             {
-                this.SetFormula(streamitem, f);
+                this._SetFormula(streamitem, f);
             }
         }
 
-        public void SetResult(T streamitem, double value, IVisio.VisUnitCodes unitcode)
+        protected void _SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            var rec = new UpdateRecord<T>(streamitem, value, unitcode);
+            var rec = new UpdateRecord(streamitem, value, unitcode);
             this.items.Add(rec);
             this.ResultCount++;
         }
 
-        public IEnumerator<UpdateRecord<T>> GetEnumerator()
+        public IEnumerator<UpdateRecord> GetEnumerator()
         {
             foreach (var i in this.items)
             {
@@ -96,12 +95,12 @@ namespace VisioAutomation.ShapeSheet.Update
             return GetEnumerator();
         }
 
-        public IEnumerable<UpdateRecord<T>> ResultRecords
+        public IEnumerable<UpdateRecord> ResultRecords
         {
             get { return this.items.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Result); }
         }
 
-        public IEnumerable<UpdateRecord<T>> FormulaRecords
+        public IEnumerable<UpdateRecord> FormulaRecords
         {
             get { return this.items.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Formula); }
         }

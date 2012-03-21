@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public class SIDSRCUpdate : UpdateBase<SIDSRC>
+    public class SIDSRCUpdate : UpdateBase
     {
         public SIDSRCUpdate() :
             base()
@@ -20,19 +20,29 @@ namespace VisioAutomation.ShapeSheet.Update
         public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             var streamitem = new SIDSRC(shapeid,src);
-            this.SetResult(streamitem, value, unitcode);
+            this._SetResult(streamitem, value, unitcode);
+        }
+
+        public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            this._SetResult(streamitem, value, unitcode);
+        }
+
+        public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
+        {
+            this._SetFormula(streamitem, formula);
         }
 
         public void SetFormula(short shapeid, SRC src, FormulaLiteral formula)
         {
             var streamitem = new SIDSRC(shapeid, src);
-            this.SetFormula(streamitem, formula);
+            this._SetFormula(streamitem, formula);
         }
 
         public void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral f)
         {
             var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
-            this.SetFormulaIgnoreNull(sidsrc,f);
+            this._SetFormulaIgnoreNull(sidsrc,f);
         }
         
         public void Execute(IVisio.Page page)

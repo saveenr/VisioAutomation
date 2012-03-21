@@ -2,15 +2,15 @@
 
 namespace VisioAutomation.ShapeSheet.Update
 {
-    public struct UpdateRecord<TStream> where TStream : struct
+    public struct UpdateRecord 
     {
-        public readonly TStream StreamItem;
+        public readonly SIDSRC StreamItem;
         public readonly string Formula;
         public readonly double Result;
         public readonly IVisio.VisUnitCodes UnitCode;
         public readonly UpdateType UpdateType;
 
-        public UpdateRecord(TStream streamitem, string formula)
+        public UpdateRecord(SIDSRC streamitem, string formula)
         {
             this.StreamItem = streamitem;
             this.Formula = formula;
@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.Update
             this.UpdateType  = UpdateType.Formula;
         }
 
-        public UpdateRecord(TStream streamitem, double result, IVisio.VisUnitCodes unit_code)
+        public UpdateRecord(SIDSRC streamitem, double result, IVisio.VisUnitCodes unit_code)
         {
             this.StreamItem = streamitem;
             this.Formula = null;
