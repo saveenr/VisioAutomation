@@ -182,6 +182,12 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="FormCreateStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCreateStyle.Designer.cs">
+      <DependentUpon>FormCreateStyle.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGetMasterImages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +210,9 @@
     <Compile Include="VPTRibbon.Designer.cs">
       <DependentUpon>VPTRibbon.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormCreateStyle.resx">
+      <DependentUpon>FormCreateStyle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGetMasterImages.resx">
       <DependentUpon>FormGetMasterImages.cs</DependentUpon>
     </EmbeddedResource>

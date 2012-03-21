@@ -119,5 +119,33 @@ namespace VisioPowerTools2010
             var form = new FormGetMasterImages();
             form.ShowDialog();
         }
+
+        private void buttonCreateStyle_Click(object sender, RibbonControlEventArgs e)
+        {
+            var form = new FormCreateStyle();
+            var result = form.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string name = form.StyleName.Trim();
+                if (name.Length < 1)
+                {
+                    MessageBox.Show("Must have non-empty name");
+                    return;
+                }
+
+                var app = Globals.ThisAddIn.Application;
+                var doc = app.ActiveDocument;
+                var styles = doc.Styles;
+                var names = styles.AsEnumerable().Select(s => s.NameU).ToList();
+                if (names.Contains(name.ToLower()))
+                {
+                    MessageBox.Show("Style with that name already exists");                    
+                    return;
+                }
+
+                var style = styles.Add(name, "", VA.Convert.BoolToShort(form.IncludesText), VA.Convert.BoolToShort(form.IncludesLine), VA.Convert.BoolToShort(form.IncludesFill));
+                int x = 1;
+            }
+        }
     }
 }
