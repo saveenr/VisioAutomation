@@ -39,11 +39,6 @@ namespace VisioAutomation.ShapeSheet
             this.Result = result;
         }
 
-        internal void SetFormula(VA.ShapeSheet.FormulaLiteral formula)
-        {
-            this.Formula = formula;
-        }
-
         public static implicit operator CellData<TResult>(VA.ShapeSheet.FormulaLiteral formula)
         {
             return new CellData<TResult>(formula,default(TResult));
