@@ -24,10 +24,10 @@ namespace VisioAutomationSamples
             var n1 = directed_graph_drawing.AddShape("n1", "N1", "basflo_u.vss", "Decision");
 
             // Format Node 1
-            n1.ShapeCells = new VA.DOM.ShapeCells();
-            n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
-            n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
-            n1.ShapeCells.FillPattern = 40;
+            n1.Cells = new VA.DOM.ShapeCells();
+            n1.Cells.FillForegnd = "rgb(255,0,0)";
+            n1.Cells.FillBkgnd = "rgb(255,255,0)";
+            n1.Cells.FillPattern = 40;
 
             // Create Node 2
             var n2 = directed_graph_drawing.AddShape("n2", "N2 MailServer", "server_u.vss", "Server");
@@ -49,20 +49,20 @@ namespace VisioAutomationSamples
             var c5 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
             // Format connector 0 to point "back" 
-            c0.ShapeCells = new VA.DOM.ShapeCells();
-            c0.ShapeCells.BeginArrow = 1;
-            c0.ShapeCells.LineWeight = 0.10;
+            c0.Cells = new VA.DOM.ShapeCells();
+            c0.Cells.BeginArrow = 1;
+            c0.Cells.LineWeight = 0.10;
 
             // Format connector 1 to point "forward" 
-            c1.ShapeCells = new VA.DOM.ShapeCells();
-            c1.ShapeCells.EndArrow = 1;
-            c1.ShapeCells.LineWeight = 0.10;
+            c1.Cells = new VA.DOM.ShapeCells();
+            c1.Cells.EndArrow = 1;
+            c1.Cells.LineWeight = 0.10;
 
             // Format connector 2 to point "back" and "forward"  
-            c2.ShapeCells = new VA.DOM.ShapeCells();
-            c2.ShapeCells.EndArrow = 1;
-            c2.ShapeCells.BeginArrow = 1;
-            c2.ShapeCells.LineWeight = 0.10;
+            c2.Cells = new VA.DOM.ShapeCells();
+            c2.Cells.EndArrow = 1;
+            c2.Cells.BeginArrow = 1;
+            c2.Cells.LineWeight = 0.10;
 
             // Perform the rendering
             var options = new VA.Layout.MSAGL.LayoutOptions();
@@ -86,10 +86,10 @@ namespace VisioAutomationSamples
             var n1 = directed_graph_drawing.AddShape("n1", "N1", "basflo_u.vss", "Decision");
 
             // Format Node 1
-            n1.ShapeCells = new VA.DOM.ShapeCells();
-            n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
-            n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
-            n1.ShapeCells.FillPattern = 40;
+            n1.Cells = new VA.DOM.ShapeCells();
+            n1.Cells.FillForegnd = "rgb(255,0,0)";
+            n1.Cells.FillBkgnd = "rgb(255,255,0)";
+            n1.Cells.FillPattern = 40;
 
             // Create Node 2
             var n2 = directed_graph_drawing.AddShape("n2", "N2 MailServer", "server_u.vss", "Server");
@@ -111,20 +111,20 @@ namespace VisioAutomationSamples
             var c5 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
             // Format connector 0 to point "back" 
-            c0.ShapeCells = new VA.DOM.ShapeCells();
-            c0.ShapeCells.BeginArrow = 1;
-            c0.ShapeCells.LineWeight = 0.10;
+            c0.Cells = new VA.DOM.ShapeCells();
+            c0.Cells.BeginArrow = 1;
+            c0.Cells.LineWeight = 0.10;
 
             // Format connector 1 to point "forward" 
-            c1.ShapeCells = new VA.DOM.ShapeCells();
-            c1.ShapeCells.EndArrow = 1;
-            c1.ShapeCells.LineWeight = 0.10;
+            c1.Cells = new VA.DOM.ShapeCells();
+            c1.Cells.EndArrow = 1;
+            c1.Cells.LineWeight = 0.10;
 
             // Format connector 2 to point "back" and "forward"  
-            c2.ShapeCells = new VA.DOM.ShapeCells();
-            c2.ShapeCells.EndArrow = 1;
-            c2.ShapeCells.BeginArrow = 1;
-            c2.ShapeCells.LineWeight = 0.10;
+            c2.Cells = new VA.DOM.ShapeCells();
+            c2.Cells.EndArrow = 1;
+            c2.Cells.BeginArrow = 1;
+            c2.Cells.LineWeight = 0.10;
 
             // Perform the rendering
             var options = new VA.Layout.MSAGL.LayoutOptions();

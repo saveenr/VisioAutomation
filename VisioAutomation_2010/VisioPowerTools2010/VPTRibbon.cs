@@ -62,19 +62,19 @@ namespace VisioPowerTools2010
 
 
 
-                    shape1.ShapeCells.FillForegnd = color_formula;
-                    shape1.ShapeCells.LinePattern = "0";
-                    shape1.ShapeCells.LineWeight = "0";
-                    shape2.ShapeCells.LineColor = color_formula;
-                    shape2.ShapeCells.LineWeight= "0.25in";
-                    shape2.ShapeCells.FillPattern = "0";
-                    shape3.ShapeCells.CharColor= color_formula;
-                    shape3.ShapeCells.FillPattern = "0";
-                    shape3.ShapeCells.LinePattern= "0";
-                    shape3.ShapeCells.LineWeight = "0";
+                    shape1.Cells.FillForegnd = color_formula;
+                    shape1.Cells.LinePattern = "0";
+                    shape1.Cells.LineWeight = "0";
+                    shape2.Cells.LineColor = color_formula;
+                    shape2.Cells.LineWeight= "0.25in";
+                    shape2.Cells.FillPattern = "0";
+                    shape3.Cells.CharColor= color_formula;
+                    shape3.Cells.FillPattern = "0";
+                    shape3.Cells.LinePattern= "0";
+                    shape3.Cells.LineWeight = "0";
                     shape3.Text = new VA.Text.Markup.TextElement("ABC");
                     shape3.CharFontName = "Segoe UI";
-                    shape3.ShapeCells.CharSize = "24pt";
+                    shape3.Cells.CharSize = "24pt";
 
                     sb.Clear();
                     sb.AppendFormat("rgb({0},{1},{2})\n", color.R, color.G, color.B);
@@ -87,17 +87,17 @@ namespace VisioPowerTools2010
 
                     shape0.Text = new VA.Text.Markup.TextElement(sb.ToString());
                     shape0.CharFontName = "Segoe UI";
-                    shape0.ShapeCells.HAlign = "0";
-                   shape0.ShapeCells.VerticalAlign = "0";
-                    shape0.ShapeCells.LinePattern = "0";
-                    shape0.ShapeCells.LineWeight = "0";
-                    shape0.ShapeCells.FillForegnd = "rgb(240,240,240)";
+                    shape0.Cells.HAlign = "0";
+                   shape0.Cells.VerticalAlign = "0";
+                    shape0.Cells.LinePattern = "0";
+                    shape0.Cells.LineWeight = "0";
+                    shape0.Cells.FillForegnd = "rgb(240,240,240)";
 
                     if (color.A != 255)
                     {
-                        shape1.ShapeCells.FillForegndTrans = transparency_formula;
-                        shape2.ShapeCells.LineColorTrans = transparency_formula;
-                        shape3.ShapeCells.CharTransparency = transparency_formula;
+                        shape1.Cells.FillForegndTrans = transparency_formula;
+                        shape2.Cells.LineColorTrans = transparency_formula;
+                        shape3.Cells.CharTransparency = transparency_formula;
                     }
 
 

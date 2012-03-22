@@ -93,13 +93,13 @@ namespace VisioAutomation.Layout.Tree
                 DOM.Master dom_master = dom_masters[i];
                 tree_node.DOMNode = dom_master;
 
-                if (tree_node.ShapeCells!=null)
+                if (tree_node.Cells!=null)
                 {
-                    dom_master.ShapeCells = tree_node.ShapeCells.ShallowCopy();
+                    dom_master.Cells = tree_node.Cells.ShallowCopy();
                 }
 
-                dom_master.ShapeCells.Width = treenodes[i].Size.Width;
-                dom_master.ShapeCells.Height = treenodes[i].Size.Height;
+                dom_master.Cells.Width = treenodes[i].Size.Width;
+                dom_master.Cells.Height = treenodes[i].Size.Height;
                 dom_master.Text = tree_node.Text;
             }
 
@@ -114,7 +114,7 @@ namespace VisioAutomation.Layout.Tree
                         var parent_shape = (VA.DOM.Shape)parent.DOMNode;
                         var child_shape = (VA.DOM.Shape)child.DOMNode;
                         var connector = dom_doc.Connect(connector_master, parent_shape, child_shape);
-                        connector.ShapeCells = this.LayoutOptions.ConnectorShapeCells;
+                        connector.Cells = this.LayoutOptions.ConnectorCells;
                     }
                 }
             }
@@ -124,7 +124,7 @@ namespace VisioAutomation.Layout.Tree
                 {
                     var bez = layout.GetConnectionBezier(connection);
                     var shape = dom_doc.DrawBezier(bez);
-                    shape.ShapeCells = this.LayoutOptions.ConnectorShapeCells;
+                    shape.Cells = this.LayoutOptions.ConnectorCells;
                 }
             }
             else if (this.LayoutOptions.ConnectorType == ConnectorType.PolyLine)
@@ -133,7 +133,7 @@ namespace VisioAutomation.Layout.Tree
                 {
                     var polyline = layout.GetConnectionPolyline(connection);
                     var shape = dom_doc.DrawPolyLine(polyline);
-                    shape.ShapeCells = this.LayoutOptions.ConnectorShapeCells;
+                    shape.Cells = this.LayoutOptions.ConnectorCells;
                 }
             }
             else

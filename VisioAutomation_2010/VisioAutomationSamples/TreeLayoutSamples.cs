@@ -43,7 +43,7 @@ namespace VisioAutomationSamples
             foreach (var tn in t.Nodes)
             {
                 var cells = new ShapeCells();
-                tn.ShapeCells = cells;
+                tn.Cells = cells;
 
                 cells.HAlign = 0; // align text to left
                 cells.VerticalAlign = 0; // align text block to top

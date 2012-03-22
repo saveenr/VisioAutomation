@@ -101,10 +101,10 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Set Shape format on all shapes
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            var shapes_with_formatting = this.Shapes.Where(s => s.ShapeCells != null);
+            var shapes_with_formatting = this.Shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_formatting)
             {
-                var fmt = shape.ShapeCells;
+                var fmt = shape.Cells;
                 short id = shape.VisioShapeID;
                 fmt.Apply(update, id);
             }
@@ -160,7 +160,7 @@ namespace VisioAutomation.DOM
             {
                 if (shape.CharFontName != null)
                 {
-                    if (!shape.ShapeCells.CharFont.HasValue)
+                    if (!shape.Cells.CharFont.HasValue)
                     {
                         unique_names.Add(shape.CharFontName);
                     }
@@ -183,9 +183,9 @@ namespace VisioAutomation.DOM
             {
                 if (shape.CharFontName != null)
                 {
-                    if (!shape.ShapeCells.CharFont.HasValue)
+                    if (!shape.Cells.CharFont.HasValue)
                     {
-                        shape.ShapeCells.CharFont = name_to_id[shape.CharFontName];
+                        shape.Cells.CharFont = name_to_id[shape.CharFontName];
                     }
                 }
             }
@@ -267,14 +267,14 @@ namespace VisioAutomation.DOM
             {
                 if (master.DroppedSize.HasValue)
                 {
-                    if (!master.ShapeCells.Width.HasValue)
+                    if (!master.Cells.Width.HasValue)
                     {
-                        master.ShapeCells.Width = master.DroppedSize.Value.Width;
+                        master.Cells.Width = master.DroppedSize.Value.Width;
                     }
 
-                    if (!master.ShapeCells.Height.HasValue)
+                    if (!master.Cells.Height.HasValue)
                     {
-                        master.ShapeCells.Height = master.DroppedSize.Value.Height;
+                        master.Cells.Height = master.DroppedSize.Value.Height;
                     }
                 }
             }

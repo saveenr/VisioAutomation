@@ -40,7 +40,7 @@ namespace VisioAutomationSamples
                 double transparency = trans[i];
 
                 var fmt = new VA.DOM.ShapeCells();
-                node.ShapeCells = fmt;
+                node.Cells = fmt;
 
                 fmt.FillPattern = (int)VA.Format.FillPattern.LinearLeftToRight;
                 fmt.FillForegnd = color1.ToFormula();

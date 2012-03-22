@@ -97,9 +97,9 @@ namespace TestVisioAutomation
             var dom_bez_0 = dom.DrawBezier(new double[] {1, 2, 3, 3, 6, 3, 3, 4});
             var dom_line_0 = dom.DrawLine(1, 1, 3, 3);
 
-            dom_master_0.ShapeCells.LineWeight = 0.1;
-            dom_bez_0.ShapeCells.LineWeight = 0.3;
-            dom_line_0.ShapeCells.LineWeight = 0.5;
+            dom_master_0.Cells.LineWeight = 0.1;
+            dom_bez_0.Cells.LineWeight = 0.3;
+            dom_line_0.Cells.LineWeight = 0.5;
 
             dom.Render(page);
 

@@ -22,7 +22,7 @@ namespace VisioAutomation.Layout.Tree
         public IVisio.Shape VisioShape { get; set; }
         public VA.DOM.Node DOMNode { get; set; }
         public VA.Drawing.Size? Size { get; set; }
-        public VA.DOM.ShapeCells ShapeCells { get; set; }
+        public VA.DOM.ShapeCells Cells { get; set; }
 
         public Node()
         {

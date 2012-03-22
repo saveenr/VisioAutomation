@@ -17,8 +17,8 @@ namespace InfoGraphicsPy
             foreach (var rect in rects)
             {
                 var dom_shape = dom.DrawOval(rect);
-                dom_shape.ShapeCells.Width = rect.Width;
-                dom_shape.ShapeCells.Height = rect.Height;
+                dom_shape.Cells.Width = rect.Width;
+                dom_shape.Cells.Height = rect.Height;
                 dom_shapes.Add(dom_shape);
             }
 
@@ -31,8 +31,8 @@ namespace InfoGraphicsPy
             foreach (var rect in rects)
             {
                 var dom_shape = dom.Drop(rectmaster, rect.Center);
-                dom_shape.ShapeCells.Width = rect.Width;
-                dom_shape.ShapeCells.Height = rect.Height;
+                dom_shape.Cells.Width = rect.Width;
+                dom_shape.Cells.Height = rect.Height;
                 dom_shapes.Add(dom_shape);
             }
 
@@ -46,8 +46,8 @@ namespace InfoGraphicsPy
             foreach (var rect in rects)
             {
                 var dom_shape = dom.Drop(rectmaster, rect.Center);
-                dom_shape.ShapeCells.Width = rect.Width;
-                dom_shape.ShapeCells.Height = rect.Height;
+                dom_shape.Cells.Width = rect.Width;
+                dom_shape.Cells.Height = rect.Height;
                 dom_shapes.Add(dom_shape);
             }
 

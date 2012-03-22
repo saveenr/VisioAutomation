@@ -153,7 +153,7 @@ namespace VisioAutomationSamples
                     dom_shape.CharFontName = node_data.Font;
                 }
 
-                dom_shape.ShapeCells = cells;
+                dom_shape.Cells = cells;
                 dom_shape.Text = new VA.Text.Markup.TextElement( node_data.Text );
             }
 
@@ -182,10 +182,10 @@ namespace VisioAutomationSamples
                     var r = new VA.Drawing.Rectangle(x0, 0 - th, x0 + w, 0);
                     var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
                     n1.Text = new VA.Text.Markup.TextElement( fontname.ToUpper() ) ;
-                    n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
-                    n1.ShapeCells.LineWeight = 0.0;
-                    n1.ShapeCells.LinePattern = 0;
-                    n1.ShapeCells.CharSize = VA.Convert.PointsToInches(16);
+                    n1.Cells.FillForegnd = "rgb(255,255,255)";
+                    n1.Cells.LineWeight = 0.0;
+                    n1.Cells.LinePattern = 0;
+                    n1.Cells.CharSize = VA.Convert.PointsToInches(16);
                 }
 
 
@@ -207,10 +207,10 @@ namespace VisioAutomationSamples
                             // empty
                         }
                         n1.CharFontName = fontnames[j];
-                        n1.ShapeCells.CharSize = VA.Convert.PointsToInches(36);
-                        n1.ShapeCells.FillForegnd = "rgb(255,255,255)";
-                        n1.ShapeCells.LineWeight = 0.0;
-                        n1.ShapeCells.LinePattern = 0;
+                        n1.Cells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.Cells.FillForegnd = "rgb(255,255,255)";
+                        n1.Cells.LineWeight = 0.0;
+                        n1.Cells.LinePattern = 0;
                     }
                 }
 
@@ -254,12 +254,12 @@ namespace VisioAutomationSamples
                             // empty
                         }
                         n1.CharFontName = fontnames[j];
-                        n1.ShapeCells.CharColor = colors[j];
-                        n1.ShapeCells.CharTransparency = 0.7;
-                        n1.ShapeCells.CharSize = VA.Convert.PointsToInches(36);
-                        n1.ShapeCells.FillPattern = 0;
-                        n1.ShapeCells.LineWeight = 0.0;
-                        n1.ShapeCells.LinePattern = 0;
+                        n1.Cells.CharColor = colors[j];
+                        n1.Cells.CharTransparency = 0.7;
+                        n1.Cells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.Cells.FillPattern = 0;
+                        n1.Cells.LineWeight = 0.0;
+                        n1.Cells.LinePattern = 0;
                     }
                 }
 

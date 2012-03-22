@@ -147,13 +147,13 @@ namespace VisioAutomation.Layout.Grid
             {
                 var dom_shape = dom_doc.Drop(node.Master, node.Rectangle.Center);
 
-                if (node.ShapeCells != null)
+                if (node.Cells != null)
                 {
-                    dom_shape.ShapeCells = node.ShapeCells;
+                    dom_shape.Cells = node.Cells;
                 }
 
-                dom_shape.ShapeCells.Width = node.Rectangle.Width;
-                dom_shape.ShapeCells.Height = node.Rectangle.Height;
+                dom_shape.Cells.Width = node.Rectangle.Width;
+                dom_shape.Cells.Height = node.Rectangle.Height;
 
                 if (!string.IsNullOrEmpty(node.Text))
                 {

@@ -57,7 +57,7 @@ namespace InfoGraphicsPy
 
             foreach (var shape in circle_shapes)
             {
-                var cells = shape.ShapeCells;
+                var cells = shape.Cells;
 
                 cells.FillForegnd = NonValueColor;
                 cells.LineColor = LineLightBorder;
@@ -66,7 +66,7 @@ namespace InfoGraphicsPy
 
             foreach (var shape in slice_shapes)
             {
-                var cells = shape.ShapeCells;
+                var cells = shape.Cells;
 
                 cells.FillForegnd = ValueFillColor;
                 cells.LineColor = LineLightBorder;
@@ -75,7 +75,7 @@ namespace InfoGraphicsPy
 
             foreach (var shape in cat_shapes)
             {
-                var cells = shape.ShapeCells;
+                var cells = shape.Cells;
 
                 cells.FillPattern = CategoryFillPattern;
                 cells.LineWeight = CategoryLineWeight;

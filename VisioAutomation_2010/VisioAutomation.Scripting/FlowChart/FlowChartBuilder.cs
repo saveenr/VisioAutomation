@@ -118,10 +118,10 @@ namespace VisioAutomation.Scripting.FlowChart
                     var al_connector = drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
                                                        connectory_type);
 
-                    al_connector.ShapeCells = new VA.DOM.ShapeCells();
-                    al_connector.ShapeCells.LineColor = VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
-                    al_connector.ShapeCells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
-                    al_connector.ShapeCells.EndArrow = def_end_arrow;
+                    al_connector.Cells = new VA.DOM.ShapeCells();
+                    al_connector.Cells.LineColor = VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
+                    al_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
+                    al_connector.Cells.EndArrow = def_end_arrow;
                 }
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering AutoLayout...");

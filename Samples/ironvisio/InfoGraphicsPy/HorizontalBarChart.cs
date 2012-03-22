@@ -53,7 +53,7 @@ namespace InfoGraphicsPy
 
             foreach (var shape in bar_shapes)
             {
-                var cells = shape.ShapeCells;
+                var cells = shape.Cells;
 
                 cells.FillForegnd = this.ValueFillColor;
                 cells.LineColor = this.LineLightBorder;
@@ -62,7 +62,7 @@ namespace InfoGraphicsPy
 
             foreach (var shape in cat_shapes)
             {
-                var cells = shape.ShapeCells;
+                var cells = shape.Cells;
 
                 cells.FillPattern = this.CategoryFillPattern;
                 cells.LineWeight = this.CategoryLineWeight;

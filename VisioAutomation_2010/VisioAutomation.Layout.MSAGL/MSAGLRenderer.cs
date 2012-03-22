@@ -335,9 +335,9 @@ namespace VisioAutomation.Layout.MSAGL
 
             foreach (var i in edge_pairs)
             {
-                if (i.layout_connector.ShapeCells != null)
+                if (i.layout_connector.Cells != null)
                 {
-                    i.dom_bezier.ShapeCells = i.layout_connector.ShapeCells.ShallowCopy();
+                    i.dom_bezier.Cells = i.layout_connector.Cells.ShallowCopy();
                 }
             }
 
@@ -349,7 +349,7 @@ namespace VisioAutomation.Layout.MSAGL
                 var vshape = new VA.DOM.Rectangle(label_bb);
                 vdoc.Shapes.Add(vshape);
 
-                vshape.ShapeCells = DefaultBezierConnectorShapeCells.ShallowCopy();
+                vshape.Cells = DefaultBezierConnectorShapeCells.ShallowCopy();
                 vshape.Text = new VA.Text.Markup.TextElement(i.layout_connector.Label);
 
             }
@@ -380,12 +380,12 @@ namespace VisioAutomation.Layout.MSAGL
 
                 i.vconnector.Text = new VA.Text.Markup.TextElement(i.layout_connector.Label);
 
-                i.vconnector.ShapeCells = i.layout_connector.ShapeCells != null ? 
-                    i.layout_connector.ShapeCells.ShallowCopy()
+                i.vconnector.Cells = i.layout_connector.Cells != null ? 
+                    i.layout_connector.Cells.ShallowCopy()
                     : new VA.DOM.ShapeCells();
 
-                i.vconnector.ShapeCells.ConLineRouteExt = con_route_style;
-                i.vconnector.ShapeCells.ShapeRouteStyle = shape_route_style;
+                i.vconnector.Cells.ConLineRouteExt = con_route_style;
+                i.vconnector.Cells.ShapeRouteStyle = shape_route_style;
 
             }
         }
@@ -403,8 +403,8 @@ namespace VisioAutomation.Layout.MSAGL
             // SET SIZE
             if (layout_shape.Size.HasValue)
             {
-                dom_shape.ShapeCells.Width = layout_shape.Size.Value.Width;
-                dom_shape.ShapeCells.Height = layout_shape.Size.Value.Height;
+                dom_shape.Cells.Width = layout_shape.Size.Value.Width;
+                dom_shape.Cells.Height = layout_shape.Size.Value.Height;
             }
 
             // ADD URL
@@ -425,9 +425,9 @@ namespace VisioAutomation.Layout.MSAGL
                 }
             }
 
-            if (layout_shape.ShapeCells != null)
+            if (layout_shape.Cells != null)
             {
-                dom_shape.ShapeCells = layout_shape.ShapeCells.ShallowCopy();
+                dom_shape.Cells = layout_shape.Cells.ShallowCopy();
             }
         }
 

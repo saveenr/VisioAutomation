@@ -12,7 +12,7 @@ namespace InfoGraphicsPy
     {
         public CategoryCell CategoryCell;
         public string ShapeText ;
-        public VA.DOM.ShapeCells ShapeCells;
+        public VA.DOM.ShapeCells Cells;
         public bool Underline;
         public bool FitWidthToParent;
     }
@@ -139,7 +139,7 @@ namespace InfoGraphicsPy
                 var info = new RenderItem();
                 info.CategoryCell = null;
                 info.ShapeText = xcats[col];
-                info.ShapeCells = xcatformat;
+                info.Cells = xcatformat;
                 n_label.Data = info;
             }
         }
@@ -170,7 +170,7 @@ namespace InfoGraphicsPy
             var info = new RenderItem();
             info.CategoryCell = null;
             info.ShapeText = ycats[row];
-            info.ShapeCells = ycatformat;
+            info.Cells = ycatformat;
             info.Underline = true;
             info.FitWidthToParent = true;
             n_row_label.Data = info;
@@ -192,7 +192,7 @@ namespace InfoGraphicsPy
             var node_data = new RenderItem();
             node_data.CategoryCell = null;
             node_data.ShapeText = this.Title;
-            node_data.ShapeCells = titleformat;
+            node_data.Cells = titleformat;
             node_data.FitWidthToParent = true;
             n_title.Data = node_data;
         }
@@ -205,7 +205,7 @@ namespace InfoGraphicsPy
             var cell_data = new RenderItem();
             cell_data.CategoryCell = cell_item;
             cell_data.ShapeText = cell_item.Item.Text;
-            cell_data.ShapeCells = cellformat;
+            cell_data.Cells = cellformat;
             n_cell.Data = cell_data;
             
             if (cell_item.Item.Items != null)
@@ -216,7 +216,7 @@ namespace InfoGraphicsPy
                     var subcell_data = new RenderItem();
                     subcell_data.CategoryCell = null;
                     subcell_data.ShapeText = sub_cat_items.Text;
-                    subcell_data.ShapeCells = subcellformat;
+                    subcell_data.Cells = subcellformat;
                     subn_cell.Data = subcell_data;
                 }
                 n_cell.AddBox(0.25, 0.25);
@@ -252,9 +252,9 @@ namespace InfoGraphicsPy
                     }
 
                     // Set Cells
-                    if (n_data.ShapeCells != null)
+                    if (n_data.Cells != null)
                     {
-                        s.ShapeCells = n_data.ShapeCells;
+                        s.Cells = n_data.Cells;
                     }
 
                     // draw Underline
@@ -263,7 +263,7 @@ namespace InfoGraphicsPy
                         var u = dom.DrawLine(r.LowerLeft, r.LowerRight);
                     }
 
-                    n_data.ShapeCells.CharFont = default_font_id;
+                    n_data.Cells.CharFont = default_font_id;
                 }
             }
             dom.Render(page);

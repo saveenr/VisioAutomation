@@ -12,6 +12,6 @@ namespace VisioAutomation.Layout.DirectedGraph
         public VA.DOM.Shape DOMNode { get; set; }
         public Dictionary<string, VA.CustomProperties.CustomPropertyCells> CustomProperties { get; set; }
 
-        public VA.DOM.ShapeCells ShapeCells;
+        public VA.DOM.ShapeCells Cells;
     }
 }

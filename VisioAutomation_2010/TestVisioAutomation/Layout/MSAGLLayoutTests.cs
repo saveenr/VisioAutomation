@@ -215,10 +215,10 @@ namespace TestVisioAutomation
             var n1 = directed_graph_drawing.AddShape("n1", "", "basflo_u.vss",
                                    "Decision");
 
-            n1.ShapeCells = new VA.DOM.ShapeCells();
-            n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
-            n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
-            n1.ShapeCells.FillPattern = 40;
+            n1.Cells = new VA.DOM.ShapeCells();
+            n1.Cells.FillForegnd = "rgb(255,0,0)";
+            n1.Cells.FillBkgnd = "rgb(255,255,0)";
+            n1.Cells.FillPattern = 40;
             var n2 = directed_graph_drawing.AddShape("n2", "MailServer", "server_u.vss",
                                    "Email Server");
             var n3 = directed_graph_drawing.AddShape("n3", null, "basflo_u.vss",

@@ -300,21 +300,21 @@ namespace VisioAutomation.Scripting.Commands
             // format the shapes
             foreach (var node in tree_layout.Nodes)
             {
-                if (node.ShapeCells==null)
+                if (node.Cells==null)
                 {
-                    node.ShapeCells = new ShapeCells();                    
+                    node.Cells = new ShapeCells();                    
                 }
-                node.ShapeCells.FillForegnd = "rgb(240,240,240)";
-                node.ShapeCells.CharFont = fontid;
+                node.Cells.FillForegnd = "rgb(240,240,240)";
+                node.Cells.CharFont = fontid;
                 //node.ShapeCells.LineWeight = "0";
                 //node.ShapeCells.LinePattern = "0";
-                node.ShapeCells.LineColor = "rgb(140,140,140)";
-                node.ShapeCells.HAlign = "0";
+                node.Cells.LineColor = "rgb(140,140,140)";
+                node.Cells.HAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
             cxn_cells.LineColor = "rgb(140,140,140)";
-            tree_layout.LayoutOptions.ConnectorShapeCells = cxn_cells;
+            tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
 
 
             tree_layout.Render(doc.Application.ActivePage);
@@ -460,21 +460,21 @@ namespace VisioAutomation.Scripting.Commands
             // format the shapes
             foreach (var node in tree_layout.Nodes)
             {
-                if (node.ShapeCells == null)
+                if (node.Cells == null)
                 {
-                    node.ShapeCells = new ShapeCells();
+                    node.Cells = new ShapeCells();
                 }
-                node.ShapeCells.FillForegnd = "rgb(245,245,245)";
+                node.Cells.FillForegnd = "rgb(245,245,245)";
                 //node.ShapeCells.LineWeight = "0";
                 //node.ShapeCells.LinePattern = "0";
-                node.ShapeCells.LineColor = linecolor;
-                node.ShapeCells.HAlign = "0";
-                node.ShapeCells.VerticalAlign = "0";
+                node.Cells.LineColor = linecolor;
+                node.Cells.HAlign = "0";
+                node.Cells.VerticalAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
             cxn_cells.LineColor = linecolor;
-            tree_layout.LayoutOptions.ConnectorShapeCells = cxn_cells;
+            tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
 
 
             tree_layout.Render(doc.Application.ActivePage);
