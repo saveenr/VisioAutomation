@@ -28,9 +28,9 @@ namespace TestVisioAutomation
             ss.Layout.Distribute(VA.Drawing.AlignmentHorizontal.Center);
 
             var xforms = ss.Layout.GetXForm();
-            Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(3.1875, 3.25), xforms[1].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(5.25, 3), xforms[2].Pin);
+            Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(3.1875, 3.25), xforms[1].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(5.25, 3), xforms[2].Pin());
 
             ss.Document.Close(true);
         }
@@ -54,9 +54,9 @@ namespace TestVisioAutomation
             ss.Layout.Nudge(1, -1);
 
             var xforms = ss.Layout.GetXForm();
-            Assert.AreEqual(new VA.Drawing.Point(2.125, 0.25), xforms[0].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(3.25, 2.25), xforms[1].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(6.25, 2), xforms[2].Pin);
+            Assert.AreEqual(new VA.Drawing.Point(2.125, 0.25), xforms[0].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(3.25, 2.25), xforms[1].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(6.25, 2), xforms[2].Pin());
             ss.Document.Close(true);
         }
 
@@ -79,18 +79,18 @@ namespace TestVisioAutomation
             ss.Layout.Stack(VA.Drawing.Axis.YAxis, 0.5);
 
             var xforms1 = ss.Layout.GetXForm();
-            Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms1[0].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(1.125, 3.75), xforms1[1].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(1.125, 2.5), xforms1[2].Pin);
+            Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms1[0].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(1.125, 3.75), xforms1[1].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(1.125, 2.5), xforms1[2].Pin());
 
             ss.Application.Undo();
 
             ss.Layout.Stack(VA.Drawing.Axis.XAxis, 0.20);
 
             var xforms2 = ss.Layout.GetXForm();
-            Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms2[0].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(1.7, 1.25), xforms2[1].Pin);
-            Assert.AreEqual(new VA.Drawing.Point(2.9, 1.25), xforms2[2].Pin);
+            Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms2[0].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(1.7, 1.25), xforms2[1].Pin());
+            Assert.AreEqual(new VA.Drawing.Point(2.9, 1.25), xforms2[2].Pin());
 
             ss.Document.Close(true);
         }

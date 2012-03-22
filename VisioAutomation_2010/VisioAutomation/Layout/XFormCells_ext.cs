@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
     public partial class XFormCells
     {
-        public VA.Drawing.Point Pin
-        {
-            get { return new VA.Drawing.Point(this.PinX.Result, this.PinY.Result); }
-        }
-
         public VA.Drawing.Rectangle Rect
         {
             get
