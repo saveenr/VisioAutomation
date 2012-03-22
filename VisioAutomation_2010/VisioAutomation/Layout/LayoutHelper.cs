@@ -9,6 +9,14 @@ namespace VisioAutomation.Layout
 {
     public static class LayoutHelper
     {
+        internal static VA.Drawing.Rectangle GetRectangle(XFormCells xFormCells)
+        {
+            var pin = new VA.Drawing.Point(xFormCells.PinX.Result, xFormCells.PinY.Result);
+            var locpin = new VA.Drawing.Point(xFormCells.LocPinX.Result, xFormCells.LocPinY.Result);
+            var size = new VA.Drawing.Size(xFormCells.Width.Result, xFormCells.Height.Result);
+            return new VA.Drawing.Rectangle(pin - locpin, size);
+        }
+
         private static double GetPosition(VA.Layout.XFormCells xform, XFormPosition pos)
         {
             if (pos == XFormPosition.PinY)
@@ -21,19 +29,19 @@ namespace VisioAutomation.Layout
             }
             else if (pos == XFormPosition.Left)
             {
-                return xform.GetRectangle().Left;
+                return GetRectangle(xform).Left;
             }
             else if (pos == XFormPosition.Right)
             {
-                return xform.GetRectangle().Right;
+                return GetRectangle(xform).Right;
             }
             else if (pos == XFormPosition.Top)
             {
-                return xform.GetRectangle().Top;
+                return GetRectangle(xform).Top;
             }
             else if (pos == XFormPosition.Right)
             {
-                return xform.GetRectangle().Bottom;
+                return GetRectangle(xform).Bottom;
             }
             else
             {
@@ -130,7 +138,7 @@ namespace VisioAutomation.Layout
 
         public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Layout.XFormCells> xfrms)
         {
-            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => i.GetRectangle()));
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => VA.Layout.LayoutHelper.GetRectangle(i)));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
@@ -154,7 +162,7 @@ namespace VisioAutomation.Layout
             {
                 var shapeid = shapeids[i];
                 var old_layout = layout_info[i];
-                var old_bb = old_layout.GetRectangle();
+                var old_bb = VA.Layout.LayoutHelper.GetRectangle(old_layout);
                 var old_bb_pos = old_bb.LowerLeft;
 
                 var new_corner_pos = snap_grid.Snap(old_bb_pos);
