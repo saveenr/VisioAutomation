@@ -161,8 +161,8 @@ namespace VisioAutomation.Layout
 
                 var new_pin_position = GetPinPositionForCorner(
                     new VA.Drawing.Point( old_layout.PinX.Result, old_layout.PinY.Result ),
-                    old_layout.Size,
-                    old_layout.LocPin,
+                    new VA.Drawing.Size( old_layout.Width.Result, old_layout.Height.Result ),
+                    new VA.Drawing.Point( old_layout.LocPinX.Result, old_layout.LocPinY.Result ),
                     new_corner_pos,
                     corner);
 
@@ -221,7 +221,7 @@ namespace VisioAutomation.Layout
             for (int i = 0; i < shapeids.Count; i++)
             {
                 int shapeid = shapeids[i];
-                var old_size = layout_info[i].Size;
+                var old_size = new VA.Drawing.Size( layout_info[i].Width.Result, layout_info[i].Height.Result );
                 var snapped_size = grid.Snap(old_size);
                 double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
                 double max_h = System.Math.Max(snapped_size.Height, minsize.Height);

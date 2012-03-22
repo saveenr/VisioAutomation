@@ -14,16 +14,6 @@ namespace VisioAutomation.Layout
             get { return new VA.Drawing.Point(this.PinX.Result, this.PinY.Result); }
         }
 
-        public VA.Drawing.Point LocPin
-        {
-            get { return new VA.Drawing.Point(this.LocPinX.Result, this.LocPinY.Result); }
-        }
-
-        public VA.Drawing.Size Size
-        {
-            get { return new VA.Drawing.Size(this.Width.Result, this.Height.Result); }
-        }
-
         public VA.Drawing.Rectangle Rect
         {
             get
