@@ -27,35 +27,15 @@ namespace VisioAutomation.CustomProperties
         {
             this.Value = value;
         }
-
-        private string encode_if_needed(VA.ShapeSheet.FormulaLiteral formula)
-        {
-            if (!formula.HasValue)
-            {
-                return null;
-            }
-
-            if (formula.Value.Length==0)
-            {
-                return VA.Convert.StringToFormulaString(formula.Value);
-            }
-
-            if (formula.Value[0]!='\"')
-            {
-                return VA.Convert.StringToFormulaString(formula.Value);                
-            }
-
-            return formula.Value;
-        }
         
         protected override void ApplyFormulas(ApplyFormula func, short row)
         {
             var cp = this;
 
-            string str_label = encode_if_needed(cp.Label.Formula);
-            string str_value = encode_if_needed(cp.Value.Formula);
-            string str_format = encode_if_needed(cp.Format.Formula);
-            string str_prompt = encode_if_needed(cp.Prompt.Formula);
+            string str_label =  VA.Convert.SmartStringToFormulaString(cp.Label.Formula);
+            string str_value =  VA.Convert.SmartStringToFormulaString(cp.Value.Formula);
+            string str_format = VA.Convert.SmartStringToFormulaString(cp.Format.Formula);
+            string str_prompt = VA.Convert.SmartStringToFormulaString(cp.Prompt.Formula);
 
             func(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(row), str_label);
             func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow( row), str_value);
