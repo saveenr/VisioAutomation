@@ -21,8 +21,9 @@
                 string msg = string.Format(System.Globalization.CultureInfo.InvariantCulture, "Missing value for attribute \"{0}\"", name);
                 throw new System.ArgumentException(msg);
             }
-            string v = el.Attribute(name).Value;
-            return converter(v);
+
+            string v = a.Value;
+            return converter(v);                
         }
 
         public static T GetAttributeValue<T>(System.Xml.Linq.XElement el, System.Xml.Linq.XName name, T defval, System.Func<string, T> converter)
@@ -32,7 +33,8 @@
             {
                 return defval;
             }
-            string v = el.Attribute(name).Value;
+
+            string v = a.Value;
             return converter(v);
         }
     }
