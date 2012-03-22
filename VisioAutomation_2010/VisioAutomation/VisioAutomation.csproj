@@ -148,10 +148,6 @@
     <Compile Include="Drawing\AlignmentHorizontal.cs" />
     <Compile Include="Drawing\AlignmentVertical.cs" />
     <Compile Include="Drawing\Transparency.cs" />
-    <Compile Include="Effects\EdgeGlow.cs" />
-    <Compile Include="Effects\MultiStopGradientDirection.cs" />
-    <Compile Include="Effects\ThreePointGradientFill.cs" />
-    <Compile Include="Effects\TwoColorGlow.cs" />
     <Compile Include="Format\FormatHelper.cs" />
     <Compile Include="Format\FormatPaintCache.cs" />
     <Compile Include="Format\FormatCategory.cs" />
@@ -182,10 +178,7 @@
     <Compile Include="UI\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
-    <Compile Include="Effects\GradientStop.cs" />
-    <Compile Include="Effects\GradientFill.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
-    <Compile Include="Effects\MultiStopGradient.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
     <Compile Include="DOM\ShapeFromMaster.cs" />
     <Compile Include="DOM\Master.cs" />
