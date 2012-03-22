@@ -122,7 +122,7 @@ namespace VisioAutomation.Layout
 
                 update.SetFormula((short)shape_id, VA.ShapeSheet.SRCConstants.PinX, new_pinpos.X);
                 update.SetFormula((short)shape_id, VA.ShapeSheet.SRCConstants.PinY, new_pinpos.Y);
-                cur_pos = cur_pos.Add(xfrm.Size).Add(delta);
+                cur_pos = cur_pos.Add(xfrm.Width.Result,xfrm.Height.Result).Add(delta);
             }
 
             update.Execute(page);
@@ -160,7 +160,7 @@ namespace VisioAutomation.Layout
                 var new_corner_pos = snap_grid.Snap(old_bb_pos);
 
                 var new_pin_position = GetPinPositionForCorner(
-                    old_layout.Pin,
+                    new VA.Drawing.Point( old_layout.PinX.Result, old_layout.PinY.Result ),
                     old_layout.Size,
                     old_layout.LocPin,
                     new_corner_pos,
@@ -249,11 +249,11 @@ namespace VisioAutomation.Layout
                 }
                 else if (align == VA.Drawing.AlignmentHorizontal.Center)
                 {
-                    nx = x + info.LocPinX.Result - (info.Size.Width / 2.0);
+                    nx = x + info.LocPinX.Result - (info.Width.Result / 2.0);
                 }
                 else if (align == VA.Drawing.AlignmentHorizontal.Right)
                 {
-                    nx = x + info.LocPinX.Result - info.Size.Width;
+                    nx = x + info.LocPinX.Result - info.Width.Result;
                 }
                 update.SetFormula((short)shapeids[i], VA.ShapeSheet.SRCConstants.PinX, nx);
 
@@ -274,11 +274,11 @@ namespace VisioAutomation.Layout
 
                 if (align == VA.Drawing.AlignmentVertical.Top)
                 {
-                    ny = y + info.LocPinY.Result - info.Size.Height;
+                    ny = y + info.LocPinY.Result - info.Height.Result;
                 }
                 else if (align == VA.Drawing.AlignmentVertical.Center)
                 {
-                    ny = y + info.LocPinY.Result - (info.Size.Height / 2.0);
+                    ny = y + info.LocPinY.Result - (info.Height.Result / 2.0);
                 }
                 else if (align == VA.Drawing.AlignmentVertical.Bottom)
                 {

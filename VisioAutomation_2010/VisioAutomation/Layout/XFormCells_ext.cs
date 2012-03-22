@@ -26,7 +26,13 @@ namespace VisioAutomation.Layout
 
         public VA.Drawing.Rectangle Rect
         {
-            get { return new VA.Drawing.Rectangle(this.Pin - this.LocPin, this.Size); }
+            get
+            {
+                var pin = new VA.Drawing.Point(this.PinX.Result, this.PinY.Result);
+                var locpin = new VA.Drawing.Point(this.LocPinX.Result, this.LocPinY.Result);
+                var size = new VA.Drawing.Size(this.Width.Result, this.Height.Result);
+                return new VA.Drawing.Rectangle(pin - locpin, size);
+            }
         }
     }
 }
