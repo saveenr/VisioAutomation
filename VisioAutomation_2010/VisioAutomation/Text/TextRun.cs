@@ -21,8 +21,7 @@ namespace VisioAutomation.Text
         
         public override string ToString()
         {
-            string t = this.Text ?? string.Empty;
-            var s = string.Format("(Begin={0},End={1},Text=\"{2}\")", this.Begin, this.End, t);
+            var s = string.Format("(Begin={0},End={1})", this.Begin, this.End);
             return s;
         }
     }
