@@ -82,6 +82,7 @@
     <Compile Include="ColorPicker_NativeMethods.cs" />
     <Compile Include="ColorPicker_WinUtil.cs" />
     <Compile Include="ColorUtil.cs" />
+    <Compile Include="DirectionRelative.cs" />
     <Compile Include="FilenamePicker.cs">
       <SubType>UserControl</SubType>
     </Compile>

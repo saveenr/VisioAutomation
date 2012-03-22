@@ -286,7 +286,6 @@
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Shapesheet\Query\SectionQuery.cs" />
     <Compile Include="Internal\TreeUtil.cs" />
-    <Compile Include="Drawing\DirectionRelative.cs" />
     <Compile Include="UI\UserInterfaceHelper.cs" />
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />
