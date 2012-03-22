@@ -21,19 +21,19 @@ namespace VisioAutomation.Layout
             }
             else if (pos == XFormPosition.Left)
             {
-                return xform.Rect.Left;
+                return xform.GetRectangle().Left;
             }
             else if (pos == XFormPosition.Right)
             {
-                return xform.Rect.Right;
+                return xform.GetRectangle().Right;
             }
             else if (pos == XFormPosition.Top)
             {
-                return xform.Rect.Top;
+                return xform.GetRectangle().Top;
             }
             else if (pos == XFormPosition.Right)
             {
-                return xform.Rect.Bottom;
+                return xform.GetRectangle().Bottom;
             }
             else
             {
@@ -130,7 +130,7 @@ namespace VisioAutomation.Layout
 
         public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Layout.XFormCells> xfrms)
         {
-            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => i.Rect));
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => i.GetRectangle()));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
@@ -154,7 +154,7 @@ namespace VisioAutomation.Layout
             {
                 var shapeid = shapeids[i];
                 var old_layout = layout_info[i];
-                var old_bb = old_layout.Rect;
+                var old_bb = old_layout.GetRectangle();
                 var old_bb_pos = old_bb.LowerLeft;
 
                 var new_corner_pos = snap_grid.Snap(old_bb_pos);
