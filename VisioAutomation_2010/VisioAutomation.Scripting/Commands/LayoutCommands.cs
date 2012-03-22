@@ -364,17 +364,41 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        private void SetAll(VA.Layout.LockCells lc, string formula)
+        {
+            lc.LockAspect = formula;
+            lc.LockBegin = formula;
+            lc.LockCalcWH = formula;
+            lc.LockCrop = formula;
+            lc.LockCustProp = formula;
+            lc.LockDelete = formula;
+            lc.LockEnd = formula;
+            lc.LockFormat = formula;
+            lc.LockFromGroupFormat = formula;
+            lc.LockGroup = formula;
+            lc.LockHeight = formula;
+            lc.LockMoveX = formula;
+            lc.LockMoveY = formula;
+            lc.LockRotate = formula;
+            lc.LockSelect = formula;
+            lc.LockTextEdit = formula;
+            lc.LockThemeColors = formula;
+            lc.LockThemeEffects = formula;
+            lc.LockVtxEdit = formula;
+            lc.LockWidth = formula;
+        }
+
         public void LockAll()
         {
             var lockcells = new VA.Layout.LockCells();
-            lockcells.SetAll("1");
+            SetAll(lockcells,"1");
             this.updatelock(lockcells);
         }
 
         public void UnlockAll()
         {
             var lockcells = new VA.Layout.LockCells();
-            lockcells.SetAll("0");
+            SetAll(lockcells,"0");
             this.updatelock(lockcells);
         }
 
