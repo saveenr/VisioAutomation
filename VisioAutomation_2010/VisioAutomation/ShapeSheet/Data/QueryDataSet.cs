@@ -69,17 +69,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
         private Table<X> BuildTableFromArray<X>(X[] array)
         {
-            var values = new X[this.Count, this.ColumnCount];
-            for (int r = 0; r < this.Count; r++)
-            {
-                for (int c = 0; c < this.ColumnCount; c++)
-                {
-                    int i = (r * this.ColumnCount) + c;
-                    values[r, c] = array[i];
-                }
-            }
-
-            var table = new Table<X>(this.Count, this.ColumnCount, this.Groups, values);
+            var table = new Table<X>(this.Count, this.ColumnCount, this.Groups, array);
             return table;
         }
 

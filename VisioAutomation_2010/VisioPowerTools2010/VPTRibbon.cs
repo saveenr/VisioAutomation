@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.Visio;
 using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
 using VA=VisioAutomation;
@@ -122,30 +123,53 @@ namespace VisioPowerTools2010
 
         private void buttonCreateStyle_Click(object sender, RibbonControlEventArgs e)
         {
+            var app = Globals.ThisAddIn.Application;
+            var doc = app.ActiveDocument;
+
+            if (doc == null)
+            {
+                MessageBox.Show("Must have a document open");
+                return;
+            }
+
+            if (doc.Type != VisDocumentTypes.visTypeDrawing)
+            {
+                MessageBox.Show("Must have a drawing open");
+                return;
+            }
+
+            var styles = doc.Styles;
+
             var form = new FormCreateStyle();
             var result = form.ShowDialog();
-            if (result == DialogResult.OK)
+
+            if (result != DialogResult.OK)
             {
-                string name = form.StyleName.Trim();
-                if (name.Length < 1)
-                {
-                    MessageBox.Show("Must have non-empty name");
-                    return;
-                }
-
-                var app = Globals.ThisAddIn.Application;
-                var doc = app.ActiveDocument;
-                var styles = doc.Styles;
-                var names = styles.AsEnumerable().Select(s => s.NameU).ToList();
-                if (names.Contains(name.ToLower()))
-                {
-                    MessageBox.Show("Style with that name already exists");                    
-                    return;
-                }
-
-                var style = styles.Add(name, "", VA.Convert.BoolToShort(form.IncludesText), VA.Convert.BoolToShort(form.IncludesLine), VA.Convert.BoolToShort(form.IncludesFill));
-                int x = 1;
+                return;
             }
+
+            string name = form.StyleName.Trim();
+
+            if (name.Length < 1)
+            {
+                MessageBox.Show("Must have non-empty name");
+                return;
+            }
+
+            var names = styles.AsEnumerable().Select(s => s.NameU).ToList();
+            var names_lc = names.Select(s=>s.ToLower()).ToList();
+
+            if (names_lc.Contains(name.ToLower()))
+            {
+                string msg = string.Format("Style with name \"{0}\" already exists", name);
+                MessageBox.Show(msg);                    
+                return;
+            }
+
+            short fIncludesText = VA.Convert.BoolToShort(form.IncludesText);
+            short fIncludesLine = VA.Convert.BoolToShort(form.IncludesLine);
+            short fIncludesFill = VA.Convert.BoolToShort(form.IncludesFill);
+            var style = styles.Add(name, "", fIncludesText, fIncludesLine, fIncludesFill);
         }
     }
 }
