@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Data
         public Table<T> Results { get; private set; }
 
         internal QueryDataSet(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
-                            int rowcount, IList<int> groupcounts)
+                            int rowcount, TableRowGroupList groups)
         {
             if (formulas_array == null && results_array == null)
             {
@@ -31,12 +31,12 @@ namespace VisioAutomation.ShapeSheet.Data
                 }
             }
 
-            if (shapeids.Count != groupcounts.Count)
+            if (shapeids.Count != groups.Count)
             {
                 throw new AutomationException("The number of shapes must be equal to the number of groups");
             }
 
-            int groupcountsum = groupcounts.Sum();
+            int groupcountsum = groups.Select(g=>g.Count).Sum();
             if (rowcount != groupcountsum)
             {
                 throw new AutomationException("The total number of rows must be equal to the sum of the group counts");                
@@ -62,13 +62,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
             this.RowCount = rowcount;
             this.ColumnCount = columncount;
-
-            this.Groups = new TableRowGroupList();
-            foreach (var g in VA.ShapeSheet.ShapeSheetHelper.GetGrouping(shapeids, groupcounts, this.Count))
-            {
-                this.Groups.Add(g);
-            }
-
+            this.Groups = groups;
             this.Formulas = formulas_array != null ? this.BuildTableFromArray(formulas_array) : null;
             this.Results = results_array != null ? this.BuildTableFromArray(results_array) : null;
         }

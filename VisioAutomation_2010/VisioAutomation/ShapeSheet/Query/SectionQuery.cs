@@ -161,7 +161,13 @@ namespace VisioAutomation.ShapeSheet.Query
             var unitcodes_for_rows = getresults ? get_unitcodes_for_rows(unitcodes, rowcount) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes_for_rows) : null;
 
-            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
+            var groups = new VA.ShapeSheet.Data.TableRowGroupList();
+            foreach (var g in VA.ShapeSheet.ShapeSheetHelper.GetGrouping(shapeids, groupcounts, rowcount))
+            {
+                groups.Add(g);
+            }
+
+            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
             return qds;
 
         }
@@ -230,7 +236,14 @@ namespace VisioAutomation.ShapeSheet.Query
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, all_unitcodes) : null;
 
             var shape_ids = new[] { shape.ID };
-            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shape_ids, this.Columns.Count, rowcount, groupcounts);
+
+            var groups = new VA.ShapeSheet.Data.TableRowGroupList();
+            foreach (var g in VA.ShapeSheet.ShapeSheetHelper.GetGrouping(shape_ids, groupcounts, rowcount))
+            {
+                groups.Add(g);
+            }
+
+            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shape_ids, this.Columns.Count, rowcount, groups);
 
             return qds;
         }
