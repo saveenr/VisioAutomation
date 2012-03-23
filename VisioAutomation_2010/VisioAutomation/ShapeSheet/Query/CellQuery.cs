@@ -61,7 +61,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             var shapeids = new[] { shape.ID };
-            var group_counts = new[] { 1 };
+            var groupcounts = new[] { 1 };
             int rowcount = shapeids.Count();
             
             // Build the Stream
@@ -70,12 +70,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
-
-            var groups = new VA.ShapeSheet.Data.TableRowGroupList();
-            foreach (var g in VA.ShapeSheet.ShapeSheetHelper.GetGrouping(shapeids, group_counts, rowcount))
-            {
-                groups.Add(g);
-            }
+            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return qds;
@@ -149,12 +144,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes) : null;
-
-            var groups = new VA.ShapeSheet.Data.TableRowGroupList();
-            foreach (var g in VA.ShapeSheet.ShapeSheetHelper.GetGrouping(shapeids, groupcounts, rowcount))
-            {
-                groups.Add(g);
-            }
+            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return qds;
