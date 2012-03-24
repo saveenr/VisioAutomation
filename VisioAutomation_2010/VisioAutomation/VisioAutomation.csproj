@@ -78,7 +78,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeGen\CSharpWriter.cs" />
     <Compile Include="Connections\ConnectorArrowEdgeHandling.cs" />
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
@@ -119,9 +118,6 @@
     <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
-    <Compile Include="CodeGen\CellGroup.cs" />
-    <Compile Include="CodeGen\CellGroupMember.cs" />
-    <Compile Include="CodeGen\VAGenCode.cs" />
     <Compile Include="Layout\Radial\DoughnutSlice.cs" />
     <Compile Include="Layout\Radial\Sector.cs" />
     <Compile Include="Layout\Radial\RadialSlice.cs" />
