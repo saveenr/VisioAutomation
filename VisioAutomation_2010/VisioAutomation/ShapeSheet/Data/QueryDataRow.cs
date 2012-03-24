@@ -4,7 +4,7 @@ using System.Linq;
 using VA=VisioAutomation;
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public struct QueryDataRow<T>
+    struct QueryDataRow<T>
     {
         private QueryDataSet<T> _queryDataSet;
         private int _rowIndex;

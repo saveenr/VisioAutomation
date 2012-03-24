@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    public class QueryDataSet<T> : IEnumerable<QueryDataRow<T>>
+    class QueryDataSet<T> : IEnumerable<QueryDataRow<T>>
     {
         internal readonly int ColumnCount;
         internal readonly int RowCount;
