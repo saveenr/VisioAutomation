@@ -101,7 +101,6 @@
     <Compile Include="Layout\LayoutHelperTests.cs" />
     <Compile Include="Metadata\MetadataTests.cs" />
     <Compile Include="Scripting\ScriptingSessionTests.cs" />
-    <Compile Include="Shapesheet\CellGroups.cs" />
     <Compile Include="Shapesheet\ShapeSheetMetadata.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper_Tests.cs" />
     <Compile Include="Scripting\ScriptingCellSRCTest.cs" />
