@@ -181,10 +181,8 @@ namespace TestVisioAutomation
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
             // Check the grouping
-            Assert.AreEqual(shapeids.Count(), r.Formulas.Count); // the total number of rows should match the number of shapeids
-            Assert.AreEqual(shapeids.Count(), r.Formulas.Groups.Count); // the total number of groups should be the number of shapes we asked for
-            Assert.AreEqual(shapeids.Count(), r.Results.Count); // the total number of rows should match the number of shapeids
-            Assert.AreEqual(shapeids.Count(), r.Results.Groups.Count); // the total number of groups should be the number of shapes we asked for
+            Assert.AreEqual(shapeids.Count(), r.Count); // the total number of rows should match the number of shapeids
+            Assert.AreEqual(shapeids.Count(), r.Groups.Count); // the total number of groups should be the number of shapes we asked for
 
             var expected_pinpos = new List<VA.Drawing.Point>
                                       {
@@ -193,12 +191,12 @@ namespace TestVisioAutomation
                                           new VA.Drawing.Point(6, 6)
                                       };
 
-            var actual_pinpos = new List<VA.Drawing.Point>(r.Results.Count);
-            foreach (var row in Enumerable.Range(0, r.Results.Count))
+            var actual_pinpos = new List<VA.Drawing.Point>(r.Count);
+            foreach (var row in Enumerable.Range(0, r.Count))
             {
                  var p = new VA.Drawing.Point(
-                    r.Results[row, col_pinx],
-                    r.Results[row, col_piny]);
+                    r[row, col_pinx].Result,
+                    r[row, col_piny].Result);
                 actual_pinpos.Add(p);
             }
 
@@ -243,12 +241,12 @@ namespace TestVisioAutomation
                                       };
 
 
-            for (int row = 0; row < r.Formulas.Count; row++)
+            for (int row = 0; row < r.Count; row++)
             {
-                for (int col = 0; col < r.Formulas.Columns.Count; col++)
+                for (int col = 0; col < r.Columns.Count; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row, col], r.Formulas[row, col]);
-                    Assert.AreEqual(expected_results[row, col], r.Results[row, col]);
+                    Assert.AreEqual(expected_formulas[row, col], r[row, col].Formula);
+                    Assert.AreEqual(expected_results[row, col], r[row, col].Result);
                 }
             }
 
@@ -278,7 +276,7 @@ namespace TestVisioAutomation
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var table = query.GetFormulasAndResults2<double>(
+            var table = query.GetFormulasAndResults<double>(
                 page1,
                 shapeids);
 
@@ -325,7 +323,7 @@ namespace TestVisioAutomation
             query.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value.Cell);
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var table = query.GetFormulasAndResults2<double>(
+            var table = query.GetFormulasAndResults<double>(
                 page1, shapeids);
             
             Assert.AreEqual(4, table.Groups.Count);

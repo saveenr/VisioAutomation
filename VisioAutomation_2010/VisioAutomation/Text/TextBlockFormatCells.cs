@@ -42,7 +42,7 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
         }
 
-        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new TextBlockFormatCells();
             cells.BottomMargin = row[query.BottomMargin];

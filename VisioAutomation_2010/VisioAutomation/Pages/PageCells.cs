@@ -146,7 +146,7 @@ namespace VisioAutomation.Pages
             func(ShapeSheet.SRCConstants.DrawingResizeType, this.DrawingResizeType.Formula);
         }
 
-        private static PageCells get_cells_from_row(PageQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static PageCells get_cells_from_row(PageQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
 
             var cells = new PageCells();

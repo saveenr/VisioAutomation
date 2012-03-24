@@ -82,19 +82,19 @@ namespace TestVisioAutomation
 
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
-            Assert.AreEqual("0.5 in", r.Formulas[0, col_pinx]);
-            Assert.AreEqual("0.5 in", r.Formulas[0, col_piny]);
-            Assert.AreEqual("1.5 in", r.Formulas[1, col_pinx]);
-            Assert.AreEqual("1.5 in", r.Formulas[1, col_piny]);
-            Assert.AreEqual("2.5 in", r.Formulas[2, col_pinx]);
-            Assert.AreEqual("2.5 in", r.Formulas[2, col_piny]);
+            Assert.AreEqual("0.5 in", r[0, col_pinx].Formula);
+            Assert.AreEqual("0.5 in", r[0, col_piny].Formula);
+            Assert.AreEqual("1.5 in", r[1, col_pinx].Formula);
+            Assert.AreEqual("1.5 in", r[1, col_piny].Formula);
+            Assert.AreEqual("2.5 in", r[2, col_pinx].Formula);
+            Assert.AreEqual("2.5 in", r[2, col_piny].Formula);
 
-            Assert.AreEqual(0.5, r.Results[0, col_pinx]);
-            Assert.AreEqual(0.5, r.Results[0, col_piny]);
-            Assert.AreEqual(1.5, r.Results[1, col_pinx]);
-            Assert.AreEqual(1.5, r.Results[1, col_piny]);
-            Assert.AreEqual(2.5, r.Results[2, col_pinx]);
-            Assert.AreEqual(2.5, r.Results[2, col_piny]);
+            Assert.AreEqual(0.5, r[0, col_pinx].Result);
+            Assert.AreEqual(0.5, r[0, col_piny].Result);
+            Assert.AreEqual(1.5, r[1, col_pinx].Result);
+            Assert.AreEqual(1.5, r[1, col_piny].Result);
+            Assert.AreEqual(2.5, r[2, col_pinx].Result);
+            Assert.AreEqual(2.5, r[2, col_piny].Result);
 
             page1.Delete(0);
         }

@@ -64,7 +64,7 @@ namespace VisioAutomation.Format
             func(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
         }
 
-        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
 
             var cells = new ShapeFormatCells();

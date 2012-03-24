@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     public abstract class CellGroup : BaseCellGroup
     {
         // Delegates
-        protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.QueryDataRow<double> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
+        protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
         
         protected abstract void ApplyFormulas(ApplyFormula func);
 

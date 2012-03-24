@@ -53,7 +53,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
         }
 
-        private static LockCells get_cells_from_row(LockQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static LockCells get_cells_from_row(LockQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new LockCells();
             cells.LockAspect = row[query.LockAspect].ToBool();

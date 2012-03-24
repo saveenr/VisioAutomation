@@ -99,11 +99,11 @@ namespace VisioAutomation.Format
             {
                 var cellrec = desired_cells[col];
 
-                var result = dataset.Results[0, col];
-                var formula = dataset.Formulas[0, col];
+                var result = dataset[0, col].Result;
+                var formula = dataset[0, col].Formula;
 
                 cellrec.Result = result;
-                cellrec.Formula = formula;
+                cellrec.Formula = formula.Value;
             }
         }
 

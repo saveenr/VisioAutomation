@@ -60,7 +60,7 @@ namespace VisioAutomation.CustomProperties
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow._GetObjectsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new CustomPropertyCells();
 

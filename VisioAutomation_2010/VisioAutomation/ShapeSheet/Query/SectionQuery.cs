@@ -91,13 +91,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return group_counts;
         }
 
-        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
-        {
-            var qds = this._Execute<T>(page, shapeids,true, true);
-            return qds;
-        }
-
-        public VA.ShapeSheet.Data.Table<CellData<T>> GetFormulasAndResults2<T>(IVisio.Page page, IList<int> shapeids)
+        public VA.ShapeSheet.Data.Table<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             var qds = this._Execute<T>(page, shapeids, true, true);
             return qds.create_merged_table();
@@ -182,13 +176,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return all_unitcodes;
         }
 
-        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Shape shape)
-        {
-            var qds =  this._Execute<T>(shape,true,true);
-            return qds;
-        }
-
-        public VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>> GetFormulasAndResults2<T>(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
             var qds = this._Execute<T>(shape, true, true);
             return qds.create_merged_table();

@@ -50,7 +50,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
         }
 
-        private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new ShapeLayoutCells();
             cells.ConFixedCode = row[query.ConFixedCode].ToInt();
