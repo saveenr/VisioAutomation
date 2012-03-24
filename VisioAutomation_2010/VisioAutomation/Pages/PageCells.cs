@@ -223,13 +223,13 @@ namespace VisioAutomation.Pages
         internal static IList<PageCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new PageQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static PageCells GetCells(IVisio.Shape shape)
         {
             var query = new PageQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
 
         class PageQuery : VA.ShapeSheet.Query.CellQuery

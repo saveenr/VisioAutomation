@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f),row);
         }
 
-        protected static IList<List<TObj>> _GetObjectsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<List<TObj>> CellsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var qds = query.GetFormulasAndResults<double>(page, shapeids);
             var list_of_lists = new List<List<TObj>>(qds.Groups.Count);
@@ -40,26 +40,20 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 var group = qds.Groups[group_index];
                 var rows = group.RowIndices.Select(ri => qds[ri]);
                 var obj_list = new List<TObj>(group.Count);
-                foreach (var row in rows)
-                {
-                    var obj = row_to_obj_func(query, row);
-                    obj_list.Add(obj);
-                }
+                var objs = rows.Select(row => row_to_obj_func(query,row));
+                obj_list.AddRange(objs);
                 list_of_lists.Add(obj_list);
             }
 
             return list_of_lists;
         }
 
-        protected static IList<TObj> _GetObjectsFromRows<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+        protected static IList<TObj> CellsFromRows<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var table = query.GetFormulasAndResults<double>(shape);
+            var objs = table.Select( row => row_to_obj_func(query, row) );
             var obj_list = new List<TObj>(table.Count);
-            foreach (var row in table)
-            {
-                var obj = row_to_obj_func(query, row);
-                obj_list.Add(obj);
-            }
+            obj_list.AddRange(objs);
             return obj_list;
         }
     }

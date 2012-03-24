@@ -33,13 +33,13 @@ namespace VisioAutomation.Text
         internal static IList<TextBlockFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new TextBlockFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static TextBlockFormatCells GetCells(IVisio.Shape shape)
         {
             var query = new TextBlockFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
 
         private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)

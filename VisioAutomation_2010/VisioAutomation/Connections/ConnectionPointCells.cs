@@ -38,13 +38,13 @@ namespace VisioAutomation.Connections
         internal static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
         }
 
         class ConnectionPointQuery : VA.ShapeSheet.Query.SectionQuery

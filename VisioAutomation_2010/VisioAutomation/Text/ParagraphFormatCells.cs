@@ -36,13 +36,13 @@ namespace VisioAutomation.Text
         internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ParagraphFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new ParagraphFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
         }
 
         private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
