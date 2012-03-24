@@ -6,12 +6,11 @@ using System.Collections;
 
 namespace VisioAutomation.ShapeSheet.Data
 {
-    class QueryDataSet<T> : IEnumerable<QueryDataRow<T>>
+    class QueryDataSet<T>
     {
-        internal readonly int ColumnCount;
-        internal readonly int RowCount;
-
-        public TableRowGroupList Groups { get; private set; }
+        readonly int ColumnCount;
+        readonly int RowCount;
+        private TableRowGroupList Groups;
         public Table<string> Formulas { get; private set; }
         public Table<T> Results { get; private set; }
 
@@ -69,50 +68,19 @@ namespace VisioAutomation.ShapeSheet.Data
 
         private Table<X> BuildTableFromArray<X>(X[] array)
         {
-            var table = new Table<X>(this.Count, this.ColumnCount, this.Groups, array);
+            var table = new Table<X>(this.RowCount, this.ColumnCount, this.Groups, array);
             return table;
-        }
-
-        public QueryDataRow<T> this[int index]
-        {
-            get { return new QueryDataRow<T>(this, index); }
-        }
-
-        public VA.ShapeSheet.CellData<T> GetItem(int row, VA.ShapeSheet.Query.QueryColumn col)
-        {
-            string formula = this.Formulas[row, col];
-            T result = this.Results[row, col];
-            var cd = new VA.ShapeSheet.CellData<T>(formula, result);
-            return cd;
-        }
-
-        public IEnumerator<QueryDataRow<T>> GetEnumerator()
-        {
-            for (int i = 0; i < this.RowCount; i++)
-            {
-                yield return this[i];
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
-            return GetEnumerator();
-        }
-
-        public int Count
-        {
-            get { return this.RowCount; }
         }
 
         internal VA.ShapeSheet.Data.Table<CellData<T>> create_merged_table()
         {
-            int n = this.Count*this.ColumnCount;
+            int n = this.RowCount*this.ColumnCount;
             var array = new VA.ShapeSheet.CellData<T>[n];
             for (int i=0; i<n; i++)
             {
                 array[i] = new VA.ShapeSheet.CellData<T>(this.Formulas.RawArray[i], this.Results.RawArray[i]);
             }
-            var table = new VA.ShapeSheet.Data.Table<CellData<T>>(this.Count, this.ColumnCount, this.Groups, array);
+            var table = new VA.ShapeSheet.Data.Table<CellData<T>>(this.RowCount, this.ColumnCount, this.Groups, array);
             return table;
         }
     }
