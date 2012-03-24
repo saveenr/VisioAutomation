@@ -98,5 +98,9 @@ namespace VisioAutomation.ShapeSheet.Data
             get { return new TableRow<T>(this,index); }
         }
 
+        internal T[] RawArray
+        {
+            get { return this._values; }
+        }
     }
 }

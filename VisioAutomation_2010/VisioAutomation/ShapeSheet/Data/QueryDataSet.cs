@@ -103,5 +103,17 @@ namespace VisioAutomation.ShapeSheet.Data
         {
             get { return this.RowCount; }
         }
+
+        internal VA.ShapeSheet.Data.Table<CellData<T>> create_merged_table()
+        {
+            int n = this.Count*this.ColumnCount;
+            var array = new VA.ShapeSheet.CellData<T>[n];
+            for (int i=0; i<n; i++)
+            {
+                array[i] = new VA.ShapeSheet.CellData<T>(this.Formulas.RawArray[i], this.Results.RawArray[i]);
+            }
+            var table = new VA.ShapeSheet.Data.Table<CellData<T>>(this.Count, this.ColumnCount, this.Groups, array);
+            return table;
+        }
     }
 }

@@ -32,6 +32,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds;
         }
 
+        public VA.ShapeSheet.Data.Table<CellData<T>> GetFormulasAndResults2<T>(IVisio.Shape shape)
+        {
+            var qds = this._Execute<T>(shape, true, true);
+            return qds.create_merged_table();
+        }
+        
         public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Shape shape)
         {
             var qds = this._Execute<double>(shape, true, false);

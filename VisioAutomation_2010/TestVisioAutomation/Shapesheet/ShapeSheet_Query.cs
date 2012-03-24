@@ -278,48 +278,36 @@ namespace TestVisioAutomation
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var r = query.GetFormulasAndResults<double>(
+            var table = query.GetFormulasAndResults2<double>(
                 page1,
                 shapeids);
 
-            var tabler = r.Results;
-            var tablef = r.Formulas;
+            Assert.AreEqual(4, table.Groups.Count);
+            Assert.AreEqual(1, table.Groups[0].Count);
+            Assert.AreEqual(2, table.Groups[1].Count);
+            Assert.AreEqual(0, table.Groups[2].Count);
+            Assert.AreEqual(3, table.Groups[3].Count);
 
-            Assert.AreEqual(4, tabler.Groups.Count);
-            Assert.AreEqual(1, tabler.Groups[0].Count);
-            Assert.AreEqual(2, tabler.Groups[1].Count);
-            Assert.AreEqual(0, tabler.Groups[2].Count);
-            Assert.AreEqual(3, tabler.Groups[3].Count);
+            var gf0 = GetRowsInGroup(table, 0);
+            var gf1 = GetRowsInGroup(table, 1);
+            var gf2 = GetRowsInGroup(table, 2);
+            var gf3 = GetRowsInGroup(table, 3);
 
-            var gf0 = GetRowsInGroup<string>(tablef, 0);
-            var gf1 = GetRowsInGroup<string>(tablef, 1);
-            var gf2 = GetRowsInGroup<string>(tablef, 2);
-            var gf3 = GetRowsInGroup<string>(tablef, 3);
 
-            var gr0 = GetRowsInGroup<double>(tabler, 0);
-            var gr1 = GetRowsInGroup<double>(tabler, 1);
-            var gr2 = GetRowsInGroup<double>(tabler, 2);
-            var gr3 = GetRowsInGroup<double>(tabler, 3);
+            Assert.AreEqual("\"1\"", gf0[0][0].Formula);
+            Assert.AreEqual("\"2\"", gf1[0][0].Formula);
+            Assert.AreEqual("\"3\"", gf1[1][0].Formula);
+            Assert.AreEqual("\"4\"", gf3[0][0].Formula);
+            Assert.AreEqual("\"5\"", gf3[1][0].Formula);
+            Assert.AreEqual("\"6\"", gf3[2][0].Formula);
 
-            Assert.AreEqual("\"1\"", gf0[0][0]);
-            Assert.AreEqual("\"2\"", gf1[0][0]);
-            Assert.AreEqual("\"3\"", gf1[1][0]);
-            Assert.AreEqual("\"4\"", gf3[0][0]);
-            Assert.AreEqual("\"5\"", gf3[1][0]);
-            Assert.AreEqual("\"6\"", gf3[2][0]);
 
-            Assert.AreEqual(4, tabler.Groups.Count);
-            Assert.AreEqual(1, gf0.Count);
-            Assert.AreEqual(2, gf1.Count);
-            Assert.AreEqual(0, gf2.Count);
-            Assert.AreEqual(3, gf3.Count);
-
-            Assert.AreEqual(1.0, gr0[0][0]);
-            Assert.AreEqual(2.0, gr1[0][0]);
-            Assert.AreEqual(3.0, gr1[1][0]);
-            Assert.AreEqual(4.0, gr3[0][0]);
-            Assert.AreEqual(5.0, gr3[1][0]);
-            Assert.AreEqual(6.0, gr3[2][0]);
+            Assert.AreEqual(1.0, gf0[0][0].Result);
+            Assert.AreEqual(2.0, gf1[0][0].Result);
+            Assert.AreEqual(3.0, gf1[1][0].Result);
+            Assert.AreEqual(4.0, gf3[0][0].Result);
+            Assert.AreEqual(5.0, gf3[1][0].Result);
+            Assert.AreEqual(6.0, gf3[2][0].Result);
 
             page1.Delete(0);
         }
@@ -337,17 +325,14 @@ namespace TestVisioAutomation
             query.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value.Cell);
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var r = query.GetFormulasAndResults<double>(
+            var table = query.GetFormulasAndResults2<double>(
                 page1, shapeids);
-
-            var tabler = r.Results;
-
-            Assert.AreEqual(4, tabler.Groups.Count);
-
-            Assert.AreEqual(0, tabler.Groups[0].Count);
-            Assert.AreEqual(0, tabler.Groups[1].Count);
-            Assert.AreEqual(0, tabler.Groups[2].Count);
-            Assert.AreEqual(0, tabler.Groups[3].Count);
+            
+            Assert.AreEqual(4, table.Groups.Count);
+            Assert.AreEqual(0, table.Groups[0].Count);
+            Assert.AreEqual(0, table.Groups[1].Count);
+            Assert.AreEqual(0, table.Groups[2].Count);
+            Assert.AreEqual(0, table.Groups[3].Count);
 
             page1.Delete(0);
         }

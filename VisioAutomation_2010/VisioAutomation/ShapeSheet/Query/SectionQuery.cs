@@ -97,6 +97,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds;
         }
 
+        public VA.ShapeSheet.Data.Table<CellData<T>> GetFormulasAndResults2<T>(IVisio.Page page, IList<int> shapeids)
+        {
+            var qds = this._Execute<T>(page, shapeids, true, true);
+            return qds.create_merged_table();
+        }
+
         public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
             var qds = this._Execute<double>(page, shapeids, true, true);
