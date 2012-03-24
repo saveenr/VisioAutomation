@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     public abstract class CellGroup : BaseCellGroup
     {
         // Delegates
-        protected delegate TObj RowToObject<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
+        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
         
         protected abstract void ApplyFormulas(ApplyFormula func);
 
@@ -22,20 +22,20 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f));
         }
 
-        protected static IList<TObj> CellsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToObject<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        protected static IList<TObj> CellsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToCells<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
-            var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var objs = qds.Select(r => row_to_cells_func(query, r));
-            var obj_list = new List<TObj>(qds.Count);
-            obj_list.AddRange(objs);
-            return obj_list;
+            var table = query.GetFormulasAndResults<double>(page, shapeids);
+            var cells = table.Select(r => row_to_cells_func(query, r));
+            var cells_list = new List<TObj>(table.Count);
+            cells_list.AddRange(cells);
+            return cells_list;
         }
 
-        protected static TObj CellsFromRow<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToObject<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        protected static TObj CellsFromRow<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
-            var qds = query.GetFormulasAndResults<double>(shape);
-            var qdr = qds[0];
-            return row_to_obj_func(query, qdr);
+            var table = query.GetFormulasAndResults<double>(shape);
+            var row = table[0];
+            return row_to_obj_func(query, row);
         }
     }
 }
