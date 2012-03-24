@@ -39,8 +39,8 @@
             this.group1 = this.Factory.CreateRibbonGroup();
             this.buttonImportColors = this.Factory.CreateRibbonButton();
             this.buttonCreateStencilCatalog = this.Factory.CreateRibbonButton();
-            this.buttonHelp = this.Factory.CreateRibbonButton();
             this.buttonCreateStyle = this.Factory.CreateRibbonButton();
+            this.buttonHelp = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
@@ -78,17 +78,17 @@
             this.buttonCreateStencilCatalog.Name = "buttonCreateStencilCatalog";
             this.buttonCreateStencilCatalog.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonCreateStencilCatalog_Click);
             // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Label = "Help";
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonHelp_Click_1);
-            // 
             // buttonCreateStyle
             // 
             this.buttonCreateStyle.Label = "Create Style";
             this.buttonCreateStyle.Name = "buttonCreateStyle";
             this.buttonCreateStyle.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonCreateStyle_Click);
+            // 
+            // buttonHelp
+            // 
+            this.buttonHelp.Label = "Help";
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonHelp_Click_1);
             // 
             // VPTRibbon
             // 
