@@ -8,12 +8,12 @@ namespace VisioAutomation.Extensions
     {
         public static VA.ShapeSheet.CellData<int> ToInt(this VA.ShapeSheet.CellData<double> cd)
         {
-            return cd.CastResult(v => (int) v);
+            return new CellData<int>(cd.Formula,(int)cd.Result);
         }
 
         public static VA.ShapeSheet.CellData<bool> ToBool(this VA.ShapeSheet.CellData<double> cd)
         {
-            return cd.CastResult(v => VA.Convert.DoubleToBool(v));
+            return new CellData<bool>(cd.Formula, VA.Convert.DoubleToBool(cd.Result));
         }
     }
 }
