@@ -48,15 +48,18 @@
             // 
             // textName
             // 
+            this.textName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textName.Location = new System.Drawing.Point(16, 30);
             this.textName.Name = "textName";
-            this.textName.Size = new System.Drawing.Size(453, 20);
+            this.textName.Size = new System.Drawing.Size(443, 20);
             this.textName.TabIndex = 1;
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(393, 292);
+            this.buttonCancel.Location = new System.Drawing.Point(384, 113);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
@@ -65,44 +68,45 @@
             // 
             // buttonOK
             // 
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOK.Location = new System.Drawing.Point(312, 292);
+            this.buttonOK.Location = new System.Drawing.Point(303, 113);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 3;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // checkBoxIncludesText
             // 
             this.checkBoxIncludesText.AutoSize = true;
             this.checkBoxIncludesText.Checked = true;
             this.checkBoxIncludesText.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIncludesText.Location = new System.Drawing.Point(28, 154);
+            this.checkBoxIncludesText.Location = new System.Drawing.Point(16, 65);
             this.checkBoxIncludesText.Name = "checkBoxIncludesText";
             this.checkBoxIncludesText.Size = new System.Drawing.Size(86, 17);
             this.checkBoxIncludesText.TabIndex = 4;
             this.checkBoxIncludesText.Text = "Includes text";
             this.checkBoxIncludesText.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // checkBoxIncludesLIne
             // 
             this.checkBoxIncludesLIne.AutoSize = true;
             this.checkBoxIncludesLIne.Checked = true;
             this.checkBoxIncludesLIne.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIncludesLIne.Location = new System.Drawing.Point(28, 177);
+            this.checkBoxIncludesLIne.Location = new System.Drawing.Point(16, 88);
             this.checkBoxIncludesLIne.Name = "checkBoxIncludesLIne";
             this.checkBoxIncludesLIne.Size = new System.Drawing.Size(85, 17);
             this.checkBoxIncludesLIne.TabIndex = 5;
             this.checkBoxIncludesLIne.Text = "Includes line";
             this.checkBoxIncludesLIne.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkBoxIncludesFill
             // 
             this.checkBoxIncludesFill.AutoSize = true;
             this.checkBoxIncludesFill.Checked = true;
             this.checkBoxIncludesFill.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIncludesFill.Location = new System.Drawing.Point(28, 200);
+            this.checkBoxIncludesFill.Location = new System.Drawing.Point(16, 111);
             this.checkBoxIncludesFill.Name = "checkBoxIncludesFill";
             this.checkBoxIncludesFill.Size = new System.Drawing.Size(78, 17);
             this.checkBoxIncludesFill.TabIndex = 6;
@@ -113,7 +117,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 327);
+            this.ClientSize = new System.Drawing.Size(471, 148);
             this.Controls.Add(this.checkBoxIncludesFill);
             this.Controls.Add(this.checkBoxIncludesLIne);
             this.Controls.Add(this.checkBoxIncludesText);
