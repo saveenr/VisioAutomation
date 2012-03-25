@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using VA = VisioAutomation;
 
 namespace VisioPowerTools2010
@@ -19,33 +20,28 @@ namespace VisioPowerTools2010
 
         private void from_text()
         {
-            var sso = System.StringSplitOptions.RemoveEmptyEntries;
+            this.Colors.Clear();
 
             var seps = new[] {',', ' '};
             int linenum = 1;
-            foreach (string line in this.textBox1.Lines)
+            foreach (string rawline in this.textBox1.Lines)
             {
-                var tline = line.Trim();
-                if (tline.Length > 0)
+                var line = rawline.Trim();
+                if (line.Length > 0)
                 {
-                    if (tline.StartsWith("//"))
+                    if (line.StartsWith("//"))
                     {
                         // skip comments
                         continue;
                     }
-                    else if (tline.StartsWith("#") && tline.Length == 1)
+                    else if (line.StartsWith("#"))
                     {
-                        // skip comments
-                        continue;
-                    }
-                    else if (tline.StartsWith("#"))
-                    {
-                        var rgb = System.Drawing.ColorTranslator.FromHtml(tline);
+                        var rgb = System.Drawing.ColorTranslator.FromHtml(line);
                         this.Colors.Add(rgb);
                     }
                     else
                     {
-                        var tokens = tline.Split(seps, sso);
+                        var tokens = line.Split(seps, System.StringSplitOptions.RemoveEmptyEntries);
                         if (tokens.Length >= 3)
                         {
                             var components = tokens.Select(v => getcomp(v)).ToArray();
@@ -85,6 +81,11 @@ namespace VisioPowerTools2010
             {
                 this.from_online();
             }
+            else
+            {
+                string msg = "Unhandeled case";
+                MessageBox.Show(msg);
+            }
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -97,30 +98,37 @@ namespace VisioPowerTools2010
 
         private void from_online()
         {
+            this.Colors.Clear();
+
             var url = new System.Uri(this.GetURL());
 
             string authority = url.Authority.ToLower();
             if (authority == "colourlovers.com" || authority == "www.colourlovers.com")
             {
                 var tokens = url.AbsolutePath.ToLower().Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                if (tokens.Length != 2 && tokens.Length != 3)
+
+                bool incorrect_format = false;
+
+                if (tokens.Length < 2)
                 {
-                    return;
+                    incorrect_format = true;
                 }
 
                 if (tokens[0] != "palette")
                 {
-                    return;
+                    incorrect_format = true;
                 }
 
-                int palnum = -1;
-                if (!int.TryParse(tokens[1], out palnum))
+                if (incorrect_format)
                 {
-                    return;
+                    string msg = "Incorrect format for ColourLovers URL";
+                    MessageBox.Show(msg);
+                    return;                    
                 }
 
+                string palette_id = tokens[1];
 
-                var new_url = "http://www.colourlovers.com/api/palette/" + palnum.ToString();
+                var new_url = "http://www.colourlovers.com/api/palette/" + palette_id;
 
                 var wc = new System.Net.WebClient();
                 var data = wc.DownloadString(new_url);
@@ -142,45 +150,38 @@ namespace VisioPowerTools2010
             else if (authority == "kuler.adobe.com")
             {
                 var tokens = url.Fragment.ToLower().Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                if (tokens.Length != 2 && tokens.Length != 3)
+
+                bool incorrect_format = false;
+
+                if (tokens.Length < 2)
                 {
-                    return;
+                    incorrect_format = true;
                 }
 
                 if (tokens[0] != "#themeid")
                 {
-                    return;
+                    incorrect_format = true;
                 }
 
-                int palnum = -1;
-                if (!int.TryParse(tokens[1], out palnum))
+                if (incorrect_format)
                 {
+                    string msg = "Incorrect format for kuler URL";
+                    MessageBox.Show(msg);
                     return;
                 }
 
+                string theme_id = tokens[1];
  
-                var new_url = "http://kuler.adobe.com/kuler/API/rss/search.cfm?searchQuery=themeid:" + palnum.ToString() + "&key=85387E02911F6599FB93A8EFF7173821";
+                var theme_api_url = "http://kuler.adobe.com/kuler/API/rss/search.cfm?searchQuery=themeid:" + theme_id + "&key=85387E02911F6599FB93A8EFF7173821";
 
-                var wc = new System.Net.WebClient();
-                var data = wc.DownloadString(new_url);
+                var webclient = new System.Net.WebClient();
+                var data = webclient.DownloadString(theme_api_url);
 
                 var xdoc = System.Xml.Linq.XDocument.Parse(data);
                 var root = xdoc.Root;
                 
-                foreach (var e in root.DescendantsAndSelf())
-                {
-                    if (e.Name.Namespace != System.Xml.Linq.XNamespace.None)
-                    {
-                        e.Name = System.Xml.Linq.XNamespace.None.GetName(e.Name.LocalName);
-                    }
-                    if (e.Attributes().Where(a => a.IsNamespaceDeclaration || a.Name.Namespace != System.Xml.Linq.XNamespace.None).Any())
-                    {
-                        e.ReplaceAttributes(e.Attributes().Select(a => a.IsNamespaceDeclaration ? null : a.Name.Namespace != System.Xml.Linq.XNamespace.None ? new System.Xml.Linq.XAttribute(System.Xml.Linq.XNamespace.None.GetName(a.Name.LocalName), a.Value) : a));
-                    }
-                }
-
-                var t = root.ToString();
-
+                strip_namespaces(root);
+                
                 var palette_el = root.Element("channel").Element("item").Element("themeItem");
                 var colors_el = palette_el.Element("themeSwatches");
                 var hex_els = colors_el.Elements("swatch").ToList();
@@ -196,9 +197,35 @@ namespace VisioPowerTools2010
             }
             else
             {
-                
+                string msg = "Unknown URL format";
+                MessageBox.Show(msg);
+                return;
             }
+        }
 
+        private static void strip_namespaces(XElement root)
+        {
+            foreach (var e in root.DescendantsAndSelf())
+            {
+                if (e.Name.Namespace != System.Xml.Linq.XNamespace.None)
+                {
+                    e.Name = System.Xml.Linq.XNamespace.None.GetName(e.Name.LocalName);
+                }
+                if (
+                    e.Attributes().Where(a => a.IsNamespaceDeclaration || a.Name.Namespace != System.Xml.Linq.XNamespace.None).
+                        Any())
+                {
+                    e.ReplaceAttributes(
+                        e.Attributes().Select(
+                            a =>
+                            a.IsNamespaceDeclaration
+                                ? null
+                                : a.Name.Namespace != System.Xml.Linq.XNamespace.None
+                                      ? new System.Xml.Linq.XAttribute(
+                                            System.Xml.Linq.XNamespace.None.GetName(a.Name.LocalName), a.Value)
+                                      : a));
+                }
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
