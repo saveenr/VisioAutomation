@@ -96,6 +96,35 @@ namespace VisioPowerTools2010
             return this.textBoxURL.Text.Trim();
         }
 
+        public System.Xml.Linq.XDocument download_xml(string url)
+        {
+            var wc = new System.Net.WebClient();
+            string data;
+            try
+            {
+                data = wc.DownloadString(url);
+            }
+            catch (Exception)
+            {
+                string msg = "Failed to download data";
+                MessageBox.Show(msg);
+                return null;
+            }
+
+            System.Xml.Linq.XDocument xdoc;
+
+            try
+            {
+                xdoc = System.Xml.Linq.XDocument.Parse(data);
+            }
+            catch (Exception)
+            {
+                string msg = "Failed to parse XML";
+                MessageBox.Show(msg);
+                return null;
+            }
+            return xdoc;
+        }
         private void from_online()
         {
             this.Colors.Clear();
@@ -128,12 +157,14 @@ namespace VisioPowerTools2010
 
                 string palette_id = tokens[1];
 
-                var new_url = "http://www.colourlovers.com/api/palette/" + palette_id;
+                var palette_api_url = "http://www.colourlovers.com/api/palette/" + palette_id;
+                var xdoc = download_xml(palette_api_url);
 
-                var wc = new System.Net.WebClient();
-                var data = wc.DownloadString(new_url);
+                if (xdoc == null)
+                {
+                    return;
+                }
 
-                var xdoc = System.Xml.Linq.XDocument.Parse(data);
                 var root = xdoc.Root;
 
                 var palette_el = root.Element("palette");
@@ -173,11 +204,13 @@ namespace VisioPowerTools2010
                 string theme_id = tokens[1];
  
                 var theme_api_url = "http://kuler.adobe.com/kuler/API/rss/search.cfm?searchQuery=themeid:" + theme_id + "&key=85387E02911F6599FB93A8EFF7173821";
+                var xdoc = download_xml(theme_api_url);
 
-                var webclient = new System.Net.WebClient();
-                var data = webclient.DownloadString(theme_api_url);
+                if (xdoc == null)
+                {
+                    return;
+                }
 
-                var xdoc = System.Xml.Linq.XDocument.Parse(data);
                 var root = xdoc.Root;
                 
                 strip_namespaces(root);
