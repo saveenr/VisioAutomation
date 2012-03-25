@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Data
     {
         private readonly T[] _values;
         private readonly int rowcount;
-        private readonly TableColumnList<T> _cols;
+        private readonly int colcount;
 
         public TableRowGroupList Groups { get; private set; }
 
@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Data
             this._values = values;
             this.Groups = groups;
             this.rowcount = rows;
-            this._cols = new TableColumnList<T>(this, cols);
+            this.colcount = cols;
         }
 
         private int get_pos(int row, int col)
@@ -40,11 +40,11 @@ namespace VisioAutomation.ShapeSheet.Data
             {
                 throw new System.ArgumentOutOfRangeException("row");
             }
-            if (col >= this.Columns.Count)
+            if (col >= this.colcount)
             {
                 throw new System.ArgumentOutOfRangeException("col");
             }
-            return (row * this.Columns.Count) + col;
+            return (row * this.colcount) + col;
         }
 
         public T this[int row, int column]
@@ -69,12 +69,6 @@ namespace VisioAutomation.ShapeSheet.Data
             set { this._values[get_pos(row, column.Ordinal)] = value; }
         }
 
-        public TableColumnList<T> Columns
-        {
-            get { return this._cols; }
-        }
-
-
         public IEnumerator<TableRow<T>> GetEnumerator()
         {
             for (int i = 0; i < this.rowcount; i++)
@@ -88,7 +82,7 @@ namespace VisioAutomation.ShapeSheet.Data
             return GetEnumerator();
         }
 
-        public int Count
+        public int RowCount
         {
             get { return this.rowcount; }
         }
@@ -101,6 +95,11 @@ namespace VisioAutomation.ShapeSheet.Data
         internal T[] RawArray
         {
             get { return this._values; }
+        }
+
+        public int ColumnCount
+        {
+            get { return this.ColumnCount; }
         }
     }
 }

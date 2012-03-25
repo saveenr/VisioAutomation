@@ -52,7 +52,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             var table = query.GetFormulasAndResults<double>(shape);
             var cells = table.Select( row => row_to_obj_func(query, row) );
-            var cells_list = new List<TObj>(table.Count);
+            var cells_list = new List<TObj>(table.RowCount);
             cells_list.AddRange(cells);
             return cells_list;
         }

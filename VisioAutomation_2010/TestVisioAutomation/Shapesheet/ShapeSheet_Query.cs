@@ -23,8 +23,8 @@ namespace TestVisioAutomation
 
         public static T[] GetRow<T>(VA.ShapeSheet.Data.Table<T> table, int row)
         {
-            var a = new T[table.Columns.Count];
-            for (int i = 0; i < table.Columns.Count; i++)
+            var a = new T[table.ColumnCount];
+            for (int i = 0; i < table.ColumnCount; i++)
             {
                 a[i] = table[row, i];
             }
@@ -181,7 +181,7 @@ namespace TestVisioAutomation
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
             // Check the grouping
-            Assert.AreEqual(shapeids.Count(), r.Count); // the total number of rows should match the number of shapeids
+            Assert.AreEqual(shapeids.Count(), r.RowCount); // the total number of rows should match the number of shapeids
             Assert.AreEqual(shapeids.Count(), r.Groups.Count); // the total number of groups should be the number of shapes we asked for
 
             var expected_pinpos = new List<VA.Drawing.Point>
@@ -191,8 +191,8 @@ namespace TestVisioAutomation
                                           new VA.Drawing.Point(6, 6)
                                       };
 
-            var actual_pinpos = new List<VA.Drawing.Point>(r.Count);
-            foreach (var row in Enumerable.Range(0, r.Count))
+            var actual_pinpos = new List<VA.Drawing.Point>(r.RowCount);
+            foreach (var row in Enumerable.Range(0, r.RowCount))
             {
                  var p = new VA.Drawing.Point(
                     r[row, col_pinx].Result,
@@ -241,9 +241,9 @@ namespace TestVisioAutomation
                                       };
 
 
-            for (int row = 0; row < r.Count; row++)
+            for (int row = 0; row < r.RowCount; row++)
             {
-                for (int col = 0; col < r.Columns.Count; col++)
+                for (int col = 0; col < r.ColumnCount; col++)
                 {
                     Assert.AreEqual(expected_formulas[row, col], r[row, col].Formula);
                     Assert.AreEqual(expected_results[row, col], r[row, col].Result);
