@@ -62,17 +62,11 @@ namespace VisioAutomation.ShapeSheet.Data
             this.RowCount = rowcount;
             this.ColumnCount = columncount;
             this.Groups = groups;
-            this.Formulas = formulas_array != null ? this.BuildTableFromArray(formulas_array) : null;
-            this.Results = results_array != null ? this.BuildTableFromArray(results_array) : null;
+            this.Formulas = formulas_array != null ? new VA.ShapeSheet.Data.Table<string>(this.RowCount, this.ColumnCount, this.Groups, formulas_array): null;
+            this.Results = results_array != null ? new VA.ShapeSheet.Data.Table<T>(this.RowCount, this.ColumnCount, this.Groups, results_array) : null;
         }
 
-        private Table<X> BuildTableFromArray<X>(X[] array)
-        {
-            var table = new Table<X>(this.RowCount, this.ColumnCount, this.Groups, array);
-            return table;
-        }
-
-        internal VA.ShapeSheet.Data.Table<CellData<T>> create_merged_table()
+        internal VA.ShapeSheet.Data.Table<CellData<T>> CreateMergedTable()
         {
             int n = this.RowCount*this.ColumnCount;
             var array = new VA.ShapeSheet.CellData<T>[n];

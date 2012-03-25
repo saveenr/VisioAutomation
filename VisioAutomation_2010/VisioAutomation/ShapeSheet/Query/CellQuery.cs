@@ -28,20 +28,20 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public VA.ShapeSheet.Data.Table<CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
-            var table = this._Execute<T>(shape, true, true);
-            return table.create_merged_table();
+            var qds = this._Execute<T>(shape, true, true);
+            return qds.CreateMergedTable();
         }
         
         public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Shape shape)
         {
-            var table = this._Execute<double>(shape, true, false);
-            return table.Formulas;
+            var qds = this._Execute<double>(shape, true, false);
+            return qds.Formulas;
         }
 
         public VA.ShapeSheet.Data.Table<T> GetResults<T>(IVisio.Shape shape)
         {
-            var table = this._Execute<T>(shape, false, true);
-            return table.Results;
+            var qds = this._Execute<T>(shape, false, true);
+            return qds.Results;
         }
 
         private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
@@ -80,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.Query
         IList<int> shapeids)
         {
             var table = this._Execute<T>(page, shapeids, true, true);
-            return table.create_merged_table();
+            return table.CreateMergedTable();
         }
 
         public VA.ShapeSheet.Data.Table<string> GetFormulas(

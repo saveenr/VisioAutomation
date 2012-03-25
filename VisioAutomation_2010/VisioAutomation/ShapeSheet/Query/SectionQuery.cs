@@ -93,23 +93,22 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public VA.ShapeSheet.Data.Table<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
-            var table = this._Execute<T>(page, shapeids, true, true);
-            return table.create_merged_table();
+            var qds = this._Execute<T>(page, shapeids, true, true);
+            return qds.CreateMergedTable();
         }
 
         public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
         {
-            var table = this._Execute<double>(page, shapeids, true, true);
-            return table.Formulas;
+            var qds = this._Execute<double>(page, shapeids, true, true);
+            return qds.Formulas;
         }
 
         public VA.ShapeSheet.Data.Table<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
-            var table = this._Execute<T>(page, shapeids, true, true);
-            return table.Results;
+            var qds = this._Execute<T>(page, shapeids, true, true);
+            return qds.Results;
         }
-
-
+        
         private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Page page, IList<int> shapeids, bool getformulas, bool getresults)
         {
             if (page == null)
@@ -179,7 +178,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
             var table = this._Execute<T>(shape, true, true);
-            return table.create_merged_table();
+            return table.CreateMergedTable();
         }
 
         public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Shape shape)
