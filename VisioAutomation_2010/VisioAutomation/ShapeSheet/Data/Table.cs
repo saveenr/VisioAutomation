@@ -99,7 +99,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
         public int ColumnCount
         {
-            get { return this.ColumnCount; }
+            get { return this.colcount; }
         }
     }
 }

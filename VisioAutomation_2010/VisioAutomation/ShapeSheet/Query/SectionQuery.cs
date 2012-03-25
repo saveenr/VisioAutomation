@@ -122,20 +122,19 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
-            var unitcodes = CreateUnitCodeArray();
 
             // Find out how many rows are in each shape for the given section id
-
-
-            // Check preconditions for getting results
-            if (getresults)
-            {
-                validate_unitcodes(unitcodes, cells.Count);
-            }
-
             var groupcounts = this.get_group_counts(page, shapeids);
             var rowcount = groupcounts.Sum();
             int total_cells = rowcount * this.Columns.Count;
+            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
+
+            // NOTE: Keep in mind that at this point we can find out that none of the shapes have any cells
+            // and the total number of cells is zero and the number of rows is zero. So in that case
+            // just return an empty dataset
+
+            //var empty_qds = new VA.ShapeSheet.Data.QueryDataSet<T>(new string[] {}, new T[] {}, shapeids,
+            //                                                      this.Columns.Count, rowcount, groups); 
 
             // Build the Stream
             var sidsrcs = new List<VA.ShapeSheet.SIDSRC>(total_cells);
@@ -157,9 +156,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             // Retrieve Formulas
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
-            var unitcodes_for_rows = getresults ? get_unitcodes_for_rows(unitcodes, rowcount) : null;
+            var unitcodes_for_rows = getresults && rowcount >0 ? this.CreateUnitCodeArrayForRows(rowcount) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes_for_rows) : null;
-            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
             var table = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return table;
@@ -205,14 +203,9 @@ namespace VisioAutomation.ShapeSheet.Query
             int rowcount = shape.RowCount[Section];
             var groupcounts = new[] { rowcount };
             int total_cells = rowcount * Columns.Count;
-
-
-            var all_unitcodes = getresults ? get_unitcodes_for_rows(CreateUnitCodeArray(), rowcount) : null;
-            if (getresults)
-            {
-                validate_unitcodes(all_unitcodes, total_cells);
-            }
             
+            // NOTE that groupcounts and rowcount could be zero
+
             // prepare the Stream
             var srcs = new List<VA.ShapeSheet.SRC>(total_cells);
             for (short row = 0; row < rowcount; row++)
@@ -225,8 +218,9 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
+            var unitcodes = getresults && rowcount > 0 ? this.CreateUnitCodeArrayForRows(rowcount) : null;
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
-            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, all_unitcodes) : null;
+            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
             var shapeids = new[] { shape.ID };
             var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
             var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);

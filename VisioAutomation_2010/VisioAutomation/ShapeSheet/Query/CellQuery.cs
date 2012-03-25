@@ -51,14 +51,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentNullException("shape");
             }
             
-            int total_cells = Columns.Count;
-            var unitcodes = CreateUnitCodeArray();
-
-            if (getresults)
-            {
-                validate_unitcodes(unitcodes, total_cells);
-            }
-
             var shapeids = new[] { shape.ID };
             var groupcounts = new[] { 1 };
             int rowcount = shapeids.Count();
@@ -67,6 +59,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcs = this.Columns.Items.Select(col => col.SRC).ToList();
 
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
+            var unitcodes = getresults ? this.CreateUnitCodeArrayForRows(1) : null;
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
             var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
@@ -113,19 +106,14 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentNullException("shapeids");
             }
 
-            var srcs = Columns.Items.Select(i => i.SRC).ToList();
-            var unitcodes = CreateUnitCodeArray();
-            
-            if (getresults)
-            {
-                validate_unitcodes(unitcodes, srcs.Count);
-            }
+            var srcs = Columns.Items.Select(i => i.SRC).ToList();         
 
             var groupcounts = new int[shapeids.Count];
             for (int i = 0; i < shapeids.Count; i++)
             {
                 groupcounts[i] = 1;
             }
+
             int rowcount = shapeids.Count;
             int total_cells = rowcount * this.Columns.Count;
 
@@ -140,7 +128,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
             var stream = VA.ShapeSheet.SIDSRC.ToStream(sidsrcs);
-
+            var unitcodes = getresults ? CreateUnitCodeArrayForRows(1) : null;
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes) : null;
             var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);

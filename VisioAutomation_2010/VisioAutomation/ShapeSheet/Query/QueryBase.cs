@@ -30,12 +30,18 @@ namespace VisioAutomation.ShapeSheet.Query
             this._columns.Add(column);
         }
 
-        protected IList<IVisio.VisUnitCodes> CreateUnitCodeArray()
+        protected IList<IVisio.VisUnitCodes> CreateUnitCodeArrayForRows(int rowcount)
         {
-            var a = new IVisio.VisUnitCodes[this.Columns.Count];
-            for (int i = 0; i < this.Columns.Count; i++)
+            if (rowcount<1)
             {
-                a[i] = this.Columns[i].UnitCode;
+                throw new AutomationException("Must have at least 1 row");
+            }
+
+            int n = this.Columns.Count*rowcount;
+            var a = new IVisio.VisUnitCodes[n];
+            for (int i = 0; i < n; i++)
+            {
+                a[i] = this.Columns[i%this.Columns.Count].UnitCode;
             }
 
             return a;
@@ -43,6 +49,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
         protected void validate_unitcodes(IList<IVisio.VisUnitCodes> unitcodes, int total_cells)
         {
+            // ensure that the number of unit codes is equal to total number of cells being retrieved 
+
             if (unitcodes == null)
             {
                 throw new AutomationException("unitcodes must not be null");
