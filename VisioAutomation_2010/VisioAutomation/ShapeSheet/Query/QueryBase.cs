@@ -46,21 +46,5 @@ namespace VisioAutomation.ShapeSheet.Query
 
             return a;
         }
-
-        protected void validate_unitcodes(IList<IVisio.VisUnitCodes> unitcodes, int total_cells)
-        {
-            // ensure that the number of unit codes is equal to total number of cells being retrieved 
-
-            if (unitcodes == null)
-            {
-                throw new AutomationException("unitcodes must not be null");
-            }
-
-            if (unitcodes.Count != total_cells)
-            {
-                string msg = string.Format("Expected {0} unitcodes", total_cells);
-                throw new AutomationException(msg);
-            }
-        }
     }
 }
