@@ -242,7 +242,7 @@
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />
     <Compile Include="Shapesheet\Update\SIDSRCUpdate.cs" />
-    <Compile Include="Shapesheet\Data\QueryDataSet.cs" />
+    <Compile Include="Internal\QueryDataSet.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Connections\DirectedEdge.cs" />
     <Compile Include="Internal\Interop\COMInterop.cs" />

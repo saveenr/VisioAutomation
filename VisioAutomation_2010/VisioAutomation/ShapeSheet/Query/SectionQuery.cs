@@ -109,7 +109,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds.Results;
         }
         
-        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Page page, IList<int> shapeids, bool getformulas, bool getresults)
+        private VA.Internal.QueryDataSet<T> _Execute<T>(IVisio.Page page, IList<int> shapeids, bool getformulas, bool getresults)
         {
             if (page == null)
             {
@@ -158,7 +158,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
             var unitcodes_for_rows = getresults && rowcount >0 ? this.CreateUnitCodeArrayForRows(rowcount) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes_for_rows) : null;
-            var table = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
+            var table = new VA.Internal.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return table;
         }
@@ -191,7 +191,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds.Results;
         }
 
-        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
+        private VA.Internal.QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
         {
             if (shape == null)
             {
@@ -223,7 +223,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
             var shapeids = new[] { shape.ID };
             var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
-            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
+            var qds = new VA.Internal.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return qds;
         }

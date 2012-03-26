@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VA=VisioAutomation;
-using System.Collections;
 
-namespace VisioAutomation.ShapeSheet.Data
+namespace VisioAutomation.Internal
 {
     class QueryDataSet<T>
     {
         readonly int ColumnCount;
         readonly int RowCount;
-        private TableRowGroupList Groups;
-        public Table<string> Formulas { get; private set; }
-        public Table<T> Results { get; private set; }
+        private VA.ShapeSheet.Data.TableRowGroupList Groups;
+        public VA.ShapeSheet.Data.Table<string> Formulas { get; private set; }
+        public VA.ShapeSheet.Data.Table<T> Results { get; private set; }
 
         internal QueryDataSet(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
-                            int rowcount, TableRowGroupList groups)
+                            int rowcount, VA.ShapeSheet.Data.TableRowGroupList groups)
         {
             if (formulas_array == null && results_array == null)
             {
@@ -66,7 +64,7 @@ namespace VisioAutomation.ShapeSheet.Data
             this.Results = results_array != null ? new VA.ShapeSheet.Data.Table<T>(this.RowCount, this.ColumnCount, this.Groups, results_array) : null;
         }
 
-        internal VA.ShapeSheet.Data.Table<CellData<T>> CreateMergedTable()
+        internal VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>> CreateMergedTable()
         {
             int n = this.RowCount*this.ColumnCount;
             var array = new VA.ShapeSheet.CellData<T>[n];
@@ -74,7 +72,7 @@ namespace VisioAutomation.ShapeSheet.Data
             {
                 array[i] = new VA.ShapeSheet.CellData<T>(this.Formulas.RawArray[i], this.Results.RawArray[i]);
             }
-            var table = new VA.ShapeSheet.Data.Table<CellData<T>>(this.RowCount, this.ColumnCount, this.Groups, array);
+            var table = new VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>>(this.RowCount, this.ColumnCount, this.Groups, array);
             return table;
         }
     }
