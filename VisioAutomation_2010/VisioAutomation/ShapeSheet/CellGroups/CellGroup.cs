@@ -2,13 +2,14 @@ using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
+using TABLEROW = VisioAutomation.ShapeSheet.Data.TableRow<VisioAutomation.ShapeSheet.CellData<double>>;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
     {
         // Delegates
-        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> qdr) where TQuery : VA.ShapeSheet.Query.CellQuery;
+        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLEROW tablerow) where TQuery : VA.ShapeSheet.Query.CellQuery;
         
         protected abstract void ApplyFormulas(ApplyFormula func);
 
@@ -34,8 +35,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected static TObj CellsFromRow<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {
             var table = query.GetFormulasAndResults<double>(shape);
-            var row = table[0];
-            return row_to_obj_func(query, row);
+            var tablerow = table[0];
+            return row_to_obj_func(query, tablerow);
         }
     }
 }

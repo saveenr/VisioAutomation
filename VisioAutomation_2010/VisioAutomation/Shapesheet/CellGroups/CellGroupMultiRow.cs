@@ -4,6 +4,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
+using TABLEROW = VisioAutomation.ShapeSheet.Data.TableRow<VisioAutomation.ShapeSheet.CellData<double>>;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -13,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         // for example the character section or the paragraph section
 
         // Delegates
-        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> qds) where TQuery : VA.ShapeSheet.Query.SectionQuery;
+        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLEROW tablerow) where TQuery : VA.ShapeSheet.Query.SectionQuery;
 
         // descendants must implement this method.
         // the implementation should be this: run the "func" on each formula in the cell
@@ -32,15 +33,15 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected static IList<List<TObj>> CellsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            var qds = query.GetFormulasAndResults<double>(page, shapeids);
-            var list_of_lists = new List<List<TObj>>(qds.Groups.Count);
+            var table = query.GetFormulasAndResults<double>(page, shapeids);
+            var list_of_lists = new List<List<TObj>>(table.Groups.Count);
 
-            for (int group_index = 0; group_index < qds.Groups.Count; group_index++)
+            for (int group_index = 0; group_index < table.Groups.Count; group_index++)
             {
-                var group = qds.Groups[group_index];
-                var rows = group.RowIndices.Select(ri => qds[ri]);
+                var group = table.Groups[group_index];
+                var tablerows = group.RowIndices.Select(ri => table[ri]);
                 var cells_list = new List<TObj>(group.Count);
-                var cells = rows.Select(row => row_to_obj_func(query,row));
+                var cells = tablerows.Select(row => row_to_obj_func(query,row));
                 cells_list.AddRange(cells);
                 list_of_lists.Add(cells_list);
             }
