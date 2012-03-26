@@ -14,7 +14,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         // for example the character section or the paragraph section
 
         // Delegates
-        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLEROW tablerow) where TQuery : VA.ShapeSheet.Query.SectionQuery;
+        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLEROW tablerow) where TQuery : VA.ShapeSheet.Query.QueryBase;
 
         // descendants must implement this method.
         // the implementation should be this: run the "func" on each formula in the cell
