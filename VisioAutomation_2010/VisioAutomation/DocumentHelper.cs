@@ -18,9 +18,10 @@ namespace VisioAutomation
                 throw new System.ArgumentNullException("docs");
             }
 
+            var application = docs.Application;
+
             while (docs.Count > 0)
             {
-                var application = docs.Application;
                 var active_document = application.ActiveDocument;
                 active_document.Close(true);
             }
