@@ -4,7 +4,6 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
-using TABLEROW = VisioAutomation.ShapeSheet.Data.TableRow<VisioAutomation.ShapeSheet.CellData<double>>;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -12,9 +11,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         // This class is meant for those cell groups that appear as multiple rows in a section
         // for example the character section or the paragraph section
-
-        // Delegates
-        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLEROW tablerow) where TQuery : VA.ShapeSheet.Query.QueryBase;
 
         // descendants must implement this method.
         // the implementation should be this: run the "func" on each formula in the cell
