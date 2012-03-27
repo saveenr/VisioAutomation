@@ -31,9 +31,16 @@ namespace TestVisioAutomation
             Assert.AreEqual(x, p.Width, delta);
             Assert.AreEqual(y, p.Height, delta);
         }
+
         public static void AssertSnap(double ex, double ey, VA.Drawing.SnappingGrid g1, double ix, double iy, double delta)
         {
             AssertVA.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
+        }
+
+        public static void AreEqual<T>(string formula, T result , VA.ShapeSheet.CellData<T> cd)
+        {
+            Assert.AreEqual(formula, cd.Formula);
+            Assert.AreEqual(result, cd.Result);
         }
 
     }

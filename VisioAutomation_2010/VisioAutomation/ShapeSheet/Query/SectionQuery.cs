@@ -31,7 +31,7 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return _section; }
         }
 
-        public VA.ShapeSheet.SRC GetCellSRCForRow( QueryColumn col, short row)
+        public VA.ShapeSheet.SRC GetSRCForRow( QueryColumn col, short row)
         {
             var src = new VA.ShapeSheet.SRC(this.Section, row, col.SRC.Cell);
             return src;
