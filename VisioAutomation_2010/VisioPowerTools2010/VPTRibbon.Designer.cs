@@ -43,6 +43,7 @@
             this.buttonHelp = this.Factory.CreateRibbonButton();
             this.groupText = this.Factory.CreateRibbonGroup();
             this.buttonToggleTextCase = this.Factory.CreateRibbonButton();
+            this.buttonCopyText = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
@@ -97,6 +98,7 @@
             // groupText
             // 
             this.groupText.Items.Add(this.buttonToggleTextCase);
+            this.groupText.Items.Add(this.buttonCopyText);
             this.groupText.Label = "Text";
             this.groupText.Name = "groupText";
             // 
@@ -105,6 +107,12 @@
             this.buttonToggleTextCase.Label = "Toggle Text Case";
             this.buttonToggleTextCase.Name = "buttonToggleTextCase";
             this.buttonToggleTextCase.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonToggleTextCase_Click);
+            // 
+            // buttonCopyText
+            // 
+            this.buttonCopyText.Label = "Copy text";
+            this.buttonCopyText.Name = "buttonCopyText";
+            this.buttonCopyText.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonCopyText_Click);
             // 
             // VPTRibbon
             // 
@@ -135,6 +143,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCreateStyle;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupText;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonToggleTextCase;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCopyText;
     }
 
     partial class ThisRibbonCollection
