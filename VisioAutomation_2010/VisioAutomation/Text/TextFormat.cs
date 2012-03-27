@@ -120,24 +120,23 @@ namespace VisioAutomation.Text
             const short row = 0;
 
 
-            var cellsrcs = new List<VA.ShapeSheet.SRC>(num_stops*3);
+            var srcs = new List<VA.ShapeSheet.SRC>(num_stops*3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
-
-
+                
                 var src_tabpos = new VA.ShapeSheet.SRC(tab_section, row, (short)(i + 1));
                 var src_tabalign = new VA.ShapeSheet.SRC(tab_section, row, (short)(i + 2));
                 var src_tabother = new VA.ShapeSheet.SRC(tab_section, row, (short)(i + 3));
 
-                cellsrcs.Add(src_tabpos);
-                cellsrcs.Add(src_tabalign );
-                cellsrcs.Add(src_tabother);
+                srcs.Add(src_tabpos);
+                srcs.Add(src_tabalign );
+                srcs.Add(src_tabother);
             }
 
-            var stream = VA.ShapeSheet.SRC.ToStream(cellsrcs);
+            var stream = VA.ShapeSheet.SRC.ToStream(srcs);
             var formulas = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream);
-            var unitcodes = cellsrcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
+            var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
             var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<double>(shape, stream, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
