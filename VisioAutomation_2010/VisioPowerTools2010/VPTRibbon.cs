@@ -13,9 +13,10 @@ namespace VisioPowerTools2010
 {
     public partial class VPTRibbon
     {
+        private VisioAutomation.Scripting.Session scriptingsession;
         private void VPTRibbon_Load(object sender, RibbonUIEventArgs e)
         {
-
+            this.scriptingsession = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
         }
 
         private void buttonHelp_Click_1(object sender, RibbonControlEventArgs e)
@@ -179,6 +180,11 @@ namespace VisioPowerTools2010
         private void buttonImportOnlineCOlors_Click(object sender, RibbonControlEventArgs e)
         {
 
+        }
+
+        private void buttonToggleTextCase_Click(object sender, RibbonControlEventArgs e)
+        {
+            this.scriptingsession.Text.ToogleCase();
         }
     }
 }
