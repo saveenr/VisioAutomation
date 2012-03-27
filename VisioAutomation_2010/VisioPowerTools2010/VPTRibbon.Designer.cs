@@ -41,9 +41,13 @@
             this.buttonCreateStencilCatalog = this.Factory.CreateRibbonButton();
             this.buttonCreateStyle = this.Factory.CreateRibbonButton();
             this.buttonHelp = this.Factory.CreateRibbonButton();
+            this.groupText = this.Factory.CreateRibbonGroup();
+            this.buttonToggleTextCase = this.Factory.CreateRibbonButton();
+            this.buttonCopyText = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
+            this.groupText.SuspendLayout();
             // 
             // tab1
             // 
@@ -54,6 +58,7 @@
             // tab2
             // 
             this.tab2.Groups.Add(this.group1);
+            this.tab2.Groups.Add(this.groupText);
             this.tab2.Label = "Power Tools";
             this.tab2.Name = "tab2";
             // 
@@ -90,6 +95,25 @@
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonHelp_Click_1);
             // 
+            // groupText
+            // 
+            this.groupText.Items.Add(this.buttonToggleTextCase);
+            this.groupText.Items.Add(this.buttonCopyText);
+            this.groupText.Label = "Text";
+            this.groupText.Name = "groupText";
+            // 
+            // buttonToggleTextCase
+            // 
+            this.buttonToggleTextCase.Label = "Toggle Text Case";
+            this.buttonToggleTextCase.Name = "buttonToggleTextCase";
+            this.buttonToggleTextCase.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonToggleTextCase_Click);
+            // 
+            // buttonCopyText
+            // 
+            this.buttonCopyText.Label = "Copy text";
+            this.buttonCopyText.Name = "buttonCopyText";
+            this.buttonCopyText.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonCopyText_Click);
+            // 
             // VPTRibbon
             // 
             this.Name = "VPTRibbon";
@@ -103,6 +127,8 @@
             this.tab2.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
+            this.groupText.ResumeLayout(false);
+            this.groupText.PerformLayout();
 
         }
 
@@ -115,6 +141,9 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonImportColors;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCreateStencilCatalog;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCreateStyle;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupText;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonToggleTextCase;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCopyText;
     }
 
     partial class ThisRibbonCollection

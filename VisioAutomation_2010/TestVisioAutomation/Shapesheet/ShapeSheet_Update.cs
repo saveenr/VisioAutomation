@@ -82,19 +82,12 @@ namespace TestVisioAutomation
 
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
-            Assert.AreEqual("0.5 in", r[0, col_pinx].Formula);
-            Assert.AreEqual("0.5 in", r[0, col_piny].Formula);
-            Assert.AreEqual("1.5 in", r[1, col_pinx].Formula);
-            Assert.AreEqual("1.5 in", r[1, col_piny].Formula);
-            Assert.AreEqual("2.5 in", r[2, col_pinx].Formula);
-            Assert.AreEqual("2.5 in", r[2, col_piny].Formula);
-
-            Assert.AreEqual(0.5, r[0, col_pinx].Result);
-            Assert.AreEqual(0.5, r[0, col_piny].Result);
-            Assert.AreEqual(1.5, r[1, col_pinx].Result);
-            Assert.AreEqual(1.5, r[1, col_piny].Result);
-            Assert.AreEqual(2.5, r[2, col_pinx].Result);
-            Assert.AreEqual(2.5, r[2, col_piny].Result);
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_pinx]);
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_piny]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_pinx]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_piny]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_pinx]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_piny]);
 
             page1.Delete(0);
         }

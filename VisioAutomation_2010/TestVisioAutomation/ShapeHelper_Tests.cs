@@ -17,12 +17,12 @@ namespace TestVisioAutomation
             var shape = page.DrawRectangle(1, 1, 3, 3);
             var xform = VA.Layout.LayoutHelper.GetXForm(shape);
 
-            Assert.AreEqual(2, xform.PinX.Result);
-            Assert.AreEqual(2, xform.PinY.Result);
-            Assert.AreEqual(1, xform.LocPinX.Result);
-            Assert.AreEqual(1, xform.LocPinY.Result);
-            Assert.AreEqual(2, xform.Width.Result);
-            Assert.AreEqual(2, xform.Height.Result);
+            AssertVA.AreEqual("2 in", 2, xform.PinX);
+            AssertVA.AreEqual("2 in", 2, xform.PinY);
+            AssertVA.AreEqual("Width*0.5", 1, xform.LocPinX);
+            AssertVA.AreEqual("Height*0.5", 1, xform.LocPinY);
+            AssertVA.AreEqual("2 in", 2, xform.Width);
+            AssertVA.AreEqual("2 in", 2, xform.Height);
 
             page.Delete(0);
         }

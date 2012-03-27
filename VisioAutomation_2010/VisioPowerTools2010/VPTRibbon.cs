@@ -13,9 +13,32 @@ namespace VisioPowerTools2010
 {
     public partial class VPTRibbon
     {
+        private VisioAutomation.Scripting.Session scriptingsession;
+ 
         private void VPTRibbon_Load(object sender, RibbonUIEventArgs e)
         {
+            try
+            {
+                this.scriptingsession = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
+            }
+            catch (Exception)
+            {
+                string msg = "Failed to load Visio Power Tools";
+                MessageBox.Show(msg);
+            }
+        }
 
+        private void execute_cmd(System.Action func)
+        {
+            try
+            {
+                func();
+            }
+            catch (Exception)
+            {
+                string msg = "Failed to execute command";
+                MessageBox.Show(msg);
+            }
         }
 
         private void buttonHelp_Click_1(object sender, RibbonControlEventArgs e)
@@ -26,6 +49,101 @@ namespace VisioPowerTools2010
 
         private void buttonImportColors_Click(object sender, RibbonControlEventArgs e)
         {
+            this.execute_cmd( cmd_import_colors );
+        }
+
+        private void buttonCreateStencilCatalog_Click(object sender, RibbonControlEventArgs e)
+        {
+            execute_cmd(cmd_create_stencil_catalog);
+        }
+
+        private void buttonCreateStyle_Click(object sender, RibbonControlEventArgs e)
+        {
+            execute_cmd(cmd_create_style);
+        }
+
+        private void buttonImportOnlineCOlors_Click(object sender, RibbonControlEventArgs e)
+        {
+            execute_cmd(cmd_import_colors);
+        }
+
+        private void buttonToggleTextCase_Click(object sender, RibbonControlEventArgs e)
+        {
+            execute_cmd(cmd_toggle_text_case);
+        }
+
+        private void buttonCopyText_Click(object sender, RibbonControlEventArgs e)
+        {
+            execute_cmd(cmd_copy_text);
+        }
+
+        // -----------------------------------------------------------------------------------------------'
+        private void cmd_create_style()
+        {
+            var app = Globals.ThisAddIn.Application;
+            var doc = app.ActiveDocument;
+
+            if (doc == null)
+            {
+                MessageBox.Show("Must have a document open");
+                return;
+            }
+
+            if (doc.Type != VisDocumentTypes.visTypeDrawing)
+            {
+                MessageBox.Show("Must have a drawing open");
+                return;
+            }
+
+            var styles = doc.Styles;
+
+            var form = new FormCreateStyle();
+            var result = form.ShowDialog();
+
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            string name = form.StyleName.Trim();
+
+            if (name.Length < 1)
+            {
+                MessageBox.Show("Must have non-empty name");
+                return;
+            }
+
+            var names = styles.AsEnumerable().Select(s => s.NameU).ToList();
+            var names_lc = names.Select(s => s.ToLower()).ToList();
+
+            if (names_lc.Contains(name.ToLower()))
+            {
+                string msg = string.Format("Style with name \"{0}\" already exists", name);
+                MessageBox.Show(msg);
+                return;
+            }
+
+            short fIncludesText = VA.Convert.BoolToShort(form.IncludesText);
+            short fIncludesLine = VA.Convert.BoolToShort(form.IncludesLine);
+            short fIncludesFill = VA.Convert.BoolToShort(form.IncludesFill);
+            var style = styles.Add(name, "", fIncludesText, fIncludesLine, fIncludesFill);
+
+        }
+
+        private void cmd_copy_text()
+        {
+            var shape_text = this.scriptingsession.Text.GetText();
+            var text = string.Join("\r\n", shape_text) + "\r\n";
+            Clipboard.SetText(text);
+        }
+        
+        private void cmd_toggle_text_case()
+        {
+            this.scriptingsession.Text.ToogleCase();
+        }
+
+        private void cmd_import_colors()
+        {
             var form = new FormImportColors();
             var result = form.ShowDialog();
             if (result == DialogResult.OK)
@@ -33,6 +151,13 @@ namespace VisioPowerTools2010
                 var colors = form.Colors;
                 draw_colors(colors);
             }
+
+        }
+
+        private void cmd_create_stencil_catalog()
+        {
+            var form = new FormGetMasterImages();
+            form.ShowDialog();
         }
 
         private static void draw_colors(List<Color> colors)
@@ -65,7 +190,7 @@ namespace VisioPowerTools2010
                 var shape3 = dom.DrawRectangle(col3_x, y, col3_x + cellwidth, y + cellwidth);
                 var fill = new VisioAutomation.Drawing.ColorRGB(color.R, color.G, color.B);
                 string color_formula = fill.ToFormula();
-                double trans = (color.A/255.0);
+                double trans = (color.A / 255.0);
                 string transparency_formula = trans.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
 
@@ -119,66 +244,5 @@ namespace VisioPowerTools2010
             window.DeselectAll();
         }
 
-        private void buttonCreateStencilCatalog_Click(object sender, RibbonControlEventArgs e)
-        {
-            var form = new FormGetMasterImages();
-            form.ShowDialog();
-        }
-
-        private void buttonCreateStyle_Click(object sender, RibbonControlEventArgs e)
-        {
-            var app = Globals.ThisAddIn.Application;
-            var doc = app.ActiveDocument;
-
-            if (doc == null)
-            {
-                MessageBox.Show("Must have a document open");
-                return;
-            }
-
-            if (doc.Type != VisDocumentTypes.visTypeDrawing)
-            {
-                MessageBox.Show("Must have a drawing open");
-                return;
-            }
-
-            var styles = doc.Styles;
-
-            var form = new FormCreateStyle();
-            var result = form.ShowDialog();
-
-            if (result != DialogResult.OK)
-            {
-                return;
-            }
-
-            string name = form.StyleName.Trim();
-
-            if (name.Length < 1)
-            {
-                MessageBox.Show("Must have non-empty name");
-                return;
-            }
-
-            var names = styles.AsEnumerable().Select(s => s.NameU).ToList();
-            var names_lc = names.Select(s=>s.ToLower()).ToList();
-
-            if (names_lc.Contains(name.ToLower()))
-            {
-                string msg = string.Format("Style with name \"{0}\" already exists", name);
-                MessageBox.Show(msg);                    
-                return;
-            }
-
-            short fIncludesText = VA.Convert.BoolToShort(form.IncludesText);
-            short fIncludesLine = VA.Convert.BoolToShort(form.IncludesLine);
-            short fIncludesFill = VA.Convert.BoolToShort(form.IncludesFill);
-            var style = styles.Add(name, "", fIncludesText, fIncludesLine, fIncludesFill);
-        }
-
-        private void buttonImportOnlineCOlors_Click(object sender, RibbonControlEventArgs e)
-        {
-
-        }
     }
 }

@@ -292,20 +292,12 @@ namespace TestVisioAutomation
             var gf3 = GetRowsInGroup(table, 3);
 
 
-            Assert.AreEqual("\"1\"", gf0[0][0].Formula);
-            Assert.AreEqual("\"2\"", gf1[0][0].Formula);
-            Assert.AreEqual("\"3\"", gf1[1][0].Formula);
-            Assert.AreEqual("\"4\"", gf3[0][0].Formula);
-            Assert.AreEqual("\"5\"", gf3[1][0].Formula);
-            Assert.AreEqual("\"6\"", gf3[2][0].Formula);
-
-
-            Assert.AreEqual(1.0, gf0[0][0].Result);
-            Assert.AreEqual(2.0, gf1[0][0].Result);
-            Assert.AreEqual(3.0, gf1[1][0].Result);
-            Assert.AreEqual(4.0, gf3[0][0].Result);
-            Assert.AreEqual(5.0, gf3[1][0].Result);
-            Assert.AreEqual(6.0, gf3[2][0].Result);
+            AssertVA.AreEqual("\"1\"", 1.0, gf0[0][0]);
+            AssertVA.AreEqual("\"2\"", 2.0, gf1[0][0]);
+            AssertVA.AreEqual("\"3\"", 3.0, gf1[1][0]);
+            AssertVA.AreEqual("\"4\"", 4.0, gf3[0][0]);
+            AssertVA.AreEqual("\"5\"", 5.0, gf3[1][0]);
+            AssertVA.AreEqual("\"6\"", 6.0, gf3[2][0]);
 
             page1.Delete(0);
         }

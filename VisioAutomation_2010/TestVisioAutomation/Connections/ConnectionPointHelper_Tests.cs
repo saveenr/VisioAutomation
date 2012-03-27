@@ -38,28 +38,18 @@ namespace TestVisioAutomation
             var controlpoints = VA.Connections.ConnectionPointHelper.GetConnectionPoints(s1);
             Assert.AreEqual(2, controlpoints.Count);
             var cp_0 = controlpoints[0];
-            Assert.AreEqual("0 in", cp_0.DirX.Formula);
-            Assert.AreEqual(0, cp_0.DirX.Result);
-            Assert.AreEqual("0 in", cp_0.DirY.Formula);
-            Assert.AreEqual(0, cp_0.DirY.Result);
-            Assert.AreEqual("0", cp_0.Type.Formula);
-            Assert.AreEqual(0, cp_0.Type.Result);
-            Assert.AreEqual("Width*0.25", cp_0.X.Formula);
-            Assert.AreEqual(1, cp_0.X.Result);
-            Assert.AreEqual("Height*0", cp_0.Y.Formula);
-            Assert.AreEqual(0, cp_0.Y.Result);
+            AssertVA.AreEqual("0 in", 0, cp_0.DirX);
+            AssertVA.AreEqual("0 in", 0, cp_0.DirY);
+            AssertVA.AreEqual("0", 0, cp_0.Type);
+            AssertVA.AreEqual("Width*0.25", 1, cp_0.X);
+            AssertVA.AreEqual("Height*0", 0, cp_0.Y);
 
             var cp_1 = controlpoints[1];
-            Assert.AreEqual("0 in", cp_1.DirX.Formula);
-            Assert.AreEqual(0, cp_1.DirX.Result);
-            Assert.AreEqual("0 in", cp_1.DirY.Formula);
-            Assert.AreEqual(0, cp_1.DirY.Result);
-            Assert.AreEqual("0", cp_1.Type.Formula);
-            Assert.AreEqual(0, cp_1.Type.Result);
-            Assert.AreEqual("Width*0.75", cp_1.X.Formula);
-            Assert.AreEqual(3, cp_1.X.Result);
-            Assert.AreEqual("Height*0", cp_1.Y.Formula);
-            Assert.AreEqual(0, cp_1.Y.Result);
+            AssertVA.AreEqual("0 in", 0, cp_1.DirX);
+            AssertVA.AreEqual("0 in", 0, cp_1.DirY);
+            AssertVA.AreEqual("0", 0, cp_1.Type);
+            AssertVA.AreEqual("Width*0.75", 3, cp_1.X);
+            AssertVA.AreEqual("Height*0", 0, cp_1.Y);
 
             ConnectionPointHelper.DeleteConnectionPoint(s1, 1);
             Assert.AreEqual(1, ConnectionPointHelper.GetConnectionPointCount(s1));
