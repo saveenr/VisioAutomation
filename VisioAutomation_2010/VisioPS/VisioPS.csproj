@@ -88,7 +88,6 @@
     <Compile Include="Commands\Draw_NURBS.cs" />
     <Compile Include="Commands\New_GridLayout.cs" />
     <Compile Include="Commands\Reset_PageOrigin.cs" />
-    <Compile Include="Commands\Get_SectionResult.cs" />
     <Compile Include="Commands\Get_SRCFormula.cs" />
     <Compile Include="Commands\Update_ShapeSheet.cs" />
     <Compile Include="Commands\New_ShapeSheetUpdate.cs" />
@@ -97,7 +96,6 @@
     <Compile Include="Commands\Draw_Grid.cs" />
     <Compile Include="Commands\New_Master.cs" />
     <Compile Include="Commands\New_Stencil.cs" />
-    <Compile Include="Commands\Get_SectionFormula.cs" />
     <Compile Include="Commands\Remove_UserDefinedCell.cs" />
     <Compile Include="objects\VisioPSSessionOptions.cs" />
     <Compile Include="enums\ResultType.cs" />
