@@ -40,5 +40,10 @@ namespace VisioAutomation.ShapeSheet
         {
             return new CellData<TResult>(formula, default(TResult));
         }
+
+        public static implicit operator CellData<TResult>(bool formula)
+        {
+            return new CellData<TResult>(formula, default(TResult));
+        }
     }
 }
