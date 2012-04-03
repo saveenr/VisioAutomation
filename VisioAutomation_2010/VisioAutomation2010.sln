@@ -34,8 +34,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Layout.MSAG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.UI", "VisioAutomation.UI\VisioAutomation.UI.csproj", "{FB28507D-C378-42B4-9050-2FBED2CD68FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Metadata", "VisioAutomation.Metadata\VisioAutomation.Metadata.csproj", "{6F0813C8-DBA0-4F93-BF96-55012DA737A3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoGraphicsPy", "..\Samples\ironvisio\InfoGraphicsPy\InfoGraphicsPy.csproj", "{6B44004C-019C-4169-BFC1-A610D1453DEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoInfographicsPy", "..\Samples\ironvisio\DemoInfographicsPy\DemoInfographicsPy.csproj", "{DCFB1784-57F1-492B-9F84-4E0983996705}"
@@ -159,18 +157,6 @@ Global
 		{FB28507D-C378-42B4-9050-2FBED2CD68FE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FB28507D-C378-42B4-9050-2FBED2CD68FE}.Release|Win32.ActiveCfg = Release|Any CPU
 		{FB28507D-C378-42B4-9050-2FBED2CD68FE}.Release|x86.ActiveCfg = Release|Any CPU
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Debug|Win32.ActiveCfg = Debug|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Debug|x86.ActiveCfg = Debug|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Debug|x86.Build.0 = Debug|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Release|Any CPU.ActiveCfg = Release|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Release|Mixed Platforms.Build.0 = Release|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Release|Win32.ActiveCfg = Release|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Release|x86.ActiveCfg = Release|x86
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3}.Release|x86.Build.0 = Release|x86
 		{6B44004C-019C-4169-BFC1-A610D1453DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6B44004C-019C-4169-BFC1-A610D1453DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B44004C-019C-4169-BFC1-A610D1453DEA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -261,7 +247,6 @@ Global
 		{2BA6E51C-D975-49E3-B6B9-DF3D2D951057} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
 		{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
 		{FB28507D-C378-42B4-9050-2FBED2CD68FE} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
-		{6F0813C8-DBA0-4F93-BF96-55012DA737A3} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
 	EndGlobalSection
 	GlobalSection(TextTemplating) = postSolution
 		TextTemplating = 1

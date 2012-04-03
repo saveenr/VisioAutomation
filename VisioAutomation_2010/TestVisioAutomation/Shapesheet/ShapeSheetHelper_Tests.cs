@@ -12,8 +12,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class ShapeSheetHelperTests_Query : VisioAutomationTest
     {
-        private static VA.Metadata.MetadataDB mdx = VA.Metadata.MetadataDB.Load();
-
         [TestMethod]
         public void CellNameParsing()
         {
