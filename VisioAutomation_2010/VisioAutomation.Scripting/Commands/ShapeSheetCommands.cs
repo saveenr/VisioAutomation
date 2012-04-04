@@ -111,43 +111,6 @@ namespace VisioAutomation.Scripting.Commands
             var formulas = query.GetFormulas(page, shapeids);
             return formulas;
         }
-
-        /// <summary>
-        /// Optimizes setting formulas for cells identified by names
-        /// </summary>
-        /// <param name="cellname"></param>
-        /// <param name="formula"></param>
-        /// <param name="flags"></param>
-        public void SetFormula(string cellname, string formula, IVisio.VisGetSetArgs flags)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            VA.ShapeSheet.SRC? src = VA.ShapeSheet.ShapeSheetHelper.TryGetSRCFromName(cellname);
-            if (src.HasValue)
-            {
-                // if cellrcs is one we have optimized for, we'll have its SRC vaue
-                var srcs = new [] {src.Value};
-                var formulas = new [] {formula };
-
-                // simply call SetFormulas using the SRC value and everything will work fast
-                SetFormula(srcs, formulas, flags);
-            }
-            else
-            {
-                // In this case, we didn't find a SRC value for the name
-                // So we resort to setting the formulas, one-by-one
-                // This is very slow, but it should not occur in practice very often
-                var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
-                foreach (var shape in shapes)
-                {
-                    var cell = shape.Cells[cellname];
-                    cell.FormulaU = formula;
-                }
-            }
-        }
         
         public void SetFormula(IList<VA.ShapeSheet.SRC> srcs, 
             IList<string> formulas,
@@ -248,36 +211,6 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
             }
-        }
-
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<string> cellnames)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                throw new AutomationException("Needs at least 1 selected shape");
-            }
-
-            var srcs = this._CellNamesToSRCs(cellnames);
-            var formulas = this.QueryFormulas(srcs);
-            return formulas;
-        }
-
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<string> cellnames)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                throw new AutomationException("Needs at least 1 selected shape");
-            }
-
-            var srcs = this._CellNamesToSRCs(cellnames);
-            var results = this.QueryResults<T>(srcs);
-            return results;
-        }
-
-        private IList<VA.ShapeSheet.SRC> _CellNamesToSRCs(IList<string> cellnames)
-        {
-            var srcs = cellnames.Select(VA.ShapeSheet.ShapeSheetHelper.GetSRCFromName).ToList();
-            return srcs;
         }
     }
 }

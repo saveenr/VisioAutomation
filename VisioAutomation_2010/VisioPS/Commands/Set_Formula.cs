@@ -7,7 +7,7 @@ namespace VisioPS.Commands
     public class Set_Formula : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
-        public string Cell { get; set; }
+        public VisioAutomation.ShapeSheet.SRC Cell { get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = true)]
         public string Formula { get; set; }
@@ -31,7 +31,7 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.ShapeSheet.SetFormula(Cell, Formula, (IVisio.VisGetSetArgs)flags);
+            scriptingsession.ShapeSheet.SetFormula(new [] {Cell}, new [] {Formula}, (IVisio.VisGetSetArgs)flags);
         }
     }
 }

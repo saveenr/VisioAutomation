@@ -100,7 +100,6 @@
     <Compile Include="objects\VisioPSSessionOptions.cs" />
     <Compile Include="enums\ResultType.cs" />
     <Compile Include="Commands\Get_SRCResult.cs" />
-    <Compile Include="Commands\Get_SRC.cs" />
     <Compile Include="Commands\Close_Drawing.cs" />
     <Compile Include="Commands\Drop_Master.cs" />
     <Compile Include="Commands\Duplicate_Shape.cs" />

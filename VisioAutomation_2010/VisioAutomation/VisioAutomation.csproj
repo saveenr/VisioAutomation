@@ -231,7 +231,6 @@
     <Compile Include="Shapesheet\Update\UpdateRecord.cs" />
     <Compile Include="Shapesheet\FormulaLiteral.cs" />
     <Compile Include="Internal\TreeTraversal.cs" />
-    <Compile Include="Shapesheet\ShapeSheetHelper_cellsrc.cs" />
     <Compile Include="Internal\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
