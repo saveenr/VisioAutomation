@@ -9,7 +9,7 @@ namespace VisioAutomation.Layout
 {
     public static class LayoutHelper
     {
-        internal static VA.Drawing.Rectangle GetRectangle(XFormCells xFormCells)
+        private static VA.Drawing.Rectangle GetRectangle(XFormCells xFormCells)
         {
             var pin = new VA.Drawing.Point(xFormCells.PinX.Result, xFormCells.PinY.Result);
             var locpin = new VA.Drawing.Point(xFormCells.LocPinX.Result, xFormCells.LocPinY.Result);
@@ -25,27 +25,31 @@ namespace VisioAutomation.Layout
             }
             else if (pos == XFormPosition.PinX)
             {
-               return xform.PinX.Result;
-            }
-            else if (pos == XFormPosition.Left)
-            {
-                return GetRectangle(xform).Left;
-            }
-            else if (pos == XFormPosition.Right)
-            {
-                return GetRectangle(xform).Right;
-            }
-            else if (pos == XFormPosition.Top)
-            {
-                return GetRectangle(xform).Top;
-            }
-            else if (pos == XFormPosition.Right)
-            {
-                return GetRectangle(xform).Bottom;
+                return xform.PinX.Result;
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException("pos");
+                var r = GetRectangle(xform);
+                if (pos == XFormPosition.Left)
+                {
+                    return r.Left;
+                }
+                else if (pos == XFormPosition.Right)
+                {
+                    return r.Right;
+                }
+                else if (pos == XFormPosition.Top)
+                {
+                    return r.Top;
+                }
+                else if (pos == XFormPosition.Right)
+                {
+                    return r.Bottom;
+                }
+                else
+                {
+                    throw new System.ArgumentOutOfRangeException("pos");
+                }
             }
         }
 
