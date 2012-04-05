@@ -2,7 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.ShapeLayout
+namespace VisioAutomation.PageLayout
 {
     public abstract class Layout
     {
@@ -34,15 +34,15 @@ namespace VisioAutomation.ShapeLayout
 
         private static IVisio.VisCellVals ConnectorAppearanceToLineRouteExt(ConnectorAppearance ca)
         {
-            if (ca == VA.ShapeLayout.ConnectorAppearance.Default)
+            if (ca == VA.PageLayout.ConnectorAppearance.Default)
             {
                 return IVisio.VisCellVals.visLORouteExtDefault;
             }
-            else if (ca == VA.ShapeLayout.ConnectorAppearance.Straight)
+            else if (ca == VA.PageLayout.ConnectorAppearance.Straight)
             {
                 return IVisio.VisCellVals.visLORouteExtStraight;
             }
-            else if (ca == VA.ShapeLayout.ConnectorAppearance.Curved)
+            else if (ca == VA.PageLayout.ConnectorAppearance.Curved)
             {
                 return IVisio.VisCellVals.visLORouteExtNURBS;
             }
@@ -55,19 +55,19 @@ namespace VisioAutomation.ShapeLayout
         protected virtual IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
         {
             var cs = this.ConnectorStyle;
-            if (cs == VA.ShapeLayout.ConnectorStyle.RightAngle)
+            if (cs == VA.PageLayout.ConnectorStyle.RightAngle)
             {
                 return IVisio.VisCellVals.visLORouteRightAngle;
             }
-            else if (cs == VA.ShapeLayout.ConnectorStyle.Straight)
+            else if (cs == VA.PageLayout.ConnectorStyle.Straight)
             {
                 return IVisio.VisCellVals.visLORouteStraight;
             }
-            else if (cs == VA.ShapeLayout.ConnectorStyle.CenterToCenter)
+            else if (cs == VA.PageLayout.ConnectorStyle.CenterToCenter)
             {
                 return IVisio.VisCellVals.visLORouteCenterToCenter;
             }
-            else if (cs == VA.ShapeLayout.ConnectorStyle.Network)
+            else if (cs == VA.PageLayout.ConnectorStyle.Network)
             {
                 return IVisio.VisCellVals.visLORouteNetwork;
             }
@@ -79,7 +79,7 @@ namespace VisioAutomation.ShapeLayout
 
         protected IVisio.VisCellVals ConnectorsStyleAndDirectionToRouteStyle(ConnectorStyle cs, Direction dir)
         {
-            if (cs == VA.ShapeLayout.ConnectorStyle.Flowchart)
+            if (cs == VA.PageLayout.ConnectorStyle.Flowchart)
             {
                 if (dir == Direction.BottomToTop)
                 {
@@ -98,7 +98,7 @@ namespace VisioAutomation.ShapeLayout
                     return IVisio.VisCellVals.visLORouteFlowchartEW;
                 }
             }
-            else if (cs == VA.ShapeLayout.ConnectorStyle.OrganizationChart)
+            else if (cs == VA.PageLayout.ConnectorStyle.OrganizationChart)
             {
                 if (dir == Direction.BottomToTop)
                 {
@@ -117,7 +117,7 @@ namespace VisioAutomation.ShapeLayout
                     return IVisio.VisCellVals.visLORouteOrgChartEW;
                 }
             }
-            else if (cs == VA.ShapeLayout.ConnectorStyle.Simple)
+            else if (cs == VA.PageLayout.ConnectorStyle.Simple)
             {
                 if (dir == Direction.BottomToTop)
                 {

@@ -1,7 +1,7 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.ShapeLayout
+namespace VisioAutomation.PageLayout
 {
     public class HierarchyLayout : Layout
     {

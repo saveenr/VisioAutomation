@@ -132,12 +132,12 @@ namespace VisioAutomationSamples
 
             directed_graph_drawing.Render(page1);
 
-            var layout_config = new VA.ShapeLayout.HierarchyLayout();
-            layout_config.Direction = VA.ShapeLayout.Direction.BottomToTop;
-            layout_config.HorizontalAlignment = VA.ShapeLayout.HorizontalAlignment.Center;
+            var layout_config = new VA.PageLayout.HierarchyLayout();
+            layout_config.Direction = VA.PageLayout.Direction.BottomToTop;
+            layout_config.HorizontalAlignment = VA.PageLayout.HorizontalAlignment.Center;
             layout_config.ResizePageToFit = true;
             layout_config.AvenueSize = new VA.Drawing.Size(1, 1);
-            layout_config.ConnectorAppearance = VA.ShapeLayout.ConnectorAppearance.Curved;
+            layout_config.ConnectorAppearance = VA.PageLayout.ConnectorAppearance.Curved;
             layout_config.Apply(page1);
         }
     }

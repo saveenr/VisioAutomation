@@ -1,4 +1,4 @@
-namespace VisioAutomation.ShapeLayout
+namespace VisioAutomation.PageLayout
 {
     public enum CompactTreeDirection
     {
