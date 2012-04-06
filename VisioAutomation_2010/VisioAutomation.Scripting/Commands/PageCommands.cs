@@ -37,12 +37,6 @@ namespace VisioAutomation.Scripting.Commands
             return active_page.GetSize();
         }
 
-        [Obsolete]
-        public string GetName()
-        {
-            return Get().NameU;
-        }
-
         public void SetName(string name)
         {
             if (name == null)
