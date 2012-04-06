@@ -402,55 +402,7 @@ namespace VisioAutomation.Scripting.Commands
             this.updatelock(lockcells);
         }
 
-        public void SetWidth(double w)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-            foreach (int shapeid in shapeids)
-            {
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, w);
-            }
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                var active_page = application.ActivePage;
-                update.Execute(active_page);
-            }
-        }
-
-        public void SetHeight(double h)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-            foreach (int shapeid in shapeids)
-            {
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h);
-            }
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                var active_page = application.ActivePage;
-                update.Execute(active_page);
-            }
-        }
-
-        public void SetSize(double w, double h)
+        public void SetSize(double? w, double? h)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -462,8 +414,14 @@ namespace VisioAutomation.Scripting.Commands
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             foreach (int shapeid in shapeids)
             {
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, w);
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h);
+                if (w.HasValue && w.Value>=0)
+                {
+                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, w.Value);
+                }
+                if (h.HasValue && h.Value >= 0)
+                {
+                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h.Value);                    
+                }
             }
 
             var application = this.Session.VisioApplication;
