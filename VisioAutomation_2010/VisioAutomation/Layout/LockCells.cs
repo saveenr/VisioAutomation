@@ -140,5 +140,28 @@ namespace VisioAutomation.Layout
             }
         }
 
+        internal void SetAll(VA.Layout.LockCells lc, string formula)
+        {
+            lc.LockAspect = formula;
+            lc.LockBegin = formula;
+            lc.LockCalcWH = formula;
+            lc.LockCrop = formula;
+            lc.LockCustProp = formula;
+            lc.LockDelete = formula;
+            lc.LockEnd = formula;
+            lc.LockFormat = formula;
+            lc.LockFromGroupFormat = formula;
+            lc.LockGroup = formula;
+            lc.LockHeight = formula;
+            lc.LockMoveX = formula;
+            lc.LockMoveY = formula;
+            lc.LockRotate = formula;
+            lc.LockSelect = formula;
+            lc.LockTextEdit = formula;
+            lc.LockThemeColors = formula;
+            lc.LockThemeEffects = formula;
+            lc.LockVtxEdit = formula;
+            lc.LockWidth = formula;
+        }
     }
 }
