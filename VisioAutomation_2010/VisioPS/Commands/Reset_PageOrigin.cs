@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Reset, "PageOrigin")]
-    public class Reset_PageLayout : VisioPS.VisioPSCmdlet
+    public class Reset_PageOrigin : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {
