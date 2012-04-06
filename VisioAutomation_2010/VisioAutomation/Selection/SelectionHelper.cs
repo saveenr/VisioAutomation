@@ -58,5 +58,26 @@ namespace VisioAutomation.Selection
 
             throw new System.ArgumentOutOfRangeException("enumerationtype");
         }
+
+        public static void SendShapes(IVisio.Selection selection, VA.Selection.ShapeSendDirection dir)
+        {
+
+            if (dir == VA.Selection.ShapeSendDirection.ToBack)
+            {
+                selection.SendToBack();
+            }
+            else if (dir == VA.Selection.ShapeSendDirection.Backward)
+            {
+                selection.SendBackward();
+            }
+            else if (dir == VA.Selection.ShapeSendDirection.Forward)
+            {
+                selection.BringForward();
+            }
+            else if (dir == VA.Selection.ShapeSendDirection.ToFront)
+            {
+                selection.BringToFront();
+            }
+        }
     }
 }

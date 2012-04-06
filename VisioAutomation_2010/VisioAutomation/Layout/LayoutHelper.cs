@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -331,27 +330,6 @@ namespace VisioAutomation.Layout
         public static IList<VA.Layout.LockCells> GetLock(IVisio.Page page, IList<int> shapeids)
         {
             return LockCells.GetCells(page, shapeids);
-        }
-
-        public static void SendShapes( IVisio.Selection selection, VA.Layout.ShapeSendDirection dir)
-        {
-
-            if (dir == VA.Layout.ShapeSendDirection.ToBack)
-            {
-                selection.SendToBack();
-            }
-            else if (dir == VA.Layout.ShapeSendDirection.Backward)
-            {
-                selection.SendBackward();
-            }
-            else if (dir == VA.Layout.ShapeSendDirection.Forward)
-            {
-                selection.BringForward();
-            }
-            else if (dir == VA.Layout.ShapeSendDirection.ToFront)
-            {
-                selection.BringToFront();
-            }
         }
     }
 }

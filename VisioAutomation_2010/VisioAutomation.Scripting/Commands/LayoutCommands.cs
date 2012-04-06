@@ -206,7 +206,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Send( VA.Layout.ShapeSendDirection dir)
+        public void Send(VA.Selection.ShapeSendDirection dir)
         {
 
             if (!this.Session.HasSelectedShapes())
@@ -215,7 +215,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = Session.Selection.Get();
-            VA.Layout.LayoutHelper.SendShapes(selection, dir);
+            VA.Selection.SelectionHelper.SendShapes(selection, dir);
         }
 
         public void Align(VA.Drawing.AlignmentHorizontal align)
