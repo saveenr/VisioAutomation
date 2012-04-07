@@ -148,7 +148,6 @@
     <Compile Include="Format\FormatPaintCache.cs" />
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
-    <Compile Include="Layout\XFormCells_ext.cs" />
     <Compile Include="Layout\LockCells.cs" />
     <Compile Include="Selection\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />

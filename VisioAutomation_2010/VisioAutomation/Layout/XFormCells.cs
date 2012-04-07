@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -7,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
-    public partial class XFormCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class XFormCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> PinX { get; set; }
         public VA.ShapeSheet.CellData<double> PinY { get; set; }
