@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -53,9 +52,7 @@ namespace VisioAutomation.Layout
             }
         }
 
-        public static IList<int> SortShapesByPosition(IVisio.Page page,
-                                                 IList<int> shapeids,
-                                                 XFormPosition pos)
+        public static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, XFormPosition pos)
         {
             if (page == null)
             {
@@ -82,10 +79,7 @@ namespace VisioAutomation.Layout
             return sorted_shape_ids;
         }
 
-        public static void DistributeWithSpacing(IVisio.Page page,
-                                     IList<int> shapeids,
-                                     VA.Drawing.Axis axis,
-                                     double spacing)
+        public static void DistributeWithSpacing(IVisio.Page page, IList<int> shapeids, VA.Drawing.Axis axis, double spacing)
         {
             if (page == null)
             {
@@ -167,10 +161,7 @@ namespace VisioAutomation.Layout
             }
         }
 
-        public static void SnapCorner(IVisio.Page page,
-                              IList<int> shapeids,
-                              VA.Drawing.Size snapsize,
-                              SnapCornerPosition corner)
+        public static void SnapCorner(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, SnapCornerPosition corner)
         {
             // First caculate the new transforms
             var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
@@ -181,7 +172,7 @@ namespace VisioAutomation.Layout
             {
                 var old_lower_left = VA.Layout.LayoutHelper.GetRectangle(input_xfrm).LowerLeft;
                 var new_lower_left = snap_grid.Snap(old_lower_left);
-                var output_xfrm = GetNewXfrmForCorner(corner, new_lower_left, input_xfrm);
+                var output_xfrm = _SnapCorner(corner, new_lower_left, input_xfrm);
                 output_xfrms.Add(output_xfrm);
             }
 
@@ -189,7 +180,7 @@ namespace VisioAutomation.Layout
             update_xfrms(page, shapeids, output_xfrms);
         }
 
-        private static XFormCells GetNewXfrmForCorner(SnapCornerPosition corner, Point new_lower_left, XFormCells input_xfrm)
+        private static XFormCells _SnapCorner(SnapCornerPosition corner, VA.Drawing.Point new_lower_left, XFormCells input_xfrm)
         {
             var new_pin_position = GetPinPositionForCorner(input_xfrm, new_lower_left, corner);
 
@@ -253,69 +244,6 @@ namespace VisioAutomation.Layout
                 output_xfrm.Width = new_size.Width;
                 output_xfrm.Height = new_size.Height;
 
-                output_xfrms.Add(output_xfrm);
-            }
-
-            // Now apply them
-            update_xfrms(page, shapeids, output_xfrms);
-        }
-
-        public static void AlignTo(IVisio.Page page, IList<int> shapeids, VA.Drawing.AlignmentHorizontal align, double x)
-        {
-            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
-            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
-
-            foreach (var input_xfrm in input_xfrms)
-            {
-                double nx = 0.0;
-
-                if (align == VA.Drawing.AlignmentHorizontal.Left)
-                {
-                    nx = x + input_xfrm.LocPinX.Result;
-                }
-                else if (align == VA.Drawing.AlignmentHorizontal.Center)
-                {
-                    nx = x + input_xfrm.LocPinX.Result - (input_xfrm.Width.Result / 2.0);
-                }
-                else if (align == VA.Drawing.AlignmentHorizontal.Right)
-                {
-                    nx = x + input_xfrm.LocPinX.Result - input_xfrm.Width.Result;
-                }
-
-                var output_xfrm = new VA.Layout.XFormCells();
-                output_xfrm.PinX = nx;
-
-                output_xfrms.Add(output_xfrm);
-            }
-
-            // Now apply them
-            update_xfrms(page, shapeids, output_xfrms);
-        }
-
-        public static void AlignTo(IVisio.Page page, IList<int> shapeids, VA.Drawing.AlignmentVertical align, double y)
-        {
-            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
-            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
-
-            foreach (var input_xfrm in input_xfrms)
-            {
-                double ny = 0.0;
-
-                if (align == VA.Drawing.AlignmentVertical.Top)
-                {
-                    ny = y + input_xfrm.LocPinY.Result - input_xfrm.Height.Result;
-                }
-                else if (align == VA.Drawing.AlignmentVertical.Center)
-                {
-                    ny = y + input_xfrm.LocPinY.Result - (input_xfrm.Height.Result / 2.0);
-                }
-                else if (align == VA.Drawing.AlignmentVertical.Bottom)
-                {
-                    ny = y + input_xfrm.LocPinY.Result;
-                }
-
-                var output_xfrm = new VA.Layout.XFormCells();
-                output_xfrm.PinY = ny;
                 output_xfrms.Add(output_xfrm);
             }
 

@@ -238,23 +238,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Align(VA.Drawing.AlignmentHorizontal align, double x)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var selection = Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                VA.Layout.LayoutHelper.AlignTo(application.ActivePage, shapeids, align, x);
-            }
-        }
-
         public void Align(VA.Drawing.AlignmentVertical align)
         {
             if (!this.Session.HasSelectedShapes(2))
@@ -272,23 +255,6 @@ namespace VisioAutomation.Scripting.Commands
                 var valign = _map_isd_valign_to_visio_valign(align);
 
                 selection.Align(halign, valign, glue_to_guide);
-            }
-        }
-
-        public void Align(VA.Drawing.AlignmentVertical align, double y)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var selection = Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                VA.Layout.LayoutHelper.AlignTo(application.ActivePage, shapeids,align,y);
             }
         }
 
