@@ -157,37 +157,48 @@ namespace VisioAutomation.Layout
                               VA.Drawing.Size snapsize,
                               SnapCornerPosition corner)
         {
-            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            // First caculate the new transforms
             var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
+            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
+            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
 
-            foreach (int i in Enumerable.Range(0, shapeids.Count))
+            foreach (var input_xfrm in input_xfrms)
             {
-                var shapeid = shapeids[i];
-                var old_layout = input_xfrms[i];
-                var old_bb = VA.Layout.LayoutHelper.GetRectangle(old_layout);
-                var old_bb_pos = old_bb.LowerLeft;
+                var old_bb = VA.Layout.LayoutHelper.GetRectangle(input_xfrm);
+                var old_bb_lowerleft = old_bb.LowerLeft;
 
-                var new_corner_pos = snap_grid.Snap(old_bb_pos);
+                var new_corner_pos = snap_grid.Snap(old_bb_lowerleft);
 
                 var new_pin_position = GetPinPositionForCorner(
-                    new VA.Drawing.Point( old_layout.PinX.Result, old_layout.PinY.Result ),
-                    new VA.Drawing.Size( old_layout.Width.Result, old_layout.Height.Result ),
-                    new VA.Drawing.Point( old_layout.LocPinX.Result, old_layout.LocPinY.Result ),
+                    new VA.Drawing.Point(input_xfrm.PinX.Result, input_xfrm.PinY.Result),
+                    new VA.Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result),
+                    new VA.Drawing.Point(input_xfrm.LocPinX.Result, input_xfrm.LocPinY.Result),
                     new_corner_pos,
                     corner);
 
-                if (new_pin_position.X != old_layout.PinX.Result)
+                var output_frm = new VA.Layout.XFormCells();
+
+                if (new_pin_position.X != input_xfrm.PinX.Result)
                 {
-                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.PinX, new_pin_position.X);
+                    output_frm.PinX = new_pin_position.X;
                 }
 
-                if (new_pin_position.Y != old_layout.PinY.Result)
+                if (new_pin_position.Y != input_xfrm.PinY.Result)
                 {
-                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.PinY, new_pin_position.Y);
+                    output_frm.PinY= new_pin_position.Y;
                 }
+
+                output_xfrms.Add(output_frm);
             }
 
+            // Now apply them
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            foreach (int i in Enumerable.Range(0, shapeids.Count))
+            {
+                var shapeid = shapeids[i];
+                var output_xfrm = output_xfrms[i];
+                output_xfrm.Apply(update,(short)shapeid);
+            }
             update.Execute(page);
         }
 
