@@ -154,9 +154,9 @@
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
-    <Compile Include="ShapeGeometry\GeometrySection.cs" />
-    <Compile Include="ShapeGeometry\GeometryRow.cs" />
-    <Compile Include="ShapeGeometry\ShapeGeometryHelper.cs" />
+    <Compile Include="Geometry\GeometrySection.cs" />
+    <Compile Include="Geometry\GeometryRow.cs" />
+    <Compile Include="Geometry\GeometryHelper.cs" />
     <Compile Include="Selection\ShapesEnumeration.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />

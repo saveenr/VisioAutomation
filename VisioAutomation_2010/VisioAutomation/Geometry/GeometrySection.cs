@@ -5,9 +5,9 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.ShapeGeometry
+namespace VisioAutomation.Geometry
 {
-    public class GeometrySection : IEnumerable<VA.ShapeGeometry.GeometryRow>
+    public class GeometrySection : IEnumerable<VA.Geometry.GeometryRow>
     {
         private List<GeometryRow> Rows { get; set; }
         public VA.ShapeSheet.FormulaLiteral NoFill { get; set; }
@@ -21,7 +21,7 @@ namespace VisioAutomation.ShapeGeometry
             this.Rows = new List<GeometryRow>();
         }
 
-        public IEnumerator<VA.ShapeGeometry.GeometryRow> GetEnumerator()
+        public IEnumerator<VA.Geometry.GeometryRow> GetEnumerator()
         {
             foreach (var i in this.Rows)
             {
@@ -34,14 +34,14 @@ namespace VisioAutomation.ShapeGeometry
             return GetEnumerator();
         }
 
-        public VA.ShapeGeometry.GeometryRow this[int index]
+        public VA.Geometry.GeometryRow this[int index]
         {
             get { return this.Rows[index]; }
         }
 
         public short Render(IVisio.Shape shape)
         {
-            short sec_index = ShapeGeometryHelper.AddGeometrySection(shape);
+            short sec_index = GeometryHelper.AddGeometrySection(shape);
             short row_count = shape.RowCount[sec_index];
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
@@ -68,80 +68,80 @@ namespace VisioAutomation.ShapeGeometry
             return 0;
         }
 
-        public VA.ShapeGeometry.GeometryRow AddMoveTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
+        public VA.Geometry.GeometryRow AddMoveTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateMoveTo(x, y);
+            var row = VA.Geometry.GeometryRow.CreateMoveTo(x, y);
             this.Rows.Add(row);
             return row;
         }
 
-        public VA.ShapeGeometry.GeometryRow AddLineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
+        public VA.Geometry.GeometryRow AddLineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateLineTo(x, y);
-            this.Rows.Add(row);
-            return row;
-
-        }
-
-        public VA.ShapeGeometry.GeometryRow AddArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
-        {
-            var row = VA.ShapeGeometry.GeometryRow.CreateArcTo(x, y, a);
+            var row = VA.Geometry.GeometryRow.CreateLineTo(x, y);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public VA.ShapeGeometry.GeometryRow AddEllipticalArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
+        public VA.Geometry.GeometryRow AddArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateEllipticalArcTo(x, y, a,b,c,d);
+            var row = VA.Geometry.GeometryRow.CreateArcTo(x, y, a);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public VA.ShapeGeometry.GeometryRow AddEllipse(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
+        public VA.Geometry.GeometryRow AddEllipticalArcTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateEllipse(x, y, a,b,c,d);
+            var row = VA.Geometry.GeometryRow.CreateEllipticalArcTo(x, y, a, b, c, d);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public VA.ShapeGeometry.GeometryRow AddNURBSTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d, VA.ShapeSheet.FormulaLiteral e)
+        public VA.Geometry.GeometryRow AddEllipse(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateNURBSTo(x, y, a,b,c,d,e);
+            var row = VA.Geometry.GeometryRow.CreateEllipse(x, y, a, b, c, d);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public VA.ShapeGeometry.GeometryRow AddPolylineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
+        public VA.Geometry.GeometryRow AddNURBSTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d, VA.ShapeSheet.FormulaLiteral e)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreatePolylineTo(x, y, a);
+            var row = VA.Geometry.GeometryRow.CreateNURBSTo(x, y, a, b, c, d, e);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public VA.ShapeGeometry.GeometryRow AddInfiniteLine(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b)
+        public VA.Geometry.GeometryRow AddPolylineTo(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateInfiniteLine(x, y, a, b);
+            var row = VA.Geometry.GeometryRow.CreatePolylineTo(x, y, a);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public VA.ShapeGeometry.GeometryRow AddSplineStart(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
+        public VA.Geometry.GeometryRow AddInfiniteLine(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateSplineStart(x, y, a,b,c,d);
+            var row = VA.Geometry.GeometryRow.CreateInfiniteLine(x, y, a, b);
             this.Rows.Add(row);
             return row;
 
         }
 
-        public VA.ShapeGeometry.GeometryRow AddSplineKnot(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
+        public VA.Geometry.GeometryRow AddSplineStart(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a, VA.ShapeSheet.FormulaLiteral b, VA.ShapeSheet.FormulaLiteral c, VA.ShapeSheet.FormulaLiteral d)
         {
-            var row = VA.ShapeGeometry.GeometryRow.CreateSplineKnot(x, y, a);
+            var row = VA.Geometry.GeometryRow.CreateSplineStart(x, y, a, b, c, d);
+            this.Rows.Add(row);
+            return row;
+
+        }
+
+        public VA.Geometry.GeometryRow AddSplineKnot(VA.ShapeSheet.FormulaLiteral x, VA.ShapeSheet.FormulaLiteral y, VA.ShapeSheet.FormulaLiteral a)
+        {
+            var row = VA.Geometry.GeometryRow.CreateSplineKnot(x, y, a);
             this.Rows.Add(row);
             return row;
         }
