@@ -4,6 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
 namespace VisioAutomationSamples
 {
@@ -12,7 +13,7 @@ namespace VisioAutomationSamples
         public static void DirectedGraphViaMSAGL()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
+            var directed_graph_drawing = new DGMODEL.Drawing();
 
             // Create a Node 0
             var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
@@ -74,7 +75,7 @@ namespace VisioAutomationSamples
         public static void DirectedGraphViaVisio()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
+            var directed_graph_drawing = new DGMODEL.Drawing();
 
             // Create a Node 0
             var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");

@@ -4,6 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using TREEMODEL = VisioAutomation.Layout.Models.Tree;
 
 namespace VisioAutomationSamples
 {
@@ -15,18 +16,18 @@ namespace VisioAutomationSamples
             var doc = SampleEnvironment.Application.ActiveDocument;
             var page1 = doc.Pages.Add();
 
-            var t = new VA.Layout.Models.Tree.Drawing();
+            var t = new TREEMODEL.Drawing();
 
-            t.Root = new VA.Layout.Models.Tree.Node("Root");
+            t.Root = new TREEMODEL.Node("Root");
 
-            var na = new VA.Layout.Models.Tree.Node("A");
-            var nb = new VA.Layout.Models.Tree.Node("B");
+            var na = new TREEMODEL.Node("A");
+            var nb = new TREEMODEL.Node("B");
 
-            var na1 = new VA.Layout.Models.Tree.Node("A1");
-            var na2 = new VA.Layout.Models.Tree.Node("A2");
+            var na1 = new TREEMODEL.Node("A1");
+            var na2 = new TREEMODEL.Node("A2");
 
-            var nb1 = new VA.Layout.Models.Tree.Node("B1");
-            var nb2 = new VA.Layout.Models.Tree.Node("B2");
+            var nb1 = new TREEMODEL.Node("B1");
+            var nb2 = new TREEMODEL.Node("B2");
 
             t.Root.Children.Add(na);
             t.Root.Children.Add(nb);

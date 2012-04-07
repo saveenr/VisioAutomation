@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using VA = VisioAutomation;
-using System.Linq;
 
 namespace VisioAutomation.Layout.Models.BoxLayout
 {

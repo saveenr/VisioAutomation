@@ -4,6 +4,7 @@ using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using TREEMODEL = VisioAutomation.Layout.Models.Tree;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -234,10 +235,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new VA.Layout.Models.Tree.Drawing();
-            tree_layout.LayoutOptions.Direction = VA.Layout.Models.Tree.LayoutDirection.Right;
-            tree_layout.LayoutOptions.ConnectorType = VA.Layout.Models.Tree.ConnectorType.CurvedBezier;
-            var ns_node_map = new Dictionary<string, VA.Layout.Models.Tree.Node>(namespaces.Count);
+            var tree_layout = new TREEMODEL.Drawing();
+            tree_layout.LayoutOptions.Direction = TREEMODEL.LayoutDirection.Right;
+            tree_layout.LayoutOptions.ConnectorType = TREEMODEL.ConnectorType.CurvedBezier;
+            var ns_node_map = new Dictionary<string, TREEMODEL.Node>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -249,7 +250,7 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep+1);
                 }
 
-                var node = new VA.Layout.Models.Tree.Node(ns);
+                var node = new TREEMODEL.Node(ns);
                 node.Text = new VA.Text.Markup.TextElement(label);
                 node.Size = new VA.Drawing.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
@@ -287,7 +288,7 @@ namespace VisioAutomation.Scripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new VA.Layout.Models.Tree.Node();
+                var root_n = new TREEMODEL.Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)
@@ -376,11 +377,11 @@ namespace VisioAutomation.Scripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new VA.Layout.Models.Tree.Drawing();
-            tree_layout.LayoutOptions.Direction = VA.Layout.Models.Tree.LayoutDirection.Down;
-            tree_layout.LayoutOptions.ConnectorType = VA.Layout.Models.Tree.ConnectorType.PolyLine;
-            var ns_node_map = new Dictionary<string, VA.Layout.Models.Tree.Node>(namespaces.Count);
-            var node_to_nslabel = new Dictionary<VA.Layout.Models.Tree.Node, string>(namespaces.Count);
+            var tree_layout = new TREEMODEL.Drawing();
+            tree_layout.LayoutOptions.Direction = TREEMODEL.LayoutDirection.Down;
+            tree_layout.LayoutOptions.ConnectorType = TREEMODEL.ConnectorType.PolyLine;
+            var ns_node_map = new Dictionary<string, TREEMODEL.Node>(namespaces.Count);
+            var node_to_nslabel = new Dictionary<TREEMODEL.Node, string>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -395,7 +396,7 @@ namespace VisioAutomation.Scripting.Commands
                 var types_in_namespace = types.Where(t => t.Type.Namespace == ns)
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
-                var node = new VA.Layout.Models.Tree.Node(ns);
+                var node = new TREEMODEL.Node(ns);
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
 
 
@@ -445,7 +446,7 @@ namespace VisioAutomation.Scripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new VA.Layout.Models.Tree.Node();
+                var root_n = new TREEMODEL.Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)

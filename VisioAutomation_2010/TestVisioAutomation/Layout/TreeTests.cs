@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using TREEMODEL = VisioAutomation.Layout.Models.Tree;
 
 namespace TestVisioAutomation
 {
@@ -13,8 +14,8 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawTree1Node()
         {
-            var t = new VA.Layout.Models.Tree.Drawing();
-            t.Root = new VA.Layout.Models.Tree.Node("Root");
+            var t = new TREEMODEL.Drawing();
+            t.Root = new TREEMODEL.Node("Root");
 
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -32,17 +33,17 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawTreeMultiNode()
         {
-            var t = new VA.Layout.Models.Tree.Drawing();
-            t.Root = new VA.Layout.Models.Tree.Node("Root");
+            var t = new TREEMODEL.Drawing();
+            t.Root = new TREEMODEL.Node("Root");
 
-            var na = new VA.Layout.Models.Tree.Node("A");
-            var nb = new VA.Layout.Models.Tree.Node("B");
+            var na = new TREEMODEL.Node("A");
+            var nb = new TREEMODEL.Node("B");
 
-            var na1 = new VA.Layout.Models.Tree.Node("A1");
-            var na2 = new VA.Layout.Models.Tree.Node("A2");
+            var na1 = new TREEMODEL.Node("A1");
+            var na2 = new TREEMODEL.Node("A2");
 
-            var nb1 = new VA.Layout.Models.Tree.Node("B1");
-            var nb2 = new VA.Layout.Models.Tree.Node("B2");
+            var nb1 = new TREEMODEL.Node("B1");
+            var nb2 = new TREEMODEL.Node("B2");
 
             t.Root.Children.Add(na);
             t.Root.Children.Add(nb);
@@ -79,18 +80,18 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawTreeMultiNode2()
         {
-            var t = new VA.Layout.Models.Tree.Drawing();
+            var t = new TREEMODEL.Drawing();
 
-            t.Root = new VA.Layout.Models.Tree.Node("Root");
+            t.Root = new TREEMODEL.Node("Root");
 
-            var na = new VA.Layout.Models.Tree.Node("A");
-            var nb = new VA.Layout.Models.Tree.Node("B");
+            var na = new TREEMODEL.Node("A");
+            var nb = new TREEMODEL.Node("B");
 
-            var na1 = new VA.Layout.Models.Tree.Node("A1");
-            var na2 = new VA.Layout.Models.Tree.Node("A2");
+            var na1 = new TREEMODEL.Node("A1");
+            var na2 = new TREEMODEL.Node("A2");
 
-            var nb1 = new VA.Layout.Models.Tree.Node("B1");
-            var nb2 = new VA.Layout.Models.Tree.Node("B2");
+            var nb1 = new TREEMODEL.Node("B1");
+            var nb2 = new TREEMODEL.Node("B2");
 
             t.Root.Children.Add(na);
             t.Root.Children.Add(nb);

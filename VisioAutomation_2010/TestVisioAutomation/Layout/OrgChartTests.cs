@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
 
 namespace TestVisioAutomation
 {
@@ -13,9 +14,9 @@ namespace TestVisioAutomation
         public void OrgChartMustHaveContent()
         {
             bool caught = false;
-            var oc = new VA.Layout.Models.OrgChart.Drawing();
+            var oc = new OCMODEL.Drawing();
             var page1 = GetNewPage(StandardPageSize);
-            var renderer = new VA.Layout.Models.OrgChart.OrgChartLayout();
+            var renderer = new OCMODEL.OrgChartLayout();
             try
             {
                 var application = page1.Application;
@@ -35,13 +36,13 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawOrgChart1()
         {
-            var oc = new VA.Layout.Models.OrgChart.Drawing();
+            var oc = new OCMODEL.Drawing();
 
-            var n_a = new VA.Layout.Models.OrgChart.Node("A");
-            var n_b = new VA.Layout.Models.OrgChart.Node("B");
-            var n_c = new VA.Layout.Models.OrgChart.Node("C");
-            var n_d = new VA.Layout.Models.OrgChart.Node("D");
-            var n_e = new VA.Layout.Models.OrgChart.Node("E");
+            var n_a = new OCMODEL.Node("A");
+            var n_b = new OCMODEL.Node("B");
+            var n_c = new OCMODEL.Node("C");
+            var n_d = new OCMODEL.Node("D");
+            var n_e = new OCMODEL.Node("E");
 
             n_a.Children.Add(n_b);
             n_a.Children.Add(n_c);
@@ -54,7 +55,7 @@ namespace TestVisioAutomation
 
             var app = new IVisio.Application();
 
-            var renderer = new VA.Layout.Models.OrgChart.OrgChartLayout();
+            var renderer = new OCMODEL.OrgChartLayout();
             oc.Render(app);
 
             var active_page = app.ActivePage;

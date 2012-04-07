@@ -3,6 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using GRIDMODEL = VisioAutomation.Layout.Models.Grid;
 
 namespace VisioAutomationSamples
 {
@@ -26,8 +27,8 @@ namespace VisioAutomationSamples
 
             page.SetSize(page_size);
 
-            var layout = new VA.Layout.Models.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
-            layout.RowDirection = VA.Layout.Models.Grid.RowDirection.TopToBottom;
+            var layout = new GRIDMODEL.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
+            layout.RowDirection = GRIDMODEL.RowDirection.TopToBottom;
             layout.Origin = upperleft;
             layout.CellSpacing = new VA.Drawing.Size(0.1, 0.1);
             layout.PerformLayout();

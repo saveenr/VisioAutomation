@@ -3,17 +3,19 @@ using System.Linq;
 using System.Xml.Linq;
 using VA = VisioAutomation;
 using IVisio= Microsoft.Office.Interop.Visio;
+using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
+
 namespace VisioAutomation.Scripting.FlowChart
 {
     public class FlowChartBuilder
     {
-        public static IList<VA.Layout.Models.DirectedGraph.Drawing> LoadFromXML(Session scriptingsession, string filename)
+        public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, string filename)
         {
             var xmldoc = XDocument.Load(filename);
             return LoadFromXML(scriptingsession, xmldoc);
         }
 
-        public static IList<VA.Layout.Models.DirectedGraph.Drawing> LoadFromXML(Session scriptingsession, XDocument xmldoc)
+        public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, XDocument xmldoc)
         {
             var drawings = new List<VA.Layout.Models.DirectedGraph.Drawing>();
             bool major_error = false;
@@ -27,7 +29,7 @@ namespace VisioAutomation.Scripting.FlowChart
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, renderer);
 
-                var drawing = new VA.Layout.Models.DirectedGraph.Drawing();
+                var drawing = new DGMODEL.Drawing();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
@@ -135,7 +137,7 @@ namespace VisioAutomation.Scripting.FlowChart
 
         public static void RenderDiagrams(
             VA.Scripting.Session scriptingsession,
-            IList<VA.Layout.Models.DirectedGraph.Drawing> drawings)
+            IList<DGMODEL.Drawing> drawings)
         {
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Start Rendering FlowChart");
             var app = scriptingsession.VisioApplication;
