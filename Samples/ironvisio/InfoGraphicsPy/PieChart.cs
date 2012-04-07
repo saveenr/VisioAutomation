@@ -18,7 +18,7 @@ namespace InfoGraphicsPy
 
         public void Draw(Session session)
         {
-            var pc = new VA.Layout.Pie.PieLayout();
+            var pc = new VA.Layout.Models.Pie.PieLayout();
             foreach (var dp in this.DataPoints)
             {
                 pc.Add(dp.Value, dp.Text);

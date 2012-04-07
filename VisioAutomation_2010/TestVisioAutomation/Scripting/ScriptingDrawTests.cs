@@ -57,7 +57,7 @@ namespace TestVisioAutomation
             string mastername = "Rectangle";
             var master = ss.Master.Get(mastername, stencil);
 
-            var grid = new VA.Layout.Grid.GridLayout(cols, rows, cellsize, master);
+            var grid = new VA.Layout.Models.Grid.GridLayout(cols, rows, cellsize, master);
             grid.Origin = new VA.Drawing.Point(0, 4);
             ss.Document.Close(true);
         }

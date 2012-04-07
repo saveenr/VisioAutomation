@@ -15,18 +15,18 @@ namespace VisioAutomationSamples
             var doc = SampleEnvironment.Application.ActiveDocument;
             var page1 = doc.Pages.Add();
 
-            var t = new VA.Layout.Tree.Drawing();
+            var t = new VA.Layout.Models.Tree.Drawing();
 
-            t.Root = new VA.Layout.Tree.Node("Root");
+            t.Root = new VA.Layout.Models.Tree.Node("Root");
 
-            var na = new VA.Layout.Tree.Node("A");
-            var nb = new VA.Layout.Tree.Node("B");
+            var na = new VA.Layout.Models.Tree.Node("A");
+            var nb = new VA.Layout.Models.Tree.Node("B");
 
-            var na1 = new VA.Layout.Tree.Node("A1");
-            var na2 = new VA.Layout.Tree.Node("A2");
+            var na1 = new VA.Layout.Models.Tree.Node("A1");
+            var na2 = new VA.Layout.Models.Tree.Node("A2");
 
-            var nb1 = new VA.Layout.Tree.Node("B1");
-            var nb2 = new VA.Layout.Tree.Node("B2");
+            var nb1 = new VA.Layout.Models.Tree.Node("B1");
+            var nb2 = new VA.Layout.Models.Tree.Node("B2");
 
             t.Root.Children.Add(na);
             t.Root.Children.Add(nb);

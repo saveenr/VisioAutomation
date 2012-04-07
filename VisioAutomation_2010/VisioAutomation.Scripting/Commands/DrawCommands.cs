@@ -56,12 +56,12 @@ namespace VisioAutomation.Scripting.Commands
             page.Background = 0; // ensure this is a foreground page
 
             var pagesize = page.GetSize();
-            
-            
-            var layout = new VA.Layout.Grid.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VA.Drawing.Size(1,1), masterobj);
+
+
+            var layout = new VA.Layout.Models.Grid.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VA.Drawing.Size(1, 1), masterobj);
             layout.Origin = new VA.Drawing.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
-            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            layout.RowDirection = VA.Layout.Models.Grid.RowDirection.TopToBottom;
             layout.PerformLayout();
 
             foreach (var i in Enumerable.Range(0, datatable.Rows.Count))
@@ -89,7 +89,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Grid( VA.Layout.Grid.GridLayout layout)
+        public void Grid(VA.Layout.Models.Grid.GridLayout layout)
         {
             
             //Create a new page to hold the grid
@@ -216,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var slices = VA.Layout.Radial.PieSlice.GetSlicesFromValues(center, radius, values);
+            var slices = VA.Layout.Models.Radial.PieSlice.GetSlicesFromValues(center, radius, values);
             var shapes = new List<Shape>(slices.Count);
             foreach (var slice in slices)
             {
@@ -226,10 +226,10 @@ namespace VisioAutomation.Scripting.Commands
             return shapes;
         }
 
-        public void OrgChart(VA.Layout.OrgChart.Drawing drawing)
+        public void OrgChart(VA.Layout.Models.OrgChart.Drawing drawing)
         {
             this.Session.Write(VA.Scripting.OutputStream.Verbose, "Start OrgChart Rendering");
-            var renderer = new VA.Layout.OrgChart.OrgChartLayout();
+            var renderer = new VA.Layout.Models.OrgChart.OrgChartLayout();
             var application = this.Session.VisioApplication;
             drawing.Render(application);
             var active_page = application.ActivePage;

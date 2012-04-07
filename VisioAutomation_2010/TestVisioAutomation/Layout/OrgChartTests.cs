@@ -13,9 +13,9 @@ namespace TestVisioAutomation
         public void OrgChartMustHaveContent()
         {
             bool caught = false;
-            var oc = new VA.Layout.OrgChart.Drawing();
+            var oc = new VA.Layout.Models.OrgChart.Drawing();
             var page1 = GetNewPage(StandardPageSize);
-            var renderer = new VA.Layout.OrgChart.OrgChartLayout();
+            var renderer = new VA.Layout.Models.OrgChart.OrgChartLayout();
             try
             {
                 var application = page1.Application;
@@ -35,13 +35,13 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawOrgChart1()
         {
-            var oc = new VA.Layout.OrgChart.Drawing();
+            var oc = new VA.Layout.Models.OrgChart.Drawing();
 
-            var n_a = new VA.Layout.OrgChart.Node("A");
-            var n_b = new VA.Layout.OrgChart.Node("B");
-            var n_c = new VA.Layout.OrgChart.Node("C");
-            var n_d = new VA.Layout.OrgChart.Node("D");
-            var n_e = new VA.Layout.OrgChart.Node("E");
+            var n_a = new VA.Layout.Models.OrgChart.Node("A");
+            var n_b = new VA.Layout.Models.OrgChart.Node("B");
+            var n_c = new VA.Layout.Models.OrgChart.Node("C");
+            var n_d = new VA.Layout.Models.OrgChart.Node("D");
+            var n_e = new VA.Layout.Models.OrgChart.Node("E");
 
             n_a.Children.Add(n_b);
             n_a.Children.Add(n_c);
@@ -54,7 +54,7 @@ namespace TestVisioAutomation
 
             var app = new IVisio.Application();
 
-            var renderer = new VA.Layout.OrgChart.OrgChartLayout();
+            var renderer = new VA.Layout.Models.OrgChart.OrgChartLayout();
             oc.Render(app);
 
             var active_page = app.ActivePage;

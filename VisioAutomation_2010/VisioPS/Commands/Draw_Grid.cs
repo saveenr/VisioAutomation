@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Draw_Grid : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
-        public VA.Layout.Grid.GridLayout GridLayout{ get; set; }
+        public VA.Layout.Models.Grid.GridLayout GridLayout { get; set; }
 
         protected override void ProcessRecord()
         {

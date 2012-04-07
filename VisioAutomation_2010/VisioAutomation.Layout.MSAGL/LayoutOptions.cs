@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Layout.MSAGL
 {
-    public class LayoutOptions : VA.Layout.DirectedGraph.LayoutOptions
+    public class LayoutOptions : VA.Layout.Models.DirectedGraph.LayoutOptions
     {
         public double ScalingFactor { get; set; }
         public bool UseDynamicConnectors { get; set; }

@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using BoxL = VisioAutomation.Layout.BoxLayout;
+using BoxL = VisioAutomation.Layout.Models.BoxLayout;
 
 namespace TestVisioAutomation
 {

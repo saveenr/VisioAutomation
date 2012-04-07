@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
         public static void DirectedGraphViaMSAGL()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             // Create a Node 0
             var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
@@ -74,7 +74,7 @@ namespace VisioAutomationSamples
         public static void DirectedGraphViaVisio()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             // Create a Node 0
             var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
@@ -132,12 +132,12 @@ namespace VisioAutomationSamples
 
             directed_graph_drawing.Render(page1);
 
-            var layout_config = new VA.PageLayout.HierarchyLayout();
-            layout_config.Direction = VA.PageLayout.Direction.BottomToTop;
-            layout_config.HorizontalAlignment = VA.PageLayout.HorizontalAlignment.Center;
+            var layout_config = new VA.Layout.PageLayout.HierarchyLayout();
+            layout_config.Direction = VA.Layout.PageLayout.Direction.BottomToTop;
+            layout_config.HorizontalAlignment = VA.Layout.PageLayout.HorizontalAlignment.Center;
             layout_config.ResizePageToFit = true;
             layout_config.AvenueSize = new VA.Drawing.Size(1, 1);
-            layout_config.ConnectorAppearance = VA.PageLayout.ConnectorAppearance.Curved;
+            layout_config.ConnectorAppearance = VA.Layout.PageLayout.ConnectorAppearance.Curved;
             layout_config.Apply(page1);
         }
     }

@@ -11,11 +11,11 @@ namespace VisioAutomationSamples
         public static void OrgChart()
         {
             // This creates a new document
-            var orgchart = new VA.Layout.OrgChart.Drawing();
+            var orgchart = new VA.Layout.Models.OrgChart.Drawing();
 
-            var bob = new VA.Layout.OrgChart.Node("Bob");
-            var ted = new VA.Layout.OrgChart.Node("Ted");
-            var alice = new VA.Layout.OrgChart.Node("Alice");
+            var bob = new VA.Layout.Models.OrgChart.Node("Bob");
+            var ted = new VA.Layout.Models.OrgChart.Node("Ted");
+            var alice = new VA.Layout.Models.OrgChart.Node("Alice");
 
             bob.Children.Add(ted);
             bob.Children.Add(alice);

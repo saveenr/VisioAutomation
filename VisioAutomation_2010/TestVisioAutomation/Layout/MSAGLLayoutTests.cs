@@ -13,7 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithBezierConnectors()
         {
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             var flowchart_stencil = "basflo_u.vss";
             var server_stencil = "server_u.vss";
@@ -207,7 +207,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithDynamicConnectors()
         {
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -280,7 +280,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");

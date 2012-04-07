@@ -18,7 +18,7 @@ namespace VisioAutomationSamples
 
             var radius = 3.0;
             var center = new VA.Drawing.Point(4, 4);
-            var slices = VA.Layout.Radial.PieSlice.GetSlicesFromValues(center, radius, data);
+            var slices = VA.Layout.Models.Radial.PieSlice.GetSlicesFromValues(center, radius, data);
             foreach (var slice in slices)
             {
                 slice.Render(page);

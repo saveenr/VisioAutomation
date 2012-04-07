@@ -35,10 +35,10 @@ namespace VisioAutomationSamples
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];
 
-            var layout = new VA.Layout.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
+            var layout = new VA.Layout.Models.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
             layout.Origin = new VA.Drawing.Point(0, 0);
             layout.CellSpacing = new VA.Drawing.Size(0, 0);
-            layout.RowDirection = VA.Layout.Grid.RowDirection.BottomToTop;
+            layout.RowDirection = VA.Layout.Models.Grid.RowDirection.BottomToTop;
 
             layout.PerformLayout();
             layout.Render(page);

@@ -26,8 +26,8 @@ namespace VisioAutomationSamples
 
             page.SetSize(page_size);
 
-            var layout = new VA.Layout.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
-            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            var layout = new VA.Layout.Models.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
+            layout.RowDirection = VA.Layout.Models.Grid.RowDirection.TopToBottom;
             layout.Origin = upperleft;
             layout.CellSpacing = new VA.Drawing.Size(0.1, 0.1);
             layout.PerformLayout();

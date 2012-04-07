@@ -1,7 +1,7 @@
 ﻿using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using BoxL = VisioAutomation.Layout.BoxLayout;
+using BoxL = VisioAutomation.Layout.Models.BoxLayout;
 
 namespace VisioAutomationSamples
 {
