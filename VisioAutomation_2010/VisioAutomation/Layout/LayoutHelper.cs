@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -178,30 +179,9 @@ namespace VisioAutomation.Layout
 
             foreach (var input_xfrm in input_xfrms)
             {
-                var old_bb = VA.Layout.LayoutHelper.GetRectangle(input_xfrm);
-                var old_bb_lowerleft = old_bb.LowerLeft;
-
-                var new_corner_pos = snap_grid.Snap(old_bb_lowerleft);
-
-                var new_pin_position = GetPinPositionForCorner(
-                    new VA.Drawing.Point(input_xfrm.PinX.Result, input_xfrm.PinY.Result),
-                    new VA.Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result),
-                    new VA.Drawing.Point(input_xfrm.LocPinX.Result, input_xfrm.LocPinY.Result),
-                    new_corner_pos,
-                    corner);
-
-                var output_xfrm = new VA.Layout.XFormCells();
-
-                if (new_pin_position.X != input_xfrm.PinX.Result)
-                {
-                    output_xfrm.PinX = new_pin_position.X;
-                }
-
-                if (new_pin_position.Y != input_xfrm.PinY.Result)
-                {
-                    output_xfrm.PinY= new_pin_position.Y;
-                }
-
+                var old_lower_left = VA.Layout.LayoutHelper.GetRectangle(input_xfrm).LowerLeft;
+                var new_lower_left = snap_grid.Snap(old_lower_left);
+                var output_xfrm = GetNewXfrmForCorner(corner, new_lower_left, input_xfrm);
                 output_xfrms.Add(output_xfrm);
             }
 
@@ -209,30 +189,44 @@ namespace VisioAutomation.Layout
             update_xfrms(page, shapeids, output_xfrms);
         }
 
-        private static VA.Drawing.Point GetPinPositionForCorner(
-            VA.Drawing.Point pinpos,
-            VA.Drawing.Size size,
-            VA.Drawing.Point locpin,
-            VA.Drawing.Point new_corner_pos,
-            SnapCornerPosition corner)
+        private static XFormCells GetNewXfrmForCorner(SnapCornerPosition corner, Point new_lower_left, XFormCells input_xfrm)
         {
+            var new_pin_position = GetPinPositionForCorner(input_xfrm, new_lower_left, corner);
+
+            var output_xfrm = new VA.Layout.XFormCells();
+            if (new_pin_position.X != input_xfrm.PinX.Result)
+            {
+                output_xfrm.PinX = new_pin_position.X;
+            }
+            if (new_pin_position.Y != input_xfrm.PinY.Result)
+            {
+                output_xfrm.PinY = new_pin_position.Y;
+            }
+            return output_xfrm;
+        }
+
+        private static VA.Drawing.Point GetPinPositionForCorner( VA.Layout.XFormCells input_xfrm, VA.Drawing.Point new_lower_left, SnapCornerPosition corner)
+        {
+            var size = new VA.Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);
+            var locpin = new VA.Drawing.Point(input_xfrm.LocPinX.Result, input_xfrm.LocPinY.Result);
+
             switch (corner)
             {
                 case SnapCornerPosition.LowerLeft:
                     {
-                        return new_corner_pos.Add(locpin.X, locpin.Y);
+                        return new_lower_left.Add(locpin.X, locpin.Y);
                     }
                 case SnapCornerPosition.UpperRight:
                     {
-                        return new_corner_pos.Subtract(size.Width, size.Height).Add(locpin.X, locpin.Y);
+                        return new_lower_left.Subtract(size.Width, size.Height).Add(locpin.X, locpin.Y);
                     }
                 case SnapCornerPosition.LowerRight:
                     {
-                        return new_corner_pos.Subtract(size.Width, 0).Add(locpin.X, locpin.Y);
+                        return new_lower_left.Subtract(size.Width, 0).Add(locpin.X, locpin.Y);
                     }
                 case SnapCornerPosition.UpperLeft:
                     {
-                        return new_corner_pos.Subtract(0, size.Height).Add(locpin.X, locpin.Y);
+                        return new_lower_left.Subtract(0, size.Height).Add(locpin.X, locpin.Y);
                     }
                 default:
                     {
