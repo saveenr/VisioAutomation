@@ -137,12 +137,18 @@ namespace VisioAutomation.Layout
             }
 
             // Apply the changes
+            update_xfrms(page,sorted_shape_ids,output_xfrms);
+        }
+
+        private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<VA.Layout.XFormCells> xfrms)
+        {
+            
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            for (int i = 0; i < sorted_shape_ids.Count; i++)
+            for (int i = 0; i < shapeids.Count; i++)
             {
-                var shape_id = sorted_shape_ids[i];
-                var output_xfrm = output_xfrms[i];
-                output_xfrm.Apply(update,(short)shape_id);
+                var shape_id = shapeids[i];
+                var xfrm = xfrms[i];
+                xfrm.Apply(update,(short)shape_id);
             }
             update.Execute(page);
         }
@@ -200,14 +206,7 @@ namespace VisioAutomation.Layout
             }
 
             // Now apply them
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            foreach (int i in Enumerable.Range(0, shapeids.Count))
-            {
-                var shapeid = shapeids[i];
-                var output_xfrm = output_xfrms[i];
-                output_xfrm.Apply(update,(short)shapeid);
-            }
-            update.Execute(page);
+            update_xfrms(page, shapeids, output_xfrms);
         }
 
         private static VA.Drawing.Point GetPinPositionForCorner(
@@ -244,81 +243,90 @@ namespace VisioAutomation.Layout
 
         public static void SnapSize(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, VA.Drawing.Size minsize)
         {
-            var layout_info = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            var grid = new VA.Drawing.SnappingGrid(snapsize);
+            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
+            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
 
-            for (int i = 0; i < shapeids.Count; i++)
+            var grid = new VA.Drawing.SnappingGrid(snapsize);
+            foreach (var input_xfrm in input_xfrms)
             {
-                int shapeid = shapeids[i];
-                var old_size = new VA.Drawing.Size( layout_info[i].Width.Result, layout_info[i].Height.Result );
-                var snapped_size = grid.Snap(old_size);
+                var inut_size = new VA.Drawing.Size( input_xfrm.Width.Result, input_xfrm.Height.Result );
+                var snapped_size = grid.Snap(inut_size);
                 double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
                 double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
                 var new_size = new VA.Drawing.Size(max_w, max_h);
 
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, new_size.Width);
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, new_size.Height);
+                var output_xfrm = new VA.Layout.XFormCells();
+                output_xfrm.Width = new_size.Width;
+                output_xfrm.Height = new_size.Height;
+
+                output_xfrms.Add(output_xfrm);
             }
 
-            update.Execute(page);
+            // Now apply them
+            update_xfrms(page, shapeids, output_xfrms);
         }
 
         public static void AlignTo(IVisio.Page page, IList<int> shapeids, VA.Drawing.AlignmentHorizontal align, double x)
         {
-            var xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
+            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
 
-            for (int i = 0; i < shapeids.Count; i++)
+            foreach (var input_xfrm in input_xfrms)
             {
-                var info = xfrms[i];
                 double nx = 0.0;
+
                 if (align == VA.Drawing.AlignmentHorizontal.Left)
                 {
-                    nx = x + info.LocPinX.Result;
+                    nx = x + input_xfrm.LocPinX.Result;
                 }
                 else if (align == VA.Drawing.AlignmentHorizontal.Center)
                 {
-                    nx = x + info.LocPinX.Result - (info.Width.Result / 2.0);
+                    nx = x + input_xfrm.LocPinX.Result - (input_xfrm.Width.Result / 2.0);
                 }
                 else if (align == VA.Drawing.AlignmentHorizontal.Right)
                 {
-                    nx = x + info.LocPinX.Result - info.Width.Result;
+                    nx = x + input_xfrm.LocPinX.Result - input_xfrm.Width.Result;
                 }
-                update.SetFormula((short)shapeids[i], VA.ShapeSheet.SRCConstants.PinX, nx);
 
+                var output_xfrm = new VA.Layout.XFormCells();
+                output_xfrm.PinX = nx;
+
+                output_xfrms.Add(output_xfrm);
             }
 
-            update.Execute(page);
+            // Now apply them
+            update_xfrms(page, shapeids, output_xfrms);
         }
 
         public static void AlignTo(IVisio.Page page, IList<int> shapeids, VA.Drawing.AlignmentVertical align, double y)
         {
-            var xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
+            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
 
-            for (int i = 0; i < shapeids.Count; i++)
+            foreach (var input_xfrm in input_xfrms)
             {
-                var info = xfrms[i];
                 double ny = 0.0;
 
                 if (align == VA.Drawing.AlignmentVertical.Top)
                 {
-                    ny = y + info.LocPinY.Result - info.Height.Result;
+                    ny = y + input_xfrm.LocPinY.Result - input_xfrm.Height.Result;
                 }
                 else if (align == VA.Drawing.AlignmentVertical.Center)
                 {
-                    ny = y + info.LocPinY.Result - (info.Height.Result / 2.0);
+                    ny = y + input_xfrm.LocPinY.Result - (input_xfrm.Height.Result / 2.0);
                 }
                 else if (align == VA.Drawing.AlignmentVertical.Bottom)
                 {
-                    ny = y + info.LocPinY.Result;
+                    ny = y + input_xfrm.LocPinY.Result;
                 }
 
-                update.SetFormula((short)shapeids[i], VA.ShapeSheet.SRCConstants.PinY, ny);
+                var output_xfrm = new VA.Layout.XFormCells();
+                output_xfrm.PinY = ny;
+                output_xfrms.Add(output_xfrm);
             }
 
-            update.Execute(page);
+            // Now apply them
+            update_xfrms(page, shapeids, output_xfrms);
         }
 
         public static VA.Layout.XFormCells GetXForm(IVisio.Shape shape)
