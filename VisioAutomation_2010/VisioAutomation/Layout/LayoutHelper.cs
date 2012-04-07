@@ -106,6 +106,7 @@ namespace VisioAutomation.Layout
                 return;
             }
 
+            // Calculate the new Xfrms
             var sortpos = axis == VA.Drawing.Axis.XAxis
                               ? VA.Layout.XFormPosition.PinX
                               : VA.Layout.XFormPosition.PinY;
@@ -116,26 +117,33 @@ namespace VisioAutomation.Layout
 
 
             var sorted_shape_ids = VA.Layout.LayoutHelper.SortShapesByPosition(page, shapeids, sortpos);
-            var xfrms = VA.Layout.LayoutHelper.GetXForm(page, sorted_shape_ids); ;
-            var bb = GetBoundingBox(xfrms);
+            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, sorted_shape_ids); ;
+            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
+            var bb = GetBoundingBox(input_xfrms);
             var cur_pos = new VA.Drawing.Point(bb.Left, bb.Bottom);
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            foreach (var input_xfrm in input_xfrms)
+            {
+                var new_pinpos = axis == VA.Drawing.Axis.XAxis
+                                     ? new VA.Drawing.Point(cur_pos.X + input_xfrm.LocPinX.Result, input_xfrm.PinY.Result)
+                                     : new VA.Drawing.Point(input_xfrm.PinX.Result, cur_pos.Y + input_xfrm.LocPinY.Result);
 
+                var output_xfrm = new VA.Layout.XFormCells();
+                output_xfrm.PinX = new_pinpos.X;
+                output_xfrm.PinY = new_pinpos.Y;
+                output_xfrms.Add(output_xfrm);
+
+                cur_pos = cur_pos.Add(input_xfrm.Width.Result, input_xfrm.Height.Result).Add(delta);
+            }
+
+            // Apply the changes
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             for (int i = 0; i < sorted_shape_ids.Count; i++)
             {
                 var shape_id = sorted_shape_ids[i];
-                var xfrm = xfrms[i];
-
-                var new_pinpos = axis == VA.Drawing.Axis.XAxis
-                                     ? new VA.Drawing.Point(cur_pos.X + xfrm.LocPinX.Result, xfrm.PinY.Result)
-                                     : new VA.Drawing.Point(xfrm.PinX.Result, cur_pos.Y + xfrm.LocPinY.Result);
-
-                update.SetFormula((short)shape_id, VA.ShapeSheet.SRCConstants.PinX, new_pinpos.X);
-                update.SetFormula((short)shape_id, VA.ShapeSheet.SRCConstants.PinY, new_pinpos.Y);
-                cur_pos = cur_pos.Add(xfrm.Width.Result,xfrm.Height.Result).Add(delta);
+                var output_xfrm = output_xfrms[i];
+                output_xfrm.Apply(update,(short)shape_id);
             }
-
             update.Execute(page);
         }
 
@@ -176,19 +184,19 @@ namespace VisioAutomation.Layout
                     new_corner_pos,
                     corner);
 
-                var output_frm = new VA.Layout.XFormCells();
+                var output_xfrm = new VA.Layout.XFormCells();
 
                 if (new_pin_position.X != input_xfrm.PinX.Result)
                 {
-                    output_frm.PinX = new_pin_position.X;
+                    output_xfrm.PinX = new_pin_position.X;
                 }
 
                 if (new_pin_position.Y != input_xfrm.PinY.Result)
                 {
-                    output_frm.PinY= new_pin_position.Y;
+                    output_xfrm.PinY= new_pin_position.Y;
                 }
 
-                output_xfrms.Add(output_frm);
+                output_xfrms.Add(output_xfrm);
             }
 
             // Now apply them
