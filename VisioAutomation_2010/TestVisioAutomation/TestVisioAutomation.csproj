@@ -99,7 +99,6 @@
     <Compile Include="Layout\DrawingHelperTests.cs" />
     <Compile Include="Layout\PieSliceTests.cs" />
     <Compile Include="Layout\LayoutHelperTests.cs" />
-    <Compile Include="Metadata\MetadataTests.cs" />
     <Compile Include="Scripting\ScriptingSessionTests.cs" />
     <Compile Include="Shapesheet\ShapeSheetMetadata.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper_Tests.cs" />
