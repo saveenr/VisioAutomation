@@ -157,14 +157,14 @@ namespace VisioAutomation.Layout
                               VA.Drawing.Size snapsize,
                               SnapCornerPosition corner)
         {
-            var layout_info = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
+            var input_xfrms = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {
                 var shapeid = shapeids[i];
-                var old_layout = layout_info[i];
+                var old_layout = input_xfrms[i];
                 var old_bb = VA.Layout.LayoutHelper.GetRectangle(old_layout);
                 var old_bb_pos = old_bb.LowerLeft;
 
