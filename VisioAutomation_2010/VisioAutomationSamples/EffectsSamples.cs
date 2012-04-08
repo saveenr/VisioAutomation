@@ -43,7 +43,7 @@ namespace VisioAutomationSamples
                 var fmt = new VA.DOM.ShapeCells();
                 node.Cells = fmt;
 
-                fmt.FillPattern = (int)VA.Format.FillPattern.LinearLeftToRight;
+                fmt.FillPattern = 25; // Linear pattern left to right
                 fmt.FillForegnd = color1.ToFormula();
                 fmt.FillBkgnd = color2.ToFormula();
                 fmt.FillForegndTrans = 0;

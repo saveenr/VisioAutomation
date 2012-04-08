@@ -82,6 +82,7 @@
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
+    <Compile Include="Format\FillPattern.cs" />
     <Compile Include="Internal\ShapeUtil.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentHorizontal.cs" />
@@ -246,7 +247,6 @@
     <Compile Include="Extensions\LayersMethods.cs" />
     <Compile Include="Extensions\WindowsMethods.cs" />
     <Compile Include="Shapesheet\SRCConstants.cs" />
-    <Compile Include="Format\FillPattern.cs" />
     <Compile Include="Shapesheet\SRC.cs" />
     <Compile Include="Connections\ConnectionPointCells.cs" />
     <Compile Include="Extensions\SectionMethods.cs" />
