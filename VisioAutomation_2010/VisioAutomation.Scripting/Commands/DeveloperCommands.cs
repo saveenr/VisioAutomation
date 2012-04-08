@@ -333,6 +333,11 @@ namespace VisioAutomation.Scripting.Commands
             return VA.Interop.InteropHelper.GetEnum(name);
         }
 
+        public VA.Interop.EnumType GetEnum(System.Type type)
+        {
+            return new VA.Interop.EnumType(type);
+        }
+        
         private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)
         {
             while (source.Any())

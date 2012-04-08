@@ -82,7 +82,6 @@
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
-    <Compile Include="Format\FillPattern.cs" />
     <Compile Include="Internal\ShapeUtil.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentHorizontal.cs" />

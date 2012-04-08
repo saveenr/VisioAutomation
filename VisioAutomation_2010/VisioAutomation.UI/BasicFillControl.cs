@@ -10,7 +10,7 @@ namespace VisioAutomation.UI
         {
             InitializeComponent();
 
-            this.comboBoxPattern.DataSource = System.Enum.GetValues(typeof(VA.Format.FillPattern));
+            this.comboBoxPattern.DataSource = System.Enum.GetValues(typeof(VA.UI.FillPattern));
         }
 
         [Browsable(true)]
@@ -42,15 +42,15 @@ namespace VisioAutomation.UI
         }
 
         [Browsable(true)]
-        public VA.Format.FillPattern FillPattern
+        public VA.UI.FillPattern FillPattern
         {
-            get { return (VA.Format.FillPattern)this.comboBoxPattern.SelectedValue; }
+            get { return (VA.UI.FillPattern)this.comboBoxPattern.SelectedValue; }
             set { this.comboBoxPattern.SelectedItem = value; }
         }
 
         private void comboBoxGradient_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            var v = (VA.Format.FillPattern)this.comboBoxPattern.SelectedValue;
+            var v = (VA.UI.FillPattern)this.comboBoxPattern.SelectedValue;
         }
 
         private void toolStripMenuItem1_Click(object sender, System.EventArgs e)

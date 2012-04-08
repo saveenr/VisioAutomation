@@ -95,6 +95,7 @@
     <Compile Include="FillControl.Designer.cs">
       <DependentUpon>FillControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="FillPattern.cs" />
     <Compile Include="FormBasicFillTools.cs">
       <SubType>Form</SubType>
     </Compile>

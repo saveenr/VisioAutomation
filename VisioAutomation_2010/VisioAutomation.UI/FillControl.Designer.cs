@@ -60,7 +60,7 @@ namespace VisioAutomation.UI
             // 
             this.basicFillControlFill.BackgroundColor = System.Drawing.Color.Black;
             this.basicFillControlFill.BackgroundTransparency = 0;
-            this.basicFillControlFill.FillPattern = VA.Format.FillPattern.None;
+            this.basicFillControlFill.FillPattern = VA.UI.FillPattern.None;
             this.basicFillControlFill.ForegroundColor = System.Drawing.Color.Red;
             this.basicFillControlFill.ForegroundTransparency = 0;
             this.basicFillControlFill.Location = new System.Drawing.Point(3, 27);
@@ -72,7 +72,7 @@ namespace VisioAutomation.UI
             // 
             this.basicFillControlShadow.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.basicFillControlShadow.BackgroundTransparency = 0;
-            this.basicFillControlShadow.FillPattern = VA.Format.FillPattern.None;
+            this.basicFillControlShadow.FillPattern = VA.UI.FillPattern.None;
             this.basicFillControlShadow.ForegroundColor = System.Drawing.Color.Blue;
             this.basicFillControlShadow.ForegroundTransparency = 0;
             this.basicFillControlShadow.Location = new System.Drawing.Point(3, 145);
