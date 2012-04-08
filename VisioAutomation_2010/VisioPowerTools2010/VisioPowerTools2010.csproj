@@ -188,6 +188,12 @@
     <Compile Include="FormCreateStyle.Designer.cs">
       <DependentUpon>FormCreateStyle.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDeveloper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDeveloper.Designer.cs">
+      <DependentUpon>FormDeveloper.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGetMasterImages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,9 @@
     </Compile>
     <EmbeddedResource Include="FormCreateStyle.resx">
       <DependentUpon>FormCreateStyle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDeveloper.resx">
+      <DependentUpon>FormDeveloper.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGetMasterImages.resx">
       <DependentUpon>FormGetMasterImages.cs</DependentUpon>

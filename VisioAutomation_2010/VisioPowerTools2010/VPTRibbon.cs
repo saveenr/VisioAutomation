@@ -244,5 +244,11 @@ namespace VisioPowerTools2010
             window.DeselectAll();
         }
 
+        private void buttonDeveloper_Click(object sender, RibbonControlEventArgs e)
+        {
+            var form = new FormDeveloper();
+            form.ShowDialog();
+        }
+
     }
 }
