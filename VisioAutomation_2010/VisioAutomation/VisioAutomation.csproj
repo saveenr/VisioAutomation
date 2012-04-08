@@ -139,7 +139,6 @@
     <Compile Include="Layout\ShapeLayoutCells.cs" />
     <Compile Include="Pages\PageCells.cs" />
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
-    <Compile Include="CustomProperties\Format.cs" />
     <Compile Include="Drawing\AlignmentHorizontal.cs" />
     <Compile Include="Drawing\AlignmentVertical.cs" />
     <Compile Include="Drawing\Transparency.cs" />

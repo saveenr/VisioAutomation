@@ -310,7 +310,7 @@ namespace VisioAutomation.CustomProperties
             // create a new property
             var cp = new CustomPropertyCells();
             cp.Value = val;
-            cp.Type = (int)VA.CustomProperties.Format.String;
+            cp.Type = 0; // 0 = string
 
             SetCustomProperty(shape, name, cp);
         }
