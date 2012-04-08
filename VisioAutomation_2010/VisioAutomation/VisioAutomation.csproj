@@ -138,7 +138,6 @@
     <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Layout\ShapeLayoutCells.cs" />
     <Compile Include="Pages\PageCells.cs" />
-    <Compile Include="CustomProperties\Calendar.cs" />
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="CustomProperties\Format.cs" />
     <Compile Include="Drawing\AlignmentHorizontal.cs" />

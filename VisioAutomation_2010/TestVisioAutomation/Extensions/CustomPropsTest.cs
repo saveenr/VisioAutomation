@@ -105,7 +105,7 @@ namespace TestVisioAutomation
             cp.Prompt = "Some Prompt";
             cp.LangId = 1034;
             cp.Type = (int) VA.CustomProperties.Format.DateOrTime;
-            cp.Calendar = (int)VA.CustomProperties.Calendar.Western;
+            cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;
             CustomPropertyHelper.SetCustomProperty(s1, "foo", cp);
             var z = CustomPropertyHelper.GetCustomProperties(s1);
             Assert.AreEqual(1, CustomPropertyHelper.GetCustomProperties(s1).Count);
