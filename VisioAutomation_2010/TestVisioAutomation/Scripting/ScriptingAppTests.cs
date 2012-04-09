@@ -20,7 +20,7 @@ namespace TestVisioAutomation
         public void Scripting_DevDocumentation2()
         {
             var ss = GetScriptingSession();
-            var doc = ss.Developer.DrawVANamespaces();
+            var doc = ss.Developer.DrawNamespaces();
             //doc.Close(true);
         }
     }

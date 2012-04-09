@@ -26,14 +26,14 @@ namespace VisioAutomationSamples
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawVANamespaces();
+            var doc = ss.Developer.DrawNamespaces();
         }
 
         public static void VisioAutomationNamespacesAndClasses()
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawVANamespacesAndClasses();
+            var doc = ss.Developer.DrawNamespacesAndClasses();
         }
     }
 }

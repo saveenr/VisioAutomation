@@ -219,14 +219,22 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Document DrawVANamespaces()
+        public IVisio.Document DrawNamespaces()
         {
+            return this.DrawNamespaces(VA.Scripting.Commands.DeveloperCommands.GetTypes());
+        }
+
+        public IVisio.Document DrawNamespaces(IList<System.Type> types)
+        {
+            string def_linecolor = "rgb(140,140,140)";
+            string def_fillcolor = "rgb(240,240,240)";
+            string def_font = "Segoe UI";
+
             var doc = this.Session.Document.New(8.5,11);
             var fonts = doc.Fonts;
-            var font = fonts["Segoe UI"];
+            var font = fonts[def_font];
             int fontid = font.ID16;
 
-            var types = VA.Scripting.Commands.DeveloperCommands.GetTypes();
             var pathbuilder = new PathTreeBuilder();
             foreach (var type in types)
             {
@@ -305,16 +313,14 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     node.Cells = new ShapeCells();                    
                 }
-                node.Cells.FillForegnd = "rgb(240,240,240)";
+                node.Cells.FillForegnd = def_fillcolor;
                 node.Cells.CharFont = fontid;
-                //node.ShapeCells.LineWeight = "0";
-                //node.ShapeCells.LinePattern = "0";
-                node.Cells.LineColor = "rgb(140,140,140)";
+                node.Cells.LineColor = def_linecolor;
                 node.Cells.HAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
-            cxn_cells.LineColor = "rgb(140,140,140)";
+            cxn_cells.LineColor = def_linecolor;
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
 
 
@@ -362,17 +368,26 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Document DrawVANamespacesAndClasses()
+        public IVisio.Document DrawNamespacesAndClasses()
         {
+            return this.DrawNamespacesAndClasses(VA.Scripting.Commands.DeveloperCommands.GetTypes());
+        }
+
+        public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
+        {
+            string segoeui_fontname = "Segoe UI";
+            string segoeuilight_fontname = "Segoe UI Light";
+            string def_linecolor = "rgb(180,180,180)";
+            string def_shape_fill = "rgb(245,245,245)";
 
             var doc = this.Session.Document.New(8.5, 11);
             var fonts = doc.Fonts;
-            var font_segoe = fonts["Segoe UI"];
-            var font_segoelight = fonts["Segoe UI Light"];
+            var font_segoe = fonts[segoeui_fontname];
+            var font_segoelight = fonts[segoeuilight_fontname];
             int fontid_segoe = font_segoe.ID16;
             int fontid_segoelight = font_segoelight.ID16;
 
-            var types = VA.Scripting.Commands.DeveloperCommands.GetTypes().Select(t=>new TypeInfo(t));
+            var types = types_.Select(t=>new TypeInfo(t));
 
             var pathbuilder = new PathTreeBuilder();
             foreach (var type in types)
@@ -461,7 +476,6 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            string linecolor = "rgb(180,180,180)";
 
             // format the shapes
             foreach (var node in tree_layout.Nodes)
@@ -470,16 +484,16 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     node.Cells = new ShapeCells();
                 }
-                node.Cells.FillForegnd = "rgb(245,245,245)";
+                node.Cells.FillForegnd = def_shape_fill;
                 //node.ShapeCells.LineWeight = "0";
                 //node.ShapeCells.LinePattern = "0";
-                node.Cells.LineColor = linecolor;
+                node.Cells.LineColor = def_linecolor;
                 node.Cells.HAlign = "0";
                 node.Cells.VerticalAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
-            cxn_cells.LineColor = linecolor;
+            cxn_cells.LineColor = def_linecolor;
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
 
 

@@ -19,13 +19,13 @@ namespace VisioPowerTools2010
         private void buttonHierarchy_Click(object sender, EventArgs e)
         {
             var session = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
-            session.Developer.DrawVANamespaces();
+            session.Developer.DrawNamespaces();
         }
 
         private void buttonDiagramWithClasses_Click(object sender, EventArgs e)
         {
             var session = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
-            session.Developer.DrawVANamespacesAndClasses();
+            session.Developer.DrawNamespacesAndClasses();
 
         }
     }
