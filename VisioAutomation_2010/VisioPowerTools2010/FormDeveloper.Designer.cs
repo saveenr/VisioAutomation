@@ -31,6 +31,8 @@
             this.buttonHierarchy = new System.Windows.Forms.Button();
             this.buttonDiagramWithClasses = new System.Windows.Forms.Button();
             this.labelDrawDiagrams = new System.Windows.Forms.Label();
+            this.buttonClassDiagrams = new System.Windows.Forms.Button();
+            this.buttonEnums = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonHierarchy
@@ -62,11 +64,33 @@
             this.labelDrawDiagrams.TabIndex = 2;
             this.labelDrawDiagrams.Text = "Generate diagrams";
             // 
+            // buttonClassDiagrams
+            // 
+            this.buttonClassDiagrams.Location = new System.Drawing.Point(15, 89);
+            this.buttonClassDiagrams.Name = "buttonClassDiagrams";
+            this.buttonClassDiagrams.Size = new System.Drawing.Size(152, 23);
+            this.buttonClassDiagrams.TabIndex = 3;
+            this.buttonClassDiagrams.Text = "Classes and methods";
+            this.buttonClassDiagrams.UseVisualStyleBackColor = true;
+            this.buttonClassDiagrams.Click += new System.EventHandler(this.buttonClassDiagrams_Click);
+            // 
+            // buttonEnums
+            // 
+            this.buttonEnums.Location = new System.Drawing.Point(15, 118);
+            this.buttonEnums.Name = "buttonEnums";
+            this.buttonEnums.Size = new System.Drawing.Size(152, 23);
+            this.buttonEnums.TabIndex = 4;
+            this.buttonEnums.Text = "Interop Enums";
+            this.buttonEnums.UseVisualStyleBackColor = true;
+            this.buttonEnums.Click += new System.EventHandler(this.buttonEnums_Click);
+            // 
             // FormDeveloper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 144);
+            this.ClientSize = new System.Drawing.Size(235, 184);
+            this.Controls.Add(this.buttonEnums);
+            this.Controls.Add(this.buttonClassDiagrams);
             this.Controls.Add(this.labelDrawDiagrams);
             this.Controls.Add(this.buttonDiagramWithClasses);
             this.Controls.Add(this.buttonHierarchy);
@@ -83,5 +107,7 @@
         private System.Windows.Forms.Button buttonHierarchy;
         private System.Windows.Forms.Button buttonDiagramWithClasses;
         private System.Windows.Forms.Label labelDrawDiagrams;
+        private System.Windows.Forms.Button buttonClassDiagrams;
+        private System.Windows.Forms.Button buttonEnums;
     }
 }
