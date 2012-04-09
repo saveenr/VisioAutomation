@@ -1,6 +1,6 @@
 using IVisio= Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Experimental.SimpleTextDoc
+namespace VisioAutomation.Layout.Models.SimpleTextDoc
 {
     public class TextPage
     {

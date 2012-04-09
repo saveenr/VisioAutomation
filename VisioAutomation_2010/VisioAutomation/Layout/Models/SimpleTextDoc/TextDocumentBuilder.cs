@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Experimental.SimpleTextDoc
+namespace VisioAutomation.Layout.Models.SimpleTextDoc
 {
     public class TextDocumentBuilder
     {
@@ -115,7 +115,7 @@ namespace VisioAutomation.Experimental.SimpleTextDoc
             
         }
 
-        public void Draw(VA.Experimental.SimpleTextDoc.TextPage textpage)
+        public void Draw(VA.Layout.Models.SimpleTextDoc.TextPage textpage)
         {
             var page = _visioDocument.Pages.Add();
             page.NameU = textpage.Name;

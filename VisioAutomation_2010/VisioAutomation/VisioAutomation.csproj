@@ -125,8 +125,8 @@
     <Compile Include="Internal\LinqUtil.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
-    <Compile Include="Experimental\SimpleTextDoc\TextDocumentBuilder.cs" />
-    <Compile Include="Experimental\SimpleTextDoc\TextPage.cs" />
+    <Compile Include="Layout\Models\SimpleTextDoc\TextDocumentBuilder.cs" />
+    <Compile Include="Layout\Models\SimpleTextDoc\TextPage.cs" />
     <Compile Include="Extensions\CellDataMethods.cs" />
     <Compile Include="Interop\EnumType.cs" />
     <Compile Include="Interop\EnumValue.cs" />
