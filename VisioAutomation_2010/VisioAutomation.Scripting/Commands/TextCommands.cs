@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -209,7 +208,7 @@ namespace VisioAutomation.Scripting.Commands
                 if (font == null)
                 {
                     var msg = "No such font: " + fontname;
-                    throw new ArgumentException(msg, "fontname");
+                    throw new System.ArgumentException(msg, "fontname");
                 }
                 var src_Char_Font = VA.ShapeSheet.SRCConstants.Char_Font;
 

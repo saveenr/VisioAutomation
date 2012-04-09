@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -26,17 +24,17 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (datatable == null)
             {
-                throw new ArgumentNullException("datatable");
+                throw new System.ArgumentNullException("datatable");
             }
 
             if (widths == null)
             {
-                throw new ArgumentNullException("widths");
+                throw new System.ArgumentNullException("widths");
             }
 
             if (heights == null)
             {
-                throw new ArgumentNullException("heights");
+                throw new System.ArgumentNullException("heights");
             }
 
             if (datatable.Rows.Count < 1)
@@ -73,7 +71,7 @@ namespace VisioAutomation.Scripting.Commands
                 for (int col_index = 0; col_index < row.ItemArray.Length; col_index++)
                 {
                     var col = row.ItemArray[col_index];
-                    var cur_label = (col != null) ? col.ToString() : String.Empty;
+                    var cur_label = (col != null) ? col.ToString() : string.Empty;
                     var node = layout.GetNode(col_index, i);
                     node.Text = cur_label;
                 }
@@ -219,7 +217,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var slices = RADIALLAYOUT.PieSlice.GetSlicesFromValues(center, radius, values);
-            var shapes = new List<Shape>(slices.Count);
+            var shapes = new List<IVisio.Shape>(slices.Count);
             foreach (var slice in slices)
             {
                 var shape = slice.Render(page);

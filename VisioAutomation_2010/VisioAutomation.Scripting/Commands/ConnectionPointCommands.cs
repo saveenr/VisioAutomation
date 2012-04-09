@@ -4,11 +4,8 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-
 namespace VisioAutomation.Scripting.Commands
 {
-
-
     public class ConnectionPointCommands : CommandSet
     {
         public ConnectionPointCommands(Session session) :
@@ -28,7 +25,6 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapes = this.Session.Selection.GetShapes( VA.Selection.ShapesEnumeration.Flat);
-
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
 
             var application = this.Session.VisioApplication;
@@ -116,5 +112,4 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
     }
-
 }

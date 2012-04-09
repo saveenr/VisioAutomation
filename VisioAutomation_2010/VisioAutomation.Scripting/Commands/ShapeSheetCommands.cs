@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -118,24 +117,24 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (srcs == null)
             {
-                throw new ArgumentNullException("srcs");
+                throw new System.ArgumentNullException("srcs");
             }
 
             if (formulas == null)
             {
-                throw new ArgumentNullException("formulas");
+                throw new System.ArgumentNullException("formulas");
             }
 
             if (formulas.Any( f => f == null))
             {
-                throw new ArgumentException("formulas contains a null value");
+                throw new System.ArgumentException("formulas contains a null value");
             }
 
 
             if (formulas.Count != srcs.Count)
             {
                 string msg = string.Format("Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count,formulas.Count);
-                throw new ArgumentException(msg);
+                throw new System.ArgumentException(msg);
             }
 
 
@@ -180,36 +179,6 @@ namespace VisioAutomation.Scripting.Commands
                 internal_update.BlastGuards = blastguards;
                 internal_update.TestCircular = testcircular;
                 internal_update.Execute(active_page);                
-            }
-        }
-
-        public void SetFormulas<T>(IEnumerable<T> items, 
-            Func<T, bool> has_data,
-            Func<T, VA.ShapeSheet.SRC> get_src,
-            Func<T, string> get_formula)
-        {
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-            foreach (var shapeid in shapeids)
-            {
-                foreach (var item in items)
-                {
-                    if (has_data(item))
-                    {
-                        var src = get_src(item);
-                        var formula = get_formula(item);
-                        update.SetFormula((short)shapeid, src, formula);
-                    }
-                }
-            }
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                var active_page = application.ActivePage;
-                update.Execute(active_page);
             }
         }
     }

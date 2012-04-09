@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -311,7 +310,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (node.Cells==null)
                 {
-                    node.Cells = new ShapeCells();                    
+                    node.Cells = new VA.DOM.ShapeCells();                    
                 }
                 node.Cells.FillForegnd = def_fillcolor;
                 node.Cells.CharFont = fontid;
@@ -482,7 +481,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (node.Cells == null)
                 {
-                    node.Cells = new ShapeCells();
+                    node.Cells = new VA.DOM.ShapeCells();
                 }
                 node.Cells.FillForegnd = def_shape_fill;
                 //node.ShapeCells.LineWeight = "0";
