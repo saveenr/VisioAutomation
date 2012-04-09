@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
-using System;
 using System.Linq;
 
 namespace VisioAutomation.Text
@@ -107,7 +106,7 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             int num_stops = VA.Text.TextFormat.GetTabStopCount(shape);
@@ -155,12 +154,12 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             if (stops == null)
             {
-                throw new ArgumentNullException("stops");
+                throw new System.ArgumentNullException("stops");
             }
 
             ClearTabStops(shape);
@@ -204,7 +203,7 @@ namespace VisioAutomation.Text
         {
             if (stops < 0)
             {
-                throw new ArgumentOutOfRangeException("stops");
+                throw new System.ArgumentOutOfRangeException("stops");
             }
 
             var tagtab = IVisio.VisRowTags.visTagTab0;
@@ -222,7 +221,7 @@ namespace VisioAutomation.Text
             }
             else
             {
-                throw new ArgumentOutOfRangeException("stops", "unsupported number of tabs");
+                throw new System.ArgumentOutOfRangeException("stops", "unsupported number of tabs");
             }
 
             return tagtab;
@@ -232,7 +231,7 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             var tcell = shape.GetCell(src_tabstopcount);
@@ -248,7 +247,7 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             int num_existing_tabstops = GetTabStopCount(shape);

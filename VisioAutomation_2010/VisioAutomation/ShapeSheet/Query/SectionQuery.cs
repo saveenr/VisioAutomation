@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -113,12 +112,12 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (page == null)
             {
-                throw new ArgumentNullException("page");
+                throw new System.ArgumentNullException("page");
             }
 
             if (shapeids == null)
             {
-                throw new ArgumentNullException("shapeids");
+                throw new System.ArgumentNullException("shapeids");
             }
 
             var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
@@ -195,7 +194,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();

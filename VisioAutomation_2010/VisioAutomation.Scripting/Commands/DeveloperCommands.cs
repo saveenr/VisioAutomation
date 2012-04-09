@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using TREEMODEL = VisioAutomation.Layout.Models.Tree;
@@ -119,8 +118,6 @@ namespace VisioAutomation.Scripting.Commands
             int pagecount = 0;
             foreach (var enum_ in interop_enums)
             {
-
-
                 int chunkcount = 0;
 
                 var values = enum_.Values.OrderBy(i => i.Name).ToList();
@@ -130,7 +127,6 @@ namespace VisioAutomation.Scripting.Commands
                     foreach (var val in chunk)
                     {
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
-
                     }
 
                     var docpage = new VA.Layout.Models.SimpleTextDoc.TextPage();
@@ -139,7 +135,6 @@ namespace VisioAutomation.Scripting.Commands
                     if (chunkcount == 0)
                     {
                         docpage.Name = string.Format("{0}", enum_.Name);
-                        
                     }
                     else
                     {
@@ -152,12 +147,12 @@ namespace VisioAutomation.Scripting.Commands
                                  {
                                      new VA.Text.TabStop(1.5, VA.Text.TabStopAlignment.Left)
                                  };
+
                     VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
                     
                     chunkcount++;
                     pagecount++;
                 }
-
             }
 
             docbuilder.Finish();
@@ -327,7 +322,6 @@ namespace VisioAutomation.Scripting.Commands
             return doc;
         }
 
-
         public IList<VA.Interop.EnumType> GetInteropEnums()
         {
             return VA.Interop.InteropHelper.GetEnums();
@@ -475,7 +469,6 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-
             // format the shapes
             foreach (var node in tree_layout.Nodes)
             {
@@ -494,8 +487,6 @@ namespace VisioAutomation.Scripting.Commands
             var cxn_cells = new VA.DOM.ShapeCells();
             cxn_cells.LineColor = def_linecolor;
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
-
-
             tree_layout.Render(doc.Application.ActivePage);
 
             return doc;
@@ -507,7 +498,6 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var sb = new System.Text.StringBuilder();
                 var tokens = type.Name.Split(new[] { '`' });
-
 
                 sb.Append(tokens[0]);
                 var gas = type.GetGenericArguments();
@@ -586,7 +576,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-
         private static bool TypeIsStruct(System.Type type)
         {
             return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
@@ -596,7 +585,6 @@ namespace VisioAutomation.Scripting.Commands
         {
             return (type.IsAbstract && type.IsSealed);
         }
-
 
         private enum TypeKind
         {

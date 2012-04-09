@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -13,7 +11,7 @@ namespace VisioAutomation.Interop
         private static Dictionary<string, EnumType> g_name_to_enum;
         private static List<System.Type> g_types; 
 
-        private static List<Type> GetTypes()
+        private static List<System.Type> GetTypes()
         {
             init();
             return g_types;

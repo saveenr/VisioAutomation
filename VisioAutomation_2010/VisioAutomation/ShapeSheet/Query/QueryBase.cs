@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -24,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (column == null)
             {
-                throw new ArgumentNullException("column");
+                throw new System.ArgumentNullException("column");
             }
 
             this._columns.Add(column);

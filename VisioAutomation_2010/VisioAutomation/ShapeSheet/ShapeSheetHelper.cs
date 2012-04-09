@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio=Microsoft.Office.Interop.Visio;
@@ -199,7 +198,7 @@ namespace VisioAutomation.ShapeSheet
             return page.SetResults(stream, unitcodes_obj_array, results_obj_array, (short)flags);
         }
 
-        private static IVisio.VisGetSetArgs ResultTypeToGetResultsFlag(Type result_type)
+        private static IVisio.VisGetSetArgs ResultTypeToGetResultsFlag(System.Type result_type)
         {
             IVisio.VisGetSetArgs flags = 0;
 
@@ -217,7 +216,7 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                throw new ArgumentOutOfRangeException();
+                throw new System.ArgumentOutOfRangeException();
             }
 
             return flags;
@@ -250,7 +249,7 @@ namespace VisioAutomation.ShapeSheet
                 return new string[0];
             }
 
-            Array formulas_sa;
+            System.Array formulas_sa;
 
             page.GetFormulasU(stream, out formulas_sa);
 
@@ -258,7 +257,7 @@ namespace VisioAutomation.ShapeSheet
 
             if (formulas_obj_array.Length != numitems)
             {
-                string msg = String.Format(
+                string msg = string.Format(
                     "Expected {0} items from GetFormulas but only received {1}",
                     numitems,
                     formulas_obj_array.Length);
@@ -280,14 +279,14 @@ namespace VisioAutomation.ShapeSheet
                 return new string[0];
             }
 
-            Array formulas_sa;
+            System.Array formulas_sa;
             shape.GetFormulasU(stream, out formulas_sa);
 
             object[] formulas_obj_array = (object[])formulas_sa;
 
             if (formulas_obj_array.Length != numitems)
             {
-                string msg = String.Format(
+                string msg = string.Format(
                     "Expected {0} items from GetFormulas but only received {1}",
                     numitems,
                     formulas_obj_array.Length);
@@ -313,7 +312,7 @@ namespace VisioAutomation.ShapeSheet
             var flags = VA.ShapeSheet.ShapeSheetHelper.ResultTypeToGetResultsFlag(result_type);
             var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
 
-            Array results_sa;
+            System.Array results_sa;
 
             page.GetResults(
                 stream,
@@ -325,7 +324,7 @@ namespace VisioAutomation.ShapeSheet
 
             if (results_obj_array.Length != numitems)
             {
-                string msg = String.Format(
+                string msg = string.Format(
                     "Expected {0} items from GetResults but only received {1}",
                     numitems,
                     results_obj_array.Length);
@@ -351,7 +350,7 @@ namespace VisioAutomation.ShapeSheet
             var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
             var flags = VA.ShapeSheet.ShapeSheetHelper.ResultTypeToGetResultsFlag(result_type);
 
-            Array results_sa;
+            System.Array results_sa;
             shape.GetResults(
                 stream,
                 (short)flags,
@@ -362,7 +361,7 @@ namespace VisioAutomation.ShapeSheet
 
             if (results_obj_array.Length != numitems)
             {
-                string msg = String.Format(
+                string msg = string.Format(
                     "Expected {0} items from GetResults but only received {1}",
                     numitems,
                     results_obj_array.Length);
