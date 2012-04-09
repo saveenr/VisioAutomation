@@ -74,5 +74,11 @@ namespace VisioAutomation
         {
             return string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", app.Version);
         }
+        
+        public static void BringWindowToTop(IVisio.Application app)
+        {
+            var visio_window_handle = new System.IntPtr(app.WindowHandle32);
+            VA.Internal.Interop.NativeMethods.BringWindowToTop(visio_window_handle);
+        }
     }
 }

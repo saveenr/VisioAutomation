@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            VA.UI.UserInterfaceHelper.BringApplicationWindowToFront(app);
+            VA.ApplicationHelper.BringWindowToTop(app);
         }
 
         public void ForceClose()
@@ -83,7 +83,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Session.VisioApplication = app;
 
-            VA.UI.UserInterfaceHelper.BringApplicationWindowToFront(app);
+            VA.ApplicationHelper.BringWindowToTop(app);
 
             return app;
         }
@@ -104,6 +104,5 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Session.VisioApplication.Redo();
         }
-
     }
 }

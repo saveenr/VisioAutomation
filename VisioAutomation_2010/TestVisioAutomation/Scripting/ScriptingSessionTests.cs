@@ -11,8 +11,7 @@ namespace TestVisioAutomation
         public void Scripting_Test_GetWindowText()
         {
             var ss = GetScriptingSession();
-            var t = ss.Application.GetWindowText();
-
+            var text = ss.Application.GetWindowText();
         }
 
         [TestMethod]
