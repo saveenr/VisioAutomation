@@ -33,7 +33,7 @@ namespace VisioAutomation.Layout.Models.Radial
             }
 
             this.InnerRadius = inner_radius;
-            this.OuterRadius = inner_radius;
+            this.OuterRadius = outer_radius;
         }
 
 
