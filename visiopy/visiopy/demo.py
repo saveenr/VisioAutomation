@@ -3,7 +3,6 @@ import win32com.client
 import visiopy
 
 visapp = win32com.client.Dispatch("Visio.Application") 
-
    
 doc = visapp.Documents.Add("") 
 page = visapp.ActivePage
@@ -15,16 +14,11 @@ masterrect = stencildoc.Masters.ItemU("rectangle")
 masteroctagon = stencildoc.Masters.ItemU("octagon") 
 masterconnector= stencildoc.Masters.ItemU("dynamic connector")
 
-dropdata = [(masterrect, (1,1) ),
-    (masteroctagon, (4,3) ),
-    (masterconnector, (-1,-1) )
-    ]
-
-shapes = []
-for dd in dropdata:
-    master = dd[0]
-    shape = page.Drop( master, *dd[1]) 
-    shapes.append(shape)
+dom = visiopy.DOM()
+dom.Drop(masterrect, (1,1))
+dom.Drop(masteroctagon, (4,3))
+dom.Drop(masterconnector, (-1,-1))
+dom.Render()
 
 q = visiopy.Query()
 q.Add( shapes[0].ID16, visiopy.SRCConstants.Width )

@@ -497,6 +497,28 @@ class SRCConstants:
     DisplayLevel  = SRC(__SEC__.visSectionObject, __ROW__.visRowShapeLayout, __CEL__.visSLODisplayLevel) #  new in Visio 2010
     Relationships  = SRC(__SEC__.visSectionObject, __ROW__.visRowShapeLayout, __CEL__.visSLORelationships) #  new in Visio 2010
 
+class DOMShape:
+    
+    def __init__( self , master, pos) :
+        this.Master = master
+        this.DropPosition = pos
+        this.VisioShape = None
+
+class DOM : 
+
+    
+    def __init__( self ) :
+        this.Shapes = []
+
+    def Drop( self, master, pos ) :
+        s = DOMShape( master, pos )
+        this.Shapes.append(s) 
+
+    def Render( self, page ) :
+        for shape in shapes:
+            vshape = page.Drop( shape.Master, *shape.DropPosition) 
+            shape.VisioShape = vshape
+
 if (__name__=='__main__') :
     pass
 else :
