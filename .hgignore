@@ -21,6 +21,7 @@ syntax: glob
 *.pdb     
 *.plg 
 *.[Pp]ublish.xml 
+*.pyc 
 *.rdl.data 
 *.sbr 
 *.scc 
