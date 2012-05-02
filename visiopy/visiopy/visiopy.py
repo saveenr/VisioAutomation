@@ -497,6 +497,12 @@ class SRCConstants:
     DisplayLevel  = SRC(__SEC__.visSectionObject, __ROW__.visRowShapeLayout, __CEL__.visSLODisplayLevel) #  new in Visio 2010
     Relationships  = SRC(__SEC__.visSectionObject, __ROW__.visRowShapeLayout, __CEL__.visSLORelationships) #  new in Visio 2010
 
+class Point:
+    
+    def __init__( self , x, y) :
+        this.X = x
+        this.Y = y
+
 class DOMShape:
     
     def __init__( self , master, pos) :
@@ -521,8 +527,8 @@ class DOM :
         xyarray = []
         for shape in this.Shapes:
             masters.append( shape. Master )
-            xyarray.append( shape.DropPosition[0] )
-            xyarray.append( shape.DropPosition[1] )
+            xyarray.append( shape.DropPosition.X )
+            xyarray.append( shape.DropPosition.Y )
         shape_ids = page.DropMany( masters, xyarray) 
  
         page_shapes = page.Shapes

@@ -15,9 +15,9 @@ masteroctagon = stencildoc.Masters.ItemU("octagon")
 masterconnector= stencildoc.Masters.ItemU("dynamic connector")
 
 dom = visiopy.DOM()
-dom.Drop(masterrect, (1,1))
-dom.Drop(masteroctagon, (4,3))
-dom.Drop(masterconnector, (-1,-1))
+dom.Drop(masterrect, visiopy.Point(1,1))
+dom.Drop(masteroctagon, visiopy.Point(4,3))
+dom.Drop(masterconnector, visiopy.Point(-1,-1))
 dom.Render()
 
 q = visiopy.Query()
