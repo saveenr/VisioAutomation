@@ -535,8 +535,6 @@ class DOM :
             xyarray.append( shape.DropPosition.Y )
         num_shapes,shape_ids = page.DropMany( masters, xyarray) 
  
-        print "mmmmm", shape_ids
-
         page_shapes = page.Shapes
         for i,shape in enumerate( self.Shapes ) :
             shape.VisioShapeID = shape_ids[i]
