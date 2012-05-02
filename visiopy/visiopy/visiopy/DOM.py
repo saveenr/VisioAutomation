@@ -25,8 +25,9 @@ class DOM :
         self.Shapes = []
         self.Connections = []
 
-    def Drop( self, mastername, stencilname, pos ) :
+    def Drop( self, mastername, stencilname, pos , text=None) :
         domshape = DOMShape( mastername, stencilname, pos )
+        domshape.Text = text
         self.Shapes.append(domshape) 
         return domshape
 
