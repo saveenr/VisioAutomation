@@ -10,6 +10,52 @@ class SRC :
     def __str__(self) :
         return "SRC(%s,%s,%s)" % (self.Section,self.Row,self.Cell)
 
+def build_sidsrcstream( id_srcs ) :
+    stream = []
+    for id,src in id_srcs:
+        stream.append(id)
+        stream.append(src.Section)
+        stream.append(src.Row)
+        stream.append(src.Cell)
+    return stream
+
+class Query :
+
+    def __init__(self) :
+        self.items = []
+
+    def Add(self, id, src) :
+        item = (id,src)
+        self.items.append(item)
+
+    def GetFormulas(self, page) :
+        stream = build_sidsrcstream( ( (id,src) for (id,src) in self.items )  )
+        formulas = page.GetFormulas(stream)
+        return formulas
+
+    def GetResults(self, page) :
+        stream = build_sidsrcstream( ( (id,src) for (id,src) in self.items )  )
+        result = page.GetResults(stream,0,None)
+        return result
+
+class Update :
+
+    def __init__(self) :
+        self.items = []
+        self.Flags = 0
+
+    def Add(self, id, src, formula ) :
+        item = (id,src,formula)
+        self.items.append(item)
+
+    def SetFormulas(self, page) :
+        stream = build_sidsrcstream( ( (id,src) for (id,src,formula) in self.items )  )
+        formulas = []
+        for (id,src,formula) in self.items :
+            formulas.append(formula)
+        result = page.SetFormulas(stream, formulas, self.Flags)
+        return result
+
 class SRCConstants:
 
     __SEC__ = win32com.client.constants
