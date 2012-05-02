@@ -5,11 +5,19 @@ win32com.client.gencache.EnsureDispatch("Visio.Application")
 
 class DOMShape:
     
-    def __init__( self , master, pos) :
-        self.Master = master
+    def __init__( self , mastername, stencilname, pos) :
+        self.MasterName = mastername
+        self.StencilName = stencilname
+        self.Master = None
         self.DropPosition = pos
         self.VisioShape = None
         self.VisioShapeID = None
+        self.Text = None
+
+def openstencilx(docs, stencilname) :
+    stencildocflags = win32com.client.constants.visOpenRO | win32com.client.constants.visOpenDocked 
+    stencildoc = docs.OpenEx(stencilname , stencildocflags )
+    return stencildoc
 
 class DOM : 
     
@@ -17,8 +25,8 @@ class DOM :
         self.Shapes = []
         self.Connections = []
 
-    def Drop( self, master, pos ) :
-        domshape = DOMShape( master, pos )
+    def Drop( self, mastername, stencilname, pos ) :
+        domshape = DOMShape( mastername, stencilname, pos )
         self.Shapes.append(domshape) 
         return domshape
 
@@ -26,19 +34,47 @@ class DOM :
         self.Connections.append((fromshape, toshape, connectorshape))
 
     def Render( self, page ) :
+        # Load all the stencils
+        # Goal: prevent trying to reload the same stencil multiple times
+        # Goal: minimize having to use COM to lookup stencil documents by name
+        docs = page.Application.Documents
+        stencilnames = set(s.StencilName.lower() for s in self.Shapes)
+        stencil_cache = {}
+        for stencilname in stencilnames:
+            stencildoc = openstencilx( docs, stencilname )       
+            stencil_cache[ stencilname ] = stencildoc 
+
+        # cache all the master references
+        # Goal: minimize having to use COM to lookup master objects by name
+        master_cache = {}
+        for shape in self.Shapes:
+            stencildoc = stencil_cache[ shape.StencilName.lower() ]
+            mastername = shape.MasterName.lower()
+            master = master_cache.get( mastername, None )
+            if (master == None) :
+                master = stencildoc.Masters.ItemU(shape.MasterName) 
+            shape.Master = master
+
+        # Perform the basic drop of all the masters
         masters = []
         xyarray = []
         for shape in self.Shapes:
-            masters.append( shape. Master )
+            masters.append( shape.Master )
             xyarray.append( shape.DropPosition.X )
             xyarray.append( shape.DropPosition.Y )
         num_shapes,shape_ids = page.DropMany( masters, xyarray) 
  
+        # Ensure that we have stored the corresponding shape object and shapeid for each dropped object
         page_shapes = page.Shapes
         for i,shape in enumerate( self.Shapes ) :
             shape.VisioShapeID = shape_ids[i]
             shape.VisioShape = page_shapes.ItemFromID( shape_ids[i] )
+        
+        for shape in self.Shapes:
+            if (shape.Text != None and shape.Text!='') :
+                shape.VisioShape.Text = shape.Text
 
+        # Finally perform the connections
         for i,cxn in enumerate( self.Connections ) :
             self.__connect(cxn[0].VisioShape, cxn[1].VisioShape, cxn[2].VisioShape)
 

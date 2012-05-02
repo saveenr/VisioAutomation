@@ -7,18 +7,15 @@ visapp = win32com.client.Dispatch("Visio.Application")
 doc = visapp.Documents.Add("") 
 page = visapp.ActivePage
 
-stencilname = "basic_u.vss" 
-stencildoc = visiopy.openstencil(visapp.Documents,stencilname)
-
-masterrect = stencildoc.Masters.ItemU("rectangle") 
-masteroctagon = stencildoc.Masters.ItemU("octagon") 
-masterconnector= stencildoc.Masters.ItemU("dynamic connector")
-
 dom = visiopy.DOM()
-s0 = dom.Drop(masterrect, visiopy.Point(1,1))
-s1 = dom.Drop(masteroctagon, visiopy.Point(4,3))
-c0 = dom.Drop(masterconnector, visiopy.Point(-1,-1))
+s0 = dom.Drop("rectangle", "basic_u.vss", visiopy.Point(1,1))
+s1 = dom.Drop("octagon", "basic_u.vss", visiopy.Point(4,3))
+c0 = dom.Drop("dynamic connector", "basic_u.vss", visiopy.Point(-1,-1))
 dom.Connect(s0,s1,c0)
+
+s0.Text = "A"
+s1.Text = "B"
+c0.Text = "C"
 dom.Render(page)
 
 q = visiopy.Query()

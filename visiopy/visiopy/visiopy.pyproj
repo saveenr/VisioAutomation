@@ -24,7 +24,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="demo.py" />
-    <Compile Include="visiopy.py" />
+    <Compile Include="visiopy\ShapeSheet.py" />
+    <Compile Include="visiopy\DOM.py" />
+    <Compile Include="visiopy\Drawing.py" />
+    <Compile Include="visiopy\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="visiopy\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>
