@@ -500,48 +500,50 @@ class SRCConstants:
 class Point:
     
     def __init__( self , x, y) :
-        this.X = x
-        this.Y = y
+        self.X = x
+        self.Y = y
 
 class DOMShape:
     
     def __init__( self , master, pos) :
-        this.Master = master
-        this.DropPosition = pos
-        this.VisioShape = None
-        this.VisioShapeID = None
+        self.Master = master
+        self.DropPosition = pos
+        self.VisioShape = None
+        self.VisioShapeID = None
 
 class DOM : 
 
     
     def __init__( self ) :
-        this.Shapes = []
-        this.Connections = []
+        self.Shapes = []
+        self.Connections = []
 
     def Drop( self, master, pos ) :
         domshape = DOMShape( master, pos )
-        this.Shapes.append(domshape) 
+        self.Shapes.append(domshape) 
         return domshape
 
     def Connect( self, fromshape, toshape, connectorshape ) :
-        this.Connections.append(shapes[0], shapes[1], shapes[2])
+        self.Connections.append((fromshape, toshape, connectorshape))
 
     def Render( self, page ) :
         masters = []
         xyarray = []
-        for shape in this.Shapes:
+        for shape in self.Shapes:
             masters.append( shape. Master )
             xyarray.append( shape.DropPosition.X )
             xyarray.append( shape.DropPosition.Y )
-        shape_ids = page.DropMany( masters, xyarray) 
+        num_shapes,shape_ids = page.DropMany( masters, xyarray) 
  
-        page_shapes = page.Shapes
-        for i,shape in enumerate( this.Shapes ) :
-            shape.VisioShapeID = shape_ids[i]
-            shape.VisioShape = pae_shapes.ItemFromID( shape_ids[i] )
+        print "mmmmm", shape_ids
 
-        for i,cxn in enumerate( this.Connections ) :
-            visiopy.connect(cxn[0], cxn[1], cxn[2])
+        page_shapes = page.Shapes
+        for i,shape in enumerate( self.Shapes ) :
+            shape.VisioShapeID = shape_ids[i]
+            shape.VisioShape = page_shapes.ItemFromID( shape_ids[i] )
+
+        for i,cxn in enumerate( self.Connections ) :
+            connect(cxn[0].VisioShape, cxn[1].VisioShape, cxn[2].VisioShape)
 
 if (__name__=='__main__') :
     pass
