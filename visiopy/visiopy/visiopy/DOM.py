@@ -1,7 +1,11 @@
+from __future__ import division
 import array
 import sys 
 import win32com.client 
 win32com.client.gencache.EnsureDispatch("Visio.Application") 
+
+from Drawing import *
+from ShapeSheet import *
 
 class DOMShape:
     
@@ -9,10 +13,20 @@ class DOMShape:
         self.MasterName = mastername
         self.StencilName = stencilname
         self.Master = None
-        self.DropPosition = pos
+        if ( isinstance(pos,Point) ) :
+            self.DropPosition = pos
+            self.DropSize = None
+        elif ( isinstance(pos,Rectangle) ) :
+            self.DropSize = ((pos.Right-pos.Left),(pos.Top-pos.Bottom))
+            self.DropPosition = Point( (pos.Right-pos.Left)/2 , (pos.Top-pos.Bottom)/2 )
+        else :
+            print ">>>", pos is Rectangle
+            raise DOM()
+            #raise some error
         self.VisioShape = None
         self.VisioShapeID = None
         self.Text = None
+        
 
 def openstencilx(docs, stencilname) :
     stencildocflags = win32com.client.constants.visOpenRO | win32com.client.constants.visOpenDocked 
@@ -64,12 +78,21 @@ class DOM :
             xyarray.append( shape.DropPosition.X )
             xyarray.append( shape.DropPosition.Y )
         num_shapes,shape_ids = page.DropMany( masters, xyarray) 
- 
+
+
         # Ensure that we have stored the corresponding shape object and shapeid for each dropped object
         page_shapes = page.Shapes
         for i,shape in enumerate( self.Shapes ) :
             shape.VisioShapeID = shape_ids[i]
             shape.VisioShape = page_shapes.ItemFromID( shape_ids[i] )
+
+        #set any dropsizes
+        u = Update()
+        for shape in self.Shapes:
+            if (shape.DropSize!=None):
+                u.Add( shape.VisioShapeID, SRCConstants.Width , str(shape.DropSize[0]))
+                u.Add( shape.VisioShapeID, SRCConstants.Width , str(shape.DropSize[1]))
+        result = u.SetFormulas(page) 
         
         for shape in self.Shapes:
             if (shape.Text != None and shape.Text!='') :

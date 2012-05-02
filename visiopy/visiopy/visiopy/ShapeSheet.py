@@ -49,6 +49,8 @@ class Update :
         self.items.append(item)
 
     def SetFormulas(self, page) :
+        if (len(self.items)<1) :
+            return (0, [])
         stream = build_sidsrcstream( ( (id,src) for (id,src,formula) in self.items )  )
         formulas = []
         for (id,src,formula) in self.items :
