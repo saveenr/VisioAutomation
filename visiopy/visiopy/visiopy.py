@@ -516,11 +516,15 @@ class DOM :
     
     def __init__( self ) :
         this.Shapes = []
+        this.Connections = []
 
     def Drop( self, master, pos ) :
         domshape = DOMShape( master, pos )
         this.Shapes.append(domshape) 
         return domshape
+
+    def Connect( self, fromshape, toshape, connectorshape ) :
+        this.Connections.append(shapes[0], shapes[1], shapes[2])
 
     def Render( self, page ) :
         masters = []
@@ -535,6 +539,9 @@ class DOM :
         for i,shape in enumerate( this.Shapes ) :
             shape.VisioShapeID = shape_ids[i]
             shape.VisioShape = pae_shapes.ItemFromID( shape_ids[i] )
+
+        for i,cxn in enumerate( this.Connections ) :
+            visiopy.connect(cxn[0], cxn[1], cxn[2])
 
 if (__name__=='__main__') :
     pass

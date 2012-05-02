@@ -15,9 +15,10 @@ masteroctagon = stencildoc.Masters.ItemU("octagon")
 masterconnector= stencildoc.Masters.ItemU("dynamic connector")
 
 dom = visiopy.DOM()
-dom.Drop(masterrect, visiopy.Point(1,1))
-dom.Drop(masteroctagon, visiopy.Point(4,3))
-dom.Drop(masterconnector, visiopy.Point(-1,-1))
+s0 = dom.Drop(masterrect, visiopy.Point(1,1))
+s1 = dom.Drop(masteroctagon, visiopy.Point(4,3))
+c0 = dom.Drop(masterconnector, visiopy.Point(-1,-1))
+dom.Connect(s0,s2,c0)
 dom.Render()
 
 q = visiopy.Query()
@@ -35,4 +36,4 @@ result = u.SetFormulas(page)
 
 print result
 
-visiopy.connect(shapes[0], shapes[1], shapes[2])
+#visiopy.connect(shapes[0], shapes[1], shapes[2])
