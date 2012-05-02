@@ -503,6 +503,7 @@ class DOMShape:
         this.Master = master
         this.DropPosition = pos
         this.VisioShape = None
+        this.VisioShapeID = None
 
 class DOM : 
 
@@ -511,13 +512,23 @@ class DOM :
         this.Shapes = []
 
     def Drop( self, master, pos ) :
-        s = DOMShape( master, pos )
-        this.Shapes.append(s) 
+        domshape = DOMShape( master, pos )
+        this.Shapes.append(domshape) 
+        return domshape
 
     def Render( self, page ) :
-        for shape in shapes:
-            vshape = page.Drop( shape.Master, *shape.DropPosition) 
-            shape.VisioShape = vshape
+        masters = []
+        xyarray = []
+        for shape in this.Shapes:
+            masters.append( shape. Master )
+            xyarray.append( shape.DropPosition[0] )
+            xyarray.append( shape.DropPosition[1] )
+        shape_ids = page.DropMany( masters, xyarray) 
+ 
+        page_shapes = page.Shapes
+        for i,shape in enumerate( this.Shapes ) :
+            shape.VisioShapeID = shape_ids[i]
+            shape.VisioShape = pae_shapes.ItemFromID( shape_ids[i] )
 
 if (__name__=='__main__') :
     pass
