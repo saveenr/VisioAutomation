@@ -23,10 +23,3 @@ results = q.GetResults(page)
 print formulas
 print results
 
-#u = visiopy.Update()
-#u.Add( dom.Shapes[0].VisioShapeID, visiopy.SRCConstants.Width , "5")
-#u.Add( dom.Shapes[0].VisioShapeID, visiopy.SRCConstants.Height , "3")
-#result = u.SetFormulas(page)
-
-print result
-
