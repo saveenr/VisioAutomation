@@ -36,18 +36,12 @@ class DOMMaster(object):
         self.MasterName = mastername
         self.StencilName = stencil
 
-class DOMConnectionType:
-    Manual = 0
-    Auto = 1
-
 class DOMConnection(object):
 
-    def __init__(self , fromshape, toshape, connectorshape,contype) :
+    def __init__(self , fromshape, toshape, connectorshape) :
         self.FromShape = fromshape
         self.ToShape = toshape
         self.ConnectorShape = connectorshape
-        self.Type = contype
-        self.Direction = 0
 
 class DOM(object): 
     
@@ -70,12 +64,11 @@ class DOM(object):
         return domshape
 
     def Connect( self, fromshape, toshape, connectorshape ) :
-        con = DOMConnection(fromshape, toshape, connectorshape, DOMConnectionType.Manual)
+        con = DOMConnection(fromshape, toshape, connectorshape)
         self.Connections.append(con)
 
-    def AutoConnect( self, fromshape, toshape, connectorshape, direction=0) :
-        con = DOMConnection(fromshape, toshape, connectorshape, DOMConnectionType.Auto)
-        con.Direction = direction
+    def AutoConnect( self, fromshape, toshape, connectorshape) :
+        con = DOMConnection(fromshape, toshape, connectorshape)
         self.Connections.append(con)
 
     def OpenStencil( self, name) :
@@ -147,11 +140,9 @@ class DOM(object):
         nonbatch_connects = []
         batch_autoconnects = []
         for i,cxn in enumerate( self.Connections ) :
-            if (cxn.Type == DOMConnectionType.Manual) :
+            if (cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
                 nonbatch_connects.append(cxn)
-            elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
-                nonbatch_connects.append(cxn)
-            elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape.VisioShape != cxn.ToShape.VisioShape) :
+            else:
                 batch_autoconnects.append(cxn)
 
         if (len(nonbatch_connects)>0):
@@ -174,10 +165,10 @@ class DOM(object):
             toshapeids=[]
             placementdirs = []
             connectors = []
+            direction = 0
             for cxn in batch_autoconnects:
                 fromshapeids.append( cxn.FromShape.VisioShapeID )
                 toshapeids.append( cxn.ToShape.VisioShapeID )
-                placementdirs.append( cxn.Direction )
+                placementdirs.append( direction )
                 connectors.append(None)
-                #autoconnectshape = cxn.FromShape.VisioShape.AutoConnect( cxn.ToShape.VisioShape, cxn.Direction, cxn.ConnectorShape.VisioShape )                
             page.AutoConnectMany(fromshapeids, toshapeids, placementdirs, None )
