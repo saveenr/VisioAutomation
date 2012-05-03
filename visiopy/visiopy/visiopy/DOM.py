@@ -42,6 +42,7 @@ class DOM :
         self.Connections = []
         self.Stencils = []
         self.Masters = []
+        self.AutoConnections = []
 
     def Master( self, mastername, stencilname ) :
         m = DOMMaster( mastername, stencilname )
@@ -57,6 +58,9 @@ class DOM :
 
     def Connect( self, fromshape, toshape, connectorshape ) :
         self.Connections.append((fromshape, toshape, connectorshape))
+
+    def AutoConnect( self, fromshape, toshape, connectorshape, direction) :
+        self.Connections.append((fromshape, toshape, connectorshape, direction))
 
     def OpenStencil( self, name) :
         stencil = DOMStencil(name)
@@ -122,6 +126,14 @@ class DOM :
         # Finally perform the connections
         for i,cxn in enumerate( self.Connections ) :
             self.__connect(cxn[0].VisioShape, cxn[1].VisioShape, cxn[2].VisioShape)
+
+        for i,cxn in enumerate( self.AutoConnections ) :
+            # Shape.AutoConnect on MSDN http://msdn.microsoft.com/en-us/library/ff765915.aspx
+            from_shape = cxn[0].VisioShape
+            to_shape = cxn[1].VisioShape
+            connectorshape = cxn[2]
+            direction = cxn[3]
+            autoconnectshape = from_shape.AutoConnect( to_shape, direction, connectorshape )
 
 
     def __connect( self, fromshape, toshape, connectorshape ) :
