@@ -35,14 +35,26 @@ class DOMMaster(object):
         self.MasterName = mastername
         self.StencilName = stencil
 
+class DOMConnectionType:
+    Manual = 0
+    Auto = 1
+
+class DOMConnection(object):
+
+    def __init__(self , fromshape, toshape, connectorshape,contype) :
+        self.FromShape = fromshape
+        self.ToShape = toshape
+        self.ConnectorShape = connectorshape
+        self.Type = contype
+        self.Direction = 0
+
 class DOM(object): 
     
     def __init__( self ) :
         self.Shapes = []
-        self.Connections = []
         self.Stencils = []
         self.Masters = []
-        self.AutoConnections = []
+        self.Connections = []
 
     def Master( self, mastername, stencilname ) :
         m = DOMMaster( mastername, stencilname )
@@ -57,10 +69,13 @@ class DOM(object):
         return domshape
 
     def Connect( self, fromshape, toshape, connectorshape ) :
-        self.Connections.append((fromshape, toshape, connectorshape))
+        con = DOMConnection(fromshape, toshape, connectorshape, DOMConnectionType.Manual)
+        self.Connections.append(con)
 
     def AutoConnect( self, fromshape, toshape, connectorshape, direction=0) :
-        self.Connections.append((fromshape, toshape, connectorshape, direction))
+        con = DOMConnection(fromshape, toshape, connectorshape, DOMConnectionType.Auto)
+        con.Direction = direction
+        self.Connections.append(con)
 
     def OpenStencil( self, name) :
         stencil = DOMStencil(name)
@@ -124,18 +139,22 @@ class DOM(object):
                 shape.VisioShape.Text = shape.Text
 
         # Finally perform the connections
-        for i,cxn in enumerate( self.Connections ) :
-            self.__connect(cxn[0].VisioShape, cxn[1].VisioShape, cxn[2].VisioShape)
-
-        for i,cxn in enumerate( self.AutoConnections ) :
-            from_shape = cxn[0].VisioShape
-            to_shape = cxn[1].VisioShape
-            connectorshape = cxn[2]
-            direction = cxn[3]
-            autoconnectshape = from_shape.AutoConnect( to_shape, direction, connectorshape )
-
         # Visio 2010 Shape.AutoConnect on MSDN http://msdn.microsoft.com/en-us/library/ff765915.aspx
         # Visio 2010 Connectivity APIs: http://blogs.msdn.com/b/visio/archive/2009/09/22/the-visio-2010-connectivity-api.aspx
+        # Visio 2010 Page.AutoConnectMany http://msdn.microsoft.com/en-us/library/ff765694.aspx
+
+        for i,cxn in enumerate( self.Connections ) :
+            if (cxn.Type == DOMConnectionType.Manual) :
+                print '>>>>>>1'
+                self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
+            elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
+                print '>>>>>>2'
+                self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
+            elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape != cxn.ToShape) :
+                print '>>>>>>3'
+                autoconnectshape = cxn.FromShape.VisioShape.AutoConnect( cxn.ToShape.VisioShape, cxn.Direction, cxn.ConnectorShape.VisioShape )
+            else:
+                raise VisioPyError("unsupported conncection type")
 
     def __connect( self, fromshape, toshape, connectorshape ) :
         cxn_from_beginx = connectorshape.CellsU( "BeginX" )
