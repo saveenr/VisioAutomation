@@ -18,7 +18,7 @@ s0 = dom.Drop(m_rect, visiopy.Rectangle(0,0,1,1), "A", default_fmt)
 s1 = dom.Drop(m_octogon, visiopy.Point(4,3), "B", default_fmt)
 c0 = dom.Drop(m_dyncon, visiopy.Point(-1,-1), "C")
 
-dom.AutoConnect(s0,s1,c0,0)
+dom.AutoConnect(s0,s1,c0)
 dom.Render(page)
 
 srcs = [visiopy.SRCConstants.Width , visiopy.SRCConstants.Height,visiopy.SRCConstants.PinX, visiopy.SRCConstants.PinY]
