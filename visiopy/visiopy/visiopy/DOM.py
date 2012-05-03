@@ -27,18 +27,13 @@ class DOMShape:
         self.VisioShape = None
         self.VisioShapeID = None
         self.Text = None
-        
+       
 
 class DOMMaster :
 
     def __init__(self , mastername, stencil) :
         self.MasterName = mastername
         self.StencilName = stencil
-
-def openstencilx(docs, stencilname) :
-    stencildocflags = win32com.client.constants.visOpenRO | win32com.client.constants.visOpenDocked 
-    stencildoc = docs.OpenEx(stencilname , stencildocflags )
-    return stencildoc
 
 class DOM : 
     
@@ -75,8 +70,9 @@ class DOM :
         docs = page.Application.Documents
         stencilnames = set(s.Master.StencilName.lower() for s in self.Shapes)
         stencil_cache = {}
+        stencildocflags = win32com.client.constants.visOpenRO | win32com.client.constants.visOpenDocked 
         for stencilname in stencilnames:
-            stencildoc = openstencilx( docs, stencilname )       
+            stencildoc = docs.OpenEx(stencilname , stencildocflags )
             stencil_cache[ stencilname ] = stencildoc 
 
         # cache all the master references
