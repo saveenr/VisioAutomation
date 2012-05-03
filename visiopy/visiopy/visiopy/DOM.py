@@ -141,12 +141,12 @@ class DOM(object):
         # Visio 2010 Page.AutoConnectMany http://msdn.microsoft.com/en-us/library/ff765694.aspx
         
         nonbatch_connects = []
-        batch_autoconnects = []
+        batch_connects = []
         for i,cxn in enumerate( self.Connections ) :
             if (cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
                 nonbatch_connects.append(cxn)
             else:
-                batch_autoconnects.append(cxn)
+                batch_connects.append(cxn)
 
         if (len(nonbatch_connects)>0):
             for i,cxn in enumerate( nonbatch_connects ) :
@@ -163,13 +163,13 @@ class DOM(object):
                     cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
                 
 
-        if (len(batch_autoconnects)>0):
+        if (len(batch_connects)>0):
             fromshapeids =[]
             toshapeids=[]
             placementdirs = []
             connectors = []
             direction = 0
-            for cxn in batch_autoconnects:
+            for cxn in batch_connects:
                 fromshapeids.append( cxn.FromShape.VisioShapeID )
                 toshapeids.append( cxn.ToShape.VisioShapeID )
                 placementdirs.append( direction )
