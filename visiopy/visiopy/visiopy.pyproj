@@ -24,6 +24,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="demo.py" />
+    <Compile Include="test.py" />
     <Compile Include="visiopy\ShapeSheet.py" />
     <Compile Include="visiopy\DOM.py" />
     <Compile Include="visiopy\Drawing.py" />

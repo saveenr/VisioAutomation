@@ -128,13 +128,14 @@ class DOM(object):
             self.__connect(cxn[0].VisioShape, cxn[1].VisioShape, cxn[2].VisioShape)
 
         for i,cxn in enumerate( self.AutoConnections ) :
-            # Shape.AutoConnect on MSDN http://msdn.microsoft.com/en-us/library/ff765915.aspx
             from_shape = cxn[0].VisioShape
             to_shape = cxn[1].VisioShape
             connectorshape = cxn[2]
             direction = cxn[3]
             autoconnectshape = from_shape.AutoConnect( to_shape, direction, connectorshape )
 
+        # Visio 2010 Shape.AutoConnect on MSDN http://msdn.microsoft.com/en-us/library/ff765915.aspx
+        # Visio 2010 Connectivity APIs: http://blogs.msdn.com/b/visio/archive/2009/09/22/the-visio-2010-connectivity-api.aspx
 
     def __connect( self, fromshape, toshape, connectorshape ) :
         cxn_from_beginx = connectorshape.CellsU( "BeginX" )
