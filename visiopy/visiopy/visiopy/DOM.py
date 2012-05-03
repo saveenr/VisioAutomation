@@ -157,7 +157,13 @@ class DOM(object):
 
         if (len(nonbatch_connects)>0):
             for i,cxn in enumerate( nonbatch_connects ) :
-                self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
+                fromshape = cxn.FromShape.VisioShape
+                connectorshape = cxn.ConnectorShape.VisioShape
+                toshape = cxn.ToShape.VisioShape
+                cxn_from_beginx = connectorshape.CellsU( "BeginX" )
+                cxn_to_endy = connectorshape.CellsU( "EndY" )
+                cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
+                cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
 
         if (len(batch_autoconnects)>0):
             fromshapeids =[]
@@ -171,9 +177,3 @@ class DOM(object):
                 connectors.append(None)
                 #autoconnectshape = cxn.FromShape.VisioShape.AutoConnect( cxn.ToShape.VisioShape, cxn.Direction, cxn.ConnectorShape.VisioShape )                
             page.AutoConnectMany(fromshapeids, toshapeids, placementdirs, None )
-
-    def __connect( self, fromshape, toshape, connectorshape ) :
-        cxn_from_beginx = connectorshape.CellsU( "BeginX" )
-        cxn_to_endy = connectorshape.CellsU( "EndY" )
-        cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
-        cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
