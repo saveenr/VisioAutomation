@@ -144,16 +144,20 @@ class DOM(object):
         # Visio 2010 Page.AutoConnectMany http://msdn.microsoft.com/en-us/library/ff765694.aspx
 
 
+        
+        nonbatch_connects = []
         batch_autoconnects = []
         for i,cxn in enumerate( self.Connections ) :
             if (cxn.Type == DOMConnectionType.Manual) :
-                self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
+                nonbatch_connects.append(cxn)
             elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
+                nonbatch_connects.append(cxn)
+            elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape.VisioShape != cxn.ToShape.VisioShape) :
+                batch_autoconnects.append(cxn)
+
+        if (len(nonbatch_connects)>0):
+            for i,cxn in enumerate( nonbatch_connects ) :
                 self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
-            elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape != cxn.ToShape) :
-                batch_autoconnects.append( cxn )  
-            else:
-                raise VisioPyError("unsupported conncection type")
 
         if (len(batch_autoconnects)>0):
             fromshapeids =[]
