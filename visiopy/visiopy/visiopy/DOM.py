@@ -35,6 +35,7 @@ class DOMMaster(object):
     def __init__(self , mastername, stencil) :
         self.MasterName = mastername
         self.StencilName = stencil
+        self.VisioMaster = None
 
 class DOMConnection(object):
 
@@ -98,6 +99,8 @@ class DOM(object):
             if (vmaster == None) :
                 vmaster = stencildoc.Masters.ItemU(shape.Master.MasterName) 
             shape.VisioMaster = vmaster
+            if (shape.Master.VisioMaster==None) :
+                shape.Master.VisioMaster = vmaster 
 
         # Perform the basic drop of all the masters
         vmasters = []
@@ -142,8 +145,12 @@ class DOM(object):
         
         nonbatch_connects = []
         batch_connects_dic = {}
-        for i,cxn in enumerate( self.Connections ) :
+        for cxn in self.Connections:
             if (cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
+                # any cases where a shape is to be connected to itself is cannot be done in batch
+                nonbatch_connects.append(cxn)
+            elif (isinstance(cxn.ConnectorShape,DOMShape)) :
+                # any cases where a specific connector is used cannot be done in batch
                 nonbatch_connects.append(cxn)
             else:
                 key = cxn.ConnectorShape
@@ -153,19 +160,29 @@ class DOM(object):
                     batch_connects_dic[key] = batch_connects
                 batch_connects.append(cxn)
 
+        print "Nonbatch", len(nonbatch_connects)
+        print "Batch Connect groups", len(batch_connects_dic)
+
         if (len(nonbatch_connects)>0):
             for i,cxn in enumerate( nonbatch_connects ) :
-                connectorshape = cxn.ConnectorShape.VisioShape
+                connectorshape = None
                 fromshape = cxn.FromShape.VisioShape
                 toshape = cxn.ToShape.VisioShape
                 if (fromshape!=toshape) :
                     direction = 0
                     autoconnectshape = fromshape.AutoConnect( toshape, direction, connectorshape)                
                 else:
-                    cxn_from_beginx = connectorshape.CellsU( "BeginX" )
-                    cxn_to_endy = connectorshape.CellsU( "EndY" )
-                    cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
-                    cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
+                    if (isinstance(cxn.ConnectorShape,DOMShape)) :
+                        connectorshape = cxn.ConnectorShape.VisioShape
+                    elif (isinstance(cxn.ConnectorShape,DOMMaster)) :
+                        vmaster = cxn.ConnectorShape.VisioMaster
+                        connectorshape = page.Drop( vmaster, 1, 1 )
+                        cxn_from_beginx = connectorshape.CellsU( "BeginX" )
+                        cxn_to_endy = connectorshape.CellsU( "EndY" )
+                        cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
+                        cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
+                    else:
+                        raise VisioPyError("!!!")
                 
         if (len(batch_connects_dic)>0):
             for key in batch_connects_dic:

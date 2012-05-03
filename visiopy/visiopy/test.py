@@ -19,8 +19,8 @@ c1 = dom.Drop(m_dyncon, visiopy.Point(-1,-1), "D")
 c2 = dom.Drop(m_dyncon, visiopy.Point(-1,-1), "E")
 
 dom.AutoConnect(s0,s1,c0)
-dom.AutoConnect(s0,s1,c1)
-dom.AutoConnect(s1,s1,c2)
+dom.AutoConnect(s0,s1,m_dyncon)
+dom.AutoConnect(s1,s1,m_dyncon)
 
 dom.Render(page)
 
