@@ -68,10 +68,6 @@ class DOM(object):
         con = DOMConnection(fromshape, toshape, connectorshape)
         self.Connections.append(con)
 
-    def AutoConnect( self, fromshape, toshape, connectorshape) :
-        con = DOMConnection(fromshape, toshape, connectorshape)
-        self.Connections.append(con)
-
     def OpenStencil( self, name) :
         stencil = DOMStencil(name)
         self.Stencils.append( stencil )
