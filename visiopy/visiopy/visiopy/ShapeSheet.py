@@ -38,40 +38,37 @@ class Query :
         result = page.GetResults(stream,0,None)
         return result
 
-class QueryEx :
-
-    def __init__(self,shapeids,srcs) :
-        self.ShapeIDs = shapeids
-        self.SRCs = srcs
-
-    def __buildquery(self) :
-        q = Query()
-        for shapeid in self.ShapeIDs:
-            for src in self.SRCs:
-                q.Add(shapeid,src)
-        return q
-
-    def GetFormulas(self, page) :
-        q = self.__buildquery()
-        formulas = q.GetFormulas(page)
-        return self.__tabulate(formulas)
-
-    def GetResults(self, page) :
-        q = self.__buildquery()
-        results = q.GetResults(page)
-        return self.__tabulate(results)
-
-    def __tabulate( self, data ) :
-        n = len(self.SRCs)
+    @staticmethod
+    def __tabulate( numcols, data) :
         container = []
         curlist = None
         for i,d in enumerate(data) :
-            if (i%n==0) : 
+            if (i%numcols==0) : 
                 cur_list = []
             cur_list.append(d)
-            if (i%n==n-1) :
+            if (i%numcols==numcols-1) :
                 container.append(cur_list)
         return container
+
+    @staticmethod
+    def __buildquery_internal(shapeids,srcs) :
+        q = Query()
+        for shapeid in shapeids:
+            for src in srcs:
+                q.Add(shapeid,src)
+        return q
+
+    @staticmethod
+    def QueryFormulas(page,shapeids,srcs) :
+        q = Query.__buildquery_internal(shapeids,srcs)
+        formulas = q.GetFormulas(page)
+        return Query.__tabulate(len(srcs),formulas)
+
+    @staticmethod
+    def QueryResults(page,shapeids,srcs) :
+        q = Query.__buildquery_internal(shapeids,srcs)
+        formulas = q.GetResults(page)
+        return Query.__tabulate(len(srcs),formulas)
 
 class Update :
 

@@ -27,9 +27,8 @@ shapeids = [dom.Shapes[0].VisioShapeID,dom.Shapes[1].VisioShapeID]
 
 print dir(visiopy)
 
-q = visiopy.QueryEx(shapeids, srcs)
-formulas = q.GetFormulas(page)
-results = q.GetResults(page)
+formulas = visiopy.Query.QueryFormulas(page,shapeids, srcs)
+results = visiopy.Query.QueryResults(page,shapeids, srcs)
 print formulas
 print results
 
