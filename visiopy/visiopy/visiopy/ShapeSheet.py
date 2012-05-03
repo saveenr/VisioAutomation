@@ -54,12 +54,24 @@ class QueryEx :
     def GetFormulas(self, page) :
         q = self.__buildquery()
         formulas = q.GetFormulas(page)
-        return formulas
+        return self.__tabulate(formulas)
 
     def GetResults(self, page) :
         q = self.__buildquery()
         results = q.GetResults(page)
-        return results
+        return self.__tabulate(results)
+
+    def __tabulate( self, data ) :
+        n = len(self.SRCs)
+        container = []
+        curlist = None
+        for i,d in enumerate(data) :
+            if (i%n==0) : 
+                cur_list = []
+            cur_list.append(d)
+            if (i%n==n-1) :
+                container.append(cur_list)
+        return container
 
 class Update :
 

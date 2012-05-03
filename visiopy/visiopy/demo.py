@@ -20,8 +20,8 @@ dom.Connect(s0,s1,c0)
 
 dom.Render(page)
 
-srcs = [visiopy.SRCConstants.Width , visiopy.SRCConstants.Height ]
-shapeids = [dom.Shapes[0].VisioShapeID]
+srcs = [visiopy.SRCConstants.Width , visiopy.SRCConstants.Height,visiopy.SRCConstants.PinX, visiopy.SRCConstants.PinY]
+shapeids = [dom.Shapes[0].VisioShapeID,dom.Shapes[1].VisioShapeID]
 
 print dir(visiopy)
 
