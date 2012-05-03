@@ -6,6 +6,7 @@ win32com.client.gencache.EnsureDispatch("Visio.Application")
 
 from Drawing import *
 from ShapeSheet import *
+from Errors import *
 
 class DOMShape(object):
     
@@ -142,8 +143,6 @@ class DOM(object):
         # Visio 2010 Shape.AutoConnect on MSDN http://msdn.microsoft.com/en-us/library/ff765915.aspx
         # Visio 2010 Connectivity APIs: http://blogs.msdn.com/b/visio/archive/2009/09/22/the-visio-2010-connectivity-api.aspx
         # Visio 2010 Page.AutoConnectMany http://msdn.microsoft.com/en-us/library/ff765694.aspx
-
-
         
         nonbatch_connects = []
         batch_autoconnects = []
@@ -157,13 +156,18 @@ class DOM(object):
 
         if (len(nonbatch_connects)>0):
             for i,cxn in enumerate( nonbatch_connects ) :
-                fromshape = cxn.FromShape.VisioShape
                 connectorshape = cxn.ConnectorShape.VisioShape
+                fromshape = cxn.FromShape.VisioShape
                 toshape = cxn.ToShape.VisioShape
-                cxn_from_beginx = connectorshape.CellsU( "BeginX" )
-                cxn_to_endy = connectorshape.CellsU( "EndY" )
-                cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
-                cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
+                if (fromshape!=toshape) :
+                    direction = 0
+                    autoconnectshape = fromshape.AutoConnect( toshape, direction, connectorshape)                
+                else:
+                    cxn_from_beginx = connectorshape.CellsU( "BeginX" )
+                    cxn_to_endy = connectorshape.CellsU( "EndY" )
+                    cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
+                    cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
+                
 
         if (len(batch_autoconnects)>0):
             fromshapeids =[]
