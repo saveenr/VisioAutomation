@@ -143,15 +143,30 @@ class DOM(object):
         # Visio 2010 Connectivity APIs: http://blogs.msdn.com/b/visio/archive/2009/09/22/the-visio-2010-connectivity-api.aspx
         # Visio 2010 Page.AutoConnectMany http://msdn.microsoft.com/en-us/library/ff765694.aspx
 
+
+        batch_autoconnects = []
         for i,cxn in enumerate( self.Connections ) :
             if (cxn.Type == DOMConnectionType.Manual) :
                 self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
             elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
                 self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
             elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape != cxn.ToShape) :
-                autoconnectshape = cxn.FromShape.VisioShape.AutoConnect( cxn.ToShape.VisioShape, cxn.Direction, cxn.ConnectorShape.VisioShape )
+                batch_autoconnects.append( cxn )  
             else:
                 raise VisioPyError("unsupported conncection type")
+
+        if (len(batch_autoconnects)>0):
+            fromshapeids =[]
+            toshapeids=[]
+            placementdirs = []
+            connectors = []
+            for cxn in batch_autoconnects:
+                fromshapeids.append( cxn.FromShape.VisioShapeID )
+                toshapeids.append( cxn.ToShape.VisioShapeID )
+                placementdirs.append( cxn.Direction )
+                connectors.append(None)
+                #autoconnectshape = cxn.FromShape.VisioShape.AutoConnect( cxn.ToShape.VisioShape, cxn.Direction, cxn.ConnectorShape.VisioShape )                
+            page.AutoConnectMany(fromshapeids, toshapeids, placementdirs, None )
 
     def __connect( self, fromshape, toshape, connectorshape ) :
         cxn_from_beginx = connectorshape.CellsU( "BeginX" )
