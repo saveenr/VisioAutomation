@@ -12,7 +12,6 @@ class DOMShape(object):
     
     def __init__( self , master, pos) :
         self.Master = master
-        self.VisioMaster = None
         self.Cells = { } 
 
         if ( isinstance(pos,Point) ) :
@@ -49,7 +48,6 @@ class DOM(object):
     def __init__( self ) :
         self.Shapes = []
         self.Stencils = []
-        self.Masters = []
         self.Connections = []
 
     def Master( self, mastername, stencilname ) :
@@ -87,22 +85,21 @@ class DOM(object):
 
         # cache all the master references
         # Goal: minimize having to use COM to lookup master objects by name
+        masters = set( s.Master for s in self.Shapes if s.Master != None)
         master_cache = {}
-        for shape in self.Shapes:
-            stencildoc = stencil_cache[ shape.Master.StencilName.lower() ]
-            mastername = shape.Master.MasterName.lower()
+        for master in masters:
+            stencildoc = stencil_cache[ master.StencilName.lower() ]
+            mastername = master.MasterName.lower()
             vmaster = master_cache.get( mastername, None )
             if (vmaster == None) :
-                vmaster = stencildoc.Masters.ItemU(shape.Master.MasterName) 
-            shape.VisioMaster = vmaster
-            if (shape.Master.VisioMaster==None) :
-                shape.Master.VisioMaster = vmaster 
+                vmaster = stencildoc.Masters.ItemU(master.MasterName) 
+            master.VisioMaster = vmaster 
 
-        # Perform the basic drop of all the masters
+        # Perform the basic drop of all the shapes
         vmasters = []
         xyarray = []
         for shape in self.Shapes:
-            vmasters.append( shape.VisioMaster )
+            vmasters.append( shape.Master.VisioMaster )
             xyarray.append( shape.DropPosition.X )
             xyarray.append( shape.DropPosition.Y )
         num_shapes,shape_ids = page.DropMany( vmasters, xyarray) 
