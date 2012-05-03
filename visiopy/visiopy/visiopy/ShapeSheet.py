@@ -38,6 +38,29 @@ class Query :
         result = page.GetResults(stream,0,None)
         return result
 
+class QueryEx :
+
+    def __init__(self,shapeids,srcs) :
+        self.ShapeIDs = shapeids
+        self.SRCs = srcs
+
+    def __buildquery(self) :
+        q = Query()
+        for shapeid in self.ShapeIDs:
+            for src in self.SRCs:
+                q.Add(shapeid,src)
+        return q
+
+    def GetFormulas(self, page) :
+        q = self.__buildquery()
+        formulas = q.GetFormulas(page)
+        return formulas
+
+    def GetResults(self, page) :
+        q = self.__buildquery()
+        results = q.GetResults(page)
+        return results
+
 class Update :
 
     def __init__(self) :

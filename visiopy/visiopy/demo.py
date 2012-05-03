@@ -20,9 +20,12 @@ dom.Connect(s0,s1,c0)
 
 dom.Render(page)
 
-q = visiopy.Query()
-q.Add( dom.Shapes[0].VisioShapeID, visiopy.SRCConstants.Width )
-q.Add( dom.Shapes[0].VisioShapeID, visiopy.SRCConstants.Height )
+srcs = [visiopy.SRCConstants.Width , visiopy.SRCConstants.Height ]
+shapeids = [dom.Shapes[0].VisioShapeID]
+
+print dir(visiopy)
+
+q = visiopy.QueryEx(shapeids, srcs)
 formulas = q.GetFormulas(page)
 results = q.GetResults(page)
 print formulas

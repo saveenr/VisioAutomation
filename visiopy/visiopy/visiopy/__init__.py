@@ -8,6 +8,6 @@ from DOM import *
 from Drawing import *
 
 if (__name__=='__main__') :
-    pass
+    print "Visiopy Cannot be run as a script."
 else :
     pass
