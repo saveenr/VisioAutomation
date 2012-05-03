@@ -132,6 +132,9 @@ class DOM(object):
             if (shape.Text != None and shape.Text!='') :
                 shape.VisioShape.Text = shape.Text
 
+        self.__connectshapes(page)
+
+    def __connectshapes( self , page ) :
         # Finally perform the connections
         # Visio 2010 Shape.AutoConnect on MSDN http://msdn.microsoft.com/en-us/library/ff765915.aspx
         # Visio 2010 Connectivity APIs: http://blogs.msdn.com/b/visio/archive/2009/09/22/the-visio-2010-connectivity-api.aspx
