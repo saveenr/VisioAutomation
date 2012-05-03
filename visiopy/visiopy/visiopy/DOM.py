@@ -7,7 +7,7 @@ win32com.client.gencache.EnsureDispatch("Visio.Application")
 from Drawing import *
 from ShapeSheet import *
 
-class DOMShape:
+class DOMShape(object):
     
     def __init__( self , master, pos) :
         self.Master = master
@@ -18,8 +18,8 @@ class DOMShape:
             self.DropPosition = pos
             self.DropSize = None
         elif ( isinstance(pos,Rectangle) ) :
-            self.DropSize = ((pos.Right-pos.Left),(pos.Top-pos.Bottom))
-            self.DropPosition = Point( (pos.Right-pos.Left)/2 , (pos.Top-pos.Bottom)/2 )
+            self.DropSize = pos.Size
+            self.DropPosition = pos.CenterPoint
         else :
             print ">>>", pos is Rectangle
             raise DOM()
@@ -29,13 +29,13 @@ class DOMShape:
         self.Text = None
        
 
-class DOMMaster :
+class DOMMaster(object):
 
     def __init__(self , mastername, stencil) :
         self.MasterName = mastername
         self.StencilName = stencil
 
-class DOM : 
+class DOM(object): 
     
     def __init__( self ) :
         self.Shapes = []
@@ -110,8 +110,8 @@ class DOM :
         u = Update()
         for shape in self.Shapes:
             if (shape.DropSize!=None):
-                u.Add( shape.VisioShapeID, SRCConstants.Width , str(shape.DropSize[0]))
-                u.Add( shape.VisioShapeID, SRCConstants.Width , str(shape.DropSize[1]))
+                u.Add( shape.VisioShapeID, SRCConstants.Width , shape.DropSize.Width)
+                u.Add( shape.VisioShapeID, SRCConstants.Width , shape.DropSize.Height)
             if (len(shape.Cells)>0) :
                 for src in shape.Cells :
                     formula = shape.Cells[src]
