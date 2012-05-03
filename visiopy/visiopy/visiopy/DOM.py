@@ -145,13 +145,10 @@ class DOM(object):
 
         for i,cxn in enumerate( self.Connections ) :
             if (cxn.Type == DOMConnectionType.Manual) :
-                print '>>>>>>1'
                 self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
             elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
-                print '>>>>>>2'
                 self.__connect(cxn.FromShape.VisioShape, cxn.ToShape.VisioShape, cxn.ConnectorShape.VisioShape)
             elif (cxn.Type == DOMConnectionType.Auto and cxn.FromShape != cxn.ToShape) :
-                print '>>>>>>3'
                 autoconnectshape = cxn.FromShape.VisioShape.AutoConnect( cxn.ToShape.VisioShape, cxn.Direction, cxn.ConnectorShape.VisioShape )
             else:
                 raise VisioPyError("unsupported conncection type")
