@@ -12,6 +12,8 @@ class DOMShape:
     def __init__( self , master, pos) :
         self.Master = master
         self.VisioMaster = None
+        self.Cells = { } 
+
         if ( isinstance(pos,Point) ) :
             self.DropPosition = pos
             self.DropSize = None
@@ -50,9 +52,11 @@ class DOM :
         m = DOMMaster( mastername, stencilname )
         return m
 
-    def Drop( self, master, pos , text=None) :
+    def Drop( self, master, pos , text=None, cells=None) :
         domshape = DOMShape( master, pos )
         domshape.Text = text
+        if (cells!=None) :
+            domshape.Cells = cells
         self.Shapes.append(domshape) 
         return domshape
 
@@ -108,6 +112,11 @@ class DOM :
             if (shape.DropSize!=None):
                 u.Add( shape.VisioShapeID, SRCConstants.Width , str(shape.DropSize[0]))
                 u.Add( shape.VisioShapeID, SRCConstants.Width , str(shape.DropSize[1]))
+            if (len(shape.Cells)>0) :
+                for src in shape.Cells :
+                    formula = shape.Cells[src]
+                    u.Add( shape.VisioShapeID, src, formula)
+                    
         result = u.SetFormulas(page) 
         
         for shape in self.Shapes:
