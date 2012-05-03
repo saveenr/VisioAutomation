@@ -141,11 +141,16 @@ class DOM(object):
         # Visio 2010 Page.AutoConnectMany http://msdn.microsoft.com/en-us/library/ff765694.aspx
         
         nonbatch_connects = []
-        batch_connects = []
+        batch_connects_dic = {}
         for i,cxn in enumerate( self.Connections ) :
             if (cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
                 nonbatch_connects.append(cxn)
             else:
+                key = cxn.ConnectorShape
+                batch_connects = batch_connects_dic.get(key,None)
+                if (batch_connects==None) :
+                    batch_connects = []
+                    batch_connects_dic[key] = batch_connects
                 batch_connects.append(cxn)
 
         if (len(nonbatch_connects)>0):
@@ -162,16 +167,17 @@ class DOM(object):
                     cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
                     cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
                 
-
-        if (len(batch_connects)>0):
-            fromshapeids =[]
-            toshapeids=[]
-            placementdirs = []
-            connectors = []
-            direction = 0
-            for cxn in batch_connects:
-                fromshapeids.append( cxn.FromShape.VisioShapeID )
-                toshapeids.append( cxn.ToShape.VisioShapeID )
-                placementdirs.append( direction )
-                connectors.append(None)
-            page.AutoConnectMany(fromshapeids, toshapeids, placementdirs, None )
+        if (len(batch_connects_dic)>0):
+            for key in batch_connects_dic:
+                batch_connects = batch_connects_dic[key]
+                fromshapeids =[]
+                toshapeids=[]
+                placementdirs = []
+                connectors = []
+                direction = 0
+                for cxn in batch_connects:
+                    fromshapeids.append( cxn.FromShape.VisioShapeID )
+                    toshapeids.append( cxn.ToShape.VisioShapeID )
+                    placementdirs.append( direction )
+                    connectors.append(None)
+                page.AutoConnectMany(fromshapeids, toshapeids, placementdirs, None )
