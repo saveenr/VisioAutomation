@@ -9,10 +9,9 @@ from ShapeSheet import *
 
 class DOMShape:
     
-    def __init__( self , mastername, stencilname, pos) :
-        self.MasterName = mastername
-        self.StencilName = stencilname
-        self.Master = None
+    def __init__( self , master, pos) :
+        self.Master = master
+        self.VisioMaster = None
         if ( isinstance(pos,Point) ) :
             self.DropPosition = pos
             self.DropSize = None
@@ -28,6 +27,12 @@ class DOMShape:
         self.Text = None
         
 
+class DOMMaster :
+
+    def __init__(self , mastername, stencil) :
+        self.MasterName = mastername
+        self.StencilName = stencil
+
 def openstencilx(docs, stencilname) :
     stencildocflags = win32com.client.constants.visOpenRO | win32com.client.constants.visOpenDocked 
     stencildoc = docs.OpenEx(stencilname , stencildocflags )
@@ -38,9 +43,15 @@ class DOM :
     def __init__( self ) :
         self.Shapes = []
         self.Connections = []
+        self.Stencils = []
+        self.Masters = []
 
-    def Drop( self, mastername, stencilname, pos , text=None) :
-        domshape = DOMShape( mastername, stencilname, pos )
+    def Master( self, mastername, stencilname ) :
+        m = DOMMaster( mastername, stencilname )
+        return m
+
+    def Drop( self, master, pos , text=None) :
+        domshape = DOMShape( master, pos )
         domshape.Text = text
         self.Shapes.append(domshape) 
         return domshape
@@ -48,12 +59,17 @@ class DOM :
     def Connect( self, fromshape, toshape, connectorshape ) :
         self.Connections.append((fromshape, toshape, connectorshape))
 
+    def OpenStencil( self, name) :
+        stencil = DOMStencil(name)
+        self.Stencils.append( stencil )
+        return stencil
+
     def Render( self, page ) :
         # Load all the stencils
         # Goal: prevent trying to reload the same stencil multiple times
         # Goal: minimize having to use COM to lookup stencil documents by name
         docs = page.Application.Documents
-        stencilnames = set(s.StencilName.lower() for s in self.Shapes)
+        stencilnames = set(s.Master.StencilName.lower() for s in self.Shapes)
         stencil_cache = {}
         for stencilname in stencilnames:
             stencildoc = openstencilx( docs, stencilname )       
@@ -63,21 +79,21 @@ class DOM :
         # Goal: minimize having to use COM to lookup master objects by name
         master_cache = {}
         for shape in self.Shapes:
-            stencildoc = stencil_cache[ shape.StencilName.lower() ]
-            mastername = shape.MasterName.lower()
-            master = master_cache.get( mastername, None )
-            if (master == None) :
-                master = stencildoc.Masters.ItemU(shape.MasterName) 
-            shape.Master = master
+            stencildoc = stencil_cache[ shape.Master.StencilName.lower() ]
+            mastername = shape.Master.MasterName.lower()
+            vmaster = master_cache.get( mastername, None )
+            if (vmaster == None) :
+                vmaster = stencildoc.Masters.ItemU(shape.Master.MasterName) 
+            shape.VisioMaster = vmaster
 
         # Perform the basic drop of all the masters
-        masters = []
+        vmasters = []
         xyarray = []
         for shape in self.Shapes:
-            masters.append( shape.Master )
+            vmasters.append( shape.VisioMaster )
             xyarray.append( shape.DropPosition.X )
             xyarray.append( shape.DropPosition.Y )
-        num_shapes,shape_ids = page.DropMany( masters, xyarray) 
+        num_shapes,shape_ids = page.DropMany( vmasters, xyarray) 
 
 
         # Ensure that we have stored the corresponding shape object and shapeid for each dropped object
