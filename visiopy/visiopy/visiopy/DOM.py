@@ -25,17 +25,7 @@ class DOMShape(object):
             self.DropSize = pos.Size
             self.DropPosition = pos.CenterPoint
         else :
-            print ">>>", pos is Rectangle
-            raise DOM()
-            #raise some error
-       
-
-class DOMMaster(object):
-
-    def __init__(self , mastername, stencil) :
-        self.MasterName = mastername
-        self.StencilName = stencil
-        self.VisioMaster = None
+            raise VisioPyError()
 
 class DOMConnection(object):
 
@@ -47,6 +37,15 @@ class DOMConnection(object):
         self.VisioShapeID = None 
         self.FromShape = fromshape
         self.ToShape = toshape
+       
+
+class DOMMaster(object):
+
+    def __init__(self , mastername, stencil) :
+        self.MasterName = mastername
+        self.StencilName = stencil
+        self.VisioMaster = None
+
 
 class DOM(object): 
     
