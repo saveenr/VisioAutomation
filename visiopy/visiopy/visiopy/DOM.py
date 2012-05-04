@@ -43,6 +43,9 @@ class DOMConnection(object):
         self.ToShape = toshape
         self.Master = master
         self.Text = text
+        self.VisioShape = None
+        self.VisioShapeID = None 
+        self.Cells = {}
 
 class DOM(object): 
     
@@ -63,9 +66,15 @@ class DOM(object):
         self.Shapes.append(domshape) 
         return domshape
 
-    def Connect( self, fromshape, toshape, connecterobject, text=None ) :
+    def Connect( self, fromshape, toshape, connecterobject, text=None , cells = None) :
+        if (not isinstance(connecterobject,DOMMaster)) :    
+            raise VisioPyError()
+
         con = DOMConnection(fromshape, toshape, connecterobject, text)
+        if (cells!=None) :
+            con.Cells = cells
         self.Connections.append(con)
+        return con
 
     def OpenStencil( self, name) :
         stencil = DOMStencil(name)
@@ -87,6 +96,9 @@ class DOM(object):
         # cache all the master references
         # Goal: minimize having to use COM to lookup master objects by name
         masters = set( s.Master for s in self.Shapes if s.Master != None)
+        for cxn in self.Connections :
+            masters.add( cxn.Master )
+
         master_cache = {}
         for master in masters:
             stencildoc = stencil_cache[ master.StencilName.lower() ]
@@ -95,6 +107,8 @@ class DOM(object):
             if (vmaster == None) :
                 vmaster = stencildoc.Masters.ItemU(master.MasterName) 
             master.VisioMaster = vmaster 
+            if (master.VisioMaster==None) :
+                raise VisioPyError()
 
         # Perform the basic drop of all the shapes
         vmasters = []
@@ -112,7 +126,7 @@ class DOM(object):
             shape.VisioShapeID = shape_ids[i]
             shape.VisioShape = page_shapes.ItemFromID( shape_ids[i] )
 
-        #set any dropsizes
+        #set any shape properties
         u = Update()
         for shape in self.Shapes:
             if (shape.DropSize!=None):
@@ -125,66 +139,60 @@ class DOM(object):
                     
         result = u.SetFormulas(page) 
         
+
+        self.__connectshapes(page)
+
+        #set any connection properties
+        u = Update()
+        for cxn in self.Connections:
+            shape = cxn.VisioShape
+            shapeid = cxn.VisioShapeID
+            if (len(cxn.Cells)>0) :
+                for src in cxn.Cells :
+                    formula = cxn.Cells[src]
+                    print src,formula, cxn.Text
+                    u.Add( cxn.VisioShapeID, src, formula)
+        result = u.SetFormulas(page) 
+
+
+        # Set the text for shapes and connections
         for shape in self.Shapes:
             if (shape.Text != None and shape.Text!='') :
                 shape.VisioShape.Text = shape.Text
 
-        self.__connectshapes(page)
+        for cxn in self.Connections:
+            if (cxn.Text != None and cxn.Text!='') :
+                cxn.VisioShape.Text = cxn.Text
+
 
     def __connectshapes( self , page ) :
+
         # Finally perform the connections
-        # Visio 2010 Shape.AutoConnect on MSDN http://msdn.microsoft.com/en-us/library/ff765915.aspx
-        # Visio 2010 Connectivity APIs: http://blogs.msdn.com/b/visio/archive/2009/09/22/the-visio-2010-connectivity-api.aspx
-        # Visio 2010 Page.AutoConnectMany http://msdn.microsoft.com/en-us/library/ff765694.aspx
-        
-        nonbatch_connects = []
-        batch_connects_dic = {}
+        if (len(self.Connections)<1) : 
+            return
+
+        # Drop all the masters
+        vmasters = []
+        xyarray = []
         for cxn in self.Connections:
-            if (cxn.FromShape.VisioShape == cxn.ToShape.VisioShape) :
-                # any cases where a shape is to be connected to itself is cannot be done in batch
-                nonbatch_connects.append(cxn)
-            else:
-                key = cxn.Master
-                batch_connects = batch_connects_dic.get(key,None)
-                if (batch_connects==None) :
-                    batch_connects = []
-                    batch_connects_dic[key] = batch_connects
-                batch_connects.append(cxn)
+            vmasters.append( cxn.Master.VisioMaster )
+            xyarray.append( -2 )
+            xyarray.append( -2 )
+        num_shapes,shape_ids = page.DropMany( vmasters, xyarray) 
+        vshapes = [page.Shapes.ItemFromID( id ) for id in shape_ids]
 
-        print "Nonbatch", len(nonbatch_connects)
-        print "Batch Connect groups", len(batch_connects_dic)
+        # Connect them
+        for i,cxn in enumerate(self.Connections):
+            fromshape = cxn.FromShape.VisioShape
+            toshape = cxn.ToShape.VisioShape
+            vmaster = cxn.Master.VisioMaster
+            connectorshape = vshapes[i]
 
-        if (len(nonbatch_connects)>0):
-            # process all the connections for which we cannot use the Page.AutoConnectMany api
-            for cxn in enumerate( nonbatch_connects ) :
-                fromshape = cxn.FromShape.VisioShape
-                toshape = cxn.ToShape.VisioShape
-                if (fromshape!=toshape) :
-                    # if connecting different shapes we can use the Shape.AutoConnect method
-                    direction = 0
-                    autoconnectshape = fromshape.AutoConnect( toshape, direction, cxn.Master.VisioMaster)  
-                else:
-                    # but if connecting the same shape to itself, we must manually add a connector
-                    # because Shape.AutoConnect fails if the from and to shape are the same
-                    vmaster = cxn.ConnectorShape.VisioMaster
-                    connectorshape = page.Drop( vmaster, 1, 1 )
-                    cxn_from_beginx = connectorshape.CellsU( "BeginX" )
-                    cxn_to_endy = connectorshape.CellsU( "EndY" )
-                    cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
-                    cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
-                    if (cxn.Text!=None) : connectorshape.Text = cxn.Text
-                
-        if (len(batch_connects_dic)>0):
-            for key in batch_connects_dic:
-                batch_connects = batch_connects_dic[key]
-                fromshapeids =[]
-                toshapeids=[]
-                placementdirs = []
-                connectors = []
-                direction = 0
-                for cxn in batch_connects:
-                    fromshapeids.append( cxn.FromShape.VisioShapeID )
-                    toshapeids.append( cxn.ToShape.VisioShapeID )
-                    placementdirs.append( direction )
-                    connectors.append(None)
-                page.AutoConnectMany(fromshapeids, toshapeids, placementdirs, None )
+            cxn_from_beginx = connectorshape.CellsU( "BeginX" )
+            cxn_to_endy = connectorshape.CellsU( "EndY" )
+            cxn_from_beginx.GlueTo(fromshape.CellsSRC(1, 1, 0)) 
+            cxn_to_endy.GlueTo(toshape.CellsSRC(1, 1, 0))
+
+            cxn.VisioShape = connectorshape
+            cxn.VisioShapeID = cxn.VisioShape.ID
+                    

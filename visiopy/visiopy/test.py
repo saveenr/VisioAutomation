@@ -17,7 +17,7 @@ s1 = dom.Drop(m_octogon, visiopy.Point(4,3), "B",)
 
 dom.Connect(s0,s1,m_dyncon,"C0")
 dom.Connect(s0,s1,m_dyncon,"C1")
-#dom.Connect(s1,s1,m_dyncon,"C2")
+dom.Connect(s1,s1,m_dyncon,"C2", cells={visiopy.SRCConstants.LineColor: "rgb(255,128,64)"} )
 
 dom.Render(page)
 
