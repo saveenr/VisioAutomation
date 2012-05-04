@@ -182,6 +182,7 @@ class DOM(object):
         vshapes = [page.Shapes.ItemFromID( id ) for id in shape_ids]
 
         # Connect them
+        direction = 0
         for i,cxn in enumerate(self.Connections):
             fromshape = cxn.FromShape.VisioShape
             toshape = cxn.ToShape.VisioShape
@@ -195,4 +196,3 @@ class DOM(object):
 
             cxn.VisioShape = connectorshape
             cxn.VisioShapeID = cxn.VisioShape.ID
-                    
