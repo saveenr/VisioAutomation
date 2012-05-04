@@ -5,9 +5,9 @@ import sys
 import win32com.client 
 win32com.client.gencache.EnsureDispatch("Visio.Application") 
 
-from Drawing import *
-from ShapeSheet import *
-from Errors import *
+import ShapeSheet
+import Errors
+import Drawing
 
 class DOMShape(object):
     
@@ -19,19 +19,19 @@ class DOMShape(object):
         self.Text = None
         self.DropPos = None
 
-        if ( isinstance(pos,Point) ) :
+        if ( isinstance(pos,Drawing.Point) ) :
             self.DropPosition = pos
             self.DropSize = None
-        elif ( isinstance(pos,Rectangle) ) :
+        elif ( isinstance(pos,Drawing.Rectangle) ) :
             self.DropSize = pos.Size
             self.DropPosition = pos.CenterPoint
         else :
-            raise VisioPyError()
+            raise Errors.VisioPyError()
 
 class DOMConnection(DOMShape):
 
     def __init__(self , fromshape, toshape, master) :
-        super(DOMConnection, self).__init__(master, Point(-1,-1)) 
+        super(DOMConnection, self).__init__(master, Drawing.Point(-1,-1)) 
         self.FromShape = fromshape
         self.ToShape = toshape
 
@@ -63,7 +63,7 @@ class DOM(object):
 
     def Connect( self, fromshape, toshape, connecterobject, text=None , cells = None) :
         if (not isinstance(connecterobject,DOMMaster)) :    
-            raise VisioPyError()
+            raise Errors.VisioPyError()
 
         cxn = DOMConnection(fromshape, toshape, connecterobject)
         if (cells!=None) : cxn.Cells = cells
@@ -103,7 +103,7 @@ class DOM(object):
                 vmaster = stencildoc.Masters.ItemU(master.MasterName) 
             master.VisioMaster = vmaster 
             if (master.VisioMaster==None) :
-                raise VisioPyError()
+                raise Errors.VisioPyError()
 
         # Perform the basic drop of all the shapes
         vmasters = []
@@ -122,11 +122,11 @@ class DOM(object):
             shape.VisioShape = page_shapes.ItemFromID( shape_ids[i] )
 
         #set any shape properties
-        u = Update()
+        u = ShapeSheet.Update()
         for shape in self.Shapes:
             if (shape.DropSize!=None):
-                u.Add( shape.VisioShapeID, SRCConstants.Width , shape.DropSize.Width)
-                u.Add( shape.VisioShapeID, SRCConstants.Width , shape.DropSize.Height)
+                u.Add( shape.VisioShapeID, ShapeSheet.SRCConstants.Width , shape.DropSize.Width)
+                u.Add( shape.VisioShapeID, ShapeSheet.SRCConstants.Width , shape.DropSize.Height)
             if (len(shape.Cells)>0) :
                 for src in shape.Cells :
                     formula = shape.Cells[src]
@@ -138,7 +138,7 @@ class DOM(object):
         self.__connectshapes(page)
 
         #set any connection properties
-        u = Update()
+        u = ShapeSheet.Update()
         for cxn in self.Connections:
             shape = cxn.VisioShape
             shapeid = cxn.VisioShapeID
@@ -154,8 +154,6 @@ class DOM(object):
                 shape.VisioShape.Text = shape.Text
 
         for cxn in self.Connections:
-            print "<<<",cxn
-            print "<<<",cxn.Text
             if (cxn.Text != None and cxn.Text!='') :
                 cxn.VisioShape.Text = cxn.Text
 
