@@ -10,14 +10,18 @@ class SRC :
     def __str__(self) :
         return "SRC(%s,%s,%s)" % (self.Section,self.Row,self.Cell)
 
-def build_sidsrcstream( id_srcs ) :
-    stream = []
-    for id,src in id_srcs:
-        stream.append(id)
-        stream.append(src.Section)
-        stream.append(src.Row)
-        stream.append(src.Cell)
-    return stream
+
+class ShapeSheetUtil (object) :
+
+    @staticmethod
+    def BuildSIDSRCStream( id_srcs ) :
+        stream = []
+        for id,src in id_srcs:
+            stream.append(id)
+            stream.append(src.Section)
+            stream.append(src.Row)
+            stream.append(src.Cell)
+        return stream
 
 class Query :
 
@@ -29,12 +33,12 @@ class Query :
         self.items.append(item)
 
     def GetFormulas(self, page) :
-        stream = build_sidsrcstream( ( (id,src) for (id,src) in self.items )  )
+        stream = ShapeSheetUtil.BuildSIDSRCStream( ( (id,src) for (id,src) in self.items )  )
         formulas = page.GetFormulas(stream)
         return formulas
 
     def GetResults(self, page) :
-        stream = build_sidsrcstream( ( (id,src) for (id,src) in self.items )  )
+        stream = ShapeSheetUtil.BuildSIDSRCStream( ( (id,src) for (id,src) in self.items )  )
         result = page.GetResults(stream,0,None)
         return result
 
@@ -83,7 +87,7 @@ class Update :
     def SetFormulas(self, page) :
         if (len(self.items)<1) :
             return (0, [])
-        stream = build_sidsrcstream( ( (id,src) for (id,src,formula) in self.items )  )
+        stream = ShapeSheetUtil.BuildSIDSRCStream( ( (id,src) for (id,src,formula) in self.items )  )
         formulas = []
         for (id,src,formula) in self.items :
             formulas.append(formula)
