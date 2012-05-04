@@ -14,13 +14,10 @@ m_dyncon= dom.Master("dynamic connector", "basic_u.vss")
 
 s0 = dom.Drop(m_rect, visiopy.Rectangle(0,0,1,1), "A")
 s1 = dom.Drop(m_octogon, visiopy.Point(4,3), "B",)
-c0 = dom.Drop(m_dyncon, visiopy.Point(-1,-1), "C")
-c1 = dom.Drop(m_dyncon, visiopy.Point(-1,-1), "D")
-c2 = dom.Drop(m_dyncon, visiopy.Point(-1,-1), "E")
 
-dom.Connect(s0,s1,c0)
-dom.Connect(s0,s1,m_dyncon)
-dom.Connect(s1,s1,m_dyncon)
+dom.Connect(s0,s1,m_dyncon,"C0")
+dom.Connect(s0,s1,m_dyncon,"C1")
+#dom.Connect(s1,s1,m_dyncon,"C2")
 
 dom.Render(page)
 
