@@ -1,6 +1,7 @@
 from __future__ import division
 import array
 import sys 
+
 import win32com.client 
 win32com.client.gencache.EnsureDispatch("Visio.Application") 
 
@@ -13,6 +14,9 @@ class DOMShape(object):
     def __init__( self , master, pos) :
         self.Master = master
         self.Cells = { } 
+        self.VisioShape = None
+        self.VisioShapeID = None
+        self.Text = None
 
         if ( isinstance(pos,Point) ) :
             self.DropPosition = pos
@@ -24,9 +28,6 @@ class DOMShape(object):
             print ">>>", pos is Rectangle
             raise DOM()
             #raise some error
-        self.VisioShape = None
-        self.VisioShapeID = None
-        self.Text = None
        
 
 class DOMMaster(object):
@@ -39,13 +40,13 @@ class DOMMaster(object):
 class DOMConnection(object):
 
     def __init__(self , fromshape, toshape, master, text) :
-        self.FromShape = fromshape
-        self.ToShape = toshape
         self.Master = master
+        self.Cells = {}
         self.Text = text
         self.VisioShape = None
         self.VisioShapeID = None 
-        self.Cells = {}
+        self.FromShape = fromshape
+        self.ToShape = toshape
 
 class DOM(object): 
     

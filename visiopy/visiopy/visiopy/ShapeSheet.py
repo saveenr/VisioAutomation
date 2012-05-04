@@ -1,6 +1,6 @@
 import win32com.client 
 
-class SRC :
+class SRC(object) :
 
     def __init__( self, s, r, c ) :
         self.Section = s
@@ -11,7 +11,7 @@ class SRC :
         return "SRC(%s,%s,%s)" % (self.Section,self.Row,self.Cell)
 
 
-class ShapeSheetUtil (object) :
+class ShapeSheetUtil(object) :
 
     @staticmethod
     def BuildSIDSRCStream( id_srcs ) :
@@ -23,7 +23,7 @@ class ShapeSheetUtil (object) :
             stream.append(src.Cell)
         return stream
 
-class Query :
+class Query(object) :
 
     def __init__(self) :
         self.items = []
@@ -74,7 +74,7 @@ class Query :
         formulas = q.GetResults(page)
         return Query.__tabulate(len(srcs),formulas)
 
-class Update :
+class Update(object) :
 
     def __init__(self) :
         self.items = []
@@ -94,7 +94,7 @@ class Update :
         result = page.SetFormulas(stream, formulas, self.Flags)
         return result
 
-class SRCConstants:
+class SRCConstants(object):
 
     __SEC__ = win32com.client.constants
     __ROW__ = win32com.client.constants
