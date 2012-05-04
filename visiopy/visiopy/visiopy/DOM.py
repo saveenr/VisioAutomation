@@ -155,13 +155,17 @@ class DOM(object):
         print "Batch Connect groups", len(batch_connects_dic)
 
         if (len(nonbatch_connects)>0):
-            for i,cxn in enumerate( nonbatch_connects ) :
+            # process all the connections for which we cannot use the Page.AutoConnectMany api
+            for cxn in enumerate( nonbatch_connects ) :
                 fromshape = cxn.FromShape.VisioShape
                 toshape = cxn.ToShape.VisioShape
                 if (fromshape!=toshape) :
+                    # if connecting different shapes we can use the Shape.AutoConnect method
                     direction = 0
                     autoconnectshape = fromshape.AutoConnect( toshape, direction, cxn.Master.VisioMaster)  
                 else:
+                    # but if connecting the same shape to itself, we must manually add a connector
+                    # because Shape.AutoConnect fails if the from and to shape are the same
                     vmaster = cxn.ConnectorShape.VisioMaster
                     connectorshape = page.Drop( vmaster, 1, 1 )
                     cxn_from_beginx = connectorshape.CellsU( "BeginX" )
