@@ -6,6 +6,9 @@ class Point(object):
         self.X = x
         self.Y = y
 
+    def Clone() :
+        return Point(self.X,self.Y)
+
 class Rectangle(object):
     
     def __init__( self , left, bottom, right, top) :
@@ -22,8 +25,14 @@ class Rectangle(object):
     def CenterPoint(self):
         return Point( (self.Right - self.Left)/2.0, (self.Top- self.Bottom)/2.0)
 
+    def Clone() :
+        return Rectangle(self.Left, self.Bottom, self.Right ,self.Top )
+
 class Size(object):
     
     def __init__( self , w, h) :
         self.Width = w
         self.Height = h
+
+    def Clone() :
+        return Point(self.Width,self.Height)

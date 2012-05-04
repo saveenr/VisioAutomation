@@ -17,6 +17,7 @@ class DOMShape(object):
         self.VisioShape = None
         self.VisioShapeID = None
         self.Text = None
+        self.DropPos = None
 
         if ( isinstance(pos,Point) ) :
             self.DropPosition = pos
@@ -27,17 +28,12 @@ class DOMShape(object):
         else :
             raise VisioPyError()
 
-class DOMConnection(object):
+class DOMConnection(DOMShape):
 
-    def __init__(self , fromshape, toshape, master, text) :
-        self.Master = master
-        self.Cells = {}
-        self.Text = text
-        self.VisioShape = None
-        self.VisioShapeID = None 
+    def __init__(self , fromshape, toshape, master) :
+        super(DOMConnection, self).__init__(master, Point(-1,-1)) 
         self.FromShape = fromshape
         self.ToShape = toshape
-       
 
 class DOMMaster(object):
 
@@ -45,7 +41,6 @@ class DOMMaster(object):
         self.MasterName = mastername
         self.StencilName = stencil
         self.VisioMaster = None
-
 
 class DOM(object): 
     
@@ -70,11 +65,11 @@ class DOM(object):
         if (not isinstance(connecterobject,DOMMaster)) :    
             raise VisioPyError()
 
-        con = DOMConnection(fromshape, toshape, connecterobject, text)
-        if (cells!=None) :
-            con.Cells = cells
-        self.Connections.append(con)
-        return con
+        cxn = DOMConnection(fromshape, toshape, connecterobject)
+        if (cells!=None) : cxn.Cells = cells
+        cxn.Text = text
+        self.Connections.append(cxn)
+        return cxn
 
     def OpenStencil( self, name) :
         stencil = DOMStencil(name)
@@ -150,10 +145,8 @@ class DOM(object):
             if (len(cxn.Cells)>0) :
                 for src in cxn.Cells :
                     formula = cxn.Cells[src]
-                    print src,formula, cxn.Text
                     u.Add( cxn.VisioShapeID, src, formula)
         result = u.SetFormulas(page) 
-
 
         # Set the text for shapes and connections
         for shape in self.Shapes:
@@ -161,6 +154,8 @@ class DOM(object):
                 shape.VisioShape.Text = shape.Text
 
         for cxn in self.Connections:
+            print "<<<",cxn
+            print "<<<",cxn.Text
             if (cxn.Text != None and cxn.Text!='') :
                 cxn.VisioShape.Text = cxn.Text
 
