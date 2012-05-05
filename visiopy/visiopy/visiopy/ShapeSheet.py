@@ -61,8 +61,14 @@ class Query(object) :
         stream = ShapeSheetUtil.BuildSIDSRCStream( self.items )
         formulas = None
         results = None
-        if (getformulas) : formulas = page.GetFormulas(stream)
-        if (getresults) : result = page.GetResults(stream, self.GetResultsFlags, self.UnitCodes)
+
+        if (getformulas) : 
+            formulas = page.GetFormulas(stream)
+            assert( len(formulas) == len(self.items))
+        if (getresults) : 
+            results = page.GetResults(stream, self.GetResultsFlags, self.UnitCodes)
+            assert( len(results) == len(self.items))
+        
         return (formulas,results)
 
     @staticmethod
@@ -75,6 +81,9 @@ class Query(object) :
             cur_list.append(d)
             if (i%numcols==numcols-1) :
                 container.append(cur_list)
+
+        total_count = sum( len(r) for r in container)
+        assert(total_count==len(data))
         return container
 
     @staticmethod
