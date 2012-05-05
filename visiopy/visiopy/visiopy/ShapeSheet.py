@@ -46,14 +46,24 @@ class Query(object) :
         self.items.append(sidsrc)
 
     def GetFormulas(self, page) :
-        stream = ShapeSheetUtil.BuildSIDSRCStream( self.items )
-        formulas = page.GetFormulas(stream)
+        formulas,results= self.__getdata(page,false,true)
         return formulas
 
     def GetResults(self, page) :
+        formulas,results= self.__getdata(page,false,true)
+        return results
+
+    def GetFormulasAndResults(self, page) :
+        formulas,results= self.__getdata(page,false,true)
+        return formulas,results
+
+    def __getdata(self, page, getformulas, getresults) :
         stream = ShapeSheetUtil.BuildSIDSRCStream( self.items )
-        result = page.GetResults(stream, self.GetResultsFlags, self.UnitCodes)
-        return result
+        formulas = None
+        results = None
+        if (getformulas) : formulas = page.GetFormulas(stream)
+        if (getresults) : result = page.GetResults(stream, self.GetResultsFlags, self.UnitCodes)
+        return (formulas,results)
 
     @staticmethod
     def __tabulate( numcols, data) :
