@@ -192,6 +192,21 @@ class DOM(object):
             cxn.VisioShape = connectorshape
             cxn.VisioShapeID = cxn.VisioShape.ID
 
+class UndoContext:
+
+    def __init__(self, app, name):
+        self.Application = app
+        self.ScopeID =None
+        self.Name = name
+        self.Commit = None
+
+    def __enter__(self):
+        self.ScopeID = self.Application.BeginUndoScope(self.Name);
+        self.Commit = True
+
+    def __exit__(self, type, value, tb):
+        self.Application.EndUndoScope(self.ScopeID, self.Commit )
+        del self.Application
 
 class PerfContext:
 
