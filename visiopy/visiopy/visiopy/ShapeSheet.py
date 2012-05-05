@@ -33,8 +33,13 @@ class ShapeSheetUtil(object) :
 
 class Query(object) :
 
+    # page.GetFormulas: http://msdn.microsoft.com/en-us/library/ff768473.aspx
+    # page.GetResults: http://msdn.microsoft.com/en-us/library/ff766481.aspx
+
     def __init__(self) :
         self.items = []
+        self.GetResultsFlags = 0
+        self.UnitCodes = None
 
     def Add(self, id, src) :
         sidsrc = SIDSRC(id,src)
@@ -47,7 +52,7 @@ class Query(object) :
 
     def GetResults(self, page) :
         stream = ShapeSheetUtil.BuildSIDSRCStream( self.items )
-        result = page.GetResults(stream,0,None)
+        result = page.GetResults(stream, self.GetResultsFlags, self.UnitCodes)
         return result
 
     @staticmethod
@@ -86,7 +91,7 @@ class Update(object) :
 
     def __init__(self) :
         self.items = []
-        self.Flags = 0
+        self.SetFormulasFlags = 0
 
     def Add(self, id, src, formula ) :
         item = (SIDSRC(id,src),formula)
@@ -99,7 +104,7 @@ class Update(object) :
         formulas = []
         for (sidsrc,formula) in self.items :
             formulas.append(formula)
-        result = page.SetFormulas(stream, formulas, self.Flags)
+        result = page.SetFormulas(stream, formulas, self.SetFormulasFlags)
         return result
 
 class SRCConstants(object):
