@@ -208,35 +208,51 @@ class UndoContext:
         self.Application.EndUndoScope(self.ScopeID, self.Commit )
         del self.Application
 
-class PerfContext:
+class PerfSettings:
 
-    screen_updating_fast = 0 #// disable screen updating
-    defer_recalc_fast = 1 # // defer recalc
-    enable_autoconnect_fast = False #// diable autoconnect
-    livedynamics_fast = False #// diable live dynamics
+    def __init__(self):
+        self.EnableAutoConnect=None
+        self.LiveDynamics=None
+        self.ScreenUpdating=None
+        self.DeferRecalc=None
 
-    def __init__(self, app):
-        self.app= app
-        self.old_autoconnect=None
-        self.old_livedynamics=None
-        self.old_screenupdating=None
-        self.old_deferrecalc=None
+    def Load(self,app):
+        self.old_livedynamics = app.LiveDynamics
+        self.old_autoconnect = app.Settings.EnableAutoConnect
+        self.old_deferrecalc = app.DeferRecalc
+        self.old_screenupdating = app.ScreenUpdating
 
-    def __enter__(self):
-        app_settings = self.app.Settings
-        self.old_livedynamics = self.app.LiveDynamics
-        self.old_autoconnect = app_settings.EnableAutoConnect
-        self.old_deferrecalc = self.app.DeferRecalc
-        self.old_screenupdating = self.app.ScreenUpdating
-
-        self.app.ScreenUpdating = PerfContext.screen_updating_fast
-        self.app.DeferRecalc = PerfContext.defer_recalc_fast
-        self.app.Settings.EnableAutoConnect = PerfContext.enable_autoconnect_fast
-        self.app.LiveDynamics = PerfContext.livedynamics_fast
+    def Apply(self,app):
+        if (self.ScreenUpdating!=None) : app.ScreenUpdating = self.ScreenUpdating
+        if (self.DeferRecalc!=None) : app.DeferRecalc = self.DeferRecalc 
+        if (self.EnableAutoConnect!=None) : app.Settings.EnableAutoConnect = self.EnableAutoConnect 
+        if (self.LiveDynamics!=None) : app.LiveDynamics = self.LiveDynamics 
 
     def __exit__(self, type, value, tb):
         self.app.ScreenUpdating = self.old_screenupdating;
         self.app.DeferRecalc = self.old_deferrecalc;
         self.app.Settings.EnableAutoConnect = self.old_autoconnect;
         self.app.LiveDynamics = self.old_livedynamics;
-        del self.app
+
+class PerfContext:
+
+    def __init__(self, app):
+        self.Application = app
+
+        self.OldSettings = PerfSettings()
+
+        ps = PerfSettings()
+        ps.ScreenUpdating = 0
+        ps.DeferRecalc = 1
+        ps.EnableAutoConnect = False
+        ps.LiveDynamics = False
+
+        self.NewSettings = ps
+
+    def __enter__(self):
+        self.OldSettings.Load(self.Application)
+        self.NewSettings.Apply(self.Application)
+
+    def __exit__(self, type, value, tb):
+        self.OldSettings.Apply(self.Application)
+        del self.Application
