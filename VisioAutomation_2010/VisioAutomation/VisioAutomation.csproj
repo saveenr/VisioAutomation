@@ -179,7 +179,7 @@
     <Compile Include="Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
     <Compile Include="DOM\PageSettings.cs" />
-    <Compile Include="FastRenderingScope.cs" />
+    <Compile Include="PerfScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Layout\Models\Grid\Column.cs" />
