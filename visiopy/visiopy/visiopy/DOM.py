@@ -23,8 +23,8 @@ class DOMShape(object):
             self.DropPosition = pos
             self.DropSize = None
         elif ( isinstance(pos,Drawing.Rectangle) ) :
-            self.DropSize = pos.Size
             self.DropPosition = pos.CenterPoint
+            self.DropSize = pos.Size
         else :
             raise Errors.VisioPyError()
 
@@ -116,7 +116,6 @@ class DOM(object):
                 xyarray.append( shape.DropPosition.Y )
             num_shapes,shape_ids = page.DropMany( vmasters, xyarray) 
 
-
             # Ensure that we have stored the corresponding shape object and shapeid for each dropped object
             page_shapes = page.Shapes
             for i,shape in enumerate( self.Shapes ) :
@@ -128,7 +127,7 @@ class DOM(object):
             for shape in self.Shapes:
                 if (shape.DropSize!=None):
                     u.Add( shape.VisioShapeID, ShapeSheet.SRCConstants.Width , shape.DropSize.Width)
-                    u.Add( shape.VisioShapeID, ShapeSheet.SRCConstants.Width , shape.DropSize.Height)
+                    u.Add( shape.VisioShapeID, ShapeSheet.SRCConstants.Height, shape.DropSize.Height)
                 if (len(shape.Cells)>0) :
                     for src in shape.Cells :
                         formula = shape.Cells[src]

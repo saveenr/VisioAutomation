@@ -46,15 +46,15 @@ class Query(object) :
         self.items.append(sidsrc)
 
     def GetFormulas(self, page) :
-        formulas,results= self.__getdata(page,false,true)
+        formulas,results= self.__getdata(page,False,True)
         return formulas
 
     def GetResults(self, page) :
-        formulas,results= self.__getdata(page,false,true)
+        formulas,results= self.__getdata(page,False,True)
         return results
 
     def GetFormulasAndResults(self, page) :
-        formulas,results= self.__getdata(page,false,true)
+        formulas,results= self.__getdata(page,True,True)
         return formulas,results
 
     def __getdata(self, page, getformulas, getresults) :
