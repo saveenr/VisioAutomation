@@ -2,6 +2,8 @@ from __future__ import division
 
 class Point(object):
     
+    __slots__ = [ "X", "Y" ]
+
     def __init__( self , x, y) :
         self.X = x
         self.Y = y
@@ -13,6 +15,8 @@ class Point(object):
         return "(%s,%s)" % ( self.X, self.Y)
 
 class Rectangle(object):
+
+    __slots__ = [ "Left", "Right", "Top", "Bottom" ]
     
     def __init__( self , left, bottom, right, top) :
         self.Left = left
@@ -37,6 +41,8 @@ class Rectangle(object):
         return "(%s,%s,%s,%s)" % ( self.Left, self.Bottom, self.Right, self.Top )
 
 class Size(object):
+
+    __slots__ = [ "Width", "Height" ]
     
     def __init__( self , w, h) :
         self.Width = w

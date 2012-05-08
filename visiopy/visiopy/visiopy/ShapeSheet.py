@@ -2,6 +2,8 @@ import win32com.client
 
 class SRC(object) :
 
+    __slots__ = [ "Section", "Row", "Cell" ]
+
     def __init__( self, s, r, c ) :
         self.Section = s
         self.Row = r
