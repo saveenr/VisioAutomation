@@ -6,8 +6,11 @@ class Point(object):
         self.X = x
         self.Y = y
 
-    def Clone() :
+    def Clone(self) :
         return Point(self.X,self.Y)
+
+    def __repr__(self) :
+        return "(%s,%s)" % ( self.X, self.Y)
 
 class Rectangle(object):
     
@@ -23,10 +26,15 @@ class Rectangle(object):
 
     @property
     def CenterPoint(self):
-        return Point( (self.Right - self.Left)/2.0, (self.Top- self.Bottom)/2.0)
+        x = self.Left + ((self.Right - self.Left)/2.0)
+        y = self.Bottom+ ((self.Top- self.Bottom)/2.0)
+        return Point( x, y)
 
-    def Clone() :
+    def Clone(self) :
         return Rectangle(self.Left, self.Bottom, self.Right ,self.Top )
+
+    def __repr__(self) :
+        return "(%s,%s,%s,%s)" % ( self.Left, self.Bottom, self.Right, self.Top )
 
 class Size(object):
     
@@ -34,5 +42,8 @@ class Size(object):
         self.Width = w
         self.Height = h
 
-    def Clone() :
+    def Clone(self) :
         return Point(self.Width,self.Height)
+
+    def __repr__(self) :
+        return "(%s,%s)" % ( self.Width, self.Height)
