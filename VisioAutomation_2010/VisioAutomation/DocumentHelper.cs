@@ -95,7 +95,7 @@ namespace VisioAutomation
         {
             if (force_close)
             {
-                var new_alert_response = VA.UI.AlertResponseCode.No;
+                var new_alert_response = VA.Application.AlertResponseCode.No;
                 var app = doc.Application;
 
                 using (var alertresponse = app.CreateAlertResponseScope(new_alert_response))

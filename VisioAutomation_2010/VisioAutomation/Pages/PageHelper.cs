@@ -199,7 +199,7 @@ namespace VisioAutomation.Pages
             // paste any contents 
             if (has_content)
             {
-                using (var alertresponse = app.CreateAlertResponseScope(VA.UI.AlertResponseCode.Ignore))
+                using (var alertresponse = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.Ignore))
                 {
                     dest_page.Paste(copy_paste_flags);
                 }

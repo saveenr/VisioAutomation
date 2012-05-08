@@ -16,9 +16,9 @@ namespace VisioAutomation.Extensions
             return new VA.Application.UndoScope(app, "Untitled");
         }
 
-        public static VA.UI.AlertResponseScope CreateAlertResponseScope(this IVisio.Application app, VA.UI.AlertResponseCode code)
+        public static VA.Application.AlertResponseScope CreateAlertResponseScope(this IVisio.Application app, VA.Application.AlertResponseCode code)
         {
-            return new VA.UI.AlertResponseScope(app, code);
+            return new VA.Application.AlertResponseScope(app, code);
         }
     }
 }

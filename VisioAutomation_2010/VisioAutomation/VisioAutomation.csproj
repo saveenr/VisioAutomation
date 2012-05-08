@@ -166,7 +166,7 @@
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
-    <Compile Include="UI\AlertResponseCode.cs" />
+    <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
@@ -274,7 +274,7 @@
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Shapesheet\Query\SectionQuery.cs" />
     <Compile Include="Internal\TreeUtil.cs" />
-    <Compile Include="UI\UserInterfaceHelper.cs" />
+    <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />
     <Compile Include="Pages\PageHelper.cs" />
@@ -283,7 +283,7 @@
     <Compile Include="Extensions\PageMethods_draw.cs" />
     <Compile Include="Extensions\ShapeMethods_draw.cs" />
     <Compile Include="Connections\PathAnalysis.cs" />
-    <Compile Include="UI\AlertResponseScope.cs" />
+    <Compile Include="Application\AlertResponseScope.cs" />
     <Compile Include="Text\TabStop.cs" />
     <Compile Include="Application\UndoScope.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />
@@ -347,6 +347,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
