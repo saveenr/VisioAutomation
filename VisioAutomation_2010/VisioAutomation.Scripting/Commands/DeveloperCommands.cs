@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         public static List<System.Type> GetTypes()
         {
             // TODO: Consider filtering out types that should *not* be exposed despite being public
-            var va_type = typeof (VisioAutomation.ApplicationHelper);
+            var va_type = typeof(VisioAutomation.Application.ApplicationHelper);
             var vas_type = typeof (VisioAutomation.Scripting.CommandSet);
 
             var va_types = va_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);

@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public string GetWindowText()
         {
-            return VA.ApplicationHelper.GetApplicationWindowText(this.Session.VisioApplication);
+            return VA.Application.ApplicationHelper.GetApplicationWindowText(this.Session.VisioApplication);
         }
 
         public void WindowToFront()
@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            VA.ApplicationHelper.BringWindowToTop(app);
+            VA.Application.ApplicationHelper.BringWindowToTop(app);
         }
 
         public void ForceClose()
@@ -75,7 +75,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application Attach()
         {
-            var app = ApplicationHelper.FindRunningApplication();
+            var app = VA.Application.ApplicationHelper.FindRunningApplication();
             if (app == null)
             {
                 throw new AutomationException("Did not find a running instance of Visio 2007");
@@ -83,7 +83,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Session.VisioApplication = app;
 
-            VA.ApplicationHelper.BringWindowToTop(app);
+            VA.Application.ApplicationHelper.BringWindowToTop(app);
 
             return app;
         }

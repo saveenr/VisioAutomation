@@ -561,7 +561,7 @@ namespace TestVisioAutomationVDX
 
         public static void DeleteXmlErrorLog(IVisio.Application app)
         {
-            string logfilename = VA.ApplicationHelper.GetXMLErrorLogFilename(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {
@@ -577,7 +577,7 @@ namespace TestVisioAutomationVDX
 
         public static bool XmlErrorLogExists(IVisio.Application app)
         {
-            string logfilename = VA.ApplicationHelper.GetXMLErrorLogFilename(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {

@@ -1,7 +1,7 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioAutomation
+namespace VisioAutomation.Application
 {
     public class PerfScope : System.IDisposable
     {

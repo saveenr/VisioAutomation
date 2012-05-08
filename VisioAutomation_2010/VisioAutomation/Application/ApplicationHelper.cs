@@ -2,7 +2,7 @@ using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
 
-namespace VisioAutomation
+namespace VisioAutomation.Application
 {
     public static class ApplicationHelper
     {

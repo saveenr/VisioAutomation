@@ -180,7 +180,7 @@
     <Compile Include="Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
     <Compile Include="DOM\PageSettings.cs" />
-    <Compile Include="PerfScope.cs" />
+    <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Layout\Models\Grid\Column.cs" />
@@ -285,13 +285,13 @@
     <Compile Include="Connections\PathAnalysis.cs" />
     <Compile Include="UI\AlertResponseScope.cs" />
     <Compile Include="Text\TabStop.cs" />
-    <Compile Include="UndoScope.cs" />
+    <Compile Include="Application\UndoScope.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />
     <Compile Include="Extensions\ColorMethods.cs" />
     <Compile Include="Extensions\ConnectsMethods.cs" />
     <Compile Include="Extensions\ShapeMethods_other.cs" />
     <Compile Include="Extensions\MasterMethods.cs" />
-    <Compile Include="ApplicationHelper.cs" />
+    <Compile Include="Application\ApplicationHelper.cs" />
     <Compile Include="Extensions\FontsMethods.cs" />
     <Compile Include="Extensions\MastersMethods.cs" />
     <Compile Include="Extensions\PageMethods_drop.cs" />
