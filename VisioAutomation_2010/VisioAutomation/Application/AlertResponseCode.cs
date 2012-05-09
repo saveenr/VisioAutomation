@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.UI
+﻿namespace VisioAutomation.Application
 {
     public enum AlertResponseCode : short
     {

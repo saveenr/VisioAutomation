@@ -17,7 +17,7 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            using (var scope = app.CreateAlertResponseScope(VA.UI.AlertResponseCode.No))
+            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
             {
                 var doc = app.Documents.Open(filename);
             }
@@ -521,7 +521,7 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            using (var scope = app.CreateAlertResponseScope(VA.UI.AlertResponseCode.No))
+            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
             {
                 var doc = app.Documents.Open(output_filename);
             }
@@ -545,7 +545,7 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            using (var scope = app.CreateAlertResponseScope(VA.UI.AlertResponseCode.No))
+            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
             {
                 var doc = app.Documents.Open(output_filename);
             }
@@ -561,7 +561,7 @@ namespace TestVisioAutomationVDX
 
         public static void DeleteXmlErrorLog(IVisio.Application app)
         {
-            string logfilename = VA.ApplicationHelper.GetXMLErrorLogFilename(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {
@@ -577,7 +577,7 @@ namespace TestVisioAutomationVDX
 
         public static bool XmlErrorLogExists(IVisio.Application app)
         {
-            string logfilename = VA.ApplicationHelper.GetXMLErrorLogFilename(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {

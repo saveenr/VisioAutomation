@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.UI
+namespace VisioAutomation.Application
 {
     /// <summary>
     /// Using an IDisposable pattern, this class allows the Visio Application's AlertResponse 

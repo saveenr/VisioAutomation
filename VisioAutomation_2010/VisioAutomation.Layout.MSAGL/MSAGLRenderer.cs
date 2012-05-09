@@ -147,7 +147,7 @@ namespace VisioAutomation.Layout.MSAGL
             var app = page.Application;
             var dom_doc = CreateDOMDocument(layout_diagram, app);
 
-            using (var speed = new VA.PerfScope(app))
+            using (var perfscope = new VA.Application.PerfScope(app))
             {
                 dom_doc.Render(page);                    
             }

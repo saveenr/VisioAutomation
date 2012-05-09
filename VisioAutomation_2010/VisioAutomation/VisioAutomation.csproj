@@ -145,6 +145,7 @@
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
     <Compile Include="Layout\LockCells.cs" />
+    <Compile Include="Internal\PerfSettings.cs" />
     <Compile Include="Selection\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />
@@ -165,7 +166,7 @@
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
-    <Compile Include="UI\AlertResponseCode.cs" />
+    <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
@@ -179,7 +180,7 @@
     <Compile Include="Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
     <Compile Include="DOM\PageSettings.cs" />
-    <Compile Include="PerfScope.cs" />
+    <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Layout\Models\Grid\Column.cs" />
@@ -273,7 +274,7 @@
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Shapesheet\Query\SectionQuery.cs" />
     <Compile Include="Internal\TreeUtil.cs" />
-    <Compile Include="UI\UserInterfaceHelper.cs" />
+    <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />
     <Compile Include="Pages\PageHelper.cs" />
@@ -282,15 +283,15 @@
     <Compile Include="Extensions\PageMethods_draw.cs" />
     <Compile Include="Extensions\ShapeMethods_draw.cs" />
     <Compile Include="Connections\PathAnalysis.cs" />
-    <Compile Include="UI\AlertResponseScope.cs" />
+    <Compile Include="Application\AlertResponseScope.cs" />
     <Compile Include="Text\TabStop.cs" />
-    <Compile Include="UndoScope.cs" />
+    <Compile Include="Application\UndoScope.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />
     <Compile Include="Extensions\ColorMethods.cs" />
     <Compile Include="Extensions\ConnectsMethods.cs" />
     <Compile Include="Extensions\ShapeMethods_other.cs" />
     <Compile Include="Extensions\MasterMethods.cs" />
-    <Compile Include="ApplicationHelper.cs" />
+    <Compile Include="Application\ApplicationHelper.cs" />
     <Compile Include="Extensions\FontsMethods.cs" />
     <Compile Include="Extensions\MastersMethods.cs" />
     <Compile Include="Extensions\PageMethods_drop.cs" />
@@ -346,6 +347,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

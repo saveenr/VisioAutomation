@@ -1,6 +1,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation
+namespace VisioAutomation.Application
 {
     public class UndoScope : System.IDisposable
     {

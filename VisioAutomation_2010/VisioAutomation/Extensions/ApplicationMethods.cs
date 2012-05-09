@@ -8,17 +8,17 @@ namespace VisioAutomation.Extensions
     {
         public static void Quit(this IVisio.Application app, bool force_close)
         {
-            VA.ApplicationHelper.Quit(app,force_close);
-        }       
-
-        public static UndoScope CreateUndoScope(this IVisio.Application app)
-        {
-            return new UndoScope(app, "Untitled");
+            VA.Application.ApplicationHelper.Quit(app,force_close);
         }
 
-        public static VA.UI.AlertResponseScope CreateAlertResponseScope(this IVisio.Application app, VA.UI.AlertResponseCode code)
+        public static VA.Application.UndoScope CreateUndoScope(this IVisio.Application app)
         {
-            return new VA.UI.AlertResponseScope(app, code);
+            return new VA.Application.UndoScope(app, "Untitled");
+        }
+
+        public static VA.Application.AlertResponseScope CreateAlertResponseScope(this IVisio.Application app, VA.Application.AlertResponseCode code)
+        {
+            return new VA.Application.AlertResponseScope(app, code);
         }
     }
 }

@@ -1,7 +1,7 @@
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.UI
+namespace VisioAutomation.Application
 {
     public static class UserInterfaceHelper
     {
