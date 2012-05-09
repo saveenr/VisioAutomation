@@ -86,47 +86,49 @@ namespace VisioAutomation.Scripting.FlowChart
 
                 if (major_error)
                 {
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Errors encountered in shape data. Stopping.");
-                    System.Environment.Exit(-1);
+                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
                 }
-
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Creating shape AutoLayout nodes");
-                foreach (var shape_info in shape_infos)
+                else
                 {
-                    var al_shape = drawing.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil,
-                                                    shape_info.Master);
-                    al_shape.URL = shape_info.URL;
-                    al_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
-                    foreach (var kv in shape_info.custprops)
+                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating shape AutoLayout nodes");
+                    foreach (var shape_info in shape_infos)
                     {
-                        al_shape.CustomProperties[kv.Key] = kv.Value;
+                        var al_shape = drawing.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil,
+                                                        shape_info.Master);
+                        al_shape.URL = shape_info.URL;
+                        al_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+                        foreach (var kv in shape_info.custprops)
+                        {
+                            al_shape.CustomProperties[kv.Key] = kv.Value;
+                        }
                     }
+
+                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating connector AutoLayout nodes");
+                    foreach (var con_info in con_infos)
+                    {
+                        var def_connector_type = VA.Connections.ConnectorType.Curved;
+                        var connectory_type = def_connector_type;
+
+                        var from_shape = drawing.Shapes.Find(con_info.From);
+                        var to_shape = drawing.Shapes.Find(con_info.To);
+
+                        var def_con_color = new VA.Drawing.ColorRGB(0x000000);
+                        var def_con_weight = 1.0/72.0;
+                        var def_end_arrow = 2;
+                        var al_connector = drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
+                                                           connectory_type);
+
+                        al_connector.ShapeCells = new VA.DOM.ShapeCells();
+                        al_connector.ShapeCells.LineColor =
+                            VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
+                        al_connector.ShapeCells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
+                        al_connector.ShapeCells.EndArrow = def_end_arrow;
+                    }
+
+                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering AutoLayout...");
+
+                    drawings.Add(drawing);
                 }
-
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Creating connector AutoLayout nodes");
-                foreach (var con_info in con_infos)
-                {
-                    var def_connector_type = VA.Connections.ConnectorType.Curved;
-                    var connectory_type = def_connector_type;
-
-                    var from_shape = drawing.Shapes.Find(con_info.From);
-                    var to_shape = drawing.Shapes.Find(con_info.To);
-
-                    var def_con_color = new VA.Drawing.ColorRGB(0x000000);
-                    var def_con_weight = 1.0 / 72.0;
-                    var def_end_arrow = 2;
-                    var al_connector = drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
-                                                       connectory_type);
-
-                    al_connector.ShapeCells = new VA.DOM.ShapeCells();
-                    al_connector.ShapeCells.LineColor = VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
-                    al_connector.ShapeCells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
-                    al_connector.ShapeCells.EndArrow = def_end_arrow;
-                }
-
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering AutoLayout...");
-
-                drawings.Add(drawing);
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering AutoLayout");
             }
 
