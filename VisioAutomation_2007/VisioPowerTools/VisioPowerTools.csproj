@@ -47,10 +47,10 @@
     </UpgradeBackupLocation>
     <TargetFrameworkProfile />
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>d:\saveenr\code\publish\VisioPowerTools\</PublishUrl>
+    <PublishUrl>c:\saveenr\code\publish\VisioPowerTools\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.74</ApplicationVersion>
+    <ApplicationVersion>1.0.0.75</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
