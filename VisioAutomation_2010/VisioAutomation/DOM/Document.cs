@@ -10,7 +10,6 @@ namespace VisioAutomation.DOM
     {
         public NodeList<BaseShape> Shapes { get; private set; }
         public PageSettings PageSettings { get; set; }
-        public bool ResolveVisioShapeObjects { get; set; }
 
         public Document()
         {
@@ -25,26 +24,12 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentNullException("page");
             }
 
-            // Preparation
             var ctx = new RenderContext(page);
 
-            // Resolve all the masters
-            ResolveMasters(ctx);
+            // Preparation
+            PrepareForDrawing(ctx);
 
-            // Handle sizes for shapes that were dropped using rects
-            SetDroppedSizes(ctx);
-
-            // Resolve all the Character Font Name Cells
-            ResolveFonts(ctx);
-
-            // ----------------------------------------
-            // Handle the initial page settings
-            // Set the page properties before the rest of the shapes are dropped
-            initialize_page(ctx);
-
-            // ----------------------------------------
             // Draw shapes
-
             var non_connector_shapes = this.Shapes.Where(s => !(s is Connector));
             foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(non_connector_shapes, s => s is Shape))
             {
@@ -57,7 +42,7 @@ namespace VisioAutomation.DOM
                         // true means this is a master
                         masters_col.Clear();
                         masters_col.AddRange( cat_shapes.Items.Cast<Shape>());
-                        _draw_masters(ctx,masters_col);
+                        drop_masters(ctx,masters_col);
                         masters_col.Clear();
                     }
                     else
@@ -138,6 +123,23 @@ namespace VisioAutomation.DOM
                     h.Address = hyperlink.Address; // Address of Hyperlink
                 }
             }
+        }
+
+        private void PrepareForDrawing(RenderContext ctx)
+        {
+// Resolve all the masters
+            ResolveMasters(ctx);
+
+            // Handle sizes for shapes that were dropped using rects
+            SetDroppedSizes(ctx);
+
+            // Resolve all the Character Font Name Cells
+            ResolveFonts(ctx);
+
+            // ----------------------------------------
+            // Handle the initial page settings
+            // Set the page properties before the rest of the shapes are dropped
+            initialize_page(ctx);
         }
 
         private void ResolveFonts(RenderContext ctx)
@@ -269,17 +271,17 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_masters(RenderContext ctx, List<Shape> dom_masters)
+        private void drop_masters(RenderContext ctx, List<Shape> dom_shapes)
         {
-            var masters = dom_masters.Select(m => m.Master.VisioMaster).ToList();
+            var masters = dom_shapes.Select(m => m.Master.VisioMaster).ToList();
 
             var points = new List<VA.Drawing.Point>(masters.Count);
-            points.AddRange(dom_masters.Select(s => s.DropPosition));
+            points.AddRange(dom_shapes.Select(s => s.DropPosition));
             var shapeids = ctx.VisioPage.DropManyU(masters, points);
             
-            for (int i = 0; i < dom_masters.Count; i++)
+            for (int i = 0; i < dom_shapes.Count; i++)
             {
-                var dom_master = dom_masters[i];
+                var dom_master = dom_shapes[i];
                 short shapeid = shapeids[i];
                 dom_master.VisioShapeID = shapeid;
             }
