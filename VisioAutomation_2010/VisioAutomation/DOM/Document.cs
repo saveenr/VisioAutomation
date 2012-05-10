@@ -41,7 +41,8 @@ namespace VisioAutomation.DOM
             var ctx = new RenderContext(page);
 
             // Resolve all the masters
-            LoadMastersDeferred(ctx);
+            ResolveMasters(ctx);
+
 
             // Handle sizes for shapes that were dropped using rects
             SetDroppedSizes(ctx);
@@ -57,7 +58,8 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(this.Shapes, s=>s is DroppedShape))
+            var non_connector_shapes = this.Shapes.Where(s => !(s is DynamicConnector));
+            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(non_connector_shapes, s => s is DroppedShape))
             {
                 var masters_col = new List<DroppedShape>();
                 var shapes_col = new List<Shape>();
@@ -84,6 +86,7 @@ namespace VisioAutomation.DOM
 
             // verify that all non-connectors have an associated shape id
             check_valid_shape_ids();
+
 
             // Draw Connectors
             _draw_dynamic_connectors(ctx);
@@ -224,37 +227,43 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void LoadMastersDeferred(RenderContext ctx)
+        private void ResolveMasters(RenderContext ctx)
         {
-            var deferred_shapes = this.Shapes
-                .Where(shape => shape is ShapeFromMaster)
-                .Cast<ShapeFromMaster>()
-                .Where(shape => shape.VisioMaster == null);
+            // Find all the shapes that use masters and for which
+            // a Visio master object has not been identifies yet
+            var shapes = this.Shapes
+                .Where(shape => shape is DroppedShape)
+                .Cast<DroppedShape>()
+                .Where(shape => shape.Master.VisioMaster == null).ToList();
 
             var loader = new VA.Masters.MasterLoader();
-            foreach (var s in deferred_shapes)
+            foreach (var s in shapes)
             {
-                loader.Add(s.MasterName,s.StencilName);
+                loader.Add(s.Master.MasterName,s.Master.StencilName);
             }
 
             var application = ctx.VisioPage.Application;
             var docs = application.Documents;
             loader.Resolve(docs);
 
-            foreach (var s in deferred_shapes)
+            foreach (var s in shapes)
             {
-                var mref = loader.Get(s.MasterName, s.StencilName);
-                s.VisioMaster = mref.VisioMaster;
+                var mref = loader.Get(s.Master.MasterName, s.Master.StencilName);
+                s.Master.VisioMaster = mref.VisioMaster;
             }
 
-            // Ensure that all masters have objects now
-            foreach (var deferred_shape in deferred_shapes)
+            // Ensure that all shapes to drop are assigned a visio master object
+
+            foreach (var shape in this.Shapes.Where(s=>s is DroppedShape).Cast<DroppedShape>())
             {
-                if (deferred_shape.VisioMaster == null)
+                if (shape.Master.VisioMaster == null)
                 {
                     throw new AutomationException("Found master without stencil object");
                 }
             }
+
+
+
         }
 
         private void SetDroppedSizes(RenderContext ctx)
@@ -282,7 +291,7 @@ namespace VisioAutomation.DOM
 
         private void _draw_masters(RenderContext ctx, List<DroppedShape> dom_masters)
         {
-            var masters = dom_masters.Select(m => m.VisioMaster).ToList();
+            var masters = dom_masters.Select(m => m.Master.VisioMaster).ToList();
 
             var points = new List<VA.Drawing.Point>(masters.Count);
             points.AddRange(dom_masters.Select(s => s.DropPosition));
@@ -377,7 +386,7 @@ namespace VisioAutomation.DOM
             }
 
             // Drop the number of connectors needed somewhere on the page
-            var masterobjects = dyncon_shapes.Select(i => i.VisioMaster).ToArray();
+            var masterobjects = dyncon_shapes.Select(i => i.Master.VisioMaster).ToArray();
             var origin = new VA.Drawing.Point(-2, -2);
             var points = Enumerable.Range(0, dyncon_shapes.Count)
                 .Select(i => origin + new VA.Drawing.Point(1.10, 0))

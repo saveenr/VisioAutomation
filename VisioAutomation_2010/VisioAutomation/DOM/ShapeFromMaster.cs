@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace VisioAutomation.DOM
 {
-    public class ShapeFromMaster : Shape
+    public class MasterRef
     {
         public string MasterName { get; private set; }
         public string StencilName { get; private set; }
         public IVisio.Master VisioMaster { get; internal set; }
 
-        public ShapeFromMaster(IVisio.Master master)
+        public MasterRef(IVisio.Master master)
         {
             if (master == null)
             {
@@ -23,7 +23,7 @@ namespace VisioAutomation.DOM
             this.StencilName = null;
         }
 
-        public ShapeFromMaster(string mastername, string stencilname)
+        public MasterRef(string mastername, string stencilname)
         {
             if (mastername == null)
             {
