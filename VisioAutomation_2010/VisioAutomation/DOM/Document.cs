@@ -18,11 +18,6 @@ namespace VisioAutomation.DOM
             this.PageSettings = new PageSettings(8.5, 11);
         }
 
-        public override IEnumerable<Node> Children
-        {
-            get { return Shapes.Cast<Node>(); }
-        }
-
         public void Render(IVisio.Page page)
         {
             if (page == null)
@@ -30,25 +25,17 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentNullException("page");
             }
 
-            this._Render(page);
-        }
-
-        public void _Render(IVisio.Page page)
-        {
-            // ----------------------------------------
             // Preparation
-
             var ctx = new RenderContext(page);
 
             // Resolve all the masters
             ResolveMasters(ctx);
 
-
             // Handle sizes for shapes that were dropped using rects
             SetDroppedSizes(ctx);
 
             // Resolve all the Character Font Name Cells
-            ResolveCharFonts(ctx);
+            ResolveFonts(ctx);
 
             // ----------------------------------------
             // Handle the initial page settings
@@ -58,7 +45,7 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            var non_connector_shapes = this.Shapes.Where(s => !(s is DynamicConnector));
+            var non_connector_shapes = this.Shapes.Where(s => !(s is Connector));
             foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(non_connector_shapes, s => s is DroppedShape))
             {
                 var masters_col = new List<DroppedShape>();
@@ -83,13 +70,11 @@ namespace VisioAutomation.DOM
                 }
             }
 
-
             // verify that all non-connectors have an associated shape id
             check_valid_shape_ids();
-
-
+            
             // Draw Connectors
-            _draw_dynamic_connectors(ctx);
+            _draw_connectors(ctx);
 
             // Get all the shape objects
             foreach (var shape in this.Shapes)
@@ -155,7 +140,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void ResolveCharFonts(RenderContext ctx)
+        private void ResolveFonts(RenderContext ctx)
         {
             var unique_names = new HashSet<string>();
             foreach (var shape in this.Shapes)
@@ -179,7 +164,6 @@ namespace VisioAutomation.DOM
                 var font = fonts[name];
                 name_to_id[name] = font.ID;
             }
-
 
             foreach (var shape in this.Shapes)
             {
@@ -212,7 +196,7 @@ namespace VisioAutomation.DOM
         {
             foreach (var shape in this.Shapes)
             {
-                if (shape is DynamicConnector)
+                if (shape is Connector)
                 {
                     // do nothing
                 }
@@ -261,9 +245,6 @@ namespace VisioAutomation.DOM
                     throw new AutomationException("Found master without stencil object");
                 }
             }
-
-
-
         }
 
         private void SetDroppedSizes(RenderContext ctx)
@@ -287,7 +268,6 @@ namespace VisioAutomation.DOM
                 }
             }
         }
-
 
         private void _draw_masters(RenderContext ctx, List<DroppedShape> dom_masters)
         {
@@ -362,7 +342,7 @@ namespace VisioAutomation.DOM
                     pl.VisioShapeID = pl_shape.ID16;
                     pl.VisioShape = pl_shape;
                 }
-                else if (shape is DynamicConnector)
+                else if (shape is Connector)
                 {
                     // skip these will be specially drawn
                 }
@@ -375,9 +355,9 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_dynamic_connectors(RenderContext ctx)
+        private void _draw_connectors(RenderContext ctx)
         {
-            var dyncon_shapes = this.Shapes.Where(s => s is DynamicConnector).Cast<DynamicConnector>().ToList();
+            var dyncon_shapes = this.Shapes.Where(s => s is Connector).Cast<Connector>().ToList();
 
             // if no dynamic connectors then do nothing
             if (dyncon_shapes.Count < 1)
@@ -521,18 +501,18 @@ namespace VisioAutomation.DOM
             return m;
         }
 
-        public DynamicConnector Connect(IVisio.Master m, Shape s0, Shape s2)
+        public Connector Connect(IVisio.Master m, Shape s0, Shape s2)
         {
-            var dc = new DynamicConnector(s0, s2, m);
-            this.Shapes.Add(dc);
-            return dc;
+            var cxn = new Connector(s0, s2, m);
+            this.Shapes.Add(cxn);
+            return cxn;
         }
 
-        public DynamicConnector Connect(string master, string stencil, Shape s0, Shape s2)
+        public Connector Connect(string master, string stencil, Shape s0, Shape s2)
         {
-            var dc = new DynamicConnector(s0, s2, master, stencil);
-            this.Shapes.Add(dc);
-            return dc;
+            var cxn = new Connector(s0, s2, master, stencil);
+            this.Shapes.Add(cxn);
+            return cxn;
         }
     }
 }

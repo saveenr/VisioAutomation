@@ -362,7 +362,7 @@ namespace VisioAutomation.Layout.MSAGL
             foreach (var i in msagl_graph.Edges)
             {
                 var layoutconnector = (DGMODEL.Connector)i.UserData;
-                var vconnector = new VA.DOM.DynamicConnector(
+                var vconnector = new VA.DOM.Connector(
                     (VA.DOM.Shape)layoutconnector.From.DOMNode,
                     (VA.DOM.Shape) layoutconnector.To.DOMNode, "Dynamic Connector", "basic_u.vss");
                 layoutconnector.DOMNode = vconnector;
@@ -372,7 +372,7 @@ namespace VisioAutomation.Layout.MSAGL
             var edge_pairs = from n in msagl_graph.Edges
                              let lc = (DGMODEL.Connector)n.UserData
                              select
-                                 new { msagl_edge = n, layout_connector = lc, vconnector = (VA.DOM.DynamicConnector)lc.DOMNode };
+                                 new { msagl_edge = n, layout_connector = lc, vconnector = (VA.DOM.Connector)lc.DOMNode };
 
             foreach (var i in edge_pairs)
             {
