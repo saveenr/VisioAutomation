@@ -114,8 +114,8 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 {
                     foreach (var child in parent.Children)
                     {
-                        var parent_shape = (VA.DOM.Shape)parent.DOMNode;
-                        var child_shape = (VA.DOM.Shape)child.DOMNode;
+                        var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
+                        var child_shape = (VA.DOM.BaseShape)child.DOMNode;
                         var connector = vdom.Connect(dc_master,parent_shape, child_shape);
                     }
                 }
@@ -133,7 +133,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
                 var orgnode = (Node) treenodes[i].Data;
-                var shape = (VA.DOM.Shape)orgnode.DOMNode;
+                var shape = (VA.DOM.BaseShape)orgnode.DOMNode;
                 shape.Text = new VA.Text.Markup.TextElement(orgnode.Text);
             }
 
@@ -148,7 +148,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                                      where n.URL != null
                                      select n;
             var all_urls = from n in orgnodes_with_urls
-                           select new { orgnode = n, shape = (VA.DOM.Shape) n.DOMNode, url = n.URL.Trim() };
+                           select new { orgnode = n, shape = (VA.DOM.BaseShape) n.DOMNode, url = n.URL.Trim() };
 
             foreach (var i in all_urls)
             {
@@ -162,7 +162,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
                 var orgnode = (Node) treenodes[i].Data;
-                var shape = (VA.DOM.Shape)orgnode.DOMNode;
+                var shape = (VA.DOM.BaseShape)orgnode.DOMNode;
                 orgnode.VisioShape = shape.VisioShape;
             }
         }

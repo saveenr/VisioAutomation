@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VisioAutomation.DOM
 {
-    public class BezierCurve : Shape
+    public class BezierCurve : BaseShape
     {
         public List<VA.Drawing.Point> ControlPoints { get; private set; }
         public int Degree { get; private set; }

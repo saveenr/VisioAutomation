@@ -299,7 +299,7 @@ namespace VisioAutomation.Layout.MSAGL
             {
                 var key = layout_shape.StencilName.ToLower() + "+" + layout_shape.MasterName;
                 var master = master_map[key];
-                var dom_shape = new VA.DOM.DroppedShape(master, node_centerpoints[count]);
+                var dom_shape = new VA.DOM.Shape(master, node_centerpoints[count]);
                 layout_shape.DOMNode = dom_shape;
                 dom_doc.Shapes.Add(dom_shape);
                 count++;
@@ -307,7 +307,7 @@ namespace VisioAutomation.Layout.MSAGL
 
             var shape_pairs = from n in msagl_graph.NodeMap.Values
                               let ls = (DGMODEL.Shape)n.UserData
-                              let vs = (VA.DOM.Shape) ls.DOMNode
+                              let vs = (VA.DOM.BaseShape) ls.DOMNode
                               select new {layout_shape = ls, dom_shape = vs};
 
             // FORMAT EACH SHAPE
@@ -363,8 +363,8 @@ namespace VisioAutomation.Layout.MSAGL
             {
                 var layoutconnector = (DGMODEL.Connector)i.UserData;
                 var vconnector = new VA.DOM.Connector(
-                    (VA.DOM.Shape)layoutconnector.From.DOMNode,
-                    (VA.DOM.Shape) layoutconnector.To.DOMNode, "Dynamic Connector", "basic_u.vss");
+                    (VA.DOM.BaseShape)layoutconnector.From.DOMNode,
+                    (VA.DOM.BaseShape) layoutconnector.To.DOMNode, "Dynamic Connector", "basic_u.vss");
                 layoutconnector.DOMNode = vconnector;
                 vdoc.Shapes.Add(vconnector);
             }
@@ -391,7 +391,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private void format_shape(DGMODEL.Shape layout_shape, VA.DOM.Shape dom_shape)
+        private void format_shape(DGMODEL.Shape layout_shape, VA.DOM.BaseShape dom_shape)
         {
             layout_shape.VisioShape = dom_shape.VisioShape;
 

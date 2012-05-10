@@ -8,13 +8,13 @@ namespace VisioAutomation.DOM
 {
     public class Document : Node
     {
-        public NodeList<Shape> Shapes { get; private set; }
+        public NodeList<BaseShape> Shapes { get; private set; }
         public PageSettings PageSettings { get; set; }
         public bool ResolveVisioShapeObjects { get; set; }
 
         public Document()
         {
-            this.Shapes = new NodeList<Shape>(this);
+            this.Shapes = new NodeList<BaseShape>(this);
             this.PageSettings = new PageSettings(8.5, 11);
         }
 
@@ -46,17 +46,17 @@ namespace VisioAutomation.DOM
             // Draw shapes
 
             var non_connector_shapes = this.Shapes.Where(s => !(s is Connector));
-            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(non_connector_shapes, s => s is DroppedShape))
+            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(non_connector_shapes, s => s is Shape))
             {
-                var masters_col = new List<DroppedShape>();
-                var shapes_col = new List<Shape>();
+                var masters_col = new List<Shape>();
+                var shapes_col = new List<BaseShape>();
                 if (cat_shapes.Items.Count > 0)
                 {
                     if (cat_shapes.Category == true)
                     {
                         // true means this is a master
                         masters_col.Clear();
-                        masters_col.AddRange( cat_shapes.Items.Cast<DroppedShape>());
+                        masters_col.AddRange( cat_shapes.Items.Cast<Shape>());
                         _draw_masters(ctx,masters_col);
                         masters_col.Clear();
                     }
@@ -216,8 +216,8 @@ namespace VisioAutomation.DOM
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
             var shapes = this.Shapes
-                .Where(shape => shape is DroppedShape)
-                .Cast<DroppedShape>()
+                .Where(shape => shape is Shape)
+                .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
             var loader = new VA.Masters.MasterLoader();
@@ -238,7 +238,7 @@ namespace VisioAutomation.DOM
 
             // Ensure that all shapes to drop are assigned a visio master object
 
-            foreach (var shape in this.Shapes.Where(s=>s is DroppedShape).Cast<DroppedShape>())
+            foreach (var shape in this.Shapes.Where(s=>s is Shape).Cast<Shape>())
             {
                 if (shape.Master.VisioMaster == null)
                 {
@@ -250,7 +250,7 @@ namespace VisioAutomation.DOM
         private void SetDroppedSizes(RenderContext ctx)
         {
             var masters = this.Shapes
-                .Where(shape => shape is DroppedShape).Cast<DroppedShape>();
+                .Where(shape => shape is Shape).Cast<Shape>();
 
             foreach (var master in masters)
             {
@@ -269,7 +269,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_masters(RenderContext ctx, List<DroppedShape> dom_masters)
+        private void _draw_masters(RenderContext ctx, List<Shape> dom_masters)
         {
             var masters = dom_masters.Select(m => m.Master.VisioMaster).ToList();
 
@@ -285,7 +285,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void _draw_non_masters(RenderContext ctx, List<Shape> non_masters)
+        private void _draw_non_masters(RenderContext ctx, List<BaseShape> non_masters)
         {
             foreach (var shape in non_masters)
             {
@@ -466,49 +466,49 @@ namespace VisioAutomation.DOM
             return bezier;
         }
 
-        public DroppedShape Drop(IVisio.Master master, VA.Drawing.Point pos)
+        public Shape Drop(IVisio.Master master, VA.Drawing.Point pos)
         {
-            var m = new DroppedShape(master, pos);
+            var m = new Shape(master, pos);
             this.Shapes.Add(m);
             return m;
         }
 
-        public DroppedShape Drop(IVisio.Master master, double x, double y)
+        public Shape Drop(IVisio.Master master, double x, double y)
         {
-            var m = new DroppedShape(master, new VA.Drawing.Point(x, y));
+            var m = new Shape(master, new VA.Drawing.Point(x, y));
             this.Shapes.Add(m);
             return m;
         }
 
-        public DroppedShape Drop(string master, string stencil, VA.Drawing.Point pos)
+        public Shape Drop(string master, string stencil, VA.Drawing.Point pos)
         {
-            var m = new DroppedShape(master, stencil, pos);
+            var m = new Shape(master, stencil, pos);
             this.Shapes.Add(m);
             return m;
         }
 
-        public DroppedShape Drop(string master, string stencil, VA.Drawing.Rectangle rect)
+        public Shape Drop(string master, string stencil, VA.Drawing.Rectangle rect)
         {
-            var m = new DroppedShape(master, stencil, rect);
+            var m = new Shape(master, stencil, rect);
             this.Shapes.Add(m);
             return m;
         }
 
-        public DroppedShape Drop(string master, string stencil, double x, double y)
+        public Shape Drop(string master, string stencil, double x, double y)
         {
-            var m = new DroppedShape(master, stencil, new VA.Drawing.Point(x, y));
+            var m = new Shape(master, stencil, new VA.Drawing.Point(x, y));
             this.Shapes.Add(m);
             return m;
         }
 
-        public Connector Connect(IVisio.Master m, Shape s0, Shape s2)
+        public Connector Connect(IVisio.Master m, BaseShape s0, BaseShape s2)
         {
             var cxn = new Connector(s0, s2, m);
             this.Shapes.Add(cxn);
             return cxn;
         }
 
-        public Connector Connect(string master, string stencil, Shape s0, Shape s2)
+        public Connector Connect(string master, string stencil, BaseShape s0, BaseShape s2)
         {
             var cxn = new Connector(s0, s2, master, stencil);
             this.Shapes.Add(cxn);

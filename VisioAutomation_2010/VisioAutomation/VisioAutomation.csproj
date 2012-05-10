@@ -172,7 +172,7 @@
     <Compile Include="Layout\LayoutHelper.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
     <Compile Include="DOM\MasterRef.cs" />
-    <Compile Include="DOM\DroppedShape.cs" />
+    <Compile Include="DOM\Shape.cs" />
     <Compile Include="DOM\Line.cs" />
     <Compile Include="DOM\Rectangle.cs" />
     <Compile Include="DOM\PolyLine.cs" />
@@ -216,7 +216,7 @@
     <Compile Include="Shapesheet\Query\QueryColumn.cs" />
     <Compile Include="Shapesheet\Data\TableRow.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
-    <Compile Include="DOM\Shape.cs" />
+    <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\Document.cs" />
     <Compile Include="DOM\Node.cs" />
     <Compile Include="DOM\NodeList.cs" />

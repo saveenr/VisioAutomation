@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VisioAutomation.DOM
 {
-    public class Rectangle : Shape
+    public class Rectangle : BaseShape
     {
         public VA.Drawing.Point P0 { get; private set; }
         public VA.Drawing.Point P1 { get; private set; }
