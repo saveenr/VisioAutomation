@@ -8,33 +8,32 @@ namespace VisioAutomation.DOM
     public class Master : ShapeFromMaster
     {
         public VA.Drawing.Point DropPosition { get; private set; }
-        public VA.Drawing.Size? DroppedSize;
+        public VA.Drawing.Size? DropSize { get; private set; }
 
-        public Master(IVisio.Master master, VA.Drawing.Point dropposition) :
+        public Master(IVisio.Master master, VA.Drawing.Point pos) :
             base(master)
         {
-            this.DropPosition = dropposition;
+            this.DropPosition = pos;
         }
-
-
+        
         public Master(IVisio.Master master, VA.Drawing.Rectangle rect) :
             base(master)
         {
             this.DropPosition = rect.Center;
-            this.DroppedSize = rect.Size;
+            this.DropSize = rect.Size;
         }
 
-        public Master(string mastername, string stencilname, VA.Drawing.Point dropposition) :
+        public Master(string mastername, string stencilname, VA.Drawing.Point pos) :
             base(mastername, stencilname)
         {
-            this.DropPosition = dropposition;
+            this.DropPosition = pos;
         }
 
         public Master(string mastername, string stencilname, VA.Drawing.Rectangle rect) :
             base(mastername, stencilname)
         {
             this.DropPosition = rect.Center;
-            this.DroppedSize = rect.Size;
+            this.DropSize = rect.Size;
             this.Cells.Width = rect.Size.Width;
             this.Cells.Height = rect.Size.Height;
         }

@@ -264,16 +264,16 @@ namespace VisioAutomation.DOM
 
             foreach (var master in masters)
             {
-                if (master.DroppedSize.HasValue)
+                if (master.DropSize.HasValue)
                 {
                     if (!master.Cells.Width.HasValue)
                     {
-                        master.Cells.Width = master.DroppedSize.Value.Width;
+                        master.Cells.Width = master.DropSize.Value.Width;
                     }
 
                     if (!master.Cells.Height.HasValue)
                     {
-                        master.Cells.Height = master.DroppedSize.Value.Height;
+                        master.Cells.Height = master.DropSize.Value.Height;
                     }
                 }
             }
