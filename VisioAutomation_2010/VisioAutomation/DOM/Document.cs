@@ -30,30 +30,12 @@ namespace VisioAutomation.DOM
             PrepareForDrawing(ctx);
 
             // Draw shapes
-            var non_connector_shapes = this.Shapes.Where(s => !(s is Connector));
-            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(non_connector_shapes, s => s is Shape))
-            {
-                var masters_col = new List<Shape>();
-                var shapes_col = new List<BaseShape>();
-                if (cat_shapes.Items.Count > 0)
-                {
-                    if (cat_shapes.Category == true)
-                    {
-                        // true means this is a master
-                        masters_col.Clear();
-                        masters_col.AddRange( cat_shapes.Items.Cast<Shape>());
-                        drop_masters(ctx,masters_col);
-                        masters_col.Clear();
-                    }
-                    else
-                    {
-                        shapes_col.Clear();
-                        shapes_col.AddRange( cat_shapes.Items);
-                        _draw_non_masters(ctx,shapes_col);
-                        shapes_col.Clear();
-                    }
-                }
-            }
+            var non_connectors = this.Shapes.Where(s => !(s is Connector));
+            var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
+            var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
+
+            drop_masters(ctx, non_connector_dropshapes);
+            _draw_non_masters(ctx, non_connector_nondropshapes);
 
             // verify that all non-connectors have an associated shape id
             check_valid_shape_ids();

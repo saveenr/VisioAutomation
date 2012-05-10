@@ -122,7 +122,6 @@
     <Compile Include="Layout\Models\Radial\Sector.cs" />
     <Compile Include="Layout\Models\Radial\RadialSlice.cs" />
     <Compile Include="Layout\Models\Radial\PieSlice.cs" />
-    <Compile Include="Internal\LinqUtil.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
     <Compile Include="Layout\Models\SimpleTextDoc\TextDocumentBuilder.cs" />
