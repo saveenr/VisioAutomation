@@ -25,9 +25,9 @@ namespace InfoGraphicsPy
             return dom_shapes;
         }
 
-        public static List<VA.DOM.Master> DrawRects(VA.DOM.Document dom, IList<VA.Drawing.Rectangle> rects, IVisio.Master rectmaster)
+        public static List<VA.DOM.DroppedShape> DrawRects(VA.DOM.Document dom, IList<VA.Drawing.Rectangle> rects, IVisio.Master rectmaster)
         {
-            var dom_shapes = new List<VA.DOM.Master>();
+            var dom_shapes = new List<VA.DOM.DroppedShape>();
             foreach (var rect in rects)
             {
                 var dom_shape = dom.Drop(rectmaster, rect.Center);
@@ -41,7 +41,7 @@ namespace InfoGraphicsPy
 
         public static List<IVisio.Shape> DrawRects(IList<VA.Drawing.Rectangle> rects, IVisio.Master rectmaster, IVisio.Page page)
         {
-            var dom_shapes = new List<VA.DOM.Master>();
+            var dom_shapes = new List<VA.DOM.DroppedShape>();
             var dom = new VA.DOM.Document();
             foreach (var rect in rects)
             {

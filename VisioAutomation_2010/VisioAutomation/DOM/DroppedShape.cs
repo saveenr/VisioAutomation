@@ -5,31 +5,31 @@ using System.Linq;
 
 namespace VisioAutomation.DOM
 {
-    public class Master : ShapeFromMaster
+    public class DroppedShape : ShapeFromMaster
     {
         public VA.Drawing.Point DropPosition { get; private set; }
         public VA.Drawing.Size? DropSize { get; private set; }
 
-        public Master(IVisio.Master master, VA.Drawing.Point pos) :
+        public DroppedShape(IVisio.Master master, VA.Drawing.Point pos) :
             base(master)
         {
             this.DropPosition = pos;
         }
         
-        public Master(IVisio.Master master, VA.Drawing.Rectangle rect) :
+        public DroppedShape(IVisio.Master master, VA.Drawing.Rectangle rect) :
             base(master)
         {
             this.DropPosition = rect.Center;
             this.DropSize = rect.Size;
         }
 
-        public Master(string mastername, string stencilname, VA.Drawing.Point pos) :
+        public DroppedShape(string mastername, string stencilname, VA.Drawing.Point pos) :
             base(mastername, stencilname)
         {
             this.DropPosition = pos;
         }
 
-        public Master(string mastername, string stencilname, VA.Drawing.Rectangle rect) :
+        public DroppedShape(string mastername, string stencilname, VA.Drawing.Rectangle rect) :
             base(mastername, stencilname)
         {
             this.DropPosition = rect.Center;
@@ -38,7 +38,7 @@ namespace VisioAutomation.DOM
             this.Cells.Height = rect.Size.Height;
         }
 
-        public Master(IVisio.Master master, double x, double y) :
+        public DroppedShape(IVisio.Master master, double x, double y) :
             this(master, new VA.Drawing.Point(x, y))
         {
         }

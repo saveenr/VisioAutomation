@@ -9,7 +9,7 @@ namespace VisioAutomation.DOM
     {
         public string MasterName { get; private set; }
         public string StencilName { get; private set; }
-        public IVisio.Master MasterObject { get; internal set; }
+        public IVisio.Master VisioMaster { get; internal set; }
 
         public ShapeFromMaster(IVisio.Master master)
         {
@@ -18,7 +18,7 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentNullException("master");
             }
 
-            this.MasterObject = master;
+            this.VisioMaster = master;
             this.MasterName = null;
             this.StencilName = null;
         }
@@ -45,7 +45,7 @@ namespace VisioAutomation.DOM
                 throw new AutomationException("Stencil name does not end with .VSS");
             }
 
-            this.MasterObject = null;
+            this.VisioMaster = null;
             this.MasterName = mastername;
             this.StencilName = stencilname;
         }

@@ -142,7 +142,7 @@ namespace VisioAutomation.Layout.Models.Grid
 
             var dom_doc = new VA.DOM.Document();
 
-            var dom_shapes = new List<VA.DOM.Master>(nodes_to_draw.Count);
+            var dom_shapes = new List<VA.DOM.DroppedShape>(nodes_to_draw.Count);
             foreach (var node in nodes_to_draw)
             {
                 var dom_shape = dom_doc.Drop(node.Master, node.Rectangle.Center);

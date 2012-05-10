@@ -57,9 +57,9 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(this.Shapes, s=>s is Master))
+            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(this.Shapes, s=>s is DroppedShape))
             {
-                var masters_col = new List<Master>();
+                var masters_col = new List<DroppedShape>();
                 var shapes_col = new List<Shape>();
                 if (cat_shapes.Items.Count > 0)
                 {
@@ -67,7 +67,7 @@ namespace VisioAutomation.DOM
                     {
                         // true means this is a master
                         masters_col.Clear();
-                        masters_col.AddRange( cat_shapes.Items.Cast<Master>());
+                        masters_col.AddRange( cat_shapes.Items.Cast<DroppedShape>());
                         _draw_masters(ctx,masters_col);
                         masters_col.Clear();
                     }
@@ -229,7 +229,7 @@ namespace VisioAutomation.DOM
             var deferred_shapes = this.Shapes
                 .Where(shape => shape is ShapeFromMaster)
                 .Cast<ShapeFromMaster>()
-                .Where(shape => shape.MasterObject == null);
+                .Where(shape => shape.VisioMaster == null);
 
             var loader = new VA.Masters.MasterLoader();
             foreach (var s in deferred_shapes)
@@ -244,13 +244,13 @@ namespace VisioAutomation.DOM
             foreach (var s in deferred_shapes)
             {
                 var mref = loader.Get(s.MasterName, s.StencilName);
-                s.MasterObject = mref.VisioMaster;
+                s.VisioMaster = mref.VisioMaster;
             }
 
             // Ensure that all masters have objects now
             foreach (var deferred_shape in deferred_shapes)
             {
-                if (deferred_shape.MasterObject == null)
+                if (deferred_shape.VisioMaster == null)
                 {
                     throw new AutomationException("Found master without stencil object");
                 }
@@ -260,7 +260,7 @@ namespace VisioAutomation.DOM
         private void SetDroppedSizes(RenderContext ctx)
         {
             var masters = this.Shapes
-                .Where(shape => shape is Master).Cast<Master>();
+                .Where(shape => shape is DroppedShape).Cast<DroppedShape>();
 
             foreach (var master in masters)
             {
@@ -280,9 +280,9 @@ namespace VisioAutomation.DOM
         }
 
 
-        private void _draw_masters(RenderContext ctx, List<Master> dom_masters)
+        private void _draw_masters(RenderContext ctx, List<DroppedShape> dom_masters)
         {
-            var masters = dom_masters.Select(m => m.MasterObject).ToList();
+            var masters = dom_masters.Select(m => m.VisioMaster).ToList();
 
             var points = new List<VA.Drawing.Point>(masters.Count);
             points.AddRange(dom_masters.Select(s => s.DropPosition));
@@ -377,7 +377,7 @@ namespace VisioAutomation.DOM
             }
 
             // Drop the number of connectors needed somewhere on the page
-            var masterobjects = dyncon_shapes.Select(i => i.MasterObject).ToArray();
+            var masterobjects = dyncon_shapes.Select(i => i.VisioMaster).ToArray();
             var origin = new VA.Drawing.Point(-2, -2);
             var points = Enumerable.Range(0, dyncon_shapes.Count)
                 .Select(i => origin + new VA.Drawing.Point(1.10, 0))
@@ -477,37 +477,37 @@ namespace VisioAutomation.DOM
             return bezier;
         }
 
-        public Master Drop(IVisio.Master master, VA.Drawing.Point pos)
+        public DroppedShape Drop(IVisio.Master master, VA.Drawing.Point pos)
         {
-            var m = new Master(master, pos);
+            var m = new DroppedShape(master, pos);
             this.Shapes.Add(m);
             return m;
         }
 
-        public Master Drop(IVisio.Master master, double x, double y)
+        public DroppedShape Drop(IVisio.Master master, double x, double y)
         {
-            var m = new Master(master, new VA.Drawing.Point(x, y));
+            var m = new DroppedShape(master, new VA.Drawing.Point(x, y));
             this.Shapes.Add(m);
             return m;
         }
 
-        public Master Drop(string master, string stencil, VA.Drawing.Point pos)
+        public DroppedShape Drop(string master, string stencil, VA.Drawing.Point pos)
         {
-            var m = new Master(master, stencil, pos);
+            var m = new DroppedShape(master, stencil, pos);
             this.Shapes.Add(m);
             return m;
         }
 
-        public Master Drop(string master, string stencil, VA.Drawing.Rectangle rect)
+        public DroppedShape Drop(string master, string stencil, VA.Drawing.Rectangle rect)
         {
-            var m = new Master(master, stencil, rect);
+            var m = new DroppedShape(master, stencil, rect);
             this.Shapes.Add(m);
             return m;
         }
 
-        public Master Drop(string master, string stencil, double x, double y)
+        public DroppedShape Drop(string master, string stencil, double x, double y)
         {
-            var m = new Master(master, stencil, new VA.Drawing.Point(x, y));
+            var m = new DroppedShape(master, stencil, new VA.Drawing.Point(x, y));
             this.Shapes.Add(m);
             return m;
         }

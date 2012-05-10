@@ -172,7 +172,7 @@
     <Compile Include="Layout\LayoutHelper.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
     <Compile Include="DOM\ShapeFromMaster.cs" />
-    <Compile Include="DOM\Master.cs" />
+    <Compile Include="DOM\DroppedShape.cs" />
     <Compile Include="DOM\Line.cs" />
     <Compile Include="DOM\Rectangle.cs" />
     <Compile Include="DOM\PolyLine.cs" />

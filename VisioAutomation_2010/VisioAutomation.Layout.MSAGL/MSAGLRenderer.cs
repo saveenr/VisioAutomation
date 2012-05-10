@@ -299,9 +299,9 @@ namespace VisioAutomation.Layout.MSAGL
             {
                 var key = layout_shape.StencilName.ToLower() + "+" + layout_shape.MasterName;
                 var master = master_map[key];
-                var dom_master = new VA.DOM.Master(master, node_centerpoints[count]);
-                layout_shape.DOMNode = dom_master;
-                dom_doc.Shapes.Add(dom_master);
+                var dom_shape = new VA.DOM.DroppedShape(master, node_centerpoints[count]);
+                layout_shape.DOMNode = dom_shape;
+                dom_doc.Shapes.Add(dom_shape);
                 count++;
             }
 

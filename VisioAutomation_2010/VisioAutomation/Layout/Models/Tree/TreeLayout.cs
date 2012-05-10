@@ -90,7 +90,7 @@ namespace VisioAutomation.Layout.Models.Tree
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
                 var tree_node = (VA.Layout.Models.Tree.Node)treenodes[i].Data;
-                DOM.Master dom_master = dom_masters[i];
+                DOM.DroppedShape dom_master = dom_masters[i];
                 tree_node.DOMNode = dom_master;
 
                 if (tree_node.Cells!=null)
