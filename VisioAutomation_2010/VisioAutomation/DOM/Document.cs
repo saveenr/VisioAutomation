@@ -199,34 +199,33 @@ namespace VisioAutomation.DOM
         {
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
-            var shapes = this.Shapes
+            var dom_shapes = this.Shapes
                 .Where(shape => shape is Shape)
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
             var loader = new VA.Masters.MasterLoader();
-            foreach (var s in shapes)
+            foreach (var dom_shape in dom_shapes)
             {
-                loader.Add(s.Master.MasterName,s.Master.StencilName);
+                loader.Add(dom_shape.Master.MasterName,dom_shape.Master.StencilName);
             }
 
             var application = ctx.VisioPage.Application;
             var docs = application.Documents;
             loader.Resolve(docs);
 
-            foreach (var s in shapes)
+            foreach (var dom_shape in dom_shapes)
             {
-                var mref = loader.Get(s.Master.MasterName, s.Master.StencilName);
-                s.Master.VisioMaster = mref.VisioMaster;
+                var mref = loader.Get(dom_shape.Master.MasterName, dom_shape.Master.StencilName);
+                dom_shape.Master.VisioMaster = mref.VisioMaster;
             }
 
             // Ensure that all shapes to drop are assigned a visio master object
-
             foreach (var shape in this.Shapes.Where(s=>s is Shape).Cast<Shape>())
             {
                 if (shape.Master.VisioMaster == null)
                 {
-                    throw new AutomationException("Found master without stencil object");
+                    throw new AutomationException("Missing a master for a shape");
                 }
             }
         }
@@ -341,35 +340,36 @@ namespace VisioAutomation.DOM
 
         private void _draw_connectors(RenderContext ctx)
         {
-            var dyncon_shapes = this.Shapes.Where(s => s is Connector).Cast<Connector>().ToList();
+            var dom_connectors = this.Shapes.Where(s => s is Connector).Cast<Connector>().ToList();
 
             // if no dynamic connectors then do nothing
-            if (dyncon_shapes.Count < 1)
+            if (dom_connectors.Count < 1)
             {
                 return;
             }
 
             // Drop the number of connectors needed somewhere on the page
-            var masterobjects = dyncon_shapes.Select(i => i.Master.VisioMaster).ToArray();
+            var masters = dom_connectors.Select(i => i.Master.VisioMaster).ToArray();
             var origin = new VA.Drawing.Point(-2, -2);
-            var points = Enumerable.Range(0, dyncon_shapes.Count)
+            var points = Enumerable.Range(0, dom_connectors.Count)
                 .Select(i => origin + new VA.Drawing.Point(1.10, 0))
                 .ToList();
-            var shapeids = ctx.VisioPage.DropManyU(masterobjects, points);
+            var connector_shapeids = ctx.VisioPage.DropManyU(masters, points);
+            var page_shapes = ctx.VisioPage.Shapes;
 
             // Perform the connection
-            for (int i = 0; i < shapeids.Length; i++)
+            for (int i = 0; i < connector_shapeids.Length; i++)
             {
-                var connector_id = shapeids[i];
-                var page_shapes = ctx.VisioPage.Shapes;
-                var vis_connector = page_shapes.ItemFromID[connector_id];
-                var dyncon_shape = dyncon_shapes[i];
+                var connector_shapeid = connector_shapeids[i];
+                var vis_connector = page_shapes.ItemFromID[connector_shapeid];
+                var dyncon_shape = dom_connectors[i];
 
                 var from_shape = ctx.GetShape(dyncon_shape.From.VisioShapeID);
                 var to_shape = ctx.GetShape(dyncon_shape.To.VisioShapeID);
+ 
                 VA.Connections.ConnectorHelper.ConnectShapes(vis_connector, from_shape, to_shape);
                 dyncon_shape.VisioShape = vis_connector;
-                dyncon_shape.VisioShapeID = shapeids[i];
+                dyncon_shape.VisioShapeID = connector_shapeids[i];
             }
         }
 
