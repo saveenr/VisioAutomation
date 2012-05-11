@@ -175,7 +175,7 @@
     <Compile Include="DOM\Line.cs" />
     <Compile Include="DOM\Rectangle.cs" />
     <Compile Include="DOM\PolyLine.cs" />
-    <Compile Include="DOM\Conector.cs" />
+    <Compile Include="DOM\Connector.cs" />
     <Compile Include="Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
     <Compile Include="DOM\PageSettings.cs" />
