@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Office.Interop.Visio;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -26,60 +27,31 @@ namespace VisioAutomation.DOM
 
             var ctx = new RenderContext(page);
 
-            // Preparation
             PrepareForDrawing(ctx);
+            PerformDrawing(ctx);
+            UpdateCells(ctx);
+            SetText();
+            SetCustomProperties(ctx);
+            AddHyperlinks(ctx);
+        }
 
-            // Draw shapes
-            var non_connectors = this.Shapes.Where(s => !(s is Connector));
-            var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
-            var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
-
-            drop_masters(ctx, non_connector_dropshapes);
-            _draw_non_masters(ctx, non_connector_nondropshapes);
-
-            // verify that all non-connectors have an associated shape id
-            check_valid_shape_ids();
-            
-            // Draw Connectors
-            _draw_connectors(ctx);
-
-            // Get all the shape objects
-            foreach (var shape in this.Shapes)
-            {
-                if (shape.VisioShape == null)
-                {
-                    shape.VisioShape = ctx.GetShape(shape.VisioShapeID);
-                }
-            }
-
-            // ----------------------------------------
-            // Set Shape format on all shapes
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            var shapes_with_formatting = this.Shapes.Where(s => s.Cells != null);
-            foreach (var shape in shapes_with_formatting)
-            {
-                var fmt = shape.Cells;
-                short id = shape.VisioShapeID;
-                fmt.Apply(update, id);
-            }
-            update.Execute(page);
-
-            // ----------------------------------------
-            // set the shape text
-            var shapes_with_text = this.Shapes.Where(s => s.Text!= null);
-            foreach (var shape in shapes_with_text)
+        private void AddHyperlinks(RenderContext ctx)
+        {
+            var shapes_with_hyperlinks = this.Shapes.Where(s => s.Hyperlinks != null);
+            foreach (var shape in shapes_with_hyperlinks)
             {
                 var vshape = ctx.GetShape(shape.VisioShapeID);
-                shape.Text.SetText(shape.VisioShape);
-
-                if (shape.TabStops != null)
+                foreach (var hyperlink in shape.Hyperlinks)
                 {
-                    VA.Text.TextFormat.SetTabStops(shape.VisioShape, shape.TabStops);
+                    var h = vshape.Hyperlinks.Add();
+                    h.Name = hyperlink.Name; // Name of Hyperlink
+                    h.Address = hyperlink.Address; // Address of Hyperlink
                 }
             }
+        }
 
-            // ----------------------------------------
-            // Apply Custom Properties
+        private void SetCustomProperties(RenderContext ctx)
+        {
             var shapes_with_custom_props = this.Shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
             {
@@ -91,18 +63,57 @@ namespace VisioAutomation.DOM
                     VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(vshape, cp_name, cp_cells);
                 }
             }
+        }
 
-            // ----------------------------------------
-            // Apply Hyperlinks Properties
-            var shapes_with_hyperlinks = this.Shapes.Where(s => s.Hyperlinks != null);
-            foreach (var shape in shapes_with_hyperlinks)
+        private void SetText()
+        {
+            var shapes_with_text = this.Shapes.Where(s => s.Text != null);
+            foreach (var shape in shapes_with_text)
             {
-                var vshape = ctx.GetShape(shape.VisioShapeID);
-                foreach (var hyperlink in shape.Hyperlinks)
+                shape.Text.SetText(shape.VisioShape);
+
+                if (shape.TabStops != null)
                 {
-                    var h = vshape.Hyperlinks.Add();
-                    h.Name = hyperlink.Name; // Name of Hyperlink
-                    h.Address = hyperlink.Address; // Address of Hyperlink
+                    VA.Text.TextFormat.SetTabStops(shape.VisioShape, shape.TabStops);
+                }
+            }
+        }
+
+        private void UpdateCells(RenderContext ctx)
+        {
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var shapes_with_cells = this.Shapes.Where(s => s.Cells != null);
+            foreach (var shape in shapes_with_cells)
+            {
+                var fmt = shape.Cells;
+                short id = shape.VisioShapeID;
+                fmt.Apply(update, id);
+            }
+            update.Execute(ctx.VisioPage);
+        }
+
+        private void PerformDrawing(RenderContext ctx)
+        {
+            // Draw shapes
+            var non_connectors = this.Shapes.Where(s => !(s is Connector));
+            var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
+            var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
+
+            drop_masters(ctx, non_connector_dropshapes);
+            _draw_non_masters(ctx, non_connector_nondropshapes);
+
+            // verify that all non-connectors have an associated shape id
+            check_valid_shape_ids();
+
+            // Draw Connectors
+            _draw_connectors(ctx);
+
+            // Make sure we have Visio shape objects for all DOM objects
+            foreach (var shape in this.Shapes)
+            {
+                if (shape.VisioShape == null)
+                {
+                    shape.VisioShape = ctx.GetShape(shape.VisioShapeID);
                 }
             }
         }
