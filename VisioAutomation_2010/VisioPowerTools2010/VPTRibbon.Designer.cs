@@ -45,10 +45,13 @@
             this.buttonToggleTextCase = this.Factory.CreateRibbonButton();
             this.buttonCopyText = this.Factory.CreateRibbonButton();
             this.buttonDeveloper = this.Factory.CreateRibbonButton();
+            this.groupDraw = this.Factory.CreateRibbonGroup();
+            this.buttonGraph = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
             this.groupText.SuspendLayout();
+            this.groupDraw.SuspendLayout();
             // 
             // tab1
             // 
@@ -60,6 +63,7 @@
             // 
             this.tab2.Groups.Add(this.group1);
             this.tab2.Groups.Add(this.groupText);
+            this.tab2.Groups.Add(this.groupDraw);
             this.tab2.Label = "Power Tools";
             this.tab2.Name = "tab2";
             // 
@@ -122,6 +126,18 @@
             this.buttonDeveloper.Name = "buttonDeveloper";
             this.buttonDeveloper.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonDeveloper_Click);
             // 
+            // groupDraw
+            // 
+            this.groupDraw.Items.Add(this.buttonGraph);
+            this.groupDraw.Label = "Draw";
+            this.groupDraw.Name = "groupDraw";
+            // 
+            // buttonGraph
+            // 
+            this.buttonGraph.Label = "Directed Graph";
+            this.buttonGraph.Name = "buttonGraph";
+            this.buttonGraph.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonGraph_Click);
+            // 
             // VPTRibbon
             // 
             this.Name = "VPTRibbon";
@@ -137,6 +153,8 @@
             this.group1.PerformLayout();
             this.groupText.ResumeLayout(false);
             this.groupText.PerformLayout();
+            this.groupDraw.ResumeLayout(false);
+            this.groupDraw.PerformLayout();
 
         }
 
@@ -153,6 +171,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonToggleTextCase;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCopyText;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonDeveloper;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupDraw;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonGraph;
     }
 
     partial class ThisRibbonCollection

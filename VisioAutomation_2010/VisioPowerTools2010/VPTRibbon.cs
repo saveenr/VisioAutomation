@@ -8,7 +8,7 @@ using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
 using Color = System.Drawing.Color;
 using VA=VisioAutomation;
-
+using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPowerTools2010
 {
     public partial class VPTRibbon
@@ -248,6 +248,47 @@ namespace VisioPowerTools2010
         {
             var form = new FormDeveloper();
             form.ShowDialog();
+        }
+
+        private void buttonGraph_Click(object sender, RibbonControlEventArgs e)
+        {
+            var form = new FormDirectedGraph();
+            var result = form.ShowDialog();
+
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+
+            var model = new VA.Layout.Models.DirectedGraph.Drawing();
+
+            var s1 = model.AddShape("A", "A", "basic_u.vss", "rectangle");
+            var s2 = model.AddShape("B", "B", "basic_u.vss", "rectangle");
+            var s3 = model.AddShape("C", "C", "basic_u.vss", "rectangle");
+
+            model.Connect("C1",s1, s2);
+            model.Connect("C2", s2, s3);
+            model.Connect("C3", s3, s1);
+
+            var app = Globals.ThisAddIn.Application;
+            var doc = Globals.ThisAddIn.Application.ActiveDocument;
+            IVisio.Page page=null;
+            if (doc==null)
+            {
+                var docs = app.Documents;
+                doc = docs.Add("");
+                var pages = doc.Pages;
+                page = pages[1];
+            }
+            else
+            {
+                page = doc.Pages.Add();                
+            }
+    
+            model.Render(page);
+
+
         }
 
     }

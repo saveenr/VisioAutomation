@@ -194,6 +194,12 @@
     <Compile Include="FormDeveloper.Designer.cs">
       <DependentUpon>FormDeveloper.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDirectedGraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDirectedGraph.Designer.cs">
+      <DependentUpon>FormDirectedGraph.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGetMasterImages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDeveloper.resx">
       <DependentUpon>FormDeveloper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDirectedGraph.resx">
+      <DependentUpon>FormDirectedGraph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGetMasterImages.resx">
       <DependentUpon>FormGetMasterImages.cs</DependentUpon>
