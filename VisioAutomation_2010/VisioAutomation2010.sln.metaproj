@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="ValidateSolutionConfiguration;ValidateToolsVersions;ValidateProjects" DefaultTargets="Build">
+  <PropertyGroup>
+    <MSBuildToolsRoot>C:\WINDOWS\Microsoft.NET\Framework\</MSBuildToolsRoot>
+    <FrameworkSDKRoot>C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\</FrameworkSDKRoot>
+    <MSBuildRuntimeVersion>4.0.30319</MSBuildRuntimeVersion>
+    <SDK40ToolsPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\</SDK40ToolsPath>
+    <SDK35ToolsPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\</SDK35ToolsPath>
+    <MSBuildToolsPath32>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\</MSBuildToolsPath32>
+    <VCTargetsPath>d:\rascal\MSBuild\Microsoft.Cpp\v4.0\v110\</VCTargetsPath>
+    <WindowsSDK80Path />
+    <VCTargetsPath10>d:\rascal\MSBuild\Microsoft.Cpp\v4.0\</VCTargetsPath10>
+    <VCTargetsPath11>d:\rascal\MSBuild\Microsoft.Cpp\v4.0\V110\</VCTargetsPath11>
+    <AspNetConfiguration>Debug</AspNetConfiguration>
+    <SolutionDir>D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\</SolutionDir>
+    <SolutionExt>.sln</SolutionExt>
+    <SolutionFileName>VisioAutomation2010.sln</SolutionFileName>
+    <SolutionName>VisioAutomation2010</SolutionName>
+    <SolutionPath>D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation2010.sln</SolutionPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+  <ProjectConfiguration Project="{920C7842-10E0-48C3-A439-C785FC2B234E}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{6DFB7C5E-7AC1-48EE-A065-2075921A7413}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPS\VisioPS.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{17035996-44F8-4506-BAAB-EA121475B936}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{A2BD039F-38EB-4E19-A1A4-8E6730CBC4E9}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.VDX\VisioAutomation.VDX.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{6E4E26FE-E903-474B-80F9-CF8ED12D34B3}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomationSamples\VisioAutomationSamples.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{2BA6E51C-D975-49E3-B6B9-DF3D2D951057}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{FB28507D-C378-42B4-9050-2FBED2CD68FE}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.UI\VisioAutomation.UI.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{6B44004C-019C-4169-BFC1-A610D1453DEA}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\InfoGraphicsPy\InfoGraphicsPy.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{DCFB1784-57F1-492B-9F84-4E0983996705}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\DemoInfographicsPy\DemoInfographicsPy.csproj" BuildProjectInSolution="True">Debug|x86</ProjectConfiguration>
+  <ProjectConfiguration Project="{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestCommon\TestCommon.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{F04E9277-48D2-4822-9AE6-E7E6ADB262C9}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomation\TestVisioAutomation.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{0522B05C-4FF2-47A5-B6AB-D4379C907814}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomationVDX\TestVisioAutomationVDX.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+  <ProjectConfiguration Project="{46B14CDD-204F-4BD4-A923-CD1D312C06D4}" AbsolutePath="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPowerTools2010\VisioPowerTools2010.csproj" BuildProjectInSolution="True">Debug|AnyCPU</ProjectConfiguration>
+</SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPS\VisioPS.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.VDX\VisioAutomation.VDX.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomationSamples\VisioAutomationSamples.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.UI\VisioAutomation.UI.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\InfoGraphicsPy\InfoGraphicsPy.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\DemoInfographicsPy\DemoInfographicsPy.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=x86; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestCommon\TestCommon.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomation\TestVisioAutomation.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomationVDX\TestVisioAutomationVDX.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+    <ProjectReference Include="D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPowerTools2010\VisioPowerTools2010.csproj">
+      <ToolsVersion>
+      </ToolsVersion>
+      <SkipNonexistentProjects>False</SkipNonexistentProjects>
+      <AdditionalProperties>Configuration=Debug; Platform=AnyCPU; VisualStudioVersion=11.0</AdditionalProperties>
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectReference>
+  </ItemGroup>
+  <Target Name="ValidateSolutionConfiguration">
+    <Error Condition="('$(CurrentSolutionConfigurationContents)' == '') and ('$(SkipInvalidConfigurations)' != 'true')" Text="The specified solution configuration &quot;$(Configuration)|$(Platform)&quot; is invalid. Please specify a valid solution configuration using the Configuration and Platform properties (e.g. MSBuild.exe Solution.sln /p:Configuration=Debug /p:Platform=&quot;Any CPU&quot;) or leave those properties blank to use the default solution configuration." Code="MSB4126" HelpKeyword="MSBuild.SolutionInvalidSolutionConfiguration" />
+    <Warning Condition="('$(CurrentSolutionConfigurationContents)' == '') and ('$(SkipInvalidConfigurations)' == 'true')" Text="The specified solution configuration &quot;$(Configuration)|$(Platform)&quot; is invalid. Please specify a valid solution configuration using the Configuration and Platform properties (e.g. MSBuild.exe Solution.sln /p:Configuration=Debug /p:Platform=&quot;Any CPU&quot;) or leave those properties blank to use the default solution configuration." Code="MSB4126" HelpKeyword="MSBuild.SolutionInvalidSolutionConfiguration" />
+    <Message Condition="'$(CurrentSolutionConfigurationContents)' != ''" Text="Building solution configuration &quot;$(Configuration)|$(Platform)&quot;." />
+  </Target>
+  <Target Name="ValidateToolsVersions">
+    <Error Condition="'$(MSBuildToolsVersion)' == '2.0' and ('$(ProjectToolsVersion)' != '2.0' and '$(ProjectToolsVersion)' != '')" Text="The tools version &quot;$(MSBuildToolsVersion)&quot; of the solution does not support building projects with a different tools version." Code="MSB4149" HelpKeyword="MSBuild.SolutionToolsVersionDoesNotSupportProjectToolsVersion" />
+  </Target>
+  <Target Name="ValidateProjects">
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioPS&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioPS&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioPS&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioPS&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.Scripting&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.Scripting&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.Scripting&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.Scripting&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.VDX&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.VDX&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.VDX&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.VDX&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomationSamples&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomationSamples&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomationSamples&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomationSamples&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.Scripting.XamlTune&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.Scripting.XamlTune&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.Scripting.XamlTune&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.Scripting.XamlTune&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.Layout.MSAGL&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.Layout.MSAGL&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.Layout.MSAGL&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.Layout.MSAGL&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.UI&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.UI&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioAutomation.UI&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioAutomation.UI&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;InfoGraphicsPy&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;InfoGraphicsPy&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;InfoGraphicsPy&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;InfoGraphicsPy&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " Text="The project &quot;DemoInfographicsPy&quot; is not selected for building in solution configuration &quot;Debug|Any CPU&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;DemoInfographicsPy&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " Text="The project &quot;DemoInfographicsPy&quot; is not selected for building in solution configuration &quot;Release|Any CPU&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;DemoInfographicsPy&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;TestCommon&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;TestCommon&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;TestCommon&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;TestCommon&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;TestVisioAutomation&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;TestVisioAutomation&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;TestVisioAutomation&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;TestVisioAutomation&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;TestVisioAutomationVDX&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;TestVisioAutomationVDX&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;TestVisioAutomationVDX&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;TestVisioAutomationVDX&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioPowerTools2010&quot; is not selected for building in solution configuration &quot;Debug|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioPowerTools2010&quot; is not selected for building in solution configuration &quot;Debug|x86&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Win32') " Text="The project &quot;VisioPowerTools2010&quot; is not selected for building in solution configuration &quot;Release|Win32&quot;." />
+    <Message Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'x86') " Text="The project &quot;VisioPowerTools2010&quot; is not selected for building in solution configuration &quot;Release|x86&quot;." />
+  </Target>
+  <Target Name="Build" Outputs="@(CollectedBuildOutput)">
+    <MSBuild Projects="@(ProjectReference)" BuildInParallel="True" Properties="BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" SkipNonexistentProjects="%(ProjectReference.SkipNonexistentProjects)">
+      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Clean">
+    <MSBuild Projects="@(ProjectReference-&gt;Reverse())" Targets="Clean" BuildInParallel="True" Properties="BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" SkipNonexistentProjects="%(ProjectReference.SkipNonexistentProjects)" />
+  </Target>
+  <Target Name="Rebuild" Outputs="@(CollectedBuildOutput)">
+    <MSBuild Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" Properties="BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" SkipNonexistentProjects="%(ProjectReference.SkipNonexistentProjects)">
+      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Publish">
+    <MSBuild Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" Properties="BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" SkipNonexistentProjects="%(ProjectReference.SkipNonexistentProjects)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation" Outputs="@(VisioAutomation_Components_VisioAutomationBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomationBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation:Rebuild" Outputs="@(VisioAutomation_Components_VisioAutomationBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomationBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\VisioPS" Outputs="@(Applications_VisioPSBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPS\VisioPS.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_VisioPSBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\VisioPS:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPS\VisioPS.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\VisioPS:Rebuild" Outputs="@(Applications_VisioPSBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPS\VisioPS.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_VisioPSBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\VisioPS:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPS\VisioPS.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting" Outputs="@(VisioAutomation_Components_VisioAutomation_ScriptingBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_ScriptingBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting:Rebuild" Outputs="@(VisioAutomation_Components_VisioAutomation_ScriptingBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_ScriptingBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_VDX" Outputs="@(VisioAutomation_Components_VisioAutomation_VDXBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.VDX\VisioAutomation.VDX.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_VDXBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_VDX:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.VDX\VisioAutomation.VDX.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_VDX:Rebuild" Outputs="@(VisioAutomation_Components_VisioAutomation_VDXBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.VDX\VisioAutomation.VDX.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_VDXBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_VDX:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.VDX\VisioAutomation.VDX.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\VisioAutomationSamples" Outputs="@(Applications_VisioAutomationSamplesBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomationSamples\VisioAutomationSamples.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_VisioAutomationSamplesBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\VisioAutomationSamples:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomationSamples\VisioAutomationSamples.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\VisioAutomationSamples:Rebuild" Outputs="@(Applications_VisioAutomationSamplesBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomationSamples\VisioAutomationSamples.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_VisioAutomationSamplesBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\VisioAutomationSamples:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomationSamples\VisioAutomationSamples.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting_XamlTune" Outputs="@(VisioAutomation_Components_VisioAutomation_Scripting_XamlTuneBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_Scripting_XamlTuneBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting_XamlTune:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting_XamlTune:Rebuild" Outputs="@(VisioAutomation_Components_VisioAutomation_Scripting_XamlTuneBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_Scripting_XamlTuneBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Scripting_XamlTune:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Layout_MSAGL" Outputs="@(VisioAutomation_Components_VisioAutomation_Layout_MSAGLBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_Layout_MSAGLBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Layout_MSAGL:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Layout_MSAGL:Rebuild" Outputs="@(VisioAutomation_Components_VisioAutomation_Layout_MSAGLBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_Layout_MSAGLBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_Layout_MSAGL:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_UI" Outputs="@(VisioAutomation_Components_VisioAutomation_UIBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.UI\VisioAutomation.UI.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_UIBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_UI:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.UI\VisioAutomation.UI.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_UI:Rebuild" Outputs="@(VisioAutomation_Components_VisioAutomation_UIBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.UI\VisioAutomation.UI.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioAutomation_Components_VisioAutomation_UIBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioAutomation Components\VisioAutomation_UI:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioAutomation.UI\VisioAutomation.UI.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\InfoGraphicsPy" Outputs="@(Applications_InfoGraphicsPyBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\InfoGraphicsPy\InfoGraphicsPy.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_InfoGraphicsPyBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\InfoGraphicsPy:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\InfoGraphicsPy\InfoGraphicsPy.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\InfoGraphicsPy:Rebuild" Outputs="@(Applications_InfoGraphicsPyBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\InfoGraphicsPy\InfoGraphicsPy.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_InfoGraphicsPyBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\InfoGraphicsPy:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\InfoGraphicsPy\InfoGraphicsPy.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\DemoInfographicsPy" Outputs="@(Applications_DemoInfographicsPyBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\DemoInfographicsPy\DemoInfographicsPy.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=x86;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_DemoInfographicsPyBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\DemoInfographicsPy:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\DemoInfographicsPy\DemoInfographicsPy.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=x86;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Applications\DemoInfographicsPy:Rebuild" Outputs="@(Applications_DemoInfographicsPyBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\DemoInfographicsPy\DemoInfographicsPy.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=x86;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Applications_DemoInfographicsPyBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Applications\DemoInfographicsPy:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\..\Samples\ironvisio\DemoInfographicsPy\DemoInfographicsPy.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=x86;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Test Projects\TestCommon" Outputs="@(Test_Projects_TestCommonBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestCommon\TestCommon.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Test_Projects_TestCommonBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Test Projects\TestCommon:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestCommon\TestCommon.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Test Projects\TestCommon:Rebuild" Outputs="@(Test_Projects_TestCommonBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestCommon\TestCommon.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Test_Projects_TestCommonBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Test Projects\TestCommon:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestCommon\TestCommon.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomation" Outputs="@(Test_Projects_TestVisioAutomationBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomation\TestVisioAutomation.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Test_Projects_TestVisioAutomationBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomation:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomation\TestVisioAutomation.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomation:Rebuild" Outputs="@(Test_Projects_TestVisioAutomationBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomation\TestVisioAutomation.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Test_Projects_TestVisioAutomationBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomation:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomation\TestVisioAutomation.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomationVDX" Outputs="@(Test_Projects_TestVisioAutomationVDXBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomationVDX\TestVisioAutomationVDX.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Test_Projects_TestVisioAutomationVDXBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomationVDX:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomationVDX\TestVisioAutomationVDX.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomationVDX:Rebuild" Outputs="@(Test_Projects_TestVisioAutomationVDXBuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomationVDX\TestVisioAutomationVDX.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="Test_Projects_TestVisioAutomationVDXBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="Test Projects\TestVisioAutomationVDX:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\TestVisioAutomationVDX\TestVisioAutomationVDX.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioPowerTools2010" Outputs="@(VisioPowerTools2010BuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPowerTools2010\VisioPowerTools2010.csproj'" Projects="@(ProjectReference)" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioPowerTools2010BuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioPowerTools2010:Clean">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPowerTools2010\VisioPowerTools2010.csproj'" Projects="@(ProjectReference)" Targets="Clean" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+  <Target Name="VisioPowerTools2010:Rebuild" Outputs="@(VisioPowerTools2010BuildOutput)">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPowerTools2010\VisioPowerTools2010.csproj'" Projects="@(ProjectReference)" Targets="Rebuild" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)">
+      <Output TaskParameter="TargetOutputs" ItemName="VisioPowerTools2010BuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="VisioPowerTools2010:Publish">
+    <MSBuild Condition="'%(ProjectReference.Identity)' == 'D:\saveenr\code\hg\visioautomation\VisioAutomation_2010\VisioPowerTools2010\VisioPowerTools2010.csproj'" Projects="@(ProjectReference)" Targets="Publish" BuildInParallel="True" ToolsVersion="$(ProjectToolsVersion)" Properties="Configuration=Debug; Platform=AnyCPU;BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" />
+  </Target>
+</Project>
