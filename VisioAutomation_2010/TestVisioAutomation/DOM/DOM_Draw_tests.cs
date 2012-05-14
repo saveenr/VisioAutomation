@@ -16,9 +16,9 @@ namespace TestVisioAutomation
         {
             // get the number of actual drawings, not including templates, stencils, etc.
             var documents = app.Documents;
-            return documents.AsEnumerable()
-                .Where( doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing)
-                .Count();
+            var drawings = documents.AsEnumerable()
+                .Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing);
+            return drawings.Count();
         }
 
         [TestMethod]
@@ -27,24 +27,16 @@ namespace TestVisioAutomation
             // Rendering a DOM should not change the page count
             // Empty DOMs do not add any shapes
             var app = this.GetVisioApplication();
-
-
             var doc1 = new VA.DOM.Document();
-
-
             var doc = this.GetNewDoc();
             doc1.Render(app.ActivePage);
-
             Assert.AreEqual(0,app.ActivePage.Shapes.Count);
-            
             app.ActiveDocument.Close( true );
         }
 
         [TestMethod]
         public void Empty_DOM_Page_Size()
         {
-
-            // A DOM document with 1 pages rendered to a document with 1 page should ????
             var app = this.GetVisioApplication();
 
             var doc1 = new VA.DOM.Document();
@@ -107,8 +99,6 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Set_Custom_Props()
         {
-            //Draws a simple red square
-
             // Create the doc
             var vdoc = new VA.DOM.Document();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
