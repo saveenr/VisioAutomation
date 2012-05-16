@@ -58,30 +58,10 @@ namespace VisioAutomation.DOM
             // ----------------------------------------
             // Draw shapes
 
-            foreach (var cat_shapes in VA.Internal.LinqUtil.ChunkByBool(this.Shapes, s=>s is Master))
-            {
-                var masters_col = new List<Master>();
-                var shapes_col = new List<Shape>();
-                if (cat_shapes.Items.Count > 0)
-                {
-                    if (cat_shapes.Category == true)
-                    {
-                        // true means this is a master
-                        masters_col.Clear();
-                        masters_col.AddRange( cat_shapes.Items.Cast<Master>());
-                        _draw_masters(ctx,masters_col);
-                        masters_col.Clear();
-                    }
-                    else
-                    {
-                        shapes_col.Clear();
-                        shapes_col.AddRange( cat_shapes.Items);
-                        _draw_non_masters(ctx,shapes_col);
-                        shapes_col.Clear();
-                    }
-                }
-            }
-
+            var masters_col = this.Shapes.Where(s => s is Master).Cast<Master>().ToList();
+            var shapes_col = this.Shapes.Where(s => !(s is Master)).ToList();
+            _draw_masters(ctx, masters_col);
+            _draw_non_masters(ctx, shapes_col);
 
             // verify that all non-connectors have an associated shape id
             check_valid_shape_ids();
