@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Extensions
