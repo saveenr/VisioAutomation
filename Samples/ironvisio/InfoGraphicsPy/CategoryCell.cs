@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Interop.Visio;
-using VisioAutomation.DOM;
-using VisioAutomation.Drawing;
-using VA=VisioAutomation;
+﻿using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace InfoGraphicsPy
