@@ -49,6 +49,7 @@
             this.buttonGraph = this.Factory.CreateRibbonButton();
             this.groupExport = this.Factory.CreateRibbonGroup();
             this.buttonExportSelection = this.Factory.CreateRibbonButton();
+            this.buttonSelectionXHTML = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
@@ -145,6 +146,7 @@
             // groupExport
             // 
             this.groupExport.Items.Add(this.buttonExportSelection);
+            this.groupExport.Items.Add(this.buttonSelectionXHTML);
             this.groupExport.Label = "Export";
             this.groupExport.Name = "groupExport";
             // 
@@ -153,6 +155,12 @@
             this.buttonExportSelection.Label = "Selection > XAML";
             this.buttonExportSelection.Name = "buttonExportSelection";
             this.buttonExportSelection.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonExportSelection_Click);
+            // 
+            // buttonSelectionXHTML
+            // 
+            this.buttonSelectionXHTML.Label = "Selection > XHTML";
+            this.buttonSelectionXHTML.Name = "buttonSelectionXHTML";
+            this.buttonSelectionXHTML.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonSelectionXHTML_Click);
             // 
             // VPTRibbon
             // 
@@ -193,6 +201,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonGraph;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupExport;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonExportSelection;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonSelectionXHTML;
     }
 
     partial class ThisRibbonCollection

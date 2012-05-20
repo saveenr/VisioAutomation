@@ -267,9 +267,6 @@
     <EmbeddedResource Include="FormDirectedGraph.resx">
       <DependentUpon>FormDirectedGraph.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormExportSelectionAsFormat.resx">
-      <DependentUpon>FormExportSelectionAsFormat.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormGetMasterImages.resx">
       <DependentUpon>FormGetMasterImages.cs</DependentUpon>
     </EmbeddedResource>

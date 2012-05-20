@@ -298,5 +298,11 @@ namespace VisioPowerTools2010
             
         }
 
+        private void buttonSelectionXHTML_Click(object sender, RibbonControlEventArgs e)
+        {
+            var form = new FormExportSelectionAsFormat(FormExportSelectionAsFormat.enumExportFormat.ExportSVGXHTML);
+            form.ShowDialog();
+        }
+
     }
 }
