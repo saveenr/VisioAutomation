@@ -47,11 +47,14 @@
             this.buttonDeveloper = this.Factory.CreateRibbonButton();
             this.groupDraw = this.Factory.CreateRibbonGroup();
             this.buttonGraph = this.Factory.CreateRibbonButton();
+            this.groupExport = this.Factory.CreateRibbonGroup();
+            this.buttonExportSelection = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
             this.groupText.SuspendLayout();
             this.groupDraw.SuspendLayout();
+            this.groupExport.SuspendLayout();
             // 
             // tab1
             // 
@@ -64,6 +67,7 @@
             this.tab2.Groups.Add(this.group1);
             this.tab2.Groups.Add(this.groupText);
             this.tab2.Groups.Add(this.groupDraw);
+            this.tab2.Groups.Add(this.groupExport);
             this.tab2.Label = "Power Tools";
             this.tab2.Name = "tab2";
             // 
@@ -138,6 +142,18 @@
             this.buttonGraph.Name = "buttonGraph";
             this.buttonGraph.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonGraph_Click);
             // 
+            // groupExport
+            // 
+            this.groupExport.Items.Add(this.buttonExportSelection);
+            this.groupExport.Label = "Export";
+            this.groupExport.Name = "groupExport";
+            // 
+            // buttonExportSelection
+            // 
+            this.buttonExportSelection.Label = "Selection > XAML";
+            this.buttonExportSelection.Name = "buttonExportSelection";
+            this.buttonExportSelection.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonExportSelection_Click);
+            // 
             // VPTRibbon
             // 
             this.Name = "VPTRibbon";
@@ -155,6 +171,8 @@
             this.groupText.PerformLayout();
             this.groupDraw.ResumeLayout(false);
             this.groupDraw.PerformLayout();
+            this.groupExport.ResumeLayout(false);
+            this.groupExport.PerformLayout();
 
         }
 
@@ -173,6 +191,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonDeveloper;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupDraw;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonGraph;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupExport;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonExportSelection;
     }
 
     partial class ThisRibbonCollection

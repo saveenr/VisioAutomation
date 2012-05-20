@@ -230,6 +230,12 @@
     <Compile Include="FormDirectedGraph.Designer.cs">
       <DependentUpon>FormDirectedGraph.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormExportSelectionAsFormat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormExportSelectionAsFormat.Designer.cs">
+      <DependentUpon>FormExportSelectionAsFormat.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGetMasterImages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDirectedGraph.resx">
       <DependentUpon>FormDirectedGraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormExportSelectionAsFormat.resx">
+      <DependentUpon>FormExportSelectionAsFormat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGetMasterImages.resx">
       <DependentUpon>FormGetMasterImages.cs</DependentUpon>
@@ -302,9 +311,17 @@
     <None Include="VisioPowerTools2010_100years_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj">
+      <Project>{2ba6e51c-d975-49e3-b6b9-df3d2d951057}</Project>
+      <Name>VisioAutomation.Scripting.XamlTune</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
       <Name>VisioAutomation.Scripting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisioAutomation.UI\VisioAutomation.UI.csproj">
+      <Project>{fb28507d-c378-42b4-9050-2fbed2cd68fe}</Project>
+      <Name>VisioAutomation.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>

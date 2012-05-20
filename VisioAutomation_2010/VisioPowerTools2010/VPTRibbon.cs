@@ -291,5 +291,12 @@ namespace VisioPowerTools2010
 
         }
 
+        private void buttonExportSelection_Click(object sender, RibbonControlEventArgs e)
+        {
+            var form = new FormExportSelectionAsFormat( FormExportSelectionAsFormat.enumExportFormat.ExportXAML);
+            form.ShowDialog();
+            
+        }
+
     }
 }
