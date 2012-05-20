@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -10,23 +9,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class ShapeHelper_Tests : VisioAutomationTest
     {
-        [TestMethod]
-        public void Test_GetXForm()
-        {
-            var page = this.GetNewPage();
-            var shape = page.DrawRectangle(1, 1, 3, 3);
-            var xform = VA.Layout.LayoutHelper.GetXForm(shape);
-
-            AssertVA.AreEqual("2 in", 2, xform.PinX);
-            AssertVA.AreEqual("2 in", 2, xform.PinY);
-            AssertVA.AreEqual("Width*0.5", 1, xform.LocPinX);
-            AssertVA.AreEqual("Height*0.5", 1, xform.LocPinY);
-            AssertVA.AreEqual("2 in", 2, xform.Width);
-            AssertVA.AreEqual("2 in", 2, xform.Height);
-
-            page.Delete(0);
-        }
-
         [TestMethod]
         public void Test_GetNestedShapes1()
         {
