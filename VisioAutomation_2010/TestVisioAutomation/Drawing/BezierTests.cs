@@ -10,14 +10,15 @@ namespace TestVisioAutomation
     public class BezierTests : VisioAutomationTest
     {
         private double delta = 0.00000000001;
-       double pi2 =       System.Math.PI * 2;
-       double pihalf =    System.Math.PI / 2;
-       double piquarter = System.Math.PI / 4;
+        private double pi2 = System.Math.PI*2;
+        private double pihalf = System.Math.PI/2;
+        private double piquarter = System.Math.PI/4;
+
         [TestMethod]
         public void TestBezierFromArcs()
         {
             // 0 width slice - 0 degrees
-            var s1 = VA.Drawing.BezierSegment.FromArc(0.0, 0.0 );
+            var s1 = VA.Drawing.BezierSegment.FromArc(0.0, 0.0);
             Assert.AreEqual(1, s1.Count());
             AssertVA.AreEqual(s1[0].Start, s1[s1.Length - 1].End, delta);
 
@@ -28,15 +29,15 @@ namespace TestVisioAutomation
 
             // a circle
             var s2 = VA.Drawing.BezierSegment.FromArc(0.0, pi2);
-            Assert.AreEqual(4,s2.Count());
-            AssertVA.AreEqual(s2[0].Start, s2[s2.Length - 1].End,delta);
+            Assert.AreEqual(4, s2.Count());
+            AssertVA.AreEqual(s2[0].Start, s2[s2.Length - 1].End, delta);
 
             // angles within first quadrant
-            var s3 = VA.Drawing.BezierSegment.FromArc(piquarter-0.1, piquarter+0.2);
+            var s3 = VA.Drawing.BezierSegment.FromArc(piquarter - 0.1, piquarter + 0.2);
             Assert.AreEqual(1, s3.Count());
 
             // angles from first to 2nd quadrant
-            var s4 = VA.Drawing.BezierSegment.FromArc(piquarter - 0.1, pihalf + piquarter) ;
+            var s4 = VA.Drawing.BezierSegment.FromArc(piquarter - 0.1, pihalf + piquarter);
             Assert.AreEqual(2, s4.Count());
 
             // half circle - top
