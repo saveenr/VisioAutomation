@@ -13,6 +13,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ContainerMustCallPerformLayout()
         {
+            // Purpose: Verify that if PerformLayout is NOT called before Render() 
+            // is called then an exception will be thrown
+
             bool caught = false;
             var layout = new OCMODEL.ContainerLayout();
             var doc = this.GetNewDoc();
@@ -41,6 +44,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawContainer1()
         {
+
+            // Purpose: Simple test to make sure that both Containers and Non-Container
+            // rendering are supported. The diagram is a single container having a single
+            // container item
+
             var doc = this.GetNewDoc();
 
             var layout1 = new OCMODEL.ContainerLayout();
