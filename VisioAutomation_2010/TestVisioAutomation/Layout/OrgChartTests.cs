@@ -14,13 +14,12 @@ namespace TestVisioAutomation
         public void OrgChartMustHaveContent()
         {
             bool caught = false;
-            var oc = new OCMODEL.Drawing();
+            var orgcgart = new OCMODEL.Drawing();
             var page1 = GetNewPage(StandardPageSize);
-            var renderer = new OCMODEL.OrgChartLayout();
             try
             {
                 var application = page1.Application;
-                oc.Render(application);
+                orgcgart.Render(application);
             }
             catch (System.Exception)
             {
@@ -36,7 +35,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawOrgChart1()
         {
-            var oc = new OCMODEL.Drawing();
+            var orgchart = new OCMODEL.Drawing();
 
             var n_a = new OCMODEL.Node("A");
             var n_b = new OCMODEL.Node("B");
@@ -51,12 +50,12 @@ namespace TestVisioAutomation
 
             n_a.Size = new VA.Drawing.Size(4, 2);
 
-            oc.Root = n_a;
+            orgchart.Root = n_a;
 
             var app = new IVisio.Application();
 
             var renderer = new OCMODEL.OrgChartLayout();
-            oc.Render(app);
+            orgchart.Render(app);
 
             var active_page = app.ActivePage;
             var page = active_page;

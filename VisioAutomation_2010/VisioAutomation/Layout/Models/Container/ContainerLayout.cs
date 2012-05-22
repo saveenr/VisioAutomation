@@ -89,7 +89,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
             this.IsLayedOut = true;
         }
 
-        public void Render(IVisio.Document doc)
+        public IVisio.Page Render(IVisio.Document doc)
         {
             if (!this.IsLayedOut)
             {
@@ -244,6 +244,8 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
             page.ResizeToFitContents();
             app.ActiveWindow.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
+
+            return page;
         }
 
         private static short[] DropManyU(

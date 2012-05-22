@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
+    <Compile Include="Layout\ContainerLayoutTests.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Layout\BoxLayoutTests.cs" />
     <Compile Include="ShapeGeometryHelper_Tests.cs" />
