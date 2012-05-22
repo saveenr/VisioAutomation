@@ -199,12 +199,6 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
                 doc.DiagramServicesEnabled = old_dse;
             }
 
-            // Set the Container Text
-            foreach (var ct in this.Containers)
-            {
-                ct.VisioShape.Text = ct.Text;
-            }
-
             // Format the containers and shapes
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
 
@@ -238,6 +232,15 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
             update.BlastGuards = true;
             update.Execute(page);
+
+            // Set the Container Text
+            foreach (var ct in this.Containers)
+            {
+                if (ct.Text != null)
+                {
+                    ct.Text.SetText(ct.VisioShape);
+                }
+            }
 
             page.ResizeToFitContents();
             app.ActiveWindow.ViewFit = (short)IVisio.VisWindowFit.visFitPage;

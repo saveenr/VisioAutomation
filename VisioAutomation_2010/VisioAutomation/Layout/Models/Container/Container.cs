@@ -6,16 +6,21 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 {
     public class Container
     {
-        public string Text { get; set; }
+        public VA.Text.Markup.TextElement Text { get; set; }
         public List<ContainerItem> ContainerItems { get; set; }
         public IVisio.Shape VisioShape { get; set; }
         public VA.Drawing.Rectangle Rectangle;
         public short ShapeID;
 
-        public Container(string text)
+        public Container(VA.Text.Markup.TextElement text)
         {
             this.Text = text;
             this.ContainerItems = new List<ContainerItem>();
+        }
+
+        public Container(string text) :
+            this( new VA.Text.Markup.TextElement(text))
+        {
         }
 
         public ContainerItem Add(string text)
