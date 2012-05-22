@@ -10,11 +10,14 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
     public class ContainerLayout
     {
         public List<Container> Containers { get; private set; }
+        public bool IsLayedOut { get; private set; }
         public LayoutOptions LayoutOptions = new LayoutOptions();
+
         
         public ContainerLayout()
         {
             this.Containers = new List<Container>();
+            this.IsLayedOut = false;
         }
 
         public Container AddContainer(string text)
@@ -40,8 +43,6 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
         public void PerformLayout()
         {
-            var origin = new VA.Drawing.Point(0, 0);
-
             var col_lefts =
                 Enumerable.Range(0, this.Containers.Count).Select(i => i * (this.LayoutOptions.ItemWidth + this.LayoutOptions.ContainerHorizontalDistance + (2 * this.LayoutOptions.Padding))).ToList();
 
@@ -84,10 +85,18 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
                 
                 ct.Rectangle = new VA.Drawing.Rectangle(min_left, min_bottom, max_right, max_top);
             }
+
+            this.IsLayedOut = true;
         }
 
         public void Render(IVisio.Document doc)
         {
+            if (!this.IsLayedOut)
+            {
+                string msg = string.Format("{0} is not prepared for rendering. Call PerformLayout() first.",
+                                           typeof (ContainerLayout).Name);
+                throw new VA.AutomationException(msg);
+            }
             // create a new drawing
             var app = doc.Application;
             var docs = app.Documents;
