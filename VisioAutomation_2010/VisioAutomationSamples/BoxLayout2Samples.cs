@@ -73,6 +73,135 @@ namespace VisioAutomationSamples
             Util.Render(layout6, doc);
 
         }
+
+        public class Info
+        {
+            public string Text;
+            public bool Render;
+            public string color;
+        }
+
+        public static void BoxLayout_TwoLevelGrouping()
+        {
+            int num_types = 10;
+            int max_properties = 50;
+
+
+            var types = typeof (VA.UserDefinedCells.UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
+
+            var data = new List<string[]>();
+            foreach (var type in types)
+            {
+                var properties = type.GetProperties().Take(max_properties).ToList();
+                foreach (var property in properties)
+                {
+                    var item = new string[] {type.Name, property.Name[0].ToString().ToUpper(), property.Name};
+                    data.Add(item);
+                }
+            }
+
+            var major_group_direction = BOXMODEL.Direction.LeftToRight;
+            var minor_group_direction = BOXMODEL.Direction.TopToBottom;
+            
+            var name_to_major_group = new Dictionary<string, BOXMODEL.Container>();
+            var name_to_minor_group = new Dictionary<string, BOXMODEL.Container>();
+
+            var layout1 = new BOXMODEL.BoxLayout();
+            layout1.Root = new BOXMODEL.Container(major_group_direction);
+
+            foreach( var row in data)
+            {
+                var majorname = row[0];
+                var minorname = row[1];
+                var itemname = row[2];
+
+                BOXMODEL.Container majorcnt = null;
+                if (name_to_major_group.ContainsKey(majorname))
+                {
+                    majorcnt = name_to_major_group[majorname];
+                }
+                else
+                {
+                    majorcnt = layout1.Root.AddContainer(minor_group_direction, 1, 1);
+
+                    var info = new Info();
+                    info.Text = majorname;
+                    info.Render = true;
+                    info.color = "rgb(245,245,245)";
+                    majorcnt.Data = info;
+
+                    name_to_major_group[majorname] = majorcnt;
+
+                    BOXMODEL.Box    headerbox= majorcnt.AddBox(2, 0.25);
+
+                }
+
+                BOXMODEL.Container minorcnt = null;
+                var minorkey = majorname + "___" + minorname;
+                if (name_to_minor_group.ContainsKey(minorkey))
+                {
+                    minorcnt = name_to_minor_group[minorkey];
+                }
+                else
+                {
+                    minorcnt = majorcnt.AddContainer(minor_group_direction);
+                    var info = new Info();
+                    info.Text = minorname;
+                    info.Render = true;
+                    info.color = "rgb(230,230,230)";
+                    minorcnt.Data = info;
+                    name_to_minor_group[minorkey] = minorcnt;
+
+                    BOXMODEL.Box headerbox = minorcnt.AddBox(2, 0.25);
+                }
+
+                BOXMODEL.Box itembox = minorcnt.AddBox(2, 0.25);
+
+                var info2 = new Info();
+                info2.Text = itemname;
+                info2.Render = true;
+
+                itembox.Data = info2;
+
+            }
+
+
+            layout1.PerformLayout();
+
+            // TODO: Check that each data item has at least 3 values
+
+            // Create a blank canvas in Visio 
+            var app = SampleEnvironment.Application;
+            var documents = app.Documents;
+            var doc = documents.Add(string.Empty);
+            var page = app.ActivePage;
+
+
+            var dom = new VA.DOM.Document();
+            foreach (var item in layout1.Nodes)
+            {
+                if (item.Data ==null)
+                {
+                    continue;
+                }
+                var info = (Info) item.Data;
+                var shape = dom.DrawRectangle(item.Rectangle);
+                if (info.Text!=null)
+                {
+                    shape.Text = new VA.Text.Markup.TextElement(info.Text);                    
+                }
+                shape.Cells.FillForegnd = info.color;
+                shape.Cells.HAlign = 0;
+                shape.Cells.VerticalAlign = 0;
+                shape.Cells.LinePattern = 0;
+                shape.Cells.LineWeight = 0;
+            }
+            dom.Render(page);
+
+            page.ResizeToFitContents(0.5,0.5);
+
+        }
+
     }
 
     public static class Util
