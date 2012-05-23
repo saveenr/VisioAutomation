@@ -198,7 +198,7 @@
       <Name>VisioAutomation.Scripting.XamlTune</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
-      <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
+      <Project>{17035996-44f8-4506-baab-ea121475b936}</Project>
       <Name>VisioAutomation.Scripting</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
