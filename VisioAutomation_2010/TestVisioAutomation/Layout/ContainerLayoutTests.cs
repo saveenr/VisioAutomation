@@ -68,5 +68,27 @@ namespace TestVisioAutomation
 
             doc.Close(true);
         }
+
+
+        [TestMethod]
+        public void DrawContainer2()
+        {
+            // Make sure that empty containers can be drawn
+            var doc = this.GetNewDoc();
+
+            var layout1 = new OCMODEL.ContainerLayout();
+            var l1_c1 = layout1.AddContainer("L1/C1");
+            var l1_c1_i1 = l1_c1.Add("L1/C1/I1");
+            var l1_c2 = layout1.AddContainer("L1/C2"); // this is the empty container
+
+            layout1.PerformLayout();
+
+            layout1.LayoutOptions.Style = VA.Layout.Models.ContainerLayout.RenderStyle.UseVisioContainers;
+            var page1 = layout1.Render(doc);
+
+            //page1.Delete(0);
+
+            //doc.Close(true);
+        }
     }
 }

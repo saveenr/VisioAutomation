@@ -43,14 +43,17 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
         public void PerformLayout()
         {
+            var max_rows = this.Containers.Select(c => c.ContainerItems.Count).Max();
+            var col_indexes = Enumerable.Range(0, this.Containers.Count);
+            var row_indexes = Enumerable.Range(0, max_rows);
+
             var col_lefts =
-                Enumerable.Range(0, this.Containers.Count).Select(i => i * (this.LayoutOptions.ItemWidth + this.LayoutOptions.ContainerHorizontalDistance + (2 * this.LayoutOptions.Padding))).ToList();
+                col_indexes.Select(i => i * (this.LayoutOptions.ItemWidth + this.LayoutOptions.ContainerHorizontalDistance + (2 * this.LayoutOptions.Padding))).ToList();
 
             var col_rights = col_lefts.Select(x => x + this.LayoutOptions.ItemWidth).ToList();
 
-            var max_rows = this.Containers.Select(c => c.ContainerItems.Count).Max();
 
-            var row_tops = Enumerable.Range(0, max_rows).Select(i => i * -(this.LayoutOptions.ItemHeight + this.LayoutOptions.ItemVerticalSpacing)).ToList();
+            var row_tops = row_indexes.Select(i => i * -(this.LayoutOptions.ItemHeight + this.LayoutOptions.ItemVerticalSpacing)).ToList();
             var row_bottoms = row_tops.Select(y => y - this.LayoutOptions.ItemHeight).ToList();
 
             for (int container = 0; container< this.Containers.Count; container++)
@@ -70,20 +73,32 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
                 }
             }
 
-            // Calculate a rectangle for the container for rendering that doesn't use the container API
+            int ctn = 0;
             foreach (var ct in this.Containers)
             {
-                double max_top = ct.ContainerItems.Select(i => i.Rectangle.Top).Max();
-                double max_right = ct.ContainerItems.Select(i => i.Rectangle.Right).Max();
-                double min_bottom = ct.ContainerItems.Select(i => i.Rectangle.Bottom).Min();
-                double min_left = ct.ContainerItems.Select(i => i.Rectangle.Left).Min();
+                if (ct.ContainerItems.Count < 1)
+                {
+                    double top = this.LayoutOptions.Padding + this.LayoutOptions.ContainerHeaderHeight;
+                    double bottom = top - this.LayoutOptions.ContainerHeaderHeight - this.LayoutOptions.Padding;
+                    ct.Rectangle = new VA.Drawing.Rectangle(col_lefts[ctn], bottom, col_rights[ctn], top);
+                }
+                else
+                {
+                    double max_top = ct.ContainerItems.Select(i => i.Rectangle.Top).Max();
+                    double max_right = ct.ContainerItems.Select(i => i.Rectangle.Right).Max();
+                    double min_bottom = ct.ContainerItems.Select(i => i.Rectangle.Bottom).Min();
+                    double min_left = ct.ContainerItems.Select(i => i.Rectangle.Left).Min();
 
-                max_top += this.LayoutOptions.Padding + this.LayoutOptions.ContainerHeaderHeight;
-                max_right += this.LayoutOptions.Padding;
-                min_left -= this.LayoutOptions.Padding;
-                min_bottom -= this.LayoutOptions.Padding;
-                
-                ct.Rectangle = new VA.Drawing.Rectangle(min_left, min_bottom, max_right, max_top);
+                    max_top += this.LayoutOptions.Padding + this.LayoutOptions.ContainerHeaderHeight;
+                    max_right += this.LayoutOptions.Padding;
+                    min_left -= this.LayoutOptions.Padding;
+                    min_bottom -= this.LayoutOptions.Padding;
+
+                    ct.Rectangle = new VA.Drawing.Rectangle(min_left, min_bottom, max_right, max_top);                    
+                }
+
+
+                ctn++;
             }
 
             this.IsLayedOut = true;
@@ -177,6 +192,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
             var window = app.ActiveWindow;
 
+
             // Render containers using container API
             if (this.LayoutOptions.Style == VA.Layout.Models.ContainerLayout.RenderStyle.UseVisioContainers)
             {
@@ -192,15 +208,33 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
                     }
                     var sel = window.Selection;
 
-                    ct.VisioShape = page.DropContainer(special_container_master, sel);
-                    ct.ShapeID = ct.VisioShape.ID16;
+                    if (ct.ContainerItems.Count>0)
+                    {
+                        ct.VisioShape = page.DropContainer(special_container_master, sel);
+                        ct.ShapeID = ct.VisioShape.ID16;
+                    }
+                    else
+                    {
+                        ct.VisioShape = page.DropContainer(special_container_master, null);
+                        ct.ShapeID = ct.VisioShape.ID16;
+
+                        var pinpos = ct.Rectangle.Center;
+                        var update2 = new VA.ShapeSheet.Update.SIDSRCUpdate();
+                        update2.SetFormula(ct.ShapeID, VA.ShapeSheet.SRCConstants.Width, ct.Rectangle.Width);
+                        update2.SetFormula(ct.ShapeID, VA.ShapeSheet.SRCConstants.Height, ct.Rectangle.Height);
+                        update2.SetFormula(ct.ShapeID, VA.ShapeSheet.SRCConstants.PinX, 10);
+                        update2.SetFormula(ct.ShapeID, VA.ShapeSheet.SRCConstants.PinY, 0);
+                        update2.BlastGuards = true;
+                        update2.Execute(page);
+                    }
                 }
 
                 doc.DiagramServicesEnabled = old_dse;
             }
 
-            // Format the containers and shapes
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+
+            // Format the containers and shapes
 
             if (this.LayoutOptions.Style == RenderStyle.UseShapes)
             {
