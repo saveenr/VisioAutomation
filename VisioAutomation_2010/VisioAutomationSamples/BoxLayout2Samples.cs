@@ -78,17 +78,13 @@ namespace VisioAutomationSamples
         {
             public string Text;
             public bool Render;
-            public string FillColor;
-            public string FillPattern;
-            public string Font;
-            public string FontSize;
+            public VA.DOM.ShapeCells ShapeCells;
         }
 
         public static void BoxLayout_TwoLevelGrouping()
         {
             int num_types = 10;
             int max_properties = 50;
-            double itemsep = 0.0;
 
             var types = typeof (VA.UserDefinedCells.UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
 
@@ -103,78 +99,7 @@ namespace VisioAutomationSamples
                 }
             }
 
-            var major_group_direction = BOXMODEL.Direction.LeftToRight;
-            var minor_group_direction = BOXMODEL.Direction.TopToBottom;
-            
-            var name_to_major_group = new Dictionary<string, BOXMODEL.Container>();
-            var name_to_minor_group = new Dictionary<string, BOXMODEL.Container>();
-
-            var layout1 = new BOXMODEL.BoxLayout();
-            layout1.Root = new BOXMODEL.Container(major_group_direction);
-
-            foreach( var row in data)
-            {
-                var majorname = row[0];
-                var minorname = row[1];
-                var itemname = row[2];
-
-                BOXMODEL.Container majorcnt = null;
-                if (name_to_major_group.ContainsKey(majorname))
-                {
-                    majorcnt = name_to_major_group[majorname];
-                }
-                else
-                {
-                    majorcnt = layout1.Root.AddContainer(minor_group_direction, 1, 1);
-
-                    var major_info = new TwoLevelInfo();
-                    major_info.Text = majorname;
-                    major_info.Render = true;
-                    major_info.FillColor = "rgb(245,245,245)";
-                    major_info.Font = "Segoe UI";
-                    major_info.FontSize = "12pt";
-                    majorcnt.Data = major_info;
-
-                    name_to_major_group[majorname] = majorcnt;
-
-                    BOXMODEL.Box    headerbox= majorcnt.AddBox(2, 0.25);
-
-                }
-
-                BOXMODEL.Container minorcnt = null;
-                var minorkey = majorname + "___" + minorname;
-                if (name_to_minor_group.ContainsKey(minorkey))
-                {
-                    minorcnt = name_to_minor_group[minorkey];
-                }
-                else
-                {
-                    minorcnt = majorcnt.AddContainer(minor_group_direction);
-                    minorcnt.ChildSpacing = itemsep;
-                    var minor_info = new TwoLevelInfo();
-                    minor_info.Text = minorname;
-                    minor_info.Render = true;
-                    minor_info.FillColor = "rgb(230,230,230)";
-                    minor_info.Font = "Segoe UI";
-                    minor_info.FontSize = "10pt";
-                    minorcnt.Data = minor_info;
-                    name_to_minor_group[minorkey] = minorcnt;
-
-                    BOXMODEL.Box headerbox = minorcnt.AddBox(2, 0.25);
-                }
-
-                BOXMODEL.Box itembox = minorcnt.AddBox(2, 0.25);
-                
-                var item_info = new TwoLevelInfo();
-                item_info.Text = itemname;
-                item_info.Render = true;
-                item_info.Font = "Segoe UI";
-                item_info.FillPattern = "0";
-                item_info.FontSize = "8pt";
-
-                itembox.Data = item_info;
-
-            }
+            var layout1 = CreateTwoLevelLayout(data);
 
 
             layout1.PerformLayout();
@@ -201,15 +126,7 @@ namespace VisioAutomationSamples
                 {
                     shape.Text = new VA.Text.Markup.TextElement(info.Text);                    
                 }
-                shape.Cells.FillForegnd = info.FillColor;
-                shape.Cells.HAlign = 0;
-                shape.Cells.VerticalAlign = 0;
-                shape.Cells.LinePattern = 0;
-                shape.Cells.LineWeight = 0;
-                shape.Cells.FillPattern = info.FillPattern;
-                shape.Cells.CharSize = info.FontSize;
-
-                shape.CharFontName = info.Font;
+                shape.Cells = info.ShapeCells;
             }
             dom.Render(page);
 
@@ -217,6 +134,105 @@ namespace VisioAutomationSamples
 
         }
 
+        private static BOXMODEL.BoxLayout CreateTwoLevelLayout(List<string[]> data)
+        {
+            double itemsep = 0.0;
+            var major_group_direction = BOXMODEL.Direction.LeftToRight;
+            var minor_group_direction = BOXMODEL.Direction.TopToBottom;
+
+            var name_to_major_group = new Dictionary<string, BOXMODEL.Container>();
+            var name_to_minor_group = new Dictionary<string, BOXMODEL.Container>();
+
+            var layout1 = new BOXMODEL.BoxLayout();
+            layout1.Root = new BOXMODEL.Container(major_group_direction);
+
+            foreach (var row in data)
+            {
+                var majorname = row[0];
+                var minorname = row[1];
+                var itemname = row[2];
+
+                BOXMODEL.Container majorcnt = null;
+                if (name_to_major_group.ContainsKey(majorname))
+                {
+                    majorcnt = name_to_major_group[majorname];
+                }
+                else
+                {
+                    majorcnt = layout1.Root.AddContainer(minor_group_direction, 1, 1);
+
+                    var major_info = new TwoLevelInfo();
+                    major_info.Text = majorname;
+                    major_info.Render = true;
+
+                    var major_cells = new VA.DOM.ShapeCells();
+                    major_cells.FillForegnd = "rgb(245,245,245)";
+                    major_cells.CharFont= 0;
+                    major_cells.CharSize= "12pt";
+                    major_cells.HAlign = "0";
+                    major_cells.VerticalAlign = "0";
+                    major_cells.LineWeight = "0";
+                    major_cells.LinePattern = "0";
+
+                    major_info.ShapeCells = major_cells;
+
+                    majorcnt.Data = major_info;
+                    
+
+                    name_to_major_group[majorname] = majorcnt;
+
+                    BOXMODEL.Box headerbox = majorcnt.AddBox(2, 0.25);
+                }
+
+                BOXMODEL.Container minorcnt = null;
+                var minorkey = majorname + "___" + minorname;
+                if (name_to_minor_group.ContainsKey(minorkey))
+                {
+                    minorcnt = name_to_minor_group[minorkey];
+                }
+                else
+                {
+                    minorcnt = majorcnt.AddContainer(minor_group_direction);
+                    minorcnt.ChildSpacing = itemsep;
+                    var minor_info = new TwoLevelInfo();
+                    minor_info.Text = minorname;
+                    minor_info.Render = true;
+                    var minor_cells = new VA.DOM.ShapeCells();
+                    minor_cells.FillForegnd = "rgb(230,230,230)";
+                    minor_cells.CharFont = 0;
+                    minor_cells.CharSize = "10pt";
+                    minor_cells.HAlign = "0";
+                    minor_cells.VerticalAlign = "0";
+                    minor_cells.LineWeight = "0";
+                    minor_cells.LinePattern = "0";
+                    minor_info.ShapeCells = minor_cells;
+                    minorcnt.Data = minor_info;
+                    name_to_minor_group[minorkey] = minorcnt;
+
+                    BOXMODEL.Box headerbox = minorcnt.AddBox(2, 0.25);
+                }
+
+                BOXMODEL.Box itembox = minorcnt.AddBox(2, 0.25);
+
+                var item_info = new TwoLevelInfo();
+                item_info.Text = itemname;
+                item_info.Render = true;
+                var item_cells = new VA.DOM.ShapeCells();
+
+                item_cells.CharFont = 0;
+                item_cells.FillPattern = "0";
+                item_cells.CharSize= "8pt";
+                item_cells.HAlign = "0";
+                item_cells.VerticalAlign = "0";
+                item_cells.LineWeight = "0";
+                item_cells.LinePattern = "0";
+
+                item_info.ShapeCells = item_cells;
+                
+                itembox.Data = item_info;
+            }
+            return layout1;
+        }
     }
 
     public static class Util
