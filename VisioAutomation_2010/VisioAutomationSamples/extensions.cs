@@ -1,15 +1,13 @@
-using VisioAutomation.Drawing;
-using VisioAutomation.Text;
-using VisioAutomation.Text.Markup;
+using VA=VisioAutomation;
 
 namespace VisioAutomationSamples
 {
     public static class extensions
     {
-        public static TextElement AddElementEx(this TextElement p, string text,
+        public static VA.Text.Markup.TextElement AddElementEx(this VA.Text.Markup.TextElement p, string text,
                                                               int? font, double? size, int? color,
-                                                              AlignmentHorizontal? halign,
-                                                              CharStyle? cs)
+                                                              VA.Drawing.AlignmentHorizontal? halign,
+                                                              VA.Text.CharStyle? cs)
         {
             var el = p.AppendElement(text);
             if (font != null)
@@ -22,7 +20,7 @@ namespace VisioAutomationSamples
             }
             if (color.HasValue)
             {
-                el.CharacterFormat.Color = new ColorRGB(color.Value);
+                el.CharacterFormat.Color = new VA.Drawing.ColorRGB(color.Value);
             }
             if (halign.HasValue)
             {

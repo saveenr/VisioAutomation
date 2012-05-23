@@ -1,6 +1,4 @@
-﻿using VisioAutomation.DOM;
-using VisioAutomation.Drawing;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;

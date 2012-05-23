@@ -10,7 +10,6 @@ namespace VisioAutomationSamples
 {
     public static class TreeLayoutSamples
     {
-
         public static void TreeWithTwoPassLayoutAndFormatting()
         {
             var doc = SampleEnvironment.Application.ActiveDocument;
@@ -53,6 +52,8 @@ namespace VisioAutomationSamples
                 cells.FillForegnd = "rgb(255,250,200)";
                 cells.CharColor = "rgb(255,0,0)";
             }
+
+            // TODO: Complete this sample
         }
     }
 

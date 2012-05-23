@@ -1,9 +1,5 @@
-﻿using VisioAutomation.DOM;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
-using System.Linq;
-using System.Collections.Generic;
 using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
 namespace VisioAutomationSamples
