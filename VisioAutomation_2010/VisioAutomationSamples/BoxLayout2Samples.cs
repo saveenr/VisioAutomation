@@ -74,18 +74,21 @@ namespace VisioAutomationSamples
 
         }
 
-        public class Info
+        public class TwoLevelInfo
         {
             public string Text;
             public bool Render;
-            public string color;
+            public string FillColor;
+            public string FillPattern;
+            public string Font;
+            public string FontSize;
         }
 
         public static void BoxLayout_TwoLevelGrouping()
         {
             int num_types = 10;
             int max_properties = 50;
-
+            double itemsep = 0.0;
 
             var types = typeof (VA.UserDefinedCells.UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
 
@@ -124,11 +127,13 @@ namespace VisioAutomationSamples
                 {
                     majorcnt = layout1.Root.AddContainer(minor_group_direction, 1, 1);
 
-                    var info = new Info();
-                    info.Text = majorname;
-                    info.Render = true;
-                    info.color = "rgb(245,245,245)";
-                    majorcnt.Data = info;
+                    var major_info = new TwoLevelInfo();
+                    major_info.Text = majorname;
+                    major_info.Render = true;
+                    major_info.FillColor = "rgb(245,245,245)";
+                    major_info.Font = "Segoe UI";
+                    major_info.FontSize = "12pt";
+                    majorcnt.Data = major_info;
 
                     name_to_major_group[majorname] = majorcnt;
 
@@ -145,23 +150,29 @@ namespace VisioAutomationSamples
                 else
                 {
                     minorcnt = majorcnt.AddContainer(minor_group_direction);
-                    var info = new Info();
-                    info.Text = minorname;
-                    info.Render = true;
-                    info.color = "rgb(230,230,230)";
-                    minorcnt.Data = info;
+                    minorcnt.ChildSpacing = itemsep;
+                    var minor_info = new TwoLevelInfo();
+                    minor_info.Text = minorname;
+                    minor_info.Render = true;
+                    minor_info.FillColor = "rgb(230,230,230)";
+                    minor_info.Font = "Segoe UI";
+                    minor_info.FontSize = "10pt";
+                    minorcnt.Data = minor_info;
                     name_to_minor_group[minorkey] = minorcnt;
 
                     BOXMODEL.Box headerbox = minorcnt.AddBox(2, 0.25);
                 }
 
                 BOXMODEL.Box itembox = minorcnt.AddBox(2, 0.25);
+                
+                var item_info = new TwoLevelInfo();
+                item_info.Text = itemname;
+                item_info.Render = true;
+                item_info.Font = "Segoe UI";
+                item_info.FillPattern = "0";
+                item_info.FontSize = "8pt";
 
-                var info2 = new Info();
-                info2.Text = itemname;
-                info2.Render = true;
-
-                itembox.Data = info2;
+                itembox.Data = item_info;
 
             }
 
@@ -184,17 +195,21 @@ namespace VisioAutomationSamples
                 {
                     continue;
                 }
-                var info = (Info) item.Data;
+                var info = (TwoLevelInfo) item.Data;
                 var shape = dom.DrawRectangle(item.Rectangle);
                 if (info.Text!=null)
                 {
                     shape.Text = new VA.Text.Markup.TextElement(info.Text);                    
                 }
-                shape.Cells.FillForegnd = info.color;
+                shape.Cells.FillForegnd = info.FillColor;
                 shape.Cells.HAlign = 0;
                 shape.Cells.VerticalAlign = 0;
                 shape.Cells.LinePattern = 0;
                 shape.Cells.LineWeight = 0;
+                shape.Cells.FillPattern = info.FillPattern;
+                shape.Cells.CharSize = info.FontSize;
+
+                shape.CharFontName = info.Font;
             }
             dom.Render(page);
 
