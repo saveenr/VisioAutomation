@@ -56,13 +56,7 @@ namespace TestVisioAutomation
             var l1_c1_i1 = l1_c1.Add("L1/C1/I1");
             
             layout1.PerformLayout();
-
-            layout1.LayoutOptions.Style = VA.Layout.Models.ContainerLayout.RenderStyle.UseVisioContainers;
             var page1 = layout1.Render(doc);
-            page1.Delete(0);
-
-            layout1.LayoutOptions.Style = VA.Layout.Models.ContainerLayout.RenderStyle.UseShapes;
-            page1 = layout1.Render(doc);
 
             page1.Delete(0);
 
@@ -83,12 +77,11 @@ namespace TestVisioAutomation
 
             layout1.PerformLayout();
 
-            layout1.LayoutOptions.Style = VA.Layout.Models.ContainerLayout.RenderStyle.UseVisioContainers;
             var page1 = layout1.Render(doc);
 
-            //page1.Delete(0);
+            page1.Delete(0);
 
-            //doc.Close(true);
+            doc.Close(true);
         }
     }
 }

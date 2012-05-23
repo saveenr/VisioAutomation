@@ -18,7 +18,6 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
         public LayoutOptions()
         {
-            Style = RenderStyle.UseVisioContainers;
             this.ContainerFormatting.TextBlockFormatCells.VerticalAlign = "0";
         }
 
@@ -51,8 +50,6 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
             get { return _padding; }
             set { _padding = value; }
         }
-
-        public RenderStyle Style { get; set; }
 
         public double ContainerHeaderHeight
         {

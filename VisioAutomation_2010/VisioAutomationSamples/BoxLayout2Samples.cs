@@ -121,6 +121,12 @@ namespace VisioAutomationSamples
                     continue;
                 }
                 var info = (TwoLevelInfo) item.Data;
+
+                if (!info.Render)
+                {
+                    continue;
+                }
+
                 var shape = dom.DrawRectangle(item.Rectangle);
                 if (info.Text!=null)
                 {
@@ -146,6 +152,34 @@ namespace VisioAutomationSamples
             var layout1 = new BOXMODEL.BoxLayout();
             layout1.Root = new BOXMODEL.Container(major_group_direction);
 
+            var major_cells = new VA.DOM.ShapeCells();
+            major_cells.FillForegnd = "rgb(245,245,245)";
+            major_cells.CharFont = 0;
+            major_cells.CharSize = "12pt";
+            major_cells.HAlign = "0";
+            major_cells.VerticalAlign = "0";
+            major_cells.LineWeight = "0";
+            major_cells.LinePattern = "0";
+
+            var minor_cells = new VA.DOM.ShapeCells();
+            minor_cells.FillForegnd = "rgb(230,230,230)";
+            minor_cells.CharFont = 0;
+            minor_cells.CharSize = "10pt";
+            minor_cells.HAlign = "0";
+            minor_cells.VerticalAlign = "0";
+            minor_cells.LineWeight = "0";
+            minor_cells.LinePattern = "0";
+
+            var item_cells = new VA.DOM.ShapeCells();
+            item_cells.CharFont = 0;
+            item_cells.FillPattern = "0";
+            item_cells.CharSize = "8pt";
+            item_cells.HAlign = "0";
+            item_cells.VerticalAlign = "0";
+            item_cells.LineWeight = "0";
+            item_cells.LinePattern = "0";
+
+
             foreach (var row in data)
             {
                 var majorname = row[0];
@@ -164,18 +198,7 @@ namespace VisioAutomationSamples
                     var major_info = new TwoLevelInfo();
                     major_info.Text = majorname;
                     major_info.Render = true;
-
-                    var major_cells = new VA.DOM.ShapeCells();
-                    major_cells.FillForegnd = "rgb(245,245,245)";
-                    major_cells.CharFont= 0;
-                    major_cells.CharSize= "12pt";
-                    major_cells.HAlign = "0";
-                    major_cells.VerticalAlign = "0";
-                    major_cells.LineWeight = "0";
-                    major_cells.LinePattern = "0";
-
                     major_info.ShapeCells = major_cells;
-
                     majorcnt.Data = major_info;
                     
 
@@ -197,14 +220,6 @@ namespace VisioAutomationSamples
                     var minor_info = new TwoLevelInfo();
                     minor_info.Text = minorname;
                     minor_info.Render = true;
-                    var minor_cells = new VA.DOM.ShapeCells();
-                    minor_cells.FillForegnd = "rgb(230,230,230)";
-                    minor_cells.CharFont = 0;
-                    minor_cells.CharSize = "10pt";
-                    minor_cells.HAlign = "0";
-                    minor_cells.VerticalAlign = "0";
-                    minor_cells.LineWeight = "0";
-                    minor_cells.LinePattern = "0";
                     minor_info.ShapeCells = minor_cells;
                     minorcnt.Data = minor_info;
                     name_to_minor_group[minorkey] = minorcnt;
@@ -217,15 +232,7 @@ namespace VisioAutomationSamples
                 var item_info = new TwoLevelInfo();
                 item_info.Text = itemname;
                 item_info.Render = true;
-                var item_cells = new VA.DOM.ShapeCells();
 
-                item_cells.CharFont = 0;
-                item_cells.FillPattern = "0";
-                item_cells.CharSize= "8pt";
-                item_cells.HAlign = "0";
-                item_cells.VerticalAlign = "0";
-                item_cells.LineWeight = "0";
-                item_cells.LinePattern = "0";
 
                 item_info.ShapeCells = item_cells;
                 

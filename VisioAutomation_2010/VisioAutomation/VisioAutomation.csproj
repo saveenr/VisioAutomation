@@ -96,7 +96,6 @@
     <Compile Include="Layout\Models\Container\ContainerLayout.cs" />
     <Compile Include="Layout\Models\Container\Formatting.cs" />
     <Compile Include="Layout\Models\Container\LayoutOptions.cs" />
-    <Compile Include="Layout\Models\Container\RenderStyle.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Connector.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Drawing.cs" />
     <Compile Include="Layout\Models\DirectedGraph\LayoutOptions.cs" />
