@@ -198,5 +198,61 @@ namespace TestVisioAutomation
             page.Delete(0);
         }
 
+        [TestMethod]
+        public void VerifyDropVersusDraw()
+        {
+            var page = this.GetNewPage();
+            var dom = new VA.DOM.Document();
+            var rect = new VA.Drawing.Rectangle(3, 4, 7, 8);
+            var dropped_shape = dom.Drop("Rectangle", "basic_u.vss", rect);
+            var drawn_shape = dom.DrawRectangle(rect);
+            dom.Render(page);
+
+            var xfrms = VA.Layout.LayoutHelper.GetXForm(page,
+                                                        new int[] {dropped_shape.VisioShapeID, drawn_shape.VisioShapeID});
+
+            Assert.AreEqual(xfrms[1].PinX,xfrms[0].PinX);
+            Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);
+
+            Assert.AreEqual(xfrms[1].Width, xfrms[0].Width);
+            Assert.AreEqual(xfrms[1].Height, xfrms[0].Height);
+
+            page.Delete(0);
+        }
+
+        [TestMethod]
+        public void VerifyDropVersusDraw2()
+        {
+            var page = this.GetNewPage();
+            var dom = new VA.DOM.Document();
+            var rect0 = new VA.Drawing.Rectangle(3, 4, 7, 8);
+            var rect1 = new VA.Drawing.Rectangle(8, 1, 9, 5);
+            var dropped_shape0 = dom.Drop("Rectangle", "basic_u.vss", rect0);
+            var drawn_shape0 = dom.DrawRectangle(rect0);
+
+            var dropped_shape1 = dom.Drop("Rectangle", "basic_u.vss", rect1);
+            var drawn_shape1 = dom.DrawRectangle(rect1);
+
+            dom.Render(page);
+
+            var xfrms = VA.Layout.LayoutHelper.GetXForm(page,
+                                                        new int[] { dropped_shape0.VisioShapeID, 
+                                                            drawn_shape0.VisioShapeID, 
+                                                            dropped_shape1.VisioShapeID, 
+                                                            drawn_shape1.VisioShapeID });
+
+            Assert.AreEqual(xfrms[1].PinX, xfrms[0].PinX);
+            Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);
+
+            Assert.AreEqual(xfrms[1].Width, xfrms[0].Width);
+            Assert.AreEqual(xfrms[1].Height, xfrms[0].Height);
+
+            Assert.AreEqual(xfrms[3].PinX,   xfrms[2].PinX);
+            Assert.AreEqual(xfrms[3].PinY,   xfrms[2].PinY);
+            Assert.AreEqual(xfrms[3].Width,  xfrms[2].Width);
+            Assert.AreEqual(xfrms[3].Height, xfrms[2].Height);
+
+            page.Delete(0);
+        }
     }
 }

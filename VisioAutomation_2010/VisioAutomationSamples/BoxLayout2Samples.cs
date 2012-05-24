@@ -114,6 +114,7 @@ namespace VisioAutomationSamples
 
 
             var dom = new VA.DOM.Document();
+            //var rect_master = dom.m
             foreach (var item in layout1.Nodes)
             {
                 if (item.Data ==null)
@@ -127,12 +128,13 @@ namespace VisioAutomationSamples
                     continue;
                 }
 
-                var shape = dom.DrawRectangle(item.Rectangle);
+                var shape = dom.Drop("Rectangle", "Basic_U.VSS",item.Rectangle);
+
                 if (info.Text!=null)
                 {
                     shape.Text = new VA.Text.Markup.TextElement(info.Text);                    
                 }
-                shape.Cells = info.ShapeCells;
+                info.ShapeCells.ApplyFormulasTo(shape.Cells);
             }
             dom.Render(page);
 

@@ -223,12 +223,115 @@ namespace VisioAutomation.DOM
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeRouteStyle, ShapeRouteStyle);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeSplit, ShapeSplit);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeSplittable, ShapeSplittable);
-
         }
 
         public ShapeCells ShallowCopy()
         {
             return (ShapeCells) this.MemberwiseClone();
+        }
+
+        public void ApplyFormulasTo(ShapeCells other)
+        {
+            if (this.Width.HasValue) { other.Width = this.Width; }
+            if (this.Height.HasValue) { other.Height = this.Height; }
+            if (this.Angle.HasValue) { other.Angle = this.Angle; }
+            if (this.PinX.HasValue) { other.PinX = this.PinX; }
+            if (this.PinY.HasValue) { other.PinY = this.PinY; }
+            if (this.LocPinX.HasValue) { other.LocPinX = this.LocPinX; }
+            if (this.LocPinY.HasValue) { other.LocPinY = this.LocPinY; }
+            if (this.FillBkgnd.HasValue) { other.FillBkgnd = this.FillBkgnd; }
+            if (this.FillBkgndTrans.HasValue) { other.FillBkgndTrans = this.FillBkgndTrans; }
+            if (this.FillForegnd.HasValue) { other.FillForegnd = this.FillForegnd; }
+            if (this.FillForegndTrans.HasValue) { other.FillForegndTrans = this.FillForegndTrans; }
+            if (this.FillPattern.HasValue) { other.FillPattern = this.FillPattern; }
+            if (this.ShapeShdwObliqueAngle.HasValue) { other.ShapeShdwObliqueAngle = this.ShapeShdwObliqueAngle; }
+            if (this.ShapeShdwOffsetX.HasValue) { other.ShapeShdwOffsetX = this.ShapeShdwOffsetX; }
+            if (this.ShapeShdwOffsetY.HasValue) { other.ShapeShdwOffsetY = this.ShapeShdwOffsetY; }
+            if (this.ShapeShdwScaleFactor.HasValue) { other.ShapeShdwScaleFactor = this.ShapeShdwScaleFactor; }
+            if (this.ShapeShdwType.HasValue) { other.ShapeShdwType = this.ShapeShdwType; }
+            if (this.ShdwBkgnd.HasValue) { other.ShdwBkgnd = this.ShdwBkgnd; }
+            if (this.ShdwBkgndTrans.HasValue) { other.ShdwBkgndTrans = this.ShdwBkgndTrans; }
+            if (this.ShdwForegnd.HasValue) { other.ShdwForegnd = this.ShdwForegnd; }
+            if (this.ShdwForegndTrans.HasValue) { other.ShdwForegndTrans = this.ShdwForegndTrans; }
+            if (this.ShdwPattern.HasValue) { other.ShdwPattern = this.ShdwPattern; }
+            if (this.BeginArrow.HasValue) { other.BeginArrow = this.BeginArrow; }
+            if (this.BeginArrowSize.HasValue) { other.BeginArrowSize = this.BeginArrowSize; }
+            if (this.EndArrow.HasValue) { other.EndArrow = this.EndArrow; }
+            if (this.EndArrowSize.HasValue) { other.EndArrowSize = this.EndArrowSize; }
+            if (this.LineCap.HasValue) { other.LineCap = this.LineCap; }
+            if (this.LineColor.HasValue) { other.LineColor = this.LineColor; }
+            if (this.LineColorTrans.HasValue) { other.LineColorTrans = this.LineColorTrans; }
+            if (this.LinePattern.HasValue) { other.LinePattern = this.LinePattern; }
+            if (this.LineWeight.HasValue) { other.LineWeight = this.LineWeight; }
+            if (this.Rounding.HasValue) { other.Rounding = this.Rounding; }
+            if (this.CharAsianFont.HasValue) { other.CharAsianFont = this.CharAsianFont; }
+            if (this.CharCase.HasValue) { other.CharCase = this.CharCase; }
+            if (this.CharColor.HasValue) { other.CharColor = this.CharColor; }
+            if (this.CharComplexScriptFont.HasValue) { other.CharComplexScriptFont = this.CharComplexScriptFont; }
+            if (this.CharComplexScriptSize.HasValue) { other.CharComplexScriptSize = this.CharComplexScriptSize; }
+            if (this.CharDoubleStrikethrough.HasValue) { other.CharDoubleStrikethrough = this.CharDoubleStrikethrough; }
+            if (this.CharDoubleULine.HasValue) { other.CharDoubleULine = this.CharDoubleULine; }
+            if (this.CharFont.HasValue) { other.CharFont = this.CharFont; }
+            if (this.CharLangID.HasValue) { other.CharLangID = this.CharLangID; }
+            if (this.CharLocale.HasValue) { other.CharLocale = this.CharLocale; }
+            if (this.CharLocalizeFont.HasValue) { other.CharLocalizeFont = this.CharLocalizeFont; }
+            if (this.CharOverline.HasValue) { other.CharOverline = this.CharOverline; }
+            if (this.CharPerpendicular.HasValue) { other.CharPerpendicular = this.CharPerpendicular; }
+            if (this.CharPos.HasValue) { other.CharPos = this.CharPos; }
+            if (this.CharRTLText.HasValue) { other.CharRTLText = this.CharRTLText; }
+            if (this.CharScale.HasValue) { other.CharScale = this.CharScale; }
+            if (this.CharSize.HasValue) { other.CharSize = this.CharSize; }
+            if (this.CharSpacing.HasValue) { other.CharSpacing = this.CharSpacing; }
+            if (this.CharStrikethru.HasValue) { other.CharStrikethru = this.CharStrikethru; }
+            if (this.CharStyle.HasValue) { other.CharStyle = this.CharStyle; }
+            if (this.CharTransparency.HasValue) { other.CharTransparency = this.CharTransparency; }
+            if (this.CharUseVertical.HasValue) { other.CharUseVertical = this.CharUseVertical; }
+            if (this.BottomMargin.HasValue) { other.BottomMargin = this.BottomMargin; }
+            if (this.DefaultTabstop.HasValue) { other.DefaultTabstop = this.DefaultTabstop; }
+            if (this.LeftMargin.HasValue) { other.LeftMargin = this.LeftMargin; }
+            if (this.RightMargin.HasValue) { other.RightMargin = this.RightMargin; }
+            if (this.TextBkgnd.HasValue) { other.TextBkgnd = this.TextBkgnd; }
+            if (this.TextBkgndTrans.HasValue) { other.TextBkgndTrans = this.TextBkgndTrans; }
+            if (this.TextDirection.HasValue) { other.TextDirection = this.TextDirection; }
+            if (this.TopMargin.HasValue) { other.TopMargin = this.TopMargin; }
+            if (this.VerticalAlign.HasValue) { other.VerticalAlign = this.VerticalAlign; }
+            if (this.BulletIndex.HasValue) { other.BulletIndex = this.BulletIndex; }
+            if (this.BulletFont.HasValue) { other.BulletFont = this.BulletFont; }
+            if (this.BulletFontSize.HasValue) { other.BulletFontSize = this.BulletFontSize; }
+            if (this.BulletString.HasValue) { other.BulletString = this.BulletString; }
+            if (this.Flags.HasValue) { other.Flags = this.Flags; }
+            if (this.HAlign.HasValue) { other.HAlign = this.HAlign; }
+            if (this.IndFirst.HasValue) { other.IndFirst = this.IndFirst; }
+            if (this.IndLeft.HasValue) { other.IndLeft = this.IndLeft; }
+            if (this.IndRight.HasValue) { other.IndRight = this.IndRight; }
+            if (this.LocBulletFont.HasValue) { other.LocBulletFont = this.LocBulletFont; }
+            if (this.SpAfter.HasValue) { other.SpAfter = this.SpAfter; }
+            if (this.SpBefore.HasValue) { other.SpBefore = this.SpBefore; }
+            if (this.SpLine.HasValue) { other.SpLine = this.SpLine; }
+            if (this.TextPosAfterBullet.HasValue) { other.TextPosAfterBullet = this.TextPosAfterBullet; }
+            if (this.TxtAngle.HasValue) { other.TxtAngle = this.TxtAngle; }
+            if (this.TxtHeight.HasValue) { other.TxtHeight = this.TxtHeight; }
+            if (this.TxtLocPinX.HasValue) { other.TxtLocPinX = this.TxtLocPinX; }
+            if (this.TxtLocPinY.HasValue) { other.TxtLocPinY = this.TxtLocPinY; }
+            if (this.TxtPinX.HasValue) { other.TxtPinX = this.TxtPinX; }
+            if (this.TxtPinY.HasValue) { other.TxtPinY = this.TxtPinY; }
+            if (this.TxtWidth.HasValue) { other.TxtWidth = this.TxtWidth; }
+            if (this.ConFixedCode.HasValue) { other.ConFixedCode = this.ConFixedCode; }
+            if (this.ConLineJumpCode.HasValue) { other.ConLineJumpCode = this.ConLineJumpCode; }
+            if (this.ConLineJumpDirX.HasValue) { other.ConLineJumpDirX = this.ConLineJumpDirX; }
+            if (this.ConLineJumpDirY.HasValue) { other.ConLineJumpDirY = this.ConLineJumpDirY; }
+            if (this.ConLineJumpStyle.HasValue) { other.ConLineJumpStyle = this.ConLineJumpStyle; }
+            if (this.ConLineRouteExt.HasValue) { other.ConLineRouteExt = this.ConLineRouteExt; }
+            if (this.ShapeFixedCode.HasValue) { other.ShapeFixedCode = this.ShapeFixedCode; }
+            if (this.ShapePermeablePlace.HasValue) { other.ShapePermeablePlace = this.ShapePermeablePlace; }
+            if (this.ShapePermeableX.HasValue) { other.ShapePermeableX = this.ShapePermeableX; }
+            if (this.ShapePermeableY.HasValue) { other.ShapePermeableY = this.ShapePermeableY; }
+            if (this.ShapePlaceFlip.HasValue) { other.ShapePlaceFlip = this.ShapePlaceFlip; }
+            if (this.ShapePlaceStyle.HasValue) { other.ShapePlaceStyle = this.ShapePlaceStyle; }
+            if (this.ShapePlowCode.HasValue) { other.ShapePlowCode = this.ShapePlowCode; }
+            if (this.ShapeRouteStyle.HasValue) { other.ShapeRouteStyle = this.ShapeRouteStyle; }
+            if (this.ShapeSplit.HasValue) { other.ShapeSplit = this.ShapeSplit; }
+            if (this.ShapeSplittable.HasValue) { other.ShapeSplittable = this.ShapeSplittable; }
         }
     }
 }
