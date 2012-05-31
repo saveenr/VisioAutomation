@@ -152,28 +152,31 @@ namespace VisioAutomation.Scripting.FlowChart
             }
 
             var doc = scriptingsession.Document.New();
-
-            int num_expected_pages = drawings.Count;
-
+            int num_pages_created = 0;
+            var doc_pages = doc.Pages;
 
             foreach (int i in Enumerable.Range(0, drawings.Count))
             {
                 var directed_graph_drawing = drawings[i];
 
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Rendering page: {0}", i+1);
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering page: {0}", i + 1);
 
                 var options = new VA.Layout.MSAGL.LayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 IVisio.Page page = null;
-                if (doc.Pages.Count == 1)
+
+                if (num_pages_created == 0)
                 {
+                    // if this is the first page to drawe
+                    // then reuse the initial empty page in the document
                     page = app.ActivePage;
                 }
                 else
                 {
-                    page = doc.Pages.Add();
+                    // otherwise, create a new page.
+                    page = doc_pages.Add();
                 }
 
                 VA.Layout.MSAGL.MSAGLRenderer.Render(page, directed_graph_drawing, options);
@@ -181,9 +184,10 @@ namespace VisioAutomation.Scripting.FlowChart
                 scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
                 scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering page");
-            }
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering page");
 
+                num_pages_created++;
+            }
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering pages");
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering flowchart.");
         }
