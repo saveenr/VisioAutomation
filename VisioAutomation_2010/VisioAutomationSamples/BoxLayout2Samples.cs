@@ -134,7 +134,8 @@ namespace VisioAutomationSamples
                 {
                     shape.Text = new VA.Text.Markup.TextElement(info.Text);                    
                 }
-                info.ShapeCells.ApplyFormulasTo(shape.Cells);
+                
+                shape.Cells = info.ShapeCells.ShallowCopy();
             }
             dom.Render(page);
 

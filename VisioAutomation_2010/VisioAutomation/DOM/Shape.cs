@@ -33,8 +33,6 @@ namespace VisioAutomation.DOM
             this.Master = new VA.DOM.MasterRef(mastername, stencilname);
             this.DropPosition = rect.Center;
             this.DropSize = rect.Size;
-            this.Cells.Width = rect.Size.Width;
-            this.Cells.Height = rect.Size.Height;
         }
 
         public Shape(IVisio.Master master, double x, double y) :

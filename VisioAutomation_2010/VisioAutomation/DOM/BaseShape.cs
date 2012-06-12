@@ -12,7 +12,12 @@ namespace VisioAutomation.DOM
         public VA.Text.Markup.TextElement Text { get; set; }
         public Dictionary<string, VA.CustomProperties.CustomPropertyCells> CustomProperties { get; set; }
         public List<Hyperlink> Hyperlinks { get; set; }
+
+        // Be aware that if multiple nodes share the same Cells reference bad things can happen.
+        // either never assign to this directly to replace it 
+        // or always assign using ShallowCopy() a ShapeCells() object
         public ShapeCells Cells { get; set; }
+        
         public List<VA.Text.TabStop> TabStops { get; set; }
         public string CharFontName { get; set; }
         

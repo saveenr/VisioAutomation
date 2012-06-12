@@ -80,6 +80,8 @@ namespace VisioAutomation.DOM
 
         private void UpdateCells(RenderContext ctx)
         {
+            UpdateCellsWithDroppSizes(ctx);
+
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             var shapes_with_cells = this.Shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
@@ -121,9 +123,6 @@ namespace VisioAutomation.DOM
         {
 // Resolve all the masters
             ResolveMasters(ctx);
-
-            // Handle sizes for shapes that were dropped using rects
-            SetDroppedSizes(ctx);
 
             // Resolve all the Character Font Name Cells
             ResolveFonts(ctx);
@@ -240,7 +239,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void SetDroppedSizes(RenderContext ctx)
+        private void UpdateCellsWithDroppSizes(RenderContext ctx)
         {
             var masters = this.Shapes
                 .Where(shape => shape is Shape).Cast<Shape>();

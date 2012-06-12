@@ -149,7 +149,7 @@ namespace VisioAutomation.Layout.Models.Grid
 
                 if (node.Cells != null)
                 {
-                    dom_shape.Cells = node.Cells;
+                    dom_shape.Cells = node.Cells.ShallowCopy();
                 }
 
                 dom_shape.Cells.Width = node.Rectangle.Width;
