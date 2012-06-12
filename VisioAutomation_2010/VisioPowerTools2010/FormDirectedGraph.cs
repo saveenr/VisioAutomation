@@ -15,5 +15,10 @@ namespace VisioPowerTools2010
         {
             InitializeComponent();
         }
+
+        public string GraphText
+        {
+            get { return this.textBox1.Text; }
+        }
     }
 }

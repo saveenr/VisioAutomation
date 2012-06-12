@@ -260,16 +260,66 @@ namespace VisioPowerTools2010
                 return;
             }
 
+            var text = form.GraphText.Trim();
+            var lines = text.Split(new[] {'\n'}).Select(s => s.Trim()).Where( s=>s.Length>0).ToList();
 
             var model = new VA.Layout.Models.DirectedGraph.Drawing();
 
-            var s1 = model.AddShape("A", "A", "basic_u.vss", "rectangle");
-            var s2 = model.AddShape("B", "B", "basic_u.vss", "rectangle");
-            var s3 = model.AddShape("C", "C", "basic_u.vss", "rectangle");
+            int cn = 0;
+            var dic = new Dictionary<string, VA.Layout.Models.DirectedGraph.Shape>();
+            foreach (var line in lines)
+            {
+                var tokens = line.Split(new string[] {"->"}, StringSplitOptions.RemoveEmptyEntries);
+                if (tokens.Length==0)
+                {
+                    // do nothing
+                }
+                else if (tokens.Length==1)
+                {
+                    string from = tokens[0];
+                    if (dic.ContainsKey(from))
+                    {
+                        
+                    }
+                    else
+                    {
+                    }
+                }
+                else if (tokens.Length >=2 )
+                {
+                    string from = tokens[0];
+                    string to = tokens[1];
 
-            model.Connect("C1",s1, s2);
-            model.Connect("C2", s2, s3);
-            model.Connect("C3", s3, s1);
+                    VA.Layout.Models.DirectedGraph.Shape fromnode;
+                    VA.Layout.Models.DirectedGraph.Shape tonode;
+                    if (!dic.ContainsKey(from))
+                    {
+                        fromnode = model.AddShape(from, from, "basic_u.vss", "rectangle");
+                        fromnode.Label = from;
+                        dic[from] = fromnode;
+                    }
+                    else
+                    {
+                        fromnode = dic[from];
+                    }
+
+                    if (!dic.ContainsKey(to))
+                    {
+                        tonode= model.AddShape(to, to, "basic_u.vss", "rectangle");
+                        tonode.Label = to;
+                        dic[to] = tonode;
+                    }
+                    else
+                    {
+                        tonode = dic[to];
+                    }
+
+                    model.Connect("C" + cn.ToString(), fromnode, tonode);
+                    cn +=1;
+
+                }
+            }
+
 
             var app = Globals.ThisAddIn.Application;
             var doc = Globals.ThisAddIn.Application.ActiveDocument;
