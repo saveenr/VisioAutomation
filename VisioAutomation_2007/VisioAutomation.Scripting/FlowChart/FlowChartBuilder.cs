@@ -141,8 +141,7 @@ namespace VisioAutomation.Scripting.FlowChart
         {
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Start Rendering FlowChart");
             var app = scriptingsession.VisioApplication;
-
-
+            
             if (drawings.Count < 1)
             {
                 return;
@@ -150,8 +149,8 @@ namespace VisioAutomation.Scripting.FlowChart
 
             var doc = scriptingsession.Document.New();
 
-            int num_expected_pages = drawings.Count;
-
+            int num_pages_created = 0;
+            var doc_pages = doc.Pages;
 
             foreach (int i in Enumerable.Range(0, drawings.Count))
             {
@@ -164,13 +163,17 @@ namespace VisioAutomation.Scripting.FlowChart
                 options.UseDynamicConnectors = false;
 
                 IVisio.Page page = null;
-                if (doc.Pages.Count == 1)
+
+                if (num_pages_created==0)
                 {
+                    // if this is the first page to drawe
+                    // then reuse the initial empty page in the document
                     page = app.ActivePage;
                 }
                 else
                 {
-                    page = doc.Pages.Add();
+                    // otherwise, create a new page.
+                    page = doc_pages.Add();
                 }
 
                 VA.Layout.MSAGL.MSAGLRenderer.Render(page, directed_graph_drawing, options);
@@ -179,6 +182,8 @@ namespace VisioAutomation.Scripting.FlowChart
                 scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering page");
+
+                num_pages_created++;
             }
 
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering pages");
