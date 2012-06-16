@@ -127,7 +127,7 @@
     <Compile Include="Commands\Get_ConnectionPoint.cs" />
     <Compile Include="Commands\Get_Control.cs" />
     <Compile Include="Commands\Get_Drawing.cs" />
-    <Compile Include="Commands\Draw_FlowChart.cs" />
+    <Compile Include="Commands\Draw_DirectedGraph.cs" />
     <Compile Include="Commands\Get_Master.cs" />
     <Compile Include="Commands\Get_UserDefinedCell.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
