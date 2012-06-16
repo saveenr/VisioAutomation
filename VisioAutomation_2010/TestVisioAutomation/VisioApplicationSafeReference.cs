@@ -25,7 +25,7 @@ namespace TestVisioAutomation
                 {
                     string s = app.Name;
                 }
-                catch (System.Runtime.InteropServices.COMException e)
+                catch (System.Runtime.InteropServices.COMException)
                 {
                     this.app = new IVisio.Application();
                 }

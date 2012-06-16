@@ -26,7 +26,6 @@ namespace TestVisioAutomation
                 v1->v2
                 v4->v2  ";
 
-            List<VA.Connections.DirectedEdge<int, object>> edges;
             var parse = parse_graph(input);
 
             int num_vertices = parse.NameToID.Count();

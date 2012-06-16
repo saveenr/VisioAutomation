@@ -28,7 +28,7 @@ namespace TestVisioAutomation
                 page = layout.Render(doc);
                 page.Delete(0);
             }
-            catch (VA.AutomationException exc)
+            catch (VA.AutomationException)
             {
                 caught = true;
             }
