@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Scripting.FlowChart
+namespace VisioAutomation.Scripting.DirectedGraph
 {
     internal class ShapeInfo
     {

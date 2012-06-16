@@ -1,6 +1,6 @@
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Scripting.FlowChart
+namespace VisioAutomation.Scripting.DirectedGraph
 {
     public static class XmlExtensions
     {

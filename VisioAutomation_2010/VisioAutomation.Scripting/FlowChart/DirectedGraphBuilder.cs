@@ -5,9 +5,9 @@ using VA = VisioAutomation;
 using IVisio= Microsoft.Office.Interop.Visio;
 using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
-namespace VisioAutomation.Scripting.FlowChart
+namespace VisioAutomation.Scripting.DirectedGraph
 {
-    public class FlowChartBuilder
+    public class DirectedGraphBuilder
     {
         public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, string filename)
         {
