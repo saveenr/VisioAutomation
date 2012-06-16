@@ -61,17 +61,6 @@ namespace TestVisioAutomation.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;autolayoutdrawing&gt;
-        ///  &lt;page&gt;
-        ///    &lt;renderoptions
-        ///      usedynamicconnectors=&quot;true&quot;
-        ///      scalingfactor=&quot;20&quot;
-        ///    /&gt;
-        ///    &lt;shapes&gt;
-        ///      &lt;shape id=&quot;n1&quot; label=&quot;FOO1&quot; stencil=&quot;server_u.vss&quot; master=&quot;Server&quot; url=&quot;http://microsoft.com&quot; /&gt;
-        ///      &lt;shape id=&quot;n2&quot; label=&quot;FOO2&quot; stencil=&quot;server_u.vss&quot; master=&quot;Email Server&quot; url=&quot;http://contoso.com&quot;/&gt;
-        ///      &lt;shape id=&quot;n3&quot; label=&quot;FOO3&quot; stencil=&quot;server_u.vss&quot; master=&quot;Proxy Server&quot; url=&quot;\\isotope\public&quot; /&gt;
-        ///      &lt;shape id=&quot;n4&quot; label=&quot;FOO4&quot; stencil=&quot;server_u.vss&quot; mast [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sampleflowchart1 {
             get {
@@ -80,22 +69,6 @@ namespace TestVisioAutomation.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;autolayoutdrawing&gt;
-        ///  &lt;page&gt;
-        ///    
-        ///  &lt;renderoptions
-        ///      usedynamicconnectors=&quot;true&quot;
-        ///      scalingfactor=&quot;20&quot;
-        ///    /&gt;
-        ///  &lt;shapes&gt;
-        ///    &lt;shape id=&quot;n1&quot; label=&quot;8761|Gus&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Process&quot; /&gt;
-        ///    &lt;shape id=&quot;n2&quot; label=&quot;0|ProABCS&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Process&quot; /&gt;
-        ///    &lt;shape id=&quot;n3&quot; label=&quot;ABCS&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Decision&quot; /&gt;
-        ///    &lt;shape id=&quot;n4&quot; label=&quot;Global Underwriting&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Decision&quot; /&gt;
-        ///  &lt;/shapes&gt;
-        ///
-        ///  &lt;connectors&gt;
-        ///    &lt;connector  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sampleflowchart2 {
             get {
@@ -104,22 +77,6 @@ namespace TestVisioAutomation.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;autolayoutdrawing&gt;
-        ///  &lt;page&gt;
-        ///    
-        ///  &lt;renderoptions
-        ///    usedynamicconnectors=&quot;false&quot;
-        ///    scalingfactor=&quot;20&quot;
-        ///    /&gt;
-        ///  &lt;shapes&gt;
-        ///    &lt;shape id=&quot;n1&quot; label=&quot;8761|Gus&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Process&quot; /&gt;
-        ///    &lt;shape id=&quot;n2&quot; label=&quot;0|ProABCS&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Process&quot; /&gt;
-        ///    &lt;shape id=&quot;n3&quot; label=&quot;ABCS&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Data&quot; /&gt;
-        ///    &lt;shape id=&quot;n4&quot; label=&quot;Global Underwriting&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Data&quot; /&gt;
-        ///  &lt;/shapes&gt;
-        ///
-        ///  &lt;connectors&gt;
-        ///    &lt;connector id=&quot;c1&quot;  fr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sampleflowchart3 {
             get {
@@ -128,19 +85,6 @@ namespace TestVisioAutomation.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;autolayoutdrawing&gt;
-        ///  &lt;page&gt;
-        ///
-        ///    &lt;renderoptions
-        ///        usedynamicconnectors=&quot;true&quot;
-        ///        scalingfactor=&quot;5&quot;
-        ///    /&gt;
-        ///  &lt;shapes&gt;
-        ///    &lt;shape id=&quot;n1&quot; label=&quot;Decision1&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Decision&quot; /&gt;
-        ///    &lt;shape id=&quot;n2&quot; label=&quot;Process2&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Process&quot; /&gt;
-        ///    &lt;shape id=&quot;n3&quot; label=&quot;Data3&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Data&quot; /&gt;
-        ///    &lt;shape id=&quot;n4&quot; label=&quot;Porcess4&quot; stencil=&quot;basflo_u.vss&quot; master=&quot;Process&quot; /&gt;
-        ///    &lt;shape id=&quot;n5&quot; label=&quot;Data5&quot; stencil=&quot;basflo_u.vss&quot; mas [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string sampleflowchart4 {
             get {
@@ -149,12 +93,6 @@ namespace TestVisioAutomation.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;orgchart&gt;
-        ///  &lt;shape id=&quot;0&quot; name=&quot;Akuma&quot; /&gt;
-        ///  &lt;shape id=&quot;1&quot; name=&quot;Ryu&quot; parentid=&quot;0&quot;/&gt;
-        ///  &lt;shape id=&quot;2&quot; name=&quot;Ken&quot; parentid=&quot;0&quot;/&gt;
-        ///  &lt;shape id=&quot;3&quot; name=&quot;Chun-Li&quot; parentid=&quot;2&quot;/&gt;
-        ///&lt;/orgchart&gt;.
         /// </summary>
         internal static string sampleorgchart1 {
             get {
@@ -163,8 +101,6 @@ namespace TestVisioAutomation.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos; ?&gt;
-        ///&lt;VisioDocument key=&apos;819C3473406D7B85E75DD5087FBD5DDA90275AB23E709157F99645FB5B7A182D34B7AA0EA9BDAECA0B085495B82312D2BCA656D7AD2D81B533C7AF17990D26C1&apos; start=&apos;190&apos; metric=&apos;0&apos; DocLangID=&apos;1033&apos; buildnum=&apos;4518&apos; version=&apos;12.0&apos; xml:space=&apos;preserve&apos; xmlns:vx=&apos;http://schemas.microsoft.com/visio/2006/extension&apos; xmlns=&apos;http://schemas.microsoft.com/visio/2003/core&apos;&gt;&lt;DocumentProperties&gt;&lt;Creator&gt;esh038&lt;/Creator&gt;&lt;Template&gt;C:\Program Files\Microsoft Office\Office12\1033\NETW_U.VST&lt;/ [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string template_router__vdx {
             get {
@@ -173,7 +109,6 @@ namespace TestVisioAutomation.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;VisioDocument key=&quot;819C3473406D7B85E75DD5087FBD5DDA90275AB23E709157F99645FB5B7A182D34B7AA0EA9BDAECA0B085495B82312D2BCA656D7AD2D81B533C7AF17990D26C1&quot; start=&quot;190&quot; metric=&quot;0&quot; DocLangID=&quot;1033&quot; buildnum=&quot;4518&quot; version=&quot;12.0&quot; xml:space=&quot;preserve&quot; xmlns:vx=&quot;http://schemas.microsoft.com/visio/2006/extension&quot; xmlns=&quot;http://schemas.microsoft.com/visio/2003/core&quot;&gt;&lt;DocumentProperties&gt;&lt;Creator&gt;&lt;/Creator&gt;&lt;Company&gt;&lt;/Company&gt;&lt;BuildNumberCreated&gt;805312791&lt;/BuildNumberCreated&gt;&lt;BuildNumb [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string vdx_with_errors_1_vdx {
             get {
