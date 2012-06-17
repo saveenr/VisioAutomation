@@ -50,7 +50,7 @@ namespace VisioAutomation
                 var doc = docs.OpenEx(filename, flags);
                 return doc;
             }
-            catch (System.Runtime.InteropServices.COMException comexc)
+            catch (System.Runtime.InteropServices.COMException)
             {
                 return null;
             }

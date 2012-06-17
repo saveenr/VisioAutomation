@@ -31,7 +31,6 @@ namespace TestVisioAutomation
         {
             var page = this.GetNewPage();
 
-            IVisio.Shape s1;
             var dom = new VA.DOM.Document();
             var dom_line_0 = dom.DrawLine(1, 1, 3, 3);
             dom.Render(page);
@@ -48,7 +47,6 @@ namespace TestVisioAutomation
         {
             var page = this.GetNewPage();
 
-            IVisio.Shape s1;
             var dom = new VA.DOM.Document();
             var dom_bez_0 = dom.DrawBezier(new double[] {1, 2, 3, 3, 6, 3, 3, 4});
 
@@ -67,7 +65,6 @@ namespace TestVisioAutomation
             var stencil = page.Application.Documents.OpenStencil("basic_u.vss");
             var master1 = stencil.Masters["Rectangle"];
 
-            IVisio.Shape s1;
             var dom = new VA.DOM.Document();
             var dom_master_0 = dom.Drop(master1, 3, 3);
             var dom_master_1 = dom.Drop("Rectangle", "basic_u.vss", 5, 5);
@@ -91,7 +88,6 @@ namespace TestVisioAutomation
             var stencil = page.Application.Documents.OpenStencil("basic_u.vss");
             var master1 = stencil.Masters["Rectangle"];
 
-            IVisio.Shape s1;
             var dom = new VA.DOM.Document();
             var dom_master_0 = dom.Drop(master1, 3, 3);
             var dom_bez_0 = dom.DrawBezier(new double[] {1, 2, 3, 3, 6, 3, 3, 4});
@@ -156,11 +152,10 @@ namespace TestVisioAutomation
             {
                 dom.Render(page);
             }
-            catch (VA.AutomationException exc)
+            catch (VA.AutomationException)
             {
                 caught = true;
             }
-
 
             if (caught == false)
             {
@@ -184,11 +179,10 @@ namespace TestVisioAutomation
             {
                 dom.Render(page);
             }
-            catch (VA.AutomationException exc)
+            catch (VA.AutomationException)
             {
                 caught = true;
             }
-
 
             if (caught == false)
             {

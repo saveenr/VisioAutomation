@@ -59,7 +59,7 @@ namespace VisioAutomation.Text
                 var font = fonts[name];
                 return font;
             }
-            catch (System.Runtime.InteropServices.COMException comexc)
+            catch (System.Runtime.InteropServices.COMException)
             {
                 return null;
             }

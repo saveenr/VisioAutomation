@@ -65,7 +65,7 @@ namespace VisioAutomation.UI
                     double _val = 1.0;
                     var c0 = VisioAutomation.UI.ColorUtil.HSVToSystemDrawingColor(h, _sat, _val);
                     var rgb = c0.R << 16 | c0.G << 8 | c0.B;
-                    var c2 = System.Drawing.Color.FromArgb((int)(0xff000000 | rgb));
+                    var c2 = System.Drawing.Color.FromArgb((int)((uint)0xff000000 | (uint)rgb));
                     using (var p = new System.Drawing.Pen(c2))
                     {
                         gfx.DrawLine(p, x, 0, x, bitmap.Height);

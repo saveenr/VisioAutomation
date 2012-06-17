@@ -119,9 +119,6 @@ namespace TestVisioAutomation
             {
                 string message = string.Format(" didn't find in src constants " + string.Join(",", unfound));
             }
-
-
-            int x = 1;
         }
 
         [TestMethod]

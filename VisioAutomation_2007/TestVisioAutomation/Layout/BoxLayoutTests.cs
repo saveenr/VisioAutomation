@@ -176,14 +176,12 @@ namespace TestVisioAutomation
 
             root.Padding = 1.0;
             layout.PerformLayout();
-            double delta = 0.00000001;
 
             var doc = draw_layout(layout);
 
+            //double delta = 0.00000001;
             //AssertX.AreEqual(1, 2, 2, 4, n1.Rectangle, delta);
-
             //AssertX.AreEqual(2, 1, 4, 4, n2.Rectangle, delta);
-
         }
 
     }
