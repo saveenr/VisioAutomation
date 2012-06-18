@@ -240,7 +240,7 @@ namespace VisioPowerTools2010
                 {
                     System.IO.Directory.CreateDirectory(cur_destfolder);
                 }
-                catch (System.IO.IOException exc)
+                catch (System.IO.IOException)
                 {
                     this.log("Failed to create directory \"{0}\"", cur_destfolder);
                     throw;
