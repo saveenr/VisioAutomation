@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>VisioCSharpSamples</id>
+    <version>1.0</version>
+    <authors>Saveen Reddy</authors>
+    <owners>Saveen Reddy</owners>
+    <projectUrl>http://visioautomation.codeplex.com</projectUrl>
+    <iconUrl>http://visioautomation.codeplex.com</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Visio C# Samples</description>
+    <releaseNotes>
+    </releaseNotes>
+    <copyright></copyright>
+    <tags></tags>
+    <dependencies>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.Office.Interop.Visio"/>
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="Packaging\lib\**" target="lib" />
+    <file src="Packaging\tools\**" target="tools" />
+    <file src="Packaging\content\**" target="content" />
+  </files>
+</package>

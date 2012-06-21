@@ -1,0 +1,6 @@
+$version = "1.0"
+$global:url="https://www.nuget.org"
+$global:version = "1.0.3"
+$global:packagefilename = "VisioCSharpSamples." + $global:version + ".nupkg"
+$global:localfeed ="D:\saveenr\live-mesh\code\mynugetfeed" 
+$global:outputfolder ="Output" 
