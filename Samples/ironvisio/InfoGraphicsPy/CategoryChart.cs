@@ -14,7 +14,6 @@ namespace InfoGraphicsPy
         public string ShapeText ;
         public VA.DOM.ShapeCells Cells;
         public bool Underline;
-        public bool FitWidthToParent;
     }
 
     public class CategoryChart
@@ -172,15 +171,12 @@ namespace InfoGraphicsPy
             info.ShapeText = ycats[row];
             info.Cells = ycatformat;
             info.Underline = true;
-            info.FitWidthToParent = true;
             n_row_label.Data = info;
         }
 
         private BL.BoxLayout create_layout(out BL.Container root)
         {
             var layout = new BL.BoxLayout();
-            //layout.LayoutOptions.Origin = new VA.Drawing.Point(0, 10);
-            // layout.LayoutOptions.DefaultHeight = 0.25;
             layout.Root = new BL.Container(BL.Direction.TopToBottom);
             root = layout.Root;
             return layout;
@@ -193,7 +189,6 @@ namespace InfoGraphicsPy
             node_data.CategoryCell = null;
             node_data.ShapeText = this.Title;
             node_data.Cells = titleformat;
-            node_data.FitWidthToParent = true;
             n_title.Data = node_data;
         }
 
@@ -238,11 +233,6 @@ namespace InfoGraphicsPy
                 {
                     var r = n.Rectangle;
                     var n_data = (RenderItem) n.Data;
-                    if (n_data.FitWidthToParent == true)
-                    {
-                       r = new VA.Drawing.Rectangle(r.LowerLeft, new VA.Drawing.Size(n.Parent.Size.Width-2,r.Height));
-                    }
-
                     var s = dom.DrawRectangle(r);
 
                     // Set Text

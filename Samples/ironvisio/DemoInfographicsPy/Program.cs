@@ -72,7 +72,7 @@ Basics, Setup,Updated Splash Screen,
 Basics, Supportability,Logging During Batch,
 
 ";
-            var chart7 = IG.CategoryChart.FromCSV("PHDDraw Feature Map",text);
+            var chart7 = IG.CategoryChart.FromCSV("VizDraw Feature Map",text);
             chart7.ToUpper = true;
 
             chart7.Render(session.Page);
