@@ -2,17 +2,18 @@
 <package >
   <metadata>
     <id>VisioCSharpSamples</id>
-    <version>1.0</version>
+    <version>1.0.4</version>
     <authors>Saveen Reddy</authors>
     <owners>Saveen Reddy</owners>
     <projectUrl>http://visioautomation.codeplex.com</projectUrl>
     <iconUrl>http://visioautomation.codeplex.com</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Visio C# Samples</description>
+    <description>This is a collection of C# samples for automating Visio 2010 using Visual Studio 2010</description>
     <releaseNotes>
+	Updated package description.
     </releaseNotes>
     <copyright></copyright>
-    <tags></tags>
+    <tags>Visio</tags>
     <dependencies>
     </dependencies>
     <frameworkAssemblies>
@@ -24,4 +25,4 @@
     <file src="Packaging\tools\**" target="tools" />
     <file src="Packaging\content\**" target="content" />
   </files>
-</package>
+</package> 
