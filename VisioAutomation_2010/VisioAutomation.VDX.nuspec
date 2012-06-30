@@ -1,0 +1,23 @@
+<package >
+  <metadata>
+    <id>VisioAutomation.VDX</id>
+    <version>1.0.0.0</version>
+    <authors>saveenr</authors>
+    <owners>saveenr</owners>
+    <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
+    <projectUrl>http://visioautomation.codeplex.com</projectUrl>
+    <iconUrl>http://visioautomation.codplex.com</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>VisioAutomation.VDX</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags></tags>
+    <dependencies>
+    </dependencies>
+    <frameworkAssemblies>
+    </frameworkAssemblies>  
+  </metadata>
+  <files>
+    <file src="VisioAutomation.VDX\bin\debug\*.dll" target="lib\net40"/>
+  </files>
+</package>
