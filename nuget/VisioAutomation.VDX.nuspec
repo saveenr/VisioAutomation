@@ -1,23 +1,23 @@
 <package >
   <metadata>
     <id>VisioAutomation.VDX</id>
-    <version>1.0.0.0</version>
+    <version>1.0.2</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
     <projectUrl>http://visioautomation.codeplex.com</projectUrl>
     <iconUrl>http://visioautomation.codplex.com</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>VisioAutomation.VDX</description>
+    <description>VisioAutomation.VDX helps create Visio diagrams using the VDX file format. It does not require a running instance of Visio and is useful for server-side diagram creation.</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2012</copyright>
-    <tags></tags>
+    <tags>Visio VDX</tags>
     <dependencies>
     </dependencies>
     <frameworkAssemblies>
     </frameworkAssemblies>  
   </metadata>
   <files>
-    <file src="VisioAutomation.VDX\bin\debug\*.dll" target="lib\net40"/>
+    <file src="..\VisioAutomation_2010\VisioAutomation.VDX\bin\debug\*.dll" target="lib\net40"/>
   </files>
 </package>

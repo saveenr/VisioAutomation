@@ -1,17 +1,19 @@
 <package >
   <metadata>
-    <id>VisioAutomation2010</id>
-    <version>1.0.0.0</version>
+    <id>VisioAutomation2007</id>
+    <version>4.0.6</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
     <projectUrl>http://visioautomation.codeplex.com</projectUrl>
     <iconUrl>http://visioautomation.codplex.com</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Visio Automation 2010 </description>
+    <description>VisioAutomation helps developers to control Visio from .NET languages. 
+It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
+</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2012</copyright>
-    <tags></tags>
+    <tags>Visio</tags>
     <dependencies>
     </dependencies>
     <frameworkAssemblies>
@@ -19,6 +21,6 @@
     </frameworkAssemblies>  
   </metadata>
   <files>
-    <file src="VisioAutomation\bin\debug\*.dll" target="lib\net40"/>
+    <file src="..\VisioAutomation_2007\VisioAutomation\bin\debug\*.dll" target="lib\net40"/>
   </files>
 </package>
