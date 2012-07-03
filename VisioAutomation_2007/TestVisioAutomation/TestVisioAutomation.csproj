@@ -177,10 +177,6 @@
       <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
       <Name>VisioAutomation.Scripting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation.VDX\VisioAutomation.VDX.csproj">
-      <Project>{A2BD039F-38EB-4E19-A1A4-8E6730CBC4E9}</Project>
-      <Name>VisioAutomation.VDX</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
