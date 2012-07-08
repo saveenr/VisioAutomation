@@ -150,13 +150,13 @@ namespace VisioAutomation.Layout.MSAGL
             using (var perfscope = new VA.Application.PerfScope(app))
             {
                 var vdoc_PageSettings = new VA.DOM.PageSettings();
-                vdoc_PageSettings.Size = this.layout_bb.Size;
                 vdoc_PageSettings.PageCells.PlaceStyle = 1;
                 vdoc_PageSettings.PageCells.RouteStyle = 5;
                 vdoc_PageSettings.PageCells.AvenueSizeX = 2.0;
                 vdoc_PageSettings.PageCells.AvenueSizeY = 2.0;
                 vdoc_PageSettings.PageCells.LineRouteExt = 2;
                 vdoc_PageSettings.Apply(page);
+                page.SetSize(this.layout_bb.Size);
 
                 dom_doc.Render(page);                    
             }
