@@ -149,15 +149,20 @@ namespace VisioAutomation.Layout.MSAGL
 
             using (var perfscope = new VA.Application.PerfScope(app))
             {
-                var vdoc_PageSettings = new VA.DOM.PageSettings();
-                vdoc_PageSettings.PageCells.PlaceStyle = 1;
-                vdoc_PageSettings.PageCells.RouteStyle = 5;
-                vdoc_PageSettings.PageCells.AvenueSizeX = 2.0;
-                vdoc_PageSettings.PageCells.AvenueSizeY = 2.0;
-                vdoc_PageSettings.PageCells.LineRouteExt = 2;
-                vdoc_PageSettings.Apply(page);
+                // Setup the page
+                var pagecells = new VA.Pages.PageCells();
+                pagecells.PlaceStyle = 1;
+                pagecells.RouteStyle = 5;
+                pagecells.AvenueSizeX = 2.0;
+                pagecells.AvenueSizeY = 2.0;
+                pagecells.LineRouteExt = 2;
+                var page_sheet = page.PageSheet;
+                var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+                pagecells.Apply(update, (short)page_sheet.ID);
+                update.Execute(page);
                 page.SetSize(this.layout_bb.Size);
 
+                // render the shapes to the page
                 dom_doc.Render(page);                    
             }
 

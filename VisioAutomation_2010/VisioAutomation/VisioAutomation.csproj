@@ -177,7 +177,6 @@
     <Compile Include="DOM\Connector.cs" />
     <Compile Include="Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
-    <Compile Include="DOM\PageSettings.cs" />
     <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
