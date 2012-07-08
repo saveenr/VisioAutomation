@@ -7,7 +7,6 @@ namespace VisioAutomation.DOM
     public class PageSettings
     {
         public Drawing.Size? Size { get; set; }
-        public string Name { get; set; }
         public PageCells PageCells { get; set; }
 
         public PageSettings()
@@ -28,12 +27,6 @@ namespace VisioAutomation.DOM
 
         public void Apply(IVisio.Page page)
         {
-            if (page.Name !=null)
-            {
-                page.Name = this.Name;
-                
-            }
-
             if (this.Size.HasValue)
             {
                 page.SetSize(this.Size.Value);

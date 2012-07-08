@@ -63,10 +63,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            int rounding = 0;
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
-            var src_charstyle = VA.ShapeSheet.SRCConstants.Char_Style;
 
             using (var undoscope = application.CreateUndoScope())
             {
