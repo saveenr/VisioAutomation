@@ -121,7 +121,7 @@ namespace VisioAutomationSamples
 
             var page = doc.Pages.Add();
 
-            var dom = new VA.DOM.Document();
+            var dom = new VA.DOM.ShapeCollection();
 
             foreach (var node in layout.Nodes)
             {
@@ -172,7 +172,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var dom = new VA.DOM.Document();
+                var dom = new VA.DOM.ShapeCollection();
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {
@@ -234,7 +234,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var dom = new VA.DOM.Document();
+                var dom = new VA.DOM.ShapeCollection();
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {

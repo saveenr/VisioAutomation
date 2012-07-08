@@ -39,11 +39,11 @@ namespace TestVisioAutomation
             var app = this.GetVisioApplication();
 
             var doc1 = new VA.DOM.Document();
-            doc1.PageSettings.Size = new VA.Drawing.Size(5,5);
 
             var visdoc = this.GetNewDoc();
             Assert.AreEqual(1, visdoc.Pages.Count);
 
+            app.ActivePage.SetSize(new VA.Drawing.Size(5, 5));
             doc1.Render(app.ActivePage);
 
             Assert.AreEqual(1, visdoc.Pages.Count);
@@ -57,7 +57,6 @@ namespace TestVisioAutomation
         {
             // Create the doc
             var vdoc = new VA.DOM.Document();
-            vdoc.PageSettings.Size = new VA.Drawing.Size(10,10);
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
             vrect1.Cells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
@@ -66,6 +65,7 @@ namespace TestVisioAutomation
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
+            app.ActivePage.SetSize(new VA.Drawing.Size(10, 10));
             vdoc.Render(app.ActivePage);
 
             // Verify

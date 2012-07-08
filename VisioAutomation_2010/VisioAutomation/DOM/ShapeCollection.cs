@@ -9,12 +9,12 @@ namespace VisioAutomation.DOM
     public class Document : Node
     {
         public NodeList<BaseShape> Shapes { get; private set; }
-        public PageSettings PageSettings { get; set; }
+        //public PageSettings PageSettings { get; set; }
 
         public Document()
         {
             this.Shapes = new NodeList<BaseShape>(this);
-            this.PageSettings = new PageSettings(8.5, 11);
+            //this.PageSettings = new PageSettings(8.5, 11);
         }
 
         public void Render(IVisio.Page page)
@@ -121,16 +121,11 @@ namespace VisioAutomation.DOM
 
         private void PrepareForDrawing(RenderContext ctx)
         {
-// Resolve all the masters
+            // Resolve all the masters
             ResolveMasters(ctx);
 
             // Resolve all the Character Font Name Cells
             ResolveFonts(ctx);
-
-            // ----------------------------------------
-            // Handle the initial page settings
-            // Set the page properties before the rest of the shapes are dropped
-            initialize_page(ctx);
         }
 
         private void ResolveFonts(RenderContext ctx)
@@ -171,19 +166,6 @@ namespace VisioAutomation.DOM
 
         }
 
-        private void initialize_page(RenderContext ctx)
-        {
-            ctx.VisioPage.Name = this.PageSettings.Name;
-            if (this.PageSettings.Size.HasValue)
-            {
-                ctx.VisioPage.SetSize(this.PageSettings.Size.Value);
-            }
-            var page_sheet = ctx.VisioPage.PageSheet;
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-            this.PageSettings.PageCells.Apply(update, (short) page_sheet.ID);
-            update.Execute(ctx.VisioPage);
-        }
 
         private void check_valid_shape_ids()
         {

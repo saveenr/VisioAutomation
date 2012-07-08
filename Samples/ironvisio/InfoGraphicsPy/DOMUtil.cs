@@ -11,7 +11,7 @@ namespace InfoGraphicsPy
 {
     internal static class DOMUtil
     {
-        public static List<VA.DOM.BaseShape> DrawOvals(VA.DOM.Document dom, IList<VA.Drawing.Rectangle> rects)
+        public static List<VA.DOM.BaseShape> DrawOvals(VA.DOM.ShapeCollection dom, IList<VA.Drawing.Rectangle> rects)
         {
             var dom_shapes = new List<VA.DOM.BaseShape>();
             foreach (var rect in rects)
@@ -25,7 +25,7 @@ namespace InfoGraphicsPy
             return dom_shapes;
         }
 
-        public static List<VA.DOM.Shape> DrawRects(VA.DOM.Document dom, IList<VA.Drawing.Rectangle> rects, IVisio.Master rectmaster)
+        public static List<VA.DOM.Shape> DrawRects(VA.DOM.ShapeCollection dom, IList<VA.Drawing.Rectangle> rects, IVisio.Master rectmaster)
         {
             var dom_shapes = new List<VA.DOM.Shape>();
             foreach (var rect in rects)
@@ -42,7 +42,7 @@ namespace InfoGraphicsPy
         public static List<IVisio.Shape> DrawRects(IList<VA.Drawing.Rectangle> rects, IVisio.Master rectmaster, IVisio.Page page)
         {
             var dom_shapes = new List<VA.DOM.Shape>();
-            var dom = new VA.DOM.Document();
+            var dom = new VA.DOM.ShapeCollection();
             foreach (var rect in rects)
             {
                 var dom_shape = dom.Drop(rectmaster, rect.Center);

@@ -16,7 +16,7 @@ namespace TestVisioAutomation
             var page = this.GetNewPage();
 
             var dom = new VA.DOM.Document();
-            dom.PageSettings.Size = new VA.Drawing.Size(5, 5);
+            page.SetSize(new VA.Drawing.Size(5, 5));
             dom.Render(page);
 
             Assert.AreEqual(0, page.Shapes.Count);

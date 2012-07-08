@@ -172,7 +172,7 @@ namespace VisioPowerTools2010
             var doc = docs.Add("");
             var page = doc.Pages[1];
 
-            var dom = new VA.DOM.Document();
+            var dom = new VA.DOM.ShapeCollection();
             double y = 8;
             double col0_w = 3.0;
             double col0_x = 0;

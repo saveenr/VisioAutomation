@@ -75,7 +75,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var dc_master = stencil.Masters["Dynamic Connector"];
             var doc = documents.AddEx(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS, 0, 0);
 
-            var vdom = new VA.DOM.Document();
+            var vdom = new VA.DOM.ShapeCollection();
             
             // fixup the nodes so that they render on the page
             foreach (var i in treenodes)

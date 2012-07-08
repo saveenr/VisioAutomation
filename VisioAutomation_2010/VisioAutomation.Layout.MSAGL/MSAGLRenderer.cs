@@ -149,6 +149,15 @@ namespace VisioAutomation.Layout.MSAGL
 
             using (var perfscope = new VA.Application.PerfScope(app))
             {
+                var vdoc_PageSettings = new VA.DOM.PageSettings();
+                vdoc_PageSettings.Size = this.layout_bb.Size;
+                vdoc_PageSettings.PageCells.PlaceStyle = 1;
+                vdoc_PageSettings.PageCells.RouteStyle = 5;
+                vdoc_PageSettings.PageCells.AvenueSizeX = 2.0;
+                vdoc_PageSettings.PageCells.AvenueSizeY = 2.0;
+                vdoc_PageSettings.PageCells.LineRouteExt = 2;
+                vdoc_PageSettings.Apply(page);
+
                 dom_doc.Render(page);                    
             }
 
@@ -233,12 +242,7 @@ namespace VisioAutomation.Layout.MSAGL
 
             var vdoc = new VA.DOM.Document();
 
-            vdoc.PageSettings.Size = this.layout_bb.Size;
-            vdoc.PageSettings.PageCells.PlaceStyle = 1;
-            vdoc.PageSettings.PageCells.RouteStyle = 5;
-            vdoc.PageSettings.PageCells.AvenueSizeX = 2.0;
-            vdoc.PageSettings.PageCells.AvenueSizeY = 2.0;
-            vdoc.PageSettings.PageCells.LineRouteExt = 2;
+
 
             var active_window = vis.ActiveWindow;
             active_window.ShowConnectPoints = VA.Convert.BoolToShort(!this.LayoutOptions.HideConnectionPoints);

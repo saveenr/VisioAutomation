@@ -113,7 +113,7 @@ namespace VisioAutomationSamples
             var page = app.ActivePage;
 
 
-            var dom = new VA.DOM.Document();
+            var dom = new VA.DOM.ShapeCollection();
             //var rect_master = dom.m
             foreach (var item in layout1.Nodes)
             {
