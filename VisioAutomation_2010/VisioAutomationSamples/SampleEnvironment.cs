@@ -30,7 +30,7 @@ namespace VisioAutomationSamples
                         // try to do something simple, read-only, and fast with the application object
                         var app_version = app.Version;
                     }
-                    catch (System.Runtime.InteropServices.COMException ce)
+                    catch (System.Runtime.InteropServices.COMException)
                     {
                         // If a COMException is thrown, this indicates that the
                         // application object is invalid, so create a new one

@@ -226,7 +226,6 @@ namespace VisioAutomationSamples
 
             double w = 2.0;
             double h = 1;
-            double th = 1;
 
             int chunksize = 12;
             var chunks = LinqUtil.Split(samplechars, chunksize);

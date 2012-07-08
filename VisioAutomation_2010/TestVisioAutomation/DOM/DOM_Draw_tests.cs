@@ -26,7 +26,7 @@ namespace TestVisioAutomation
             // Rendering a DOM should not change the page count
             // Empty DOMs do not add any shapes
             var app = this.GetVisioApplication();
-            var doc1 = new VA.DOM.Document();
+            var doc1 = new VA.DOM.ShapeCollection();
             var doc = this.GetNewDoc();
             doc1.Render(app.ActivePage);
             Assert.AreEqual(0,app.ActivePage.Shapes.Count);
@@ -38,7 +38,7 @@ namespace TestVisioAutomation
         {
             var app = this.GetVisioApplication();
 
-            var doc1 = new VA.DOM.Document();
+            var doc1 = new VA.DOM.ShapeCollection();
 
             var visdoc = this.GetNewDoc();
             Assert.AreEqual(1, visdoc.Pages.Count);
@@ -56,7 +56,7 @@ namespace TestVisioAutomation
         public void Draw_Red_Rectangle_With_Text()
         {
             // Create the doc
-            var vdoc = new VA.DOM.Document();
+            var vdoc = new VA.DOM.ShapeCollection();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
             vrect1.Cells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
@@ -85,7 +85,7 @@ namespace TestVisioAutomation
             var rectmaster = stencil.Masters["Rectangle"];
 
             // Create the doc
-            var vdoc = new VA.DOM.Document();
+            var vdoc = new VA.DOM.ShapeCollection();
             
             vdoc.DrawRectangle(0, 0, 1, 1);
             vdoc.Drop(rectmaster, 3, 3);
@@ -99,7 +99,7 @@ namespace TestVisioAutomation
         public void Set_Custom_Props()
         {
             // Create the doc
-            var vdoc = new VA.DOM.Document();
+            var vdoc = new VA.DOM.ShapeCollection();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
 

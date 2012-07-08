@@ -226,7 +226,7 @@ namespace InfoGraphicsPy
             var default_font = fonts[this.Font];
             int default_font_id = default_font.ID;
             // Perform Rendering
-            var dom = new VA.DOM.Document();
+            var dom = new VA.DOM.ShapeCollection();
             foreach (var n in layout.Nodes)
             {
                 if (n.Data != null)

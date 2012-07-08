@@ -234,13 +234,13 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        public VA.DOM.Document CreateDOMDocument(DGMODEL.Drawing layout_diagram, IVisio.Application vis)
+        public VA.DOM.ShapeCollection CreateDOMDocument(DGMODEL.Drawing layout_diagram, IVisio.Application vis)
         {
             ResolveMasters(layout_diagram, vis);
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
 
-            var vdoc = new VA.DOM.Document();
+            var vdoc = new VA.DOM.ShapeCollection();
 
 
 
@@ -262,7 +262,7 @@ namespace VisioAutomation.Layout.MSAGL
             return vdoc;
         }
 
-        private void CreateDOMShapes(VA.DOM.Document dom_doc, MG.GeometryGraph msagl_graph, IVisio.Application app)
+        private void CreateDOMShapes(VA.DOM.ShapeCollection dom_doc, MG.GeometryGraph msagl_graph, IVisio.Application app)
         {
             var node_centerpoints = msagl_graph.NodeMap.Values
                     .Select(n => ToDocumentCoordinates(MSAGLUtil.ToVAPoint(n.Center)))
@@ -321,7 +321,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private void CreateBezierEdges(VA.DOM.Document vdoc, MG.GeometryGraph msagl_graph)
+        private void CreateBezierEdges(VA.DOM.ShapeCollection vdoc, MG.GeometryGraph msagl_graph)
         {
 // DRAW EDGES WITH BEZIERS 
             foreach (var msagl_edge in msagl_graph.Edges)
@@ -360,7 +360,7 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        private void CreateDynamicConnectorEdges(VA.DOM.Document vdoc, MG.GeometryGraph msagl_graph)
+        private void CreateDynamicConnectorEdges(VA.DOM.ShapeCollection vdoc, MG.GeometryGraph msagl_graph)
         {
 // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
@@ -437,7 +437,7 @@ namespace VisioAutomation.Layout.MSAGL
         }
 
         private VA.DOM.BezierCurve draw_edge_bezier(
-            VA.DOM.Document page,
+            VA.DOM.ShapeCollection page,
                                             DGMODEL.Connector fc,
                                             MG.Edge edge)
         {

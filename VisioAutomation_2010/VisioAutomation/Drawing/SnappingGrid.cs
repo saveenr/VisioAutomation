@@ -34,8 +34,6 @@ namespace VisioAutomation.Drawing
 
         public VA.Drawing.Point Snap(double x, double y)
         {
-            double ox;
-            double oy;
             this.SnapXY(x, y, out x, out y);
             return new VA.Drawing.Point(x, y);
         }

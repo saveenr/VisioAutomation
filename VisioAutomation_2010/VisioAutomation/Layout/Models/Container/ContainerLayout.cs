@@ -118,8 +118,6 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
             var pages = doc.Pages;
             var page = pages.Add();
 
-            IVisio.Master special_container_master=null;
-
             // load the stencil used to draw the items
             var item_stencil = docs.OpenStencil(this.LayoutOptions.ManualItemStencil);
             var item_stencil_masters = item_stencil.Masters;

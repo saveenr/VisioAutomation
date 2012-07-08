@@ -6,15 +6,13 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.DOM
 {
-    public class Document : Node
+    public class ShapeCollection : Node
     {
         public NodeList<BaseShape> Shapes { get; private set; }
-        //public PageSettings PageSettings { get; set; }
 
-        public Document()
+        public ShapeCollection()
         {
             this.Shapes = new NodeList<BaseShape>(this);
-            //this.PageSettings = new PageSettings(8.5, 11);
         }
 
         public void Render(IVisio.Page page)
