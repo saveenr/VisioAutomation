@@ -42,16 +42,16 @@ namespace InfoGraphicsPy
         public static List<IVisio.Shape> DrawRects(IList<VA.Drawing.Rectangle> rects, IVisio.Master rectmaster, IVisio.Page page)
         {
             var dom_shapes = new List<VA.DOM.Shape>();
-            var dom = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
             foreach (var rect in rects)
             {
-                var dom_shape = dom.Drop(rectmaster, rect.Center);
+                var dom_shape = domshapescol.Drop(rectmaster, rect.Center);
                 dom_shape.Cells.Width = rect.Width;
                 dom_shape.Cells.Height = rect.Height;
                 dom_shapes.Add(dom_shape);
             }
 
-            dom.Render(page);
+            domshapescol.Render(page);
 
             var shapes = new List<IVisio.Shape>();
             foreach (var dom_shape in dom_shapes)

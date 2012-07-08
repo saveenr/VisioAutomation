@@ -245,7 +245,7 @@ namespace VisioAutomation.Layout.MSAGL
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
 
-            var vdoc = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
 
 
 
@@ -253,18 +253,18 @@ namespace VisioAutomation.Layout.MSAGL
             active_window.ShowConnectPoints = VA.Convert.BoolToShort(!this.LayoutOptions.HideConnectionPoints);
             active_window.ShowGrid = VA.Convert.BoolToShort(this.LayoutOptions.HideGrid);
 
-            CreateDOMShapes(vdoc, msagl_graph, vis);
+            CreateDOMShapes(domshapescol, msagl_graph, vis);
 
             if (this.LayoutOptions.UseDynamicConnectors)
             {
-                CreateDynamicConnectorEdges(vdoc, msagl_graph);
+                CreateDynamicConnectorEdges(domshapescol, msagl_graph);
             }
             else
             {
-                CreateBezierEdges(vdoc, msagl_graph);
+                CreateBezierEdges(domshapescol, msagl_graph);
             }
 
-            return vdoc;
+            return domshapescol;
         }
 
         private void CreateDOMShapes(VA.DOM.ShapeCollection dom_doc, MG.GeometryGraph msagl_graph, IVisio.Application app)

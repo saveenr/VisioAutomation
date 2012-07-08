@@ -30,9 +30,9 @@ namespace TestVisioAutomation
         {
             var page = this.GetNewPage();
 
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_line_0 = dom.DrawLine(1, 1, 3, 3);
-            dom.Render(page);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_line_0 = domshapescol.DrawLine(1, 1, 3, 3);
+            domshapescol.Render(page);
 
             Assert.AreEqual(1, page.Shapes.Count);
             Assert.AreNotEqual(0, dom_line_0.VisioShapeID);
@@ -46,10 +46,10 @@ namespace TestVisioAutomation
         {
             var page = this.GetNewPage();
 
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_bez_0 = dom.DrawBezier(new double[] {1, 2, 3, 3, 6, 3, 3, 4});
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_bez_0 = domshapescol.DrawBezier(new double[] {1, 2, 3, 3, 6, 3, 3, 4});
 
-            dom.Render(page);
+            domshapescol.Render(page);
 
             Assert.AreEqual(1, page.Shapes.Count);
             Assert.AreNotEqual(0, dom_bez_0.VisioShapeID);
@@ -64,11 +64,11 @@ namespace TestVisioAutomation
             var stencil = page.Application.Documents.OpenStencil("basic_u.vss");
             var master1 = stencil.Masters["Rectangle"];
 
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_master_0 = dom.Drop(master1, 3, 3);
-            var dom_master_1 = dom.Drop("Rectangle", "basic_u.vss", 5, 5);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_master_0 = domshapescol.Drop(master1, 3, 3);
+            var dom_master_1 = domshapescol.Drop("Rectangle", "basic_u.vss", 5, 5);
 
-            dom.Render(page);
+            domshapescol.Render(page);
 
             Assert.AreEqual(2, page.Shapes.Count);
 
@@ -87,16 +87,16 @@ namespace TestVisioAutomation
             var stencil = page.Application.Documents.OpenStencil("basic_u.vss");
             var master1 = stencil.Masters["Rectangle"];
 
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_master_0 = dom.Drop(master1, 3, 3);
-            var dom_bez_0 = dom.DrawBezier(new double[] {1, 2, 3, 3, 6, 3, 3, 4});
-            var dom_line_0 = dom.DrawLine(1, 1, 3, 3);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_master_0 = domshapescol.Drop(master1, 3, 3);
+            var dom_bez_0 = domshapescol.DrawBezier(new double[] {1, 2, 3, 3, 6, 3, 3, 4});
+            var dom_line_0 = domshapescol.DrawLine(1, 1, 3, 3);
 
             dom_master_0.Cells.LineWeight = 0.1;
             dom_bez_0.Cells.LineWeight = 0.3;
             dom_line_0.Cells.LineWeight = 0.5;
 
-            dom.Render(page);
+            domshapescol.Render(page);
 
             Assert.AreEqual(3, page.Shapes.Count);
             page.Delete(0);
@@ -110,12 +110,12 @@ namespace TestVisioAutomation
             var master1 = stencil.Masters["Rectangle"];
             var master2 = stencil.Masters["Dynamic Connector"];
 
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_master_0 = dom.Drop(master1, 3, 3);
-            var dom_master_1 = dom.Drop(master1, 6, 5);
-            var dc = dom.Connect(master2, dom_master_0, dom_master_1);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_master_0 = domshapescol.Drop(master1, 3, 3);
+            var dom_master_1 = domshapescol.Drop(master1, 6, 5);
+            var dc = domshapescol.Connect(master2, dom_master_0, dom_master_1);
 
-            dom.Render(page);
+            domshapescol.Render(page);
 
             Assert.AreEqual(3, page.Shapes.Count);
 
@@ -126,12 +126,12 @@ namespace TestVisioAutomation
         public void ConnectDeferred()
         {
             var page = this.GetNewPage();
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_master_0 = dom.Drop("Rectangle", "basic_u.vss", 3, 3);
-            var dom_master_1 = dom.Drop("Rectangle", "basic_u.vss", 6, 5);
-            var dc = dom.Connect("Dynamic Connector", "basic_u.vss", dom_master_0, dom_master_1);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_master_0 = domshapescol.Drop("Rectangle", "basic_u.vss", 3, 3);
+            var dom_master_1 = domshapescol.Drop("Rectangle", "basic_u.vss", 6, 5);
+            var dc = domshapescol.Connect("Dynamic Connector", "basic_u.vss", dom_master_0, dom_master_1);
 
-            dom.Render(page);
+            domshapescol.Render(page);
 
             Assert.AreEqual(3, page.Shapes.Count);
 
@@ -143,13 +143,13 @@ namespace TestVisioAutomation
         public void DropUnknownMaster()
         {
             var page = this.GetNewPage();
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_master_0 = dom.Drop("RectangleXXX", "basic_u.vss", 3, 3);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_master_0 = domshapescol.Drop("RectangleXXX", "basic_u.vss", 3, 3);
 
             bool caught = false;
             try
             {
-                dom.Render(page);
+                domshapescol.Render(page);
             }
             catch (VA.AutomationException)
             {
@@ -171,13 +171,13 @@ namespace TestVisioAutomation
         public void DropUnknownStencil()
         {
             var page = this.GetNewPage();
-            var dom = new VA.DOM.ShapeCollection();
-            var dom_master_0 = dom.Drop("RectangleXXX", "basic_uXXX.vss", 3, 3);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var dom_master_0 = domshapescol.Drop("RectangleXXX", "basic_uXXX.vss", 3, 3);
 
             bool caught = false;
             try
             {
-                dom.Render(page);
+                domshapescol.Render(page);
             }
             catch (VA.AutomationException)
             {
@@ -220,16 +220,16 @@ namespace TestVisioAutomation
         public void VerifyDropVersusDraw2()
         {
             var page = this.GetNewPage();
-            var dom = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
             var rect0 = new VA.Drawing.Rectangle(3, 4, 7, 8);
             var rect1 = new VA.Drawing.Rectangle(8, 1, 9, 5);
-            var dropped_shape0 = dom.Drop("Rectangle", "basic_u.vss", rect0);
-            var drawn_shape0 = dom.DrawRectangle(rect0);
+            var dropped_shape0 = domshapescol.Drop("Rectangle", "basic_u.vss", rect0);
+            var drawn_shape0 = domshapescol.DrawRectangle(rect0);
 
-            var dropped_shape1 = dom.Drop("Rectangle", "basic_u.vss", rect1);
-            var drawn_shape1 = dom.DrawRectangle(rect1);
+            var dropped_shape1 = domshapescol.Drop("Rectangle", "basic_u.vss", rect1);
+            var drawn_shape1 = domshapescol.DrawRectangle(rect1);
 
-            dom.Render(page);
+            domshapescol.Render(page);
 
             var xfrms = VA.Layout.LayoutHelper.GetXForm(page,
                                                         new int[] { dropped_shape0.VisioShapeID, 

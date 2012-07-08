@@ -75,7 +75,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var dc_master = stencil.Masters["Dynamic Connector"];
             var doc = documents.AddEx(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS, 0, 0);
 
-            var vdom = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
             
             // fixup the nodes so that they render on the page
             foreach (var i in treenodes)
@@ -93,7 +93,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
 
             var vmasters = centerpoints
-                .Select(centerpoint => vdom.Drop(master, centerpoint))
+                .Select(centerpoint => domshapescol.Drop(master, centerpoint))
                 .ToList();
 
 
@@ -116,7 +116,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                     {
                         var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                         var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                        var connector = vdom.Connect(dc_master,parent_shape, child_shape);
+                        var connector = domshapescol.Connect(dc_master,parent_shape, child_shape);
                     }
                 }
             }
@@ -125,7 +125,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 foreach (var connection in layout.EnumConnections())
                 {
                     var bez = layout.GetConnectionBezier(connection);
-                    vdom.DrawBezier(bez);
+                    domshapescol.DrawBezier(bez);
                 }
             }
 
@@ -141,7 +141,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var page_size_with_border = bb.Size.Add(border_width*2, border_width*2.0);
             page.SetSize(page_size_with_border);
 
-            vdom.Render(page);
+            domshapescol.Render(page);
 
             var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
             var orgnodes_with_urls = from n in orgnodes

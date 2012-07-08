@@ -113,7 +113,7 @@ namespace VisioAutomationSamples
             var page = app.ActivePage;
 
 
-            var dom = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
             //var rect_master = dom.m
             foreach (var item in layout1.Nodes)
             {
@@ -128,7 +128,7 @@ namespace VisioAutomationSamples
                     continue;
                 }
 
-                var shape = dom.Drop("Rectangle", "Basic_U.VSS",item.Rectangle);
+                var shape = domshapescol.Drop("Rectangle", "Basic_U.VSS",item.Rectangle);
 
                 if (info.Text!=null)
                 {
@@ -137,7 +137,7 @@ namespace VisioAutomationSamples
                 
                 shape.Cells = info.ShapeCells.ShallowCopy();
             }
-            dom.Render(page);
+            domshapescol.Render(page);
 
             page.ResizeToFitContents(0.5,0.5);
 

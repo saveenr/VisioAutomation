@@ -31,7 +31,7 @@ namespace InfoGraphicsPy
 
             var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
 
-            var dom = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
             var circle_shapes = new List<VA.DOM.Oval>();
             var slice_shapes = new List<VA.DOM.PieSlice>();
             for (int i = 0; i < DataPoints.Count; i++)
@@ -41,14 +41,14 @@ namespace InfoGraphicsPy
                 double end = System.Math.PI * 2.0 * normalized_values[i];
                 double radius = top_rects[i].Width/2.0;
 
-                var circle_shape = dom.DrawOval(top_rects[i]);
+                var circle_shape = domshapescol.DrawOval(top_rects[i]);
                 circle_shapes.Add(circle_shape);
 
-                var dom_shape = dom.DrawPieSlice(top_rects[i].Center, radius, start, end);
+                var dom_shape = domshapescol.DrawPieSlice(top_rects[i].Center, radius, start, end);
                 slice_shapes.Add(dom_shape);
             }
 
-            var cat_shapes = DOMUtil.DrawRects(dom, cat_rects, session.MasterRectangle);
+            var cat_shapes = DOMUtil.DrawRects(domshapescol, cat_rects, session.MasterRectangle);
 
             for (int i = 0; i < DataPoints.Count; i++)
             {
@@ -83,7 +83,7 @@ namespace InfoGraphicsPy
                 cells.LinePattern = CategoryLinePattern;
             }
 
-            dom.Render(session.Page);
+            domshapescol.Render(session.Page);
         }
     }
 }

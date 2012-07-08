@@ -12,10 +12,5 @@ namespace VisioAutomation.DOM
         protected Node()
         {
         }
-
-        public virtual IEnumerable<Node> Children
-        {
-            get { yield break; }
-        }
     }
 }

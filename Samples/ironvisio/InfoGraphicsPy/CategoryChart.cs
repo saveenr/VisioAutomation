@@ -226,14 +226,14 @@ namespace InfoGraphicsPy
             var default_font = fonts[this.Font];
             int default_font_id = default_font.ID;
             // Perform Rendering
-            var dom = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
             foreach (var n in layout.Nodes)
             {
                 if (n.Data != null)
                 {
                     var r = n.Rectangle;
                     var n_data = (RenderItem) n.Data;
-                    var s = dom.DrawRectangle(r);
+                    var s = domshapescol.DrawRectangle(r);
 
                     // Set Text
                     if (n_data.ShapeText != null)
@@ -250,13 +250,13 @@ namespace InfoGraphicsPy
                     // draw Underline
                     if (n_data.Underline)
                     {
-                        var u = dom.DrawLine(r.LowerLeft, r.LowerRight);
+                        var u = domshapescol.DrawLine(r.LowerLeft, r.LowerRight);
                     }
 
                     n_data.Cells.CharFont = default_font_id;
                 }
             }
-            dom.Render(page);
+            domshapescol.Render(page);
         }
 
         public static CategoryChart FromCSV(string title, string text)

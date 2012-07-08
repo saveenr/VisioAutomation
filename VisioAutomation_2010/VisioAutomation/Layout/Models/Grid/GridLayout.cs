@@ -140,12 +140,12 @@ namespace VisioAutomation.Layout.Models.Grid
 
             var nodes_to_draw = this.Nodes.Where(n => n.Draw).ToList();
 
-            var dom_doc = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
 
             var dom_shapes = new List<VA.DOM.Shape>(nodes_to_draw.Count);
             foreach (var node in nodes_to_draw)
             {
-                var dom_shape = dom_doc.Drop(node.Master, node.Rectangle.Center);
+                var dom_shape = domshapescol.Drop(node.Master, node.Rectangle.Center);
 
                 if (node.Cells != null)
                 {
@@ -163,7 +163,7 @@ namespace VisioAutomation.Layout.Models.Grid
                 dom_shapes.Add(dom_shape);
             }
 
-            dom_doc.Render(page);
+            domshapescol.Render(page);
 
             for (int i = 0; i < nodes_to_draw.Count; i++)
             {

@@ -121,7 +121,7 @@ namespace VisioAutomationSamples
 
             var page = doc.Pages.Add();
 
-            var dom = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeCollection();
 
             foreach (var node in layout.Nodes)
             {
@@ -136,7 +136,7 @@ namespace VisioAutomationSamples
                     continue;
                 }
 
-                var dom_shape = dom.Drop("Rectangle", "basic_u.vss", node.Rectangle);
+                var dom_shape = domshapescol.Drop("Rectangle", "basic_u.vss", node.Rectangle);
        
                 var cells = node_data.Cells;
                 if (cells == null)
@@ -157,7 +157,7 @@ namespace VisioAutomationSamples
                 dom_shape.Text = new VA.Text.Markup.TextElement( node_data.Text );
             }
 
-            dom.Render(page);
+            domshapescol.Render(page);
             page.ResizeToFitContents(0.5, 0.5);
         }
 
@@ -172,7 +172,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var dom = new VA.DOM.ShapeCollection();
+                var domshapescol = new VA.DOM.ShapeCollection();
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {
@@ -180,7 +180,7 @@ namespace VisioAutomationSamples
                     double x0 = j*w;
 
                     var r = new VA.Drawing.Rectangle(x0, 0 - th, x0 + w, 0);
-                    var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
+                    var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                     n1.Text = new VA.Text.Markup.TextElement( fontname.ToUpper() ) ;
                     n1.Cells.FillForegnd = "rgb(255,255,255)";
                     n1.Cells.LineWeight = 0.0;
@@ -197,7 +197,7 @@ namespace VisioAutomationSamples
                         double y0 = i*h*-1 - th - h;
 
                         var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
-                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
+                        var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
                             n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
@@ -215,7 +215,7 @@ namespace VisioAutomationSamples
                 }
 
                 var page = doc.Pages.Add();
-                dom.Render(page);
+                domshapescol.Render(page);
                 page.ResizeToFitContents(0.5, 0.5);
             }
         }
@@ -233,7 +233,7 @@ namespace VisioAutomationSamples
 
             foreach (var chunk in chunks)
             {
-                var dom = new VA.DOM.ShapeCollection();
+                var domshapescol = new VA.DOM.ShapeCollection();
 
                 for (int j = 0; j < fontnames.Count(); j++)
                 {
@@ -243,7 +243,7 @@ namespace VisioAutomationSamples
                         double y0 = i*h*-1;
 
                         var r = new VA.Drawing.Rectangle(x0, y0, x0 + w, y0 + h);
-                        var n1 = dom.Drop("Rectangle", "basic_u.vss", r);
+                        var n1 = domshapescol.Drop("Rectangle", "basic_u.vss", r);
                         if (i < chunk.Count)
                         {
                             n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
@@ -264,7 +264,7 @@ namespace VisioAutomationSamples
 
                 var page = doc.Pages.Add();
 
-                dom.Render(page);
+                domshapescol.Render(page);
 
                 page.ResizeToFitContents(0.5, 0.5);
             }

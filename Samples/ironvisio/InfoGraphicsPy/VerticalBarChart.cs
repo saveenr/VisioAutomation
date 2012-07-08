@@ -39,9 +39,9 @@ namespace InfoGraphicsPy
             }
             var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
 
-            var dom = new VA.DOM.ShapeCollection();
-            var bar_shapes = DOMUtil.DrawRects(dom, bar_rects, session.MasterRectangle);
-            var cat_shapes = DOMUtil.DrawRects(dom, cat_rects, session.MasterRectangle);
+            var domshapescol = new VA.DOM.ShapeCollection();
+            var bar_shapes = DOMUtil.DrawRects(domshapescol, bar_rects, session.MasterRectangle);
+            var cat_shapes = DOMUtil.DrawRects(domshapescol, cat_rects, session.MasterRectangle);
 
             for (int i = 0; i < this.DataPoints.Count; i++)
             {
@@ -66,7 +66,7 @@ namespace InfoGraphicsPy
                 cells.LineWeight = this.CategoryLineWeight;
                 cells.LinePattern = this.CategoryLinePattern;
             }
-            dom.Render(session.Page);
+            domshapescol.Render(session.Page);
         }
     }
 }
