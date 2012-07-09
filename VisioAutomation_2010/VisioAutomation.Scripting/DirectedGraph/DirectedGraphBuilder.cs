@@ -9,6 +9,38 @@ namespace VisioAutomation.Scripting.DirectedGraph
 {
     public class DirectedGraphBuilder
     {
+        private class BuilderError
+        {
+            public string Text;
+
+            public BuilderError(string text)
+            {
+                this.Text = text;
+            }
+
+            public static BuilderError ConnectorAlreadyDefined(string id)
+            {
+                return new BuilderError(string.Format("Connector \"{0}\" is already defined", id));
+            }
+
+            public static BuilderError NodeAlreadyDefined(string id)
+            {
+                return new BuilderError(string.Format("Node \"{0}\" is already defined", id));
+            }
+
+            public static BuilderError InvalidFromNode(string conid, string fromid)
+            {
+                return new BuilderError(string.Format("Connector \"{0}\" references a nonexistent FROM Node \"{1}\"",
+                                                      conid, fromid));
+            }
+
+            public static BuilderError InvalidToNode(string conid, string toid)
+            {
+                return new BuilderError(string.Format("Connector \"{0}\" references a nonexistent TO Node \"{1}\"",
+                                                      conid, toid));
+            }
+        }
+
         public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, string filename)
         {
             var xmldoc = XDocument.Load(filename);
@@ -18,10 +50,13 @@ namespace VisioAutomation.Scripting.DirectedGraph
         public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, XDocument xmldoc)
         {
             var drawings = new List<VA.Layout.Models.DirectedGraph.Drawing>();
-            bool major_error = false;
+            var errors = new List<BuilderError>();
+
+            int pagenum = 0;
             var page_els = xmldoc.Root.Elements("page");
             foreach (var page_el in page_els)
             {
+                pagenum++;
                 var node_ids = new HashSet<string>();
                 var con_ids = new HashSet<string>();
 
@@ -38,15 +73,14 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                 // ANALYZE 1
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Analyzing shape data...");
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in shape_infos)
                 {
                     scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "shape {0}", shape_info.ID);
 
                     if (node_ids.Contains(shape_info.ID))
                     {
-                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "ERROR: Node \"{0}\" is already defined", shape_info.ID);
-                        major_error = true;
+                        errors.Add( BuilderError.NodeAlreadyDefined(shape_info.ID) );
                     }
                     else
                     {
@@ -61,8 +95,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (con_ids.Contains(con_info.ID))
                     {
-                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"ERROR: Connector \"{0}\" is already defined", con_info.ID);
-                        major_error = true;
+                        errors.Add(BuilderError.ConnectorAlreadyDefined(con_info.ID));
                     }
                     else
                     {
@@ -71,23 +104,21 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (!node_ids.Contains(con_info.From))
                     {
-                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose,
-                            "ERROR: Connector \"{0}\" references a nonexistent FROM Node \"{1}\"",
-                            con_info.ID, con_info.From);
-                        major_error = true;
+                        errors.Add(BuilderError.InvalidFromNode(con_info.ID, con_info.From));
                     }
 
                     if (!node_ids.Contains(con_info.To))
                     {
-                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose,
-                            "ERROR: Connector \"{0}\" references a nonexistent TO Node \"{1}\"",
-                            con_info.ID, con_info.To);
-                        major_error = true;
+                        errors.Add(BuilderError.InvalidToNode(con_info.ID, con_info.To));
                     }
                 }
 
-                if (major_error)
+                if (errors.Count>1)
                 {
+                    foreach (var error in errors)
+                    {
+                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose, error.Text);                       
+                    }
                     scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
                 }
                 else
