@@ -97,10 +97,10 @@
     <Compile Include="OutputStream.cs" />
     <Compile Include="SessionOptions.cs" />
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
-    <Compile Include="FlowChart\ConnectorInfo.cs" />
-    <Compile Include="FlowChart\DirectedGraphBuilder.cs" />
-    <Compile Include="FlowChart\ShapeInfo.cs" />
-    <Compile Include="FlowChart\XmlExtensions.cs" />
+    <Compile Include="DirectedGraph\ConnectorInfo.cs" />
+    <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />
+    <Compile Include="DirectedGraph\ShapeInfo.cs" />
+    <Compile Include="DirectedGraph\XmlExtensions.cs" />
     <Compile Include="OrgChart\OrgChartBuilder.cs" />
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Commands\ConnectionPointCommands.cs" />
