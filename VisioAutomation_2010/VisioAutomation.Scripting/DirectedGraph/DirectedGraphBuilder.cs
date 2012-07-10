@@ -20,24 +20,24 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
             public static BuilderError ConnectorAlreadyDefined(int pagenum, string id)
             {
-                return new BuilderError(string.Format("Connector \"{0}\" is already defined", id));
+                return new BuilderError(string.Format("Page {0} : Connector \"{1}\" is already defined", pagenum, id));
             }
 
             public static BuilderError NodeAlreadyDefined(int pagenum, string id)
             {
-                return new BuilderError(string.Format("Node \"{0}\" is already defined", id));
+                return new BuilderError(string.Format("Page {0} : Node \"{1}\" is already defined", pagenum, id));
             }
 
             public static BuilderError InvalidFromNode(int pagenum, string conid, string fromid)
             {
-                return new BuilderError(string.Format("Connector \"{0}\" references a nonexistent FROM Node \"{1}\"",
-                                                      conid, fromid));
+                return new BuilderError(string.Format("Page {0} : Connector \"{1}\" references a nonexistent FROM Node \"{2}\"",
+                                                      pagenum, conid, fromid));
             }
 
             public static BuilderError InvalidToNode(int pagenum, string conid, string toid)
             {
-                return new BuilderError(string.Format("Connector \"{0}\" references a nonexistent TO Node \"{1}\"",
-                                                      conid, toid));
+                return new BuilderError(string.Format("Page {0} : Connector \"{1}\" references a nonexistent TO Node \"{2}\"",
+                                                      pagenum, conid, toid));
             }
         }
 
