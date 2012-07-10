@@ -26,11 +26,6 @@ namespace VisioAutomation.Internal
             }
         }
 
-        public static IEnumerable<WalkEvent<T>> Walk<T>(T node, TreeTraversal.EnumerateChildren<T> enum_children)
-        {
-            return Walk(node, enum_children, n => true);
-        }
-
         /// <summary>
         // Walks a Node in a depth-first/pre-order manner without recursion.
         // It returns a series of "events" that indicate one of three things:
@@ -41,8 +36,7 @@ namespace VisioAutomation.Internal
         /// <param name="enum_children"></param>
         /// <param name="enter_node"></param>
         /// <returns></returns>
-        public static IEnumerable<WalkEvent<T>> Walk<T>(T node, TreeTraversal.EnumerateChildren<T> enum_children,
-                                                        EnterNode<T> enter_node)
+        public static IEnumerable<WalkEvent<T>> Walk<T>(T node, TreeTraversal.EnumerateChildren<T> enum_children)
         {
             var stack = new Stack<WalkState<T>>();
 
@@ -62,12 +56,9 @@ namespace VisioAutomation.Internal
                     cur_item.Entered = true;
                     stack.Push(cur_item);
 
-                    if (enter_node(cur_item.Node))
+                    foreach (var child in TreeTraversal.efficient_reverse(enum_children(cur_item.Node)))
                     {
-                        foreach (var child in TreeTraversal.efficient_reverse(enum_children(cur_item.Node)))
-                        {
-                            stack.Push(new WalkState<T>(child));
-                        }
+                        stack.Push(new WalkState<T>(child));
                     }
                 }
                 else

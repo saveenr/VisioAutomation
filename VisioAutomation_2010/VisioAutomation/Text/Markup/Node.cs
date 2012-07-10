@@ -60,14 +60,21 @@ namespace VisioAutomation.Text.Markup
 
         internal IEnumerable<VA.Internal.WalkEvent<Node>> Walk()
         {
-            VA.Internal.TreeTraversal.EnumerateChildren<Node> enumchildren =
-                n => (n.Children.Items);
-
-            VA.Internal.TreeTraversal.EnterNode<Node> enternode =
-                n => (n is TextElement);
-
-            return VA.Internal.TreeTraversal.Walk<Node>(this, enumchildren, enternode);
+            return VA.Internal.TreeTraversal.Walk<Node>(this, get_children_for_walk);
         }
+
+        IEnumerable<Node> get_children_for_walk(Node n)
+        {
+            if (n is TextElement)
+            {
+                foreach (var c in n.Children.Items)
+                {
+                    yield return c;
+                }
+            }
+        }
+
+
 
         private IEnumerable<Node> WalkNodes()
         {
