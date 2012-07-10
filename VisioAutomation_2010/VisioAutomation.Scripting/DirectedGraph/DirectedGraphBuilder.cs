@@ -58,17 +58,16 @@ namespace VisioAutomation.Scripting.DirectedGraph
             public DGMODEL.Drawing Drawing;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
+            public List<BuilderError> Errors;
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
+        private static new List<PageData> LoadPageDataFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
         {
-            var errors = new List<BuilderError>();
             var pagedatas = new List<PageData>();
+            // LOAD and ANALYZE EACH PAGE
 
             int pagenum = 0;
             var page_els = xmldoc.Root.Elements("page");
-
-            // LOAD and ANALYZE EACH PAGE
 
             foreach (var page_el in page_els)
             {
@@ -78,6 +77,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 var pagedata = new PageData();
                 pagedatas.Add(pagedata);
                 pagedata.PageNumber = pagenum++;
+                pagedata.Errors = new List<BuilderError>();
                 pagedata.Renderer = new Layout.MSAGL.MSAGLRenderer();
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, pagedata.Renderer);
@@ -88,7 +88,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                 pagedata.ShapeInfos = shape_els.Select(e => ShapeInfo.FromXml(scriptingsession, e)).ToList();
                 pagedata.ConnectorInfos = con_els.Select(e => ConnectorInfo.FromXml(scriptingsession, e)).ToList();
-                
+
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (node_ids.Contains(shape_info.ID))
                     {
-                        errors.Add(BuilderError.NodeAlreadyDefined(pagenum, shape_info.ID));
+                        pagedata.Errors.Add(BuilderError.NodeAlreadyDefined(pagenum, shape_info.ID));
                     }
                     else
                     {
@@ -111,7 +111,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (con_ids.Contains(con_info.ID))
                     {
-                        errors.Add(BuilderError.ConnectorAlreadyDefined(pagenum, con_info.ID));
+                        pagedata.Errors.Add(BuilderError.ConnectorAlreadyDefined(pagenum, con_info.ID));
                     }
                     else
                     {
@@ -120,27 +120,37 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (!node_ids.Contains(con_info.From))
                     {
-                        errors.Add(BuilderError.InvalidFromNode(pagenum, con_info.ID, con_info.From));
+                        pagedata.Errors.Add(BuilderError.InvalidFromNode(pagenum, con_info.ID, con_info.From));
                     }
 
                     if (!node_ids.Contains(con_info.To))
                     {
-                        errors.Add(BuilderError.InvalidToNode(pagenum, con_info.ID, con_info.To));
+                        pagedata.Errors.Add(BuilderError.InvalidToNode(pagenum, con_info.ID, con_info.To));
                     }
                 }
             }
 
-            // STOP IF ANY ERRORS
-            if (errors.Count > 1)
-            {
-                foreach (var error in errors)
-                {
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, error.Text);
-                }
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
-                return new List<DGMODEL.Drawing>();
-            }
+            return pagedatas;
+        }
 
+
+        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
+        {
+            var pagedatas = LoadPageDataFromXML(scriptingsession, xmldoc);
+
+            // STOP IF ANY ERRORS
+            int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();
+            if (num_errors > 1)
+            {
+                foreach (var pagedata in pagedatas)
+                {
+                    foreach (var error in pagedata.Errors)
+                    {
+                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose, error.Text);
+                    }
+                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
+                }
+            }
 
             // DRAW EACH PAGE
             foreach (var pagedata in pagedatas)
