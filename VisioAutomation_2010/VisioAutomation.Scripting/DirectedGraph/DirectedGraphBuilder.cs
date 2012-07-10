@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SXL = System.Xml.Linq;
 using VA = VisioAutomation;
-using IVisio= Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
 namespace VisioAutomation.Scripting.DirectedGraph
@@ -30,14 +30,18 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
             public static BuilderError InvalidFromNode(int pagenum, string conid, string fromid)
             {
-                return new BuilderError(string.Format("Page {0} : Connector \"{1}\" references a nonexistent FROM Node \"{2}\"",
-                                                      pagenum, conid, fromid));
+                return
+                    new BuilderError(
+                        string.Format("Page {0} : Connector \"{1}\" references a nonexistent FROM Node \"{2}\"",
+                                      pagenum, conid, fromid));
             }
 
             public static BuilderError InvalidToNode(int pagenum, string conid, string toid)
             {
-                return new BuilderError(string.Format("Page {0} : Connector \"{1}\" references a nonexistent TO Node \"{2}\"",
-                                                      pagenum, conid, toid));
+                return
+                    new BuilderError(
+                        string.Format("Page {0} : Connector \"{1}\" references a nonexistent TO Node \"{2}\"",
+                                      pagenum, conid, toid));
             }
         }
 
@@ -47,40 +51,52 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return LoadFromXML(scriptingsession, xmldoc);
         }
 
+        private class PageData
+        {
+            public int PageNumber;
+            public Layout.MSAGL.MSAGLRenderer Renderer;
+            public DGMODEL.Drawing Drawing;
+            public List<ShapeInfo> ShapeInfos;
+            public List<ConnectorInfo> ConnectorInfos;
+        }
+
         public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
         {
-            var drawings = new List<VA.Layout.Models.DirectedGraph.Drawing>();
             var errors = new List<BuilderError>();
+            var pagedatas = new List<PageData>();
 
             int pagenum = 0;
             var page_els = xmldoc.Root.Elements("page");
+
+            // LOAD and ANALYZE EACH PAGE
+
             foreach (var page_el in page_els)
             {
-                pagenum++;
                 var node_ids = new HashSet<string>();
                 var con_ids = new HashSet<string>();
 
-                var renderer = new Layout.MSAGL.MSAGLRenderer();
+                var pagedata = new PageData();
+                pagedatas.Add(pagedata);
+                pagedata.PageNumber = pagenum++;
+                pagedata.Renderer = new Layout.MSAGL.MSAGLRenderer();
                 var renderoptions_el = page_el.Element("renderoptions");
-                GetRenderOptionsFromXml(renderoptions_el, renderer);
+                GetRenderOptionsFromXml(renderoptions_el, pagedata.Renderer);
 
-                var drawing = new DGMODEL.Drawing();
+                pagedata.Drawing = new DGMODEL.Drawing();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
-                var shape_infos = shape_els.Select(e => ShapeInfo.FromXml(scriptingsession, e)).ToList();
-                var con_infos = con_els.Select(e => ConnectorInfo.FromXml(scriptingsession, e)).ToList();
-
-                // ANALYZE 1
-
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Analyzing shape data for page {0}", pagenum);
-                foreach (var shape_info in shape_infos)
+                pagedata.ShapeInfos = shape_els.Select(e => ShapeInfo.FromXml(scriptingsession, e)).ToList();
+                pagedata.ConnectorInfos = con_els.Select(e => ConnectorInfo.FromXml(scriptingsession, e)).ToList();
+                
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Analyzing shape data for page {0}", pagenum);
+                foreach (var shape_info in pagedata.ShapeInfos)
                 {
                     scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "shape {0}", shape_info.ID);
 
                     if (node_ids.Contains(shape_info.ID))
                     {
-                        errors.Add( BuilderError.NodeAlreadyDefined(pagenum,shape_info.ID) );
+                        errors.Add(BuilderError.NodeAlreadyDefined(pagenum, shape_info.ID));
                     }
                     else
                     {
@@ -89,7 +105,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 }
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Analyzing connector data...");
-                foreach (var con_info in con_infos)
+                foreach (var con_info in pagedata.ConnectorInfos)
                 {
                     scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "connector {0}", con_info.ID);
 
@@ -112,60 +128,63 @@ namespace VisioAutomation.Scripting.DirectedGraph
                         errors.Add(BuilderError.InvalidToNode(pagenum, con_info.ID, con_info.To));
                     }
                 }
-
-                if (errors.Count>1)
-                {
-                    foreach (var error in errors)
-                    {
-                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose, error.Text);                       
-                    }
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
-                }
-                else
-                {
-
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating shape AutoLayout nodes");
-                    foreach (var shape_info in shape_infos)
-                    {
-                        var al_shape = drawing.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil,
-                                                        shape_info.Master);
-                        al_shape.URL = shape_info.URL;
-                        al_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
-                        foreach (var kv in shape_info.custprops)
-                        {
-                            al_shape.CustomProperties[kv.Key] = kv.Value;
-                        }
-                    }
-
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating connector AutoLayout nodes");
-                    foreach (var con_info in con_infos)
-                    {
-                        var def_connector_type = VA.Connections.ConnectorType.Curved;
-                        var connectory_type = def_connector_type;
-
-                        var from_shape = drawing.Shapes.Find(con_info.From);
-                        var to_shape = drawing.Shapes.Find(con_info.To);
-
-                        var def_con_color = new VA.Drawing.ColorRGB(0x000000);
-                        var def_con_weight = 1.0/72.0;
-                        var def_end_arrow = 2;
-                        var al_connector = drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
-                                                           connectory_type);
-
-                        al_connector.Cells = new VA.DOM.ShapeCells();
-                        al_connector.Cells.LineColor =
-                            VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
-                        al_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
-                        al_connector.Cells.EndArrow = def_end_arrow;
-                    }
-
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering AutoLayout...");
-
-                    drawings.Add(drawing);
-                }
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering AutoLayout");
             }
 
+            // STOP IF ANY ERRORS
+            if (errors.Count > 1)
+            {
+                foreach (var error in errors)
+                {
+                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, error.Text);
+                }
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
+                return new List<DGMODEL.Drawing>();
+            }
+
+
+            // DRAW EACH PAGE
+            foreach (var pagedata in pagedatas)
+            {
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating shape AutoLayout nodes");
+                foreach (var shape_info in pagedata.ShapeInfos)
+                {
+                    var al_shape = pagedata.Drawing.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil,
+                                                             shape_info.Master);
+                    al_shape.URL = shape_info.URL;
+                    al_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+                    foreach (var kv in shape_info.custprops)
+                    {
+                        al_shape.CustomProperties[kv.Key] = kv.Value;
+                    }
+                }
+
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating connector AutoLayout nodes");
+                foreach (var con_info in pagedata.ConnectorInfos)
+                {
+                    var def_connector_type = VA.Connections.ConnectorType.Curved;
+                    var connectory_type = def_connector_type;
+
+                    var from_shape = pagedata.Drawing.Shapes.Find(con_info.From);
+                    var to_shape = pagedata.Drawing.Shapes.Find(con_info.To);
+
+                    var def_con_color = new VA.Drawing.ColorRGB(0x000000);
+                    var def_con_weight = 1.0/72.0;
+                    var def_end_arrow = 2;
+                    var al_connector = pagedata.Drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
+                                                                connectory_type);
+
+                    al_connector.Cells = new VA.DOM.ShapeCells();
+                    al_connector.Cells.LineColor =
+                        VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
+                    al_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
+                    al_connector.Cells.EndArrow = def_end_arrow;
+                }
+
+                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering AutoLayout...");
+            }
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering AutoLayout");
+
+            var drawings = pagedatas.Select(pagedata => pagedata.Drawing).ToList();
             return drawings;
         }
 
@@ -173,7 +192,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             VA.Scripting.Session scriptingsession,
             IList<DGMODEL.Drawing> drawings)
         {
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Start Rendering FlowChart");
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Start Rendering FlowChart");
             var app = scriptingsession.VisioApplication;
 
 
@@ -219,8 +238,8 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                 num_pages_created++;
             }
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering pages");
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering flowchart.");
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering pages");
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering flowchart.");
         }
 
         private static void GetRenderOptionsFromXml(SXL.XElement el, Layout.MSAGL.MSAGLRenderer directed_graph_layout)
@@ -229,8 +248,12 @@ namespace VisioAutomation.Scripting.DirectedGraph
             System.Func<string, int> int_converter = s => int.Parse(s);
             System.Func<string, double> double_converter = (s) => double.Parse(s);
 
-            directed_graph_layout.LayoutOptions.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el,"usedynamicconnectors", bool_converter);
-            directed_graph_layout.LayoutOptions.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el,"scalingfactor", double_converter);
+            directed_graph_layout.LayoutOptions.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el,
+                                                                                                              "usedynamicconnectors",
+                                                                                                              bool_converter);
+            directed_graph_layout.LayoutOptions.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el,
+                                                                                                       "scalingfactor",
+                                                                                                       double_converter);
         }
     }
 }
