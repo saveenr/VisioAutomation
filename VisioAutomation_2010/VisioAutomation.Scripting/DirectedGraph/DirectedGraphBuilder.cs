@@ -18,36 +18,36 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 this.Text = text;
             }
 
-            public static BuilderError ConnectorAlreadyDefined(string id)
+            public static BuilderError ConnectorAlreadyDefined(int pagenum, string id)
             {
                 return new BuilderError(string.Format("Connector \"{0}\" is already defined", id));
             }
 
-            public static BuilderError NodeAlreadyDefined(string id)
+            public static BuilderError NodeAlreadyDefined(int pagenum, string id)
             {
                 return new BuilderError(string.Format("Node \"{0}\" is already defined", id));
             }
 
-            public static BuilderError InvalidFromNode(string conid, string fromid)
+            public static BuilderError InvalidFromNode(int pagenum, string conid, string fromid)
             {
                 return new BuilderError(string.Format("Connector \"{0}\" references a nonexistent FROM Node \"{1}\"",
                                                       conid, fromid));
             }
 
-            public static BuilderError InvalidToNode(string conid, string toid)
+            public static BuilderError InvalidToNode(int pagenum, string conid, string toid)
             {
                 return new BuilderError(string.Format("Connector \"{0}\" references a nonexistent TO Node \"{1}\"",
                                                       conid, toid));
             }
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, string filename)
+        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
             return LoadFromXML(scriptingsession, xmldoc);
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, SXL.XDocument xmldoc)
+        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
         {
             var drawings = new List<VA.Layout.Models.DirectedGraph.Drawing>();
             var errors = new List<BuilderError>();
@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (node_ids.Contains(shape_info.ID))
                     {
-                        errors.Add( BuilderError.NodeAlreadyDefined(shape_info.ID) );
+                        errors.Add( BuilderError.NodeAlreadyDefined(pagenum,shape_info.ID) );
                     }
                     else
                     {
@@ -95,7 +95,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (con_ids.Contains(con_info.ID))
                     {
-                        errors.Add(BuilderError.ConnectorAlreadyDefined(con_info.ID));
+                        errors.Add(BuilderError.ConnectorAlreadyDefined(pagenum, con_info.ID));
                     }
                     else
                     {
@@ -104,12 +104,12 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                     if (!node_ids.Contains(con_info.From))
                     {
-                        errors.Add(BuilderError.InvalidFromNode(con_info.ID, con_info.From));
+                        errors.Add(BuilderError.InvalidFromNode(pagenum, con_info.ID, con_info.From));
                     }
 
                     if (!node_ids.Contains(con_info.To))
                     {
-                        errors.Add(BuilderError.InvalidToNode(con_info.ID, con_info.To));
+                        errors.Add(BuilderError.InvalidToNode(pagenum, con_info.ID, con_info.To));
                     }
                 }
 
