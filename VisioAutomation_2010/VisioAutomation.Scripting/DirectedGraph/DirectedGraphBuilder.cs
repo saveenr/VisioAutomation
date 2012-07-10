@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
+using SXL = System.Xml.Linq;
 using VA = VisioAutomation;
 using IVisio= Microsoft.Office.Interop.Visio;
 using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
@@ -43,11 +43,11 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, string filename)
         {
-            var xmldoc = XDocument.Load(filename);
+            var xmldoc = SXL.XDocument.Load(filename);
             return LoadFromXML(scriptingsession, xmldoc);
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, XDocument xmldoc)
+        public static IList<DGMODEL.Drawing> LoadFromXML(Session scriptingsession, SXL.XDocument xmldoc)
         {
             var drawings = new List<VA.Layout.Models.DirectedGraph.Drawing>();
             var errors = new List<BuilderError>();
@@ -223,7 +223,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Finished rendering flowchart.");
         }
 
-        private static void GetRenderOptionsFromXml(XElement el, Layout.MSAGL.MSAGLRenderer directed_graph_layout)
+        private static void GetRenderOptionsFromXml(SXL.XElement el, Layout.MSAGL.MSAGLRenderer directed_graph_layout)
         {
             System.Func<string, bool> bool_converter = s => bool.Parse(s);
             System.Func<string, int> int_converter = s => int.Parse(s);
