@@ -66,20 +66,11 @@ namespace VisioAutomation.Internal
 
         public static IEnumerable<T> PreOrder<T>(T root, EnumerateChildren<T> enum_children)
         {
-            var stack = new Stack<T>();
-
-            // put the first item on the stack 
-            stack.Push(root);
-
-            while (stack.Count > 0)
+            foreach (var ev in Walk(root,enum_children))
             {
-                var cur_item = stack.Pop();
-
-                yield return cur_item;
-
-                foreach (var i in efficient_reverse(enum_children(cur_item)))
+                if (ev.HasEnteredNode)
                 {
-                    stack.Push(i);
+                    yield return ev.Node;
                 }
             }
         }
