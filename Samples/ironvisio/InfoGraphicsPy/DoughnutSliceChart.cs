@@ -30,7 +30,7 @@ namespace InfoGraphicsPy
 
             var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
 
-            var domshapescol = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeList();
             var circle_shapes = new List<VA.DOM.Arc>();
             var slice_shapes = new List<VA.DOM.Arc>();
             for (int i = 0; i < DataPoints.Count; i++)

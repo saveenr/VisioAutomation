@@ -6,11 +6,11 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.DOM
 {
-    public class ShapeCollection : Node
+    public class ShapeList : Node
     {
         public NodeList<BaseShape> Shapes { get; private set; }
 
-        public ShapeCollection()
+        public ShapeList()
         {
             this.Shapes = new NodeList<BaseShape>(this);
         }

@@ -56,7 +56,7 @@ namespace VisioAutomation.Text.Markup
 
         public IEnumerable<TextElement> Elements
         {
-            get { return this.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
+            get { return this.Children.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
         }
         
         internal MarkupRegions GetMarkupInfo()

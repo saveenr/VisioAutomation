@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using System.Collections;
 
 namespace VisioAutomation.Text.Markup
 {
-    internal class NodeList<T> where T : Node
+    public class NodeList<T> : IEnumerable<T> where T : Node
     {
         private readonly Node parent;
         private readonly List<T> items;
@@ -11,6 +12,19 @@ namespace VisioAutomation.Text.Markup
         {
             this.parent = parentnode;
             this.items = new List<T>(0);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (var i in this.Items)
+            {
+                yield return i;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
         }
 
         public IEnumerable<T> Items

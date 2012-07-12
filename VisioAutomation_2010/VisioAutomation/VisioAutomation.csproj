@@ -214,7 +214,7 @@
     <Compile Include="Shapesheet\Data\TableRow.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
     <Compile Include="DOM\BaseShape.cs" />
-    <Compile Include="DOM\ShapeCollection.cs" />
+    <Compile Include="DOM\ShapeList.cs" />
     <Compile Include="DOM\Node.cs" />
     <Compile Include="DOM\NodeList.cs" />
     <Compile Include="DOM\RenderContext.cs" />

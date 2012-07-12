@@ -73,7 +73,7 @@ namespace VisioAutomation.Layout.Models.Tree
             var node_master = masters[master_name];
             var connector_master = masters[dc_name];
 
-            var domshapescol = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeList();
 
             var page_size = bb.Size.Add(border_width*2, border_width*2.0);
 

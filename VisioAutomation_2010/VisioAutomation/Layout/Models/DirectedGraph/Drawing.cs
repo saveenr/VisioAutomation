@@ -139,7 +139,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
                 throw new System.ArgumentNullException("page");
             }
 
-            var domshapescol = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeList();
             double x = 0;
             double y = 1;
             foreach (var shape in this.Shapes)

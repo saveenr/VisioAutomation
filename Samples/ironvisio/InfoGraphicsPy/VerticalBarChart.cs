@@ -39,7 +39,7 @@ namespace InfoGraphicsPy
             }
             var cat_rects = this.SkipOdd(grid.GetRectsInRow(catrow)).ToList();
 
-            var domshapescol = new VA.DOM.ShapeCollection();
+            var domshapescol = new VA.DOM.ShapeList();
             var bar_shapes = DOMUtil.DrawRects(domshapescol, bar_rects, session.MasterRectangle);
             var cat_shapes = DOMUtil.DrawRects(domshapescol, cat_rects, session.MasterRectangle);
 
