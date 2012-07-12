@@ -7,8 +7,6 @@ namespace VisioAutomation.Internal
     internal static class TreeTraversal
     {
         // Delegates
-        public delegate bool EnterNode<T>(T item);
-
         public delegate IEnumerable<T> EnumerateChildren<T>(T item);
 
         private struct WalkState<T>
@@ -31,11 +29,8 @@ namespace VisioAutomation.Internal
         // It returns a series of "events" that indicate one of three things:
         // - whether it has enters into a node
         // - whether it has exited from a node (i.e. it is finished with that container and its children)
+        // - caller can control which children get entered via the enum_children method
         /// </summary>
-        /// <param name="node"></param>
-        /// <param name="enum_children"></param>
-        /// <param name="enter_node"></param>
-        /// <returns></returns>
         public static IEnumerable<WalkEvent<T>> Walk<T>(T node, TreeTraversal.EnumerateChildren<T> enum_children)
         {
             var stack = new Stack<WalkState<T>>();
