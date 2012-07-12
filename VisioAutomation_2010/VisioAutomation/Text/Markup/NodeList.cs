@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Text.Markup
 {
-    public class NodeList<T> where T : Node
+    internal class NodeList<T> where T : Node
     {
         private readonly Node parent;
         private readonly List<T> items;

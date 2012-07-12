@@ -61,7 +61,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             public List<BuilderError> Errors;
         }
 
-        private static new List<PageData> LoadPageDataFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
+        private static List<PageData> LoadPageDataFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
         {
             var pagedatas = new List<PageData>();
             // LOAD and ANALYZE EACH PAGE

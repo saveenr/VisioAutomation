@@ -30,33 +30,33 @@ namespace VisioAutomation.Text.Markup
         public Literal AppendText(string text)
         {
             var text_node = new Literal(text);
-            this.Children.Add(text_node);
+            this.Add(text_node);
             return text_node;
         }
 
         public Field AppendField(VA.Text.Markup.Field field)
         {
-            this.Children.Add(field);
+            this.Add(field);
             return field;
         }
 
         public TextElement AppendElement()
         {
             var el = new TextElement();
-            this.Children.Add(el);
+            this.Add(el);
             return el;
         }
 
         public TextElement AppendElement(string text)
         {
             var el = new TextElement(text);
-            this.Children.Add(el);
+            this.Add(el);
             return el;
         }
 
         public IEnumerable<TextElement> Elements
         {
-            get { return this.Children.Items.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
+            get { return this.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
         }
         
         internal MarkupRegions GetMarkupInfo()
