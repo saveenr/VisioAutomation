@@ -15,12 +15,12 @@ namespace VisioAutomation.Internal
             var stack = new Stack<TDest>();
             var dest_nodes = new List<TDest>();
 
-            var walk_items = VA.Internal.TreeTraversal.Walk<TSrc>(src_root_node, input_node => enum_src_children(input_node));
-            foreach (var walk_item in walk_items)
+            var walkevents = VA.Internal.TreeTraversal.Walk<TSrc>(src_root_node, input_node => enum_src_children(input_node));
+            foreach (var ev in walkevents)
             {
-                if (walk_item.HasEnteredNode)
+                if (ev.HasEnteredNode)
                 {
-                    var new_dst_node = create_dest_node(walk_item.Node);
+                    var new_dst_node = create_dest_node(ev.Node);
 
                     if (stack.Count > 0)
                     {
@@ -36,7 +36,7 @@ namespace VisioAutomation.Internal
                     stack.Push(new_dst_node);
                     dest_nodes.Add(new_dst_node);
                 }
-                else if (walk_item.HasExitedNode)
+                else if (ev.HasExitedNode)
                 {
                     stack.Pop();
                 }

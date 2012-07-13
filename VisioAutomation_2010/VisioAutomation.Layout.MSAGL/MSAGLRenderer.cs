@@ -35,7 +35,6 @@ namespace VisioAutomation.Layout.MSAGL
             DefaultBezierConnectorShapeCells.LinePattern = 0;
             DefaultBezierConnectorShapeCells.LineWeight = 0.0;
             DefaultBezierConnectorShapeCells.FillPattern = 0;
-
             DefaultBezierConnectorLabelBoxSize = new VA.Drawing.Size(1.0, 0.5);
         }
 
@@ -123,11 +122,14 @@ namespace VisioAutomation.Layout.MSAGL
 
             msagl_graph.CalculateLayout();
 
-            this.msagl_bb = new VA.Drawing.Rectangle(msagl_graph.BoundingBox.Left, msagl_graph.BoundingBox.Bottom,
-                                                          msagl_graph.BoundingBox.Right, msagl_graph.BoundingBox.Top);
-            this.layout_bb =
-                new VA.Drawing.Rectangle(0, 0, this.msagl_bb.Width, msagl_bb.Height).Multiply(
-                    ScaleToDocument, ScaleToDocument);
+            this.msagl_bb = new VA.Drawing.Rectangle(
+                msagl_graph.BoundingBox.Left, 
+                msagl_graph.BoundingBox.Bottom,
+                msagl_graph.BoundingBox.Right,
+                msagl_graph.BoundingBox.Top);
+            
+            this.layout_bb = new VA.Drawing.Rectangle(0, 0, this.msagl_bb.Width, msagl_bb.Height)
+                .Multiply(ScaleToDocument, ScaleToDocument);
 
             return msagl_graph;
         }
@@ -210,7 +212,6 @@ namespace VisioAutomation.Layout.MSAGL
             // loading the specified stenciles
 
             var documents = app.Documents;
-
             var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
 
             // Load and cache all the masters
@@ -220,14 +221,12 @@ namespace VisioAutomation.Layout.MSAGL
                 loader.Add(layout_shape.MasterName,layout_shape.StencilName);                
             }
             loader.Resolve(documents);
-
-
+            
             // If no size was provided for the shape, then set the size based on the master
             var layoutshapes_without_size_info = layout_diagram.Shapes.Where(s => s.Size == null);
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
                 var master = loader.Get(layoutshape.MasterName,layoutshape.StencilName);
-
                 var size = TryGetValue(master_to_size,master.VisioMaster);
                 if (!size.HasValue)
                 {
@@ -244,27 +243,24 @@ namespace VisioAutomation.Layout.MSAGL
             ResolveMasters(layout_diagram, vis);
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
-
-            var domshapescol = new VA.DOM.ShapeList();
-
-
-
+            var domshapes = new VA.DOM.ShapeList();
+            
             var active_window = vis.ActiveWindow;
             active_window.ShowConnectPoints = VA.Convert.BoolToShort(!this.LayoutOptions.HideConnectionPoints);
             active_window.ShowGrid = VA.Convert.BoolToShort(this.LayoutOptions.HideGrid);
 
-            CreateDOMShapes(domshapescol, msagl_graph, vis);
+            CreateDOMShapes(domshapes, msagl_graph, vis);
 
             if (this.LayoutOptions.UseDynamicConnectors)
             {
-                CreateDynamicConnectorEdges(domshapescol, msagl_graph);
+                CreateDynamicConnectorEdges(domshapes, msagl_graph);
             }
             else
             {
-                CreateBezierEdges(domshapescol, msagl_graph);
+                CreateBezierEdges(domshapes, msagl_graph);
             }
 
-            return domshapescol;
+            return domshapes;
         }
 
         private void CreateDOMShapes(VA.DOM.ShapeList dom_doc, MG.GeometryGraph msagl_graph, IVisio.Application app)
@@ -328,7 +324,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         private void CreateBezierEdges(VA.DOM.ShapeList vdoc, MG.GeometryGraph msagl_graph)
         {
-// DRAW EDGES WITH BEZIERS 
+            // DRAW EDGES WITH BEZIERS 
             foreach (var msagl_edge in msagl_graph.Edges)
             {
                 var layoutconnector = (DGMODEL.Connector)msagl_edge.UserData;
@@ -367,7 +363,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         private void CreateDynamicConnectorEdges(VA.DOM.ShapeList vdoc, MG.GeometryGraph msagl_graph)
         {
-// CREATE EDGES
+            // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
             {
                 var layoutconnector = (DGMODEL.Connector)i.UserData;
@@ -443,8 +439,8 @@ namespace VisioAutomation.Layout.MSAGL
 
         private VA.DOM.BezierCurve draw_edge_bezier(
             VA.DOM.ShapeList page,
-                                            DGMODEL.Connector fc,
-                                            MG.Edge edge)
+            DGMODEL.Connector connector,
+            MG.Edge edge)
         {
             var final_bez_points =
                 MSAGLUtil.ToVAPoints(edge).Select(p => ToDocumentCoordinates(p)).ToList();
