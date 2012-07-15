@@ -144,11 +144,8 @@ namespace VisioAutomation.Layout.Models.OrgChart
             domshapescol.Render(page);
 
             var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
-            var orgnodes_with_urls = from n in orgnodes
-                                     where n.URL != null
-                                     select n;
-            var all_urls = from n in orgnodes_with_urls
-                           select new { orgnode = n, shape = (VA.DOM.BaseShape) n.DOMNode, url = n.URL.Trim() };
+            var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);
+            var all_urls = orgnodes_with_urls.Select( n=>  new { orgnode = n, shape = (VA.DOM.BaseShape) n.DOMNode, url = n.URL.Trim() } );
 
             foreach (var i in all_urls)
             {
@@ -156,8 +153,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 h.Name = "Row_1";
                 h.Address = i.orgnode.URL;
             }
-
-
+            
             // Attach all the orgchart nodes to the Visio shapes that were created
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
