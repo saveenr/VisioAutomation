@@ -73,7 +73,7 @@ namespace VisioAutomation.Layout.Models.Tree
             var node_master = masters[master_name];
             var connector_master = masters[dc_name];
 
-            var domshapescol = new VA.DOM.ShapeList();
+            var dompage = new VA.DOM.Page();
 
             var page_size = bb.Size.Add(border_width*2, border_width*2.0);
 
@@ -84,7 +84,7 @@ namespace VisioAutomation.Layout.Models.Tree
             }
 
             var centerpoints = treenodes.Select(tn => tn.Rect.Center).ToList();
-            var dom_masters = centerpoints.Select(cp => domshapescol.Drop(node_master, cp)).ToList();
+            var dom_masters = centerpoints.Select(cp => dompage.ShapeList.Drop(node_master, cp)).ToList();
 
             // For each OrgChart object, attach the shape that corresponds to it
             foreach (int i in Enumerable.Range(0, treenodes.Count))
@@ -113,7 +113,7 @@ namespace VisioAutomation.Layout.Models.Tree
                     {
                         var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                         var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                        var connector = domshapescol.Connect(connector_master, parent_shape, child_shape);
+                        var connector = dompage.ShapeList.Connect(connector_master, parent_shape, child_shape);
                         connector.Cells = this.LayoutOptions.ConnectorCells;
                     }
                 }
@@ -123,7 +123,7 @@ namespace VisioAutomation.Layout.Models.Tree
                 foreach (var connection in layout.EnumConnections())
                 {
                     var bez = layout.GetConnectionBezier(connection);
-                    var shape = domshapescol.DrawBezier(bez);
+                    var shape = dompage.ShapeList.DrawBezier(bez);
                     shape.Cells = this.LayoutOptions.ConnectorCells;
                 }
             }
@@ -132,7 +132,7 @@ namespace VisioAutomation.Layout.Models.Tree
                 foreach (var connection in layout.EnumConnections())
                 {
                     var polyline = layout.GetConnectionPolyline(connection);
-                    var shape = domshapescol.DrawPolyLine(polyline);
+                    var shape = dompage.ShapeList.DrawPolyLine(polyline);
                     shape.Cells = this.LayoutOptions.ConnectorCells;
                 }
             }
@@ -142,10 +142,8 @@ namespace VisioAutomation.Layout.Models.Tree
                 throw new VA.AutomationException(msg);
             }
 
-
-            domshapescol.Render(page);
-
-            page.SetSize(page_size);
+            dompage.Size = page_size;
+            dompage.Render(page);
 
             // Attach all the orgchart nodes to the Visio shapes that were created
             foreach (int i in Enumerable.Range(0, treenodes.Count))

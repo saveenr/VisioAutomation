@@ -75,7 +75,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var dc_master = stencil.Masters["Dynamic Connector"];
             var doc = documents.AddEx(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS, 0, 0);
 
-            var domshapescol = new VA.DOM.ShapeList();
+            var dompage = new VA.DOM.Page();
             
             // fixup the nodes so that they render on the page
             foreach (var i in treenodes)
@@ -93,7 +93,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
 
             var vmasters = centerpoints
-                .Select(centerpoint => domshapescol.Drop(master, centerpoint))
+                .Select(centerpoint => dompage.ShapeList.Drop(master, centerpoint))
                 .ToList();
 
 
@@ -116,7 +116,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                     {
                         var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                         var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                        var connector = domshapescol.Connect(dc_master,parent_shape, child_shape);
+                        var connector = dompage.ShapeList.Connect(dc_master, parent_shape, child_shape);
                     }
                 }
             }
@@ -125,7 +125,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 foreach (var connection in layout.EnumConnections())
                 {
                     var bez = layout.GetConnectionBezier(connection);
-                    domshapescol.DrawBezier(bez);
+                    dompage.ShapeList.DrawBezier(bez);
                 }
             }
 
@@ -137,11 +137,10 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 shape.Text = new VA.Text.Markup.TextElement(orgnode.Text);
             }
 
-            var page = doc.Pages.Add();
-            var page_size_with_border = bb.Size.Add(border_width*2, border_width*2.0);
-            page.SetSize(page_size_with_border);
+            var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
+            dompage.Size = page_size_with_border;
 
-            domshapescol.Render(page);
+            var page = dompage.Render(doc);
 
             var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
             var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);

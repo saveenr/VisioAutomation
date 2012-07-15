@@ -24,12 +24,28 @@ namespace VisioAutomation.DOM
             {
                 throw new System.ArgumentNullException("doc");
             }
+
             var pages = doc.Pages;
             var page = pages.Add();
+
+            this.Render(page);
+            
+            return page;
+        }
+
+        public void Render(IVisio.Page page)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException("page");
+            }
+
+
             if (this.Size.HasValue)
             {
-                page.SetSize(this.Size.Value);                
+                page.SetSize(this.Size.Value);
             }
+
             this.ShapeList.Render(page);
             if (this.ResizeToFit)
             {
@@ -42,8 +58,6 @@ namespace VisioAutomation.DOM
                     page.ResizeToFitContents();
                 }
             }
-
-            return page;
         }
     }
 

@@ -139,12 +139,12 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
                 throw new System.ArgumentNullException("page");
             }
 
-            var domshapescol = new VA.DOM.ShapeList();
+            var dompage = new VA.DOM.Page();
             double x = 0;
             double y = 1;
             foreach (var shape in this.Shapes)
             {
-                var dom_node = domshapescol.Drop(shape.MasterName, shape.StencilName, x, y);
+                var dom_node = dompage.ShapeList.Drop(shape.MasterName, shape.StencilName, x, y);
                 shape.DOMNode = dom_node;
                 shape.DOMNode.Text = new VA.Text.Markup.TextElement( shape.Label ) ;
                 x += 1.0;
@@ -152,15 +152,14 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
 
             foreach (var connector in this.Connectors)
             {
-                
-                var dom_node = domshapescol.Connect( "Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
+
+                var dom_node = dompage.ShapeList.Connect("Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
                 connector.DOMNode = dom_node;
                 connector.DOMNode.Text = new VA.Text.Markup.TextElement( connector.Label );
             }
-
-            domshapescol.Render(page);
-
-            page.ResizeToFitContents(0.5,0.5);
+            dompage.ResizeToFit = true;
+            dompage.ResizeToFitMargin = new VA.Drawing.Size(0.5, 0.5);
+            dompage.Render(page);
         }
     }
 }
