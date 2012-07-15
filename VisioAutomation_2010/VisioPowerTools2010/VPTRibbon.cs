@@ -170,7 +170,6 @@ namespace VisioPowerTools2010
             var app = Globals.ThisAddIn.Application;
             var docs = app.Documents;
             var doc = docs.Add("");
-            var page = doc.Pages[1];
 
             var dompage = new VA.DOM.Page();
             double y = 8;
