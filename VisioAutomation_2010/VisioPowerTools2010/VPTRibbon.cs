@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Microsoft.Office.Interop.Visio;
 using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
-using Color = System.Drawing.Color;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioPowerTools2010
 {
     public partial class VPTRibbon
@@ -21,7 +18,7 @@ namespace VisioPowerTools2010
             {
                 this.scriptingsession = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
             }
-            catch (Exception)
+            catch (System.Exception)
             {
                 string msg = "Failed to load Visio Power Tools";
                 MessageBox.Show(msg);
@@ -34,7 +31,7 @@ namespace VisioPowerTools2010
             {
                 func();
             }
-            catch (Exception)
+            catch (System.Exception)
             {
                 string msg = "Failed to execute command";
                 MessageBox.Show(msg);
@@ -89,7 +86,7 @@ namespace VisioPowerTools2010
                 return;
             }
 
-            if (doc.Type != VisDocumentTypes.visTypeDrawing)
+            if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
                 MessageBox.Show("Must have a drawing open");
                 return;
@@ -160,7 +157,7 @@ namespace VisioPowerTools2010
             form.ShowDialog();
         }
 
-        private static void draw_colors(List<Color> colors)
+        private static void draw_colors(List<System.Drawing.Color> colors)
         {
             if (colors.Count < 1)
             {
@@ -273,7 +270,7 @@ namespace VisioPowerTools2010
             var dic = new Dictionary<string, VA.Layout.Models.DirectedGraph.Shape>();
             foreach (var line in lines)
             {
-                var tokens = line.Split(new string[] {"->"}, StringSplitOptions.RemoveEmptyEntries);
+                var tokens = line.Split(new string[] {"->"}, System.StringSplitOptions.RemoveEmptyEntries);
                 if (tokens.Length==0)
                 {
                     // do nothing
