@@ -184,10 +184,10 @@ namespace VisioPowerTools2010
             var sb = new System.Text.StringBuilder();
             foreach (var color in colors)
             {
-                var shape0 = dompage.ShapeList.DrawRectangle(col0_x, y, col0_x + col0_w, y + cellwidth);
-                var shape1 = dompage.ShapeList.DrawRectangle(col1_x, y, col1_x + cellwidth, y + cellwidth);
-                var shape2 = dompage.ShapeList.DrawRectangle(col2_x, y, col2_x + cellwidth, y + cellwidth);
-                var shape3 = dompage.ShapeList.DrawRectangle(col3_x, y, col3_x + cellwidth, y + cellwidth);
+                var shape0 = dompage.Shapes.DrawRectangle(col0_x, y, col0_x + col0_w, y + cellwidth);
+                var shape1 = dompage.Shapes.DrawRectangle(col1_x, y, col1_x + cellwidth, y + cellwidth);
+                var shape2 = dompage.Shapes.DrawRectangle(col2_x, y, col2_x + cellwidth, y + cellwidth);
+                var shape3 = dompage.Shapes.DrawRectangle(col3_x, y, col3_x + cellwidth, y + cellwidth);
                 var fill = new VisioAutomation.Drawing.ColorRGB(color.R, color.G, color.B);
                 string color_formula = fill.ToFormula();
                 double trans = (color.A / 255.0);

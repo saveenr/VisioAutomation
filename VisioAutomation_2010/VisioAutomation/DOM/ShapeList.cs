@@ -3,12 +3,13 @@ using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using System.Collections;
 
 namespace VisioAutomation.DOM
 {
     public class Page : Node
     {
-        public ShapeList ShapeList { get; private set; }
+        public ShapeList Shapes { get; private set; }
         public VA.Drawing.Size? Size;
         public bool ResizeToFit;
         public VA.Drawing.Size? ResizeToFitMargin;
@@ -16,7 +17,7 @@ namespace VisioAutomation.DOM
 
         public Page()
         {
-            this.ShapeList = new ShapeList();
+            this.Shapes = new ShapeList();
             this.PageCells = new VA.Pages.PageCells();
         }
 
@@ -54,7 +55,7 @@ namespace VisioAutomation.DOM
             }
             
             // Then render the shapes
-            this.ShapeList.Render(page);
+            this.Shapes.Render(page);
 
             // Optionally, perform page resizing to fit contents
             if (this.ResizeToFit)
@@ -71,15 +72,38 @@ namespace VisioAutomation.DOM
         }
     }
 
-    public class ShapeList : Node
+    public class ShapeList : Node, IEnumerable<BaseShape>
     {
-        public NodeList<BaseShape> Shapes { get; private set; }
+        private NodeList<BaseShape> shapes;
 
         public ShapeList()
         {
-            this.Shapes = new NodeList<BaseShape>(this);
+            this.shapes = new NodeList<BaseShape>(this);
         }
 
+        public IEnumerator<BaseShape> GetEnumerator()
+        {
+            foreach (var i in this.shapes)
+            {
+                yield return i;
+            }
+        }
+
+        public void Add( BaseShape shape )
+        {
+            this.shapes.Add(shape);
+        }
+
+        public int Count
+        {
+            get { return this.shapes.Count; }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
+        {                                           // keeps it hidden.
+            return GetEnumerator();
+        }
+        
         public void Render(IVisio.Page page)
         {
             if (page == null)
@@ -99,7 +123,7 @@ namespace VisioAutomation.DOM
 
         private void AddHyperlinks(RenderContext ctx)
         {
-            var shapes_with_hyperlinks = this.Shapes.Where(s => s.Hyperlinks != null);
+            var shapes_with_hyperlinks = this.shapes.Where(s => s.Hyperlinks != null);
             foreach (var shape in shapes_with_hyperlinks)
             {
                 var vshape = ctx.GetShape(shape.VisioShapeID);
@@ -114,7 +138,7 @@ namespace VisioAutomation.DOM
 
         private void SetCustomProperties(RenderContext ctx)
         {
-            var shapes_with_custom_props = this.Shapes.Where(s => s.CustomProperties != null);
+            var shapes_with_custom_props = this.shapes.Where(s => s.CustomProperties != null);
             foreach (var shape in shapes_with_custom_props)
             {
                 var vshape = ctx.GetShape(shape.VisioShapeID);
@@ -129,7 +153,7 @@ namespace VisioAutomation.DOM
 
         private void SetText()
         {
-            var shapes_with_text = this.Shapes.Where(s => s.Text != null);
+            var shapes_with_text = this.shapes.Where(s => s.Text != null);
             foreach (var shape in shapes_with_text)
             {
                 shape.Text.SetText(shape.VisioShape);
@@ -146,7 +170,7 @@ namespace VisioAutomation.DOM
             UpdateCellsWithDroppSizes(ctx);
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            var shapes_with_cells = this.Shapes.Where(s => s.Cells != null);
+            var shapes_with_cells = this.shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {
                 var fmt = shape.Cells;
@@ -159,7 +183,7 @@ namespace VisioAutomation.DOM
         private void PerformDrawing(RenderContext ctx)
         {
             // Draw shapes
-            var non_connectors = this.Shapes.Where(s => !(s is Connector));
+            var non_connectors = this.shapes.Where(s => !(s is Connector));
             var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
             var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
 
@@ -173,7 +197,7 @@ namespace VisioAutomation.DOM
             _draw_connectors(ctx);
 
             // Make sure we have Visio shape objects for all DOM objects
-            foreach (var shape in this.Shapes)
+            foreach (var shape in this.shapes)
             {
                 if (shape.VisioShape == null)
                 {
@@ -194,7 +218,7 @@ namespace VisioAutomation.DOM
         private void ResolveFonts(RenderContext ctx)
         {
             var unique_names = new HashSet<string>();
-            foreach (var shape in this.Shapes)
+            foreach (var shape in this.shapes)
             {
                 if (shape.CharFontName != null)
                 {
@@ -216,7 +240,7 @@ namespace VisioAutomation.DOM
                 name_to_id[name] = font.ID;
             }
 
-            foreach (var shape in this.Shapes)
+            foreach (var shape in this.shapes)
             {
                 if (shape.CharFontName != null)
                 {
@@ -232,7 +256,7 @@ namespace VisioAutomation.DOM
 
         private void check_valid_shape_ids()
         {
-            foreach (var shape in this.Shapes)
+            foreach (var shape in this.shapes)
             {
                 if (shape is Connector)
                 {
@@ -253,7 +277,7 @@ namespace VisioAutomation.DOM
         {
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
-            var dom_shapes = this.Shapes
+            var dom_shapes = this.shapes
                 .Where(shape => shape is Shape)
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
@@ -275,7 +299,7 @@ namespace VisioAutomation.DOM
             }
 
             // Ensure that all shapes to drop are assigned a visio master object
-            foreach (var shape in this.Shapes.Where(s=>s is Shape).Cast<Shape>())
+            foreach (var shape in this.shapes.Where(s=>s is Shape).Cast<Shape>())
             {
                 if (shape.Master.VisioMaster == null)
                 {
@@ -286,7 +310,7 @@ namespace VisioAutomation.DOM
 
         private void UpdateCellsWithDroppSizes(RenderContext ctx)
         {
-            var masters = this.Shapes
+            var masters = this.shapes
                 .Where(shape => shape is Shape).Cast<Shape>();
 
             foreach (var master in masters)
@@ -394,7 +418,7 @@ namespace VisioAutomation.DOM
 
         private void _draw_connectors(RenderContext ctx)
         {
-            var dom_connectors = this.Shapes.Where(s => s is Connector).Cast<Connector>().ToList();
+            var dom_connectors = this.shapes.Where(s => s is Connector).Cast<Connector>().ToList();
 
             // if no dynamic connectors then do nothing
             if (dom_connectors.Count < 1)
@@ -430,35 +454,35 @@ namespace VisioAutomation.DOM
         public PolyLine DrawPolyLine(IList<VA.Drawing.Point> points)
         {
             var pl = new PolyLine(points);
-            this.Shapes.Add(pl);
+            this.Add(pl);
             return pl;
         }
 
         public Line DrawLine(double x0, double y0, double x1, double y1)
         {
             var line = new Line(x0, y0, x1, y1);
-            this.Shapes.Add(line);
+            this.Add(line);
             return line;
         }
 
         public Line DrawLine(VA.Drawing.Point p0, VA.Drawing.Point p1)
         {
             var line = new Line(p0, p1);
-            this.Shapes.Add(line);
+            this.Add(line);
             return line;
         }
 
         public Rectangle DrawRectangle(double x0, double y0, double x1, double y1)
         {
             var rectangle = new Rectangle(x0, y0, x1, y1);
-            this.Shapes.Add(rectangle);
+            this.Add(rectangle);
             return rectangle;
         }
 
         public Rectangle DrawRectangle(VA.Drawing.Point p0, VA.Drawing.Point p1)
         {
             var rectangle = new Rectangle(p0, p1);
-            this.Shapes.Add(rectangle);
+            this.Add(rectangle);
             return rectangle;
         }
 
@@ -466,90 +490,90 @@ namespace VisioAutomation.DOM
         public Oval DrawOval(VA.Drawing.Rectangle r)
         {
             var oval = new Oval(r);
-            this.Shapes.Add(oval);
+            this.Add(oval);
             return oval;
         }
 
         public PieSlice DrawPieSlice(VA.Drawing.Point center, double radius, double start, double end)
         {
             var pieslice = new PieSlice(center,radius,start,end);
-            this.Shapes.Add(pieslice);
+            this.Add(pieslice);
             return pieslice;
         }
 
         public Arc DrawArc(VA.Drawing.Point center, double inner_radius, double outer_radius, double start, double end)
         {
             var arc = new Arc(center, inner_radius, outer_radius, start, end);
-            this.Shapes.Add(arc);
+            this.Add(arc);
             return arc;
         }
         public Rectangle DrawRectangle(VA.Drawing.Rectangle r)
         {
             var rectangle = new Rectangle(r);
-            this.Shapes.Add(rectangle);
+            this.Add(rectangle);
             return rectangle;
         }
 
         public BezierCurve DrawBezier(IEnumerable<VA.Drawing.Point> points)
         {
             var bezier = new BezierCurve(points);
-            this.Shapes.Add(bezier);
+            this.Add(bezier);
             return bezier;
         }
 
         public BezierCurve DrawBezier(IEnumerable<double> points)
         {
             var bezier = new BezierCurve(points);
-            this.Shapes.Add(bezier);
+            this.Add(bezier);
             return bezier;
         }
 
         public Shape Drop(IVisio.Master master, VA.Drawing.Point pos)
         {
             var m = new Shape(master, pos);
-            this.Shapes.Add(m);
+            this.Add(m);
             return m;
         }
 
         public Shape Drop(IVisio.Master master, double x, double y)
         {
             var m = new Shape(master, new VA.Drawing.Point(x, y));
-            this.Shapes.Add(m);
+            this.Add(m);
             return m;
         }
 
         public Shape Drop(string master, string stencil, VA.Drawing.Point pos)
         {
             var m = new Shape(master, stencil, pos);
-            this.Shapes.Add(m);
+            this.Add(m);
             return m;
         }
 
         public Shape Drop(string master, string stencil, VA.Drawing.Rectangle rect)
         {
             var m = new Shape(master, stencil, rect);
-            this.Shapes.Add(m);
+            this.Add(m);
             return m;
         }
 
         public Shape Drop(string master, string stencil, double x, double y)
         {
             var m = new Shape(master, stencil, new VA.Drawing.Point(x, y));
-            this.Shapes.Add(m);
+            this.Add(m);
             return m;
         }
 
         public Connector Connect(IVisio.Master m, BaseShape s0, BaseShape s2)
         {
             var cxn = new Connector(s0, s2, m);
-            this.Shapes.Add(cxn);
+            this.Add(cxn);
             return cxn;
         }
 
         public Connector Connect(string master, string stencil, BaseShape s0, BaseShape s2)
         {
             var cxn = new Connector(s0, s2, master, stencil);
-            this.Shapes.Add(cxn);
+            this.Add(cxn);
             return cxn;
         }
     }

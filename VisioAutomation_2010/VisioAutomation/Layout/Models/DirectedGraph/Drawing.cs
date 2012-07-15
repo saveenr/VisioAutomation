@@ -144,7 +144,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             double y = 1;
             foreach (var shape in this.Shapes)
             {
-                var dom_node = dompage.ShapeList.Drop(shape.MasterName, shape.StencilName, x, y);
+                var dom_node = dompage.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
                 shape.DOMNode = dom_node;
                 shape.DOMNode.Text = new VA.Text.Markup.TextElement( shape.Label ) ;
                 x += 1.0;
@@ -153,7 +153,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             foreach (var connector in this.Connectors)
             {
 
-                var dom_node = dompage.ShapeList.Connect("Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
+                var dom_node = dompage.Shapes.Connect("Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
                 connector.DOMNode = dom_node;
                 connector.DOMNode.Text = new VA.Text.Markup.TextElement( connector.Label );
             }

@@ -61,7 +61,7 @@ namespace TestVisioAutomation
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
             vrect1.Cells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
-            dompage.ShapeList.Shapes.Add(vrect1);
+            dompage.Shapes.Add(vrect1);
 
             // Render it
             var app = this.GetVisioApplication();
@@ -117,7 +117,7 @@ namespace TestVisioAutomation
             vrect1.CustomProperties["FOO"] = cp1;
             vrect1.CustomProperties["BAR"] = cp2;
 
-            domshapescol.Shapes.Add(vrect1);
+            domshapescol.Add(vrect1);
 
             // Render it
             var app = this.GetVisioApplication();

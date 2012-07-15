@@ -84,7 +84,7 @@ namespace VisioAutomation.Layout.Models.Tree
             }
 
             var centerpoints = treenodes.Select(tn => tn.Rect.Center).ToList();
-            var dom_masters = centerpoints.Select(cp => dompage.ShapeList.Drop(node_master, cp)).ToList();
+            var dom_masters = centerpoints.Select(cp => dompage.Shapes.Drop(node_master, cp)).ToList();
 
             // For each OrgChart object, attach the shape that corresponds to it
             foreach (int i in Enumerable.Range(0, treenodes.Count))
@@ -113,7 +113,7 @@ namespace VisioAutomation.Layout.Models.Tree
                     {
                         var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                         var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                        var connector = dompage.ShapeList.Connect(connector_master, parent_shape, child_shape);
+                        var connector = dompage.Shapes.Connect(connector_master, parent_shape, child_shape);
                         connector.Cells = this.LayoutOptions.ConnectorCells;
                     }
                 }
@@ -123,7 +123,7 @@ namespace VisioAutomation.Layout.Models.Tree
                 foreach (var connection in layout.EnumConnections())
                 {
                     var bez = layout.GetConnectionBezier(connection);
-                    var shape = dompage.ShapeList.DrawBezier(bez);
+                    var shape = dompage.Shapes.DrawBezier(bez);
                     shape.Cells = this.LayoutOptions.ConnectorCells;
                 }
             }
@@ -132,7 +132,7 @@ namespace VisioAutomation.Layout.Models.Tree
                 foreach (var connection in layout.EnumConnections())
                 {
                     var polyline = layout.GetConnectionPolyline(connection);
-                    var shape = dompage.ShapeList.DrawPolyLine(polyline);
+                    var shape = dompage.Shapes.DrawPolyLine(polyline);
                     shape.Cells = this.LayoutOptions.ConnectorCells;
                 }
             }

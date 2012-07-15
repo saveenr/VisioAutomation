@@ -93,7 +93,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
 
             var vmasters = centerpoints
-                .Select(centerpoint => dompage.ShapeList.Drop(master, centerpoint))
+                .Select(centerpoint => dompage.Shapes.Drop(master, centerpoint))
                 .ToList();
 
 
@@ -116,7 +116,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                     {
                         var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                         var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                        var connector = dompage.ShapeList.Connect(dc_master, parent_shape, child_shape);
+                        var connector = dompage.Shapes.Connect(dc_master, parent_shape, child_shape);
                     }
                 }
             }
@@ -125,7 +125,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 foreach (var connection in layout.EnumConnections())
                 {
                     var bez = layout.GetConnectionBezier(connection);
-                    dompage.ShapeList.DrawBezier(bez);
+                    dompage.Shapes.DrawBezier(bez);
                 }
             }
 
