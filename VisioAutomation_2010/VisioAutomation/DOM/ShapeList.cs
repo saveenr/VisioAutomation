@@ -6,6 +6,47 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.DOM
 {
+    public class Page : Node
+    {
+        public ShapeList ShapeList { get; private set; }
+        public VA.Drawing.Size? Size;
+        public bool ResizeToFit;
+        public VA.Drawing.Size? ResizeToFitMargin;
+
+        public Page()
+        {
+            this.ShapeList = new ShapeList();
+        }
+
+        public IVisio.Page Render(IVisio.Document doc)
+        {
+            if (doc== null)
+            {
+                throw new System.ArgumentNullException("doc");
+            }
+            var pages = doc.Pages;
+            var page = pages.Add();
+            if (this.Size.HasValue)
+            {
+                page.SetSize(this.Size.Value);                
+            }
+            this.ShapeList.Render(page);
+            if (this.ResizeToFit)
+            {
+                if (this.ResizeToFitMargin.HasValue)
+                {
+                    page.ResizeToFitContents(this.ResizeToFitMargin.Value);
+                }
+                else
+                {
+                    page.ResizeToFitContents();
+                }
+            }
+
+            return page;
+        }
+    }
+
     public class ShapeList : Node
     {
         public NodeList<BaseShape> Shapes { get; private set; }

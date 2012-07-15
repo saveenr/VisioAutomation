@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Office.Interop.Visio;
-using VisioAutomation.DOM;
 using BL = VisioAutomation.Layout.Models.BoxLayout;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -37,11 +35,11 @@ namespace InfoGraphicsPy
         public string CellFill = "rgb(240,240,240)";
         public string SubCellFill = "rgb(220,220,220)";
 
-        ShapeCells titleformat = new VA.DOM.ShapeCells();
-        ShapeCells cellformat = new VA.DOM.ShapeCells();
-        ShapeCells subcellformat = new VA.DOM.ShapeCells();
-        ShapeCells xcatformat = new VA.DOM.ShapeCells();
-        ShapeCells ycatformat = new VA.DOM.ShapeCells();
+        VA.DOM.ShapeCells titleformat = new VA.DOM.ShapeCells();
+        VA.DOM.ShapeCells cellformat = new VA.DOM.ShapeCells();
+        VA.DOM.ShapeCells subcellformat = new VA.DOM.ShapeCells();
+        VA.DOM.ShapeCells xcatformat = new VA.DOM.ShapeCells();
+        VA.DOM.ShapeCells ycatformat = new VA.DOM.ShapeCells();
 
         public CategoryChart()
         {
@@ -218,7 +216,7 @@ namespace InfoGraphicsPy
             }
         }
 
-        private void Render(Page page, BL.BoxLayout layout)
+        private void Render(IVisio.Page page, BL.BoxLayout layout)
         {
             layout.PerformLayout();
             var doc = page.Document;
