@@ -82,6 +82,8 @@
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
+    <Compile Include="DOM\Document.cs" />
+    <Compile Include="DOM\PageList.cs" />
     <Compile Include="DOM\Page.cs" />
     <Compile Include="Internal\ShapeUtil.cs" />
     <Compile Include="DOM\Arc.cs" />
