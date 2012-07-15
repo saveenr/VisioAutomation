@@ -147,11 +147,11 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);
             var all_urls = orgnodes_with_urls.Select( n=>  new { orgnode = n, shape = (VA.DOM.BaseShape) n.DOMNode, url = n.URL.Trim() } );
 
-            foreach (var i in all_urls)
+            foreach (var url in all_urls)
             {
-                var h = i.orgnode.VisioShape.Hyperlinks.Add();
-                h.Name = "Row_1";
-                h.Address = i.orgnode.URL;
+                var hlink = url.orgnode.VisioShape.Hyperlinks.Add();
+                hlink.Name = "Row_1";
+                hlink.Address = url.orgnode.URL;
             }
             
             // Attach all the orgchart nodes to the Visio shapes that were created
