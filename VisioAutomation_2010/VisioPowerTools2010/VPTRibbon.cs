@@ -168,10 +168,12 @@ namespace VisioPowerTools2010
             }
 
             var app = Globals.ThisAddIn.Application;
-            var docs = app.Documents;
-            var doc = docs.Add("");
 
+            var domdoc = new VA.DOM.Document();
             var dompage = new VA.DOM.Page();
+            domdoc.Pages.Add(dompage);
+          
+
             double y = 8;
             double col0_w = 3.0;
             double col0_x = 0;
@@ -237,7 +239,8 @@ namespace VisioPowerTools2010
 
             dompage.ResizeToFit = true;
             dompage.ResizeToFitMargin = new VA.Drawing.Size(cellwidth, cellwidth);
-            dompage.Render(doc);
+
+            domdoc.Render(app);
 
             var window = app.ActiveWindow;
             window.ShowPageBreaks = 0;
