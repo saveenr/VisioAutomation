@@ -26,9 +26,10 @@ namespace TestVisioAutomation
             // Rendering a DOM should not change the page count
             // Empty DOMs do not add any shapes
             var app = this.GetVisioApplication();
-            var domshapescol = new VA.DOM.ShapeList();
+
+            var dompage = new VA.DOM.Page();
             var doc = this.GetNewDoc();
-            domshapescol.Render(app.ActivePage);
+            dompage.Render(app.ActiveDocument);
             Assert.AreEqual(0,app.ActivePage.Shapes.Count);
             app.ActiveDocument.Close( true );
         }
@@ -38,15 +39,15 @@ namespace TestVisioAutomation
         {
             var app = this.GetVisioApplication();
 
-            var domshapescol = new VA.DOM.ShapeList();
+            var dompage = new VA.DOM.Page();
 
             var visdoc = this.GetNewDoc();
             Assert.AreEqual(1, visdoc.Pages.Count);
 
             app.ActivePage.SetSize(new VA.Drawing.Size(5, 5));
-            domshapescol.Render(app.ActivePage);
+            var page = dompage.Render(app.ActiveDocument);
 
-            Assert.AreEqual(1, visdoc.Pages.Count);
+            Assert.AreEqual(2, visdoc.Pages.Count);
             AssertVA.AreEqual(5, 5, app.ActivePage.GetSize(), 0.005);
 
             app.ActiveDocument.Close(true);
@@ -56,17 +57,17 @@ namespace TestVisioAutomation
         public void Draw_Red_Rectangle_With_Text()
         {
             // Create the doc
-            var domshapescol = new VA.DOM.ShapeList();
+            var dompage = new VA.DOM.Page();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
             vrect1.Cells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
-            domshapescol.Shapes.Add(vrect1);
+            dompage.ShapeList.Shapes.Add(vrect1);
 
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             app.ActivePage.SetSize(new VA.Drawing.Size(10, 10));
-            domshapescol.Render(app.ActivePage);
+            var page = dompage.Render(app.ActiveDocument);
 
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
