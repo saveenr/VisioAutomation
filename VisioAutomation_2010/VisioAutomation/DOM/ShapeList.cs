@@ -12,10 +12,12 @@ namespace VisioAutomation.DOM
         public VA.Drawing.Size? Size;
         public bool ResizeToFit;
         public VA.Drawing.Size? ResizeToFitMargin;
+        public VA.Pages.PageCells PageCells;
 
         public Page()
         {
             this.ShapeList = new ShapeList();
+            this.PageCells = new VA.Pages.PageCells();
         }
 
         public IVisio.Page Render(IVisio.Document doc)
@@ -40,13 +42,21 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentNullException("page");
             }
 
+            // First handle any page properties
+            var page_sheet = page.PageSheet;
+            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            this.PageCells.Apply(update, (short)page_sheet.ID);
+            update.Execute(page);
 
             if (this.Size.HasValue)
             {
                 page.SetSize(this.Size.Value);
             }
-
+            
+            // Then render the shapes
             this.ShapeList.Render(page);
+
+            // Optionally, perform page resizing to fit contents
             if (this.ResizeToFit)
             {
                 if (this.ResizeToFitMargin.HasValue)

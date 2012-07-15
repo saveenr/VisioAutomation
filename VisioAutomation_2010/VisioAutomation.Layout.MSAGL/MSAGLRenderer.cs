@@ -147,25 +147,12 @@ namespace VisioAutomation.Layout.MSAGL
         {        
             // Create A DOM and render it to the page
             var app = page.Application;
-            var dom_doc = CreateDOMDocument(layout_diagram, app);
+            var dompage = CreateDOMPage(layout_diagram, app);
 
             using (var perfscope = new VA.Application.PerfScope(app))
             {
-                // Setup the page
-                var pagecells = new VA.Pages.PageCells();
-                pagecells.PlaceStyle = 1;
-                pagecells.RouteStyle = 5;
-                pagecells.AvenueSizeX = 2.0;
-                pagecells.AvenueSizeY = 2.0;
-                pagecells.LineRouteExt = 2;
-                var page_sheet = page.PageSheet;
-                var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-                pagecells.Apply(update, (short)page_sheet.ID);
-                update.Execute(page);
-                page.SetSize(this.layout_bb.Size);
-
                 // render the shapes to the page
-                dom_doc.Render(page);                    
+                dompage.Render(page);                    
             }
 
             // Find all the shapes that were created in the DOM and put them in the layout structure
@@ -238,29 +225,37 @@ namespace VisioAutomation.Layout.MSAGL
             }
         }
 
-        public VA.DOM.ShapeList CreateDOMDocument(DGMODEL.Drawing layout_diagram, IVisio.Application vis)
+        public VA.DOM.Page CreateDOMPage(DGMODEL.Drawing layout_diagram, IVisio.Application vis)
         {
+            var dompage = new VA.DOM.Page();
             ResolveMasters(layout_diagram, vis);
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
-            var domshapes = new VA.DOM.ShapeList();
             
             var active_window = vis.ActiveWindow;
             active_window.ShowConnectPoints = VA.Convert.BoolToShort(!this.LayoutOptions.HideConnectionPoints);
             active_window.ShowGrid = VA.Convert.BoolToShort(this.LayoutOptions.HideGrid);
 
-            CreateDOMShapes(domshapes, msagl_graph, vis);
+            CreateDOMShapes(dompage.ShapeList, msagl_graph, vis);
 
             if (this.LayoutOptions.UseDynamicConnectors)
             {
-                CreateDynamicConnectorEdges(domshapes, msagl_graph);
+                CreateDynamicConnectorEdges(dompage.ShapeList, msagl_graph);
             }
             else
             {
-                CreateBezierEdges(domshapes, msagl_graph);
+                CreateBezierEdges(dompage.ShapeList, msagl_graph);
             }
 
-            return domshapes;
+            // Additional Page properties
+            dompage.PageCells.PlaceStyle = 1;
+            dompage.PageCells.RouteStyle = 5;
+            dompage.PageCells.AvenueSizeX = 2.0;
+            dompage.PageCells.AvenueSizeY = 2.0;
+            dompage.PageCells.LineRouteExt = 2;
+            dompage.Size = this.layout_bb.Size;
+
+            return dompage;
         }
 
         private void CreateDOMShapes(VA.DOM.ShapeList dom_doc, MG.GeometryGraph msagl_graph, IVisio.Application app)
