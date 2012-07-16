@@ -27,7 +27,7 @@ namespace VisioAutomation.Layout.Models.Tree
         
         public IEnumerable<Node> Nodes
         {
-            get { return VA.Internal.TreeTraversal.PreOrder(this.Root, n => n.Children); }
+            get { return VA.Internal.TreeOps.PreOrder(this.Root, n => n.Children); }
         }
     }
 }

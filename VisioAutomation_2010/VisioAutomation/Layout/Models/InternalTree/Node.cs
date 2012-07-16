@@ -171,7 +171,7 @@ namespace VisioAutomation.Layout.Models.InternalTree
 
         public IEnumerable<Node<T>> EnumRecursive()
         {
-            var iter = VA.Internal.TreeTraversal.Walk<Node<T>>(this, n => n.EnumChildren());
+            var iter = VA.Internal.TreeOps.Walk<Node<T>>(this, n => n.EnumChildren());
             var iter2 = iter.Where(i => i.HasEnteredNode).Select(i => i.Node);
             return iter2;
         }

@@ -226,7 +226,7 @@
     <Compile Include="Shapesheet\Update\UpdateBase.cs" />
     <Compile Include="Shapesheet\Update\UpdateRecord.cs" />
     <Compile Include="Shapesheet\FormulaLiteral.cs" />
-    <Compile Include="Internal\TreeTraversal.cs" />
+    <Compile Include="Internal\TreeOps.cs" />
     <Compile Include="Internal\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
@@ -273,7 +273,6 @@
     <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Shapesheet\Query\SectionQuery.cs" />
-    <Compile Include="Internal\TreeUtil.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />

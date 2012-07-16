@@ -61,7 +61,7 @@ namespace VisioAutomation.Text.Markup
 
         internal IEnumerable<VA.Internal.WalkEvent<Node>> Walk()
         {
-            return VA.Internal.TreeTraversal.Walk<Node>(this, get_children_for_walk);
+            return VA.Internal.TreeOps.Walk<Node>(this, get_children_for_walk);
         }
 
         IEnumerable<Node> get_children_for_walk(Node n)
@@ -77,7 +77,7 @@ namespace VisioAutomation.Text.Markup
         
         private IEnumerable<Node> WalkNodes()
         {
-            return VA.Internal.TreeTraversal.PreOrder<Node>(this,n=>n.Children);
+            return VA.Internal.TreeOps.PreOrder<Node>(this,n=>n.Children);
         }
 
         public void Add(Node n)

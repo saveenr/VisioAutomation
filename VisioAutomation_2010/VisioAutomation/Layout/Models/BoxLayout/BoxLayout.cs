@@ -18,7 +18,7 @@ namespace VisioAutomation.Layout.Models.BoxLayout
             get
             {
                 Node rootn = _root;
-                return VA.Internal.TreeTraversal.PreOrder(rootn, n => n.GetChildren());
+                return VA.Internal.TreeOps.PreOrder(rootn, n => n.GetChildren());
             }
         }
 

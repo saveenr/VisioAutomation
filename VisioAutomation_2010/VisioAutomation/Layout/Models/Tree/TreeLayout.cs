@@ -46,7 +46,7 @@ namespace VisioAutomation.Layout.Models.Tree
             const double border_width = 0.5;
 
             // Construct a layout tree from the hierarchy
-            var treenodes = VA.Internal.TreeUtil.CopyTree(
+            var treenodes = VA.Internal.TreeOps.CopyTree(
                 drawing.Root,
                 n => n.Children,
                 n => node_to_layout_node(n),

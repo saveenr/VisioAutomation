@@ -578,7 +578,7 @@ namespace VisioAutomation.Layout.Models.InternalTree
             System.Func<TA, T> func_get_data,
             System.Func<TA, VA.Drawing.Size> func_get_size)
         {
-            var walkevents = VA.Internal.TreeTraversal.Walk<TA>(root, n => enum_children(n));
+            var walkevents = VA.Internal.TreeOps.Walk<TA>(root, n => enum_children(n));
             return CreateLayoutTree(walkevents, func_get_data, func_get_size);
         }
 
