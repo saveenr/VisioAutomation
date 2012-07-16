@@ -16,7 +16,7 @@ namespace VisioAutomation.Layout.PageLayout
             this.AvenueSize = new VA.Drawing.Size(0.375, 0.375);
         }
 
-        public virtual void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
+        protected virtual void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
         {
             pagecells.AvenueSizeX = this.AvenueSize.Width;
             pagecells.AvenueSizeY = this.AvenueSize.Height;
