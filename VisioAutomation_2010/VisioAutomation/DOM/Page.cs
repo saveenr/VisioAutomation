@@ -11,6 +11,8 @@ namespace VisioAutomation.DOM
         public bool ResizeToFit;
         public VA.Drawing.Size? ResizeToFitMargin;
         public VA.Pages.PageCells PageCells;
+        public string Name;
+        public VA.Layout.PageLayout.Layout Layout;
 
         public Page()
         {
@@ -41,7 +43,13 @@ namespace VisioAutomation.DOM
             }
 
             // First handle any page properties
+            if (this.Name!=null)
+            {
+                page.NameU = this.Name;
+            }
+
             var page_sheet = page.PageSheet;
+            
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             this.PageCells.Apply(update, (short)page_sheet.ID);
             update.Execute(page);
@@ -53,6 +61,12 @@ namespace VisioAutomation.DOM
             
             // Then render the shapes
             this.Shapes.Render(page);
+
+            // Perform any additional layout
+            if (this.Layout!=null)
+            {
+                this.Layout.Apply(page);
+            }
 
             // Optionally, perform page resizing to fit contents
             if (this.ResizeToFit)

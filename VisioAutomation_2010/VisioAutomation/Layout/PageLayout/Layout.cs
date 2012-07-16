@@ -9,13 +9,10 @@ namespace VisioAutomation.Layout.PageLayout
         public LayoutStyle LayoutStyle { get; set; }
         public ConnectorStyle ConnectorStyle { get; set; }
         public ConnectorAppearance ConnectorAppearance { get; set; }
-        public bool ResizePageToFit { get; set; }
-        public VA.Drawing.Size Border { get; set; }
         public VA.Drawing.Size AvenueSize { get; set; }
 
         protected Layout()
         {
-            this.Border = new VA.Drawing.Size(0.5, 0.5);
             this.AvenueSize = new VA.Drawing.Size(0.375, 0.375);
         }
 
@@ -149,18 +146,6 @@ namespace VisioAutomation.Layout.PageLayout
             var pagesheet = page.PageSheet;
             update.Execute(pagesheet);
             page.Layout();
-
-            if (this.ResizePageToFit)
-            {
-                if (this.Border.Height > 0 || this.Border.Width > 0)
-                {
-                    page.ResizeToFitContents(this.Border);
-                }
-                else
-                {
-                    page.ResizeToFitContents();
-                }
-            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
+using VisioAutomation.Extensions;
 
 namespace VisioAutomationSamples
 {
@@ -132,10 +133,11 @@ namespace VisioAutomationSamples
             var layout_config = new VA.Layout.PageLayout.HierarchyLayout();
             layout_config.Direction = VA.Layout.PageLayout.Direction.BottomToTop;
             layout_config.HorizontalAlignment = VA.Layout.PageLayout.HorizontalAlignment.Center;
-            layout_config.ResizePageToFit = true;
             layout_config.AvenueSize = new VA.Drawing.Size(1, 1);
             layout_config.ConnectorAppearance = VA.Layout.PageLayout.ConnectorAppearance.Curved;
             layout_config.Apply(page1);
+
+            page1.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));
         }
     }
 }
