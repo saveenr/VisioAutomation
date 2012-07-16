@@ -73,9 +73,11 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var stencil = documents.OpenStencil(xorgchart_vss);
             var master = stencil.Masters[xorgchart_master_node_name];
             var dc_master = stencil.Masters["Dynamic Connector"];
-            var doc = documents.AddEx(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS, 0, 0);
 
+
+            var domdoc = new VA.DOM.Document(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
             var dompage = new VA.DOM.Page();
+            domdoc.Pages.Add(dompage);
             
             // fixup the nodes so that they render on the page
             foreach (var i in treenodes)
@@ -140,7 +142,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
             dompage.Size = page_size_with_border;
 
-            var page = dompage.Render(doc);
+            var doc = domdoc.Render(app);
 
             var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
             var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);

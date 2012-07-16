@@ -13,6 +13,7 @@ namespace VisioAutomation.DOM
         public VA.Pages.PageCells PageCells;
         public string Name;
         public VA.Layout.PageLayout.Layout Layout;
+        public IVisio.Page VisioPage;
 
         public Page()
         {
@@ -29,6 +30,7 @@ namespace VisioAutomation.DOM
 
             var pages = doc.Pages;
             var page = pages.Add();
+            this.VisioPage = page;
 
             this.Render(page);
             
@@ -42,11 +44,14 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentNullException("page");
             }
 
+
             // First handle any page properties
             if (this.Name!=null)
             {
                 page.NameU = this.Name;
             }
+
+            this.VisioPage = page;
 
             var page_sheet = page.PageSheet;
             
