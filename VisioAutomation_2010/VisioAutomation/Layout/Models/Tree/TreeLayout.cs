@@ -8,9 +8,10 @@ namespace VisioAutomation.Layout.Models.Tree
 {
     public class TreeLayout
     {
-        const string stencil_name = "basic_u.vss";
-        string master_name = "Rectangle";
-        private string dc_name = "Dynamic Connector";
+        const string basic_stencil_name = "basic_u.vss";
+        const string connectors_stencil_name = "connec_u.vss";
+        string rect_master_name = "Rectangle";
+        private string dc_master_name = "Dynamic Connector";
 
         public LayoutOptions LayoutOptions { get; set; }
 
@@ -68,10 +69,13 @@ namespace VisioAutomation.Layout.Models.Tree
 
             var app = page.Application;
             var documents = app.Documents;
-            var stencil = documents.OpenStencil(stencil_name);
-            var masters = stencil.Masters;
-            var node_master = masters[master_name];
-            var connector_master = masters[dc_name];
+            var basic_stencil = documents.OpenStencil(basic_stencil_name);
+            var connectors_stencil = documents.OpenStencil(connectors_stencil_name);
+            var basic_masters = basic_stencil.Masters;
+            var connectors_masters = connectors_stencil.Masters;
+
+            var node_master = basic_masters[rect_master_name];
+            var connector_master = connectors_masters[dc_master_name];
 
             var dompage = new VA.DOM.Page();
 
