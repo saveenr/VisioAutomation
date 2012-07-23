@@ -68,7 +68,7 @@ namespace VisioAutomation.Text.Markup
         {
             if (n is TextElement)
             {
-                foreach (var c in n.Children.Items)
+                foreach (var c in n.Children)
                 {
                     yield return c;
                 }

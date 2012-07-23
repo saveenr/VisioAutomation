@@ -16,7 +16,7 @@ namespace VisioAutomation.Text.Markup
 
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (var i in this.Items)
+            foreach (var i in this.items)
             {
                 yield return i;
             }
@@ -25,14 +25,6 @@ namespace VisioAutomation.Text.Markup
         IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
         {                                           // keeps it hidden.
             return GetEnumerator();
-        }
-
-        public IEnumerable<T> Items
-        {
-            get 
-            {
-                return this.items;
-            }
         }
 
         public void Add(T item)
