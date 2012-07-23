@@ -70,9 +70,10 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
             // vis.ActiveWindow.ShowConnectPoints = 0;
             var documents = app.Documents;
-            var stencil = documents.OpenStencil(xorgchart_vss);
-            var master = stencil.Masters[xorgchart_master_node_name];
-            var dc_master = stencil.Masters["Dynamic Connector"];
+            var orgchart_stencil = documents.OpenStencil(xorgchart_vss);
+            var connectors_stencil = documents.OpenStencil("connec_u.vss");
+            var master = orgchart_stencil.Masters[xorgchart_master_node_name];
+            var dc_master = connectors_stencil.Masters["Dynamic connector"];
 
 
             var domdoc = new VA.DOM.Document(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
