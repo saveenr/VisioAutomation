@@ -126,19 +126,22 @@ namespace TestVisioAutomation
             CustomPropertyHelper.SetCustomProperty(s1, "FOO2", "BAR3");
 
             var names1 = CustomPropertyHelper.GetCustomPropertyNames(s1);
-            Assert.AreEqual("FOO1", names1[0]);
-            Assert.AreEqual("FOO2", names1[1]);
+            Assert.AreEqual(2,names1.Count);
+            Assert.IsTrue(names1.Contains("FOO1"));
+            Assert.IsTrue(names1.Contains("FOO2"));
 
             Assert.AreEqual(2, CustomPropertyHelper.GetCustomPropertyCount(s1));
             CustomPropertyHelper.DeleteCustomProperty(s1, "FOO1");
 
             var names2 = CustomPropertyHelper.GetCustomPropertyNames(s1);
-            Assert.AreEqual("FOO2", names2[0]);
+            Assert.AreEqual(1, names2.Count);
+            Assert.IsTrue(names2.Contains("FOO2"));
 
             CustomPropertyHelper.SetCustomProperty(s1, "FOO3", "BAR1");
             var names3 = CustomPropertyHelper.GetCustomPropertyNames(s1);
-            Assert.AreEqual("FOO3", names3[0]);
-            Assert.AreEqual("FOO2", names3[1]);
+            Assert.AreEqual(2, names3.Count);
+            Assert.IsTrue(names3.Contains("FOO3"));
+            Assert.IsTrue(names3.Contains("FOO2"));
 
             CustomPropertyHelper.DeleteCustomProperty(s1, "FOO3");
 
