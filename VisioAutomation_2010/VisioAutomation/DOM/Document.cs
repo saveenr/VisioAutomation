@@ -32,7 +32,9 @@ namespace VisioAutomation.DOM
             }
             else
             {
-                vdoc = appdocs.AddEx(this.vst, this.measurementSystem.Value, 0, 0);
+                int flags = 0;// (int)IVisio.VisOpenSaveArgs.visAddDocked;
+                int langid = 0;
+                vdoc = appdocs.AddEx(this.vst, this.measurementSystem.Value, flags, langid);
             }
             this.VisioDocument = vdoc;
             var docpages = vdoc.Pages;

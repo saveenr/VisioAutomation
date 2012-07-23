@@ -40,9 +40,10 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 throw new System.ArgumentException("Org chart has root node set to null", "orgchartdrawing");
             }
 
-            const string xorgchart_vst = "orgch_u.vst";
-            const string xorgchart_vss = "orgch_u.vss";
-            string xorgchart_master_node_name = "Position";
+            const string orgchart_vst = "orgch_u.vst";
+            const string orgchart_vss = "orgch_u.vss";
+            string orgchart_master_node_name = "Position";
+            const string dyncon_master_name = "Dynamic connector";
             const double border_width = 0.5;
 
 
@@ -56,7 +57,6 @@ namespace VisioAutomation.Layout.Models.OrgChart
             // Perform the layout
             var layout = new VA.Layout.Models.InternalTree.TreeLayout<object>();
 
-
            layout.Options.Direction = map_direction2(this.LayoutOptions.Direction);
             layout.Options.LevelSeparation = 1;
             layout.Options.SiblingSeparation = 0.25;
@@ -69,14 +69,8 @@ namespace VisioAutomation.Layout.Models.OrgChart
             var bb = layout.GetBoundingBoxOfTree();
 
             // vis.ActiveWindow.ShowConnectPoints = 0;
-            var documents = app.Documents;
-            var orgchart_stencil = documents.OpenStencil(xorgchart_vss);
-            var connectors_stencil = documents.OpenStencil("connec_u.vss");
-            var master = orgchart_stencil.Masters[xorgchart_master_node_name];
-            var dc_master = connectors_stencil.Masters["Dynamic connector"];
-
-
-            var domdoc = new VA.DOM.Document(xorgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
+            
+            var domdoc = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
             var dompage = new VA.DOM.Page();
             domdoc.Pages.Add(dompage);
             
@@ -96,7 +90,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
 
             var vmasters = centerpoints
-                .Select(centerpoint => dompage.Shapes.Drop(master, centerpoint))
+                .Select(centerpoint => dompage.Shapes.Drop(orgchart_master_node_name,orgchart_vss, centerpoint))
                 .ToList();
 
 
@@ -119,7 +113,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                     {
                         var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                         var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                        var connector = dompage.Shapes.Connect(dc_master, parent_shape, child_shape);
+                        var connector = dompage.Shapes.Connect(dyncon_master_name, orgchart_vss, parent_shape, child_shape);
                     }
                 }
             }
