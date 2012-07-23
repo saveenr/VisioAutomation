@@ -82,7 +82,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(renderer.LayoutOptions.DefaultNodeSize,
                             VisioAutomationTest.GetSize(n_b.VisioShape));
 
-            //app.Quit(true);
+            app.Quit(true);
         }
     }
 }
