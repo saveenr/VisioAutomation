@@ -29,7 +29,8 @@ namespace TestVisioAutomation
             ss.Selection.Select(s3);
 
             ss.Document.OpenStencil("basic_u.vss");
-            var master = ss.Master.Get("Dynamic Connector", "basic_u.vss");
+            ss.Document.OpenStencil("connec_u.vss");
+            var master = ss.Master.Get("Dynamic Connector", "connec_u.vss");
             var directed_connectors = ss.Connection.Connect(master);
             ss.Selection.SelectNone();
             ss.Selection.Select(directed_connectors);
