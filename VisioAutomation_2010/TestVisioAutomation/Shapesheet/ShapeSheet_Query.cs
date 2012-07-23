@@ -77,14 +77,10 @@ namespace TestVisioAutomation
             // now retrieve the results with GetResults as floats
             var float_results = query.GetResults<double>(page1,shapeids);
             Assert.IsNotNull(float_results);
-            Assert.AreEqual(24.0, float_results[0, col_fg]);
-            Assert.AreEqual(25.0, float_results[0, col_bg]);
             Assert.AreEqual(40.0, float_results[0,col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
-            Assert.AreEqual(24, int_results[0, col_fg]);
-            Assert.AreEqual(25, int_results[0, col_bg]);
             Assert.AreEqual(40, int_results[0, col_filpat]);
 
             // now retrieve the results with GetResults as strings
