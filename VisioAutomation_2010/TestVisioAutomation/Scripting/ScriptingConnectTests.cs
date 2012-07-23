@@ -71,7 +71,8 @@ namespace TestVisioAutomation
             ss.Selection.Select(s3);
 
             ss.Document.OpenStencil("basic_u.vss");
-            var master = ss.Master.Get("Dynamic Connector", "basic_u.vss");
+            ss.Document.OpenStencil("connec_u.vss");
+            var master = ss.Master.Get("Dynamic Connector", "connec_u.vss");
             var undirected_connectors = ss.Connection.Connect(master);
 
             var directed_edges0 = ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
