@@ -111,8 +111,9 @@ namespace TestVisioAutomation
             var doc = this.GetNewDoc();
             var dompage = new VA.DOM.Page();
             var stencil = doc.Application.Documents.OpenStencil("basic_u.vss");
-            var master1 = stencil.Masters["Rectangle"];
-            var master2 = stencil.Masters["Dynamic Connector"];
+            var masters = stencil.Masters;
+            var master1 = masters["Rectangle"];
+            var master2 = masters["Dynamic Connector"];
 
             var dom_master_0 = dompage.Shapes.Drop(master1, 3, 3);
             var dom_master_1 = dompage.Shapes.Drop(master1, 6, 5);
@@ -134,7 +135,7 @@ namespace TestVisioAutomation
 
             var dom_master_0 = dompage.Shapes.Drop("Rectangle", "basic_u.vss", 3, 3);
             var dom_master_1 = dompage.Shapes.Drop("Rectangle", "basic_u.vss", 6, 5);
-            var dc = dompage.Shapes.Connect("Dynamic Connector", "basic_u.vss", dom_master_0, dom_master_1);
+            var dc = dompage.Shapes.Connect("Dynamic Connector", "connec_u.vss", dom_master_0, dom_master_1);
 
             var page = dompage.Render(doc);
 

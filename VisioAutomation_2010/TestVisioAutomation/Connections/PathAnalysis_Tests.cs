@@ -15,8 +15,13 @@ namespace TestVisioAutomation
         public void Case1()
         {
             var page1 = GetNewPage();
-            var stencil = page1.Application.Documents.OpenStencil("basic_u.vss");
-            var dcm = stencil.Masters["Dynamic Connector"];
+            var basic_stencil = page1.Application.Documents.OpenStencil("basic_u.vss");
+            var basic_masters = basic_stencil.Masters;
+
+            var connectors_stencil = page1.Application.Documents.OpenStencil("connec_u.vss");
+            var connectors_masters = connectors_stencil.Masters;
+
+            var dcm = connectors_masters["Dynamic Connector"];
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var s2 = page1.DrawRectangle(2, 0, 3, 1);

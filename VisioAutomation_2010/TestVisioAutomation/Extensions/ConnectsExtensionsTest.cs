@@ -101,10 +101,13 @@ namespace TestVisioAutomation
             short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;
             var application = page1.Application;
             var documents = application.Documents;
-            var stencil = documents.OpenEx("basic_u.vss", flags);
+            var basic_stencil = documents.OpenEx("basic_u.vss", flags);
+            var connectors_stencil = documents.OpenEx("connec_u.vss",flags);
+            var connectors_masters = connectors_stencil.Masters;
+            var basic_masters = basic_stencil.Masters;
 
-            var masters = stencil.Masters;
-            var master = masters["Dynamic Connector"];
+
+            var master = connectors_masters["Dynamic Connector"];
 
             var c1 = page1.Drop(master, -1, -1);
             connect(c1, shapes[0], shapes[1]);

@@ -364,7 +364,7 @@ namespace VisioAutomation.Layout.MSAGL
                 var layoutconnector = (DGMODEL.Connector)i.UserData;
                 var vconnector = new VA.DOM.Connector(
                     (VA.DOM.BaseShape)layoutconnector.From.DOMNode,
-                    (VA.DOM.BaseShape) layoutconnector.To.DOMNode, "Dynamic Connector", "basic_u.vss");
+                    (VA.DOM.BaseShape) layoutconnector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
                 layoutconnector.DOMNode = vconnector;
                 vdoc.Add(vconnector);
             }
