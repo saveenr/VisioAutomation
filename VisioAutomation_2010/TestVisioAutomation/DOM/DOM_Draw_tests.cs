@@ -149,7 +149,7 @@ namespace TestVisioAutomation
         public void Markup_Simple_Bold()
         {
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
+            m.CharacterFormat.Style = VA.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -160,7 +160,7 @@ namespace TestVisioAutomation
         public void Markup_Simple_Italic()
         {
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
+            m.CharacterFormat.Style = VA.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -174,7 +174,7 @@ namespace TestVisioAutomation
 
             var impact = page1.Document.Fonts["Impact"];
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.CharacterFormat.FontID = impact.ID;
+            m.CharacterFormat.Font = impact.ID;
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
             page1.Delete(0);
@@ -186,7 +186,7 @@ namespace TestVisioAutomation
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var impact = page1.Document.Fonts["Impact"];
             var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.CharacterFormat.FontID = impact.ID;
+            m.CharacterFormat.Font = impact.ID;
             m.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -200,15 +200,15 @@ namespace TestVisioAutomation
             var segoeui = page1.Document.Fonts["Segoe UI"];
 
             var t1 = new VA.Text.Markup.TextElement("Normal Text");
-            t1.CharacterFormat.FontID = segoeui.ID;
+            t1.CharacterFormat.Font = segoeui.ID;
             var t2 = t1.AppendElement("Italic");
-            t2.CharacterFormat.CharStyle = VA.Text.CharStyle.Italic;
+            t2.CharacterFormat.Style = VA.Text.CharStyle.Italic;
 
             var t3 = t2.AppendElement("Italic");
-            t3.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold;
+            t3.CharacterFormat.Style = VA.Text.CharStyle.Bold;
 
             var t4 = t2.AppendElement("Bold Italic");
-            t4.CharacterFormat.CharStyle = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
+            t4.CharacterFormat.Style = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
 
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             t1.SetText(s0);

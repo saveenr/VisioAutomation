@@ -415,8 +415,8 @@ namespace VisioAutomation.Scripting.Commands
 
                 var markup = new VA.Text.Markup.TextElement();
                 var m1 = markup.AppendElement(label+"\n");
-                m1.CharacterFormat.FontID = fontid_segoe;
-                m1.CharacterFormat.FontSize = 12.0;
+                m1.CharacterFormat.Font = fontid_segoe;
+                m1.CharacterFormat.Size = 12.0;
                 var m2 = markup.AppendElement();
                 m2.AppendText(string.Join("\n", types_in_namespace));
                 m2.ParagraphFormat.Bullets = false;

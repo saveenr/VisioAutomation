@@ -6,20 +6,19 @@ namespace VisioAutomation.Text.Markup
 {
     public class CharacterFormat
     {
-        private double? _font_size;
-        private int? _transparency;
-
-        public CharStyle? CharStyle { get; set; }
-        public int? FontID { get; set; }
         public ColorRGB? Color { get; set; }
+        public int? Font { get; set; }
+        private double? _size;
+        public CharStyle? Style { get; set; }
+        private int? _transparency;
 
         public CharacterFormat()
         {
         }
 
-        public double? FontSize
+        public double? Size
         {
-            get { return _font_size; }
+            get { return _size; }
             set
             {
                 if (value.HasValue)
@@ -30,7 +29,7 @@ namespace VisioAutomation.Text.Markup
                     }
                 }
 
-                _font_size = value;
+                _size = value;
             }
         }
 
@@ -62,9 +61,9 @@ namespace VisioAutomation.Text.Markup
 
         public void UpdateFrom(CharacterFormat other)
         {
-            this.FontID = other.FontID;
-            this._font_size = other._font_size;
-            this.CharStyle = other.CharStyle;
+            this.Font = other.Font;
+            this._size = other._size;
+            this.Style = other.Style;
             this.Color = other.Color;
             this._transparency = other._transparency;
         }

@@ -271,9 +271,9 @@ namespace VisioAutomation.Text.Markup
         {
             var fmt = new VA.Text.CharacterFormatCells();
 
-            if (region.Element.CharacterFormat.FontSize.HasValue)
+            if (region.Element.CharacterFormat.Size.HasValue)
             {
-                fmt.Size = Convert.PointsToInches(region.Element.CharacterFormat.FontSize.Value);
+                fmt.Size = Convert.PointsToInches(region.Element.CharacterFormat.Size.Value);
             }
 
             if (region.Element.CharacterFormat.Color.HasValue)
@@ -281,17 +281,17 @@ namespace VisioAutomation.Text.Markup
                 fmt.Color = region.Element.CharacterFormat.Color.Value.ToFormula();
             }
 
-            if (region.Element.CharacterFormat.FontID!=null)
+            if (region.Element.CharacterFormat.Font!=null)
             {
                 var doc = shape.Document;
                 var fonts = doc.Fonts;
-                var font = fonts[region.Element.CharacterFormat.FontID];
+                var font = fonts[region.Element.CharacterFormat.Font];
                 fmt.Font = font.ID;
             }
 
-            if (region.Element.CharacterFormat.CharStyle.HasValue)
+            if (region.Element.CharacterFormat.Style.HasValue)
             {
-                fmt.Style = (int) region.Element.CharacterFormat.CharStyle.Value;
+                fmt.Style = (int) region.Element.CharacterFormat.Style.Value;
             }
 
             if (region.Element.CharacterFormat.Transparency.HasValue)

@@ -15,8 +15,8 @@ namespace VisioAutomationSamples
 
             var e1 = new VA.Text.Markup.TextElement();
             e1.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.CharacterFormat.FontID = tnr.ID;
-            e1.CharacterFormat.FontSize = 20;
+            e1.CharacterFormat.Font = tnr.ID;
+            e1.CharacterFormat.Size = 20;
             e1.AppendText("Hello World");
             e1.SetText(s1);
         }
@@ -31,8 +31,8 @@ namespace VisioAutomationSamples
 
             var e1 = new VA.Text.Markup.TextElement();
             e1.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.CharacterFormat.FontID = tnr.ID;
-            e1.CharacterFormat.FontSize = 20;
+            e1.CharacterFormat.Font = tnr.ID;
+            e1.CharacterFormat.Size = 20;
             e1.AppendText("Hello ");
 
             var e2 = e1.AddElementEx("World", null, null, null, null, VA.Text.CharStyle.Italic); 
