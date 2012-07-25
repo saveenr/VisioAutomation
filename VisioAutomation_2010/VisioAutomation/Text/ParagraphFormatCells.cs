@@ -21,6 +21,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> LocBulletFont { get; set; }
         public VA.ShapeSheet.CellData<double> TextPosAfterBullet { get; set; }
         public VA.ShapeSheet.CellData<int> Flags { get; set; }
+        public VA.ShapeSheet.CellData<string> BulletString { get; set; }
 
         protected override void ApplyFormulas(ApplyFormula func, short row)
         {
@@ -37,6 +38,7 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont.ForRow(row), this.LocBulletFont.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet.ForRow(row), this.TextPosAfterBullet.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_Flags.ForRow(row), this.Flags.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_BulletStr.ForRow(row), this.BulletString.Formula);
         }
 
         internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
@@ -67,6 +69,7 @@ namespace VisioAutomation.Text
             cells.LocBulletFont = row[query.LocalizeBulletFont].ToInt();
             cells.TextPosAfterBullet= row[query.TextPosAfterBullet];
             cells.Flags= row[query.Flags].ToInt();
+            cells.BulletString = ""; // TODO: Figure out some way of getting this
             return cells;
         }
 
