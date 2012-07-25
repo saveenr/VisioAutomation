@@ -15,9 +15,12 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<double> SpacingAfter { get; set; }
         public VA.ShapeSheet.CellData<double> SpacingLine { get; set; }
         public VA.ShapeSheet.CellData<int> HorizontalAlign { get; set; }
-        public VA.ShapeSheet.CellData<int> BulletIndex { get; set; }
+        public VA.ShapeSheet.CellData<int> Bullet { get; set; }
         public VA.ShapeSheet.CellData<int> BulletFont { get; set; }
         public VA.ShapeSheet.CellData<int> BulletFontSize { get; set; }
+        public VA.ShapeSheet.CellData<int> LocBulletFont { get; set; }
+        public VA.ShapeSheet.CellData<double> TextPosAfterBullet { get; set; }
+        public VA.ShapeSheet.CellData<int> Flags { get; set; }
 
         protected override void ApplyFormulas(ApplyFormula func, short row)
         {
@@ -29,8 +32,11 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Para_SpLine.ForRow(row), this.SpacingLine.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_HorzAlign.ForRow(row), this.HorizontalAlign.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_BulletFont.ForRow(row), this.BulletFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_Bullet.ForRow(row), this.BulletIndex.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_Bullet.ForRow(row), this.Bullet.Formula);
             func(VA.ShapeSheet.SRCConstants.Para_BulletFontSize.ForRow(row), this.BulletFontSize.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont.ForRow(row), this.LocBulletFont.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet.ForRow(row), this.TextPosAfterBullet.Formula);
+            func(VA.ShapeSheet.SRCConstants.Para_Flags.ForRow(row), this.Flags.Formula);
         }
 
         internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
@@ -55,16 +61,18 @@ namespace VisioAutomation.Text
             cells.SpacingBefore = row[query.SpaceBefore];
             cells.SpacingLine = row[query.SpaceLine];
             cells.HorizontalAlign = row[query.HorzAlign].ToInt();
-            cells.BulletIndex = row[query.BulletIndex].ToInt();
+            cells.Bullet = row[query.Bullet].ToInt();
             cells.BulletFont = row[query.BulletFont].ToInt();
             cells.BulletFontSize = row[query.BulletFontSize].ToInt();
-
+            cells.LocBulletFont = row[query.LocalizeBulletFont].ToInt();
+            cells.TextPosAfterBullet= row[query.TextPosAfterBullet];
+            cells.Flags= row[query.Flags].ToInt();
             return cells;
         }
 
         class ParagraphFormatQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.QueryColumn BulletIndex { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Bullet { get; set; }
             public VA.ShapeSheet.Query.QueryColumn BulletFont { get; set; }
             public VA.ShapeSheet.Query.QueryColumn BulletFontSize { get; set; }
             public VA.ShapeSheet.Query.QueryColumn BulletString { get; set; }
@@ -82,7 +90,7 @@ namespace VisioAutomation.Text
             public ParagraphFormatQuery() :
                 base(IVisio.VisSectionIndices.visSectionParagraph)
             {
-                BulletIndex = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
+                Bullet = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
                 BulletFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletFont, "BulletFont");
                 BulletFontSize = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, "BulletFontSize");
                 BulletString = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletStr, "BulletString");
