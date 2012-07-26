@@ -14,25 +14,13 @@ namespace VisioAutomation.Text.Markup
         public  double? FontSizeInPoints { get; set;  }
         public CharStyle? Style { get; set; }
         public int? TransparencyPercent { get; set; }
-
-        private int? AsianFontID { get; set; }
         public int? Case { get; set; }
-        public int? ComplexScriptFontID { get; set; }
-        public double? ComplexScriptSize { get; set; }
-        public bool? DoubleStrikeThrough{ get; set; }
         public bool? DoubleUnderline { get; set; }
-
         public int? LangID { get; set; }
-        public int? Locale { get; set; }
-        public int? LocalizeFont { get; set; }
-
         public bool? Overline { get; set; }
-        public bool? Perpendicular { get; set; }
-
         public int? Pos { get; set; }
-        public int? RTLText{ get; set; }
         public double? FontScalePercent { get; set; }
-        public double? Letterspace{ get; set; }
+        public double? LetterspaceInPoints{ get; set; }
         public bool? Strikethru { get; set; }
         public int? UseVertical { get; set; }
 
@@ -42,33 +30,20 @@ namespace VisioAutomation.Text.Markup
 
         public void UpdateFrom(CharacterFormat other)
         {
-            this.Color = other.Color;
             this.FontID = other.FontID;
-            this.FontSizeInPoints = other.FontSizeInPoints;
+            this.Color = other.Color;
             this.Style = other.Style;
-            this.TransparencyPercent = other.TransparencyPercent;
-
-            this.AsianFontID = other.AsianFontID;
             this.Case = other.Case;
-            this.ComplexScriptFontID = other.ComplexScriptFontID;
-            this.ComplexScriptSize = other.ComplexScriptSize;
-
-            this.DoubleStrikeThrough = other.DoubleStrikeThrough;
-            this.DoubleUnderline = other.DoubleUnderline;
-            this.LangID= other.LangID;
-            this.Locale = other.Locale;
-
-            this.LocalizeFont = other.LocalizeFont;
-
-            this.Overline = other.Overline;
-            this.Perpendicular = other.Perpendicular;
-
             this.Pos = other.Pos;
-            this.RTLText = other.RTLText;
+            this.FontSizeInPoints = other.FontSizeInPoints;
+            this.TransparencyPercent = other.TransparencyPercent;
+            this.DoubleUnderline = other.DoubleUnderline;
             this.FontScalePercent = other.FontScalePercent;
-            this.Letterspace = other.Letterspace;
+            this.LangID = other.LangID;
+            this.LetterspaceInPoints = other.LetterspaceInPoints;
+            this.Overline = other.Overline;
             this.Strikethru = other.Strikethru;
-            this.UseVertical = other.UseVertical;
+           
         }
 
         public CharacterFormat Clone()
@@ -77,5 +52,78 @@ namespace VisioAutomation.Text.Markup
             fmt.UpdateFrom(this);
             return fmt;
         }
+
+        public VA.Text.CharacterFormatCells ToCells()
+        {
+            var cells = new VA.Text.CharacterFormatCells();
+
+            if (this.Case.HasValue)
+            {
+                cells.Case = this.Case.Value;
+            }
+
+            if (this.Color.HasValue)
+            {
+                cells.Color = this.Color.Value.ToFormula();
+            }
+
+            if (this.DoubleUnderline.HasValue)
+            {
+                cells.DoubleUnderline = this.DoubleUnderline.Value;
+            }
+
+            if (this.FontID != null)
+            {
+                cells.Font = this.FontID.Value;
+            }
+
+            if (this.FontScalePercent.HasValue)
+            {
+                cells.FontScale = this.FontScalePercent.Value / 100.0;
+            }
+
+            if (this.FontSizeInPoints.HasValue)
+            {
+                cells.Size = Convert.PointsToInches(this.FontSizeInPoints.Value);
+            }
+
+            if (this.LangID.HasValue)
+            {
+                cells.LangID = this.LangID.Value;
+            }
+
+            if (this.LetterspaceInPoints.HasValue)
+            {
+                cells.Letterspace = this.LetterspaceInPoints.Value / 100.0;
+            }
+
+            if (this.Overline.HasValue)
+            {
+                cells.Overline = this.Overline.Value;
+            }
+
+            if (this.Strikethru.HasValue)
+            {
+                cells.Strikethru = this.Strikethru.Value;
+            }
+
+            if (this.Style.HasValue)
+            {
+                cells.Style = (int)this.Style.Value;
+            }
+
+            if (this.TransparencyPercent.HasValue)
+            {
+                cells.Transparency = this.TransparencyPercent.Value / 100.0;
+            }
+
+            if (this.Pos.HasValue)
+            {
+                cells.Pos = this.Pos.Value;
+            }
+
+            return cells;
+        }
+
     }
 }
