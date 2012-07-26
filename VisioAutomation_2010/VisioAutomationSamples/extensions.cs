@@ -12,11 +12,11 @@ namespace VisioAutomationSamples
             var el = p.AppendElement(text);
             if (font != null)
             {
-                el.CharacterFormat.Font = font;
+                el.CharacterFormat.FontID = font;
             }
             if (size.HasValue)
             {
-                el.CharacterFormat.Size = size.Value;
+                el.CharacterFormat.FontSizeInPoints = size.Value;
             }
             if (color.HasValue)
             {

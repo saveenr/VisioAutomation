@@ -6,29 +6,32 @@ namespace VisioAutomation.Text.Markup
 {
     public class CharacterFormat
     {
-        public ColorRGB? Color { get; set; }
-        public int? Font { get; set; }
-        public  double? Size { get; set;  }
-        public CharStyle? Style { get; set; }
-        public int? Transparency { get; set; }
+        // http://msdn.microsoft.com/en-us/library/ff767069
+        // this is used for dealing with character ranges typically
 
-        private int? AsianFont { get; set; }
+        public ColorRGB? Color { get; set; }
+        public int? FontID { get; set; }
+        public  double? FontSizeInPoints { get; set;  }
+        public CharStyle? Style { get; set; }
+        public int? TransparencyPercent { get; set; }
+
+        private int? AsianFontID { get; set; }
         public int? Case { get; set; }
-        public int? ComplexScriptFont { get; set; }
+        public int? ComplexScriptFontID { get; set; }
         public double? ComplexScriptSize { get; set; }
         public bool? DoubleStrikeThrough{ get; set; }
         public bool? DoubleUnderline { get; set; }
 
         public int? LangID { get; set; }
         public int? Locale { get; set; }
-        public int? LocalizeFont{ get; set; }
+        public int? LocalizeFont { get; set; }
 
         public bool? Overline { get; set; }
         public bool? Perpendicular { get; set; }
 
         public int? Pos { get; set; }
         public int? RTLText{ get; set; }
-        public double? FontScale { get; set; }
+        public double? FontScalePercent { get; set; }
         public double? Letterspace{ get; set; }
         public bool? Strikethru { get; set; }
         public int? UseVertical { get; set; }
@@ -40,14 +43,14 @@ namespace VisioAutomation.Text.Markup
         public void UpdateFrom(CharacterFormat other)
         {
             this.Color = other.Color;
-            this.Font = other.Font;
-            this.Size = other.Size;
+            this.FontID = other.FontID;
+            this.FontSizeInPoints = other.FontSizeInPoints;
             this.Style = other.Style;
-            this.Transparency = other.Transparency;
+            this.TransparencyPercent = other.TransparencyPercent;
 
-            this.AsianFont = other.AsianFont;
+            this.AsianFontID = other.AsianFontID;
             this.Case = other.Case;
-            this.ComplexScriptFont = other.ComplexScriptFont;
+            this.ComplexScriptFontID = other.ComplexScriptFontID;
             this.ComplexScriptSize = other.ComplexScriptSize;
 
             this.DoubleStrikeThrough = other.DoubleStrikeThrough;
@@ -62,7 +65,7 @@ namespace VisioAutomation.Text.Markup
 
             this.Pos = other.Pos;
             this.RTLText = other.RTLText;
-            this.FontScale = other.FontScale;
+            this.FontScalePercent = other.FontScalePercent;
             this.Letterspace = other.Letterspace;
             this.Strikethru = other.Strikethru;
             this.UseVertical = other.UseVertical;

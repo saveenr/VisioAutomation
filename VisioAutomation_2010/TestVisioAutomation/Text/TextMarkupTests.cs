@@ -177,14 +177,14 @@ namespace TestVisioAutomation
             var el1 = el0.AppendElement("HELLO");
             var el2 = el1.AppendElement(" WORLD");
 
-            el0.CharacterFormat.Size = 14;
-            el0.CharacterFormat.Size = 7;
+            el0.CharacterFormat.FontSizeInPoints = 14;
+            el0.CharacterFormat.FontSizeInPoints = 7;
             
-            el1.CharacterFormat.Font = impact.ID;
+            el1.CharacterFormat.FontID = impact.ID;
             el1.CharacterFormat.Style = VA.Text.CharStyle.Bold;
             
-            el2.CharacterFormat.Font = courier.ID;
-            el2.CharacterFormat.Size = 20;
+            el2.CharacterFormat.FontID = courier.ID;
+            el2.CharacterFormat.FontSizeInPoints = 20;
             el2.CharacterFormat.Style = VA.Text.CharStyle.Italic;
 
             var markup = el0.GetMarkupInfo();

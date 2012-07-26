@@ -66,7 +66,7 @@ namespace TestVisioAutomation
 
             var impact = page1.Document.Fonts["Impact"];
             var m = new VA.Text.Markup.TextElement("Normal Text in Impact Font");
-            m.CharacterFormat.Font = impact.ID;
+            m.CharacterFormat.FontID = impact.ID;
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -85,7 +85,7 @@ namespace TestVisioAutomation
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var impact = page1.Document.Fonts["Impact"];
             var m = new VA.Text.Markup.TextElement("Normal Text in Impact Font with Red Color");
-            m.CharacterFormat.Font = impact.ID;
+            m.CharacterFormat.FontID = impact.ID;
             m.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -106,7 +106,7 @@ namespace TestVisioAutomation
             var segoeui = page1.Document.Fonts["Segoe UI"];
 
             var t1 = new VA.Text.Markup.TextElement("{Normal}");
-            t1.CharacterFormat.Font = segoeui.ID;
+            t1.CharacterFormat.FontID = segoeui.ID;
             
             var t2 = t1.AppendElement("{Italic}");
             t2.CharacterFormat.Style = VA.Text.CharStyle.Italic;

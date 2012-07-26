@@ -270,9 +270,9 @@ namespace VisioAutomation.Text.Markup
         private static VA.Text.CharacterFormatCells cf_to_cells( VA.Text.Markup.CharacterFormat cf, IVisio.Fonts fonts)
         {
             var cells = new VA.Text.CharacterFormatCells();
-            if (cf.Size.HasValue)
+            if (cf.FontSizeInPoints.HasValue)
             {
-                cells.Size = Convert.PointsToInches(cf.Size.Value);
+                cells.Size = Convert.PointsToInches(cf.FontSizeInPoints.Value);
             }
 
             if (cf.Color.HasValue)
@@ -280,9 +280,9 @@ namespace VisioAutomation.Text.Markup
                 cells.Color = cf.Color.Value.ToFormula();
             }
 
-            if (cf.Font != null)
+            if (cf.FontID != null)
             {
-                var font = fonts[cf.Font];
+                var font = fonts[cf.FontID];
                 cells.Font = font.ID;
             }
 
@@ -291,9 +291,9 @@ namespace VisioAutomation.Text.Markup
                 cells.Style = (int)cf.Style.Value;
             }
 
-            if (cf.Transparency.HasValue)
+            if (cf.TransparencyPercent.HasValue)
             {
-                cells.Transparency = cf.Transparency.Value / 100.0;
+                cells.Transparency = cf.TransparencyPercent.Value / 100.0;
             }
 
             return cells;
