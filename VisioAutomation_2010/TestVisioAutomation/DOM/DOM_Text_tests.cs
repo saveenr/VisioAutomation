@@ -129,6 +129,12 @@ namespace TestVisioAutomation
             Assert.AreEqual((int) (VA.Text.CharStyle.Italic | VA.Text.CharStyle.Bold), charfmt[3].Style.Result);
             Assert.AreEqual((int)(VA.Text.CharStyle.None), charfmt[4].Style.Result);
 
+            var charruns= textfmt.CharacterTextRuns;
+            Assert.AreEqual(4, charruns.Count);
+            Assert.AreEqual("{Normal}", charruns[0].Text);
+            Assert.AreEqual("{Italic}", charruns[1].Text);
+            Assert.AreEqual("{Bold}", charruns[2].Text);
+            Assert.AreEqual("{Bold Italic}", charruns[3].Text);
             page1.Delete(0);
         }
     }
