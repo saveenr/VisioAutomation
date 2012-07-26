@@ -13,7 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void MarkupCharacterPlain()
         {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
+            var m = new VA.Text.Markup.TextElement("{Normal}");
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -28,7 +28,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void MarkupCharacterBold()
         {
-            var m = new VA.Text.Markup.TextElement("Bold Text");
+            var m = new VA.Text.Markup.TextElement("{Bold}");
             m.CharacterFormat.Style = VA.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
@@ -45,7 +45,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void MarkupCharacterItalic()
         {
-            var m = new VA.Text.Markup.TextElement("Italic Text");
+            var m = new VA.Text.Markup.TextElement("{Italic}");
             m.CharacterFormat.Style = VA.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
@@ -137,7 +137,79 @@ namespace TestVisioAutomation
             Assert.AreEqual("{Italic}", charruns[1].Text);
             Assert.AreEqual("{Bold}", charruns[2].Text);
             Assert.AreEqual("{Bold Italic}", charruns[3].Text);
+
+            // cleanup
             page1.Delete(0);
         }
+
+        [TestMethod]
+        public void MarkupParagraphDefault()
+        {
+            var m = new VA.Text.Markup.TextElement("{DefaultPara}");
+            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
+            var s0 = page1.DrawRectangle(0, 0, 4, 4);
+            m.SetText(s0);
+
+            var textfmt = VA.Text.TextFormat.GetFormat(s0);
+            var parafmt = textfmt.ParagraphFormats;
+            Assert.AreEqual(1, parafmt.Count);
+
+            page1.Delete(0);
+        }
+
+        [TestMethod]
+        public void MarkupParagraphLeft()
+        {
+            var m = new VA.Text.Markup.TextElement("{LeftHAlign}");
+            m.ParagraphFormat.HAlign = VA.Drawing.AlignmentHorizontal.Left;
+            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
+            var s0 = page1.DrawRectangle(0, 0, 4, 4);
+            m.SetText(s0);
+
+            var textfmt = VA.Text.TextFormat.GetFormat(s0);
+            var parafmt = textfmt.ParagraphFormats;
+            Assert.AreEqual(1, parafmt.Count);
+
+            Assert.AreEqual((int)VA.Drawing.AlignmentHorizontal.Left, parafmt[0].HorizontalAlign.Result);
+
+            page1.Delete(0);
+        }
+
+        [TestMethod]
+        public void MarkupParagraphCenter()
+        {
+            var m = new VA.Text.Markup.TextElement("{CenterHAlign}");
+            m.ParagraphFormat.HAlign = VA.Drawing.AlignmentHorizontal.Center;
+            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
+            var s0 = page1.DrawRectangle(0, 0, 4, 4);
+            m.SetText(s0);
+
+            var textfmt = VA.Text.TextFormat.GetFormat(s0);
+            var parafmt = textfmt.ParagraphFormats;
+            Assert.AreEqual(1, parafmt.Count);
+
+            Assert.AreEqual((int)VA.Drawing.AlignmentHorizontal.Center, parafmt[0].HorizontalAlign.Result);
+
+            page1.Delete(0);
+        }
+
+        [TestMethod]
+        public void MarkupParagraphRight()
+        {
+            var m = new VA.Text.Markup.TextElement("{RightHAlign}");
+            m.ParagraphFormat.HAlign = VA.Drawing.AlignmentHorizontal.Right;
+            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
+            var s0 = page1.DrawRectangle(0, 0, 4, 4);
+            m.SetText(s0);
+
+            var textfmt = VA.Text.TextFormat.GetFormat(s0);
+            var parafmt = textfmt.ParagraphFormats;
+            Assert.AreEqual(1, parafmt.Count);
+
+            Assert.AreEqual((int)VA.Drawing.AlignmentHorizontal.Right, parafmt[0].HorizontalAlign.Result);
+
+            page1.Delete(0);
+        }
+
     }
 }
