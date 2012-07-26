@@ -419,7 +419,6 @@ namespace VisioAutomation.Scripting.Commands
                 m1.CharacterFormat.FontSizeInPoints = 12.0;
                 var m2 = markup.AppendElement();
                 m2.AppendText(string.Join("\n", types_in_namespace));
-                m2.ParagraphFormat.Bullets = false;
 
                 node.Text = markup;
 
