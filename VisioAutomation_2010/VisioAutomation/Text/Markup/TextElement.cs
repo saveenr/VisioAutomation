@@ -267,43 +267,50 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
+        private static VA.Text.CharacterFormatCells cf_to_cells( VA.Text.Markup.CharacterFormat cf, IVisio.Fonts fonts)
+        {
+            var cells = new VA.Text.CharacterFormatCells();
+            if (cf.Size.HasValue)
+            {
+                cells.Size = Convert.PointsToInches(cf.Size.Value);
+            }
+
+            if (cf.Color.HasValue)
+            {
+                cells.Color = cf.Color.Value.ToFormula();
+            }
+
+            if (cf.Font != null)
+            {
+                var font = fonts[cf.Font];
+                cells.Font = font.ID;
+            }
+
+            if (cf.Style.HasValue)
+            {
+                cells.Style = (int)cf.Style.Value;
+            }
+
+            if (cf.Transparency.HasValue)
+            {
+                cells.Transparency = cf.Transparency.Value / 100.0;
+            }
+
+            return cells;
+        }
+
         private static void set_text_range_char_fmt(TextRegion region, IVisio.Shape shape)
         {
-            var fmt = new VA.Text.CharacterFormatCells();
-
-            if (region.Element.CharacterFormat.Size.HasValue)
-            {
-                fmt.Size = Convert.PointsToInches(region.Element.CharacterFormat.Size.Value);
-            }
-
-            if (region.Element.CharacterFormat.Color.HasValue)
-            {
-                fmt.Color = region.Element.CharacterFormat.Color.Value.ToFormula();
-            }
-
-            if (region.Element.CharacterFormat.Font!=null)
-            {
-                var doc = shape.Document;
-                var fonts = doc.Fonts;
-                var font = fonts[region.Element.CharacterFormat.Font];
-                fmt.Font = font.ID;
-            }
-
-            if (region.Element.CharacterFormat.Style.HasValue)
-            {
-                fmt.Style = (int) region.Element.CharacterFormat.Style.Value;
-            }
-
-            if (region.Element.CharacterFormat.Transparency.HasValue)
-            {
-                fmt.Transparency = region.Element.CharacterFormat.Transparency.Value/100.0;
-            }
-
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
             }
-
+            
+            // Convert to cells
+            VA.Text.Markup.CharacterFormat cf = region.Element.CharacterFormat;
+            var doc1 = shape.Document;
+            var fmt = cf_to_cells(cf, doc1.Fonts);
+            
             // Initialize the properties with temp values
             short rownum = -1;
             const int temp_color = 0;
