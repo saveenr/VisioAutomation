@@ -8,15 +8,15 @@ namespace VisioAutomation.Text.Markup
         // http://msdn.microsoft.com/en-us/library/ff767385
 
         public AlignmentHorizontal? HAlign { get; set; }
-        public double? IndentFirst { get; set; }
-        public double? IndentLeft { get; set; }
+        public double? IndentFirstInPoints { get; set; }
+        public double? IndentLeftInPoints { get; set; }
         public bool? Bullets { get; set; }
 
         public void UpdateFrom(ParagraphFormat other)
         {
             this.HAlign =  other.HAlign;
-            this.IndentFirst = other.IndentFirst;
-            this.IndentLeft = other.IndentLeft;
+            this.IndentFirstInPoints = other.IndentFirstInPoints;
+            this.IndentLeftInPoints = other.IndentLeftInPoints;
             this.Bullets = other.Bullets;
         }
 

@@ -182,15 +182,15 @@ namespace VisioAutomation.Text.Markup
 
         private static void set_text_range_para_fmt(TextRegion region, IVisio.Shape shape)
         {
-            if (region.Element.ParagraphFormat.IndentFirst.HasValue)
+            if (region.Element.ParagraphFormat.IndentFirstInPoints.HasValue)
             {
-                int indent_first_points = (int)VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentFirst.Value);
+                int indent_first_points = (int)VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentFirstInPoints.Value);
                 var chars0 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndFirst, indent_first_points, region);
             }
 
-            if (region.Element.ParagraphFormat.IndentLeft.HasValue)
+            if (region.Element.ParagraphFormat.IndentLeftInPoints.HasValue)
             {
-                int indent_left_points = (int) VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentLeft.Value);
+                int indent_left_points = (int) VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentLeftInPoints.Value);
                 var chars1 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndLeft, indent_left_points, region);
             }
 
