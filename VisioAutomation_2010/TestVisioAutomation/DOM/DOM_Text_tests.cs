@@ -19,8 +19,8 @@ namespace TestVisioAutomation
             m.SetText(s0);
 
             var textfmt = VA.Text.TextFormat.GetFormat(s0);
-            var fmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1,fmt.Count);
+            var charfmt = textfmt.CharacterFormats;
+            Assert.AreEqual(1,charfmt.Count);
 
             page1.Delete(0);
         }
@@ -35,9 +35,9 @@ namespace TestVisioAutomation
             m.SetText(s0);
 
             var textfmt = VA.Text.TextFormat.GetFormat(s0);
-            var fmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, fmt.Count);
-            Assert.AreEqual((int)VA.Text.CharStyle.Bold, fmt[0].Style.Result);
+            var charfmt = textfmt.CharacterFormats;
+            Assert.AreEqual(1, charfmt.Count);
+            Assert.AreEqual((int)VA.Text.CharStyle.Bold, charfmt[0].Style.Result);
 
             page1.Delete(0);
         }
@@ -52,9 +52,9 @@ namespace TestVisioAutomation
             m.SetText(s0);
 
             var textfmt = VA.Text.TextFormat.GetFormat(s0);
-            var fmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, fmt.Count);
-            Assert.AreEqual((int)VA.Text.CharStyle.Italic, fmt[0].Style.Result);
+            var charfmt = textfmt.CharacterFormats;
+            Assert.AreEqual(1, charfmt.Count);
+            Assert.AreEqual((int)VA.Text.CharStyle.Italic, charfmt[0].Style.Result);
 
             page1.Delete(0);
         }
@@ -71,10 +71,10 @@ namespace TestVisioAutomation
             m.SetText(s0);
 
             var textfmt = VA.Text.TextFormat.GetFormat(s0);
-            var fmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, fmt.Count);
-            Assert.AreEqual(0, fmt[0].Style.Result);
-            Assert.AreEqual(impact.ID, fmt[0].Font.Result);
+            var charfmt = textfmt.CharacterFormats;
+            Assert.AreEqual(1, charfmt.Count);
+            Assert.AreEqual(0, charfmt[0].Style.Result);
+            Assert.AreEqual(impact.ID, charfmt[0].Font.Result);
 
             page1.Delete(0);
         }
@@ -91,10 +91,10 @@ namespace TestVisioAutomation
             m.SetText(s0);
 
             var textfmt = VA.Text.TextFormat.GetFormat(s0);
-            var fmt = textfmt.CharacterFormats;
-            Assert.AreEqual(1, fmt.Count);
-            Assert.AreEqual(0, fmt[0].Style.Result);
-            Assert.AreEqual(impact.ID, fmt[0].Font.Result);
+            var charfmt = textfmt.CharacterFormats;
+            Assert.AreEqual(1, charfmt.Count);
+            Assert.AreEqual(0, charfmt[0].Style.Result);
+            Assert.AreEqual(impact.ID, charfmt[0].Font.Result);
 
             page1.Delete(0);
         }
@@ -121,13 +121,13 @@ namespace TestVisioAutomation
             t1.SetText(s0);
 
             var textfmt = VA.Text.TextFormat.GetFormat(s0);
-            var fmt = textfmt.CharacterFormats;
-            Assert.AreEqual(5, fmt.Count);
-            Assert.AreEqual((int)VA.Text.CharStyle.None, fmt[0].Style.Result);
-            Assert.AreEqual((int)VA.Text.CharStyle.Italic, fmt[1].Style.Result);
-            Assert.AreEqual((int)VA.Text.CharStyle.Bold, fmt[2].Style.Result);
-            Assert.AreEqual((int) (VA.Text.CharStyle.Italic | VA.Text.CharStyle.Bold), fmt[3].Style.Result);
-            Assert.AreEqual((int)(VA.Text.CharStyle.None), fmt[4].Style.Result);
+            var charfmt = textfmt.CharacterFormats;
+            Assert.AreEqual(5, charfmt.Count);
+            Assert.AreEqual((int)VA.Text.CharStyle.None, charfmt[0].Style.Result);
+            Assert.AreEqual((int)VA.Text.CharStyle.Italic, charfmt[1].Style.Result);
+            Assert.AreEqual((int)VA.Text.CharStyle.Bold, charfmt[2].Style.Result);
+            Assert.AreEqual((int) (VA.Text.CharStyle.Italic | VA.Text.CharStyle.Bold), charfmt[3].Style.Result);
+            Assert.AreEqual((int)(VA.Text.CharStyle.None), charfmt[4].Style.Result);
 
             page1.Delete(0);
         }
