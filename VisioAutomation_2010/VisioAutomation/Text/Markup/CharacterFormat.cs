@@ -8,67 +8,67 @@ namespace VisioAutomation.Text.Markup
     {
         public ColorRGB? Color { get; set; }
         public int? Font { get; set; }
-        private double? _size;
+        public  double? Size { get; set;  }
         public CharStyle? Style { get; set; }
-        private int? _transparency;
+        public int? Transparency { get; set; }
+
+        private int? AsianFont { get; set; }
+        public int? Case { get; set; }
+        public int? ComplexScriptFont { get; set; }
+        public double? ComplexScriptSize { get; set; }
+        public bool? DoubleStrikeThrough{ get; set; }
+        public bool? DoubleUnderline { get; set; }
+
+        public int? LangID { get; set; }
+        public int? Locale { get; set; }
+        public int? LocalizeFont{ get; set; }
+
+        public bool? Overline { get; set; }
+        public bool? Perpendicular { get; set; }
+
+        public int? Pos { get; set; }
+        public int? RTLText{ get; set; }
+        public double? FontScale { get; set; }
+        public double? Letterspace{ get; set; }
+        public bool? Strikethru { get; set; }
+        public int? UseVertical { get; set; }
 
         public CharacterFormat()
         {
         }
 
-        public double? Size
-        {
-            get { return _size; }
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (value.Value <= 0)
-                    {
-                        throw new System.ArgumentOutOfRangeException();
-                    }
-                }
-
-                _size = value;
-            }
-        }
-
-        public int? Transparency
-        {
-            get { return _transparency; }
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (value.Value < 0)
-                    {
-                        throw new System.ArgumentOutOfRangeException();
-                    }
-                }
-
-                if (value.HasValue)
-                {
-                    if (value.Value > 100)
-                    {
-                        throw new System.ArgumentOutOfRangeException();
-                    }
-                }
-
-
-                _transparency = value;
-            }
-        }
-
         public void UpdateFrom(CharacterFormat other)
         {
-            this.Font = other.Font;
-            this._size = other._size;
-            this.Style = other.Style;
             this.Color = other.Color;
-            this._transparency = other._transparency;
+            this.Font = other.Font;
+            this.Size = other.Size;
+            this.Style = other.Style;
+            this.Transparency = other.Transparency;
+
+            this.AsianFont = other.AsianFont;
+            this.Case = other.Case;
+            this.ComplexScriptFont = other.ComplexScriptFont;
+            this.ComplexScriptSize = other.ComplexScriptSize;
+
+            this.DoubleStrikeThrough = other.DoubleStrikeThrough;
+            this.DoubleUnderline = other.DoubleUnderline;
+            this.LangID= other.LangID;
+            this.Locale = other.Locale;
+
+            this.LocalizeFont = other.LocalizeFont;
+
+            this.Overline = other.Overline;
+            this.Perpendicular = other.Perpendicular;
+
+            this.Pos = other.Pos;
+            this.RTLText = other.RTLText;
+            this.FontScale = other.FontScale;
+            this.Letterspace = other.Letterspace;
+            this.Strikethru = other.Strikethru;
+            this.UseVertical = other.UseVertical;
         }
 
-        public CharacterFormat Duplicate()
+        public CharacterFormat Clone()
         {
             var fmt = new CharacterFormat();
             fmt.UpdateFrom(this);

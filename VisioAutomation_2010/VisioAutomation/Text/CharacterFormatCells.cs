@@ -17,7 +17,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> Case { get; set; }
         public VA.ShapeSheet.CellData<int> ComplexScriptFont { get; set; }
         public VA.ShapeSheet.CellData<double> ComplexScriptSize { get; set; }
-        public VA.ShapeSheet.CellData<bool> DoubleStrikethrough { get; set; }
+        public VA.ShapeSheet.CellData<bool> DoubleStrikeThrough { get; set; }
         public VA.ShapeSheet.CellData<bool> DoubleUnderline { get; set; }
         public VA.ShapeSheet.CellData<int> LangID { get; set; }
         public VA.ShapeSheet.CellData<int> Locale { get; set; }
@@ -39,15 +39,14 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Char_Size.ForRow(row), this.Size.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_Style.ForRow(row), this.Style.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(row), this.Transparency.Formula);
-
-
+            
             func(VA.ShapeSheet.SRCConstants.Char_AsianFont.ForRow(row), this.AsianFont.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_Case.ForRow(row), this.Case.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_ComplexScriptFont.ForRow(row), this.ComplexScriptFont.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_ComplexScriptSize.ForRow(row), this.ComplexScriptSize.Formula);
             
             func(VA.ShapeSheet.SRCConstants.Char_DblUnderline.ForRow(row), this.DoubleUnderline.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_DoubleStrikethrough.ForRow(row), this.DoubleStrikethrough.Formula);
+            func(VA.ShapeSheet.SRCConstants.Char_DoubleStrikethrough.ForRow(row), this.DoubleStrikeThrough.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_LangID.ForRow(row), this.LangID.Formula);
 
             func(VA.ShapeSheet.SRCConstants.Char_FontScale.ForRow(row), this.FontScale.Formula);
@@ -93,7 +92,7 @@ namespace VisioAutomation.Text
             cells.Case = row[query.Case].ToInt();
             cells.ComplexScriptFont= row[query.ComplexScriptFont].ToInt();
             cells.ComplexScriptSize= row[query.ComplexScriptSize];
-            cells.DoubleStrikethrough= row[query.DoubleStrikethrough].ToBool();
+            cells.DoubleStrikeThrough= row[query.DoubleStrikethrough].ToBool();
             cells.DoubleUnderline= row[query.DoubleUnderline].ToBool();
             cells.FontScale= row[query.FontScale];
             cells.LangID= row[query.LangID].ToInt();
