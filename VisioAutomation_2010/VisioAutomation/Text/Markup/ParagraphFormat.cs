@@ -5,6 +5,8 @@ namespace VisioAutomation.Text.Markup
 {
     public class ParagraphFormat
     {
+        // http://msdn.microsoft.com/en-us/library/ff767385
+
         public AlignmentHorizontal? HAlign { get; set; }
         public double? IndentFirst { get; set; }
         public double? IndentLeft { get; set; }

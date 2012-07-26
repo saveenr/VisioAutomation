@@ -7,7 +7,6 @@ namespace VisioAutomation.Text.Markup
     public class CharacterFormat
     {
         // http://msdn.microsoft.com/en-us/library/ff767069
-        // this is used for dealing with character ranges typically
 
         public ColorRGB? Color { get; set; }
         public int? FontID { get; set; }
@@ -26,31 +25,6 @@ namespace VisioAutomation.Text.Markup
 
         public CharacterFormat()
         {
-        }
-
-        public void UpdateFrom(CharacterFormat other)
-        {
-            this.FontID = other.FontID;
-            this.Color = other.Color;
-            this.Style = other.Style;
-            this.Case = other.Case;
-            this.Pos = other.Pos;
-            this.FontSizeInPoints = other.FontSizeInPoints;
-            this.TransparencyPercent = other.TransparencyPercent;
-            this.DoubleUnderline = other.DoubleUnderline;
-            this.FontScalePercent = other.FontScalePercent;
-            this.LangID = other.LangID;
-            this.LetterspaceInPoints = other.LetterspaceInPoints;
-            this.Overline = other.Overline;
-            this.Strikethru = other.Strikethru;
-           
-        }
-
-        public CharacterFormat Clone()
-        {
-            var fmt = new CharacterFormat();
-            fmt.UpdateFrom(this);
-            return fmt;
         }
 
         public VA.Text.CharacterFormatCells ToCells()
