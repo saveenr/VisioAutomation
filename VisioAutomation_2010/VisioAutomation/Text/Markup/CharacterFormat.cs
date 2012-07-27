@@ -8,19 +8,19 @@ namespace VisioAutomation.Text.Markup
     {
         // http://msdn.microsoft.com/en-us/library/ff767069
 
-        public ColorRGB? Color { get; set; }
-        public int? FontID { get; set; }
-        public  double? FontSizeInPoints { get; set;  }
-        public CharStyle? Style { get; set; }
-        public int? TransparencyPercent { get; set; }
-        public int? Case { get; set; }
         public bool? DoubleUnderline { get; set; }
-        public int? LangID { get; set; }
         public bool? Overline { get; set; }
-        public int? Pos { get; set; }
-        public double? FontScalePercent { get; set; }
-        public double? LetterspaceInPoints{ get; set; }
         public bool? Strikethru { get; set; }
+        public CharStyle? Style { get; set; }
+        public ColorRGB? Color { get; set; }
+        public double? FontScalePercent { get; set; }
+        public double? FontSizeInPoints { get; set; }
+        public double? LetterspaceInPoints { get; set; }
+        public int? Case { get; set; }
+        public int? FontID { get; set; }
+        public int? LangID { get; set; }
+        public int? Pos { get; set; }
+        public int? TransparencyPercent { get; set; }
         public int? UseVertical { get; set; }
 
         public CharacterFormat()

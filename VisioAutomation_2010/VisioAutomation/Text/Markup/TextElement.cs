@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Text.Markup
 {
@@ -73,7 +72,7 @@ namespace VisioAutomation.Text.Markup
                     if (walkevent.Node is TextElement)
                     {
                         var element = (TextElement) walkevent.Node;
-                        var region = new TextRegion(element, start_pos);
+                        var region = new TextRegion(start_pos, element);
                         region_stack.Push(region);
                         markupinfo.FormatRegions.Add(region);
                     }
@@ -85,7 +84,7 @@ namespace VisioAutomation.Text.Markup
                         {
                             // Add text length to parent
                             var nparent = region_stack.Peek();
-                            nparent.TextLength += text_node.Text.Length;
+                            nparent.Length += text_node.Text.Length;
 
                             // update the start position with the length
                             start_pos += text_node.Text.Length;
@@ -98,14 +97,14 @@ namespace VisioAutomation.Text.Markup
                         {
                             var field_region = new TextRegion();
                             field_region.Field = f;
-                            field_region.TextStartPos = start_pos;
-                            field_region.TextLength = f.PlaceholderText.Length;
+                            field_region.Start = start_pos;
+                            field_region.Length = f.PlaceholderText.Length;
 
                             markupinfo.FieldRegions.Add(field_region);
 
                             // Add text length to parent
                             var nparent = region_stack.Peek();
-                            nparent.TextLength += f.PlaceholderText.Length;
+                            nparent.Length += f.PlaceholderText.Length;
 
                             // update the start position with the length
                             start_pos += f.PlaceholderText.Length;
@@ -126,7 +125,7 @@ namespace VisioAutomation.Text.Markup
                         if (region_stack.Count > 0)
                         {
                             var parent_el = region_stack.Peek();
-                            parent_el.TextLength += this_region.TextLength;
+                            parent_el.Length += this_region.Length;
                         }
                     }
                 }
@@ -159,7 +158,7 @@ namespace VisioAutomation.Text.Markup
 
             // Find all the regions needing formatting
             var markupinfo = this.GetMarkupInfo();
-            var regions_to_format = markupinfo.FormatRegions.Where(region => region.TextLength >= 1);
+            var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1);
             foreach (var markup_region in regions_to_format)
             {
                 set_text_range_char_fmt(markup_region, shape);
@@ -168,11 +167,11 @@ namespace VisioAutomation.Text.Markup
 
             // Insert the fields
             // note: Fields are added in reverse because it is simpler to keep track of the insertion positions
-            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.TextLength >= 1).Reverse())
+            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.Length >= 1).Reverse())
             {
                 var chars = shape.Characters;
-                chars.Begin = field_region.TextStartPos;
-                chars.End = field_region.TextEndPos;
+                chars.Begin = field_region.Start;
+                chars.End = field_region.End;
                 chars.AddField((short) field_region.Field.Category, (short) field_region.Field.Code,
                                (short) field_region.Field.Format);
                 var fr = field_region;
@@ -185,19 +184,19 @@ namespace VisioAutomation.Text.Markup
             if (region.Element.ParagraphFormat.IndentFirstInPoints.HasValue)
             {
                 int indent_first_points = (int)VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentFirstInPoints.Value);
-                var chars0 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndFirst, indent_first_points, region);
+                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first_points, region);
             }
 
             if (region.Element.ParagraphFormat.IndentLeftInPoints.HasValue)
             {
                 int indent_left_points = (int) VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentLeftInPoints.Value);
-                var chars1 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndLeft, indent_left_points, region);
+                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left_points, region);
             }
 
             if (region.Element.ParagraphFormat.HAlign.HasValue)
             {
                 int int_halign = (int)region.Element.ParagraphFormat.HAlign.Value;
-                SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_HorzAlign, int_halign, region);
+                SetRangeParagraphProps(shape, SRCCON.Para_HorzAlign, int_halign, region);
             }
 
             // Handle bullets
@@ -209,9 +208,9 @@ namespace VisioAutomation.Text.Markup
                 int indent_first = -base_indent_size;
                 int indent_left = base_indent_size;
 
-                var chars0 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndFirst, indent_first, region);
-                var chars1 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_IndLeft, indent_left, region);
-                var chars2 = SetRangeParagraphProps(shape, VA.ShapeSheet.SRCConstants.Para_Bullet, bullet_type, region);
+                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first, region);
+                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left, region);
+                var chars2 = SetRangeParagraphProps(shape, SRCCON.Para_Bullet, bullet_type, region);
             }
         }
 
@@ -224,8 +223,8 @@ namespace VisioAutomation.Text.Markup
         private static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, VA.ShapeSheet.SRC src, int value, VA.Text.Markup.TextRegion region)
         {
             var chars = shape.Characters;
-            chars.Begin = region.TextStartPos;
-            chars.End = region.TextEndPos;
+            chars.Begin = region.Start;
+            chars.End = region.End;
             chars.ParaProps[src.Cell] = (short)value;
             return chars;
         }
@@ -243,8 +242,8 @@ namespace VisioAutomation.Text.Markup
 
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
             chars = shape.Characters;
-            chars.Begin = region.TextStartPos;
-            chars.End = region.TextEndPos;
+            chars.Begin = region.Start;
+            chars.End = region.End;
 
             if (src.Section == (short)IVisio.VisSectionIndices.visSectionCharacter)
             {
@@ -288,28 +287,28 @@ namespace VisioAutomation.Text.Markup
 
             IVisio.Characters chars = null;
             
-            SetRangeProps(shape, charcells.AsianFont, VA.ShapeSheet.SRCConstants.Char_AsianFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Case, VA.ShapeSheet.SRCConstants.Char_Case, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Color, VA.ShapeSheet.SRCConstants.Char_Color, temp_color, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.ComplexScriptFont, VA.ShapeSheet.SRCConstants.Char_ComplexScriptFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.ComplexScriptSize, VA.ShapeSheet.SRCConstants.Char_ComplexScriptSize, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.DoubleStrikeThrough, VA.ShapeSheet.SRCConstants.Char_DoubleStrikethrough, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.DoubleUnderline, VA.ShapeSheet.SRCConstants.Char_DblUnderline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Font, VA.ShapeSheet.SRCConstants.Char_Font, temp_font, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.FontScale, VA.ShapeSheet.SRCConstants.Char_FontScale, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.LangID, VA.ShapeSheet.SRCConstants.Char_LangID, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Letterspace, VA.ShapeSheet.SRCConstants.Char_Letterspace, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Locale, VA.ShapeSheet.SRCConstants.Char_Locale, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.LocalizeFont, VA.ShapeSheet.SRCConstants.Char_LocalizeFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Overline, VA.ShapeSheet.SRCConstants.Char_Overline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Perpendicular, VA.ShapeSheet.SRCConstants.Char_Perpendicular, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Pos, VA.ShapeSheet.SRCConstants.Char_Overline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.RTLText, VA.ShapeSheet.SRCConstants.Char_RTLText, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Size, VA.ShapeSheet.SRCConstants.Char_Size, temp_size, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Strikethru, VA.ShapeSheet.SRCConstants.Char_Strikethru, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Style, VA.ShapeSheet.SRCConstants.Char_Style, temp_style, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Transparency, VA.ShapeSheet.SRCConstants.Char_ColorTrans, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.UseVertical, VA.ShapeSheet.SRCConstants.Char_UseVertical, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.AsianFont, SRCCON.Char_AsianFont, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Case, SRCCON.Char_Case, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Color, SRCCON.Char_Color, temp_color, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.ComplexScriptFont, SRCCON.Char_ComplexScriptFont, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.ComplexScriptSize, SRCCON.Char_ComplexScriptSize, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.DoubleStrikeThrough, SRCCON.Char_DoubleStrikethrough, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.DoubleUnderline, SRCCON.Char_DblUnderline, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Font, SRCCON.Char_Font, temp_font, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.FontScale, SRCCON.Char_FontScale, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.LangID, SRCCON.Char_LangID, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Letterspace, SRCCON.Char_Letterspace, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Locale, SRCCON.Char_Locale, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.LocalizeFont, SRCCON.Char_LocalizeFont, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Overline, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Perpendicular, SRCCON.Char_Perpendicular, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Pos, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.RTLText, SRCCON.Char_RTLText, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Size, SRCCON.Char_Size, temp_size, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Strikethru, SRCCON.Char_Strikethru, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Style, SRCCON.Char_Style, temp_style, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Transparency, SRCCON.Char_ColorTrans, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.UseVertical, SRCCON.Char_UseVertical, temp_trans, region, ref rownum, ref chars);
 
 
             // if any text region was created then set the formula values
@@ -322,28 +321,28 @@ namespace VisioAutomation.Text.Markup
 
                 var update = new VA.ShapeSheet.Update.SRCUpdate();
 
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Case.ForRow(rownum), charcells.Case.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(rownum), charcells.Color.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(rownum), charcells.Transparency.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(rownum), charcells.AsianFont.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_ComplexScriptFont.ForRow(rownum), charcells.ComplexScriptFont.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_ComplexScriptSize.ForRow(rownum), charcells.ComplexScriptSize.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_DblUnderline.ForRow(rownum), charcells.DoubleUnderline.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_DoubleStrikethrough.ForRow(rownum), charcells.DoubleStrikeThrough.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(rownum), charcells.Font.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_FontScale.ForRow(rownum), charcells.FontScale.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_LangID.ForRow(rownum), charcells.LangID.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Letterspace.ForRow(rownum), charcells.Letterspace.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Locale.ForRow(rownum), charcells.Locale.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_LocalizeFont.ForRow(rownum), charcells.LocalizeFont.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Overline.ForRow(rownum), charcells.Overline.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Perpendicular.ForRow(rownum), charcells.Perpendicular.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Pos.ForRow(rownum), charcells.Pos.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_RTLText.ForRow(rownum), charcells.RTLText.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Size.ForRow(rownum), charcells.Size.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Strikethru.ForRow(rownum), charcells.Strikethru.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Style.ForRow(rownum), charcells.Style.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_UseVertical.ForRow(rownum), charcells.UseVertical.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Case.ForRow(rownum), charcells.Case.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Color.ForRow(rownum), charcells.Color.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.Transparency.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.AsianFont.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptFont.ForRow(rownum), charcells.ComplexScriptFont.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptSize.ForRow(rownum), charcells.ComplexScriptSize.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_DblUnderline.ForRow(rownum), charcells.DoubleUnderline.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_DoubleStrikethrough.ForRow(rownum), charcells.DoubleStrikeThrough.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Font.ForRow(rownum), charcells.Font.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_FontScale.ForRow(rownum), charcells.FontScale.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_LangID.ForRow(rownum), charcells.LangID.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Letterspace.ForRow(rownum), charcells.Letterspace.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Locale.ForRow(rownum), charcells.Locale.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_LocalizeFont.ForRow(rownum), charcells.LocalizeFont.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Overline.ForRow(rownum), charcells.Overline.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Perpendicular.ForRow(rownum), charcells.Perpendicular.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Pos.ForRow(rownum), charcells.Pos.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_RTLText.ForRow(rownum), charcells.RTLText.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Size.ForRow(rownum), charcells.Size.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Strikethru.ForRow(rownum), charcells.Strikethru.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_Style.ForRow(rownum), charcells.Style.Formula);
+                update.SetFormulaIgnoreNull(SRCCON.Char_UseVertical.ForRow(rownum), charcells.UseVertical.Formula);
                 
                 update.Execute(shape);
             }

@@ -57,27 +57,27 @@ namespace TestVisioAutomation
             var markup1 = el1.GetMarkupInfo();
             var regions1 = markup1.FormatRegions;
             Assert.AreEqual(1, markup1.FormatRegions.Count);
-            Assert.AreEqual(0, regions1[0].TextLength);
-            Assert.AreEqual(0, regions1[0].TextStartPos);
-            Assert.AreEqual(0, regions1[0].TextEndPos);
+            Assert.AreEqual(0, regions1[0].Length);
+            Assert.AreEqual(0, regions1[0].Start);
+            Assert.AreEqual(0, regions1[0].End);
 
 
             var el2 = new VA.Text.Markup.TextElement("HELLO");
             var markup2 = el2.GetMarkupInfo();
             var regions2 = markup2.FormatRegions;
             Assert.AreEqual(1, markup2.FormatRegions.Count);
-            Assert.AreEqual(5, regions2[0].TextLength);
-            Assert.AreEqual(0, regions2[0].TextStartPos);
-            Assert.AreEqual(5, regions2[0].TextEndPos);
+            Assert.AreEqual(5, regions2[0].Length);
+            Assert.AreEqual(0, regions2[0].Start);
+            Assert.AreEqual(5, regions2[0].End);
 
             var el3 = new VA.Text.Markup.TextElement("HELLO");
             el3.AppendText(" WORLD");
             var markup3 = el3.GetMarkupInfo();
             var regions3 = markup3.FormatRegions;
             Assert.AreEqual(1, markup3.FormatRegions.Count);
-            Assert.AreEqual(11, regions3[0].TextLength);
-            Assert.AreEqual(0, regions3[0].TextStartPos);
-            Assert.AreEqual(11, regions3[0].TextEndPos);
+            Assert.AreEqual(11, regions3[0].Length);
+            Assert.AreEqual(0, regions3[0].Start);
+            Assert.AreEqual(11, regions3[0].End);
 
             var el4 = new VA.Text.Markup.TextElement();
             el4.AppendElement("HELLO");
@@ -85,15 +85,15 @@ namespace TestVisioAutomation
             var markup4 = el4.GetMarkupInfo();
             var regions4 = markup4.FormatRegions;
             Assert.AreEqual(3, markup4.FormatRegions.Count);
-            Assert.AreEqual(11, regions4[0].TextLength);
-            Assert.AreEqual(0, regions4[0].TextStartPos);
-            Assert.AreEqual(11, regions4[0].TextEndPos);
-            Assert.AreEqual(5, regions4[1].TextLength);
-            Assert.AreEqual(0, regions4[1].TextStartPos);
-            Assert.AreEqual(5, regions4[1].TextEndPos);
-            Assert.AreEqual(6, regions4[2].TextLength);
-            Assert.AreEqual(5, regions4[2].TextStartPos);
-            Assert.AreEqual(11, regions4[2].TextEndPos);
+            Assert.AreEqual(11, regions4[0].Length);
+            Assert.AreEqual(0, regions4[0].Start);
+            Assert.AreEqual(11, regions4[0].End);
+            Assert.AreEqual(5, regions4[1].Length);
+            Assert.AreEqual(0, regions4[1].Start);
+            Assert.AreEqual(5, regions4[1].End);
+            Assert.AreEqual(6, regions4[2].Length);
+            Assert.AreEqual(5, regions4[2].Start);
+            Assert.AreEqual(11, regions4[2].End);
 
 
             var el5 = new VA.Text.Markup.TextElement();
@@ -103,15 +103,15 @@ namespace TestVisioAutomation
             var markup5 = el5.GetMarkupInfo();
             var regions5 = markup5.FormatRegions;
             Assert.AreEqual(3, markup5.FormatRegions.Count);
-            Assert.AreEqual(11, regions5[0].TextLength);
-            Assert.AreEqual(0, regions5[0].TextStartPos);
-            Assert.AreEqual(11, regions5[0].TextEndPos);
-            Assert.AreEqual(11, regions5[1].TextLength);
-            Assert.AreEqual(0, regions5[1].TextStartPos);
-            Assert.AreEqual(11, regions5[1].TextEndPos);
-            Assert.AreEqual(6, regions5[2].TextLength);
-            Assert.AreEqual(5, regions5[2].TextStartPos);
-            Assert.AreEqual(11, regions5[2].TextEndPos);
+            Assert.AreEqual(11, regions5[0].Length);
+            Assert.AreEqual(0, regions5[0].Start);
+            Assert.AreEqual(11, regions5[0].End);
+            Assert.AreEqual(11, regions5[1].Length);
+            Assert.AreEqual(0, regions5[1].Start);
+            Assert.AreEqual(11, regions5[1].End);
+            Assert.AreEqual(6, regions5[2].Length);
+            Assert.AreEqual(5, regions5[2].Start);
+            Assert.AreEqual(11, regions5[2].End);
 
         }
 
@@ -190,15 +190,15 @@ namespace TestVisioAutomation
             var markup = el0.GetMarkupInfo();
             var regions = markup.FormatRegions;
             Assert.AreEqual(3, regions.Count);
-            Assert.AreEqual(6, regions[2].TextLength);
-            Assert.AreEqual(5, regions[2].TextStartPos);
-            Assert.AreEqual(11, regions[2].TextEndPos);
-            Assert.AreEqual(11, regions[1].TextLength);
-            Assert.AreEqual(0, regions[1].TextStartPos);
-            Assert.AreEqual(11, regions[1].TextEndPos);
-            Assert.AreEqual(11, regions[0].TextLength);
-            Assert.AreEqual(0, regions[0].TextStartPos);
-            Assert.AreEqual(11, regions[0].TextEndPos);
+            Assert.AreEqual(6, regions[2].Length);
+            Assert.AreEqual(5, regions[2].Start);
+            Assert.AreEqual(11, regions[2].End);
+            Assert.AreEqual(11, regions[1].Length);
+            Assert.AreEqual(0, regions[1].Start);
+            Assert.AreEqual(11, regions[1].End);
+            Assert.AreEqual(11, regions[0].Length);
+            Assert.AreEqual(0, regions[0].Start);
+            Assert.AreEqual(11, regions[0].End);
 
             Assert.AreEqual(el0, regions[0].Element);
             Assert.AreEqual(el1, regions[1].Element);

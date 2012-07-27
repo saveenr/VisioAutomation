@@ -2,42 +2,36 @@ namespace VisioAutomation.Text.Markup
 {
     class TextRegion
     {
+        // This class is used to identify continuos regions of text
+        // mostly it is used to set character and paragraph formating
+
+        // optionally a textregion may be associated with a text element
+        public TextElement Element { get; set; }
+        public Field Field { get; set; }
+        public int Start { get; set; }
+        public int Length { get; set; }
+
         public TextRegion()
         {
+            // initialize an empty span
+            this.Start = 0;
+            this.Length = 0;
+
+            // by default no text element is associated with this region
             this.Element = null;
-            this.initialize_empty_span();
         }
 
-        public TextRegion(TextElement el) :
+        public TextRegion(int start, TextElement el) :
             this()
         {
             this.Element = el;
+            this.Start = start;
         }
 
-        public TextRegion(TextElement el, int start) :
-            this()
+        public int End
         {
-            this.Element = el;
-            this.TextStartPos = start;
+            get { return (this.Start + this.Length); }
         }
 
-        private void initialize_empty_span()
-        {
-            this.TextStartPos = 0;
-            this.TextLength = 0;
-        }
-
-        public int TextEndPos
-        {
-            get { return (this.TextStartPos + this.TextLength); }
-        }
-
-        public TextElement Element { get; set; }
-
-        public Field Field { get; set; }
-
-        public int TextStartPos { get; set; }
-
-        public int TextLength { get; set; }
     }
 }
