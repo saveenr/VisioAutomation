@@ -164,10 +164,10 @@ namespace VisioAutomation.Text.Markup
             {
 
                 var charcells = markup_region.Element.CharacterFormat.ToCells();
-                FormatTextRegion(charcells, markup_region, shape); 
+                FormatTextRegion(charcells, markup_region.Start, markup_region.End , shape); 
 
                 var paracells = markup_region.Element.ParagraphFormat.ToCells();
-                FormatTextRegion(paracells, markup_region, shape);
+                FormatTextRegion(paracells, markup_region.Start, markup_region.End, shape);
             }
 
             // Insert the fields
@@ -183,8 +183,13 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
-        private static void FormatTextRegion(VA.ShapeSheet.CellGroups.CellGroupMultiRow fmtcells, TextRegion region, IVisio.Shape shape)
+        private static int FormatTextRegion(VA.ShapeSheet.CellGroups.CellGroupMultiRow fmtcells, int start, int end, IVisio.Shape shape)
         {
+            // overall strategy:
+            // we need a row (either an existing one or a new one to be created)
+            // once we have a row, we can set the cells like normal for that row
+
+            // Ensure that this method only works on character and paragraph cells
             if (!(fmtcells is CharacterFormatCells || fmtcells is ParagraphFormatCells))
             {
                 string msg = string.Format("Only accepts {0} or {1}", typeof (CharacterFormatCells).Name,
@@ -192,6 +197,7 @@ namespace VisioAutomation.Text.Markup
                 throw new VA.AutomationException(msg);
             }
 
+            // ensure we have a valid shape object
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
@@ -200,19 +206,22 @@ namespace VisioAutomation.Text.Markup
             // Initialize the properties with temp values
             short rownum = -1;
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
-            IVisio.Characters chars = null;
 
-            chars = shape.Characters;
-            chars.Begin = region.Start;
-            chars.End = region.End;
+            // Try to create either a character or paragraph row depending nthe cells that were passed into this method
+            IVisio.Characters chars = shape.Characters;
+            chars.Begin = start;
+            chars.End = end;
+
 
             if (fmtcells is CharacterFormatCells)
             {
+                // the choice of Color arbitrary 
                 chars.CharProps[SRCCON.Char_Color.Cell] = (short)0;
                 rownum = chars.CharPropsRow[(short)default_chars_bias];                
             }
             else if (fmtcells is ParagraphFormatCells)
             {
+                // the choice of Bullet is arbitrary
                 chars.ParaProps[SRCCON.Para_Bullet.Cell] = (short)0;
                 rownum = chars.ParaPropsRow[(short)default_chars_bias];                
             }
@@ -221,20 +230,19 @@ namespace VisioAutomation.Text.Markup
                 throw new ArgumentOutOfRangeException("fmtcells");
             }
 
+            // If a negative rownum was return the reason is that the desired new region spanned multiple existing regions
             if (rownum == -1)
             {
-                throw new VA.AutomationException("Internal Error");
+                throw new VA.AutomationException("Cannot apply formatting across multiple regions");
             }
 
-            if (chars == null)
-            {
-                throw new VA.AutomationException("Internal Error2");
-
-            }
-
+            // Now that we have a row identified apply the cells
             var update = new VA.ShapeSheet.Update.SRCUpdate();
             fmtcells.Apply(update, rownum);
             update.Execute(shape);
+
+            // return the rownumber in case the caller wants to do something with the row that the formatting is on
+            return rownum;
         }
     }
 }
