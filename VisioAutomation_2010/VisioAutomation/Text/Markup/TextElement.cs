@@ -181,22 +181,25 @@ namespace VisioAutomation.Text.Markup
 
         private static void set_text_range_para_fmt(TextRegion region, IVisio.Shape shape)
         {
+            short rownum = -1;
+            IVisio.Characters chars=null;
+
             if (region.Element.ParagraphFormat.IndentFirstInPoints.HasValue)
             {
                 int indent_first_points = (int)VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentFirstInPoints.Value);
-                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first_points, region);
+                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first_points, region, ref rownum, ref chars);
             }
 
             if (region.Element.ParagraphFormat.IndentLeftInPoints.HasValue)
             {
                 int indent_left_points = (int) VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentLeftInPoints.Value);
-                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left_points, region);
+                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left_points, region, ref rownum, ref chars);
             }
 
             if (region.Element.ParagraphFormat.HAlign.HasValue)
             {
                 int int_halign = (int)region.Element.ParagraphFormat.HAlign.Value;
-                SetRangeParagraphProps(shape, SRCCON.Para_HorzAlign, int_halign, region);
+                SetRangeParagraphProps(shape, SRCCON.Para_HorzAlign, int_halign, region, ref rownum, ref chars);
             }
 
             // Handle bullets
@@ -208,9 +211,9 @@ namespace VisioAutomation.Text.Markup
                 int indent_first = -base_indent_size;
                 int indent_left = base_indent_size;
 
-                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first, region);
-                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left, region);
-                var chars2 = SetRangeParagraphProps(shape, SRCCON.Para_Bullet, bullet_type, region);
+                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first, region, ref rownum, ref chars);
+                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left, region, ref rownum, ref chars);
+                var chars2 = SetRangeParagraphProps(shape, SRCCON.Para_Bullet, bullet_type, region, ref rownum, ref chars);
             }
         }
 
@@ -220,7 +223,7 @@ namespace VisioAutomation.Text.Markup
             Character
         }
 
-        private static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, VA.ShapeSheet.SRC src, int value, VA.Text.Markup.TextRegion region)
+        private static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, VA.ShapeSheet.SRC src, int value, VA.Text.Markup.TextRegion region, ref short rownum, ref IVisio.Characters chars2)
         {
             var chars = shape.Characters;
             chars.Begin = region.Start;
