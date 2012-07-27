@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -182,8 +183,15 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
-        private static void FormatTextRegion(CharacterFormatCells charcells, TextRegion region, IVisio.Shape shape)
+        private static void FormatTextRegion(VA.ShapeSheet.CellGroups.CellGroupMultiRow fmtcells, TextRegion region, IVisio.Shape shape)
         {
+            if (!(fmtcells is CharacterFormatCells || fmtcells is ParagraphFormatCells))
+            {
+                string msg = string.Format("Only accepts {0} or {1}", typeof (CharacterFormatCells).Name,
+                                           typeof (ParagraphFormatCells).Name);
+                throw new VA.AutomationException(msg);
+            }
+
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
@@ -198,8 +206,20 @@ namespace VisioAutomation.Text.Markup
             chars.Begin = region.Start;
             chars.End = region.End;
 
-            chars.CharProps[SRCCON.Char_Color.Cell] = (short)0;
-            rownum = chars.CharPropsRow[(short)default_chars_bias];
+            if (fmtcells is CharacterFormatCells)
+            {
+                chars.CharProps[SRCCON.Char_Color.Cell] = (short)0;
+                rownum = chars.CharPropsRow[(short)default_chars_bias];                
+            }
+            else if (fmtcells is ParagraphFormatCells)
+            {
+                chars.ParaProps[SRCCON.Para_Bullet.Cell] = (short)0;
+                rownum = chars.ParaPropsRow[(short)default_chars_bias];                
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("fmtcells");
+            }
 
             if (rownum == -1)
             {
@@ -213,42 +233,7 @@ namespace VisioAutomation.Text.Markup
             }
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
-            charcells.Apply(update, rownum);
-            update.Execute(shape);
-        }
-
-        private static void FormatTextRegion(ParagraphFormatCells paracells, TextRegion region, IVisio.Shape shape)
-        {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
-            // Initialize the properties with temp values
-            short rownum = -1;
-            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
-            IVisio.Characters chars = null;
-
-            chars = shape.Characters;
-            chars.Begin = region.Start;
-            chars.End = region.End;
-
-            chars.ParaProps[SRCCON.Char_Color.Cell] = (short)0;
-            rownum = chars.ParaPropsRow[(short)default_chars_bias];
-
-            if (rownum == -1)
-            {
-                throw new VA.AutomationException("Internal Error");
-            }
-
-            if (chars == null)
-            {
-                throw new VA.AutomationException("Internal Error2");
-
-            }
-
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
-            paracells.Apply(update, rownum);
+            fmtcells.Apply(update, rownum);
             update.Execute(shape);
         }
     }
