@@ -222,12 +222,6 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
-        internal enum rangetype
-        {
-            Paragraph,
-            Character
-        }
-
         private static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, bool perform, VA.ShapeSheet.SRC src, int value, VA.Text.Markup.TextRegion region, ref short rownum, ref IVisio.Characters chars2)
         {
             if (!perform)
