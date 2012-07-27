@@ -184,36 +184,38 @@ namespace VisioAutomation.Text.Markup
             short rownum = -1;
             IVisio.Characters chars=null;
 
-            if (region.Element.ParagraphFormat.IndentFirstInPoints.HasValue)
+            var parafmt = region.Element.ParagraphFormat;
+
+            if (parafmt.IndentFirstInPoints.HasValue)
             {
-                int indent_first_points = (int)VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentFirstInPoints.Value);
-                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first_points, region, ref rownum, ref chars);
+                int indent_first_points = (int)VA.Convert.InchestoPoints(parafmt.IndentFirstInPoints.Value);
+                var chars0 = SetRangeParagraphProps(shape, parafmt.IndentFirstInPoints.HasValue, SRCCON.Para_IndFirst, indent_first_points, region, ref rownum, ref chars);
             }
 
-            if (region.Element.ParagraphFormat.IndentLeftInPoints.HasValue)
+            if (parafmt.IndentLeftInPoints.HasValue)
             {
-                int indent_left_points = (int) VA.Convert.InchestoPoints(region.Element.ParagraphFormat.IndentLeftInPoints.Value);
-                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left_points, region, ref rownum, ref chars);
+                int indent_left_points = (int) VA.Convert.InchestoPoints(parafmt.IndentLeftInPoints.Value);
+                var chars1 = SetRangeParagraphProps(shape, parafmt.IndentLeftInPoints.HasValue, SRCCON.Para_IndLeft, indent_left_points, region, ref rownum, ref chars);
             }
 
-            if (region.Element.ParagraphFormat.HAlign.HasValue)
+            if (parafmt.HAlign.HasValue)
             {
-                int int_halign = (int)region.Element.ParagraphFormat.HAlign.Value;
-                SetRangeParagraphProps(shape, SRCCON.Para_HorzAlign, int_halign, region, ref rownum, ref chars);
+                int int_halign = (int)parafmt.HAlign.Value;
+                SetRangeParagraphProps(shape, parafmt.HAlign.HasValue, SRCCON.Para_HorzAlign, int_halign, region, ref rownum, ref chars);
             }
 
             // Handle bullets
-            if (region.Element.ParagraphFormat.Bullets.HasValue &&
-                region.Element.ParagraphFormat.Bullets.Value)
+            if (parafmt.Bullets.HasValue &&
+                parafmt.Bullets.Value)
             {
                 const int bullet_type = 1;
                 const int base_indent_size = 25;
                 int indent_first = -base_indent_size;
                 int indent_left = base_indent_size;
 
-                var chars0 = SetRangeParagraphProps(shape, SRCCON.Para_IndFirst, indent_first, region, ref rownum, ref chars);
-                var chars1 = SetRangeParagraphProps(shape, SRCCON.Para_IndLeft, indent_left, region, ref rownum, ref chars);
-                var chars2 = SetRangeParagraphProps(shape, SRCCON.Para_Bullet, bullet_type, region, ref rownum, ref chars);
+                var chars0 = SetRangeParagraphProps(shape, parafmt.Bullets.HasValue, SRCCON.Para_IndFirst, indent_first, region, ref rownum, ref chars);
+                var chars1 = SetRangeParagraphProps(shape, parafmt.Bullets.HasValue, SRCCON.Para_IndLeft, indent_left, region, ref rownum, ref chars);
+                var chars2 = SetRangeParagraphProps(shape, parafmt.Bullets.HasValue, SRCCON.Para_Bullet, bullet_type, region, ref rownum, ref chars);
             }
         }
 
@@ -223,8 +225,13 @@ namespace VisioAutomation.Text.Markup
             Character
         }
 
-        private static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, VA.ShapeSheet.SRC src, int value, VA.Text.Markup.TextRegion region, ref short rownum, ref IVisio.Characters chars2)
+        private static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, bool perform, VA.ShapeSheet.SRC src, int value, VA.Text.Markup.TextRegion region, ref short rownum, ref IVisio.Characters chars2)
         {
+            if (!perform)
+            {
+                return null;
+            }
+
             var chars = shape.Characters;
             chars.Begin = region.Start;
             chars.End = region.End;
