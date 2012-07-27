@@ -229,13 +229,13 @@ namespace VisioAutomation.Text.Markup
             return chars;
         }
 
-        private static void SetRangeProps<T>(IVisio.Shape shape, VA.ShapeSheet.CellData<T> f,
+        private static void SetRangeProps(IVisio.Shape shape, bool performset,
                                       VA.ShapeSheet.SRC src, int value, Markup.TextRegion region,
                                       ref short rownum, ref IVisio.Characters chars)
         {
             // http://office.microsoft.com/en-us/visio-help/HV080350454.aspx
 
-            if (!f.Formula.HasValue)
+            if (!performset)
             {
                 return;
             }
@@ -287,28 +287,28 @@ namespace VisioAutomation.Text.Markup
 
             IVisio.Characters chars = null;
             
-            SetRangeProps(shape, charcells.AsianFont, SRCCON.Char_AsianFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Case, SRCCON.Char_Case, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Color, SRCCON.Char_Color, temp_color, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.ComplexScriptFont, SRCCON.Char_ComplexScriptFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.ComplexScriptSize, SRCCON.Char_ComplexScriptSize, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.DoubleStrikeThrough, SRCCON.Char_DoubleStrikethrough, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.DoubleUnderline, SRCCON.Char_DblUnderline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Font, SRCCON.Char_Font, temp_font, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.FontScale, SRCCON.Char_FontScale, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.LangID, SRCCON.Char_LangID, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Letterspace, SRCCON.Char_Letterspace, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Locale, SRCCON.Char_Locale, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.LocalizeFont, SRCCON.Char_LocalizeFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Overline, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Perpendicular, SRCCON.Char_Perpendicular, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Pos, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.RTLText, SRCCON.Char_RTLText, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Size, SRCCON.Char_Size, temp_size, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Strikethru, SRCCON.Char_Strikethru, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Style, SRCCON.Char_Style, temp_style, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Transparency, SRCCON.Char_ColorTrans, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.UseVertical, SRCCON.Char_UseVertical, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.AsianFont.Formula.HasValue, SRCCON.Char_AsianFont, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Case.Formula.HasValue, SRCCON.Char_Case, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Color.Formula.HasValue, SRCCON.Char_Color, temp_color, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.ComplexScriptFont.Formula.HasValue, SRCCON.Char_ComplexScriptFont, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.ComplexScriptSize.Formula.HasValue, SRCCON.Char_ComplexScriptSize, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.DoubleStrikeThrough.Formula.HasValue, SRCCON.Char_DoubleStrikethrough, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.DoubleUnderline.Formula.HasValue, SRCCON.Char_DblUnderline, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Font.Formula.HasValue, SRCCON.Char_Font, temp_font, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.FontScale.Formula.HasValue, SRCCON.Char_FontScale, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.LangID.Formula.HasValue, SRCCON.Char_LangID, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Letterspace.Formula.HasValue, SRCCON.Char_Letterspace, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Locale.Formula.HasValue, SRCCON.Char_Locale, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.LocalizeFont.Formula.HasValue, SRCCON.Char_LocalizeFont, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Overline.Formula.HasValue, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Perpendicular.Formula.HasValue, SRCCON.Char_Perpendicular, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Pos.Formula.HasValue, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.RTLText.Formula.HasValue, SRCCON.Char_RTLText, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Size.Formula.HasValue, SRCCON.Char_Size, temp_size, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Strikethru.Formula.HasValue, SRCCON.Char_Strikethru, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Style.Formula.HasValue, SRCCON.Char_Style, temp_style, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.Transparency.Formula.HasValue, SRCCON.Char_ColorTrans, temp_trans, region, ref rownum, ref chars);
+            SetRangeProps(shape, charcells.UseVertical.Formula.HasValue, SRCCON.Char_UseVertical, temp_trans, region, ref rownum, ref chars);
 
 
             // if any text region was created then set the formula values
