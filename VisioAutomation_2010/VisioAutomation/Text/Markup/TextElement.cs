@@ -161,7 +161,10 @@ namespace VisioAutomation.Text.Markup
             var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1);
             foreach (var markup_region in regions_to_format)
             {
-                set_text_range_char_fmt(markup_region, shape);
+
+                var charfmt = markup_region.Element.CharacterFormat;
+                var charcells = charfmt.ToCells();
+                FormatTextRegion(charcells, markup_region, shape); 
                 set_text_range_para_fmt(markup_region, shape);
             }
 
@@ -239,22 +242,18 @@ namespace VisioAutomation.Text.Markup
             return chars;
         }
 
-        private static void set_text_range_char_fmt(TextRegion region, IVisio.Shape shape)
+        private static void FormatTextRegion(CharacterFormatCells charcells, TextRegion region, IVisio.Shape shape)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
             }
 
-            var charfmt = region.Element.CharacterFormat;
-            var charcells = charfmt.ToCells();
-
-
             // Initialize the properties with temp values
             short rownum = -1;
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
             IVisio.Characters chars = null;
-            
+
             chars = shape.Characters;
             chars.Begin = region.Start;
             chars.End = region.End;
@@ -262,7 +261,7 @@ namespace VisioAutomation.Text.Markup
             chars.CharProps[SRCCON.Char_Color.Cell] = (short)0;
             rownum = chars.CharPropsRow[(short)default_chars_bias];
 
-            if (rownum==-1)
+            if (rownum == -1)
             {
                 throw new VA.AutomationException("Internal Error");
             }
@@ -274,7 +273,7 @@ namespace VisioAutomation.Text.Markup
             }
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
-            charcells.Apply(update,rownum);
+            charcells.Apply(update, rownum);
             update.Execute(shape);
         }
     }
