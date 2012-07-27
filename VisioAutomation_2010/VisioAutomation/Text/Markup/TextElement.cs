@@ -24,30 +24,30 @@ namespace VisioAutomation.Text.Markup
         {
             this.CharacterFormat = new CharacterFormat();
             this.ParagraphFormat = new ParagraphFormat();
-            this.AppendText(text);
+            this.AddText(text);
         }
 
-        public Literal AppendText(string text)
+        public Literal AddText(string text)
         {
             var text_node = new Literal(text);
             this.Add(text_node);
             return text_node;
         }
 
-        public Field AppendField(VA.Text.Markup.Field field)
+        public Field AddField(VA.Text.Markup.Field field)
         {
             this.Add(field);
             return field;
         }
 
-        public TextElement AppendElement()
+        public TextElement Add()
         {
             var el = new TextElement();
             this.Add(el);
             return el;
         }
 
-        public TextElement AppendElement(string text)
+        public TextElement Add(string text)
         {
             var el = new TextElement(text);
             this.Add(el);

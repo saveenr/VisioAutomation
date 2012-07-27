@@ -71,7 +71,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(5, regions2[0].End);
 
             var el3 = new VA.Text.Markup.TextElement("HELLO");
-            el3.AppendText(" WORLD");
+            el3.AddText(" WORLD");
             var markup3 = el3.GetMarkupInfo();
             var regions3 = markup3.FormatRegions;
             Assert.AreEqual(1, markup3.FormatRegions.Count);
@@ -80,8 +80,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(11, regions3[0].End);
 
             var el4 = new VA.Text.Markup.TextElement();
-            el4.AppendElement("HELLO");
-            el4.AppendElement(" WORLD");
+            el4.Add("HELLO");
+            el4.Add(" WORLD");
             var markup4 = el4.GetMarkupInfo();
             var regions4 = markup4.FormatRegions;
             Assert.AreEqual(3, markup4.FormatRegions.Count);
@@ -97,8 +97,8 @@ namespace TestVisioAutomation
 
 
             var el5 = new VA.Text.Markup.TextElement();
-            var el5_a = el5.AppendElement("HELLO");
-            var el5_b = el5_a.AppendElement(" WORLD");
+            var el5_a = el5.Add("HELLO");
+            var el5_b = el5_a.Add(" WORLD");
 
             var markup5 = el5.GetMarkupInfo();
             var regions5 = markup5.FormatRegions;
@@ -123,8 +123,8 @@ namespace TestVisioAutomation
             // all make it into a real visio shep when the text is render
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.AppendElement("HELLO");
-            var el2 = el0.AppendElement(" WORLD");
+            var el1 = el0.Add("HELLO");
+            var el2 = el0.Add(" WORLD");
 
             var page1 = GetNewPage();
 
@@ -143,8 +143,8 @@ namespace TestVisioAutomation
             // Validate that basic formatting works when rendering
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.AppendElement("HELLO");
-            var el2 = el0.AppendElement(" WORLD");
+            var el1 = el0.Add("HELLO");
+            var el2 = el0.Add(" WORLD");
 
             el1.CharacterFormat.Style = VA.Text.CharStyle.Bold;
             el2.CharacterFormat.Style = VA.Text.CharStyle.Italic;
@@ -174,8 +174,8 @@ namespace TestVisioAutomation
 
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.AppendElement("HELLO");
-            var el2 = el1.AppendElement(" WORLD");
+            var el1 = el0.Add("HELLO");
+            var el2 = el1.Add(" WORLD");
 
             el0.CharacterFormat.FontSizeInPoints = 14;
             el0.CharacterFormat.FontSizeInPoints = 7;
@@ -221,9 +221,9 @@ namespace TestVisioAutomation
             // Now account for field insertion
 
             var el0 = new VA.Text.Markup.TextElement();
-            el0.AppendText("HELLO ");
-            el0.AppendField(VA.Text.Markup.FieldConstants.Height);
-            el0.AppendText(" WORLD");
+            el0.AddText("HELLO ");
+            el0.AddField(VA.Text.Markup.FieldConstants.Height);
+            el0.AddText(" WORLD");
 
             var page1 = GetNewPage();
 
@@ -279,31 +279,31 @@ namespace TestVisioAutomation
 
             // case 1 - markup is just a single field element
             var markup_1 = new VA.Text.Markup.TextElement();
-            markup_1.AppendField(VA.Text.Markup.FieldConstants.Height);
+            markup_1.AddField(VA.Text.Markup.FieldConstants.Height);
             markup_1.SetText(shape);
             Assert.AreEqual("2", shape.Characters.Text);
 
             // case 2 - markup contains a single field surrounded by literal text
             var markup2 = new VA.Text.Markup.TextElement();
-            markup2.AppendText("HELLO ");
-            markup2.AppendField(VA.Text.Markup.FieldConstants.Height);
-            markup2.AppendText(" WORLD");
+            markup2.AddText("HELLO ");
+            markup2.AddField(VA.Text.Markup.FieldConstants.Height);
+            markup2.AddText(" WORLD");
             markup2.SetText(shape);
             Assert.AreEqual("HELLO 2 WORLD", shape.Characters.Text);
 
             // case 3 - markup contains a single literal surrounded by two fields
             var markup3 = new VA.Text.Markup.TextElement();
-            markup3.AppendField(VA.Text.Markup.FieldConstants.Height);
-            markup3.AppendText(" HELLO ");
-            markup3.AppendField(VA.Text.Markup.FieldConstants.Width);
+            markup3.AddField(VA.Text.Markup.FieldConstants.Height);
+            markup3.AddText(" HELLO ");
+            markup3.AddField(VA.Text.Markup.FieldConstants.Width);
             markup3.SetText(shape);
             Assert.AreEqual("2 HELLO 4", shape.Characters.Text);
 
             var markup4 = new VA.Text.Markup.TextElement();
-            markup4.AppendField(VA.Text.Markup.FieldConstants.Height);
-            markup4.AppendText(" HELLO ");
-            markup4.AppendField(VA.Text.Markup.FieldConstants.Width);
-            markup4.AppendField(VA.Text.Markup.FieldConstants.Width);
+            markup4.AddField(VA.Text.Markup.FieldConstants.Height);
+            markup4.AddText(" HELLO ");
+            markup4.AddField(VA.Text.Markup.FieldConstants.Width);
+            markup4.AddField(VA.Text.Markup.FieldConstants.Width);
             markup4.SetText(shape);
             Assert.AreEqual("2 HELLO 44", shape.Characters.Text);
 

@@ -94,15 +94,15 @@ namespace TestVisioAutomation
             var t1 = new VA.Text.Markup.TextElement("{Normal}");
             t1.CharacterFormat.FontID = segoeui.ID;
             
-            var t2 = t1.AppendElement("{Italic}");
+            var t2 = t1.Add("{Italic}");
             t2.CharacterFormat.Style = VA.Text.CharStyle.Italic;
             t2.CharacterFormat.FontID = impact.ID;
 
-            var t3 = t2.AppendElement("{Bold}");
+            var t3 = t2.Add("{Bold}");
             t3.CharacterFormat.Style = VA.Text.CharStyle.Bold;
             t3.CharacterFormat.FontID = couriernew.ID;
 
-            var t4 = t2.AppendElement("{Bold Italic}");
+            var t4 = t2.Add("{Bold Italic}");
             t4.CharacterFormat.Style = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
             t4.CharacterFormat.FontID = georgia.ID;
 

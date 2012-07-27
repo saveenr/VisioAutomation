@@ -45,12 +45,12 @@ namespace VisioAutomationSamples
             update.Execute(page_a);
 
             var markup1 = new VA.Text.Markup.TextElement();
-            markup1.AppendField(VA.Text.Markup.FieldConstants.PageName);
-            markup1.AppendText(" (");
-            markup1.AppendField(VA.Text.Markup.FieldConstants.PageNumber);
-            markup1.AppendText(" of ");
-            markup1.AppendField(VA.Text.Markup.FieldConstants.NumberOfPages);
-            markup1.AppendText(") ");
+            markup1.AddField(VA.Text.Markup.FieldConstants.PageName);
+            markup1.AddText(" (");
+            markup1.AddField(VA.Text.Markup.FieldConstants.PageNumber);
+            markup1.AddText(" of ");
+            markup1.AddField(VA.Text.Markup.FieldConstants.NumberOfPages);
+            markup1.AddText(") ");
             markup1.SetText(group);
         }
     }
