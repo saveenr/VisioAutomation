@@ -239,44 +239,6 @@ namespace VisioAutomation.Text.Markup
             return chars;
         }
 
-        private static void SetRangeProps(IVisio.Shape shape, bool performset,
-                                      VA.ShapeSheet.SRC src, int value, Markup.TextRegion region,
-                                      ref short rownum, ref IVisio.Characters chars)
-        {
-            // http://office.microsoft.com/en-us/visio-help/HV080350454.aspx
-
-            if (!performset)
-            {
-                return;
-            }
-
-            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
-            chars = shape.Characters;
-            chars.Begin = region.Start;
-            chars.End = region.End;
-
-            if (src.Section == (short)IVisio.VisSectionIndices.visSectionCharacter)
-            {
-                chars.CharProps[src.Cell] = (short)value;
-                rownum = chars.CharPropsRow[(short)default_chars_bias];
-            }
-            else if (src.Section == (short)IVisio.VisSectionIndices.visSectionParagraph)
-            {
-                chars.ParaProps[src.Cell] = (short)value;
-                rownum = chars.ParaPropsRow[(short)default_chars_bias];
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException("rangetype");
-            }
-
-            if (rownum < 0)
-            {
-                throw new VA.AutomationException("Failed to create a new row. Because range spanned multiple existing rows");
-            }
-        }
-
-
         private static void set_text_range_char_fmt(TextRegion region, IVisio.Shape shape)
         {
             if (shape == null)
