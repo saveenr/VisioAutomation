@@ -276,29 +276,29 @@ namespace VisioAutomation.Text
 
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
-            var t = new TextFormat();
-            t._characterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
-            t._paragraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
-            t._textBlocks = VA.Text.TextBlockFormatCells.GetCells(shape);
-            t._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            t._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
-            t._tabStops = VA.Text.TextFormat.GetTabStops(shape);
-            return t;
+            var textfmt = new TextFormat();
+            textfmt._characterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
+            textfmt._paragraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
+            textfmt._textBlocks = VA.Text.TextBlockFormatCells.GetCells(shape);
+            textfmt._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            textfmt._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            textfmt._tabStops = VA.Text.TextFormat.GetTabStops(shape);
+            return textfmt;
         }
 
         public static IList<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
         {
-            var c = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
-            var p = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
-            var b = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
+            var charcells = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
+            var paracells = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
+            var textblockcells = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
             var l = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var t = new TextFormat();
-                t._characterFormats = c[i];
-                t._paragraphFormats = p[i];
-                t._textBlocks = b[i];
+                t._characterFormats = charcells[i];
+                t._paragraphFormats = paracells[i];
+                t._textBlocks = textblockcells[i];
                 l.Add(t);
 
                 var shape = page_shapes.get_ItemFromID(shapeids[i]);
