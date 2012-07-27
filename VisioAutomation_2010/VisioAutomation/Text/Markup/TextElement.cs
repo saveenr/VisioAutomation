@@ -286,76 +286,56 @@ namespace VisioAutomation.Text.Markup
 
             var charfmt = region.Element.CharacterFormat;
             var charcells = charfmt.ToCells();
-            
+
+
             // Initialize the properties with temp values
             short rownum = -1;
-            const int temp_color = 0;
-            const int temp_size = 10;
-            const int temp_font = 0;
-            const int temp_style = 0;
-            const int temp_trans = 0;
-
+            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
             IVisio.Characters chars = null;
             
-            SetRangeProps(shape, charcells.AsianFont.Formula.HasValue, SRCCON.Char_AsianFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Case.Formula.HasValue, SRCCON.Char_Case, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Color.Formula.HasValue, SRCCON.Char_Color, temp_color, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.ComplexScriptFont.Formula.HasValue, SRCCON.Char_ComplexScriptFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.ComplexScriptSize.Formula.HasValue, SRCCON.Char_ComplexScriptSize, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.DoubleStrikeThrough.Formula.HasValue, SRCCON.Char_DoubleStrikethrough, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.DoubleUnderline.Formula.HasValue, SRCCON.Char_DblUnderline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Font.Formula.HasValue, SRCCON.Char_Font, temp_font, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.FontScale.Formula.HasValue, SRCCON.Char_FontScale, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.LangID.Formula.HasValue, SRCCON.Char_LangID, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Letterspace.Formula.HasValue, SRCCON.Char_Letterspace, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Locale.Formula.HasValue, SRCCON.Char_Locale, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.LocalizeFont.Formula.HasValue, SRCCON.Char_LocalizeFont, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Overline.Formula.HasValue, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Perpendicular.Formula.HasValue, SRCCON.Char_Perpendicular, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Pos.Formula.HasValue, SRCCON.Char_Overline, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.RTLText.Formula.HasValue, SRCCON.Char_RTLText, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Size.Formula.HasValue, SRCCON.Char_Size, temp_size, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Strikethru.Formula.HasValue, SRCCON.Char_Strikethru, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Style.Formula.HasValue, SRCCON.Char_Style, temp_style, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.Transparency.Formula.HasValue, SRCCON.Char_ColorTrans, temp_trans, region, ref rownum, ref chars);
-            SetRangeProps(shape, charcells.UseVertical.Formula.HasValue, SRCCON.Char_UseVertical, temp_trans, region, ref rownum, ref chars);
+            chars = shape.Characters;
+            chars.Begin = region.Start;
+            chars.End = region.End;
 
+            chars.CharProps[SRCCON.Char_Color.Cell] = (short)0;
+            rownum = chars.CharPropsRow[(short)default_chars_bias];
 
-            // if any text region was created then set the formula values
-            if (chars != null)
+            if (rownum==-1)
             {
-                if (rownum < 0)
-                {
-                    throw new AutomationException("Internal Error");
-                }
-
-                var update = new VA.ShapeSheet.Update.SRCUpdate();
-
-                update.SetFormulaIgnoreNull(SRCCON.Char_Case.ForRow(rownum), charcells.Case.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Color.ForRow(rownum), charcells.Color.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.Transparency.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.AsianFont.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptFont.ForRow(rownum), charcells.ComplexScriptFont.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptSize.ForRow(rownum), charcells.ComplexScriptSize.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_DblUnderline.ForRow(rownum), charcells.DoubleUnderline.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_DoubleStrikethrough.ForRow(rownum), charcells.DoubleStrikeThrough.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Font.ForRow(rownum), charcells.Font.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_FontScale.ForRow(rownum), charcells.FontScale.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_LangID.ForRow(rownum), charcells.LangID.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Letterspace.ForRow(rownum), charcells.Letterspace.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Locale.ForRow(rownum), charcells.Locale.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_LocalizeFont.ForRow(rownum), charcells.LocalizeFont.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Overline.ForRow(rownum), charcells.Overline.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Perpendicular.ForRow(rownum), charcells.Perpendicular.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Pos.ForRow(rownum), charcells.Pos.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_RTLText.ForRow(rownum), charcells.RTLText.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Size.ForRow(rownum), charcells.Size.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Strikethru.ForRow(rownum), charcells.Strikethru.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_Style.ForRow(rownum), charcells.Style.Formula);
-                update.SetFormulaIgnoreNull(SRCCON.Char_UseVertical.ForRow(rownum), charcells.UseVertical.Formula);
-                
-                update.Execute(shape);
+                throw new VA.AutomationException("Internal Error");
             }
+
+            if (chars == null)
+            {
+                throw new VA.AutomationException("Internal Error2");
+
+            }
+
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            update.SetFormulaIgnoreNull(SRCCON.Char_Case.ForRow(rownum), charcells.Case.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Color.ForRow(rownum), charcells.Color.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.Transparency.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.AsianFont.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptFont.ForRow(rownum), charcells.ComplexScriptFont.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptSize.ForRow(rownum), charcells.ComplexScriptSize.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_DblUnderline.ForRow(rownum), charcells.DoubleUnderline.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_DoubleStrikethrough.ForRow(rownum), charcells.DoubleStrikeThrough.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Font.ForRow(rownum), charcells.Font.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_FontScale.ForRow(rownum), charcells.FontScale.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_LangID.ForRow(rownum), charcells.LangID.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Letterspace.ForRow(rownum), charcells.Letterspace.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Locale.ForRow(rownum), charcells.Locale.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_LocalizeFont.ForRow(rownum), charcells.LocalizeFont.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Overline.ForRow(rownum), charcells.Overline.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Perpendicular.ForRow(rownum), charcells.Perpendicular.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Pos.ForRow(rownum), charcells.Pos.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_RTLText.ForRow(rownum), charcells.RTLText.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Size.ForRow(rownum), charcells.Size.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Strikethru.ForRow(rownum), charcells.Strikethru.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_Style.ForRow(rownum), charcells.Style.Formula);
+            update.SetFormulaIgnoreNull(SRCCON.Char_UseVertical.ForRow(rownum), charcells.UseVertical.Formula);
+            charcells.Apply(update,rownum);                
+            update.Execute(shape);
         }
     }
 }
