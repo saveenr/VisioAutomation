@@ -164,10 +164,10 @@ namespace VisioAutomation.Text.Markup
             {
 
                 var charcells = markup_region.Element.CharacterFormat.ToCells();
-                FormatTextRegion(charcells, markup_region.Start, markup_region.End , shape); 
+                FormatTextRegion(shape, charcells, markup_region.Start, markup_region.End); 
 
                 var paracells = markup_region.Element.ParagraphFormat.ToCells();
-                FormatTextRegion(paracells, markup_region.Start, markup_region.End, shape);
+                FormatTextRegion(shape, paracells, markup_region.Start, markup_region.End);
             }
 
             // Insert the fields
@@ -183,7 +183,7 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
-        private static int FormatTextRegion(VA.ShapeSheet.CellGroups.CellGroupMultiRow fmtcells, int start, int end, IVisio.Shape shape)
+        public static int FormatTextRegion(IVisio.Shape shape, VA.ShapeSheet.CellGroups.CellGroupMultiRow fmtcells, int start, int end)
         {
             // overall strategy:
             // we need a row (either an existing one or a new one to be created)
@@ -207,11 +207,10 @@ namespace VisioAutomation.Text.Markup
             short rownum = -1;
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
-            // Try to create either a character or paragraph row depending nthe cells that were passed into this method
+            // Try to create either a character or paragraph row depending on the cells that were passed into this method
             IVisio.Characters chars = shape.Characters;
             chars.Begin = start;
             chars.End = end;
-
 
             if (fmtcells is CharacterFormatCells)
             {
