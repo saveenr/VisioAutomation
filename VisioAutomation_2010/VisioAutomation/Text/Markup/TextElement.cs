@@ -162,10 +162,11 @@ namespace VisioAutomation.Text.Markup
             foreach (var markup_region in regions_to_format)
             {
 
-                var charfmt = markup_region.Element.CharacterFormat;
-                var charcells = charfmt.ToCells();
+                var charcells = markup_region.Element.CharacterFormat.ToCells();
                 FormatTextRegion(charcells, markup_region, shape); 
-                set_text_range_para_fmt(markup_region, shape);
+
+                var paracells = markup_region.Element.ParagraphFormat.ToCells();
+                FormatTextRegion(paracells, markup_region, shape);
             }
 
             // Insert the fields
@@ -179,61 +180,6 @@ namespace VisioAutomation.Text.Markup
                                (short) field_region.Field.Format);
                 var fr = field_region;
             }
-        }
-
-
-        private static void set_text_range_para_fmt(TextRegion region, IVisio.Shape shape)
-        {
-            short rownum = -1;
-            IVisio.Characters chars=null;
-
-            var parafmt = region.Element.ParagraphFormat;
-
-            if (parafmt.IndentFirstInPoints.HasValue)
-            {
-                int indent_first_points = (int)VA.Convert.InchestoPoints(parafmt.IndentFirstInPoints.Value);
-                var chars0 = SetRangeParagraphProps(shape, parafmt.IndentFirstInPoints.HasValue, SRCCON.Para_IndFirst, indent_first_points, region, ref rownum, ref chars);
-            }
-
-            if (parafmt.IndentLeftInPoints.HasValue)
-            {
-                int indent_left_points = (int) VA.Convert.InchestoPoints(parafmt.IndentLeftInPoints.Value);
-                var chars1 = SetRangeParagraphProps(shape, parafmt.IndentLeftInPoints.HasValue, SRCCON.Para_IndLeft, indent_left_points, region, ref rownum, ref chars);
-            }
-
-            if (parafmt.HAlign.HasValue)
-            {
-                int int_halign = (int)parafmt.HAlign.Value;
-                SetRangeParagraphProps(shape, parafmt.HAlign.HasValue, SRCCON.Para_HorzAlign, int_halign, region, ref rownum, ref chars);
-            }
-
-            // Handle bullets
-            if (parafmt.Bullets.HasValue &&
-                parafmt.Bullets.Value)
-            {
-                const int bullet_type = 1;
-                const int base_indent_size = 25;
-                int indent_first = -base_indent_size;
-                int indent_left = base_indent_size;
-
-                var chars0 = SetRangeParagraphProps(shape, parafmt.Bullets.HasValue, SRCCON.Para_IndFirst, indent_first, region, ref rownum, ref chars);
-                var chars1 = SetRangeParagraphProps(shape, parafmt.Bullets.HasValue, SRCCON.Para_IndLeft, indent_left, region, ref rownum, ref chars);
-                var chars2 = SetRangeParagraphProps(shape, parafmt.Bullets.HasValue, SRCCON.Para_Bullet, bullet_type, region, ref rownum, ref chars);
-            }
-        }
-
-        private static IVisio.Characters SetRangeParagraphProps(IVisio.Shape shape, bool perform, VA.ShapeSheet.SRC src, int value, VA.Text.Markup.TextRegion region, ref short rownum, ref IVisio.Characters chars2)
-        {
-            if (!perform)
-            {
-                return null;
-            }
-
-            var chars = shape.Characters;
-            chars.Begin = region.Start;
-            chars.End = region.End;
-            chars.ParaProps[src.Cell] = (short)value;
-            return chars;
         }
 
         private static void FormatTextRegion(CharacterFormatCells charcells, TextRegion region, IVisio.Shape shape)
@@ -268,6 +214,41 @@ namespace VisioAutomation.Text.Markup
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
             charcells.Apply(update, rownum);
+            update.Execute(shape);
+        }
+
+        private static void FormatTextRegion(ParagraphFormatCells paracells, TextRegion region, IVisio.Shape shape)
+        {
+            if (shape == null)
+            {
+                throw new System.ArgumentNullException("shape");
+            }
+
+            // Initialize the properties with temp values
+            short rownum = -1;
+            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
+            IVisio.Characters chars = null;
+
+            chars = shape.Characters;
+            chars.Begin = region.Start;
+            chars.End = region.End;
+
+            chars.ParaProps[SRCCON.Char_Color.Cell] = (short)0;
+            rownum = chars.ParaPropsRow[(short)default_chars_bias];
+
+            if (rownum == -1)
+            {
+                throw new VA.AutomationException("Internal Error");
+            }
+
+            if (chars == null)
+            {
+                throw new VA.AutomationException("Internal Error2");
+
+            }
+
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            paracells.Apply(update, rownum);
             update.Execute(shape);
         }
     }
