@@ -274,29 +274,7 @@ namespace VisioAutomation.Text.Markup
             }
 
             var update = new VA.ShapeSheet.Update.SRCUpdate();
-            update.SetFormulaIgnoreNull(SRCCON.Char_Case.ForRow(rownum), charcells.Case.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Color.ForRow(rownum), charcells.Color.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.Transparency.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(rownum), charcells.AsianFont.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptFont.ForRow(rownum), charcells.ComplexScriptFont.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptSize.ForRow(rownum), charcells.ComplexScriptSize.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_DblUnderline.ForRow(rownum), charcells.DoubleUnderline.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_DoubleStrikethrough.ForRow(rownum), charcells.DoubleStrikeThrough.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Font.ForRow(rownum), charcells.Font.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_FontScale.ForRow(rownum), charcells.FontScale.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_LangID.ForRow(rownum), charcells.LangID.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Letterspace.ForRow(rownum), charcells.Letterspace.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Locale.ForRow(rownum), charcells.Locale.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_LocalizeFont.ForRow(rownum), charcells.LocalizeFont.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Overline.ForRow(rownum), charcells.Overline.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Perpendicular.ForRow(rownum), charcells.Perpendicular.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Pos.ForRow(rownum), charcells.Pos.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_RTLText.ForRow(rownum), charcells.RTLText.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Size.ForRow(rownum), charcells.Size.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Strikethru.ForRow(rownum), charcells.Strikethru.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Style.ForRow(rownum), charcells.Style.Formula);
-            update.SetFormulaIgnoreNull(SRCCON.Char_UseVertical.ForRow(rownum), charcells.UseVertical.Formula);
-            charcells.Apply(update,rownum);                
+            charcells.Apply(update,rownum);
             update.Execute(shape);
         }
     }
