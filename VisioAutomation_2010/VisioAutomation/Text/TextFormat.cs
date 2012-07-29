@@ -311,12 +311,12 @@ namespace VisioAutomation.Text
             return l;
         }
 
-        public static int FormatTextRegion(IVisio.Shape shape, VA.Text.CharacterFormatCells fmtcells, int start, int end)
+        public static int SetFormat(IVisio.Shape shape, VA.Text.CharacterFormatCells fmtcells, int start, int end)
         {
             return _FormatTextRegion(shape, fmtcells, start, end);
         }
 
-        public static int FormatTextRegion(IVisio.Shape shape, VA.Text.ParagraphFormatCells fmtcells, int start, int end)
+        public static int SetFormat(IVisio.Shape shape, VA.Text.ParagraphFormatCells fmtcells, int start, int end)
         {
             return _FormatTextRegion(shape, fmtcells, start, end);
         }

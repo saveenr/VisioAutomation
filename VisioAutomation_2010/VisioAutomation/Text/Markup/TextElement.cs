@@ -164,10 +164,10 @@ namespace VisioAutomation.Text.Markup
             {
 
                 var charcells = markup_region.Element.CharacterFormat.ToCells();
-                VA.Text.TextFormat.FormatTextRegion(shape, charcells, markup_region.Start, markup_region.End); 
+                VA.Text.TextFormat.SetFormat(shape, charcells, markup_region.Start, markup_region.End); 
 
                 var paracells = markup_region.Element.ParagraphFormat.ToCells();
-                VA.Text.TextFormat.FormatTextRegion(shape, paracells, markup_region.Start, markup_region.End);
+                VA.Text.TextFormat.SetFormat(shape, paracells, markup_region.Start, markup_region.End);
             }
 
             // Insert the fields
