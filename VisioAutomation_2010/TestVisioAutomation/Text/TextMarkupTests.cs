@@ -32,7 +32,7 @@ namespace TestVisioAutomation
             // Validate that setting text with no values works
             var el0 = new VA.Text.Markup.TextElement("HELLO");
             var color_red = new VA.Drawing.ColorRGB(0xff0000);
-            el0.CharacterFormat.Color = color_red.ToFormula();
+            el0.CharacterFormatCells.Color = color_red.ToFormula();
 
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
@@ -147,8 +147,8 @@ namespace TestVisioAutomation
             var el1 = el0.Add("HELLO");
             var el2 = el0.Add(" WORLD");
 
-            el1.CharacterFormat.Style = (int)VA.Text.CharStyle.Bold;
-            el2.CharacterFormat.Style = (int)VA.Text.CharStyle.Italic;
+            el1.CharacterFormatCells.Style = (int)VA.Text.CharStyle.Bold;
+            el2.CharacterFormatCells.Style = (int)VA.Text.CharStyle.Italic;
 
             var page1 = GetNewPage();
 
@@ -178,15 +178,15 @@ namespace TestVisioAutomation
             var el1 = el0.Add("HELLO");
             var el2 = el1.Add(" WORLD");
 
-            el0.CharacterFormat.Font = "14pt";
-            el0.CharacterFormat.Size = "7pt";
+            el0.CharacterFormatCells.Font = "14pt";
+            el0.CharacterFormatCells.Size = "7pt";
             
-            el1.CharacterFormat.Font = impact.ID;
-            el1.CharacterFormat.Style = (int) VA.Text.CharStyle.Bold;
+            el1.CharacterFormatCells.Font = impact.ID;
+            el1.CharacterFormatCells.Style = (int) VA.Text.CharStyle.Bold;
             
-            el2.CharacterFormat.Font = courier.ID;
-            el2.CharacterFormat.Size = "20pt";
-            el2.CharacterFormat.Style = (int) VA.Text.CharStyle.Italic;
+            el2.CharacterFormatCells.Font = courier.ID;
+            el2.CharacterFormatCells.Size = "20pt";
+            el2.CharacterFormatCells.Style = (int) VA.Text.CharStyle.Italic;
 
             var markup = el0.GetMarkupInfo();
             var regions = markup.FormatRegions;

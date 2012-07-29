@@ -163,7 +163,6 @@
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\Markup\CustomField.cs" />
     <Compile Include="Text\Markup\FieldBase.cs" />
-    <Compile Include="Text\Markup\ParagraphFormat.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
@@ -264,7 +263,6 @@
     <Compile Include="Text\Markup\NodeList.cs" />
     <Compile Include="Text\Markup\NodeType.cs" />
     <Compile Include="Text\Markup\TextElement.cs" />
-    <Compile Include="Text\Markup\CharacterFormat.cs" />
     <Compile Include="Text\Markup\Literal.cs" />
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />
