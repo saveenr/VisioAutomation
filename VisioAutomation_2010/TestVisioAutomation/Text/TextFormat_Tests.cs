@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -56,6 +57,60 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
+        public void Format1()
+        {
+
+            var text = "ABCDEFGHIJHLMNOPQRSTUVWXYZ0123456789";
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 4);
+            s1.Text = text;
+
+            var charfmt1 = new VA.Text.CharacterFormatCells();
+            charfmt1.Color = "rgb(255,0,0)";
+            
+            VA.Text.TextFormat.SetFormat(s1, charfmt1, 0, text.Length);
+
+            var outfmt = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(1,outfmt.CharacterFormats.Count);
+            Assert.AreEqual(1, outfmt.CharacterTextRuns.Count);
+        }
+
+        [TestMethod]
+        public void Format2()
+        {
+
+            var text = "ABCDEFGHIJHLMNOPQRSTUVWXYZ0123456789";
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 4);
+            s1.Text = text;
+
+            var charfmt1 = new VA.Text.CharacterFormatCells();
+            charfmt1.Color = "rgb(255,0,0)";
+
+            var charfmt2 = new VA.Text.CharacterFormatCells();
+            charfmt2.Color = "rgb(0,255,0)";
+
+            VA.Text.TextFormat.SetFormat(s1, charfmt1, 0, text.Length/2);
+
+            var outfmt1 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(2, outfmt1.CharacterFormats.Count);
+            Assert.AreEqual(2, outfmt1.CharacterTextRuns.Count);
+            
+            Assert.AreEqual("RGB(255,0,0)",outfmt1.CharacterFormats[0].Color.Formula);
+            Assert.AreEqual("0", outfmt1.CharacterFormats[1].Color.Formula);
+
+            VA.Text.TextFormat.SetFormat(s1, charfmt2, 5, 10);
+
+            var outfmt2 = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(4, outfmt2.CharacterFormats.Count);
+            Assert.AreEqual(4, outfmt2.CharacterTextRuns.Count);
+
+            Assert.AreEqual("RGB(255,0,0)", outfmt2.CharacterFormats[0].Color.Formula);
+            Assert.AreEqual("RGB(0,255,0)", outfmt2.CharacterFormats[1].Color.Formula);
+            Assert.AreEqual("RGB(255,0,0)", outfmt2.CharacterFormats[2].Color.Formula);
+            Assert.AreEqual("0", outfmt2.CharacterFormats[3].Color.Formula);
+        }
 
     }
 }
