@@ -14,9 +14,10 @@ namespace VisioAutomationSamples
             var tnr = page.Document.Fonts["Times New Roman"];
 
             var e1 = new VA.Text.Markup.TextElement();
-            e1.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.CharacterFormat.FontID = tnr.ID;
-            e1.CharacterFormat.FontSizeInPoints = 20;
+            var color_red = new VA.Drawing.ColorRGB(0xff0000);
+            e1.CharacterFormat.Color = color_red.ToFormula();
+            e1.CharacterFormat.Font = tnr.ID;
+            e1.CharacterFormat.Font = "20pt";
             e1.AddText("Hello World");
             e1.SetText(s1);
         }
@@ -30,9 +31,10 @@ namespace VisioAutomationSamples
             var tnr = page.Document.Fonts["Times New Roman"];
 
             var e1 = new VA.Text.Markup.TextElement();
-            e1.CharacterFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            e1.CharacterFormat.FontID = tnr.ID;
-            e1.CharacterFormat.FontSizeInPoints = 20;
+            var color_red = new VA.Drawing.ColorRGB(0xff0000);
+            e1.CharacterFormat.Color = color_red.ToFormula();
+            e1.CharacterFormat.Font = tnr.ID;
+            e1.CharacterFormat.Font = "20pt";
             e1.AddText("Hello ");
 
             var e2 = e1.AddElementEx("World", null, null, null, null, VA.Text.CharStyle.Italic); 

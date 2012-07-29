@@ -12,15 +12,16 @@ namespace VisioAutomationSamples
             var el = p.Add(text);
             if (font != null)
             {
-                el.CharacterFormat.FontID = font;
+                el.CharacterFormat.Font = font.Value;
             }
             if (size.HasValue)
             {
-                el.CharacterFormat.FontSizeInPoints = size.Value;
+                el.CharacterFormat.Size = VA.Convert.PointsToInches(size.Value);
             }
             if (color.HasValue)
             {
-                el.CharacterFormat.Color = new VA.Drawing.ColorRGB(color.Value);
+                var c = new VA.Drawing.ColorRGB(color.Value);
+                el.CharacterFormat.Color = c.ToFormula();
             }
             if (halign.HasValue)
             {
@@ -29,7 +30,7 @@ namespace VisioAutomationSamples
 
             if (cs.HasValue)
             {
-                el.CharacterFormat.Style = cs;
+                el.CharacterFormat.Style = (int) cs;
             }
 
             return el;

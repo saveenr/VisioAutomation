@@ -9,20 +9,20 @@ namespace VisioAutomation.Text.Markup
 {
     public class TextElement : Node
     {
-        public CharacterFormat CharacterFormat { get; set; }
+        public CharacterFormatCells CharacterFormat { get; set; }
         public ParagraphFormat ParagraphFormat { get; set; }
 
         public TextElement() :
             base(NodeType.Element)
         {
-            this.CharacterFormat = new CharacterFormat();
+            this.CharacterFormat = new CharacterFormatCells();
             this.ParagraphFormat  = new ParagraphFormat();
         }
 
         public TextElement(string text) :
             base(NodeType.Element)
         {
-            this.CharacterFormat = new CharacterFormat();
+            this.CharacterFormat = new CharacterFormatCells();
             this.ParagraphFormat = new ParagraphFormat();
             this.AddText(text);
         }
@@ -163,7 +163,7 @@ namespace VisioAutomation.Text.Markup
             foreach (var markup_region in regions_to_format)
             {
 
-                var charcells = markup_region.Element.CharacterFormat.ToCells();
+                var charcells = markup_region.Element.CharacterFormat;
                 VA.Text.TextFormat.SetFormat(shape, charcells, markup_region.Start, markup_region.End); 
 
                 var paracells = markup_region.Element.ParagraphFormat.ToCells();

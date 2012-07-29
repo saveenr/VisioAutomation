@@ -29,7 +29,7 @@ namespace TestVisioAutomation
         public void MarkupCharacterBold()
         {
             var m = new VA.Text.Markup.TextElement("{Bold}");
-            m.CharacterFormat.Style = VA.Text.CharStyle.Bold;
+            m.CharacterFormat.Style = (int) VA.Text.CharStyle.Bold;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -46,7 +46,7 @@ namespace TestVisioAutomation
         public void MarkupCharacterItalic()
         {
             var m = new VA.Text.Markup.TextElement("{Italic}");
-            m.CharacterFormat.Style = VA.Text.CharStyle.Italic;
+            m.CharacterFormat.Style = (int)VA.Text.CharStyle.Italic;
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
@@ -66,7 +66,7 @@ namespace TestVisioAutomation
 
             var impact = page1.Document.Fonts["Impact"];
             var m = new VA.Text.Markup.TextElement("Normal Text in Impact Font");
-            m.CharacterFormat.FontID = impact.ID;
+            m.CharacterFormat.Font = impact.ID;
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
@@ -92,19 +92,19 @@ namespace TestVisioAutomation
             var georgia = fonts["Georgia"];
 
             var t1 = new VA.Text.Markup.TextElement("{Normal}");
-            t1.CharacterFormat.FontID = segoeui.ID;
+            t1.CharacterFormat.Font = segoeui.ID;
             
             var t2 = t1.Add("{Italic}");
-            t2.CharacterFormat.Style = VA.Text.CharStyle.Italic;
-            t2.CharacterFormat.FontID = impact.ID;
+            t2.CharacterFormat.Style = (int) VA.Text.CharStyle.Italic;
+            t2.CharacterFormat.Font = impact.ID;
 
             var t3 = t2.Add("{Bold}");
-            t3.CharacterFormat.Style = VA.Text.CharStyle.Bold;
-            t3.CharacterFormat.FontID = couriernew.ID;
+            t3.CharacterFormat.Style = (int)VA.Text.CharStyle.Bold;
+            t3.CharacterFormat.Font= couriernew.ID;
 
             var t4 = t2.Add("{Bold Italic}");
-            t4.CharacterFormat.Style = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
-            t4.CharacterFormat.FontID = georgia.ID;
+            t4.CharacterFormat.Style = (int) (VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic);
+            t4.CharacterFormat.Font = georgia.ID;
 
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             t1.SetText(s0);

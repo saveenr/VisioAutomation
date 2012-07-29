@@ -12,7 +12,6 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<double> Size { get; set; }
         public VA.ShapeSheet.CellData<int> Style { get; set; }
         public VA.ShapeSheet.CellData<double> Transparency { get; set; }
-
         public VA.ShapeSheet.CellData<int> AsianFont { get; set; }
         public VA.ShapeSheet.CellData<int> Case { get; set; }
         public VA.ShapeSheet.CellData<int> ComplexScriptFont { get; set; }
@@ -30,7 +29,6 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<double> Letterspace { get; set; }
         public VA.ShapeSheet.CellData<bool> Strikethru { get; set; }
         public VA.ShapeSheet.CellData<int> UseVertical { get; set; }
-
 
         protected override void ApplyFormulas(ApplyFormula func, short row)
         {

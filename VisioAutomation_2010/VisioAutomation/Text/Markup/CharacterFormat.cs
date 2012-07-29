@@ -16,11 +16,11 @@ namespace VisioAutomation.Text.Markup
         public double? FontScalePercent { get; set; }
         public double? FontSizeInPoints { get; set; }
         public double? LetterspaceInPoints { get; set; }
+        public int? TransparencyPercent { get; set; }
         public int? Case { get; set; }
         public int? FontID { get; set; }
         public int? LangID { get; set; }
         public int? Pos { get; set; }
-        public int? TransparencyPercent { get; set; }
         public int? UseVertical { get; set; }
 
         public CharacterFormat()
