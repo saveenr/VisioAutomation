@@ -35,21 +35,30 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Empty_DOM_Page_Size()
+        public void Page_Render_1()
         {
+            // Rendering a dom page to a document should create a new page
             var app = this.GetVisioApplication();
-
             var dompage = new VA.DOM.Page();
-
             var visdoc = this.GetNewDoc();
             Assert.AreEqual(1, visdoc.Pages.Count);
-
-            app.ActivePage.SetSize(new VA.Drawing.Size(5, 5));
             var page = dompage.Render(app.ActiveDocument);
-
             Assert.AreEqual(2, visdoc.Pages.Count);
-            AssertVA.AreEqual(5, 5, app.ActivePage.GetSize(), 0.005);
+            app.ActiveDocument.Close(true);
+        }
 
+        [TestMethod]
+        public void Page_Render_2()
+        {
+            // Rendering a dom document to an appliction instance should create a new document
+            var app = this.GetVisioApplication();
+            var domdoc = new VA.DOM.Document();
+            var dompage = new VA.DOM.Page();
+            domdoc.Pages.Add(dompage);
+            Assert.AreEqual(0, app.Documents.Count);
+            var newdoc = domdoc.Render(app);
+            Assert.AreEqual(1, app.Documents.Count);
+            Assert.AreEqual(1, newdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
 
