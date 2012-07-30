@@ -60,7 +60,6 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Format1()
         {
-
             var text = "ABCDEFGHIJHLMNOPQRSTUVWXYZ0123456789";
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
@@ -74,6 +73,8 @@ namespace TestVisioAutomation
             var outfmt = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(1,outfmt.CharacterFormats.Count);
             Assert.AreEqual(1, outfmt.CharacterTextRuns.Count);
+
+            page1.Delete(0);
         }
 
         [TestMethod]
@@ -110,7 +111,37 @@ namespace TestVisioAutomation
             Assert.AreEqual("RGB(0,255,0)", outfmt2.CharacterFormats[1].Color.Formula);
             Assert.AreEqual("RGB(255,0,0)", outfmt2.CharacterFormats[2].Color.Formula);
             Assert.AreEqual("0", outfmt2.CharacterFormats[3].Color.Formula);
+
+            page1.Delete(0);
         }
 
+        [TestMethod]
+        public void Format3()
+        {
+
+            var text = "ABCDEFGHIJHLMNOPQRSTUVWXYZ0123456789";
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 4);
+            s1.Text = text;
+
+            var charfmt1 = new VA.Text.CharacterFormatCells();
+            charfmt1.Color = "rgb(255,0,0)";
+
+            var charfmt2 = new VA.Text.CharacterFormatCells();
+            charfmt2.Color = "rgb(255,0,0)";
+
+            VA.Text.TextFormat.SetFormat(s1, charfmt1, 0, text.Length);
+            VA.Text.TextFormat.SetFormat(s1, charfmt1, 10, 20);
+
+            var outfmt = VA.Text.TextFormat.GetFormat(s1);
+            Assert.AreEqual(3, outfmt.CharacterFormats.Count);
+            Assert.AreEqual(3, outfmt.CharacterTextRuns.Count);
+
+            Assert.AreEqual("RGB(255,0,0)", outfmt.CharacterFormats[0].Color.Formula);
+            Assert.AreEqual("RGB(255,0,0)", outfmt.CharacterFormats[1].Color.Formula);
+            Assert.AreEqual("RGB(255,0,0)", outfmt.CharacterFormats[2].Color.Formula);
+
+            page1.Delete(0);
+        }
     }
 }
