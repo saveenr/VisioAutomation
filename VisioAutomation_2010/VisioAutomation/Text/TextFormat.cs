@@ -135,7 +135,6 @@ namespace VisioAutomation.Text
             }
 
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
-            var formulas = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream);
             var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
             var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<double>(shape, stream, unitcodes);
 

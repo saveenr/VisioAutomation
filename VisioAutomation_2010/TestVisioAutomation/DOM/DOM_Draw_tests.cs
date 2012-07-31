@@ -35,7 +35,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Page_Render_1()
+        public void Render_Page_To_Document()
         {
             // Rendering a dom page to a document should create a new page
             var app = this.GetVisioApplication();
@@ -48,7 +48,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Page_Render_2()
+        public void Render_Document_To_App()
         {
             // Rendering a dom document to an appliction instance should create a new document
             var app = this.GetVisioApplication();
