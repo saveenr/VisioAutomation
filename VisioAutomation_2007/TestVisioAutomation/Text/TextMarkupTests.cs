@@ -437,12 +437,11 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, formats2.ParagraphFormats[2].IndentLeft.Result);
             Assert.AreEqual(0, formats2.ParagraphFormats[2].IndentFirst.Result);
 
-            Assert.AreEqual(2, formats2.ParagraphFormats[1].BulletIndex.Result);
+            Assert.AreEqual(2, formats2.ParagraphFormats[2].BulletIndex.Result);
 
             Assert.AreEqual(0, formats2.ParagraphFormats[1].IndentLeft.Result);
-            Assert.AreEqual(0, formats2.ParagraphFormats[2].BulletIndex.Result);
 
-            page1.Delete(0);
+            //page1.Delete(0);
         }
 
         [TestMethod]

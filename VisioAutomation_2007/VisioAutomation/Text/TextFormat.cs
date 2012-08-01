@@ -56,46 +56,6 @@ namespace VisioAutomation.Text
             return chars;
         }
 
-        internal enum rangetype
-        {
-            Paragraph,
-            Character
-        }
-
-        internal static void SetRangeProps<T>(IVisio.Shape shape, VA.ShapeSheet.CellData<T> f,
-                                              IVisio.VisCellIndices cell, int value, int begin, int end,
-                                              ref short rownum, ref IVisio.Characters chars, rangetype rt)
-        {
-            if (f.Formula.HasValue)
-            {
-                var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
-                chars = shape.Characters;
-                chars.Begin = begin;
-                chars.End = end;
-
-                if (rt == rangetype.Character)
-                {
-                    chars.CharProps[(short)cell] = (short)value;
-                    rownum = chars.CharPropsRow[(short)default_chars_bias];
-                }
-                else if (rt == rangetype.Paragraph)
-                {
-                    chars.ParaProps[(short)cell] = (short)value;
-                    rownum = chars.ParaPropsRow[(short)default_chars_bias];
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("rangetype");
-                }
-
-                if (rownum < 0)
-                {
-                    throw new VA.AutomationException("Failed to set CharPropsRow");
-                }
-            }
-        }
-
-
         private static IList<TextRun> GetTextRuns(
             IVisio.Shape shape,
             IVisio.VisRunTypes runtype,
@@ -169,114 +129,44 @@ namespace VisioAutomation.Text
 
         public static void FormatRange(IVisio.Shape shape, VA.Text.ParagraphFormatCells format, int begin, int end)
         {
-            if (shape == null)
+            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
+            
+            // get a row
+            var chars = shape.Characters;
+            chars.Begin = begin;
+            chars.End = end;
+            chars.ParaProps[(short)IVisio.VisCellIndices.visIndentLeft] = (short)0;
+            short rownum = chars.ParaPropsRow[(short)default_chars_bias];
+
+            if (rownum < 0)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new AutomationException("Could not create paragraph row");
             }
 
-            short rownum = -1;
-            IVisio.Characters chars = null;
-
-            int temp_leftindent = 0;
-            int temp_indentfirst = 0;
-            int temp_indentright = 0;
-            int temp_spacingafter = 0;
-            int temp_spacingbefore = 0;
-            int temp_spacingline = 0;
-            int temp_halign = 0;
-            int temp_bulletindex = 0;
-            int temp_bulletsize = 0;
-            int temp_bulletfont = 0;
-
-            VA.Text.TextFormat.SetRangeProps(shape, format.IndentLeft, IVisio.VisCellIndices.visIndentLeft,
-                                             temp_leftindent, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.IndentFirst, IVisio.VisCellIndices.visIndentFirst,
-                                             temp_indentfirst, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.IndentRight, IVisio.VisCellIndices.visIndentRight,
-                                             temp_indentright, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.SpacingAfter, IVisio.VisCellIndices.visSpaceAfter,
-                                             temp_spacingafter, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.SpacingBefore, IVisio.VisCellIndices.visSpaceBefore,
-                                             temp_spacingbefore, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.SpacingLine, IVisio.VisCellIndices.visSpaceLine,
-                                             temp_spacingline, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.HorizontalAlign, IVisio.VisCellIndices.visHorzAlign,
-                                             temp_halign, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.BulletIndex, IVisio.VisCellIndices.visBulletIndex,
-                                             temp_bulletindex, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.BulletFontSize, IVisio.VisCellIndices.visBulletFontSize,
-                                             temp_bulletsize, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-            VA.Text.TextFormat.SetRangeProps(shape, format.BulletFont, IVisio.VisCellIndices.visBulletFont,
-                                             temp_bulletfont, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Paragraph);
-
-            if (chars != null)
-            {
-                if (rownum < 0)
-                {
-                    throw new AutomationException("Internal Error");
-                }
-
-                var update = new VA.ShapeSheet.Update.SRCUpdate();
-                format.Apply(update, rownum);
-                update.Execute(shape);
-            }
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            format.Apply(update, rownum);
+            update.Execute(shape);
         }
 
         public static void FormatRange(IVisio.Shape shape, VA.Text.CharacterFormatCells format, int begin, int end)
         {
-            if (shape == null)
+            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
+            
+            // get a row
+            var chars = shape.Characters;
+            chars.Begin = begin;
+            chars.End = end;
+            chars.CharProps[(short)IVisio.VisCellIndices.visCharacterColor] = (short)0;
+            short rownum = chars.CharPropsRow[(short)default_chars_bias];
+
+            if (rownum < 0)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new AutomationException("Could not create character row");
             }
 
-
-            short rownum = -1;
-            IVisio.Characters chars = null;
-
-            const int temp_color = 13;
-            const int temp_size = 10;
-            const int temp_font = 0;
-            const int temp_style = 0;
-            const int temp_trans = 0;
-
-            VA.Text.TextFormat.SetRangeProps(shape, format.Color, IVisio.VisCellIndices.visCharacterColor, temp_color,
-                                             begin, end, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
-            VA.Text.TextFormat.SetRangeProps(shape, format.Size, IVisio.VisCellIndices.visCharacterSize, temp_size,
-                                             begin, end, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
-            VA.Text.TextFormat.SetRangeProps(shape, format.Font, IVisio.VisCellIndices.visCharacterFont, temp_font,
-                                             begin, end, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
-            VA.Text.TextFormat.SetRangeProps(shape, format.Style, IVisio.VisCellIndices.visCharacterStyle, temp_style,
-                                             begin, end, ref rownum, ref chars, VA.Text.TextFormat.rangetype.Character);
-            VA.Text.TextFormat.SetRangeProps(shape, format.Transparency, IVisio.VisCellIndices.visCharacterColorTrans,
-                                             temp_trans, begin, end, ref rownum, ref chars,
-                                             VA.Text.TextFormat.rangetype.Character);
-
-            if (chars != null)
-            {
-                if (rownum < 0)
-                {
-                    throw new AutomationException("Internal Error");
-                }
-
-                var update = new VA.ShapeSheet.Update.SRCUpdate();
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(rownum), format.Color.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Size.ForRow(rownum), format.Size.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(rownum), format.Font.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_Style.ForRow(rownum), format.Style.Formula);
-                update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(rownum),
-                                            format.Transparency.Formula);
-                update.Execute(shape);
-            }
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            format.Apply(update, rownum);
+            update.Execute(shape);
         }
 
         private static readonly VA.ShapeSheet.SRC src_tabstopcount = VA.ShapeSheet.SRCConstants.Tabs_StopCount;
@@ -316,7 +206,6 @@ namespace VisioAutomation.Text
             }
 
             var stream = VA.ShapeSheet.SRC.ToStream(cellsrcs);
-            var formulas = VA.ShapeSheet.Query.QueryUtil.GetFormulasU(shape, stream, num_stops*3);
             var unitcodes = cellsrcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
             var results = VA.ShapeSheet.Query.QueryUtil.GetResults<double>(shape, stream, unitcodes, num_stops*3);
 

@@ -160,7 +160,8 @@ namespace VisioAutomation.Text.Markup
             // Format the regions
             foreach (var markup_region in markupinfo.FormatRegions.Where(region => region.TextLength >= 1))
             {
-                set_text_range_markup(shape, markup_region);
+                set_text_range_char_fmt(markup_region, shape);
+                set_text_range_para_fmt(markup_region, shape);
             }
 
             // Insert the fields
@@ -176,58 +177,37 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
-        private static void set_text_range_markup(IVisio.Shape shape, TextRegion markup_region)
-        {
-            if (markup_region.TextLength < 1)
-            {
-                return;
-            }
-
-            set_text_range_char_fmt(markup_region, shape);
-            set_text_range_para_fmt(markup_region, shape);
-        }
 
         private static void set_text_range_para_fmt(TextRegion markup_region, IVisio.Shape shape)
         {
-            if (markup_region.Element.TextFormat.Indent.HasValue)
-            {
-                var chars0 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
-                                                                  (short) IVisio.VisCellIndices.visIndentFirst,
-                                                                  0, markup_region.TextStartPos, markup_region.TextEndPos);
+            int startpos = markup_region.TextStartPos;
+            int endpos = markup_region.TextEndPos;
 
-                var chars1 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
-                                                                  (short) IVisio.VisCellIndices.visIndentLeft,
-                                                                  (int)
-                                                                  markup_region.Element.TextFormat.Indent.Value, markup_region.TextStartPos, markup_region.TextEndPos);
+            var fmt = new VA.Text.ParagraphFormatCells();
+            var tf = markup_region.Element.TextFormat;
+            
+            if (tf.Indent.HasValue)
+            {
+                fmt.IndentFirst = VA.Convert.PointsToInches(tf.Indent.Value);
+                fmt.IndentLeft = VA.Convert.PointsToInches(tf.Indent.Value);
             }
 
-            if (markup_region.Element.TextFormat.HAlign.HasValue)
+            if (tf.HAlign.HasValue)
             {
-                int int_halign = (int) markup_region.Element.TextFormat.HAlign.Value;
-                VA.Text.TextFormat.SetRangeParagraphProps(shape,
-                                                     (short) IVisio.VisCellIndices.visHorzAlign,
-                                                     int_halign, markup_region.TextStartPos, markup_region.TextEndPos);
+                fmt.HorizontalAlign = (int) tf.HAlign.Value;
             }
 
             // Handle bullets
-            if (markup_region.Element.TextFormat.Bullets.HasValue &&
-                markup_region.Element.TextFormat.Bullets.Value)
+            if (tf.Bullets.HasValue &&
+                tf.Bullets.Value)
             {
-                const int bullet_type = 1;
                 const int base_indent_size = 25;
-                int indent_first = -base_indent_size;
-                int indent_left = base_indent_size;
-
-                var chars0 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
-                                                                  (short) IVisio.VisCellIndices.visIndentFirst,
-                                                                  indent_first, markup_region.TextStartPos, markup_region.TextEndPos);
-                var chars1 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
-                                                                  (short) IVisio.VisCellIndices.visIndentLeft,
-                                                                  indent_left, markup_region.TextStartPos, markup_region.TextEndPos);
-                var chars2 = VA.Text.TextFormat.SetRangeParagraphProps(shape,
-                                                                  (short) IVisio.VisCellIndices.visBulletIndex,
-                                                                  bullet_type, markup_region.TextStartPos, markup_region.TextEndPos);
+                fmt.IndentFirst = "-25pt";
+                fmt.IndentLeft = "25pt";
+                fmt.BulletIndex = "1";
             }
+            
+            VA.Text.TextFormat.FormatRange(shape, fmt, startpos, endpos);
         }
 
         private static void set_text_range_char_fmt(TextRegion markup_region, IVisio.Shape shape)
