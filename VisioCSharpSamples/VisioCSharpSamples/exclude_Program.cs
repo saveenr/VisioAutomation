@@ -7,7 +7,9 @@ namespace VisioCSharpSamples
     {
         private static void Main(string[] args)
         {
-            Samples.HelloWorld();
+            var app = new IVisio.Application();
+            var doc = app.Documents.Add("");
+            Samples.Shape_FormatText(doc);
         }
     }
 
