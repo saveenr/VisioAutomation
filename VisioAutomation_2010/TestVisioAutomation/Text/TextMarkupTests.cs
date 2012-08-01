@@ -81,8 +81,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(11, regions3[0].End);
 
             var el4 = new VA.Text.Markup.TextElement();
-            el4.Add("HELLO");
-            el4.Add(" WORLD");
+            el4.AddElement("HELLO");
+            el4.AddElement(" WORLD");
             var markup4 = el4.GetMarkupInfo();
             var regions4 = markup4.FormatRegions;
             Assert.AreEqual(3, markup4.FormatRegions.Count);
@@ -98,8 +98,8 @@ namespace TestVisioAutomation
 
 
             var el5 = new VA.Text.Markup.TextElement();
-            var el5_a = el5.Add("HELLO");
-            var el5_b = el5_a.Add(" WORLD");
+            var el5_a = el5.AddElement("HELLO");
+            var el5_b = el5_a.AddElement(" WORLD");
 
             var markup5 = el5.GetMarkupInfo();
             var regions5 = markup5.FormatRegions;
@@ -124,8 +124,8 @@ namespace TestVisioAutomation
             // all make it into a real visio shep when the text is render
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.Add("HELLO");
-            var el2 = el0.Add(" WORLD");
+            var el1 = el0.AddElement("HELLO");
+            var el2 = el0.AddElement(" WORLD");
 
             var page1 = GetNewPage();
 
@@ -144,8 +144,8 @@ namespace TestVisioAutomation
             // Validate that basic formatting works when rendering
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.Add("HELLO");
-            var el2 = el0.Add(" WORLD");
+            var el1 = el0.AddElement("HELLO");
+            var el2 = el0.AddElement(" WORLD");
 
             el1.CharacterFormatCells.Style = (int)VA.Text.CharStyle.Bold;
             el2.CharacterFormatCells.Style = (int)VA.Text.CharStyle.Italic;
@@ -175,8 +175,8 @@ namespace TestVisioAutomation
 
 
             var el0 = new VA.Text.Markup.TextElement();
-            var el1 = el0.Add("HELLO");
-            var el2 = el1.Add(" WORLD");
+            var el1 = el0.AddElement("HELLO");
+            var el2 = el1.AddElement(" WORLD");
 
             el0.CharacterFormatCells.Font = "14pt";
             el0.CharacterFormatCells.Size = "7pt";

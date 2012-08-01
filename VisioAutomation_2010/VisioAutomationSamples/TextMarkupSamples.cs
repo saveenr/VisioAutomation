@@ -83,10 +83,10 @@ namespace VisioAutomationSamples
 
             var e1 = new VA.Text.Markup.TextElement();
             e1.ParagraphFormatCells.HorizontalAlign = 0;
-            var e2 = e1.Add("Hello Worldline1\nline2\nline3\n");
+            var e2 = e1.AddElement("Hello Worldline1\nline2\nline3\n");
             e2.ParagraphFormatCells.IndentFirst = "0.5pt";
             e2.ParagraphFormatCells.IndentLeft= "0.25pt";
-            var e3 = e1.Add("Goodbye\nline1\nline2\nline3");
+            var e3 = e1.AddElement("Goodbye\nline1\nline2\nline3");
             e3.ParagraphFormatCells.IndentFirst = "1.0pt";
             e3.ParagraphFormatCells.IndentLeft= "0.75pt";
 

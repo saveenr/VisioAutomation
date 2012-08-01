@@ -9,7 +9,7 @@ namespace VisioAutomationSamples
                                                               VA.Drawing.AlignmentHorizontal? halign,
                                                               VA.Text.CharStyle? cs)
         {
-            var el = p.Add(text);
+            var el = p.AddElement(text);
             if (font != null)
             {
                 el.CharacterFormatCells.Font = font.Value;
