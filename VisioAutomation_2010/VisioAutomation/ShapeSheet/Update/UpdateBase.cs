@@ -178,5 +178,127 @@ namespace VisioAutomation.ShapeSheet.Update
             }
             return a;
         }
+
+        public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
+        {
+            var streamitem = new SIDSRC(shapeid,src);
+            this._SetResult(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            this._SetResult(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
+        {
+            this._SetFormula(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, formula);
+        }
+
+        public void SetFormula(short shapeid, SRC src, FormulaLiteral formula)
+        {
+            var streamitem = new SIDSRC(shapeid, src);
+            this._SetFormula(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, formula);
+        }
+
+        public void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
+        {
+            var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
+            this._SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType.SIDSRC, sidsrc, formula);
+        }
+
+        public void Execute(IVisio.Page page)
+        {
+            this.SetResults(page);
+            this.SetFormulas(page);
+        }
+
+        private short SetResults( IVisio.Page page)
+        {
+            if (this.ResultCount== 0)
+            {
+                return 0;
+            }
+
+            var streamb = new List<SIDSRC>(this.ResultCount);
+            streamb.AddRange(this.ResultRecords.Select(i => i.SIDSRC));
+            var stream = SIDSRC.ToStream(streamb);
+
+            var unitcodes = this.GetUnitCodesArray();
+            double[] results = this.GetResultsArray();
+            var flags = this.ResultFlags;
+
+            return VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
+        }
+
+
+        private short SetFormulas(IVisio.Page page)
+        {
+            if (this.FormulaCount == 0)
+            {
+                return 0;
+            }
+
+            var streamb = new List<SIDSRC>(this.FormulaCount);
+            streamb.AddRange(this.FormulaRecords.Select(i => i.SIDSRC));
+            var stream = SIDSRC.ToStream(streamb); 
+            var formulas = this.GetFormulasArray();
+            var flags = this.FormulaFlags;
+
+            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(page, stream, formulas, (short)flags);
+        }
+
+        public void Execute(IVisio.Shape shape)
+        {
+            this.SetResults(shape);
+            this.SetFormulas(shape);
+        }
+
+        private short SetResults(
+            IVisio.Shape shape)
+        {
+            if (this.ResultCount== 0)
+            {
+                return 0;
+            }
+
+            var streamb = new List<SRC>(this.ResultCount);
+            streamb.AddRange(this.ResultRecords.Select(i => i.SIDSRC.SRC));
+            var stream = SRC.ToStream(streamb); 
+            var unitcodes = this.GetUnitCodesArray();
+            var results = this.GetResultsArray();
+            var flags = this.ResultFlags;
+            return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
+        }
+
+        public void SetFormula(SRC streamitem, FormulaLiteral formula)
+        {
+            this._SetFormula(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
+        }
+
+        public void SetFormulaIgnoreNull(SRC streamitem, ShapeSheet.FormulaLiteral formula)
+        {
+            this._SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
+        }
+
+        public void SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            this._SetResult(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), value, unitcode);
+        }
+
+        private short SetFormulas(IVisio.Shape shape)
+        {
+            if (this.FormulaCount == 0)
+            {
+                return 0;
+            }
+
+            var streamb = new List<SRC>(this.FormulaCount);
+            streamb.AddRange(this.FormulaRecords.Select(i => i.SIDSRC.SRC));
+            var stream = SRC.ToStream(streamb); 
+            var formulas = this.GetFormulasArray();
+            var flags = this.FormulaFlags;
+            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
+        }
     }
 }
