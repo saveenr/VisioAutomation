@@ -166,6 +166,7 @@ namespace VisioAutomation.Text.Markup
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
+            var update = new VA.ShapeSheet.Update.SRCUpdate();
 
             foreach (var region in regions_to_format)
             {
@@ -185,7 +186,7 @@ namespace VisioAutomation.Text.Markup
                         throw new AuthenticationException("Could not create Character row");
                     }
 
-                    var update = new VA.ShapeSheet.Update.SRCUpdate();
+                    update.Clear();
                     charcells.Apply(update, rownum);
                     update.Execute(shape);
                 }
@@ -205,12 +206,11 @@ namespace VisioAutomation.Text.Markup
                         throw new AuthenticationException("Could not create Paragraph row");
                     }
 
-                    var update = new VA.ShapeSheet.Update.SRCUpdate();
+                    update.Clear();
                     paracells.Apply(update, rownum);
                     update.Execute(shape);
                 }
             }
-
 
             // Insert the fields
             // note: Fields are added in reverse because it is simpler to keep track of the insertion positions

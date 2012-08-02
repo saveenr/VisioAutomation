@@ -14,6 +14,13 @@ namespace VisioAutomation.ShapeSheet.Update
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 
+        public void Clear()
+        {
+            this.items.Clear();
+            this.FormulaCount = 0;
+            this.ResultCount = 0;
+        }
+
         protected UpdateBase()
         {
             this.items = new List<UpdateRecord>();
