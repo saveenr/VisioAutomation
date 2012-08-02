@@ -20,7 +20,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
             this.TextBlockFormatCells = new TextBlockFormatCells();
         }
 
-        public void Apply(VA.ShapeSheet.Update.UpdateBase update, short shapeid, short shapeid2)
+        public void Apply(VA.ShapeSheet.Update update, short shapeid, short shapeid2)
         {
             this.CharacterFormatCells.Apply(update, shapeid, 0);
             this.ParagraphFormatCells.Apply(update, shapeid, 0);

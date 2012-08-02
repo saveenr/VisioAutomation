@@ -104,7 +104,7 @@ namespace VisioAutomation.DOM
         {
             UpdateCellsWithDropSizes(ctx);
 
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
             var shapes_with_cells = this.shapes.Where(s => s.Cells != null);
             foreach (var shape in shapes_with_cells)
             {

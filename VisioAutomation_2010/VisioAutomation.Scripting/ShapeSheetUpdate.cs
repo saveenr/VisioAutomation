@@ -5,11 +5,11 @@ namespace VisioAutomation.Scripting
 {
     public class ShapeSheetUpdate
     {
-        internal readonly VA.ShapeSheet.Update.UpdateBase update;
+        internal readonly VA.ShapeSheet.Update update;
 
         public ShapeSheetUpdate()
         {
-            this.update = new VA.ShapeSheet.Update.UpdateBase();
+            this.update = new VA.ShapeSheet.Update();
         }
 
         public void SetFormula(short id, VA.ShapeSheet.SRC src, string formula)

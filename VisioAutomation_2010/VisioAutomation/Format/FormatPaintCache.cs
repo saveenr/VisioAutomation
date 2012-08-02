@@ -122,7 +122,7 @@ namespace VisioAutomation.Format
 
         public void PasteFormat(IVisio.Page page, IList<int> shapeids, VA.Format.FormatCategory category)
         {
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
 
             foreach (var shape_id in shapeids)
             {

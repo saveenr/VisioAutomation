@@ -33,7 +33,7 @@ namespace TestVisioAutomation
 
         private static void m_connect(IVisio.Page page)
         {
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
             update.SetFormula(VA.ShapeSheet.SRCConstants.RouteStyle, 16);// Set page routing style to center-to-center:
             update.SetFormula(VA.ShapeSheet.SRCConstants.LineJumpStyle, 2);// Set to connector intersection to 'gap':
             var page_sheet = page.PageSheet;

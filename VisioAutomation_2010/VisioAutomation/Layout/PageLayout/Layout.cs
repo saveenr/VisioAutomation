@@ -141,7 +141,7 @@ namespace VisioAutomation.Layout.PageLayout
             var pagecells = new VA.Pages.PageCells();
             this.SetPageCells(pagecells);
 
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
             pagecells.Apply(update);
             var pagesheet = page.PageSheet;
             update.Execute(pagesheet);

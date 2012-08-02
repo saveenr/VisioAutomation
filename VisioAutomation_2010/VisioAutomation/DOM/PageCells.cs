@@ -35,7 +35,7 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral ResizePage { get; set; }
         public ShapeSheet.FormulaLiteral RouteStyle { get; set; }
 
-        public void Apply(VA.ShapeSheet.Update.UpdateBase update, short id)
+        public void Apply(VA.ShapeSheet.Update update, short id)
         {
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeX, AvenueSizeX);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeY, AvenueSizeY);

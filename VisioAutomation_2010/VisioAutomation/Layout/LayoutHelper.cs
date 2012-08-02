@@ -138,7 +138,7 @@ namespace VisioAutomation.Layout
         private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<VA.Layout.XFormCells> xfrms)
         {
             
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var shape_id = shapeids[i];

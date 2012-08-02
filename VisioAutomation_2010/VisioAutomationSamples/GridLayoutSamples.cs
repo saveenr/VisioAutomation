@@ -45,7 +45,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Format.ShapeFormatCells();
             int i = 0;
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;

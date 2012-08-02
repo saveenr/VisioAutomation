@@ -166,7 +166,7 @@ namespace VisioAutomation.Text.Markup
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
 
             foreach (var region in regions_to_format)
             {

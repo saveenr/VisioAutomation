@@ -42,7 +42,7 @@ namespace VisioAutomation.Geometry
             short sec_index = GeometryHelper.AddGeometrySection(shape);
             short row_count = shape.RowCount[sec_index];
 
-            var update = new VA.ShapeSheet.Update.UpdateBase();
+            var update = new VA.ShapeSheet.Update();
 
             var src_nofill = VA.ShapeSheet.SRCConstants.Geometry_NoFill.ForSectionAndRow(sec_index, 0);
             var src_noline = VA.ShapeSheet.SRCConstants.Geometry_NoLine.ForSectionAndRow(sec_index, 0);
