@@ -13,6 +13,8 @@ namespace VisioAutomation.ShapeSheet.Update
         public int FormulaCount { get; private set; }
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
+        private bool contains_SIDSRC;
+        private bool contains_SID;
 
         public void Clear()
         {
@@ -65,12 +67,42 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
+        private void AddRecord(UpdateRecord record)
+        {
+            if (this.contains_SID && record.StreamType==StreamType.SIDSRC)
+            {
+                throw new VA.AutomationException("Cannot mix SIDSRC and SRC Update records");
+            }
+            else if (this.contains_SIDSRC && record.StreamType==StreamType.SRC)
+            {
+                throw new VA.AutomationException("Cannot mix SIDSRC and SRC Update records");                
+            }
+
+            if (record.StreamType==StreamType.SIDSRC)
+            {
+                this.contains_SIDSRC = true;
+            }
+            else
+            {
+                this.contains_SID = true;
+            }
+
+            this.items.Add(record);
+
+            if (record.UpdateType == UpdateType.Result)
+            {
+                this.ResultCount++;
+            }
+            else
+            {
+                this.FormulaCount++;
+            }
+        }
         protected void _SetFormula(VA.ShapeSheet.Update.StreamType st,SIDSRC streamitem, FormulaLiteral formula)
         {
             this.CheckFormulaIsNotNull(formula.Value);
             var rec = new UpdateRecord(st, streamitem, formula.Value);
-            this.items.Add(rec);
-            this.FormulaCount++;
+            this.AddRecord(rec);
         }
 
         protected void _SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType st, SIDSRC streamitem, ShapeSheet.FormulaLiteral formula)
@@ -84,8 +116,7 @@ namespace VisioAutomation.ShapeSheet.Update
         protected void _SetResult(VA.ShapeSheet.Update.StreamType st, SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             var rec = new UpdateRecord(st,streamitem, value, unitcode);
-            this.items.Add(rec);
-            this.ResultCount++;
+            this.AddRecord(rec);
         }
 
         public IEnumerator<UpdateRecord> GetEnumerator()
