@@ -4,9 +4,9 @@ using VA = VisioAutomation;
 using System.Collections;
 using System.Linq;
 
-namespace VisioAutomation.ShapeSheet.Update
+namespace VisioAutomation.ShapeSheet
 {
-    public class UpdateBase : IEnumerable<UpdateRecord>
+    public class Update : IEnumerable<Update.UpdateRecord>
     {
         private List<UpdateRecord> items;
         public int ResultCount { get; private set; }
@@ -23,12 +23,12 @@ namespace VisioAutomation.ShapeSheet.Update
             this.ResultCount = 0;
         }
 
-        public UpdateBase()
+        public Update()
         {
             this.items = new List<UpdateRecord>();
         }
 
-        public UpdateBase(int capacity)
+        public Update(int capacity)
         {
             this.items = new List<UpdateRecord>(capacity);
         }
@@ -98,14 +98,14 @@ namespace VisioAutomation.ShapeSheet.Update
                 this.FormulaCount++;
             }
         }
-        protected void _SetFormula(VA.ShapeSheet.Update.StreamType st,SIDSRC streamitem, FormulaLiteral formula)
+        protected void _SetFormula(StreamType st,SIDSRC streamitem, FormulaLiteral formula)
         {
             this.CheckFormulaIsNotNull(formula.Value);
             var rec = new UpdateRecord(st, streamitem, formula.Value);
             this.AddRecord(rec);
         }
 
-        protected void _SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType st, SIDSRC streamitem, ShapeSheet.FormulaLiteral formula)
+        protected void _SetFormulaIgnoreNull(StreamType st, SIDSRC streamitem, ShapeSheet.FormulaLiteral formula)
         {
             if (formula.HasValue)
             {
@@ -113,7 +113,7 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        protected void _SetResult(VA.ShapeSheet.Update.StreamType st, SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        protected void _SetResult(StreamType st, SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             var rec = new UpdateRecord(st,streamitem, value, unitcode);
             this.AddRecord(rec);
@@ -135,12 +135,12 @@ namespace VisioAutomation.ShapeSheet.Update
 
         public IEnumerable<UpdateRecord> ResultRecords
         {
-            get { return this.items.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Result); }
+            get { return this.items.Where(i => i.UpdateType == UpdateType.Result); }
         }
 
         public IEnumerable<UpdateRecord> FormulaRecords
         {
-            get { return this.items.Where(i => i.UpdateType == VA.ShapeSheet.Update.UpdateType.Formula); }
+            get { return this.items.Where(i => i.UpdateType == UpdateType.Formula); }
         }
 
         protected string[] GetFormulasArray()
@@ -182,29 +182,29 @@ namespace VisioAutomation.ShapeSheet.Update
         public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
         {
             var streamitem = new SIDSRC(shapeid,src);
-            this._SetResult(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, value, unitcode);
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }
 
         public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            this._SetResult(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, value, unitcode);
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }
 
         public void SetFormula(SIDSRC streamitem, FormulaLiteral formula)
         {
-            this._SetFormula(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, formula);
+            this._SetFormula(StreamType.SIDSRC, streamitem, formula);
         }
 
         public void SetFormula(short shapeid, SRC src, FormulaLiteral formula)
         {
             var streamitem = new SIDSRC(shapeid, src);
-            this._SetFormula(VA.ShapeSheet.Update.StreamType.SIDSRC, streamitem, formula);
+            this._SetFormula(StreamType.SIDSRC, streamitem, formula);
         }
 
         public void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
         {
             var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
-            this._SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType.SIDSRC, sidsrc, formula);
+            this._SetFormulaIgnoreNull(StreamType.SIDSRC, sidsrc, formula);
         }
 
         public void Execute(IVisio.Page page)
@@ -273,17 +273,17 @@ namespace VisioAutomation.ShapeSheet.Update
 
         public void SetFormula(SRC streamitem, FormulaLiteral formula)
         {
-            this._SetFormula(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
+            this._SetFormula(StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
         }
 
         public void SetFormulaIgnoreNull(SRC streamitem, ShapeSheet.FormulaLiteral formula)
         {
-            this._SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
+            this._SetFormulaIgnoreNull(StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
         }
 
         public void SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            this._SetResult(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), value, unitcode);
+            this._SetResult(StreamType.SIDSRC, new SIDSRC(-1, streamitem), value, unitcode);
         }
 
         private short SetFormulas(IVisio.Shape shape)
@@ -299,6 +299,48 @@ namespace VisioAutomation.ShapeSheet.Update
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
             return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
+        }
+
+        public struct UpdateRecord
+        {
+            public readonly SIDSRC SIDSRC;
+            public readonly string Formula;
+            public readonly double Result;
+            public readonly IVisio.VisUnitCodes UnitCode;
+            public readonly UpdateType UpdateType;
+            public readonly StreamType StreamType;
+
+            internal UpdateRecord(StreamType st, SIDSRC sidsrc, string formula)
+            {
+                this.SIDSRC = sidsrc;
+                this.Formula = formula;
+                this.Result = 0.0;
+                this.UnitCode = IVisio.VisUnitCodes.visNoCast;
+                this.UpdateType = UpdateType.Formula;
+                this.StreamType = st;
+            }
+
+            internal UpdateRecord(StreamType st, SIDSRC sidsrc, double result, IVisio.VisUnitCodes unit_code)
+            {
+                this.SIDSRC = sidsrc;
+                this.Formula = null;
+                this.UnitCode = unit_code;
+                this.Result = result;
+                this.UpdateType = UpdateType.Result;
+                this.StreamType = st;
+            }
+
+        }
+
+        public enum StreamType
+        {
+            SIDSRC, SRC
+        }
+
+        public enum UpdateType
+        {
+            Formula,
+            Result
         }
     }
 }
