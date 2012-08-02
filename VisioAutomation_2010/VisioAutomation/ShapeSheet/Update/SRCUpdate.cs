@@ -40,17 +40,17 @@ namespace VisioAutomation.ShapeSheet.Update
          
         public void SetFormula(SRC streamitem, FormulaLiteral formula)
         {
-            this._SetFormula(new SIDSRC(-1,streamitem), formula);
+            this._SetFormula(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
         }
 
         public void SetFormulaIgnoreNull(SRC streamitem, ShapeSheet.FormulaLiteral formula)
         {
-            this._SetFormulaIgnoreNull(new SIDSRC(-1,streamitem),formula );
+            this._SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
         }
 
         public void SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            this._SetResult(new SIDSRC(-1,streamitem), value, unitcode);
+            this._SetResult(VA.ShapeSheet.Update.StreamType.SIDSRC, new SIDSRC(-1, streamitem), value, unitcode);
         }
 
         private short [] GetResultStream()

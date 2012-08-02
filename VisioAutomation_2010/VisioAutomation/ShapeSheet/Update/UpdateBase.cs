@@ -65,25 +65,25 @@ namespace VisioAutomation.ShapeSheet.Update
             }
         }
 
-        protected void _SetFormula(SIDSRC streamitem, FormulaLiteral formula)
+        protected void _SetFormula(VA.ShapeSheet.Update.StreamType st,SIDSRC streamitem, FormulaLiteral formula)
         {
             this.CheckFormulaIsNotNull(formula.Value);
-            var rec = new UpdateRecord(streamitem, formula.Value);
+            var rec = new UpdateRecord(st, streamitem, formula.Value);
             this.items.Add(rec);
             this.FormulaCount++;
         }
 
-        protected void _SetFormulaIgnoreNull(SIDSRC streamitem, ShapeSheet.FormulaLiteral formula)
+        protected void _SetFormulaIgnoreNull(VA.ShapeSheet.Update.StreamType st, SIDSRC streamitem, ShapeSheet.FormulaLiteral formula)
         {
             if (formula.HasValue)
             {
-                this._SetFormula(streamitem, formula);
+                this._SetFormula(st, streamitem, formula);
             }
         }
 
-        protected void _SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        protected void _SetResult(VA.ShapeSheet.Update.StreamType st, SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            var rec = new UpdateRecord(streamitem, value, unitcode);
+            var rec = new UpdateRecord(st,streamitem, value, unitcode);
             this.items.Add(rec);
             this.ResultCount++;
         }
