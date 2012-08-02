@@ -44,7 +44,7 @@ namespace VisioCSharpSamples
             chars.ParaProps[(short)IVisio.VisCellIndices.visHorzAlign] = (short)0;
             var rownum = chars.ParaPropsRow[(short)default_chars_bias];
 
-            shape.Cells["Halign[" + (rownum + 1) + "]"].Formula = "2";
+            //shape.Cells["Halign[" + (rownum + 1) + "]"].Formula = "2";
 
         }
 
