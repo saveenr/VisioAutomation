@@ -62,7 +62,7 @@ namespace VisioAutomation.UserDefinedCells
                 throw new AutomationException(msg);
             }
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             var src = new VA.ShapeSheet.SRC(UserDefinedCell.query.Section, cell.Row, (short)IVisio.VisCellIndices.visUserValue);
             update.SetFormula(src, val);
 
@@ -88,7 +88,7 @@ namespace VisioAutomation.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
 
             if (value != null)
             {

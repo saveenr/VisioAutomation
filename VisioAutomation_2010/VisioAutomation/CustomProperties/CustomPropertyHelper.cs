@@ -77,7 +77,7 @@ namespace VisioAutomation.CustomProperties
                 throw new ArgumentNullException("shape");
             }
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             cp.Apply(update, row);
             update.Execute(shape);
         }

@@ -9,12 +9,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {       
         protected abstract void ApplyFormulas(ApplyFormula func);
 
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short shapeid)
+        public void Apply(VA.ShapeSheet.Update.UpdateBase update, short shapeid)
         {
             this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f));
         }
 
-        public void Apply(VA.ShapeSheet.Update.SRCUpdate update)
+        public void Apply(VA.ShapeSheet.Update.UpdateBase update)
         {
             this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f));
         }

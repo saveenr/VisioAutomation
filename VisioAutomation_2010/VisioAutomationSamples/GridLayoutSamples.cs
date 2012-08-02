@@ -16,7 +16,7 @@ namespace VisioAutomationSamples
             // Demonstrates:
             // How use the GridLayout object to quickly drop a grid
             // How to use ShapeFormatCells to apply formatting to shapes
-            // How SIDSRCUpdate can be used to modfiy multiple shapes at once
+            // How UpdateBase can be used to modfiy multiple shapes at once
 
             int[] colors = {
                     0x0A3B76, 0x4395D1, 0x99D9EA, 0x0D686B, 0x00A99D, 0x7ACCC8, 0x82CA9C,
@@ -45,7 +45,7 @@ namespace VisioAutomationSamples
 
             var fmtcells = new VA.Format.ShapeFormatCells();
             int i = 0;
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             foreach (var node in layout.Nodes)
             {
                 var shapeid = node.ShapeID;

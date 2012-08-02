@@ -257,7 +257,7 @@ namespace TestVisioAutomation
             var tb1 = new VA.Text.TextBlockFormatCells();
             tb1.BottomMargin = "8 pt";
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             tb1.Apply(update,s1.ID16);
             update.Execute(page1);
 

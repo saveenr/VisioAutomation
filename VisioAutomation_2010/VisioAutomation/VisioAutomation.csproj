@@ -235,7 +235,6 @@
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />
-    <Compile Include="Shapesheet\Update\SIDSRCUpdate.cs" />
     <Compile Include="Internal\QueryDataSet.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Connections\DirectedEdge.cs" />
@@ -254,7 +253,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Shapesheet\Update\SRCUpdate.cs" />
     <Compile Include="Shapesheet\CellData.cs" />
     <Compile Include="Text\Markup\Field.cs" />
     <Compile Include="Text\Markup\FieldConstants.cs" />

@@ -24,14 +24,14 @@ namespace VisioAutomation.Geometry
             return this.RowTag;
         }
 
-        public void AddTo(IVisio.Shape shape, VA.ShapeSheet.Update.SRCUpdate update, short row, short section)
+        public void AddTo(IVisio.Shape shape, VA.ShapeSheet.Update.UpdateBase update, short row, short section)
         {
             short row_index = shape.AddRow(section, row, (short) this.GetRowTagType());
             this.Update(section, row_index, update);
         }
 
 
-        private void Update(short section, short row_index, VA.ShapeSheet.Update.SRCUpdate update)
+        private void Update(short section, short row_index, VA.ShapeSheet.Update.UpdateBase update)
         {
             var x_src = VA.ShapeSheet.SRCConstants.Geometry_X.ForSectionAndRow(section, row_index);
             var y_src = VA.ShapeSheet.SRCConstants.Geometry_Y.ForSectionAndRow(section, row_index);

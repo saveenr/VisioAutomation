@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -126,7 +126,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
 
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();

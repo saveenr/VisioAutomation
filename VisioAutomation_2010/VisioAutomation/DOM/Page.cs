@@ -55,7 +55,7 @@ namespace VisioAutomation.DOM
 
             var page_sheet = page.PageSheet;
             
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             this.PageCells.Apply(update, (short)page_sheet.ID);
             update.Execute(page);
 

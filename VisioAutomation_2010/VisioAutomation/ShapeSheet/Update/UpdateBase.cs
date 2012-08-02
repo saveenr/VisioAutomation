@@ -23,12 +23,12 @@ namespace VisioAutomation.ShapeSheet.Update
             this.ResultCount = 0;
         }
 
-        protected UpdateBase()
+        public UpdateBase()
         {
             this.items = new List<UpdateRecord>();
         }
 
-        protected UpdateBase(int capacity)
+        public UpdateBase(int capacity)
         {
             this.items = new List<UpdateRecord>(capacity);
         }

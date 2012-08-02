@@ -26,7 +26,7 @@ namespace TestVisioAutomation
             string bg_formula = VA.Convert.ColorToFormulaRGB(255, 128, 0);
 
             // Setup the modifications to the cell values
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             update.SetFormula(src_fg, fg_formula);
             update.SetFormula(src_bg, bg_formula);
             update.SetFormula(src_fillpat, 40);
@@ -64,7 +64,7 @@ namespace TestVisioAutomation
 
 
             // Set the formulas
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             update.SetFormula(shape1.ID16, src_pinx, 0.5);
             update.SetFormula(shape1.ID16, src_piny, 0.5);
             update.SetFormula(shape2.ID16, src_pinx, 1.5);
@@ -106,7 +106,7 @@ namespace TestVisioAutomation
             var s3 = page1.DrawRectangle(2, 2, 3, 3);
 
             // format it with setformulas
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             update.SetResult((short)s1.ID, src_pinx, 5.0, unitcode_nocast);
             update.SetResult((short)s2.ID, src_pinx, 6.0, unitcode_nocast);
             update.SetResult((short)s3.ID, src_pinx, 7.0, unitcode_nocast);

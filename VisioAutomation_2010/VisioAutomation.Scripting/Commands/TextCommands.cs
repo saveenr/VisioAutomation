@@ -87,7 +87,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 // Now restore all the formatting - based on any initial formatting from the text
 
-                var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+                var update = new VA.ShapeSheet.Update.UpdateBase();
                 for (int i = 0; i < shapes.Count; i++)
                 {
                     var format = formats[i];
@@ -155,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_window = application.ActiveWindow;
             var sel = active_window.Selection;
             var shapes = this.Session.Selection.EnumShapes().ToList();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
 
             foreach (var shape in shapes)
             {

@@ -314,7 +314,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
 
             foreach (int shapeid in shapeids)
             {
@@ -338,7 +338,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             foreach (int shapeid in shapeids)
             {
                 if (w.HasValue && w.Value>=0)

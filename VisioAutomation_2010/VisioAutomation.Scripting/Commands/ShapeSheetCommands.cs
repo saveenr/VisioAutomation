@@ -143,7 +143,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
             update.BlastGuards  = ((short) flags & (short) IVisio.VisGetSetArgs.visSetBlastGuards)!=0;
             update.TestCircular = ((short) flags & (short) IVisio.VisGetSetArgs.visSetTestCircular) != 0;
             var selection = this.Session.Selection.Get();

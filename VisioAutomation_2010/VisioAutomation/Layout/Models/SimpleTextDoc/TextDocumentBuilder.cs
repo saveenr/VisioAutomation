@@ -128,7 +128,7 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
             var bodyshape = page.DrawRectangle(_bodywith_title_rect);
             bodyshape.Text = textpage.Body;
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
 
             // Set the ShapeSheet props
             short bodyshape_id = bodyshape.ID16;

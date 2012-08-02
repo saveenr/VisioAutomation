@@ -171,7 +171,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
             var window = app.ActiveWindow;
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update.UpdateBase();
 
             // Format the containers and shapes
 
@@ -213,7 +213,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
             var xfrm = new VA.Layout.XFormCells();
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate(points.Count*2);
+            var update = new VA.ShapeSheet.Update.UpdateBase(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
             {
                 xfrm.Width = rects[i].Width;
