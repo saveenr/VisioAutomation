@@ -102,7 +102,7 @@ namespace VisioAutomation.DOM
 
         private void UpdateCells(RenderContext ctx)
         {
-            UpdateCellsWithDroppSizes(ctx);
+            UpdateCellsWithDropSizes(ctx);
 
             var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
             var shapes_with_cells = this.shapes.Where(s => s.Cells != null);
@@ -243,7 +243,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void UpdateCellsWithDroppSizes(RenderContext ctx)
+        private void UpdateCellsWithDropSizes(RenderContext ctx)
         {
             var masters = this.shapes
                 .Where(shape => shape is Shape).Cast<Shape>();
