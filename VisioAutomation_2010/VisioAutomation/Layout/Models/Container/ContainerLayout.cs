@@ -108,7 +108,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
         {
             if (!this.IsLayedOut)
             {
-                string msg = string.Format("{0} is not prepared for rendering. Call PerformLayout() first.",
+                string msg = string.Format("{0} usage error. Call PerformLayout() before calling Render().",
                                            typeof (ContainerLayout).Name);
                 throw new VA.AutomationException(msg);
             }
