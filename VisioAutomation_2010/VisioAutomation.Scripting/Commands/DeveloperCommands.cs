@@ -414,10 +414,10 @@ namespace VisioAutomation.Scripting.Commands
 
 
                 var markup = new VA.Text.Markup.TextElement();
-                var m1 = markup.Add(label+"\n");
+                var m1 = markup.AddElement(label+"\n");
                 m1.CharacterFormatCells.Font = fontid_segoe;
                 m1.CharacterFormatCells.Size = "12.0pt";
-                var m2 = markup.Add();
+                var m2 = markup.AddElement();
                 m2.AddText(string.Join("\n", types_in_namespace));
 
                 node.Text = markup;

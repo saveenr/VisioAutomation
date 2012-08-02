@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
@@ -40,14 +41,14 @@ namespace VisioAutomation.Text.Markup
             return field;
         }
 
-        public TextElement Add()
+        public TextElement AddElement()
         {
             var el = new TextElement();
             this.Add(el);
             return el;
         }
 
-        public TextElement Add(string text)
+        public TextElement AddElement(string text)
         {
             var el = new TextElement(text);
             this.Add(el);
@@ -160,15 +161,56 @@ namespace VisioAutomation.Text.Markup
             // Find all the regions needing formatting
             var markupinfo = this.GetMarkupInfo();
             var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1);
-            foreach (var markup_region in regions_to_format)
+
+            
+            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
+
+
+
+            foreach (var region in regions_to_format)
             {
 
-                var charcells = markup_region.Element.CharacterFormatCells;
-                VA.Text.TextFormat.SetFormat(shape, charcells, markup_region.Start, markup_region.End); 
+                // Apply character formatting
+                var charcells = region.Element.CharacterFormatCells;
+                if (charcells != null)
+                {
+                    var chars = shape.Characters;
+                    chars.Begin = region.Start;
+                    chars.End = region.End;
+                    chars.CharProps[VA.ShapeSheet.SRCConstants.Char_Color.Cell] = (short) 0;
+                    short rownum = chars.CharPropsRow[(short) default_chars_bias];
 
-                var paracells = markup_region.Element.ParagraphFormatCells;
-                VA.Text.TextFormat.SetFormat(shape, paracells, markup_region.Start, markup_region.End);
+                    if (rownum < 0)
+                    {
+                        throw new AuthenticationException("Could not create Character row");
+                    }
+
+                    var update = new VA.ShapeSheet.Update.SRCUpdate();
+                    charcells.Apply(update, rownum);
+                    update.Execute(shape);
+                }
+
+                // Apply paragraph formatting
+                var paracells = region.Element.ParagraphFormatCells;
+                if (paracells != null)
+                {
+                    var chars = shape.Characters;
+                    chars.Begin = region.Start;
+                    chars.End = region.End;
+                    chars.ParaProps[VA.ShapeSheet.SRCConstants.Para_Bullet.Cell] = (short) 0;
+                    short rownum = chars.ParaPropsRow[(short) default_chars_bias];
+
+                    if (rownum < 0)
+                    {
+                        throw new AuthenticationException("Could not create Paragraph row");
+                    }
+
+                    var update = new VA.ShapeSheet.Update.SRCUpdate();
+                    paracells.Apply(update, rownum);
+                    update.Execute(shape);
+                }
             }
+
 
             // Insert the fields
             // note: Fields are added in reverse because it is simpler to keep track of the insertion positions
