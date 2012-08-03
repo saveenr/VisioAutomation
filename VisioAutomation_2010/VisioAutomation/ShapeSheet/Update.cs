@@ -209,71 +209,45 @@ namespace VisioAutomation.ShapeSheet
 
         public void Execute(IVisio.Page page)
         {
-            this.SetResults(page);
-            this.SetFormulas(page);
-        }
-
-        private short SetFormulas(IVisio.Shape shape)
-        {
-            if (this.FormulaCount == 0)
+            if (this.ResultCount > 0)
             {
-                return 0;
+                var stream = this.build_stream(UpdateType.Result, StreamType.SIDSRC);
+                var unitcodes = this.GetUnitCodesArray();
+                double[] results = this.GetResultsArray();
+                var flags = this.ResultFlags;
+
+                int c = VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
             }
 
-            var stream = this.build_stream(UpdateType.Formula, StreamType.SRC);
-            var formulas = this.GetFormulasArray();
-            var flags = this.FormulaFlags;
-            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
-        }
-
-        private short SetFormulas(IVisio.Page page)
-        {
-            if (this.FormulaCount == 0)
+            if (this.FormulaCount > 0)
             {
-                return 0;
+                var stream = this.build_stream(UpdateType.Formula, StreamType.SIDSRC);
+                var formulas = this.GetFormulasArray();
+                var flags = this.FormulaFlags;
+
+                int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas(page, stream, formulas, (short) flags);
             }
-
-            var stream = this.build_stream(UpdateType.Formula, StreamType.SIDSRC);
-            var formulas = this.GetFormulasArray();
-            var flags = this.FormulaFlags;
-
-            return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(page, stream, formulas, (short)flags);
         }
 
         public void Execute(IVisio.Shape shape)
         {
-            this.SetResults(shape);
-            this.SetFormulas(shape);
-        }
-
-        private short SetResults(
-            IVisio.Shape shape)
-        {
-            if (this.ResultCount== 0)
+            if (this.ResultCount > 0)
             {
-                return 0;
+
+                var stream = this.build_stream(UpdateType.Result, StreamType.SRC);
+                var unitcodes = this.GetUnitCodesArray();
+                var results = this.GetResultsArray();
+                var flags = this.ResultFlags;
+                int c = VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
             }
 
-            var stream = this.build_stream(UpdateType.Result, StreamType.SRC);
-            var unitcodes = this.GetUnitCodesArray();
-            var results = this.GetResultsArray();
-            var flags = this.ResultFlags;
-            return VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
-        }
-
-        private short SetResults(IVisio.Page page)
-        {
-            if (this.ResultCount == 0)
+            if (this.FormulaCount > 0)
             {
-                return 0;
+                var stream = this.build_stream(UpdateType.Formula, StreamType.SRC);
+                var formulas = this.GetFormulasArray();
+                var flags = this.FormulaFlags;
+                int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
             }
-
-            var stream = this.build_stream(UpdateType.Result, StreamType.SIDSRC);
-            var unitcodes = this.GetUnitCodesArray();
-            double[] results = this.GetResultsArray();
-            var flags = this.ResultFlags;
-
-            return VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
         }
 
         private short [] build_stream(UpdateType ut, StreamType st)
