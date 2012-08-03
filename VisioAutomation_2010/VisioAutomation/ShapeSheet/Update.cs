@@ -220,9 +220,7 @@ namespace VisioAutomation.ShapeSheet
                 return 0;
             }
 
-            var streamb = new List<SRC>(this.FormulaCount);
-            streamb.AddRange(this.FormulaRecords.Where(i => i.StreamType == StreamType.SRC).Select(i => i.SIDSRC.SRC));
-            var stream = SRC.ToStream(streamb);
+            var stream = this.build_stream(UpdateType.Formula, StreamType.SRC);
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
             return VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
@@ -235,9 +233,7 @@ namespace VisioAutomation.ShapeSheet
                 return 0;
             }
 
-            var streamb = new List<SIDSRC>(this.FormulaCount);
-            streamb.AddRange(this.FormulaRecords.Where(i => i.StreamType == StreamType.SIDSRC).Select(i => i.SIDSRC));
-            var stream = SIDSRC.ToStream(streamb); 
+            var stream = this.build_stream(UpdateType.Formula, StreamType.SIDSRC);
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
 
@@ -258,9 +254,7 @@ namespace VisioAutomation.ShapeSheet
                 return 0;
             }
 
-            var streamb = new List<SRC>(this.ResultCount);
-            streamb.AddRange(this.ResultRecords.Where(i=>i.StreamType==StreamType.SRC).Select(i => i.SIDSRC.SRC));
-            var stream = SRC.ToStream(streamb); 
+            var stream = this.build_stream(UpdateType.Result, StreamType.SRC);
             var unitcodes = this.GetUnitCodesArray();
             var results = this.GetResultsArray();
             var flags = this.ResultFlags;
@@ -274,15 +268,42 @@ namespace VisioAutomation.ShapeSheet
                 return 0;
             }
 
-            var streamb = new List<SIDSRC>(this.ResultCount);
-            streamb.AddRange(this.ResultRecords.Where(i => i.StreamType == StreamType.SIDSRC).Select(i => i.SIDSRC));
-            var stream = SIDSRC.ToStream(streamb);
-
+            var stream = this.build_stream(UpdateType.Result, StreamType.SIDSRC);
             var unitcodes = this.GetUnitCodesArray();
             double[] results = this.GetResultsArray();
             var flags = this.ResultFlags;
 
             return VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
+        }
+
+        private short [] build_stream(UpdateType ut, StreamType st)
+        {
+            IEnumerable<UpdateRecord> items;
+            int count;
+            if (ut==UpdateType.Formula)
+            {
+                items = this.FormulaRecords;
+                count = this.FormulaCount;
+            }
+            else
+            {
+                items = this.ResultRecords;
+                count = this.ResultCount;
+            }
+            
+            if (st==StreamType.SRC)
+            {
+                var streamb = new List<SRC>(count);
+                streamb.AddRange( items.Where(i=>i.StreamType==StreamType.SRC).Select(i=>i.SIDSRC.SRC));
+                return SRC.ToStream(streamb);
+            }
+            else
+            {
+                var streamb = new List<SIDSRC>(count);
+                streamb.AddRange(items.Where(i => i.StreamType == StreamType.SIDSRC).Select(i => i.SIDSRC));
+                return SIDSRC.ToStream(streamb);
+            }
+            
         }
 
         public void SetFormula(SRC streamitem, FormulaLiteral formula)
