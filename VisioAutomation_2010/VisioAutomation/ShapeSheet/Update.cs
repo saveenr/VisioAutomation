@@ -211,7 +211,7 @@ namespace VisioAutomation.ShapeSheet
 
             if (first_record.Value.UpdateType == UpdateType.Result)
             {
-                var stream = this.build_stream(StreamType.SIDSRC);
+                var stream = this.build_stream();
                 var unitcodes = this.GetUnitCodesArray();
                 double[] results = this.GetResultsArray();
                 var flags = this.ResultFlags;
@@ -220,7 +220,7 @@ namespace VisioAutomation.ShapeSheet
             }
             else 
             {
-                var stream = this.build_stream(StreamType.SIDSRC);
+                var stream = this.build_stream();
                 var formulas = this.GetFormulasArray();
                 var flags = this.FormulaFlags;
 
@@ -243,7 +243,7 @@ namespace VisioAutomation.ShapeSheet
             if (first_record.Value.UpdateType == UpdateType.Result)
             {
 
-                var stream = this.build_stream(StreamType.SRC);
+                var stream = this.build_stream();
                 var unitcodes = this.GetUnitCodesArray();
                 var results = this.GetResultsArray();
                 var flags = this.ResultFlags;
@@ -251,15 +251,17 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                var stream = this.build_stream(StreamType.SRC);
+                var stream = this.build_stream();
                 var formulas = this.GetFormulasArray();
                 var flags = this.FormulaFlags;
                 int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
             }
         }
 
-        private short [] build_stream(StreamType st)
+        private short [] build_stream()
         {
+            var st = this.first_record.Value.StreamType;
+
             if (st==StreamType.SRC)
             {
                 var streamb = new List<SRC>(this.items.Count);
