@@ -9,8 +9,8 @@ namespace VisioAutomation.ShapeSheet
     public class Update : IEnumerable<Update.UpdateRecord>
     {
         private List<UpdateRecord> items;
-        public int ResultCount { get; private set; }
-        public int FormulaCount { get; private set; }
+        private int ResultCount;
+        private int FormulaCount;
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
         private bool contains_SIDSRC;
