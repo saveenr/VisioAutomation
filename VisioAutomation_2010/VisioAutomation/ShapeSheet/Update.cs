@@ -9,18 +9,15 @@ namespace VisioAutomation.ShapeSheet
     public class Update : IEnumerable<Update.UpdateRecord>
     {
         private List<UpdateRecord> items;
-        private int ResultCount;
-        private int FormulaCount;
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
-        private bool contains_SIDSRC;
-        private bool contains_SID;
+
+        private UpdateRecord? first_record;
 
         public void Clear()
         {
             this.items.Clear();
-            this.FormulaCount = 0;
-            this.ResultCount = 0;
+            this.first_record = null;
         }
 
         public Update()
@@ -69,34 +66,27 @@ namespace VisioAutomation.ShapeSheet
 
         private void AddRecord(UpdateRecord record)
         {
-            if (this.contains_SID && record.StreamType==StreamType.SIDSRC)
+            // This block ensures that only homogeneous updates are constructed
+            if (this.items.Count<1)
             {
-                throw new VA.AutomationException("Cannot mix SIDSRC and SRC Update records");
-            }
-            else if (this.contains_SIDSRC && record.StreamType==StreamType.SRC)
-            {
-                throw new VA.AutomationException("Cannot mix SIDSRC and SRC Update records");                
-            }
-
-            if (record.StreamType==StreamType.SIDSRC)
-            {
-                this.contains_SIDSRC = true;
+                this.first_record = record;
             }
             else
             {
-                this.contains_SID = true;
+                if (record.StreamType != first_record.Value.StreamType)
+                {
+                    throw new VA.AutomationException("Cannot contain both SRC and SIDSRC updates");
+                }
+
+                if (record.UpdateType != first_record.Value.UpdateType)
+                {
+                    throw new VA.AutomationException("Cannot contain both Formula and Result updates");
+                }
             }
 
+            // Now that it is safe, add the record
             this.items.Add(record);
 
-            if (record.UpdateType == UpdateType.Result)
-            {
-                this.ResultCount++;
-            }
-            else
-            {
-                this.FormulaCount++;
-            }
         }
         protected void _SetFormula(StreamType st,SIDSRC streamitem, FormulaLiteral formula)
         {
@@ -145,7 +135,7 @@ namespace VisioAutomation.ShapeSheet
 
         protected string[] GetFormulasArray()
         {
-            var a = new string[this.FormulaCount];
+            var a = new string[this.items.Count];
             int i = 0;
             foreach (var rec in this.FormulaRecords)
             {
@@ -157,7 +147,7 @@ namespace VisioAutomation.ShapeSheet
 
         protected double[] GetResultsArray()
         {
-            var a = new double[this.ResultCount];
+            var a = new double[this.items.Count];
             int i = 0;
             foreach (var rec in this.ResultRecords)
             {
@@ -169,7 +159,7 @@ namespace VisioAutomation.ShapeSheet
 
         protected IVisio.VisUnitCodes[] GetUnitCodesArray()
         {
-            var a = new IVisio.VisUnitCodes[this.ResultCount];
+            var a = new IVisio.VisUnitCodes[this.items.Count];
             int i = 0;
             foreach (var rec in this.ResultRecords)
             {
@@ -209,19 +199,28 @@ namespace VisioAutomation.ShapeSheet
 
         public void Execute(IVisio.Page page)
         {
-            if (this.ResultCount > 0)
+            if (this.items.Count<1)
             {
-                var stream = this.build_stream(UpdateType.Result, StreamType.SIDSRC);
+                return;
+            }
+
+            if (first_record.Value.StreamType == StreamType.SRC)
+            {
+                throw new VA.AutomationException("Contains a SRC updates. Need SIDSRC updates");
+            }
+
+            if (first_record.Value.UpdateType == UpdateType.Result)
+            {
+                var stream = this.build_stream(StreamType.SIDSRC);
                 var unitcodes = this.GetUnitCodesArray();
                 double[] results = this.GetResultsArray();
                 var flags = this.ResultFlags;
 
                 int c = VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
             }
-
-            if (this.FormulaCount > 0)
+            else 
             {
-                var stream = this.build_stream(UpdateType.Formula, StreamType.SIDSRC);
+                var stream = this.build_stream(StreamType.SIDSRC);
                 var formulas = this.GetFormulasArray();
                 var flags = this.FormulaFlags;
 
@@ -231,50 +230,46 @@ namespace VisioAutomation.ShapeSheet
 
         public void Execute(IVisio.Shape shape)
         {
-            if (this.ResultCount > 0)
+            if (this.items.Count < 1)
+            {
+                return;
+            }
+
+            if (first_record.Value.StreamType == StreamType.SIDSRC)
+            {
+                throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
+            }
+
+            if (first_record.Value.UpdateType == UpdateType.Result)
             {
 
-                var stream = this.build_stream(UpdateType.Result, StreamType.SRC);
+                var stream = this.build_stream(StreamType.SRC);
                 var unitcodes = this.GetUnitCodesArray();
                 var results = this.GetResultsArray();
                 var flags = this.ResultFlags;
                 int c = VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
             }
-
-            if (this.FormulaCount > 0)
+            else
             {
-                var stream = this.build_stream(UpdateType.Formula, StreamType.SRC);
+                var stream = this.build_stream(StreamType.SRC);
                 var formulas = this.GetFormulasArray();
                 var flags = this.FormulaFlags;
                 int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
             }
         }
 
-        private short [] build_stream(UpdateType ut, StreamType st)
+        private short [] build_stream(StreamType st)
         {
-            IEnumerable<UpdateRecord> items;
-            int count;
-            if (ut==UpdateType.Formula)
-            {
-                items = this.FormulaRecords;
-                count = this.FormulaCount;
-            }
-            else
-            {
-                items = this.ResultRecords;
-                count = this.ResultCount;
-            }
-            
             if (st==StreamType.SRC)
             {
-                var streamb = new List<SRC>(count);
-                streamb.AddRange( items.Where(i=>i.StreamType==StreamType.SRC).Select(i=>i.SIDSRC.SRC));
+                var streamb = new List<SRC>(this.items.Count);
+                streamb.AddRange( this.items.Select(i=>i.SIDSRC.SRC));
                 return SRC.ToStream(streamb);
             }
             else
             {
-                var streamb = new List<SIDSRC>(count);
-                streamb.AddRange(items.Where(i => i.StreamType == StreamType.SIDSRC).Select(i => i.SIDSRC));
+                var streamb = new List<SIDSRC>(this.items.Count);
+                streamb.AddRange(this.items.Select(i => i.SIDSRC));
                 return SIDSRC.ToStream(streamb);
             }
             

@@ -30,7 +30,7 @@ namespace TestVisioAutomation
             update.SetFormula(src_fg, fg_formula);
             update.SetFormula(src_bg, bg_formula);
             update.SetFormula(src_fillpat, 40);
-            update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNoCast);
+            //update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNoCast);
             update.Execute(shape1);
 
             // Build the query
@@ -48,7 +48,7 @@ namespace TestVisioAutomation
             Assert.AreEqual("RGB(255,0,0)", formulas[0, col_fg]);
             Assert.AreEqual("RGB(255,128,0)", formulas[0, col_bg]);
             Assert.AreEqual("40", formulas[0, col_fillpat]);
-            Assert.AreEqual(7.0, results[0, col_linepat]);
+            //Assert.AreEqual(7.0, results[0, col_linepat]);
 
             page1.Delete(0);
         }
