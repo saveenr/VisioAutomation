@@ -221,7 +221,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var streamb = new List<SRC>(this.FormulaCount);
-            streamb.AddRange(this.FormulaRecords.Select(i => i.SIDSRC.SRC));
+            streamb.AddRange(this.FormulaRecords.Where(i => i.StreamType == StreamType.SRC).Select(i => i.SIDSRC.SRC));
             var stream = SRC.ToStream(streamb);
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
@@ -236,7 +236,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var streamb = new List<SIDSRC>(this.FormulaCount);
-            streamb.AddRange(this.FormulaRecords.Select(i => i.SIDSRC));
+            streamb.AddRange(this.FormulaRecords.Where(i => i.StreamType == StreamType.SIDSRC).Select(i => i.SIDSRC));
             var stream = SIDSRC.ToStream(streamb); 
             var formulas = this.GetFormulasArray();
             var flags = this.FormulaFlags;
@@ -259,7 +259,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var streamb = new List<SRC>(this.ResultCount);
-            streamb.AddRange(this.ResultRecords.Select(i => i.SIDSRC.SRC));
+            streamb.AddRange(this.ResultRecords.Where(i=>i.StreamType==StreamType.SRC).Select(i => i.SIDSRC.SRC));
             var stream = SRC.ToStream(streamb); 
             var unitcodes = this.GetUnitCodesArray();
             var results = this.GetResultsArray();
@@ -275,7 +275,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var streamb = new List<SIDSRC>(this.ResultCount);
-            streamb.AddRange(this.ResultRecords.Select(i => i.SIDSRC));
+            streamb.AddRange(this.ResultRecords.Where(i => i.StreamType == StreamType.SIDSRC).Select(i => i.SIDSRC));
             var stream = SIDSRC.ToStream(streamb);
 
             var unitcodes = this.GetUnitCodesArray();
@@ -287,17 +287,17 @@ namespace VisioAutomation.ShapeSheet
 
         public void SetFormula(SRC streamitem, FormulaLiteral formula)
         {
-            this._SetFormula(StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
+            this._SetFormula(StreamType.SRC, new SIDSRC(-1, streamitem), formula);
         }
 
         public void SetFormulaIgnoreNull(SRC streamitem, ShapeSheet.FormulaLiteral formula)
         {
-            this._SetFormulaIgnoreNull(StreamType.SIDSRC, new SIDSRC(-1, streamitem), formula);
+            this._SetFormulaIgnoreNull(StreamType.SRC, new SIDSRC(-1, streamitem), formula);
         }
 
         public void SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
-            this._SetResult(StreamType.SIDSRC, new SIDSRC(-1, streamitem), value, unitcode);
+            this._SetResult(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
         }
 
         public struct UpdateRecord
