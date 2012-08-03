@@ -199,47 +199,41 @@ namespace VisioAutomation.ShapeSheet
 
         public void Execute(IVisio.Page page)
         {
-            if (this.items.Count<1)
-            {
-                return;
-            }
-
-            if (first_record.Value.StreamType == StreamType.SRC)
-            {
-                throw new VA.AutomationException("Contains a SRC updates. Need SIDSRC updates");
-            }
-
-            if (first_record.Value.UpdateType == UpdateType.Result)
-            {
-                var stream = this.build_stream();
-                var unitcodes = this.GetUnitCodesArray();
-                double[] results = this.GetResultsArray();
-                var flags = this.ResultFlags;
-
-                int c = VA.ShapeSheet.ShapeSheetHelper.SetResults(page, stream, results, unitcodes, flags);
-            }
-            else 
-            {
-                var stream = this.build_stream();
-                var formulas = this.GetFormulasArray();
-                var flags = this.FormulaFlags;
-
-                int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas(page, stream, formulas, (short) flags);
-            }
+            this._Execute(page);
         }
 
         public void Execute(IVisio.Shape shape)
         {
+            this._Execute(shape);
+        }
+
+        private void _Execute(object visio_object)
+        {
+            if (!(visio_object is IVisio.Page || visio_object is IVisio.Shape))
+            {
+                throw new VA.AutomationException();
+            }
+
             if (this.items.Count < 1)
             {
                 return;
             }
 
-            if (first_record.Value.StreamType == StreamType.SIDSRC)
+            if (visio_object is IVisio.Shape)
             {
-                throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
+                if (first_record.Value.StreamType == StreamType.SIDSRC)
+                {
+                    throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
+                }
             }
-
+            else if (visio_object is IVisio.Page)
+            {
+                if (first_record.Value.StreamType == StreamType.SRC)
+                {
+                    throw new VA.AutomationException("Contains a SRC updates. Need SIDSRC updates");
+                }
+            }
+            
             if (first_record.Value.UpdateType == UpdateType.Result)
             {
 
@@ -247,16 +241,33 @@ namespace VisioAutomation.ShapeSheet
                 var unitcodes = this.GetUnitCodesArray();
                 var results = this.GetResultsArray();
                 var flags = this.ResultFlags;
-                int c = VA.ShapeSheet.ShapeSheetHelper.SetResults(shape, stream, results, unitcodes, flags);
+
+                if (visio_object is IVisio.Shape)
+                {
+                    int c = VA.ShapeSheet.ShapeSheetHelper.SetResults( (IVisio.Shape) visio_object, stream, results, unitcodes, flags);                    
+                }
+                else if (visio_object is IVisio.Page)
+                {
+                    int c = VA.ShapeSheet.ShapeSheetHelper.SetResults( (IVisio.Page) visio_object, stream, results, unitcodes, flags);
+                }
             }
             else
             {
                 var stream = this.build_stream();
                 var formulas = this.GetFormulasArray();
                 var flags = this.FormulaFlags;
-                int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas(shape, stream, formulas, flags);
+                if (visio_object is IVisio.Shape)
+                {
+                    int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas((IVisio.Shape) visio_object, stream, formulas, flags);
+                }
+                else if (visio_object is IVisio.Page)
+                {
+                    int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas( (IVisio.Page) visio_object, stream, formulas, (short) flags);
+                }
+
             }
         }
+
 
         private short [] build_stream()
         {
