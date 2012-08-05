@@ -5,48 +5,8 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet
 {
-    public static partial class ShapeSheetHelper
+    public static class ShapeSheetHelper
     {
-        private static object[] UnitCodesToObjectArray(IList<IVisio.VisUnitCodes> unitcodes)
-        {
-            if (unitcodes == null)
-            {
-                return null;
-            }
-
-            int num_items = unitcodes.Count;
-            var destination_array = new object[num_items];
-            for (int i = 0; i < num_items; i++)
-            {
-                destination_array[i] = unitcodes[i];
-            }
-            return destination_array;
-        }
-
-        private static IVisio.VisGetSetArgs ResultTypeToGetResultsFlag(System.Type result_type)
-        {
-            IVisio.VisGetSetArgs flags = 0;
-
-            if (result_type == typeof(int))
-            {
-                flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
-            }
-            else if (result_type == typeof(double))
-            {
-                flags = IVisio.VisGetSetArgs.visGetFloats;
-            }
-            else if (result_type == typeof(string))
-            {
-                flags = IVisio.VisGetSetArgs.visGetStrings;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException();
-            }
-
-            return flags;
-        }
-
         private static int check_stream_size(short[] stream, int chunksize)
         {
             if ((chunksize != 3) && (chunksize != 4))
@@ -164,8 +124,37 @@ namespace VisioAutomation.ShapeSheet
             }
 
             var result_type = typeof(TResult);
-            var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
-            var flags = VA.ShapeSheet.ShapeSheetHelper.ResultTypeToGetResultsFlag(result_type);
+            
+            // Create the unit codes array
+            object[] unitcodes_obj_array = null;
+            if (unitcodes!=null)
+            {
+                unitcodes_obj_array = new object[unitcodes.Count];
+                for (int i = 0; i < unitcodes.Count; i++)
+                {
+                    unitcodes_obj_array[i] = unitcodes[i];
+                }
+            }
+
+            // Calculate the flags based on the result datatype
+            IVisio.VisGetSetArgs flags = 0;
+            if (result_type == typeof(int))
+            {
+                flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
+            }
+            else if (result_type == typeof(double))
+            {
+                flags = IVisio.VisGetSetArgs.visGetFloats;
+            }
+            else if (result_type == typeof(string))
+            {
+                flags = IVisio.VisGetSetArgs.visGetStrings;
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+            }
+
 
             System.Array results_sa=null;
             if (visio_object is IVisio.Shape)
