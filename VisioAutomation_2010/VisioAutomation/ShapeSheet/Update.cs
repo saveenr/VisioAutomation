@@ -234,11 +234,13 @@ namespace VisioAutomation.ShapeSheet
                 
                 if (visio_object is IVisio.Shape)
                 {
+                    var shape = (IVisio.Shape) visio_object;
                     int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas((IVisio.Shape) visio_object, stream, formulas, flags);
                 }
                 else if (visio_object is IVisio.Page)
                 {
-                    int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas( (IVisio.Page) visio_object, stream, formulas, (short) flags);
+                    var page = (IVisio.Page) visio_object;
+                    int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas((IVisio.Page)visio_object, stream, formulas, flags);
                 }
             }
         }

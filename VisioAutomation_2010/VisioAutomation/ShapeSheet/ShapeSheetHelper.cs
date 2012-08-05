@@ -96,7 +96,7 @@ namespace VisioAutomation.ShapeSheet
             IVisio.Page page,
             short[] stream,
             IList<string> formulas,
-            short flags)
+            IVisio.VisGetSetArgs flags)
         {
             int numitems = VA.ShapeSheet.ShapeSheetHelper.check_stream_size(stream, 4);
 
@@ -115,9 +115,9 @@ namespace VisioAutomation.ShapeSheet
             var formula_obj_array = VA.ShapeSheet.ShapeSheetHelper.StringsToObjectArray(formulas);
 
             // Force UniversalSyntax 
-            flags |= (short)IVisio.VisGetSetArgs.visSetUniversalSyntax;
+            flags |= IVisio.VisGetSetArgs.visSetUniversalSyntax;
 
-            return page.SetFormulas(stream, formula_obj_array, flags);
+            return page.SetFormulas(stream, formula_obj_array, (short) flags);
         }
         public static short SetFormulas(
             IVisio.Shape shape,
@@ -137,9 +137,9 @@ namespace VisioAutomation.ShapeSheet
             var formula_obj_array = VA.ShapeSheet.ShapeSheetHelper.StringsToObjectArray(formulas);
 
             // Force UniversalSyntax 
-            short short_flags = (short)(((short)flags) | ((short)IVisio.VisGetSetArgs.visSetUniversalSyntax));
+            flags = flags | IVisio.VisGetSetArgs.visSetUniversalSyntax;
 
-            return shape.SetFormulas(stream, formula_obj_array, short_flags);
+            return shape.SetFormulas(stream, formula_obj_array, (short) flags);
         }
 
         public static short SetResults(
