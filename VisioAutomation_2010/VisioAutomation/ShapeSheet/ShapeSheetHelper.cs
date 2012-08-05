@@ -67,45 +67,50 @@ namespace VisioAutomation.ShapeSheet
 
         public static string[] GetFormulasU(IVisio.Page page, short[] stream)
         {
-            int numitems = check_stream_size(stream, 4);
-
-            if (numitems == 0)
-            {
-                return new string[0];
-            }
-
-            System.Array formulas_sa;
-
-            page.GetFormulasU(stream, out formulas_sa);
-
-            object[] formulas_obj_array = (object[])formulas_sa;
-
-            if (formulas_obj_array.Length != numitems)
-            {
-                string msg = string.Format(
-                    "Expected {0} items from GetFormulas but only received {1}",
-                    numitems,
-                    formulas_obj_array.Length);
-                throw new AutomationException(msg);
-            }
-
-            string[] formulas = new string[formulas_obj_array.Length];
-            formulas_obj_array.CopyTo(formulas, 0);
-
-            return formulas;
+            return _GetFormulasU(page, stream);
         }
 
         public static string[] GetFormulasU(IVisio.Shape shape, short[] stream)
         {
-            int numitems = check_stream_size(stream, 3);
+            return _GetFormulasU(shape, stream);
+        }
+
+        public static string[] _GetFormulasU(object visio_object, short[] stream)
+        {
+            if (!(visio_object is IVisio.Page || visio_object is IVisio.Shape))
+            {
+                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");
+            }
+
+            int numitems = -1; 
+
+            if (visio_object is IVisio.Shape)
+            {
+                numitems = check_stream_size(stream, 3);
+            }
+            else if (visio_object is IVisio.Page)
+            {
+                numitems = check_stream_size(stream, 4);
+            }
 
             if (numitems < 1)
             {
                 return new string[0];
             }
 
-            System.Array formulas_sa;
-            shape.GetFormulasU(stream, out formulas_sa);
+            System.Array formulas_sa=null;
+
+            if (visio_object is IVisio.Shape)
+            {
+                var shape = (IVisio.Shape)visio_object;
+                shape.GetFormulasU(stream, out formulas_sa);
+            }
+            else if (visio_object is IVisio.Page)
+            {
+                var page = (IVisio.Page)visio_object;
+                page.GetFormulasU(stream, out formulas_sa);
+            }
+
 
             object[] formulas_obj_array = (object[])formulas_sa;
 
@@ -123,6 +128,7 @@ namespace VisioAutomation.ShapeSheet
 
             return formulas;
         }
+
 
         public static TResult[] GetResults<TResult>(IVisio.Page page, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
