@@ -126,46 +126,32 @@ namespace VisioAutomation.ShapeSheet
 
         public static TResult[] GetResults<TResult>(IVisio.Page page, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            int numitems = check_stream_size(stream, 4);
-
-            if (numitems == 0)
-            {
-                return new TResult[0];
-            }
-
-            var result_type = typeof(TResult);
-            var flags = VA.ShapeSheet.ShapeSheetHelper.ResultTypeToGetResultsFlag(result_type);
-            var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
-
-            System.Array results_sa;
-
-            page.GetResults(
-                stream,
-                (short)flags,
-                unitcodes_obj_array,
-                out results_sa);
-
-            object[] results_obj_array = (object[])results_sa;
-
-            if (results_obj_array.Length != numitems)
-            {
-                string msg = string.Format(
-                    "Expected {0} items from GetResults but only received {1}",
-                    numitems,
-                    results_obj_array.Length);
-                throw new AutomationException(msg);
-            }
-
-            TResult[] results = new TResult[results_obj_array.Length];
-            results_obj_array.CopyTo(results, 0);
-
-            return results;
+            return _GetResults<TResult>(page, stream, unitcodes);
         }
 
         public static TResult[] GetResults<TResult>(IVisio.Shape shape, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            int numitems = check_stream_size(stream, 3);
+            return _GetResults<TResult>(shape, stream, unitcodes);
+        }
 
+        public static TResult[] _GetResults<TResult>(object visio_object, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
+        {
+            if (!(visio_object is IVisio.Page || visio_object is IVisio.Shape))
+            {
+                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");
+            }
+
+            int numitems = -1; 
+
+            if (visio_object is IVisio.Shape)
+            {
+                numitems = check_stream_size(stream, 3);
+            }
+            else if (visio_object is IVisio.Page)
+            {
+                numitems = check_stream_size(stream, 4);
+            }
+            
             if (numitems < 1)
             {
                 return new TResult[0];
@@ -175,12 +161,17 @@ namespace VisioAutomation.ShapeSheet
             var unitcodes_obj_array = VA.ShapeSheet.ShapeSheetHelper.UnitCodesToObjectArray(unitcodes);
             var flags = VA.ShapeSheet.ShapeSheetHelper.ResultTypeToGetResultsFlag(result_type);
 
-            System.Array results_sa;
-            shape.GetResults(
-                stream,
-                (short)flags,
-                unitcodes_obj_array,
-                out results_sa);
+            System.Array results_sa=null;
+            if (visio_object is IVisio.Shape)
+            {
+                var shape = (IVisio.Shape) visio_object;
+                shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+            }
+            else if (visio_object is IVisio.Page)
+            {
+                var page = (IVisio.Page)visio_object;
+                page.GetResults( stream, (short)flags, unitcodes_obj_array, out results_sa);
+            }
 
             object[] results_obj_array = (object[])results_sa;
 
