@@ -32,7 +32,15 @@ namespace VisioAutomation.ShapeSheet
 
         protected IVisio.VisGetSetArgs ResultFlags
         {
-            get { return get_common_flags(); }
+            get 
+            { 
+                var flags = get_common_flags();
+                if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
+                {
+                    flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
+                }
+                return flags;
+            }
         }
 
         protected IVisio.VisGetSetArgs FormulaFlags
@@ -196,8 +204,8 @@ namespace VisioAutomation.ShapeSheet
                 // Set Results
 
                 // Create the unitcodes and results arrays
-                var unitcodes = new IVisio.VisUnitCodes[this.updates.Count];
-                var results = new double[this.updates.Count];
+                var unitcodes = new object[this.updates.Count];
+                var results = new object[this.updates.Count];
                 int i = 0;
                 foreach (var update in this.updates)
                 {
@@ -210,11 +218,13 @@ namespace VisioAutomation.ShapeSheet
 
                 if (visio_object is IVisio.Shape)
                 {
-                    int c = VA.ShapeSheet.ShapeSheetHelper.SetResults( (IVisio.Shape) visio_object, stream, results, unitcodes, flags);                    
+                    var shape = (IVisio.Shape)visio_object;
+                    int c = shape.SetResults(stream, unitcodes, results, (short)flags);                    
                 }
                 else if (visio_object is IVisio.Page)
                 {
-                    int c = VA.ShapeSheet.ShapeSheetHelper.SetResults( (IVisio.Page) visio_object, stream, results, unitcodes, flags);
+                    var page = (IVisio.Page)visio_object;
+                    int c = page.SetResults(stream, unitcodes, results, (short)flags);
                 }
             }
             else
