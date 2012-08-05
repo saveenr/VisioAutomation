@@ -222,7 +222,7 @@ namespace VisioAutomation.ShapeSheet
                 // Set Formulas
 
                 // Create the formulas array
-                var formulas = new string[this.updates.Count];
+                var formulas = new object[this.updates.Count];
                 int i = 0;
                 foreach (var rec in this.updates)
                 {
@@ -235,12 +235,12 @@ namespace VisioAutomation.ShapeSheet
                 if (visio_object is IVisio.Shape)
                 {
                     var shape = (IVisio.Shape) visio_object;
-                    int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas((IVisio.Shape) visio_object, stream, formulas, flags);
+                    int c = shape.SetFormulas(stream, formulas, (short) flags);
                 }
                 else if (visio_object is IVisio.Page)
                 {
                     var page = (IVisio.Page) visio_object;
-                    int c = VA.ShapeSheet.ShapeSheetHelper.SetFormulas((IVisio.Page)visio_object, stream, formulas, flags);
+                    int c = page.SetFormulas(stream, formulas, (short) flags);
                 }
             }
         }

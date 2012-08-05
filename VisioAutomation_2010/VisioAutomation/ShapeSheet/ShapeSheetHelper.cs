@@ -90,57 +90,7 @@ namespace VisioAutomation.ShapeSheet
                 string msg = string.Format("Expected {0} results, instead have {1}", numitems, results.Count);
                 throw new AutomationException(msg);
             }
-        }
-        
-        public static short SetFormulas(
-            IVisio.Page page,
-            short[] stream,
-            IList<string> formulas,
-            IVisio.VisGetSetArgs flags)
-        {
-            int numitems = VA.ShapeSheet.ShapeSheetHelper.check_stream_size(stream, 4);
-
-            if (numitems < 1)
-            {
-                return 0;
-            }
-
-            CheckSetFormulasCount(formulas, numitems);
-
-            if (numitems == 0)
-            {
-                return 0;
-            }
-
-            var formula_obj_array = VA.ShapeSheet.ShapeSheetHelper.StringsToObjectArray(formulas);
-
-            // Force UniversalSyntax 
-            flags |= IVisio.VisGetSetArgs.visSetUniversalSyntax;
-
-            return page.SetFormulas(stream, formula_obj_array, (short) flags);
-        }
-        public static short SetFormulas(
-            IVisio.Shape shape,
-            short[] stream,
-            IList<string> formulas,
-            IVisio.VisGetSetArgs flags)
-        {
-            int numitems = VA.ShapeSheet.ShapeSheetHelper.check_stream_size(stream, 3);
-
-            CheckSetFormulasCount(formulas,numitems);
-
-            if (numitems == 0)
-            {
-                return 0;
-            }
-
-            var formula_obj_array = VA.ShapeSheet.ShapeSheetHelper.StringsToObjectArray(formulas);
-
-            // Force UniversalSyntax 
-            flags = flags | IVisio.VisGetSetArgs.visSetUniversalSyntax;
-
-            return shape.SetFormulas(stream, formula_obj_array, (short) flags);
-        }
+        }       
 
         public static short SetResults(
             IVisio.Shape shape,
