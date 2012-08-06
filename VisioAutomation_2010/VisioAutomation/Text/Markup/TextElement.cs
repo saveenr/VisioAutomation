@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using VA = VisioAutomation;
@@ -10,21 +9,21 @@ namespace VisioAutomation.Text.Markup
 {
     public class TextElement : Node
     {
-        public CharacterFormatCells CharacterFormatCells { get; set; }
-        public ParagraphFormatCells ParagraphFormatCells { get; set; }
+        public CharacterCells CharacterCells { get; set; }
+        public ParagraphCells ParagraphCells { get; set; }
 
         public TextElement() :
             base(NodeType.Element)
         {
-            this.CharacterFormatCells = new CharacterFormatCells();
-            this.ParagraphFormatCells  = new ParagraphFormatCells();
+            this.CharacterCells = new CharacterCells();
+            this.ParagraphCells = new ParagraphCells();
         }
 
         public TextElement(string text) :
             base(NodeType.Element)
         {
-            this.CharacterFormatCells = new CharacterFormatCells();
-            this.ParagraphFormatCells = new ParagraphFormatCells();
+            this.CharacterCells = new CharacterCells();
+            this.ParagraphCells = new ParagraphCells();
             this.AddText(text);
         }
 
@@ -172,7 +171,7 @@ namespace VisioAutomation.Text.Markup
             {
 
                 // Apply character formatting
-                var charcells = region.Element.CharacterFormatCells;
+                var charcells = region.Element.CharacterCells;
                 if (charcells != null)
                 {
                     var chars = shape.Characters;
@@ -187,12 +186,12 @@ namespace VisioAutomation.Text.Markup
                     }
 
                     update.Clear();
-                    charcells.Apply(update, rownum);
+                    charcells.ApplyFormulas(update, rownum);
                     update.Execute(shape);
                 }
 
                 // Apply paragraph formatting
-                var paracells = region.Element.ParagraphFormatCells;
+                var paracells = region.Element.ParagraphCells;
                 if (paracells != null)
                 {
                     var chars = shape.Characters;
@@ -207,7 +206,7 @@ namespace VisioAutomation.Text.Markup
                     }
 
                     update.Clear();
-                    paracells.Apply(update, rownum);
+                    paracells.ApplyFormulas(update, rownum);
                     update.Execute(shape);
                 }
             }

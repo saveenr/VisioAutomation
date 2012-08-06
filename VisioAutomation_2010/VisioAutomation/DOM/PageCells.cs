@@ -65,10 +65,5 @@ namespace VisioAutomation.DOM
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ResizePage, ResizePage);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.RouteStyle, RouteStyle);
         }
-
-        public PageCells ShallowCopy()
-        {
-            return (PageCells) this.MemberwiseClone();
-        }
     }
 }
