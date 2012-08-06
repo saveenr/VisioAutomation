@@ -168,19 +168,18 @@ namespace VisioAutomation.ShapeSheet
                 page.GetResults( stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
 
-            object[] results_obj_array = (object[])results_sa;
-
-            if (results_obj_array.Length != numitems)
+            // Convert the System.Array back to a strongly typed array
+            if (results_sa.Length != numitems)
             {
                 string msg = string.Format(
                     "Expected {0} items from GetResults but only received {1}",
                     numitems,
-                    results_obj_array.Length);
+                    results_sa.Length);
                 throw new AutomationException(msg);
             }
 
-            TResult[] results = new TResult[results_obj_array.Length];
-            results_obj_array.CopyTo(results, 0);
+            TResult[] results = new TResult[results_sa.Length];
+            results_sa.CopyTo(results, 0 );
 
             return results;
         }
