@@ -55,13 +55,11 @@ namespace TestVisioAutomation
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(src_fg, 10, IVisio.VisUnitCodes.visNoCast);
             update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNoCast);
             update.Execute(shape1);
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddColumn(src_fg);
             var col_linepat = query.AddColumn(src_linepat);
 
             // Retrieve the values
@@ -69,7 +67,6 @@ namespace TestVisioAutomation
             var results = query.GetResults<double>(shape1);
 
             // Verify
-            //Assert.AreEqual("RGB(255,0,0)", formulas[0, col_fg]);
             Assert.AreEqual("7", formulas[0, col_linepat]);
             Assert.AreEqual(7, results[0, col_linepat]);
 
