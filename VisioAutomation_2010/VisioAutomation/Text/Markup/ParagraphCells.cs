@@ -6,22 +6,21 @@ namespace VisioAutomation.Text.Markup
 {
     public class ParagraphCells 
     {
-        ////public string BulletString;
-        public VA.ShapeSheet.FormulaLiteral IndentFirst { get; set; }
-        public VA.ShapeSheet.FormulaLiteral IndentRight { get; set; }
-        public VA.ShapeSheet.FormulaLiteral IndentLeft { get; set; }
-        public VA.ShapeSheet.FormulaLiteral SpacingBefore { get; set; }
-        public VA.ShapeSheet.FormulaLiteral SpacingAfter { get; set; }
-        public VA.ShapeSheet.FormulaLiteral SpacingLine { get; set; }
-        public VA.ShapeSheet.FormulaLiteral HorizontalAlign { get; set; }
         public VA.ShapeSheet.FormulaLiteral Bullet { get; set; }
         public VA.ShapeSheet.FormulaLiteral BulletFont { get; set; }
         public VA.ShapeSheet.FormulaLiteral BulletFontSize { get; set; }
-        public VA.ShapeSheet.FormulaLiteral LocBulletFont { get; set; }
-        public VA.ShapeSheet.FormulaLiteral TextPosAfterBullet { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Flags { get; set; }
         public VA.ShapeSheet.FormulaLiteral BulletString { get; set; }
-
+        public VA.ShapeSheet.FormulaLiteral Flags { get; set; }
+        public VA.ShapeSheet.FormulaLiteral HorizontalAlign { get; set; }
+        public VA.ShapeSheet.FormulaLiteral IndentFirst { get; set; }
+        public VA.ShapeSheet.FormulaLiteral IndentLeft { get; set; }
+        public VA.ShapeSheet.FormulaLiteral IndentRight { get; set; }
+        public VA.ShapeSheet.FormulaLiteral LocBulletFont { get; set; }
+        public VA.ShapeSheet.FormulaLiteral SpacingAfter { get; set; }
+        public VA.ShapeSheet.FormulaLiteral SpacingBefore { get; set; }
+        public VA.ShapeSheet.FormulaLiteral SpacingLine { get; set; }
+        public VA.ShapeSheet.FormulaLiteral TextPosAfterBullet { get; set; }
+        
         internal void ApplyFormulas(VA.ShapeSheet.Update update, short row)
         {
             update.SetFormulaIgnoreNull(SRCCON.Para_IndLeft.ForRow(row), this.IndentLeft);

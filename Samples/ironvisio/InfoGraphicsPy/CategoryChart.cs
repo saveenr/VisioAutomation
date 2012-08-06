@@ -46,34 +46,34 @@ namespace InfoGraphicsPy
             this.Items = new List<CategoryCell>();
 
             titleformat.VerticalAlign = 0;
-            titleformat.HAlign = 0;
+            titleformat.ParaHorizontalAlign = 0;
             titleformat.CharSize = VA.Convert.PointsToInches(TitleFontSize);
             titleformat.LinePattern = 0;
             titleformat.LineWeight = 0;
 
             cellformat.VerticalAlign = 0;
-            cellformat.HAlign = 0;
+            cellformat.ParaHorizontalAlign = 0;
             cellformat.CharSize = VA.Convert.PointsToInches(CellFontSize);
             cellformat.LinePattern = 0;
             cellformat.LineWeight = 0;
             cellformat.FillForegnd = CellFill;
 
             subcellformat.VerticalAlign = 0;
-            subcellformat.HAlign = 0;
+            subcellformat.ParaHorizontalAlign = 0;
             subcellformat.CharSize = VA.Convert.PointsToInches(CellFontSize);
             subcellformat.LinePattern = 0;
             subcellformat.LineWeight = 0;
             subcellformat.FillForegnd = SubCellFill;
 
             xcatformat.VerticalAlign = 2;
-            xcatformat.HAlign = 1;
+            xcatformat.ParaHorizontalAlign = 1;
             xcatformat.CharSize = VA.Convert.PointsToInches(CategoryFontSize);
             xcatformat.LinePattern = 0;
             xcatformat.LineWeight = 0;
             xcatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
             ycatformat.VerticalAlign = 2;
-            ycatformat.HAlign = 0;
+            ycatformat.ParaHorizontalAlign = 0;
             ycatformat.CharSize = VA.Convert.PointsToInches(CategoryFontSize);
             ycatformat.LinePattern = 0;
             ycatformat.LineWeight = 0;

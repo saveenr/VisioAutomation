@@ -45,7 +45,7 @@ namespace VisioAutomationSamples
                 var cells = new ShapeCells();
                 tn.Cells = cells;
 
-                cells.HAlign = 0; // align text to left
+                cells.ParaHorizontalAlign = 0; // align text to left
                 cells.VerticalAlign = 0; // align text block to top
                 cells.CharFont = font.ID;
                 cells.CharSize = "10pt";

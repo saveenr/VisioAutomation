@@ -159,7 +159,7 @@ namespace VisioAutomationSamples
             major_cells.FillForegnd = "rgb(245,245,245)";
             major_cells.CharFont = 0;
             major_cells.CharSize = "12pt";
-            major_cells.HAlign = "0";
+            major_cells.ParaHorizontalAlign = "0";
             major_cells.VerticalAlign = "0";
             major_cells.LineWeight = "0";
             major_cells.LinePattern = "0";
@@ -168,7 +168,7 @@ namespace VisioAutomationSamples
             minor_cells.FillForegnd = "rgb(230,230,230)";
             minor_cells.CharFont = 0;
             minor_cells.CharSize = "10pt";
-            minor_cells.HAlign = "0";
+            minor_cells.ParaHorizontalAlign = "0";
             minor_cells.VerticalAlign = "0";
             minor_cells.LineWeight = "0";
             minor_cells.LinePattern = "0";
@@ -177,7 +177,7 @@ namespace VisioAutomationSamples
             item_cells.CharFont = 0;
             item_cells.FillPattern = "0";
             item_cells.CharSize = "8pt";
-            item_cells.HAlign = "0";
+            item_cells.ParaHorizontalAlign = "0";
             item_cells.VerticalAlign = "0";
             item_cells.LineWeight = "0";
             item_cells.LinePattern = "0";

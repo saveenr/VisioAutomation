@@ -50,19 +50,19 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral CharColor { get; set; }
         public ShapeSheet.FormulaLiteral CharComplexScriptFont { get; set; }
         public ShapeSheet.FormulaLiteral CharComplexScriptSize { get; set; }
-        public ShapeSheet.FormulaLiteral CharDoubleStrikethrough { get; set; }
-        public ShapeSheet.FormulaLiteral CharDoubleULine { get; set; }
+        public ShapeSheet.FormulaLiteral CharDoubleStrikeThrough { get; set; }
+        public ShapeSheet.FormulaLiteral CharDoubleUnderline { get; set; }
         public ShapeSheet.FormulaLiteral CharFont { get; set; }
+        public ShapeSheet.FormulaLiteral CharFontScale { get; set; }
         public ShapeSheet.FormulaLiteral CharLangID { get; set; }
+        public ShapeSheet.FormulaLiteral CharLetterspace { get; set; }
         public ShapeSheet.FormulaLiteral CharLocale { get; set; }
         public ShapeSheet.FormulaLiteral CharLocalizeFont { get; set; }
         public ShapeSheet.FormulaLiteral CharOverline { get; set; }
         public ShapeSheet.FormulaLiteral CharPerpendicular { get; set; }
         public ShapeSheet.FormulaLiteral CharPos { get; set; }
         public ShapeSheet.FormulaLiteral CharRTLText { get; set; }
-        public ShapeSheet.FormulaLiteral CharScale { get; set; }
         public ShapeSheet.FormulaLiteral CharSize { get; set; }
-        public ShapeSheet.FormulaLiteral CharSpacing { get; set; }
         public ShapeSheet.FormulaLiteral CharStrikethru { get; set; }
         public ShapeSheet.FormulaLiteral CharStyle { get; set; }
         public ShapeSheet.FormulaLiteral CharTransparency { get; set; }
@@ -80,20 +80,20 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral VerticalAlign { get; set; }
 
         // Paragraph
-        public ShapeSheet.FormulaLiteral BulletIndex { get; set; }
-        public ShapeSheet.FormulaLiteral BulletFont { get; set; }
-        public ShapeSheet.FormulaLiteral BulletFontSize { get; set; }
-        public ShapeSheet.FormulaLiteral BulletString { get; set; }
-        public ShapeSheet.FormulaLiteral Flags { get; set; }
-        public ShapeSheet.FormulaLiteral HAlign { get; set; }
-        public ShapeSheet.FormulaLiteral IndFirst { get; set; }
-        public ShapeSheet.FormulaLiteral IndLeft { get; set; }
-        public ShapeSheet.FormulaLiteral IndRight { get; set; }
-        public ShapeSheet.FormulaLiteral LocBulletFont { get; set; }
-        public ShapeSheet.FormulaLiteral SpAfter { get; set; }
-        public ShapeSheet.FormulaLiteral SpBefore { get; set; }
-        public ShapeSheet.FormulaLiteral SpLine { get; set; }
-        public ShapeSheet.FormulaLiteral TextPosAfterBullet { get; set; }
+        public ShapeSheet.FormulaLiteral ParaBullet { get; set; }
+        public ShapeSheet.FormulaLiteral ParaBulletFont { get; set; }
+        public ShapeSheet.FormulaLiteral ParaBulletFontSize { get; set; }
+        public ShapeSheet.FormulaLiteral ParaBulletString { get; set; }
+        public ShapeSheet.FormulaLiteral ParaFlags { get; set; }
+        public ShapeSheet.FormulaLiteral ParaHorizontalAlign { get; set; }
+        public ShapeSheet.FormulaLiteral ParaIndentFirst { get; set; }
+        public ShapeSheet.FormulaLiteral ParaIndentLeft { get; set; }
+        public ShapeSheet.FormulaLiteral ParaIndentRight { get; set; }
+        public ShapeSheet.FormulaLiteral ParaLocBulletFont { get; set; }
+        public ShapeSheet.FormulaLiteral ParaSpacingAfter { get; set; }
+        public ShapeSheet.FormulaLiteral ParaSpacingBefore { get; set; }
+        public ShapeSheet.FormulaLiteral ParaSpacingLine { get; set; }
+        public ShapeSheet.FormulaLiteral ParaTextPosAfterBullet { get; set; }
 
         //TextXForm
         public ShapeSheet.FormulaLiteral TxtAngle { get; set; }
@@ -156,7 +156,7 @@ namespace VisioAutomation.DOM
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Font, CharFont);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Color, CharColor);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Size, CharSize);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Letterspace, CharSpacing);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Letterspace, CharLetterspace);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Style, CharStyle);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_ColorTrans, CharTransparency);
 
@@ -182,20 +182,20 @@ namespace VisioAutomation.DOM
 
             // Paragraph
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Bullet, BulletIndex);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, BulletFont);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFontSize, BulletFontSize);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletStr, BulletString);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, Flags);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HorzAlign, HAlign);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndFirst, IndFirst);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndLeft, IndLeft);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndRight, IndRight);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_LocalizeBulletFont, LocBulletFont);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpAfter, SpAfter);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpBefore, SpBefore);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpLine, SpLine);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_TextPosAfterBullet, TextPosAfterBullet);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Bullet, ParaBullet);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, ParaBulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFontSize, ParaBulletFontSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletStr, ParaBulletString);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, ParaFlags);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HorzAlign, ParaHorizontalAlign);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndFirst, ParaIndentFirst);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndLeft, ParaIndentLeft);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndRight, ParaIndentRight);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_LocalizeBulletFont, ParaLocBulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpAfter, ParaSpacingAfter);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpBefore, ParaSpacingBefore);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpLine, ParaSpacingLine);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_TextPosAfterBullet, ParaTextPosAfterBullet);
 
             // TextXForm
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtAngle, TxtAngle);
@@ -269,8 +269,8 @@ namespace VisioAutomation.DOM
             if (this.CharColor.HasValue) { other.CharColor = this.CharColor; }
             if (this.CharComplexScriptFont.HasValue) { other.CharComplexScriptFont = this.CharComplexScriptFont; }
             if (this.CharComplexScriptSize.HasValue) { other.CharComplexScriptSize = this.CharComplexScriptSize; }
-            if (this.CharDoubleStrikethrough.HasValue) { other.CharDoubleStrikethrough = this.CharDoubleStrikethrough; }
-            if (this.CharDoubleULine.HasValue) { other.CharDoubleULine = this.CharDoubleULine; }
+            if (this.CharDoubleStrikeThrough.HasValue) { other.CharDoubleStrikeThrough = this.CharDoubleStrikeThrough; }
+            if (this.CharDoubleUnderline.HasValue) { other.CharDoubleUnderline = this.CharDoubleUnderline; }
             if (this.CharFont.HasValue) { other.CharFont = this.CharFont; }
             if (this.CharLangID.HasValue) { other.CharLangID = this.CharLangID; }
             if (this.CharLocale.HasValue) { other.CharLocale = this.CharLocale; }
@@ -279,9 +279,9 @@ namespace VisioAutomation.DOM
             if (this.CharPerpendicular.HasValue) { other.CharPerpendicular = this.CharPerpendicular; }
             if (this.CharPos.HasValue) { other.CharPos = this.CharPos; }
             if (this.CharRTLText.HasValue) { other.CharRTLText = this.CharRTLText; }
-            if (this.CharScale.HasValue) { other.CharScale = this.CharScale; }
+            if (this.CharFontScale.HasValue) { other.CharFontScale = this.CharFontScale; }
             if (this.CharSize.HasValue) { other.CharSize = this.CharSize; }
-            if (this.CharSpacing.HasValue) { other.CharSpacing = this.CharSpacing; }
+            if (this.CharLetterspace.HasValue) { other.CharLetterspace = this.CharLetterspace; }
             if (this.CharStrikethru.HasValue) { other.CharStrikethru = this.CharStrikethru; }
             if (this.CharStyle.HasValue) { other.CharStyle = this.CharStyle; }
             if (this.CharTransparency.HasValue) { other.CharTransparency = this.CharTransparency; }
@@ -295,20 +295,20 @@ namespace VisioAutomation.DOM
             if (this.TextDirection.HasValue) { other.TextDirection = this.TextDirection; }
             if (this.TopMargin.HasValue) { other.TopMargin = this.TopMargin; }
             if (this.VerticalAlign.HasValue) { other.VerticalAlign = this.VerticalAlign; }
-            if (this.BulletIndex.HasValue) { other.BulletIndex = this.BulletIndex; }
-            if (this.BulletFont.HasValue) { other.BulletFont = this.BulletFont; }
-            if (this.BulletFontSize.HasValue) { other.BulletFontSize = this.BulletFontSize; }
-            if (this.BulletString.HasValue) { other.BulletString = this.BulletString; }
-            if (this.Flags.HasValue) { other.Flags = this.Flags; }
-            if (this.HAlign.HasValue) { other.HAlign = this.HAlign; }
-            if (this.IndFirst.HasValue) { other.IndFirst = this.IndFirst; }
-            if (this.IndLeft.HasValue) { other.IndLeft = this.IndLeft; }
-            if (this.IndRight.HasValue) { other.IndRight = this.IndRight; }
-            if (this.LocBulletFont.HasValue) { other.LocBulletFont = this.LocBulletFont; }
-            if (this.SpAfter.HasValue) { other.SpAfter = this.SpAfter; }
-            if (this.SpBefore.HasValue) { other.SpBefore = this.SpBefore; }
-            if (this.SpLine.HasValue) { other.SpLine = this.SpLine; }
-            if (this.TextPosAfterBullet.HasValue) { other.TextPosAfterBullet = this.TextPosAfterBullet; }
+            if (this.ParaBullet.HasValue) { other.ParaBullet = this.ParaBullet; }
+            if (this.ParaBulletFont.HasValue) { other.ParaBulletFont = this.ParaBulletFont; }
+            if (this.ParaBulletFontSize.HasValue) { other.ParaBulletFontSize = this.ParaBulletFontSize; }
+            if (this.ParaBulletString.HasValue) { other.ParaBulletString = this.ParaBulletString; }
+            if (this.ParaFlags.HasValue) { other.ParaFlags = this.ParaFlags; }
+            if (this.ParaHorizontalAlign.HasValue) { other.ParaHorizontalAlign = this.ParaHorizontalAlign; }
+            if (this.ParaIndentFirst.HasValue) { other.ParaIndentFirst = this.ParaIndentFirst; }
+            if (this.ParaIndentLeft.HasValue) { other.ParaIndentLeft = this.ParaIndentLeft; }
+            if (this.ParaIndentRight.HasValue) { other.ParaIndentRight = this.ParaIndentRight; }
+            if (this.ParaLocBulletFont.HasValue) { other.ParaLocBulletFont = this.ParaLocBulletFont; }
+            if (this.ParaSpacingAfter.HasValue) { other.ParaSpacingAfter = this.ParaSpacingAfter; }
+            if (this.ParaSpacingBefore.HasValue) { other.ParaSpacingBefore = this.ParaSpacingBefore; }
+            if (this.ParaSpacingLine.HasValue) { other.ParaSpacingLine = this.ParaSpacingLine; }
+            if (this.ParaTextPosAfterBullet.HasValue) { other.ParaTextPosAfterBullet = this.ParaTextPosAfterBullet; }
             if (this.TxtAngle.HasValue) { other.TxtAngle = this.TxtAngle; }
             if (this.TxtHeight.HasValue) { other.TxtHeight = this.TxtHeight; }
             if (this.TxtLocPinX.HasValue) { other.TxtLocPinX = this.TxtLocPinX; }

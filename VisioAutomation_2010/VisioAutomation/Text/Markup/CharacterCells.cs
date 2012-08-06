@@ -6,27 +6,27 @@ namespace VisioAutomation.Text.Markup
 {
     public class CharacterCells
     {
-        public VA.ShapeSheet.FormulaLiteral Color { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Font { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Size { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Style { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Transparency { get; set; }
         public VA.ShapeSheet.FormulaLiteral AsianFont { get; set; }
         public VA.ShapeSheet.FormulaLiteral Case { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Color { get; set; }
         public VA.ShapeSheet.FormulaLiteral ComplexScriptFont { get; set; }
         public VA.ShapeSheet.FormulaLiteral ComplexScriptSize { get; set; }
         public VA.ShapeSheet.FormulaLiteral DoubleStrikeThrough { get; set; }
         public VA.ShapeSheet.FormulaLiteral DoubleUnderline { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Font { get; set; }
+        public VA.ShapeSheet.FormulaLiteral FontScale { get; set; }
         public VA.ShapeSheet.FormulaLiteral LangID { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Letterspace { get; set; }
         public VA.ShapeSheet.FormulaLiteral Locale { get; set; }
         public VA.ShapeSheet.FormulaLiteral LocalizeFont { get; set; }
         public VA.ShapeSheet.FormulaLiteral Overline { get; set; }
         public VA.ShapeSheet.FormulaLiteral Perpendicular { get; set; }
         public VA.ShapeSheet.FormulaLiteral Pos { get; set; }
         public VA.ShapeSheet.FormulaLiteral RTLText { get; set; }
-        public VA.ShapeSheet.FormulaLiteral FontScale { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Letterspace { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Size { get; set; }
         public VA.ShapeSheet.FormulaLiteral Strikethru { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Style { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Transparency { get; set; }
         public VA.ShapeSheet.FormulaLiteral UseVertical { get; set; }
 
         internal void ApplyFormulas(VA.ShapeSheet.Update update, short row)

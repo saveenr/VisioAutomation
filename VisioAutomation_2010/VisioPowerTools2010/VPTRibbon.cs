@@ -217,7 +217,7 @@ namespace VisioPowerTools2010
 
                 shape0.Text = new VA.Text.Markup.TextElement(sb.ToString());
                 shape0.CharFontName = "Segoe UI";
-                shape0.Cells.HAlign = "0";
+                shape0.Cells.ParaHorizontalAlign = "0";
                 shape0.Cells.VerticalAlign = "0";
                 shape0.Cells.LinePattern = "0";
                 shape0.Cells.LineWeight = "0";

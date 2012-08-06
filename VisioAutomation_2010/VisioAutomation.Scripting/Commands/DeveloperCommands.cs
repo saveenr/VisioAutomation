@@ -310,7 +310,7 @@ namespace VisioAutomation.Scripting.Commands
                 node.Cells.FillForegnd = def_fillcolor;
                 node.Cells.CharFont = fontid;
                 node.Cells.LineColor = def_linecolor;
-                node.Cells.HAlign = "0";
+                node.Cells.ParaHorizontalAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
@@ -479,7 +479,7 @@ namespace VisioAutomation.Scripting.Commands
                 //node.ShapeCells.LineWeight = "0";
                 //node.ShapeCells.LinePattern = "0";
                 node.Cells.LineColor = def_linecolor;
-                node.Cells.HAlign = "0";
+                node.Cells.ParaHorizontalAlign = "0";
                 node.Cells.VerticalAlign = "0";
             }
 

@@ -66,7 +66,7 @@ namespace VisioAutomationSamples
             fontname_cells.FillPattern = 0;
             fontname_cells.LinePattern = 0;
             fontname_cells.LineWeight = 0.0;
-            fontname_cells.HAlign = 0;
+            fontname_cells.ParaHorizontalAlign = 0;
             fontname_cells.CharSize = VA.Convert.PointsToInches(36.0);
 
             var charbox_cells = new VA.DOM.ShapeCells();
@@ -74,7 +74,7 @@ namespace VisioAutomationSamples
             charbox_cells.LinePattern = 1;
             charbox_cells.LineWeight = 0.0;
             charbox_cells.LineColor = "rgb(150,150,150)";
-            charbox_cells.HAlign = 1;
+            charbox_cells.ParaHorizontalAlign = 1;
             charbox_cells.CharSize = VA.Convert.PointsToInches(24.0);
 
             foreach (string fontname in fontnames)
