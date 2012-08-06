@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Authentication;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
@@ -182,7 +181,7 @@ namespace VisioAutomation.Text.Markup
 
                     if (rownum < 0)
                     {
-                        throw new AuthenticationException("Could not create Character row");
+                        throw new VA.AutomationException("Could not create Character row");
                     }
 
                     update.Clear();
@@ -202,7 +201,7 @@ namespace VisioAutomation.Text.Markup
 
                     if (rownum < 0)
                     {
-                        throw new AuthenticationException("Could not create Paragraph row");
+                        throw new VA.AutomationException("Could not create Paragraph row");
                     }
 
                     update.Clear();

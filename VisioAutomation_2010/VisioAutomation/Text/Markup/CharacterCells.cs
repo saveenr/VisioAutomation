@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Authentication;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
@@ -57,6 +54,32 @@ namespace VisioAutomation.Text.Markup
             update.SetFormulaIgnoreNull(SRCCON.Char_RTLText.ForRow(row), this.RTLText);
             update.SetFormulaIgnoreNull(SRCCON.Char_Strikethru.ForRow(row), this.Strikethru);
             update.SetFormulaIgnoreNull(SRCCON.Char_UseVertical.ForRow(row), this.UseVertical);
+        }
+
+        public void ApplyFormulasTo(CharacterCells other)
+        {
+            if (this.AsianFont.HasValue) { other.AsianFont = this.AsianFont; }
+            if (this.Case.HasValue) { other.Case = this.Case; }
+            if (this.Color.HasValue) { other.Color = this.Color; }
+            if (this.ComplexScriptFont.HasValue) { other.ComplexScriptFont = this.ComplexScriptFont; }
+            if (this.ComplexScriptSize.HasValue) { other.ComplexScriptSize = this.ComplexScriptSize; }
+            if (this.DoubleStrikeThrough.HasValue) { other.DoubleStrikeThrough = this.DoubleStrikeThrough; }
+            if (this.DoubleUnderline.HasValue) { other.DoubleUnderline = this.DoubleUnderline; }
+            if (this.Font.HasValue) { other.Font = this.Font; }
+            if (this.LangID.HasValue) { other.LangID = this.LangID; }
+            if (this.Locale.HasValue) { other.Locale = this.Locale; }
+            if (this.LocalizeFont.HasValue) { other.LocalizeFont = this.LocalizeFont; }
+            if (this.Overline.HasValue) { other.Overline = this.Overline; }
+            if (this.Perpendicular.HasValue) { other.Perpendicular = this.Perpendicular; }
+            if (this.Pos.HasValue) { other.Pos = this.Pos; }
+            if (this.RTLText.HasValue) { other.RTLText = this.RTLText; }
+            if (this.FontScale.HasValue) { other.FontScale = this.FontScale; }
+            if (this.Size.HasValue) { other.Size = this.Size; }
+            if (this.Letterspace.HasValue) { other.Letterspace = this.Letterspace; }
+            if (this.Strikethru.HasValue) { other.Strikethru = this.Strikethru; }
+            if (this.Style.HasValue) { other.Style = this.Style; }
+            if (this.Transparency.HasValue) { other.Transparency = this.Transparency; }
+            if (this.UseVertical.HasValue) { other.UseVertical = this.UseVertical; }
         }
     }
 }
