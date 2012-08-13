@@ -1,4 +1,5 @@
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA=VisioAutomation;
 
 namespace VisioAutomation.Application
 {
@@ -9,43 +10,19 @@ namespace VisioAutomation.Application
     /// </summary>
     public class AlertResponseScope : System.IDisposable
     {
-        private AlertResponseCode old_alertresponse;
-        private bool configured = false;
+        private VA.Application.AlertResponseCode old_alertresponse;
         private readonly IVisio.Application app;
-        private readonly AlertResponseCode conf_val;
 
-        internal AlertResponseScope(IVisio.Application app, AlertResponseCode value)
+        internal AlertResponseScope(IVisio.Application app, VA.Application.AlertResponseCode value)
         {
-            if (app == null)
-            {
-                throw new System.ArgumentNullException("app");
-            }
-
-            this.configured = false;
             this.app = app;
-            this.conf_val = value;
-            this.begin_config();
-        }
-
-        private void begin_config()
-        {
-            this.old_alertresponse = (AlertResponseCode) this.app.AlertResponse;
-            this.app.AlertResponse = (short) this.conf_val;
-            this.configured = true;
-        }
-
-        private void end_config()
-        {
-            if (this.configured)
-            {
-                this.app.AlertResponse = (short) this.old_alertresponse;
-                this.configured = false;
-            }
+            this.old_alertresponse = (VA.Application.AlertResponseCode)this.app.AlertResponse;
+            this.app.AlertResponse = (short)value;
         }
 
         public void Dispose()
         {
-            this.end_config();
+            this.app.AlertResponse = (short)this.old_alertresponse;
         }
     }
 }
