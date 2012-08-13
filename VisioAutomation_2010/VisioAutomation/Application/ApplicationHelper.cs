@@ -30,13 +30,6 @@ namespace VisioAutomation.Application
             app.Quit();
         }       
 
-        public static string GetApplicationWindowText( IVisio.Application app)
-        {
-            var visio_window_handle = new System.IntPtr(app.WindowHandle32);
-            string visio_window_title = VA.Internal.Interop.NativeMethods.GetWindowText(visio_window_handle);
-            return visio_window_title;
-        }
-
         public static string GetXMLErrorLogFilename(IVisio.Application app)
         {
             // the location of the xml error log file is specific to the user

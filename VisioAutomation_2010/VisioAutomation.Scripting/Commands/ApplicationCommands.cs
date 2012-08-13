@@ -14,11 +14,6 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public string GetWindowText()
-        {
-            return VA.Application.ApplicationHelper.GetApplicationWindowText(this.Session.VisioApplication);
-        }
-
         public void WindowToFront()
         {
             var app = this.Session.VisioApplication;
