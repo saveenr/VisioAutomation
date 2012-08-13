@@ -54,37 +54,42 @@ namespace VisioAutomation.DOM
             this.VisioPage = page;
 
             var page_sheet = page.PageSheet;
-            
-            var update = new VA.ShapeSheet.Update();
-            this.PageCells.Apply(update, (short)page_sheet.ID);
-            update.Execute(page);
 
-            if (this.Size.HasValue)
+            var app = page.Application;
+            using (var perfscope = new VA.Application.PerfScope(app))
             {
-                page.SetSize(this.Size.Value);
-            }
-            
-            // Then render the shapes
-            this.Shapes.Render(page);
+                var update = new VA.ShapeSheet.Update();
+                this.PageCells.Apply(update, (short)page_sheet.ID);
+                update.Execute(page);
 
-            // Perform any additional layout
-            if (this.Layout!=null)
-            {
-                this.Layout.Apply(page);
-            }
-
-            // Optionally, perform page resizing to fit contents
-            if (this.ResizeToFit)
-            {
-                if (this.ResizeToFitMargin.HasValue)
+                if (this.Size.HasValue)
                 {
-                    page.ResizeToFitContents(this.ResizeToFitMargin.Value);
+                    page.SetSize(this.Size.Value);
                 }
-                else
+
+                // Then render the shapes
+                this.Shapes.Render(page);
+
+                // Perform any additional layout
+                if (this.Layout != null)
                 {
-                    page.ResizeToFitContents();
+                    this.Layout.Apply(page);
+                }
+
+                // Optionally, perform page resizing to fit contents
+                if (this.ResizeToFit)
+                {
+                    if (this.ResizeToFitMargin.HasValue)
+                    {
+                        page.ResizeToFitContents(this.ResizeToFitMargin.Value);
+                    }
+                    else
+                    {
+                        page.ResizeToFitContents();
+                    }
                 }
             }
+
         }
     }
 }
