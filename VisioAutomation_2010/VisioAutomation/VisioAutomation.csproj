@@ -146,7 +146,7 @@
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
     <Compile Include="Layout\LockCells.cs" />
-    <Compile Include="Internal\PerfSettings.cs" />
+    <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="Selection\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />

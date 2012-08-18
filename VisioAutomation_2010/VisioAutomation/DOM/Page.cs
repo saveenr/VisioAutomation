@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.Application;
+using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
@@ -14,11 +15,18 @@ namespace VisioAutomation.DOM
         public string Name;
         public VA.Layout.PageLayout.Layout Layout;
         public IVisio.Page VisioPage;
+        public VA.Application.PerfSettings PerfSettings { get; private set; }
 
         public Page()
         {
             this.Shapes = new ShapeList();
             this.PageCells = new VA.Pages.PageCells();
+
+            this.PerfSettings = new VA.Application.PerfSettings();
+            this.PerfSettings.DeferRecalc = 1;
+            this.PerfSettings.ScreenUpdating = 0;
+            this.PerfSettings.EnableAutoConnect = false;
+            this.PerfSettings.LiveDynamics = false;
         }
 
         public IVisio.Page Render(IVisio.Document doc)
@@ -56,7 +64,9 @@ namespace VisioAutomation.DOM
             var page_sheet = page.PageSheet;
 
             var app = page.Application;
-            using (var perfscope = new VA.Application.PerfScope(app))
+
+
+            using (var perfscope = new VA.Application.PerfScope(app, PerfSettings))
             {
                 var update = new VA.ShapeSheet.Update();
                 this.PageCells.Apply(update, (short)page_sheet.ID);
