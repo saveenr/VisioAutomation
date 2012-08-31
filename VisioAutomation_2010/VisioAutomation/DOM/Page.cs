@@ -23,8 +23,11 @@ namespace VisioAutomation.DOM
             this.PageCells = new VA.Pages.PageCells();
 
             this.PerfSettings = new VA.Application.PerfSettings();
-            this.PerfSettings.DeferRecalc = 1;
-            this.PerfSettings.ScreenUpdating = 0;
+            this.PerfSettings.DeferRecalc = 0;
+            // By Default enable this because it messes up page resizing (there may be a workaround)
+            // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
+
+            this.PerfSettings.ScreenUpdating = 0; 
             this.PerfSettings.EnableAutoConnect = false;
             this.PerfSettings.LiveDynamics = false;
         }
