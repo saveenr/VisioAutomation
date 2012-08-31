@@ -149,11 +149,7 @@ namespace VisioAutomation.Layout.MSAGL
             var app = page.Application;
             var dompage = CreateDOMPage(layout_diagram, app);
 
-            using (var perfscope = new VA.Application.PerfScope(app))
-            {
-                // render the shapes to the page
-                dompage.Render(page);                    
-            }
+            dompage.Render(page);                    
 
             // Find all the shapes that were created in the DOM and put them in the layout structure
             foreach (var layout_shape in layout_diagram.Shapes)

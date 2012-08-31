@@ -4,8 +4,6 @@ namespace VisioAutomation.Application
 {
     public class UndoScope : System.IDisposable
     {
-        private System.DateTimeOffset time_closed;
-        private bool IsOpen;
         private IVisio.Application Application;
 
         public int ScopeID { get; private set; }
@@ -28,36 +26,6 @@ namespace VisioAutomation.Application
             this.Name = name;
             this.ScopeID = this.Application.BeginUndoScope(name);
             this.Commit = true;
-            this.IsOpen = true;
-        }
-
-        /// <summary>
-        /// When the scope was closed
-        /// </summary>
-        public System.DateTimeOffset ClosedOn
-        {
-            get
-            {
-                if (this.IsOpen)
-                {
-                    throw new AutomationException("Scope is not closed");
-                }
-
-                return time_closed;
-            }
-        }
-
-        /// <summary>
-        /// Ends the scope if the scope is open. If thw scope is already closed it does nothing.
-        /// </summary>
-        public void EndScope()
-        {
-            if (this.IsOpen)
-            {
-                this.Application.EndUndoScope(this.ScopeID, this.Commit );
-                this.IsOpen = false;
-                this.time_closed = System.DateTimeOffset.UtcNow;
-            }
         }
 
         /// <summary>
@@ -65,7 +33,7 @@ namespace VisioAutomation.Application
         /// </summary>
         public void Dispose()
         {
-            this.EndScope();
+            this.Application.EndUndoScope(this.ScopeID, this.Commit);
         }
 
         /// <summary>

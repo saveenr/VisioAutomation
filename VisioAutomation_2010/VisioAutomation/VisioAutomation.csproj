@@ -85,7 +85,6 @@
     <Compile Include="DOM\Document.cs" />
     <Compile Include="DOM\PageList.cs" />
     <Compile Include="DOM\Page.cs" />
-    <Compile Include="Internal\ShapeUtil.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentHorizontal.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentVertical.cs" />
@@ -146,7 +145,7 @@
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
     <Compile Include="Layout\LockCells.cs" />
-    <Compile Include="Internal\PerfSettings.cs" />
+    <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="Selection\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />

@@ -6,23 +6,18 @@ namespace VisioAutomation.Application
     public class PerfScope : System.IDisposable
     {
         private IVisio.Application app;
-        private VA.Internal.PerfSettings old_settings;
+        private VA.Application.PerfSettings old_settings;
 
-        public PerfScope(IVisio.Application vis)
+        public PerfScope(IVisio.Application vis, VA.Application.PerfSettings new_settings)
         {
             this.app = vis;
 
             // save the old settings
-            this.old_settings = new VA.Internal.PerfSettings();
+            this.old_settings = new VA.Application.PerfSettings();
             this.old_settings.Load(this.app);
 
             // Set the new settings
-            var fast = new VA.Internal.PerfSettings();
-            fast.DeferRecalc = 1;
-            fast.ScreenUpdating = 0;
-            fast.EnableAutoConnect = false;
-            fast.LiveDynamics = false;
-            fast.Apply(app);
+            new_settings.Apply(app);
         }
 
         public void Dispose()

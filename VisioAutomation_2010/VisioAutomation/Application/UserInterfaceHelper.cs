@@ -8,8 +8,6 @@ namespace VisioAutomation.Application
         /// <summary>
         /// Allows a windows form to be used as the UI for an anchor window
         /// </summary>
-        /// <param name="anchor_window"></param>
-        /// <param name="the_form"></param>
         public static void AttachWindowsForm(
             IVisio.Window anchor_window,
             System.Windows.Forms.Form the_form)
@@ -56,12 +54,6 @@ namespace VisioAutomation.Application
         /// <summary>
         /// Creates a new anchor window
         /// </summary>
-        /// <param name="parent_window"></param>
-        /// <param name="caption"></param>
-        /// <param name="window_states"></param>
-        /// <param name="window_types"></param>
-        /// <param name="rect"></param>
-        /// <returns></returns>
         public static IVisio.Window AddAnchorWindow(IVisio.Window parent_window,
                                                     string caption,
                                                     object window_states,
@@ -73,7 +65,8 @@ namespace VisioAutomation.Application
                 throw new System.ArgumentNullException("parent_window");
             }
 
-            var anchor_window = parent_window.Windows.Add(
+            var parents_windows = parent_window.Windows;
+            var anchor_window = parents_windows.Add(
                 caption,
                 window_states,
                 window_types,

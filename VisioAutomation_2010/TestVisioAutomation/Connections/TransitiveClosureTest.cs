@@ -5,78 +5,94 @@ using VA = VisioAutomation;
 
 namespace TestVisioAutomation
 {
-    class ParseResult
-    {
-        public List<VA.Connections.DirectedEdge<int, object>> Edges;
-        public IDictionary<string, int> NameToID;
-        public IDictionary<int, string> IDToName;
-    }
-
     [TestClass]
-    public class TransitiveCLosure_Test
+    public class TransitiveClosure_Test
     {
+
         [TestMethod]
-        public void TestTransitiveClosure()
+        public void TestTransitiveClosure0()
         {
-            string input =
-                @"
-                v3->v3
-                v2->v3
-                v0->v1
-                v1->v2
-                v4->v2  ";
-
-            var parse = parse_graph(input);
-
-            int num_vertices = parse.NameToID.Count();
-            var adj_matrix = new VA.Internal.BitArray2D(num_vertices, num_vertices);
-            foreach (var e in parse.Edges)
-            {
-                adj_matrix[e.From, e.To] = true;
-            }
-
-            var warshall_result = adj_matrix.Clone();
-            VA.Connections.PathAnalysis.PerformWarshall(warshall_result);
+            // v0->v0
+            // doesn't yield any edges (nodes are implictly connected to themselves)
+            var input = new List<VA.Connections.DirectedEdge<string, object>>();
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v0","v0",null));
+            var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
+            Assert.AreEqual(0,output.Count);
         }
 
-        private static ParseResult parse_graph(string input)
+        [TestMethod]
+        public void TestTransitiveClosure1()
         {
-            var pr = new ParseResult();
-            char[] seps = { '\n' };
-            string[] lines =
-                input.Trim().Split(seps, System.StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).Where(
-                    s => s.Length > 0).ToArray();
+            // v0->v0
+            // v1->v1
+            // doesn't yield any edges (nodes are implictly connected to themselves)
+            var input = new List<VA.Connections.DirectedEdge<string, object>>();
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v0", "v0", null));
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v1", "v1", null));
+            var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
+            Assert.AreEqual(0, output.Count);
+        }
 
-            pr.Edges = new List<VA.Connections.DirectedEdge<int, object>>();
-            var dic_vname_to_vindex = new Dictionary<string, int>();
-            var dic_vindex_to_vname = new Dictionary<int, string>();
-            int n = 0;
-            foreach (string line in lines)
-            {
-                string[] xseps = { "->" };
-                string[] tokens = line.Split(xseps, System.StringSplitOptions.RemoveEmptyEntries);
-                string from = tokens[0];
-                string to = tokens[1];
-                if (!dic_vname_to_vindex.ContainsKey(from))
-                {
-                    dic_vname_to_vindex.Add(from, n);
-                    dic_vindex_to_vname.Add(n, from);
-                    n++;
-                }
-                if (!dic_vname_to_vindex.ContainsKey(to))
-                {
-                    dic_vname_to_vindex.Add(to, n);
-                    dic_vindex_to_vname.Add(n, to);
-                    n++;
-                }
+        [TestMethod]
+        public void TestTransitiveClosure2()
+        {
+            // v0->v1
+            // doesn't yield any edges (nodes are implictly connected to themselves)
+            var input = new List<VA.Connections.DirectedEdge<string, object>>();
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v0", "v1", null));
+            var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
+            Assert.AreEqual(1, output.Count);
+            Assert.AreEqual("v0",output[0].From);
+            Assert.AreEqual("v1", output[0].To);
+        }
 
-                var new_edge = new VA.Connections.DirectedEdge<int, object>(dic_vname_to_vindex[from], dic_vname_to_vindex[to], null);
-                pr.Edges.Add(new_edge);
-            }
 
-            pr.IDToName = dic_vindex_to_vname;
-            pr.NameToID = dic_vname_to_vindex;
-            return pr;
+        [TestMethod]
+        public void TestTransitiveClosure3()
+        {
+            var input = new List<VA.Connections.DirectedEdge<string, object>>();
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v0", "v1", null));
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v1", "v2", null));
+            var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
+            Assert.AreEqual(3, output.Count);
+            Assert.AreEqual("v0", output[0].From);
+            Assert.AreEqual("v1", output[0].To);
+
+            Assert.AreEqual("v0", output[1].From);
+            Assert.AreEqual("v2", output[1].To);
+
+            Assert.AreEqual("v1", output[2].From);
+            Assert.AreEqual("v2", output[2].To);
+            
+        }
+
+        [TestMethod]
+        public void TestTransitiveClosure4()
+        {
+            var input = new List<VA.Connections.DirectedEdge<string, object>>();
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v0", "v1", null));
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v1", "v2", null));
+            input.Add(new VA.Connections.DirectedEdge<string, object>("v2", "v0", null));
+            var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
+            Assert.AreEqual(6, output.Count);
+            Assert.AreEqual("v0", output[0].From);
+            Assert.AreEqual("v1", output[0].To);
+
+            Assert.AreEqual("v0", output[1].From);
+            Assert.AreEqual("v2", output[1].To);
+
+            Assert.AreEqual("v1", output[2].From);
+            Assert.AreEqual("v0", output[2].To);
+
+            Assert.AreEqual("v1", output[3].From);
+            Assert.AreEqual("v2", output[3].To);
+
+            Assert.AreEqual("v2", output[4].From);
+            Assert.AreEqual("v0", output[4].To);
+
+            Assert.AreEqual("v2", output[5].From);
+            Assert.AreEqual("v1", output[5].To);
+
         }
     }
 }

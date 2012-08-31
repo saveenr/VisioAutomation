@@ -1,8 +1,8 @@
 using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Internal
+namespace VisioAutomation.Application
 {
-    internal class PerfSettings
+    public class PerfSettings
     {
         public bool? EnableAutoConnect;
         public bool? LiveDynamics;

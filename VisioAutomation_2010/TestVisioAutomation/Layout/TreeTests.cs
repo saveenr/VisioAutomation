@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -10,7 +9,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class TreeTests : VisioAutomationTest
     {
-
         [TestMethod]
         public void DrawTree1Node()
         {
@@ -26,9 +24,7 @@ namespace TestVisioAutomation
             AssertVA.AreEqual(3.0, 1.5, page.GetSize(), 0.05);
 
             doc.Close(true);
-
         }
-
 
         [TestMethod]
         public void DrawTreeMultiNode()
@@ -73,9 +69,7 @@ namespace TestVisioAutomation
             Assert.AreEqual("B2", nb2.VisioShape.Text);
 
             doc.Close(true);
-
         }
-
 
         [TestMethod]
         public void DrawTreeMultiNode2()
@@ -124,6 +118,5 @@ namespace TestVisioAutomation
 
             doc.Close(true);
         }
-
     }
 }

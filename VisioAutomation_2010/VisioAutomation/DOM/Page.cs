@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.Application;
+using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
@@ -14,11 +15,21 @@ namespace VisioAutomation.DOM
         public string Name;
         public VA.Layout.PageLayout.Layout Layout;
         public IVisio.Page VisioPage;
+        public VA.Application.PerfSettings PerfSettings { get; private set; }
 
         public Page()
         {
             this.Shapes = new ShapeList();
             this.PageCells = new VA.Pages.PageCells();
+
+            this.PerfSettings = new VA.Application.PerfSettings();
+            this.PerfSettings.DeferRecalc = 0;
+            // By Default enable this because it messes up page resizing (there may be a workaround)
+            // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
+
+            this.PerfSettings.ScreenUpdating = 0; 
+            this.PerfSettings.EnableAutoConnect = false;
+            this.PerfSettings.LiveDynamics = false;
         }
 
         public IVisio.Page Render(IVisio.Document doc)
@@ -54,37 +65,44 @@ namespace VisioAutomation.DOM
             this.VisioPage = page;
 
             var page_sheet = page.PageSheet;
-            
-            var update = new VA.ShapeSheet.Update();
-            this.PageCells.Apply(update, (short)page_sheet.ID);
-            update.Execute(page);
 
-            if (this.Size.HasValue)
-            {
-                page.SetSize(this.Size.Value);
-            }
-            
-            // Then render the shapes
-            this.Shapes.Render(page);
+            var app = page.Application;
 
-            // Perform any additional layout
-            if (this.Layout!=null)
-            {
-                this.Layout.Apply(page);
-            }
 
-            // Optionally, perform page resizing to fit contents
-            if (this.ResizeToFit)
+            using (var perfscope = new VA.Application.PerfScope(app, PerfSettings))
             {
-                if (this.ResizeToFitMargin.HasValue)
+                var update = new VA.ShapeSheet.Update();
+                this.PageCells.Apply(update, (short)page_sheet.ID);
+                update.Execute(page);
+
+                if (this.Size.HasValue)
                 {
-                    page.ResizeToFitContents(this.ResizeToFitMargin.Value);
+                    page.SetSize(this.Size.Value);
                 }
-                else
+
+                // Then render the shapes
+                this.Shapes.Render(page);
+
+                // Perform any additional layout
+                if (this.Layout != null)
                 {
-                    page.ResizeToFitContents();
+                    this.Layout.Apply(page);
+                }
+
+                // Optionally, perform page resizing to fit contents
+                if (this.ResizeToFit)
+                {
+                    if (this.ResizeToFitMargin.HasValue)
+                    {
+                        page.ResizeToFitContents(this.ResizeToFitMargin.Value);
+                    }
+                    else
+                    {
+                        page.ResizeToFitContents();
+                    }
                 }
             }
+
         }
     }
 }
