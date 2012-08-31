@@ -31,18 +31,29 @@ namespace VisioPowerTools2010
             this.textBoxLog.AppendText(snl);
         }
 
+        private string get_src_folder()
+        {
+            return normalize_path(textBoxStencilFolder.Text);
+        }
+
         private string get_dest_folder()
         {
-            return this.textBoxOutputFolder.Text;
+            return normalize_path( this.textBoxOutputFolder.Text );
+        }
+
+        private string normalize_path(string s)
+        {
+            while (s.EndsWith(@"\"))
+            {
+                s = s.Substring(0, s.Length - 1);
+            }
+            return s;
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
-
-
-
             this.textBoxLog.Clear();
-            string srcfolder = textBoxStencilFolder.Text;
+            string srcfolder = this.get_src_folder();
 
             if (!System.IO.Directory.Exists(srcfolder))
             {
@@ -50,8 +61,20 @@ namespace VisioPowerTools2010
                 return;
             }
 
+            if (!System.IO.Path.IsPathRooted(srcfolder))
+            {
+                MessageBox.Show("Source folder is not an absolute path");
+                return;
+            }
+
             string destfolder = this.get_dest_folder();
-            
+
+            if (!System.IO.Path.IsPathRooted(destfolder))
+            {
+                MessageBox.Show("Output folder is not an absolute path");
+                return;
+            }
+
             this.log("Searching for *.VSS files");
             var stencilfiles = System.IO.Directory.GetFiles(srcfolder, "*.vss").ToList();
             this.log("Found {0} .VSS files", stencilfiles.Count);
