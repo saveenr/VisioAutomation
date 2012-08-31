@@ -85,7 +85,6 @@
     <Compile Include="DOM\Document.cs" />
     <Compile Include="DOM\PageList.cs" />
     <Compile Include="DOM\Page.cs" />
-    <Compile Include="Internal\ShapeUtil.cs" />
     <Compile Include="DOM\Arc.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentHorizontal.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentVertical.cs" />
