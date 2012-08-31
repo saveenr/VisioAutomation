@@ -103,34 +103,5 @@ namespace VisioAutomation.Internal
         {
             this.BitArray.SetAll(value);
         }
-
-        public void Not()
-        {
-            this.BitArray.Not();
-        }
-
-        public byte[] ToBytes()
-        {
-            return BitArrayToBytes(this.BitArray);
-        }
-
-        private static byte[] BitArrayToBytes(System.Collections.BitArray bitarray)
-        {
-            if (bitarray.Length == 0)
-            {
-                throw new System.ArgumentException("must have at least length 1", "bitarray");
-            }
-
-            int num_bytes = bitarray.Length / 8;
-
-            if (bitarray.Length % 8 != 0)
-            {
-                num_bytes += 1;
-            }
-
-            var bytes = new byte[num_bytes];
-            bitarray.CopyTo(bytes, 0);
-            return bytes;
-        }
     }
 }
