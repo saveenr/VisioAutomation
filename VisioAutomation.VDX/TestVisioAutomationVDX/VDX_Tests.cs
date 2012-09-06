@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomationVDX
@@ -10,6 +9,84 @@ namespace TestVisioAutomationVDX
     [TestClass]
     public class VDX_Tests
     {
+        short alert_response_no = 7;
+
+        private static string GetHKCUApplicationPath(IVisio.Application app)
+        {
+            return string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", app.Version);
+        }
+        public static string GetXMLErrorLogFilename(IVisio.Application app)
+        {
+            // the location of the xml error log file is specific to the user
+            // we need to retrieve it from the registry
+            var hkcu = Microsoft.Win32.Registry.CurrentUser;
+
+            // The reg path is specific to the version of visio being used
+            string path = GetHKCUApplicationPath(app);
+
+            var key_visio_application = hkcu.OpenSubKey(path);
+            if (key_visio_application == null)
+            {
+                // key doesn't exist - can't continue
+                throw new System.Exception("Could not find the key visio application key in hkcu");
+            }
+
+            var subkeynames = key_visio_application.GetValueNames();
+            if (!subkeynames.Contains("XMLErrorLogName"))
+            {
+                return null;
+            }
+
+            string logfilename = (string)key_visio_application.GetValue("XMLErrorLogName");
+            key_visio_application.Close();
+
+            // the folder that contains the file is located in the users internet cache
+            // C:\Users\<your alias>\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.MSO\VisioLogFiles
+            string internetcache = System.Environment.GetFolderPath(System.Environment.SpecialFolder.InternetCache);
+            string folder = System.IO.Path.Combine(internetcache, @"Content.MSO\VisioLogFiles");
+
+            return System.IO.Path.Combine(folder, logfilename);
+        }
+
+        public void ForceCloseAll(IVisio.Documents docs)
+        {
+            if (docs == null)
+            {
+                throw new System.ArgumentNullException("docs");
+            }
+
+            var application = docs.Application;
+
+            while (docs.Count > 0)
+            {
+                var active_document = application.ActiveDocument;
+                CloseEx(active_document,true);
+            }
+        }
+
+        public void CloseEx(IVisio.Document doc, bool force_close)
+        {
+            if (force_close)
+            {
+                var app = doc.Application;
+                short old_alert_response = app.AlertResponse;
+                try
+                {
+                    app.AlertResponse = alert_response_no;
+                    //
+                    doc.Close();
+                }
+                finally
+                {
+                    app.AlertResponse = old_alert_response;
+                }
+            }
+            else
+            {
+                doc.Close();
+            }
+        }
+
         public void CheckIfLoadsWithoutErrorLog(string filename)
         {
             var app = new IVisio.Application();
@@ -17,9 +94,16 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
+            short old_alert_response = app.AlertResponse;
+            try
             {
+                app.AlertResponse = alert_response_no;
+                //
                 var doc = app.Documents.Open(filename);
+            }
+            finally
+            {
+                app.AlertResponse = old_alert_response;
             }
 
             if (XmlErrorLogExists(app))
@@ -27,7 +111,7 @@ namespace TestVisioAutomationVDX
                 Assert.Fail("XML Error Log Error Was Created when opening the VDX file");
             }
 
-            VA.DocumentHelper.ForceCloseAll(app.Documents);
+            this.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
@@ -521,16 +605,23 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
+            short old_alert_response = app.AlertResponse;
+            try
             {
+                app.AlertResponse = alert_response_no;
+                //
                 var doc = app.Documents.Open(output_filename);
+            }
+            finally
+            {
+                app.AlertResponse = old_alert_response;
             }
 
             if (XmlErrorLogExists(app))
             {
                 Assert.Fail("Error log exists and we did not expect it");
             }
-            VA.DocumentHelper.ForceCloseAll(app.Documents);
+            this.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
@@ -545,23 +636,31 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
+            short old_alert_response = app.AlertResponse;
+            try
             {
+                app.AlertResponse = alert_response_no;
+                //
                 var doc = app.Documents.Open(output_filename);
             }
+            finally
+            {
+                app.AlertResponse = old_alert_response;
+            }
+
 
             if (!XmlErrorLogExists(app))
             {
                 System.Windows.Forms.MessageBox.Show("Error log does not exist even though we expected it to");
             }
             Assert.AreEqual(1, app.Documents.Count);
-            VA.DocumentHelper.ForceCloseAll(app.Documents);
+            this.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
         public static void DeleteXmlErrorLog(IVisio.Application app)
         {
-            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
+            string logfilename = GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {
@@ -577,7 +676,7 @@ namespace TestVisioAutomationVDX
 
         public static bool XmlErrorLogExists(IVisio.Application app)
         {
-            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
+            string logfilename = GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {
