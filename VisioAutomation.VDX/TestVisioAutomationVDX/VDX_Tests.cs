@@ -141,6 +141,7 @@ namespace TestVisioAutomationVDX
             GetPage09_Layout(doc);
             GetPage10_layers(doc);
             GetPage11_Add_color(doc);
+            GetPage12_AdjustToTextSize(doc);
 
             var w1 = new VA.VDX.Elements.DocumentWindow();
             w1.ShowGrid = false;
@@ -526,6 +527,25 @@ namespace TestVisioAutomationVDX
             page.Shapes.Add(shape1);
 
             doc.Colors.Add(new VA.VDX.Elements.ColorEntry {RGB = 0x123456});
+            return page;
+        }
+
+        private VA.VDX.Elements.Page GetPage12_AdjustToTextSize(VA.VDX.Elements.Drawing doc)
+        {
+            var page = new VA.VDX.Elements.Page(8, 4);
+            doc.Pages.Add(page);
+
+            string rounded_rect = "Rounded REctAngle";
+            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+
+            var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 1, 3);
+            page.Shapes.Add(shape1);
+            shape1.Text.Add("Page12Shape1");
+
+
+            shape1.XForm.Width.Formula = "GUARD(TEXTWIDTH(TheText))";
+            shape1.XForm.Height.Formula = "GUARD(TEXTHEIGHT(TheText,Width))";
+
             return page;
         }
 
