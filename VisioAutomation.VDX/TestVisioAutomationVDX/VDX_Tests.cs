@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomationVDX
@@ -9,82 +10,15 @@ namespace TestVisioAutomationVDX
     [TestClass]
     public class VDX_Tests
     {
-        short alert_response_no = 7;
-
-        private static string GetHKCUApplicationPath(IVisio.Application app)
+        public IVisio.Document TryOpen(IVisio.Documents docs, string filename)
         {
-            return string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", app.Version);
-        }
-        public static string GetXMLErrorLogFilename(IVisio.Application app)
-        {
-            // the location of the xml error log file is specific to the user
-            // we need to retrieve it from the registry
-            var hkcu = Microsoft.Win32.Registry.CurrentUser;
-
-            // The reg path is specific to the version of visio being used
-            string path = GetHKCUApplicationPath(app);
-
-            var key_visio_application = hkcu.OpenSubKey(path);
-            if (key_visio_application == null)
+            var app = docs.Application;
+            IVisio.Document doc=null;
+            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
             {
-                // key doesn't exist - can't continue
-                throw new System.Exception("Could not find the key visio application key in hkcu");
+                doc = app.Documents.Open(filename);
             }
-
-            var subkeynames = key_visio_application.GetValueNames();
-            if (!subkeynames.Contains("XMLErrorLogName"))
-            {
-                return null;
-            }
-
-            string logfilename = (string)key_visio_application.GetValue("XMLErrorLogName");
-            key_visio_application.Close();
-
-            // the folder that contains the file is located in the users internet cache
-            // C:\Users\<your alias>\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.MSO\VisioLogFiles
-            string internetcache = System.Environment.GetFolderPath(System.Environment.SpecialFolder.InternetCache);
-            string folder = System.IO.Path.Combine(internetcache, @"Content.MSO\VisioLogFiles");
-
-            return System.IO.Path.Combine(folder, logfilename);
-        }
-
-        public void ForceCloseAll(IVisio.Documents docs)
-        {
-            if (docs == null)
-            {
-                throw new System.ArgumentNullException("docs");
-            }
-
-            var application = docs.Application;
-
-            while (docs.Count > 0)
-            {
-                var active_document = application.ActiveDocument;
-                CloseEx(active_document,true);
-            }
-        }
-
-        public void CloseEx(IVisio.Document doc, bool force_close)
-        {
-            if (force_close)
-            {
-                var app = doc.Application;
-                short old_alert_response = app.AlertResponse;
-                try
-                {
-                    app.AlertResponse = alert_response_no;
-                    //
-                    doc.Close();
-                }
-                finally
-                {
-                    app.AlertResponse = old_alert_response;
-                }
-            }
-            else
-            {
-                doc.Close();
-            }
+            return doc;
         }
 
         public void CheckIfLoadsWithoutErrorLog(string filename)
@@ -94,29 +28,19 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            short old_alert_response = app.AlertResponse;
-            try
-            {
-                app.AlertResponse = alert_response_no;
-                //
-                var doc = app.Documents.Open(filename);
-            }
-            finally
-            {
-                app.AlertResponse = old_alert_response;
-            }
+            var doc = TryOpen(app.Documents, filename);
 
             if (XmlErrorLogExists(app))
             {
                 Assert.Fail("XML Error Log Error Was Created when opening the VDX file");
             }
 
-            this.ForceCloseAll(app.Documents);
+            VA.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
         [TestMethod]
-        public void CreateSampleVDX1()
+        public void CreateMultiPageVDX()
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
@@ -149,15 +73,16 @@ namespace TestVisioAutomationVDX
             w1.ShowConnectionPoints = false;
             w1.ShowPageBreaks = false;
             w1.Page = 1;
-
-
+            
             doc.Windows.Add(w1);
 
             // now create a writer object
             var vdx_writer = new VA.VDX.VDXWriter();
+            
             // merge the template with the new in-memory drawing and save it to the output fie
             vdx_writer.CreateVDX(doc, template_dom, output_filename);
-
+            
+            // Verify this file can be loaded
             CheckIfLoadsWithoutErrorLog(output_filename);
         }
 
@@ -165,10 +90,9 @@ namespace TestVisioAutomationVDX
         {
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
-
-            string rounded_rect = "Rounded REctAngle";
+           
             // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             // using that ID draw a rounded rectangle at pinpos(4,3)
             var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 4, 3);
@@ -198,9 +122,8 @@ namespace TestVisioAutomationVDX
         {
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
-            string rounded_rect = "Rounded REctAngle";
             // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             // find the id of the master for dynamic connector
             int dynamic_connector_id = doc.GetMasterMetaData("Dynamic Connector").ID;
@@ -221,12 +144,8 @@ namespace TestVisioAutomationVDX
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
 
-            string rounded_rect = "Rounded REctAngle";
-            // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
-
-            // find the id of the master for dynamic connector
-            int dynamic_connector_id = doc.GetMasterMetaData("Dynamic Connector").ID;
+            // find the id of the masters
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             // using that ID draw a rounded rectangle at pinpos(4,3)
             var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 4, 3);
@@ -250,9 +169,8 @@ namespace TestVisioAutomationVDX
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
 
-            string rounded_rect = "Rounded REctAngle";
             // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 1, 3);
             page.Shapes.Add(shape1);
@@ -279,9 +197,8 @@ namespace TestVisioAutomationVDX
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
 
-            string rounded_rect = "Rounded REctAngle";
             // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             // using that ID draw a rounded rectangle at pinpos(4,3)
             var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 4, 3);
@@ -295,8 +212,6 @@ namespace TestVisioAutomationVDX
 
             shape1.Text.Add("HELLO");
             shape2.TextXForm = new VA.VDX.Sections.TextXForm();
-            shape2.TextXForm.Width.Formula = "GUARD(TEXTWIDTH(TheText))";
-            shape2.TextXForm.Height.Formula = "GUARD(TEXTHEIGHT(TheText,TxtWidth))";
             shape2.TextXForm.PinY.Formula = "-TxtHeight*0.5";
 
             var font_segoeui = doc.AddFace("Segoe UI");
@@ -404,9 +319,8 @@ namespace TestVisioAutomationVDX
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
 
-            string rounded_rect = "Rounded REctAngle";
             // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 1, 3);
             page.Shapes.Add(shape1);
@@ -432,9 +346,8 @@ namespace TestVisioAutomationVDX
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
 
-            string rounded_rect = "Rounded REctAngle";
             // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             var layout = new VA.VDX.Sections.Layout();
             layout.ShapeRouteStyle.Result = VA.VDX.Enums.RouteStyle.TreeEW;
@@ -472,9 +385,8 @@ namespace TestVisioAutomationVDX
             var layer1 = page.AddLayer("Layer1", 1);
             var layer2 = page.AddLayer("Layer2", 2);
 
-            string rounded_rect = "Rounded REctAngle";
             // find the id of the master for rounded rectangles
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             var layout = new VA.VDX.Sections.Layout();
             layout.ShapeRouteStyle.Result = VA.VDX.Enums.RouteStyle.TreeEW;
@@ -514,11 +426,9 @@ namespace TestVisioAutomationVDX
             doc.Pages.Add(page);
 
             var layer0 = page.AddLayer("Foo", 0);
-
             var layer1 = page.AddLayer("BAR", 1);
 
-            string rounded_rect = "Rounded REctAngle";
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             var layout = new VA.VDX.Sections.Layout();
             layout.ShapeRouteStyle.Result = VA.VDX.Enums.RouteStyle.TreeEW;
@@ -535,13 +445,11 @@ namespace TestVisioAutomationVDX
             var page = new VA.VDX.Elements.Page(8, 4);
             doc.Pages.Add(page);
 
-            string rounded_rect = "Rounded REctAngle";
-            int rounded_rect_id = doc.GetMasterMetaData(rounded_rect).ID;
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
 
             var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 1, 3);
             page.Shapes.Add(shape1);
             shape1.Text.Add("Page12Shape1");
-
 
             shape1.XForm.Width.Formula = "GUARD(TEXTWIDTH(TheText))";
             shape1.XForm.Height.Formula = "GUARD(TEXTHEIGHT(TheText,Width))";
@@ -550,11 +458,9 @@ namespace TestVisioAutomationVDX
         }
 
         [TestMethod]
-        public void CreateSampleVDX2()
+        public void CreateCustomTemplateVDX()
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
-
-            const string shapeMasterName = "Router";
 
             var templateDom =
                 System.Xml.Linq.XDocument.Parse(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
@@ -574,8 +480,8 @@ namespace TestVisioAutomationVDX
             layout.ShapeRouteStyle.Result = VA.VDX.Enums.RouteStyle.TreeEW;
 
             // find the id of the master for rounded rectangles
-            int shapeMasterNameId = doc.GetMasterMetaData(shapeMasterName).ID;
-            bool shapeMasterNameGroup = doc.GetMasterMetaData(shapeMasterName).IsGroup;
+            int shapeMasterNameId = doc.GetMasterMetaData("Router").ID;
+            bool shapeMasterNameGroup = doc.GetMasterMetaData("Router").IsGroup;
 
             // add shape1
             var shape1 = new VA.VDX.Elements.Shape(shapeMasterNameId, shapeMasterNameGroup, 1, 3);
@@ -589,7 +495,7 @@ namespace TestVisioAutomationVDX
             shape2.Text.Add("Router2");
             shape2.Layout = shape1.Layout;
 
-            // add shape3
+            // add shape3 - this is the dynamic connector
             VA.VDX.Elements.Shape shape3 = VA.VDX.Elements.Shape.CreateDynamicConnector(doc);
             shape3.XForm1D.BeginX.Result = 1;
             shape3.XForm1D.EndX.Result = 5;
@@ -603,6 +509,7 @@ namespace TestVisioAutomationVDX
             shape3.Layout = shape1.Layout;
             page.ConnectShapesViaConnector(shape3, shape1, shape2);
 
+            // handle layers
             shape3.LayerMembership = new List<int> {layer0.Index, layer2.Index};
             shape1.LayerMembership = new List<int> {layer1.Index};
             shape2.LayerMembership = new List<int> {layer2.Index};
@@ -624,24 +531,13 @@ namespace TestVisioAutomationVDX
             
             DeleteXmlErrorLog(app);
 
-            // this causes the doc to load no matter what the error ))))))
-            short old_alert_response = app.AlertResponse;
-            try
-            {
-                app.AlertResponse = alert_response_no;
-                //
-                var doc = app.Documents.Open(output_filename);
-            }
-            finally
-            {
-                app.AlertResponse = old_alert_response;
-            }
+            var doc = TryOpen(app.Documents, output_filename);
 
             if (XmlErrorLogExists(app))
             {
                 Assert.Fail("Error log exists and we did not expect it");
             }
-            this.ForceCloseAll(app.Documents);
+            VA.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
@@ -656,31 +552,20 @@ namespace TestVisioAutomationVDX
             DeleteXmlErrorLog(app);
 
             // this causes the doc to load no matter what the error ))))))
-            short old_alert_response = app.AlertResponse;
-            try
-            {
-                app.AlertResponse = alert_response_no;
-                //
-                var doc = app.Documents.Open(output_filename);
-            }
-            finally
-            {
-                app.AlertResponse = old_alert_response;
-            }
-
+            var doc = TryOpen(app.Documents, output_filename);
 
             if (!XmlErrorLogExists(app))
             {
                 System.Windows.Forms.MessageBox.Show("Error log does not exist even though we expected it to");
             }
             Assert.AreEqual(1, app.Documents.Count);
-            this.ForceCloseAll(app.Documents);
+            VA.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
         public static void DeleteXmlErrorLog(IVisio.Application app)
         {
-            string logfilename = GetXMLErrorLogFilename(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {
@@ -696,7 +581,7 @@ namespace TestVisioAutomationVDX
 
         public static bool XmlErrorLogExists(IVisio.Application app)
         {
-            string logfilename = GetXMLErrorLogFilename(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             if (logfilename == null)
             {
