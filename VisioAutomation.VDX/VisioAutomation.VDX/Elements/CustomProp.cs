@@ -8,10 +8,10 @@ namespace VisioAutomation.VDX.Elements
     {
         // http://msdn.microsoft.com/en-us/library/aa722335.aspx
 
-        public string NameU;
+        public string NameU { get; set; }
         private int? _del;
 
-        public VA.VDX.ShapeSheet.StringCell Value = new VA.VDX.ShapeSheet.StringCell();
+        public string Value { get; set; }
         public VA.VDX.ShapeSheet.StringCell Prompt = new VA.VDX.ShapeSheet.StringCell();
         public VA.VDX.ShapeSheet.StringCell Label = new VA.VDX.ShapeSheet.StringCell();
         public VA.VDX.ShapeSheet.StringCell Format = new VA.VDX.ShapeSheet.StringCell();
@@ -55,7 +55,14 @@ namespace VisioAutomation.VDX.Elements
             prop_el.SetAttributeValue("NameU", this.NameU);
             prop_el.SetAttributeValue("ID", this.ID);
             prop_el.SetElementValueConditional("Del", this._del);
-            prop_el.Add(this.Value.ToXml("Value"));
+
+            if (this.Value!=null)
+            {
+                var val_el = new System.Xml.Linq.XElement(VA.VDX.Internal.Constants.VisioXmlNamespace2003 + "Value");
+                prop_el.Add(val_el);
+                val_el.SetAttributeValue("Unit", "STR");
+                val_el.SetValue(this.Value);                
+            }
             prop_el.Add(this.Prompt.ToXml("Prompt"));
             prop_el.Add(this.Label.ToXml("Label"));
             prop_el.Add(this.Format.ToXml("Format"));

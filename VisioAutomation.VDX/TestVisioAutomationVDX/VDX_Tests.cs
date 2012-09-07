@@ -295,6 +295,48 @@ namespace TestVisioAutomationVDX
             return page;
         }
 
+        [TestMethod]
+        public void VDXCustomProperties()
+        {
+            string filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+
+            var template = System.Xml.Linq.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
+            VA.VDX.VDXWriter.CleanUpTemplate(template);
+
+            var dom_doc = new VA.VDX.Elements.Drawing(template);
+
+            int rect_id = dom_doc.GetMasterMetaData("REctAngle").ID;
+
+            var dom_page = new VA.VDX.Elements.Page(8, 5);
+            dom_doc.Pages.Add(dom_page);
+
+            var dom_shape = new VA.VDX.Elements.Shape(rect_id, 4, 2, 3, 2);
+            dom_shape.CustomProps = new List<VA.VDX.Elements.CustomProp>();
+
+            var dom_custprop0 = new VA.VDX.Elements.CustomProp(1, "PROP1");
+            dom_custprop0.Value = "VALUE1";
+            dom_shape.CustomProps.Add(dom_custprop0);
+            dom_page.Shapes.Add(dom_shape);
+
+            var vdx_writer = new VA.VDX.VDXWriter();
+            vdx_writer.CreateVDX(dom_doc, template, filename);
+
+            var app = new IVisio.Application();
+            var docs = app.Documents;
+            var doc = docs.Add(filename);
+
+            var page = app.ActivePage;
+            var shapes = page.Shapes;
+            Assert.AreEqual(1,page.Shapes.Count);
+
+            var shape = page.Shapes[1];
+            var customprops = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(shape);
+            Assert.IsTrue(customprops.ContainsKey("PROP1"));
+            Assert.AreEqual("\"VALUE1\"",customprops["PROP1"].Value.Formula);
+
+            app.Quit(true);
+        }
+
         private VA.VDX.Elements.Page GetPage07_CustomProps(VA.VDX.Elements.Drawing doc)
         {
             var page = new VA.VDX.Elements.Page(8, 5);
