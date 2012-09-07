@@ -101,7 +101,7 @@ namespace VisioAutomation.CustomProperties
             Label = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
             LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
             Prompt = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
-            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Type");
+            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
             Value = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
         }
     }

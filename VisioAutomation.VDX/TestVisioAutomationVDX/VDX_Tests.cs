@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.VDX.Enums;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
@@ -316,6 +317,17 @@ namespace TestVisioAutomationVDX
             var dom_custprop0 = new VA.VDX.Elements.CustomProp(1, "PROP1");
             dom_custprop0.Value = "VALUE1";
             dom_shape.CustomProps.Add(dom_custprop0);
+
+            var dom_custprop1 = new VA.VDX.Elements.CustomProp(2, "PROP2");
+            dom_custprop1.Value = "123";
+            dom_custprop1.Type.Result = CustomPropType.String;
+            dom_shape.CustomProps.Add(dom_custprop1);
+
+            var dom_custprop2 = new VA.VDX.Elements.CustomProp(3, "PROP3");
+            dom_custprop2.Value = "456";
+            dom_custprop2.Type.Result = CustomPropType.Number;
+            dom_shape.CustomProps.Add(dom_custprop2);
+
             dom_page.Shapes.Add(dom_shape);
 
             var vdx_writer = new VA.VDX.VDXWriter();
@@ -331,8 +343,18 @@ namespace TestVisioAutomationVDX
 
             var shape = page.Shapes[1];
             var customprops = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(shape);
+
             Assert.IsTrue(customprops.ContainsKey("PROP1"));
             Assert.AreEqual("\"VALUE1\"",customprops["PROP1"].Value.Formula);
+
+
+            Assert.IsTrue(customprops.ContainsKey("PROP2"));
+            Assert.AreEqual("\"123\"", customprops["PROP2"].Value.Formula);
+            Assert.AreEqual("0", customprops["PROP2"].Type.Formula);
+
+            Assert.IsTrue(customprops.ContainsKey("PROP3"));
+            Assert.AreEqual("\"456\"", customprops["PROP3"].Value.Formula);
+            Assert.AreEqual("2", customprops["PROP3"].Type.Formula);
 
             app.Quit(true);
         }
