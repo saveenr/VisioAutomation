@@ -10,13 +10,13 @@ namespace VisioAutomation.VDX.Elements
 
         public string NameU { get; set; }
         private int? _del;
+        public CustomPropType Type { get; set; }
 
         public string Value { get; set; }
         public VA.VDX.ShapeSheet.StringCell Prompt = new VA.VDX.ShapeSheet.StringCell();
         public VA.VDX.ShapeSheet.StringCell Label = new VA.VDX.ShapeSheet.StringCell();
         public VA.VDX.ShapeSheet.StringCell Format = new VA.VDX.ShapeSheet.StringCell();
         public VA.VDX.ShapeSheet.IntCell SortKey = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.EnumCell<CustomPropType> Type = new VA.VDX.ShapeSheet.EnumCell<CustomPropType>(v => (int)v);
         public VA.VDX.ShapeSheet.BoolCell Invisible = new VA.VDX.ShapeSheet.BoolCell();
         public VA.VDX.ShapeSheet.BoolCell Verify = new VA.VDX.ShapeSheet.BoolCell();
         public VA.VDX.ShapeSheet.IntCell LangID = new VA.VDX.ShapeSheet.IntCell();
@@ -34,7 +34,7 @@ namespace VisioAutomation.VDX.Elements
 
         public CustomProp()
         {
-            
+            this.Type = CustomPropType.String;
         }
 
         public CustomProp(int id, string nameu) :
@@ -60,14 +60,47 @@ namespace VisioAutomation.VDX.Elements
             {
                 var val_el = new System.Xml.Linq.XElement(VA.VDX.Internal.Constants.VisioXmlNamespace2003 + "Value");
                 prop_el.Add(val_el);
-                val_el.SetAttributeValue("Unit", "STR");
+                string unit = "STR";
+                if (this.Type == CustomPropType.String)
+                {
+                    unit = "STR";
+                }
+                else if (this.Type == CustomPropType.Currency)
+                {
+                    
+                }
+                else if (this.Type == CustomPropType.DateOrTime)
+                {
+
+                }
+                else if (this.Type == CustomPropType.Duration)
+                {
+
+                }
+                else if (this.Type == CustomPropType.FixedList)
+                {
+
+                }
+                else if (this.Type == CustomPropType.Number)
+                {
+
+                }
+                else if (this.Type == CustomPropType.VariableList)
+                {
+
+                }
+                else
+                {
+                    throw new System.ArgumentOutOfRangeException();
+                }
+
+                val_el.SetAttributeValue("Unit", unit);
                 val_el.SetValue(this.Value);                
             }
             prop_el.Add(this.Prompt.ToXml("Prompt"));
             prop_el.Add(this.Label.ToXml("Label"));
             prop_el.Add(this.Format.ToXml("Format"));
             prop_el.Add(this.SortKey.ToXml("SortKey"));
-            prop_el.Add(this.Type.ToXml("Type"));
             prop_el.Add(this.Invisible.ToXml("Invisible"));
             prop_el.Add(this.LangID.ToXml("LangID"));
             prop_el.Add(this.Calendar.ToXml("Calendar"));
