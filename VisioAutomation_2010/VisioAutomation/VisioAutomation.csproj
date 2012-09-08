@@ -90,6 +90,7 @@
     <Compile Include="DOM\PageList.cs" />
     <Compile Include="DOM\Page.cs" />
     <Compile Include="DOM\Arc.cs" />
+    <Compile Include="ExportHelper.cs" />
     <Compile Include="LayoutOptions.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentHorizontal.cs" />
     <Compile Include="Layout\Models\BoxLayout\AlignmentVertical.cs" />
@@ -359,7 +360,6 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-
   <Target Name="AfterBuild">
     <CreateItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)'=='.dll'">
       <Output ItemName="AssembliesToMerge" TaskParameter="Include" />
@@ -367,8 +367,4 @@
     <Exec Command="&quot;C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe&quot; /ndebug /out:@(MainAssembly) /targetplatform:v4,$(MSBuildToolsPath) &quot;@(IntermediateAssembly)&quot; @(AssembliesToMerge->'&quot;%(FullPath)&quot;', ' ')" />
     <Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
   </Target>
-
-
-
-
 </Project>
