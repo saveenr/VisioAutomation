@@ -27,7 +27,7 @@ namespace VisioAutomation.DOM
             // By Default enable this because it messes up page resizing (there may be a workaround)
             // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
 
-            this.PerfSettings.ScreenUpdating = 0; 
+            this.PerfSettings.ScreenUpdating = 1; 
             this.PerfSettings.EnableAutoConnect = false;
             this.PerfSettings.LiveDynamics = false;
         }
