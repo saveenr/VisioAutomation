@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\ColorEntry.cs" />
+    <Compile Include="Elements\CustomProps.cs" />
     <Compile Include="Elements\Layer.cs" />
     <Compile Include="FaceList.cs" />
     <Compile Include="LayerList.cs" />

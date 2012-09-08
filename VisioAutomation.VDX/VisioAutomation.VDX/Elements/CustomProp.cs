@@ -30,17 +30,17 @@ namespace VisioAutomation.VDX.Elements
             set { _del = value; }
         }
 
-        public int ID { get; private set; }
+        public int ID { get; internal set; }
 
         public CustomProp()
         {
             
         }
 
-        public CustomProp(int id, string nameu) :
+        public CustomProp(string nameu) :
             this()
         {
-            this.ID = id;
+            this.ID = -1;
             this.NameU = nameu;
         }
 

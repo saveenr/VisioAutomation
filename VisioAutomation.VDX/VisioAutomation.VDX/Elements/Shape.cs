@@ -21,7 +21,7 @@ namespace VisioAutomation.VDX.Elements
         public List<VA.VDX.Sections.Char> CharFormats;
         public List<Sections.ParagraphFormat> ParaFormats;
         public List<int> LayerMembership;
-        public List<CustomProp> CustomProps;
+        public CustomProps CustomProps;
         public VA.VDX.Sections.Geom Geom;
 
         internal int _id;

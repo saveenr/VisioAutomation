@@ -61,7 +61,6 @@ namespace TestVisioAutomationVDX
             GetPage04_Simple_Text(doc);
             GetPage05_Formatted_Text(doc);
             GetPage06_All_FillPatterns(doc);
-            GetPage07_CustomProps(doc);
             GetPage08_Connector_With_Geometry(doc);
             GetPage09_Layout(doc);
             GetPage10_layers(doc);
@@ -312,18 +311,18 @@ namespace TestVisioAutomationVDX
             dom_doc.Pages.Add(dom_page);
 
             var dom_shape = new VA.VDX.Elements.Shape(rect_id, 4, 2, 3, 2);
-            dom_shape.CustomProps = new List<VA.VDX.Elements.CustomProp>();
+            dom_shape.CustomProps = new VA.VDX.Elements.CustomProps();
 
-            var dom_custprop0 = new VA.VDX.Elements.CustomProp(1, "PROP1");
+            var dom_custprop0 = new VA.VDX.Elements.CustomProp("PROP1");
             dom_custprop0.Value = "VALUE1";
             dom_shape.CustomProps.Add(dom_custprop0);
 
-            var dom_custprop1 = new VA.VDX.Elements.CustomProp(2, "PROP2");
+            var dom_custprop1 = new VA.VDX.Elements.CustomProp("PROP2");
             dom_custprop1.Value = "123";
             dom_custprop1.Type.Result = CustomPropType.String;
             dom_shape.CustomProps.Add(dom_custprop1);
 
-            var dom_custprop2 = new VA.VDX.Elements.CustomProp(3, "PROP3");
+            var dom_custprop2 = new VA.VDX.Elements.CustomProp("PROP3");
             dom_custprop2.Value = "456";
             dom_custprop2.Type.Result = CustomPropType.Number;
             dom_shape.CustomProps.Add(dom_custprop2);
@@ -357,25 +356,6 @@ namespace TestVisioAutomationVDX
             Assert.AreEqual("2", customprops["PROP3"].Type.Formula);
 
             app.Quit(true);
-        }
-
-        private VA.VDX.Elements.Page GetPage07_CustomProps(VA.VDX.Elements.Drawing doc)
-        {
-            var page = new VA.VDX.Elements.Page(8, 5);
-            doc.Pages.Add(page);
-
-            int rect_id = doc.GetMasterMetaData("REctAngle").ID;
-
-            var shape = new VA.VDX.Elements.Shape(rect_id, 4, 2, 3, 2);
-            shape.CustomProps = new List<VA.VDX.Elements.CustomProp>();
-
-            var cp1 = new VA.VDX.Elements.CustomProp(1, "NAMER");
-
-            shape.CustomProps.Add(cp1);
-
-            page.Shapes.Add(shape);
-
-            return page;
         }
 
         private VA.VDX.Elements.Page GetPage08_Connector_With_Geometry(VA.VDX.Elements.Drawing doc)
