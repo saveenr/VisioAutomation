@@ -95,24 +95,38 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportSelectionAsSVGXHTML(string filename)
         {
+            ExportSelectionAsSVGXHTML2(filename, s=>this.Session.Write(OutputStream.Verbose,s));
+        }
+
+        public void ExportSelectionAsSVGXHTML2(string filename, System.Action<string> verboselog)
+        {
             // Save temp SVG
-            string svg_filename = SaveSelectionAsTemporarySVG();
+            string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
+            var selection = this.Session.Selection.Get();
+            selection.Export(svg_filename);
 
             // Load temp SVG
             var load_svg_timer = new System.Diagnostics.Stopwatch();
             var svg_doc = SXL.XDocument.Load(svg_filename);
             load_svg_timer.Stop();
-            this.Session.Write(OutputStream.Verbose, "Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds);
+            verboselog(string.Format("Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds));
 
             // Delete temp SVG
-            DeleteTemporarySVG(svg_filename);
+            if (System.IO.File.Exists(svg_filename))
+            {
+                System.IO.File.Delete(svg_filename);
+            }
+            else
+            {
+                // TODO: throw an exception
+            }
 
-            this.Session.Write(OutputStream.Verbose, "Creating XHTML with embedded SVG");
+            verboselog(string.Format("Creating XHTML with embedded SVG"));
             var s = svg_filename;
 
             if (System.IO.File.Exists(filename))
             {
-                this.Session.Write(OutputStream.Verbose, "Deleting \"{0}\"", filename);
+                verboselog(string.Format("Deleting \"{0}\"", filename));
                 System.IO.File.Delete(filename);
             }
 
@@ -127,48 +141,9 @@ namespace VisioAutomation.Scripting.Commands
             body.Add(svg_node);
 
             xhtml_doc.Save(filename);
-            this.Session.Write(OutputStream.Verbose, "Done writing XHTML file \"{0}\"", filename);
+            verboselog(string.Format("Done writing XHTML file \"{0}\"", filename));
         }
 
-
-        public void DeleteTemporarySVG(string svg_filename)
-        {
-            if (System.IO.File.Exists(svg_filename))
-            {
-                this.Session.Write(OutputStream.Verbose, "Deleting \"{0}\"", svg_filename);
-                System.IO.File.Delete(svg_filename);
-            }
-            else
-            {
-                string msg = string.Format("Expected to find temp svg filename \"{0}\" but it does not exist", svg_filename);
-                this.Session.Write(OutputStream.Verbose, msg);
-                throw new AutomationException(msg);
-            }
-        }
-
-        public string SaveSelectionAsTemporarySVG()
-        {
-            string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
-
-            if (System.IO.File.Exists(svg_filename))
-            {
-                System.IO.File.Delete(svg_filename);
-            }
-
-            var export_timer = new System.Diagnostics.Stopwatch();
-
-            this.Session.Write(OutputStream.Verbose, "Started SVG export to \"{0}\"", svg_filename);
-
-            var selection = this.Session.Selection.Get();
-            selection.Export(svg_filename);
-            export_timer.Stop();
-
-            this.Session.Write(OutputStream.Verbose, "Finished SVG export ({0} seconds)", export_timer.Elapsed.TotalSeconds);
-
-            var fi = new System.IO.FileInfo(svg_filename);
-            this.Session.Write(OutputStream.Verbose, "SVG File size = {0} bytes", fi.Length);
-            return svg_filename;
-        }
     }
 }
 
