@@ -1,5 +1,4 @@
-﻿using VisioAutomation.Application;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
@@ -24,7 +23,10 @@ namespace VisioAutomation.DOM
 
             this.PerfSettings = new VA.Application.PerfSettings();
             this.PerfSettings.DeferRecalc = 0;
-            // By Default enable this because it messes up page resizing (there may be a workaround)
+            
+            
+            // By Enable ScreenUpdating by default
+            // If it is disabled it messes up page resizing (there may be a workaround)
             // TODO: Try the DrawTreeMultiNode2 unit test to see how setting it to 1 will affect the rendering
 
             this.PerfSettings.ScreenUpdating = 1; 
