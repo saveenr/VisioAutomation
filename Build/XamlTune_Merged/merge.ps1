@@ -5,7 +5,7 @@ $bin_path = join-path $script_path "binaries"
 
 $bin_path
 
-$ilmerge_exe = "C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe"
+$ilmerge_exe = join-path $script_path "../ILMerge.exe"
 $out_file = join-path $script_path "XamlTuneMerged.dll"
 $primary_assembly = join-path $bin_path "XamlTuneConverter.dll"
 
