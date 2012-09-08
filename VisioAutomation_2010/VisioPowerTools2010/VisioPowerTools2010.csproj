@@ -303,10 +303,6 @@
     <None Include="VisioPowerTools2010_100years_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj">
-      <Project>{2ba6e51c-d975-49e3-b6b9-df3d2d951057}</Project>
-      <Name>VisioAutomation.Scripting.XamlTune</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
       <Name>VisioAutomation.Scripting</Name>

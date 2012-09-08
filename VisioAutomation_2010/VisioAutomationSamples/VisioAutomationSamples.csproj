@@ -132,10 +132,6 @@
     <Compile Include="TextSamples.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
-      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
-      <Name>VisioAutomation.Layout.MSAGL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
       <Name>VisioAutomation.Scripting</Name>

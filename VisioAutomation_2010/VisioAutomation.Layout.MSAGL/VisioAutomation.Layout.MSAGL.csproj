@@ -121,4 +121,18 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+
+  <Target Name="AfterBuild">
+    <CreateItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(Extension)'=='.dll'">
+      <Output ItemName="AssembliesToMerge" TaskParameter="Include" />
+    </CreateItem>
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft\ILMerge\ILMerge.exe&quot; /internalize:&quot;$(MSBuildProjectPath)ilmerge.exclude&quot; /ndebug /out:@(MainAssembly) /targetplatform:v4,$(MSBuildToolsPath) &quot;@(IntermediateAssembly)&quot; @(AssembliesToMerge->'&quot;%(FullPath)&quot;', ' ')" />
+    <Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
+  </Target>
+
+
+
+
+
+
 </Project>

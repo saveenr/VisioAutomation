@@ -79,12 +79,17 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="XamlTuneMerged, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>binaries\XamlTuneConverter\XamlTuneMerged.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ReflectionUtil.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\TextUtil.cs" />
+    <Compile Include="XamlTuneHelper.cs" />
     <Compile Include="XmlUtil.cs" />
     <Compile Include="ShapeSheetUpdate.cs" />
     <Compile Include="Commands\ApplicationCommands.cs" />
@@ -120,10 +125,6 @@
     <Compile Include="Zoom.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
-      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
-      <Name>VisioAutomation.Layout.MSAGL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
@@ -153,6 +154,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="binaries\XamlTuneConverter\XamlTuneMerged.dll" />
     <Content Include="visio.py">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
