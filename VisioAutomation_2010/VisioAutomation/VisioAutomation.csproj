@@ -144,7 +144,7 @@
     <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Layout\ShapeLayoutCells.cs" />
     <Compile Include="Layout\MSAGLRenderer.cs" />
-    <Compile Include="Layout\MSAGLUtil.cs" />
+    <Compile Include="Internal\MSAGLUtil.cs" />
     <Compile Include="Pages\PageCells.cs" />
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="Drawing\AlignmentHorizontal.cs" />

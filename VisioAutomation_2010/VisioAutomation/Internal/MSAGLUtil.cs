@@ -3,7 +3,7 @@ using System.Linq;
 using MG = Microsoft.Msagl;
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Layout.MSAGL
+namespace VisioAutomation.Internal
 {
     static class MSAGLUtil
     {
