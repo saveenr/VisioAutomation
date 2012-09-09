@@ -6,7 +6,7 @@ using MG = Microsoft.Msagl;
 using VA = VisioAutomation;
 using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
-namespace VisioAutomation.Layout.MSAGL
+namespace VisioAutomation.Layout.Models.DirectedGraph
 {
     public class MSAGLRenderer
     {
@@ -488,7 +488,7 @@ namespace VisioAutomation.Layout.MSAGL
 
         public static void Render(IVisio.Page page, VisioAutomation.Layout.Models.DirectedGraph.Drawing drawing, VA.Layout.MSAGL.LayoutOptions options)
         {
-            var renderer = new VA.Layout.MSAGL.MSAGLRenderer();
+            var renderer = new VA.Layout.Models.DirectedGraph.MSAGLRenderer();
             renderer.LayoutOptions = options;
             renderer.Render(drawing,page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);

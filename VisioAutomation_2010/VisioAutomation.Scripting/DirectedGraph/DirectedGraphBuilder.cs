@@ -54,7 +54,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         private class PageData
         {
             public int PageNumber;
-            public Layout.MSAGL.MSAGLRenderer Renderer;
+            public VA.Layout.Models.DirectedGraph.MSAGLRenderer Renderer;
             public DGMODEL.Drawing Drawing;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 pagedatas.Add(pagedata);
                 pagedata.PageNumber = pagenum++;
                 pagedata.Errors = new List<BuilderError>();
-                pagedata.Renderer = new Layout.MSAGL.MSAGLRenderer();
+                pagedata.Renderer = new VA.Layout.Models.DirectedGraph.MSAGLRenderer();
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, pagedata.Renderer);
 
@@ -239,7 +239,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     page = doc_pages.Add();
                 }
 
-                VA.Layout.MSAGL.MSAGLRenderer.Render(page, directed_graph_drawing, options);
+                VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page, directed_graph_drawing, options);
 
                 scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
                 scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
@@ -252,7 +252,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering flowchart.");
         }
 
-        private static void GetRenderOptionsFromXml(SXL.XElement el, Layout.MSAGL.MSAGLRenderer directed_graph_layout)
+        private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLRenderer directed_graph_layout)
         {
             System.Func<string, bool> bool_converter = s => bool.Parse(s);
             System.Func<string, int> int_converter = s => int.Parse(s);

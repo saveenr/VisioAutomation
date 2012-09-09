@@ -39,7 +39,7 @@ namespace TestVisioAutomation
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
 
-            VA.Layout.MSAGL.MSAGLRenderer.Render(page, directed_graph_drawing, options);
+            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page, directed_graph_drawing, options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -239,7 +239,7 @@ namespace TestVisioAutomation
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            VA.Layout.MSAGL.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -296,7 +296,7 @@ namespace TestVisioAutomation
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            VA.Layout.MSAGL.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
             
             Assert.IsNotNull(n0.VisioShape);
             var props_dic = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(n0.VisioShape);
