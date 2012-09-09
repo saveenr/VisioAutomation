@@ -8,7 +8,7 @@ using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
 namespace VisioAutomation.Layout.Models.DirectedGraph
 {
-    public class MSAGLRenderer
+    class MSAGLRenderer
     {
         private VA.Drawing.Rectangle msagl_bb;
         private VA.Drawing.Rectangle layout_bb;

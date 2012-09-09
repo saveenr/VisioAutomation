@@ -54,7 +54,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         private class PageData
         {
             public int PageNumber;
-            public VA.Layout.Models.DirectedGraph.MSAGLRenderer Renderer;
+            public VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions LayoutOptions;
             public DGMODEL.Drawing Drawing;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
@@ -78,9 +78,9 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 pagedatas.Add(pagedata);
                 pagedata.PageNumber = pagenum++;
                 pagedata.Errors = new List<BuilderError>();
-                pagedata.Renderer = new VA.Layout.Models.DirectedGraph.MSAGLRenderer();
+                pagedata.LayoutOptions = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
-                GetRenderOptionsFromXml(renderoptions_el, pagedata.Renderer);
+                GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
 
                 pagedata.Drawing = new DGMODEL.Drawing();
                 var shape_els = page_el.Element("shapes").Elements("shape");
@@ -252,16 +252,16 @@ namespace VisioAutomation.Scripting.DirectedGraph
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering flowchart.");
         }
 
-        private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLRenderer directed_graph_layout)
+        private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)
         {
             System.Func<string, bool> bool_converter = s => bool.Parse(s);
             System.Func<string, int> int_converter = s => int.Parse(s);
             System.Func<string, double> double_converter = (s) => double.Parse(s);
 
-            directed_graph_layout.LayoutOptions.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el,
+            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el,
                                                                                                               "usedynamicconnectors",
                                                                                                               bool_converter);
-            directed_graph_layout.LayoutOptions.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el,
+            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el,
                                                                                                        "scalingfactor",
                                                                                                        double_converter);
         }
