@@ -33,13 +33,13 @@ namespace TestVisioAutomation
             var c6 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = false;
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
 
-            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page, directed_graph_drawing, options);
+            directed_graph_drawing.Render(page,options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -233,13 +233,14 @@ namespace TestVisioAutomation
             var c5 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
             var c6 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+            
+            directed_graph_drawing.Render(page1,options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -290,13 +291,14 @@ namespace TestVisioAutomation
             n0.CustomProperties["p2"] = new VA.CustomProperties.CustomPropertyCells("v2");
             n0.CustomProperties["p3"] = new VA.CustomProperties.CustomPropertyCells("v3");
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+
+            directed_graph_drawing.Render(page1, options);
             
             Assert.IsNotNull(n0.VisioShape);
             var props_dic = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(n0.VisioShape);

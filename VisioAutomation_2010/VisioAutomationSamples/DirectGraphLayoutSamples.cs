@@ -63,10 +63,10 @@ namespace VisioAutomationSamples
             c2.Cells.LineWeight = 0.10;
 
             // Perform the rendering
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new DGMODEL.MSAGLLayoutOptions();
             options.UseDynamicConnectors = false;
 
-            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+            directed_graph_drawing.Render(page1, options);
         }
 
         public static void DirectedGraphViaVisio()
@@ -125,7 +125,7 @@ namespace VisioAutomationSamples
             c2.Cells.LineWeight = 0.10;
 
             // Perform the rendering
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new DGMODEL.MSAGLLayoutOptions();
             options.UseDynamicConnectors = false;
 
             directed_graph_drawing.Render(page1);

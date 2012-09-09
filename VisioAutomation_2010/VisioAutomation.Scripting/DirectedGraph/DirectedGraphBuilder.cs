@@ -222,7 +222,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                 scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering page: {0}", i + 1);
 
-                var options = new VA.Layout.MSAGL.LayoutOptions();
+                var options = new DGMODEL.MSAGLLayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 IVisio.Page page = null;
@@ -239,7 +239,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     page = doc_pages.Add();
                 }
 
-                VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page, directed_graph_drawing, options);
+                directed_graph_drawing.Render(page, options);
 
                 scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
                 scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);

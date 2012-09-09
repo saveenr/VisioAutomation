@@ -2,7 +2,6 @@
 
 namespace VisioAutomation.Layout.Models.DirectedGraph
 {
-
     public class LayoutOptions
     {
         public VA.Drawing.Size ResizeBorderWidth { get; set; }
@@ -16,7 +15,6 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             DefaultShapeSize = new VA.Drawing.Size(1.0, 0.75);
             HideConnectionPoints = true;
             HideGrid = true;            
-        }
-        
+        }        
     }
 }

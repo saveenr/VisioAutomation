@@ -161,5 +161,10 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             dompage.ResizeToFitMargin = new VA.Drawing.Size(0.5, 0.5);
             dompage.Render(page);
         }
+
+        public void Render(IVisio.Page page, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)
+        {
+            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page, this, options);
+        }
     }
 }
