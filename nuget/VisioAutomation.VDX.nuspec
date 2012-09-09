@@ -1,7 +1,7 @@
 <package >
   <metadata>
     <id>VisioAutomation.VDX</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -9,7 +9,9 @@
     <iconUrl>http://viziblr.com/storage/visioautomation/visioautomation-128x128.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>VisioAutomation.VDX helps create Visio diagrams using the VDX file format. It does not require a running instance of Visio and is useful for server-side diagram creation.</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+	Now adding custom properties works correctly. Also, IDs for custom properties are automatically calculated.
+    </releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Visio VDX</tags>
     <dependencies>
