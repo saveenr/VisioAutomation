@@ -12,7 +12,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var ss = this.ScriptingSession;
-            VAS.XamlTune.XamlTuneHelper.ExportSelectionAsXAML(ss, this.Filename);
+            ss.Export.ExportSelectionToXAML(this.Filename);
         }
     }
 }

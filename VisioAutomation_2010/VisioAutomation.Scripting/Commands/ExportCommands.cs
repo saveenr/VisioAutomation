@@ -93,9 +93,36 @@ namespace VisioAutomation.Scripting.Commands
             old_page.Activate();
         }
 
-        public void ExportSelectionAsSVGXHTML(string filename)
+        public void ExportSelectionToXAML(string filename)
         {
-            VA.ExportHelper.ExportSelectionAsSVGXHTML2(this.Session.Selection.Get(),filename, s=>this.Session.Write(OutputStream.Verbose,s));
+            if (filename == null)
+            {
+                throw new System.ArgumentNullException("filename");
+            }
+
+            if (!this.Session.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var selection = this.Session.Selection.Get();
+            VA.ExportHelper.ExportSelectionAsXAML2(this.Session.Selection.Get(), filename, s => this.Session.Output.Write(OutputStream.Verbose, s));
+        }
+
+        public void ExportSelectionToSVGXHTML(string filename)
+        {
+            if (filename == null)
+            {
+                throw new System.ArgumentNullException("filename");
+            }
+
+            if (!this.Session.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var selection = this.Session.Selection.Get();
+            VA.ExportHelper.ExportSelectionAsSVGXHTML2(this.Session.Selection.Get(), filename, s => this.Session.Write(OutputStream.Verbose, s));
         }
     }
 }
