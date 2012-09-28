@@ -5,6 +5,14 @@ namespace VisioAutomation.UI
     using System.ComponentModel;
     using System.Windows.Forms;
 
+    public enum DirectionRelative
+    {
+        Up,
+        Right,
+        Left,
+        Down
+    }
+
     public partial class ThreePointFillControl : UserControl
     {
         [Browsable(true)]
@@ -29,25 +37,25 @@ namespace VisioAutomation.UI
         }
 
         [Browsable(true)]
-        public VA.Drawing.DirectionRelative Direction
+        public DirectionRelative Direction
         {
             get
             {
                 if (this.radioButtonUp.Checked)
                 {
-                    return VA.Drawing.DirectionRelative.Up;
+                    return DirectionRelative.Up;
                 }
                 else if (this.radioButtonRight.Checked)
                 {
-                    return VA.Drawing.DirectionRelative.Right;
+                    return DirectionRelative.Right;
                 }
                 else if (this.radioButtonDown.Checked)
                 {
-                    return VA.Drawing.DirectionRelative.Down;
+                    return DirectionRelative.Down;
                 }
                 else if (this.radioButtonLeft.Checked)
                 {
-                    return VA.Drawing.DirectionRelative.Left;
+                    return DirectionRelative.Left;
                 }
                 else
                 {
@@ -57,10 +65,10 @@ namespace VisioAutomation.UI
 
             set
             {
-                this.radioButtonUp.Checked = (value == VA.Drawing.DirectionRelative.Up);
-                this.radioButtonDown.Checked = (value == VA.Drawing.DirectionRelative.Down);
-                this.radioButtonLeft.Checked = (value == VA.Drawing.DirectionRelative.Left);
-                this.radioButtonRight.Checked = (value == VA.Drawing.DirectionRelative.Right);
+                this.radioButtonUp.Checked = (value == DirectionRelative.Up);
+                this.radioButtonDown.Checked = (value == DirectionRelative.Down);
+                this.radioButtonLeft.Checked = (value == DirectionRelative.Left);
+                this.radioButtonRight.Checked = (value == DirectionRelative.Right);
             }
         }
 
@@ -68,7 +76,7 @@ namespace VisioAutomation.UI
         {
             InitializeComponent();
 
-            this.Direction = VA.Drawing.DirectionRelative.Right;
+            this.Direction =DirectionRelative.Right;
         }
 
         private void UC3PointFill_Load(object sender, System.EventArgs e)
