@@ -15,57 +15,6 @@ namespace VisioPowerTools
             this.update_from_selection();
         }
 
-        private void buttonSet2ColorGlow_Click(object sender, System.EventArgs e)
-        {
-            var vis = Globals.VisioPowerToolsAddIn.Application;
-            var active_window = vis.ActiveWindow;
-            var selection = active_window.Selection;
-            if (selection.Count < 1)
-            {
-                return;
-            }
-
-            var upper_glow_color = new VA.Drawing.ColorRGB(this.uC2ColorGlow1.UpperColor);
-            var lower_glow_color = new VA.Drawing.ColorRGB(this.uC2ColorGlow1.LowerColor);
-            double uppertrans = this.uC2ColorGlow1.UpperTransparency/100.0;
-            double lowertrans = this.uC2ColorGlow1.LowerTransparency/100.0;
-            double scale = this.uC2ColorGlow1.GlowSize/100.0;
-
-            var fildef = new VA.Effects.TwoColorGlow();
-            fildef.TopColor = upper_glow_color;
-            fildef.BottomColor = lower_glow_color;
-            fildef.TopTransparency = uppertrans;
-            fildef.BottomTransparency = lowertrans;
-            fildef.Scale = scale;
-
-            var fmt = fildef.GetFormat();
-
-            VisioPowerToolsAddIn.ScriptingSession.Format.SetFormat(fmt);
-        }
-
-        private void buttonSet3PointFill_Click(object sender, System.EventArgs e)
-        {
-            var vis = Globals.VisioPowerToolsAddIn.Application;
-            var active_window = vis.ActiveWindow;
-            var selection = active_window.Selection;
-            if (selection.Count < 1)
-            {
-                return;
-            }
-
-            var filldef = new VA.Effects.ThreePointGradientFill();
-            filldef.Direction = this.uC3PointFill1.Direction;
-            filldef.SideColor = new VA.Drawing.ColorRGB(this.uC3PointFill1.EdgeColor);
-            filldef.SideTransparency = 0.0;
-            filldef.Corner1Color = new VA.Drawing.ColorRGB(this.uC3PointFill1.Corner1Color);
-            filldef.Corner1Transparency = 0.0;
-            filldef.Corner2Color = new VA.Drawing.ColorRGB(this.uC3PointFill1.Corner2Color);
-            filldef.Corner2Transparency = 0.0;
-            var fmt = filldef.GetFormat();
-
-            VisioPowerToolsAddIn.ScriptingSession.Format.SetFormat(fmt);
-        }
-
         private void buttonSetFillGradient_Click(object sender, System.EventArgs e)
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
