@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using VA=VisioAutomation;
 
@@ -14,24 +12,46 @@ namespace VisioAutomation.ShapeSheet.Data
     /// <typeparam name="T"></typeparam>
     public class Table<T> : IEnumerable<TableRow<T>>
     {
-        private readonly T[,] _values;
+        private readonly T[] _values;
         private readonly int rowcount;
-        private readonly TableColumnList<T> _cols;
+        private readonly int colcount;
 
         public TableRowGroupList Groups { get; private set; }
 
-        internal Table(int rows, int cols, TableRowGroupList groups, T[,] values)
+        internal Table(int rows, int cols, TableRowGroupList groups, T[] values)
         {
+            int total_cells = rows*cols;
+            if (values.Length != total_cells)
+            {
+                throw new VA.AutomationException("incorret number of values for rows and columns");
+            }
+
             this._values = values;
             this.Groups = groups;
             this.rowcount = rows;
-            this._cols = new TableColumnList<T>(this, cols);
+            this.colcount = cols;
+        }
+
+        private int get_pos(int row, int col)
+        {
+            if (row >= this.rowcount)
+            {
+                throw new System.ArgumentOutOfRangeException("row");
+            }
+            if (col >= this.colcount)
+            {
+                throw new System.ArgumentOutOfRangeException("col");
+            }
+            return (row * this.colcount) + col;
         }
 
         public T this[int row, int column]
         {
-            get { return this._values[row, column]; }
-            set { this._values[row, column] = value; }
+            get
+            {
+                return this._values[get_pos(row,column)];
+            }
+            set { this._values[get_pos(row, column)] = value; }
         }
 
         public T this[int row, VA.ShapeSheet.Query.QueryColumn column]
@@ -42,16 +62,10 @@ namespace VisioAutomation.ShapeSheet.Data
                 {
                     throw new System.ArgumentNullException("column");
                 }
-                return this._values[row, column.Ordinal];
+                return this._values[get_pos(row, column.Ordinal)];
             }
-            set { this._values[row, column.Ordinal] = value; }
+            set { this._values[get_pos(row, column.Ordinal)] = value; }
         }
-
-        public TableColumnList<T> Columns
-        {
-            get { return this._cols; }
-        }
-
 
         public IEnumerator<TableRow<T>> GetEnumerator()
         {
@@ -66,7 +80,7 @@ namespace VisioAutomation.ShapeSheet.Data
             return GetEnumerator();
         }
 
-        public int Count
+        public int RowCount
         {
             get { return this.rowcount; }
         }
@@ -76,5 +90,14 @@ namespace VisioAutomation.ShapeSheet.Data
             get { return new TableRow<T>(this,index); }
         }
 
+        internal T[] RawArray
+        {
+            get { return this._values; }
+        }
+
+        public int ColumnCount
+        {
+            get { return this.colcount; }
+        }
     }
 }

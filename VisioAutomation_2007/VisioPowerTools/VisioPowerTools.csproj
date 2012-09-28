@@ -174,9 +174,6 @@
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Office.Interop.Visio, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Microsoft.Office.Tools, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -377,14 +374,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
-      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
-      <Name>VisioAutomation.Layout.MSAGL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj">
-      <Project>{2BA6E51C-D975-49E3-B6B9-DF3D2D951057}</Project>
-      <Name>VisioAutomation.Scripting.XamlTune</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
       <Name>VisioAutomation.Scripting</Name>
@@ -400,6 +389,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="VisioPowerTools_TemporaryKey_10Year.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Visio">
+      <Guid>{00021A98-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>12</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

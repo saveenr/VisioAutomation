@@ -1,5 +1,4 @@
-﻿using System;
-using VisioAutomation.Extensions;
+﻿using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -18,9 +17,10 @@ namespace VisioAutomation
                 throw new System.ArgumentNullException("docs");
             }
 
+            var application = docs.Application;
+
             while (docs.Count > 0)
             {
-                var application = docs.Application;
                 var active_document = application.ActiveDocument;
                 active_document.Close(true);
             }
@@ -55,7 +55,6 @@ namespace VisioAutomation
                 return null;
             }
         }
-
 
         public static void Activate(IVisio.Document doc)
         {
@@ -96,7 +95,7 @@ namespace VisioAutomation
         {
             if (force_close)
             {
-                var new_alert_response = VA.UI.AlertResponseCode.No;
+                var new_alert_response = VA.Application.AlertResponseCode.No;
                 var app = doc.Application;
 
                 using (var alertresponse = app.CreateAlertResponseScope(new_alert_response))

@@ -35,7 +35,7 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral ResizePage { get; set; }
         public ShapeSheet.FormulaLiteral RouteStyle { get; set; }
 
-        public void Apply(VA.ShapeSheet.Update.SIDSRCUpdate update, short id)
+        public void Apply(VA.ShapeSheet.Update update, short id)
         {
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeX, AvenueSizeX);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.AvenueSizeY, AvenueSizeY);
@@ -64,11 +64,6 @@ namespace VisioAutomation.DOM
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.PlowCode, PlowCode);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ResizePage, ResizePage);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.RouteStyle, RouteStyle);
-        }
-
-        public PageCells ShallowCopy()
-        {
-            return (PageCells) this.MemberwiseClone();
         }
     }
 }

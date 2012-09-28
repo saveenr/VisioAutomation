@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -63,6 +62,20 @@ namespace VisioAutomation.Format
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_Locale);
             this.Add(VA.Format.FormatCategory.Character, VA.ShapeSheet.SRCConstants.Char_LocalizeFont);
 
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_Bullet);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_BulletFont);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_BulletFontSize);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_BulletStr);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_Flags);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_HorzAlign);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_IndFirst);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_IndLeft);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_IndRight);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_SpAfter);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_SpBefore);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_SpLine);
+            this.Add(VA.Format.FormatCategory.Paragraph, VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet);
         }
 
         public void Add(VA.Format.FormatCategory Category, VA.ShapeSheet.SRC src)
@@ -86,9 +99,9 @@ namespace VisioAutomation.Format
             var query = new VA.ShapeSheet.Query.CellQuery();
             var desired_cells = this.Cells.Where(cell => cell.MatchesCategory(category)).ToList();
 
-            foreach (var src in desired_cells.Select(c => c.SRC))
+            foreach (var cell in desired_cells)
             {
-                query.AddColumn(src);
+                query.AddColumn(cell.SRC);
             }
 
             // Retrieve the values for the cells
@@ -99,39 +112,43 @@ namespace VisioAutomation.Format
             {
                 var cellrec = desired_cells[col];
 
-                var result = dataset.Results[0, col];
-                var formula = dataset.Formulas[0, col];
+                var result = dataset[0, col].Result;
+                var formula = dataset[0, col].Formula;
 
                 cellrec.Result = result;
-                cellrec.Formula = formula;
+                cellrec.Formula = formula.Value;
             }
         }
 
         public void PasteFormat(IVisio.Page page, IList<int> shapeids, VA.Format.FormatCategory category)
         {
-
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
 
             foreach (var shape_id in shapeids)
             {
                 foreach (var cellrec in this.Cells)
                 {
-                    if (cellrec.Result.HasValue && cellrec.MatchesCategory(category))
+                    if (!cellrec.MatchesCategory(category))
                     {
-                        var sidsrc = new VA.ShapeSheet.SIDSRC((short)shape_id, cellrec.SRC);
-                        update.SetFormula(sidsrc, cellrec.Result.Value);
+                        continue;
                     }
+
+                    if (!cellrec.Result.HasValue)
+                    {
+                        continue;
+                    }
+
+                    var sidsrc = new VA.ShapeSheet.SIDSRC((short)shape_id, cellrec.SRC);
+                    update.SetFormula(sidsrc, cellrec.Result.Value);
                 }
             }
 
             update.Execute(page);
         }
 
-        public VA.Format.FormatCategory GetAllFormatPaintFlags()
+        public FormatCategory GetAllFormatPaintFlags()
         {
-            return VA.Format.FormatCategory.Fill | VA.Format.FormatCategory.Line | VA.Format.FormatCategory.Shadow |
-                   VA.Format.FormatCategory.Character;
+            return FormatCategory.Fill | FormatCategory.Line | FormatCategory.Shadow | FormatCategory.Character | FormatCategory.Paragraph;
         }
-
     }
 }

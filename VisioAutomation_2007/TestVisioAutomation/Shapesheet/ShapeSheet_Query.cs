@@ -23,8 +23,8 @@ namespace TestVisioAutomation
 
         public static T[] GetRow<T>(VA.ShapeSheet.Data.Table<T> table, int row)
         {
-            var a = new T[table.Columns.Count];
-            for (int i = 0; i < table.Columns.Count; i++)
+            var a = new T[table.ColumnCount];
+            for (int i = 0; i < table.ColumnCount; i++)
             {
                 a[i] = table[row, i];
             }
@@ -77,14 +77,10 @@ namespace TestVisioAutomation
             // now retrieve the results with GetResults as floats
             var float_results = query.GetResults<double>(page1,shapeids);
             Assert.IsNotNull(float_results);
-            Assert.AreEqual(24.0, float_results[0, col_fg]);
-            Assert.AreEqual(25.0, float_results[0, col_bg]);
             Assert.AreEqual(40.0, float_results[0,col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
-            Assert.AreEqual(24, int_results[0, col_fg]);
-            Assert.AreEqual(25, int_results[0, col_bg]);
             Assert.AreEqual(40, int_results[0, col_filpat]);
 
             // now retrieve the results with GetResults as strings
@@ -181,10 +177,8 @@ namespace TestVisioAutomation
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
             // Check the grouping
-            Assert.AreEqual(shapeids.Count(), r.Formulas.Count); // the total number of rows should match the number of shapeids
-            Assert.AreEqual(shapeids.Count(), r.Formulas.Groups.Count); // the total number of groups should be the number of shapes we asked for
-            Assert.AreEqual(shapeids.Count(), r.Results.Count); // the total number of rows should match the number of shapeids
-            Assert.AreEqual(shapeids.Count(), r.Results.Groups.Count); // the total number of groups should be the number of shapes we asked for
+            Assert.AreEqual(shapeids.Count(), r.RowCount); // the total number of rows should match the number of shapeids
+            Assert.AreEqual(shapeids.Count(), r.Groups.Count); // the total number of groups should be the number of shapes we asked for
 
             var expected_pinpos = new List<VA.Drawing.Point>
                                       {
@@ -193,12 +187,12 @@ namespace TestVisioAutomation
                                           new VA.Drawing.Point(6, 6)
                                       };
 
-            var actual_pinpos = new List<VA.Drawing.Point>(r.Results.Count);
-            foreach (var row in Enumerable.Range(0, r.Results.Count))
+            var actual_pinpos = new List<VA.Drawing.Point>(r.RowCount);
+            foreach (var row in Enumerable.Range(0, r.RowCount))
             {
                  var p = new VA.Drawing.Point(
-                    r.Results[row, col_pinx],
-                    r.Results[row, col_piny]);
+                    r[row, col_pinx].Result,
+                    r[row, col_piny].Result);
                 actual_pinpos.Add(p);
             }
 
@@ -243,12 +237,12 @@ namespace TestVisioAutomation
                                       };
 
 
-            for (int row = 0; row < r.Formulas.Count; row++)
+            for (int row = 0; row < r.RowCount; row++)
             {
-                for (int col = 0; col < r.Formulas.Columns.Count; col++)
+                for (int col = 0; col < r.ColumnCount; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row, col], r.Formulas[row, col]);
-                    Assert.AreEqual(expected_results[row, col], r.Results[row, col]);
+                    Assert.AreEqual(expected_formulas[row, col], r[row, col].Formula);
+                    Assert.AreEqual(expected_results[row, col], r[row, col].Result);
                 }
             }
 
@@ -278,48 +272,28 @@ namespace TestVisioAutomation
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var r = query.GetFormulasAndResults<double>(
+            var table = query.GetFormulasAndResults<double>(
                 page1,
                 shapeids);
 
-            var tabler = r.Results;
-            var tablef = r.Formulas;
+            Assert.AreEqual(4, table.Groups.Count);
+            Assert.AreEqual(1, table.Groups[0].Count);
+            Assert.AreEqual(2, table.Groups[1].Count);
+            Assert.AreEqual(0, table.Groups[2].Count);
+            Assert.AreEqual(3, table.Groups[3].Count);
 
-            Assert.AreEqual(4, tabler.Groups.Count);
-            Assert.AreEqual(1, tabler.Groups[0].Count);
-            Assert.AreEqual(2, tabler.Groups[1].Count);
-            Assert.AreEqual(0, tabler.Groups[2].Count);
-            Assert.AreEqual(3, tabler.Groups[3].Count);
+            var gf0 = GetRowsInGroup(table, 0);
+            var gf1 = GetRowsInGroup(table, 1);
+            var gf2 = GetRowsInGroup(table, 2);
+            var gf3 = GetRowsInGroup(table, 3);
 
-            var gf0 = GetRowsInGroup<string>(tablef, 0);
-            var gf1 = GetRowsInGroup<string>(tablef, 1);
-            var gf2 = GetRowsInGroup<string>(tablef, 2);
-            var gf3 = GetRowsInGroup<string>(tablef, 3);
 
-            var gr0 = GetRowsInGroup<double>(tabler, 0);
-            var gr1 = GetRowsInGroup<double>(tabler, 1);
-            var gr2 = GetRowsInGroup<double>(tabler, 2);
-            var gr3 = GetRowsInGroup<double>(tabler, 3);
-
-            Assert.AreEqual("\"1\"", gf0[0][0]);
-            Assert.AreEqual("\"2\"", gf1[0][0]);
-            Assert.AreEqual("\"3\"", gf1[1][0]);
-            Assert.AreEqual("\"4\"", gf3[0][0]);
-            Assert.AreEqual("\"5\"", gf3[1][0]);
-            Assert.AreEqual("\"6\"", gf3[2][0]);
-
-            Assert.AreEqual(4, tabler.Groups.Count);
-            Assert.AreEqual(1, gf0.Count);
-            Assert.AreEqual(2, gf1.Count);
-            Assert.AreEqual(0, gf2.Count);
-            Assert.AreEqual(3, gf3.Count);
-
-            Assert.AreEqual(1.0, gr0[0][0]);
-            Assert.AreEqual(2.0, gr1[0][0]);
-            Assert.AreEqual(3.0, gr1[1][0]);
-            Assert.AreEqual(4.0, gr3[0][0]);
-            Assert.AreEqual(5.0, gr3[1][0]);
-            Assert.AreEqual(6.0, gr3[2][0]);
+            AssertVA.AreEqual("\"1\"", 1.0, gf0[0][0]);
+            AssertVA.AreEqual("\"2\"", 2.0, gf1[0][0]);
+            AssertVA.AreEqual("\"3\"", 3.0, gf1[1][0]);
+            AssertVA.AreEqual("\"4\"", 4.0, gf3[0][0]);
+            AssertVA.AreEqual("\"5\"", 5.0, gf3[1][0]);
+            AssertVA.AreEqual("\"6\"", 6.0, gf3[2][0]);
 
             page1.Delete(0);
         }
@@ -337,17 +311,14 @@ namespace TestVisioAutomation
             query.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value.Cell);
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var r = query.GetFormulasAndResults<double>(
+            var table = query.GetFormulasAndResults<double>(
                 page1, shapeids);
-
-            var tabler = r.Results;
-
-            Assert.AreEqual(4, tabler.Groups.Count);
-
-            Assert.AreEqual(0, tabler.Groups[0].Count);
-            Assert.AreEqual(0, tabler.Groups[1].Count);
-            Assert.AreEqual(0, tabler.Groups[2].Count);
-            Assert.AreEqual(0, tabler.Groups[3].Count);
+            
+            Assert.AreEqual(4, table.Groups.Count);
+            Assert.AreEqual(0, table.Groups[0].Count);
+            Assert.AreEqual(0, table.Groups[1].Count);
+            Assert.AreEqual(0, table.Groups[2].Count);
+            Assert.AreEqual(0, table.Groups[3].Count);
 
             page1.Delete(0);
         }

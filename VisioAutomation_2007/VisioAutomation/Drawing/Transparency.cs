@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 
 namespace VisioAutomation.Drawing
 {
@@ -26,7 +24,8 @@ namespace VisioAutomation.Drawing
 
         public string ToFormula()
         {
-            var formula = this.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            var invariantCulture = System.Globalization.CultureInfo.InvariantCulture;
+            var formula = this.Value.ToString(invariantCulture);
             return formula;
         }
     }

@@ -140,19 +140,22 @@ namespace TestVisioAutomation
             VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(s1, "FOO2", "BAR3", null);
 
             var names1 = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCellNames(s1);
-            Assert.AreEqual("FOO1", names1[0]);
-            Assert.AreEqual("FOO2", names1[1]);
+            Assert.AreEqual(2,names1.Count);
+            Assert.IsTrue(names1.Contains("FOO1"));
+            Assert.IsTrue(names1.Contains("FOO2"));
 
             Assert.AreEqual(2, VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCellCount(s1));
             VA.UserDefinedCells.UserDefinedCellsHelper.DeleteUserDefinedCell(s1, "FOO1");
 
             var names2 = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCellNames(s1);
-            Assert.AreEqual("FOO2", names2[0]);
+            Assert.AreEqual(1, names2.Count);
+            Assert.IsTrue(names2.Contains("FOO2"));
 
             VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(s1, "FOO3", "BAR1", null);
             var names3 = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCellNames(s1);
-            Assert.AreEqual("FOO3", names3[0]);
-            Assert.AreEqual("FOO2", names3[1]);
+            Assert.AreEqual(2, names3.Count);
+            Assert.IsTrue(names3.Contains("FOO2"));
+            Assert.IsTrue(names3.Contains("FOO3"));
 
             VA.UserDefinedCells.UserDefinedCellsHelper.DeleteUserDefinedCell(s1, "FOO3");
 

@@ -1,11 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-
+using GRIDLAYOUT = VisioAutomation.Layout.Models.Grid;
+using RADIALLAYOUT = VisioAutomation.Layout.Models.Radial;
+using ORGCHARTLAYOUT = VisioAutomation.Layout.Models.OrgChart;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -24,17 +24,17 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (datatable == null)
             {
-                throw new ArgumentNullException("datatable");
+                throw new System.ArgumentNullException("datatable");
             }
 
             if (widths == null)
             {
-                throw new ArgumentNullException("widths");
+                throw new System.ArgumentNullException("widths");
             }
 
             if (heights == null)
             {
-                throw new ArgumentNullException("heights");
+                throw new System.ArgumentNullException("heights");
             }
 
             if (datatable.Rows.Count < 1)
@@ -56,12 +56,12 @@ namespace VisioAutomation.Scripting.Commands
             page.Background = 0; // ensure this is a foreground page
 
             var pagesize = page.GetSize();
-            
-            
-            var layout = new VA.Layout.Grid.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VA.Drawing.Size(1,1), masterobj);
+
+
+            var layout = new GRIDLAYOUT.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VA.Drawing.Size(1, 1), masterobj);
             layout.Origin = new VA.Drawing.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
-            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            layout.RowDirection = GRIDLAYOUT.RowDirection.TopToBottom;
             layout.PerformLayout();
 
             foreach (var i in Enumerable.Range(0, datatable.Rows.Count))
@@ -71,7 +71,7 @@ namespace VisioAutomation.Scripting.Commands
                 for (int col_index = 0; col_index < row.ItemArray.Length; col_index++)
                 {
                     var col = row.ItemArray[col_index];
-                    var cur_label = (col != null) ? col.ToString() : String.Empty;
+                    var cur_label = (col != null) ? col.ToString() : string.Empty;
                     var node = layout.GetNode(col_index, i);
                     node.Text = cur_label;
                 }
@@ -89,7 +89,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Grid( VA.Layout.Grid.GridLayout layout)
+        public void Grid(GRIDLAYOUT.GridLayout layout)
         {
             
             //Create a new page to hold the grid
@@ -216,8 +216,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var slices = VA.Layout.Radial.PieSlice.GetSlicesFromValues(center, radius, values);
-            var shapes = new List<Shape>(slices.Count);
+            var slices = RADIALLAYOUT.PieSlice.GetSlicesFromValues(center, radius, values);
+            var shapes = new List<IVisio.Shape>(slices.Count);
             foreach (var slice in slices)
             {
                 var shape = slice.Render(page);
@@ -226,10 +226,10 @@ namespace VisioAutomation.Scripting.Commands
             return shapes;
         }
 
-        public void OrgChart(VA.Layout.OrgChart.Drawing drawing)
+        public void OrgChart(ORGCHARTLAYOUT.Drawing drawing)
         {
             this.Session.Write(VA.Scripting.OutputStream.Verbose, "Start OrgChart Rendering");
-            var renderer = new VA.Layout.OrgChart.OrgChartLayout();
+            var renderer = new ORGCHARTLAYOUT.OrgChartLayout();
             var application = this.Session.VisioApplication;
             drawing.Render(application);
             var active_page = application.ActivePage;

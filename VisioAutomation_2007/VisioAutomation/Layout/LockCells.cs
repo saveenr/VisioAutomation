@@ -53,7 +53,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
         }
 
-        private static LockCells get_cells_from_row(LockQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static LockCells get_cells_from_row(LockQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new LockCells();
             cells.LockAspect = row[query.LockAspect].ToBool();
@@ -82,37 +82,37 @@ namespace VisioAutomation.Layout
         internal static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new LockQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static LockCells GetCells(IVisio.Shape shape)
         {
             var query = new LockQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
 
         class LockQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQueryColumn LockAspect { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockBegin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockCalcWH { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockCrop { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockCustProp { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockDelete { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockEnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockFormat { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockFromGroupFormat { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockGroup { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockHeight { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockMoveX { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockMoveY { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockRotate { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockSelect { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockTextEdit { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockThemeColors { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockThemeEffects { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockVtxEdit { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LockWidth { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockAspect { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockBegin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockCalcWH { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockCrop { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockCustProp { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockDelete { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockEnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockFormat { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockFromGroupFormat { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockGroup { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockHeight { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockMoveX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockMoveY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockRotate { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockSelect { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockTextEdit { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockThemeColors { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockThemeEffects { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockVtxEdit { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LockWidth { get; set; }
 
             public LockQuery() :
                 base()
@@ -140,5 +140,28 @@ namespace VisioAutomation.Layout
             }
         }
 
+        internal void SetAll(VA.Layout.LockCells lc, string formula)
+        {
+            lc.LockAspect = formula;
+            lc.LockBegin = formula;
+            lc.LockCalcWH = formula;
+            lc.LockCrop = formula;
+            lc.LockCustProp = formula;
+            lc.LockDelete = formula;
+            lc.LockEnd = formula;
+            lc.LockFormat = formula;
+            lc.LockFromGroupFormat = formula;
+            lc.LockGroup = formula;
+            lc.LockHeight = formula;
+            lc.LockMoveX = formula;
+            lc.LockMoveY = formula;
+            lc.LockRotate = formula;
+            lc.LockSelect = formula;
+            lc.LockTextEdit = formula;
+            lc.LockThemeColors = formula;
+            lc.LockThemeEffects = formula;
+            lc.LockVtxEdit = formula;
+            lc.LockWidth = formula;
+        }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
-using System.Collections.Generic;
 using VA = VisioAutomation;
-using System.Linq;
 
 namespace VisioAutomation.Extensions
 {

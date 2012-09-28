@@ -2,6 +2,7 @@
 using System.Xml.Linq;
 using VisioAutomation.Extensions;
 using System.Linq;
+using VisioAutomation.Format;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
@@ -14,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void SetFormat(VA.Format.ShapeFormatCells format)
+        public void Set(VA.Format.ShapeFormatCells format)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -22,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -32,6 +33,19 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             update.Execute(this.Session.VisioApplication.ActivePage);            
+        }
+
+        public IList<VA.Format.ShapeFormatCells> Get()
+        {
+            if (!this.Session.HasSelectedShapes())
+            {
+                return new List<ShapeFormatCells>(0);
+            }
+
+            var shapes = this.Session.Selection.EnumShapes().ToList();
+            var shapeids = shapes.Select(s => s.ID).ToList();
+            var fmts = VA.Format.FormatHelper.GetShapeFormat(this.Session.VisioApplication.ActivePage, shapeids);
+            return fmts;
         }
 
         public void Duplicate(int n)
@@ -112,7 +126,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
 
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();

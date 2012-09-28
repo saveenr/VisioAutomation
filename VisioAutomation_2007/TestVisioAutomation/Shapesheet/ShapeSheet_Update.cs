@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -10,34 +11,27 @@ namespace TestVisioAutomation
     public class ShapeSheet_Update : VisioAutomationTest
     {
         private static VA.ShapeSheet.SRC src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-        private static VA.ShapeSheet.SRC src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-        private static VA.ShapeSheet.SRC src_fillpat = VA.ShapeSheet.SRCConstants.FillPattern;
         private static VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;
         private static VA.ShapeSheet.SRC src_piny = VA.ShapeSheet.SRCConstants.PinY;
         private static VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
-        public void Set_Cell_On_Shape()
+        public void UpdateShapeFormulas()
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             string fg_formula = VA.Convert.ColorToFormulaRGB(255, 0, 0);
-            string bg_formula = VA.Convert.ColorToFormulaRGB(255, 128, 0);
 
             // Setup the modifications to the cell values
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             update.SetFormula(src_fg, fg_formula);
-            update.SetFormula(src_bg, bg_formula);
-            update.SetFormula(src_fillpat, 40);
-            update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNoCast);
+            update.SetFormula(src_linepat, "7");
             update.Execute(shape1);
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
             var col_fg = query.AddColumn(src_fg);
-            var col_bg = query.AddColumn(src_bg);
-            var col_fillpat = query.AddColumn(src_fillpat);
             var col_linepat = query.AddColumn(src_linepat);
 
             // Retrieve the values
@@ -46,15 +40,41 @@ namespace TestVisioAutomation
 
             // Verify
             Assert.AreEqual("RGB(255,0,0)", formulas[0, col_fg]);
-            Assert.AreEqual("RGB(255,128,0)", formulas[0, col_bg]);
-            Assert.AreEqual("40", formulas[0, col_fillpat]);
-            Assert.AreEqual(7.0, results[0, col_linepat]);
+            Assert.AreEqual("7", formulas[0, col_linepat]);
+            Assert.AreEqual(7, results[0, col_linepat]);
 
             page1.Delete(0);
         }
 
         [TestMethod]
-        public void Set_Cells_Formulas_On_Shapes()
+        public void UpdateShapeResults()
+        {
+            var page1 = GetNewPage();
+            var shape1 = page1.DrawRectangle(0, 0, 1, 1);
+
+
+            // Setup the modifications to the cell values
+            var update = new VA.ShapeSheet.Update();
+            update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNoCast);
+            update.Execute(shape1);
+
+            // Build the query
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_linepat = query.AddColumn(src_linepat);
+
+            // Retrieve the values
+            var formulas = query.GetFormulas(shape1);
+            var results = query.GetResults<double>(shape1);
+
+            // Verify
+            Assert.AreEqual("7", formulas[0, col_linepat]);
+            Assert.AreEqual(7, results[0, col_linepat]);
+
+            page1.Delete(0);
+        }
+
+        [TestMethod]
+        public void UpdateShapesFormulas()
         {
             var page1 = GetNewPage();
 
@@ -64,7 +84,7 @@ namespace TestVisioAutomation
 
 
             // Set the formulas
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             update.SetFormula(shape1.ID16, src_pinx, 0.5);
             update.SetFormula(shape1.ID16, src_piny, 0.5);
             update.SetFormula(shape2.ID16, src_pinx, 1.5);
@@ -82,56 +102,102 @@ namespace TestVisioAutomation
 
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
-            Assert.AreEqual("0.5 in", r.Formulas[0, col_pinx]);
-            Assert.AreEqual("0.5 in", r.Formulas[0, col_piny]);
-            Assert.AreEqual("1.5 in", r.Formulas[1, col_pinx]);
-            Assert.AreEqual("1.5 in", r.Formulas[1, col_piny]);
-            Assert.AreEqual("2.5 in", r.Formulas[2, col_pinx]);
-            Assert.AreEqual("2.5 in", r.Formulas[2, col_piny]);
-
-            Assert.AreEqual(0.5, r.Results[0, col_pinx]);
-            Assert.AreEqual(0.5, r.Results[0, col_piny]);
-            Assert.AreEqual(1.5, r.Results[1, col_pinx]);
-            Assert.AreEqual(1.5, r.Results[1, col_piny]);
-            Assert.AreEqual(2.5, r.Results[2, col_pinx]);
-            Assert.AreEqual(2.5, r.Results[2, col_piny]);
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_pinx]);
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_piny]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_pinx]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_piny]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_pinx]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_piny]);
 
             page1.Delete(0);
         }
 
         [TestMethod]
-        public void Set_1_Cell_on_Many_Shapes()
+        public void UpdateShapesResults()
         {
             var page1 = GetNewPage();
 
-            var unitcode_nocast = IVisio.VisUnitCodes.visNoCast;
-            var src_pinx = VA.ShapeSheet.SRCConstants.PinX;
+            var shape1 = page1.DrawRectangle(-1, -1, 0, 0);
+            var shape2 = page1.DrawRectangle(-1, -1, 0, 0);
+            var shape3 = page1.DrawRectangle(-1, -1, 0, 0);
 
-            // draw a simple shape
-            var s1 = page1.DrawRectangle(0, 0, 1, 1);
-            var s2 = page1.DrawRectangle(1, 1, 2, 2);
-            var s3 = page1.DrawRectangle(2, 2, 3, 3);
 
-            // format it with setformulas
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-            update.SetResult((short)s1.ID, src_pinx, 5.0, unitcode_nocast);
-            update.SetResult((short)s2.ID, src_pinx, 6.0, unitcode_nocast);
-            update.SetResult((short)s3.ID, src_pinx, 7.0, unitcode_nocast);
-
+            // Set the formulas
+            var update = new VA.ShapeSheet.Update();
+            update.SetResult(shape1.ID16, src_pinx, 0.5, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(shape1.ID16, src_piny, 0.5, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(shape2.ID16, src_pinx, 1.5, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(shape2.ID16, src_piny, 1.5, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(shape3.ID16, src_pinx, 2.5, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(shape3.ID16, src_piny, 2.5, IVisio.VisUnitCodes.visNoCast);
             update.Execute(page1);
 
+            // Verify that the formulas were set
             var query = new VA.ShapeSheet.Query.CellQuery();
             var col_pinx = query.AddColumn(src_pinx);
-            var shapeids = new[] { s1.ID, s2.ID, s3.ID };
+            var col_piny = query.AddColumn(src_piny);
 
-            var results = query.GetResults<double>(page1, shapeids);
-            Assert.AreEqual(5.0, results[0, col_pinx]);
-            Assert.AreEqual(6.0, results[1, col_pinx]);
-            Assert.AreEqual(7.0, results[2, col_pinx]);
+            var shapeids = new int[] { shape1.ID, shape2.ID, shape3.ID };
+
+            var r = query.GetFormulasAndResults<double>(page1, shapeids);
+
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_pinx]);
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_piny]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_pinx]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_piny]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_pinx]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_piny]);
 
             page1.Delete(0);
         }
 
+
+        [TestMethod]
+        public void CheckHomogenousUpdates1()
+        {
+
+            var update1 = new VA.ShapeSheet.Update();
+            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
+            bool caught1 = false;
+            try
+            {
+                update1.SetFormula(src_pinx, "5.0");
+
+            }
+            catch (VA.AutomationException)
+            {
+                caught1 = true;
+            }
+
+            if (!caught1)
+            {
+                Assert.Fail();
+            }
+        }
+
+
+        [TestMethod]
+        public void CheckHomogenousUpdates2()
+        {
+
+            var update1 = new VA.ShapeSheet.Update();
+            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
+            bool caught1 = false;
+            try
+            {
+                update1.SetResult(1,src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
+
+            }
+            catch (VA.AutomationException)
+            {
+                caught1 = true;
+            }
+
+            if (!caught1)
+            {
+                Assert.Fail();
+            }
+        }
 
     }
 }

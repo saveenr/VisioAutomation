@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace TestVisioAutomation
 {
@@ -13,8 +15,13 @@ namespace TestVisioAutomation
         public void Case1()
         {
             var page1 = GetNewPage();
-            var stencil = page1.Application.Documents.OpenStencil("basic_u.vss");
-            var dcm = stencil.Masters["Dynamic Connector"];
+            var basic_stencil = page1.Application.Documents.OpenStencil("basic_u.vss");
+            var basic_masters = basic_stencil.Masters;
+
+            var connectors_stencil = page1.Application.Documents.OpenStencil("connec_u.vss");
+            var connectors_masters = connectors_stencil.Masters;
+
+            var dcm = connectors_masters["Dynamic Connector"];
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var s2 = page1.DrawRectangle(2, 0, 3, 1);
@@ -35,9 +42,7 @@ namespace TestVisioAutomation
             var tcd = VA.Connections.PathAnalysis.GetTransitiveClosure(page1,
                                                  VA.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
 
-
             page1.Delete(0);
         }
-
     }
 }

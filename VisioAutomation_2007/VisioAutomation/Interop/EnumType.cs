@@ -10,8 +10,7 @@ namespace VisioAutomation.Interop
         public List<EnumValue> Values { get; private set; }
         public Dictionary<string,int> NameToValue { get; private set; }
         
-
-        internal EnumType(System.Type t)
+        public EnumType(System.Type t)
         {
             this.Type = t;
             this.Name = t.Name;
@@ -31,6 +30,5 @@ namespace VisioAutomation.Interop
                 yield return item;
             }
         }
-
     }
 }

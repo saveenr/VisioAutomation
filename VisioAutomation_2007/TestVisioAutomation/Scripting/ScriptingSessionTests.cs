@@ -8,14 +8,6 @@ namespace TestVisioAutomation
     public class ScriptingAppTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Test_GetWindowText()
-        {
-            var ss = GetScriptingSession();
-            var t = ss.Application.GetWindowText();
-
-        }
-
-        [TestMethod]
         public void Scripting_Test_Resize_Application_Window()
         {
             var ss = GetScriptingSession();

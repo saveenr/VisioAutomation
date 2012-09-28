@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VisioAutomation.Scripting</RootNamespace>
     <AssemblyName>VisioAutomation.Scripting</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -61,23 +61,21 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Visio, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="XamlTuneMerged, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>binaries\XamlTuneMerged.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ReflectionUtil.cs" />
@@ -96,10 +94,10 @@
     <Compile Include="OutputStream.cs" />
     <Compile Include="SessionOptions.cs" />
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
-    <Compile Include="FlowChart\ConnectorInfo.cs" />
-    <Compile Include="FlowChart\FlowChartBuilder.cs" />
-    <Compile Include="FlowChart\ShapeInfo.cs" />
-    <Compile Include="FlowChart\XmlExtensions.cs" />
+    <Compile Include="DirectedGraph\ConnectorInfo.cs" />
+    <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />
+    <Compile Include="DirectedGraph\ShapeInfo.cs" />
+    <Compile Include="DirectedGraph\XmlExtensions.cs" />
     <Compile Include="OrgChart\OrgChartBuilder.cs" />
     <Compile Include="Commands\ConnectionCommands.cs" />
     <Compile Include="Commands\ConnectionPointCommands.cs" />
@@ -119,10 +117,6 @@
     <Compile Include="Zoom.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
-      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
-      <Name>VisioAutomation.Layout.MSAGL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
@@ -130,9 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Documents\FlowChartXMLSchema.vsd" />
-    <None Include="interactive.cmd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -152,9 +143,27 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="visio.py">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="binaries\XamlTuneMerged.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Visio">
+      <Guid>{00021A98-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>12</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

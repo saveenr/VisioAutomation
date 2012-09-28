@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -42,7 +41,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new System.ArgumentNullException("name");
             }
 
             if (!this.Session.HasSelectedShapes())
@@ -66,12 +65,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new System.ArgumentNullException("name");
             }
 
             if (name.Length < 1)
             {
-                throw new ArgumentException("name");
+                throw new System.ArgumentException("name");
             }
 
             var shapes = this.Session.Selection.EnumShapes().ToList();
@@ -95,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (userdefinedcell == null)
             {
-                throw new ArgumentNullException("userdefinedcell");
+                throw new System.ArgumentNullException("userdefinedcell");
             }
 
             var shapes = this.Session.Selection.EnumShapes().ToList();

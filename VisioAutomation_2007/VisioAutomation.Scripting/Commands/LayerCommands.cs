@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -20,12 +18,12 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (layername == null)
             {
-                throw new ArgumentNullException("layername");
+                throw new System.ArgumentNullException("layername");
             }
 
             if (layername.Length < 1)
             {
-                throw new ArgumentException("layername");
+                throw new System.ArgumentException("layername");
             }
 
             var application = this.Session.VisioApplication;
@@ -38,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                string msg = String.Format("No such layer \"{0}\"", layername);
+                string msg = string.Format("No such layer \"{0}\"", layername);
                 throw new AutomationException(msg);
             }
             return layer;

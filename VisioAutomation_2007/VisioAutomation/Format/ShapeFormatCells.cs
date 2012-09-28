@@ -1,8 +1,6 @@
-﻿using VA=VisioAutomation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Format
@@ -34,12 +32,6 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<int> LinePattern { get; set; }
         public VA.ShapeSheet.CellData<double> LineWeight { get; set; }
         public VA.ShapeSheet.CellData<double> Rounding { get; set; }
-        public VA.ShapeSheet.CellData<int> CharFont { get; set; }
-        public VA.ShapeSheet.CellData<int> CharColor { get; set; }
-        public VA.ShapeSheet.CellData<double> CharColorTrans { get; set; }
-        public VA.ShapeSheet.CellData<double> CharSize { get; set; }
-        public VA.ShapeSheet.CellData<int> TextBkgnd { get; set; }
-        public VA.ShapeSheet.CellData<double> TextBkgndTrans { get; set; }
 
         protected override void ApplyFormulas(ApplyFormula func)
         {
@@ -68,15 +60,9 @@ namespace VisioAutomation.Format
             func(ShapeSheet.SRCConstants.LinePattern, this.LinePattern.Formula);
             func(ShapeSheet.SRCConstants.LineWeight, this.LineWeight.Formula);
             func(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
-            func(ShapeSheet.SRCConstants.Char_Font, this.CharFont.Formula);
-            func(ShapeSheet.SRCConstants.Char_Color, this.CharColor.Formula);
-            func(ShapeSheet.SRCConstants.Char_ColorTrans, this.CharColorTrans.Formula);
-            func(ShapeSheet.SRCConstants.Char_Size, this.CharSize.Formula);
-            func(ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd.Formula);
-            func(ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
         }
 
-        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
 
             var cells = new ShapeFormatCells();
@@ -105,63 +91,49 @@ namespace VisioAutomation.Format
             cells.LinePattern = row[query.LinePattern].ToInt();
             cells.LineWeight = row[query.LineWeight];
             cells.Rounding = row[query.Rounding];
-            cells.CharFont = row[query.CharFont].ToInt();
-            cells.CharColor = row[query.CharColor].ToInt();
-            cells.CharColorTrans = row[query.CharColorTrans];
-            cells.CharSize = row[query.CharSize];
-            cells.TextBkgnd = row[query.TextBkgnd].ToInt();
-            cells.TextBkgndTrans = row[query.TextBkgndTrans];
             return cells;
         }
 
         internal static IList<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ShapeFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static ShapeFormatCells GetCells(IVisio.Shape shape)
         {
             var query = new ShapeFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
 
         class ShapeFormatQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQueryColumn FillBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillBkgndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillForegnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillForegndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn FillPattern { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwObliqueAngle { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwOffsetX { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwOffsetY { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwScaleFactor { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShapeShdwType { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwBkgndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwForegnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwForegndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn ShdwPattern { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillBkgnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillBkgndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillForegnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillForegndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn FillPattern { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwObliqueAngle { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwOffsetX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwOffsetY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwScaleFactor { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShapeShdwType { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwBkgnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwBkgndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwForegnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwForegndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn ShdwPattern { get; set; }
 
-            public VA.ShapeSheet.Query.CellQueryColumn BeginArrow { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn BeginArrowSize { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn EndArrow { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn EndArrowSize { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineColor { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineCap { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineColorTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LinePattern { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LineWeight { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn Rounding { get; set; }
-
-            public VA.ShapeSheet.Query.CellQueryColumn CharColor { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn CharColorTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn CharSize { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn CharFont { get; set; }
-
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BeginArrow { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BeginArrowSize { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn EndArrow { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn EndArrowSize { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineColor { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineCap { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineColorTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LinePattern { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LineWeight { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Rounding { get; set; }
 
             public ShapeFormatQuery() :
                 base()
@@ -192,16 +164,7 @@ namespace VisioAutomation.Format
                 this.LinePattern = this.AddColumn(VA.ShapeSheet.SRCConstants.LinePattern, "LinePattern");
                 this.LineWeight = this.AddColumn(VA.ShapeSheet.SRCConstants.LineWeight, "LineWeight");
                 this.Rounding = this.AddColumn(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
-
-                this.CharColor = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Color, "CharColor");
-                this.CharColorTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_ColorTrans, "CharColorTrans");
-                this.CharSize = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Size, "CharSize");
-                this.CharFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Font, "CharFont");
-
-                this.TextBkgnd = this.AddColumn(VA.ShapeSheet.SRCConstants.TextBkgnd, "TextBkgnd");
-                this.TextBkgndTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.TextBkgndTrans, "TextBkgndTrans");
             }
         }
-
     }
 }

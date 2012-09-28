@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Controls
 {
-    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupRow
+    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<int> CanGlue { get; set; }
         public VA.ShapeSheet.CellData<int> Tip { get; set; }
@@ -28,7 +28,7 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
-        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new ControlCells();
             cells.CanGlue = row[query.CanGlue].ToInt();
@@ -45,25 +45,25 @@ namespace VisioAutomation.Controls
         internal static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ControlQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = new ControlQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
         }
 
         class ControlQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.SectionQueryColumn CanGlue { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Tip { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn X { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Y { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn YBehavior { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn XBehavior { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn XDynamics { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn YDynamics { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn CanGlue { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Tip { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn X { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Y { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn YBehavior { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn XBehavior { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn XDynamics { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn YDynamics { get; set; }
 
             public ControlQuery() :
                 base(IVisio.VisSectionIndices.visSectionControls)

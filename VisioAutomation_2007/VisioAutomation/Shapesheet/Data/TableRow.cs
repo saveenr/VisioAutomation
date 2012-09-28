@@ -38,7 +38,7 @@ namespace VisioAutomation.ShapeSheet.Data
 
         public int Count
         {
-            get { return this.Table.Columns.Count; }
+            get { return this.Table.ColumnCount; }
         }
     }
 }

@@ -45,7 +45,7 @@ namespace TestVisioAutomation
             var active_window = app.ActiveWindow;
             var selection = active_window.Selection;
             selection.DeselectAll();
-            var g1 = VA.SelectionHelper.SelectAndGroup(active_window, new[] {s2, s3});
+            var g1 = VA.Selection.SelectionHelper.SelectAndGroup(active_window, new[] { s2, s3 });
 
             var d1 = page1.Shapes.AsEnumerable().ToList();
             Assert.AreEqual(2, d1.Count);

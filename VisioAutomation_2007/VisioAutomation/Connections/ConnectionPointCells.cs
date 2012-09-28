@@ -6,19 +6,13 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Connections
 {
-    public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupRow
+    public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<double> X { get; set; }
         public VA.ShapeSheet.CellData<double> Y { get; set; }
         public VA.ShapeSheet.CellData<int> DirX { get; set; }
         public VA.ShapeSheet.CellData<int> DirY { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }
-
-        [System.Obsolete]
-        public static IList<ConnectionPointCells> GetConnectionPoints(IVisio.Shape shape)
-        {
-            return ConnectionPointCells.GetCells(shape);
-        }
 
         protected override void ApplyFormulas(ApplyFormula func, short row)
         {
@@ -29,7 +23,7 @@ namespace VisioAutomation.Connections
             func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
         }
 
-        private static ConnectionPointCells get_cells_from_row2(ConnectionPointQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static ConnectionPointCells get_cells_from_row(ConnectionPointQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new ConnectionPointCells();
             cells.X = row[query.X];
@@ -44,22 +38,22 @@ namespace VisioAutomation.Connections
         internal static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row2);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = new ConnectionPointQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRows(shape, query, get_cells_from_row2);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
         }
 
         class ConnectionPointQuery : VA.ShapeSheet.Query.SectionQuery
         {
-            public VA.ShapeSheet.Query.SectionQueryColumn DirX { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn DirY { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Type { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn X { get; set; }
-            public VA.ShapeSheet.Query.SectionQueryColumn Y { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn DirX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn DirY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Type { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn X { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Y { get; set; }
 
             public ConnectionPointQuery() :
                 base(IVisio.VisSectionIndices.visSectionConnectionPts)

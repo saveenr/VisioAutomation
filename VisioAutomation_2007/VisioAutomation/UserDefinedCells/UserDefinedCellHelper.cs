@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -18,12 +17,12 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new System.ArgumentNullException("name");
             }
 
             CheckValidUserDefinedCellName(name);
@@ -38,14 +37,14 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             CheckValidUserDefinedCellName(name);
 
             if (val == null)
             {
-                throw new ArgumentNullException("val");
+                throw new System.ArgumentNullException("val");
             }
 
             if (!HasUserDefinedCell(shape, name))
@@ -59,11 +58,11 @@ namespace VisioAutomation.UserDefinedCells
 
             if (cell == null)
             {
-                string msg = String.Format("Could not retrieve cell for user property \"{0}\"", full_prop_name);
+                string msg = string.Format("Could not retrieve cell for user property \"{0}\"", full_prop_name);
                 throw new AutomationException(msg);
             }
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             var src = new VA.ShapeSheet.SRC(UserDefinedCell.query.Section, cell.Row, (short)IVisio.VisCellIndices.visUserValue);
             update.SetFormula(src, val);
 
@@ -74,7 +73,7 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             CheckValidUserDefinedCellName(name);
@@ -89,7 +88,7 @@ namespace VisioAutomation.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update();
 
             if (value != null)
             {
@@ -119,7 +118,7 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             var prop_count = GetUserDefinedCellCount(shape);
@@ -136,8 +135,8 @@ namespace VisioAutomation.UserDefinedCells
 
             var formulas = UserDefinedCell.query.GetFormulas(shape);
 
-            var rows = new List<int>(formulas.Count);
-            for (int row = 0; row < formulas.Count; row++)
+            var rows = new List<int>(formulas.RowCount);
+            for (int row = 0; row < formulas.RowCount; row++)
             {
                 rows.Add(row);
             }
@@ -150,12 +149,12 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (page == null)
             {
-                throw new ArgumentNullException("page");
+                throw new System.ArgumentNullException("page");
             }
 
             if (shapes == null)
             {
-                throw new ArgumentNullException("shapes");
+                throw new System.ArgumentNullException("shapes");
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
@@ -208,7 +207,7 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             // If the User Property section does not exist then return zero immediately
@@ -221,7 +220,7 @@ namespace VisioAutomation.UserDefinedCells
 
             if (section == null)
             {
-                string msg = String.Format("Could not find the user-defined section for shape {0}", shape.NameU);
+                string msg = string.Format("Could not find the user-defined section for shape {0}", shape.NameU);
                 throw new AutomationException(msg);
             }
 
@@ -242,7 +241,7 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             int user_prop_row_count = GetUserDefinedCellCount(shape);
@@ -312,7 +311,7 @@ namespace VisioAutomation.UserDefinedCells
         {
             if (!IsValidUserDefinedCellName(name))
             {
-                string msg = String.Format("Invalid Property Name: \"{0}\"", name);
+                string msg = string.Format("Invalid Property Name: \"{0}\"", name);
                 throw new VA.AutomationException(msg);
             }
         }

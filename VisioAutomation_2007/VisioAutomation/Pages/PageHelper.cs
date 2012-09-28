@@ -61,7 +61,7 @@ namespace VisioAutomation.Pages
             var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
 
             // Set them on the destination page
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             pagecells.Apply(update);
             update.Execute(dest_pagesheet);
         }
@@ -199,7 +199,7 @@ namespace VisioAutomation.Pages
             // paste any contents 
             if (has_content)
             {
-                using (var alertresponse = app.CreateAlertResponseScope(VA.UI.AlertResponseCode.Ignore))
+                using (var alertresponse = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.Ignore))
                 {
                     dest_page.Paste(copy_paste_flags);
                 }
@@ -249,7 +249,7 @@ namespace VisioAutomation.Pages
             double new_height = old_size.Width;
             double new_width = old_size.Height;
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate(3);
+            var update = new VA.ShapeSheet.Update(3);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, new_width);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, new_height);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
@@ -283,7 +283,7 @@ namespace VisioAutomation.Pages
 
             var page_sheet = page.PageSheet;
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate(2);
+            var update = new VA.ShapeSheet.Update(2);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, size.Width);
             update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, size.Height);
             update.Execute(page_sheet);
@@ -446,7 +446,7 @@ namespace VisioAutomation.Pages
                 throw new System.ArgumentNullException("page");
             }
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update();
 
             update.SetFormula(VA.ShapeSheet.SRCConstants.XGridOrigin, "0.0");
             update.SetFormula(VA.ShapeSheet.SRCConstants.YGridOrigin, "0.0");

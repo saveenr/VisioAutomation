@@ -30,7 +30,7 @@ namespace VisioAutomation.Connections
                                  (short)IVisio.VisRowIndices.visRowLast,
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             cp.Apply(update,n);
             update.Execute(shape);
 

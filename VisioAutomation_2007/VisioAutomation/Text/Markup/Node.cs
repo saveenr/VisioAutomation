@@ -1,11 +1,12 @@
 using VA = VisioAutomation;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace VisioAutomation.Text.Markup
 {
-    public class Node
+    public class Node 
     {
-        public NodeList<Node> Children { get; private set; }
+        public NodeList<Node> Children { get;  set; }
         public NodeType NodeType { get; private set; }
 
         internal Node(NodeType nt)
@@ -60,19 +61,28 @@ namespace VisioAutomation.Text.Markup
 
         internal IEnumerable<VA.Internal.WalkEvent<Node>> Walk()
         {
-            VA.Internal.TreeTraversal.EnumerateChildren<Node> enumchildren =
-                n => (n.Children.Items);
-
-            VA.Internal.TreeTraversal.EnterNode<Node> enternode =
-                n => (n is TextElement);
-
-            return VA.Internal.TreeTraversal.Walk<Node>(this, enumchildren, enternode);
+            return VA.Internal.TreeOps.Walk<Node>(this, get_children_for_walk);
         }
 
-        public IEnumerable<Node> WalkNodes()
+        IEnumerable<Node> get_children_for_walk(Node n)
         {
-            return VA.Internal.TreeTraversal.PreOrder<Node>(this,n=>n.Children.Items);
+            if (n is TextElement)
+            {
+                foreach (var c in n.Children)
+                {
+                    yield return c;
+                }
+            }
+        }
+        
+        private IEnumerable<Node> WalkNodes()
+        {
+            return VA.Internal.TreeOps.PreOrder<Node>(this,n=>n.Children);
         }
 
+        public void Add(Node n)
+        {
+            this.Children.Add(n);
+        }
     }
 }

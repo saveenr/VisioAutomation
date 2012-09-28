@@ -57,7 +57,7 @@ namespace TestVisioAutomation
             string mastername = "Rectangle";
             var master = ss.Master.Get(mastername, stencil);
 
-            var grid = new VA.Layout.Grid.GridLayout(cols, rows, cellsize, master);
+            var grid = new VA.Layout.Models.Grid.GridLayout(cols, rows, cellsize, master);
             grid.Origin = new VA.Drawing.Point(0, 4);
             ss.Document.Close(true);
         }
@@ -128,24 +128,24 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_Flowchart()
+        public void Scripting_DirectedGraph()
         {
             var ss = GetScriptingSession();
-            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
+            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
             ss.Document.Close(true);
-            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
+            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
             ss.Document.Close(true);
-            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
+            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
             ss.Document.Close(true);
-            draw_flowchart(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
+            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
             ss.Document.Close(true);
         }
 
-        private void draw_flowchart(VA.Scripting.Session scriptingsession, string t1)
+        private void draw_dg(VA.Scripting.Session scriptingsession, string dg_text)
         {
-            var x1 = System.Xml.Linq.XDocument.Parse(t1);
-            var fc1 = VA.Scripting.FlowChart.FlowChartBuilder.LoadFromXML(scriptingsession, x1);
-            VA.Scripting.FlowChart.FlowChartBuilder.RenderDiagrams(scriptingsession, fc1);
+            var dg_xml = System.Xml.Linq.XDocument.Parse(dg_text);
+            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, dg_xml);
+            VA.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(scriptingsession, dg_model);
         }
 
         [TestMethod]

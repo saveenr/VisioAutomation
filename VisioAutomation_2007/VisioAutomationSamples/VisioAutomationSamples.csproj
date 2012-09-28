@@ -91,8 +91,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoxLayoutShared.cs" />
-    <Compile Include="ColorSample.cs" />
+    <Compile Include="BoxLayout2Samples.cs" />
+    <Compile Include="LinqUtil.cs" />
+    <Compile Include="TreeLayoutSamples.cs" />
+    <Compile Include="extensions.cs" />
+    <Compile Include="GridLayoutSamples.cs" />
     <Compile Include="ConnectorSamples.cs" />
+    <Compile Include="BoxLayoutSamples.cs" />
+    <Compile Include="ContiainerLayoutSamples.cs" />
+    <Compile Include="TextMarkupSamples.cs" />
     <Compile Include="DeveloperSamples.cs" />
     <Compile Include="DebugSamples.cs" />
     <Compile Include="FormSampleRunner.cs">
@@ -101,8 +108,7 @@
     <Compile Include="FormSampleRunner.Designer.cs">
       <DependentUpon>FormSampleRunner.cs</DependentUpon>
     </Compile>
-    <Compile Include="LayoutSamples.cs" />
-    <Compile Include="PageSamples.cs" />
+    <Compile Include="DirectGraphLayoutSamples.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -123,10 +129,6 @@
     <Compile Include="TextSamples.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
-      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
-      <Name>VisioAutomation.Layout.MSAGL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
       <Name>VisioAutomation.Scripting</Name>

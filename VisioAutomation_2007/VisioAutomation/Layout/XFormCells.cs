@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -7,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout
 {
-    public partial class XFormCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class XFormCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> PinX { get; set; }
         public VA.ShapeSheet.CellData<double> PinY { get; set; }
@@ -28,7 +27,7 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
         }
 
-        private static XFormCells get_cells_from_row(XFormQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static XFormCells get_cells_from_row(XFormQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new XFormCells();
             cells.PinX = row[query.PinX];
@@ -44,24 +43,24 @@ namespace VisioAutomation.Layout
         internal static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new XFormQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static XFormCells GetCells(IVisio.Shape shape)
         {
             var query = new XFormQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
 
         class XFormQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQueryColumn Width { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn Height { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn PinX { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn PinY { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LocPinX { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LocPinY { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn Angle { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Width { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Height { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn PinX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn PinY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LocPinX { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LocPinY { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn Angle { get; set; }
 
             public XFormQuery() :
                 base()

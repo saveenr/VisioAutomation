@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.CustomProperties
 {
-    public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupRow
+    public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<double> Value{ get; set; }
         public VA.ShapeSheet.CellData<double> Prompt { get; set; }
@@ -27,35 +27,15 @@ namespace VisioAutomation.CustomProperties
         {
             this.Value = value;
         }
-
-        private string encode_if_needed(VA.ShapeSheet.FormulaLiteral f)
-        {
-            if (!f.HasValue)
-            {
-                return null;
-            }
-
-            if (f.Value.Length==0)
-            {
-                return VA.Convert.StringToFormulaString(f.Value);
-            }
-
-            if (f.Value[0]!='\"')
-            {
-                return VA.Convert.StringToFormulaString(f.Value);                
-            }
-
-            return f.Value;
-        }
         
         protected override void ApplyFormulas(ApplyFormula func, short row)
         {
             var cp = this;
 
-            string str_label = encode_if_needed(cp.Label.Formula);
-            string str_value = encode_if_needed(cp.Value.Formula);
-            string str_format = encode_if_needed(cp.Format.Formula);
-            string str_prompt = encode_if_needed(cp.Prompt.Formula);
+            string str_label =  VA.Convert.SmartStringToFormulaString(cp.Label.Formula);
+            string str_value =  VA.Convert.SmartStringToFormulaString(cp.Value.Formula);
+            string str_format = VA.Convert.SmartStringToFormulaString(cp.Format.Formula);
+            string str_prompt = VA.Convert.SmartStringToFormulaString(cp.Prompt.Formula);
 
             func(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(row), str_label);
             func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow( row), str_value);
@@ -71,16 +51,16 @@ namespace VisioAutomation.CustomProperties
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new CustomPropertyQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         public static IList<CustomPropertyCells> GetCells(IVisio.Shape shape)
         {
             var query = new CustomPropertyQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupRow._GetObjectsFromRows(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
         }
 
-        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new CustomPropertyCells();
 
@@ -99,16 +79,16 @@ namespace VisioAutomation.CustomProperties
 
     class CustomPropertyQuery : VA.ShapeSheet.Query.SectionQuery
     {
-        public VA.ShapeSheet.Query.SectionQueryColumn SortKey { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Ask { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Calendar { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Format { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Invis { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Label { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn LangID { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Prompt { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Value { get; set; }
-        public VA.ShapeSheet.Query.SectionQueryColumn Type { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn SortKey { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Ask { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Calendar { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Format { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Invis { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Label { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn LangID { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Prompt { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Value { get; set; }
+        public VA.ShapeSheet.Query.QueryColumn Type { get; set; }
 
         public CustomPropertyQuery() :
             base(IVisio.VisSectionIndices.visSectionProp)
@@ -121,7 +101,7 @@ namespace VisioAutomation.CustomProperties
             Label = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
             LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
             Prompt = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
-            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Type");
+            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
             Value = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
         }
     }

@@ -9,14 +9,16 @@ namespace VisioAutomationSamples
     {
         public static void ConnectorsToBack()
         {
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
+            var doc = SampleEnvironment.Application.ActiveDocument;
+            var pages = doc.Pages;
+            var page = pages.Add();
 
             // get the data and the labels to use
             var data = new double[] {1, 2, 3, 4, 5, 6};
 
             var radius = 3.0;
             var center = new VA.Drawing.Point(4, 4);
-            var slices = VA.Layout.Radial.PieSlice.GetSlicesFromValues(center, radius, data);
+            var slices = VA.Layout.Models.Radial.PieSlice.GetSlicesFromValues(center, radius, data);
             foreach (var slice in slices)
             {
                 slice.Render(page);
@@ -33,7 +35,11 @@ namespace VisioAutomationSamples
             VA.Connections.ConnectorHelper.ConnectShapes(connector, r1, r2);
 
             var con_layer = page.Layers["Connector"];
-            var sel = VA.SelectionHelper.SelectShapesInLayer(page, con_layer);
+
+            var sel = page.CreateSelection(
+                IVisio.VisSelectionTypes.visSelTypeByLayer,
+                IVisio.VisSelectMode.visSelModeSkipSub,
+                con_layer);
             sel.SendToBack();
         }
     }

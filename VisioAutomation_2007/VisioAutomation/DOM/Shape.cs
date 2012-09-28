@@ -1,40 +1,43 @@
-using System.Collections.Generic;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using System.Linq;
 
 namespace VisioAutomation.DOM
 {
-    public class Shape : Node
+    public class Shape : BaseShape
     {
-        public string Text { get; set; }
-        public VA.Text.Markup.TextElement TextElement { get; set; }
+        public VA.DOM.MasterRef Master { get; protected set; }
+        public VA.Drawing.Point DropPosition { get; private set; }
+        public VA.Drawing.Size? DropSize { get; private set; }
 
-        public Dictionary<string, VA.CustomProperties.CustomPropertyCells> CustomProperties { get; set; }
-        public List<Hyperlink> Hyperlinks { get; set; }
-        public ShapeCells ShapeCells { get; set; }
-        public List<VA.Text.TabStop> TabStops { get; set; }
-        public IVisio.Shape VisioShape;
-        public short VisioShapeID { get; internal set; }
-        public string CharFontName { get; set; }
-        
-        protected Shape()
+        public Shape(IVisio.Master master, VA.Drawing.Point pos)
         {
-            this.ShapeCells = new ShapeCells();
+            this.Master = new VA.DOM.MasterRef(master);
+            this.DropPosition = pos;
+        }
+        
+        public Shape(IVisio.Master master, VA.Drawing.Rectangle rect) 
+        {
+            this.Master = new VA.DOM.MasterRef(master);
+            this.DropPosition = rect.Center;
+            this.DropSize = rect.Size;
         }
 
-        public VA.CustomProperties.CustomPropertyCells SetCustomProperty(string name, string value)
+        public Shape(string mastername, string stencilname, VA.Drawing.Point pos)
         {
-            var cp = new VA.CustomProperties.CustomPropertyCells();
-            cp.Value = value;
+            this.Master = new VA.DOM.MasterRef(mastername, stencilname);
+            this.DropPosition = pos;
+        }
 
-            if (this.CustomProperties == null)
-            {
-                this.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
-            }
+        public Shape(string mastername, string stencilname, VA.Drawing.Rectangle rect) 
+        {
+            this.Master = new VA.DOM.MasterRef(mastername, stencilname);
+            this.DropPosition = rect.Center;
+            this.DropSize = rect.Size;
+        }
 
-            this.CustomProperties[name] = cp;
-            return cp;
+        public Shape(IVisio.Master master, double x, double y) :
+            this(master, new VA.Drawing.Point(x, y))
+        {
         }
     }
 }

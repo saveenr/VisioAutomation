@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting
             const string formula_wrap = "WIDTH*1";
             const string formula_no_wrap = "TEXTWIDTH(TheText)";
             string formula = wrap ? formula_wrap : formula_no_wrap;
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             
             foreach (int shapeid in shapeids)
             {

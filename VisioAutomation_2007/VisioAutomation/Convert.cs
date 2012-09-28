@@ -39,7 +39,7 @@ namespace VisioAutomation
 
         public static bool DoubleToBool(double d)
         {
-            return d != 0 ? true : false;
+            return d != 0;
         }
 
         /// <summary>
@@ -49,10 +49,11 @@ namespace VisioAutomation
         /// <returns></returns>
         public static bool ShortToBool(short v)
         {
-            return (v == 0) ? false : true;
+            // if v is 0 then false
+            // if v != 0 then true
+            return v != 0;
         }
-
-
+        
         /// <summary>
         /// Properly quotes a string being used as a formula
         /// </summary>
@@ -94,6 +95,25 @@ namespace VisioAutomation
             return output_string;
         }
 
+        public static string SmartStringToFormulaString(VA.ShapeSheet.FormulaLiteral formula)
+        {
+            if (!formula.HasValue)
+            {
+                return null;
+            }
+
+            if (formula.Value.Length == 0)
+            {
+                return VA.Convert.StringToFormulaString(formula.Value);
+            }
+
+            if (formula.Value[0] != '\"')
+            {
+                return VA.Convert.StringToFormulaString(formula.Value);
+            }
+
+            return formula.Value;
+        }
 
         public static string ColorToFormulaRGB(System.Drawing.Color color)
         {

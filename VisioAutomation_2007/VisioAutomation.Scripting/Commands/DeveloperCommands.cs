@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.DOM;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using TREEMODEL = VisioAutomation.Layout.Models.Tree;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -14,6 +13,22 @@ namespace VisioAutomation.Scripting.Commands
         {
 
         }
+
+        public static List<System.Type> GetTypes()
+        {
+            // TODO: Consider filtering out types that should *not* be exposed despite being public
+            var va_type = typeof(VisioAutomation.Application.ApplicationHelper);
+            var vas_type = typeof (VisioAutomation.Scripting.CommandSet);
+
+            var va_types = va_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
+            var vas_types = vas_type.Assembly.GetExportedTypes().Where(t => t.IsPublic);
+            
+            var types = new List<System.Type>();
+            types.AddRange(va_types);
+            types.AddRange(vas_types);
+            
+            return types;
+        }       
 
         public void HelloWorld()
         {
@@ -33,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document DrawScriptingDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
+            var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
@@ -72,7 +87,7 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextUtil.Join(helpstr,"\r\n",lines);
 
-                var docpage = new VisioAutomation.Experimental.SimpleTextDoc.TextPage();
+                var docpage = new VisioAutomation.Layout.Models.SimpleTextDoc.TextPage();
                 docpage.Title = cmdset_prop.Name + " commands";
                 docpage.Body = helpstr.ToString();
                 docpage.Name = cmdset_prop.Name + " commands";
@@ -92,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document DrawInteropEnumDocumentation()
         {
             var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Experimental.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
+            var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             //docbuilder.BodyParaSpacingAfter = 2.0;
             docbuilder.BodyTextSize = 8.0;
             var helpstr = new System.Text.StringBuilder();
@@ -103,8 +118,6 @@ namespace VisioAutomation.Scripting.Commands
             int pagecount = 0;
             foreach (var enum_ in interop_enums)
             {
-
-
                 int chunkcount = 0;
 
                 var values = enum_.Values.OrderBy(i => i.Name).ToList();
@@ -114,16 +127,14 @@ namespace VisioAutomation.Scripting.Commands
                     foreach (var val in chunk)
                     {
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
-
                     }
 
-                    var docpage = new VA.Experimental.SimpleTextDoc.TextPage();
+                    var docpage = new VA.Layout.Models.SimpleTextDoc.TextPage();
                     docpage.Title = enum_.Name;
                     docpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
                     {
                         docpage.Name = string.Format("{0}", enum_.Name);
-                        
                     }
                     else
                     {
@@ -136,12 +147,12 @@ namespace VisioAutomation.Scripting.Commands
                                  {
                                      new VA.Text.TabStop(1.5, VA.Text.TabStopAlignment.Left)
                                  };
+
                     VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
                     
                     chunkcount++;
                     pagecount++;
                 }
-
             }
 
             docbuilder.Finish();
@@ -190,7 +201,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
                 else
                 {
-                    string parent_path = string.Join(this.Separator, tokens.Take(tokens.Length - 1).ToArray());
+                    string parent_path = string.Join(this.Separator, tokens.Take(tokens.Length - 1));
                     this.Add(parent_path);
                     this.PathToParentPath[path] = parent_path;
                 }   
@@ -202,14 +213,22 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Document DrawVANamespaces()
+        public IVisio.Document DrawNamespaces()
         {
+            return this.DrawNamespaces(VA.Scripting.Commands.DeveloperCommands.GetTypes());
+        }
+
+        public IVisio.Document DrawNamespaces(IList<System.Type> types)
+        {
+            string def_linecolor = "rgb(140,140,140)";
+            string def_fillcolor = "rgb(240,240,240)";
+            string def_font = "Segoe UI";
+
             var doc = this.Session.Document.New(8.5,11);
             var fonts = doc.Fonts;
-            var font = fonts["Segoe UI"];
+            var font = fonts[def_font];
             int fontid = font.ID16;
 
-            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes();
             var pathbuilder = new PathTreeBuilder();
             foreach (var type in types)
             {
@@ -217,11 +236,11 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var namespaces = pathbuilder.GetPaths();
-            
-            var tree_layout = new VA.Layout.Tree.Drawing();
-            tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Right;
-            tree_layout.LayoutOptions.ConnectorType  = VA.Layout.Tree.ConnectorType.CurvedBezier;
-            var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
+
+            var tree_layout = new TREEMODEL.Drawing();
+            tree_layout.LayoutOptions.Direction = TREEMODEL.LayoutDirection.Right;
+            tree_layout.LayoutOptions.ConnectorType = TREEMODEL.ConnectorType.CurvedBezier;
+            var ns_node_map = new Dictionary<string, TREEMODEL.Node>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -233,8 +252,8 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep+1);
                 }
 
-                var node = new VA.Layout.Tree.Node(ns);
-                node.Text = label;
+                var node = new TREEMODEL.Node(ns);
+                node.Text = new VA.Text.Markup.TextElement(label);
                 node.Size = new VA.Drawing.Size(2.0, 0.25);
                 ns_node_map[ns] = node;
             }
@@ -271,7 +290,7 @@ namespace VisioAutomation.Scripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new VA.Layout.Tree.Node();
+                var root_n = new TREEMODEL.Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)
@@ -284,27 +303,24 @@ namespace VisioAutomation.Scripting.Commands
             // format the shapes
             foreach (var node in tree_layout.Nodes)
             {
-                if (node.ShapeCells==null)
+                if (node.Cells==null)
                 {
-                    node.ShapeCells = new ShapeCells();                    
+                    node.Cells = new VA.DOM.ShapeCells();                    
                 }
-                node.ShapeCells.FillForegnd = "rgb(240,240,240)";
-                node.ShapeCells.CharFont = fontid;
-                //node.ShapeCells.LineWeight = "0";
-                //node.ShapeCells.LinePattern = "0";
-                node.ShapeCells.LineColor = "rgb(140,140,140)";
-                node.ShapeCells.HAlign = "0";
+                node.Cells.FillForegnd = def_fillcolor;
+                node.Cells.CharFont = fontid;
+                node.Cells.LineColor = def_linecolor;
+                node.Cells.ParaHorizontalAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
-            cxn_cells.LineColor = "rgb(140,140,140)";
-            tree_layout.LayoutOptions.ConnectorShapeCells = cxn_cells;
+            cxn_cells.LineColor = def_linecolor;
+            tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
 
 
             tree_layout.Render(doc.Application.ActivePage);
             return doc;
         }
-
 
         public IList<VA.Interop.EnumType> GetInteropEnums()
         {
@@ -316,6 +332,11 @@ namespace VisioAutomation.Scripting.Commands
             return VA.Interop.InteropHelper.GetEnum(name);
         }
 
+        public VA.Interop.EnumType GetEnum(System.Type type)
+        {
+            return new VA.Interop.EnumType(type);
+        }
+        
         private static IEnumerable<IEnumerable<T>> Chunk<T>(IEnumerable<T> source, int chunksize)
         {
             while (source.Any())
@@ -340,15 +361,26 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Document DrawVANamespacesAndClasses()
+        public IVisio.Document DrawNamespacesAndClasses()
         {
+            return this.DrawNamespacesAndClasses(VA.Scripting.Commands.DeveloperCommands.GetTypes());
+        }
+
+        public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
+        {
+            string segoeui_fontname = "Segoe UI";
+            string segoeuilight_fontname = "Segoe UI Light";
+            string def_linecolor = "rgb(180,180,180)";
+            string def_shape_fill = "rgb(245,245,245)";
 
             var doc = this.Session.Document.New(8.5, 11);
             var fonts = doc.Fonts;
-            var font = fonts["Segoe UI"];
-            int fontid = font.ID16;
+            var font_segoe = fonts[segoeui_fontname];
+            var font_segoelight = fonts[segoeuilight_fontname];
+            int fontid_segoe = font_segoe.ID16;
+            int fontid_segoelight = font_segoelight.ID16;
 
-            var types = VA.Experimental.Developer.DeveloperHelper.GetAllTypes().Select(t=>new TypeInfo(t));
+            var types = types_.Select(t=>new TypeInfo(t));
 
             var pathbuilder = new PathTreeBuilder();
             foreach (var type in types)
@@ -358,11 +390,11 @@ namespace VisioAutomation.Scripting.Commands
 
             var namespaces = pathbuilder.GetPaths();
 
-            var tree_layout = new VA.Layout.Tree.Drawing();
-            tree_layout.LayoutOptions.Direction = VA.Layout.Tree.LayoutDirection.Down;
-            tree_layout.LayoutOptions.ConnectorType= VA.Layout.Tree.ConnectorType.CurvedBezier;
-            var ns_node_map = new Dictionary<string, VA.Layout.Tree.Node>(namespaces.Count);
-            var node_to_nslabel= new Dictionary<VA.Layout.Tree.Node,string>(namespaces.Count);
+            var tree_layout = new TREEMODEL.Drawing();
+            tree_layout.LayoutOptions.Direction = TREEMODEL.LayoutDirection.Down;
+            tree_layout.LayoutOptions.ConnectorType = TREEMODEL.ConnectorType.PolyLine;
+            var ns_node_map = new Dictionary<string, TREEMODEL.Node>(namespaces.Count);
+            var node_to_nslabel = new Dictionary<TREEMODEL.Node, string>(namespaces.Count);
 
             // create nodes for every namespace
             foreach (string ns in namespaces)
@@ -377,9 +409,18 @@ namespace VisioAutomation.Scripting.Commands
                 var types_in_namespace = types.Where(t => t.Type.Namespace == ns)
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
-                var node = new VA.Layout.Tree.Node(ns);
-                node.Text = label + "\r\n\r\n" + string.Join("\n",types_in_namespace.ToArray());
+                var node = new TREEMODEL.Node(ns);
                 node.Size = new VA.Drawing.Size(2.0, (0.15) * (1 + 2 + types_in_namespace.Count()));
+
+
+                var markup = new VA.Text.Markup.TextElement();
+                var m1 = markup.AddElement(label+"\n");
+                m1.CharacterCells.Font = fontid_segoe;
+                m1.CharacterCells.Size = "12.0pt";
+                var m2 = markup.AddElement();
+                m2.AddText(string.Join("\n", types_in_namespace));
+
+                node.Text = markup;
 
                 ns_node_map[ns] = node;
                 node_to_nslabel[node] = label;
@@ -417,7 +458,7 @@ namespace VisioAutomation.Scripting.Commands
             else
             {
                 // if there are multiple root namespaces, inject an empty placeholder root
-                var root_n = new VA.Layout.Tree.Node();
+                var root_n = new TREEMODEL.Node();
                 tree_layout.Root = root_n;
 
                 foreach (var root_ns in pathbuilder.Roots)
@@ -430,65 +471,129 @@ namespace VisioAutomation.Scripting.Commands
             // format the shapes
             foreach (var node in tree_layout.Nodes)
             {
-                if (node.ShapeCells == null)
+                if (node.Cells == null)
                 {
-                    node.ShapeCells = new ShapeCells();
+                    node.Cells = new VA.DOM.ShapeCells();
                 }
-                node.ShapeCells.FillForegnd = "rgb(240,240,240)";
-                node.ShapeCells.CharFont = fontid;
+                node.Cells.FillForegnd = def_shape_fill;
                 //node.ShapeCells.LineWeight = "0";
                 //node.ShapeCells.LinePattern = "0";
-                node.ShapeCells.LineColor = "rgb(140,140,140)";
-                node.ShapeCells.HAlign = "0";
-                node.ShapeCells.VerticalAlign = "0";
+                node.Cells.LineColor = def_linecolor;
+                node.Cells.ParaHorizontalAlign = "0";
+                node.Cells.VerticalAlign = "0";
             }
 
             var cxn_cells = new VA.DOM.ShapeCells();
-            cxn_cells.LineColor = "rgb(140,140,140)";
-            tree_layout.LayoutOptions.ConnectorShapeCells = cxn_cells;
-
-
+            cxn_cells.LineColor = def_linecolor;
+            tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
             tree_layout.Render(doc.Application.ActivePage);
 
-            var charcells = new VA.Text.CharacterFormatCells();
-            charcells.Style = (int) VA.Text.CharStyle.Bold;
-            charcells.Size = VA.Convert.PointsToInches(12);
-            foreach (var node in tree_layout.Nodes)
-            {
-                string label = node_to_nslabel[node];
-                VA.Text.TextFormat.FormatRange(node.VisioShape, charcells, 0, label.Length);
-            }
             return doc;
         }
 
-    }
-}
-
-
-namespace VisioAutomation.Experimental.Developer
-{
-    public class DeveloperHelper
-    {
-        public static List<System.Type> GetTypes()
+        private static string get_nice_type_name(System.Type type)
         {
-            // find the VA assembly
-            var vat = typeof (VisioAutomation.ApplicationHelper);
-            var asm = vat.Assembly;
+            if (type.IsGenericType)
+            {
+                var sb = new System.Text.StringBuilder();
+                var tokens = type.Name.Split(new[] { '`' });
 
-            // TODO: Consider filtering out types that should *not* be exposed despite being public
-            var types = asm.GetExportedTypes().Where(t => t.IsPublic).ToList();
-            return types;
+                sb.Append(tokens[0]);
+                var gas = type.GetGenericArguments();
+                var ga_names = gas.Select(i => i.Name).ToList();
+
+                sb.Append("<");
+                sb.Append(string.Join(", ", ga_names));
+                sb.Append(">");
+                return sb.ToString();
+            }
+
+            return type.Name;
         }
 
-        public static List<System.Type> GetAllTypes()
+        private static string get_type_kindname(TypeKind type)
         {
-            // find the VA assembly
-            var vat = typeof(VisioAutomation.ApplicationHelper);
-            var asm = vat.Assembly;
-
-            var types = asm.GetExportedTypes().ToList();
-            return types;
+            if (type == TypeKind.StaticClass)
+            {
+                return "static class";
+            }
+            else if (type == TypeKind.AbstractClass)
+            {
+                return "abstract class";
+            }
+            else if (type == TypeKind.Class)
+            {
+                return "class";
+            }
+            else if (type == TypeKind.Enum)
+            {
+                return "enum";
+            }
+            else if (type == TypeKind.Interface)
+            {
+                return "interface";
+            }
+            else if (type == TypeKind.Struct)
+            {
+                return "struct";
+            }
+            else
+            {
+                return "";
+            }
         }
 
+        private static TypeKind get_type_kindEx(System.Type type)
+        {
+            if (type.IsClass)
+            {
+                if (TypeIsStaticClass(type))
+                {
+                    return TypeKind.StaticClass;
+                }
+                else if (type.IsAbstract)
+                {
+                    return TypeKind.AbstractClass;
+                }
+                return TypeKind.Class;
+            }
+            else if (type.IsEnum)
+            {
+                return TypeKind.Enum;
+            }
+            else if (type.IsInterface)
+            {
+                return TypeKind.Interface;
+            }
+            else if (TypeIsStruct(type))
+            {
+                return TypeKind.Struct;
+            }
+            else
+            {
+                return TypeKind.Other;
+            }
+        }
+
+        private static bool TypeIsStruct(System.Type type)
+        {
+            return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
+        }
+
+        private static bool TypeIsStaticClass(System.Type type)
+        {
+            return (type.IsAbstract && type.IsSealed);
+        }
+
+        private enum TypeKind
+        {
+            StaticClass,
+            Class,
+            AbstractClass,
+            Interface,
+            Struct,
+            Enum,
+            Other
+        }
     }
 }

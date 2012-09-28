@@ -1,8 +1,5 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {
@@ -22,19 +19,18 @@ namespace VisioAutomationSamples
             var doc = ss.Developer.DrawInteropEnumDocumentation();
         }
 
-        public static void VANamespaces()
+        public static void VisioAutomationNamespaces()
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawVANamespaces();
+            var doc = ss.Developer.DrawNamespaces();
         }
 
-        public static void VANamespacesAndClasses()
+        public static void VisioAutomationNamespacesAndClasses()
         {
             var app = SampleEnvironment.Application;
             var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawVANamespacesAndClasses();
+            var doc = ss.Developer.DrawNamespacesAndClasses();
         }
-
     }
 }

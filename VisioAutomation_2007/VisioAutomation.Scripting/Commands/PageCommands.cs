@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -37,22 +36,16 @@ namespace VisioAutomation.Scripting.Commands
             return active_page.GetSize();
         }
 
-        [Obsolete]
-        public string GetName()
-        {
-            return Get().NameU;
-        }
-
         public void SetName(string name)
         {
             if (name == null)
             {
-                throw new ArgumentNullException("name");
+                throw new System.ArgumentNullException("name");
             }
 
             if (name.Length < 1)
             {
-                throw new ArgumentException("name must have at least one character");
+                throw new System.ArgumentException("name must have at least one character");
             }
 
             var application = this.Session.VisioApplication;
@@ -97,7 +90,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (background_page_name == null)
             {
-                throw new ArgumentNullException("background_page_name");
+                throw new System.ArgumentNullException("background_page_name");
             }
 
             if (!this.Session.HasActiveDrawing)
@@ -111,7 +104,7 @@ namespace VisioAutomation.Scripting.Commands
             var names = new HashSet<string>(pages.GetNamesU());
             if (!names.Contains(background_page_name))
             {
-                string msg = String.Format("Could not find page with name \"{0}\"", background_page_name);
+                string msg = string.Format("Could not find page with name \"{0}\"", background_page_name);
                 throw new AutomationException(msg);
             }
 
@@ -149,7 +142,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_page = application.ActivePage;
             var page_to_dupe = active_page;
             var documents = application.Documents;
-            var dest_doc = documents.Add(String.Empty);
+            var dest_doc = documents.Add(string.Empty);
             page_to_dupe.Activate();
             string page_name = page_to_dupe.NameU;
             var destpages = dest_doc.Pages;

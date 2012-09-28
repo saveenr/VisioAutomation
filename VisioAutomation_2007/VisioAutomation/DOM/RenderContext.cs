@@ -5,9 +5,9 @@ namespace VisioAutomation.DOM
 {
     internal class RenderContext
     {
-        public Dictionary<short, IVisio.Shape> id_to_shape;
-        public IVisio.Page VisioPage;
+        private Dictionary<short, IVisio.Shape> id_to_shape;
         private IVisio.Shapes pageshapes;
+        public IVisio.Page VisioPage { get; private set; }
 
         public RenderContext(IVisio.Page visio_page)
         {
@@ -16,7 +16,7 @@ namespace VisioAutomation.DOM
             this.pageshapes = visio_page.Shapes;
         }
 
-        public IVisio.Shape GetShapeObjectForID(short id)
+        public IVisio.Shape GetShape(short id)
         {
             IVisio.Shape vshape;
             if (this.id_to_shape.TryGetValue(id, out vshape))

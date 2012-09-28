@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DOM
 {
-    public class PieSlice: Shape
+    public class PieSlice: BaseShape
     {
         public VA.Drawing.Point Center { get; private set; }
         public double Radius { get; private set; }

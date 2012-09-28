@@ -4,8 +4,8 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct CellData<TResult>
     {
-        public VA.ShapeSheet.FormulaLiteral Formula { get; set; }
-        public TResult Result { get; set; }
+        public VA.ShapeSheet.FormulaLiteral Formula { get; private set; }
+        public TResult Result { get; private set; }
 
         public CellData(VA.ShapeSheet.FormulaLiteral formula, TResult result)
             : this()
@@ -14,34 +14,11 @@ namespace VisioAutomation.ShapeSheet
             this.Result = result;
         }
 
-        /// <summary>
-        /// Returns whether there is a formula stored. If the formula is set to null then it counts as not having a formula
-        /// </summary>
-        public bool HasFormula
-        {
-            get { return this.Formula.HasValue; }
-        }
-
         public override string ToString()
         {
-            var fs = (this.HasFormula) ? string.Format("\"{0}\"", this.Formula) : "null";
-            var rs = this.GetResultAsString();
+            var fs = (this.Formula.HasValue) ? string.Format("\"{0}\"", this.Formula.Value) : "null";
+            var rs = this.Result.ToString();
             return string.Format("({0},{1})", fs, rs);
-        }
-
-        private string GetResultAsString()
-        {
-            return this.Result.ToString();
-        }
-
-        internal void SetResult(TResult result)
-        {
-            this.Result = result;
-        }
-
-        internal void SetFormula(VA.ShapeSheet.FormulaLiteral formula)
-        {
-            this.Formula = formula;
         }
 
         public static implicit operator CellData<TResult>(VA.ShapeSheet.FormulaLiteral formula)
@@ -67,11 +44,6 @@ namespace VisioAutomation.ShapeSheet
         public static implicit operator CellData<TResult>(bool formula)
         {
             return new CellData<TResult>(formula, default(TResult));
-        }
-
-        internal CellData<X> CastResult<X>(System.Func<TResult,X> f)
-        {
-            return new CellData<X>(this.Formula,f(this.Result));
         }
     }
 }

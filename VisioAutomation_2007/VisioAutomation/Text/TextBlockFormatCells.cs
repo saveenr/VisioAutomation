@@ -33,16 +33,16 @@ namespace VisioAutomation.Text
         internal static IList<TextBlockFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new TextBlockFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectsFromRows(page, shapeids, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static TextBlockFormatCells GetCells(IVisio.Shape shape)
         {
             var query = new TextBlockFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetObjectFromSingleRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
 
-        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Data.QueryDataRow<double> row)
+        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new TextBlockFormatCells();
             cells.BottomMargin = row[query.BottomMargin];
@@ -59,15 +59,15 @@ namespace VisioAutomation.Text
 
         class TextBlockFormatQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQueryColumn BottomMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn LeftMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn RightMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TopMargin { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn DefaultTabStop { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgnd { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextBkgndTrans { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn TextDirection { get; set; }
-            public VA.ShapeSheet.Query.CellQueryColumn VerticalAlign { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn BottomMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn LeftMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn RightMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TopMargin { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn DefaultTabStop { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TextBkgnd { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TextBkgndTrans { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn TextDirection { get; set; }
+            public VA.ShapeSheet.Query.QueryColumn VerticalAlign { get; set; }
 
             public TextBlockFormatQuery() :
                 base()

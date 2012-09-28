@@ -23,7 +23,8 @@ namespace VisioAutomationSamples
                 .Where(t => t.IsPublic)
                 .Where(t => t.IsClass)
                 .Where(t => t.Name.Contains("Sample"))
-                .OrderBy(t => t.Name);
+                .OrderBy(t => t.Name)
+                .ToList();
 
             var names = new List<string>();
             foreach (var t in public_sample_classes)

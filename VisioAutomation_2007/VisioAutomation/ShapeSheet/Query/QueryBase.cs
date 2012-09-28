@@ -1,58 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class QueryBase<TCol> where TCol : QueryColumn
+    public class QueryBase
     {
-        private QueryColumnList<TCol> _columns;
+        private QueryColumnList _columns;
 
         internal QueryBase()
         {
-            this._columns = new QueryColumnList<TCol>();
+            this._columns = new QueryColumnList();
         }
 
-        public QueryColumnList<TCol> Columns
+        public QueryColumnList Columns
         {
             get { return this._columns; }
         }
 
-        protected void AddColumn(TCol column)
+        protected void AddColumn(QueryColumn column)
         {
             if (column == null)
             {
-                throw new ArgumentNullException("column");
+                throw new System.ArgumentNullException("column");
             }
 
             this._columns.Add(column);
         }
 
-        protected IList<IVisio.VisUnitCodes> CreateUnitCodeArray()
+        protected IList<IVisio.VisUnitCodes> CreateUnitCodeArrayForRows(int rowcount)
         {
-            var a = new IVisio.VisUnitCodes[this.Columns.Count];
-            for (int i = 0; i < this.Columns.Count; i++)
+            if (rowcount<1)
             {
-                a[i] = this.Columns[i].UnitCode;
+                throw new AutomationException("Must have at least 1 row");
+            }
+
+            int n = this.Columns.Count*rowcount;
+            var a = new IVisio.VisUnitCodes[n];
+            for (int i = 0; i < n; i++)
+            {
+                a[i] = this.Columns[i%this.Columns.Count].UnitCode;
             }
 
             return a;
-        }
-
-        protected void validate_unitcodes(IList<IVisio.VisUnitCodes> unitcodes, int total_cells)
-        {
-            if (unitcodes == null)
-            {
-                throw new AutomationException("unitcodes must not be null");
-            }
-
-            if (unitcodes.Count != total_cells)
-            {
-                string msg = string.Format("Expected {0} unitcodes", total_cells);
-                throw new AutomationException(msg);
-            }
         }
     }
 }

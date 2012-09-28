@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -27,13 +29,14 @@ namespace TestVisioAutomation
             ss.Selection.Select(s3);
 
             ss.Document.OpenStencil("basic_u.vss");
-            var master = ss.Master.Get("Dynamic Connector", "basic_u.vss");
+            ss.Document.OpenStencil("connec_u.vss");
+            var master = ss.Master.Get("Dynamic Connector", "connec_u.vss");
             var directed_connectors = ss.Connection.Connect(master);
             ss.Selection.SelectNone();
             ss.Selection.Select(directed_connectors);
 
             IVisio.VisGetSetArgs flags = 0;
-            ss.ShapeSheet.SetFormula("EndArrow", "13", flags);
+            ss.ShapeSheet.SetFormula(new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
 
             var undirected_edges0 = ss.Connection.GetEdges();
             Assert.AreEqual(2, undirected_edges0.Count);
@@ -68,7 +71,8 @@ namespace TestVisioAutomation
             ss.Selection.Select(s3);
 
             ss.Document.OpenStencil("basic_u.vss");
-            var master = ss.Master.Get("Dynamic Connector", "basic_u.vss");
+            ss.Document.OpenStencil("connec_u.vss");
+            var master = ss.Master.Get("Dynamic Connector", "connec_u.vss");
             var undirected_connectors = ss.Connection.Connect(master);
 
             var directed_edges0 = ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);

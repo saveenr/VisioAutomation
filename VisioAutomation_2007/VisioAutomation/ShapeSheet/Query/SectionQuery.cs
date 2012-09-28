@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionQuery : QueryBase<SectionQueryColumn>
+    public class SectionQuery : QueryBase
     {
         private readonly short _section;
         private SectionQuery() :
@@ -31,32 +30,32 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return _section; }
         }
 
-        public VA.ShapeSheet.SRC GetCellSRCForRow( SectionQueryColumn col, short row)
+        public VA.ShapeSheet.SRC GetSRCForRow( QueryColumn col, short row)
         {
-            var src = new VA.ShapeSheet.SRC(this.Section, row, col.Cell);
+            var src = new VA.ShapeSheet.SRC(this.Section, row, col.SRC.Cell);
             return src;
         }
 
-        public SectionQueryColumn AddColumn(short cell)
+        public QueryColumn AddColumn(short cell)
         {
-            var col = new SectionQueryColumn(this.Columns.Count, cell, null);
+            var col = new QueryColumn(this.Columns.Count, cell, null);
             this.AddColumn(col);
             return col;
         }
 
-        public SectionQueryColumn AddColumn(short cell, string name)
+        public QueryColumn AddColumn(short cell, string name)
         {
-            var col = new SectionQueryColumn(this.Columns.Count, cell, name);
+            var col = new QueryColumn(this.Columns.Count, cell, name);
             this.AddColumn(col);
             return col;
         }
 
-        public SectionQueryColumn AddColumn(IVisio.VisCellIndices cell)
+        public QueryColumn AddColumn(IVisio.VisCellIndices cell)
         {
             return AddColumn((short) cell);
         }
 
-        public SectionQueryColumn AddColumn(VA.ShapeSheet.SRC cell)
+        public QueryColumn AddColumn(VA.ShapeSheet.SRC cell)
         {
             if (cell.Section != this.Section)
             {
@@ -67,12 +66,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return AddColumn(cell.Cell);
         }
 
-        public SectionQueryColumn AddColumn(IVisio.VisCellIndices cell, string name)
+        public QueryColumn AddColumn(IVisio.VisCellIndices cell, string name)
         {
             return AddColumn((short)cell, name);
         }
 
-        public SectionQueryColumn AddColumn(VA.ShapeSheet.SRC cell, string name)
+        public QueryColumn AddColumn(VA.ShapeSheet.SRC cell, string name)
         {
             return AddColumn(cell.Cell, name);
         }
@@ -91,10 +90,10 @@ namespace VisioAutomation.ShapeSheet.Query
             return group_counts;
         }
 
-        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
+        public VA.ShapeSheet.Data.Table<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
-            var qds = this._Execute<T>(page, shapeids,true, true);
-            return qds;
+            var qds = this._Execute<T>(page, shapeids, true, true);
+            return qds.CreateMergedTable();
         }
 
         public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Page page, IList<int> shapeids)
@@ -108,35 +107,33 @@ namespace VisioAutomation.ShapeSheet.Query
             var qds = this._Execute<T>(page, shapeids, true, true);
             return qds.Results;
         }
-
-
-        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Page page, IList<int> shapeids, bool getformulas, bool getresults)
+        
+        private VA.Internal.QueryDataSet<T> _Execute<T>(IVisio.Page page, IList<int> shapeids, bool getformulas, bool getresults)
         {
             if (page == null)
             {
-                throw new ArgumentNullException("page");
+                throw new System.ArgumentNullException("page");
             }
 
             if (shapeids == null)
             {
-                throw new ArgumentNullException("shapeids");
+                throw new System.ArgumentNullException("shapeids");
             }
 
-            var cells = Columns.Items.Select(c => c.Cell).ToList();
-            var unitcodes = CreateUnitCodeArray();
+            var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
 
             // Find out how many rows are in each shape for the given section id
-
-
-            // Check preconditions for getting results
-            if (getresults)
-            {
-                validate_unitcodes(unitcodes, cells.Count);
-            }
-
             var groupcounts = this.get_group_counts(page, shapeids);
             var rowcount = groupcounts.Sum();
             int total_cells = rowcount * this.Columns.Count;
+            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
+
+            // NOTE: Keep in mind that at this point we can find out that none of the shapes have any cells
+            // and the total number of cells is zero and the number of rows is zero. So in that case
+            // just return an empty dataset
+
+            //var empty_qds = new VA.ShapeSheet.Data.QueryDataSet<T>(new string[] {}, new T[] {}, shapeids,
+            //                                                      this.Columns.Count, rowcount, groups); 
 
             // Build the Stream
             var sidsrcs = new List<VA.ShapeSheet.SIDSRC>(total_cells);
@@ -157,13 +154,12 @@ namespace VisioAutomation.ShapeSheet.Query
             var stream = VA.ShapeSheet.SIDSRC.ToStream(sidsrcs);
 
             // Retrieve Formulas
-            var formulas = getformulas ? VA.ShapeSheet.Query.QueryUtil.GetFormulasU(page, stream, sidsrcs.Count) : null;
-            var unitcodes_for_rows = getresults ? get_unitcodes_for_rows(unitcodes, rowcount) : null;
-            var results = getresults ? VA.ShapeSheet.Query.QueryUtil.GetResults<T>(page, stream, unitcodes_for_rows, sidsrcs.Count) : null;
+            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
+            var unitcodes_for_rows = getresults && rowcount >0 ? this.CreateUnitCodeArrayForRows(rowcount) : null;
+            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes_for_rows) : null;
+            var table = new VA.Internal.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
-            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groupcounts);
-            return qds;
-
+            return table;
         }
 
         private static IList<IVisio.VisUnitCodes> get_unitcodes_for_rows(IList<IVisio.VisUnitCodes> unitcodes, int rows)
@@ -176,10 +172,10 @@ namespace VisioAutomation.ShapeSheet.Query
             return all_unitcodes;
         }
 
-        public VA.ShapeSheet.Data.QueryDataSet<T> GetFormulasAndResults<T>(IVisio.Shape shape)
+        public VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
-            var qds =  this._Execute<T>(shape,true,true);
-            return qds;
+            var table = this._Execute<T>(shape, true, true);
+            return table.CreateMergedTable();
         }
 
         public VA.ShapeSheet.Data.Table<string> GetFormulas(IVisio.Shape shape)
@@ -194,26 +190,21 @@ namespace VisioAutomation.ShapeSheet.Query
             return qds.Results;
         }
 
-        private VA.ShapeSheet.Data.QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
+        private VA.Internal.QueryDataSet<T> _Execute<T>(IVisio.Shape shape, bool getformulas, bool getresults)
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
-            var cells = Columns.Items.Select(c => c.Cell).ToList();
+            var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
 
             int rowcount = shape.RowCount[Section];
             var groupcounts = new[] { rowcount };
             int total_cells = rowcount * Columns.Count;
-
-
-            var all_unitcodes = getresults ? get_unitcodes_for_rows(CreateUnitCodeArray(), rowcount) : null;
-            if (getresults)
-            {
-                validate_unitcodes(all_unitcodes, total_cells);
-            }
             
+            // NOTE that groupcounts and rowcount could be zero
+
             // prepare the Stream
             var srcs = new List<VA.ShapeSheet.SRC>(total_cells);
             for (short row = 0; row < rowcount; row++)
@@ -224,13 +215,14 @@ namespace VisioAutomation.ShapeSheet.Query
                     srcs.Add(src);
                 }
             }
+
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
-
-            var formulas = getformulas ? VA.ShapeSheet.Query.QueryUtil.GetFormulasU(shape, stream, srcs.Count) : null;
-            var results = getresults ? VA.ShapeSheet.Query.QueryUtil.GetResults<T>(shape, stream, all_unitcodes, srcs.Count) : null;
-
-            var shape_ids = new[] { shape.ID };
-            var qds = new VA.ShapeSheet.Data.QueryDataSet<T>(formulas, results, shape_ids, this.Columns.Count, rowcount, groupcounts);
+            var unitcodes = getresults && rowcount > 0 ? this.CreateUnitCodeArrayForRows(rowcount) : null;
+            var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
+            var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
+            var shapeids = new[] { shape.ID };
+            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
+            var qds = new VA.Internal.QueryDataSet<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return qds;
         }

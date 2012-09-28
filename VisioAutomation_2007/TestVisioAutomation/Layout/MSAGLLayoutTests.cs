@@ -13,7 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithBezierConnectors()
         {
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             var flowchart_stencil = "basflo_u.vss";
             var server_stencil = "server_u.vss";
@@ -33,13 +33,13 @@ namespace TestVisioAutomation
             var c6 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = false;
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
 
-            VA.Layout.MSAGL.MSAGLRenderer.Render(page, directed_graph_drawing, options);
+            directed_graph_drawing.Render(page,options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -207,7 +207,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithDynamicConnectors()
         {
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -215,10 +215,10 @@ namespace TestVisioAutomation
             var n1 = directed_graph_drawing.AddShape("n1", "", "basflo_u.vss",
                                    "Decision");
 
-            n1.ShapeCells = new VA.DOM.ShapeCells();
-            n1.ShapeCells.FillForegnd = "rgb(255,0,0)";
-            n1.ShapeCells.FillBkgnd = "rgb(255,255,0)";
-            n1.ShapeCells.FillPattern = 40;
+            n1.Cells = new VA.DOM.ShapeCells();
+            n1.Cells.FillForegnd = "rgb(255,0,0)";
+            n1.Cells.FillBkgnd = "rgb(255,255,0)";
+            n1.Cells.FillPattern = 40;
             var n2 = directed_graph_drawing.AddShape("n2", "MailServer", "server_u.vss",
                                    "Email Server");
             var n3 = directed_graph_drawing.AddShape("n3", null, "basflo_u.vss",
@@ -233,13 +233,14 @@ namespace TestVisioAutomation
             var c5 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
             var c6 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            VA.Layout.MSAGL.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+            
+            directed_graph_drawing.Render(page1,options);
 
             Assert.IsNotNull(n0.VisioShape);
             Assert.IsNotNull(n1.VisioShape);
@@ -280,7 +281,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
-            var directed_graph_drawing = new VA.Layout.DirectedGraph.Drawing();
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
 
             var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -290,13 +291,14 @@ namespace TestVisioAutomation
             n0.CustomProperties["p2"] = new VA.CustomProperties.CustomPropertyCells("v2");
             n0.CustomProperties["p3"] = new VA.CustomProperties.CustomPropertyCells("v3");
 
-            var options = new VA.Layout.MSAGL.LayoutOptions();
+            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             var page1 = visapp.ActivePage;
-            VA.Layout.MSAGL.MSAGLRenderer.Render(page1, directed_graph_drawing, options);
+
+            directed_graph_drawing.Render(page1, options);
             
             Assert.IsNotNull(n0.VisioShape);
             var props_dic = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(n0.VisioShape);

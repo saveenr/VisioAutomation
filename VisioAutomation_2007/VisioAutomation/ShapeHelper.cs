@@ -5,13 +5,6 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation
 {
-    public enum GroupSelectMode
-    {
-        GroupFirst = IVisio.VisCellVals.visGrpSelModeGroup1st,
-        GroupOnly = IVisio.VisCellVals.visGrpSelModeGroupOnly,
-        MembersFirst = IVisio.VisCellVals.visGrpSelModeMembers1st
-    }
-
     public static class ShapeHelper
     {
         /// <summary>
@@ -68,20 +61,6 @@ namespace VisioAutomation
                 shape_objs.Add(shape);
             }
             return shape_objs;
-        }
-
-        public static void SetGroupSelectMode(IVisio.Shape shape, IVisio.VisCellVals mode)
-        {
-            var src_selectmode = VA.ShapeSheet.SRCConstants.SelectMode;
-            var select_mode_cell = shape.CellsSRC[src_selectmode.Section, src_selectmode.Row, src_selectmode.Cell];
-            select_mode_cell.FormulaU = ((int)mode).ToString();
-        }
-
-        public static void SetGroupSelectMode(IVisio.Shape shape, GroupSelectMode mode)
-        {
-            var src_selectmode = VA.ShapeSheet.SRCConstants.SelectMode;
-            var select_mode_cell = shape.CellsSRC[src_selectmode.Section, src_selectmode.Row, src_selectmode.Cell];
-            select_mode_cell.FormulaU = ((int)mode).ToString();
         }
     }
 }

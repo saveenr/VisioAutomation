@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -108,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (shape == null)
             {
-                throw new ArgumentNullException("shape");
+                throw new System.ArgumentNullException("shape");
             }
 
             if (!this.Session.HasActiveDrawing)
@@ -125,7 +124,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (shapes == null)
             {
-                throw new ArgumentNullException("shapes");
+                throw new System.ArgumentNullException("shapes");
             }
 
             if (!this.Session.HasActiveDrawing)
@@ -142,7 +141,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (shapeids == null)
             {
-                throw new ArgumentNullException("shapeids");
+                throw new System.ArgumentNullException("shapeids");
             }
 
             if (!this.Session.HasActiveDrawing)
@@ -162,7 +161,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (shapes == null)
             {
-                throw new ArgumentNullException("shapes");
+                throw new System.ArgumentNullException("shapes");
             }
 
             if (!this.Session.HasActiveDrawing)
@@ -198,12 +197,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (layername == null)
             {
-                throw new ArgumentNullException("layername");
+                throw new System.ArgumentNullException("layername");
             }
 
             if (layername.Length < 1)
             {
-                throw new ArgumentException("layername");
+                throw new System.ArgumentException("layername");
             }
 
             var layer = this.Session.Layer.GetLayer(layername);
@@ -217,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
                 layer);
         }
 
-        public IList<IVisio.Shape> GetShapes(ShapesEnumeration enumerationtype)
+        public IList<IVisio.Shape> GetShapes( VA.Selection.ShapesEnumeration enumerationtype)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -225,7 +224,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Session.Selection.Get();
-            return VA.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
+            return VA.Selection.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
         }
 
         public IList<IVisio.Shape> GetSubSelectedShapes()
@@ -296,7 +295,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public bool HasShapes(int min_items)
         {
-            this.Session.Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
+            // this.Session.Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException("min_items");

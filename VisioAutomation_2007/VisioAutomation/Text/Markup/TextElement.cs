@@ -2,62 +2,65 @@
 using System.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
+using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioAutomation.Text.Markup
 {
     public class TextElement : Node
     {
+        public CharacterCells CharacterCells { get; set; }
+        public ParagraphCells ParagraphCells { get; set; }
+
         public TextElement() :
             base(NodeType.Element)
         {
-            this.TextFormat = new TextFormat();
+            this.CharacterCells = new CharacterCells();
+            this.ParagraphCells = new ParagraphCells();
         }
 
         public TextElement(string text) :
             base(NodeType.Element)
         {
-            this.TextFormat = new TextFormat();
-            this.AppendText(text);
+            this.CharacterCells = new CharacterCells();
+            this.ParagraphCells = new ParagraphCells();
+            this.AddText(text);
         }
 
-        public Literal AppendText(string text)
+        public Literal AddText(string text)
         {
             var text_node = new Literal(text);
-            this.Children.Add(text_node);
+            this.Add(text_node);
             return text_node;
         }
 
-        public Field AppendField(VA.Text.Markup.Field f)
+        public Field AddField(VA.Text.Markup.Field field)
         {
-            this.Children.Add(f);
-            return f;
+            this.Add(field);
+            return field;
         }
 
-        public TextElement AppendElement()
+        public TextElement AddElement()
         {
             var el = new TextElement();
-            this.Children.Add(el);
+            this.Add(el);
             return el;
         }
 
-        public TextElement AppendElement(string text)
+        public TextElement AddElement(string text)
         {
             var el = new TextElement(text);
-            this.Children.Add(el);
+            this.Add(el);
             return el;
         }
 
         public IEnumerable<TextElement> Elements
         {
-            get { return this.Children.Items.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
+            get { return this.Children.Where(n => n.NodeType == NodeType.Element).Cast<TextElement>(); }
         }
-
-        public TextFormat TextFormat { get; set; }
-
-
-        internal MarkupInfo GetMarkupInfo()
+        
+        internal MarkupRegions GetMarkupInfo()
         {
-            var markupinfo = new MarkupInfo();
+            var markupinfo = new MarkupRegions();
 
             int start_pos = 0;
             var region_stack = new Stack<TextRegion>();
@@ -69,11 +72,11 @@ namespace VisioAutomation.Text.Markup
                     if (walkevent.Node is TextElement)
                     {
                         var element = (TextElement) walkevent.Node;
-                        var region = new TextRegion(element, start_pos);
+                        var region = new TextRegion(start_pos, element);
                         region_stack.Push(region);
                         markupinfo.FormatRegions.Add(region);
                     }
-                    if (walkevent.Node is Literal)
+                    else if (walkevent.Node is Literal)
                     {
                         var text_node = (Literal) walkevent.Node;
 
@@ -81,7 +84,7 @@ namespace VisioAutomation.Text.Markup
                         {
                             // Add text length to parent
                             var nparent = region_stack.Peek();
-                            nparent.TextLength += text_node.Text.Length;
+                            nparent.Length += text_node.Text.Length;
 
                             // update the start position with the length
                             start_pos += text_node.Text.Length;
@@ -89,30 +92,28 @@ namespace VisioAutomation.Text.Markup
                     }
                     else if (walkevent.Node is Field)
                     {
-                        var field = (Field) walkevent.Node;
-                        if (field.PlaceholderText == null)
+                        var f = (Field) walkevent.Node;
+                        if (!string.IsNullOrEmpty(f.PlaceholderText))
                         {
-                            string msg = "Placeholder text cannot be null";
-                            throw new VA.AutomationException(msg);
+                            var field_region = new TextRegion();
+                            field_region.Field = f;
+                            field_region.Start = start_pos;
+                            field_region.Length = f.PlaceholderText.Length;
+
+                            markupinfo.FieldRegions.Add(field_region);
+
+                            // Add text length to parent
+                            var nparent = region_stack.Peek();
+                            nparent.Length += f.PlaceholderText.Length;
+
+                            // update the start position with the length
+                            start_pos += f.PlaceholderText.Length;
                         }
-
-                        var field_region = new TextRegion();
-                        field_region.Field = field;
-                        field_region.TextStartPos = start_pos;
-                        field_region.TextLength = field.PlaceholderText.Length;
-
-                        markupinfo.FieldRegions.Add(field_region);
-
-                        // Add text length to parent
-                        var nparent = region_stack.Peek();
-                        nparent.TextLength += field.PlaceholderText.Length;
-
-                        // update the start position with the length
-                        start_pos += field.PlaceholderText.Length;
                     }
                     else
                     {
-                        // do nothing
+                        string msg = "Unhandled node";
+                        throw new AutomationException(msg);
                     }
                 }
                 else if (walkevent.HasExitedNode)
@@ -124,7 +125,7 @@ namespace VisioAutomation.Text.Markup
                         if (region_stack.Count > 0)
                         {
                             var parent_el = region_stack.Peek();
-                            parent_el.TextLength += this_region.TextLength;
+                            parent_el.Length += this_region.Length;
                         }
                     }
                 }
@@ -151,98 +152,75 @@ namespace VisioAutomation.Text.Markup
                 throw new System.ArgumentNullException("shape");
             }
 
-            var markupinfo = this.GetMarkupInfo();
-
+            // First just set all the text
             string full_doc_inner_text = this.GetInnerText();
-
             shape.Text = full_doc_inner_text;
 
-            // Format the regions
-            foreach (var markup_region in markupinfo.FormatRegions.Where(region => region.TextLength >= 1))
+            // Find all the regions needing formatting
+            var markupinfo = this.GetMarkupInfo();
+            var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1);
+
+            
+            var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
+
+
+            var update = new VA.ShapeSheet.Update();
+
+            foreach (var region in regions_to_format)
             {
-                set_text_range_char_fmt(markup_region, shape);
-                set_text_range_para_fmt(markup_region, shape);
+
+                // Apply character formatting
+                var charcells = region.Element.CharacterCells;
+                if (charcells != null)
+                {
+                    var chars = shape.Characters;
+                    chars.Begin = region.Start;
+                    chars.End = region.End;
+                    chars.CharProps[VA.ShapeSheet.SRCConstants.Char_Color.Cell] = (short) 0;
+                    short rownum = chars.CharPropsRow[(short) default_chars_bias];
+
+                    if (rownum < 0)
+                    {
+                        throw new VA.AutomationException("Could not create Character row");
+                    }
+
+                    update.Clear();
+                    charcells.ApplyFormulas(update, rownum);
+                    update.Execute(shape);
+                }
+
+                // Apply paragraph formatting
+                var paracells = region.Element.ParagraphCells;
+                if (paracells != null)
+                {
+                    var chars = shape.Characters;
+                    chars.Begin = region.Start;
+                    chars.End = region.End;
+                    chars.ParaProps[VA.ShapeSheet.SRCConstants.Para_Bullet.Cell] = (short) 0;
+                    short rownum = chars.ParaPropsRow[(short) default_chars_bias];
+
+                    if (rownum < 0)
+                    {
+                        throw new VA.AutomationException("Could not create Paragraph row");
+                    }
+
+                    update.Clear();
+                    paracells.ApplyFormulas(update, rownum);
+                    update.Execute(shape);
+                }
             }
 
             // Insert the fields
-            // NOTE - to keep it simpler the fields are added backwards - last to first
-            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.TextLength >= 1).Reverse())
+            // note: Fields are added in reverse because it is simpler to keep track of the insertion positions
+            foreach (var field_region in markupinfo.FieldRegions.Where(region => region.Length >= 1).Reverse())
             {
                 var chars = shape.Characters;
-                chars.Begin = field_region.TextStartPos;
-                chars.End = field_region.TextEndPos;
+                chars.Begin = field_region.Start;
+                chars.End = field_region.End;
                 chars.AddField((short) field_region.Field.Category, (short) field_region.Field.Code,
                                (short) field_region.Field.Format);
                 var fr = field_region;
             }
-        }
-
-
-        private static void set_text_range_para_fmt(TextRegion markup_region, IVisio.Shape shape)
-        {
-            int startpos = markup_region.TextStartPos;
-            int endpos = markup_region.TextEndPos;
-
-            var fmt = new VA.Text.ParagraphFormatCells();
-            var tf = markup_region.Element.TextFormat;
-            
-            if (tf.Indent.HasValue)
-            {
-                fmt.IndentFirst = VA.Convert.PointsToInches(tf.Indent.Value);
-                fmt.IndentLeft = VA.Convert.PointsToInches(tf.Indent.Value);
-            }
-
-            if (tf.HAlign.HasValue)
-            {
-                fmt.HorizontalAlign = (int) tf.HAlign.Value;
-            }
-
-            // Handle bullets
-            if (tf.Bullets.HasValue &&
-                tf.Bullets.Value)
-            {
-                const int base_indent_size = 25;
-                fmt.IndentFirst = "-25pt";
-                fmt.IndentLeft = "25pt";
-                fmt.BulletIndex = "1";
-            }
-            
-            VA.Text.TextFormat.FormatRange(shape, fmt, startpos, endpos);
-        }
-
-        private static void set_text_range_char_fmt(TextRegion markup_region, IVisio.Shape shape)
-        {
-            int startpos = markup_region.TextStartPos;
-            int endpos = markup_region.TextEndPos;
-
-            var fmt = new VA.Text.CharacterFormatCells();
-
-            if (markup_region.Element.TextFormat.FontSize.HasValue)
-            {
-                fmt.Size = Convert.PointsToInches(markup_region.Element.TextFormat.FontSize.Value);
-            }
-
-            if (markup_region.Element.TextFormat.Color.HasValue)
-            {
-                fmt.Color = markup_region.Element.TextFormat.Color.Value.ToFormula();
-            }
-
-            if (markup_region.Element.TextFormat.Font!=null)
-            {
-                fmt.Font = shape.Document.Fonts[markup_region.Element.TextFormat.Font].ID;
-            }
-
-            if (markup_region.Element.TextFormat.CharStyle.HasValue)
-            {
-                fmt.Style = (int) markup_region.Element.TextFormat.CharStyle.Value;
-            }
-
-            if (markup_region.Element.TextFormat.Transparency.HasValue)
-            {
-                fmt.Transparency = markup_region.Element.TextFormat.Transparency.Value/100.0;
-            }
-
-            VA.Text.TextFormat.FormatRange(shape, fmt, startpos, endpos);
         }
     }
 }

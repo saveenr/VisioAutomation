@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
 
 namespace TestVisioAutomation
 {
@@ -13,13 +14,12 @@ namespace TestVisioAutomation
         public void OrgChartMustHaveContent()
         {
             bool caught = false;
-            var oc = new VA.Layout.OrgChart.Drawing();
+            var orgcgart = new OCMODEL.Drawing();
             var page1 = GetNewPage(StandardPageSize);
-            var renderer = new VA.Layout.OrgChart.OrgChartLayout();
             try
             {
                 var application = page1.Application;
-                oc.Render(application);
+                orgcgart.Render(application);
             }
             catch (System.Exception)
             {
@@ -35,13 +35,13 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawOrgChart1()
         {
-            var oc = new VA.Layout.OrgChart.Drawing();
+            var orgchart = new OCMODEL.Drawing();
 
-            var n_a = new VA.Layout.OrgChart.Node("A");
-            var n_b = new VA.Layout.OrgChart.Node("B");
-            var n_c = new VA.Layout.OrgChart.Node("C");
-            var n_d = new VA.Layout.OrgChart.Node("D");
-            var n_e = new VA.Layout.OrgChart.Node("E");
+            var n_a = new OCMODEL.Node("A");
+            var n_b = new OCMODEL.Node("B");
+            var n_c = new OCMODEL.Node("C");
+            var n_d = new OCMODEL.Node("D");
+            var n_e = new OCMODEL.Node("E");
 
             n_a.Children.Add(n_b);
             n_a.Children.Add(n_c);
@@ -50,12 +50,12 @@ namespace TestVisioAutomation
 
             n_a.Size = new VA.Drawing.Size(4, 2);
 
-            oc.Root = n_a;
+            orgchart.Root = n_a;
 
             var app = new IVisio.Application();
 
-            var renderer = new VA.Layout.OrgChart.OrgChartLayout();
-            oc.Render(app);
+            var renderer = new OCMODEL.OrgChartLayout();
+            orgchart.Render(app);
 
             var active_page = app.ActivePage;
             var page = active_page;

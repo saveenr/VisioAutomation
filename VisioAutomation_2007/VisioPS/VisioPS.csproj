@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VisioPS</RootNamespace>
     <AssemblyName>VisioPS</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -82,27 +82,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Get_TextFormat.cs" />
-    <Compile Include="Commands\Draw_Glow.cs" />
     <Compile Include="Commands\Draw_NURBS.cs" />
     <Compile Include="Commands\New_GridLayout.cs" />
     <Compile Include="Commands\Reset_PageOrigin.cs" />
-    <Compile Include="Commands\Get_SectionResult.cs" />
     <Compile Include="Commands\Get_SRCFormula.cs" />
     <Compile Include="Commands\Update_ShapeSheet.cs" />
     <Compile Include="Commands\New_ShapeSheetUpdate.cs" />
     <Compile Include="Commands\Set_TextStyle.cs" />
-    <Compile Include="DataUtil.cs" />
     <Compile Include="Commands\Get_Point.cs" />
     <Compile Include="Commands\Draw_Grid.cs" />
     <Compile Include="Commands\New_Master.cs" />
     <Compile Include="Commands\New_Stencil.cs" />
-    <Compile Include="Commands\Get_SectionFormula.cs" />
     <Compile Include="Commands\Remove_UserDefinedCell.cs" />
     <Compile Include="objects\VisioPSSessionOptions.cs" />
     <Compile Include="enums\ResultType.cs" />
     <Compile Include="Commands\Get_SRCResult.cs" />
-    <Compile Include="Commands\Get_SRC.cs" />
     <Compile Include="Commands\Close_Drawing.cs" />
     <Compile Include="Commands\Drop_Master.cs" />
     <Compile Include="Commands\Duplicate_Shape.cs" />
@@ -114,7 +108,6 @@
     <Compile Include="Commands\TestSelectedShapes.cs" />
     <Compile Include="Commands\Remove_Shape.cs" />
     <Compile Include="Commands\Get_Layer.cs" />
-    <Compile Include="Commands\New_CustomField.cs" />
     <Compile Include="Commands\Align_Shape.cs" />
     <Compile Include="Commands\Connect_Shape.cs" />
     <Compile Include="Commands\Distribute_Shape.cs" />
@@ -131,7 +124,7 @@
     <Compile Include="Commands\Get_ConnectionPoint.cs" />
     <Compile Include="Commands\Get_Control.cs" />
     <Compile Include="Commands\Get_Drawing.cs" />
-    <Compile Include="Commands\Draw_FlowChart.cs" />
+    <Compile Include="Commands\Draw_DirectedGraph.cs" />
     <Compile Include="Commands\Get_Master.cs" />
     <Compile Include="Commands\Get_UserDefinedCell.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
@@ -193,16 +186,8 @@
     <Compile Include="Commands\Set_Zoom.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VisioAutomation.Layout.MSAGL\VisioAutomation.Layout.MSAGL.csproj">
-      <Project>{9D3CA030-E8EA-4EF6-AB58-B4689C7CDB76}</Project>
-      <Name>VisioAutomation.Layout.MSAGL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VisioAutomation.Scripting.XamlTune\VisioAutomation.Scripting.XamlTune.csproj">
-      <Project>{2BA6E51C-D975-49E3-B6B9-DF3D2D951057}</Project>
-      <Name>VisioAutomation.Scripting.XamlTune</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
-      <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
+      <Project>{17035996-44f8-4506-baab-ea121475b936}</Project>
       <Name>VisioAutomation.Scripting</Name>
     </ProjectReference>
     <ProjectReference Include="..\VisioAutomation\VisioAutomation.csproj">
@@ -218,6 +203,9 @@
     <Content Include="samples\orgcharts\orgchart-sample-1.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="VisioPS.psd1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="scripts\demo_3_draw_linegrid.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -254,7 +242,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
@@ -263,7 +251,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

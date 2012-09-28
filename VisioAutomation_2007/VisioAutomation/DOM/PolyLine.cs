@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace VisioAutomation.DOM
 {
-    public class PolyLine : Shape
+    public class PolyLine : BaseShape
     {
         public List<VA.Drawing.Point> Points { get; private set; }
 

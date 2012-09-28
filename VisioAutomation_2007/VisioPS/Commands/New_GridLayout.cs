@@ -23,15 +23,15 @@ namespace VisioPS.Commands
         public double CellHeight = 0.5;
 
         [SMA.Parameter(Position = 5, Mandatory = false)]
-        public VA.Layout.Grid.RowDirection RowDirection = VA.Layout.Grid.RowDirection.BottomToTop;
+        public VA.Layout.Models.Grid.RowDirection RowDirection = VA.Layout.Models.Grid.RowDirection.BottomToTop;
 
         [SMA.Parameter(Position = 5, Mandatory = false)]
-        public VA.Layout.Grid.ColumnDirection ColumnDirection = VA.Layout.Grid.ColumnDirection.LeftToRight;
+        public VA.Layout.Models.Grid.ColumnDirection ColumnDirection = VA.Layout.Models.Grid.ColumnDirection.LeftToRight;
 
         protected override void ProcessRecord()
         {
             var cellsize = new VA.Drawing.Size(CellWidth, CellHeight);
-            var layout = new VA.Layout.Grid.GridLayout(this.Columns, this.Rows, cellsize, this.Master);
+            var layout = new VA.Layout.Models.Grid.GridLayout(this.Columns, this.Rows, cellsize, this.Master);
             layout.RowDirection = this.RowDirection;
             layout.ColumnDirection = this.ColumnDirection;
             this.WriteObject(layout);

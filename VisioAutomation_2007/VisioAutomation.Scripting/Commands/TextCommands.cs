@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -64,106 +63,49 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            int rounding = 0;
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
-            var src_charstyle = VA.ShapeSheet.SRCConstants.Char_Style;
 
             using (var undoscope = application.CreateUndoScope())
             {
+                var shapeids = shapes.Select(s => s.ID).ToList();
+
+                var page = this.Session.VisioApplication.ActivePage;
+                // Store all the formatting
+                var formats = VA.Text.TextFormat.GetFormat(page, shapeids);
+
+                // Change the text - this will wipe out all the character and paragraph formatting
                 foreach (var shape in shapes)
                 {
-                    var s = shape; // to prevent Access to Modified Closure warning
-                    var tf = VA.Text.TextFormat.GetFormat(s);
-                    var textruns = tf.CharacterTextRuns;
-                    var nocast = (short)IVisio.VisUnitCodes.visNoCast;
-                    var textstyles = textruns
-                        .Select(
-                            tr =>
-                                {
-                                    var c = s.GetCell(src_charstyle);
-                                    return (short) c.ResultInt[nocast, (short) rounding];
-                                }
-                        ).ToList();
-
-                    string t = s.Text;
+                    string t = shape.Text;
                     if (t.Length < 1)
                     {
                         continue;
                     }
-                    s.Text = TextCommandsUtil.toggle_case(t);
+                    shape.Text = TextCommandsUtil.toggle_case(t);
+                }
 
-                    foreach (var tr in textruns)
+                // Now restore all the formatting - based on any initial formatting from the text
+
+                var update = new VA.ShapeSheet.Update();
+                for (int i = 0; i < shapes.Count; i++)
+                {
+                    var format = formats[i];
+
+                    if (format.CharacterFormats.Count>0)
                     {
-                        var chars = s.Characters;
-                        chars.Begin = tr.Begin;
-                        chars.End = tr.End;
-                        var cellindex = src_charstyle.Cell;
-                        chars.CharProps[cellindex] =  textstyles[tr.Index];
+                        var fmt = format.CharacterFormats[0];
+                        fmt.Apply(update,(short) shapeids[i],(short)0);
+                    }
+
+                    if (format.ParagraphFormats.Count > 0)
+                    {
+                        var fmt = format.ParagraphFormats[0];
+                        fmt.Apply(update, (short)shapeids[i], (short)0);
                     }
                 }
-            }
-        }
 
-        public void InsertField(VA.Text.Markup.Field field, int start, int end)
-        {
-            if (start < 0)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to zero");
-            }
-
-            if (end < start)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to start");
-            }
-
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                foreach (var shape in shapes)
-                {
-                    var c = shape.Characters;
-                    c.Begin = start;
-                    c.End = end;
-                    c.AddField((short)field.Category, (short)field.Code, (short)field.Format);
-                }
-            }
-        }
-
-        public void InsertCustomField(int start, int end, string formula, IVisio.VisFieldFormats format)
-        {
-            if (start < 0)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to zero");
-            }
-
-            if (end < start)
-            {
-                throw new ArgumentOutOfRangeException("end", "must be greater than or equal to start");
-            }
-
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                foreach (var shape in shapes)
-                {
-                    var c = shape.Characters;
-                    c.Begin = start;
-                    c.End = end;
-                    c.AddCustomFieldU(formula,(short)format);
-                }
+                update.Execute(page);
             }
         }
 
@@ -213,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_window = application.ActiveWindow;
             var sel = active_window.Selection;
             var shapes = this.Session.Selection.EnumShapes().ToList();
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
 
             foreach (var shape in shapes)
             {
@@ -235,26 +177,6 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = application.ActivePage;
             update.Execute(active_page);
-        }
-
-        public void StripWhiteSpace()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var all_shapes = this.Session.Selection.EnumShapes().ToList();
-
-            foreach (var shape in all_shapes)
-            {
-                var original_text = shape.Text;
-                var stripped_text = original_text.Trim();
-                if (original_text.Length != stripped_text.Length)
-                {
-                    shape.Text = stripped_text;
-                }
-            }
         }
 
         public void IncreaseTextSize()
@@ -284,7 +206,7 @@ namespace VisioAutomation.Scripting.Commands
                 if (font == null)
                 {
                     var msg = "No such font: " + fontname;
-                    throw new ArgumentException(msg, "fontname");
+                    throw new System.ArgumentException(msg, "fontname");
                 }
                 var src_Char_Font = VA.ShapeSheet.SRCConstants.Char_Font;
 
@@ -293,14 +215,13 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetTextFont(string fontname)
+        public void SetFont(string fontname)
         {
-            var fontnames = new string[] {fontname};
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
-            var fonts = fontnames.Select(v => active_doc_fonts[v]);
-            var fontids = fonts.Select(f => f.ID.ToString()).ToList();
+            var font = active_doc_fonts[fontname];
+            var fontids = new[] {font.ID.ToString()};
             IVisio.VisGetSetArgs flags=0;
             this.Session.ShapeSheet.SetFormula(new[] { VA.ShapeSheet.SRCConstants.Char_Font }, fontids, flags);
         }
@@ -314,7 +235,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
         }
 
-        public IList<VA.Text.TextFormat> GetTextFormat()
+        public IList<VA.Text.TextFormat> GetFormat()
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -326,37 +247,6 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var formats = VA.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
-        }
-
-        public void SetTextFormat(VA.Text.CharacterFormatCells charfmt, VA.Text.ParagraphFormatCells parafmt)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return ;
-            }
-
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var application = this.Session.VisioApplication;
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
-
-            if (charfmt != null)
-            {
-                foreach (int shapeid in shapeids)
-                {
-                    charfmt.Apply(update,(short)shapeid,0);
-                }
-            }
-
-            if (parafmt != null)
-            {
-                foreach (int shapeid in shapeids)
-                {
-                    parafmt.Apply(update, (short)shapeid, 0);
-                }
-            }
-
-            update.Execute(application.ActivePage);
         }
     }
 }

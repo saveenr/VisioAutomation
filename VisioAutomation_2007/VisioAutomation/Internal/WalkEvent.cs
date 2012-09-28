@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using VA=VisioAutomation;
-
-namespace VisioAutomation.Internal
+﻿namespace VisioAutomation.Internal
 {
     /// <summary>
     /// Assists in performing a depth-first traversal of nodes for some Node type T. 

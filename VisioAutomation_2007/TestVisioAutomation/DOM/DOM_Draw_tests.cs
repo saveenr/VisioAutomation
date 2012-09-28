@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
@@ -14,9 +15,9 @@ namespace TestVisioAutomation
         {
             // get the number of actual drawings, not including templates, stencils, etc.
             var documents = app.Documents;
-            return documents.AsEnumerable()
-                .Where( doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing)
-                .Count();
+            var drawings = documents.AsEnumerable()
+                .Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing);
+            return drawings.Count();
         }
 
         [TestMethod]
@@ -26,36 +27,38 @@ namespace TestVisioAutomation
             // Empty DOMs do not add any shapes
             var app = this.GetVisioApplication();
 
-
-            var doc1 = new VA.DOM.Document();
-
-
+            var dompage = new VA.DOM.Page();
             var doc = this.GetNewDoc();
-            doc1.Render(app.ActivePage);
-
+            dompage.Render(app.ActiveDocument);
             Assert.AreEqual(0,app.ActivePage.Shapes.Count);
-            
             app.ActiveDocument.Close( true );
         }
 
         [TestMethod]
-        public void Empty_DOM_Page_Size()
+        public void Render_Page_To_Document()
         {
-
-            // A DOM document with 1 pages rendered to a document with 1 page should ????
+            // Rendering a dom page to a document should create a new page
             var app = this.GetVisioApplication();
-
-            var doc1 = new VA.DOM.Document();
-            doc1.PageSettings.Size = new VA.Drawing.Size(5,5);
-
+            var dompage = new VA.DOM.Page();
             var visdoc = this.GetNewDoc();
             Assert.AreEqual(1, visdoc.Pages.Count);
+            var page = dompage.Render(app.ActiveDocument);
+            Assert.AreEqual(2, visdoc.Pages.Count);
+            app.ActiveDocument.Close(true);
+        }
 
-            doc1.Render(app.ActivePage);
-
-            Assert.AreEqual(1, visdoc.Pages.Count);
-            AssertVA.AreEqual(5, 5, app.ActivePage.GetSize(), 0.005);
-
+        [TestMethod]
+        public void Render_Document_To_App()
+        {
+            // Rendering a dom document to an appliction instance should create a new document
+            var app = this.GetVisioApplication();
+            var domdoc = new VA.DOM.Document();
+            var dompage = new VA.DOM.Page();
+            domdoc.Pages.Add(dompage);
+            Assert.AreEqual(0, app.Documents.Count);
+            var newdoc = domdoc.Render(app);
+            Assert.AreEqual(1, app.Documents.Count);
+            Assert.AreEqual(1, newdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
 
@@ -63,17 +66,17 @@ namespace TestVisioAutomation
         public void Draw_Red_Rectangle_With_Text()
         {
             // Create the doc
-            var vdoc = new VA.DOM.Document();
-            vdoc.PageSettings.Size = new VA.Drawing.Size(10,10);
+            var dompage = new VA.DOM.Page();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
-            vrect1.Text = "HELLO WORLD";
-            vrect1.ShapeCells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
-            vdoc.Shapes.Add(vrect1);
+            vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
+            vrect1.Cells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
+            dompage.Shapes.Add(vrect1);
 
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            vdoc.Render(app.ActivePage);
+            app.ActivePage.SetSize(new VA.Drawing.Size(10, 10));
+            var page = dompage.Render(app.ActiveDocument);
 
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
@@ -92,12 +95,12 @@ namespace TestVisioAutomation
             var rectmaster = stencil.Masters["Rectangle"];
 
             // Create the doc
-            var vdoc = new VA.DOM.Document();
+            var domshapescol = new VA.DOM.ShapeList();
             
-            vdoc.DrawRectangle(0, 0, 1, 1);
-            vdoc.Drop(rectmaster, 3, 3);
+            domshapescol.DrawRectangle(0, 0, 1, 1);
+            domshapescol.Drop(rectmaster, 3, 3);
 
-            vdoc.Render(app.ActivePage);
+            domshapescol.Render(app.ActivePage);
 
             app.ActiveDocument.Close(true);
         }
@@ -105,24 +108,30 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Set_Custom_Props()
         {
-            //Draws a simple red square
-
             // Create the doc
-            var vdoc = new VA.DOM.Document();
+            var domshapescol = new VA.DOM.ShapeList();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
-            vrect1.Text = "HELLO WORLD";
+            vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
 
-            var cp1 = vrect1.SetCustomProperty("FOO", "FOOVALUE");
+            vrect1.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+
+            var cp1 = new VA.CustomProperties.CustomPropertyCells();
+            cp1.Value = "FOOVALUE";
             cp1.Label = "Foo Label";
-            var cp2 = vrect1.SetCustomProperty("BAR", "BARVALUE");
+
+            var cp2 = new VA.CustomProperties.CustomPropertyCells();
+            cp2.Value = "BARVALUE";
             cp2.Label = "Bar Label";
 
-            vdoc.Shapes.Add(vrect1);
+            vrect1.CustomProperties["FOO"] = cp1;
+            vrect1.CustomProperties["BAR"] = cp2;
+
+            domshapescol.Add(vrect1);
 
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            vdoc.Render(app.ActivePage);
+            domshapescol.Render(app.ActivePage);
 
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
@@ -131,83 +140,6 @@ namespace TestVisioAutomation
             Assert.IsTrue(VA.CustomProperties.CustomPropertyHelper.HasCustomProperty(vrect1.VisioShape, "BAR"));
 
             doc.Close(true);
-        }
-
-
-
-        [TestMethod]
-        public void Markup_Simple_Plain()
-        {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
-            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
-            var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetText(s0);
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void Markup_Simple_Bold()
-        {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
-            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
-            var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetText(s0);
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void Markup_Simple_Italic()
-        {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
-            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
-            var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetText(s0);
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void Markup_Simple_Font()
-        {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.Font = "Impact";
-            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
-            var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetText(s0);
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void Render_Markup_Simple_Font_Multiple()
-        {
-            var m = new VA.Text.Markup.TextElement("Normal Text");
-            m.TextFormat.Font = "Impact";
-            m.TextFormat.Color = new VA.Drawing.ColorRGB(0xff0000);
-            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
-            var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            m.SetText(s0);
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void Markup_Overlap_Multiple()
-        {
-            var t1 = new VA.Text.Markup.TextElement("Normal Text");
-            t1.TextFormat.Font = "Segoe UI";
-            var t2 = t1.AppendElement("Italic");
-            t2.TextFormat.CharStyle = VA.Text.CharStyle.Italic;
-
-            var t3 = t2.AppendElement("Italic");
-            t3.TextFormat.CharStyle = VA.Text.CharStyle.Bold;
-
-            var t4 = t2.AppendElement("Bold Italic");
-            t4.TextFormat.CharStyle = VA.Text.CharStyle.Bold | VA.Text.CharStyle.Italic;
-
-            var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
-            var s0 = page1.DrawRectangle(0, 0, 4, 4);
-            t1.SetText(s0);
-            //page1.Delete(0);
         }
     }
 }

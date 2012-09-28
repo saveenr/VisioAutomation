@@ -14,13 +14,11 @@
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
     </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
     <SccProvider>
     </SccProvider>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -62,8 +60,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Visio, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Msagl, Version=1.2.0.0, Culture=neutral, PublicKeyToken=7f84f738e1fc245c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MSAGL\binaries\Microsoft.Msagl.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -71,167 +71,163 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeGen\CSharpWriter.cs" />
     <Compile Include="Connections\ConnectorArrowEdgeHandling.cs" />
     <Compile Include="Connections\ConnectionPointType.cs" />
     <Compile Include="Connections\ConnectionPointHelper.cs" />
     <Compile Include="Controls\ControlHelper.cs" />
+    <Compile Include="DOM\Document.cs" />
+    <Compile Include="DOM\PageList.cs" />
+    <Compile Include="DOM\Page.cs" />
     <Compile Include="DOM\Arc.cs" />
-    <Compile Include="Layout\DirectedGraph\Connector.cs" />
-    <Compile Include="Layout\DirectedGraph\Drawing.cs" />
-    <Compile Include="Layout\DirectedGraph\LayoutOptions.cs" />
-    <Compile Include="Layout\DirectedGraph\Node.cs" />
-    <Compile Include="Layout\DirectedGraph\Shape.cs" />
-    <Compile Include="ShapeLayout\CompactTreeLayout.cs" />
-    <Compile Include="ShapeLayout\CircularLayout.cs" />
-    <Compile Include="ShapeLayout\HierarchyLayout.cs" />
-    <Compile Include="ShapeLayout\RadialLayout.cs" />
-    <Compile Include="ShapeLayout\Layout.cs" />
-    <Compile Include="ShapeLayout\FlowchartLayout.cs" />
-    <Compile Include="ShapeLayout\CompactTreeDirection.cs" />
-    <Compile Include="ShapeLayout\ConnectorAppearance.cs" />
-    <Compile Include="ShapeLayout\ConnectorStyle.cs" />
-    <Compile Include="ShapeLayout\Direction.cs" />
-    <Compile Include="ShapeLayout\HorizontalAlignment.cs" />
-    <Compile Include="ShapeLayout\VerticalAlignment.cs" />
-    <Compile Include="ShapeLayout\LayoutStyle.cs" />
+    <Compile Include="ExportHelper.cs" />
+    <Compile Include="Layout\Models\DirectedGraph\MSAGLLayoutOptions.cs" />
+    <Compile Include="Layout\Models\BoxLayout\AlignmentHorizontal.cs" />
+    <Compile Include="Layout\Models\BoxLayout\AlignmentVertical.cs" />
+    <Compile Include="Layout\Models\BoxLayout\BoxLayout.cs" />
+    <Compile Include="Layout\Models\BoxLayout\Box.cs" />
+    <Compile Include="Layout\Models\BoxLayout\Container.cs" />
+    <Compile Include="Layout\Models\BoxLayout\Direction.cs" />
+    <Compile Include="Layout\Models\BoxLayout\Node.cs" />
+    <Compile Include="Layout\Models\Container\Container.cs" />
+    <Compile Include="Layout\Models\Container\ContainerItem.cs" />
+    <Compile Include="Layout\Models\Container\ContainerLayout.cs" />
+    <Compile Include="Layout\Models\Container\Formatting.cs" />
+    <Compile Include="Layout\Models\Container\LayoutOptions.cs" />
+    <Compile Include="Layout\Models\DirectedGraph\Connector.cs" />
+    <Compile Include="Layout\Models\DirectedGraph\Drawing.cs" />
+    <Compile Include="Layout\Models\DirectedGraph\LayoutOptions.cs" />
+    <Compile Include="Layout\Models\DirectedGraph\Node.cs" />
+    <Compile Include="Layout\Models\DirectedGraph\Shape.cs" />
+    <Compile Include="Layout\PageLayout\CompactTreeLayout.cs" />
+    <Compile Include="Layout\PageLayout\CircularLayout.cs" />
+    <Compile Include="Layout\PageLayout\HierarchyLayout.cs" />
+    <Compile Include="Layout\PageLayout\RadialLayout.cs" />
+    <Compile Include="Layout\PageLayout\Layout.cs" />
+    <Compile Include="Layout\PageLayout\FlowchartLayout.cs" />
+    <Compile Include="Layout\PageLayout\CompactTreeDirection.cs" />
+    <Compile Include="Layout\PageLayout\ConnectorAppearance.cs" />
+    <Compile Include="Layout\PageLayout\ConnectorStyle.cs" />
+    <Compile Include="Layout\PageLayout\Direction.cs" />
+    <Compile Include="Layout\PageLayout\HorizontalAlignment.cs" />
+    <Compile Include="Layout\PageLayout\VerticalAlignment.cs" />
+    <Compile Include="Layout\PageLayout\LayoutStyle.cs" />
     <Compile Include="Masters\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
-    <Compile Include="CodeGen\CellGroup.cs" />
-    <Compile Include="CodeGen\CellGroupMember.cs" />
-    <Compile Include="CodeGen\VAGenCode.cs" />
-    <Compile Include="Layout\Radial\DoughnutSlice.cs" />
-    <Compile Include="Layout\Radial\Sector.cs" />
-    <Compile Include="Layout\Radial\RadialSlice.cs" />
-    <Compile Include="Layout\Radial\PieSlice.cs" />
+    <Compile Include="Layout\Models\Radial\DoughnutSlice.cs" />
+    <Compile Include="Layout\Models\Radial\Sector.cs" />
+    <Compile Include="Layout\Models\Radial\RadialSlice.cs" />
+    <Compile Include="Layout\Models\Radial\PieSlice.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
-    <Compile Include="Experimental\SimpleTextDoc\TextDocumentBuilder.cs" />
-    <Compile Include="Experimental\SimpleTextDoc\TextPage.cs" />
+    <Compile Include="Layout\Models\SimpleTextDoc\TextDocumentBuilder.cs" />
+    <Compile Include="Layout\Models\SimpleTextDoc\TextPage.cs" />
     <Compile Include="Extensions\CellDataMethods.cs" />
     <Compile Include="Interop\EnumType.cs" />
     <Compile Include="Interop\EnumValue.cs" />
-    <Compile Include="Layout\Pie\PieLayout.cs" />
-    <Compile Include="Layout\Pie\PieSlice.cs" />
     <Compile Include="Masters\MasterHelper.cs" />
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Layout\ShapeLayoutCells.cs" />
+    <Compile Include="Layout\Models\DirectedGraph\MSAGLRenderer.cs" />
+    <Compile Include="Internal\MSAGLUtil.cs" />
     <Compile Include="Pages\PageCells.cs" />
-    <Compile Include="CustomProperties\Calendar.cs" />
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
-    <Compile Include="CustomProperties\Format.cs" />
     <Compile Include="Drawing\AlignmentHorizontal.cs" />
     <Compile Include="Drawing\AlignmentVertical.cs" />
     <Compile Include="Drawing\Transparency.cs" />
-    <Compile Include="Effects\EdgeGlow.cs" />
-    <Compile Include="Effects\MultiStopGradientDirection.cs" />
-    <Compile Include="Effects\ThreePointGradientFill.cs" />
-    <Compile Include="Effects\TwoColorGlow.cs" />
     <Compile Include="Format\FormatHelper.cs" />
     <Compile Include="Format\FormatPaintCache.cs" />
     <Compile Include="Format\FormatCategory.cs" />
     <Compile Include="Format\FormatPaintCell.cs" />
-    <Compile Include="Layout\BoxHierarchy\DirectionHorizontal.cs" />
-    <Compile Include="Layout\BoxHierarchy\DirectionVertical.cs" />
-    <Compile Include="Layout\LockCells_ext.cs" />
-    <Compile Include="Layout\XFormCells_ext.cs" />
     <Compile Include="Layout\LockCells.cs" />
-    <Compile Include="Layout\ShapeSendDirection.cs" />
+    <Compile Include="Application\PerfSettings.cs" />
+    <Compile Include="Selection\ShapeSendDirection.cs" />
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
-    <Compile Include="ShapeGeometry\GeometrySection.cs" />
-    <Compile Include="ShapeGeometry\GeometryRow.cs" />
-    <Compile Include="ShapeGeometry\ShapeGeometryHelper.cs" />
-    <Compile Include="ShapesEnumeration.cs" />
+    <Compile Include="Geometry\GeometrySection.cs" />
+    <Compile Include="Geometry\GeometryRow.cs" />
+    <Compile Include="Geometry\GeometryHelper.cs" />
+    <Compile Include="Selection\ShapesEnumeration.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
-    <Compile Include="Shapesheet\CellGroups\CellGroupRow.cs" />
+    <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroupList.cs" />
-    <Compile Include="Shapesheet\Data\QueryDataRow.cs" />
-    <Compile Include="Shapesheet\Query\QueryUtil.cs" />
-    <Compile Include="Shapesheet\Update\UpdateUtil.cs" />
-    <Compile Include="Shapesheet\Update\UpdateType.cs" />
     <Compile Include="Text\CharStyle.cs" />
+    <Compile Include="Text\Markup\CharacterCells.cs" />
+    <Compile Include="Text\Markup\ParagraphCells.cs" />
+    <Compile Include="Text\Markup\CustomField.cs" />
+    <Compile Include="Text\Markup\FieldBase.cs" />
     <Compile Include="Text\TextFormat.cs" />
     <Compile Include="Text\TextBlockFormatCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
-    <Compile Include="UI\AlertResponseCode.cs" />
+    <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
-    <Compile Include="Effects\GradientStop.cs" />
-    <Compile Include="Effects\GradientFillDefinition.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
-    <Compile Include="Effects\MultiStopGradient.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
-    <Compile Include="DOM\ShapeFromMaster.cs" />
-    <Compile Include="DOM\Master.cs" />
+    <Compile Include="DOM\MasterRef.cs" />
+    <Compile Include="DOM\Shape.cs" />
     <Compile Include="DOM\Line.cs" />
     <Compile Include="DOM\Rectangle.cs" />
     <Compile Include="DOM\PolyLine.cs" />
-    <Compile Include="DOM\DynamicConector.cs" />
+    <Compile Include="DOM\Connector.cs" />
     <Compile Include="Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
-    <Compile Include="DOM\PageSettings.cs" />
-    <Compile Include="FastRenderingScope.cs" />
+    <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
-    <Compile Include="Layout\BoxHierarchy\BoxLayout.cs" />
-    <Compile Include="Layout\BoxHierarchy\LayoutDirection.cs" />
-    <Compile Include="Layout\BoxHierarchy\LayoutOptions.cs" />
-    <Compile Include="Layout\BoxHierarchy\Node.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
-    <Compile Include="Layout\Grid\Column.cs" />
-    <Compile Include="Layout\Grid\ColumnDirection.cs" />
-    <Compile Include="Layout\Grid\GridLayout.cs" />
-    <Compile Include="Layout\Grid\Node.cs" />
-    <Compile Include="Layout\Grid\Row.cs" />
-    <Compile Include="Layout\Grid\RowDirection.cs" />
-    <Compile Include="Layout\OrgChart\Drawing.cs" />
-    <Compile Include="Layout\OrgChart\LayoutDirection.cs" />
-    <Compile Include="Layout\OrgChart\LayoutOptions.cs" />
-    <Compile Include="Layout\OrgChart\Node.cs" />
-    <Compile Include="Layout\OrgChart\NodeList.cs" />
-    <Compile Include="Layout\OrgChart\OrgChartLayout.cs" />
-    <Compile Include="Layout\InternalTree\DictionaryUtil.cs" />
-    <Compile Include="Layout\InternalTree\LayoutDirection.cs" />
-    <Compile Include="Layout\InternalTree\Node.cs" />
-    <Compile Include="Layout\InternalTree\TreeLayout.cs" />
-    <Compile Include="Layout\InternalTree\TreeLayoutOptions.cs" />
-    <Compile Include="Layout\Tree\Drawing.cs" />
-    <Compile Include="Layout\Tree\LayoutDirection.cs" />
-    <Compile Include="Layout\Tree\LayoutOptions.cs" />
-    <Compile Include="Layout\Tree\Node.cs" />
-    <Compile Include="Layout\Tree\NodeList.cs" />
-    <Compile Include="Layout\Tree\TreeLayout.cs" />
+    <Compile Include="Layout\Models\Grid\Column.cs" />
+    <Compile Include="Layout\Models\Grid\ColumnDirection.cs" />
+    <Compile Include="Layout\Models\Grid\GridLayout.cs" />
+    <Compile Include="Layout\Models\Grid\Node.cs" />
+    <Compile Include="Layout\Models\Grid\Row.cs" />
+    <Compile Include="Layout\Models\Grid\RowDirection.cs" />
+    <Compile Include="Layout\Models\OrgChart\Drawing.cs" />
+    <Compile Include="Layout\Models\OrgChart\LayoutDirection.cs" />
+    <Compile Include="Layout\Models\OrgChart\LayoutOptions.cs" />
+    <Compile Include="Layout\Models\OrgChart\Node.cs" />
+    <Compile Include="Layout\Models\OrgChart\NodeList.cs" />
+    <Compile Include="Layout\Models\OrgChart\OrgChartLayout.cs" />
+    <Compile Include="Layout\Models\InternalTree\DictionaryUtil.cs" />
+    <Compile Include="Layout\Models\InternalTree\LayoutDirection.cs" />
+    <Compile Include="Layout\Models\InternalTree\Node.cs" />
+    <Compile Include="Layout\Models\InternalTree\TreeLayout.cs" />
+    <Compile Include="Layout\Models\InternalTree\TreeLayoutOptions.cs" />
+    <Compile Include="Layout\Models\Tree\Drawing.cs" />
+    <Compile Include="Layout\Models\Tree\LayoutDirection.cs" />
+    <Compile Include="Layout\Models\Tree\LayoutOptions.cs" />
+    <Compile Include="Layout\Models\Tree\Node.cs" />
+    <Compile Include="Layout\Models\Tree\NodeList.cs" />
+    <Compile Include="Layout\Models\Tree\TreeLayout.cs" />
     <Compile Include="Text\CharacterFormatCells.cs" />
     <Compile Include="Layout\XFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="UndoCommitFlag.cs" />
     <Compile Include="Pages\PageNavigation.cs" />
-    <Compile Include="Shapesheet\Data\TableColumnList.cs" />
     <Compile Include="Shapesheet\Query\QueryColumnList.cs" />
     <Compile Include="Shapesheet\Query\QueryBase.cs" />
     <Compile Include="Shapesheet\Query\QueryColumn.cs" />
     <Compile Include="Shapesheet\Data\TableRow.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
-    <Compile Include="DOM\Shape.cs" />
-    <Compile Include="DOM\Document.cs" />
+    <Compile Include="DOM\BaseShape.cs" />
+    <Compile Include="DOM\ShapeList.cs" />
     <Compile Include="DOM\Node.cs" />
     <Compile Include="DOM\NodeList.cs" />
     <Compile Include="DOM\RenderContext.cs" />
     <Compile Include="DOM\ShapeCells.cs" />
     <Compile Include="Internal\WalkEvent.cs" />
-    <Compile Include="Shapesheet\Update\UpdateBase.cs" />
-    <Compile Include="Shapesheet\Update\UpdateRecord.cs" />
+    <Compile Include="Shapesheet\Update.cs" />
     <Compile Include="Shapesheet\FormulaLiteral.cs" />
-    <Compile Include="Internal\TreeTraversal.cs" />
-    <Compile Include="Shapesheet\ShapeSheetHelper_cellsrc.cs" />
+    <Compile Include="Internal\TreeOps.cs" />
     <Compile Include="Internal\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
     <Compile Include="Drawing\BezierSegment.cs" />
@@ -241,9 +237,7 @@
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />
-    <Compile Include="Shapesheet\Query\CellQueryColumn.cs" />
-    <Compile Include="Shapesheet\Update\SIDSRCUpdate.cs" />
-    <Compile Include="Shapesheet\Data\QueryDataSet.cs" />
+    <Compile Include="Internal\QueryDataSet.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Connections\DirectedEdge.cs" />
     <Compile Include="Internal\Interop\COMInterop.cs" />
@@ -251,11 +245,9 @@
     <Compile Include="Extensions\LayersMethods.cs" />
     <Compile Include="Extensions\WindowsMethods.cs" />
     <Compile Include="Shapesheet\SRCConstants.cs" />
-    <Compile Include="Format\FillPattern.cs" />
     <Compile Include="Shapesheet\SRC.cs" />
     <Compile Include="Connections\ConnectionPointCells.cs" />
     <Compile Include="Extensions\SectionMethods.cs" />
-    <Compile Include="Shapesheet\Query\SectionQueryColumn.cs" />
     <Compile Include="UserDefinedCells\UserDefinedCellHelper.cs" />
     <Compile Include="UserDefinedCells\UserDefinedCell.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -263,16 +255,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Shapesheet\Update\SRCUpdate.cs" />
     <Compile Include="Shapesheet\CellData.cs" />
     <Compile Include="Text\Markup\Field.cs" />
-    <Compile Include="Text\Markup\Fields.cs" />
-    <Compile Include="Text\Markup\MarkupInfo.cs" />
+    <Compile Include="Text\Markup\FieldConstants.cs" />
+    <Compile Include="Text\Markup\MarkupRegions.cs" />
     <Compile Include="Text\Markup\Node.cs" />
     <Compile Include="Text\Markup\NodeList.cs" />
     <Compile Include="Text\Markup\NodeType.cs" />
     <Compile Include="Text\Markup\TextElement.cs" />
-    <Compile Include="Text\Markup\TextFormat.cs" />
     <Compile Include="Text\Markup\Literal.cs" />
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />
@@ -281,26 +271,24 @@
     <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Shapesheet\Query\SectionQuery.cs" />
-    <Compile Include="Internal\TreeUtil.cs" />
-    <Compile Include="Drawing\DirectionRelative.cs" />
-    <Compile Include="UI\UserInterfaceHelper.cs" />
+    <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />
     <Compile Include="Pages\PageHelper.cs" />
-    <Compile Include="SelectionHelper.cs" />
+    <Compile Include="Selection\SelectionHelper.cs" />
     <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Extensions\PageMethods_draw.cs" />
     <Compile Include="Extensions\ShapeMethods_draw.cs" />
     <Compile Include="Connections\PathAnalysis.cs" />
-    <Compile Include="UI\AlertResponseScope.cs" />
+    <Compile Include="Application\AlertResponseScope.cs" />
     <Compile Include="Text\TabStop.cs" />
-    <Compile Include="UndoScope.cs" />
+    <Compile Include="Application\UndoScope.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />
     <Compile Include="Extensions\ColorMethods.cs" />
     <Compile Include="Extensions\ConnectsMethods.cs" />
     <Compile Include="Extensions\ShapeMethods_other.cs" />
     <Compile Include="Extensions\MasterMethods.cs" />
-    <Compile Include="ApplicationHelper.cs" />
+    <Compile Include="Application\ApplicationHelper.cs" />
     <Compile Include="Extensions\FontsMethods.cs" />
     <Compile Include="Extensions\MastersMethods.cs" />
     <Compile Include="Extensions\PageMethods_drop.cs" />
@@ -316,10 +304,19 @@
     <Compile Include="Extensions\PageMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\SelectionMethods.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Internal\Constants.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Visio">
+      <Guid>{00021A98-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>12</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -356,6 +353,11 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="binaries\MSAGL\Microsoft.Msagl.dll" />
+    <Content Include="binaries\MSAGL\readme.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -8,9 +8,6 @@ namespace VisioAutomation.Connections
 {
     public static class ConnectorHelper
     {
-        private readonly static VA.ShapeSheet.SRC src_beginx = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowXForm1D, IVisio.VisCellIndices.vis1DBeginX);
-        private readonly static VA.ShapeSheet.SRC src_endx = new VA.ShapeSheet.SRC(IVisio.VisSectionIndices.visSectionObject, IVisio.VisRowIndices.visRowXForm1D, IVisio.VisCellIndices.vis1DEndX);
-
         public static void ConnectShapes(IVisio.Shape connector_shape, IVisio.Shape from_shape, IVisio.Shape to_shape)
         {
             if (connector_shape == null)
@@ -38,14 +35,13 @@ namespace VisioAutomation.Connections
                 throw new System.ArgumentException("connector cannot be the TO shape");
             }
 
-            var connector_beginx = connector_shape.GetCell(src_beginx);
-            var connector_endx = connector_shape.GetCell(src_endx);
+            var connector_beginx = connector_shape.GetCell(VA.ShapeSheet.SRCConstants.BeginX);
+            var connector_endx = connector_shape.GetCell(VA.ShapeSheet.SRCConstants.EndX);
             var from_cell = from_shape.CellsSRC[1, 1, 0];
             var to_cell = to_shape.CellsSRC[1, 1, 0];
             connector_beginx.GlueTo(from_cell);
             connector_endx.GlueTo(to_cell);
         }
-
 
         public static IList<IVisio.Shape> ConnectShapes(IVisio.Page page, IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
         {

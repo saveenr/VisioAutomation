@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DOM
 {
-    public class Oval : Shape
+    public class Oval : BaseShape
     {
         public VA.Drawing.Point P0 { get; private set; }
         public VA.Drawing.Point P1 { get; private set; }

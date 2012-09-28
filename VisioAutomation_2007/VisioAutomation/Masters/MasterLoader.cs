@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -71,7 +70,7 @@ namespace VisioAutomation.Masters
                 var stencil_doc = docs.OpenStencil(stencil);
                 if (stencil_doc == null)
                 {
-                    string msg = string.Format("Failed to Open Stencil \"{0}\"", stencil);
+                    string msg = string.Format("Failed to open stencil \"{0}\"", stencil);
                     throw new AutomationException(msg);                    
                 }
                 else

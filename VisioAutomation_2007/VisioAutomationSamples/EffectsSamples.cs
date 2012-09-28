@@ -3,42 +3,12 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
+using GRIDMODEL = VisioAutomation.Layout.Models.Grid;
 
 namespace VisioAutomationSamples
 {
     public static class EffectsSamples
     {
-        public static void SoftShadow()
-        {
-
-            var baserect = new VA.Drawing.Rectangle(1, 1, 5, 5);
-
-            var glow = new VA.Effects.EdgeGlow();
-            glow.GlowColor = new VA.Drawing.ColorRGB(0, 0, 0);
-            glow.GlowTransparency = 0.0;
-            glow.GlowWidth = 0.25;
-
-            var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
-            var master = stencil.Masters["Rectangle"];
-            var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-
-
-            glow.DrawOuter(page, baserect);
-            var shape = page.Drop(master, baserect.Center);
-
-            var fmt = new VA.Format.ShapeFormatCells();
-            fmt.FillForegnd = "rgb(255,0,0)";
-
-            var xfrm = new VA.Layout.XFormCells();
-            xfrm.Width = 4;
-            xfrm.Height = 4;
-
-            var update = new VA.ShapeSheet.Update.SRCUpdate();
-            fmt.Apply(update);
-            xfrm.Apply(update);
-            update.Execute(shape);
-        }
-
         public static void GradientTransparencies()
         {
             int num_cols = 1;
@@ -57,8 +27,8 @@ namespace VisioAutomationSamples
 
             page.SetSize(page_size);
 
-            var layout = new VA.Layout.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
-            layout.RowDirection = VA.Layout.Grid.RowDirection.TopToBottom;
+            var layout = new GRIDMODEL.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
+            layout.RowDirection = GRIDMODEL.RowDirection.TopToBottom;
             layout.Origin = upperleft;
             layout.CellSpacing = new VA.Drawing.Size(0.1, 0.1);
             layout.PerformLayout();
@@ -71,9 +41,9 @@ namespace VisioAutomationSamples
                 double transparency = trans[i];
 
                 var fmt = new VA.DOM.ShapeCells();
-                node.ShapeCells = fmt;
+                node.Cells = fmt;
 
-                fmt.FillPattern = (int)VA.Format.FillPattern.LinearLeftToRight;
+                fmt.FillPattern = 25; // Linear pattern left to right
                 fmt.FillForegnd = color1.ToFormula();
                 fmt.FillBkgnd = color2.ToFormula();
                 fmt.FillForegndTrans = 0;

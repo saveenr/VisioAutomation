@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            var app = VA.ApplicationHelper.FindRunningApplication();
+            var app = VA.Application.ApplicationHelper.FindRunningApplication();
             Globals.Application = app;
             this.WriteObject(app);
         }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -39,7 +38,7 @@ namespace VisioAutomation.Text
             var src_width = VA.ShapeSheet.SRCConstants.Width;
             var src_height = VA.ShapeSheet.SRCConstants.Height;
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             for (int i = 0; i < new_sizes.Count; i++)
             {
                 var shapeid = shapeids[i];
