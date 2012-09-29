@@ -26,7 +26,7 @@ namespace VisioPowerTools
             var window_rect = new System.Drawing.Rectangle(displacement, form.Size);
             string window_caption = form.Text;
 
-            var the_anchor_window = VA.UI.UserInterfaceHelper.AddAnchorWindow(parent_window,
+            var the_anchor_window = VA.Application.UserInterfaceHelper.AddAnchorWindow(parent_window,
                                                                                        window_caption,
                                                                                        window_states,
                                                                                        window_types,
@@ -34,7 +34,7 @@ namespace VisioPowerTools
 
             if (the_anchor_window != null)
             {
-                VA.UI.UserInterfaceHelper.AttachWindowsForm(the_anchor_window, form);
+                VA.Application.UserInterfaceHelper.AttachWindowsForm(the_anchor_window, form);
                 form.Refresh();
             }
         }
@@ -74,9 +74,6 @@ namespace VisioPowerTools
             add_menu_item(tools_menu, "menu_tools_view", "View", CmdShowViewTool);
 
             // Shape Menu
-            add_menu_item(shape_menu, "menu_shape_stripws", "Strip Leading and Trailing Whitepace", CmdStripWhitespace);
-            add_menu_item(shape_menu, "menu_shape_lock", "Lock Shape", CmdShapeLock);
-            add_menu_item(shape_menu, "menu_shape_unlock", "Unlock Shape", CmdShapeUnlock);
             var shape_snappos_menu = add_popup(shape_menu, "menu_shape_snap_pos", "Snap Position");
             add_menu_item(shape_snappos_menu, "menu_shape_snappos1", "Snap Position to 1 inch",
                           CmdShapeSnapPositionOneInch);

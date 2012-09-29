@@ -2,6 +2,7 @@ using System.Windows.Forms;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
+using System.Linq;
 
 namespace VisioPowerTools
 {
@@ -93,10 +94,13 @@ namespace VisioPowerTools
                                 this.Colors.ShadowBackgroundColor,
                                 this.Colors.LineColor
                             };
-            scriptingsession.ShapeSheet.SetFormulas(cells,
-                                         i => i.Formula.HasValue,
-                                         i => i.SRC,
-                                         i => i.Formula.ToString());
+
+
+            var xcells = cells.Where(i => i.Formula.HasValue).ToList();
+            var srcs = xcells.Select(i => i.SRC).ToList();
+            var formulas = xcells.Select(i => i.Formula.Value).ToList();
+
+            scriptingsession.ShapeSheet.SetFormula(srcs,formulas, IVisio.VisGetSetArgs.visSetBlastGuards);
         }
     }
 
@@ -118,7 +122,6 @@ namespace VisioPowerTools
             shapecolors.ShadowForegroundColor = format.ShdwForegnd;
             shapecolors.ShadowBackgroundColor = format.ShdwBkgnd;
             shapecolors.LineColor = format.LineColor;
-            shapecolors.CharacterColor = format.CharColor;
 
             return shapecolors;
         }

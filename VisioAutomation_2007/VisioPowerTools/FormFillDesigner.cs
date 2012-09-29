@@ -41,7 +41,7 @@ namespace VisioPowerTools
             format.ShapeShdwType= 5;
 
 
-            var update = new VA.ShapeSheet.Update.SIDSRCUpdate();
+            var update = new VA.ShapeSheet.Update();
             var shapes = ss.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -93,13 +93,13 @@ namespace VisioPowerTools
             this.fillGradient1.FillDef.BackgroundColor = (System.Drawing.Color)colors[(int)row[col_bg]].ToColorRGB();
             this.fillGradient1.FillDef.ForegroundTransparency = (int)(100.0 * row[col_fgtrans]);
             this.fillGradient1.FillDef.BackgroundTransparency = (int)(100.0 * row[col_bgtrans]);
-            this.fillGradient1.FillDef.FillPattern = (VA.Format.FillPattern)(int)row[col_fillpat];
+            this.fillGradient1.FillDef.FillPattern = (VA.UI.FillPattern)(int)row[col_fillpat];
 
             this.fillGradient1.ShadowDef.ForegroundColor = (System.Drawing.Color)colors[(int)row[col_sfg]].ToColorRGB();
             this.fillGradient1.ShadowDef.BackgroundColor = (System.Drawing.Color)colors[(int)row[col_sbg]].ToColorRGB();
             this.fillGradient1.ShadowDef.ForegroundTransparency = (int)(100.0 * row[col_sfgtrans]);
             this.fillGradient1.ShadowDef.BackgroundTransparency = (int)(100.0 * row[col_bfgtrans]);
-            this.fillGradient1.ShadowDef.FillPattern = (VA.Format.FillPattern)((int)row[col_spat]);
+            this.fillGradient1.ShadowDef.FillPattern = (VA.UI.FillPattern)((int)row[col_spat]);
         }
     }
 }

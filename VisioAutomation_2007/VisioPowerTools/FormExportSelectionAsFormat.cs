@@ -73,11 +73,11 @@ namespace VisioPowerTools
             var ss = VisioPowerToolsAddIn.ScriptingSession;
             if (this.ExportFormat == enumExportFormat.ExportSVGXHTML)
             {
-                ss.Export.ExportSelectionAsSVGXHTML(filename);                
+                ss.Export.ExportSelectionToSVGXHTML(filename);                
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {
-                VA.Scripting.XamlTune.XamlTuneHelper.ExportSelectionAsXAML(ss,filename);
+                ss.Export.ExportSelectionToXAML(filename);
             }
             else
             {

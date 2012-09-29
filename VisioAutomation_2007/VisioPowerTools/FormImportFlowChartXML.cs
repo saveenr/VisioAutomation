@@ -60,11 +60,11 @@ namespace VisioPowerTools
                 return;
             }
 
-            IList<VA.Layout.DirectedGraph.Drawing> drawings;
+            IList<VA.Layout.Models.DirectedGraph.Drawing> drawings;
             try
             {
                 VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;
-                drawings = VisioAutomation.Scripting.FlowChart.FlowChartBuilder.LoadFromXML(ss, xdoc);
+                drawings = VisioAutomation.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(ss, xdoc);
                 VisioPowerToolsAddIn.g_session_options.OnWriteString -= write_msg;
             }
             catch (VisioAutomation.AutomationException)
@@ -77,7 +77,7 @@ namespace VisioPowerTools
             try
             {
                 VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;
-                VisioAutomation.Scripting.FlowChart.FlowChartBuilder.RenderDiagrams(ss, drawings);
+                VisioAutomation.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(ss, drawings);
                 VisioPowerToolsAddIn.g_session_options.OnWriteString -= write_msg;
             }
             catch(VisioAutomation.AutomationException)

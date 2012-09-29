@@ -261,12 +261,6 @@ namespace VisioPowerTools
             ss.View.Zoom(VA.Scripting.Zoom.ToSelection);
         }
 
-        public static void CmdStripWhitespace()
-        {
-            var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Text.StripWhiteSpace();
-        }
-
         public static void CmdPageResizeToFit()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
@@ -316,16 +310,6 @@ namespace VisioPowerTools
             var ss = ScriptingSession;
             var form = new FormImportFlowChartXML();
             form.ShowDialog();
-        }
-
-        public static void CmdShapeLock()
-        {
-            VisioPowerToolsAddIn.ScriptingSession.Layout.LockAll();
-        }
-
-        public static void CmdShapeUnlock()
-        {
-            VisioPowerToolsAddIn.ScriptingSession.Layout.UnlockAll();
         }
 
         private void CmdShowTextTool(MOC.CommandBarButton ctrl, ref bool cancel_default)

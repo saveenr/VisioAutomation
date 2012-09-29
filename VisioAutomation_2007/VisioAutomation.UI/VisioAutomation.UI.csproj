@@ -100,29 +100,11 @@
     <Compile Include="FormBasicFillTools.Designer.cs">
       <DependentUpon>FormBasicFillTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlowSizeControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="GlowSizeControl.Designer.cs">
-      <DependentUpon>GlowSizeControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ThreePointFillControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ThreePointFillControl.Designer.cs">
-      <DependentUpon>ThreePointFillControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="TransparencyControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TransparencyControl.Designer.cs">
       <DependentUpon>TransparencyControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TwoColorGlowControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TwoColorGlowControl.Designer.cs">
-      <DependentUpon>TwoColorGlowControl.cs</DependentUpon>
     </Compile>
     <Compile Include="WinFormUtil.cs">
     </Compile>
@@ -177,10 +159,6 @@
     <EmbeddedResource Include="FormBasicFillTools.resx">
       <DependentUpon>FormBasicFillTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GlowSizeControl.resx">
-      <DependentUpon>GlowSizeControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Slider.resx">
       <DependentUpon>Slider.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -189,16 +167,8 @@
       <DependentUpon>ColorSelectorSmall.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThreePointFillControl.resx">
-      <DependentUpon>ThreePointFillControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="TransparencyControl.resx">
       <DependentUpon>TransparencyControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TwoColorGlowControl.resx">
-      <DependentUpon>TwoColorGlowControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
