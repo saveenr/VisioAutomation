@@ -35,21 +35,14 @@ namespace VisioPowerTools
             this.tabPageGradient = new System.Windows.Forms.TabPage();
             this.buttonUpdateFill = new System.Windows.Forms.Button();
             this.buttonSetFillGradient = new System.Windows.Forms.Button();
-            this.tabPage3PointGradient = new System.Windows.Forms.TabPage();
-            this.buttonSet3PointFill = new System.Windows.Forms.Button();
-            this.tabPage2ColorGlow = new System.Windows.Forms.TabPage();
             this.fillGradient1 = new VA.UI.FillControl();
             this.tabControl1.SuspendLayout();
             this.tabPageGradient.SuspendLayout();
-            this.tabPage3PointGradient.SuspendLayout();
-            this.tabPage2ColorGlow.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageGradient);
-            this.tabControl1.Controls.Add(this.tabPage3PointGradient);
-            this.tabControl1.Controls.Add(this.tabPage2ColorGlow);
             this.tabControl1.Location = new System.Drawing.Point(4, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -88,18 +81,7 @@ namespace VisioPowerTools
             this.buttonSetFillGradient.Text = "Apply";
             this.buttonSetFillGradient.UseVisualStyleBackColor = true;
             this.buttonSetFillGradient.Click += new System.EventHandler(this.buttonSetFillGradient_Click);
-            // 
-            // tabPage3PointGradient
-            // 
-            this.tabPage3PointGradient.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage3PointGradient.Controls.Add(this.buttonSet3PointFill);
-            this.tabPage3PointGradient.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3PointGradient.Name = "tabPage3PointGradient";
-            this.tabPage3PointGradient.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3PointGradient.Size = new System.Drawing.Size(357, 289);
-            this.tabPage3PointGradient.TabIndex = 1;
-            this.tabPage3PointGradient.Text = "3 Color Fill";
-            this.tabPage3PointGradient.UseVisualStyleBackColor = true;
+
             // 
             // fillGradient1
             // 
@@ -121,8 +103,6 @@ namespace VisioPowerTools
             this.Text = "Fill";
             this.tabControl1.ResumeLayout(false);
             this.tabPageGradient.ResumeLayout(false);
-            this.tabPage3PointGradient.ResumeLayout(false);
-            this.tabPage2ColorGlow.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -131,9 +111,6 @@ namespace VisioPowerTools
 
         private System.Windows.Forms.Button buttonSet2ColorGlow;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage2ColorGlow;
-        private System.Windows.Forms.TabPage tabPage3PointGradient;
-        private System.Windows.Forms.Button buttonSet3PointFill;
         private System.Windows.Forms.TabPage tabPageGradient;
         private System.Windows.Forms.Button buttonSetFillGradient;
         private VA.UI.FillControl fillGradient1;
