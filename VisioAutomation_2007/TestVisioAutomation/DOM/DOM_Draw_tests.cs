@@ -55,9 +55,9 @@ namespace TestVisioAutomation
             var domdoc = new VA.DOM.Document();
             var dompage = new VA.DOM.Page();
             domdoc.Pages.Add(dompage);
-            Assert.AreEqual(0, app.Documents.Count);
+            int old_count = app.Documents.Count;
             var newdoc = domdoc.Render(app);
-            Assert.AreEqual(1, app.Documents.Count);
+            Assert.AreEqual(old_count+1, app.Documents.Count);
             Assert.AreEqual(1, newdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
