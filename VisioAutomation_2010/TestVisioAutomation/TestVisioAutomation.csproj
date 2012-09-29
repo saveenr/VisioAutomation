@@ -157,7 +157,6 @@
     <Compile Include="Text\TextHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\CustomPropsTest.cs" />
-    <Compile Include="Text\CharacterFormatTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestCommon\TestCommon.csproj">

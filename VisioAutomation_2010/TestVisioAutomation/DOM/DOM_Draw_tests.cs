@@ -42,7 +42,7 @@ namespace TestVisioAutomation
             var dompage = new VA.DOM.Page();
             var visdoc = this.GetNewDoc();
             Assert.AreEqual(1, visdoc.Pages.Count);
-            var page = dompage.Render(app.ActiveDocument);
+            var page = dompage.Render(app.ActiveDocument);  
             Assert.AreEqual(2, visdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
@@ -55,9 +55,9 @@ namespace TestVisioAutomation
             var domdoc = new VA.DOM.Document();
             var dompage = new VA.DOM.Page();
             domdoc.Pages.Add(dompage);
-            Assert.AreEqual(0, app.Documents.Count);
+            int old_count = app.Documents.Count;
             var newdoc = domdoc.Render(app);
-            Assert.AreEqual(1, app.Documents.Count);
+            Assert.AreEqual(old_count + 1, app.Documents.Count);
             Assert.AreEqual(1, newdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
