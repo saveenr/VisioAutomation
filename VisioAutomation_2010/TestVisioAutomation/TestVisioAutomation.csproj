@@ -87,11 +87,12 @@
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
     <Compile Include="DOM\DOM_Text_tests.cs" />
-    <Compile Include="Layout\ContainerLayoutTests.cs" />
+    <Compile Include="Layout\CointainerLayoutTests.cs" />
+    <Compile Include="LayoutExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Layout\BoxLayoutTests.cs" />
     <Compile Include="ShapeGeometryHelper_Tests.cs" />
-    <Compile Include="Drawing\SnappingGrid.cs" />
+    <Compile Include="Drawing\SnappingGraidTests.cs" />
     <Compile Include="Extensions\ColorsExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Extensions\LayersExtensions.cs" />
@@ -99,18 +100,18 @@
     <Compile Include="Extensions\MastersExtensions_Tests.cs" />
     <Compile Include="Extensions\SectionExtensions_Tests.cs" />
     <Compile Include="Drawing\BezierTests.cs" />
-    <Compile Include="Layout\DrawingHelperTests.cs" />
+    <Compile Include="Layout\DrawingHelper.cs" />
     <Compile Include="Layout\PieSliceTests.cs" />
-    <Compile Include="Layout\LayoutHelperTests.cs" />
-    <Compile Include="Scripting\ScriptingSessionTests.cs" />
-    <Compile Include="Scripting\ScriptingCellSRCTest.cs" />
+    <Compile Include="Layout\LayoutHelper.cs" />
+    <Compile Include="Scripting\ScriptingApplicationTests.cs" />
+    <Compile Include="Scripting\ScriptingSRCTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Scripting\ScriptingPageTests.cs" />
-    <Compile Include="Layout\MSAGLLayoutTests.cs" />
+    <Compile Include="Layout\AutoLayoutTests.cs" />
     <Compile Include="Layout\TreeTests.cs" />
     <Compile Include="DOM\DOM_Draw_tests.cs" />
     <Compile Include="Layout\OrgChartTests.cs" />
@@ -119,8 +120,8 @@
     <Compile Include="Core\PerfTests.cs" />
     <Compile Include="Core\CustomPropertiesTest.cs" />
     <Compile Include="Extensions\SelectionExtensions.cs" />
-    <Compile Include="UtilTests\BitArray2D.cs" />
-    <Compile Include="Connections\TransitiveClosureTest.cs" />
+    <Compile Include="UtilTests\BitArray2DTest.cs" />
+    <Compile Include="Connections\TransitiveClosure_Test.cs" />
     <Compile Include="UtilTests\DrawingHelper_Tests.cs" />
     <Compile Include="UserDefinedCells\UserDefinedCellHelper_Test.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />
@@ -130,8 +131,7 @@
     <Compile Include="Scripting\ScriptingCustomPropTests.cs" />
     <Compile Include="Scripting\ScriptingDrawTests.cs" />
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
-    <Compile Include="Scripting\ScriptingAppTests.cs" />
-    <Compile Include="Scripting\ScriptingSessionTest.cs" />
+    <Compile Include="Scripting\ScriptingSessionTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
     <Compile Include="Scripting\ScriptingTextTests.cs" />
     <Compile Include="Core\Struct_Sizes.cs" />
@@ -153,7 +153,7 @@
     <Compile Include="UtilTests\PageHelper_Tests.cs" />
     <Compile Include="Convert_Tests.cs" />
     <Compile Include="ShapeHelper_Tests.cs" />
-    <Compile Include="UtilTests\Stencil_Tests.cs" />
+    <Compile Include="UtilTests\StencilTests.cs" />
     <Compile Include="Text\TextHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\CustomPropsTest.cs" />

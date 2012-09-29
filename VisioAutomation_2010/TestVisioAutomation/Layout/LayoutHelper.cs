@@ -6,15 +6,6 @@ using VA = VisioAutomation;
 
 namespace TestVisioAutomation
 {
-    public static class HExtensins
-    {
-        public static VA.Drawing.Point Pin( this VA.Layout.XFormCells xthis)
-        {
-            return new VA.Drawing.Point(xthis.PinX.Result, xthis.PinY.Result);
-        }
-  
-    }
-
     [TestClass]
     public class LayoutHelper : VisioAutomationTest
     {
@@ -97,6 +88,7 @@ namespace TestVisioAutomation
 
             doc.Close(true);
         }
+
 
     }
 }
