@@ -91,7 +91,7 @@
     <Compile Include="LayoutExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Layout\BoxLayoutTests.cs" />
-    <Compile Include="ShapeGeometryHelper_Tests.cs" />
+    <Compile Include="Other\ShapeGeometryHelper_Tests.cs" />
     <Compile Include="Drawing\SnappingGraidTests.cs" />
     <Compile Include="Extensions\ColorsExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
@@ -104,7 +104,6 @@
     <Compile Include="Layout\PieSliceTests.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
     <Compile Include="Scripting\ScriptingApplicationTests.cs" />
-    <Compile Include="Scripting\ScriptingSRCTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -151,8 +150,8 @@
     <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
     <Compile Include="Connections\Controls\ControlHelper_Tests.cs" />
     <Compile Include="UtilTests\PageHelper_Tests.cs" />
-    <Compile Include="Convert_Tests.cs" />
-    <Compile Include="ShapeHelper_Tests.cs" />
+    <Compile Include="Layout\Convert_Tests.cs" />
+    <Compile Include="Other\ShapeHelper_Tests.cs" />
     <Compile Include="UtilTests\StencilTests.cs" />
     <Compile Include="Text\TextHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

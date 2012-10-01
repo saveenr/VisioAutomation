@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using OCMODEL = VisioAutomation.Layout.Models.ContainerLayout;
+using CONMODEL = VisioAutomation.Layout.Models.ContainerLayout;
 
 namespace TestVisioAutomation
 {
@@ -17,7 +17,7 @@ namespace TestVisioAutomation
             // is called then an exception will be thrown
 
             bool caught = false;
-            var layout = new OCMODEL.ContainerLayout();
+            var layout = new CONMODEL.ContainerLayout();
             var doc = this.GetNewDoc();
             IVisio.Page page = null;
             try
@@ -51,7 +51,7 @@ namespace TestVisioAutomation
 
             var doc = this.GetNewDoc();
 
-            var layout1 = new OCMODEL.ContainerLayout();
+            var layout1 = new CONMODEL.ContainerLayout();
             var l1_c1 = layout1.AddContainer("L1/C1");
             var l1_c1_i1 = l1_c1.Add("L1/C1/I1");
             
@@ -70,7 +70,7 @@ namespace TestVisioAutomation
             // Make sure that empty containers can be drawn
             var doc = this.GetNewDoc();
 
-            var layout1 = new OCMODEL.ContainerLayout();
+            var layout1 = new CONMODEL.ContainerLayout();
             var l1_c1 = layout1.AddContainer("L1/C1");
             var l1_c1_i1 = l1_c1.Add("L1/C1/I1");
             var l1_c2 = layout1.AddContainer("L1/C2"); // this is the empty container

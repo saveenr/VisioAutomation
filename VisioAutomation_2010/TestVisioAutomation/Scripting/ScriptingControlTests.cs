@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Controls;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
