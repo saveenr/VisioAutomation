@@ -12,7 +12,7 @@ namespace TestVisioAutomation
     public class PathAnalysis_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void Case1()
+        public void VerifyEdgesAndTransitiveClosure()
         {
             var page1 = GetNewPage();
             var basic_stencil = page1.Application.Documents.OpenStencil("basic_u.vss");
