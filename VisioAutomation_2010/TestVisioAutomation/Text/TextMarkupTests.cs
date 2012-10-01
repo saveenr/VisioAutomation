@@ -121,7 +121,7 @@ namespace TestVisioAutomation
         public void TextElement_with_multiple_text_nodes()
         {
             // Validate that multiple text elements in the structure
-            // all make it into a real visio shep when the text is render
+            // all make it into the Visio shape when the text is rendered
 
             var el0 = new VA.Text.Markup.TextElement();
             var el1 = el0.AddElement("HELLO");
@@ -151,18 +151,16 @@ namespace TestVisioAutomation
             el2.CharacterCells.Style = (int)VA.Text.CharStyle.Italic;
 
             var page1 = GetNewPage();
-
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
-
             el0.SetText(s1);
 
             var fmts = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual(3, fmts.CharacterFormats.Count);
             Assert.AreEqual((int)VA.Text.CharStyle.Bold, fmts.CharacterFormats[0].Style.Result);
             Assert.AreEqual((int)VA.Text.CharStyle.Italic, fmts.CharacterFormats[1].Style.Result);
-            
-            
-            // This returns a different value in Visio 2007. Commenting out to keep unit tests consistent
+                        
+            // The code line below returns a different value in Visio 2007. 
+            // Commenting-out that line to keep unit tests consistent
             // Assert.AreEqual((int)VA.Text.CharStyle.Bold, fmts.CharacterFormats[2].Style.Result);
 
             page1.Delete(0);
@@ -175,8 +173,7 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             var courier = page1.Document.Fonts["Courier New"];
             var impact = page1.Document.Fonts["Impact"];
-
-
+            
             var el0 = new VA.Text.Markup.TextElement();
             var el1 = el0.AddElement("HELLO");
             var el2 = el1.AddElement(" WORLD");
@@ -208,9 +205,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(el1, regions[1].Element);
             Assert.AreEqual(el2, regions[2].Element);
 
-
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
-
             el0.SetText(s1);
 
             var fmts = VA.Text.TextFormat.GetFormat(s1);
@@ -280,7 +275,6 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             var shape = page1.DrawRectangle(0, 0, 4, 2);
 
-
             // case 1 - markup is just a single field element
             var markup_1 = new VA.Text.Markup.TextElement();
             markup_1.AddField(VA.Text.Markup.FieldConstants.Height);
@@ -313,6 +307,5 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
-
     }
 }
