@@ -135,7 +135,6 @@
     <Compile Include="Scripting\ScriptingTextTests.cs" />
     <Compile Include="Core\Struct_Sizes.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Update.cs" />
-    <Compile Include="Core\ConnectionTests.cs" />
     <Compile Include="Extensions\ApplicationExtensionsTests.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Query.cs" />
     <Compile Include="Core\ShapeEnumerationTests.cs" />
