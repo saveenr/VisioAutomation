@@ -134,13 +134,14 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ConnectDeferred()
         {
+            // Deferred means that the stencils (and thus masters) are loaded when rendering
+            // and are no loaded by the caller before Render() is called
+
             var doc = this.GetNewDoc();
             var dompage = new VA.DOM.Page();
-
             var dom_master_0 = dompage.Shapes.Drop("Rectangle", "basic_u.vss", 3, 3);
             var dom_master_1 = dompage.Shapes.Drop("Rectangle", "basic_u.vss", 6, 5);
             var dc = dompage.Shapes.Connect("Dynamic Connector", "connec_u.vss", dom_master_0, dom_master_1);
-
             var page = dompage.Render(doc);
 
             Assert.AreEqual(3, page.Shapes.Count);
@@ -148,8 +149,7 @@ namespace TestVisioAutomation
             page.Delete(0);
             doc.Close(true);
         }
-
-
+        
         [TestMethod]
         public void DropUnknownMaster()
         {
@@ -167,14 +167,12 @@ namespace TestVisioAutomation
             {
                 caught = true;
             }
-
-
+            
             if (caught == false)
             {
                 Assert.Fail("Expected an AutomationException");
             }
-
-
+            
             if (page!=null)
             {
                 page.Delete(0);
@@ -200,8 +198,7 @@ namespace TestVisioAutomation
             {
                 caught = true;
             }
-
-
+            
             if (caught == false)
             {
                 Assert.Fail("Expected an AutomationException");
