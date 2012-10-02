@@ -93,22 +93,23 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void AdditionalProperties()
+        public void VerifyCustomPropAttributes()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomProperties(s1).Count);
 
-            var cp = new VA.CustomProperties.CustomPropertyCells();
-            cp.Label = "The Foo property";
-            cp.Value = "Some value";
-            cp.Prompt = "Some Prompt";
-            cp.LangId = 1034;
-            cp.Type = 5; // 5= date-or-time. see: http://msdn.microsoft.com/en-us/library/aa200980(v=office.10).aspx
-            cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;
-            CustomPropertyHelper.SetCustomProperty(s1, "foo", cp);
-            var z = CustomPropertyHelper.GetCustomProperties(s1);
-            Assert.AreEqual(1, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            var in_cp = new VA.CustomProperties.CustomPropertyCells();
+            in_cp.Label = "The Foo property";
+            in_cp.Value = "Some value";
+            in_cp.Prompt = "Some Prompt";
+            in_cp.LangId = 1034;
+            in_cp.Type = 5; // 5= date-or-time. see: http://msdn.microsoft.com/en-us/library/aa200980(v=office.10).aspx
+            in_cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;
+            in_cp.Invisible = 0;
+            in_cp.Verify = 0;
+            CustomPropertyHelper.SetCustomProperty(s1, "foo", in_cp);
+            var out_cp = CustomPropertyHelper.GetCustomProperties(s1);
+            Assert.AreEqual(1, out_cp.Count);
             page1.Delete(0);
         }
 

@@ -16,11 +16,11 @@ namespace TestVisioAutomation
             var actual = colors.AsEnumerable().ToList();
             for (int i = 0; i < colors.Count; i++)
             {
-                var ex = colors[i];
-                var ac = actual[i];
-                Assert.AreEqual( ex.Red, ac.Red);
-                Assert.AreEqual(ex.Green, ac.Green);
-                Assert.AreEqual(ex.Blue, ac.Blue);
+                var expected_color = colors[i];
+                var actual_color = actual[i];
+                Assert.AreEqual(expected_color.Red, actual_color.Red);
+                Assert.AreEqual(expected_color.Green, actual_color.Green);
+                Assert.AreEqual(expected_color.Blue, actual_color.Blue);
             }
         }
     }
