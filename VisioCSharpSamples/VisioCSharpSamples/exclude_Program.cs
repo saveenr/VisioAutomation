@@ -9,8 +9,7 @@ namespace VisioCSharpSamples
         {
             var app = new IVisio.Application();
             var doc = app.Documents.Add("");
-            Samples.Shape_Format_Paragraph_Range(doc);
+            Samples.AutoConnect_ConnectorToolDataObject(doc);
         }
     }
-
 }

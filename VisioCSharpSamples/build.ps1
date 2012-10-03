@@ -9,7 +9,7 @@ $publocal = $pub_params.Contains( "local" )
 $pubremote = $pub_params.Contains( "remote" )
 
 
-$nuspecfilname = "Package.nuspec"
+$nuspecfilname = "VisioCSharpSamples.nuspec"
 
 Write-Host looading $nuspecfilname 
 
