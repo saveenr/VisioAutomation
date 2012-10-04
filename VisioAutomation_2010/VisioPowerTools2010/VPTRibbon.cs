@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
@@ -355,5 +356,82 @@ namespace VisioPowerTools2010
             form.ShowDialog();
         }
 
+        private void buttonScrambleText_Click(object sender, RibbonControlEventArgs e)
+        {
+            var app = Globals.ThisAddIn.Application;
+            var doc = Globals.ThisAddIn.Application.ActiveDocument;
+            if (doc == null)
+            {
+                return;
+            }
+
+            if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing )
+            {
+                MessageBox.Show("Currently Active Document is not a Drawing");
+                return;
+            }
+
+            var sb = new System.Text.StringBuilder();
+
+            var pages = doc.Pages.AsEnumerable().ToList();
+
+            using (var scope = app.CreateUndoScope())
+            {
+                doc.Company = Scramble(sb,doc.Company);
+                doc.Category = Scramble(sb,doc.Category);
+                doc.Title = Scramble(sb, doc.Title);
+                doc.Subject = Scramble(sb, doc.Subject);
+                doc.Creator = Scramble(sb, doc.Creator);
+                doc.Manager = Scramble(sb, doc.Manager);
+                doc.Keywords = Scramble(sb, doc.Keywords);
+                foreach (var page in pages)
+                {
+                    page.Activate();
+
+
+                    var shapes = page.Shapes.AsEnumerable().ToList();
+                    foreach (var shape in shapes)
+                    {
+                        Scramble(sb, shape);
+
+                        var shape_shapes = shape.Shapes;
+                        if (shape_shapes!=null && shape_shapes.Count>0)
+                        {
+                            foreach (var nested_shape in VA.ShapeHelper.GetNestedShapes(shape))
+                            {
+                                Scramble(sb,nested_shape);                                
+                            }
+                        }
+
+                    }
+
+                }
+            }
+        }
+
+        private static void Scramble(StringBuilder sb, IVisio.Shape shape)
+        {
+            sb.Clear();
+            string text = shape.Text;
+            string text_trimmed = text.Trim();
+            if (text_trimmed.Length >= 1)
+            {
+                shape.Text = Scramble(sb,shape.Text);
+            }
+        }
+
+        private static string Scramble(StringBuilder sb, string text)
+        {
+            string text_trimmed = text.Trim();
+            if (text_trimmed.Length >= 1)
+            {
+                for (int i = 0; i < text_trimmed.Length; i++)
+                {
+                    sb.Append("X");
+                }
+                return sb.ToString();
+            }
+            return text;
+        }
     }
 }
