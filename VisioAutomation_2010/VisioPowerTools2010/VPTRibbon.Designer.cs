@@ -44,14 +44,15 @@
             this.groupText = this.Factory.CreateRibbonGroup();
             this.buttonToggleTextCase = this.Factory.CreateRibbonButton();
             this.buttonCopyText = this.Factory.CreateRibbonButton();
-            this.buttonDeveloper = this.Factory.CreateRibbonButton();
             this.groupDraw = this.Factory.CreateRibbonGroup();
             this.buttonGraph = this.Factory.CreateRibbonButton();
             this.groupExport = this.Factory.CreateRibbonGroup();
             this.buttonExportSelection = this.Factory.CreateRibbonButton();
             this.buttonSelectionXHTML = this.Factory.CreateRibbonButton();
             this.groupDev = this.Factory.CreateRibbonGroup();
+            this.buttonDeveloper = this.Factory.CreateRibbonButton();
             this.buttonScrambleText = this.Factory.CreateRibbonButton();
+            this.buttomResetPageOrigin = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
@@ -128,12 +129,6 @@
             this.buttonCopyText.Name = "buttonCopyText";
             this.buttonCopyText.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonCopyText_Click);
             // 
-            // buttonDeveloper
-            // 
-            this.buttonDeveloper.Label = "Developer";
-            this.buttonDeveloper.Name = "buttonDeveloper";
-            this.buttonDeveloper.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonDeveloper_Click);
-            // 
             // groupDraw
             // 
             this.groupDraw.Items.Add(this.buttonGraph);
@@ -150,6 +145,7 @@
             // 
             this.groupExport.Items.Add(this.buttonExportSelection);
             this.groupExport.Items.Add(this.buttonSelectionXHTML);
+            this.groupExport.Items.Add(this.buttomResetPageOrigin);
             this.groupExport.Label = "Export";
             this.groupExport.Name = "groupExport";
             // 
@@ -172,11 +168,23 @@
             this.groupDev.Label = "Developer";
             this.groupDev.Name = "groupDev";
             // 
+            // buttonDeveloper
+            // 
+            this.buttonDeveloper.Label = "Developer";
+            this.buttonDeveloper.Name = "buttonDeveloper";
+            this.buttonDeveloper.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonDeveloper_Click);
+            // 
             // buttonScrambleText
             // 
             this.buttonScrambleText.Label = "ScrambleText";
             this.buttonScrambleText.Name = "buttonScrambleText";
             this.buttonScrambleText.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonScrambleText_Click);
+            // 
+            // buttomResetPageOrigin
+            // 
+            this.buttomResetPageOrigin.Label = "Reset Page Origin";
+            this.buttomResetPageOrigin.Name = "buttomResetPageOrigin";
+            this.buttomResetPageOrigin.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttomResetPageOrigin_Click);
             // 
             // VPTRibbon
             // 
@@ -222,6 +230,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonSelectionXHTML;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupDev;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonScrambleText;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttomResetPageOrigin;
     }
 
     partial class ThisRibbonCollection

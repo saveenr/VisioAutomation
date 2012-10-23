@@ -359,7 +359,7 @@ namespace VisioPowerTools2010
         private void buttonScrambleText_Click(object sender, RibbonControlEventArgs e)
         {
             var app = Globals.ThisAddIn.Application;
-            var doc = Globals.ThisAddIn.Application.ActiveDocument;
+            var doc = app.ActiveDocument;
             if (doc == null)
             {
                 return;
@@ -432,6 +432,29 @@ namespace VisioPowerTools2010
                 return sb.ToString();
             }
             return text;
+        }
+
+        private void buttomResetPageOrigin_Click(object sender, RibbonControlEventArgs e)
+        {
+            var app = Globals.ThisAddIn.Application;
+            var doc = app.ActiveDocument;
+            if (doc == null)
+            {
+                return;
+            }
+
+            if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
+            {
+                MessageBox.Show("Currently Active Document is not a Drawing");
+                return;
+            }
+
+            var page = app.ActivePage;
+            if (page==null)
+            {
+                return;
+            }
+            VA.Pages.PageHelper.ResetOrigin(page);
         }
     }
 }
