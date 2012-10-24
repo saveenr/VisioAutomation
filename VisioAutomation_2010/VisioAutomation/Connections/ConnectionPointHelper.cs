@@ -80,18 +80,6 @@ namespace VisioAutomation.Connections
             return n;
         }
 
-        [System.Obsolete]
-        public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
-        {
-            return ConnectionPointCells.GetCells(page, shapeids);
-        }
-
-        [System.Obsolete]
-        public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
-        {
-            return ConnectionPointCells.GetCells(shape);
-        }
-
         public static IList<List<ConnectionPointCells>> GetConnectionPoints(IVisio.Page page, IList<int> shapeids)
         {
             return ConnectionPointCells.GetCells(page, shapeids);
