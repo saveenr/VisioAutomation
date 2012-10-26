@@ -42,11 +42,13 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
 
-        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
+        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query,
+                                                               VA.ShapeSheet.Data.TableRow
+                                                                   <VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new TextBlockFormatCells();
             cells.BottomMargin = row[query.BottomMargin];
-            cells.LeftMargin= row[query.LeftMargin];
+            cells.LeftMargin = row[query.LeftMargin];
             cells.RightMargin = row[query.RightMargin];
             cells.TopMargin = row[query.TopMargin];
             cells.DefaultTabStop = row[query.DefaultTabStop];
@@ -57,7 +59,7 @@ namespace VisioAutomation.Text
             return cells;
         }
 
-        class TextBlockFormatQuery : VA.ShapeSheet.Query.CellQuery
+        private class TextBlockFormatQuery : VA.ShapeSheet.Query.CellQuery
         {
             public VA.ShapeSheet.Query.QueryColumn BottomMargin { get; set; }
             public VA.ShapeSheet.Query.QueryColumn LeftMargin { get; set; }
@@ -85,6 +87,5 @@ namespace VisioAutomation.Text
                 VerticalAlign = this.AddColumn(VA.ShapeSheet.SRCConstants.VerticalAlign, "VerticalAlign");
             }
         }
-
     }
 }

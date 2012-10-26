@@ -270,6 +270,42 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void TextXformCells_Check_SetFormat_1()
+        {
+            var page1 = GetNewPage();
+            var s1 = page1.DrawRectangle(0, 0, 4, 4);
+            s1.Text = TestCommon.Helper.LoremIpsumText;
+            
+            var tb1 = new VA.Text.TextXFormCells();
+            tb1.TxtAngle = "20 deg";
+            tb1.TxtPinX = "Width*1.3";
+            tb1.TxtPinY = "Height*0.5";
+            tb1.TxtLocPinX = "TxtWidth*0.3";
+            tb1.TxtLocPinY = "TxtHeight*0.4";
+            tb1.TxtWidth = "Height*1.5";
+            tb1.TxtWidth = "Width*0.7";
+
+            var update = new VA.ShapeSheet.Update();
+            tb1.Apply(update, s1.ID16);
+            update.Execute(page1);
+
+            var tb2 = VA.Text.TextXFormCells.GetCells(s1);
+            Assert.AreEqual(tb1.TxtAngle.Formula,tb2.TxtAngle.Formula);
+            Assert.AreEqual(tb1.TxtPinX.Formula, tb2.TxtPinX.Formula);
+            Assert.AreEqual(tb1.TxtPinY.Formula, tb2.TxtPinY.Formula);
+            Assert.AreEqual(tb1.TxtHeight.Formula, tb2.TxtHeight.Formula);
+            Assert.AreEqual(tb1.TxtWidth.Formula, tb2.TxtWidth.Formula);
+            Assert.AreEqual(tb1.TxtLocPinX.Formula, tb2.TxtLocPinX.Formula);
+            Assert.AreEqual(tb1.TxtLocPinY.Formula, tb2.TxtLocPinY.Formula);
+
+            //Assert.AreEqual("8 pt", tfs[0].TextBlocks.BottomMargin.Formula);
+            //Assert.AreEqual("4 pt", tfs[1].TextBlocks.BottomMargin.Formula);
+
+            //page1.Delete(0);
+        }
+
+
+        [TestMethod]
         public void Test_Fields1()
         {
             var page1 = GetNewPage();

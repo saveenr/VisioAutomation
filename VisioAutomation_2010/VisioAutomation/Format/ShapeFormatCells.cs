@@ -64,7 +64,6 @@ namespace VisioAutomation.Format
 
         private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
         {
-
             var cells = new ShapeFormatCells();
             cells.FillBkgnd = row[query.FillBkgnd].ToInt();
             cells.FillBkgndTrans = row[query.FillBkgndTrans];

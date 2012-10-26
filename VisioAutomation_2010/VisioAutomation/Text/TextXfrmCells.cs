@@ -7,13 +7,13 @@ namespace VisioAutomation.Text
 {
         public class TextXFormCells : VA.ShapeSheet.CellGroups.CellGroup
     {
+        public VA.ShapeSheet.CellData<double> TxtAngle { get; set; }
+        public VA.ShapeSheet.CellData<double> TxtWidth { get; set; }
+        public VA.ShapeSheet.CellData<double> TxtHeight { get; set; }
         public VA.ShapeSheet.CellData<double> TxtPinX { get; set; }
         public VA.ShapeSheet.CellData<double> TxtPinY { get; set; }
         public VA.ShapeSheet.CellData<double> TxtLocPinX { get; set; }
         public VA.ShapeSheet.CellData<double> TxtLocPinY { get; set; }
-        public VA.ShapeSheet.CellData<double> TxtWidth { get; set; }
-        public VA.ShapeSheet.CellData<double> TxtHeight { get; set; }
-        public VA.ShapeSheet.CellData<double> TxtAngle { get; set; }
 
         protected override void ApplyFormulas(ApplyFormula func)
         {
