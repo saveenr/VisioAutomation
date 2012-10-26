@@ -34,9 +34,10 @@ namespace VisioAutomation.Connections
             {
                 throw new System.ArgumentException("connector cannot be the TO shape");
             }
-
-            var connector_beginx = connector_shape.GetCell(VA.ShapeSheet.SRCConstants.BeginX);
-            var connector_endx = connector_shape.GetCell(VA.ShapeSheet.SRCConstants.EndX);
+            var src_beginx = VA.ShapeSheet.SRCConstants.BeginX;
+            var src_endx = VA.ShapeSheet.SRCConstants.EndX;
+            var connector_beginx = connector_shape.CellsSRC[src_beginx.Section, src_beginx.Row, src_beginx.Cell];
+            var connector_endx = connector_shape.CellsSRC[src_endx.Section, src_endx.Row, src_endx.Cell];
             var from_cell = from_shape.CellsSRC[1, 1, 0];
             var to_cell = to_shape.CellsSRC[1, 1, 0];
             connector_beginx.GlueTo(from_cell);

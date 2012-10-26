@@ -205,9 +205,9 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException("shape");
             }
 
-            var tcell = shape.GetCell(src_tabstopcount);
+            var cell_tabstopcount = shape.CellsSRC[src_tabstopcount.Section, src_tabstopcount.Row, src_tabstopcount.Cell];
             const short rounding = 0;
-            return tcell.ResultInt[unitcode_nocast, rounding];
+            return cell_tabstopcount.ResultInt[unitcode_nocast, rounding];
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace VisioAutomation.Text
                 return;
             }
 
-            var cell_tabstopcount = shape.GetCell(src_tabstopcount);
+            var cell_tabstopcount = shape.CellsSRC[src_tabstopcount.Section, src_tabstopcount.Row, src_tabstopcount.Cell];
             cell_tabstopcount.FormulaForce = "0";
 
             const string formula = "0";

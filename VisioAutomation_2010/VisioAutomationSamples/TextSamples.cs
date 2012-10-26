@@ -12,7 +12,9 @@ namespace VisioAutomationSamples
             var s0 = page.DrawRectangle(1, 1, 4, 4);
             s0.Text = "Hello World";
 
-            s0.GetCell(VA.ShapeSheet.SRCConstants.TxtAngle).Formula = "-Angle";
+            var src = VA.ShapeSheet.SRCConstants.TxtAngle;
+            var cell = s0.CellsSRC[src.Section, src.Row, src.Cell];
+            cell.Formula = "-Angle";
         }
 
         public static void TextFields()

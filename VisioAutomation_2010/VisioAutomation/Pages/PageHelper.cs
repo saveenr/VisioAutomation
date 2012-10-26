@@ -214,7 +214,8 @@ namespace VisioAutomation.Pages
             }
 
             var page_sheet = page.PageSheet;
-            var orientationcell = page_sheet.GetCell(VA.ShapeSheet.SRCConstants.PrintPageOrientation);
+            var src = VA.ShapeSheet.SRCConstants.PrintPageOrientation;
+            var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNoCast, 0];
             return (VA.Pages.PrintPageOrientation)value;
         }
