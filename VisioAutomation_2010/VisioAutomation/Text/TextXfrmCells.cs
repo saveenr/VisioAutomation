@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-        public class TextXFormCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class TextXFormCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> TxtAngle { get; set; }
         public VA.ShapeSheet.CellData<double> TxtWidth { get; set; }

@@ -9,42 +9,13 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        private IList<CharacterFormatCells> _characterFormats;
-        private IList<ParagraphFormatCells> _paragraphFormats;
-        private TextBlockFormatCells _textBlocks;
-        private IList<TextRun> _characterTextRuns;
-        private IList<TextRun> _paragraphTextRuns;
-        private IList<TabStop> _tabStops;
-
-        public IList<CharacterFormatCells> CharacterFormats
-        {
-            get { return _characterFormats; }
-        }
-
-        public IList<ParagraphFormatCells> ParagraphFormats
-        {
-            get { return _paragraphFormats; }
-        }
-
-        public TextBlockFormatCells TextBlocks
-        {
-            get { return _textBlocks; }
-        }
-
-        public IList<TextRun> CharacterTextRuns
-        {
-            get { return _characterTextRuns; }
-        }
-
-        public IList<TextRun> ParagraphTextRuns
-        {
-            get { return _paragraphTextRuns; }
-        }
-
-        public IList<TabStop> TabStops
-        {
-            get { return _tabStops; }
-        }
+        public IList<CharacterFormatCells> CharacterFormats { get; private set; }
+        public IList<ParagraphFormatCells> ParagraphFormats { get; private set; }
+        public TextBlockFormatCells TextBlock { get; private set; }
+        public IList<TextRun> CharacterTextRuns { get; private set; }
+        public IList<TextRun> ParagraphTextRuns { get; private set; }
+        public IList<TabStop> TabStops { get; private set; }
+        public TextXFormCells TextXForm { get; private set; }
 
         private static IList<TextRun> GetTextRuns(
             IVisio.Shape shape,
@@ -276,12 +247,13 @@ namespace VisioAutomation.Text
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
             var textfmt = new TextFormat();
-            textfmt._characterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
-            textfmt._paragraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
-            textfmt._textBlocks = VA.Text.TextBlockFormatCells.GetCells(shape);
-            textfmt._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            textfmt._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
-            textfmt._tabStops = VA.Text.TextFormat.GetTabStops(shape);
+            textfmt.CharacterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
+            textfmt.ParagraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
+            textfmt.TextBlock = VA.Text.TextBlockFormatCells.GetCells(shape);
+            textfmt.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            textfmt.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            textfmt.TabStops = VA.Text.TextFormat.GetTabStops(shape);
+            textfmt.TextXForm = VA.Text.TextXFormCells.GetCells(shape);
             return textfmt;
         }
 
@@ -290,21 +262,23 @@ namespace VisioAutomation.Text
             var charcells = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
             var paracells = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
             var textblockcells = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
+            var textxfrms = VA.Text.TextXFormCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
             var l = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var t = new TextFormat();
-                t._characterFormats = charcells[i];
-                t._paragraphFormats = paracells[i];
-                t._textBlocks = textblockcells[i];
+                t.CharacterFormats = charcells[i];
+                t.ParagraphFormats = paracells[i];
+                t.TextBlock = textblockcells[i];
+                t.TextXForm = textxfrms[i];
                 l.Add(t);
 
                 var shape = page_shapes.get_ItemFromID(shapeids[i]);
-                t._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-                t._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+                t.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                t.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
-                t._tabStops = VA.Text.TextFormat.GetTabStops(shape);
+                t.TabStops = VA.Text.TextFormat.GetTabStops(shape);
             }
 
             return l;

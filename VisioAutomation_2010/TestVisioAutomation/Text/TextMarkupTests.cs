@@ -250,7 +250,7 @@ namespace TestVisioAutomation
             var s2 = page1.DrawRectangle(5, 5, 7, 7);
 
             var tf0 = VA.Text.TextFormat.GetFormat(s1);
-            Assert.AreEqual("4 pt",tf0.TextBlocks.BottomMargin.Formula);
+            Assert.AreEqual("4 pt",tf0.TextBlock.BottomMargin.Formula);
 
             var tb1 = new VA.Text.TextBlockFormatCells();
             tb1.BottomMargin = "8 pt";
@@ -260,11 +260,11 @@ namespace TestVisioAutomation
             update.Execute(page1);
 
             var tf2 = VA.Text.TextFormat.GetFormat(s1);
-            Assert.AreEqual("8 pt", tf2.TextBlocks.BottomMargin.Formula);
+            Assert.AreEqual("8 pt", tf2.TextBlock.BottomMargin.Formula);
 
             var tfs = VA.Text.TextFormat.GetFormat(page1, new[] { s1.ID, s2.ID });
-            Assert.AreEqual("8 pt", tfs[0].TextBlocks.BottomMargin.Formula);
-            Assert.AreEqual("4 pt", tfs[1].TextBlocks.BottomMargin.Formula);
+            Assert.AreEqual("8 pt", tfs[0].TextBlock.BottomMargin.Formula);
+            Assert.AreEqual("4 pt", tfs[1].TextBlock.BottomMargin.Formula);
 
             page1.Delete(0);
         }
@@ -282,7 +282,7 @@ namespace TestVisioAutomation
             tb1.TxtPinY = "Height*0.5";
             tb1.TxtLocPinX = "TxtWidth*0.3";
             tb1.TxtLocPinY = "TxtHeight*0.4";
-            tb1.TxtWidth = "Height*1.5";
+            tb1.TxtHeight = "Height*1.5";
             tb1.TxtWidth = "Width*0.7";
 
             var update = new VA.ShapeSheet.Update();
@@ -298,10 +298,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(tb1.TxtLocPinX.Formula, tb2.TxtLocPinX.Formula);
             Assert.AreEqual(tb1.TxtLocPinY.Formula, tb2.TxtLocPinY.Formula);
 
-            //Assert.AreEqual("8 pt", tfs[0].TextBlocks.BottomMargin.Formula);
-            //Assert.AreEqual("4 pt", tfs[1].TextBlocks.BottomMargin.Formula);
-
-            //page1.Delete(0);
+            page1.Delete(0);
         }
 
 
