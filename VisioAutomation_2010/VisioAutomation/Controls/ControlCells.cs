@@ -44,14 +44,24 @@ namespace VisioAutomation.Controls
 
         internal static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = new ControlQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
-            var query = new ControlQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+        }
+
+        private static ControlQuery m_query;
+        private static ControlQuery get_query()
+        {
+            if (m_query == null)
+            {
+                m_query = new ControlQuery();
+            }
+            return m_query;
         }
 
         class ControlQuery : VA.ShapeSheet.Query.SectionQuery

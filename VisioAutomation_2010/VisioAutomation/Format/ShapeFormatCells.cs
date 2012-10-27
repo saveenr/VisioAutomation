@@ -95,14 +95,24 @@ namespace VisioAutomation.Format
 
         internal static IList<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = new ShapeFormatQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static ShapeFormatCells GetCells(IVisio.Shape shape)
         {
-            var query = new ShapeFormatQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
+        }
+
+        private static ShapeFormatQuery m_query;
+        private static ShapeFormatQuery get_query()
+        {
+            if (m_query == null)
+            {
+                m_query = new ShapeFormatQuery();
+            }
+            return m_query;
         }
 
         class ShapeFormatQuery : VA.ShapeSheet.Query.CellQuery

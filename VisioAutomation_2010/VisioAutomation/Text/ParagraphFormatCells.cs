@@ -43,14 +43,24 @@ namespace VisioAutomation.Text
 
         internal static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = new ParagraphFormatQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
         internal static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
-            var query = new ParagraphFormatQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+        }
+
+        private static ParagraphFormatQuery m_query;
+        private static ParagraphFormatQuery get_query()
+        {
+            if (m_query == null)
+            {
+                m_query = new ParagraphFormatQuery();
+            }
+            return m_query;
         }
 
         private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)

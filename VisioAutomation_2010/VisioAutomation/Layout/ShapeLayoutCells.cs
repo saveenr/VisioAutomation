@@ -76,14 +76,24 @@ namespace VisioAutomation.Layout
 
         internal static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = new ShapeLayoutQuery();
+            var query =get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static ShapeLayoutCells GetCells(IVisio.Shape shape)
         {
-            var query = new ShapeLayoutQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
+        }
+
+        private static ShapeLayoutQuery m_query;
+        private static ShapeLayoutQuery get_query()
+        {
+            if (m_query == null)
+            {
+                m_query = new ShapeLayoutQuery();
+            }
+            return m_query;
         }
 
         class ShapeLayoutQuery : VA.ShapeSheet.Query.CellQuery

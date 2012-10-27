@@ -42,15 +42,26 @@ namespace VisioAutomation.Text
 
         internal static IList<TextXFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = new TextXFormQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static TextXFormCells GetCells(IVisio.Shape shape)
         {
-            var query = new TextXFormQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
         }
+
+        private static TextXFormQuery m_query;
+        private static TextXFormQuery get_query()
+        {
+            if (m_query == null)
+            {
+                m_query = new TextXFormQuery();
+            }
+            return m_query;
+        }
+
 
         private class TextXFormQuery : VA.ShapeSheet.Query.CellQuery
         {

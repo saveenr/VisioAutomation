@@ -81,14 +81,24 @@ namespace VisioAutomation.Layout
 
         internal static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = new LockQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
         internal static LockCells GetCells(IVisio.Shape shape)
         {
-            var query = new LockQuery();
+            var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
+        }
+
+        private static LockQuery m_query;
+        private static LockQuery get_query()
+        {
+            if (m_query == null)
+            {
+                m_query = new LockQuery();
+            }
+            return m_query;
         }
 
         class LockQuery : VA.ShapeSheet.Query.CellQuery
