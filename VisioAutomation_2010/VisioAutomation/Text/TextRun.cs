@@ -17,11 +17,5 @@ namespace VisioAutomation.Text
             this.End = end;
             this.Text = text;
         }
-        
-        public override string ToString()
-        {
-            var s = string.Format("(Begin={0},End={1})", this.Begin, this.End);
-            return s;
-        }
     }
 }
