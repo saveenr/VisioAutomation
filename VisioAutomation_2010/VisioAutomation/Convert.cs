@@ -75,26 +75,6 @@ namespace VisioAutomation
             return output_string;
         }
 
-        public static string SmartStringToFormulaString(VA.ShapeSheet.FormulaLiteral formula)
-        {
-            if (!formula.HasValue)
-            {
-                return null;
-            }
-
-            if (formula.Value.Length == 0)
-            {
-                return VA.Convert.StringToFormulaString(formula.Value);
-            }
-
-            if (formula.Value[0] != '\"')
-            {
-                return VA.Convert.StringToFormulaString(formula.Value);
-            }
-
-            return formula.Value;
-        }
-
         public static string ColorToFormulaRGB(System.Drawing.Color color)
         {
             return ColorToFormulaRGB(color.R, color.G, color.B);
