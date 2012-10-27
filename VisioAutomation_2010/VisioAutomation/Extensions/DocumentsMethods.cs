@@ -17,7 +17,7 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Document OpenStencil(this IVisio.Documents docs, string filename)
         {
-            return VA.DocumentHelper.OpenStencil(docs, filename);
+            return VA.Documents.DocumentHelper.OpenStencil(docs, filename);
         }
     }
 }

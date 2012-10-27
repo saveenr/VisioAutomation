@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
-            VA.DocumentHelper.ForceCloseAll(documents);
+            VA.Documents.DocumentHelper.ForceCloseAll(documents);
             application.Quit(true);
             this.Session.VisioApplication = null;
         }

@@ -7,12 +7,12 @@ namespace VisioAutomation.Extensions
     {
         public static void Activate(this IVisio.Document doc)
         {
-            VA.DocumentHelper.Activate(doc);
+            VA.Documents.DocumentHelper.Activate(doc);
         }
 
         public static void Close(this IVisio.Document doc, bool force_close)
         {
-            VA.DocumentHelper.Close(doc,force_close);
+            VA.Documents.DocumentHelper.Close(doc, force_close);
         }
     }
 }

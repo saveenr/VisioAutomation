@@ -154,7 +154,7 @@ namespace TestVisioAutomation
             var ss = GetScriptingSession();
             draw_org_chart(ss, TestVisioAutomation.Properties.Resources.sampleorgchart1);
             ss.Document.Close(true);
-            VA.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
+            VA.Documents.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
         }
 
         private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)

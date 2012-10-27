@@ -2,7 +2,7 @@
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioAutomation
+namespace VisioAutomation.Documents
 {
     public static class DocumentHelper
     {
@@ -37,7 +37,7 @@ namespace VisioAutomation
             return stencil;
         }
 
-        public static IVisio.Document TryOpenStencil(IVisio.Documents docs, string filename)
+        private static IVisio.Document TryOpenStencil(IVisio.Documents docs, string filename)
         {
             if (filename == null)
             {
@@ -106,29 +106,6 @@ namespace VisioAutomation
             else
             {
                 doc.Close();
-            }
-        }
-
-        public static IVisio.Document NewStencil(IVisio.Documents documents)
-        {
-
-            var doc = documents.AddEx(string.Empty, IVisio.VisMeasurementSystem.visMSDefault,
-                                      (int)IVisio.VisOpenSaveArgs.visAddStencil +
-                                      (int)IVisio.VisOpenSaveArgs.visOpenDocked,
-                                      0);
-            return doc;
-        }
-
-        public static IVisio.Document TryGetDocument(IVisio.Documents documents, string name)
-        {
-            try
-            {
-                var stencil_doc = documents[name];
-                return stencil_doc;
-            }
-            catch (System.Runtime.InteropServices.COMException)
-            {
-                return null;
             }
         }
     }

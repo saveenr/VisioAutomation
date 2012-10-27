@@ -129,7 +129,10 @@ namespace VisioAutomation.Scripting.Commands
         {
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
-            var doc = VA.DocumentHelper.NewStencil(documents);
+            var doc = documents.AddEx(string.Empty, IVisio.VisMeasurementSystem.visMSDefault,
+                          (int)IVisio.VisOpenSaveArgs.visAddStencil +
+                          (int)IVisio.VisOpenSaveArgs.visOpenDocked,
+                          0);
             return doc;
         }
 

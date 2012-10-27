@@ -65,6 +65,19 @@ namespace VisioAutomation.Scripting.Commands
             return master;
         }
 
+        private static IVisio.Document TryGetDocument(IVisio.Documents documents, string name)
+        {
+            try
+            {
+                var stencil_doc = documents[name];
+                return stencil_doc;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                return null;
+            }
+        }
+
         public IVisio.Master Get(string master, string stencil)
         {
             if (master == null)
@@ -79,7 +92,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
-            IVisio.Document stencil_doc = VA.DocumentHelper.TryGetDocument(documents,stencil);
+            IVisio.Document stencil_doc = TryGetDocument(documents,stencil);
             if (stencil_doc==null)
             {
                 string msg = string.Format("No such stencil \"{0}\"", stencil);

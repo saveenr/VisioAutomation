@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -106,6 +107,26 @@ namespace TestVisioAutomation
             {
                 p.Delete(1);
             }
+        }
+
+        /// Selects a series of shapes and groups them into one shape
+        public static IVisio.Shape SelectAndGroup(IVisio.Window window, IEnumerable<IVisio.Shape> shapes)
+        {
+            if (window == null)
+            {
+                throw new System.ArgumentNullException("window");
+            }
+
+            if (shapes == null)
+            {
+                throw new System.ArgumentNullException("shapes");
+            }
+
+            var selectargs = IVisio.VisSelectArgs.visSelect;
+            window.Select(shapes, selectargs);
+            var selection = window.Selection;
+            var group = selection.Group();
+            return group;
         }
     }
 }
