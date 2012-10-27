@@ -13,6 +13,7 @@ namespace VisioAutomation.Extensions
         [System.Obsolete]
         public static VA.Application.UndoScope CreateUndoScope(this IVisio.Application app)
         {
+            // Obsolete because we want callers to always give a descriptive name to the Undo Scope
             return new VA.Application.UndoScope(app, "Untitled");
         }
 
@@ -24,8 +25,7 @@ namespace VisioAutomation.Extensions
             }
             return new VA.Application.UndoScope(app, name);
         }
-
-
+        
         public static VA.Application.AlertResponseScope CreateAlertResponseScope(this IVisio.Application app, VA.Application.AlertResponseCode code)
         {
             return new VA.Application.AlertResponseScope(app, code);

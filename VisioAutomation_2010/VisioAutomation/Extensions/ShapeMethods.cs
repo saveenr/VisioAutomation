@@ -16,11 +16,6 @@ namespace VisioAutomation.Extensions
             return shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
         }
 
-        public static IVisio.Cell GetCell(this IVisio.Shape shape, VA.ShapeSheet.SRC src)
-        {
-            return shape.CellsSRC[src.Section, src.Row, src.Cell];
-        }
-
         public static VA.Drawing.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)
         {
             // MSDN: http://msdn.microsoft.com/library/default.asp?url=/library/en-us/vissdk11/html/vimthBoundingBox_HV81900422.asp

@@ -19,6 +19,5 @@ namespace VisioAutomation.Extensions
         {
             return VA.ShapeHelper.GetShapesFromIDs(shapes, shapeids);
         }
-
     }
 }
