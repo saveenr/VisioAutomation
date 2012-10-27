@@ -15,7 +15,6 @@ namespace VisioAutomation.Text
         public IList<TextRun> CharacterTextRuns { get; private set; }
         public IList<TextRun> ParagraphTextRuns { get; private set; }
         public IList<TabStop> TabStops { get; private set; }
-        public TextXFormCells TextXForm { get; private set; }
 
         private static IList<TextRun> GetTextRuns(
             IVisio.Shape shape,
@@ -253,7 +252,6 @@ namespace VisioAutomation.Text
             textfmt.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             textfmt.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             textfmt.TabStops = VA.Text.TextFormat.GetTabStops(shape);
-            textfmt.TextXForm = VA.Text.TextXFormCells.GetCells(shape);
             return textfmt;
         }
 
@@ -262,7 +260,6 @@ namespace VisioAutomation.Text
             var charcells = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
             var paracells = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
             var textblockcells = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
-            var textxfrms = VA.Text.TextXFormCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
             var l = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
@@ -271,7 +268,6 @@ namespace VisioAutomation.Text
                 t.CharacterFormats = charcells[i];
                 t.ParagraphFormats = paracells[i];
                 t.TextBlock = textblockcells[i];
-                t.TextXForm = textxfrms[i];
                 l.Add(t);
 
                 var shape = page_shapes.get_ItemFromID(shapeids[i]);
