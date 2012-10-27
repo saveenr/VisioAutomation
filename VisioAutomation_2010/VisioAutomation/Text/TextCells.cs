@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class TextBlockFormatCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class TextCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> BottomMargin { get; set; }
         public VA.ShapeSheet.CellData<double> LeftMargin { get; set; }
@@ -35,22 +35,22 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
             func(VA.ShapeSheet.SRCConstants.TextDirection, this.TextDirection.Formula);
             func(VA.ShapeSheet.SRCConstants.VerticalAlign, this.VerticalAlign.Formula);
-            func(ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX.Formula);
-            func(ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY.Formula);
-            func(ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX.Formula);
-            func(ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY.Formula);
-            func(ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth.Formula);
-            func(ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight.Formula);
-            func(ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle.Formula);
+            func(VA.ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX.Formula);
+            func(VA.ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY.Formula);
+            func(VA.ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX.Formula);
+            func(VA.ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY.Formula);
+            func(VA.ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth.Formula);
+            func(VA.ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight.Formula);
+            func(VA.ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle.Formula);
         }
 
-        internal static IList<TextBlockFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        internal static IList<TextCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
-        internal static TextBlockFormatCells GetCells(IVisio.Shape shape)
+        internal static TextCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
@@ -66,11 +66,11 @@ namespace VisioAutomation.Text
             return m_query;
         }
 
-        private static TextBlockFormatCells get_cells_from_row(TextBlockFormatQuery query,
+        private static TextCells get_cells_from_row(TextBlockFormatQuery query,
                                                                VA.ShapeSheet.Data.TableRow
                                                                    <VA.ShapeSheet.CellData<double>> row)
         {
-            var cells = new TextBlockFormatCells();
+            var cells = new TextCells();
             cells.BottomMargin = row[query.BottomMargin];
             cells.LeftMargin = row[query.LeftMargin];
             cells.RightMargin = row[query.RightMargin];

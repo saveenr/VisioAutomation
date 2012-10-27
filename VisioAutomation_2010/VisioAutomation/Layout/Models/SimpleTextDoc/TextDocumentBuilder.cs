@@ -18,7 +18,7 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
         private VA.Drawing.Rectangle _bodywith_title_rect;
         private VA.Drawing.Rectangle _bodywithout_title_rect;
         private int _fontid;
-        private VA.Text.TextBlockFormatCells _textblockformat;
+        private VA.Text.TextCells _textblockformat;
         private VA.Text.ParagraphFormatCells _titleParaFmt;
         private VA.Format.ShapeFormatCells _titleFormat;
         private VA.Text.CharacterFormatCells _titleCharFmt;
@@ -87,7 +87,7 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
             var font = _visioDocument.Fonts[this.DefaultFont];
             _fontid = font.ID;
 
-            _textblockformat = new VA.Text.TextBlockFormatCells();
+            _textblockformat = new VA.Text.TextCells();
             _textblockformat.VerticalAlign = 0;
 
             _titleParaFmt = new VA.Text.ParagraphFormatCells();

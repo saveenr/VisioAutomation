@@ -10,14 +10,14 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
         public VA.Format.ShapeFormatCells ShapeFormatCells;
         public VA.Text.CharacterFormatCells CharacterFormatCells;
         public VA.Text.ParagraphFormatCells ParagraphFormatCells;
-        public VA.Text.TextBlockFormatCells TextBlockFormatCells;
+        public VA.Text.TextCells TextCells;
 
         public Formatting()
         {
             this.ShapeFormatCells = new ShapeFormatCells();
             this.CharacterFormatCells = new CharacterFormatCells();
             this.ParagraphFormatCells = new ParagraphFormatCells();
-            this.TextBlockFormatCells = new TextBlockFormatCells();
+            this.TextCells = new TextCells();
         }
 
         public void Apply(VA.ShapeSheet.Update update, short shapeid, short shapeid2)
@@ -25,7 +25,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
             this.CharacterFormatCells.Apply(update, shapeid, 0);
             this.ParagraphFormatCells.Apply(update, shapeid, 0);
             this.ShapeFormatCells.Apply(update, shapeid2);
-            this.TextBlockFormatCells.Apply(update, shapeid);
+            this.TextCells.Apply(update, shapeid);
         }
     }
 }

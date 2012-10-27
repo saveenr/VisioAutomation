@@ -11,7 +11,7 @@ namespace VisioAutomation.Text
     {
         public IList<CharacterFormatCells> CharacterFormats { get; private set; }
         public IList<ParagraphFormatCells> ParagraphFormats { get; private set; }
-        public TextBlockFormatCells TextBlock { get; private set; }
+        public TextCells TextBlock { get; private set; }
         public IList<TextRun> CharacterTextRuns { get; private set; }
         public IList<TextRun> ParagraphTextRuns { get; private set; }
         public IList<TabStop> TabStops { get; private set; }
@@ -248,7 +248,7 @@ namespace VisioAutomation.Text
             var textfmt = new TextFormat();
             textfmt.CharacterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
             textfmt.ParagraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
-            textfmt.TextBlock = VA.Text.TextBlockFormatCells.GetCells(shape);
+            textfmt.TextBlock = VA.Text.TextCells.GetCells(shape);
             textfmt.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             textfmt.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
             textfmt.TabStops = VA.Text.TextFormat.GetTabStops(shape);
@@ -259,7 +259,7 @@ namespace VisioAutomation.Text
         {
             var charcells = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
             var paracells = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
-            var textblockcells = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
+            var textblockcells = VA.Text.TextCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
             var l = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)

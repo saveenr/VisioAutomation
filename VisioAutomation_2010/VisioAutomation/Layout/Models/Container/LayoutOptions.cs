@@ -18,7 +18,7 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
         public LayoutOptions()
         {
-            this.ContainerFormatting.TextBlockFormatCells.VerticalAlign = "0";
+            this.ContainerFormatting.TextCells.VerticalAlign = "0";
         }
 
         public double ItemWidth
