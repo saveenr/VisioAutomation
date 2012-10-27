@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Delete User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Set User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {

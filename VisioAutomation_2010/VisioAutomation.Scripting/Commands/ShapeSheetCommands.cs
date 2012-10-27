@@ -162,7 +162,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Set ShapeSheet Formulas"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -172,7 +172,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Update(ShapeSheetUpdate update, bool blastguards, bool testcircular)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Update ShapeSheet Formalas"))
             {
                 var active_page = application.ActivePage;
                 var internal_update = update.update;

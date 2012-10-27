@@ -8,6 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ConnectionCommands : CommandSet
     {
+        string undoname_connectShapes = "Connect Shapes";
+
         public ConnectionCommands(Session session) :
             base(session)
         {
@@ -97,7 +99,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = this.Session.VisioApplication.ActivePage;
 
-            using (var undoscope = this.Session.VisioApplication.CreateUndoScope())
+            using (var undoscope = this.Session.VisioApplication.CreateUndoScope(undoname_connectShapes))
             {
                 var connectors = VA.Connections.ConnectorHelper.ConnectShapes(active_page, master, from_shapes, to_shapes);
                 return connectors;
@@ -146,7 +148,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var active_page = this.Session.VisioApplication.ActivePage;
 
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope(undoname_connectShapes))
             {
                 var connectors = VA.Connections.ConnectorHelper.ConnectShapes(active_page, master, fromshapes, toshapes);
                 return connectors;

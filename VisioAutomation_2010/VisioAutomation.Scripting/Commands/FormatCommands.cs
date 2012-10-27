@@ -64,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope( string.Format("Duplicate Shape {0} Times",n)))
             {
                 var active_window = application.ActiveWindow;
                 var selection = active_window.Selection;

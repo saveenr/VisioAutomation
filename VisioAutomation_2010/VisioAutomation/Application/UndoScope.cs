@@ -17,7 +17,7 @@ namespace VisioAutomation.Application
                 throw new System.ArgumentNullException("app");
             }
 
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 throw new System.ArgumentException("name");
             }

@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Set Shape Tex"))
             {
                 var values = texts.ToList();
 
@@ -39,7 +39,6 @@ namespace VisioAutomation.Scripting.Commands
                     var shape = shapes[i];
                     var text = values[i%values.Count];
                     shape.Text = text;
-
                 }
             }
         }
@@ -66,7 +65,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
 
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Toggle Shape Text Case"))
             {
                 var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -119,7 +118,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Set Text Wrapping"))
             {
                 var active_page = application.ActivePage;
                 TextCommandsUtil.set_text_wrapping(active_page, shapeids, wrap);
@@ -135,7 +134,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes_2d = this.Session.Selection.EnumShapes2D().ToList();
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Fit Shape To Text"))
             {
                 var active_page = application.ActivePage;
                 VA.Text.TextHelper.FitShapeToText(active_page, shapes_2d);

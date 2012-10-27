@@ -10,10 +10,21 @@ namespace VisioAutomation.Extensions
             VA.Application.ApplicationHelper.Quit(app,force_close);
         }
 
+        [System.Obsolete]
         public static VA.Application.UndoScope CreateUndoScope(this IVisio.Application app)
         {
             return new VA.Application.UndoScope(app, "Untitled");
         }
+
+        public static VA.Application.UndoScope CreateUndoScope(this IVisio.Application app, string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new System.ArgumentOutOfRangeException(name, "name");
+            }
+            return new VA.Application.UndoScope(app, name);
+        }
+
 
         public static VA.Application.AlertResponseScope CreateAlertResponseScope(this IVisio.Application app, VA.Application.AlertResponseCode code)
         {

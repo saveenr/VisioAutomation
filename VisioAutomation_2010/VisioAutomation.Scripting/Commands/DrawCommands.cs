@@ -77,7 +77,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Table"))
             {
                 layout.Render(page);
                 page.ResizeToFitContents();
@@ -97,7 +97,7 @@ namespace VisioAutomation.Scripting.Commands
             var page = application.ActivePage;
             layout.PerformLayout();
            
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Grid"))
             {
                 layout.Render(page);
             }
@@ -113,7 +113,7 @@ namespace VisioAutomation.Scripting.Commands
             // IVisio.VisDrawSplineFlags.visSpline1D
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw NURBS Curve"))
             {
 
                 var page = application.ActivePage;
@@ -125,7 +125,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Rectangle"))
             {
                 var active_page = application.ActivePage;
                 var shape = active_page.DrawRectangle(x0, y0, x1, y1);
@@ -136,7 +136,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Line"))
             {
                 var active_page = application.ActivePage;
                 var shape = active_page.DrawLine(x0, y0, x1, y1);
@@ -147,7 +147,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Oval"))
             {
                 var active_page = application.ActivePage;
                 var shape = active_page.DrawOval(x0, y0, x1, y1);
@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Oval(VA.Drawing.Point center, double radius)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Oval"))
             {
                 var A = center.Add(-radius, -radius);
                 var B = center.Add(radius, radius);
@@ -172,7 +172,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Bezier(IEnumerable<VA.Drawing.Point> points)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Bezier"))
             {
                 var active_page = application.ActivePage;
                 var shape = active_page.DrawBezier(points.ToList());
@@ -183,7 +183,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape PolyLine(IList<VA.Drawing.Point> points)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw PolyLine"))
             {
                 var active_page = application.ActivePage;
                 var shape = active_page.DrawPolyline(points);
@@ -197,7 +197,7 @@ namespace VisioAutomation.Scripting.Commands
                                   double  end_angle)
         {
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
                 var shape = DrawCommandsUtil.DrawPieSlice(active_page, center, radius, start_angle, end_angle);

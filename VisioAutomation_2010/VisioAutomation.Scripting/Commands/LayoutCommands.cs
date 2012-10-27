@@ -101,7 +101,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = _map_axis_to_uicmd(axis);
 
-            using (var undoscope = this.Session.VisioApplication.CreateUndoScope())
+            using (var undoscope = this.Session.VisioApplication.CreateUndoScope("Distribute Shapes"))
             {
                 this.Session.VisioApplication.DoCmd((short)cmd);
             }
@@ -119,7 +119,7 @@ namespace VisioAutomation.Scripting.Commands
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
 
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Distribute Shapes"))
             {
                 VA.Layout.LayoutHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
             }
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Nudge Shapes"))
             {
                 var selection = this.Session.Selection.Get();
                 var unitcode = IVisio.VisUnitCodes.visInches;
@@ -153,7 +153,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Snap Shape Corners"))
             {
                 var active_page = application.ActivePage;
                 VA.Layout.LayoutHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Snape Shape Sizes"))
             {
                 var active_page = application.ActivePage;
                 var snapsize = new VA.Drawing.Size(w, h);
@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
             }
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Stack Shapes"))
             {
                 if (axis == VA.Drawing.Axis.YAxis)
                 {
@@ -227,7 +227,7 @@ namespace VisioAutomation.Scripting.Commands
             var cmd = LayoutCommands.AlignmentToUICmd(align);
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Align Shapes"))
             {
                 bool glue_to_guide = false;
                 var selection = Session.Selection.Get();
@@ -245,7 +245,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Align Shapes"))
             {
                 bool glue_to_guide = false;
                 var selection = Session.Selection.Get();
@@ -322,7 +322,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Set Shape Lock Properties"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -352,7 +352,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Set Shape Size"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);

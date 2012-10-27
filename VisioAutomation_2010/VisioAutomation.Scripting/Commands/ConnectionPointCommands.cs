@@ -28,13 +28,10 @@ namespace VisioAutomation.Scripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            foreach (var shape in shapes)
             {
-                foreach (var shape in shapes)
-                {
-                    var cp = VA.Connections.ConnectionPointHelper.GetConnectionPoints(shape);
-                    dic[shape] = cp;
-                }
+                var cp = VA.Connections.ConnectionPointHelper.GetConnectionPoints(shape);
+                dic[shape] = cp;
             }
 
             return dic;
@@ -65,7 +62,7 @@ namespace VisioAutomation.Scripting.Commands
             var indices = new List<int>(shapes.Count);
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Add Connection Point"))
             {
                 var cp = new VA.Connections.ConnectionPointCells();
                 cp.X = fx;
@@ -103,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
                                 select shape;
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = application.CreateUndoScope("Delete Connection Point"))
             {
                 foreach (var shape in target_shapes)
                 {
