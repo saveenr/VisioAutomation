@@ -89,8 +89,8 @@ namespace VisioAutomation.Drawing
         public string ToFormula()
         {
             this.CheckValidVisioHSL();
-            return VA.Convert.ColorToFormulaHSL(this.H, this.S, this.L);
+            string formula = System.String.Format("HSL({0},{1},{2})", this.H, this.S, this.L);
+            return formula;
         }
-
     }
 }

@@ -69,7 +69,7 @@ namespace TestVisioAutomation
             var dompage = new VA.DOM.Page();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
-            vrect1.Cells.FillForegnd = VA.Convert.ColorToFormulaRGB(0xff0000);
+            vrect1.Cells.FillForegnd = "rgb(255,0,0)";
             dompage.Shapes.Add(vrect1);
 
             // Render it

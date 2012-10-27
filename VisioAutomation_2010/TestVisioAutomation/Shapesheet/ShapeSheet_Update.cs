@@ -21,7 +21,7 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
-            string fg_formula = VA.Convert.ColorToFormulaRGB(255, 0, 0);
+            string fg_formula = "RGB(255,0,0)";
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();

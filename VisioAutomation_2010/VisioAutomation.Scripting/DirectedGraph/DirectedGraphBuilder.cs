@@ -184,8 +184,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                                                                 connectory_type);
 
                     al_connector.Cells = new VA.DOM.ShapeCells();
-                    al_connector.Cells.LineColor =
-                        VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
+                    al_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
                     al_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
                     al_connector.Cells.EndArrow = def_end_arrow;
                 }

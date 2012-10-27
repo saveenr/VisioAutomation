@@ -75,34 +75,6 @@ namespace VisioAutomation
             return output_string;
         }
 
-        public static string ColorToFormulaRGB(System.Drawing.Color color)
-        {
-            return ColorToFormulaRGB(color.R, color.G, color.B);
-        }
-
-        public static string ColorToFormulaRGB(VA.Drawing.ColorRGB color)
-        {
-            return ColorToFormulaRGB(color.R, color.G, color.B);
-        }
-
-        public static string ColorToFormulaRGB(int color)
-        {
-            var c = new VA.Drawing.ColorRGB(color);
-            return ColorToFormulaRGB(c);
-        }
-
-        public static string ColorToFormulaRGB(byte r, byte g, byte b)
-        {
-            string formula = System.String.Format("RGB({0},{1},{2})", r, g, b);
-            return formula;
-        }
-
-        public static string ColorToFormulaHSL(byte h, byte s, byte l)
-        {
-            string formula = System.String.Format("HSL({0},{1},{2})", h, s, l);
-            return formula;
-        }
-
         internal static void CheckValidVisioHSL(byte h, byte s, byte l)
         {
             if (h < 0)

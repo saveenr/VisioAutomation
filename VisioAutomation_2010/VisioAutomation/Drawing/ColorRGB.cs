@@ -246,7 +246,8 @@ namespace VisioAutomation.Drawing
 
         public string ToFormula()
         {
-            return VisioAutomation.Convert.ColorToFormulaRGB(this);
-        }
+            string formula = System.String.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
+            return formula;
+        }        
     }
 }
