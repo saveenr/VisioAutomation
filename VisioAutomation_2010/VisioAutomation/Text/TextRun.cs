@@ -9,7 +9,7 @@ namespace VisioAutomation.Text
         public string Text { get; private set; }
         public int Index { get; private set; }
 
-        public TextRun(int index, int begin, int end, string text)
+        internal TextRun(int index, int begin, int end, string text)
             : this()
         {
             this.Index = index;
