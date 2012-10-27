@@ -67,7 +67,7 @@ namespace VisioAutomationSamples
             fontname_cells.LinePattern = 0;
             fontname_cells.LineWeight = 0.0;
             fontname_cells.ParaHorizontalAlign = 0;
-            fontname_cells.CharSize = VA.Convert.PointsToInches(36.0);
+            fontname_cells.CharSize = "36pt";
 
             var charbox_cells = new VA.DOM.ShapeCells();
             charbox_cells.FillPattern = 0;
@@ -75,7 +75,7 @@ namespace VisioAutomationSamples
             charbox_cells.LineWeight = 0.0;
             charbox_cells.LineColor = "rgb(150,150,150)";
             charbox_cells.ParaHorizontalAlign = 1;
-            charbox_cells.CharSize = VA.Convert.PointsToInches(24.0);
+            charbox_cells.CharSize = "24pt";
 
             foreach (string fontname in fontnames)
             {
@@ -185,7 +185,7 @@ namespace VisioAutomationSamples
                     n1.Cells.FillForegnd = "rgb(255,255,255)";
                     n1.Cells.LineWeight = 0.0;
                     n1.Cells.LinePattern = 0;
-                    n1.Cells.CharSize = VA.Convert.PointsToInches(16);
+                    n1.Cells.CharSize = "16pt";
                 }
 
 
@@ -207,7 +207,7 @@ namespace VisioAutomationSamples
                             // empty
                         }
                         n1.CharFontName = fontnames[j];
-                        n1.Cells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.Cells.CharSize = "36pt";
                         n1.Cells.FillForegnd = "rgb(255,255,255)";
                         n1.Cells.LineWeight = 0.0;
                         n1.Cells.LinePattern = 0;
@@ -255,7 +255,7 @@ namespace VisioAutomationSamples
                         n1.CharFontName = fontnames[j];
                         n1.Cells.CharColor = colors[j];
                         n1.Cells.CharTransparency = 0.7;
-                        n1.Cells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.Cells.CharSize = "36pt";
                         n1.Cells.FillPattern = 0;
                         n1.Cells.LineWeight = 0.0;
                         n1.Cells.LinePattern = 0;

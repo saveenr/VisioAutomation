@@ -41,40 +41,45 @@ namespace InfoGraphicsPy
         VA.DOM.ShapeCells xcatformat = new VA.DOM.ShapeCells();
         VA.DOM.ShapeCells ycatformat = new VA.DOM.ShapeCells();
 
+        private string get_pt_string(double size)
+        {
+            return string.Format("{0}pt",size);
+        }
+
         public CategoryChart()
         {
             this.Items = new List<CategoryCell>();
 
             titleformat.VerticalAlign = 0;
             titleformat.ParaHorizontalAlign = 0;
-            titleformat.CharSize = VA.Convert.PointsToInches(TitleFontSize);
+            titleformat.CharSize = get_pt_string(TitleFontSize);
             titleformat.LinePattern = 0;
             titleformat.LineWeight = 0;
 
             cellformat.VerticalAlign = 0;
             cellformat.ParaHorizontalAlign = 0;
-            cellformat.CharSize = VA.Convert.PointsToInches(CellFontSize);
+            cellformat.CharSize = get_pt_string(CellFontSize);
             cellformat.LinePattern = 0;
             cellformat.LineWeight = 0;
             cellformat.FillForegnd = CellFill;
 
             subcellformat.VerticalAlign = 0;
             subcellformat.ParaHorizontalAlign = 0;
-            subcellformat.CharSize = VA.Convert.PointsToInches(CellFontSize);
+            subcellformat.CharSize = get_pt_string(CellFontSize);
             subcellformat.LinePattern = 0;
             subcellformat.LineWeight = 0;
             subcellformat.FillForegnd = SubCellFill;
 
             xcatformat.VerticalAlign = 2;
             xcatformat.ParaHorizontalAlign = 1;
-            xcatformat.CharSize = VA.Convert.PointsToInches(CategoryFontSize);
+            xcatformat.CharSize = get_pt_string(CategoryFontSize);
             xcatformat.LinePattern = 0;
             xcatformat.LineWeight = 0;
             xcatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);
 
             ycatformat.VerticalAlign = 2;
             ycatformat.ParaHorizontalAlign = 0;
-            ycatformat.CharSize = VA.Convert.PointsToInches(CategoryFontSize);
+            ycatformat.CharSize = get_pt_string(CategoryFontSize);
             ycatformat.LinePattern = 0;
             ycatformat.LineWeight = 0;
             ycatformat.CharStyle = ((int)VA.Text.CharStyle.Bold);

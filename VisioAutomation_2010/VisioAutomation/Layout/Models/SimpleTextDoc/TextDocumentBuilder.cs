@@ -99,20 +99,24 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
 
             _titleCharFmt = new VA.Text.CharacterFormatCells();
             _titleCharFmt.Font = _fontid;
-            _titleCharFmt.Size = VA.Convert.PointsToInches(_titleTextSize);
+            _titleCharFmt.Size = get_pt_string(_titleTextSize);
 
             _bodyParaFmt = new VA.Text.ParagraphFormatCells();
             _bodyParaFmt.HorizontalAlign = 0;
-            _bodyParaFmt.SpacingAfter = VA.Convert.PointsToInches(_bodyParaSpacingAfter);
+            _bodyParaFmt.SpacingAfter = get_pt_string(_bodyParaSpacingAfter);
 
             _bodyCharFmt = new VA.Text.CharacterFormatCells();
             _bodyCharFmt.Font = _fontid;
-            _bodyCharFmt.Size = VA.Convert.PointsToInches(_bodyTextSize);
+            _bodyCharFmt.Size = get_pt_string(_bodyTextSize);
 
             _bodyFormat = new VA.Format.ShapeFormatCells();
             _bodyFormat.LineWeight = 0;
             _bodyFormat.LinePattern = 0;
-            
+        }
+
+        private string get_pt_string(double size)
+        {
+            return string.Format("{0}pt",size);
         }
 
         public void Draw(VA.Layout.Models.SimpleTextDoc.TextPage textpage)

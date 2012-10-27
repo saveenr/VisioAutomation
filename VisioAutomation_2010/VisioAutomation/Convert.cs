@@ -7,26 +7,6 @@ namespace VisioAutomation
         private const string quote = "\"";
         private const string quotequote = "\"\"";
 
-        public static double PointsToInches(double points)
-        {
-            return points / 72.0;
-        }
-
-        public static double InchestoPoints(double inches)
-        {
-            return inches * 72;
-        }
-
-        public static double DegreesToRadians(double degrees)
-        {
-            return (System.Math.PI / 180) * degrees;
-        }
-
-        public static double RadiansToDegrees(double radians)
-        {
-            return (180 / System.Math.PI) * radians;
-        }
-
         public static short BoolToShort(bool b)
         {
             return b ? ((short)1) : ((short)0);
