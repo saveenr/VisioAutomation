@@ -144,7 +144,6 @@
     <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="Drawing\AlignmentHorizontal.cs" />
     <Compile Include="Drawing\AlignmentVertical.cs" />
-    <Compile Include="Drawing\Transparency.cs" />
     <Compile Include="Format\FormatHelper.cs" />
     <Compile Include="Format\FormatPaintCache.cs" />
     <Compile Include="Format\FormatCategory.cs" />

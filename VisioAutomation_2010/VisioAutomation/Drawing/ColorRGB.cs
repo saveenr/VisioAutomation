@@ -3,7 +3,6 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Drawing
 {
-    [System.Diagnostics.DebuggerDisplay("rgb({_r},{_g},{_b})")]
     public struct ColorRGB
     {
         private readonly byte _r;

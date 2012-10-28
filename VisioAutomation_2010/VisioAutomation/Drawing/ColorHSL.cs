@@ -2,7 +2,6 @@
 
 namespace VisioAutomation.Drawing
 {
-    [System.Diagnostics.DebuggerDisplay("hsl({_h},{_s},{_l})")]
     public struct ColorHSL
     {
         // HSL http://msdn.microsoft.com/en-us/library/ms406705(v=office.12).aspx
@@ -23,7 +22,30 @@ namespace VisioAutomation.Drawing
 
         private void CheckValidVisioHSL()
         {
-            VA.Convert.CheckValidVisioHSL(this.H,this.S,this.L);
+            if (this.H < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("h", "h must be >=0");
+            }
+            if (this.S < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("s", "s must be >=0");
+            }
+            if (this.L < 0)
+            {
+                throw new System.ArgumentOutOfRangeException("l", "l must be >=0");
+            }
+            if (this.H > 255)
+            {
+                throw new System.ArgumentOutOfRangeException("h", "h must be <=255");
+            }
+            if (this.S > 240)
+            {
+                throw new System.ArgumentOutOfRangeException("s", "s must be <=240");
+            }
+            if (this.L > 240)
+            {
+                throw new System.ArgumentOutOfRangeException("l", "l must be <=240");
+            }
         }
 
         public ColorHSL(short h, short s, short l) :
