@@ -37,11 +37,6 @@ namespace VisioAutomation.ShapeSheet
 
         public static string[] _GetFormulasU(object visio_object, short[] stream)
         {
-            if (!(visio_object is IVisio.Page || visio_object is IVisio.Shape))
-            {
-                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");
-            }
-
             int numitems = -1; 
 
             if (visio_object is IVisio.Shape)
@@ -51,6 +46,10 @@ namespace VisioAutomation.ShapeSheet
             else if (visio_object is IVisio.Page)
             {
                 numitems = check_stream_size(stream, 4);
+            }
+            else
+            {
+                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");                
             }
 
             if (numitems < 1)
@@ -70,8 +69,7 @@ namespace VisioAutomation.ShapeSheet
                 var page = (IVisio.Page)visio_object;
                 page.GetFormulasU(stream, out formulas_sa);
             }
-
-
+            
             object[] formulas_obj_array = (object[])formulas_sa;
 
             if (formulas_obj_array.Length != numitems)
@@ -102,11 +100,6 @@ namespace VisioAutomation.ShapeSheet
 
         public static TResult[] _GetResults<TResult>(object visio_object, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            if (!(visio_object is IVisio.Page || visio_object is IVisio.Shape))
-            {
-                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");
-            }
-
             int numitems = -1; 
 
             if (visio_object is IVisio.Shape)
@@ -116,6 +109,10 @@ namespace VisioAutomation.ShapeSheet
             else if (visio_object is IVisio.Page)
             {
                 numitems = check_stream_size(stream, 4);
+            }
+            else
+            {
+                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");
             }
             
             if (numitems < 1)
@@ -152,10 +149,10 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException();
+                string msg = string.Format("Internal error: Unsupported Result Type: {0}", result_type.Name);
+                throw new VA.AutomationException();
             }
-
-
+            
             System.Array results_sa=null;
             if (visio_object is IVisio.Shape)
             {
