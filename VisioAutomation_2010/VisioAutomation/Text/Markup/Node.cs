@@ -1,6 +1,5 @@
 using VA = VisioAutomation;
 using System.Collections.Generic;
-using System.Collections;
 
 namespace VisioAutomation.Text.Markup
 {

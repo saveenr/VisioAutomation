@@ -95,11 +95,7 @@ namespace VisioAutomation.Text.Markup
                         var f = (Field) walkevent.Node;
                         if (!string.IsNullOrEmpty(f.PlaceholderText))
                         {
-                            var field_region = new TextRegion();
-                            field_region.Field = f;
-                            field_region.Start = start_pos;
-                            field_region.Length = f.PlaceholderText.Length;
-
+                            var field_region = new TextRegion(start_pos,f);
                             markupinfo.FieldRegions.Add(field_region);
 
                             // Add text length to parent

@@ -6,12 +6,12 @@ namespace VisioAutomation.Text.Markup
         // mostly it is used to set character and paragraph formating
 
         // optionally a textregion may be associated with a text element
-        public TextElement Element { get; set; }
-        public Field Field { get; set; }
-        public int Start { get; set; }
-        public int Length { get; set; }
+        public TextElement Element { get; internal set; }
+        public Field Field { get; internal set; }
+        public int Start { get; internal set; }
+        public int Length { get; internal set; }
 
-        public TextRegion()
+        internal TextRegion()
         {
             // initialize an empty span
             this.Start = 0;
@@ -19,13 +19,25 @@ namespace VisioAutomation.Text.Markup
 
             // by default no text element is associated with this region
             this.Element = null;
+
+            // by default no field is associated with this region
+            this.Field = null;
+
         }
 
-        public TextRegion(int start, TextElement el) :
+        internal TextRegion(int start, TextElement el) :
             this()
         {
             this.Element = el;
             this.Start = start;
+        }
+
+        internal TextRegion(int start, Field field) :
+            this()
+        {
+            this.Field = field;
+            this.Start = start;
+            this.Length = field.PlaceholderText.Length;
         }
 
         public int End
