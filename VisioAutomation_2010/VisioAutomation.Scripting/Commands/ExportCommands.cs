@@ -106,7 +106,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Session.Selection.Get();
-            ExportSelectionAsXAML2(this.Session.Selection.Get(), filename, s => this.Session.Output.Write(OutputStream.Verbose, s));
+            ExportSelectionToXAML(this.Session.Selection.Get(), filename, s => this.Session.Output.Write(OutputStream.Verbose, s));
         }
 
         public void ExportSelectionToSVGXHTML(string filename)
@@ -122,10 +122,10 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Session.Selection.Get();
-            ExportSelectionAsSVGXHTML2(this.Session.Selection.Get(), filename, s => this.Session.Write(OutputStream.Verbose, s));
+            ExportSelectionToSVGXHTML(this.Session.Selection.Get(), filename, s => this.Session.Write(OutputStream.Verbose, s));
         }
 
-        public static void ExportSelectionAsSVGXHTML2(IVisio.Selection selection, string filename, System.Action<string> verboselog)
+        public static void ExportSelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public static void ExportSelectionAsXAML2(IVisio.Selection sel, string filename, System.Action<string> verboselog)
+        public static void ExportSelectionToXAML(IVisio.Selection sel, string filename, System.Action<string> verboselog)
         {
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
