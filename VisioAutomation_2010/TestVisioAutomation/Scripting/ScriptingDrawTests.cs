@@ -128,18 +128,41 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_DirectedGraph()
+        public void Scripting_DirectedGraph1()
         {
             var ss = GetScriptingSession();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
-            ss.Document.Close(true);
-            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
             ss.Document.Close(true);
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
             ss.Document.Close(true);
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
             ss.Document.Close(true);
         }
+
+        [TestMethod]
+        public void Scripting_DirectedGraph4()
+        {
+            var ss = GetScriptingSession();
+            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
+            ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_DirectedGraph3()
+        {
+            var ss = GetScriptingSession();
+            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
+            ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_DirectedGraph2()
+        {
+            var ss = GetScriptingSession();
+            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
+            ss.Document.Close(true);
+        }
+
 
         private void draw_dg(VA.Scripting.Session scriptingsession, string dg_text)
         {

@@ -77,7 +77,7 @@ namespace VisioPowerTools2010
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {
-                ss.Export.ExportSelectionToXAML(filename);
+                VisioPowerTools2010.ExportExtensions.ExportSelectionToXAML(ss, filename);
             }
             else
             {

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using VA=VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerTools2010
 {

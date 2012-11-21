@@ -187,6 +187,14 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="XamlTune, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>xamltune\XamlTune.exe</HintPath>
+    </Reference>
+    <Reference Include="XamlTuneConverter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>xamltune\XamlTuneConverter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -207,6 +215,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="XamlUtil.cs" />
     <Compile Include="FormCreateStyle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,6 +324,18 @@
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="xamltune\AEdit.dll" />
+    <Content Include="xamltune\AEdit.DomCore.dll" />
+    <Content Include="xamltune\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="xamltune\SharpVectorCss.dll" />
+    <Content Include="xamltune\SharpVectorObjectModel.dll" />
+    <Content Include="xamltune\SharpVectorScripting.dll" />
+    <Content Include="xamltune\SharpVectorXamlRenderingEngine.dll" />
+    <Content Include="xamltune\SharpVectorXml.dll" />
+    <Content Include="xamltune\XamlTune.exe" />
+    <Content Include="xamltune\XamlTuneConverter.dll" />
   </ItemGroup>
   <!-- Include the build rules for a C# project. -->
   <PropertyGroup>

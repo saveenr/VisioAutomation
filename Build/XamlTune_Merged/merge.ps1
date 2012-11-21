@@ -9,4 +9,4 @@ $ilmerge_exe = join-path $script_path "../ILMerge.exe"
 $out_file = join-path $script_path "XamlTuneMerged.dll"
 $primary_assembly = join-path $bin_path "XamlTuneConverter.dll"
 
-& $ilmerge_exe /out:$out_file $primary_assembly /lib:$bin_path /v4 /target:library /log:merge.log /internalize
+& $ilmerge_exe /out:$out_file $primary_assembly /lib:$bin_path /v4 /target:library /log:merge.log
