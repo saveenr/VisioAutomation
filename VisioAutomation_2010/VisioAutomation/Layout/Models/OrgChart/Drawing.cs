@@ -10,8 +10,8 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
         public void Render(IVisio.Application app)
         {
-            var renderer = new OrgChartLayout();
-            renderer.RenderToVisio(this, app);
+            var layout = new OrgChartLayout();
+            layout.RenderToVisio(this, app);
         }
     }
 }
