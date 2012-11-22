@@ -326,16 +326,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="xamltune\AEdit.dll" />
-    <Content Include="xamltune\AEdit.DomCore.dll" />
-    <Content Include="xamltune\ICSharpCode.SharpZipLib.dll" />
-    <Content Include="xamltune\SharpVectorCss.dll" />
-    <Content Include="xamltune\SharpVectorObjectModel.dll" />
-    <Content Include="xamltune\SharpVectorScripting.dll" />
-    <Content Include="xamltune\SharpVectorXamlRenderingEngine.dll" />
-    <Content Include="xamltune\SharpVectorXml.dll" />
-    <Content Include="xamltune\XamlTune.exe" />
-    <Content Include="xamltune\XamlTuneConverter.dll" />
+    <None Include="xamltune\AEdit.dll" />
+    <None Include="xamltune\AEdit.DomCore.dll" />
+    <None Include="xamltune\ICSharpCode.SharpZipLib.dll" />
+    <None Include="xamltune\SharpVectorCss.dll" />
+    <None Include="xamltune\SharpVectorObjectModel.dll" />
+    <None Include="xamltune\SharpVectorScripting.dll" />
+    <None Include="xamltune\SharpVectorXamlRenderingEngine.dll" />
+    <None Include="xamltune\SharpVectorXml.dll" />
+    <None Include="xamltune\XamlTune.exe" />
+    <None Include="xamltune\XamlTuneConverter.dll" />
   </ItemGroup>
   <!-- Include the build rules for a C# project. -->
   <PropertyGroup>

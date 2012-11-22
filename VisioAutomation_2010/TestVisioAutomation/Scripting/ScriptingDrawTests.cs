@@ -133,10 +133,6 @@ namespace TestVisioAutomation
             var ss = GetScriptingSession();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
             ss.Document.Close(true);
-            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
-            ss.Document.Close(true);
-            draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
-            ss.Document.Close(true);
         }
 
         [TestMethod]

@@ -166,15 +166,6 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             }
         }
 
-        private static string handle_multiline_labels(string s)
-        {
-            char[] lineseps = {'|'};
-            string t = s;
-            t = string.Join("\n", t.Split(lineseps).Select(tok => tok.Trim()).ToArray());
-            t = t.Trim();
-            return t;
-        }
-
         private static U? TryGetValue<T, U>(Dictionary<T, U> dic, T t) where U : struct 
         {
             U outval;
@@ -394,7 +385,29 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             // SET TEXT
             if (!string.IsNullOrEmpty(layout_shape.Label))
             {
-                dom_shape.Text = new VA.Text.Markup.TextElement( handle_multiline_labels(layout_shape.Label) ) ;
+                // if the shape contains vertical bars these are treated as line breaks
+                if (layout_shape.Label.IndexOf('|') >= 0)
+                {
+                    // there is at least one line break so this means we have to
+                    // construct multiple text regions
+
+                    // create the root text element
+                    dom_shape.Text = new VA.Text.Markup.TextElement();
+
+                    // Split apart the string
+                    char[] lineseps = { '|' };
+                    var tokens = layout_shape.Label.Split(lineseps).Select(tok => tok.Trim()).ToArray();
+                    // Add an text element for each piece
+                    foreach (string token in tokens)
+                    {
+                        dom_shape.Text.AddText(token);
+                    }
+                }
+                else
+                {
+                    // No line braeaks. Just use a simple TextElement with the label string
+                    dom_shape.Text = new VA.Text.Markup.TextElement(layout_shape.Label);
+                }
             }
 
             // SET SIZE

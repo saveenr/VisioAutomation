@@ -154,7 +154,7 @@ namespace VisioAutomation.Text.Markup
 
             // Find all the regions needing formatting
             var markupinfo = this.GetMarkupInfo();
-            var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1);
+            var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1).ToList();
 
             
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
