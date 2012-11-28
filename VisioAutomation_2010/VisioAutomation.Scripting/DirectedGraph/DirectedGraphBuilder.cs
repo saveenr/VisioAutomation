@@ -201,7 +201,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             VA.Scripting.Session scriptingsession,
             IList<DGMODEL.Drawing> drawings)
         {
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Start Rendering FlowChart");
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Start rendering directed graph");
             var app = scriptingsession.VisioApplication;
 
 
@@ -248,7 +248,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 num_pages_created++;
             }
             scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering pages");
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering flowchart.");
+            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering directed graph.");
         }
 
         private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)
