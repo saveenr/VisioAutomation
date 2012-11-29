@@ -2,13 +2,13 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Close", "Drawing")]
-    public class Close_Drawing : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet("Duplicate", "VisioShape")]
+    public class Duplicate_VisioShape : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Document.Close(true);
+            scriptingsession.Selection.Duplicate();
         }
     }
 }

@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Test", "Drawing")]
-    public class TestDrawing: VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet("Test", "VisioDrawing")]
+    public class Test_VisioDrawing: VisioPS.VisioPSCmdlet
     {
         // checks to see if we hae an active drawing open
         protected override void ProcessRecord()

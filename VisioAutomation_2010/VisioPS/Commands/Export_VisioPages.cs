@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Export", "Pages")]
-    public class Export_Pages : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet("Export", "VisioPages")]
+    public class Export_VisioPages : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] public string Filename;
 

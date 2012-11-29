@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "UserDefinedCell")]
-    public class Get_UserDefinedCell : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet("Get", "VisioUserDefinedCell")]
+    public class Get_VisioUserDefinedCell : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {

@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "Text")]
-    public class Get_Text : VisioPSCmdlet
+    [SMA.Cmdlet("Get", "VisioText")]
+    public class Get_VisioText : VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {
