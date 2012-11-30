@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Import, "OrgChart")]
-    public class Import_OrgChart : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsData.Import, "VisioOrgChart")]
+    public class Import_VisioOrgChart : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = true)]
         public string Filename { get; set; }

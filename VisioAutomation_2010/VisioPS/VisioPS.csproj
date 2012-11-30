@@ -85,7 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Import_OrgChart.cs" />
+    <Compile Include="Commands\Import_VisioOrgChart.cs" />
     <Compile Include="Commands\New_VisioNURBS.cs" />
     <Compile Include="Commands\New_VisioGridLayout.cs" />
     <Compile Include="Commands\Reset_VisioPageOrigin.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="Commands\Remove_VisioShape.cs" />
     <Compile Include="Commands\Get_VisioLayer.cs" />
     <Compile Include="Commands\Invoke_VisioAlignShape.cs" />
-    <Compile Include="Commands\Connect_VisioShape.cs" />
+    <Compile Include="Commands\Invoke_VisioConnect.cs" />
     <Compile Include="Commands\Invoke_VisioDistributeShape.cs" />
     <Compile Include="Commands\Select_VisioShape.cs" />
     <Compile Include="Commands\Set_VisioFormula.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="Commands\Get_VisioConnectionPoint.cs" />
     <Compile Include="Commands\Get_VisioControl.cs" />
     <Compile Include="Commands\Get_VisioDocument.cs" />
-    <Compile Include="Commands\Import_DirectedGraph.cs" />
+    <Compile Include="Commands\Import_VisioDirectedGraph.cs" />
     <Compile Include="Commands\Get_VisioMaster.cs" />
     <Compile Include="Commands\Get_VisioUserDefinedCell.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />

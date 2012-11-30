@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommunications.Connect, "VisioShape")]
-    public class Connect_VisioShape : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioConnect")]
+    public class Invoke_VisioConnect : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Master master;

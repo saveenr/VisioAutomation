@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Import, "DirectedGraph")]
-    public class Import_DirectedGraph : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsData.Import, "VisioDirectedGraph")]
+    public class Import_VisioDirectedGraph : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = true)]
         public string Filename { get; set; }
