@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Draw", "DirectedGraph")]
-    public class Draw_DirectedGraph : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsData.Import, "DirectedGraph")]
+    public class Import_DirectedGraph : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = true)]
         public string Filename { get; set; }
@@ -29,8 +29,8 @@ namespace VisioPS.Commands
                 return;
             }
 
-            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, abs_filename);
-            VA.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(scriptingsession, dg_model);
+            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, abs_filename);            
+            this.WriteObject(dg_model);
         }
     }
 }

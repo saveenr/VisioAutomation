@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Distribute", "VisioShape")]
-    public class Distribute_VisioShape : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioDistributeShape")]
+    public class Invoke_VisioDistributeShape : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public VA.Drawing.Axis Axis { get; set; }

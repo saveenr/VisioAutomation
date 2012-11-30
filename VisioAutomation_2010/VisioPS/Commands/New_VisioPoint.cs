@@ -5,8 +5,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioPoint")]
-    public class Get_VisioPoint : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPoint")]
+    public class New_VisioPoint : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public double[] Doubles { get; set; }

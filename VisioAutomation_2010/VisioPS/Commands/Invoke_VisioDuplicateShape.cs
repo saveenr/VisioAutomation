@@ -2,8 +2,8 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Duplicate", "VisioShape")]
-    public class Duplicate_VisioShape : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioDuplicateShape")]
+    public class Invoke_VisioDuplicateShape : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {

@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Attach", "VisioApplication")]
-    public class Attach_VisioApplication : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommunications.Connect, "VisioApplication")]
+    public class Connect_VisioApplication : VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {

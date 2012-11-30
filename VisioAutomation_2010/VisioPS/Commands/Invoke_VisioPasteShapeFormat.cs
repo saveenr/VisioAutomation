@@ -5,8 +5,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Paste", "VisioFormat")]
-    public class Paste_VisioFormat : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioPasteFormat")]
+    public class Invoke_VisioPasteShapeFormat : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Fill { get; set; }

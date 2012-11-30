@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Align", "VisioShape")]
-    public class Align_VisioShape : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioAlignShape")]
+    public class Invoke_VisioAlignShape : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)] public VerticalAlignment Vertical =
             VerticalAlignment.None;

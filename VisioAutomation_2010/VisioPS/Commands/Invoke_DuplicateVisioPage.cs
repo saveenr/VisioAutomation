@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Duplicate", "VisioPage")]
-    public class Duplicate_VisioPage : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioDuplicatePage")]
+    public class Invoke_DuplicateVisioPage : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         private SMA.SwitchParameter NewDoc;

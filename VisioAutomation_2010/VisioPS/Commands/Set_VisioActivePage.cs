@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("MoveTo", "Page")]
-    public class MoveTo_Page : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioActivePage")]
+    public class Set_VisioActivePage : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public VA.Pages.PageNavigation Flag { get; set; }

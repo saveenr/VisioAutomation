@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Copy", "VisioFormat")]
-    public class Copy_VisioFormat : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioCopyShapeFormat")]
+    public class Invoke_VisioCopyShapeFormat : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Fill { get; set; }
