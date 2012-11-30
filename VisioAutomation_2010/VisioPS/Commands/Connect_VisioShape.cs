@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Connect", "VisioShape")]
+    [SMA.Cmdlet(SMA.VerbsCommunications.Connect, "VisioShape")]
     public class Connect_VisioShape : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]

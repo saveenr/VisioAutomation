@@ -2,7 +2,7 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Remove", "VisioUserDefinedCell")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioUserDefinedCell")]
     public class Remove_VisioUserDefinedCell : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Remove", "VisioCustomProperty")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioCustomProperty")]
     public class Remove_VisioCustomProperty : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

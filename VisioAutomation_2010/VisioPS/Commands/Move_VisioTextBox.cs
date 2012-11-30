@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Move", "VisioTextBox")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Move, "VisioTextBox")]
     public class Move_VisioTextBox : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] public TextBoxPosition Position;

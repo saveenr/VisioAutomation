@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioMaster")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioMaster")]
     public class Get_VisioMaster : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]

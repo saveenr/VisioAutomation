@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioNURBS")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioNURBS")]
     public class New_VisioNURBS : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

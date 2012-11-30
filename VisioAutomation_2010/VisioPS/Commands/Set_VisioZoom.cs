@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Set", "VisioZoom")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioZoom")]
     public class Set_VisioZoom : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] public VA.Scripting.Zoom ZoomLevel =

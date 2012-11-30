@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Update", "VisioShapeSizeFromText")]
+    [SMA.Cmdlet(SMA.VerbsData.Update, "VisioShapeSizeFromText")]
     public class Update_VisioShapeSizeFromText : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] public

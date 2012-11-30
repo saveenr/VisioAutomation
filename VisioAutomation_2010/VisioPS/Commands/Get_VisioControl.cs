@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioControl")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioControl")]
     public class Get_VisioControl : VisioPSCmdlet
     {
 

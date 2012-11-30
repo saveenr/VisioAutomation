@@ -2,7 +2,7 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioSRCResult")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioSRCResult")]
     public class Get_VisioSRCResult : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

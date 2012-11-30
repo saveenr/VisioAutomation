@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioLine")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioLine")]
     public class New_VisioLine : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

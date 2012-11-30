@@ -2,7 +2,7 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Redo", "Visio")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Redo, "Visio")]
     public class Redo_Visio : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()

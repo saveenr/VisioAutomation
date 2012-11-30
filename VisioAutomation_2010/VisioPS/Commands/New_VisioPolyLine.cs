@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioPolyLine")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPolyLine")]
     public class New_VisioPolyLine : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

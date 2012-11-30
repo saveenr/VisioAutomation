@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Open", "VisioDocument")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Open, "VisioDocument")]
     public class Open_VisioDocument : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

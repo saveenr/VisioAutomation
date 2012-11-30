@@ -2,7 +2,7 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Close", "VisioDocument")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Close, "VisioDocument")]
     public class Close_VisioDocument: VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()

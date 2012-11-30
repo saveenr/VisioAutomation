@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Update", "VisioPageSize")]
+    [SMA.Cmdlet(SMA.VerbsData.Update, "VisioPageSize")]
     public class Update_VisioPageSize : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioConnection")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioConnection")]
     public class New_VisioConnection : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

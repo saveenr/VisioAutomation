@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Set", "VisioUserDefinedCell")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioUserDefinedCell")]
     public class Set_VisioUserDefinedCell : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

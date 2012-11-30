@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Set", "VisioSelection")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioSelection")]
     public class Set_VisioSelection : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]

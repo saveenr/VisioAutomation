@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioControl")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioControl")]
     public class New_VisioControl : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]

@@ -2,7 +2,7 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioSRCFormula")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioSRCFormula")]
     public class Get_VisioSRCFormula : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

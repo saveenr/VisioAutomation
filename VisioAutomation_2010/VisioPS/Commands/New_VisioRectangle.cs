@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioRectangle")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioRectangle")]
     public class New_VisioRectangle : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

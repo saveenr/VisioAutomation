@@ -4,7 +4,7 @@ using VA=VisioAutomation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Update", "VisioShapeSheet")]
+    [SMA.Cmdlet(SMA.VerbsData.Update, "VisioShapeSheet")]
     public class Update_VisioShapeSheet : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

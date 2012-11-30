@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioLayer")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioLayer")]
     public class Get_VisioLayer : VisioPSCmdlet
     {
 

@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Set", "VisioFormula")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioFormula")]
     public class Set_VisioFormula : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

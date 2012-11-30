@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioConnectionPoint")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
     public class Get_VisioConnectionPoint : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()

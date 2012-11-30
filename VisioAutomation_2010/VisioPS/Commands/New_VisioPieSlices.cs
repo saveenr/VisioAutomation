@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioPieSlices")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPieSlices")]
     public class New_VisioPieSlices : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

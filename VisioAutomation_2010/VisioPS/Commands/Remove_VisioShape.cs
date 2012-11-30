@@ -2,7 +2,7 @@
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Remove", "VisioShape")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioShape")]
     public class Remove_VisioShape : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()

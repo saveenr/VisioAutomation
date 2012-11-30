@@ -4,7 +4,7 @@ using VA=VisioAutomation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioShapeSheetUpdate")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioShapeSheetUpdate")]
     public class New_VisioShapeSheetUpdate : VisioPSCmdlet
     {
         protected override void ProcessRecord()

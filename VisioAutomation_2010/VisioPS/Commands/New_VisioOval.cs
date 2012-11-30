@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioOval")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioOval")]
     public class New_VisioOval : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

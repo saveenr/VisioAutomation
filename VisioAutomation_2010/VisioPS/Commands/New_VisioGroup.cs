@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioGroup")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioGroup")]
     public class New_VisioGroup : VisioPSCmdlet
     {
         protected override void ProcessRecord()

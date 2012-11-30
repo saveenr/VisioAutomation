@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("New", "VisioGridLayout")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioGridLayout")]
     public class New_VisioGridLayout : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

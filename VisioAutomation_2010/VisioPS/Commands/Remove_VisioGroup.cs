@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Remove", "VisioGroup")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioGroup")]
     public class Remove_VisioGroup : VisioPSCmdlet
     {
         protected override void ProcessRecord()

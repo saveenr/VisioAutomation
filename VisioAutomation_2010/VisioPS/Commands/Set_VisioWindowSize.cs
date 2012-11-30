@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Set", "VisioWindowSize")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioWindowSize")]
     public class Set_VisioWindowSize : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

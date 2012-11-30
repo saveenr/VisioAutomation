@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Test", "VisioDrawing")]
+    [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, "VisioDrawing")]
     public class Test_VisioDrawing: VisioPS.VisioPSCmdlet
     {
         // checks to see if we hae an active drawing open

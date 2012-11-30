@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioEdge")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioEdge")]
     public class Get_VisioEdge : VisioPSCmdlet
     {
         protected override void ProcessRecord()

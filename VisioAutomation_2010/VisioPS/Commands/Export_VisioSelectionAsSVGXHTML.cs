@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Export", "VisioSelectionAsSVGXHTML")]
+    [SMA.Cmdlet(SMA.VerbsData.Export, "VisioSelectionAsSVGXHTML")]
     public class Export_VisioSelectionAsSVGXHTML : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

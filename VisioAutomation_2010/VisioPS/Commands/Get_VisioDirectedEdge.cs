@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Get", "VisioDirectedEdge")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
     public class Get_VisioDirectedEdge : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 1, Mandatory = false)]

@@ -2,7 +2,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet("Move", "VisioShape")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Move, "VisioShape")]
     public class Move_VisioShape : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
