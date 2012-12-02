@@ -8,10 +8,23 @@ namespace VisioPS.Commands
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] public string Filename;
 
+        [SMA.Parameter(Position = 1, Mandatory = false)]
+        public SMA.SwitchParameter AllPages;
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            scriptingsession.Export.ExportPageToFile(this.Filename);
+
+            if (!this.AllPages)
+            {
+                // this means use the current page 
+                var scriptingsession = this.ScriptingSession;
+                scriptingsession.Export.ExportPageToFile(this.Filename);
+            }
+            else
+            {
+                // is -AllPages is set then export them all
+                var scriptingsession = this.ScriptingSession;
+                scriptingsession.Export.ExportPagesToFiles(this.Filename);
+            }
         }
     }
 }

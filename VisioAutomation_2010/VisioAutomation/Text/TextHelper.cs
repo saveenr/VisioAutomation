@@ -10,6 +10,12 @@ namespace VisioAutomation.Text
     {
         public static void FitShapeToText(IVisio.Page page, IEnumerable<IVisio.Shape> shapes)
         {
+            var minsize = new VA.Drawing.Size(0, 0);
+            FitShapeToText(page, shapes, minsize);
+        }
+
+        public static void FitShapeToText(IVisio.Page page, IEnumerable<IVisio.Shape> shapes, VA.Drawing.Size minsize)
+        {
             if (page == null)
             {
                 throw new System.ArgumentNullException("page");
@@ -30,7 +36,11 @@ namespace VisioAutomation.Text
                 var wh_bounding_box = shape.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightWH).Size;
 
                 double max_w = System.Math.Max(text_bounding_box.Width, wh_bounding_box.Width);
+                max_w = System.Math.Max(max_w , minsize.Width);
+
                 double max_h = System.Math.Max(text_bounding_box.Height, wh_bounding_box.Height);
+                max_h = System.Math.Max(max_h , minsize.Height);
+
                 var max_size = new VA.Drawing.Size(max_w, max_h);
                 new_sizes.Add(max_size);
             }

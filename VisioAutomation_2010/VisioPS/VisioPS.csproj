@@ -93,7 +93,6 @@
     <Compile Include="Commands\Update_VisioShapeSheet.cs" />
     <Compile Include="Commands\New_VisioShapeSheetUpdate.cs" />
     <Compile Include="Commands\Set_VisioTextStyle.cs" />
-    <Compile Include="Commands\New_VisioPoint.cs" />
     <Compile Include="Commands\New_VisioMaster.cs" />
     <Compile Include="Commands\New_VisioStencil.cs" />
     <Compile Include="Commands\Remove_VisioUserDefinedCell.cs" />
@@ -103,10 +102,10 @@
     <Compile Include="Commands\Close_VisioDrawing.cs" />
     <Compile Include="Commands\New_VisioShape.cs" />
     <Compile Include="Commands\Invoke_VisioDuplicateShape.cs" />
-    <Compile Include="Commands\Export_VisioSelectionAsSVGXHTML.cs" />
+    <Compile Include="Commands\Export_VisioSelectionAsXHTML.cs" />
     <Compile Include="Commands\Redo_Visio.cs" />
     <Compile Include="Commands\Save_VisioDocument.cs" />
-    <Compile Include="Commands\Test_VisioDrawing.cs" />
+    <Compile Include="Commands\Test_VisioDocument.cs" />
     <Compile Include="Commands\Test_VisioSelectedShapes.cs" />
     <Compile Include="Commands\Remove_VisioShape.cs" />
     <Compile Include="Commands\Get_VisioLayer.cs" />
@@ -121,7 +120,6 @@
     <Compile Include="Commands\New_VisioPieSlices.cs" />
     <Compile Include="Commands\New_VisioPolyLine.cs" />
     <Compile Include="Commands\Export_VisioPage.cs" />
-    <Compile Include="Commands\Export_VisioPages.cs" />
     <Compile Include="enums\GetShapeFlags.cs" />
     <Compile Include="Commands\Get_VisioConnectionPoint.cs" />
     <Compile Include="Commands\Get_VisioControl.cs" />
@@ -135,7 +133,6 @@
     <Compile Include="Commands\New_VisioDocument.cs" />
     <Compile Include="enums\SelectionOperation.cs" />
     <Compile Include="enums\TextBoxPosition.cs" />
-    <Compile Include="enums\PageSizeOperations.cs" />
     <Compile Include="Commands\Open_VisioDocument.cs" />
     <Compile Include="enums\PageOrientation.cs" />
     <Compile Include="enums\ParagraphHorizontalAlignment.cs" />
@@ -143,7 +140,7 @@
     <Compile Include="Commands\Set_VisioUserDefinedCell.cs" />
     <Compile Include="Commands\Invoke_VisioStackShape.cs" />
     <Compile Include="enums\TextVerticalAlignment.cs" />
-    <Compile Include="Commands\Update_VisioShapeSizeFromText.cs" />
+    <Compile Include="Commands\Invoke_VisioResizeShapeToFitText.cs" />
     <Compile Include="Commands\Connect_VisioApplication.cs" />
     <Compile Include="Commands\Get_VisioDirectedEdge.cs" />
     <Compile Include="Commands\Invoke_VisioCopyShapeFormat.cs" />
@@ -154,7 +151,7 @@
     <Compile Include="Commands\New_VisioLine.cs" />
     <Compile Include="Commands\New_VisioOval.cs" />
     <Compile Include="Commands\New_VisioRectangle.cs" />
-    <Compile Include="Commands\Invoke_DuplicateVisioPage.cs" />
+    <Compile Include="Commands\Invoke_VisioDuplicatePage.cs" />
     <Compile Include="Commands\Get_VisioEdge.cs" />
     <Compile Include="Commands\Get_VisioPage.cs" />
     <Compile Include="Commands\Get_CustomProperty.cs" />
@@ -167,7 +164,7 @@
     <Compile Include="Commands\New_VisioApplication.cs" />
     <Compile Include="Commands\Move_VisioShape.cs" />
     <Compile Include="objects\CmdletExtensions.cs" />
-    <Compile Include="Commands\Update_VisioPageSize.cs" />
+    <Compile Include="Commands\Invoke_VisioResizePageToFitContents.cs" />
     <Compile Include="Commands\Set_VisioWindowSize.cs" />
     <Compile Include="Commands\Set_VisioSelection.cs" />
     <Compile Include="enums\VerticalAlignment.cs" />
@@ -175,7 +172,6 @@
     <Compile Include="Commands\Set_VisioPageLayout.cs" />
     <Compile Include="Commands\Set_VisioCustomProperty.cs" />
     <Compile Include="Commands\Set_VisioText.cs" />
-    <Compile Include="Commands\Set_VisioZoomLevel.cs" />
     <Compile Include="Commands\Stop_VisioApplication.cs" />
     <Compile Include="Commands\Undo_Visio.cs" />
     <Compile Include="Commands\Remove_VisioGroup.cs" />
@@ -195,26 +191,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="samples\flowcharts\flowchart-sample-1.xml" />
-    <Content Include="samples\flowcharts\flowchart-sample-2.xml" />
-    <Content Include="samples\flowcharts\flowchart-sample-3.xml" />
-    <Content Include="samples\flowcharts\flowchart-sample-4.xml" />
-    <Content Include="samples\orgcharts\orgchart-sample-1.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="VisioPS.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="scripts\demo_3_draw_linegrid.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="scripts\demo_2_draw_and_drop.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="scripts\demo_1_emptydoc.ps1">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="samples\scripts\batch-create-flowcharts.ps1" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
