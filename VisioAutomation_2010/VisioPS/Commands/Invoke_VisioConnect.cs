@@ -8,13 +8,13 @@ namespace VisioPS.Commands
     public class Invoke_VisioConnect : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Master master;
+        public IVisio.Master Master;
 
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
 
-            scriptingsession.Connection.Connect(master);                
+            scriptingsession.Connection.Connect(Master);                
         }
     }
 }

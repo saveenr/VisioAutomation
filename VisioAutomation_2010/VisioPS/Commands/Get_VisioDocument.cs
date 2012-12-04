@@ -37,7 +37,6 @@ namespace VisioPS.Commands
                 var docs = application.Documents;
                 var doc = docs[ Name ];
                 this.WriteObject(doc);
-                                
             }
         }
     }

@@ -9,22 +9,22 @@ namespace VisioPS.Commands
     public class Get_VisioShape : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
-        public GetShapeFlags Flags = GetShapeFlags.Selected;
+        public GetVisioShapeFlags Flags = GetVisioShapeFlags.Selected;
 
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            if (this.Flags == GetShapeFlags.Selected)
+            if (this.Flags == GetVisioShapeFlags.Selected)
             {
                 var shapes = scriptingsession.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
                 this.WriteObject(shapes);
             }
-            else if (this.Flags == GetShapeFlags.SelectedNested)
+            else if (this.Flags == GetVisioShapeFlags.SelectedNested)
             {
                 var shapes = scriptingsession.Selection.GetShapes(VA.Selection.ShapesEnumeration.ExpandGroups);
                 this.WriteObject(shapes);
             }
-            else if (this.Flags == GetShapeFlags.Page)
+            else if (this.Flags == GetVisioShapeFlags.Page)
             {
                 var application = scriptingsession.VisioApplication;
                 var active_page = application.ActivePage;

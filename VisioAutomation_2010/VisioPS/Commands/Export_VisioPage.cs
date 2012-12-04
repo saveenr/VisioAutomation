@@ -10,6 +10,7 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(Position = 1, Mandatory = false)]
         public SMA.SwitchParameter AllPages;
+
         protected override void ProcessRecord()
         {
 

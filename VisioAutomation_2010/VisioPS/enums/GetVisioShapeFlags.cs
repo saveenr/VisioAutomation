@@ -1,6 +1,6 @@
 namespace VisioPS
 {
-    public enum GetShapeFlags
+    public enum GetVisioShapeFlags
     {
         Page,
         Selected,
