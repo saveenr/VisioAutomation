@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Move, "VisioShape")]
-    public class Move_VisioShape : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioNudgeShape")]
+    public class Invoke_VisioNudgeShape : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public double Left { get; set; }
@@ -16,8 +16,7 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(Mandatory = false)]
         public double Down { get; set; }
-
-
+        
         protected override void ProcessRecord()
         {
             double h = Right - Left;

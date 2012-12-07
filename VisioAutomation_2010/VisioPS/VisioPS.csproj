@@ -159,10 +159,9 @@
     <Compile Include="Commands\Get_VisioText.cs" />
     <Compile Include="Commands\Get_VisioApplication.cs" />
     <Compile Include="Commands\New_VisioGroup.cs" />
-    <Compile Include="Commands\Move_VisioTextBox.cs" />
     <Compile Include="Commands\New_VisioPage.cs" />
     <Compile Include="Commands\New_VisioApplication.cs" />
-    <Compile Include="Commands\Move_VisioShape.cs" />
+    <Compile Include="Commands\Invoke_VisioNudgeShape.cs" />
     <Compile Include="objects\CmdletExtensions.cs" />
     <Compile Include="Commands\Invoke_VisioResizePageToFitContents.cs" />
     <Compile Include="Commands\Set_VisioWindowSize.cs" />
