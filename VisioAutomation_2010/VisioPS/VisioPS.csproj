@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Get_VisioAutomationScriptingSession.cs" />
     <Compile Include="Commands\Get_VisioAutomationAssembly.cs" />
     <Compile Include="Commands\Import_VisioOrgChart.cs" />
     <Compile Include="Commands\New_VisioNURBS.cs" />
