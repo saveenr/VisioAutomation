@@ -170,11 +170,11 @@ if (!(test-path $product_wxs ))
 &$candleexe $modules_wxs $product_wxs 
 if (!(test-path $modules_wixobj ))
 {
-    Write-Error Did not produce $modules_wixobj 
+    Write-Error "Did not produce $modules_wixobj"
 }
 if (!(test-path $product_wixobj ))
 {
-    Write-Error Did not produce $product_wixobj
+    Write-Error "Did not produce $product_wixobj"
 }
 
 # ----------------------------------------
@@ -183,12 +183,12 @@ if (!(test-path $product_wixobj ))
 &$lightexe -ext WixUIExtension -out $output_msi_file $modules_wixobj $product_wixobj -b $binpath -sice:ICE91 -sice:ICE69 -sice:ICE38 -sice:ICE57 -sice:ICE64 -sice:ICE204
 if (!(test-path $productpdb))
 {
-    Write-Error Did not produce $productpdb
+    Write-Error "Did not produce $productpdb"
 }
 
 if (!(test-path $output_msi_file))
 {
-    Write-Error Did not produce $output_msi_file
+    Write-Error "Did not produce $output_msi_file"
 }
 
 
