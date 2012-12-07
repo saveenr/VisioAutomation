@@ -96,11 +96,11 @@
     <Compile Include="Layout\Models\BoxLayout\Container.cs" />
     <Compile Include="Layout\Models\BoxLayout\Direction.cs" />
     <Compile Include="Layout\Models\BoxLayout\Node.cs" />
-    <Compile Include="Layout\Models\Container\Container.cs" />
-    <Compile Include="Layout\Models\Container\ContainerItem.cs" />
-    <Compile Include="Layout\Models\Container\ContainerLayout.cs" />
-    <Compile Include="Layout\Models\Container\Formatting.cs" />
-    <Compile Include="Layout\Models\Container\LayoutOptions.cs" />
+    <Compile Include="Layout\Models\ContainerLayout\Container.cs" />
+    <Compile Include="Layout\Models\ContainerLayout\ContainerItem.cs" />
+    <Compile Include="Layout\Models\ContainerLayout\ContainerLayout.cs" />
+    <Compile Include="Layout\Models\ContainerLayout\Formatting.cs" />
+    <Compile Include="Layout\Models\ContainerLayout\LayoutOptions.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Connector.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Drawing.cs" />
     <Compile Include="Layout\Models\DirectedGraph\LayoutOptions.cs" />
