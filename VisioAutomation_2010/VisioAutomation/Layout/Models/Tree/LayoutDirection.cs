@@ -7,11 +7,4 @@
         Left = 2,
         Right = 3
     }
-
-    public enum ConnectorType
-    {
-        DynamicConnector,
-        CurvedBezier,
-        PolyLine
-    }
 }

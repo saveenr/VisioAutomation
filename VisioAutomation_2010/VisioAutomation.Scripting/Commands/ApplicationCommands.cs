@@ -8,23 +8,14 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ApplicationCommands : CommandSet
     {
+        public ApplicationWindowCommands Window { get; private set; }
+
         public ApplicationCommands(Session session) :
             base(session)
         {
-
+            this.Window = new ApplicationWindowCommands(this.Session);
         }
 
-        public void WindowToFront()
-        {
-            var app = this.Session.VisioApplication;
-
-            if (app == null)
-            {
-                return;
-            }
-
-            VA.Application.ApplicationHelper.BringWindowToTop(app);
-        }
 
         public void ForceClose()
         {
@@ -33,39 +24,6 @@ namespace VisioAutomation.Scripting.Commands
             VA.Documents.DocumentHelper.ForceCloseAll(documents);
             application.Quit(true);
             this.Session.VisioApplication = null;
-        }
-
-        public System.Drawing.Size GetWindowSize()
-        {
-            var rect = this.Session.VisioApplication.Window.GetWindowRect();
-            var size = new System.Drawing.Size(rect.Width, rect.Height);
-            return size;
-        }
-
-        /// <summary>
-        /// Sets the width and height (in pixels) of the attached Visio application window
-        /// </summary>
-        /// <param name="scripting_session"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void SetWindowSize(int width, int height)
-        {
-            if (width <= 0)
-            {
-                this.Session.Write(OutputStream.Error, "width must be positive");
-                return;
-            }
-
-            if (height <= 0)
-            {
-                this.Session.Write(OutputStream.Error, "height must be positive");
-                return;
-            }
-
-            var r = this.Session.VisioApplication.Window.GetWindowRect();
-            r.Width = width;
-            r.Height = height;
-            this.Session.VisioApplication.Window.SetWindowRect(r);
         }
 
         public IVisio.Application Attach()

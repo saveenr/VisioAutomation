@@ -15,7 +15,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Application.SetWindowSize(Width, Height);
+            scriptingsession.Application.Window.SetSize(Width, Height);
         }
     }
 }

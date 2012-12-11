@@ -23,7 +23,6 @@ namespace VisioAutomation.Layout.Models.Tree
             }
             renderer.RenderToVisio(this, page);
         }
-
         
         public IEnumerable<Node> Nodes
         {

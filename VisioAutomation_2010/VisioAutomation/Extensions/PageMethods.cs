@@ -47,8 +47,17 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<VA.Drawing.Point> points)
         {
+            short degree = 3;
+            short flags = 0;
+            var shape = page.DrawBezier(points, degree, flags);
+            return shape;
+        }
+
+        public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<VA.Drawing.Point> points, short degree, short flags)
+        {
+            // DrawBezier method: http://msdn.microsoft.com/en-us/library/office/ff766273.aspx
             var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
-            var shape = page.DrawBezier(doubles_array, 3, 0);
+            var shape = page.DrawBezier(doubles_array, degree, flags);
             return shape;
         }
 
