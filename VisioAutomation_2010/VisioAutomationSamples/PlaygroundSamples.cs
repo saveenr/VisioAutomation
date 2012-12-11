@@ -144,7 +144,9 @@ namespace VisioAutomationSamples
             }
 
             update.Execute(page);
-            page.ResizeToFitContents(1, 1);
+
+            var bordersize = new VA.Drawing.Size(1, 1);
+            page.ResizeToFitContents(bordersize);
         }
     }
 }

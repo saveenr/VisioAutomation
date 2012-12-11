@@ -31,8 +31,10 @@ namespace TestVisioAutomation
                 cx += 2.5;
             }
 
-            page.ResizeToFitContents(1,1);
-            //doc.Close(true);
+            var bordersize = new VA.Drawing.Size(1,1);
+            page.ResizeToFitContents(bordersize);
+
+            doc.Close(true);
         }
 
         [TestMethod]
@@ -57,7 +59,8 @@ namespace TestVisioAutomation
                 cx += 2.5;
             }
 
-            page.ResizeToFitContents(1, 1);
+            var bordersize = new VA.Drawing.Size(1,1);
+            page.ResizeToFitContents(bordersize);
             doc.Close(true);
         }
 

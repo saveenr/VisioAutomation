@@ -65,11 +65,14 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             Assert.AreEqual(this.StandardPageSize, page1.GetSize());
 
-            page1.SetSize(10, 5);
-            Assert.AreEqual(new VA.Drawing.Size(10, 5), page1.GetSize());
+            var page_size1 = new VA.Drawing.Size(10, 5);
+            var page_size2 = new VA.Drawing.Size(6, 3);
 
-            page1.SetSize(6, 3);
-            Assert.AreEqual(new VA.Drawing.Size(6, 3), page1.GetSize());
+            page1.SetSize(page_size1);
+            Assert.AreEqual(page_size1, page1.GetSize());
+
+            page1.SetSize(page_size2);
+            Assert.AreEqual(page_size2, page1.GetSize());
             page1.Delete(0);
         }
 
