@@ -93,7 +93,7 @@
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Layout\BoxLayoutTests.cs" />
     <Compile Include="Other\ShapeGeometryHelper_Tests.cs" />
-    <Compile Include="Drawing\SnappingGraidTests.cs" />
+    <Compile Include="Drawing\SnappingGridTests.cs" />
     <Compile Include="Extensions\ColorsExtensions.cs" />
     <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Extensions\LayersExtensions.cs" />

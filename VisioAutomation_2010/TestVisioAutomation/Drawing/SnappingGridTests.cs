@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class SnappingGraidTests : VisioAutomationTest
+    public class SnappingGridTests : VisioAutomationTest
     {
         [TestMethod]
         public void Snap1()

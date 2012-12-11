@@ -13,9 +13,9 @@ namespace VisioAutomation.Drawing
         {
         }
 
-        public BezierCurve(VA.Drawing.Point[] points, int degree)
+        public BezierCurve(VA.Drawing.Point[] controlpoints, int degree)
         {
-            this.ControlPoints = points;
+            this.ControlPoints = controlpoints;
             this.Degree = degree;
         }
 

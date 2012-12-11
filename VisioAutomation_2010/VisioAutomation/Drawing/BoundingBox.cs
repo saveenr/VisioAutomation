@@ -72,7 +72,7 @@ namespace VisioAutomation.Drawing
             }
         }
 
-        public void Add( VA.Drawing.Rectangle r)
+        public void Add(VA.Drawing.Rectangle r)
         {
             this.Add(r.LowerLeft);
             this.Add(r.UpperRight);
