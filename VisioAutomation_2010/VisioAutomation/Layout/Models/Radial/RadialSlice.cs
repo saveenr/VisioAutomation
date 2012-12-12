@@ -56,7 +56,7 @@ namespace VisioAutomation.Layout.Models.Radial
 
         protected static List<T> GetSlicesFromValues<T>(Point center, IList<double> values, System.Func<Sector,T> make_slice)
         {
-            var sectors = VA.Layout.Models.Radial.Sector.GetSectorsFromValues(values);
+            var sectors = RadialSlice.GetSectorsFromValues(values);
             var slices = new List<T>(values.Count);
             foreach (var sector in sectors)
             {
@@ -65,6 +65,27 @@ namespace VisioAutomation.Layout.Models.Radial
             }
             return slices;
         }
+
+        private static List<Sector> GetSectorsFromValues(IList<double> values)
+        {
+            double sectors = values.Sum();
+            var slices = new List<Sector>(values.Count);
+            double start_angle = 0;
+            foreach (int i in Enumerable.Range(0, values.Count))
+            {
+                double cur_val = values[i];
+                double cur_val_norm = cur_val / sectors;
+                double cur_angle = cur_val_norm * System.Math.PI * 2.0;
+                double end_angle = start_angle + cur_angle;
+
+                var ps = new VA.Layout.Models.Radial.Sector(start_angle, end_angle);
+                slices.Add(ps);
+
+                start_angle += cur_angle;
+            }
+            return slices;
+        }
+
 
 
         protected void check_normal_angle()
