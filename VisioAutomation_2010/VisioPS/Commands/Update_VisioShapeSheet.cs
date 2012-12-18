@@ -1,6 +1,7 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
+using VisioPS.Extensions;
 
 namespace VisioPS.Commands
 {
@@ -19,7 +20,6 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-
             scriptingsession.ShapeSheet.Update(this.Update, this.BlastGuards, this.TestCircular);
         }
     }
