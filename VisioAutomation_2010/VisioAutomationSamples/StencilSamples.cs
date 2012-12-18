@@ -44,7 +44,8 @@ namespace VisioAutomationSamples
             // Draw the masters
             var shapeids = page.DropManyU(masters, centerpoints);
 
-            page.ResizeToFitContents(1,1);
+            var bordersize = new VA.Drawing.Size(1,1);
+            page.ResizeToFitContents(bordersize);
         }
     }
 }

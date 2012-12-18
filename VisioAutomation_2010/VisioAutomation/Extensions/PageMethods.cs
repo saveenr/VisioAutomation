@@ -5,17 +5,11 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Extensions
 {
-    public static partial class PageMethods
+    public static class PageMethods
     {
         public static void Activate(this IVisio.Page page)
         {
             VA.Pages.PageHelper.Activate(page);
-        }
-
-        public static void ResizeToFitContents(this IVisio.Page page, double borderwidth, double borderheight)
-        {
-            var bordersize = new VA.Drawing.Size(borderwidth, borderheight);
-            VA.Pages.PageHelper.ResizeToFitContents(page, bordersize);
         }
 
         public static void ResizeToFitContents(this IVisio.Page page, VA.Drawing.Size bordersize)
@@ -31,11 +25,6 @@ namespace VisioAutomation.Extensions
         public static void SetSize(this IVisio.Page page, VA.Drawing.Size size)
         {
             VA.Pages.PageHelper.SetSize(page, size);
-        }
-
-        public static void SetSize(this IVisio.Page page, double x, double y)
-        {
-            VA.Pages.PageHelper.SetSize(page, new VA.Drawing.Size(x, y));
         }
 
         public static IVisio.Shape DrawLine(this IVisio.Page page, VA.Drawing.Point p1, VA.Drawing.Point p2)
@@ -58,8 +47,17 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<VA.Drawing.Point> points)
         {
+            short degree = 3;
+            short flags = 0;
+            var shape = page.DrawBezier(points, degree, flags);
+            return shape;
+        }
+
+        public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<VA.Drawing.Point> points, short degree, short flags)
+        {
+            // DrawBezier method: http://msdn.microsoft.com/en-us/library/office/ff766273.aspx
             var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
-            var shape = page.DrawBezier(doubles_array, 3, 0);
+            var shape = page.DrawBezier(doubles_array, degree, flags);
             return shape;
         }
 

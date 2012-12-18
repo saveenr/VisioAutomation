@@ -106,6 +106,7 @@
     <Compile Include="Layout\Models\DirectedGraph\LayoutOptions.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Node.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Shape.cs" />
+    <Compile Include="Layout\Models\Tree\ConnectorType.cs" />
     <Compile Include="Layout\PageLayout\CompactTreeLayout.cs" />
     <Compile Include="Layout\PageLayout\CircularLayout.cs" />
     <Compile Include="Layout\PageLayout\HierarchyLayout.cs" />

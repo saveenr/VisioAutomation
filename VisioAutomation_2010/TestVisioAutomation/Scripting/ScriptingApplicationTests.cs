@@ -12,15 +12,15 @@ namespace TestVisioAutomation
         {
             var ss = GetScriptingSession();
 
-            var old_size = ss.Application.GetWindowSize();
+            var old_size = ss.Application.Window.GetSize();
             var desired_size = new System.Drawing.Size(600, 800);
 
-            ss.Application.SetWindowSize(desired_size.Width, desired_size.Height);
+            ss.Application.Window.SetSize(desired_size.Width, desired_size.Height);
 
-            var actual_size = ss.Application.GetWindowSize();
+            var actual_size = ss.Application.Window.GetSize();
             Assert.AreEqual(desired_size, actual_size);
-            ss.Application.SetWindowSize(old_size.Width, old_size.Height);
-            actual_size = ss.Application.GetWindowSize();
+            ss.Application.Window.SetSize(old_size.Width, old_size.Height);
+            actual_size = ss.Application.Window.GetSize();
             Assert.AreEqual(old_size, actual_size);
         }
 
@@ -47,7 +47,7 @@ namespace TestVisioAutomation
         public void Scripting_Test_App_to_Front()
         {
             var ss = GetScriptingSession();
-            ss.Application.WindowToFront();
+            ss.Application.Window.ToFront();
         }
 
         [TestMethod]

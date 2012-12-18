@@ -8,7 +8,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class TransitiveClosure_Test
     {
-
         [TestMethod]
         public void TestTransitiveClosure0()
         {

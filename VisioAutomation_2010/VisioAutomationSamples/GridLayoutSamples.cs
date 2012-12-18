@@ -30,7 +30,9 @@ namespace VisioAutomationSamples
             const int num_rows = 5;
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            page.SetSize(10, 10);
+
+            var page_size = new VA.Drawing.Size(10, 10);
+            page.SetSize(page_size);
 
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];
@@ -59,7 +61,9 @@ namespace VisioAutomationSamples
             }
 
             update.Execute(page);
-            page.ResizeToFitContents(1,1);
+
+            var bordersize = new VA.Drawing.Size(1,1);
+            page.ResizeToFitContents(bordersize);
         }
     }
 }

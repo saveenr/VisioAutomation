@@ -158,7 +158,9 @@ namespace VisioAutomationSamples
             }
 
             domshapescol.Render(page);
-            page.ResizeToFitContents(0.5, 0.5);
+
+            var bordersize = new VA.Drawing.Size(0.5, 0.5);
+            page.ResizeToFitContents(bordersize);
         }
 
         public static void FontGlyphComparision2(IVisio.Document doc, string[] fontnames, List<string> samplechars)
@@ -216,7 +218,9 @@ namespace VisioAutomationSamples
 
                 var page = doc.Pages.Add();
                 domshapescol.Render(page);
-                page.ResizeToFitContents(0.5, 0.5);
+
+                var bordersize = new VA.Drawing.Size(0.5, 0.5);
+                page.ResizeToFitContents(bordersize);
             }
         }
 
@@ -266,7 +270,8 @@ namespace VisioAutomationSamples
 
                 domshapescol.Render(page);
 
-                page.ResizeToFitContents(0.5, 0.5);
+                var bordersize = new VA.Drawing.Size(0.5, 0.5);
+                page.ResizeToFitContents(bordersize);
             }
         }
     }

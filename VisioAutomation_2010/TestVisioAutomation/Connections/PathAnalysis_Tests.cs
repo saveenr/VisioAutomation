@@ -15,9 +15,6 @@ namespace TestVisioAutomation
         public void VerifyEdgesAndTransitiveClosure()
         {
             var page1 = GetNewPage();
-            var basic_stencil = page1.Application.Documents.OpenStencil("basic_u.vss");
-            var basic_masters = basic_stencil.Masters;
-
             var connectors_stencil = page1.Application.Documents.OpenStencil("connec_u.vss");
             var connectors_masters = connectors_stencil.Masters;
 
