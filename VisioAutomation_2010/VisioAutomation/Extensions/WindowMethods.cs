@@ -24,6 +24,7 @@ namespace VisioAutomation.Extensions
 
         public static VA.Drawing.Rectangle GetViewRect(this IVisio.Window window)
         {
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ff765846.aspx
             double left, top, height, width;
             window.GetViewRect(out left, out top, out width, out height);
             double x0 = left;
@@ -37,6 +38,7 @@ namespace VisioAutomation.Extensions
 
         public static System.Drawing.Rectangle GetWindowRect(this IVisio.Window window)
         {
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx
             int left, top, height, width;
             window.GetWindowRect(out left, out top, out width, out height);
             var r = new System.Drawing.Rectangle(left, top, width, height);
@@ -47,6 +49,7 @@ namespace VisioAutomation.Extensions
             this IVisio.Window window, 
             System.Drawing.Rectangle rect)
         {
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ff769098.aspx
             window.SetWindowRect(rect.Left, rect.Top, rect.Width, rect.Height);
         }
 
@@ -54,6 +57,7 @@ namespace VisioAutomation.Extensions
             this IVisio.Window window, 
             VA.Drawing.Rectangle rect)
         {
+            // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx
             window.SetViewRect(rect.Left, rect.Top, rect.Width, rect.Height);
         }
     }
