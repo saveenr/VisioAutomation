@@ -56,7 +56,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int rowcount = shapeids.Count();
             
             // Build the Stream
-            var srcs = this.Columns.Items.Select(col => col.SRC).ToList();
+            var srcs = this.Columns.Select(col => col.SRC).ToList();
 
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
             var unitcodes = getresults ? this.CreateUnitCodeArrayForRows(1) : null;
@@ -106,7 +106,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentNullException("shapeids");
             }
 
-            var srcs = Columns.Items.Select(i => i.SRC).ToList();         
+            var srcs = Columns.Select(i => i.SRC).ToList();         
 
             var groupcounts = new int[shapeids.Count];
             for (int i = 0; i < shapeids.Count; i++)

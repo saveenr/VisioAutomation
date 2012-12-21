@@ -37,13 +37,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             int n = this.Columns.Count*rowcount;
-            var a = new IVisio.VisUnitCodes[n];
+            var unitcodes = new IVisio.VisUnitCodes[n];
             for (int i = 0; i < n; i++)
             {
-                a[i] = this.Columns[i%this.Columns.Count].UnitCode;
+                unitcodes[i] = this.Columns[i%this.Columns.Count].UnitCode;
             }
 
-            return a;
+            return unitcodes;
         }
     }
 }

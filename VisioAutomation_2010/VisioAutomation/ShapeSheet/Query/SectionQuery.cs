@@ -30,7 +30,7 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return _section; }
         }
 
-        public VA.ShapeSheet.SRC GetSRCForRow( QueryColumn col, short row)
+        public VA.ShapeSheet.SRC GetSRCForRow(QueryColumn col, short row)
         {
             var src = new VA.ShapeSheet.SRC(this.Section, row, col.SRC.Cell);
             return src;
@@ -120,7 +120,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentNullException("shapeids");
             }
 
-            var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
+            var cells = Columns.Select(c => c.SRC.Cell).ToList();
 
             // Find out how many rows are in each shape for the given section id
             var groupcounts = this.get_group_counts(page, shapeids);
@@ -162,16 +162,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return table;
         }
 
-        private static IList<IVisio.VisUnitCodes> get_unitcodes_for_rows(IList<IVisio.VisUnitCodes> unitcodes, int rows)
-        {
-            var all_unitcodes = new List<IVisio.VisUnitCodes>(rows * unitcodes.Count);
-            for (short row = 0; row < rows; row++)
-            {
-                all_unitcodes.AddRange(unitcodes);
-            }
-            return all_unitcodes;
-        }
-
         public VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
             var table = this._Execute<T>(shape, true, true);
@@ -197,7 +187,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentNullException("shape");
             }
 
-            var cells = Columns.Items.Select(c => c.SRC.Cell).ToList();
+            var cells = Columns.Select(c => c.SRC.Cell).ToList();
 
             int rowcount = shape.RowCount[Section];
             var groupcounts = new[] { rowcount };
