@@ -7,16 +7,11 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class QueryBase
     {
-        private QueryColumnList _columns;
+        public List<QueryColumn> Columns { get; private set; }
 
         internal QueryBase()
         {
-            this._columns = new QueryColumnList();
-        }
-
-        public QueryColumnList Columns
-        {
-            get { return this._columns; }
+            this.Columns = new List<QueryColumn>();
         }
 
         protected void AddColumn(QueryColumn column)
@@ -26,7 +21,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new System.ArgumentNullException("column");
             }
 
-            this._columns.Add(column);
+            this.Columns.Add(column);
         }
 
         protected IList<IVisio.VisUnitCodes> CreateUnitCodeArrayForRows(int rowcount)
