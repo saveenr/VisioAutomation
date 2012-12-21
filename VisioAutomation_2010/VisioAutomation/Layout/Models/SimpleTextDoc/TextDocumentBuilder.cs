@@ -1,4 +1,3 @@
-using Microsoft.Office.Interop.Visio;
 using VisioAutomation.Drawing;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -16,7 +15,6 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
         private VA.Drawing.Rectangle _pageintrect;
         private VA.Drawing.Rectangle _titlerect;
         private VA.Drawing.Rectangle _bodywith_title_rect;
-        private VA.Drawing.Rectangle _bodywithout_title_rect;
         private int _fontid;
         private VA.Text.TextCells _textblockformat;
         private VA.Text.ParagraphFormatCells _titleParaFmt;
@@ -41,11 +39,9 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
 
             _titlerect = new VA.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pageintrect.UpperRight);
             _bodywith_title_rect = new VA.Drawing.Rectangle(_pageintrect.LowerLeft, _pagerect.UpperRight.Subtract(0.5, 1.0));
-            _bodywithout_title_rect = _pageintrect;
-
         }
 
-        public Document VisioDocument
+        public IVisio.Document VisioDocument
         {
             get { return _visioDocument; }
         }

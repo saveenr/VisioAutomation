@@ -5,7 +5,6 @@ using VAL = VisioAutomation.Layout;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout.Models.OrgChart
-
 {
     public class OrgChartLayout
     {
@@ -87,7 +86,6 @@ namespace VisioAutomation.Layout.Models.OrgChart
             }
 
             // TODO: Add support for Left to right , Right to Left, and Bottom to Top Layouts
-
 
             var vmasters = centerpoints
                 .Select(centerpoint => dompage.Shapes.Drop(orgchart_master_node_name,orgchart_vss, centerpoint))

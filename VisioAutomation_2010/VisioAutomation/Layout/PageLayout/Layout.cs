@@ -1,6 +1,5 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout.PageLayout
 {

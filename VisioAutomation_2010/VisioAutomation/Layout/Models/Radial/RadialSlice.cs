@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -85,8 +84,6 @@ namespace VisioAutomation.Layout.Models.Radial
             return slices;
         }
 
-
-
         protected void check_normal_angle()
         {
             if ((this.Sector.Angle <= 0.0) || (this.Sector.Angle > System.Math.PI * 2.0))
@@ -95,7 +92,5 @@ namespace VisioAutomation.Layout.Models.Radial
                 throw new System.ArgumentException(msg);
             }
         }
-
-
     }
 }

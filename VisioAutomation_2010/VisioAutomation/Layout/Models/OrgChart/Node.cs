@@ -2,7 +2,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VisioAutomation.Layout.Models.OrgChart
-
 {
     public class Node
     {
@@ -35,6 +34,5 @@ namespace VisioAutomation.Layout.Models.OrgChart
         {
             get { return this.parent; }
         }      
-
     }
 }

@@ -1,4 +1,4 @@
-using IVisio= Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Layout.Models.SimpleTextDoc
 {

@@ -12,9 +12,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
         }
 
         public bool UseDynamicConnectors { get; set; }
-
         public LayoutDirection Direction { get; set; }
-
         public VA.Drawing.Size DefaultNodeSize { get; set; }
     }
 }
