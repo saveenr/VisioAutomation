@@ -1,6 +1,5 @@
 using System.Xml.Linq;
 using System.Collections.Generic;
-using VisioAutomation.VDX.Internal;
 using VA=VisioAutomation;
 using System.Linq;
 using System.Collections;
@@ -24,8 +23,8 @@ namespace VisioAutomation.VDX.Elements
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
+        IEnumerator IEnumerable.GetEnumerator()     
+        {                                           
             return GetEnumerator();
         }
 

@@ -48,8 +48,8 @@ namespace VisioAutomation.Layout.Models.BoxLayout
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
+        IEnumerator IEnumerable.GetEnumerator()     
+        {                                           
             return GetEnumerator();
         }
 

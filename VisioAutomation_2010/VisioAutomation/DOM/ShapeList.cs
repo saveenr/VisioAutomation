@@ -34,8 +34,8 @@ namespace VisioAutomation.DOM
             get { return this.shapes.Count; }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
+        IEnumerator IEnumerable.GetEnumerator()    
+        {                                          
             return GetEnumerator();
         }
         

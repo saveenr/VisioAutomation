@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -12,7 +11,7 @@ namespace VisioAutomation.Layout.Models.Radial
     {
         public double Radius { get; private set; }
 
-        public PieSlice(Point center, double start, double end, double radius) :
+        public PieSlice(VA.Drawing.Point center, double start, double end, double radius) :
             base(center,start,end)
         {
             if (radius < 0.0)
@@ -23,8 +22,7 @@ namespace VisioAutomation.Layout.Models.Radial
             this.Radius = radius;
         }
 
-
-        internal List<Point> GetShapeBezier(out int degree)
+        internal List<VA.Drawing.Point> GetShapeBezier(out int degree)
         {
             this.check_normal_angle();
 
@@ -75,7 +73,7 @@ namespace VisioAutomation.Layout.Models.Radial
             }
         }
 
-        public static List<PieSlice> GetSlicesFromValues(Point center, double radius, IList<double> values)
+        public static List<PieSlice> GetSlicesFromValues(VA.Drawing.Point center, double radius, IList<double> values)
         {
             var slices = RadialSlice.GetSlicesFromValues(center, values,
                                                          sector =>

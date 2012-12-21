@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -34,7 +33,7 @@ namespace VisioAutomation.Layout.Models.Radial
             return new_point;
         }
 
-        protected List<Point> GetArcBez(double radius, out int degree)
+        protected List<VA.Drawing.Point> GetArcBez(double radius, out int degree)
         {
             // split apart the arc into distinct bezier segments (will end up with at least 1 segment)
             // the segments will "fit" end to end
@@ -54,7 +53,7 @@ namespace VisioAutomation.Layout.Models.Radial
             return arc_bez;
         }
 
-        protected static List<T> GetSlicesFromValues<T>(Point center, IList<double> values, System.Func<Sector,T> make_slice)
+        protected static List<T> GetSlicesFromValues<T>(VA.Drawing.Point center, IList<double> values, System.Func<Sector, T> make_slice)
         {
             var sectors = RadialSlice.GetSectorsFromValues(values);
             var slices = new List<T>(values.Count);

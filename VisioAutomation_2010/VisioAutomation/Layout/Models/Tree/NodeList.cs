@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
 
-
 namespace VisioAutomation.Layout.Models.Tree
 {
     public class NodeList  : IEnumerable<Node>
@@ -61,10 +60,9 @@ namespace VisioAutomation.Layout.Models.Tree
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
+        IEnumerator IEnumerable.GetEnumerator()     
+        {                                           
             return GetEnumerator();
         }
-
     }
 }

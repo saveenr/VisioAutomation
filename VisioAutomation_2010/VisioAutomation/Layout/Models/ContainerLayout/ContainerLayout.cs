@@ -12,7 +12,6 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
         public List<Container> Containers { get; private set; }
         public bool IsLayedOut { get; private set; }
         public LayoutOptions LayoutOptions = new LayoutOptions();
-
         
         public ContainerLayout()
         {

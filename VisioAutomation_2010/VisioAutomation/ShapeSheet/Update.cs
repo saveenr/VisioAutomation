@@ -125,7 +125,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() // Explicit implementation
+        IEnumerator IEnumerable.GetEnumerator() 
         {
             // keeps it hidden.
             return GetEnumerator();

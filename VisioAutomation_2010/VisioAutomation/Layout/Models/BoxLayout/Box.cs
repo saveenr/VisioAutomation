@@ -3,7 +3,6 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Layout.Models.BoxLayout
 {
-
     public class Box : Node
     {
         public Box(double w, double h) :

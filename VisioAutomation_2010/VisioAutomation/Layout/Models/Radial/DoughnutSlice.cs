@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout.Models.Radial
 {
-
     public class DoughnutSlice : RadialSlice
     {
         public double InnerRadius { get; private set; }
         public double OuterRadius { get; private set; }
 
-        public DoughnutSlice(Point center, double start, double end, double inner_radius, double outer_radius) :
+        public DoughnutSlice(VA.Drawing.Point center, double start, double end, double inner_radius, double outer_radius) :
             base(center,start,end)
         {
             if (inner_radius < 0.0)
@@ -77,7 +75,7 @@ namespace VisioAutomation.Layout.Models.Radial
             }
         }
 
-        List<Point> GetShapeBezier(out int degree)
+        List<VA.Drawing.Point> GetShapeBezier(out int degree)
         {
             this.check_normal_angle();
 
@@ -105,6 +103,5 @@ namespace VisioAutomation.Layout.Models.Radial
             bez.Add(point_first);
             return bez;
         }
-
     }
 }
