@@ -55,6 +55,5 @@ namespace TestVisioAutomation
 
             page.Delete(0);
         }
-
     }
 }
