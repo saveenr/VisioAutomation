@@ -92,10 +92,10 @@ namespace VisioAutomationSamples
             int num_rows = 7;
 
             var page_size = new VA.Drawing.Size(5, 5);
-            page.SetSize(page_size);
+            VA.Pages.PageHelper.SetSize(page,page_size);
 
             var lowerleft = new VA.Drawing.Point(0, 0);
-            var actual_page_size = page.GetSize();
+            var actual_page_size = VA.Pages.PageHelper.GetSize(page);
             var page_rect = new VA.Drawing.Rectangle(lowerleft, actual_page_size);
 
             var layout = new GRIDMODEL.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
