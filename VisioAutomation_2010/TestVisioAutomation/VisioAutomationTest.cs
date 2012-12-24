@@ -49,7 +49,7 @@ namespace TestVisioAutomation
             var pages = active_document.Pages;
             var page = pages.Add();
             page.Background = 0;
-            page.SetSize(s);
+            VA.Pages.PageHelper.SetSize(page,s);
 
             return page;
         }

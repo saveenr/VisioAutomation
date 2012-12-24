@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
-            return active_page.GetSize();
+            return VA.Pages.PageHelper.GetSize(active_page);
         }
 
         public void SetName(string name)
@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting.Commands
                 if (size.HasValue)
                 {
                     this.Session.Write(OutputStream.Verbose,"Setting page size to {0}", size.Value);
-                    page.SetSize(size.Value);
+                    VA.Pages.PageHelper.SetSize(page,size.Value);
                 }
 
                 if (isbackgroundpage)
@@ -148,7 +148,7 @@ namespace VisioAutomation.Scripting.Commands
             var destpages = dest_doc.Pages;
             var dest_page = destpages[1];
             VA.Pages.PageHelper.DuplicateToDocument(active_page, dest_doc, dest_page, page_name, true);
-            dest_doc.Activate();
+            VA.Documents.DocumentHelper.Activate(dest_doc);
             dest_page.Activate();
         }
 
@@ -224,7 +224,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = application.CreateUndoScope("Set Page Size"))
             {
                 var active_page = application.ActivePage;
-                active_page.SetSize(new_size);
+                VA.Pages.PageHelper.SetSize(active_page,new_size);
             }
         }
 
@@ -243,7 +243,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
-            var old_size = active_page.GetSize();
+            var old_size = VA.Pages.PageHelper.GetSize(active_page);
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VA.Drawing.Size(w, h);

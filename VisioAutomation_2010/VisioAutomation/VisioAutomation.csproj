@@ -284,7 +284,6 @@
     <Compile Include="Text\TabStop.cs" />
     <Compile Include="Application\UndoScope.cs" />
     <Compile Include="Extensions\ColorsMethods.cs" />
-    <Compile Include="Extensions\ColorMethods.cs" />
     <Compile Include="Extensions\ConnectsMethods.cs" />
     <Compile Include="Extensions\MasterMethods.cs" />
     <Compile Include="Application\ApplicationHelper.cs" />

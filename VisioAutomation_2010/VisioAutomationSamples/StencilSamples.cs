@@ -16,7 +16,7 @@ namespace VisioAutomationSamples
 
             // Resize the page to a sqaure
             var page_size = new VA.Drawing.Size(4, 4);
-            page.SetSize(page_size);
+            VA.Pages.PageHelper.SetSize(page,page_size);
 
             // Load the Stencil
             var application = page.Application;

@@ -17,16 +17,6 @@ namespace VisioAutomation.Extensions
             VA.Pages.PageHelper.ResizeToFitContents(page, bordersize);
         }
 
-        public static VA.Drawing.Size GetSize(this IVisio.Page page)
-        {
-            return VA.Pages.PageHelper.GetSize(page);
-        }
-
-        public static void SetSize(this IVisio.Page page, VA.Drawing.Size size)
-        {
-            VA.Pages.PageHelper.SetSize(page, size);
-        }
-
         public static IVisio.Shape DrawLine(this IVisio.Page page, VA.Drawing.Point p1, VA.Drawing.Point p2)
         {
             var shape = page.DrawLine(p1.X, p1.Y, p2.X, p2.Y);

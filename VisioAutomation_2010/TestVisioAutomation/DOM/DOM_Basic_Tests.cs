@@ -19,7 +19,7 @@ namespace TestVisioAutomation
             var page = dompage.Render(doc);
 
             Assert.AreEqual(0, page.Shapes.Count);
-            Assert.AreEqual(new VA.Drawing.Size(5, 5), page.GetSize());
+            Assert.AreEqual(new VA.Drawing.Size(5, 5), VA.Pages.PageHelper.GetSize(page));
 
             page.Delete(0);
             doc.Close(true);

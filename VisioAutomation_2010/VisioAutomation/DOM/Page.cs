@@ -79,7 +79,7 @@ namespace VisioAutomation.DOM
 
                 if (this.Size.HasValue)
                 {
-                    page.SetSize(this.Size.Value);
+                    VA.Pages.PageHelper.SetSize(page,this.Size.Value);
                 }
 
                 // Then render the shapes

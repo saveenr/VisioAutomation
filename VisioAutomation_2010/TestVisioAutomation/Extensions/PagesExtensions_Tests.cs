@@ -63,16 +63,16 @@ namespace TestVisioAutomation
         public void ResizePage()
         {
             var page1 = GetNewPage();
-            Assert.AreEqual(this.StandardPageSize, page1.GetSize());
+            Assert.AreEqual(this.StandardPageSize, VA.Pages.PageHelper.GetSize(page1));
 
             var page_size1 = new VA.Drawing.Size(10, 5);
             var page_size2 = new VA.Drawing.Size(6, 3);
 
-            page1.SetSize(page_size1);
-            Assert.AreEqual(page_size1, page1.GetSize());
+            VA.Pages.PageHelper.SetSize(page1,page_size1);
+            Assert.AreEqual(page_size1, VA.Pages.PageHelper.GetSize(page1));
 
-            page1.SetSize(page_size2);
-            Assert.AreEqual(page_size2, page1.GetSize());
+            VA.Pages.PageHelper.SetSize(page1,page_size2);
+            Assert.AreEqual(page_size2, VA.Pages.PageHelper.GetSize(page1));
             page1.Delete(0);
         }
 

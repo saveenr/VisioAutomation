@@ -57,12 +57,12 @@ namespace TestVisioAutomation
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
             Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait,
                             VA.Pages.PageHelper.GetOrientation(page1));
-            Assert.AreEqual(new VA.Drawing.Size(4, 3), page1.GetSize());
+            Assert.AreEqual(new VA.Drawing.Size(4, 3), VA.Pages.PageHelper.GetSize(page1));
 
             VA.Pages.PageHelper.SetOrientation(page1, VA.Pages.PrintPageOrientation.Landscape);
             Assert.AreEqual(VA.Pages.PrintPageOrientation.Landscape,
                             VA.Pages.PageHelper.GetOrientation(page1));
-            Assert.AreEqual(new VA.Drawing.Size(3, 4), page1.GetSize());
+            Assert.AreEqual(new VA.Drawing.Size(3, 4), VA.Pages.PageHelper.GetSize(page1));
             page1.Delete(0);
         }
 
@@ -74,7 +74,7 @@ namespace TestVisioAutomation
 
             var page2 = VA.Pages.PageHelper.Duplicate(page1);
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 3), page2.GetSize() );
+            Assert.AreEqual(new VA.Drawing.Size(4, 3), VA.Pages.PageHelper.GetSize(page2) );
             Assert.AreEqual(1, page2.Shapes.Count);
 
             var s2 = page2.Shapes[1];

@@ -101,7 +101,7 @@ namespace VisioAutomation.Scripting.Commands
             var page = this.Session.VisioApplication.ActivePage;
 
             var pagesize = new VA.Drawing.Size(w, h);
-            page.SetSize(pagesize);
+            VA.Pages.PageHelper.SetSize(page,pagesize);
             return doc;
         }
 

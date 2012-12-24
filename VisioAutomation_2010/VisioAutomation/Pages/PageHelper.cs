@@ -124,7 +124,7 @@ namespace VisioAutomation.Pages
 
             var new_page = page.Document.Pages.Add();
             new_page.Background = 0; // ensure this is a foreground page
-            new_page.SetSize(page.GetSize()); // set the size
+            VA.Pages.PageHelper.SetSize(new_page,VA.Pages.PageHelper.GetSize(page)); // set the size
 
             copy_page_cells(page, new_page);
             if (do_copy && has_something_to_copy)
@@ -169,7 +169,7 @@ namespace VisioAutomation.Pages
 
             short copy_paste_flags = (short)IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
 
-            src_page.Document.Activate();
+            VA.Documents.DocumentHelper.Activate(src_page.Document);
             src_page.Activate();
 
             bool has_content = src_page.Shapes.Count > 0;
@@ -369,7 +369,7 @@ namespace VisioAutomation.Pages
             if (app.ActiveDocument != page.Document)
             {
                 var page_doc = page.Document;
-                page_doc.Activate();
+                VA.Documents.DocumentHelper.Activate(page_doc);
             }
 
             // Double-check: make sure the page's parent document is active
@@ -401,9 +401,9 @@ namespace VisioAutomation.Pages
 
             if ((bordersize.Width > 0.0) || (bordersize.Height > 0.0))
             {
-                var old_size = page.GetSize();
+                var old_size = VA.Pages.PageHelper.GetSize(page);
                 var new_size = old_size + bordersize.Multiply(2, 2);
-                page.SetSize(new_size);
+                VA.Pages.PageHelper.SetSize(page,new_size);
                 page.CenterDrawing();
             }
         }
