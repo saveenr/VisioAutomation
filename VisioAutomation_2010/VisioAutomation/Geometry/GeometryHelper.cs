@@ -25,11 +25,11 @@ namespace VisioAutomation.Geometry
             return new_sec_index;
         }
 
-        public static short GetGeometrySectionIndex(short index)
+        private static short GetGeometrySectionIndex(short index)
         {
-            short new_sec_index =
+            short i =
                 (short) (((int) IVisio.VisSectionIndices.visSectionFirstComponent) + (index));
-            return new_sec_index;
+            return i;
         }
 
         public static void DeleteGeometry(IVisio.Shape shape)
@@ -41,7 +41,7 @@ namespace VisioAutomation.Geometry
             }
         }
 
-        public static void DeleteGeometrySection(IVisio.Shape shape, short index)
+        private static void DeleteGeometrySection(IVisio.Shape shape, short index)
         {
             if (shape == null)
             {
