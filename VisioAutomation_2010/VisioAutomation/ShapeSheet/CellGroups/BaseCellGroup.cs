@@ -13,6 +13,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         // Delegates
         protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLEROW tablerow) where TQuery : VA.ShapeSheet.Query.QueryBase;
-
     }
 }
