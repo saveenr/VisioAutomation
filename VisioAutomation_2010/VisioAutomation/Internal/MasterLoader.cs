@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Masters
+namespace VisioAutomation.Internal
 {
     internal class MasterLoader
     {

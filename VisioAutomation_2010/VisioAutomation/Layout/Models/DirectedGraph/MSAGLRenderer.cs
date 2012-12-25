@@ -189,7 +189,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             var master_to_size = new Dictionary<IVisio.Master, VA.Drawing.Size>();
 
             // Load and cache all the masters
-            var loader = new VA.Masters.MasterLoader();
+            var loader = new VA.Internal.MasterLoader();
             foreach (var layout_shape in layout_diagram.Shapes)
             {
                 loader.Add(layout_shape.MasterName,layout_shape.StencilName);                

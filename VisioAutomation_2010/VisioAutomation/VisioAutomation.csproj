@@ -120,7 +120,7 @@
     <Compile Include="Layout\PageLayout\HorizontalAlignment.cs" />
     <Compile Include="Layout\PageLayout\VerticalAlignment.cs" />
     <Compile Include="Layout\PageLayout\LayoutStyle.cs" />
-    <Compile Include="Masters\MasterLoader.cs" />
+    <Compile Include="Internal\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
     <Compile Include="Layout\Models\Radial\DoughnutSlice.cs" />

@@ -217,7 +217,7 @@ namespace VisioAutomation.DOM
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
-            var loader = new VA.Masters.MasterLoader();
+            var loader = new VA.Internal.MasterLoader();
             foreach (var dom_shape in dom_shapes)
             {
                 loader.Add(dom_shape.Master.MasterName,dom_shape.Master.StencilName);
