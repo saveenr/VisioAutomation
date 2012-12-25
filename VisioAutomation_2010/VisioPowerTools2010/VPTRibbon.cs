@@ -371,13 +371,14 @@ namespace VisioPowerTools2010
                 return;
             }
 
+            var activewindow = app.ActiveWindow;
             var sb = new System.Text.StringBuilder();
-
             var pages = doc.Pages.AsEnumerable().ToList();
 
-            using (var scope = app.CreateUndoScope("ScrambleText"))
+            using (var scope = app.CreateUndoScope("Scramble Text"))
             {
-                doc.Company = Scramble(sb,doc.Company);
+                // Begin Undo Scope
+                doc.Company = Scramble(sb, doc.Company);
                 doc.Category = Scramble(sb,doc.Category);
                 doc.Title = Scramble(sb, doc.Title);
                 doc.Subject = Scramble(sb, doc.Subject);
@@ -386,9 +387,7 @@ namespace VisioPowerTools2010
                 doc.Keywords = Scramble(sb, doc.Keywords);
                 foreach (var page in pages)
                 {
-                    page.Activate();
-
-
+                    activewindow.Page = page;
                     var shapes = page.Shapes.AsEnumerable().ToList();
                     foreach (var shape in shapes)
                     {
@@ -402,10 +401,9 @@ namespace VisioPowerTools2010
                                 Scramble(sb,nested_shape);                                
                             }
                         }
-
                     }
-
                 }
+                // End Undo Scope
             }
         }
 
