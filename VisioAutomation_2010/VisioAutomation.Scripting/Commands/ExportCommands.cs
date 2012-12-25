@@ -62,6 +62,8 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var old_page = application.ActivePage;
             var active_document = application.ActiveDocument;
+            var active_window = application.ActiveWindow;
+
             var pages = active_document.Pages.AsEnumerable().ToList();
             var pbase = System.IO.Path.GetDirectoryName(filename);
 
@@ -86,11 +88,11 @@ namespace VisioAutomation.Scripting.Commands
 
                     this.Session.Write(OutputStream.User, "file {0}", page_filname);
                     page_filname = System.IO.Path.Combine(pbase, page_filname);
-                    page.Activate();
+                    active_window.Page = page;
                     this.Session.Selection.SelectNone();
                     page.Export(page_filname);
                 }
-            old_page.Activate();
+            active_window.Page = old_page;
         }
 
         public void ExportSelectionToSVGXHTML(string filename)

@@ -51,10 +51,11 @@ namespace TestVisioAutomation
             var page3 = doc1.Pages.Add();
             Assert.AreEqual(old_page_count + 2, doc1.Pages.Count);
 
+            var active_window = app.ActiveWindow;
             Assert.AreSame(page3, app.ActivePage);
-            page2.Activate();
+            active_window.Page = page2;
             Assert.AreSame(page2, app.ActivePage);
-            page1.Activate();
+            active_window.Page = page1;
             Assert.AreSame(page1, app.ActivePage);
             doc1.Close(true);
         }

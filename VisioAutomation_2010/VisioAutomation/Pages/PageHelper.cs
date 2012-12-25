@@ -170,19 +170,20 @@ namespace VisioAutomation.Pages
             short copy_paste_flags = (short)IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
 
             VA.Documents.DocumentHelper.Activate(src_page.Document);
-            src_page.Activate();
+
+            var src_window = app.ActiveWindow;
+            src_window.Page = src_page;
 
             bool has_content = src_page.Shapes.Count > 0;
 
             // copy contents
             if (has_content)
             {
-                src_page.Activate();
-                var active_window = app.ActiveWindow;
-                active_window.SelectAll();
-                var selection = active_window.Selection;
+                src_window.Page = src_page;
+                src_window.SelectAll();
+                var selection = src_window.Selection;
                 selection.Copy(copy_paste_flags);
-                active_window.DeselectAll();
+                src_window.DeselectAll();
             }
 
             // Create the new page and give it the same general properties
@@ -319,7 +320,9 @@ namespace VisioAutomation.Pages
             {
                 var doc_pages = active_document.Pages;
                 var page = doc_pages[new_index];
-                page.Activate();
+
+                var active_window = app.ActiveWindow;
+                active_window.Page = page;
             }
         }
 
@@ -359,39 +362,6 @@ namespace VisioAutomation.Pages
             else
             {
                 throw new System.ArgumentOutOfRangeException("direction");
-            }
-        }
-
-        public static void Activate(IVisio.Page page)
-        {
-            var app = page.Application;
-            // If the page belongs to an Inactive Document, then activate that document first
-            if (app.ActiveDocument != page.Document)
-            {
-                var page_doc = page.Document;
-                VA.Documents.DocumentHelper.Activate(page_doc);
-            }
-
-            // Double-check: make sure the page's parent document is active
-            if (app.ActiveDocument != page.Document)
-            {
-                var page_doc = page.Document;
-                string msg = string.Format("Failed to activate document \"{0}\"", page_doc.Name);
-                throw new AutomationException(msg);
-            }
-
-            var active_window = app.ActiveWindow;
-            // if current page is not already active, then activate it
-            if (active_window.Page != page)
-            {
-                active_window.Page = page;
-            }
-
-            // Double-check: make sure the page is active now
-            if (active_window.Page != page)
-            {
-                string msg = string.Format("Failed to activate page \"{0}\"", page.Name);
-                throw new AutomationException(msg);
             }
         }
 

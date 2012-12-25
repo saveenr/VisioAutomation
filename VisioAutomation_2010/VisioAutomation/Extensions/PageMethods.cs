@@ -7,11 +7,6 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods
     {
-        public static void Activate(this IVisio.Page page)
-        {
-            VA.Pages.PageHelper.Activate(page);
-        }
-
         public static void ResizeToFitContents(this IVisio.Page page, VA.Drawing.Size bordersize)
         {
             VA.Pages.PageHelper.ResizeToFitContents(page, bordersize);

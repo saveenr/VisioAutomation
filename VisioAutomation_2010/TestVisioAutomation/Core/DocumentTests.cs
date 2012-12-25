@@ -26,10 +26,11 @@ namespace TestVisioAutomation
             page2.Background = 0;
             VA.Pages.PageHelper.SetSize(page2,this.StandardPageSize);
 
+            var active_window = app.ActiveWindow;
             Assert.AreEqual(app.ActivePage, page2);
-            page1.Activate();
+            active_window.Page = page1;
             Assert.AreEqual(app.ActivePage, page1);
-            page2.Activate();
+            active_window.Page = page2;
             Assert.AreEqual(app.ActivePage, page2);
             doc1.Close(true);
         }

@@ -154,8 +154,12 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
             DeleteFirstPage();
 
             // set the new first page
-            var first_page = _visioDocument.Pages[1];
-            first_page.Activate();
+            var pages = _visioDocument.Pages;
+            var first_page = pages[1];
+
+            var app = _visioDocument.Application;
+            var active_window = app.ActiveWindow;
+            active_window.Page = first_page;
         }
 
         private void DeleteFirstPage()

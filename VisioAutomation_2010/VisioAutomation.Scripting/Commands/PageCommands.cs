@@ -143,13 +143,16 @@ namespace VisioAutomation.Scripting.Commands
             var page_to_dupe = active_page;
             var documents = application.Documents;
             var dest_doc = documents.Add(string.Empty);
-            page_to_dupe.Activate();
+            //page_to_dupe.Activate();
             string page_name = page_to_dupe.NameU;
             var destpages = dest_doc.Pages;
             var dest_page = destpages[1];
             VA.Pages.PageHelper.DuplicateToDocument(active_page, dest_doc, dest_page, page_name, true);
-            VA.Documents.DocumentHelper.Activate(dest_doc);
-            dest_page.Activate();
+
+            // the active window will be to the new document
+            // now activate the page we just created
+            var active_window = application.ActiveWindow;
+            active_window.Page = dest_page;
         }
 
         public VA.Pages.PrintPageOrientation GetOrientation()
