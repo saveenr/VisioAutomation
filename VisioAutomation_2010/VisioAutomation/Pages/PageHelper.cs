@@ -73,7 +73,7 @@ namespace VisioAutomation.Pages
             return pagecells;
         }
 
-        public static IVisio.Page Duplicate(IVisio.Page page)
+        public static IVisio.Page Duplicate(IVisio.Page page,string dest_pagename)
         {
             if (page == null)
             {
@@ -122,7 +122,13 @@ namespace VisioAutomation.Pages
                 }
             }
 
-            var new_page = page.Document.Pages.Add();
+            var doc = page.Document;
+            var pages = doc.Pages;
+            var new_page = pages.Add();
+            if (dest_pagename != null)
+            {
+                new_page.NameU = dest_pagename;
+            }
             new_page.Background = 0; // ensure this is a foreground page
             VA.Pages.PageHelper.SetSize(new_page,VA.Pages.PageHelper.GetSize(page)); // set the size
 

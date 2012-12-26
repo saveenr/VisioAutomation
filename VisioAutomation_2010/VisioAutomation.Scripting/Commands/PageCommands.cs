@@ -117,7 +117,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Duplicate()
+        public void Duplicate(string dest_pagename)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -127,24 +127,33 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             using (var undoscope = application.CreateUndoScope("Duplicate Page"))
             {
-                VA.Pages.PageHelper.Duplicate(application.ActivePage);
+                VA.Pages.PageHelper.Duplicate(application.ActivePage, dest_pagename);
             }
         }
 
-        public void DuplicateToNewDocument()
+        public void DuplicateToDocument(IVisio.Document dest_doc, string dest_pagename)
         {
             if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
 
+            if (dest_doc==null)
+            {
+                throw new System.ArgumentNullException("dest_doc");
+                return;
+            }
+
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             var page_to_dupe = active_page;
-            var documents = application.Documents;
-            var dest_doc = documents.Add(string.Empty);
-            //page_to_dupe.Activate();
-            string page_name = page_to_dupe.NameU;
+
+            if (application.ActiveDocument == dest_doc)
+            {
+                throw new VA.AutomationException("dest doc is same as active doc");
+            }
+
+            string page_name = dest_pagename ?? page_to_dupe.NameU;
             var destpages = dest_doc.Pages;
             var dest_page = destpages[1];
             VA.Pages.PageHelper.DuplicateToDocument(active_page, dest_doc, dest_page, page_name, true);
