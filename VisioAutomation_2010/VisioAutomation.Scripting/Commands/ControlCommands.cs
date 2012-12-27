@@ -41,8 +41,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var control_indices = new List<int>();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Add Control"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Add Control"))
             {
                 foreach (var shape in shapes)
                 {
@@ -63,8 +62,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumShapes().ToList();
 
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Delete Control"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Control"))
             {
                 foreach (var shape in shapes)
                 {

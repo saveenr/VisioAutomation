@@ -61,8 +61,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var indices = new List<int>(shapes.Count);
 
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Add Connection Point"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Add Connection Point"))
             {
                 var cp = new VA.Connections.ConnectionPointCells();
                 cp.X = fx;
@@ -99,8 +98,7 @@ namespace VisioAutomation.Scripting.Commands
                                 where VA.Connections.ConnectionPointHelper.GetConnectionPointCount(shape) > index
                                 select shape;
 
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Delete Connection Point"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Connection Point"))
             {
                 foreach (var shape in target_shapes)
                 {

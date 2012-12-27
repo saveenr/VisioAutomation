@@ -13,7 +13,7 @@ namespace VisioAutomation.Application
         private VA.Application.AlertResponseCode old_alertresponse;
         private readonly IVisio.Application app;
 
-        internal AlertResponseScope(IVisio.Application app, VA.Application.AlertResponseCode value)
+        public AlertResponseScope(IVisio.Application app, VA.Application.AlertResponseCode value)
         {
             this.app = app;
             this.old_alertresponse = (VA.Application.AlertResponseCode)this.app.AlertResponse;

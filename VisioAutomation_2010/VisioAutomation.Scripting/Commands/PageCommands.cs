@@ -69,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
             var pages = active_document.Pages;
             page = pages.Add();
 
-            using (var undoscope = application.CreateUndoScope("New Page"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"New Page"))
             {
                 if (size.HasValue)
                 {
@@ -111,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
             var bgpage = pages.ItemU[background_page_name];
             var fgpage = application.ActivePage;
 
-            using (var undoscope = application.CreateUndoScope("Set Background Page"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Background Page"))
             {
                 VA.Pages.PageHelper.SetBackgroundPage(fgpage, bgpage);
             }
@@ -125,7 +125,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Duplicate Page"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Duplicate Page"))
             {
                 VA.Pages.PageHelper.Duplicate(application.ActivePage, dest_pagename);
             }
@@ -182,7 +182,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Set Page Orientation"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Page Orientation"))
             {
                 var active_page = application.ActivePage;
                 VA.Pages.PageHelper.SetOrientation(active_page, orientation);
@@ -197,7 +197,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Resize Page to Fit Contents"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Resize Page to Fit Contents"))
             {
                 var active_page = application.ActivePage;
                 active_page.ResizeToFitContents(bordersize);
@@ -216,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Reset Page Origin"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Reset Page Origin"))
             {
                 var active_page = application.ActivePage;
                 VA.Pages.PageHelper.ResetOrigin(active_page);
@@ -231,7 +231,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Set Page Size"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Page Size"))
             {
                 var active_page = application.ActivePage;
                 VA.Pages.PageHelper.SetSize(active_page,new_size);

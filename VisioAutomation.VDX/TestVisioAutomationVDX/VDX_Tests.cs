@@ -15,7 +15,7 @@ namespace TestVisioAutomationVDX
         {
             var app = docs.Application;
             IVisio.Document doc=null;
-            using (var scope = app.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
+            using (var scope = new VA.Application.AlertResponseScope(app,VA.Application.AlertResponseCode.No))
             {
                 doc = app.Documents.Open(filename);
             }

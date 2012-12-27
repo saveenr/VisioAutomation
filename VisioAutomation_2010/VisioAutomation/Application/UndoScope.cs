@@ -10,7 +10,7 @@ namespace VisioAutomation.Application
         public string Name { get; private set; }
         public bool Commit { get; set; }
 
-        internal UndoScope(IVisio.Application app, string name)
+        public UndoScope(IVisio.Application app, string name)
         {
             if (app == null)
             {

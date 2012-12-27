@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Delete Custom Property"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Set Custom Property"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Set Custom Property"))
             {
                 foreach (var shape in shapes)
                 {

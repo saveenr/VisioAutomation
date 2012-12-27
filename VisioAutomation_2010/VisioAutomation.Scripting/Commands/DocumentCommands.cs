@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 if (force)
                 {
-                    using (var alert = application.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
+                    using (var alert = new VA.Application.AlertResponseScope(application, VA.Application.AlertResponseCode.No))
                     {
                         doc.Close();
                     }
@@ -50,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).
                 ToList();
 
-            using (var alert = application.CreateAlertResponseScope(VA.Application.AlertResponseCode.No))
+            using (var alert = new VA.Application.AlertResponseScope(application, VA.Application.AlertResponseCode.No))
             {
                 foreach (var doc in docs)
                 {

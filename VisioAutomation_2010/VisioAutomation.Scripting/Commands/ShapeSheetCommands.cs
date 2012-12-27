@@ -162,7 +162,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Set ShapeSheet Formulas"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set ShapeSheet Formulas"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -173,7 +173,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Session.Write( OutputStream.Verbose, "Staring ShapeSheet Update");
             var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope("Update ShapeSheet Formulas"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Update ShapeSheet Formulas"))
             {
                 var active_page = application.ActivePage;
                 var internal_update = update.update;

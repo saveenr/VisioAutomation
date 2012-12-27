@@ -99,7 +99,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = this.Session.VisioApplication.ActivePage;
 
-            using (var undoscope = this.Session.VisioApplication.CreateUndoScope(undoname_connectShapes))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,undoname_connectShapes))
             {
                 var connectors = VA.Connections.ConnectorHelper.ConnectShapes(active_page, master, from_shapes, to_shapes);
                 return connectors;
@@ -145,10 +145,9 @@ namespace VisioAutomation.Scripting.Commands
                 new List<IVisio.Shape>(0);
             }
 
-            var application = this.Session.VisioApplication;
             var active_page = this.Session.VisioApplication.ActivePage;
 
-            using (var undoscope = application.CreateUndoScope(undoname_connectShapes))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, undoname_connectShapes))
             {
                 var connectors = VA.Connections.ConnectorHelper.ConnectShapes(active_page, master, fromshapes, toshapes);
                 return connectors;

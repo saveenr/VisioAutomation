@@ -375,7 +375,7 @@ namespace VisioPowerTools2010
             var sb = new System.Text.StringBuilder();
             var pages = doc.Pages.AsEnumerable().ToList();
 
-            using (var scope = app.CreateUndoScope("Scramble Text"))
+            using (var scope = new VA.Application.UndoScope(app, "Scramble Text"))
             {
                 // Begin Undo Scope
                 doc.Company = Scramble(sb, doc.Company);
