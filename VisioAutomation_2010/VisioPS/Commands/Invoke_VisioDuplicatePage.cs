@@ -21,7 +21,7 @@ namespace VisioPS.Commands
             }
             else
             {
-                scriptingsession.Page.DuplicateToDocument(this.ToDocument, this.Name);
+                scriptingsession.Page.Duplicate(this.Name, this.ToDocument);
             }
         }
     }

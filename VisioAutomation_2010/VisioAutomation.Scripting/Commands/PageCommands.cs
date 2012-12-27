@@ -131,7 +131,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void DuplicateToDocument(IVisio.Document dest_doc, string dest_pagename)
+        public void Duplicate(string dest_pagename, IVisio.Document dest_doc)
         {
             if (!this.Session.HasActiveDrawing)
             {
@@ -141,25 +141,23 @@ namespace VisioAutomation.Scripting.Commands
             if (dest_doc==null)
             {
                 throw new System.ArgumentNullException("dest_doc");
-                return;
             }
 
             var application = this.Session.VisioApplication;
-            var active_page = application.ActivePage;
-            var page_to_dupe = active_page;
 
             if (application.ActiveDocument == dest_doc)
             {
                 throw new VA.AutomationException("dest doc is same as active doc");
             }
 
-            string page_name = dest_pagename ?? page_to_dupe.NameU;
-            var destpages = dest_doc.Pages;
-            var dest_page = destpages[1];
-            VA.Pages.PageHelper.DuplicateToDocument(active_page, dest_doc, dest_page, page_name, true);
+            var src_page = application.ActivePage;
+
+            dest_pagename = dest_pagename ?? src_page.NameU;
+            var dest_pages = dest_doc.Pages;
+            var dest_page = dest_pages[1];
+            VA.Pages.PageHelper.DuplicateToDocument(src_page, dest_doc, dest_page, dest_pagename, true);
 
             // the active window will be to the new document
-            // now activate the page we just created
             var active_window = application.ActiveWindow;
             active_window.Page = dest_page;
         }
