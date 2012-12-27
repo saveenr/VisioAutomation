@@ -58,37 +58,37 @@ namespace VisioAutomation.Documents
 
         public static void Activate(IVisio.Document doc)
         {
-            bool found_window = false;
-            IVisio.Window the_window = null;
-            var application = doc.Application;
-            var appwindows = application.Windows;
+            var app = doc.Application;
+            var cur_active_doc = app.ActiveDocument;
+
+            // if the doc is already active do nothing
+            if (doc == cur_active_doc)
+            {
+                // do nothing
+                return;
+            }
+
+            // go through each window and check if it is assigned
+            // to the target document
+            var appwindows = app.Windows;
             var allwindows = appwindows.AsEnumerable();
             foreach (var curwin in allwindows)
             {
                 if (curwin.Document == doc)
                 {
-                    found_window = true;
-                    the_window = curwin;
-                    break;
+                    // we did find one, so activate that window
+                    // and then exit the method
+                    curwin.Activate();
+                    if (app.ActiveDocument != doc)
+                    {
+                        throw new AutomationException("failed to activate document");
+                    }
+                    return;
                 }
             }
 
-            if (!found_window)
-            {
-                throw new VA.AutomationException("could not find window for doc");
-            }
-
-            if (the_window == null)
-            {
-                throw new VA.AutomationException("Internal Error");
-            }
-
-            the_window.Activate();
-
-            if (application.ActiveDocument != doc)
-            {
-                throw new AutomationException("failed to activate document");
-            }
+            // If we get here, we couldn't find any matching window
+            throw new VA.AutomationException("could not find window for document");
         }
 
         public static void Close(IVisio.Document doc, bool force_close)
