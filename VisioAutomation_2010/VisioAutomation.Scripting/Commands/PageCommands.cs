@@ -155,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
             dest_pagename = dest_pagename ?? src_page.NameU;
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            VA.Pages.PageHelper.DuplicateToDocument(src_page, dest_doc, dest_page, dest_pagename, true);
+            VA.Pages.PageHelper.DuplicateToDocument(src_page, dest_page, dest_pagename, true);
 
             // the active window will be to the new document
             var active_window = application.ActiveWindow;

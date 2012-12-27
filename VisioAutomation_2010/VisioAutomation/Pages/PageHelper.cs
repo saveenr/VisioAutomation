@@ -150,7 +150,6 @@ namespace VisioAutomation.Pages
 
         public static void DuplicateToDocument(
             IVisio.Page src_page,
-            IVisio.Document dest_doc,
             IVisio.Page dest_page,
             string new_page_name,
             bool suppress_ui)
@@ -165,9 +164,17 @@ namespace VisioAutomation.Pages
                 throw new System.ArgumentNullException("dest_page");
             }
 
-            if (dest_doc == null)
+            if (src_page == dest_page)
             {
-                throw new System.ArgumentNullException("dest_doc");
+                throw new VA.AutomationException("source and dest pages can't be the same");
+            }
+
+            var src_doc = src_page.Document;
+            var dest_doc = dest_page.Document;
+
+            if (src_doc == dest_doc)
+            {
+                throw new VA.AutomationException("source and dest documents can't be the same");
             }
 
             // http://support.microsoft.com/kb/290581
