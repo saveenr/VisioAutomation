@@ -82,8 +82,7 @@ namespace VisioAutomation.DOM
                 var update = new VA.ShapeSheet.Update();
                 this.PageCells.Apply(update, (short)page_sheet.ID);
                 update.Execute(page);
-
-
+                
                 // Then render the shapes
                 this.Shapes.Render(page);
 

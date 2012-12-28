@@ -119,7 +119,14 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
         {
             var page = _visioDocument.Pages.Add();
             page.NameU = textpage.Name;
-            VA.Pages.PageHelper.SetSize(page, this.PageSize);
+
+            // Update the Page ShapeSheet
+            // - to set the size
+            var page_cells = new VA.Pages.PageCells();
+            page_cells.PageHeight = this.PageSize.Height;
+            page_cells.PageWidth = this.PageSize.Width;
+            var pageupdate = new VA.ShapeSheet.Update();
+            pageupdate.Execute(page);
 
             // Draw the shapes
             var titleshape = page.DrawRectangle(_titlerect);
