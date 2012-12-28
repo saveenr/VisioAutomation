@@ -195,7 +195,21 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
-            return VA.Pages.PageHelper.GetOrientation(active_page);
+            return GetOrientation(active_page);
+        }
+
+        private static VA.Pages.PrintPageOrientation GetOrientation(IVisio.Page page)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException("page");
+            }
+
+            var page_sheet = page.PageSheet;
+            var src = VA.ShapeSheet.SRCConstants.PrintPageOrientation;
+            var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
+            int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNoCast, 0];
+            return (VA.Pages.PrintPageOrientation)value;
         }
 
         public void SetOrientation(VA.Pages.PrintPageOrientation orientation)
@@ -206,12 +220,39 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
+
+            var active_page = application.ActivePage;
+
+            if (orientation != VA.Pages.PrintPageOrientation.Landscape && orientation != VA.Pages.PrintPageOrientation.Portrait)
+            {
+                throw new System.ArgumentOutOfRangeException("orientation", "must be either Portrait or Landscape");
+            }
+
+            var old_orientation = GetOrientation(active_page);
+
+            if (old_orientation == orientation)
+            {
+                // don't need to do anything
+                return;
+            }
+
+            var old_size = this.GetSize();
+
+            double new_height = old_size.Width;
+            double new_width = old_size.Height;
+
+            var update = new VA.ShapeSheet.Update(3);
+            update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, new_width);
+            update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, new_height);
+            update.SetFormula(VA.ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
+
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Page Orientation"))
             {
-                var active_page = application.ActivePage;
-                VA.Pages.PageHelper.SetOrientation(active_page, orientation);
+                update.Execute(active_page.PageSheet);
             }
         }
+
+
 
         public void ResizeToFitContents(VA.Drawing.Size bordersize, bool zoom_to_page)
         {
@@ -240,10 +281,18 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Session.VisioApplication;
+            var active_page = application.ActivePage;
+
+            var update = new VA.ShapeSheet.Update();
+
+            update.SetFormula(VA.ShapeSheet.SRCConstants.XGridOrigin, "0.0");
+            update.SetFormula(VA.ShapeSheet.SRCConstants.YGridOrigin, "0.0");
+            update.SetFormula(VA.ShapeSheet.SRCConstants.XRulerOrigin, "0.0");
+            update.SetFormula(VA.ShapeSheet.SRCConstants.YRulerOrigin, "0.0");
+
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Reset Page Origin"))
             {
-                var active_page = application.ActivePage;
-                VA.Pages.PageHelper.ResetOrigin(active_page);
+                update.Execute(active_page.PageSheet);
             }
         }
 

@@ -452,7 +452,7 @@ namespace VisioPowerTools2010
             {
                 return;
             }
-            VA.Pages.PageHelper.ResetOrigin(page);
+            this.scriptingsession.Page.ResetOrigin();
         }
     }
 }
