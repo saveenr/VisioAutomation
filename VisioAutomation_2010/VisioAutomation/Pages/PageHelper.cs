@@ -208,7 +208,15 @@ namespace VisioAutomation.Pages
             {
                 var old_size = VA.Pages.PageHelper.GetSize(page);
                 var new_size = old_size + bordersize.Multiply(2, 2);
-                VA.Pages.PageHelper.SetSize(page,new_size);
+
+                // Set the page size
+                var page_cells = new VA.Pages.PageCells();
+                page_cells.PageHeight = new_size.Height;
+                page_cells.PageWidth = new_size.Width;
+                var pageupdate = new VA.ShapeSheet.Update();
+                pageupdate.Execute(page);
+
+                // recenter the contents
                 page.CenterDrawing();
             }
         }
