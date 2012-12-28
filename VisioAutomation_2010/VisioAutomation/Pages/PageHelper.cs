@@ -94,7 +94,7 @@ namespace VisioAutomation.Pages
             update.Execute(page.PageSheet);
         }
 
-        public static VA.Drawing.Size GetSize(IVisio.Page page)
+        private static VA.Drawing.Size GetSize(IVisio.Page page)
         {
             if (page == null)
             {

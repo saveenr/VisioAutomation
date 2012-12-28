@@ -33,7 +33,16 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
-            return VA.Pages.PageHelper.GetSize(active_page);
+
+
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_height = query.AddColumn(VA.ShapeSheet.SRCConstants.PageHeight);
+            var col_width = query.AddColumn(VA.ShapeSheet.SRCConstants.PageWidth);
+            var results = query.GetResults<double>(active_page.PageSheet);
+            double height = results[0, col_height];
+            double width = results[0, col_width];
+            var s = new VA.Drawing.Size(width, height);
+            return s;
         }
 
         public void SetName(string name)
@@ -270,9 +279,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.VisioApplication;
-            var active_page = application.ActivePage;
-            var old_size = VA.Pages.PageHelper.GetSize(active_page);
+            var old_size = this.GetSize();
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
             var new_size = new VA.Drawing.Size(w, h);

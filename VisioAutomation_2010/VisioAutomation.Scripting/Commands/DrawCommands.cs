@@ -55,9 +55,8 @@ namespace VisioAutomation.Scripting.Commands
             var page = pages.Add();
             page.Background = 0; // ensure this is a foreground page
 
-            var pagesize = VA.Pages.PageHelper.GetSize(page);
-
-
+            var pagesize = this.Session.Page.GetSize();
+            
             var layout = new GRIDLAYOUT.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VA.Drawing.Size(1, 1), masterobj);
             layout.Origin = new VA.Drawing.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;

@@ -43,7 +43,7 @@ namespace TestVisioAutomation
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
             VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
-            var page_size = VA.Pages.PageHelper.GetSize(page1);
+            var page_size = VisioAutomationTest.GetPageSize(page1);
             Assert.AreEqual(page_size, this.StandardPageSize);
             doc1.Close(true);
         }

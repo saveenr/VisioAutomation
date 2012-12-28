@@ -95,7 +95,7 @@ namespace VisioAutomationSamples
             SampleEnvironment.SetPageSize(page,page_size);
 
             var lowerleft = new VA.Drawing.Point(0, 0);
-            var actual_page_size = VA.Pages.PageHelper.GetSize(page);
+            var actual_page_size = SampleEnvironment.GetPageSize(page);
             var page_rect = new VA.Drawing.Rectangle(lowerleft, actual_page_size);
 
             var layout = new GRIDMODEL.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);

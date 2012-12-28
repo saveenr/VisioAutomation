@@ -272,7 +272,7 @@ namespace TestVisioAutomation
             Assert.AreEqual("", c5.VisioShape.Text);
             Assert.AreEqual("", c6.VisioShape.Text);
 
-            var pagesize = VA.Pages.PageHelper.GetSize(page1);
+            var pagesize = VisioAutomationTest.GetPageSize(page1);
             //TestUtil.AreEqual(13.62, 13.57, pagesize, 0.05);
 
             doc.Close(true);
