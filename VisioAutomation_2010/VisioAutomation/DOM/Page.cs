@@ -73,14 +73,16 @@ namespace VisioAutomation.DOM
 
             using (var perfscope = new VA.Application.PerfScope(app, PerfSettings))
             {
+                if (this.Size.HasValue)
+                {
+                    this.PageCells.PageHeight = this.Size.Value.Height;
+                    this.PageCells.PageWidth = this.Size.Value.Width;
+                }
+
                 var update = new VA.ShapeSheet.Update();
                 this.PageCells.Apply(update, (short)page_sheet.ID);
                 update.Execute(page);
 
-                if (this.Size.HasValue)
-                {
-                    VA.Pages.PageHelper.SetSize(page,this.Size.Value);
-                }
 
                 // Then render the shapes
                 this.Shapes.Render(page);

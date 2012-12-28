@@ -28,7 +28,6 @@ namespace VisioAutomation.Pages
 
             return dest_page;
         }
-
         
         public static void Duplicate(
             IVisio.Page src_page,
