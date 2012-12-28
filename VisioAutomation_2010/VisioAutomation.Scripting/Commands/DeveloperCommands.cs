@@ -488,6 +488,12 @@ namespace VisioAutomation.Scripting.Commands
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
             tree_layout.Render(doc.Application.ActivePage);
 
+            var app = doc.Application;
+            var active_window = app.ActiveWindow;
+            active_window.ShowGrid = 0;
+            active_window.ShowPageBreaks = 0;
+            active_window.ShowGuides = 0;
+
             return doc;
         }
 
