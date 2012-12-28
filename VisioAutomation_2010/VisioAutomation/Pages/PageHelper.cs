@@ -17,166 +17,30 @@ namespace VisioAutomation.Pages
 
         public static IVisio.Page Duplicate(IVisio.Page src_page,string dest_page_name)
         {
-            if (src_page == null)
-            {
-                throw new System.ArgumentNullException("src_page");
-            }
+            var pcc = new VA.Internal.PageContentCopier(src_page);
 
-            var application = src_page.Application;
-            if (src_page != application.ActivePage)
-            {
-                throw new System.ArgumentException("Source page must be active page.", "src_page");
-            }
-
-            bool has_something_to_copy = false;
-            var copy_flag = IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
-            bool perform_group_before_copy = false;
-
-            var page_shapes = src_page.Shapes;
-            if (page_shapes.Count > 0)
-            {
-                has_something_to_copy = true;
-                var active_window = application.ActiveWindow;
-                active_window.SelectAll();
-                var selection = active_window.Selection;
-                int num_source_shapes = selection.Count;
-
-                IVisio.Shape shape_to_copy = null;
-                perform_group_before_copy = num_source_shapes > 1;
-
-                // Group multiple shapes into 1 if needed
-                if (perform_group_before_copy)
-                {
-                    var w = application.ActiveWindow;
-                    var sel = w.Selection;
-                    sel.Group();                    
-                }
-
-                // Perform the copy
-                shape_to_copy = page_shapes[1];
-
-                // so perform the copy
-                shape_to_copy.Copy(copy_flag);
-
-                // Undo the grouping we may have done
-                if (perform_group_before_copy)
-                {
-                    shape_to_copy.Ungroup();
-                }
-            }
-            
-            // create the new page
-            var app = src_page.Application;
             var doc = src_page.Document;
             var pages = doc.Pages;
             var dest_page = pages.Add();
+            dest_page.Name = dest_page_name;
 
-            // Match the page properties
-            set_page_props(src_page,dest_page,dest_page_name);
-
-            if (has_something_to_copy)
-            {
-                using (var alertresponse = new VA.Application.AlertResponseScope(app, VA.Application.AlertResponseCode.Ignore))
-                {
-                    dest_page.Paste(copy_flag);
-                }
-
-                if (perform_group_before_copy)
-                {
-                    var active_window = application.ActiveWindow;
-                    var selection = active_window.Selection;
-                    selection.Ungroup();
-                }
-            }
+            pcc.ApplyTo(dest_page);
 
             return dest_page;
         }
 
-        private static void set_page_props(IVisio.Page src_page,
-                                           IVisio.Page dest_page,
-                                           string dest_page_name)
-        {
-            // First copy the Page's shapesheet
-            var src_pagesheet = src_page.PageSheet;
-            var dest_pagesheet = dest_page.PageSheet;
-            var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
-            var update = new VA.ShapeSheet.Update();
-            pagecells.Apply(update);
-            update.Execute(dest_pagesheet);
-
-            // Now set the page's name
-            if (dest_page_name != null)
-            {
-                dest_page.NameU = dest_page_name;
-            }            
-
-            // Set other properties
-            // dest_page.Background = src_page.Background;
-            // dest_page.BackPage = src_page.BackPage;
-        }
         
         public static void Duplicate(
             IVisio.Page src_page,
             IVisio.Page dest_page,
             string dest_page_name)
         {
-            if (src_page == null)
-            {
-                throw new System.ArgumentNullException("src_page");
-            }
-
-            if (dest_page == null)
-            {
-                throw new System.ArgumentNullException("dest_page");
-            }
-
-            if (src_page == dest_page)
-            {
-                throw new VA.AutomationException("source and dest pages can't be the same");
-            }
-
-            var src_doc = src_page.Document;
-            var dest_doc = dest_page.Document;
-
-            if (src_doc == dest_doc)
-            {
-                throw new VA.AutomationException("source and dest documents can't be the same");
-            }
-
-            // http://support.microsoft.com/kb/290581
             var app = src_page.Application;
+            var doc = src_page.Document;
+            dest_page.Name = dest_page_name;
 
-            short copy_paste_flags = (short)IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
-
-            VA.Documents.DocumentHelper.Activate(src_page.Document);
-
-            var src_window = app.ActiveWindow;
-            src_window.Page = src_page;
-
-            var src_page_shapes = src_page.Shapes;
-            bool has_content = src_page_shapes.Count > 0;
-
-            // copy contents
-            if (has_content)
-            {
-                src_window.Page = src_page;
-                src_window.SelectAll();
-                var selection = src_window.Selection;
-                selection.Copy(copy_paste_flags);
-                src_window.DeselectAll();
-            }
-
-            // Create the new page and give it the same general properties
-            set_page_props(src_page, dest_page,dest_page_name);
-
-            // paste any contents 
-            if (has_content)
-            {
-                using (var alertresponse = new VA.Application.AlertResponseScope(app,VA.Application.AlertResponseCode.Ignore))
-                {
-                    dest_page.Paste(copy_paste_flags);
-                }
-            }
+            var pcc = new VA.Internal.PageContentCopier(src_page);
+            pcc.ApplyTo(dest_page);
         }
 
         public static VA.Pages.PrintPageOrientation GetOrientation(IVisio.Page page)

@@ -28,6 +28,7 @@ namespace TestVisioAutomation
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
             var s1 = page1.DrawRectangle(1, 1, 3, 3);
 
+
             var page2 = VA.Pages.PageHelper.Duplicate(page1, null);
 
             Assert.AreEqual(new VA.Drawing.Size(4, 3), VA.Pages.PageHelper.GetSize(page2) );
