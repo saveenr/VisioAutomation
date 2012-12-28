@@ -1,7 +1,7 @@
 <package >
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>1.0.11</version>
+    <version>1.0.12</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -11,7 +11,11 @@
     <description>VisioAutomation helps developers to control Visio from .NET languages. 
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
-    <releaseNotes>Fixes to Directed Graph Layout</releaseNotes>
+    <releaseNotes>
+     -Removed Page.Activate() extension methods
+     -Removed extension methods in favor of helpers
+     -Internal refactoring
+    </releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Visio</tags>
     <dependencies>
