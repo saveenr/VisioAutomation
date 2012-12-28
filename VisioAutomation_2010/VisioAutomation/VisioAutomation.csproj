@@ -245,7 +245,6 @@
     <Compile Include="Internal\Interop\COMInterop.cs" />
     <Compile Include="Convert.cs" />
     <Compile Include="Extensions\LayersMethods.cs" />
-    <Compile Include="Extensions\WindowsMethods.cs" />
     <Compile Include="Shapesheet\SRCConstants.cs" />
     <Compile Include="Shapesheet\SRC.cs" />
     <Compile Include="Connections\ConnectionPointCells.cs" />
@@ -289,15 +288,11 @@
     <Compile Include="Extensions\MasterMethods.cs" />
     <Compile Include="Application\ApplicationHelper.cs" />
     <Compile Include="Extensions\FontsMethods.cs" />
-    <Compile Include="Extensions\MastersMethods.cs" />
     <Compile Include="Extensions\ApplicationMethods.cs" />
-    <Compile Include="Extensions\DocumentsMethods.cs" />
-    <Compile Include="Extensions\PagesMethods.cs" />
     <Compile Include="Internal\Interop\NativeMethods.cs" />
     <Compile Include="AutomationException.cs" />
     <Compile Include="ShapeHelper.cs" />
     <Compile Include="Text\TextRun.cs" />
-    <Compile Include="Extensions\ShapesMethods.cs" />
     <Compile Include="Extensions\DocumentMethods.cs" />
     <Compile Include="Extensions\PageMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

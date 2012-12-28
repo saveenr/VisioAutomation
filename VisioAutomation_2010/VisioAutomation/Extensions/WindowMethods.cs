@@ -60,5 +60,14 @@ namespace VisioAutomation.Extensions
             // MSDN: http://msdn.microsoft.com/en-us/library/office/ms367542(v=office.14).aspx
             window.SetViewRect(rect.Left, rect.Top, rect.Width, rect.Height);
         }
+
+        public static IEnumerable<IVisio.Window> AsEnumerable(this IVisio.Windows windows)
+        {
+            short count = windows.Count;
+            for (int i = 0; i < count; i++)
+            {
+                yield return windows[(short)(i + 1)];
+            }
+        }
     }
 }
