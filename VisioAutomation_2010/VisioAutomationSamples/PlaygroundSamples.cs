@@ -92,7 +92,7 @@ namespace VisioAutomationSamples
             int num_rows = 7;
 
             var page_size = new VA.Drawing.Size(5, 5);
-            VA.Pages.PageHelper.SetSize(page,page_size);
+            SampleEnvironment.SetPageSize(page,page_size);
 
             var lowerleft = new VA.Drawing.Point(0, 0);
             var actual_page_size = VA.Pages.PageHelper.GetSize(page);

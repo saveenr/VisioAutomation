@@ -49,7 +49,7 @@ namespace TestVisioAutomation
             var pages = active_document.Pages;
             var page = pages.Add();
             page.Background = 0;
-            VA.Pages.PageHelper.SetSize(page,s);
+            VisioAutomationTest.SetPageSize(page, s);
 
             return page;
         }
@@ -127,6 +127,21 @@ namespace TestVisioAutomation
             var selection = window.Selection;
             var group = selection.Group();
             return group;
+        }
+
+        public static void SetPageSize(IVisio.Page page, VA.Drawing.Size size)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException("page");
+            }
+
+            var page_sheet = page.PageSheet;
+
+            var update = new VA.ShapeSheet.Update(2);
+            update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, size.Width);
+            update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, size.Height);
+            update.Execute(page_sheet);
         }
     }
 }

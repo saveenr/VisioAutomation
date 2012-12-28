@@ -69,10 +69,10 @@ namespace TestVisioAutomation
             var page_size1 = new VA.Drawing.Size(10, 5);
             var page_size2 = new VA.Drawing.Size(6, 3);
 
-            VA.Pages.PageHelper.SetSize(page1,page_size1);
+            VisioAutomationTest.SetPageSize(page1, page_size1);
             Assert.AreEqual(page_size1, VA.Pages.PageHelper.GetSize(page1));
 
-            VA.Pages.PageHelper.SetSize(page1,page_size2);
+            VisioAutomationTest.SetPageSize(page1, page_size2);
             Assert.AreEqual(page_size2, VA.Pages.PageHelper.GetSize(page1));
             page1.Delete(0);
         }

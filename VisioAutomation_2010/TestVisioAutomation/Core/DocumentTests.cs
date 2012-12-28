@@ -24,7 +24,7 @@ namespace TestVisioAutomation
 
             var page2 = doc1.Pages.Add();
             page2.Background = 0;
-            VA.Pages.PageHelper.SetSize(page2,this.StandardPageSize);
+            VisioAutomationTest.SetPageSize(page2, this.StandardPageSize);
 
             var active_window = app.ActiveWindow;
             Assert.AreEqual(app.ActivePage, page2);
@@ -42,7 +42,7 @@ namespace TestVisioAutomation
             var documents = app.Documents;
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            VA.Pages.PageHelper.SetSize(page1,this.StandardPageSize);
+            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
             var page_size = VA.Pages.PageHelper.GetSize(page1);
             Assert.AreEqual(page_size, this.StandardPageSize);
             doc1.Close(true);

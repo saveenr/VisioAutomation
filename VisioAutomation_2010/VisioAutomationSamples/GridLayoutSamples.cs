@@ -32,7 +32,7 @@ namespace VisioAutomationSamples
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
 
             var page_size = new VA.Drawing.Size(10, 10);
-            VA.Pages.PageHelper.SetSize(page,page_size);
+            SampleEnvironment.SetPageSize(page,page_size);
 
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];

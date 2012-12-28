@@ -97,11 +97,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(double w, double h)
         {
-            var doc = New();
-            var page = this.Session.VisioApplication.ActivePage;
-
+            var doc = this.New();
             var pagesize = new VA.Drawing.Size(w, h);
-            VA.Pages.PageHelper.SetSize(page,pagesize);
+            this.Session.Page.SetSize(pagesize);
             return doc;
         }
 

@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting.Commands
                 if (size.HasValue)
                 {
                     this.Session.Write(OutputStream.Verbose,"Setting page size to {0}", size.Value);
-                    VA.Pages.PageHelper.SetSize(page,size.Value);
+                    this.SetSize(size.Value);
                 }
 
                 if (isbackgroundpage)
@@ -249,7 +249,11 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Page Size"))
             {
                 var active_page = application.ActivePage;
-                VA.Pages.PageHelper.SetSize(active_page,new_size);
+                var page_sheet = active_page.PageSheet;
+                var update = new VA.ShapeSheet.Update(2);
+                update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, new_size.Width);
+                update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, new_size.Height);
+                update.Execute(page_sheet);
             }
         }
 

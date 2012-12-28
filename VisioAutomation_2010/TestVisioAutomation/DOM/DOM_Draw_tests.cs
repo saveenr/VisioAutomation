@@ -75,7 +75,7 @@ namespace TestVisioAutomation
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            VA.Pages.PageHelper.SetSize(app.ActivePage,new VA.Drawing.Size(10, 10));
+            VisioAutomationTest.SetPageSize(app.ActivePage, new VA.Drawing.Size(10, 10));
             var page = dompage.Render(app.ActiveDocument);
 
             // Verify

@@ -39,7 +39,7 @@ namespace TestVisioAutomation
             var documents = app.Documents;
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            VA.Pages.PageHelper.SetSize(page1,this.StandardPageSize);
+            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
 
             // draw a simple shape
             var s1 = page1.DrawRectangle(this.StandardPageSizeRect);
