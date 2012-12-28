@@ -8,64 +8,6 @@ namespace VisioAutomation.Pages
 {
     public static class PageHelper
     {
-        public static void SetBackgroundPage(IVisio.Page fgpage, IVisio.Page bgpage)
-        {
-            if (fgpage == null)
-            {
-                throw new System.ArgumentNullException("fgpage");
-            }
-
-            if (bgpage != null)
-            {
-                // Set the background page
-                // Check that the intended background is indeed a background page
-                if (bgpage.Background == 0)
-                {
-                    string msg = string.Format("Page \"{0}\" is not a background page", bgpage.Name);
-                    throw new AutomationException(msg);
-                }
-
-                // don't allow the page to be set as a background to itself
-                if (fgpage == bgpage)
-                {
-                    string msg = string.Format("Cannot set page as its own background page");
-                    throw new AutomationException(msg);
-                }
-
-                // Finally set it
-                fgpage.BackPage = bgpage;
-            }
-            else
-            {
-                // Clear the background page
-                fgpage.BackPage = string.Empty;
-            }
-        }
-
-        private static void copy_page_cells(IVisio.Page src_page, IVisio.Page dest_page)
-        {
-            if (src_page == null)
-            {
-                throw new System.ArgumentNullException("src_page");
-            }
-
-            if (dest_page == null)
-            {
-                throw new System.ArgumentNullException("dest_page");
-            }
-
-            var src_pagesheet = src_page.PageSheet;
-            var dest_pagesheet = dest_page.PageSheet;
-
-            // Collect the cells from the source page
-            var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
-
-            // Set them on the destination page
-            var update = new VA.ShapeSheet.Update();
-            pagecells.Apply(update);
-            update.Execute(dest_pagesheet);
-        }
-
         public static VA.Pages.PageCells GetPageCells(IVisio.Page page)
         {
             var pagesheet = page.PageSheet;
@@ -73,69 +15,71 @@ namespace VisioAutomation.Pages
             return pagecells;
         }
 
-        public static IVisio.Page Duplicate(IVisio.Page page,string dest_pagename)
+        public static IVisio.Page Duplicate(IVisio.Page src_page,string dest_page_name)
         {
-            if (page == null)
+            if (src_page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException("src_page");
             }
 
-            var application = page.Application;
-            if (page != application.ActivePage)
+            var application = src_page.Application;
+            if (src_page != application.ActivePage)
             {
-                throw new System.ArgumentException("Source page must be active page.", "page");
+                throw new System.ArgumentException("Source page must be active page.", "src_page");
             }
 
-            bool do_copy = true;
             bool has_something_to_copy = false;
-            IVisio.Shape shape_to_copy = null;
-            bool perform_group_before_copy = false;
             var copy_flag = IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
+            bool perform_group_before_copy = false;
 
-            int num_shapes = 0;
-            if (do_copy && (page.Shapes.Count > 0))
+            var page_shapes = src_page.Shapes;
+            if (page_shapes.Count > 0)
             {
                 has_something_to_copy = true;
                 var active_window = application.ActiveWindow;
                 active_window.SelectAll();
                 var selection = active_window.Selection;
-                num_shapes = selection.Count;
+                int num_source_shapes = selection.Count;
 
-                if (num_shapes == 1)
-                {
-                    shape_to_copy = page.Shapes[1];
-                    perform_group_before_copy = false;
-                }
-                else
+                IVisio.Shape shape_to_copy = null;
+                perform_group_before_copy = num_source_shapes > 1;
+
+                // Group multiple shapes into 1 if needed
+                if (perform_group_before_copy)
                 {
                     var w = application.ActiveWindow;
                     var sel = w.Selection;
-                    shape_to_copy = sel.Group();
-                    perform_group_before_copy = true;
+                    sel.Group();                    
                 }
 
+                // Perform the copy
+                shape_to_copy = page_shapes[1];
+
+                // so perform the copy
                 shape_to_copy.Copy(copy_flag);
 
+                // Undo the grouping we may have done
                 if (perform_group_before_copy)
                 {
                     shape_to_copy.Ungroup();
                 }
             }
-
-            var doc = page.Document;
+            
+            // create the new page
+            var app = src_page.Application;
+            var doc = src_page.Document;
             var pages = doc.Pages;
-            var new_page = pages.Add();
-            if (dest_pagename != null)
-            {
-                new_page.NameU = dest_pagename;
-            }
-            new_page.Background = 0; // ensure this is a foreground page
-            VA.Pages.PageHelper.SetSize(new_page,VA.Pages.PageHelper.GetSize(page)); // set the size
+            var dest_page = pages.Add();
 
-            copy_page_cells(page, new_page);
-            if (do_copy && has_something_to_copy)
+            // Match the page properties
+            set_page_props(src_page,dest_page,dest_page_name);
+
+            if (has_something_to_copy)
             {
-                new_page.Paste(copy_flag);
+                using (var alertresponse = new VA.Application.AlertResponseScope(app, VA.Application.AlertResponseCode.Ignore))
+                {
+                    dest_page.Paste(copy_flag);
+                }
 
                 if (perform_group_before_copy)
                 {
@@ -145,14 +89,36 @@ namespace VisioAutomation.Pages
                 }
             }
 
-            return new_page;
+            return dest_page;
         }
 
-        public static void DuplicateToDocument(
+        private static void set_page_props(IVisio.Page src_page,
+                                           IVisio.Page dest_page,
+                                           string dest_page_name)
+        {
+            // First copy the Page's shapesheet
+            var src_pagesheet = src_page.PageSheet;
+            var dest_pagesheet = dest_page.PageSheet;
+            var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
+            var update = new VA.ShapeSheet.Update();
+            pagecells.Apply(update);
+            update.Execute(dest_pagesheet);
+
+            // Now set the page's name
+            if (dest_page_name != null)
+            {
+                dest_page.NameU = dest_page_name;
+            }            
+
+            // Set other properties
+            // dest_page.Background = src_page.Background;
+            // dest_page.BackPage = src_page.BackPage;
+        }
+        
+        public static void Duplicate(
             IVisio.Page src_page,
             IVisio.Page dest_page,
-            string new_page_name,
-            bool suppress_ui)
+            string dest_page_name)
         {
             if (src_page == null)
             {
@@ -187,7 +153,8 @@ namespace VisioAutomation.Pages
             var src_window = app.ActiveWindow;
             src_window.Page = src_page;
 
-            bool has_content = src_page.Shapes.Count > 0;
+            var src_page_shapes = src_page.Shapes;
+            bool has_content = src_page_shapes.Count > 0;
 
             // copy contents
             if (has_content)
@@ -200,15 +167,7 @@ namespace VisioAutomation.Pages
             }
 
             // Create the new page and give it the same general properties
-            copy_page_cells(src_page, dest_page);
-
-            // Try to preserve the name
-            new_page_name = new_page_name ?? src_page.Name;
-            var existing_names = new HashSet<string>(dest_doc.Pages.GetNamesU());
-            if (!existing_names.Contains(new_page_name))
-            {
-                dest_page.Name = new_page_name;
-            }
+            set_page_props(src_page, dest_page,dest_page_name);
 
             // paste any contents 
             if (has_content)

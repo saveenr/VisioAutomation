@@ -111,9 +111,24 @@ namespace VisioAutomation.Scripting.Commands
             var bgpage = pages.ItemU[background_page_name];
             var fgpage = application.ActivePage;
 
+            // Set the background page
+            // Check that the intended background is indeed a background page
+            if (bgpage.Background == 0)
+            {
+                string msg = string.Format("Page \"{0}\" is not a background page", bgpage.Name);
+                throw new VA.AutomationException(msg);
+            }
+
+            // don't allow the page to be set as a background to itself
+            if (fgpage == bgpage)
+            {
+                string msg = string.Format("Cannot set page as its own background page");
+                throw new VA.AutomationException(msg);
+            }
+
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Background Page"))
             {
-                VA.Pages.PageHelper.SetBackgroundPage(fgpage, bgpage);
+                fgpage.BackPage = bgpage;
             }
         }
 
@@ -155,7 +170,7 @@ namespace VisioAutomation.Scripting.Commands
             dest_pagename = dest_pagename ?? src_page.NameU;
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            VA.Pages.PageHelper.DuplicateToDocument(src_page, dest_page, dest_pagename, true);
+            VA.Pages.PageHelper.Duplicate(src_page, dest_page, dest_pagename);
 
             // the active window will be to the new document
             var active_window = application.ActiveWindow;
