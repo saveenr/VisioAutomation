@@ -238,7 +238,7 @@ namespace VisioAutomation.CustomProperties
             return IsValidCustomPropertyName(name, out errmsg);
         }
 
-        public static void CheckValidCustomPropertyName(string name)
+        internal static void CheckValidCustomPropertyName(string name)
         {
             string errmsg;
             if (!IsValidCustomPropertyName(name, out errmsg))
@@ -268,7 +268,7 @@ namespace VisioAutomation.CustomProperties
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
         }
 
-        public static string GetRowName(string name)
+        private static string GetRowName(string name)
         {
             return String.Format("Prop.{0}", name);
         }
