@@ -101,6 +101,8 @@ namespace VisioAutomation.Scripting.Commands
             docbuilder.VisioDocument.Creator = "";
             docbuilder.VisioDocument.Company = "";
 
+            hide_ui_stuff(docbuilder.VisioDocument);
+
             return docbuilder.VisioDocument;
         }
 
@@ -160,6 +162,8 @@ namespace VisioAutomation.Scripting.Commands
             docbuilder.VisioDocument.Title = "Visio Interop Enum Documenation";
             docbuilder.VisioDocument.Creator = "";
             docbuilder.VisioDocument.Company = "";
+
+            hide_ui_stuff(docbuilder.VisioDocument);
 
             return docbuilder.VisioDocument;
         }
@@ -319,6 +323,8 @@ namespace VisioAutomation.Scripting.Commands
 
 
             tree_layout.Render(doc.Application.ActivePage);
+
+            hide_ui_stuff(doc);
             return doc;
         }
 
