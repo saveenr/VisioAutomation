@@ -25,7 +25,7 @@ namespace VisioAutomation.UserDefinedCells
                 throw new System.ArgumentNullException("name");
             }
 
-            CheckValidUserDefinedCellName(name);
+            CheckValidName(name);
 
             string full_prop_name = GetRowName(name);
 
@@ -40,7 +40,7 @@ namespace VisioAutomation.UserDefinedCells
                 throw new System.ArgumentNullException("shape");
             }
 
-            CheckValidUserDefinedCellName(name);
+            CheckValidName(name);
 
             if (val == null)
             {
@@ -76,7 +76,7 @@ namespace VisioAutomation.UserDefinedCells
                 throw new System.ArgumentNullException("shape");
             }
 
-            CheckValidUserDefinedCellName(name);
+            CheckValidName(name);
 
             if (HasUserDefinedCell(shape, name))
             {
@@ -276,29 +276,6 @@ namespace VisioAutomation.UserDefinedCells
                 return false;
             }
 
-            return true;
-        }
-
-        public static void CheckValidName(string name)
-        {
-            if (!IsValidName(name))
-            {
-                throw new System.ArgumentException("name");                
-            }
-        }
-
-        public static bool IsValidUserDefinedCellName(string name)
-        {
-            if (name == null)
-            {
-                return false;
-            }
-
-            if (name.Length < 1)
-            {
-                return false;
-            }
-
             if (name.Contains(" ") || name.Contains("\t") || name.Contains("\r") || name.Contains("\n"))
             {
                 return false;
@@ -307,11 +284,11 @@ namespace VisioAutomation.UserDefinedCells
             return true;
         }
 
-        public static void CheckValidUserDefinedCellName(string name)
+        internal static void CheckValidName(string name)
         {
-            if (!IsValidUserDefinedCellName(name))
+            if (!IsValidName(name))
             {
-                string msg = string.Format("Invalid Property Name: \"{0}\"", name);
+                string msg = string.Format("Invalid Name for User-Defined Cell: \"{0}\"", name);
                 throw new VA.AutomationException(msg);
             }
         }
@@ -328,7 +305,7 @@ namespace VisioAutomation.UserDefinedCells
                 throw new System.ArgumentNullException("name");
             }
 
-            CheckValidUserDefinedCellName(name);
+            CheckValidName(name);
 
             string full_prop_name = GetRowName(name);
 
