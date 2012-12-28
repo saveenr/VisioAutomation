@@ -301,7 +301,7 @@ namespace TestVisioAutomation
             directed_graph_drawing.Render(page1, options);
             
             Assert.IsNotNull(n0.VisioShape);
-            var props_dic = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(n0.VisioShape);
+            var props_dic = VA.CustomProperties.CustomPropertyHelper.Get(n0.VisioShape);
             Assert.IsTrue(props_dic.Count>=3);
             Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Formula);
             Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Formula);

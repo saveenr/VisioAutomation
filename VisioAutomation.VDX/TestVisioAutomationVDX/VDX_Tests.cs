@@ -341,7 +341,7 @@ namespace TestVisioAutomationVDX
             Assert.AreEqual(1,page.Shapes.Count);
 
             var shape = page.Shapes[1];
-            var customprops = VA.CustomProperties.CustomPropertyHelper.GetCustomProperties(shape);
+            var customprops = VA.CustomProperties.CustomPropertyHelper.Get(shape);
 
             Assert.IsTrue(customprops.ContainsKey("PROP1"));
             Assert.AreEqual("\"VALUE1\"",customprops["PROP1"].Value.Formula);

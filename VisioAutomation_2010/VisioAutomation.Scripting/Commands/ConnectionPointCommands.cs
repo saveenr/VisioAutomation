@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             foreach (var shape in shapes)
             {
-                var cp = VA.Connections.ConnectionPointHelper.GetConnectionPoints(shape);
+                var cp = VA.Connections.ConnectionPointHelper.Get(shape);
                 dic[shape] = cp;
             }
 
@@ -73,7 +73,7 @@ namespace VisioAutomation.Scripting.Commands
                 foreach (var shape in shapes)
                 {
 
-                    int index = VA.Connections.ConnectionPointHelper.AddConnectionPoint(shape, cp);
+                    int index = VA.Connections.ConnectionPointHelper.Add(shape, cp);
                     indices.Add(index);
                 }
             }
@@ -95,14 +95,14 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
 
             var target_shapes = from shape in shapes
-                                where VA.Connections.ConnectionPointHelper.GetConnectionPointCount(shape) > index
+                                where VA.Connections.ConnectionPointHelper.GetCount(shape) > index
                                 select shape;
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Connection Point"))
             {
                 foreach (var shape in target_shapes)
                 {
-                    VA.Connections.ConnectionPointHelper.DeleteConnectionPoint(shape, index);
+                    VA.Connections.ConnectionPointHelper.Delete(shape, index);
                 }
             }
         }

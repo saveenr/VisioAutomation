@@ -81,7 +81,7 @@ namespace VisioAutomation.DOM
                 {
                     string cp_name = kv.Key;
                     VA.CustomProperties.CustomPropertyCells cp_cells = kv.Value;
-                    VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(vshape, cp_name, cp_cells);
+                    VA.CustomProperties.CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
                 }
             }
         }

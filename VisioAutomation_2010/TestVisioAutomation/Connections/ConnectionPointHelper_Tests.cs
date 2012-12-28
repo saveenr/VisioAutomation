@@ -15,7 +15,7 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ConnectionPointHelper.GetConnectionPointCount(s1));
+            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             var cp_type = VA.Connections.ConnectionPointType.Inward;
 
@@ -29,13 +29,13 @@ namespace TestVisioAutomation
             cpd2.Y = "Height*0";
             cpd2.Type = (int) cp_type;
 
-            ConnectionPointHelper.AddConnectionPoint(s1, cpd1);
-            Assert.AreEqual(1, ConnectionPointHelper.GetConnectionPointCount(s1));
+            ConnectionPointHelper.Add(s1, cpd1);
+            Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
 
-            ConnectionPointHelper.AddConnectionPoint(s1, cpd2);
-            Assert.AreEqual(2, ConnectionPointHelper.GetConnectionPointCount(s1));
+            ConnectionPointHelper.Add(s1, cpd2);
+            Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
 
-            var controlpoints = VA.Connections.ConnectionPointHelper.GetConnectionPoints(s1);
+            var controlpoints = VA.Connections.ConnectionPointHelper.Get(s1);
             Assert.AreEqual(2, controlpoints.Count);
             var cp_0 = controlpoints[0];
             AssertVA.AreEqual("0 in", 0, cp_0.DirX);
@@ -51,10 +51,10 @@ namespace TestVisioAutomation
             AssertVA.AreEqual("Width*0.75", 3, cp_1.X);
             AssertVA.AreEqual("Height*0", 0, cp_1.Y);
 
-            ConnectionPointHelper.DeleteConnectionPoint(s1, 1);
-            Assert.AreEqual(1, ConnectionPointHelper.GetConnectionPointCount(s1));
-            ConnectionPointHelper.DeleteConnectionPoint(s1, 0);
-            Assert.AreEqual(0, ConnectionPointHelper.GetConnectionPointCount(s1));
+            ConnectionPointHelper.Delete(s1, 1);
+            Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
+            ConnectionPointHelper.Delete(s1, 0);
+            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             page1.Delete(0);
         }
@@ -65,7 +65,7 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ConnectionPointHelper.GetConnectionPointCount(s1));
+            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             var cp_type = VA.Connections.ConnectionPointType.Inward;
 
@@ -81,14 +81,14 @@ namespace TestVisioAutomation
                 cp.DirY = 0;
                 cp.Type = (int) cp_type;
 
-                ConnectionPointHelper.AddConnectionPoint(s1, cp);
+                ConnectionPointHelper.Add(s1, cp);
             }
 
-            Assert.AreEqual(4, ConnectionPointHelper.GetConnectionPointCount(s1));
+            Assert.AreEqual(4, ConnectionPointHelper.GetCount(s1));
 
-            int num_deleted = ConnectionPointHelper.DeleteAllConnectionPoints(s1);
+            int num_deleted = ConnectionPointHelper.Delete(s1);
             Assert.AreEqual(4, num_deleted);
-            Assert.AreEqual(0, ConnectionPointHelper.GetConnectionPointCount(s1));
+            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
             page1.Delete(0);
         }

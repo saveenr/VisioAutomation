@@ -7,7 +7,7 @@ namespace VisioAutomation.Controls
 {
     public static class ControlHelper
     {
-        public static int AddControl(IVisio.Shape shape)
+        public static int Add(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -16,10 +16,10 @@ namespace VisioAutomation.Controls
 
             var ctrl = new ControlCells();
 
-            return AddControl(shape, ctrl);
+            return Add(shape, ctrl);
         }
 
-        public static int AddControl(
+        public static int Add(
             IVisio.Shape shape,
             ControlCells ctrl)
         {
@@ -32,12 +32,12 @@ namespace VisioAutomation.Controls
                                      (short)IVisio.VisRowIndices.visRowLast,
                                      (short)IVisio.VisRowTags.visTagDefault);
 
-            SetControl(shape, row, ctrl);
+            Set(shape, row, ctrl);
 
             return row;
         }
 
-        public static int SetControl(
+        public static int Set(
             IVisio.Shape shape,
             short row,
             ControlCells ctrl)
@@ -65,7 +65,7 @@ namespace VisioAutomation.Controls
             return row;
         }
 
-        public static void DeleteControl(IVisio.Shape shape, int index)
+        public static void Delete(IVisio.Shape shape, int index)
         {
             if (shape == null)
             {
@@ -81,7 +81,7 @@ namespace VisioAutomation.Controls
             shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionControls, (short)row);
         }
 
-        public static int GetControlsCount(IVisio.Shape shape)
+        public static int GetCount(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -91,12 +91,12 @@ namespace VisioAutomation.Controls
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];
         }
 
-        public static IList<ControlCells> GetControls(IVisio.Shape shape)
+        public static IList<ControlCells> Get(IVisio.Shape shape)
         {
             return ControlCells.GetCells(shape);
         }
 
-        public static IList<List<ControlCells>> GetControls(IVisio.Page page, IList<int> shapeids)
+        public static IList<List<ControlCells>> Get(IVisio.Page page, IList<int> shapeids)
         {
             return ControlCells.GetCells(page,shapeids);
         }

@@ -259,13 +259,13 @@ namespace TestVisioAutomation
             var s3 = page1.DrawRectangle(3, 1, 4, 2);
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
-            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(s1, "S1P1", "1");
-            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(s2, "S2P1", "2");
-            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(s2, "S2P2", "3");
+            VA.CustomProperties.CustomPropertyHelper.Set(s1, "S1P1", "1");
+            VA.CustomProperties.CustomPropertyHelper.Set(s2, "S2P1", "2");
+            VA.CustomProperties.CustomPropertyHelper.Set(s2, "S2P2", "3");
             //set nothing for s3
-            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(s4, "S3P1", "4");
-            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(s4, "S3P2", "5");
-            VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(s4, "S3P3", "6");
+            VA.CustomProperties.CustomPropertyHelper.Set(s4, "S3P1", "4");
+            VA.CustomProperties.CustomPropertyHelper.Set(s4, "S3P2", "5");
+            VA.CustomProperties.CustomPropertyHelper.Set(s4, "S3P3", "6");
 
             var query = new VA.ShapeSheet.Query.SectionQuery((short)IVisio.VisSectionIndices.visSectionProp);
             query.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value.Cell);
@@ -419,7 +419,7 @@ namespace TestVisioAutomation
 
             // Add a Controls row to shape2
             var cc = new VA.Controls.ControlCells();
-            VA.Controls.ControlHelper.AddControl(s2, cc);
+            VA.Controls.ControlHelper.Add(s2, cc);
 
             // Now verify that none of the shapes *except s2* have the controls section locally or otherwise
             foreach (var s in shapes)

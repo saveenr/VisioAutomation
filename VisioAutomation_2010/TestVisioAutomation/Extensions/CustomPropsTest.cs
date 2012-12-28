@@ -17,24 +17,24 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
 
             // Add a Custom Property
             var cp = new VA.CustomProperties.CustomPropertyCells();
             cp.Value = "BAR1";
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", cp);
+            CustomPropertyHelper.Set(s1, "FOO1", cp);
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.Get(s1).Count);
             // Check that it is called FOO1
-            Assert.AreEqual(true, CustomPropertyHelper.HasCustomProperty(s1, "FOO1"));
+            Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             // Check that non-existent properties can't be found
-            Assert.AreEqual(false, CustomPropertyHelper.HasCustomProperty(s1, "FOOX"));
+            Assert.AreEqual(false, CustomPropertyHelper.Contains(s1, "FOOX"));
 
             // Delete that custom property
-            CustomPropertyHelper.DeleteCustomProperty(s1, "FOO1");
+            CustomPropertyHelper.Delete(s1, "FOO1");
             // Verify that we have zero Custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
 
             page1.Delete(0);
         }
@@ -47,24 +47,24 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             // By default a shape has ZERO custom Properties
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
 
             // Add the same one multiple times Custom Property
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", "BAR1");
+            CustomPropertyHelper.Set(s1, "FOO1", "BAR1");
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.Get(s1).Count);
             // Check that it is called FOO1
-            Assert.AreEqual(true, CustomPropertyHelper.HasCustomProperty(s1, "FOO1"));
+            Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             // Try to SET the same property again many times
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", "BAR2");
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", "BAR3");
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", "BAR4");
+            CustomPropertyHelper.Set(s1, "FOO1", "BAR2");
+            CustomPropertyHelper.Set(s1, "FOO1", "BAR3");
+            CustomPropertyHelper.Set(s1, "FOO1", "BAR4");
 
             // Asset that now we have ONE CustomProperty
-            Assert.AreEqual(1, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(1, CustomPropertyHelper.Get(s1).Count);
             // Check that it is called FOO1
-            Assert.AreEqual(true, CustomPropertyHelper.HasCustomProperty(s1, "FOO1"));
+            Assert.AreEqual(true, CustomPropertyHelper.Contains(s1, "FOO1"));
 
             page1.Delete(0);
         }
@@ -75,10 +75,10 @@ namespace TestVisioAutomation
             bool caught = false;
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomProperties(s1).Count);
+            Assert.AreEqual(0, CustomPropertyHelper.Get(s1).Count);
             try
             {
-                CustomPropertyHelper.SetCustomProperty(s1, "FOO 1", "BAR1");
+                CustomPropertyHelper.Set(s1, "FOO 1", "BAR1");
             }
             catch (VA.AutomationException )
             {
@@ -107,8 +107,8 @@ namespace TestVisioAutomation
             in_cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;
             in_cp.Invisible = 0;
             in_cp.Verify = 0;
-            CustomPropertyHelper.SetCustomProperty(s1, "foo", in_cp);
-            var out_cp = CustomPropertyHelper.GetCustomProperties(s1);
+            CustomPropertyHelper.Set(s1, "foo", in_cp);
+            var out_cp = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(1, out_cp.Count);
             page1.Delete(0);
         }
@@ -119,37 +119,37 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomPropertyCount(s1));
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", "BAR1");
-            Assert.AreEqual(1, CustomPropertyHelper.GetCustomPropertyCount(s1));
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", "BAR2");
-            Assert.AreEqual(1, CustomPropertyHelper.GetCustomPropertyCount(s1));
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO2", "BAR3");
+            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
+            CustomPropertyHelper.Set(s1, "FOO1", "BAR1");
+            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            CustomPropertyHelper.Set(s1, "FOO1", "BAR2");
+            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            CustomPropertyHelper.Set(s1, "FOO2", "BAR3");
 
-            var names1 = CustomPropertyHelper.GetCustomPropertyNames(s1);
+            var names1 = CustomPropertyHelper.GetNames(s1);
             Assert.AreEqual(2,names1.Count);
             Assert.IsTrue(names1.Contains("FOO1"));
             Assert.IsTrue(names1.Contains("FOO2"));
 
-            Assert.AreEqual(2, CustomPropertyHelper.GetCustomPropertyCount(s1));
-            CustomPropertyHelper.DeleteCustomProperty(s1, "FOO1");
+            Assert.AreEqual(2, CustomPropertyHelper.GetCount(s1));
+            CustomPropertyHelper.Delete(s1, "FOO1");
 
-            var names2 = CustomPropertyHelper.GetCustomPropertyNames(s1);
+            var names2 = CustomPropertyHelper.GetNames(s1);
             Assert.AreEqual(1, names2.Count);
             Assert.IsTrue(names2.Contains("FOO2"));
 
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO3", "BAR1");
-            var names3 = CustomPropertyHelper.GetCustomPropertyNames(s1);
+            CustomPropertyHelper.Set(s1, "FOO3", "BAR1");
+            var names3 = CustomPropertyHelper.GetNames(s1);
             Assert.AreEqual(2, names3.Count);
             Assert.IsTrue(names3.Contains("FOO3"));
             Assert.IsTrue(names3.Contains("FOO2"));
 
-            CustomPropertyHelper.DeleteCustomProperty(s1, "FOO3");
+            CustomPropertyHelper.Delete(s1, "FOO3");
 
-            Assert.AreEqual(1, CustomPropertyHelper.GetCustomPropertyCount(s1));
-            CustomPropertyHelper.DeleteCustomProperty(s1, "FOO2");
+            Assert.AreEqual(1, CustomPropertyHelper.GetCount(s1));
+            CustomPropertyHelper.Delete(s1, "FOO2");
 
-            Assert.AreEqual(0, CustomPropertyHelper.GetCustomPropertyCount(s1));
+            Assert.AreEqual(0, CustomPropertyHelper.GetCount(s1));
             page1.Delete(0);
         }
 
@@ -162,15 +162,15 @@ namespace TestVisioAutomation
             var s3 = page1.DrawRectangle(0, 0, 2, 2);
             var s4 = page1.DrawRectangle(0, 0, 2, 2);
 
-            CustomPropertyHelper.SetCustomProperty(s1, "FOO1", "1");
-            CustomPropertyHelper.SetCustomProperty(s2, "FOO2", "2");
-            CustomPropertyHelper.SetCustomProperty(s2, "FOO3", "3");
-            CustomPropertyHelper.SetCustomProperty(s4, "FOO4", "4");
-            CustomPropertyHelper.SetCustomProperty(s4, "FOO5", "5");
-            CustomPropertyHelper.SetCustomProperty(s4, "FOO6", "6");
+            CustomPropertyHelper.Set(s1, "FOO1", "1");
+            CustomPropertyHelper.Set(s2, "FOO2", "2");
+            CustomPropertyHelper.Set(s2, "FOO3", "3");
+            CustomPropertyHelper.Set(s4, "FOO4", "4");
+            CustomPropertyHelper.Set(s4, "FOO5", "5");
+            CustomPropertyHelper.Set(s4, "FOO6", "6");
 
             var shapes = new[] {s1, s2, s3, s4};
-            var allprops = CustomPropertyHelper.GetCustomProperties(page1, shapes);
+            var allprops = CustomPropertyHelper.Get(page1, shapes);
 
             Assert.AreEqual(4, allprops.Count);
             Assert.AreEqual(1, allprops[0].Count);

@@ -50,7 +50,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(2, shape2.GeometryCount);
 
             // remove all the geometry
-            VA.Geometry.GeometryHelper.DeleteGeometry(shape2);
+            VA.Geometry.GeometryHelper.Delete(shape2);
             Assert.AreEqual(0, shape2.GeometryCount);
 
             page.Delete(0);

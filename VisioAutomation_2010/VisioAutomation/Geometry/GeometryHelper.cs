@@ -5,7 +5,7 @@ namespace VisioAutomation.Geometry
 {
     public static class GeometryHelper
     {
-        public static short AddGeometrySection(IVisio.Shape shape)
+        public static short AddSection(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -32,16 +32,16 @@ namespace VisioAutomation.Geometry
             return i;
         }
 
-        public static void DeleteGeometry(IVisio.Shape shape)
+        public static void Delete(IVisio.Shape shape)
         {
             int num = shape.GeometryCount;
             for (int i = num-1; i >=0; i--)
             {
-                VA.Geometry.GeometryHelper.DeleteGeometrySection(shape, (short)i);                
+                VA.Geometry.GeometryHelper.DeleteSection(shape, (short)i);                
             }
         }
 
-        private static void DeleteGeometrySection(IVisio.Shape shape, short index)
+        private static void DeleteSection(IVisio.Shape shape, short index)
         {
             if (shape == null)
             {

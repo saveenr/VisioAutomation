@@ -39,7 +39,7 @@ namespace VisioAutomation.Geometry
 
         public short Render(IVisio.Shape shape)
         {
-            short sec_index = GeometryHelper.AddGeometrySection(shape);
+            short sec_index = GeometryHelper.AddSection(shape);
             short row_count = shape.RowCount[sec_index];
 
             var update = new VA.ShapeSheet.Update();

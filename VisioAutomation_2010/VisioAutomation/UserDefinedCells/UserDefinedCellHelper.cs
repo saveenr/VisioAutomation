@@ -8,12 +8,12 @@ namespace VisioAutomation.UserDefinedCells
 {
     public static class UserDefinedCellsHelper
     {
-        public static string GetRowName(string name)
+        private static string GetRowName(string name)
         {
             return "User." + name;
         }
 
-        public static void DeleteUserDefinedCell(IVisio.Shape shape, string name)
+        public static void Delete(IVisio.Shape shape, string name)
         {
             if (shape == null)
             {
@@ -33,7 +33,7 @@ namespace VisioAutomation.UserDefinedCells
             shape.DeleteRow(UserDefinedCell.query.Section, row);
         }
 
-        public static void UpdateUserDefinedCell(IVisio.Shape shape, string name, string val)
+        public static void Update(IVisio.Shape shape, string name, string val)
         {
             if (shape == null)
             {
@@ -47,7 +47,7 @@ namespace VisioAutomation.UserDefinedCells
                 throw new System.ArgumentNullException("val");
             }
 
-            if (!HasUserDefinedCell(shape, name))
+            if (!Contains(shape, name))
             {
                 throw new AutomationException("user Property does not exist");
             }
@@ -69,7 +69,7 @@ namespace VisioAutomation.UserDefinedCells
             update.Execute(shape);
         }
 
-        public static void SetUserDefinedCell(IVisio.Shape shape, string name, string value, string prompt)
+        public static void Set(IVisio.Shape shape, string name, string value, string prompt)
         {
             if (shape == null)
             {
@@ -78,9 +78,9 @@ namespace VisioAutomation.UserDefinedCells
 
             CheckValidName(name);
 
-            if (HasUserDefinedCell(shape, name))
+            if (Contains(shape, name))
             {
-                DeleteUserDefinedCell(shape, name);
+                Delete(shape, name);
             }
 
             short row = shape.AddNamedRow(
@@ -114,20 +114,20 @@ namespace VisioAutomation.UserDefinedCells
         /// If there are no user properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of user  properties</returns>
-        public static IList<UserDefinedCell> GetUserDefinedCells(IVisio.Shape shape)
+        public static IList<UserDefinedCell> Get(IVisio.Shape shape)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
             }
 
-            var prop_count = GetUserDefinedCellCount(shape);
+            var prop_count = GetCount(shape);
             if (prop_count < 1)
             {
                 return new List<UserDefinedCell>(0);
             }
 
-            var prop_names = GetUserDefinedCellNames(shape);
+            var prop_names = GetNames(shape);
             if (prop_names.Count != prop_count)
             {
                 throw new AutomationException("Unexpected number of prop names");
@@ -145,7 +145,7 @@ namespace VisioAutomation.UserDefinedCells
             return custom_props;
         }
 
-        public static IList<List<UserDefinedCell>> GetUserDefinedCells(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static IList<List<UserDefinedCell>> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -167,7 +167,7 @@ namespace VisioAutomation.UserDefinedCells
             {
                 var group = formulas.Groups[shape_index];
                 var shape = shapes[shape_index];
-                var prop_names = GetUserDefinedCellNames(shape);
+                var prop_names = GetNames(shape);
                 var custom_props_for_shape = create_userdefined_cell_list(prop_names, formulas, group.RowIndices.ToList());
                 custom_props.Add(custom_props_for_shape);
             }
@@ -203,7 +203,7 @@ namespace VisioAutomation.UserDefinedCells
         /// </summary>
         /// <param name="shape"></param>
         /// <returns></returns>
-        public static int GetUserDefinedCellCount(IVisio.Shape shape)
+        public static int GetCount(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -237,14 +237,14 @@ namespace VisioAutomation.UserDefinedCells
         /// </remarks>
         /// <param name="shape"></param>
         /// <returns></returns>
-        public static IList<string> GetUserDefinedCellNames(IVisio.Shape shape)
+        public static IList<string> GetNames(IVisio.Shape shape)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
             }
 
-            int user_prop_row_count = GetUserDefinedCellCount(shape);
+            int user_prop_row_count = GetCount(shape);
 
             if (user_prop_row_count < 1)
             {
@@ -258,7 +258,7 @@ namespace VisioAutomation.UserDefinedCells
 
             if (user_prop_row_count != prop_names.Count)
             {
-                throw new AutomationException("Unexpected number of property names");
+                throw new AutomationException("Unexpected number of user-defined-cell names");
             }
 
             return prop_names;
@@ -293,7 +293,7 @@ namespace VisioAutomation.UserDefinedCells
             }
         }
 
-        public static bool HasUserDefinedCell(IVisio.Shape shape, string name)
+        public static bool Contains(IVisio.Shape shape, string name)
         {
             if (shape == null)
             {

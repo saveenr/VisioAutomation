@@ -14,18 +14,18 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
 
             // Ensure we start with 0 controls
-            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetCount(s1));
 
             // Add the first control
-            int ci1 = VA.Controls.ControlHelper.AddControl(s1);
-            Assert.AreEqual(1, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci1 = VA.Controls.ControlHelper.Add(s1);
+            Assert.AreEqual(1, VA.Controls.ControlHelper.GetCount(s1));
 
             // Add the second control
-            int ci2 = VA.Controls.ControlHelper.AddControl(s1);
-            Assert.AreEqual(2, VA.Controls.ControlHelper.GetControlsCount(s1));
+            int ci2 = VA.Controls.ControlHelper.Add(s1);
+            Assert.AreEqual(2, VA.Controls.ControlHelper.GetCount(s1));
             
             // retrieve the control information
-            var controls = VA.Controls.ControlHelper.GetControls(s1);
+            var controls = VA.Controls.ControlHelper.Get(s1);
 
             // verify that the controls were set propery
             Assert.AreEqual(2, controls.Count);
@@ -35,10 +35,10 @@ namespace TestVisioAutomation
             Assert.AreEqual("Controls.Row_2", controls[1].XDynamics.Formula);
 
             // Delete both controls
-            VA.Controls.ControlHelper.DeleteControl(s1, 0);
-            Assert.AreEqual(1, VA.Controls.ControlHelper.GetControlsCount(s1));
-            VA.Controls.ControlHelper.DeleteControl(s1, 0);
-            Assert.AreEqual(0, VA.Controls.ControlHelper.GetControlsCount(s1));
+            VA.Controls.ControlHelper.Delete(s1, 0);
+            Assert.AreEqual(1, VA.Controls.ControlHelper.GetCount(s1));
+            VA.Controls.ControlHelper.Delete(s1, 0);
+            Assert.AreEqual(0, VA.Controls.ControlHelper.GetCount(s1));
 
             page1.Delete(0);
         }

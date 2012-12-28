@@ -9,7 +9,7 @@ namespace VisioAutomation.CustomProperties
 {
     public static class CustomPropertyHelper
     {
-        public static void UpdateCustomProperty(IVisio.Shape shape, string name, string val)
+        public static void Update(IVisio.Shape shape, string name, string val)
         {
             if (shape == null)
             {
@@ -23,7 +23,7 @@ namespace VisioAutomation.CustomProperties
                 throw new ArgumentNullException("val");
             }
 
-            if (!HasCustomProperty(shape, name))
+            if (!Contains(shape, name))
             {
                 throw new AutomationException("Custom Property does not exist");
             }
@@ -45,7 +45,7 @@ namespace VisioAutomation.CustomProperties
         }
 
 
-        public static void SetCustomProperty(
+        public static void Set(
             IVisio.Shape shape,
             string name,
             VA.CustomProperties.CustomPropertyCells cp)
@@ -57,9 +57,9 @@ namespace VisioAutomation.CustomProperties
 
             CheckValidCustomPropertyName(name);
 
-            if (HasCustomProperty(shape, name))
+            if (Contains(shape, name))
             {
-                DeleteCustomProperty(shape, name);
+                Delete(shape, name);
             }
 
             short row = shape.AddNamedRow(
@@ -67,10 +67,10 @@ namespace VisioAutomation.CustomProperties
                 name,
                 (short)IVisio.VisRowIndices.visRowProp);
 
-            SetCustomProperty(shape, row, cp);
+            Set(shape, row, cp);
         }
 
-        public static void SetCustomProperty(IVisio.Shape shape, short row, VA.CustomProperties.CustomPropertyCells cp)
+        public static void Set(IVisio.Shape shape, short row, VA.CustomProperties.CustomPropertyCells cp)
         {
             if (shape == null)
             {
@@ -89,9 +89,9 @@ namespace VisioAutomation.CustomProperties
         /// If there are no custom properties then null will be returned</remarks>
         /// <param name="shape"></param>
         /// <returns>A list of custom properties</returns>
-        public static IDictionary<string, CustomPropertyCells> GetCustomProperties(IVisio.Shape shape)
+        public static IDictionary<string, CustomPropertyCells> Get(IVisio.Shape shape)
         {
-            var prop_names = GetCustomPropertyNames(shape);
+            var prop_names = GetNames(shape);
             var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
             var cells = CustomPropertyCells.GetCells(shape);
 
@@ -104,7 +104,7 @@ namespace VisioAutomation.CustomProperties
             return dic;
         }
 
-        public static IList<Dictionary<string, CustomPropertyCells>> GetCustomProperties(IVisio.Page page, IList<IVisio.Shape> shapes)
+        public static IList<Dictionary<string, CustomPropertyCells>> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
         {
             if (page == null)
             {
@@ -129,7 +129,7 @@ namespace VisioAutomation.CustomProperties
             {
                 var shape = shapes[shape_index];
                 var cells = cells_list[shape_index];
-                var prop_names = GetCustomPropertyNames(shape);
+                var prop_names = GetNames(shape);
 
                 if (cells.Count != prop_names.Count)
                 {
@@ -150,7 +150,7 @@ namespace VisioAutomation.CustomProperties
             return customprops;
         }
 
-        public static int GetCustomPropertyCount(IVisio.Shape shape)
+        public static int GetCount(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -175,14 +175,14 @@ namespace VisioAutomation.CustomProperties
             return row_count;
         }
 
-        public static IList<string> GetCustomPropertyNames(IVisio.Shape shape)
+        public static IList<string> GetNames(IVisio.Shape shape)
         {
             if (shape == null)
             {
                 throw new ArgumentNullException("shape");
             }
 
-            int custom_prop_row_count = GetCustomPropertyCount(shape);
+            int custom_prop_row_count = GetCount(shape);
 
             if (custom_prop_row_count < 1)
             {
@@ -202,7 +202,7 @@ namespace VisioAutomation.CustomProperties
             return prop_names;
         }
 
-        private static bool IsValidCustomPropertyName(string name, out string errmsg)
+        private static bool IsValidName(string name, out string errmsg)
         {
             if (name == null)
             {
@@ -232,23 +232,23 @@ namespace VisioAutomation.CustomProperties
             return true;
         }
 
-        public static bool IsValidCustomPropertyName(string name)
+        public static bool IsValidName(string name)
         {
             string errmsg;
-            return IsValidCustomPropertyName(name, out errmsg);
+            return IsValidName(name, out errmsg);
         }
 
         internal static void CheckValidCustomPropertyName(string name)
         {
             string errmsg;
-            if (!IsValidCustomPropertyName(name, out errmsg))
+            if (!IsValidName(name, out errmsg))
             {
                 string msg = String.Format("Invalid Property Name: \"{0}\". {1}", name,errmsg);
                 throw new VA.AutomationException(msg);
             }
         }
 
-        public static bool HasCustomProperty(IVisio.Shape shape, string name)
+        public static bool Contains(IVisio.Shape shape, string name)
         {
             if (shape == null)
             {
@@ -273,7 +273,7 @@ namespace VisioAutomation.CustomProperties
             return String.Format("Prop.{0}", name);
         }
 
-        public static void DeleteCustomProperty(IVisio.Shape shape, string name)
+        public static void Delete(IVisio.Shape shape, string name)
         {
             if (shape == null)
             {
@@ -293,7 +293,7 @@ namespace VisioAutomation.CustomProperties
             shape.DeleteRow((short)IVisio.VisSectionIndices.visSectionProp, row);
         }
 
-        public static void SetCustomProperty(IVisio.Shape shape, string name, string val)
+        public static void Set(IVisio.Shape shape, string name, string val)
         {
             if (shape == null)
             {
@@ -312,7 +312,7 @@ namespace VisioAutomation.CustomProperties
             cp.Value = val;
             cp.Type = 0; // 0 = string
 
-            SetCustomProperty(shape, name, cp);
+            Set(shape, name, cp);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    int ci = VA.Controls.ControlHelper.AddControl(shape, ctrl);
+                    int ci = VA.Controls.ControlHelper.Add(shape, ctrl);
                     control_indices.Add(ci);
                 }
             }
@@ -66,7 +66,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    VA.Controls.ControlHelper.DeleteControl(shape, n);
+                    VA.Controls.ControlHelper.Delete(shape, n);
                 }
             }
         }
@@ -83,7 +83,7 @@ namespace VisioAutomation.Scripting.Commands
             var dic = new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>();
             foreach (var shape in shapes)
             {
-                var controls = VA.Controls.ControlHelper.GetControls(shape);
+                var controls = VA.Controls.ControlHelper.Get(shape);
                 dic[shape] = controls;
             }
             return dic;

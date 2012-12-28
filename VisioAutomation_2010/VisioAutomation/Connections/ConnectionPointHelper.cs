@@ -7,7 +7,7 @@ namespace VisioAutomation.Connections
 {
     public static class ConnectionPointHelper
     {
-        public static int AddConnectionPoint(
+        public static int Add(
             IVisio.Shape shape,
             Connections.ConnectionPointCells cp)
         {
@@ -38,7 +38,7 @@ namespace VisioAutomation.Connections
         }
 
 
-        public static void DeleteConnectionPoint(IVisio.Shape shape, int index)
+        public static void Delete(IVisio.Shape shape, int index)
         {
             if (shape == null)
             {
@@ -54,7 +54,7 @@ namespace VisioAutomation.Connections
             shape.DeleteRow( (short) IVisio.VisSectionIndices.visSectionConnectionPts, (short)row);
         }
 
-        public static int GetConnectionPointCount(IVisio.Shape shape)
+        public static int GetCount(IVisio.Shape shape)
         {
             if (shape == null)
             {
@@ -64,28 +64,28 @@ namespace VisioAutomation.Connections
             return shape.RowCount[ (short) IVisio.VisSectionIndices.visSectionConnectionPts];
         }
 
-        public static int DeleteAllConnectionPoints(IVisio.Shape shape)
+        public static int Delete(IVisio.Shape shape)
         {
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
             }
 
-            int n = GetConnectionPointCount(shape);
+            int n = GetCount(shape);
             for (int i = n - 1; i >= 0; i--)
             {
-                DeleteConnectionPoint(shape, i);
+                Delete(shape, i);
             }
 
             return n;
         }
 
-        public static IList<List<ConnectionPointCells>> GetConnectionPoints(IVisio.Page page, IList<int> shapeids)
+        public static IList<List<ConnectionPointCells>> Get(IVisio.Page page, IList<int> shapeids)
         {
             return ConnectionPointCells.GetCells(page, shapeids);
         }
 
-        public static IList<ConnectionPointCells> GetConnectionPoints(IVisio.Shape shape)
+        public static IList<ConnectionPointCells> Get(IVisio.Shape shape)
         {
             return ConnectionPointCells.GetCells(shape);
         }
