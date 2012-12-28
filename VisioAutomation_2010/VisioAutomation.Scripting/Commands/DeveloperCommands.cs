@@ -418,6 +418,8 @@ namespace VisioAutomation.Scripting.Commands
                 m1.CharacterCells.Font = fontid_segoe;
                 m1.CharacterCells.Size = "12.0pt";
                 var m2 = markup.AddElement();
+                m2.CharacterCells.Font = fontid_segoe;
+                m2.CharacterCells.Size = "8.0pt";
                 m2.AddText(string.Join("\n", types_in_namespace));
 
                 node.Text = markup;
@@ -488,13 +490,18 @@ namespace VisioAutomation.Scripting.Commands
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
             tree_layout.Render(doc.Application.ActivePage);
 
+            hide_ui_stuff(doc);
+
+            return doc;
+        }
+
+        private static void hide_ui_stuff(IVisio.Document doc)
+        {
             var app = doc.Application;
             var active_window = app.ActiveWindow;
             active_window.ShowGrid = 0;
             active_window.ShowPageBreaks = 0;
             active_window.ShowGuides = 0;
-
-            return doc;
         }
 
         private static string get_nice_type_name(System.Type type)
