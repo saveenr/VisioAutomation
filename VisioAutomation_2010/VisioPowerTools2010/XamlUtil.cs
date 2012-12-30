@@ -20,7 +20,7 @@ namespace VisioPowerTools2010
             }
 
             var selection = session.Selection.Get();
-            ExportSelectionToXAML(selection, filename, s => session.Output.Write(VA.Scripting.OutputStream.Verbose, s));
+            ExportSelectionToXAML(selection, filename, s => session.Output.WriteVerbose(s));
         }
 
         public static void ExportSelectionToXAML(IVisio.Selection sel, string filename, System.Action<string> verboselog)

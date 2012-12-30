@@ -4,7 +4,7 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Internal
 {
-    class QueryDataSet<T>
+    class QueryResults<T>
     {
         readonly int ColumnCount;
         readonly int RowCount;
@@ -12,7 +12,7 @@ namespace VisioAutomation.Internal
         public VA.ShapeSheet.Data.Table<string> Formulas { get; private set; }
         public VA.ShapeSheet.Data.Table<T> Results { get; private set; }
 
-        internal QueryDataSet(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
+        internal QueryResults(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
                             int rowcount, VA.ShapeSheet.Data.TableRowGroupList groups)
         {
             if (formulas_array == null && results_array == null)

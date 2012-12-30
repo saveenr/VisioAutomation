@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using VisioAutomation.Scripting.Commands;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
@@ -14,26 +12,26 @@ namespace VisioAutomation.Scripting
         public IVisio.Application VisioApplication { get; set; }
         public SessionOptions Options { get; set; }
 
-        public ApplicationCommands Application { get; private set; }
-        public ViewCommands View { get; private set; }
-        public FormatCommands Format { get; private set; }
-        public LayerCommands Layer { get; private set; }
-        public ControlCommands Control { get; private set; }
-        public CustomPropCommands CustomProp { get; private set; }
-        public ExportCommands Export { get; private set; }
-        public ConnectionCommands Connection { get; private set; }
-        public ConnectionPointCommands ConnectionPoint { get; private set; }
-        public DrawCommands Draw { get; private set; }
-        public MasterCommands Master { get; private set; }
-        public LayoutCommands Layout { get; private set; }
-        public PageCommands Page { get; private set; }
-        public SelectionCommands Selection { get; private set; }
-        public ShapeSheetCommands ShapeSheet { get; private set; }
-        public TextCommands Text { get; private set; }
-        public UserDefinedCellCommands UserDefinedCell { get; private set; }
-        public DocumentCommands Document { get; private set; }
-        public DeveloperCommands Developer { get; private set; }
-        public OutputCommands Output { get; private set; }
+        public VA.Scripting.Commands.ApplicationCommands Application { get; private set; }
+        public VA.Scripting.Commands.ViewCommands View { get; private set; }
+        public VA.Scripting.Commands.FormatCommands Format { get; private set; }
+        public VA.Scripting.Commands.LayerCommands Layer { get; private set; }
+        public VA.Scripting.Commands.ControlCommands Control { get; private set; }
+        public VA.Scripting.Commands.CustomPropCommands CustomProp { get; private set; }
+        public VA.Scripting.Commands.ExportCommands Export { get; private set; }
+        public VA.Scripting.Commands.ConnectionCommands Connection { get; private set; }
+        public VA.Scripting.Commands.ConnectionPointCommands ConnectionPoint { get; private set; }
+        public VA.Scripting.Commands.DrawCommands Draw { get; private set; }
+        public VA.Scripting.Commands.MasterCommands Master { get; private set; }
+        public VA.Scripting.Commands.LayoutCommands Layout { get; private set; }
+        public VA.Scripting.Commands.PageCommands Page { get; private set; }
+        public VA.Scripting.Commands.SelectionCommands Selection { get; private set; }
+        public VA.Scripting.Commands.ShapeSheetCommands ShapeSheet { get; private set; }
+        public VA.Scripting.Commands.TextCommands Text { get; private set; }
+        public VA.Scripting.Commands.UserDefinedCellCommands UserDefinedCell { get; private set; }
+        public VA.Scripting.Commands.DocumentCommands Document { get; private set; }
+        public VA.Scripting.Commands.DeveloperCommands Developer { get; private set; }
+        public VA.Scripting.Commands.OutputCommands Output { get; private set; }
 
         public Session() :
             this(null)
@@ -45,26 +43,26 @@ namespace VisioAutomation.Scripting
             this.Options = new SessionOptions();
             this.VisioApplication = app;
 
-            this.Application = new ApplicationCommands(this);
-            this.View = new ViewCommands(this);
-            this.Format = new FormatCommands(this);
-            this.Layer = new LayerCommands(this);
-            this.Control = new ControlCommands(this);
-            this.CustomProp = new CustomPropCommands(this);
-            this.Export = new ExportCommands(this);
-            this.Connection = new ConnectionCommands(this);
-            this.ConnectionPoint = new ConnectionPointCommands(this);
-            this.Draw = new DrawCommands(this);
-            this.Master = new MasterCommands(this);
-            this.Layout = new LayoutCommands(this);
-            this.Page = new PageCommands(this);
-            this.Selection = new SelectionCommands(this);
-            this.ShapeSheet = new ShapeSheetCommands(this);
-            this.Text = new TextCommands(this);
-            this.UserDefinedCell = new UserDefinedCellCommands(this);
-            this.Document = new DocumentCommands(this);
-            this.Developer = new DeveloperCommands(this);
-            this.Output = new OutputCommands(this);
+            this.Application = new VA.Scripting.Commands.ApplicationCommands(this);
+            this.View = new VA.Scripting.Commands.ViewCommands(this);
+            this.Format = new VA.Scripting.Commands.FormatCommands(this);
+            this.Layer = new VA.Scripting.Commands.LayerCommands(this);
+            this.Control = new VA.Scripting.Commands.ControlCommands(this);
+            this.CustomProp = new VA.Scripting.Commands.CustomPropCommands(this);
+            this.Export = new VA.Scripting.Commands.ExportCommands(this);
+            this.Connection = new VA.Scripting.Commands.ConnectionCommands(this);
+            this.ConnectionPoint = new VA.Scripting.Commands.ConnectionPointCommands(this);
+            this.Draw = new VA.Scripting.Commands.DrawCommands(this);
+            this.Master = new VA.Scripting.Commands.MasterCommands(this);
+            this.Layout = new VA.Scripting.Commands.LayoutCommands(this);
+            this.Page = new VA.Scripting.Commands.PageCommands(this);
+            this.Selection = new VA.Scripting.Commands.SelectionCommands(this);
+            this.ShapeSheet = new VA.Scripting.Commands.ShapeSheetCommands(this);
+            this.Text = new VA.Scripting.Commands.TextCommands(this);
+            this.UserDefinedCell = new VA.Scripting.Commands.UserDefinedCellCommands(this);
+            this.Document = new VA.Scripting.Commands.DocumentCommands(this);
+            this.Developer = new VA.Scripting.Commands.DeveloperCommands(this);
+            this.Output = new VA.Scripting.Commands.OutputCommands(this);
         }
 
         internal void Write(OutputStream output, string s)
