@@ -21,8 +21,55 @@ namespace VisioAutomation.Pages
         {
             var app = src_page.Application;
             var doc = src_page.Document;
-            var pcc = new VA.Internal.PageContentCopier(src_page);
-            pcc.ApplyTo(dest_page);
+            short copy_paste_flags = (short)IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
+
+            // handle the source page
+            if (src_page == null)
+            {
+                throw new System.ArgumentNullException("Source Page is null");
+            }
+
+            if (dest_page == null)
+            {
+                throw new System.ArgumentNullException("Destination Page is null");
+            }
+
+            if (dest_page == src_page)
+            {
+                throw new System.ArgumentNullException("Destination Page cannot be Source Page");
+            }
+
+
+            if (src_page != app.ActivePage)
+            {
+                throw new System.ArgumentException("Source page must be active page.", "src_page");
+            }
+
+            var src_page_shapes = src_page.Shapes;
+            int num_src_shapes=src_page_shapes.Count;
+
+            if (num_src_shapes > 0)
+            {
+                var active_window = app.ActiveWindow;
+                active_window.SelectAll();
+                var selection = active_window.Selection;
+                selection.Copy(copy_paste_flags);
+                active_window.DeselectAll();
+            }
+
+            var src_pagesheet = src_page.PageSheet;
+            var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
+
+            // handle the dest page
+            var dest_pagesheet = dest_page.PageSheet;
+            var update = new VisioAutomation.ShapeSheet.Update();
+            pagecells.Apply(update);
+            update.Execute(dest_pagesheet);
+            
+            if (num_src_shapes>0)
+            {
+                dest_page.Paste(copy_paste_flags);                
+            }
         }
 
         private static VA.Drawing.Size GetSize(IVisio.Page page)
