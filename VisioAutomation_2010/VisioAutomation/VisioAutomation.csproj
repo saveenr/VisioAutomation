@@ -213,7 +213,6 @@
     <Compile Include="Layout\XFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="Pages\PageNavigation.cs" />
     <Compile Include="Shapesheet\Query\QueryBase.cs" />
     <Compile Include="Shapesheet\Query\QueryColumn.cs" />
     <Compile Include="Shapesheet\Data\TableRow.cs" />
