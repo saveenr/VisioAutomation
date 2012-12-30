@@ -87,7 +87,7 @@ namespace VisioAutomation.Internal
                     var stencildoc = name_to_stencildoc[master_ref.StencilName];
                     var stencilmasters = stencildoc.Masters;
 
-                    var master_object = VA.Masters.MasterHelper.TryGetMaster(stencilmasters,master_ref.MasterName);
+                    var master_object = this.TryGetMaster(stencilmasters,master_ref.MasterName);
                     if (master_object==null)
                     {
                         string msg = string.Format("No such master \"{0}\" in stencil \"{1}\"",
@@ -99,5 +99,17 @@ namespace VisioAutomation.Internal
             }
         }
 
+        private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
+        {
+            try
+            {
+                var masterobj = masters.ItemU[name];
+                return masterobj;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                return null;
+            }
+        }
     }
 }

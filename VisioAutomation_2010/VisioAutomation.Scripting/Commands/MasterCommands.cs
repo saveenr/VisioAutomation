@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var masters = stencil_doc.Masters;
-            IVisio.Master masterobj = VA.Masters.MasterHelper.TryGetMaster(masters,master);
+            IVisio.Master masterobj = this.TryGetMaster(masters,master);
             if (masterobj==null)
             {
                 string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, stencil);
@@ -108,6 +108,19 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             return masterobj;
+        }
+
+        private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
+        {
+            try
+            {
+                var masterobj = masters.ItemU[name];
+                return masterobj;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                return null;
+            }
         }
 
         public IVisio.Shape Drop(IVisio.Master master, double x, double y)

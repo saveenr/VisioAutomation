@@ -134,7 +134,6 @@
     <Compile Include="Extensions\CellDataMethods.cs" />
     <Compile Include="Interop\EnumType.cs" />
     <Compile Include="Interop\EnumValue.cs" />
-    <Compile Include="Masters\MasterHelper.cs" />
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
