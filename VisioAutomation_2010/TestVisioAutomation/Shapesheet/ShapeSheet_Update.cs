@@ -1,4 +1,3 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -35,13 +34,11 @@ namespace TestVisioAutomation
             var col_linepat = query.AddColumn(src_linepat);
 
             // Retrieve the values
-            var formulas = query.GetFormulas(shape1);
-            var results = query.GetResults<double>(shape1);
+            var data = query.GetFormulasAndResults<double>(shape1);
 
             // Verify
-            Assert.AreEqual("RGB(255,0,0)", formulas[0, col_fg]);
-            Assert.AreEqual("7", formulas[0, col_linepat]);
-            Assert.AreEqual(7, results[0, col_linepat]);
+            Assert.AreEqual("RGB(255,0,0)", data[0, col_fg].Formula);
+            AssertVA.AreEqual("7", 7, data[0, col_linepat]);
 
             page1.Delete(0);
         }
@@ -51,7 +48,6 @@ namespace TestVisioAutomation
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
-
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
@@ -63,13 +59,10 @@ namespace TestVisioAutomation
             var col_linepat = query.AddColumn(src_linepat);
 
             // Retrieve the values
-            var formulas = query.GetFormulas(shape1);
-            var results = query.GetResults<double>(shape1);
+            var data = query.GetFormulasAndResults<double>(shape1);
 
             // Verify
-            Assert.AreEqual("7", formulas[0, col_linepat]);
-            Assert.AreEqual(7, results[0, col_linepat]);
-
+            AssertVA.AreEqual("7", 7, data[0, col_linepat]);
             page1.Delete(0);
         }
 
@@ -150,12 +143,10 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
-
-
+        
         [TestMethod]
         public void CheckHomogenousUpdates1()
         {
-
             var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
             bool caught1 = false;
@@ -174,8 +165,7 @@ namespace TestVisioAutomation
                 Assert.Fail();
             }
         }
-
-
+        
         [TestMethod]
         public void CheckHomogenousUpdates2()
         {

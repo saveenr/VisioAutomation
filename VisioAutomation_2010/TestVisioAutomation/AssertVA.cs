@@ -37,7 +37,7 @@ namespace TestVisioAutomation
             AssertVA.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
         }
 
-        public static void AreEqual<T>(string formula, T result , VA.ShapeSheet.CellData<T> cd)
+        public static void AreEqual<T>(string formula, T result, VA.ShapeSheet.CellData<T> cd)
         {
             Assert.AreEqual(formula, cd.Formula);
             Assert.AreEqual(result, cd.Result);
