@@ -141,25 +141,29 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Duplicate(string dest_pagename)
+        public IVisio.Page Duplicate()
         {
             if (!this.Session.HasActiveDrawing)
             {
-                return;
+                return null;
             }
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Duplicate Page"))
             {
-                VA.Pages.PageHelper.Duplicate(application.ActivePage, dest_pagename);
+                var doc = application.ActiveDocument;
+                var pages = doc.Pages;
+                var new_page = pages.Add();
+                VA.Pages.PageHelper.Duplicate(application.ActivePage, new_page);
+                return new_page;
             }
         }
 
-        public void Duplicate(string dest_pagename, IVisio.Document dest_doc)
+        public IVisio.Page Duplicate(IVisio.Document dest_doc)
         {
             if (!this.Session.HasActiveDrawing)
             {
-                return;
+                return null;
             }
 
             if (dest_doc==null)
@@ -175,15 +179,15 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var src_page = application.ActivePage;
-
-            dest_pagename = dest_pagename ?? src_page.NameU;
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            VA.Pages.PageHelper.Duplicate(src_page, dest_page, dest_pagename);
+            VA.Pages.PageHelper.Duplicate(src_page, dest_page);
 
             // the active window will be to the new document
             var active_window = application.ActiveWindow;
             active_window.Page = dest_page;
+
+            return dest_page;
         }
 
         public VA.Pages.PrintPageOrientation GetOrientation()

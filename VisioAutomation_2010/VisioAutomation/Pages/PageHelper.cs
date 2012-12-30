@@ -14,30 +14,13 @@ namespace VisioAutomation.Pages
             var pagecells = VA.Pages.PageCells.GetCells(pagesheet);
             return pagecells;
         }
-
-        public static IVisio.Page Duplicate(IVisio.Page src_page,string dest_page_name)
-        {
-            var pcc = new VA.Internal.PageContentCopier(src_page);
-
-            var doc = src_page.Document;
-            var pages = doc.Pages;
-            var dest_page = pages.Add();
-            dest_page.Name = dest_page_name;
-
-            pcc.ApplyTo(dest_page);
-
-            return dest_page;
-        }
         
         public static void Duplicate(
             IVisio.Page src_page,
-            IVisio.Page dest_page,
-            string dest_page_name)
+            IVisio.Page dest_page)
         {
             var app = src_page.Application;
             var doc = src_page.Document;
-            dest_page.Name = dest_page_name;
-
             var pcc = new VA.Internal.PageContentCopier(src_page);
             pcc.ApplyTo(dest_page);
         }

@@ -1,4 +1,5 @@
 using VA=VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Internal
 {
@@ -9,11 +10,11 @@ namespace VisioAutomation.Internal
         // first: the source page must be the active page and it's contents are placed on the clipboard
         // second: the contents of the clipboard are then pasted onto the destination page
         
-        private bool has_clipboard_contents = false;
-        short copy_paste_flags = (short)Microsoft.Office.Interop.Visio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
+        short copy_paste_flags = (short)IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
         VA.Pages.PageCells pagecells;
-        
-        public PageContentCopier(Microsoft.Office.Interop.Visio.Page src_page)
+        int num_src_shapes=-1;
+
+        public  PageContentCopier(Microsoft.Office.Interop.Visio.Page src_page)
         {
             if (src_page == null)
             {
@@ -32,19 +33,15 @@ namespace VisioAutomation.Internal
 
             if (num_src_shapes > 0)
             {
-                has_clipboard_contents = true;
                 var active_window = app.ActiveWindow;
                 active_window.SelectAll();
                 var selection = active_window.Selection;
-   
-
                 selection.Copy(copy_paste_flags);
                 active_window.DeselectAll();
             }
 
             var src_pagesheet = src_page.PageSheet;
             pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
-
         }
 
         public void ApplyTo(Microsoft.Office.Interop.Visio.Page dest_page)
@@ -59,11 +56,10 @@ namespace VisioAutomation.Internal
             pagecells.Apply(update);
             update.Execute(dest_pagesheet);
             
-            if (this.has_clipboard_contents)
+            if (this.num_src_shapes>0)
             {
                 dest_page.Paste(this.copy_paste_flags);                
             }
-
         }
     }
 }
