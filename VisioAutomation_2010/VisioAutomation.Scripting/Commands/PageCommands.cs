@@ -349,7 +349,7 @@ namespace VisioAutomation.Scripting.Commands
             SetSize(width, null);
         }
 
-        public void GoTo(Pages.PageNavigation flags)
+        public void GoTo(VA.Scripting.PageNavigation flags)
         {
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
@@ -360,7 +360,82 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var pages = docpages;
-            VA.Pages.PageHelper.NavigateTo(pages, flags);
+            this.NavigateTo(pages, flags);
         }
+
+        public void NavigateTo(IVisio.Pages pages, PageNavigation flags)
+        {
+            if (pages == null)
+            {
+                throw new System.ArgumentNullException("pages");
+            }
+
+            var app = pages.Application;
+            var active_document = app.ActiveDocument;
+            if (pages.Document != active_document)
+            {
+                throw new System.ArgumentException("Page.Document is not application's ActiveDocument");
+            }
+
+            if (pages.Count < 2)
+            {
+                throw new AutomationException("Only 1 page available. Navigation not possible.");
+            }
+
+            var activepage = app.ActivePage;
+
+            int cur_index = activepage.Index;
+            const int min_index = 1;
+            int max_index = pages.Count;
+            int new_index = move_in_range(cur_index, min_index, max_index, flags);
+            if (cur_index != new_index)
+            {
+                var doc_pages = active_document.Pages;
+                var page = doc_pages[new_index];
+
+                var active_window = app.ActiveWindow;
+                active_window.Page = page;
+            }
+        }
+
+        internal static int move_in_range(int cur, int min, int max, PageNavigation direction)
+        {
+            if (max < min)
+            {
+                throw new System.ArgumentOutOfRangeException("max");
+            }
+
+            if (cur < min)
+            {
+                throw new System.ArgumentOutOfRangeException("cur");
+            }
+
+            if (cur > max)
+            {
+                throw new System.ArgumentOutOfRangeException("cur");
+            }
+
+            if (direction == PageNavigation.NextPage)
+            {
+                return System.Math.Min(cur + 1, max);
+            }
+            else if (direction == PageNavigation.PreviousPage)
+            {
+                return System.Math.Max(cur - 1, min);
+            }
+            else if (direction == PageNavigation.FirstPage)
+            {
+                return min;
+            }
+            else if (direction == PageNavigation.LastPage)
+            {
+                return max;
+            }
+            else
+            {
+                throw new System.ArgumentOutOfRangeException("direction");
+            }
+        }
+
     }
 }

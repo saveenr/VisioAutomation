@@ -21,25 +21,25 @@ namespace TestVisioAutomation
 
             Assert.AreEqual(3,doc.Pages.Count);
             Assert.AreEqual(page3, ss.Page.Get());
-            ss.Page.GoTo(VA.Pages.PageNavigation.FirstPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.FirstPage);
             Assert.AreEqual(page1, ss.Page.Get());
-            ss.Page.GoTo(VA.Pages.PageNavigation.LastPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.LastPage);
             Assert.AreEqual(page3, ss.Page.Get());
-            ss.Page.GoTo(VA.Pages.PageNavigation.PreviousPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.PreviousPage);
             Assert.AreEqual(page2, ss.Page.Get());
-            ss.Page.GoTo(VA.Pages.PageNavigation.NextPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.NextPage);
             Assert.AreEqual(page3, ss.Page.Get());
 
             // move to last and try to go to next page
-            ss.Page.GoTo(VA.Pages.PageNavigation.LastPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.LastPage);
             Assert.AreEqual(page3, ss.Page.Get());
-            ss.Page.GoTo(VA.Pages.PageNavigation.NextPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.NextPage);
             Assert.AreEqual(page3, ss.Page.Get());
 
             // move to first and try to go to previous page
-            ss.Page.GoTo(VA.Pages.PageNavigation.FirstPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.FirstPage);
             Assert.AreEqual(page1, ss.Page.Get());
-            ss.Page.GoTo(VA.Pages.PageNavigation.PreviousPage);
+            ss.Page.GoTo(VA.Scripting.PageNavigation.PreviousPage);
             Assert.AreEqual(page1, ss.Page.Get());
 
             ss.Document.Close(true);
