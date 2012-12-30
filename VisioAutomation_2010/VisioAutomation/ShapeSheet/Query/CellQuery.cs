@@ -62,7 +62,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var unitcodes = getresults ? this.CreateUnitCodeArrayForRows(1) : null;
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
-            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
+            var groups = VA.ShapeSheet.Query.QueryBase.Build(shapeids, groupcounts, rowcount);
             var table = new VA.Internal.QueryResults<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return table;
@@ -131,7 +131,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var unitcodes = getresults ? CreateUnitCodeArrayForRows(1) : null;
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, stream, unitcodes) : null;
-            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
+            var groups = VA.ShapeSheet.Query.QueryBase.Build(shapeids, groupcounts, rowcount);
             var table = new VA.Internal.QueryResults<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return table;

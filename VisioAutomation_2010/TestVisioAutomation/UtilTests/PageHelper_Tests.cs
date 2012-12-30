@@ -41,7 +41,13 @@ namespace TestVisioAutomation
             var doc = page1.Document;
             var pages = doc.Pages;
 
-            var page2 = pages.Add(); 
+            var page2 = pages.Add();
+
+            // Activate Page 1 - needed for duplicate to work
+            var app = page1.Application;
+            var active_window = app.ActiveWindow;
+            active_window.Page = page1;
+
             VA.Pages.PageHelper.Duplicate(page1, page2);
 
             Assert.AreEqual(new VA.Drawing.Size(4, 3), VisioAutomationTest.GetPageSize(page2));

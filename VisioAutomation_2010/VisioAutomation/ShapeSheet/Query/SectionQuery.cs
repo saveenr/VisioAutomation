@@ -126,7 +126,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var groupcounts = this.get_group_counts(page, shapeids);
             var rowcount = groupcounts.Sum();
             int total_cells = rowcount * this.Columns.Count;
-            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
+            var groups = VA.ShapeSheet.Query.QueryBase.Build(shapeids, groupcounts, rowcount);
 
             // NOTE: Keep in mind that at this point we can find out that none of the shapes have any cells
             // and the total number of cells is zero and the number of rows is zero. So in that case
@@ -211,7 +211,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var formulas = getformulas ? VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, stream) : null;
             var results = getresults ? VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, stream, unitcodes) : null;
             var shapeids = new[] { shape.ID };
-            var groups = VA.ShapeSheet.Data.TableRowGroupList.Build(shapeids, groupcounts, rowcount);
+            var groups = VA.ShapeSheet.Query.QueryBase.Build(shapeids, groupcounts, rowcount);
             var qds = new VA.Internal.QueryResults<T>(formulas, results, shapeids, this.Columns.Count, rowcount, groups);
 
             return qds;

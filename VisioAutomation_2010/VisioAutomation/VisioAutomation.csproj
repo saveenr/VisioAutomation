@@ -161,7 +161,6 @@
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
-    <Compile Include="Shapesheet\Data\TableRowGroupList.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\Markup\CharacterCells.cs" />
     <Compile Include="Text\Markup\ParagraphCells.cs" />

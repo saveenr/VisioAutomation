@@ -53,12 +53,19 @@ namespace VisioAutomation.Pages
             var src_pagesheet = src_page.PageSheet;
             var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
 
+
             // handle the dest page
+
+            // first update all the page cells
             var dest_pagesheet = dest_page.PageSheet;
             var update = new VisioAutomation.ShapeSheet.Update();
             pagecells.Apply(update);
             update.Execute(dest_pagesheet);
+
+            // make sure the new page looks like the old page
+            dest_page.Background = src_page.Background;
             
+            // then paste any contents from the first page
             if (num_src_shapes>0)
             {
                 dest_page.Paste(copy_paste_flags);                

@@ -16,9 +16,9 @@ namespace VisioAutomation.ShapeSheet.Data
         private readonly int rowcount;
         private readonly int colcount;
 
-        public TableRowGroupList Groups { get; private set; }
+        public List<VA.ShapeSheet.Data.TableRowGroup> Groups { get; private set; }
 
-        internal Table(int rows, int cols, TableRowGroupList groups, T[] values)
+        internal Table(int rows, int cols, List<VA.ShapeSheet.Data.TableRowGroup> groups, T[] values)
         {
             int total_cells = rows*cols;
             if (values.Length != total_cells)

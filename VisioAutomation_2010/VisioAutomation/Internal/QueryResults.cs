@@ -8,12 +8,12 @@ namespace VisioAutomation.Internal
     {
         readonly int ColumnCount;
         readonly int RowCount;
-        private VA.ShapeSheet.Data.TableRowGroupList Groups;
+        private List<VA.ShapeSheet.Data.TableRowGroup> Groups;
         public VA.ShapeSheet.Data.Table<string> Formulas { get; private set; }
         public VA.ShapeSheet.Data.Table<T> Results { get; private set; }
 
         internal QueryResults(string[] formulas_array, T[] results_array, IList<int> shapeids, int columncount,
-                            int rowcount, VA.ShapeSheet.Data.TableRowGroupList groups)
+                            int rowcount, List<VA.ShapeSheet.Data.TableRowGroup> groups)
         {
             if (formulas_array == null && results_array == null)
             {
