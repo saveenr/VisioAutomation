@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = VA.Format.FormatHelper.GetShapeFormat(this.Session.VisioApplication.ActivePage, shapeids);
+            var fmts = VA.Format.ShapeFormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
             return fmts;
         }
 

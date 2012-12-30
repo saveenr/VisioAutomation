@@ -279,7 +279,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = selection.GetIDs();
 
             var page = this.Session.VisioApplication.ActivePage;
-            var data = VA.Layout.LayoutHelper.GetXForm(page, shapeids);
+            var data = VA.Layout.XFormCells.GetCells(page, shapeids);
             return data;
         }
 

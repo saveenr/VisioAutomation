@@ -40,13 +40,13 @@ namespace VisioAutomation.Layout
             return cells;
         }
 
-        internal static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
         }
 
-        internal static XFormCells GetCells(IVisio.Shape shape)
+        public static XFormCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);

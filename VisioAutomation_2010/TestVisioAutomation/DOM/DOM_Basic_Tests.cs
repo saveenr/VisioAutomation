@@ -221,7 +221,7 @@ namespace TestVisioAutomation
             var drawn_shape = dompage.Shapes.DrawRectangle(rect);
             var page = dompage.Render(doc);
 
-            var xfrms = VA.Layout.LayoutHelper.GetXForm(page,
+            var xfrms = VA.Layout.XFormCells.GetCells(page,
                                                         new int[] {dropped_shape.VisioShapeID, drawn_shape.VisioShapeID});
 
             Assert.AreEqual(xfrms[1].PinX,xfrms[0].PinX);
@@ -250,7 +250,7 @@ namespace TestVisioAutomation
 
             var page = dompage.Render(doc);
 
-            var xfrms = VA.Layout.LayoutHelper.GetXForm(page,
+            var xfrms = VA.Layout.XFormCells.GetCells(page,
                                                         new int[] { dropped_shape0.VisioShapeID, 
                                                             drawn_shape0.VisioShapeID, 
                                                             dropped_shape1.VisioShapeID, 

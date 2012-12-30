@@ -8,13 +8,6 @@ namespace VisioAutomation.Pages
 {
     public static class PageHelper
     {
-        public static VA.Pages.PageCells GetPageCells(IVisio.Page page)
-        {
-            var pagesheet = page.PageSheet;
-            var pagecells = VA.Pages.PageCells.GetCells(pagesheet);
-            return pagecells;
-        }
-        
         public static void Duplicate(
             IVisio.Page src_page,
             IVisio.Page dest_page)
