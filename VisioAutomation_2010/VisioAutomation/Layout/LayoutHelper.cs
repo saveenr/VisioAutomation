@@ -52,7 +52,7 @@ namespace VisioAutomation.Layout
             }
         }
 
-        public static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, XFormPosition pos)
+        public static IList<int> OrderShapesByXFormPosition(IVisio.Page page, IList<int> shapeids, XFormPosition pos)
         {
             if (page == null)
             {
@@ -111,7 +111,7 @@ namespace VisioAutomation.Layout
                             : new VA.Drawing.Size(0, spacing);
 
 
-            var sorted_shape_ids = VA.Layout.LayoutHelper.SortShapesByPosition(page, shapeids, sortpos);
+            var sorted_shape_ids = VA.Layout.LayoutHelper.OrderShapesByXFormPosition(page, shapeids, sortpos);
             var input_xfrms = VA.Layout.XFormCells.GetCells(page, sorted_shape_ids); ;
             var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
             var bb = GetBoundingBox(input_xfrms);

@@ -75,13 +75,12 @@ namespace TestVisioAutomation
             var shapes = new[] {s1, s2, s3, s4};
             var shapeids = shapes.Select(s=>s.ID).ToList();
 
-            var sorted_shapeids = VA.Layout.LayoutHelper.SortShapesByPosition(page, shapeids, VA.Layout.XFormPosition.PinX);
-
+            var sorted_shapeids = VA.Layout.LayoutHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinX);
             var sorted_shapes = sorted_shapeids.Select(id => page.Shapes.get_ItemFromID(id)).ToList();
             var text = string.Join("", sorted_shapes.Select(s => s.Text));
             Assert.AreEqual("BADC",text);
 
-            sorted_shapeids = VA.Layout.LayoutHelper.SortShapesByPosition(page, shapeids, VA.Layout.XFormPosition.PinY);
+            sorted_shapeids = VA.Layout.LayoutHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinY);
             sorted_shapes = sorted_shapeids.Select(id => page.Shapes.get_ItemFromID(id)).ToList();
             text = string.Join("", sorted_shapes.Select(s => s.Text));
             Assert.AreEqual("BADC",text);
