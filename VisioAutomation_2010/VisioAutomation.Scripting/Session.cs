@@ -10,7 +10,7 @@ namespace VisioAutomation.Scripting
     public class Session
     {
         public IVisio.Application VisioApplication { get; set; }
-        public SessionOptions Options { get; set; }
+        public SessionContext Context { get; set; }
 
         public VA.Scripting.Commands.ApplicationCommands Application { get; private set; }
         public VA.Scripting.Commands.ViewCommands View { get; private set; }
@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting
 
         public Session(IVisio.Application app)
         {
-            this.Options = new SessionOptions();
+            this.Context = new SessionContext();
             this.VisioApplication = app;
 
             this.Application = new VA.Scripting.Commands.ApplicationCommands(this);
@@ -68,48 +68,47 @@ namespace VisioAutomation.Scripting
         public void WriteUser(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
-            this.Options.WriteUser(s);
+            this.Context.WriteUser(s);
         }
 
         public void WriteDebug(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
-            this.Options.WriteDebug(s);
+            this.Context.WriteDebug(s);
         }
 
         public void WriteVerbose(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
-            this.Options.WriteVerbose(s);
+            this.Context.WriteVerbose(s);
         }
 
         public void WriteError(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
-            this.Options.WriteError(s);
+            this.Context.WriteError(s);
         }
 
         public void WriteUser(string s)
         {
-            this.Options.WriteUser(s);
+            this.Context.WriteUser(s);
         }
 
         public void WriteDebug(string s)
         {
-            this.Options.WriteDebug(s);
+            this.Context.WriteDebug(s);
         }
 
         public void WriteVerbose(string s)
         {
-            this.Options.WriteVerbose(s);
+            this.Context.WriteVerbose(s);
         }
 
         public void WriteError(string s)
         {
-            this.Options.WriteError(s);
+            this.Context.WriteError(s);
         }
-
-
+        
         internal bool HasSelectedShapes()
         {
             return this.Selection.HasShapes();
@@ -127,22 +126,26 @@ namespace VisioAutomation.Scripting
                 var application = VisioApplication;
                 var active_window = application.ActiveWindow;
 
-                if (active_window == null)
-                {
-                    return false;
-                }
-                
+                // if there's no active document, then there can't be an active drawing
                 if (application.ActiveDocument == null)
                 {
                     return false;
                 }
-                
-                if (application.ActivePage == null)
+
+                // If there's no active window there can't be an active drawing
+                if (active_window == null)
                 {
                     return false;
                 }
 
+                // Check if the window type matches that of a drawing
                 if (active_window.Type != (int)IVisio.VisWinTypes.visDrawing)
+                {
+                    return false;
+                }
+
+                // finally verify there is an active page
+                if (application.ActivePage == null)
                 {
                     return false;
                 }

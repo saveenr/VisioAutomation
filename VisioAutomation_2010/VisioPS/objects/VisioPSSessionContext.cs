@@ -3,12 +3,11 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS
 {
-
-    public class VisioPSSessionOptions : VisioAutomation.Scripting.SessionOptions
+    public class VisioPSSessionContext : VisioAutomation.Scripting.SessionContext
     {
         private SMA.Cmdlet cmdlet;
         
-        public VisioPSSessionOptions(SMA.Cmdlet cmdlet)
+        public VisioPSSessionContext(SMA.Cmdlet cmdlet)
         {
             this.cmdlet = cmdlet;
         }

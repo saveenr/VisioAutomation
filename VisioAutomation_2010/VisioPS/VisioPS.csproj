@@ -99,7 +99,7 @@
     <Compile Include="Commands\New_VisioMaster.cs" />
     <Compile Include="Commands\New_VisioStencil.cs" />
     <Compile Include="Commands\Remove_VisioUserDefinedCell.cs" />
-    <Compile Include="objects\VisioPSSessionOptions.cs" />
+    <Compile Include="objects\VisioPSSessionContext.cs" />
     <Compile Include="enums\ResultType.cs" />
     <Compile Include="Commands\Get_VisioSRCResult.cs" />
     <Compile Include="Commands\Close_VisioDrawing.cs" />

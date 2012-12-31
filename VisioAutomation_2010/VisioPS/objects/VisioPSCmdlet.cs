@@ -26,7 +26,7 @@ namespace VisioPS
                 //     from that same thread."
                 // message.
 
-                cached_session.Options = new VisioPSSessionOptions(this);
+                cached_session.Context = new VisioPSSessionContext(this);
                 return cached_session;
             }
         }

@@ -93,7 +93,7 @@
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
     <Compile Include="OutputStream.cs" />
-    <Compile Include="SessionOptions.cs" />
+    <Compile Include="SessionContext.cs" />
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
     <Compile Include="DirectedGraph\ConnectorInfo.cs" />
     <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />

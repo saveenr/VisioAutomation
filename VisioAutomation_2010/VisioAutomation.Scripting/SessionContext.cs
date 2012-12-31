@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Scripting
 {
-    public class SessionOptions
+    public class SessionContext
     {
         public virtual void WriteDebug(string s)
         {
