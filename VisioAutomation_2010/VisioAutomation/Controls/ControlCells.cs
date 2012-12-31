@@ -16,7 +16,7 @@ namespace VisioAutomation.Controls
         public VA.ShapeSheet.CellData<int> XDynamics { get; set; }
         public VA.ShapeSheet.CellData<int> YDynamics { get; set; }
 
-        public override void ApplyFormulas(ApplyFormula func, short row)
+        public override void ApplyFormulasForRow(ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Controls_CanGlue.ForRow(row), this.CanGlue.Formula);
             func(VA.ShapeSheet.SRCConstants.Controls_Tip.ForRow(row), this.Tip.Formula);

@@ -4,11 +4,11 @@ namespace VisioAutomation.ShapeSheet.Data
 {
     public struct TableRow<T>
     {
-        private int _index;
+        private readonly int _row;
 
-        public int Index
+        public int Row
         {
-            get { return _index; }
+            get { return _row; }
         }
 
         private Table<T> _table;
@@ -18,22 +18,22 @@ namespace VisioAutomation.ShapeSheet.Data
             get { return _table; }
         }
 
-        internal TableRow(Table<T> table,int index)
+        internal TableRow(Table<T> table,int row)
         {
-            this._index = index;
+            this._row = row;
             this._table = table;
         }
 
         public T this[int column]
         {
-            get { return this.Table[this.Index, column]; }
-            set { this.Table[this.Index, column] = value; }
+            get { return this.Table[this.Row, column]; }
+            set { this.Table[this.Row, column] = value; }
         }
 
         public T this[VA.ShapeSheet.Query.QueryColumn column]
         {
-            get { return this.Table[this.Index, column]; }
-            set { this.Table[this.Index, column] = value; }
+            get { return this.Table[this.Row, column]; }
+            set { this.Table[this.Row, column] = value; }
         }
 
         public int Count
