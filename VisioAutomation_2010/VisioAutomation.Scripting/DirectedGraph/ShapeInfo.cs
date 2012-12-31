@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         {
             var info = new ShapeInfo();
             info.ID = shape_el.Attribute("id").Value;
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Reading shape id={0}", info.ID);
+            scriptingsession.WriteVerbose( "Reading shape id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.Stencil = shape_el.Attribute("stencil").Value;

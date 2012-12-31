@@ -82,7 +82,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (size.HasValue)
                 {
-                    this.Session.Write(OutputStream.Verbose,"Setting page size to {0}", size.Value);
+                    this.Session.WriteVerbose("Setting page size to {0}", size.Value);
                     this.SetSize(size.Value);
                 }
 

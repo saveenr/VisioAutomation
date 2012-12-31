@@ -65,36 +65,57 @@ namespace VisioAutomation.Scripting
             this.Output = new VA.Scripting.Commands.OutputCommands(this);
         }
 
-        internal void Write(OutputStream output, string s)
-        {
-            if (output == OutputStream.User)
-            {
-                this.Options.WriteUser(s);
-            }
-            else if (output == OutputStream.Error)
-            {
-                this.Options.WriteError(s);
-            }
-            else if (output == OutputStream.Debug)
-            {
-                this.Options.WriteDebug(s);
-            }
-            else if (output == OutputStream.Verbose)
-            {
-                this.Options.WriteVerbose(s);
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException("output");
-            }
-        }
-
         internal void Write(OutputStream output, string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
             this.Write(output, s);
         }
-        
+
+        public void WriteUser(string fmt, params object[] items)
+        {
+            string s = String.Format(fmt, items);
+            this.Options.WriteUser(s);
+        }
+
+        public void WriteDebug(string fmt, params object[] items)
+        {
+            string s = String.Format(fmt, items);
+            this.Options.WriteDebug(s);
+        }
+
+        public void WriteVerbose(string fmt, params object[] items)
+        {
+            string s = String.Format(fmt, items);
+            this.Options.WriteVerbose(s);
+        }
+
+        public void WriteError(string fmt, params object[] items)
+        {
+            string s = String.Format(fmt, items);
+            this.Options.WriteError(s);
+        }
+
+        public void WriteUser(string s)
+        {
+            this.Options.WriteUser(s);
+        }
+
+        public void WriteDebug(string s)
+        {
+            this.Options.WriteDebug(s);
+        }
+
+        public void WriteVerbose(string s)
+        {
+            this.Options.WriteVerbose(s);
+        }
+
+        public void WriteError(string s)
+        {
+            this.Options.WriteError(s);
+        }
+
+
         internal bool HasSelectedShapes()
         {
             return this.Selection.HasShapes();

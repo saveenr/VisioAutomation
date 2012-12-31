@@ -69,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
                 edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
             }
 
-            this.Session.Write(OutputStream.Verbose, "{0} Edges found", edges.Count);
+            this.Session.WriteVerbose( "{0} Edges found", edges.Count);
             return edges;
         }
 

@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         {
             var info = new ConnectorInfo();
             info.ID = shape_el.Attribute("id").Value;
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Reading connector id={0}", info.ID);
+            scriptingsession.WriteVerbose("Reading connector id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.From = shape_el.Attribute("from").Value;

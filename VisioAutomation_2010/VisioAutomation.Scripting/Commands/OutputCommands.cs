@@ -13,11 +13,6 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        private void Write(OutputStream output, string s)
-        {
-            this.Session.Write(output,s);
-        }
-
         private void Write(OutputStream output, string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);

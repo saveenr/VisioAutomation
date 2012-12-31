@@ -69,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!System.IO.Directory.Exists(pbase))
             {
-                this.Session.Write(OutputStream.Error, " Folder {0} does not exist", pbase);
+                this.Session.WriteError( " Folder {0} does not exist", pbase);
                 return;
             }
             var ext = System.IO.Path.GetExtension(filename);
@@ -86,7 +86,7 @@ namespace VisioAutomation.Scripting.Commands
                     string page_filname = System.String.Format("{0}_{1}_{2}{3}{4}", fbase, page_index, page.Name,
                                                                bkgnd, ext);
 
-                    this.Session.Write(OutputStream.User, "file {0}", page_filname);
+                    this.Session.WriteUser( "file {0}", page_filname);
                     page_filname = System.IO.Path.Combine(pbase, page_filname);
                     active_window.Page = page;
                     this.Session.Selection.SelectNone();
@@ -108,7 +108,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Session.Selection.Get();
-            ExportSelectionToSVGXHTML(this.Session.Selection.Get(), filename, s => this.Session.Write(OutputStream.Verbose, s));
+            ExportSelectionToSVGXHTML(this.Session.Selection.Get(), filename, s => this.Session.WriteVerbose( s));
         }
 
         public static void ExportSelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)

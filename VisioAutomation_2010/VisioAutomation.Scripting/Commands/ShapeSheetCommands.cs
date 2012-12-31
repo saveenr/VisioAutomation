@@ -171,7 +171,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Update(ShapeSheetUpdate update, bool blastguards, bool testcircular)
         {
-            this.Session.Write( OutputStream.Verbose, "Staring ShapeSheet Update");
+            this.Session.WriteVerbose( "Staring ShapeSheet Update");
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Update ShapeSheet Formulas"))
             {
@@ -179,11 +179,11 @@ namespace VisioAutomation.Scripting.Commands
                 var internal_update = update.update;
                 internal_update.BlastGuards = blastguards;
                 internal_update.TestCircular = testcircular;
-                this.Session.Write(OutputStream.Verbose, "BlastGuards={0}", blastguards);
-                this.Session.Write(OutputStream.Verbose, "TestCircular={0}", testcircular);
+                this.Session.WriteVerbose( "BlastGuards={0}", blastguards);
+                this.Session.WriteVerbose( "TestCircular={0}", testcircular);
                 internal_update.Execute(active_page);                
             }
-            this.Session.Write(OutputStream.Verbose, "Ending ShapeSheet Update");
+            this.Session.WriteVerbose( "Ending ShapeSheet Update");
         }
     }
 }

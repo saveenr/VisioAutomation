@@ -36,13 +36,13 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (width <= 0)
             {
-                this.Session.Write(OutputStream.Error, "width must be positive");
+                this.Session.WriteError( "width must be positive");
                 return;
             }
 
             if (height <= 0)
             {
-                this.Session.Write(OutputStream.Error, "height must be positive");
+                this.Session.WriteError("height must be positive");
                 return;
             }
 

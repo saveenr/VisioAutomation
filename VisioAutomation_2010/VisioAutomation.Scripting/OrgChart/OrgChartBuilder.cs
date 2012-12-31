@@ -20,7 +20,7 @@ namespace VisioAutomation.Scripting.OrgChart
             var dic = new Dictionary<string, OCMODEL.Node>();
             OCMODEL.Node ocroot = null;
 
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Walking XML");
+            scriptingsession.WriteVerbose("Walking XML");
 
             foreach (var ev in root.Elements())
             {
@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.OrgChart
                     string parentid = VA.Scripting.XmlUtil.GetAttributeValue(ev, "parentid", null);
                     var name = ev.Attribute("name").Value;
 
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Loading shape: {0} {1} {2}", id, name, parentid);
+                    scriptingsession.WriteVerbose( "Loading shape: {0} {1} {2}", id, name, parentid);
                     var new_ocnode = new OCMODEL.Node(name);
 
                     if (ocroot == null)
@@ -50,10 +50,10 @@ namespace VisioAutomation.Scripting.OrgChart
                     }
                 }
             }
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished Walking XML");
+            scriptingsession.WriteVerbose( "Finished Walking XML");
             var oc = new OCMODEL.Drawing();
             oc.Root = ocroot;
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished Creating OrgChart model");
+            scriptingsession.WriteVerbose( "Finished Creating OrgChart model");
             return oc;
         }
     }

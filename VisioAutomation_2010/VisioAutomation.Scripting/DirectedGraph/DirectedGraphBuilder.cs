@@ -89,10 +89,10 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 pagedata.ShapeInfos = shape_els.Select(e => ShapeInfo.FromXml(scriptingsession, e)).ToList();
                 pagedata.ConnectorInfos = con_els.Select(e => ConnectorInfo.FromXml(scriptingsession, e)).ToList();
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Analyzing shape data for page {0}", pagenum);
+                scriptingsession.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "shape {0}", shape_info.ID);
+                    scriptingsession.WriteVerbose( "shape {0}", shape_info.ID);
 
                     if (node_ids.Contains(shape_info.ID))
                     {
@@ -104,10 +104,10 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     }
                 }
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Analyzing connector data...");
+                scriptingsession.WriteVerbose( "Analyzing connector data...");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "connector {0}", con_info.ID);
+                    scriptingsession.WriteVerbose( "connector {0}", con_info.ID);
 
                     if (con_ids.Contains(con_info.ID))
                     {
@@ -146,16 +146,16 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 {
                     foreach (var error in pagedata.Errors)
                     {
-                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose, error.Text);
+                        scriptingsession.WriteVerbose( error.Text);
                     }
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
+                    scriptingsession.WriteVerbose( "Errors encountered in shape data. Stopping.");
                 }
             }
 
             // DRAW EACH PAGE
             foreach (var pagedata in pagedatas)
             {
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating shape AutoLayout nodes");
+                scriptingsession.WriteVerbose( "Creating shape AutoLayout nodes");
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
                     var al_shape = pagedata.Drawing.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil,
@@ -168,7 +168,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     }
                 }
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating connector AutoLayout nodes");
+                scriptingsession.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
                     var def_connector_type = VA.Connections.ConnectorType.Curved;
@@ -189,9 +189,9 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     al_connector.Cells.EndArrow = def_end_arrow;
                 }
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering AutoLayout...");
+                scriptingsession.WriteVerbose( "Rendering AutoLayout...");
             }
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering AutoLayout");
+            scriptingsession.WriteVerbose( "Finished rendering AutoLayout");
 
             var drawings = pagedatas.Select(pagedata => pagedata.Drawing).ToList();
             return drawings;
@@ -201,7 +201,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             VA.Scripting.Session scriptingsession,
             IList<DGMODEL.Drawing> drawings)
         {
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Start rendering directed graph");
+            scriptingsession.WriteVerbose( "Start rendering directed graph");
             var app = scriptingsession.VisioApplication;
 
 
@@ -219,7 +219,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 var directed_graph_drawing = drawings[i];
 
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering page: {0}", i + 1);
+                scriptingsession.WriteVerbose( "Rendering page: {0}", i + 1);
 
                 var options = new DGMODEL.MSAGLLayoutOptions();
                 options.UseDynamicConnectors = false;
@@ -243,12 +243,12 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
                 scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering page");
+                scriptingsession.WriteVerbose( "Finished rendering page");
 
                 num_pages_created++;
             }
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering pages");
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering directed graph.");
+            scriptingsession.WriteVerbose( "Finished rendering pages");
+            scriptingsession.WriteVerbose( "Finished rendering directed graph.");
         }
 
         private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)

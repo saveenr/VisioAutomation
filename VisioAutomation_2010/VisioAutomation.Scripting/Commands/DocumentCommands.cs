@@ -26,8 +26,8 @@ namespace VisioAutomation.Scripting.Commands
 
             if (doc.Type == IVisio.VisDocumentTypes.visTypeDrawing)
             {
-                this.Session.Write(OutputStream.Verbose, "Closing Document Name=\"{0}\"", doc.Name);
-                this.Session.Write(OutputStream.Verbose, "Closing Document FullName=\"{0}\"", doc.FullName);
+                this.Session.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+                this.Session.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
 
                 if (force)
                 {
@@ -54,8 +54,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var doc in docs)
                 {
-                    this.Session.Write(OutputStream.Verbose, "Closing Document Name=\"{0}\"", doc.Name);
-                    this.Session.Write(OutputStream.Verbose, "Closing Document FullName=\"{0}\"", doc.FullName);
+                    this.Session.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+                    this.Session.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
                     doc.Close();
                 }
             }
@@ -63,7 +63,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New()
         {
-            this.Session.Write(OutputStream.Verbose, "Creating Empty Drawing");
+            this.Session.WriteVerbose( "Creating Empty Drawing");
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var doc = documents.Add(string.Empty);
@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (!this.Session.HasActiveDrawing)
             {
-                this.Session.Write(OutputStream.Error, "No Drawing to Save");
+                this.Session.WriteError( "No Drawing to Save");
                 return;
             }
             var application = this.Session.VisioApplication;
@@ -86,7 +86,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (!this.Session.HasActiveDrawing)
             {
-                this.Session.Write(OutputStream.Error, "No Drawing to Save");
+                this.Session.WriteError("No Drawing to Save");
                 return;
             }
 
@@ -115,13 +115,13 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException(name);
             }
 
-            this.Session.Write(OutputStream.Verbose, "Loading stencil \"{0}\"", name);
+            this.Session.WriteVerbose( "Loading stencil \"{0}\"", name);
 
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var doc = documents.OpenStencil(name);
 
-            this.Session.Write(OutputStream.Verbose, "Finished loading stencil \"{0}\"", name);
+            this.Session.WriteVerbose( "Finished loading stencil \"{0}\"", name);
             return doc;
         }
 
@@ -150,8 +150,8 @@ namespace VisioAutomation.Scripting.Commands
 
             string abs_filename = System.IO.Path.GetFullPath(filename);
 
-            this.Session.Write(OutputStream.Verbose, "Input filename: {0}", filename);
-            this.Session.Write(OutputStream.Verbose, "Absolute filename: {0}", abs_filename);
+            this.Session.WriteVerbose( "Input filename: {0}", filename);
+            this.Session.WriteVerbose( "Absolute filename: {0}", abs_filename);
 
             if (!System.IO.File.Exists(abs_filename))
             {

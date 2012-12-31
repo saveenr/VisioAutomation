@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (!this.Session.HasActiveDrawing)
             {
-                this.Session.Write(OutputStream.Verbose,"No Active Document - 0 Masters");
+                this.Session.WriteVerbose( "No Active Document - 0 Masters");
                 new List<IVisio.Master>(0);
             }
 
