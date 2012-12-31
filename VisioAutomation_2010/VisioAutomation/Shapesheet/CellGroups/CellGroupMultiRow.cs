@@ -14,17 +14,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         // descendants must implement this method.
         // the implementation should be this: run the "func" on each formula in the cell
         // group (even in the formula is null) 
-        protected abstract void ApplyFormulas(ApplyFormula func, short row);
-
-        internal void Apply(VA.ShapeSheet.Update update, short shapeid, short row)
-        {
-            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f), row);
-        }
-
-        internal void Apply(VA.ShapeSheet.Update update, short row)
-        {
-            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f),row);
-        }
+        internal abstract void ApplyFormulas(ApplyFormula func, short row);
 
         protected static IList<List<TObj>> CellsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {

@@ -26,8 +26,8 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<int> ShapeSplittable { get; set; }
         public VA.ShapeSheet.CellData<int> DisplayLevel { get; set; } // new in visio 2010
         public VA.ShapeSheet.CellData<int> Relationships { get; set; } // new in visio 2010
-        
-        protected override void ApplyFormulas(ApplyFormula func)
+
+        internal override void ApplyFormulas(ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
             func(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);

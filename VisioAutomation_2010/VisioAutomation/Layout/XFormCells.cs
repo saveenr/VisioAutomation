@@ -16,7 +16,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<double> Height { get; set; }
         public VA.ShapeSheet.CellData<double> Angle { get; set; }
 
-        protected override void ApplyFormulas(ApplyFormula func)
+        internal override void ApplyFormulas(ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
             func(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);

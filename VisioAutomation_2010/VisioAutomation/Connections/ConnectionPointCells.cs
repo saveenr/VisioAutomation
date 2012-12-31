@@ -14,7 +14,7 @@ namespace VisioAutomation.Connections
         public VA.ShapeSheet.CellData<int> DirY { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }
 
-        protected override void ApplyFormulas(ApplyFormula func, short row)
+        internal override void ApplyFormulas(ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Connections_X.ForRow(row), this.X.Formula);
             func(VA.ShapeSheet.SRCConstants.Connections_Y.ForRow(row), this.Y.Formula);
