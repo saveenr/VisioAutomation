@@ -24,7 +24,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<double> TxtLocPinX { get; set; }
         public VA.ShapeSheet.CellData<double> TxtLocPinY { get; set; }
 
-        internal override void ApplyFormulas(ApplyFormula func)
+        public override void ApplyFormulas(ApplyFormula func)
         {
             func(VA.ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
             func(VA.ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);

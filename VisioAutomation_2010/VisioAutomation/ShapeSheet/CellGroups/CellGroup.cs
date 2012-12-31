@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
     {       
-        internal abstract void ApplyFormulas(ApplyFormula func);
+        public abstract void ApplyFormulas(ApplyFormula func);
 
         protected static IList<TObj> CellsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToCells<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
         {

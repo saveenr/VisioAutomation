@@ -33,7 +33,7 @@ namespace VisioAutomation.Format
         public VA.ShapeSheet.CellData<double> LineWeight { get; set; }
         public VA.ShapeSheet.CellData<double> Rounding { get; set; }
 
-        internal override void ApplyFormulas(ApplyFormula func)
+        public override void ApplyFormulas(ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
             func(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);

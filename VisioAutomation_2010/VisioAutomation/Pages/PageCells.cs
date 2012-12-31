@@ -75,7 +75,7 @@ namespace VisioAutomation.Pages
         public VA.ShapeSheet.CellData<int> AvoidPageBreaks { get; set; } // new in visio 2010
         public VA.ShapeSheet.CellData<int> DrawingResizeType { get; set; } // new in visio 2010
 
-        internal override void ApplyFormulas(ApplyFormula func)
+        public override void ApplyFormulas(ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.PageLeftMargin, this.PageLeftMargin.Formula);
             func(ShapeSheet.SRCConstants.CenterX, this.CenterX.Formula);

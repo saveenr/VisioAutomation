@@ -30,7 +30,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<bool> Strikethru { get; set; }
         public VA.ShapeSheet.CellData<int> UseVertical { get; set; }
 
-        internal override void ApplyFormulas(ApplyFormula func, short row)
+        public override void ApplyFormulas(ApplyFormula func, short row)
         {
             func(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(row), this.Color.Formula);
             func(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(row), this.Font.Formula);

@@ -29,7 +29,7 @@ namespace VisioAutomation.Layout
         public VA.ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
         public VA.ShapeSheet.CellData<bool> LockWidth { get; set; }
 
-        internal override void ApplyFormulas(ApplyFormula func)
+        public override void ApplyFormulas(ApplyFormula func)
         {
             func(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
             func(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);
