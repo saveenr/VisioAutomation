@@ -65,12 +65,6 @@ namespace VisioAutomation.Scripting
             this.Output = new VA.Scripting.Commands.OutputCommands(this);
         }
 
-        internal void Write(OutputStream output, string fmt, params object[] items)
-        {
-            string s = String.Format(fmt, items);
-            this.Write(output, s);
-        }
-
         public void WriteUser(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);

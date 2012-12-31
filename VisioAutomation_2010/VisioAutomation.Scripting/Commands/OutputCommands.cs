@@ -13,50 +13,44 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        private void Write(OutputStream output, string fmt, params object[] items)
-        {
-            string s = string.Format(fmt, items);
-            this.Session.Write(output, s);
-        }
-
         public void WriteUser(string s)
         {
-            this.Write(OutputStream.User, s);
+            this.Session.WriteUser(s);
         }
 
         public void WriteDebug(string s)
         {
-            this.Write(OutputStream.Debug, s);
+            this.Session.WriteDebug(s);
         }
 
         public void WriteError(string s)
         {
-            this.Write(OutputStream.Error, s);
+            this.Session.WriteError(s);
         }
 
         public void WriteVerbose(string s)
         {
-            this.Write(OutputStream.Verbose, s);
+            this.Session.WriteVerbose(s);
         }
 
         public void WriteUser(string fmt, params object[] items)
         {
-            this.Write(OutputStream.User, fmt, items);
+            this.Session.WriteUser(fmt, items);
         }
 
         public void WriteDebug(string fmt, params object[] items)
         {
-            this.Write(OutputStream.Debug,fmt,items);           
+            this.Session.WriteDebug( fmt, items);           
         }
 
         public void WriteError(string fmt, params object[] items)
         {
-            this.Write(OutputStream.Error, fmt, items);
+            this.Session.WriteError( fmt, items);
         }
 
         public void WriteVerbose(string fmt, params object[] items)
         {
-            this.Write(OutputStream.Verbose, fmt, items);
+            this.Session.WriteVerbose( fmt, items);
         }
     }
 }
