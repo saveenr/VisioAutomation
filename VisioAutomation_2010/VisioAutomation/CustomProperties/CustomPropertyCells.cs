@@ -90,19 +90,19 @@ namespace VisioAutomation.CustomProperties
             return m_query;
         }
 
-        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
+        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new CustomPropertyCells();
 
-            cells.Value = row[query.Value];
-            cells.Calendar = row[query.Calendar].ToInt();
-            cells.Format = row[query.Format];
-            cells.Invisible = row[query.Invis].ToInt();
-            cells.Label = row[query.Label];
-            cells.LangId = row[query.LangID].ToInt();
-            cells.Prompt = row[query.Prompt];
-            cells.SortKey = row[query.SortKey].ToInt();
-            cells.Type = row[query.Type].ToInt();
+            cells.Value = table[row,query.Value];
+            cells.Calendar = table[row,query.Calendar].ToInt();
+            cells.Format = table[row,query.Format];
+            cells.Invisible = table[row,query.Invis].ToInt();
+            cells.Label = table[row,query.Label];
+            cells.LangId = table[row,query.LangID].ToInt();
+            cells.Prompt = table[row,query.Prompt];
+            cells.SortKey = table[row,query.SortKey].ToInt();
+            cells.Type = table[row,query.Type].ToInt();
             return cells;
         }
     }

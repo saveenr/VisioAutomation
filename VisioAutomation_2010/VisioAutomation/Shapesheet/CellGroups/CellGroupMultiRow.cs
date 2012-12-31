@@ -21,10 +21,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             for (int group_index = 0; group_index < table.Groups.Count; group_index++)
             {
                 var group = table.Groups[group_index];
-                var tablerows = group.RowIndices.Select(ri => table[ri]);
                 var cells_list = new List<TObj>(group.Count);
-                var cells = tablerows.Select(row => row_to_obj_func(query,row));
-                cells_list.AddRange(cells);
+                foreach (int i in group.RowIndices)
+                {
+                    var new_object = row_to_obj_func(query, table, i);
+                    cells_list.Add(new_object);
+                }
                 list_of_lists.Add(cells_list);
             }
 
@@ -34,9 +36,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         protected static IList<TObj> CellsFromRows<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
         {
             var table = query.GetFormulasAndResults<double>(shape);
-            var cells = table.Select( row => row_to_obj_func(query, row) );
             var cells_list = new List<TObj>(table.RowCount);
-            cells_list.AddRange(cells);
+            for (int i = 0; i < table.RowCount; i++)
+            {
+                var new_object = row_to_obj_func(query, table, i);
+                cells_list.Add(new_object);
+            }
             return cells_list;
         }
     }

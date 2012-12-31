@@ -67,26 +67,25 @@ namespace VisioAutomation.Text
         }
 
         private static TextCells get_cells_from_row(TextBlockFormatQuery query,
-                                                               VA.ShapeSheet.Data.TableRow
-                                                                   <VA.ShapeSheet.CellData<double>> row)
+                                                               VA.ShapeSheet.Data.Table <VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new TextCells();
-            cells.BottomMargin = row[query.BottomMargin];
-            cells.LeftMargin = row[query.LeftMargin];
-            cells.RightMargin = row[query.RightMargin];
-            cells.TopMargin = row[query.TopMargin];
-            cells.DefaultTabStop = row[query.DefaultTabStop];
-            cells.TextBkgnd = row[query.TextBkgnd].ToInt();
-            cells.TextBkgndTrans = row[query.TextBkgndTrans];
-            cells.TextDirection = row[query.TextDirection].ToInt();
-            cells.VerticalAlign = row[query.VerticalAlign].ToInt();
-            cells.TxtPinX = row[query.TxtPinX];
-            cells.TxtPinY = row[query.TxtPinY];
-            cells.TxtLocPinX = row[query.TxtLocPinX];
-            cells.TxtLocPinY = row[query.TxtLocPinY];
-            cells.TxtWidth = row[query.TxtWidth];
-            cells.TxtHeight = row[query.TxtHeight];
-            cells.TxtAngle = row[query.TxtAngle];
+            cells.BottomMargin = table[row,query.BottomMargin];
+            cells.LeftMargin = table[row,query.LeftMargin];
+            cells.RightMargin = table[row,query.RightMargin];
+            cells.TopMargin = table[row,query.TopMargin];
+            cells.DefaultTabStop = table[row,query.DefaultTabStop];
+            cells.TextBkgnd = table[row,query.TextBkgnd].ToInt();
+            cells.TextBkgndTrans = table[row,query.TextBkgndTrans];
+            cells.TextDirection = table[row,query.TextDirection].ToInt();
+            cells.VerticalAlign = table[row,query.VerticalAlign].ToInt();
+            cells.TxtPinX = table[row,query.TxtPinX];
+            cells.TxtPinY = table[row,query.TxtPinY];
+            cells.TxtLocPinX = table[row,query.TxtLocPinX];
+            cells.TxtLocPinY = table[row,query.TxtLocPinY];
+            cells.TxtWidth = table[row,query.TxtWidth];
+            cells.TxtHeight = table[row,query.TxtHeight];
+            cells.TxtAngle = table[row,query.TxtAngle];
             return cells;
         }
 

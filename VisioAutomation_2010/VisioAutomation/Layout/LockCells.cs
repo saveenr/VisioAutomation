@@ -53,29 +53,29 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
         }
 
-        private static LockCells get_cells_from_row(LockQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
+        private static LockCells get_cells_from_row(LockQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new LockCells();
-            cells.LockAspect = row[query.LockAspect].ToBool();
-            cells.LockBegin = row[query.LockBegin].ToBool();
-            cells.LockCalcWH = row[query.LockCalcWH].ToBool();
-            cells.LockCrop = row[query.LockCrop].ToBool();
-            cells.LockCustProp = row[query.LockCustProp].ToBool();
-            cells.LockDelete = row[query.LockDelete].ToBool();
-            cells.LockEnd = row[query.LockEnd].ToBool();
-            cells.LockFormat = row[query.LockFormat].ToBool();
-            cells.LockFromGroupFormat = row[query.LockFromGroupFormat].ToBool();
-            cells.LockGroup = row[query.LockGroup].ToBool();
-            cells.LockHeight = row[query.LockHeight].ToBool();
-            cells.LockMoveX = row[query.LockMoveX].ToBool();
-            cells.LockMoveY = row[query.LockMoveY].ToBool();
-            cells.LockRotate = row[query.LockRotate].ToBool();
-            cells.LockSelect = row[query.LockSelect].ToBool();
-            cells.LockTextEdit = row[query.LockTextEdit].ToBool();
-            cells.LockThemeColors = row[query.LockThemeColors].ToBool();
-            cells.LockThemeEffects = row[query.LockThemeEffects].ToBool();
-            cells.LockVtxEdit = row[query.LockVtxEdit].ToBool();
-            cells.LockWidth = row[query.LockWidth].ToBool();
+            cells.LockAspect = table[row,query.LockAspect].ToBool();
+            cells.LockBegin = table[row,query.LockBegin].ToBool();
+            cells.LockCalcWH = table[row,query.LockCalcWH].ToBool();
+            cells.LockCrop = table[row,query.LockCrop].ToBool();
+            cells.LockCustProp = table[row,query.LockCustProp].ToBool();
+            cells.LockDelete = table[row,query.LockDelete].ToBool();
+            cells.LockEnd = table[row,query.LockEnd].ToBool();
+            cells.LockFormat = table[row,query.LockFormat].ToBool();
+            cells.LockFromGroupFormat = table[row,query.LockFromGroupFormat].ToBool();
+            cells.LockGroup = table[row,query.LockGroup].ToBool();
+            cells.LockHeight = table[row,query.LockHeight].ToBool();
+            cells.LockMoveX = table[row,query.LockMoveX].ToBool();
+            cells.LockMoveY = table[row,query.LockMoveY].ToBool();
+            cells.LockRotate = table[row,query.LockRotate].ToBool();
+            cells.LockSelect = table[row,query.LockSelect].ToBool();
+            cells.LockTextEdit = table[row,query.LockTextEdit].ToBool();
+            cells.LockThemeColors = table[row,query.LockThemeColors].ToBool();
+            cells.LockThemeEffects = table[row,query.LockThemeEffects].ToBool();
+            cells.LockVtxEdit = table[row,query.LockVtxEdit].ToBool();
+            cells.LockWidth = table[row,query.LockWidth].ToBool();
             return cells;
         }
 

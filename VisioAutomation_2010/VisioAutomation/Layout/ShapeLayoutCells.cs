@@ -49,27 +49,27 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
         }
 
-        private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
+        private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new ShapeLayoutCells();
-            cells.ConFixedCode = row[query.ConFixedCode].ToInt();
-            cells.ConLineJumpCode = row[query.ConLineJumpCode].ToInt();
-            cells.ConLineJumpDirX = row[query.ConLineJumpDirX].ToInt();
-            cells.ConLineJumpDirY = row[query.ConLineJumpDirY].ToInt();
-            cells.ConLineJumpStyle = row[query.ConLineJumpStyle].ToInt();
-            cells.ConLineRouteExt = row[query.ConLineRouteExt].ToInt();
-            cells.ShapeFixedCode = row[query.ShapeFixedCode].ToInt();
-            cells.ShapePermeablePlace = row[query.ShapePermeablePlace].ToInt();
-            cells.ShapePermeableX = row[query.ShapePermeableX].ToInt();
-            cells.ShapePermeableY = row[query.ShapePermeableY].ToInt();
-            cells.ShapePlaceFlip = row[query.ShapePlaceFlip].ToInt();
-            cells.ShapePlaceStyle = row[query.ShapePlaceStyle].ToInt();
-            cells.ShapePlowCode = row[query.ShapePlowCode].ToInt();
-            cells.ShapeRouteStyle = row[query.ShapeRouteStyle].ToInt();
-            cells.ShapeSplit = row[query.ShapeSplit].ToInt();
-            cells.ShapeSplittable = row[query.ShapeSplittable].ToInt();
-            cells.DisplayLevel= row[query.DisplayLevel].ToInt();
-            cells.Relationships = row[query.Relationships].ToInt();
+            cells.ConFixedCode = table[row,query.ConFixedCode].ToInt();
+            cells.ConLineJumpCode = table[row,query.ConLineJumpCode].ToInt();
+            cells.ConLineJumpDirX = table[row,query.ConLineJumpDirX].ToInt();
+            cells.ConLineJumpDirY = table[row,query.ConLineJumpDirY].ToInt();
+            cells.ConLineJumpStyle = table[row,query.ConLineJumpStyle].ToInt();
+            cells.ConLineRouteExt = table[row,query.ConLineRouteExt].ToInt();
+            cells.ShapeFixedCode = table[row,query.ShapeFixedCode].ToInt();
+            cells.ShapePermeablePlace = table[row,query.ShapePermeablePlace].ToInt();
+            cells.ShapePermeableX = table[row,query.ShapePermeableX].ToInt();
+            cells.ShapePermeableY = table[row,query.ShapePermeableY].ToInt();
+            cells.ShapePlaceFlip = table[row,query.ShapePlaceFlip].ToInt();
+            cells.ShapePlaceStyle = table[row,query.ShapePlaceStyle].ToInt();
+            cells.ShapePlowCode = table[row,query.ShapePlowCode].ToInt();
+            cells.ShapeRouteStyle = table[row,query.ShapeRouteStyle].ToInt();
+            cells.ShapeSplit = table[row,query.ShapeSplit].ToInt();
+            cells.ShapeSplittable = table[row,query.ShapeSplittable].ToInt();
+            cells.DisplayLevel= table[row,query.DisplayLevel].ToInt();
+            cells.Relationships = table[row,query.Relationships].ToInt();
             return cells;
         }
 

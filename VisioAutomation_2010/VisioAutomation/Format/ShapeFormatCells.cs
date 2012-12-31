@@ -62,34 +62,34 @@ namespace VisioAutomation.Format
             func(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
         }
 
-        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
+        private static ShapeFormatCells get_cells_from_row(ShapeFormatQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new ShapeFormatCells();
-            cells.FillBkgnd = row[query.FillBkgnd].ToInt();
-            cells.FillBkgndTrans = row[query.FillBkgndTrans];
-            cells.FillForegnd = row[query.FillForegnd].ToInt();
-            cells.FillForegndTrans = row[query.FillForegndTrans];
-            cells.FillPattern = row[query.FillPattern].ToInt();
-            cells.ShapeShdwObliqueAngle = row[query.ShapeShdwObliqueAngle];
-            cells.ShapeShdwOffsetX = row[query.ShapeShdwOffsetX];
-            cells.ShapeShdwOffsetY = row[query.ShapeShdwOffsetY];
-            cells.ShapeShdwScaleFactor = row[query.ShapeShdwScaleFactor];
-            cells.ShapeShdwType = row[query.ShapeShdwType].ToInt();
-            cells.ShdwBkgnd = row[query.ShdwBkgnd].ToInt();
-            cells.ShdwBkgndTrans = row[query.ShdwBkgndTrans];
-            cells.ShdwForegnd = row[query.ShdwForegnd].ToInt();
-            cells.ShdwForegndTrans = row[query.ShdwForegndTrans];
-            cells.ShdwPattern = row[query.ShdwPattern].ToInt();
-            cells.BeginArrow = row[query.BeginArrow].ToInt();
-            cells.BeginArrowSize = row[query.BeginArrowSize];
-            cells.EndArrow = row[query.EndArrow].ToInt();
-            cells.EndArrowSize = row[query.EndArrowSize];
-            cells.LineCap = row[query.LineCap].ToInt();
-            cells.LineColor = row[query.LineColor].ToInt();
-            cells.LineColorTrans = row[query.LineColorTrans];
-            cells.LinePattern = row[query.LinePattern].ToInt();
-            cells.LineWeight = row[query.LineWeight];
-            cells.Rounding = row[query.Rounding];
+            cells.FillBkgnd = table[row,query.FillBkgnd].ToInt();
+            cells.FillBkgndTrans = table[row,query.FillBkgndTrans];
+            cells.FillForegnd = table[row,query.FillForegnd].ToInt();
+            cells.FillForegndTrans = table[row,query.FillForegndTrans];
+            cells.FillPattern = table[row,query.FillPattern].ToInt();
+            cells.ShapeShdwObliqueAngle = table[row,query.ShapeShdwObliqueAngle];
+            cells.ShapeShdwOffsetX = table[row,query.ShapeShdwOffsetX];
+            cells.ShapeShdwOffsetY = table[row,query.ShapeShdwOffsetY];
+            cells.ShapeShdwScaleFactor = table[row,query.ShapeShdwScaleFactor];
+            cells.ShapeShdwType = table[row,query.ShapeShdwType].ToInt();
+            cells.ShdwBkgnd = table[row,query.ShdwBkgnd].ToInt();
+            cells.ShdwBkgndTrans = table[row,query.ShdwBkgndTrans];
+            cells.ShdwForegnd = table[row,query.ShdwForegnd].ToInt();
+            cells.ShdwForegndTrans = table[row,query.ShdwForegndTrans];
+            cells.ShdwPattern = table[row,query.ShdwPattern].ToInt();
+            cells.BeginArrow = table[row,query.BeginArrow].ToInt();
+            cells.BeginArrowSize = table[row,query.BeginArrowSize];
+            cells.EndArrow = table[row,query.EndArrow].ToInt();
+            cells.EndArrowSize = table[row,query.EndArrowSize];
+            cells.LineCap = table[row,query.LineCap].ToInt();
+            cells.LineColor = table[row,query.LineColor].ToInt();
+            cells.LineColorTrans = table[row,query.LineColorTrans];
+            cells.LinePattern = table[row,query.LinePattern].ToInt();
+            cells.LineWeight = table[row,query.LineWeight];
+            cells.Rounding = table[row,query.Rounding];
             return cells;
         }
 

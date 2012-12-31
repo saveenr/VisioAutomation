@@ -63,22 +63,22 @@ namespace VisioAutomation.Text
             return m_query;
         }
 
-        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Data.TableRow<VA.ShapeSheet.CellData<double>> row)
+        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new ParagraphFormatCells();
-            cells.IndentFirst = row[query.IndentFirst];
-            cells.IndentLeft = row[query.IndentLeft];
-            cells.IndentRight = row[query.IndentRight];
-            cells.SpacingAfter = row[query.SpaceAfter];
-            cells.SpacingBefore = row[query.SpaceBefore];
-            cells.SpacingLine = row[query.SpaceLine];
-            cells.HorizontalAlign = row[query.HorzAlign].ToInt();
-            cells.Bullet = row[query.Bullet].ToInt();
-            cells.BulletFont = row[query.BulletFont].ToInt();
-            cells.BulletFontSize = row[query.BulletFontSize].ToInt();
-            cells.LocBulletFont = row[query.LocalizeBulletFont].ToInt();
-            cells.TextPosAfterBullet= row[query.TextPosAfterBullet];
-            cells.Flags= row[query.Flags].ToInt();
+            cells.IndentFirst = table[row,query.IndentFirst];
+            cells.IndentLeft = table[row,query.IndentLeft];
+            cells.IndentRight = table[row,query.IndentRight];
+            cells.SpacingAfter = table[row,query.SpaceAfter];
+            cells.SpacingBefore = table[row,query.SpaceBefore];
+            cells.SpacingLine = table[row,query.SpaceLine];
+            cells.HorizontalAlign = table[row,query.HorzAlign].ToInt();
+            cells.Bullet = table[row,query.Bullet].ToInt();
+            cells.BulletFont = table[row,query.BulletFont].ToInt();
+            cells.BulletFontSize = table[row,query.BulletFontSize].ToInt();
+            cells.LocBulletFont = table[row,query.LocalizeBulletFont].ToInt();
+            cells.TextPosAfterBullet= table[row,query.TextPosAfterBullet];
+            cells.Flags= table[row,query.Flags].ToInt();
             cells.BulletString = ""; // TODO: Figure out some way of getting this
             return cells;
         }
