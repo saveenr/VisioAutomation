@@ -1,7 +1,5 @@
-using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using System.Collections.Generic;
 using TABLE = VisioAutomation.ShapeSheet.Data.Table<VisioAutomation.ShapeSheet.CellData<double>>;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
@@ -10,8 +8,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         // Delegates
         public delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
-
-        // Delegates
         protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLE table, int row) where TQuery : VA.ShapeSheet.Query.QueryBase;
     }
 }
