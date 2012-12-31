@@ -57,15 +57,6 @@ namespace VisioAutomation.ShapeSheet
             return this.Value;
         }
 
-        public string ToDisplayString()
-        {
-            if (this.HasValue)
-            {
-                return this.Value;
-            }
-            return "";
-        }
-
         public string Encode()
         {
             if (!this.HasValue)

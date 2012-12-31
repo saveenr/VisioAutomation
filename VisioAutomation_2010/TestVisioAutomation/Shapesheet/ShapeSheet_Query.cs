@@ -13,8 +13,7 @@ namespace TestVisioAutomation
         public static VA.ShapeSheet.SRC cell_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
         public static VA.ShapeSheet.SRC cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
         public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
-
-
+        
         public static List<T[]> GetRowsInGroup<T>(VA.ShapeSheet.Data.Table<T> table, int group)
         {
             var g = table.Groups[group];
