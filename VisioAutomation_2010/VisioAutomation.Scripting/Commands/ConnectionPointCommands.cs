@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             foreach (var shape in shapes)
             {
-                var cp = VA.Connections.ConnectionPointHelper.Get(shape);
+                var cp = VA.Connections.ConnectionPointCells.GetCells(shape);
                 dic[shape] = cp;
             }
 

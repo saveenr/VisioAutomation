@@ -90,15 +90,5 @@ namespace VisioAutomation.Controls
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];
         }
-
-        public static IList<ControlCells> Get(IVisio.Shape shape)
-        {
-            return ControlCells.GetCells(shape);
-        }
-
-        public static IList<List<ControlCells>> Get(IVisio.Page page, IList<int> shapeids)
-        {
-            return ControlCells.GetCells(page,shapeids);
-        }
     }
 }

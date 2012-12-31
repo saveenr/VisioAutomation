@@ -35,13 +35,13 @@ namespace VisioAutomation.Connections
             return cells;
         }
 
-        internal static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
-        internal static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
+        public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);

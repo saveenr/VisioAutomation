@@ -25,7 +25,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(2, VA.Controls.ControlHelper.GetCount(s1));
             
             // retrieve the control information
-            var controls = VA.Controls.ControlHelper.Get(s1);
+            var controls = VA.Controls.ControlCells.GetCells(s1);
 
             // verify that the controls were set propery
             Assert.AreEqual(2, controls.Count);

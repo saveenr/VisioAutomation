@@ -78,15 +78,5 @@ namespace VisioAutomation.Connections
 
             return n;
         }
-
-        public static IList<List<ConnectionPointCells>> Get(IVisio.Page page, IList<int> shapeids)
-        {
-            return ConnectionPointCells.GetCells(page, shapeids);
-        }
-
-        public static IList<ConnectionPointCells> Get(IVisio.Shape shape)
-        {
-            return ConnectionPointCells.GetCells(shape);
-        }
     }
 }

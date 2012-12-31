@@ -65,13 +65,13 @@ namespace VisioAutomation.Text
 
         }
 
-        internal static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = new CharacterFormatQuery();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
         }
 
-        internal static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
+        public static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = new CharacterFormatQuery();
             return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);

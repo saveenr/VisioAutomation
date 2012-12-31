@@ -35,7 +35,7 @@ namespace TestVisioAutomation
             ConnectionPointHelper.Add(s1, cpd2);
             Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
 
-            var controlpoints = VA.Connections.ConnectionPointHelper.Get(s1);
+            var controlpoints = VA.Connections.ConnectionPointCells.GetCells(s1);
             Assert.AreEqual(2, controlpoints.Count);
             var cp_0 = controlpoints[0];
             AssertVA.AreEqual("0 in", 0, cp_0.DirX);
