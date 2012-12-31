@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet.Data
     /// Used to store the output of the QueryRows and QueryCells methods. Stores a string for the formula and a typed value (int|bool|double|string) for the result.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Table<T> : IEnumerable<TableRow<T>>
+    public class Table<T> 
     {
         private readonly T[] _values;
         private readonly int rowcount;
@@ -67,27 +67,9 @@ namespace VisioAutomation.ShapeSheet.Data
             set { this._values[get_pos(row, column.Ordinal)] = value; }
         }
 
-        public IEnumerator<TableRow<T>> GetEnumerator()
-        {
-            for (int i = 0; i < this.rowcount; i++)
-            {
-                yield return this[i];
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()     
-        {                                           
-            return GetEnumerator();
-        }
-
         public int RowCount
         {
             get { return this.rowcount; }
-        }
-
-        public TableRow<T> this[int index]
-        {
-            get { return new TableRow<T>(this,index); }
         }
 
         internal T[] RawArray

@@ -214,7 +214,6 @@
     <Compile Include="CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="Shapesheet\Query\QueryBase.cs" />
     <Compile Include="Shapesheet\Query\QueryColumn.cs" />
-    <Compile Include="Shapesheet\Data\TableRow.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
     <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\ShapeList.cs" />
