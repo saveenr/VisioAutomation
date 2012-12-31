@@ -16,12 +16,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         // group (even in the formula is null) 
         protected abstract void ApplyFormulas(ApplyFormula func, short row);
 
-        public void Apply(VA.ShapeSheet.Update update, short shapeid, short row)
+        internal void Apply(VA.ShapeSheet.Update update, short shapeid, short row)
         {
             this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f), row);
         }
 
-        public void Apply(VA.ShapeSheet.Update update, short row)
+        internal void Apply(VA.ShapeSheet.Update update, short row)
         {
             this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f),row);
         }

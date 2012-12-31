@@ -140,15 +140,15 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
             // Set the ShapeSheet props
             short bodyshape_id = bodyshape.ID16;
             short titleshape_id = titleshape.ID16;
-            _textblockformat.Apply(update, titleshape_id);
-            this._titleParaFmt.Apply(update, titleshape_id, 0);
-            this._titleCharFmt.Apply(update, titleshape_id, 0);
-            this._titleFormat.Apply(update, titleshape_id);
+            update.SetFormulas(titleshape_id, _textblockformat);
+            update.SetFormulasForRow(titleshape_id, this._titleParaFmt, 0);
+            update.SetFormulasForRow(titleshape_id, this._titleCharFmt, 0);
+            update.SetFormulas(titleshape_id, this._titleFormat);
 
-            _textblockformat.Apply(update, bodyshape_id);
-            this._bodyCharFmt.Apply(update, bodyshape_id, 0);
-            this._bodyParaFmt.Apply(update, bodyshape_id, 0);
-            this._bodyFormat.Apply(update, bodyshape_id);
+            update.SetFormulas(bodyshape_id, _textblockformat);
+            update.SetFormulasForRow(bodyshape_id, this._bodyCharFmt, 0);
+            update.SetFormulasForRow(bodyshape_id, this._bodyParaFmt, 0);
+            update.SetFormulas(bodyshape_id, this._bodyFormat);
             update.Execute(page);
 
             textpage.VisioBodyShape = bodyshape;

@@ -20,12 +20,12 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
             this.TextCells = new TextCells();
         }
 
-        public void Apply(VA.ShapeSheet.Update update, short shapeid, short shapeid2)
+        public void Apply(VA.ShapeSheet.Update update, short shapeid_label, short shapeid_box)
         {
-            this.CharacterFormatCells.Apply(update, shapeid, 0);
-            this.ParagraphFormatCells.Apply(update, shapeid, 0);
-            this.ShapeFormatCells.Apply(update, shapeid2);
-            this.TextCells.Apply(update, shapeid);
+            update.SetFormulasForRow(shapeid_label, this.CharacterFormatCells, 0);
+            update.SetFormulasForRow(shapeid_label, this.ParagraphFormatCells, 0);
+            update.SetFormulas(shapeid_box, this.ShapeFormatCells);
+            update.SetFormulas(shapeid_label, this.TextCells);
         }
     }
 }

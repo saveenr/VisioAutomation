@@ -143,7 +143,7 @@ namespace VisioAutomation.Layout
             {
                 var shape_id = shapeids[i];
                 var xfrm = xfrms[i];
-                xfrm.Apply(update,(short)shape_id);
+                update.SetFormulas((short)shape_id, xfrm);
             }
             update.Execute(page);
         }

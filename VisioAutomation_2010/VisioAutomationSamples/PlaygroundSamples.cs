@@ -72,8 +72,8 @@ namespace VisioAutomationSamples
                 format.LinePattern = 0;
                 format.FillForegndTrans = 0.5;
 
-                xfrm.Apply(update, shapeid);
-                format.Apply(update, shapeid);
+                update.SetFormulas(shapeid, xfrm);
+                update.SetFormulas(shapeid, format);
             }
 
             update.Execute(page);
@@ -138,7 +138,7 @@ namespace VisioAutomationSamples
                 format.FillBkgnd = color2_formula;
                 format.LinePattern = 0;
                 format.LineWeight = 0;
-                format.Apply(update, shapeid);
+                update.SetFormulas(shapeid, format);
 
                 n++;
             }

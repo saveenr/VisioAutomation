@@ -59,7 +59,7 @@ namespace VisioAutomation.Controls
             }
 
             var update = new VA.ShapeSheet.Update();
-            ctrl.Apply(update, row);
+            update.SetFormulasForRow(ctrl, row);
             update.Execute(shape);
 
             return row;

@@ -252,11 +252,11 @@ namespace TestVisioAutomation
             var tf0 = VA.Text.TextFormat.GetFormat(s1);
             Assert.AreEqual("4 pt",tf0.TextBlock.BottomMargin.Formula);
 
-            var tb1 = new VA.Text.TextCells();
-            tb1.BottomMargin = "8 pt";
+            var textcells1 = new VA.Text.TextCells();
+            textcells1.BottomMargin = "8 pt";
 
             var update = new VA.ShapeSheet.Update();
-            tb1.Apply(update,s1.ID16);
+            update.SetFormulas(s1.ID16, textcells1);
             update.Execute(page1);
 
             var tf2 = VA.Text.TextFormat.GetFormat(s1);
@@ -276,27 +276,27 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
             s1.Text = TestCommon.Helper.LoremIpsumText;
             
-            var tb1 = new VA.Text.TextCells();
-            tb1.TxtAngle = "20 deg";
-            tb1.TxtPinX = "Width*1.3";
-            tb1.TxtPinY = "Height*0.5";
-            tb1.TxtLocPinX = "TxtWidth*0.3";
-            tb1.TxtLocPinY = "TxtHeight*0.4";
-            tb1.TxtHeight = "Height*1.5";
-            tb1.TxtWidth = "Width*0.7";
+            var textcells1 = new VA.Text.TextCells();
+            textcells1.TxtAngle = "20 deg";
+            textcells1.TxtPinX = "Width*1.3";
+            textcells1.TxtPinY = "Height*0.5";
+            textcells1.TxtLocPinX = "TxtWidth*0.3";
+            textcells1.TxtLocPinY = "TxtHeight*0.4";
+            textcells1.TxtHeight = "Height*1.5";
+            textcells1.TxtWidth = "Width*0.7";
 
             var update = new VA.ShapeSheet.Update();
-            tb1.Apply(update, s1.ID16);
+            update.SetFormulas(s1.ID16, textcells1);
             update.Execute(page1);
 
             var tb2 = VA.Text.TextCells.GetCells(s1);
-            Assert.AreEqual(tb1.TxtAngle.Formula,tb2.TxtAngle.Formula);
-            Assert.AreEqual(tb1.TxtPinX.Formula, tb2.TxtPinX.Formula);
-            Assert.AreEqual(tb1.TxtPinY.Formula, tb2.TxtPinY.Formula);
-            Assert.AreEqual(tb1.TxtHeight.Formula, tb2.TxtHeight.Formula);
-            Assert.AreEqual(tb1.TxtWidth.Formula, tb2.TxtWidth.Formula);
-            Assert.AreEqual(tb1.TxtLocPinX.Formula, tb2.TxtLocPinX.Formula);
-            Assert.AreEqual(tb1.TxtLocPinY.Formula, tb2.TxtLocPinY.Formula);
+            Assert.AreEqual(textcells1.TxtAngle.Formula,tb2.TxtAngle.Formula);
+            Assert.AreEqual(textcells1.TxtPinX.Formula, tb2.TxtPinX.Formula);
+            Assert.AreEqual(textcells1.TxtPinY.Formula, tb2.TxtPinY.Formula);
+            Assert.AreEqual(textcells1.TxtHeight.Formula, tb2.TxtHeight.Formula);
+            Assert.AreEqual(textcells1.TxtWidth.Formula, tb2.TxtWidth.Formula);
+            Assert.AreEqual(textcells1.TxtLocPinX.Formula, tb2.TxtLocPinX.Formula);
+            Assert.AreEqual(textcells1.TxtLocPinY.Formula, tb2.TxtLocPinY.Formula);
 
             page1.Delete(0);
         }

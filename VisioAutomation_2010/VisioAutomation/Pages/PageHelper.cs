@@ -59,7 +59,7 @@ namespace VisioAutomation.Pages
             // first update all the page cells
             var dest_pagesheet = dest_page.PageSheet;
             var update = new VisioAutomation.ShapeSheet.Update();
-            pagecells.Apply(update);
+            update.SetFormulas(pagecells);
             update.Execute(dest_pagesheet);
 
             // make sure the new page looks like the old page

@@ -39,9 +39,9 @@ namespace VisioAutomationSamples
             xform.Height = string.Format("GUARD({0}!Height)", bkname); 
 
             var update = new VA.ShapeSheet.Update();
-            xform.Apply(update,progress.ID16);
-            background_fmt.Apply(update,background.ID16);
-            progress_fmt.Apply(update, progress.ID16);
+            update.SetFormulas(progress.ID16, xform);
+            update.SetFormulas(progress.ID16, background_fmt);
+            update.SetFormulas(progress.ID16, progress_fmt);
             update.Execute(page_a);
 
             var markup1 = new VA.Text.Markup.TextElement();

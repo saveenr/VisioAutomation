@@ -318,7 +318,7 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (int shapeid in shapeids)
             {
-                lockcells.Apply(update, (short) shapeid);
+                update.SetFormulas((short)shapeid, lockcells);
             }
 
             var application = this.Session.VisioApplication;

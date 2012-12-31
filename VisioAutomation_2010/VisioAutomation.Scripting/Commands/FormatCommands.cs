@@ -29,7 +29,7 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (int shapeid in shapeids)
             {
-                format.Apply(update, (short) shapeid);
+                update.SetFormulas((short)shapeid, format);
             }
 
             update.Execute(this.Session.VisioApplication.ActivePage);            

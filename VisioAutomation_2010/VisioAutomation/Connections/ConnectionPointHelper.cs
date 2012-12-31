@@ -31,12 +31,11 @@ namespace VisioAutomation.Connections
                                  (short)IVisio.VisRowTags.visTagCnnctPt);
 
             var update = new VA.ShapeSheet.Update();
-            cp.Apply(update,n);
+            update.SetFormulasForRow(cp,n);
             update.Execute(shape);
 
             return n;
         }
-
 
         public static void Delete(IVisio.Shape shape, int index)
         {
