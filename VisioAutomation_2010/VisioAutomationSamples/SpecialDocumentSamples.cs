@@ -21,7 +21,7 @@ namespace VisioAutomationSamples
             bob.Children.Add(ted);
             bob.Children.Add(alice);
 
-            orgchart.Root = bob;
+            orgchart.Roots.Add(bob);
 
             orgchart.Render(SampleEnvironment.Application);
 

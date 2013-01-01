@@ -53,11 +53,15 @@ namespace VisioAutomation.DOM
             var doc = startpage.Document;
             int count = 0;
             var vpages = new List<IVisio.Page>(this.Count);
+
+            var app = doc.Application;
+            var active_window = app.ActiveWindow;
             foreach (var dompage in this.pages)
             {
                 if (count == 0)
                 {
                     dompage.Render(startpage);
+                    
                     vpages.Add(startpage);
                 }
                 else
@@ -65,6 +69,8 @@ namespace VisioAutomation.DOM
                     var vpage = dompage.Render(doc);
                     vpages.Add(vpage);
                 }
+                active_window.ViewFit = 1; // 1==visFitPage - adjust the zoom
+                count++;
             }
             return vpages;
         }

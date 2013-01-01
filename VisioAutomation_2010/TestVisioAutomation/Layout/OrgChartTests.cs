@@ -50,7 +50,7 @@ namespace TestVisioAutomation
 
             n_a.Size = new VA.Drawing.Size(4, 2);
 
-            orgchart.Root = n_a;
+            orgchart.Roots.Add(n_a);
 
             var app = new IVisio.Application();
 
@@ -84,5 +84,34 @@ namespace TestVisioAutomation
 
             app.Quit(true);
         }
+
+        [TestMethod]
+        public void DrawOrgChart2()
+        {
+            var orgchart = new OCMODEL.Drawing();
+
+            var n_a = new OCMODEL.Node("A");
+            var n_b = new OCMODEL.Node("B");
+            var n_c = new OCMODEL.Node("C");
+            var n_d = new OCMODEL.Node("D");
+            var n_e = new OCMODEL.Node("E");
+
+            n_a.Children.Add(n_b);
+            n_a.Children.Add(n_c);
+            n_c.Children.Add(n_d);
+            n_c.Children.Add(n_e);
+
+            n_a.Size = new VA.Drawing.Size(4, 2);
+
+            orgchart.Roots.Add(n_a);
+            orgchart.Roots.Add(n_a);
+
+            var app = new IVisio.Application();
+
+            orgchart.Render(app);
+
+            app.Quit(true);
+        }
+
     }
 }

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Layout.Models.InternalTree;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VAL = VisioAutomation.Layout;
@@ -34,9 +36,16 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 throw new System.ArgumentNullException("app");
             }
 
-            if (orgchartdrawing.Root == null)
+            if (orgchartdrawing.Roots.Count < 1)
             {
-                throw new System.ArgumentException("Org chart has root node set to null", "orgchartdrawing");
+                throw new System.ArgumentException("orgchart must have at least one root");                
+            }
+            foreach (var root in orgchartdrawing.Roots)
+            {
+                if (root == null)
+                {
+                    throw new System.ArgumentException("Org chart has root node set to null", "orgchartdrawing");
+                }                
             }
 
             const string orgchart_vst = "orgch_u.vst";
@@ -45,115 +54,127 @@ namespace VisioAutomation.Layout.Models.OrgChart
             const string dyncon_master_name = "Dynamic connector";
             const double border_width = 0.5;
 
-
-            // Construct a layout tree from the hierarchy
-            var treenodes = VA.Internal.TreeOps.CopyTree(
-                orgchartdrawing.Root,
-                n => n.Children,
-                n => node_to_layout_node(n),
-                (p, c) => p.AddChild(c));
-
-            // Perform the layout
-            var layout = new VA.Layout.Models.InternalTree.TreeLayout<object>();
-
-           layout.Options.Direction = map_direction2(this.LayoutOptions.Direction);
-            layout.Options.LevelSeparation = 1;
-            layout.Options.SiblingSeparation = 0.25;
-            layout.Options.SubtreeSeparation = 1;
-
-            layout.Root.AddChild(treenodes[0]);
-            layout.PerformLayout();
-
-            // Render the Document in Visio
-            var bb = layout.GetBoundingBoxOfTree();
-
-            // vis.ActiveWindow.ShowConnectPoints = 0;
-            
             var domdoc = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
-            var dompage = new VA.DOM.Page();
-            domdoc.Pages.Add(dompage);
-            
-            // fixup the nodes so that they render on the page
-            foreach (var i in treenodes)
+
+            var trees = new List<IList<Node<object>>>();
+ 
+            foreach (var root in orgchartdrawing.Roots)
             {
-                i.Position = i.Position.Add(border_width, border_width);
-            }
+                // Construct a layout tree from the hierarchy
+                var treenodes = VA.Internal.TreeOps.CopyTree(
+                    orgchartdrawing.Roots[0],
+                    n => n.Children,
+                    n => node_to_layout_node(n),
+                    (p, c) => p.AddChild(c));
 
-            var centerpoints = new VA.Drawing.Point[treenodes.Count];
-            foreach (int i in Enumerable.Range(0, treenodes.Count))
-            {
-                centerpoints[i] = treenodes[i].Rect.Center;
-            }
+                trees.Add(treenodes);
 
-            // TODO: Add support for Left to right , Right to Left, and Bottom to Top Layouts
+                // Perform the layout
+                var layout = new VA.Layout.Models.InternalTree.TreeLayout<object>();
 
-            var vmasters = centerpoints
-                .Select(centerpoint => dompage.Shapes.Drop(orgchart_master_node_name,orgchart_vss, centerpoint))
-                .ToList();
+                layout.Options.Direction = map_direction2(this.LayoutOptions.Direction);
+                layout.Options.LevelSeparation = 1;
+                layout.Options.SiblingSeparation = 0.25;
+                layout.Options.SubtreeSeparation = 1;
 
+                layout.Root.AddChild(treenodes[0]);
+                layout.PerformLayout();
 
-            // For each OrgChart object, attach the shape that corresponds to it
-            foreach (int i in Enumerable.Range(0, treenodes.Count))
-            {
-                var orgnode = (Node) treenodes[i].Data;
-                orgnode.DOMNode = vmasters[i];
-                vmasters[i].Cells.Width = treenodes[i].Size.Width;
-                vmasters[i].Cells.Height = treenodes[i].Size.Height;
-            }
+                // Render the Document in Visio
+                var bb = layout.GetBoundingBoxOfTree();
 
-            if (this.LayoutOptions.UseDynamicConnectors)
-            {
-                var orgchart_nodes = treenodes.Select(tn => tn.Data).Cast<Node>();
+                // vis.ActiveWindow.ShowConnectPoints = 0;
 
-                foreach (var parent in orgchart_nodes)
+                var dompage = new VA.DOM.Page();
+                domdoc.Pages.Add(dompage);
+
+                // fixup the nodes so that they render on the page
+                foreach (var i in treenodes)
                 {
-                    foreach (var child in parent.Children)
+                    i.Position = i.Position.Add(border_width, border_width);
+                }
+
+                var centerpoints = new VA.Drawing.Point[treenodes.Count];
+                foreach (int i in Enumerable.Range(0, treenodes.Count))
+                {
+                    centerpoints[i] = treenodes[i].Rect.Center;
+                }
+
+                // TODO: Add support for Left to right , Right to Left, and Bottom to Top Layouts
+
+                var vmasters = centerpoints
+                    .Select(centerpoint => dompage.Shapes.Drop(orgchart_master_node_name, orgchart_vss, centerpoint))
+                    .ToList();
+
+
+                // For each OrgChart object, attach the shape that corresponds to it
+                foreach (int i in Enumerable.Range(0, treenodes.Count))
+                {
+                    var orgnode = (Node)treenodes[i].Data;
+                    orgnode.DOMNode = vmasters[i];
+                    vmasters[i].Cells.Width = treenodes[i].Size.Width;
+                    vmasters[i].Cells.Height = treenodes[i].Size.Height;
+                }
+
+                if (this.LayoutOptions.UseDynamicConnectors)
+                {
+                    var orgchart_nodes = treenodes.Select(tn => tn.Data).Cast<Node>();
+
+                    foreach (var parent in orgchart_nodes)
                     {
-                        var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
-                        var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                        var connector = dompage.Shapes.Connect(dyncon_master_name, orgchart_vss, parent_shape, child_shape);
+                        foreach (var child in parent.Children)
+                        {
+                            var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
+                            var child_shape = (VA.DOM.BaseShape)child.DOMNode;
+                            var connector = dompage.Shapes.Connect(dyncon_master_name, orgchart_vss, parent_shape, child_shape);
+                        }
                     }
                 }
-            }
-            else
-            {
-                foreach (var connection in layout.EnumConnections())
+                else
                 {
-                    var bez = layout.GetConnectionBezier(connection);
-                    dompage.Shapes.DrawBezier(bez);
+                    foreach (var connection in layout.EnumConnections())
+                    {
+                        var bez = layout.GetConnectionBezier(connection);
+                        dompage.Shapes.DrawBezier(bez);
+                    }
                 }
-            }
 
-            // Set the Text Labels on each Org node
-            foreach (int i in Enumerable.Range(0, treenodes.Count))
-            {
-                var orgnode = (Node) treenodes[i].Data;
-                var shape = (VA.DOM.BaseShape)orgnode.DOMNode;
-                shape.Text = new VA.Text.Markup.TextElement(orgnode.Text);
-            }
+                // Set the Text Labels on each Org node
+                foreach (int i in Enumerable.Range(0, treenodes.Count))
+                {
+                    var orgnode = (Node)treenodes[i].Data;
+                    var shape = (VA.DOM.BaseShape)orgnode.DOMNode;
+                    shape.Text = new VA.Text.Markup.TextElement(orgnode.Text);
+                }
 
-            var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
-            dompage.Size = page_size_with_border;
-
+                var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
+                dompage.Size = page_size_with_border;
+                dompage.ResizeToFit = true;
+                dompage.ResizeToFitMargin = new VA.Drawing.Size(border_width*2, border_width*2.0);
+            } // finish handling root node
+            
             var doc = domdoc.Render(app);
 
-            var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
-            var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);
-            var all_urls = orgnodes_with_urls.Select( n=>  new { orgnode = n, shape = (VA.DOM.BaseShape) n.DOMNode, url = n.URL.Trim() } );
+            foreach (var treenodes in trees)
+            {
+                var orgnodes = treenodes.Select(i => i.Data).Cast<Node>();
+                var orgnodes_with_urls = orgnodes.Where(n => n.URL != null);
+                var all_urls = orgnodes_with_urls.Select(n => new { orgnode = n, shape = (VA.DOM.BaseShape)n.DOMNode, url = n.URL.Trim() });
 
-            foreach (var url in all_urls)
-            {
-                var hlink = url.orgnode.VisioShape.Hyperlinks.Add();
-                hlink.Name = "Row_1";
-                hlink.Address = url.orgnode.URL;
-            }
-            
-            // Attach all the orgchart nodes to the Visio shapes that were created
-            foreach (int i in Enumerable.Range(0, treenodes.Count))
-            {
-                var orgnode = (Node) treenodes[i].Data;
-                var shape = (VA.DOM.BaseShape)orgnode.DOMNode;
-                orgnode.VisioShape = shape.VisioShape;
+                foreach (var url in all_urls)
+                {
+                    var hlink = url.orgnode.VisioShape.Hyperlinks.Add();
+                    hlink.Name = "Row_1";
+                    hlink.Address = url.orgnode.URL;
+                }
+
+                // Attach all the orgchart nodes to the Visio shapes that were created
+                foreach (int i in Enumerable.Range(0, treenodes.Count))
+                {
+                    var orgnode = (Node)treenodes[i].Data;
+                    var shape = (VA.DOM.BaseShape)orgnode.DOMNode;
+                    orgnode.VisioShape = shape.VisioShape;
+                }               
             }
         }
 
