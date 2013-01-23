@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -47,6 +48,11 @@ namespace VisioAutomation.ShapeSheet.Query
             foreach (var g in GetGrouping(shapeids, groupcounts, rowcount))
             {
                 groups.Add(g);
+            }
+
+            if (groupcounts.Count != groups.Count)
+            {
+                throw new SystemException();
             }
             return groups;
         }
