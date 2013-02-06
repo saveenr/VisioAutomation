@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "CustomProperty")]
-    public class Get_CustomProperty : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioCustomProperty")]
+    public class Get_VisioCustomProperty : VisioPS.VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {

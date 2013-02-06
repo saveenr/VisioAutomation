@@ -157,7 +157,7 @@
     <Compile Include="Commands\Invoke_VisioDuplicatePage.cs" />
     <Compile Include="Commands\Get_VisioEdge.cs" />
     <Compile Include="Commands\Get_VisioPage.cs" />
-    <Compile Include="Commands\Get_CustomProperty.cs" />
+    <Compile Include="Commands\Get_VisioCustomProperty.cs" />
     <Compile Include="Commands\Get_VisioShape.cs" />
     <Compile Include="Commands\Get_VisioText.cs" />
     <Compile Include="Commands\Get_VisioApplication.cs" />
