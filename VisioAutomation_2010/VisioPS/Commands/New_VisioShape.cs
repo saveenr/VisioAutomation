@@ -15,9 +15,6 @@ namespace VisioPS.Commands
         public double [] Points { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter GetShapeIDs=false;
-
-        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter NoSelect=false;
 
         protected override void ProcessRecord()
@@ -25,27 +22,21 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.Point.FromDoubles(Points).ToList();
             var shape_ids = scriptingsession.Master.Drop(Masters, points);
+            
+            var page = scriptingsession.Page.Get();
+            var shape_objects = VA.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
 
-            if (NoSelect)
+            scriptingsession.Selection.SelectNone();
+
+            if (this.NoSelect)
             {
-                
             }
             else
             {
-                
+                scriptingsession.Selection.Select(shape_objects);
             }
 
-
-            if (this.GetShapeIDs)
-            {
-                this.WriteObject(shape_ids);
-            }
-            else
-            {
-                var page = scriptingsession.Page.Get();
-                var shape_objects = VA.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
-                this.WriteObject(shape_objects);
-            }
+            this.WriteObject(shape_objects);
         }
     }
 }
