@@ -168,7 +168,6 @@
     <Compile Include="objects\CmdletExtensions.cs" />
     <Compile Include="Commands\Invoke_VisioResizePageToFitContents.cs" />
     <Compile Include="Commands\Set_VisioWindowSize.cs" />
-    <Compile Include="Commands\Set_VisioSelection.cs" />
     <Compile Include="enums\VerticalAlignment.cs" />
     <Compile Include="objects\VisioPSCmdlet.cs" />
     <Compile Include="Commands\Set_VisioPageLayout.cs" />

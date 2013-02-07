@@ -6,21 +6,45 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Select, "VisioShape")]
     public class Select_VisioShape : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] public IVisio.Shape[] Shape;
-        [SMA.Parameter(Mandatory = false)] public int[] ID;
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
+        public IVisio.Shape[] Shapes { get; set; }
+        
+        [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapeIDs")]
+        public int[] ShapeIDs { get; set; }
+        
+        [SMA.Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
+        public SelectionOperation SelectionOperation { get; set; }
 
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
 
-            if ( Shape !=null)
+            if ( Shapes !=null)
             {
-                scriptingsession.Selection.Select(Shape);
+                scriptingsession.Selection.Select(Shapes);
             }
-
-            if (ID!=null)
+            else if (ShapeIDs!=null)
             {
-                scriptingsession.Selection.Select(ID);
+                scriptingsession.Selection.Select(ShapeIDs);
+            }
+            else
+            {
+                if (this.SelectionOperation == VisioPS.SelectionOperation.All)
+                {
+                    scriptingsession.Selection.SelectAll();
+                }
+                else if (this.SelectionOperation == VisioPS.SelectionOperation.None)
+                {
+                    scriptingsession.Selection.SelectNone();
+                }
+                else if (this.SelectionOperation == VisioPS.SelectionOperation.Invert)
+                {
+                    scriptingsession.Selection.SelectInvert();
+                }
+                else
+                {
+                    throw new System.ArgumentOutOfRangeException("SelectionOperation");
+                }
             }
         }
     }
