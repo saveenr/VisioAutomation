@@ -30,5 +30,11 @@ namespace VisioPS
                 return cached_session;
             }
         }
+
+        public void WriteVerboseEx(string fmt, params object[] items)
+        {
+            string s = string.Format(fmt, items);
+            this.WriteVerbose(s);
+        }
     }
 }

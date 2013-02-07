@@ -19,12 +19,15 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
+            this.WriteVerboseEx("NoSelect: {0}", this.NoSelect);
+
             var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.Point.FromDoubles(Points).ToList();
             var shape_ids = scriptingsession.Master.Drop(Masters, points);
             
             var page = scriptingsession.Page.Get();
             var shape_objects = VA.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
+
 
             scriptingsession.Selection.SelectNone();
 
@@ -33,6 +36,7 @@ namespace VisioPS.Commands
             }
             else
             {
+                this.WriteVerbose("Selecting");
                 scriptingsession.Selection.Select(shape_objects);
             }
 
