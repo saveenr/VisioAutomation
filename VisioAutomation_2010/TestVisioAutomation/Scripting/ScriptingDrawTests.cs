@@ -55,7 +55,9 @@ namespace TestVisioAutomation
             ss.Document.OpenStencil("basic_u.vss");
             string stencil = "basic_u.vss";
             string mastername = "Rectangle";
-            var master = ss.Master.Get(mastername, stencil);
+
+            var stencildoc = ss.Document.Get(stencil);
+            var master = ss.Master.Get(mastername, stencildoc);
 
             var grid = new VA.Layout.Models.Grid.GridLayout(cols, rows, cellsize, master);
             grid.Origin = new VA.Drawing.Point(0, 4);
@@ -190,8 +192,8 @@ namespace TestVisioAutomation
             var ss = GetScriptingSession();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
-            ss.Document.OpenStencil("Basic_U.VSS");
-            var master = ss.Master.Get("Rectangle", "Basic_U.VSS");
+            var basic_stencil = ss.Document.OpenStencil("Basic_U.VSS");
+            var master = ss.Master.Get("Rectangle", basic_stencil);
             ss.Master.Drop(master, 2, 2);
             var application = ss.VisioApplication;
             var active_page = application.ActivePage;
@@ -206,10 +208,10 @@ namespace TestVisioAutomation
             var ss = GetScriptingSession();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(10, 10), false);
-            ss.Document.OpenStencil("Basic_U.VSS");
+            var basic_stencil = ss.Document.OpenStencil("Basic_U.VSS");
 
-            var m1 = ss.Master.Get("Rectangle", "Basic_U.VSS");
-            var m2 = ss.Master.Get("Ellipse", "Basic_U.VSS");
+            var m1 = ss.Master.Get("Rectangle", basic_stencil);
+            var m2 = ss.Master.Get("Ellipse", basic_stencil);
 
             var masters = new[] {m1, m2};
             var points = VA.Drawing.Point.FromDoubles(new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 }).ToList();

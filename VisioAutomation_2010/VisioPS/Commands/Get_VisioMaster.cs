@@ -1,3 +1,4 @@
+using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -9,9 +10,9 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Master;
 
-        [SMA.Parameter(Position = 1, Mandatory = false)]
-        public string Stencil;
-        
+        [SMA.Parameter(Position = 1, Mandatory = false, ParameterSetName = "StencilName")]
+        public IVisio.Document Stencil;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -21,8 +22,7 @@ namespace VisioPS.Commands
                 // Master name is not provided
                 // Stencil name is provided
                 // So retrieve all the masters in that stencil doc
-                var doc = scriptingsession.Document.Get(Stencil);
-                var masters = scriptingsession.Master.Get(doc);
+                var masters = scriptingsession.Master.Get(this.Stencil);
                 this.WriteObject(masters);
             }
             else if (isprovided(Master) && !isprovided(Stencil))
@@ -48,7 +48,7 @@ namespace VisioPS.Commands
             }           
         }
 
-        private bool isprovided(string s)
+        private bool isprovided<T>(T s) where T : class 
         {
             return s != null;
         }

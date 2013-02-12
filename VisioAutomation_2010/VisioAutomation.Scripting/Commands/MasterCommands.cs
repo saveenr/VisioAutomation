@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IVisio.Master Get(string master, string stencil)
+        public IVisio.Master Get(string master, IVisio.Document stencil)
         {
             if (master == null)
             {
@@ -92,16 +92,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
-            IVisio.Document stencil_doc = TryGetDocument(documents,stencil);
-            if (stencil_doc==null)
-            {
-                string msg = string.Format("No such stencil \"{0}\"", stencil);
-                throw new AutomationException(msg);
-            }
 
-            var masters = stencil_doc.Masters;
-            IVisio.Master masterobj = this.TryGetMaster(masters,master);
-            if (masterobj==null)
+            var masters = stencil.Masters;
+            IVisio.Master masterobj = this.TryGetMaster(masters, master);
+            if (masterobj == null)
             {
                 string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, stencil);
                 throw new AutomationException(msg);
