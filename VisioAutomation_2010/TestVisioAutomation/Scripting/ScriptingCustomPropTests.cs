@@ -25,7 +25,7 @@ namespace TestVisioAutomation
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);
 
-            var prop_dic0 = ss.CustomProp.Get();
+            var prop_dic0 = ss.CustomProp.Get(null);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
             Assert.AreEqual(0, prop_dic0[s2].Count);
@@ -33,9 +33,9 @@ namespace TestVisioAutomation
 
             var cp = new VA.CustomProperties.CustomPropertyCells();
             cp.Value = "BAR";
-            ss.CustomProp.Set("FOO",cp);
+            ss.CustomProp.Set(null,"FOO",cp);
 
-            var prop_dic1 = ss.CustomProp.Get();
+            var prop_dic1 = ss.CustomProp.Get(null);
             Assert.AreEqual(3, prop_dic1.Count);
             Assert.AreEqual(1, prop_dic1[s1].Count);
             Assert.AreEqual(1, prop_dic1[s2].Count);
@@ -48,18 +48,18 @@ namespace TestVisioAutomation
             Assert.AreEqual("\"BAR\"", cp2.Value.Formula);
             Assert.AreEqual("\"BAR\"", cp3.Value.Formula);
 
-            var hasprops0 = ss.CustomProp.Contains("FOO");
+            var hasprops0 = ss.CustomProp.Contains(null,"FOO");
             Assert.IsTrue(hasprops0.All(v => v == true));
 
-            ss.CustomProp.Delete("FOO");
+            ss.CustomProp.Delete(null,"FOO");
 
-            var prop_dic2 = ss.CustomProp.Get();
+            var prop_dic2 = ss.CustomProp.Get(null);
             Assert.AreEqual(3, prop_dic2.Count);
             Assert.AreEqual(0, prop_dic2[s1].Count);
             Assert.AreEqual(0, prop_dic2[s2].Count);
             Assert.AreEqual(0, prop_dic2[s3].Count);
 
-            var hasprops1 = ss.CustomProp.Contains("FOO");
+            var hasprops1 = ss.CustomProp.Contains(null,"FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
             ss.Document.Close(true);

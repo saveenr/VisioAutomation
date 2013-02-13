@@ -190,7 +190,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
             }
-            var application = this.Session.VisioApplication;
+
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Stack Shapes"))
             {
                 if (axis == VA.Drawing.Axis.YAxis)
@@ -305,11 +305,6 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
         }
 
-        public void SetLock(VA.Layout.LockCells lockcells)
-        {
-            this.SetLock(null,lockcells);
-        }
-
         public void SetLock(IList<IVisio.Shape> target_shapes, VA.Layout.LockCells lockcells)
         {
             var shapes = get_target_shapes(target_shapes);
@@ -332,11 +327,6 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
             }
-        }
-
-        public void SetSize(double? w, double? h)
-        {
-            this.SetSize(null,w,h);
         }
 
         public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)

@@ -32,13 +32,13 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, indices0[1]);
             Assert.AreEqual(0, indices0[2]);
 
-            var dic = ss.ConnectionPoint.Get();
+            var dic = ss.ConnectionPoint.Get(null);
             Assert.AreEqual(3, dic.Count);
             Assert.AreEqual("Width*0.67", dic[s1][0].Y.Formula);
             Assert.AreEqual("Width*0.67", dic[s2][0].Y.Formula);
             Assert.AreEqual("Width*0.67", dic[s2][0].Y.Formula);
 
-            ss.ConnectionPoint.Delete(0);
+            ss.ConnectionPoint.Delete(null,0);
             ss.Document.Close(true);
         }
     }

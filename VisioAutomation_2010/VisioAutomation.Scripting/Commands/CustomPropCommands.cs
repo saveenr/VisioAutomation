@@ -14,11 +14,6 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, Dictionary<string, VA.CustomProperties.CustomPropertyCells>> Get()
-        {
-            return this.Get(null);
-        }
-
         public IDictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
         {
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VA.CustomProperties.CustomPropertyCells>>();
@@ -42,12 +37,6 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> Contains(string name)
-        {
-            return this.Contains(null,name);
-        }
-
-
         public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
             if (name == null)
@@ -67,12 +56,6 @@ namespace VisioAutomation.Scripting.Commands
 
             return results;
         }
-
-        public void Delete(string name)
-        {
-            this.Delete(null,name);
-        }
-
 
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
@@ -105,11 +88,6 @@ namespace VisioAutomation.Scripting.Commands
                     VA.CustomProperties.CustomPropertyHelper.Delete(shape, name);
                 }
             }
-        }
-
-        public void Set(string name, VA.CustomProperties.CustomPropertyCells customprop)
-        {
-            this.Set(null,name,customprop);
         }
 
         public void Set(IList<IVisio.Shape> target_shapes, string name, VA.CustomProperties.CustomPropertyCells customprop)
