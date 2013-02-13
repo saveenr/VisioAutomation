@@ -113,7 +113,6 @@
     <Compile Include="Commands\Remove_VisioShape.cs" />
     <Compile Include="Commands\Get_VisioLayer.cs" />
     <Compile Include="Commands\Invoke_VisioAlignShape.cs" />
-    <Compile Include="Commands\Invoke_VisioConnect.cs" />
     <Compile Include="Commands\Invoke_VisioDistributeShape.cs" />
     <Compile Include="Commands\Select_VisioShape.cs" />
     <Compile Include="Commands\Set_VisioFormula.cs" />
@@ -143,7 +142,6 @@
     <Compile Include="Commands\Set_VisioUserDefinedCell.cs" />
     <Compile Include="Commands\Invoke_VisioStackShape.cs" />
     <Compile Include="enums\TextVerticalAlignment.cs" />
-    <Compile Include="Commands\Invoke_VisioResizeShapeToFitText.cs" />
     <Compile Include="Commands\Connect_VisioApplication.cs" />
     <Compile Include="Commands\Get_VisioDirectedEdge.cs" />
     <Compile Include="Commands\Invoke_VisioCopyShapeFormat.cs" />
