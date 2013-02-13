@@ -56,7 +56,7 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.CustomProp.SetCustomProperty(this.Name , cp);
+            scriptingsession.CustomProp.Set(this.Name , cp);
         }
     }
 }

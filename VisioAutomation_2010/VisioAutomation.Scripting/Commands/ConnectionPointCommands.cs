@@ -13,20 +13,16 @@ namespace VisioAutomation.Scripting.Commands
         {
 
         }
-        /// <summary>
-        /// Retrieves the connection points for elected shapes
-        /// </summary>
-        /// <returns></returns>
-        public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> Get()
+
+        public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.Selection.HasShapes())
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count<1)
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
             }
 
-            var shapes = this.Session.Selection.GetShapes( VA.Selection.ShapesEnumeration.Flat);
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
-
             var application = this.Session.VisioApplication;
             foreach (var shape in shapes)
             {
@@ -37,38 +33,37 @@ namespace VisioAutomation.Scripting.Commands
             return dic;
         }
 
-        /// <summary>
-        /// Adds a connection point to the selected shapes
-        /// </summary>
-        /// <param name="fx"></param>
-        /// <param name="fy"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public IList<int> Add(
-            string fx,
-            string fy,
-            VA.Connections.ConnectionPointType type)
+        public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> Get()
         {
-            if (!this.Session.Selection.HasShapes())
+            return this.Get(null);
+        }
+
+        public IList<int> Add( IList<IVisio.Shape> target_shapes, 
+    string fx,
+    string fy,
+    VA.Connections.ConnectionPointType type)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new List<int>(0);
             }
 
+
             int dirx = 0;
             int diry = 0;
 
-            var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
 
             var indices = new List<int>(shapes.Count);
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Add Connection Point"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Add Connection Point"))
             {
                 var cp = new VA.Connections.ConnectionPointCells();
                 cp.X = fx;
                 cp.Y = fy;
                 cp.DirX = dirx;
                 cp.DirY = diry;
-                cp.Type = (int) type;
+                cp.Type = (int)type;
 
                 foreach (var shape in shapes)
                 {
@@ -81,18 +76,27 @@ namespace VisioAutomation.Scripting.Commands
             return indices;
         }
 
-        /// <summary>
-        /// Deletes the connection point on the seleected shapes
-        /// </summary>
-        /// <param name="index"></param>
+
+        public IList<int> Add(
+            string fx,
+            string fy,
+            VA.Connections.ConnectionPointType type)
+        {
+            return this.Add(null, fx, fy, type);
+        }
+
         public void Delete(int index)
         {
-            if (!this.Session.Selection.HasShapes())
+            this.Delete(null,index);
+        }
+
+        public void Delete(List<IVisio.Shape> target_shapes0, int index)
+        {
+            var shapes = get_target_shapes(target_shapes0);
+            if (shapes.Count < 1)
             {
                 return;
             }
-
-            var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
 
             var target_shapes = from shape in shapes
                                 where VA.Connections.ConnectionPointHelper.GetCount(shape) > index

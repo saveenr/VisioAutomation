@@ -31,12 +31,6 @@ namespace VisioAutomation.Scripting.Commands
             return VA.Connections.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
-        /// <summary>
-        /// Returns all the connected pairs of shapes in the active page
-        /// </summary>
-        /// <param name="scripting_session"></param>
-        /// <param name="flag"></param>
-        /// <returns></returns>
         public IList<VA.Connections.ConnectorEdge> GetDirectedEdges(Connections.ConnectorArrowEdgeHandling flag)
         {
             if (!this.Session.HasActiveDrawing)
@@ -55,11 +49,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        /// <summary>
-        /// Returns all the connected pairs of shapes in the active page
-        /// </summary>
-        /// <param name="scripting_session"></param>
-        /// <returns></returns>
         public IList<VA.Connections.ConnectorEdge> GetEdges()
         {
             IList<VA.Connections.ConnectorEdge> edges = new List<VA.Connections.ConnectorEdge>(0);
@@ -73,16 +62,16 @@ namespace VisioAutomation.Scripting.Commands
             return edges;
         }
 
+
         public IList<IVisio.Shape> Connect(IVisio.Master master)
         {
-            if (!this.Session.HasSelectedShapes(2))
-            {
-                return new List<IVisio.Shape>(0);
-            }
+            return this.Connect(null, master);
+        }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-
-            if (shapes.Count <= 1)
+        public IList<IVisio.Shape> Connect(IList<IVisio.Shape> target_shapes, IVisio.Master master)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new List<IVisio.Shape>(0);
             }

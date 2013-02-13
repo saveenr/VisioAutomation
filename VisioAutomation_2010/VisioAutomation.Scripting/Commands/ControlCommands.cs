@@ -14,32 +14,25 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<int> Add()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return null;
-            }
-
-            var ctrl = new VA.Controls.ControlCells();
-            var control_indices = Add(ctrl);
-
-            return control_indices;
-        }
-
         public IList<int> Add(VA.Controls.ControlCells ctrl)
         {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return null;
-            }
+            return this.Add(null, ctrl);
+        }
 
+        public IList<int> Add(IList<IVisio.Shape> target_shapes, VA.Controls.ControlCells ctrl)
+        {
             if (ctrl == null)
             {
                 throw new System.ArgumentNullException("ctrl");
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return new List<int>(0);
+            }
+
+
             var control_indices = new List<int>();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Add Control"))
             {
@@ -55,12 +48,16 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(int n)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.Delete(null,n);
+        }
+
+        public void Delete(IList<IVisio.Shape> target_shapes, int n)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
             }
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Control"))
             {
@@ -73,12 +70,16 @@ namespace VisioAutomation.Scripting.Commands
 
         public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get()
         {
-            if (!this.Session.HasSelectedShapes())
+            return this.Get(null);
+        }
+
+        public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>(0);
             }
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
 
             var dic = new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>();
             foreach (var shape in shapes)

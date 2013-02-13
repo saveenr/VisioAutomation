@@ -38,5 +38,16 @@ namespace VisioAutomation.Scripting
                 yield return method;
             }
         }
+
+        protected IList<IVisio.Shape> get_target_shapes(IList<IVisio.Shape> shapes)
+        {
+            if (shapes == null)
+            {
+                // If no collection of shapes were passed in then use the selection
+                var out_shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
+                return out_shapes;
+            }
+            return shapes;
+        }
     }
 }

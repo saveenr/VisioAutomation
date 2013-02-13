@@ -8,7 +8,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var dic = scriptingsession.UserDefinedCell.GetUserDefinedCells();
+            var dic = scriptingsession.UserDefinedCell.Get();
             this.WriteObject(dic);
         }
     }

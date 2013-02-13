@@ -45,25 +45,33 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<string> GetText()
         {
-            if (!this.Session.HasSelectedShapes())
+            return this.GetText(null);
+        }
+
+        public IList<string> GetText(IList<IVisio.Shape> target_shapes)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new List<string>(0);
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var texts = shapes.Select(s => s.Text).ToList();
             return texts;
         }
 
         public void ToogleCase()
         {
-            if (!this.Session.HasSelectedShapes())
+            this.ToogleCase(null);
+        }
+        
+        public void ToogleCase(IList<IVisio.Shape> target_shapes)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
             }
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-            var application = this.Session.VisioApplication;
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Toggle Shape Text Case"))
             {
@@ -108,6 +116,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        //TODO: Make this support an input list
         public void SetTextWrapping(bool wrap)
         {
             if (!this.Session.HasSelectedShapes())
@@ -125,6 +134,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        //TODO: Make this support an input list
         public void FitShapeToText()
         {
             if (!this.Session.HasSelectedShapes())
@@ -141,6 +151,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        //TODO: Make this support an input list
         public void MoveTextToBottom()
         {
             // http://www.visguy.com/2007/11/07/text-to-the-bottom-of-the-shape/
@@ -178,14 +189,6 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(active_page);
         }
 
-        public void IncreaseTextSize()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-            this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeUp);
-        }
 
         private static IVisio.Font TryGetFont(IVisio.Fonts fonts, string name)
         {
@@ -227,6 +230,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        //TODO: Make this support an input list
         public void SetFont(string fontname)
         {
             var application = this.Session.VisioApplication;
@@ -249,7 +253,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Text.TextFormat> GetFormat()
         {
-            if (!this.Session.HasSelectedShapes())
+            return this.GetFormat(null);
+        }
+
+        public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new List<VA.Text.TextFormat>(0);
             }

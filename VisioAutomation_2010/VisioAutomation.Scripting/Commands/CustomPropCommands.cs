@@ -14,15 +14,20 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>> GetCustomProperties()
+        public IDictionary<IVisio.Shape, Dictionary<string, VA.CustomProperties.CustomPropertyCells>> Get()
         {
-            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>>();
-            if (!this.Session.HasSelectedShapes())
+            return this.Get(null);
+        }
+
+        public IDictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
+        {
+            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VA.CustomProperties.CustomPropertyCells>>();
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return prop_dic;
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var list_custom_props = VA.CustomProperties.CustomPropertyHelper.Get(page, shapes);
@@ -37,14 +42,21 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> HasCustomProperty(string name)
+        public IList<bool> Contains(string name)
+        {
+            return this.Contains(null,name);
+        }
+
+
+        public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new List<bool>();
             }
@@ -56,7 +68,13 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public void DeleteCustomProperty(string name)
+        public void Delete(string name)
+        {
+            this.Delete(null,name);
+        }
+
+
+        public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -73,7 +91,11 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return;
+            }
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Custom Property"))
@@ -85,7 +107,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetCustomProperty(string name, VA.CustomProperties.CustomPropertyCells customprop)
+        public void Set(string name, VA.CustomProperties.CustomPropertyCells customprop)
+        {
+            this.Set(null,name,customprop);
+        }
+
+        public void Set(IList<IVisio.Shape> target_shapes, string name, VA.CustomProperties.CustomPropertyCells customprop)
         {
             if (!this.Session.HasSelectedShapes())
             {
@@ -97,7 +124,11 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("customprop");
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return;
+            }
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Set Custom Property"))
@@ -109,12 +140,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        /// <summary>
-        /// Given a set of shapes will will enumerate each shape and set the selection to that shape
-        /// </summary>
-        /// <param name="scripting_session"></param>
-        /// <param name="shapes"></param>
-        /// <returns></returns>
         public IEnumerable<IVisio.Shape> EnumerateAndSelect(IEnumerable<IVisio.Shape> shapes)
         {
             if (shapes == null)
