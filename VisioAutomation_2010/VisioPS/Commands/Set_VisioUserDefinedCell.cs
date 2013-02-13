@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -14,6 +15,9 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(Mandatory = false)] public string Prompt;
 
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             var userprop = new VA.UserDefinedCells.UserDefinedCell(this.Name, this.Value);
@@ -23,7 +27,7 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.UserDefinedCell.Set(userprop);
+            scriptingsession.UserDefinedCell.Set(this.Shapes,userprop);
         }
     }
 }

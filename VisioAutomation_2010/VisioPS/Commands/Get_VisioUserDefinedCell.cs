@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
@@ -5,10 +6,13 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioUserDefinedCell")]
     public class Get_VisioUserDefinedCell : VisioPS.VisioPSCmdlet
     {
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var dic = scriptingsession.UserDefinedCell.Get();
+            var dic = scriptingsession.UserDefinedCell.Get(this.Shapes);
             this.WriteObject(dic);
         }
     }

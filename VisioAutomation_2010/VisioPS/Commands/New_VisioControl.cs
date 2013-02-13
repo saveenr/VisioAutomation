@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VAS=VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
@@ -30,6 +31,9 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Tip { get; set; }
 
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -44,7 +48,7 @@ namespace VisioPS.Commands
                 ctrl.CanGlue = VA.Convert.BoolToFormula(this.CanGlue);
                 ctrl.Tip = this.Tip;
 
-                scriptingsession.Control.Add(ctrl);
+                scriptingsession.Control.Add(this.Shapes,ctrl);
         }
     }
 }

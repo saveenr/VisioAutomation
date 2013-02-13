@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -23,6 +24,9 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public int Type = 0; // 0 = string
 
         [SMA.Parameter(Mandatory = false)] public int Verify = -1;
+
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
 
         protected override void ProcessRecord()
         {
@@ -56,7 +60,7 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.CustomProp.Set(this.Name , cp);
+            scriptingsession.CustomProp.Set(this.Shapes, this.Name , cp);
         }
     }
 }
