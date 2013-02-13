@@ -35,7 +35,7 @@ namespace TestVisioAutomation
             ss.Selection.Select(directed_connectors);
 
             IVisio.VisGetSetArgs flags = 0;
-            ss.ShapeSheet.SetFormula(new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
+            ss.ShapeSheet.SetFormula(null,new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
 
             var undirected_edges0 = ss.Connection.GetEdges();
             Assert.AreEqual(2, undirected_edges0.Count);

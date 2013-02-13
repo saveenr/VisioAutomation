@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using System.Collections.Generic;
+using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
@@ -18,6 +19,9 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular;
 
+        [SMA.Parameter(Mandatory = false)]
+        public IList<IVisio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             short flags = 0;
@@ -31,7 +35,7 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.ShapeSheet.SetFormula(new [] {Cell}, new [] {Formula}, (IVisio.VisGetSetArgs)flags);
+            scriptingsession.ShapeSheet.SetFormula(this.Shapes,new [] {Cell}, new [] {Formula}, (IVisio.VisGetSetArgs)flags);
         }
     }
 }

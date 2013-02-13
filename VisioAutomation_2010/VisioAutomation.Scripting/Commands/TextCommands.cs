@@ -103,80 +103,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        //TODO: Make this support an input list
-        public void SetTextWrapping(bool wrap)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Text Wrapping"))
-            {
-                var active_page = application.ActivePage;
-                TextCommandsUtil.set_text_wrapping(active_page, shapeids, wrap);
-            }
-        }
-
-        //TODO: Make this support an input list
-        public void FitShapeToText()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var shapes_2d = this.Session.Selection.EnumShapes2D().ToList();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Fit Shape To Text"))
-            {
-                var active_page = application.ActivePage;
-                VA.Text.TextHelper.FitShapeToText(active_page, shapes_2d);
-            }
-        }
-
-        //TODO: Make this support an input list
-        public void MoveTextToBottom()
-        {
-            // http://www.visguy.com/2007/11/07/text-to-the-bottom-of-the-shape/
-
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var application = this.Session.VisioApplication;
-            var active_window = application.ActiveWindow;
-            var sel = active_window.Selection;
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-            var update = new VA.ShapeSheet.Update();
-
-            foreach (var shape in shapes)
-            {
-                if (0 == shape.RowExists[(short)IVisio.VisSectionIndices.visSectionObject, (short)IVisio.VisRowIndices.visRowTextXForm, (short)IVisio.VisExistsFlags.visExistsAnywhere])
-                {
-                    shape.AddRow((short)IVisio.VisSectionIndices.visSectionObject,
-                                 (short)IVisio.VisRowIndices.visRowTextXForm,
-                                 (short)IVisio.VisRowTags.visTagDefault);
-                }
-            }
-
-            var shapeids = sel.GetIDs();
-            foreach (int shapeid in shapeids)
-            {
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.TxtHeight, "Height*0");
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.TxtPinY, "Height*0");
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.VerticalAlign, "0");
-            }
-
-            var active_page = application.ActivePage;
-            update.Execute(active_page);
-        }
-
-
         private static IVisio.Font TryGetFont(IVisio.Fonts fonts, string name)
         {
             try
@@ -226,7 +152,7 @@ namespace VisioAutomation.Scripting.Commands
             var font = active_doc_fonts[fontname];
             var fontids = new[] {font.ID.ToString()};
             IVisio.VisGetSetArgs flags=0;
-            this.Session.ShapeSheet.SetFormula(new[] { VA.ShapeSheet.SRCConstants.Char_Font }, fontids, flags);
+            this.Session.ShapeSheet.SetFormula(null,new[] { VA.ShapeSheet.SRCConstants.Char_Font }, fontids, flags);
         }
 
         public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)

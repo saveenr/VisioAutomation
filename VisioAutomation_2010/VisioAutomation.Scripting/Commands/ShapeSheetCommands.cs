@@ -14,19 +14,12 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(VA.ShapeSheet.SRC src)
+        public VA.ShapeSheet.Data.Table<T> QueryResults<T>( IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
-            var srcs = new[] { src };
-            return QueryResults<T>(srcs);
-        }
-
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<VA.ShapeSheet.SRC> srcs)
-        {
+            var shapes = this.get_target_shapes(target_shapes);
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
-            var active_window = app.ActiveWindow;
-            var selection = active_window.Selection;
-            var shapeids = selection.GetIDs();
+            var shapeids = shapes.Select(s=>s.ID).ToList();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
 
@@ -41,20 +34,15 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(VA.ShapeSheet.SRC src)
+        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
-            var srcs = new[] { src };
-            return QueryFormulas(srcs);
-        }
+            var shapes = this.get_target_shapes(target_shapes);
+            var shapeids = shapes.Select(s => s.ID).ToList();
 
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<VA.ShapeSheet.SRC> srcs)
-        {
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
             var active_window = app.ActiveWindow;
-            var selection = active_window.Selection;
-            var shapeids = selection.GetIDs();
-
+            
             var query = new VA.ShapeSheet.Query.CellQuery();
 
             int ci = 0;
@@ -69,14 +57,13 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
+            var shapes = this.get_target_shapes(target_shapes);
+            var shapeids = shapes.Select(s => s.ID).ToList();
+
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
-            var active_window = app.ActiveWindow;
-            var selection = active_window.Selection;
-            var shapeids = selection.GetIDs();
-
             var query = new VA.ShapeSheet.Query.SectionQuery((short)section);
 
             int ci = 0;
@@ -90,13 +77,13 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
+            var shapes = this.get_target_shapes(target_shapes);
+            var shapeids = shapes.Select(s => s.ID).ToList();
+
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
-            var active_window = app.ActiveWindow;
-            var selection = active_window.Selection;
-            var shapeids = selection.GetIDs();
 
             var query = new VA.ShapeSheet.Query.SectionQuery((short)section);
 
@@ -111,10 +98,16 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
         
-        public void SetFormula(IList<VA.ShapeSheet.SRC> srcs, 
+        public void SetFormula(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs, 
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
+            var shapes = this.get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return;
+            }
+
             if (srcs == null)
             {
                 throw new System.ArgumentNullException("srcs");
@@ -138,16 +131,10 @@ namespace VisioAutomation.Scripting.Commands
             }
 
 
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
             var update = new VA.ShapeSheet.Update();
             update.BlastGuards  = ((short) flags & (short) IVisio.VisGetSetArgs.visSetBlastGuards)!=0;
             update.TestCircular = ((short) flags & (short) IVisio.VisGetSetArgs.visSetTestCircular) != 0;
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
+            var shapeids = shapes.Select(s=>s.ID).ToList();
 
             int num_formulas = formulas.Count;
             foreach (var shapeid in shapeids)
