@@ -307,11 +307,16 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetLock(VA.Layout.LockCells lockcells)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.SetLock(null,lockcells);
+        }
+
+        public void SetLock(IList<IVisio.Shape> target_shapes, VA.Layout.LockCells lockcells)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
-            }
-
+            } 
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new VA.ShapeSheet.Update();
@@ -331,10 +336,16 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(double? w, double? h)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.SetSize(null,w,h);
+        }
+
+        public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
+        {
+            var shapes = get_target_shapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
-            }
+            } 
 
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
