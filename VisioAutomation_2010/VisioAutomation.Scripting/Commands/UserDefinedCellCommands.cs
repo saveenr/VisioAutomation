@@ -14,11 +14,6 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>> Get()
-        {
-            return this.Get(null);
-        }
-
         public IDictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
         {
             var prop_dic = new Dictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>>();
@@ -43,11 +38,6 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> Contains(string name)
-        {
-            return this.Contains(null);
-        }
-
         public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
             if (name == null)
@@ -67,12 +57,7 @@ namespace VisioAutomation.Scripting.Commands
 
             return results;
         }
-
-        public void Delete(string name)
-        {
-            this.Delete(null,name);
-        }
-        
+       
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
             var shapes = get_target_shapes(target_shapes);
@@ -99,12 +84,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
         }
-
-        public void Set(VA.UserDefinedCells.UserDefinedCell userdefinedcell)
-        {
-            this.Set(null, userdefinedcell);
-        }
-        
+      
         public void Set(IList<IVisio.Shape> target_shapes, VA.UserDefinedCells.UserDefinedCell userdefinedcell)
         {
             var shapes = get_target_shapes(target_shapes);

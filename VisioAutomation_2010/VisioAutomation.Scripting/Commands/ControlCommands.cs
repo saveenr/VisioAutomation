@@ -14,11 +14,6 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<int> Add(VA.Controls.ControlCells ctrl)
-        {
-            return this.Add(null, ctrl);
-        }
-
         public IList<int> Add(IList<IVisio.Shape> target_shapes, VA.Controls.ControlCells ctrl)
         {
             if (ctrl == null)
@@ -46,11 +41,6 @@ namespace VisioAutomation.Scripting.Commands
             return control_indices;
         }
 
-        public void Delete(int n)
-        {
-            this.Delete(null,n);
-        }
-
         public void Delete(IList<IVisio.Shape> target_shapes, int n)
         {
             var shapes = get_target_shapes(target_shapes);
@@ -66,11 +56,6 @@ namespace VisioAutomation.Scripting.Commands
                     VA.Controls.ControlHelper.Delete(shape, n);
                 }
             }
-        }
-
-        public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get()
-        {
-            return this.Get(null);
         }
 
         public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get(IList<IVisio.Shape> target_shapes)

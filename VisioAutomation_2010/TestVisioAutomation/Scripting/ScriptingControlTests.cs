@@ -25,7 +25,7 @@ namespace TestVisioAutomation
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);
 
-            var controls0 = ss.Control.Get();
+            var controls0 = ss.Control.Get(null);
             int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
@@ -35,16 +35,16 @@ namespace TestVisioAutomation
             var ctrl = new VA.Controls.ControlCells();
             ctrl.X = "Width*0.5";
             ctrl.Y = "0";
-            ss.Control.Add(ctrl);
+            ss.Control.Add(null,ctrl);
 
-            var controls1 = ss.Control.Get();
+            var controls1 = ss.Control.Get(null);
             Assert.AreEqual(3, controls1.Count);
             Assert.AreEqual(1, controls1[s1].Count);
             Assert.AreEqual(1, controls1[s2].Count);
             Assert.AreEqual(1, controls1[s3].Count);
 
-            ss.Control.Delete(0);
-            var controls2 = ss.Control.Get();
+            ss.Control.Delete(null,0);
+            var controls2 = ss.Control.Get(null);
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls2[s1].Count);
             Assert.AreEqual(0, controls2[s2].Count);

@@ -14,22 +14,19 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void SetText(string text)
+        public void SetText(IList<IVisio.Shape> target_shapes, string text)
         {
-            var texts = new string[] {text};
-            SetText(texts);
+            this.SetText(target_shapes, new string [] { text });
         }
 
-        public void SetText(IEnumerable<string> texts)
+        public void SetText(IList<IVisio.Shape> target_shapes, IEnumerable<string> texts)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = this.get_target_shapes(target_shapes);
+            if (shapes.Count<1)
             {
                 return;
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-
-            var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Shape Tex"))
             {
                 var values = texts.ToList();
@@ -41,11 +38,6 @@ namespace VisioAutomation.Scripting.Commands
                     shape.Text = text;
                 }
             }
-        }
-
-        public IList<string> GetText()
-        {
-            return this.GetText(null);
         }
 
         public IList<string> GetText(IList<IVisio.Shape> target_shapes)
@@ -60,11 +52,6 @@ namespace VisioAutomation.Scripting.Commands
             return texts;
         }
 
-        public void ToogleCase()
-        {
-            this.ToogleCase(null);
-        }
-        
         public void ToogleCase(IList<IVisio.Shape> target_shapes)
         {
             var shapes = get_target_shapes(target_shapes);
@@ -240,20 +227,6 @@ namespace VisioAutomation.Scripting.Commands
             var fontids = new[] {font.ID.ToString()};
             IVisio.VisGetSetArgs flags=0;
             this.Session.ShapeSheet.SetFormula(new[] { VA.ShapeSheet.SRCConstants.Char_Font }, fontids, flags);
-        }
-
-        public void DecreaseTextSize()
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-            this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdSetCharSizeDown);
-        }
-
-        public IList<VA.Text.TextFormat> GetFormat()
-        {
-            return this.GetFormat(null);
         }
 
         public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)

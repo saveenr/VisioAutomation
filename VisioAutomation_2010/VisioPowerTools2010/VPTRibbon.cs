@@ -130,14 +130,14 @@ namespace VisioPowerTools2010
 
         private void cmd_copy_text()
         {
-            var shape_text = this.scriptingsession.Text.GetText();
+            var shape_text = this.scriptingsession.Text.GetText(null);
             var text = string.Join("\r\n", shape_text) + "\r\n";
             Clipboard.SetText(text);
         }
         
         private void cmd_toggle_text_case()
         {
-            this.scriptingsession.Text.ToogleCase();
+            this.scriptingsession.Text.ToogleCase(null);
         }
 
         private void cmd_import_colors()
