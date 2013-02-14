@@ -118,6 +118,12 @@ namespace VisioAutomation.ShapeSheet
             this._add_update(rec);
         }
 
+        protected void _SetResult(StreamType st, SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        {
+            var rec = new UpdateRecord(st, streamitem, value, unitcode);
+            this._add_update(rec);
+        }
+
         public IEnumerator<UpdateRecord> GetEnumerator()
         {
             foreach (var i in this.updates)
@@ -139,6 +145,17 @@ namespace VisioAutomation.ShapeSheet
         }
 
         public void SetResult(SIDSRC streamitem, double value, IVisio.VisUnitCodes unitcode)
+        {
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetResult(short shapeid, SRC src, string value, IVisio.VisUnitCodes unitcode)
+        {
+            var streamitem = new SIDSRC(shapeid, src);
+            this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
+        }
+
+        public void SetResult(SIDSRC streamitem, string value, IVisio.VisUnitCodes unitcode)
         {
             this._SetResult(StreamType.SIDSRC, streamitem, value, unitcode);
         }
@@ -220,7 +237,7 @@ namespace VisioAutomation.ShapeSheet
 
             var stream = this.build_stream();
 
-            if (first_update.Value.UpdateType == UpdateType.Result)
+            if (first_update.Value.UpdateType == UpdateType.ResultNumeric || first_update.Value.UpdateType==UpdateType.ResultString)
             {
                 // Set Results
 
@@ -231,11 +248,30 @@ namespace VisioAutomation.ShapeSheet
                 foreach (var update in this.updates)
                 {
                     unitcodes[i] = update.UnitCode;
-                    results[i] = update.Result;
+                    if (first_update.Value.UpdateType == UpdateType.ResultNumeric)
+                    {
+                        results[i] = update.ResultNumeric;                       
+                    }
+                    else if (first_update.Value.UpdateType == UpdateType.ResultString)
+                    {
+                        results[i] = update.ResultString;
+                    }
+                    else
+                    {
+                        throw new AutomationException("Unhandled update type");
+                    }
                     i++;
                 }
                 
                 var flags = this.ResultFlags;
+
+                if (first_update.Value.UpdateType == UpdateType.ResultNumeric)
+                {
+                }
+                else if (first_update.Value.UpdateType == UpdateType.ResultString)
+                {
+                    flags |= IVisio.VisGetSetArgs.visGetStrings;
+                }
 
                 if (visio_object is IVisio.Shape)
                 {
@@ -305,6 +341,11 @@ namespace VisioAutomation.ShapeSheet
             this._SetFormulaIgnoreNull(StreamType.SRC, new SIDSRC(-1, streamitem), formula);
         }
 
+        public void SetResult(SRC streamitem, string value, IVisio.VisUnitCodes unitcode)
+        {
+            this._SetResult(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
+        }
+
         public void SetResult(SRC streamitem, double value, IVisio.VisUnitCodes unitcode)
         {
             this._SetResult(StreamType.SRC, new SIDSRC(-1, streamitem), value, unitcode);
@@ -314,7 +355,8 @@ namespace VisioAutomation.ShapeSheet
         {
             public readonly SIDSRC SIDSRC;
             public readonly string Formula;
-            public readonly double Result;
+            public readonly double ResultNumeric;
+            public readonly string ResultString;
             public readonly IVisio.VisUnitCodes UnitCode;
             public readonly UpdateType UpdateType;
             public readonly StreamType StreamType;
@@ -323,7 +365,8 @@ namespace VisioAutomation.ShapeSheet
             {
                 this.SIDSRC = sidsrc;
                 this.Formula = formula;
-                this.Result = 0.0;
+                this.ResultNumeric = 0.0;
+                this.ResultString = null;
                 this.UnitCode = IVisio.VisUnitCodes.visNoCast;
                 this.UpdateType = UpdateType.Formula;
                 this.StreamType = st;
@@ -334,8 +377,20 @@ namespace VisioAutomation.ShapeSheet
                 this.SIDSRC = sidsrc;
                 this.Formula = null;
                 this.UnitCode = unit_code;
-                this.Result = result;
-                this.UpdateType = UpdateType.Result;
+                this.ResultNumeric = result;
+                this.ResultString = null;
+                this.UpdateType = UpdateType.ResultNumeric;
+                this.StreamType = st;
+            }
+
+            internal UpdateRecord(StreamType st, SIDSRC sidsrc, string result, IVisio.VisUnitCodes unit_code)
+            {
+                this.SIDSRC = sidsrc;
+                this.Formula = null;
+                this.UnitCode = unit_code;
+                this.ResultNumeric = 0.0;
+                this.ResultString = result;
+                this.UpdateType = UpdateType.ResultString;
                 this.StreamType = st;
             }
 
@@ -349,7 +404,8 @@ namespace VisioAutomation.ShapeSheet
         public enum UpdateType
         {
             Formula,
-            Result
+            ResultNumeric,
+            ResultString
         }
     }
 }

@@ -67,6 +67,30 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void UpdateShapeResultsString()
+        {
+            var page1 = GetNewPage();
+            var shape1 = page1.DrawRectangle(0, 0, 1, 1);
+
+            // Setup the modifications to the cell values
+            var update = new VA.ShapeSheet.Update();
+            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNoCast);
+            update.Execute(shape1);
+
+            // Build the query
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_linepat = query.AddColumn(src_linepat);
+
+            // Retrieve the values
+            var data = query.GetFormulasAndResults<double>(shape1);
+
+            // Verify
+            AssertVA.AreEqual("7", 7, data[0, col_linepat]);
+            page1.Delete(0);
+        }
+
+
+        [TestMethod]
         public void UpdateShapesFormulas()
         {
             var page1 = GetNewPage();
