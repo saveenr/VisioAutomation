@@ -307,7 +307,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetLock(IList<IVisio.Shape> target_shapes, VA.Layout.LockCells lockcells)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -331,7 +331,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;

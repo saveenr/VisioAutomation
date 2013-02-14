@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("ctrl");
             }
 
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<int>(0);
@@ -43,7 +43,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Shape> target_shapes, int n)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -60,7 +60,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>(0);

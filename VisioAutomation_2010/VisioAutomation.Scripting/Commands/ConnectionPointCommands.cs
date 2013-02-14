@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
@@ -38,7 +38,7 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             VA.Connections.ConnectionPointType type)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<int>(0);
@@ -82,7 +82,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(List<IVisio.Shape> target_shapes0, int index)
         {
-            var shapes = get_target_shapes(target_shapes0);
+            var shapes = GetTargetShapes(target_shapes0);
             if (shapes.Count < 1)
             {
                 return;

@@ -4,6 +4,7 @@ using VisioAutomation.Extensions;
 using System.Linq;
 using VisioAutomation.Format;
 using VA=VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -149,24 +150,22 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(active_page);
         }
 
-
         private VA.Format.FormatPaintCache cache = new VA.Format.FormatPaintCache();
 
         public void CopyFormat()
         {
             var allflags = this.cache.GetAllFormatPaintFlags();
-            this.CopyFormat(allflags);
+            this.CopyFormat(null, allflags);
         }
 
-        public void CopyFormat(VA.Format.FormatCategory category)
+        public void CopyFormat(IVisio.Shape target_shape, VA.Format.FormatCategory category)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shape = GetTargetShape(target_shape);
+            if (shape == null)
             {
                 return;
             }
 
-            var selection = this.Session.Selection.Get();
-            var shape = selection[1];
             this.cache.CopyFormat(shape, category);
         }
 
@@ -175,26 +174,19 @@ namespace VisioAutomation.Scripting.Commands
             this.cache.Clear();
         }
 
-        public void PasteFormat()
+        public void PasteFormat(IList<IVisio.Shape> target_shapes, VA.Format.FormatCategory category, bool apply_formulas)
         {
-            var allflags = this.cache.GetAllFormatPaintFlags();
-
-            this.PasteFormat(allflags);
-        }
-
-        public void PasteFormat(VA.Format.FormatCategory category)
-        {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
             }
-
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
+ 
+            var shapeids = target_shapes.Select(s=>s.ID).ToList();
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
 
-            this.cache.PasteFormat(active_page, shapeids, category);
+            this.cache.PasteFormat(active_page, shapeids, category, apply_formulas);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -17,7 +18,10 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Text { get; set; }
-        
+
+        [SMA.Parameter(Mandatory = false)]
+        public Microsoft.Office.Interop.Visio.Shape Shape;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -40,7 +44,7 @@ namespace VisioPS.Commands
                 category |= VA.Format.FormatCategory.Character;
             }
             
-            scriptingsession.Format.CopyFormat(category);
+            scriptingsession.Format.CopyFormat(this.Shape, category);
         }
     }
 }

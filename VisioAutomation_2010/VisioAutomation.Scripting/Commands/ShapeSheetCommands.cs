@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<T> QueryResults<T>( IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
             var shapeids = shapes.Select(s=>s.ID).ToList();
@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var app = this.Session.VisioApplication;
@@ -59,7 +59,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var app = this.Session.VisioApplication;
@@ -79,7 +79,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var app = this.Session.VisioApplication;
@@ -102,7 +102,7 @@ namespace VisioAutomation.Scripting.Commands
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -159,7 +159,7 @@ namespace VisioAutomation.Scripting.Commands
         public void SetResult(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs,
                IList<double> results, IVisio.VisGetSetArgs flags)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -214,7 +214,7 @@ namespace VisioAutomation.Scripting.Commands
         public void SetResult(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs,
                IList<string> results, IVisio.VisGetSetArgs flags)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;

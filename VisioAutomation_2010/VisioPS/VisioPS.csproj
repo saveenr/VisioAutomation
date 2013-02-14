@@ -94,7 +94,6 @@
     <Compile Include="Commands\Reset_VisioPageOrigin.cs" />
     <Compile Include="Commands\Update_VisioShapeSheet.cs" />
     <Compile Include="Commands\New_VisioShapeSheetUpdate.cs" />
-    <Compile Include="Commands\Set_VisioTextStyle.cs" />
     <Compile Include="Commands\New_VisioMaster.cs" />
     <Compile Include="Commands\New_VisioStencil.cs" />
     <Compile Include="Commands\Remove_VisioUserDefinedCell.cs" />

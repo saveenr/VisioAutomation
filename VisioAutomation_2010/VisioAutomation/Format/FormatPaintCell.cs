@@ -6,13 +6,17 @@ namespace VisioAutomation.Format
     {
         public VA.Format.FormatCategory Category { get; private set; }
         public VA.ShapeSheet.SRC SRC { get; private set; }
-        public double? Result { get; set; }
+        public string Name;
+
+        public string Result { get; set; }
         public string Formula { get; set; }
 
-        public FormatPaintCell(VA.ShapeSheet.SRC src, FormatCategory category)
+        public FormatPaintCell(VA.ShapeSheet.SRC src, string name, FormatCategory category)
         {
             this.Category = category;
+            this.Name = name;
             this.SRC = src;
+            this.Formula = null;
             this.Result = null;
         }
 

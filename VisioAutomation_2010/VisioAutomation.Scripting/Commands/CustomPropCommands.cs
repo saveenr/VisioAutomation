@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         public IDictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
         {
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VA.CustomProperties.CustomPropertyCells>>();
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return prop_dic;
@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("name");
             }
 
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<bool>();
@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -102,7 +102,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("customprop");
             }
 
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;

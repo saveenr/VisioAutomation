@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetText(IList<IVisio.Shape> target_shapes, IEnumerable<string> texts)
         {
-            var shapes = this.get_target_shapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
                 return;
@@ -42,7 +42,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<string> GetText(IList<IVisio.Shape> target_shapes)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<string>(0);
@@ -54,7 +54,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ToogleCase(IList<IVisio.Shape> target_shapes)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -116,33 +116,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetStyleProperties(string stylename, string fontname)
-        {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
-
-            var doc = this.Session.VisioApplication.ActiveDocument;
-            var styles = doc.Styles;
-            var style = styles.ItemU[stylename];
-
-            if (fontname != null)
-            {
-                var font = TryGetFont(doc.Fonts, fontname);
-
-                if (font == null)
-                {
-                    var msg = "No such font: " + fontname;
-                    throw new System.ArgumentException(msg, "fontname");
-                }
-                var src_Char_Font = VA.ShapeSheet.SRCConstants.Char_Font;
-
-                var cell_font = style.CellsSRC[src_Char_Font.Section, src_Char_Font.Row, src_Char_Font.Cell];
-                cell_font.FormulaU = font.ID.ToString(System.Globalization.CultureInfo.InvariantCulture);                
-            }
-        }
-
         //TODO: Make this support an input list
         public void SetFont(string fontname)
         {
@@ -157,7 +130,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)
         {
-            var shapes = get_target_shapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<VA.Text.TextFormat>(0);

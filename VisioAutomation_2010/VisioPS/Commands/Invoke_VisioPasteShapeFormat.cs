@@ -19,7 +19,10 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Text { get; set; }
-        
+
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -42,7 +45,8 @@ namespace VisioPS.Commands
                 category |= VA.Format.FormatCategory.Character;
             }
 
-            scriptingsession.Format.PasteFormat(category);
+            bool apply_formulas = false;
+            scriptingsession.Format.PasteFormat(this.Shapes,category,apply_formulas);
         }
     }
 }
