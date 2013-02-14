@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VA= VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -11,6 +12,9 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(Position = 1, Mandatory = false)] public double Distance = -1.0;
 
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -20,7 +24,7 @@ namespace VisioPS.Commands
             }
             else
             {
-                scriptingsession.Layout.Distribute(this.Axis, this.Distance);
+                scriptingsession.Layout.Distribute(this.Shapes, this.Axis, this.Distance);
             }
         }
     }

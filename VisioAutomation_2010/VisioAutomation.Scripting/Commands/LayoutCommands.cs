@@ -107,17 +107,16 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Distribute(VA.Drawing.Axis axis, double d)
+        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double d)
         {
-            if (!this.Session.HasActiveDrawing)
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
-            }
+            } 
 
-
+            var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this.Session.VisioApplication;
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Distribute Shapes"))
             {
@@ -160,14 +159,15 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SnapSize(double w, double h)
+        public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
             }
 
-            var shapes_2d = this.Session.Selection.EnumShapes2D().ToList();
+            var shapes_2d = shapes.Where(s=>s.OneD==0).ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
             var application = this.Session.VisioApplication;
@@ -201,7 +201,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     Align(VA.Drawing.AlignmentVertical.Center);
                 }
-                Distribute(axis, space);
+                Distribute(null, axis, space);
             }
         }
 
@@ -268,26 +268,38 @@ namespace VisioAutomation.Scripting.Commands
             return selection.Count;
         }
 
-        public IList<VA.Layout.XFormCells> GetXForm()
+        public IList<VA.Layout.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = this.GetTargetShapes(target_shapes);
+            if (shapes.Count<1)
             {
                 return new List<VA.Layout.XFormCells>(0);
             }
 
-            var selection = Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-
+            var shapeids = shapes.Select(s=>s.ID).ToList();
             var page = this.Session.VisioApplication.ActivePage;
             var data = VA.Layout.XFormCells.GetCells(page, shapeids);
             return data;
         }
 
-        public IVisio.Shape Group()
+        public IVisio.Shape Group(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.HasSelectedShapes(2))
+            if (target_shapes == null)
             {
-                return null;
+                if (!this.Session.HasSelectedShapes())
+                {
+                    this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
+                }
+                else
+                {
+                    // do nothing
+                }
+            }
+            else
+            {
+                this.Session.Selection.SelectNone();
+                this.Session.Selection.Select(target_shapes);
+                this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
             }
 
             var selection = this.Session.Selection.Get();
@@ -295,14 +307,26 @@ namespace VisioAutomation.Scripting.Commands
             return g;
         }
 
-        public void Ungroup()
+        public void Ungroup(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.HasSelectedShapes())
+            if (target_shapes == null)
             {
-                return;
+                if (this.Session.HasSelectedShapes())
+                {
+                    this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
+                }
+                else
+                {
+                    // do nothing                    
+                }
             }
-
-            this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
+            else
+            {
+                foreach (var shape in target_shapes)
+                {
+                    shape.Ungroup();
+                }
+            }
         }
 
         public void SetLock(IList<IVisio.Shape> target_shapes, VA.Layout.LockCells lockcells)
@@ -312,6 +336,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return;
             } 
+
             var selection = this.Session.Selection.Get();
             var shapeids = selection.GetIDs();
             var update = new VA.ShapeSheet.Update();
@@ -337,8 +362,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             } 
 
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
+            var shapeids = shapes.Select(s=>s.ID).ToList();
             var update = new VA.ShapeSheet.Update();
             foreach (int shapeid in shapeids)
             {

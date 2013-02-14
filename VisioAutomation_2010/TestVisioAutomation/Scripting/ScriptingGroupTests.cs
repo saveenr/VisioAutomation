@@ -22,14 +22,14 @@ namespace TestVisioAutomation
             var s0 = ss.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
             Assert.AreEqual(4, s0.Count);
 
-            var g = ss.Layout.Group();
+            var g = ss.Layout.Group(null);
             ss.Selection.SelectNone();
             ss.Selection.SelectAll();
 
             var s1 = ss.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
             Assert.AreEqual(1, s1.Count);
 
-            ss.Layout.Ungroup();
+            ss.Layout.Ungroup(null);
             ss.Selection.SelectAll();
             var s2 = ss.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
             Assert.AreEqual(4, s2.Count);
