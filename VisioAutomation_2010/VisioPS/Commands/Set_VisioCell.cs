@@ -11,7 +11,7 @@ namespace VisioPS.Commands
         public VisioAutomation.ShapeSheet.SRC Cell { get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = true)]
-        public string Formula { get; set; }
+        public string Result { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards;
@@ -23,7 +23,7 @@ namespace VisioPS.Commands
         public IList<IVisio.Shape> Shapes;
 
         [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter GetResults;
+        public SMA.SwitchParameter SetResults;
 
         protected override void ProcessRecord()
         {
@@ -39,13 +39,13 @@ namespace VisioPS.Commands
 
             var scriptingsession = this.ScriptingSession;
 
-            if (!this.GetResults)
+            if (!this.SetResults)
             {
-                scriptingsession.ShapeSheet.SetFormula(this.Shapes, new[] { Cell }, new[] { Formula }, (IVisio.VisGetSetArgs)flags);               
+                scriptingsession.ShapeSheet.SetFormula(this.Shapes, new[] { Cell }, new[] { Result }, (IVisio.VisGetSetArgs)flags);               
             }
             else
             {
-                var d = double.Parse(Formula);
+                var d = double.Parse(Result);
                 scriptingsession.ShapeSheet.SetResult(this.Shapes, new[] { Cell }, new[] { d }, (IVisio.VisGetSetArgs)flags);                               
             }
         }
