@@ -8,10 +8,10 @@ namespace VisioPS.Commands
     public class Set_VisioCell : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
-        public VisioAutomation.ShapeSheet.SRC Cell { get; set; }
+        public VisioAutomation.ShapeSheet.SRC[] Cell { get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = true)]
-        public string Result { get; set; }
+        public string[] Value { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards;
@@ -20,10 +20,10 @@ namespace VisioPS.Commands
         public SMA.SwitchParameter TestCircular;
 
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+        public SMA.SwitchParameter SetResults;
 
         [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter SetResults;
+        public IList<IVisio.Shape> Shapes;
 
         protected override void ProcessRecord()
         {
@@ -41,12 +41,11 @@ namespace VisioPS.Commands
 
             if (!this.SetResults)
             {
-                scriptingsession.ShapeSheet.SetFormula(this.Shapes, new[] { Cell }, new[] { Result }, (IVisio.VisGetSetArgs)flags);               
+                scriptingsession.ShapeSheet.SetFormula(this.Shapes, Cell , Value , (IVisio.VisGetSetArgs)flags);               
             }
             else
             {
-                var d = double.Parse(Result);
-                scriptingsession.ShapeSheet.SetResult(this.Shapes, new[] { Cell }, new[] { d }, (IVisio.VisGetSetArgs)flags);                               
+                scriptingsession.ShapeSheet.SetResult(this.Shapes, Cell , Value, (IVisio.VisGetSetArgs)flags);                               
             }
         }
     }
