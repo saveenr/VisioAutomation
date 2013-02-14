@@ -114,7 +114,7 @@
     <Compile Include="Commands\Invoke_VisioAlignShape.cs" />
     <Compile Include="Commands\Invoke_VisioDistributeShape.cs" />
     <Compile Include="Commands\Select_VisioShape.cs" />
-    <Compile Include="Commands\Set_VisioFormula.cs" />
+    <Compile Include="Commands\Set_VisioCell.cs" />
     <Compile Include="Commands\New_VisioBezier.cs" />
     <Compile Include="Commands\Invoke_VisioDraw.cs" />
     <Compile Include="Commands\New_VisioPieSlice.cs" />
