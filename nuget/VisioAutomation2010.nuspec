@@ -1,7 +1,7 @@
 <package >
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -12,8 +12,8 @@
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
     <releaseNotes>
-     -More Internal Improvements to Page Duplication code
-     -Helper methods for retrieving cells removed. Instead callers should use methods on the cell groups directly
+     -VisioAutomation.Scripting commands now handle specific shapes versus current selection cleanly
+     -ShapeSheet update now supports SetResults with strings
     </releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Visio</tags>
