@@ -50,6 +50,18 @@ namespace VisioAutomation.Scripting
             return shapes;
         }
 
+        protected int GetTargetShapesAndSelect(IList<IVisio.Shape> shapes)
+        {
+            if (shapes == null)
+            {
+                return this.Session.Selection.Count();
+            }
+
+            this.Session.Selection.SelectNone();
+            this.Session.Selection.Select(shapes);
+            return this.Session.Selection.Count();
+        }
+
         protected IVisio.Shape GetTargetShape( IVisio.Shape shape)
         {
             if (shape == null)

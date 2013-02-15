@@ -68,9 +68,15 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Distribute(VA.Drawing.AlignmentHorizontal halign)
+        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal halign)
         {
             if (!this.Session.HasActiveDrawing)
+            {
+                return;
+            }
+
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 1)
             {
                 return;
             }
@@ -80,9 +86,15 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)cmd);
         }
 
-        public void Distribute(VA.Drawing.AlignmentVertical valign)
+        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical valign)
         {
             if (!this.Session.HasActiveDrawing)
+            {
+                return;
+            }
+
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 1)
             {
                 return;
             }
@@ -92,9 +104,15 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication.DoCmd((short)cmd); 
         }
 
-        public void Distribute(VA.Drawing.Axis axis)
+        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis)
         {
             if (!this.Session.HasActiveDrawing)
+            {
+                return;
+            }
+
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 1)
             {
                 return;
             }
@@ -124,9 +142,10 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Nudge(double dx, double dy)
+        public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
         {
-            if (!this.Session.HasSelectedShapes())
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 1)
             {
                 return;
             }
@@ -142,13 +161,14 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SnapCorner(double w, double h, VA.Layout.SnapCornerPosition corner)
+        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, VA.Layout.SnapCornerPosition corner)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = this.GetTargetShapes(target_shapes);
+            if (shapes.Count<1)
             {
                 return;
             }
-            var shapes_2d = Session.Selection.EnumShapes2D().ToList();
+            var shapes_2d = shapes.Where(s=>s.OneD==0).ToList();
             var shapeids = shapes_2d.Select(s => s.ID).ToList();
 
             var application = this.Session.VisioApplication;
@@ -180,35 +200,37 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Stack(VA.Drawing.Axis axis, double space)
+        public void Stack(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double space)
         {
-            if (!this.Session.HasSelectedShapes(2))
-            {
-                return;
-            }
             if (space < 0.0)
             {
                 throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
             }
 
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 2)
+            {
+                return;
+            }
+            
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Stack Shapes"))
             {
                 if (axis == VA.Drawing.Axis.YAxis)
                 {
-                    Align(VA.Drawing.AlignmentHorizontal.Center);
+                    Align(null,VA.Drawing.AlignmentHorizontal.Center);
                 }
                 else
                 {
-                    Align(VA.Drawing.AlignmentVertical.Center);
+                    Align(null, VA.Drawing.AlignmentVertical.Center);
                 }
                 Distribute(null, axis, space);
             }
         }
 
-        public void Send(VA.Selection.ShapeSendDirection dir)
+        public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
-
-            if (!this.Session.HasSelectedShapes())
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 1)
             {
                 return;
             }
@@ -217,16 +239,14 @@ namespace VisioAutomation.Scripting.Commands
             VA.Selection.SelectionHelper.SendShapes(selection, dir);
         }
 
-        public void Align(VA.Drawing.AlignmentHorizontal align)
+        public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal align)
         {
-            if (!this.Session.HasSelectedShapes(2))
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 2)
             {
                 return;
             }
 
-            var cmd = LayoutCommands.AlignmentToUICmd(align);
-
-            var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Align Shapes"))
             {
                 bool glue_to_guide = false;
@@ -237,14 +257,14 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Align(VA.Drawing.AlignmentVertical align)
+        public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical align)
         {
-            if (!this.Session.HasSelectedShapes(2))
+            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            if (shape_count < 2)
             {
                 return;
             }
 
-            var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Align Shapes"))
             {
                 bool glue_to_guide = false;

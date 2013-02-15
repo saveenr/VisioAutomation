@@ -227,6 +227,15 @@ namespace VisioAutomation.Scripting.Commands
             return VA.Selection.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
         }
 
+        public int Count()
+        {
+            var application = this.Session.VisioApplication;
+            var active_window = application.ActiveWindow;
+            var selection = active_window.Selection;
+            int count = selection.Count;;
+            return count;
+        }
+
         public IList<IVisio.Shape> GetSubSelectedShapes()
         {
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/

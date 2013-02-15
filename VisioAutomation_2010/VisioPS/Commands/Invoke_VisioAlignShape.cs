@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VA=VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -12,16 +13,19 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public HorizontalAlignment Horizontal
             = HorizontalAlignment.None;
 
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
             if (this.Vertical != VerticalAlignment.None)
             {
-                scriptingsession.Layout.Align((VA.Drawing.AlignmentVertical)Vertical);
+                scriptingsession.Layout.Align(this.Shapes,(VA.Drawing.AlignmentVertical)Vertical);
             }
             if (this.Horizontal != HorizontalAlignment.None)
             {
-                scriptingsession.Layout.Align((VA.Drawing.AlignmentHorizontal)Horizontal);
+                scriptingsession.Layout.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)Horizontal);
             }
         }
     }

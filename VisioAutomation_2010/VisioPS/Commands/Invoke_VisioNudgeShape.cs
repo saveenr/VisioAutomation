@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
@@ -16,14 +17,18 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(Mandatory = false)]
         public double Down { get; set; }
-        
+
+
+        [SMA.Parameter(Mandatory = false)]
+        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+
         protected override void ProcessRecord()
         {
             double h = Right - Left;
             double v = Up - Down;
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Layout.Nudge(h, v);
+            scriptingsession.Layout.Nudge(this.Shapes, h, v);
         }
     }
 }

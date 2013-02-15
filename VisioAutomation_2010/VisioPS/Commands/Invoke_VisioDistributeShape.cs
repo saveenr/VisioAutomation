@@ -20,7 +20,7 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             if (this.Distance < 0)
             {
-                scriptingsession.Layout.Distribute(this.Axis);
+                scriptingsession.Layout.Distribute(this.Shapes, this.Axis);
             }
             else
             {
