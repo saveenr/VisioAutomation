@@ -87,9 +87,35 @@ namespace VisioAutomation.ShapeSheet
                     throw new VA.AutomationException("Cannot contain both SRC and SIDSRC updates");
                 }
 
-                if (update.UpdateType != first_update.Value.UpdateType)
+                if (first_update.Value.UpdateType == UpdateType.Formula)
                 {
-                    throw new VA.AutomationException("Cannot contain both Formula and Result updates");
+                    if (update.UpdateType == UpdateType.Formula)
+                    {
+                        // Formula and Formula - OK
+                    }
+                    else if (update.UpdateType == UpdateType.ResultNumeric || update.UpdateType == UpdateType.ResultString)
+                    {
+                        throw new VA.AutomationException("Cannot contain both Formula and Result updates");
+                    }
+                    else
+                    {
+                        throw new VA.AutomationException("Unsupportd update type");
+                    }
+                }
+                else if (update.UpdateType == UpdateType.ResultNumeric || update.UpdateType == UpdateType.ResultString)
+                {
+                    if (update.UpdateType == UpdateType.Formula)
+                    {
+                        throw new VA.AutomationException("Cannot contain both Formula and Result updates");
+                    }
+                    else if (update.UpdateType == UpdateType.ResultNumeric || update.UpdateType == UpdateType.ResultString)
+                    {
+                        // Result and Result- OK
+                    }
+                    else
+                    {
+                        throw new VA.AutomationException("Unsupportd update type");
+                    }
                 }
             }
 
@@ -248,11 +274,11 @@ namespace VisioAutomation.ShapeSheet
                 foreach (var update in this.updates)
                 {
                     unitcodes[i] = update.UnitCode;
-                    if (first_update.Value.UpdateType == UpdateType.ResultNumeric)
+                    if (update.UpdateType == UpdateType.ResultNumeric)
                     {
                         results[i] = update.ResultNumeric;                       
                     }
-                    else if (first_update.Value.UpdateType == UpdateType.ResultString)
+                    else if (update.UpdateType == UpdateType.ResultString)
                     {
                         results[i] = update.ResultString;
                     }

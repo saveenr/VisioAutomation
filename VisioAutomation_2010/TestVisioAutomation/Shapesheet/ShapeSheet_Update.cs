@@ -216,10 +216,28 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckHomogenousUpdates3()
         {
+            var page1 = GetNewPage();
+            var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
-            var update1 = new VA.ShapeSheet.Update();
-            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
-            update1.SetResult(src_piny, "1.0", IVisio.VisUnitCodes.visNoCast);
+            // Setup the modifications to the cell values
+            var update = new VA.ShapeSheet.Update();
+            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNoCast);
+            update.Execute(shape1);
+
+            // Build the query
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_linepat = query.AddColumn(src_linepat);
+            var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
+
+            // Retrieve the values
+            var data = query.GetFormulasAndResults<double>(shape1);
+
+            // Verify
+            AssertVA.AreEqual("7", 7, data[0, col_linepat]);
+            AssertVA.AreEqual("2 in", 2, data[0, col_pinx]);
+            
+            // page1.Delete(0);
         }
 
     }
