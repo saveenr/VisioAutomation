@@ -213,5 +213,14 @@ namespace TestVisioAutomation
             }
         }
 
+        [TestMethod]
+        public void CheckHomogenousUpdates3()
+        {
+
+            var update1 = new VA.ShapeSheet.Update();
+            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
+            update1.SetResult(src_piny, "1.0", IVisio.VisUnitCodes.visNoCast);
+        }
+
     }
 }

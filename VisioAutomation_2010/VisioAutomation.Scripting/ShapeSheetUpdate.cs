@@ -23,5 +23,18 @@ namespace VisioAutomation.Scripting
             var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
             this.update.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNoCast);
         }
+
+        public void SetResult(short id, VA.ShapeSheet.SRC src, int result)
+        {
+            var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
+            this.update.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNoCast);
+        }
+
+        public void SetResult(short id, VA.ShapeSheet.SRC src, string result)
+        {
+            var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
+            this.update.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNoCast);
+        }
+
     }
 }
