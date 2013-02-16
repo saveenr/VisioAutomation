@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-
-using VisioPS.Extensions;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 

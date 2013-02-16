@@ -24,9 +24,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-
             var shape = scriptingsession.Draw.PieSlice(new VA.Drawing.Point(this.X0, this.Y0), this.Radius,this.StartAngle, this.EndAngle);
-
             this.WriteObject(shape);
         }
     }

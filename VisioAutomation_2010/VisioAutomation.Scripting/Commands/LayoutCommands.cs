@@ -75,7 +75,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -93,7 +93,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -111,7 +111,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -144,7 +144,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
         {
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -207,7 +207,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
             }
 
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
             {
                 return;
@@ -229,7 +229,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
                 return;
@@ -241,7 +241,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal align)
         {
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
             {
                 return;
@@ -259,7 +259,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical align)
         {
-            int shape_count = this.GetTargetShapesAndSelect(target_shapes);
+            int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
             {
                 return;

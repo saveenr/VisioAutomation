@@ -27,7 +27,8 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Y { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = false)] public bool CanGlue = false;
+        [SMA.Parameter(Position = 0, Mandatory = false)]
+        public bool CanGlue = false;
 
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Tip { get; set; }

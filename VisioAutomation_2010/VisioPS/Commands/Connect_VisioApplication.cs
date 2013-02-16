@@ -12,6 +12,7 @@ namespace VisioPS.Commands
             {
                 this.WriteWarning("Already connected to an instance");
             }
+
             var app = VA.Application.ApplicationHelper.FindRunningApplication();
 
             if (app == null)

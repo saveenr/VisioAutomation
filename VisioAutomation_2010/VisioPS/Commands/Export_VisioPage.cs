@@ -13,7 +13,6 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-
             if (!this.AllPages)
             {
                 // this means use the current page 

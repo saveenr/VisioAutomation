@@ -288,7 +288,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Duplicate( IList<IVisio.Shape> target_shapes )
         {
-            int n = this.GetTargetShapesAndSelect(target_shapes);
+            int n = this.GetTargetSelection(target_shapes);
             if (n<1)
             {
                 return;

@@ -6,7 +6,7 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
     public class Get_VisioDirectedEdge : VisioPSCmdlet
     {
-        [SMA.Parameter(Position = 1, Mandatory = false)]
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public VisioAutomation.Connections.ConnectorArrowEdgeHandling TreatAsConnected { get; set; }
 
         protected override void ProcessRecord()

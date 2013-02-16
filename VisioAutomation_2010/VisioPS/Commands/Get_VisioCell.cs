@@ -20,7 +20,7 @@ namespace VisioPS.Commands
         public SMA.SwitchParameter GetResults;
 
         [SMA.Parameter(Mandatory = false)]
-        public ResultType ResultType= ResultType.Double;
+        public ResultType ResultType= ResultType.String;
 
         [SMA.Parameter(Mandatory = false)]
         public IList<IVisio.Shape> Shapes;

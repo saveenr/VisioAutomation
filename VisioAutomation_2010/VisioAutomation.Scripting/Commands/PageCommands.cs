@@ -277,15 +277,18 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void ResetOrigin()
-        {
+        public void ResetOrigin(IVisio.Page page)
+        {            
             if (!this.Session.HasActiveDrawing)
             {
                 return;
             }
 
             var application = this.Session.VisioApplication;
-            var active_page = application.ActivePage;
+            if (page == null)
+            {
+                page = application.ActivePage;
+            }
 
             var update = new VA.ShapeSheet.Update();
 
@@ -296,7 +299,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Reset Page Origin"))
             {
-                update.Execute(active_page.PageSheet);
+                update.Execute(page.PageSheet);
             }
         }
 

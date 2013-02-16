@@ -19,7 +19,6 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 3, Mandatory = true)]
         public int Degree { get; set; }
         
-
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
