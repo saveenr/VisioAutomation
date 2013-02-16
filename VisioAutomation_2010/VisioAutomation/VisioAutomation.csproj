@@ -157,7 +157,6 @@
     <Compile Include="Geometry\GeometrySection.cs" />
     <Compile Include="Geometry\GeometryRow.cs" />
     <Compile Include="Geometry\GeometryHelper.cs" />
-    <Compile Include="Selection\ShapesEnumeration.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />

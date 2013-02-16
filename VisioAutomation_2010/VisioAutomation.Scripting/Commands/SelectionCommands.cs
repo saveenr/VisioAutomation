@@ -216,15 +216,16 @@ namespace VisioAutomation.Scripting.Commands
                 layer);
         }
 
-        public IList<IVisio.Shape> GetShapes( VA.Selection.ShapesEnumeration enumerationtype)
+        public IList<IVisio.Shape> GetShapes()
         {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return new List<IVisio.Shape>(0);
-            }
-
             var selection = this.Session.Selection.Get();
-            return VA.Selection.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
+            return VA.Selection.SelectionHelper.GetSelectedShapes(selection);
+        }
+
+        public IList<IVisio.Shape> GetShapesRecursive()
+        {
+            var selection = this.Session.Selection.Get();
+            return VA.Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
         public int Count()

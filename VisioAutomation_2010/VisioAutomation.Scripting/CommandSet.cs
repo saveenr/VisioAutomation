@@ -44,9 +44,8 @@ namespace VisioAutomation.Scripting
             if (shapes == null)
             {
                 // If no collection of shapes were passed in then use the selection
-                var shape_enumeration = VA.Selection.ShapesEnumeration.Flat;
-                this.Session.WriteVerbose("Targeting shapes from active selection using shape enumeration {0}",shape_enumeration);
-                var out_shapes = this.Session.Selection.GetShapes(shape_enumeration);
+                this.Session.WriteVerbose("Targeting shapes from active selection");
+                var out_shapes = this.Session.Selection.GetShapes();
                 this.Session.WriteVerbose("Number of shapes = {0}", out_shapes.Count);
                 return out_shapes;
             }
@@ -82,7 +81,7 @@ namespace VisioAutomation.Scripting
             {
                 this.Session.WriteVerbose("Targeting single shape from active selection");
                 // If no collection of shapes were passed in then use the selection
-                var out_shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
+                var out_shapes = this.Session.Selection.GetShapes();
                 int n = out_shapes.Count;
                 this.Session.WriteVerbose("number of shapes from selection = {0}", n);
                 if (out_shapes.Count > 0)

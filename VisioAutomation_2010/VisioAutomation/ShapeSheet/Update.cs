@@ -82,39 +82,26 @@ namespace VisioAutomation.ShapeSheet
             }
             else
             {
-                if (update.StreamType != first_update.Value.StreamType)
+                // first validate the stream types
+                if (first_update.Value.StreamType != update.StreamType)
                 {
                     throw new VA.AutomationException("Cannot contain both SRC and SIDSRC updates");
                 }
 
-                if (first_update.Value.UpdateType == UpdateType.Formula)
+                // Now ensure that we aren't mixing formulas and results
+                // Keep in mind that we can mix differnt types of results (strings and numerics)
+                if (first_update.Value.UpdateType == UpdateType.Formula && update.UpdateType != UpdateType.Formula)
                 {
-                    if (update.UpdateType == UpdateType.Formula)
-                    {
-                        // Formula and Formula - OK
-                    }
-                    else if (update.UpdateType == UpdateType.ResultNumeric || update.UpdateType == UpdateType.ResultString)
+                    if (update.UpdateType != UpdateType.Formula)
                     {
                         throw new VA.AutomationException("Cannot contain both Formula and Result updates");
-                    }
-                    else
-                    {
-                        throw new VA.AutomationException("Unsupportd update type");
                     }
                 }
-                else if (update.UpdateType == UpdateType.ResultNumeric || update.UpdateType == UpdateType.ResultString)
+                else if (first_update.Value.UpdateType == UpdateType.ResultNumeric || first_update.Value.UpdateType == UpdateType.ResultString)
                 {
                     if (update.UpdateType == UpdateType.Formula)
                     {
                         throw new VA.AutomationException("Cannot contain both Formula and Result updates");
-                    }
-                    else if (update.UpdateType == UpdateType.ResultNumeric || update.UpdateType == UpdateType.ResultString)
-                    {
-                        // Result and Result- OK
-                    }
-                    else
-                    {
-                        throw new VA.AutomationException("Unsupportd update type");
                     }
                 }
             }
