@@ -93,6 +93,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             }
 
             bool connectors_ok = this.validate_connectors(layout_diagram);
+            // TODO: What to do if connectors_ok is false?
 
             var msagl_size = this.ToMSAGLCoordinates(DefaultBezierConnectorLabelBoxSize);
 
@@ -218,10 +219,6 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             ResolveMasters(layout_diagram, vis);
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
-            
-            var active_window = vis.ActiveWindow;
-            //active_window.ShowConnectPoints = VA.Convert.BoolToShort(!this.LayoutOptions.HideConnectionPoints);
-            //active_window.ShowGrid = VA.Convert.BoolToShort(this.LayoutOptions.HideGrid);
 
             CreateDOMShapes(dompage.Shapes, msagl_graph, vis);
 
