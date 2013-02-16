@@ -220,8 +220,8 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
             
             var active_window = vis.ActiveWindow;
-            active_window.ShowConnectPoints = VA.Convert.BoolToShort(!this.LayoutOptions.HideConnectionPoints);
-            active_window.ShowGrid = VA.Convert.BoolToShort(this.LayoutOptions.HideGrid);
+            //active_window.ShowConnectPoints = VA.Convert.BoolToShort(!this.LayoutOptions.HideConnectionPoints);
+            //active_window.ShowGrid = VA.Convert.BoolToShort(this.LayoutOptions.HideGrid);
 
             CreateDOMShapes(dompage.Shapes, msagl_graph, vis);
 

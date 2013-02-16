@@ -174,11 +174,6 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentNullException("results");
             }
-
-            if (results.Any(f => f == null))
-            {
-                throw new System.ArgumentException("formulas contains a null value");
-            }
             
             if (results.Count != srcs.Count)
             {

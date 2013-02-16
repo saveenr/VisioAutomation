@@ -8,7 +8,7 @@ using System.Linq;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class AutoLayoutTests : VisioAutomationTest
+    public class DirectedGraphLayoutTests : VisioAutomationTest
     {
         [TestMethod]
         public void RenderDirectedGraphWithBezierConnectors()
@@ -310,6 +310,38 @@ namespace TestVisioAutomation
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 
             doc.Close(true);
+        }
+
+        [TestMethod]
+        public void RenderDirectedGraph_Directions()
+        {
+            var directed_graph_drawing = new VA.Layout.Models.DirectedGraph.Drawing();
+
+            var flowchart_stencil = "basflo_u.vss";
+            var server_stencil = "server_u.vss";
+
+            var n0 = directed_graph_drawing.AddShape("n0", "Untitled Node", flowchart_stencil, "Decision");
+            n0.Size = new VA.Drawing.Size(3, 2);
+            var n1 = directed_graph_drawing.AddShape("n1", "", flowchart_stencil, "Decision");
+            var n2 = directed_graph_drawing.AddShape("n2", "MailServer", server_stencil, "Server");
+            var n3 = directed_graph_drawing.AddShape("n3", null, flowchart_stencil, "Data");
+            var n4 = directed_graph_drawing.AddShape("n4", "Alone", flowchart_stencil, "Data");
+
+            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
+            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
+            var c3 = directed_graph_drawing.Connect("c2", n1, n0, "NO", VA.Connections.ConnectorType.Curved);
+            var c4 = directed_graph_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
+            var c5 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
+            var c6 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+
+
+            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
+            options.UseDynamicConnectors = false;
+            var visapp = this.GetVisioApplication();
+            var doc = this.GetNewDoc();
+            var page = visapp.ActivePage;
+
+            directed_graph_drawing.Render(page, options);
         }
     }
 }
