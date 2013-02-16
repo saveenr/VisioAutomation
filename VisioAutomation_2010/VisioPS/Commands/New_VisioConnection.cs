@@ -9,10 +9,10 @@ namespace VisioPS.Commands
     public class New_VisioConnection : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
-        public IVisio.Shape From { get; set; }
+        public IVisio.Shape[] From { get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = true)]
-        public IVisio.Shape To { get; set; }
+        public IVisio.Shape[] To { get; set; }
 
         [SMA.Parameter(Position = 2, Mandatory = true)]
         public IVisio.Master Master { get; set; }
@@ -20,7 +20,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var connectors = scriptingsession.Connection.Connect(Master, new[] { From }, new[] { To });
+            var connectors = scriptingsession.Connection.Connect(Master, From , To );
             this.WriteObject(connectors);
         }
     }
