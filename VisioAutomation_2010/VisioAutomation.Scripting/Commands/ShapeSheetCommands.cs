@@ -179,8 +179,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentException("formulas contains a null value");
             }
-
-
+            
             if (results.Count != srcs.Count)
             {
                 string msg = string.Format("Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count, results.Count);

@@ -12,22 +12,29 @@ namespace VisioAutomation.Selection
         {
             if (selection.Count < 1)
             {
-                return new List<IVisio.Shape>(0);
+                var shapes = new List<IVisio.Shape>(0);
+                return shapes;
             }
-
-            var shapes = selection.AsEnumerable();
-
+            
             if (enumerationtype == ShapesEnumeration.Flat)
             {
-                return shapes.ToList();
+                var sel_shapes = selection.AsEnumerable();
+                var shapes = sel_shapes.ToList();
+                return shapes;
             }
             
             if (enumerationtype == ShapesEnumeration.ExpandGroups)
             {
-                var shapes_in_groups = VA.ShapeHelper.GetNestedShapes(shapes)
-                    .Where(s => s.Type != (short) IVisio.VisShapeTypes.visTypeGroup)
-                    .ToList();
-                return shapes_in_groups;
+                var shapes = new List<IVisio.Shape>();
+                var sel_shapes = selection.AsEnumerable();
+                foreach (var shape in VA.ShapeHelper.GetNestedShapes(sel_shapes))
+                {
+                    if (shape.Type != (short) IVisio.VisShapeTypes.visTypeGroup)
+                    {
+                        shapes.Add(shape);
+                    }
+                }
+                return shapes;
             }
 
             throw new System.ArgumentOutOfRangeException("enumerationtype");
