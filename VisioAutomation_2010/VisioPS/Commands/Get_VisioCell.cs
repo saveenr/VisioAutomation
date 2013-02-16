@@ -23,7 +23,7 @@ namespace VisioPS.Commands
         public ResultType ResultType= ResultType.Double;
 
         [SMA.Parameter(Mandatory = false)]
-        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+        public IList<IVisio.Shape> Shapes;
 
         protected override void ProcessRecord()
         {

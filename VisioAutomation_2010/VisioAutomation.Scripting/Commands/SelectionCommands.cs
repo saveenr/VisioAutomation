@@ -286,13 +286,16 @@ namespace VisioAutomation.Scripting.Commands
             selection.Copy(flags);
         }
 
-        public void Duplicate()
+        public void Duplicate( IList<IVisio.Shape> target_shapes )
         {
-            if (!this.Session.HasSelectedShapes())
+            int n = this.GetTargetShapesAndSelect(target_shapes);
+            if (n<1)
             {
                 return;
             }
-            var active_window = this.Session.View.GetActiveWindow();
+
+            var view = this.Session.View;
+            var active_window = view.GetActiveWindow();
             var selection = active_window.Selection;
             selection.Duplicate();
         }

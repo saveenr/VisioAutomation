@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using VA=VisioAutomation;
 using VisioPS.Extensions;
 using SMA = System.Management.Automation;
+using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioPS.Commands
 {
@@ -21,7 +22,7 @@ namespace VisioPS.Commands
         public SMA.SwitchParameter Text { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public IList<Microsoft.Office.Interop.Visio.Shape> Shapes;
+        public IList<IVisio.Shape> Shapes;
 
         protected override void ProcessRecord()
         {
