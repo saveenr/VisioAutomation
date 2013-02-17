@@ -44,13 +44,13 @@ namespace VisioAutomation.Scripting
             if (shapes == null)
             {
                 // If no collection of shapes were passed in then use the selection
-                this.Session.WriteVerbose("Targeting shapes from active selection");
+                this.Session.WriteVerbose("GetTargetShapes: Targeting shapes from active selection");
                 var out_shapes = this.Session.Selection.GetShapes();
-                this.Session.WriteVerbose("Number of shapes = {0}", out_shapes.Count);
+                this.Session.WriteVerbose("GetTargetShapes: Number of shapes = {0}", out_shapes.Count);
                 return out_shapes;
             }
-            this.Session.WriteVerbose("Targeting specified shapes ");
-            this.Session.WriteVerbose("Number of shapes = {0}", shapes.Count);
+            this.Session.WriteVerbose("GetTargetShapes: Targeting specified shapes ");
+            this.Session.WriteVerbose("GetTargetShapes: Number of shapes = {0}", shapes.Count);
             return shapes;
         }
 
@@ -58,20 +58,20 @@ namespace VisioAutomation.Scripting
         {
             if (shapes == null)
             {
-                this.Session.WriteVerbose("Targeting shapes from active selection");
+                this.Session.WriteVerbose("GetTargetSelection: Targeting shapes from active selection");
                 int n = this.Session.Selection.Count();
-                this.Session.WriteVerbose("Number of shapes = {0}", n);
+                this.Session.WriteVerbose("GetTargetSelection: Number of shapes = {0}", n);
                 return n;
             }
 
-            this.Session.WriteVerbose("Targeting specified shapes");
-            this.Session.WriteVerbose("Number of shapes specified = {0}", shapes.Count);
-            this.Session.WriteVerbose("Clearing Selection");
+            this.Session.WriteVerbose("GetTargetSelection: Targeting specified shapes");
+            this.Session.WriteVerbose("GetTargetSelection: Number of shapes specified = {0}", shapes.Count);
+            this.Session.WriteVerbose("GetTargetSelection: Clearing Selection");
             this.Session.Selection.SelectNone();
-            this.Session.WriteVerbose("Setting selection");
+            this.Session.WriteVerbose("GetTargetSelection: Setting selection");
             this.Session.Selection.Select(shapes);
             int n2 = this.Session.Selection.Count();
-            this.Session.WriteVerbose("Selection contains {0} shapes",n2);
+            this.Session.WriteVerbose("GetTargetSelection: Selection contains {0} shapes", n2);
             return n2;
         }
 
@@ -79,25 +79,25 @@ namespace VisioAutomation.Scripting
         {
             if (shape == null)
             {
-                this.Session.WriteVerbose("Targeting single shape from active selection");
+                this.Session.WriteVerbose("GetTargetShape: Targeting single shape from active selection");
                 // If no collection of shapes were passed in then use the selection
                 var out_shapes = this.Session.Selection.GetShapes();
                 int n = out_shapes.Count;
-                this.Session.WriteVerbose("number of shapes from selection = {0}", n);
+                this.Session.WriteVerbose("GetTargetShape: Number of shapes from selection = {0}", n);
                 if (out_shapes.Count > 0)
                 {
-                    this.Session.WriteVerbose("More than 1 shape in selection, targeing the first one");                    
+                    this.Session.WriteVerbose("GetTargetShape: More than 1 shape in selection, targeting the first one");                    
                     return out_shapes[0];
                 }
                 else
                 {
-                    this.Session.WriteVerbose("No shapes in selection, targeting none");
+                    this.Session.WriteVerbose("GetTargetShape: No shapes in selection, targeting none");
                     return null;
                 }
             }
             else
             {
-                this.Session.WriteVerbose("Targeting specified shape");
+                this.Session.WriteVerbose("GetTargetShape: Targeting specified shape");
                 return shape;
             }
         }

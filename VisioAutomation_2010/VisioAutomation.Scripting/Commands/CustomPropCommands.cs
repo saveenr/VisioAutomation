@@ -59,11 +59,6 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -92,11 +87,6 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IList<IVisio.Shape> target_shapes, string name, VA.CustomProperties.CustomPropertyCells customprop)
         {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
             if (customprop == null)
             {
                 throw new System.ArgumentNullException("customprop");

@@ -123,32 +123,39 @@ namespace VisioAutomation.Scripting
         {
             get
             {
-                var application = VisioApplication;
-                var active_window = application.ActiveWindow;
-
+                var app = VisioApplication;
+                
                 // if there's no active document, then there can't be an active drawing
-                if (application.ActiveDocument == null)
+                if (app.ActiveDocument == null)
                 {
+                    this.WriteVerbose("HasActiveDrawing: FALSE: No Active Window -> No Active Document");
                     return false;
                 }
+
+                var active_window = app.ActiveWindow;
 
                 // If there's no active window there can't be an active drawing
                 if (active_window == null)
                 {
+                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> No Active Window");
                     return false;
                 }
 
                 // Check if the window type matches that of a drawing
                 if (active_window.Type != (int)IVisio.VisWinTypes.visDrawing)
                 {
+                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> incorrect Window Type (Expected {0}, Actually {1}", (int)IVisio.VisWinTypes.visDrawing, (int)active_window.Type);
                     return false;
                 }
 
                 // finally verify there is an active page
-                if (application.ActivePage == null)
+                if (app.ActivePage == null)
                 {
+                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> Active Window -> Correct Window Type -> No Active Page");
                     return false;
                 }
+
+                this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> Active Window -> Correct Window Type -> Active Page");
 
                 return true;
             }

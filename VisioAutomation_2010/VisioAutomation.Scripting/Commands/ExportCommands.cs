@@ -23,6 +23,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!this.Session.HasSelectedShapes())
             {
+                this.Session.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
@@ -45,6 +46,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!this.Session.HasSelectedShapes())
             {
+                this.Session.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
@@ -104,6 +106,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!this.Session.HasSelectedShapes())
             {
+                this.Session.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 

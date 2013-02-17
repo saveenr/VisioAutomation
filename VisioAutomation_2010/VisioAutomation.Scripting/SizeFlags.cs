@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Scripting.Commands
+﻿namespace VisioAutomation.Scripting
 {
     [System.Flags]
     public enum SizeFlags

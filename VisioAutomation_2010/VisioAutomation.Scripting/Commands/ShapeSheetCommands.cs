@@ -107,6 +107,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
+                this.Session.WriteVerbose("SetFormula: Zero Shapes. Not performing Operation");
                 return;
             }
 
@@ -122,13 +123,15 @@ namespace VisioAutomation.Scripting.Commands
 
             if (formulas.Any( f => f == null))
             {
+                this.Session.WriteVerbose("SetFormula: One of the Input Formulas is a NULL value");
                 throw new System.ArgumentException("formulas contains a null value");
             }
 
+            this.Session.WriteVerbose("SetFormula: src count= {0} and formula count = {1}", srcs.Count, formulas.Count);
 
             if (formulas.Count != srcs.Count)
             {
-                string msg = string.Format("Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count,formulas.Count);
+                string msg = string.Format("SetFormula: Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count,formulas.Count);
                 throw new System.ArgumentException(msg);
             }
 
@@ -167,6 +170,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
+                this.Session.WriteVerbose("SetResult: Zero Shapes. Not performing Operation");
                 return;
             }
 
@@ -182,12 +186,15 @@ namespace VisioAutomation.Scripting.Commands
 
             if (results.Any(f => f == null))
             {
-                throw new System.ArgumentException("formulas contains a null value");
+                this.Session.WriteVerbose("SetResult: One of the Input Results is a NULL value");
+                throw new System.ArgumentException("results contains a null value");
             }
-            
+
+            this.Session.WriteVerbose("SetResult: src count= {0} and result count = {1}", srcs.Count, results.Count);
+
             if (results.Count != srcs.Count)
             {
-                string msg = string.Format("Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count, results.Count);
+                string msg = string.Format("Must have the same number of srcs ({0}) and results ({1})", srcs.Count, results.Count);
                 throw new System.ArgumentException(msg);
             }
 

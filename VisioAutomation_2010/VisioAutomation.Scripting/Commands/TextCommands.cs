@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Shape Tex"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Shape Text"))
             {
                 var values = texts.ToList();
 
@@ -103,29 +103,22 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        private static IVisio.Font TryGetFont(IVisio.Fonts fonts, string name)
-        {
-            try
-            {
-                var font = fonts[name];
-                return font;
-            }
-            catch (System.Runtime.InteropServices.COMException)
-            {
-                return null;
-            }
-        }
-
         //TODO: Make this support an input list
-        public void SetFont(string fontname)
+        public void SetFont(IList<IVisio.Shape> target_shapes, string fontname)
         {
+            var shapes = this.GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return;
+            }
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
-            var fontids = new[] {font.ID.ToString()};
             IVisio.VisGetSetArgs flags=0;
-            this.Session.ShapeSheet.SetFormula(null,new[] { VA.ShapeSheet.SRCConstants.Char_Font }, fontids, flags);
+            var srcs = new[] {VA.ShapeSheet.SRCConstants.Char_Font};
+            var formulas = new[] { font.ID.ToString() };
+            this.Session.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
         }
 
         public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)

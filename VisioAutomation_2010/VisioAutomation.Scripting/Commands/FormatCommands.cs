@@ -16,16 +16,16 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(VA.Format.ShapeFormatCells format)
+        public void Set(IList<IVisio.Shape> target_shapes, VA.Format.ShapeFormatCells format)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = this.GetTargetShapes(target_shapes);
+
+            if (shapes.Count<1)
             {
                 return;
             }
 
-
             var update = new VA.ShapeSheet.Update();
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -36,14 +36,15 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(this.Session.VisioApplication.ActivePage);            
         }
 
-        public IList<VA.Format.ShapeFormatCells> Get()
+        public IList<VA.Format.ShapeFormatCells> Get(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = this.GetTargetShapes(target_shapes);
+
+            if (shapes.Count < 1)
             {
                 return new List<ShapeFormatCells>(0);
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
             var fmts = VA.Format.ShapeFormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
             return fmts;
@@ -101,16 +102,16 @@ namespace VisioAutomation.Scripting.Commands
             cached_size_height = queryresults[0, height_col];
         }
 
-
-
         /// <summary>
         /// Applies the cached size to the currently selected shapes. If no shapes are selected then nothing happens.
         /// If no size was cached then nothing happens.
         /// </summary>
         /// <param name="flags">Controls if either or both the width and height values are applied during the paste</param>
-        public void PasteSize(SizeFlags flags)
+        public void PasteSize(IList<IVisio.Shape> target_shapes, SizeFlags flags)
         {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = this.GetTargetShapes(target_shapes);
+
+            if (shapes.Count < 1)
             {
                 return;
             }
@@ -121,8 +122,6 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var update = new VA.ShapeSheet.Update();
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)

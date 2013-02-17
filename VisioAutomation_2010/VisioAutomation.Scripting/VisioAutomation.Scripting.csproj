@@ -81,7 +81,7 @@
     <Compile Include="Commands\ReflectionUtil.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
-    <Compile Include="Commands\SizeFlags.cs" />
+    <Compile Include="SizeFlags.cs" />
     <Compile Include="Commands\TextUtil.cs" />
     <Compile Include="PageNavigation.cs" />
     <Compile Include="XmlUtil.cs" />

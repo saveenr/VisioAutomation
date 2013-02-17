@@ -308,7 +308,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public bool HasShapes(int min_items)
         {
-            // this.Session.WriteVerbose( "Checking for at least {0} selected shapes", min_items);
+            this.Session.WriteVerbose( "HasShapes: Checking for at least {0} selected shapes", min_items);
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException("min_items");
@@ -322,7 +322,9 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
-            bool v = selection.Count >= min_items;
+            int num_selected = selection.Count;
+            bool v = num_selected >= min_items;
+            this.Session.WriteVerbose("HasShapes: {0}: Selection Has {1} shapes. Checking for Minimum of {2} shapes", v, num_selected, min_items);
             return v;
         }
     }

@@ -6,9 +6,15 @@ namespace VisioAutomation.Scripting
     public class ShapeSheetUpdate
     {
         internal readonly VA.ShapeSheet.Update update;
+        public VA.Scripting.Session ScriptinSession;
+        public IVisio.Page TargetPage;
+        public bool BlastGuards;
+        public bool TestCircular;
 
-        public ShapeSheetUpdate()
+        public ShapeSheetUpdate(VA.Scripting.Session ss,IVisio.Page page)
         {
+            this.ScriptinSession = ss;
+            this.TargetPage = page;
             this.update = new VA.ShapeSheet.Update();
         }
 
@@ -36,5 +42,17 @@ namespace VisioAutomation.Scripting
             this.update.SetResult(sidsrc, result, IVisio.VisUnitCodes.visNoCast);
         }
 
+        public void Update()
+        {
+            this.ScriptinSession.WriteVerbose("Staring ShapeSheet Update");
+            var application = this.ScriptinSession.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(application, "Update ShapeSheet Formulas"))
+            {
+                this.update.BlastGuards = this.BlastGuards;
+                this.update.TestCircular = this.TestCircular;
+                this.update.Execute(this.TargetPage);
+            }
+            this.ScriptinSession.WriteVerbose("Ending ShapeSheet Update");
+        }
     }
 }
