@@ -1,4 +1,3 @@
-using VisioPS.Extensions;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -12,6 +11,11 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
+            if (!this.CheckFileExists(this.Filename))
+            {
+                return;
+            }
+
             var scriptingsession = this.ScriptingSession;
             var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, this.Filename);
             this.WriteObject(oc);

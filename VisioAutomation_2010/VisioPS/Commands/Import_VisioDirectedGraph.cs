@@ -1,4 +1,3 @@
-using VisioPS.Extensions;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -12,24 +11,16 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-            var abs_filename = System.IO.Path.GetFullPath(this.Filename);
-           
-            if (!System.IO.File.Exists(abs_filename))
+            if (!this.CheckFileExists(this.Filename))
             {
-                this.WriteVerbose("ERROR: File not found {0}",abs_filename);
                 return;
             }
 
             var scriptingsession = this.ScriptingSession;
-
-            if (scriptingsession.VisioApplication == null)
-            {
-
-                this.WriteVerbose("ERROR: No Visio Application is attached");
-                return;
-            }
-
-            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, abs_filename);            
+            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(
+                scriptingsession, 
+                this.Filename);            
+            
             this.WriteObject(dg_model);
         }
     }

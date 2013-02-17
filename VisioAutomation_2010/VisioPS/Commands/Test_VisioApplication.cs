@@ -1,6 +1,5 @@
 ﻿using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
-using VisioPS.Extensions;
 
 namespace VisioPS.Commands
 {

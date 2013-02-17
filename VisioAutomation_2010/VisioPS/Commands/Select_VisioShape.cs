@@ -13,7 +13,7 @@ namespace VisioPS.Commands
         public int[] ShapeIDs { get; set; }
         
         [SMA.Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
-        public SelectionOperation SelectionOperation { get; set; }
+        public SelectionOperation Operation { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -29,15 +29,15 @@ namespace VisioPS.Commands
             }
             else
             {
-                if (this.SelectionOperation == VisioPS.SelectionOperation.All)
+                if (this.Operation == VisioPS.SelectionOperation.All)
                 {
                     scriptingsession.Selection.SelectAll();
                 }
-                else if (this.SelectionOperation == VisioPS.SelectionOperation.None)
+                else if (this.Operation == VisioPS.SelectionOperation.None)
                 {
                     scriptingsession.Selection.SelectNone();
                 }
-                else if (this.SelectionOperation == VisioPS.SelectionOperation.Invert)
+                else if (this.Operation == VisioPS.SelectionOperation.Invert)
                 {
                     scriptingsession.Selection.SelectInvert();
                 }

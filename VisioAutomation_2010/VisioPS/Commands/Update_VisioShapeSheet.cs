@@ -1,7 +1,6 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
-using VisioPS.Extensions;
 
 namespace VisioPS.Commands
 {

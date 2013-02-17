@@ -131,7 +131,6 @@
     <Compile Include="Commands\New_VisioControl.cs" />
     <Compile Include="Commands\New_VisioDocument.cs" />
     <Compile Include="enums\SelectionOperation.cs" />
-    <Compile Include="enums\TextBoxPosition.cs" />
     <Compile Include="Commands\Open_VisioDocument.cs" />
     <Compile Include="enums\PageOrientation.cs" />
     <Compile Include="enums\ParagraphHorizontalAlignment.cs" />
@@ -142,7 +141,6 @@
     <Compile Include="Commands\Connect_VisioApplication.cs" />
     <Compile Include="Commands\Get_VisioDirectedEdge.cs" />
     <Compile Include="Commands\Invoke_VisioCopyShapeFormat.cs" />
-    <Compile Include="enums\ZoomLevel.cs" />
     <Compile Include="Commands\New_VisioConnection.cs" />
     <Compile Include="Commands\Invoke_VisioPasteShapeFormat.cs" />
     <Compile Include="Commands\Remove_VisioCustomProperty.cs" />
@@ -160,7 +158,6 @@
     <Compile Include="Commands\New_VisioPage.cs" />
     <Compile Include="Commands\New_VisioApplication.cs" />
     <Compile Include="Commands\Invoke_VisioNudgeShape.cs" />
-    <Compile Include="objects\CmdletExtensions.cs" />
     <Compile Include="Commands\Invoke_VisioResizePageToFitContents.cs" />
     <Compile Include="Commands\Set_VisioWindowSize.cs" />
     <Compile Include="enums\VerticalAlignment.cs" />

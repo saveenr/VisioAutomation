@@ -11,6 +11,11 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
+            if (!this.CheckFileExists(Filename))
+            {
+                return;
+            }
+
             var scriptingsession = this.ScriptingSession;
             scriptingsession.Export.ExportSelectionToSVGXHTML(this.Filename);
         }

@@ -36,5 +36,18 @@ namespace VisioPS
             string s = string.Format(fmt, items);
             this.WriteVerbose(s);
         }
+
+
+        protected bool CheckFileExists(string file)
+        {
+            if (!System.IO.File.Exists(file))
+            {
+                var exc = new System.IO.FileNotFoundException(file);
+                var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
+                this.WriteError(er);
+                return false;
+            }
+            return true;
+        }
     }
 }
