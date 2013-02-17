@@ -1,7 +1,7 @@
 <package >
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>1.0.16</version>
+    <version>1.0.17</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -12,8 +12,7 @@
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
     <releaseNotes>
-     -Improvements to VisioAutomation.Scripting to handle Layout commands by specifying shapes in addition to using the current selection
-     -ShapeSheet update now supports mixed strings and numerics
+     -Fixed bug in ShapeSheet.Update
     </releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Visio</tags>
