@@ -2,7 +2,8 @@
 #
 # HISTORY
 # -------
-# 8/8/2012 Modified by saveenr
+# 2012/02/16 Updated PowerShellVersion and Copyright
+# 2012/08/08 Initial version
 #
 
 @{
@@ -23,13 +24,13 @@ Author = 'Saveen Reddy'
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) 2012 Saveen Reddy'
+Copyright = '(c) 2013 Saveen Reddy'
 
 # Description of the functionality provided by this module
 # Description = ''
 
 # Minimum version of the Windows PowerShell engine required by this module
-# PowerShellVersion = ''
+# PowerShellVersion = '2.0'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''

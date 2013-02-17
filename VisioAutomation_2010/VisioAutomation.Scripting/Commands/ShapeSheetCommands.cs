@@ -98,7 +98,9 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
         
-        public void SetFormula(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs, 
+        public void SetFormula(
+            IList<IVisio.Shape> target_shapes, 
+            IList<VA.ShapeSheet.SRC> srcs, 
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
@@ -131,12 +133,13 @@ namespace VisioAutomation.Scripting.Commands
             }
 
 
-            var update = new VA.ShapeSheet.Update();
-            update.BlastGuards  = ((short) flags & (short) IVisio.VisGetSetArgs.visSetBlastGuards)!=0;
-            update.TestCircular = ((short) flags & (short) IVisio.VisGetSetArgs.visSetTestCircular) != 0;
             var shapeids = shapes.Select(s=>s.ID).ToList();
-
             int num_formulas = formulas.Count;
+
+            var update = new VA.ShapeSheet.Update(shapes.Count*num_formulas);
+            update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
+            update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
+
             foreach (var shapeid in shapeids)
             {
                 for (int i=0; i<num_formulas;i++)
@@ -156,57 +159,10 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetResult(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs,
-               IList<double> results, IVisio.VisGetSetArgs flags)
-        {
-            var shapes = this.GetTargetShapes(target_shapes);
-            if (shapes.Count < 1)
-            {
-                return;
-            }
-
-            if (srcs == null)
-            {
-                throw new System.ArgumentNullException("srcs");
-            }
-
-            if (results == null)
-            {
-                throw new System.ArgumentNullException("results");
-            }
-            
-            if (results.Count != srcs.Count)
-            {
-                string msg = string.Format("Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count, results.Count);
-                throw new System.ArgumentException(msg);
-            }
-
-            var update = new VA.ShapeSheet.Update();
-            update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
-            update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
-            var shapeids = shapes.Select(s => s.ID).ToList();
-
-            int num_formulas = results.Count;
-            foreach (var shapeid in shapeids)
-            {
-                for (int i = 0; i < num_formulas; i++)
-                {
-                    var src = srcs[i];
-                    var result = results[i];
-                    update.SetResult((short)shapeid, src, result, IVisio.VisUnitCodes.visNoCast );
-                }
-            }
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Set ShapeSheet Result"))
-            {
-                var active_page = application.ActivePage;
-                update.Execute(active_page);
-            }
-        }
-
-        public void SetResult(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs,
-               IList<string> results, IVisio.VisGetSetArgs flags)
+        public void SetResult(
+                IList<IVisio.Shape> target_shapes, 
+                IList<VA.ShapeSheet.SRC> srcs,
+                IList<string> results, IVisio.VisGetSetArgs flags)
         {
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -228,23 +184,23 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentException("formulas contains a null value");
             }
-
-
+            
             if (results.Count != srcs.Count)
             {
                 string msg = string.Format("Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count, results.Count);
                 throw new System.ArgumentException(msg);
             }
 
-            var update = new VA.ShapeSheet.Update();
-            update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
-            update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            int num_formulas = results.Count;
+            int num_results = results.Count;
+            var update = new VA.ShapeSheet.Update(shapes.Count * num_results);
+            update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
+            update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
+
             foreach (var shapeid in shapeids)
             {
-                for (int i = 0; i < num_formulas; i++)
+                for (int i = 0; i < num_results; i++)
                 {
                     var src = srcs[i];
                     var result = results[i];
@@ -259,8 +215,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.Execute(active_page);
             }
         }
-
-
+        
         public void Update(ShapeSheetUpdate update, bool blastguards, bool testcircular)
         {
             this.Session.WriteVerbose( "Staring ShapeSheet Update");
