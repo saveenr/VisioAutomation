@@ -1,4 +1,4 @@
-﻿## Module manifest for module 'VisioPS'
+﻿# Module manifest for module 'VisioPS'
 #
 # HISTORY
 # -------
