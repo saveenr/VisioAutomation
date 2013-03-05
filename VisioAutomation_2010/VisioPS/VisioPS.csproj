@@ -85,6 +85,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Close_VisioDocument.cs" />
+    <Compile Include="Commands\Remove_VisioPage.cs" />
     <Compile Include="Commands\Test_VisioApplication.cs" />
     <Compile Include="Commands\Get_VisioAutomationScriptingSession.cs" />
     <Compile Include="Commands\Get_VisioAutomationAssembly.cs" />
@@ -98,7 +100,6 @@
     <Compile Include="objects\VisioPSSessionContext.cs" />
     <Compile Include="enums\ResultType.cs" />
     <Compile Include="Commands\Get_VisioCell.cs" />
-    <Compile Include="Commands\Close_VisioDrawing.cs" />
     <Compile Include="Commands\New_VisioShape.cs" />
     <Compile Include="Commands\Invoke_VisioDuplicateShape.cs" />
     <Compile Include="Commands\Export_VisioSelectionAsXHTML.cs" />
