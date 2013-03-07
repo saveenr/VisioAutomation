@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Close_VisioDocument.cs" />
+    <Compile Include="Commands\Set_VisioPageProperty.cs" />
     <Compile Include="Commands\Set_VisioShapeProperty.cs" />
     <Compile Include="Commands\Remove_VisioPage.cs" />
     <Compile Include="Commands\Test_VisioApplication.cs" />
