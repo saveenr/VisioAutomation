@@ -6,11 +6,8 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsData.Import, "VisioOrgChart")]
     public class Import_VisioOrgChart : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = true,ParameterSetName = "filename")]
+        [SMA.Parameter(Mandatory = true,Position= 0)]
         public string Filename { get; set; }
-
-        [SMA.Parameter(Mandatory = true, ParameterSetName = "xml")]
-        public string Xml { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -20,17 +17,8 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            if (this.Filename != null)
-            {
-                var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, this.Filename);
-                this.WriteObject(oc);
-            }
-            else if (this.Xml!= null)
-            {
-                var x = System.Xml.Linq.XDocument.Parse(this.Xml);
-                var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(ScriptingSession, x);
-                this.WriteObject(oc);
-            }
+            var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, this.Filename);
+            this.WriteObject(oc);
         }
     }
 }

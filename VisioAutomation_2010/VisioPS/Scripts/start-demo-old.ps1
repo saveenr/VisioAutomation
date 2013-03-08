@@ -33,7 +33,7 @@
 ##################################################################################################
 ##
 param(
-  $file=".\demo.ps1", 
+  $file=".\demo.txt", 
   [int]$command=0, 
   [System.ConsoleColor]$promptColor="Yellow", 
   [System.ConsoleColor]$commandColor="White", 

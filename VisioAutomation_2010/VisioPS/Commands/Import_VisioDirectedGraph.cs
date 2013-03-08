@@ -6,7 +6,7 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsData.Import, "VisioDirectedGraph")]
     public class Import_VisioDirectedGraph : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = true)]
+        [SMA.Parameter(Mandatory = true, Position = 0)]
         public string Filename { get; set; }
 
         protected override void ProcessRecord()

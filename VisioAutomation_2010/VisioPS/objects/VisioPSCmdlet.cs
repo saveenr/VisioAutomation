@@ -42,6 +42,8 @@ namespace VisioPS
         {
             if (!System.IO.File.Exists(file))
             {
+                this.WriteVerboseEx("Filename: {0}",file);
+                this.WriteVerboseEx("Abs Filename: {0}", System.IO.Path.GetFullPath(file));
                 var exc = new System.IO.FileNotFoundException(file);
                 var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
                 this.WriteError(er);
