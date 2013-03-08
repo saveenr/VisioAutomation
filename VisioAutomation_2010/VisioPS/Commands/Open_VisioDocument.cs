@@ -11,8 +11,18 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var doc = scriptingsession.Document.Open(this.Filename);
-            this.WriteObject(doc);
+
+            var ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
+            if (ext == ".vss" || ext == ".vst")
+            {
+                var doc = scriptingsession.Document.OpenStencil(this.Filename);
+                this.WriteObject(doc);                
+            }
+            else
+            {
+                var doc = scriptingsession.Document.Open(this.Filename);
+                this.WriteObject(doc);                
+            }
         }
     }
 }

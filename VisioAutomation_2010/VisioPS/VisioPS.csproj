@@ -86,8 +86,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Close_VisioDocument.cs" />
-    <Compile Include="Commands\Set_VisioPageProperty.cs" />
-    <Compile Include="Commands\Set_VisioShapeProperty.cs" />
+    <Compile Include="Commands\Set_VisioPageCell.cs" />
+    <Compile Include="Commands\Set_VisioShapeCell.cs" />
     <Compile Include="Commands\Remove_VisioPage.cs" />
     <Compile Include="Commands\Test_VisioApplication.cs" />
     <Compile Include="Commands\Get_VisioAutomationScriptingSession.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Commands\Invoke_VisioAlignShape.cs" />
     <Compile Include="Commands\Invoke_VisioDistributeShape.cs" />
     <Compile Include="Commands\Select_VisioShape.cs" />
-    <Compile Include="Commands\Set_VisioCell.cs" />
+    <Compile Include="Commands\Set_VisioShapeSheet.cs" />
     <Compile Include="Commands\New_VisioBezier.cs" />
     <Compile Include="Commands\Invoke_VisioDraw.cs" />
     <Compile Include="Commands\New_VisioPieSlice.cs" />
@@ -170,7 +170,6 @@
     <Compile Include="Commands\Stop_VisioApplication.cs" />
     <Compile Include="Commands\Undo_Visio.cs" />
     <Compile Include="Commands\Remove_VisioGroup.cs" />
-    <Compile Include="Commands\Open_VisioStencil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="objects\ModuleGlobals.cs" />
     <Compile Include="Commands\Set_VisioZoom.cs" />

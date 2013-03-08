@@ -1,8 +1,9 @@
 #First import the VisioPS
-Import-Module VisioPS
+Import-Module D:\saveenr\code\visioautomation\VisioAutomation_2010\VisioPS\bin\Debug\VisioPS.dll
+#Import-Module VisioPS
 
 # There are a lot of Visio-related cmdlets
-Get-Command -Module VisioPS | Out-GridView
+Get-Command -Module VisioPS
 
 #We could connect to a Visio instance with 
 #    $visapp = Connect-VisioApplication
@@ -27,7 +28,7 @@ Get-Help Remove-VisioShape
 
 #Let's do this the normal way
 #First load the Stencil
-$basic_u = Open-VisioStencil basic_u.vss
+$basic_u = Open-VisioDocument basic_u.vss
 
 #Then Get a master from the stencil
 $master = Get-VisioMaster "Rectangle" $basic_u
@@ -35,10 +36,9 @@ $master = Get-VisioMaster "Rectangle" $basic_u
 #Now drop the shape somewhere
 $shape = New-VisioShape $master 3,3
 
-#Set text
-$shape.Text = "Hello"
+Write-Host $shape
 
-#Set text (a better way)
+#Set text
 Set-VisioText "Hello World"
 
 #Let's drop a lot of shapes
@@ -57,12 +57,58 @@ New-VisioPage
 New-VisioPage –Width 5.0 –Height 2.0 –Name “MyPage1”
 Set-VisioPageLayout –Orientation Landscape
 Set-VisioPageLayout –Orientation Portrait
+Set-VisioPageCell -PageWidth 10 -PageHeight 5
 
 $pages = Get-VisioPage *
 $pages.Count
 
 Remove-VisioPage
-Remove-VisioPage $pages
 
-#Close Notice it works on the current document
-Close-VisioDocument
+New-VisioShape $master 1,1 | Out-Null
+New-VisioShape $master 3,3 | Out-Null
+New-VisioShape $master 5,5 | Out-Null
+New-VisioShape $master 7,7 | Out-Null
+
+Select-VisioShape Invert
+Select-VisioShape None
+Select-VisioShape All
+Set-VisioText -Text "A"
+Set-VisioText -Text "A","B"
+Set-VisioText -Text "A","B","C","D", "E" 
+Set-VisioShapeCell -Width 1.0 
+Get-Help Set-VisioShapeCell
+Set-VisioShapeCell -CharColor "rgb(255,255,255)" -LineWeight 4pt -LinePattern 10 
+Undo-Visio
+
+Invoke-VisioAlignShape –Horizontal Left
+Undo-Visio
+Invoke-VisioAlignShape –Vertical Bottom
+Undo-Visio
+
+$shapes = Get-VisioShape Selected
+$dc = Get-VisioMaster "Dynamic Connector" $basic_u
+
+
+New-VisioConnection -From $shapes[0] -To $shapes[1] -Master $dc
+Undo-Visio
+New-VisioConnection -From $shapes[0],$shapes[1] -To $shapes[1],$shapes[2] -Master $dc
+
+Set-VisioCustomProperty -Name "Prop1" -Value "Prop2"
+
+
+Select-VisioShape All
+Remove-VisioShape
+
+$grid= New-VisioGridLayout -Master $master -Columns 4 -Rows 6 -CellWidth 1.0 -CellHeight 0.5 
+Invoke-VisioDraw -GridLayout $grid
+
+Undo-Visio
+
+#To draw an Organizational chart. Just create an XML as shown below:
+notepad orgchart1.xml
+
+#Then load the XML:
+$orgchart= Import-VisioOrgChart -Filename orgchart1.xml
+
+#Then the Invoke-VisioDraw cmdlet to render it.
+Invoke-VisioDraw -OrgChart $orgchart

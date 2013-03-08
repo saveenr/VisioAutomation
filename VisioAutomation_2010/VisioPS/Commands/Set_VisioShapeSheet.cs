@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioCell")]
-    public class Set_VisioCell : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioShapeSheet")]
+    public class Set_VisioShapeSheet : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public VisioAutomation.ShapeSheet.SRC[] Cell { get; set; }

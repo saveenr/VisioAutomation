@@ -7,7 +7,6 @@ namespace VisioPS.Commands
     public class New_VisioPage : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)] public double Width = -1.0;
-
         [SMA.Parameter(Mandatory = false)] public double Height = -1.0;
 
         [SMA.Parameter(Mandatory = false)]

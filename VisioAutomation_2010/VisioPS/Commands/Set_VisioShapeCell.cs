@@ -6,8 +6,8 @@ using VA=VisioAutomation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioShapeProperty")]
-    public class Set_VisioShapeProperty: VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioShapeCell")]
+    public class Set_VisioShapeCell: VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)] public string Width { get; set; }
         [SMA.Parameter(Mandatory = false)] public string Height { get; set; }
@@ -188,7 +188,11 @@ namespace VisioPS.Commands
             }
 
             var page = scriptingsession.Page.Get();
-            update.Execute(page);
+
+            using (var undoscope = new VA.Application.UndoScope(this.ScriptingSession.VisioApplication, "SetShapeCells"))
+            {
+                update.Execute(page);                
+            }
         }
     }
 }
