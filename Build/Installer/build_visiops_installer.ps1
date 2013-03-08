@@ -8,13 +8,15 @@ $verstring = "1.1.2"
 $mypath = $MyInvocation.MyCommand.path
 $visioautomation_path = Resolve-Path ( Join-Path $MyInvocation.MyCommand.path "..\..\.." )
 $bindebug_path = Resolve-Path( Join-Path $visioautomation_path  "visioautomation_2010\VisioPS\bin\Debug" )
+$wixbin_path = Resolve-Path( Join-Path $visioautomation_path  "Build\Installer\wix36-binaries" )
+
 $mydocs = join-Path $env:USERPROFILE Documents
 $zipfile = Join-Path $mydocs ( "VisioPS_" + $verstring + ".ZIP")
 
 Export-PowerShellModuleInstaller `
     -InputFolder $bindebug_path `
     -OutputFolder $mydocs `
-    -WIXBinFolder "D:\saveenr\code\visioautomation\Build\Installer\wix36-binaries" `
+    -WIXBinFolder $wixbin_path `
 	-InstallType "PowerShellUserModule" `
     -ProductNameLong "Visio Powershell Module" `
     -ProductNameShort "VisioPS" `
