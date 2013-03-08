@@ -1,11 +1,13 @@
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
-Remove-Module CodePackage
+#Remove-Module CodePackage
 Import-Module .\CodePackage.psm1
 
 $verstring = "1.1.2"
-$bindebug_path = "D:\saveenr\code\visioautomation\VisioAutomation_2010\VisioPS\bin\Debug"
+$mypath = $MyInvocation.MyCommand.path
+$visioautomation_path = Resolve-Path ( Join-Path $MyInvocation.MyCommand.path "..\..\.." )
+$bindebug_path = Resolve-Path( Join-Path $visioautomation_path  "visioautomation_2010\VisioPS\bin\Debug" )
 $mydocs = join-Path $env:USERPROFILE Documents
 $zipfile = Join-Path $mydocs ( "VisioPS_" + $verstring + ".ZIP")
 

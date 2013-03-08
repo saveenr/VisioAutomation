@@ -3,10 +3,11 @@
 
 # HISTORY
 # 2013-03-08 - Version 1.1
-# Now MSI filename uses version instead of datestring
+# - Now MSI filename uses version instead of datestring
+# - Fixed Bug in Temp Folder Deletion
 #
 # 2013-02-23 - Version 1.0
- 
+# - Initial version
 
 Set-StrictMode -Version 2 
 $ErrorActionPreference = "Stop"
@@ -487,4 +488,26 @@ function Export-ZIPFolder
     }
 }
 
+function Remove-InstalledProgram
+{
+    param (
+        [parameter(Mandatory=$true)] [string] $Name
+    )
+    PROCESS 
+    {
+        $filter = "Name = '$Name'"
+        $app = Get-WmiObject -Class Win32_Product -Filter $filter
+        if ($app -eq $null)
+        {
+            Write-Verbose "Program not installed"
+        }
+        else
+        {
+            Write-Verbose "App is installed"
+            Write-Verbose "Uninstalling now"
+            $app.Uninstall()
+            Write-Verbose "Finished Uninstalling"   
+        }
+    }
+}
 
