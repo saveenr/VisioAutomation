@@ -2,8 +2,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsLifecycle.Stop, "VisioApplication")]
-    public class Stop_VisioApplication : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Close, "VisioApplication")]
+    public class Close_VisioApplication : VisioPSCmdlet
     {
         protected override void ProcessRecord()
         {

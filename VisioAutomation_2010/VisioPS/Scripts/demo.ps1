@@ -11,11 +11,10 @@ Get-Command -Module VisioPS
 New-VisioApplication
 
 #Create a new document
-New-VisioDocument
+New-VisioDocument | Out-Null
 
 #Draw a rectangle
-New-VisioRectangle 0 0 1 1
-
+New-VisioRectangle 0 0 1 1 | Out-Null
 
 
 #get rid of that shape
@@ -36,10 +35,10 @@ $master = Get-VisioMaster "Rectangle" $basic_u
 #Now drop the shape somewhere
 $shape = New-VisioShape $master 3,3
 
-Write-Host $shape
-
 #Set text
 Set-VisioText "Hello World"
+
+Remove-VisioShape
 
 #Let's drop a lot of shapes
 Get-Help New-VisioShape
@@ -57,18 +56,16 @@ New-VisioPage
 New-VisioPage –Width 5.0 –Height 2.0 –Name “MyPage1”
 Set-VisioPageLayout –Orientation Landscape
 Set-VisioPageLayout –Orientation Portrait
-Set-VisioPageCell -PageWidth 10 -PageHeight 5
+Set-VisioPageCell -PageWidth 1 -PageHeight 1
 
 $pages = Get-VisioPage *
 $pages.Count
 
 Remove-VisioPage
 
-New-VisioShape $master 1,1 | Out-Null
-New-VisioShape $master 3,3 | Out-Null
-New-VisioShape $master 5,5 | Out-Null
-New-VisioShape $master 7,7 | Out-Null
-
+$shapes = New-VisioShape $master 1,1 ,3,3, 5,5, 7,7 
+Select-VisioShape None
+Select-VisioShape -Shapes $shape[0]
 Select-VisioShape Invert
 Select-VisioShape None
 Select-VisioShape All
@@ -84,6 +81,9 @@ Invoke-VisioAlignShape –Horizontal Left
 Undo-Visio
 Invoke-VisioAlignShape –Vertical Bottom
 Undo-Visio
+
+New-VisioGroup
+Remove-VisioGroup
 
 $shapes = Get-VisioShape Selected
 $dc = Get-VisioMaster "Dynamic Connector" $basic_u
@@ -105,10 +105,31 @@ Invoke-VisioDraw -GridLayout $grid
 Undo-Visio
 
 #To draw an Organizational chart. Just create an XML as shown below:
-notepad orgchart1.xml
-
 #Then load the XML:
-$orgchart= Import-VisioOrgChart -Filename orgchart1.xml
+$orgchart= Import-VisioOrgChart -Filename "orgchart1.xml"
 
 #Then the Invoke-VisioDraw cmdlet to render it.
 Invoke-VisioDraw -OrgChart $orgchart
+
+$dg1 = Import-VisioDirectedGraph -Filename "directegraph1.xml"
+Invoke-VisioDraw $dg1
+
+$dg1 = Import-VisioDirectedGraph -Filename "directegraph2.xml"
+Invoke-VisioDraw $dg1
+
+#Sometimes you accidentally close Visio
+Close-VisioApplication
+
+#What happens now
+New-VisioDocument
+
+Test-VisioApplication 
+New-VisioApplication
+Test-VisioApplication
+
+Test-VisioDocument
+
+#IF you need to get the current applciation instance
+Get-VisioApplication
+
+
