@@ -11,11 +11,16 @@ $bindebug_path = Resolve-Path( Join-Path $visioautomation_path  "visioautomation
 $wixbin_path = Resolve-Path( Join-Path $visioautomation_path  "Build\Installer\wix36-binaries" )
 
 $mydocs = join-Path $env:USERPROFILE Documents
-$zipfile = Join-Path $mydocs ( "VisioPS_" + $verstring + ".ZIP")
+$output_folder = Join-Path $mydocs "Visio Powershell Distribution"
+$zipfile = Join-Path $output_folder ( "VisioPS_" + $verstring + ".zip")
+
+if (!(Test-Path $output_folder)) {
+    New-Item -Path $output_folder -ItemType Directory
+}
 
 Export-PowerShellModuleInstaller `
     -InputFolder $bindebug_path `
-    -OutputFolder $mydocs `
+    -OutputFolder $output_folder `
     -WIXBinFolder $wixbin_path `
 	-InstallType "PowerShellUserModule" `
     -ProductNameLong "Visio Powershell Module" `
