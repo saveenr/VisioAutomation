@@ -22,6 +22,8 @@ namespace VisioPS.Commands
             {
                 scripting_session.Page.SetName(this.Name);
             }
+
+            this.WriteObject(page);
         }
     }
 }
