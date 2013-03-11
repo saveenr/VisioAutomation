@@ -12,9 +12,9 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var x = System.Xml.Linq.XDocument.Parse(this.Xml);
-            var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(ScriptingSession, x);
-            this.WriteObject(oc);
+            var xml = System.Xml.Linq.XDocument.Parse(this.Xml);
+            var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(ScriptingSession, xml);
+            this.WriteObject(orgchart);
         }
     }
 }

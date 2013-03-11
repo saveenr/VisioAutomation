@@ -55,4 +55,22 @@
         </Members>
     </Type> 
 
+    <Type> 
+      <Name>Microsoft.Office.Interop.Visio.MasterClass</Name>
+      <Members>
+        <MemberSet>
+         <Name>PSStandardMembers</Name>
+         <Members>
+           <PropertySet>
+             <Name>DefaultDisplayPropertySet</Name>
+             <ReferencedProperties>
+               <Name>ID</Name>
+               <Name>NameU</Name>
+             </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+        </Members>
+    </Type> 
+
 </Types>

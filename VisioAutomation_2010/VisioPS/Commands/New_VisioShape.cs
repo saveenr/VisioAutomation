@@ -28,7 +28,6 @@ namespace VisioPS.Commands
             var page = scriptingsession.Page.Get();
             var shape_objects = VA.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
 
-
             scriptingsession.Selection.SelectNone();
 
             if (this.NoSelect)

@@ -21,8 +21,8 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var r = scriptingsession.Draw.Line(X0, Y0, X1, Y1);
-            this.WriteObject(r);
+            var line = scriptingsession.Draw.Line(X0, Y0, X1, Y1);
+            this.WriteObject(line);
         }
     }
 }
