@@ -186,6 +186,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="VisioPS.Types.ps1xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="VisioPS.psd1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
