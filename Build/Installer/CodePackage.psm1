@@ -2,6 +2,9 @@
 # Cmdlets to help distribute code
 
 # HISTORY
+# 2013-03-11 - Version 1.2
+# - Added cmdlet to cleanly install a powershell module
+#
 # 2013-03-08 - Version 1.1
 # - Now MSI filename uses version instead of datestring
 # - Fixed Bug in Temp Folder Deletion
@@ -508,6 +511,42 @@ function Remove-InstalledProgram
             $app.Uninstall()
             Write-Verbose "Finished Uninstalling"   
         }
+    }
+}
+
+function Install-PSModuleFromFolder
+{
+    param (
+        [parameter(Mandatory=$true)] [string] $Folder,
+        [parameter(Mandatory=$true)] [string] $Name
+    )
+    PROCESS 
+    {
+        $mydocs = join-Path $env:USERPROFILE Documents
+        $output_folder = Join-Path $mydocs "WindowsPowerShell\Modules"
+        $output_folder = Join-Path $output_folder $Name
+        
+        Write-Verbose $output_folder
+        Write-Host "copying"
+
+        if (Test-Path $output_folder)
+        {
+            foreach ($i in Get-ChildItem $output_folder)
+            {
+                $fn =  $i.FullName
+                Write-Verbose "Removing $fn"
+                Remove-Item $i.FullName -Recurse -Force
+            }
+        }
+        else
+        {
+            New-Item $output_folder -ItemType Directory
+        }
+
+        Write-Host "copying"
+
+        &robocopy $Folder $output_folder /MIR /A-:R /XF *.pdb /XF *.ignore 
+
     }
 }
 
