@@ -10,20 +10,17 @@ namespace VisioPS.Commands
         [SMA.Parameter(ParameterSetName="named",Position=0, Mandatory = false)]
         public string Name=null;
 
-        [SMA.Parameter(ParameterSetName = "active", Position = 0, Mandatory = false)]
-        public SMA.SwitchParameter ActivePage;
-
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
             var application = scriptingsession.VisioApplication;
 
-            if (this.ActivePage)
+            if (Name == null)
             {
                 // return the active page
                 this.WriteObject(scriptingsession.Page.Get());
             }
-            else if (Name=="*" || Name==null)
+            else if (Name=="*" )
             {
                 // return all pages
                 var active_document = application.ActiveDocument;

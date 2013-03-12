@@ -1,5 +1,25 @@
-﻿<Types> 
-    <Type> 
+﻿<Types>
+
+  <Type>
+    <Name>Microsoft.Office.Interop.Visio.ApplicationClass</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>Name</Name>
+              <Name>ID</Name>
+              <Name>Version</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
+  
+  <Type> 
       <Name>Microsoft.Office.Interop.Visio.DocumentClass</Name>
       <Members>
         <MemberSet>
@@ -8,8 +28,8 @@
            <PropertySet>
              <Name>DefaultDisplayPropertySet</Name>
              <ReferencedProperties>
-               <Name>ID</Name>
                <Name>Name</Name>
+               <Name>ID</Name>
              </ReferencedProperties>
           </PropertySet>
         </Members>
@@ -26,8 +46,8 @@
            <PropertySet>
              <Name>DefaultDisplayPropertySet</Name>
              <ReferencedProperties>
-               <Name>ID</Name>
                <Name>NameU</Name>
+               <Name>ID</Name>
                <Name>Master</Name>
              </ReferencedProperties>
           </PropertySet>
@@ -45,9 +65,9 @@
            <PropertySet>
              <Name>DefaultDisplayPropertySet</Name>
              <ReferencedProperties>
-               <Name>ID</Name>
                <Name>NameU</Name>
-               <Name>Background</Name>
+               <Name>ID</Name>
+               <Name>Type</Name>
              </ReferencedProperties>
           </PropertySet>
         </Members>
@@ -64,13 +84,76 @@
            <PropertySet>
              <Name>DefaultDisplayPropertySet</Name>
              <ReferencedProperties>
-               <Name>ID</Name>
                <Name>NameU</Name>
+               <Name>ID</Name>
              </ReferencedProperties>
           </PropertySet>
         </Members>
       </MemberSet>
         </Members>
-    </Type> 
+    </Type>
+
+  <Type>
+    <Name>Microsoft.Office.Interop.Visio.WindowClass</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>Caption</Name>
+              <Name>ID</Name>
+              <Name>WindowHandle</Name>
+              <Name>WindowHandle32</Name>
+              <Name>SubType</Name>
+              <Name>Visible</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
+
+
+  <Type>
+    <Name>Microsoft.Office.Interop.Visio.CellClass</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>NameU</Name>
+              <Name>ID</Name>
+              <Name>FormulaU</Name>
+              <Name>ResultIU</Name>
+              <Name>Section</Name>
+              <Name>Row</Name>
+              <Name>Column</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
+
+  <Type>
+    <Name>Microsoft.Office.Interop.Visio.SectionClass</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>Count</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
 
 </Types>
