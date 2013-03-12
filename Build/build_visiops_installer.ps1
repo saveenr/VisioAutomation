@@ -4,11 +4,11 @@ $ErrorActionPreference = "Stop"
 #Remove-Module CodePackage
 Import-Module .\CodePackage.psm1
 
-$verstring = "1.1.2"
+$verstring = "1.1.3"
 $mypath = $MyInvocation.MyCommand.path
-$visioautomation_path = Resolve-Path ( Join-Path $MyInvocation.MyCommand.path "..\..\.." )
+$visioautomation_path = Resolve-Path ( Join-Path $MyInvocation.MyCommand.path "..\.." )
 $bindebug_path = Resolve-Path( Join-Path $visioautomation_path  "visioautomation_2010\VisioPS\bin\Debug" )
-$wixbin_path = Resolve-Path( Join-Path $visioautomation_path  "Build\Installer\wix36-binaries" )
+$wixbin_path = Resolve-Path( Join-Path $visioautomation_path  "Build\wix36-binaries" )
 
 $mydocs = join-Path $env:USERPROFILE Documents
 $output_folder = Join-Path $mydocs "Visio Powershell Distribution"
