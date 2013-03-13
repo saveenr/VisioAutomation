@@ -2,14 +2,6 @@
 
 namespace VisioAutomation.Layout.Models.DirectedGraph
 {
-    public enum LayoutDirection
-    {
-        TopToBottom,
-        BottomToTop,
-        LeftToRight,
-        RightToLeft
-    }
-
     public class LayoutOptions
     {
         public VA.Drawing.Size ResizeBorderWidth { get; set; }
