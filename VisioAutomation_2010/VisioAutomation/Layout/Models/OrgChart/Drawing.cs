@@ -7,16 +7,16 @@ namespace VisioAutomation.Layout.Models.OrgChart
 {
     public class Drawing
     {
-        public List<Node> Roots { get; set; }
+        public List<Node> OrgCharts { get; set; }
 
         public Drawing()
         {
-            this.Roots = new List<Node>();
+            this.OrgCharts = new List<Node>();
         }
 
         public void Render(IVisio.Application app)
         {
-            var layout = new OrgChartLayout();
+            var layout = new OrgChartRenderer();
             layout.RenderToVisio(this, app);
         }
     }

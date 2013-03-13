@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.OrgChart
             }
             scriptingsession.WriteVerbose( "Finished Walking XML");
             var oc = new OCMODEL.Drawing();
-            oc.Roots.Add(ocroot);
+            oc.OrgCharts.Add(ocroot);
             scriptingsession.WriteVerbose( "Finished Creating OrgChart model");
             return oc;
         }

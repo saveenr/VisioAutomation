@@ -50,11 +50,11 @@ namespace TestVisioAutomation
 
             n_a.Size = new VA.Drawing.Size(4, 2);
 
-            orgchart.Roots.Add(n_a);
+            orgchart.OrgCharts.Add(n_a);
 
             var app = new IVisio.Application();
 
-            var renderer = new OCMODEL.OrgChartLayout();
+            var renderer = new OCMODEL.OrgChartRenderer();
             orgchart.Render(app);
 
             var active_page = app.ActivePage;
@@ -103,8 +103,8 @@ namespace TestVisioAutomation
 
             n_a.Size = new VA.Drawing.Size(4, 2);
 
-            orgchart.Roots.Add(n_a);
-            orgchart.Roots.Add(n_a);
+            orgchart.OrgCharts.Add(n_a);
+            orgchart.OrgCharts.Add(n_a);
 
             var app = new IVisio.Application();
 

@@ -198,7 +198,7 @@
     <Compile Include="Layout\Models\OrgChart\LayoutOptions.cs" />
     <Compile Include="Layout\Models\OrgChart\Node.cs" />
     <Compile Include="Layout\Models\OrgChart\NodeList.cs" />
-    <Compile Include="Layout\Models\OrgChart\OrgChartLayout.cs" />
+    <Compile Include="Layout\Models\OrgChart\OrgChartRenderer.cs" />
     <Compile Include="Layout\Models\InternalTree\DictionaryUtil.cs" />
     <Compile Include="Layout\Models\InternalTree\LayoutDirection.cs" />
     <Compile Include="Layout\Models\InternalTree\Node.cs" />

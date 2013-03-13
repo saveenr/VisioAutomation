@@ -228,7 +228,7 @@ namespace VisioAutomation.Scripting.Commands
         public void OrgChart(ORGCHARTLAYOUT.Drawing drawing)
         {
             this.Session.WriteVerbose( "Start OrgChart Rendering");
-            var renderer = new ORGCHARTLAYOUT.OrgChartLayout();
+            var renderer = new ORGCHARTLAYOUT.OrgChartRenderer();
             var application = this.Session.VisioApplication;
             drawing.Render(application);
             var active_page = application.ActivePage;

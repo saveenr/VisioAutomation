@@ -8,11 +8,11 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout.Models.OrgChart
 {
-    public class OrgChartLayout
+    public class OrgChartRenderer
     {
         public LayoutOptions LayoutOptions;
 
-        public OrgChartLayout()
+        public OrgChartRenderer()
         {
             this.LayoutOptions = new LayoutOptions();
         }
@@ -36,11 +36,11 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 throw new System.ArgumentNullException("app");
             }
 
-            if (orgchartdrawing.Roots.Count < 1)
+            if (orgchartdrawing.OrgCharts.Count < 1)
             {
                 throw new System.ArgumentException("orgchart must have at least one root");                
             }
-            foreach (var root in orgchartdrawing.Roots)
+            foreach (var root in orgchartdrawing.OrgCharts)
             {
                 if (root == null)
                 {
@@ -58,11 +58,11 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
             var trees = new List<IList<Node<object>>>();
  
-            foreach (var root in orgchartdrawing.Roots)
+            foreach (var root in orgchartdrawing.OrgCharts)
             {
                 // Construct a layout tree from the hierarchy
                 var treenodes = VA.Internal.TreeOps.CopyTree(
-                    orgchartdrawing.Roots[0],
+                    orgchartdrawing.OrgCharts[0],
                     n => n.Children,
                     n => node_to_layout_node(n),
                     (p, c) => p.AddChild(c));
