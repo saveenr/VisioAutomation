@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            var dg_model = new VA.Layout.Models.DirectedGraph.Drawing();           
+            var dg_model = new VA.Layout.Models.DirectedGraph.Drawing();
             this.WriteObject(dg_model);
         }
     }
