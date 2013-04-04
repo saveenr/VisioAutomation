@@ -66,7 +66,7 @@ namespace TestVisioAutomationVDX
             GetPage10_layers(doc);
             GetPage11_Add_color(doc);
             GetPage12_AdjustToTextSize(doc);
-            //GetPage13_MultipleConnectors(doc);
+            GetPage13_MultipleConnectors(doc);
 
             var w1 = new VA.VDX.Elements.DocumentWindow();
             w1.ShowGrid = false;
@@ -528,6 +528,16 @@ namespace TestVisioAutomationVDX
             page.Shapes.Add(shape3);
 
             page.ConnectShapesViaConnector(shape3, shape1, shape2);
+
+            // Add the Connector
+            var shape4 = VA.VDX.Elements.Shape.CreateDynamicConnector(doc);
+            shape4.XForm1D.EndY.Result = 0;
+            shape4.Line = new VA.VDX.Elements.Line();
+            shape4.Line.EndArrow.Result = 3;
+            page.Shapes.Add(shape4);
+
+            page.ConnectShapesViaConnector(shape4, shape1, shape2);
+
             return page;
         }
 

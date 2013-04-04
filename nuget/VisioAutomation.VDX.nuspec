@@ -1,7 +1,7 @@
 <package >
   <metadata>
     <id>VisioAutomation.VDX</id>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>VisioAutomation.VDX helps create Visio diagrams using the VDX file format. It does not require a running instance of Visio and is useful for server-side diagram creation.</description>
     <releaseNotes>
-	Now adding custom properties works correctly. Also, IDs for custom properties are automatically calculated.
+	Added extra error checking to ensure that document windows are pointing to existing pages
     </releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Visio VDX</tags>
@@ -20,6 +20,6 @@
     </frameworkAssemblies>  
   </metadata>
   <files>
-    <file src="..\VisioAutomation_2010\VisioAutomation.VDX\bin\debug\*.dll" target="lib\net40"/>
+    <file src="..\VisioAutomation.VDX\VisioAutomation.VDX\bin\debug\*.dll" target="lib\net40"/>
   </files>
 </package>
