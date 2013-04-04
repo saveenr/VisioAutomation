@@ -36,7 +36,18 @@ namespace VisioAutomation.VDX.Elements
 
         public double? TabSplitterPos { get; set; }
 
+        internal void ValidatePage( VA.VDX.Elements.Drawing drawing )
+        {
+            if (this.Page < 0)
+            {
+                throw new System.ArgumentException("Negative Page not Allowed in Document Window");
+            }
+            if (this.Page >= drawing.Pages.Count)
+            {
+                throw new System.ArgumentException("Document Window pointing to Page that does not exist");
+            }
 
+        }
         public override void AddToElement(System.Xml.Linq.XElement parent)
         {
             string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;

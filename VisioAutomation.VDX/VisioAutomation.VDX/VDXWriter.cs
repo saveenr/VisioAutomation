@@ -1,3 +1,4 @@
+using System;
 using SXL=System.Xml.Linq;
 using VA=VisioAutomation;
 using VisioAutomation.VDX.Internal.Extensions;
@@ -33,6 +34,15 @@ namespace VisioAutomation.VDX
                 throw new System.ArgumentNullException("output_filename");
             }
 
+            // Validate that all Document windows refer to an existing page
+            foreach (var window in vdoc.Windows)
+            {
+                if (window is VA.VDX.Elements.DocumentWindow)
+                {
+                    var docwind = (VA.VDX.Elements.DocumentWindow) window;
+                    docwind.ValidatePage(vdoc);
+                }
+            }
             this.CreateVDX(vdoc,vdx_xml_doc);
 
             // important to use DisableFormatting - Visio is very sensitive to whitespace in the <Text> element when there is complex formatting

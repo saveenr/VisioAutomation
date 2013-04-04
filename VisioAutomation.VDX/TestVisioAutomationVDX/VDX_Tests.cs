@@ -66,13 +66,14 @@ namespace TestVisioAutomationVDX
             GetPage10_layers(doc);
             GetPage11_Add_color(doc);
             GetPage12_AdjustToTextSize(doc);
+            //GetPage13_MultipleConnectors(doc);
 
             var w1 = new VA.VDX.Elements.DocumentWindow();
             w1.ShowGrid = false;
             w1.ShowGuides = false;
             w1.ShowConnectionPoints = false;
             w1.ShowPageBreaks = false;
-            w1.Page = 1;
+            w1.Page = 0; // point to first page
             
             doc.Windows.Add(w1);
 
@@ -501,6 +502,36 @@ namespace TestVisioAutomationVDX
             return page;
         }
 
+        private VA.VDX.Elements.Page GetPage13_MultipleConnectors(VA.VDX.Elements.Drawing doc)
+        {
+            var page = new VA.VDX.Elements.Page(8, 4);
+            doc.Pages.Add(page);
+
+            // find the id of the master for rounded rectangles
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
+
+            // Add the first shape
+            var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 1, 3);
+            page.Shapes.Add(shape1);
+            shape1.Text.Add("Page13Shape1");
+
+            // Add the second shape
+            var shape2 = new VA.VDX.Elements.Shape(rounded_rect_id, 5, 3);
+            page.Shapes.Add(shape2);
+            shape2.Text.Add("Page13Shape2");
+
+            // Add the Connector
+            var shape3 = VA.VDX.Elements.Shape.CreateDynamicConnector(doc);
+            shape3.XForm1D.EndY.Result = 0;
+            shape3.Line = new VA.VDX.Elements.Line();
+            shape3.Line.EndArrow.Result = 3;
+            page.Shapes.Add(shape3);
+
+            page.ConnectShapesViaConnector(shape3, shape1, shape2);
+            return page;
+        }
+
+
         [TestMethod]
         public void CreateCustomTemplateVDX()
         {
@@ -606,6 +637,7 @@ namespace TestVisioAutomationVDX
             VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
+
 
         public static void DeleteXmlErrorLog(IVisio.Application app)
         {
