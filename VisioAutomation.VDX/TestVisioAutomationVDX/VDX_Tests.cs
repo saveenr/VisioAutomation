@@ -73,7 +73,7 @@ namespace TestVisioAutomationVDX
             w1.ShowGuides = false;
             w1.ShowConnectionPoints = false;
             w1.ShowPageBreaks = false;
-            w1.Page = 0; // point to first page
+            w1.Page = 0; // point to first pagees
             
             doc.Windows.Add(w1);
 
