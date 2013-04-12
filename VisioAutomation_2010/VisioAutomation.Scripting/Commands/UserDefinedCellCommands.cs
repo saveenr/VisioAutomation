@@ -16,7 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>>();
 
@@ -42,7 +43,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -63,7 +66,8 @@ namespace VisioAutomation.Scripting.Commands
        
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -92,7 +96,8 @@ namespace VisioAutomation.Scripting.Commands
       
         public void Set(IList<IVisio.Shape> target_shapes, VA.UserDefinedCells.UserDefinedCell userdefinedcell)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)

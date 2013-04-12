@@ -70,11 +70,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal halign)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -89,11 +86,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical valign)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -108,11 +102,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -130,7 +121,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double d)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -148,7 +141,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
@@ -168,7 +163,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, VA.Layout.SnapCornerPosition corner)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+            
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
@@ -187,7 +184,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+            
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -209,7 +208,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Stack(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double space)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (space < 0.0)
             {
@@ -238,7 +238,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
@@ -251,7 +253,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal align)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
             {
@@ -270,7 +274,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical align)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
             {
@@ -291,12 +297,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public int GetSelectedShapeCount()
         {
-            this.CheckApplication();
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                return 0;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var selection = Session.Selection.Get();
             return selection.Count;
@@ -304,7 +306,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Layout.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
@@ -319,7 +323,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Group(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             if (target_shapes == null)
             {
                 if (!this.Session.HasSelectedShapes())
@@ -345,7 +351,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Ungroup(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             if (target_shapes == null)
             {
                 if (this.Session.HasSelectedShapes())
@@ -368,7 +374,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetLock(IList<IVisio.Shape> target_shapes, VA.Layout.LockCells lockcells)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -394,7 +402,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -420,37 +430,6 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
-            }
-        }
-
-        private static IVisio.VisUICmds AlignmentToUICmd(VA.Drawing.AlignmentHorizontal a)
-        {
-            if (a == VA.Drawing.AlignmentHorizontal.Left)
-            {
-                return IVisio.VisUICmds.visCmdAlignObjectLeft;
-            }
-            if (a == VA.Drawing.AlignmentHorizontal.Center)
-            {
-                return IVisio.VisUICmds.visCmdAlignObjectCenter;
-            }
-            if (a == VA.Drawing.AlignmentHorizontal.Right)
-            {
-                return IVisio.VisUICmds.visCmdAlignObjectRight;
-            }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException();
-            }
-        }
-
-        private static IVisio.VisUICmds AlignmentToUICmd(VA.Drawing.AlignmentVertical a)
-        {
-            if (a == VA.Drawing.AlignmentVertical.Top) { return IVisio.VisUICmds.visCmdAlignObjectTop; }
-            if (a == VA.Drawing.AlignmentVertical.Center) { return IVisio.VisUICmds.visCmdAlignObjectMiddle; }
-            if (a == VA.Drawing.AlignmentVertical.Bottom) { return IVisio.VisUICmds.visCmdAlignObjectBottom; }
-            else
-            {
-                throw new System.ArgumentOutOfRangeException();
             }
         }
     }

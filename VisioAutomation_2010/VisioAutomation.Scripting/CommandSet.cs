@@ -5,6 +5,22 @@ using System.Linq;
 
 namespace VisioAutomation.Scripting
 {
+    [System.Serializable]
+    public class ScriptingException : System.Exception
+    {
+        public ScriptingException() { }
+        public ScriptingException(string message) : base(message) { }
+        public ScriptingException(string message, System.Exception inner) : base(message, inner) { }
+    }
+
+    [System.Serializable]
+    public class VisioApplicationException : ScriptingException
+    {
+        public VisioApplicationException() { }
+        public VisioApplicationException(string message) : base(message) { }
+        public VisioApplicationException(string message, System.Exception inner) : base(message, inner) { }
+    }
+
     public class CommandSet
     {
         // Keep a reference back to the parent session. This gives access to all other commands
@@ -16,6 +32,23 @@ namespace VisioAutomation.Scripting
             this.Session = session;
         }
 
+        protected void CheckVisioApplicationAvailable()
+        {
+            var has_app = this.Session.HasApplication;
+            if (!has_app)
+            {
+                throw new VisioApplicationException("No Visio Application available");
+            }
+        }
+
+        protected void CheckActiveDrawingAvailable()
+        {
+            if (!this.Session.HasActiveDrawing)
+            {
+                throw new VA.Scripting.ScriptingException("No Drawing available");
+            }
+
+        }
 
         internal static IEnumerable<System.Reflection.MethodInfo> GetCommandMethods(System.Type mytype)
         {
@@ -39,17 +72,9 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        protected void CheckApplication()
-        {
-            var has_app = this.Session.HasApplication();
-            if (!has_app)
-            {
-                throw new VA.AutomationException("No Visio Application is bound to to this session");
-            }
-        }
-
         protected IList<IVisio.Shape> GetTargetShapes(IList<IVisio.Shape> shapes)
         {
+            this.CheckVisioApplicationAvailable();
             if (shapes == null)
             {
                 // If no collection of shapes were passed in then use the selection
@@ -65,6 +90,8 @@ namespace VisioAutomation.Scripting
 
         protected int GetTargetSelection(IList<IVisio.Shape> shapes)
         {
+            this.CheckVisioApplicationAvailable();
+
             if (shapes == null)
             {
                 this.Session.WriteVerbose("GetTargetSelection: Targeting shapes from active selection");
@@ -86,6 +113,8 @@ namespace VisioAutomation.Scripting
 
         protected IVisio.Shape GetTargetShape( IVisio.Shape shape)
         {
+            this.CheckVisioApplicationAvailable();
+
             if (shape == null)
             {
                 this.Session.WriteVerbose("GetTargetShape: Targeting single shape from active selection");

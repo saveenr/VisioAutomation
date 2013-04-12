@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
-using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Scripting
 {
@@ -161,11 +160,14 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        public bool HasApplication()
+        public bool HasApplication
         {
-            bool b = this.VisioApplication != null;
-            this.WriteVerbose("HasApplication: {0}", b);
-            return b;
+            get
+            {
+                bool b = this.VisioApplication != null;
+                this.WriteVerbose("HasApplication: {0}", b);
+                return b;
+            }
         }
 
         internal static List<System.Reflection.PropertyInfo> GetCommandSetProperties()

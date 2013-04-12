@@ -23,55 +23,36 @@ namespace VisioAutomation.Scripting.Commands
         /// <returns></returns>
         public IList<VA.Connections.ConnectorEdge> GetTransitiveClosure(Connections.ConnectorArrowEdgeHandling flag)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return new List<VA.Connections.ConnectorEdge>(0);
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var app = this.Session.VisioApplication;
             return VA.Connections.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
         public IList<VA.Connections.ConnectorEdge> GetDirectedEdges(Connections.ConnectorArrowEdgeHandling flag)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return new List<VA.Connections.ConnectorEdge>(0);
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
-            if (this.Session.HasActiveDrawing)
-            {
-                var directed_edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage, flag);
-                return directed_edges;
-            }
-            else
-            {
-                return new List<VA.Connections.ConnectorEdge>(0);
-            }
+            var directed_edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage, flag);
+            return directed_edges;
         }
 
         public IList<VA.Connections.ConnectorEdge> GetEdges()
         {
-            this.CheckApplication();
-            IList<VA.Connections.ConnectorEdge> edges = new List<VA.Connections.ConnectorEdge>(0);
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
-            if (this.Session.HasActiveDrawing)
-            {
-                edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
-            }
-
+            var edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
             this.Session.WriteVerbose( "{0} Edges found", edges.Count);
             return edges;
         }
 
         public IList<IVisio.Shape> Connect(IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                new List<IVisio.Shape>(0);
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var active_page = this.Session.VisioApplication.ActivePage;
 

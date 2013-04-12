@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Window GetActiveWindow()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
@@ -23,11 +23,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public double GetActiveZoom()
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                throw new AutomationException("Has no active drawing");
-            }
+            this.CheckVisioApplicationAvailable();
 
             var active_window = GetActiveWindow();
             return active_window.Zoom;
@@ -60,12 +56,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ZoomToPercentage(double amount)
         {
-            this.CheckApplication();
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;   
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (amount <= 0)
             {
@@ -78,12 +70,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Zoom(Zoom zoom)
         {
-            this.CheckApplication();
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
 
             if (zoom == Scripting.Zoom.Out)
             {

@@ -16,12 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Close(bool force)
         {
-            this.CheckApplication();
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -47,7 +43,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseAllWithoutSaving()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).
@@ -66,7 +62,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+
             this.Session.WriteVerbose("Creating Empty Drawing");
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
@@ -76,12 +73,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Save()
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                this.Session.WriteError( "No Drawing to Save");
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+            
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
             doc.Save();
@@ -89,12 +83,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SaveAs(string filename)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                this.Session.WriteError("No Drawing to Save");
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -103,7 +93,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(double w, double h)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+
             var doc = this.New();
             var pagesize = new VA.Drawing.Size(w, h);
             this.Session.Page.SetSize(pagesize);
@@ -112,7 +103,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document OpenStencil(string name)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             
             if (name == null)
             {
@@ -136,7 +127,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document NewStencil()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var doc = documents.AddEx(string.Empty, IVisio.VisMeasurementSystem.visMSDefault,
@@ -148,7 +139,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Open(string filename)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             
             if (filename == null)
             {
@@ -179,7 +170,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Get(string name)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             
             var application = this.Session.VisioApplication;
             var documents = application.Documents;

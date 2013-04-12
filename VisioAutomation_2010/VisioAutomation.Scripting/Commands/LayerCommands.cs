@@ -16,7 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Layer GetLayer(string layername)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (layername == null)
             {
@@ -39,24 +40,19 @@ namespace VisioAutomation.Scripting.Commands
             catch (System.Runtime.InteropServices.COMException)
             {
                 string msg = string.Format("No such layer \"{0}\"", layername);
-                throw new AutomationException(msg);
+                throw new VA.Scripting.ScriptingException(msg);
             }
             return layer;
         }
 
         public IList<IVisio.Layer> GetLayers()
         {
-            this.CheckApplication();
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                new List<IVisio.Layer>(0);
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             return page.Layers.AsEnumerable().ToList();
         }
-
     }
 }

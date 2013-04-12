@@ -15,11 +15,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Get()
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                throw new AutomationException("No Drawing available");
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             return application.ActivePage;
@@ -27,11 +24,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Drawing.Size GetSize()
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                throw new AutomationException("No Drawing available");
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
@@ -49,7 +43,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetName(string name)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -60,22 +56,15 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name must have at least one character");
             }
 
-            var application = this.Session.VisioApplication;
-            var active_document = application.ActiveDocument;
-            var pages = active_document.Pages;
-            var pagenames = new HashSet<string>(pages.GetNamesU());
-            if (pagenames.Contains(name))
-            {
-                throw new AutomationException("Page already exists with this name");
-            }
-
             var page = Get();
             page.NameU = name;
         }
 
         public IVisio.Page New(VA.Drawing.Size? size, bool isbackgroundpage)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             IVisio.Page page;
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
@@ -101,15 +90,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetBackgroundPage(string background_page_name)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             if (background_page_name == null)
             {
                 throw new System.ArgumentNullException("background_page_name");
-            }
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
             }
 
             var application = this.Session.VisioApplication;
@@ -119,7 +105,7 @@ namespace VisioAutomation.Scripting.Commands
             if (!names.Contains(background_page_name))
             {
                 string msg = string.Format("Could not find page with name \"{0}\"", background_page_name);
-                throw new AutomationException(msg);
+                throw new VA.Scripting.ScriptingException(msg);
             }
 
             var bgpage = pages.ItemU[background_page_name];
@@ -130,14 +116,14 @@ namespace VisioAutomation.Scripting.Commands
             if (bgpage.Background == 0)
             {
                 string msg = string.Format("Page \"{0}\" is not a background page", bgpage.Name);
-                throw new VA.AutomationException(msg);
+                throw new ScriptingException(msg);
             }
 
             // don't allow the page to be set as a background to itself
             if (fgpage == bgpage)
             {
                 string msg = string.Format("Cannot set page as its own background page");
-                throw new VA.AutomationException(msg);
+                throw new VA.Scripting.ScriptingException(msg);
             }
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Background Page"))
@@ -148,11 +134,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Duplicate()
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return null;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Duplicate Page"))
@@ -167,11 +150,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Duplicate(IVisio.Document dest_doc)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return null;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (dest_doc==null)
             {
@@ -182,7 +162,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (application.ActiveDocument == dest_doc)
             {
-                throw new VA.AutomationException("dest doc is same as active doc");
+                throw new VA.Scripting.ScriptingException("dest doc is same as active doc");
             }
 
             var src_page = application.ActivePage;
@@ -199,12 +179,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Pages.PrintPageOrientation GetOrientation()
         {
-            this.CheckApplication();
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                throw new AutomationException("No active page");
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
@@ -227,11 +203,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetOrientation(VA.Pages.PrintPageOrientation orientation)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
 
@@ -270,12 +243,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ResizeToFitContents(VA.Drawing.Size bordersize, bool zoom_to_page)
         {
-            this.CheckApplication();
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Resize Page to Fit Contents"))
@@ -291,11 +260,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ResetOrigin(IVisio.Page page)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             if (page == null)
@@ -318,11 +284,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(VA.Drawing.Size new_size)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Page Size"))
@@ -338,11 +301,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(double? width, double? height)
         {
-            this.CheckApplication();
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (!width.HasValue && !height.HasValue)
             {
@@ -369,7 +329,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void GoTo(VA.Scripting.PageNavigation flags)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
@@ -385,7 +345,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void NavigateTo(IVisio.Pages pages, PageNavigation flags)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             if (pages == null)
             {
@@ -396,12 +356,12 @@ namespace VisioAutomation.Scripting.Commands
             var active_document = app.ActiveDocument;
             if (pages.Document != active_document)
             {
-                throw new System.ArgumentException("Page.Document is not application's ActiveDocument");
+                throw new VA.Scripting.ScriptingException("Page.Document is not application's ActiveDocument");
             }
 
             if (pages.Count < 2)
             {
-                throw new AutomationException("Only 1 page available. Navigation not possible.");
+                throw new VA.Scripting.ScriptingException("Only 1 page available. Navigation not possible.");
             }
 
             var activepage = app.ActivePage;

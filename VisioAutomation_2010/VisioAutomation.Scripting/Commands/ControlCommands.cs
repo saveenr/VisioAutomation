@@ -16,7 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<int> Add(IList<IVisio.Shape> target_shapes, VA.Controls.ControlCells ctrl)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (ctrl == null)
             {
@@ -45,7 +46,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Shape> target_shapes, int n)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -64,7 +66,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)

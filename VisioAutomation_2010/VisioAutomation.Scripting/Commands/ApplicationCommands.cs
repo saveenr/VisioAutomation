@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ForceClose()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
             var app = VA.Application.ApplicationHelper.FindRunningApplication();
             if (app == null)
             {
-                throw new AutomationException("Did not find a running instance of Visio 2007");
+                throw new VA.Scripting.VisioApplicationException("Did not find a running instance of Visio 2010 or above");
             }
 
             this.Session.VisioApplication = app;
@@ -52,13 +52,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Undo()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             this.Session.VisioApplication.Undo();
         }
 
         public void Redo()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             this.Session.VisioApplication.Redo();
         }
     }

@@ -16,7 +16,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
@@ -39,7 +41,8 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             VA.Connections.ConnectionPointType type)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -80,14 +83,15 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             VA.Connections.ConnectionPointType type)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             return this.Add(null, fx, fy, type);
         }
 
         public void Delete(List<IVisio.Shape> target_shapes0, int index)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = GetTargetShapes(target_shapes0);
             if (shapes.Count < 1)

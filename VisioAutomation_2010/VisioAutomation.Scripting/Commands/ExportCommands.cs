@@ -16,7 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportPageToFile(string filename)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (filename == null)
             {
@@ -41,7 +42,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportSelectionToFile(string filename)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (filename == null)
             {
@@ -60,7 +62,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportPagesToFiles(string filename)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (filename == null)
             {
@@ -105,7 +108,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportSelectionToSVGXHTML(string filename)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             if (filename == null)
             {
@@ -124,7 +128,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportSelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";

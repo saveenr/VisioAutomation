@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawScriptingDocumentation()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             var pagesize = new VA.Drawing.Size(8.5, 11);
             var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
@@ -110,7 +110,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
             
             var pagesize = new VA.Drawing.Size(8.5, 11);
             var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
@@ -199,7 +199,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 if (tokens.Length == 0)
                 {
-                    throw new VA.AutomationException();
+                    throw new VA.Scripting.ScriptingException();
                 }
                 else if (tokens.Length == 1)
                 {
@@ -228,7 +228,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<System.Type> types)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             string def_linecolor = "rgb(140,140,140)";
             string def_fillcolor = "rgb(240,240,240)";
@@ -380,7 +380,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
 
             string segoeui_fontname = "Segoe UI";
             string segoeuilight_fontname = "Segoe UI Light";

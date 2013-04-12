@@ -16,7 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<T> QueryResults<T>( IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             var app = this.Session.VisioApplication;
@@ -38,7 +39,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -62,7 +65,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
@@ -84,7 +88,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -110,7 +116,9 @@ namespace VisioAutomation.Scripting.Commands
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+            
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -174,7 +182,9 @@ namespace VisioAutomation.Scripting.Commands
                 IList<VA.ShapeSheet.SRC> srcs,
                 IList<string> results, IVisio.VisGetSetArgs flags)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+            
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -233,7 +243,8 @@ namespace VisioAutomation.Scripting.Commands
         
         public void Update(ShapeSheetUpdate update, bool blastguards, bool testcircular)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             this.Session.WriteVerbose( "Staring ShapeSheet Update");
             var application = this.Session.VisioApplication;

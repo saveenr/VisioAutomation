@@ -18,7 +18,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IList<IVisio.Shape> target_shapes, VA.Format.ShapeFormatCells format)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
 
@@ -40,7 +41,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Format.ShapeFormatCells> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
 
@@ -56,7 +58,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Duplicate(int n)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
             
             if (n < 1)
             {
@@ -89,7 +92,8 @@ namespace VisioAutomation.Scripting.Commands
         /// </summary>
         public void CopySize()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
             
             if (!this.Session.HasSelectedShapes())
             {
@@ -117,7 +121,8 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="flags">Controls if either or both the width and height values are applied during the paste</param>
         public void PasteSize(IList<IVisio.Shape> target_shapes, SizeFlags flags)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
             
             var shapes = this.GetTargetShapes(target_shapes);
 
@@ -156,7 +161,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CopyFormat()
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var allflags = this.cache.GetAllFormatPaintFlags();
             this.CopyFormat(null, allflags);
@@ -164,7 +170,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CopyFormat(IVisio.Shape target_shape, VA.Format.FormatCategory category)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shape = GetTargetShape(target_shape);
             if (shape == null)
@@ -177,13 +184,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ClearFormatCache()
         {
-
             this.cache.Clear();
         }
 
         public void PasteFormat(IList<IVisio.Shape> target_shapes, VA.Format.FormatCategory category, bool apply_formulas)
         {
-            this.CheckApplication();
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
