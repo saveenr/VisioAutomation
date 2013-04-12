@@ -16,6 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportPageToFile(string filename)
         {
+            this.CheckApplication();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
@@ -39,6 +41,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportSelectionToFile(string filename)
         {
+            this.CheckApplication();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
@@ -56,6 +60,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportPagesToFiles(string filename)
         {
+            this.CheckApplication();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
@@ -99,6 +105,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ExportSelectionToSVGXHTML(string filename)
         {
+            this.CheckApplication();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
@@ -114,8 +122,10 @@ namespace VisioAutomation.Scripting.Commands
             ExportSelectionToSVGXHTML(this.Session.Selection.Get(), filename, s => this.Session.WriteVerbose( s));
         }
 
-        public static void ExportSelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
+        public void ExportSelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
+            this.CheckApplication();
+
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
             selection.Export(svg_filename);

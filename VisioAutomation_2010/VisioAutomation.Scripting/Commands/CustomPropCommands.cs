@@ -16,6 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
         {
+            this.CheckApplication();
+
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VA.CustomProperties.CustomPropertyCells>>();
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -39,6 +41,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
+            this.CheckApplication();
+
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -59,6 +63,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
+            this.CheckApplication();
+            
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -87,6 +93,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IList<IVisio.Shape> target_shapes, string name, VA.CustomProperties.CustomPropertyCells customprop)
         {
+            this.CheckApplication();
+            
             if (customprop == null)
             {
                 throw new System.ArgumentNullException("customprop");
@@ -110,6 +118,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IEnumerable<IVisio.Shape> EnumerateAndSelect(IEnumerable<IVisio.Shape> shapes)
         {
+            this.CheckApplication();
+            
             if (shapes == null)
             {
                 throw new System.ArgumentNullException("shapes");

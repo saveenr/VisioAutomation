@@ -16,6 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Close(bool force)
         {
+            this.CheckApplication();
+
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -45,6 +47,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseAllWithoutSaving()
         {
+            this.CheckApplication();
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).
@@ -63,7 +66,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New()
         {
-            this.Session.WriteVerbose( "Creating Empty Drawing");
+            this.CheckApplication();
+            this.Session.WriteVerbose("Creating Empty Drawing");
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var doc = documents.Add(string.Empty);
@@ -72,6 +76,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Save()
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 this.Session.WriteError( "No Drawing to Save");
@@ -84,6 +89,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SaveAs(string filename)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 this.Session.WriteError("No Drawing to Save");
@@ -97,6 +103,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(double w, double h)
         {
+            this.CheckApplication();
             var doc = this.New();
             var pagesize = new VA.Drawing.Size(w, h);
             this.Session.Page.SetSize(pagesize);
@@ -105,6 +112,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document OpenStencil(string name)
         {
+            this.CheckApplication();
+            
             if (name == null)
             {
                 throw new System.ArgumentNullException(name);
@@ -127,6 +136,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document NewStencil()
         {
+            this.CheckApplication();
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var doc = documents.AddEx(string.Empty, IVisio.VisMeasurementSystem.visMSDefault,
@@ -138,6 +148,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Open(string filename)
         {
+            this.CheckApplication();
+            
             if (filename == null)
             {
                 throw new System.ArgumentNullException(filename);
@@ -167,11 +179,12 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Get(string name)
         {
+            this.CheckApplication();
+            
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             var doc = documents[name];
             return doc;
         }
-
     }
 }

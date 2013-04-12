@@ -16,6 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> Get()
         {
+            this.CheckApplication();
+
             if (!this.Session.HasActiveDrawing)
             {
                 this.Session.WriteVerbose( "No Active Document - 0 Masters");
@@ -31,6 +33,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> Get(IVisio.Document doc)
         {
+            this.CheckApplication();
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
             return masters;
@@ -38,6 +41,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master Get(string name)
         {
+            this.CheckApplication();
+
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -67,6 +72,7 @@ namespace VisioAutomation.Scripting.Commands
 
         private static IVisio.Document TryGetDocument(IVisio.Documents documents, string name)
         {
+
             try
             {
                 var stencil_doc = documents[name];
@@ -80,6 +86,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master Get(string master, IVisio.Document stencil)
         {
+            this.CheckApplication();
+
             if (master == null)
             {
                 throw new System.ArgumentNullException("master");
@@ -106,6 +114,8 @@ namespace VisioAutomation.Scripting.Commands
 
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
         {
+            this.CheckApplication();
+
             try
             {
                 var masterobj = masters.ItemU[name];
@@ -127,6 +137,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public short[] Drop(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
         {
+            this.CheckApplication();
+
             if (masters == null)
             {
                 throw new System.ArgumentNullException("points");
@@ -150,6 +162,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master New(IVisio.Document stencil, string name)
         {
+            this.CheckApplication();
 
             var masters = stencil.Masters;
 

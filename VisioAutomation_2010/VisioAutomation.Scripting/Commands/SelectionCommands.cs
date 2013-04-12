@@ -16,6 +16,8 @@ namespace VisioAutomation.Scripting.Commands
         
         public IEnumerable<IVisio.Shape> EnumShapes()
         {
+            this.CheckApplication();
+
             var app = this.Session.VisioApplication;
             var activewin = app.ActiveWindow;
             var sel = activewin.Selection;
@@ -26,12 +28,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public IEnumerable<IVisio.Shape> EnumShapes2D()
         {
+            this.CheckApplication();
             var shapes = this.EnumShapes().Where(s => s.OneD == 0);
             return shapes;
         }
 
         public IVisio.Selection Get()
         {
+            this.CheckApplication();
             var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
@@ -40,6 +44,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectAll()
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -51,6 +56,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectInvert()
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -92,6 +98,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectNone()
         {
+            this.CheckApplication();
+
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -105,6 +113,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Select(IVisio.Shape shape)
         {
+            this.CheckApplication();
+
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
@@ -122,6 +132,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Select(IEnumerable<IVisio.Shape> shapes)
         {
+            this.CheckApplication();
             if (shapes == null)
             {
                 throw new System.ArgumentNullException("shapes");
@@ -139,6 +150,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Select(IEnumerable<int> shapeids)
         {
+            this.CheckApplication();
             if (shapeids == null)
             {
                 throw new System.ArgumentNullException("shapeids");
@@ -159,6 +171,7 @@ namespace VisioAutomation.Scripting.Commands
         
         public void SubSelect(IList<IVisio.Shape> shapes)
         {
+            this.CheckApplication();
             if (shapes == null)
             {
                 throw new System.ArgumentNullException("shapes");
@@ -174,6 +187,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectByMaster(IVisio.Master master)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -190,6 +204,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectByLayer(string layername)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -218,18 +233,22 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> GetShapes()
         {
+            this.CheckApplication();
+
             var selection = this.Session.Selection.Get();
             return VA.Selection.SelectionHelper.GetSelectedShapes(selection);
         }
 
         public IList<IVisio.Shape> GetShapesRecursive()
         {
+            this.CheckApplication();
             var selection = this.Session.Selection.Get();
             return VA.Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
         public int Count()
         {
+            this.CheckApplication();
             var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
@@ -239,6 +258,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> GetSubSelectedShapes()
         {
+            this.CheckApplication();
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
             var shapes = new List<IVisio.Shape>(0);
             var sel = this.Session.Selection.Get();
@@ -265,6 +285,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete()
         {
+            this.CheckApplication();
+
             if (!this.Session.HasSelectedShapes())
             {
                 return;
@@ -276,6 +298,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Copy()
         {
+            this.CheckApplication();
+
             if (!this.Session.HasSelectedShapes())
             {
                 return;
@@ -289,6 +313,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Duplicate( IList<IVisio.Shape> target_shapes )
         {
+            this.CheckApplication();
+
             int n = this.GetTargetSelection(target_shapes);
             if (n<1)
             {
@@ -303,12 +329,15 @@ namespace VisioAutomation.Scripting.Commands
 
         public bool HasShapes()
         {
+            this.CheckApplication();
+
             return HasShapes(1);
         }
 
         public bool HasShapes(int min_items)
         {
-            this.Session.WriteVerbose( "HasShapes: Checking for at least {0} selected shapes", min_items);
+            this.CheckApplication();
+            this.Session.WriteVerbose("HasShapes: Checking for at least {0} selected shapes", min_items);
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException("min_items");

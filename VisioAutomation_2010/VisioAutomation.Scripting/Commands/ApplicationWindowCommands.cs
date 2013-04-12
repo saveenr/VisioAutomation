@@ -13,6 +13,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ToFront()
         {
+            this.CheckApplication();
             var app = this.Session.VisioApplication;
 
             if (app == null)
@@ -25,6 +26,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public System.Drawing.Size GetSize()
         {
+            this.CheckApplication();
             var app = this.Session.VisioApplication;
             var appwindow = app.Window;
             var rect = appwindow.GetWindowRect();
@@ -45,6 +47,8 @@ namespace VisioAutomation.Scripting.Commands
                 this.Session.WriteError("height must be positive");
                 return;
             }
+
+            this.CheckApplication();
 
             var app = this.Session.VisioApplication;
             var appwindow = app.Window;

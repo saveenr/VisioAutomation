@@ -161,6 +161,13 @@ namespace VisioAutomation.Scripting
             }
         }
 
+        public bool HasApplication()
+        {
+            bool b = this.VisioApplication != null;
+            this.WriteVerbose("HasApplication: {0}", b);
+            return b;
+        }
+
         internal static List<System.Reflection.PropertyInfo> GetCommandSetProperties()
         {
             var props = typeof(Scripting.Session).GetProperties()

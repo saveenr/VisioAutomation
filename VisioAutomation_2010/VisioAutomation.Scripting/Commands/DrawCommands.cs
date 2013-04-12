@@ -41,6 +41,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return new List<IVisio.Shape>(0);
             }
+
+            this.CheckApplication();
             
             string master = "Rectangle";
             string stencil = "basic_u.vss";
@@ -90,7 +92,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Grid(GRIDLAYOUT.GridLayout layout)
         {
-            
+            this.CheckApplication();
+
             //Create a new page to hold the grid
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
@@ -111,6 +114,8 @@ namespace VisioAutomation.Scripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
+            this.CheckApplication();
+
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw NURBS Curve"))
             {
@@ -123,6 +128,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
+            this.CheckApplication();
+
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Rectangle"))
             {
@@ -134,6 +141,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
+            this.CheckApplication();
+            
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Line"))
             {
@@ -145,6 +154,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
+            this.CheckApplication();
+            
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
@@ -156,6 +167,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(VA.Drawing.Point center, double radius)
         {
+            this.CheckApplication();
+            
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
@@ -170,6 +183,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Bezier(IEnumerable<VA.Drawing.Point> points)
         {
+            this.CheckApplication();
+            
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Draw Bezier"))
             {
@@ -181,6 +196,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape PolyLine(IList<VA.Drawing.Point> points)
         {
+            this.CheckApplication();
+            
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Draw PolyLine"))
             {
@@ -195,6 +212,8 @@ namespace VisioAutomation.Scripting.Commands
                                   double start_angle,
                                   double  end_angle)
         {
+            this.CheckApplication();
+            
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Draw Pie Slice"))
             {
@@ -208,6 +227,8 @@ namespace VisioAutomation.Scripting.Commands
                                           double radius,
                                           IList<double> values)
         {
+            this.CheckApplication();
+            
             if (!this.Session.HasActiveDrawing)
             {
                 return null;
@@ -227,7 +248,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public void OrgChart(ORGCHARTLAYOUT.Drawing drawing)
         {
-            this.Session.WriteVerbose( "Start OrgChart Rendering");
+           
+            this.Session.WriteVerbose("Start OrgChart Rendering");
+            this.CheckApplication();
+
             var renderer = new ORGCHARTLAYOUT.OrgChartRenderer();
             var application = this.Session.VisioApplication;
             drawing.Render(application);

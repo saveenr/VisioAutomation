@@ -16,6 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Layer GetLayer(string layername)
         {
+            this.CheckApplication();
+
             if (layername == null)
             {
                 throw new System.ArgumentNullException("layername");
@@ -44,6 +46,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Layer> GetLayers()
         {
+            this.CheckApplication();
+
             if (!this.Session.HasActiveDrawing)
             {
                 new List<IVisio.Layer>(0);

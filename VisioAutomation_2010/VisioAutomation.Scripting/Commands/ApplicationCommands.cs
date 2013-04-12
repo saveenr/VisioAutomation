@@ -19,6 +19,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ForceClose()
         {
+            this.CheckApplication();
+
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
             VA.Documents.DocumentHelper.ForceCloseAll(documents);
@@ -50,11 +52,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Undo()
         {
+            this.CheckApplication();
             this.Session.VisioApplication.Undo();
         }
 
         public void Redo()
         {
+            this.CheckApplication();
             this.Session.VisioApplication.Redo();
         }
     }

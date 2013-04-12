@@ -70,6 +70,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal halign)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -88,6 +89,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical valign)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -106,6 +108,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -127,6 +130,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double d)
         {
+            this.CheckApplication();
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -144,6 +148,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
         {
+            this.CheckApplication();
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
@@ -163,6 +168,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, VA.Layout.SnapCornerPosition corner)
         {
+            this.CheckApplication();
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
@@ -181,6 +187,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
         {
+            this.CheckApplication();
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -202,6 +209,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Stack(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double space)
         {
+            this.CheckApplication();
+
             if (space < 0.0)
             {
                 throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
@@ -229,6 +238,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
+            this.CheckApplication();
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
             {
@@ -241,6 +251,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal align)
         {
+            this.CheckApplication();
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
             {
@@ -259,6 +270,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical align)
         {
+            this.CheckApplication();
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
             {
@@ -279,6 +291,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public int GetSelectedShapeCount()
         {
+            this.CheckApplication();
+
             if (!this.Session.HasActiveDrawing)
             {
                 return 0;
@@ -290,6 +304,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Layout.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
+            this.CheckApplication();
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
@@ -304,6 +319,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Group(IList<IVisio.Shape> target_shapes)
         {
+            this.CheckApplication();
             if (target_shapes == null)
             {
                 if (!this.Session.HasSelectedShapes())
@@ -329,6 +345,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Ungroup(IList<IVisio.Shape> target_shapes)
         {
+            this.CheckApplication();
             if (target_shapes == null)
             {
                 if (this.Session.HasSelectedShapes())
@@ -351,6 +368,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetLock(IList<IVisio.Shape> target_shapes, VA.Layout.LockCells lockcells)
         {
+            this.CheckApplication();
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -376,6 +394,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
         {
+            this.CheckApplication();
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {

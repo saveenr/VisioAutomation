@@ -47,6 +47,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawScriptingDocumentation()
         {
+            this.CheckApplication();
+
             var pagesize = new VA.Drawing.Size(8.5, 11);
             var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             docbuilder.BodyParaSpacingAfter = 6.0;
@@ -108,6 +110,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
+            this.CheckApplication();
+            
             var pagesize = new VA.Drawing.Size(8.5, 11);
             var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             //docbuilder.BodyParaSpacingAfter = 2.0;
@@ -224,6 +228,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<System.Type> types)
         {
+            this.CheckApplication();
+
             string def_linecolor = "rgb(140,140,140)";
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
@@ -374,6 +380,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
         {
+            this.CheckApplication();
+
             string segoeui_fontname = "Segoe UI";
             string segoeuilight_fontname = "Segoe UI Light";
             string def_linecolor = "rgb(180,180,180)";

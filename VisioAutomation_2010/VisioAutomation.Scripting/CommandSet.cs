@@ -39,6 +39,15 @@ namespace VisioAutomation.Scripting
             }
         }
 
+        protected void CheckApplication()
+        {
+            var has_app = this.Session.HasApplication();
+            if (!has_app)
+            {
+                throw new VA.AutomationException("No Visio Application is bound to to this session");
+            }
+        }
+
         protected IList<IVisio.Shape> GetTargetShapes(IList<IVisio.Shape> shapes)
         {
             if (shapes == null)

@@ -15,6 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Get()
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("No Drawing available");
@@ -26,6 +27,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Drawing.Size GetSize()
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("No Drawing available");
@@ -47,6 +49,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetName(string name)
         {
+            this.CheckApplication();
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -72,6 +75,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page New(VA.Drawing.Size? size, bool isbackgroundpage)
         {
+            this.CheckApplication();
             IVisio.Page page;
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
@@ -97,6 +101,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetBackgroundPage(string background_page_name)
         {
+            this.CheckApplication();
             if (background_page_name == null)
             {
                 throw new System.ArgumentNullException("background_page_name");
@@ -143,6 +148,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Duplicate()
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return null;
@@ -161,6 +167,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Duplicate(IVisio.Document dest_doc)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return null;
@@ -192,6 +199,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Pages.PrintPageOrientation GetOrientation()
         {
+            this.CheckApplication();
+
             if (!this.Session.HasActiveDrawing)
             {
                 throw new AutomationException("No active page");
@@ -218,6 +227,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetOrientation(VA.Pages.PrintPageOrientation orientation)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -260,6 +270,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ResizeToFitContents(VA.Drawing.Size bordersize, bool zoom_to_page)
         {
+            this.CheckApplication();
+
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -278,7 +290,8 @@ namespace VisioAutomation.Scripting.Commands
         }
 
         public void ResetOrigin(IVisio.Page page)
-        {            
+        {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -305,6 +318,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(VA.Drawing.Size new_size)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -324,6 +338,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(double? width, double? height)
         {
+            this.CheckApplication();
             if (!this.Session.HasActiveDrawing)
             {
                 return;
@@ -354,6 +369,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void GoTo(VA.Scripting.PageNavigation flags)
         {
+            this.CheckApplication();
+
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var docpages = active_document.Pages;
@@ -368,6 +385,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void NavigateTo(IVisio.Pages pages, PageNavigation flags)
         {
+            this.CheckApplication();
+
             if (pages == null)
             {
                 throw new System.ArgumentNullException("pages");
@@ -439,6 +458,5 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException("direction");
             }
         }
-
     }
 }
