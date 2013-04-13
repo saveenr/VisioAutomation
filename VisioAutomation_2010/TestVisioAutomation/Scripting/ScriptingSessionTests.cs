@@ -31,7 +31,6 @@ namespace TestVisioAutomation
             ss.Document.CloseAllWithoutSaving();
 
             Assert.IsFalse(ss.HasActiveDrawing);
-            Assert.IsFalse(ss.Selection.HasShapes());
 
             var doc1 = ss.Document.New();
             Assert.IsTrue(ss.HasActiveDrawing);
