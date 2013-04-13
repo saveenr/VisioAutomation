@@ -257,12 +257,8 @@ namespace VisioAutomation.Scripting.DirectedGraph
             System.Func<string, int> int_converter = s => int.Parse(s);
             System.Func<string, double> double_converter = (s) => double.Parse(s);
 
-            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el,
-                                                                                                              "usedynamicconnectors",
-                                                                                                              bool_converter);
-            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el,
-                                                                                                       "scalingfactor",
-                                                                                                       double_converter);
+            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el, "usedynamicconnectors", bool_converter);
+            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el, "scalingfactor", double_converter);
         }
     }
 }
