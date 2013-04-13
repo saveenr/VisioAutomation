@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         private class PageData
         {
             public VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions LayoutOptions;
-            public DGMODEL.Drawing Drawing;
+            public DGMODEL.Drawing DirectedGraph;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
 
-                pagedata.Drawing = new DGMODEL.Drawing();
+                pagedata.DirectedGraph = new DGMODEL.Drawing();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
@@ -153,13 +153,12 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 scriptingsession.WriteVerbose( "Creating shape AutoLayout nodes");
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
-                    var al_shape = pagedata.Drawing.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil,
-                                                             shape_info.Master);
-                    al_shape.URL = shape_info.URL;
-                    al_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+                    var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
+                    dg_shape.URL = shape_info.URL;
+                    dg_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
                     foreach (var kv in shape_info.custprops)
                     {
-                        al_shape.CustomProperties[kv.Key] = kv.Value;
+                        dg_shape.CustomProperties[kv.Key] = kv.Value;
                     }
                 }
 
@@ -169,27 +168,25 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     var def_connector_type = VA.Connections.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
-                    var from_shape = pagedata.Drawing.Shapes.Find(con_info.From);
-                    var to_shape = pagedata.Drawing.Shapes.Find(con_info.To);
+                    var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);
+                    var to_shape = pagedata.DirectedGraph.Shapes.Find(con_info.To);
 
                     var def_con_color = new VA.Drawing.ColorRGB(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
-                    var al_connector = pagedata.Drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
-                                                                connectory_type);
+                    var dg_connector = pagedata.DirectedGraph.Connect(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
 
-                    al_connector.Cells = new VA.DOM.ShapeCells();
-                    al_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
-                    al_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
-                    al_connector.Cells.EndArrow = def_end_arrow;
+                    dg_connector.Cells = new VA.DOM.ShapeCells();
+                    dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
+                    dg_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
+                    dg_connector.Cells.EndArrow = def_end_arrow;
                 }
-
                 scriptingsession.WriteVerbose( "Rendering AutoLayout...");
             }
             scriptingsession.WriteVerbose( "Finished rendering AutoLayout");
 
-            var drawings = pagedatas.Select(pagedata => pagedata.Drawing).ToList();
-            return drawings;
+            var directedgraphs = pagedatas.Select(pagedata => pagedata.DirectedGraph).ToList();
+            return directedgraphs;
         }
 
         private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)
