@@ -6,6 +6,7 @@ using VA = VisioAutomation;
 using GRIDLAYOUT = VisioAutomation.Layout.Models.Grid;
 using RADIALLAYOUT = VisioAutomation.Layout.Models.Radial;
 using ORGCHARTLAYOUT = VisioAutomation.Layout.Models.OrgChart;
+using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -60,7 +61,7 @@ namespace VisioAutomation.Scripting.Commands
             page.Background = 0; // ensure this is a foreground page
 
             var pagesize = this.Session.Page.GetSize();
-            
+
             var layout = new GRIDLAYOUT.GridLayout(datatable.Columns.Count, datatable.Rows.Count, new VA.Drawing.Size(1, 1), masterobj);
             layout.Origin = new VA.Drawing.Point(0, pagesize.Height);
             layout.CellSpacing = cellspacing;
@@ -87,7 +88,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var page_shapes = page.Shapes;
-            var shapes = layout.Nodes.Select(n => n.Shape ).ToList();
+            var shapes = layout.Nodes.Select(n => n.Shape).ToList();
             return shapes;
 
         }
@@ -148,7 +149,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
-            
+
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Line"))
             {
@@ -162,7 +163,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
-            
+
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
@@ -176,7 +177,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
-            
+
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
@@ -193,9 +194,9 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
-            
+
             var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Draw Bezier"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Bezier"))
             {
                 var active_page = application.ActivePage;
                 var shape = active_page.DrawBezier(points.ToList());
@@ -207,9 +208,9 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
-            
+
             var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Draw PolyLine"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw PolyLine"))
             {
                 var active_page = application.ActivePage;
                 var shape = active_page.DrawPolyline(points);
@@ -220,13 +221,13 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape PieSlice(VA.Drawing.Point center,
                                   double radius,
                                   double start_angle,
-                                  double  end_angle)
+                                  double end_angle)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
-            
+
             var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Draw Pie Slice"))
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
                 var shape = DrawCommandsUtil.DrawPieSlice(active_page, center, radius, start_angle, end_angle);
@@ -240,7 +241,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
-            
+
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var slices = RADIALLAYOUT.PieSlice.GetSlicesFromValues(center, radius, values);
@@ -255,16 +256,55 @@ namespace VisioAutomation.Scripting.Commands
 
         public void OrgChart(ORGCHARTLAYOUT.Drawing drawing)
         {
-           
+
             this.Session.WriteVerbose("Start OrgChart Rendering");
             this.CheckVisioApplicationAvailable();
 
-            var renderer = new ORGCHARTLAYOUT.OrgChartRenderer();
             var application = this.Session.VisioApplication;
             drawing.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
-            this.Session.WriteVerbose( "Finished OrgChart Rendering");
+            this.Session.WriteVerbose("Finished OrgChart Rendering");
+        }
+
+        public void DirectedGraph(IList<DGMODEL.Drawing> directedgraphs)
+        {
+            this.CheckVisioApplicationAvailable();
+
+            this.Session.WriteVerbose("Start rendering directed graph");
+            var app = this.Session.VisioApplication;
+
+
+            this.Session.WriteVerbose("Creating a New Document For the Directed Graphs");
+            var doc = this.Session.Document.New();
+
+            int num_pages_created = 0;
+            var doc_pages = doc.Pages;
+
+            foreach (int i in Enumerable.Range(0, directedgraphs.Count))
+            {
+                var dg = directedgraphs[i];
+
+                
+                var options = new DGMODEL.MSAGLLayoutOptions();
+                options.UseDynamicConnectors = false;
+
+                // if this is the first page to drawe
+                // then reuse the initial empty page in the document
+                // otherwise, create a new page.
+                var page = num_pages_created == 0 ? app.ActivePage : doc_pages.Add();
+
+                this.Session.WriteVerbose("Rendering page: {0}", i + 1);
+                dg.Render(page, options);
+                this.Session.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
+                this.Session.View.Zoom(VA.Scripting.Zoom.ToPage);
+                this.Session.WriteVerbose("Finished rendering page");
+
+                num_pages_created++;
+            }
+
+            this.Session.WriteVerbose("Finished rendering all pages");
+            this.Session.WriteVerbose("Finished rendering directed graph.");
         }
     }
 }

@@ -44,7 +44,7 @@ namespace VisioPS.Commands
             else if (this.DirectedGraphs != null)
             {
                 var scriptingsession = this.ScriptingSession;
-                VA.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(scriptingsession, this.DirectedGraphs);
+                scriptingsession.Draw.DirectedGraph(this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {

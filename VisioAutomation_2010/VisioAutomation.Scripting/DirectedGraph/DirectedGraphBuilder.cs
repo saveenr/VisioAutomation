@@ -20,28 +20,26 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
             public static BuilderError ConnectorAlreadyDefined(int pagenum, string id)
             {
-                return new BuilderError(string.Format("Page {0} : Connector \"{1}\" is already defined", pagenum, id));
+                string msg = string.Format("Page {0} : Connector \"{1}\" is already defined", pagenum, id);
+                return new BuilderError(msg);
             }
 
             public static BuilderError NodeAlreadyDefined(int pagenum, string id)
             {
-                return new BuilderError(string.Format("Page {0} : Node \"{1}\" is already defined", pagenum, id));
+                string msg = string.Format("Page {0} : Node \"{1}\" is already defined", pagenum, id);
+                return new BuilderError(msg);
             }
 
             public static BuilderError InvalidFromNode(int pagenum, string conid, string fromid)
             {
-                return
-                    new BuilderError(
-                        string.Format("Page {0} : Connector \"{1}\" references a nonexistent FROM Node \"{2}\"",
-                                      pagenum, conid, fromid));
+                string msg = string.Format("Page {0} : Connector \"{1}\" references a nonexistent FROM Node \"{2}\"", pagenum, conid, fromid);
+                return new BuilderError( msg);
             }
 
             public static BuilderError InvalidToNode(int pagenum, string conid, string toid)
             {
-                return
-                    new BuilderError(
-                        string.Format("Page {0} : Connector \"{1}\" references a nonexistent TO Node \"{2}\"",
-                                      pagenum, conid, toid));
+                string msg = string.Format("Page {0} : Connector \"{1}\" references a nonexistent TO Node \"{2}\"", pagenum, conid, toid);
+                return new BuilderError(msg);
             }
         }
 
@@ -53,7 +51,6 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         private class PageData
         {
-            public int PageNumber;
             public VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions LayoutOptions;
             public DGMODEL.Drawing Drawing;
             public List<ShapeInfo> ShapeInfos;
@@ -76,7 +73,6 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                 var pagedata = new PageData();
                 pagedatas.Add(pagedata);
-                pagedata.PageNumber = pagenum++;
                 pagedata.Errors = new List<BuilderError>();
                 pagedata.LayoutOptions = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
@@ -132,7 +128,6 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
             return pagedatas;
         }
-
 
         public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
         {
@@ -195,60 +190,6 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
             var drawings = pagedatas.Select(pagedata => pagedata.Drawing).ToList();
             return drawings;
-        }
-
-        public static void RenderDiagrams(
-            VA.Scripting.Session scriptingsession,
-            IList<DGMODEL.Drawing> drawings)
-        {
-            scriptingsession.WriteVerbose( "Start rendering directed graph");
-            var app = scriptingsession.VisioApplication;
-
-
-            if (drawings.Count < 1)
-            {
-                return;
-            }
-
-            var doc = scriptingsession.Document.New();
-            int num_pages_created = 0;
-            var doc_pages = doc.Pages;
-
-            foreach (int i in Enumerable.Range(0, drawings.Count))
-            {
-                var directed_graph_drawing = drawings[i];
-
-
-                scriptingsession.WriteVerbose( "Rendering page: {0}", i + 1);
-
-                var options = new DGMODEL.MSAGLLayoutOptions();
-                options.UseDynamicConnectors = false;
-
-                IVisio.Page page = null;
-
-                if (num_pages_created == 0)
-                {
-                    // if this is the first page to drawe
-                    // then reuse the initial empty page in the document
-                    page = app.ActivePage;
-                }
-                else
-                {
-                    // otherwise, create a new page.
-                    page = doc_pages.Add();
-                }
-
-                directed_graph_drawing.Render(page, options);
-
-                scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
-                scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
-
-                scriptingsession.WriteVerbose( "Finished rendering page");
-
-                num_pages_created++;
-            }
-            scriptingsession.WriteVerbose( "Finished rendering pages");
-            scriptingsession.WriteVerbose( "Finished rendering directed graph.");
         }
 
         private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)

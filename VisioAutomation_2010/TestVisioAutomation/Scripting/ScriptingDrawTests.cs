@@ -166,7 +166,7 @@ namespace TestVisioAutomation
         {
             var dg_xml = System.Xml.Linq.XDocument.Parse(dg_text);
             var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, dg_xml);
-            VA.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(scriptingsession, dg_model);
+            scriptingsession.Draw.DirectedGraph(dg_model);
         }
 
         [TestMethod]
