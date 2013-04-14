@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using VA = VisioAutomation;
+using SXL = System.Xml.Linq;
 
 namespace TestVisioAutomation
 {
@@ -164,7 +165,7 @@ namespace TestVisioAutomation
 
         private void draw_dg(VA.Scripting.Session scriptingsession, string dg_text)
         {
-            var dg_xml = System.Xml.Linq.XDocument.Parse(dg_text);
+            var dg_xml = SXL.XDocument.Parse(dg_text);
             var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, dg_xml);
             scriptingsession.Draw.DirectedGraph(dg_model);
         }
@@ -180,7 +181,7 @@ namespace TestVisioAutomation
 
         private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)
         {
-            var xmldoc = System.Xml.Linq.XDocument.Parse(text);
+            var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, xmldoc);
             scriptingsession.Draw.OrgChart(orgchart);
         }

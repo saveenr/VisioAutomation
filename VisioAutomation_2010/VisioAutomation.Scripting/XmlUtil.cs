@@ -1,8 +1,10 @@
-﻿namespace VisioAutomation.Scripting
+﻿using SXL = System.Xml.Linq;
+
+namespace VisioAutomation.Scripting
 {
     static class XmlUtil
     {
-        public static string GetAttributeValue(System.Xml.Linq.XElement el, System.Xml.Linq.XName name, string defval)
+        public static string GetAttributeValue(SXL.XElement el, SXL.XName name, string defval)
         {
             var attr = el.Attribute(name);
             if (attr == null)
@@ -13,7 +15,7 @@
             return attr.Value ?? defval;
         }
 
-        public static T GetAttributeValue<T>(System.Xml.Linq.XElement el, System.Xml.Linq.XName name, System.Func<string, T> converter)
+        public static T GetAttributeValue<T>(SXL.XElement el, SXL.XName name, System.Func<string, T> converter)
         {
             var a = el.Attribute(name);
             if (a == null)
@@ -26,7 +28,7 @@
             return converter(v);                
         }
 
-        public static T GetAttributeValue<T>(System.Xml.Linq.XElement el, System.Xml.Linq.XName name, T defval, System.Func<string, T> converter)
+        public static T GetAttributeValue<T>(SXL.XElement el, SXL.XName name, T defval, System.Func<string, T> converter)
         {
             var a = el.Attribute(name);
             if (a == null)

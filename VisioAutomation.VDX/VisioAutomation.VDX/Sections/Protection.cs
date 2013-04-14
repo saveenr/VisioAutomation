@@ -1,6 +1,8 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
 using VA = VisioAutomation;
+using SXL = System.Xml.Linq;
+
 namespace VisioAutomation.VDX.Sections
 {
     public class Protection
@@ -33,7 +35,7 @@ namespace VisioAutomation.VDX.Sections
         public BoolCell ThemeColors = new BoolCell();
         public BoolCell ThemeEffects = new BoolCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el1 = XMLUtil.CreateVisioSchema2003Element("Protection");
             el1.Add(this.Width.ToXml("LockWidth"));

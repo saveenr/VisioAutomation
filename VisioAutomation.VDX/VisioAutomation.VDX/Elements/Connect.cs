@@ -1,4 +1,5 @@
 using VisioAutomation.VDX.Internal;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -39,7 +40,7 @@ namespace VisioAutomation.VDX.Elements
         public int? FromPart { get; set; }
         public int? ToPart { get; set; }
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var connect_el = XMLUtil.CreateVisioSchema2003Element("Connect");
             connect_el.SetAttributeValue("FromSheet", FromSheet);

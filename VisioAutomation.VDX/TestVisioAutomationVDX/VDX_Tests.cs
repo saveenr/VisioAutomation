@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.VDX.Enums;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
+using SXL = System.Xml.Linq;
 
 namespace TestVisioAutomationVDX
 {
@@ -46,8 +46,8 @@ namespace TestVisioAutomationVDX
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
             // First load a starter VDX (a.k.a "the template") - we will build a new VDX from this one
-            //var template_dom = System.Xml.Linq.XDocument.Load(template_filename);
-            var template_dom = System.Xml.Linq.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
+            //var template_dom = SXL.XDocument.Load(template_filename);
+            var template_dom = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
 
             // Clean up the template - remove the existing pages
             VA.VDX.VDXWriter.CleanUpTemplate(template_dom);
@@ -301,7 +301,7 @@ namespace TestVisioAutomationVDX
         {
             string filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            var template = System.Xml.Linq.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
+            var template = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
             VA.VDX.VDXWriter.CleanUpTemplate(template);
 
             var dom_doc = new VA.VDX.Elements.Drawing(template);
@@ -320,12 +320,12 @@ namespace TestVisioAutomationVDX
 
             var dom_custprop1 = new VA.VDX.Elements.CustomProp("PROP2");
             dom_custprop1.Value = "123";
-            dom_custprop1.Type.Result = CustomPropType.String;
+            dom_custprop1.Type.Result = VisioAutomation.VDX.Enums.CustomPropType.String;
             dom_shape.CustomProps.Add(dom_custprop1);
 
             var dom_custprop2 = new VA.VDX.Elements.CustomProp("PROP3");
             dom_custprop2.Value = "456";
-            dom_custprop2.Type.Result = CustomPropType.Number;
+            dom_custprop2.Type.Result = VisioAutomation.VDX.Enums.CustomPropType.Number;
             dom_shape.CustomProps.Add(dom_custprop2);
 
             dom_page.Shapes.Add(dom_shape);
@@ -548,7 +548,7 @@ namespace TestVisioAutomationVDX
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
             var templateDom =
-                System.Xml.Linq.XDocument.Parse(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
+                SXL.XDocument.Parse(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
             VA.VDX.VDXWriter.CleanUpTemplate(templateDom);
             var doc = new VisioAutomation.VDX.Elements.Drawing(templateDom);
             var page = new VA.VDX.Elements.Page(8, 4);

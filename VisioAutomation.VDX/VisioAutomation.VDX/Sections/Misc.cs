@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -30,7 +31,7 @@ namespace VisioAutomation.VDX.Sections
         public DoubleCell ShapeKeywords = new DoubleCell();
         public IntCell DropOnPageScale = new IntCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("Misc");
             el.Add(this.NoObjHandles.ToXml("NoObjHandles"));

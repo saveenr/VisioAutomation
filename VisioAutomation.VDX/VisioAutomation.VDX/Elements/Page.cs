@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VA=VisioAutomation;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -47,7 +48,7 @@ namespace VisioAutomation.VDX.Elements
             get { return _id; }
         }
 
-        internal void AddToElement(System.Xml.Linq.XElement parent)
+        internal void AddToElement(SXL.XElement parent)
         {
             var page_el = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Page");
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;

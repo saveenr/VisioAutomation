@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.VDX.Internal;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -34,7 +35,7 @@ namespace VisioAutomation.VDX.Elements
             this.Add(tr);
         }
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             if (this.Runs != null)
             {

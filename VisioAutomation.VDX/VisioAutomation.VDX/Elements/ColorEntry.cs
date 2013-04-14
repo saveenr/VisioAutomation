@@ -1,4 +1,5 @@
 using VisioAutomation.VDX.Internal;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -13,7 +14,7 @@ namespace VisioAutomation.VDX.Elements
             b = (byte) ((rgb & 0x000000ff) >> 0);
         }
 
-        public void AddToElement(System.Xml.Linq.XElement parent, int ix)
+        public void AddToElement(SXL.XElement parent, int ix)
         {
             var colorentry_el = XMLUtil.CreateVisioSchema2003Element("ColorEntry");
             colorentry_el.SetAttributeValue("IX", ix.ToString(System.Globalization.CultureInfo.InvariantCulture));

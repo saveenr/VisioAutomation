@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -10,7 +11,7 @@ namespace VisioAutomation.VDX.Sections
         public DistanceCell EndX = new DistanceCell();
         public DistanceCell EndY = new DistanceCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("XForm1D");
             el.Add(this.BeginX.ToXml("BeginX"));

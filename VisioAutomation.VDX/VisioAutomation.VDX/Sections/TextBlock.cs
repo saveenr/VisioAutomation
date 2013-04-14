@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -17,7 +18,7 @@ namespace VisioAutomation.VDX.Sections
         public IntCell TextDirection = new IntCell();
         public TransparencyCell TextBkgndTrans = new TransparencyCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el1 = XMLUtil.CreateVisioSchema2003Element("TextBlock");
             el1.Add(this.LeftMargin.ToXml("LeftMargin"));

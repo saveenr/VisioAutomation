@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -18,7 +19,7 @@ namespace VisioAutomation.VDX.Sections
             this.Rows = new List<GeomRow>();
         }
 
-        public void AddToElement(System.Xml.Linq.XElement parent, int index)
+        public void AddToElement(SXL.XElement parent, int index)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("Geom");
             el.SetAttributeValue("IX", index.ToString(System.Globalization.CultureInfo.InvariantCulture));

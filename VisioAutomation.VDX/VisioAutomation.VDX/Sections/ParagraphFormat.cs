@@ -1,6 +1,7 @@
 using VisioAutomation.VDX.Enums;
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -21,7 +22,7 @@ namespace VisioAutomation.VDX.Sections
         public DoubleCell TextPosAfterBullet = new DoubleCell();
         public IntCell Flags = new IntCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent, int ix)
+        public void AddToElement(SXL.XElement parent, int ix)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("Para");
 

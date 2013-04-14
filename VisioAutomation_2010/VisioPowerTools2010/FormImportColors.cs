@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
+using SXL=System.Xml.Linq;
 using VA = VisioAutomation;
 
 namespace VisioPowerTools2010
@@ -96,7 +95,7 @@ namespace VisioPowerTools2010
             return this.textBoxURL.Text.Trim();
         }
 
-        public System.Xml.Linq.XDocument download_xml(string url)
+        public SXL.XDocument download_xml(string url)
         {
             var wc = new System.Net.WebClient();
             string data;
@@ -111,11 +110,11 @@ namespace VisioPowerTools2010
                 return null;
             }
 
-            System.Xml.Linq.XDocument xdoc;
+            SXL.XDocument xdoc;
 
             try
             {
-                xdoc = System.Xml.Linq.XDocument.Parse(data);
+                xdoc = SXL.XDocument.Parse(data);
             }
             catch (Exception)
             {
@@ -236,16 +235,16 @@ namespace VisioPowerTools2010
             }
         }
 
-        private static void strip_namespaces(XElement root)
+        private static void strip_namespaces(SXL.XElement root)
         {
             foreach (var e in root.DescendantsAndSelf())
             {
-                if (e.Name.Namespace != System.Xml.Linq.XNamespace.None)
+                if (e.Name.Namespace != SXL.XNamespace.None)
                 {
-                    e.Name = System.Xml.Linq.XNamespace.None.GetName(e.Name.LocalName);
+                    e.Name = SXL.XNamespace.None.GetName(e.Name.LocalName);
                 }
                 if (
-                    e.Attributes().Where(a => a.IsNamespaceDeclaration || a.Name.Namespace != System.Xml.Linq.XNamespace.None).
+                    e.Attributes().Where(a => a.IsNamespaceDeclaration || a.Name.Namespace != SXL.XNamespace.None).
                         Any())
                 {
                     e.ReplaceAttributes(
@@ -253,9 +252,9 @@ namespace VisioPowerTools2010
                             a =>
                             a.IsNamespaceDeclaration
                                 ? null
-                                : a.Name.Namespace != System.Xml.Linq.XNamespace.None
-                                      ? new System.Xml.Linq.XAttribute(
-                                            System.Xml.Linq.XNamespace.None.GetName(a.Name.LocalName), a.Value)
+                                : a.Name.Namespace != SXL.XNamespace.None
+                                      ? new SXL.XAttribute(
+                                            SXL.XNamespace.None.GetName(a.Name.LocalName), a.Value)
                                       : a));
                 }
             }

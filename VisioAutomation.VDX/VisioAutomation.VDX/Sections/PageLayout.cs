@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -42,7 +43,7 @@ namespace VisioAutomation.VDX.Sections
         public IntCell LineRouteExt = new IntCell();
         public IntCell PageShapeSplit = new IntCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("PageLayout");
             el.Add(this.ResizePage.ToXml("ResizePage"));

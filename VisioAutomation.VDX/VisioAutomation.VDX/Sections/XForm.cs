@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -16,7 +17,7 @@ namespace VisioAutomation.VDX.Sections
         public IntCell FlipY = new IntCell();
         public IntCell FlipMode = new IntCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("XForm");
             el.Add(this.PinX.ToXml("PinX"));

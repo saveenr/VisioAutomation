@@ -1,6 +1,6 @@
-using System.Globalization;
 using VisioAutomation.VDX.Internal.Extensions;
 using VisioAutomation.VDX.Internal;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -17,7 +17,7 @@ namespace VisioAutomation.VDX.Sections
         public System.DateTimeOffset? TimeEdited;
         public System.DateTimeOffset? TimePrinted;
 
-        public System.Xml.Linq.XElement ToXml()
+        public SXL.XElement ToXml()
         {
 
             var ns = Constants.VisioXmlNamespace2003;

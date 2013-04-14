@@ -1,6 +1,7 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
-using VisioAutomation.VDX.Elements;
+using SXL = System.Xml.Linq;
+
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -14,7 +15,7 @@ namespace VisioAutomation.VDX.Sections
 
         public DoubleCell EventMultiDrop = new DoubleCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el1 = XMLUtil.CreateVisioSchema2003Element("Event");
             el1.Add(this.TheData.ToXml("TheData"));

@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -22,7 +23,7 @@ namespace VisioAutomation.VDX.Sections
         public AngleCell ShadowObliqueAngle = new AngleCell();
         public DoubleCell ShadowScale = new DoubleCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("Fill");
             el.Add(this.ForegroundColor.ToXml("FillForegnd"));

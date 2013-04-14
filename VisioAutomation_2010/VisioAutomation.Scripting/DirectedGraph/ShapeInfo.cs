@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VA = VisioAutomation;
+using SXL=System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph
 {
@@ -10,11 +11,11 @@ namespace VisioAutomation.Scripting.DirectedGraph
         public string Stencil;
         public string Master;
         public string URL;
-        public System.Xml.Linq.XElement Element;
+        public SXL.XElement Element;
 
         public Dictionary<string, VA.CustomProperties.CustomPropertyCells> custprops;
 
-        public static ShapeInfo FromXml(Session scriptingsession, System.Xml.Linq.XElement shape_el)
+        public static ShapeInfo FromXml(Session scriptingsession, SXL.XElement shape_el)
         {
             var info = new ShapeInfo();
             info.ID = shape_el.Attribute("id").Value;

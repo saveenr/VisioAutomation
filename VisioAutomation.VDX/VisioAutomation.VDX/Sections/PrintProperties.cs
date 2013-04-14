@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -28,7 +29,7 @@ namespace VisioAutomation.VDX.Sections
         public IntCell ShdwObliqueAngle = new IntCell();
         public IntCell ShdwScaleFactor = new IntCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("PrintProps");
             el.Add(this.PageLeftMargin.ToXml("PageLeftMargin"));

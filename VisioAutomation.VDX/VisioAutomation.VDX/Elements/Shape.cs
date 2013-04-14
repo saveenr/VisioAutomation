@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using VisioAutomation.VDX.Internal;
 using VA=VisioAutomation;
 using System.Linq;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -80,12 +81,12 @@ namespace VisioAutomation.VDX.Elements
             get { return _id; }
         }
 
-        public void AddToElement(System.Xml.Linq.XElement parent, int index)
+        public void AddToElement(SXL.XElement parent, int index)
         {
 
         }
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var shape_el = XMLUtil.CreateVisioSchema2003Element("Shape");
             shape_el.SetAttributeValue("ID", this._id.ToString(System.Globalization.CultureInfo.InvariantCulture));

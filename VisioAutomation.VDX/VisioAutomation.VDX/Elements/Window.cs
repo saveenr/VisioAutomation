@@ -1,4 +1,5 @@
 using VisioAutomation.VDX.Internal;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -20,7 +21,7 @@ namespace VisioAutomation.VDX.Elements
             get { return _id; }
         }
 
-        public virtual void AddToElement(System.Xml.Linq.XElement parent)
+        public virtual void AddToElement(SXL.XElement parent)
         {
             throw new System.Exception();
         }

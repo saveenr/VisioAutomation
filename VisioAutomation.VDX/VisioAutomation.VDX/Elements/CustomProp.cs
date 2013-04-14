@@ -1,6 +1,7 @@
 using VisioAutomation.VDX.Enums;
 using VA=VisioAutomation;
 using VisioAutomation.VDX.Internal.Extensions;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -44,7 +45,7 @@ namespace VisioAutomation.VDX.Elements
             this.NameU = nameu;
         }
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var prop_el = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Prop");
             if (this.Name != null)
@@ -58,7 +59,7 @@ namespace VisioAutomation.VDX.Elements
 
             if (this.Value!=null)
             {
-                var val_el = new System.Xml.Linq.XElement(VA.VDX.Internal.Constants.VisioXmlNamespace2003 + "Value");
+                var val_el = new SXL.XElement(VA.VDX.Internal.Constants.VisioXmlNamespace2003 + "Value");
                 prop_el.Add(val_el);
                 val_el.SetAttributeValue("Unit", "STR");
                 val_el.SetValue(this.Value);                

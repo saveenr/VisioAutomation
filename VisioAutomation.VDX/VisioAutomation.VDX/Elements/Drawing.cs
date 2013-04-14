@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using VisioAutomation.VDX.Internal.Extensions;
 using VA=VisioAutomation;
+using SXL = System.Xml.Linq;
+
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -20,7 +21,7 @@ namespace VisioAutomation.VDX.Elements
 
         internal int CurrentShapeID = -100;
 
-        public Drawing(System.Xml.Linq.XDocument dom)
+        public Drawing(SXL.XDocument dom)
         {
             this._pages = new PageList(this);
             this._faces = new FaceList();

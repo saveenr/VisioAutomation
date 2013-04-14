@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VA=VisioAutomation;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -16,7 +17,7 @@ namespace VisioAutomation.VDX.Elements
         public VA.VDX.ShapeSheet.IntCell Cap = new VA.VDX.ShapeSheet.IntCell();
         public VA.VDX.ShapeSheet.TransparencyCell Transparency = new VA.VDX.ShapeSheet.TransparencyCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var line_el = XMLUtil.CreateVisioSchema2003Element("Line");
             line_el.Add(this.Weight.ToXml("LineWeight"));

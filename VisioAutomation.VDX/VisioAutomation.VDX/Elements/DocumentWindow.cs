@@ -1,5 +1,6 @@
 using VA=VisioAutomation;
 using VisioAutomation.VDX.Internal.Extensions;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -48,7 +49,7 @@ namespace VisioAutomation.VDX.Elements
             }
 
         }
-        public override void AddToElement(System.Xml.Linq.XElement parent)
+        public override void AddToElement(SXL.XElement parent)
         {
             string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;
 

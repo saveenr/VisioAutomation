@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using VA = VisioAutomation;
 using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.OrgChart
 {
@@ -8,12 +9,12 @@ namespace VisioAutomation.Scripting.OrgChart
     {
         public static OCMODEL.Drawing LoadFromXML(Session scriptingsession, string filename)
         {
-            var xdoc = System.Xml.Linq.XDocument.Load(filename);
+            var xdoc = SXL.XDocument.Load(filename);
             return LoadFromXML(scriptingsession, xdoc);
         }
 
         public static OCMODEL.Drawing LoadFromXML(Session scriptingsession,
-                                                             System.Xml.Linq.XDocument xdoc)
+                                                             SXL.XDocument xdoc)
         {
             var root = xdoc.Root;
 

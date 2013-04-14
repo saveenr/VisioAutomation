@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -48,7 +49,7 @@ namespace VisioAutomation.VDX.Elements
             this.Index = index;
         }
 
-        internal void AddToElement(System.Xml.Linq.XElement parent)
+        internal void AddToElement(SXL.XElement parent)
         {
             var layer_el = XMLUtil.CreateVisioSchema2003Element("Layer");
             layer_el.SetAttributeValue("IX", this.Index);

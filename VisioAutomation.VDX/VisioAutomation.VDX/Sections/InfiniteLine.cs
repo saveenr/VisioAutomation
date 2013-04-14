@@ -1,5 +1,6 @@
 ﻿using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -10,7 +11,7 @@ namespace VisioAutomation.VDX.Sections
         public StringCell A = new StringCell();
         public StringCell B = new StringCell();
 
-        public override void AddToElement(System.Xml.Linq.XElement parent, int index)
+        public override void AddToElement(SXL.XElement parent, int index)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("InfiniteLine");
             el.SetAttributeValue("IX", index.ToString(System.Globalization.CultureInfo.InvariantCulture));

@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Sections
 {
@@ -13,7 +14,7 @@ namespace VisioAutomation.VDX.Sections
         public DistanceCell LocPinY = new DistanceCell();
         public AngleCell Angle = new AngleCell();
 
-        public void AddToElement(System.Xml.Linq.XElement parent)
+        public void AddToElement(SXL.XElement parent)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("TextXForm");
             el.Add(this.PinX.ToXml("TxtPinX"));
