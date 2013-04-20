@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoConnect_ConnectorToolDataObject.cs" />
+    <Compile Include="AddContainer.cs" />
+    <Compile Include="LoadStencilDropShape.cs" />
     <Compile Include="format_text.cs" />
     <Compile Include="HelloWorld.cs" />
     <Compile Include="page_getformulas.cs" />
