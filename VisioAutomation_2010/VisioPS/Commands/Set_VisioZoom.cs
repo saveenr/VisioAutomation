@@ -7,9 +7,11 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioZoom")]
     public class Set_VisioZoom : VisioPSCmdlet
     {
-        [SMA.Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] public VA.Scripting.Zoom Level = VA.Scripting.Zoom.In;
+        [SMA.Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
+        public VA.Scripting.Zoom Level = VA.Scripting.Zoom.In;
 
-        [SMA.Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] public double Percent = 0;
+        [SMA.Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
+        public double Percent = 0;
 
         protected override void ProcessRecord()
         {
@@ -21,8 +23,7 @@ namespace VisioPS.Commands
             }
             else
             {
-                scriptingsession.View.Zoom(this.Level);
-               
+                scriptingsession.View.Zoom(this.Level);       
             }
         }
     }
