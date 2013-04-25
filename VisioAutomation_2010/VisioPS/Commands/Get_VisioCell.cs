@@ -23,7 +23,7 @@ namespace VisioPS.Commands
         public ResultType ResultType= ResultType.String;
 
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

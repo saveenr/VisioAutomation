@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Remove_VisioShape : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+       public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

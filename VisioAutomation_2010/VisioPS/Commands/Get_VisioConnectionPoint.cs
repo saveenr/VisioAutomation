@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
     public class Get_VisioConnectionPoint : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] public IList<IVisio.Shape> Shapes;
+        [SMA.Parameter(Mandatory = false)]public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

@@ -9,7 +9,7 @@ namespace VisioPS.Commands
     public class Close_VisioDocument : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Document> Documents;
+        public IVisio.Document[] Documents;
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Force;

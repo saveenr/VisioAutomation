@@ -132,7 +132,7 @@ namespace VisioPS.Commands
         public string DrawingResizeType;
  
 
-        [SMA.Parameter(Mandatory = false)] public IList<IVisio.Page> Pages;
+        [SMA.Parameter(Mandatory = false)] public IVisio.Page[] Pages;
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards;

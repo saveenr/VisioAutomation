@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Get_VisioControl : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+       public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

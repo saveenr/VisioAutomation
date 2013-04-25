@@ -14,7 +14,7 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 1, Mandatory = false)] public double Distance = -1.0;
 
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+       public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

@@ -90,7 +90,7 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public string TxtWidth;
         
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

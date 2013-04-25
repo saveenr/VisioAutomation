@@ -17,7 +17,7 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public string Prompt;
 
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+        public IVisio.Shape[] Shapes; 
 
         protected override void ProcessRecord()
         {

@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Remove_VisioPage : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Page> Pages;
+        public IVisio.Page[] Pages;
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Renumber;

@@ -21,7 +21,7 @@ namespace VisioPS.Commands
         public SMA.SwitchParameter Text { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public IList<IVisio.Shape> Shapes;
+       public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {
