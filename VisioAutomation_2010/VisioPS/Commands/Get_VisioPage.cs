@@ -19,7 +19,8 @@ namespace VisioPS.Commands
 
             if (this.ActivePage)
             {
-                this.WriteObject(scriptingsession.Page.Get());
+                var page = scriptingsession.Page.Get();
+                this.WriteObject(page);
                 return;
             }
 
@@ -28,7 +29,7 @@ namespace VisioPS.Commands
                 // return all pages
                 var active_document = application.ActiveDocument;
                 var pages = active_document.Pages.AsEnumerable().ToList();
-                this.WriteObject(pages);
+                this.WriteObject(pages,true);
             }
             else
             {

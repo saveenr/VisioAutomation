@@ -23,7 +23,7 @@ namespace VisioPS.Commands
                 // Stencil name is provided
                 // So retrieve all the masters in that stencil doc
                 var masters = scriptingsession.Master.Get(this.Stencil);
-                this.WriteObject(masters);
+                this.WriteObject(masters,true);
             }
             else if (isprovided(Master) && !isprovided(Stencil))
             {
@@ -37,7 +37,7 @@ namespace VisioPS.Commands
             {
                 // Neither was given, return all the masters in the active doc
                 var masters = scriptingsession.Master.Get();
-                this.WriteObject(masters);
+                this.WriteObject(masters, true);
                 return;
             }
             else if (isprovided(Master) && isprovided(Stencil))

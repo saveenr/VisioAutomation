@@ -17,7 +17,7 @@ namespace VisioPS.Commands
             if (this.Flags == GetVisioShapeFlags.Selected)
             {
                 var shapes = scriptingsession.Selection.GetShapes();
-                this.WriteObject(shapes);
+                this.WriteObject(shapes,true);
             }
             else if (this.Flags == GetVisioShapeFlags.SelectedNested)
             {
@@ -30,7 +30,7 @@ namespace VisioPS.Commands
                 var active_page = application.ActivePage;
                 var shapes1 = active_page.Shapes;
                 var shapes = shapes1.AsEnumerable().ToList();
-                this.WriteObject(shapes);
+                this.WriteObject(shapes,true);
             }
             else
             {

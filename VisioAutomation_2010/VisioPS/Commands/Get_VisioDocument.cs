@@ -30,7 +30,7 @@ namespace VisioPS.Commands
                 // return all pages
                 var documents = application.Documents;
                 var docs = documents.AsEnumerable().ToList();
-                this.WriteObject(docs);                
+                this.WriteObject(docs,true);                
             }
             else 
             {

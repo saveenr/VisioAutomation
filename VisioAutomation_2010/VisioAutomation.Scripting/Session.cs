@@ -154,7 +154,7 @@ namespace VisioAutomation.Scripting
                     return false;
                 }
 
-                this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> Active Window -> Correct Window Type -> Active Page");
+                this.WriteVerbose("HasActiveDrawing: TRUE: Active Document -> Active Window -> Correct Window Type -> Active Page");
 
                 return true;
             }
