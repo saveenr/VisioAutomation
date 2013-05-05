@@ -34,6 +34,7 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Layer layer = null;
             try
             {
+                this.Session.WriteVerbose("Trying to find Layer named \"{0}\"",layername);
                 var layers = page.Layers;
                 layer = layers.ItemU[layername];
             }

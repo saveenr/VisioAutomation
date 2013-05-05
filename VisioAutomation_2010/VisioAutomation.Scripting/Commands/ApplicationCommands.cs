@@ -45,7 +45,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application New()
         {
+            this.Session.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
+            this.Session.WriteVerbose("Attaching that instance to current scipting session");
             this.Session.VisioApplication = app;
             return app;
         }
