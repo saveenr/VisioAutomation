@@ -21,29 +21,16 @@ namespace VisioPS.Commands
         {
             if (this.Name != null)
             {
-
-                var app = this.ScriptingSession.VisioApplication;
-                var doc = app.ActiveDocument;
-                this.WriteVerboseEx("Retrieving Page \"{0}\"", this.Name);
-                var pages = doc.Pages;
-                var page = pages[this.Name];
-                this.WriteVerboseEx("Setting Active Page to \"{0}\"", this.Name);
-                var window = app.ActiveWindow;
-                window.Page = page;
+                this.ScriptingSession.Page.Set(this.Name);
             }
             else if (this.Page != null)
             {
-
-                var app = this.ScriptingSession.VisioApplication;
-                this.WriteVerboseEx("Setting Active Page to \"{0}\"", Page.Name);
-                var window = app.ActiveWindow;
-                window.Page = this.Page;
+                this.ScriptingSession.Page.Set(this.Page);
             }
             else
             {
                 var scriptingsession = this.ScriptingSession;
-                scriptingsession.Page.GoTo(this.Flag);
-                
+                scriptingsession.Page.GoTo(this.Flag);                
             }
         }
     }

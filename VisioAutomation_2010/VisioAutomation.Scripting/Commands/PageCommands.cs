@@ -13,6 +13,29 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
+        public void Set(IVisio.Page page)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var app = this.Session.VisioApplication;
+            this.Session.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
+            var window = app.ActiveWindow;
+            window.Page = page;
+        }
+
+        public void Set(string name)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var doc = this.Session.VisioApplication.ActiveDocument;
+            this.Session.WriteVerbose("Retrieving Page \"{0}\"", name);
+            var pages = doc.Pages;
+            var page = pages[name];
+            this.Set(page);
+        }
+
         public IVisio.Page Get()
         {
             this.CheckVisioApplicationAvailable();
