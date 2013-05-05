@@ -12,11 +12,10 @@ namespace VisioPS.Commands
         public int ControlIndex { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-       public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             this.ScriptingSession.Control.Delete(this.Shapes,this.ControlIndex);
         }
     }
