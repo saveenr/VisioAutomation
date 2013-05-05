@@ -61,5 +61,43 @@ namespace VisioAutomation.Scripting.Commands
             this.CheckVisioApplicationAvailable();
             this.Session.VisioApplication.Redo();
         }
+
+        public bool Validate()
+        {
+            var app = this.Session.VisioApplication;
+
+            if (app == null)
+            {
+                this.Session.WriteVerbose("Session's Application object is null");
+                return false;
+            }
+            else
+            {
+                this.Session.WriteVerbose("Session's Application object is not null");
+                try
+                {
+                    this.Session.WriteVerbose("Attempting to read Visio Application's Version property");
+                    // try to do something simple, read-only, and fast with the application object
+                    var app_version = app.Version;
+                    this.Session.WriteVerbose(
+                        "No COMException was thrown when reading Version property. This application instance seems valid");
+                    return true;
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+                    this.Session.WriteVerbose("COMException thrown");
+                    this.Session.WriteVerbose("This application instance is invalid");
+                    // If a COMException is thrown, this indicates that the
+                    // application object is invalid
+                    return false;
+                }
+                catch (System.Exception exc)
+                {
+                    this.Session.WriteVerbose("An exception besides COMException was thrown");
+                    // just re-raise it.
+                    throw;
+                }
+            }
+        }
     }
 }
