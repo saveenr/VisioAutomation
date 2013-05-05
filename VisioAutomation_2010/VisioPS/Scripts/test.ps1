@@ -2,7 +2,7 @@
 $script_folder = Split-Path $script_path -Parent
 
 Write-Host $script_folder
-$bin_debug = Join-Path $script_folder "bin/debug"
+$bin_debug = Join-Path $script_folder "../bin/debug"
 Write-Host $bin_debug
 
 $visiops_dll = Join-Path $bin_debug "VisioPS.dll"
