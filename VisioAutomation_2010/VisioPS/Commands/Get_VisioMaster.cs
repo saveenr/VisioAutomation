@@ -17,40 +17,37 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            if (!isprovided(Master) && isprovided(Stencil))
+            bool isprovided_Master = this.Master !=null;
+            bool isprovided_Stencil = this.Stencil !=null;
+
+            this.WriteVerboseEx("Master name provided: {0}", isprovided_Master);
+            this.WriteVerboseEx("Stencil document provided: {0}", isprovided_Stencil);
+
+            if (!isprovided_Master && isprovided_Stencil)
             {
-                // Master name is not provided
-                // Stencil name is provided
-                // So retrieve all the masters in that stencil doc
+                this.WriteVerbose("Retrieve all the masters in the specified stencil doc");
                 var masters = scriptingsession.Master.Get(this.Stencil);
                 this.WriteObject(masters,true);
             }
-            else if (isprovided(Master) && !isprovided(Stencil))
+            else if (isprovided_Master && !isprovided_Stencil)
             {
-                // Master was given
-                // Stencil was not given
-                // return that master in the current doc
+                this.WriteVerbose("Retrieve a specific master in the currently active document");
                 var master = scriptingsession.Master.Get(this.Master);
                 this.WriteObject(master);
             }
-            else if (!isprovided(Master) && !isprovided(Stencil))
+            else if (!isprovided_Master && !isprovided_Stencil)
             {
-                // Neither was given, return all the masters in the active doc
+                this.WriteVerbose("Retrieve all the masters in the currently active document");
                 var masters = scriptingsession.Master.Get();
                 this.WriteObject(masters, true);
                 return;
             }
-            else if (isprovided(Master) && isprovided(Stencil))
+            else if (isprovided_Master && isprovided_Stencil)
             {
-                // Master & Stencil were given, retrive the master in that stencil
+                this.WriteVerbose("Retrieve a specific master in the specified stencil document");
                 var master = scriptingsession.Master.Get(this.Master, this.Stencil);
                 this.WriteObject(master);
             }           
-        }
-
-        private bool isprovided<T>(T s) where T : class 
-        {
-            return s != null;
         }
     }
 }
