@@ -23,26 +23,5 @@ namespace VisioPS.Commands
                 scriptingsession.Page.SetBackgroundPage(this.BackgroundPage);
             }
         }
-
-        public static void set_page_size(VA.Scripting.Session scriptingsession, double width, double height)
-        {
-            double? w = null;
-            double? h = null; 
-
-            if (width > 0)
-            {
-                w = width;
-            }
-
-            if (height > 0)
-            {
-                h = height;
-            }
-
-            if (w.HasValue || h.HasValue)
-            {
-                scriptingsession.Page.SetSize(w, h);
-            }
-        }
     }
 }

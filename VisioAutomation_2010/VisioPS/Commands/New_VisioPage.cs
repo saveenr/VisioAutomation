@@ -1,3 +1,4 @@
+using VA=VisioAutomation;
 using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
@@ -16,7 +17,7 @@ namespace VisioPS.Commands
         {
             var scripting_session = this.ScriptingSession;
             var page = scripting_session.Page.New(null, false);
-            Set_VisioPageLayout.set_page_size(scripting_session, Width, Height);
+            set_page_size(scripting_session, Width, Height);
             
             if (this.Name != null)
             {
@@ -24,6 +25,27 @@ namespace VisioPS.Commands
             }
 
             this.WriteObject(page);
+        }
+
+        public static void set_page_size(VA.Scripting.Session scriptingsession, double width, double height)
+        {
+            double? w = null;
+            double? h = null;
+
+            if (width > 0)
+            {
+                w = width;
+            }
+
+            if (height > 0)
+            {
+                h = height;
+            }
+
+            if (w.HasValue || h.HasValue)
+            {
+                scriptingsession.Page.SetSize(w, h);
+            }
         }
     }
 }
