@@ -5,8 +5,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioActivePage")]
-    public class Set_VisioActivePage : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPage")]
+    public class Set_VisioPage : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Name")]
         public string Name { get; set; }
