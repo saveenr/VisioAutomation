@@ -131,7 +131,7 @@
     <Compile Include="Commands\Get_VisioMaster.cs" />
     <Compile Include="Commands\Get_VisioUserDefinedCell.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
-    <Compile Include="Commands\Set_VisioActivePage.cs" />
+    <Compile Include="Commands\Set_VisioPage.cs" />
     <Compile Include="Commands\New_VisioControl.cs" />
     <Compile Include="Commands\New_VisioDocument.cs" />
     <Compile Include="enums\SelectionOperation.cs" />

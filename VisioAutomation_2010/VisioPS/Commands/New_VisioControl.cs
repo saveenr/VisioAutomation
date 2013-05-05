@@ -34,7 +34,7 @@ namespace VisioPS.Commands
         public string Tip { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-       public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

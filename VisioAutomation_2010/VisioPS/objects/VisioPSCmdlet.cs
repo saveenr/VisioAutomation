@@ -20,11 +20,12 @@ namespace VisioPS
 
                 // Must always setup the session output
                 // if we try to do this only once per new session then we'll
-                // get the "The WriteObject and WriteError methods cannot be
+                // get this message:
+                //
+                //    "The WriteObject and WriteError methods cannot be
                 //     called from outside the overrides of the BeginProcessing
                 //     ProcessRecord, and EndProcessing methods, and only
                 //     from that same thread."
-                // message.
 
                 cached_session.Context = new VisioPSSessionContext(this);
                 return cached_session;
@@ -36,8 +37,7 @@ namespace VisioPS
             string s = string.Format(fmt, items);
             this.WriteVerbose(s);
         }
-
-
+        
         protected bool CheckFileExists(string file)
         {
             if (!System.IO.File.Exists(file))
