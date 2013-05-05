@@ -9,7 +9,7 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            this.WriteObject(Globals.Application);
+            this.WriteObject(AttachedVisioApplication);
         }
     }
 }
