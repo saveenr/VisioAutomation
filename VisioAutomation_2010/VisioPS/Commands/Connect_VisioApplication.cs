@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            if (Globals.Application != null)
+            if (AttachedVisioApplication != null)
             {
                 this.WriteWarning("Already connected to an instance");
             }
@@ -20,7 +20,7 @@ namespace VisioPS.Commands
                 throw new VA.AutomationException("Could not find an instance");
             }
 
-            Globals.Application = app;
+            AttachedVisioApplication = app;
 
             this.WriteObject(app);
         }

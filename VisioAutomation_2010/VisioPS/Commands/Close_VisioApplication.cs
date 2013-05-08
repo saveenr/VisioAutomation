@@ -7,13 +7,13 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            if (Globals.Application == null)
+            if (AttachedVisioApplication == null)
             {
                 this.WriteWarning("There is no Visio Application to stop");
                 return;
             }
 
-            Globals.Application.Quit();
+            AttachedVisioApplication.Quit();
         }
     }
 }

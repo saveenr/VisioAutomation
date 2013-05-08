@@ -302,8 +302,12 @@ namespace VisioAutomation.Scripting.Commands
             this.CheckActiveDrawingAvailable();
 
             int n = this.GetTargetSelection(target_shapes);
+
+            this.Session.WriteVerbose("Number of shapes to duplicate: {0}", n);
+
             if (n<1)
             {
+                this.Session.WriteVerbose("Zero shapes to duplicate. No duplication operation performed");
                 return;
             }
 

@@ -9,138 +9,207 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPageCell")]
     public class Set_VisioPageCell: VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] public string PageWidth { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string PageHeight { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string PageBottomMargin;
-        [SMA.Parameter(Mandatory = false)] public string PageLeftMargin;
-        [SMA.Parameter(Mandatory = false)] public string PageLineJumpDirX;
-        [SMA.Parameter(Mandatory = false)] public string PageLineJumpDirY;
-        [SMA.Parameter(Mandatory = false)] public string PageRightMargin;
-        [SMA.Parameter(Mandatory = false)] public string PageScale;
-        [SMA.Parameter(Mandatory = false)] public string PageShapeSplit;
-        [SMA.Parameter(Mandatory = false)] public string PageTopMargin;
+        [SMA.Parameter(Mandatory = false)] 
+        public string PageWidth { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)] 
+        public string PageHeight { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)] 
+        public string PageBottomMargin;
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string PageLeftMargin { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string PageLineJumpDirX { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string PageLineJumpDirY { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string PageRightMargin { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string PageScale { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string PageShapeSplit { get; set; }
+        
+        [SMA.Parameter(Mandatory = false)]
+        public string PageTopMargin { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public string CenterX;
+        public string CenterX { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public string CenterY;
+        public string CenterY { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public string PaperKind;
+        public string PaperKind { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string PrintGrid;
+        public string PrintGrid { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string PrintPageOrientation;
+        public string PrintPageOrientation { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ScaleX;
+        public string ScaleX { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ScaleY;
+        public string ScaleY { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string PaperSource;
+        public string PaperSource { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string DrawingScaleType;
+        public string DrawingScaleType { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string DrawingScale;
+        public string DrawingScale { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string DrawingSizeType;
+        public string DrawingSizeType { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string InhibitSnap;
+        public string InhibitSnap { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ShdwObliqueAngle;
+        public string ShdwObliqueAngle { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ShdwOffsetX;
+        public string ShdwOffsetX { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ShdwOffsetY;
+        public string ShdwOffsetY { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ShdwScaleFactor;
+        public string ShdwScaleFactor { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ShdwType;
+        public string ShdwType { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string UIVisibility;
+        public string UIVisibility { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string XGridDensity;
+        public string XGridDensity { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string XGridOrigin;
+        public string XGridOrigin { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string XGridSpacing;
+        public string XGridSpacing { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string XRulerDensity;
+        public string XRulerDensity { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string XRulerOrigin;
+        public string XRulerOrigin { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string YGridDensity;
+        public string YGridDensity { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string YGridOrigin;
+        public string YGridOrigin { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string YGridSpacing;
+        public string YGridSpacing { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string YRulerDensity;
+        public string YRulerDensity { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string YRulerOrigin;
+        public string YRulerOrigin { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string AvenueSizeX;
+        public string AvenueSizeX { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string AvenueSizeY;
+        public string AvenueSizeY { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string BlockSizeX;
+        public string BlockSizeX { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string BlockSizeY;
+        public string BlockSizeY { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string CtrlAsInput;
+        public string CtrlAsInput { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string DynamicsOff;
+        public string DynamicsOff { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string EnableGrid;
+        public string EnableGrid { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineAdjustFrom;
+        public string LineAdjustFrom { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineAdjustTo;
+        public string LineAdjustTo { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineJumpCode;
+        public string LineJumpCode { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineJumpFactorX;
+        public string LineJumpFactorX { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineJumpFactorY;
+        public string LineJumpFactorY { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineJumpStyle;
+        public string LineJumpStyle { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineRouteExt;
+        public string LineRouteExt { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineToLineX;
+        public string LineToLineX { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineToLineY;
+        public string LineToLineY { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineToNodeX;
+        public string LineToNodeX { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string LineToNodeY;
+        public string LineToNodeY { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string PlaceDepth;
+        public string PlaceDepth { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string PlaceFlip;
+        public string PlaceFlip { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string PlaceStyle;
+        public string PlaceStyle { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string ResizePage;
+        public string ResizePage { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string PlowCode;
+        public string PlowCode { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string RouteStyle;
+        public string RouteStyle { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string AvoidPageBreaks;
+        public string AvoidPageBreaks { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
-        public string DrawingResizeType;
+        public string DrawingResizeType { get; set; }
  
-
-        [SMA.Parameter(Mandatory = false)] public IVisio.Page[] Pages;
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page[] Pages { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter BlastGuards;
+        public SMA.SwitchParameter BlastGuards { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public SMA.SwitchParameter TestCircular;
-
-
+        public SMA.SwitchParameter TestCircular { get; set; }
+        
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -225,9 +294,18 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.AvoidPageBreaks, this.AvoidPageBreaks);
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.DrawingResizeType, this.DrawingResizeType);
 
+
+                this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
+                this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
+                this.WriteVerboseEx("Number of Shapes : {0}", 1);
+                this.WriteVerboseEx("Number of Total Updates: {0}", update.Count());
+                this.WriteVerboseEx("Number of Updates per Shape: {0}", update.Count() / 1);
+
                 using (var undoscope = new VA.Application.UndoScope(this.ScriptingSession.VisioApplication, "SetPageCells"))
                 {
+                    this.WriteVerboseEx("Start Update");
                     update.Execute(pagesheet);
+                    this.WriteVerboseEx("End Update");
                 }
             }
 

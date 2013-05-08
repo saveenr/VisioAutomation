@@ -56,41 +56,44 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public string ShadowScalefactor { get; set; }
         [SMA.Parameter(Mandatory = false)] public string ShadowType { get; set; }
         [SMA.Parameter(Mandatory = false)] public string SelectMode { get; set; }
-        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter BlastGuards;
-        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter TestCircular;
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter BlastGuards { get; set; }
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter TestCircular { get; set; }
 
 
-        [SMA.Parameter(Mandatory = false)] public string LockAspect;
-        [SMA.Parameter(Mandatory = false)] public string LockBegin;
-        [SMA.Parameter(Mandatory = false)] public string LockCalcWH;
-        [SMA.Parameter(Mandatory = false)] public string LockCrop;
-        [SMA.Parameter(Mandatory = false)] public string LockCustProp;
-        [SMA.Parameter(Mandatory = false)] public string LockDelete;
-        [SMA.Parameter(Mandatory = false)] public string LockEnd;
-        [SMA.Parameter(Mandatory = false)] public string LockFormat;
-        [SMA.Parameter(Mandatory = false)] public string LockFromGroupFormat;
-        [SMA.Parameter(Mandatory = false)] public string LockGroup;
-        [SMA.Parameter(Mandatory = false)] public string LockHeight;
-        [SMA.Parameter(Mandatory = false)] public string LockMoveX;
-        [SMA.Parameter(Mandatory = false)] public string LockMoveY;
-        [SMA.Parameter(Mandatory = false)] public string LockRotate;
-        [SMA.Parameter(Mandatory = false)] public string LockSelect;
-        [SMA.Parameter(Mandatory = false)] public string LockTextEdit;
-        [SMA.Parameter(Mandatory = false)] public string LockThemeColors;
-        [SMA.Parameter(Mandatory = false)] public string LockThemeEffects;
-        [SMA.Parameter(Mandatory = false)] public string LockVtxEdit;
-        [SMA.Parameter(Mandatory = false)] public string LockWidth;
+        [SMA.Parameter(Mandatory = false)]
+        public string LockAspect { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockBegin { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockCalcWH { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockCrop { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockCustProp { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockDelete { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockEnd { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockFormat { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockFromGroupFormat { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockGroup { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockHeight { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockMoveX { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockMoveY { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockRotate { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockSelect { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockTextEdit { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockThemeColors { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockThemeEffects { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockVtxEdit { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string LockWidth { get; set; }
 
-        [SMA.Parameter(Mandatory = false)] public string TxtAngle;
-        [SMA.Parameter(Mandatory = false)] public string TxtHeight;
-        [SMA.Parameter(Mandatory = false)] public string TxtLocPinX ;
-        [SMA.Parameter(Mandatory = false)] public string TxtLocPinY;
-        [SMA.Parameter(Mandatory = false)] public string TxtPinX;
-        [SMA.Parameter(Mandatory = false)] public string TxtPinY;
-        [SMA.Parameter(Mandatory = false)] public string TxtWidth;
+        [SMA.Parameter(Mandatory = false)] public string TxtAngle { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string TxtHeight { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string TxtLocPinX  { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string TxtLocPinY { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string TxtPinX { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string TxtPinY { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string TxtWidth { get; set; }
         
         [SMA.Parameter(Mandatory = false)]
-        public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shapes { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -153,8 +156,7 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LocPinY, this.LocPinY);
 
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.SelectMode, this.SelectMode);
-
-
+                
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockAspect , this.LockAspect);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockBegin, this.LockBegin);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockCalcWH, this.LockCalcWH);
@@ -183,15 +185,21 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth);
-
-
             }
 
             var page = scriptingsession.Page.Get();
 
+            this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
+            this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
+            this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
+            this.WriteVerboseEx("Number of Total Updates: {0}", update.Count());
+            this.WriteVerboseEx("Number of Updates per Shape: {0}", update.Count() / target_shapes.Count());
+
             using (var undoscope = new VA.Application.UndoScope(this.ScriptingSession.VisioApplication, "SetShapeCells"))
             {
-                update.Execute(page);                
+                this.WriteVerboseEx("Start Update");
+                update.Execute(page);
+                this.WriteVerboseEx("End Update");
             }
         }
     }

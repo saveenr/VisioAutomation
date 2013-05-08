@@ -20,13 +20,13 @@ namespace VisioAutomation.Scripting.Commands
             this.CheckActiveDrawingAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
+
             if (shapes.Count<1)
             {
                 return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
             }
 
             var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
-            var application = this.Session.VisioApplication;
             foreach (var shape in shapes)
             {
                 var cp = VA.Connections.ConnectionPointCells.GetCells(shape);
@@ -50,10 +50,8 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<int>(0);
             }
 
-
             int dirx = 0;
             int diry = 0;
-
 
             var indices = new List<int>(shapes.Count);
 

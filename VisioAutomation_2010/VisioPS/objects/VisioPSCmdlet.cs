@@ -1,3 +1,4 @@
+using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -5,17 +6,29 @@ namespace VisioPS
 {
     public class VisioPSCmdlet : SMA.Cmdlet
     {
-        private static VA.Scripting.Session cached_session;
-        internal static ModuleGlobals Globals = new ModuleGlobals();
+        private static VA.Scripting.Session scripting_session;
+
+        // Attached Visio Application represents the Visio instance
+        //
+        // that will be used for the cmdlet
+        // NOTE that there are three cases - all are valid - to think about:
+        // AttachedApplication = null
+        // AttachedApplication != null && it is a usable instance
+        // AttachedApplication != null && it is an unusable instance. For example
+        //                     it might have been manually deleted
+
+        protected IVisio.Application AttachedVisioApplication;
 
         public VA.Scripting.Session ScriptingSession
         {
             get
             {
                 // if a scripting session is not available create one and cache it
-                if (cached_session==null)
+                // for the lifetime of this cmdlet
+
+                if (scripting_session==null)
                 {
-                    cached_session = new VA.Scripting.Session(Globals.Application);
+                    scripting_session = new VA.Scripting.Session(AttachedVisioApplication);
                 }
 
                 // Must always setup the session output
@@ -27,8 +40,8 @@ namespace VisioPS
                 //     ProcessRecord, and EndProcessing methods, and only
                 //     from that same thread."
 
-                cached_session.Context = new VisioPSSessionContext(this);
-                return cached_session;
+                scripting_session.Context = new VisioPSSessionContext(this);
+                return scripting_session;
             }
         }
 
