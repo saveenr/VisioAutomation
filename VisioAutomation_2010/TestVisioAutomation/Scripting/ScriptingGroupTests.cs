@@ -22,7 +22,7 @@ namespace TestVisioAutomation
             var s0 = ss.Selection.GetShapes();
             Assert.AreEqual(4, s0.Count);
 
-            var g = ss.Layout.Group(null);
+            var g = ss.Layout.Group();
             ss.Selection.SelectNone();
             ss.Selection.SelectAll();
 

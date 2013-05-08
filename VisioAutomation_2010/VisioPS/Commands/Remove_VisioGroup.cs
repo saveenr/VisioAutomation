@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Remove_VisioGroup : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-       public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

@@ -45,6 +45,24 @@ namespace VisioAutomation.Scripting.Commands
             return application.ActivePage;
         }
 
+        public void Delete(IList<IVisio.Page> pages, bool renumber)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            if (pages == null)
+            {
+                var application = this.Session.VisioApplication;
+                pages = new List<IVisio.Page> { application.ActivePage };
+            }
+
+            foreach (var page in pages)
+            {
+                page.Delete(renumber ? (short) 1 : (short) 0);
+            }
+        }
+
+
         public VA.Drawing.Size GetSize()
         {
             this.CheckVisioApplicationAvailable();

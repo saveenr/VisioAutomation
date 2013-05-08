@@ -321,29 +321,22 @@ namespace VisioAutomation.Scripting.Commands
             return data;
         }
 
-        public IVisio.Shape Group(IList<IVisio.Shape> target_shapes)
+        public IVisio.Shape Group()
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
-            if (target_shapes == null)
+            // No shapes provided, use the active selection
+            if (this.Session.HasSelectedShapes())
             {
-                if (!this.Session.HasSelectedShapes())
-                {
-                    this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
-                }
-                else
-                {
-                    // do nothing
-                }
+                this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
             }
             else
             {
-                this.Session.Selection.SelectNone();
-                this.Session.Selection.Select(target_shapes);
-                this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
+                throw new ScriptingException("No Selected Shapes to Group");
             }
 
+            // The current selection should be the group
             var selection = this.Session.Selection.Get();
             var g = selection.Group();
             return g;
