@@ -1,1 +1,1 @@
-powershell -noexit -file test.ps1
+powershell -noexit -file Scripts/test.ps1
