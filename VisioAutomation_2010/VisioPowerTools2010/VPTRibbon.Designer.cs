@@ -49,10 +49,12 @@
             this.groupExport = this.Factory.CreateRibbonGroup();
             this.buttonExportSelection = this.Factory.CreateRibbonButton();
             this.buttonSelectionXHTML = this.Factory.CreateRibbonButton();
+            this.buttomResetPageOrigin = this.Factory.CreateRibbonButton();
             this.groupDev = this.Factory.CreateRibbonGroup();
             this.buttonDeveloper = this.Factory.CreateRibbonButton();
             this.buttonScrambleText = this.Factory.CreateRibbonButton();
-            this.buttomResetPageOrigin = this.Factory.CreateRibbonButton();
+            this.groupPage = this.Factory.CreateRibbonGroup();
+            this.buttonResizePageToFit = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
             this.group1.SuspendLayout();
@@ -60,6 +62,7 @@
             this.groupDraw.SuspendLayout();
             this.groupExport.SuspendLayout();
             this.groupDev.SuspendLayout();
+            this.groupPage.SuspendLayout();
             // 
             // tab1
             // 
@@ -71,6 +74,7 @@
             // 
             this.tab2.Groups.Add(this.group1);
             this.tab2.Groups.Add(this.groupText);
+            this.tab2.Groups.Add(this.groupPage);
             this.tab2.Groups.Add(this.groupDraw);
             this.tab2.Groups.Add(this.groupExport);
             this.tab2.Groups.Add(this.groupDev);
@@ -145,7 +149,6 @@
             // 
             this.groupExport.Items.Add(this.buttonExportSelection);
             this.groupExport.Items.Add(this.buttonSelectionXHTML);
-            this.groupExport.Items.Add(this.buttomResetPageOrigin);
             this.groupExport.Label = "Export";
             this.groupExport.Name = "groupExport";
             // 
@@ -160,6 +163,12 @@
             this.buttonSelectionXHTML.Label = "Selection > XHTML";
             this.buttonSelectionXHTML.Name = "buttonSelectionXHTML";
             this.buttonSelectionXHTML.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonSelectionXHTML_Click);
+            // 
+            // buttomResetPageOrigin
+            // 
+            this.buttomResetPageOrigin.Label = "Reset Page Origin";
+            this.buttomResetPageOrigin.Name = "buttomResetPageOrigin";
+            this.buttomResetPageOrigin.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttomResetPageOrigin_Click);
             // 
             // groupDev
             // 
@@ -180,11 +189,18 @@
             this.buttonScrambleText.Name = "buttonScrambleText";
             this.buttonScrambleText.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonScrambleText_Click);
             // 
-            // buttomResetPageOrigin
+            // groupPage
             // 
-            this.buttomResetPageOrigin.Label = "Reset Page Origin";
-            this.buttomResetPageOrigin.Name = "buttomResetPageOrigin";
-            this.buttomResetPageOrigin.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttomResetPageOrigin_Click);
+            this.groupPage.Items.Add(this.buttomResetPageOrigin);
+            this.groupPage.Items.Add(this.buttonResizePageToFit);
+            this.groupPage.Label = "Page";
+            this.groupPage.Name = "groupPage";
+            // 
+            // buttonResizePageToFit
+            // 
+            this.buttonResizePageToFit.Label = "Resize to Fit";
+            this.buttonResizePageToFit.Name = "buttonResizePageToFit";
+            this.buttonResizePageToFit.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.buttonResizePageToFit_Click);
             // 
             // VPTRibbon
             // 
@@ -207,6 +223,8 @@
             this.groupExport.PerformLayout();
             this.groupDev.ResumeLayout(false);
             this.groupDev.PerformLayout();
+            this.groupPage.ResumeLayout(false);
+            this.groupPage.PerformLayout();
 
         }
 
@@ -231,6 +249,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupDev;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonScrambleText;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton buttomResetPageOrigin;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupPage;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonResizePageToFit;
     }
 
     partial class ThisRibbonCollection

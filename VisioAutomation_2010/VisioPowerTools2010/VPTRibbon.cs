@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
+using VisioAutomation.Layout.PageLayout;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -340,6 +341,12 @@ namespace VisioPowerTools2010
     
             model.Render(page);
 
+            var pl = new VA.Layout.PageLayout.FlowchartLayout();
+            pl.ConnectorStyle = ConnectorStyle.Flowchart;
+            pl.ConnectorAppearance = ConnectorAppearance.Curved;
+            pl.Apply(page);
+
+            page.ResizeToFitContents();
 
         }
 
@@ -453,6 +460,30 @@ namespace VisioPowerTools2010
                 return;
             }
             this.scriptingsession.Page.ResetOrigin(null);
+        }
+
+        private void buttonResizePageToFit_Click(object sender, RibbonControlEventArgs e)
+        {
+            var app = Globals.ThisAddIn.Application;
+            var doc = app.ActiveDocument;
+            if (doc == null)
+            {
+                return;
+            }
+
+            if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
+            {
+                MessageBox.Show("Currently Active Document is not a Drawing");
+                return;
+            }
+
+            var page = app.ActivePage;
+            if (page == null)
+            {
+                return;
+            }
+            page.ResizeToFitContents();
+
         }
     }
 }
