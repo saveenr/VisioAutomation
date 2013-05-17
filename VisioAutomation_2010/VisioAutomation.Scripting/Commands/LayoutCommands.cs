@@ -329,17 +329,17 @@ namespace VisioAutomation.Scripting.Commands
             // No shapes provided, use the active selection
             if (this.Session.HasSelectedShapes())
             {
-                this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
+                // the other way of doing this: this.Session.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);
+                // but it doesn't return the group
+
+                var selection = this.Session.Selection.Get();
+                var g = selection.Group();
+                return g;
             }
             else
             {
                 throw new ScriptingException("No Selected Shapes to Group");
             }
-
-            // The current selection should be the group
-            var selection = this.Session.Selection.Get();
-            var g = selection.Group();
-            return g;
         }
 
         public void Ungroup(IList<IVisio.Shape> target_shapes)
