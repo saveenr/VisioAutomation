@@ -10,7 +10,7 @@ namespace VisioAutomation.VDX.ShapeSheet
         public override string GetResultString()
         {
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
-            return string.Format(invariant_culture, "#{0:X}", this.Result);
+            return string.Format(invariant_culture, "#{0:X6}", this.Result);
         }
     }
 }
