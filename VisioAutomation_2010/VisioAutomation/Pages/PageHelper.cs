@@ -13,29 +13,28 @@ namespace VisioAutomation.Pages
             IVisio.Page dest_page)
         {
             var app = src_page.Application;
-            var doc = src_page.Document;
             short copy_paste_flags = (short)IVisio.VisCutCopyPasteCodes.visCopyPasteNoTranslate;
 
             // handle the source page
             if (src_page == null)
             {
-                throw new System.ArgumentNullException("Source Page is null");
+                throw new System.ArgumentNullException("src_page");
             }
 
             if (dest_page == null)
             {
-                throw new System.ArgumentNullException("Destination Page is null");
+                throw new System.ArgumentNullException("dest_page");
             }
 
             if (dest_page == src_page)
             {
-                throw new System.ArgumentNullException("Destination Page cannot be Source Page");
+                throw new VA.AutomationException("Destination Page cannot be Source Page");
             }
 
 
             if (src_page != app.ActivePage)
             {
-                throw new System.ArgumentException("Source page must be active page.", "src_page");
+                throw new VA.AutomationException("Source page must be active page.");
             }
 
             var src_page_shapes = src_page.Shapes;
@@ -74,11 +73,6 @@ namespace VisioAutomation.Pages
 
         private static VA.Drawing.Size GetSize(IVisio.Page page)
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException("page");
-            }
-
             var query = new VA.ShapeSheet.Query.CellQuery();
             var col_height = query.AddColumn(VA.ShapeSheet.SRCConstants.PageHeight);
             var col_width = query.AddColumn(VA.ShapeSheet.SRCConstants.PageWidth);
@@ -89,23 +83,35 @@ namespace VisioAutomation.Pages
             return s;
         }
 
-        public static void ResizeToFitContents(IVisio.Page page, VA.Drawing.Size bordersize)
+        private static void SetSize(IVisio.Page page, VA.Drawing.Size size)
         {
+            var page_cells = new VA.Pages.PageCells();
+            page_cells.PageHeight = size.Height;
+            page_cells.PageWidth = size.Width;
+            var pageupdate = new VA.ShapeSheet.Update();
+            pageupdate.SetFormulas(page_cells);
+            pageupdate.Execute(page.PageSheet);
+        }
+        
+        public static void ResizeToFitContents(IVisio.Page page, VA.Drawing.Size padding)
+        {
+            // first perform the native resizetofit
             page.ResizeToFitContents();
 
-            if ((bordersize.Width > 0.0) || (bordersize.Height > 0.0))
+            if ((padding.Width > 0.0) || (padding.Height > 0.0))
             {
+                // if there is any additional padding requested
+                // we need to further handle the page
+
+                // first determine the desired page size including the padding
+                // and set the new size
+
                 var old_size = VA.Pages.PageHelper.GetSize(page);
-                var new_size = old_size + bordersize.Multiply(2, 2);
+                var new_size = old_size + padding.Multiply(2, 2);
+                SetSize(page,new_size);
 
-                // Set the page size
-                var page_cells = new VA.Pages.PageCells();
-                page_cells.PageHeight = new_size.Height;
-                page_cells.PageWidth = new_size.Width;
-                var pageupdate = new VA.ShapeSheet.Update();
-                pageupdate.Execute(page);
-
-                // recenter the contents
+                // The page has the correct size, but
+                // the contents will be offset from the correct location
                 page.CenterDrawing();
             }
         }

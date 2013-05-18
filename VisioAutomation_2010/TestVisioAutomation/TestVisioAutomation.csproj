@@ -88,6 +88,7 @@
     <Compile Include="AssertVA.cs" />
     <Compile Include="DOM\DOM_Text_tests.cs" />
     <Compile Include="Layout\CointainerLayoutTests.cs" />
+    <Compile Include="Layout\ResizePageTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="TestExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />

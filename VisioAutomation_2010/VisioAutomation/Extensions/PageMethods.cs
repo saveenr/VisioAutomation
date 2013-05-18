@@ -7,9 +7,9 @@ namespace VisioAutomation.Extensions
 {
     public static class PageMethods
     {
-        public static void ResizeToFitContents(this IVisio.Page page, VA.Drawing.Size bordersize)
+        public static void ResizeToFitContents(this IVisio.Page page, VA.Drawing.Size padding)
         {
-            VA.Pages.PageHelper.ResizeToFitContents(page, bordersize);
+            VA.Pages.PageHelper.ResizeToFitContents(page, padding);
         }
 
         public static IVisio.Shape DrawLine(this IVisio.Page page, VA.Drawing.Point p1, VA.Drawing.Point p2)
