@@ -187,8 +187,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="run_bindebug_demo.cmd" />
     <None Include="Scripts\manual_install.ps1" />
-    <None Include="Scripts\test.ps1" />
+    <None Include="Scripts\demo_bin_debug.ps1" />
     <None Include="VisioPS.Types.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
