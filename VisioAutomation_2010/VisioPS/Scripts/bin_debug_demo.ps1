@@ -1,25 +1,26 @@
-﻿cls
+﻿Param($demotype)
+
+$Host.UI.RawUI.WindowTitle = "PowerShell:VisioPS"
+cls
 CD \
 
 $script_path = $myinvocation.mycommand.path
 $script_folder = Split-Path $script_path -Parent
 
-#Write-Host $script_folder
-$bin_debug = Join-Path $script_folder "../bin/debug"
-#Write-Host $bin_debug
+if ($demotype -eq "bindebug")
+{
+    $bin_debug = Join-Path $script_folder "../bin/debug"
+    $visiops_psd1 = Join-Path $bin_debug "VisioPS.psd1"
+    Import-Module $visiops_psd1
+}
+else
+{
+    Import-Module VisioPS
+}
 
-$visiops_dll = Join-Path $bin_debug "VisioPS.dll"
-#Write-Host $visiops_dll 
-
-
-$types_file = Join-Path $bin_debug "VisioPS.Types.ps1xml"
-
-Import-Module $visiops_dll 
-
-Update-TypeData $types_file
+$visiopsmodule = Get-Module VisioPS
 
 New-VisioApplication
-New-VisioDocument
 
 $doc = New-VisioDocument
 $basic_stencil = Open-VisioDocument "basic_u.vss"
@@ -34,3 +35,8 @@ Set-VisioShapeCell -FillForegnd "rgb(255,128,50)" -Width "2" -CharSize "30pt" -S
 Set-VisioShapeCell -FillForegnd "rgb(255,200,50)" -Width "3" -CharSize "40pt" -Shapes $shapes[2]
 
 Set-VisioText -Shapes $shape -Text "A","B","C"
+
+Write-Host Demo Type: $demotype
+Write-Host Module Path: $visiopsmodule.Path
+Write-Host Module Version: $visiopsmodule.Version
+Write-Host
