@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using VisioAutomation.Scripting;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using System.Linq;
@@ -10,9 +11,19 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioShapeCell")]
     public class Get_VisioShapeCell: VisioPSCmdlet
     {
-
         [SMA.Parameter(Mandatory = true,Position=0)]
-        [SMA.ValidateSet("Angle", "BeginX", "BeginY", "CharCase", "CharColor", "CharColorTransparency", "CharFont", "CharFontScale", "CharLetterspace", "CharSize", "CharStyle", "EndX", "EndY", "FillBackgroundColor", "FillBackgroundtransparency", "FillForegroundColor", "FillForegroundtransparency", "FillPattern", "Height", "LineCap", "LineColor", "LinePattern", "LineWeight", "LockAspect", "LockBegin", "LockCalcWH", "LockCrop", "LockCustProp", "LockDelete", "LockEnd", "LockFormat", "LockFromGroupFormat", "LockGroup", "LockHeight", "LockMoveX", "LockMoveY", "LockRotate", "LockSelect", "LockTextEdit", "LockThemeColors", "LockThemeEffects", "LockVtxEdit", "LockWidth", "LocPinX", "LocPinY", "PinX", "PinY", "Rounding", "SelectMode", "ShadowBackground", "ShadowBackgroundTransparency", "ShadowForeground", "ShadowForegroundTransparency", "ShadowObliqueAngle", "ShadowOffsetX", "ShadowOffsetY", "ShadowPattern", "ShadowScalefactor", "ShadowType", "TxtAngle", "TxtHeight", "TxtLocPinX", "TxtLocPinY", "TxtPinX", "TxtPinY", "TxtWidth", "Width")]
+        [SMA.ValidateSet( 
+            "Angle", "BeginX", "BeginY", "CharCase", "CharColor", "CharColorTransparency", "CharFont", 
+            "CharFontScale", "CharLetterspace", "CharSize", "CharStyle", "EndX", "EndY", "FillBackgroundColor", 
+            "FillBackgroundtransparency", "FillForegroundColor", "FillForegroundtransparency", "FillPattern", 
+            "Height", "LineCap", "LineColor", "LinePattern", "LineWeight", "LockAspect", "LockBegin", 
+            "LockCalcWH", "LockCrop", "LockCustProp", "LockDelete", "LockEnd", "LockFormat", "LockFromGroupFormat", 
+            "LockGroup", "LockHeight", "LockMoveX", "LockMoveY", "LockRotate", "LockSelect", "LockTextEdit", 
+            "LockThemeColors", "LockThemeEffects", "LockVtxEdit", "LockWidth", "LocPinX", "LocPinY", "PinX", 
+            "PinY", "Rounding", "SelectMode", "ShadowBackground", "ShadowBackgroundTransparency", "ShadowForeground", 
+            "ShadowForegroundTransparency", "ShadowObliqueAngle", "ShadowOffsetX", "ShadowOffsetY", "ShadowPattern", 
+            "ShadowScalefactor", "ShadowType", "TxtAngle", "TxtHeight", "TxtLocPinX", "TxtLocPinY", "TxtPinX", 
+            "TxtPinY", "TxtWidth", "Width")]
         public string[] Cells { get; set; }
         
         [SMA.Parameter(Mandatory = false)]
@@ -33,76 +44,7 @@ namespace VisioPS.Commands
             var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
 
-            var dic = new Dictionary<string,VA.ShapeSheet.SRC>(this.Cells.Count());
-            dic["Angle"] = VA.ShapeSheet.SRCConstants.Angle;
-            dic["BeginX"] = VA.ShapeSheet.SRCConstants.BeginX;
-            dic["BeginY"] = VA.ShapeSheet.SRCConstants.BeginY;
-            dic["CharCase"] = VA.ShapeSheet.SRCConstants.Char_Case;
-            dic["CharColor"] = VA.ShapeSheet.SRCConstants.Char_Color;
-            dic["CharColorTransparency"] = VA.ShapeSheet.SRCConstants.Char_ColorTrans;
-            dic["CharFont"] = VA.ShapeSheet.SRCConstants.Char_Font;
-            dic["CharFontScale"] = VA.ShapeSheet.SRCConstants.Char_FontScale;
-            dic["CharLetterspace"] = VA.ShapeSheet.SRCConstants.Char_Letterspace;
-            dic["CharSize"] = VA.ShapeSheet.SRCConstants.Char_Size;
-            dic["CharStyle"] = VA.ShapeSheet.SRCConstants.Char_Style;
-            dic["EndX"] = VA.ShapeSheet.SRCConstants.EndX;
-            dic["EndY"] = VA.ShapeSheet.SRCConstants.EndY;
-            dic["FillBackgroundColor"] = VA.ShapeSheet.SRCConstants.FillBkgnd;
-            dic["FillBackgroundtransparency"] = VA.ShapeSheet.SRCConstants.FillBkgndTrans;
-            dic["FillForegroundColor"] = VA.ShapeSheet.SRCConstants.FillForegnd;
-            dic["FillForegroundtransparency"] = VA.ShapeSheet.SRCConstants.FillForegndTrans;
-            dic["FillPattern"] = VA.ShapeSheet.SRCConstants.FillPattern;
-            dic["Height"] = VA.ShapeSheet.SRCConstants.Height;
-            dic["LineCap"] = VA.ShapeSheet.SRCConstants.LineCap;
-            dic["LineColor"] = VA.ShapeSheet.SRCConstants.LineColor;
-            dic["LinePattern"] = VA.ShapeSheet.SRCConstants.LinePattern;
-            dic["LineWeight"] = VA.ShapeSheet.SRCConstants.LineWeight;
-            dic["LockAspect"] = VA.ShapeSheet.SRCConstants.LockAspect;
-            dic["LockBegin"] = VA.ShapeSheet.SRCConstants.LockBegin;
-            dic["LockCalcWH"] = VA.ShapeSheet.SRCConstants.LockCalcWH;
-            dic["LockCrop"] = VA.ShapeSheet.SRCConstants.LockCrop;
-            dic["LockCustProp"] = VA.ShapeSheet.SRCConstants.LockCustProp;
-            dic["LockDelete"] = VA.ShapeSheet.SRCConstants.LockDelete;
-            dic["LockEnd"] = VA.ShapeSheet.SRCConstants.LockEnd;
-            dic["LockFormat"] = VA.ShapeSheet.SRCConstants.LockFormat;
-            dic["LockFromGroupFormat"] = VA.ShapeSheet.SRCConstants.LockFromGroupFormat;
-            dic["LockGroup"] = VA.ShapeSheet.SRCConstants.LockGroup;
-            dic["LockHeight"] = VA.ShapeSheet.SRCConstants.LockHeight;
-            dic["LockMoveX"] = VA.ShapeSheet.SRCConstants.LockMoveX;
-            dic["LockMoveY"] = VA.ShapeSheet.SRCConstants.LockMoveY;
-            dic["LockRotate"] = VA.ShapeSheet.SRCConstants.LockRotate;
-            dic["LockSelect"] = VA.ShapeSheet.SRCConstants.LockSelect;
-            dic["LockTextEdit"] = VA.ShapeSheet.SRCConstants.LockTextEdit;
-            dic["LockThemeColors"] = VA.ShapeSheet.SRCConstants.LockThemeColors;
-            dic["LockThemeEffects"] = VA.ShapeSheet.SRCConstants.LockThemeEffects;
-            dic["LockVtxEdit"] = VA.ShapeSheet.SRCConstants.LockVtxEdit;
-            dic["LockWidth"] = VA.ShapeSheet.SRCConstants.LockWidth;
-            dic["LocPinX"] = VA.ShapeSheet.SRCConstants.LocPinX;
-            dic["LocPinY"] = VA.ShapeSheet.SRCConstants.LocPinY;
-            dic["PinX"] = VA.ShapeSheet.SRCConstants.PinX;
-            dic["PinY"] = VA.ShapeSheet.SRCConstants.PinY;
-            dic["Rounding"] = VA.ShapeSheet.SRCConstants.Rounding;
-            dic["SelectMode"] = VA.ShapeSheet.SRCConstants.SelectMode;
-            dic["ShadowBackground"] = VA.ShapeSheet.SRCConstants.ShdwBkgnd;
-            dic["ShadowBackgroundTransparency"] = VA.ShapeSheet.SRCConstants.ShdwBkgndTrans;
-            dic["ShadowForeground"] = VA.ShapeSheet.SRCConstants.ShdwForegnd;
-            dic["ShadowForegroundTransparency"] = VA.ShapeSheet.SRCConstants.ShdwForegndTrans;
-            dic["ShadowObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
-            dic["ShadowOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
-            dic["ShadowOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
-            dic["ShadowPattern"] = VA.ShapeSheet.SRCConstants.ShdwPattern;
-            dic["ShadowScalefactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
-            dic["ShadowType"] = VA.ShapeSheet.SRCConstants.ShdwType;
-            dic["TxtAngle"] = VA.ShapeSheet.SRCConstants.TxtAngle;
-            dic["TxtHeight"] = VA.ShapeSheet.SRCConstants.TxtHeight;
-            dic["TxtLocPinX"] = VA.ShapeSheet.SRCConstants.TxtLocPinX;
-            dic["TxtLocPinY"] = VA.ShapeSheet.SRCConstants.TxtLocPinY;
-            dic["TxtPinX"] = VA.ShapeSheet.SRCConstants.TxtPinX;
-            dic["TxtPinY"] = VA.ShapeSheet.SRCConstants.TxtPinY;
-            dic["TxtWidth"] = VA.ShapeSheet.SRCConstants.TxtWidth;
-            dic["Width"] = VA.ShapeSheet.SRCConstants.Width;
-
-
+            var dic = GetCellDictionary();
             foreach (var cell in this.Cells)
             {
                 query.AddColumn(dic[cell], cell);   
@@ -151,6 +93,85 @@ namespace VisioPS.Commands
             }
 
             this.WriteVerboseEx("End Query");
+        }
+
+        private static Dictionary<string, VA.ShapeSheet.SRC> dic_cellname_to_src;
+
+
+        private Dictionary<string, SRC> GetCellDictionary()
+        {
+            if (dic_cellname_to_src == null)
+            {
+                dic_cellname_to_src = new Dictionary<string, VA.ShapeSheet.SRC>(this.Cells.Count());
+                dic_cellname_to_src["Angle"] = VA.ShapeSheet.SRCConstants.Angle;
+                dic_cellname_to_src["BeginX"] = VA.ShapeSheet.SRCConstants.BeginX;
+                dic_cellname_to_src["BeginY"] = VA.ShapeSheet.SRCConstants.BeginY;
+                dic_cellname_to_src["CharCase"] = VA.ShapeSheet.SRCConstants.Char_Case;
+                dic_cellname_to_src["CharColor"] = VA.ShapeSheet.SRCConstants.Char_Color;
+                dic_cellname_to_src["CharColorTransparency"] = VA.ShapeSheet.SRCConstants.Char_ColorTrans;
+                dic_cellname_to_src["CharFont"] = VA.ShapeSheet.SRCConstants.Char_Font;
+                dic_cellname_to_src["CharFontScale"] = VA.ShapeSheet.SRCConstants.Char_FontScale;
+                dic_cellname_to_src["CharLetterspace"] = VA.ShapeSheet.SRCConstants.Char_Letterspace;
+                dic_cellname_to_src["CharSize"] = VA.ShapeSheet.SRCConstants.Char_Size;
+                dic_cellname_to_src["CharStyle"] = VA.ShapeSheet.SRCConstants.Char_Style;
+                dic_cellname_to_src["EndX"] = VA.ShapeSheet.SRCConstants.EndX;
+                dic_cellname_to_src["EndY"] = VA.ShapeSheet.SRCConstants.EndY;
+                dic_cellname_to_src["FillBackgroundColor"] = VA.ShapeSheet.SRCConstants.FillBkgnd;
+                dic_cellname_to_src["FillBackgroundtransparency"] = VA.ShapeSheet.SRCConstants.FillBkgndTrans;
+                dic_cellname_to_src["FillForegroundColor"] = VA.ShapeSheet.SRCConstants.FillForegnd;
+                dic_cellname_to_src["FillForegroundtransparency"] = VA.ShapeSheet.SRCConstants.FillForegndTrans;
+                dic_cellname_to_src["FillPattern"] = VA.ShapeSheet.SRCConstants.FillPattern;
+                dic_cellname_to_src["Height"] = VA.ShapeSheet.SRCConstants.Height;
+                dic_cellname_to_src["LineCap"] = VA.ShapeSheet.SRCConstants.LineCap;
+                dic_cellname_to_src["LineColor"] = VA.ShapeSheet.SRCConstants.LineColor;
+                dic_cellname_to_src["LinePattern"] = VA.ShapeSheet.SRCConstants.LinePattern;
+                dic_cellname_to_src["LineWeight"] = VA.ShapeSheet.SRCConstants.LineWeight;
+                dic_cellname_to_src["LockAspect"] = VA.ShapeSheet.SRCConstants.LockAspect;
+                dic_cellname_to_src["LockBegin"] = VA.ShapeSheet.SRCConstants.LockBegin;
+                dic_cellname_to_src["LockCalcWH"] = VA.ShapeSheet.SRCConstants.LockCalcWH;
+                dic_cellname_to_src["LockCrop"] = VA.ShapeSheet.SRCConstants.LockCrop;
+                dic_cellname_to_src["LockCustProp"] = VA.ShapeSheet.SRCConstants.LockCustProp;
+                dic_cellname_to_src["LockDelete"] = VA.ShapeSheet.SRCConstants.LockDelete;
+                dic_cellname_to_src["LockEnd"] = VA.ShapeSheet.SRCConstants.LockEnd;
+                dic_cellname_to_src["LockFormat"] = VA.ShapeSheet.SRCConstants.LockFormat;
+                dic_cellname_to_src["LockFromGroupFormat"] = VA.ShapeSheet.SRCConstants.LockFromGroupFormat;
+                dic_cellname_to_src["LockGroup"] = VA.ShapeSheet.SRCConstants.LockGroup;
+                dic_cellname_to_src["LockHeight"] = VA.ShapeSheet.SRCConstants.LockHeight;
+                dic_cellname_to_src["LockMoveX"] = VA.ShapeSheet.SRCConstants.LockMoveX;
+                dic_cellname_to_src["LockMoveY"] = VA.ShapeSheet.SRCConstants.LockMoveY;
+                dic_cellname_to_src["LockRotate"] = VA.ShapeSheet.SRCConstants.LockRotate;
+                dic_cellname_to_src["LockSelect"] = VA.ShapeSheet.SRCConstants.LockSelect;
+                dic_cellname_to_src["LockTextEdit"] = VA.ShapeSheet.SRCConstants.LockTextEdit;
+                dic_cellname_to_src["LockThemeColors"] = VA.ShapeSheet.SRCConstants.LockThemeColors;
+                dic_cellname_to_src["LockThemeEffects"] = VA.ShapeSheet.SRCConstants.LockThemeEffects;
+                dic_cellname_to_src["LockVtxEdit"] = VA.ShapeSheet.SRCConstants.LockVtxEdit;
+                dic_cellname_to_src["LockWidth"] = VA.ShapeSheet.SRCConstants.LockWidth;
+                dic_cellname_to_src["LocPinX"] = VA.ShapeSheet.SRCConstants.LocPinX;
+                dic_cellname_to_src["LocPinY"] = VA.ShapeSheet.SRCConstants.LocPinY;
+                dic_cellname_to_src["PinX"] = VA.ShapeSheet.SRCConstants.PinX;
+                dic_cellname_to_src["PinY"] = VA.ShapeSheet.SRCConstants.PinY;
+                dic_cellname_to_src["Rounding"] = VA.ShapeSheet.SRCConstants.Rounding;
+                dic_cellname_to_src["SelectMode"] = VA.ShapeSheet.SRCConstants.SelectMode;
+                dic_cellname_to_src["ShadowBackground"] = VA.ShapeSheet.SRCConstants.ShdwBkgnd;
+                dic_cellname_to_src["ShadowBackgroundTransparency"] = VA.ShapeSheet.SRCConstants.ShdwBkgndTrans;
+                dic_cellname_to_src["ShadowForeground"] = VA.ShapeSheet.SRCConstants.ShdwForegnd;
+                dic_cellname_to_src["ShadowForegroundTransparency"] = VA.ShapeSheet.SRCConstants.ShdwForegndTrans;
+                dic_cellname_to_src["ShadowObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
+                dic_cellname_to_src["ShadowOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
+                dic_cellname_to_src["ShadowOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
+                dic_cellname_to_src["ShadowPattern"] = VA.ShapeSheet.SRCConstants.ShdwPattern;
+                dic_cellname_to_src["ShadowScalefactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
+                dic_cellname_to_src["ShadowType"] = VA.ShapeSheet.SRCConstants.ShdwType;
+                dic_cellname_to_src["TxtAngle"] = VA.ShapeSheet.SRCConstants.TxtAngle;
+                dic_cellname_to_src["TxtHeight"] = VA.ShapeSheet.SRCConstants.TxtHeight;
+                dic_cellname_to_src["TxtLocPinX"] = VA.ShapeSheet.SRCConstants.TxtLocPinX;
+                dic_cellname_to_src["TxtLocPinY"] = VA.ShapeSheet.SRCConstants.TxtLocPinY;
+                dic_cellname_to_src["TxtPinX"] = VA.ShapeSheet.SRCConstants.TxtPinX;
+                dic_cellname_to_src["TxtPinY"] = VA.ShapeSheet.SRCConstants.TxtPinY;
+                dic_cellname_to_src["TxtWidth"] = VA.ShapeSheet.SRCConstants.TxtWidth;
+                dic_cellname_to_src["Width"] = VA.ShapeSheet.SRCConstants.Width;
+            }
+            return dic_cellname_to_src;
         }
 
         private System.Data.DataTable todatatable<T>(VA.ShapeSheet.Data.Table<T> output, IList<string> names )
