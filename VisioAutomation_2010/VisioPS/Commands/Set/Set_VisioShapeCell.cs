@@ -18,10 +18,10 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public string Angle { get; set; }
 
         [SMA.Parameter(Mandatory = false)] public string FillPattern { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string FillForegroundColor { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string FillForegroundtransparency { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string FillBackgroundColor { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string FillBackgroundtransparency { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string FillForegnd { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string FillForegndTrans { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string FillBkgnd { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string FillBkgndTrans { get; set; }
         
         [SMA.Parameter(Mandatory = false)] public string LinePattern { get; set; }
         [SMA.Parameter(Mandatory = false)] public string LineWeight{ get; set; }
@@ -44,17 +44,17 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)] public string EndY{ get; set; }
 
 
-        [SMA.Parameter(Mandatory = false)] public string ShadowBackground { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowBackgroundTransparency { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowForeground { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwBkgnd { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwBkgndTrans { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwForegnd { get; set; }
         
-        [SMA.Parameter(Mandatory = false)] public string ShadowForegroundTransparency { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowObliqueAngle { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowOffsetX { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowOffsetY { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowPattern { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowScalefactor { get; set; }
-        [SMA.Parameter(Mandatory = false)] public string ShadowType { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwForegndTrans { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwObliqueAngle { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwOffsetX { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwOffsetY { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwPattern { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwScalefactor { get; set; }
+        [SMA.Parameter(Mandatory = false)] public string ShdwType { get; set; }
         [SMA.Parameter(Mandatory = false)] public string SelectMode { get; set; }
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
@@ -114,14 +114,14 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.PinY, this.PinY);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Angle, this.Angle);
  
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillForegnd, this.FillForegroundColor);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillPattern, this.FillPattern);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillBkgnd, this.FillBackgroundColor);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LineColor, this.LineColor);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LinePattern, this.LinePattern);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LineWeight, this.LineWeight);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegroundtransparency);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBackgroundtransparency);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans);
 
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharCase, this.CharCase);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharColor, this.CharColor);
@@ -141,16 +141,16 @@ namespace VisioPS.Commands
 
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Rounding, this.Rounding);
 
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwBkgnd, this.ShadowBackground);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShadowBackgroundTransparency);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwForegnd, this.ShadowForeground);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShadowForegroundTransparency);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwObliqueAngle, this.ShadowObliqueAngle);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwOffsetX, this.ShadowOffsetX);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwOffsetY, this.ShadowOffsetY);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwPattern, this.ShadowPattern);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwScaleFactor, this.ShadowScalefactor);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwType, this.ShadowType);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwObliqueAngle, this.ShdwObliqueAngle);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwOffsetX, this.ShdwOffsetX);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwOffsetY, this.ShdwOffsetY);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwScaleFactor, this.ShdwScalefactor);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.ShdwType, this.ShdwType);
 
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LocPinX, this.LocPinX);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LocPinY, this.LocPinY);
@@ -165,7 +165,7 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockDelete, this.LockDelete);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockEnd, this.LockEnd);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockFormat, this.LockFormat);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockAspect, this.LockFromGroupFormat);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockFromGroupFormat, this.LockFromGroupFormat);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockGroup, this.LockGroup);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockHeight, this.LockHeight);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.LockMoveX, this.LockMoveX);
