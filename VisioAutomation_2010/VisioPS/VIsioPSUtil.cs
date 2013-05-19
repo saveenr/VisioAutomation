@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using VA = VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPS
 {
@@ -27,5 +28,44 @@ namespace VisioPS
             }
             return dt;
         }
+
+        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery query, bool getresults, ResultType ResultType, IList<int> shapeids, IVisio.Page page)
+        {
+            var names = query.Columns.Select(c => c.Name).ToList();
+            if (getresults)
+            {
+                if (ResultType == ResultType.String)
+                {
+                    var output = query.GetResults<string>(page, shapeids);
+                    return VisioPSUtil.todatatable(output, names);
+                }
+                else if (ResultType == ResultType.Boolean)
+                {
+                    var output = query.GetResults<bool>(page, shapeids);
+                    return VisioPSUtil.todatatable(output, names);
+                }
+                else if (ResultType == ResultType.Double)
+                {
+                    var output = query.GetResults<double>(page, shapeids);
+                    return VisioPSUtil.todatatable(output, names);
+                }
+                else if (ResultType == ResultType.Integer)
+                {
+                    var output = query.GetResults<int>(page, shapeids);
+                    return VisioPSUtil.todatatable(output, names);
+                }
+                else
+                {
+                    throw new VA.Scripting.VisioApplicationException("Unsupported Result type");
+                }
+
+            }
+            else
+            {
+                var output = query.GetFormulas(page, shapeids);
+                return VisioPSUtil.todatatable(output, names);
+            }
+        }
+
     }
 }

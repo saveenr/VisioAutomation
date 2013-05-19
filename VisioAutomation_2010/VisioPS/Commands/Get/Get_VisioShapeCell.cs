@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.Scripting;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using System.Linq;
@@ -44,7 +42,7 @@ namespace VisioPS.Commands
             var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
 
-            var dic = GetCellDictionary();
+            var dic = GetShapeCellDictionary();
             foreach (var cell in this.Cells)
             {
                 query.AddColumn(dic[cell], cell);   
@@ -57,47 +55,15 @@ namespace VisioPS.Commands
 
             this.WriteVerboseEx("Start Query");
 
-            var names = query.Columns.Select(c => c.Name).ToList();
-            if (this.GetResults)
-            {
-                if (this.ResultType == ResultType.String)
-                {
-                    var output = query.GetResults<string>(page, target_shapeids);
-                    this.WriteObject(VisioPSUtil.todatatable(output, names));
-                }
-                else if (this.ResultType == ResultType.Boolean)
-                {
-                    var output = query.GetResults<bool>(page, target_shapeids);
-                    this.WriteObject(VisioPSUtil.todatatable(output, names));
-                }
-                else if (this.ResultType == ResultType.Double)
-                {
-                    var output = query.GetResults<double>(page, target_shapeids);
-                    this.WriteObject(VisioPSUtil.todatatable(output, names));
-                }
-                else if (this.ResultType == ResultType.Integer)
-                {
-                    var output = query.GetResults<int>(page, target_shapeids);
-                    this.WriteObject(VisioPSUtil.todatatable(output, names));
-                }
-                else
-                {
-                    throw new VisioApplicationException("Unsupported Result type");
-                }
-
-            }
-            else
-            {
-                var output = query.GetFormulas(page, target_shapeids);
-                this.WriteObject(VisioPSUtil.todatatable(output, names));
-            }
+            var dt = VisioPSUtil.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, page);
+            this.WriteObject(dt);
 
             this.WriteVerboseEx("End Query");
         }
 
         private static Dictionary<string, VA.ShapeSheet.SRC> dic_cellname_to_src;
         
-        private Dictionary<string, SRC> GetCellDictionary()
+        private Dictionary<string, VA.ShapeSheet.SRC> GetShapeCellDictionary()
         {
             if (dic_cellname_to_src == null)
             {
