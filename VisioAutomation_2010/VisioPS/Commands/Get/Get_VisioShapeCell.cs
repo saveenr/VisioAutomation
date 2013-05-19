@@ -11,8 +11,8 @@ namespace VisioPS.Commands
     {
         [SMA.Parameter(Mandatory = true,Position=0)]
         [SMA.ValidateSet( 
-            "Angle", "BeginX", "BeginY", "CharCase", "CharColor", "CharColorTransparency", "CharFont",
-            "CharFontScale", "CharLetterspace", "CharSize", "CharStyle", "EndX", "EndY", "FillBkgnd",
+            "Angle", "BeginArrow", "BeginArrowSize", "BeginX", "BeginY", "CharCase", "CharColor", "CharColorTransparency", "CharFont",
+            "CharFontScale", "CharLetterspace", "CharSize", "CharStyle", "EndArrow", "EndArrowSize", "EndX", "EndY", "FillBkgnd",
             "FillBkgndTrans", "FillForegnd", "FillForegndTrans", "FillPattern", 
             "Height", "LineCap", "LineColor", "LinePattern", "LineWeight", "LockAspect", "LockBegin", 
             "LockCalcWH", "LockCrop", "LockCustProp", "LockDelete", "LockEnd", "LockFormat", "LockFromGroupFormat", 
@@ -135,6 +135,12 @@ namespace VisioPS.Commands
                 dic_cellname_to_src["TxtPinY"] = VA.ShapeSheet.SRCConstants.TxtPinY;
                 dic_cellname_to_src["TxtWidth"] = VA.ShapeSheet.SRCConstants.TxtWidth;
                 dic_cellname_to_src["Width"] = VA.ShapeSheet.SRCConstants.Width;
+
+                dic_cellname_to_src["BeginArrow"] = VA.ShapeSheet.SRCConstants.BeginArrow;
+                dic_cellname_to_src["BeginArrowSize"] = VA.ShapeSheet.SRCConstants.BeginArrowSize;
+                dic_cellname_to_src["EndArrow"] = VA.ShapeSheet.SRCConstants.EndArrow;
+                dic_cellname_to_src["EndArrowSize"] = VA.ShapeSheet.SRCConstants.EndArrowSize;
+
             }
             return dic_cellname_to_src;
         }

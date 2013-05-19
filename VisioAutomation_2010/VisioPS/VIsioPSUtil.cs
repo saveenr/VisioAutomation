@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
+using VisioAutomation.ShapeSheet.Data;
+using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -9,63 +12,68 @@ namespace VisioPS
 {
     static class VisioPSUtil
     {
-        public static System.Data.DataTable todatatable<T>(VA.ShapeSheet.Data.Table<T> output, IList<string> names)
+        public static DataTable querytable_to_datatable<T>(CellQuery query, Table<T> query_output)
         {
+            // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
-            foreach (string name in names)
+            foreach (var col in query.Columns)
             {
-                dt.Columns.Add(name, typeof(T));
+                dt.Columns.Add(col.Name, typeof(T));
             }
-            int colcount = names.Count;
-            var arr = new object[colcount];
-            for (int r = 0; r < output.RowCount; r++)
+
+            // Then populate the rows of the datatable
+            dt.BeginLoadData();
+            int colcount = query.Columns.Count;
+            var rowbuf = new object[colcount];
+            for (int r = 0; r < query_output.RowCount; r++)
             {
+                // populate the row buffer
                 for (int i = 0; i < colcount; i++)
                 {
-                    arr[i] = output[r, i];
+                    rowbuf[i] = query_output[r, i];
                 }
-                dt.Rows.Add(arr);
+
+                // load it into the table
+                dt.Rows.Add(rowbuf);
             }
+            dt.EndLoadData();
             return dt;
         }
 
         public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery query, bool getresults, ResultType ResultType, IList<int> shapeids, IVisio.Page page)
         {
-            var names = query.Columns.Select(c => c.Name).ToList();
             if (getresults)
             {
                 if (ResultType == ResultType.String)
                 {
                     var output = query.GetResults<string>(page, shapeids);
-                    return VisioPSUtil.todatatable(output, names);
+                    return VisioPSUtil.querytable_to_datatable(query, output);
                 }
                 else if (ResultType == ResultType.Boolean)
                 {
                     var output = query.GetResults<bool>(page, shapeids);
-                    return VisioPSUtil.todatatable(output, names);
+                    return VisioPSUtil.querytable_to_datatable(query, output);
                 }
                 else if (ResultType == ResultType.Double)
                 {
                     var output = query.GetResults<double>(page, shapeids);
-                    return VisioPSUtil.todatatable(output, names);
+                    return VisioPSUtil.querytable_to_datatable(query, output);
                 }
                 else if (ResultType == ResultType.Integer)
                 {
                     var output = query.GetResults<int>(page, shapeids);
-                    return VisioPSUtil.todatatable(output, names);
+                    return VisioPSUtil.querytable_to_datatable(query, output);
                 }
                 else
                 {
                     throw new VA.Scripting.VisioApplicationException("Unsupported Result type");
                 }
-
             }
             else
             {
                 var output = query.GetFormulas(page, shapeids);
-                return VisioPSUtil.todatatable(output, names);
+                return VisioPSUtil.querytable_to_datatable(query, output);
             }
         }
-
     }
 }
