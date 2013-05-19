@@ -29,3 +29,8 @@ $rectangle_master = Get-VisioMaster -Master "Rectangle" -Stencil $basic_stencil
 
 $shapes = New-VisioShape -Masters $rectangle_master -Points 2.0,2.0,4.0,4.0,6.0,6.0
 
+Set-VisioShapeCell -FillForegnd "rgb(255,0,0)" -Width "1" -CharSize "20pt" -Shapes $shapes[0]
+Set-VisioShapeCell -FillForegnd "rgb(255,128,50)" -Width "2" -CharSize "30pt" -Shapes $shapes[1]
+Set-VisioShapeCell -FillForegnd "rgb(255,200,50)" -Width "3" -CharSize "40pt" -Shapes $shapes[2]
+
+Set-VisioText -Shapes $shape -Text "A","B","C"
