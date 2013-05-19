@@ -100,7 +100,6 @@
     <Compile Include="Commands\Import\Import_VisioOrgChart.cs" />
     <Compile Include="Commands\New\New_VisioNURBS.cs" />
     <Compile Include="Commands\New\New_VisioGridLayout.cs" />
-    <Compile Include="Commands\Reset_VisioPageOrigin.cs" />
     <Compile Include="Commands\New\New_VisioShapeSheetUpdate.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />
     <Compile Include="Commands\Remove\Remove_VisioUserDefinedCell.cs" />
