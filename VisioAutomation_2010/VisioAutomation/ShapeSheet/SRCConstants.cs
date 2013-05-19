@@ -39,28 +39,28 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Annotation_Y { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationY); } }
 
         // Character
-        public static SRC Char_AsianFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterAsianFont); } }
-        public static SRC Char_Case { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterCase); } }
-        public static SRC Char_Color { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColor); } }
-        public static SRC Char_ComplexScriptFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptFont); } }
-        public static SRC Char_ComplexScriptSize { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptSize); } }
-        public static SRC Char_DoubleStrikethrough { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDoubleStrikethrough); } }
-        public static SRC Char_DblUnderline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDblUnderline); } }
-        public static SRC Char_Font { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFont); } }
-        public static SRC Char_LangID { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLangID); } }
-        public static SRC Char_Locale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocale); } }
-        public static SRC Char_LocalizeFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocalizeFont); } }
-        public static SRC Char_Overline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterOverline); } }
-        public static SRC Char_Perpendicular { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPerpendicular); } }
-        public static SRC Char_Pos { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPos); } }
-        public static SRC Char_RTLText { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterRTLText); } }
-        public static SRC Char_FontScale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFontScale); } }
-        public static SRC Char_Size { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterSize); } }
-        public static SRC Char_Letterspace { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLetterspace); } }
-        public static SRC Char_Strikethru { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStrikethru); } }
-        public static SRC Char_Style { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStyle); } }
-        public static SRC Char_ColorTrans { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColorTrans); } }
-        public static SRC Char_UseVertical { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical); } }
+        public static SRC CharAsianFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterAsianFont); } }
+        public static SRC CharCase { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterCase); } }
+        public static SRC CharColor { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColor); } }
+        public static SRC CharComplexScriptFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptFont); } }
+        public static SRC CharComplexScriptSize { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptSize); } }
+        public static SRC CharDoubleStrikethrough { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDoubleStrikethrough); } }
+        public static SRC CharDblUnderline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDblUnderline); } }
+        public static SRC CharFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFont); } }
+        public static SRC CharLangID { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLangID); } }
+        public static SRC CharLocale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocale); } }
+        public static SRC CharLocalizeFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocalizeFont); } }
+        public static SRC CharOverline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterOverline); } }
+        public static SRC CharPerpendicular { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPerpendicular); } }
+        public static SRC CharPos { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPos); } }
+        public static SRC CharRTLText { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterRTLText); } }
+        public static SRC CharFontScale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFontScale); } }
+        public static SRC CharSize { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterSize); } }
+        public static SRC CharLetterspace { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLetterspace); } }
+        public static SRC CharStrikethru { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStrikethru); } }
+        public static SRC CharStyle { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStyle); } }
+        public static SRC CharColorTrans { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColorTrans); } }
+        public static SRC CharUseVertical { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical); } }
 
         // Connections
         public static SRC Connections_D { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visCnnctD); } }

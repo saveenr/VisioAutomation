@@ -123,14 +123,14 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegroundtransparency);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBackgroundtransparency);
 
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_Case, this.CharCase);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_Color, this.CharColor);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_Font, this.CharFont);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_FontScale, this.CharFontScale);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_Letterspace, this.CharLetterspace);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_Size, this.CharSize);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_Style, this.CharStyle);
-                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.Char_ColorTrans, this.CharColorTransparency);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharCase, this.CharCase);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharColor, this.CharColor);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharFont, this.CharFont);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharFontScale, this.CharFontScale);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharLetterspace, this.CharLetterspace);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharSize, this.CharSize);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharStyle, this.CharStyle);
+                update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.CharColorTrans, this.CharColorTransparency);
 
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.BeginX, this.BeginX);
                 update.SetFormulaIgnoreNull(id, VisioAutomation.ShapeSheet.SRCConstants.EndX, this.EndX);

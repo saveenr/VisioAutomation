@@ -131,7 +131,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
             IVisio.VisGetSetArgs flags=0;
-            var srcs = new[] {VA.ShapeSheet.SRCConstants.Char_Font};
+            var srcs = new[] {VA.ShapeSheet.SRCConstants.CharFont};
             var formulas = new[] { font.ID.ToString() };
             this.Session.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
         }

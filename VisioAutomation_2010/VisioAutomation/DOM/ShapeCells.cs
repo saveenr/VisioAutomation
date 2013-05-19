@@ -152,13 +152,13 @@ namespace VisioAutomation.DOM
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwForegndTrans, ShdwForegndTrans);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwPattern, ShdwPattern);
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Case, CharCase);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Font, CharFont);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Color, CharColor);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Size, CharSize);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Letterspace, CharLetterspace);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_Style, CharStyle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Char_ColorTrans, CharTransparency);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharCase, CharCase);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharFont, CharFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharColor, CharColor);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharSize, CharSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharLetterspace, CharLetterspace);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharStyle, CharStyle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharColorTrans, CharTransparency);
 
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.EndArrow, EndArrow);
             update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.EndArrowSize, EndArrowSize);

@@ -172,7 +172,7 @@ namespace VisioAutomation.Text.Markup
                     var chars = shape.Characters;
                     chars.Begin = region.Start;
                     chars.End = region.End;
-                    chars.CharProps[VA.ShapeSheet.SRCConstants.Char_Color.Cell] = (short) 0;
+                    chars.CharProps[VA.ShapeSheet.SRCConstants.CharColor.Cell] = (short) 0;
                     short rownum = chars.CharPropsRow[(short) default_chars_bias];
 
                     if (rownum < 0)

@@ -32,35 +32,35 @@ namespace VisioAutomation.Text
 
         public override void ApplyFormulasForRow(ApplyFormula func, short row)
         {
-            func(VA.ShapeSheet.SRCConstants.Char_Color.ForRow(row), this.Color.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Font.ForRow(row), this.Font.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Size.ForRow(row), this.Size.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Style.ForRow(row), this.Style.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_ColorTrans.ForRow(row), this.Transparency.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharColor.ForRow(row), this.Color.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharFont.ForRow(row), this.Font.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharSize.ForRow(row), this.Size.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharStyle.ForRow(row), this.Style.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharColorTrans.ForRow(row), this.Transparency.Formula);
             
-            func(VA.ShapeSheet.SRCConstants.Char_AsianFont.ForRow(row), this.AsianFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Case.ForRow(row), this.Case.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_ComplexScriptFont.ForRow(row), this.ComplexScriptFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_ComplexScriptSize.ForRow(row), this.ComplexScriptSize.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharAsianFont.ForRow(row), this.AsianFont.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharCase.ForRow(row), this.Case.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharComplexScriptFont.ForRow(row), this.ComplexScriptFont.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharComplexScriptSize.ForRow(row), this.ComplexScriptSize.Formula);
             
-            func(VA.ShapeSheet.SRCConstants.Char_DblUnderline.ForRow(row), this.DoubleUnderline.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_DoubleStrikethrough.ForRow(row), this.DoubleStrikeThrough.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_LangID.ForRow(row), this.LangID.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharDblUnderline.ForRow(row), this.DoubleUnderline.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough.ForRow(row), this.DoubleStrikeThrough.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharLangID.ForRow(row), this.LangID.Formula);
 
-            func(VA.ShapeSheet.SRCConstants.Char_FontScale.ForRow(row), this.FontScale.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_LangID.ForRow(row), this.LangID.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Letterspace.ForRow(row), this.Letterspace.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Locale.ForRow(row), this.Locale.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharFontScale.ForRow(row), this.FontScale.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharLangID.ForRow(row), this.LangID.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharLetterspace.ForRow(row), this.Letterspace.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharLocale.ForRow(row), this.Locale.Formula);
 
-            func(VA.ShapeSheet.SRCConstants.Char_LocalizeFont.ForRow(row), this.LocalizeFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Overline.ForRow(row), this.Overline.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharLocalizeFont.ForRow(row), this.LocalizeFont.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharOverline.ForRow(row), this.Overline.Formula);
             
-            func(VA.ShapeSheet.SRCConstants.Char_Perpendicular.ForRow(row), this.Perpendicular.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Pos.ForRow(row), this.Pos.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharPerpendicular.ForRow(row), this.Perpendicular.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharPos.ForRow(row), this.Pos.Formula);
 
-            func(VA.ShapeSheet.SRCConstants.Char_RTLText.ForRow(row), this.RTLText.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_Strikethru.ForRow(row), this.Strikethru.Formula);
-            func(VA.ShapeSheet.SRCConstants.Char_UseVertical.ForRow(row), this.UseVertical.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharRTLText.ForRow(row), this.RTLText.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharStrikethru.ForRow(row), this.Strikethru.Formula);
+            func(VA.ShapeSheet.SRCConstants.CharUseVertical.ForRow(row), this.UseVertical.Formula);
 
 
         }
@@ -135,28 +135,28 @@ namespace VisioAutomation.Text
             public CharacterFormatQuery() :
                 base(IVisio.VisSectionIndices.visSectionCharacter)
             {
-                Color = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Color, "Color");
-                Trans = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_ColorTrans, "Trans");
-                Font = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Font, "Font");
-                Size = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Size, "Size");
-                Style = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Style, "Style");
-                AsianFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_AsianFont, "AsianFont");
-                Case = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Case, "Case");
-                ComplexScriptFont= this.AddColumn(VA.ShapeSheet.SRCConstants.Char_ComplexScriptFont, "Style");
-                ComplexScriptSize= this.AddColumn(VA.ShapeSheet.SRCConstants.Char_ComplexScriptSize, "Style");
-                DoubleStrikethrough = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_DoubleStrikethrough, "DoubleStrikethrough");
-                DoubleUnderline = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_DblUnderline, "DoubleUnderline");
-                LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_LangID, "LangID");
-                Locale = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Locale, "Locale");
-                LocalizeFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_LocalizeFont, "LocalizeFont");
-                Overline = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Overline, "Overline");
-                Perpendicular = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Perpendicular, "Perpendicular");
-                Pos = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Pos, "Pos");
-                RTLText = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_RTLText, "RTLText");
-                FontScale = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_FontScale, "FontScale");
-                Letterspace = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Letterspace, "Letterspace");
-                Strikethru = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_Strikethru, "Strikethru");
-                UseVertical = this.AddColumn(VA.ShapeSheet.SRCConstants.Char_UseVertical, "UseVertical");
+                Color = this.AddColumn(VA.ShapeSheet.SRCConstants.CharColor, "Color");
+                Trans = this.AddColumn(VA.ShapeSheet.SRCConstants.CharColorTrans, "Trans");
+                Font = this.AddColumn(VA.ShapeSheet.SRCConstants.CharFont, "Font");
+                Size = this.AddColumn(VA.ShapeSheet.SRCConstants.CharSize, "Size");
+                Style = this.AddColumn(VA.ShapeSheet.SRCConstants.CharStyle, "Style");
+                AsianFont = this.AddColumn(VA.ShapeSheet.SRCConstants.CharAsianFont, "AsianFont");
+                Case = this.AddColumn(VA.ShapeSheet.SRCConstants.CharCase, "Case");
+                ComplexScriptFont= this.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "Style");
+                ComplexScriptSize= this.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "Style");
+                DoubleStrikethrough = this.AddColumn(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, "DoubleStrikethrough");
+                DoubleUnderline = this.AddColumn(VA.ShapeSheet.SRCConstants.CharDblUnderline, "DoubleUnderline");
+                LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLangID, "LangID");
+                Locale = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLocale, "Locale");
+                LocalizeFont = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLocalizeFont, "LocalizeFont");
+                Overline = this.AddColumn(VA.ShapeSheet.SRCConstants.CharOverline, "Overline");
+                Perpendicular = this.AddColumn(VA.ShapeSheet.SRCConstants.CharPerpendicular, "Perpendicular");
+                Pos = this.AddColumn(VA.ShapeSheet.SRCConstants.CharPos, "Pos");
+                RTLText = this.AddColumn(VA.ShapeSheet.SRCConstants.CharRTLText, "RTLText");
+                FontScale = this.AddColumn(VA.ShapeSheet.SRCConstants.CharFontScale, "FontScale");
+                Letterspace = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLetterspace, "Letterspace");
+                Strikethru = this.AddColumn(VA.ShapeSheet.SRCConstants.CharStrikethru, "Strikethru");
+                UseVertical = this.AddColumn(VA.ShapeSheet.SRCConstants.CharUseVertical, "UseVertical");
             }
         }
     }

@@ -17,7 +17,7 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 0.1, 0.1);
 
             var font = doc1.Fonts["Arial"];
-            var src_charfont = VisioAutomation.ShapeSheet.SRCConstants.Char_Font;
+            var src_charfont = VisioAutomation.ShapeSheet.SRCConstants.CharFont;
             var cell_charfont = s1.CellsSRC[src_charfont.Section, src_charfont.Row, src_charfont.Cell];
             cell_charfont.FormulaU = font.ID.ToString(System.Globalization.CultureInfo.InvariantCulture);
             s1.Text = TestCommon.Helper.LoremIpsumText;
