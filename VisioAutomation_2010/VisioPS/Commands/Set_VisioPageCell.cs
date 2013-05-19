@@ -234,10 +234,8 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageShapeSplit, this.PageShapeSplit);
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageTopMargin, this.PageTopMargin);
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, this.PageWidth);
-
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.CenterX, this.CenterX);
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.CenterY, this.CenterY);
-
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PaperKind, this.PaperKind);
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PrintGrid, this.PrintGrid);
                 update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PrintPageOrientation, this.PrintPageOrientation);
