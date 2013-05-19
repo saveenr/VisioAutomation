@@ -33,75 +33,80 @@ namespace VisioPS.Commands
             var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
 
-            var hs = new HashSet<string>( this.Cells );
+            var dic = new Dictionary<string,VA.ShapeSheet.SRC>(this.Cells.Count());
+            dic["Angle"] = VA.ShapeSheet.SRCConstants.Angle;
+            dic["BeginX"] = VA.ShapeSheet.SRCConstants.BeginX;
+            dic["BeginY"] = VA.ShapeSheet.SRCConstants.BeginY;
+            dic["CharCase"] = VA.ShapeSheet.SRCConstants.Char_Case;
+            dic["CharColor"] = VA.ShapeSheet.SRCConstants.Char_Color;
+            dic["CharColorTransparency"] = VA.ShapeSheet.SRCConstants.Char_ColorTrans;
+            dic["CharFont"] = VA.ShapeSheet.SRCConstants.Char_Font;
+            dic["CharFontScale"] = VA.ShapeSheet.SRCConstants.Char_FontScale;
+            dic["CharLetterspace"] = VA.ShapeSheet.SRCConstants.Char_Letterspace;
+            dic["CharSize"] = VA.ShapeSheet.SRCConstants.Char_Size;
+            dic["CharStyle"] = VA.ShapeSheet.SRCConstants.Char_Style;
+            dic["EndX"] = VA.ShapeSheet.SRCConstants.EndX;
+            dic["EndY"] = VA.ShapeSheet.SRCConstants.EndY;
+            dic["FillBackgroundColor"] = VA.ShapeSheet.SRCConstants.FillBkgnd;
+            dic["FillBackgroundtransparency"] = VA.ShapeSheet.SRCConstants.FillBkgndTrans;
+            dic["FillForegroundColor"] = VA.ShapeSheet.SRCConstants.FillForegnd;
+            dic["FillForegroundtransparency"] = VA.ShapeSheet.SRCConstants.FillForegndTrans;
+            dic["FillPattern"] = VA.ShapeSheet.SRCConstants.FillPattern;
+            dic["Height"] = VA.ShapeSheet.SRCConstants.Height;
+            dic["LineCap"] = VA.ShapeSheet.SRCConstants.LineCap;
+            dic["LineColor"] = VA.ShapeSheet.SRCConstants.LineColor;
+            dic["LinePattern"] = VA.ShapeSheet.SRCConstants.LinePattern;
+            dic["LineWeight"] = VA.ShapeSheet.SRCConstants.LineWeight;
+            dic["LockAspect"] = VA.ShapeSheet.SRCConstants.LockAspect;
+            dic["LockBegin"] = VA.ShapeSheet.SRCConstants.LockBegin;
+            dic["LockCalcWH"] = VA.ShapeSheet.SRCConstants.LockCalcWH;
+            dic["LockCrop"] = VA.ShapeSheet.SRCConstants.LockCrop;
+            dic["LockCustProp"] = VA.ShapeSheet.SRCConstants.LockCustProp;
+            dic["LockDelete"] = VA.ShapeSheet.SRCConstants.LockDelete;
+            dic["LockEnd"] = VA.ShapeSheet.SRCConstants.LockEnd;
+            dic["LockFormat"] = VA.ShapeSheet.SRCConstants.LockFormat;
+            dic["LockFromGroupFormat"] = VA.ShapeSheet.SRCConstants.LockFromGroupFormat;
+            dic["LockGroup"] = VA.ShapeSheet.SRCConstants.LockGroup;
+            dic["LockHeight"] = VA.ShapeSheet.SRCConstants.LockHeight;
+            dic["LockMoveX"] = VA.ShapeSheet.SRCConstants.LockMoveX;
+            dic["LockMoveY"] = VA.ShapeSheet.SRCConstants.LockMoveY;
+            dic["LockRotate"] = VA.ShapeSheet.SRCConstants.LockRotate;
+            dic["LockSelect"] = VA.ShapeSheet.SRCConstants.LockSelect;
+            dic["LockTextEdit"] = VA.ShapeSheet.SRCConstants.LockTextEdit;
+            dic["LockThemeColors"] = VA.ShapeSheet.SRCConstants.LockThemeColors;
+            dic["LockThemeEffects"] = VA.ShapeSheet.SRCConstants.LockThemeEffects;
+            dic["LockVtxEdit"] = VA.ShapeSheet.SRCConstants.LockVtxEdit;
+            dic["LockWidth"] = VA.ShapeSheet.SRCConstants.LockWidth;
+            dic["LocPinX"] = VA.ShapeSheet.SRCConstants.LocPinX;
+            dic["LocPinY"] = VA.ShapeSheet.SRCConstants.LocPinY;
+            dic["PinX"] = VA.ShapeSheet.SRCConstants.PinX;
+            dic["PinY"] = VA.ShapeSheet.SRCConstants.PinY;
+            dic["Rounding"] = VA.ShapeSheet.SRCConstants.Rounding;
+            dic["SelectMode"] = VA.ShapeSheet.SRCConstants.SelectMode;
+            dic["ShadowBackground"] = VA.ShapeSheet.SRCConstants.ShdwBkgnd;
+            dic["ShadowBackgroundTransparency"] = VA.ShapeSheet.SRCConstants.ShdwBkgndTrans;
+            dic["ShadowForeground"] = VA.ShapeSheet.SRCConstants.ShdwForegnd;
+            dic["ShadowForegroundTransparency"] = VA.ShapeSheet.SRCConstants.ShdwForegndTrans;
+            dic["ShadowObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
+            dic["ShadowOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
+            dic["ShadowOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
+            dic["ShadowPattern"] = VA.ShapeSheet.SRCConstants.ShdwPattern;
+            dic["ShadowScalefactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
+            dic["ShadowType"] = VA.ShapeSheet.SRCConstants.ShdwType;
+            dic["TxtAngle"] = VA.ShapeSheet.SRCConstants.TxtAngle;
+            dic["TxtHeight"] = VA.ShapeSheet.SRCConstants.TxtHeight;
+            dic["TxtLocPinX"] = VA.ShapeSheet.SRCConstants.TxtLocPinX;
+            dic["TxtLocPinY"] = VA.ShapeSheet.SRCConstants.TxtLocPinY;
+            dic["TxtPinX"] = VA.ShapeSheet.SRCConstants.TxtPinX;
+            dic["TxtPinY"] = VA.ShapeSheet.SRCConstants.TxtPinY;
+            dic["TxtWidth"] = VA.ShapeSheet.SRCConstants.TxtWidth;
+            dic["Width"] = VA.ShapeSheet.SRCConstants.Width;
 
-            if (hs.Contains("Angle")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Angle, "Angle"); }
-            if (hs.Contains("BeginX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.BeginX, "BeginX"); }
-            if (hs.Contains("BeginY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.BeginY, "BeginY"); }
-            if (hs.Contains("CharCase")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Case, "CharCase"); }
-            if (hs.Contains("CharColor")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Color, "CharColor"); }
-            if (hs.Contains("CharColorTransparency")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_ColorTrans, "CharColorTransparency"); }
-            if (hs.Contains("CharFont")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Font, "CharFont"); }
-            if (hs.Contains("CharFontScale")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_FontScale, "CharFontScale"); }
-            if (hs.Contains("CharLetterspace")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Letterspace, "CharLetterspace"); }
-            if (hs.Contains("CharSize")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Size, "CharSize"); }
-            if (hs.Contains("CharStyle")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Char_Style, "CharStyle"); }
-            if (hs.Contains("EndX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.EndX, "EndX"); }
-            if (hs.Contains("EndY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.EndY, "EndY"); }
-            if (hs.Contains("FillBackgroundColor")) { query.AddColumn(VA.ShapeSheet.SRCConstants.FillBkgnd, "FillBackgroundColor"); }
-            if (hs.Contains("FillBackgroundtransparency")) { query.AddColumn(VA.ShapeSheet.SRCConstants.FillBkgndTrans, "FillBackgroundtransparency"); }
-            if (hs.Contains("FillForegroundColor")) { query.AddColumn(VA.ShapeSheet.SRCConstants.FillForegnd, "FillForegroundColor"); }
-            if (hs.Contains("FillForegroundtransparency")) { query.AddColumn(VA.ShapeSheet.SRCConstants.FillForegndTrans, "FillForegroundtransparency"); }
-            if (hs.Contains("FillPattern")) { query.AddColumn(VA.ShapeSheet.SRCConstants.FillPattern, "FillPattern"); }
-            if (hs.Contains("Height")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Height, "Height"); }
-            if (hs.Contains("LineCap")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LineCap, "LineCap"); }
-            if (hs.Contains("LineColor")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LineColor, "LineColor"); }
-            if (hs.Contains("LinePattern")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LinePattern, "LinePattern"); }
-            if (hs.Contains("LineWeight")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LineWeight, "LineWeight"); }
-            if (hs.Contains("LockAspect")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockAspect, "LockAspect"); }
-            if (hs.Contains("LockBegin")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockBegin, "LockBegin"); }
-            if (hs.Contains("LockCalcWH")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockCalcWH, "LockCalcWH"); }
-            if (hs.Contains("LockCrop")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockCrop, "LockCrop"); }
-            if (hs.Contains("LockCustProp")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockCustProp, "LockCustProp"); }
-            if (hs.Contains("LockDelete")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockDelete, "LockDelete"); }
-            if (hs.Contains("LockEnd")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockEnd, "LockEnd"); }
-            if (hs.Contains("LockFormat")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockFormat, "LockFormat"); }
-            if (hs.Contains("LockFromGroupFormat")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockFromGroupFormat, "LockFromGroupFormat"); }
-            if (hs.Contains("LockGroup")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockGroup, "LockGroup"); }
-            if (hs.Contains("LockHeight")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockHeight, "LockHeight"); }
-            if (hs.Contains("LockMoveX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockMoveX, "LockMoveX"); }
-            if (hs.Contains("LockMoveY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockMoveY, "LockMoveY"); }
-            if (hs.Contains("LockRotate")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockRotate, "LockRotate"); }
-            if (hs.Contains("LockSelect")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockSelect, "LockSelect"); }
-            if (hs.Contains("LockTextEdit")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockTextEdit, "LockTextEdit"); }
-            if (hs.Contains("LockThemeColors")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockThemeColors, "LockThemeColors"); }
-            if (hs.Contains("LockThemeEffects")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockThemeEffects, "LockThemeEffects"); }
-            if (hs.Contains("LockVtxEdit")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockVtxEdit, "LockVtxEdit"); }
-            if (hs.Contains("LockWidth")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth"); }
-            if (hs.Contains("LocPinX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LocPinX, "LocPinX"); }
-            if (hs.Contains("LocPinY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.LocPinY, "LocPinY"); }
-            if (hs.Contains("PinX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.PinX, "PinX"); }
-            if (hs.Contains("PinY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.PinY, "PinY"); }
-            if (hs.Contains("Rounding")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Rounding, "Rounding"); }
-            if (hs.Contains("SelectMode")) { query.AddColumn(VA.ShapeSheet.SRCConstants.SelectMode, "SelectMode"); }
-            if (hs.Contains("ShadowBackground")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwBkgnd, "ShadowBackground"); }
-            if (hs.Contains("ShadowBackgroundTransparency")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwBkgndTrans, "ShadowBackgroundTransparency"); }
-            if (hs.Contains("ShadowForeground")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwForegnd, "ShadowForeground"); }
-            if (hs.Contains("ShadowForegroundTransparency")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwForegndTrans, "ShadowForegroundTransparency"); }
-            if (hs.Contains("ShadowObliqueAngle")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwObliqueAngle, "ShadowObliqueAngle"); }
-            if (hs.Contains("ShadowOffsetX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwOffsetX, "ShadowOffsetX"); }
-            if (hs.Contains("ShadowOffsetY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwOffsetY, "ShadowOffsetY"); }
-            if (hs.Contains("ShadowPattern")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwPattern, "ShadowPattern"); }
-            if (hs.Contains("ShadowScalefactor")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwScaleFactor, "ShadowScalefactor"); }
-            if (hs.Contains("ShadowType")) { query.AddColumn(VA.ShapeSheet.SRCConstants.ShdwType, "ShadowType"); }
-            if (hs.Contains("TxtAngle")) { query.AddColumn(VA.ShapeSheet.SRCConstants.TxtAngle, "TxtAngle"); }
-            if (hs.Contains("TxtHeight")) { query.AddColumn(VA.ShapeSheet.SRCConstants.TxtHeight, "TxtHeight"); }
-            if (hs.Contains("TxtLocPinX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.TxtLocPinX, "TxtLocPinX"); }
-            if (hs.Contains("TxtLocPinY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.TxtLocPinY, "TxtLocPinY"); }
-            if (hs.Contains("TxtPinX")) { query.AddColumn(VA.ShapeSheet.SRCConstants.TxtPinX, "TxtPinX"); }
-            if (hs.Contains("TxtPinY")) { query.AddColumn(VA.ShapeSheet.SRCConstants.TxtPinY, "TxtPinY"); }
-            if (hs.Contains("TxtWidth")) { query.AddColumn(VA.ShapeSheet.SRCConstants.TxtWidth, "TxtWidth"); }
-            if (hs.Contains("Width")) { query.AddColumn(VA.ShapeSheet.SRCConstants.Width, "Width"); }
+
+            foreach (var cell in this.Cells)
+            {
+                query.AddColumn(dic[cell], cell);   
+            }
 
             var page = scriptingsession.Page.Get();
 
