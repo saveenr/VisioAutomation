@@ -57,22 +57,22 @@ namespace VisioPS.Commands
                 if (this.ResultType == ResultType.String)
                 {
                     var output = query.GetResults<string>(page.PageSheet);
-                    this.WriteObject(todatatable(output,names));
+                    this.WriteObject(VisioPSUtil.todatatable(output, names));
                 }
                 else if (this.ResultType == ResultType.Boolean)
                 {
                     var output = query.GetResults<bool>(page.PageSheet);
-                    this.WriteObject(todatatable(output, names));
+                    this.WriteObject(VisioPSUtil.todatatable(output, names));
                 }
                 else if (this.ResultType == ResultType.Double)
                 {
                     var output = query.GetResults<double>(page.PageSheet);
-                    this.WriteObject(todatatable(output, names));
+                    this.WriteObject(VisioPSUtil.todatatable(output, names));
                 }
                 else if (this.ResultType == ResultType.Integer)
                 {
                     var output = query.GetResults<int>(page.PageSheet);
-                    this.WriteObject(todatatable(output, names));
+                    this.WriteObject(VisioPSUtil.todatatable(output, names));
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace VisioPS.Commands
             else
             {
                 var output = query.GetFormulas(page.PageSheet);
-                this.WriteObject(todatatable(output, names));
+                this.WriteObject(VisioPSUtil.todatatable(output, names));
             }
 
             this.WriteVerboseEx("End Query");
@@ -166,26 +166,6 @@ namespace VisioPS.Commands
                 dic_cellname_to_src["DrawingResizeType"] = VA.ShapeSheet.SRCConstants.DrawingResizeType;
             }
             return dic_cellname_to_src;
-        }
-
-        private System.Data.DataTable todatatable<T>(VA.ShapeSheet.Data.Table<T> output, IList<string> names )
-        {
-            var dt = new System.Data.DataTable();
-            foreach (string name in names)
-            {
-                dt.Columns.Add(name, typeof (T));
-            }
-            int colcount = names.Count;
-            var arr = new object[colcount];
-            for (int r = 0; r < output.RowCount; r++)
-            {
-                for (int i = 0; i < colcount; i++)
-                {
-                    arr[i] = output[r, i];
-                }
-                dt.Rows.Add(arr);
-            }
-            return dt;
         }
     }
 }
