@@ -97,39 +97,41 @@ namespace VisioAutomation.Scripting
 
             if (total_angle == 0.0)
             {
+                // This devolves into a single line
                 return page.DrawLine(center, GetPointAtRadius(center, start_angle, radius));
             }
-            else if (total_angle >= System.Math.PI*2.0)
+            
+            if (total_angle >= System.Math.PI*2.0)
             {
+                // This devolves into a circle
                 var A = center.Add(-radius, -radius);
                 var B = center.Add(radius, radius);
                 var rect = new VA.Drawing.Rectangle(A, B);
                 var shape = page.DrawOval(rect);
                 return shape;
             }
-            else
-            {
-                int degree;
-                var sub_arcs = VA.Drawing.BezierSegment.FromArc(
-                    start_angle,
-                    end_angle);
 
-                var arc_bez_points = (from p in VA.Drawing.BezierSegment.Merge(sub_arcs, out degree)
-                                      select p.Multiply(radius) + center).ToList();
+            // This is a true slice
+            int degree;
+            var sub_arcs = VA.Drawing.BezierSegment.FromArc(
+                start_angle,
+                end_angle);
 
-                var pie_points = new List<VA.Drawing.Point>();
-                pie_points.Add(center);
-                pie_points.Add(center);
-                pie_points.Add(arc_bez_points[0]);
-                pie_points.AddRange(arc_bez_points);
-                pie_points.Add(arc_bez_points[arc_bez_points.Count - 1]);
-                pie_points.Add(center);
-                pie_points.Add(center);
+            var arc_bez_points = (from p in VA.Drawing.BezierSegment.Merge(sub_arcs, out degree)
+                                    select p.Multiply(radius) + center).ToList();
 
-                var doubles_array = VA.Drawing.Point.ToDoubles(pie_points).ToArray();
-                var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
-                return pie_slice;
-            }
+            var pie_points = new List<VA.Drawing.Point>();
+            pie_points.Add(center);
+            pie_points.Add(center);
+            pie_points.Add(arc_bez_points[0]);
+            pie_points.AddRange(arc_bez_points);
+            pie_points.Add(arc_bez_points[arc_bez_points.Count - 1]);
+            pie_points.Add(center);
+            pie_points.Add(center);
+
+            var doubles_array = VA.Drawing.Point.ToDoubles(pie_points).ToArray();
+            var pie_slice = page.DrawBezier(doubles_array, (short)degree, 0);
+            return pie_slice;
         }
     }
 }

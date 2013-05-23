@@ -39,12 +39,7 @@ namespace VisioAutomation.Documents
 
         private static IVisio.Document TryOpenStencil(IVisio.Documents docs, string filename)
         {
-            if (filename == null)
-            {
-                throw new System.ArgumentNullException("filename");
-            }
-
-            short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;
+            const short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;
             try
             {
                 var doc = docs.OpenEx(filename, flags);
