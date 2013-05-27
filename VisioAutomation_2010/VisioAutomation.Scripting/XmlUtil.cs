@@ -12,7 +12,7 @@ namespace VisioAutomation.Scripting
                 return defval;
             }
 
-            return attr.Value ?? defval;
+            return attr.Value;
         }
 
         public static T GetAttributeValue<T>(SXL.XElement el, SXL.XName name, System.Func<string, T> converter)
