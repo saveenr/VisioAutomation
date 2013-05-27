@@ -81,11 +81,6 @@ namespace VisioAutomation.VDX.Elements
             get { return _id; }
         }
 
-        public void AddToElement(SXL.XElement parent, int index)
-        {
-
-        }
-
         public void AddToElement(SXL.XElement parent)
         {
             var shape_el = XMLUtil.CreateVisioSchema2003Element("Shape");
