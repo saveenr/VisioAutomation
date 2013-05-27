@@ -41,10 +41,6 @@ namespace VisioPS.Commands
                 {
                     scriptingsession.Selection.SelectInvert();
                 }
-                else
-                {
-                    throw new System.ArgumentOutOfRangeException("SelectionOperation");
-                }
             }
         }
     }

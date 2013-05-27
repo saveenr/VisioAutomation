@@ -50,10 +50,7 @@ namespace VisioAutomation.Connections
         private static ConnectionPointQuery m_query;
         private static ConnectionPointQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new ConnectionPointQuery();
-            }
+            m_query =  m_query ?? new ConnectionPointQuery();
             return m_query;
         }
 

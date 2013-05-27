@@ -42,7 +42,7 @@ namespace VisioAutomationSamples
 
             var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
-            var samplechars = sampletext.Select(c => new string(new char[] {c})).ToList();
+            var samplechars = sampletext.Select(c => new string(new[] {c})).ToList();
 
             FontGlyphComparision(doc, fontnames, samplechars);
             FontGlyphComparision2(doc, fontnames, samplechars);

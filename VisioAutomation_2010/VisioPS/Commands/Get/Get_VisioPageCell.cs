@@ -44,7 +44,7 @@ namespace VisioPS.Commands
             }
 
             var page = scriptingsession.Page.Get();
-            var target_shapeids = new int[] { page.ID };
+            var target_shapeids = new[] { page.ID };
 
             this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);
 

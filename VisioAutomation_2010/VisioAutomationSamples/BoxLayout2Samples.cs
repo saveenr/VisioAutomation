@@ -94,7 +94,7 @@ namespace VisioAutomationSamples
                 var properties = type.GetProperties().Take(max_properties).ToList();
                 foreach (var property in properties)
                 {
-                    var item = new string[] {type.Name, property.Name[0].ToString().ToUpper(), property.Name};
+                    var item = new[] {type.Name, property.Name[0].ToString().ToUpper(), property.Name};
                     data.Add(item);
                 }
             }
@@ -190,7 +190,7 @@ namespace VisioAutomationSamples
                 var minorname = row[1];
                 var itemname = row[2];
 
-                BOXMODEL.Container majorcnt = null;
+                BOXMODEL.Container majorcnt;
                 if (name_to_major_group.ContainsKey(majorname))
                 {
                     majorcnt = name_to_major_group[majorname];
@@ -211,7 +211,7 @@ namespace VisioAutomationSamples
                     BOXMODEL.Box headerbox = majorcnt.AddBox(2, 0.25);
                 }
 
-                BOXMODEL.Container minorcnt = null;
+                BOXMODEL.Container minorcnt;
                 var minorkey = majorname + "___" + minorname;
                 if (name_to_minor_group.ContainsKey(minorkey))
                 {

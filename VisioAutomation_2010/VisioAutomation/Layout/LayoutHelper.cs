@@ -112,7 +112,7 @@ namespace VisioAutomation.Layout
 
 
             var sorted_shape_ids = VA.Layout.LayoutHelper.OrderShapesByXFormPosition(page, shapeids, sortpos);
-            var input_xfrms = VA.Layout.XFormCells.GetCells(page, sorted_shape_ids); ;
+            var input_xfrms = VA.Layout.XFormCells.GetCells(page, sorted_shape_ids);
             var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
             var bb = GetBoundingBox(input_xfrms);
             var cur_pos = new VA.Drawing.Point(bb.Left, bb.Bottom);
@@ -150,7 +150,7 @@ namespace VisioAutomation.Layout
 
         public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Layout.XFormCells> xfrms)
         {
-            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => VA.Layout.LayoutHelper.GetRectangle(i)));
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(VA.Layout.LayoutHelper.GetRectangle));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");

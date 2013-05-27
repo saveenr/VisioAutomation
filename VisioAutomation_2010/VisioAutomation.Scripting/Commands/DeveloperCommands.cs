@@ -420,7 +420,8 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep + 1);
                 }
 
-                var types_in_namespace = types.Where(t => t.Type.Namespace == ns)
+                string ns1 = ns;
+                var types_in_namespace = types.Where(t => t.Type.Namespace == ns1)
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new TREEMODEL.Node(ns);

@@ -83,10 +83,7 @@ namespace VisioAutomation.CustomProperties
         private static CustomPropertyQuery m_query;
         private static CustomPropertyQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new CustomPropertyQuery();
-            }
+            m_query = m_query ?? new CustomPropertyQuery();
             return m_query;
         }
 

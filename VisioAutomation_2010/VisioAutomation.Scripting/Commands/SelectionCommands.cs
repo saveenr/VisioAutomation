@@ -233,7 +233,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
-            int count = selection.Count;;
+            int count = selection.Count;
             return count;
         }
 

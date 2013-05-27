@@ -9,22 +9,22 @@ namespace VisioAutomation.VDX.Elements
         {
             if (to_shape == null)
             {
-                throw new System.ArgumentNullException("shape1");
+                throw new System.ArgumentNullException("to_shape");
             }
 
             if (from_shape == null)
             {
-                throw new System.ArgumentNullException("connectorshape");
+                throw new System.ArgumentNullException("from_shape");
             }
 
             if (string.IsNullOrEmpty(to_cell))
             {
-                throw new System.ArgumentException("cell1");
+                throw new System.ArgumentException("to_cell");
             }
 
             if (string.IsNullOrEmpty(from_cell))
             {
-                throw new System.ArgumentException("cell2");
+                throw new System.ArgumentException("from_cell");
             }
 
             FromSheet = from_shape.ID;

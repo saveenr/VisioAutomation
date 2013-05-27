@@ -347,8 +347,8 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             {
                 var layoutconnector = (DGMODEL.Connector)i.UserData;
                 var vconnector = new VA.DOM.Connector(
-                    (VA.DOM.BaseShape)layoutconnector.From.DOMNode,
-                    (VA.DOM.BaseShape) layoutconnector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
+                    layoutconnector.From.DOMNode,
+                    layoutconnector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
                 layoutconnector.DOMNode = vconnector;
                 vdoc.Add(vconnector);
             }
@@ -418,8 +418,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             if (!string.IsNullOrEmpty(layout_shape.URL))
             {
                 var hyperlink = new VA.DOM.Hyperlink("Row_1", layout_shape.URL);
-                dom_shape.Hyperlinks = new List<VA.DOM.Hyperlink>();
-                dom_shape.Hyperlinks.Add(hyperlink);
+                dom_shape.Hyperlinks = new List<VA.DOM.Hyperlink> {hyperlink};
             }
 
             // ADD CUSTOM PROPS

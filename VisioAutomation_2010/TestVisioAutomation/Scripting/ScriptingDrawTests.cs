@@ -92,7 +92,7 @@ namespace TestVisioAutomation
                                  new VA.Drawing.Point(0, 0),
                                  new VA.Drawing.Point(2, 0.5),
                                  new VA.Drawing.Point(2, 2),
-                                 new VA.Drawing.Point(3, 0.5),
+                                 new VA.Drawing.Point(3, 0.5)
                              };
 
             var shape_bezier = ss.Draw.Bezier(points);

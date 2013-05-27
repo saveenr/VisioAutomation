@@ -16,7 +16,7 @@ namespace VisioAutomation.Layout.Models.Radial
         {
             if (radius < 0.0)
             {
-                throw new System.ArgumentException("radius","must be non-negative");
+                throw new System.ArgumentOutOfRangeException("radius","must be non-negative");
             }
 
             this.Radius = radius;

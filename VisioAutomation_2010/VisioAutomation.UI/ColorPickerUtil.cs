@@ -15,10 +15,10 @@
         public static System.Drawing.RectangleF Rect(System.Drawing.Rectangle r)
         {
             var rf = new System.Drawing.RectangleF();
-            rf.X = (float) r.X;
-            rf.Y = (float) r.Y;
-            rf.Width = (float) r.Width;
-            rf.Height = (float) r.Height;
+            rf.X = r.X;
+            rf.Y = r.Y;
+            rf.Width = r.Width;
+            rf.Height = r.Height;
             return rf;
         }
 

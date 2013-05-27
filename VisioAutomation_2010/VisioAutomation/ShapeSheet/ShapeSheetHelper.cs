@@ -100,7 +100,7 @@ namespace VisioAutomation.ShapeSheet
 
         public static TResult[] _GetResults<TResult>(object visio_object, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            int numitems = -1; 
+            int numitems; 
 
             if (visio_object is IVisio.Shape)
             {
@@ -134,7 +134,7 @@ namespace VisioAutomation.ShapeSheet
             }
 
             // Calculate the flags based on the result datatype
-            IVisio.VisGetSetArgs flags = 0;
+            IVisio.VisGetSetArgs flags;
             if (result_type == typeof(int))
             {
                 flags = IVisio.VisGetSetArgs.visGetTruncatedInts;

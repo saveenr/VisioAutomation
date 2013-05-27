@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Layout
 {
-    public partial class ShapeLayoutCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class ShapeLayoutCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<int> ConFixedCode { get; set; }
         public VA.ShapeSheet.CellData<int> ConLineJumpCode { get; set; }
@@ -88,10 +88,7 @@ namespace VisioAutomation.Layout
         private static ShapeLayoutQuery m_query;
         private static ShapeLayoutQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new ShapeLayoutQuery();
-            }
+            m_query = m_query ?? new ShapeLayoutQuery();
             return m_query;
         }
 

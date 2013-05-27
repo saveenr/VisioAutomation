@@ -115,7 +115,7 @@ namespace TestVisioAutomation
             var col_pinx = query.AddColumn(src_pinx);
             var col_piny = query.AddColumn(src_piny);
 
-            var shapeids = new int[] {shape1.ID, shape2.ID, shape3.ID};
+            var shapeids = new[] {shape1.ID, shape2.ID, shape3.ID};
 
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 
@@ -154,7 +154,7 @@ namespace TestVisioAutomation
             var col_pinx = query.AddColumn(src_pinx);
             var col_piny = query.AddColumn(src_piny);
 
-            var shapeids = new int[] { shape1.ID, shape2.ID, shape3.ID };
+            var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
             var r = query.GetFormulasAndResults<double>(page1, shapeids);
 

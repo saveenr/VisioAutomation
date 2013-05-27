@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Pages
 {
-    public partial class PageCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class PageCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> PageLeftMargin { get; set; }
         public VA.ShapeSheet.CellData<double> CenterX { get; set; }
@@ -235,10 +235,7 @@ namespace VisioAutomation.Pages
         private static PageQuery m_query;
         private static PageQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new PageQuery();
-            }
+            m_query = m_query ?? new PageQuery();
             return m_query;
         }
 

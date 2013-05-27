@@ -67,12 +67,8 @@ namespace VisioAutomationSamples
 
         private HashSet<string> GetPreviouslySelectedSamples()
         {
-            var prev_names_str = Properties.Settings.Default.SelectedSamples;
-            if (prev_names_str == null)
-            {
-                prev_names_str = "";
-            }
-            return new HashSet<string>(prev_names_str.Split(new char[] {'|'}));
+            var prev_names_str = Properties.Settings.Default.SelectedSamples ?? "";
+            return new HashSet<string>(prev_names_str.Split(new[] {'|'}));
         }
 
         private void SaveSelectedNames()

@@ -147,7 +147,7 @@ namespace TestVisioAutomation
             s2.Text = "B";
             var s3 = page1.DrawRectangle(3, 0, 4, 1);
             s3.Text = "C";
-            return new IVisio.Shape[] {s1, s2, s3};
+            return new[] {s1, s2, s3};
         }
 
         private void connect(IVisio.Shape c1, IVisio.Shape from, IVisio.Shape to)

@@ -211,7 +211,7 @@ namespace VisioAutomation.Drawing
                 return null;
             }
 
-            int current_color = 0;
+            int current_color;
             bool result = System.Int32.TryParse(webcolor, System.Globalization.NumberStyles.HexNumber, null, out current_color);
 
             if (!result)

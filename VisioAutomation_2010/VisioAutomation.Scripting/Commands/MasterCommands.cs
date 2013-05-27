@@ -48,9 +48,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentException("mastername");
             }
-
-
-            IVisio.Master master = null;
+            
+            IVisio.Master master;
             try
             {
                 var application = this.Session.VisioApplication;

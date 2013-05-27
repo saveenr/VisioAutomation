@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         public static VA.Drawing.ColorRGB AttributeAsColor(this SXL.XElement el, string name,
                                                      VA.Drawing.ColorRGB def)
         {
-            return VA.Scripting.XmlUtil.GetAttributeValue(el, name, def, s => VA.Drawing.ColorRGB.ParseWebColor(s));
+            return VA.Scripting.XmlUtil.GetAttributeValue(el, name, def, VA.Drawing.ColorRGB.ParseWebColor);
         }
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)

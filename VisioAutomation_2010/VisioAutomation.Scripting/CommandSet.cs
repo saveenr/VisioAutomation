@@ -122,22 +122,18 @@ namespace VisioAutomation.Scripting
                 var out_shapes = this.Session.Selection.GetShapes();
                 int n = out_shapes.Count;
                 this.Session.WriteVerbose("GetTargetShape: Number of shapes from selection = {0}", n);
+
                 if (out_shapes.Count > 0)
                 {
                     this.Session.WriteVerbose("GetTargetShape: More than 1 shape in selection, targeting the first one");                    
                     return out_shapes[0];
                 }
-                else
-                {
-                    this.Session.WriteVerbose("GetTargetShape: No shapes in selection, targeting none");
-                    return null;
-                }
+
+                this.Session.WriteVerbose("GetTargetShape: No shapes in selection, targeting none");
+                return null;
             }
-            else
-            {
-                this.Session.WriteVerbose("GetTargetShape: Targeting specified shape");
-                return shape;
-            }
+            this.Session.WriteVerbose("GetTargetShape: Targeting specified shape");
+            return shape;
         }
     }
 }

@@ -14,12 +14,11 @@ namespace TestVisioAutomationVDX
         public IVisio.Document TryOpen(IVisio.Documents docs, string filename)
         {
             var app = docs.Application;
-            IVisio.Document doc=null;
             using (var scope = new VA.Application.AlertResponseScope(app,VA.Application.AlertResponseCode.No))
             {
-                doc = app.Documents.Open(filename);
+                var doc = app.Documents.Open(filename);
+                return doc;
             }
-            return doc;
         }
 
         public void CheckIfLoadsWithoutErrorLog(string filename)

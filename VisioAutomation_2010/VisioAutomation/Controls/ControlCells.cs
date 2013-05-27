@@ -57,10 +57,7 @@ namespace VisioAutomation.Controls
         private static ControlQuery m_query;
         private static ControlQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new ControlQuery();
-            }
+            m_query = m_query ?? new ControlQuery();
             return m_query;
         }
 

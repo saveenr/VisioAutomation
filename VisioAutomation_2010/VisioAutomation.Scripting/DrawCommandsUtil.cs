@@ -31,8 +31,7 @@ namespace VisioAutomation.Scripting
                 throw new System.InvalidOperationException("internal error: leftover value must greater than or equal to zero");
             }
 
-            var duplicated_shapes = new List<IVisio.Shape>();
-            duplicated_shapes.Add(shape);
+            var duplicated_shapes = new List<IVisio.Shape> {shape};
 
             var application = page.Application;
             var win = application.ActiveWindow;

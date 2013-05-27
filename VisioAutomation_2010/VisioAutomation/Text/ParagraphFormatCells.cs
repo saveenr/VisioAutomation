@@ -56,10 +56,7 @@ namespace VisioAutomation.Text
         private static ParagraphFormatQuery m_query;
         private static ParagraphFormatQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new ParagraphFormatQuery();
-            }
+            m_query = m_query ?? new ParagraphFormatQuery();
             return m_query;
         }
 

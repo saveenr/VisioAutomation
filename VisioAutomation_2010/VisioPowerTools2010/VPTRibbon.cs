@@ -272,7 +272,7 @@ namespace VisioPowerTools2010
             var dic = new Dictionary<string, VA.Layout.Models.DirectedGraph.Shape>();
             foreach (var line in lines)
             {
-                var tokens = line.Split(new string[] {"->"}, System.StringSplitOptions.RemoveEmptyEntries);
+                var tokens = line.Split(new[] {"->"}, System.StringSplitOptions.RemoveEmptyEntries);
                 if (tokens.Length==0)
                 {
                     // do nothing
@@ -326,7 +326,7 @@ namespace VisioPowerTools2010
 
             var app = Globals.ThisAddIn.Application;
             var doc = Globals.ThisAddIn.Application.ActiveDocument;
-            IVisio.Page page=null;
+            IVisio.Page page;
             if (doc==null)
             {
                 var docs = app.Documents;

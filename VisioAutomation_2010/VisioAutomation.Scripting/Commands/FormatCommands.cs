@@ -114,11 +114,6 @@ namespace VisioAutomation.Scripting.Commands
             cached_size_height = queryresults[0, height_col];
         }
 
-        /// <summary>
-        /// Applies the cached size to the currently selected shapes. If no shapes are selected then nothing happens.
-        /// If no size was cached then nothing happens.
-        /// </summary>
-        /// <param name="flags">Controls if either or both the width and height values are applied during the paste</param>
         public void PasteSize(IList<IVisio.Shape> target_shapes, bool paste_width, bool paste_height)
         {
             this.CheckVisioApplicationAvailable();

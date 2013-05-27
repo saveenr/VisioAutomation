@@ -32,7 +32,6 @@ namespace VisioAutomation.Text
             // Get the Characters object representing the shape text
             var chars = shape.Characters;
             int num_chars = chars.CharCount;
-            int run_begin = 0;
             int run_end = 1;
 
             int index = 0;
@@ -45,7 +44,7 @@ namespace VisioAutomation.Text
                 chars.End = c + 1;
 
                 // Get the beginning and end of this character run
-                run_begin = chars.RunBegin[(short)runtype];
+                int run_begin = chars.RunBegin[(short)runtype];
                 run_end = chars.RunEnd[(short)runtype];
 
                 // Set the begin and end of the Characters object to this run
@@ -270,7 +269,7 @@ namespace VisioAutomation.Text
                 t.TextBlock = textblockcells[i];
                 l.Add(t);
 
-                var shape = page_shapes.get_ItemFromID(shapeids[i]);
+                var shape = page_shapes.ItemFromID[shapeids[i]];
                 t.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
                 t.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 

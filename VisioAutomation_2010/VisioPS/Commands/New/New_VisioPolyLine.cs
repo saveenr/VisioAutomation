@@ -13,15 +13,6 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-            if ((this.Doubles.Length%2) != 0)
-            {
-                var exc = new ArgumentOutOfRangeException("polyline has odd number of elements");
-                var er = new SMA.ErrorRecord(exc, "POLYLINE_COUNT", SMA.ErrorCategory.InvalidData, null);
-                this.WriteError(er);
-
-                return;
-            }
-
             var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.Point.FromDoubles(this.Doubles).ToList();
             var shape = scriptingsession.Draw.PolyLine(points);

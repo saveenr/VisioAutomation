@@ -43,7 +43,7 @@ namespace VisioPowerTools2010
                         var tokens = line.Split(seps, System.StringSplitOptions.RemoveEmptyEntries);
                         if (tokens.Length >= 3)
                         {
-                            var components = tokens.Select(v => getcomp(v)).ToArray();
+                            var components = tokens.Select(getcomp).ToArray();
 
                             bool has_alpha = components.Length > 3;
                             int i = has_alpha ? 1 : 0;
@@ -270,7 +270,7 @@ namespace VisioPowerTools2010
         {
             var rs = s.Trim();
 
-            int ri = 0;
+            int ri;
             int.TryParse(rs, out ri);
             ri = System.Math.Max(0, System.Math.Min(255, ri));
             return (byte) ri;

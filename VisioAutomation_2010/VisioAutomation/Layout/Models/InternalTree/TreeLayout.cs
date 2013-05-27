@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 
 /*
@@ -546,7 +547,7 @@ namespace VisioAutomation.Layout.Models.InternalTree
                 m1 = new VA.Drawing.Point(lineseg.End.X - a, lineseg.End.Y);
             }
 
-            return new VA.Drawing.Point[] {lineseg.Start, m0, m1, lineseg.End};
+            return new[] {lineseg.Start, m0, m1, lineseg.End};
         }
 
         public VA.Drawing.Point[] GetConnectionBezier(ParentChildConnection<Node<T>> connection)
@@ -555,8 +556,6 @@ namespace VisioAutomation.Layout.Models.InternalTree
 
             VA.Drawing.Point parent_attach_point = lineseg.Start;
             VA.Drawing.Point child_attach_point = lineseg.End;
-            VA.Drawing.Point h1;
-            VA.Drawing.Point h2;
 
             double scale = this.Options.LevelSeparation/2.0;
             var dif = child_attach_point.Subtract(parent_attach_point).Multiply(scale);
@@ -566,10 +565,10 @@ namespace VisioAutomation.Layout.Models.InternalTree
                                           ? new VA.Drawing.Point(0, dif.Y)
                                           : new VA.Drawing.Point(dif.X, 0);
 
-            h1 = parent_attach_point.Add(handle_displacement);
-            h2 = child_attach_point.Add(handle_displacement*(-1));
+            Point h1 = parent_attach_point.Add(handle_displacement);
+            Point h2 = child_attach_point.Add(handle_displacement*(-1));
 
-            return new VA.Drawing.Point[] {parent_attach_point, h1, h2, child_attach_point};
+            return new[] {parent_attach_point, h1, h2, child_attach_point};
         }
 
         public static Node<T> CreateLayoutTree<TA>(

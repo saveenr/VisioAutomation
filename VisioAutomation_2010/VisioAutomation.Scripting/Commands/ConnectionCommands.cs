@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ConnectionCommands : CommandSet
     {
-        string undoname_connectShapes = "Connect Shapes";
+        private const string undoname_connectShapes = "Connect Shapes";
 
         public ConnectionCommands(Session session) :
             base(session)

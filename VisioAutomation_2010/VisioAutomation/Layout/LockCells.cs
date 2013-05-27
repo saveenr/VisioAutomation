@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Layout
 {
-    public partial class LockCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class LockCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<bool> LockAspect { get; set; }
         public VA.ShapeSheet.CellData<bool> LockBegin { get; set; }
@@ -94,10 +94,7 @@ namespace VisioAutomation.Layout
         private static LockQuery m_query;
         private static LockQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new LockQuery();
-            }
+            m_query = m_query ?? new LockQuery();
             return m_query;
         }
 

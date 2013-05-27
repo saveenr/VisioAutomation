@@ -4,7 +4,7 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Extensions
 {
-    public static partial class StylesMethods
+    public static class StylesMethods
     {
         public static IEnumerable<IVisio.Style> AsEnumerable(this IVisio.Styles styles)
         {

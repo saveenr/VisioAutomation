@@ -191,12 +191,8 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)
         {
-            System.Func<string, bool> bool_converter = s => bool.Parse(s);
-            System.Func<string, int> int_converter = s => int.Parse(s);
-            System.Func<string, double> double_converter = (s) => double.Parse(s);
-
-            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el, "usedynamicconnectors", bool_converter);
-            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el, "scalingfactor", double_converter);
+            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el, "usedynamicconnectors", bool.Parse);
+            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el, "scalingfactor", double.Parse);
         }
     }
 }

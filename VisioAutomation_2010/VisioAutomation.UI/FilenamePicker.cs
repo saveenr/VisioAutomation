@@ -5,7 +5,7 @@ namespace VisioAutomation.UI.CommonControls
 {
     public partial class FilenamePicker : UserControl
     {
-        static readonly int MAX_LINES = 1;
+        private const int MAX_LINES = 1;
 
         OpenFileDialog openfiledialog = new OpenFileDialog();
 

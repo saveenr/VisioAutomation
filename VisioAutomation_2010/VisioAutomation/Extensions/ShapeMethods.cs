@@ -4,7 +4,7 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Extensions
 {
-    public static partial class ShapeMethods
+    public static class ShapeMethods
     {
         public static IVisio.Shape DrawLine(this IVisio.Shape shape, VA.Drawing.Point p1, VA.Drawing.Point p2)
         {

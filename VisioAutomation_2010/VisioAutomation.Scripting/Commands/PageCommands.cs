@@ -106,11 +106,10 @@ namespace VisioAutomation.Scripting.Commands
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
-            IVisio.Page page;
             var application = this.Session.VisioApplication;
             var active_document = application.ActiveDocument;
             var pages = active_document.Pages;
-            page = pages.Add();
+            IVisio.Page page = pages.Add();
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"New Page"))
             {

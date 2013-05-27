@@ -13,8 +13,10 @@ namespace TestVisioAutomation
         {
             // v0->v0
             // doesn't yield any edges (nodes are implictly connected to themselves)
-            var input = new List<VA.Connections.DirectedEdge<string, object>>();
-            input.Add(new VA.Connections.DirectedEdge<string, object>("v0","v0",null));
+            var input = new List<VA.Connections.DirectedEdge<string, object>>
+                {
+                    new VA.Connections.DirectedEdge<string, object>("v0", "v0", null)
+                };
             var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(0,output.Count);
         }
@@ -37,8 +39,10 @@ namespace TestVisioAutomation
         {
             // v0->v1
             // doesn't yield any edges (nodes are implictly connected to themselves)
-            var input = new List<VA.Connections.DirectedEdge<string, object>>();
-            input.Add(new VA.Connections.DirectedEdge<string, object>("v0", "v1", null));
+            var input = new List<VA.Connections.DirectedEdge<string, object>>
+                {
+                    new VA.Connections.DirectedEdge<string, object>("v0", "v1", null)
+                };
             var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(1, output.Count);
             Assert.AreEqual("v0",output[0].From);
@@ -49,9 +53,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void TestTransitiveClosure3()
         {
-            var input = new List<VA.Connections.DirectedEdge<string, object>>();
-            input.Add(new VA.Connections.DirectedEdge<string, object>("v0", "v1", null));
-            input.Add(new VA.Connections.DirectedEdge<string, object>("v1", "v2", null));
+            var input = new List<VA.Connections.DirectedEdge<string, object>>
+                {
+                    new VA.Connections.DirectedEdge<string, object>("v0", "v1", null),
+                    new VA.Connections.DirectedEdge<string, object>("v1", "v2", null)
+                };
             var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(3, output.Count);
             Assert.AreEqual("v0", output[0].From);
@@ -68,10 +74,12 @@ namespace TestVisioAutomation
         [TestMethod]
         public void TestTransitiveClosure4()
         {
-            var input = new List<VA.Connections.DirectedEdge<string, object>>();
-            input.Add(new VA.Connections.DirectedEdge<string, object>("v0", "v1", null));
-            input.Add(new VA.Connections.DirectedEdge<string, object>("v1", "v2", null));
-            input.Add(new VA.Connections.DirectedEdge<string, object>("v2", "v0", null));
+            var input = new List<VA.Connections.DirectedEdge<string, object>>
+                {
+                    new VA.Connections.DirectedEdge<string, object>("v0", "v1", null),
+                    new VA.Connections.DirectedEdge<string, object>("v1", "v2", null),
+                    new VA.Connections.DirectedEdge<string, object>("v2", "v0", null)
+                };
             var output = VA.Connections.PathAnalysis.GetClosureFromEdges(input).ToList();
             Assert.AreEqual(6, output.Count);
             Assert.AreEqual("v0", output[0].From);

@@ -59,10 +59,7 @@ namespace VisioAutomation.Text
         private static TextBlockFormatQuery m_query;
         private static TextBlockFormatQuery get_query()
         {
-            if (m_query==null)
-            {
-                m_query = new TextBlockFormatQuery();
-            }
+            m_query= m_query ?? new TextBlockFormatQuery();
             return m_query;
         }
 

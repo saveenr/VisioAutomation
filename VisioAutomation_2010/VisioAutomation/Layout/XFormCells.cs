@@ -55,10 +55,7 @@ namespace VisioAutomation.Layout
         private static XFormQuery m_query;
         private static XFormQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new XFormQuery();
-            }
+            m_query = m_query ?? new XFormQuery();
             return m_query;
         }
 

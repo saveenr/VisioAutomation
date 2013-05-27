@@ -108,10 +108,7 @@ namespace VisioAutomation.Format
         private static ShapeFormatQuery m_query;
         private static ShapeFormatQuery get_query()
         {
-            if (m_query == null)
-            {
-                m_query = new ShapeFormatQuery();
-            }
+            m_query = m_query ?? new ShapeFormatQuery();
             return m_query;
         }
 

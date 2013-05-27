@@ -7,7 +7,7 @@ namespace VisioAutomation.Interop
 {
     public static class InteropHelper
     {
-        private static bool initialized=false;
+        private static bool _initialized=false;
         private static Dictionary<string, EnumType> g_name_to_enum;
         private static List<System.Type> g_types; 
 
@@ -19,7 +19,7 @@ namespace VisioAutomation.Interop
 
         public static void init()
         {
-            if (!initialized)
+            if (!_initialized)
             {
                 g_types = typeof(IVisio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
@@ -30,7 +30,7 @@ namespace VisioAutomation.Interop
                     .Where(t => t.IsEnum)
                     .Select(i => new EnumType(i))
                     .ToDictionary(i => i.Name, i => i);
-                initialized = true;
+                _initialized = true;
             }
         }
 

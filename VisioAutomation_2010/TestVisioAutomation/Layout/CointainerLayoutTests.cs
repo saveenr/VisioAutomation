@@ -19,13 +19,12 @@ namespace TestVisioAutomation
             bool caught = false;
             var layout = new CONMODEL.ContainerLayout();
             var doc = this.GetNewDoc();
-            IVisio.Page page = null;
             try
             {
                 var c1 = layout.AddContainer("A");
                 var i1 = c1.Add("A1");
                 // layout.PerformLayout(); 
-                page = layout.Render(doc);
+                IVisio.Page page = layout.Render(doc);
                 page.Delete(0);
             }
             catch (VA.AutomationException)

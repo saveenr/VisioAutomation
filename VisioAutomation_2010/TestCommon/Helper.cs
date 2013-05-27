@@ -121,7 +121,7 @@ namespace TestCommon
 
             if (dupes.Count > 0)
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail(string.Format("Duplicated {0}", dupes.Count));
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("Duplicated {0}", dupes.Count);
             }
         }
 
