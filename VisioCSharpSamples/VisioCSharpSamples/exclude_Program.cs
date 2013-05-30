@@ -7,7 +7,7 @@ namespace VisioCSharpSamples
     {
         private static void Main(string[] args)
         {
-            Samples.AddContainer();
+            Samples.DrawOrgChart();
         }
     }
 }
