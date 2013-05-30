@@ -20,6 +20,7 @@ namespace VisioPS.Commands
                 throw new VA.AutomationException("Could not find an instance");
             }
 
+            this.WriteVerboseEx("Attaching to an instance");
             AttachedVisioApplication = app;
 
             this.WriteObject(app);
