@@ -244,8 +244,7 @@ namespace VisioPowerTools2010
                     e.Name = SXL.XNamespace.None.GetName(e.Name.LocalName);
                 }
                 if (
-                    e.Attributes().Where(a => a.IsNamespaceDeclaration || a.Name.Namespace != SXL.XNamespace.None).
-                        Any())
+                    e.Attributes().Any(a => a.IsNamespaceDeclaration || a.Name.Namespace != SXL.XNamespace.None))
                 {
                     e.ReplaceAttributes(
                         e.Attributes().Select(

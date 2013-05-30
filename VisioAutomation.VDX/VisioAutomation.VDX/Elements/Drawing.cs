@@ -43,9 +43,7 @@ namespace VisioAutomation.VDX.Elements
                 var subshapes = master_el.Descendants()
                     .Where(el => el.Name.LocalName == "Shape");
 
-                var count_groups = subshapes
-                    .Where(shape_el => shape_el.Attribute("Type").Value == "Group")
-                    .Count();
+                var count_groups = subshapes.Count(shape_el => shape_el.Attribute("Type").Value == "Group");
 
                 bool master_is_group = count_groups > 0;
 
