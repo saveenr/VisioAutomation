@@ -4,7 +4,7 @@ namespace VisioAutomation.VDX.ShapeSheet
 {
     public class EnumCell<T> : CellScalar<T> where T : struct
     {
-        private System.Func<T, int> EnumToInt;
+        private readonly System.Func<T, int> EnumToInt;
 
         public EnumCell(System.Func<T, int> enum_to_int)
             : base(CellUnit.None)

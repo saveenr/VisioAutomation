@@ -2,7 +2,8 @@
 {
     public class PageList : NamedNodeList<Elements.Page>
     {
-        private Elements.Drawing drawing_el;
+        private readonly Elements.Drawing drawing_el;
+
         public PageList(Elements.Drawing drawing_el) :
             base(page => page.Name)
         {

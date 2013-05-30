@@ -34,7 +34,7 @@ namespace VisioAutomation.Layout.Models.InternalTree
         private Dictionary<int, double> max_level_width;
         private Dictionary<int, Node<T>> previous_level_node;
         private VA.Drawing.Point root_offset;
-        private Node<T> root;
+        private readonly Node<T> root;
 
         public TreeLayoutOptions Options { get; set; }
 

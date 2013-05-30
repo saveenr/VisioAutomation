@@ -8,13 +8,13 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
     public class TextDocumentBuilder
     {
         private IVisio.Document _visioDocument;
-        private IVisio.Application _app;
+        private readonly IVisio.Application _app;
 
-        private VA.Drawing.Size _pageSize;
-        private VA.Drawing.Rectangle _pagerect;
-        private VA.Drawing.Rectangle _pageintrect;
-        private VA.Drawing.Rectangle _titlerect;
-        private VA.Drawing.Rectangle _bodywith_title_rect;
+        private readonly VA.Drawing.Size _pageSize;
+        private readonly VA.Drawing.Rectangle _pagerect;
+        private readonly VA.Drawing.Rectangle _pageintrect;
+        private readonly VA.Drawing.Rectangle _titlerect;
+        private readonly VA.Drawing.Rectangle _bodywith_title_rect;
         private int _fontid;
         private VA.Text.TextCells _textblockformat;
         private VA.Text.ParagraphFormatCells _titleParaFmt;

@@ -10,7 +10,7 @@ namespace VisioAutomation.Application
     /// </summary>
     public class AlertResponseScope : System.IDisposable
     {
-        private VA.Application.AlertResponseCode old_alertresponse;
+        private readonly VA.Application.AlertResponseCode old_alertresponse;
         private readonly IVisio.Application app;
 
         public AlertResponseScope(IVisio.Application app, VA.Application.AlertResponseCode value)

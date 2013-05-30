@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     [TestClass]
     public class VisioAutomationTest
     {
-        private static VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();
+        private static readonly VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();
         public readonly VA.Drawing.Size StandardPageSize = new VA.Drawing.Size(8.5, 11);
         public readonly VA.Drawing.Rectangle StandardPageSizeRect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), new VA.Drawing.Size(8.5, 11));
 

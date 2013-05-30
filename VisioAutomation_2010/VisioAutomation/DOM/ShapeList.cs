@@ -9,7 +9,7 @@ namespace VisioAutomation.DOM
 {
     public class ShapeList : Node, IEnumerable<BaseShape>
     {
-        private NodeList<BaseShape> shapes;
+        private readonly NodeList<BaseShape> shapes;
 
         public ShapeList()
         {

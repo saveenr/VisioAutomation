@@ -11,7 +11,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
     {
         private class BuilderError
         {
-            public string Text;
+            public readonly string Text;
 
             public BuilderError(string text)
             {

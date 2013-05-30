@@ -26,8 +26,8 @@ namespace VisioAutomation.VDX.Elements
         public VA.VDX.Sections.Geom Geom;
 
         internal int _id;
-        private bool _isGroup;
-        private Text m_text = new Text();
+        private readonly bool _isGroup;
+        private readonly Text m_text = new Text();
 
         public string Name { get; set; }
         public int Master { get; set; }

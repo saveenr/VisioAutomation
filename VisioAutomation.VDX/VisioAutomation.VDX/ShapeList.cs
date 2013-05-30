@@ -2,7 +2,7 @@
 {
     public class ShapeList : NamedNodeList<Elements.Shape>
     {
-        private Elements.Page page_el;
+        private readonly Elements.Page page_el;
 
         public ShapeList(Elements.Page page_el) :
             base(shape => shape.Name)

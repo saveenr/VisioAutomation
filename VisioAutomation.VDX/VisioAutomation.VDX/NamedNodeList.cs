@@ -5,9 +5,9 @@ namespace VisioAutomation.VDX
 {
     public class NamedNodeList<T> : Elements.Node where T : Elements.Node
     {
-        private Dictionary<string, T> dic;
-        private List<T> items;
-        private System.Func<T, string> func_get_name;
+        private readonly Dictionary<string, T> dic;
+        private readonly List<T> items;
+        private readonly System.Func<T, string> func_get_name;
 
         public NamedNodeList(System.Func<T, string> func_get_name)
         {

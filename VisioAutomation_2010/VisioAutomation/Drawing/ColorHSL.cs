@@ -22,18 +22,6 @@ namespace VisioAutomation.Drawing
 
         private void CheckValidVisioHSL()
         {
-            if (this.H < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("h", "h must be >=0");
-            }
-            if (this.S < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("s", "s must be >=0");
-            }
-            if (this.L < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("l", "l must be >=0");
-            }
             if (this.H > 255)
             {
                 throw new System.ArgumentOutOfRangeException("h", "h must be <=255");

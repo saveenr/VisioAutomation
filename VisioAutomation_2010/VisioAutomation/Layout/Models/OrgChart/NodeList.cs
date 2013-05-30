@@ -6,7 +6,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
     public class NodeList : IEnumerable<Node>
     {
         private readonly Node parent;
-        private List<Node> items;
+        private readonly List<Node> items;
 
         public NodeList(Node parentnode)
         {

@@ -8,7 +8,7 @@ namespace VisioAutomation.Internal
 {
     internal class MasterLoader
     {
-        private Dictionary<string, MasterRef> master_ref_dic;
+        private readonly Dictionary<string, MasterRef> master_ref_dic;
 
         public class MasterRef
         {

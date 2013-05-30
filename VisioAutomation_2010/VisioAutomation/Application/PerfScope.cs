@@ -5,8 +5,8 @@ namespace VisioAutomation.Application
 {
     public class PerfScope : System.IDisposable
     {
-        private IVisio.Application app;
-        private VA.Application.PerfSettings old_settings;
+        private readonly IVisio.Application app;
+        private readonly VA.Application.PerfSettings old_settings;
 
         public PerfScope(IVisio.Application vis, VA.Application.PerfSettings new_settings)
         {

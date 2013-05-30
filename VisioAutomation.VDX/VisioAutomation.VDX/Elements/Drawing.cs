@@ -14,7 +14,7 @@ namespace VisioAutomation.VDX.Elements
         private readonly List<Window> _windows;
         private readonly List<ColorEntry> _colors;
 
-        private Dictionary<string, MasterMetdata> master_metadata =
+        private readonly Dictionary<string, MasterMetdata> master_metadata =
             new Dictionary<string, MasterMetdata>(System.StringComparer.OrdinalIgnoreCase);
 
         public VA.VDX.Sections.DocumentProperties DocumentProperties = new VA.VDX.Sections.DocumentProperties();

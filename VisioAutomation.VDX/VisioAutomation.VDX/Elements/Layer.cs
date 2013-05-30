@@ -29,8 +29,8 @@ namespace VisioAutomation.VDX.Elements
 
         public TransparencyCell ColorTrans { get; set; }
         public int Index { get; private set; }
-        private StringCell _Name = new StringCell();
-        private StringCell _NameUniv = new StringCell();
+        private readonly StringCell _Name = new StringCell();
+        private readonly StringCell _NameUniv = new StringCell();
 
         
         public Layer(string name, int index)

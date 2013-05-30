@@ -7,7 +7,7 @@ namespace VisioPowerTools2010
     public class SimpleHTML5Writer
     {
         protected System.Xml.XmlWriter _xw;
-        private Stack<string> stack;
+        private readonly Stack<string> stack;
 
         protected System.Xml.XmlWriter xmlwriter
         {

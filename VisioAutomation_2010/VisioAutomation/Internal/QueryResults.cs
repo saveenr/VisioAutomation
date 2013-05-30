@@ -8,7 +8,7 @@ namespace VisioAutomation.Internal
     {
         readonly int ColumnCount;
         readonly int RowCount;
-        private List<VA.ShapeSheet.Data.TableRowGroup> Groups;
+        private readonly List<VA.ShapeSheet.Data.TableRowGroup> Groups;
         public VA.ShapeSheet.Data.Table<string> Formulas { get; private set; }
         public VA.ShapeSheet.Data.Table<T> Results { get; private set; }
 

@@ -7,7 +7,7 @@ namespace VisioAutomation.UI.CommonControls
     {
         private const int MAX_LINES = 1;
 
-        OpenFileDialog openfiledialog = new OpenFileDialog();
+        readonly OpenFileDialog openfiledialog = new OpenFileDialog();
 
         public FilenamePicker()
         {

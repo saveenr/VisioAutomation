@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet
 {
     public class Update : IEnumerable<Update.UpdateRecord>
     {
-        private List<UpdateRecord> updates;
+        private readonly List<UpdateRecord> updates;
         public bool BlastGuards { get; set; }
         public bool TestCircular { get; set; }
 

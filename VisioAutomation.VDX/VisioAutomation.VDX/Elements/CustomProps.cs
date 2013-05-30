@@ -8,7 +8,7 @@ namespace VisioAutomation.VDX.Elements
 {
     public class CustomProps : IEnumerable<CustomProp>
     {
-        private List<CustomProp> items;
+        private readonly List<CustomProp> items;
 
         public CustomProps()
         {

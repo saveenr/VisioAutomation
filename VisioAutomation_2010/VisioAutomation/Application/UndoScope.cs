@@ -4,7 +4,7 @@ namespace VisioAutomation.Application
 {
     public class UndoScope : System.IDisposable
     {
-        private IVisio.Application Application;
+        private readonly IVisio.Application Application;
 
         public int ScopeID { get; private set; }
         public string Name { get; private set; }

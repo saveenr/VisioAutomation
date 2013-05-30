@@ -5,9 +5,9 @@ namespace VisioAutomation.VDX.Elements
 {
     public class Window
     {
-        private static IDGenerator idgen = new IDGenerator(0);
+        private static readonly IDGenerator idgen = new IDGenerator(0);
 
-        private int _id;
+        private readonly int _id;
         public int? Width { get; set; }
         public int? Height { get; set; }
 

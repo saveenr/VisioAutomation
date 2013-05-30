@@ -152,7 +152,7 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(active_page);
         }
 
-        private VA.Format.FormatPaintCache cache = new VA.Format.FormatPaintCache();
+        private readonly VA.Format.FormatPaintCache cache = new VA.Format.FormatPaintCache();
 
         public void CopyFormat()
         {

@@ -5,7 +5,7 @@ namespace VisioPS
 {
     public class VisioPSSessionContext : VisioAutomation.Scripting.SessionContext
     {
-        private SMA.Cmdlet cmdlet;
+        private readonly SMA.Cmdlet cmdlet;
         
         public VisioPSSessionContext(SMA.Cmdlet cmdlet)
         {

@@ -7,7 +7,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
 {
     public class IDList<T> : IEnumerable<T> where T : class
     {
-        private Dictionary<string, T> items;
+        private readonly Dictionary<string, T> items;
 
         public IDList()
         {

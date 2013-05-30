@@ -6,7 +6,7 @@ namespace VisioAutomation.VDX.Elements
 {
     public class Text
     {
-        private List<TextRun> m_runs;
+        private readonly List<TextRun> m_runs;
 
         public Text()
         {

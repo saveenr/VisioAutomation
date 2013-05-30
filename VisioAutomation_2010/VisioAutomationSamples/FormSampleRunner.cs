@@ -11,8 +11,8 @@ namespace VisioAutomationSamples
 {
     public partial class FormSampleRunner : Form
     {
-        private List<SampleMethod> samplemethods = new List<SampleMethod>();
-        private Dictionary<string, SampleMethod> dic = new Dictionary<string, SampleMethod>();
+        private readonly List<SampleMethod> samplemethods = new List<SampleMethod>();
+        private readonly Dictionary<string, SampleMethod> dic = new Dictionary<string, SampleMethod>();
 
         public FormSampleRunner()
         {

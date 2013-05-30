@@ -9,10 +9,10 @@ namespace TestVisioAutomation
     [TestClass]
     public class ShapeSheet_Update : VisioAutomationTest
     {
-        private static VA.ShapeSheet.SRC src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-        private static VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;
-        private static VA.ShapeSheet.SRC src_piny = VA.ShapeSheet.SRCConstants.PinY;
-        private static VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
+        private static readonly VA.ShapeSheet.SRC src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
+        private static readonly VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;
+        private static readonly VA.ShapeSheet.SRC src_piny = VA.ShapeSheet.SRCConstants.PinY;
+        private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
         public void UpdateShapeFormulas()

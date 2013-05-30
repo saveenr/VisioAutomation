@@ -7,7 +7,7 @@ namespace VisioAutomation.DOM
 {
     public class PageList : Node, IEnumerable<Page>
     {
-        private NodeList<Page> pages;
+        private readonly NodeList<Page> pages;
 
         public PageList()
         {

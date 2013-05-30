@@ -174,10 +174,10 @@ namespace VisioAutomation.Scripting.Commands
 
         private class PathTreeBuilder
         {
-            public Dictionary<string, string> PathToParentPath;
-            public List<string> Roots;
-            public string Separator;
-            public string[] seps;
+            public readonly Dictionary<string, string> PathToParentPath;
+            public readonly List<string> Roots;
+            public readonly string Separator;
+            public readonly string[] seps;
             private System.StringSplitOptions options = System.StringSplitOptions.None;
 
             public PathTreeBuilder()
@@ -360,9 +360,9 @@ namespace VisioAutomation.Scripting.Commands
 
         private class TypeInfo
         {
-            public System.Type Type;
+            public readonly System.Type Type;
             public ReflectionUtil.TypeCategory TypeCategory ;
-            public string Label;
+            public readonly string Label;
 
             public TypeInfo(System.Type type)
             {
