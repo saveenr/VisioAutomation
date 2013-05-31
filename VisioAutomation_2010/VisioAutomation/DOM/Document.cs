@@ -38,8 +38,8 @@ namespace VisioAutomation.DOM
             }
             this.VisioDocument = vdoc;
             var docpages = vdoc.Pages;
-            var starpage = docpages[1];
-            this.Pages.Render(starpage);
+            var startpage = docpages[1];
+            this.Pages.Render(startpage);
             return vdoc;
         }
     }
