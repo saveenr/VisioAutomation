@@ -33,6 +33,28 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void DrawOrgChart0()
+        {
+            var orgchart = new OCMODEL.Drawing();
+
+            var n_a = new OCMODEL.Node("A");
+            
+            n_a.Size = new VA.Drawing.Size(4, 2);
+
+            orgchart.OrgCharts.Add(n_a);
+
+            var app = new IVisio.Application();
+
+            orgchart.Render(app);
+
+            var active_page = app.ActivePage;
+            var page = active_page;
+            page.ResizeToFitContents();
+
+            app.Quit(true);
+        }
+
+        [TestMethod]
         public void DrawOrgChart1()
         {
             var orgchart = new OCMODEL.Drawing();

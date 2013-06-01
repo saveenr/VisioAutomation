@@ -79,15 +79,15 @@ namespace VisioAutomation.VDX
             }
         }
 
-        private void _ModifyTemplate(SXL.XDocument vdx_xml_doc, Elements.Drawing vdoc)
+        private void _ModifyTemplate(SXL.XDocument vdx_xml_doc, Elements.Drawing doc_node)
         {
             var root = vdx_xml_doc.Root;
-            root.AddFirst(vdoc.DocumentProperties.ToXml());
+            root.AddFirst(doc_node.DocumentProperties.ToXml());
 
             var xfacenames = root.ElementVisioSchema2003("FaceNames");
             xfacenames.RemoveAll();
 
-            foreach (var vface in vdoc.Faces.Items)
+            foreach (var vface in doc_node.Faces.Items)
             {
                 vface.ToXml(xfacenames);
             }
@@ -96,24 +96,24 @@ namespace VisioAutomation.VDX
             xcolors.RemoveAll();
 
             int ix = 0;
-            foreach (var color in vdoc.Colors)
+            foreach (var color in doc_node.Colors)
             {
                 color.AddToElement(xcolors, ix++);
             }
 
             var xpages = root.ElementVisioSchema2003("Pages");
 
-            foreach (var vpage in vdoc.Pages.Items)
+            foreach (var page_node in doc_node.Pages.Items)
             {
-                vpage.AddToElement(xpages);
+                page_node.AddToElement(xpages);
             }
 
-            if (vdoc.Windows != null && vdoc.Windows.Count > 0)
+            if (doc_node.Windows != null && doc_node.Windows.Count > 0)
             {
                 var xwindows = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Windows");
                 root.Add(xwindows);
 
-                foreach (var window in vdoc.Windows)
+                foreach (var window in doc_node.Windows)
                 {
                     window.AddToElement(xwindows);
                 }

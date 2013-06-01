@@ -118,7 +118,7 @@ namespace VisioAutomation.DOM
         private void PerformDrawing(RenderContext ctx)
         {
             // Draw shapes
-            var non_connectors = this.shapes.Where(s => !(s is Connector));
+            var non_connectors = this.shapes.Where(s => !(s is Connector)).ToList();
             var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
             var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
 

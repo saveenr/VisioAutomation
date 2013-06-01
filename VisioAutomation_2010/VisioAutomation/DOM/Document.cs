@@ -7,12 +7,13 @@ namespace VisioAutomation.DOM
     {
         public PageList Pages;
         private readonly string vst_template_file ;
-        private IVisio.VisMeasurementSystem? measurementSystem;
+        private IVisio.VisMeasurementSystem measurementSystem;
         public IVisio.Document VisioDocument;
 
         public Document()
         {
             this.Pages = new PageList();
+            this.measurementSystem = IVisio.VisMeasurementSystem.visMSDefault;
         }
 
         public Document(string template, IVisio.VisMeasurementSystem ms) :
@@ -25,22 +26,22 @@ namespace VisioAutomation.DOM
         public IVisio.Document Render(IVisio.Application app)
         {
             var appdocs = app.Documents;
-            IVisio.Document vdoc = null;
+            IVisio.Document doc = null;
             if (this.vst_template_file == null)
             {
-                vdoc = appdocs.Add("");
+                doc = appdocs.Add("");
             }
             else
             {
                 const int flags = 0; // (int)IVisio.VisOpenSaveArgs.visAddDocked;
                 const int langid = 0;
-                vdoc = appdocs.AddEx(this.vst_template_file, this.measurementSystem.Value, flags, langid);
+                doc = appdocs.AddEx(this.vst_template_file, this.measurementSystem, flags, langid);
             }
-            this.VisioDocument = vdoc;
-            var docpages = vdoc.Pages;
+            this.VisioDocument = doc;
+            var docpages = doc.Pages;
             var startpage = docpages[1];
             this.Pages.Render(startpage);
-            return vdoc;
+            return doc;
         }
     }
 }

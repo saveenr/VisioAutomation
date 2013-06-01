@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>VisioCSharpSamples</id>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <authors>Saveen Reddy</authors>
     <owners>Saveen Reddy</owners>
     <projectUrl>http://visioautomation.codeplex.com</projectUrl>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This is a collection of C# samples for automating Visio 2010 using Visual Studio 2010</description>
     <releaseNotes>
-	Added a sample for Dropping a Container
+	Added a sample for Drawing an Org Chart
     </releaseNotes>
     <copyright></copyright>
     <tags>Visio</tags>

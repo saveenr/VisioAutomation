@@ -340,7 +340,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             }
         }
 
-        private void CreateDynamicConnectorEdges(VA.DOM.ShapeList vdoc, MG.GeometryGraph msagl_graph)
+        private void CreateDynamicConnectorEdges(VA.DOM.ShapeList shape_nodes, MG.GeometryGraph msagl_graph)
         {
             // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
@@ -350,7 +350,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
                     layoutconnector.From.DOMNode,
                     layoutconnector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
                 layoutconnector.DOMNode = vconnector;
-                vdoc.Add(vconnector);
+                shape_nodes.Add(vconnector);
             }
 
             var edge_pairs = from n in msagl_graph.Edges

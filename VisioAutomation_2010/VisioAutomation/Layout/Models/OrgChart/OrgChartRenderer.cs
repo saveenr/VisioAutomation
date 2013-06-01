@@ -39,7 +39,8 @@ namespace VisioAutomation.Layout.Models.OrgChart
             if (orgchartdrawing.OrgCharts.Count < 1)
             {
                 throw new System.ArgumentException("orgchart must have at least one root");                
-            }
+            } 
+
             foreach (var root in orgchartdrawing.OrgCharts)
             {
                 if (root == null)
@@ -48,9 +49,12 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 }                
             }
 
+            int majorver = int.Parse(app.Version.Split( new char[] { '.' })[0]);
+            bool is_visio_2013 = majorver >= 15;
+
             const string orgchart_vst = "orgch_u.vst";
             const string orgchart_vss = "orgch_u.vss";
-            string orgchart_master_node_name = "Position";
+            string orgchart_master_node_name = is_visio_2013 ? "Position Belt" : "Position";
             const string dyncon_master_name = "Dynamic connector";
             const double border_width = 0.5;
 
