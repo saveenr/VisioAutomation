@@ -65,18 +65,17 @@ namespace VisioAutomation.Internal
 
             // for each unique stencil, load the stencil doc
             var name_to_stencildoc = new Dictionary<string, IVisio.Document>(comparer);
-            foreach (var stencil in unique_stencils)
+            foreach (var stencil in unique_stencils.Where(s=>s!=null))
             {
+                // If a stencil was stencified open the stencil if needed
                 var stencil_doc = docs.OpenStencil(stencil);
                 if (stencil_doc == null)
                 {
                     string msg = string.Format("Failed to open stencil \"{0}\"", stencil);
-                    throw new AutomationException(msg);                    
+                    throw new AutomationException(msg);
                 }
-                else
-                {
-                    name_to_stencildoc[stencil] = stencil_doc;
-                }
+
+                name_to_stencildoc[stencil] = stencil_doc;
             }
 
             // identify real master objects for all deferred shapes
@@ -84,17 +83,37 @@ namespace VisioAutomation.Internal
             {
                 if (master_ref.VisioMaster == null)
                 {
-                    var stencildoc = name_to_stencildoc[master_ref.StencilName];
-                    var stencilmasters = stencildoc.Masters;
-
-                    var master_object = this.TryGetMaster(stencilmasters,master_ref.MasterName);
-                    if (master_object==null)
+                    if (master_ref.StencilName != null)
                     {
-                        string msg = string.Format("No such master \"{0}\" in stencil \"{1}\"",
-                                                   master_ref.MasterName, master_ref.StencilName);
-                        throw new AutomationException(msg);
+                        // The stencil doc was specified so try to find the master in that stencil doc
+                        var stencildoc = name_to_stencildoc[master_ref.StencilName];
+                        var stencilmasters = stencildoc.Masters;
+
+                        var master_object = this.TryGetMaster(stencilmasters, master_ref.MasterName);
+                        if (master_object == null)
+                        {
+                            string msg = string.Format("No such master \"{0}\" in stencil \"{1}\"",
+                                                       master_ref.MasterName, master_ref.StencilName);
+                            throw new AutomationException(msg);
+                        }
+                        master_ref.VisioMaster = master_object;                        
                     }
-                    master_ref.VisioMaster = master_object;
+                    else
+                    {
+                        // the stencil doc was not specified so try to find the master int the current doc
+                        var app = docs.Application;
+                        var stencildoc = app.ActiveDocument;
+                        var stencilmasters = stencildoc.Masters;
+
+                        var master_object = this.TryGetMaster(stencilmasters, master_ref.MasterName);
+                        if (master_object == null)
+                        {
+                            string msg = string.Format("No such master \"{0}\" in Active Document \"{1}\"",
+                                                       master_ref.MasterName, stencildoc.Name);
+                            throw new AutomationException(msg);
+                        }
+                        master_ref.VisioMaster = master_object;
+                    }
                 }
             }
         }

@@ -148,7 +148,7 @@ namespace TestVisioAutomation
         public void DOM_OrgChart()
         {
             const string orgchart_vst = "orgch_u.vst";
-            const string orgchart_vss = "orgch_u.vss";
+            // const string orgchart_vss = "orgch_u.vss";
 
             // How to draw using a Template instead of a doc and a stencil
             var app = this.GetVisioApplication();
@@ -156,10 +156,13 @@ namespace TestVisioAutomation
             var page_node = new VA.DOM.Page();
             doc_node.Pages.Add(page_node);
 
-            var s1 = new Shape("Position", orgchart_vss, new VA.Drawing.Point(3, 4));
+            int vis_ver = int.Parse(app.Version.Split( new char[]{'.'} )[0]);
+            string position_master_name = vis_ver >= 15 ? "Position Belt" : "Position";
+            var s1 = new Shape(position_master_name, null, new VA.Drawing.Point(3, 4));
             page_node.Shapes.Add( s1 );
-            doc_node.Render(app);
+            var doc = doc_node.Render(app);
 
+            doc.Close();
         }
     }
 }

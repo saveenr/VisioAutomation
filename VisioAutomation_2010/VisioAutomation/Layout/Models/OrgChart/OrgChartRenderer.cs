@@ -53,7 +53,6 @@ namespace VisioAutomation.Layout.Models.OrgChart
             bool is_visio_2013 = majorver >= 15;
 
             const string orgchart_vst = "orgch_u.vst";
-            const string orgchart_vss = "orgch_u.vss";
             string orgchart_master_node_name = is_visio_2013 ? "Position Belt" : "Position";
             const string dyncon_master_name = "Dynamic connector";
             const double border_width = 0.5;
@@ -107,7 +106,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 // TODO: Add support for Left to right , Right to Left, and Bottom to Top Layouts
 
                 var vmasters = centerpoints
-                    .Select(centerpoint => dompage.Shapes.Drop(orgchart_master_node_name, orgchart_vss, centerpoint))
+                    .Select(centerpoint => dompage.Shapes.Drop(orgchart_master_node_name, null, centerpoint))
                     .ToList();
 
 
@@ -130,7 +129,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                         {
                             var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                             var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                            var connector = dompage.Shapes.Connect(dyncon_master_name, orgchart_vss, parent_shape, child_shape);
+                            var connector = dompage.Shapes.Connect(dyncon_master_name, null, parent_shape, child_shape);
                         }
                     }
                 }
