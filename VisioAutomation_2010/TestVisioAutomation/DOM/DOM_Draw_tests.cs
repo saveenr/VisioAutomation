@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -27,9 +28,9 @@ namespace TestVisioAutomation
             // Empty DOMs do not add any shapes
             var app = this.GetVisioApplication();
 
-            var dompage = new VA.DOM.Page();
+            var page_node = new VA.DOM.Page();
             var doc = this.GetNewDoc();
-            dompage.Render(app.ActiveDocument);
+            page_node.Render(app.ActiveDocument);
             Assert.AreEqual(0,app.ActivePage.Shapes.Count);
             app.ActiveDocument.Close( true );
         }
@@ -39,10 +40,10 @@ namespace TestVisioAutomation
         {
             // Rendering a dom page to a document should create a new page
             var app = this.GetVisioApplication();
-            var dompage = new VA.DOM.Page();
+            var page_node = new VA.DOM.Page();
             var visdoc = this.GetNewDoc();
             Assert.AreEqual(1, visdoc.Pages.Count);
-            var page = dompage.Render(app.ActiveDocument);  
+            var page = page_node.Render(app.ActiveDocument);  
             Assert.AreEqual(2, visdoc.Pages.Count);
             app.ActiveDocument.Close(true);
         }
@@ -52,11 +53,11 @@ namespace TestVisioAutomation
         {
             // Rendering a dom document to an appliction instance should create a new document
             var app = this.GetVisioApplication();
-            var domdoc = new VA.DOM.Document();
-            var dompage = new VA.DOM.Page();
-            domdoc.Pages.Add(dompage);
+            var doc_node = new VA.DOM.Document();
+            var page_node = new VA.DOM.Page();
+            doc_node.Pages.Add(page_node);
             int old_count = app.Documents.Count;
-            var newdoc = domdoc.Render(app);
+            var newdoc = doc_node.Render(app);
             Assert.AreEqual(old_count + 1, app.Documents.Count);
             Assert.AreEqual(1, newdoc.Pages.Count);
             app.ActiveDocument.Close(true);
@@ -66,17 +67,17 @@ namespace TestVisioAutomation
         public void Draw_Red_Rectangle_With_Text()
         {
             // Create the doc
-            var dompage = new VA.DOM.Page();
+            var page_node = new VA.DOM.Page();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
             vrect1.Cells.FillForegnd = "rgb(255,0,0)";
-            dompage.Shapes.Add(vrect1);
+            page_node.Shapes.Add(vrect1);
 
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             VisioAutomationTest.SetPageSize(app.ActivePage, new VA.Drawing.Size(10, 10));
-            var page = dompage.Render(app.ActiveDocument);
+            var page = page_node.Render(app.ActiveDocument);
 
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
@@ -94,13 +95,14 @@ namespace TestVisioAutomation
             var stencil = app.Documents.OpenStencil("basic_u.vss");
             var rectmaster = stencil.Masters["Rectangle"];
 
-            // Create the doc
-            var domshapescol = new VA.DOM.ShapeList();
-            
-            domshapescol.DrawRectangle(0, 0, 1, 1);
-            domshapescol.Drop(rectmaster, 3, 3);
 
-            domshapescol.Render(app.ActivePage);
+            // Create the doc
+            var shape_nodes = new VA.DOM.ShapeList();
+            
+            shape_nodes.DrawRectangle(0, 0, 1, 1);
+            shape_nodes.Drop(rectmaster, 3, 3);
+
+            shape_nodes.Render(app.ActivePage);
 
             app.ActiveDocument.Close(true);
         }
@@ -109,7 +111,7 @@ namespace TestVisioAutomation
         public void Set_Custom_Props()
         {
             // Create the doc
-            var domshapescol = new VA.DOM.ShapeList();
+            var shape_nodes = new VA.DOM.ShapeList();
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
 
@@ -126,12 +128,12 @@ namespace TestVisioAutomation
             vrect1.CustomProperties["FOO"] = cp1;
             vrect1.CustomProperties["BAR"] = cp2;
 
-            domshapescol.Add(vrect1);
+            shape_nodes.Add(vrect1);
 
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            domshapescol.Render(app.ActivePage);
+            shape_nodes.Render(app.ActivePage);
 
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
@@ -140,6 +142,24 @@ namespace TestVisioAutomation
             Assert.IsTrue(VA.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
 
             doc.Close(true);
+        }
+
+        [TestMethod]
+        public void DOM_OrgChart()
+        {
+            const string orgchart_vst = "orgch_u.vst";
+            const string orgchart_vss = "orgch_u.vss";
+
+            // How to draw using a Template instead of a doc and a stencil
+            var app = this.GetVisioApplication();
+            var doc_node = new VA.DOM.Document( orgchart_vst , IVisio.VisMeasurementSystem.visMSUS );
+            var page_node = new VA.DOM.Page();
+            doc_node.Pages.Add(page_node);
+
+            var s1 = new Shape("Position", orgchart_vss, new VA.Drawing.Point(3, 4));
+            page_node.Shapes.Add( s1 );
+            doc_node.Render(app);
+
         }
     }
 }
