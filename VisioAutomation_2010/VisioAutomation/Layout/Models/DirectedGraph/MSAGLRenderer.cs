@@ -148,15 +148,15 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
         {        
             // Create A DOM and render it to the page
             var app = page.Application;
-            var dompage = CreateDOMPage(layout_diagram, app);
+            var page_node = CreateDOMPage(layout_diagram, app);
 
-            dompage.Render(page);                    
+            page_node.Render(page);                    
 
             // Find all the shapes that were created in the DOM and put them in the layout structure
             foreach (var layout_shape in layout_diagram.Shapes)
             {
-                var dom_node = layout_shape.DOMNode;
-                layout_shape.VisioShape = dom_node.VisioShape;
+                var shape_node = layout_shape.DOMNode;
+                layout_shape.VisioShape = shape_node.VisioShape;
             }
 
             var layout_edges = layout_diagram.Connectors;
@@ -215,31 +215,31 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
 
         public VA.DOM.Page CreateDOMPage(DGMODEL.Drawing layout_diagram, IVisio.Application vis)
         {
-            var dompage = new VA.DOM.Page();
+            var page_node = new VA.DOM.Page();
             ResolveMasters(layout_diagram, vis);
 
             var msagl_graph = this.CreateMSAGLGraph(layout_diagram);
 
-            CreateDOMShapes(dompage.Shapes, msagl_graph, vis);
+            CreateDOMShapes(page_node.Shapes, msagl_graph, vis);
 
             if (this.LayoutOptions.UseDynamicConnectors)
             {
-                CreateDynamicConnectorEdges(dompage.Shapes, msagl_graph);
+                CreateDynamicConnectorEdges(page_node.Shapes, msagl_graph);
             }
             else
             {
-                CreateBezierEdges(dompage.Shapes, msagl_graph);
+                CreateBezierEdges(page_node.Shapes, msagl_graph);
             }
 
             // Additional Page properties
-            dompage.PageCells.PlaceStyle = 1;
-            dompage.PageCells.RouteStyle = 5;
-            dompage.PageCells.AvenueSizeX = 2.0;
-            dompage.PageCells.AvenueSizeY = 2.0;
-            dompage.PageCells.LineRouteExt = 2;
-            dompage.Size = this.layout_bb.Size;
+            page_node.PageCells.PlaceStyle = 1;
+            page_node.PageCells.RouteStyle = 5;
+            page_node.PageCells.AvenueSizeX = 2.0;
+            page_node.PageCells.AvenueSizeY = 2.0;
+            page_node.PageCells.LineRouteExt = 2;
+            page_node.Size = this.layout_bb.Size;
 
-            return dompage;
+            return page_node;
         }
 
         private void CreateDOMShapes(VA.DOM.ShapeList domshapeslist, MG.GeometryGraph msagl_graph, IVisio.Application app)
@@ -283,21 +283,24 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             {
                 var key = layout_shape.StencilName.ToLower() + "+" + layout_shape.MasterName;
                 var master = master_map[key];
-                var dom_shape = new VA.DOM.Shape(master, node_centerpoints[count]);
-                layout_shape.DOMNode = dom_shape;
-                domshapeslist.Add(dom_shape);
+                var shape_node = new VA.DOM.Shape(master, node_centerpoints[count]);
+                layout_shape.DOMNode = shape_node;
+                domshapeslist.Add(shape_node);
                 count++;
             }
 
             var shape_pairs = from n in msagl_graph.NodeMap.Values
-                              let ls = (DGMODEL.Shape)n.UserData
-                              let vs = (VA.DOM.BaseShape) ls.DOMNode
-                              select new {layout_shape = ls, dom_shape = vs};
+                              let layout_shape = (DGMODEL.Shape)n.UserData
+                              select new
+                                  {
+                                      layout_shape,
+                                      shape_node = (VA.DOM.BaseShape)layout_shape.DOMNode
+                                  };
 
             // FORMAT EACH SHAPE
             foreach (var i in shape_pairs)
             {
-                format_shape(i.layout_shape, i.dom_shape);
+                format_shape(i.layout_shape, i.shape_node);
             }
         }
 
@@ -316,13 +319,13 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
                              let lc = (DGMODEL.Connector)n.UserData
                              select new { msagl_edge = n, 
                                  layout_connector = lc, 
-                                 dom_bezier = (VA.DOM.BezierCurve)lc.DOMNode };
+                                 bezier_node = (VA.DOM.BezierCurve)lc.DOMNode };
 
             foreach (var i in edge_pairs)
             {
                 if (i.layout_connector.Cells != null)
                 {
-                    i.dom_bezier.Cells = i.layout_connector.Cells.ShallowCopy();
+                    i.bezier_node.Cells = i.layout_connector.Cells.ShallowCopy();
                 }
             }
 
@@ -375,9 +378,9 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             }
         }
 
-        private void format_shape(DGMODEL.Shape layout_shape, VA.DOM.BaseShape dom_shape)
+        private void format_shape(DGMODEL.Shape layout_shape, VA.DOM.BaseShape shape_node)
         {
-            layout_shape.VisioShape = dom_shape.VisioShape;
+            layout_shape.VisioShape = shape_node.VisioShape;
 
             // SET TEXT
             if (!string.IsNullOrEmpty(layout_shape.Label))
@@ -389,7 +392,7 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
                     // construct multiple text regions
 
                     // create the root text element
-                    dom_shape.Text = new VA.Text.Markup.TextElement();
+                    shape_node.Text = new VA.Text.Markup.TextElement();
 
                     // Split apart the string
                     char[] lineseps = { '|' };
@@ -397,43 +400,43 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
                     // Add an text element for each piece
                     foreach (string token in tokens)
                     {
-                        dom_shape.Text.AddText(token);
+                        shape_node.Text.AddText(token);
                     }
                 }
                 else
                 {
                     // No line braeaks. Just use a simple TextElement with the label string
-                    dom_shape.Text = new VA.Text.Markup.TextElement(layout_shape.Label);
+                    shape_node.Text = new VA.Text.Markup.TextElement(layout_shape.Label);
                 }
             }
 
             // SET SIZE
             if (layout_shape.Size.HasValue)
             {
-                dom_shape.Cells.Width = layout_shape.Size.Value.Width;
-                dom_shape.Cells.Height = layout_shape.Size.Value.Height;
+                shape_node.Cells.Width = layout_shape.Size.Value.Width;
+                shape_node.Cells.Height = layout_shape.Size.Value.Height;
             }
 
             // ADD URL
             if (!string.IsNullOrEmpty(layout_shape.URL))
             {
                 var hyperlink = new VA.DOM.Hyperlink("Row_1", layout_shape.URL);
-                dom_shape.Hyperlinks = new List<VA.DOM.Hyperlink> {hyperlink};
+                shape_node.Hyperlinks = new List<VA.DOM.Hyperlink> {hyperlink};
             }
 
             // ADD CUSTOM PROPS
             if (layout_shape.CustomProperties != null)
             {
-                dom_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+                shape_node.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
                 foreach (var kv in layout_shape.CustomProperties)
                 {
-                    dom_shape.CustomProperties[kv.Key] = kv.Value;
+                    shape_node.CustomProperties[kv.Key] = kv.Value;
                 }
             }
 
             if (layout_shape.Cells != null)
             {
-                dom_shape.Cells = layout_shape.Cells.ShallowCopy();
+                shape_node.Cells = layout_shape.Cells.ShallowCopy();
             }
         }
 

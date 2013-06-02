@@ -57,7 +57,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
             const string dyncon_master_name = "Dynamic connector";
             const double border_width = 0.5;
 
-            var domdoc = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
+            var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
 
             var trees = new List<IList<Node<object>>>();
  
@@ -88,8 +88,8 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
                 // vis.ActiveWindow.ShowConnectPoints = 0;
 
-                var dompage = new VA.DOM.Page();
-                domdoc.Pages.Add(dompage);
+                var page_node = new VA.DOM.Page();
+                doc_node.Pages.Add(page_node);
 
                 // fixup the nodes so that they render on the page
                 foreach (var i in treenodes)
@@ -106,7 +106,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 // TODO: Add support for Left to right , Right to Left, and Bottom to Top Layouts
 
                 var vmasters = centerpoints
-                    .Select(centerpoint => dompage.Shapes.Drop(orgchart_master_node_name, null, centerpoint))
+                    .Select(centerpoint => page_node.Shapes.Drop(orgchart_master_node_name, null, centerpoint))
                     .ToList();
 
 
@@ -129,7 +129,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                         {
                             var parent_shape = (VA.DOM.BaseShape)parent.DOMNode;
                             var child_shape = (VA.DOM.BaseShape)child.DOMNode;
-                            var connector = dompage.Shapes.Connect(dyncon_master_name, null, parent_shape, child_shape);
+                            var connector = page_node.Shapes.Connect(dyncon_master_name, null, parent_shape, child_shape);
                         }
                     }
                 }
@@ -138,7 +138,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
                     foreach (var connection in layout.EnumConnections())
                     {
                         var bez = layout.GetConnectionBezier(connection);
-                        dompage.Shapes.DrawBezier(bez);
+                        page_node.Shapes.DrawBezier(bez);
                     }
                 }
 
@@ -151,12 +151,12 @@ namespace VisioAutomation.Layout.Models.OrgChart
                 }
 
                 var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
-                dompage.Size = page_size_with_border;
-                dompage.ResizeToFit = true;
-                dompage.ResizeToFitMargin = new VA.Drawing.Size(border_width*2, border_width*2.0);
+                page_node.Size = page_size_with_border;
+                page_node.ResizeToFit = true;
+                page_node.ResizeToFitMargin = new VA.Drawing.Size(border_width*2, border_width*2.0);
             } // finish handling root node
             
-            var doc = domdoc.Render(app);
+            var doc = doc_node.Render(app);
 
             foreach (var treenodes in trees)
             {

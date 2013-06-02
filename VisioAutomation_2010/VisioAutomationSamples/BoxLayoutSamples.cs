@@ -136,7 +136,7 @@ namespace VisioAutomationSamples
                     continue;
                 }
 
-                var dom_shape = domshapescol.Drop("Rectangle", "basic_u.vss", node.Rectangle);
+                var shape_node = domshapescol.Drop("Rectangle", "basic_u.vss", node.Rectangle);
        
                 var cells = node_data.Cells;
                 if (cells == null)
@@ -150,11 +150,11 @@ namespace VisioAutomationSamples
 
                 if (node_data.Font != null)
                 {
-                    dom_shape.CharFontName = node_data.Font;
+                    shape_node.CharFontName = node_data.Font;
                 }
 
-                dom_shape.Cells = cells;
-                dom_shape.Text = new VA.Text.Markup.TextElement( node_data.Text );
+                shape_node.Cells = cells;
+                shape_node.Text = new VA.Text.Markup.TextElement( node_data.Text );
             }
 
             domshapescol.Render(page);

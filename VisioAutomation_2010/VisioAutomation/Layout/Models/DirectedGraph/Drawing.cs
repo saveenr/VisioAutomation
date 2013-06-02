@@ -55,13 +55,13 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
                 throw new System.ArgumentNullException("page");
             }
 
-            var dompage = new VA.DOM.Page();
+            var page_node = new VA.DOM.Page();
             double x = 0;
             double y = 1;
             foreach (var shape in this.Shapes)
             {
-                var dom_node = dompage.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
-                shape.DOMNode = dom_node;
+                var shape_nodes = page_node.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
+                shape.DOMNode = shape_nodes;
                 shape.DOMNode.Text = new VA.Text.Markup.TextElement( shape.Label ) ;
                 x += 1.0;
             }
@@ -69,13 +69,13 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             foreach (var connector in this.Connectors)
             {
 
-                var dom_node = dompage.Shapes.Connect("Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
-                connector.DOMNode = dom_node;
+                var connector_node = page_node.Shapes.Connect("Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
+                connector.DOMNode = connector_node;
                 connector.DOMNode.Text = new VA.Text.Markup.TextElement( connector.Label );
             }
-            dompage.ResizeToFit = true;
-            dompage.ResizeToFitMargin = new VA.Drawing.Size(0.5, 0.5);
-            dompage.Render(page);
+            page_node.ResizeToFit = true;
+            page_node.ResizeToFitMargin = new VA.Drawing.Size(0.5, 0.5);
+            page_node.Render(page);
         }
 
         public void Render(IVisio.Page page, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)

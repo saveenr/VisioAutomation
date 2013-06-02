@@ -162,7 +162,7 @@ namespace TestVisioAutomation
             page_node.Shapes.Add( s1 );
             var doc = doc_node.Render(app);
 
-            doc.Close();
+            doc.Close(true);
         }
     }
 }

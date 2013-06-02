@@ -140,38 +140,38 @@ namespace VisioAutomation.Layout.Models.Grid
 
             var nodes_to_draw = this.Nodes.Where(n => n.Draw).ToList();
 
-            var dompage = new VA.DOM.Page();
+            var page_node = new VA.DOM.Page();
 
-            var dom_shapes = new List<VA.DOM.Shape>(nodes_to_draw.Count);
+            var shape_nodes = new List<VA.DOM.Shape>(nodes_to_draw.Count);
             foreach (var node in nodes_to_draw)
             {
-                var dom_shape = dompage.Shapes.Drop(node.Master, node.Rectangle.Center);
+                var shape_node = page_node.Shapes.Drop(node.Master, node.Rectangle.Center);
 
                 if (node.Cells != null)
                 {
-                    dom_shape.Cells = node.Cells.ShallowCopy();
+                    shape_node.Cells = node.Cells.ShallowCopy();
                 }
 
-                dom_shape.Cells.Width = node.Rectangle.Width;
-                dom_shape.Cells.Height = node.Rectangle.Height;
+                shape_node.Cells.Width = node.Rectangle.Width;
+                shape_node.Cells.Height = node.Rectangle.Height;
 
                 if (!string.IsNullOrEmpty(node.Text))
                 {
-                    dom_shape.Text = new VA.Text.Markup.TextElement( node.Text );
+                    shape_node.Text = new VA.Text.Markup.TextElement( node.Text );
                 }
 
-                dom_shapes.Add(dom_shape);
+                shape_nodes.Add(shape_node);
             }
 
-            dompage.Shapes.Render(page);
+            page_node.Shapes.Render(page);
 
             for (int i = 0; i < nodes_to_draw.Count; i++)
             {
                 var node = nodes_to_draw[i];
-                var dom_shape = dom_shapes[i];
+                var shape_node = shape_nodes[i];
 
-                node.Shape = dom_shape.VisioShape;
-                node.ShapeID = dom_shape.VisioShapeID;
+                node.Shape = shape_node.VisioShape;
+                node.ShapeID = shape_node.VisioShapeID;
             }
         }
     }

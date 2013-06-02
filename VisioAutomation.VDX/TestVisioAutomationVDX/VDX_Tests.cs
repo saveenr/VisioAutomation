@@ -303,34 +303,34 @@ namespace TestVisioAutomationVDX
             var template = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
             VA.VDX.VDXWriter.CleanUpTemplate(template);
 
-            var dom_doc = new VA.VDX.Elements.Drawing(template);
+            var doc_node = new VA.VDX.Elements.Drawing(template);
 
-            int rect_id = dom_doc.GetMasterMetaData("REctAngle").ID;
+            int rect_id = doc_node.GetMasterMetaData("REctAngle").ID;
 
-            var dom_page = new VA.VDX.Elements.Page(8, 5);
-            dom_doc.Pages.Add(dom_page);
+            var node_page = new VA.VDX.Elements.Page(8, 5);
+            doc_node.Pages.Add(node_page);
 
-            var dom_shape = new VA.VDX.Elements.Shape(rect_id, 4, 2, 3, 2);
-            dom_shape.CustomProps = new VA.VDX.Elements.CustomProps();
+            var node_shape = new VA.VDX.Elements.Shape(rect_id, 4, 2, 3, 2);
+            node_shape.CustomProps = new VA.VDX.Elements.CustomProps();
 
-            var dom_custprop0 = new VA.VDX.Elements.CustomProp("PROP1");
-            dom_custprop0.Value = "VALUE1";
-            dom_shape.CustomProps.Add(dom_custprop0);
+            var node_custprop0 = new VA.VDX.Elements.CustomProp("PROP1");
+            node_custprop0.Value = "VALUE1";
+            node_shape.CustomProps.Add(node_custprop0);
 
-            var dom_custprop1 = new VA.VDX.Elements.CustomProp("PROP2");
-            dom_custprop1.Value = "123";
-            dom_custprop1.Type.Result = VisioAutomation.VDX.Enums.CustomPropType.String;
-            dom_shape.CustomProps.Add(dom_custprop1);
+            var node_custprop1 = new VA.VDX.Elements.CustomProp("PROP2");
+            node_custprop1.Value = "123";
+            node_custprop1.Type.Result = VisioAutomation.VDX.Enums.CustomPropType.String;
+            node_shape.CustomProps.Add(node_custprop1);
 
-            var dom_custprop2 = new VA.VDX.Elements.CustomProp("PROP3");
-            dom_custprop2.Value = "456";
-            dom_custprop2.Type.Result = VisioAutomation.VDX.Enums.CustomPropType.Number;
-            dom_shape.CustomProps.Add(dom_custprop2);
+            var node_custprop2 = new VA.VDX.Elements.CustomProp("PROP3");
+            node_custprop2.Value = "456";
+            node_custprop2.Type.Result = VisioAutomation.VDX.Enums.CustomPropType.Number;
+            node_shape.CustomProps.Add(node_custprop2);
 
-            dom_page.Shapes.Add(dom_shape);
+            node_page.Shapes.Add(node_shape);
 
             var vdx_writer = new VA.VDX.VDXWriter();
-            vdx_writer.CreateVDX(dom_doc, template, filename);
+            vdx_writer.CreateVDX(doc_node, template, filename);
 
             var app = new IVisio.Application();
             var docs = app.Documents;
@@ -608,25 +608,60 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void CheckNoErrorOnLoad1()
         {
+            // This test tends to fail with Visio 2013
+
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
 
             var app = new IVisio.Application();
             
             DeleteXmlErrorLog(app);
-
-            var doc = TryOpen(app.Documents, output_filename);
-
+            
             if (XmlErrorLogExists(app))
             {
-                Assert.Fail("Error log exists and we did not expect it");
+                Assert.Fail("Before TryOpen: Error log exists and we did not expect it");
             }
+            var doc = TryOpen(app.Documents, output_filename);
+
+            var visio_version = app.Version;
+            var vermajor = int.Parse(visio_version.Split(new char[]{'.'})[0]);
+
+            if (vermajor < 15)
+            {
+                if (XmlErrorLogExists(app))
+                {
+                    Assert.Fail("After TryOpen: Error log exists and we did not expect it");
+                }
+                
+            }
+            else
+            {
+                if (!XmlErrorLogExists(app))
+                {
+                    Assert.Fail("After TryOpen: Error log does not exist");
+                }
+
+                string logfile = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
+                string logtext = System.IO.File.ReadAllText(logfile);
+
+                if (logtext.Contains("[Warning]"))
+                {
+                    Assert.Fail("Error log contains [Warning]");
+                }
+
+                if (logtext.Contains("[Error]"))
+                {
+                    Assert.Fail("Error log contains [Error]");
+                }
+
+            }
+
             VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
         [TestMethod]
-        public void CheckErrorOnLoad1()
+        public void CheckErrorOnLoadLogFileExists()
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.vdx_with_errors_1_vdx);
@@ -635,16 +670,31 @@ namespace TestVisioAutomationVDX
 
             DeleteXmlErrorLog(app);
 
+            if (XmlErrorLogExists(app))
+            {
+                Assert.Fail("Before TryOpen: Error log exists and we did not expect it");
+            }
+
             // this causes the doc to load no matter what the error ))))))
             var doc = TryOpen(app.Documents, output_filename);
 
+            string logfile = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
+
             if (!XmlErrorLogExists(app))
             {
-                System.Windows.Forms.MessageBox.Show("Error log does not exist even though we expected it to");
+                Assert.Fail("Error log does not exist even though we expected it to");
             }
+
+            string logtext = System.IO.File.ReadAllText(logfile);
+
+            if (!logtext.Contains("[Warning]"))
+            {
+                Assert.Fail("Error log does not contain [Warning]");
+            }
+
             Assert.AreEqual(1, app.Documents.Count);
             VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
-            app.Quit();
+            app.Quit(true);
         }
 
 

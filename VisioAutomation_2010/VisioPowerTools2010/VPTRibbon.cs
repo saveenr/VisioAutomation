@@ -169,8 +169,8 @@ namespace VisioPowerTools2010
             var app = Globals.ThisAddIn.Application;
 
             var domdoc = new VA.DOM.Document();
-            var dompage = new VA.DOM.Page();
-            domdoc.Pages.Add(dompage);
+            var page_node = new VA.DOM.Page();
+            domdoc.Pages.Add(page_node);
           
 
             double y = 8;
@@ -184,10 +184,10 @@ namespace VisioPowerTools2010
             var sb = new System.Text.StringBuilder();
             foreach (var color in colors)
             {
-                var shape0 = dompage.Shapes.DrawRectangle(col0_x, y, col0_x + col0_w, y + cellwidth);
-                var shape1 = dompage.Shapes.DrawRectangle(col1_x, y, col1_x + cellwidth, y + cellwidth);
-                var shape2 = dompage.Shapes.DrawRectangle(col2_x, y, col2_x + cellwidth, y + cellwidth);
-                var shape3 = dompage.Shapes.DrawRectangle(col3_x, y, col3_x + cellwidth, y + cellwidth);
+                var shape0 = page_node.Shapes.DrawRectangle(col0_x, y, col0_x + col0_w, y + cellwidth);
+                var shape1 = page_node.Shapes.DrawRectangle(col1_x, y, col1_x + cellwidth, y + cellwidth);
+                var shape2 = page_node.Shapes.DrawRectangle(col2_x, y, col2_x + cellwidth, y + cellwidth);
+                var shape3 = page_node.Shapes.DrawRectangle(col3_x, y, col3_x + cellwidth, y + cellwidth);
                 var fill = new VisioAutomation.Drawing.ColorRGB(color.R, color.G, color.B);
                 string color_formula = fill.ToFormula();
                 double trans = (color.A / 255.0);
@@ -236,8 +236,8 @@ namespace VisioPowerTools2010
                 y -= cellwidth + sep;
             }
 
-            dompage.ResizeToFit = true;
-            dompage.ResizeToFitMargin = new VA.Drawing.Size(cellwidth, cellwidth);
+            page_node.ResizeToFit = true;
+            page_node.ResizeToFitMargin = new VA.Drawing.Size(cellwidth, cellwidth);
 
             domdoc.Render(app);
 
