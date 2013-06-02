@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AutoConnect_ConnectorToolDataObject.cs" />
     <Compile Include="AddContainer.cs" />
+    <Compile Include="AutoConnectManyShapes.cs" />
     <Compile Include="DropManyShapes.cs" />
     <Compile Include="DrawOrgChart.cs" />
     <Compile Include="LoadStencilDropShape.cs" />
