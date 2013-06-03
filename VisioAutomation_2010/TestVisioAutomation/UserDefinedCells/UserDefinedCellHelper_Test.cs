@@ -10,7 +10,7 @@ namespace TestVisioAutomation
     public class UserDefinedCellHelper_Test : VisioAutomationTest
     {
         [TestMethod]
-        public void BasicScenario()
+        public void UserDefinedCellsScenario1()
         {
             var page1 = GetNewPage();
 
@@ -38,7 +38,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void GetPropsForMultipleShapes()
+        public void GetUserDefinedCellsForMultipleShapes()
         {
             var page1 = GetNewPage();
 
@@ -61,7 +61,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void SetSamePropMultipleTimes()
+        public void SetUserDefinedCellMultipleTimes()
         {
             var page1 = GetNewPage();
 
@@ -90,7 +90,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void InvalidPropName()
+        public void InvalidUserDefinedCellNameNotAllowed()
         {
             bool caught = false;
             var page1 = GetNewPage();
@@ -113,7 +113,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void AdditionalProperties()
+        public void SetAdditionalPropertiesOnUserDefinedCells()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -127,7 +127,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void GetPropNames()
+        public void GetUserDefinedCellNames()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -168,7 +168,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void PropsForMultipleShapes()
+        public void SetUserDefinedCellsForMultipleShapes()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -202,7 +202,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void GetProps1()
+        public void VerifyQuotingForUserDefinedCells()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -212,16 +212,21 @@ namespace TestVisioAutomation
 
             VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "FOO1", "1", null);
             VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "FOO2", "2", null);
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "FOO3", "3\"4", null);
 
             var p2 = VA.UserDefinedCells.UserDefinedCellsHelper.Get(s1);
-            Assert.AreEqual(2, p2.Count);
+            Assert.AreEqual(3, p2.Count);
+            
             Assert.AreEqual("FOO1",p2[0].Name);
             Assert.AreEqual("\"1\"", p2[0].Value);
+
             Assert.AreEqual("FOO2", p2[1].Name);
             Assert.AreEqual("\"2\"", p2[1].Value);
 
+            Assert.AreEqual("FOO3", p2[2].Name);
+            Assert.AreEqual("\"3\"\"4\"", p2[2].Value);
+
             page1.Delete(0);
         }
-
     }
 }

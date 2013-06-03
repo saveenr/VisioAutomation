@@ -539,8 +539,7 @@ namespace TestVisioAutomationVDX
 
             return page;
         }
-
-
+        
         [TestMethod]
         public void CreateCustomTemplateVDX()
         {
@@ -625,6 +624,10 @@ namespace TestVisioAutomationVDX
 
             var visio_version = app.Version;
             var vermajor = int.Parse(visio_version.Split(new char[]{'.'})[0]);
+            
+            // Prior to Visio 2013 the error log file exists only
+            // if there is a problem loading the VDX file
+            // in Visio 2013 it is always created
 
             if (vermajor < 15)
             {
