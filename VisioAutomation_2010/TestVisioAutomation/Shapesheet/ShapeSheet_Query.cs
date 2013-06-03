@@ -34,8 +34,6 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Verify_Shape_GetResults_For_Multiple_Types()
         {
-            var app = GetVisioApplication();
-            var documents = app.Documents;
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
             VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
@@ -435,8 +433,6 @@ namespace TestVisioAutomation
                 }
             }
 
-
-
             // Try to retrieve the control cells rows for each shape, every shape should return zero rows *except for s2*
             foreach (var s in shapes)
             {
@@ -467,11 +463,7 @@ namespace TestVisioAutomation
                 }
             }
 
-
-           
-
             page1.Delete(0);
         }
-
     }
 }

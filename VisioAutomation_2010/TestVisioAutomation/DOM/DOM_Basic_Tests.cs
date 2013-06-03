@@ -267,7 +267,6 @@ namespace TestVisioAutomation
             Assert.AreEqual(xfrms[3].Width,  xfrms[2].Width);
             Assert.AreEqual(xfrms[3].Height, xfrms[2].Height);
 
-            page.Delete(0);
             doc.Close(true);
         }
     }
