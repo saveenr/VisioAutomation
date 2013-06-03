@@ -12,7 +12,6 @@ namespace TestVisioAutomation
         public void TestAsEnumerable()
         {
             var doc1 = GetNewDoc();
-            var doc2 = GetNewDoc();
             var app = doc1.Application;
             var windows = app.Windows;
             var actual = windows.AsEnumerable().ToList();
@@ -22,6 +21,7 @@ namespace TestVisioAutomation
                 var ac = actual[i];
                 Assert.AreEqual( ex.ID, ac.ID);
             }
+            doc1.Close(true);
         }
     }
 }

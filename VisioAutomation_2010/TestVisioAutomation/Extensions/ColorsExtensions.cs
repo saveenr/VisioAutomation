@@ -22,6 +22,7 @@ namespace TestVisioAutomation
                 Assert.AreEqual(expected_color.Green, actual_color.Green);
                 Assert.AreEqual(expected_color.Blue, actual_color.Blue);
             }
+            doc1.Close(true);
         }
     }
 }

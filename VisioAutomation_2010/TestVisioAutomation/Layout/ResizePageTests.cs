@@ -55,7 +55,7 @@ namespace TestVisioAutomation
             page.ResizeToFitContents(padding_size);
             var xform = VA.Layout.XFormCells.GetCells(shape);
             AssertVA.AreEqual(expected_pinx, expected_piny, xform.Pin(), 0.1);
-
+            page.Delete(0);
         }
     }
 }

@@ -99,6 +99,5 @@ namespace TestVisioAutomation
 
             doc1.Close(true);
         }
-
     }
 }

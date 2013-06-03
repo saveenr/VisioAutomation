@@ -26,6 +26,7 @@ namespace TestVisioAutomation
                 var ac = actual[i];
                 Assert.AreEqual(ex.NameU, ac.NameU);
             }
+            doc1.Close(true);
         }
     }
 }

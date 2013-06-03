@@ -24,6 +24,8 @@ namespace TestVisioAutomation
             {
                 Assert.AreEqual( masters[i+1].NameU, actual[i].NameU);
             }
+
+            doc1.Close();
         }
     }
 }
