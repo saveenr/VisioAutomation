@@ -64,14 +64,12 @@ namespace TestVisioAutomation
             var c4 = VA.CustomProperties.CustomPropertyHelper.Get(s1);
             Assert.AreEqual(0, c4.Count);
 
-
             var app = this.GetVisioApplication();
             var doc = app.ActiveDocument;
             if (doc != null)
             {
                 VA.Documents.DocumentHelper.Close(doc, true);
             }
-
         }
     }
 }
