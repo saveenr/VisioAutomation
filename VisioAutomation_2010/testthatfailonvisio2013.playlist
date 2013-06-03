@@ -1,1 +1,0 @@
-<Playlist Version="1.0"><Add Test="TestVisioAutomation.OrgChartTests.DrawOrgChart1" /><Add Test="TestVisioAutomationVDX.VDX_Tests.CheckNoErrorOnLoad1" /><Add Test="TestVisioAutomation.ScriptingDrawTests.Scripting_Orgchart" /><Add Test="TestVisioAutomation.OrgChartTests.DrawOrgChart2" /></Playlist>

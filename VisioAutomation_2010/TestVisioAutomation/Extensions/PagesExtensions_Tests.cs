@@ -39,51 +39,13 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ActivatePage()
-        {
-            var page1 = GetNewPage();
-            var app = page1.Application;
-            var doc1 = page1.Document;
-
-            int old_page_count = doc1.Pages.Count;
-
-            var page2 = doc1.Pages.Add();
-            var page3 = doc1.Pages.Add();
-            Assert.AreEqual(old_page_count + 2, doc1.Pages.Count);
-
-            var active_window = app.ActiveWindow;
-            Assert.AreSame(page3, app.ActivePage);
-            active_window.Page = page2;
-            Assert.AreSame(page2, app.ActivePage);
-            active_window.Page = page1;
-            Assert.AreSame(page1, app.ActivePage);
-            doc1.Close(true);
-        }
-
-        [TestMethod]
-        public void ResizePage()
-        {
-            var page1 = GetNewPage();
-            Assert.AreEqual(this.StandardPageSize, VisioAutomationTest.GetPageSize(page1));
-
-            var page_size1 = new VA.Drawing.Size(10, 5);
-            var page_size2 = new VA.Drawing.Size(6, 3);
-
-            VisioAutomationTest.SetPageSize(page1, page_size1);
-            Assert.AreEqual(page_size1, VisioAutomationTest.GetPageSize(page1));
-
-            VisioAutomationTest.SetPageSize(page1, page_size2);
-            Assert.AreEqual(page_size2, VisioAutomationTest.GetPageSize(page1));
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void TestAsEnumerable()
+        public void EnumeratePages()
         {
             var doc1 = this.GetNewDoc();
-            var page1 = doc1.Pages[1];
-            var page2 = doc1.Pages.Add();
-            var page3 = doc1.Pages.Add();
+            var docpages = doc1.Pages;
+            var page1 = docpages[1];
+            var page2 = docpages.Add();
+            var page3 = docpages.Add();
 
             page1.NameU = "P1";
             page2.NameU = "P2";

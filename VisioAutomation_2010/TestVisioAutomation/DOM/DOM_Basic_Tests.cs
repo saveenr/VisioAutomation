@@ -26,7 +26,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DropLine()
+        public void DropDOMLine()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -42,7 +42,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DropBezier()
+        public void DropDOMBezier()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -106,7 +106,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Connect()
+        public void ConnectDOMShapes()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -132,7 +132,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ConnectDeferred()
+        public void ConnectDOMShapesDeferred()
         {
             // Deferred means that the stencils (and thus masters) are loaded when rendering
             // and are no loaded by the caller before Render() is called
@@ -151,7 +151,7 @@ namespace TestVisioAutomation
         }
         
         [TestMethod]
-        public void DropUnknownMaster()
+        public void DropDOMUnknownMaster()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -182,7 +182,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void DropUnknownStencil()
+        public void DropUnknownDOMStencil()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -212,30 +212,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void VerifyDropVersusDraw()
-        {
-            var doc = this.GetNewDoc();
-            var page_node = new VA.DOM.Page();
-            var rect = new VA.Drawing.Rectangle(3, 4, 7, 8);
-            var dropped_shape = page_node.Shapes.Drop("Rectangle", "basic_u.vss", rect);
-            var drawn_shape = page_node.Shapes.DrawRectangle(rect);
-            var page = page_node.Render(doc);
-
-            var xfrms = VA.Layout.XFormCells.GetCells(page,
-                                                        new int[] {dropped_shape.VisioShapeID, drawn_shape.VisioShapeID});
-
-            Assert.AreEqual(xfrms[1].PinX,xfrms[0].PinX);
-            Assert.AreEqual(xfrms[1].PinY, xfrms[0].PinY);
-
-            Assert.AreEqual(xfrms[1].Width, xfrms[0].Width);
-            Assert.AreEqual(xfrms[1].Height, xfrms[0].Height);
-
-            page.Delete(0);
-            doc.Close(true);
-        }
-
-        [TestMethod]
-        public void VerifyDropVersusDraw2()
+        public void DroppingAndDrawingInDOMWorkTogether()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();

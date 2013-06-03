@@ -90,6 +90,30 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void DetectInvalidUserDefinedCellNames()
+        {
+            if (VA.UserDefinedCells.UserDefinedCellsHelper.IsValidName("A") == false)
+            {
+                Assert.Fail();
+            }
+
+            if (VA.UserDefinedCells.UserDefinedCellsHelper.IsValidName("A.B") == false)
+            {
+                Assert.Fail();
+            }
+
+            if (VA.UserDefinedCells.UserDefinedCellsHelper.IsValidName("A B") == true)
+            {
+                Assert.Fail();
+            }
+
+            if (VA.UserDefinedCells.UserDefinedCellsHelper.IsValidName(" ") == true)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
         public void InvalidUserDefinedCellNameNotAllowed()
         {
             bool caught = false;
