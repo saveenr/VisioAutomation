@@ -95,11 +95,7 @@
     <Compile Include="Layout\BoxLayoutTests.cs" />
     <Compile Include="Other\ShapeGeometryHelper_Tests.cs" />
     <Compile Include="Drawing\SnappingGridTests.cs" />
-    <Compile Include="Extensions\ColorsExtensions.cs" />
-    <Compile Include="Extensions\WindowsExtensions.cs" />
     <Compile Include="Extensions\LayersExtensions.cs" />
-    <Compile Include="Extensions\DocumentsExtensions_Tests.cs" />
-    <Compile Include="Extensions\MastersExtensions_Tests.cs" />
     <Compile Include="Drawing\BezierTests.cs" />
     <Compile Include="Layout\DrawingHelper.cs" />
     <Compile Include="Layout\PieSliceTests.cs" />
@@ -142,7 +138,6 @@
     <Compile Include="Extensions\ConnectsExtensionsTest.cs" />
     <Compile Include="Extensions\DocumentExtensions_Tests.cs" />
     <Compile Include="Core\DocumentTests.cs" />
-    <Compile Include="Extensions\FontsExtensions_Tests.cs" />
     <Compile Include="VisioAutomationTest.cs" />
     <Compile Include="Extensions\PageDrawTests.cs" />
     <Compile Include="Extensions\PagesExtensions_Tests.cs" />
