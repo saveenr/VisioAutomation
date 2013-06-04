@@ -10,6 +10,20 @@ namespace TestVisioAutomation
     public class UserDefinedCellHelper_Test : VisioAutomationTest
     {
         [TestMethod]
+        public void UserDefinedCellsScenarios()
+        {
+            this.DetectInvalidUserDefinedCellNames();
+            this.GetUserDefinedCellNames();
+            this.GetUserDefinedCellsForMultipleShapes();
+            this.InvalidUserDefinedCellNameNotAllowed();
+            this.SetAdditionalPropertiesOnUserDefinedCells();
+            this.SetUserDefinedCellMultipleTimes();
+            this.SetUserDefinedCellsForMultipleShapes();
+            this.UserDefinedCellsScenario1();
+            this.VerifyQuotingForUserDefinedCells();
+        }
+
+
         public void UserDefinedCellsScenario1()
         {
             var page1 = GetNewPage();
@@ -37,7 +51,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void GetUserDefinedCellsForMultipleShapes()
         {
             var page1 = GetNewPage();
@@ -60,7 +73,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void SetUserDefinedCellMultipleTimes()
         {
             var page1 = GetNewPage();
@@ -89,7 +101,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void DetectInvalidUserDefinedCellNames()
         {
             if (VA.UserDefinedCells.UserDefinedCellsHelper.IsValidName("A") == false)
@@ -113,7 +124,6 @@ namespace TestVisioAutomation
             }
         }
 
-        [TestMethod]
         public void InvalidUserDefinedCellNameNotAllowed()
         {
             bool caught = false;
@@ -136,7 +146,6 @@ namespace TestVisioAutomation
             }
         }
 
-        [TestMethod]
         public void SetAdditionalPropertiesOnUserDefinedCells()
         {
             var page1 = GetNewPage();
@@ -150,7 +159,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void GetUserDefinedCellNames()
         {
             var page1 = GetNewPage();
@@ -191,7 +199,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void SetUserDefinedCellsForMultipleShapes()
         {
             var page1 = GetNewPage();
@@ -225,7 +232,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void VerifyQuotingForUserDefinedCells()
         {
             var page1 = GetNewPage();

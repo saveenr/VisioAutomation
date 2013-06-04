@@ -9,6 +9,12 @@ namespace TestVisioAutomation
     public class ScriptingDrawTests : VisioAutomationTest
     {
         [TestMethod]
+        public void Scripting_Draw_ComplexShapes()
+        {
+            this.Scripting_Draw_DataTable_0();
+            this.Scripting_Draw_Grid();
+        }
+
         public void Scripting_Draw_DataTable_0()
         {
             var ss = GetScriptingSession();
@@ -42,7 +48,6 @@ namespace TestVisioAutomation
             ss.Document.Close(true);
         }
 
-        [TestMethod]
         public void Scripting_Draw_Grid()
         {
             var ss = GetScriptingSession();

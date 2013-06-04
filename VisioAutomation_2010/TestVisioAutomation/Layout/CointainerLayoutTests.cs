@@ -41,6 +41,12 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void DrawContainers()
+        {
+            this.DrawContainer1();
+            this.DrawContainer2();
+        }
+
         public void DrawContainer1()
         {
 
@@ -63,7 +69,6 @@ namespace TestVisioAutomation
         }
 
 
-        [TestMethod]
         public void DrawContainer2()
         {
             // Make sure that empty containers can be drawn

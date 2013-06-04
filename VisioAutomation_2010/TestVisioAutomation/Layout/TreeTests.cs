@@ -10,6 +10,13 @@ namespace TestVisioAutomation
     public class TreeTests : VisioAutomationTest
     {
         [TestMethod]
+        public void DrawTrees()
+        {
+            this.DrawTree1Node();
+            this.DrawTreeMultiNode();
+            this.DrawTreeMultiNode2();
+        }
+
         public void DrawTree1Node()
         {
             var t = new TREEMODEL.Drawing();
@@ -26,7 +33,6 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
         public void DrawTreeMultiNode()
         {
             var t = new TREEMODEL.Drawing();
@@ -71,7 +77,6 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
         public void DrawTreeMultiNode2()
         {
             var t = new TREEMODEL.Drawing();

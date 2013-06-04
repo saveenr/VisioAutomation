@@ -108,7 +108,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Set_Custom_Props()
+        public void Set_DOM_Custom_Props()
         {
             // Create the doc
             var shape_nodes = new VA.DOM.ShapeList();

@@ -9,6 +9,13 @@ namespace TestVisioAutomation
     public class ScriptingArrangeTests : VisioAutomationTest
     {
         [TestMethod]
+        public void Scripting_Arrangement_Tests()
+        {
+            this.Scripting_Distribute();
+            this.Scripting_Nudge();
+            this.Scripting_Stack();
+        }
+
         public void Scripting_Distribute()
         {
             var ss = GetScriptingSession();
@@ -60,7 +67,6 @@ namespace TestVisioAutomation
             ss.Document.Close(true);
         }
 
-        [TestMethod]
         public void Scripting_Stack()
         {
             var ss = GetScriptingSession();

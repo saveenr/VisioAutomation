@@ -167,8 +167,15 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
-        
+
         [TestMethod]
+        public void CheckHomogenousUpdates()
+        {
+            this.CheckHomogenousUpdates1();
+            this.CheckHomogenousUpdates2();
+            this.CheckHomogenousUpdates3();
+        }
+
         public void CheckHomogenousUpdates1()
         {
             var update1 = new VA.ShapeSheet.Update();
@@ -190,10 +197,8 @@ namespace TestVisioAutomation
             }
         }
         
-        [TestMethod]
         public void CheckHomogenousUpdates2()
         {
-
             var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
             bool caught1 = false;
@@ -213,7 +218,6 @@ namespace TestVisioAutomation
             }
         }
 
-        [TestMethod]
         public void CheckHomogenousUpdates3()
         {
             var page1 = GetNewPage();

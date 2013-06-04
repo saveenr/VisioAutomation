@@ -10,6 +10,12 @@ namespace TestVisioAutomation
     public class LayoutHelper : VisioAutomationTest
     {
         [TestMethod]
+        public void DistributeXandY()
+        {
+            this.DistributeX();
+            this.DistributeY();
+        }
+
         public void DistributeX()
         {
             var app = this.GetVisioApplication();
@@ -32,7 +38,6 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
         public void DistributeY()
         {
             var app = this.GetVisioApplication();
