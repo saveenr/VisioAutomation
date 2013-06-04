@@ -11,6 +11,19 @@ namespace TestVisioAutomation
     public class DOM_Text_Tests : VisioAutomationTest
     {
         [TestMethod]
+        public void MarkupCharacter()
+        {
+            this.MarkupCharacterBold();
+            this.MarkupCharacterComplex();
+            this.MarkupCharacterFont();
+            this.MarkupCharacterItalic();
+            this.MarkupCharacterPlain();
+            this.MarkupParagraphCenter();
+            this.MarkupParagraphDefault();
+            this.MarkupParagraphLeft();
+            this.MarkupParagraphRight();
+        }
+
         public void MarkupCharacterPlain()
         {
             var m = new VA.Text.Markup.TextElement("{Normal}");
@@ -25,7 +38,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupCharacterBold()
         {
             var m = new VA.Text.Markup.TextElement("{Bold}");
@@ -42,7 +54,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupCharacterItalic()
         {
             var m = new VA.Text.Markup.TextElement("{Italic}");
@@ -59,7 +70,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupCharacterFont()
         {
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
@@ -79,7 +89,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupCharacterComplex()
         {
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
@@ -142,7 +151,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupParagraphDefault()
         {
             var m = new VA.Text.Markup.TextElement("{DefaultPara}");
@@ -157,7 +165,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupParagraphLeft()
         {
             var m = new VA.Text.Markup.TextElement("{LeftHAlign}");
@@ -175,7 +182,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupParagraphCenter()
         {
             var m = new VA.Text.Markup.TextElement("{CenterHAlign}");
@@ -193,7 +199,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void MarkupParagraphRight()
         {
             var m = new VA.Text.Markup.TextElement("{RightHAlign}");
@@ -210,6 +215,5 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
-
     }
 }

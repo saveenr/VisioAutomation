@@ -9,6 +9,12 @@ namespace TestVisioAutomation
     public class ScriptingSessionTests : VisioAutomationTest
     {
         [TestMethod]
+        public void Scripting_DevDocumentationAll()
+        {
+            this.Scripting_DevDocumentation();
+            this.Scripting_DevDocumentation2();
+        }
+
         public void Scripting_DevDocumentation()
         {
             var ss = GetScriptingSession();
@@ -16,7 +22,6 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
         public void Scripting_DevDocumentation2()
         {
             var ss = GetScriptingSession();

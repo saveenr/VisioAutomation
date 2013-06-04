@@ -7,7 +7,7 @@ namespace TestVisioAutomation
     public class ScriptingControlTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Controls_Scenario_0()
+        public void Scripting_Controls_Scenarios()
         {
             var ss = GetScriptingSession();
             ss.Document.New();

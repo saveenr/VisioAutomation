@@ -10,6 +10,12 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Test_Resize_Application_Window()
         {
+            this.Scripting_Test_Resize_Application_Window1();
+            this.Scripting_Test_Resize_Application_Window2();
+        }
+
+        public void Scripting_Test_Resize_Application_Window1()
+        {
             var ss = GetScriptingSession();
 
             var old_size = ss.Application.Window.GetSize();
@@ -24,7 +30,6 @@ namespace TestVisioAutomation
             Assert.AreEqual(old_size, actual_size);
         }
 
-        [TestMethod]
         public void Scripting_Test_Resize_Application_Window2()
         {
             var ss = GetScriptingSession();

@@ -8,7 +8,7 @@ namespace TestVisioAutomation
     public class ScriptingCustomPropTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_CustomProps_Scenario_0()
+        public void Scripting_CustomProps_Scenarios()
         {
             var ss = GetScriptingSession();
             ss.Document.New();

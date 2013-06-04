@@ -33,18 +33,22 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void DrawOrgCharts()
+        {
+            this.DrawOrgChart0();
+            this.DrawOrgChart1();
+            this.DrawOrgChart2();
+        }
+
         public void DrawOrgChart0()
         {
             var orgchart = new OCMODEL.Drawing();
 
             var n_a = new OCMODEL.Node("A");
-            
             n_a.Size = new VA.Drawing.Size(4, 2);
-
             orgchart.OrgCharts.Add(n_a);
 
             var app = new IVisio.Application();
-
             orgchart.Render(app);
 
             var active_page = app.ActivePage;
@@ -54,7 +58,6 @@ namespace TestVisioAutomation
             app.Quit(true);
         }
 
-        [TestMethod]
         public void DrawOrgChart1()
         {
             var orgchart = new OCMODEL.Drawing();
@@ -107,7 +110,6 @@ namespace TestVisioAutomation
             app.Quit(true);
         }
 
-        [TestMethod]
         public void DrawOrgChart2()
         {
             var orgchart = new OCMODEL.Drawing();
@@ -134,6 +136,5 @@ namespace TestVisioAutomation
 
             app.Quit(true);
         }
-
     }
 }
