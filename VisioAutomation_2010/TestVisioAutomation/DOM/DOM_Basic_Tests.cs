@@ -59,7 +59,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DropMaster()
+        public void DropDOMMaster()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -83,7 +83,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeFormat()
+        public void FormatDOMShape()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
