@@ -13,6 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void OrgChartMustHaveContent()
         {
+            // Before an Org Chart is rendered it must have at least one node
             bool caught = false;
             var orgcgart = new OCMODEL.Drawing();
             var page1 = GetNewPage(StandardPageSize);
@@ -36,12 +37,13 @@ namespace TestVisioAutomation
         public void DrawOrgCharts()
         {
             this.DrawOrgChart0();
-            this.DrawOrgChart1();
-            this.DrawOrgChart2();
+            this.DrawSingleOrgChart();
+            this.DrawMultipleOrgCharts();
         }
 
         public void DrawOrgChart0()
         {
+            // Draw the minimum org chart - a chart with one nod
             var orgchart = new OCMODEL.Drawing();
 
             var n_a = new OCMODEL.Node("A");
@@ -58,8 +60,10 @@ namespace TestVisioAutomation
             app.Quit(true);
         }
 
-        public void DrawOrgChart1()
+        public void DrawSingleOrgChart()
         {
+            // Verify that basic org chart connectivity is maintained
+
             var orgchart = new OCMODEL.Drawing();
 
             var n_a = new OCMODEL.Node("A");
@@ -104,14 +108,16 @@ namespace TestVisioAutomation
             Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
             Assert.AreEqual(new VA.Drawing.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
-            Assert.AreEqual(renderer.LayoutOptions.DefaultNodeSize,
-                            VisioAutomationTest.GetSize(n_b.VisioShape));
+            Assert.AreEqual(renderer.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
         }
 
-        public void DrawOrgChart2()
+        public void DrawMultipleOrgCharts()
         {
+            // Verify that we can create multiple org charts in one
+            // document
+
             var orgchart = new OCMODEL.Drawing();
 
             var n_a = new OCMODEL.Node("A");

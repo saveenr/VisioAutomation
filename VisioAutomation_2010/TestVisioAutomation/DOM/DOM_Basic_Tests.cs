@@ -13,6 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DrawEmptyDOM()
         {
+            // Verify that an empty DOM page can be created and rendered
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
             page_node.Size = new VA.Drawing.Size(5, 5);
@@ -26,7 +27,13 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DropDOMLine()
+        public void DrawDOMSimpleNonMasterShapes()
+        {
+            this.DrawDOMBezier();
+            this.DrawDOMLine();                    
+        }
+
+        public void DrawDOMLine()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -41,8 +48,7 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
-        public void DropDOMBezier()
+        public void DrawDOMBezier()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -108,6 +114,15 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ConnectDOMShapes()
         {
+            // Deferred means that instead of passing
+            // an IVisio Master object, that 
+            // the name of the master and stencil are used
+            this.ConnectDOMShapesNonDeferred();
+            this.ConnectDOMShapesDeferred();
+        }
+
+        public void ConnectDOMShapesNonDeferred()
+        {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
             var basic_stencil = doc.Application.Documents.OpenStencil("basic_u.vss");
@@ -131,7 +146,6 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
         public void ConnectDOMShapesDeferred()
         {
             // Deferred means that the stencils (and thus masters) are loaded when rendering
@@ -151,7 +165,7 @@ namespace TestVisioAutomation
         }
         
         [TestMethod]
-        public void DropDOMUnknownMaster()
+        public void VerifyThatUnknownMastersAreDetected()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -182,11 +196,11 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void DropUnknownDOMStencil()
+        public void VerifyThatUnknownStencilsAreDetected()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var master_node_0 = page_node.Shapes.Drop("RectangleXXX", "basic_uXXX.vss", 3, 3);
+            var master_node_0 = page_node.Shapes.Drop("Rectangle", "basic_uXXX.vss", 3, 3);
 
             IVisio.Page page = null;
             bool caught = false;

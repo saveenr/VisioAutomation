@@ -15,7 +15,6 @@ namespace TestVisioAutomation
         public void GetUndirectedEdges()
         {
             var page1 = GetNewPage();
-
             var shapes = draw_standard_shapes(page1);
 
             shapes[0].AutoConnect(shapes[1], connect_dir_none, null);
@@ -40,10 +39,7 @@ namespace TestVisioAutomation
         public void UndirectedEdgesAsBiDirectional()
         {
             var page1 = GetNewPage();
-
             var shapes = draw_standard_shapes(page1);
-
-            var doc = page1.Document;
 
             shapes[0].AutoConnect(shapes[1], connect_dir_none, null);
             shapes[1].AutoConnect(shapes[2], connect_dir_none, null);
@@ -73,10 +69,7 @@ namespace TestVisioAutomation
         public void IgnoreUndirectedEdges()
         {
             var page1 = GetNewPage();
-
             var shapes = draw_standard_shapes(page1);
-
-            var doc = page1.Document;
 
             shapes[0].AutoConnect(shapes[1], connect_dir_none, null);
             shapes[1].AutoConnect(shapes[2], connect_dir_none, null);
@@ -139,10 +132,10 @@ namespace TestVisioAutomation
         private IVisio.Shape[] draw_standard_shapes(IVisio.Page page1)
         {
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
-            s1.Text = "A";
             var s2 = page1.DrawRectangle(0, 3, 1, 4);
-            s2.Text = "B";
             var s3 = page1.DrawRectangle(3, 0, 4, 1);
+            s1.Text = "A";
+            s2.Text = "B";
             s3.Text = "C";
             return new[] {s1, s2, s3};
         }
