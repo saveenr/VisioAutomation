@@ -113,7 +113,6 @@
     <Compile Include="Layout\OrgChartTests.cs" />
     <Compile Include="DOM\DOM_Basic_Tests.cs" />
     <Compile Include="Text\TextFormat_Tests.cs" />
-    <Compile Include="Core\PerfTests.cs" />
     <Compile Include="Core\CustomPropertiesTest.cs" />
     <Compile Include="Extensions\SelectionExtensions.cs" />
     <Compile Include="UtilTests\BitArray2DTest.cs" />
@@ -129,7 +128,6 @@
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
     <Compile Include="Scripting\ScriptingSessionTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
-    <Compile Include="Scripting\ScriptingTextTests.cs" />
     <Compile Include="Core\Struct_Sizes.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Update.cs" />
     <Compile Include="Extensions\ApplicationExtensionsTests.cs" />

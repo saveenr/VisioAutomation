@@ -7,7 +7,7 @@ namespace TestVisioAutomation
     public class ScriptingGroupTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Draw_RectangleLineOval_0()
+        public void Scripting_Grouping()
         {
             var ss = GetScriptingSession();
             ss.Document.New();

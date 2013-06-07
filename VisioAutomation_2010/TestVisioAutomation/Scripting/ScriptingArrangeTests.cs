@@ -42,7 +42,6 @@ namespace TestVisioAutomation
             ss.Document.Close(true);
         }
 
-        [TestMethod]
         public void Scripting_Nudge()
         {
             var ss = GetScriptingSession();

@@ -11,6 +11,12 @@ namespace TestVisioAutomation
     public class DirectedGraphLayoutTests : VisioAutomationTest
     {
         [TestMethod]
+        public void RenderDirectedGraphWithConnectors()
+        {
+            this.RenderDirectedGraphWithBezierConnectors();
+            this.RenderDirectedGraphWithDynamicConnectors();
+        }
+
         public void RenderDirectedGraphWithBezierConnectors()
         {
             var directed_graph_drawing = this.create_sample_graph();
@@ -25,7 +31,6 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
         public void RenderDirectedGraphWithDynamicConnectors()
         {
             var directed_graph_drawing = this.create_sample_graph();

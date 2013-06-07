@@ -10,6 +10,12 @@ namespace TestVisioAutomation
     public class TextMarkupTests : VisioAutomationTest
     {
         [TestMethod]
+        public void TextMarkups()
+        {
+            this.Markup1();
+            this.Markup2();
+        }
+
         public void Markup1()
         {
             // Validate that setting text with no values works
@@ -26,7 +32,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void Markup2()
         {
             // Validate that setting text with no values works

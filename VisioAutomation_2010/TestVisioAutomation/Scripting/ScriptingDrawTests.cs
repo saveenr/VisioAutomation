@@ -22,17 +22,17 @@ namespace TestVisioAutomation
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
             var items = new[]
-                            {
-                                new {Name = "X", Age = 28, Score = 16},
-                                new {Name = "Y", Age = 32, Score = 23},
-                                new {Name = "Z", Age = 45, Score = 12},
-                                new {Name = "U", Age = 48, Score = 10}
-                            };
+                {
+                    new {Name = "X", Age = 28, Score = 16},
+                    new {Name = "Y", Age = 32, Score = 23},
+                    new {Name = "Z", Age = 45, Score = 12},
+                    new {Name = "U", Age = 48, Score = 10}
+                };
 
             var dt = new System.Data.DataTable();
             dt.Columns.Add("X", typeof (string));
-            dt.Columns.Add("Age", typeof(int));
-            dt.Columns.Add("Score", typeof(int));
+            dt.Columns.Add("Age", typeof (int));
+            dt.Columns.Add("Score", typeof (int));
 
             foreach (var item in items)
             {
@@ -102,12 +102,12 @@ namespace TestVisioAutomation
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
             var points = new[]
-                             {
-                                 new VA.Drawing.Point(0, 0),
-                                 new VA.Drawing.Point(2, 0.5),
-                                 new VA.Drawing.Point(2, 2),
-                                 new VA.Drawing.Point(3, 0.5)
-                             };
+                {
+                    new VA.Drawing.Point(0, 0),
+                    new VA.Drawing.Point(2, 0.5),
+                    new VA.Drawing.Point(2, 2),
+                    new VA.Drawing.Point(3, 0.5)
+                };
 
             var shape_bezier = ss.Draw.Bezier(points);
             var shape_polyline = ss.Draw.PolyLine(points);
@@ -143,7 +143,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_DirectedGraph_X()
+        public void Scripting_DirectedGraph_Tests()
         {
             this.Scripting_DirectedGraph1();
             this.Scripting_DirectedGraph2();
@@ -205,6 +205,12 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
+        public void Scripting_DropMaster_Tests()
+        {
+            this.Scripting_DropMany();
+            this.Scripting_DropMaster();
+        }
+
         public void Scripting_DropMaster()
         {
             var ss = GetScriptingSession();
@@ -220,7 +226,6 @@ namespace TestVisioAutomation
             ss.Document.Close(true);
         }
 
-        [TestMethod]
         public void Scripting_DropMany()
         {
             var ss = GetScriptingSession();
