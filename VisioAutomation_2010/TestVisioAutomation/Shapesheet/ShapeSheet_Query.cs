@@ -183,15 +183,12 @@ namespace TestVisioAutomation
                                           new VA.Drawing.Point(5, 5),
                                           new VA.Drawing.Point(6, 6)
                                       };
-
-            var actual_pinpos = new List<VA.Drawing.Point>(r.RowCount);
-            foreach (var row in Enumerable.Range(0, r.RowCount))
-            {
-                 var p = new VA.Drawing.Point(
-                    r[row, col_pinx].Result,
-                    r[row, col_piny].Result);
-                actual_pinpos.Add(p);
-            }
+            
+            var range = Enumerable.Range(0, r.RowCount);
+            var points = range.Select(row => new VA.Drawing.Point(
+                                                 r[row, col_pinx].Result,
+                                                 r[row, col_piny].Result));
+            var actual_pinpos = new List<VA.Drawing.Point>(points);
 
             Assert.AreEqual(expected_pinpos[0], actual_pinpos[0]);
             Assert.AreEqual(expected_pinpos[1], actual_pinpos[1]);
