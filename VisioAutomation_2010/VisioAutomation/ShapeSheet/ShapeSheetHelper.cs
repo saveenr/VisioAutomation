@@ -100,6 +100,8 @@ namespace VisioAutomation.ShapeSheet
 
         public static TResult[] _GetResults<TResult>(object visio_object, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
+            EnforceValidResultType(typeof(TResult));
+
             int numitems; 
 
             if (visio_object is IVisio.Shape)
@@ -180,5 +182,22 @@ namespace VisioAutomation.ShapeSheet
 
             return results;
         }
+
+        internal static void EnforceValidResultType(System.Type result_type)
+        {
+            if (!IsValidResultType(result_type))
+            {
+                string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
+                throw new VA.AutomationException();
+            }
+        }
+
+        internal static bool IsValidResultType(System.Type result_type)
+        {
+            return (result_type == typeof (int)
+                    || result_type == typeof (double)
+                    || result_type == typeof (string));
+        }
+
     }
 }

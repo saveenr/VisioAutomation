@@ -50,7 +50,9 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 throw new System.ArgumentNullException("shape");
             }
-            
+
+            VA.ShapeSheet.ShapeSheetHelper.EnforceValidResultType(typeof(T));
+
             var shapeids = new[] { shape.ID };
             var groupcounts = new[] { 1 };
             int rowcount = shapeids.Count();
@@ -105,6 +107,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 throw new System.ArgumentNullException("shapeids");
             }
+
+            VA.ShapeSheet.ShapeSheetHelper.EnforceValidResultType(typeof(T));
 
             var srcs = Columns.Select(i => i.SRC).ToList();         
 

@@ -33,6 +33,8 @@ namespace VisioAutomation.Internal
                 throw new AutomationException("The number of shapes must be equal to the number of groups");
             }
 
+            VA.ShapeSheet.ShapeSheetHelper.EnforceValidResultType(typeof(T));
+
             int groupcountsum = groups.Select(g=>g.Count).Sum();
             if (rowcount != groupcountsum)
             {
@@ -66,7 +68,8 @@ namespace VisioAutomation.Internal
 
         internal VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<T>> CreateMergedTable()
         {
-            int n = this.RowCount*this.ColumnCount;
+            VA.ShapeSheet.ShapeSheetHelper.EnforceValidResultType(typeof(T));
+            int n = this.RowCount * this.ColumnCount;
             var array = new VA.ShapeSheet.CellData<T>[n];
             for (int i=0; i<n; i++)
             {
