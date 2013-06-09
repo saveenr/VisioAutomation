@@ -34,18 +34,5 @@ namespace TestVisioAutomation
             Assert.AreEqual(app.ActivePage, page2);
             doc1.Close(true);
         }
-
-        [TestMethod]
-        public void SetSize()
-        {
-            var app = this.GetVisioApplication();
-            var documents = app.Documents;
-            var doc1 = this.GetNewDoc();
-            var page1 = doc1.Pages[1];
-            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
-            var page_size = VisioAutomationTest.GetPageSize(page1);
-            Assert.AreEqual(page_size, this.StandardPageSize);
-            doc1.Close(true);
-        }
     }
 }

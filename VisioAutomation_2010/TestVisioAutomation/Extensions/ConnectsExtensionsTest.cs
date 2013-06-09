@@ -12,6 +12,13 @@ namespace TestVisioAutomation
         private IVisio.VisAutoConnectDir connect_dir_none = IVisio.VisAutoConnectDir.visAutoConnectDirNone;
 
         [TestMethod]
+        public void GetUndirectedEdgesTests()
+        {
+            this.GetUndirectedEdges();
+            this.GetDirectedEdgesIncludeNoArrowsAreBidirectional();
+            this.GetDirectedEdgesExcludeNoArrows();
+        }
+
         public void GetUndirectedEdges()
         {
             var page1 = GetNewPage();
@@ -35,8 +42,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
-        public void UndirectedEdgesAsBiDirectional()
+        public void GetDirectedEdgesIncludeNoArrowsAreBidirectional()
         {
             var page1 = GetNewPage();
             var shapes = draw_standard_shapes(page1);
@@ -47,7 +53,8 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+            var edges = VA.Connections.PathAnalysis.GetEdges(page1, 
+                VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(4, edges.Count);
 
             Assert.AreEqual(shapes[1], edges[0].From);
@@ -65,28 +72,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
-        public void IgnoreUndirectedEdges()
-        {
-            var page1 = GetNewPage();
-            var shapes = draw_standard_shapes(page1);
-
-            shapes[0].AutoConnect(shapes[1], connect_dir_none, null);
-            shapes[1].AutoConnect(shapes[2], connect_dir_none, null);
-
-            var cons = page1.Connects.AsEnumerable().ToList();
-            Assert.AreEqual(4, cons.Count);
-
-            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
-            Assert.AreEqual(0, edges0.Count);
-
-            var edges1 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
-            Assert.AreEqual(4, edges1.Count);
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void IgnoreDirectedEdges2()
+        public void GetDirectedEdgesExcludeNoArrows()
         {
             var page1 = GetNewPage();
 
@@ -108,7 +94,8 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, 
+                VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(0, edges0.Count);
 
             var src_beginarrow = VA.ShapeSheet.SRCConstants.BeginArrow;

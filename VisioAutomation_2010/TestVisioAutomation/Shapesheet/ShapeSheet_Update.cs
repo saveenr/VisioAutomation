@@ -15,6 +15,50 @@ namespace TestVisioAutomation
         private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
+        public void UpdateShapeFormulasAll()
+        {
+            this.UpdateShapeFormulas();
+            this.UpdateShapesFormulas();
+        }
+
+        public void UpdateShapesFormulas()
+        {
+            var page1 = GetNewPage();
+
+            var shape1 = page1.DrawRectangle(-1, -1, 0, 0);
+            var shape2 = page1.DrawRectangle(-1, -1, 0, 0);
+            var shape3 = page1.DrawRectangle(-1, -1, 0, 0);
+
+
+            // Set the formulas
+            var update = new VA.ShapeSheet.Update();
+            update.SetFormula(shape1.ID16, src_pinx, 0.5);
+            update.SetFormula(shape1.ID16, src_piny, 0.5);
+            update.SetFormula(shape2.ID16, src_pinx, 1.5);
+            update.SetFormula(shape2.ID16, src_piny, 1.5);
+            update.SetFormula(shape3.ID16, src_pinx, 2.5);
+            update.SetFormula(shape3.ID16, src_piny, 2.5);
+            update.Execute(page1);
+
+            // Verify that the formulas were set
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_pinx = query.AddColumn(src_pinx);
+            var col_piny = query.AddColumn(src_piny);
+
+            var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
+
+            var r = query.GetFormulasAndResults<double>(page1, shapeids);
+
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_pinx]);
+            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_piny]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_pinx]);
+            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_piny]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_pinx]);
+            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_piny]);
+
+            page1.Delete(0);
+        }
+
         public void UpdateShapeFormulas()
         {
             var page1 = GetNewPage();
@@ -44,6 +88,13 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void UpdateShapeResultsAll()
+        {
+            this.UpdateShapeResults();
+            this.UpdateShapeResultsString();
+            this.UpdateShapesResults();
+        }
+
         public void UpdateShapeResults()
         {
             var page1 = GetNewPage();
@@ -66,7 +117,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void UpdateShapeResultsString()
         {
             var page1 = GetNewPage();
@@ -89,47 +139,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-
-        [TestMethod]
-        public void UpdateShapesFormulas()
-        {
-            var page1 = GetNewPage();
-
-            var shape1 = page1.DrawRectangle(-1, -1, 0, 0);
-            var shape2 = page1.DrawRectangle(-1, -1, 0, 0);
-            var shape3 = page1.DrawRectangle(-1, -1, 0, 0);
-
-
-            // Set the formulas
-            var update = new VA.ShapeSheet.Update();
-            update.SetFormula(shape1.ID16, src_pinx, 0.5);
-            update.SetFormula(shape1.ID16, src_piny, 0.5);
-            update.SetFormula(shape2.ID16, src_pinx, 1.5);
-            update.SetFormula(shape2.ID16, src_piny, 1.5);
-            update.SetFormula(shape3.ID16, src_pinx, 2.5);
-            update.SetFormula(shape3.ID16, src_piny, 2.5);
-            update.Execute(page1);
-
-            // Verify that the formulas were set
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddColumn(src_pinx);
-            var col_piny = query.AddColumn(src_piny);
-
-            var shapeids = new[] {shape1.ID, shape2.ID, shape3.ID};
-
-            var r = query.GetFormulasAndResults<double>(page1, shapeids);
-
-            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_pinx]);
-            AssertVA.AreEqual("0.5 in", 0.5, r[0, col_piny]);
-            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_pinx]);
-            AssertVA.AreEqual("1.5 in", 1.5, r[1, col_piny]);
-            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_pinx]);
-            AssertVA.AreEqual("2.5 in", 2.5, r[2, col_piny]);
-
-            page1.Delete(0);
-        }
-
-        [TestMethod]
         public void UpdateShapesResults()
         {
             var page1 = GetNewPage();
@@ -171,12 +180,12 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CheckHomogenousUpdates()
         {
-            this.CheckHomogenousUpdates1();
-            this.CheckHomogenousUpdates2();
-            this.CheckHomogenousUpdates3();
+            this.CheckHomogenousUpdates_Formulas_and_Results_Dont_Mix();
+            this.CheckHomogenousUpdates_SRC_and_SIDSRC_Dont_Mix();
+            this.CheckHomogenousUpdates_Different_Types_for_results_Do_Mix();
         }
 
-        public void CheckHomogenousUpdates1()
+        public void CheckHomogenousUpdates_Formulas_and_Results_Dont_Mix()
         {
             var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
@@ -197,7 +206,7 @@ namespace TestVisioAutomation
             }
         }
         
-        public void CheckHomogenousUpdates2()
+        public void CheckHomogenousUpdates_SRC_and_SIDSRC_Dont_Mix()
         {
             var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
@@ -218,7 +227,7 @@ namespace TestVisioAutomation
             }
         }
 
-        public void CheckHomogenousUpdates3()
+        public void CheckHomogenousUpdates_Different_Types_for_results_Do_Mix()
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -241,8 +250,7 @@ namespace TestVisioAutomation
             AssertVA.AreEqual("7", 7, data[0, col_linepat]);
             AssertVA.AreEqual("2 in", 2, data[0, col_pinx]);
             
-            // page1.Delete(0);
+            page1.Delete(0);
         }
-
     }
 }

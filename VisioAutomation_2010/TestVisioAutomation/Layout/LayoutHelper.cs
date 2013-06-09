@@ -61,7 +61,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Sort1()
+        public void SortShapesByPosition()
         {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();

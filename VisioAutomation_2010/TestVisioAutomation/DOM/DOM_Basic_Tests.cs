@@ -163,8 +163,14 @@ namespace TestVisioAutomation
             page.Delete(0);
             doc.Close(true);
         }
-        
+
         [TestMethod]
+        public void VerifyUnknownMastersAndStencils()
+        {
+            this.VerifyThatUnknownMastersAreDetected();
+            this.VerifyThatUnknownStencilsAreDetected();                    
+        }
+
         public void VerifyThatUnknownMastersAreDetected()
         {
             var doc = this.GetNewDoc();
@@ -195,7 +201,6 @@ namespace TestVisioAutomation
         }
 
 
-        [TestMethod]
         public void VerifyThatUnknownStencilsAreDetected()
         {
             var doc = this.GetNewDoc();
