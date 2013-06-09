@@ -21,7 +21,6 @@ namespace TestVisioAutomation
             return drawings.Count();
         }
 
-        [TestMethod]
         public void Empty_DOM_Rendering()
         {
             // Rendering a DOM should not change the page count
@@ -35,7 +34,6 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close( true );
         }
 
-        [TestMethod]
         public void Render_Page_To_Document()
         {
             // Rendering a dom page to a document should create a new page
@@ -64,7 +62,15 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Draw_Red_Rectangle_With_Text()
+        public void BasicDOMDrawing()
+        {
+            this.DrawSimpleShape();
+            this.DropShapes();
+            this.SetCustomProperties();
+            this.DrawOrgChart();
+        }
+
+        public void DrawSimpleShape()
         {
             // Create the doc
             var page_node = new VA.DOM.Page();
@@ -86,8 +92,7 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
-        public void Draw_DropShapes()
+        public void DropShapes()
         {
             // Render it
             var app = this.GetVisioApplication();
@@ -107,8 +112,7 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
-        public void Set_DOM_Custom_Props()
+        public void SetCustomProperties()
         {
             // Create the doc
             var shape_nodes = new VA.DOM.ShapeList();
@@ -144,20 +148,20 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
-        public void DOM_OrgChart()
+        public void DrawOrgChart()
         {
-            const string orgchart_vst = "orgch_u.vst";
-            // const string orgchart_vss = "orgch_u.vss";
-
             // How to draw using a Template instead of a doc and a stencil
+            const string orgchart_vst = "orgch_u.vst";
+
             var app = this.GetVisioApplication();
             var doc_node = new VA.DOM.Document( orgchart_vst , IVisio.VisMeasurementSystem.visMSUS );
             var page_node = new VA.DOM.Page();
             doc_node.Pages.Add(page_node);
 
+            // Have to be smart about selecting the right master with Visio 2013
             int vis_ver = int.Parse(app.Version.Split( new char[]{'.'} )[0]);
             string position_master_name = vis_ver >= 15 ? "Position Belt" : "Position";
+
             var s1 = new Shape(position_master_name, null, new VA.Drawing.Point(3, 4));
             page_node.Shapes.Add( s1 );
             var doc = doc_node.Render(app);

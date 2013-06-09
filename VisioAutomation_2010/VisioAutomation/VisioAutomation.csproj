@@ -275,7 +275,6 @@
     <Compile Include="Controls\ControlCells.cs" />
     <Compile Include="Pages\PageHelper.cs" />
     <Compile Include="Selection\SelectionHelper.cs" />
-    <Compile Include="Text\TextHelper.cs" />
     <Compile Include="Extensions\ShapeMethods.cs" />
     <Compile Include="Connections\PathAnalysis.cs" />
     <Compile Include="Application\AlertResponseScope.cs" />

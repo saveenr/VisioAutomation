@@ -146,7 +146,6 @@
     <Compile Include="Layout\Convert_Tests.cs" />
     <Compile Include="Other\ShapeHelper_Tests.cs" />
     <Compile Include="UtilTests\StencilTests.cs" />
-    <Compile Include="Text\TextHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\CustomPropsTest.cs" />
   </ItemGroup>
