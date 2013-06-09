@@ -1,10 +1,35 @@
 Set-StrictMode -Version 2 
 $ErrorActionPreference = "Stop"
 
+function mkdir_safe($dir)
+{
+    if ( ! (test-path $dir) ) 
+    { 
+        mkdir $dir
+    }
+}
+
+function clean_dir_safe($dir)
+{
+    if (test-path $packaging_folder)
+    {
+        remove-item -Recurse -Force $packaging_folder 
+    }
+}
+
+
 $mypath = $MyInvocation.MyCommand.path
 $project_path = Resolve-Path ( Join-Path $MyInvocation.MyCommand.path ".." )
 $samples_path = Join-Path $project_path "VisioCSharpSamples" 
 $nuspecfilname = Join-Path $project_path "VisioCSharpSamples.nuspec"
+
+$nuget_exe = Join-Path $project_path "nuget.exe"
+Write-Host NUGET $nuget_exe
+
+if (!(test-path $nuget_exe))
+{
+    Write-Error "NuGET.EXE can't be found"
+}
 
 Write-Host PROJ $project_path
 Write-Host SAMPLES $samples_path
@@ -21,7 +46,6 @@ if (!(test-path $nuspecfilname))
     Write-Host ERROR nuspec file ($nuspecfilname) does not exist
 }
 
-
 [xml]$nuspec = Get-Content $nuspecfilname
 
 $url="https://www.nuget.org"
@@ -35,61 +59,41 @@ $tools_folder = join-path $packaging_folder "tools"
 
 Write-Host Packaging Folder: $packaging_folder
 
-if ( ! (test-path "d:\VisiosCSharpSamplesBuild") ) 
-{
-    mkdir "d:\VisiosCSharpSamplesBuild"
-}
+mkdir_safe "d:\VisiosCSharpSamplesBuild"
 
 # Clean up any earlier packaging files
-if (test-path $packaging_folder)
-{
-    remove-item -Recurse -Force $packaging_folder 
-}
+clean_dir_safe $packaging_folder
 
 # Recreate the folder that will hold the contents
-mkdir $package_content 
-
-# If the lib folder does not exist, create it
-# NOTE: nuget.exe requires the lib folder to exist 
-
-if ( ! (test-path $lib_folder) ) 
-{ 
-    mkdir $lib_folder
-}
-
-# If the tools folder does not exist, create it
-# NOTE: nuget.exe requires the tools folder to exist 
-
-if ( ! (test-path $tools_folder) ) 
-{ 
-    mkdir $tools_folder
-}
-
+mkdir_safe $package_content 
+mkdir_safe $lib_folder # NOTE: nuget.exe requires the lib folder to exist 
+mkdir_safe $tools_folder # NOTE: nuget.exe requires the tools folder to exist 
 
 
 # Copy all the CS files except any that begin with "exclude"
 Write-Host from: $samples_path
 robocopy $samples_path  $package_content *.cs /xf Program.cs 
 
-
-# Create the NuGet Package
-
-$nuget_exe = Join-Path $project_path "nuget.exe"
-Write-Host NUGET $nuget_exe
-
-if (!(test-path $nuget_exe))
-{
-    Write-Error "NuGET.EXE can't be found"
-}
-
+# ------------------------
+# Copy the NUSPEC file over
+# ------------------------
 
 $dest_nuspec = Join-Path "d:\VisiosCSharpSamplesBuild" "VisioCSharpSamples.nuspec"
 copy $nuspecfilname $dest_nuspec 
 
-$old_location = Get-Location
-Set-Location "d:\VisiosCSharpSamplesBuild"
-&$nuget_exe pack $dest_nuspec -Verbose
-Set-Location $old_location
+# ------------------------
+# Create the NuGet Package
+# ------------------------
+
+Push-Location d:\VisiosCSharpSamplesBuild
+try
+{
+    &$nuget_exe pack $dest_nuspec -Verbose 
+}
+finally
+{
+    Pop-Location
+}
 
 # Remove the packaging folder
-remove-item -Recurse -Force $packaging_folder 
+clean_dir_safe $packaging_folder 
