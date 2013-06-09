@@ -35,8 +35,9 @@ Write-Host PROJ $project_path
 Write-Host SAMPLES $samples_path
 Write-Host NUSPEC $nuspecfilname
 
+$build_folder = join-path "D:" ( $packagename + "_NuGetBuild" )
 
-$packaging_folder = "d:\VisiosCSharpSamplesBuild\Packaging" 
+$packaging_folder = join-path $build_folder "Packaging" 
 
 
 Write-Host loading $nuspecfilname 
@@ -59,7 +60,7 @@ $tools_folder = join-path $packaging_folder "tools"
 
 Write-Host Packaging Folder: $packaging_folder
 
-mkdir_safe "d:\VisiosCSharpSamplesBuild"
+mkdir_safe $build_folder 
 
 # Clean up any earlier packaging files
 clean_dir_safe $packaging_folder
@@ -78,22 +79,26 @@ robocopy $samples_path  $package_content *.cs /xf Program.cs
 # Copy the NUSPEC file over
 # ------------------------
 
-$dest_nuspec = Join-Path "d:\VisiosCSharpSamplesBuild" "VisioCSharpSamples.nuspec"
+$dest_nuspec = Join-Path $build_folder "VisioCSharpSamples.nuspec"
 copy $nuspecfilname $dest_nuspec 
 
 # ------------------------
 # Create the NuGet Package
 # ------------------------
 
-Push-Location d:\VisiosCSharpSamplesBuild
+$output_path = "D:\"
+
+Push-Location $build_folder 
 try
 {
-    &$nuget_exe pack $dest_nuspec -Verbose 
+    &$nuget_exe pack $dest_nuspec -Verbose -OutputDirectory $output_path
 }
 finally
 {
     Pop-Location
 }
 
-# Remove the packaging folder
-clean_dir_safe $packaging_folder 
+# Remove the build folder
+clean_dir_safe $build_folder
+remove-item $dest_nuspec 
+remove-item $build_folder
