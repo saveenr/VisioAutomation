@@ -1,22 +1,26 @@
-param([string]$param_pub)
-$pub_params = $param_pub -split ","
+Set-StrictMode -Version 2 
+$ErrorActionPreference = "Stop"
 
-$localfeed ="D:\saveenr\live-mesh\code\mynugetfeed" 
-$publicfeedurl="https://www.nuget.org"
-$packaging_folder = ".\Packaging" 
+$mypath = $MyInvocation.MyCommand.path
+$project_path = Resolve-Path ( Join-Path $MyInvocation.MyCommand.path ".." )
+$samples_path = Join-Path $project_path "VisioCSharpSamples" 
+$nuspecfilname = Join-Path $project_path "VisioCSharpSamples.nuspec"
 
-$publocal = $pub_params.Contains( "local" )
-$pubremote = $pub_params.Contains( "remote" )
+Write-Host PROJ $project_path
+Write-Host SAMPLES $samples_path
+Write-Host NUSPEC $nuspecfilname
 
 
-$nuspecfilname = "VisioCSharpSamples.nuspec"
+$packaging_folder = "d:\VisiosCSharpSamplesBuild\Packaging" 
 
-Write-Host looading $nuspecfilname 
+
+Write-Host loading $nuspecfilname 
 
 if (!(test-path $nuspecfilname))
 {
     Write-Host ERROR nuspec file ($nuspecfilname) does not exist
 }
+
 
 [xml]$nuspec = Get-Content $nuspecfilname
 
@@ -29,6 +33,12 @@ $package_content = join-path $content_folder $packagename
 $lib_folder = join-path $packaging_folder "lib"
 $tools_folder = join-path $packaging_folder "tools"
 
+Write-Host Packaging Folder: $packaging_folder
+
+if ( ! (test-path "d:\VisiosCSharpSamplesBuild") ) 
+{
+    mkdir "d:\VisiosCSharpSamplesBuild"
+}
 
 # Clean up any earlier packaging files
 if (test-path $packaging_folder)
@@ -55,41 +65,31 @@ if ( ! (test-path $tools_folder) )
     mkdir $tools_folder
 }
 
+
+
 # Copy all the CS files except any that begin with "exclude"
-robocopy $packagename  $package_content *.cs /xf exclude*.* 
+Write-Host from: $samples_path
+robocopy $samples_path  $package_content *.cs /xf Program.cs 
+
 
 # Create the NuGet Package
-./nuget.exe pack $nuspecfilname -Verbose 
 
+$nuget_exe = Join-Path $project_path "nuget.exe"
+Write-Host NUGET $nuget_exe
 
-Write-Host "Publishing"
-Write-host "param_pub": $param_pub
-Write-host "pub_params": $pub_params
-Write-host "publocal": $publocal
-Write-host "pubremote": $pubremote
-
-# Local publishing
-if ($publocal)
+if (!(test-path $nuget_exe))
 {
-    Write-Host "Publish locally"
-    if (!(test-path $localfeed))
-    {
-        Write-Host ERROR $localfeed Does not exist
-        Exit
-    }
-
-    Write-Host Copying to: $localfeed
-    copy $packagefilename $localfeed
-
+    Write-Error "NuGET.EXE can't be found"
 }
 
-# Global publishing
-if ($pubremote)
-{
-    Write-Host "Publish remote"
-    Write-Host Publishing $packagefilename 
-    .\nuget.exe push $packagefilename -Source $publicfeedurl
-}
+
+$dest_nuspec = Join-Path "d:\VisiosCSharpSamplesBuild" "VisioCSharpSamples.nuspec"
+copy $nuspecfilname $dest_nuspec 
+
+$old_location = Get-Location
+Set-Location "d:\VisiosCSharpSamplesBuild"
+&$nuget_exe pack $dest_nuspec -Verbose
+Set-Location $old_location
 
 # Remove the packaging folder
 remove-item -Recurse -Force $packaging_folder 
