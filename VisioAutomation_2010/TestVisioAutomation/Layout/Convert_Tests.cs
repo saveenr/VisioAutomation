@@ -9,6 +9,13 @@ namespace TestVisioAutomation
     public class Convert_Tests : VisioAutomationTest
     {
         [TestMethod]
+        public void TestConversions()
+        {
+            this.TestBoolToShortConversion();
+            this.Test_FormulaStringToString();
+            this.Test_StringToFormulaString();
+        }
+
         public void TestBoolToShortConversion()
         {
             Assert.AreEqual(1, VisioAutomation.Convert.BoolToShort(true));
@@ -18,7 +25,6 @@ namespace TestVisioAutomation
             Assert.AreEqual(false, VisioAutomation.Convert.ShortToBool(0));
         }
 
-        [TestMethod]
         public void Test_StringToFormulaString()
         {
             bool caught = false;
@@ -42,7 +48,6 @@ namespace TestVisioAutomation
             Assert.AreEqual("\" \"\"foo\"\" \"", VisioAutomation.Convert.StringToFormulaString(" \"foo\" "));
         }
 
-        [TestMethod]
         public void Test_FormulaStringToString()
         {
             bool caught = false;

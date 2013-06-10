@@ -154,6 +154,13 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void Verify_Grouping()
+        {
+            this.Verify_CellQuery_Grouping();
+            this.Verify_SectionQuery_Grouping();
+            this.Demo_SectionQuery_Grouping();
+        }
+
         public void Verify_CellQuery_Grouping()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
@@ -196,55 +203,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
-        public void Demo_CellQuery_Usage_for_Formulas_and_Results()
-        {
-            var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
-
-            // draw a simple shape
-            var s1 = page1.DrawRectangle(0, 0, 2, 2);
-            var s2 = page1.DrawRectangle(4, 4, 6, 6);
-            var s3 = page1.DrawRectangle(5, 5, 7, 7);
-
-            var shapeids = new List<int> { s1.ID, s2.ID, s3.ID };
-
-            Assert.AreEqual(3, page1.Shapes.Count);
-
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
-            var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
-
-            var r = query.GetFormulasAndResults<double>(page1, shapeids);
-
-            var expected_formulas = new [,]
-                                      {
-                                          {"1 in", "1 in"},
-                                          {"5 in", "5 in"},
-                                          {"6 in", "6 in"}
-                                      };
-
-            var expected_results = new [,]
-                                      {
-                                          {1.0, 1.0},
-                                          {5.0, 5.0},
-                                          {6.0, 6.0}
-                                      };
-
-
-            for (int row = 0; row < r.RowCount; row++)
-            {
-                for (int col = 0; col < r.ColumnCount; col++)
-                {
-                    Assert.AreEqual(expected_formulas[row, col], r[row, col].Formula);
-                    Assert.AreEqual(expected_results[row, col], r[row, col].Result);
-                }
-            }
-
-            page1.Delete(0);
-        }
-
-
-        [TestMethod]
         public void Demo_SectionQuery_Grouping()
         {
             var page1 = GetNewPage();
@@ -292,7 +250,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void Verify_SectionQuery_Grouping()
         {
             var page1 = GetNewPage();
@@ -316,6 +273,54 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
+
+        [TestMethod]
+        public void Demo_CellQuery_Usage_for_Formulas_and_Results()
+        {
+            var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
+
+            // draw a simple shape
+            var s1 = page1.DrawRectangle(0, 0, 2, 2);
+            var s2 = page1.DrawRectangle(4, 4, 6, 6);
+            var s3 = page1.DrawRectangle(5, 5, 7, 7);
+
+            var shapeids = new List<int> { s1.ID, s2.ID, s3.ID };
+
+            Assert.AreEqual(3, page1.Shapes.Count);
+
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
+            var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
+
+            var r = query.GetFormulasAndResults<double>(page1, shapeids);
+
+            var expected_formulas = new[,]
+                                      {
+                                          {"1 in", "1 in"},
+                                          {"5 in", "5 in"},
+                                          {"6 in", "6 in"}
+                                      };
+
+            var expected_results = new[,]
+                                      {
+                                          {1.0, 1.0},
+                                          {5.0, 5.0},
+                                          {6.0, 6.0}
+                                      };
+
+
+            for (int row = 0; row < r.RowCount; row++)
+            {
+                for (int col = 0; col < r.ColumnCount; col++)
+                {
+                    Assert.AreEqual(expected_formulas[row, col], r[row, col].Formula);
+                    Assert.AreEqual(expected_results[row, col], r[row, col].Result);
+                }
+            }
+
+            page1.Delete(0);
+        }
+
 
         private static VA.ShapeSheet.Query.CellQuery BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
         {

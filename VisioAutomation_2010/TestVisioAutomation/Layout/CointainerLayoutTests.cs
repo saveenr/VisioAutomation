@@ -41,7 +41,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DrawContainers()
+        public void DrawContainerLayouts()
         {
             this.DrawContainer1();
             this.DrawContainer2();
