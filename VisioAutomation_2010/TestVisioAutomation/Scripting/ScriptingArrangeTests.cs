@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class ScriptingArrangeTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Arrangement_Tests()
+        public void Scripting_Arrangement_Scenarios()
         {
             this.Scripting_Distribute();
             this.Scripting_Nudge();

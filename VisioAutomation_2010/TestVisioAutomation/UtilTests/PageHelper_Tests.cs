@@ -10,6 +10,12 @@ namespace TestVisioAutomation
     public class PageHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
+        public void PageScenarios()
+        {
+            this.PageOrientation();
+            this.DuplicatePage();
+        }
+
         public void PageOrientation()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
@@ -32,7 +38,6 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        [TestMethod]
         public void DuplicatePage()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));

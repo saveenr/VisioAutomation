@@ -8,7 +8,7 @@ namespace TestVisioAutomation
     public class ScriptingSelectionTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Test_Selection()
+        public void Scripting_Selection_Scenarios()
         {
             var ss = GetScriptingSession();
 

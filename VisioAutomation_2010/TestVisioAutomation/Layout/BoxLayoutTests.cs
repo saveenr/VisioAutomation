@@ -9,6 +9,13 @@ namespace TestVisioAutomation
     public class BoxLayoutTests : VisioAutomationTest
     {
         [TestMethod]
+        public void Test_BoxLayoutScenarios()
+        {
+            this.Test_empty();
+            this.Test_single_node();
+            this.Test_single_node_padding();
+        }
+
         public void Test_empty()
         {
             var layout = new BoxL.BoxLayout();
@@ -32,7 +39,6 @@ namespace TestVisioAutomation
             }
         }
 
-        [TestMethod]
         public void Test_single_node()
         {
             var layout = new BoxL.BoxLayout();
@@ -51,7 +57,6 @@ namespace TestVisioAutomation
             
         }
 
-        [TestMethod]
         public void Test_single_node_padding()
         {
             var layout = new BoxL.BoxLayout();

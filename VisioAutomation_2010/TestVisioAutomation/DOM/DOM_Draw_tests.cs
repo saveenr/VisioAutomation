@@ -21,6 +21,13 @@ namespace TestVisioAutomation
             return drawings.Count();
         }
 
+        public void DOM_Render_Scenarios()
+        {
+            this.Empty_DOM_Rendering();
+            this.Render_Page_To_Document();
+            this.Render_Document_To_App();
+        }
+
         public void Empty_DOM_Rendering()
         {
             // Rendering a DOM should not change the page count
@@ -46,7 +53,6 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
-        [TestMethod]
         public void Render_Document_To_App()
         {
             // Rendering a dom document to an appliction instance should create a new document

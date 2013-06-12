@@ -9,28 +9,29 @@ namespace TestVisioAutomation
     public class ScriptingSessionTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_DevDocumentationAll()
+        public void Scripting_DevDocumentationScenarios
+            ()
         {
-            this.Scripting_DevDocumentation();
-            this.Scripting_DevDocumentation2();
+            this.DrawVAScriptingAPIDiagram();
+            this.DrawVANamespaceDiagram();
         }
 
-        public void Scripting_DevDocumentation()
+        public void DrawVAScriptingAPIDiagram()
         {
             var ss = GetScriptingSession();
             var doc= ss.Developer.DrawScriptingDocumentation();
             doc.Close(true);
         }
 
-        public void Scripting_DevDocumentation2()
+        public void DrawVANamespaceDiagram()
         {
             var ss = GetScriptingSession();
             var doc = ss.Developer.DrawNamespaces();
-            //doc.Close(true);
+            doc.Close(true);
         }
 
         [TestMethod]
-        public void Scripting_Test_Has_Star()
+        public void Scripting_CanCloseUnsavedDrawings()
         {
             var ss = GetScriptingSession();
             ss.Document.CloseAllWithoutSaving();

@@ -8,10 +8,11 @@ namespace TestVisioAutomation
     public class ScriptingApplicationTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Test_Resize_Application_Window()
+        public void Scripting_Test_Application_Window()
         {
             this.Scripting_Test_Resize_Application_Window1();
             this.Scripting_Test_Resize_Application_Window2();
+            this.Scripting_Test_App_to_Front();
         }
 
         public void Scripting_Test_Resize_Application_Window1()
@@ -48,7 +49,6 @@ namespace TestVisioAutomation
             ss.Document.CloseAllWithoutSaving();
         }
 
-        [TestMethod]
         public void Scripting_Test_App_to_Front()
         {
             var ss = GetScriptingSession();
@@ -56,7 +56,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_Test_Undo()
+        public void Scripting_Undo_Scenarios()
         {
             var ss = GetScriptingSession();
             var drawing = ss.Document.New(8.5, 11);
@@ -70,7 +70,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_Test_close_all()
+        public void Scripting_CloseDocument_Scenarios()
         {
             var ss = GetScriptingSession();
             var doc1 = ss.Document.New(10, 5);

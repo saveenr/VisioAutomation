@@ -7,7 +7,7 @@ namespace TestVisioAutomation
     public class ScriptingConnectionPointTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_ConnectionPoints_Scenario_0()
+        public void Scripting_ConnectionPoints_Scenarios()
         {
             var ss = GetScriptingSession();
             ss.Document.New();

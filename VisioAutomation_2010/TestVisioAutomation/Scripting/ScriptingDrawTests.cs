@@ -11,11 +11,27 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_ComplexShapes()
         {
-            this.Scripting_Draw_DataTable_0();
-            this.Scripting_Draw_Grid();
+            this.DrawOrgChart();
+            this.DrawDataTable();
+            this.DrawGrid();
+        }
+        
+        public void DrawOrgChart()
+        {
+            var ss = GetScriptingSession();
+            draw_org_chart(ss, TestVisioAutomation.Properties.Resources.sampleorgchart1);
+            ss.Document.Close(true);
+            VA.Documents.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
         }
 
-        public void Scripting_Draw_DataTable_0()
+        private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)
+        {
+            var xmldoc = SXL.XDocument.Parse(text);
+            var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, xmldoc);
+            scriptingsession.Draw.OrgChart(orgchart);
+        }
+
+        public void DrawDataTable()
         {
             var ss = GetScriptingSession();
             ss.Document.New();
@@ -48,7 +64,7 @@ namespace TestVisioAutomation
             ss.Document.Close(true);
         }
 
-        public void Scripting_Draw_Grid()
+        public void DrawGrid()
         {
             var ss = GetScriptingSession();
             ss.Document.New();
@@ -74,8 +90,8 @@ namespace TestVisioAutomation
         public void Scripting_Draw_Shapes()
         {
             this.Scripting_Draw_BezierPolyLine_0();
-            this.Scripting_Draw_DataTable_0();
-            this.Scripting_Draw_Grid();
+            this.DrawDataTable();
+            this.DrawGrid();
             this.Scripting_Draw_PieSlice();
             this.Scripting_Draw_PieSlices();
             this.Scripting_Draw_RectangleLineOval_0();
@@ -143,7 +159,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_DirectedGraph_Tests()
+        public void Scripting_DirectedGraph_Scenarios()
         {
             this.Scripting_DirectedGraph1();
             this.Scripting_DirectedGraph2();
@@ -187,25 +203,9 @@ namespace TestVisioAutomation
             scriptingsession.Draw.DirectedGraph(dg_model);
         }
 
-        [TestMethod]
-        public void Scripting_Orgchart()
-        {
-            var ss = GetScriptingSession();
-            draw_org_chart(ss, TestVisioAutomation.Properties.Resources.sampleorgchart1);
-            ss.Document.Close(true);
-            VA.Documents.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
-        }
-
-        private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)
-        {
-            var xmldoc = SXL.XDocument.Parse(text);
-            var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, xmldoc);
-            scriptingsession.Draw.OrgChart(orgchart);
-        }
-
 
         [TestMethod]
-        public void Scripting_DropMaster_Tests()
+        public void Scripting_DropShapes_Scenarios()
         {
             this.Scripting_DropMany();
             this.Scripting_DropMaster();
