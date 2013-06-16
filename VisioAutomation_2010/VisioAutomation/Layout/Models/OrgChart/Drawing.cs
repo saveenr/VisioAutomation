@@ -7,7 +7,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
 {
     public class Drawing
     {
-        public List<Node> OrgCharts { get; set; }
+        public List<Node> OrgCharts { get; private set; }
 
         public Drawing()
         {
