@@ -93,7 +93,7 @@ namespace VisioAutomation.Scripting.Commands
                     // application object is invalid
                     return false;
                 }
-                catch (System.Exception exc)
+                catch (System.Exception)
                 {
                     this.Session.WriteVerbose("An exception besides COMException was thrown");
                     // just re-raise it.

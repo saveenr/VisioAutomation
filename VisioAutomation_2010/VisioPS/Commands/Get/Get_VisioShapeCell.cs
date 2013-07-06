@@ -21,7 +21,7 @@ namespace VisioPS.Commands
             "PinY", "Rounding", "SelectMode", "ShdwBkgnd", "ShdwBkgndTrans", "ShdwForegnd",
             "ShdwForegndTrans", "ShdwObliqueAngle", "ShdwOffsetX", "ShdwOffsetY", "ShdwPattern",
             "ShdwScalefactor", "ShdwType", "TxtAngle", "TxtHeight", "TxtLocPinX", "TxtLocPinY", "TxtPinX", 
-            "TxtPinY", "TxtWidth", "Width")]
+            "TxtPinY", "TxtWidth", "Width", "HideText")]
         public string[] Cells { get; set; }
         
         [SMA.Parameter(Mandatory = false)]
@@ -140,6 +140,8 @@ namespace VisioPS.Commands
                 dic_cellname_to_src["BeginArrowSize"] = VA.ShapeSheet.SRCConstants.BeginArrowSize;
                 dic_cellname_to_src["EndArrow"] = VA.ShapeSheet.SRCConstants.EndArrow;
                 dic_cellname_to_src["EndArrowSize"] = VA.ShapeSheet.SRCConstants.EndArrowSize;
+
+                dic_cellname_to_src["HideText"] = VA.ShapeSheet.SRCConstants.HideText;
 
             }
             return dic_cellname_to_src;

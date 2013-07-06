@@ -107,8 +107,10 @@ namespace VisioPS.Commands
         public string ShdwType { get; set; }
         [SMA.Parameter(Mandatory = false)]
         public string SelectMode { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
+        
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
@@ -168,6 +170,9 @@ namespace VisioPS.Commands
         public string TxtPinY { get; set; }
         [SMA.Parameter(Mandatory = false)]
         public string TxtWidth { get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
+        public string HideText { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
@@ -258,6 +263,9 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(id, SRCCON.TxtPinX, this.TxtPinX);
                 update.SetFormulaIgnoreNull(id, SRCCON.TxtPinY, this.TxtPinY);
                 update.SetFormulaIgnoreNull(id, SRCCON.TxtWidth, this.TxtWidth);
+
+                update.SetFormulaIgnoreNull(id, SRCCON.HideText, this.HideText);
+
             }
 
             var page = scriptingsession.Page.Get();

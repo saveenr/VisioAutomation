@@ -194,6 +194,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC NoObjHandles { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visNoObjHandles); } }
         public static SRC ObjType { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visLOFlags); } }
         public static SRC UpdateAlignBox { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visUpdateAlignBox); } }
+        public static SRC HideText { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visHideText); } }
 
         // 1d endpoints
         public static SRC BeginX { get { return new SRC(SEC.visSectionObject, ROW.visRowXForm1D, CEL.vis1DBeginX); } }
@@ -403,7 +404,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC EnableFillProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesFill); } }
         public static SRC EnableLineProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesLine); } }
         public static SRC EnableTextProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesText); } }
-        public static SRC HideText { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleHidden); } }
 
         //tabs
         public static SRC Tabs_Alignment { get { return new SRC(SEC.visSectionTab, ROW.visRowTab, CEL.visTabAlign); } }
