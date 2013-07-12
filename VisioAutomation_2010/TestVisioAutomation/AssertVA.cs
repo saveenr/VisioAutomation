@@ -43,5 +43,12 @@ namespace TestVisioAutomation
             Assert.AreEqual(result, cd.Result);
         }
 
+        public static void AreEqual<T>(string formula, T result, string af, T ar)
+        {
+            Assert.AreEqual(formula, af);
+            Assert.AreEqual(result, ar);
+        }
+
+
     }
 }

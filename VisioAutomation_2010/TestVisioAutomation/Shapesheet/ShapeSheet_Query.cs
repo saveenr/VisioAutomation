@@ -57,36 +57,40 @@ namespace TestVisioAutomation
             var src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
             var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddColumn(src_fg);
-            var col_bg = query.AddColumn(src_bg);
-            var col_filpat = query.AddColumn(src_filpat);
+            var query = new VA.ShapeSheet.Query.QueryEx();
+            var col_fg = query.AddCell(src_fg);
+            var col_bg = query.AddCell(src_bg);
+            var col_filpat = query.AddCell(src_filpat);
+            var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
+            int col_charcase  = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase);
+            int col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor);
+            int col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans);
 
             var shapeids = new[] {s1_id};
 
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("RGB(255,0,0)", formulas[0,col_fg]);
-            Assert.AreEqual("RGB(0,0,255)", formulas[0,col_bg]);
-            Assert.AreEqual("40", formulas[0,col_filpat]);
+            Assert.AreEqual("RGB(255,0,0)", formulas[0].Cells[col_fg]);
+            Assert.AreEqual("RGB(0,0,255)", formulas[0].Cells[col_bg]);
+            Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as floats
             var float_results = query.GetResults<double>(page1,shapeids);
             Assert.IsNotNull(float_results);
-            Assert.AreEqual(40.0, float_results[0,col_filpat]);
+            Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
-            Assert.AreEqual(40, int_results[0, col_filpat]);
+            Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as strings
 
             var string_results = query.GetResults<string>(page1,shapeids);
 
-            Assert.AreEqual("RGB(255, 0, 0)", string_results[0, col_fg]);
-            Assert.AreEqual("RGB(0, 0, 255)", string_results[0, col_bg]);
-            Assert.AreEqual("40", string_results[0, col_filpat]);
+            Assert.AreEqual("RGB(255, 0, 0)", string_results[0].Cells[col_fg]);
+            Assert.AreEqual("RGB(0, 0, 255)", string_results[0].Cells[col_bg]);
+            Assert.AreEqual("40", string_results[0].Cells[col_filpat]);
 
             page1.Delete(0);
             doc1.Close(true);
@@ -116,39 +120,39 @@ namespace TestVisioAutomation
 
             // now retrieve the formulas with GetFormulas
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddColumn(src_fg);
-            var col_bg = query.AddColumn(src_bg);
-            var col_filpat = query.AddColumn(src_filpat);
+            var query = new VA.ShapeSheet.Query.QueryEx();
+            var col_fg = query.AddCell(src_fg);
+            var col_bg = query.AddCell(src_bg);
+            var col_filpat = query.AddCell(src_filpat);
 
             var shapeids = new[] {s1_id};
 
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("2",  formulas[0,col_fg]);
-            Assert.AreEqual("3",  formulas[0,col_bg]);
-            Assert.AreEqual("40", formulas[0,col_filpat]);
+            Assert.AreEqual("2",  formulas[0].Cells[col_fg]);
+            Assert.AreEqual("3", formulas[0].Cells[col_bg]);
+            Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as floats
 
             var float_results = query.GetResults<double>(page1,shapeids);
-            Assert.AreEqual(2.0, float_results[0, col_fg]);
-            Assert.AreEqual(3.0, float_results[0, col_bg]);
-            Assert.AreEqual(40.0, float_results[0, col_filpat]);
+            Assert.AreEqual(2.0, float_results[0].Cells[col_fg]);
+            Assert.AreEqual(3.0, float_results[0].Cells[col_bg]);
+            Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
 
-            Assert.AreEqual(2, int_results[0, col_fg]);
-            Assert.AreEqual(3, int_results[0, col_bg]);
-            Assert.AreEqual(40, int_results[0, col_filpat]);
+            Assert.AreEqual(2, int_results[0].Cells[col_fg]);
+            Assert.AreEqual(3, int_results[0].Cells[col_bg]);
+            Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
 
             // now retrieve the results with GetResults as strings
             var string_results = query.GetResults<string>(page1,shapeids);
-            Assert.AreEqual("2", string_results[0, col_fg]);
-            Assert.AreEqual("3", string_results[0, col_bg]);
-            Assert.AreEqual("40", string_results[0, col_filpat]);
+            Assert.AreEqual("2", string_results[0].Cells[col_fg]);
+            Assert.AreEqual("3", string_results[0].Cells[col_bg]);
+            Assert.AreEqual("40", string_results[0].Cells[col_filpat]);
 
             page1.Delete(0);
         }
@@ -178,7 +182,7 @@ namespace TestVisioAutomation
             var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
             var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
 
-            var r = query.GetFormulasAndResults<double>(page1, shapeids);
+            var r = query.GetResults<double>(page1, shapeids);
 
             // Check the grouping
             Assert.AreEqual(shapeids.Count(), r.RowCount); // the total number of rows should match the number of shapeids
@@ -193,8 +197,8 @@ namespace TestVisioAutomation
             
             var range = Enumerable.Range(0, r.RowCount);
             var points = range.Select(row => new VA.Drawing.Point(
-                                                 r[row, col_pinx].Result,
-                                                 r[row, col_piny].Result));
+                                                 r[row, col_pinx],
+                                                 r[row, col_piny]));
             var actual_pinpos = new List<VA.Drawing.Point>(points);
 
             Assert.AreEqual(expected_pinpos[0], actual_pinpos[0]);
@@ -292,7 +296,8 @@ namespace TestVisioAutomation
             var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
             var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
 
-            var r = query.GetFormulasAndResults<double>(page1, shapeids);
+            var rf = query.GetFormulas(page1, shapeids);
+            var rr = query.GetResults<double>(page1, shapeids);
 
             var expected_formulas = new[,]
                                       {
@@ -309,12 +314,12 @@ namespace TestVisioAutomation
                                       };
 
 
-            for (int row = 0; row < r.RowCount; row++)
+            for (int row = 0; row < rr.RowCount; row++)
             {
-                for (int col = 0; col < r.ColumnCount; col++)
+                for (int col = 0; col < rr.ColumnCount; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row, col], r[row, col].Formula);
-                    Assert.AreEqual(expected_results[row, col], r[row, col].Result);
+                    Assert.AreEqual(expected_formulas[row, col], rf[row, col]);
+                    Assert.AreEqual(expected_results[row, col], rr[row, col]);
                 }
             }
 

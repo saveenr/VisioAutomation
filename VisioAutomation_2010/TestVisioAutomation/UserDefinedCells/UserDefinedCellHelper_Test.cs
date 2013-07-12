@@ -10,20 +10,6 @@ namespace TestVisioAutomation
     public class UserDefinedCellHelper_Test : VisioAutomationTest
     {
         [TestMethod]
-        public void UserDefinedCellsScenarios()
-        {
-            this.DetectInvalidUserDefinedCellNames();
-            this.GetUserDefinedCellNames();
-            this.GetUserDefinedCellsForMultipleShapes();
-            this.InvalidUserDefinedCellNameNotAllowed();
-            this.SetAdditionalPropertiesOnUserDefinedCells();
-            this.SetUserDefinedCellMultipleTimes();
-            this.SetUserDefinedCellsForMultipleShapes();
-            this.UserDefinedCellsScenario1();
-            this.VerifyQuotingForUserDefinedCells();
-        }
-
-
         public void UserDefinedCellsScenario1()
         {
             var page1 = GetNewPage();
@@ -51,6 +37,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void GetUserDefinedCellsForMultipleShapes()
         {
             var page1 = GetNewPage();
@@ -58,11 +45,6 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var s2 = page1.DrawRectangle(1, 1, 2, 2);
             var shapes = new[] { s1, s2 };
-
-            var props = VA.UserDefinedCells.UserDefinedCellsHelper.Get(page1, shapes);
-            Assert.AreEqual(2, props.Count);
-            Assert.AreEqual(0, props[0].Count);
-            Assert.AreEqual(0, props[1].Count);
 
             VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "foo", "bar", null);
             var props1 = VA.UserDefinedCells.UserDefinedCellsHelper.Get(page1, shapes);
@@ -73,6 +55,29 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
+        public void GetUserDefinedCellsForMultipleShapes_2()
+        {
+            var page1 = GetNewPage();
+
+            var s1 = page1.DrawRectangle(0, 0, 1, 1);
+            var s2 = page1.DrawRectangle(1, 1, 2, 2);
+            var shapes = new[] { s1, s2 };
+
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "foo", "bar", null);
+
+            var queryex = new VA.ShapeSheet.Query.QueryEx();
+            var sec=queryex.AddSection(IVisio.VisSectionIndices.visSectionUser);
+            int Value = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Value, "Value");
+            int Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
+
+            var formulas = queryex.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
+
+
+            page1.Delete(0);
+        }
+
+        [TestMethod]
         public void SetUserDefinedCellMultipleTimes()
         {
             var page1 = GetNewPage();
@@ -101,6 +106,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void DetectInvalidUserDefinedCellNames()
         {
             if (VA.UserDefinedCells.UserDefinedCellsHelper.IsValidName("A") == false)
@@ -124,6 +130,7 @@ namespace TestVisioAutomation
             }
         }
 
+        [TestMethod]
         public void InvalidUserDefinedCellNameNotAllowed()
         {
             bool caught = false;
@@ -146,6 +153,7 @@ namespace TestVisioAutomation
             }
         }
 
+        [TestMethod]
         public void SetAdditionalPropertiesOnUserDefinedCells()
         {
             var page1 = GetNewPage();
@@ -159,6 +167,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void GetUserDefinedCellNames()
         {
             var page1 = GetNewPage();
@@ -199,6 +208,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void SetUserDefinedCellsForMultipleShapes()
         {
             var page1 = GetNewPage();
@@ -207,12 +217,12 @@ namespace TestVisioAutomation
             var s3 = page1.DrawRectangle(0, 0, 2, 2);
             var s4 = page1.DrawRectangle(0, 0, 2, 2);
 
-            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "FOO1", "1", null);
-            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s2, "FOO2", "2", null);
-            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s2, "FOO3", "3", null);
-            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s4, "FOO4", "4", null);
-            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s4, "FOO5", "5", null);
-            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s4, "FOO6", "6", null);
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "FOO1", "1", "p1");
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s2, "FOO2", "2", "p2");
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s2, "FOO3", "3", "p3");
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s4, "FOO4", "4", "p4");
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s4, "FOO5", "5", "p4");
+            VA.UserDefinedCells.UserDefinedCellsHelper.Set(s4, "FOO6", "6", "p6");
 
             var shapeids = new[] {s1, s2, s3, s4};
             var allprops = VA.UserDefinedCells.UserDefinedCellsHelper.Get(page1, shapeids);
@@ -232,6 +242,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void VerifyQuotingForUserDefinedCells()
         {
             var page1 = GetNewPage();
