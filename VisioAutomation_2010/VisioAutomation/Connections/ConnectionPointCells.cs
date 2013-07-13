@@ -6,7 +6,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Connections
 {
-    public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupMultiRowEx
+    public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<double> X { get; set; }
         public VA.ShapeSheet.CellData<double> Y { get; set; }

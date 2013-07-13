@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells : VA.ShapeSheet.CellGroups.CellGroupMultiRowEx
+    public class ParagraphFormatCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         ////public string BulletString;
         public VA.ShapeSheet.CellData<double> IndentFirst { get; set; }

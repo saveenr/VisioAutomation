@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.CustomProperties
 {
-    public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRowEx
+    public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<double> Value{ get; set; }
         public VA.ShapeSheet.CellData<double> Prompt { get; set; }

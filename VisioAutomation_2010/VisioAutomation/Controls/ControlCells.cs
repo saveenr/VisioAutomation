@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Controls
 {
-    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupMultiRowEx
+    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<int> CanGlue { get; set; }
         public VA.ShapeSheet.CellData<int> Tip { get; set; }
