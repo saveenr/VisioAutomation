@@ -11,45 +11,39 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             public short SectionIndex { get; private set; }
             public List<short> CellIndexes { get; private set; }
+            public int Ordinal;
 
-            public SectionSubQuery(short section)
+            public SectionSubQuery(int ordinal,short section)
             {
+                this.Ordinal = ordinal;
                 this.SectionIndex = section;
                 this.CellIndexes = new List<short>();
             }
-            public SectionSubQuery(short section, IEnumerable<short> cells) :
-                this(section)
+            public SectionSubQuery(int ordinal, short section, IEnumerable<short> cells) :
+                this(ordinal,section)
             {
                 this.CellIndexes.AddRange(cells);
             }
 
-            public int AddCell(SRC src)
+            public static implicit operator int(SectionSubQuery m)
             {
-                int ordinal = this.CellIndexes.Count;
-                this.CellIndexes.Add(src.Cell);
-                return ordinal;
+                return m.Ordinal;
             }
 
-            public int AddCell(SRC src, string name)
+
+            public QueryColumn AddColumn(SRC src, string name)
             {
                 int ordinal = this.CellIndexes.Count;
                 this.CellIndexes.Add(src.Cell);
-                return ordinal;
+                return new QueryColumn(ordinal,src,name);
             }
 
-            public int AddColumn(SRC src, string name)
-            {
-                int ordinal = this.CellIndexes.Count;
-                this.CellIndexes.Add(src.Cell);
-                return ordinal;
-            }
-            public int AddColumn(short cell, string name)
+            public QueryColumn AddColumn(short cell, string name)
             {
                 int ordinal = this.CellIndexes.Count;
                 this.CellIndexes.Add(cell);
-                return ordinal;
+                return new QueryColumn(ordinal, cell, name);
             }
-
 
         }
 
@@ -80,24 +74,21 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public int AddColumn(SRC src)
+        public QueryColumn AddColumn(SRC src)
         {
             CheckNotFrozen();
             int ordinal = this.Cells.Count;
+            var col = new QueryColumn(ordinal, src, null);
             this.Cells.Add(src);
-            return ordinal;
+            return col;
         }
-        public int AddColumn(SRC src,string name)
+        public QueryColumn AddColumn(SRC src,string name)
         {
             CheckNotFrozen();
             int ordinal = this.Cells.Count;
+            var col = new QueryColumn(ordinal, src, null);
             this.Cells.Add(src);
-            return ordinal;
-        }
-
-        public int AddColumn2(SRC src, string name)
-        {
-            return this.AddColumn(src);
+            return col;
         }
 
         public int AddSection(IVisio.VisSectionIndices section, IList<SRC> srcs)
@@ -107,7 +98,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             // Add error checking for section index
             // Add error checking for cell index
-            var sec = new SectionSubQuery((short)section, srcs.Select(i => i.Cell));
+
+            var sec = new SectionSubQuery(ordinal,(short)section, srcs.Select(i => i.Cell));
             this.Sections.Add(sec);
             return ordinal;
         }
@@ -118,7 +110,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int ordinal = this.Sections.Count;
             // Add error checking for section index
             // Add error checking for cell index
-            var sec = new SectionSubQuery((short)section);
+            var sec = new SectionSubQuery(ordinal,(short)section);
             this.Sections.Add(sec);
             return sec;
         }

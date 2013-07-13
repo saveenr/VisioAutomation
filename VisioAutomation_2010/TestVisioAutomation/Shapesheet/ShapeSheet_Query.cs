@@ -62,9 +62,9 @@ namespace TestVisioAutomation
             var col_bg = query.AddColumn(src_bg);
             var col_filpat = query.AddColumn(src_filpat);
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
-            int col_charcase  = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase);
-            int col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor);
-            int col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans);
+            int col_charcase  = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharCase,"Case");
+            int col_charcolor = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColor, "Color");
+            int col_chartrans = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");
 
             var shapeids = new[] {s1_id};
 

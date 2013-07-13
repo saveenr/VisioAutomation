@@ -86,60 +86,60 @@ namespace VisioAutomation.Format
 
         class ShapeFormatQuery : VA.ShapeSheet.Query.QueryEx
         {
-            public int FillBkgnd { get; set; }
-            public int FillBkgndTrans { get; set; }
-            public int FillForegnd { get; set; }
-            public int FillForegndTrans { get; set; }
-            public int FillPattern { get; set; }
-            public int ShapeShdwObliqueAngle { get; set; }
-            public int ShapeShdwOffsetX { get; set; }
-            public int ShapeShdwOffsetY { get; set; }
-            public int ShapeShdwScaleFactor { get; set; }
-            public int ShapeShdwType { get; set; }
-            public int ShdwBkgnd { get; set; }
-            public int ShdwBkgndTrans { get; set; }
-            public int ShdwForegnd { get; set; }
-            public int ShdwForegndTrans { get; set; }
-            public int ShdwPattern { get; set; }
-            public int BeginArrow { get; set; }
-            public int BeginArrowSize { get; set; }
-            public int EndArrow { get; set; }
-            public int EndArrowSize { get; set; }
-            public int LineColor { get; set; }
-            public int LineCap { get; set; }
-            public int LineColorTrans { get; set; }
-            public int LinePattern { get; set; }
-            public int LineWeight { get; set; }
-            public int Rounding { get; set; }
+            public QueryColumn FillBkgnd { get; set; }
+            public QueryColumn FillBkgndTrans { get; set; }
+            public QueryColumn FillForegnd { get; set; }
+            public QueryColumn FillForegndTrans { get; set; }
+            public QueryColumn FillPattern { get; set; }
+            public QueryColumn ShapeShdwObliqueAngle { get; set; }
+            public QueryColumn ShapeShdwOffsetX { get; set; }
+            public QueryColumn ShapeShdwOffsetY { get; set; }
+            public QueryColumn ShapeShdwScaleFactor { get; set; }
+            public QueryColumn ShapeShdwType { get; set; }
+            public QueryColumn ShdwBkgnd { get; set; }
+            public QueryColumn ShdwBkgndTrans { get; set; }
+            public QueryColumn ShdwForegnd { get; set; }
+            public QueryColumn ShdwForegndTrans { get; set; }
+            public QueryColumn ShdwPattern { get; set; }
+            public QueryColumn BeginArrow { get; set; }
+            public QueryColumn BeginArrowSize { get; set; }
+            public QueryColumn EndArrow { get; set; }
+            public QueryColumn EndArrowSize { get; set; }
+            public QueryColumn LineColor { get; set; }
+            public QueryColumn LineCap { get; set; }
+            public QueryColumn LineColorTrans { get; set; }
+            public QueryColumn LinePattern { get; set; }
+            public QueryColumn LineWeight { get; set; }
+            public QueryColumn Rounding { get; set; }
 
             public ShapeFormatQuery()
             {
-                this.FillBkgnd = this.AddColumn2(VA.ShapeSheet.SRCConstants.FillBkgnd, "FillBkgnd");
-                this.FillBkgndTrans = this.AddColumn2(VA.ShapeSheet.SRCConstants.FillBkgndTrans, "FillBkgndTrans");
-                this.FillForegnd = this.AddColumn2(VA.ShapeSheet.SRCConstants.FillForegnd, "FillForegnd");
-                this.FillForegndTrans = this.AddColumn2(VA.ShapeSheet.SRCConstants.FillForegndTrans, "FillForegndTrans");
-                this.FillPattern = this.AddColumn2(VA.ShapeSheet.SRCConstants.FillPattern, "FillPattern");
-                this.ShapeShdwObliqueAngle = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, "ShapeShdwObliqueAngle");
-                this.ShapeShdwOffsetX = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShapeShdwOffsetX, "ShapeShdwOffsetX");
-                this.ShapeShdwOffsetY = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShapeShdwOffsetY, "ShapeShdwOffsetY");
-                this.ShapeShdwScaleFactor = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShapeShdwScaleFactor, "ShapeShdwScaleFactor");
-                this.ShapeShdwType = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShapeShdwType, "ShapeShdwType");
-                this.ShdwBkgnd = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShdwBkgnd, "ShdwBkgnd ");
-                this.ShdwBkgndTrans = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShdwBkgndTrans, "ShdwBkgndTrans");
-                this.ShdwForegnd = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShdwForegnd, "ShdwForegnd ");
-                this.ShdwForegndTrans = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShdwForegndTrans, "ShdwForegndTrans");
-                this.ShdwPattern = this.AddColumn2(VA.ShapeSheet.SRCConstants.ShdwPattern, "ShdwPattern");
+                this.FillBkgnd = this.AddColumn(VA.ShapeSheet.SRCConstants.FillBkgnd, "FillBkgnd");
+                this.FillBkgndTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.FillBkgndTrans, "FillBkgndTrans");
+                this.FillForegnd = this.AddColumn(VA.ShapeSheet.SRCConstants.FillForegnd, "FillForegnd");
+                this.FillForegndTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.FillForegndTrans, "FillForegndTrans");
+                this.FillPattern = this.AddColumn(VA.ShapeSheet.SRCConstants.FillPattern, "FillPattern");
+                this.ShapeShdwObliqueAngle = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, "ShapeShdwObliqueAngle");
+                this.ShapeShdwOffsetX = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeShdwOffsetX, "ShapeShdwOffsetX");
+                this.ShapeShdwOffsetY = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeShdwOffsetY, "ShapeShdwOffsetY");
+                this.ShapeShdwScaleFactor = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeShdwScaleFactor, "ShapeShdwScaleFactor");
+                this.ShapeShdwType = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeShdwType, "ShapeShdwType");
+                this.ShdwBkgnd = this.AddColumn(VA.ShapeSheet.SRCConstants.ShdwBkgnd, "ShdwBkgnd ");
+                this.ShdwBkgndTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.ShdwBkgndTrans, "ShdwBkgndTrans");
+                this.ShdwForegnd = this.AddColumn(VA.ShapeSheet.SRCConstants.ShdwForegnd, "ShdwForegnd ");
+                this.ShdwForegndTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.ShdwForegndTrans, "ShdwForegndTrans");
+                this.ShdwPattern = this.AddColumn(VA.ShapeSheet.SRCConstants.ShdwPattern, "ShdwPattern");
 
-                this.BeginArrow = this.AddColumn2(VA.ShapeSheet.SRCConstants.BeginArrow, "BeginArrow");
-                this.BeginArrowSize = this.AddColumn2(VA.ShapeSheet.SRCConstants.BeginArrowSize, "BeginArrowSize");
-                this.EndArrow = this.AddColumn2(VA.ShapeSheet.SRCConstants.EndArrow, "EndArrow ");
-                this.EndArrowSize = this.AddColumn2(VA.ShapeSheet.SRCConstants.EndArrowSize, "EndArrowSize");
-                this.LineColor = this.AddColumn2(VA.ShapeSheet.SRCConstants.LineColor, "LineColor");
-                this.LineCap = this.AddColumn2(VA.ShapeSheet.SRCConstants.LineCap, "LineCap");
-                this.LineColorTrans = this.AddColumn2(VA.ShapeSheet.SRCConstants.LineColorTrans, "LineColorTrans");
-                this.LinePattern = this.AddColumn2(VA.ShapeSheet.SRCConstants.LinePattern, "LinePattern");
-                this.LineWeight = this.AddColumn2(VA.ShapeSheet.SRCConstants.LineWeight, "LineWeight");
-                this.Rounding = this.AddColumn2(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
+                this.BeginArrow = this.AddColumn(VA.ShapeSheet.SRCConstants.BeginArrow, "BeginArrow");
+                this.BeginArrowSize = this.AddColumn(VA.ShapeSheet.SRCConstants.BeginArrowSize, "BeginArrowSize");
+                this.EndArrow = this.AddColumn(VA.ShapeSheet.SRCConstants.EndArrow, "EndArrow ");
+                this.EndArrowSize = this.AddColumn(VA.ShapeSheet.SRCConstants.EndArrowSize, "EndArrowSize");
+                this.LineColor = this.AddColumn(VA.ShapeSheet.SRCConstants.LineColor, "LineColor");
+                this.LineCap = this.AddColumn(VA.ShapeSheet.SRCConstants.LineCap, "LineCap");
+                this.LineColorTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.LineColorTrans, "LineColorTrans");
+                this.LinePattern = this.AddColumn(VA.ShapeSheet.SRCConstants.LinePattern, "LinePattern");
+                this.LineWeight = this.AddColumn(VA.ShapeSheet.SRCConstants.LineWeight, "LineWeight");
+                this.Rounding = this.AddColumn(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
             }
 
             public ShapeFormatCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
@@ -147,31 +147,31 @@ namespace VisioAutomation.Format
                 var row = data_for_shape.Cells;
 
                 var cells = new ShapeFormatCells();
-                cells.FillBkgnd = row[ this.FillBkgnd].ToInt();
-                cells.FillBkgndTrans = row[ this.FillBkgndTrans];
-                cells.FillForegnd = row[ this.FillForegnd].ToInt();
-                cells.FillForegndTrans = row[ this.FillForegndTrans];
-                cells.FillPattern = row[ this.FillPattern].ToInt();
-                cells.ShapeShdwObliqueAngle = row[ this.ShapeShdwObliqueAngle];
-                cells.ShapeShdwOffsetX = row[ this.ShapeShdwOffsetX];
-                cells.ShapeShdwOffsetY = row[ this.ShapeShdwOffsetY];
-                cells.ShapeShdwScaleFactor = row[ this.ShapeShdwScaleFactor];
-                cells.ShapeShdwType = row[ this.ShapeShdwType].ToInt();
-                cells.ShdwBkgnd = row[ this.ShdwBkgnd].ToInt();
-                cells.ShdwBkgndTrans = row[ this.ShdwBkgndTrans];
-                cells.ShdwForegnd = row[ this.ShdwForegnd].ToInt();
-                cells.ShdwForegndTrans = row[ this.ShdwForegndTrans];
-                cells.ShdwPattern = row[ this.ShdwPattern].ToInt();
-                cells.BeginArrow = row[ this.BeginArrow].ToInt();
-                cells.BeginArrowSize = row[ this.BeginArrowSize];
-                cells.EndArrow = row[ this.EndArrow].ToInt();
-                cells.EndArrowSize = row[ this.EndArrowSize];
-                cells.LineCap = row[ this.LineCap].ToInt();
-                cells.LineColor = row[ this.LineColor].ToInt();
-                cells.LineColorTrans = row[ this.LineColorTrans];
-                cells.LinePattern = row[ this.LinePattern].ToInt();
-                cells.LineWeight = row[ this.LineWeight];
-                cells.Rounding = row[ this.Rounding];
+                cells.FillBkgnd = row[ this.FillBkgnd.Ordinal].ToInt();
+                cells.FillBkgndTrans = row[ this.FillBkgndTrans.Ordinal];
+                cells.FillForegnd = row[ this.FillForegnd.Ordinal].ToInt();
+                cells.FillForegndTrans = row[ this.FillForegndTrans.Ordinal];
+                cells.FillPattern = row[ this.FillPattern.Ordinal].ToInt();
+                cells.ShapeShdwObliqueAngle = row[ this.ShapeShdwObliqueAngle.Ordinal];
+                cells.ShapeShdwOffsetX = row[ this.ShapeShdwOffsetX.Ordinal];
+                cells.ShapeShdwOffsetY = row[ this.ShapeShdwOffsetY.Ordinal];
+                cells.ShapeShdwScaleFactor = row[ this.ShapeShdwScaleFactor.Ordinal];
+                cells.ShapeShdwType = row[ this.ShapeShdwType.Ordinal].ToInt();
+                cells.ShdwBkgnd = row[ this.ShdwBkgnd.Ordinal].ToInt();
+                cells.ShdwBkgndTrans = row[ this.ShdwBkgndTrans.Ordinal];
+                cells.ShdwForegnd = row[ this.ShdwForegnd.Ordinal].ToInt();
+                cells.ShdwForegndTrans = row[ this.ShdwForegndTrans.Ordinal];
+                cells.ShdwPattern = row[ this.ShdwPattern.Ordinal].ToInt();
+                cells.BeginArrow = row[ this.BeginArrow.Ordinal].ToInt();
+                cells.BeginArrowSize = row[ this.BeginArrowSize.Ordinal];
+                cells.EndArrow = row[ this.EndArrow.Ordinal].ToInt();
+                cells.EndArrowSize = row[ this.EndArrowSize.Ordinal];
+                cells.LineCap = row[ this.LineCap.Ordinal].ToInt();
+                cells.LineColor = row[ this.LineColor.Ordinal].ToInt();
+                cells.LineColorTrans = row[ this.LineColorTrans.Ordinal];
+                cells.LinePattern = row[ this.LinePattern.Ordinal].ToInt();
+                cells.LineWeight = row[ this.LineWeight.Ordinal];
+                cells.Rounding = row[ this.Rounding.Ordinal];
                 return cells;
             }
 

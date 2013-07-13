@@ -68,8 +68,8 @@ namespace TestVisioAutomation
 
             var queryex = new VA.ShapeSheet.Query.QueryEx();
             var sec=queryex.AddSection(IVisio.VisSectionIndices.visSectionUser);
-            int Value = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Value, "Value");
-            int Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
+            int Value = sec.AddColumn(VA.ShapeSheet.SRCConstants.User_Value, "Value");
+            int Prompt = sec.AddColumn(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
 
             var formulas = queryex.GetFormulas(page1, shapes.Select(s => s.ID).ToList());
 

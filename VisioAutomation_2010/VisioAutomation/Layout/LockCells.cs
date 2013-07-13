@@ -78,76 +78,75 @@ namespace VisioAutomation.Layout
 
         class LockQuery : VA.ShapeSheet.Query.QueryEx
         {
-            public int LockAspect { get; set; }
-            public int LockBegin { get; set; }
-            public int LockCalcWH { get; set; }
-            public int LockCrop { get; set; }
-            public int LockCustProp { get; set; }
-            public int LockDelete { get; set; }
-            public int LockEnd { get; set; }
-            public int LockFormat { get; set; }
-            public int LockFromGroupFormat { get; set; }
-            public int LockGroup { get; set; }
-            public int LockHeight { get; set; }
-            public int LockMoveX { get; set; }
-            public int LockMoveY { get; set; }
-            public int LockRotate { get; set; }
-            public int LockSelect { get; set; }
-            public int LockTextEdit { get; set; }
-            public int LockThemeColors { get; set; }
-            public int LockThemeEffects { get; set; }
-            public int LockVtxEdit { get; set; }
-            public int LockWidth { get; set; }
+            public QueryColumn LockAspect { get; set; }
+            public QueryColumn LockBegin { get; set; }
+            public QueryColumn LockCalcWH { get; set; }
+            public QueryColumn LockCrop { get; set; }
+            public QueryColumn LockCustProp { get; set; }
+            public QueryColumn LockDelete { get; set; }
+            public QueryColumn LockEnd { get; set; }
+            public QueryColumn LockFormat { get; set; }
+            public QueryColumn LockFromGroupFormat { get; set; }
+            public QueryColumn LockGroup { get; set; }
+            public QueryColumn LockHeight { get; set; }
+            public QueryColumn LockMoveX { get; set; }
+            public QueryColumn LockMoveY { get; set; }
+            public QueryColumn LockRotate { get; set; }
+            public QueryColumn LockSelect { get; set; }
+            public QueryColumn LockTextEdit { get; set; }
+            public QueryColumn LockThemeColors { get; set; }
+            public QueryColumn LockThemeEffects { get; set; }
+            public QueryColumn LockVtxEdit { get; set; }
+            public QueryColumn LockWidth { get; set; }
 
-            public LockQuery() :
-                base()
+            public LockQuery() 
             {
-                this.LockAspect = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockAspect, "LockAspect");
-                this.LockBegin = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockBegin, "LockBegin");
-                this.LockCalcWH = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockCalcWH, "LockCalcWH");
-                this.LockCrop = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockCrop, "LockCrop");
-                this.LockCustProp = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockCustProp, "LockCustProp");
-                this.LockDelete = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockDelete, "LockDelete");
-                this.LockEnd = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockEnd, "LockEnd");
-                this.LockFormat = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockFormat, "LockFormat");
-                this.LockFromGroupFormat = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockFromGroupFormat, "LockFromGroupFormat");
-                this.LockGroup = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockGroup, "LockGroup");
-                this.LockHeight = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockHeight, "LockHeight");
-                this.LockMoveX = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockMoveX, "LockMoveX");
-                this.LockMoveY = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockMoveY, "LockMoveY");
-                this.LockRotate = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockRotate, "LockRotate");
-                this.LockSelect = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockSelect, "LockSelect");
-                this.LockTextEdit = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockTextEdit, "LockTextEdit");
-                this.LockThemeColors = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockThemeColors, "LockThemeColors");
-                this.LockThemeEffects = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockThemeEffects, "LockThemeEffects");
-                this.LockVtxEdit = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockVtxEdit, "LockVtxEdit");
-                this.LockWidth = this.AddColumn2(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth");
+                this.LockAspect = this.AddColumn(VA.ShapeSheet.SRCConstants.LockAspect, "LockAspect");
+                this.LockBegin = this.AddColumn(VA.ShapeSheet.SRCConstants.LockBegin, "LockBegin");
+                this.LockCalcWH = this.AddColumn(VA.ShapeSheet.SRCConstants.LockCalcWH, "LockCalcWH");
+                this.LockCrop = this.AddColumn(VA.ShapeSheet.SRCConstants.LockCrop, "LockCrop");
+                this.LockCustProp = this.AddColumn(VA.ShapeSheet.SRCConstants.LockCustProp, "LockCustProp");
+                this.LockDelete = this.AddColumn(VA.ShapeSheet.SRCConstants.LockDelete, "LockDelete");
+                this.LockEnd = this.AddColumn(VA.ShapeSheet.SRCConstants.LockEnd, "LockEnd");
+                this.LockFormat = this.AddColumn(VA.ShapeSheet.SRCConstants.LockFormat, "LockFormat");
+                this.LockFromGroupFormat = this.AddColumn(VA.ShapeSheet.SRCConstants.LockFromGroupFormat, "LockFromGroupFormat");
+                this.LockGroup = this.AddColumn(VA.ShapeSheet.SRCConstants.LockGroup, "LockGroup");
+                this.LockHeight = this.AddColumn(VA.ShapeSheet.SRCConstants.LockHeight, "LockHeight");
+                this.LockMoveX = this.AddColumn(VA.ShapeSheet.SRCConstants.LockMoveX, "LockMoveX");
+                this.LockMoveY = this.AddColumn(VA.ShapeSheet.SRCConstants.LockMoveY, "LockMoveY");
+                this.LockRotate = this.AddColumn(VA.ShapeSheet.SRCConstants.LockRotate, "LockRotate");
+                this.LockSelect = this.AddColumn(VA.ShapeSheet.SRCConstants.LockSelect, "LockSelect");
+                this.LockTextEdit = this.AddColumn(VA.ShapeSheet.SRCConstants.LockTextEdit, "LockTextEdit");
+                this.LockThemeColors = this.AddColumn(VA.ShapeSheet.SRCConstants.LockThemeColors, "LockThemeColors");
+                this.LockThemeEffects = this.AddColumn(VA.ShapeSheet.SRCConstants.LockThemeEffects, "LockThemeEffects");
+                this.LockVtxEdit = this.AddColumn(VA.ShapeSheet.SRCConstants.LockVtxEdit, "LockVtxEdit");
+                this.LockWidth = this.AddColumn(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth");
             }
 
             public LockCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
             {
                 var row = data_for_shape.Cells;
                 var cells = new LockCells();
-                cells.LockAspect = row[this.LockAspect].ToBool();
-                cells.LockBegin = row[this.LockBegin].ToBool();
-                cells.LockCalcWH = row[this.LockCalcWH].ToBool();
-                cells.LockCrop = row[this.LockCrop].ToBool();
-                cells.LockCustProp = row[this.LockCustProp].ToBool();
-                cells.LockDelete = row[this.LockDelete].ToBool();
-                cells.LockEnd = row[this.LockEnd].ToBool();
-                cells.LockFormat = row[this.LockFormat].ToBool();
-                cells.LockFromGroupFormat = row[this.LockFromGroupFormat].ToBool();
-                cells.LockGroup = row[this.LockGroup].ToBool();
-                cells.LockHeight = row[this.LockHeight].ToBool();
-                cells.LockMoveX = row[this.LockMoveX].ToBool();
-                cells.LockMoveY = row[this.LockMoveY].ToBool();
-                cells.LockRotate = row[this.LockRotate].ToBool();
-                cells.LockSelect = row[this.LockSelect].ToBool();
-                cells.LockTextEdit = row[this.LockTextEdit].ToBool();
-                cells.LockThemeColors = row[this.LockThemeColors].ToBool();
-                cells.LockThemeEffects = row[this.LockThemeEffects].ToBool();
-                cells.LockVtxEdit = row[this.LockVtxEdit].ToBool();
-                cells.LockWidth = row[this.LockWidth].ToBool();
+                cells.LockAspect = row[this.LockAspect.Ordinal].ToBool();
+                cells.LockBegin = row[this.LockBegin.Ordinal].ToBool();
+                cells.LockCalcWH = row[this.LockCalcWH.Ordinal].ToBool();
+                cells.LockCrop = row[this.LockCrop.Ordinal].ToBool();
+                cells.LockCustProp = row[this.LockCustProp.Ordinal].ToBool();
+                cells.LockDelete = row[this.LockDelete.Ordinal].ToBool();
+                cells.LockEnd = row[this.LockEnd.Ordinal].ToBool();
+                cells.LockFormat = row[this.LockFormat.Ordinal].ToBool();
+                cells.LockFromGroupFormat = row[this.LockFromGroupFormat.Ordinal].ToBool();
+                cells.LockGroup = row[this.LockGroup.Ordinal].ToBool();
+                cells.LockHeight = row[this.LockHeight.Ordinal].ToBool();
+                cells.LockMoveX = row[this.LockMoveX.Ordinal].ToBool();
+                cells.LockMoveY = row[this.LockMoveY.Ordinal].ToBool();
+                cells.LockRotate = row[this.LockRotate.Ordinal].ToBool();
+                cells.LockSelect = row[this.LockSelect.Ordinal].ToBool();
+                cells.LockTextEdit = row[this.LockTextEdit.Ordinal].ToBool();
+                cells.LockThemeColors = row[this.LockThemeColors.Ordinal].ToBool();
+                cells.LockThemeEffects = row[this.LockThemeEffects.Ordinal].ToBool();
+                cells.LockVtxEdit = row[this.LockVtxEdit.Ordinal].ToBool();
+                cells.LockWidth = row[this.LockWidth.Ordinal].ToBool();
                 return cells;
             }
         }

@@ -51,23 +51,23 @@ namespace VisioAutomation.Layout
 
         class XFormQuery : VA.ShapeSheet.Query.QueryEx
         {
-            public int Width { get; set; }
-            public int Height { get; set; }
-            public int PinX { get; set; }
-            public int PinY { get; set; }
-            public int LocPinX { get; set; }
-            public int LocPinY { get; set; }
-            public int Angle { get; set; }
+            public QueryColumn Width { get; set; }
+            public QueryColumn Height { get; set; }
+            public QueryColumn PinX { get; set; }
+            public QueryColumn PinY { get; set; }
+            public QueryColumn LocPinX { get; set; }
+            public QueryColumn LocPinY { get; set; }
+            public QueryColumn Angle { get; set; }
 
             public XFormQuery()
             {
-                PinX = this.AddColumn2(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-                PinY = this.AddColumn2(VA.ShapeSheet.SRCConstants.PinY, "PinY");
-                LocPinX = this.AddColumn2(VA.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
-                LocPinY = this.AddColumn2(VA.ShapeSheet.SRCConstants.LocPinY, "LocPinY");
-                Width = this.AddColumn2(VA.ShapeSheet.SRCConstants.Width, "Width");
-                Height = this.AddColumn2(VA.ShapeSheet.SRCConstants.Height, "Height");
-                Angle = this.AddColumn2(VA.ShapeSheet.SRCConstants.Angle, "Angle");
+                PinX = this.AddColumn(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+                PinY = this.AddColumn(VA.ShapeSheet.SRCConstants.PinY, "PinY");
+                LocPinX = this.AddColumn(VA.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
+                LocPinY = this.AddColumn(VA.ShapeSheet.SRCConstants.LocPinY, "LocPinY");
+                Width = this.AddColumn(VA.ShapeSheet.SRCConstants.Width, "Width");
+                Height = this.AddColumn(VA.ShapeSheet.SRCConstants.Height, "Height");
+                Angle = this.AddColumn(VA.ShapeSheet.SRCConstants.Angle, "Angle");
             }
 
             public  XFormCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
@@ -76,13 +76,13 @@ namespace VisioAutomation.Layout
 
                 var cells = new XFormCells
                 {
-                    PinX = row[this.PinX],
-                    PinY = row[this.PinY],
-                    LocPinX = row[this.LocPinX],
-                    LocPinY = row[this.LocPinY],
-                    Width = row[this.Width],
-                    Height = row[this.Height],
-                    Angle = row[this.Angle]
+                    PinX = row[this.PinX.Ordinal],
+                    PinY = row[this.PinY.Ordinal],
+                    LocPinX = row[this.LocPinX.Ordinal],
+                    LocPinY = row[this.LocPinY.Ordinal],
+                    Width = row[this.Width.Ordinal],
+                    Height = row[this.Height.Ordinal],
+                    Angle = row[this.Angle.Ordinal]
                 };
                 return cells;
             }

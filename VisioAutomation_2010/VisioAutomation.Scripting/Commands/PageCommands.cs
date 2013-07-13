@@ -76,8 +76,8 @@ namespace VisioAutomation.Scripting.Commands
             var col_height = query.AddColumn(VA.ShapeSheet.SRCConstants.PageHeight);
             var col_width = query.AddColumn(VA.ShapeSheet.SRCConstants.PageWidth);
             var results = query.GetResults<double>(active_page.PageSheet);
-            double height = results.Cells[col_height];
-            double width = results.Cells[col_width];
+            double height = results.Cells[col_height.Ordinal];
+            double width = results.Cells[col_width.Ordinal];
             var s = new VA.Drawing.Size(width, height);
             return s;
         }

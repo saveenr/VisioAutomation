@@ -31,5 +31,11 @@ namespace VisioAutomation.ShapeSheet.Query
             this.SRC = src;
         }
 
+        public static implicit operator int(QueryColumn m)
+        {
+            return m.Ordinal;
+        }
+
+
     }
 }
