@@ -22,65 +22,21 @@ namespace VisioAutomation.Connections
             func(VA.ShapeSheet.SRCConstants.Connections_DirY.ForRow(row), this.DirY.Formula);
             func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
         }
-
-        private static ConnectionPointCells get_cells_from_row(ConnectionPointQuery query, VA.ShapeSheet.CellData<double>[] row)
-        {
-            var cells = new ConnectionPointCells();
-            cells.X = row[query.X];
-            cells.Y = row[query.Y];
-            cells.DirX = row[query.DirX].ToInt();
-            cells.DirY = row[query.DirY].ToInt();
-            cells.Type = row[query.Type].ToInt();
-
-            return cells;
-        }
-
+        
         public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-
-            var outer_list = new List<List<ConnectionPointCells>>();
-
             var query = get_query();
-
-            var data_for_shapes = query.GetFormulasAndResults<double>(page, shapeids);
-
-            foreach (var  data_for_shape in data_for_shapes)
-            {
-                var inner_list = new List<ConnectionPointCells>();
-                outer_list.Add(inner_list);
-
-                var sec = data_for_shape.SectionCells[0];
-                foreach (var row in sec.Rows)
-                {
-                    var cells = get_cells_from_row(query, row);
-                    inner_list.Add(cells);
-                }
-
-            }
-
-            return outer_list;
+            return _GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
-
             var query = get_query();
-
-            var data_for_shape = query.GetFormulasAndResults<double>(shape);
-
-            var inner_list = new List<ConnectionPointCells>();
-
-            var sec = data_for_shape.SectionCells[0];
-            foreach (var row in sec.Rows)
-            {
-                var cells = get_cells_from_row(query, row);
-                inner_list.Add(cells);
-            }
-
-            return inner_list;
+            return _GetCells(shape, query, query.GetCells);
         }
 
         private static ConnectionPointQuery m_query;
+
         private static ConnectionPointQuery get_query()
         {
             m_query =  m_query ?? new ConnectionPointQuery();
@@ -104,8 +60,18 @@ namespace VisioAutomation.Connections
                 X = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_X, "X");
                 Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Y, "Y");
             }
+
+            public  ConnectionPointCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            {
+                var cells = new ConnectionPointCells();
+                cells.X = row[this.X];
+                cells.Y = row[this.Y];
+                cells.DirX = row[this.DirX].ToInt();
+                cells.DirY = row[this.DirY].ToInt();
+                cells.Type = row[this.Type].ToInt();
+
+                return cells;
+            }
         }
     }
-
-
 }
