@@ -1,6 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
@@ -42,5 +43,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
             return objects;
         }
+    }
+
+    public abstract class CellGroupMultiRowEx : CellGroupMultiRow
+    {
+
     }
 }

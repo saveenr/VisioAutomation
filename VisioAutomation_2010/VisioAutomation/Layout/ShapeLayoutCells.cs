@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Layout
 {
-    public class ShapeLayoutCells : VA.ShapeSheet.CellGroups.CellGroupEx
+    public class ShapeLayoutCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<int> ConFixedCode { get; set; }
         public VA.ShapeSheet.CellData<int> ConLineJumpCode { get; set; }
@@ -56,13 +56,13 @@ namespace VisioAutomation.Layout
         public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(page, shapeids, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static ShapeLayoutCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(shape, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
         private static ShapeLayoutQuery m_query;

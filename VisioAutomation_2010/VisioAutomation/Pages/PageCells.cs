@@ -7,7 +7,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Pages
 {
-    public class PageCells : VA.ShapeSheet.CellGroups.CellGroupEx
+    public class PageCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> PageLeftMargin { get; set; }
         public VA.ShapeSheet.CellData<double> CenterX { get; set; }
@@ -152,13 +152,13 @@ namespace VisioAutomation.Pages
         public static IList<PageCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(page, shapeids, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static PageCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(shape, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
         private static PageQuery m_query;

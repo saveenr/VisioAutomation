@@ -136,7 +136,9 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
             var srcstream = BuildSRCStream(shape);
-            var unitcodes = Enumerable.Range(0, this.Cells.Count).Select(i => IVisio.VisUnitCodes.visNoCast).ToArray();
+
+
+            var unitcodes = Enumerable.Range(0, this.GetTotalCellCount(1)).Select(i => IVisio.VisUnitCodes.visNoCast).ToArray();
             var values = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, srcstream,unitcodes);
             var r = new ExQueryResult<T>(shape.ID16);
             FillValuesForShape<T>(values, r, 0,0);
@@ -146,10 +148,11 @@ namespace VisioAutomation.ShapeSheet.Query
         public ExQueryResult<CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
             this.Freeze();
+
             var srcstream = BuildSRCStream(shape);
-            var unitcodes = Enumerable.Range(0, this.Cells.Count).Select(i => IVisio.VisUnitCodes.visNoCast).ToArray();
-            var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, srcstream, unitcodes);
+            var unitcodes = Enumerable.Range(0, this.GetTotalCellCount(1)).Select(i => IVisio.VisUnitCodes.visNoCast).ToArray();
             var formulas = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, srcstream);
+            var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, srcstream, unitcodes);
 
             var combineddata = new CellData<T>[results.Length];
             for (int i = 0; i < results.Length; i++)
@@ -180,6 +183,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var list = FillValuesForMultipleShapes(shapeids, values, srcstream);
             return list;
         }
+
 
         public List<ExQueryResult<CellData<T>>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
@@ -264,6 +268,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return start + cellcount;
         }
 
+        public int GetTotalCellCount(int numshapes)
+        {
+            int total_cells_from_sections = this.count_cells_from_sections();
+            int total = (this.Cells.Count * numshapes) + total_cells_from_sections;
+            return total;
+        }
+
         private short[] BuildSRCStream(IVisio.Shape shape)
         {
             this.PerShapeSectionInfo = new List<List<ShapeSectionInfo>>();
@@ -281,10 +292,8 @@ namespace VisioAutomation.ShapeSheet.Query
                 this.PerShapeSectionInfo.Add(section_infos);
             }
 
-            int total_cells_from_sections = this.count_cells_from_sections();
-            int total = this.Cells.Count + total_cells_from_sections;
-
-
+            int total = this.GetTotalCellCount(1);
+            
             int cellcount = 0;
             var srcstream = new short[3*total];
             foreach (var src in this.Cells)
@@ -345,8 +354,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 }                    
             }
 
-            int total_cells_from_sections = this.count_cells_from_sections();
-            int total = (this.Cells.Count*shapeids.Count) + total_cells_from_sections;
+            int total = this.GetTotalCellCount(shapeids.Count);
 
             int cellcount = 0;
             var srcstream = new short[4 * total];

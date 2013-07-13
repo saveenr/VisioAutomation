@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Layout
 {
-    public class LockCells : VA.ShapeSheet.CellGroups.CellGroupEx
+    public class LockCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<bool> LockAspect { get; set; }
         public VA.ShapeSheet.CellData<bool> LockBegin { get; set; }
@@ -59,13 +59,13 @@ namespace VisioAutomation.Layout
         public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(page, shapeids, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static LockCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(shape, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
 

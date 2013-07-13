@@ -7,7 +7,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class TextCells : VA.ShapeSheet.CellGroups.CellGroupEx
+    public class TextCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<double> BottomMargin { get; set; }
         public VA.ShapeSheet.CellData<double> LeftMargin { get; set; }
@@ -49,13 +49,13 @@ namespace VisioAutomation.Text
         public static IList<TextCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(page, shapeids, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static TextCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupEx._GetCells(shape, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
         private static TextBlockFormatQuery m_query;
