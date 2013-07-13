@@ -58,9 +58,9 @@ namespace TestVisioAutomation
             var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
 
             var query = new VA.ShapeSheet.Query.QueryEx();
-            var col_fg = query.AddCell(src_fg);
-            var col_bg = query.AddCell(src_bg);
-            var col_filpat = query.AddCell(src_filpat);
+            var col_fg = query.AddColumn(src_fg);
+            var col_bg = query.AddColumn(src_bg);
+            var col_filpat = query.AddColumn(src_filpat);
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
             int col_charcase  = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase);
             int col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor);
@@ -121,9 +121,9 @@ namespace TestVisioAutomation
             // now retrieve the formulas with GetFormulas
 
             var query = new VA.ShapeSheet.Query.QueryEx();
-            var col_fg = query.AddCell(src_fg);
-            var col_bg = query.AddCell(src_bg);
-            var col_filpat = query.AddCell(src_filpat);
+            var col_fg = query.AddColumn(src_fg);
+            var col_bg = query.AddColumn(src_bg);
+            var col_filpat = query.AddColumn(src_filpat);
 
             var shapeids = new[] {s1_id};
 

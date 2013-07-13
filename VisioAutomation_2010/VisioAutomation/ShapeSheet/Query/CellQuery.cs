@@ -79,13 +79,6 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Sections = new List<SectionSubQuery>();
         }
 
-        public int AddCell(SRC src)
-        {
-            CheckNotFrozen();
-            int ordinal=this.Cells.Count;
-            this.Cells.Add(src);
-            return ordinal;
-        }
 
         public int AddColumn(SRC src)
         {
@@ -102,9 +95,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return ordinal;
         }
 
-        public int AddCell(SRC src, string name)
+        public int AddColumn2(SRC src, string name)
         {
-            return this.AddCell(src);
+            return this.AddColumn(src);
         }
 
         public int AddSection(IVisio.VisSectionIndices section, IList<SRC> srcs)
