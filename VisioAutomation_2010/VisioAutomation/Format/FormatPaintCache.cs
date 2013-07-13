@@ -95,7 +95,7 @@ namespace VisioAutomation.Format
         public void CopyFormat(IVisio.Shape shape, VA.Format.FormatCategory category)
         {
             // Build the Query
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new VA.ShapeSheet.Query.QueryEx();
             var desired_cells = this.Cells.Where(cell => cell.MatchesCategory(category)).ToList();
 
             foreach (var cell in desired_cells)
@@ -107,12 +107,12 @@ namespace VisioAutomation.Format
             var dataset = query.GetFormulasAndResults<string>(shape);
 
             // Now store the values
-            for (int col = 0; col < query.Columns.Count; col++)
+            for (int col = 0; col < query.Cells.Count; col++)
             {
                 var cellrec = desired_cells[col];
 
-                var result = dataset[0, col].Result;
-                var formula = dataset[0, col].Formula;
+                var result = dataset.Cells[col].Result;
+                var formula = dataset.Cells[col].Formula;
 
                 cellrec.Result = result;
                 cellrec.Formula = formula.Value;

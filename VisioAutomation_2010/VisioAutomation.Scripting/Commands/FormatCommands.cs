@@ -105,13 +105,13 @@ namespace VisioAutomation.Scripting.Commands
             var selection = active_window.Selection;
             var shape = selection[1];
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new VA.ShapeSheet.Query.QueryEx();
             var width_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Width);
             var height_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Height);
             var queryresults = query.GetResults<double>(shape);
 
-            cached_size_width = queryresults[0, width_col];
-            cached_size_height = queryresults[0, height_col];
+            cached_size_width = queryresults .Cells[width_col];
+            cached_size_height = queryresults.Cells[height_col];
         }
 
         public void PasteSize(IList<IVisio.Shape> target_shapes, bool paste_width, bool paste_height)

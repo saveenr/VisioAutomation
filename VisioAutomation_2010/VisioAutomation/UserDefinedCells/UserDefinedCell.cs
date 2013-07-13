@@ -13,7 +13,7 @@ namespace VisioAutomation.UserDefinedCells
         public string Prompt { get; set; }
 
         internal static readonly UserDefinedCellQuery query = new UserDefinedCellQuery();
-        internal static readonly UserDefinedCellQueryEx queryex = new UserDefinedCellQueryEx();
+        internal static readonly UserDefinedCellQuery queryex = new UserDefinedCellQuery();
 
         public UserDefinedCell(string name)
         {
@@ -57,25 +57,13 @@ namespace VisioAutomation.UserDefinedCells
             return s;
         }
 
-        internal class UserDefinedCellQuery : VA.ShapeSheet.Query.SectionQuery
-        {
-            public VA.ShapeSheet.Query.QueryColumn Value { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Prompt { get; set; }
 
-            public UserDefinedCellQuery() :
-                base(IVisio.VisSectionIndices.visSectionUser)
-            {
-                Value = this.AddColumn(VA.ShapeSheet.SRCConstants.User_Value, "Value");
-                Prompt = this.AddColumn(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
-            }
-        }
-
-        internal class UserDefinedCellQueryEx : VA.ShapeSheet.Query.QueryEx
+        internal class UserDefinedCellQuery : VA.ShapeSheet.Query.QueryEx
         {
             public int Value { get; set; }
             public int Prompt { get; set; }
 
-            public UserDefinedCellQueryEx()
+            public UserDefinedCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionUser);
                 Value = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Value, "Value");

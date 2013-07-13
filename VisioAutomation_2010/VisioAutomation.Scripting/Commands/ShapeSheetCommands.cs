@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -14,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>( IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public List<ExQueryResult<T>> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -24,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
             var page = app.ActivePage;
             var shapeids = shapes.Select(s=>s.ID).ToList();
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new VA.ShapeSheet.Query.QueryEx();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -37,7 +38,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public List<ExQueryResult<string>> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -49,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
             var page = app.ActivePage;
             var active_window = app.ActiveWindow;
             
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new VA.ShapeSheet.Query.QueryEx();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -63,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public List<ExQueryResult<T>> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -73,20 +74,21 @@ namespace VisioAutomation.Scripting.Commands
 
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
-            var query = new VA.ShapeSheet.Query.SectionQuery((short)section);
+            var query = new VA.ShapeSheet.Query.QueryEx();
+            var sec = query.AddSection(section);
 
             int ci = 0;
             foreach (var cell in cells)
             {
-                query.AddColumn(cell);
+                sec.AddColumn((short)cell,"Name");
                 ci++;
             }
 
-            var results = query.GetResults<T>(page, shapeids);
+           var results = query.GetResults<T>(page, shapeids);
             return results;
         }
 
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public List<ExQueryResult<string>> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -97,12 +99,13 @@ namespace VisioAutomation.Scripting.Commands
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
 
-            var query = new VA.ShapeSheet.Query.SectionQuery((short)section);
+            var query = new VA.ShapeSheet.Query.QueryEx();
+            var sec = query.AddSection(section);
 
             int ci = 0;
             foreach (var cell in cells)
             {
-                query.AddColumn(cell);
+                sec.AddColumn((short)cell,"name");
                 ci++;
             }
 

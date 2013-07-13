@@ -35,7 +35,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new VA.ShapeSheet.Query.QueryEx();
 
             var dic = GetPageCellDictionary();
             foreach (var cell in this.Cells)
@@ -46,7 +46,7 @@ namespace VisioPS.Commands
             var page = scriptingsession.Page.Get();
             var target_shapeids = new[] { page.ID };
 
-            this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);
+            this.WriteVerboseEx("Number of Cells: {0}", query.Cells.Count);
 
             this.WriteVerboseEx("Start Query");
 

@@ -12,25 +12,26 @@ namespace VisioPS
 {
     static class VisioPSUtil
     {
-        public static DataTable querytable_to_datatable<T>(CellQuery query, Table<T> query_output)
+        public static DataTable querytable_to_datatable<T>(QueryEx query, List<ExQueryResult<T>> query_output)
         {
+            // TODO Add Name
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
-            foreach (var col in query.Columns)
+            foreach (var col in query.Cells)
             {
-                dt.Columns.Add(col.Name, typeof(T));
+                dt.Columns.Add("CELLNAME", typeof(T));
             }
 
             // Then populate the rows of the datatable
             dt.BeginLoadData();
-            int colcount = query.Columns.Count;
+            int colcount = query.Cells.Count;
             var rowbuf = new object[colcount];
-            for (int r = 0; r < query_output.RowCount; r++)
+            for (int r = 0; r < query_output.Count; r++)
             {
                 // populate the row buffer
                 for (int i = 0; i < colcount; i++)
                 {
-                    rowbuf[i] = query_output[r, i];
+                    rowbuf[i] = query_output[r].Cells[i];
                 }
 
                 // load it into the table
@@ -40,7 +41,7 @@ namespace VisioPS
             return dt;
         }
 
-        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery query, bool getresults, ResultType ResultType, IList<int> shapeids, IVisio.Page page)
+        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.QueryEx query, bool getresults, ResultType ResultType, IList<int> shapeids, IVisio.Page page)
         {
             if (getresults)
             {
