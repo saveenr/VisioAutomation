@@ -91,18 +91,8 @@ namespace VisioAutomation.ShapeSheet.Query
             return col;
         }
 
-        public int AddSection(IVisio.VisSectionIndices section, IList<SRC> srcs)
-        {
-            CheckNotFrozen();
-            int ordinal = this.Sections.Count;
-
-            // Add error checking for section index
-            // Add error checking for cell index
-
-            var sec = new SectionSubQuery(ordinal,(short)section, srcs.Select(i => i.Cell));
-            this.Sections.Add(sec);
-            return ordinal;
-        }
+        private static Dictionary<IVisio.VisSectionIndices, string> sec_to_name;
+        
 
         public SectionSubQuery AddSection(IVisio.VisSectionIndices section)
         {
