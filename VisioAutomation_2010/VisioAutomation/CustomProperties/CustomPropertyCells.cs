@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.CustomProperties
 {
-    public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRowEx
     {
         public VA.ShapeSheet.CellData<double> Value{ get; set; }
         public VA.ShapeSheet.CellData<double> Prompt { get; set; }
@@ -71,13 +71,13 @@ namespace VisioAutomation.CustomProperties
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return _GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static IList<CustomPropertyCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+            return _GetCells(shape, query, query.GetCells);
         }
 
         private static CustomPropertyQuery m_query;
@@ -104,32 +104,48 @@ namespace VisioAutomation.CustomProperties
         }
     }
 
-    class CustomPropertyQuery : VA.ShapeSheet.Query.SectionQuery
+    class CustomPropertyQuery : VA.ShapeSheet.Query.QueryEx
     {
-        public VA.ShapeSheet.Query.QueryColumn SortKey { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Ask { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Calendar { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Format { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Invis { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Label { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn LangID { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Prompt { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Value { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Type { get; set; }
+        public int SortKey { get; set; }
+        public int Ask { get; set; }
+        public int Calendar { get; set; }
+        public int Format { get; set; }
+        public int Invis { get; set; }
+        public int Label { get; set; }
+        public int LangID { get; set; }
+        public int Prompt { get; set; }
+        public int Value { get; set; }
+        public int Type { get; set; }
 
-        public CustomPropertyQuery() :
-            base(IVisio.VisSectionIndices.visSectionProp)
+        public CustomPropertyQuery() 
         {
-            SortKey = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
-            Ask = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
-            Calendar = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Calendar");
-            Format = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Format, "Format");
-            Invis = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Invis");
-            Label = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
-            LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
-            Prompt = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
-            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
-            Value = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
+            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
+
+            SortKey = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
+            Ask = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
+            Calendar = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Calendar");
+            Format = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Format, "Format");
+            Invis = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Invis");
+            Label = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
+            LangID = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
+            Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
+            Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
+            Value = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
+        }
+
+        public CustomPropertyCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+        {
+            var cells = new CustomPropertyCells();
+            cells.Value = row[Value];
+            cells.Calendar = row[Calendar].ToInt();
+            cells.Format = row[Format];
+            cells.Invisible = row[Invis].ToInt();
+            cells.Label = row[Label];
+            cells.LangId = row[LangID].ToInt();
+            cells.Prompt = row[Prompt];
+            cells.SortKey = row[SortKey].ToInt();
+            cells.Type = row[Type].ToInt();
+            return cells;
         }
     }
 

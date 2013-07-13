@@ -9,17 +9,8 @@ namespace TestVisioAutomation
     [TestClass]
     public class CustomPropsTest : VisioAutomationTest
     {
-        [TestMethod]
-        public void SetCustomProps_Scenarios()
-        {
-            this.SetCustomProps1();
-            this.SetSamePropMultipleTimes();
-            this.InvalidPropName();
-            this.VerifyCustomPropAttributes();
-            this.PropertyNames();
-            this.GetCustomPropsForMultipleShapes();
-        }
 
+        [TestMethod]
         public void SetCustomProps1()
         {
             var page1 = GetNewPage();
@@ -49,6 +40,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void SetSamePropMultipleTimes()
         {
             var page1 = GetNewPage();
@@ -78,6 +70,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void InvalidPropName()
         {
             bool caught = false;
@@ -100,6 +93,7 @@ namespace TestVisioAutomation
             }
         }
 
+        [TestMethod]
         public void VerifyCustomPropAttributes()
         {
             var page1 = GetNewPage();
@@ -120,6 +114,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void PropertyNames()
         {
             var page1 = GetNewPage();
@@ -159,6 +154,7 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
+        [TestMethod]
         public void GetCustomPropsForMultipleShapes()
         {
             var page1 = GetNewPage();

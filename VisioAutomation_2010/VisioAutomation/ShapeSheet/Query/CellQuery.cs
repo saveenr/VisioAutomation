@@ -43,6 +43,14 @@ namespace VisioAutomation.ShapeSheet.Query
                 this.CellIndexes.Add(src.Cell);
                 return ordinal;
             }
+            public int AddColumn(short cell, string name)
+            {
+                int ordinal = this.CellIndexes.Count;
+                this.CellIndexes.Add(cell);
+                return ordinal;
+            }
+
+
         }
 
         public class ShapeSectionInfo
@@ -78,6 +86,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Cells.Add(src);
             return ordinal;
         }
+
 
         public int AddCell(SRC src, string name)
         {
@@ -178,7 +187,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
-            var unitcodes = Enumerable.Range(0, this.Cells.Count * shapeids.Count).Select(j => IVisio.VisUnitCodes.visNoCast).ToArray();
+            var unitcodes = Enumerable.Range(0, this.GetTotalCellCount(shapeids.Count)).Select(j => IVisio.VisUnitCodes.visNoCast).ToArray();
             var values = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, srcstream, unitcodes);
             var list = FillValuesForMultipleShapes(shapeids, values, srcstream);
             return list;
@@ -189,7 +198,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
-            var unitcodes = Enumerable.Range(0, this.Cells.Count * shapeids.Count).Select(j => IVisio.VisUnitCodes.visNoCast).ToArray();
+            var unitcodes = Enumerable.Range(0, this.GetTotalCellCount(shapeids.Count)).Select(j => IVisio.VisUnitCodes.visNoCast).ToArray();
             T[] results = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, srcstream, unitcodes);
             string[] formulas  = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, srcstream);
 
