@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
-    {       
+    {
         public abstract void ApplyFormulas(ApplyFormula func);
 
         protected static IList<T> _GetCells<T>(IVisio.Page page, IList<int> shapeids, QueryEx query, System.Func<ExQueryResult<CellData<double>>,T> f )

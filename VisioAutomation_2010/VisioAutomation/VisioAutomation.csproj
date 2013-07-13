@@ -269,7 +269,6 @@
     <Compile Include="Shapesheet\Data\Table.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
-    <Compile Include="Shapesheet\Query\SectionQuery.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Connections\ConnectorEdge.cs" />
     <Compile Include="Controls\ControlCells.cs" />
