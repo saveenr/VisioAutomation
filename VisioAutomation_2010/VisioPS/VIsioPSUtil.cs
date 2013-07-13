@@ -17,14 +17,14 @@ namespace VisioPS
             // TODO Add Name
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
-            foreach (var col in query.Cells)
+            foreach (var col in query.Columns)
             {
                 dt.Columns.Add("CELLNAME", typeof(T));
             }
 
             // Then populate the rows of the datatable
             dt.BeginLoadData();
-            int colcount = query.Cells.Count;
+            int colcount = query.Columns.Count;
             var rowbuf = new object[colcount];
             for (int r = 0; r < query_output.Count; r++)
             {

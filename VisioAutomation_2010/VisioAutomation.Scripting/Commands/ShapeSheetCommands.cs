@@ -80,7 +80,8 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var cell in cells)
             {
-                sec.AddColumn((short)cell,"Name");
+                string name = string.Format("Cell{0}", ci);
+                sec.AddColumn((short)cell,name);
                 ci++;
             }
 
@@ -105,7 +106,8 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var cell in cells)
             {
-                sec.AddColumn((short)cell,"name");
+                string name = string.Format("Cell{0}", ci);
+                sec.AddColumn((short)cell, name);
                 ci++;
             }
 

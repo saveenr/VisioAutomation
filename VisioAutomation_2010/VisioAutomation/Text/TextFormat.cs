@@ -242,6 +242,13 @@ namespace VisioAutomation.Text
             update.Execute(shape);
         }
 
+
+        private VA.ShapeSheet.Query.QueryEx GetQuery()
+        {
+            var q = new VA.ShapeSheet.Query.QueryEx();
+
+            return q;
+        }
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
             var textfmt = new TextFormat();

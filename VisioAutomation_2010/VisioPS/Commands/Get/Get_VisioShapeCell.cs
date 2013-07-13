@@ -51,7 +51,7 @@ namespace VisioPS.Commands
             var page = scriptingsession.Page.Get();
 
             this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
-            this.WriteVerboseEx("Number of Cells: {0}", query.Cells.Count);
+            this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);
 
             this.WriteVerboseEx("Start Query");
 

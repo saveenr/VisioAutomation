@@ -107,7 +107,7 @@ namespace VisioAutomation.Format
             var dataset = query.GetFormulasAndResults<string>(shape);
 
             // Now store the values
-            for (int col = 0; col < query.Cells.Count; col++)
+            for (int col = 0; col < query.Columns.Count; col++)
             {
                 var cellrec = desired_cells[col];
 
