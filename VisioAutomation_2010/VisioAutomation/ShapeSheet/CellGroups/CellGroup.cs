@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         public abstract void ApplyFormulas(ApplyFormula func);
 
-        protected static IList<T> _GetCells<T>(IVisio.Page page, IList<int> shapeids, QueryEx query, System.Func<ExQueryResult<CellData<double>>,T> f )
+        protected static IList<T> _GetCells<T>(IVisio.Page page, IList<int> shapeids, QueryEx query, ResultToCells<T> f)
         {
             var data = query.GetFormulasAndResults<double>(page, shapeids);
             var list = new List<T>();
@@ -21,7 +21,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return list;
         }
 
-        protected static T _GetCells<T>(IVisio.Shape shape, QueryEx query, System.Func<ExQueryResult<CellData<double>>, T> f)
+        protected static T _GetCells<T>(IVisio.Shape shape, QueryEx query, ResultToCells<T> f)
         {
             var data_for_shape = query.GetFormulasAndResults<double>(shape);
             var cells = f(data_for_shape);
