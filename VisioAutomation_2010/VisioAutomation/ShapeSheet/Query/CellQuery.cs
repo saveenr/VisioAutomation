@@ -36,6 +36,13 @@ namespace VisioAutomation.ShapeSheet.Query
                 this.CellIndexes.Add(src.Cell);
                 return ordinal;
             }
+
+            public int AddColumn(SRC src, string name)
+            {
+                int ordinal = this.CellIndexes.Count;
+                this.CellIndexes.Add(src.Cell);
+                return ordinal;
+            }
         }
 
         public class ShapeSectionInfo

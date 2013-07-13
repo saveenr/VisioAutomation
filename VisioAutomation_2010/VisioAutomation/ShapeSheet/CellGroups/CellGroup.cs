@@ -1,3 +1,4 @@
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
@@ -24,6 +25,28 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             var table = query.GetFormulasAndResults<double>(shape);
             return row_to_obj(query, table, 0);
+        }
+    }
+
+    public abstract class CellGroupEx : CellGroup
+    {
+        protected static IList<T> _GetCells<T>(IVisio.Page page, IList<int> shapeids, QueryEx query, System.Func<ExQueryResult<CellData<double>>,T> f )
+        {
+            var data = query.GetFormulasAndResults<double>(page, shapeids);
+            var list = new List<T>();
+            for (int i = 0; i < shapeids.Count; i++)
+            {
+                var cells = f(data[i]);
+                list.Add(cells);
+            }
+            return list;
+        }
+
+        protected static T _GetCells<T>(IVisio.Shape shape, QueryEx query, System.Func<ExQueryResult<CellData<double>>, T> f)
+        {
+            var data_for_shape = query.GetFormulasAndResults<double>(shape);
+            var cells = f(data_for_shape);
+            return cells;
         }
     }
 }
