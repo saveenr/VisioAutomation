@@ -37,7 +37,7 @@ namespace VisioAutomation.Layout
             var list = new List<XFormCells>();
             for (int i = 0; i < shapeids.Count; i++)
             {
-                var cells = query.GetXFormCells(data[i]);
+                var cells = query.GetCells(data[i]);
                 list.Add(cells);
             }
             return list;
@@ -47,7 +47,7 @@ namespace VisioAutomation.Layout
         {
             var query = get_query();
             var data_for_shape = query.GetFormulasAndResults<double>(shape);
-            var cells = query.GetXFormCells(data_for_shape);
+            var cells = query.GetCells(data_for_shape);
 
             return cells;
         }
@@ -69,8 +69,7 @@ namespace VisioAutomation.Layout
             public int LocPinY { get; set; }
             public int Angle { get; set; }
 
-            public XFormQuery() :
-                base()
+            public XFormQuery()
             {
                 PinX = this.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
                 PinY = this.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
@@ -81,7 +80,7 @@ namespace VisioAutomation.Layout
                 Angle = this.AddCell(VA.ShapeSheet.SRCConstants.Angle, "Angle");
             }
 
-            public  XFormCells GetXFormCells(ExQueryResult<CellData<double>> data_for_shape)
+            public  XFormCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
             {
                 var row = data_for_shape.Cells;
 
