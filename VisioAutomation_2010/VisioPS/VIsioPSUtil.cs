@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using VisioAutomation.ShapeSheet.Data;
 using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -12,14 +8,14 @@ namespace VisioPS
 {
     static class VisioPSUtil
     {
-        public static DataTable querytable_to_datatable<T>(QueryEx query, QueryResults<T> query_output)
+        public static DataTable querytable_to_datatable<T>(QueryEx query, QueryEx.QueryResults<T> query_output)
         {
             // TODO Add Name
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
             foreach (var col in query.Columns)
             {
-                dt.Columns.Add("CELLNAME", typeof(T));
+                dt.Columns.Add(col.Name, typeof(T));
             }
 
             // Then populate the rows of the datatable

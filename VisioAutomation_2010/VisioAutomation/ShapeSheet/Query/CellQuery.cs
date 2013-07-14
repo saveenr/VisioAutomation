@@ -7,59 +7,6 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class QueryEx
     {
-        public class SectionSubQuery
-        {
-            public short SectionIndex { get; private set; }
-            public List<QueryColumn> Columns { get; private set; }
-            public int Ordinal { get; private set; }
-
-            public SectionSubQuery(int ordinal, short section)
-            {
-                this.Ordinal = ordinal;
-                this.SectionIndex = section;
-                this.Columns = new List<QueryColumn>();
-            }
-
-            public static implicit operator int(SectionSubQuery m)
-            {
-                return m.Ordinal;
-            }
-            
-            public QueryColumn AddColumn(SRC src, string name)
-            {
-                int ordinal = this.Columns.Count;
-                if (src.Section != this.SectionIndex)
-                {
-                    throw new VA.AutomationException("SRC's Section does not match");
-                }
-                var col=  new QueryColumn(ordinal,src,name);
-                this.Columns.Add(col);
-                return col;
-            }
-
-            public QueryColumn AddColumn(short cell, string name)
-            {
-                int ordinal = this.Columns.Count;
-                var col = new QueryColumn(ordinal, cell, name);
-                this.Columns.Add(col);
-                return col;
-            }
-        }
-
-        public class SectionSubQueryInfo
-        {
-            public QueryEx.SectionSubQuery SectionSubQuery { get; private set; }
-            public short ShapeID { get; private set; }
-            public List<short> RowIndexes { get; private set; }
-
-            public SectionSubQueryInfo(SectionSubQuery sq, short shapeid, int numrows)
-            {
-                this.SectionSubQuery = sq;
-                this.ShapeID = shapeid;
-                this.RowIndexes = Enumerable.Range(0, numrows).Select(i => (short) i).ToList();
-            }
-        }
-
         public List<QueryColumn> Columns { get; private set; }
         public List<SectionSubQuery> Sections { get; private set; }
         private List<List<SectionSubQueryInfo>> PerShapeSectionInfo; 
@@ -430,59 +377,113 @@ namespace VisioAutomation.ShapeSheet.Query
 
             return total_cells_from_sections;
         }
-    }
 
-    public class QueryResults<T> : IEnumerable<QueryResult<T>>
-    {
-        List<QueryResult<T>> Items;   
-
-        public QueryResults()
+        public class QueryResults<T> : IEnumerable<QueryResult<T>>
         {
-            this.Items = new List<QueryResult<T>> ();
+            List<QueryResult<T>> Items;
+
+            public QueryResults()
+            {
+                this.Items = new List<QueryResult<T>>();
+            }
+
+            public IEnumerator<QueryResult<T>> GetEnumerator()
+            {
+                return this.Items.GetEnumerator();
+            }
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+
+
+            public QueryResult<T> this[int index]
+            {
+                get { return this.Items[index]; }
+            }
+
+            internal void Add(QueryResult<T> item)
+            {
+                this.Items.Add(item);
+            }
+
+            public int Count
+            {
+                get { return this.Items.Count; }
+            }
         }
 
-        public IEnumerator<QueryResult<T>> GetEnumerator()
+        public class QueryResult<T>
         {
-            return this.Items.GetEnumerator();
+            public int ShapeID { get; private set; }
+            public T[] Cells { get; internal set; }
+            public List<SectionResult<T>> SectionCells { get; internal set; }
+
+            public QueryResult(int sid)
+            {
+                this.ShapeID = sid;
+            }
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        public class SectionResult<T>
         {
-            return GetEnumerator();
+            public VA.ShapeSheet.Query.QueryEx.SectionSubQuery Query { get; internal set; }
+            public List<T[]> Rows { get; internal set; }
         }
 
-
-        public QueryResult<T> this[int index]
-	    {
-            get { return this.Items[index]; }
-	    }
-
-        internal void Add(QueryResult<T> item)
+        public class SectionSubQuery
         {
-            this.Items.Add(item);
+            public short SectionIndex { get; private set; }
+            public List<QueryColumn> Columns { get; private set; }
+            public int Ordinal { get; private set; }
+
+            public SectionSubQuery(int ordinal, short section)
+            {
+                this.Ordinal = ordinal;
+                this.SectionIndex = section;
+                this.Columns = new List<QueryColumn>();
+            }
+
+            public static implicit operator int(SectionSubQuery m)
+            {
+                return m.Ordinal;
+            }
+
+            public QueryColumn AddColumn(SRC src, string name)
+            {
+                int ordinal = this.Columns.Count;
+                if (src.Section != this.SectionIndex)
+                {
+                    throw new VA.AutomationException("SRC's Section does not match");
+                }
+                var col = new QueryColumn(ordinal, src, name);
+                this.Columns.Add(col);
+                return col;
+            }
+
+            public QueryColumn AddColumn(short cell, string name)
+            {
+                int ordinal = this.Columns.Count;
+                var col = new QueryColumn(ordinal, cell, name);
+                this.Columns.Add(col);
+                return col;
+            }
         }
 
-        public int Count
+        public class SectionSubQueryInfo
         {
-            get { return this.Items.Count; }
+            public SectionSubQuery SectionSubQuery { get; private set; }
+            public short ShapeID { get; private set; }
+            public List<short> RowIndexes { get; private set; }
+
+            public SectionSubQueryInfo(SectionSubQuery sq, short shapeid, int numrows)
+            {
+                this.SectionSubQuery = sq;
+                this.ShapeID = shapeid;
+                this.RowIndexes = Enumerable.Range(0, numrows).Select(i => (short)i).ToList();
+            }
         }
-    }
 
-    public class QueryResult<T>
-    {
-        public int ShapeID { get; private set; }
-        public T[] Cells { get; internal set; }
-        public List<SectionResult<T>> SectionCells { get; internal set; }
-
-        public QueryResult(int sid)
-        {
-            this.ShapeID = sid;
-        }    
-    }
-
-    public class SectionResult<T>
-    {
-        public VA.ShapeSheet.Query.QueryEx.SectionSubQuery Query { get; internal set; }
-        public List<T[]> Rows { get; internal set; }
     }
 }
