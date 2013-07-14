@@ -50,12 +50,12 @@ namespace TestVisioAutomation
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
 
-            AssertVA.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
-            AssertVA.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
-            AssertVA.AreEqual("1.5 in", 1.5, rf[1].Cells[col_pinx], rr[1].Cells[col_pinx]);
-            AssertVA.AreEqual("1.5 in", 1.5, rf[1].Cells[col_piny], rr[1].Cells[col_piny]);
-            AssertVA.AreEqual("2.5 in", 2.5, rf[2].Cells[col_pinx], rr[2].Cells[col_pinx]);
-            AssertVA.AreEqual("2.5 in", 2.5, rf[2].Cells[col_piny], rr[2].Cells[col_piny]);
+            AssertVA.AreEqual("0.5 in", 0.5, rf[0][col_pinx], rr[0][col_pinx]);
+            AssertVA.AreEqual("0.5 in", 0.5, rf[0][col_piny], rr[0][col_piny]);
+            AssertVA.AreEqual("1.5 in", 1.5, rf[1][col_pinx], rr[1][col_pinx]);
+            AssertVA.AreEqual("1.5 in", 1.5, rf[1][col_piny], rr[1][col_piny]);
+            AssertVA.AreEqual("2.5 in", 2.5, rf[2][col_pinx], rr[2][col_pinx]);
+            AssertVA.AreEqual("2.5 in", 2.5, rf[2][col_piny], rr[2][col_piny]);
 
             page1.Delete(0);
         }
@@ -82,8 +82,8 @@ namespace TestVisioAutomation
             var data = query.GetFormulasAndResults<double>(shape1);
 
             // Verify
-            Assert.AreEqual("RGB(255,0,0)", data.Cells[col_fg].Formula);
-            AssertVA.AreEqual("7", 7, data.Cells[col_linepat]);
+            Assert.AreEqual("RGB(255,0,0)", data[col_fg].Formula);
+            AssertVA.AreEqual("7", 7, data[col_linepat]);
 
             page1.Delete(0);
         }
@@ -114,7 +114,7 @@ namespace TestVisioAutomation
             var data = query.GetFormulasAndResults<double>(shape1);
 
             // Verify
-            AssertVA.AreEqual("7", 7, data.Cells[col_linepat]);
+            AssertVA.AreEqual("7", 7, data[col_linepat]);
             page1.Delete(0);
         }
 
@@ -136,7 +136,7 @@ namespace TestVisioAutomation
             var data = query.GetFormulasAndResults<double>(shape1);
 
             // Verify
-            AssertVA.AreEqual("7", 7, data.Cells[col_linepat]);
+            AssertVA.AreEqual("7", 7, data[col_linepat]);
             page1.Delete(0);
         }
 
@@ -169,12 +169,12 @@ namespace TestVisioAutomation
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
 
-            AssertVA.AreEqual("0.5 in", 0.5, rf[0].Cells[col_pinx], rr[0].Cells[col_pinx]);
-            AssertVA.AreEqual("0.5 in", 0.5, rf[0].Cells[col_piny], rr[0].Cells[col_piny]);
-            AssertVA.AreEqual("1.5 in", 1.5, rf[1].Cells[col_pinx], rr[1].Cells[col_pinx]);
-            AssertVA.AreEqual("1.5 in", 1.5, rf[1].Cells[col_piny], rr[1].Cells[col_piny]);
-            AssertVA.AreEqual("2.5 in", 2.5, rf[2].Cells[col_pinx], rr[2].Cells[col_pinx]);
-            AssertVA.AreEqual("2.5 in", 2.5, rf[2].Cells[col_piny], rr[2].Cells[col_piny]);
+            AssertVA.AreEqual("0.5 in", 0.5, rf[0][col_pinx], rr[0][col_pinx]);
+            AssertVA.AreEqual("0.5 in", 0.5, rf[0][col_piny], rr[0][col_piny]);
+            AssertVA.AreEqual("1.5 in", 1.5, rf[1][col_pinx], rr[1][col_pinx]);
+            AssertVA.AreEqual("1.5 in", 1.5, rf[1][col_piny], rr[1][col_piny]);
+            AssertVA.AreEqual("2.5 in", 2.5, rf[2][col_pinx], rr[2][col_pinx]);
+            AssertVA.AreEqual("2.5 in", 2.5, rf[2][col_piny], rr[2][col_piny]);
 
             page1.Delete(0);
         }
@@ -249,8 +249,8 @@ namespace TestVisioAutomation
             var data = query.GetFormulasAndResults<double>(shape1);
 
             // Verify
-            AssertVA.AreEqual("7", 7, data.Cells[col_linepat]);
-            AssertVA.AreEqual("2 in", 2, data.Cells[col_pinx]);
+            AssertVA.AreEqual("7", 7, data[col_linepat]);
+            AssertVA.AreEqual("2 in", 2, data[col_pinx]);
             
             page1.Delete(0);
         }

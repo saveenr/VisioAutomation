@@ -116,9 +116,8 @@ namespace VisioAutomation.Layout
                 this.Relationships = this.AddColumn(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
             }
 
-            public ShapeLayoutCells GetCells(QueryResult<CellData<double>> data_for_shape)
+            public ShapeLayoutCells GetCells(QueryResult<CellData<double>> row)
             {
-                var row = data_for_shape.Cells;
                 var cells = new ShapeLayoutCells();
                 cells.ConFixedCode = row[ConFixedCode.Ordinal].ToInt();
                 cells.ConLineJumpCode = row[ConLineJumpCode.Ordinal].ToInt();

@@ -310,10 +310,8 @@ namespace VisioAutomation.Pages
             }
 
 
-            public PageCells GetCells(QueryResult<CellData<double>> data_for_shape)
+            public PageCells GetCells(QueryResult<CellData<double>> row)
             {
-                                var row = data_for_shape.Cells;
-
                 var cells = new PageCells();
                 cells.PageLeftMargin = row[PageLeftMargin.Ordinal];
                 cells.CenterX = row[CenterX.Ordinal];

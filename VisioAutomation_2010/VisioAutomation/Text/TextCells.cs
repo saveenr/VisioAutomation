@@ -128,10 +128,8 @@ namespace VisioAutomation.Text
                 TxtAngle = this.AddColumn(VA.ShapeSheet.SRCConstants.TxtAngle, "TxtAngle");
             }
 
-            public TextCells GetCells(QueryResult<CellData<double>> data_for_shape)
+            public TextCells GetCells(QueryResult<CellData<double>> row)
             {
-                var row = data_for_shape.Cells;
-
                 var cells = new TextCells();
                 cells.BottomMargin = row[BottomMargin.Ordinal];
                 cells.LeftMargin = row[LeftMargin.Ordinal];

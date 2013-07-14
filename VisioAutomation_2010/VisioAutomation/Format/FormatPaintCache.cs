@@ -111,8 +111,8 @@ namespace VisioAutomation.Format
             {
                 var cellrec = desired_cells[col];
 
-                var result = dataset.Cells[col].Result;
-                var formula = dataset.Cells[col].Formula;
+                var result = dataset[col].Result;
+                var formula = dataset[col].Formula;
 
                 cellrec.Result = result;
                 cellrec.Formula = formula.Value;

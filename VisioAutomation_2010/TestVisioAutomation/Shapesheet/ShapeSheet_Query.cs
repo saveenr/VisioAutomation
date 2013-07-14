@@ -71,26 +71,26 @@ namespace TestVisioAutomation
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("RGB(255,0,0)", formulas[0].Cells[col_fg]);
-            Assert.AreEqual("RGB(0,0,255)", formulas[0].Cells[col_bg]);
-            Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
+            Assert.AreEqual("RGB(255,0,0)", formulas[0][col_fg]);
+            Assert.AreEqual("RGB(0,0,255)", formulas[0][col_bg]);
+            Assert.AreEqual("40", formulas[0][col_filpat]);
 
             // now retrieve the results with GetResults as floats
             var float_results = query.GetResults<double>(page1,shapeids);
             Assert.IsNotNull(float_results);
-            Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
+            Assert.AreEqual(40.0, float_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
-            Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
+            Assert.AreEqual(40, int_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as strings
 
             var string_results = query.GetResults<string>(page1,shapeids);
 
-            Assert.AreEqual("RGB(255, 0, 0)", string_results[0].Cells[col_fg]);
-            Assert.AreEqual("RGB(0, 0, 255)", string_results[0].Cells[col_bg]);
-            Assert.AreEqual("40", string_results[0].Cells[col_filpat]);
+            Assert.AreEqual("RGB(255, 0, 0)", string_results[0][col_fg]);
+            Assert.AreEqual("RGB(0, 0, 255)", string_results[0][col_bg]);
+            Assert.AreEqual("40", string_results[0][col_filpat]);
 
             page1.Delete(0);
             doc1.Close(true);
@@ -130,29 +130,29 @@ namespace TestVisioAutomation
             var formulas = query.GetFormulas(page1, shapeids);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("2",  formulas[0].Cells[col_fg]);
-            Assert.AreEqual("3", formulas[0].Cells[col_bg]);
-            Assert.AreEqual("40", formulas[0].Cells[col_filpat]);
+            Assert.AreEqual("2",  formulas[0][col_fg]);
+            Assert.AreEqual("3", formulas[0][col_bg]);
+            Assert.AreEqual("40", formulas[0][col_filpat]);
 
             // now retrieve the results with GetResults as floats
 
             var float_results = query.GetResults<double>(page1,shapeids);
-            Assert.AreEqual(2.0, float_results[0].Cells[col_fg]);
-            Assert.AreEqual(3.0, float_results[0].Cells[col_bg]);
-            Assert.AreEqual(40.0, float_results[0].Cells[col_filpat]);
+            Assert.AreEqual(2.0, float_results[0][col_fg]);
+            Assert.AreEqual(3.0, float_results[0][col_bg]);
+            Assert.AreEqual(40.0, float_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(page1,shapeids);
 
-            Assert.AreEqual(2, int_results[0].Cells[col_fg]);
-            Assert.AreEqual(3, int_results[0].Cells[col_bg]);
-            Assert.AreEqual(40, int_results[0].Cells[col_filpat]);
+            Assert.AreEqual(2, int_results[0][col_fg]);
+            Assert.AreEqual(3, int_results[0][col_bg]);
+            Assert.AreEqual(40, int_results[0][col_filpat]);
 
             // now retrieve the results with GetResults as strings
             var string_results = query.GetResults<string>(page1,shapeids);
-            Assert.AreEqual("2", string_results[0].Cells[col_fg]);
-            Assert.AreEqual("3", string_results[0].Cells[col_bg]);
-            Assert.AreEqual("40", string_results[0].Cells[col_filpat]);
+            Assert.AreEqual("2", string_results[0][col_fg]);
+            Assert.AreEqual("3", string_results[0][col_bg]);
+            Assert.AreEqual("40", string_results[0][col_filpat]);
 
             page1.Delete(0);
         }
@@ -195,8 +195,8 @@ namespace TestVisioAutomation
             
             var range = Enumerable.Range(0, r.Count);
             var points = range.Select(row => new VA.Drawing.Point(
-                                                 r[row].Cells[col_pinx],
-                                                 r[row].Cells[col_piny]));
+                                                 r[row][col_pinx],
+                                                 r[row][col_piny]));
             var actual_pinpos = new List<VA.Drawing.Point>(points);
 
             Assert.AreEqual(expected_pinpos[0], actual_pinpos[0]);
@@ -289,8 +289,8 @@ namespace TestVisioAutomation
             {
                 for (int col = 0; col < query.Columns.Count; col++)
                 {
-                    Assert.AreEqual(expected_formulas[row,col], rf[row].Cells[col]);
-                    Assert.AreEqual(expected_results[row,col], rr[row].Cells[col]);
+                    Assert.AreEqual(expected_formulas[row,col], rf[row][col]);
+                    Assert.AreEqual(expected_results[row,col], rr[row][col]);
                 }
             }
 
@@ -332,28 +332,28 @@ namespace TestVisioAutomation
             var formulas = query.GetFormulas(s1);
 
             // now verify that the formulas were actually set
-            Assert.AreEqual("2", formulas.Cells[0]);
-            Assert.AreEqual("3", formulas.Cells[1]);
-            Assert.AreEqual("40", formulas.Cells[2]);
+            Assert.AreEqual("2", formulas[0]);
+            Assert.AreEqual("3", formulas[1]);
+            Assert.AreEqual("40", formulas[2]);
 
             // now retrieve the results with GetResults as floats
 
             var float_results = query.GetResults<double>(s1);
-            Assert.AreEqual(2.0, float_results.Cells[0]);
-            Assert.AreEqual(3.0, float_results.Cells[1]);
-            Assert.AreEqual(40.0, float_results.Cells[2]);
+            Assert.AreEqual(2.0, float_results[0]);
+            Assert.AreEqual(3.0, float_results[1]);
+            Assert.AreEqual(40.0, float_results[2]);
 
             // now retrieve the results with GetResults as ints
             var int_results = query.GetResults<int>(s1);
-            Assert.AreEqual(2, int_results.Cells[0]);
-            Assert.AreEqual(3, int_results.Cells[1]);
-            Assert.AreEqual(40, int_results.Cells[2]);
+            Assert.AreEqual(2, int_results[0]);
+            Assert.AreEqual(3, int_results[1]);
+            Assert.AreEqual(40, int_results[2]);
 
             // now retrieve the results with GetResults as strings
             var string_results = query.GetResults<string>(s1);
-            Assert.AreEqual("2", string_results.Cells[0]);
-            Assert.AreEqual("3", string_results.Cells[1]);
-            Assert.AreEqual("40", string_results.Cells[2]);
+            Assert.AreEqual("2", string_results[0]);
+            Assert.AreEqual("3", string_results[1]);
+            Assert.AreEqual("40", string_results[2]);
 
             page1.Delete(0);
         }

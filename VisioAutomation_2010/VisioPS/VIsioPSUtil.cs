@@ -26,7 +26,7 @@ namespace VisioPS
                 // populate the row buffer
                 for (int i = 0; i < colcount; i++)
                 {
-                    rowbuf[i] = query_output[r].Cells[i];
+                    rowbuf[i] = query_output[r][i];
                 }
 
                 // load it into the table
