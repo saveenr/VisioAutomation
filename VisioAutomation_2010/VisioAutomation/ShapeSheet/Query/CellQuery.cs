@@ -157,7 +157,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return r;
         }
 
-        public List<ExQueryResult<string>> GetFormulas(IVisio.Page page, IList<int>  shapeids)
+        public ExQueryResults<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page,shapeids);
@@ -166,7 +166,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public List<ExQueryResult<T>> GetResults<T>(IVisio.Page page, IList<int> shapeids)
+        public ExQueryResults<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
@@ -177,7 +177,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public List<ExQueryResult<CellData<T>>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
+        public ExQueryResults<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
@@ -195,9 +195,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return r;
         }
 
-        private List<ExQueryResult<T>> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values, short[] srcstream)
+        private ExQueryResults<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values, short[] srcstream)
         {
-            var list = new List<ExQueryResult<T>>();
+            var list = new ExQueryResults<T>();
             int cellcount = 0;
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
@@ -426,6 +426,42 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             return total_cells_from_sections;
+        }
+    }
+
+    public class ExQueryResults<T> : IEnumerable<ExQueryResult<T>>
+    {
+        List<ExQueryResult<T>> Items;   
+
+        public ExQueryResults()
+        {
+            this.Items = new List<ExQueryResult<T>> ();
+        }
+
+        public IEnumerator<ExQueryResult<T>> GetEnumerator()
+        {
+            return this.Items.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+
+        public ExQueryResult<T> this[int index]
+	    {
+            get { return this.Items[index]; }
+	    }
+
+        internal void Add(ExQueryResult<T> item)
+        {
+            this.Items.Add(item);
+        }
+
+        public int Count
+        {
+            get { return this.Items.Count; }
         }
     }
 

@@ -188,9 +188,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="run_bindebug_demo.cmd" />
     <None Include="Scripts\manual_install.ps1" />
-    <None Include="Scripts\demo_bin_debug.ps1" />
+    <None Include="Scripts\quickdemo.ps1" />
+    <None Include="Scripts\quickdemo_debug.cmd" />
+    <None Include="Scripts\quickdemo_installed.cmd" />
+    <None Include="Scripts\VisioPSUtil.ps1" />
     <None Include="VisioPS.Types.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -214,9 +216,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\GetCommandHelp.ps1" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,7 +12,7 @@ namespace VisioPS
 {
     static class VisioPSUtil
     {
-        public static DataTable querytable_to_datatable<T>(QueryEx query, List<ExQueryResult<T>> query_output)
+        public static DataTable querytable_to_datatable<T>(QueryEx query, ExQueryResults<T> query_output)
         {
             // TODO Add Name
             // First Construct a Datatable with a compatible schema
