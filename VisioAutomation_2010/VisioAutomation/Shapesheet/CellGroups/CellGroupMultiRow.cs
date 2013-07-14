@@ -26,7 +26,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
                 outer_list.Add(inner_list);
 
                 var sec = data_for_shape.SectionCells[0];
-                foreach (var row in sec.Rows)
+                foreach (var row in sec)
                 {
                     var cells = f(row);
                     inner_list.Add(cells);
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var inner_list = new List<T>();
 
             var sec = data_for_shape.SectionCells[0];
-            foreach (var row in sec.Rows)
+            foreach (var row in sec)
             {
                 var cells = f(row);
                 inner_list.Add(cells);

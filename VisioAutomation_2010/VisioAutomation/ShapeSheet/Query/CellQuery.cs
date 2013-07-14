@@ -185,7 +185,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 foreach (var section in sections)
                 {
                     var section_result = new SectionResult<T>();
-                    section_result.Rows = new List<T[]>();
                     section_result.Query = section.SectionSubQuery;
                     result.SectionCells.Add(section_result);
 
@@ -199,7 +198,7 @@ namespace VisioAutomation.ShapeSheet.Query
                             T value = array[index];
                             row_values[c] = value;
                         }
-                        section_result.Rows.Add(row_values);
+                        section_result.Add(row_values);
                         cellcount += num_cols;
                     }
                 }

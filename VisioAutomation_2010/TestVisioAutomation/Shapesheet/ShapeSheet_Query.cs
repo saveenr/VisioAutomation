@@ -233,17 +233,17 @@ namespace TestVisioAutomation
                 shapeids);
 
             Assert.AreEqual(4, table.Count);
-            Assert.AreEqual(1, table[0].SectionCells[0].Rows.Count);
-            Assert.AreEqual(2, table[1].SectionCells[0].Rows.Count);
-            Assert.AreEqual(0, table[2].SectionCells[0].Rows.Count);
-            Assert.AreEqual(3, table[3].SectionCells[0].Rows.Count);
+            Assert.AreEqual(1, table[0].SectionCells[sec].Count);
+            Assert.AreEqual(2, table[1].SectionCells[sec].Count);
+            Assert.AreEqual(0, table[2].SectionCells[sec].Count);
+            Assert.AreEqual(3, table[3].SectionCells[sec].Count);
 
-            AssertVA.AreEqual("\"1\"", 1.0, table[0].SectionCells[0].Rows[0][0]);
-            AssertVA.AreEqual("\"2\"", 2.0, table[1].SectionCells[0].Rows[0][0]);
-            AssertVA.AreEqual("\"3\"", 3.0, table[1].SectionCells[0].Rows[1][0]);
-            AssertVA.AreEqual("\"4\"", 4.0, table[3].SectionCells[0].Rows[0][0]);
-            AssertVA.AreEqual("\"5\"", 5.0, table[3].SectionCells[0].Rows[1][0]);
-            AssertVA.AreEqual("\"6\"", 6.0, table[3].SectionCells[0].Rows[2][0]);
+            AssertVA.AreEqual("\"1\"", 1.0, table[0].SectionCells[sec][0][0]);
+            AssertVA.AreEqual("\"2\"", 2.0, table[1].SectionCells[sec][0][0]);
+            AssertVA.AreEqual("\"3\"", 3.0, table[1].SectionCells[sec][1][0]);
+            AssertVA.AreEqual("\"4\"", 4.0, table[3].SectionCells[sec][0][0]);
+            AssertVA.AreEqual("\"5\"", 5.0, table[3].SectionCells[sec][1][0]);
+            AssertVA.AreEqual("\"6\"", 6.0, table[3].SectionCells[sec][2][0]);
 
             page1.Delete(0);
         }
