@@ -19,24 +19,24 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Sections = new List<SectionQuery>();
         }
 
-
         public Column AddColumn(SRC src)
         {
-            CheckNotFrozen();
-            int ordinal = this.Columns.Count;
-            var col = new Column(ordinal, src, null);
-            this.Columns.Add(col);
-            return col;
+            return this.AddColumn(src, null);
         }
+
         public Column AddColumn(SRC src,string name)
         {
             CheckNotFrozen();
+
+            if (string.IsNullOrEmpty(name))
+            {
+                name = string.Format("Col{0}", this.Columns.Count);
+            }
             int ordinal = this.Columns.Count;
-            var col = new Column(ordinal, src, null);
+            var col = new Column(ordinal, src, name);
             this.Columns.Add(col);
             return col;
         }
-
         
         public SectionQuery AddSection(IVisio.VisSectionIndices section)
         {

@@ -13,10 +13,13 @@ namespace VisioAutomation.ShapeSheet.Query
 
             protected Column(int ordinal, string name)
             {
+                if (string.IsNullOrEmpty(name))
+                {
+                    throw new System.ArgumentException("name");
+                }
+
                 this.Ordinal = ordinal;
                 this.UnitCode = IVisio.VisUnitCodes.visNoCast;
-
-                this.Name = name ?? string.Format("Column{0}", ordinal);
             }
 
             public int Ordinal { get; private set; }
