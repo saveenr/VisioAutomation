@@ -12,8 +12,8 @@ namespace VisioAutomation.UserDefinedCells
         public string Value { get; set; }
         public string Prompt { get; set; }
 
-        internal static readonly UserDefinedCellQuery query = new UserDefinedCellQuery();
-        internal static readonly UserDefinedCellQuery queryex = new UserDefinedCellQuery();
+        internal static readonly UserDefinedCellCellQuery cellQuery = new UserDefinedCellCellQuery();
+        internal static readonly UserDefinedCellCellQuery queryex = new UserDefinedCellCellQuery();
 
         public UserDefinedCell(string name)
         {
@@ -58,12 +58,12 @@ namespace VisioAutomation.UserDefinedCells
         }
 
 
-        internal class UserDefinedCellQuery : VA.ShapeSheet.Query.QueryEx
+        internal class UserDefinedCellCellQuery : VA.ShapeSheet.Query.CellQuery
         {
             public int Value { get; set; }
             public int Prompt { get; set; }
 
-            public UserDefinedCellQuery()
+            public UserDefinedCellCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionUser);
                 Value = sec.AddColumn(VA.ShapeSheet.SRCConstants.User_Value, "Value");

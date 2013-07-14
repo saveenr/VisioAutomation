@@ -35,15 +35,15 @@ namespace VisioAutomation.Connections
             return _GetCells(shape, query, query.GetCells);
         }
 
-        private static ConnectionPointQuery m_query;
+        private static ConnectionPointCellQuery _mCellQuery;
 
-        private static ConnectionPointQuery get_query()
+        private static ConnectionPointCellQuery get_query()
         {
-            m_query =  m_query ?? new ConnectionPointQuery();
-            return m_query;
+            _mCellQuery =  _mCellQuery ?? new ConnectionPointCellQuery();
+            return _mCellQuery;
         }
 
-        class ConnectionPointQuery : VA.ShapeSheet.Query.QueryEx
+        class ConnectionPointCellQuery : VA.ShapeSheet.Query.CellQuery
         {
             public int DirX { get; set; }
             public int DirY { get; set; }
@@ -51,7 +51,7 @@ namespace VisioAutomation.Connections
             public int X { get; set; }
             public int Y { get; set; }
 
-            public ConnectionPointQuery()
+            public ConnectionPointCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionConnectionPts);
                 DirX = sec.AddColumn(VA.ShapeSheet.SRCConstants.Connections_DirX, "DirX");

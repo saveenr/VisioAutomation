@@ -41,7 +41,7 @@ namespace TestVisioAutomation
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_pinx = query.AddColumn(src_pinx);
             var col_piny = query.AddColumn(src_piny);
 
@@ -74,7 +74,7 @@ namespace TestVisioAutomation
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_fg = query.AddColumn(src_fg);
             var col_linepat = query.AddColumn(src_linepat);
 
@@ -107,7 +107,7 @@ namespace TestVisioAutomation
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_linepat = query.AddColumn(src_linepat);
 
             // Retrieve the values
@@ -129,7 +129,7 @@ namespace TestVisioAutomation
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_linepat = query.AddColumn(src_linepat);
 
             // Retrieve the values
@@ -160,7 +160,7 @@ namespace TestVisioAutomation
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_pinx = query.AddColumn(src_pinx);
             var col_piny = query.AddColumn(src_piny);
 
@@ -241,7 +241,7 @@ namespace TestVisioAutomation
             update.Execute(shape1);
 
             // Build the query
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_linepat = query.AddColumn(src_linepat);
             var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
 

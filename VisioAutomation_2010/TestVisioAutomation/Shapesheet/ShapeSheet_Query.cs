@@ -57,7 +57,7 @@ namespace TestVisioAutomation
             var src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
             var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
 
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_fg = query.AddColumn(src_fg);
             var col_bg = query.AddColumn(src_bg);
             var col_filpat = query.AddColumn(src_filpat);
@@ -120,7 +120,7 @@ namespace TestVisioAutomation
 
             // now retrieve the formulas with GetFormulas
 
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_fg = query.AddColumn(src_fg);
             var col_bg = query.AddColumn(src_bg);
             var col_filpat = query.AddColumn(src_filpat);
@@ -177,7 +177,7 @@ namespace TestVisioAutomation
 
             Assert.AreEqual(3, page1.Shapes.Count);
 
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
             var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
 
@@ -221,7 +221,7 @@ namespace TestVisioAutomation
             VA.CustomProperties.CustomPropertyHelper.Set(s4, "S3P2", "5");
             VA.CustomProperties.CustomPropertyHelper.Set(s4, "S3P3", "6");
 
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             
             var sec = query.AddSection(IVisio.VisSectionIndices.visSectionProp);
             sec.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value,"Value");
@@ -263,7 +263,7 @@ namespace TestVisioAutomation
 
             Assert.AreEqual(3, page1.Shapes.Count);
 
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
             var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
 
@@ -298,9 +298,9 @@ namespace TestVisioAutomation
         }
 
 
-        private static VA.ShapeSheet.Query.QueryEx BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
+        private static VA.ShapeSheet.Query.CellQuery BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
         {
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             foreach (var src in srcs)
             {
                 query.AddColumn(src);

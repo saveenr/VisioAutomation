@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet.Data
             set { this._values[get_pos(row, column)] = value; }
         }
 
-        public T this[int row, VA.ShapeSheet.Query.QueryColumn column]
+        public T this[int row, VA.ShapeSheet.Query.CellQuery.Column column]
         {
             get
             {

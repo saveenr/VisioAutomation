@@ -65,35 +65,35 @@ namespace VisioAutomation.Layout
             return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
-        private static ShapeLayoutQuery m_query;
-        private static ShapeLayoutQuery get_query()
+        private static ShapeLayoutCellQuery _mCellQuery;
+        private static ShapeLayoutCellQuery get_query()
         {
-            m_query = m_query ?? new ShapeLayoutQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new ShapeLayoutCellQuery();
+            return _mCellQuery;
         }
 
-        class ShapeLayoutQuery : VA.ShapeSheet.Query.QueryEx
+        class ShapeLayoutCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public QueryColumn ConFixedCode { get; set; }
-            public QueryColumn ConLineJumpCode { get; set; }
-            public QueryColumn ConLineJumpDirX { get; set; }
-            public QueryColumn ConLineJumpDirY { get; set; }
-            public QueryColumn ConLineJumpStyle { get; set; }
-            public QueryColumn ConLineRouteExt { get; set; }
-            public QueryColumn ShapeFixedCode { get; set; }
-            public QueryColumn ShapePermeablePlace { get; set; }
-            public QueryColumn ShapePermeableX { get; set; }
-            public QueryColumn ShapePermeableY { get; set; }
-            public QueryColumn ShapePlaceFlip { get; set; }
-            public QueryColumn ShapePlaceStyle { get; set; }
-            public QueryColumn ShapePlowCode { get; set; }
-            public QueryColumn ShapeRouteStyle { get; set; }
-            public QueryColumn ShapeSplit { get; set; }
-            public QueryColumn ShapeSplittable { get; set; }
-            public QueryColumn DisplayLevel { get; set; }
-            public QueryColumn Relationships { get; set; }
+            public Column ConFixedCode { get; set; }
+            public Column ConLineJumpCode { get; set; }
+            public Column ConLineJumpDirX { get; set; }
+            public Column ConLineJumpDirY { get; set; }
+            public Column ConLineJumpStyle { get; set; }
+            public Column ConLineRouteExt { get; set; }
+            public Column ShapeFixedCode { get; set; }
+            public Column ShapePermeablePlace { get; set; }
+            public Column ShapePermeableX { get; set; }
+            public Column ShapePermeableY { get; set; }
+            public Column ShapePlaceFlip { get; set; }
+            public Column ShapePlaceStyle { get; set; }
+            public Column ShapePlowCode { get; set; }
+            public Column ShapeRouteStyle { get; set; }
+            public Column ShapeSplit { get; set; }
+            public Column ShapeSplittable { get; set; }
+            public Column DisplayLevel { get; set; }
+            public Column Relationships { get; set; }
 
-            public ShapeLayoutQuery() :
+            public ShapeLayoutCellQuery() :
                 base()
             {
                 this.ConFixedCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ConFixedCode, "ConFixedCode");

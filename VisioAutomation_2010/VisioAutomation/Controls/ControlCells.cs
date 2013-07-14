@@ -28,17 +28,17 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
-        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
+        private static ControlCells get_cells_from_row(ControlCellQuery cellQuery, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new ControlCells();
-            cells.CanGlue = table[row,query.CanGlue].ToInt();
-            cells.Tip = table[row,query.Tip].ToInt();
-            cells.X = table[row,query.X];
-            cells.Y = table[row,query.Y];
-            cells.YBehavior = table[row,query.YBehavior].ToInt();
-            cells.XBehavior = table[row,query.XBehavior].ToInt();
-            cells.XDynamics = table[row,query.XDynamics].ToInt();
-            cells.YDynamics = table[row,query.YDynamics].ToInt();
+            cells.CanGlue = table[row,cellQuery.CanGlue].ToInt();
+            cells.Tip = table[row,cellQuery.Tip].ToInt();
+            cells.X = table[row,cellQuery.X];
+            cells.Y = table[row,cellQuery.Y];
+            cells.YBehavior = table[row,cellQuery.YBehavior].ToInt();
+            cells.XBehavior = table[row,cellQuery.XBehavior].ToInt();
+            cells.XDynamics = table[row,cellQuery.XDynamics].ToInt();
+            cells.YDynamics = table[row,cellQuery.YDynamics].ToInt();
             return cells;
         }
 
@@ -54,14 +54,14 @@ namespace VisioAutomation.Controls
             return _GetCells(shape, query, query.GetCells);
         }
 
-        private static ControlQuery m_query;
-        private static ControlQuery get_query()
+        private static ControlCellQuery _mCellQuery;
+        private static ControlCellQuery get_query()
         {
-            m_query = m_query ?? new ControlQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new ControlCellQuery();
+            return _mCellQuery;
         }
 
-        class ControlQuery : VA.ShapeSheet.Query.QueryEx
+        class ControlCellQuery : VA.ShapeSheet.Query.CellQuery
         {
             public int CanGlue { get; set; }
             public int Tip { get; set; }
@@ -72,7 +72,7 @@ namespace VisioAutomation.Controls
             public int XDynamics { get; set; }
             public int YDynamics { get; set; }
 
-            public ControlQuery() 
+            public ControlCellQuery() 
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionControls);
                 this.CanGlue = sec.AddColumn(VA.ShapeSheet.SRCConstants.Controls_CanGlue, "CanGlue");

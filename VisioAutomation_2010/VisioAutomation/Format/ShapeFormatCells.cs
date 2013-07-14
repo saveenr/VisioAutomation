@@ -77,42 +77,42 @@ namespace VisioAutomation.Format
             return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
-        private static ShapeFormatQuery m_query;
-        private static ShapeFormatQuery get_query()
+        private static ShapeFormatCellQuery _mCellQuery;
+        private static ShapeFormatCellQuery get_query()
         {
-            m_query = m_query ?? new ShapeFormatQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new ShapeFormatCellQuery();
+            return _mCellQuery;
         }
 
-        class ShapeFormatQuery : VA.ShapeSheet.Query.QueryEx
+        class ShapeFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public QueryColumn FillBkgnd { get; set; }
-            public QueryColumn FillBkgndTrans { get; set; }
-            public QueryColumn FillForegnd { get; set; }
-            public QueryColumn FillForegndTrans { get; set; }
-            public QueryColumn FillPattern { get; set; }
-            public QueryColumn ShapeShdwObliqueAngle { get; set; }
-            public QueryColumn ShapeShdwOffsetX { get; set; }
-            public QueryColumn ShapeShdwOffsetY { get; set; }
-            public QueryColumn ShapeShdwScaleFactor { get; set; }
-            public QueryColumn ShapeShdwType { get; set; }
-            public QueryColumn ShdwBkgnd { get; set; }
-            public QueryColumn ShdwBkgndTrans { get; set; }
-            public QueryColumn ShdwForegnd { get; set; }
-            public QueryColumn ShdwForegndTrans { get; set; }
-            public QueryColumn ShdwPattern { get; set; }
-            public QueryColumn BeginArrow { get; set; }
-            public QueryColumn BeginArrowSize { get; set; }
-            public QueryColumn EndArrow { get; set; }
-            public QueryColumn EndArrowSize { get; set; }
-            public QueryColumn LineColor { get; set; }
-            public QueryColumn LineCap { get; set; }
-            public QueryColumn LineColorTrans { get; set; }
-            public QueryColumn LinePattern { get; set; }
-            public QueryColumn LineWeight { get; set; }
-            public QueryColumn Rounding { get; set; }
+            public Column FillBkgnd { get; set; }
+            public Column FillBkgndTrans { get; set; }
+            public Column FillForegnd { get; set; }
+            public Column FillForegndTrans { get; set; }
+            public Column FillPattern { get; set; }
+            public Column ShapeShdwObliqueAngle { get; set; }
+            public Column ShapeShdwOffsetX { get; set; }
+            public Column ShapeShdwOffsetY { get; set; }
+            public Column ShapeShdwScaleFactor { get; set; }
+            public Column ShapeShdwType { get; set; }
+            public Column ShdwBkgnd { get; set; }
+            public Column ShdwBkgndTrans { get; set; }
+            public Column ShdwForegnd { get; set; }
+            public Column ShdwForegndTrans { get; set; }
+            public Column ShdwPattern { get; set; }
+            public Column BeginArrow { get; set; }
+            public Column BeginArrowSize { get; set; }
+            public Column EndArrow { get; set; }
+            public Column EndArrowSize { get; set; }
+            public Column LineColor { get; set; }
+            public Column LineCap { get; set; }
+            public Column LineColorTrans { get; set; }
+            public Column LinePattern { get; set; }
+            public Column LineWeight { get; set; }
+            public Column Rounding { get; set; }
 
-            public ShapeFormatQuery()
+            public ShapeFormatCellQuery()
             {
                 this.FillBkgnd = this.AddColumn(VA.ShapeSheet.SRCConstants.FillBkgnd, "FillBkgnd");
                 this.FillBkgndTrans = this.AddColumn(VA.ShapeSheet.SRCConstants.FillBkgndTrans, "FillBkgndTrans");

@@ -80,31 +80,31 @@ namespace VisioAutomation.CustomProperties
             return _GetCells(shape, query, query.GetCells);
         }
 
-        private static CustomPropertyQuery m_query;
-        private static CustomPropertyQuery get_query()
+        private static CustomPropertyCellQuery _mCellQuery;
+        private static CustomPropertyCellQuery get_query()
         {
-            m_query = m_query ?? new CustomPropertyQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new CustomPropertyCellQuery();
+            return _mCellQuery;
         }
 
-        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
+        private static CustomPropertyCells get_cells_from_row(CustomPropertyCellQuery cellQuery, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new CustomPropertyCells();
 
-            cells.Value = table[row,query.Value];
-            cells.Calendar = table[row,query.Calendar].ToInt();
-            cells.Format = table[row,query.Format];
-            cells.Invisible = table[row,query.Invis].ToInt();
-            cells.Label = table[row,query.Label];
-            cells.LangId = table[row,query.LangID].ToInt();
-            cells.Prompt = table[row,query.Prompt];
-            cells.SortKey = table[row,query.SortKey].ToInt();
-            cells.Type = table[row,query.Type].ToInt();
+            cells.Value = table[row,cellQuery.Value];
+            cells.Calendar = table[row,cellQuery.Calendar].ToInt();
+            cells.Format = table[row,cellQuery.Format];
+            cells.Invisible = table[row,cellQuery.Invis].ToInt();
+            cells.Label = table[row,cellQuery.Label];
+            cells.LangId = table[row,cellQuery.LangID].ToInt();
+            cells.Prompt = table[row,cellQuery.Prompt];
+            cells.SortKey = table[row,cellQuery.SortKey].ToInt();
+            cells.Type = table[row,cellQuery.Type].ToInt();
             return cells;
         }
     }
 
-    class CustomPropertyQuery : VA.ShapeSheet.Query.QueryEx
+    class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery
     {
         public int SortKey { get; set; }
         public int Ask { get; set; }
@@ -117,7 +117,7 @@ namespace VisioAutomation.CustomProperties
         public int Value { get; set; }
         public int Type { get; set; }
 
-        public CustomPropertyQuery() 
+        public CustomPropertyCellQuery() 
         {
             var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
 

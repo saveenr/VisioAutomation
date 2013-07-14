@@ -243,9 +243,9 @@ namespace VisioAutomation.Text
         }
 
 
-        private VA.ShapeSheet.Query.QueryEx GetQuery()
+        private VA.ShapeSheet.Query.CellQuery GetQuery()
         {
-            var q = new VA.ShapeSheet.Query.QueryEx();
+            var q = new VA.ShapeSheet.Query.CellQuery();
 
             return q;
         }

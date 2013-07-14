@@ -164,6 +164,11 @@
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_QueryResults.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_QueryResult.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_SectionSubQueryInfo.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_SectionSubQuery.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_SectionResult.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\Markup\CharacterCells.cs" />
     <Compile Include="Text\Markup\ParagraphCells.cs" />
@@ -215,8 +220,7 @@
     <Compile Include="Layout\XFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="Shapesheet\Query\QueryBase.cs" />
-    <Compile Include="Shapesheet\Query\QueryColumn.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_Column.cs" />
     <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
     <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\ShapeList.cs" />

@@ -35,7 +35,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var query = new VA.ShapeSheet.Query.QueryEx();
+            var query = new VA.ShapeSheet.Query.CellQuery();
 
             var dic = GetPageCellDictionary();
             foreach (var cell in this.Cells)

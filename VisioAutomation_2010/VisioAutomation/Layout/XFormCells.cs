@@ -42,24 +42,24 @@ namespace VisioAutomation.Layout
             return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
-        private static XFormQuery m_query;
-        private static XFormQuery get_query()
+        private static XFormCellQuery _mCellQuery;
+        private static XFormCellQuery get_query()
         {
-            m_query = m_query ?? new XFormQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new XFormCellQuery();
+            return _mCellQuery;
         }
 
-        class XFormQuery : VA.ShapeSheet.Query.QueryEx
+        class XFormCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public QueryColumn Width { get; set; }
-            public QueryColumn Height { get; set; }
-            public QueryColumn PinX { get; set; }
-            public QueryColumn PinY { get; set; }
-            public QueryColumn LocPinX { get; set; }
-            public QueryColumn LocPinY { get; set; }
-            public QueryColumn Angle { get; set; }
+            public Column Width { get; set; }
+            public Column Height { get; set; }
+            public Column PinX { get; set; }
+            public Column PinY { get; set; }
+            public Column LocPinX { get; set; }
+            public Column LocPinY { get; set; }
+            public Column Angle { get; set; }
 
-            public XFormQuery()
+            public XFormCellQuery()
             {
                 PinX = this.AddColumn(VA.ShapeSheet.SRCConstants.PinX, "PinX");
                 PinY = this.AddColumn(VA.ShapeSheet.SRCConstants.PinY, "PinY");

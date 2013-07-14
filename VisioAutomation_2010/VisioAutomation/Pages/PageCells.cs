@@ -161,84 +161,84 @@ namespace VisioAutomation.Pages
             return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
-        private static PageQuery m_query;
-        private static PageQuery get_query()
+        private static PageCellQuery _mCellQuery;
+        private static PageCellQuery get_query()
         {
-            m_query = m_query ?? new PageQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new PageCellQuery();
+            return _mCellQuery;
         }
 
-        class PageQuery : VA.ShapeSheet.Query.QueryEx
+        class PageCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public QueryColumn PageLeftMargin { get; set; }
-            public QueryColumn CenterX { get; set; }
-            public QueryColumn CenterY { get; set; }
-            public QueryColumn OnPage { get; set; }
-            public QueryColumn PageBottomMargin { get; set; }
-            public QueryColumn PageRightMargin { get; set; }
-            public QueryColumn PagesX { get; set; }
-            public QueryColumn PagesY { get; set; }
-            public QueryColumn PageTopMargin { get; set; }
-            public QueryColumn PaperKind { get; set; }
-            public QueryColumn PrintGrid { get; set; }
-            public QueryColumn PrintPageOrientation { get; set; }
-            public QueryColumn ScaleX { get; set; }
-            public QueryColumn ScaleY { get; set; }
-            public QueryColumn PaperSource { get; set; }
-            public QueryColumn DrawingScale { get; set; }
-            public QueryColumn DrawingScaleType { get; set; }
-            public QueryColumn DrawingSizeType { get; set; }
-            public QueryColumn InhibitSnap { get; set; }
-            public QueryColumn PageHeight { get; set; }
-            public QueryColumn PageScale { get; set; }
-            public QueryColumn PageWidth { get; set; }
-            public QueryColumn ShdwObliqueAngle { get; set; }
-            public QueryColumn ShdwOffsetX { get; set; }
-            public QueryColumn ShdwOffsetY { get; set; }
-            public QueryColumn ShdwScaleFactor { get; set; }
-            public QueryColumn ShdwType { get; set; }
-            public QueryColumn UIVisibility { get; set; }
-            public QueryColumn XGridDensity { get; set; }
-            public QueryColumn XGridOrigin { get; set; }
-            public QueryColumn XGridSpacing { get; set; }
-            public QueryColumn XRulerDensity { get; set; }
-            public QueryColumn XRulerOrigin { get; set; }
-            public QueryColumn YGridDensity { get; set; }
-            public QueryColumn YGridOrigin { get; set; }
-            public QueryColumn YGridSpacing { get; set; }
-            public QueryColumn YRulerDensity { get; set; }
-            public QueryColumn YRulerOrigin { get; set; }
-            public QueryColumn AvenueSizeX { get; set; }
-            public QueryColumn AvenueSizeY { get; set; }
-            public QueryColumn BlockSizeX { get; set; }
-            public QueryColumn BlockSizeY { get; set; }
-            public QueryColumn CtrlAsInput { get; set; }
-            public QueryColumn DynamicsOff { get; set; }
-            public QueryColumn EnableGrid { get; set; }
-            public QueryColumn LineAdjustFrom { get; set; }
-            public QueryColumn LineAdjustTo { get; set; }
-            public QueryColumn LineJumpCode { get; set; }
-            public QueryColumn LineJumpFactorX { get; set; }
-            public QueryColumn LineJumpFactorY { get; set; }
-            public QueryColumn LineJumpStyle { get; set; }
-            public QueryColumn LineRouteExt { get; set; }
-            public QueryColumn LineToLineX { get; set; }
-            public QueryColumn LineToLineY { get; set; }
-            public QueryColumn LineToNodeX { get; set; }
-            public QueryColumn LineToNodeY { get; set; }
-            public QueryColumn PageLineJumpDirX { get; set; }
-            public QueryColumn PageLineJumpDirY { get; set; }
-            public QueryColumn PageShapeSplit { get; set; }
-            public QueryColumn PlaceDepth { get; set; }
-            public QueryColumn PlaceFlip { get; set; }
-            public QueryColumn PlaceStyle { get; set; }
-            public QueryColumn PlowCode { get; set; }
-            public QueryColumn ResizePage { get; set; }
-            public QueryColumn RouteStyle { get; set; }
-            public QueryColumn AvoidPageBreaks { get; set; }
-            public QueryColumn DrawingResizeType { get; set; }
+            public Column PageLeftMargin { get; set; }
+            public Column CenterX { get; set; }
+            public Column CenterY { get; set; }
+            public Column OnPage { get; set; }
+            public Column PageBottomMargin { get; set; }
+            public Column PageRightMargin { get; set; }
+            public Column PagesX { get; set; }
+            public Column PagesY { get; set; }
+            public Column PageTopMargin { get; set; }
+            public Column PaperKind { get; set; }
+            public Column PrintGrid { get; set; }
+            public Column PrintPageOrientation { get; set; }
+            public Column ScaleX { get; set; }
+            public Column ScaleY { get; set; }
+            public Column PaperSource { get; set; }
+            public Column DrawingScale { get; set; }
+            public Column DrawingScaleType { get; set; }
+            public Column DrawingSizeType { get; set; }
+            public Column InhibitSnap { get; set; }
+            public Column PageHeight { get; set; }
+            public Column PageScale { get; set; }
+            public Column PageWidth { get; set; }
+            public Column ShdwObliqueAngle { get; set; }
+            public Column ShdwOffsetX { get; set; }
+            public Column ShdwOffsetY { get; set; }
+            public Column ShdwScaleFactor { get; set; }
+            public Column ShdwType { get; set; }
+            public Column UIVisibility { get; set; }
+            public Column XGridDensity { get; set; }
+            public Column XGridOrigin { get; set; }
+            public Column XGridSpacing { get; set; }
+            public Column XRulerDensity { get; set; }
+            public Column XRulerOrigin { get; set; }
+            public Column YGridDensity { get; set; }
+            public Column YGridOrigin { get; set; }
+            public Column YGridSpacing { get; set; }
+            public Column YRulerDensity { get; set; }
+            public Column YRulerOrigin { get; set; }
+            public Column AvenueSizeX { get; set; }
+            public Column AvenueSizeY { get; set; }
+            public Column BlockSizeX { get; set; }
+            public Column BlockSizeY { get; set; }
+            public Column CtrlAsInput { get; set; }
+            public Column DynamicsOff { get; set; }
+            public Column EnableGrid { get; set; }
+            public Column LineAdjustFrom { get; set; }
+            public Column LineAdjustTo { get; set; }
+            public Column LineJumpCode { get; set; }
+            public Column LineJumpFactorX { get; set; }
+            public Column LineJumpFactorY { get; set; }
+            public Column LineJumpStyle { get; set; }
+            public Column LineRouteExt { get; set; }
+            public Column LineToLineX { get; set; }
+            public Column LineToLineY { get; set; }
+            public Column LineToNodeX { get; set; }
+            public Column LineToNodeY { get; set; }
+            public Column PageLineJumpDirX { get; set; }
+            public Column PageLineJumpDirY { get; set; }
+            public Column PageShapeSplit { get; set; }
+            public Column PlaceDepth { get; set; }
+            public Column PlaceFlip { get; set; }
+            public Column PlaceStyle { get; set; }
+            public Column PlowCode { get; set; }
+            public Column ResizePage { get; set; }
+            public Column RouteStyle { get; set; }
+            public Column AvoidPageBreaks { get; set; }
+            public Column DrawingResizeType { get; set; }
 
-            public PageQuery() 
+            public PageCellQuery() 
             {
                 this.PageLeftMargin = this.AddColumn(VA.ShapeSheet.SRCConstants.PageLeftMargin, "PageLeftMargin");
                 this.CenterX = this.AddColumn(VA.ShapeSheet.SRCConstants.CenterX, "CenterX");

@@ -191,7 +191,7 @@ namespace VisioAutomation.UserDefinedCells
 
         public static List<UserDefinedCell> create_userdefined_cell_list(
             IList<string> prop_names,
-            VA.ShapeSheet.Query.QueryEx.SectionResult<string> sectiondata)
+            VA.ShapeSheet.Query.CellQuery.SectionResult<string> sectiondata)
         {
             var custom_props = new List<UserDefinedCell>();
             int name_index = 0;

@@ -37,7 +37,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var query = new VisioAutomation.ShapeSheet.Query.QueryEx();
+            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
 
             var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();

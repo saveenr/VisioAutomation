@@ -77,15 +77,15 @@ namespace VisioAutomation.Text
             return _GetCells(shape, query, query.GetCells);
         }
 
-        private static CharacterFormatQuery m_query;
+        private static CharacterFormatCellQuery _mCellQuery;
 
-        private static CharacterFormatQuery get_query()
+        private static CharacterFormatCellQuery get_query()
         {
-            m_query = m_query ?? new CharacterFormatQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new CharacterFormatCellQuery();
+            return _mCellQuery;
         }
 
-        class CharacterFormatQuery : VA.ShapeSheet.Query.QueryEx
+        class CharacterFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
             public int Font { get; set; }
             public int Style { get; set; }
@@ -110,7 +110,7 @@ namespace VisioAutomation.Text
             public int Strikethru { get; set; }
             public int UseVertical { get; set; }
 
-            public CharacterFormatQuery() 
+            public CharacterFormatCellQuery() 
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
                 Color = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharColor, "Color");

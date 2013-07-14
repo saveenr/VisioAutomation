@@ -58,56 +58,56 @@ namespace VisioAutomation.Text
             return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
-        private static TextBlockFormatQuery m_query;
-        private static TextBlockFormatQuery get_query()
+        private static TextBlockFormatCellQuery _mCellQuery;
+        private static TextBlockFormatCellQuery get_query()
         {
-            m_query= m_query ?? new TextBlockFormatQuery();
-            return m_query;
+            _mCellQuery= _mCellQuery ?? new TextBlockFormatCellQuery();
+            return _mCellQuery;
         }
 
-        private static TextCells get_cells_from_row(TextBlockFormatQuery query,
+        private static TextCells get_cells_from_row(TextBlockFormatCellQuery cellQuery,
                                                                VA.ShapeSheet.Data.Table <VA.ShapeSheet.CellData<double>> table, int row)
         {
             var cells = new TextCells();
-            cells.BottomMargin = table[row,query.BottomMargin];
-            cells.LeftMargin = table[row,query.LeftMargin];
-            cells.RightMargin = table[row,query.RightMargin];
-            cells.TopMargin = table[row,query.TopMargin];
-            cells.DefaultTabStop = table[row,query.DefaultTabStop];
-            cells.TextBkgnd = table[row,query.TextBkgnd].ToInt();
-            cells.TextBkgndTrans = table[row,query.TextBkgndTrans];
-            cells.TextDirection = table[row,query.TextDirection].ToInt();
-            cells.VerticalAlign = table[row,query.VerticalAlign].ToInt();
-            cells.TxtPinX = table[row,query.TxtPinX];
-            cells.TxtPinY = table[row,query.TxtPinY];
-            cells.TxtLocPinX = table[row,query.TxtLocPinX];
-            cells.TxtLocPinY = table[row,query.TxtLocPinY];
-            cells.TxtWidth = table[row,query.TxtWidth];
-            cells.TxtHeight = table[row,query.TxtHeight];
-            cells.TxtAngle = table[row,query.TxtAngle];
+            cells.BottomMargin = table[row,cellQuery.BottomMargin];
+            cells.LeftMargin = table[row,cellQuery.LeftMargin];
+            cells.RightMargin = table[row,cellQuery.RightMargin];
+            cells.TopMargin = table[row,cellQuery.TopMargin];
+            cells.DefaultTabStop = table[row,cellQuery.DefaultTabStop];
+            cells.TextBkgnd = table[row,cellQuery.TextBkgnd].ToInt();
+            cells.TextBkgndTrans = table[row,cellQuery.TextBkgndTrans];
+            cells.TextDirection = table[row,cellQuery.TextDirection].ToInt();
+            cells.VerticalAlign = table[row,cellQuery.VerticalAlign].ToInt();
+            cells.TxtPinX = table[row,cellQuery.TxtPinX];
+            cells.TxtPinY = table[row,cellQuery.TxtPinY];
+            cells.TxtLocPinX = table[row,cellQuery.TxtLocPinX];
+            cells.TxtLocPinY = table[row,cellQuery.TxtLocPinY];
+            cells.TxtWidth = table[row,cellQuery.TxtWidth];
+            cells.TxtHeight = table[row,cellQuery.TxtHeight];
+            cells.TxtAngle = table[row,cellQuery.TxtAngle];
             return cells;
         }
 
-        private class TextBlockFormatQuery : VA.ShapeSheet.Query.QueryEx
+        private class TextBlockFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public QueryColumn BottomMargin { get; set; }
-            public QueryColumn LeftMargin { get; set; }
-            public QueryColumn RightMargin { get; set; }
-            public QueryColumn TopMargin { get; set; }
-            public QueryColumn DefaultTabStop { get; set; }
-            public QueryColumn TextBkgnd { get; set; }
-            public QueryColumn TextBkgndTrans { get; set; }
-            public QueryColumn TextDirection { get; set; }
-            public QueryColumn VerticalAlign { get; set; }
-            public QueryColumn TxtWidth { get; set; }
-            public QueryColumn TxtHeight { get; set; }
-            public QueryColumn TxtPinX { get; set; }
-            public QueryColumn TxtPinY { get; set; }
-            public QueryColumn TxtLocPinX { get; set; }
-            public QueryColumn TxtLocPinY { get; set; }
-            public QueryColumn TxtAngle { get; set; }
+            public Column BottomMargin { get; set; }
+            public Column LeftMargin { get; set; }
+            public Column RightMargin { get; set; }
+            public Column TopMargin { get; set; }
+            public Column DefaultTabStop { get; set; }
+            public Column TextBkgnd { get; set; }
+            public Column TextBkgndTrans { get; set; }
+            public Column TextDirection { get; set; }
+            public Column VerticalAlign { get; set; }
+            public Column TxtWidth { get; set; }
+            public Column TxtHeight { get; set; }
+            public Column TxtPinX { get; set; }
+            public Column TxtPinY { get; set; }
+            public Column TxtLocPinX { get; set; }
+            public Column TxtLocPinY { get; set; }
+            public Column TxtAngle { get; set; }
 
-            public TextBlockFormatQuery() :
+            public TextBlockFormatCellQuery() :
                 base()
             {
                 BottomMargin = this.AddColumn(VA.ShapeSheet.SRCConstants.BottomMargin, "BottomMargin");

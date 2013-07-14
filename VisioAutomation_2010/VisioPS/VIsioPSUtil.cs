@@ -8,18 +8,18 @@ namespace VisioPS
 {
     static class VisioPSUtil
     {
-        public static DataTable querytable_to_datatable<T>(QueryEx query, QueryEx.QueryResults<T> query_output)
+        public static DataTable querytable_to_datatable<T>(CellQuery cellQuery, CellQuery.QueryResults<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
-            foreach (var col in query.Columns)
+            foreach (var col in cellQuery.Columns)
             {
                 dt.Columns.Add(col.Name, typeof(T));
             }
 
             // Then populate the rows of the datatable
             dt.BeginLoadData();
-            int colcount = query.Columns.Count;
+            int colcount = cellQuery.Columns.Count;
             var rowbuf = new object[colcount];
             for (int r = 0; r < query_output.Count; r++)
             {
@@ -36,29 +36,29 @@ namespace VisioPS
             return dt;
         }
 
-        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.QueryEx query, bool getresults, ResultType ResultType, IList<int> shapeids, IVisio.Page page)
+        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, IVisio.Page page)
         {
             if (getresults)
             {
                 if (ResultType == ResultType.String)
                 {
-                    var output = query.GetResults<string>(page, shapeids);
-                    return VisioPSUtil.querytable_to_datatable(query, output);
+                    var output = cellQuery.GetResults<string>(page, shapeids);
+                    return VisioPSUtil.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Boolean)
                 {
-                    var output = query.GetResults<bool>(page, shapeids);
-                    return VisioPSUtil.querytable_to_datatable(query, output);
+                    var output = cellQuery.GetResults<bool>(page, shapeids);
+                    return VisioPSUtil.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Double)
                 {
-                    var output = query.GetResults<double>(page, shapeids);
-                    return VisioPSUtil.querytable_to_datatable(query, output);
+                    var output = cellQuery.GetResults<double>(page, shapeids);
+                    return VisioPSUtil.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Integer)
                 {
-                    var output = query.GetResults<int>(page, shapeids);
-                    return VisioPSUtil.querytable_to_datatable(query, output);
+                    var output = cellQuery.GetResults<int>(page, shapeids);
+                    return VisioPSUtil.querytable_to_datatable(cellQuery, output);
                 }
                 else
                 {
@@ -67,8 +67,8 @@ namespace VisioPS
             }
             else
             {
-                var output = query.GetFormulas(page, shapeids);
-                return VisioPSUtil.querytable_to_datatable(query, output);
+                var output = cellQuery.GetFormulas(page, shapeids);
+                return VisioPSUtil.querytable_to_datatable(cellQuery, output);
             }
         }
     }
