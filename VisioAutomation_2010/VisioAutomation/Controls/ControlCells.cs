@@ -63,14 +63,14 @@ namespace VisioAutomation.Controls
 
         class ControlCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public int CanGlue { get; set; }
-            public int Tip { get; set; }
-            public int X { get; set; }
-            public int Y { get; set; }
-            public int YBehavior { get; set; }
-            public int XBehavior { get; set; }
-            public int XDynamics { get; set; }
-            public int YDynamics { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column CanGlue { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Tip { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column X { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Y { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column YBehavior { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column XBehavior { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column XDynamics { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column YDynamics { get; set; }
 
             public ControlCellQuery() 
             {
@@ -88,14 +88,14 @@ namespace VisioAutomation.Controls
             public ControlCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
                 var cells = new ControlCells();
-                cells.CanGlue = row[CanGlue].ToInt();
-                cells.Tip = row[Tip].ToInt();
-                cells.X = row[X];
-                cells.Y = row[Y];
-                cells.YBehavior = row[YBehavior].ToInt();
-                cells.XBehavior = row[XBehavior].ToInt();
-                cells.XDynamics = row[XDynamics].ToInt();
-                cells.YDynamics = row[YDynamics].ToInt();
+                cells.CanGlue = row[CanGlue.Ordinal].ToInt();
+                cells.Tip = row[Tip.Ordinal].ToInt();
+                cells.X = row[X.Ordinal];
+                cells.Y = row[Y.Ordinal];
+                cells.YBehavior = row[YBehavior.Ordinal].ToInt();
+                cells.XBehavior = row[XBehavior.Ordinal].ToInt();
+                cells.XDynamics = row[XDynamics.Ordinal].ToInt();
+                cells.YDynamics = row[YDynamics.Ordinal].ToInt();
                 return cells;
             }
         }

@@ -26,10 +26,14 @@ namespace VisioAutomation.ShapeSheet.Query
                 return GetEnumerator();
             }
 
-
             public QueryResult<T> this[int index]
             {
                 get { return this.Items[index]; }
+            }
+
+            public QueryResult<T> this[CellQuery.Column index]
+            {
+                get { return this.Items[index.Ordinal]; }
             }
 
             internal void Add(QueryResult<T> item)

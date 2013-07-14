@@ -87,28 +87,28 @@ namespace VisioAutomation.Text
 
         class CharacterFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public int Font { get; set; }
-            public int Style { get; set; }
-            public int Color { get; set; }
-            public int Size { get; set; }
-            public int Trans { get; set; }
-            public int AsianFont { get; set; }
-            public int Case { get; set; }
-            public int ComplexScriptFont { get; set; }
-            public int ComplexScriptSize { get; set; }
-            public int DoubleStrikethrough { get; set; }
-            public int DoubleUnderline { get; set; }
-            public int LangID { get; set; }
-            public int Locale { get; set; }
-            public int LocalizeFont { get; set; }
-            public int Overline { get; set; }
-            public int Perpendicular { get; set; }
-            public int Pos { get; set; }
-            public int RTLText { get; set; }
-            public int FontScale { get; set; }
-            public int Letterspace { get; set; }
-            public int Strikethru { get; set; }
-            public int UseVertical { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Font { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Style { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Color { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Size { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Trans { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column AsianFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Case { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column ComplexScriptFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column ComplexScriptSize { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column DoubleStrikethrough { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column DoubleUnderline { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column LangID { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Locale { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column LocalizeFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Overline { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Perpendicular { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Pos { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column RTLText { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column FontScale { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Letterspace { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Strikethru { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column UseVertical { get; set; }
 
             public CharacterFormatCellQuery() 
             {
@@ -140,29 +140,29 @@ namespace VisioAutomation.Text
             public CharacterFormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
                 var cells = new CharacterFormatCells();
-                cells.Color = row[this.Color].ToInt();
-                cells.Transparency = row[this.Trans];
-                cells.Font = row[this.Font].ToInt();
-                cells.Size = row[this.Size];
-                cells.Style = row[this.Style].ToInt();
-                cells.AsianFont = row[this.AsianFont].ToInt();
-                cells.AsianFont = row[this.AsianFont].ToInt();
-                cells.Case = row[this.Case].ToInt();
-                cells.ComplexScriptFont = row[this.ComplexScriptFont].ToInt();
-                cells.ComplexScriptSize = row[this.ComplexScriptSize];
-                cells.DoubleStrikeThrough = row[this.DoubleStrikethrough].ToBool();
-                cells.DoubleUnderline = row[this.DoubleUnderline].ToBool();
-                cells.FontScale = row[this.FontScale];
-                cells.LangID = row[this.LangID].ToInt();
-                cells.Letterspace = row[this.Letterspace];
-                cells.Locale = row[this.Locale].ToInt();
-                cells.LocalizeFont = row[this.LocalizeFont].ToInt();
-                cells.Overline = row[this.Overline].ToBool();
-                cells.Perpendicular = row[this.Perpendicular].ToBool();
-                cells.Pos = row[this.Pos].ToInt();
-                cells.RTLText = row[this.RTLText].ToInt();
-                cells.Strikethru = row[this.Strikethru].ToBool();
-                cells.UseVertical = row[this.UseVertical].ToInt();
+                cells.Color = row[this.Color.Ordinal].ToInt();
+                cells.Transparency = row[this.Trans.Ordinal];
+                cells.Font = row[this.Font.Ordinal].ToInt();
+                cells.Size = row[this.Size.Ordinal];
+                cells.Style = row[this.Style.Ordinal].ToInt();
+                cells.AsianFont = row[this.AsianFont.Ordinal].ToInt();
+                cells.AsianFont = row[this.AsianFont.Ordinal].ToInt();
+                cells.Case = row[this.Case.Ordinal].ToInt();
+                cells.ComplexScriptFont = row[this.ComplexScriptFont.Ordinal].ToInt();
+                cells.ComplexScriptSize = row[this.ComplexScriptSize.Ordinal];
+                cells.DoubleStrikeThrough = row[this.DoubleStrikethrough.Ordinal].ToBool();
+                cells.DoubleUnderline = row[this.DoubleUnderline.Ordinal].ToBool();
+                cells.FontScale = row[this.FontScale.Ordinal];
+                cells.LangID = row[this.LangID.Ordinal].ToInt();
+                cells.Letterspace = row[this.Letterspace.Ordinal];
+                cells.Locale = row[this.Locale.Ordinal].ToInt();
+                cells.LocalizeFont = row[this.LocalizeFont.Ordinal].ToInt();
+                cells.Overline = row[this.Overline.Ordinal].ToBool();
+                cells.Perpendicular = row[this.Perpendicular.Ordinal].ToBool();
+                cells.Pos = row[this.Pos.Ordinal].ToInt();
+                cells.RTLText = row[this.RTLText.Ordinal].ToInt();
+                cells.Strikethru = row[this.Strikethru.Ordinal].ToBool();
+                cells.UseVertical = row[this.UseVertical.Ordinal].ToInt();
 
                 return cells;
             }

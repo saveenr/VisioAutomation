@@ -365,7 +365,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (short rowindex in sd.RowIndexes)
                         {
-                            foreach (short col in sd.SectionQuery.Columns)
+                            foreach (var col in sd.SectionQuery.Columns)
                             {
                                 total_cells_from_sections++;
                             } 

@@ -45,11 +45,11 @@ namespace VisioAutomation.Connections
 
         class ConnectionPointCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public int DirX { get; set; }
-            public int DirY { get; set; }
-            public int Type { get; set; }
-            public int X { get; set; }
-            public int Y { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column DirX { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column DirY { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Type { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column X { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Y { get; set; }
 
             public ConnectionPointCellQuery()
             {
@@ -64,11 +64,11 @@ namespace VisioAutomation.Connections
             public ConnectionPointCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
                 var cells = new ConnectionPointCells();
-                cells.X = row[this.X];
-                cells.Y = row[this.Y];
-                cells.DirX = row[this.DirX].ToInt();
-                cells.DirY = row[this.DirY].ToInt();
-                cells.Type = row[this.Type].ToInt();
+                cells.X = row[this.X.Ordinal];
+                cells.Y = row[this.Y.Ordinal];
+                cells.DirX = row[this.DirX.Ordinal].ToInt();
+                cells.DirY = row[this.DirY.Ordinal].ToInt();
+                cells.Type = row[this.Type.Ordinal].ToInt();
 
                 return cells;
             }

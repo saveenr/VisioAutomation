@@ -62,9 +62,9 @@ namespace TestVisioAutomation
             var col_bg = query.AddColumn(src_bg);
             var col_filpat = query.AddColumn(src_filpat);
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
-            int col_charcase  = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharCase,"Case");
-            int col_charcolor = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColor, "Color");
-            int col_chartrans = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");
+            var col_charcase = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharCase, "Case");
+            var col_charcolor = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColor, "Color");
+            var col_chartrans = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");
 
             var shapeids = new[] {s1_id};
 
@@ -233,17 +233,17 @@ namespace TestVisioAutomation
                 shapeids);
 
             Assert.AreEqual(4, table.Count);
-            Assert.AreEqual(1, table[0].SectionCells[sec].Count);
-            Assert.AreEqual(2, table[1].SectionCells[sec].Count);
-            Assert.AreEqual(0, table[2].SectionCells[sec].Count);
-            Assert.AreEqual(3, table[3].SectionCells[sec].Count);
+            Assert.AreEqual(1, table[0].SectionCells[sec.Ordinal].Count);
+            Assert.AreEqual(2, table[1].SectionCells[sec.Ordinal].Count);
+            Assert.AreEqual(0, table[2].SectionCells[sec.Ordinal].Count);
+            Assert.AreEqual(3, table[3].SectionCells[sec.Ordinal].Count);
 
-            AssertVA.AreEqual("\"1\"", 1.0, table[0].SectionCells[sec][0][0]);
-            AssertVA.AreEqual("\"2\"", 2.0, table[1].SectionCells[sec][0][0]);
-            AssertVA.AreEqual("\"3\"", 3.0, table[1].SectionCells[sec][1][0]);
-            AssertVA.AreEqual("\"4\"", 4.0, table[3].SectionCells[sec][0][0]);
-            AssertVA.AreEqual("\"5\"", 5.0, table[3].SectionCells[sec][1][0]);
-            AssertVA.AreEqual("\"6\"", 6.0, table[3].SectionCells[sec][2][0]);
+            AssertVA.AreEqual("\"1\"", 1.0, table[0].SectionCells[sec.Ordinal][0][0]);
+            AssertVA.AreEqual("\"2\"", 2.0, table[1].SectionCells[sec.Ordinal][0][0]);
+            AssertVA.AreEqual("\"3\"", 3.0, table[1].SectionCells[sec.Ordinal][1][0]);
+            AssertVA.AreEqual("\"4\"", 4.0, table[3].SectionCells[sec.Ordinal][0][0]);
+            AssertVA.AreEqual("\"5\"", 5.0, table[3].SectionCells[sec.Ordinal][1][0]);
+            AssertVA.AreEqual("\"6\"", 6.0, table[3].SectionCells[sec.Ordinal][2][0]);
 
             page1.Delete(0);
         }

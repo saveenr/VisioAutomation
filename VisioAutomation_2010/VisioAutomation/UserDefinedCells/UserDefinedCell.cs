@@ -60,8 +60,8 @@ namespace VisioAutomation.UserDefinedCells
 
         internal class UserDefinedCellCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public int Value { get; set; }
-            public int Prompt { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Value { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Prompt { get; set; }
 
             public UserDefinedCellCellQuery()
             {

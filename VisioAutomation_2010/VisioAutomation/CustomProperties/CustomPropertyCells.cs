@@ -106,16 +106,16 @@ namespace VisioAutomation.CustomProperties
 
     class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery
     {
-        public int SortKey { get; set; }
-        public int Ask { get; set; }
-        public int Calendar { get; set; }
-        public int Format { get; set; }
-        public int Invis { get; set; }
-        public int Label { get; set; }
-        public int LangID { get; set; }
-        public int Prompt { get; set; }
-        public int Value { get; set; }
-        public int Type { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column SortKey { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Ask { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Calendar { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Format { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Invis { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Label { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column LangID { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Prompt { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Value { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Type { get; set; }
 
         public CustomPropertyCellQuery() 
         {
@@ -136,15 +136,15 @@ namespace VisioAutomation.CustomProperties
         public CustomPropertyCells GetCells(VA.ShapeSheet.CellData<double>[] row)
         {
             var cells = new CustomPropertyCells();
-            cells.Value = row[Value];
-            cells.Calendar = row[Calendar].ToInt();
-            cells.Format = row[Format];
-            cells.Invisible = row[Invis].ToInt();
-            cells.Label = row[Label];
-            cells.LangId = row[LangID].ToInt();
-            cells.Prompt = row[Prompt];
-            cells.SortKey = row[SortKey].ToInt();
-            cells.Type = row[Type].ToInt();
+            cells.Value = row[Value.Ordinal];
+            cells.Calendar = row[Calendar.Ordinal].ToInt();
+            cells.Format = row[Format.Ordinal];
+            cells.Invisible = row[Invis.Ordinal].ToInt();
+            cells.Label = row[Label.Ordinal];
+            cells.LangId = row[LangID.Ordinal].ToInt();
+            cells.Prompt = row[Prompt.Ordinal];
+            cells.SortKey = row[SortKey.Ordinal].ToInt();
+            cells.Type = row[Type.Ordinal].ToInt();
             return cells;
         }
     }

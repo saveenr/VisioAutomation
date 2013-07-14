@@ -23,11 +23,6 @@ namespace VisioAutomation.ShapeSheet.Query
                this.Columns = new List<Column>();
            }
 
-           public static implicit operator int(SectionQuery m)
-           {
-               return m.Ordinal;
-           }
-
            public Column AddColumn(SRC src, string name)
            {
                this.Parent.CheckNotFrozen();

@@ -82,20 +82,20 @@ namespace VisioAutomation.Text
 
         class ParagraphFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public int Bullet { get; set; }
-            public int BulletFont { get; set; }
-            public int BulletFontSize { get; set; }
-            public int BulletString { get; set; }
-            public int Flags { get; set; }
-            public int HorzAlign { get; set; }
-            public int IndentFirst { get; set; }
-            public int IndentLeft { get; set; }
-            public int IndentRight { get; set; }
-            public int LocalizeBulletFont { get; set; }
-            public int SpaceAfter { get; set; }
-            public int SpaceBefore { get; set; }
-            public int SpaceLine { get; set; }
-            public int TextPosAfterBullet { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Bullet { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column BulletFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column BulletFontSize { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column BulletString { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Flags { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column HorzAlign { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column IndentFirst { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column IndentLeft { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column IndentRight { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column LocalizeBulletFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column SpaceAfter { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column SpaceBefore { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column SpaceLine { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column TextPosAfterBullet { get; set; }
 
             public ParagraphFormatCellQuery() 
             {
@@ -119,19 +119,19 @@ namespace VisioAutomation.Text
             public ParagraphFormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
                 var cells = new ParagraphFormatCells();
-                cells.IndentFirst = row[IndentFirst];
-                cells.IndentLeft = row[IndentLeft];
-                cells.IndentRight = row[IndentRight];
-                cells.SpacingAfter = row[SpaceAfter];
-                cells.SpacingBefore = row[SpaceBefore];
-                cells.SpacingLine = row[SpaceLine];
-                cells.HorizontalAlign = row[HorzAlign].ToInt();
-                cells.Bullet = row[Bullet].ToInt();
-                cells.BulletFont = row[BulletFont].ToInt();
-                cells.BulletFontSize = row[BulletFontSize].ToInt();
-                cells.LocBulletFont = row[LocalizeBulletFont].ToInt();
-                cells.TextPosAfterBullet = row[TextPosAfterBullet];
-                cells.Flags = row[Flags].ToInt();
+                cells.IndentFirst = row[IndentFirst.Ordinal];
+                cells.IndentLeft = row[IndentLeft.Ordinal];
+                cells.IndentRight = row[IndentRight.Ordinal];
+                cells.SpacingAfter = row[SpaceAfter.Ordinal];
+                cells.SpacingBefore = row[SpaceBefore.Ordinal];
+                cells.SpacingLine = row[SpaceLine.Ordinal];
+                cells.HorizontalAlign = row[HorzAlign.Ordinal].ToInt();
+                cells.Bullet = row[Bullet.Ordinal].ToInt();
+                cells.BulletFont = row[BulletFont.Ordinal].ToInt();
+                cells.BulletFontSize = row[BulletFontSize.Ordinal].ToInt();
+                cells.LocBulletFont = row[LocalizeBulletFont.Ordinal].ToInt();
+                cells.TextPosAfterBullet = row[TextPosAfterBullet.Ordinal];
+                cells.Flags = row[Flags.Ordinal].ToInt();
                 cells.BulletString = ""; // TODO: Figure out some way of getting this
 
                 return cells;

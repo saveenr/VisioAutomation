@@ -199,8 +199,8 @@ namespace VisioAutomation.UserDefinedCells
             foreach (var prop_name in prop_names)
             {
                 var custom_prop = new UserDefinedCell(prop_name);
-                custom_prop.Value = sectiondata[name_index][UserDefinedCell.queryex.Value];
-                custom_prop.Prompt = sectiondata[name_index][UserDefinedCell.queryex.Prompt];
+                custom_prop.Value = sectiondata[name_index][UserDefinedCell.queryex.Value.Ordinal];
+                custom_prop.Prompt = sectiondata[name_index][UserDefinedCell.queryex.Prompt.Ordinal];
                 custom_props.Add(custom_prop);
 
                 name_index++;
