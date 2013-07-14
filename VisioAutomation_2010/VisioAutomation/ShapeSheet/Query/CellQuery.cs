@@ -248,11 +248,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
 
-            if (sb.ShortsWrittenCount != (total * 3))
-            {
-                throw new VA.AutomationException();
-            }
-
             if (sb.ChunksWrittenCount != total)
             {
                 throw new VA.AutomationException();
@@ -297,11 +292,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
             }
             
-            if (sb.ShortsWrittenCount != (total * 4))
-            {
-                throw new VA.AutomationException();
-            }
-
             if (sb.ChunksWrittenCount != total)
             {
                 throw new VA.AutomationException();
