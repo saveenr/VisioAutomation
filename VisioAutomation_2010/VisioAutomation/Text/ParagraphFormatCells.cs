@@ -60,26 +60,6 @@ namespace VisioAutomation.Text
             return _mCellQuery;
         }
 
-        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatCellQuery cellQuery, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new ParagraphFormatCells();
-            cells.IndentFirst = table[row,cellQuery.IndentFirst];
-            cells.IndentLeft = table[row,cellQuery.IndentLeft];
-            cells.IndentRight = table[row,cellQuery.IndentRight];
-            cells.SpacingAfter = table[row,cellQuery.SpaceAfter];
-            cells.SpacingBefore = table[row,cellQuery.SpaceBefore];
-            cells.SpacingLine = table[row,cellQuery.SpaceLine];
-            cells.HorizontalAlign = table[row,cellQuery.HorzAlign].ToInt();
-            cells.Bullet = table[row,cellQuery.Bullet].ToInt();
-            cells.BulletFont = table[row,cellQuery.BulletFont].ToInt();
-            cells.BulletFontSize = table[row,cellQuery.BulletFontSize].ToInt();
-            cells.LocBulletFont = table[row,cellQuery.LocalizeBulletFont].ToInt();
-            cells.TextPosAfterBullet= table[row,cellQuery.TextPosAfterBullet];
-            cells.Flags= table[row,cellQuery.Flags].ToInt();
-            cells.BulletString = ""; // TODO: Figure out some way of getting this
-            return cells;
-        }
-
         class ParagraphFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
             public VA.ShapeSheet.Query.CellQuery.Column Bullet { get; set; }

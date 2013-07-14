@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Query
            public T[] Cells { get; internal set; }
            public List<SectionResult<T>> SectionCells { get; internal set; }
 
-           public QueryResult(int sid)
+           internal QueryResult(int sid)
            {
                this.ShapeID = sid;
            }

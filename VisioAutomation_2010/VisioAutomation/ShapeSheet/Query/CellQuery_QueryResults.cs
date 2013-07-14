@@ -7,11 +7,11 @@ namespace VisioAutomation.ShapeSheet.Query
 {
    public partial class CellQuery
     {
-        public class QueryResults<T> : IEnumerable<QueryResult<T>>
+        public class QueryResultList<T> : IEnumerable<QueryResult<T>>
         {
             List<QueryResult<T>> Items;
 
-            public QueryResults()
+            public QueryResultList()
             {
                 this.Items = new List<QueryResult<T>>();
             }

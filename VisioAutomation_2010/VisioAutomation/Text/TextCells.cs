@@ -65,29 +65,6 @@ namespace VisioAutomation.Text
             return _mCellQuery;
         }
 
-        private static TextCells get_cells_from_row(TextBlockFormatCellQuery cellQuery,
-                                                               VA.ShapeSheet.Data.Table <VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new TextCells();
-            cells.BottomMargin = table[row,cellQuery.BottomMargin];
-            cells.LeftMargin = table[row,cellQuery.LeftMargin];
-            cells.RightMargin = table[row,cellQuery.RightMargin];
-            cells.TopMargin = table[row,cellQuery.TopMargin];
-            cells.DefaultTabStop = table[row,cellQuery.DefaultTabStop];
-            cells.TextBkgnd = table[row,cellQuery.TextBkgnd].ToInt();
-            cells.TextBkgndTrans = table[row,cellQuery.TextBkgndTrans];
-            cells.TextDirection = table[row,cellQuery.TextDirection].ToInt();
-            cells.VerticalAlign = table[row,cellQuery.VerticalAlign].ToInt();
-            cells.TxtPinX = table[row,cellQuery.TxtPinX];
-            cells.TxtPinY = table[row,cellQuery.TxtPinY];
-            cells.TxtLocPinX = table[row,cellQuery.TxtLocPinX];
-            cells.TxtLocPinY = table[row,cellQuery.TxtLocPinY];
-            cells.TxtWidth = table[row,cellQuery.TxtWidth];
-            cells.TxtHeight = table[row,cellQuery.TxtHeight];
-            cells.TxtAngle = table[row,cellQuery.TxtAngle];
-            return cells;
-        }
-
         private class TextBlockFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
             public Column BottomMargin { get; set; }

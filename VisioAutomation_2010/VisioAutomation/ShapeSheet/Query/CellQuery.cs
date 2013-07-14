@@ -7,7 +7,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public partial class CellQuery
     {
-        public List<Column> Columns { get; private set; }
+        public ColumnList Columns { get; private set; }
         public List<SectionQuery> Sections { get; private set; }
         private List<List<SectionQueryInfo>> PerShapeSectionInfo; 
 
@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Query
  
         public CellQuery()
         {
-            this.Columns = new List<Column>();
+            this.Columns = new ColumnList();
             this.Sections = new List<SectionQuery>();
         }
 
@@ -27,15 +27,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public Column AddColumn(SRC src,string name)
         {
             CheckNotFrozen();
-
-            if (string.IsNullOrEmpty(name))
-            {
-                name = string.Format("Col{0}", this.Columns.Count);
-            }
-            int ordinal = this.Columns.Count;
-            var col = new Column(ordinal, src, name);
-            this.Columns.Add(col);
-            return col;
+            return this.Columns.Add(src, name);
         }
         
         public SectionQuery AddSection(IVisio.VisSectionIndices section)
@@ -107,7 +99,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return r;
         }
 
-        public QueryResults<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
+        public QueryResultList<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page,shapeids);
@@ -116,7 +108,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public QueryResults<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
+        public QueryResultList<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
@@ -127,7 +119,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public QueryResults<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
+        public QueryResultList<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
@@ -145,9 +137,9 @@ namespace VisioAutomation.ShapeSheet.Query
             return r;
         }
 
-        private QueryResults<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values, short[] srcstream)
+        private QueryResultList<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values, short[] srcstream)
         {
-            var list = new QueryResults<T>();
+            var list = new QueryResultList<T>();
             int cellcount = 0;
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {

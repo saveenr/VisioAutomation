@@ -86,22 +86,6 @@ namespace VisioAutomation.CustomProperties
             _mCellQuery = _mCellQuery ?? new CustomPropertyCellQuery();
             return _mCellQuery;
         }
-
-        private static CustomPropertyCells get_cells_from_row(CustomPropertyCellQuery cellQuery, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new CustomPropertyCells();
-
-            cells.Value = table[row,cellQuery.Value];
-            cells.Calendar = table[row,cellQuery.Calendar].ToInt();
-            cells.Format = table[row,cellQuery.Format];
-            cells.Invisible = table[row,cellQuery.Invis].ToInt();
-            cells.Label = table[row,cellQuery.Label];
-            cells.LangId = table[row,cellQuery.LangID].ToInt();
-            cells.Prompt = table[row,cellQuery.Prompt];
-            cells.SortKey = table[row,cellQuery.SortKey].ToInt();
-            cells.Type = table[row,cellQuery.Type].ToInt();
-            return cells;
-        }
     }
 
     class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery

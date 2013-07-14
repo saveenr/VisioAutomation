@@ -14,23 +14,6 @@ namespace TestVisioAutomation
         public static VA.ShapeSheet.SRC cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
         public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
         
-        public static List<T[]> GetRowsInGroup<T>(VA.ShapeSheet.Data.Table<T> table, int group)
-        {
-            var g = table.Groups[group];
-            return g.RowIndices.Select(i => GetRow(table, i)).ToList();
-        }
-
-        public static T[] GetRow<T>(VA.ShapeSheet.Data.Table<T> table, int row)
-        {
-            var a = new T[table.ColumnCount];
-            for (int i = 0; i < table.ColumnCount; i++)
-            {
-                a[i] = table[row, i];
-            }
-            return a;
-        }
-
-
         [TestMethod]
         public void Verify_Shape_GetResults_For_Multiple_Types()
         {

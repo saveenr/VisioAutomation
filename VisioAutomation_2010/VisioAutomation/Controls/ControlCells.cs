@@ -28,20 +28,6 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
-        private static ControlCells get_cells_from_row(ControlCellQuery cellQuery, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new ControlCells();
-            cells.CanGlue = table[row,cellQuery.CanGlue].ToInt();
-            cells.Tip = table[row,cellQuery.Tip].ToInt();
-            cells.X = table[row,cellQuery.X];
-            cells.Y = table[row,cellQuery.Y];
-            cells.YBehavior = table[row,cellQuery.YBehavior].ToInt();
-            cells.XBehavior = table[row,cellQuery.XBehavior].ToInt();
-            cells.XDynamics = table[row,cellQuery.XDynamics].ToInt();
-            cells.YDynamics = table[row,cellQuery.YDynamics].ToInt();
-            return cells;
-        }
-
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();

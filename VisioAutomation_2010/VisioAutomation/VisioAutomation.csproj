@@ -169,6 +169,7 @@
     <Compile Include="Shapesheet\Query\CellQuery_SectionQueryInfo.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_SectionQuery.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_SectionResult.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_Columns.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\Markup\CharacterCells.cs" />
     <Compile Include="Text\Markup\ParagraphCells.cs" />
@@ -221,7 +222,6 @@
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_Column.cs" />
-    <Compile Include="Shapesheet\Data\TableRowGroup.cs" />
     <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\ShapeList.cs" />
     <Compile Include="DOM\Node.cs" />
@@ -270,7 +270,6 @@
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />
     <Compile Include="Connections\ConnectorHelper.cs" />
-    <Compile Include="Shapesheet\Data\Table.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />

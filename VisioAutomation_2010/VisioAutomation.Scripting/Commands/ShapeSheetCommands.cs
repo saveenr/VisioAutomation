@@ -15,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public CellQuery.QueryResults<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public CellQuery.QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -38,7 +38,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public CellQuery.QueryResults<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public CellQuery.QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -64,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public CellQuery.QueryResults<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public CellQuery.QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -89,7 +89,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public CellQuery.QueryResults<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public CellQuery.QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
