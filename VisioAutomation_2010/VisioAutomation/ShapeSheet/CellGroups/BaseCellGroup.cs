@@ -10,6 +10,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public delegate T RowToCells<T>(CellData<double>[] data);
 
-        public delegate T ResultToCells<T>(VA.ShapeSheet.Query.ExQueryResult<CellData<double>>  data);
+        public delegate T ResultToCells<T>(VA.ShapeSheet.Query.QueryResult<CellData<double>>  data);
     }
 }

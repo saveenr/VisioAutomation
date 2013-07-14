@@ -310,7 +310,7 @@ namespace VisioAutomation.Pages
             }
 
 
-            public PageCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
+            public PageCells GetCells(QueryResult<CellData<double>> data_for_shape)
             {
                                 var row = data_for_shape.Cells;
 

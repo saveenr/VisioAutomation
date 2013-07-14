@@ -112,19 +112,19 @@ namespace VisioAutomation.ShapeSheet.Query
             this.IsFrozen = true;            
         }
 
-        public ExQueryResult<string> GetFormulas(IVisio.Shape shape)
+        public QueryResult<string> GetFormulas(IVisio.Shape shape)
         {
             this.Freeze();
             var srcstream = BuildSRCStream(shape);
             var values = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, srcstream);
-            var r = new ExQueryResult<string>(shape.ID);
+            var r = new QueryResult<string>(shape.ID);
             FillValuesForShape<string>(values, r, 0,0);
 
             return r;
         }
 
 
-        public ExQueryResult<T> GetResults<T>(IVisio.Shape shape)
+        public QueryResult<T> GetResults<T>(IVisio.Shape shape)
         {
             this.Freeze();
             var srcstream = BuildSRCStream(shape);
@@ -132,12 +132,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var unitcodes = Enumerable.Range(0, this.GetTotalCellCount(1)).Select(i => IVisio.VisUnitCodes.visNoCast).ToArray();
             var values = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, srcstream,unitcodes);
-            var r = new ExQueryResult<T>(shape.ID16);
+            var r = new QueryResult<T>(shape.ID16);
             FillValuesForShape<T>(values, r, 0,0);
             return r;
         }
 
-        public ExQueryResult<CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
+        public QueryResult<CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
         {
             this.Freeze();
 
@@ -152,12 +152,12 @@ namespace VisioAutomation.ShapeSheet.Query
                 combineddata[i] = new CellData<T>(formulas[i], results[i]);
             }
 
-            var r = new ExQueryResult<CellData<T>>(shape.ID16);
+            var r = new QueryResult<CellData<T>>(shape.ID16);
             FillValuesForShape<CellData<T>>(combineddata, r, 0, 0);
             return r;
         }
 
-        public ExQueryResults<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
+        public QueryResults<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page,shapeids);
@@ -166,7 +166,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public ExQueryResults<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
+        public QueryResults<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
@@ -177,7 +177,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public ExQueryResults<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
+        public QueryResults<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page, shapeids);
@@ -195,14 +195,14 @@ namespace VisioAutomation.ShapeSheet.Query
             return r;
         }
 
-        private ExQueryResults<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values, short[] srcstream)
+        private QueryResults<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values, short[] srcstream)
         {
-            var list = new ExQueryResults<T>();
+            var list = new QueryResults<T>();
             int cellcount = 0;
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var r = new ExQueryResult<T>(shapeid);
+                var r = new QueryResult<T>(shapeid);
                 cellcount = this.FillValuesForShape<T>(values, r, cellcount, shape_index);
                 list.Add(r);
             }
@@ -214,7 +214,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        private int FillValuesForShape<T>(T[] array, ExQueryResult<T> result, int start, int shape_index)
+        private int FillValuesForShape<T>(T[] array, QueryResult<T> result, int start, int shape_index)
         {
             // First Copy the Cell Values over
             int cellcount = 0;
@@ -429,16 +429,16 @@ namespace VisioAutomation.ShapeSheet.Query
         }
     }
 
-    public class ExQueryResults<T> : IEnumerable<ExQueryResult<T>>
+    public class QueryResults<T> : IEnumerable<QueryResult<T>>
     {
-        List<ExQueryResult<T>> Items;   
+        List<QueryResult<T>> Items;   
 
-        public ExQueryResults()
+        public QueryResults()
         {
-            this.Items = new List<ExQueryResult<T>> ();
+            this.Items = new List<QueryResult<T>> ();
         }
 
-        public IEnumerator<ExQueryResult<T>> GetEnumerator()
+        public IEnumerator<QueryResult<T>> GetEnumerator()
         {
             return this.Items.GetEnumerator();
         }
@@ -449,12 +449,12 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        public ExQueryResult<T> this[int index]
+        public QueryResult<T> this[int index]
 	    {
             get { return this.Items[index]; }
 	    }
 
-        internal void Add(ExQueryResult<T> item)
+        internal void Add(QueryResult<T> item)
         {
             this.Items.Add(item);
         }
@@ -465,13 +465,13 @@ namespace VisioAutomation.ShapeSheet.Query
         }
     }
 
-    public class ExQueryResult<T>
+    public class QueryResult<T>
     {
         public int ShapeID;
         public T[] Cells;
         public List<SectionResult<T>> SectionCells; 
 
-        public ExQueryResult(int sid)
+        public QueryResult(int sid)
         {
             this.ShapeID = sid;
         }    

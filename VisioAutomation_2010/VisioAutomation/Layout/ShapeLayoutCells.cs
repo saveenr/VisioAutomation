@@ -116,7 +116,7 @@ namespace VisioAutomation.Layout
                 this.Relationships = this.AddColumn(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
             }
 
-            public ShapeLayoutCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
+            public ShapeLayoutCells GetCells(QueryResult<CellData<double>> data_for_shape)
             {
                 var row = data_for_shape.Cells;
                 var cells = new ShapeLayoutCells();

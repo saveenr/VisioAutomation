@@ -142,7 +142,7 @@ namespace VisioAutomation.Format
                 this.Rounding = this.AddColumn(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
             }
 
-            public ShapeFormatCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
+            public ShapeFormatCells GetCells(QueryResult<CellData<double>> data_for_shape)
             {
                 var row = data_for_shape.Cells;
 

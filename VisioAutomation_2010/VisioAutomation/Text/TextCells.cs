@@ -128,7 +128,7 @@ namespace VisioAutomation.Text
                 TxtAngle = this.AddColumn(VA.ShapeSheet.SRCConstants.TxtAngle, "TxtAngle");
             }
 
-            public TextCells GetCells(ExQueryResult<CellData<double>> data_for_shape)
+            public TextCells GetCells(QueryResult<CellData<double>> data_for_shape)
             {
                 var row = data_for_shape.Cells;
 
