@@ -188,7 +188,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     section_result.Query = section.SectionQuery;
                     result.SectionCells.Add(section_result);
 
-                    foreach (var row_index in section.RowIndexes)
+                    foreach (short row_index in section.RowIndexes)
                     {
                         var row_values = new T[section.SectionQuery.Columns.Count];
                         int num_cols = row_values.Length;

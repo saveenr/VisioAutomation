@@ -11,13 +11,18 @@ namespace VisioAutomation.ShapeSheet.Query
        {
            public SectionQuery SectionQuery { get; private set; }
            public short ShapeID { get; private set; }
-           public List<short> RowIndexes { get; private set; }
+           public int RowCount  { get; private set; }
 
-           public SectionQueryInfo(SectionQuery sq, short shapeid, int numrows)
+           internal SectionQueryInfo(SectionQuery sq, short shapeid, int numrows)
            {
                this.SectionQuery = sq;
                this.ShapeID = shapeid;
-               this.RowIndexes = Enumerable.Range(0, numrows).Select(i => (short)i).ToList();
+               this.RowCount = numrows;
+           }
+
+           public IEnumerable<int> RowIndexes
+           {
+               get { return Enumerable.Range(0, this.RowCount); }
            }
        }
     }
