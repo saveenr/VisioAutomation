@@ -226,13 +226,13 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             int total = this.GetTotalCellCount(1);
+
+            var sb = new StreamBuilder(3, total);
             
-            int cellcount = 0;
-            var srcstream = new short[3*total];
             foreach (var col in this.Columns)
             {
                 var src = col.SRC;
-                cellcount = this.add_src(srcstream,cellcount,src.Section,src.Row,src.Cell);
+                sb.Add(src.Section,src.Row,src.Cell);
             }
 
             // And then the sections if any exist
@@ -245,18 +245,23 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (var col in section.SectionQuery.Columns)
                         {
-                            cellcount = add_src(srcstream, cellcount, section.SectionQuery.SectionIndex, rowindex, col.SRC.Cell);
+                            sb.Add(section.SectionQuery.SectionIndex, rowindex, col.SRC.Cell);
                         }
                     }
                 }
             }
 
-
-            if (cellcount != total*3)
+            if (sb.ShortsWrittenCount != (total * 3))
             {
                 throw new VA.AutomationException();
             }
-            return srcstream;
+
+            if (sb.ChunksWrittenCount != total)
+            {
+                throw new VA.AutomationException();
+            }
+
+            return sb.Stream;
         }
 
         private short[] BuildSIDSRCStream(IVisio.Page page, IList<int> shapeids)
