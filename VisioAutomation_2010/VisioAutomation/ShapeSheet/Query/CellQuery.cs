@@ -194,10 +194,7 @@ namespace VisioAutomation.ShapeSheet.Query
                         cellcount += num_cols;
                     }
                 }
-
-
             }
-
             return start + cellcount;
         }
 
@@ -336,25 +333,6 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             return sb.Stream;
-        }
-
-        private int add_sidsrc(short[] srcstream, int starting_index, short id, short section, short row, short cell)
-        {
-            int i = starting_index;
-            srcstream[i++] = id;
-            srcstream[i++] = section;
-            srcstream[i++] = row;
-            srcstream[i++] = cell;
-            return i;
-        }
-
-        private int add_src(short[] srcstream, int starting_index, short section, short row, short cell)
-        {
-            int i = starting_index;
-            srcstream[i++] = section;
-            srcstream[i++] = row;
-            srcstream[i++] = cell;
-            return i;
         }
 
         class StreamBuilder
