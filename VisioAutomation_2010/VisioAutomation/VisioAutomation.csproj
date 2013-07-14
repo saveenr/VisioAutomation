@@ -170,6 +170,7 @@
     <Compile Include="Shapesheet\Query\CellQuery_SectionQuery.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_SectionResult.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_Columns.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_StreamBuilder.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\Markup\CharacterCells.cs" />
     <Compile Include="Text\Markup\ParagraphCells.cs" />
