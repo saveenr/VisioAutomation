@@ -263,32 +263,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private short[] BuildSIDSRCStream(IVisio.Page page, IList<int> shapeids)
         {
-            this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
-            if (this.Sections.Count>0)
-            {
-                var pageshapes = page.Shapes;
-                var shapes = shapeids.Select(id=>pageshapes[id]).ToList();
-
-                for (int n = 0; n < shapeids.Count; n++)
-                {
-                    var shapeid = (short)shapeids[n];
-                    var shape = shapes[n];
-
-                    var section_infos = new List<SectionQueryInfo>();
-                    foreach (var sec in this.Sections)
-                    {
-                        int num_rows = shape.RowCount[sec.SectionIndex];
-                        var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
-                        section_infos.Add(section_info);
-                    }
-                    this.PerShapeSectionInfo.Add(section_infos);
-                }
-
-                if (shapeids.Count != this.PerShapeSectionInfo.Count)
-                {
-                    throw new VA.AutomationException();
-                }                    
-            }
+            CalculatePerShapeInfo(page, shapeids);
 
             int total = this.GetTotalCellCount(shapeids.Count);
 
@@ -333,6 +308,36 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             return sb.Stream;
+        }
+
+        private void CalculatePerShapeInfo(IVisio.Page page, IList<int> shapeids)
+        {
+            this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
+            if (this.Sections.Count > 0)
+            {
+                var pageshapes = page.Shapes;
+                var shapes = shapeids.Select(id => pageshapes[id]).ToList();
+
+                for (int n = 0; n < shapeids.Count; n++)
+                {
+                    var shapeid = (short) shapeids[n];
+                    var shape = shapes[n];
+
+                    var section_infos = new List<SectionQueryInfo>();
+                    foreach (var sec in this.Sections)
+                    {
+                        int num_rows = shape.RowCount[sec.SectionIndex];
+                        var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
+                        section_infos.Add(section_info);
+                    }
+                    this.PerShapeSectionInfo.Add(section_infos);
+                }
+
+                if (shapeids.Count != this.PerShapeSectionInfo.Count)
+                {
+                    throw new VA.AutomationException();
+                }
+            }
         }
 
         private int GetCellsCountFromSections()
