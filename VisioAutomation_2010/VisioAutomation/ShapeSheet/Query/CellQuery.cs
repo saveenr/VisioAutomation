@@ -290,8 +290,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             int total = this.GetTotalCellCount(shapeids.Count);
 
-            int cellcount = 0;
-            var srcstream = new short[4 * total];
+            // stream_count is the number of short values that have been written to the array
+            var sb = new StreamBuilder(4, total);
 
             for (int i = 0; i < shapeids.Count; i++)
             {
@@ -300,7 +300,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 foreach (var col in this.Columns)
                 {
                     var src = col.SRC;
-                    cellcount = add_sidsrc(srcstream, cellcount, (short)shapeid, src.Section, src.Row, src.Cell);
+                    sb.Add((short)shapeid, src.Section, src.Row, src.Cell);
                 }
 
                 // And then the sections if any exist
@@ -313,24 +313,29 @@ namespace VisioAutomation.ShapeSheet.Query
                         {
                             foreach (var col in section.SectionQuery.Columns)
                             {
-                                cellcount = add_sidsrc(srcstream,cellcount,(short)shapeid,section.SectionQuery.SectionIndex,rowindex,col.SRC.Cell);
+                                sb.Add((short)shapeid,section.SectionQuery.SectionIndex,rowindex,col.SRC.Cell);
                             }                                
                         }
                     }
                 }
             }
-
-
-
-            if (cellcount != (total * 4))
+            
+            if (sb.ShortsWrittenCount != (total * 4))
             {
                 throw new VA.AutomationException();
             }
-            return srcstream;
+
+            if (sb.ChunksWrittenCount != total)
+            {
+                throw new VA.AutomationException();
+            }
+
+            return sb.Stream;
         }
 
-        private int add_sidsrc(short[] srcstream, int i, short id, short section, short row, short cell)
+        private int add_sidsrc(short[] srcstream, int starting_index, short id, short section, short row, short cell)
         {
+            int i = starting_index;
             srcstream[i++] = id;
             srcstream[i++] = section;
             srcstream[i++] = row;
@@ -338,14 +343,55 @@ namespace VisioAutomation.ShapeSheet.Query
             return i;
         }
 
-        private int add_src(short[] srcstream, int i, short section, short row, short cell)
+        private int add_src(short[] srcstream, int starting_index, short section, short row, short cell)
         {
+            int i = starting_index;
             srcstream[i++] = section;
             srcstream[i++] = row;
             srcstream[i++] = cell;
             return i;
         }
 
+        class StreamBuilder
+        {
+            public short[] Stream { get; private set; }
+            public int ChunksWrittenCount { get; private set; }
+            public int ChunkSize { get; private set; }
+            public int ShortsWrittenCount { get; private set; }
+            
+            public StreamBuilder(int chunk, int capacity)
+            {
+                this.Stream = new short[chunk*capacity];
+                ChunksWrittenCount = 0;
+                this.ChunkSize = chunk;
+                ShortsWrittenCount = 0;
+            }
+
+            public void Add(short id, short sec, short row, short cell)
+            {
+                if (this.ChunkSize != 4)
+                {
+                    throw new VA.AutomationException();
+                }
+                Stream[ShortsWrittenCount++] = id;
+                Stream[ShortsWrittenCount++] = sec;
+                Stream[ShortsWrittenCount++] = row;
+                Stream[ShortsWrittenCount++] = cell;
+                ChunksWrittenCount++;
+            }
+
+            public void Add(short sec, short row, short cell)
+            {
+                if (this.ChunkSize != 3)
+                {
+                    throw new VA.AutomationException();
+                }
+                Stream[ShortsWrittenCount++] = sec;
+                Stream[ShortsWrittenCount++] = row;
+                Stream[ShortsWrittenCount++] = cell;
+                ChunksWrittenCount++;
+            }
+        }
         private int GetCellsCountFromSections()
         {
             int total_cells_from_sections = 0;
