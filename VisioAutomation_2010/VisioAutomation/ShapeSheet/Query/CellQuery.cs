@@ -44,7 +44,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int ordinal = this.Sections.Count;
             // Add error checking for section index
             // Add error checking for cell index
-            var sec = new SectionQuery(ordinal,(short)section);
+            var sec = new SectionQuery(this,ordinal,(short)section);
             this.Sections.Add(sec);
             return sec;
         }

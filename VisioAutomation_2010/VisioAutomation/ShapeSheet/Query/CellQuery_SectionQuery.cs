@@ -10,12 +10,14 @@ namespace VisioAutomation.ShapeSheet.Query
 
        public class SectionQuery
        {
+           public CellQuery Parent { get; private set; }
            public short SectionIndex { get; private set; }
            public List<Column> Columns { get; private set; }
            public int Ordinal { get; private set; }
 
-           public SectionQuery(int ordinal, short section)
+           public SectionQuery(CellQuery parent, int ordinal, short section)
            {
+               this.Parent = parent;
                this.Ordinal = ordinal;
                this.SectionIndex = section;
                this.Columns = new List<Column>();
@@ -28,6 +30,13 @@ namespace VisioAutomation.ShapeSheet.Query
 
            public Column AddColumn(SRC src, string name)
            {
+               this.Parent.CheckNotFrozen();
+
+               if (string.IsNullOrEmpty(name))
+               {
+                   name = string.Format("Col{0}", this.Columns.Count);
+               }
+               
                int ordinal = this.Columns.Count;
                if (src.Section != this.SectionIndex)
                {
@@ -40,6 +49,13 @@ namespace VisioAutomation.ShapeSheet.Query
 
            public Column AddColumn(short cell, string name)
            {
+               this.Parent.CheckNotFrozen();
+
+               if (string.IsNullOrEmpty(name))
+               {
+                   name = string.Format("Col{0}", this.Columns.Count);
+               }
+
                int ordinal = this.Columns.Count;
                var col = new Column(ordinal, cell, name);
                this.Columns.Add(col);
