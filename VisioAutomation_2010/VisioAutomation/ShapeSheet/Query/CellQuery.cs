@@ -337,21 +337,17 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private int GetCellsCountFromSections()
         {
-            int total_cells_from_sections = 0;
-            if (this.PerShapeSectionInfo != null)
+            if (this.PerShapeSectionInfo == null)
             {
-                foreach (var data_for_shape in this.PerShapeSectionInfo)
+                return 0;
+            }
+
+            int total_cells_from_sections = 0;
+            foreach (var data_for_shape in this.PerShapeSectionInfo)
+            {
+                foreach (var section_data in data_for_shape)
                 {
-                    foreach (var sd in data_for_shape)
-                    {
-                        foreach (short rowindex in sd.RowIndexes)
-                        {
-                            foreach (var col in sd.SectionQuery.Columns)
-                            {
-                                total_cells_from_sections++;
-                            } 
-                        }
-                    }
+                    total_cells_from_sections += (section_data.RowCount * section_data.SectionQuery.Columns.Count);
                 }
             }
 
