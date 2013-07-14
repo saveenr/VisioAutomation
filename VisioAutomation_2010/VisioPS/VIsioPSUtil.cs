@@ -10,7 +10,6 @@ namespace VisioPS
     {
         public static DataTable querytable_to_datatable<T>(QueryEx query, QueryEx.QueryResults<T> query_output)
         {
-            // TODO Add Name
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
             foreach (var col in query.Columns)
