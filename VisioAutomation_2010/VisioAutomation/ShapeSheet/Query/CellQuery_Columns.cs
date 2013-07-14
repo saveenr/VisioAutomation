@@ -11,9 +11,14 @@ namespace VisioAutomation.ShapeSheet.Query
        {
            private IList<Column> items { get; set; }
            
-           internal ColumnList()
+           internal ColumnList() :
+               this(0)
            {
-               this.items = new List<Column>();
+           }
+
+           internal ColumnList(int capacity)
+           {
+               this.items = new List<Column>(capacity);
            }
 
            public IEnumerator<Column> GetEnumerator()

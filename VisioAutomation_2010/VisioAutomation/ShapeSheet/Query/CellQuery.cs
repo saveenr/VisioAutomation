@@ -15,8 +15,8 @@ namespace VisioAutomation.ShapeSheet.Query
  
         public CellQuery()
         {
-            this.Columns = new ColumnList();
-            this.Sections = new List<SectionQuery>();
+            this.Columns = new ColumnList(0);
+            this.Sections = new List<SectionQuery>(0);
         }
 
         public Column AddColumn(SRC src)
