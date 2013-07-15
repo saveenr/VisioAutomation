@@ -64,7 +64,6 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public QueryResult<T> GetResults<T>(IVisio.Shape shape)
         {
-            const IVisio.VisUnitCodes default_unit_code = IVisio.VisUnitCodes.visNoCast;
             this.Freeze();
             var srcstream = BuildSRCStream(shape);
             var unitcodes = this.BuildUnitCodeArray(1);
@@ -76,14 +75,18 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private IList<IVisio.VisUnitCodes> BuildUnitCodeArray(int numshapes)
         {
-            const IVisio.VisUnitCodes default_unit_code = IVisio.VisUnitCodes.visNoCast;
+            if (numshapes < 1)
+            {
+                throw  new AutomationException("Internal Error: numshapes must be >=1");
+            }
+
             int numcells = this.GetTotalCellCount(numshapes);
             var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
             for (int i = 0; i < numshapes; i++)
             {
-                for (int j = 0; j < this.Columns.Count; j++)
+                foreach (var col in this.Columns)
                 {
-                    unitcodes.Add(default_unit_code);                    
+                    unitcodes.Add(col.UnitCode);                    
                 }
 
                 if (this.PerShapeSectionInfo != null && this.PerShapeSectionInfo.Count>0)
@@ -93,15 +96,20 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (var rowindex in sec.RowIndexes)
                         {
-                            for (int k = 0; k < sec.SectionQuery.Columns.Count; k++)
+                            foreach (var col in sec.SectionQuery.Columns)
                             {
-                                unitcodes.Add(default_unit_code);
-
+                                unitcodes.Add(col.UnitCode);
                             }
                         }
                     }
                 }
             }
+
+            if (numcells != unitcodes.Count)
+            {
+                throw new AutomationException("Internal Error: Number of unit cdes must match number of cells");
+            }
+
             return unitcodes;
         }
 

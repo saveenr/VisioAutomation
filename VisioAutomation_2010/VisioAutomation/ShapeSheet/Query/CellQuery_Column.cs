@@ -9,7 +9,8 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             public string Name { get; private set; }
             public SRC SRC { get; protected set; }
-
+            public IVisio.VisUnitCodes UnitCode { get; set; }
+            
             protected Column(int ordinal, string name)
             {
                 if (string.IsNullOrEmpty(name))
