@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using System.Linq;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -426,5 +427,64 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
+
+        [TestMethod]
+        public void GetAllCells()
+        {
+            var doc1 = this.GetNewDoc();
+            var page1 = doc1.Pages[1];
+            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
+
+            // draw a simple shape
+            var s1 = page1.DrawRectangle(this.StandardPageSizeRect);
+            int s1_id = s1.ID;
+
+            var q = new VA.ShapeSheet.Query.CellQuery();
+            var dic = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
+
+            var dic2 = new Dictionary<short,VA.ShapeSheet.Query.CellQuery.SectionQuery>();
+            foreach (var kv in dic)
+            {
+                var name = kv.Key;
+                var src = kv.Value;
+
+                if (src.Section == (short) IVisio.VisSectionIndices.visSectionObject)
+                {
+                    q.Columns.Add(src, name);
+                }
+                else if ((src.Section == (short) IVisio.VisSectionIndices.visSectionFirst)
+                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionFirstComponent)
+                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionLast)
+                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionInval)
+                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionNone)
+                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionFirst)
+                         || (src.Section == (short) IVisio.VisSectionIndices.visSectionLastComponent)
+                    )
+                {
+                    //skip
+                }
+                else
+                {
+                    VA.ShapeSheet.Query.CellQuery.SectionQuery sec;
+                    if (!dic2.ContainsKey(src.Section))
+                    {
+                        sec = q.AddSection((IVisio.VisSectionIndices) src.Section);
+                        dic2[src.Section] = sec;
+                    }
+                    else
+                    {
+                        sec = dic2[src.Section];
+                    }
+                    sec.Columns.Add(src.Cell, name);
+                }
+
+
+            }
+
+            var formulas = q.GetFormulas(s1);
+
+            int x = 1;
+        }
+
     }
 }

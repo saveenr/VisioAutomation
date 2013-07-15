@@ -27,13 +27,17 @@ namespace VisioAutomation.ShapeSheet.Query
             internal Column(int ordinal, short cell, string name) :
                 this(ordinal, name)
             {
-                this.SRC = new VA.ShapeSheet.SRC(-1, -1, cell);
+                const short sec = -1;
+                const short row = -1;
+                this.SRC = new VA.ShapeSheet.SRC(sec, row, cell);
+                this.Name = name;
             }
 
             internal Column(int ordinal, SRC src, string name) :
                 this(ordinal, name)
             {
                 this.SRC = src;
+                this.Name = name;
             }
         }
     }
