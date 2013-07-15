@@ -50,15 +50,15 @@ namespace VisioAutomation.Connections
             public VA.ShapeSheet.Query.CellQuery.Column Type { get; set; }
             public VA.ShapeSheet.Query.CellQuery.Column X { get; set; }
             public VA.ShapeSheet.Query.CellQuery.Column Y { get; set; }
-
+            
             public ConnectionPointCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionConnectionPts);
-                DirX = sec.AddColumn(VA.ShapeSheet.SRCConstants.Connections_DirX, "DirX");
-                DirY = sec.AddColumn(VA.ShapeSheet.SRCConstants.Connections_DirY, "DirY");
-                Type = sec.AddColumn(VA.ShapeSheet.SRCConstants.Connections_Type, "Type");
-                X = sec.AddColumn(VA.ShapeSheet.SRCConstants.Connections_X, "X");
-                Y = sec.AddColumn(VA.ShapeSheet.SRCConstants.Connections_Y, "Y");
+                DirX = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_DirX, "DirX");
+                DirY = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_DirY, "DirY");
+                Type = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_Type, "Type");
+                X = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_X, "X");
+                Y = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_Y, "Y");
             }
 
             public ConnectionPointCells GetCells(VA.ShapeSheet.CellData<double>[] row)

@@ -106,8 +106,8 @@ namespace VisioAutomation.Scripting.Commands
             var shape = selection[1];
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var width_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Width);
-            var height_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Height);
+            var width_col = query.Columns.Add(VA.ShapeSheet.SRCConstants.Width, "Width");
+            var height_col = query.Columns.Add(VA.ShapeSheet.SRCConstants.Height, "Height");
             var queryresults = query.GetResults<double>(shape);
 
             cached_size_width = queryresults[width_col];

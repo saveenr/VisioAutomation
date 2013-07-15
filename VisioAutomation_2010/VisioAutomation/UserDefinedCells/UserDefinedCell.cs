@@ -66,8 +66,8 @@ namespace VisioAutomation.UserDefinedCells
             public UserDefinedCellCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionUser);
-                Value = sec.AddColumn(VA.ShapeSheet.SRCConstants.User_Value, "Value");
-                Prompt = sec.AddColumn(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
+                Value = sec.Columns.Add(VA.ShapeSheet.SRCConstants.User_Value, "Value");
+                Prompt = sec.Columns.Add(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
             }
         }
     }

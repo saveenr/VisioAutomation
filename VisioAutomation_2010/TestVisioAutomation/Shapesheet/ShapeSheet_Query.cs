@@ -41,8 +41,8 @@ namespace TestVisioAutomation
             var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddColumn(src_fg);
-            var col_bg = query.AddColumn(src_bg);
+            var col_fg = query.Columns.Add(src_fg,"Foreground");
+            var col_bg = query.Columns.Add(src_bg, "Background");
             var col_filpat = query.AddColumn(src_filpat);
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
             var col_charcase = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharCase, "Case");

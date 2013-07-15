@@ -30,7 +30,8 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                query.AddColumn(src);
+                string colname = string.Format("Col{0}", ci);
+                query.Columns.Add(src,colname);
                 ci++;
             }
 
@@ -55,7 +56,8 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                query.AddColumn(src);
+                string colname = string.Format("Col{0}", ci);
+                query.Columns.Add(src,colname);
                 ci++;
             }
 
