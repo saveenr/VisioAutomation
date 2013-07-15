@@ -10,7 +10,8 @@ namespace VisioAutomation.ShapeSheet.Query
        public class ColumnList : IEnumerable<Column>
        {
            private IList<Column> items { get; set; }
-           
+           private Dictionary<string, Column> dic_columns; 
+
            internal ColumnList() :
                this(0)
            {
@@ -19,6 +20,7 @@ namespace VisioAutomation.ShapeSheet.Query
            internal ColumnList(int capacity)
            {
                this.items = new List<Column>(capacity);
+               this.dic_columns = new Dictionary<string, Column>(capacity);
            }
 
            public IEnumerator<Column> GetEnumerator()
@@ -35,17 +37,36 @@ namespace VisioAutomation.ShapeSheet.Query
            {
                get { return this.items[index]; }
            }
+
            public Column this[VA.ShapeSheet.Query.CellQuery.Column index]
            {
                get { return this.items[index.Ordinal]; }
            }
 
+           public Column this[string name]
+           {
+               get { return this.dic_columns[name]; }
+           }
+
+           public bool Contains(string name)
+           {
+               return this.dic_columns.ContainsKey(name);
+           }
+
            public Column Add(SRC src, string name)
            {
                name = GetName(name);
+
+               if (this.dic_columns.ContainsKey(name))
+               {
+                   throw new VA.AutomationException("Duplicate Column Name");
+               }
+               
                int ordinal = this.items.Count;
                var col = new Column(ordinal, src, name);
                this.items.Add(col);
+
+               this.dic_columns[name] = col;
                return col;
            }
 

@@ -120,8 +120,8 @@ namespace VisioAutomation.Text
                 Style = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharStyle, "Style");
                 AsianFont = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharAsianFont, "AsianFont");
                 Case = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharCase, "Case");
-                ComplexScriptFont= sec.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "Style");
-                ComplexScriptSize= sec.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "Style");
+                ComplexScriptFont = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "ComplexScriptStyle");
+                ComplexScriptSize = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "ComplexScriptSize");
                 DoubleStrikethrough = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, "DoubleStrikethrough");
                 DoubleUnderline = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharDblUnderline, "DoubleUnderline");
                 LangID = sec.AddColumn(VA.ShapeSheet.SRCConstants.CharLangID, "LangID");

@@ -37,12 +37,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (this.dic_section_query.ContainsKey(section))
             {
-                throw new VA.AutomationException("Section is Already in Query");
+                throw new VA.AutomationException("Duplicate Section");
             }
 
             int ordinal = this.Sections.Count;
-            // Add error checking for section index
-            // Add error checking for cell index
             var sec = new SectionQuery(this,ordinal,(short)section);
             this.Sections.Add(sec);
             this.dic_section_query[section] = sec;
