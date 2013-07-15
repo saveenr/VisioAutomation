@@ -96,24 +96,24 @@ namespace VisioAutomation.Layout
             public ShapeLayoutCellQuery() :
                 base()
             {
-                this.ConFixedCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ConFixedCode, "ConFixedCode");
-                this.ConLineJumpCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpCode, "ConLineJumpCode");
-                this.ConLineJumpDirX = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpDirX, "ConLineJumpDirX");
-                this.ConLineJumpDirY = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpDirY, "ConLineJumpDirY");
-                this.ConLineJumpStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpStyle, "ConLineJumpStyle");
-                this.ConLineRouteExt = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineRouteExt, "ConLineRouteExt");
-                this.ShapeFixedCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeFixedCode, "ShapeFixedCode");
-                this.ShapePermeablePlace = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePermeablePlace, "ShapePermeablePlace");
-                this.ShapePermeableX = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePermeableX, "ShapePermeableX");
-                this.ShapePermeableY = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePermeableY, "ShapePermeableY");
-                this.ShapePlaceFlip = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePlaceFlip, "ShapePlaceFlip");
-                this.ShapePlaceStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePlaceStyle, "ShapePlaceStyle");
-                this.ShapePlowCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePlowCode, "ShapePlowCode");
-                this.ShapeRouteStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeRouteStyle, "ShapeRouteStyle");
-                this.ShapeSplit = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplit, "ShapeSplit");
-                this.ShapeSplittable = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplittable, "ShapeSplittable");
-                this.DisplayLevel= this.AddColumn(VA.ShapeSheet.SRCConstants.DisplayLevel, "DisplayLevel");
-                this.Relationships = this.AddColumn(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
+                this.ConFixedCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConFixedCode, "ConFixedCode");
+                this.ConLineJumpCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpCode, "ConLineJumpCode");
+                this.ConLineJumpDirX = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpDirX, "ConLineJumpDirX");
+                this.ConLineJumpDirY = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpDirY, "ConLineJumpDirY");
+                this.ConLineJumpStyle = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpStyle, "ConLineJumpStyle");
+                this.ConLineRouteExt = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineRouteExt, "ConLineRouteExt");
+                this.ShapeFixedCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeFixedCode, "ShapeFixedCode");
+                this.ShapePermeablePlace = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePermeablePlace, "ShapePermeablePlace");
+                this.ShapePermeableX = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePermeableX, "ShapePermeableX");
+                this.ShapePermeableY = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePermeableY, "ShapePermeableY");
+                this.ShapePlaceFlip = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePlaceFlip, "ShapePlaceFlip");
+                this.ShapePlaceStyle = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePlaceStyle, "ShapePlaceStyle");
+                this.ShapePlowCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePlowCode, "ShapePlowCode");
+                this.ShapeRouteStyle = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeRouteStyle, "ShapeRouteStyle");
+                this.ShapeSplit = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeSplit, "ShapeSplit");
+                this.ShapeSplittable = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeSplittable, "ShapeSplittable");
+                this.DisplayLevel= this.Columns.Add(VA.ShapeSheet.SRCConstants.DisplayLevel, "DisplayLevel");
+                this.Relationships = this.Columns.Add(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
             }
 
             public ShapeLayoutCells GetCells(QueryResult<CellData<double>> row)

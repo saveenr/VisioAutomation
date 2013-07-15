@@ -19,18 +19,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Sections = new List<SectionQuery>(0);
             this.dic_section_query = new Dictionary<IVisio.VisSectionIndices, SectionQuery>();
         }
-
-        public Column AddColumn(SRC src)
-        {
-            return this.AddColumn(src, null);
-        }
-
-        public Column AddColumn(SRC src,string name)
-        {
-            CheckNotFrozen();
-            return this.Columns.Add(src, name);
-        }
-        
+       
         public SectionQuery AddSection(IVisio.VisSectionIndices section)
         {
             CheckNotFrozen();

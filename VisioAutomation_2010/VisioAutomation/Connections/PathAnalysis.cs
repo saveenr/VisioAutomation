@@ -49,8 +49,8 @@ namespace VisioAutomation.Connections
             var src_endarrow = VA.ShapeSheet.SRCConstants.EndArrow;
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_beginarrow = query.AddColumn(src_beginarrow,"BeginArrow");
-            var col_endarrow = query.AddColumn(src_endarrow,"EndArrow");
+            var col_beginarrow = query.Columns.Add(src_beginarrow,"BeginArrow");
+            var col_endarrow = query.Columns.Add(src_endarrow,"EndArrow");
 
             var arrow_table = query.GetResults<int>(page, connnector_ids);
             

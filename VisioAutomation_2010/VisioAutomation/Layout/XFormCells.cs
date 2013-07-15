@@ -61,13 +61,13 @@ namespace VisioAutomation.Layout
 
             public XFormCellQuery()
             {
-                PinX = this.AddColumn(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-                PinY = this.AddColumn(VA.ShapeSheet.SRCConstants.PinY, "PinY");
-                LocPinX = this.AddColumn(VA.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
-                LocPinY = this.AddColumn(VA.ShapeSheet.SRCConstants.LocPinY, "LocPinY");
-                Width = this.AddColumn(VA.ShapeSheet.SRCConstants.Width, "Width");
-                Height = this.AddColumn(VA.ShapeSheet.SRCConstants.Height, "Height");
-                Angle = this.AddColumn(VA.ShapeSheet.SRCConstants.Angle, "Angle");
+                PinX = this.Columns.Add(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+                PinY = this.Columns.Add(VA.ShapeSheet.SRCConstants.PinY, "PinY");
+                LocPinX = this.Columns.Add(VA.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
+                LocPinY = this.Columns.Add(VA.ShapeSheet.SRCConstants.LocPinY, "LocPinY");
+                Width = this.Columns.Add(VA.ShapeSheet.SRCConstants.Width, "Width");
+                Height = this.Columns.Add(VA.ShapeSheet.SRCConstants.Height, "Height");
+                Angle = this.Columns.Add(VA.ShapeSheet.SRCConstants.Angle, "Angle");
             }
 
             public  XFormCells GetCells(QueryResult<CellData<double>> row)

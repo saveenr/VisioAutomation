@@ -82,8 +82,8 @@ namespace TestVisioAutomation
         public static VA.Drawing.Size GetSize(IVisio.Shape shape)
         {
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_w = query.AddColumn(VA.ShapeSheet.SRCConstants.Width);
-            var col_h = query.AddColumn(VA.ShapeSheet.SRCConstants.Height);
+            var col_w = query.Columns.Add(VA.ShapeSheet.SRCConstants.Width,"Width");
+            var col_h = query.Columns.Add(VA.ShapeSheet.SRCConstants.Height,"Height");
 
             var table = query.GetResults<double>(shape);
             double w = table[col_w];
@@ -153,8 +153,8 @@ namespace TestVisioAutomation
             }
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_height = query.AddColumn(VA.ShapeSheet.SRCConstants.PageHeight);
-            var col_width = query.AddColumn(VA.ShapeSheet.SRCConstants.PageWidth);
+            var col_height = query.Columns.Add(VA.ShapeSheet.SRCConstants.PageHeight,"PageHeight");
+            var col_width = query.Columns.Add(VA.ShapeSheet.SRCConstants.PageWidth,"PageWidth");
             var results = query.GetResults<double>(page.PageSheet);
             double height = results[col_height];
             double width = results[col_width];

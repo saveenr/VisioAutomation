@@ -9,9 +9,14 @@ namespace VisioAutomation.ShapeSheet.Query
     {
        public class ColumnList : IEnumerable<Column>
        {
-           private IList<Column> items { get; set; }
-           private Dictionary<string, Column> dic_columns; 
+           enum ColumnType
+           {
+               Unknown, SRC, CellIndex
+           }
 
+           private IList<Column> items { get; set; }
+           private Dictionary<string, Column> dic_columns;
+           private ColumnType coltype;
            internal ColumnList() :
                this(0)
            {
@@ -21,6 +26,7 @@ namespace VisioAutomation.ShapeSheet.Query
            {
                this.items = new List<Column>(capacity);
                this.dic_columns = new Dictionary<string, Column>(capacity);
+               this.coltype = ColumnType.Unknown;
            }
 
            public IEnumerator<Column> GetEnumerator()
@@ -53,8 +59,21 @@ namespace VisioAutomation.ShapeSheet.Query
                return this.dic_columns.ContainsKey(name);
            }
 
+           public Column Add(SRC src)
+           {
+               return this.Add(src, null);
+           }
+
            public Column Add(SRC src, string name)
            {
+               if (this.coltype == ColumnType.CellIndex)
+               {
+                   throw new VA.AutomationException("Can't add an SRC if Columns contains CellIndexes");
+               }
+               else
+               {
+                   this.coltype = ColumnType.SRC;
+               }
                name = GetName(name);
 
                if (this.dic_columns.ContainsKey(name))
@@ -70,8 +89,22 @@ namespace VisioAutomation.ShapeSheet.Query
                return col;
            }
 
+           public Column Add(short cell)
+           {
+               return this.Add(cell, null);
+           }
+
            public Column Add(short cell, string name)
            {
+               if (this.coltype == ColumnType.SRC)
+               {
+                   throw new VA.AutomationException("Can't add a CellIndex if Columns contains SRCs");
+               }
+               else
+               {
+                   this.coltype = ColumnType.CellIndex;
+               }
+
                name = GetName(name);
                int ordinal = this.items.Count;
                var col = new Column(ordinal, cell, name);

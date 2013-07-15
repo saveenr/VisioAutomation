@@ -42,8 +42,8 @@ namespace TestVisioAutomation
 
             // Verify that the formulas were set
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddColumn(src_pinx);
-            var col_piny = query.AddColumn(src_piny);
+            var col_pinx = query.Columns.Add(src_pinx,"PinX");
+            var col_piny = query.Columns.Add(src_piny,"PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -75,8 +75,8 @@ namespace TestVisioAutomation
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddColumn(src_fg);
-            var col_linepat = query.AddColumn(src_linepat);
+            var col_fg = query.Columns.Add(src_fg,"Foreground");
+            var col_linepat = query.Columns.Add(src_linepat,"LinePattern");
 
             // Retrieve the values
             var data = query.GetFormulasAndResults<double>(shape1);
@@ -108,7 +108,7 @@ namespace TestVisioAutomation
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddColumn(src_linepat);
+            var col_linepat = query.Columns.Add(src_linepat,"LinePattern");
 
             // Retrieve the values
             var data = query.GetFormulasAndResults<double>(shape1);
@@ -130,7 +130,7 @@ namespace TestVisioAutomation
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddColumn(src_linepat);
+            var col_linepat = query.Columns.Add(src_linepat,"LinePattern");
 
             // Retrieve the values
             var data = query.GetFormulasAndResults<double>(shape1);
@@ -161,8 +161,8 @@ namespace TestVisioAutomation
 
             // Verify that the formulas were set
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddColumn(src_pinx);
-            var col_piny = query.AddColumn(src_piny);
+            var col_pinx = query.Columns.Add(src_pinx,"PinX");
+            var col_piny = query.Columns.Add(src_piny,"PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -242,8 +242,8 @@ namespace TestVisioAutomation
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddColumn(src_linepat);
-            var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
+            var col_linepat = query.Columns.Add(src_linepat,"LinePattern");
+            var col_pinx = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinX,"PinX");
 
             // Retrieve the values
             var data = query.GetFormulasAndResults<double>(shape1);

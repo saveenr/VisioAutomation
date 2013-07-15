@@ -43,11 +43,11 @@ namespace TestVisioAutomation
             var query = new VA.ShapeSheet.Query.CellQuery();
             var col_fg = query.Columns.Add(src_fg,"Foreground");
             var col_bg = query.Columns.Add(src_bg, "Background");
-            var col_filpat = query.AddColumn(src_filpat);
+            var col_filpat = query.Columns.Add(src_filpat,"FillPattern");
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
-            var col_charcase = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharCase, "Case");
-            var col_charcolor = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColor, "Color");
-            var col_chartrans = sec_char.AddColumn(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");
+            var col_charcase = sec_char.Columns.Add(VA.ShapeSheet.SRCConstants.CharCase, "Case");
+            var col_charcolor = sec_char.Columns.Add(VA.ShapeSheet.SRCConstants.CharColor, "Color");
+            var col_chartrans = sec_char.Columns.Add(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");
 
             var shapeids = new[] {s1_id};
 
@@ -104,9 +104,9 @@ namespace TestVisioAutomation
             // now retrieve the formulas with GetFormulas
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddColumn(src_fg);
-            var col_bg = query.AddColumn(src_bg);
-            var col_filpat = query.AddColumn(src_filpat);
+            var col_fg = query.Columns.Add(src_fg,"Foreground");
+            var col_bg = query.Columns.Add(src_bg,"Background");
+            var col_filpat = query.Columns.Add(src_filpat,"FillPattern");
 
             var shapeids = new[] {s1_id};
 
@@ -161,8 +161,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
-            var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
+            var col_pinx = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinX,"PinX");
+            var col_piny = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinY,"PinY");
 
             var r = query.GetResults<double>(page1, shapeids);
 
@@ -207,7 +207,7 @@ namespace TestVisioAutomation
             var query = new VA.ShapeSheet.Query.CellQuery();
             
             var sec = query.AddSection(IVisio.VisSectionIndices.visSectionProp);
-            sec.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value,"Value");
+            sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
@@ -247,8 +247,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddColumn(VA.ShapeSheet.SRCConstants.PinX);
-            var col_piny = query.AddColumn(VA.ShapeSheet.SRCConstants.PinY);
+            var col_pinx = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinX,"PinX");
+            var col_piny = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinY,"PinY");
 
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
@@ -286,7 +286,7 @@ namespace TestVisioAutomation
             var query = new VA.ShapeSheet.Query.CellQuery();
             foreach (var src in srcs)
             {
-                query.AddColumn(src);
+                query.Columns.Add(src,null);
             }
             return query;
         }

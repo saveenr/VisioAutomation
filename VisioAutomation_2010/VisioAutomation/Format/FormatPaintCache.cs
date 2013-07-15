@@ -100,7 +100,7 @@ namespace VisioAutomation.Format
 
             foreach (var cell in desired_cells)
             {
-                query.AddColumn(cell.SRC,null);
+                query.Columns.Add(cell.SRC,null);
             }
 
             // Retrieve the values for the cells
