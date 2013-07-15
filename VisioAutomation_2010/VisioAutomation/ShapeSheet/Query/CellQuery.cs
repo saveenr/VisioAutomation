@@ -10,13 +10,14 @@ namespace VisioAutomation.ShapeSheet.Query
         public ColumnList Columns { get; private set; }
         public List<SectionQuery> Sections { get; private set; }
         private List<List<SectionQueryInfo>> PerShapeSectionInfo; 
-
         private bool IsFrozen;
- 
+
+        private Dictionary<IVisio.VisSectionIndices, SectionQuery> dic_section_query; 
         public CellQuery()
         {
             this.Columns = new ColumnList(0);
             this.Sections = new List<SectionQuery>(0);
+            this.dic_section_query = new Dictionary<IVisio.VisSectionIndices, SectionQuery>();
         }
 
         public Column AddColumn(SRC src)
@@ -33,11 +34,19 @@ namespace VisioAutomation.ShapeSheet.Query
         public SectionQuery AddSection(IVisio.VisSectionIndices section)
         {
             CheckNotFrozen();
+
+            if (this.dic_section_query.ContainsKey(section))
+            {
+                throw new VA.AutomationException("Section is Already in Query");
+            }
+
             int ordinal = this.Sections.Count;
             // Add error checking for section index
             // Add error checking for cell index
             var sec = new SectionQuery(this,ordinal,(short)section);
             this.Sections.Add(sec);
+            this.dic_section_query[section] = sec;
+
             return sec;
         }
 
