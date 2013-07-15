@@ -8,7 +8,6 @@ namespace VisioAutomation.ShapeSheet.Query
         public class Column
         {
             public string Name { get; private set; }
-            public IVisio.VisUnitCodes UnitCode { get; set; }
             public SRC SRC { get; protected set; }
 
             protected Column(int ordinal, string name)
@@ -19,7 +18,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
 
                 this.Ordinal = ordinal;
-                this.UnitCode = IVisio.VisUnitCodes.visNoCast;
             }
 
             public int Ordinal { get; private set; }

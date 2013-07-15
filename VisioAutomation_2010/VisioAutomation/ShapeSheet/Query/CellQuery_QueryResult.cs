@@ -32,6 +32,7 @@ namespace VisioAutomation.ShapeSheet.Query
            {
                get { return this.Cells[index]; }
            }
+
            public T this[VA.ShapeSheet.Query.CellQuery.Column index]
            {
                get { return this.Cells[index.Ordinal]; }
