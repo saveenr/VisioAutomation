@@ -17,6 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
            private IList<Column> items { get; set; }
            private Dictionary<string, Column> dic_columns;
            private ColumnType coltype;
+
            internal ColumnList() :
                this(0)
            {
@@ -70,11 +71,9 @@ namespace VisioAutomation.ShapeSheet.Query
                {
                    throw new VA.AutomationException("Can't add an SRC if Columns contains CellIndexes");
                }
-               else
-               {
-                   this.coltype = ColumnType.SRC;
-               }
-               name = GetName(name);
+               this.coltype = ColumnType.SRC;
+
+               name = fixup_name(name);
 
                if (this.dic_columns.ContainsKey(name))
                {
@@ -100,19 +99,16 @@ namespace VisioAutomation.ShapeSheet.Query
                {
                    throw new VA.AutomationException("Can't add a CellIndex if Columns contains SRCs");
                }
-               else
-               {
-                   this.coltype = ColumnType.CellIndex;
-               }
+               this.coltype = ColumnType.CellIndex;
 
-               name = GetName(name);
+               name = fixup_name(name);
                int ordinal = this.items.Count;
                var col = new Column(ordinal, cell, name);
                this.items.Add(col);
                return col;
            }
 
-           private string GetName(string name)
+           private string fixup_name(string name)
            {
                if (string.IsNullOrEmpty(name))
                {
