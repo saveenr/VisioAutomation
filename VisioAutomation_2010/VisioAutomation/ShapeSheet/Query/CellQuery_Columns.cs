@@ -122,5 +122,52 @@ namespace VisioAutomation.ShapeSheet.Query
                get { return this.items.Count; }
            }
        }
+
+
+        public class SectionList : IEnumerable<SectionQuery>
+       {
+           private IList<SectionQuery> items { get; set; }
+           private CellQuery parent;
+ 
+           internal SectionList(CellQuery parent) :
+               this(parent,0)
+           {
+           }
+
+           internal SectionList(CellQuery parent,int capacity)
+           {
+               this.items = new List<SectionQuery>(capacity);
+               this.parent = parent;
+           }
+
+           public IEnumerator<SectionQuery> GetEnumerator()
+           {
+               return (this.items).GetEnumerator();
+           }
+
+           System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+           {
+               return GetEnumerator();
+           }
+
+           public SectionQuery this[int index]
+           {
+               get { return this.items[index]; }
+           }
+
+           public SectionQuery Add(IVisio.VisSectionIndices section)
+           {
+               int ordinal = items.Count;
+               var sec = new SectionQuery(this.parent, ordinal, (short) section);
+               this.items.Add(sec);
+               return sec;
+           }
+
+           public int Count
+           {
+               get { return this.items.Count; }
+           }
+       }
     }
+
 }

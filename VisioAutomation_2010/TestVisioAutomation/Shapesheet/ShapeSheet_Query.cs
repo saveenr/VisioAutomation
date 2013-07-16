@@ -45,7 +45,7 @@ namespace TestVisioAutomation
             var col_fg = query.Columns.Add(src_fg,"Foreground");
             var col_bg = query.Columns.Add(src_bg, "Background");
             var col_filpat = query.Columns.Add(src_filpat,"FillPattern");
-            var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
+            var sec_char = query.Sections.Add(IVisio.VisSectionIndices.visSectionCharacter);
             var col_charcase = sec_char.Columns.Add(VA.ShapeSheet.SRCConstants.CharCase, "Case");
             var col_charcolor = sec_char.Columns.Add(VA.ShapeSheet.SRCConstants.CharColor, "Color");
             var col_chartrans = sec_char.Columns.Add(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");
@@ -206,8 +206,8 @@ namespace TestVisioAutomation
             VA.CustomProperties.CustomPropertyHelper.Set(s4, "S3P3", "6");
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            
-            var sec = query.AddSection(IVisio.VisSectionIndices.visSectionProp);
+
+            var sec = query.Sections.Add(IVisio.VisSectionIndices.visSectionProp);
             sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
@@ -470,7 +470,7 @@ namespace TestVisioAutomation
                     VA.ShapeSheet.Query.CellQuery.SectionQuery sec;
                     if (!section_to_secquery.ContainsKey(src.Section))
                     {
-                        sec = query.AddSection((IVisio.VisSectionIndices) src.Section);
+                        sec = query.Sections.Add((IVisio.VisSectionIndices)src.Section);
                         section_to_secquery[src.Section] = sec;
                     }
                     else

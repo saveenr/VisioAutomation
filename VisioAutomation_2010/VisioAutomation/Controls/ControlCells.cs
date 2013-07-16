@@ -60,7 +60,7 @@ namespace VisioAutomation.Controls
 
             public ControlCellQuery() 
             {
-                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionControls);
+                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionControls);
                 this.CanGlue = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_CanGlue, "CanGlue");
                 this.Tip = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_Tip, "Tip");
                 this.X = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_X, "X");

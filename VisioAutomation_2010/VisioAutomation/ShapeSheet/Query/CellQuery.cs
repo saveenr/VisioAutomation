@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.Query
     public partial class CellQuery
     {
         public ColumnList Columns { get; private set; }
-        public List<SectionQuery> Sections { get; private set; }
+        public SectionList Sections { get; private set; }
         private List<List<SectionQueryInfo>> PerShapeSectionInfo; 
         private bool IsFrozen;
 
@@ -16,28 +16,12 @@ namespace VisioAutomation.ShapeSheet.Query
         public CellQuery()
         {
             this.Columns = new ColumnList(0);
-            this.Sections = new List<SectionQuery>(0);
+            this.Sections = new SectionList(this,0);
             this.dic_section_query = new Dictionary<IVisio.VisSectionIndices, SectionQuery>();
         }
        
-        public SectionQuery AddSection(IVisio.VisSectionIndices section)
-        {
-            CheckNotFrozen();
 
-            if (this.dic_section_query.ContainsKey(section))
-            {
-                throw new VA.AutomationException("Duplicate Section");
-            }
-
-            int ordinal = this.Sections.Count;
-            var sec = new SectionQuery(this,ordinal,(short)section);
-            this.Sections.Add(sec);
-            this.dic_section_query[section] = sec;
-
-            return sec;
-        }
-
-        private void CheckNotFrozen()
+        internal void CheckNotFrozen()
         {
             if (this.IsFrozen)
             {
