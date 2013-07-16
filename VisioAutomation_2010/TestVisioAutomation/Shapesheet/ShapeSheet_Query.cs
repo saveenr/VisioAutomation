@@ -429,28 +429,30 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void GetAllCells()
+        public void QueryAllCells()
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
             VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
 
-            // draw a simple shape
-            var s1 = page1.DrawRectangle(this.StandardPageSizeRect);
-            int s1_id = s1.ID;
+            // draw simple shapes
+            var s1 = page1.DrawRectangle(0,0,1,1);
+            var s2 = page1.DrawRectangle(2,2,3,3);
 
-            var q = new VA.ShapeSheet.Query.CellQuery();
-            var dic = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
 
-            var dic2 = new Dictionary<short,VA.ShapeSheet.Query.CellQuery.SectionQuery>();
-            foreach (var kv in dic)
+            var query = new VA.ShapeSheet.Query.CellQuery();
+
+            var name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
+            var section_to_secquery = new Dictionary<short,VA.ShapeSheet.Query.CellQuery.SectionQuery>();
+
+            foreach (var kv in name_to_src)
             {
                 var name = kv.Key;
                 var src = kv.Value;
 
                 if (src.Section == (short) IVisio.VisSectionIndices.visSectionObject)
                 {
-                    q.Columns.Add(src, name);
+                    query.Columns.Add(src, name);
                 }
                 else if ((src.Section == (short) IVisio.VisSectionIndices.visSectionFirst)
                          || (src.Section == (short) IVisio.VisSectionIndices.visSectionFirstComponent)
@@ -466,14 +468,14 @@ namespace TestVisioAutomation
                 else
                 {
                     VA.ShapeSheet.Query.CellQuery.SectionQuery sec;
-                    if (!dic2.ContainsKey(src.Section))
+                    if (!section_to_secquery.ContainsKey(src.Section))
                     {
-                        sec = q.AddSection((IVisio.VisSectionIndices) src.Section);
-                        dic2[src.Section] = sec;
+                        sec = query.AddSection((IVisio.VisSectionIndices) src.Section);
+                        section_to_secquery[src.Section] = sec;
                     }
                     else
                     {
-                        sec = dic2[src.Section];
+                        sec = section_to_secquery[src.Section];
                     }
                     sec.Columns.Add(src.Cell, name);
                 }
@@ -481,7 +483,9 @@ namespace TestVisioAutomation
 
             }
 
-            var formulas = q.GetFormulas(s1);
+            var formulas1 = query.GetFormulas(s1);
+
+            var formulas2 = query.GetFormulas(page1,new [] {s1.ID,s2.ID});
 
             int x = 1;
         }

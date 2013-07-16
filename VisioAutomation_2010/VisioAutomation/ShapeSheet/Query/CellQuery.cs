@@ -232,7 +232,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return start + cellcount;
         }
 
-        public int GetTotalCellCount(int numshapes)
+        private int GetTotalCellCount(int numshapes)
         {
             int total_cells_from_sections = this.GetCellsCountFromSections();
             int total = (this.Columns.Count * numshapes) + total_cells_from_sections;
