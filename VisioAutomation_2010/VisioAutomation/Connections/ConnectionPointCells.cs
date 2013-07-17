@@ -53,7 +53,7 @@ namespace VisioAutomation.Connections
             
             public ConnectionPointCellQuery()
             {
-                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionConnectionPts);
+                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
                 DirX = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_DirX, "DirX");
                 DirY = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_DirY, "DirY");
                 Type = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_Type, "Type");

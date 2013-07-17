@@ -67,7 +67,7 @@ namespace TestVisioAutomation
             VA.UserDefinedCells.UserDefinedCellsHelper.Set(s1, "foo", "bar", null);
 
             var queryex = new VA.ShapeSheet.Query.CellQuery();
-            var sec=queryex.AddSection(IVisio.VisSectionIndices.visSectionUser);
+            var sec = queryex.Sections.Add(IVisio.VisSectionIndices.visSectionUser);
             var Value = sec.Columns.Add(VA.ShapeSheet.SRCConstants.User_Value, "Value");
             var Prompt = sec.Columns.Add(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
 

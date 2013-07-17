@@ -77,7 +77,7 @@ namespace VisioAutomation.Scripting.Commands
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var sec = query.AddSection(section);
+            var sec = query.Sections.Add(section);
 
             int ci = 0;
             foreach (var cell in cells)
@@ -103,7 +103,7 @@ namespace VisioAutomation.Scripting.Commands
             var page = app.ActivePage;
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var sec = query.AddSection(section);
+            var sec = query.Sections.Add(section);
 
             int ci = 0;
             foreach (var cell in cells)

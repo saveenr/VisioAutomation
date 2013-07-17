@@ -103,7 +103,7 @@ namespace VisioAutomation.CustomProperties
 
         public CustomPropertyCellQuery() 
         {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
+            var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionProp);
 
             SortKey = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
             Ask = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
