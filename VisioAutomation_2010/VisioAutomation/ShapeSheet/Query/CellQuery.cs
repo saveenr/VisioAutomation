@@ -17,6 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Columns = new ColumnList(0);
             this.Sections = new List<SectionQuery>(0);
+            this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>(0);
             this.dic_section_query = new Dictionary<IVisio.VisSectionIndices, SectionQuery>();
         }
        
@@ -89,7 +90,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     unitcodes.Add(col.UnitCode);                    
                 }
 
-                if (this.PerShapeSectionInfo != null && this.PerShapeSectionInfo.Count>0)
+                if (this.PerShapeSectionInfo.Count>0)
                 {
                     var per_shape_data = this.PerShapeSectionInfo[i];
                     foreach (var sec in per_shape_data)
@@ -203,7 +204,7 @@ namespace VisioAutomation.ShapeSheet.Query
             result.Cells = cellarray;
 
             // Now copy the Section values over
-            if (this.PerShapeSectionInfo != null && this.PerShapeSectionInfo.Count > 0)
+            if (this.PerShapeSectionInfo.Count > 0)
             {
                 result.SectionCells = new List<SectionResult<T>>();
                 List<SectionQueryInfo> sections = this.PerShapeSectionInfo[shape_index];
@@ -267,7 +268,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             // And then the sections if any exist
-            if (this.PerShapeSectionInfo != null && this.PerShapeSectionInfo.Count > 0)
+            if (this.PerShapeSectionInfo.Count > 0)
             {
                 var data_for_shape = this.PerShapeSectionInfo[0];
                 foreach (var section in data_for_shape)
@@ -310,7 +311,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 }
 
                 // And then the sections if any exist
-                if (this.PerShapeSectionInfo != null && this.PerShapeSectionInfo.Count>0)
+                if (this.PerShapeSectionInfo.Count>0)
                 {
                     var data_for_shape = this.PerShapeSectionInfo[i];
                     foreach (var section in data_for_shape)
@@ -366,7 +367,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private int GetCellsCountFromSections()
         {
-            if (this.PerShapeSectionInfo == null)
+            if (this.PerShapeSectionInfo.Count<1)
             {
                 return 0;
             }
