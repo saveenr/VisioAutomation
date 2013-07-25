@@ -12,15 +12,12 @@ namespace VisioAutomation.ShapeSheet.Query
         private List<List<SectionQueryInfo>> PerShapeSectionInfo; 
         private bool IsFrozen;
 
-        private Dictionary<IVisio.VisSectionIndices, SectionQuery> dic_section_query; 
         public CellQuery()
         {
             this.Columns = new ColumnList(0);
             this.Sections = new SectionList(this,0);
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>(0);
-            this.dic_section_query = new Dictionary<IVisio.VisSectionIndices, SectionQuery>();
         }
-       
 
         internal void CheckNotFrozen()
         {
@@ -123,7 +120,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Freeze();
             var srcstream = BuildSIDSRCStream(page,shapeids);
             var values = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, srcstream);
-            var list = FillValuesForMultipleShapes(shapeids, values, srcstream);
+            var list = FillValuesForMultipleShapes(shapeids, values);
             return list;
         }
 
@@ -133,7 +130,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = BuildSIDSRCStream(page, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
             var values = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, srcstream, unitcodes);
-            var list = FillValuesForMultipleShapes(shapeids, values, srcstream);
+            var list = FillValuesForMultipleShapes(shapeids, values);
             return list;
         }
 
@@ -146,32 +143,29 @@ namespace VisioAutomation.ShapeSheet.Query
             T[] results = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(page, srcstream, unitcodes);
             string[] formulas  = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(page, srcstream);
 
-            var combineddata = new CellData<T>[results.Length];
+            // Merge the results and formulas
+            var combined_data = new CellData<T>[results.Length];
             for (int i = 0; i < results.Length; i++)
             {
-                combineddata[i] = new CellData<T>(formulas[i], results[i]);
+                combined_data[i] = new CellData<T>(formulas[i], results[i]);
             }
 
-            var r = FillValuesForMultipleShapes(shapeids, combineddata, srcstream);
+            var r = FillValuesForMultipleShapes(shapeids, combined_data);
             return r;
         }
 
-        private QueryResultList<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values, short[] srcstream)
+        private QueryResultList<T> FillValuesForMultipleShapes<T>(IList<int> shapeids, T[] values)
         {
             var list = new QueryResultList<T>();
             int cellcount = 0;
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shapeid = shapeids[shape_index];
-                var r = new QueryResult<T>(shapeid);
-                cellcount = this.FillValuesForShape<T>(values, r, cellcount, shape_index);
-                list.Add(r);
+                var data = new QueryResult<T>(shapeid);
+                cellcount = this.FillValuesForShape<T>(values, data, cellcount, shape_index);
+                list.Add(data);
             }
             
-            if (cellcount*4 != srcstream.Length)
-            {
-                throw new VA.AutomationException();
-            }
             return list;
         }
 
@@ -243,12 +237,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
             int total = this.GetTotalCellCount(1);
 
-            var sb = new StreamBuilder(3, total);
+            var stream_builder = new StreamBuilder(3, total);
             
             foreach (var col in this.Columns)
             {
                 var src = col.SRC;
-                sb.Add(src.Section,src.Row,src.Cell);
+                stream_builder.Add(src.Section,src.Row,src.Cell);
             }
 
             // And then the sections if any exist
@@ -261,18 +255,18 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (var col in section.SectionQuery.Columns)
                         {
-                            sb.Add(section.SectionQuery.SectionIndex, rowindex, col.SRC.Cell);
+                            stream_builder.Add(section.SectionQuery.SectionIndex, rowindex, col.SRC.Cell);
                         }
                     }
                 }
             }
 
-            if (sb.ChunksWrittenCount != total)
+            if (stream_builder.ChunksWrittenCount != total)
             {
                 throw new VA.AutomationException();
             }
 
-            return sb.Stream;
+            return stream_builder.Stream;
         }
 
         private short[] BuildSIDSRCStream(IVisio.Page page, IList<int> shapeids)
@@ -282,7 +276,7 @@ namespace VisioAutomation.ShapeSheet.Query
             int total = this.GetTotalCellCount(shapeids.Count);
 
             // stream_count is the number of short values that have been written to the array
-            var sb = new StreamBuilder(4, total);
+            var stream_builder = new StreamBuilder(4, total);
 
             for (int i = 0; i < shapeids.Count; i++)
             {
@@ -291,7 +285,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 foreach (var col in this.Columns)
                 {
                     var src = col.SRC;
-                    sb.Add((short)shapeid, src.Section, src.Row, src.Cell);
+                    stream_builder.Add((short)shapeid, src.Section, src.Row, src.Cell);
                 }
 
                 // And then the sections if any exist
@@ -304,19 +298,19 @@ namespace VisioAutomation.ShapeSheet.Query
                         {
                             foreach (var col in section.SectionQuery.Columns)
                             {
-                                sb.Add((short)shapeid,section.SectionQuery.SectionIndex,rowindex,col.SRC.Cell);
+                                stream_builder.Add((short)shapeid,section.SectionQuery.SectionIndex,rowindex,col.SRC.Cell);
                             }                                
                         }
                     }
                 }
             }
             
-            if (sb.ChunksWrittenCount != total)
+            if (stream_builder.ChunksWrittenCount != total)
             {
                 throw new VA.AutomationException();
             }
 
-            return sb.Stream;
+            return stream_builder.Stream;
         }
 
         private void CalculatePerShapeInfo(IVisio.Page page, IList<int> shapeids)
