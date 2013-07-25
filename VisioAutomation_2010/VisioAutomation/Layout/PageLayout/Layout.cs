@@ -44,7 +44,8 @@ namespace VisioAutomation.Layout.PageLayout
             }
             else
             {
-                throw new VA.AutomationException();
+                string msg = "Unsupported connector appearance";
+                throw new VA.AutomationException(msg);
             }
         }
 
@@ -132,7 +133,8 @@ namespace VisioAutomation.Layout.PageLayout
                     return IVisio.VisCellVals.visLORouteSimpleEW;
                 }
             }
-            throw new VA.AutomationException();
+            string msg = "Unsupported connector style";
+            throw new VA.AutomationException(msg);
         }
 
         public void Apply(IVisio.Page page)

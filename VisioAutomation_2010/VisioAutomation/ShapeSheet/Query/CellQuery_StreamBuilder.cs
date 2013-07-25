@@ -32,7 +32,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 if (this.ChunkSize != 4)
                 {
-                    throw new VA.AutomationException();
+                    string msg = string.Format("Only ChunkSize 4 supported");
+                    throw new VA.AutomationException(msg);
                 }
 
                 if (this.ChunksWrittenCount >= this.Capacity)
@@ -52,7 +53,8 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 if (this.ChunkSize != 3)
                 {
-                    throw new VA.AutomationException();
+                    string msg = string.Format("Only ChunkSize 3 supported");
+                    throw new VA.AutomationException(msg);
                 }
 
                 if (this.ChunksWrittenCount >= this.Capacity)

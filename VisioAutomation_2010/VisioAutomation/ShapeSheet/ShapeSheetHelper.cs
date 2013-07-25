@@ -152,7 +152,7 @@ namespace VisioAutomation.ShapeSheet
             else
             {
                 string msg = string.Format("Internal error: Unsupported Result Type: {0}", result_type.Name);
-                throw new VA.AutomationException();
+                throw new VA.AutomationException(msg);
             }
             
             System.Array results_sa=null;
@@ -188,7 +188,7 @@ namespace VisioAutomation.ShapeSheet
             if (!IsValidResultType(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
-                throw new VA.AutomationException();
+                throw new VA.AutomationException(msg);
             }
         }
 
