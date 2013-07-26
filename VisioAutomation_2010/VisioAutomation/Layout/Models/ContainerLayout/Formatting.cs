@@ -1,6 +1,4 @@
-﻿using VisioAutomation.Format;
-using VisioAutomation.Text;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.Layout.Models.ContainerLayout
@@ -14,10 +12,10 @@ namespace VisioAutomation.Layout.Models.ContainerLayout
 
         public Formatting()
         {
-            this.ShapeFormatCells = new ShapeFormatCells();
-            this.CharacterFormatCells = new CharacterFormatCells();
-            this.ParagraphFormatCells = new ParagraphFormatCells();
-            this.TextCells = new TextCells();
+            this.ShapeFormatCells = new VA.Format.ShapeFormatCells();
+            this.CharacterFormatCells = new VA.Text.CharacterFormatCells();
+            this.ParagraphFormatCells = new VA.Text.ParagraphFormatCells();
+            this.TextCells = new VA.Text.TextCells();
         }
 
         public void Apply(VA.ShapeSheet.Update update, short shapeid_label, short shapeid_box)

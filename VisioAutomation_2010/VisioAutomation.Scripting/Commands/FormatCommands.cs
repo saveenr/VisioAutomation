@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Linq;
-using VisioAutomation.Extensions;
 using System.Linq;
-using VisioAutomation.Format;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -48,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return new List<ShapeFormatCells>(0);
+                return new List<VA.Format.ShapeFormatCells>(0);
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();

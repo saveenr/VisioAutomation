@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -70,7 +68,7 @@ namespace VisioAutomation.Layout
                 Angle = this.Columns.Add(VA.ShapeSheet.SRCConstants.Angle, "Angle");
             }
 
-            public  XFormCells GetCells(QueryResult<CellData<double>> row)
+            public  XFormCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new XFormCells
                 {

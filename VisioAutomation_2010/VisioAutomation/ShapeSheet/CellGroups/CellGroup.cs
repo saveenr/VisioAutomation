@@ -1,4 +1,3 @@
-using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         public abstract void ApplyFormulas(ApplyFormula func);
 
-        protected static IList<T> _GetCells<T>(IVisio.Page page, IList<int> shapeids, CellQuery cellQuery, QueryResultToObject<T> f)
+        protected static IList<T> _GetCells<T>(IVisio.Page page, IList<int> shapeids, VA.ShapeSheet.Query.CellQuery cellQuery, QueryResultToObject<T> f)
         {
             var data_for_shapes = cellQuery.GetFormulasAndResults<double>(page, shapeids);
             var list = new List<T>(shapeids.Count);
@@ -21,7 +20,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return list;
         }
 
-        protected static T _GetCells<T>(IVisio.Shape shape, CellQuery cellQuery, QueryResultToObject<T> f)
+        protected static T _GetCells<T>(IVisio.Shape shape, VA.ShapeSheet.Query.CellQuery cellQuery, QueryResultToObject<T> f)
         {
             var data_for_shape = cellQuery.GetFormulasAndResults<double>(shape);
             var cells = f(data_for_shape);

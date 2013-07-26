@@ -4,7 +4,6 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
-using VisioAutomation.Layout.PageLayout;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -342,8 +341,8 @@ namespace VisioPowerTools2010
             model.Render(page);
 
             var pl = new VA.Layout.PageLayout.FlowchartLayout();
-            pl.ConnectorStyle = ConnectorStyle.Flowchart;
-            pl.ConnectorAppearance = ConnectorAppearance.Curved;
+            pl.ConnectorStyle = VisioAutomation.Layout.PageLayout.ConnectorStyle.Flowchart;
+            pl.ConnectorAppearance = VisioAutomation.Layout.PageLayout.ConnectorAppearance.Curved;
             pl.Apply(page);
 
             page.ResizeToFitContents();

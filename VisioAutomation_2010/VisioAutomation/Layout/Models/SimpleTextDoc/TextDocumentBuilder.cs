@@ -1,4 +1,3 @@
-using VisioAutomation.Drawing;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -46,7 +45,7 @@ namespace VisioAutomation.Layout.Models.SimpleTextDoc
             get { return _visioDocument; }
         }
 
-        public Size PageSize
+        public VA.Drawing.Size PageSize
         {
             get { return _pageSize; }
         }

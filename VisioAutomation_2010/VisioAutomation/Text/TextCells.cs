@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -105,7 +103,7 @@ namespace VisioAutomation.Text
                 TxtAngle = this.Columns.Add(VA.ShapeSheet.SRCConstants.TxtAngle, "TxtAngle");
             }
 
-            public TextCells GetCells(QueryResult<CellData<double>> row)
+            public TextCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new TextCells();
                 cells.BottomMargin = row[BottomMargin.Ordinal];

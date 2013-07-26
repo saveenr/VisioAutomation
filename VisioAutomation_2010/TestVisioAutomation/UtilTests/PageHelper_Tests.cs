@@ -1,7 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
-using VisioAutomation.Extensions;
-using VisioAutomation.Pages;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation

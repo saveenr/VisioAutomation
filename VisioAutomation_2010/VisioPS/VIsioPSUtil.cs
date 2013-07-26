@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -8,7 +7,7 @@ namespace VisioPS
 {
     static class VisioPSUtil
     {
-        public static DataTable querytable_to_datatable<T>(CellQuery cellQuery, CellQuery.QueryResultList<T> query_output)
+        public static DataTable querytable_to_datatable<T>(VA.ShapeSheet.Query.CellQuery cellQuery, VA.ShapeSheet.Query.CellQuery.QueryResultList<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();

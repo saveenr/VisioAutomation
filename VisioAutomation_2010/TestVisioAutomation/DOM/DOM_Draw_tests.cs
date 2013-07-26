@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -168,7 +167,7 @@ namespace TestVisioAutomation
             int vis_ver = int.Parse(app.Version.Split( new char[]{'.'} )[0]);
             string position_master_name = vis_ver >= 15 ? "Position Belt" : "Position";
 
-            var s1 = new Shape(position_master_name, null, new VA.Drawing.Point(3, 4));
+            var s1 = new VisioAutomation.DOM.Shape(position_master_name, null, new VA.Drawing.Point(3, 4));
             page_node.Shapes.Add( s1 );
             var doc = doc_node.Render(app);
 

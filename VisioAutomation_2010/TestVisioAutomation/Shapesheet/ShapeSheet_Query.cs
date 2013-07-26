@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using System.Linq;
-using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -479,16 +478,10 @@ namespace TestVisioAutomation
                     }
                     sec.Columns.Add(src.Cell, name);
                 }
-
-
             }
 
             var formulas1 = query.GetFormulas(s1);
-
             var formulas2 = query.GetFormulas(page1,new [] {s1.ID,s2.ID});
-
-            int x = 1;
         }
-
     }
 }

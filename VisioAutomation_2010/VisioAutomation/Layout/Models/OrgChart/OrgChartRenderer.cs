@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Layout.Models.InternalTree;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VAL = VisioAutomation.Layout;
@@ -59,7 +58,7 @@ namespace VisioAutomation.Layout.Models.OrgChart
 
             var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
 
-            var trees = new List<IList<Node<object>>>();
+            var trees = new List<IList<VisioAutomation.Layout.Models.InternalTree.Node<object>>>();
  
             foreach (var root in orgchartdrawing.OrgCharts)
             {

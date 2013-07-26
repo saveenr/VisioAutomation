@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
@@ -310,7 +308,7 @@ namespace VisioAutomation.Pages
             }
 
 
-            public PageCells GetCells(QueryResult<CellData<double>> row)
+            public PageCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new PageCells();
                 cells.PageLeftMargin = row[PageLeftMargin.Ordinal];

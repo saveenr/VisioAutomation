@@ -1,7 +1,4 @@
-using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
@@ -123,7 +120,7 @@ namespace VisioAutomation.Layout
                 this.LockWidth = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth");
             }
 
-            public LockCells GetCells(QueryResult<CellData<double>> row)
+            public LockCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new LockCells();
                 cells.LockAspect = row[this.LockAspect.Ordinal].ToBool();

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 
 /*
@@ -565,8 +564,8 @@ namespace VisioAutomation.Layout.Models.InternalTree
                                           ? new VA.Drawing.Point(0, dif.Y)
                                           : new VA.Drawing.Point(dif.X, 0);
 
-            Point h1 = parent_attach_point.Add(handle_displacement);
-            Point h2 = child_attach_point.Add(handle_displacement*(-1));
+            VA.Drawing.Point h1 = parent_attach_point.Add(handle_displacement);
+            VA.Drawing.Point h2 = child_attach_point.Add(handle_displacement * (-1));
 
             return new[] {parent_attach_point, h1, h2, child_attach_point};
         }

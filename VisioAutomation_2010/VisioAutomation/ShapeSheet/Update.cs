@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.CellGroups;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections;
@@ -195,17 +194,17 @@ namespace VisioAutomation.ShapeSheet
             cg.ApplyFormulas((src, f) => this.SetFormulaIgnoreNull(src, f));
         }
 
-        public void SetFormulas(short shapeid, CellGroup cg)
+        public void SetFormulas(short shapeid, VA.ShapeSheet.CellGroups.CellGroup cg)
         {
             cg.ApplyFormulas((src, f) => this.SetFormulaIgnoreNull(shapeid, src, f));
         }
 
-        public void SetFormulasForRow(short shapeid, CellGroupMultiRow cg, short row)
+        public void SetFormulasForRow(short shapeid, VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
         {
             cg.ApplyFormulasForRow((src, f) => this.SetFormulaIgnoreNull(shapeid, src, f), row);
         }
 
-        public void SetFormulasForRow(CellGroupMultiRow cg, short row)
+        public void SetFormulasForRow(VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
         {
             cg.ApplyFormulasForRow((src, f) => this.SetFormulaIgnoreNull(src, f), row);
         }
