@@ -75,7 +75,7 @@ namespace VisioAutomation.ShapeSheet
         private void _add_update(UpdateRecord update)
         {
             // This block ensures that only homogeneous updates are constructed
-            if (this.updates.Count<1)
+            if (!this.first_update.HasValue)
             {
                 this.first_update = update;
             }

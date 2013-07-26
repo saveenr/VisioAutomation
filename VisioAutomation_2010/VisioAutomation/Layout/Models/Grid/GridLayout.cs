@@ -88,16 +88,16 @@ namespace VisioAutomation.Layout.Models.Grid
 
             foreach (int row in Enumerable.Range(0, this.RowCount))
             {
-                double final_left;
-                double final_right;
-                double final_top;
-                double final_bottom;
-                
                 // Restart calculating the cols
                 double dx = 0;
                 foreach (int col in Enumerable.Range(0, this.ColumnCount))
                 {
-                    if (ColumnDirection== ColumnDirection.LeftToRight)
+                    double final_left;
+                    double final_right;
+                    double final_top;
+                    double final_bottom;
+
+                    if (ColumnDirection == ColumnDirection.LeftToRight)
                     {
                         final_left = this.Origin.X + dx;
                         final_right = final_left + this.Columns[col].Width;                       

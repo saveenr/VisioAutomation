@@ -193,7 +193,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     section_result.Query = section.SectionQuery;
                     result.SectionCells.Add(section_result);
 
-                    foreach (short row_index in section.RowIndexes)
+                    foreach (int row_index in section.RowIndexes)
                     {
                         var row_values = new T[section.SectionQuery.Columns.Count];
                         int num_cols = row_values.Length;
@@ -251,11 +251,11 @@ namespace VisioAutomation.ShapeSheet.Query
                 var data_for_shape = this.PerShapeSectionInfo[0];
                 foreach (var section in data_for_shape)
                 {
-                    foreach (short rowindex in section.RowIndexes)
+                    foreach (int rowindex in section.RowIndexes)
                     {
                         foreach (var col in section.SectionQuery.Columns)
                         {
-                            stream_builder.Add(section.SectionQuery.SectionIndex, rowindex, col.SRC.Cell);
+                            stream_builder.Add(section.SectionQuery.SectionIndex, (short) rowindex, col.SRC.Cell);
                         }
                     }
                 }
@@ -295,11 +295,11 @@ namespace VisioAutomation.ShapeSheet.Query
                     var data_for_shape = this.PerShapeSectionInfo[i];
                     foreach (var section in data_for_shape)
                     {
-                        foreach (short rowindex in section.RowIndexes)
+                        foreach (int rowindex in section.RowIndexes)
                         {
                             foreach (var col in section.SectionQuery.Columns)
                             {
-                                stream_builder.Add((short)shapeid,section.SectionQuery.SectionIndex,rowindex,col.SRC.Cell);
+                                stream_builder.Add((short)shapeid,section.SectionQuery.SectionIndex,(short)rowindex,col.SRC.Cell);
                             }                                
                         }
                     }

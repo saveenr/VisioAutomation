@@ -87,7 +87,7 @@ namespace VisioAutomation.ShapeSheet
 
             var result_type = typeof(TResult);
             var unitcodes_obj_array = get_unit_code_obj_array(unitcodes);
-            var flags = get_get_set_args<TResult>(result_type);
+            var flags = get_VisGetSetArgs(result_type);
 
             System.Array results_sa = null;
             page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
@@ -109,7 +109,7 @@ namespace VisioAutomation.ShapeSheet
 
             var result_type = typeof(TResult);
             var unitcodes_obj_array = get_unit_code_obj_array(unitcodes);
-            var flags = get_get_set_args<TResult>(result_type);
+            var flags = get_VisGetSetArgs(result_type);
 
             System.Array results_sa = null;
             shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
@@ -134,24 +134,24 @@ namespace VisioAutomation.ShapeSheet
             return results;
         }
 
-        private static IVisio.VisGetSetArgs get_get_set_args<TResult>(Type result_type)
+        private static IVisio.VisGetSetArgs get_VisGetSetArgs(Type type)
         {
             IVisio.VisGetSetArgs flags;
-            if (result_type == typeof (int))
+            if (type == typeof (int))
             {
                 flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
             }
-            else if (result_type == typeof (double))
+            else if (type == typeof (double))
             {
                 flags = IVisio.VisGetSetArgs.visGetFloats;
             }
-            else if (result_type == typeof (string))
+            else if (type == typeof (string))
             {
                 flags = IVisio.VisGetSetArgs.visGetStrings;
             }
             else
             {
-                string msg = string.Format("Internal error: Unsupported Result Type: {0}", result_type.Name);
+                string msg = string.Format("Internal error: Unsupported Result Type: {0}", type.Name);
                 throw new VA.AutomationException(msg);
             }
             return flags;
