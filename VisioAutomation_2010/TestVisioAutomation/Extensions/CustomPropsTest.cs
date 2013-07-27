@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     {
 
         [TestMethod]
-        public void SetCustomProps1()
+        public void CustomProps_SetCustomProps1()
         {
             var page1 = GetNewPage();
 
@@ -39,7 +39,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void SetSamePropMultipleTimes()
+        public void CustomProps_SetSamePropMultipleTimes()
         {
             var page1 = GetNewPage();
 
@@ -69,7 +69,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void InvalidPropName()
+        public void CustomProps_InvalidPropName()
         {
             bool caught = false;
             var page1 = GetNewPage();
@@ -92,7 +92,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void VerifyCustomPropAttributes()
+        public void CustomProps_VerifyCustomPropAttributes()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -113,7 +113,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void PropertyNames()
+        public void CustomProps_PropertyNames()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);

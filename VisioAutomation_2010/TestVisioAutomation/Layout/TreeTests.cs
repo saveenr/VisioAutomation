@@ -10,13 +10,7 @@ namespace TestVisioAutomation
     public class TreeTests : VisioAutomationTest
     {
         [TestMethod]
-        public void DrawTrees()
-        {
-            this.DrawTree1Node();
-            this.DrawTreeMultiNode();
-        }
-
-        public void DrawTree1Node()
+        public void TreeLayout_DrawTree1Node()
         {
             // Verify that a tree with a single node can be drawn
             var t = new TREEMODEL.Drawing();
@@ -33,7 +27,8 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        public void DrawTreeMultiNode()
+        [TestMethod]
+        public void TreeLayout_DrawTreeMultiNode()
         {
             // Verify that a tree with multiple nodes can be drawn
             // Note that  the DefaultNodeSize option is being used

@@ -10,7 +10,7 @@ namespace TestVisioAutomation
     public class TextFormat_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void SetTabStops()
+        public void Text_SetTabStops()
         {
             var no_tab_stops = new VA.Text.TabStop[] { };
             var tabstops = new[]

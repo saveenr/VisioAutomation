@@ -15,13 +15,7 @@ namespace TestVisioAutomation
         private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
-        public void UpdateShapeFormulasAll()
-        {
-            this.UpdateShapeFormulas();
-            this.UpdateShapesFormulas();
-        }
-
-        public void UpdateShapesFormulas()
+        public void ShapeSheet_UpdateFormulas_Shapes()
         {
             var page1 = GetNewPage();
 
@@ -60,43 +54,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void UpdateShapeFormulas()
-        {
-            var page1 = GetNewPage();
-            var shape1 = page1.DrawRectangle(0, 0, 1, 1);
-
-            string fg_formula = "RGB(255,0,0)";
-
-            // Setup the modifications to the cell values
-            var update = new VA.ShapeSheet.Update();
-            update.SetFormula(src_fg, fg_formula);
-            update.SetFormula(src_linepat, "7");
-            update.Execute(shape1);
-
-            // Build the query
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.Columns.Add(src_fg,"Foreground");
-            var col_linepat = query.Columns.Add(src_linepat,"LinePattern");
-
-            // Retrieve the values
-            var data = query.GetFormulasAndResults<double>(shape1);
-
-            // Verify
-            Assert.AreEqual("RGB(255,0,0)", data[col_fg].Formula);
-            AssertVA.AreEqual("7", 7, data[col_linepat]);
-
-            page1.Delete(0);
-        }
-
         [TestMethod]
-        public void UpdateShapeResultsAll()
-        {
-            this.UpdateShapeResults();
-            this.UpdateShapeResultsString();
-            this.UpdateShapesResults();
-        }
-
-        public void UpdateShapeResults()
+        public void ShapeSheet_UpdateResultsInt_Shape()
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -118,7 +77,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void UpdateShapeResultsString()
+        [TestMethod]
+        public void ShapeSheet_UpdateResultsString_Shape()
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -140,7 +100,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void UpdateShapesResults()
+        [TestMethod]
+        public void ShapeSheet_UpdateResultsDouble_Shapes()
         {
             var page1 = GetNewPage();
 
@@ -180,7 +141,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void CheckHomogenousShapeSheetUpdates()
+        public void ShapeSheet_CheckHomogenouUpdates()
         {
             this.CheckHomogenousUpdates_FormulasResults();
             this.CheckHomogenousUpdates_Streams();

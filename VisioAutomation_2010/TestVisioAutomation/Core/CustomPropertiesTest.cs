@@ -7,7 +7,7 @@ namespace TestVisioAutomation
     public class CustomPropertiesTest : VisioAutomationTest
     {
         [TestMethod]
-        public void CheckCustomPropertyNames()
+        public void CustomProps_CheckCustomPropertyNames()
         {
             Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidName(null));
             Assert.IsFalse(VA.CustomProperties.CustomPropertyHelper.IsValidName(""));
@@ -19,7 +19,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void GetSetCustomProps()
+        public void CustomProps_GetSetCustomProps()
         {
             var page1 = GetNewPage();
 

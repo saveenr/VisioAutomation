@@ -10,7 +10,7 @@ namespace TestVisioAutomation
     public class ConnectionPointHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void AddRemoveAndCountConnectionPoints()
+        public void ConnectionPoints_AddRemoveAndCountConnectionPoints()
         {
             var page1 = GetNewPage();
 
@@ -60,7 +60,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DeleteAllConnectionPoints()
+        public void ConnectionPoints_DeleteAllConnectionPoints()
         {
             var page1 = GetNewPage();
 

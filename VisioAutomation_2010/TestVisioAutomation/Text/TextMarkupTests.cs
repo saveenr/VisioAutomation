@@ -118,7 +118,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void TextText_Element_with_multiple_text_nodes()
+        public void Text_TextElement_with_multiple_text_nodes()
         {
             // Validate that multiple text elements in the structure
             // all make it into the Visio shape when the text is rendered
@@ -243,7 +243,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void TextText_BlockFormatCells_Check_SetFormat_1()
+        public void Text_TextBlockFormatCells_Check_SetFormat_1()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);

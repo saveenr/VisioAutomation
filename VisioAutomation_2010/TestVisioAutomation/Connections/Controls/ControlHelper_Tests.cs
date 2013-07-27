@@ -7,7 +7,7 @@ namespace TestVisioAutomation
     public class ControlHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void AddRemoveControls()
+        public void Controls_AddRemoveControls()
         {
             var page1 = GetNewPage();
 
