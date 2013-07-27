@@ -11,7 +11,7 @@ namespace TestVisioAutomation
     {
 
         [TestMethod]
-        public void DrawEmptyDOM()
+        public void DOM_DrawEmpty()
         {
             // Verify that an empty DOM page can be created and rendered
             var doc = this.GetNewDoc();
@@ -26,14 +26,7 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        [TestMethod]
-        public void DrawDOMSimpleNonMasterShapes()
-        {
-            this.DrawDOMBezier();
-            this.DrawDOMLine();                    
-        }
-
-        public void DrawDOMLine()
+        public void DOM_DrawLine()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -48,7 +41,7 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        public void DrawDOMBezier()
+        public void DOM_DrawBezier()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -65,7 +58,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DropDOMMaster()
+        public void DOM_DropMaster()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -89,7 +82,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void FormatDOMShape()
+        public void DOM_FormatShape()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -112,16 +105,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ConnectDOMShapes()
-        {
-            // Deferred means that instead of passing
-            // an IVisio Master object, that 
-            // the name of the master and stencil are used
-            this.ConnectDOMShapesNonDeferred();
-            this.ConnectDOMShapesDeferred();
-        }
-
-        public void ConnectDOMShapesNonDeferred()
+        public void DOM_ConnectShapes()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -146,7 +130,8 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        public void ConnectDOMShapesDeferred()
+        [TestMethod]
+        public void DOM_ConnectShapes2()
         {
             // Deferred means that the stencils (and thus masters) are loaded when rendering
             // and are no loaded by the caller before Render() is called
@@ -165,13 +150,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void VerifyUnknownMastersAndStencils()
-        {
-            this.VerifyThatUnknownMastersAreDetected();
-            this.VerifyThatUnknownStencilsAreDetected();                    
-        }
-
-        public void VerifyThatUnknownMastersAreDetected()
+        public void DOM_VerifyThatUnknownMastersAreDetected()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -200,8 +179,8 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-
-        public void VerifyThatUnknownStencilsAreDetected()
+        [TestMethod]
+        public void DOM_VerifyThatUnknownStencilsAreDetected()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
@@ -231,7 +210,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DroppingAndDrawingInDOMWorkTogether()
+        public void DOM_DrawAndDrop()
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();

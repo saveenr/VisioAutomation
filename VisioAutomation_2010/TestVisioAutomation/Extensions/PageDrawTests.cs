@@ -10,34 +10,20 @@ namespace TestVisioAutomation
     public class PageDrawTests : VisioAutomationTest
     {
         [TestMethod]
-        public void DrawLinesSplines()
-        {
-            this.DrawLine0();
-            this.DrawLine1();
-            this.DrawSpline();
-            this.DrawRoundedRectReometry();
-            this.DrawSliceRanges();
-            this.DrawThickArcRanges();
-        }
-
-        public void DrawLine1()
+        public void Page_DrawLine()
         {
             var page1 = GetNewPage();
-            var s0 = page1.DrawLine(new VA.Drawing.Point(0, 0), new VA.Drawing.Point(3, 2));
+            var p0 = new VA.Drawing.Point(0, 0);
+            var p1 = new VA.Drawing.Point(3, 2);
+            var s0 = page1.DrawLine(p0, p1);
             page1.Delete(0);
         }
 
-        public void DrawLine0()
+
+        [TestMethod]
+        public void Page_DrawSpline()
         {
             var page1 = GetNewPage();
-            var s0 = page1.DrawLine(new VA.Drawing.Point(0, 0), new VA.Drawing.Point(3, 3));
-            page1.Delete(0);
-        }
-
-        public void DrawSpline()
-        {
-            var page1 = GetNewPage();
-
             var points = new[]
                              {
                                  new VA.Drawing.Point(0, 0), 
@@ -51,7 +37,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void DrawRoundedRectReometry()
+        [TestMethod]
+        public void Page_DrawRoundedRectangle()
         {
             var page1 = GetNewPage();
             var rect = new VA.Drawing.Rectangle(1, 1, 3, 2);
@@ -87,7 +74,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void DrawSliceRanges()
+        [TestMethod]
+        public void Page_DrawPieSlices()
         {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -114,7 +102,8 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        public void DrawThickArcRanges()
+        [TestMethod]
+        public void Page_DrawDoughnutSlices()
         {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -141,7 +130,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DropManyShapes()
+        public void Page_DropManyU()
         {
             var page1 = GetNewPage();            
             var stencil = "basic_u.vss";

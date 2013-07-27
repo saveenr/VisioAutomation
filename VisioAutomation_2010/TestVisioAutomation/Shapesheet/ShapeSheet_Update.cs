@@ -180,14 +180,14 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void CheckHomogenousUpdates()
+        public void CheckHomogenousShapeSheetUpdates()
         {
-            this.CheckHomogenousUpdates_Formulas_and_Results_Dont_Mix();
-            this.CheckHomogenousUpdates_SRC_and_SIDSRC_Dont_Mix();
-            this.CheckHomogenousUpdates_Different_Types_for_results_Do_Mix();
+            this.CheckHomogenousUpdates_FormulasResults();
+            this.CheckHomogenousUpdates_Streams();
+            this.CheckHomogenousUpdates_ResultTypes();
         }
 
-        public void CheckHomogenousUpdates_Formulas_and_Results_Dont_Mix()
+        public void CheckHomogenousUpdates_FormulasResults()
         {
             var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
@@ -208,7 +208,7 @@ namespace TestVisioAutomation
             }
         }
         
-        public void CheckHomogenousUpdates_SRC_and_SIDSRC_Dont_Mix()
+        public void CheckHomogenousUpdates_Streams()
         {
             var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
@@ -229,7 +229,7 @@ namespace TestVisioAutomation
             }
         }
 
-        public void CheckHomogenousUpdates_Different_Types_for_results_Do_Mix()
+        public void CheckHomogenousUpdates_ResultTypes()
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);

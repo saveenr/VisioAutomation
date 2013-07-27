@@ -20,14 +20,8 @@ namespace TestVisioAutomation
             return drawings.Count();
         }
 
-        public void DOM_Render_Scenarios()
-        {
-            this.Empty_DOM_Rendering();
-            this.Render_Page_To_Document();
-            this.Render_Document_To_App();
-        }
-
-        public void Empty_DOM_Rendering()
+        [TestMethod]
+        public void DOM_EmptyRendering()
         {
             // Rendering a DOM should not change the page count
             // Empty DOMs do not add any shapes
@@ -40,7 +34,8 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close( true );
         }
 
-        public void Render_Page_To_Document()
+        [TestMethod]
+        public void DOM_RenderPageToDocument()
         {
             // Rendering a dom page to a document should create a new page
             var app = this.GetVisioApplication();
@@ -52,7 +47,8 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
-        public void Render_Document_To_App()
+        [TestMethod]
+        public void DOM_RenderDocumentToApplication()
         {
             // Rendering a dom document to an appliction instance should create a new document
             var app = this.GetVisioApplication();
@@ -67,15 +63,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void BasicDOMDrawing()
-        {
-            this.DrawSimpleShape();
-            this.DropShapes();
-            this.SetCustomProperties();
-            this.DrawOrgChart();
-        }
-
-        public void DrawSimpleShape()
+        public void DOM_DrawSimpleShape()
         {
             // Create the doc
             var page_node = new VA.DOM.Page();
@@ -97,7 +85,8 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
-        public void DropShapes()
+        [TestMethod]
+        public void DOM_DropShapes()
         {
             // Render it
             var app = this.GetVisioApplication();
@@ -117,7 +106,8 @@ namespace TestVisioAutomation
             app.ActiveDocument.Close(true);
         }
 
-        public void SetCustomProperties()
+        [TestMethod]
+        public void DOM_CustomProperties()
         {
             // Create the doc
             var shape_nodes = new VA.DOM.ShapeList();
@@ -153,7 +143,8 @@ namespace TestVisioAutomation
             doc.Close(true);
         }
 
-        public void DrawOrgChart()
+        [TestMethod]
+        public void DOM_DrawOrgChart()
         {
             // How to draw using a Template instead of a doc and a stencil
             const string orgchart_vst = "orgch_u.vst";

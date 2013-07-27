@@ -40,7 +40,7 @@ namespace TestVisioAutomationVDX
         }
 
         [TestMethod]
-        public void CreateMultiPageVDX()
+        public void VDX_MultiPageDocument()
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
@@ -296,7 +296,7 @@ namespace TestVisioAutomationVDX
         }
 
         [TestMethod]
-        public void VDXCustomProperties()
+        public void VDX_CustomProperties()
         {
             string filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
@@ -541,7 +541,7 @@ namespace TestVisioAutomationVDX
         }
         
         [TestMethod]
-        public void CreateCustomTemplateVDX()
+        public void VDX_CustomTemplate()
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
@@ -605,7 +605,7 @@ namespace TestVisioAutomationVDX
         }
 
         [TestMethod]
-        public void CheckNoErrorOnLoad1()
+        public void VDX_CheckNoErrorOnLoad()
         {
             // This test tends to fail with Visio 2013
 
@@ -664,7 +664,7 @@ namespace TestVisioAutomationVDX
         }
 
         [TestMethod]
-        public void CheckErrorOnLoadLogFileExists()
+        public void VDX_CheckErrorOnLoadLogFileExists()
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.vdx_with_errors_1_vdx);
