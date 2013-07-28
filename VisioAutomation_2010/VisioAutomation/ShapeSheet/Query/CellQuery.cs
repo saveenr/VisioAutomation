@@ -189,7 +189,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
                 foreach (var section in sections)
                 {
-                    var section_result = new SectionResult<T>();
+                    var section_result = new SectionResult<T>(section.RowCount);
                     section_result.Query = section.SectionQuery;
                     result.SectionCells.Add(section_result);
 
@@ -228,7 +228,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 foreach (var sec in this.Sections)
                 {
                     // Figure out which rows to query
-                    int num_rows = shape.RowCount[sec.SectionIndex];
+                    int num_rows = shape.RowCount[(short)sec.SectionIndex];
                     var section_info = new SectionQueryInfo(sec, shape.ID16, num_rows);
                     section_infos.Add(section_info);
                 }
@@ -255,7 +255,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (var col in section.SectionQuery.Columns)
                         {
-                            stream_builder.Add(section.SectionQuery.SectionIndex, (short) rowindex, col.SRC.Cell);
+                            stream_builder.Add((short)section.SectionQuery.SectionIndex, (short)rowindex, col.SRC.Cell);
                         }
                     }
                 }
@@ -299,7 +299,7 @@ namespace VisioAutomation.ShapeSheet.Query
                         {
                             foreach (var col in section.SectionQuery.Columns)
                             {
-                                stream_builder.Add((short)shapeid,section.SectionQuery.SectionIndex,(short)rowindex,col.SRC.Cell);
+                                stream_builder.Add((short)shapeid,(short)section.SectionQuery.SectionIndex,(short)rowindex,col.SRC.Cell);
                             }                                
                         }
                     }
@@ -331,7 +331,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     var section_infos = new List<SectionQueryInfo>();
                     foreach (var sec in this.Sections)
                     {
-                        int num_rows = shape.RowCount[sec.SectionIndex];
+                        int num_rows = shape.RowCount[(short)sec.SectionIndex];
                         var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
                         section_infos.Add(section_info);
                     }

@@ -158,7 +158,7 @@ namespace VisioAutomation.ShapeSheet.Query
            public SectionQuery Add(IVisio.VisSectionIndices section)
            {
                int ordinal = items.Count;
-               var sec = new SectionQuery(this.parent, ordinal, (short) section);
+               var sec = new SectionQuery(this.parent, ordinal, section);
                this.items.Add(sec);
                return sec;
            }

@@ -10,11 +10,11 @@ namespace VisioAutomation.ShapeSheet.Query
        public class SectionQuery
        {
            public CellQuery Parent { get; private set; }
-           public short SectionIndex { get; private set; }
+           public IVisio.VisSectionIndices SectionIndex { get; private set; }
            public ColumnList Columns { get; private set; }
            public int Ordinal { get; private set; }
 
-           internal SectionQuery(CellQuery parent, int ordinal, short section)
+           internal SectionQuery(CellQuery parent, int ordinal, IVisio.VisSectionIndices section)
            {
                this.Parent = parent;
                this.Ordinal = ordinal;

@@ -10,16 +10,16 @@ namespace VisioAutomation.ShapeSheet.Query
        public class SectionResult<T> : IEnumerable<T[]>
        {
            public VA.ShapeSheet.Query.CellQuery.SectionQuery Query { get; internal set; }
-           private List<T[]> Rows;
+           private List<T[]> items;
 
-           public SectionResult()
+           public SectionResult(int capacity)
            {
-               this.Rows = new List<T[]>();
+               this.items = new List<T[]>(capacity);
            }
 
            public IEnumerator<T[]> GetEnumerator()
            {
-               return this.Rows.GetEnumerator();
+               return this.items.GetEnumerator();
            }
 
            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
@@ -30,17 +30,17 @@ namespace VisioAutomation.ShapeSheet.Query
 
            public T[] this[int index]
            {
-               get { return this.Rows[index]; }
+               get { return this.items[index]; }
            }
 
            internal void Add(T[] item)
            {
-               this.Rows.Add(item);
+               this.items.Add(item);
            }
 
            public int Count
            {
-               get { return this.Rows.Count; }
+               get { return this.items.Count; }
            }
        }
     }

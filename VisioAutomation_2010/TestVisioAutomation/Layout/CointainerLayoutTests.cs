@@ -11,7 +11,7 @@ namespace TestVisioAutomation
     public class CointainerLayoutTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Container_MustCallPerformLayout()
+        public void Container_PerformLayoutBeforeRender()
         {
             // Purpose: Verify that if PerformLayout is NOT called before Render() 
             // is called then an exception will be thrown
