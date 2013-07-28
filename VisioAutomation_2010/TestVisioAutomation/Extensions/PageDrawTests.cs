@@ -10,7 +10,7 @@ namespace TestVisioAutomation
     public class PageDrawTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Page_DrawLine()
+        public void Page_Draw_Line()
         {
             var page1 = GetNewPage();
             var p0 = new VA.Drawing.Point(0, 0);
@@ -21,7 +21,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void Page_DrawSpline()
+        public void Page_Draw_Spline()
         {
             var page1 = GetNewPage();
             var points = new[]
@@ -38,7 +38,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Page_DrawRoundedRectangle()
+        public void Page_Draw_RoundedRectangle()
         {
             var page1 = GetNewPage();
             var rect = new VA.Drawing.Rectangle(1, 1, 3, 2);
@@ -75,7 +75,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Page_DrawPieSlices()
+        public void Page_Draw_PieSlices()
         {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -103,7 +103,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Page_DrawDoughnutSlices()
+        public void Page_Draw_DoughnutSlices()
         {
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
@@ -130,7 +130,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Page_DropManyU()
+        public void Page_Drop_ManyU()
         {
             var page1 = GetNewPage();            
             var stencil = "basic_u.vss";

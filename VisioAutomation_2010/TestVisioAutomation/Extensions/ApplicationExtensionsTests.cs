@@ -33,7 +33,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void Application_SimpleUndoScope()
+        public void Application_UndoScope_Simple()
         {
             var page1 = GetNewPage();
             var app = page1.Application;
@@ -61,7 +61,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Application_UndoScopeNestedInner()
+        public void Application_UndoScope_NestedInner()
         {
             var page1 = GetNewPage();
             var app = page1.Application;
@@ -87,7 +87,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Application_UndoScopeNestedOuter()
+        public void Application_UndoScope_NestedOuter()
         {
             var page1 = GetNewPage();
             var app = page1.Application;
@@ -115,7 +115,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void Application_AbortUndoScope()
+        public void Application_UndoScope_Abort()
         {
 
             var page1 = GetNewPage();
@@ -141,7 +141,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Application_AbortNestedUndoScope()
+        public void Application_UndoScope_AbortNested()
         {
 
             var page1 = GetNewPage();
@@ -170,7 +170,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Application_AbortOuterUndoScope()
+        public void Application_UndoScope_AbortOuter()
         {
 
             var page1 = GetNewPage();
@@ -198,6 +198,5 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
-
     }
 }

@@ -9,15 +9,8 @@ namespace TestVisioAutomation
     [TestClass]
     public class ResizePageTests : VisioAutomationTest
     {
-
         [TestMethod]
-        public void Test_Page_Scenarios()
-        {
-            this.SwitchPages();
-            this.ResizeBorder();
-        }
-
-        public void SwitchPages()
+        public void Page_SwitchPages()
         {
             var app = this.GetVisioApplication();
 
@@ -43,7 +36,8 @@ namespace TestVisioAutomation
             doc1.Close(true);
         }
 
-        public void ResizeBorder()
+        [TestMethod]
+        public void Page_ResizeBorder()
         {
             var doc = this.GetNewDoc();
             var shapesize = new VA.Drawing.Size(1, 2);

@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class SelectionExtensions : VisioAutomationTest
     {
         [TestMethod]
-        public void GetShapeIDs()
+        public void Selection_GetShapeIDs()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -33,7 +33,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void SelectionAsEnumerable()
+        public void Selection_SelectionAsEnumerable()
         {
             // Selection Object: http://msdn.microsoft.com/en-us/library/ms408990(v=office.12).aspx
             // this is a 1-based collection

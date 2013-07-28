@@ -10,7 +10,7 @@ namespace TestVisioAutomation
     public class DrawingHelper : VisioAutomationTest
     {
         [TestMethod]
-        public void CreateBoundingBox()
+        public void Drawing_CreateBoundingBox()
         {
             var doubles = new[] {0.0, 0.0, 1.0, -2.0};
             var points = VA.Drawing.Point.FromDoubles(doubles);

@@ -8,7 +8,7 @@ namespace TestVisioAutomation
     public class BitArray2DTest
     {
         [TestMethod]
-        public void Construct2DBitArray()
+        public void Internal_Construct2DBitArray()
         {
             // check that cols and rows must be > 0
             bool caught = false;

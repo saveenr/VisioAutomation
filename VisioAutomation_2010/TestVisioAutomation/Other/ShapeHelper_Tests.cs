@@ -10,14 +10,7 @@ namespace TestVisioAutomation
     public class ShapeHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void Test_GetNestedShapes()
-        {
-            this.Test_GetNestedShapes1();
-            this.Test_GetNestedShapes2();
-            this.Test_GetNestedShapes3();
-        }        
-        
-        public void Test_GetNestedShapes1()
+        public void ShapeHelper_Test_GetNestedShapes1()
         {
             // For a single shape with no subshapes, GetNestedShapes returns the single starting shape
             var page = this.GetNewPage();
@@ -30,7 +23,8 @@ namespace TestVisioAutomation
             page.Delete(0);
         }
 
-        public void Test_GetNestedShapes2()
+        [TestMethod]
+        public void ShapeHelper_Test_GetNestedShapes2()
         {
             // group with two shapes
             var page = this.GetNewPage();
@@ -48,7 +42,8 @@ namespace TestVisioAutomation
             page.Delete(0);
         }
 
-        public void Test_GetNestedShapes3()
+        [TestMethod]
+        public void ShapeHelper_Test_GetNestedShapes3()
         {
             // group with subgroups
             var page = this.GetNewPage();

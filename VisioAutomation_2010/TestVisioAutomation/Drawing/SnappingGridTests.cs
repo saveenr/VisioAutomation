@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class SnappingGridTests : VisioAutomationTest
     {
         [TestMethod]
-        public void ValidateSnappingGrid()
+        public void Internal_ValidateSnappingGrid()
         {
             double delta = 0.000000001;
 

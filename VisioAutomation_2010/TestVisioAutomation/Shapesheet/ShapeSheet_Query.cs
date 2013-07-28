@@ -15,7 +15,7 @@ namespace TestVisioAutomation
         public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
         
         [TestMethod]
-        public void ShapeSheet_GetResultMultipleTypes_Shape()
+        public void ShapeSheet_Query_GetResultMultipleTypes_Shape()
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
@@ -80,7 +80,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_GetResultsMultipleTypes_Shapes()
+        public void ShapeSheet_Query_GetResultsMultipleTypes_Shapes()
         {
             var page1 = GetNewPage();
 
@@ -141,7 +141,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_VerifyCellQuery_Grouping()
+        public void ShapeSheet_Query_VerifyCellQuery_Grouping()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
 
@@ -183,7 +183,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Verify_SectionQuery_Grouping()
+        public void ShapeSheet_Query_Verify_SectionQuery_Grouping()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -228,7 +228,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void ShapeSheet_Demo_CellQuery_Usage_for_Formulas_and_Results()
+        public void ShapeSheet_Query_Demo_CellQuery_Usage_for_Formulas_and_Results()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
 
@@ -287,7 +287,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Verify_CellQuery_Results_for_multiple_types()
+        public void ShapeSheet_Query_Verify_CellQuery_Results_for_multiple_types()
         {
             var page1 = GetNewPage();
 
@@ -337,7 +337,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Verify_SectionQuery_With_NonExistentSections()
+        public void ShapeSheet_Query_Verify_SectionQuery_With_NonExistentSections()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -423,7 +423,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Demo_QueryAllCells()
+        public void ShapeSheet_Query_Demo_QueryAllCells()
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];

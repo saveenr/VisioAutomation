@@ -11,7 +11,7 @@ namespace TestVisioAutomation
     public class OrgChartTests : VisioAutomationTest
     {
         [TestMethod]
-        public void OrgChart_OrgChartMustHaveContent()
+        public void OrgChart_MustHaveContent()
         {
             // Before an Org Chart is rendered it must have at least one node
             bool caught = false;
@@ -34,7 +34,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void OrgChart_DrawOrgChart0()
+        public void OrgChart_SingleNode()
         {
             // Draw the minimum org chart - a chart with one nod
             var orgchart = new OCMODEL.Drawing();
@@ -54,7 +54,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void OrgChart_DrawSingleOrgChart()
+        public void OrgChart_FiveNodes()
         {
             // Verify that basic org chart connectivity is maintained
 
@@ -108,7 +108,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void OrgChart_DrawMultipleOrgCharts()
+        public void OrgChart_MultipleOrgCharts()
         {
             // Verify that we can create multiple org charts in one
             // document

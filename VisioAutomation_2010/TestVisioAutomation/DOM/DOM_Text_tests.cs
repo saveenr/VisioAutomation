@@ -11,7 +11,7 @@ namespace TestVisioAutomation
     public class DOM_Text_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void MarkupCharacter()
+        public void Text_MarkupCharacter()
         {
             this.MarkupCharacterBold();
             this.MarkupCharacterComplex();

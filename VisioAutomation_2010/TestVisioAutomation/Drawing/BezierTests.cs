@@ -15,7 +15,7 @@ namespace TestVisioAutomation
         private double piquarter = System.Math.PI/4;
 
         [TestMethod]
-        public void TestBezierFromArcs()
+        public void Internal_TestBezierFromArcs()
         {
             // 0 width slice - 0 degrees
             var s1 = VA.Drawing.BezierSegment.FromArc(0.0, 0.0);

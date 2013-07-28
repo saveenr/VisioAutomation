@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class BoxLayoutTests : VisioAutomationTest
     {
         [TestMethod]
-        public void BoxLayoutTest_empty()
+        public void BoxLayout_Test_empty()
         {
             var layout = new BoxL.BoxLayout();
             layout.Root = new BoxL.Container(BoxL.Direction.BottomToTop);
