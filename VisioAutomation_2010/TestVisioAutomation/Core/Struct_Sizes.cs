@@ -7,7 +7,7 @@ namespace TestVisioAutomation
     public class Struct_Sizes
     {
         [TestMethod]
-        public void ShapeSheet_VerifySRCLayout()
+        public void Internal_ShapeSheet_VerifySRCLayout()
         {
             this.SRCSizeIs6Bytes();
             this.Verify_Size_of_instance();

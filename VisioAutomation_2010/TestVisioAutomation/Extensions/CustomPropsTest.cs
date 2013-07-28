@@ -153,7 +153,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void CustomProps_GetFromShapes()
+        public void CustomProps_GetFromMultipleShapes()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);

@@ -32,7 +32,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Document_ForceClosing()
+        public void Document_ForceClose()
         {
             var app = GetVisioApplication();
             var documents = app.Documents;

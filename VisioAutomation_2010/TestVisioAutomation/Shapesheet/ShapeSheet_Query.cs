@@ -15,7 +15,7 @@ namespace TestVisioAutomation
         public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
         
         [TestMethod]
-        public void ShapeSheet_Query_GetResultMultipleTypes_Shape()
+        public void ShapeSheet_Query_GetResults_SingleShape()
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
@@ -80,7 +80,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Query_GetResultsMultipleTypes_Shapes()
+        public void ShapeSheet_Query_GetResults_MultipleShapes()
         {
             var page1 = GetNewPage();
 
@@ -141,49 +141,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Query_VerifyCellQuery_Grouping()
-        {
-            var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
-
-            // draw a simple shape
-            var s1 = page1.DrawRectangle(0, 0, 2, 2);
-            var s2 = page1.DrawRectangle(4, 4, 6, 6);
-            var s3 = page1.DrawRectangle(5, 5, 7, 7);
-
-            var shapeids = new List<int> { s1.ID, s2.ID, s3.ID };
-
-            Assert.AreEqual(3, page1.Shapes.Count);
-
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinX,"PinX");
-            var col_piny = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinY,"PinY");
-
-            var r = query.GetResults<double>(page1, shapeids);
-
-            // Check the grouping
-            Assert.AreEqual(shapeids.Count(), r.Count); // the total number of rows should match the number of shapeids
-
-            var expected_pinpos = new List<VA.Drawing.Point>
-                                      {
-                                          new VA.Drawing.Point(1, 1),
-                                          new VA.Drawing.Point(5, 5),
-                                          new VA.Drawing.Point(6, 6)
-                                      };
-            
-            var range = Enumerable.Range(0, r.Count);
-            var points = range.Select(row => new VA.Drawing.Point(
-                                                 r[row][col_pinx],
-                                                 r[row][col_piny]));
-            var actual_pinpos = new List<VA.Drawing.Point>(points);
-
-            Assert.AreEqual(expected_pinpos[0], actual_pinpos[0]);
-            Assert.AreEqual(expected_pinpos[1], actual_pinpos[1]);
-            Assert.AreEqual(expected_pinpos[2], actual_pinpos[2]);
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void ShapeSheet_Query_Verify_SectionQuery_Grouping()
+        public void ShapeSheet_Query_SectionRowHandling()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -228,7 +186,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void ShapeSheet_Query_Demo_CellQuery_Usage_for_Formulas_and_Results()
+        public void ShapeSheet_Query_Demo_MultipleShapes()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
 
@@ -287,57 +245,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Query_Verify_CellQuery_Results_for_multiple_types()
-        {
-            var page1 = GetNewPage();
-
-            // draw a simple shape
-            var s1 = page1.DrawRectangle(this.StandardPageSizeRect);
-
-            // format it with setformulas
-            var fg_cell = s1.Cells["FillForegnd"];
-            var bg_cell = s1.Cells["FillBkgnd"];
-            var pat_cell = s1.Cells["FillPattern"];
-
-            fg_cell.ResultIU = 2.0; //red
-            bg_cell.ResultIU = 3.0; //green
-            pat_cell.ResultIU = 40.0;
-
-            // now retrieve the formulas with GetFormulas
-
-
-            var query = BuildCellQuery(new[] { cell_fg, cell_bg, cell_pat });
-            var formulas = query.GetFormulas(s1);
-
-            // now verify that the formulas were actually set
-            Assert.AreEqual("2", formulas[0]);
-            Assert.AreEqual("3", formulas[1]);
-            Assert.AreEqual("40", formulas[2]);
-
-            // now retrieve the results with GetResults as floats
-
-            var float_results = query.GetResults<double>(s1);
-            Assert.AreEqual(2.0, float_results[0]);
-            Assert.AreEqual(3.0, float_results[1]);
-            Assert.AreEqual(40.0, float_results[2]);
-
-            // now retrieve the results with GetResults as ints
-            var int_results = query.GetResults<int>(s1);
-            Assert.AreEqual(2, int_results[0]);
-            Assert.AreEqual(3, int_results[1]);
-            Assert.AreEqual(40, int_results[2]);
-
-            // now retrieve the results with GetResults as strings
-            var string_results = query.GetResults<string>(s1);
-            Assert.AreEqual("2", string_results[0]);
-            Assert.AreEqual("3", string_results[1]);
-            Assert.AreEqual("40", string_results[2]);
-
-            page1.Delete(0);
-        }
-
-        [TestMethod]
-        public void ShapeSheet_Query_Verify_SectionQuery_With_NonExistentSections()
+        public void ShapeSheet_Query_NonExistentSections()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -423,7 +331,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Query_Demo_QueryAllCells()
+        public void ShapeSheet_Query_Demo_AllCellsAndSections()
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];

@@ -241,7 +241,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void Text_TextCells_Check_SetFormat_1()
+        public void Text_TextCells_CharFormat()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
@@ -268,7 +268,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Text_TextCells_Check_SetFormat_2()
+        public void Text_TextCells_TextXForm()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);

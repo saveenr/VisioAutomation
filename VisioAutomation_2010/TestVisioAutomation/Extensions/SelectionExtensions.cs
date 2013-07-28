@@ -33,7 +33,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Selection_SelectionAsEnumerable()
+        public void Selection_AsEnumerable()
         {
             // Selection Object: http://msdn.microsoft.com/en-us/library/ms408990(v=office.12).aspx
             // this is a 1-based collection

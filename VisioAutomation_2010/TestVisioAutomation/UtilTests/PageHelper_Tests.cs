@@ -7,7 +7,7 @@ namespace TestVisioAutomation
     public class PageHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void Page_PageOrientation()
+        public void Page_Orientation()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
 
@@ -30,7 +30,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Page_DuplicatePage()
+        public void Page_Duplicate()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
             var s1 = page1.DrawRectangle(1, 1, 3, 3);

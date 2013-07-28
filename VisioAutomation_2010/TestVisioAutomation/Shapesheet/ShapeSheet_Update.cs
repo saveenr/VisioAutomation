@@ -15,7 +15,7 @@ namespace TestVisioAutomation
         private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
-        public void ShapeSheet_Update_Formulas_Shapes()
+        public void ShapeSheet_Update_Formulas_MultipleShapes()
         {
             var page1 = GetNewPage();
 
@@ -55,7 +55,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_ResultsInt_Shape()
+        public void ShapeSheet_Update_ResultsInt_SingleShape()
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -78,7 +78,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_ResultsString_Shape()
+        public void ShapeSheet_Update_ResultsString_SingleShape()
         {
             var page1 = GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
@@ -101,7 +101,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_ResultsDouble_Shapes()
+        public void ShapeSheet_Update_ResultsDouble_MultipleShapes()
         {
             var page1 = GetNewPage();
 
@@ -141,7 +141,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void ShapeSheet_Update_CheckHomogenouUpdates()
+        public void ShapeSheet_Update_ConsistencyChecking()
         {
             this.CheckHomogenousUpdates_FormulasResults();
             this.CheckHomogenousUpdates_Streams();
