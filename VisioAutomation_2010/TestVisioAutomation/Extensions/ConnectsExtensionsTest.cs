@@ -12,14 +12,7 @@ namespace TestVisioAutomation
         private IVisio.VisAutoConnectDir connect_dir_none = IVisio.VisAutoConnectDir.visAutoConnectDirNone;
 
         [TestMethod]
-        public void GetUndirectedEdgesTests()
-        {
-            this.GetUndirectedEdges();
-            this.GetDirectedEdgesIncludeNoArrowsAreBidirectional();
-            this.GetDirectedEdgesExcludeNoArrows();
-        }
-
-        public void GetUndirectedEdges()
+        public void Connects_GetUndirectedEdges()
         {
             var page1 = GetNewPage();
             var shapes = draw_standard_shapes(page1);
@@ -42,7 +35,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void GetDirectedEdgesIncludeNoArrowsAreBidirectional()
+        [TestMethod]
+        public void Connects_GetDirectedEdgesIncludeNoArrowsAreBidirectional()
         {
             var page1 = GetNewPage();
             var shapes = draw_standard_shapes(page1);
@@ -72,7 +66,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void GetDirectedEdgesExcludeNoArrows()
+        [TestMethod]
+        public void Connects_GetDirectedEdgesExcludeNoArrows()
         {
             var page1 = GetNewPage();
 

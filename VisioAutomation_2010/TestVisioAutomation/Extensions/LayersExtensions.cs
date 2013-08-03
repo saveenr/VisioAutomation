@@ -10,7 +10,7 @@ namespace TestVisioAutomation
     public class EnumerableExtensions : VisioAutomationTest
     {
         [TestMethod]
-        public void TestAsEnumerable()
+        public void Extensions_TestAsEnumerable()
         {
             this.Layers();
             this.Colors();

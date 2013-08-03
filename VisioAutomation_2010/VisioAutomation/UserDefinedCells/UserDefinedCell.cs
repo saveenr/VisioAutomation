@@ -12,7 +12,8 @@ namespace VisioAutomation.UserDefinedCells
         public string Value { get; set; }
         public string Prompt { get; set; }
 
-        internal static readonly UserDefinedCellQuery query = new UserDefinedCellQuery();
+        internal static readonly UserDefinedCellCellQuery cellQuery = new UserDefinedCellCellQuery();
+        internal static readonly UserDefinedCellCellQuery queryex = new UserDefinedCellCellQuery();
 
         public UserDefinedCell(string name)
         {
@@ -56,18 +57,18 @@ namespace VisioAutomation.UserDefinedCells
             return s;
         }
 
-        internal class UserDefinedCellQuery : VA.ShapeSheet.Query.SectionQuery
-        {
-            public VA.ShapeSheet.Query.QueryColumn Value { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Prompt { get; set; }
 
-            public UserDefinedCellQuery() :
-                base(IVisio.VisSectionIndices.visSectionUser)
+        internal class UserDefinedCellCellQuery : VA.ShapeSheet.Query.CellQuery
+        {
+            public VA.ShapeSheet.Query.CellQuery.Column Value { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Prompt { get; set; }
+
+            public UserDefinedCellCellQuery()
             {
-                Value = this.AddColumn(VA.ShapeSheet.SRCConstants.User_Value, "Value");
-                Prompt = this.AddColumn(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
+                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionUser);
+                Value = sec.Columns.Add(VA.ShapeSheet.SRCConstants.User_Value, "Value");
+                Prompt = sec.Columns.Add(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
             }
         }
-
     }
 }

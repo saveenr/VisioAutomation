@@ -28,61 +28,61 @@ namespace VisioAutomation.Controls
             func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
         }
 
-        private static ControlCells get_cells_from_row(ControlQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new ControlCells();
-            cells.CanGlue = table[row,query.CanGlue].ToInt();
-            cells.Tip = table[row,query.Tip].ToInt();
-            cells.X = table[row,query.X];
-            cells.Y = table[row,query.Y];
-            cells.YBehavior = table[row,query.YBehavior].ToInt();
-            cells.XBehavior = table[row,query.XBehavior].ToInt();
-            cells.XDynamics = table[row,query.XDynamics].ToInt();
-            cells.YDynamics = table[row,query.YDynamics].ToInt();
-            return cells;
-        }
-
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return _GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+            return _GetCells(shape, query, query.GetCells);
         }
 
-        private static ControlQuery m_query;
-        private static ControlQuery get_query()
+        private static ControlCellQuery _mCellQuery;
+        private static ControlCellQuery get_query()
         {
-            m_query = m_query ?? new ControlQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new ControlCellQuery();
+            return _mCellQuery;
         }
 
-        class ControlQuery : VA.ShapeSheet.Query.SectionQuery
+        class ControlCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.QueryColumn CanGlue { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Tip { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn X { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Y { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn YBehavior { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn XBehavior { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn XDynamics { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn YDynamics { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column CanGlue { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Tip { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column X { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Y { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column YBehavior { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column XBehavior { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column XDynamics { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column YDynamics { get; set; }
 
-            public ControlQuery() :
-                base(IVisio.VisSectionIndices.visSectionControls)
+            public ControlCellQuery() 
             {
-                this.CanGlue = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_CanGlue.Cell, "CanGlue");
-                this.Tip = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_Tip.Cell, "Tip");
-                this.X = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_X.Cell, "X");
-                this.Y = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_Y.Cell, "Y");
-                this.YBehavior = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_YCon.Cell, "YBehavior");
-                this.XBehavior = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_XCon.Cell, "XBehavior");
-                this.XDynamics = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_XDyn.Cell, "XDynamics");
-                this.YDynamics = this.AddColumn(VA.ShapeSheet.SRCConstants.Controls_YDyn.Cell, "YDynamics");
+                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionControls);
+                this.CanGlue = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_CanGlue, "CanGlue");
+                this.Tip = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_Tip, "Tip");
+                this.X = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_X, "X");
+                this.Y = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_Y, "Y");
+                this.YBehavior = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_YCon, "YBehavior");
+                this.XBehavior = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_XCon, "XBehavior");
+                this.XDynamics = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_XDyn, "XDynamics");
+                this.YDynamics = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Controls_YDyn, "YDynamics");
+            }
+
+            public ControlCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            {
+                var cells = new ControlCells();
+                cells.CanGlue = row[CanGlue.Ordinal].ToInt();
+                cells.Tip = row[Tip.Ordinal].ToInt();
+                cells.X = row[X.Ordinal];
+                cells.Y = row[Y.Ordinal];
+                cells.YBehavior = row[YBehavior.Ordinal].ToInt();
+                cells.XBehavior = row[XBehavior.Ordinal].ToInt();
+                cells.XDynamics = row[XDynamics.Ordinal].ToInt();
+                cells.YDynamics = row[YDynamics.Ordinal].ToInt();
+                return cells;
             }
         }
     }

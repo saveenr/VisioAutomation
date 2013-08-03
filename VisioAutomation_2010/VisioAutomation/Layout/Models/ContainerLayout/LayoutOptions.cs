@@ -1,6 +1,4 @@
-﻿using VisioAutomation.Text;
-
-namespace VisioAutomation.Layout.Models.ContainerLayout
+﻿namespace VisioAutomation.Layout.Models.ContainerLayout
 {
     public class LayoutOptions
     {

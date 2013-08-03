@@ -22,54 +22,55 @@ namespace VisioAutomation.Connections
             func(VA.ShapeSheet.SRCConstants.Connections_DirY.ForRow(row), this.DirY.Formula);
             func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
         }
-
-        private static ConnectionPointCells get_cells_from_row(ConnectionPointQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new ConnectionPointCells();
-            cells.X = table[row,query.X];
-            cells.Y = table[row,query.Y];
-            cells.DirX = table[row,query.DirX].ToInt();
-            cells.DirY = table[row,query.DirY].ToInt();
-            cells.Type = table[row,query.Type].ToInt();
-
-            return cells;
-        }
-
+        
         public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return _GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+            return _GetCells(shape, query, query.GetCells);
         }
 
-        private static ConnectionPointQuery m_query;
-        private static ConnectionPointQuery get_query()
+        private static ConnectionPointCellQuery _mCellQuery;
+
+        private static ConnectionPointCellQuery get_query()
         {
-            m_query =  m_query ?? new ConnectionPointQuery();
-            return m_query;
+            _mCellQuery =  _mCellQuery ?? new ConnectionPointCellQuery();
+            return _mCellQuery;
         }
 
-        class ConnectionPointQuery : VA.ShapeSheet.Query.SectionQuery
+        class ConnectionPointCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.QueryColumn DirX { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn DirY { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Type { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn X { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Y { get; set; }
-
-            public ConnectionPointQuery() :
-                base(IVisio.VisSectionIndices.visSectionConnectionPts)
+            public VA.ShapeSheet.Query.CellQuery.Column DirX { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column DirY { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Type { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column X { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Y { get; set; }
+            
+            public ConnectionPointCellQuery()
             {
-                DirX = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_DirX, "DirX");
-                DirY = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_DirY, "DirY");
-                Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_Type, "Type");
-                X = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_X, "X");
-                Y = this.AddColumn(VA.ShapeSheet.SRCConstants.Connections_Y, "Y");
+                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionConnectionPts);
+                DirX = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_DirX, "DirX");
+                DirY = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_DirY, "DirY");
+                Type = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_Type, "Type");
+                X = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_X, "X");
+                Y = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Connections_Y, "Y");
+            }
+
+            public ConnectionPointCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            {
+                var cells = new ConnectionPointCells();
+                cells.X = row[this.X.Ordinal];
+                cells.Y = row[this.Y.Ordinal];
+                cells.DirX = row[this.DirX.Ordinal].ToInt();
+                cells.DirY = row[this.DirY.Ordinal].ToInt();
+                cells.Type = row[this.Type.Ordinal].ToInt();
+
+                return cells;
             }
         }
     }

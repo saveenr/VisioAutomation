@@ -87,10 +87,12 @@ namespace VisioAutomation.Layout.PageLayout
                 }
                 else
                 {
-                    throw new VA.AutomationException();
+                    string msg = "Unsupported vertical alignment";
+                    throw new VA.AutomationException(msg);
                 }
             }
-            throw new VA.AutomationException();
+            string msg2 = "Unsupported direction";
+            throw new VA.AutomationException(msg2);
         }
 
         protected override IVisio.VisCellVals? ConnectorsStyleToRouteStyle()

@@ -1,4 +1,4 @@
-using VisioAutomation.Application;
+using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Scripting.Commands
@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            ApplicationHelper.BringWindowToTop(app);
+            VA.Application.ApplicationHelper.BringWindowToTop(app);
         }
 
         public System.Drawing.Size GetSize()

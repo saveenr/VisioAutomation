@@ -57,7 +57,8 @@ namespace VisioAutomation.Layout.PageLayout
             }
             else
             {
-                throw new VA.AutomationException();
+                string msg = "Unsupported direction";
+                throw new VA.AutomationException(msg);
             }
         }
     }

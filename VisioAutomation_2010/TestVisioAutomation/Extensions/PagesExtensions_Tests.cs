@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class PagesExtensions_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void CreatePage()
+        public void Page_CreatePage()
         {
             var page1 = GetNewPage();
             var doc1 = page1.Document;

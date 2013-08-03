@@ -72,11 +72,11 @@ namespace VisioAutomationSamples
             }
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_height = query.AddColumn(VA.ShapeSheet.SRCConstants.PageHeight);
-            var col_width = query.AddColumn(VA.ShapeSheet.SRCConstants.PageWidth);
+            var col_height = query.Columns.Add(VA.ShapeSheet.SRCConstants.PageHeight,"PageHeight");
+            var col_width = query.Columns.Add(VA.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
             var results = query.GetResults<double>(page.PageSheet);
-            double height = results[0, col_height];
-            double width = results[0, col_width];
+            double height = results[col_height];
+            double width = results[col_width];
             var s = new VA.Drawing.Size(width, height);
             return s;
         }

@@ -100,7 +100,7 @@ namespace VisioAutomation.Format
 
             foreach (var cell in desired_cells)
             {
-                query.AddColumn(cell.SRC);
+                query.Columns.Add(cell.SRC,null);
             }
 
             // Retrieve the values for the cells
@@ -111,8 +111,8 @@ namespace VisioAutomation.Format
             {
                 var cellrec = desired_cells[col];
 
-                var result = dataset[0, col].Result;
-                var formula = dataset[0, col].Formula;
+                var result = dataset[col].Result;
+                var formula = dataset[col].Formula;
 
                 cellrec.Result = result;
                 cellrec.Formula = formula.Value;

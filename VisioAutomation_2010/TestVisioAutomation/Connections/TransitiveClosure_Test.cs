@@ -9,16 +9,7 @@ namespace TestVisioAutomation
     public class TransitiveClosure_Test
     {
         [TestMethod]
-        public void TestTransitiveClosureCalculation()
-        {
-            this.TestTransitiveClosure0();
-            this.TestTransitiveClosure1();
-            this.TestTransitiveClosure2();
-            this.TestTransitiveClosure3();
-            this.TestTransitiveClosure4();
-        }
-
-        public void TestTransitiveClosure0()
+        public void Path_TestTransitiveClosure0()
         {
             // v0->v0
             // doesn't yield any edges (nodes are implictly connected to themselves)
@@ -30,7 +21,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(0,output.Count);
         }
 
-        public void TestTransitiveClosure1()
+        [TestMethod]
+        public void Path_TestTransitiveClosure1()
         {
             // v0->v0
             // v1->v1
@@ -42,7 +34,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, output.Count);
         }
 
-        public void TestTransitiveClosure2()
+        [TestMethod]
+        public void Path_TestTransitiveClosure2()
         {
             // v0->v1
             // doesn't yield any edges (nodes are implictly connected to themselves)
@@ -57,7 +50,8 @@ namespace TestVisioAutomation
         }
 
 
-        public void TestTransitiveClosure3()
+        [TestMethod]
+        public void Path_TestTransitiveClosure3()
         {
             var input = new List<VA.Connections.DirectedEdge<string, object>>
                 {
@@ -77,7 +71,8 @@ namespace TestVisioAutomation
             
         }
 
-        public void TestTransitiveClosure4()
+        [TestMethod]
+        public void Path_TestTransitiveClosure4()
         {
             var input = new List<VA.Connections.DirectedEdge<string, object>>
                 {

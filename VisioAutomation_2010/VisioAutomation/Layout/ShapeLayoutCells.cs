@@ -1,4 +1,3 @@
-using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -49,91 +48,93 @@ namespace VisioAutomation.Layout
             func(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
         }
 
-        private static ShapeLayoutCells get_cells_from_row(ShapeLayoutQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new ShapeLayoutCells();
-            cells.ConFixedCode = table[row,query.ConFixedCode].ToInt();
-            cells.ConLineJumpCode = table[row,query.ConLineJumpCode].ToInt();
-            cells.ConLineJumpDirX = table[row,query.ConLineJumpDirX].ToInt();
-            cells.ConLineJumpDirY = table[row,query.ConLineJumpDirY].ToInt();
-            cells.ConLineJumpStyle = table[row,query.ConLineJumpStyle].ToInt();
-            cells.ConLineRouteExt = table[row,query.ConLineRouteExt].ToInt();
-            cells.ShapeFixedCode = table[row,query.ShapeFixedCode].ToInt();
-            cells.ShapePermeablePlace = table[row,query.ShapePermeablePlace].ToInt();
-            cells.ShapePermeableX = table[row,query.ShapePermeableX].ToInt();
-            cells.ShapePermeableY = table[row,query.ShapePermeableY].ToInt();
-            cells.ShapePlaceFlip = table[row,query.ShapePlaceFlip].ToInt();
-            cells.ShapePlaceStyle = table[row,query.ShapePlaceStyle].ToInt();
-            cells.ShapePlowCode = table[row,query.ShapePlowCode].ToInt();
-            cells.ShapeRouteStyle = table[row,query.ShapeRouteStyle].ToInt();
-            cells.ShapeSplit = table[row,query.ShapeSplit].ToInt();
-            cells.ShapeSplittable = table[row,query.ShapeSplittable].ToInt();
-            cells.DisplayLevel= table[row,query.DisplayLevel].ToInt();
-            cells.Relationships = table[row,query.Relationships].ToInt();
-            return cells;
-        }
+
 
         public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query =get_query();
-            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRows(page, shapeids, query, get_cells_from_row);
+            var query = get_query();
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static ShapeLayoutCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroup.CellsFromRow(shape, query, get_cells_from_row);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
         }
 
-        private static ShapeLayoutQuery m_query;
-        private static ShapeLayoutQuery get_query()
+        private static ShapeLayoutCellQuery _mCellQuery;
+        private static ShapeLayoutCellQuery get_query()
         {
-            m_query = m_query ?? new ShapeLayoutQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new ShapeLayoutCellQuery();
+            return _mCellQuery;
         }
 
-        class ShapeLayoutQuery : VA.ShapeSheet.Query.CellQuery
+        class ShapeLayoutCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.QueryColumn ConFixedCode { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ConLineJumpCode { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ConLineJumpDirX { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ConLineJumpDirY { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ConLineJumpStyle { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ConLineRouteExt { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapeFixedCode { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapePermeablePlace { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapePermeableX { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapePermeableY { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapePlaceFlip { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapePlaceStyle { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapePlowCode { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapeRouteStyle { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapeSplit { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ShapeSplittable { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn DisplayLevel { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Relationships { get; set; }
+            public Column ConFixedCode { get; set; }
+            public Column ConLineJumpCode { get; set; }
+            public Column ConLineJumpDirX { get; set; }
+            public Column ConLineJumpDirY { get; set; }
+            public Column ConLineJumpStyle { get; set; }
+            public Column ConLineRouteExt { get; set; }
+            public Column ShapeFixedCode { get; set; }
+            public Column ShapePermeablePlace { get; set; }
+            public Column ShapePermeableX { get; set; }
+            public Column ShapePermeableY { get; set; }
+            public Column ShapePlaceFlip { get; set; }
+            public Column ShapePlaceStyle { get; set; }
+            public Column ShapePlowCode { get; set; }
+            public Column ShapeRouteStyle { get; set; }
+            public Column ShapeSplit { get; set; }
+            public Column ShapeSplittable { get; set; }
+            public Column DisplayLevel { get; set; }
+            public Column Relationships { get; set; }
 
-            public ShapeLayoutQuery() :
+            public ShapeLayoutCellQuery() :
                 base()
             {
-                this.ConFixedCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ConFixedCode, "ConFixedCode");
-                this.ConLineJumpCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpCode, "ConLineJumpCode");
-                this.ConLineJumpDirX = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpDirX, "ConLineJumpDirX");
-                this.ConLineJumpDirY = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpDirY, "ConLineJumpDirY");
-                this.ConLineJumpStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineJumpStyle, "ConLineJumpStyle");
-                this.ConLineRouteExt = this.AddColumn(VA.ShapeSheet.SRCConstants.ConLineRouteExt, "ConLineRouteExt");
-                this.ShapeFixedCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeFixedCode, "ShapeFixedCode");
-                this.ShapePermeablePlace = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePermeablePlace, "ShapePermeablePlace");
-                this.ShapePermeableX = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePermeableX, "ShapePermeableX");
-                this.ShapePermeableY = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePermeableY, "ShapePermeableY");
-                this.ShapePlaceFlip = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePlaceFlip, "ShapePlaceFlip");
-                this.ShapePlaceStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePlaceStyle, "ShapePlaceStyle");
-                this.ShapePlowCode = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapePlowCode, "ShapePlowCode");
-                this.ShapeRouteStyle = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeRouteStyle, "ShapeRouteStyle");
-                this.ShapeSplit = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplit, "ShapeSplit");
-                this.ShapeSplittable = this.AddColumn(VA.ShapeSheet.SRCConstants.ShapeSplittable, "ShapeSplittable");
-                this.DisplayLevel= this.AddColumn(VA.ShapeSheet.SRCConstants.DisplayLevel, "DisplayLevel");
-                this.Relationships = this.AddColumn(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
+                this.ConFixedCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConFixedCode, "ConFixedCode");
+                this.ConLineJumpCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpCode, "ConLineJumpCode");
+                this.ConLineJumpDirX = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpDirX, "ConLineJumpDirX");
+                this.ConLineJumpDirY = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpDirY, "ConLineJumpDirY");
+                this.ConLineJumpStyle = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineJumpStyle, "ConLineJumpStyle");
+                this.ConLineRouteExt = this.Columns.Add(VA.ShapeSheet.SRCConstants.ConLineRouteExt, "ConLineRouteExt");
+                this.ShapeFixedCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeFixedCode, "ShapeFixedCode");
+                this.ShapePermeablePlace = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePermeablePlace, "ShapePermeablePlace");
+                this.ShapePermeableX = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePermeableX, "ShapePermeableX");
+                this.ShapePermeableY = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePermeableY, "ShapePermeableY");
+                this.ShapePlaceFlip = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePlaceFlip, "ShapePlaceFlip");
+                this.ShapePlaceStyle = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePlaceStyle, "ShapePlaceStyle");
+                this.ShapePlowCode = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapePlowCode, "ShapePlowCode");
+                this.ShapeRouteStyle = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeRouteStyle, "ShapeRouteStyle");
+                this.ShapeSplit = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeSplit, "ShapeSplit");
+                this.ShapeSplittable = this.Columns.Add(VA.ShapeSheet.SRCConstants.ShapeSplittable, "ShapeSplittable");
+                this.DisplayLevel= this.Columns.Add(VA.ShapeSheet.SRCConstants.DisplayLevel, "DisplayLevel");
+                this.Relationships = this.Columns.Add(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
+            }
+
+            public ShapeLayoutCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
+            {
+                var cells = new ShapeLayoutCells();
+                cells.ConFixedCode = row[ConFixedCode.Ordinal].ToInt();
+                cells.ConLineJumpCode = row[ConLineJumpCode.Ordinal].ToInt();
+                cells.ConLineJumpDirX = row[ConLineJumpDirX.Ordinal].ToInt();
+                cells.ConLineJumpDirY = row[ConLineJumpDirY.Ordinal].ToInt();
+                cells.ConLineJumpStyle = row[ConLineJumpStyle.Ordinal].ToInt();
+                cells.ConLineRouteExt = row[ConLineRouteExt.Ordinal].ToInt();
+                cells.ShapeFixedCode = row[ShapeFixedCode.Ordinal].ToInt();
+                cells.ShapePermeablePlace = row[ShapePermeablePlace.Ordinal].ToInt();
+                cells.ShapePermeableX = row[ShapePermeableX.Ordinal].ToInt();
+                cells.ShapePermeableY = row[ShapePermeableY.Ordinal].ToInt();
+                cells.ShapePlaceFlip = row[ShapePlaceFlip.Ordinal].ToInt();
+                cells.ShapePlaceStyle = row[ShapePlaceStyle.Ordinal].ToInt();
+                cells.ShapePlowCode = row[ShapePlowCode.Ordinal].ToInt();
+                cells.ShapeRouteStyle = row[ShapeRouteStyle.Ordinal].ToInt();
+                cells.ShapeSplit = row[ShapeSplit.Ordinal].ToInt();
+                cells.ShapeSplittable = row[ShapeSplittable.Ordinal].ToInt();
+                cells.DisplayLevel = row[DisplayLevel.Ordinal].ToInt();
+                cells.Relationships = row[Relationships.Ordinal].ToInt();
+                return cells;
             }
         }
 

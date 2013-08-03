@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Linq;
-using VisioAutomation.Extensions;
 using System.Linq;
-using VisioAutomation.Format;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -48,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return new List<ShapeFormatCells>(0);
+                return new List<VA.Format.ShapeFormatCells>(0);
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
@@ -106,12 +103,12 @@ namespace VisioAutomation.Scripting.Commands
             var shape = selection[1];
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var width_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Width);
-            var height_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Height);
+            var width_col = query.Columns.Add(VA.ShapeSheet.SRCConstants.Width, "Width");
+            var height_col = query.Columns.Add(VA.ShapeSheet.SRCConstants.Height, "Height");
             var queryresults = query.GetResults<double>(shape);
 
-            cached_size_width = queryresults[0, width_col];
-            cached_size_height = queryresults[0, height_col];
+            cached_size_width = queryresults[width_col];
+            cached_size_height = queryresults[height_col];
         }
 
         public void PasteSize(IList<IVisio.Shape> target_shapes, bool paste_width, bool paste_height)

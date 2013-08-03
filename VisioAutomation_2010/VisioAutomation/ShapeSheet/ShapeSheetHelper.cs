@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio=Microsoft.Office.Interop.Visio;
@@ -27,50 +28,37 @@ namespace VisioAutomation.ShapeSheet
 
         public static string[] GetFormulasU(IVisio.Page page, short[] stream)
         {
-            return _GetFormulasU(page, stream);
-        }
-
-        public static string[] GetFormulasU(IVisio.Shape shape, short[] stream)
-        {
-            return _GetFormulasU(shape, stream);
-        }
-
-        public static string[] _GetFormulasU(object visio_object, short[] stream)
-        {
-            int numitems = -1; 
-
-            if (visio_object is IVisio.Shape)
-            {
-                numitems = check_stream_size(stream, 3);
-            }
-            else if (visio_object is IVisio.Page)
-            {
-                numitems = check_stream_size(stream, 4);
-            }
-            else
-            {
-                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");                
-            }
-
+            int numitems = check_stream_size(stream, 4);
             if (numitems < 1)
             {
                 return new string[0];
             }
 
-            System.Array formulas_sa=null;
+            System.Array formulas_sa = null;
+            page.GetFormulasU(stream, out formulas_sa);
 
-            if (visio_object is IVisio.Shape)
+            var formulas = get_formulas_array(formulas_sa, numitems);
+            return formulas;
+        }
+
+        public static string[] GetFormulasU(IVisio.Shape shape, short[] stream)
+        {
+            int numitems = check_stream_size(stream, 3);
+            if (numitems < 1)
             {
-                var shape = (IVisio.Shape)visio_object;
-                shape.GetFormulasU(stream, out formulas_sa);
+                return new string[0];
             }
-            else if (visio_object is IVisio.Page)
-            {
-                var page = (IVisio.Page)visio_object;
-                page.GetFormulasU(stream, out formulas_sa);
-            }
-            
-            object[] formulas_obj_array = (object[])formulas_sa;
+
+            System.Array formulas_sa = null;
+            shape.GetFormulasU(stream, out formulas_sa);
+
+            var formulas = get_formulas_array(formulas_sa, numitems);
+            return formulas;
+        }
+
+        private static string[] get_formulas_array(Array formulas_sa, int numitems)
+        {
+            object[] formulas_obj_array = (object[]) formulas_sa;
 
             if (formulas_obj_array.Length != numitems)
             {
@@ -83,91 +71,55 @@ namespace VisioAutomation.ShapeSheet
 
             string[] formulas = new string[formulas_obj_array.Length];
             formulas_obj_array.CopyTo(formulas, 0);
-
             return formulas;
         }
 
 
         public static TResult[] GetResults<TResult>(IVisio.Page page, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
-            return _GetResults<TResult>(page, stream, unitcodes);
-        }
-
-        public static TResult[] GetResults<TResult>(IVisio.Shape shape, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
-        {
-            return _GetResults<TResult>(shape, stream, unitcodes);
-        }
-
-        public static TResult[] _GetResults<TResult>(object visio_object, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
-        {
             EnforceValidResultType(typeof(TResult));
 
-            int numitems; 
-
-            if (visio_object is IVisio.Shape)
-            {
-                numitems = check_stream_size(stream, 3);
-            }
-            else if (visio_object is IVisio.Page)
-            {
-                numitems = check_stream_size(stream, 4);
-            }
-            else
-            {
-                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");
-            }
-            
+            int numitems = check_stream_size(stream, 4);
             if (numitems < 1)
             {
                 return new TResult[0];
             }
 
             var result_type = typeof(TResult);
-            
-            // Create the unit codes array
-            object[] unitcodes_obj_array = null;
-            if (unitcodes!=null)
+            var unitcodes_obj_array = get_unit_code_obj_array(unitcodes);
+            var flags = get_VisGetSetArgs(result_type);
+
+            System.Array results_sa = null;
+            page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+            var results = get_results_array<TResult>(results_sa, numitems);
+
+            return results;
+        }
+
+        public static TResult[] GetResults<TResult>(IVisio.Shape shape, short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
+        {
+            EnforceValidResultType(typeof(TResult));
+
+            int numitems  = check_stream_size(stream, 3);
+
+            if (numitems < 1)
             {
-                unitcodes_obj_array = new object[unitcodes.Count];
-                for (int i = 0; i < unitcodes.Count; i++)
-                {
-                    unitcodes_obj_array[i] = unitcodes[i];
-                }
+                return new TResult[0];
             }
 
-            // Calculate the flags based on the result datatype
-            IVisio.VisGetSetArgs flags;
-            if (result_type == typeof(int))
-            {
-                flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
-            }
-            else if (result_type == typeof(double))
-            {
-                flags = IVisio.VisGetSetArgs.visGetFloats;
-            }
-            else if (result_type == typeof(string))
-            {
-                flags = IVisio.VisGetSetArgs.visGetStrings;
-            }
-            else
-            {
-                string msg = string.Format("Internal error: Unsupported Result Type: {0}", result_type.Name);
-                throw new VA.AutomationException();
-            }
-            
-            System.Array results_sa=null;
-            if (visio_object is IVisio.Shape)
-            {
-                var shape = (IVisio.Shape) visio_object;
-                shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
-            }
-            else if (visio_object is IVisio.Page)
-            {
-                var page = (IVisio.Page)visio_object;
-                page.GetResults( stream, (short)flags, unitcodes_obj_array, out results_sa);
-            }
+            var result_type = typeof(TResult);
+            var unitcodes_obj_array = get_unit_code_obj_array(unitcodes);
+            var flags = get_VisGetSetArgs(result_type);
 
-            // Convert the System.Array back to a strongly typed array
+            System.Array results_sa = null;
+            shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+            var results = get_results_array<TResult>(results_sa, numitems);
+
+            return results;
+        }
+
+        private static TResult[] get_results_array<TResult>(Array results_sa, int numitems)
+        {
             if (results_sa.Length != numitems)
             {
                 string msg = string.Format(
@@ -178,9 +130,46 @@ namespace VisioAutomation.ShapeSheet
             }
 
             TResult[] results = new TResult[results_sa.Length];
-            results_sa.CopyTo(results, 0 );
-
+            results_sa.CopyTo(results, 0);
             return results;
+        }
+
+        private static IVisio.VisGetSetArgs get_VisGetSetArgs(Type type)
+        {
+            IVisio.VisGetSetArgs flags;
+            if (type == typeof (int))
+            {
+                flags = IVisio.VisGetSetArgs.visGetTruncatedInts;
+            }
+            else if (type == typeof (double))
+            {
+                flags = IVisio.VisGetSetArgs.visGetFloats;
+            }
+            else if (type == typeof (string))
+            {
+                flags = IVisio.VisGetSetArgs.visGetStrings;
+            }
+            else
+            {
+                string msg = string.Format("Internal error: Unsupported Result Type: {0}", type.Name);
+                throw new VA.AutomationException(msg);
+            }
+            return flags;
+        }
+
+        private static object[] get_unit_code_obj_array(IList<IVisio.VisUnitCodes> unitcodes)
+        {
+            // Create the unit codes array
+            object[] unitcodes_obj_array = null;
+            if (unitcodes != null)
+            {
+                unitcodes_obj_array = new object[unitcodes.Count];
+                for (int i = 0; i < unitcodes.Count; i++)
+                {
+                    unitcodes_obj_array[i] = unitcodes[i];
+                }
+            }
+            return unitcodes_obj_array;
         }
 
         internal static void EnforceValidResultType(System.Type result_type)
@@ -188,7 +177,7 @@ namespace VisioAutomation.ShapeSheet
             if (!IsValidResultType(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
-                throw new VA.AutomationException();
+                throw new VA.AutomationException(msg);
             }
         }
 

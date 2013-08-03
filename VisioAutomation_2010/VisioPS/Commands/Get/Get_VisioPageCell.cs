@@ -40,7 +40,7 @@ namespace VisioPS.Commands
             var dic = GetPageCellDictionary();
             foreach (var cell in this.Cells)
             {
-                query.AddColumn(dic[cell], cell);   
+                query.Columns.Add(dic[cell], cell);   
             }
 
             var page = scriptingsession.Page.Get();

@@ -11,7 +11,7 @@ namespace TestVisioAutomation
     public class CointainerLayoutTests : VisioAutomationTest
     {
         [TestMethod]
-        public void ContainerMustCallPerformLayout()
+        public void Container_PerformLayoutBeforeRender()
         {
             // Purpose: Verify that if PerformLayout is NOT called before Render() 
             // is called then an exception will be thrown
@@ -40,14 +40,9 @@ namespace TestVisioAutomation
             }
         }
 
-        [TestMethod]
-        public void DrawContainerLayouts()
-        {
-            this.DrawContainer1();
-            this.DrawContainer2();
-        }
 
-        public void DrawContainer1()
+        [TestMethod]
+        public void Container_Diagram1()
         {
 
             // Purpose: Simple test to make sure that both Containers and Non-Container
@@ -69,7 +64,8 @@ namespace TestVisioAutomation
         }
 
 
-        public void DrawContainer2()
+        [TestMethod]
+        public void Container_Diagram2()
         {
             // Make sure that empty containers can be drawn
             var doc = this.GetNewDoc();

@@ -10,13 +10,7 @@ namespace TestVisioAutomation
     public class TextMarkupTests : VisioAutomationTest
     {
         [TestMethod]
-        public void TextMarkups()
-        {
-            this.Markup1();
-            this.Markup2();
-        }
-
-        public void Markup1()
+        public void Text_Markup_TextOnly()
         {
             // Validate that setting text with no values works
             var el0 = new VA.Text.Markup.TextElement("HELLO");
@@ -32,7 +26,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void Markup2()
+        [TestMethod]
+        public void Text_Markup_TextWithColor()
         {
             // Validate that setting text with no values works
             var el0 = new VA.Text.Markup.TextElement("HELLO");
@@ -54,7 +49,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void ValidateFormattingRegions()
+        public void Text_Markup_FormattingRegions()
         {
             // Check that the formatting regions are correctly
             // mapped given a number of Text structures
@@ -118,12 +113,10 @@ namespace TestVisioAutomation
             Assert.AreEqual(6, regions5[2].Length);
             Assert.AreEqual(5, regions5[2].Start);
             Assert.AreEqual(11, regions5[2].End);
-
         }
 
-
         [TestMethod]
-        public void TextElement_with_multiple_text_nodes()
+        public void Text_Markup_MultipleTextNodes()
         {
             // Validate that multiple text elements in the structure
             // all make it into the Visio shape when the text is rendered
@@ -144,7 +137,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Element_with_bold_and_italic_text()
+        public void Text_Markup_BoldAndItalic()
         {
             // Validate that basic formatting works when rendering
 
@@ -172,7 +165,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Style_inheritance()
+        public void Text_Markup_Inheritance()
         {
             // Validate that sub elements inherit the formatting of parent elements
             var page1 = GetNewPage();
@@ -220,7 +213,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Test_Format_Text_field()
+        public void Text_Markup_Fields()
         {
             // Now account for field insertion
 
@@ -248,7 +241,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void TextBlockFormatCells_Check_SetFormat_1()
+        public void Text_TextCells_CharFormat()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
@@ -275,7 +268,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void TextXformCells_Check_SetFormat_1()
+        public void Text_TextCells_TextXForm()
         {
             var page1 = GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
@@ -308,7 +301,7 @@ namespace TestVisioAutomation
 
 
         [TestMethod]
-        public void Test_Fields1()
+        public void Text_Markup_MultipleFields()
         {
             var page1 = GetNewPage();
             var shape = page1.DrawRectangle(0, 0, 4, 2);

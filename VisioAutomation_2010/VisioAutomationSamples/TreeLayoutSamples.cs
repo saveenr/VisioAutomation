@@ -1,9 +1,5 @@
-﻿using VisioAutomation.DOM;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
-using System.Linq;
-using System.Collections.Generic;
 using TREEMODEL = VisioAutomation.Layout.Models.Tree;
 
 namespace VisioAutomationSamples
@@ -42,7 +38,7 @@ namespace VisioAutomationSamples
 
             foreach (var tn in t.Nodes)
             {
-                var cells = new ShapeCells();
+                var cells = new VA.DOM.ShapeCells();
                 tn.Cells = cells;
 
                 cells.ParaHorizontalAlign = 0; // align text to left

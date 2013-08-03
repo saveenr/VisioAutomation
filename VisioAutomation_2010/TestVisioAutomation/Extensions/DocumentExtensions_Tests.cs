@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class DocumentExtensions_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void TestDocActivation()
+        public void Document_Activation()
         {
             var app = GetVisioApplication();
             var documents = app.Documents;
@@ -32,7 +32,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void TestDocForceClosing()
+        public void Document_ForceClose()
         {
             var app = GetVisioApplication();
             var documents = app.Documents;

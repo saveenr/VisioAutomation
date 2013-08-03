@@ -44,76 +44,77 @@ namespace VisioAutomation.Text
         public static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return _GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+            return _GetCells(shape, query, query.GetCells);
         }
 
-        private static ParagraphFormatQuery m_query;
-        private static ParagraphFormatQuery get_query()
+        private static ParagraphFormatCellQuery _mCellQuery;
+        private static ParagraphFormatCellQuery get_query()
         {
-            m_query = m_query ?? new ParagraphFormatQuery();
-            return m_query;
+            _mCellQuery = _mCellQuery ?? new ParagraphFormatCellQuery();
+            return _mCellQuery;
         }
 
-        private static ParagraphFormatCells get_cells_from_row(ParagraphFormatQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
+        class ParagraphFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            var cells = new ParagraphFormatCells();
-            cells.IndentFirst = table[row,query.IndentFirst];
-            cells.IndentLeft = table[row,query.IndentLeft];
-            cells.IndentRight = table[row,query.IndentRight];
-            cells.SpacingAfter = table[row,query.SpaceAfter];
-            cells.SpacingBefore = table[row,query.SpaceBefore];
-            cells.SpacingLine = table[row,query.SpaceLine];
-            cells.HorizontalAlign = table[row,query.HorzAlign].ToInt();
-            cells.Bullet = table[row,query.Bullet].ToInt();
-            cells.BulletFont = table[row,query.BulletFont].ToInt();
-            cells.BulletFontSize = table[row,query.BulletFontSize].ToInt();
-            cells.LocBulletFont = table[row,query.LocalizeBulletFont].ToInt();
-            cells.TextPosAfterBullet= table[row,query.TextPosAfterBullet];
-            cells.Flags= table[row,query.Flags].ToInt();
-            cells.BulletString = ""; // TODO: Figure out some way of getting this
-            return cells;
-        }
+            public VA.ShapeSheet.Query.CellQuery.Column Bullet { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column BulletFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column BulletFontSize { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column BulletString { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Flags { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column HorzAlign { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column IndentFirst { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column IndentLeft { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column IndentRight { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column LocalizeBulletFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column SpaceAfter { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column SpaceBefore { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column SpaceLine { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column TextPosAfterBullet { get; set; }
 
-        class ParagraphFormatQuery : VA.ShapeSheet.Query.SectionQuery
-        {
-            public VA.ShapeSheet.Query.QueryColumn Bullet { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn BulletFont { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn BulletFontSize { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn BulletString { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Flags { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn HorzAlign { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn IndentFirst { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn IndentLeft { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn IndentRight { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn LocalizeBulletFont { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn SpaceAfter { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn SpaceBefore { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn SpaceLine { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn TextPosAfterBullet { get; set; }
-
-            public ParagraphFormatQuery() :
-                base(IVisio.VisSectionIndices.visSectionParagraph)
+            public ParagraphFormatCellQuery() 
             {
-                Bullet = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
-                BulletFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletFont, "BulletFont");
-                BulletFontSize = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, "BulletFontSize");
-                BulletString = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_BulletStr, "BulletString");
-                Flags = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_Flags, "Flags");
-                HorzAlign = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_HorzAlign, "HorzAlign");
-                IndentFirst = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_IndFirst, "IndentFirst");
-                IndentLeft = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_IndLeft, "IndentLeft");
-                IndentRight = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_IndRight, "IndentRight");
-                LocalizeBulletFont = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont, "LocalizeBulletFont");
-                SpaceAfter = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_SpAfter, "SpaceAfter");
-                SpaceBefore = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_SpBefore, "SpaceBefore");
-                SpaceLine = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_SpLine, "SpaceLine");
-                TextPosAfterBullet = this.AddColumn(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "TextPosAfterBullet");
+                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionParagraph);
+                Bullet = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
+                BulletFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_BulletFont, "BulletFont");
+                BulletFontSize = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, "BulletFontSize");
+                BulletString = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_BulletStr, "BulletString");
+                Flags = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_Flags, "Flags");
+                HorzAlign = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_HorzAlign, "HorzAlign");
+                IndentFirst = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_IndFirst, "IndentFirst");
+                IndentLeft = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_IndLeft, "IndentLeft");
+                IndentRight = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_IndRight, "IndentRight");
+                LocalizeBulletFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont, "LocalizeBulletFont");
+                SpaceAfter = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_SpAfter, "SpaceAfter");
+                SpaceBefore = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_SpBefore, "SpaceBefore");
+                SpaceLine = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_SpLine, "SpaceLine");
+                TextPosAfterBullet = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "TextPosAfterBullet");
+            }
+
+            public ParagraphFormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            {
+                var cells = new ParagraphFormatCells();
+                cells.IndentFirst = row[IndentFirst.Ordinal];
+                cells.IndentLeft = row[IndentLeft.Ordinal];
+                cells.IndentRight = row[IndentRight.Ordinal];
+                cells.SpacingAfter = row[SpaceAfter.Ordinal];
+                cells.SpacingBefore = row[SpaceBefore.Ordinal];
+                cells.SpacingLine = row[SpaceLine.Ordinal];
+                cells.HorizontalAlign = row[HorzAlign.Ordinal].ToInt();
+                cells.Bullet = row[Bullet.Ordinal].ToInt();
+                cells.BulletFont = row[BulletFont.Ordinal].ToInt();
+                cells.BulletFontSize = row[BulletFontSize.Ordinal].ToInt();
+                cells.LocBulletFont = row[LocalizeBulletFont.Ordinal].ToInt();
+                cells.TextPosAfterBullet = row[TextPosAfterBullet.Ordinal];
+                cells.Flags = row[Flags.Ordinal].ToInt();
+                cells.BulletString = ""; // TODO: Figure out some way of getting this
+
+                return cells;
             }
         }
     }

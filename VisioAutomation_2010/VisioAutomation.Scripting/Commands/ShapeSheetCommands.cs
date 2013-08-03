@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -14,7 +13,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>( IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public VA.ShapeSheet.Query.CellQuery.QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -29,7 +28,8 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                query.AddColumn(src);
+                string colname = string.Format("Col{0}", ci);
+                query.Columns.Add(src,colname);
                 ci++;
             }
 
@@ -37,7 +37,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public VA.ShapeSheet.Query.CellQuery.QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -54,7 +54,8 @@ namespace VisioAutomation.Scripting.Commands
             int ci = 0;
             foreach (var src in srcs)
             {
-                query.AddColumn(src);
+                string colname = string.Format("Col{0}", ci);
+                query.Columns.Add(src,colname);
                 ci++;
             }
 
@@ -63,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public VA.ShapeSheet.Data.Table<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VA.ShapeSheet.Query.CellQuery.QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -73,20 +74,22 @@ namespace VisioAutomation.Scripting.Commands
 
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
-            var query = new VA.ShapeSheet.Query.SectionQuery((short)section);
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var sec = query.Sections.Add(section);
 
             int ci = 0;
             foreach (var cell in cells)
             {
-                query.AddColumn(cell);
+                string name = string.Format("Cell{0}", ci);
+                sec.Columns.Add((short)cell, name);
                 ci++;
             }
 
-            var results = query.GetResults<T>(page, shapeids);
+           var results = query.GetResults<T>(page, shapeids);
             return results;
         }
 
-        public VA.ShapeSheet.Data.Table<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VA.ShapeSheet.Query.CellQuery.QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -97,12 +100,14 @@ namespace VisioAutomation.Scripting.Commands
             var app = this.Session.VisioApplication;
             var page = app.ActivePage;
 
-            var query = new VA.ShapeSheet.Query.SectionQuery((short)section);
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var sec = query.Sections.Add(section);
 
             int ci = 0;
             foreach (var cell in cells)
             {
-                query.AddColumn(cell);
+                string name = string.Format("Cell{0}", ci);
+                sec.Columns.Add((short)cell, name);
                 ci++;
             }
 

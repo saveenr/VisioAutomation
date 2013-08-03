@@ -67,96 +67,104 @@ namespace VisioAutomation.Text
 
         public static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = new CharacterFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            var query = get_query();
+            return _GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
         {
-            var query = new CharacterFormatQuery();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+            var query = get_query();
+            return _GetCells(shape, query, query.GetCells);
         }
 
-        private static CharacterFormatCells get_cells_from_row(CharacterFormatQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new CharacterFormatCells();
-            cells.Color = table[row,query.Color].ToInt();
-            cells.Transparency = table[row,query.Trans];
-            cells.Font = table[row,query.Font].ToInt();
-            cells.Size = table[row,query.Size];
-            cells.Style = table[row,query.Style].ToInt();
-            cells.AsianFont = table[row,query.AsianFont].ToInt();
-            cells.AsianFont = table[row,query.AsianFont].ToInt();
-            cells.Case = table[row,query.Case].ToInt();
-            cells.ComplexScriptFont= table[row,query.ComplexScriptFont].ToInt();
-            cells.ComplexScriptSize= table[row,query.ComplexScriptSize];
-            cells.DoubleStrikeThrough= table[row,query.DoubleStrikethrough].ToBool();
-            cells.DoubleUnderline= table[row,query.DoubleUnderline].ToBool();
-            cells.FontScale= table[row,query.FontScale];
-            cells.LangID= table[row,query.LangID].ToInt();
-            cells.Letterspace= table[row,query.Letterspace];
-            cells.Locale= table[row,query.Locale].ToInt();
-            cells.LocalizeFont= table[row,query.LocalizeFont].ToInt();
-            cells.Overline= table[row,query.Overline].ToBool();
-            cells.Perpendicular= table[row,query.Perpendicular].ToBool();          
-            cells.Pos= table[row,query.Pos].ToInt();
-            cells.RTLText= table[row,query.RTLText].ToInt();
-            cells.Strikethru= table[row,query.Strikethru].ToBool();
-            cells.UseVertical= table[row,query.UseVertical].ToInt();
+        private static CharacterFormatCellQuery _mCellQuery;
 
-            return cells;
+        private static CharacterFormatCellQuery get_query()
+        {
+            _mCellQuery = _mCellQuery ?? new CharacterFormatCellQuery();
+            return _mCellQuery;
         }
 
-        class CharacterFormatQuery : VA.ShapeSheet.Query.SectionQuery
+        class CharacterFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.QueryColumn Font { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Style { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Color { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Size { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Trans { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn AsianFont { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Case { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ComplexScriptFont { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn ComplexScriptSize { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn DoubleStrikethrough { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn DoubleUnderline { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn LangID { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Locale { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn LocalizeFont { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Overline { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Perpendicular { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Pos { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn RTLText { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn FontScale { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Letterspace { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn Strikethru { get; set; }
-            public VA.ShapeSheet.Query.QueryColumn UseVertical { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Font { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Style { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Color { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Size { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Trans { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column AsianFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Case { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column ComplexScriptFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column ComplexScriptSize { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column DoubleStrikethrough { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column DoubleUnderline { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column LangID { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Locale { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column LocalizeFont { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Overline { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Perpendicular { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Pos { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column RTLText { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column FontScale { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Letterspace { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column Strikethru { get; set; }
+            public VA.ShapeSheet.Query.CellQuery.Column UseVertical { get; set; }
 
-            public CharacterFormatQuery() :
-                base(IVisio.VisSectionIndices.visSectionCharacter)
+            public CharacterFormatCellQuery() 
             {
-                Color = this.AddColumn(VA.ShapeSheet.SRCConstants.CharColor, "Color");
-                Trans = this.AddColumn(VA.ShapeSheet.SRCConstants.CharColorTrans, "Trans");
-                Font = this.AddColumn(VA.ShapeSheet.SRCConstants.CharFont, "Font");
-                Size = this.AddColumn(VA.ShapeSheet.SRCConstants.CharSize, "Size");
-                Style = this.AddColumn(VA.ShapeSheet.SRCConstants.CharStyle, "Style");
-                AsianFont = this.AddColumn(VA.ShapeSheet.SRCConstants.CharAsianFont, "AsianFont");
-                Case = this.AddColumn(VA.ShapeSheet.SRCConstants.CharCase, "Case");
-                ComplexScriptFont= this.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "Style");
-                ComplexScriptSize= this.AddColumn(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "Style");
-                DoubleStrikethrough = this.AddColumn(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, "DoubleStrikethrough");
-                DoubleUnderline = this.AddColumn(VA.ShapeSheet.SRCConstants.CharDblUnderline, "DoubleUnderline");
-                LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLangID, "LangID");
-                Locale = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLocale, "Locale");
-                LocalizeFont = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLocalizeFont, "LocalizeFont");
-                Overline = this.AddColumn(VA.ShapeSheet.SRCConstants.CharOverline, "Overline");
-                Perpendicular = this.AddColumn(VA.ShapeSheet.SRCConstants.CharPerpendicular, "Perpendicular");
-                Pos = this.AddColumn(VA.ShapeSheet.SRCConstants.CharPos, "Pos");
-                RTLText = this.AddColumn(VA.ShapeSheet.SRCConstants.CharRTLText, "RTLText");
-                FontScale = this.AddColumn(VA.ShapeSheet.SRCConstants.CharFontScale, "FontScale");
-                Letterspace = this.AddColumn(VA.ShapeSheet.SRCConstants.CharLetterspace, "Letterspace");
-                Strikethru = this.AddColumn(VA.ShapeSheet.SRCConstants.CharStrikethru, "Strikethru");
-                UseVertical = this.AddColumn(VA.ShapeSheet.SRCConstants.CharUseVertical, "UseVertical");
+                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionCharacter);
+                Color = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharColor, "Color");
+                Trans = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharColorTrans, "Trans");
+                Font = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharFont, "Font");
+                Size = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharSize, "Size");
+                Style = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharStyle, "Style");
+                AsianFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharAsianFont, "AsianFont");
+                Case = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharCase, "Case");
+                ComplexScriptFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "ComplexScriptStyle");
+                ComplexScriptSize = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "ComplexScriptSize");
+                DoubleStrikethrough = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, "DoubleStrikethrough");
+                DoubleUnderline = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharDblUnderline, "DoubleUnderline");
+                LangID = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLangID, "LangID");
+                Locale = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLocale, "Locale");
+                LocalizeFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLocalizeFont, "LocalizeFont");
+                Overline = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharOverline, "Overline");
+                Perpendicular = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharPerpendicular, "Perpendicular");
+                Pos = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharPos, "Pos");
+                RTLText = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharRTLText, "RTLText");
+                FontScale = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharFontScale, "FontScale");
+                Letterspace = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLetterspace, "Letterspace");
+                Strikethru = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharStrikethru, "Strikethru");
+                UseVertical = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharUseVertical, "UseVertical");
+            }
+
+            public CharacterFormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            {
+                var cells = new CharacterFormatCells();
+                cells.Color = row[this.Color.Ordinal].ToInt();
+                cells.Transparency = row[this.Trans.Ordinal];
+                cells.Font = row[this.Font.Ordinal].ToInt();
+                cells.Size = row[this.Size.Ordinal];
+                cells.Style = row[this.Style.Ordinal].ToInt();
+                cells.AsianFont = row[this.AsianFont.Ordinal].ToInt();
+                cells.AsianFont = row[this.AsianFont.Ordinal].ToInt();
+                cells.Case = row[this.Case.Ordinal].ToInt();
+                cells.ComplexScriptFont = row[this.ComplexScriptFont.Ordinal].ToInt();
+                cells.ComplexScriptSize = row[this.ComplexScriptSize.Ordinal];
+                cells.DoubleStrikeThrough = row[this.DoubleStrikethrough.Ordinal].ToBool();
+                cells.DoubleUnderline = row[this.DoubleUnderline.Ordinal].ToBool();
+                cells.FontScale = row[this.FontScale.Ordinal];
+                cells.LangID = row[this.LangID.Ordinal].ToInt();
+                cells.Letterspace = row[this.Letterspace.Ordinal];
+                cells.Locale = row[this.Locale.Ordinal].ToInt();
+                cells.LocalizeFont = row[this.LocalizeFont.Ordinal].ToInt();
+                cells.Overline = row[this.Overline.Ordinal].ToBool();
+                cells.Perpendicular = row[this.Perpendicular.Ordinal].ToBool();
+                cells.Pos = row[this.Pos.Ordinal].ToInt();
+                cells.RTLText = row[this.RTLText.Ordinal].ToInt();
+                cells.Strikethru = row[this.Strikethru.Ordinal].ToBool();
+                cells.UseVertical = row[this.UseVertical.Ordinal].ToInt();
+
+                return cells;
             }
         }
     }

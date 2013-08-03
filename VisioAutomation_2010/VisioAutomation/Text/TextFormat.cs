@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 using System.Linq;
 
 namespace VisioAutomation.Text
@@ -244,14 +243,14 @@ namespace VisioAutomation.Text
 
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
-            var textfmt = new TextFormat();
-            textfmt.CharacterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
-            textfmt.ParagraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
-            textfmt.TextBlock = VA.Text.TextCells.GetCells(shape);
-            textfmt.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            textfmt.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
-            textfmt.TabStops = VA.Text.TextFormat.GetTabStops(shape);
-            return textfmt;
+            var cells = new TextFormat();
+            cells.CharacterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
+            cells.ParagraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
+            cells.TextBlock = VA.Text.TextCells.GetCells(shape);
+            cells.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            cells.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            cells.TabStops = VA.Text.TextFormat.GetTabStops(shape);
+            return cells;
         }
 
         public static IList<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)

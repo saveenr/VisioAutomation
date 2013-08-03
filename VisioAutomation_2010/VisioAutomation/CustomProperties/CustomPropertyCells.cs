@@ -71,65 +71,65 @@ namespace VisioAutomation.CustomProperties
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRowsGrouped(page, shapeids, query, get_cells_from_row);
+            return _GetCells(page, shapeids, query, query.GetCells);
         }
 
         public static IList<CustomPropertyCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroupMultiRow.CellsFromRows(shape, query, get_cells_from_row);
+            return _GetCells(shape, query, query.GetCells);
         }
 
-        private static CustomPropertyQuery m_query;
-        private static CustomPropertyQuery get_query()
+        private static CustomPropertyCellQuery _mCellQuery;
+        private static CustomPropertyCellQuery get_query()
         {
-            m_query = m_query ?? new CustomPropertyQuery();
-            return m_query;
-        }
-
-        private static CustomPropertyCells get_cells_from_row(CustomPropertyQuery query, VA.ShapeSheet.Data.Table<VA.ShapeSheet.CellData<double>> table, int row)
-        {
-            var cells = new CustomPropertyCells();
-
-            cells.Value = table[row,query.Value];
-            cells.Calendar = table[row,query.Calendar].ToInt();
-            cells.Format = table[row,query.Format];
-            cells.Invisible = table[row,query.Invis].ToInt();
-            cells.Label = table[row,query.Label];
-            cells.LangId = table[row,query.LangID].ToInt();
-            cells.Prompt = table[row,query.Prompt];
-            cells.SortKey = table[row,query.SortKey].ToInt();
-            cells.Type = table[row,query.Type].ToInt();
-            return cells;
+            _mCellQuery = _mCellQuery ?? new CustomPropertyCellQuery();
+            return _mCellQuery;
         }
     }
 
-    class CustomPropertyQuery : VA.ShapeSheet.Query.SectionQuery
+    class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery
     {
-        public VA.ShapeSheet.Query.QueryColumn SortKey { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Ask { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Calendar { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Format { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Invis { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Label { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn LangID { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Prompt { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Value { get; set; }
-        public VA.ShapeSheet.Query.QueryColumn Type { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column SortKey { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Ask { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Calendar { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Format { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Invis { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Label { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column LangID { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Prompt { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Value { get; set; }
+        public VA.ShapeSheet.Query.CellQuery.Column Type { get; set; }
 
-        public CustomPropertyQuery() :
-            base(IVisio.VisSectionIndices.visSectionProp)
+        public CustomPropertyCellQuery() 
         {
-            SortKey = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
-            Ask = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
-            Calendar = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Calendar");
-            Format = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Format, "Format");
-            Invis = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Invis");
-            Label = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
-            LangID = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
-            Prompt = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
-            Type = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
-            Value = this.AddColumn(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
+            var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionProp);
+
+            SortKey = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
+            Ask = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
+            Calendar = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Calendar");
+            Format = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Format, "Format");
+            Invis = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Invis");
+            Label = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
+            LangID = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
+            Prompt = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
+            Type = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
+            Value = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
+        }
+
+        public CustomPropertyCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+        {
+            var cells = new CustomPropertyCells();
+            cells.Value = row[Value.Ordinal];
+            cells.Calendar = row[Calendar.Ordinal].ToInt();
+            cells.Format = row[Format.Ordinal];
+            cells.Invisible = row[Invis.Ordinal].ToInt();
+            cells.Label = row[Label.Ordinal];
+            cells.LangId = row[LangID.Ordinal].ToInt();
+            cells.Prompt = row[Prompt.Ordinal];
+            cells.SortKey = row[SortKey.Ordinal].ToInt();
+            cells.Type = row[Type.Ordinal].ToInt();
+            return cells;
         }
     }
 

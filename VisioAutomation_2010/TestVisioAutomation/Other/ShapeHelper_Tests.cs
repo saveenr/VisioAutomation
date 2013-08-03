@@ -10,14 +10,7 @@ namespace TestVisioAutomation
     public class ShapeHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void Test_GetNestedShapes()
-        {
-            this.Test_GetNestedShapes1();
-            this.Test_GetNestedShapes2();
-            this.Test_GetNestedShapes3();
-        }        
-        
-        public void Test_GetNestedShapes1()
+        public void ShapeHelper_Test_GetNestedShapes_SingleShapeNoSubShapes()
         {
             // For a single shape with no subshapes, GetNestedShapes returns the single starting shape
             var page = this.GetNewPage();
@@ -30,7 +23,8 @@ namespace TestVisioAutomation
             page.Delete(0);
         }
 
-        public void Test_GetNestedShapes2()
+        [TestMethod]
+        public void ShapeHelper_Test_GetNestedShapes_GroupWithTwoSubShapes()
         {
             // group with two shapes
             var page = this.GetNewPage();
@@ -48,7 +42,8 @@ namespace TestVisioAutomation
             page.Delete(0);
         }
 
-        public void Test_GetNestedShapes3()
+        [TestMethod]
+        public void ShapeHelper_Test_GetNestedShapes_GroupWithSubGroups()
         {
             // group with subgroups
             var page = this.GetNewPage();
@@ -60,15 +55,12 @@ namespace TestVisioAutomation
             var group0 = VisioAutomationTest.SelectAndGroup(active_window, new[] { shape0, shape1 });
             page.Application.ActiveWindow.DeselectAll();
 
-
             var shape2 = page.DrawRectangle(0, 3, 1, 4);
             var shape3 = page.DrawRectangle(2, 0, 5, 6);
-
-
+            
             var group1 = VisioAutomationTest.SelectAndGroup(active_window, new[] { shape2, shape3 });
             page.Application.ActiveWindow.Selection.DeselectAll();
-
-
+            
             var group2 = VisioAutomationTest.SelectAndGroup(active_window, new[] { group0, group1 });
             page.Application.ActiveWindow.Selection.DeselectAll();
             

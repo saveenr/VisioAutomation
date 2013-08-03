@@ -1,7 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
-using VisioAutomation.Extensions;
-using VisioAutomation.Pages;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -10,13 +7,7 @@ namespace TestVisioAutomation
     public class PageHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void PageScenarios()
-        {
-            this.PageOrientation();
-            this.DuplicatePage();
-        }
-
-        public void PageOrientation()
+        public void Page_Orientation()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
 
@@ -38,7 +29,8 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-        public void DuplicatePage()
+        [TestMethod]
+        public void Page_Duplicate()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
             var s1 = page1.DrawRectangle(1, 1, 3, 3);

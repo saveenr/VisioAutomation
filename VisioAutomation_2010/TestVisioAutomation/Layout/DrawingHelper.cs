@@ -10,9 +10,11 @@ namespace TestVisioAutomation
     public class DrawingHelper : VisioAutomationTest
     {
         [TestMethod]
-        public void BoundingBox()
+        public void Drawing_CreateBoundingBox()
         {
-            var bb0 = new VA.Drawing.BoundingBox(VA.Drawing.Point.FromDoubles(new[] {0.0, 0.0, 1.0, -2.0}));
+            var doubles = new[] {0.0, 0.0, 1.0, -2.0};
+            var points = VA.Drawing.Point.FromDoubles(doubles);
+            var bb0 = new VA.Drawing.BoundingBox(points);
             var bb = bb0.Rectangle;
             Assert.AreEqual(0, bb.Left);
             Assert.AreEqual(0, bb.Top);

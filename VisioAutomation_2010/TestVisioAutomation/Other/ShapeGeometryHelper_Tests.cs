@@ -11,13 +11,7 @@ namespace TestVisioAutomation
     public class ShapeGeometryHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void Test_GeometryScenarios()
-        {
-            this.AddGeometrySection();
-            this.DeleteGeometry();
-        }
-
-        public void AddGeometrySection()
+        public void Geometry_AddGeometrySection()
         {
             var page = this.GetNewPage();
             var shape = page.DrawRectangle(1, 1, 3, 3);
@@ -37,7 +31,7 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void DeleteGeometry()
+        public void Geometry_DeleteGeometry()
         {
             var page = this.GetNewPage();
 

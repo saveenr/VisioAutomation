@@ -9,7 +9,7 @@ namespace TestVisioAutomation
     public class Convert_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void TestConversions()
+        public void Convert_TestConversions()
         {
             this.TestBoolToShortConversion();
             this.Test_FormulaStringToString();
