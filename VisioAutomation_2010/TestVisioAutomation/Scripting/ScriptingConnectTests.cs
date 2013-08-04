@@ -9,12 +9,6 @@ namespace TestVisioAutomation
     public class ScriptingConnectTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Connects_Scenarios()
-        {
-            this.Scripting_Connects_Scenario_0();
-            this.Scripting_Connects_Scenario_1();
-        }
-
         public void Scripting_Connects_Scenario_0()
         {
             var ss = GetScriptingSession();
@@ -56,6 +50,7 @@ namespace TestVisioAutomation
             ss.Document.Close(true);
         }
 
+        [TestMethod]
         public void Scripting_Connects_Scenario_1()
         {
             var ss = GetScriptingSession();

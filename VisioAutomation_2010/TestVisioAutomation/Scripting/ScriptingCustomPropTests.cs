@@ -15,9 +15,7 @@ namespace TestVisioAutomation
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
             var s1 = ss.Draw.Rectangle(1, 1, 1.25, 1.5);
-
             var s2 = ss.Draw.Rectangle(2, 3, 2.5, 3.5);
-
             var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
             ss.Selection.SelectNone();
