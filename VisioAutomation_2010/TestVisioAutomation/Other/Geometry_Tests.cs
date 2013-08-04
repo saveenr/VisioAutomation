@@ -8,7 +8,7 @@ using System.Linq;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class ShapeGeometryHelper_Tests : VisioAutomationTest
+    public class Geometry_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Geometry_AddGeometrySection()

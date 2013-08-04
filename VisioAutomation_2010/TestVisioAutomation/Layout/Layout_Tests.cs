@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class LayoutHelper : VisioAutomationTest
+    public class Layout_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Layout_DistributeX()

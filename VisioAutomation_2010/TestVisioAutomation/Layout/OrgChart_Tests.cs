@@ -8,7 +8,7 @@ using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class OrgChartTests : VisioAutomationTest
+    public class OrgChart_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void OrgChart_MustHaveContent()

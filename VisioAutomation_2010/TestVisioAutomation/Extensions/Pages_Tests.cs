@@ -6,7 +6,7 @@ using IVisio= Microsoft.Office.Interop.Visio;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class PagesExtensions_Tests : VisioAutomationTest
+    public class Pages_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Page_CreatePage()

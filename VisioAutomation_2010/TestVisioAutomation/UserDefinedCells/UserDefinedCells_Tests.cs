@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class UserDefinedCellHelper_Test : VisioAutomationTest
+    public class UserDefinedCells_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void UserDefinedCells_Scenario1()

@@ -7,7 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class TextMarkupTests : VisioAutomationTest
+    public class TextMarkup_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Text_Markup_TextOnly()

@@ -86,18 +86,17 @@
   <ItemGroup>
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
-    <Compile Include="DOM\DOM_Text_tests.cs" />
     <Compile Include="Layout\CointainerLayout_Tests.cs" />
     <Compile Include="Layout\ResizePageTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="TestExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Layout\BoxLayout_Tests.cs" />
-    <Compile Include="Other\ShapeGeometryHelper_Tests.cs" />
+    <Compile Include="Other\Geometry_Tests.cs" />
     <Compile Include="Extensions\LayersExtensions.cs" />
     <Compile Include="Layout\DrawingHelper.cs" />
     <Compile Include="Layout\PieSliceTests.cs" />
-    <Compile Include="Layout\LayoutHelper.cs" />
+    <Compile Include="Layout\Layout_Tests.cs" />
     <Compile Include="Scripting\ScriptingApplicationTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -106,16 +105,15 @@
     </Compile>
     <Compile Include="Scripting\ScriptingPageTests.cs" />
     <Compile Include="Layout\DirectedGraph_Tests.cs" />
-    <Compile Include="Layout\TreeTests.cs" />
-    <Compile Include="DOM\DOM_Draw_tests.cs" />
-    <Compile Include="Layout\OrgChartTests.cs" />
-    <Compile Include="DOM\DOM_Basic_Tests.cs" />
+    <Compile Include="Layout\Tree_Tests.cs" />
+    <Compile Include="Layout\OrgChart_Tests.cs" />
+    <Compile Include="DOM\DOM_Tests.cs" />
     <Compile Include="Text\TextFormat_Tests.cs" />
     <Compile Include="CustomProperties\CustomPropertiesTest.cs" />
-    <Compile Include="Extensions\SelectionExtensions.cs" />
+    <Compile Include="Extensions\Selection_Tests.cs" />
     <Compile Include="Internal\Internal_Tests.cs" />
-    <Compile Include="Connections\TransitiveClosure_Test.cs" />
-    <Compile Include="UserDefinedCells\UserDefinedCellHelper_Test.cs" />
+    <Compile Include="Connections\Path_Test.cs" />
+    <Compile Include="UserDefinedCells\UserDefinedCells_Tests.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />
     <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
     <Compile Include="Scripting\ScriptingConnectTests.cs" />
@@ -125,17 +123,17 @@
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
     <Compile Include="Scripting\ScriptingSessionTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
-    <Compile Include="Shapesheet\ShapeSheet_Update.cs" />
+    <Compile Include="Shapesheet\ShapeSheet_Update_Tests.cs" />
     <Compile Include="Extensions\Application_Tests.cs" />
-    <Compile Include="Shapesheet\ShapeSheet_Query.cs" />
+    <Compile Include="Shapesheet\ShapeSheet_Query_Tests.cs" />
     <Compile Include="Other\ShapeEnumerationTests.cs" />
     <Compile Include="Extensions\ConnectsExtensionsTest.cs" />
     <Compile Include="Extensions\Document_Tests.cs" />
     <Compile Include="Documents\DocumentTests.cs" />
     <Compile Include="VisioAutomationTest.cs" />
-    <Compile Include="Extensions\PageDrawTests.cs" />
-    <Compile Include="Extensions\PagesExtensions_Tests.cs" />
-    <Compile Include="Text\TextMarkupTests.cs" />
+    <Compile Include="Extensions\PageDraw_Tests.cs" />
+    <Compile Include="Extensions\Pages_Tests.cs" />
+    <Compile Include="Text\TextMarkup_Tests.cs" />
     <Compile Include="Connections\ConnectionPoint_Tests.cs" />
     <Compile Include="Controls\Control_Tests.cs" />
     <Compile Include="Page\PageHelper_Tests.cs" />

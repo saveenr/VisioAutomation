@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class TransitiveClosure_Test
+    public class Path_Test
     {
         [TestMethod]
         public void Path_TestTransitiveClosure0()

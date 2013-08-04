@@ -8,7 +8,7 @@ using VisioAutomation.Extensions;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class DOM_Basic_Tests : VisioAutomationTest
+    public class DOM_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Text_Markup_CharacterFormatting()

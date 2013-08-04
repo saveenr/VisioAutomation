@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Linq;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class ShapeSheet_Update : VisioAutomationTest
+    public class ShapeSheet_Update_Tests : VisioAutomationTest
     {
         private static readonly VA.ShapeSheet.SRC src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
         private static readonly VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;

@@ -7,7 +7,7 @@ using VA=VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class PageDrawTests : VisioAutomationTest
+    public class PageDraw_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Page_Draw_Line()

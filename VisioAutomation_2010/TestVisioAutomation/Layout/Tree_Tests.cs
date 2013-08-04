@@ -7,7 +7,7 @@ using TREEMODEL = VisioAutomation.Layout.Models.Tree;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class TreeTests : VisioAutomationTest
+    public class Tree_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void TreeLayout_SingleNode()
