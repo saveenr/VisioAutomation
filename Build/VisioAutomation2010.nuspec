@@ -1,7 +1,7 @@
 <package >
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -12,7 +12,7 @@
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
     <releaseNotes>
-	Implemented new ShapeSheet Query system
+       -Now must use of Column.Ordinal is consistent in ShapeSheet Query API
     </releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>Visio</tags>
