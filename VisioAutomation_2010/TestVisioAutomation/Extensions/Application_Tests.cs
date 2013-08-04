@@ -1,11 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA=VisioAutomation;
-using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class ApplicationExtensionsTests : VisioAutomationTest
+    public class Application_Tests : VisioAutomationTest
     {
         /*
         
@@ -29,8 +28,6 @@ namespace TestVisioAutomation
             }
 
         */
-
-
 
         [TestMethod]
         public void Application_UndoScope_Simple()
@@ -113,11 +110,9 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-
         [TestMethod]
         public void Application_UndoScope_Abort()
         {
-
             var page1 = GetNewPage();
             var app = page1.Application;
 
