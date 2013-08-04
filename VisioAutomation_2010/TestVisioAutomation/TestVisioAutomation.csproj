@@ -94,9 +94,7 @@
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Layout\BoxLayoutTests.cs" />
     <Compile Include="Other\ShapeGeometryHelper_Tests.cs" />
-    <Compile Include="Drawing\SnappingGridTests.cs" />
     <Compile Include="Extensions\LayersExtensions.cs" />
-    <Compile Include="Drawing\BezierTests.cs" />
     <Compile Include="Layout\DrawingHelper.cs" />
     <Compile Include="Layout\PieSliceTests.cs" />
     <Compile Include="Layout\LayoutHelper.cs" />
@@ -115,9 +113,9 @@
     <Compile Include="Text\TextFormat_Tests.cs" />
     <Compile Include="Core\CustomPropertiesTest.cs" />
     <Compile Include="Extensions\SelectionExtensions.cs" />
-    <Compile Include="UtilTests\BitArray2DTest.cs" />
+    <Compile Include="Internal\Internal_Tests.cs" />
     <Compile Include="Connections\TransitiveClosure_Test.cs" />
-    <Compile Include="UtilTests\DrawingHelper_Tests.cs" />
+    <Compile Include="Internal\DrawingHelper_Tests.cs" />
     <Compile Include="UserDefinedCells\UserDefinedCellHelper_Test.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />
     <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
@@ -128,7 +126,6 @@
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
     <Compile Include="Scripting\ScriptingSessionTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
-    <Compile Include="Core\Struct_Sizes.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Update.cs" />
     <Compile Include="Extensions\ApplicationExtensionsTests.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Query.cs" />
@@ -145,7 +142,7 @@
     <Compile Include="Page\PageHelper_Tests.cs" />
     <Compile Include="Layout\Convert_Tests.cs" />
     <Compile Include="Other\ShapeHelper_Tests.cs" />
-    <Compile Include="Drawing\StencilTests.cs" />
+    <Compile Include="Layout\StencilTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\CustomPropsTest.cs" />
   </ItemGroup>
