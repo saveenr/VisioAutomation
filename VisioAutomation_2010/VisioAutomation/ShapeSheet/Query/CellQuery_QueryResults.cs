@@ -31,11 +31,6 @@ namespace VisioAutomation.ShapeSheet.Query
                 get { return this.Items[index]; }
             }
 
-            public QueryResult<T> this[CellQuery.Column index]
-            {
-                get { return this.Items[index.Ordinal]; }
-            }
-
             internal void Add(QueryResult<T> item)
             {
                 this.Items.Add(item);
