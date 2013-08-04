@@ -6,7 +6,7 @@ using BoxL = VisioAutomation.Layout.Models.BoxLayout;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class BoxLayoutTests : VisioAutomationTest
+    public class BoxLayout_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void BoxLayout_Test_empty()

@@ -8,7 +8,7 @@ using CONMODEL = VisioAutomation.Layout.Models.ContainerLayout;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class CointainerLayoutTests : VisioAutomationTest
+    public class CointainerLayout_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Container_PerformLayoutBeforeRender()

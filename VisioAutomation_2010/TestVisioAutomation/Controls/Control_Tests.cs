@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class ControlHelper_Tests : VisioAutomationTest
+    public class Control_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void Controls_AddRemove()

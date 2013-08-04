@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class CustomPropsTest : VisioAutomationTest
+    public class CustomProps_Test : VisioAutomationTest
     {
 
         [TestMethod]

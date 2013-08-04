@@ -7,7 +7,7 @@ using VA = VisioAutomation;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class ConnectionPointHelper_Tests : VisioAutomationTest
+    public class ConnectionPoint_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void ConnectionPoints_AddRemove()

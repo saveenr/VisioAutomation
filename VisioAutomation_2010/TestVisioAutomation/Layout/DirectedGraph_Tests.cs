@@ -8,7 +8,7 @@ using DG = VisioAutomation.Layout.Models.DirectedGraph;
 namespace TestVisioAutomation
 {
     [TestClass]
-    public class DirectedGraphLayoutTests : VisioAutomationTest
+    public class DirectedGraph_Tests : VisioAutomationTest
     {
         [TestMethod]
         public void DirectedGraph_WithBezierConnectors()

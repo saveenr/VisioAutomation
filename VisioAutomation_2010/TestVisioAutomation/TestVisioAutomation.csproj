@@ -87,12 +87,12 @@
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
     <Compile Include="DOM\DOM_Text_tests.cs" />
-    <Compile Include="Layout\CointainerLayoutTests.cs" />
+    <Compile Include="Layout\CointainerLayout_Tests.cs" />
     <Compile Include="Layout\ResizePageTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="TestExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
-    <Compile Include="Layout\BoxLayoutTests.cs" />
+    <Compile Include="Layout\BoxLayout_Tests.cs" />
     <Compile Include="Other\ShapeGeometryHelper_Tests.cs" />
     <Compile Include="Extensions\LayersExtensions.cs" />
     <Compile Include="Layout\DrawingHelper.cs" />
@@ -105,7 +105,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Scripting\ScriptingPageTests.cs" />
-    <Compile Include="Layout\DirectedGraphLayoutTests.cs" />
+    <Compile Include="Layout\DirectedGraph_Tests.cs" />
     <Compile Include="Layout\TreeTests.cs" />
     <Compile Include="DOM\DOM_Draw_tests.cs" />
     <Compile Include="Layout\OrgChartTests.cs" />
@@ -126,24 +126,24 @@
     <Compile Include="Scripting\ScriptingSessionTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Update.cs" />
-    <Compile Include="Extensions\ApplicationExtensionsTests.cs" />
+    <Compile Include="Extensions\Application_Tests.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Query.cs" />
     <Compile Include="Other\ShapeEnumerationTests.cs" />
     <Compile Include="Extensions\ConnectsExtensionsTest.cs" />
-    <Compile Include="Extensions\DocumentExtensions_Tests.cs" />
+    <Compile Include="Extensions\Document_Tests.cs" />
     <Compile Include="Documents\DocumentTests.cs" />
     <Compile Include="VisioAutomationTest.cs" />
     <Compile Include="Extensions\PageDrawTests.cs" />
     <Compile Include="Extensions\PagesExtensions_Tests.cs" />
     <Compile Include="Text\TextMarkupTests.cs" />
-    <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
-    <Compile Include="Controls\ControlHelper_Tests.cs" />
+    <Compile Include="Connections\ConnectionPoint_Tests.cs" />
+    <Compile Include="Controls\Control_Tests.cs" />
     <Compile Include="Page\PageHelper_Tests.cs" />
     <Compile Include="Layout\Convert_Tests.cs" />
     <Compile Include="Other\ShapeHelper_Tests.cs" />
     <Compile Include="Layout\StencilTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\CustomPropsTest.cs" />
+    <Compile Include="Extensions\CustomProps_Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TestCommon\TestCommon.csproj">
