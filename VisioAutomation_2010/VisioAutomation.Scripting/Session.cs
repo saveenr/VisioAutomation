@@ -82,6 +82,12 @@ namespace VisioAutomation.Scripting
             this.Context.WriteVerbose(s);
         }
 
+        public void WriteWarning(string fmt, params object[] items)
+        {
+            string s = String.Format(fmt, items);
+            this.Context.WriteWarning(s);
+        }
+
         public void WriteError(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
@@ -103,6 +109,11 @@ namespace VisioAutomation.Scripting
             this.Context.WriteVerbose(s);
         }
 
+        public void WriteWarning(string s)
+        {
+            this.Context.WriteWarning(s);
+        }
+        
         public void WriteError(string s)
         {
             this.Context.WriteError(s);

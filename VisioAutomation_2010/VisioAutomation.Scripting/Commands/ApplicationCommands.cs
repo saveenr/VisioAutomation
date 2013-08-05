@@ -30,38 +30,36 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application FindRunningApplication()
         {
-            object o;
-            this.Session.WriteVerbose("Calling System.Runtime.InteropServices.Marshal.GetActiveObject(\"Visio.Application\")");
-            try
+            if (VisioAutomation.Scripting.UACHelper.IsUacEnabled)
             {
-                o = System.Runtime.InteropServices.Marshal.GetActiveObject("Visio.Application");
-                if (o == null)
-                {
-                    return null;
-                }
-
-            }
-            catch (System.Exception)
-            {
-                this.Session.WriteVerbose("GetActiveObject() Threw an exception");
-                throw;
+                this.Session.WriteVerbose("UAC Enabled");
             }
 
-            this.Session.WriteVerbose("Type of object returned: {0}", o.GetType());
-            this.Session.WriteVerbose("Converting to: {0}", typeof(IVisio.Application).Name);
-            var app = (IVisio.Application)o;
+            if (VisioAutomation.Scripting.UACHelper.IsProcessElevated)
+            {
+                this.Session.WriteVerbose("Process is Elevated");
+                this.Session.WriteWarning("Having an Elevated Process with UAC Enabled will cause Running Applications to not be found");
+            }
 
-            this.Session.WriteVerbose("Attaching to an instance");
+            var app = VA.Application.ApplicationHelper.FindRunningApplication();
             return app;
         }
 
+
         public IVisio.Application Attach()
         {
-            var app = VA.Application.ApplicationHelper.FindRunningApplication();
+            if (this.Session.VisioApplication != null)
+            {
+                this.Session.WriteWarning("Already connected to an instance");
+            }
+
+            var app = this.FindRunningApplication();
             if (app == null)
             {
                 throw new VA.Scripting.VisioApplicationException("Did not find a running instance of Visio 2010 or above");
             }
+
+            this.Session.WriteVerbose("Attaching to an instance");
 
             this.Session.VisioApplication = app;
 

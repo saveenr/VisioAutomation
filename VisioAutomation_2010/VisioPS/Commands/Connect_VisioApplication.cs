@@ -9,11 +9,6 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            if (scriptingsession.VisioApplication!= null)
-            {
-                this.WriteWarning("Already connected to an instance");
-            }
-
             var app = scriptingsession.Application.Attach();
 
             if (app == null)

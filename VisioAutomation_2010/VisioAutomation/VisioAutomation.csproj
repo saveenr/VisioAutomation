@@ -88,6 +88,7 @@
     <Compile Include="DOM\PageList.cs" />
     <Compile Include="DOM\Page.cs" />
     <Compile Include="DOM\Arc.cs" />
+    <Compile Include="Interop\UACHelper.cs" />
     <Compile Include="Layout\Models\DirectedGraph\ConnectorList.cs" />
     <Compile Include="Layout\Models\DirectedGraph\LayoutDirection.cs" />
     <Compile Include="Layout\Models\DirectedGraph\ShapeList.cs" />

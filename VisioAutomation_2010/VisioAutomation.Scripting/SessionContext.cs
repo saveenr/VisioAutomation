@@ -31,6 +31,12 @@
             this.DefaultWriteString(s);
         }
 
+        public virtual void WriteWarning(string s)
+        {
+            this.DefaultWriteString(s);
+        }
+
+
         public virtual void DefaultWriteString(string s)
         {
             System.Console.WriteLine(s);
