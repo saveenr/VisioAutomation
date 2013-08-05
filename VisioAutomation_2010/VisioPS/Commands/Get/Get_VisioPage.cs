@@ -29,7 +29,7 @@ namespace VisioPS.Commands
                 // return all pages
                 var active_document = application.ActiveDocument;
                 var pages = active_document.Pages.AsEnumerable().ToList();
-                this.WriteObject(pages,true);
+                this.WriteObject(pages,false);
             }
             else
             {

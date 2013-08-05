@@ -27,7 +27,7 @@ namespace VisioPS.Commands
             {
                 this.WriteVerbose("Retrieve all the masters in the specified stencil doc");
                 var masters = scriptingsession.Master.Get(this.Stencil);
-                this.WriteObject(masters,true);
+                this.WriteObject(masters,false);
             }
             else if (isprovided_Master && !isprovided_Stencil)
             {
@@ -39,7 +39,7 @@ namespace VisioPS.Commands
             {
                 this.WriteVerbose("Retrieve all the masters in the currently active document");
                 var masters = scriptingsession.Master.Get();
-                this.WriteObject(masters, true);
+                this.WriteObject(masters, false);
                 return;
             }
             else if (isprovided_Master && isprovided_Stencil)

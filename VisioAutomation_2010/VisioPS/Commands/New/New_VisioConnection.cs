@@ -21,7 +21,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var connectors = scriptingsession.Connection.Connect(Master, From , To );
-            this.WriteObject(connectors, true);
+            this.WriteObject(connectors, false);
         }
     }
 }

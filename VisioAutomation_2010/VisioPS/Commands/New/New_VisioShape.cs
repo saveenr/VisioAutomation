@@ -39,7 +39,7 @@ namespace VisioPS.Commands
                 scriptingsession.Selection.Select(shape_objects);
             }
 
-            this.WriteObject(shape_objects, true);
+            this.WriteObject(shape_objects, false);
         }
     }
 }

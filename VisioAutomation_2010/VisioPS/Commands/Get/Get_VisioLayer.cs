@@ -20,7 +20,7 @@ namespace VisioPS.Commands
             else
             {
                 var layers = scriptingsession.Layer.GetLayers();
-                this.WriteObject(layers, true);
+                this.WriteObject(layers,false);
             }
         }
     }

@@ -9,7 +9,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
             var edges = scriptingsession.Connection.GetEdges();
-            this.WriteObject(edges,true);
+            this.WriteObject(edges,false);
         }
     }
 }
