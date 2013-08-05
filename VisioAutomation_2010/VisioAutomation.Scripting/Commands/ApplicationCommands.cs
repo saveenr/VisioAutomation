@@ -28,6 +28,33 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication = null;
         }
 
+        public IVisio.Application FindRunningApplication()
+        {
+            object o;
+            this.Session.WriteVerbose("Calling System.Runtime.InteropServices.Marshal.GetActiveObject(\"Visio.Application\")");
+            try
+            {
+                o = System.Runtime.InteropServices.Marshal.GetActiveObject("Visio.Application");
+                if (o == null)
+                {
+                    return null;
+                }
+
+            }
+            catch (System.Exception)
+            {
+                this.Session.WriteVerbose("GetActiveObject() Threw an exception");
+                throw;
+            }
+
+            this.Session.WriteVerbose("Type of object returned: {0}", o.GetType());
+            this.Session.WriteVerbose("Converting to: {0}", typeof(IVisio.Application).Name);
+            var app = (IVisio.Application)o;
+
+            this.Session.WriteVerbose("Attaching to an instance");
+            return app;
+        }
+
         public IVisio.Application Attach()
         {
             var app = VA.Application.ApplicationHelper.FindRunningApplication();

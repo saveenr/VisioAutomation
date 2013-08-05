@@ -7,13 +7,18 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            if (AttachedVisioApplication == null)
+            var scriptingsession = this.ScriptingSession;
+            var app = scriptingsession.VisioApplication;
+
+            if (app==null)
             {
                 this.WriteWarning("There is no Visio Application to stop");
                 return;
             }
 
-            AttachedVisioApplication.Quit();
+
+            // TODO: Add proper quit method to ScriptinSession
+            app.Quit();
         }
     }
 }

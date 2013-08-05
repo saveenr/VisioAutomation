@@ -8,21 +8,20 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            if (AttachedVisioApplication != null)
+            var scriptingsession = this.ScriptingSession;
+            if (scriptingsession.VisioApplication!= null)
             {
                 this.WriteWarning("Already connected to an instance");
             }
 
-            var app = VA.Application.ApplicationHelper.FindRunningApplication();
+            var app = scriptingsession.Application.Attach();
 
             if (app == null)
             {
-                throw new VA.AutomationException("Could not find an instance");
+                throw new VA.AutomationException("Could not find an instance of the Visio Application");
             }
 
-            this.WriteVerboseEx("Attaching to an instance");
-            AttachedVisioApplication = app;
-
+            this.WriteVerboseEx("Attaching to Visio Application");
             this.WriteObject(app);
         }
     }
