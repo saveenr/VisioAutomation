@@ -82,6 +82,7 @@
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\TextUtil.cs" />
+    <Compile Include="DefaultSessionContext.cs" />
     <Compile Include="PageNavigation.cs" />
     <Compile Include="UACHelper.cs" />
     <Compile Include="XmlUtil.cs" />

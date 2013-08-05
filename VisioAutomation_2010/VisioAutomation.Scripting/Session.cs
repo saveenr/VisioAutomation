@@ -32,14 +32,18 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.DeveloperCommands Developer { get; private set; }
         public VA.Scripting.Commands.OutputCommands Output { get; private set; }
 
-        public Session() :
-            this(null)
+        public Session(IVisio.Application app):
+            this(app,new DefaultSessionContext())
         {
         }
 
-        public Session(IVisio.Application app)
+        public Session(IVisio.Application app, SessionContext ctx)
         {
-            this.Context = new SessionContext();
+            if (ctx == null)
+            {
+                throw new System.ArgumentNullException();
+            }
+            this.Context = ctx;
             this.VisioApplication = app;
 
             this.Application = new VA.Scripting.Commands.ApplicationCommands(this);

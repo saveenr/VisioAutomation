@@ -32,7 +32,7 @@ namespace VisioPS
 
                 if (scripting_session==null)
                 {
-                    scripting_session = new VA.Scripting.Session();
+                    scripting_session = new VA.Scripting.Session(null);
                 }
 
                 // Must always setup the session output
