@@ -12,6 +12,18 @@ namespace VisioPS.Commands
         
         protected override void ProcessRecord()
         {
+            if (this.Shapes == null)
+            {
+                this.WriteVerboseEx("Null shapes array passed to Get-VisioCustomProperty");
+                return;
+            }
+
+            if (this.Shapes.Length == 0)
+            {
+                this.WriteVerboseEx("0 shapes array passed to Get-VisioCustomProperty");
+                return;
+            }
+
             var scriptingsession = this.ScriptingSession;
             var dic = scriptingsession.CustomProp.Get(this.Shapes);
             this.WriteObject(dic);
