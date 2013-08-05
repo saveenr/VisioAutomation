@@ -4,43 +4,6 @@ namespace VisioAutomation.Internal.Interop
 {
     internal static class COMInterop
     {
-        public static T FindActiveObjectTyped<T>(string progid) where T : class
-        {
-            object running_obj = VA.Internal.Interop.COMInterop.FindActiveObject(progid);
-            if (running_obj == null)
-            {
-                return null;
-            }
-
-            var running_obj_type = System.Type.GetTypeFromProgID(progid);
-            T running_obj_wrapper =
-                (T) System.Runtime.InteropServices.Marshal.CreateWrapperOfType(running_obj, running_obj_type);
-            return running_obj_wrapper;
-        }
-
-        public static object FindActiveObject(string progid)
-        {
-            if (progid == null)
-            {
-                throw new System.ArgumentNullException("progid");
-            }
-            if (progid.Length < 1)
-            {
-                throw new System.ArgumentOutOfRangeException("progid", "length is zero");
-            }
-
-            object running_obj;
-            try
-            {
-                running_obj = System.Runtime.InteropServices.Marshal.GetActiveObject(progid);
-            }
-            catch (System.Exception)
-            {
-                return null;
-            }
-            return running_obj;
-        }
-
         public static System.Collections.Generic.IList<VA.Internal.Interop.RunningObject> GetRunningObjects()
         {
             // Based on:
