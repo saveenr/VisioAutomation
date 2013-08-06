@@ -321,7 +321,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.Sections.Count > 0)
             {
                 var pageshapes = page.Shapes;
-                var shapes = shapeids.Select(id => pageshapes[id]).ToList();
+                var shapes = shapeids.Select(id => pageshapes.ItemFromID16[(short)id]).ToList();
 
                 for (int n = 0; n < shapeids.Count; n++)
                 {

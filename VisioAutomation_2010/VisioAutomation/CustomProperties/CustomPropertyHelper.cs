@@ -117,10 +117,10 @@ namespace VisioAutomation.CustomProperties
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var customprops = new List<Dictionary<string, CustomPropertyCells>>(shapeids.Count);
-            var cells_list = CustomPropertyCells.GetCells(page, shapeids);
+            var customprops_dic = new List<Dictionary<string, CustomPropertyCells>>(shapeids.Count);
+            var customprops_per_shape = CustomPropertyCells.GetCells(page, shapeids);
             
-            if (cells_list.Count!=shapeids.Count)
+            if (customprops_per_shape.Count!=shapeids.Count)
             {
                 throw new VA.AutomationException("1");
             }
@@ -128,10 +128,10 @@ namespace VisioAutomation.CustomProperties
             for (int shape_index = 0; shape_index < shapeids.Count; shape_index++)
             {
                 var shape = shapes[shape_index];
-                var cells = cells_list[shape_index];
+                var customprops_for_shape = customprops_per_shape[shape_index];
                 var prop_names = GetNames(shape);
 
-                if (cells.Count != prop_names.Count)
+                if (customprops_for_shape.Count != prop_names.Count)
                 {
                     throw new VA.AutomationException("2");
                 }
@@ -141,13 +141,13 @@ namespace VisioAutomation.CustomProperties
                 for (int prop_index=0; prop_index< prop_names.Count(); prop_index++)
                 {
                     string prop_name = prop_names[prop_index];
-                    dic[prop_name] = cells[prop_index];
+                    dic[prop_name] = customprops_for_shape[prop_index];
                 }
 
-                customprops.Add(dic);
+                customprops_dic.Add(dic);
             }
 
-            return customprops;
+            return customprops_dic;
         }
 
         public static int GetCount(IVisio.Shape shape)
