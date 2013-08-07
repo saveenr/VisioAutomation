@@ -321,8 +321,24 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.Sections.Count > 0)
             {
                 var pageshapes = page.Shapes;
-                var shapes = shapeids.Select(id => pageshapes[id]).ToList();
 
+
+                // For each shapeid, find the shape
+                var shapes = new List<IVisio.Shape>(shapeids.Count);
+                foreach (int shapeid in shapeids)
+                {
+                    var shape = pageshapes[(short) shapeid];
+                    shapes.Add(shape);
+                }
+
+                // validate that we have the expected number of shapes and shapeids
+                if (shapes.Count != shapeids.Count)
+                {
+                    string msg = string.Format("Internal Error: must have the same number of shapes and shapeids");
+                    throw new VA.AutomationException(msg);
+                }
+
+                // For each shape get the information on each section in the query 
                 for (int n = 0; n < shapeids.Count; n++)
                 {
                     var shapeid = (short) shapeids[n];
