@@ -321,7 +321,16 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.Sections.Count > 0)
             {
                 var pageshapes = page.Shapes;
-                var shapes = shapeids.Select(id => pageshapes.ItemFromID16[(short)id]).ToList();
+
+                // For each shapeid fetch the corresponding shape from the page
+                // this is needed because we'll need to get per shape section information
+                var shapes = new List<IVisio.Shape>(shapeids.Count);
+                foreach (int shapeid in shapeids)
+                {
+                    var shape = pageshapes.ItemFromID16[(short) shapeid];
+                    shapes.Add(shape);
+
+                }
 
                 for (int n = 0; n < shapeids.Count; n++)
                 {
