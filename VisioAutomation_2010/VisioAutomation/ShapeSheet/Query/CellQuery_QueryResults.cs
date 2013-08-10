@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             List<QueryResult<T>> Items;
 
-            public QueryResultList()
+            internal QueryResultList()
             {
                 this.Items = new List<QueryResult<T>>();
             }

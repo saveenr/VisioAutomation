@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.Query
            public VA.ShapeSheet.Query.CellQuery.SectionQuery Query { get; internal set; }
            private List<T[]> items;
 
-           public SectionResult(int capacity)
+           internal SectionResult(int capacity)
            {
                this.items = new List<T[]>(capacity);
            }
@@ -26,7 +26,6 @@ namespace VisioAutomation.ShapeSheet.Query
            {
                return GetEnumerator();
            }
-
 
            public T[] this[int index]
            {
