@@ -318,40 +318,43 @@ namespace VisioAutomation.ShapeSheet.Query
         private void CalculatePerShapeInfo(IVisio.Page page, IList<int> shapeids)
         {
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
-            if (this.Sections.Count > 0)
+
+            if (this.Sections.Count < 1)
             {
-                var pageshapes = page.Shapes;
+                return;
+            }
 
-                // For each shapeid fetch the corresponding shape from the page
-                // this is needed because we'll need to get per shape section information
-                var shapes = new List<IVisio.Shape>(shapeids.Count);
-                foreach (int shapeid in shapeids)
+            var pageshapes = page.Shapes;
+
+            // For each shapeid fetch the corresponding shape from the page
+            // this is needed because we'll need to get per shape section information
+            var shapes = new List<IVisio.Shape>(shapeids.Count);
+            foreach (int shapeid in shapeids)
+            {
+                var shape = pageshapes.ItemFromID16[(short) shapeid];
+                shapes.Add(shape);
+
+            }
+
+            for (int n = 0; n < shapeids.Count; n++)
+            {
+                var shapeid = (short) shapeids[n];
+                var shape = shapes[n];
+
+                var section_infos = new List<SectionQueryInfo>(this.Sections.Count);
+                foreach (var sec in this.Sections)
                 {
-                    var shape = pageshapes.ItemFromID16[(short) shapeid];
-                    shapes.Add(shape);
-
+                    int num_rows = shape.RowCount[(short)sec.SectionIndex];
+                    var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
+                    section_infos.Add(section_info);
                 }
+                this.PerShapeSectionInfo.Add(section_infos);
+            }
 
-                for (int n = 0; n < shapeids.Count; n++)
-                {
-                    var shapeid = (short) shapeids[n];
-                    var shape = shapes[n];
-
-                    var section_infos = new List<SectionQueryInfo>(this.Sections.Count);
-                    foreach (var sec in this.Sections)
-                    {
-                        int num_rows = shape.RowCount[(short)sec.SectionIndex];
-                        var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
-                        section_infos.Add(section_info);
-                    }
-                    this.PerShapeSectionInfo.Add(section_infos);
-                }
-
-                if (shapeids.Count != this.PerShapeSectionInfo.Count)
-                {
-                    string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count, this.PerShapeSectionInfo.Count);
-                    throw new VA.AutomationException(msg);
-                }
+            if (shapeids.Count != this.PerShapeSectionInfo.Count)
+            {
+                string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count, this.PerShapeSectionInfo.Count);
+                throw new VA.AutomationException(msg);
             }
         }
 
