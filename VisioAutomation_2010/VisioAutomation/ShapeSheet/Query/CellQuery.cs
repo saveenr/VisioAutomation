@@ -337,7 +337,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     var shapeid = (short) shapeids[n];
                     var shape = shapes[n];
 
-                    var section_infos = new List<SectionQueryInfo>();
+                    var section_infos = new List<SectionQueryInfo>(this.Sections.Count);
                     foreach (var sec in this.Sections)
                     {
                         int num_rows = shape.RowCount[(short)sec.SectionIndex];
