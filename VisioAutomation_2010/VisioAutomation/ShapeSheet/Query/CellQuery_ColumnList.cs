@@ -18,6 +18,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             private IList<Column> items { get; set; }
             private Dictionary<string, Column> dic_columns;
+            private HashSet<VA.ShapeSheet.SRC> hs_src;
+            private HashSet<short> hs_cellindex;
             private ColumnType coltype;
 
             internal ColumnList() :
@@ -82,11 +84,23 @@ namespace VisioAutomation.ShapeSheet.Query
                     throw new VA.AutomationException("Duplicate Column Name");
                 }
 
+                if (this.hs_src == null)
+                {
+                    this.hs_src = new HashSet<SRC>();
+                }
+
+                if (this.hs_src.Contains(src))
+                {
+                    string msg = string.Format("Duplicate SRC");
+                    throw new VA.AutomationException(msg);
+                }
+
                 int ordinal = this.items.Count;
                 var col = new Column(ordinal, src, name);
                 this.items.Add(col);
 
                 this.dic_columns[name] = col;
+                this.hs_src.Add(src);
                 return col;
             }
 
@@ -101,12 +115,25 @@ namespace VisioAutomation.ShapeSheet.Query
                 {
                     throw new VA.AutomationException("Can't add a CellIndex if Columns contains SRCs");
                 }
+
                 this.coltype = ColumnType.CellIndex;
+
+                if (this.hs_cellindex == null)
+                {
+                    this.hs_cellindex = new HashSet<short>();
+                }
+
+                if (this.hs_cellindex.Contains(cell))
+                {
+                    string msg = string.Format("Duplicate Cell Index");
+                    throw new VA.AutomationException(msg);
+                }
 
                 name = fixup_name(name);
                 int ordinal = this.items.Count;
                 var col = new Column(ordinal, cell, name);
                 this.items.Add(col);
+                this.hs_cellindex.Add(cell);
                 return col;
             }
 

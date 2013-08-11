@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
@@ -385,6 +386,60 @@ namespace TestVisioAutomation
 
             var formulas1 = query.GetFormulas(s1);
             var formulas2 = query.GetFormulas(page1,new [] {s1.ID,s2.ID});
+        }
+
+        [TestMethod]
+        public void ShapeSheet_Query_TestDuplicates()
+        {
+            // Ensure that duplicate cells are caught
+            var q1 = new VA.ShapeSheet.Query.CellQuery();
+            q1.Columns.Add(VA.ShapeSheet.SRCConstants.PinX);
+
+            bool caught_exc1 = false;
+            try
+            {
+                q1.Columns.Add(VA.ShapeSheet.SRCConstants.PinX);
+            }
+            catch (VA.AutomationException exc)
+            {
+                caught_exc1 = true;
+            }
+
+            Assert.IsTrue(caught_exc1);
+
+            // Ensure that duplicate sections are caught
+
+            var q2 = new VA.ShapeSheet.Query.CellQuery();
+            q2.Sections.Add(IVisio.VisSectionIndices.visSectionObject);
+
+            bool caught_exc2 = false;
+            try
+            {
+                q2.Sections.Add(IVisio.VisSectionIndices.visSectionObject);
+            }
+            catch (VA.AutomationException exc)
+            {
+                caught_exc2 = true;
+            }
+
+            Assert.IsTrue(caught_exc2);
+
+            // Ensure that Duplicates in Section Queries Are caught - 
+            var q3 = new VA.ShapeSheet.Query.CellQuery();
+            var sec = q3.Sections.Add(IVisio.VisSectionIndices.visSectionObject);
+            sec.Columns.Add(VA.ShapeSheet.SRCConstants.PinX.Cell);
+            bool caught_exc3 = false;
+            try
+            {
+                sec.Columns.Add(VA.ShapeSheet.SRCConstants.PinX.Cell);
+            }
+            catch (VA.AutomationException exc)
+            {
+                caught_exc3 = true;
+            }
+
+            Assert.IsTrue(caught_exc3);
+
         }
     }
 }
