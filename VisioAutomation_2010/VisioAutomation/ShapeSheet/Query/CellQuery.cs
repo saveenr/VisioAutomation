@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.IsFrozen)
             {
-                throw new VA.AutomationException("Frozen");
+                throw new VA.AutomationException("Further Modifications to this Query are not allowed");
             }
         }
 
@@ -50,7 +50,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var srcstream = BuildSRCStream(shape);
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, srcstream,unitcodes);
-            var r = new QueryResult<T>(shape.ID16);
+            var r = new QueryResult<T>(shape.ID);
             FillValuesForShape<T>(values, r, 0,0);
             return r;
         }
@@ -89,7 +89,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (numcells != unitcodes.Count)
             {
-                throw new AutomationException("Internal Error: Number of unit cdes must match number of cells");
+                throw new AutomationException("Internal Error: Number of unit codes must match number of cells");
             }
 
             return unitcodes;
@@ -211,13 +211,6 @@ namespace VisioAutomation.ShapeSheet.Query
             return start + cellcount;
         }
 
-        private int GetTotalCellCount(int numshapes)
-        {
-            int total_cells_from_sections = this.GetCellsCountFromSections();
-            int total = (this.Columns.Count * numshapes) + total_cells_from_sections;
-            return total;
-        }
-
         private short[] BuildSRCStream(IVisio.Shape shape)
         {
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
@@ -276,7 +269,6 @@ namespace VisioAutomation.ShapeSheet.Query
 
             int total = this.GetTotalCellCount(shapeids.Count);
 
-            // stream_count is the number of short values that have been written to the array
             var stream_builder = new StreamBuilder(4, total);
 
             for (int i = 0; i < shapeids.Count; i++)
@@ -299,7 +291,11 @@ namespace VisioAutomation.ShapeSheet.Query
                         {
                             foreach (var col in section.SectionQuery.Columns)
                             {
-                                stream_builder.Add((short)shapeid,(short)section.SectionQuery.SectionIndex,(short)rowindex,col.SRC.Cell);
+                                stream_builder.Add(
+                                    (short)shapeid,
+                                    (short)section.SectionQuery.SectionIndex,
+                                    (short)rowindex,
+                                    col.SRC.Cell);
                             }                                
                         }
                     }
@@ -333,7 +329,6 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 var shape = pageshapes.ItemFromID16[(short) shapeid];
                 shapes.Add(shape);
-
             }
 
             for (int n = 0; n < shapeids.Count; n++)
@@ -358,23 +353,24 @@ namespace VisioAutomation.ShapeSheet.Query
             }
         }
 
-        private int GetCellsCountFromSections()
+        private int GetTotalCellCount(int numshapes)
         {
-            if (this.PerShapeSectionInfo.Count<1)
-            {
-                return 0;
-            }
+            // Count the cells not in sections
+            int total_cells_not_in_sections = this.Columns.Count * numshapes;
 
+            // Count the Cells in the Sections
             int total_cells_from_sections = 0;
             foreach (var data_for_shape in this.PerShapeSectionInfo)
             {
                 foreach (var section_data in data_for_shape)
                 {
-                    total_cells_from_sections += (section_data.RowCount * section_data.SectionQuery.Columns.Count);
+                    int cells_in_section = section_data.RowCount * section_data.SectionQuery.Columns.Count;
+                    total_cells_from_sections += cells_in_section;
                 }
             }
-
-            return total_cells_from_sections;
+            
+            int total = total_cells_not_in_sections + total_cells_from_sections;
+            return total;
         }
     }
 }
