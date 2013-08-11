@@ -124,20 +124,22 @@ namespace VisioAutomation.ShapeSheet.Query
        }
 
 
-        public class SectionList : IEnumerable<SectionQuery>
+       public class SectionQueryList : IEnumerable<SectionQuery>
        {
            private IList<SectionQuery> items { get; set; }
            private CellQuery parent;
+           private Dictionary<IVisio.VisSectionIndices,SectionQuery> hs_section; 
  
-           internal SectionList(CellQuery parent) :
+           internal SectionQueryList(CellQuery parent) :
                this(parent,0)
            {
            }
 
-           internal SectionList(CellQuery parent,int capacity)
+           internal SectionQueryList(CellQuery parent,int capacity)
            {
                this.items = new List<SectionQuery>(capacity);
                this.parent = parent;
+               this.hs_section = new Dictionary<IVisio.VisSectionIndices, SectionQuery>(capacity);
            }
 
            public IEnumerator<SectionQuery> GetEnumerator()
@@ -157,10 +159,17 @@ namespace VisioAutomation.ShapeSheet.Query
 
            public SectionQuery Add(IVisio.VisSectionIndices section)
            {
+               if (this.hs_section.ContainsKey(section))
+               {
+                   string msg = string.Format("Duplicate Section");
+                   throw new AutomationException(msg);
+               }
+
                int ordinal = items.Count;
-               var sec = new SectionQuery(this.parent, ordinal, section);
-               this.items.Add(sec);
-               return sec;
+               var section_query = new SectionQuery(this.parent, ordinal, section);
+               this.items.Add(section_query);
+               this.hs_section[section] = section_query;
+               return section_query;
            }
 
            public int Count

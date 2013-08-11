@@ -8,14 +8,15 @@ namespace VisioAutomation.ShapeSheet.Query
     public partial class CellQuery
     {
         public ColumnList Columns { get; private set; }
-        public SectionList Sections { get; private set; }
+        public SectionQueryList Sections { get; private set; }
+
         private List<List<SectionQueryInfo>> PerShapeSectionInfo; 
         private bool IsFrozen;
 
         public CellQuery()
         {
             this.Columns = new ColumnList(0);
-            this.Sections = new SectionList(this,0);
+            this.Sections = new SectionQueryList(this,0);
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>(0);
         }
 
