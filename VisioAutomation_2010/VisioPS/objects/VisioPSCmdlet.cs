@@ -6,6 +6,12 @@ namespace VisioPS
 {
     public class VisioPSCmdlet : SMA.Cmdlet
     {
+        // this static scripting_session variable is what allows
+        // the various visiops cmdlets to share state (for example
+        // to share which instance of Visio they are attached to)
+        // 
+        // To prevent confustion this should be the only static 
+        // variable defined in VisioPS
         private static VA.Scripting.Session scripting_session;
 
         // Attached Visio Application represents the Visio instance
@@ -17,8 +23,6 @@ namespace VisioPS
         // AttachedApplication != null && it is an unusable instance. For example
         //                     it might have been manually deleted
 
-        protected IVisio.Application AttachedVisioApplication;
-
         public VA.Scripting.Session ScriptingSession
         {
             get
@@ -28,7 +32,7 @@ namespace VisioPS
 
                 if (scripting_session==null)
                 {
-                    scripting_session = new VA.Scripting.Session(AttachedVisioApplication);
+                    scripting_session = new VA.Scripting.Session(null);
                 }
 
                 // Must always setup the session output

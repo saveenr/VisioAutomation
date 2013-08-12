@@ -28,13 +28,38 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication = null;
         }
 
+        public IVisio.Application FindRunningApplication()
+        {
+            if (VisioAutomation.Scripting.UACHelper.IsUacEnabled)
+            {
+                this.Session.WriteVerbose("UAC Enabled");
+            }
+
+            if (VisioAutomation.Scripting.UACHelper.IsProcessElevated)
+            {
+                this.Session.WriteVerbose("Process is Elevated");
+                this.Session.WriteWarning("Having an Elevated Process with UAC Enabled will cause Running Applications to not be found");
+            }
+
+            var app = VA.Application.ApplicationHelper.FindRunningApplication();
+            return app;
+        }
+
+
         public IVisio.Application Attach()
         {
-            var app = VA.Application.ApplicationHelper.FindRunningApplication();
+            if (this.Session.VisioApplication != null)
+            {
+                this.Session.WriteWarning("Already connected to an instance");
+            }
+
+            var app = this.FindRunningApplication();
             if (app == null)
             {
                 throw new VA.Scripting.VisioApplicationException("Did not find a running instance of Visio 2010 or above");
             }
+
+            this.Session.WriteVerbose("Attaching to an instance");
 
             this.Session.VisioApplication = app;
 

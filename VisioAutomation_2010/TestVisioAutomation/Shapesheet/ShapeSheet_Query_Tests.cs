@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
@@ -233,16 +234,58 @@ namespace TestVisioAutomation
             page1.Delete(0);
         }
 
-
-        private static VA.ShapeSheet.Query.CellQuery BuildCellQuery(IList<VA.ShapeSheet.SRC> srcs)
+        [TestMethod]
+        public void ShapeSheet_Query_Demo_MultipleShapes_Verify_Out_Of_order()
         {
+            var page1 = GetNewPage(new VA.Drawing.Size(10, 10));
+
+            // draw a simple shape
+            var sa = page1.DrawRectangle(-1, -1, 0, 0);
+            var s1 = page1.DrawRectangle(0, 0, 2, 2);
+            var sb = page1.DrawRectangle(-1, -1, 0, 0);
+            var s2 = page1.DrawRectangle(4, 4, 6, 6);
+            var s3 = page1.DrawRectangle(5, 5, 7, 7);
+
+            // notice that the shapes are created as 0, 1,2,3
+            // but are queried as 2, 3, 1
+            var shapeids = new List<int> { s2.ID, s3.ID, s1.ID };
+
+            Assert.AreEqual(5, page1.Shapes.Count);
+
             var query = new VA.ShapeSheet.Query.CellQuery();
-            foreach (var src in srcs)
+            var col_pinx = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            var col_piny = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinY, "PinY");
+
+            var rf = query.GetFormulas(page1, shapeids);
+            var rr = query.GetResults<double>(page1, shapeids);
+
+            var expected_formulas = new[,]
+                                      {
+                                          {"5 in", "5 in"},
+                                          {"6 in", "6 in"},
+                                          {"1 in", "1 in"}
+                                      };
+
+            var expected_results = new[,]
+                                      {
+                                          {5.0, 5.0},
+                                          {6.0, 6.0},
+                                          {1.0, 1.0}
+                                      };
+
+
+            for (int row = 0; row < rr.Count; row++)
             {
-                query.Columns.Add(src,null);
+                for (int col = 0; col < query.Columns.Count; col++)
+                {
+                    Assert.AreEqual(expected_formulas[row, col], rf[row][col]);
+                    Assert.AreEqual(expected_results[row, col], rr[row][col]);
+                }
             }
-            return query;
+
+            page1.Delete(0);
         }
+
 
         [TestMethod]
         public void ShapeSheet_Query_NonExistentSections()
@@ -385,6 +428,60 @@ namespace TestVisioAutomation
 
             var formulas1 = query.GetFormulas(s1);
             var formulas2 = query.GetFormulas(page1,new [] {s1.ID,s2.ID});
+        }
+
+        [TestMethod]
+        public void ShapeSheet_Query_TestDuplicates()
+        {
+            // Ensure that duplicate cells are caught
+            var q1 = new VA.ShapeSheet.Query.CellQuery();
+            q1.Columns.Add(VA.ShapeSheet.SRCConstants.PinX);
+
+            bool caught_exc1 = false;
+            try
+            {
+                q1.Columns.Add(VA.ShapeSheet.SRCConstants.PinX);
+            }
+            catch (VA.AutomationException exc)
+            {
+                caught_exc1 = true;
+            }
+
+            Assert.IsTrue(caught_exc1);
+
+            // Ensure that duplicate sections are caught
+
+            var q2 = new VA.ShapeSheet.Query.CellQuery();
+            q2.Sections.Add(IVisio.VisSectionIndices.visSectionObject);
+
+            bool caught_exc2 = false;
+            try
+            {
+                q2.Sections.Add(IVisio.VisSectionIndices.visSectionObject);
+            }
+            catch (VA.AutomationException exc)
+            {
+                caught_exc2 = true;
+            }
+
+            Assert.IsTrue(caught_exc2);
+
+            // Ensure that Duplicates in Section Queries Are caught - 
+            var q3 = new VA.ShapeSheet.Query.CellQuery();
+            var sec = q3.Sections.Add(IVisio.VisSectionIndices.visSectionObject);
+            sec.Columns.Add(VA.ShapeSheet.SRCConstants.PinX.Cell);
+            bool caught_exc3 = false;
+            try
+            {
+                sec.Columns.Add(VA.ShapeSheet.SRCConstants.PinX.Cell);
+            }
+            catch (VA.AutomationException exc)
+            {
+                caught_exc3 = true;
+            }
+
+            Assert.IsTrue(caught_exc3);
+
         }
     }
 }

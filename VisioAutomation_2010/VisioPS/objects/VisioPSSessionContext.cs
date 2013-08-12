@@ -31,5 +31,11 @@ namespace VisioPS
         {
             this.cmdlet.WriteVerbose(s);
         }
+
+        public override void WriteWarning(string s)
+        {
+            this.cmdlet.WriteWarning(s);
+        }
+
     }
 }

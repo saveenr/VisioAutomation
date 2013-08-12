@@ -9,15 +9,18 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            if (this.AttachedVisioApplication == null)
+            var scriptingsession = this.ScriptingSession;
+
+            if (scriptingsession.VisioApplication  == null)
             {
-                this.WriteVerboseEx("A Visio Application Instance is Attached");
+                this.WriteVerboseEx("A Visio Application Instance is NOT Attached");
+                this.WriteObject(null);
             }
             else
             {
-                this.WriteVerboseEx("A Visio Application Instance is not Attached");                
+                this.WriteVerboseEx("A Visio Application Instance is Attached");
+                this.WriteObject(scriptingsession.VisioApplication);
             }
-            this.WriteObject(AttachedVisioApplication);
         }
     }
 }

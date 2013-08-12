@@ -17,20 +17,20 @@ namespace VisioPS.Commands
             if (this.Flags == GetVisioShapeFlags.Selected)
             {
                 var shapes = scriptingsession.Selection.GetShapes();
-                this.WriteObject(shapes,true);
+                this.WriteObject(shapes,false);
             }
             else if (this.Flags == GetVisioShapeFlags.SelectedNested)
             {
                 var shapes = scriptingsession.Selection.GetShapesRecursive();
-                this.WriteObject(shapes);
+                this.WriteObject(shapes, false);
             }
             else if (this.Flags == GetVisioShapeFlags.Page)
             {
                 var application = scriptingsession.VisioApplication;
                 var active_page = application.ActivePage;
-                var shapes1 = active_page.Shapes;
-                var shapes = shapes1.AsEnumerable().ToList();
-                this.WriteObject(shapes,true);
+                var page_shapes = active_page.Shapes;
+                var shapes = page_shapes.AsEnumerable().ToList();
+                this.WriteObject(shapes, false);
             }
             else
             {

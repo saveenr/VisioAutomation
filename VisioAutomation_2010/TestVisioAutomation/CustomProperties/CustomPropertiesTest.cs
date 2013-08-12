@@ -1,5 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using System.Windows.Forms;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {

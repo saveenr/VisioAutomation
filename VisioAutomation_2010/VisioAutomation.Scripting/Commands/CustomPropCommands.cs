@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
@@ -28,6 +29,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
+
             var list_custom_props = VA.CustomProperties.CustomPropertyHelper.Get(page, shapes);
 
             for (int i = 0; i < shapes.Count; i++)

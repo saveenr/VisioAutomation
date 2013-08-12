@@ -32,14 +32,18 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.DeveloperCommands Developer { get; private set; }
         public VA.Scripting.Commands.OutputCommands Output { get; private set; }
 
-        public Session() :
-            this(null)
+        public Session(IVisio.Application app):
+            this(app,new DefaultSessionContext())
         {
         }
 
-        public Session(IVisio.Application app)
+        public Session(IVisio.Application app, SessionContext ctx)
         {
-            this.Context = new SessionContext();
+            if (ctx == null)
+            {
+                throw new System.ArgumentNullException();
+            }
+            this.Context = ctx;
             this.VisioApplication = app;
 
             this.Application = new VA.Scripting.Commands.ApplicationCommands(this);
@@ -82,6 +86,12 @@ namespace VisioAutomation.Scripting
             this.Context.WriteVerbose(s);
         }
 
+        public void WriteWarning(string fmt, params object[] items)
+        {
+            string s = String.Format(fmt, items);
+            this.Context.WriteWarning(s);
+        }
+
         public void WriteError(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
@@ -103,6 +113,11 @@ namespace VisioAutomation.Scripting
             this.Context.WriteVerbose(s);
         }
 
+        public void WriteWarning(string s)
+        {
+            this.Context.WriteWarning(s);
+        }
+        
         public void WriteError(string s)
         {
             this.Context.WriteError(s);

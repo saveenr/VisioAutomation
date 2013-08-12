@@ -5,7 +5,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public partial class CellQuery
     {
-        class StreamBuilder
+        internal class StreamBuilder
         {
             public short[] Stream { get; private set; }
             public int ChunksWrittenCount { get; private set; }
