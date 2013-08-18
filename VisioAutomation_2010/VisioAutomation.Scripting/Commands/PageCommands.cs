@@ -367,7 +367,7 @@ namespace VisioAutomation.Scripting.Commands
             SetSize(width, null);
         }
 
-        public void GoTo(VA.Scripting.PageNavigation flags)
+        public void GoTo(VA.Scripting.PageDirection flags)
         {
             this.CheckVisioApplicationAvailable();
 
@@ -380,10 +380,10 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var pages = docpages;
-            this.NavigateTo(pages, flags);
+            this._GoTo(pages, flags);
         }
 
-        public void NavigateTo(IVisio.Pages pages, PageNavigation flags)
+        private void _GoTo(IVisio.Pages pages, PageDirection flags)
         {
             this.CheckVisioApplicationAvailable();
 
@@ -420,7 +420,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        internal static int move_in_range(int cur, int min, int max, PageNavigation direction)
+        internal static int move_in_range(int cur, int min, int max, PageDirection direction)
         {
             if (max < min)
             {
@@ -437,19 +437,19 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException("cur");
             }
 
-            if (direction == PageNavigation.NextPage)
+            if (direction == PageDirection.Next)
             {
                 return System.Math.Min(cur + 1, max);
             }
-            else if (direction == PageNavigation.PreviousPage)
+            else if (direction == PageDirection.Previous)
             {
                 return System.Math.Max(cur - 1, min);
             }
-            else if (direction == PageNavigation.FirstPage)
+            else if (direction == PageDirection.First)
             {
                 return min;
             }
-            else if (direction == PageNavigation.LastPage)
+            else if (direction == PageDirection.Last)
             {
                 return max;
             }

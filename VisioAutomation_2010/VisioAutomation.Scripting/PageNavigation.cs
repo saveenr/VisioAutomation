@@ -1,10 +1,10 @@
 ﻿namespace VisioAutomation.Scripting
 {
-    public enum PageNavigation
+    public enum PageDirection
     {
-        FirstPage,
-        PreviousPage,
-        NextPage,
-        LastPage
+        First,
+        Previous,
+        Next,
+        Last
     }
 }

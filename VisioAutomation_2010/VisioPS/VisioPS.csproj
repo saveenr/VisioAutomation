@@ -110,7 +110,7 @@
     <Compile Include="Commands\Invoke\Invoke_VisioDuplicateShape.cs" />
     <Compile Include="Commands\Export\Export_VisioSelectionAsXHTML.cs" />
     <Compile Include="Commands\Redo_Visio.cs" />
-    <Compile Include="Commands\Save_VisioDocument.cs" />
+    <Compile Include="Commands\Save\Save_VisioDocument.cs" />
     <Compile Include="Commands\Test\Test_VisioDocument.cs" />
     <Compile Include="Commands\Test\Test_VisioSelectedShapes.cs" />
     <Compile Include="Commands\Remove\Remove_VisioShape.cs" />

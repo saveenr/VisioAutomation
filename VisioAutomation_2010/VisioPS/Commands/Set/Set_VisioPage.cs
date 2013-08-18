@@ -15,7 +15,7 @@ namespace VisioPS.Commands
         public IVisio.Page Page  { get; set; }
 
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Flags")]
-        public VA.Scripting.PageNavigation Flag { get; set; }
+        public VA.Scripting.PageDirection Direction { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -30,7 +30,7 @@ namespace VisioPS.Commands
             else
             {
                 var scriptingsession = this.ScriptingSession;
-                scriptingsession.Page.GoTo(this.Flag);                
+                scriptingsession.Page.GoTo(this.Direction);                
             }
         }
     }
