@@ -276,7 +276,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
             this.Session.WriteVerbose("Creating a New Document For the Directed Graphs");
-            var doc = this.Session.Document.New();
+            var doc = this.Session.Document.New(null);
 
             int num_pages_created = 0;
             var doc_pages = doc.Pages;

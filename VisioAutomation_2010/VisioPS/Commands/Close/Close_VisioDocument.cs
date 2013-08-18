@@ -30,6 +30,7 @@ namespace VisioPS.Commands
             {
                 foreach (var doc in this.Documents)
                 {
+                    this.ScriptingSession.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
                     VA.Documents.DocumentHelper.Close(doc, this.Force);
                 }
             }

@@ -352,7 +352,8 @@ namespace TestVisioAutomation
         public void DOM_DrawOrgChart()
         {
             // How to draw using a Template instead of a doc and a stencil
-            const string orgchart_vst = "orgch_u.vst";
+            const string orgchart_vst = "orgch_u.vst" +
+                                        "";
 
             var app = this.GetVisioApplication();
             var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);

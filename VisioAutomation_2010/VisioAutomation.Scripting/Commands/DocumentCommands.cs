@@ -62,13 +62,32 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New()
         {
+            return this.New(null);
+        }
+
+        public IVisio.Document New(string template)
+        {
             this.CheckVisioApplicationAvailable();
 
             this.Session.WriteVerbose("Creating Empty Drawing");
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
-            var doc = documents.Add(string.Empty);
-            return doc;
+            
+            if (template == null)
+            {
+                var doc = documents.Add(string.Empty);
+                return doc;
+            }
+            else
+            {
+
+                var doc = documents.Add(string.Empty);
+                var template_doc = documents.AddEx(template, IVisio.VisMeasurementSystem.visMSDefault,
+                              (int)IVisio.VisOpenSaveArgs.visAddStencil +
+                              (int)IVisio.VisOpenSaveArgs.visOpenDocked,
+                              0);
+                return doc;
+            }
         }
 
         public void Save()
@@ -93,9 +112,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(double w, double h)
         {
+            return this.New(w, h, null);
+        }
+
+        public IVisio.Document New(double w, double h,string template)
+        {
             this.CheckVisioApplicationAvailable();
 
-            var doc = this.New();
+            var doc = this.New(template);
             var pagesize = new VA.Drawing.Size(w, h);
             this.Session.Page.SetSize(pagesize);
             return doc;
@@ -122,18 +146,6 @@ namespace VisioAutomation.Scripting.Commands
             var doc = documents.OpenStencil(name);
 
             this.Session.WriteVerbose( "Finished loading stencil \"{0}\"", name);
-            return doc;
-        }
-
-        public IVisio.Document NewStencil()
-        {
-            this.CheckVisioApplicationAvailable();
-            var application = this.Session.VisioApplication;
-            var documents = application.Documents;
-            var doc = documents.AddEx(string.Empty, IVisio.VisMeasurementSystem.visMSDefault,
-                          (int)IVisio.VisOpenSaveArgs.visAddStencil +
-                          (int)IVisio.VisOpenSaveArgs.visOpenDocked,
-                          0);
             return doc;
         }
 

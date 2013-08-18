@@ -37,7 +37,7 @@ namespace VisioAutomation.Scripting.Commands
                 this.Session.Application.New();
             }
 
-            var doc = this.Session.Document.New(8.5, 11);
+            var doc = this.Session.Document.New(8.5, 11,null);
             var pages = doc.Pages;
             var page = pages.Add();
 
@@ -234,7 +234,7 @@ namespace VisioAutomation.Scripting.Commands
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var doc = this.Session.Document.New(8.5,11);
+            var doc = this.Session.Document.New(8.5,11,null);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
             int fontid = font.ID16;
@@ -387,7 +387,7 @@ namespace VisioAutomation.Scripting.Commands
             string def_linecolor = "rgb(180,180,180)";
             string def_shape_fill = "rgb(245,245,245)";
 
-            var doc = this.Session.Document.New(8.5, 11);
+            var doc = this.Session.Document.New(8.5, 11,null);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
             var font_segoelight = fonts[segoeuilight_fontname];
