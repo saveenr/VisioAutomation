@@ -7,7 +7,7 @@ namespace VisioPS
 {
     static class VisioPSUtil
     {
-        public static DataTable querytable_to_datatable<T>(VA.ShapeSheet.Query.CellQuery cellQuery, VA.ShapeSheet.Query.CellQuery.QueryResultList<T> query_output)
+        private static DataTable querytable_to_datatable<T>(VA.ShapeSheet.Query.CellQuery cellQuery, VA.ShapeSheet.Query.CellQuery.QueryResultList<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
