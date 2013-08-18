@@ -109,7 +109,7 @@
     <Compile Include="Commands\New\New_VisioShape.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioDuplicateShape.cs" />
     <Compile Include="Commands\Export\Export_VisioSelectionAsXHTML.cs" />
-    <Compile Include="Commands\Redo_Visio.cs" />
+    <Compile Include="Commands\Redo\Redo_Visio.cs" />
     <Compile Include="Commands\Save\Save_VisioDocument.cs" />
     <Compile Include="Commands\Test\Test_VisioDocument.cs" />
     <Compile Include="Commands\Test\Test_VisioSelectedShapes.cs" />
@@ -117,7 +117,7 @@
     <Compile Include="Commands\Get\Get_VisioLayer.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioAlignShape.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioDistributeShape.cs" />
-    <Compile Include="Commands\Select_VisioShape.cs" />
+    <Compile Include="Commands\Select\Select_VisioShape.cs" />
     <Compile Include="Commands\Set\Set_VisioShapeSheet.cs" />
     <Compile Include="Commands\New\New_VisioBezier.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioDraw.cs" />
@@ -136,14 +136,14 @@
     <Compile Include="Commands\New\New_VisioControl.cs" />
     <Compile Include="Commands\New\New_VisioDocument.cs" />
     <Compile Include="enums\SelectionOperation.cs" />
-    <Compile Include="Commands\Open_VisioDocument.cs" />
+    <Compile Include="Commands\Open\Open_VisioDocument.cs" />
     <Compile Include="enums\PageOrientation.cs" />
     <Compile Include="enums\ParagraphHorizontalAlignment.cs" />
     <Compile Include="Commands\Remove\Remove_VisioControl.cs" />
     <Compile Include="Commands\Set\Set_VisioUserDefinedCell.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioStackShape.cs" />
     <Compile Include="enums\TextVerticalAlignment.cs" />
-    <Compile Include="Commands\Connect_VisioApplication.cs" />
+    <Compile Include="Commands\Connect\Connect_VisioApplication.cs" />
     <Compile Include="Commands\Get\Get_VisioDirectedEdge.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioCopyShapeFormat.cs" />
     <Compile Include="Commands\New\New_VisioConnection.cs" />
@@ -171,7 +171,7 @@
     <Compile Include="Commands\Set\Set_VisioCustomProperty.cs" />
     <Compile Include="Commands\Set\Set_VisioText.cs" />
     <Compile Include="Commands\Close\Close_VisioApplication.cs" />
-    <Compile Include="Commands\Undo_Visio.cs" />
+    <Compile Include="Commands\Undo\Undo_Visio.cs" />
     <Compile Include="Commands\Remove\Remove_VisioGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\Set\Set_VisioZoom.cs" />
