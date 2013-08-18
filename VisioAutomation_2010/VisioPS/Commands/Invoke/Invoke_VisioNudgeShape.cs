@@ -20,7 +20,7 @@ namespace VisioPS.Commands
         public double Down { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-       public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

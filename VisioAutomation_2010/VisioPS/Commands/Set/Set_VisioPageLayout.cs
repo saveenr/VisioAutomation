@@ -6,8 +6,11 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPageLayout")]
     public class Set_VisioPageLayout : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] public PageOrientation Orientation = PageOrientation.None;
-        [SMA.Parameter(Mandatory = false)] public string BackgroundPage = null;
+        [SMA.Parameter(Mandatory = false)] 
+        public PageOrientation Orientation = PageOrientation.None;
+        
+        [SMA.Parameter(Mandatory = false)] 
+        public string BackgroundPage = null;
 
         protected override void ProcessRecord()
         {

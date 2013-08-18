@@ -28,10 +28,12 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             short flags = 0;
+            
             if (this.BlastGuards)
             {
                 flags = (short)(flags | (short)IVisio.VisGetSetArgs.visSetBlastGuards);
             }
+            
             if (this.TestCircular)
             {
                 flags = (short)(flags | (short)IVisio.VisGetSetArgs.visSetTestCircular);

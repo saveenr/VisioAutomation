@@ -5,7 +5,6 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioLayer")]
     public class Get_VisioLayer : VisioPSCmdlet
     {
-
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name;
 

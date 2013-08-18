@@ -6,7 +6,8 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsData.Export, "VisioPage")]
     public class Export_VisioPage : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = true)] public string Filename;
+        [SMA.Parameter(Position = 0, Mandatory = true)] 
+        public string Filename;
 
         [SMA.Parameter(Position = 1, Mandatory = false)]
         public SMA.SwitchParameter AllPages;

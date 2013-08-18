@@ -8,7 +8,6 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-
             scriptingsession.Application.Undo();
         }
     }

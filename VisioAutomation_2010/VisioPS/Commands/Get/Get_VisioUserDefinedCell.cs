@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Get_VisioUserDefinedCell : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-       public IVisio.Shape[] Shapes;
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

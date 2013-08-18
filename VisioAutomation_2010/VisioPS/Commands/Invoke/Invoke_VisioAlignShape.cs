@@ -8,14 +8,14 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioAlignShape")]
     public class Invoke_VisioAlignShape : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] public VerticalAlignment Vertical =
-            VerticalAlignment.None;
-
-        [SMA.Parameter(Mandatory = false)] public HorizontalAlignment Horizontal
-            = HorizontalAlignment.None;
+        [SMA.Parameter(Mandatory = false)]
+        public VerticalAlignment Vertical = VerticalAlignment.None;
 
         [SMA.Parameter(Mandatory = false)]
-       public IVisio.Shape[] Shapes;
+        public HorizontalAlignment Horizontal = HorizontalAlignment.None;
+
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

@@ -24,7 +24,6 @@ namespace VisioPS.Commands
         public string LocPinY { get; set; }
         [SMA.Parameter(Mandatory = false)]
         public string Angle { get; set; }
-
         [SMA.Parameter(Mandatory = false)]
         public string FillPattern { get; set; }
         [SMA.Parameter(Mandatory = false)]
@@ -72,8 +71,7 @@ namespace VisioPS.Commands
         public string EndArrow { get; set; }
         [SMA.Parameter(Mandatory = false)]
         public string EndArrowSize { get; set; }
-
-
+        
         [SMA.Parameter(Mandatory = false)]
         public string BeginX { get; set; }
         [SMA.Parameter(Mandatory = false)]
@@ -82,8 +80,7 @@ namespace VisioPS.Commands
         public string EndX { get; set; }
         [SMA.Parameter(Mandatory = false)]
         public string EndY { get; set; }
-
-
+        
         [SMA.Parameter(Mandatory = false)]
         public string ShdwBkgnd { get; set; }
         [SMA.Parameter(Mandatory = false)]
@@ -113,7 +110,6 @@ namespace VisioPS.Commands
         
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
-
 
         [SMA.Parameter(Mandatory = false)]
         public string LockAspect { get; set; }
@@ -265,7 +261,6 @@ namespace VisioPS.Commands
                 update.SetFormulaIgnoreNull(id, SRCCON.TxtWidth, this.TxtWidth);
 
                 update.SetFormulaIgnoreNull(id, SRCCON.HideText, this.HideText);
-
             }
 
             var page = scriptingsession.Page.Get();

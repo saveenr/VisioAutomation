@@ -14,7 +14,8 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 1, Mandatory = true)]
         public string Value { get; set; }
 
-        [SMA.Parameter(Mandatory = false)] public string Prompt;
+        [SMA.Parameter(Mandatory = false)] 
+        public string Prompt;
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes; 

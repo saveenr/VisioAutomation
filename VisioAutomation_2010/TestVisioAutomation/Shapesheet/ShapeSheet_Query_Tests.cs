@@ -442,7 +442,7 @@ namespace TestVisioAutomation
             {
                 q1.Columns.Add(VA.ShapeSheet.SRCConstants.PinX);
             }
-            catch (VA.AutomationException exc)
+            catch (VA.AutomationException)
             {
                 caught_exc1 = true;
             }
@@ -459,7 +459,7 @@ namespace TestVisioAutomation
             {
                 q2.Sections.Add(IVisio.VisSectionIndices.visSectionObject);
             }
-            catch (VA.AutomationException exc)
+            catch (VA.AutomationException)
             {
                 caught_exc2 = true;
             }
@@ -475,7 +475,7 @@ namespace TestVisioAutomation
             {
                 sec.Columns.Add(VA.ShapeSheet.SRCConstants.PinX.Cell);
             }
-            catch (VA.AutomationException exc)
+            catch (VA.AutomationException)
             {
                 caught_exc3 = true;
             }

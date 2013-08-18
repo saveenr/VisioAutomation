@@ -1,6 +1,7 @@
 ﻿using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
+using GRID = VisioAutomation.Layout.Models.Grid;
 
 namespace VisioPS.Commands
 {
@@ -23,15 +24,15 @@ namespace VisioPS.Commands
         public double CellHeight = 0.5;
 
         [SMA.Parameter(Position = 5, Mandatory = false)]
-        public VA.Layout.Models.Grid.RowDirection RowDirection = VA.Layout.Models.Grid.RowDirection.BottomToTop;
+        public GRID.RowDirection RowDirection = GRID.RowDirection.BottomToTop;
 
         [SMA.Parameter(Position = 5, Mandatory = false)]
-        public VA.Layout.Models.Grid.ColumnDirection ColumnDirection = VA.Layout.Models.Grid.ColumnDirection.LeftToRight;
+        public GRID.ColumnDirection ColumnDirection = GRID.ColumnDirection.LeftToRight;
 
         protected override void ProcessRecord()
         {
             var cellsize = new VA.Drawing.Size(CellWidth, CellHeight);
-            var layout = new VA.Layout.Models.Grid.GridLayout(this.Columns, this.Rows, cellsize, this.Master);
+            var layout = new GRID.GridLayout(this.Columns, this.Rows, cellsize, this.Master);
             layout.RowDirection = this.RowDirection;
             layout.ColumnDirection = this.ColumnDirection;
             this.WriteObject(layout);

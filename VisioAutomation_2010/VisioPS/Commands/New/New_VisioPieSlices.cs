@@ -15,7 +15,8 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 2, Mandatory = true)]
         public double Radius { get; set; }
 
-        [SMA.Parameter(Position = 3, Mandatory = true)] public double[] Values;
+        [SMA.Parameter(Position = 3, Mandatory = true)]
+        public double[] Values;
 
         protected override void ProcessRecord()
         {
