@@ -182,8 +182,13 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var doc = application.ActiveDocument;
                 var pages = doc.Pages;
+                var src_page = application.ActivePage;
                 var new_page = pages.Add();
-                VA.Pages.PageHelper.Duplicate(application.ActivePage, new_page);
+
+                var win = application.ActiveWindow;
+                win.Page = src_page;
+                VA.Pages.PageHelper.Duplicate(src_page, new_page);
+                win.Page = new_page;
                 return new_page;
             }
         }
