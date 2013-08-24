@@ -22,13 +22,23 @@ namespace TestVisioAutomation
             var values = new[] {1.0, 2.0};
             var slices = VA.Layout.Models.Radial.PieSlice.GetSlicesFromValues(center, radius, values);
 
+            var shapes = new IVisio.Shape[values.Length];
             for (int i=0 ;i<values.Length;i++)
             {
                 var slice = slices[i];
                 var shape = slice.Render(page);
+                shapes[i] = shape;
                 shape.Text = values[i].ToString();
-
             }
+
+            var shapeids = shapes.Select(s => s.ID).ToList();
+            var xfrms = VA.Layout.XFormCells.GetCells(page, shapeids);
+
+            Assert.AreEqual("4.25 in", xfrms[0].PinX.Formula);
+            Assert.AreEqual("5.5 in", xfrms[0].PinY.Formula);
+            Assert.AreEqual("4 in", xfrms[1].PinX.Formula);
+            Assert.AreEqual("4.9330127018922 in", xfrms[1].PinY.Formula);
+
         }
     }
 }
