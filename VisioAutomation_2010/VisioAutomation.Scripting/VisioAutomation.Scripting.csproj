@@ -107,7 +107,6 @@
     <Compile Include="Commands\CustomPropCommands.cs" />
     <Compile Include="Commands\DocumentCommands.cs" />
     <Compile Include="Commands\DrawCommands.cs" />
-    <Compile Include="DrawCommandsUtil.cs" />
     <Compile Include="Commands\ExportCommands.cs" />
     <Compile Include="Commands\PageCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
