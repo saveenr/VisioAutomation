@@ -56,13 +56,22 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_Page_DuplicationToDoc()
+        public void Scripting_Page_DuplicationToDoc1()
         {
             var ss = GetScriptingSession();
-            var docto = ss.Document.New();
-            var docfrom = ss.Document.New();
+
+            // First case: the source document is already the active document
+            var docto_1 = ss.Document.New();
+            var docfrom_1 = ss.Document.New();
             ss.Draw.Rectangle(0, 0, 1, 1);
-            ss.Page.Duplicate(docto);
+            ss.Page.Duplicate(docto_1);
+
+            // Second case: the source document has to be activated beforehand
+            var docfrom_2 = ss.Document.New();
+            var docto_2 = ss.Document.New();
+            VA.Documents.DocumentHelper.Activate(docfrom_2);
+            ss.Draw.Rectangle(0, 0, 1, 1);
+            ss.Page.Duplicate(docto_2);
         }
 
     }
