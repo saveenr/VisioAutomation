@@ -17,7 +17,7 @@ namespace VisioPS.Commands
             }
 
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Export.ExportSelectionToSVGXHTML(this.Filename);
+            scriptingsession.Export.SelectionToSVGXHTML(this.Filename);
         }
     }
 }

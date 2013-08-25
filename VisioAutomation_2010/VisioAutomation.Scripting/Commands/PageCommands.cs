@@ -217,7 +217,7 @@ namespace VisioAutomation.Scripting.Commands
 
             // the active window will be to the new document
             var active_window = application.ActiveWindow;
-            active_window.Page = dest_page;
+            //active_window.Page = dest_page;
 
             return dest_page;
         }

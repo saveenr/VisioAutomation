@@ -11,7 +11,7 @@ namespace VisioAutomation.Layout.Models.Radial
     {
         public double Radius { get; private set; }
 
-        public PieSlice(VA.Drawing.Point center, double start, double end, double radius) :
+        public PieSlice(VA.Drawing.Point center, double radius, double start, double end) :
             base(center,start,end)
         {
             if (radius < 0.0)

@@ -295,15 +295,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public int GetSelectedShapeCount()
-        {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
-
-            var selection = Session.Selection.Get();
-            return selection.Count;
-        }
-
         public IList<VA.Layout.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();

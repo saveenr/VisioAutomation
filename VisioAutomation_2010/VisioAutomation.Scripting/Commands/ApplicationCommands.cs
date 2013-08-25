@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Session.VisioApplication = null;
         }
 
-        public IVisio.Application FindRunningApplication()
+        public IVisio.Application FindRunning()
         {
             if (VisioAutomation.Scripting.UACHelper.IsUacEnabled)
             {
@@ -53,7 +53,7 @@ namespace VisioAutomation.Scripting.Commands
                 this.Session.WriteWarning("Already connected to an instance");
             }
 
-            var app = this.FindRunningApplication();
+            var app = this.FindRunning();
             if (app == null)
             {
                 throw new VA.Scripting.VisioApplicationException("Did not find a running instance of Visio 2010 or above");

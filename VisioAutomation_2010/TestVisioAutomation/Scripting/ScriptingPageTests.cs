@@ -58,10 +58,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Page_DuplicationToDoc()
         {
-            var page_size = new VA.Drawing.Size(8.5, 11);
             var ss = GetScriptingSession();
-            var docto = ss.Document.New(page_size.Width, page_size.Height);
-            var docfrom = ss.Document.New(page_size.Width, page_size.Height);
+            var docto = ss.Document.New();
+            var docfrom = ss.Document.New();
             ss.Draw.Rectangle(0, 0, 1, 1);
             ss.Page.Duplicate(docto);
         }

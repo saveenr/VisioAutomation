@@ -14,15 +14,15 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void SetText(IList<IVisio.Shape> target_shapes, string text)
+        public void Set(IList<IVisio.Shape> target_shapes, string text)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
             
-            this.SetText(target_shapes, new[] { text });
+            this.Set(target_shapes, new[] { text });
         }
 
-        public void SetText(IList<IVisio.Shape> target_shapes, IEnumerable<string> texts)
+        public void Set(IList<IVisio.Shape> target_shapes, IEnumerable<string> texts)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<string> GetText(IList<IVisio.Shape> target_shapes)
+        public IList<string> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

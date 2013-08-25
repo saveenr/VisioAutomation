@@ -42,9 +42,9 @@ namespace TestVisioAutomation
             var pagesize = ss.Page.GetSize();
             Assert.AreEqual(10.0, pagesize.Width);
             Assert.AreEqual(5.0, pagesize.Height);
-            Assert.AreEqual(0, ss.Layout.GetSelectedShapeCount());
+            Assert.AreEqual(0, ss.Selection.Get().Count);
             ss.Draw.Rectangle(1, 1, 2, 2);
-            Assert.AreEqual(1, ss.Layout.GetSelectedShapeCount());
+            Assert.AreEqual(1, ss.Selection.Get().Count);
 
             ss.Document.CloseAllWithoutSaving();
         }

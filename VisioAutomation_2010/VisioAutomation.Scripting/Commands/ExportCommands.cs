@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void ExportPageToFile(string filename)
+        public void PageToFile(string filename)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting.Commands
             active_window.Select(old_selection, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void ExportSelectionToFile(string filename)
+        public void SelectionToFile(string filename)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -60,7 +60,7 @@ namespace VisioAutomation.Scripting.Commands
             selection.Export(filename);
         }
 
-        public void ExportPagesToFiles(string filename)
+        public void PagesToFiles(string filename)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -106,7 +106,7 @@ namespace VisioAutomation.Scripting.Commands
             active_window.Page = old_page;
         }
 
-        public void ExportSelectionToSVGXHTML(string filename)
+        public void SelectionToSVGXHTML(string filename)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -123,10 +123,10 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Session.Selection.Get();
-            ExportSelectionToSVGXHTML(this.Session.Selection.Get(), filename, s => this.Session.WriteVerbose( s));
+            SelectionToSVGXHTML(this.Session.Selection.Get(), filename, s => this.Session.WriteVerbose( s));
         }
 
-        public void ExportSelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
+        private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

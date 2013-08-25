@@ -44,7 +44,7 @@ namespace VisioPS.Commands
                 category |= VA.Format.FormatCategory.Character;
             }
             
-            scriptingsession.Format.CopyFormat(this.Shape, category);
+            scriptingsession.Format.Copy(this.Shape, category);
         }
     }
 }

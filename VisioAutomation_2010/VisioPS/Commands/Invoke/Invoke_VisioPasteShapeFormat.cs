@@ -46,7 +46,7 @@ namespace VisioPS.Commands
             }
 
             bool apply_formulas = false;
-            scriptingsession.Format.PasteFormat(this.Shapes,category,apply_formulas);
+            scriptingsession.Format.Paste(this.Shapes,category,apply_formulas);
         }
     }
 }

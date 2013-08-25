@@ -30,21 +30,6 @@ namespace VisioAutomation.Scripting.Commands
             return types;
         }       
 
-        public void HelloWorld()
-        {
-            if (this.Session.VisioApplication == null)
-            {
-                this.Session.Application.New();
-            }
-
-            var doc = this.Session.Document.New(8.5, 11,null);
-            var pages = doc.Pages;
-            var page = pages.Add();
-
-            var s0 = page.DrawRectangle(2, 2, 6, 6);
-            s0.Text = "Hello World";
-        }
-
         public IVisio.Document DrawScriptingDocumentation()
         {
             this.CheckVisioApplicationAvailable();

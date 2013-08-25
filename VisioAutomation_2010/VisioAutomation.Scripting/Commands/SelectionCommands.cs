@@ -196,7 +196,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("layername");
             }
 
-            var layer = this.Session.Layer.GetLayer(layername);
+            var layer = this.Session.Layer.Get(layername);
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
 

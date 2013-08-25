@@ -13,12 +13,12 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             if (this.Name==null)
             {
-                var layer = scriptingsession.Layer.GetLayer(this.Name);
+                var layer = scriptingsession.Layer.Get(this.Name);
                 this.WriteObject(layer);
             }
             else
             {
-                var layers = scriptingsession.Layer.GetLayers();
+                var layers = scriptingsession.Layer.Get();
                 this.WriteObject(layers,false);
             }
         }

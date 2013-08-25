@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IVisio.Layer GetLayer(string layername)
+        public IVisio.Layer Get(string layername)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting.Commands
             return layer;
         }
 
-        public IList<IVisio.Layer> GetLayers()
+        public IList<IVisio.Layer> Get()
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

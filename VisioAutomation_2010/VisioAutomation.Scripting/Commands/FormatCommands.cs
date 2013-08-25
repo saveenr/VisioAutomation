@@ -123,16 +123,16 @@ namespace VisioAutomation.Scripting.Commands
 
         private readonly VA.Format.FormatPaintCache cache = new VA.Format.FormatPaintCache();
 
-        public void CopyFormat()
+        public void Copy()
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
             var allflags = this.cache.GetAllFormatPaintFlags();
-            this.CopyFormat(null, allflags);
+            this.Copy(null, allflags);
         }
 
-        public void CopyFormat(IVisio.Shape target_shape, VA.Format.FormatCategory category)
+        public void Copy(IVisio.Shape target_shape, VA.Format.FormatCategory category)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -151,7 +151,7 @@ namespace VisioAutomation.Scripting.Commands
             this.cache.Clear();
         }
 
-        public void PasteFormat(IList<IVisio.Shape> target_shapes, VA.Format.FormatCategory category, bool apply_formulas)
+        public void Paste(IList<IVisio.Shape> target_shapes, VA.Format.FormatCategory category, bool apply_formulas)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

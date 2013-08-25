@@ -18,13 +18,13 @@ namespace VisioPS.Commands
             {
                 // this means use the current page 
                 var scriptingsession = this.ScriptingSession;
-                scriptingsession.Export.ExportPageToFile(this.Filename);
+                scriptingsession.Export.PageToFile(this.Filename);
             }
             else
             {
                 // is -AllPages is set then export them all
                 var scriptingsession = this.ScriptingSession;
-                scriptingsession.Export.ExportPagesToFiles(this.Filename);
+                scriptingsession.Export.PagesToFiles(this.Filename);
             }
         }
     }

@@ -14,7 +14,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var t = scriptingsession.Text.GetText(this.Shapes);
+            var t = scriptingsession.Text.Get(this.Shapes);
             this.WriteObject(t);
         }
     }

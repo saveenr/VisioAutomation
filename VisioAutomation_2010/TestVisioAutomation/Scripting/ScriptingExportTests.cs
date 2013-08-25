@@ -29,7 +29,7 @@ namespace TestVisioAutomation
             {
                 System.IO.File.Delete(output_filename);
             }
-            ss.Export.ExportSelectionToSVGXHTML(output_filename);
+            ss.Export.SelectionToSVGXHTML(output_filename);
 
             Assert.IsTrue( System.IO.File.Exists(output_filename));
             ss.Document.Close(true);
