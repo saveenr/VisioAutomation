@@ -90,6 +90,7 @@
     <Compile Include="Commands\Get\Get_VisioShapeCell.cs" />
     <Compile Include="Commands\New\New_VisioDirectedGraph.cs" />
     <Compile Include="Commands\New\New_VisioOrgChart.cs" />
+    <Compile Include="Commands\Set\Set_VisioDocument.cs" />
     <Compile Include="Commands\Set\Set_VisioPage.cs" />
     <Compile Include="Commands\Set\Set_VisioPageCell.cs" />
     <Compile Include="Commands\Set\Set_VisioShapeCell.cs" />

@@ -14,6 +14,23 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
+        public void Activate(string name)
+        {
+            this.CheckVisioApplicationAvailable();
+
+            var application = this.Session.VisioApplication;
+            var documents = application.Documents;
+            var doc = documents[name];
+
+            this.Activate(doc);
+        }
+
+        public void Activate(IVisio.Document doc)
+        {
+            this.CheckVisioApplicationAvailable();
+            VA.Documents.DocumentHelper.Activate(doc);
+        }
+
         public void Close(bool force)
         {
             this.CheckVisioApplicationAvailable();
