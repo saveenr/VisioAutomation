@@ -74,9 +74,14 @@ namespace VisioAutomation.Layout.Models.Radial
 
         public static List<PieSlice> GetSlicesFromValues(VA.Drawing.Point center, double radius, IList<double> values)
         {
-            var slices = RadialSlice.GetSlicesFromValues(center, values,
-                                                         sector =>
-                                                         new PieSlice(center, sector.StartAngle, sector.EndAngle, radius));
+            var sectors = RadialSlice.GetSectorsFromValues(values);
+            var slices = new List<PieSlice>(sectors.Count);
+            foreach (var sector in sectors)
+            {
+                var pieslice = new PieSlice(center, sector.StartAngle, sector.EndAngle, radius);
+                slices.Add(pieslice);
+            }
+             
             return slices;
         }
     }

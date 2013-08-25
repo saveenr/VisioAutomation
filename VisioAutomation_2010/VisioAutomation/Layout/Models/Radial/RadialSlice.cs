@@ -52,19 +52,7 @@ namespace VisioAutomation.Layout.Models.Radial
             return arc_bez;
         }
 
-        protected static List<T> GetSlicesFromValues<T>(VA.Drawing.Point center, IList<double> values, System.Func<Sector, T> make_slice)
-        {
-            var sectors = RadialSlice.GetSectorsFromValues(values);
-            var slices = new List<T>(values.Count);
-            foreach (var sector in sectors)
-            {
-                var s = make_slice(sector);
-                slices.Add(s);
-            }
-            return slices;
-        }
-
-        private static List<Sector> GetSectorsFromValues(IList<double> values)
+        protected static List<Sector> GetSectorsFromValues(IList<double> values)
         {
             double sectors = values.Sum();
             var slices = new List<Sector>(values.Count);
