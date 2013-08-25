@@ -21,11 +21,22 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 4, Mandatory = true)]
         public double EndAngle { get; set; }
 
+        [SMA.Parameter(Mandatory = false)] public double InnerRadius = 0;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var shape = scriptingsession.Draw.PieSlice(new VA.Drawing.Point(this.X0, this.Y0), this.Radius,this.StartAngle, this.EndAngle);
-            this.WriteObject(shape);
+            var center = new VA.Drawing.Point(this.X0, this.Y0);
+            if (this.InnerRadius <= 0)
+            {
+                var shape = scriptingsession.Draw.PieSlice(center, this.Radius, this.StartAngle, this.EndAngle);
+                this.WriteObject(shape);
+            }
+            else
+            {
+                var shape = scriptingsession.Draw.DoughnutSlice(center, this.InnerRadius, this.Radius, this.StartAngle, this.EndAngle);
+                this.WriteObject(shape);                
+            }
         }
     }
 }

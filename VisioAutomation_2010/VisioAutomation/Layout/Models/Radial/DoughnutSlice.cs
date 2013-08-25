@@ -102,5 +102,18 @@ namespace VisioAutomation.Layout.Models.Radial
             bez.Add(point_first);
             return bez;
         }
+
+        public static List<DoughnutSlice> GetSlicesFromValues(VA.Drawing.Point center, double inner_radius, double outer_radius, IList<double> values)
+        {
+            var sectors = RadialSlice.GetSectorsFromValues(values);
+            var slices = new List<DoughnutSlice>(sectors.Count);
+            foreach (var sector in sectors)
+            {
+                var pieslice = new DoughnutSlice(center, sector.StartAngle, sector.EndAngle, inner_radius, outer_radius);
+                slices.Add(pieslice);
+            }
+
+            return slices;
+        }
     }
 }

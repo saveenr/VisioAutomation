@@ -230,7 +230,26 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var shape = DrawCommandsUtil.DrawPieSlice(active_page, center, radius, start_angle, end_angle);
+                var slice = new VA.Layout.Models.Radial.PieSlice(center, radius, start_angle, end_angle);
+                var shape = slice.Render(active_page);
+                return shape;
+            }
+        }
+        public IVisio.Shape DoughnutSlice(VA.Drawing.Point center,
+                          double inner_radius,
+                          double outer_radius,
+                          double start_angle,
+                          double end_angle)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var application = this.Session.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
+            {
+                var active_page = application.ActivePage;
+                var slice = new VA.Layout.Models.Radial.DoughnutSlice(center, inner_radius, outer_radius, start_angle, end_angle);
+                var shape = slice.Render(active_page);
                 return shape;
             }
         }
@@ -245,6 +264,26 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
             var slices = RADIALLAYOUT.PieSlice.GetSlicesFromValues(center, radius, values);
+            var shapes = new List<IVisio.Shape>(slices.Count);
+            foreach (var slice in slices)
+            {
+                var shape = slice.Render(page);
+                shapes.Add(shape);
+            }
+            return shapes;
+        }
+
+        public IList<IVisio.Shape> DoughnutSlices(VA.Drawing.Point center,
+                                  double inner_radius,
+                                  double outer_radius,
+                                  IList<double> values)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var application = this.Session.VisioApplication;
+            var page = application.ActivePage;
+            var slices = RADIALLAYOUT.DoughnutSlice.GetSlicesFromValues(center, inner_radius, outer_radius, values);
             var shapes = new List<IVisio.Shape>(slices.Count);
             foreach (var slice in slices)
             {
