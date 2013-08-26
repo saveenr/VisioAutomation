@@ -31,8 +31,7 @@ namespace VisioPS.Commands
             chart.Radius = this.Radius;
             chart.Center = new VA.Drawing.Point(this.X0, this.Y0);
 
-            var shapes = scriptingsession.Draw.PieChart(chart);
-            this.WriteObject(shapes, false);
+            this.WriteObject(chart);
         }
     }
 }

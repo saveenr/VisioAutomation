@@ -29,36 +29,40 @@ namespace VisioPS.Commands
         [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true)]
         public double CellSpacing { get; set; }
 
+        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true)] 
+        public VA.Layout.Models.Radial.PieChart PieChart;
+
         protected override void ProcessRecord()
         {
+            var scriptingsession = this.ScriptingSession;
             if (this.OrgChart != null)
             {
-                var scriptingsession = this.ScriptingSession;
                 scriptingsession.Draw.OrgChart(this.OrgChart);                
             }
             else if (this.GridLayout != null)
             {
-                var scriptingsession = this.ScriptingSession;
                 scriptingsession.Draw.Grid(this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
             {
-                var scriptingsession = this.ScriptingSession;
                 scriptingsession.Draw.DirectedGraph(this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {
-                var scriptingsession = this.ScriptingSession;
-
                 var widths = Enumerable.Repeat<double>(CellWidth, DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(CellHeight, DataTable.Rows.Count).ToList();
                 var spacing = new VA.Drawing.Size(CellSpacing, CellSpacing);
                 var shapes = scriptingsession.Draw.Table(DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
+            else if (this.PieChart != null)
+            {
+                var shapes = scriptingsession.Draw.PieChart(this.PieChart);
+                this.WriteObject(shapes, false);
+            }
             else
             {
-                
+                this.WriteVerboseEx("No object to draw");
             }
         }
     }
