@@ -26,16 +26,13 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             var center = new VA.Drawing.Point(this.X0, this.Y0);
 
-            if (this.InnerRadius <= 0)
-            {
-                var shapes = scriptingsession.Draw.PieChart(center, this.Radius, this.Values);
-                this.WriteObject(shapes, false);
-            }
-            else
-            {
-                var shapes = scriptingsession.Draw.DoughnutChart(center, this.InnerRadius, this.Radius, this.Values);
-                this.WriteObject(shapes, false);                
-            }
+            var chart = new VA.Layout.Models.Radial.PieChart(this.Values);
+            chart.InnerRadius = this.InnerRadius;
+            chart.Radius = this.Radius;
+            chart.Center = new VA.Drawing.Point(this.X0, this.Y0);
+
+            var shapes = scriptingsession.Draw.PieChart(chart);
+            this.WriteObject(shapes, false);
         }
     }
 }

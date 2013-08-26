@@ -133,16 +133,18 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_Draw_PieSlices()
+        public void Scripting_Draw_PieChart()
         {
             var ss = GetScriptingSession();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
-            var center = new VA.Drawing.Point(2, 2);
-            double radius = 1.0;
+
             double[] values = new[] {1.0, 2.0, 3.0, 4.0};
-            var shapes = ss.Draw.PieChart(center, radius, values);
+            var chart = new VA.Layout.Models.Radial.PieChart(values);
+            chart.Radius = 1.0;
+            chart.Center = new VA.Drawing.Point(2, 2);
+            var shapes = ss.Draw.PieChart(chart);
             ss.Document.Close(true);
         }
 

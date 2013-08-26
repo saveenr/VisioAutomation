@@ -49,7 +49,7 @@ namespace VisioAutomation.Layout.Models.Radial
         {
             if (this.Sector.Angle == 0.0)
             {
-                var p1 = this.GetPointAtRadius(this.Center, this.Sector.StartAngle, this.Radius);
+                var p1 = this.GetPointAtRadius(this.Center, this.Radius, this.Sector.StartAngle);
                 return page.DrawLine(this.Center, p1);
             }
             else if (this.Sector.Angle >= 2*System.Math.PI)
@@ -78,7 +78,7 @@ namespace VisioAutomation.Layout.Models.Radial
             var slices = new List<PieSlice>(sectors.Count);
             foreach (var sector in sectors)
             {
-                var pieslice = new PieSlice(center, sector.StartAngle, sector.EndAngle, radius);
+                var pieslice = new PieSlice(center, radius, sector.StartAngle, sector.EndAngle);
                 slices.Add(pieslice);
             }
              

@@ -91,7 +91,7 @@ namespace TestVisioAutomation
             foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
             {
                 var center = new VA.Drawing.Point(cx, cy);
-                var ps = new VA.Layout.Models.Radial.PieSlice(center, start_angle, end_angle, radius);
+                var ps = new VA.Layout.Models.Radial.PieSlice(center, radius, start_angle, end_angle);
                 ps.Render(page);
                 cx += 2.5;
             }

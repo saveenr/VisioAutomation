@@ -254,42 +254,14 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<IVisio.Shape> PieChart(VA.Drawing.Point center,
-                                          double radius,
-                                          IList<double> values)
+        public IList<IVisio.Shape> PieChart(VA.Layout.Models.Radial.PieChart chart)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var slices = RADIALLAYOUT.PieSlice.GetSlicesFromValues(center, radius, values);
-            var shapes = new List<IVisio.Shape>(slices.Count);
-            foreach (var slice in slices)
-            {
-                var shape = slice.Render(page);
-                shapes.Add(shape);
-            }
-            return shapes;
-        }
-
-        public IList<IVisio.Shape> DoughnutChart(VA.Drawing.Point center,
-                                  double inner_radius,
-                                  double outer_radius,
-                                  IList<double> values)
-        {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
-
-            var application = this.Session.VisioApplication;
-            var page = application.ActivePage;
-            var slices = RADIALLAYOUT.DoughnutSlice.GetSlicesFromValues(center, inner_radius, outer_radius, values);
-            var shapes = new List<IVisio.Shape>(slices.Count);
-            foreach (var slice in slices)
-            {
-                var shape = slice.Render(page);
-                shapes.Add(shape);
-            }
+            var shapes = chart.Render(page);
             return shapes;
         }
 
