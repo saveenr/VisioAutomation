@@ -122,7 +122,6 @@
     <Compile Include="Commands\Set\Set_VisioShapeSheet.cs" />
     <Compile Include="Commands\New\New_VisioBezier.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioDraw.cs" />
-    <Compile Include="Commands\New\New_VisioPieSlice.cs" />
     <Compile Include="Commands\New\New_VisioPieChart.cs" />
     <Compile Include="Commands\New\New_VisioPolyLine.cs" />
     <Compile Include="Commands\Export\Export_VisioPage.cs" />

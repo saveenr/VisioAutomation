@@ -254,7 +254,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<IVisio.Shape> PieSlices(VA.Drawing.Point center,
+        public IList<IVisio.Shape> PieChart(VA.Drawing.Point center,
                                           double radius,
                                           IList<double> values)
         {
@@ -273,7 +273,7 @@ namespace VisioAutomation.Scripting.Commands
             return shapes;
         }
 
-        public IList<IVisio.Shape> DoughnutSlices(VA.Drawing.Point center,
+        public IList<IVisio.Shape> DoughnutChart(VA.Drawing.Point center,
                                   double inner_radius,
                                   double outer_radius,
                                   IList<double> values)
