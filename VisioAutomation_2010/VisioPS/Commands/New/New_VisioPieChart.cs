@@ -3,8 +3,8 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPieSlices")]
-    public class New_VisioPieSlices : VisioPS.VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPieChart")]
+    public class New_VisioPieChart : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }
@@ -28,12 +28,12 @@ namespace VisioPS.Commands
 
             if (this.InnerRadius <= 0)
             {
-                var shapes = scriptingsession.Draw.PieSlices(center, this.Radius, this.Values);
+                var shapes = scriptingsession.Draw.PieChart(center, this.Radius, this.Values);
                 this.WriteObject(shapes, false);
             }
             else
             {
-                var shapes = scriptingsession.Draw.DoughnutSlices(center, this.InnerRadius, this.Radius, this.Values);
+                var shapes = scriptingsession.Draw.DoughnutChart(center, this.InnerRadius, this.Radius, this.Values);
                 this.WriteObject(shapes, false);                
             }
         }

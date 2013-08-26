@@ -142,7 +142,7 @@ namespace TestVisioAutomation
             var center = new VA.Drawing.Point(2, 2);
             double radius = 1.0;
             double[] values = new[] {1.0, 2.0, 3.0, 4.0};
-            var shapes = ss.Draw.PieSlices(center, radius, values);
+            var shapes = ss.Draw.PieChart(center, radius, values);
             ss.Document.Close(true);
         }
 
