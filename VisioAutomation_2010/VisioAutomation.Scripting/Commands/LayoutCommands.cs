@@ -206,36 +206,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Stack(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double space)
-        {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
-
-            if (space < 0.0)
-            {
-                throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
-            }
-
-            int shape_count = this.GetTargetSelection(target_shapes);
-            if (shape_count < 2)
-            {
-                return;
-            }
-            
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Stack Shapes"))
-            {
-                if (axis == VA.Drawing.Axis.YAxis)
-                {
-                    Align(null,VA.Drawing.AlignmentHorizontal.Center);
-                }
-                else
-                {
-                    Align(null, VA.Drawing.AlignmentVertical.Center);
-                }
-                Distribute(null, axis, space);
-            }
-        }
-
         public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
             this.CheckVisioApplicationAvailable();

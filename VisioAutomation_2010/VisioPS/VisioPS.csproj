@@ -141,7 +141,6 @@
     <Compile Include="enums\ParagraphHorizontalAlignment.cs" />
     <Compile Include="Commands\Remove\Remove_VisioControl.cs" />
     <Compile Include="Commands\Set\Set_VisioUserDefinedCell.cs" />
-    <Compile Include="Commands\Invoke\Invoke_VisioStackShape.cs" />
     <Compile Include="enums\TextVerticalAlignment.cs" />
     <Compile Include="Commands\Connect\Connect_VisioApplication.cs" />
     <Compile Include="Commands\Get\Get_VisioDirectedEdge.cs" />
