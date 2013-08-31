@@ -73,7 +73,7 @@ namespace VisioPowerTools2010
             var ss = Globals.ThisAddIn.ScriptingSession;
             if (this.ExportFormat == enumExportFormat.ExportSVGXHTML)
             {
-                ss.Export.ExportSelectionToSVGXHTML(filename);                
+                ss.Export.SelectionToSVGXHTML(filename);                
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {

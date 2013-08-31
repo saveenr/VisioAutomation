@@ -130,7 +130,7 @@ namespace VisioPowerTools2010
 
         private void cmd_copy_text()
         {
-            var shape_text = this.scriptingsession.Text.GetText(null);
+            var shape_text = this.scriptingsession.Text.Get(null);
             var text = string.Join("\r\n", shape_text) + "\r\n";
             Clipboard.SetText(text);
         }
