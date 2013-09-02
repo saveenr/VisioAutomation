@@ -32,7 +32,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var old_selection = this.Session.Selection.EnumShapes().ToList();
 
-            this.Session.Selection.SelectNone();
+            this.Session.Selection.None();
             var application = this.Session.VisioApplication;
             var active_page = application.ActivePage;
             active_page.Export(filename);
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
                     this.Session.WriteUser( "file {0}", page_filname);
                     page_filname = System.IO.Path.Combine(pbase, page_filname);
                     active_window.Page = page;
-                    this.Session.Selection.SelectNone();
+                    this.Session.Selection.None();
                     page.Export(page_filname);
                 }
             active_window.Page = old_page;

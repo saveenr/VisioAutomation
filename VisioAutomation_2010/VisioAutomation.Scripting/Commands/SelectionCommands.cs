@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
             return selection;
         }
 
-        public void SelectAll()
+        public void All()
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -56,7 +56,7 @@ namespace VisioAutomation.Scripting.Commands
             active_window.SelectAll();
         }
 
-        public void SelectInvert()
+        public void Invert()
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -95,7 +95,7 @@ namespace VisioAutomation.Scripting.Commands
             window.Select(shapes_to_select, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void SelectNone()
+        public void None()
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

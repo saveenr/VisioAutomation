@@ -26,7 +26,7 @@ namespace TestVisioAutomation
             var s2 = ss.Draw.Rectangle(2, 3, 2.5, 3.5);
             var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             ss.Selection.Select(s1);
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);
@@ -51,7 +51,7 @@ namespace TestVisioAutomation
             var s2 = ss.Draw.Rectangle(2, 3, 2.5, 3.5);
             var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             ss.Selection.Select(s1);
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);

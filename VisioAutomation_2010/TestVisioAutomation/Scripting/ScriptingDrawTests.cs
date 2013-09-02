@@ -140,12 +140,14 @@ namespace TestVisioAutomation
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
 
-            double[] values = new[] {1.0, 2.0, 3.0, 4.0};
-            var chart = new VA.Layout.Models.Radial.PieChart(values);
+            var chart = new VA.Layout.Models.Radial.PieChart();
             chart.Radius = 1.0;
             chart.Center = new VA.Drawing.Point(2, 2);
-            var shapes = ss.Draw.PieChart(chart);
-            ss.Document.Close(true);
+            chart.DataPoints.Add( new VA.Layout.Models.Radial.DataPoint(1.0));
+            chart.DataPoints.Add(new VA.Layout.Models.Radial.DataPoint(2.0));
+            chart.DataPoints.Add(new VA.Layout.Models.Radial.DataPoint(3.0));
+            chart.DataPoints.Add(new VA.Layout.Models.Radial.DataPoint(4.0));
+            ss.Draw.PieChart(chart);
         }
 
         [TestMethod]

@@ -18,19 +18,19 @@ namespace TestVisioAutomation
             var shape_oval1 = ss.Draw.Oval(0.2, 1, 3.8, 2);
             var shape_oval2 = ss.Draw.Oval(new VA.Drawing.Point(2, 2), 0.5);
 
-            ss.Selection.SelectAll();
+            ss.Selection.All();
             var s0 = ss.Selection.GetShapes();
             Assert.AreEqual(4, s0.Count);
 
             var g = ss.Layout.Group();
-            ss.Selection.SelectNone();
-            ss.Selection.SelectAll();
+            ss.Selection.None();
+            ss.Selection.All();
 
             var s1 = ss.Selection.GetShapes();
             Assert.AreEqual(1, s1.Count);
 
             ss.Layout.Ungroup(null);
-            ss.Selection.SelectAll();
+            ss.Selection.All();
             var s2 = ss.Selection.GetShapes();
             Assert.AreEqual(4, s2.Count);
             ss.Document.Close(true);

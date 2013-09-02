@@ -29,11 +29,23 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             var center = new VA.Drawing.Point(this.X0, this.Y0);
 
-            var chart = new VA.Layout.Models.Radial.PieChart(this.Values);
+            var chart = new VA.Layout.Models.Radial.PieChart();
             chart.InnerRadius = this.InnerRadius;
             chart.Radius = this.Radius;
             chart.Center = new VA.Drawing.Point(this.X0, this.Y0);
-            chart.Labels = this.Labels;
+
+            for (int i = 0; i < this.Values.Length; i++)
+            {
+                var dp = new VA.Layout.Models.Radial.DataPoint();
+                dp.Value = this.Values[i];
+                if (i < this.Labels.Length)
+                {
+                    dp.Label = this.Labels[i];
+                }
+
+                chart.DataPoints.Add(dp);
+            }
+
             this.WriteObject(chart);
         }
     }

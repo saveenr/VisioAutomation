@@ -31,15 +31,15 @@ namespace VisioPS.Commands
             {
                 if (this.Operation == VisioPS.SelectionOperation.All)
                 {
-                    scriptingsession.Selection.SelectAll();
+                    scriptingsession.Selection.All();
                 }
                 else if (this.Operation == VisioPS.SelectionOperation.None)
                 {
-                    scriptingsession.Selection.SelectNone();
+                    scriptingsession.Selection.None();
                 }
                 else if (this.Operation == VisioPS.SelectionOperation.Invert)
                 {
-                    scriptingsession.Selection.SelectInvert();
+                    scriptingsession.Selection.Invert();
                 }
             }
         }

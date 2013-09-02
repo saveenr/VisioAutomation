@@ -7,62 +7,87 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Layout.Models.Radial
 {
+    public class DataPoint
+    {
+        public double Value;
+        public string Label;
+        public string LabelFormat;
+        public IVisio.Shape VisioShape;
+
+        public DataPoint()
+        {
+            
+        }
+
+        public DataPoint(double value)
+        {
+            this.Value = value;
+        }
+    }
+
     public class PieChart
     {
         public double Radius= 1;
         public double InnerRadius = -1;
         public VA.Drawing.Point Center;
-        public List<double> Values;
-        public IList<string> Labels; 
-
-        public PieChart(IList<double> values)
+        public List<DataPoint> DataPoints;
+ 
+        public PieChart()
         {
-            this.Values = values.ToList();
+            this.DataPoints = new List<DataPoint>();
         }
 
-        public List<IVisio.Shape> Render( IVisio.Page page)
+        public void Render( IVisio.Page page)
         {
+            var values = this.DataPoints.Select(p => p.Value).ToList();
+            var shapes = new List<IVisio.Shape>(values.Count);
             if (this.InnerRadius <= 0)
             {
-                var slices = VA.Layout.Models.Radial.PieSlice.GetSlicesFromValues(this.Center, this.Radius, this.Values);
-                var shapes = new List<IVisio.Shape>(slices.Count);
+                var slices = VA.Layout.Models.Radial.PieSlice.GetSlicesFromValues(this.Center, this.Radius, values);
                 foreach (var slice in slices)
                 {
-                    var shape = slice.Render(page);
-                    shapes.Add(shape);
-                    this.SetText(shapes);
+                    shapes.Add(slice.Render(page));
                 }
-                return shapes;
             }
             else
             {
-                var slices = VA.Layout.Models.Radial.DoughnutSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, this.Values);
-                var shapes = new List<IVisio.Shape>(slices.Count);
+                var slices = VA.Layout.Models.Radial.DoughnutSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
                 foreach (var slice in slices)
                 {
-                    var shape = slice.Render(page);
-                    shapes.Add(shape);
-                    this.SetText(shapes);
+                    shapes.Add(slice.Render(page));
                 }
-                return shapes;
-            }
-        }
-
-        private void SetText(List<IVisio.Shape> shapes)
-        {
-            if (this.Labels == null)
-            {
-                return;
             }
 
-            for (int i = 0; i < shapes.Count; i++)
+            for (int i = 0; i < this.DataPoints.Count; i++)
             {
-                if (i < this.Labels.Count)
+                var dp = this.DataPoints[i];
+                var shape = shapes[i];
+
+                dp.VisioShape = shape;
+                if (dp.Label != null)
                 {
-                    string label = this.Labels[i];
-                    var shape = shapes[i];
-                    shape.Text = label;
+                    if (dp.LabelFormat != null)
+                    {
+                        string formatted_label = string.Format(dp.Label, dp.Label);
+                        dp.VisioShape.Text = formatted_label;
+                    }
+                    else
+                    {
+                        dp.VisioShape.Text = dp.Label;
+                    }
                 }
+            }
+
+            var allshapes = this.DataPoints.Select(dp => dp.VisioShape).Where(s => s != null).ToList();
+            if (allshapes.Count > 0)
+            {
+                var app = page.Application;
+                var win = app.ActiveWindow;
+                win.DeselectAll();
+                win.DeselectAll();
+                win.Select(shapes, IVisio.VisSelectArgs.visSelect);
+                var sel = win.Selection;
+                sel.Group();                
             }
         }
     }

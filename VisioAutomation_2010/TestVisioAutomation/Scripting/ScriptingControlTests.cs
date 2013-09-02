@@ -19,7 +19,7 @@ namespace TestVisioAutomation
 
             var s3 = ss.Draw.Rectangle(1.5, 3.5, 2, 4.0);
 
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             ss.Selection.Select(s1);
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);

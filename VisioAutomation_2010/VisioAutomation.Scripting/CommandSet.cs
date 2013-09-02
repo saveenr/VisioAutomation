@@ -103,7 +103,7 @@ namespace VisioAutomation.Scripting
             this.Session.WriteVerbose("GetTargetSelection: Targeting specified shapes");
             this.Session.WriteVerbose("GetTargetSelection: Number of shapes specified = {0}", shapes.Count);
             this.Session.WriteVerbose("GetTargetSelection: Clearing Selection");
-            this.Session.Selection.SelectNone();
+            this.Session.Selection.None();
             this.Session.WriteVerbose("GetTargetSelection: Setting selection");
             this.Session.Selection.Select(shapes);
             int n2 = this.Session.Selection.Count();

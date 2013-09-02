@@ -254,15 +254,14 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<IVisio.Shape> PieChart(VA.Layout.Models.Radial.PieChart chart)
+        public void PieChart(VA.Layout.Models.Radial.PieChart chart)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var shapes = chart.Render(page);
-            return shapes;
+            chart.Render(page);
         }
 
         public void OrgChart(ORGCHARTLAYOUT.Drawing drawing)

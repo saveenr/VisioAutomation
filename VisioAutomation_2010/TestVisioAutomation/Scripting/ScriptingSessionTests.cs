@@ -49,13 +49,13 @@ namespace TestVisioAutomation
             Assert.IsFalse(ss.Selection.HasShapes(2));
 
             ss.Draw.Rectangle(2, 2, 3, 3);
-            ss.Selection.SelectAll();
+            ss.Selection.All();
             Assert.IsTrue(ss.HasActiveDrawing);
             Assert.IsTrue(ss.Selection.HasShapes());
             Assert.IsTrue(ss.Selection.HasShapes(1));
             Assert.IsTrue(ss.Selection.HasShapes(2));
 
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             Assert.IsTrue(ss.HasActiveDrawing);
             Assert.IsFalse(ss.Selection.HasShapes());
 

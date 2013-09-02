@@ -21,7 +21,7 @@ namespace TestVisioAutomation
             var s3 = page1.DrawRectangle(0, 1, 1, 2);
             var s4 = page1.DrawRectangle(1, 1, 2, 2);
 
-            ss.Selection.SelectAll();
+            ss.Selection.All();
 
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".html");
 

@@ -22,7 +22,7 @@ namespace TestVisioAutomation
 
             var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             ss.Selection.Select(s1);
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);
@@ -31,7 +31,7 @@ namespace TestVisioAutomation
             var connec_stencil = ss.Document.OpenStencil("connec_u.vss");
             var master = ss.Master.Get("Dynamic Connector", connec_stencil);
             var directed_connectors = ss.Connection.Connect(master,new [] { s1,s2},new [] { s2,s3});
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             ss.Selection.Select(directed_connectors);
 
             IVisio.VisGetSetArgs flags = 0;
@@ -64,7 +64,7 @@ namespace TestVisioAutomation
 
             var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             ss.Selection.Select(s1);
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);

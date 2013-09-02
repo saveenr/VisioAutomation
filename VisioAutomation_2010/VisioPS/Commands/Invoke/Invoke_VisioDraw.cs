@@ -57,8 +57,7 @@ namespace VisioPS.Commands
             }
             else if (this.PieChart != null)
             {
-                var shapes = scriptingsession.Draw.PieChart(this.PieChart);
-                this.WriteObject(shapes, false);
+                scriptingsession.Draw.PieChart(this.PieChart);
             }
             else
             {

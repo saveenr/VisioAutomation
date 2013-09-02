@@ -28,7 +28,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, x1.Count);
             Assert.IsTrue(x1.ContainsKey(s4));
 
-            ss.Selection.SelectInvert();
+            ss.Selection.Invert();
             var x2 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
             Assert.AreEqual(3, x2.Count);
             Assert.IsTrue(x2.ContainsKey(s1));
