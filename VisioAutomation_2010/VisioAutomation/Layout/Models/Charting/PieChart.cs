@@ -51,7 +51,7 @@ namespace VisioAutomation.Layout.Models.Charting
             }
             else
             {
-                var slices = VA.Layout.Models.Charting.DoughnutSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
+                var slices = VA.Layout.Models.Charting.PieSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
                 foreach (var slice in slices)
                 {
                     shapes.Add(slice.Render(page));

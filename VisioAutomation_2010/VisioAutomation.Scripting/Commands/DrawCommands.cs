@@ -248,7 +248,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var slice = new VA.Layout.Models.Charting.DoughnutSlice(center, inner_radius, outer_radius, start_angle, end_angle);
+                var slice = new VA.Layout.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
             }

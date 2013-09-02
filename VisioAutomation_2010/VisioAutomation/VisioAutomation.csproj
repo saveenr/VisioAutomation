@@ -128,9 +128,7 @@
     <Compile Include="Internal\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
-    <Compile Include="Layout\Models\Charting\DoughnutSlice.cs" />
     <Compile Include="Layout\Models\Charting\Sector.cs" />
-    <Compile Include="Layout\Models\Charting\RadialSlice.cs" />
     <Compile Include="Layout\Models\Charting\PieSlice.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
