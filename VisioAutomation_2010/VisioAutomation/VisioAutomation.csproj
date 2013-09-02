@@ -110,7 +110,7 @@
     <Compile Include="Layout\Models\DirectedGraph\LayoutOptions.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Node.cs" />
     <Compile Include="Layout\Models\DirectedGraph\Shape.cs" />
-    <Compile Include="Layout\Models\Radial\PieChart.cs" />
+    <Compile Include="Layout\Models\Charting\PieChart.cs" />
     <Compile Include="Layout\Models\Tree\ConnectorType.cs" />
     <Compile Include="Layout\PageLayout\CompactTreeLayout.cs" />
     <Compile Include="Layout\PageLayout\CircularLayout.cs" />
@@ -128,10 +128,10 @@
     <Compile Include="Internal\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
     <Compile Include="Format\ShapeFormatCells.cs" />
-    <Compile Include="Layout\Models\Radial\DoughnutSlice.cs" />
-    <Compile Include="Layout\Models\Radial\Sector.cs" />
-    <Compile Include="Layout\Models\Radial\RadialSlice.cs" />
-    <Compile Include="Layout\Models\Radial\PieSlice.cs" />
+    <Compile Include="Layout\Models\Charting\DoughnutSlice.cs" />
+    <Compile Include="Layout\Models\Charting\Sector.cs" />
+    <Compile Include="Layout\Models\Charting\RadialSlice.cs" />
+    <Compile Include="Layout\Models\Charting\PieSlice.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
     <Compile Include="Layout\Models\SimpleTextDoc\TextDocumentBuilder.cs" />
