@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace VisioAutomation.Layout.Models.OrgChart
+namespace VisioAutomation.Models.OrgChart
 {
     public class NodeList : IEnumerable<Node>
     {

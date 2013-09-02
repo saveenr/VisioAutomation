@@ -1,7 +1,7 @@
 ﻿using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
-using GRID = VisioAutomation.Layout.Models.Grid;
+using GRID = VisioAutomation.Models.Grid;
 
 namespace VisioPS.Commands
 {

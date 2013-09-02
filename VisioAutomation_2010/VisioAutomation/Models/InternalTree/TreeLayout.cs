@@ -25,7 +25,7 @@ using VA = VisioAutomation;
  * 
  * */
 
-namespace VisioAutomation.Layout.Models.InternalTree
+namespace VisioAutomation.Models.InternalTree
 {
     internal class TreeLayout<T>
     {

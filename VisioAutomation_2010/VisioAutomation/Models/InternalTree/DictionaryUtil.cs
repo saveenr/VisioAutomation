@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioAutomation.Layout.Models.InternalTree
+namespace VisioAutomation.Models.InternalTree
 {
     static class DictionaryUtil
     {

@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using DG = VisioAutomation.Layout.Models.DirectedGraph;
+using DG = VisioAutomation.Models.DirectedGraph;
 
 namespace TestVisioAutomation
 {
@@ -30,7 +30,7 @@ namespace TestVisioAutomation
         {
             var directed_graph_drawing = this.create_sample_graph();
 
-            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
+            var options = new VA.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
@@ -44,7 +44,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
-            var d = new VA.Layout.Models.DirectedGraph.Drawing();
+            var d = new VA.Models.DirectedGraph.Drawing();
 
             var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
@@ -54,7 +54,7 @@ namespace TestVisioAutomation
             n0.CustomProperties["p2"] = new VA.CustomProperties.CustomPropertyCells("v2");
             n0.CustomProperties["p3"] = new VA.CustomProperties.CustomPropertyCells("v3");
 
-            var options = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
+            var options = new VA.Models.DirectedGraph.MSAGLLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();

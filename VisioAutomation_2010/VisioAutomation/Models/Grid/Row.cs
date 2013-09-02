@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VisioAutomation.Layout.Models.Grid
+namespace VisioAutomation.Models.Grid
 {
     public class Row
     {

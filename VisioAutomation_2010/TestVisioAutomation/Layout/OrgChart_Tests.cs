@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
+using OCMODEL = VisioAutomation.Models.OrgChart;
 
 namespace TestVisioAutomation
 {

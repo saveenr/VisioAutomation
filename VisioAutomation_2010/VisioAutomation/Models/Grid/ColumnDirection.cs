@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Layout.Models.Grid
+﻿namespace VisioAutomation.Models.Grid
 {
     public enum ColumnDirection
     {

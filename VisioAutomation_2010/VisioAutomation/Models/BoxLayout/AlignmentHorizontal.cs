@@ -1,4 +1,4 @@
-namespace VisioAutomation.Layout.Models.BoxLayout
+namespace VisioAutomation.Models.BoxLayout
 {
     public enum AlignmentHorizontal
     {

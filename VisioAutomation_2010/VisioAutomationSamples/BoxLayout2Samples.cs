@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BOXMODEL = VisioAutomation.Layout.Models.BoxLayout;
+using BOXMODEL = VisioAutomation.Models.BoxLayout;
 
 namespace VisioAutomationSamples
 {

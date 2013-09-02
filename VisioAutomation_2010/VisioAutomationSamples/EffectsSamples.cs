@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using GRIDMODEL = VisioAutomation.Layout.Models.Grid;
+using GRIDMODEL = VisioAutomation.Models.Grid;
 
 namespace VisioAutomationSamples
 {

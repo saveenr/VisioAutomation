@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Layout.Models.ContainerLayout
+﻿namespace VisioAutomation.Models.ContainerLayout
 {
     public class LayoutOptions
     {

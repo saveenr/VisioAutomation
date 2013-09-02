@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout.Models.Charting
+namespace VisioAutomation.Models.Charting
 {
     public class DataPoint
     {
@@ -43,7 +43,7 @@ namespace VisioAutomation.Layout.Models.Charting
             var shapes = new List<IVisio.Shape>(values.Count);
             if (this.InnerRadius <= 0)
             {
-                var slices = VA.Layout.Models.Charting.PieSlice.GetSlicesFromValues(this.Center, this.Radius, values);
+                var slices = VA.Models.Charting.PieSlice.GetSlicesFromValues(this.Center, this.Radius, values);
                 foreach (var slice in slices)
                 {
                     shapes.Add(slice.Render(page));
@@ -51,7 +51,7 @@ namespace VisioAutomation.Layout.Models.Charting
             }
             else
             {
-                var slices = VA.Layout.Models.Charting.PieSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
+                var slices = VA.Models.Charting.PieSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
                 foreach (var slice in slices)
                 {
                     shapes.Add(slice.Render(page));

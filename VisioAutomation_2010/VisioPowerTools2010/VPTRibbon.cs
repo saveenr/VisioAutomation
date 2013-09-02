@@ -265,10 +265,10 @@ namespace VisioPowerTools2010
             var text = form.GraphText.Trim();
             var lines = text.Split(new[] {'\n'}).Select(s => s.Trim()).Where( s=>s.Length>0).ToList();
 
-            var model = new VA.Layout.Models.DirectedGraph.Drawing();
+            var model = new VA.Models.DirectedGraph.Drawing();
 
             int cn = 0;
-            var dic = new Dictionary<string, VA.Layout.Models.DirectedGraph.Shape>();
+            var dic = new Dictionary<string, VA.Models.DirectedGraph.Shape>();
             foreach (var line in lines)
             {
                 var tokens = line.Split(new[] {"->"}, System.StringSplitOptions.RemoveEmptyEntries);
@@ -292,8 +292,8 @@ namespace VisioPowerTools2010
                     string from = tokens[0];
                     string to = tokens[1];
 
-                    VA.Layout.Models.DirectedGraph.Shape fromnode;
-                    VA.Layout.Models.DirectedGraph.Shape tonode;
+                    VA.Models.DirectedGraph.Shape fromnode;
+                    VA.Models.DirectedGraph.Shape tonode;
                     if (!dic.ContainsKey(from))
                     {
                         fromnode = model.AddShape(from, from, "basic_u.vss", "rectangle");

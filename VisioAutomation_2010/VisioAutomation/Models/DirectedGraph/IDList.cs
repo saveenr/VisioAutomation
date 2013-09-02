@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 using IVisio=Microsoft.Office.Interop.Visio;
 using System.Collections;
 
-namespace VisioAutomation.Layout.Models.DirectedGraph
+namespace VisioAutomation.Models.DirectedGraph
 {
     public class IDList<T> : IEnumerable<T> where T : class
     {

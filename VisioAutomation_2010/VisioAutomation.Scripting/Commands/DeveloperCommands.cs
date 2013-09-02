@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using TREEMODEL = VisioAutomation.Layout.Models.Tree;
+using TREEMODEL = VisioAutomation.Models.Tree;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -35,7 +35,7 @@ namespace VisioAutomation.Scripting.Commands
             this.CheckVisioApplicationAvailable();
 
             var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
+            var docbuilder = new VA.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextUtil.Join(helpstr,"\r\n",lines);
 
-                var docpage = new VisioAutomation.Layout.Models.SimpleTextDoc.TextPage();
+                var docpage = new VisioAutomation.Models.SimpleTextDoc.TextPage();
                 docpage.Title = cmdset_prop.Name + " commands";
                 docpage.Body = helpstr.ToString();
                 docpage.Name = cmdset_prop.Name + " commands";
@@ -98,7 +98,7 @@ namespace VisioAutomation.Scripting.Commands
             this.CheckVisioApplicationAvailable();
             
             var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
+            var docbuilder = new VA.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
             //docbuilder.BodyParaSpacingAfter = 2.0;
             docbuilder.BodyTextSize = 8.0;
             var helpstr = new System.Text.StringBuilder();
@@ -120,7 +120,7 @@ namespace VisioAutomation.Scripting.Commands
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
                     }
 
-                    var docpage = new VA.Layout.Models.SimpleTextDoc.TextPage();
+                    var docpage = new VA.Models.SimpleTextDoc.TextPage();
                     docpage.Title = enum_.Name;
                     docpage.Body = helpstr.ToString();
                     if (chunkcount == 0)

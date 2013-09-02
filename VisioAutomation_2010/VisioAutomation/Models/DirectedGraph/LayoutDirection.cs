@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Layout.Models.DirectedGraph
+﻿namespace VisioAutomation.Models.DirectedGraph
 {
     public enum LayoutDirection
     {

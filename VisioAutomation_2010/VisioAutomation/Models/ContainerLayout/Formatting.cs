@@ -1,7 +1,7 @@
 ﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Layout.Models.ContainerLayout
+namespace VisioAutomation.Models.ContainerLayout
 {
     public class Formatting
     {

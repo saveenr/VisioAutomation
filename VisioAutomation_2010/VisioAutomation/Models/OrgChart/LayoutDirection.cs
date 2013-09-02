@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Layout.Models.OrgChart
+﻿namespace VisioAutomation.Models.OrgChart
 {
     public enum LayoutDirection
     {

@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout.Models.ContainerLayout
+namespace VisioAutomation.Models.ContainerLayout
 {
     public class ContainerLayout
     {

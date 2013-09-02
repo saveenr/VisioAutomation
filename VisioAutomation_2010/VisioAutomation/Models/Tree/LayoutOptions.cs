@@ -1,6 +1,6 @@
 using VA=VisioAutomation;
 
-namespace VisioAutomation.Layout.Models.Tree
+namespace VisioAutomation.Models.Tree
 {
     public class LayoutOptions
     {

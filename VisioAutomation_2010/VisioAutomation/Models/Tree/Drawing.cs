@@ -2,12 +2,12 @@
 using VA=VisioAutomation;
 using IVisio= Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Layout.Models.Tree
+namespace VisioAutomation.Models.Tree
 {
     public class Drawing
     {
         public Node Root { get; set; }
-        public VA.Layout.Models.Tree.LayoutOptions LayoutOptions;
+        public VA.Models.Tree.LayoutOptions LayoutOptions;
         
         public Drawing()
         {

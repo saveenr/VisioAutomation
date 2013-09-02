@@ -3,10 +3,10 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using GRIDLAYOUT = VisioAutomation.Layout.Models.Grid;
-using RADIALLAYOUT = VisioAutomation.Layout.Models.Charting;
-using ORGCHARTLAYOUT = VisioAutomation.Layout.Models.OrgChart;
-using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
+using GRIDLAYOUT = VisioAutomation.Models.Grid;
+using RADIALLAYOUT = VisioAutomation.Models.Charting;
+using ORGCHARTLAYOUT = VisioAutomation.Models.OrgChart;
+using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -230,7 +230,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var slice = new VA.Layout.Models.Charting.PieSlice(center, radius, start_angle, end_angle);
+                var slice = new VA.Models.Charting.PieSlice(center, radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
             }
@@ -248,13 +248,13 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var slice = new VA.Layout.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
+                var slice = new VA.Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
             }
         }
 
-        public void PieChart(VA.Layout.Models.Charting.PieChart chart)
+        public void PieChart(VA.Models.Charting.PieChart chart)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

@@ -2,7 +2,7 @@
 using VA=VisioAutomation;
 
 
-namespace VisioAutomation.Layout.Models.Grid
+namespace VisioAutomation.Models.Grid
 {
     public class Node
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace VisioAutomation.Layout.Models.Tree
+namespace VisioAutomation.Models.Tree
 {
     public class NodeList  : IEnumerable<Node>
     {

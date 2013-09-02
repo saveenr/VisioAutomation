@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
+using OCMODEL = VisioAutomation.Models.OrgChart;
 
 namespace VisioAutomationSamples
 {

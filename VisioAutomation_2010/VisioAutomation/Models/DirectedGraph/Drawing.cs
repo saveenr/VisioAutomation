@@ -4,7 +4,7 @@ using System.Linq;
 using VA = VisioAutomation;
 using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Layout.Models.DirectedGraph
+namespace VisioAutomation.Models.DirectedGraph
 {   
     public class Drawing
     {
@@ -78,9 +78,9 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             page_node.Render(page);
         }
 
-        public void Render(IVisio.Page page, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)
+        public void Render(IVisio.Page page, VA.Models.DirectedGraph.MSAGLLayoutOptions options)
         {
-            VA.Layout.Models.DirectedGraph.MSAGLRenderer.Render(page, this, options);
+            VA.Models.DirectedGraph.MSAGLRenderer.Render(page, this, options);
         }
     }
 }

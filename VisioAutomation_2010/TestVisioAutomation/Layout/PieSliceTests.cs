@@ -20,7 +20,7 @@ namespace TestVisioAutomation
             var center = new VA.Drawing.Point(4, 5);
             double radius = 1.0;
             var values = new[] {1.0, 2.0};
-            var slices = VA.Layout.Models.Charting.PieSlice.GetSlicesFromValues(center, radius, values);
+            var slices = VA.Models.Charting.PieSlice.GetSlicesFromValues(center, radius, values);
 
             var shapes = new IVisio.Shape[values.Length];
             for (int i=0 ;i<values.Length;i++)

@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Layout.Models.Tree
+﻿namespace VisioAutomation.Models.Tree
 {
     public enum ConnectorType
     {

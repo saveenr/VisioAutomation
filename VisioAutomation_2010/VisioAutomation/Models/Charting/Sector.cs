@@ -1,7 +1,7 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Layout.Models.Charting
+namespace VisioAutomation.Models.Charting
 {
     public struct Sector
     {

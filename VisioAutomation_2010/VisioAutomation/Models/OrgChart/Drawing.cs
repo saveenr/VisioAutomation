@@ -3,7 +3,7 @@ using VA=VisioAutomation;
 using IVisio= Microsoft.Office.Interop.Visio;
 using VAL = VisioAutomation.Layout;
 
-namespace VisioAutomation.Layout.Models.OrgChart
+namespace VisioAutomation.Models.OrgChart
 {
     public class Drawing
     {

@@ -76,7 +76,7 @@ namespace TestVisioAutomation
             var stencildoc = ss.Document.Get(stencil);
             var master = ss.Master.Get(mastername, stencildoc);
 
-            var grid = new VA.Layout.Models.Grid.GridLayout(cols, rows, cellsize, master);
+            var grid = new VA.Models.Grid.GridLayout(cols, rows, cellsize, master);
             grid.Origin = new VA.Drawing.Point(0, 4);
             ss.Document.Close(true);
         }
@@ -140,13 +140,13 @@ namespace TestVisioAutomation
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
 
-            var chart = new VA.Layout.Models.Charting.PieChart();
+            var chart = new VA.Models.Charting.PieChart();
             chart.Radius = 1.0;
             chart.Center = new VA.Drawing.Point(2, 2);
-            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(1.0));
-            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(2.0));
-            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(3.0));
-            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(4.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
             ss.Draw.PieChart(chart);
         }
 

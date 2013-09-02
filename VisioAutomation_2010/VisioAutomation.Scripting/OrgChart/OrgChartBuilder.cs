@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using VA = VisioAutomation;
-using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
+using OCMODEL = VisioAutomation.Models.OrgChart;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.OrgChart

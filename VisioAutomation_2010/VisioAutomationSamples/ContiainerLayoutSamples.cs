@@ -1,7 +1,7 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using CONTMODEL = VisioAutomation.Layout.Models.ContainerLayout;
+using CONTMODEL = VisioAutomation.Models.ContainerLayout;
 
 namespace VisioAutomationSamples
 {

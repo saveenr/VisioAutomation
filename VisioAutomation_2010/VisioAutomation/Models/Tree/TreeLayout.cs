@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout.Models.Tree
+namespace VisioAutomation.Models.Tree
 {
     public class TreeLayout
     {
@@ -20,10 +20,10 @@ namespace VisioAutomation.Layout.Models.Tree
             this.LayoutOptions = new LayoutOptions();
         }
 
-        private VA.Layout.Models.InternalTree.Node<object> node_to_layout_node(Node n)
+        private VA.Models.InternalTree.Node<object> node_to_layout_node(Node n)
         {
             var nodesize = n.Size.GetValueOrDefault(this.LayoutOptions.DefaultNodeSize);
-            var newnode = new VA.Layout.Models.InternalTree.Node<object>(nodesize, n);
+            var newnode = new VA.Models.InternalTree.Node<object>(nodesize, n);
             return newnode;
         }
 
@@ -54,7 +54,7 @@ namespace VisioAutomation.Layout.Models.Tree
                 (p, c) => p.AddChild(c));
 
             // Perform the layout
-            var layout = new VA.Layout.Models.InternalTree.TreeLayout<object>();
+            var layout = new VA.Models.InternalTree.TreeLayout<object>();
 
             layout.Options.Direction = map_direction2(this.LayoutOptions.Direction);
             layout.Options.LevelSeparation = 1;
@@ -93,7 +93,7 @@ namespace VisioAutomation.Layout.Models.Tree
             // For each OrgChart object, attach the shape that corresponds to it
             foreach (int i in Enumerable.Range(0, treenodes.Count))
             {
-                var tree_node = (VA.Layout.Models.Tree.Node)treenodes[i].Data;
+                var tree_node = (VA.Models.Tree.Node)treenodes[i].Data;
                 DOM.Shape master_node = master_nodes[i];
                 tree_node.DOMNode = master_node;
 
@@ -158,28 +158,28 @@ namespace VisioAutomation.Layout.Models.Tree
             }
         }
 
-        private VA.Layout.Models.InternalTree.LayoutDirection map_direction2(LayoutDirection input_dir)
+        private VA.Models.InternalTree.LayoutDirection map_direction2(LayoutDirection input_dir)
         {
-            VA.Layout.Models.InternalTree.LayoutDirection dir;
+            VA.Models.InternalTree.LayoutDirection dir;
             if (input_dir == LayoutDirection.Down)
             {
-                dir = VA.Layout.Models.InternalTree.LayoutDirection.Down;
+                dir = VA.Models.InternalTree.LayoutDirection.Down;
             }
             else if (input_dir == LayoutDirection.Up)
             {
-                dir = VA.Layout.Models.InternalTree.LayoutDirection.Up;
+                dir = VA.Models.InternalTree.LayoutDirection.Up;
             }
             else if (input_dir == LayoutDirection.Left)
             {
-                dir = VA.Layout.Models.InternalTree.LayoutDirection.Left;
+                dir = VA.Models.InternalTree.LayoutDirection.Left;
             }
             else if (input_dir == LayoutDirection.Right)
             {
-                dir = VA.Layout.Models.InternalTree.LayoutDirection.Right;
+                dir = VA.Models.InternalTree.LayoutDirection.Right;
             }
             else
             {
-                dir = VA.Layout.Models.InternalTree.LayoutDirection.Down;
+                dir = VA.Models.InternalTree.LayoutDirection.Down;
             }
             return dir;
         }

@@ -1,6 +1,6 @@
 ﻿using VA=VisioAutomation;
 
-namespace VisioAutomation.Layout.Models.DirectedGraph
+namespace VisioAutomation.Models.DirectedGraph
 {
     public class Connector : Node
     {

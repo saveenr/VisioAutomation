@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Layout.Models.BoxLayout
+namespace VisioAutomation.Models.BoxLayout
 {
     public class Container : Node, IEnumerable<Node>
     {
@@ -199,15 +199,15 @@ namespace VisioAutomation.Layout.Models.BoxLayout
                     if (excess_width>0)
                     {
 
-                        if (c.HAlignToParent == VA.Layout.Models.BoxLayout.AlignmentHorizontal.Left)
+                        if (c.HAlignToParent == VA.Models.BoxLayout.AlignmentHorizontal.Left)
                         {
                             align_delta_x = 0;
                         }
-                        else if (c.HAlignToParent == VA.Layout.Models.BoxLayout.AlignmentHorizontal.Right)
+                        else if (c.HAlignToParent == VA.Models.BoxLayout.AlignmentHorizontal.Right)
                         {
                             align_delta_x = excess_width;
                         }
-                        else if (c.HAlignToParent == VA.Layout.Models.BoxLayout.AlignmentHorizontal.Center)
+                        else if (c.HAlignToParent == VA.Models.BoxLayout.AlignmentHorizontal.Center)
                         {
                             align_delta_x = excess_width / 2;
                         }
@@ -243,15 +243,15 @@ namespace VisioAutomation.Layout.Models.BoxLayout
                     // for any alignment
                     if (excess_height > 0)
                     {
-                        if (c.VAlignToParent == VA.Layout.Models.BoxLayout.AlignmentVertical.Bottom)
+                        if (c.VAlignToParent == VA.Models.BoxLayout.AlignmentVertical.Bottom)
                         {
                             align_delta_y = 0;
                         }
-                        else if (c.VAlignToParent == VA.Layout.Models.BoxLayout.AlignmentVertical.Top)
+                        else if (c.VAlignToParent == VA.Models.BoxLayout.AlignmentVertical.Top)
                         {
                             align_delta_y = excess_height;
                         }
-                        else if (c.VAlignToParent == VA.Layout.Models.BoxLayout.AlignmentVertical.Center)
+                        else if (c.VAlignToParent == VA.Models.BoxLayout.AlignmentVertical.Center)
                         {
                             align_delta_y = excess_height / 2;
                         }

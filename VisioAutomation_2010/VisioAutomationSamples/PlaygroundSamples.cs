@@ -2,7 +2,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
-using GRIDMODEL = VisioAutomation.Layout.Models.Grid;
+using GRIDMODEL = VisioAutomation.Models.Grid;
 
 namespace VisioAutomationSamples
 {

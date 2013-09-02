@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 using VA=VisioAutomation;
 using IVisio=Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Layout.Models.Grid
+namespace VisioAutomation.Models.Grid
 {
     public class GridLayout
     {

@@ -4,9 +4,9 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using MG = Microsoft.Msagl;
 using VA = VisioAutomation;
-using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
+using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
-namespace VisioAutomation.Layout.Models.DirectedGraph
+namespace VisioAutomation.Models.DirectedGraph
 {
     class MSAGLRenderer
     {
@@ -498,9 +498,9 @@ namespace VisioAutomation.Layout.Models.DirectedGraph
             }
         }
 
-        public static void Render(IVisio.Page page, VisioAutomation.Layout.Models.DirectedGraph.Drawing drawing, DGMODEL.MSAGLLayoutOptions options)
+        public static void Render(IVisio.Page page, VisioAutomation.Models.DirectedGraph.Drawing drawing, DGMODEL.MSAGLLayoutOptions options)
         {
-            var renderer = new VA.Layout.Models.DirectedGraph.MSAGLRenderer();
+            var renderer = new VA.Models.DirectedGraph.MSAGLRenderer();
             renderer.LayoutOptions = options;
             renderer.Render(drawing,page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);

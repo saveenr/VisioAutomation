@@ -9,13 +9,13 @@ namespace VisioPS.Commands
     public class Invoke_VisioDraw : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(ParameterSetName="orgchcart",Position=0,Mandatory = true)]
-        public VA.Layout.Models.OrgChart.Drawing OrgChart { get; set; }
+        public VA.Models.OrgChart.Drawing OrgChart { get; set; }
 
         [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true)]
-        public VA.Layout.Models.Grid.GridLayout GridLayout { get; set; }
+        public VA.Models.Grid.GridLayout GridLayout { get; set; }
 
         [SMA.Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true)]
-        public List<VA.Layout.Models.DirectedGraph.Drawing> DirectedGraphs { get; set; }
+        public List<VA.Models.DirectedGraph.Drawing> DirectedGraphs { get; set; }
 
         [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true)]
         public System.Data.DataTable DataTable { get; set; }
@@ -30,7 +30,7 @@ namespace VisioPS.Commands
         public double CellSpacing { get; set; }
 
         [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true)]
-        public VA.Layout.Models.Charting.PieChart PieChart;
+        public VA.Models.Charting.PieChart PieChart;
 
         protected override void ProcessRecord()
         {
