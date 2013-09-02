@@ -130,11 +130,11 @@ namespace VisioAutomationSamples
 
             directed_graph_drawing.Render(page1);
 
-            var layout_config = new VA.Layout.PageLayout.HierarchyLayout();
-            layout_config.Direction = VA.Layout.PageLayout.Direction.BottomToTop;
-            layout_config.HorizontalAlignment = VA.Layout.PageLayout.HorizontalAlignment.Center;
+            var layout_config = new VA.Pages.PageLayout.HierarchyLayout();
+            layout_config.Direction = VA.Pages.PageLayout.Direction.BottomToTop;
+            layout_config.HorizontalAlignment = VA.Pages.PageLayout.HorizontalAlignment.Center;
             layout_config.AvenueSize = new VA.Drawing.Size(1, 1);
-            layout_config.ConnectorAppearance = VA.Layout.PageLayout.ConnectorAppearance.Curved;
+            layout_config.ConnectorAppearance = VA.Pages.PageLayout.ConnectorAppearance.Curved;
             layout_config.Apply(page1);
 
             page1.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));

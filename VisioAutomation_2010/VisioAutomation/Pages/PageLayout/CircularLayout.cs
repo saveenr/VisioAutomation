@@ -1,7 +1,7 @@
 ﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Layout.PageLayout
+namespace VisioAutomation.Pages.PageLayout
 {
     public class CircularLayout : Layout
     {

@@ -340,9 +340,9 @@ namespace VisioPowerTools2010
     
             model.Render(page);
 
-            var pl = new VA.Layout.PageLayout.FlowchartLayout();
-            pl.ConnectorStyle = VisioAutomation.Layout.PageLayout.ConnectorStyle.Flowchart;
-            pl.ConnectorAppearance = VisioAutomation.Layout.PageLayout.ConnectorAppearance.Curved;
+            var pl = new VA.Pages.PageLayout.FlowchartLayout();
+            pl.ConnectorStyle = VisioAutomation.Pages.PageLayout.ConnectorStyle.Flowchart;
+            pl.ConnectorAppearance = VisioAutomation.Pages.PageLayout.ConnectorAppearance.Curved;
             pl.Apply(page);
 
             page.ResizeToFitContents();
