@@ -19,6 +19,9 @@ namespace VisioPS.Commands
         public double[] Values;
 
         [SMA.Parameter(Mandatory = false)]
+        public string[] Labels;
+
+        [SMA.Parameter(Mandatory = false)]
         public double InnerRadius = 0;
 
         protected override void ProcessRecord()
@@ -30,7 +33,7 @@ namespace VisioPS.Commands
             chart.InnerRadius = this.InnerRadius;
             chart.Radius = this.Radius;
             chart.Center = new VA.Drawing.Point(this.X0, this.Y0);
-
+            chart.Labels = this.Labels;
             this.WriteObject(chart);
         }
     }

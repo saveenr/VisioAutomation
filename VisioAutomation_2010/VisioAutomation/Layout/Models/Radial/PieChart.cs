@@ -12,7 +12,8 @@ namespace VisioAutomation.Layout.Models.Radial
         public double Radius= 1;
         public double InnerRadius = -1;
         public VA.Drawing.Point Center;
-        public List<double> Values; 
+        public List<double> Values;
+        public IList<string> Labels; 
 
         public PieChart(IList<double> values)
         {
@@ -29,6 +30,7 @@ namespace VisioAutomation.Layout.Models.Radial
                 {
                     var shape = slice.Render(page);
                     shapes.Add(shape);
+                    this.SetText(shapes);
                 }
                 return shapes;
             }
@@ -40,8 +42,27 @@ namespace VisioAutomation.Layout.Models.Radial
                 {
                     var shape = slice.Render(page);
                     shapes.Add(shape);
+                    this.SetText(shapes);
                 }
                 return shapes;
+            }
+        }
+
+        private void SetText(List<IVisio.Shape> shapes)
+        {
+            if (this.Labels == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < shapes.Count; i++)
+            {
+                if (i < this.Labels.Count)
+                {
+                    string label = this.Labels[i];
+                    var shape = shapes[i];
+                    shape.Text = label;
+                }
             }
         }
     }
