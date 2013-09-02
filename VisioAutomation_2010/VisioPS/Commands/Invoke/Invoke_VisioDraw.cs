@@ -29,8 +29,8 @@ namespace VisioPS.Commands
         [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true)]
         public double CellSpacing { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true)] 
-        public VA.Layout.Models.Radial.PieChart PieChart;
+        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true)]
+        public VA.Layout.Models.Charting.PieChart PieChart;
 
         protected override void ProcessRecord()
         {

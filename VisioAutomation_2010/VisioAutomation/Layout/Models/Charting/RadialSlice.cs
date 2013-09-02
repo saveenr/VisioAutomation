@@ -4,12 +4,12 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout.Models.Radial
+namespace VisioAutomation.Layout.Models.Charting
 {
     public class RadialSlice
     {
         public VA.Drawing.Point Center { get; private set; }
-        public VA.Layout.Models.Radial.Sector Sector { get; private set; }
+        public VA.Layout.Models.Charting.Sector Sector { get; private set; }
 
         public RadialSlice(VA.Drawing.Point center, double start, double end)
         {
@@ -20,7 +20,7 @@ namespace VisioAutomation.Layout.Models.Radial
                 throw new System.ArgumentException("end","end angle must be greater than or equal to start angle");
             }
 
-            this.Sector = new VA.Layout.Models.Radial.Sector(start, end);
+            this.Sector = new VA.Layout.Models.Charting.Sector(start, end);
         }
 
         protected VA.Drawing.Point GetPointAtRadius(VA.Drawing.Point origin, double angle, double radius)
@@ -64,7 +64,7 @@ namespace VisioAutomation.Layout.Models.Radial
                 double cur_angle = cur_val_norm * System.Math.PI * 2.0;
                 double end_angle = start_angle + cur_angle;
 
-                var ps = new VA.Layout.Models.Radial.Sector(start_angle, end_angle);
+                var ps = new VA.Layout.Models.Charting.Sector(start_angle, end_angle);
                 slices.Add(ps);
 
                 start_angle += cur_angle;

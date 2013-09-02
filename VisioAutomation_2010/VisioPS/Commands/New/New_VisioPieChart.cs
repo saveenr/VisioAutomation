@@ -29,14 +29,14 @@ namespace VisioPS.Commands
             var scriptingsession = this.ScriptingSession;
             var center = new VA.Drawing.Point(this.X0, this.Y0);
 
-            var chart = new VA.Layout.Models.Radial.PieChart();
+            var chart = new VA.Layout.Models.Charting.PieChart();
             chart.InnerRadius = this.InnerRadius;
             chart.Radius = this.Radius;
             chart.Center = new VA.Drawing.Point(this.X0, this.Y0);
 
             for (int i = 0; i < this.Values.Length; i++)
             {
-                var dp = new VA.Layout.Models.Radial.DataPoint();
+                var dp = new VA.Layout.Models.Charting.DataPoint();
                 dp.Value = this.Values[i];
                 if (i < this.Labels.Length)
                 {

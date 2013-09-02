@@ -140,13 +140,13 @@ namespace TestVisioAutomation
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
 
-            var chart = new VA.Layout.Models.Radial.PieChart();
+            var chart = new VA.Layout.Models.Charting.PieChart();
             chart.Radius = 1.0;
             chart.Center = new VA.Drawing.Point(2, 2);
-            chart.DataPoints.Add( new VA.Layout.Models.Radial.DataPoint(1.0));
-            chart.DataPoints.Add(new VA.Layout.Models.Radial.DataPoint(2.0));
-            chart.DataPoints.Add(new VA.Layout.Models.Radial.DataPoint(3.0));
-            chart.DataPoints.Add(new VA.Layout.Models.Radial.DataPoint(4.0));
+            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(1.0));
+            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(2.0));
+            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(3.0));
+            chart.DataPoints.Add(new VA.Layout.Models.Charting.DataPoint(4.0));
             ss.Draw.PieChart(chart);
         }
 

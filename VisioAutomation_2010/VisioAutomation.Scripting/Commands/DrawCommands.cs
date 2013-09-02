@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using GRIDLAYOUT = VisioAutomation.Layout.Models.Grid;
-using RADIALLAYOUT = VisioAutomation.Layout.Models.Radial;
+using RADIALLAYOUT = VisioAutomation.Layout.Models.Charting;
 using ORGCHARTLAYOUT = VisioAutomation.Layout.Models.OrgChart;
 using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
 
@@ -230,7 +230,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var slice = new VA.Layout.Models.Radial.PieSlice(center, radius, start_angle, end_angle);
+                var slice = new VA.Layout.Models.Charting.PieSlice(center, radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
             }
@@ -248,13 +248,13 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
-                var slice = new VA.Layout.Models.Radial.DoughnutSlice(center, inner_radius, outer_radius, start_angle, end_angle);
+                var slice = new VA.Layout.Models.Charting.DoughnutSlice(center, inner_radius, outer_radius, start_angle, end_angle);
                 var shape = slice.Render(active_page);
                 return shape;
             }
         }
 
-        public void PieChart(VA.Layout.Models.Radial.PieChart chart)
+        public void PieChart(VA.Layout.Models.Charting.PieChart chart)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

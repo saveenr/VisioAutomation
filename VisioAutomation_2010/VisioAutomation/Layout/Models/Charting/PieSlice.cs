@@ -5,7 +5,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout.Models.Radial
+namespace VisioAutomation.Layout.Models.Charting
 {
     public class PieSlice : RadialSlice
     {
