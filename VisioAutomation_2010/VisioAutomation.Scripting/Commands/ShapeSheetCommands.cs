@@ -234,7 +234,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     var src = srcs[i];
                     var result = results[i];
-                    update.SetResult((short)shapeid, src, result, IVisio.VisUnitCodes.visNoCast);
+                    update.SetResult((short)shapeid, src, result, IVisio.VisUnitCodes.visNumber);
                 }
             }
 

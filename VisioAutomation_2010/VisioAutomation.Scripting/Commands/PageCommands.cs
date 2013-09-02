@@ -242,7 +242,7 @@ namespace VisioAutomation.Scripting.Commands
             var page_sheet = page.PageSheet;
             var src = VA.ShapeSheet.SRCConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
-            int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNoCast, 0];
+            int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
             return (VA.Pages.PrintPageOrientation)value;
         }
 

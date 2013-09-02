@@ -61,7 +61,7 @@ namespace TestVisioAutomation
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
@@ -84,7 +84,7 @@ namespace TestVisioAutomation
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
@@ -111,12 +111,12 @@ namespace TestVisioAutomation
 
             // Set the formulas
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(shape1.ID16, src_pinx, 0.5, IVisio.VisUnitCodes.visNoCast);
-            update.SetResult(shape1.ID16, src_piny, 0.5, IVisio.VisUnitCodes.visNoCast);
-            update.SetResult(shape2.ID16, src_pinx, 1.5, IVisio.VisUnitCodes.visNoCast);
-            update.SetResult(shape2.ID16, src_piny, 1.5, IVisio.VisUnitCodes.visNoCast);
-            update.SetResult(shape3.ID16, src_pinx, 2.5, IVisio.VisUnitCodes.visNoCast);
-            update.SetResult(shape3.ID16, src_piny, 2.5, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(shape1.ID16, src_pinx, 0.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape1.ID16, src_piny, 0.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape2.ID16, src_pinx, 1.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape2.ID16, src_piny, 1.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape3.ID16, src_pinx, 2.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape3.ID16, src_piny, 2.5, IVisio.VisUnitCodes.visNumber);
             update.Execute(page1);
 
             // Verify that the formulas were set
@@ -150,7 +150,7 @@ namespace TestVisioAutomation
         public void CheckHomogenousUpdates_FormulasResults()
         {
             var update1 = new VA.ShapeSheet.Update();
-            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
+            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
             bool caught1 = false;
             try
             {
@@ -171,11 +171,11 @@ namespace TestVisioAutomation
         public void CheckHomogenousUpdates_Streams()
         {
             var update1 = new VA.ShapeSheet.Update();
-            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
+            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
             bool caught1 = false;
             try
             {
-                update1.SetResult(1,src_pinx, 5.0, IVisio.VisUnitCodes.visNoCast);
+                update1.SetResult(1, src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
 
             }
             catch (VA.AutomationException)
@@ -196,8 +196,8 @@ namespace TestVisioAutomation
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNoCast);
-            update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNoCast);
+            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNumber);
+            update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query

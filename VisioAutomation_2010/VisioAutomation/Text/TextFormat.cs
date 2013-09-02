@@ -68,7 +68,7 @@ namespace VisioAutomation.Text
         }
 
         private static readonly VA.ShapeSheet.SRC src_tabstopcount = VA.ShapeSheet.SRCConstants.Tabs_StopCount;
-        private static readonly short unitcode_nocast = (short)IVisio.VisUnitCodes.visNoCast;
+        private static readonly short unitcode_number = (short)IVisio.VisUnitCodes.visNumber;
         private const short tab_section = (short)IVisio.VisSectionIndices.visSectionTab;
 
         private static IList<TabStop> GetTabStops(IVisio.Shape shape)
@@ -103,7 +103,7 @@ namespace VisioAutomation.Text
             }
 
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
-            var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
+            var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
             var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<double>(shape, stream, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
@@ -204,7 +204,7 @@ namespace VisioAutomation.Text
 
             var cell_tabstopcount = shape.CellsSRC[src_tabstopcount.Section, src_tabstopcount.Row, src_tabstopcount.Cell];
             const short rounding = 0;
-            return cell_tabstopcount.ResultInt[unitcode_nocast, rounding];
+            return cell_tabstopcount.ResultInt[unitcode_number, rounding];
         }
 
         /// <summary>

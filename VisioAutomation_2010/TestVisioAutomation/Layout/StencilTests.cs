@@ -75,7 +75,7 @@ namespace TestVisioAutomation
 
                 var src_height = VisioAutomation.ShapeSheet.SRCConstants.Height;
                 var height_cell = shape1.CellsSRC[src_height.Section, src_height.Row, src_height.Cell];
-                var actual_height = height_cell.Result[IVisio.VisUnitCodes.visNoCast];
+                var actual_height = height_cell.Result[IVisio.VisUnitCodes.visNumber];
 
                 cy += actual_height;
             }

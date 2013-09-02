@@ -397,7 +397,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, page.Shapes.Count);
             Assert.AreNotEqual(0, line_node_0.VisioShapeID);
             Assert.IsNotNull(line_node_0.VisioShape);
-            Assert.AreEqual(2.0, line_node_0.VisioShape.CellsU["PinX"].Result[IVisio.VisUnitCodes.visNoCast]);
+            Assert.AreEqual(2.0, line_node_0.VisioShape.CellsU["PinX"].Result[IVisio.VisUnitCodes.visNumber]);
             page.Delete(0);
             doc.Close(true);
         }

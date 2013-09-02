@@ -379,7 +379,7 @@ namespace VisioAutomation.ShapeSheet
                 this.Formula = formula;
                 this.ResultNumeric = 0.0;
                 this.ResultString = null;
-                this.UnitCode = IVisio.VisUnitCodes.visNoCast;
+                this.UnitCode = IVisio.VisUnitCodes.visNumber;
                 this.UpdateType = UpdateType.Formula;
                 this.StreamType = st;
             }
