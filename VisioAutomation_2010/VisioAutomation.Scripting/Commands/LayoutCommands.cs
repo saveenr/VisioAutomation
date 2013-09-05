@@ -1,6 +1,7 @@
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
+using VisioAutomation.Shapes.Layout;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using System.Collections.Generic;
@@ -136,7 +137,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Distribute Shapes"))
             {
-                VA.Layout.LayoutHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
+                LayoutHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
             }
         }
 
@@ -179,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Snap Shape Corners"))
             {
                 var active_page = application.ActivePage;
-                VA.Layout.LayoutHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
+                LayoutHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
             }
         }
 
@@ -203,7 +204,7 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 var snapsize = new VA.Drawing.Size(w, h);
                 var minsize = new VA.Drawing.Size(w, h);
-                VA.Layout.LayoutHelper.SnapSize(active_page, shapeids, snapsize, minsize);
+                LayoutHelper.SnapSize(active_page, shapeids, snapsize, minsize);
             }
         }
 
