@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using ConnectionPointHelper = VisioAutomation.Connections.ConnectionPointHelper;
+using VisioAutomation.Shapes.Connections;
+using ConnectionPointHelper = VisioAutomation.Shapes.Connections.ConnectionPointHelper;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -17,14 +18,14 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
             Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
-            var cp_type = VA.Connections.ConnectionPointType.Inward;
+            var cp_type = ConnectionPointType.Inward;
 
-            var cpd1 = new VA.Connections.ConnectionPointCells();
+            var cpd1 = new ConnectionPointCells();
             cpd1.X = "Width*0.25";
             cpd1.Y = "Height*0";
             cpd1.Type = (int) cp_type;
 
-            var cpd2 = new VA.Connections.ConnectionPointCells();
+            var cpd2 = new ConnectionPointCells();
             cpd2.X = "Width*0.75";
             cpd2.Y = "Height*0";
             cpd2.Type = (int) cp_type;
@@ -35,7 +36,7 @@ namespace TestVisioAutomation
             ConnectionPointHelper.Add(s1, cpd2);
             Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
 
-            var controlpoints = VA.Connections.ConnectionPointCells.GetCells(s1);
+            var controlpoints = ConnectionPointCells.GetCells(s1);
             Assert.AreEqual(2, controlpoints.Count);
             var cp_0 = controlpoints[0];
             AssertVA.AreEqual("0 in", 0, cp_0.DirX);
@@ -67,14 +68,14 @@ namespace TestVisioAutomation
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
             Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
 
-            var cp_type = VA.Connections.ConnectionPointType.Inward;
+            var cp_type = ConnectionPointType.Inward;
 
             var xpositions = new[] {"Width*0.25", "Width*0.30", "Width*0.75", "Width*0.90"};
             var ypos = "Height*0";
 
             foreach (var xpos in xpositions)
             {
-                var cp = new VA.Connections.ConnectionPointCells();
+                var cp = new ConnectionPointCells();
                 cp.X = xpos;
                 cp.Y = ypos;
                 cp.DirX = 0;

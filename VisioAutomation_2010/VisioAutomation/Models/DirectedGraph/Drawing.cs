@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio=Microsoft.Office.Interop.Visio;
 
@@ -24,7 +25,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public Connector Connect(string id, Shape from, Shape to)
         {
-            return Connect(id, from, to, id, VA.Connections.ConnectorType.RightAngle);
+            return Connect(id, from, to, id, ConnectorType.RightAngle);
         }
 
         public Connector Connect(
@@ -32,7 +33,7 @@ namespace VisioAutomation.Models.DirectedGraph
             Shape from, 
             Shape to, 
             string label,
-             VA.Connections.ConnectorType type)
+             ConnectorType type)
         {
             var new_connector = new Connector(from, to);
             new_connector.Label = label;

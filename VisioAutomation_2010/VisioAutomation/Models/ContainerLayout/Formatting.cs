@@ -1,18 +1,19 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.Shapes.Format;
+using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
 namespace VisioAutomation.Models.ContainerLayout
 {
     public class Formatting
     {
-        public VA.Format.ShapeFormatCells ShapeFormatCells;
+        public ShapeFormatCells ShapeFormatCells;
         public VA.Text.CharacterFormatCells CharacterFormatCells;
         public VA.Text.ParagraphFormatCells ParagraphFormatCells;
         public VA.Text.TextCells TextCells;
 
         public Formatting()
         {
-            this.ShapeFormatCells = new VA.Format.ShapeFormatCells();
+            this.ShapeFormatCells = new ShapeFormatCells();
             this.CharacterFormatCells = new VA.Text.CharacterFormatCells();
             this.ParagraphFormatCells = new VA.Text.ParagraphFormatCells();
             this.TextCells = new VA.Text.TextCells();

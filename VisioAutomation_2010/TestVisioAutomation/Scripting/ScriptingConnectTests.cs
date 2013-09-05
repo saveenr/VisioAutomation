@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -40,11 +41,11 @@ namespace TestVisioAutomation
             var undirected_edges0 = ss.Connection.GetEdges();
             Assert.AreEqual(2, undirected_edges0.Count);
 
-            var directed_edges0 = ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var directed_edges0 = ss.Connection.GetDirectedEdges(ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(2, directed_edges0.Count);
 
             var directed_edges1 =
-                ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+                ss.Connection.GetDirectedEdges(ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(2, directed_edges1.Count);
 
             ss.Document.Close(true);
@@ -74,11 +75,11 @@ namespace TestVisioAutomation
             var master = ss.Master.Get("Dynamic Connector", connec_stencil);
             var undirected_connectors = ss.Connection.Connect(master, new [] { s1,s2},new [] { s2,s3});
 
-            var directed_edges0 = ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var directed_edges0 = ss.Connection.GetDirectedEdges(ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(0, directed_edges0.Count);
 
             var directed_edges1 =
-                ss.Connection.GetDirectedEdges(VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+                ss.Connection.GetDirectedEdges(ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(4, directed_edges1.Count);
 
             var undirected_edges0 = ss.Connection.GetEdges();

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
@@ -341,7 +342,7 @@ namespace TestVisioAutomationVDX
             Assert.AreEqual(1,page.Shapes.Count);
 
             var shape = page.Shapes[1];
-            var customprops = VA.CustomProperties.CustomPropertyHelper.Get(shape);
+            var customprops = CustomPropertyHelper.Get(shape);
 
             Assert.IsTrue(customprops.ContainsKey("PROP1"));
             Assert.AreEqual("\"VALUE1\"",customprops["PROP1"].Value.Formula);

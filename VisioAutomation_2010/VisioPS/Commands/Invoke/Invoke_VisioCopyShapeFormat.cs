@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Shapes.Format;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -25,23 +26,23 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            VA.Format.FormatCategory category = 0x00;
+            FormatCategory category = 0x00;
 
             if (Fill)
             {
-                category |= VA.Format.FormatCategory.Fill;
+                category |= FormatCategory.Fill;
             }
             if (Line)
             {
-                category |= VA.Format.FormatCategory.Line;
+                category |= FormatCategory.Line;
             }
             if (Shadow)
             {
-                category |= VA.Format.FormatCategory.Shadow;
+                category |= FormatCategory.Shadow;
             }
             if (Text)
             {
-                category |= VA.Format.FormatCategory.Character;
+                category |= FormatCategory.Character;
             }
             
             scriptingsession.Format.Copy(this.Shape, category);

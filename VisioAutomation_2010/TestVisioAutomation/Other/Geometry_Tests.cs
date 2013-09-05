@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes.Geometry;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -17,7 +18,7 @@ namespace TestVisioAutomation
             var shape = page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1,shape.GeometryCount);
 
-            var geom1 = new VA.Geometry.GeometrySection();
+            var geom1 = new GeometrySection();
             geom1.NoFill = "true";
             geom1.AddMoveTo("-1", "-1");
             geom1.AddLineTo("1", "0");
@@ -39,7 +40,7 @@ namespace TestVisioAutomation
             var shape2 = page.DrawRectangle(4, 4, 5, 5);
             Assert.AreEqual(1, shape2.GeometryCount);
 
-            var geom1 = new VA.Geometry.GeometrySection();
+            var geom1 = new GeometrySection();
             geom1.NoFill = "true";
             geom1.AddMoveTo("-1", "-1");
             geom1.AddLineTo("1", "0");
@@ -50,7 +51,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(2, shape2.GeometryCount);
 
             // remove all the geometry
-            VA.Geometry.GeometryHelper.Delete(shape2);
+            GeometryHelper.Delete(shape2);
             Assert.AreEqual(0, shape2.GeometryCount);
 
             page.Delete(0);

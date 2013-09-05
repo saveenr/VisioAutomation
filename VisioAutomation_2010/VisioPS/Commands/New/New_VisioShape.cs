@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.Shapes;
+using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 using VA=VisioAutomation;
 using SMA = System.Management.Automation;
@@ -26,7 +27,7 @@ namespace VisioPS.Commands
             var shape_ids = scriptingsession.Master.Drop(Masters, points);
             
             var page = scriptingsession.Page.Get();
-            var shape_objects = VA.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
+            var shape_objects = ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
 
             scriptingsession.Selection.None();
 

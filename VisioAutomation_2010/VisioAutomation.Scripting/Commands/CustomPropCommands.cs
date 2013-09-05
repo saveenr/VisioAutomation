@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -15,12 +16,12 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, Dictionary<string,VA.CustomProperties.CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
+        public IDictionary<IVisio.Shape, Dictionary<string,CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
-            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, VA.CustomProperties.CustomPropertyCells>>();
+            var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, CustomPropertyCells>>();
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -30,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
 
-            var list_custom_props = VA.CustomProperties.CustomPropertyHelper.Get(page, shapes);
+            var list_custom_props = CustomPropertyHelper.Get(page, shapes);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -56,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var results = (from s in this.Session.Selection.EnumShapes()
-                           select VA.CustomProperties.CustomPropertyHelper.Contains(s, name))
+                           select CustomPropertyHelper.Contains(s, name))
                 .ToList();
 
             return results;
@@ -88,12 +89,12 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    VA.CustomProperties.CustomPropertyHelper.Delete(shape, name);
+                    CustomPropertyHelper.Delete(shape, name);
                 }
             }
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, string name, VA.CustomProperties.CustomPropertyCells customprop)
+        public void Set(IList<IVisio.Shape> target_shapes, string name, CustomPropertyCells customprop)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -114,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    VA.CustomProperties.CustomPropertyHelper.Set(shape, name, customprop);
+                    CustomPropertyHelper.Set(shape, name, customprop);
                 }
             }
         }

@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes.Controls;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -31,7 +32,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, controls0[s2].Count);
             Assert.AreEqual(0, controls0[s3].Count);
 
-            var ctrl = new VA.Controls.ControlCells();
+            var ctrl = new ControlCells();
             ctrl.X = "Width*0.5";
             ctrl.Y = "0";
             ss.Control.Add(null,ctrl);

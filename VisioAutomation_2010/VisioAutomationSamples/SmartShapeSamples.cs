@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Shapes.Format;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -17,12 +18,12 @@ namespace VisioAutomationSamples
             var background = page_a.DrawRectangle(0, 0, 5, 1);
             var progress = page_a.DrawRectangle(0, 0, 1, 1);
 
-            var background_fmt = new VA.Format.ShapeFormatCells();
+            var background_fmt = new ShapeFormatCells();
             background_fmt.FillForegnd= "rgb(240,240,240)";
             background_fmt.LineColor = "rgb(100,100,100)";
 
 
-            var progress_fmt = new VA.Format.ShapeFormatCells();
+            var progress_fmt = new ShapeFormatCells();
             progress_fmt.FillForegnd = "rgb(100,150,240)";
             progress_fmt.LineColor = "rgb(100,100,100)";
 

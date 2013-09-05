@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -32,7 +33,7 @@ namespace VisioAutomationSamples
             var r1 = page.DrawRectangle(0, 1, 2, 2);
             var r2 = page.DrawRectangle(7, 7, 8, 8);
 
-            VA.Connections.ConnectorHelper.ConnectShapes(connector, r1, r2);
+            ConnectorHelper.ConnectShapes(connector, r1, r2);
 
             var con_layer = page.Layers["Connector"];
 

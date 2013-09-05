@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes.CustomProperties;
 using IVisio=Microsoft.Office.Interop.Visio;
 using System.Linq;
 using VA = VisioAutomation;
@@ -63,14 +64,14 @@ namespace TestVisioAutomation
             var rack_master = raq_eq_masters["Rack"];
             var drop_pos_rack = new VA.Drawing.Point(cx, cy);
             var rack_shape = page1.Drop(rack_master, drop_pos_rack);
-            VA.CustomProperties.CustomPropertyHelper.Set(rack_shape, "UCount", total_height.ToString());
+            CustomPropertyHelper.Set(rack_shape, "UCount", total_height.ToString());
 
             foreach (var item in items)
             {
                 var master = raq_eq_masters[item.master];
                 var drop_pos1 = new VA.Drawing.Point(cx, cy + 0.25);
                 var shape1 = page1.Drop(master, drop_pos1);
-                VA.CustomProperties.CustomPropertyHelper.Update(shape1, "UCount", item.ucount.ToString());
+                CustomPropertyHelper.Update(shape1, "UCount", item.ucount.ToString());
                 shape1.Text = item.name;
 
                 var src_height = VisioAutomation.ShapeSheet.SRCConstants.Height;

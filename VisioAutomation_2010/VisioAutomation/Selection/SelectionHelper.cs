@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -29,7 +30,7 @@ namespace VisioAutomation.Selection
 
             var shapes = new List<IVisio.Shape>();
             var sel_shapes = selection.AsEnumerable();
-            foreach (var shape in VA.ShapeHelper.GetNestedShapes(sel_shapes))
+            foreach (var shape in ShapeHelper.GetNestedShapes(sel_shapes))
             {
                 if (shape.Type != (short)IVisio.VisShapeTypes.visTypeGroup)
                 {

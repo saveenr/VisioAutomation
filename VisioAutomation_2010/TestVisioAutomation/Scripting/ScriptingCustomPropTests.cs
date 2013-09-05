@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -30,7 +31,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, prop_dic0[s2].Count);
             Assert.AreEqual(0, prop_dic0[s3].Count);
 
-            var cp = new VA.CustomProperties.CustomPropertyCells();
+            var cp = new CustomPropertyCells();
             cp.Value = "BAR";
             ss.CustomProp.Set(null,"FOO",cp);
 

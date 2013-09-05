@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes.Connections;
 using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 
@@ -7,7 +8,7 @@ namespace VisioPS.Commands
     public class Get_VisioDirectedEdge : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
-        public VisioAutomation.Connections.ConnectorArrowEdgeHandling TreatAsConnected { get; set; }
+        public ConnectorArrowEdgeHandling TreatAsConnected { get; set; }
 
         protected override void ProcessRecord()
         {

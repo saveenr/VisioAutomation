@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Shapes.Format;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -7,11 +8,11 @@ namespace VisioAutomation.Format
 {
     public class FormatPaintCache
     {
-        public List<VA.Format.FormatPaintCell> Cells { get; private set; }
+        public List<FormatPaintCell> Cells { get; private set; }
 
         public FormatPaintCache()
         {
-            this.Cells = new List<VA.Format.FormatPaintCell>();
+            this.Cells = new List<FormatPaintCell>();
 
             this.Add(VA.Format.FormatCategory.Fill, "FillBkgnd", VA.ShapeSheet.SRCConstants.FillBkgnd);
             this.Add(VA.Format.FormatCategory.Fill, "FillBkgndTrans", VA.ShapeSheet.SRCConstants.FillBkgndTrans);
@@ -80,7 +81,7 @@ namespace VisioAutomation.Format
 
         public void Add(VA.Format.FormatCategory category, string name, VA.ShapeSheet.SRC src)
         {
-            var format_cell = new VA.Format.FormatPaintCell(src, name, category);
+            var format_cell = new FormatPaintCell(src, name, category);
             this.Cells.Add(format_cell);
         }
 

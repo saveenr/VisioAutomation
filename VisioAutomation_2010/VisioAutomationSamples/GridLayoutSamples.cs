@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Shapes.Format;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace VisioAutomationSamples
             layout.PerformLayout();
             layout.Render(page);
 
-            var fmtcells = new VA.Format.ShapeFormatCells();
+            var fmtcells = new ShapeFormatCells();
             int i = 0;
             var update = new VA.ShapeSheet.Update();
             foreach (var node in layout.Nodes)

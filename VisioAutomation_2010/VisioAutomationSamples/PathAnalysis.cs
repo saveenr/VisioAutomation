@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -38,11 +39,11 @@ namespace VisioAutomationSamples
             s3.AutoConnect(s4, dir, null);
             s5.AutoConnect(s6, dir, null);
 
-            var normal_edges = VA.Connections.PathAnalysis.GetEdges(page);
-            var edge_handling_0 = VA.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
-            var edge_handling_1 = VA.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional;
-            var tc_edges_0 = VA.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_0);
-            var tc_edges_1 = VA.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_1);
+            var normal_edges = VisioAutomation.Shapes.Connections.PathAnalysis.GetEdges(page);
+            var edge_handling_0 = ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
+            var edge_handling_1 = ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional;
+            var tc_edges_0 = VisioAutomation.Shapes.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_0);
+            var tc_edges_1 = VisioAutomation.Shapes.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_1);
 
             var legend0 = page.DrawRectangle(5, 0, 6.5, 6);
             var sb0 = new System.Text.StringBuilder();

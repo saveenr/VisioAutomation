@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes.UserDefinedCells;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -14,12 +15,12 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
+        public IDictionary<IVisio.Shape, IList<UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
-            var prop_dic = new Dictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>>();
+            var prop_dic = new Dictionary<IVisio.Shape, IList<UserDefinedCell>>();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -29,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
-            var list_user_props = VA.UserDefinedCells.UserDefinedCellsHelper.Get(page, shapes);
+            var list_user_props = UserDefinedCellsHelper.Get(page, shapes);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -58,7 +59,7 @@ namespace VisioAutomation.Scripting.Commands
             } 
 
             var results = (from s in this.Session.Selection.EnumShapes().ToList()
-                           select VA.UserDefinedCells.UserDefinedCellsHelper.Contains(s, name))
+                           select UserDefinedCellsHelper.Contains(s, name))
                 .ToList();
 
             return results;
@@ -89,12 +90,12 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    VA.UserDefinedCells.UserDefinedCellsHelper.Delete(shape, name);
+                    UserDefinedCellsHelper.Delete(shape, name);
                 }
             }
         }
       
-        public void Set(IList<IVisio.Shape> target_shapes, VA.UserDefinedCells.UserDefinedCell userdefinedcell)
+        public void Set(IList<IVisio.Shape> target_shapes, UserDefinedCell userdefinedcell)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -115,7 +116,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    VA.UserDefinedCells.UserDefinedCellsHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value, userdefinedcell.Prompt);
+                    UserDefinedCellsHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value, userdefinedcell.Prompt);
                 }
             }
         }
