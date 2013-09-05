@@ -291,7 +291,7 @@
     <Compile Include="Extensions\ApplicationMethods.cs" />
     <Compile Include="Internal\Interop\NativeMethods.cs" />
     <Compile Include="AutomationException.cs" />
-    <Compile Include="ShapeHelper.cs" />
+    <Compile Include="Shapes\ShapeHelper.cs" />
     <Compile Include="Text\TextRun.cs" />
     <Compile Include="Extensions\DocumentMethods.cs" />
     <Compile Include="Extensions\PageMethods.cs" />

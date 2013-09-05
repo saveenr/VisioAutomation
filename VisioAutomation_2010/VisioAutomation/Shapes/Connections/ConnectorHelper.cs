@@ -4,7 +4,7 @@ using IVisio=Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace VisioAutomation.Connections
+namespace VisioAutomation.Shapes.Connections
 {
     public static class ConnectorHelper
     {

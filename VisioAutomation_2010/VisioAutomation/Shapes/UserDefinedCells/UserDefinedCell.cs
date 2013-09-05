@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.UserDefinedCells
+namespace VisioAutomation.Shapes.UserDefinedCells
 {
     public class UserDefinedCell
     {

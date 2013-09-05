@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
-namespace VisioAutomation.Connections
+namespace VisioAutomation.Shapes.Connections
 {
     public static class ConnectionPointHelper
     {
         public static int Add(
             IVisio.Shape shape,
-            Connections.ConnectionPointCells cp)
+            ConnectionPointCells cp)
         {
             if (shape == null)
             {

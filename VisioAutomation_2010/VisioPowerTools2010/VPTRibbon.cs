@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -402,7 +403,7 @@ namespace VisioPowerTools2010
                         var shape_shapes = shape.Shapes;
                         if (shape_shapes!=null && shape_shapes.Count>0)
                         {
-                            foreach (var nested_shape in VA.ShapeHelper.GetNestedShapes(shape))
+                            foreach (var nested_shape in ShapeHelper.GetNestedShapes(shape))
                             {
                                 Scramble(sb,nested_shape);                                
                             }

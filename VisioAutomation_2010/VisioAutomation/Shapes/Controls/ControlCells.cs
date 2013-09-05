@@ -3,7 +3,7 @@ using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Controls
+namespace VisioAutomation.Shapes.Controls
 {
     public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {

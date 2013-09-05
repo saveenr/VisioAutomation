@@ -1,11 +1,12 @@
 ﻿using System;
+using VisioAutomation.CustomProperties;
 using VA=VisioAutomation;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.CustomProperties
+namespace VisioAutomation.Shapes.CustomProperties
 {
     public static class CustomPropertyHelper
     {
@@ -48,7 +49,7 @@ namespace VisioAutomation.CustomProperties
         public static void Set(
             IVisio.Shape shape,
             string name,
-            VA.CustomProperties.CustomPropertyCells cp)
+            CustomPropertyCells cp)
         {
             if (shape == null)
             {
@@ -70,7 +71,7 @@ namespace VisioAutomation.CustomProperties
             Set(shape, row, cp);
         }
 
-        public static void Set(IVisio.Shape shape, short row, VA.CustomProperties.CustomPropertyCells cp)
+        public static void Set(IVisio.Shape shape, short row, CustomPropertyCells cp)
         {
             if (shape == null)
             {

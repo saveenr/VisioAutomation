@@ -3,7 +3,7 @@ using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
 
-namespace VisioAutomation.Controls
+namespace VisioAutomation.Shapes.Controls
 {
     public static class ControlHelper
     {

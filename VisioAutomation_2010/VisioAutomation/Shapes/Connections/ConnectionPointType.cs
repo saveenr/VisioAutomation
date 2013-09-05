@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
-namespace VisioAutomation.Connections
+namespace VisioAutomation.Shapes.Connections
 {
     public enum ConnectionPointType
     {

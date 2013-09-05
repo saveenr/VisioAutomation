@@ -1,10 +1,10 @@
 ﻿using VA=VisioAutomation;
 
-namespace VisioAutomation.Format
+namespace VisioAutomation.Shapes.Format
 {
     public class FormatPaintCell
     {
-        public VA.Format.FormatCategory Category { get; private set; }
+        public FormatCategory Category { get; private set; }
         public VA.ShapeSheet.SRC SRC { get; private set; }
         public string Name;
 
@@ -26,7 +26,7 @@ namespace VisioAutomation.Format
             this.Formula = null;
         }
 
-        public bool MatchesCategory(VA.Format.FormatCategory category)
+        public bool MatchesCategory(FormatCategory category)
         {
             return ((this.Category & category) != 0);
         }

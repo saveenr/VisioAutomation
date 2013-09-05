@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Connections
+namespace VisioAutomation.Shapes.Connections
 {
     public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {

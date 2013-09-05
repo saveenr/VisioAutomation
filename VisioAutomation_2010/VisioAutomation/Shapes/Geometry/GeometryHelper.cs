@@ -1,7 +1,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace VisioAutomation.Geometry
+namespace VisioAutomation.Shapes.Geometry
 {
     public static class GeometryHelper
     {
@@ -37,7 +37,7 @@ namespace VisioAutomation.Geometry
             int num = shape.GeometryCount;
             for (int i = num-1; i >=0; i--)
             {
-                VA.Geometry.GeometryHelper.DeleteSection(shape, (short)i);                
+                GeometryHelper.DeleteSection(shape, (short)i);                
             }
         }
 

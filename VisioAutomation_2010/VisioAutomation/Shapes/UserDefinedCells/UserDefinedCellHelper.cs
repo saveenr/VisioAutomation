@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Shapes.UserDefinedCells;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.UserDefinedCells
+namespace VisioAutomation.Shapes.UserDefinedCells
 {
     public static class UserDefinedCellsHelper
     {

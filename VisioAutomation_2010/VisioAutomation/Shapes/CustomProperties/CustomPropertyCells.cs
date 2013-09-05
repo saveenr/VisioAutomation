@@ -1,9 +1,11 @@
-﻿using VA=VisioAutomation;
+﻿using VisioAutomation.CustomProperties;
+using VisioAutomation.Shapes.CustomProperties;
+using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.CustomProperties
+namespace VisioAutomation.Shapes.CustomProperties
 {
     public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
@@ -87,7 +89,10 @@ namespace VisioAutomation.CustomProperties
             return _mCellQuery;
         }
     }
+}
 
+namespace VisioAutomation.CustomProperties
+{
     class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQuery.Column SortKey { get; set; }

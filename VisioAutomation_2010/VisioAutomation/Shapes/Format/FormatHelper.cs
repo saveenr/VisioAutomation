@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Format
+namespace VisioAutomation.Shapes.Format
 {
     public static class FormatHelper
     {

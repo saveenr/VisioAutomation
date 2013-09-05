@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Format
+﻿namespace VisioAutomation.Shapes.Format
 {
     [System.Flags]
     public enum FormatCategory
