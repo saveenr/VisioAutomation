@@ -137,7 +137,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Distribute Shapes"))
             {
-                LayoutHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
+                ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
             }
         }
 
@@ -180,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Snap Shape Corners"))
             {
                 var active_page = application.ActivePage;
-                LayoutHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
+                ArrangeHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
             }
         }
 
@@ -204,7 +204,7 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 var snapsize = new VA.Drawing.Size(w, h);
                 var minsize = new VA.Drawing.Size(w, h);
-                LayoutHelper.SnapSize(active_page, shapeids, snapsize, minsize);
+                ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);
             }
         }
 

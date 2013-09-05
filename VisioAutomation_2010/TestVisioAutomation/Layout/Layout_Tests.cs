@@ -24,7 +24,7 @@ namespace TestVisioAutomation
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
 
-            LayoutHelper.DistributeWithSpacing(page, shapeids, VA.Drawing.Axis.XAxis, 1.0);
+            ArrangeHelper.DistributeWithSpacing(page, shapeids, VA.Drawing.Axis.XAxis, 1.0);
 
             var xforms = XFormCells.GetCells(page, shapeids);
             Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin());
@@ -47,7 +47,7 @@ namespace TestVisioAutomation
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID };
 
-            LayoutHelper.DistributeWithSpacing(page, shapeids, VA.Drawing.Axis.YAxis, 1.0);
+            ArrangeHelper.DistributeWithSpacing(page, shapeids, VA.Drawing.Axis.YAxis, 1.0);
 
             var xforms = XFormCells.GetCells(page, shapeids);
             Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin());
@@ -77,12 +77,12 @@ namespace TestVisioAutomation
             var shapes = new[] {s1, s2, s3, s4};
             var shapeids = shapes.Select(s=>s.ID).ToList();
 
-            var sorted_shapeids = LayoutHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinX);
+            var sorted_shapeids = ArrangeHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinX);
             var sorted_shapes = sorted_shapeids.Select(id => page.Shapes.ItemFromID[id]).ToList();
             var text = string.Join("", sorted_shapes.Select(s => s.Text));
             Assert.AreEqual("BADC",text);
 
-            sorted_shapeids = LayoutHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinY);
+            sorted_shapeids = ArrangeHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinY);
             sorted_shapes = sorted_shapeids.Select(id => page.Shapes.ItemFromID[id]).ToList();
             text = string.Join("", sorted_shapes.Select(s => s.Text));
             Assert.AreEqual("BADC",text);
