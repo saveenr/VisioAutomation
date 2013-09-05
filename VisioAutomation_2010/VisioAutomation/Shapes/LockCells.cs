@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
 
-namespace VisioAutomation.Layout
+namespace VisioAutomation.Shapes
 {
     public class LockCells : VA.ShapeSheet.CellGroups.CellGroup
     {

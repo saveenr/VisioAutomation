@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
+using VisioAutomation.Shapes.Arrange;
 using VisioAutomation.Shapes.Layout;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -77,12 +78,12 @@ namespace TestVisioAutomation
             var shapes = new[] {s1, s2, s3, s4};
             var shapeids = shapes.Select(s=>s.ID).ToList();
 
-            var sorted_shapeids = ArrangeHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinX);
+            var sorted_shapeids = ArrangeHelper.OrderShapesByXFormPosition(page, shapeids, XFormPosition.PinX);
             var sorted_shapes = sorted_shapeids.Select(id => page.Shapes.ItemFromID[id]).ToList();
             var text = string.Join("", sorted_shapes.Select(s => s.Text));
             Assert.AreEqual("BADC",text);
 
-            sorted_shapeids = ArrangeHelper.OrderShapesByXFormPosition(page, shapeids, VA.Layout.XFormPosition.PinY);
+            sorted_shapeids = ArrangeHelper.OrderShapesByXFormPosition(page, shapeids, XFormPosition.PinY);
             sorted_shapes = sorted_shapeids.Select(id => page.Shapes.ItemFromID[id]).ToList();
             text = string.Join("", sorted_shapes.Select(s => s.Text));
             Assert.AreEqual("BADC",text);

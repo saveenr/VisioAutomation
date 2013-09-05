@@ -127,7 +127,7 @@
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
-    <Compile Include="Layout\ShapeLayoutCells.cs" />
+    <Compile Include="Shapes\ShapeLayoutCells.cs" />
     <Compile Include="Models\DirectedGraph\MSAGLRenderer.cs" />
     <Compile Include="Internal\MSAGLUtil.cs" />
     <Compile Include="Pages\PageCells.cs" />
@@ -138,7 +138,7 @@
     <Compile Include="Shapes\Format\FormatPaintCache.cs" />
     <Compile Include="Shapes\Format\FormatCategory.cs" />
     <Compile Include="Shapes\Format\FormatPaintCell.cs" />
-    <Compile Include="Layout\LockCells.cs" />
+    <Compile Include="Shapes\LockCells.cs" />
     <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="Pages\PageLayout\CircularLayout.cs" />
     <Compile Include="Pages\PageLayout\CompactTreeDirection.cs" />
@@ -154,8 +154,8 @@
     <Compile Include="Pages\PageLayout\RadialLayout.cs" />
     <Compile Include="Pages\PageLayout\VerticalAlignment.cs" />
     <Compile Include="Selection\ShapeSendDirection.cs" />
-    <Compile Include="Layout\SnapCornerPosition.cs" />
-    <Compile Include="Layout\XFormPosition.cs" />
+    <Compile Include="Shapes\Arrange\SnapCornerPosition.cs" />
+    <Compile Include="Shapes\Arrange\XFormPosition.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />
@@ -182,7 +182,7 @@
     <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
-    <Compile Include="Layout\LayoutHelper.cs" />
+    <Compile Include="Shapes\Arrange\ArrangeHelper.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
     <Compile Include="DOM\MasterRef.cs" />
     <Compile Include="DOM\Shape.cs" />
@@ -219,7 +219,7 @@
     <Compile Include="Models\Tree\NodeList.cs" />
     <Compile Include="Models\Tree\TreeLayout.cs" />
     <Compile Include="Text\CharacterFormatCells.cs" />
-    <Compile Include="Layout\XFormCells.cs" />
+    <Compile Include="Shapes\XFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_Column.cs" />

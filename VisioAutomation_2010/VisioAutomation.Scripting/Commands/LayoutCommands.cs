@@ -1,6 +1,7 @@
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes;
+using VisioAutomation.Shapes.Arrange;
 using VisioAutomation.Shapes.Layout;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
@@ -163,7 +164,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, VA.Layout.SnapCornerPosition corner)
+        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, SnapCornerPosition corner)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

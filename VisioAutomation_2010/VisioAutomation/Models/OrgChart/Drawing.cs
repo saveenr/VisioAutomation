@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using VA=VisioAutomation;
 using IVisio= Microsoft.Office.Interop.Visio;
-using VAL = VisioAutomation.Layout;
 
 namespace VisioAutomation.Models.OrgChart
 {

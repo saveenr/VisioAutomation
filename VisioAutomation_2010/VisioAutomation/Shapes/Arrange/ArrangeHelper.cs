@@ -4,9 +4,9 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout
+namespace VisioAutomation.Shapes.Arrange
 {
-    public static class LayoutHelper
+    public static class ArrangeHelper
     {
         private static VA.Drawing.Rectangle GetRectangle(XFormCells xFormCells)
         {
@@ -16,7 +16,7 @@ namespace VisioAutomation.Layout
             return new VA.Drawing.Rectangle(pin - locpin, size);
         }
 
-        private static double GetPosition(VA.Layout.XFormCells xform, XFormPosition pos)
+        private static double GetPosition(XFormCells xform, XFormPosition pos)
         {
             if (pos == XFormPosition.PinY)
             {
@@ -65,7 +65,7 @@ namespace VisioAutomation.Layout
             }
 
             // First get the transforms of the shapes on the given axis
-            var xforms = VA.Layout.XFormCells.GetCells(page, shapeids);
+            var xforms = XFormCells.GetCells(page, shapeids);
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
@@ -103,17 +103,17 @@ namespace VisioAutomation.Layout
 
             // Calculate the new Xfrms
             var sortpos = axis == VA.Drawing.Axis.XAxis
-                              ? VA.Layout.XFormPosition.PinX
-                              : VA.Layout.XFormPosition.PinY;
+                              ? XFormPosition.PinX
+                              : XFormPosition.PinY;
 
             var delta = axis == VA.Drawing.Axis.XAxis
                             ? new VA.Drawing.Size(spacing, 0)
                             : new VA.Drawing.Size(0, spacing);
 
 
-            var sorted_shape_ids = VA.Layout.LayoutHelper.OrderShapesByXFormPosition(page, shapeids, sortpos);
-            var input_xfrms = VA.Layout.XFormCells.GetCells(page, sorted_shape_ids);
-            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
+            var sorted_shape_ids = ArrangeHelper.OrderShapesByXFormPosition(page, shapeids, sortpos);
+            var input_xfrms = XFormCells.GetCells(page, sorted_shape_ids);
+            var output_xfrms = new List<XFormCells>(input_xfrms.Count);
             var bb = GetBoundingBox(input_xfrms);
             var cur_pos = new VA.Drawing.Point(bb.Left, bb.Bottom);
 
@@ -123,7 +123,7 @@ namespace VisioAutomation.Layout
                                      ? new VA.Drawing.Point(cur_pos.X + input_xfrm.LocPinX.Result, input_xfrm.PinY.Result)
                                      : new VA.Drawing.Point(input_xfrm.PinX.Result, cur_pos.Y + input_xfrm.LocPinY.Result);
 
-                var output_xfrm = new VA.Layout.XFormCells();
+                var output_xfrm = new XFormCells();
                 output_xfrm.PinX = new_pinpos.X;
                 output_xfrm.PinY = new_pinpos.Y;
                 output_xfrms.Add(output_xfrm);
@@ -135,7 +135,7 @@ namespace VisioAutomation.Layout
             update_xfrms(page,sorted_shape_ids,output_xfrms);
         }
 
-        private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<VA.Layout.XFormCells> xfrms)
+        private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<XFormCells> xfrms)
         {
             
             var update = new VA.ShapeSheet.Update();
@@ -148,9 +148,9 @@ namespace VisioAutomation.Layout
             update.Execute(page);
         }
 
-        public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Layout.XFormCells> xfrms)
+        public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<XFormCells> xfrms)
         {
-            var bb = new VA.Drawing.BoundingBox(xfrms.Select(VA.Layout.LayoutHelper.GetRectangle));
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(ArrangeHelper.GetRectangle));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
@@ -165,12 +165,12 @@ namespace VisioAutomation.Layout
         {
             // First caculate the new transforms
             var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
-            var input_xfrms = VA.Layout.XFormCells.GetCells(page, shapeids);
-            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
+            var input_xfrms = XFormCells.GetCells(page, shapeids);
+            var output_xfrms = new List<XFormCells>(input_xfrms.Count);
 
             foreach (var input_xfrm in input_xfrms)
             {
-                var old_lower_left = VA.Layout.LayoutHelper.GetRectangle(input_xfrm).LowerLeft;
+                var old_lower_left = ArrangeHelper.GetRectangle(input_xfrm).LowerLeft;
                 var new_lower_left = snap_grid.Snap(old_lower_left);
                 var output_xfrm = _SnapCorner(corner, new_lower_left, input_xfrm);
                 output_xfrms.Add(output_xfrm);
@@ -184,7 +184,7 @@ namespace VisioAutomation.Layout
         {
             var new_pin_position = GetPinPositionForCorner(input_xfrm, new_lower_left, corner);
 
-            var output_xfrm = new VA.Layout.XFormCells();
+            var output_xfrm = new XFormCells();
             if (new_pin_position.X != input_xfrm.PinX.Result)
             {
                 output_xfrm.PinX = new_pin_position.X;
@@ -196,7 +196,7 @@ namespace VisioAutomation.Layout
             return output_xfrm;
         }
 
-        private static VA.Drawing.Point GetPinPositionForCorner( VA.Layout.XFormCells input_xfrm, VA.Drawing.Point new_lower_left, SnapCornerPosition corner)
+        private static VA.Drawing.Point GetPinPositionForCorner( XFormCells input_xfrm, VA.Drawing.Point new_lower_left, SnapCornerPosition corner)
         {
             var size = new VA.Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);
             var locpin = new VA.Drawing.Point(input_xfrm.LocPinX.Result, input_xfrm.LocPinY.Result);
@@ -228,8 +228,8 @@ namespace VisioAutomation.Layout
 
         public static void SnapSize(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, VA.Drawing.Size minsize)
         {
-            var input_xfrms = VA.Layout.XFormCells.GetCells(page, shapeids);
-            var output_xfrms = new List<VA.Layout.XFormCells>(input_xfrms.Count);
+            var input_xfrms = XFormCells.GetCells(page, shapeids);
+            var output_xfrms = new List<XFormCells>(input_xfrms.Count);
 
             var grid = new VA.Drawing.SnappingGrid(snapsize);
             foreach (var input_xfrm in input_xfrms)
@@ -240,7 +240,7 @@ namespace VisioAutomation.Layout
                 double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
                 var new_size = new VA.Drawing.Size(max_w, max_h);
 
-                var output_xfrm = new VA.Layout.XFormCells();
+                var output_xfrm = new XFormCells();
                 output_xfrm.Width = new_size.Width;
                 output_xfrm.Height = new_size.Height;
 

@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Layout
+namespace VisioAutomation.Shapes
 {
     public class XFormCells : VA.ShapeSheet.CellGroups.CellGroup
     {

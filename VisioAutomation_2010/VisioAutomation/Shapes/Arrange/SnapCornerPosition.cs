@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.Layout
+﻿namespace VisioAutomation.Shapes.Arrange
 {
     public enum SnapCornerPosition
     {
