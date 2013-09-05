@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -32,7 +33,7 @@ namespace TestVisioAutomation
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var xfrms = VA.Layout.XFormCells.GetCells(page, shapeids);
+            var xfrms = XFormCells.GetCells(page, shapeids);
 
             Assert.AreEqual("4.25 in", xfrms[0].PinX.Formula);
             Assert.AreEqual("5.5 in", xfrms[0].PinY.Formula);

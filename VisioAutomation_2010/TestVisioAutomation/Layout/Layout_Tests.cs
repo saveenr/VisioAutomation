@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -24,7 +25,7 @@ namespace TestVisioAutomation
 
             VA.Layout.LayoutHelper.DistributeWithSpacing(page, shapeids, VA.Drawing.Axis.XAxis, 1.0);
 
-            var xforms = VA.Layout.XFormCells.GetCells(page, shapeids);
+            var xforms = XFormCells.GetCells(page, shapeids);
             Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin());
             Assert.AreEqual(new VA.Drawing.Point(2.5, 3.25), xforms[1].Pin());
             Assert.AreEqual(new VA.Drawing.Point(4.5, 3), xforms[2].Pin());
@@ -47,7 +48,7 @@ namespace TestVisioAutomation
 
             VA.Layout.LayoutHelper.DistributeWithSpacing(page, shapeids, VA.Drawing.Axis.YAxis, 1.0);
 
-            var xforms = VA.Layout.XFormCells.GetCells(page, shapeids);
+            var xforms = XFormCells.GetCells(page, shapeids);
             Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin());
             Assert.AreEqual(new VA.Drawing.Point(2.25, 4.75), xforms[1].Pin());
             Assert.AreEqual(new VA.Drawing.Point(5.25, 3), xforms[2].Pin());

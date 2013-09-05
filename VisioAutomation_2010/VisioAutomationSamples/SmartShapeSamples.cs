@@ -1,4 +1,5 @@
-﻿using VisioAutomation.Shapes.Format;
+﻿using VisioAutomation.Shapes;
+using VisioAutomation.Shapes.Format;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -33,7 +34,7 @@ namespace VisioAutomationSamples
 
             // Set the progress shape update itself based on its position
             string bkname = background.NameID;
-            var xform = new VA.Layout.XFormCells();
+            var xform = new XFormCells();
             xform.PinX = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
             xform.PinY = string.Format("GUARD({0}!PinY)", bkname);
             xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);

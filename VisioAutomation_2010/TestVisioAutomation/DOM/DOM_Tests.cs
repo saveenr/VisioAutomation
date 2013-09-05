@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes;
 using VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using System.Linq;
@@ -587,7 +588,7 @@ namespace TestVisioAutomation
 
             var page = page_node.Render(doc);
 
-            var xfrms = VA.Layout.XFormCells.GetCells(page,
+            var xfrms = XFormCells.GetCells(page,
                                                         new int[] { dropped_shape0.VisioShapeID, 
                                                             drawn_shape0.VisioShapeID, 
                                                             dropped_shape1.VisioShapeID, 

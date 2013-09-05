@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes;
 using VisioAutomation.Shapes.Format;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -61,7 +62,7 @@ namespace VisioAutomationSamples
 
             var update = new VA.ShapeSheet.Update();
             var format = new ShapeFormatCells();
-            var xfrm = new VA.Layout.XFormCells();
+            var xfrm = new XFormCells();
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {

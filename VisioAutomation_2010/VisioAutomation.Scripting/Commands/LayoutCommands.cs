@@ -1,5 +1,6 @@
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using System.Collections.Generic;
@@ -265,7 +266,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<VA.Layout.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
+        public IList<XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -273,12 +274,12 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
-                return new List<VA.Layout.XFormCells>(0);
+                return new List<XFormCells>(0);
             }
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
             var page = this.Session.VisioApplication.ActivePage;
-            var data = VA.Layout.XFormCells.GetCells(page, shapeids);
+            var data = XFormCells.GetCells(page, shapeids);
             return data;
         }
 
@@ -326,7 +327,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetLock(IList<IVisio.Shape> target_shapes, VA.Layout.LockCells lockcells)
+        public void SetLock(IList<IVisio.Shape> target_shapes, LockCells lockcells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

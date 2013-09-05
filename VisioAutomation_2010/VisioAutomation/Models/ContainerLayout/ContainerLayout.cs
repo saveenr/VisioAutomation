@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -210,7 +211,7 @@ namespace VisioAutomation.Models.ContainerLayout
             var points = rects.Select(r => r.Center).ToList();
             var shapeids = VA.Pages.PageHelper.DropManyU(page, masters, points);
 
-            var xfrm = new VA.Layout.XFormCells();
+            var xfrm = new XFormCells();
 
             var update = new VA.ShapeSheet.Update(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
