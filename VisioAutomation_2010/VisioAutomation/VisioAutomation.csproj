@@ -80,10 +80,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connections\ConnectorArrowEdgeHandling.cs" />
-    <Compile Include="Connections\ConnectionPointType.cs" />
-    <Compile Include="Connections\ConnectionPointHelper.cs" />
-    <Compile Include="Controls\ControlHelper.cs" />
+    <Compile Include="Shapes\Connections\ConnectorArrowEdgeHandling.cs" />
+    <Compile Include="Shapes\Connections\ConnectionPointType.cs" />
+    <Compile Include="Shapes\Connections\ConnectionPointHelper.cs" />
+    <Compile Include="Shapes\Controls\ControlHelper.cs" />
     <Compile Include="DOM\Document.cs" />
     <Compile Include="DOM\PageList.cs" />
     <Compile Include="DOM\Page.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Models\Tree\ConnectorType.cs" />
     <Compile Include="Internal\MasterLoader.cs" />
     <Compile Include="Drawing\BoundingBox.cs" />
-    <Compile Include="Format\ShapeFormatCells.cs" />
+    <Compile Include="Shapes\Format\ShapeFormatCells.cs" />
     <Compile Include="Models\Charting\Sector.cs" />
     <Compile Include="Models\Charting\PieSlice.cs" />
     <Compile Include="DOM\PieSlice.cs" />
@@ -131,13 +131,13 @@
     <Compile Include="Models\DirectedGraph\MSAGLRenderer.cs" />
     <Compile Include="Internal\MSAGLUtil.cs" />
     <Compile Include="Pages\PageCells.cs" />
-    <Compile Include="CustomProperties\CustomPropertyHelper.cs" />
+    <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="Drawing\AlignmentHorizontal.cs" />
     <Compile Include="Drawing\AlignmentVertical.cs" />
-    <Compile Include="Format\FormatHelper.cs" />
-    <Compile Include="Format\FormatPaintCache.cs" />
-    <Compile Include="Format\FormatCategory.cs" />
-    <Compile Include="Format\FormatPaintCell.cs" />
+    <Compile Include="Shapes\Format\FormatHelper.cs" />
+    <Compile Include="Shapes\Format\FormatPaintCache.cs" />
+    <Compile Include="Shapes\Format\FormatCategory.cs" />
+    <Compile Include="Shapes\Format\FormatPaintCell.cs" />
     <Compile Include="Layout\LockCells.cs" />
     <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="Pages\PageLayout\CircularLayout.cs" />
@@ -157,9 +157,9 @@
     <Compile Include="Layout\SnapCornerPosition.cs" />
     <Compile Include="Layout\XFormPosition.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
-    <Compile Include="Geometry\GeometrySection.cs" />
-    <Compile Include="Geometry\GeometryRow.cs" />
-    <Compile Include="Geometry\GeometryHelper.cs" />
+    <Compile Include="Shapes\Geometry\GeometrySection.cs" />
+    <Compile Include="Shapes\Geometry\GeometryRow.cs" />
+    <Compile Include="Shapes\Geometry\GeometryHelper.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
@@ -190,7 +190,7 @@
     <Compile Include="DOM\Rectangle.cs" />
     <Compile Include="DOM\PolyLine.cs" />
     <Compile Include="DOM\Connector.cs" />
-    <Compile Include="Connections\ConnectorType.cs" />
+    <Compile Include="Shapes\Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
     <Compile Include="Application\PerfScope.cs" />
     <Compile Include="Internal\Interop\RunningObject.cs" />
@@ -221,7 +221,7 @@
     <Compile Include="Text\CharacterFormatCells.cs" />
     <Compile Include="Layout\XFormCells.cs" />
     <Compile Include="Text\ParagraphFormatCells.cs" />
-    <Compile Include="CustomProperties\CustomPropertyCells.cs" />
+    <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_Column.cs" />
     <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\ShapeList.cs" />
@@ -244,16 +244,16 @@
     <Compile Include="Shapesheet\SIDSRC.cs" />
     <Compile Include="Internal\QueryResults.cs" />
     <Compile Include="Drawing\Size.cs" />
-    <Compile Include="Connections\DirectedEdge.cs" />
+    <Compile Include="Shapes\Connections\DirectedEdge.cs" />
     <Compile Include="Internal\Interop\COMInterop.cs" />
     <Compile Include="Convert.cs" />
     <Compile Include="Extensions\LayersMethods.cs" />
     <Compile Include="Shapesheet\SRCConstants.cs" />
     <Compile Include="Shapesheet\SRC.cs" />
-    <Compile Include="Connections\ConnectionPointCells.cs" />
+    <Compile Include="Shapes\Connections\ConnectionPointCells.cs" />
     <Compile Include="Extensions\SectionMethods.cs" />
-    <Compile Include="UserDefinedCells\UserDefinedCellHelper.cs" />
-    <Compile Include="UserDefinedCells\UserDefinedCell.cs" />
+    <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
+    <Compile Include="Shapes\UserDefinedCells\UserDefinedCell.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -270,16 +270,16 @@
     <Compile Include="Text\Markup\Literal.cs" />
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />
-    <Compile Include="Connections\ConnectorHelper.cs" />
+    <Compile Include="Shapes\Connections\ConnectorHelper.cs" />
     <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
-    <Compile Include="Connections\ConnectorEdge.cs" />
-    <Compile Include="Controls\ControlCells.cs" />
+    <Compile Include="Shapes\Connections\ConnectorEdge.cs" />
+    <Compile Include="Shapes\Controls\ControlCells.cs" />
     <Compile Include="Pages\PageHelper.cs" />
     <Compile Include="Selection\SelectionHelper.cs" />
     <Compile Include="Extensions\ShapeMethods.cs" />
-    <Compile Include="Connections\PathAnalysis.cs" />
+    <Compile Include="Shapes\Connections\PathAnalysis.cs" />
     <Compile Include="Application\AlertResponseScope.cs" />
     <Compile Include="Text\TabStop.cs" />
     <Compile Include="Application\UndoScope.cs" />
