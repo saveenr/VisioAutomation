@@ -417,6 +417,7 @@ namespace VisioAutomation.Scripting.Commands
                 var m1 = markup.AddElement(label+"\n");
                 m1.CharacterCells.Font = fontid_segoe;
                 m1.CharacterCells.Size = "12.0pt";
+                m1.CharacterCells.Style = "1"; // Bold
                 var m2 = markup.AddElement();
                 m2.CharacterCells.Font = fontid_segoe;
                 m2.CharacterCells.Size = "8.0pt";
