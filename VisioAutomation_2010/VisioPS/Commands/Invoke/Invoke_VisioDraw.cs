@@ -9,7 +9,7 @@ namespace VisioPS.Commands
     public class Invoke_VisioDraw : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(ParameterSetName="orgchcart",Position=0,Mandatory = true)]
-        public VA.Models.OrgChart.Document OrgChart { get; set; }
+        public VA.Models.OrgChart.OrgChartDocument OrgChart { get; set; }
 
         [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true)]
         public VA.Models.Grid.GridLayout GridLayout { get; set; }

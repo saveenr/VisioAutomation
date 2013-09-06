@@ -7,13 +7,13 @@ namespace VisioAutomation.Scripting.OrgChart
 {
     public class OrgChartBuilder
     {
-        public static OCMODEL.Document LoadFromXML(Session scriptingsession, string filename)
+        public static OCMODEL.OrgChartDocument LoadFromXML(Session scriptingsession, string filename)
         {
             var xdoc = SXL.XDocument.Load(filename);
             return LoadFromXML(scriptingsession, xdoc);
         }
 
-        public static OCMODEL.Document LoadFromXML(Session scriptingsession,
+        public static OCMODEL.OrgChartDocument LoadFromXML(Session scriptingsession,
                                                              SXL.XDocument xdoc)
         {
             var root = xdoc.Root;
@@ -52,7 +52,7 @@ namespace VisioAutomation.Scripting.OrgChart
                 }
             }
             scriptingsession.WriteVerbose( "Finished Walking XML");
-            var oc = new OCMODEL.Document();
+            var oc = new OCMODEL.OrgChartDocument();
             oc.OrgCharts.Add(ocroot);
             scriptingsession.WriteVerbose( "Finished Creating OrgChart model");
             return oc;

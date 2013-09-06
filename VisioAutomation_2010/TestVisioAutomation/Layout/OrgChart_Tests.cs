@@ -15,7 +15,7 @@ namespace TestVisioAutomation
         {
             // Before an Org Chart is rendered it must have at least one node
             bool caught = false;
-            var orgcgart = new OCMODEL.Document();
+            var orgcgart = new OCMODEL.OrgChartDocument();
             var page1 = GetNewPage(StandardPageSize);
             try
             {
@@ -37,7 +37,7 @@ namespace TestVisioAutomation
         public void OrgChart_SingleNode()
         {
             // Draw the minimum org chart - a chart with one nod
-            var orgchart = new OCMODEL.Document();
+            var orgchart = new OCMODEL.OrgChartDocument();
 
             var n_a = new OCMODEL.Node("A");
             n_a.Size = new VA.Drawing.Size(4, 2);
@@ -58,7 +58,7 @@ namespace TestVisioAutomation
         {
             // Verify that basic org chart connectivity is maintained
 
-            var orgchart = new OCMODEL.Document();
+            var orgchart_doc = new OCMODEL.OrgChartDocument();
 
             var n_a = new OCMODEL.Node("A");
             var n_b = new OCMODEL.Node("B");
@@ -73,12 +73,11 @@ namespace TestVisioAutomation
 
             n_a.Size = new VA.Drawing.Size(4, 2);
 
-            orgchart.OrgCharts.Add(n_a);
+            orgchart_doc.OrgCharts.Add(n_a);
 
             var app = new IVisio.Application();
-
-            var renderer = new OCMODEL.OrgChartRenderer();
-            orgchart.Render(app);
+            
+            orgchart_doc.Render(app);
 
             var active_page = app.ActivePage;
             var page = active_page;
@@ -102,7 +101,7 @@ namespace TestVisioAutomation
             Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
             Assert.AreEqual(new VA.Drawing.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
-            Assert.AreEqual(renderer.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
+            Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
         }
@@ -113,7 +112,7 @@ namespace TestVisioAutomation
             // Verify that we can create multiple org charts in one
             // document
 
-            var orgchart = new OCMODEL.Document();
+            var orgchart = new OCMODEL.OrgChartDocument();
 
             var n_a = new OCMODEL.Node("A");
             var n_b = new OCMODEL.Node("B");

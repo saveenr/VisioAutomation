@@ -197,12 +197,11 @@
     <Compile Include="Models\Grid\Node.cs" />
     <Compile Include="Models\Grid\Row.cs" />
     <Compile Include="Models\Grid\RowDirection.cs" />
-    <Compile Include="Models\OrgChart\Document.cs" />
+    <Compile Include="Models\OrgChart\OrgChartDocument.cs" />
     <Compile Include="Models\OrgChart\LayoutDirection.cs" />
     <Compile Include="Models\OrgChart\LayoutOptions.cs" />
     <Compile Include="Models\OrgChart\Node.cs" />
     <Compile Include="Models\OrgChart\NodeList.cs" />
-    <Compile Include="Models\OrgChart\OrgChartRenderer.cs" />
     <Compile Include="Models\InternalTree\DictionaryUtil.cs" />
     <Compile Include="Models\InternalTree\LayoutDirection.cs" />
     <Compile Include="Models\InternalTree\Node.cs" />

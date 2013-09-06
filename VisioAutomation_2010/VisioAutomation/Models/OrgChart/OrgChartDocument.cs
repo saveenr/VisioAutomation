@@ -1,17 +1,19 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using VA=VisioAutomation;
+using IVisio= Microsoft.Office.Interop.Visio;
 using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Models.OrgChart
 {
-    public class OrgChartRenderer
+    public class OrgChartDocument
     {
+        public List<Node> OrgCharts { get; private set; }
+
         public LayoutOptions LayoutOptions;
 
-        public OrgChartRenderer()
+        public OrgChartDocument()
         {
+            this.OrgCharts = new List<Node>();
             this.LayoutOptions = new LayoutOptions();
         }
 
@@ -22,8 +24,10 @@ namespace VisioAutomation.Models.OrgChart
             return newnode;
         }
 
-        internal void RenderToVisio(Document orgchartdrawing, IVisio.Application app)
+        public void Render(IVisio.Application app)
         {
+            var orgchartdrawing = this;
+
             if (orgchartdrawing == null)
             {
                 throw new System.ArgumentNullException("orgchartdrawing");
@@ -36,18 +40,18 @@ namespace VisioAutomation.Models.OrgChart
 
             if (orgchartdrawing.OrgCharts.Count < 1)
             {
-                throw new System.ArgumentException("orgchart must have at least one root");                
-            } 
+                throw new System.ArgumentException("orgchart must have at least one root");
+            }
 
             foreach (var root in orgchartdrawing.OrgCharts)
             {
                 if (root == null)
                 {
                     throw new System.ArgumentException("Org chart has root node set to null", "orgchartdrawing");
-                }                
+                }
             }
 
-            int majorver = int.Parse(app.Version.Split( new char[] { '.' })[0]);
+            int majorver = int.Parse(app.Version.Split(new char[] { '.' })[0]);
             bool is_visio_2013 = majorver >= 15;
 
             const string orgchart_vst = "orgch_u.vst";
@@ -58,7 +62,7 @@ namespace VisioAutomation.Models.OrgChart
             var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
 
             var trees = new List<IList<VisioAutomation.Models.InternalTree.Node<object>>>();
- 
+
             foreach (var root in orgchartdrawing.OrgCharts)
             {
                 // Construct a layout tree from the hierarchy
@@ -151,9 +155,9 @@ namespace VisioAutomation.Models.OrgChart
                 var page_size_with_border = bb.Size.Add(border_width * 2, border_width * 2.0);
                 page_node.Size = page_size_with_border;
                 page_node.ResizeToFit = true;
-                page_node.ResizeToFitMargin = new VA.Drawing.Size(border_width*2, border_width*2.0);
+                page_node.ResizeToFitMargin = new VA.Drawing.Size(border_width * 2, border_width * 2.0);
             } // finish handling root node
-            
+
             var doc = doc_node.Render(app);
 
             foreach (var treenodes in trees)
@@ -175,7 +179,7 @@ namespace VisioAutomation.Models.OrgChart
                     var orgnode = (Node)treenodes[i].Data;
                     var shape = (VA.DOM.BaseShape)orgnode.DOMNode;
                     orgnode.VisioShape = shape.VisioShape;
-                }               
+                }
             }
         }
 
@@ -204,5 +208,6 @@ namespace VisioAutomation.Models.OrgChart
             }
             return dir;
         }
+
     }
 }

@@ -264,14 +264,14 @@ namespace VisioAutomation.Scripting.Commands
             chart.Render(page);
         }
 
-        public void OrgChart(ORGCHARTLAYOUT.Document document)
+        public void OrgChart(ORGCHARTLAYOUT.OrgChartDocument orgChartDocument)
         {
 
             this.Session.WriteVerbose("Start OrgChart Rendering");
             this.CheckVisioApplicationAvailable();
 
             var application = this.Session.VisioApplication;
-            document.Render(application);
+            orgChartDocument.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
             this.Session.WriteVerbose("Finished OrgChart Rendering");
