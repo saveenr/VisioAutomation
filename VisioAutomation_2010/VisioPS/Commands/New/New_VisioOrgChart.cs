@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
-            var orgchart = new VA.Models.OrgChart.Drawing();
+            var orgchart = new VA.Models.OrgChart.Document();
             this.WriteObject(orgchart);
         }
     }

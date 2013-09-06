@@ -2,7 +2,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Models.SimpleTextDoc
+namespace VisioAutomation.Models.TextDocument
 {
     public class TextDocumentBuilder
     {
@@ -114,7 +114,7 @@ namespace VisioAutomation.Models.SimpleTextDoc
             return string.Format("{0}pt",size);
         }
 
-        public void Draw(VA.Models.SimpleTextDoc.TextPage textpage)
+        public void Draw(TextPage textpage)
         {
             var page = _visioDocument.Pages.Add();
             page.NameU = textpage.Name;

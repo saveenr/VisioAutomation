@@ -197,7 +197,7 @@
     <Compile Include="Models\Grid\Node.cs" />
     <Compile Include="Models\Grid\Row.cs" />
     <Compile Include="Models\Grid\RowDirection.cs" />
-    <Compile Include="Models\OrgChart\Drawing.cs" />
+    <Compile Include="Models\OrgChart\Document.cs" />
     <Compile Include="Models\OrgChart\LayoutDirection.cs" />
     <Compile Include="Models\OrgChart\LayoutOptions.cs" />
     <Compile Include="Models\OrgChart\Node.cs" />

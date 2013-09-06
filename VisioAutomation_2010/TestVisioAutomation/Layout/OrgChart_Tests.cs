@@ -15,7 +15,7 @@ namespace TestVisioAutomation
         {
             // Before an Org Chart is rendered it must have at least one node
             bool caught = false;
-            var orgcgart = new OCMODEL.Drawing();
+            var orgcgart = new OCMODEL.Document();
             var page1 = GetNewPage(StandardPageSize);
             try
             {
@@ -37,7 +37,7 @@ namespace TestVisioAutomation
         public void OrgChart_SingleNode()
         {
             // Draw the minimum org chart - a chart with one nod
-            var orgchart = new OCMODEL.Drawing();
+            var orgchart = new OCMODEL.Document();
 
             var n_a = new OCMODEL.Node("A");
             n_a.Size = new VA.Drawing.Size(4, 2);
@@ -58,7 +58,7 @@ namespace TestVisioAutomation
         {
             // Verify that basic org chart connectivity is maintained
 
-            var orgchart = new OCMODEL.Drawing();
+            var orgchart = new OCMODEL.Document();
 
             var n_a = new OCMODEL.Node("A");
             var n_b = new OCMODEL.Node("B");
@@ -113,7 +113,7 @@ namespace TestVisioAutomation
             // Verify that we can create multiple org charts in one
             // document
 
-            var orgchart = new OCMODEL.Drawing();
+            var orgchart = new OCMODEL.Document();
 
             var n_a = new OCMODEL.Node("A");
             var n_b = new OCMODEL.Node("B");

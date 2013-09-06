@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.OrgChart
             return newnode;
         }
 
-        internal void RenderToVisio(Drawing orgchartdrawing, IVisio.Application app)
+        internal void RenderToVisio(Document orgchartdrawing, IVisio.Application app)
         {
             if (orgchartdrawing == null)
             {

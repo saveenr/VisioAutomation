@@ -4,11 +4,11 @@ using IVisio= Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.OrgChart
 {
-    public class Drawing
+    public class Document
     {
         public List<Node> OrgCharts { get; private set; }
 
-        public Drawing()
+        public Document()
         {
             this.OrgCharts = new List<Node>();
         }
