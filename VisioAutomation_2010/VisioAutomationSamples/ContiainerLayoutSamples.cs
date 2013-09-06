@@ -24,9 +24,9 @@ namespace VisioAutomationSamples
             c2.Add("3");
 
             m.LayoutOptions = new CONTMODEL.LayoutOptions();
-            m.LayoutOptions.ContainerFormatting.ShapeFormatCells.FillForegnd = "rgb(0,176,240)";
-            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.FillForegnd = "rgb(250,250,250)";
-            m.LayoutOptions.ContainerItemFormatting.ShapeFormatCells.LinePattern= "0";
+            m.LayoutOptions.ContainerFormatting.FormatCells.FillForegnd = "rgb(0,176,240)";
+            m.LayoutOptions.ContainerItemFormatting.FormatCells.FillForegnd = "rgb(250,250,250)";
+            m.LayoutOptions.ContainerItemFormatting.FormatCells.LinePattern= "0";
 
             m.PerformLayout();
             m.Render(SampleEnvironment.Application.ActiveDocument);

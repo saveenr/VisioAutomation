@@ -3,9 +3,9 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Shapes.Format
+namespace VisioAutomation.Shapes
 {
-    public class ShapeFormatCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class FormatCells : VA.ShapeSheet.CellGroups.CellGroup
     {
         public VA.ShapeSheet.CellData<int> FillBkgnd { get; set; }
         public VA.ShapeSheet.CellData<double> FillBkgndTrans { get; set; }
@@ -63,13 +63,13 @@ namespace VisioAutomation.Shapes.Format
         }
 
 
-        public static IList<ShapeFormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static IList<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup._GetCells(page, shapeids, query, query.GetCells);
         }
 
-        public static ShapeFormatCells GetCells(IVisio.Shape shape)
+        public static FormatCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
             return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
@@ -140,9 +140,9 @@ namespace VisioAutomation.Shapes.Format
                 this.Rounding = this.Columns.Add(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
             }
 
-            public ShapeFormatCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
+            public FormatCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
             {
-                var cells = new ShapeFormatCells();
+                var cells = new FormatCells();
                 cells.FillBkgnd = row[ this.FillBkgnd.Ordinal].ToInt();
                 cells.FillBkgndTrans = row[ this.FillBkgndTrans.Ordinal];
                 cells.FillForegnd = row[ this.FillForegnd.Ordinal].ToInt();

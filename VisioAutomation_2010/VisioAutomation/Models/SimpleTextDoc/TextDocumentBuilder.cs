@@ -18,11 +18,11 @@ namespace VisioAutomation.Models.SimpleTextDoc
         private int _fontid;
         private VA.Text.TextCells _textblockformat;
         private VA.Text.ParagraphFormatCells _titleParaFmt;
-        private ShapeFormatCells _titleFormat;
+        private FormatCells _titleFormat;
         private VA.Text.CharacterFormatCells _titleCharFmt;
         private VA.Text.ParagraphFormatCells _bodyParaFmt;
         private VA.Text.CharacterFormatCells _bodyCharFmt;
-        private ShapeFormatCells _bodyFormat;
+        private FormatCells _bodyFormat;
 
         private double _titleTextSize = 15.0;
         private double _bodyParaSpacingAfter = 0.0;
@@ -89,7 +89,7 @@ namespace VisioAutomation.Models.SimpleTextDoc
             _titleParaFmt = new VA.Text.ParagraphFormatCells();
             _titleParaFmt.HorizontalAlign = 0;
 
-            _titleFormat = new ShapeFormatCells();
+            _titleFormat = new FormatCells();
             _titleFormat.LineWeight = 0;
             _titleFormat.LinePattern = 0;
 
@@ -105,7 +105,7 @@ namespace VisioAutomation.Models.SimpleTextDoc
             _bodyCharFmt.Font = _fontid;
             _bodyCharFmt.Size = get_pt_string(_bodyTextSize);
 
-            _bodyFormat = new ShapeFormatCells();
+            _bodyFormat = new FormatCells();
             _bodyFormat.LineWeight = 0;
             _bodyFormat.LinePattern = 0;
         }

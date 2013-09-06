@@ -60,7 +60,7 @@ namespace VisioAutomationSamples
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
             var update = new VA.ShapeSheet.Update();
-            var format = new ShapeFormatCells();
+            var format = new FormatCells();
             var xfrm = new XFormCells();
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
@@ -120,7 +120,7 @@ namespace VisioAutomationSamples
             var color1 = new VA.Drawing.ColorRGB(0xffdddd);
             var color2 = new VA.Drawing.ColorRGB(0x00ffff);
 
-            var format = new ShapeFormatCells();
+            var format = new FormatCells();
 
             var update = new VA.ShapeSheet.Update();
 

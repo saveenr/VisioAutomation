@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, ShapeFormatCells format)
+        public void Set(IList<IVisio.Shape> target_shapes, FormatCells format)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -37,7 +37,7 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(this.Session.VisioApplication.ActivePage);            
         }
 
-        public IList<ShapeFormatCells> Get(IList<IVisio.Shape> target_shapes)
+        public IList<FormatCells> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -46,11 +46,11 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return new List<ShapeFormatCells>(0);
+                return new List<FormatCells>(0);
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = ShapeFormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
+            var fmts = FormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
             return fmts;
         }
 

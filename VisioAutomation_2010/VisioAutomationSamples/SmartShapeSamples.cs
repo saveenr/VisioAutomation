@@ -18,12 +18,12 @@ namespace VisioAutomationSamples
             var background = page_a.DrawRectangle(0, 0, 5, 1);
             var progress = page_a.DrawRectangle(0, 0, 1, 1);
 
-            var background_fmt = new ShapeFormatCells();
+            var background_fmt = new FormatCells();
             background_fmt.FillForegnd= "rgb(240,240,240)";
             background_fmt.LineColor = "rgb(100,100,100)";
 
 
-            var progress_fmt = new ShapeFormatCells();
+            var progress_fmt = new FormatCells();
             progress_fmt.FillForegnd = "rgb(100,150,240)";
             progress_fmt.LineColor = "rgb(100,100,100)";
 
