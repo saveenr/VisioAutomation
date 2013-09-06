@@ -7,24 +7,6 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Models.Charting
 {
-    public class DataPoint
-    {
-        public double Value;
-        public string Label;
-        public string LabelFormat;
-        public IVisio.Shape VisioShape;
-
-        public DataPoint()
-        {
-            
-        }
-
-        public DataPoint(double value)
-        {
-            this.Value = value;
-        }
-    }
-
     public class PieChart
     {
         public double Radius= 1;

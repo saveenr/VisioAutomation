@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Charting\DataPoint.cs" />
     <Compile Include="Shapes\Connections\ConnectorArrowEdgeHandling.cs" />
     <Compile Include="Shapes\Connections\ConnectionPointType.cs" />
     <Compile Include="Shapes\Connections\ConnectionPointHelper.cs" />
