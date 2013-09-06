@@ -1,4 +1,4 @@
-using VisioAutomation.Shapes.Format;
+using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
