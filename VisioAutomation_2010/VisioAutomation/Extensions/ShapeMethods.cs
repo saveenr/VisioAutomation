@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -58,7 +57,7 @@ namespace VisioAutomation.Extensions
 
         public static IList<IVisio.Shape> GetShapesFromIDs(this IVisio.Shapes shapes, IList<short> shapeids)
         {
-            return ShapeHelper.GetShapesFromIDs(shapes, shapeids);
+            return VA.Shapes.ShapeHelper.GetShapesFromIDs(shapes, shapeids);
         }
     }
 }

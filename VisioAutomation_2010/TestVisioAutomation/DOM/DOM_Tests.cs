@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Shapes;
-using VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -321,13 +319,13 @@ namespace TestVisioAutomation
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
 
-            vrect1.CustomProperties = new Dictionary<string, CustomPropertyCells>();
+            vrect1.CustomProperties = new Dictionary<string, VA.Shapes.CustomProperties.CustomPropertyCells>();
 
-            var cp1 = new CustomPropertyCells();
+            var cp1 = new VA.Shapes.CustomProperties.CustomPropertyCells();
             cp1.Value = "FOOVALUE";
             cp1.Label = "Foo Label";
 
-            var cp2 = new CustomPropertyCells();
+            var cp2 = new VA.Shapes.CustomProperties.CustomPropertyCells();
             cp2.Value = "BARVALUE";
             cp2.Label = "Bar Label";
 
@@ -344,8 +342,8 @@ namespace TestVisioAutomation
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
             Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
-            Assert.IsTrue(CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
-            Assert.IsTrue(CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
+            Assert.IsTrue(VA.Shapes.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
+            Assert.IsTrue(VA.Shapes.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
 
             doc.Close(true);
         }
@@ -588,7 +586,7 @@ namespace TestVisioAutomation
 
             var page = page_node.Render(doc);
 
-            var xfrms = XFormCells.GetCells(page,
+            var xfrms = VA.Shapes.XFormCells.GetCells(page,
                                                         new int[] { dropped_shape0.VisioShapeID, 
                                                             drawn_shape0.VisioShapeID, 
                                                             dropped_shape1.VisioShapeID, 

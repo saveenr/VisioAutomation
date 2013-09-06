@@ -1,8 +1,5 @@
 using System.Linq;
 using VisioAutomation.Extensions;
-using VisioAutomation.Shapes;
-using VisioAutomation.Shapes.Arrange;
-using VisioAutomation.Shapes.Layout;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using System.Collections.Generic;
@@ -138,7 +135,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Distribute Shapes"))
             {
-                ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
+                VA.Shapes.Arrange.ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
             }
         }
 
@@ -164,7 +161,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, SnapCornerPosition corner)
+        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, VA.Shapes.Arrange.SnapCornerPosition corner)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -181,7 +178,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Snap Shape Corners"))
             {
                 var active_page = application.ActivePage;
-                ArrangeHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
+                VA.Shapes.Arrange.ArrangeHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
             }
         }
 
@@ -205,7 +202,7 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 var snapsize = new VA.Drawing.Size(w, h);
                 var minsize = new VA.Drawing.Size(w, h);
-                ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);
+                VA.Shapes.Arrange.ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);
             }
         }
 
@@ -268,7 +265,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
+        public IList<VA.Shapes.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -276,12 +273,12 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
-                return new List<XFormCells>(0);
+                return new List<VA.Shapes.XFormCells>(0);
             }
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
             var page = this.Session.VisioApplication.ActivePage;
-            var data = XFormCells.GetCells(page, shapeids);
+            var data = VA.Shapes.XFormCells.GetCells(page, shapeids);
             return data;
         }
 
@@ -329,7 +326,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetLock(IList<IVisio.Shape> target_shapes, LockCells lockcells)
+        public void SetLock(IList<IVisio.Shape> target_shapes, VA.Shapes.LockCells lockcells)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

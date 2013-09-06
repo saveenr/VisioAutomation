@@ -1,7 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -32,7 +31,7 @@ namespace TestVisioAutomation
             var a1 = page1.Shapes.AsEnumerable().ToList();
             Assert.AreEqual(0, a1.Count);
 
-            var a2 = ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var a2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
             Assert.AreEqual(0, a2.Count);
 
             // -------------------------------
@@ -41,7 +40,7 @@ namespace TestVisioAutomation
             var b1 = page1.Shapes.AsEnumerable().ToList();
             Assert.AreEqual(1, b1.Count);
 
-            var b2 = ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var b2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
             Assert.AreEqual(1, b2.Count);
 
             // -------------------------------
@@ -51,7 +50,7 @@ namespace TestVisioAutomation
             var c1 = page1.Shapes.AsEnumerable().ToList();
             Assert.AreEqual(3, c1.Count);
 
-            var c2 = ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var c2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
             Assert.AreEqual(3, c2.Count);
 
             // -------------------------------
@@ -64,7 +63,7 @@ namespace TestVisioAutomation
             var d1 = page1.Shapes.AsEnumerable().ToList();
             Assert.AreEqual(2, d1.Count);
 
-            var d2 = ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
+            var d2 = VA.Shapes.ShapeHelper.GetNestedShapes(page1.Shapes.AsEnumerable());
             Assert.AreEqual(4, d2.Count);
 
             page1.Delete(0);

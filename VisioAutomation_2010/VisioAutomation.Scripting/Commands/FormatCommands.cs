@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Shapes;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -14,7 +13,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, FormatCells format)
+        public void Set(IList<IVisio.Shape> target_shapes, VA.Shapes.FormatCells format)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -37,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(this.Session.VisioApplication.ActivePage);            
         }
 
-        public IList<FormatCells> Get(IList<IVisio.Shape> target_shapes)
+        public IList<VA.Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -46,11 +45,11 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return new List<FormatCells>(0);
+                return new List<VA.Shapes.FormatCells>(0);
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = FormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
+            var fmts = VA.Shapes.FormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
             return fmts;
         }
 
