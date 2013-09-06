@@ -134,10 +134,6 @@
     <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
     <Compile Include="Drawing\AlignmentHorizontal.cs" />
     <Compile Include="Drawing\AlignmentVertical.cs" />
-    <Compile Include="Shapes\Format\FormatHelper.cs" />
-    <Compile Include="Shapes\Format\FormatPaintCache.cs" />
-    <Compile Include="Shapes\Format\FormatCategory.cs" />
-    <Compile Include="Shapes\Format\FormatPaintCell.cs" />
     <Compile Include="Shapes\LockCells.cs" />
     <Compile Include="Application\PerfSettings.cs" />
     <Compile Include="Pages\PageLayout\CircularLayout.cs" />

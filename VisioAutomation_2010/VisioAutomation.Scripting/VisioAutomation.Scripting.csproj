@@ -83,6 +83,9 @@
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="Commands\TextUtil.cs" />
     <Compile Include="DefaultSessionContext.cs" />
+    <Compile Include="FormatCategory.cs" />
+    <Compile Include="FormatPaintCache.cs" />
+    <Compile Include="FormatPaintCell.cs" />
     <Compile Include="PageNavigation.cs" />
     <Compile Include="UACHelper.cs" />
     <Compile Include="XmlUtil.cs" />
