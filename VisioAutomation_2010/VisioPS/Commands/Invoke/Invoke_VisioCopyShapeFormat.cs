@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Scripting;
 using VisioAutomation.Shapes.Format;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
