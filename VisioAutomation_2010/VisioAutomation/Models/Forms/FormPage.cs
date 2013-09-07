@@ -1,25 +1,27 @@
 using VisioAutomation.Extensions;
+using VA = VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
 {
     public class FormPage
     {
         public string Name;
-        public VisioAutomation.Drawing.Size Size;
-        public Microsoft.Office.Interop.Visio.Page VisioPage;
+        public VA.Drawing.Size Size;
+        public MIVisio.Page VisioPage;
 
-        private readonly VisioAutomation.Drawing.Rectangle _pagerect;
-        private readonly VisioAutomation.Drawing.Rectangle _pageintrect;
-        private readonly VisioAutomation.Drawing.Rectangle _titlerect;
-        private readonly VisioAutomation.Drawing.Rectangle _bodywith_title_rect;
+        private readonly VA.Drawing.Rectangle _pagerect;
+        private readonly VA.Drawing.Rectangle _pageintrect;
+        private readonly VA.Drawing.Rectangle _titlerect;
+        private readonly VA.Drawing.Rectangle _bodywith_title_rect;
         private int _fontid;
-        private VisioAutomation.Text.TextCells _textblockformat;
-        private VisioAutomation.Text.ParagraphFormatCells _titleParaFmt;
-        private VisioAutomation.Shapes.FormatCells _titleFormat;
-        private VisioAutomation.Text.CharacterFormatCells _titleCharFmt;
-        private VisioAutomation.Text.ParagraphFormatCells _bodyParaFmt;
-        private VisioAutomation.Text.CharacterFormatCells _bodyCharFmt;
-        private VisioAutomation.Shapes.FormatCells _bodyFormat;
+        private VA.Text.TextCells _textblockformat;
+        private VA.Text.ParagraphFormatCells _titleParaFmt;
+        private VA.Shapes.FormatCells _titleFormat;
+        private VA.Text.CharacterFormatCells _titleCharFmt;
+        private VA.Text.ParagraphFormatCells _bodyParaFmt;
+        private VA.Text.CharacterFormatCells _bodyCharFmt;
+        private VA.Shapes.FormatCells _bodyFormat;
 
         public double TitleTextSize { get; set; }
         public double BodyParaSpacingAfter { get; set; }
@@ -30,22 +32,22 @@ namespace VisioAutomation.Models.Forms
 
         public FormPage()
         {
-            this.Size = new VisioAutomation.Drawing.Size(8.5, 11);
+            this.Size = new VA.Drawing.Size(8.5, 11);
 
             DefaultFont = "Segoe UI";
             BodyTextSize = 8.0;
             BodyParaSpacingAfter = 0.0;
             TitleTextSize = 15.0;
-            _pagerect = new VisioAutomation.Drawing.Rectangle(new VisioAutomation.Drawing.Point(0, 0), this.Size);
-            _pageintrect = new VisioAutomation.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5),
+            _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), this.Size);
+            _pageintrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5),
                 _pagerect.UpperRight.Subtract(0.5, 0.5));
 
-            _titlerect = new VisioAutomation.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pageintrect.UpperRight);
-            _bodywith_title_rect = new VisioAutomation.Drawing.Rectangle(_pageintrect.LowerLeft, _pagerect.UpperRight.Subtract(0.5, 1.0));
+            _titlerect = new VA.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pageintrect.UpperRight);
+            _bodywith_title_rect = new VA.Drawing.Rectangle(_pageintrect.LowerLeft, _pagerect.UpperRight.Subtract(0.5, 1.0));
 
         }
 
-        public Microsoft.Office.Interop.Visio.Page Draw(Microsoft.Office.Interop.Visio.Pages pages)
+        public IVisio.Page Draw(IVisio.Pages pages)
         {
             var page = pages.Add();
 
@@ -53,8 +55,8 @@ namespace VisioAutomation.Models.Forms
 
             var pagesheet = page.PageSheet;
 
-            var pageupdate = new VisioAutomation.ShapeSheet.Update();
-            var page_cells = new VisioAutomation.Pages.PageCells();
+            var pageupdate = new VA.ShapeSheet.Update();
+            var page_cells = new VA.Pages.PageCells();
             page_cells.PageHeight = this.Size.Height;
             page_cells.PageWidth = this.Size.Width;
             pageupdate.Execute(pagesheet);
@@ -67,29 +69,29 @@ namespace VisioAutomation.Models.Forms
             var font = fonts[this.DefaultFont];
             _fontid = font.ID;
 
-            _textblockformat = new VisioAutomation.Text.TextCells();
+            _textblockformat = new VA.Text.TextCells();
             _textblockformat.VerticalAlign = 0;
 
-            _titleParaFmt = new VisioAutomation.Text.ParagraphFormatCells();
+            _titleParaFmt = new VA.Text.ParagraphFormatCells();
             _titleParaFmt.HorizontalAlign = 0;
 
-            _titleFormat = new VisioAutomation.Shapes.FormatCells();
+            _titleFormat = new VA.Shapes.FormatCells();
             _titleFormat.LineWeight = 0;
             _titleFormat.LinePattern = 0;
 
-            _titleCharFmt = new VisioAutomation.Text.CharacterFormatCells();
+            _titleCharFmt = new VA.Text.CharacterFormatCells();
             _titleCharFmt.Font = _fontid;
             _titleCharFmt.Size = get_pt_string(TitleTextSize);
 
-            _bodyParaFmt = new VisioAutomation.Text.ParagraphFormatCells();
+            _bodyParaFmt = new VA.Text.ParagraphFormatCells();
             _bodyParaFmt.HorizontalAlign = 0;
             _bodyParaFmt.SpacingAfter = get_pt_string(BodyParaSpacingAfter);
 
-            _bodyCharFmt = new VisioAutomation.Text.CharacterFormatCells();
+            _bodyCharFmt = new VA.Text.CharacterFormatCells();
             _bodyCharFmt.Font = _fontid;
             _bodyCharFmt.Size = get_pt_string(BodyTextSize);
 
-            _bodyFormat = new VisioAutomation.Shapes.FormatCells();
+            _bodyFormat = new VA.Shapes.FormatCells();
             _bodyFormat.LineWeight = 0;
             _bodyFormat.LinePattern = 0;
 
@@ -100,7 +102,7 @@ namespace VisioAutomation.Models.Forms
             var bodyshape = page.DrawRectangle(_bodywith_title_rect);
             bodyshape.Text = this.Body;
 
-            var update = new VisioAutomation.ShapeSheet.Update();
+            var update = new VA.ShapeSheet.Update();
 
             // Set the ShapeSheet props
             short bodyshape_id = bodyshape.ID16;
