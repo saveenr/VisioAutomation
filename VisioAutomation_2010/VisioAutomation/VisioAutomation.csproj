@@ -120,8 +120,8 @@
     <Compile Include="Models\Charting\PieSlice.cs" />
     <Compile Include="DOM\PieSlice.cs" />
     <Compile Include="DOM\Oval.cs" />
-    <Compile Include="Models\TextDocument\TextDocumentBuilder.cs" />
-    <Compile Include="Models\TextDocument\TextPage.cs" />
+    <Compile Include="Models\Forms\TextDocumentBuilder.cs" />
+    <Compile Include="Models\Forms\TextPage.cs" />
     <Compile Include="Extensions\CellDataMethods.cs" />
     <Compile Include="Interop\EnumType.cs" />
     <Compile Include="Interop\EnumValue.cs" />
