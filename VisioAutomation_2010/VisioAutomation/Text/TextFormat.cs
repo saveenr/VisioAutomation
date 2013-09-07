@@ -8,8 +8,8 @@ namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        public IList<CharacterFormatCells> CharacterFormats { get; private set; }
-        public IList<ParagraphFormatCells> ParagraphFormats { get; private set; }
+        public IList<CharacterCells> CharacterFormats { get; private set; }
+        public IList<ParagraphCells> ParagraphFormats { get; private set; }
         public TextCells TextBlock { get; private set; }
         public IList<TextRun> CharacterTextRuns { get; private set; }
         public IList<TextRun> ParagraphTextRuns { get; private set; }
@@ -244,8 +244,8 @@ namespace VisioAutomation.Text
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
             var cells = new TextFormat();
-            cells.CharacterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
-            cells.ParagraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
+            cells.CharacterFormats = VA.Text.CharacterCells.GetCells(shape);
+            cells.ParagraphFormats = VA.Text.ParagraphCells.GetCells(shape);
             cells.TextBlock = VA.Text.TextCells.GetCells(shape);
             cells.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
             cells.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
@@ -255,8 +255,8 @@ namespace VisioAutomation.Text
 
         public static IList<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
         {
-            var charcells = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
-            var paracells = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
+            var charcells = VA.Text.CharacterCells.GetCells(page, shapeids);
+            var paracells = VA.Text.ParagraphCells.GetCells(page, shapeids);
             var textblockcells = VA.Text.TextCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
             var l = new List<TextFormat>(shapeids.Count);

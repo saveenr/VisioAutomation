@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class ParagraphFormatCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class ParagraphCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         ////public string BulletString;
         public VA.ShapeSheet.CellData<double> IndentFirst { get; set; }
@@ -41,13 +41,13 @@ namespace VisioAutomation.Text
             func(VA.ShapeSheet.SRCConstants.Para_BulletStr.ForRow(row), this.BulletString.Formula);
         }
 
-        public static IList<List<ParagraphFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static IList<List<ParagraphCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
             return _GetCells(page, shapeids, query, query.GetCells);
         }
 
-        public static IList<ParagraphFormatCells> GetCells(IVisio.Shape shape)
+        public static IList<ParagraphCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
             return _GetCells(shape, query, query.GetCells);
@@ -96,9 +96,9 @@ namespace VisioAutomation.Text
                 TextPosAfterBullet = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "TextPosAfterBullet");
             }
 
-            public ParagraphFormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public ParagraphCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
-                var cells = new ParagraphFormatCells();
+                var cells = new ParagraphCells();
                 cells.IndentFirst = row[IndentFirst.Ordinal];
                 cells.IndentLeft = row[IndentLeft.Ordinal];
                 cells.IndentRight = row[IndentRight.Ordinal];

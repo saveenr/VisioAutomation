@@ -12,9 +12,9 @@ namespace VisioAutomation.Models.Forms
         public VA.Drawing.Size Size;
         public string Font = "SegoeUI";
         public VA.Text.TextCells Textcells;
-        public VA.Text.ParagraphFormatCells ParagraphFormatCells;
+        public VA.Text.ParagraphCells ParagraphCells;
         public VA.Shapes.FormatCells FormatCells;
-        public VA.Text.CharacterFormatCells CharacterFormatCells;
+        public VA.Text.CharacterCells CharacterCells;
         public string Text;
         public IVisio.Shape VisioShape;
 
@@ -23,12 +23,12 @@ namespace VisioAutomation.Models.Forms
             this.Text = text;
             this.Size = size;
             this.Textcells = new TextCells();
-            this.ParagraphFormatCells = new ParagraphFormatCells();
+            this.ParagraphCells = new ParagraphCells();
             this.FormatCells = new FormatCells();
-            this.CharacterFormatCells = new CharacterFormatCells();
+            this.CharacterCells = new CharacterCells();
 
             this.Textcells.VerticalAlign = 0;
-            this.ParagraphFormatCells.HorizontalAlign = 0;
+            this.ParagraphCells.HorizontalAlign = 0;
 
             this.FormatCells.LineWeight = 0;
             this.FormatCells.LinePattern = 0;
@@ -39,8 +39,8 @@ namespace VisioAutomation.Models.Forms
         {
             short titleshape_id = this.VisioShape.ID16;
             update.SetFormulas(titleshape_id, this.Textcells);
-            update.SetFormulasForRow(titleshape_id, this.ParagraphFormatCells, 0);
-            update.SetFormulasForRow(titleshape_id, this.CharacterFormatCells, 0);
+            update.SetFormulasForRow(titleshape_id, this.ParagraphCells, 0);
+            update.SetFormulasForRow(titleshape_id, this.CharacterCells, 0);
             update.SetFormulas(titleshape_id, this.FormatCells);
         }
     }
@@ -162,17 +162,17 @@ namespace VisioAutomation.Models.Forms
 
             int _fontid = ctx.GetFontID(this.DefaultFont);
             titleblock.Textcells.VerticalAlign = 0;
-            titleblock.ParagraphFormatCells.HorizontalAlign = 0;
+            titleblock.ParagraphCells.HorizontalAlign = 0;
             titleblock.FormatCells.LineWeight = 0;
             titleblock.FormatCells.LinePattern = 0;
-            titleblock.CharacterFormatCells.Font = _fontid;
-            titleblock.CharacterFormatCells.Size = get_pt_string(TitleTextSize);
+            titleblock.CharacterCells.Font = _fontid;
+            titleblock.CharacterCells.Size = get_pt_string(TitleTextSize);
 
             var bodyblock = new TextBlock(new VA.Drawing.Size(7.5, 9.0), this.Body);
-            bodyblock.ParagraphFormatCells.HorizontalAlign = 0;
-            bodyblock.ParagraphFormatCells.SpacingAfter = get_pt_string(BodyParaSpacingAfter);
-            bodyblock.CharacterFormatCells.Font = _fontid;
-            bodyblock.CharacterFormatCells.Size = get_pt_string(BodyTextSize);
+            bodyblock.ParagraphCells.HorizontalAlign = 0;
+            bodyblock.ParagraphCells.SpacingAfter = get_pt_string(BodyParaSpacingAfter);
+            bodyblock.CharacterCells.Font = _fontid;
+            bodyblock.CharacterCells.Size = get_pt_string(BodyTextSize);
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
 

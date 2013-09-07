@@ -5,7 +5,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterFormatCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class CharacterCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public VA.ShapeSheet.CellData<int> Color { get; set; }
         public VA.ShapeSheet.CellData<int> Font { get; set; }
@@ -65,13 +65,13 @@ namespace VisioAutomation.Text
 
         }
 
-        public static IList<List<CharacterFormatCells>> GetCells(IVisio.Page page, IList<int> shapeids)
+        public static IList<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();
             return _GetCells(page, shapeids, query, query.GetCells);
         }
 
-        public static IList<CharacterFormatCells> GetCells(IVisio.Shape shape)
+        public static IList<CharacterCells> GetCells(IVisio.Shape shape)
         {
             var query = get_query();
             return _GetCells(shape, query, query.GetCells);
@@ -137,9 +137,9 @@ namespace VisioAutomation.Text
                 UseVertical = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharUseVertical, "UseVertical");
             }
 
-            public CharacterFormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public CharacterCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
-                var cells = new CharacterFormatCells();
+                var cells = new CharacterCells();
                 cells.Color = row[this.Color.Ordinal].ToInt();
                 cells.Transparency = row[this.Trans.Ordinal];
                 cells.Font = row[this.Font.Ordinal].ToInt();
