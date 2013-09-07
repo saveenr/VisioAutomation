@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
 
-namespace VisioAutomation.Models.TextDocument
+namespace VisioAutomation.Models.Forms
 {
     public class TextDocumentBuilder
     {
