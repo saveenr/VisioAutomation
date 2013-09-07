@@ -1,27 +1,135 @@
+using System.Collections.Generic;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes;
+using VisioAutomation.Text;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
 {
+    public class TextBlock
+    {
+        public VA.Drawing.Size Size;
+        public string Font = "SegoeUI";
+        public VA.Text.TextCells Textcells;
+        public VA.Text.ParagraphFormatCells ParagraphFormatCells;
+        public VA.Shapes.FormatCells FormatCells;
+        public VA.Text.CharacterFormatCells CharacterFormatCells;
+        public string Text;
+        public IVisio.Shape VisioShape;
+
+        public TextBlock(VA.Drawing.Size size,string text)
+        {
+            this.Text = text;
+            this.Size = size;
+            this.Textcells = new TextCells();
+            this.ParagraphFormatCells = new ParagraphFormatCells();
+            this.FormatCells = new FormatCells();
+            this.CharacterFormatCells = new CharacterFormatCells();
+
+            this.Textcells.VerticalAlign = 0;
+            this.ParagraphFormatCells.HorizontalAlign = 0;
+
+            this.FormatCells.LineWeight = 0;
+            this.FormatCells.LinePattern = 0;
+
+        }
+
+        public void ApplyFormus(VA.ShapeSheet.Update update)
+        {
+            short titleshape_id = this.VisioShape.ID16;
+            update.SetFormulas(titleshape_id, this.Textcells);
+            update.SetFormulasForRow(titleshape_id, this.ParagraphFormatCells, 0);
+            update.SetFormulasForRow(titleshape_id, this.CharacterFormatCells, 0);
+            update.SetFormulas(titleshape_id, this.FormatCells);
+        }
+    }
+
+    public class InteractiveDocumentRenderer
+    {
+        private IVisio.Pages Pages;
+        public VA.Drawing.Point InsertionPoint;
+
+        private double leftmargin;
+        private double topmargin;
+
+        private double heightacc ;
+        private IVisio.Page page;
+        public List<TextBlock> Blocks; 
+        public InteractiveDocumentRenderer(IVisio.Document doc)
+        {
+            this.Pages = doc.Pages;
+            this.Blocks = new List<TextBlock>();
+        }
+
+        public IVisio.Page AddPage(string name, VA.Drawing.Size size, VA.Pages.PageCells pagecells)
+        {
+            this.page = this.Pages.Add();
+            this.page.Name = name;
+
+            // Update the Page Cells
+            var pagesheet = page.PageSheet;
+            var pageupdate = new VA.ShapeSheet.Update();
+            pagecells.PageWidth = size.Width;
+            pagecells.PageHeight = size.Height;
+            pageupdate.Execute(pagesheet);
+
+            var rpagecells = VA.Pages.PageCells.GetCells(pagesheet);
+
+            this.leftmargin = rpagecells.PageLeftMargin.Result;
+            this.topmargin = size.Height - rpagecells.PageTopMargin.Result;
+
+            this.Reset();
+            return this.page;
+        }
+
+        public void Reset()
+        {
+            this.Blocks = new List<TextBlock>();
+            this.InsertionPoint = new VA.Drawing.Point(leftmargin, topmargin);
+          
+        }
+
+        public IVisio.Shape AddShape(TextBlock block)
+        {
+            var ll = new VA.Drawing.Point(this.InsertionPoint.X, this.InsertionPoint.Y-block.Size.Height);
+            var tr  = new VA.Drawing.Point(this.InsertionPoint.X+block.Size.Width, this.InsertionPoint.Y);
+            var rect = new VA.Drawing.Rectangle(ll, tr);
+            var titleshape = this.page.DrawRectangle(rect);
+            block.VisioShape = titleshape;
+            if (block.Text != null)
+            {
+                titleshape.Text = block.Text;                
+            }
+
+            this.InsertionPoint = this.InsertionPoint.Add(block.Size.Width, 0);
+            this.heightacc = System.Math.Max(this.heightacc, block.Size.Height);
+
+
+            short titleshape_id = titleshape.ID16;
+
+            this.Blocks.Add(block);
+
+            return titleshape;
+        }
+
+        public void Linefeed()
+        {
+            this.InsertionPoint = new VA.Drawing.Point(leftmargin, this.InsertionPoint.Y - this.heightacc);            
+        }
+
+        public void CarriageReturn()
+        {
+            this.InsertionPoint = new VA.Drawing.Point(leftmargin, this.InsertionPoint.Y);
+        }
+
+    }
+
     public class FormPage
     {
         public string Name;
         public VA.Drawing.Size Size;
-        public MIVisio.Page VisioPage;
-
-        private readonly VA.Drawing.Rectangle _pagerect;
-        private readonly VA.Drawing.Rectangle _pageintrect;
-        private readonly VA.Drawing.Rectangle _titlerect;
-        private readonly VA.Drawing.Rectangle _bodywith_title_rect;
-        private int _fontid;
-        private VA.Text.TextCells _textblockformat;
-        private VA.Text.ParagraphFormatCells _titleParaFmt;
-        private VA.Shapes.FormatCells _titleFormat;
-        private VA.Text.CharacterFormatCells _titleCharFmt;
-        private VA.Text.ParagraphFormatCells _bodyParaFmt;
-        private VA.Text.CharacterFormatCells _bodyCharFmt;
-        private VA.Shapes.FormatCells _bodyFormat;
+        public IVisio.Page VisioPage;
 
         public double TitleTextSize { get; set; }
         public double BodyParaSpacingAfter { get; set; }
@@ -38,101 +146,51 @@ namespace VisioAutomation.Models.Forms
             BodyTextSize = 8.0;
             BodyParaSpacingAfter = 0.0;
             TitleTextSize = 15.0;
-            _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), this.Size);
-            _pageintrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5),
-                _pagerect.UpperRight.Subtract(0.5, 0.5));
-
-            _titlerect = new VA.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pageintrect.UpperRight);
-            _bodywith_title_rect = new VA.Drawing.Rectangle(_pageintrect.LowerLeft, _pagerect.UpperRight.Subtract(0.5, 1.0));
 
         }
 
-        public IVisio.Page Draw(IVisio.Pages pages)
+        public IVisio.Page Draw(FormRenderingContext ctx)
         {
-            var page = pages.Add();
 
-            page.Name = this.Name;
+            var r = new InteractiveDocumentRenderer(ctx.Document);
 
-            var pagesheet = page.PageSheet;
-
-            var pageupdate = new VA.ShapeSheet.Update();
             var page_cells = new VA.Pages.PageCells();
-            page_cells.PageHeight = this.Size.Height;
-            page_cells.PageWidth = this.Size.Width;
-            pageupdate.Execute(pagesheet);
+            this.VisioPage = r.AddPage(this.Name, this.Size, page_cells);
+            ctx.Page = this.VisioPage;
 
-            this.VisioPage = page;
+            var titleblock = new TextBlock(new VA.Drawing.Size(7.5, 1.0), this.Title);
 
-            var doc = pages.Document;
+            int _fontid = ctx.GetFontID(this.DefaultFont);
+            titleblock.Textcells.VerticalAlign = 0;
+            titleblock.ParagraphFormatCells.HorizontalAlign = 0;
+            titleblock.FormatCells.LineWeight = 0;
+            titleblock.FormatCells.LinePattern = 0;
+            titleblock.CharacterFormatCells.Font = _fontid;
+            titleblock.CharacterFormatCells.Size = get_pt_string(TitleTextSize);
 
-            var fonts = doc.Fonts;
-            var font = fonts[this.DefaultFont];
-            _fontid = font.ID;
-
-            _textblockformat = new VA.Text.TextCells();
-            _textblockformat.VerticalAlign = 0;
-
-            _titleParaFmt = new VA.Text.ParagraphFormatCells();
-            _titleParaFmt.HorizontalAlign = 0;
-
-            _titleFormat = new VA.Shapes.FormatCells();
-            _titleFormat.LineWeight = 0;
-            _titleFormat.LinePattern = 0;
-
-            _titleCharFmt = new VA.Text.CharacterFormatCells();
-            _titleCharFmt.Font = _fontid;
-            _titleCharFmt.Size = get_pt_string(TitleTextSize);
-
-            _bodyParaFmt = new VA.Text.ParagraphFormatCells();
-            _bodyParaFmt.HorizontalAlign = 0;
-            _bodyParaFmt.SpacingAfter = get_pt_string(BodyParaSpacingAfter);
-
-            _bodyCharFmt = new VA.Text.CharacterFormatCells();
-            _bodyCharFmt.Font = _fontid;
-            _bodyCharFmt.Size = get_pt_string(BodyTextSize);
-
-            _bodyFormat = new VA.Shapes.FormatCells();
-            _bodyFormat.LineWeight = 0;
-            _bodyFormat.LinePattern = 0;
+            var bodyblock = new TextBlock(new VA.Drawing.Size(7.5, 9.0), this.Body);
+            bodyblock.ParagraphFormatCells.HorizontalAlign = 0;
+            bodyblock.ParagraphFormatCells.SpacingAfter = get_pt_string(BodyParaSpacingAfter);
+            bodyblock.CharacterFormatCells.Font = _fontid;
+            bodyblock.CharacterFormatCells.Size = get_pt_string(BodyTextSize);
+            bodyblock.FormatCells.LineWeight = 0;
+            bodyblock.FormatCells.LinePattern = 0;
 
             // Draw the shapes
-            var titleshape = page.DrawRectangle(_titlerect);
-            titleshape.Text = this.Title;
+            var titleshape = r.AddShape(titleblock);
+            r.Linefeed();
 
-            var bodyshape = page.DrawRectangle(_bodywith_title_rect);
-            bodyshape.Text = this.Body;
+            var bodyshape = r.AddShape(bodyblock);
+            r.Linefeed();
 
             var update = new VA.ShapeSheet.Update();
-
-            // Set the ShapeSheet props
-            short bodyshape_id = bodyshape.ID16;
-            short titleshape_id = titleshape.ID16;
-            update.SetFormulas(titleshape_id, _textblockformat);
-            update.SetFormulasForRow(titleshape_id, this._titleParaFmt, 0);
-            update.SetFormulasForRow(titleshape_id, this._titleCharFmt, 0);
-            update.SetFormulas(titleshape_id, this._titleFormat);
-
-            update.SetFormulas(bodyshape_id, _textblockformat);
-            update.SetFormulasForRow(bodyshape_id, this._bodyCharFmt, 0);
-            update.SetFormulasForRow(bodyshape_id, this._bodyParaFmt, 0);
-            update.SetFormulas(bodyshape_id, this._bodyFormat);
-            update.Execute(page);
-
-
-            if (this.Body != null)
+            foreach (var block in r.Blocks)
             {
-                bodyshape.Text = this.Body;
+                block.ApplyFormus(update);
             }
+            update.Execute(this.VisioPage);
 
-            if (this.Title != null)
-            {
-                titleshape.Text = this.Title;
-            }
-            //this.VisioBodyShape = bodyshape;
-            //this.VisioTitleShape = titleshape;
-            this.VisioPage = page;
-
-            return page;
+            return this.VisioPage;
         }
 
         private string get_pt_string(double size)

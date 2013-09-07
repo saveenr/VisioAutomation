@@ -20,8 +20,15 @@ namespace VisioAutomation.Models.Forms
 
         public IVisio.Document Render(IVisio.Application app)
         {
+
             var docs = app.Documents;
             var doc = docs.Add("");
+
+            var ctx = new FormRenderingContext(app);
+            ctx.Application = app;
+            ctx.Document = doc;
+            ctx.Pages = doc.Pages;
+            ctx.Fonts = doc.Fonts;
 
             this.VisioDocument = doc;
 
@@ -33,7 +40,7 @@ namespace VisioAutomation.Models.Forms
             var pages = doc.Pages;
             foreach (var formpage in this.Pages)
             {
-                var page = formpage.Draw(pages);
+                var page = formpage.Draw(ctx);
             }
 
             if (pages.Count > 0)
