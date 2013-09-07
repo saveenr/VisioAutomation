@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using VisioAutomation.Drawing;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -5,9 +6,57 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Models.Forms
 {
-    public class TextDocumentBuilder
+    public class FormDocument
     {
-        private readonly IVisio.Application _app;
+        public string Subject ;
+        public string Title ;
+        public string Creator ;
+        public string Company;
+        public List<FormPage> Pages;
+        public IVisio.Document VisioDocument;
+
+        public FormDocument()
+        {
+            this.Pages = new List<FormPage>();
+        }
+
+        public IVisio.Document Render(IVisio.Application app)
+        {
+            var docs = app.Documents;
+            var doc = docs.Add("");
+
+            this.VisioDocument = doc;
+
+            doc.Subject = this.Subject;
+            doc.Title = this.Title;
+            doc.Creator = this.Creator;
+            doc.Company = this.Company;
+
+            var pages = doc.Pages;
+            foreach (var formpage in this.Pages)
+            {
+                var page = formpage.Draw(pages);
+            }
+
+            if (pages.Count > 0)
+            {
+                // Delete the empty first page
+                var first_page = VisioDocument.Pages[1];
+                first_page.Delete(1);
+                first_page = pages[1];
+                var active_window = app.ActiveWindow;
+                active_window.Page = first_page;
+
+            }
+            return doc;
+        }
+    }
+
+    public class FormPage
+    {
+        public string Name;
+        public VA.Drawing.Size Size;
+        public IVisio.Page VisioPage;
 
         private readonly VA.Drawing.Rectangle _pagerect;
         private readonly VA.Drawing.Rectangle _pageintrect;
@@ -22,35 +71,50 @@ namespace VisioAutomation.Models.Forms
         private VA.Text.CharacterFormatCells _bodyCharFmt;
         private VA.Shapes.FormatCells _bodyFormat;
 
-        public IVisio.Document VisioDocument { get; private set; }
-        public Size PageSize { get; private set; }
         public double TitleTextSize { get; set; }
         public double BodyParaSpacingAfter { get; set; }
         public double BodyTextSize { get; set; }
         public string DefaultFont { get; set; }
+        public string Title;
+        public string Body;
 
-        public TextDocumentBuilder(IVisio.Application app, VA.Drawing.Size size)
+        public FormPage()
         {
+            this.Size = new VA.Drawing.Size(8.5, 11);
+
             DefaultFont = "Segoe UI";
             BodyTextSize = 8.0;
             BodyParaSpacingAfter = 0.0;
             TitleTextSize = 15.0;
-            _app = app;
-            PageSize = size;
-            _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), PageSize);
+            _pagerect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), this.Size);
             _pageintrect = new VA.Drawing.Rectangle(_pagerect.LowerLeft.Add(0.5, 0.5),
                                                     _pagerect.UpperRight.Subtract(0.5, 0.5));
 
             _titlerect = new VA.Drawing.Rectangle(_pagerect.UpperLeft.Add(0.5, -1.0), _pageintrect.UpperRight);
             _bodywith_title_rect = new VA.Drawing.Rectangle(_pageintrect.LowerLeft, _pagerect.UpperRight.Subtract(0.5, 1.0));
+
         }
 
-        public void Start()
+        public IVisio.Page Draw(IVisio.Pages pages)
         {
-            var docs = _app.Documents;
-            VisioDocument = docs.Add("");
+            var page = pages.Add();
 
-            var font = VisioDocument.Fonts[this.DefaultFont];
+            page.Name = this.Name;
+
+            var pagesheet = page.PageSheet;
+
+            var pageupdate = new VA.ShapeSheet.Update();
+            var page_cells = new VA.Pages.PageCells();
+            page_cells.PageHeight = this.Size.Height;
+            page_cells.PageWidth = this.Size.Width;
+            pageupdate.Execute(pagesheet);
+
+            this.VisioPage = page;
+
+            var doc = pages.Document;
+
+            var fonts = doc.Fonts;
+            var font = fonts[this.DefaultFont];
             _fontid = font.ID;
 
             _textblockformat = new VA.Text.TextCells();
@@ -78,32 +142,13 @@ namespace VisioAutomation.Models.Forms
             _bodyFormat = new VA.Shapes.FormatCells();
             _bodyFormat.LineWeight = 0;
             _bodyFormat.LinePattern = 0;
-        }
-
-        private string get_pt_string(double size)
-        {
-            return string.Format("{0}pt",size);
-        }
-
-        public void Draw(TextPage textpage)
-        {
-            var page = VisioDocument.Pages.Add();
-            page.NameU = textpage.Name;
-
-            // Update the Page ShapeSheet
-            // - to set the size
-            var page_cells = new VA.Pages.PageCells();
-            page_cells.PageHeight = this.PageSize.Height;
-            page_cells.PageWidth = this.PageSize.Width;
-            var pageupdate = new VA.ShapeSheet.Update();
-            pageupdate.Execute(page);
 
             // Draw the shapes
             var titleshape = page.DrawRectangle(_titlerect);
-            titleshape.Text = textpage.Title;
+            titleshape.Text = this.Title;
 
             var bodyshape = page.DrawRectangle(_bodywith_title_rect);
-            bodyshape.Text = textpage.Body;
+            bodyshape.Text = this.Body;
 
             var update = new VA.ShapeSheet.Update();
 
@@ -121,31 +166,26 @@ namespace VisioAutomation.Models.Forms
             update.SetFormulas(bodyshape_id, this._bodyFormat);
             update.Execute(page);
 
-            textpage.VisioBodyShape = bodyshape;
-            textpage.VisioTitleShape = titleshape;
-            textpage.VisioPage = page;
+
+            if (this.Body != null)
+            {
+                bodyshape.Text = this.Body;
+            }
+
+            if (this.Title != null)
+            {
+                titleshape.Text = this.Title;
+            }
+            //this.VisioBodyShape = bodyshape;
+            //this.VisioTitleShape = titleshape;
+            this.VisioPage = page;
+
+            return page;
         }
 
-        public void Finish()
+        private string get_pt_string(double size)
         {
-            DeleteFirstPage();
-
-            // set the new first page
-            var pages = VisioDocument.Pages;
-            var first_page = pages[1];
-
-            var app = VisioDocument.Application;
-            var active_window = app.ActiveWindow;
-            active_window.Page = first_page;
-        }
-
-        private void DeleteFirstPage()
-        {
-            // Delete the empty first page
-            var first_page = VisioDocument.Pages[1];
-            first_page.Delete(1);
-            first_page = null;
+            return string.Format("{0}pt", size);
         }
     }
-
 }
