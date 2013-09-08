@@ -7,42 +7,41 @@ namespace VisioAutomation.Models.Forms
 {
     public class InteractiveDocumentRenderer
     {
-        private IVisio.Pages VisioPages;
-
-        private VA.Drawing.Margin PageMargin;
-        private VA.Drawing.Size PageSize;
-        
+        private IVisio.Pages VisioPages;       
         private double CurrentLineHeight ;
         private IVisio.Page page;
+        private FormPage FormPage;
 
         public List<TextBlock> Blocks;
         public VA.Drawing.Point InsertionPoint;
-
+        
         public InteractiveDocumentRenderer(IVisio.Document doc)
         {
             this.VisioPages = doc.Pages;
             this.Blocks = new List<TextBlock>();
         }
 
-        public IVisio.Page AddPage(string name, VA.Drawing.Size size, VA.Drawing.Margin margin, VA.Pages.PageCells pagecells)
+        public IVisio.Page AddPage(FormPage formpage)
         {
+            this.FormPage = formpage;
+
             this.page = this.VisioPages.Add();
-            this.page.Name = name;
+            this.page.Name = formpage.Name;
 
             // Update the Page Cells
             var pagesheet = page.PageSheet;
             var pageupdate = new VA.ShapeSheet.Update();
-            pagecells.PageWidth = size.Width;
-            pagecells.PageHeight = size.Height;
-            pagecells.PageLeftMargin = margin.Left;
-            pagecells.PageRightMargin = margin.Right;
-            pagecells.PageTopMargin = margin.Top;
-            pagecells.PageBottomMargin = margin.Bottom;
+
+            var pagecells = new VA.Pages.PageCells();
+            pagecells.PageWidth = formpage.Size.Width;
+            pagecells.PageHeight = formpage.Size.Height;
+            pagecells.PageLeftMargin = formpage.Margin.Left;
+            pagecells.PageRightMargin = formpage.Margin.Right;
+            pagecells.PageTopMargin = formpage.Margin.Top;
+            pagecells.PageBottomMargin = formpage.Margin.Bottom;
             pageupdate.SetFormulas(pagecells);
             pageupdate.Execute(pagesheet);
 
-            this.PageMargin = margin;
-            this.PageSize = size;
 
             this.Reset();
             return this.page;
@@ -51,7 +50,7 @@ namespace VisioAutomation.Models.Forms
         public void Reset()
         {
             this.Blocks = new List<TextBlock>();
-            this.InsertionPoint = new VA.Drawing.Point(this.PageMargin.Left, this.PageSize.Height - this.PageMargin.Top);
+            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.FormPage.Size.Height - this.FormPage.Margin.Top);
           
         }
 
@@ -78,12 +77,12 @@ namespace VisioAutomation.Models.Forms
 
         public void Linefeed()
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.PageMargin.Left, this.InsertionPoint.Y - this.CurrentLineHeight);            
+            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight);            
         }
 
         public void CarriageReturn()
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.PageMargin.Left, this.InsertionPoint.Y);
+            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y);
         }
 
     }
@@ -115,11 +114,9 @@ namespace VisioAutomation.Models.Forms
 
         internal IVisio.Page Draw(FormRenderingContext ctx)
         {
-
             var r = new InteractiveDocumentRenderer(ctx.Document);
-
             var page_cells = new VA.Pages.PageCells();
-            this.VisioPage = r.AddPage(this.Name, this.Size, this.Margin,page_cells);
+            this.VisioPage = r.AddPage(this);
             ctx.Page = this.VisioPage;
 
             var titleblock = new TextBlock(new VA.Drawing.Size(7.5, 1.0), this.Title);
