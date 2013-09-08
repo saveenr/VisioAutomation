@@ -10,9 +10,9 @@ namespace VisioAutomation.Models.Forms
         private IVisio.Pages Pages;
         public VA.Drawing.Point InsertionPoint;
 
-        private double leftmargin;
-        private double topmargin;
-
+        private VA.Drawing.Margin Margin;
+        private VA.Drawing.Size Size;
+        
         private double heightacc ;
         private IVisio.Page page;
         public List<TextBlock> Blocks; 
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.Forms
             this.Blocks = new List<TextBlock>();
         }
 
-        public IVisio.Page AddPage(string name, VA.Drawing.Size size, VA.Pages.PageCells pagecells)
+        public IVisio.Page AddPage(string name, VA.Drawing.Size size, VA.Drawing.Margin margin, VA.Pages.PageCells pagecells)
         {
             this.page = this.Pages.Add();
             this.page.Name = name;
@@ -32,12 +32,15 @@ namespace VisioAutomation.Models.Forms
             var pageupdate = new VA.ShapeSheet.Update();
             pagecells.PageWidth = size.Width;
             pagecells.PageHeight = size.Height;
+            pagecells.PageLeftMargin = margin.Left;
+            pagecells.PageRightMargin = margin.Right;
+            pagecells.PageTopMargin = margin.Top;
+            pagecells.PageBottomMargin = margin.Bottom;
+            pageupdate.SetFormulas(pagecells);
             pageupdate.Execute(pagesheet);
 
-            var rpagecells = VA.Pages.PageCells.GetCells(pagesheet);
-
-            this.leftmargin = rpagecells.PageLeftMargin.Result;
-            this.topmargin = size.Height - rpagecells.PageTopMargin.Result;
+            this.Margin = margin;
+            this.Size = size;
 
             this.Reset();
             return this.page;
@@ -46,7 +49,7 @@ namespace VisioAutomation.Models.Forms
         public void Reset()
         {
             this.Blocks = new List<TextBlock>();
-            this.InsertionPoint = new VA.Drawing.Point(leftmargin, topmargin);
+            this.InsertionPoint = new VA.Drawing.Point(this.Margin.Left, this.Size.Height - this.Margin.Top);
           
         }
 
@@ -66,8 +69,6 @@ namespace VisioAutomation.Models.Forms
             this.heightacc = System.Math.Max(this.heightacc, block.Size.Height);
 
 
-            short titleshape_id = titleshape.ID16;
-
             this.Blocks.Add(block);
 
             return titleshape;
@@ -75,12 +76,12 @@ namespace VisioAutomation.Models.Forms
 
         public void Linefeed()
         {
-            this.InsertionPoint = new VA.Drawing.Point(leftmargin, this.InsertionPoint.Y - this.heightacc);            
+            this.InsertionPoint = new VA.Drawing.Point(this.Margin.Left, this.InsertionPoint.Y - this.heightacc);            
         }
 
         public void CarriageReturn()
         {
-            this.InsertionPoint = new VA.Drawing.Point(leftmargin, this.InsertionPoint.Y);
+            this.InsertionPoint = new VA.Drawing.Point(this.Margin.Left, this.InsertionPoint.Y);
         }
 
     }
@@ -89,6 +90,7 @@ namespace VisioAutomation.Models.Forms
     {
         public string Name;
         public VA.Drawing.Size Size;
+        public VA.Drawing.Margin Margin;
         public IVisio.Page VisioPage;
 
         public double TitleTextSize { get; set; }
@@ -101,7 +103,7 @@ namespace VisioAutomation.Models.Forms
         public FormPage()
         {
             this.Size = new VA.Drawing.Size(8.5, 11);
-
+            this.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
             DefaultFont = "Segoe UI";
             BodyTextSize = 8.0;
             BodyParaSpacingAfter = 0.0;
@@ -115,7 +117,7 @@ namespace VisioAutomation.Models.Forms
             var r = new InteractiveDocumentRenderer(ctx.Document);
 
             var page_cells = new VA.Pages.PageCells();
-            this.VisioPage = r.AddPage(this.Name, this.Size, page_cells);
+            this.VisioPage = r.AddPage(this.Name, this.Size, this.Margin,page_cells);
             ctx.Page = this.VisioPage;
 
             var titleblock = new TextBlock(new VA.Drawing.Size(7.5, 1.0), this.Title);

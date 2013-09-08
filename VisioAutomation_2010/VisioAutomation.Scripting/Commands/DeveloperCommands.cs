@@ -41,10 +41,6 @@ namespace VisioAutomation.Scripting.Commands
             formdoc.Creator = "";
             formdoc.Company = "";
 
-
-            var pagesize = new VA.Drawing.Size(8.5, 11);
-
-
             //docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
@@ -86,7 +82,8 @@ namespace VisioAutomation.Scripting.Commands
                 formpage.Title = cmdset_prop.Name + " commands";
                 formpage.Body = helpstr.ToString();
                 formpage.Name = cmdset_prop.Name + " commands";
-
+                formpage.Size = new VA.Drawing.Size(8.5, 11);
+                formpage.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
                 formdoc.Pages.Add(formpage);
 
             }
@@ -103,8 +100,6 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
             
-            var pagesize = new VA.Drawing.Size(8.5, 11);
-
             var formdoc = new VA.Models.Forms.FormDocument();
 
             var helpstr = new System.Text.StringBuilder();
@@ -126,6 +121,8 @@ namespace VisioAutomation.Scripting.Commands
                     }
 
                     var formpage = new VA.Models.Forms.FormPage();
+                    formpage.Size = new VA.Drawing.Size(8.5, 11);
+                    formpage.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
                     formpage.Title = enum_.Name;
                     formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
