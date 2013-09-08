@@ -88,6 +88,7 @@
     <Compile Include="AssertVA.cs" />
     <Compile Include="Layout\CointainerLayout_Tests.cs" />
     <Compile Include="Layout\ResizePageTests.cs" />
+    <Compile Include="Scripting\ScriptingDevTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="TestExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
