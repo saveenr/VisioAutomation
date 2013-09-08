@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
 {
-    public class FormRenderingContext
+    internal class FormRenderingContext
     {
         public IVisio.Application Application;
         public IVisio.Document Document;

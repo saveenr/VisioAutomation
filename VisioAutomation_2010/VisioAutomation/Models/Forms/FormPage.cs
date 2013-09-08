@@ -1,50 +1,10 @@
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
-using VisioAutomation.Shapes;
-using VisioAutomation.Text;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
 {
-    public class TextBlock
-    {
-        public VA.Drawing.Size Size;
-        public string Font = "SegoeUI";
-        public VA.Text.TextCells Textcells;
-        public VA.Text.ParagraphCells ParagraphCells;
-        public VA.Shapes.FormatCells FormatCells;
-        public VA.Text.CharacterCells CharacterCells;
-        public string Text;
-        public IVisio.Shape VisioShape;
-
-        public TextBlock(VA.Drawing.Size size,string text)
-        {
-            this.Text = text;
-            this.Size = size;
-            this.Textcells = new TextCells();
-            this.ParagraphCells = new ParagraphCells();
-            this.FormatCells = new FormatCells();
-            this.CharacterCells = new CharacterCells();
-
-            this.Textcells.VerticalAlign = 0;
-            this.ParagraphCells.HorizontalAlign = 0;
-
-            this.FormatCells.LineWeight = 0;
-            this.FormatCells.LinePattern = 0;
-
-        }
-
-        public void ApplyFormus(VA.ShapeSheet.Update update)
-        {
-            short titleshape_id = this.VisioShape.ID16;
-            update.SetFormulas(titleshape_id, this.Textcells);
-            update.SetFormulasForRow(titleshape_id, this.ParagraphCells, 0);
-            update.SetFormulasForRow(titleshape_id, this.CharacterCells, 0);
-            update.SetFormulas(titleshape_id, this.FormatCells);
-        }
-    }
-
     public class InteractiveDocumentRenderer
     {
         private IVisio.Pages Pages;
@@ -149,7 +109,7 @@ namespace VisioAutomation.Models.Forms
 
         }
 
-        public IVisio.Page Draw(FormRenderingContext ctx)
+        internal IVisio.Page Draw(FormRenderingContext ctx)
         {
 
             var r = new InteractiveDocumentRenderer(ctx.Document);
