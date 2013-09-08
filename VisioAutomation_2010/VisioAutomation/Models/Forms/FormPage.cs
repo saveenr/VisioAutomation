@@ -7,24 +7,26 @@ namespace VisioAutomation.Models.Forms
 {
     public class InteractiveDocumentRenderer
     {
-        private IVisio.Pages Pages;
+        private IVisio.Pages VisioPages;
+
+        private VA.Drawing.Margin PageMargin;
+        private VA.Drawing.Size PageSize;
+        
+        private double CurrentLineHeight ;
+        private IVisio.Page page;
+
+        public List<TextBlock> Blocks;
         public VA.Drawing.Point InsertionPoint;
 
-        private VA.Drawing.Margin Margin;
-        private VA.Drawing.Size Size;
-        
-        private double heightacc ;
-        private IVisio.Page page;
-        public List<TextBlock> Blocks; 
         public InteractiveDocumentRenderer(IVisio.Document doc)
         {
-            this.Pages = doc.Pages;
+            this.VisioPages = doc.Pages;
             this.Blocks = new List<TextBlock>();
         }
 
         public IVisio.Page AddPage(string name, VA.Drawing.Size size, VA.Drawing.Margin margin, VA.Pages.PageCells pagecells)
         {
-            this.page = this.Pages.Add();
+            this.page = this.VisioPages.Add();
             this.page.Name = name;
 
             // Update the Page Cells
@@ -39,8 +41,8 @@ namespace VisioAutomation.Models.Forms
             pageupdate.SetFormulas(pagecells);
             pageupdate.Execute(pagesheet);
 
-            this.Margin = margin;
-            this.Size = size;
+            this.PageMargin = margin;
+            this.PageSize = size;
 
             this.Reset();
             return this.page;
@@ -49,7 +51,7 @@ namespace VisioAutomation.Models.Forms
         public void Reset()
         {
             this.Blocks = new List<TextBlock>();
-            this.InsertionPoint = new VA.Drawing.Point(this.Margin.Left, this.Size.Height - this.Margin.Top);
+            this.InsertionPoint = new VA.Drawing.Point(this.PageMargin.Left, this.PageSize.Height - this.PageMargin.Top);
           
         }
 
@@ -66,7 +68,7 @@ namespace VisioAutomation.Models.Forms
             }
 
             this.InsertionPoint = this.InsertionPoint.Add(block.Size.Width, 0);
-            this.heightacc = System.Math.Max(this.heightacc, block.Size.Height);
+            this.CurrentLineHeight = System.Math.Max(this.CurrentLineHeight, block.Size.Height);
 
 
             this.Blocks.Add(block);
@@ -76,12 +78,12 @@ namespace VisioAutomation.Models.Forms
 
         public void Linefeed()
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.Margin.Left, this.InsertionPoint.Y - this.heightacc);            
+            this.InsertionPoint = new VA.Drawing.Point(this.PageMargin.Left, this.InsertionPoint.Y - this.CurrentLineHeight);            
         }
 
         public void CarriageReturn()
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.Margin.Left, this.InsertionPoint.Y);
+            this.InsertionPoint = new VA.Drawing.Point(this.PageMargin.Left, this.InsertionPoint.Y);
         }
 
     }
