@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Drawing\Margin.cs" />
     <Compile Include="Models\Charting\DataPoint.cs" />
+    <Compile Include="Models\Forms\InteractiveRenderer.cs" />
     <Compile Include="Models\Forms\TextBlock.cs" />
     <Compile Include="Models\Forms\FormRenderingContext.cs" />
     <Compile Include="Models\Forms\FormPage.cs" />
