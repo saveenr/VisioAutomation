@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
 {
-    public class InteractiveDocumentRenderer
+    internal class InteractiveDocumentRenderer
     {
         private IVisio.Pages VisioPages;       
         private double CurrentLineHeight ;
@@ -21,7 +21,7 @@ namespace VisioAutomation.Models.Forms
             this.Blocks = new List<TextBlock>();
         }
 
-        public IVisio.Page AddPage(FormPage formpage)
+        public IVisio.Page CreatePage(FormPage formpage)
         {
             this.FormPage = formpage;
 
@@ -116,7 +116,7 @@ namespace VisioAutomation.Models.Forms
         {
             var r = new InteractiveDocumentRenderer(ctx.Document);
             var page_cells = new VA.Pages.PageCells();
-            this.VisioPage = r.AddPage(this);
+            this.VisioPage = r.CreatePage(this);
             ctx.Page = this.VisioPage;
 
             var titleblock = new TextBlock(new VA.Drawing.Size(7.5, 1.0), this.Title);
