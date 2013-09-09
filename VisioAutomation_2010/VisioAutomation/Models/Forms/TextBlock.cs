@@ -16,6 +16,7 @@ namespace VisioAutomation.Models.Forms
         public string Text;
         public IVisio.Shape VisioShape;
         public int VisioShapeID;
+        public VA.Drawing.Rectangle Rectangle;
 
         public TextBlock(VA.Drawing.Size size, string text)
         {
