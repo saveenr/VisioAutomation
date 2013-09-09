@@ -59,11 +59,13 @@ namespace VisioAutomation.Models.Forms
             var ll = new VA.Drawing.Point(this.InsertionPoint.X, this.InsertionPoint.Y-block.Size.Height);
             var tr  = new VA.Drawing.Point(this.InsertionPoint.X+block.Size.Width, this.InsertionPoint.Y);
             var rect = new VA.Drawing.Rectangle(ll, tr);
-            var titleshape = this.page.DrawRectangle(rect);
-            block.VisioShape = titleshape;
+            var newshape = this.page.DrawRectangle(rect);
+            block.VisioShape = newshape;
+            block.VisioShapeID = newshape.ID;
+
             if (block.Text != null)
             {
-                titleshape.Text = block.Text;                
+                newshape.Text = block.Text;                
             }
 
             this.InsertionPoint = this.InsertionPoint.Add(block.Size.Width, 0);
@@ -72,7 +74,7 @@ namespace VisioAutomation.Models.Forms
 
             this.Blocks.Add(block);
 
-            return titleshape;
+            return newshape;
         }
 
         public void Linefeed()

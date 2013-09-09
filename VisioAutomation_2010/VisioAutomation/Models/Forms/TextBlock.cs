@@ -15,6 +15,7 @@ namespace VisioAutomation.Models.Forms
         public VA.Text.CharacterCells CharacterCells;
         public string Text;
         public IVisio.Shape VisioShape;
+        public int VisioShapeID;
 
         public TextBlock(VA.Drawing.Size size, string text)
         {
