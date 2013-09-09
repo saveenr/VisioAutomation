@@ -14,9 +14,20 @@ namespace VisioAutomation.Models.Charting
         public VA.Drawing.Point Center;
         public List<DataPoint> DataPoints;
  
-        public PieChart()
+        public PieChart(VA.Drawing.Point center, double radius)
         {
             this.DataPoints = new List<DataPoint>();
+            this.Center = center;
+            this.Radius = radius;
+        }
+
+        public PieChart(VA.Drawing.Rectangle rect)
+        {
+            var center = rect.Center;
+            var radius = rect.Height/2.0;
+            this.DataPoints = new List<DataPoint>();
+            this.Center = center;
+            this.Radius = radius;
         }
 
         public void Render( IVisio.Page page)
