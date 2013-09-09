@@ -24,7 +24,7 @@ namespace VisioAutomation.Models.Charting
         public PieChart(VA.Drawing.Rectangle rect)
         {
             var center = rect.Center;
-            var radius = rect.Height/2.0;
+            var radius = System.Math.Min(rect.Width,rect.Height)/2.0;
             this.DataPoints = new List<DataPoint>();
             this.Center = center;
             this.Radius = radius;
