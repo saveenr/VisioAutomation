@@ -111,6 +111,12 @@ namespace VisioAutomation.Models.Forms
             this.CurrentLineHeight = 0;
         }
 
+        public void MoveRight(double advance)
+        {
+            this.InsertionPoint = new VA.Drawing.Point(this.InsertionPoint.X + advance, this.InsertionPoint.Y);
+            
+        }
+
 
         public void CarriageReturn()
         {
