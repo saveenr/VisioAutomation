@@ -26,13 +26,6 @@ namespace VisioAutomation.Models.Forms
             this.ParagraphCells = new VA.Text.ParagraphCells();
             this.FormatCells = new VA.Shapes.FormatCells();
             this.CharacterCells = new VA.Text.CharacterCells();
-
-            //this.Textcells.VerticalAlign = 0;
-            //this.ParagraphCells.HorizontalAlign = 0;
-
-            //this.FormatCells.LineWeight = 0;
-            //this.FormatCells.LinePattern = 0;
-
         }
 
         public void ApplyFormus(VA.ShapeSheet.Update update)

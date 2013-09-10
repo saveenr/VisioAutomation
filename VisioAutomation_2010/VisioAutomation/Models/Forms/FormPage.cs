@@ -54,6 +54,10 @@ namespace VisioAutomation.Models.Forms
             bodyblock.CharacterCells.Size = get_pt_string(BodyTextSize);
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
+            bodyblock.Textcells.VerticalAlign = 0;
+            bodyblock.FormatCells.LineWeight = 0;
+            bodyblock.FormatCells.LinePattern = 0;
+
 
             // Draw the shapes
             var titleshape = r.AddShape(titleblock);
@@ -62,13 +66,7 @@ namespace VisioAutomation.Models.Forms
             var bodyshape = r.AddShape(bodyblock);
             r.Linefeed();
 
-            var update = new VA.ShapeSheet.Update();
-            foreach (var block in r.Blocks)
-            {
-                block.ApplyFormus(update);
-            }
-            update.Execute(this.VisioPage);
-
+            r.Finish();
             return this.VisioPage;
         }
 

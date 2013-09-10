@@ -53,6 +53,8 @@ namespace VisioAutomation.Models.Forms
                 active_window.Page = first_page;
 
             }
+
+
             return doc;
         }
     }
