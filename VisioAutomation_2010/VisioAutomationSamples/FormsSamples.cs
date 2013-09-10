@@ -40,7 +40,7 @@ namespace VisioAutomationSamples
                 new ResolutionInfo("WXGA","16:9",1280,720),
                 new ResolutionInfo("WXGA","5:3",1280,768),
                 new ResolutionInfo("WXGA","16:10",1280,800),
-                new ResolutionInfo("SXGA–(UVGA)","4:03",1280,960),
+                new ResolutionInfo("SXGA–(UVGA)","4:3",1280,960),
                 new ResolutionInfo("SXGA","5:4",1280,1024),
                 new ResolutionInfo("HD","~16:9",1360,768),
                 new ResolutionInfo("HD","~16:9",1366,768),
@@ -65,7 +65,6 @@ namespace VisioAutomationSamples
 
             var segoe_ui_font = fonts["Segoe UI"];
             var segoe_ui__light_font = fonts["Segoe UI Light"];
-
             var segoe_ui_font_id = segoe_ui_font.ID;
             var segoe_ui__light_font_id = segoe_ui__light_font.ID;
 
@@ -74,7 +73,8 @@ namespace VisioAutomationSamples
             var formpage = new VA.Models.Forms.FormPage();
             var page = renderer.CreatePage(formpage);
 
-            var page_title = renderer.AddShape(10, 1.5, "Resolutions");
+            double max_body_width = 30.0;
+            var page_title = renderer.AddShape(max_body_width, 1.5, "Standard Resolutions by Aspect Ratio");
             page_title.CharacterCells.Font = segoe_ui__light_font_id;
             page_title.CharacterCells.Size = "100pt";
             page_title.ParagraphCells.HorizontalAlign = 0;
@@ -84,10 +84,9 @@ namespace VisioAutomationSamples
             renderer.Linefeed(0);
 
             var grouped = resolutions.GroupBy(i => i.AspectRatioName).ToList();
-
             foreach (var group in grouped)
             {
-               var group_title = renderer.AddShape(15, 1, group.Key);
+                var group_title = renderer.AddShape(max_body_width, 1, group.Key);
                group_title.CharacterCells.Font = segoe_ui__light_font_id;
                group_title.CharacterCells.Size = "50pt";
                group_title.ParagraphCells.HorizontalAlign = 0;
@@ -105,19 +104,15 @@ namespace VisioAutomationSamples
                     string label = string.Format("{0}\n{1}x{2}", resolution.Name, resolution.Width, resolution.Height);
                     var res_title = renderer.AddShape(w, h, label);
                     res_title.CharacterCells.Font = segoe_ui_font_id;
-                    res_title.CharacterCells.Size = "20pt";
+                    res_title.CharacterCells.Size = "25pt";
                     //res_title.ParagraphCells.HorizontalAlign = 0;
                     //res_title.FormatCells.LineWeight = 0;
                     //res_title.FormatCells.LinePattern = 0;
                     res_title.FormatCells.FillForegnd = "RGB(240,240,240)";
                     renderer.MoveRight(0.5);
                 }
-
                 renderer.Linefeed(1);
-
             }
-
-
             renderer.Finish();
             page.ResizeToFitContents();
         }

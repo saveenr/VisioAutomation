@@ -51,10 +51,7 @@ namespace VisioAutomation.Models.Forms
                 first_page = pages[1];
                 var active_window = app.ActiveWindow;
                 active_window.Page = first_page;
-
             }
-
-
             return doc;
         }
     }
