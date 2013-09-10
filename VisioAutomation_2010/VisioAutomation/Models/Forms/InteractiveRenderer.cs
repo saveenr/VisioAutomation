@@ -102,7 +102,15 @@ namespace VisioAutomation.Models.Forms
         public void Linefeed()
         {
             this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight);
+            this.CurrentLineHeight = 0;
         }
+
+        public void Linefeed(double advance)
+        {
+            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight - advance);
+            this.CurrentLineHeight = 0;
+        }
+
 
         public void CarriageReturn()
         {

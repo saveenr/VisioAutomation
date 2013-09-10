@@ -81,22 +81,21 @@ namespace VisioAutomationSamples
                 x24
             };
 
-            var page = SampleEnvironment.Application.ActivePage;
             var doc = SampleEnvironment.Application.ActiveDocument;
             var ir = new VA.Models.Forms.InteractiveRenderer(doc);
 
             var formpage = new VA.Models.Forms.FormPage();
-            ir.CreatePage(formpage);
+            var page = ir.CreatePage(formpage);
 
             ir.AddShape(5, 0.5, "Resolutions");
-            ir.Linefeed();
+            ir.Linefeed(0.5);
 
             foreach (var r in  reses)
             {
                 double w = r.width/400.0;
                 double h = r.height /400.0;
                 ir.AddShape(w, h, r.name);               
-                ir.Linefeed();
+                ir.Linefeed(0.5);
             }
 
             page.ResizeToFitContents();
