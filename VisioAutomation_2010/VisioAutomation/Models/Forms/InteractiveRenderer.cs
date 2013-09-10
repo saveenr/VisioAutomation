@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -91,6 +93,19 @@ namespace VisioAutomation.Models.Forms
             this.AdjustInsertionPoint(block.Size);
 
             return newshape;
+        }
+
+        public void Finish()
+        {
+            var update = new VA.ShapeSheet.Update();
+            foreach (var block in this.Blocks)
+            {
+                update.SetFormulas((short)block.VisioShapeID,block.FormatCells);
+                update.SetFormulas((short)block.VisioShapeID,block.Textcells);
+                update.SetFormulas((short)block.VisioShapeID,block.ParagraphCells, (short)0);
+                update.SetFormulas((short)block.VisioShapeID,block.CharacterCells, (short)0);
+            }
+            update.Execute(this.page);
         }
 
         private void AdjustInsertionPoint(VA.Drawing.Size size)

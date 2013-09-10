@@ -79,7 +79,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
 
             var update = new VA.ShapeSheet.Update();
-            update.SetFormulasForRow(cp, row);
+            update.SetFormulas(cp, row);
             update.Execute(shape);
         }
 

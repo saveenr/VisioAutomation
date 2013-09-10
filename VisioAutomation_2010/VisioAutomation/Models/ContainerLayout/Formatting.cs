@@ -20,8 +20,8 @@ namespace VisioAutomation.Models.ContainerLayout
 
         public void Apply(VA.ShapeSheet.Update update, short shapeid_label, short shapeid_box)
         {
-            update.SetFormulasForRow(shapeid_label, this.CharacterCells, 0);
-            update.SetFormulasForRow(shapeid_label, this.ParagraphCells, 0);
+            update.SetFormulas(shapeid_label, this.CharacterCells, 0);
+            update.SetFormulas(shapeid_label, this.ParagraphCells, 0);
             update.SetFormulas(shapeid_box, this.FormatCells);
             update.SetFormulas(shapeid_label, this.TextCells);
         }

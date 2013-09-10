@@ -27,11 +27,11 @@ namespace VisioAutomation.Models.Forms
             this.FormatCells = new VA.Shapes.FormatCells();
             this.CharacterCells = new VA.Text.CharacterCells();
 
-            this.Textcells.VerticalAlign = 0;
-            this.ParagraphCells.HorizontalAlign = 0;
+            //this.Textcells.VerticalAlign = 0;
+            //this.ParagraphCells.HorizontalAlign = 0;
 
-            this.FormatCells.LineWeight = 0;
-            this.FormatCells.LinePattern = 0;
+            //this.FormatCells.LineWeight = 0;
+            //this.FormatCells.LinePattern = 0;
 
         }
 
@@ -39,8 +39,8 @@ namespace VisioAutomation.Models.Forms
         {
             short titleshape_id = this.VisioShape.ID16;
             update.SetFormulas(titleshape_id, this.Textcells);
-            update.SetFormulasForRow(titleshape_id, this.ParagraphCells, 0);
-            update.SetFormulasForRow(titleshape_id, this.CharacterCells, 0);
+            update.SetFormulas(titleshape_id, this.ParagraphCells, 0);
+            update.SetFormulas(titleshape_id, this.CharacterCells, 0);
             update.SetFormulas(titleshape_id, this.FormatCells);
         }
     }
