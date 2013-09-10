@@ -37,7 +37,7 @@ namespace VisioAutomation.Models.Forms
             this.VisioPage = r.CreatePage(this);
             ctx.Page = this.VisioPage;
 
-            var titleblock = new TextBlock(new VA.Drawing.Size(7.5, 1.0), this.Title);
+            var titleblock = new TextBlock(new VA.Drawing.Size(7.5, 0.5), this.Title);
 
             int _fontid = ctx.GetFontID(this.DefaultFont);
             titleblock.Textcells.VerticalAlign = 0;
@@ -47,7 +47,14 @@ namespace VisioAutomation.Models.Forms
             titleblock.CharacterCells.Font = _fontid;
             titleblock.CharacterCells.Size = get_pt_string(TitleTextSize);
 
-            var bodyblock = new TextBlock(new VA.Drawing.Size(7.5, 9.0), this.Body);
+
+
+            // Draw the shapes
+            var titleshape = r.AddShape(titleblock);
+            r.Linefeed();
+
+            double body_height = r.GetDistanceToBottomMargin();
+            var bodyblock = new TextBlock(new VA.Drawing.Size(7.5, body_height), this.Body);
             bodyblock.ParagraphCells.HorizontalAlign = 0;
             bodyblock.ParagraphCells.SpacingAfter = get_pt_string(BodyParaSpacingAfter);
             bodyblock.CharacterCells.Font = _fontid;
@@ -57,11 +64,6 @@ namespace VisioAutomation.Models.Forms
             bodyblock.Textcells.VerticalAlign = 0;
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
-
-
-            // Draw the shapes
-            var titleshape = r.AddShape(titleblock);
-            r.Linefeed();
 
             var bodyshape = r.AddShape(bodyblock);
             r.Linefeed();
