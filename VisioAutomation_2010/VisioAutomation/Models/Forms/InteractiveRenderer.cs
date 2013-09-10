@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
 {
-    internal class InteractiveRenderer
+    public class InteractiveRenderer
     {
         private IVisio.Pages VisioPages;
         private double CurrentLineHeight;
@@ -57,6 +57,13 @@ namespace VisioAutomation.Models.Forms
         {
             this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left,
                 this.FormPage.Size.Height - this.FormPage.Margin.Top);
+        }
+
+        public TextBlock AddShape(double w, double h, string text)
+        {
+            var tb = new TextBlock(new VA.Drawing.Size(w, h), text);
+            this.AddShape(tb);
+            return tb;
         }
 
         public IVisio.Shape AddShape(TextBlock block)
