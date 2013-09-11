@@ -88,6 +88,7 @@
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
     <Compile Include="Commands\Get\Get_VisioPageCell.cs" />
     <Compile Include="Commands\Get\Get_VisioShapeCell.cs" />
+    <Compile Include="Commands\New\New_VisioBarChart.cs" />
     <Compile Include="Commands\New\New_VisioDirectedGraph.cs" />
     <Compile Include="Commands\New\New_VisioOrgChart.cs" />
     <Compile Include="Commands\Set\Set_VisioDocument.cs" />

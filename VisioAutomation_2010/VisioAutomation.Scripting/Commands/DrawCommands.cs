@@ -264,6 +264,16 @@ namespace VisioAutomation.Scripting.Commands
             chart.Render(page);
         }
 
+        public void BarChart(VA.Models.Charting.BarChart chart)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var application = this.Session.VisioApplication;
+            var page = application.ActivePage;
+            chart.Render(page);
+        }
+
         public void OrgChart(ORGCHARTLAYOUT.OrgChartDocument orgChartDocument)
         {
 

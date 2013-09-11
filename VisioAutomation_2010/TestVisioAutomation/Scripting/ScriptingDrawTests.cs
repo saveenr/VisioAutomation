@@ -147,6 +147,25 @@ namespace TestVisioAutomation
             chart.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
             chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
             ss.Draw.PieChart(chart);
+            ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_Draw_BarChart()
+        {
+            var ss = GetScriptingSession();
+            ss.Document.New();
+            ss.Page.New(new VA.Drawing.Size(4, 4), false);
+
+            var rect = new VA.Drawing.Rectangle(0, 0,4,4);
+
+            double radius = 1.0;
+            var chart = new VA.Models.Charting.BarChart(rect);
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.BarChart(chart);
         }
 
         [TestMethod]

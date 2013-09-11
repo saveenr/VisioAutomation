@@ -32,6 +32,9 @@ namespace VisioPS.Commands
         [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true)]
         public VA.Models.Charting.PieChart PieChart;
 
+        [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true)]
+        public VA.Models.Charting.BarChart BarChart;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -58,6 +61,10 @@ namespace VisioPS.Commands
             else if (this.PieChart != null)
             {
                 scriptingsession.Draw.PieChart(this.PieChart);
+            }
+            else if (this.BarChart != null)
+            {
+                scriptingsession.Draw.BarChart(this.BarChart);
             }
             else
             {
