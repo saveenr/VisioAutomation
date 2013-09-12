@@ -38,28 +38,14 @@ namespace VisioAutomation.Models.Charting
             double min = this.DataPoints.Select(i => i.Value).Min();
 
             double range = -1;
-            if (max >= 0)
+
+            if (min < 0)
             {
-                if (min >= 0)
-                {
-                    range = max;
-                }
-                else
-                {
-                    range = max - min;
-                }
+                range = max - min;                    
             }
             else
             {
-                if (min >= 0)
-                {
-                    // not possible
-                    throw new Exception();
-                }
-                else
-                {
-                    range = max - min;
-                }
+                range = max;
             }
 
 
@@ -70,39 +56,43 @@ namespace VisioAutomation.Models.Charting
                 base_y += System.Math.Abs(this.Rectangle.Height * (min / range));
             }
 
-            var baseline = page.DrawLine(this.Rectangle.Left, base_y, this.Rectangle.Right, base_y);
+            var category_axis_start_point = new VA.Drawing.Point(this.Rectangle.Left, base_y);
+            var category_axis_end_point = new VA.Drawing.Point(this.Rectangle.Right, base_y);
+            var category_axis_shape = page.DrawLine(category_axis_start_point, category_axis_end_point);
 
-            foreach (var dp in this.DataPoints)
+            foreach (var p in this.DataPoints)
             {
+                var value_height = System.Math.Abs(this.Rectangle.Height*(p.Value/range));
 
-                var cur_h = System.Math.Abs(this.Rectangle.Height*(dp.Value/range));
+                VA.Drawing.Point bar_p0;
+                VA.Drawing.Point bar_p1;
 
-                VA.Drawing.Point ll;
-                VA.Drawing.Point up;
-
-                if (dp.Value >= 0.0)
+                if (p.Value >= 0.0)
                 {
-                    ll = new VA.Drawing.Point(cur_x, base_y);
-                    up = new VA.Drawing.Point(cur_x + bar_width, base_y + cur_h); ;
+                    bar_p0 = new VA.Drawing.Point(cur_x, base_y);
+                    bar_p1 = new VA.Drawing.Point(cur_x + bar_width, base_y + value_height); ;
                 }
                 else
                 {
-                    ll = new VA.Drawing.Point(cur_x, base_y - cur_h);
-                    up = new VA.Drawing.Point(cur_x + bar_width, base_y);                    
+                    bar_p0 = new VA.Drawing.Point(cur_x, base_y - value_height);
+                    bar_p1 = new VA.Drawing.Point(cur_x + bar_width, base_y);                    
                 }
                 
-                var bar_rect = new VA.Drawing.Rectangle(ll, up);
+                var bar_rect = new VA.Drawing.Rectangle(bar_p0, bar_p1);
                 var shape = page.DrawRectangle(bar_rect);
-                dp.VisioShape = shape;
-                if (dp.Label != null)
+                p.VisioShape = shape;
+
+                if (p.Label != null)
                 {
-                    shape.Text = dp.Label;
+                    shape.Text = p.Label;
                 }
 
                 cur_x += bar_width + bar_spacing;
             }
 
             var allshapes = this.DataPoints.Select(dp => dp.VisioShape).Where(s => s != null).ToList();
+            allshapes.Add(category_axis_shape);
+
             if (allshapes.Count > 0)
             {
                 var app = page.Application;
