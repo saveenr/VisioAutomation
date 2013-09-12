@@ -1,4 +1,3 @@
-using VisioAutomation.Shapes.Controls;
 using VAS=VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
@@ -40,7 +39,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var ctrl = new ControlCells();
+            var ctrl = new VA.Shapes.Controls.ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;
