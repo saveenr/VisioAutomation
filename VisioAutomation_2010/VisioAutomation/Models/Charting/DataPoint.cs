@@ -10,11 +10,6 @@ namespace VisioAutomation.Models.Charting
         public string LabelFormat;
         public IVisio.Shape VisioShape;
 
-        public DataPoint()
-        {
-            
-        }
-
         public DataPoint(double value)
         {
             this.Value = value;

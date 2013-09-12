@@ -40,7 +40,6 @@ namespace TestVisioAutomation
             }
         }
 
-
         [TestMethod]
         public void Container_Diagram1()
         {
@@ -76,11 +75,9 @@ namespace TestVisioAutomation
             var l1_c2 = layout1.AddContainer("L1/C2"); // this is the empty container
 
             layout1.PerformLayout();
-
             var page1 = layout1.Render(doc);
 
             page1.Delete(0);
-
             doc.Close(true);
         }
     }

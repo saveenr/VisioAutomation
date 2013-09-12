@@ -36,7 +36,6 @@ namespace TestVisioAutomation
             Assert.AreEqual("5.5 in", xfrms[0].PinY.Formula);
             Assert.AreEqual("4 in", xfrms[1].PinX.Formula);
             Assert.AreEqual("4.9330127018922 in", xfrms[1].PinY.Formula);
-
         }
     }
 }
