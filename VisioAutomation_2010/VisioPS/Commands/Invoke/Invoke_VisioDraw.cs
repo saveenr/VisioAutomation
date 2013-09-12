@@ -35,6 +35,9 @@ namespace VisioPS.Commands
         [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true)]
         public VA.Models.Charting.BarChart BarChart;
 
+        [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true)]
+        public VA.Models.Charting.AreaChart AreaChart;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -65,6 +68,10 @@ namespace VisioPS.Commands
             else if (this.BarChart != null)
             {
                 scriptingsession.Draw.BarChart(this.BarChart);
+            }
+            else if (this.AreaChart != null)
+            {
+                scriptingsession.Draw.AreaChart(this.AreaChart);
             }
             else
             {

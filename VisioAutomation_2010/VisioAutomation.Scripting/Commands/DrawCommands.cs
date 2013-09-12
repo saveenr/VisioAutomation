@@ -274,6 +274,17 @@ namespace VisioAutomation.Scripting.Commands
             chart.Render(page);
         }
 
+        public void AreaChart(VA.Models.Charting.AreaChart chart)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var application = this.Session.VisioApplication;
+            var page = application.ActivePage;
+            chart.Render(page);
+        }
+
+
         public void OrgChart(ORGCHARTLAYOUT.OrgChartDocument orgChartDocument)
         {
 

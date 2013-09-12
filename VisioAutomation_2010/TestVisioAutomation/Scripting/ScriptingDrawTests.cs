@@ -183,7 +183,42 @@ namespace TestVisioAutomation
             ss.Draw.BarChart(chart3);
 
             ss.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0,1.0));
+            ss.Document.Close(true);
+        }
 
+        [TestMethod]
+        public void Scripting_Draw_AreaChart()
+        {
+            var ss = GetScriptingSession();
+            ss.Document.New();
+            ss.Page.New(new VA.Drawing.Size(4, 4), false);
+
+            var rect1 = new VA.Drawing.Rectangle(0, 0, 4, 4);
+            var chart1 = new VA.Models.Charting.AreaChart(rect1);
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.AreaChart(chart1);
+
+            var rect2 = new VA.Drawing.Rectangle(5, 0, 9, 4);
+            var chart2 = new VA.Models.Charting.AreaChart(rect2);
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(-3.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.AreaChart(chart2);
+
+            var rect3 = new VA.Drawing.Rectangle(10, 0, 14, 4);
+            var chart3 = new VA.Models.Charting.AreaChart(rect3);
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-1.0));
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-2.0));
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-3.0));
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-4.0));
+            ss.Draw.AreaChart(chart3);
+
+            ss.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0));
+            //ss.Document.Close(true);
         }
 
         [TestMethod]

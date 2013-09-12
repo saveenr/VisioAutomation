@@ -7,7 +7,7 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Models.Charting
 {
-    public class BarChart
+    public class AreaChart
     {
         public VA.Drawing.Rectangle Rectangle;
         public List<DataPoint> DataPoints;
@@ -15,7 +15,7 @@ namespace VisioAutomation.Models.Charting
         public double TotalMarginWidth;
         public double TotalBarSpacingWidth;
  
-        public BarChart(VA.Drawing.Rectangle rect)
+        public AreaChart(VA.Drawing.Rectangle rect)
         {
             this.Rectangle = rect;
             this.DataPoints = new List<DataPoint>();
@@ -24,20 +24,15 @@ namespace VisioAutomation.Models.Charting
         public void Render(IVisio.Page page)
         {
             this.TotalMarginWidth = this.Rectangle.Width*(0.10);
-            this.TotalBarSpacingWidth = this.Rectangle.Width * (0.10);
-            this.TotalBarWidth = this.Rectangle.Width*(0.80);
 
             int num_points = this.DataPoints.Count;
-
-            double bar_spacing = num_points > 1 ? this.TotalBarSpacingWidth/num_points : 0.0;
-            double bar_width = num_points > 0 ? this.TotalBarWidth/num_points : this.TotalBarWidth;
+            double bar_spacing = num_points > 1 ? (this.Rectangle.Width-this.TotalBarWidth)/num_points : 0.0;
 
             double cur_x = this.Rectangle.Left + (this.TotalMarginWidth/2.0);
-
             double max = this.DataPoints.Select(i => i.Value).Max();
             double min = this.DataPoints.Select(i => i.Value).Min();
             var range = ChartUtil.GetValueRangeDistance(min, max);
-
+            
             double base_y = this.Rectangle.Bottom;
 
             if (min < 0.0)
@@ -49,41 +44,46 @@ namespace VisioAutomation.Models.Charting
             var category_axis_end_point = new VA.Drawing.Point(this.Rectangle.Right, base_y);
             var category_axis_shape = page.DrawLine(category_axis_start_point, category_axis_end_point);
 
-            foreach (var p in this.DataPoints)
-            {
-                var value_height = System.Math.Abs(this.Rectangle.Height*(p.Value/range));
 
-                VA.Drawing.Point bar_p0;
-                VA.Drawing.Point bar_p1;
+            var points = new List<VA.Drawing.Point>();
+            for (int i = 0; i < this.DataPoints.Count; i++)
+            {
+                if (i == 0)
+                {
+                    points.Add( new VA.Drawing.Point(cur_x,base_y));
+                }
+
+                var p = this.DataPoints[i];
+
+                var value_height = System.Math.Abs(this.Rectangle.Height*(p.Value/range));
 
                 if (p.Value >= 0.0)
                 {
-                    bar_p0 = new VA.Drawing.Point(cur_x, base_y);
-                    bar_p1 = new VA.Drawing.Point(cur_x + bar_width, base_y + value_height); ;
+                    points.Add(new VA.Drawing.Point(cur_x, base_y+value_height));
                 }
                 else
                 {
-                    bar_p0 = new VA.Drawing.Point(cur_x, base_y - value_height);
-                    bar_p1 = new VA.Drawing.Point(cur_x + bar_width, base_y);                    
-                }
-                
-                var bar_rect = new VA.Drawing.Rectangle(bar_p0, bar_p1);
-                var shape = page.DrawRectangle(bar_rect);
-                p.VisioShape = shape;
+                    points.Add(new VA.Drawing.Point(cur_x , base_y - value_height));
 
-                if (p.Label != null)
+                }
+
+                if (i == this.DataPoints.Count - 1)
                 {
-                    shape.Text = p.Label;
+                    points.Add(new VA.Drawing.Point(cur_x, base_y));
                 }
 
-                cur_x += bar_width + bar_spacing;
+                cur_x += bar_spacing;
             }
+
+
+            var area_shape = page.DrawPolyline(points);
+            
 
             var allshapes = this.DataPoints.Select(dp => dp.VisioShape).Where(s => s != null).ToList();
             allshapes.Add(category_axis_shape);
 
             ChartUtil.GroupShapesIfNeeded(page, allshapes);
-
         }
+
     }
 }

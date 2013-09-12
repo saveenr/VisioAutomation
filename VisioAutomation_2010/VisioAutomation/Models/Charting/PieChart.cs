@@ -72,16 +72,7 @@ namespace VisioAutomation.Models.Charting
             }
 
             var allshapes = this.DataPoints.Select(dp => dp.VisioShape).Where(s => s != null).ToList();
-            if (allshapes.Count > 0)
-            {
-                var app = page.Application;
-                var win = app.ActiveWindow;
-                win.DeselectAll();
-                win.DeselectAll();
-                win.Select(shapes, IVisio.VisSelectArgs.visSelect);
-                var sel = win.Selection;
-                sel.Group();                
-            }
+            ChartUtil.GroupShapesIfNeeded(page, allshapes);
         }
     }
 }
