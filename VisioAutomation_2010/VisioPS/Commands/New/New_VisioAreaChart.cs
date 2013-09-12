@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using VisioAutomation.Models.Charting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -26,24 +28,11 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             var rect = new VA.Drawing.Rectangle(X0, Y0, X1, Y1);
-            var center = new VA.Drawing.Point(this.X0, this.Y0);
-
             var chart = new VA.Models.Charting.AreaChart(rect);
-
-            for (int i = 0; i < this.Values.Length; i++)
-            {
-                var dp = new VA.Models.Charting.DataPoint(this.Values[i]);
-                if (i < this.Labels.Length)
-                {
-                    dp.Label = this.Labels[i];
-                }
-
-                chart.DataPoints.Add(dp);
-            }
-
+            chart.DataPoints = VA.Models.Charting.DataPoint.DoublesToDataPoints(this.Values, this.Labels);
             this.WriteObject(chart);
         }
+
     }
 }

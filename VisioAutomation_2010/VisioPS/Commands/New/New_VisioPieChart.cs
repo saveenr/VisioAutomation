@@ -26,23 +26,10 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             var center = new VA.Drawing.Point(this.X0, this.Y0);
-
             var chart = new VA.Models.Charting.PieChart(center,this.Radius);
             chart.InnerRadius = this.InnerRadius;
-
-            for (int i = 0; i < this.Values.Length; i++)
-            {
-                var dp = new VA.Models.Charting.DataPoint(this.Values[i]);
-                if (i < this.Labels.Length)
-                {
-                    dp.Label = this.Labels[i];
-                }
-
-                chart.DataPoints.Add(dp);
-            }
-
+            chart.DataPoints = VA.Models.Charting.DataPoint.DoublesToDataPoints(this.Values, this.Labels);
             this.WriteObject(chart);
         }
     }
