@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
+using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -157,15 +158,26 @@ namespace TestVisioAutomation
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
-            var rect = new VA.Drawing.Rectangle(0, 0,4,4);
+            var rect1 = new VA.Drawing.Rectangle(0, 0, 4, 4);
 
-            double radius = 1.0;
-            var chart = new VA.Models.Charting.BarChart(rect);
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
-            ss.Draw.BarChart(chart);
+            var chart1 = new VA.Models.Charting.BarChart(rect1);
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.BarChart(chart1);
+
+            var rect2 = new VA.Drawing.Rectangle(6, 0, 10, 4);
+
+            var chart2= new VA.Models.Charting.BarChart(rect2);
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(-3.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.BarChart(chart2);
+
+            ss.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0,1.0));
+
         }
 
         [TestMethod]
