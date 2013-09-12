@@ -34,8 +34,7 @@ namespace VisioPS.Commands
 
             for (int i = 0; i < this.Values.Length; i++)
             {
-                var dp = new VA.Models.Charting.DataPoint();
-                dp.Value = this.Values[i];
+                var dp = new VA.Models.Charting.DataPoint(this.Values[i]);
                 if (i < this.Labels.Length)
                 {
                     dp.Label = this.Labels[i];
