@@ -45,10 +45,9 @@ namespace TestVisioAutomation
             var n1 = root.AddBox(10, 5);
             layout.PerformLayout();
             double delta = 0.00000001;
-            AssertVA.AreEqual(0, 0, 10, 5, n1.Rectangle, delta);
 
-            AssertVA.AreEqual(0, 0, 10, 5, root.Rectangle, delta);
-            
+            AssertVA.AreEqual(0, 0, 10, 5, n1.Rectangle, delta);
+            AssertVA.AreEqual(0, 0, 10, 5, root.Rectangle, delta);          
         }
 
         [TestMethod]

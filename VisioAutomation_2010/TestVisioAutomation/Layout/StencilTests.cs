@@ -82,7 +82,6 @@ namespace TestVisioAutomation
             }
 
             page1.Delete(0);
-
             rack_eq.Close(true);
         }
     }
