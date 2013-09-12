@@ -41,7 +41,14 @@ namespace VisioAutomation.Models.Charting
 
             if (min < 0)
             {
-                range = max - min;                    
+                if (max >= 0)
+                {
+                    range = max - min;                    
+                }
+                else
+                {
+                    range = System.Math.Abs(min);
+                }
             }
             else
             {
