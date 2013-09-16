@@ -9,7 +9,7 @@ namespace VisioPS.Commands
     public class Invoke_VisioDraw : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(ParameterSetName="orgchcart",Position=0,Mandatory = true)]
-        public VA.Models.OrgChart.Drawing OrgChart { get; set; }
+        public VA.Models.OrgChart.OrgChartDocument OrgChart { get; set; }
 
         [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true)]
         public VA.Models.Grid.GridLayout GridLayout { get; set; }
@@ -31,6 +31,12 @@ namespace VisioPS.Commands
 
         [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true)]
         public VA.Models.Charting.PieChart PieChart;
+
+        [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true)]
+        public VA.Models.Charting.BarChart BarChart;
+
+        [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true)]
+        public VA.Models.Charting.AreaChart AreaChart;
 
         protected override void ProcessRecord()
         {
@@ -58,6 +64,14 @@ namespace VisioPS.Commands
             else if (this.PieChart != null)
             {
                 scriptingsession.Draw.PieChart(this.PieChart);
+            }
+            else if (this.BarChart != null)
+            {
+                scriptingsession.Draw.BarChart(this.BarChart);
+            }
+            else if (this.AreaChart != null)
+            {
+                scriptingsession.Draw.AreaChart(this.AreaChart);
             }
             else
             {

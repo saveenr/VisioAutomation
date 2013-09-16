@@ -264,14 +264,35 @@ namespace VisioAutomation.Scripting.Commands
             chart.Render(page);
         }
 
-        public void OrgChart(ORGCHARTLAYOUT.Drawing drawing)
+        public void BarChart(VA.Models.Charting.BarChart chart)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var application = this.Session.VisioApplication;
+            var page = application.ActivePage;
+            chart.Render(page);
+        }
+
+        public void AreaChart(VA.Models.Charting.AreaChart chart)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var application = this.Session.VisioApplication;
+            var page = application.ActivePage;
+            chart.Render(page);
+        }
+
+
+        public void OrgChart(ORGCHARTLAYOUT.OrgChartDocument orgChartDocument)
         {
 
             this.Session.WriteVerbose("Start OrgChart Rendering");
             this.CheckVisioApplicationAvailable();
 
             var application = this.Session.VisioApplication;
-            drawing.Render(application);
+            orgChartDocument.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
             this.Session.WriteVerbose("Finished OrgChart Rendering");

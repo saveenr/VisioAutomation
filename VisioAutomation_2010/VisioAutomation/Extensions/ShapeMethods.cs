@@ -57,7 +57,7 @@ namespace VisioAutomation.Extensions
 
         public static IList<IVisio.Shape> GetShapesFromIDs(this IVisio.Shapes shapes, IList<short> shapeids)
         {
-            return VA.ShapeHelper.GetShapesFromIDs(shapes, shapeids);
+            return VA.Shapes.ShapeHelper.GetShapesFromIDs(shapes, shapeids);
         }
     }
 }

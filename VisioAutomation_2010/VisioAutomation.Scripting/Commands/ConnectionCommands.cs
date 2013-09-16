@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes.Connections;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -21,30 +22,30 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="scripting_session"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public IList<VA.Connections.ConnectorEdge> GetTransitiveClosure(Connections.ConnectorArrowEdgeHandling flag)
+        public IList<ConnectorEdge> GetTransitiveClosure(ConnectorArrowEdgeHandling flag)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
             var app = this.Session.VisioApplication;
-            return VA.Connections.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
+            return PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
-        public IList<VA.Connections.ConnectorEdge> GetDirectedEdges(Connections.ConnectorArrowEdgeHandling flag)
+        public IList<ConnectorEdge> GetDirectedEdges(ConnectorArrowEdgeHandling flag)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
-            var directed_edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage, flag);
+            var directed_edges = PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage, flag);
             return directed_edges;
         }
 
-        public IList<VA.Connections.ConnectorEdge> GetEdges()
+        public IList<ConnectorEdge> GetEdges()
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
 
-            var edges = VA.Connections.PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
+            var edges = PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
             this.Session.WriteVerbose( "{0} Edges found", edges.Count);
             return edges;
         }
@@ -58,7 +59,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, undoname_connectShapes))
             {
-                var connectors = VA.Connections.ConnectorHelper.ConnectShapes(active_page, master, fromshapes, toshapes);
+                var connectors = ConnectorHelper.ConnectShapes(active_page, master, fromshapes, toshapes);
                 return connectors;
             }
         }

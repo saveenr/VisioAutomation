@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -25,7 +26,7 @@ namespace TestVisioAutomation
             ss.Selection.Select(s3);
 
             var indices0 = ss.ConnectionPoint.Add("0", "Width*0.67",
-                                                 VA.Connections.ConnectionPointType.
+                                                 ConnectionPointType.
                                                      Outward);
             Assert.AreEqual(3, indices0.Count);
             Assert.AreEqual(0, indices0[0]);

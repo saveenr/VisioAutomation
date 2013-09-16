@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -31,7 +32,7 @@ namespace VisioPS.Commands
 
         protected override void ProcessRecord()
         {
-            var cp = new VA.CustomProperties.CustomPropertyCells();
+            var cp = new CustomPropertyCells();
             cp.Value = this.Value;
             if (this.Label != null)
             {

@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
         public static void OrgChart()
         {
             // This creates a new document
-            var orgchart = new OCMODEL.Drawing();
+            var orgchart = new OCMODEL.OrgChartDocument();
 
             var bob = new OCMODEL.Node("Bob");
             var ted = new OCMODEL.Node("Ted");

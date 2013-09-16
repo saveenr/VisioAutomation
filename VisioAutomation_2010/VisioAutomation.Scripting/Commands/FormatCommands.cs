@@ -13,7 +13,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, VA.Format.ShapeFormatCells format)
+        public void Set(IList<IVisio.Shape> target_shapes, VA.Shapes.FormatCells format)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(this.Session.VisioApplication.ActivePage);            
         }
 
-        public IList<VA.Format.ShapeFormatCells> Get(IList<IVisio.Shape> target_shapes)
+        public IList<VA.Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -45,11 +45,11 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return new List<VA.Format.ShapeFormatCells>(0);
+                return new List<VA.Shapes.FormatCells>(0);
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = VA.Format.ShapeFormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
+            var fmts = VA.Shapes.FormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
             return fmts;
         }
 
@@ -121,7 +121,7 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(active_page);
         }
 
-        private readonly VA.Format.FormatPaintCache cache = new VA.Format.FormatPaintCache();
+        private readonly FormatPaintCache cache = new FormatPaintCache();
 
         public void Copy()
         {
@@ -132,7 +132,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Copy(null, allflags);
         }
 
-        public void Copy(IVisio.Shape target_shape, VA.Format.FormatCategory category)
+        public void Copy(IVisio.Shape target_shape, FormatCategory category)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -151,7 +151,7 @@ namespace VisioAutomation.Scripting.Commands
             this.cache.Clear();
         }
 
-        public void Paste(IList<IVisio.Shape> target_shapes, VA.Format.FormatCategory category, bool apply_formulas)
+        public void Paste(IList<IVisio.Shape> target_shapes, FormatCategory category, bool apply_formulas)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();

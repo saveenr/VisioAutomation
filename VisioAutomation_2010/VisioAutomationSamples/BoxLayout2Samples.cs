@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Shapes.UserDefinedCells;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
@@ -86,7 +87,7 @@ namespace VisioAutomationSamples
             int num_types = 10;
             int max_properties = 50;
 
-            var types = typeof (VA.UserDefinedCells.UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
+            var types = typeof (UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
 
             var data = new List<string[]>();
             foreach (var type in types)

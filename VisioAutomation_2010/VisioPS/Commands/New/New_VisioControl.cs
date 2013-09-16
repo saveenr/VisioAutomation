@@ -39,7 +39,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var ctrl = new VA.Controls.ControlCells();
+            var ctrl = new VA.Shapes.Controls.ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;

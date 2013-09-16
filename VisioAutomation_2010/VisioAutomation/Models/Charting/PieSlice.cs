@@ -12,7 +12,13 @@ namespace VisioAutomation.Models.Charting
         public double InnerRadius { get; private set; }
         public double Radius { get; private set; }
         public VA.Drawing.Point Center { get; private set; }
-        public VA.Models.Charting.Sector Sector { get; private set; }
+        public double SectorStartAngle { get; private set; }
+        public double SectorEndAngle { get; private set; }
+
+        public double Angle
+        {
+            get { return this.SectorEndAngle - this.SectorStartAngle; }
+        }
 
         public PieSlice(VA.Drawing.Point center, double start, double end)
         {
@@ -23,7 +29,8 @@ namespace VisioAutomation.Models.Charting
                 throw new System.ArgumentException("end","end angle must be greater than or equal to start angle");
             }
 
-            this.Sector = new VA.Models.Charting.Sector(start, end);
+            this.SectorStartAngle = start;
+            this.SectorEndAngle = end;
         }
 
         public PieSlice(VA.Drawing.Point center, double radius, double start, double end) :
@@ -97,12 +104,12 @@ namespace VisioAutomation.Models.Charting
 
         public IVisio.Shape RenderPie( IVisio.Page page)
         {
-            if (this.Sector.Angle == 0.0)
+            if (this.Angle == 0.0)
             {
-                var p1 = this.GetPointAtRadius(this.Center, this.Radius, this.Sector.StartAngle);
+                var p1 = this.GetPointAtRadius(this.Center, this.Radius, this.SectorStartAngle);
                 return page.DrawLine(this.Center, p1);
             }
-            else if (this.Sector.Angle >= 2*System.Math.PI)
+            else if (this.Angle >= 2*System.Math.PI)
             {
                 var A = this.Center.Add(-this.Radius, -this.Radius);
                 var B = this.Center.Add(this.Radius, this.Radius);
@@ -124,12 +131,12 @@ namespace VisioAutomation.Models.Charting
 
         public IVisio.Shape RenderDoughnut(IVisio.Page page)
         {
-            double total_angle = this.Sector.Angle;
+            double total_angle = this.Angle;
 
             if (total_angle == 0.0)
             {
-                var p1 = this.GetPointAtRadius(this.Center, this.Sector.StartAngle, this.InnerRadius);
-                var p2 = this.GetPointAtRadius(this.Center, this.Sector.StartAngle, this.Radius);
+                var p1 = this.GetPointAtRadius(this.Center, this.SectorStartAngle, this.InnerRadius);
+                var p2 = this.GetPointAtRadius(this.Center, this.SectorStartAngle, this.Radius);
                 var shape = page.DrawLine(p1, p2);
                 return shape;
             }
@@ -193,27 +200,31 @@ namespace VisioAutomation.Models.Charting
 
         public static List<PieSlice> GetSlicesFromValues(VA.Drawing.Point center, double radius, IList<double> values)
         {
-            var sectors = GetSectorsFromValues(values);
-            var slices = new List<PieSlice>(sectors.Count);
-            foreach (var sector in sectors)
+            double sectors_sum = values.Sum();
+            var slices = new List<PieSlice>(values.Count);
+            double start_angle = 0;
+            foreach (int i in Enumerable.Range(0, values.Count))
             {
-                var pieslice = new PieSlice(center, radius, sector.StartAngle, sector.EndAngle);
-                slices.Add(pieslice);
+                double cur_val = values[i];
+                double cur_val_norm = cur_val / sectors_sum;
+                double cur_angle = cur_val_norm * System.Math.PI * 2.0;
+                double end_angle = start_angle + cur_angle;
+
+                var ps = new VA.Models.Charting.PieSlice(center,radius,start_angle, end_angle);
+                slices.Add(ps);
+
+                start_angle += cur_angle;
             }
-             
             return slices;
         }
 
         public static List<PieSlice> GetSlicesFromValues(VA.Drawing.Point center, double inner_radius, double outer_radius, IList<double> values)
         {
-            var sectors = GetSectorsFromValues(values);
-            var slices = new List<PieSlice>(sectors.Count);
-            foreach (var sector in sectors)
+            var slices = GetSlicesFromValues(center, outer_radius, values);
+            foreach (var slice in slices)
             {
-                var pieslice = new PieSlice(center, sector.StartAngle, sector.EndAngle, inner_radius, outer_radius);
-                slices.Add(pieslice);
+                slice.InnerRadius = inner_radius;
             }
-
             return slices;
         }
 
@@ -231,8 +242,8 @@ namespace VisioAutomation.Models.Charting
             // split apart the arc into distinct bezier segments (will end up with at least 1 segment)
             // the segments will "fit" end to end
             var sub_arcs = VA.Drawing.BezierSegment.FromArc(
-                this.Sector.StartAngle,
-                this.Sector.EndAngle);
+                this.SectorStartAngle,
+                this.SectorEndAngle);
 
             // merge bezier segments together into a list of points
             var merged_points = VA.Drawing.BezierSegment.Merge(sub_arcs, out degree);
@@ -246,29 +257,9 @@ namespace VisioAutomation.Models.Charting
             return arc_bez;
         }
 
-        protected static List<Sector> GetSectorsFromValues(IList<double> values)
-        {
-            double sectors = values.Sum();
-            var slices = new List<Sector>(values.Count);
-            double start_angle = 0;
-            foreach (int i in Enumerable.Range(0, values.Count))
-            {
-                double cur_val = values[i];
-                double cur_val_norm = cur_val / sectors;
-                double cur_angle = cur_val_norm * System.Math.PI * 2.0;
-                double end_angle = start_angle + cur_angle;
-
-                var ps = new VA.Models.Charting.Sector(start_angle, end_angle);
-                slices.Add(ps);
-
-                start_angle += cur_angle;
-            }
-            return slices;
-        }
-
         protected void check_normal_angle()
         {
-            if ((this.Sector.Angle <= 0.0) || (this.Sector.Angle > System.Math.PI * 2.0))
+            if ((this.Angle <= 0.0) || (this.Angle > System.Math.PI * 2.0))
             {
                 string msg = string.Format("Angle of sector must be greater than zero and less than 2*PI");
                 throw new System.ArgumentException(msg);

@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using System.Linq;
+using VisioAutomation.Shapes.Connections;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -23,7 +24,7 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges = VA.Connections.PathAnalysis.GetEdges(page1);
+            var edges = PathAnalysis.GetEdges(page1);
             Assert.AreEqual(2, edges.Count);
 
             Assert.AreEqual(shapes[0], edges[0].From);
@@ -47,8 +48,8 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges = VA.Connections.PathAnalysis.GetEdges(page1, 
-                VisioAutomation.Connections.ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
+            var edges = PathAnalysis.GetEdges(page1, 
+                ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional);
             Assert.AreEqual(4, edges.Count);
 
             Assert.AreEqual(shapes[1], edges[0].From);
@@ -89,8 +90,8 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges0 = VA.Connections.PathAnalysis.GetEdges(page1, 
-                VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var edges0 = PathAnalysis.GetEdges(page1, 
+                ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(0, edges0.Count);
 
             var src_beginarrow = VA.ShapeSheet.SRCConstants.BeginArrow;
@@ -101,7 +102,7 @@ namespace TestVisioAutomation
 
             cell_beginarrow.FormulaU = "1";
             cell_endarow.FormulaU = "1";
-            var edges1 = VA.Connections.PathAnalysis.GetEdges(page1, VisioAutomation.Connections.ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
+            var edges1 = PathAnalysis.GetEdges(page1, ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(2, edges1.Count);
             Assert.AreEqual("B", edges1[0].From.Text);
             Assert.AreEqual("A", edges1[0].To.Text);
@@ -124,7 +125,7 @@ namespace TestVisioAutomation
 
         private void connect(IVisio.Shape c1, IVisio.Shape from, IVisio.Shape to)
         {
-            VA.Connections.ConnectorHelper.ConnectShapes(c1, from, to);
+            ConnectorHelper.ConnectShapes(c1, from, to);
         }
     }
 }

@@ -319,13 +319,13 @@ namespace TestVisioAutomation
             var vrect1 = new VA.DOM.Rectangle(1, 1, 9, 9);
             vrect1.Text = new VA.Text.Markup.TextElement("HELLO WORLD");
 
-            vrect1.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+            vrect1.CustomProperties = new Dictionary<string, VA.Shapes.CustomProperties.CustomPropertyCells>();
 
-            var cp1 = new VA.CustomProperties.CustomPropertyCells();
+            var cp1 = new VA.Shapes.CustomProperties.CustomPropertyCells();
             cp1.Value = "FOOVALUE";
             cp1.Label = "Foo Label";
 
-            var cp2 = new VA.CustomProperties.CustomPropertyCells();
+            var cp2 = new VA.Shapes.CustomProperties.CustomPropertyCells();
             cp2.Value = "BARVALUE";
             cp2.Label = "Bar Label";
 
@@ -342,8 +342,8 @@ namespace TestVisioAutomation
             // Verify
             Assert.IsNotNull(vrect1.VisioShape);
             Assert.AreEqual("HELLO WORLD", vrect1.VisioShape.Text);
-            Assert.IsTrue(VA.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
-            Assert.IsTrue(VA.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
+            Assert.IsTrue(VA.Shapes.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "FOO"));
+            Assert.IsTrue(VA.Shapes.CustomProperties.CustomPropertyHelper.Contains(vrect1.VisioShape, "BAR"));
 
             doc.Close(true);
         }
@@ -586,7 +586,7 @@ namespace TestVisioAutomation
 
             var page = page_node.Render(doc);
 
-            var xfrms = VA.Layout.XFormCells.GetCells(page,
+            var xfrms = VA.Shapes.XFormCells.GetCells(page,
                                                         new int[] { dropped_shape0.VisioShapeID, 
                                                             drawn_shape0.VisioShapeID, 
                                                             dropped_shape1.VisioShapeID, 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using TREEMODEL = VisioAutomation.Models.Tree;
@@ -34,16 +35,19 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.CheckVisioApplicationAvailable();
 
-            var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
-            docbuilder.BodyParaSpacingAfter = 6.0;
+            var formdoc = new VA.Models.Forms.FormDocument();
+            formdoc.Subject = "VisioAutomation.Scripting Documenation";
+            formdoc.Title = "VisioAutomation.Scripting Documenation";
+            formdoc.Creator = "";
+            formdoc.Company = "";
+
+            //docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
             var cmdst_props = VA.Scripting.Session.GetCommandSetProperties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 
-            docbuilder.Start();
             foreach (var cmdset_prop in cmdst_props)
             {
                 var cmdset_type = cmdset_prop.PropertyType;
@@ -74,38 +78,34 @@ namespace VisioAutomation.Scripting.Commands
                 helpstr.Length = 0;
                 TextUtil.Join(helpstr,"\r\n",lines);
 
-                var docpage = new VisioAutomation.Models.SimpleTextDoc.TextPage();
-                docpage.Title = cmdset_prop.Name + " commands";
-                docpage.Body = helpstr.ToString();
-                docpage.Name = cmdset_prop.Name + " commands";
+                var formpage = new VisioAutomation.Models.Forms.FormPage();
+                formpage.Title = cmdset_prop.Name + " commands";
+                formpage.Body = helpstr.ToString();
+                formpage.Name = cmdset_prop.Name + " commands";
+                formpage.Size = new VA.Drawing.Size(8.5, 11);
+                formpage.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
+                formdoc.Pages.Add(formpage);
 
-                docbuilder.Draw(docpage);
             }
 
-            docbuilder.Finish();
-            docbuilder.VisioDocument.Subject = "VisioAutomation.Scripting Documenation";
-            docbuilder.VisioDocument.Title = "VisioAutomation.Scripting Documenation";
-            docbuilder.VisioDocument.Creator = "";
-            docbuilder.VisioDocument.Company = "";
 
-            hide_ui_stuff(docbuilder.VisioDocument);
+            //hide_ui_stuff(docbuilder.VisioDocument);
 
-            return docbuilder.VisioDocument;
+            var app = this.Session.VisioApplication;
+            var doc = formdoc.Render(app);
+            return doc;
         }
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
             this.CheckVisioApplicationAvailable();
             
-            var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
-            //docbuilder.BodyParaSpacingAfter = 2.0;
-            docbuilder.BodyTextSize = 8.0;
+            var formdoc = new VA.Models.Forms.FormDocument();
+
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
 
             var interop_enums = VA.Interop.InteropHelper.GetEnums();
-            docbuilder.Start();
             int pagecount = 0;
             foreach (var enum_ in interop_enums)
             {
@@ -120,41 +120,49 @@ namespace VisioAutomation.Scripting.Commands
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
                     }
 
-                    var docpage = new VA.Models.SimpleTextDoc.TextPage();
-                    docpage.Title = enum_.Name;
-                    docpage.Body = helpstr.ToString();
+                    var formpage = new VA.Models.Forms.FormPage();
+                    formpage.Size = new VA.Drawing.Size(8.5, 11);
+                    formpage.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
+                    formpage.Title = enum_.Name;
+                    formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
                     {
-                        docpage.Name = string.Format("{0}", enum_.Name);
+                        formpage.Name = string.Format("{0}", enum_.Name);
                     }
                     else
                     {
-                        docpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
+                        formpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
                     }
 
-                    docbuilder.Draw(docpage);
+                    //docbuilder.BodyParaSpacingAfter = 2.0;
+
+                    formpage.BodyTextSize = 8.0;
+
+                    formdoc.Pages.Add(formpage);
+            
 
                     var tabstops = new[]
                                  {
                                      new VA.Text.TabStop(1.5, VA.Text.TabStopAlignment.Left)
                                  };
 
-                    VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
+                    //VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
                     
                     chunkcount++;
                     pagecount++;
                 }
             }
 
-            docbuilder.Finish();
-            docbuilder.VisioDocument.Subject = "Visio Interop Enum Documenation";
-            docbuilder.VisioDocument.Title = "Visio Interop Enum Documenation";
-            docbuilder.VisioDocument.Creator = "";
-            docbuilder.VisioDocument.Company = "";
+            formdoc.Subject = "Visio Interop Enum Documenation";
+            formdoc.Title = "Visio Interop Enum Documenation";
+            formdoc.Creator = "";
+            formdoc.Company = "";
 
-            hide_ui_stuff(docbuilder.VisioDocument);
+            //hide_ui_stuff(docbuilder.VisioDocument);
 
-            return docbuilder.VisioDocument;
+
+            var doc = formdoc.Render(this.Session.VisioApplication);
+            return doc;
         }
 
         private class PathTreeBuilder
@@ -417,6 +425,7 @@ namespace VisioAutomation.Scripting.Commands
                 var m1 = markup.AddElement(label+"\n");
                 m1.CharacterCells.Font = fontid_segoe;
                 m1.CharacterCells.Size = "12.0pt";
+                m1.CharacterCells.Style = "1"; // Bold
                 var m2 = markup.AddElement();
                 m2.CharacterCells.Font = fontid_segoe;
                 m2.CharacterCells.Size = "8.0pt";

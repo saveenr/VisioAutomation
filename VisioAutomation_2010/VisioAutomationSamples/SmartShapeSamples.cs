@@ -17,12 +17,12 @@ namespace VisioAutomationSamples
             var background = page_a.DrawRectangle(0, 0, 5, 1);
             var progress = page_a.DrawRectangle(0, 0, 1, 1);
 
-            var background_fmt = new VA.Format.ShapeFormatCells();
+            var background_fmt = new VA.Shapes.FormatCells();
             background_fmt.FillForegnd= "rgb(240,240,240)";
             background_fmt.LineColor = "rgb(100,100,100)";
 
 
-            var progress_fmt = new VA.Format.ShapeFormatCells();
+            var progress_fmt = new VA.Shapes.FormatCells();
             progress_fmt.FillForegnd = "rgb(100,150,240)";
             progress_fmt.LineColor = "rgb(100,100,100)";
 
@@ -32,7 +32,7 @@ namespace VisioAutomationSamples
 
             // Set the progress shape update itself based on its position
             string bkname = background.NameID;
-            var xform = new VA.Layout.XFormCells();
+            var xform = new VA.Shapes.XFormCells();
             xform.PinX = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
             xform.PinY = string.Format("GUARD({0}!PinY)", bkname);
             xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);

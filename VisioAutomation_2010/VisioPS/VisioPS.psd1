@@ -2,6 +2,7 @@
 #
 # HISTORY
 # -------
+# 2013/08/06 Moved VisioPS.dll moved to RootModule
 # 2012/02/16 Updated PowerShellVersion and Copyright
 # 2012/08/08 Initial version
 #
@@ -9,7 +10,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-# RootModule = ''
+# RootModule = 'VisioPS.dll'
 
 # Version number of this module.
 ModuleVersion = '1.1.20'
@@ -63,7 +64,7 @@ TypesToProcess = @('VisioPS.Types.ps1xml')
 FormatsToProcess = @(  )
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-NestedModules = @('VisioPS.dll')
+NestedModules = @()
 
 # Functions to export from this module
 FunctionsToExport = '*'

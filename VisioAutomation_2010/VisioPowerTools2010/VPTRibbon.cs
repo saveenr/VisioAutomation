@@ -402,7 +402,7 @@ namespace VisioPowerTools2010
                         var shape_shapes = shape.Shapes;
                         if (shape_shapes!=null && shape_shapes.Count>0)
                         {
-                            foreach (var nested_shape in VA.ShapeHelper.GetNestedShapes(shape))
+                            foreach (var nested_shape in VA.Shapes.ShapeHelper.GetNestedShapes(shape))
                             {
                                 Scramble(sb,nested_shape);                                
                             }

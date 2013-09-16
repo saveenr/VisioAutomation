@@ -7,24 +7,6 @@ using VisioAutomation.Extensions;
 
 namespace VisioAutomation.Models.Charting
 {
-    public class DataPoint
-    {
-        public double Value;
-        public string Label;
-        public string LabelFormat;
-        public IVisio.Shape VisioShape;
-
-        public DataPoint()
-        {
-            
-        }
-
-        public DataPoint(double value)
-        {
-            this.Value = value;
-        }
-    }
-
     public class PieChart
     {
         public double Radius= 1;
@@ -32,9 +14,20 @@ namespace VisioAutomation.Models.Charting
         public VA.Drawing.Point Center;
         public List<DataPoint> DataPoints;
  
-        public PieChart()
+        public PieChart(VA.Drawing.Point center, double radius)
         {
             this.DataPoints = new List<DataPoint>();
+            this.Center = center;
+            this.Radius = radius;
+        }
+
+        public PieChart(VA.Drawing.Rectangle rect)
+        {
+            var center = rect.Center;
+            var radius = System.Math.Min(rect.Width,rect.Height)/2.0;
+            this.DataPoints = new List<DataPoint>();
+            this.Center = center;
+            this.Radius = radius;
         }
 
         public void Render( IVisio.Page page)
@@ -79,16 +72,7 @@ namespace VisioAutomation.Models.Charting
             }
 
             var allshapes = this.DataPoints.Select(dp => dp.VisioShape).Where(s => s != null).ToList();
-            if (allshapes.Count > 0)
-            {
-                var app = page.Application;
-                var win = app.ActiveWindow;
-                win.DeselectAll();
-                win.DeselectAll();
-                win.Select(shapes, IVisio.VisSelectArgs.visSelect);
-                var sel = win.Selection;
-                sel.Group();                
-            }
+            ChartUtil.GroupShapesIfNeeded(page, allshapes);
         }
     }
 }

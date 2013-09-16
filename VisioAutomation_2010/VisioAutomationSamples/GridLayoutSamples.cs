@@ -45,7 +45,7 @@ namespace VisioAutomationSamples
             layout.PerformLayout();
             layout.Render(page);
 
-            var fmtcells = new VA.Format.ShapeFormatCells();
+            var fmtcells = new VA.Shapes.FormatCells();
             int i = 0;
             var update = new VA.ShapeSheet.Update();
             foreach (var node in layout.Nodes)

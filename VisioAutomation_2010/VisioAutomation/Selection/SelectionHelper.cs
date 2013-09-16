@@ -29,7 +29,7 @@ namespace VisioAutomation.Selection
 
             var shapes = new List<IVisio.Shape>();
             var sel_shapes = selection.AsEnumerable();
-            foreach (var shape in VA.ShapeHelper.GetNestedShapes(sel_shapes))
+            foreach (var shape in VA.Shapes.ShapeHelper.GetNestedShapes(sel_shapes))
             {
                 if (shape.Type != (short)IVisio.VisShapeTypes.visTypeGroup)
                 {
