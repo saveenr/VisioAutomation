@@ -340,7 +340,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var section_infos = new List<SectionQueryInfo>(this.Sections.Count);
                 foreach (var sec in this.Sections)
                 {
-                    int num_rows = shape.RowCount[(short)sec.SectionIndex];
+                    int num_rows = GetNumRowsForSection(shape, sec);
                     var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
                     section_infos.Add(section_info);
                 }
@@ -352,6 +352,19 @@ namespace VisioAutomation.ShapeSheet.Query
                 string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count, this.PerShapeSectionInfo.Count);
                 throw new VA.AutomationException(msg);
             }
+        }
+
+        private static short GetNumRowsForSection(IVisio.Shape shape, SectionQuery sec)
+        {
+            // For visSectionObject we know the result is always going to be 1
+            // so avoid making the call tp RowCount[]
+            if (sec.SectionIndex == IVisio.VisSectionIndices.visSectionObject)
+            {
+                return 1;
+            }
+
+            // For all other cases use RowCount[]
+            return shape.RowCount[(short)sec.SectionIndex];
         }
 
         private int GetTotalCellCount(int numshapes)
