@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioBarChart")]
+    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioAreaChart")]
     public class New_VisioAreaChart : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]

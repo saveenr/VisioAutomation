@@ -28,7 +28,8 @@ namespace VisioAutomation.Models.Charting
             int num_points = this.DataPoints.Count;
             double bar_spacing = num_points > 1 ? (this.Rectangle.Width-this.TotalBarWidth)/num_points : 0.0;
 
-            double cur_x = this.Rectangle.Left + (this.TotalMarginWidth/2.0);
+            double far_left = this.Rectangle.Left + (this.TotalMarginWidth/2.0);
+            double cur_x = far_left;
             double max = this.DataPoints.Select(i => i.Value).Max();
             double min = this.DataPoints.Select(i => i.Value).Min();
             var range = ChartUtil.GetValueRangeDistance(min, max);
@@ -74,6 +75,8 @@ namespace VisioAutomation.Models.Charting
 
                 cur_x += bar_spacing;
             }
+
+            points.Add(new VA.Drawing.Point(far_left, base_y));
 
 
             var area_shape = page.DrawPolyline(points);
