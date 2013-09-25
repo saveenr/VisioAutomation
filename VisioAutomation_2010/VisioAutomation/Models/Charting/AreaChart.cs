@@ -28,16 +28,20 @@ namespace VisioAutomation.Models.Charting
             int num_points = this.DataPoints.Count;
             double bar_spacing = num_points > 1 ? (this.Rectangle.Width-this.TotalBarWidth)/num_points : 0.0;
 
-            double far_left = this.Rectangle.Left + (this.TotalMarginWidth/2.0);
-            double cur_x = far_left;
+
+            // Calculate min & max which will be used many times later
             double max = this.DataPoints.Select(i => i.Value).Max();
             double min = this.DataPoints.Select(i => i.Value).Min();
             var range = ChartUtil.GetValueRangeDistance(min, max);
             
-            double base_y = this.Rectangle.Bottom;
+            // Determine the leftmost part of the drawing area
+            double base_x = this.Rectangle.Left + (this.TotalMarginWidth / 2.0);
 
+            // Determine the baseline height a.k.a the y axis location
+            double base_y = this.Rectangle.Bottom;
             if (min < 0.0)
             {
+                // if the min value is negative then we have to "raise" the baseline to accomodate it
                 base_y += System.Math.Abs(this.Rectangle.Height * (min / range));
             }
 
@@ -45,6 +49,7 @@ namespace VisioAutomation.Models.Charting
             var category_axis_end_point = new VA.Drawing.Point(this.Rectangle.Right, base_y);
             var category_axis_shape = page.DrawLine(category_axis_start_point, category_axis_end_point);
 
+            double cur_x = base_x;
 
             var points = new List<VA.Drawing.Point>();
             for (int i = 0; i < this.DataPoints.Count; i++)
@@ -76,7 +81,7 @@ namespace VisioAutomation.Models.Charting
                 cur_x += bar_spacing;
             }
 
-            points.Add(new VA.Drawing.Point(far_left, base_y));
+            points.Add(new VA.Drawing.Point(base_x, base_y));
 
 
             var area_shape = page.DrawPolyline(points);
