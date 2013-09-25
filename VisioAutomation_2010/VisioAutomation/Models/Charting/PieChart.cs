@@ -12,11 +12,11 @@ namespace VisioAutomation.Models.Charting
         public double Radius= 1;
         public double InnerRadius = -1;
         public VA.Drawing.Point Center;
-        public List<DataPoint> DataPoints;
+        public DataPointList DataPoints;
  
         public PieChart(VA.Drawing.Point center, double radius)
         {
-            this.DataPoints = new List<DataPoint>();
+            this.DataPoints = new DataPointList();
             this.Center = center;
             this.Radius = radius;
         }
@@ -25,7 +25,7 @@ namespace VisioAutomation.Models.Charting
         {
             var center = rect.Center;
             var radius = System.Math.Min(rect.Width,rect.Height)/2.0;
-            this.DataPoints = new List<DataPoint>();
+            this.DataPoints = new DataPointList();
             this.Center = center;
             this.Radius = radius;
         }

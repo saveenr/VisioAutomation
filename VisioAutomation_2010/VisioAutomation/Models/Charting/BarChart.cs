@@ -10,7 +10,7 @@ namespace VisioAutomation.Models.Charting
     public class BarChart
     {
         public VA.Drawing.Rectangle Rectangle;
-        public List<DataPoint> DataPoints;
+        public DataPointList DataPoints;
         public double TotalBarWidth;
         public double TotalMarginWidth;
         public double TotalBarSpacingWidth;
@@ -18,7 +18,7 @@ namespace VisioAutomation.Models.Charting
         public BarChart(VA.Drawing.Rectangle rect)
         {
             this.Rectangle = rect;
-            this.DataPoints = new List<DataPoint>();
+            this.DataPoints = new DataPointList();
         }
 
         public void Render(IVisio.Page page)

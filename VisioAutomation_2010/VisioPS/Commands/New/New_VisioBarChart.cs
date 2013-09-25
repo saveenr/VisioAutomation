@@ -1,3 +1,4 @@
+using VisioAutomation.Models.Charting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -28,7 +29,7 @@ namespace VisioPS.Commands
         {
             var rect = new VA.Drawing.Rectangle(X0, Y0, X1, Y1);
             var chart = new VA.Models.Charting.BarChart(rect);
-            chart.DataPoints = VA.Models.Charting.DataPoint.DoublesToDataPoints(this.Values, this.Labels);
+            chart.DataPoints = new DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
         }
     }

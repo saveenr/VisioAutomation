@@ -29,7 +29,7 @@ namespace VisioPS.Commands
             var center = new VA.Drawing.Point(this.X0, this.Y0);
             var chart = new VA.Models.Charting.PieChart(center,this.Radius);
             chart.InnerRadius = this.InnerRadius;
-            chart.DataPoints = VA.Models.Charting.DataPoint.DoublesToDataPoints(this.Values, this.Labels);
+            chart.DataPoints = new VA.Models.Charting.DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
         }
     }

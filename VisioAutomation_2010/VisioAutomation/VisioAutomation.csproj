@@ -84,6 +84,7 @@
     <Compile Include="Models\Charting\BarChart.cs" />
     <Compile Include="Models\Charting\AreaChart.cs" />
     <Compile Include="Models\Charting\ChartUtil.cs" />
+    <Compile Include="Models\Charting\DataPointList.cs" />
     <Compile Include="Models\Charting\DataPoint.cs" />
     <Compile Include="Models\Forms\InteractiveRenderer.cs" />
     <Compile Include="Models\Forms\TextBlock.cs" />

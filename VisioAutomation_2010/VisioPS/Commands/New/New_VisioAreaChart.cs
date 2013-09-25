@@ -30,7 +30,7 @@ namespace VisioPS.Commands
         {
             var rect = new VA.Drawing.Rectangle(X0, Y0, X1, Y1);
             var chart = new VA.Models.Charting.AreaChart(rect);
-            chart.DataPoints = VA.Models.Charting.DataPoint.DoublesToDataPoints(this.Values, this.Labels);
+            chart.DataPoints = new VA.Models.Charting.DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
         }
 
