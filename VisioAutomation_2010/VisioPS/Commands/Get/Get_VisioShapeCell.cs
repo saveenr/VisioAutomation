@@ -10,6 +10,9 @@ namespace VisioPS.Commands
     public class Get_VisioShapeCell : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
+        public string[] Cells { get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter Width { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
@@ -321,6 +324,9 @@ namespace VisioPS.Commands
             addcell(query, this.TxtPinY, "TxtPinY");
             addcell(query, this.TxtWidth, "TxtWidth");
             addcell(query, this.Width, "Width");
+
+            var dic = this.GetShapeCellDictionary();
+            Get_VisioPageCell.SetFromCellNames(query, this.Cells, dic);
 
             var page = scriptingsession.Page.Get();
 

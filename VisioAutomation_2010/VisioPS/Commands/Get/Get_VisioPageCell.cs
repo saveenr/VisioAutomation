@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Odbc;
+using System.Drawing;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using System.Linq;
@@ -9,8 +13,10 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioPageCell")]
     public class Get_VisioPageCell: VisioPSCmdlet
     {
+[SMA.Parameter(Mandatory = false)]
+public string[] Cells { get; set; }	
 
-        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvenueSizeX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvenueSizeX	{ get; set; }	
 [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvenueSizeY	{ get; set; }	
 [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvoidPageBreaks	{ get; set; }	
 [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	BlockSizeX	{ get; set; }	
@@ -160,6 +166,8 @@ addcell(query,this.YGridSpacing,"YGridSpacing");
 addcell(query,this.YRulerDensity,"YRulerDensity");
 addcell(query,this.YRulerOrigin,"YRulerOrigin");
 
+            var dic = this.GetPageCellDictionary();
+            SetFromCellNames(query, this.Cells, dic);
 
             var page = scriptingsession.Page.Get();
             var target_shapeids = new[] { page.ID };
@@ -172,6 +180,42 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
 
             this.WriteObject(dt);
             this.WriteVerboseEx("End Query");
+        }
+
+        public static void SetFromCellNames(CellQuery query, string[] Cells, Dictionary<string, VA.ShapeSheet.SRC> dic)
+        {
+            if (Cells != null)
+            {
+                foreach (string c in Cells)
+                {
+                    if (c.Contains("*") || c.Contains("?"))
+                    {
+                        string pat = "^" + System.Text.RegularExpressions.Regex.Escape(c)
+                            .Replace(@"\*", ".*").
+                            Replace(@"\?", ".") + "$";
+
+                        var regex = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+                            foreach (string k in dic.Keys)
+                            {
+                                if (regex.IsMatch(k))
+                                {
+                                    if (!query.Columns.Contains(k))
+                                    {
+                                        query.Columns.Add(dic[k], k);
+                                    }
+                                }
+                            }
+                    }
+                    else
+                    {
+                        if (!query.Columns.Contains(c))
+                        {
+                            query.Columns.Add(dic[c], c);
+                        }
+                    }
+                }
+            }
         }
 
         private void addcell(VisioAutomation.ShapeSheet.Query.CellQuery q, bool b, string name)

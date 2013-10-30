@@ -9,6 +9,17 @@ namespace VisioPS.Commands
     {
         protected override void ProcessRecord()
         {
+            if (!this.ScriptingSession.HasApplication)
+            {
+                this.ScriptingSession.Application.New();
+            }
+            else
+            {
+                if (!this.ScriptingSession.Application.Validate())
+                {
+                    this.ScriptingSession.Application.New();
+                }
+            }
             var doc = this.ScriptingSession.Document.New();
             this.WriteObject(doc);
         }
