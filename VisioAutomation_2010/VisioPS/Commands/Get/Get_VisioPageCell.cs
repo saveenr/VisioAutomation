@@ -128,12 +128,9 @@ addcell(query,this.PageBottomMargin,"PageBottomMargin");
 addcell(query,this.PageHeight,"PageHeight");
 addcell(query,this.PageLeftMargin,"PageLeftMargin");
 addcell(query,this.PageLineJumpDirX,"PageLineJumpDirX");
-addcell(query,this.PageLineJumpDirX,"PageLineJumpDirX");
-addcell(query,this.PageLineJumpDirY,"PageLineJumpDirY");
 addcell(query,this.PageLineJumpDirY,"PageLineJumpDirY");
 addcell(query,this.PageRightMargin,"PageRightMargin");
 addcell(query,this.PageScale,"PageScale");
-addcell(query,this.PageShapeSplit,"PageShapeSplit");
 addcell(query,this.PageShapeSplit,"PageShapeSplit");
 addcell(query,this.PageTopMargin,"PageTopMargin");
 addcell(query,this.PageWidth,"PageWidth");
@@ -184,27 +181,26 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
 
         public static void SetFromCellNames(CellQuery query, string[] Cells, CellMap dic)
         {
-            if (Cells != null)
+            if (Cells == null)
             {
-                foreach (string cellname in Cells)
+                return;
+            }
+
+            foreach (string resolved_cellname in dic.ResolveNames(Cells))
+            {
+                if (!query.Columns.Contains(resolved_cellname))
                 {
-                    foreach (string resolved_cellname in dic.ResolveName(cellname))
-                    {
-                        if (!query.Columns.Contains(resolved_cellname))
-                        {
-                            query.Columns.Add(dic[resolved_cellname], resolved_cellname);
-                        }
-                    }
+                    query.Columns.Add(dic[resolved_cellname], resolved_cellname);
                 }
             }
         }
 
-        private void addcell(VisioAutomation.ShapeSheet.Query.CellQuery q, bool b, string name)
+        private void addcell(VA.ShapeSheet.Query.CellQuery query, bool switchpar, string cellname)
         {
             var dic = this.GetPageCellDictionary();
-            if (b)
+            if (switchpar)
             {
-                q.Columns.Add(dic[name], name);
+                query.Columns.Add(dic[cellname], cellname);
             }
         }
 
@@ -272,9 +268,6 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
                 cellmap["LineToLineY"] = VA.ShapeSheet.SRCConstants.LineToLineY;
                 cellmap["LineToNodeX"] = VA.ShapeSheet.SRCConstants.LineToNodeX;
                 cellmap["LineToNodeY"] = VA.ShapeSheet.SRCConstants.LineToNodeY;
-                cellmap["PageLineJumpDirX"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirX;
-                cellmap["PageLineJumpDirY"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirY;
-                cellmap["PageShapeSplit"] = VA.ShapeSheet.SRCConstants.PageShapeSplit;
                 cellmap["PlaceDepth"] = VA.ShapeSheet.SRCConstants.PlaceDepth;
                 cellmap["PlaceFlip"] = VA.ShapeSheet.SRCConstants.PlaceFlip;
                 cellmap["PlaceStyle"] = VA.ShapeSheet.SRCConstants.PlaceStyle;

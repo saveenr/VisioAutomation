@@ -6,16 +6,31 @@ namespace VisioPS.Commands
     public class CellMap
     {
         Dictionary<string, SRC> dic;
-        
+
+        private System.Text.RegularExpressions.Regex regex_cellname;
+        private System.Text.RegularExpressions.Regex regex_cellname_wildcard;
+
         public CellMap()
         {
+            this.regex_cellname = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
+            this.regex_cellname_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
             this.dic = new Dictionary<string, SRC>(System.StringComparer.OrdinalIgnoreCase);
         }
 
         public VisioAutomation.ShapeSheet.SRC this[string name]
         {
             get { return this.dic[name]; }
-            set { this.dic[name] = value; }
+            set
+            {
+                this.CheckCellName(name);
+
+                if (dic.ContainsKey(name))
+                {
+                    string msg = string.Format("CellMap already contains a cell called \"{0}\"", name);
+                    throw new System.ArgumentOutOfRangeException(msg);
+                }
+                this.dic[name] = value;
+            }
         }
 
         public Dictionary<string, SRC>.KeyCollection CellNames
@@ -26,10 +41,44 @@ namespace VisioPS.Commands
             }
         }
 
+        public bool IsValidCellName(string name)
+        {
+            return this.regex_cellname.IsMatch(name);
+        }
+
+        public bool IsValidCellNameWildCard(string name)
+        {
+            return this.regex_cellname_wildcard.IsMatch(name);
+        }
+
+
+        public void CheckCellName(string name)
+        {
+            if (this.IsValidCellName(name))
+            {
+                return;
+            }
+
+            string msg = string.Format("Cell name \"{0}\" is not valid",name);
+            throw new System.ArgumentOutOfRangeException(msg);
+        }
+
+        public void CheckCellNameWildcard(string name)
+        {
+            if (this.IsValidCellNameWildCard(name))
+            {
+                return;
+            }
+
+            string msg = string.Format("Cell name pattern \"{0}\" is not valid", name);
+            throw new System.ArgumentOutOfRangeException(msg);
+        }
+
         public IEnumerable<string> ResolveName(string cellname)
         {
             if (cellname.Contains("*") || cellname.Contains("?"))
             {
+                this.CheckCellNameWildcard(cellname);
                 string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
                     .Replace(@"\*", ".*").
                     Replace(@"\?", ".") + "$";
@@ -46,6 +95,7 @@ namespace VisioPS.Commands
             }
             else
             {
+                this.CheckCellName(cellname);
                 if (!this.dic.ContainsKey(cellname))
                 {
                     throw new System.ArgumentException("cellname not defined in map");
@@ -54,6 +104,15 @@ namespace VisioPS.Commands
             }
         }
 
-
+        public IEnumerable<string> ResolveNames(string[] cellnames)
+        {
+            foreach (var name in cellnames)
+            {
+                foreach (var resolved_name in this.ResolveName(name))
+                {
+                    yield return resolved_name;
+                }
+            }
+        }
     }
 }
