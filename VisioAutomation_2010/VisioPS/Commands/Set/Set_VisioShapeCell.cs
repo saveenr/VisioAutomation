@@ -12,158 +12,220 @@ namespace VisioPS.Commands
     {
         [SMA.Parameter(Mandatory = false)]
         public string Width { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string Height { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string PinX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string PinY { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LocPinX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LocPinY { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string Angle { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string FillPattern { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string FillForegnd { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string FillForegndTrans { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string FillBkgnd { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string FillBkgndTrans { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public string LinePattern { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LineWeight { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LineColor { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LineCap { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string Rounding { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public string CharCase { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string CharColor { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string CharFont { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string CharFontScale { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string CharLetterspace { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string CharSize { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string CharStyle { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string CharColorTransparency { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public string BeginArrow { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string BeginArrowSize { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string EndArrow { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string EndArrowSize { get; set; }
-        
+
         [SMA.Parameter(Mandatory = false)]
         public string BeginX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string BeginY { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string EndX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string EndY { get; set; }
-        
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwBkgnd { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwBkgndTrans { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwForegnd { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public string ShdwForegndTrans { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwObliqueAngle { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwOffsetX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwOffsetY { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwPattern { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwScalefactor { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string ShdwType { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string SelectMode { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
-        
+
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public string LockAspect { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockBegin { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockCalcWH { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockCrop { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockCustProp { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockDelete { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockEnd { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockFormat { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockFromGroupFormat { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockGroup { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockHeight { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockMoveX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockMoveY { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockRotate { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockSelect { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockTextEdit { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockThemeColors { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockThemeEffects { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockVtxEdit { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string LockWidth { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public string TxtAngle { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string TxtHeight { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string TxtLocPinX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string TxtLocPinY { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string TxtPinX { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string TxtPinY { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string TxtWidth { get; set; }
 

@@ -9,21 +9,75 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioPageCell")]
     public class Get_VisioPageCell: VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = true,Position=0)]
-        [SMA.ValidateSet(
-            "PageBottomMargin", "PageHeight", "PageLeftMargin", "PageLineJumpDirX", "PageLineJumpDirY", 
-            "PageRightMargin", "PageScale", "PageShapeSplit", "PageTopMargin", "PageWidth", "CenterX", "CenterY", 
-            "PaperKind", "PrintGrid", "PrintPageOrientation", "ScaleX", "ScaleY", "PaperSource", 
-            "DrawingScale", "DrawingScaleType", "DrawingSizeType", "InhibitSnap", "ShdwObliqueAngle", 
-            "ShdwOffsetX", "ShdwOffsetY", "ShdwScaleFactor", "ShdwType", "UIVisibility", "XGridDensity", 
-            "XGridOrigin", "XGridSpacing", "XRulerDensity", "XRulerOrigin", "YGridDensity", "YGridOrigin", "YGridSpacing", 
-            "YRulerDensity", "YRulerOrigin", "AvenueSizeX", "AvenueSizeY", "BlockSizeX", "BlockSizeY", "CtrlAsInput", 
-            "DynamicsOff", "EnableGrid", "LineAdjustFrom", "LineAdjustTo", "LineJumpCode", "LineJumpFactorX", "LineJumpFactorY", 
-            "LineJumpStyle", "LineRouteExt", "LineToLineX", "LineToLineY", "LineToNodeX", "LineToNodeY", "PageLineJumpDirX", 
-            "PageLineJumpDirY", "PageShapeSplit", "PlaceDepth", "PlaceFlip", "PlaceStyle", "PlowCode", "ResizePage", 
-            "RouteStyle", "AvoidPageBreaks", "DrawingResizeType")]
 
-        public string[] Cells { get; set; }
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvenueSizeX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvenueSizeY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvoidPageBreaks	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	BlockSizeX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	BlockSizeY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	CenterX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	CenterY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	CtrlAsInput	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	DrawingResizeType	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	DrawingScale	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	DrawingScaleType	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	DrawingSizeType	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	DynamicsOff	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	EnableGrid	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	InhibitSnap	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineAdjustFrom	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineAdjustTo	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineJumpCode	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineJumpFactorX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineJumpFactorY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineJumpStyle	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineRouteExt	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineToLineX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineToLineY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineToNodeX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	LineToNodeY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageBottomMargin	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageHeight	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageLeftMargin	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageLineJumpDirX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageLineJumpDirY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageRightMargin	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageScale	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageShapeSplit	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageTopMargin	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PageWidth	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PaperKind	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PaperSource	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PlaceDepth	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PlaceFlip	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PlaceStyle	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PlowCode	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PrintGrid	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	PrintPageOrientation	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ResizePage	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	RouteStyle	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ScaleX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ScaleY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ShdwObliqueAngle	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ShdwOffsetX	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ShdwOffsetY	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ShdwScaleFactor	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	ShdwType	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	UIVisibility	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	XGridDensity	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	XGridOrigin	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	XGridSpacing	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	XRulerDensity	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	XRulerOrigin	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	YGridDensity	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	YGridOrigin	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	YGridSpacing	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	YRulerDensity	{ get; set; }	
+[SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	YRulerOrigin	{ get; set; }	
+
+
+
+
         
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetResults;
@@ -37,11 +91,75 @@ namespace VisioPS.Commands
 
             var query = new VA.ShapeSheet.Query.CellQuery();
 
-            var dic = GetPageCellDictionary();
-            foreach (var cell in this.Cells)
-            {
-                query.Columns.Add(dic[cell], cell);   
-            }
+    
+addcell(query,this.AvenueSizeX,"AvenueSizeX");
+addcell(query,this.AvenueSizeY,"AvenueSizeY");
+addcell(query,this.AvoidPageBreaks,"AvoidPageBreaks");
+addcell(query,this.BlockSizeX,"BlockSizeX");
+addcell(query,this.BlockSizeY,"BlockSizeY");
+addcell(query,this.CenterX,"CenterX");
+addcell(query,this.CenterY,"CenterY");
+addcell(query,this.CtrlAsInput,"CtrlAsInput");
+addcell(query,this.DrawingResizeType,"DrawingResizeType");
+addcell(query,this.DrawingScale,"DrawingScale");
+addcell(query,this.DrawingScaleType,"DrawingScaleType");
+addcell(query,this.DrawingSizeType,"DrawingSizeType");
+addcell(query,this.DynamicsOff,"DynamicsOff");
+addcell(query,this.EnableGrid,"EnableGrid");
+addcell(query,this.InhibitSnap,"InhibitSnap");
+addcell(query,this.LineAdjustFrom,"LineAdjustFrom");
+addcell(query,this.LineAdjustTo,"LineAdjustTo");
+addcell(query,this.LineJumpCode,"LineJumpCode");
+addcell(query,this.LineJumpFactorX,"LineJumpFactorX");
+addcell(query,this.LineJumpFactorY,"LineJumpFactorY");
+addcell(query,this.LineJumpStyle,"LineJumpStyle");
+addcell(query,this.LineRouteExt,"LineRouteExt");
+addcell(query,this.LineToLineX,"LineToLineX");
+addcell(query,this.LineToLineY,"LineToLineY");
+addcell(query,this.LineToNodeX,"LineToNodeX");
+addcell(query,this.LineToNodeY,"LineToNodeY");
+addcell(query,this.PageBottomMargin,"PageBottomMargin");
+addcell(query,this.PageHeight,"PageHeight");
+addcell(query,this.PageLeftMargin,"PageLeftMargin");
+addcell(query,this.PageLineJumpDirX,"PageLineJumpDirX");
+addcell(query,this.PageLineJumpDirX,"PageLineJumpDirX");
+addcell(query,this.PageLineJumpDirY,"PageLineJumpDirY");
+addcell(query,this.PageLineJumpDirY,"PageLineJumpDirY");
+addcell(query,this.PageRightMargin,"PageRightMargin");
+addcell(query,this.PageScale,"PageScale");
+addcell(query,this.PageShapeSplit,"PageShapeSplit");
+addcell(query,this.PageShapeSplit,"PageShapeSplit");
+addcell(query,this.PageTopMargin,"PageTopMargin");
+addcell(query,this.PageWidth,"PageWidth");
+addcell(query,this.PaperKind,"PaperKind");
+addcell(query,this.PaperSource,"PaperSource");
+addcell(query,this.PlaceDepth,"PlaceDepth");
+addcell(query,this.PlaceFlip,"PlaceFlip");
+addcell(query,this.PlaceStyle,"PlaceStyle");
+addcell(query,this.PlowCode,"PlowCode");
+addcell(query,this.PrintGrid,"PrintGrid");
+addcell(query,this.PrintPageOrientation,"PrintPageOrientation");
+addcell(query,this.ResizePage,"ResizePage");
+addcell(query,this.RouteStyle,"RouteStyle");
+addcell(query,this.ScaleX,"ScaleX");
+addcell(query,this.ScaleY,"ScaleY");
+addcell(query,this.ShdwObliqueAngle,"ShdwObliqueAngle");
+addcell(query,this.ShdwOffsetX,"ShdwOffsetX");
+addcell(query,this.ShdwOffsetY,"ShdwOffsetY");
+addcell(query,this.ShdwScaleFactor,"ShdwScaleFactor");
+addcell(query,this.ShdwType,"ShdwType");
+addcell(query,this.UIVisibility,"UIVisibility");
+addcell(query,this.XGridDensity,"XGridDensity");
+addcell(query,this.XGridOrigin,"XGridOrigin");
+addcell(query,this.XGridSpacing,"XGridSpacing");
+addcell(query,this.XRulerDensity,"XRulerDensity");
+addcell(query,this.XRulerOrigin,"XRulerOrigin");
+addcell(query,this.YGridDensity,"YGridDensity");
+addcell(query,this.YGridOrigin,"YGridOrigin");
+addcell(query,this.YGridSpacing,"YGridSpacing");
+addcell(query,this.YRulerDensity,"YRulerDensity");
+addcell(query,this.YRulerOrigin,"YRulerOrigin");
+
 
             var page = scriptingsession.Page.Get();
             var target_shapeids = new[] { page.ID };
@@ -56,6 +174,15 @@ namespace VisioPS.Commands
             this.WriteVerboseEx("End Query");
         }
 
+        private void addcell(VisioAutomation.ShapeSheet.Query.CellQuery q, bool b, string name)
+        {
+            var dic = this.GetPageCellDictionary();
+            if (b)
+            {
+                q.Columns.Add(dic[name], name);
+            }
+        }
+
         private static Dictionary<string, VA.ShapeSheet.SRC> dic_cellname_to_src;
 
 
@@ -63,7 +190,7 @@ namespace VisioPS.Commands
         {
             if (dic_cellname_to_src == null)
             {
-                dic_cellname_to_src = new Dictionary<string, VA.ShapeSheet.SRC>(this.Cells.Count());
+                dic_cellname_to_src = new Dictionary<string, VA.ShapeSheet.SRC>();
                 dic_cellname_to_src["PageBottomMargin"] = VA.ShapeSheet.SRCConstants.PageBottomMargin;
                 dic_cellname_to_src["PageHeight"] = VA.ShapeSheet.SRCConstants.PageHeight;
                 dic_cellname_to_src["PageLeftMargin"] = VA.ShapeSheet.SRCConstants.PageLeftMargin;
@@ -134,5 +261,75 @@ namespace VisioPS.Commands
             }
             return dic_cellname_to_src;
         }
+
+        /*
+       
+AvenueSizeX
+AvenueSizeY
+AvoidPageBreaks
+BlockSizeX
+BlockSizeY
+CenterX
+CenterY
+CtrlAsInput
+DrawingResizeType
+DrawingScale
+DrawingScaleType
+DrawingSizeType
+DynamicsOff
+EnableGrid
+InhibitSnap
+LineAdjustFrom
+LineAdjustTo
+LineJumpCode
+LineJumpFactorX
+LineJumpFactorY
+LineJumpStyle
+LineRouteExt
+LineToLineX
+LineToLineY
+LineToNodeX
+LineToNodeY
+PageBottomMargin
+PageHeight
+PageLeftMargin
+PageLineJumpDirX
+PageLineJumpDirY
+PageRightMargin
+PageScale
+PageShapeSplit
+PageTopMargin
+PageWidth
+PaperKind
+PaperSource
+PlaceDepth
+PlaceFlip
+PlaceStyle
+PlowCode
+PrintGrid
+PrintPageOrientation
+ResizePage
+RouteStyle
+ScaleX
+ScaleY
+ShdwObliqueAngle
+ShdwOffsetX
+ShdwOffsetY
+ShdwScaleFactor
+ShdwType
+UIVisibility
+XGridDensity
+XGridOrigin
+XGridSpacing
+XRulerDensity
+XRulerOrigin
+YGridDensity
+YGridOrigin
+YGridSpacing
+YRulerDensity
+YRulerOrigin
+ 
+         
+         * */
     }
 }
