@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
+    <Compile Include="Commands\Get\CellMap.cs" />
     <Compile Include="Commands\Get\Get_VisioPageCell.cs" />
     <Compile Include="Commands\Get\Get_VisioShapeCell.cs" />
     <Compile Include="Commands\New\New_VisioAreaChart.cs" />
