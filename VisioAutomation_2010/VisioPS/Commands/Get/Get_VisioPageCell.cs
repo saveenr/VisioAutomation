@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Drawing;
+using Microsoft.PowerShell.Commands;
+using VisioAutomation.ShapeSheet;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
@@ -182,36 +184,17 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
             this.WriteVerboseEx("End Query");
         }
 
-        public static void SetFromCellNames(CellQuery query, string[] Cells, Dictionary<string, VA.ShapeSheet.SRC> dic)
+        public static void SetFromCellNames(CellQuery query, string[] Cells, CellMap dic)
         {
             if (Cells != null)
             {
-                foreach (string c in Cells)
+                foreach (string cellname in Cells)
                 {
-                    if (c.Contains("*") || c.Contains("?"))
+                    foreach (string resolved_cellname in dic.ResolveName(cellname))
                     {
-                        string pat = "^" + System.Text.RegularExpressions.Regex.Escape(c)
-                            .Replace(@"\*", ".*").
-                            Replace(@"\?", ".") + "$";
-
-                        var regex = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-
-                            foreach (string k in dic.Keys)
-                            {
-                                if (regex.IsMatch(k))
-                                {
-                                    if (!query.Columns.Contains(k))
-                                    {
-                                        query.Columns.Add(dic[k], k);
-                                    }
-                                }
-                            }
-                    }
-                    else
-                    {
-                        if (!query.Columns.Contains(c))
+                        if (!query.Columns.Contains(resolved_cellname))
                         {
-                            query.Columns.Add(dic[c], c);
+                            query.Columns.Add(dic[resolved_cellname], resolved_cellname);
                         }
                     }
                 }
@@ -227,83 +210,83 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
             }
         }
 
-        private static Dictionary<string, VA.ShapeSheet.SRC> dic_cellname_to_src;
+        private static CellMap cellmap;
 
 
-        private Dictionary<string, VA.ShapeSheet.SRC> GetPageCellDictionary()
+        private CellMap GetPageCellDictionary()
         {
-            if (dic_cellname_to_src == null)
+            if (cellmap == null)
             {
-                dic_cellname_to_src = new Dictionary<string, VA.ShapeSheet.SRC>(System.StringComparer.OrdinalIgnoreCase);
-                dic_cellname_to_src["PageBottomMargin"] = VA.ShapeSheet.SRCConstants.PageBottomMargin;
-                dic_cellname_to_src["PageHeight"] = VA.ShapeSheet.SRCConstants.PageHeight;
-                dic_cellname_to_src["PageLeftMargin"] = VA.ShapeSheet.SRCConstants.PageLeftMargin;
-                dic_cellname_to_src["PageLineJumpDirX"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirX;
-                dic_cellname_to_src["PageLineJumpDirY"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirY;
-                dic_cellname_to_src["PageRightMargin"] = VA.ShapeSheet.SRCConstants.PageRightMargin;
-                dic_cellname_to_src["PageScale"] = VA.ShapeSheet.SRCConstants.PageScale;
-                dic_cellname_to_src["PageShapeSplit"] = VA.ShapeSheet.SRCConstants.PageShapeSplit;
-                dic_cellname_to_src["PageTopMargin"] = VA.ShapeSheet.SRCConstants.PageTopMargin;
-                dic_cellname_to_src["PageWidth"] = VA.ShapeSheet.SRCConstants.PageWidth;
-                dic_cellname_to_src["CenterX"] = VA.ShapeSheet.SRCConstants.CenterX;
-                dic_cellname_to_src["CenterY"] = VA.ShapeSheet.SRCConstants.CenterY;
-                dic_cellname_to_src["PaperKind"] = VA.ShapeSheet.SRCConstants.PaperKind;
-                dic_cellname_to_src["PrintGrid"] = VA.ShapeSheet.SRCConstants.PrintGrid;
-                dic_cellname_to_src["PrintPageOrientation"] = VA.ShapeSheet.SRCConstants.PrintPageOrientation;
-                dic_cellname_to_src["ScaleX"] = VA.ShapeSheet.SRCConstants.ScaleX;
-                dic_cellname_to_src["ScaleY"] = VA.ShapeSheet.SRCConstants.ScaleY;
-                dic_cellname_to_src["PaperSource"] = VA.ShapeSheet.SRCConstants.PaperSource;
-                dic_cellname_to_src["DrawingScale"] = VA.ShapeSheet.SRCConstants.DrawingScale;
-                dic_cellname_to_src["DrawingScaleType"] = VA.ShapeSheet.SRCConstants.DrawingScaleType;
-                dic_cellname_to_src["DrawingSizeType"] = VA.ShapeSheet.SRCConstants.DrawingSizeType;
-                dic_cellname_to_src["InhibitSnap"] = VA.ShapeSheet.SRCConstants.InhibitSnap;
-                dic_cellname_to_src["ShdwObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
-                dic_cellname_to_src["ShdwOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
-                dic_cellname_to_src["ShdwOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
-                dic_cellname_to_src["ShdwScaleFactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
-                dic_cellname_to_src["ShdwType"] = VA.ShapeSheet.SRCConstants.ShdwType;
-                dic_cellname_to_src["UIVisibility"] = VA.ShapeSheet.SRCConstants.UIVisibility;
-                dic_cellname_to_src["XGridDensity"] = VA.ShapeSheet.SRCConstants.XGridDensity;
-                dic_cellname_to_src["XGridOrigin"] = VA.ShapeSheet.SRCConstants.XGridOrigin;
-                dic_cellname_to_src["XGridSpacing"] = VA.ShapeSheet.SRCConstants.XGridSpacing;
-                dic_cellname_to_src["XRulerDensity"] = VA.ShapeSheet.SRCConstants.XRulerDensity;
-                dic_cellname_to_src["XRulerOrigin"] = VA.ShapeSheet.SRCConstants.XRulerOrigin;
-                dic_cellname_to_src["YGridDensity"] = VA.ShapeSheet.SRCConstants.YGridDensity;
-                dic_cellname_to_src["YGridOrigin"] = VA.ShapeSheet.SRCConstants.YGridOrigin;
-                dic_cellname_to_src["YGridSpacing"] = VA.ShapeSheet.SRCConstants.YGridSpacing;
-                dic_cellname_to_src["YRulerDensity"] = VA.ShapeSheet.SRCConstants.YRulerDensity;
-                dic_cellname_to_src["YRulerOrigin"] = VA.ShapeSheet.SRCConstants.YRulerOrigin;
-                dic_cellname_to_src["AvenueSizeX"] = VA.ShapeSheet.SRCConstants.AvenueSizeX;
-                dic_cellname_to_src["AvenueSizeY"] = VA.ShapeSheet.SRCConstants.AvenueSizeY;
-                dic_cellname_to_src["BlockSizeX"] = VA.ShapeSheet.SRCConstants.BlockSizeX;
-                dic_cellname_to_src["BlockSizeY"] = VA.ShapeSheet.SRCConstants.BlockSizeY;
-                dic_cellname_to_src["CtrlAsInput"] = VA.ShapeSheet.SRCConstants.CtrlAsInput;
-                dic_cellname_to_src["DynamicsOff"] = VA.ShapeSheet.SRCConstants.DynamicsOff;
-                dic_cellname_to_src["EnableGrid"] = VA.ShapeSheet.SRCConstants.EnableGrid;
-                dic_cellname_to_src["LineAdjustFrom"] = VA.ShapeSheet.SRCConstants.LineAdjustFrom;
-                dic_cellname_to_src["LineAdjustTo"] = VA.ShapeSheet.SRCConstants.LineAdjustTo;
-                dic_cellname_to_src["LineJumpCode"] = VA.ShapeSheet.SRCConstants.LineJumpCode;
-                dic_cellname_to_src["LineJumpFactorX"] = VA.ShapeSheet.SRCConstants.LineJumpFactorX;
-                dic_cellname_to_src["LineJumpFactorY"] = VA.ShapeSheet.SRCConstants.LineJumpFactorY;
-                dic_cellname_to_src["LineJumpStyle"] = VA.ShapeSheet.SRCConstants.LineJumpStyle;
-                dic_cellname_to_src["LineRouteExt"] = VA.ShapeSheet.SRCConstants.LineRouteExt;
-                dic_cellname_to_src["LineToLineX"] = VA.ShapeSheet.SRCConstants.LineToLineX;
-                dic_cellname_to_src["LineToLineY"] = VA.ShapeSheet.SRCConstants.LineToLineY;
-                dic_cellname_to_src["LineToNodeX"] = VA.ShapeSheet.SRCConstants.LineToNodeX;
-                dic_cellname_to_src["LineToNodeY"] = VA.ShapeSheet.SRCConstants.LineToNodeY;
-                dic_cellname_to_src["PageLineJumpDirX"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirX;
-                dic_cellname_to_src["PageLineJumpDirY"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirY;
-                dic_cellname_to_src["PageShapeSplit"] = VA.ShapeSheet.SRCConstants.PageShapeSplit;
-                dic_cellname_to_src["PlaceDepth"] = VA.ShapeSheet.SRCConstants.PlaceDepth;
-                dic_cellname_to_src["PlaceFlip"] = VA.ShapeSheet.SRCConstants.PlaceFlip;
-                dic_cellname_to_src["PlaceStyle"] = VA.ShapeSheet.SRCConstants.PlaceStyle;
-                dic_cellname_to_src["PlowCode"] = VA.ShapeSheet.SRCConstants.PlowCode;
-                dic_cellname_to_src["ResizePage"] = VA.ShapeSheet.SRCConstants.ResizePage;
-                dic_cellname_to_src["RouteStyle"] = VA.ShapeSheet.SRCConstants.RouteStyle;
-                dic_cellname_to_src["AvoidPageBreaks"] = VA.ShapeSheet.SRCConstants.AvoidPageBreaks;
-                dic_cellname_to_src["DrawingResizeType"] = VA.ShapeSheet.SRCConstants.DrawingResizeType;
+                cellmap = new CellMap();
+                cellmap["PageBottomMargin"] = VA.ShapeSheet.SRCConstants.PageBottomMargin;
+                cellmap["PageHeight"] = VA.ShapeSheet.SRCConstants.PageHeight;
+                cellmap["PageLeftMargin"] = VA.ShapeSheet.SRCConstants.PageLeftMargin;
+                cellmap["PageLineJumpDirX"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirX;
+                cellmap["PageLineJumpDirY"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirY;
+                cellmap["PageRightMargin"] = VA.ShapeSheet.SRCConstants.PageRightMargin;
+                cellmap["PageScale"] = VA.ShapeSheet.SRCConstants.PageScale;
+                cellmap["PageShapeSplit"] = VA.ShapeSheet.SRCConstants.PageShapeSplit;
+                cellmap["PageTopMargin"] = VA.ShapeSheet.SRCConstants.PageTopMargin;
+                cellmap["PageWidth"] = VA.ShapeSheet.SRCConstants.PageWidth;
+                cellmap["CenterX"] = VA.ShapeSheet.SRCConstants.CenterX;
+                cellmap["CenterY"] = VA.ShapeSheet.SRCConstants.CenterY;
+                cellmap["PaperKind"] = VA.ShapeSheet.SRCConstants.PaperKind;
+                cellmap["PrintGrid"] = VA.ShapeSheet.SRCConstants.PrintGrid;
+                cellmap["PrintPageOrientation"] = VA.ShapeSheet.SRCConstants.PrintPageOrientation;
+                cellmap["ScaleX"] = VA.ShapeSheet.SRCConstants.ScaleX;
+                cellmap["ScaleY"] = VA.ShapeSheet.SRCConstants.ScaleY;
+                cellmap["PaperSource"] = VA.ShapeSheet.SRCConstants.PaperSource;
+                cellmap["DrawingScale"] = VA.ShapeSheet.SRCConstants.DrawingScale;
+                cellmap["DrawingScaleType"] = VA.ShapeSheet.SRCConstants.DrawingScaleType;
+                cellmap["DrawingSizeType"] = VA.ShapeSheet.SRCConstants.DrawingSizeType;
+                cellmap["InhibitSnap"] = VA.ShapeSheet.SRCConstants.InhibitSnap;
+                cellmap["ShdwObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
+                cellmap["ShdwOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
+                cellmap["ShdwOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
+                cellmap["ShdwScaleFactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
+                cellmap["ShdwType"] = VA.ShapeSheet.SRCConstants.ShdwType;
+                cellmap["UIVisibility"] = VA.ShapeSheet.SRCConstants.UIVisibility;
+                cellmap["XGridDensity"] = VA.ShapeSheet.SRCConstants.XGridDensity;
+                cellmap["XGridOrigin"] = VA.ShapeSheet.SRCConstants.XGridOrigin;
+                cellmap["XGridSpacing"] = VA.ShapeSheet.SRCConstants.XGridSpacing;
+                cellmap["XRulerDensity"] = VA.ShapeSheet.SRCConstants.XRulerDensity;
+                cellmap["XRulerOrigin"] = VA.ShapeSheet.SRCConstants.XRulerOrigin;
+                cellmap["YGridDensity"] = VA.ShapeSheet.SRCConstants.YGridDensity;
+                cellmap["YGridOrigin"] = VA.ShapeSheet.SRCConstants.YGridOrigin;
+                cellmap["YGridSpacing"] = VA.ShapeSheet.SRCConstants.YGridSpacing;
+                cellmap["YRulerDensity"] = VA.ShapeSheet.SRCConstants.YRulerDensity;
+                cellmap["YRulerOrigin"] = VA.ShapeSheet.SRCConstants.YRulerOrigin;
+                cellmap["AvenueSizeX"] = VA.ShapeSheet.SRCConstants.AvenueSizeX;
+                cellmap["AvenueSizeY"] = VA.ShapeSheet.SRCConstants.AvenueSizeY;
+                cellmap["BlockSizeX"] = VA.ShapeSheet.SRCConstants.BlockSizeX;
+                cellmap["BlockSizeY"] = VA.ShapeSheet.SRCConstants.BlockSizeY;
+                cellmap["CtrlAsInput"] = VA.ShapeSheet.SRCConstants.CtrlAsInput;
+                cellmap["DynamicsOff"] = VA.ShapeSheet.SRCConstants.DynamicsOff;
+                cellmap["EnableGrid"] = VA.ShapeSheet.SRCConstants.EnableGrid;
+                cellmap["LineAdjustFrom"] = VA.ShapeSheet.SRCConstants.LineAdjustFrom;
+                cellmap["LineAdjustTo"] = VA.ShapeSheet.SRCConstants.LineAdjustTo;
+                cellmap["LineJumpCode"] = VA.ShapeSheet.SRCConstants.LineJumpCode;
+                cellmap["LineJumpFactorX"] = VA.ShapeSheet.SRCConstants.LineJumpFactorX;
+                cellmap["LineJumpFactorY"] = VA.ShapeSheet.SRCConstants.LineJumpFactorY;
+                cellmap["LineJumpStyle"] = VA.ShapeSheet.SRCConstants.LineJumpStyle;
+                cellmap["LineRouteExt"] = VA.ShapeSheet.SRCConstants.LineRouteExt;
+                cellmap["LineToLineX"] = VA.ShapeSheet.SRCConstants.LineToLineX;
+                cellmap["LineToLineY"] = VA.ShapeSheet.SRCConstants.LineToLineY;
+                cellmap["LineToNodeX"] = VA.ShapeSheet.SRCConstants.LineToNodeX;
+                cellmap["LineToNodeY"] = VA.ShapeSheet.SRCConstants.LineToNodeY;
+                cellmap["PageLineJumpDirX"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirX;
+                cellmap["PageLineJumpDirY"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirY;
+                cellmap["PageShapeSplit"] = VA.ShapeSheet.SRCConstants.PageShapeSplit;
+                cellmap["PlaceDepth"] = VA.ShapeSheet.SRCConstants.PlaceDepth;
+                cellmap["PlaceFlip"] = VA.ShapeSheet.SRCConstants.PlaceFlip;
+                cellmap["PlaceStyle"] = VA.ShapeSheet.SRCConstants.PlaceStyle;
+                cellmap["PlowCode"] = VA.ShapeSheet.SRCConstants.PlowCode;
+                cellmap["ResizePage"] = VA.ShapeSheet.SRCConstants.ResizePage;
+                cellmap["RouteStyle"] = VA.ShapeSheet.SRCConstants.RouteStyle;
+                cellmap["AvoidPageBreaks"] = VA.ShapeSheet.SRCConstants.AvoidPageBreaks;
+                cellmap["DrawingResizeType"] = VA.ShapeSheet.SRCConstants.DrawingResizeType;
             }
-            return dic_cellname_to_src;
+            return cellmap;
         }
 
         /*
@@ -375,5 +358,59 @@ YRulerOrigin
  
          
          * */
+    }
+
+    public class CellMap
+    {
+        Dictionary<string, VA.ShapeSheet.SRC> dic;
+        
+        public CellMap()
+        {
+            this.dic = new Dictionary<string, VA.ShapeSheet.SRC>(System.StringComparer.OrdinalIgnoreCase);
+        }
+
+        public VA.ShapeSheet.SRC this[string name]
+        {
+            get { return this.dic[name]; }
+            set { this.dic[name] = value; }
+        }
+
+        public Dictionary<string, SRC>.KeyCollection CellNames
+        {
+            get
+            {
+                return this.dic.Keys;
+            }
+        }
+
+        public IEnumerable<string> ResolveName(string cellname)
+        {
+            if (cellname.Contains("*") || cellname.Contains("?"))
+            {
+                string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
+                    .Replace(@"\*", ".*").
+                    Replace(@"\?", ".") + "$";
+
+                var regex = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+                foreach (string k in this.CellNames)
+                {
+                    if (regex.IsMatch(k))
+                    {
+                        yield return k;
+                    }
+                }
+            }
+            else
+            {
+                if (!this.dic.ContainsKey(cellname))
+                {
+                    throw new System.ArgumentException("cellname not defined in map");
+                }
+                yield return cellname;
+            }
+        }
+
+
     }
 }
