@@ -234,7 +234,7 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
         {
             if (dic_cellname_to_src == null)
             {
-                dic_cellname_to_src = new Dictionary<string, VA.ShapeSheet.SRC>();
+                dic_cellname_to_src = new Dictionary<string, VA.ShapeSheet.SRC>(System.StringComparer.OrdinalIgnoreCase);
                 dic_cellname_to_src["PageBottomMargin"] = VA.ShapeSheet.SRCConstants.PageBottomMargin;
                 dic_cellname_to_src["PageHeight"] = VA.ShapeSheet.SRCConstants.PageHeight;
                 dic_cellname_to_src["PageLeftMargin"] = VA.ShapeSheet.SRCConstants.PageLeftMargin;
