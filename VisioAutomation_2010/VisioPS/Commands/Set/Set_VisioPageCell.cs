@@ -11,7 +11,7 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPageCell")]
     public class Set_VisioPageCell: VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] 
+        [SMA.Parameter(Mandatory = false,Position=0)] 
         public System.Collections.Hashtable Hashtable  { get; set; }
 
         [SMA.Parameter(Mandatory = false)] 
