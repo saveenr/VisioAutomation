@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
@@ -10,6 +11,9 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPageCell")]
     public class Set_VisioPageCell: VisioPSCmdlet
     {
+        [SMA.Parameter(Mandatory = false)] 
+        public System.Collections.Hashtable Hashtable  { get; set; }
+
         [SMA.Parameter(Mandatory = false)] 
         public string PageWidth { get; set; }
         
@@ -222,6 +226,58 @@ namespace VisioPS.Commands
             var target_pages = this.Pages ?? new [] { scriptingsession.Page.Get() };
 
             var valuemap = new CellValueMap(Get_VisioPageCell.GetPageCellDictionary());
+
+            if (this.Hashtable != null)
+            {
+                foreach (object key_o in this.Hashtable.Keys)
+                {
+                    if (!(key_o is string))
+                    {
+                        string message = "Only string values can be keys in the hashtable";
+                        throw new System.ArgumentOutOfRangeException(message);
+                    }
+                    string key_string = (string) key_o;
+
+                    object value_o = this.Hashtable[key_o];
+                    if (value_o == null)
+                    {
+                        string message = "Null values not allowed for cellvalues";
+                        throw new System.ArgumentOutOfRangeException(message);
+                        
+                    }
+                    if (value_o is string)
+                    {
+                        string value_string = (string)value_o;
+                        valuemap[key_string] = value_string;
+                    }
+                    else if (value_o is int)
+                    {
+                        int value_int  = (int)value_o;
+                        string value_string = value_int.ToString( System.Globalization.CultureInfo.InvariantCulture);
+                        valuemap[key_string] = value_string;
+                    }
+                    else if (value_o is float)
+                    {
+                        float value_float = (float)value_o;
+                        string value_string = value_float.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        valuemap[key_string] = value_string;
+                    }
+                    else if (value_o is double)
+                    {
+                        double value_double = (double)value_o;
+                        string value_string = value_double.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        valuemap[key_string] = value_string;
+                    }
+                    else
+                    {
+                        string message = string.Format("Cell values cannot be of type {0} ",value_o.GetType().Name);
+                        throw new System.ArgumentOutOfRangeException(message);                        
+                    }
+
+
+                }
+
+            }
 
             valuemap.SetIf("PageBottomMargin",this.PageBottomMargin);
             valuemap.SetIf("PageHeight",this.PageHeight);
