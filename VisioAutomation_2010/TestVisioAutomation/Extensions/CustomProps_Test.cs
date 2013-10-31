@@ -103,7 +103,7 @@ namespace TestVisioAutomation
             in_cp.Value = "Some value";
             in_cp.Prompt = "Some Prompt";
             in_cp.LangId = 1034;
-            in_cp.Type = 5; // 5= date-or-time. see: http://msdn.microsoft.com/en-us/library/aa200980(v=office.10).aspx
+            in_cp.Type = 0; // 0 = string. see: http://msdn.microsoft.com/en-us/library/aa200980(v=office.10).aspx
             in_cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;
             in_cp.Invisible = 0;
             in_cp.Verify = 0;

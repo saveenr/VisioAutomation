@@ -60,12 +60,14 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             string str_label =  this.SmartStringToFormulaString(cp.Label.Formula, false);
             string str_value = null;
-            if (cp.Type.Formula.Value == "0")
+            if (cp.Type.Formula.Value == "0" || cp.Type.Formula.Value == null)
             {
+                // if type has no value or is a "0" then it is a string
                 str_value = this.SmartStringToFormulaString(cp.Value.Formula, false);
             }
             else
             {
+               // For non-stringd don't add any extra quotes
                 str_value = this.SmartStringToFormulaString(cp.Value.Formula, true);                
             }
             string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
