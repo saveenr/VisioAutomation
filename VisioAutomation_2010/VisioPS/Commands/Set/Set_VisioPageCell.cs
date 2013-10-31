@@ -221,7 +221,8 @@ namespace VisioPS.Commands
 
             var target_pages = this.Pages ?? new [] { scriptingsession.Page.Get() };
 
-            var valuemap = new CellValueMap();
+            var valuemap = new CellValueMap(Get_VisioPageCell.GetPageCellDictionary());
+
             valuemap.SetIf("PageBottomMargin",this.PageBottomMargin);
             valuemap.SetIf("PageHeight",this.PageHeight);
             valuemap.SetIf("PageLeftMargin",this.PageLeftMargin);
@@ -290,7 +291,6 @@ namespace VisioPS.Commands
             valuemap.SetIf("AvoidPageBreaks",this.AvoidPageBreaks);
             valuemap.SetIf("DrawingResizeType",this.DrawingResizeType);
 
-            var srcmap = Get_VisioPageCell.GetPageCellDictionary();
 
             foreach (var page in target_pages)
             {
@@ -299,7 +299,7 @@ namespace VisioPS.Commands
                 foreach (var cellname in valuemap.CellNames)
                 {
                     string cell_value = valuemap[cellname];
-                    var cell_src = srcmap[cellname];
+                    var cell_src = valuemap.GetSRC(cellname);
                     update.SetFormulaIgnoreNull( cell_src , cell_value);
                 }
                 this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
@@ -327,11 +327,19 @@ namespace VisioPS.Commands
         private System.Text.RegularExpressions.Regex regex_cellname;
         private System.Text.RegularExpressions.Regex regex_cellname_wildcard;
 
-        public CellValueMap()
+        private CellMap srcmap;
+
+        public CellValueMap( CellMap srcMap)
         {
             this.regex_cellname = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
             this.regex_cellname_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
             this.dic = new Dictionary<string, string>(System.StringComparer.OrdinalIgnoreCase);
+            this.srcmap = srcMap;
+        }
+
+        public VA.ShapeSheet.SRC GetSRC(string name)
+        {
+            return this.srcmap[name];
         }
 
         public string this[string name]
