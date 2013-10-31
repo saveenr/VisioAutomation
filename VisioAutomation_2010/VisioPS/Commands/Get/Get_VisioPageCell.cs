@@ -13,7 +13,7 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioPageCell")]
     public class Get_VisioPageCell: VisioPSCmdlet
     {
-[SMA.Parameter(Mandatory = false)]
+[SMA.Parameter(Mandatory = false, Position=0)]
 public string[] Cells { get; set; }	
 
 [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter	AvenueSizeX	{ get; set; }	

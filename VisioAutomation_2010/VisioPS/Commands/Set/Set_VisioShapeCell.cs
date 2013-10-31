@@ -10,6 +10,9 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioShapeCell")]
     public class Set_VisioShapeCell : VisioPSCmdlet
     {
+        [SMA.Parameter(Mandatory = false, Position = 0)]
+        public System.Collections.Hashtable Hashtable { get; set; }
+
         [SMA.Parameter(Mandatory = false)]
         public string Width { get; set; }
 
@@ -243,86 +246,92 @@ namespace VisioPS.Commands
             update.BlastGuards = this.BlastGuards;
             update.TestCircular = this.TestCircular;
 
+            var valuemap = new CellValueMap(Get_VisioShapeCell.GetShapeCellDictionary());
+            valuemap.UpdateValueMap(this.Hashtable);
+            valuemap.SetIf("Angle", this.Angle);
+            valuemap.SetIf("BeginArrow", this.BeginArrow);
+            valuemap.SetIf("BeginArrowSize", this.BeginArrowSize);
+            valuemap.SetIf("BeginX", this.BeginX);
+            valuemap.SetIf("BeginY", this.BeginY);
+            valuemap.SetIf("CharCase", this.CharCase);
+            valuemap.SetIf("CharColor", this.CharColor);
+            valuemap.SetIf("CharColorTransparency", this.CharColorTransparency);
+            valuemap.SetIf("CharFont", this.CharFont);
+            valuemap.SetIf("CharFontScale", this.CharFontScale);
+            valuemap.SetIf("CharLetterspace", this.CharLetterspace);
+            valuemap.SetIf("CharSize", this.CharSize);
+            valuemap.SetIf("CharStyle", this.CharStyle);
+            valuemap.SetIf("EndArrow", this.EndArrow);
+            valuemap.SetIf("EndArrowSize", this.EndArrowSize);
+            valuemap.SetIf("EndX", this.EndX);
+            valuemap.SetIf("EndY", this.EndY);
+            valuemap.SetIf("FillBkgnd", this.FillBkgnd);
+            valuemap.SetIf("FillBkgndTrans", this.FillBkgndTrans);
+            valuemap.SetIf("FillForegnd", this.FillForegnd);
+            valuemap.SetIf("FillForegndTrans", this.FillForegndTrans);
+            valuemap.SetIf("FillPattern", this.FillPattern);
+            valuemap.SetIf("Height", this.Height);
+            valuemap.SetIf("HideText", this.HideText);
+            valuemap.SetIf("LineCap", this.LineCap);
+            valuemap.SetIf("LineColor", this.LineColor);
+            valuemap.SetIf("LinePattern", this.LinePattern);
+            valuemap.SetIf("LineWeight", this.LineWeight);
+            valuemap.SetIf("LockAspect", this.LockAspect);
+            valuemap.SetIf("LockBegin", this.LockBegin);
+            valuemap.SetIf("LockCalcWH", this.LockCalcWH);
+            valuemap.SetIf("LockCrop", this.LockCrop);
+            valuemap.SetIf("LockCustProp", this.LockCustProp);
+            valuemap.SetIf("LockDelete", this.LockDelete);
+            valuemap.SetIf("LockEnd", this.LockEnd);
+            valuemap.SetIf("LockFormat", this.LockFormat);
+            valuemap.SetIf("LockFromGroupFormat", this.LockFromGroupFormat);
+            valuemap.SetIf("LockGroup", this.LockGroup);
+            valuemap.SetIf("LockHeight", this.LockHeight);
+            valuemap.SetIf("LockMoveX", this.LockMoveX);
+            valuemap.SetIf("LockMoveY", this.LockMoveY);
+            valuemap.SetIf("LockRotate", this.LockRotate);
+            valuemap.SetIf("LockSelect", this.LockSelect);
+            valuemap.SetIf("LockTextEdit", this.LockTextEdit);
+            valuemap.SetIf("LockThemeColors", this.LockThemeColors);
+            valuemap.SetIf("LockThemeEffects", this.LockThemeEffects);
+            valuemap.SetIf("LockVtxEdit", this.LockVtxEdit);
+            valuemap.SetIf("LockWidth", this.LockWidth);
+            valuemap.SetIf("LocPinX", this.LocPinX);
+            valuemap.SetIf("LocPinY", this.LocPinY);
+            valuemap.SetIf("PinX", this.PinX);
+            valuemap.SetIf("PinY", this.PinY);
+            valuemap.SetIf("Rounding", this.Rounding);
+            valuemap.SetIf("SelectMode", this.SelectMode);
+            valuemap.SetIf("ShdwBkgnd", this.ShdwBkgnd);
+            valuemap.SetIf("ShdwBkgndTrans", this.ShdwBkgndTrans);
+            valuemap.SetIf("ShdwForegnd", this.ShdwForegnd);
+            valuemap.SetIf("ShdwForegndTrans", this.ShdwForegndTrans);
+            valuemap.SetIf("ShdwObliqueAngle", this.ShdwObliqueAngle);
+            valuemap.SetIf("ShdwOffsetX", this.ShdwOffsetX);
+            valuemap.SetIf("ShdwOffsetY", this.ShdwOffsetY);
+            valuemap.SetIf("ShdwPattern", this.ShdwPattern);
+            valuemap.SetIf("ShdwScalefactor", this.ShdwScalefactor);
+            valuemap.SetIf("ShdwType", this.ShdwType);
+            valuemap.SetIf("TxtAngle", this.TxtAngle);
+            valuemap.SetIf("TxtHeight", this.TxtHeight);
+            valuemap.SetIf("TxtHeight", this.TxtHeight);
+            valuemap.SetIf("TxtLocPinY", this.TxtLocPinY);
+            valuemap.SetIf("TxtPinX", this.TxtPinX);
+            valuemap.SetIf("TxtPinY", this.TxtPinY);
+            valuemap.SetIf("TxtWidth", this.TxtWidth);
+            valuemap.SetIf("Width", this.Width);
             var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
 
             foreach (var shape in target_shapes)
             {
                 var id = shape.ID16;
-                update.SetFormulaIgnoreNull(id, SRCCON.Width, this.Width);
-                update.SetFormulaIgnoreNull(id, SRCCON.Height, this.Height);
-                update.SetFormulaIgnoreNull(id, SRCCON.PinX, this.PinX);
-                update.SetFormulaIgnoreNull(id, SRCCON.PinY, this.PinY);
-                update.SetFormulaIgnoreNull(id, SRCCON.Angle, this.Angle);
 
-                update.SetFormulaIgnoreNull(id, SRCCON.FillForegnd, this.FillForegnd);
-                update.SetFormulaIgnoreNull(id, SRCCON.FillPattern, this.FillPattern);
-                update.SetFormulaIgnoreNull(id, SRCCON.FillBkgnd, this.FillBkgnd);
-                update.SetFormulaIgnoreNull(id, SRCCON.LineColor, this.LineColor);
-                update.SetFormulaIgnoreNull(id, SRCCON.LinePattern, this.LinePattern);
-                update.SetFormulaIgnoreNull(id, SRCCON.LineWeight, this.LineWeight);
-                update.SetFormulaIgnoreNull(id, SRCCON.FillForegndTrans, this.FillForegndTrans);
-                update.SetFormulaIgnoreNull(id, SRCCON.FillBkgndTrans, this.FillBkgndTrans);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharCase, this.CharCase);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharColor, this.CharColor);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharFont, this.CharFont);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharFontScale, this.CharFontScale);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharLetterspace, this.CharLetterspace);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharSize, this.CharSize);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharStyle, this.CharStyle);
-                update.SetFormulaIgnoreNull(id, SRCCON.CharColorTrans, this.CharColorTransparency);
-                update.SetFormulaIgnoreNull(id, SRCCON.BeginArrow, this.BeginArrow);
-                update.SetFormulaIgnoreNull(id, SRCCON.BeginArrowSize, this.BeginArrowSize);
-                update.SetFormulaIgnoreNull(id, SRCCON.EndArrow, this.EndArrow);
-                update.SetFormulaIgnoreNull(id, SRCCON.EndArrowSize, this.EndArrowSize);
-
-                update.SetFormulaIgnoreNull(id, SRCCON.BeginX, this.BeginX);
-                update.SetFormulaIgnoreNull(id, SRCCON.EndX, this.EndX);
-                update.SetFormulaIgnoreNull(id, SRCCON.BeginY, this.BeginY);
-                update.SetFormulaIgnoreNull(id, SRCCON.EndY, this.EndY);
-                update.SetFormulaIgnoreNull(id, SRCCON.LineCap, this.LineCap);
-                update.SetFormulaIgnoreNull(id, SRCCON.Rounding, this.Rounding);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwBkgnd, this.ShdwBkgnd);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwBkgndTrans, this.ShdwBkgndTrans);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwForegnd, this.ShdwForegnd);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwForegndTrans, this.ShdwForegndTrans);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwObliqueAngle, this.ShdwObliqueAngle);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwOffsetX, this.ShdwOffsetX);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwOffsetY, this.ShdwOffsetY);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwPattern, this.ShdwPattern);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwScaleFactor, this.ShdwScalefactor);
-                update.SetFormulaIgnoreNull(id, SRCCON.ShdwType, this.ShdwType);
-                update.SetFormulaIgnoreNull(id, SRCCON.LocPinX, this.LocPinX);
-                update.SetFormulaIgnoreNull(id, SRCCON.LocPinY, this.LocPinY);
-                update.SetFormulaIgnoreNull(id, SRCCON.SelectMode, this.SelectMode);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockAspect, this.LockAspect);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockBegin, this.LockBegin);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockCalcWH, this.LockCalcWH);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockCrop, this.LockCrop);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockCustProp, this.LockCustProp);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockDelete, this.LockDelete);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockEnd, this.LockEnd);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockFormat, this.LockFormat);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockFromGroupFormat, this.LockFromGroupFormat);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockGroup, this.LockGroup);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockHeight, this.LockHeight);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockMoveX, this.LockMoveX);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockMoveY, this.LockMoveY);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockRotate, this.LockRotate);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockSelect, this.LockSelect);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockTextEdit, this.LockTextEdit);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockThemeColors, this.LockThemeColors);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockThemeEffects, this.LockThemeEffects);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockVtxEdit, this.LockVtxEdit);
-                update.SetFormulaIgnoreNull(id, SRCCON.LockWidth, this.LockWidth);
-                update.SetFormulaIgnoreNull(id, SRCCON.TxtAngle, this.TxtAngle);
-                update.SetFormulaIgnoreNull(id, SRCCON.TxtHeight, this.TxtHeight);
-                update.SetFormulaIgnoreNull(id, SRCCON.TxtLocPinX, this.TxtHeight);
-                update.SetFormulaIgnoreNull(id, SRCCON.TxtLocPinY, this.TxtLocPinY);
-                update.SetFormulaIgnoreNull(id, SRCCON.TxtPinX, this.TxtPinX);
-                update.SetFormulaIgnoreNull(id, SRCCON.TxtPinY, this.TxtPinY);
-                update.SetFormulaIgnoreNull(id, SRCCON.TxtWidth, this.TxtWidth);
-
-                update.SetFormulaIgnoreNull(id, SRCCON.HideText, this.HideText);
+                foreach (var cellname in valuemap.CellNames)
+                {
+                    string cell_value = valuemap[cellname];
+                    var cell_src = valuemap.GetSRC(cellname);
+                    update.SetFormulaIgnoreNull(id,cell_src, cell_value);
+                }
             }
 
             var page = scriptingsession.Page.Get();

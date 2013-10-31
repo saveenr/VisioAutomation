@@ -9,7 +9,7 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioShapeCell")]
     public class Get_VisioShapeCell : VisioPSCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.Parameter(Mandatory = false, Position = 0)]
         public string[] Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
@@ -325,7 +325,7 @@ namespace VisioPS.Commands
             addcell(query, this.TxtWidth, "TxtWidth");
             addcell(query, this.Width, "Width");
 
-            var dic = this.GetShapeCellDictionary();
+            var dic = GetShapeCellDictionary();
             Get_VisioPageCell.SetFromCellNames(query, this.Cells, dic);
 
             var page = scriptingsession.Page.Get();
@@ -343,7 +343,7 @@ namespace VisioPS.Commands
 
         private void addcell(VisioAutomation.ShapeSheet.Query.CellQuery q, bool b, string name)
         {
-            var dic = this.GetShapeCellDictionary();
+            var dic = GetShapeCellDictionary();
             if (b)
             {
                 q.Columns.Add(dic[name], name);
@@ -352,7 +352,7 @@ namespace VisioPS.Commands
 
         private static CellMap callmap;
 
-        private CellMap GetShapeCellDictionary()
+        public static CellMap GetShapeCellDictionary()
         {
             if (callmap == null)
             {
