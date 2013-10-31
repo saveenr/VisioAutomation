@@ -354,6 +354,11 @@ namespace VisioPS.Commands
             set
             {
                 this.CheckCellName(name);
+                if (!this.srcmap.HasCellName(name))
+                {
+                    string msg = string.Format("Unknown Cell name \"{0}\"", name);
+                    throw new System.ArgumentOutOfRangeException(msg);
+                }
                 this.dic[name] = value;
             }
         }

@@ -117,5 +117,10 @@ namespace VisioPS.Commands
 
             List<KeyValuePair<string, SRC>> pairs = this.dic.ToList();
         }
+
+        public bool HasCellName(string name)
+        {
+            return this.dic.ContainsKey(name);
+        }
     }
 }
