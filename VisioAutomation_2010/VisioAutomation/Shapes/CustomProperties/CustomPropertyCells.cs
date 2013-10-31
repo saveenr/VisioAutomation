@@ -30,7 +30,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             this.Value = value;
         }
 
-        private string SmartStringToFormulaString(VA.ShapeSheet.FormulaLiteral formula)
+        private string SmartStringToFormulaString(VA.ShapeSheet.FormulaLiteral formula, bool force_no_quoting)
         {
             if (!formula.HasValue)
             {
@@ -44,6 +44,10 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             if (formula.Value[0] != '\"')
             {
+                if (force_no_quoting)
+                {
+                    return formula.Value;
+                }
                 return VA.Convert.StringToFormulaString(formula.Value);
             }
 
@@ -54,10 +58,18 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             var cp = this;
 
-            string str_label =  this.SmartStringToFormulaString(cp.Label.Formula);
-            string str_value =  this.SmartStringToFormulaString(cp.Value.Formula);
-            string str_format = this.SmartStringToFormulaString(cp.Format.Formula);
-            string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula);
+            string str_label =  this.SmartStringToFormulaString(cp.Label.Formula, false);
+            string str_value = null;
+            if (cp.Type.Formula.Value == "0")
+            {
+                str_value = this.SmartStringToFormulaString(cp.Value.Formula, false);
+            }
+            else
+            {
+                str_value = this.SmartStringToFormulaString(cp.Value.Formula, true);                
+            }
+            string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
+            string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
             func(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(row), str_label);
             func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow( row), str_value);

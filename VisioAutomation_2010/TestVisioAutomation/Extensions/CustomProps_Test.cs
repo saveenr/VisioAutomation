@@ -187,5 +187,43 @@ namespace TestVisioAutomation
 
             page1.Delete(0);
         }
+
+        [TestMethod]
+        public void CustomProps_TryAllTypes()
+        {
+            var page1 = GetNewPage();
+
+            var s1 = page1.DrawRectangle(0, 0, 2, 2);
+
+            // string
+            var cp_string = new CustomPropertyCells();
+            cp_string.Value = "Hello World";
+            cp_string.Type = 0;
+
+            var cp_int = new CustomPropertyCells();
+            cp_int.Value = 1024;
+            cp_int.Type = 2;
+
+            var cp_dt = new CustomPropertyCells();
+            cp_dt.Value = "DATETIME(\"03/31/1979\")";
+            cp_dt.Type = 5;
+
+            var cp_bool = new CustomPropertyCells();
+            cp_bool.Value = "TRUE";
+            cp_bool.Type = 2;
+
+            var cp_float = new CustomPropertyCells();
+            cp_float.Value = 3.14;
+            cp_float.Type = 2;
+
+            CustomPropertyHelper.Set(s1, "PropertyString", cp_string);
+            CustomPropertyHelper.Set(s1, "PropertyInt", cp_int);
+            CustomPropertyHelper.Set(s1, "PropertyFloat", cp_float);
+            CustomPropertyHelper.Set(s1, "PropertyDateTime", cp_dt);
+            CustomPropertyHelper.Set(s1, "PropertyBool", cp_bool);
+
+            page1.Delete(0);
+        }
+
     }
 }
