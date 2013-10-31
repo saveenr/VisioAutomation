@@ -25,6 +25,42 @@ namespace VisioAutomation.Shapes.CustomProperties
             
         }
 
+        public CustomPropertyCells(string value)
+        {
+            this.Value = value;
+            this.Type = 0;
+        }
+
+        public CustomPropertyCells(int value)
+        {
+            this.Value = value;
+            this.Type = 2;
+        }
+
+        public CustomPropertyCells(double value)
+        {
+            this.Value = value;
+            this.Type = 2;
+        }
+
+        public CustomPropertyCells(float value)
+        {
+            this.Value = value;
+            this.Type = 2;
+        }
+
+        public CustomPropertyCells(bool value)
+        {
+            this.Value = ((bool)value) ? "TRUE" : "FALSE";
+            this.Type = 3;
+        }
+
+        public CustomPropertyCells(System.DateTime value)
+        {
+            this.Value = string.Format("DATETIME({0},{1},{2})", value.Month, value.Date, value.Year);
+            this.Type = 3;
+        }
+
         public CustomPropertyCells(VA.ShapeSheet.FormulaLiteral value)
         {
             this.Value = value;
@@ -101,6 +137,40 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             _mCellQuery = _mCellQuery ?? new CustomPropertyCellQuery();
             return _mCellQuery;
+        }
+
+
+        public static CustomPropertyCells FromValue(object value)
+        {
+            if (value is string)
+            {
+                return new CustomPropertyCells((string)value);
+            }
+            else if (value is int)
+            {
+                return new CustomPropertyCells((int)value);
+            }
+            else if (value is double)
+            {
+                return new CustomPropertyCells((double)value);
+            }
+            else if (value is float)
+            {
+                return new CustomPropertyCells((float)value);
+            }
+            else if (value is bool)
+            {
+                return new CustomPropertyCells((bool)value);
+            }
+            else if (value is System.DateTime)
+            {
+                return new CustomPropertyCells((System.DateTime)value);
+            }
+            else
+            {
+                string msg = string.Format("Unsupported type for value \"{0}\" \"{1}\"", value, value.GetType());
+                throw new System.ArgumentOutOfRangeException(msg);
+            }
         }
     }
 }

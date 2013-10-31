@@ -126,56 +126,10 @@ namespace VisioPS.Commands
                 string key_string = (string) key;
 
                 object value = this.HashTable[key];
-
-                var cp = new CustomPropertyCells();
-
-                if (value is string)
-                {
-                    cp.Value = (string) value;
-                    cp.Type = 0;
-                }
-                else if (value is int)
-                {
-                    int value_int = (int) value;
-                    cp.Value = value_int;
-                    cp.Type = 2;
-
-                }
-                else if (value is double)
-                {
-                    double value_double  = (double)value;
-                    cp.Value = value_double;
-                    cp.Type = 2;
-                }
-                else if (value is float)
-                {
-                    float value_float = (float)value;
-                    cp.Value = value_float;
-                    cp.Type = 2;
-                }
-                else if (value is bool)
-                {
-                    bool value_bool = (bool)value;
-                    cp.Value = value_bool ? "TRUE" : "FALSE";
-                    cp.Type = 3;
-                }
-                else if (value is System.DateTime)
-                {
-                    System.DateTime value_dt = (System.DateTime)value;
-                    cp.Value = string.Format("DATETIME({0},{1},{2})", value_dt.Month, value_dt.Date, value_dt.Year);
-                    cp.Type = 5;
-                }
-                else
-                {
-                    string msg = string.Format("Unsupported type for value \"{0}\" \"{1}\"", value, value.GetType());
-                    throw new System.ArgumentOutOfRangeException(msg);                    
-                }
-
+                var cp = CustomPropertyCells.FromValue(value);
                 var scriptingsession = this.ScriptingSession;
                 scriptingsession.CustomProp.Set(this.Shapes, key_string, cp);
-
             }
         }
-
     }
 }
