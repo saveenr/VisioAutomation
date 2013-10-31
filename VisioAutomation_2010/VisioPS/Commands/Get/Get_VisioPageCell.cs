@@ -163,7 +163,7 @@ addcell(query,this.YGridSpacing,"YGridSpacing");
 addcell(query,this.YRulerDensity,"YRulerDensity");
 addcell(query,this.YRulerOrigin,"YRulerOrigin");
 
-            var dic = this.GetPageCellDictionary();
+            var dic = GetPageCellDictionary();
             SetFromCellNames(query, this.Cells, dic);
 
             var page = scriptingsession.Page.Get();
@@ -197,7 +197,7 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
 
         private void addcell(VA.ShapeSheet.Query.CellQuery query, bool switchpar, string cellname)
         {
-            var dic = this.GetPageCellDictionary();
+            var dic = Get_VisioPageCell.GetPageCellDictionary();
             if (switchpar)
             {
                 query.Columns.Add(dic[cellname], cellname);
@@ -207,7 +207,7 @@ addcell(query,this.YRulerOrigin,"YRulerOrigin");
         private static CellMap cellmap;
 
 
-        private CellMap GetPageCellDictionary()
+        public static CellMap GetPageCellDictionary()
         {
             if (cellmap == null)
             {

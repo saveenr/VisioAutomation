@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.ShapeSheet;
 
 namespace VisioPS.Commands
@@ -113,6 +114,8 @@ namespace VisioPS.Commands
                     yield return resolved_name;
                 }
             }
+
+            List<KeyValuePair<string, SRC>> pairs = this.dic.ToList();
         }
     }
 }

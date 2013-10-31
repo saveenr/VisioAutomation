@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using System.Linq;
@@ -220,79 +221,87 @@ namespace VisioPS.Commands
 
             var target_pages = this.Pages ?? new [] { scriptingsession.Page.Get() };
 
+            var valuemap = new CellValueMap();
+            valuemap.SetIf("PageBottomMargin",this.PageBottomMargin);
+            valuemap.SetIf("PageHeight",this.PageHeight);
+            valuemap.SetIf("PageLeftMargin",this.PageLeftMargin);
+            valuemap.SetIf("PageLineJumpDirX",this.PageLineJumpDirX);
+            valuemap.SetIf("PageLineJumpDirY",this.PageLineJumpDirY);
+            valuemap.SetIf("PageRightMargin",this.PageRightMargin);
+            valuemap.SetIf("PageScale",this.PageScale);
+            valuemap.SetIf("PageShapeSplit",this.PageShapeSplit);
+            valuemap.SetIf("PageTopMargin",this.PageTopMargin);
+            valuemap.SetIf("PageWidth",this.PageWidth);
+            valuemap.SetIf("CenterX",this.CenterX);
+            valuemap.SetIf("CenterY",this.CenterY);
+            valuemap.SetIf("PaperKind",this.PaperKind);
+            valuemap.SetIf("PrintGrid",this.PrintGrid);
+            valuemap.SetIf("PrintPageOrientation",this.PrintPageOrientation);
+            valuemap.SetIf("ScaleX",this.ScaleX);
+            valuemap.SetIf("ScaleY",this.ScaleY);
+            valuemap.SetIf("PaperSource",this.PaperSource);
+            valuemap.SetIf("DrawingScale",this.DrawingScale);
+            valuemap.SetIf("DrawingScaleType",this.DrawingScaleType);
+            valuemap.SetIf("DrawingSizeType",this.DrawingSizeType);
+            valuemap.SetIf("InhibitSnap",this.InhibitSnap);
+            valuemap.SetIf("ShdwObliqueAngle",this.ShdwObliqueAngle);
+            valuemap.SetIf("ShdwOffsetX",this.ShdwOffsetX);
+            valuemap.SetIf("ShdwOffsetY",this.ShdwOffsetY);
+            valuemap.SetIf("ShdwScaleFactor",this.ShdwScaleFactor);
+            valuemap.SetIf("ShdwType",this.ShdwType);
+            valuemap.SetIf("UIVisibility",this.UIVisibility);
+            valuemap.SetIf("XGridDensity",this.XGridDensity);
+            valuemap.SetIf("XGridOrigin",this.XGridOrigin);
+            valuemap.SetIf("XGridSpacing",this.XGridSpacing);
+            valuemap.SetIf("XRulerDensity",this.XRulerDensity);
+            valuemap.SetIf("XRulerOrigin",this.XRulerOrigin);
+            valuemap.SetIf("YGridDensity",this.YGridDensity);
+            valuemap.SetIf("YGridOrigin",this.YGridOrigin);
+            valuemap.SetIf("YGridSpacing",this.YGridSpacing);
+            valuemap.SetIf("YRulerDensity",this.YRulerDensity);
+            valuemap.SetIf("YRulerOrigin",this.YRulerOrigin);
+            valuemap.SetIf("AvenueSizeX",this.AvenueSizeX);
+            valuemap.SetIf("AvenueSizeY",this.AvenueSizeY);
+            valuemap.SetIf("BlockSizeX",this.BlockSizeX);
+            valuemap.SetIf("BlockSizeY",this.BlockSizeY);
+            valuemap.SetIf("CtrlAsInput",this.CtrlAsInput);
+            valuemap.SetIf("DynamicsOff",this.DynamicsOff);
+            valuemap.SetIf("EnableGrid",this.EnableGrid);
+            valuemap.SetIf("LineAdjustFrom",this.LineAdjustFrom);
+            valuemap.SetIf("LineAdjustTo",this.LineAdjustTo);
+            valuemap.SetIf("LineJumpCode",this.LineJumpCode);
+            valuemap.SetIf("LineJumpFactorX",this.LineJumpFactorX);
+            valuemap.SetIf("LineJumpFactorY",this.LineJumpFactorY);
+            valuemap.SetIf("LineJumpStyle",this.LineJumpStyle);
+            valuemap.SetIf("LineRouteExt",this.LineRouteExt);
+            valuemap.SetIf("LineToLineX",this.LineToLineX);
+            valuemap.SetIf("LineToLineY",this.LineToLineY);
+            valuemap.SetIf("LineToNodeX",this.LineToNodeX);
+            valuemap.SetIf("LineToNodeY",this.LineToNodeY);
+            valuemap.SetIf("PageLineJumpDirX",this.PageLineJumpDirX);
+            valuemap.SetIf("PageLineJumpDirY",this.PageLineJumpDirY);
+            valuemap.SetIf("PageShapeSplit",this.PageShapeSplit);
+            valuemap.SetIf("PlaceDepth",this.PlaceDepth);
+            valuemap.SetIf("PlaceFlip",this.PlaceFlip);
+            valuemap.SetIf("PlaceStyle",this.PlaceStyle);
+            valuemap.SetIf("PlowCode",this.PlowCode);
+            valuemap.SetIf("ResizePage",this.ResizePage);
+            valuemap.SetIf("RouteStyle",this.RouteStyle);
+            valuemap.SetIf("AvoidPageBreaks",this.AvoidPageBreaks);
+            valuemap.SetIf("DrawingResizeType",this.DrawingResizeType);
+
+            var srcmap = Get_VisioPageCell.GetPageCellDictionary();
+
             foreach (var page in target_pages)
             {
                 var pagesheet = page.PageSheet;
 
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageBottomMargin, this.PageBottomMargin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, this.PageHeight);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageLeftMargin, this.PageLeftMargin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageLineJumpDirX, this.PageLineJumpDirX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageLineJumpDirY, this.PageLineJumpDirY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageRightMargin, this.PageRightMargin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageScale, this.PageScale);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageShapeSplit, this.PageShapeSplit);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageTopMargin, this.PageTopMargin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, this.PageWidth);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.CenterX, this.CenterX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.CenterY, this.CenterY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PaperKind, this.PaperKind);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PrintGrid, this.PrintGrid);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PrintPageOrientation, this.PrintPageOrientation);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ScaleX, this.ScaleX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ScaleY, this.ScaleY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PaperSource, this.PaperSource);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.DrawingScale, this.DrawingScale);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.DrawingScaleType, this.DrawingScaleType);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.DrawingSizeType, this.DrawingSizeType);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.InhibitSnap, this.InhibitSnap);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ShdwObliqueAngle, this.ShdwObliqueAngle);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ShdwOffsetX, this.ShdwOffsetX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ShdwOffsetY, this.ShdwOffsetY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ShdwScaleFactor, this.ShdwScaleFactor);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ShdwType, this.ShdwType);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.UIVisibility, this.UIVisibility);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.XGridDensity, this.XGridDensity);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.XGridOrigin, this.XGridOrigin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.XGridSpacing, this.XGridSpacing);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.XRulerDensity, this.XRulerDensity);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.XRulerOrigin, this.XRulerOrigin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.YGridDensity, this.YGridDensity);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.YGridOrigin, this.YGridOrigin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.YGridSpacing, this.YGridSpacing);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.YRulerDensity, this.YRulerDensity);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.YRulerOrigin, this.YRulerOrigin);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeX, this.AvenueSizeX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.AvenueSizeY, this.AvenueSizeY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.BlockSizeX, this.BlockSizeX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.BlockSizeY, this.BlockSizeY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.CtrlAsInput, this.CtrlAsInput);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.DynamicsOff, this.DynamicsOff);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.EnableGrid, this.EnableGrid);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineAdjustFrom, this.LineAdjustFrom);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineAdjustTo, this.LineAdjustTo);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineJumpCode, this.LineJumpCode);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineJumpFactorX, this.LineJumpFactorX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineJumpFactorY, this.LineJumpFactorY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineJumpStyle, this.LineJumpStyle);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineRouteExt, this.LineRouteExt);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineToLineX, this.LineToLineX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineToLineY, this.LineToLineY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineToNodeX, this.LineToNodeX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.LineToNodeY, this.LineToNodeY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageLineJumpDirX, this.PageLineJumpDirX);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageLineJumpDirY, this.PageLineJumpDirY);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PageShapeSplit, this.PageShapeSplit);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PlaceDepth, this.PlaceDepth);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PlaceFlip, this.PlaceFlip);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PlaceStyle, this.PlaceStyle);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.PlowCode, this.PlowCode);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.ResizePage, this.ResizePage);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.RouteStyle, this.RouteStyle);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.AvoidPageBreaks, this.AvoidPageBreaks);
-                update.SetFormulaIgnoreNull(VisioAutomation.ShapeSheet.SRCConstants.DrawingResizeType, this.DrawingResizeType);
-
-
+                foreach (var cellname in valuemap.CellNames)
+                {
+                    string cell_value = valuemap[cellname];
+                    var cell_src = srcmap[cellname];
+                    update.SetFormulaIgnoreNull( cell_src , cell_value);
+                }
                 this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
                 this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
                 this.WriteVerboseEx("Number of Shapes : {0}", 1);
@@ -308,5 +317,122 @@ namespace VisioPS.Commands
             }
 
         }
+
     }
+
+    public class CellValueMap
+    {
+        Dictionary<string, string> dic;
+
+        private System.Text.RegularExpressions.Regex regex_cellname;
+        private System.Text.RegularExpressions.Regex regex_cellname_wildcard;
+
+        public CellValueMap()
+        {
+            this.regex_cellname = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
+            this.regex_cellname_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
+            this.dic = new Dictionary<string, string>(System.StringComparer.OrdinalIgnoreCase);
+        }
+
+        public string this[string name]
+        {
+            get { return this.dic[name]; }
+            set
+            {
+                this.CheckCellName(name);
+                this.dic[name] = value;
+            }
+        }
+
+        public void SetIf(string name, string value)
+        {
+            if (value != null)
+            {
+                this.dic[name] = value;
+            }            
+        }
+
+        public Dictionary<string, string>.KeyCollection CellNames
+        {
+            get
+            {
+                return this.dic.Keys;
+            }
+        }
+
+        public bool IsValidCellName(string name)
+        {
+            return this.regex_cellname.IsMatch(name);
+        }
+
+        public bool IsValidCellNameWildCard(string name)
+        {
+            return this.regex_cellname_wildcard.IsMatch(name);
+        }
+
+
+        public void CheckCellName(string name)
+        {
+            if (this.IsValidCellName(name))
+            {
+                return;
+            }
+
+            string msg = string.Format("Cell name \"{0}\" is not valid", name);
+            throw new System.ArgumentOutOfRangeException(msg);
+        }
+
+        public void CheckCellNameWildcard(string name)
+        {
+            if (this.IsValidCellNameWildCard(name))
+            {
+                return;
+            }
+
+            string msg = string.Format("Cell name pattern \"{0}\" is not valid", name);
+            throw new System.ArgumentOutOfRangeException(msg);
+        }
+
+        public IEnumerable<string> ResolveName(string cellname)
+        {
+            if (cellname.Contains("*") || cellname.Contains("?"))
+            {
+                this.CheckCellNameWildcard(cellname);
+                string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
+                    .Replace(@"\*", ".*").
+                    Replace(@"\?", ".") + "$";
+
+                var regex = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+                foreach (string k in this.CellNames)
+                {
+                    if (regex.IsMatch(k))
+                    {
+                        yield return k;
+                    }
+                }
+            }
+            else
+            {
+                this.CheckCellName(cellname);
+                if (!this.dic.ContainsKey(cellname))
+                {
+                    throw new System.ArgumentException("cellname not defined in map");
+                }
+                yield return cellname;
+            }
+        }
+
+        public IEnumerable<string> ResolveNames(string[] cellnames)
+        {
+            foreach (var name in cellnames)
+            {
+                foreach (var resolved_name in this.ResolveName(name))
+                {
+                    yield return resolved_name;
+                }
+            }
+        }
+    }
+
 }
