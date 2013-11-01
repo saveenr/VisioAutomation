@@ -64,6 +64,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         public CustomPropertyCells(VA.ShapeSheet.FormulaLiteral value)
         {
             this.Value = value;
+            this.Type = 2;
         }
 
         private string SmartStringToFormulaString(VA.ShapeSheet.FormulaLiteral formula, bool force_no_quoting)
