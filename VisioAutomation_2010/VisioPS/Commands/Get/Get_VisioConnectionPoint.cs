@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Globalization;
+using VA=VisioAutomation;
 using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -10,11 +12,50 @@ namespace VisioPS.Commands
     {
         [SMA.Parameter(Mandatory = false)]public IVisio.Shape[] Shapes;
 
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter GetCells;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
             var dic = scriptingsession.ConnectionPoint.Get(this.Shapes);
-            this.WriteObject(dic);
+
+            if (this.GetCells)
+            {
+                this.WriteObject(dic);
+            }
+            else
+            {
+                foreach (var shape_points in dic)
+                {
+                    var shape = shape_points.Key;
+                    var points = shape_points.Value;
+                    int shapeid = shape.ID;
+
+                    foreach (var point in points)
+                    {
+                        var cp = new ConnectionPointFormulas();
+
+                        cp.Type = point.Type.Formula.Value;
+                        cp.X = point.X.Formula.Value;
+                        cp.Y = point.Y.Formula.Value;
+                        cp.DirX = point.DirX.Formula.Value;
+                        cp.DirY = point.DirY.Formula.Value;
+
+                        this.WriteObject(cp);
+                    }
+                }
+            }
         }
+    }
+
+    public class ConnectionPointFormulas
+    {
+        public int ShapeID;
+        public string Type;
+        public string X;
+        public string Y;
+        public string DirX;
+        public string DirY;
     }
 }

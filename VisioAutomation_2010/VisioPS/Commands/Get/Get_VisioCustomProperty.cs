@@ -55,7 +55,7 @@ namespace VisioPS.Commands
 
     public class CustomPropertyFormulas
     {
-        public int ShapeID ;
+        public int ShapeID;
         public string Name;
         public string Value;
         public string Format;
@@ -68,8 +68,7 @@ namespace VisioPS.Commands
         public string Verify;
 
         public CustomPropertyFormulas()
-        {
-            
+        {           
         }
     }
 }
