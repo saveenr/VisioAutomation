@@ -36,6 +36,7 @@ namespace VisioPS.Commands
                     {
                         var cp = new ConnectionPointFormulas();
 
+                        cp.ShapeID = shapeid;
                         cp.Type = point.Type.Formula.Value;
                         cp.X = point.X.Formula.Value;
                         cp.Y = point.Y.Formula.Value;
