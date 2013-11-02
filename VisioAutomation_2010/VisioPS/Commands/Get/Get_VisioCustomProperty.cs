@@ -24,19 +24,6 @@ namespace VisioPS.Commands
             }
             else
             {
-                var dt = new System.Data.DataTable("CustomProperties");
-                dt.Columns.Add("ShapeId");
-                dt.Columns.Add("Name");
-                dt.Columns.Add("Value");
-                dt.Columns.Add("Format");
-                dt.Columns.Add("Invisible");
-                dt.Columns.Add("Label");
-                dt.Columns.Add("LangId");
-                dt.Columns.Add("Prompt");
-                dt.Columns.Add("SortKey");
-                dt.Columns.Add("Type");
-                dt.Columns.Add("Verify");
-
                 foreach (var shape_propdic_pair in dic)
                 {
                     var shape = shape_propdic_pair.Key;
@@ -46,24 +33,43 @@ namespace VisioPS.Commands
                         string propname = propname_propcells_pair.Key;
                         var propcells = propname_propcells_pair.Value;
 
-                        dt.Rows.Add(
-                            shape.ID, 
-                            propname, 
-                            propcells.Value.Formula, 
-                            propcells.Format.Formula, 
-                            propcells.Invisible.Formula,
-                            propcells.Label.Formula,
-                            propcells.LangId.Formula, 
-                            propcells.Prompt.Formula, 
-                            propcells.SortKey.Formula,
-                            propcells.Type.Formula,
-                            propcells.Verify.Formula);
+                        var cpf = new CustomPropertyFormulas();
+                        cpf.ShapeID = shape.ID;
+                        cpf.Name = propname;
+                        cpf.Value = propcells.Value.Formula.Value;
+                        cpf.Value = propcells.Format.Formula.Value;
+                        cpf.Value = propcells.Invisible.Formula.Value;
+                        cpf.Value = propcells.Label.Formula.Value;
+                        cpf.Value = propcells.LangId.Formula.Value;
+                        cpf.Value =  propcells.Prompt.Formula.Value; 
+                        cpf.Value =  propcells.SortKey.Formula.Value;
+                        cpf.Value = propcells.Type.Formula.Value;
+                        cpf.Value = propcells.Verify.Formula.Value;
+
+                        this.WriteObject(cpf);
                     }
                 }
-
-                this.WriteObject(dt);
             }
         }
+    }
 
+    public class CustomPropertyFormulas
+    {
+        public int ShapeID ;
+        public string Name;
+        public string Value;
+        public string Format;
+        public string Invisible;
+        public string Label;
+        public string LangId;
+        public string Prompt;
+        public string SortKey;
+        public string Type;
+        public string Verify;
+
+        public CustomPropertyFormulas()
+        {
+            
+        }
     }
 }
