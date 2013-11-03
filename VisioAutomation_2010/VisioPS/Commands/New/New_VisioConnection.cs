@@ -14,13 +14,13 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 1, Mandatory = true)]
         public IVisio.Shape[] To { get; set; }
 
-        [SMA.Parameter(Position = 2, Mandatory = true)]
+        [SMA.Parameter(Position = 2, Mandatory = false)]
         public IVisio.Master Master { get; set; }
 
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var connectors = scriptingsession.Connection.Connect(Master, From , To );
+            var connectors = scriptingsession.Connection.Connect(From , To, Master);
             this.WriteObject(connectors, false);
         }
     }

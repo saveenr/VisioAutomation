@@ -147,5 +147,31 @@ namespace VisioAutomation.Pages
             short[] outids = (short[])outids_sa;
             return outids;
         }
+
+        public static short[] DropManyAutoConnectors(
+            IVisio.Page page,
+            IEnumerable<VA.Drawing.Point> points)
+        {
+
+            if (points == null)
+            {
+                throw new System.ArgumentNullException("points");
+            }
+
+            // NOTE: DropMany will fail if you pass in zero items to drop
+
+            var app = page.Application;
+            var thing = app.ConnectorToolDataObject;
+            var masters_obj_array = Enumerable.Repeat((object)thing, points.Count()/2).ToArray();
+            var xy_array = VA.Drawing.Point.ToDoubles(points).ToArray();
+
+            System.Array outids_sa;
+
+            page.DropManyU(masters_obj_array, xy_array, out outids_sa);
+
+            short[] outids = (short[])outids_sa;
+            return outids;
+        }
+
     }
 }

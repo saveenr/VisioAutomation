@@ -125,7 +125,7 @@ namespace TestVisioAutomation
 
         private void connect(IVisio.Shape c1, IVisio.Shape from, IVisio.Shape to)
         {
-            ConnectorHelper.ConnectShapes(c1, from, to);
+            ConnectorHelper.ConnectShapes(from, to, c1);
         }
     }
 }

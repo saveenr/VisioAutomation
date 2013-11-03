@@ -31,7 +31,9 @@ namespace TestVisioAutomation
             ss.Document.OpenStencil("basic_u.vss");
             var connec_stencil = ss.Document.OpenStencil("connec_u.vss");
             var master = ss.Master.Get("Dynamic Connector", connec_stencil);
-            var directed_connectors = ss.Connection.Connect(master,new [] { s1,s2},new [] { s2,s3});
+            var fromshapes = new [] { s1,s2};
+            var toshapes = new [] { s2,s3};
+            var directed_connectors = ss.Connection.Connect(fromshapes,toshapes, master);
             ss.Selection.None();
             ss.Selection.Select(directed_connectors);
 
@@ -73,7 +75,7 @@ namespace TestVisioAutomation
             ss.Document.OpenStencil("basic_u.vss");
             var connec_stencil = ss.Document.OpenStencil("connec_u.vss");
             var master = ss.Master.Get("Dynamic Connector", connec_stencil);
-            var undirected_connectors = ss.Connection.Connect(master, new [] { s1,s2},new [] { s2,s3});
+            var undirected_connectors = ss.Connection.Connect(new [] { s1,s2},new [] { s2,s3}, master);
 
             var directed_edges0 = ss.Connection.GetDirectedEdges(ConnectorArrowEdgeHandling.ExcludeNoArrowEdges);
             Assert.AreEqual(0, directed_edges0.Count);

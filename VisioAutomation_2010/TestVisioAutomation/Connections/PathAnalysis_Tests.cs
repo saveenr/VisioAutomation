@@ -22,10 +22,15 @@ namespace TestVisioAutomation
             var dcm = connectors_masters["Dynamic Connector"];
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
-            var s2 = page1.DrawRectangle(2, 0, 3, 1);
-            var c1 = page1.Drop(dcm, new VA.Drawing.Point(-2, -2));
+            s1.Text = "From";
 
-            ConnectorHelper.ConnectShapes(c1, s1, s2);
+            var s2 = page1.DrawRectangle(2, 0, 3, 1);
+            s2.Text = "To";
+
+            var c1 = page1.Drop(dcm, new VA.Drawing.Point(-2, -2));
+            c1.Text = "Con";
+
+            ConnectorHelper.ConnectShapes(s1, s2, c1);
 
             var edges_bd = PathAnalysis.GetEdges(page1,
                                                              ConnectorArrowEdgeHandling.

@@ -53,7 +53,6 @@ namespace VisioPS.Commands
 
     public class ControlFormulas
     {
-        private static VisioAutomation.Shapes.Controls.ControlCells x;
         public int ShapeID;
         public string CanGlue;
         public string Tip;

@@ -20,11 +20,13 @@ namespace VisioAutomation.Scripting.Commands
         public void ForceClose()
         {
             this.CheckVisioApplicationAvailable();
-
-            var application = this.Session.VisioApplication;
-            var documents = application.Documents;
-            VA.Documents.DocumentHelper.ForceCloseAll(documents);
-            application.Quit(true);
+            if (this.Validate())
+            {
+                var application = this.Session.VisioApplication;
+                var documents = application.Documents;
+                VA.Documents.DocumentHelper.ForceCloseAll(documents);
+                application.Quit(true);
+            }
             this.Session.VisioApplication = null;
         }
 

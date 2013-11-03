@@ -50,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
             return edges;
         }
 
-        public IList<IVisio.Shape> Connect(IVisio.Master master, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes)
+        public IList<IVisio.Shape> Connect(IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)
         {
             this.CheckVisioApplicationAvailable();
             this.CheckActiveDrawingAvailable();
@@ -59,8 +59,16 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, undoname_connectShapes))
             {
-                var connectors = ConnectorHelper.ConnectShapes(active_page, master, fromshapes, toshapes);
-                return connectors;
+                if (master == null)
+                {
+                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
+                    return connectors;                    
+                }
+                else
+                {
+                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
+                    return connectors;
+                }
             }
         }
     }
