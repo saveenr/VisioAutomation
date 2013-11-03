@@ -61,12 +61,12 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (master == null)
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
+                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
                     return connectors;                    
                 }
                 else
                 {
-                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
+                    var connectors = ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
                     return connectors;
                 }
             }
