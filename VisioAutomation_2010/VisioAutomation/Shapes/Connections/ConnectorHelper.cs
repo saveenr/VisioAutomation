@@ -78,8 +78,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (connector_master == null && force_manual == true)
             {
-                throw new System.ArgumentNullException("if the connector object is null then force manual must be false");
-                
+                throw new System.ArgumentNullException("if the connector object is null then force manual must be false");                
             }
             // no_connector + force_manual -> INVALID
             // no_connector + not_force_manual -> AutoConect
@@ -109,11 +108,11 @@ namespace VisioAutomation.Shapes.Connections
             int num_connectors = fromshapes.Count;
             var connectors = new List<IVisio.Shape>(num_connectors);
 
-            var masters = Enumerable.Repeat(connector_master, num_connectors).ToList();
             var points = Enumerable.Range(0, num_connectors).Select(i => new VA.Drawing.Point(i*2.0, -2)).ToList();
             IList<IVisio.Shape> con_shapes = null;
             if (connector_master != null)
             {
+                var masters = Enumerable.Repeat(connector_master, num_connectors).ToList();
                 short[] con_shapeids = page.DropManyU(masters, points);
                 con_shapes = page.Shapes.GetShapesFromIDs(con_shapeids);                
             }
@@ -130,7 +129,7 @@ namespace VisioAutomation.Shapes.Connections
                 var connector = con_shapes[i];
 
                 // Connect from Shape 1 to Shape2
-                ConnectShapes(from_shape, to_shape, connector, force_manual);
+                ConnectShapes(from_shape, to_shape, connector, true);
 
                 connectors.Add(connector);
             }
