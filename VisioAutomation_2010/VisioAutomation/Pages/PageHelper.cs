@@ -162,7 +162,8 @@ namespace VisioAutomation.Pages
 
             var app = page.Application;
             var thing = app.ConnectorToolDataObject;
-            var masters_obj_array = Enumerable.Repeat((object)thing, points.Count()/2).ToArray();
+            int num_points = points.Count();
+            var masters_obj_array = Enumerable.Repeat((object)thing, num_points).ToArray();
             var xy_array = VA.Drawing.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;

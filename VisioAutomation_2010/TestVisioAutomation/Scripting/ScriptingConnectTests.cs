@@ -89,5 +89,21 @@ namespace TestVisioAutomation
 
             ss.Document.Close(true);
         }
+
+
+        [TestMethod]
+        public void Scripting_Connects_Scenario_3()
+        {
+            var ss = GetScriptingSession();
+            ss.Document.New();
+            var s1 = ss.Draw.Rectangle(1, 1, 2,2);
+            var s2 = ss.Draw.Rectangle(4, 4, 5, 5);
+
+            ss.Connection.Connect(new[] {s1}, new[] {s2}, null);
+
+
+            //ss.Document.Close(true);
+        }
+
     }
 }

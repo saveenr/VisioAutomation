@@ -148,10 +148,17 @@ $Test1 =
 
 $Test2 = 
 { 
+    Write-Host "Test: Simple Connection"
     $r0 = New-VisioRectangle 0 0 1 1
-    $r1 = New-VisioRectangle 4 5 5 5
+    $r1 = New-VisioRectangle 3 3 4 4 
+    $r2 = New-VisioRectangle 6 6 7 7
 
-    Write-Host "Test: Start Test Placeholder"
+    New-VisioConnection -From $r0 -To $r1 -Verbose 
+    New-VisioConnection -From $r1 -To $r2 -Verbose 
+
+    $allshapes = Get-VisioShape -Flags Page
+    Write-Host $allshapes.Count
+    Assert-True (3 -eq $allshapes.Count) 
 } 
 
 Run-Test $Test1
@@ -166,7 +173,7 @@ Write-Host ------ -ForegroundColor Yellow
 
 
 
-Close-VisioApplication -Force
+#Close-VisioApplication -Force
 
 
 Assert-True ($null -eq (Get-VisioApplication)) "Visio Application is still referenced after force close"
