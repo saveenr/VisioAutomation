@@ -138,6 +138,17 @@ Load-VisioPSModule
 Create-VisioApplication
 
 
+function Assert-PageShapeCount( $desired )
+{
+    $shapes = Get-VisioShape -Flags Page
+    $actual = $shapes.Count
+
+    if ($actual -ne $desired)
+    {
+        Write-Host ERROR: Expected $desired shapes on page, got $actual -ForegroundColor Gray
+        exit
+    }
+}
 
 $Test1 = 
 { 
@@ -156,9 +167,9 @@ $Test2 =
     New-VisioConnection -From $r0 -To $r1 -Verbose 
     New-VisioConnection -From $r1 -To $r2 -Verbose 
 
-    $allshapes = Get-VisioShape -Flags Page
-    Write-Host $allshapes.Count
-    Assert-True (3 -eq $allshapes.Count) 
+    Assert-PageShapeCount 5
+
+    Get-VisioEdge
 } 
 
 Run-Test $Test1
@@ -168,6 +179,7 @@ Write-Host
 Write-Host ------ -ForegroundColor Yellow
 Write-Host Ending -ForegroundColor Yellow
 Write-Host ------ -ForegroundColor Yellow
+
 
 
 
