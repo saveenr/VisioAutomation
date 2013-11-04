@@ -156,9 +156,14 @@ namespace VisioAutomation.Scripting
                 }
 
                 // Check if the window type matches that of a drawing
-                if (active_window.Type != (int)IVisio.VisWinTypes.visDrawing)
+                short active_window_type = active_window.Type;
+                if (active_window_type != (int)IVisio.VisWinTypes.visDrawing)
                 {
-                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> incorrect Window Type (Expected {0}, Actually {1}", (int)IVisio.VisWinTypes.visDrawing, (int)active_window.Type);
+                    if (active_window_type == (short) IVisio.VisWinTypes.visSheet)
+                    {
+                        this.WriteVerbose("The Active Window is a ShapeSheet Window Type={0}", active_window_type);                        
+                    }
+                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> incorrect Window Type (Expected {0}, Actually {1}", (int)IVisio.VisWinTypes.visDrawing, (int)active_window_type);
                     return false;
                 }
 
