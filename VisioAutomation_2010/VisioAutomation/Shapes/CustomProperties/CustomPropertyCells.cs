@@ -57,8 +57,8 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public CustomPropertyCells(System.DateTime value)
         {
-            this.Value = string.Format("DATETIME({0},{1},{2})", value.Month, value.Date, value.Year);
-            this.Type = 3;
+            this.Value = string.Format("DATETIME(\"{0}\")", value.ToString());
+            this.Type = 5;
         }
 
         public CustomPropertyCells(VA.ShapeSheet.FormulaLiteral value)
