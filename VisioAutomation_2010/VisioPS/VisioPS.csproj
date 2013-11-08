@@ -192,10 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\manual_install.ps1" />
-    <None Include="Scripts\quickdemo.ps1" />
-    <None Include="Scripts\quickdemo_debug.cmd" />
-    <None Include="Scripts\quickdemo_installed.cmd" />
-    <None Include="Scripts\VisioPSUtil.ps1" />
+    <None Include="Scripts\unittest.ps1" />
     <None Include="VisioPS.Types.ps1xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
