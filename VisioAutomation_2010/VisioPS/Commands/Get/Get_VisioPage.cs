@@ -10,7 +10,7 @@ namespace VisioPS.Commands
         [SMA.Parameter(ParameterSetName="named",Position=0, Mandatory = false)]
         public string Name=null;
 
-        [SMA.Parameter(ParameterSetName = "active", Mandatory = false)] public SMA.SwitchParameter ActivePage;
+        [SMA.Parameter(ParameterSetName = "active", Mandatory = true)] public SMA.SwitchParameter ActivePage;
 
         protected override void ProcessRecord()
         {
