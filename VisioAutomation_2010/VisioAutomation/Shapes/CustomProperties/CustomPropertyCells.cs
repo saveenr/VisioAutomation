@@ -1,4 +1,5 @@
-﻿using VisioAutomation.CustomProperties;
+﻿using System.Globalization;
+using VisioAutomation.CustomProperties;
 using VisioAutomation.Shapes.CustomProperties;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
@@ -57,7 +58,9 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public CustomPropertyCells(System.DateTime value)
         {
-            this.Value = string.Format("DATETIME(\"{0}\")", value.ToString());
+            var current_culture = System.Globalization.CultureInfo.CurrentCulture;
+            string formatted_dt = value.ToString( current_culture );
+            this.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
             this.Type = 5;
         }
 
