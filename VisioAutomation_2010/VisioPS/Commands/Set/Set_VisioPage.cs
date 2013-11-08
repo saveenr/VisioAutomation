@@ -14,9 +14,12 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Page")]
         public IVisio.Page Page  { get; set; }
 
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "PageNumber")]
+        public int PageNumber = -1;
+
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Flags")]
         public VA.Scripting.PageDirection Direction { get; set; }
-
+        
         protected override void ProcessRecord()
         {
             if (this.Name != null)
@@ -26,6 +29,10 @@ namespace VisioPS.Commands
             else if (this.Page != null)
             {
                 this.ScriptingSession.Page.Set(this.Page);
+            }
+            else if (this.PageNumber > 0)
+            {
+                this.ScriptingSession.Page.Set(this.PageNumber);
             }
             else
             {

@@ -36,6 +36,18 @@ namespace VisioAutomation.Scripting.Commands
             this.Set(page);
         }
 
+        public void Set(int pagenumber)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var doc = this.Session.VisioApplication.ActiveDocument;
+            this.Session.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
+            var pages = doc.Pages;
+            var page = pages[pagenumber];
+            this.Set(page);
+        }
+        
         public IVisio.Page Get()
         {
             this.CheckVisioApplicationAvailable();
