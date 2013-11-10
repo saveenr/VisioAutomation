@@ -206,6 +206,7 @@ $Test3 =
     $r0 = New-VisioRectangle 0 0 1 1
     $r1 = New-VisioRectangle 3 3 4 4 
     $r2 = New-VisioRectangle 6 6 7 7
+	Set-VisioText  -Shapes $r0,$r1,$r2 "Shape0", "Shape1", "Shape2"
     Assert-PageShapeCount 3
 
     Invoke-VisioDuplicatePage
@@ -225,6 +226,7 @@ $Test4 =
     $r0 = New-VisioRectangle 0 0 1 1
     $r1 = New-VisioRectangle 3 3 4 4 
     $r2 = New-VisioRectangle 6 6 7 7
+	Set-VisioText  -Shapes $r0,$r1,$r2 "Shape0", "Shape1", "Shape2"
     Assert-PageShapeCount 3
 
     $p0 = @{ PString = "HelloWorld" }
@@ -243,14 +245,40 @@ $Test4 =
 
     Select-VisioShape -Operation All
     $ap0 = Get-VisioCustomProperty
-    #Remove-VisioPage 
+    Remove-VisioPage 
+} 
+
+$Test5 = 
+{ 
+    New-VisioPage
+
+    Write-Host "Test: Get Specific  Shapes"
+    $r0 = New-VisioRectangle 0 0 1 1
+    $r1 = New-VisioRectangle 3 3 4 4 
+    $r2 = New-VisioRectangle 6 6 7 7
+
+	Select-VisioShape -Operation None
+	Set-VisioText  -Shapes $r0,$r1,$r2 "Shape0","Shape1","Shape2"
+
+	$x = Get-VisioShape 1,2,3 #by ID
+	$y = Get-VisioShape "Sheet.1","Sheet.2","Sheet.3"  #by name
+
+	Assert-Equals "Shape0" $x[0].Text
+	Assert-Equals "Shape1" $x[1].Text
+	Assert-Equals "Shape2" $x[2].Text
+	Assert-Equals "Shape0" $y[0].Text
+	Assert-Equals "Shape1" $y[1].Text
+	Assert-Equals "Shape2" $y[2].Text
+
+	Remove-VisioPage 
 } 
 
 
 Run-Test $Test1
 #Run-Test $Test2
 #Run-Test $Test3
-Run-Test $Test4
+#Run-Test $Test4
+Run-Test $Test5
 
 Write-Host
 Write-Host ------ -ForegroundColor Yellow
@@ -262,7 +290,7 @@ Write-Host ------ -ForegroundColor Yellow
 
 
 
-#Close-VisioApplication -Force
+Close-VisioApplication -Force
 
 
 Assert-True ($null -eq (Get-VisioApplication)) "Visio Application is still referenced after force close"
