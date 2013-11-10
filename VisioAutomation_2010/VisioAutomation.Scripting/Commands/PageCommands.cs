@@ -475,5 +475,38 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException("direction");
             }
         }
+
+        public IList<IVisio.Shape> GetShapesByID(int[] shapeids)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var page = this.Session.Page.Get();
+            var shapes = page.Shapes;
+            var shapes_list = new List<IVisio.Shape>(shapeids.Length);
+            foreach (int id in shapeids)
+            {
+                var shape = shapes.ItemFromID[id];
+                shapes_list.Add(shape);
+            }
+            return shapes_list;
+        }
+
+        public IList<IVisio.Shape> GetShapesByName(string[] shapenames)
+        {
+            this.CheckVisioApplicationAvailable();
+            this.CheckActiveDrawingAvailable();
+
+            var page = this.Session.Page.Get();
+            var shapes = page.Shapes;
+            var shapes_list = new List<IVisio.Shape>(shapenames.Length);
+            foreach (string name in shapenames)
+            {
+                var shape = shapes.ItemU[name];
+                shapes_list.Add(shape);
+            }
+            return shapes_list;
+        }
+
     }
 }

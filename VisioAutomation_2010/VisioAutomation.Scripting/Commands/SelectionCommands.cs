@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;

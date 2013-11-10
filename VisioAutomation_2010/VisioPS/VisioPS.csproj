@@ -110,7 +110,6 @@
     <Compile Include="Commands\Remove\Remove_VisioUserDefinedCell.cs" />
     <Compile Include="objects\VisioPSSessionContext.cs" />
     <Compile Include="enums\ResultType.cs" />
-    <Compile Include="Commands\Get\Get_VisioCell.cs" />
     <Compile Include="Commands\New\New_VisioShape.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioDuplicateShape.cs" />
     <Compile Include="Commands\Export\Export_VisioSelectionAsXHTML.cs" />
