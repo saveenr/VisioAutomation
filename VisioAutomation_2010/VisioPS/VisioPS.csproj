@@ -93,7 +93,6 @@
     <Compile Include="Commands\New\New_VisioBarChart.cs" />
     <Compile Include="Commands\New\New_VisioDirectedGraph.cs" />
     <Compile Include="Commands\New\New_VisioOrgChart.cs" />
-    <Compile Include="Commands\New\RectangleCmdlet.cs" />
     <Compile Include="Commands\Set\CellValueMap.cs" />
     <Compile Include="Commands\Set\Set_VisioDocument.cs" />
     <Compile Include="Commands\Set\Set_VisioPage.cs" />
