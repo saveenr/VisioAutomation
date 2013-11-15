@@ -23,8 +23,8 @@ namespace VisioAutomation.Scripting.Commands
                                           IList<double> heights,
                                           VA.Drawing.Size cellspacing)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (datatable == null)
             {
@@ -95,8 +95,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Grid(GRIDLAYOUT.GridLayout layout)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             //Create a new page to hold the grid
             var application = this.Session.VisioApplication;
@@ -118,8 +118,8 @@ namespace VisioAutomation.Scripting.Commands
             // None = 0,
             // IVisio.VisDrawSplineFlags.visSpline1D
 
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw NURBS Curve"))
@@ -133,8 +133,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Rectangle"))
@@ -147,8 +147,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Line"))
@@ -161,8 +161,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
@@ -175,8 +175,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(VA.Drawing.Point center, double radius)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
@@ -192,8 +192,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Bezier(IEnumerable<VA.Drawing.Point> points)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Bezier"))
@@ -206,8 +206,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape PolyLine(IList<VA.Drawing.Point> points)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw PolyLine"))
@@ -223,8 +223,8 @@ namespace VisioAutomation.Scripting.Commands
                                   double start_angle,
                                   double end_angle)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
@@ -241,8 +241,8 @@ namespace VisioAutomation.Scripting.Commands
                           double start_angle,
                           double end_angle)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Pie Slice"))
@@ -256,8 +256,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void PieChart(VA.Models.Charting.PieChart chart)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
@@ -266,8 +266,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void BarChart(VA.Models.Charting.BarChart chart)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
@@ -276,8 +276,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void AreaChart(VA.Models.Charting.AreaChart chart)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
@@ -289,7 +289,7 @@ namespace VisioAutomation.Scripting.Commands
         {
 
             this.Session.WriteVerbose("Start OrgChart Rendering");
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             var application = this.Session.VisioApplication;
             orgChartDocument.Render(application);
@@ -300,7 +300,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void DirectedGraph(IList<DGMODEL.Drawing> directedgraphs)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             this.Session.WriteVerbose("Start rendering directed graph");
             var app = this.Session.VisioApplication;
@@ -340,8 +340,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Duplicate(int n)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (n < 1)
             {

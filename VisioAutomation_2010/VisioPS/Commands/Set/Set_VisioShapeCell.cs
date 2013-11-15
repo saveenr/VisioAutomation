@@ -320,6 +320,7 @@ namespace VisioPS.Commands
             valuemap.SetIf("TxtPinY", this.TxtPinY);
             valuemap.SetIf("TxtWidth", this.TxtWidth);
             valuemap.SetIf("Width", this.Width);
+
             var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
 
             foreach (var shape in target_shapes)

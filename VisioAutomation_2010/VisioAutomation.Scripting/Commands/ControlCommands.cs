@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-using VisioAutomation.Extensions;
-using VisioAutomation.Shapes.Controls;
+using CTRLS=VisioAutomation.Shapes.Controls;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -15,10 +13,10 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IList<int> Add(IList<IVisio.Shape> target_shapes, ControlCells ctrl)
+        public IList<int> Add(IList<IVisio.Shape> target_shapes, CTRLS.ControlCells ctrl)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (ctrl == null)
             {
@@ -37,7 +35,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    int ci = ControlHelper.Add(shape, ctrl);
+                    int ci = CTRLS.ControlHelper.Add(shape, ctrl);
                     control_indices.Add(ci);
                 }
             }
@@ -47,8 +45,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Shape> target_shapes, int n)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -60,26 +58,26 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    ControlHelper.Delete(shape, n);
+                    CTRLS.ControlHelper.Delete(shape, n);
                 }
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<ControlCells>> Get(IList<IVisio.Shape> target_shapes)
+        public Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
-                return new Dictionary<IVisio.Shape, IList<ControlCells>>(0);
+                return new Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>>(0);
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<ControlCells>>();
+            var dic = new Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>>();
             foreach (var shape in shapes)
             {
-                var controls = ControlCells.GetCells(shape);
+                var controls = CTRLS.ControlCells.GetCells(shape);
                 dic[shape] = controls;
             }
             return dic;

@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void PageToFile(string filename)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (filename == null)
             {
@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var old_selection = this.Session.Selection.EnumShapes().ToList();
+            var old_selection = this.Session.Selection.GetShapes();
 
             this.Session.Selection.None();
             var application = this.Session.VisioApplication;
@@ -42,8 +42,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectionToFile(string filename)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (filename == null)
             {
@@ -62,8 +62,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void PagesToFiles(string filename)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (filename == null)
             {
@@ -108,8 +108,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectionToSVGXHTML(string filename)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (filename == null)
             {
@@ -128,8 +128,8 @@ namespace VisioAutomation.Scripting.Commands
 
         private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";

@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawScriptingDocumentation()
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             var formdoc = new VA.Models.Forms.FormDocument();
             formdoc.Subject = "VisioAutomation.Scripting Documenation";
@@ -98,7 +98,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             
             var formdoc = new VA.Models.Forms.FormDocument();
 
@@ -221,7 +221,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<System.Type> types)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             string def_linecolor = "rgb(140,140,140)";
             string def_fillcolor = "rgb(240,240,240)";
@@ -373,7 +373,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             string segoeui_fontname = "Segoe UI";
             string segoeuilight_fontname = "Segoe UI Light";

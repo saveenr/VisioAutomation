@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> Get()
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> Get(IVisio.Document doc)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
             return masters;
@@ -36,8 +36,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master Get(string name)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (name == null)
             {
@@ -67,8 +67,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master Get(string master, IVisio.Document stencil)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (master == null)
             {
@@ -96,8 +96,8 @@ namespace VisioAutomation.Scripting.Commands
 
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             try
             {
@@ -112,8 +112,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Drop(IVisio.Master master, double x, double y)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
@@ -123,8 +123,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public short[] Drop(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (masters == null)
             {
@@ -144,7 +144,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master New(IVisio.Document stencil, string name)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             var masters = stencil.Masters;
             var master = masters.AddEx(IVisio.VisMasterTypes.visTypeMaster);

@@ -70,8 +70,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal halign)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -86,8 +86,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical valign)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -102,8 +102,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -121,8 +121,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double d)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -141,8 +141,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -163,8 +163,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, VA.Shapes.Arrange.SnapCornerPosition corner)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
             
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
@@ -184,8 +184,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -208,8 +208,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -223,8 +223,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal align)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
@@ -244,8 +244,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical align)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
@@ -267,8 +267,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Shapes.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
@@ -284,8 +284,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Group()
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             // No shapes provided, use the active selection
             if (this.Session.HasSelectedShapes())
@@ -305,7 +305,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Ungroup(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             if (target_shapes == null)
             {
                 if (this.Session.HasSelectedShapes())
@@ -328,8 +328,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetLock(IList<IVisio.Shape> target_shapes, VA.Shapes.LockCells lockcells)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -356,8 +356,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)

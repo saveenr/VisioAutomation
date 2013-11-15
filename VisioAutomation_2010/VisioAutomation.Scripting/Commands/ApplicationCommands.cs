@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ForceClose()
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             if (this.Validate())
             {
                 var application = this.Session.VisioApplication;
@@ -81,13 +81,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Undo()
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             this.Session.VisioApplication.Undo();
         }
 
         public void Redo()
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             this.Session.VisioApplication.Redo();
         }
 

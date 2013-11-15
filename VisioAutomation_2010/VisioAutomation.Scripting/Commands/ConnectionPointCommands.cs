@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
-using VisioAutomation.Shapes.Connections;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using CONS = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation.Scripting.Commands
 {
@@ -15,22 +14,22 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public IDictionary<IVisio.Shape, IList<ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
+        public IDictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
 
             if (shapes.Count<1)
             {
-                return new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
+                return new Dictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>>();
             }
 
-            var dic = new Dictionary<IVisio.Shape, IList<ConnectionPointCells>>();
+            var dic = new Dictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>>();
             foreach (var shape in shapes)
             {
-                var cp = ConnectionPointCells.GetCells(shape);
+                var cp = CONS.ConnectionPointCells.GetCells(shape);
                 dic[shape] = cp;
             }
 
@@ -40,10 +39,10 @@ namespace VisioAutomation.Scripting.Commands
         public IList<int> Add( IList<IVisio.Shape> target_shapes, 
             string fx,
             string fy,
-            ConnectionPointType type)
+            CONS.ConnectionPointType type)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -58,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Add Connection Point"))
             {
-                var cp = new ConnectionPointCells();
+                var cp = new CONS.ConnectionPointCells();
                 cp.X = fx;
                 cp.Y = fy;
                 cp.DirX = dirx;
@@ -67,8 +66,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 foreach (var shape in shapes)
                 {
-
-                    int index = ConnectionPointHelper.Add(shape, cp);
+                    int index = CONS.ConnectionPointHelper.Add(shape, cp);
                     indices.Add(index);
                 }
             }
@@ -80,17 +78,17 @@ namespace VisioAutomation.Scripting.Commands
         public IList<int> Add(
             string fx,
             string fy,
-            ConnectionPointType type)
+            CONS.ConnectionPointType type)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             return this.Add(null, fx, fy, type);
         }
 
         public void Delete(List<IVisio.Shape> target_shapes0, int index)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes0);
             if (shapes.Count < 1)
@@ -98,15 +96,13 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var target_shapes = from shape in shapes
-                                where ConnectionPointHelper.GetCount(shape) > index
-                                select shape;
+            var target_shapes = shapes.Where(shape => CONS.ConnectionPointHelper.GetCount(shape) > index);
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Connection Point"))
             {
                 foreach (var shape in target_shapes)
                 {
-                    ConnectionPointHelper.Delete(shape, index);
+                    CONS.ConnectionPointHelper.Delete(shape, index);
                 }
             }
         }

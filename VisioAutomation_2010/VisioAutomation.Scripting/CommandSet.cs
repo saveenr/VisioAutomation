@@ -32,7 +32,7 @@ namespace VisioAutomation.Scripting
             this.Session = session;
         }
 
-        protected void CheckVisioApplicationAvailable()
+        protected void AssertApplicationAvailable()
         {
             var has_app = this.Session.HasApplication;
             if (!has_app)
@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        protected void CheckActiveDocumentAvailable()
+        protected void AssertDocumentAvailable()
         {
             if (!this.Session.HasActiveDocument)
             {
@@ -74,7 +74,7 @@ namespace VisioAutomation.Scripting
 
         protected IList<IVisio.Shape> GetTargetShapes(IList<IVisio.Shape> shapes)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             if (shapes == null)
             {
                 // If no collection of shapes were passed in then use the selection
@@ -90,7 +90,7 @@ namespace VisioAutomation.Scripting
 
         protected int GetTargetSelection(IList<IVisio.Shape> shapes)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             if (shapes == null)
             {
@@ -113,7 +113,7 @@ namespace VisioAutomation.Scripting
 
         protected IVisio.Shape GetTargetShape( IVisio.Shape shape)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             if (shape == null)
             {

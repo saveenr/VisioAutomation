@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -16,7 +15,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Activate(string name)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
@@ -27,44 +26,46 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Activate(IVisio.Document doc)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             VA.Documents.DocumentHelper.Activate(doc);
         }
 
         public void Close(bool force)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
 
-            if (doc.Type == IVisio.VisDocumentTypes.visTypeDrawing)
+            if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
-                this.Session.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-                this.Session.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+                this.Session.WriteVerbose("Not a Drawing Window", doc.Name);
+                throw new VA.AutomationException("Not a Drawing Window");
+            }
 
-                if (force)
-                {
-                    using (var alert = new VA.Application.AlertResponseScope(application, VA.Application.AlertResponseCode.No))
-                    {
-                        doc.Close();
-                    }
-                }
-                else
+            this.Session.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+            this.Session.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+
+            if (force)
+            {
+                using (var alert = new VA.Application.AlertResponseScope(application, VA.Application.AlertResponseCode.No))
                 {
                     doc.Close();
                 }
+            }
+            else
+            {
+                doc.Close();
             }
         }
 
         public void CloseAllWithoutSaving()
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
-            var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).
-                ToList();
+            var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
             using (var alert = new VA.Application.AlertResponseScope(application, VA.Application.AlertResponseCode.No))
             {
@@ -84,7 +85,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(string template)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             this.Session.WriteVerbose("Creating Empty Drawing");
             var application = this.Session.VisioApplication;
@@ -109,8 +110,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Save()
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
             
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -119,8 +120,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SaveAs(string filename)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -134,7 +135,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(double w, double h,string template)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
 
             var doc = this.New(template);
             var pagesize = new VA.Drawing.Size(w, h);
@@ -144,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document OpenStencil(string name)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             
             if (name == null)
             {
@@ -168,7 +169,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Open(string filename)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             
             if (filename == null)
             {
@@ -199,7 +200,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Get(string name)
         {
-            this.CheckVisioApplicationAvailable();
+            this.AssertApplicationAvailable();
             
             var application = this.Session.VisioApplication;
             var documents = application.Documents;

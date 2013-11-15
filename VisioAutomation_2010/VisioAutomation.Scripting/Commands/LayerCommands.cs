@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Layer Get(string layername)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (layername == null)
             {
@@ -48,8 +48,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Layer> Get()
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;

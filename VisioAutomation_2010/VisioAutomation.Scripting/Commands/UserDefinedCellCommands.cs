@@ -17,8 +17,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, IList<UserDefinedCell>>();
 
@@ -44,8 +44,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (name == null)
             {
@@ -56,19 +56,18 @@ namespace VisioAutomation.Scripting.Commands
             if (shapes.Count < 1)
             {
                 return new List<bool>();
-            } 
+            }
 
-            var results = (from s in this.Session.Selection.EnumShapes().ToList()
-                           select UserDefinedCellsHelper.Contains(s, name))
-                .ToList();
+            var all_shapes = this.Session.Selection.GetShapes();
+            var results = all_shapes.Select(s => UserDefinedCellsHelper.Contains(s, name)).ToList();
 
             return results;
         }
        
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -97,8 +96,8 @@ namespace VisioAutomation.Scripting.Commands
       
         public void Set(IList<IVisio.Shape> target_shapes, UserDefinedCell userdefinedcell)
         {
-            this.CheckVisioApplicationAvailable();
-            this.CheckActiveDocumentAvailable();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
