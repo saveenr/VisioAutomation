@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         public IList<IVisio.Master> Get()
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -37,7 +37,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Master Get(string name)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             if (name == null)
             {
@@ -68,7 +68,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Master Get(string master, IVisio.Document stencil)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             if (master == null)
             {
@@ -97,7 +97,7 @@ namespace VisioAutomation.Scripting.Commands
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             try
             {
@@ -113,7 +113,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Shape Drop(IVisio.Master master, double x, double y)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;
@@ -124,7 +124,7 @@ namespace VisioAutomation.Scripting.Commands
         public short[] Drop(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             if (masters == null)
             {

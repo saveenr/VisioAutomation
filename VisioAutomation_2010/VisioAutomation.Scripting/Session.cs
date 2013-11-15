@@ -133,48 +133,50 @@ namespace VisioAutomation.Scripting
             return this.Selection.HasShapes(min_items);
         }
 
-        public bool HasActiveDrawing
+        public bool HasActiveDocument
         {
             get
             {
                 var app = VisioApplication;
                 
-                // if there's no active document, then there can't be an active drawing
+                // if there's no active document, then there can't be an active document
                 if (app.ActiveDocument == null)
                 {
-                    this.WriteVerbose("HasActiveDrawing: FALSE: No Active Window -> No Active Document");
+                    this.WriteVerbose("HasActiveDocument: No Active Window");
                     return false;
                 }
 
                 var active_window = app.ActiveWindow;
 
-                // If there's no active window there can't be an active drawing
+                // If there's no active window there can't be an active document
                 if (active_window == null)
                 {
-                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> No Active Window");
+                    this.WriteVerbose("HasActiveDocument: No Active Document");
                     return false;
                 }
 
-                // Check if the window type matches that of a drawing
+                // Check if the window type matches that of a document
                 short active_window_type = active_window.Type;
-                if (active_window_type != (int)IVisio.VisWinTypes.visDrawing)
+                var vis_drawing = (int)IVisio.VisWinTypes.visDrawing;
+                var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
+                if (active_window_type != vis_drawing)
                 {
-                    if (active_window_type == (short) IVisio.VisWinTypes.visSheet)
+                    if (active_window_type == vis_sheet)
                     {
                         this.WriteVerbose("The Active Window is a ShapeSheet Window Type={0}", active_window_type);                        
                     }
-                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> incorrect Window Type (Expected {0}, Actually {1}", (int)IVisio.VisWinTypes.visDrawing, (int)active_window_type);
+                    this.WriteVerbose("HasActiveDocument: Not a Drawing Window");
                     return false;
                 }
 
-                // finally verify there is an active page
+                //  verify there is an active page
                 if (app.ActivePage == null)
                 {
-                    this.WriteVerbose("HasActiveDrawing: FALSE: Active Document -> Active Window -> Correct Window Type -> No Active Page");
+                    this.WriteVerbose("HasActiveDocumentg: No Active Page");
                     return false;
                 }
 
-                this.WriteVerbose("HasActiveDrawing: TRUE: Active Document -> Active Window -> Correct Window Type -> Active Page");
+                this.WriteVerbose("HasActiveDocument: Verified a drawing is available for use");
 
                 return true;
             }

@@ -37,7 +37,7 @@ namespace TestVisioAutomation
 
             var doc = ss.Document.New(10, 5);
 
-            Assert.IsTrue(ss.HasActiveDrawing);
+            Assert.IsTrue(ss.HasActiveDocument);
 
             var pagesize = ss.Page.GetSize();
             Assert.AreEqual(10.0, pagesize.Width);
@@ -79,7 +79,7 @@ namespace TestVisioAutomation
 
             ss.Document.CloseAllWithoutSaving();
 
-            Assert.IsFalse(ss.HasActiveDrawing);
+            Assert.IsFalse(ss.HasActiveDocument);
             var application = ss.VisioApplication;
             var documents = application.Documents;
             Assert.AreEqual(0, documents.Count);

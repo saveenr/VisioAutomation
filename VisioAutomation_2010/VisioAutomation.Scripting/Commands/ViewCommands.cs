@@ -57,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
         public void ZoomToPercentage(double amount)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             if (amount <= 0)
             {

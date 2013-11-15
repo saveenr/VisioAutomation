@@ -36,27 +36,27 @@ namespace TestVisioAutomation
             var ss = GetScriptingSession();
             ss.Document.CloseAllWithoutSaving();
 
-            Assert.IsFalse(ss.HasActiveDrawing);
+            Assert.IsFalse(ss.HasActiveDocument);
 
             var doc1 = ss.Document.New();
-            Assert.IsTrue(ss.HasActiveDrawing);
+            Assert.IsTrue(ss.HasActiveDocument);
             Assert.IsFalse(ss.Selection.HasShapes());
 
             ss.Draw.Rectangle(0, 0, 1, 1);
-            Assert.IsTrue(ss.HasActiveDrawing);
+            Assert.IsTrue(ss.HasActiveDocument);
             Assert.IsTrue(ss.Selection.HasShapes());
             Assert.IsTrue(ss.Selection.HasShapes(1));
             Assert.IsFalse(ss.Selection.HasShapes(2));
 
             ss.Draw.Rectangle(2, 2, 3, 3);
             ss.Selection.All();
-            Assert.IsTrue(ss.HasActiveDrawing);
+            Assert.IsTrue(ss.HasActiveDocument);
             Assert.IsTrue(ss.Selection.HasShapes());
             Assert.IsTrue(ss.Selection.HasShapes(1));
             Assert.IsTrue(ss.Selection.HasShapes(2));
 
             ss.Selection.None();
-            Assert.IsTrue(ss.HasActiveDrawing);
+            Assert.IsTrue(ss.HasActiveDocument);
             Assert.IsFalse(ss.Selection.HasShapes());
 
             ss.Document.CloseAllWithoutSaving();

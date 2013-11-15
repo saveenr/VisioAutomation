@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Layer Get(string layername)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             if (layername == null)
             {
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
         public IList<IVisio.Layer> Get()
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var page = application.ActivePage;

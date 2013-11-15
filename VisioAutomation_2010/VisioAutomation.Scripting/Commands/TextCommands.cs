@@ -17,7 +17,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Set(IList<IVisio.Shape> target_shapes, string text)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             this.Set(target_shapes, new[] { text });
         }
@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Set(IList<IVisio.Shape> target_shapes, IEnumerable<string> texts)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
         public IList<string> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -64,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
         public void ToogleCase(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -119,7 +119,7 @@ namespace VisioAutomation.Scripting.Commands
         public void SetFont(IList<IVisio.Shape> target_shapes, string fontname)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -139,7 +139,7 @@ namespace VisioAutomation.Scripting.Commands
         public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)

@@ -20,7 +20,7 @@ namespace VisioPS.Commands
         {
             var session = this.ScriptingSession;
             
-            if (!this.ScriptingSession.HasActiveDrawing)
+            if (!this.ScriptingSession.HasActiveDocument)
             {
                 return;
             }

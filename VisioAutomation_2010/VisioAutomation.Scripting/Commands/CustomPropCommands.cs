@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
         public IDictionary<IVisio.Shape, Dictionary<string,CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, CustomPropertyCells>>();
             var shapes = GetTargetShapes(target_shapes);
@@ -66,7 +66,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             if (name == null)
             {
@@ -97,7 +97,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Set(IList<IVisio.Shape> target_shapes, string name, CustomPropertyCells customprop)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             if (customprop == null)
             {
@@ -123,7 +123,7 @@ namespace VisioAutomation.Scripting.Commands
         public IEnumerable<IVisio.Shape> EnumerateAndSelect(IEnumerable<IVisio.Shape> shapes)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             if (shapes == null)
             {

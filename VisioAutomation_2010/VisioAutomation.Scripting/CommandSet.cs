@@ -41,9 +41,9 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        protected void CheckActiveDrawingAvailable()
+        protected void CheckActiveDocumentAvailable()
         {
-            if (!this.Session.HasActiveDrawing)
+            if (!this.Session.HasActiveDocument)
             {
                 throw new VA.Scripting.ScriptingException("No Drawing available");
             }

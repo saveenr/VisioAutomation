@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Close(bool force)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -110,7 +110,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Save()
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
             
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
@@ -120,7 +120,7 @@ namespace VisioAutomation.Scripting.Commands
         public void SaveAs(string filename)
         {
             this.CheckVisioApplicationAvailable();
-            this.CheckActiveDrawingAvailable();
+            this.CheckActiveDocumentAvailable();
 
             var application = this.Session.VisioApplication;
             var doc = application.ActiveDocument;
