@@ -146,13 +146,6 @@ namespace VisioAutomation.Pages
             func(ShapeSheet.SRCConstants.DrawingResizeType, this.DrawingResizeType.Formula);
         }
 
-
-        public static IList<PageCells> GetCells(IVisio.Page page, IList<int> shapeids)
-        {
-            var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(page, shapeids, query, query.GetCells);
-        }
-
         public static PageCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();

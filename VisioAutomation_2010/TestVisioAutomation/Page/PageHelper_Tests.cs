@@ -7,6 +7,26 @@ namespace TestVisioAutomation
     public class PageHelper_Tests : VisioAutomationTest
     {
         [TestMethod]
+        public void Page_Query()
+        {
+            var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
+            var pagecells = VA.Pages.PageCells.GetCells(page1.PageSheet);
+            Assert.AreEqual(new VA.Drawing.Size(4, 3), new VA.Drawing.Size(pagecells.PageWidth.Result,pagecells.PageHeight.Result));
+
+            // Double each side
+            pagecells.PageWidth = pagecells.PageWidth.Result * 2.0;
+            pagecells.PageHeight = pagecells.PageHeight.Result * 2.0;
+
+            var update = new VA.ShapeSheet.Update();
+            update.SetFormulas(pagecells);
+            update.Execute(page1.PageSheet);
+
+            var pagecells2 = VA.Pages.PageCells.GetCells(page1.PageSheet);
+            Assert.AreEqual(new VA.Drawing.Size(8, 6), new VA.Drawing.Size(pagecells2.PageWidth.Result, pagecells2.PageHeight.Result));
+            page1.Delete(0);
+        }
+
+        [TestMethod]
         public void Page_Orientation()
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
