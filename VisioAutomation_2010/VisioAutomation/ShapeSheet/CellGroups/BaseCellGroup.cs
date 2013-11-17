@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return new SRCValuePair(src, f);
         }
 
-        public abstract IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs();
+        public abstract IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs();
 
         public void ApplyFormulas(ApplyFormula func)
         {

@@ -15,7 +15,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         // that's why ony the first section result is retrieved - there are no more.
 
         public static IList<List<T>> _GetCells<T>(
-            IVisio.Page page, IList<int> shapeids, 
+            IVisio.Page page, 
+            IList<int> shapeids, 
             VA.ShapeSheet.Query.CellQuery cellQuery, 
             RowToObject<T> f)
         {
@@ -69,6 +70,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             
             return inner_list;
         }
-
     }
 }

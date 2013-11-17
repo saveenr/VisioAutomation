@@ -6,7 +6,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
     {
-        protected static IList<T> _GetCells<T>(IVisio.Page page, IList<int> shapeids, VA.ShapeSheet.Query.CellQuery cellQuery, QueryResultToObject<T> f)
+        protected static IList<T> _GetCells<T>(
+            IVisio.Page page, IList<int> shapeids, 
+            VA.ShapeSheet.Query.CellQuery cellQuery, 
+            QueryResultToObject<T> f)
         {
             var data_for_shapes = cellQuery.GetFormulasAndResults<double>(page, shapeids);
             var list = new List<T>(shapeids.Count);
