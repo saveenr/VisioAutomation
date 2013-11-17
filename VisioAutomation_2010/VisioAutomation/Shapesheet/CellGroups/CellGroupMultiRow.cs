@@ -1,4 +1,5 @@
 using System.Security.Authentication;
+using System.Xml.Serialization;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
@@ -7,22 +8,29 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupMultiRow : BaseCellGroup
     {
-        // This class is meant for those cell groups that appear as multiple rows in a section
-        // for example the character section or the paragraph section
+        private static void check_query(VA.ShapeSheet.Query.CellQuery query)
+        {
+            if (query.Columns.Count != 0)
+            {
+                throw new VA.AutomationException("Query should not contain any Columns");
+            }
 
-        // Note: in the _GetCells method below you will notice that SectionCells[0] is used
-        // Why 0? In the context of how these methods are used, only one section is retrieved so
-        // that's why ony the first section result is retrieved - there are no more.
+            if (query.Sections.Count != 1)
+            {
+                throw new VA.AutomationException("Query should not contain contain exaxtly 1 section");
+            }            
+        }
 
         public static IList<List<T>> _GetCells<T>(
             IVisio.Page page, 
             IList<int> shapeids, 
-            VA.ShapeSheet.Query.CellQuery cellQuery, 
+            VA.ShapeSheet.Query.CellQuery query, 
             RowToObject<T> f)
         {
-            var outer_list = new List<List<T>>();
-            var data_for_shapes = cellQuery.GetFormulasAndResults<double>(page, shapeids);
+            check_query(query);
 
+            var outer_list = new List<List<T>>();
+            var data_for_shapes = query.GetFormulasAndResults<double>(page, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
             {
@@ -48,10 +56,12 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public static IList<T> _GetCells<T>(
             IVisio.Shape shape, 
-            VA.ShapeSheet.Query.CellQuery cellQuery, 
+            VA.ShapeSheet.Query.CellQuery query, 
             RowToObject<T> f)
         {
-            var data_for_shape = cellQuery.GetFormulasAndResults<double>(shape);
+            check_query(query);
+
+            var data_for_shape = query.GetFormulasAndResults<double>(shape);
 
             if (data_for_shape.SectionCells.Count != 1)
             {

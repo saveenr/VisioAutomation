@@ -6,12 +6,27 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
     {
+        private static void check_query(VA.ShapeSheet.Query.CellQuery query)
+        {
+            if (query.Columns.Count < 1)
+            {
+                throw new VA.AutomationException("Query must contain at least 1 Column");
+            }
+
+            if (query.Sections.Count != 0)
+            {
+                throw new VA.AutomationException("Query should not contain contain any sections");
+            }
+        }
+
         protected static IList<T> _GetCells<T>(
             IVisio.Page page, IList<int> shapeids, 
-            VA.ShapeSheet.Query.CellQuery cellQuery, 
+            VA.ShapeSheet.Query.CellQuery query, 
             QueryResultToObject<T> f)
         {
-            var data_for_shapes = cellQuery.GetFormulasAndResults<double>(page, shapeids);
+            check_query(query);
+
+            var data_for_shapes = query.GetFormulasAndResults<double>(page, shapeids);
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {
@@ -21,9 +36,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return list;
         }
 
-        protected static T _GetCells<T>(IVisio.Shape shape, VA.ShapeSheet.Query.CellQuery cellQuery, QueryResultToObject<T> f)
+        protected static T _GetCells<T>(
+            IVisio.Shape shape, 
+            VA.ShapeSheet.Query.CellQuery query, 
+            QueryResultToObject<T> f)
         {
-            var data_for_shape = cellQuery.GetFormulasAndResults<double>(shape);
+            check_query(query);
+
+            var data_for_shape = query.GetFormulasAndResults<double>(shape);
             var cells = f(data_for_shape);
             return cells;
         }
