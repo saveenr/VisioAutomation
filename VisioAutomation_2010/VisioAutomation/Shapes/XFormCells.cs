@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes
         public VA.ShapeSheet.CellData<double> Height { get; set; }
         public VA.ShapeSheet.CellData<double> Angle { get; set; }
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
+        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
         {
             yield return createpair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
             yield return createpair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);

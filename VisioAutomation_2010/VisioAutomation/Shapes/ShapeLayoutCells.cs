@@ -26,7 +26,7 @@ namespace VisioAutomation.Shapes.Layout
         public VA.ShapeSheet.CellData<int> DisplayLevel { get; set; } // new in visio 2010
         public VA.ShapeSheet.CellData<int> Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
+        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
         {
             yield return createpair(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
             yield return createpair(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);

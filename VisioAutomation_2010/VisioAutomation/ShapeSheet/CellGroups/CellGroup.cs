@@ -25,23 +25,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return cells;
         }
 
-        public struct SRCValuePair
-        {
-            public SRC SRC;
-            public FormulaLiteral Formula;
-
-            public SRCValuePair(SRC src, FormulaLiteral f)
-            {
-                this.SRC = src;
-                this.Formula = f;
-            }
-        }
-
-        protected SRCValuePair createpair(SRC src, FormulaLiteral f)
-        {
-            return new SRCValuePair(src, f);
-        }
-
         public void ApplyFormulas(ApplyFormula func)
         {
             foreach (var pair in this.EnumPairs())
