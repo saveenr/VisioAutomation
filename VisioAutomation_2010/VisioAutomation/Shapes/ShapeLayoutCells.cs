@@ -28,24 +28,24 @@ namespace VisioAutomation.Shapes.Layout
 
         public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
         {
-            yield return foo(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit.Formula);
-            yield return foo(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
-            yield return foo(ShapeSheet.SRCConstants.DisplayLevel, this.DisplayLevel.Formula);
-            yield return foo(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.DisplayLevel, this.DisplayLevel.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
         }
 
 

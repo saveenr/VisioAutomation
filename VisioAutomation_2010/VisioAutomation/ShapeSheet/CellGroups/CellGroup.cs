@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        protected SRCValuePair foo(SRC src, FormulaLiteral f)
+        protected SRCValuePair createpair(SRC src, FormulaLiteral f)
         {
             return new SRCValuePair(src, f);
         }

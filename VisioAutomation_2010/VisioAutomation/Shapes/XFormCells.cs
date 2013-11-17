@@ -19,13 +19,13 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
         {
-            yield return foo(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
-            yield return foo(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
-            yield return foo(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
-            yield return foo(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
-            yield return foo(ShapeSheet.SRCConstants.Width, this.Width.Formula);
-            yield return foo(ShapeSheet.SRCConstants.Height, this.Height.Formula);
-            yield return foo(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
+            yield return createpair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
         }
 
         public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
