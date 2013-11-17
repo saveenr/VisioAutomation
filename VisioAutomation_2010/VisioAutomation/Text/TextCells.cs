@@ -24,24 +24,24 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<double> TxtLocPinX { get; set; }
         public VA.ShapeSheet.CellData<double> TxtLocPinY { get; set; }
 
-        public override void ApplyFormulas(ApplyFormula func)
+        public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
         {
-            func(VA.ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
-            func(VA.ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);
-            func(VA.ShapeSheet.SRCConstants.RightMargin, this.RightMargin.Formula);
-            func(VA.ShapeSheet.SRCConstants.TopMargin, this.TopMargin.Formula);
-            func(VA.ShapeSheet.SRCConstants.DefaultTabStop, this.DefaultTabStop.Formula);
-            func(VA.ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd.Formula);
-            func(VA.ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
-            func(VA.ShapeSheet.SRCConstants.TextDirection, this.TextDirection.Formula);
-            func(VA.ShapeSheet.SRCConstants.VerticalAlign, this.VerticalAlign.Formula);
-            func(VA.ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX.Formula);
-            func(VA.ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY.Formula);
-            func(VA.ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX.Formula);
-            func(VA.ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY.Formula);
-            func(VA.ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth.Formula);
-            func(VA.ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight.Formula);
-            func(VA.ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.RightMargin, this.RightMargin.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TopMargin, this.TopMargin.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.DefaultTabStop, this.DefaultTabStop.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TextDirection, this.TextDirection.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.VerticalAlign, this.VerticalAlign.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight.Formula);
+            yield return foo(VA.ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle.Formula);
         }
 
         public static IList<TextCells> GetCells(IVisio.Page page, IList<int> shapeids)

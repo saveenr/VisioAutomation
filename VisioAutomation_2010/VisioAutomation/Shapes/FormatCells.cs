@@ -33,33 +33,33 @@ namespace VisioAutomation.Shapes
         public VA.ShapeSheet.CellData<double> LineWeight { get; set; }
         public VA.ShapeSheet.CellData<double> Rounding { get; set; }
 
-        public override void ApplyFormulas(ApplyFormula func)
+        public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
         {
-            func(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
-            func(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
-            func(ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd.Formula);
-            func(ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans.Formula);
-            func(ShapeSheet.SRCConstants.FillPattern, this.FillPattern.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor.Formula);
-            func(ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType.Formula);
-            func(ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd.Formula);
-            func(ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans.Formula);
-            func(ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd.Formula);
-            func(ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans.Formula);
-            func(ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern.Formula);
-            func(ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow.Formula);
-            func(ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize.Formula);
-            func(ShapeSheet.SRCConstants.EndArrow, this.EndArrow.Formula);
-            func(ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize.Formula);
-            func(ShapeSheet.SRCConstants.LineCap, this.LineCap.Formula);
-            func(ShapeSheet.SRCConstants.LineColor, this.LineColor.Formula);
-            func(ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans.Formula);
-            func(ShapeSheet.SRCConstants.LinePattern, this.LinePattern.Formula);
-            func(ShapeSheet.SRCConstants.LineWeight, this.LineWeight.Formula);
-            func(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
+            yield return foo(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
+            yield return foo(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
+            yield return foo(ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd.Formula);
+            yield return foo(ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans.Formula);
+            yield return foo(ShapeSheet.SRCConstants.FillPattern, this.FillPattern.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern.Formula);
+            yield return foo(ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow.Formula);
+            yield return foo(ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize.Formula);
+            yield return foo(ShapeSheet.SRCConstants.EndArrow, this.EndArrow.Formula);
+            yield return foo(ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize.Formula);
+            yield return foo(ShapeSheet.SRCConstants.LineCap, this.LineCap.Formula);
+            yield return foo(ShapeSheet.SRCConstants.LineColor, this.LineColor.Formula);
+            yield return foo(ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans.Formula);
+            yield return foo(ShapeSheet.SRCConstants.LinePattern, this.LinePattern.Formula);
+            yield return foo(ShapeSheet.SRCConstants.LineWeight, this.LineWeight.Formula);
+            yield return foo(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
         }
 
 

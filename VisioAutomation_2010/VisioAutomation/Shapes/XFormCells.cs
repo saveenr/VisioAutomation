@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.ShapeSheet.CellGroups;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -16,16 +17,15 @@ namespace VisioAutomation.Shapes
         public VA.ShapeSheet.CellData<double> Height { get; set; }
         public VA.ShapeSheet.CellData<double> Angle { get; set; }
 
-
-        public override void ApplyFormulas(ApplyFormula func)
+        public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
         {
-            func(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
-            func(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
-            func(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
-            func(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
-            func(ShapeSheet.SRCConstants.Width, this.Width.Formula);
-            func(ShapeSheet.SRCConstants.Height, this.Height.Formula);
-            func(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
+            yield return foo(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
+            yield return foo(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
+            yield return foo(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
+            yield return foo(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
+            yield return foo(ShapeSheet.SRCConstants.Width, this.Width.Formula);
+            yield return foo(ShapeSheet.SRCConstants.Height, this.Height.Formula);
+            yield return foo(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
         }
 
         public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)

@@ -26,26 +26,26 @@ namespace VisioAutomation.Shapes.Layout
         public VA.ShapeSheet.CellData<int> DisplayLevel { get; set; } // new in visio 2010
         public VA.ShapeSheet.CellData<int> Relationships { get; set; } // new in visio 2010
 
-        public override void ApplyFormulas(ApplyFormula func)
+        public override IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs()
         {
-            func(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
-            func(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
-            func(ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX.Formula);
-            func(ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY.Formula);
-            func(ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle.Formula);
-            func(ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt.Formula);
-            func(ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode.Formula);
-            func(ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace.Formula);
-            func(ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX.Formula);
-            func(ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY.Formula);
-            func(ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip.Formula);
-            func(ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle.Formula);
-            func(ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode.Formula);
-            func(ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
-            func(ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit.Formula);
-            func(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
-            func(ShapeSheet.SRCConstants.DisplayLevel, this.DisplayLevel.Formula);
-            func(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit.Formula);
+            yield return foo(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
+            yield return foo(ShapeSheet.SRCConstants.DisplayLevel, this.DisplayLevel.Formula);
+            yield return foo(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
         }
 
 
