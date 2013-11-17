@@ -16,16 +16,17 @@ namespace VisioAutomation.Shapes.Controls
         public VA.ShapeSheet.CellData<int> XDynamics { get; set; }
         public VA.ShapeSheet.CellData<int> YDynamics { get; set; }
 
-        public override void ApplyFormulasForRow(ApplyFormula func, short row)
+
+        public override IEnumerable<SRCValuePair> EnumPairs()
         {
-            func(VA.ShapeSheet.SRCConstants.Controls_CanGlue.ForRow(row), this.CanGlue.Formula);
-            func(VA.ShapeSheet.SRCConstants.Controls_Tip.ForRow(row), this.Tip.Formula);
-            func(VA.ShapeSheet.SRCConstants.Controls_X.ForRow(row), this.X.Formula);
-            func(VA.ShapeSheet.SRCConstants.Controls_Y.ForRow(row), this.Y.Formula);
-            func(VA.ShapeSheet.SRCConstants.Controls_YCon.ForRow(row), this.YBehavior.Formula);
-            func(VA.ShapeSheet.SRCConstants.Controls_XCon.ForRow(row), this.XBehavior.Formula);
-            func(VA.ShapeSheet.SRCConstants.Controls_XDyn.ForRow(row), this.XDynamics.Formula);
-            func(VA.ShapeSheet.SRCConstants.Controls_YDyn.ForRow(row), this.YDynamics.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_CanGlue, this.CanGlue.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_Tip, this.Tip.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_X, this.X.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_Y, this.Y.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_YCon, this.YBehavior.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_XCon, this.XBehavior.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_XDyn, this.XDynamics.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Controls_YDyn, this.YDynamics.Formula);
         }
 
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)

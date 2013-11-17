@@ -91,7 +91,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return formula.Value;
         }
 
-        public override void ApplyFormulasForRow(ApplyFormula func, short row)
+        public override IEnumerable<SRCValuePair> EnumPairs()
         {
             var cp = this;
 
@@ -110,15 +110,15 @@ namespace VisioAutomation.Shapes.CustomProperties
             string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
             string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
-            func(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(row), str_label);
-            func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow(row), str_value);
-            func(VA.ShapeSheet.SRCConstants.Prop_Format.ForRow(row), str_format);
-            func(VA.ShapeSheet.SRCConstants.Prop_Prompt.ForRow(row), str_prompt);
-            func(VA.ShapeSheet.SRCConstants.Prop_Calendar.ForRow(row), cp.Calendar.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_LangID.ForRow(row), cp.LangId.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_SortKey.ForRow(row), cp.SortKey.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_Invisible.ForRow(row), cp.Invisible.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_Type.ForRow(row), cp.Type.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Label, str_label);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Value, str_value);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Format, str_format);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
         }
 
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)

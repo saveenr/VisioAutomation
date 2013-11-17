@@ -14,8 +14,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         // Why 0? In the context of how these methods are used, only one section is retrieved so
         // that's why ony the first section result is retrieved - there are no more.
 
-        public abstract void ApplyFormulasForRow(ApplyFormula func, short row);
-
         public static IList<List<T>> _GetCells<T>(
             IVisio.Page page, IList<int> shapeids, 
             VA.ShapeSheet.Query.CellQuery cellQuery, 

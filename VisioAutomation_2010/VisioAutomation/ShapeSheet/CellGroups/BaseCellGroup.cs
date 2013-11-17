@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -26,5 +27,22 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return new SRCValuePair(src, f);
         }
 
+        public abstract IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs();
+
+        public void ApplyFormulas(ApplyFormula func)
+        {
+            foreach (var pair in this.EnumPairs())
+            {
+                func(pair.SRC, pair.Formula);
+            }
+        }
+
+        public void ApplyFormulas(ApplyFormula func, short row)
+        {
+            foreach (var pair in this.EnumPairs())
+            {
+                func(pair.SRC.ForRow(row), pair.Formula);
+            }
+        }
     }
 }

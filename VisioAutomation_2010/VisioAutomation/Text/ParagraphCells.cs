@@ -23,22 +23,22 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> Flags { get; set; }
         public VA.ShapeSheet.CellData<string> BulletString { get; set; }
 
-        public override void ApplyFormulasForRow(ApplyFormula func, short row)
+        public override IEnumerable<SRCValuePair> EnumPairs()
         {
-            func(VA.ShapeSheet.SRCConstants.Para_IndLeft.ForRow(row), this.IndentLeft.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_IndFirst.ForRow(row), this.IndentFirst.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_IndRight.ForRow(row), this.IndentRight.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_SpAfter.ForRow(row), this.SpacingAfter.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_SpBefore.ForRow(row), this.SpacingBefore.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_SpLine.ForRow(row), this.SpacingLine.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_HorzAlign.ForRow(row), this.HorizontalAlign.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletFont.ForRow(row), this.BulletFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_Bullet.ForRow(row), this.Bullet.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletFontSize.ForRow(row), this.BulletFontSize.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont.ForRow(row), this.LocBulletFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet.ForRow(row), this.TextPosAfterBullet.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_Flags.ForRow(row), this.Flags.Formula);
-            func(VA.ShapeSheet.SRCConstants.Para_BulletStr.ForRow(row), this.BulletString.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_IndLeft, this.IndentLeft.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_IndFirst, this.IndentFirst.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_IndRight, this.IndentRight.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_SpAfter, this.SpacingAfter.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_SpBefore, this.SpacingBefore.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_SpLine, this.SpacingLine.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_HorzAlign, this.HorizontalAlign.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_BulletFont, this.BulletFont.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_Bullet, this.Bullet.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, this.BulletFontSize.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont, this.LocBulletFont.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, this.TextPosAfterBullet.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_Flags, this.Flags.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Para_BulletStr, this.BulletString.Formula);
         }
 
         public static IList<List<ParagraphCells>> GetCells(IVisio.Page page, IList<int> shapeids)

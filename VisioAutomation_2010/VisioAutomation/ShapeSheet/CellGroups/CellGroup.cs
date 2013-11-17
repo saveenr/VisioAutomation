@@ -24,15 +24,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var cells = f(data_for_shape);
             return cells;
         }
-
-        public void ApplyFormulas(ApplyFormula func)
-        {
-            foreach (var pair in this.EnumPairs())
-            {
-                func(pair.SRC, pair.Formula);
-            }
-        }
-
-        public abstract IEnumerable<VA.ShapeSheet.CellGroups.CellGroup.SRCValuePair> EnumPairs();
     }
 }

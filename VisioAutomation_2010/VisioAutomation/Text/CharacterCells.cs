@@ -30,37 +30,31 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<bool> Strikethru { get; set; }
         public VA.ShapeSheet.CellData<int> UseVertical { get; set; }
 
-        public override void ApplyFormulasForRow(ApplyFormula func, short row)
+        public override IEnumerable<SRCValuePair> EnumPairs()
         {
-            func(VA.ShapeSheet.SRCConstants.CharColor.ForRow(row), this.Color.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharFont.ForRow(row), this.Font.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharSize.ForRow(row), this.Size.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharStyle.ForRow(row), this.Style.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharColorTrans.ForRow(row), this.Transparency.Formula);
-            
-            func(VA.ShapeSheet.SRCConstants.CharAsianFont.ForRow(row), this.AsianFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharCase.ForRow(row), this.Case.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharComplexScriptFont.ForRow(row), this.ComplexScriptFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharComplexScriptSize.ForRow(row), this.ComplexScriptSize.Formula);
-            
-            func(VA.ShapeSheet.SRCConstants.CharDblUnderline.ForRow(row), this.DoubleUnderline.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough.ForRow(row), this.DoubleStrikeThrough.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharLangID.ForRow(row), this.LangID.Formula);
-
-            func(VA.ShapeSheet.SRCConstants.CharFontScale.ForRow(row), this.FontScale.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharLangID.ForRow(row), this.LangID.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharLetterspace.ForRow(row), this.Letterspace.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharLocale.ForRow(row), this.Locale.Formula);
-
-            func(VA.ShapeSheet.SRCConstants.CharLocalizeFont.ForRow(row), this.LocalizeFont.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharOverline.ForRow(row), this.Overline.Formula);
-            
-            func(VA.ShapeSheet.SRCConstants.CharPerpendicular.ForRow(row), this.Perpendicular.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharPos.ForRow(row), this.Pos.Formula);
-
-            func(VA.ShapeSheet.SRCConstants.CharRTLText.ForRow(row), this.RTLText.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharStrikethru.ForRow(row), this.Strikethru.Formula);
-            func(VA.ShapeSheet.SRCConstants.CharUseVertical.ForRow(row), this.UseVertical.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharColor, this.Color.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharFont, this.Font.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharSize, this.Size.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharStyle, this.Style.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharColorTrans, this.Transparency.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharAsianFont, this.AsianFont.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharCase, this.Case.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharDblUnderline, this.DoubleUnderline.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, this.DoubleStrikeThrough.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharFontScale, this.FontScale.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharLetterspace, this.Letterspace.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharLocale, this.Locale.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharLocalizeFont, this.LocalizeFont.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharOverline, this.Overline.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharPerpendicular, this.Perpendicular.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharPos, this.Pos.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharRTLText, this.RTLText.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharStrikethru, this.Strikethru.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.CharUseVertical, this.UseVertical.Formula);
 
 
         }

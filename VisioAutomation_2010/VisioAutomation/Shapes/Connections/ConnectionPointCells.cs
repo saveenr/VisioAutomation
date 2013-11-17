@@ -14,13 +14,13 @@ namespace VisioAutomation.Shapes.Connections
         public VA.ShapeSheet.CellData<int> DirY { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }
 
-        public override void ApplyFormulasForRow(ApplyFormula func, short row)
+        public override IEnumerable<SRCValuePair> EnumPairs()
         {
-            func(VA.ShapeSheet.SRCConstants.Connections_X.ForRow(row), this.X.Formula);
-            func(VA.ShapeSheet.SRCConstants.Connections_Y.ForRow(row), this.Y.Formula);
-            func(VA.ShapeSheet.SRCConstants.Connections_DirX.ForRow(row), this.DirX.Formula);
-            func(VA.ShapeSheet.SRCConstants.Connections_DirY.ForRow(row), this.DirY.Formula);
-            func(VA.ShapeSheet.SRCConstants.Connections_Type.ForRow(row), this.Type.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
+            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
         }
         
         public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
