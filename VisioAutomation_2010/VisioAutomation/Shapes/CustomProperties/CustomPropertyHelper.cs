@@ -1,5 +1,4 @@
 ﻿using System;
-using VisioAutomation.CustomProperties;
 using VA=VisioAutomation;
 using System.Collections.Generic;
 using System.Linq;

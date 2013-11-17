@@ -1,7 +1,4 @@
-﻿using System.Globalization;
-using VisioAutomation.CustomProperties;
-using VisioAutomation.Shapes.CustomProperties;
-using VA=VisioAutomation;
+﻿using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -10,7 +7,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 {
     public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public VA.ShapeSheet.CellData<double> Value{ get; set; }
+        public VA.ShapeSheet.CellData<double> Value { get; set; }
         public VA.ShapeSheet.CellData<double> Prompt { get; set; }
         public VA.ShapeSheet.CellData<double> Label { get; set; }
         public VA.ShapeSheet.CellData<double> Format { get; set; }
@@ -23,7 +20,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public CustomPropertyCells()
         {
-            
+
         }
 
         public CustomPropertyCells(string value)
@@ -52,14 +49,14 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public CustomPropertyCells(bool value)
         {
-            this.Value = ((bool)value) ? "TRUE" : "FALSE";
+            this.Value = ((bool) value) ? "TRUE" : "FALSE";
             this.Type = 3;
         }
 
         public CustomPropertyCells(System.DateTime value)
         {
             var current_culture = System.Globalization.CultureInfo.CurrentCulture;
-            string formatted_dt = value.ToString( current_culture );
+            string formatted_dt = value.ToString(current_culture);
             this.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
             this.Type = 5;
         }
@@ -98,7 +95,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             var cp = this;
 
-            string str_label =  this.SmartStringToFormulaString(cp.Label.Formula, false);
+            string str_label = this.SmartStringToFormulaString(cp.Label.Formula, false);
             string str_value = null;
             if (cp.Type.Formula.Value == "0" || cp.Type.Formula.Value == null)
             {
@@ -107,21 +104,21 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
             else
             {
-               // For non-stringd don't add any extra quotes
-                str_value = this.SmartStringToFormulaString(cp.Value.Formula, true);                
+                // For non-stringd don't add any extra quotes
+                str_value = this.SmartStringToFormulaString(cp.Value.Formula, true);
             }
             string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
             string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
             func(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(row), str_label);
-            func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow( row), str_value);
-            func(VA.ShapeSheet.SRCConstants.Prop_Format.ForRow( row), str_format);
-            func(VA.ShapeSheet.SRCConstants.Prop_Prompt.ForRow( row), str_prompt);
-            func(VA.ShapeSheet.SRCConstants.Prop_Calendar.ForRow( row), cp.Calendar.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_LangID.ForRow( row), cp.LangId.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_SortKey.ForRow( row), cp.SortKey.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_Invisible.ForRow( row), cp.Invisible.Formula);
-            func(VA.ShapeSheet.SRCConstants.Prop_Type.ForRow( row), cp.Type.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow(row), str_value);
+            func(VA.ShapeSheet.SRCConstants.Prop_Format.ForRow(row), str_format);
+            func(VA.ShapeSheet.SRCConstants.Prop_Prompt.ForRow(row), str_prompt);
+            func(VA.ShapeSheet.SRCConstants.Prop_Calendar.ForRow(row), cp.Calendar.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_LangID.ForRow(row), cp.LangId.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_SortKey.ForRow(row), cp.SortKey.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_Invisible.ForRow(row), cp.Invisible.Formula);
+            func(VA.ShapeSheet.SRCConstants.Prop_Type.ForRow(row), cp.Type.Formula);
         }
 
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
@@ -137,6 +134,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         }
 
         private static CustomPropertyCellQuery _mCellQuery;
+
         private static CustomPropertyCellQuery get_query()
         {
             _mCellQuery = _mCellQuery ?? new CustomPropertyCellQuery();
@@ -148,27 +146,27 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (value is string)
             {
-                return new CustomPropertyCells((string)value);
+                return new CustomPropertyCells((string) value);
             }
             else if (value is int)
             {
-                return new CustomPropertyCells((int)value);
+                return new CustomPropertyCells((int) value);
             }
             else if (value is double)
             {
-                return new CustomPropertyCells((double)value);
+                return new CustomPropertyCells((double) value);
             }
             else if (value is float)
             {
-                return new CustomPropertyCells((float)value);
+                return new CustomPropertyCells((float) value);
             }
             else if (value is bool)
             {
-                return new CustomPropertyCells((bool)value);
+                return new CustomPropertyCells((bool) value);
             }
             else if (value is System.DateTime)
             {
-                return new CustomPropertyCells((System.DateTime)value);
+                return new CustomPropertyCells((System.DateTime) value);
             }
             else
             {
@@ -177,10 +175,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
         }
     }
-}
 
-namespace VisioAutomation.CustomProperties
-{
     class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery
     {
         public VA.ShapeSheet.Query.CellQuery.Column SortKey { get; set; }
