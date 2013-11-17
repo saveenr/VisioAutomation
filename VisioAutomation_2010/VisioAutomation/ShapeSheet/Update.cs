@@ -191,22 +191,34 @@ namespace VisioAutomation.ShapeSheet
 
         public void SetFormulas(VA.ShapeSheet.CellGroups.CellGroup cg)
         {
-            cg.ApplyFormulas((src, f) => this.SetFormulaIgnoreNull(src, f));
+            foreach (var pair in cg.EnumPairs())
+            {
+                this.SetFormulaIgnoreNull(pair.SRC, pair.Formula);
+            }
         }
 
         public void SetFormulas(short shapeid, VA.ShapeSheet.CellGroups.CellGroup cg)
         {
-            cg.ApplyFormulas((src, f) => this.SetFormulaIgnoreNull(shapeid, src, f));
+            foreach (var pair in cg.EnumPairs())
+            {
+                this.SetFormulaIgnoreNull(shapeid, pair.SRC, pair.Formula);
+            }
         }
 
         public void SetFormulas(short shapeid, VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
         {
-            cg.ApplyFormulas((src, f) => this.SetFormulaIgnoreNull(shapeid, src, f), row);
+            foreach (var pair in cg.EnumPairs())
+            {
+                this.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);            
+            }
         }
 
         public void SetFormulas(VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
         {
-            cg.ApplyFormulas((src, f) => this.SetFormulaIgnoreNull(src, f), row);
+            foreach (var pair in cg.EnumPairs())
+            {
+                this.SetFormulaIgnoreNull(pair.SRC.ForRow(row), pair.Formula);
+            }
         }
         
         public void Execute(IVisio.Page page)
