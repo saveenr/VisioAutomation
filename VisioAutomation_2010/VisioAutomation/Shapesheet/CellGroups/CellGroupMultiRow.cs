@@ -34,12 +34,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
             foreach (var data_for_shape in data_for_shapes)
             {
-                if (data_for_shape.SectionCells.Count != 1)
-                {
-                    var msg = string.Format("Internal Error: Only 1 section should be in these queries");
-                    throw new AuthenticationException(msg);
-                }
-
                 var sec = data_for_shape.SectionCells[0];
                 var inner_list = new List<T>(sec.Count);
 
@@ -62,13 +56,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             check_query(query);
 
             var data_for_shape = query.GetFormulasAndResults<double>(shape);
-
-            if (data_for_shape.SectionCells.Count != 1)
-            {
-                var msg = string.Format("Internal Error: Only 1 section should be in these queries");
-                throw new AuthenticationException(msg);
-            }
-
             var sec = data_for_shape.SectionCells[0];
             var inner_list = new List<T>(sec.Count);
             
