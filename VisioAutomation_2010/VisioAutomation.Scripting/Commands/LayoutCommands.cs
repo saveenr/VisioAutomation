@@ -119,26 +119,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis, double d)
-        {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var shapes = GetTargetShapes(target_shapes);
-            if (shapes.Count < 1)
-            {
-                return;
-            } 
-
-            var shapeids = shapes.Select(s => s.ID).ToList();
-            var application = this.Session.VisioApplication;
-
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Distribute Shapes"))
-            {
-                VA.Shapes.Arrange.ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
-            }
-        }
-
         public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
         {
             this.AssertApplicationAvailable();
@@ -158,27 +138,6 @@ namespace VisioAutomation.Scripting.Commands
 
                 // Move method: http://msdn.microsoft.com/en-us/library/ms367549.aspx   
                 selection.Move(dx, dy, unitcode);
-            }
-        }
-
-        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, VA.Shapes.Arrange.SnapCornerPosition corner)
-        {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-            
-            var shapes = this.GetTargetShapes(target_shapes);
-            if (shapes.Count<1)
-            {
-                return;
-            }
-            var shapes_2d = shapes.Where(s=>s.OneD==0).ToList();
-            var shapeids = shapes_2d.Select(s => s.ID).ToList();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Snap Shape Corners"))
-            {
-                var active_page = application.ActivePage;
-                VA.Shapes.Arrange.ArrangeHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
             }
         }
 
@@ -202,9 +161,49 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 var snapsize = new VA.Drawing.Size(w, h);
                 var minsize = new VA.Drawing.Size(w, h);
-                VA.Shapes.Arrange.ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);
+                SnapSize(active_page, shapeids, snapsize, minsize);
             }
         }
+
+        private static void SnapSize(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, VA.Drawing.Size minsize)
+        {
+            var input_xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids);
+            var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
+
+            var grid = new VA.Drawing.SnappingGrid(snapsize);
+            foreach (var input_xfrm in input_xfrms)
+            {
+                var inut_size = new VA.Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);
+                var snapped_size = grid.Snap(inut_size);
+                double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
+                double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
+                var new_size = new VA.Drawing.Size(max_w, max_h);
+
+                var output_xfrm = new VA.Shapes.XFormCells();
+                output_xfrm.Width = new_size.Width;
+                output_xfrm.Height = new_size.Height;
+
+                output_xfrms.Add(output_xfrm);
+            }
+
+            // Now apply them
+            update_xfrms(page, shapeids, output_xfrms);
+        }
+
+        private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<VA.Shapes.XFormCells> xfrms)
+        {
+
+            var update = new VA.ShapeSheet.Update();
+            for (int i = 0; i < shapeids.Count; i++)
+            {
+                var shape_id = shapeids[i];
+                var xfrm = xfrms[i];
+                update.SetFormulas((short)shape_id, xfrm);
+            }
+            update.Execute(page);
+        }
+
+
 
         public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
@@ -384,6 +383,27 @@ namespace VisioAutomation.Scripting.Commands
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
+            }
+        }
+
+        private static VA.Drawing.Rectangle GetRectangle(VA.Shapes.XFormCells xFormCells)
+        {
+            var pin = new VA.Drawing.Point(xFormCells.PinX.Result, xFormCells.PinY.Result);
+            var locpin = new VA.Drawing.Point(xFormCells.LocPinX.Result, xFormCells.LocPinY.Result);
+            var size = new VA.Drawing.Size(xFormCells.Width.Result, xFormCells.Height.Result);
+            return new VA.Drawing.Rectangle(pin - locpin, size);
+        }
+
+        public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Shapes.XFormCells> xfrms)
+        {
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(GetRectangle));
+            if (!bb.HasValue)
+            {
+                throw new System.ArgumentException("Could not calculate bounding box");
+            }
+            else
+            {
+                return bb.Rectangle;
             }
         }
     }

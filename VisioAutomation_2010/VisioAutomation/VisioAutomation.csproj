@@ -158,8 +158,6 @@
     <Compile Include="Pages\PageLayout\RadialLayout.cs" />
     <Compile Include="Pages\PageLayout\VerticalAlignment.cs" />
     <Compile Include="Selection\ShapeSendDirection.cs" />
-    <Compile Include="Shapes\Arrange\SnapCornerPosition.cs" />
-    <Compile Include="Shapes\Arrange\XFormPosition.cs" />
     <Compile Include="Pages\PrintPageOrientation.cs" />
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />
@@ -186,7 +184,6 @@
     <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />
     <Compile Include="Drawing\ColorHSL.cs" />
-    <Compile Include="Shapes\Arrange\ArrangeHelper.cs" />
     <Compile Include="DOM\BezierCurve.cs" />
     <Compile Include="DOM\MasterRef.cs" />
     <Compile Include="DOM\Shape.cs" />

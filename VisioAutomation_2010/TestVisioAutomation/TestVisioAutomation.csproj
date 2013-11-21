@@ -98,7 +98,6 @@
     <Compile Include="Extensions\LayersExtensions.cs" />
     <Compile Include="Models\DrawingHelper.cs" />
     <Compile Include="Models\PieSliceTests.cs" />
-    <Compile Include="Models\Layout_Tests.cs" />
     <Compile Include="Scripting\ScriptingApplicationTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
