@@ -160,7 +160,7 @@
     <Compile Include="Commands\New\New_VisioPage.cs" />
     <Compile Include="Commands\New\New_VisioApplication.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioArrange.cs" />
-    <Compile Include="Commands\Invoke\Resize_VisioPage.cs" />
+    <Compile Include="Commands\Resize\Resize_VisioPage.cs" />
     <Compile Include="Commands\Set\Set_VisioWindowSize.cs" />
     <Compile Include="enums\VerticalAlignment.cs" />
     <Compile Include="objects\VisioPSCmdlet.cs" />
