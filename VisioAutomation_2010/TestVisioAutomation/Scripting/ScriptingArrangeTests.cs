@@ -31,9 +31,9 @@ namespace TestVisioAutomation
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);
 
-            ss.Layout.Distribute(null,VA.Drawing.AlignmentHorizontal.Center);
+            ss.Arrange.Distribute(null,VA.Drawing.AlignmentHorizontal.Center);
 
-            var xforms = ss.Layout.GetXForm(null);
+            var xforms = ss.Arrange.GetXForm(null);
             Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin());
             Assert.AreEqual(new VA.Drawing.Point(3.1875, 3.25), xforms[1].Pin());
             Assert.AreEqual(new VA.Drawing.Point(5.25, 3), xforms[2].Pin());
@@ -56,9 +56,9 @@ namespace TestVisioAutomation
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);
 
-            ss.Layout.Nudge(null,1, -1);
+            ss.Arrange.Nudge(null,1, -1);
 
-            var xforms = ss.Layout.GetXForm(null);
+            var xforms = ss.Arrange.GetXForm(null);
             Assert.AreEqual(new VA.Drawing.Point(2.125, 0.25), xforms[0].Pin());
             Assert.AreEqual(new VA.Drawing.Point(3.25, 2.25), xforms[1].Pin());
             Assert.AreEqual(new VA.Drawing.Point(6.25, 2), xforms[2].Pin());

@@ -10,7 +10,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            var group = scriptingsession.Layout.Group();
+            var group = scriptingsession.Arrange.Group();
             this.WriteObject(group);
         }
     }
