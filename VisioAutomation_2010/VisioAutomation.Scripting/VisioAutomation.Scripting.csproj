@@ -93,7 +93,7 @@
     <Compile Include="Commands\ApplicationCommands.cs" />
     <Compile Include="CommandSet.cs" />
     <Compile Include="Commands\SelectionCommands.cs" />
-    <Compile Include="Commands\LayoutCommands.cs" />
+    <Compile Include="Commands\ArrangeCommands.cs" />
     <Compile Include="Commands\FormatCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />

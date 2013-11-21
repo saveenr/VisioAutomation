@@ -1,34 +1,62 @@
+using VA = VisioAutomation;
 using System.Collections.Generic;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioNudgeShape")]
-    public class Invoke_VisioNudgeShape : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioArrange")]
+    public class Invoke_VisioArrange : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
-        public double Left { get; set; }
+        public double NudgeX { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public double Right { get; set; }
+        public double NudgeY { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public double Up { get; set; }
+        public SMA.SwitchParameter DistributeHorizontal { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public double Down { get; set; }
+        public SMA.SwitchParameter DistributeVertical { get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
+        public VerticalAlignment Vertical = VerticalAlignment.None;
+
+        [SMA.Parameter(Mandatory = false)]
+        public HorizontalAlignment Horizontal = HorizontalAlignment.None;
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {
-            double h = Right - Left;
-            double v = Up - Down;
-
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Layout.Nudge(this.Shapes, h, v);
+            if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
+            {
+                scriptingsession.Arrange.Nudge(this.Shapes, this.NudgeX, this.NudgeY);                
+            }
+
+            if (this.DistributeHorizontal)
+            {
+                scriptingsession.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);
+            }
+
+            if (this.DistributeVertical)
+            {
+                scriptingsession.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
+            }
+
+            if (this.Vertical != VerticalAlignment.None)
+            {
+                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)Vertical);
+            }
+
+            if (this.Horizontal != HorizontalAlignment.None)
+            {
+                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)Horizontal);
+            }
+
         }
     }
 }

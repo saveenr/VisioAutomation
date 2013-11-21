@@ -119,8 +119,6 @@
     <Compile Include="Commands\Test\Test_VisioSelectedShapes.cs" />
     <Compile Include="Commands\Remove\Remove_VisioShape.cs" />
     <Compile Include="Commands\Get\Get_VisioLayer.cs" />
-    <Compile Include="Commands\Invoke\Invoke_VisioAlignShape.cs" />
-    <Compile Include="Commands\Invoke\Invoke_VisioDistributeShape.cs" />
     <Compile Include="Commands\Select\Select_VisioShape.cs" />
     <Compile Include="Commands\Set\Set_VisioShapeSheet.cs" />
     <Compile Include="Commands\New\New_VisioBezier.cs" />

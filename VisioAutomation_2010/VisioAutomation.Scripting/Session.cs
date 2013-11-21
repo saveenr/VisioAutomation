@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.ConnectionPointCommands ConnectionPoint { get; private set; }
         public VA.Scripting.Commands.DrawCommands Draw { get; private set; }
         public VA.Scripting.Commands.MasterCommands Master { get; private set; }
-        public VA.Scripting.Commands.LayoutCommands Layout { get; private set; }
+        public VA.Scripting.Commands.ArrangeCommands Arrange { get; private set; }
         public VA.Scripting.Commands.PageCommands Page { get; private set; }
         public VA.Scripting.Commands.SelectionCommands Selection { get; private set; }
         public VA.Scripting.Commands.ShapeSheetCommands ShapeSheet { get; private set; }
@@ -57,7 +57,7 @@ namespace VisioAutomation.Scripting
             this.ConnectionPoint = new VA.Scripting.Commands.ConnectionPointCommands(this);
             this.Draw = new VA.Scripting.Commands.DrawCommands(this);
             this.Master = new VA.Scripting.Commands.MasterCommands(this);
-            this.Layout = new VA.Scripting.Commands.LayoutCommands(this);
+            this.Arrange = new VA.Scripting.Commands.ArrangeCommands(this);
             this.Page = new VA.Scripting.Commands.PageCommands(this);
             this.Selection = new VA.Scripting.Commands.SelectionCommands(this);
             this.ShapeSheet = new VA.Scripting.Commands.ShapeSheetCommands(this);

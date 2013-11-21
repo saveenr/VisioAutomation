@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class LayoutCommands : CommandSet
+    public class ArrangeCommands : CommandSet
     {
-        public LayoutCommands(Session session) :
+        public ArrangeCommands(Session session) :
             base(session)
         {
 
@@ -121,6 +121,11 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Nudge(IList<IVisio.Shape> target_shapes, double dx, double dy)
         {
+            if (dx == 0.0 && dy == 0.0)
+            {
+                return;
+            }
+
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
