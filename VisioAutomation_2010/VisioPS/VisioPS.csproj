@@ -105,7 +105,6 @@
     <Compile Include="Commands\Import\Import_VisioOrgChart.cs" />
     <Compile Include="Commands\New\New_VisioNURBS.cs" />
     <Compile Include="Commands\New\New_VisioGridLayout.cs" />
-    <Compile Include="Commands\New\New_VisioShapeSheetUpdate.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />
     <Compile Include="Commands\Remove\Remove_VisioUserDefinedCell.cs" />
     <Compile Include="objects\VisioPSSessionContext.cs" />
@@ -160,7 +159,7 @@
     <Compile Include="Commands\New\New_VisioGroup.cs" />
     <Compile Include="Commands\New\New_VisioPage.cs" />
     <Compile Include="Commands\New\New_VisioApplication.cs" />
-    <Compile Include="Commands\Invoke\Invoke_VisioNudgeShape.cs" />
+    <Compile Include="Commands\Invoke\Invoke_VisioArrange.cs" />
     <Compile Include="Commands\Invoke\Invoke_VisioResizePageToFitContents.cs" />
     <Compile Include="Commands\Set\Set_VisioWindowSize.cs" />
     <Compile Include="enums\VerticalAlignment.cs" />
