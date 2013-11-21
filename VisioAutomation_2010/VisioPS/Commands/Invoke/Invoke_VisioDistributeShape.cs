@@ -8,8 +8,11 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioDistributeShape")]
     public class Invoke_VisioDistributeShape : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = true)]
-        public VA.Drawing.Axis Axis { get; set; }
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter Horizontal { get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter Vertical { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
@@ -17,7 +20,16 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            scriptingsession.Layout.Distribute(this.Shapes, this.Axis);
+            if (this.Horizontal)
+            {
+                scriptingsession.Layout.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);                
+            }
+
+            if (this.Vertical)
+            {
+                scriptingsession.Layout.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
+            }
+
         }
     }
 }
