@@ -86,14 +86,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
-    <Compile Include="Commands\Get\CellMap.cs" />
+    <Compile Include="objects\CellMap.cs" />
     <Compile Include="Commands\Get\Get_VisioPageCell.cs" />
     <Compile Include="Commands\Get\Get_VisioShapeCell.cs" />
     <Compile Include="Commands\New\New_VisioAreaChart.cs" />
     <Compile Include="Commands\New\New_VisioBarChart.cs" />
     <Compile Include="Commands\New\New_VisioDirectedGraph.cs" />
     <Compile Include="Commands\New\New_VisioOrgChart.cs" />
-    <Compile Include="Commands\Set\CellValueMap.cs" />
+    <Compile Include="objects\CellValueMap.cs" />
     <Compile Include="Commands\Set\Set_VisioDocument.cs" />
     <Compile Include="Commands\Set\Set_VisioPage.cs" />
     <Compile Include="Commands\Set\Set_VisioPageCell.cs" />

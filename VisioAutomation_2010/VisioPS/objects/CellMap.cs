@@ -2,7 +2,7 @@
 using System.Linq;
 using VisioAutomation.ShapeSheet;
 
-namespace VisioPS.Commands
+namespace VisioPS
 {
     public class CellMap
     {
