@@ -48,7 +48,7 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional);
+            var edges = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.NoArrowsAreBidirectional);
             Assert.AreEqual(4, edges.Count);
 
             Assert.AreEqual(shapes[1], edges[0].From);
@@ -89,7 +89,7 @@ namespace TestVisioAutomation
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
 
-            var edges0 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.Arrows_NoArrowsAreExcluded);
+            var edges0 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.NoArrowsAreExcluded);
             Assert.AreEqual(0, edges0.Count);
 
             var src_beginarrow = VA.ShapeSheet.SRCConstants.BeginArrow;
@@ -100,7 +100,7 @@ namespace TestVisioAutomation
 
             cell_beginarrow.FormulaU = "1";
             cell_endarow.FormulaU = "1";
-            var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.Arrows_NoArrowsAreExcluded);
+            var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.NoArrowsAreExcluded);
             Assert.AreEqual(2, edges1.Count);
             Assert.AreEqual("B", edges1[0].From.Text);
             Assert.AreEqual("A", edges1[0].To.Text);

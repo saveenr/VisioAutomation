@@ -4,8 +4,8 @@ using SMA = System.Management.Automation;
 using VA=VisioAutomation;
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioEdge")]
-    public class Get_VisioEdge : VisioPSCmdlet
+    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
+    public class Get_VisioDirectedEdge : VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetShapeObjects { get; set; }
@@ -20,23 +20,7 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var flag = VA.Shapes.Connections.DirectedEdgeHandling.Arrows_NoArrowsAreExcluded;
-
-            if (this.Raw)
-            {
-                flag = VA.Shapes.Connections.DirectedEdgeHandling.Raw;
-            }
-            else
-            {
-                if (this.TreatUndirectedAsBidirectional)
-                {
-                    flag = VA.Shapes.Connections.DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional;                
-                }
-                else
-                {
-                    flag = VA.Shapes.Connections.DirectedEdgeHandling.Arrows_NoArrowsAreExcluded;
-                }
-            }
+            var flag = get_DirectedEdgeHandling();
 
             var edges = scriptingsession.Connection.GetDirectedEdges(flag);
 
@@ -48,6 +32,28 @@ namespace VisioPS.Commands
 
             write_edges_with_shapeids(edges);
                 
+        }
+
+        private DirectedEdgeHandling get_DirectedEdgeHandling()
+        {
+            var flag = VA.Shapes.Connections.DirectedEdgeHandling.NoArrowsAreExcluded;
+
+            if (this.Raw)
+            {
+                flag = VA.Shapes.Connections.DirectedEdgeHandling.Raw;
+            }
+            else
+            {
+                if (this.TreatUndirectedAsBidirectional)
+                {
+                    flag = VA.Shapes.Connections.DirectedEdgeHandling.NoArrowsAreBidirectional;
+                }
+                else
+                {
+                    flag = VA.Shapes.Connections.DirectedEdgeHandling.NoArrowsAreExcluded;
+                }
+            }
+            return flag;
         }
 
         private void write_edges_with_shapeids(IList<ConnectorEdge> edges)

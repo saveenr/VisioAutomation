@@ -43,10 +43,10 @@ namespace TestVisioAutomation
             var undirected_edges0 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.Raw);
             Assert.AreEqual(2, undirected_edges0.Count);
 
-            var directed_edges0 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.Arrows_NoArrowsAreExcluded);
+            var directed_edges0 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.NoArrowsAreExcluded);
             Assert.AreEqual(2, directed_edges0.Count);
 
-            var directed_edges1 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional);
+            var directed_edges1 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.NoArrowsAreBidirectional);
             Assert.AreEqual(2, directed_edges1.Count);
 
             ss.Document.Close(true);
@@ -76,11 +76,11 @@ namespace TestVisioAutomation
             var master = ss.Master.Get("Dynamic Connector", connec_stencil);
             var undirected_connectors = ss.Connection.Connect(new [] { s1,s2},new [] { s2,s3}, master);
 
-            var directed_edges0 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.Arrows_NoArrowsAreExcluded);
+            var directed_edges0 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.NoArrowsAreExcluded);
             Assert.AreEqual(0, directed_edges0.Count);
 
             var directed_edges1 =
-                ss.Connection.GetDirectedEdges(DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional);
+                ss.Connection.GetDirectedEdges(DirectedEdgeHandling.NoArrowsAreBidirectional);
             Assert.AreEqual(4, directed_edges1.Count);
 
             var undirected_edges0 = ss.Connection.GetDirectedEdges(DirectedEdgeHandling.Raw);

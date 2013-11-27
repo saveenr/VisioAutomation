@@ -32,12 +32,12 @@ namespace TestVisioAutomation
 
             ConnectorHelper.ConnectShapes(s1, s2, c1);
 
-            var edges_bd = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional);
-            var edges_d = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.Arrows_NoArrowsAreExcluded);
+            var edges_bd = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.NoArrowsAreBidirectional);
+            var edges_d = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.NoArrowsAreExcluded);
 
-            var tcbd = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional);
+            var tcbd = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.NoArrowsAreBidirectional);
 
-            var tcd = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.Arrows_NoArrowsAreExcluded);
+            var tcd = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.NoArrowsAreExcluded);
 
             page1.Delete(0);
         }
