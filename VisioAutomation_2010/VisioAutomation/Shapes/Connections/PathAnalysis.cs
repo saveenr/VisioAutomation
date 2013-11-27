@@ -6,18 +6,25 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Connections
 {
+    public enum DirectedEdgeHandling
+    {
+        Raw,
+        Arrows_NoArrowsAreBidirectional,
+        Arrows_NoArrowsAreExcluded // this should be the default
+    }
+
     public static class PathAnalysis
     {
         public static IList<ConnectorEdge> GetTransitiveClosure(
             IVisio.Page page,
-            ConnectorArrowEdgeHandling flag)
+            DirectedEdgeHandling flag)
         {
             if (page == null)
             {
                 throw new System.ArgumentNullException("page");
             }
 
-            var directed_edges = GetEdges(page, flag)
+            var directed_edges = GetDirectedEdges(page, flag)
                 .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
 
             var closure = GetClosureFromEdges(directed_edges)
@@ -32,16 +39,24 @@ namespace VisioAutomation.Shapes.Connections
         /// <param name="page"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public static IList<ConnectorEdge> GetEdges(
+        public static IList<ConnectorEdge> GetDirectedEdges(
             IVisio.Page page,
-            ConnectorArrowEdgeHandling flag)
+            DirectedEdgeHandling flag)
         {
             if (page == null)
             {
                 throw new System.ArgumentNullException("page");
             }
 
-            var edges = GetEdges(page);
+            var edges = GetDirectedEdgesRaw(page);
+
+            if (flag == DirectedEdgeHandling.Raw)
+            {
+                return edges;
+            }
+
+            // At this point we know we need to analyze the connetor arrows to produce the correct results
+
             var connnector_ids = edges.Select(e => e.Connector.ID).ToList();
 
             // Get the arrows for each connector
@@ -65,7 +80,7 @@ namespace VisioAutomation.Shapes.Connections
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
                     // the line has no arrows
-                    if (flag == ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional)
+                    if (flag == DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional)
                     {
                         // in this case treat the connector as pointing in both directions
                         var de1 = new ConnectorEdge(e.Connector, e.To, e.From);
@@ -73,7 +88,7 @@ namespace VisioAutomation.Shapes.Connections
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
-                    else if (flag == ConnectorArrowEdgeHandling.ExcludeNoArrowEdges)
+                    else if (flag == DirectedEdgeHandling.Arrows_NoArrowsAreExcluded)
                     {
                         // in this case ignore the connector completely
                     }
@@ -112,7 +127,7 @@ namespace VisioAutomation.Shapes.Connections
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        public static IList<ConnectorEdge> GetEdges(IVisio.Page page)
+        private static IList<ConnectorEdge> GetDirectedEdgesRaw(IVisio.Page page)
         {
             if (page == null)
             {

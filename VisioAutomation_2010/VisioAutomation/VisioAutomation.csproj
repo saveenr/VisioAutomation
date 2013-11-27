@@ -90,7 +90,6 @@
     <Compile Include="Models\Forms\TextBlock.cs" />
     <Compile Include="Models\Forms\FormRenderingContext.cs" />
     <Compile Include="Models\Forms\FormPage.cs" />
-    <Compile Include="Shapes\Connections\ConnectorArrowEdgeHandling.cs" />
     <Compile Include="Shapes\Connections\ConnectionPointType.cs" />
     <Compile Include="Shapes\Connections\ConnectionPointHelper.cs" />
     <Compile Include="Shapes\Controls\ControlHelper.cs" />

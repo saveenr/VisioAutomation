@@ -21,33 +21,32 @@ namespace VisioPS.Commands
             if (this.GetCells)
             {
                 this.WriteObject(dic);                
+                return;
             }
-            else
+
+            foreach (var shape_propdic_pair in dic)
             {
-                foreach (var shape_propdic_pair in dic)
+                var shape = shape_propdic_pair.Key;
+                var propdic = shape_propdic_pair.Value;
+                foreach (var propname_propcells_pair in propdic)
                 {
-                    var shape = shape_propdic_pair.Key;
-                    var propdic = shape_propdic_pair.Value;
-                    foreach (var propname_propcells_pair in propdic)
-                    {
-                        string propname = propname_propcells_pair.Key;
-                        var propcells = propname_propcells_pair.Value;
+                    string propname = propname_propcells_pair.Key;
+                    var propcells = propname_propcells_pair.Value;
 
-                        var cpf = new CustomPropertyFormulas();
-                        cpf.ShapeID = shape.ID;
-                        cpf.Name = propname;
-                        cpf.Value = propcells.Value.Formula.Value;
-                        cpf.Value = propcells.Format.Formula.Value;
-                        cpf.Value = propcells.Invisible.Formula.Value;
-                        cpf.Value = propcells.Label.Formula.Value;
-                        cpf.Value = propcells.LangId.Formula.Value;
-                        cpf.Value =  propcells.Prompt.Formula.Value; 
-                        cpf.Value =  propcells.SortKey.Formula.Value;
-                        cpf.Value = propcells.Type.Formula.Value;
-                        cpf.Value = propcells.Verify.Formula.Value;
+                    var cpf = new CustomPropertyFormulas();
+                    cpf.ShapeID = shape.ID;
+                    cpf.Name = propname;
+                    cpf.Value = propcells.Value.Formula.Value;
+                    cpf.Value = propcells.Format.Formula.Value;
+                    cpf.Value = propcells.Invisible.Formula.Value;
+                    cpf.Value = propcells.Label.Formula.Value;
+                    cpf.Value = propcells.LangId.Formula.Value;
+                    cpf.Value =  propcells.Prompt.Formula.Value; 
+                    cpf.Value =  propcells.SortKey.Formula.Value;
+                    cpf.Value = propcells.Type.Formula.Value;
+                    cpf.Value = propcells.Verify.Formula.Value;
 
-                        this.WriteObject(cpf);
-                    }
+                    this.WriteObject(cpf);
                 }
             }
         }

@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
+    <Compile Include="objects\DirectedEdge.cs" />
     <Compile Include="objects\CellMap.cs" />
     <Compile Include="Commands\Get\Get_VisioPageCell.cs" />
     <Compile Include="Commands\Get\Get_VisioShapeCell.cs" />
@@ -143,7 +144,6 @@
     <Compile Include="Commands\Set\Set_VisioUserDefinedCell.cs" />
     <Compile Include="enums\TextVerticalAlignment.cs" />
     <Compile Include="Commands\Connect\Connect_VisioApplication.cs" />
-    <Compile Include="Commands\Get\Get_VisioDirectedEdge.cs" />
     <Compile Include="Commands\New\New_VisioConnection.cs" />
     <Compile Include="Commands\Remove\Remove_VisioCustomProperty.cs" />
     <Compile Include="Commands\New\New_VisioLine.cs" />

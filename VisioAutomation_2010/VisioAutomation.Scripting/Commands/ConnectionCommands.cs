@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
         /// <param name="scripting_session"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public IList<ConnectorEdge> GetTransitiveClosure(ConnectorArrowEdgeHandling flag)
+        public IList<ConnectorEdge> GetTransitiveClosure(DirectedEdgeHandling flag)
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
@@ -31,23 +31,13 @@ namespace VisioAutomation.Scripting.Commands
             return PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
-        public IList<ConnectorEdge> GetDirectedEdges(ConnectorArrowEdgeHandling flag)
+        public IList<ConnectorEdge> GetDirectedEdges(DirectedEdgeHandling flag)
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var directed_edges = PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage, flag);
+            var directed_edges = PathAnalysis.GetDirectedEdges(this.Session.VisioApplication.ActivePage, flag);
             return directed_edges;
-        }
-
-        public IList<ConnectorEdge> GetEdges()
-        {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var edges = PathAnalysis.GetEdges(this.Session.VisioApplication.ActivePage);
-            this.Session.WriteVerbose( "{0} Edges found", edges.Count);
-            return edges;
         }
 
         public IList<IVisio.Shape> Connect(IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)

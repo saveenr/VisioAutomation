@@ -10,7 +10,7 @@ namespace VisioPS.Commands
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Master;
 
-        [SMA.Parameter(Position = 1, Mandatory = false, ParameterSetName = "StencilName")]
+        [SMA.Parameter(Position = 1, Mandatory = false, ParameterSetName = "StencilDoc")]
         public IVisio.Document Stencil;
 
         protected override void ProcessRecord()

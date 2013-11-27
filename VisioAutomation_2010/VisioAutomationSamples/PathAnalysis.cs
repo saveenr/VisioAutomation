@@ -39,9 +39,9 @@ namespace VisioAutomationSamples
             s3.AutoConnect(s4, dir, null);
             s5.AutoConnect(s6, dir, null);
 
-            var normal_edges = VisioAutomation.Shapes.Connections.PathAnalysis.GetEdges(page);
-            var edge_handling_0 = ConnectorArrowEdgeHandling.ExcludeNoArrowEdges;
-            var edge_handling_1 = ConnectorArrowEdgeHandling.TreatNoArrowEdgesAsBidirectional;
+            var normal_edges = VisioAutomation.Shapes.Connections.PathAnalysis.GetDirectedEdges(page, VA.Shapes.Connections.DirectedEdgeHandling.Raw);
+            var edge_handling_0 = DirectedEdgeHandling.Arrows_NoArrowsAreExcluded;
+            var edge_handling_1 = DirectedEdgeHandling.Arrows_NoArrowsAreBidirectional;
             var tc_edges_0 = VisioAutomation.Shapes.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_0);
             var tc_edges_1 = VisioAutomation.Shapes.Connections.PathAnalysis.GetTransitiveClosure(page, edge_handling_1);
 

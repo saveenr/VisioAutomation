@@ -16,6 +16,27 @@ namespace VisioAutomation.Scripting.Commands
             this.Window = new ApplicationWindowCommands(this.Session);
         }
 
+        public void Close(bool force)
+        {
+            var app = this.Session.VisioApplication;
+
+            if (app == null)
+            {
+                this.Session.WriteWarning("There is no Visio Application to stop");
+                return;
+            }
+
+            if (force)
+            {
+                this.Session.Application.ForceClose();
+            }
+            else
+            {
+                app.Quit();
+                this.Session.VisioApplication = null;
+            }
+        }
+
 
         public void ForceClose()
         {

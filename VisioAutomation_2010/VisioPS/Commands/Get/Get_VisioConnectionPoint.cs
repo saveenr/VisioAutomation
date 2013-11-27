@@ -23,28 +23,27 @@ namespace VisioPS.Commands
             if (this.GetCells)
             {
                 this.WriteObject(dic);
+                return;
             }
-            else
+
+            foreach (var shape_points in dic)
             {
-                foreach (var shape_points in dic)
+                var shape = shape_points.Key;
+                var points = shape_points.Value;
+                int shapeid = shape.ID;
+
+                foreach (var point in points)
                 {
-                    var shape = shape_points.Key;
-                    var points = shape_points.Value;
-                    int shapeid = shape.ID;
+                    var cp = new ConnectionPointFormulas();
 
-                    foreach (var point in points)
-                    {
-                        var cp = new ConnectionPointFormulas();
+                    cp.ShapeID = shapeid;
+                    cp.Type = point.Type.Formula.Value;
+                    cp.X = point.X.Formula.Value;
+                    cp.Y = point.Y.Formula.Value;
+                    cp.DirX = point.DirX.Formula.Value;
+                    cp.DirY = point.DirY.Formula.Value;
 
-                        cp.ShapeID = shapeid;
-                        cp.Type = point.Type.Formula.Value;
-                        cp.X = point.X.Formula.Value;
-                        cp.Y = point.Y.Formula.Value;
-                        cp.DirX = point.DirX.Formula.Value;
-                        cp.DirY = point.DirY.Formula.Value;
-
-                        this.WriteObject(cp);
-                    }
+                    this.WriteObject(cp);
                 }
             }
         }
