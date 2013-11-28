@@ -36,7 +36,7 @@ namespace VisioPS.Commands
 
         private DirectedEdgeHandling get_DirectedEdgeHandling()
         {
-            var flag = VA.Shapes.Connections.DirectedEdgeHandling.NoArrowsAreExcluded;
+            var flag = VA.Shapes.Connections.DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded;
 
             if (this.Raw)
             {
@@ -46,11 +46,11 @@ namespace VisioPS.Commands
             {
                 if (this.TreatUndirectedAsBidirectional)
                 {
-                    flag = VA.Shapes.Connections.DirectedEdgeHandling.NoArrowsAreBidirectional;
+                    flag = VA.Shapes.Connections.DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional;
                 }
                 else
                 {
-                    flag = VA.Shapes.Connections.DirectedEdgeHandling.NoArrowsAreExcluded;
+                    flag = VA.Shapes.Connections.DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded;
                 }
             }
             return flag;

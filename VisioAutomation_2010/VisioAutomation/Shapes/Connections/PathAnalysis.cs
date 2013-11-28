@@ -8,8 +8,8 @@ namespace VisioAutomation.Shapes.Connections
 {
     public enum DirectedEdgeHandling
     {
-        NoArrowsAreExcluded, // this should be the default
-        NoArrowsAreBidirectional,
+        EdgesWithoutArrowsAreExcluded, // this should be the default
+        EdgesWithoutArrowsAreBidirectional,
         Raw,
     }
 
@@ -80,7 +80,7 @@ namespace VisioAutomation.Shapes.Connections
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
                     // the line has no arrows
-                    if (flag == DirectedEdgeHandling.NoArrowsAreBidirectional)
+                    if (flag == DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional)
                     {
                         // in this case treat the connector as pointing in both directions
                         var de1 = new ConnectorEdge(e.Connector, e.To, e.From);
@@ -88,7 +88,7 @@ namespace VisioAutomation.Shapes.Connections
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
-                    else if (flag == DirectedEdgeHandling.NoArrowsAreExcluded)
+                    else if (flag == DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded)
                     {
                         // in this case ignore the connector completely
                     }
