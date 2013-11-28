@@ -63,7 +63,7 @@ namespace TestVisioAutomation
             connect(shapes[0], shapes[1], false, false);
             connect(shapes[1], shapes[2], false, false);
 
-            var edges = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.Raw);
+            var edges = PathAnalysis.GetDirectedEdges(page1, ConnectorEdgeHandling.Raw);
             var map = new ConnectivityMap(edges);
             Assert.AreEqual(2, map.CountFromNodes());
             Assert.IsTrue(map.HasConnectionFromTo("A","B"));
@@ -82,7 +82,7 @@ namespace TestVisioAutomation
             connect(shapes[0], shapes[1], false, false);
             connect(shapes[1], shapes[2], false, false);
 
-            var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional);
+            var edges1 = PathAnalysis.GetDirectedEdges(page1, ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(3, map1.CountFromNodes());
             Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
@@ -94,7 +94,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
 
-            var edges2 = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional);
+            var edges2 = PathAnalysis.GetTransitiveClosure(page1, ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional);
             var map2 = new ConnectivityMap(edges2);
             Assert.AreEqual(3, map2.CountFromNodes());
             Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));
@@ -121,11 +121,11 @@ namespace TestVisioAutomation
             connect(shapes[0], shapes[1], false, false);
             connect(shapes[1], shapes[2], false, false);
 
-            var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded);
+            var edges1 = PathAnalysis.GetDirectedEdges(page1, ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(0, map1.CountFromNodes());
 
-            var edges2 = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded);
+            var edges2 = PathAnalysis.GetTransitiveClosure(page1, ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows);
             var map2 = new ConnectivityMap(edges2);
             Assert.AreEqual(0, map2.CountFromNodes());
 
@@ -141,7 +141,7 @@ namespace TestVisioAutomation
             connect(shapes[0], shapes[1], true, false);
             connect(shapes[1], shapes[2], true, false);
 
-            var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded);
+            var edges1 = PathAnalysis.GetDirectedEdges(page1, ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(2, map1.CountFromNodes());
             Assert.IsTrue(map1.HasConnectionFromTo("B", "A"));
@@ -150,7 +150,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
 
-            var edges2 = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional);
+            var edges2 = PathAnalysis.GetTransitiveClosure(page1, ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional);
             var map2 = new ConnectivityMap(edges1);
             Assert.AreEqual(2, map2.CountFromNodes());
             Assert.IsTrue(map2.HasConnectionFromTo("B", "A"));
@@ -171,7 +171,7 @@ namespace TestVisioAutomation
             connect(shapes[0], shapes[1], true, true);
             connect(shapes[1], shapes[2], true, true);
 
-            var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded);
+            var edges1 = PathAnalysis.GetDirectedEdges(page1, ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows);
             var map1 = new ConnectivityMap(edges1);
             Assert.AreEqual(3, map1.CountFromNodes());
             Assert.IsTrue(map1.HasConnectionFromTo("A", "B"));
@@ -183,7 +183,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, map1.CountConnectionsFrom("C"));
 
 
-            var edges2 = PathAnalysis.GetTransitiveClosure(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional);
+            var edges2 = PathAnalysis.GetTransitiveClosure(page1, ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional);
             var map2 = new ConnectivityMap(edges2);
             Assert.AreEqual(3, map2.CountFromNodes());
             Assert.IsTrue(map2.HasConnectionFromTo("A", "B"));

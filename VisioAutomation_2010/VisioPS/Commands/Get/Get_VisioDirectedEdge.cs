@@ -34,23 +34,23 @@ namespace VisioPS.Commands
                 
         }
 
-        private DirectedEdgeHandling get_DirectedEdgeHandling()
+        private ConnectorEdgeHandling get_DirectedEdgeHandling()
         {
-            var flag = VA.Shapes.Connections.DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded;
+            var flag = VA.Shapes.Connections.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
 
             if (this.Raw)
             {
-                flag = VA.Shapes.Connections.DirectedEdgeHandling.Raw;
+                flag = VA.Shapes.Connections.ConnectorEdgeHandling.Raw;
             }
             else
             {
                 if (this.TreatUndirectedAsBidirectional)
                 {
-                    flag = VA.Shapes.Connections.DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional;
+                    flag = VA.Shapes.Connections.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
                 }
                 else
                 {
-                    flag = VA.Shapes.Connections.DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded;
+                    flag = VA.Shapes.Connections.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
                 }
             }
             return flag;

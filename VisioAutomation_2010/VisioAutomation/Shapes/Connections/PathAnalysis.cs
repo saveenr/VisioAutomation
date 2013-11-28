@@ -6,10 +6,10 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Connections
 {
-    public enum DirectedEdgeHandling
+    public enum ConnectorEdgeHandling
     {
-        EdgesWithoutArrowsAreExcluded, // this should be the default
-        EdgesWithoutArrowsAreBidirectional,
+        Arrow_ExcludeConnectorsWithoutArrows, // this should be the default when getting edges
+        Arrow_TreatConnectorsWithoutArrowsAsBidirectional,
         Raw,
     }
 
@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes.Connections
     {
         public static IList<ConnectorEdge> GetTransitiveClosure(
             IVisio.Page page,
-            DirectedEdgeHandling flag)
+            ConnectorEdgeHandling flag)
         {
             if (page == null)
             {
@@ -41,7 +41,7 @@ namespace VisioAutomation.Shapes.Connections
         /// <returns></returns>
         public static IList<ConnectorEdge> GetDirectedEdges(
             IVisio.Page page,
-            DirectedEdgeHandling flag)
+            ConnectorEdgeHandling flag)
         {
             if (page == null)
             {
@@ -50,7 +50,7 @@ namespace VisioAutomation.Shapes.Connections
 
             var edges = GetDirectedEdgesRaw(page);
 
-            if (flag == DirectedEdgeHandling.Raw)
+            if (flag == ConnectorEdgeHandling.Raw)
             {
                 return edges;
             }
@@ -80,7 +80,7 @@ namespace VisioAutomation.Shapes.Connections
                 if ((beginarrow < 1) && (endarrow < 1))
                 {
                     // the line has no arrows
-                    if (flag == DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional)
+                    if (flag == ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional)
                     {
                         // in this case treat the connector as pointing in both directions
                         var de1 = new ConnectorEdge(e.Connector, e.To, e.From);
@@ -88,7 +88,7 @@ namespace VisioAutomation.Shapes.Connections
                         directed_edges.Add(de1);
                         directed_edges.Add(de2);
                     }
-                    else if (flag == DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded)
+                    else if (flag == ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows)
                     {
                         // in this case ignore the connector completely
                     }
