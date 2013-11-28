@@ -129,7 +129,6 @@
     <Compile Include="Extensions\Application_Tests.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Query_Tests.cs" />
     <Compile Include="Other\ShapeEnumerationTests.cs" />
-    <Compile Include="Extensions\ConnectsExtensionsTest.cs" />
     <Compile Include="Extensions\Document_Tests.cs" />
     <Compile Include="Documents\DocumentTests.cs" />
     <Compile Include="VisioAutomationTest.cs" />
