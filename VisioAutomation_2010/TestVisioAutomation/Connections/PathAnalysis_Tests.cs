@@ -13,14 +13,19 @@ namespace TestVisioAutomation
     {
         private IVisio.VisAutoConnectDir connect_dir_none = IVisio.VisAutoConnectDir.visAutoConnectDirNone;
 
+        private void connect(IVisio.Shape a, IVisio.Shape b, bool a_arrow, bool b_arrow)
+        {
+            a.AutoConnect(b, connect_dir_none, null);
+        }
+
         [TestMethod]
         public void Connects_EnumerableExtensionMethod()
         {
             var page1 = GetNewPage();
             var shapes = draw_standard_shapes(page1);
 
-            shapes[0].AutoConnect(shapes[1], connect_dir_none, null);
-            shapes[1].AutoConnect(shapes[2], connect_dir_none, null);
+            connect(shapes[0], shapes[1], false, false);
+            connect(shapes[1], shapes[2], false, false);
 
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
@@ -32,8 +37,8 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             var shapes = draw_standard_shapes(page1);
 
-            shapes[0].AutoConnect(shapes[1], connect_dir_none, null); // RAW A->B
-            shapes[1].AutoConnect(shapes[2], connect_dir_none, null); // RAW B->C
+            connect(shapes[0], shapes[1], false, false);
+            connect(shapes[1], shapes[2], false, false);
 
             var edges = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.Raw);
             var map = new ConnectivityMap(edges);
@@ -51,8 +56,8 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             var shapes = draw_standard_shapes(page1);
 
-            shapes[0].AutoConnect(shapes[1], connect_dir_none, null);  // RAW A->B
-            shapes[1].AutoConnect(shapes[2], connect_dir_none, null);  // RAW B->C
+            connect(shapes[0], shapes[1], false, false);
+            connect(shapes[1], shapes[2], false, false);
 
             var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreBidirectional);
             var map1 = new ConnectivityMap(edges1);
@@ -90,8 +95,8 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
             var shapes = draw_standard_shapes(page1);
 
-            shapes[0].AutoConnect(shapes[1], connect_dir_none, null);  // RAW A->B
-            shapes[1].AutoConnect(shapes[2], connect_dir_none, null);  // RAW B->C
+            connect(shapes[0], shapes[1], false, false);
+            connect(shapes[1], shapes[2], false, false);
 
             var edges1 = PathAnalysis.GetDirectedEdges(page1, DirectedEdgeHandling.EdgesWithoutArrowsAreExcluded);
             var map1 = new ConnectivityMap(edges1);
