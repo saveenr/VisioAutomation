@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Security.Authentication;
 using System.Xml.Serialization;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
@@ -26,47 +28,47 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             IVisio.Page page,
             IList<int> shapeids,
             VA.ShapeSheet.Query.CellQuery query,
-            RowToObject<T, RT> f)
+            RowToObject<T, RT> row_to_object)
         {
             check_query(query);
 
-            var outer_list = new List<List<T>>();
+            var list = new List<List<T>>();
             var data_for_shapes = query.GetFormulasAndResults<RT>(page, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
             {
                 var sec = data_for_shape.SectionCells[0];
-                var inner_list = new List<T>(sec.Count);
-
-                foreach (var row in sec)
-                {
-                    var obj = f(row);
-                    inner_list.Add(obj);
-                }
-
-                outer_list.Add(inner_list);
+                var sec_objects = SectionToObjectList(sec, row_to_object);
+                list.Add(sec_objects);
             }
-            return outer_list;
+
+            return list;
         }
 
         public static IList<T> _GetCells<T, RT>(
             IVisio.Shape shape,
             VA.ShapeSheet.Query.CellQuery query,
-            RowToObject<T, RT> f)
+            RowToObject<T, RT> row_to_object)
         {
             check_query(query);
 
             var data_for_shape = query.GetFormulasAndResults<RT>(shape);
             var sec = data_for_shape.SectionCells[0];
-            var inner_list = new List<T>(sec.Count);
+            var sec_objects = SectionToObjectList(sec, row_to_object);
+            
+            return sec_objects;
+        }
 
+        private static List<T> SectionToObjectList<T, RT>(CellQuery.SectionResult<CellData<RT>> sec, RowToObject<T, RT> f)
+        {
+            int num_rows = sec.Count;
+            var sec_objects = new List<T>(num_rows);
             foreach (var row in sec)
             {
                 var obj = f(row);
-                inner_list.Add(obj);
+                sec_objects.Add(obj);
             }
-
-            return inner_list;
+            return sec_objects;
         }
     }
 }
