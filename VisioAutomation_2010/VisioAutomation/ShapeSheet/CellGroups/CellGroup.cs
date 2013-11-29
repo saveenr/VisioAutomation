@@ -20,9 +20,9 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         }
 
         protected static IList<T> _GetCells<T, RT>(
-    IVisio.Page page, IList<int> shapeids,
-    VA.ShapeSheet.Query.CellQuery query,
-    RowToObject<T, RT> f)
+            IVisio.Page page, IList<int> shapeids,
+            VA.ShapeSheet.Query.CellQuery query,
+            RowToObject<T, RT> f)
         {
             check_query(query);
 
@@ -47,6 +47,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             var cells = f(data_for_shape.Cells);
             return cells;
         }
-
     }
 }
