@@ -26,7 +26,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     IVisio.Page page,
     IList<int> shapeids,
     VA.ShapeSheet.Query.CellQuery query,
-    ____RowToObject<T,X> f)
+    RowToObject<T,X> f)
         {
             check_query(query);
 
@@ -52,7 +52,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public static IList<T> ____GetCells<T,X>(
             IVisio.Shape shape,
             VA.ShapeSheet.Query.CellQuery query,
-            ____RowToObject<T,X> f)
+            RowToObject<T,X> f)
         {
             check_query(query);
 

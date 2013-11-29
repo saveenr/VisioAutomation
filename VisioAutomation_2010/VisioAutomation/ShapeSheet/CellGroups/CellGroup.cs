@@ -38,8 +38,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected static T _GetCells<T,X>(
             IVisio.Shape shape, 
-            VA.ShapeSheet.Query.CellQuery query, 
-            QueryResultToObject<T,X> f)
+            VA.ShapeSheet.Query.CellQuery query,
+            QueryResultToObject<T, X> f)
         {
             check_query(query);
 
