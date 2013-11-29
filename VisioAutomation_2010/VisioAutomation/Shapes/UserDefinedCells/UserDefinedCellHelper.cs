@@ -71,6 +71,11 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             update.Execute(shape);
         }
 
+        public static void Set(IVisio.Shape shape, string name, VA.ShapeSheet.CellData<double> value, VA.ShapeSheet.CellData<double> prompt)
+        {
+            Set(shape, name, value.Formula.Value, prompt.Formula.Value);
+        }
+
         public static void Set(IVisio.Shape shape, string name, string value, string prompt)
         {
             if (shape == null)
@@ -135,19 +140,16 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 throw new AutomationException("Unexpected number of prop names");
             }
 
-            var data = UserDefinedCell.queryex.GetFormulas(shape);
+            var shape_data = UserDefinedCell.GetCells(shape);
 
-            if (data.SectionCells != null)
+            var list = new List<UserDefinedCell>(prop_count);
+            for (int i = 0; i < prop_count; i++)
             {
-                var sec = data.SectionCells[0];
-                var custom_props = create_userdefined_cell_list(prop_names, sec);
-                return custom_props;
-            }
-            else
-            {
-                return new List<UserDefinedCell>(0);
+                shape_data[i].Name = prop_names[i];
+                list.Add(shape_data[i]);
             }
 
+            return list;
         }
 
         public static IList<List<UserDefinedCell>> Get(IVisio.Page page, IList<IVisio.Shape> shapes)
@@ -164,49 +166,26 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var data = UserDefinedCell.queryex.GetFormulas(page, shapeids);
+            var list_data = UserDefinedCell.GetCells(page,shapeids);
 
-            var custom_props = new List<List<UserDefinedCell>>(shapeids.Count);
+            var list_list = new List<List<UserDefinedCell>>(shapeids.Count);
 
             for (int i = 0; i < shapes.Count; i++)
             {
                 var shape = shapes[i];
-                var shape_data = data[i];
-                if (shape_data.SectionCells.Count > 0)
+                var shape_data = list_data[i];
+                var prop_names = GetNames(shape);
+
+                var list = new List<UserDefinedCell>(shape_data.Count);
+                list_list.Add(list);
+                for (int j = 0; j < shape_data.Count ; j++)
                 {
-                    var section_data = shape_data.SectionCells[0];
-                    var prop_names = GetNames(shape);
-                    var ud_cells = create_userdefined_cell_list(prop_names, section_data);
-                    custom_props.Add(ud_cells);
-                }
-                else
-                {
-                    custom_props.Add(new List<UserDefinedCell>(0));
-                    
+                    shape_data[j].Name = prop_names[j];
+                    list.Add(shape_data[j]);
                 }
             }
 
-            return custom_props;
-        }
-
-        public static List<UserDefinedCell> create_userdefined_cell_list(
-            IList<string> prop_names,
-            VA.ShapeSheet.Query.CellQuery.SectionResult<string> sectiondata)
-        {
-            var custom_props = new List<UserDefinedCell>();
-            int name_index = 0;
-
-            foreach (var prop_name in prop_names)
-            {
-                var custom_prop = new UserDefinedCell(prop_name);
-                custom_prop.Value = sectiondata[name_index][UserDefinedCell.queryex.Value.Ordinal];
-                custom_prop.Prompt = sectiondata[name_index][UserDefinedCell.queryex.Prompt.Ordinal];
-                custom_props.Add(custom_prop);
-
-                name_index++;
-            }
-
-            return custom_props;
+            return list_list;
         }
 
         /// <summary>

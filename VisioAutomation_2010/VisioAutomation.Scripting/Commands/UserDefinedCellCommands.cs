@@ -115,7 +115,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var shape in shapes)
                 {
-                    UserDefinedCellsHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value, userdefinedcell.Prompt);
+                    UserDefinedCellsHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula.Value, userdefinedcell.Prompt.Formula.Value);
                 }
             }
         }

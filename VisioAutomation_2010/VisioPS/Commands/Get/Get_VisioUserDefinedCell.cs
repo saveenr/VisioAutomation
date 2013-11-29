@@ -32,8 +32,8 @@ namespace VisioPS.Commands
                     var rec = new UserDefinedCellRecord();
                     rec.ShapeID = shapeid;
                     rec.Name = udc.Name;
-                    rec.Value = udc.Value;
-                    rec.Prompt = udc.Prompt;
+                    rec.Value = udc.Value.Formula.Value;
+                    rec.Prompt = udc.Prompt.Formula.Value;
                     this.WriteObject(rec);
                 }
             }

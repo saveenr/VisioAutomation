@@ -22,8 +22,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, UserDefinedCellsHelper.GetCount(s1));
 
             // Add a Custom Property
-            var prop = new UserDefinedCell("FOO1", "BAR1");
-            UserDefinedCellsHelper.Set(s1, prop.Name, prop.Value, prop.Prompt);
+            UserDefinedCellsHelper.Set(s1, "FOO1", "BAR", null);
             Assert.AreEqual(1, UserDefinedCellsHelper.GetCount(s1));
             // Check that it is called FOO1
             Assert.AreEqual(true, UserDefinedCellsHelper.Contains(s1, "FOO1"));
@@ -164,7 +163,7 @@ namespace TestVisioAutomation
 
             var prop = new UserDefinedCell("foo");
             prop.Prompt = "Some Prompt";
-            UserDefinedCellsHelper.Set(s1, prop.Name, prop.Value, prop.Prompt);
+            UserDefinedCellsHelper.Set(s1, "foo", null, "Some prompt");
             Assert.AreEqual(1, UserDefinedCellsHelper.GetCount(s1));
             page1.Delete(0);
         }
@@ -235,12 +234,12 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, allprops[2].Count);
             Assert.AreEqual(3, allprops[3].Count);
 
-            Assert.AreEqual("\"1\"", allprops[0][0].Value);
-            Assert.AreEqual("\"2\"", allprops[1][0].Value);
-            Assert.AreEqual("\"3\"", allprops[1][1].Value);
-            Assert.AreEqual("\"4\"", allprops[3][0].Value);
-            Assert.AreEqual("\"5\"", allprops[3][1].Value);
-            Assert.AreEqual("\"6\"", allprops[3][2].Value);
+            Assert.AreEqual("\"1\"", allprops[0][0].Value.Formula.Value);
+            Assert.AreEqual("\"2\"", allprops[1][0].Value.Formula.Value);
+            Assert.AreEqual("\"3\"", allprops[1][1].Value.Formula.Value);
+            Assert.AreEqual("\"4\"", allprops[3][0].Value.Formula.Value);
+            Assert.AreEqual("\"5\"", allprops[3][1].Value.Formula.Value);
+            Assert.AreEqual("\"6\"", allprops[3][2].Value.Formula.Value);
             page1.Delete(0);
         }
 
@@ -261,13 +260,13 @@ namespace TestVisioAutomation
             Assert.AreEqual(3, p2.Count);
             
             Assert.AreEqual("FOO1",p2[0].Name);
-            Assert.AreEqual("\"1\"", p2[0].Value);
+            Assert.AreEqual("\"1\"", p2[0].Value.Formula.Value);
 
             Assert.AreEqual("FOO2", p2[1].Name);
-            Assert.AreEqual("\"2\"", p2[1].Value);
+            Assert.AreEqual("\"2\"", p2[1].Value.Formula.Value);
 
             Assert.AreEqual("FOO3", p2[2].Name);
-            Assert.AreEqual("\"3\"\"4\"", p2[2].Value);
+            Assert.AreEqual("\"3\"\"4\"", p2[2].Value.Formula.Value);
 
             page1.Delete(0);
         }

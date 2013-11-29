@@ -67,5 +67,116 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             
             return inner_list;
         }
+
+        public static IList<List<T>> __GetCells<T>(
+    IVisio.Page page,
+    IList<int> shapeids,
+    VA.ShapeSheet.Query.CellQuery query,
+    _RowToObject<T> f)
+        {
+            check_query(query);
+
+            var outer_list = new List<List<T>>();
+            var data_for_shapes = query.GetFormulasAndResults<string>(page, shapeids);
+
+            foreach (var data_for_shape in data_for_shapes)
+            {
+                var sec = data_for_shape.SectionCells[0];
+                var inner_list = new List<T>(sec.Count);
+
+                foreach (var row in sec)
+                {
+                    var obj = f(row);
+                    inner_list.Add(obj);
+                }
+
+                outer_list.Add(inner_list);
+            }
+            return outer_list;
+        }
+
+        public static IList<T> __GetCells<T>(
+            IVisio.Shape shape,
+            VA.ShapeSheet.Query.CellQuery query,
+            _RowToObject<T> f)
+        {
+            check_query(query);
+
+            var data_for_shape = query.GetFormulasAndResults<string>(shape);
+            var sec = data_for_shape.SectionCells[0];
+            var inner_list = new List<T>(sec.Count);
+
+            foreach (var row in sec)
+            {
+                var obj = f(row);
+                inner_list.Add(obj);
+            }
+
+            return inner_list;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static IList<List<T>> ____GetCells<T,X>(
+    IVisio.Page page,
+    IList<int> shapeids,
+    VA.ShapeSheet.Query.CellQuery query,
+    ____RowToObject<T,X> f)
+        {
+            check_query(query);
+
+            var outer_list = new List<List<T>>();
+            var data_for_shapes = query.GetFormulasAndResults<X>(page, shapeids);
+
+            foreach (var data_for_shape in data_for_shapes)
+            {
+                var sec = data_for_shape.SectionCells[0];
+                var inner_list = new List<T>(sec.Count);
+
+                foreach (var row in sec)
+                {
+                    var obj = f(row);
+                    inner_list.Add(obj);
+                }
+
+                outer_list.Add(inner_list);
+            }
+            return outer_list;
+        }
+
+        public static IList<T> ____GetCells<T,X>(
+            IVisio.Shape shape,
+            VA.ShapeSheet.Query.CellQuery query,
+            ____RowToObject<T,X> f)
+        {
+            check_query(query);
+
+            var data_for_shape = query.GetFormulasAndResults<X>(shape);
+            var sec = data_for_shape.SectionCells[0];
+            var inner_list = new List<T>(sec.Count);
+
+            foreach (var row in sec)
+            {
+                var obj = f(row);
+                inner_list.Add(obj);
+            }
+
+            return inner_list;
+        }
+
     }
 }
