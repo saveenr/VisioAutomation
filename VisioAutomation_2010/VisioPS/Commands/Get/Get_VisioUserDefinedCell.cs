@@ -10,11 +10,41 @@ namespace VisioPS.Commands
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
+        [SMA.Parameter(Mandatory = false)]
+        public SMA.SwitchParameter GetCells;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
             var dic = scriptingsession.UserDefinedCell.Get(this.Shapes);
-            this.WriteObject(dic);
+
+            if (this.GetCells)
+            {
+                this.WriteObject(dic);
+                return;
+            }
+
+            foreach (var kv in dic)
+            {
+                int shapeid = kv.Key.ID;
+                foreach (var udc in kv.Value)
+                {
+                    var rec = new UserDefinedCellRecord();
+                    rec.ShapeID = shapeid;
+                    rec.Name = udc.Name;
+                    rec.Value = udc.Value;
+                    rec.Prompt = udc.Prompt;
+                    this.WriteObject(rec);
+                }
+            }
         }
+    }
+
+    public class UserDefinedCellRecord
+    {
+        public int ShapeID;
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public string Prompt { get; set; }
     }
 }
