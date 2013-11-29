@@ -18,20 +18,20 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             if (query.Sections.Count != 1)
             {
                 throw new VA.AutomationException("Query should not contain contain exaxtly 1 section");
-            }            
+            }
         }
 
 
-        public static IList<List<T>> ____GetCells<T,X>(
-    IVisio.Page page,
-    IList<int> shapeids,
-    VA.ShapeSheet.Query.CellQuery query,
-    RowToObject<T,X> f)
+        public static IList<List<T>> _GetCells<T, RT>(
+            IVisio.Page page,
+            IList<int> shapeids,
+            VA.ShapeSheet.Query.CellQuery query,
+            RowToObject<T, RT> f)
         {
             check_query(query);
 
             var outer_list = new List<List<T>>();
-            var data_for_shapes = query.GetFormulasAndResults<X>(page, shapeids);
+            var data_for_shapes = query.GetFormulasAndResults<RT>(page, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
             {
@@ -49,14 +49,14 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return outer_list;
         }
 
-        public static IList<T> ____GetCells<T,X>(
+        public static IList<T> _GetCells<T, RT>(
             IVisio.Shape shape,
             VA.ShapeSheet.Query.CellQuery query,
-            RowToObject<T,X> f)
+            RowToObject<T, RT> f)
         {
             check_query(query);
 
-            var data_for_shape = query.GetFormulasAndResults<X>(shape);
+            var data_for_shape = query.GetFormulasAndResults<RT>(shape);
             var sec = data_for_shape.SectionCells[0];
             var inner_list = new List<T>(sec.Count);
 
@@ -68,6 +68,5 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
             return inner_list;
         }
-
     }
 }
