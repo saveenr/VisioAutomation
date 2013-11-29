@@ -16,11 +16,11 @@ namespace VisioAutomation.Shapes.Connections
 
         public override IEnumerable<SRCValuePair> EnumPairs()
         {
-            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
         }
         
         public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)

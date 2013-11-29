@@ -110,15 +110,15 @@ namespace VisioAutomation.Shapes.CustomProperties
             string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
             string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Label, str_label);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Value, str_value);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Format, str_format);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Label, str_label);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Value, str_value);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Format, str_format);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
         }
 
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)

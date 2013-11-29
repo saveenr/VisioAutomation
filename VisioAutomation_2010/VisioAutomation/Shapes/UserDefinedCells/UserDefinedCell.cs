@@ -51,8 +51,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
         public override IEnumerable<SRCValuePair> EnumPairs()
         {
-            yield return createpair(VA.ShapeSheet.SRCConstants.User_Value, this.Value.Formula);
-            yield return createpair(VA.ShapeSheet.SRCConstants.User_Prompt, this.Prompt.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.User_Value, this.Value.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.User_Prompt, this.Prompt.Formula);
         }
 
         public override string ToString()

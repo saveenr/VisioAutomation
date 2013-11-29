@@ -19,13 +19,13 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
         {
-            yield return createpair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
         }
 
         public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)
@@ -68,7 +68,7 @@ namespace VisioAutomation.Shapes
                 Angle = this.Columns.Add(VA.ShapeSheet.SRCConstants.Angle, "Angle");
             }
 
-            public  XFormCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
+            public XFormCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
                 var cells = new XFormCells
                 {

@@ -35,31 +35,31 @@ namespace VisioAutomation.Shapes
 
         public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
         {
-            yield return createpair(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.FillPattern, this.FillPattern.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.EndArrow, this.EndArrow.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.LineCap, this.LineCap.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.LineColor, this.LineColor.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.LinePattern, this.LinePattern.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.LineWeight, this.LineWeight.Formula);
-            yield return createpair(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.FillPattern, this.FillPattern.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.EndArrow, this.EndArrow.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.LineCap, this.LineCap.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.LineColor, this.LineColor.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.LinePattern, this.LinePattern.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.LineWeight, this.LineWeight.Formula);
+            yield return srcvaluepair(ShapeSheet.SRCConstants.Rounding, this.Rounding.Formula);
         }
 
 
@@ -140,7 +140,7 @@ namespace VisioAutomation.Shapes
                 this.Rounding = this.Columns.Add(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
             }
 
-            public FormatCells GetCells(QueryResult<VA.ShapeSheet.CellData<double>> row)
+            public FormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
                 var cells = new FormatCells();
                 cells.FillBkgnd = row[ this.FillBkgnd.Ordinal].ToInt();
