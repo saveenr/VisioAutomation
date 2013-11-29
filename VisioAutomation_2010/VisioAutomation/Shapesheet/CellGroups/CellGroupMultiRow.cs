@@ -21,65 +21,6 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }            
         }
 
-        public static IList<List<T>> _GetCells<T>(
-            IVisio.Page page, 
-            IList<int> shapeids, 
-            VA.ShapeSheet.Query.CellQuery query, 
-            RowToObject<T> f)
-        {
-            check_query(query);
-
-            var outer_list = new List<List<T>>();
-            var data_for_shapes = query.GetFormulasAndResults<double>(page, shapeids);
-
-            foreach (var data_for_shape in data_for_shapes)
-            {
-                var sec = data_for_shape.SectionCells[0];
-                var inner_list = new List<T>(sec.Count);
-
-                foreach (var row in sec)
-                {
-                    var obj = f(row);
-                    inner_list.Add(obj);
-                }
-
-                outer_list.Add(inner_list);
-            }
-            return outer_list;
-        }
-
-        public static IList<T> _GetCells<T>(
-            IVisio.Shape shape, 
-            VA.ShapeSheet.Query.CellQuery query, 
-            RowToObject<T> f)
-        {
-            check_query(query);
-
-            var data_for_shape = query.GetFormulasAndResults<double>(shape);
-            var sec = data_for_shape.SectionCells[0];
-            var inner_list = new List<T>(sec.Count);
-            
-            foreach (var row in sec)
-            {
-                var obj = f(row);
-                inner_list.Add(obj);
-            }
-            
-            return inner_list;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public static IList<List<T>> ____GetCells<T,X>(
     IVisio.Page page,

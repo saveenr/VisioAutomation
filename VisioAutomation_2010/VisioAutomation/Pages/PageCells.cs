@@ -149,7 +149,7 @@ namespace VisioAutomation.Pages
         public static PageCells GetCells(IVisio.Shape shape)
         {
             var query = get_query();
-            return VA.ShapeSheet.CellGroups.CellGroup._GetCells(shape, query, query.GetCells);
+            return VA.ShapeSheet.CellGroups.CellGroup._GetCells<PageCells, double>(shape, query, query.GetCells);
         }
 
         private static PageCellQuery _mCellQuery;
