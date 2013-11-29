@@ -8,11 +8,11 @@ namespace VisioAutomation.Shapes.Connections
 {
     public enum ConnectorEdgeHandling
     {
-        Arrow_ExcludeConnectorsWithoutArrows, // this should be the default when getting edges
+        Arrow_ExcludeConnectorsWithoutArrows,
         Arrow_TreatConnectorsWithoutArrowsAsBidirectional,
         Raw,
     }
-
+    
     public static class PathAnalysis
     {
         public static IList<ConnectorEdge> GetTransitiveClosure(
