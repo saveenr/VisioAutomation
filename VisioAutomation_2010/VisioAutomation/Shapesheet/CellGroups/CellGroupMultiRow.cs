@@ -59,13 +59,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             return sec_objects;
         }
 
-        private static List<T> SectionToObjectList<T, RT>(CellQuery.SectionResult<CellData<RT>> sec, RowToObject<T, RT> f)
+        private static List<T> SectionToObjectList<T, RT>(CellQuery.SectionResult<CellData<RT>> sec, RowToObject<T, RT> row_to_object)
         {
             int num_rows = sec.Count;
             var sec_objects = new List<T>(num_rows);
             foreach (var row in sec)
             {
-                var obj = f(row);
+                var obj = row_to_object(row);
                 sec_objects.Add(obj);
             }
             return sec_objects;
