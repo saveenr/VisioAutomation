@@ -172,6 +172,12 @@ namespace VisioAutomation.VDX.Elements
             get { return VA.VDX.Properties.Resources.DefaultVDXTemplate; }
         }
 
+        public void Save(VA.VDX.Elements.Template template, string filename)
+        {
+            var vdxWriter = new VA.VDX.VDXWriter();
+            vdxWriter.CreateVDX(this, template, filename);
+        }
+
         internal void AccountForMasteSubshapes(int n)
         {
             this.CurrentShapeID += n + 1;

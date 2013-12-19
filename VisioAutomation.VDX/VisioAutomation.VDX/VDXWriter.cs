@@ -7,7 +7,7 @@ using VisioAutomation.VDX.Internal.Extensions;
 
 namespace VisioAutomation.VDX
 {
-    public class VDXWriter
+    internal class VDXWriter
     {
         public VDXWriter()
         {

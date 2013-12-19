@@ -70,11 +70,7 @@ namespace TestVisioAutomationVDX
             
             doc.Windows.Add(w1);
 
-            // now create a writer object
-            var vdx_writer = new VA.VDX.VDXWriter();
-            
-            // merge the template with the new in-memory drawing and save it to the output fie
-            vdx_writer.CreateVDX(doc, template, output_filename);
+            doc.Save(template, output_filename);
             
             // Verify this file can be loaded
             CheckIfLoadsWithoutErrorLog(output_filename);
@@ -321,8 +317,7 @@ namespace TestVisioAutomationVDX
 
             node_page.Shapes.Add(node_shape);
 
-            var vdx_writer = new VA.VDX.VDXWriter();
-            vdx_writer.CreateVDX(doc_node, template, filename);
+            doc_node.Save(template, filename);
 
             var app = new IVisio.Application();
             var docs = app.Documents;
@@ -588,8 +583,8 @@ namespace TestVisioAutomationVDX
             shape2.LayerMembership = new List<int> {layer2.Index};
 
             // write document to disk as .vdx file
-            var vdxWriter = new VA.VDX.VDXWriter();
-            vdxWriter.CreateVDX(doc, template, output_filename);
+
+            doc.Save(template,output_filename);
 
             CheckIfLoadsWithoutErrorLog(output_filename);
         }
