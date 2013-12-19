@@ -45,7 +45,7 @@ namespace TestVisioAutomationVDX
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            var template = new VA.VDX.Elements.Template(); // the default template
+            var template = new VA.VDX.Template(); // the default template
             var doc = new VA.VDX.Elements.Drawing(template);
 
             GetPage01_Simple_Fill_Format(doc);
@@ -70,7 +70,7 @@ namespace TestVisioAutomationVDX
             
             doc.Windows.Add(w1);
 
-            doc.Save(template, output_filename);
+            doc.Save(output_filename);
             
             // Verify this file can be loaded
             CheckIfLoadsWithoutErrorLog(output_filename);
@@ -290,7 +290,7 @@ namespace TestVisioAutomationVDX
         {
             string filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            var template = new VA.VDX.Elements.Template();
+            var template = new VA.VDX.Template();
             var doc_node = new VA.VDX.Elements.Drawing(template);
 
             int rect_id = doc_node.GetMasterMetaData("REctAngle").ID;
@@ -317,7 +317,7 @@ namespace TestVisioAutomationVDX
 
             node_page.Shapes.Add(node_shape);
 
-            doc_node.Save(template, filename);
+            doc_node.Save(filename);
 
             var app = new IVisio.Application();
             var docs = app.Documents;
@@ -532,7 +532,7 @@ namespace TestVisioAutomationVDX
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            var template = new VA.VDX.Elements.Template(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
+            var template = new VA.VDX.Template(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
             var doc = new VisioAutomation.VDX.Elements.Drawing(template);
             var page = new VA.VDX.Elements.Page(8, 4);
 
@@ -584,7 +584,7 @@ namespace TestVisioAutomationVDX
 
             // write document to disk as .vdx file
 
-            doc.Save(template,output_filename);
+            doc.Save(output_filename);
 
             CheckIfLoadsWithoutErrorLog(output_filename);
         }

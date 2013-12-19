@@ -13,7 +13,7 @@ namespace VisioAutomation.VDX
         {
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Elements.Template template)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Template template)
         {
             if (vdoc == null)
             {
@@ -28,7 +28,7 @@ namespace VisioAutomation.VDX
             _ModifyTemplate(template, vdoc);
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Elements.Template template, string output_filename)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Template template, string output_filename)
         {
             if (output_filename == null)
             {
@@ -80,7 +80,7 @@ namespace VisioAutomation.VDX
             }
         }
 
-        private void _ModifyTemplate(VA.VDX.Elements.Template template, Elements.Drawing doc_node)
+        private void _ModifyTemplate(VA.VDX.Template template, Elements.Drawing doc_node)
         {
             var root = template.dom.Root;
             root.AddFirst(doc_node.DocumentProperties.ToXml());

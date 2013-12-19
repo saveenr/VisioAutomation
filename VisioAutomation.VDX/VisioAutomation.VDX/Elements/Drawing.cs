@@ -5,7 +5,7 @@ using VA=VisioAutomation;
 using SXL = System.Xml.Linq;
 
 
-namespace VisioAutomation.VDX.Elements
+namespace VisioAutomation.VDX
 {
     public class Template
     {
@@ -15,7 +15,7 @@ namespace VisioAutomation.VDX.Elements
         public Template()
         {
             this.dom = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
-            VA.VDX.VDXWriter.CleanUpTemplate(this.dom);            
+            VA.VDX.VDXWriter.CleanUpTemplate(this.dom);
         }
 
         public Template(string filename)
@@ -24,13 +24,16 @@ namespace VisioAutomation.VDX.Elements
             VA.VDX.VDXWriter.CleanUpTemplate(this.dom);
         }
     }
-
+}
+namespace VisioAutomation.VDX.Elements
+{
     public class Drawing : Node
     {
         private readonly PageList _pages;
         private readonly FaceList _faces;
         private readonly List<Window> _windows;
         private readonly List<ColorEntry> _colors;
+        private readonly Template template;
 
         private readonly Dictionary<string, MasterMetdata> master_metadata =
             new Dictionary<string, MasterMetdata>(System.StringComparer.OrdinalIgnoreCase);
@@ -52,6 +55,9 @@ namespace VisioAutomation.VDX.Elements
             }
 
             template.used = true;
+
+
+            this.template = template;
 
             this._pages = new PageList(this);
             this._faces = new FaceList();
@@ -172,7 +178,7 @@ namespace VisioAutomation.VDX.Elements
             get { return VA.VDX.Properties.Resources.DefaultVDXTemplate; }
         }
 
-        public void Save(VA.VDX.Elements.Template template, string filename)
+        public void Save(string filename)
         {
             var vdxWriter = new VA.VDX.VDXWriter();
             vdxWriter.CreateVDX(this, template, filename);
