@@ -7,6 +7,24 @@ using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
+    public class Template
+    {
+        internal SXL.XDocument dom;
+        internal bool used;
+
+        public Template()
+        {
+            this.dom = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
+            VA.VDX.VDXWriter.CleanUpTemplate(this.dom);            
+        }
+
+        public Template(string filename)
+        {
+            this.dom = SXL.XDocument.Parse(filename);
+            VA.VDX.VDXWriter.CleanUpTemplate(this.dom);
+        }
+    }
+
     public class Drawing : Node
     {
         private readonly PageList _pages;
@@ -21,14 +39,26 @@ namespace VisioAutomation.VDX.Elements
 
         internal int CurrentShapeID = -100;
 
-        public Drawing(SXL.XDocument dom)
+        public Drawing(Template template)
         {
+            if (template == null)
+            {
+                throw new System.ArgumentNullException("template");
+            }
+
+            if (template.used)
+            {
+                throw new System.ArgumentException("template has already neen used to create a drawing. Create a new template");                
+            }
+
+            template.used = true;
+
             this._pages = new PageList(this);
             this._faces = new FaceList();
             this._windows = new List<Window>();
             this._colors = new List<ColorEntry>();
 
-            var masters_el = dom.Root.ElementVisioSchema2003("Masters");
+            var masters_el = template.dom.Root.ElementVisioSchema2003("Masters");
             if (masters_el == null)
             {
                 throw new System.InvalidOperationException();
@@ -58,7 +88,7 @@ namespace VisioAutomation.VDX.Elements
                 this.CurrentShapeID = 1;
             }
 
-            var facenames_el = dom.Root.ElementVisioSchema2003("FaceNames");
+            var facenames_el = template.dom.Root.ElementVisioSchema2003("FaceNames");
             foreach (var face_el in facenames_el.ElementsVisioSchema2003("FaceName"))
             {
                 var id = int.Parse(face_el.Attribute("ID").Value);
@@ -67,7 +97,7 @@ namespace VisioAutomation.VDX.Elements
                 this._faces.Add(face);
             }
 
-            var colors_el = dom.Root.ElementVisioSchema2003("Colors");
+            var colors_el = template.dom.Root.ElementVisioSchema2003("Colors");
             foreach (var color_el in colors_el.ElementsVisioSchema2003("ColorEntry"))
             {
                 var rgb_s = color_el.Attribute("RGB").Value;

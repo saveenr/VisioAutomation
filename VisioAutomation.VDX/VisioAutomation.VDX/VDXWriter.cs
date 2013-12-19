@@ -1,4 +1,5 @@
 using System;
+using VisioAutomation.VDX.Elements;
 using SXL=System.Xml.Linq;
 using VA=VisioAutomation;
 using VisioAutomation.VDX.Internal.Extensions;
@@ -12,22 +13,22 @@ namespace VisioAutomation.VDX
         {
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument vdx_xml_doc)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Elements.Template template)
         {
             if (vdoc == null)
             {
                 throw new System.ArgumentNullException("vdoc");
             }
 
-            if (vdx_xml_doc == null)
+            if (template == null)
             {
                 throw new System.ArgumentNullException("vdx_xml_doc");
             }
 
-            _ModifyTemplate(vdx_xml_doc, vdoc);
+            _ModifyTemplate(template, vdoc);
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument vdx_xml_doc, string output_filename)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Elements.Template template, string output_filename)
         {
             if (output_filename == null)
             {
@@ -43,11 +44,11 @@ namespace VisioAutomation.VDX
                     docwind.ValidatePage(vdoc);
                 }
             }
-            this.CreateVDX(vdoc,vdx_xml_doc);
+            this.CreateVDX(vdoc, template);
 
             // important to use DisableFormatting - Visio is very sensitive to whitespace in the <Text> element when there is complex formatting
             var saveoptions = SXL.SaveOptions.DisableFormatting;
-            vdx_xml_doc.Save(output_filename, saveoptions);
+            template.dom.Save(output_filename, saveoptions);
         }
 
         public static void CleanUpTemplate(SXL.XDocument vdx_xml_doc)
@@ -79,9 +80,9 @@ namespace VisioAutomation.VDX
             }
         }
 
-        private void _ModifyTemplate(SXL.XDocument vdx_xml_doc, Elements.Drawing doc_node)
+        private void _ModifyTemplate(VA.VDX.Elements.Template template, Elements.Drawing doc_node)
         {
-            var root = vdx_xml_doc.Root;
+            var root = template.dom.Root;
             root.AddFirst(doc_node.DocumentProperties.ToXml());
 
             var xfacenames = root.ElementVisioSchema2003("FaceNames");

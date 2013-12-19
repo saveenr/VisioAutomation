@@ -45,15 +45,8 @@ namespace TestVisioAutomationVDX
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            // First load a starter VDX (a.k.a "the template") - we will build a new VDX from this one
-            //var template_dom = SXL.XDocument.Load(template_filename);
-            var template_dom = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
-
-            // Clean up the template - remove the existing pages
-            VA.VDX.VDXWriter.CleanUpTemplate(template_dom);
-
-            // Create a new Drawing based on the template
-            var doc = new VA.VDX.Elements.Drawing(template_dom);
+            var template = new VA.VDX.Elements.Template(); // the default template
+            var doc = new VA.VDX.Elements.Drawing(template);
 
             GetPage01_Simple_Fill_Format(doc);
             GetPage02_Locking(doc);
@@ -81,7 +74,7 @@ namespace TestVisioAutomationVDX
             var vdx_writer = new VA.VDX.VDXWriter();
             
             // merge the template with the new in-memory drawing and save it to the output fie
-            vdx_writer.CreateVDX(doc, template_dom, output_filename);
+            vdx_writer.CreateVDX(doc, template, output_filename);
             
             // Verify this file can be loaded
             CheckIfLoadsWithoutErrorLog(output_filename);
@@ -301,9 +294,7 @@ namespace TestVisioAutomationVDX
         {
             string filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            var template = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
-            VA.VDX.VDXWriter.CleanUpTemplate(template);
-
+            var template = new VA.VDX.Elements.Template();
             var doc_node = new VA.VDX.Elements.Drawing(template);
 
             int rect_id = doc_node.GetMasterMetaData("REctAngle").ID;
@@ -546,10 +537,8 @@ namespace TestVisioAutomationVDX
         {
             string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            var templateDom =
-                SXL.XDocument.Parse(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
-            VA.VDX.VDXWriter.CleanUpTemplate(templateDom);
-            var doc = new VisioAutomation.VDX.Elements.Drawing(templateDom);
+            var template = new VA.VDX.Elements.Template(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
+            var doc = new VisioAutomation.VDX.Elements.Drawing(template);
             var page = new VA.VDX.Elements.Page(8, 4);
 
             doc.Pages.Add(page);
@@ -600,7 +589,7 @@ namespace TestVisioAutomationVDX
 
             // write document to disk as .vdx file
             var vdxWriter = new VA.VDX.VDXWriter();
-            vdxWriter.CreateVDX(doc, templateDom, output_filename);
+            vdxWriter.CreateVDX(doc, template, output_filename);
 
             CheckIfLoadsWithoutErrorLog(output_filename);
         }
