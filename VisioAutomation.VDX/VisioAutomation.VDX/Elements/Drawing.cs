@@ -9,22 +9,57 @@ namespace VisioAutomation.VDX
 {
     public class Template
     {
-        internal SXL.XDocument dom;
-        internal bool used;
+        private string xml;
 
         public Template()
         {
-            this.dom = SXL.XDocument.Parse(VA.VDX.Elements.Drawing.DefaultTemplateXML);
-            VA.VDX.VDXWriter.CleanUpTemplate(this.dom);
+            this.xml = VA.VDX.Elements.Drawing.DefaultTemplateXML;
         }
 
-        public Template(string filename)
+        public Template(string xml)
         {
-            this.dom = SXL.XDocument.Parse(filename);
-            VA.VDX.VDXWriter.CleanUpTemplate(this.dom);
+            this.xml = xml;
         }
+
+        internal SXL.XDocument LoadCleanDOM()
+        {
+            var dom = SXL.XDocument.Parse(this.xml);
+            CleanUpTemplate(dom);
+            return dom;                
+        }
+
+        public static void CleanUpTemplate(SXL.XDocument vdx_xml_doc)
+        {
+            var root = vdx_xml_doc.Root;
+
+            string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;
+
+            // set document properties
+            var docprops = root.ElementVisioSchema2003("DocumentProperties");
+            docprops.RemoveElement(ns_2003 + "PreviewPicture");
+            docprops.SetElementValue(ns_2003 + "Creator", "");
+            docprops.SetElementValue(ns_2003 + "Company", "");
+
+            // remove any pages
+            var pages = root.ElementVisioSchema2003("Pages");
+            pages.RemoveNodes();
+
+            // Do not remove the FaceNames node - it contains fonts to which the template may be referring
+            root.RemoveElement(ns_2003 + "Windows");
+            root.RemoveElement(ns_2003 + "DocumentProperties");
+
+
+            // TODO Add DocumentSettings to VDX
+            var docsettings = root.ElementsVisioSchema2003("DocumentSettings");
+            if (docsettings != null)
+            {
+                SXL.Extensions.Remove(docsettings);
+            }
+        }
+
     }
 }
+
 namespace VisioAutomation.VDX.Elements
 {
     public class Drawing : Node
@@ -33,7 +68,6 @@ namespace VisioAutomation.VDX.Elements
         private readonly FaceList _faces;
         private readonly List<Window> _windows;
         private readonly List<ColorEntry> _colors;
-        private readonly Template template;
 
         private readonly Dictionary<string, MasterMetdata> master_metadata =
             new Dictionary<string, MasterMetdata>(System.StringComparer.OrdinalIgnoreCase);
@@ -42,6 +76,8 @@ namespace VisioAutomation.VDX.Elements
 
         internal int CurrentShapeID = -100;
 
+        private SXL.XDocument dom;
+
         public Drawing(Template template)
         {
             if (template == null)
@@ -49,22 +85,14 @@ namespace VisioAutomation.VDX.Elements
                 throw new System.ArgumentNullException("template");
             }
 
-            if (template.used)
-            {
-                throw new System.ArgumentException("template has already neen used to create a drawing. Create a new template");                
-            }
-
-            template.used = true;
-
-
-            this.template = template;
+            this.dom = template.LoadCleanDOM();
 
             this._pages = new PageList(this);
             this._faces = new FaceList();
             this._windows = new List<Window>();
             this._colors = new List<ColorEntry>();
 
-            var masters_el = template.dom.Root.ElementVisioSchema2003("Masters");
+            var masters_el = dom.Root.ElementVisioSchema2003("Masters");
             if (masters_el == null)
             {
                 throw new System.InvalidOperationException();
@@ -94,7 +122,7 @@ namespace VisioAutomation.VDX.Elements
                 this.CurrentShapeID = 1;
             }
 
-            var facenames_el = template.dom.Root.ElementVisioSchema2003("FaceNames");
+            var facenames_el = dom.Root.ElementVisioSchema2003("FaceNames");
             foreach (var face_el in facenames_el.ElementsVisioSchema2003("FaceName"))
             {
                 var id = int.Parse(face_el.Attribute("ID").Value);
@@ -103,7 +131,7 @@ namespace VisioAutomation.VDX.Elements
                 this._faces.Add(face);
             }
 
-            var colors_el = template.dom.Root.ElementVisioSchema2003("Colors");
+            var colors_el = dom.Root.ElementVisioSchema2003("Colors");
             foreach (var color_el in colors_el.ElementsVisioSchema2003("ColorEntry"))
             {
                 var rgb_s = color_el.Attribute("RGB").Value;
@@ -181,7 +209,7 @@ namespace VisioAutomation.VDX.Elements
         public void Save(string filename)
         {
             var vdxWriter = new VA.VDX.VDXWriter();
-            vdxWriter.CreateVDX(this, template, filename);
+            vdxWriter.CreateVDX(this, this.dom, filename);
         }
 
         internal void AccountForMasteSubshapes(int n)

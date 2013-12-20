@@ -13,22 +13,22 @@ namespace VisioAutomation.VDX
         {
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Template template)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument dom)
         {
             if (vdoc == null)
             {
                 throw new System.ArgumentNullException("vdoc");
             }
 
-            if (template == null)
+            if (dom == null)
             {
                 throw new System.ArgumentNullException("vdx_xml_doc");
             }
 
-            _ModifyTemplate(template, vdoc);
+            _ModifyTemplate(dom, vdoc);
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, VA.VDX.Template template, string output_filename)
+        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument dom, string output_filename)
         {
             if (output_filename == null)
             {
@@ -44,45 +44,16 @@ namespace VisioAutomation.VDX
                     docwind.ValidatePage(vdoc);
                 }
             }
-            this.CreateVDX(vdoc, template);
+            this.CreateVDX(vdoc, dom);
 
             // important to use DisableFormatting - Visio is very sensitive to whitespace in the <Text> element when there is complex formatting
             var saveoptions = SXL.SaveOptions.DisableFormatting;
-            template.dom.Save(output_filename, saveoptions);
+            dom.Save(output_filename, saveoptions);
         }
 
-        public static void CleanUpTemplate(SXL.XDocument vdx_xml_doc)
+        private void _ModifyTemplate( SXL.XDocument dom, Elements.Drawing doc_node)
         {
-            var root = vdx_xml_doc.Root;
-
-            string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;
-
-            // set document properties
-            var docprops = root.ElementVisioSchema2003("DocumentProperties");
-            docprops.RemoveElement(ns_2003 + "PreviewPicture");
-            docprops.SetElementValue(ns_2003 + "Creator", "");
-            docprops.SetElementValue(ns_2003 + "Company", "");
-
-            // remove any pages
-            var pages = root.ElementVisioSchema2003("Pages");
-            pages.RemoveNodes();
-
-            // Do not remove the FaceNames node - it contains fonts to which the template may be referring
-            root.RemoveElement(ns_2003 + "Windows");
-            root.RemoveElement(ns_2003 + "DocumentProperties");
-
-
-            // TODO Add DocumentSettings to VDX
-            var docsettings = root.ElementsVisioSchema2003("DocumentSettings");
-            if (docsettings!=null)
-            {
-                SXL.Extensions.Remove(docsettings);
-            }
-        }
-
-        private void _ModifyTemplate(VA.VDX.Template template, Elements.Drawing doc_node)
-        {
-            var root = template.dom.Root;
+            var root = dom.Root;
             root.AddFirst(doc_node.DocumentProperties.ToXml());
 
             var xfacenames = root.ElementVisioSchema2003("FaceNames");
