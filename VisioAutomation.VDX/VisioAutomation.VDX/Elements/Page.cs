@@ -39,7 +39,8 @@ namespace VisioAutomation.VDX.Elements
             this.PrintProperties = new VA.VDX.Sections.PrintProperties();
             this.PageLayout = new VA.VDX.Sections.PageLayout();
             this._id = idgen.GetNextID();
-            this.Name = string.Format(System.Globalization.CultureInfo.InvariantCulture, "Page-{0}", this._id + 1);
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            this.Name = string.Format(culture, "Page-{0}", this._id + 1);
             this.Layers = new LayerList();
         }
 

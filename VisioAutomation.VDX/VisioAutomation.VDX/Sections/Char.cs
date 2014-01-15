@@ -1,5 +1,6 @@
 using VisioAutomation.VDX.Enums;
 using VisioAutomation.VDX.Internal;
+using VisioAutomation.VDX.Internal.Extensions;
 using VisioAutomation.VDX.ShapeSheet;
 using SXL = System.Xml.Linq;
 
@@ -32,7 +33,8 @@ namespace VisioAutomation.VDX.Sections
         public void AddToElement(SXL.XElement parent, int index)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("Char");
-            el.SetAttributeValue("IX", index.ToString(System.Globalization.CultureInfo.InvariantCulture));
+
+            el.SetAttributeValueInt("IX", index);
             el.Add(this.Font.ToXml("Font"));
             el.Add(this.Color.ToXml("Color"));
 

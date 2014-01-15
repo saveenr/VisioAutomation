@@ -1,3 +1,4 @@
+using VisioAutomation.VDX.Internal.Extensions;
 using System.Collections.Generic;
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
@@ -22,7 +23,7 @@ namespace VisioAutomation.VDX.Sections
         public void AddToElement(SXL.XElement parent, int index)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("Geom");
-            el.SetAttributeValue("IX", index.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            el.SetAttributeValueInt("IX", index);
             el.Add(this.NoFill.ToXml("NoFill"));
             el.Add(this.NoLine.ToXml("NoLine"));
             el.Add(this.NoShow.ToXml("NoShow"));

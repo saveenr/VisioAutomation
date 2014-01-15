@@ -1,4 +1,5 @@
 using VisioAutomation.VDX.Internal;
+using VisioAutomation.VDX.Internal.Extensions;
 using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.VDX.Elements
@@ -17,15 +18,14 @@ namespace VisioAutomation.VDX.Elements
         public void AddToElement(SXL.XElement parent, int ix)
         {
             var colorentry_el = XMLUtil.CreateVisioSchema2003Element("ColorEntry");
-            colorentry_el.SetAttributeValue("IX", ix.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            colorentry_el.SetAttributeValueInt("IX", ix);
 
             byte rbyte;
             byte gbyte;
             byte bbyte;
             GetRGBBytes(this.RGB, out rbyte, out gbyte, out bbyte);
             const string format_string = "#{0:x2}{1:x2}{2:x2}";
-            string color_string = string.Format(System.Globalization.CultureInfo.InvariantCulture, format_string, rbyte,
-                                                gbyte, bbyte);
+            string color_string = string.Format(System.Globalization.CultureInfo.InvariantCulture, format_string, rbyte, gbyte, bbyte);
 
             colorentry_el.SetAttributeValue("RGB", color_string);
 

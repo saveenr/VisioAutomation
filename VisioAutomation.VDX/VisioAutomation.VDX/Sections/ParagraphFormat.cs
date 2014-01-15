@@ -1,3 +1,4 @@
+using VisioAutomation.VDX.Internal.Extensions;
 using VisioAutomation.VDX.Enums;
 using VisioAutomation.VDX.Internal;
 using VisioAutomation.VDX.ShapeSheet;
@@ -26,7 +27,7 @@ namespace VisioAutomation.VDX.Sections
         {
             var el = XMLUtil.CreateVisioSchema2003Element("Para");
 
-            el.SetAttributeValue("IX", ix.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            el.SetAttributeValueInt("IX", ix);
             el.Add(this.IndFirst.ToXml("IndFirst"));
             el.Add(this.IndLeft.ToXml("IndLeft"));
             el.Add(this.IndRight.ToXml("IndRight"));

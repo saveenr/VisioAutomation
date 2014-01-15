@@ -166,19 +166,22 @@ namespace VisioPS
                     else if (value_o is int)
                     {
                         int value_int = (int)value_o;
-                        string value_string = value_int.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        var culture = System.Globalization.CultureInfo.InvariantCulture;
+                        string value_string = value_int.ToString(culture);
                         this[key_string] = value_string;
                     }
                     else if (value_o is float)
                     {
                         float value_float = (float)value_o;
-                        string value_string = value_float.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        var culture = System.Globalization.CultureInfo.InvariantCulture;
+                        string value_string = value_float.ToString(culture);
                         this[key_string] = value_string;
                     }
                     else if (value_o is double)
                     {
                         double value_double = (double)value_o;
-                        string value_string = value_double.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        var culture = System.Globalization.CultureInfo.InvariantCulture;
+                        string value_string = value_double.ToString(culture);
                         this[key_string] = value_string;
                     }
                     else

@@ -92,9 +92,23 @@ namespace VisioAutomation.VDX.Internal.Extensions
 
             if (date!= null)
             {
-                string datestr = date.Value.ToString(datefmt, System.Globalization.CultureInfo.InvariantCulture);
+                var culture = System.Globalization.CultureInfo.InvariantCulture;
+                string datestr = date.Value.ToString(datefmt, culture);
                 el.SetElementValue( name, datestr);
             }
         }
+
+        public static void SetAttributeValueInt(this SXL.XElement el, SXL.XName name, int value)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            el.SetAttributeValue(name, value.ToString(culture));            
+        }
+
+        public static void SetAttributeValueDouble(this SXL.XElement el, SXL.XName name, double value)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            el.SetAttributeValue(name, value.ToString(culture));
+        }
+
     }
 }

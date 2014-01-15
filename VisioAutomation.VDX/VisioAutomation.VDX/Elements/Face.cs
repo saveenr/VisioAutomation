@@ -1,3 +1,4 @@
+using VisioAutomation.VDX.Internal.Extensions;
 using VisioAutomation.VDX.Internal;
 using SXL = System.Xml.Linq;
 
@@ -17,7 +18,7 @@ namespace VisioAutomation.VDX.Elements
         public void ToXml(SXL.XElement parent)
         {
             var facename_el = XMLUtil.CreateVisioSchema2003Element("FaceName");
-            facename_el.SetAttributeValue("ID", this.ID.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            facename_el.SetAttributeValueInt("ID", this.ID);
             facename_el.SetAttributeValue("Name", this.Name);
             parent.Add(facename_el);
         }

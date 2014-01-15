@@ -1,4 +1,5 @@
 ﻿using VisioAutomation.VDX.Internal;
+using VisioAutomation.VDX.Internal.Extensions;
 using VisioAutomation.VDX.ShapeSheet;
 using SXL = System.Xml.Linq;
 
@@ -16,7 +17,7 @@ namespace VisioAutomation.VDX.Sections
         public override void AddToElement(SXL.XElement parent, int index)
         {
             var el = XMLUtil.CreateVisioSchema2003Element("EllipticalArcTo");
-            el.SetAttributeValue("IX", index.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            el.SetAttributeValueInt("IX", index);
             el.Add(this.X.ToXml("X"));
             el.Add(this.Y.ToXml("Y"));
             el.Add(this.A.ToXml("A"));

@@ -20,7 +20,8 @@ namespace VisioAutomation.Scripting
             var a = el.Attribute(name);
             if (a == null)
             {
-                string msg = string.Format(System.Globalization.CultureInfo.InvariantCulture, "Missing value for attribute \"{0}\"", name);
+                var culture = System.Globalization.CultureInfo.InvariantCulture;
+                string msg = string.Format(culture, "Missing value for attribute \"{0}\"", name);
                 throw new System.ArgumentException(msg);
             }
 

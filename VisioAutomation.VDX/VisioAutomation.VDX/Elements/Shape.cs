@@ -1,6 +1,7 @@
 using System.Xml.Linq;
 using System.Collections.Generic;
 using VisioAutomation.VDX.Internal;
+using VisioAutomation.VDX.Internal.Extensions;
 using VA=VisioAutomation;
 using System.Linq;
 using SXL = System.Xml.Linq;
@@ -84,7 +85,7 @@ namespace VisioAutomation.VDX.Elements
         public void AddToElement(SXL.XElement parent)
         {
             var shape_el = XMLUtil.CreateVisioSchema2003Element("Shape");
-            shape_el.SetAttributeValue("ID", this._id.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            shape_el.SetAttributeValueInt("ID", this._id);
             shape_el.SetAttributeValue("NameU", this.Name);
 
             if (this._isGroup)
