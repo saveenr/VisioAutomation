@@ -88,7 +88,7 @@ namespace VisioAutomation.VDX.Internal.Extensions
 
         public static void SetElementValueConditionalDateTime(this SXL.XElement el, SXL.XName name, System.DateTimeOffset? date)
         {
-            string datefmt = "yyyy-MM-ddTHH:mm:ss";
+            const string datefmt = "yyyy-MM-ddTHH:mm:ss";
 
             if (date!= null)
             {

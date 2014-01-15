@@ -105,7 +105,8 @@ namespace VisioAutomation.VDX.Elements
                 var id = int.Parse(master_el.Attribute("ID").Value);
 
                 var subshapes = master_el.Descendants()
-                    .Where(el => el.Name.LocalName == "Shape");
+                    .Where(el => el.Name.LocalName == "Shape")
+                    .ToList();
 
                 var count_groups = subshapes.Count(shape_el => shape_el.Attribute("Type").Value == "Group");
 

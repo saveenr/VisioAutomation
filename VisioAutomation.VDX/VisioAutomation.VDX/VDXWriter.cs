@@ -1,5 +1,3 @@
-using System;
-using VisioAutomation.VDX.Elements;
 using SXL=System.Xml.Linq;
 using VA=VisioAutomation;
 using VisioAutomation.VDX.Internal.Extensions;
@@ -22,7 +20,7 @@ namespace VisioAutomation.VDX
 
             if (dom == null)
             {
-                throw new System.ArgumentNullException("vdx_xml_doc");
+                throw new System.ArgumentNullException("dom");
             }
 
             _ModifyTemplate(dom, vdoc);
@@ -53,6 +51,11 @@ namespace VisioAutomation.VDX
 
         private void _ModifyTemplate( SXL.XDocument dom, Elements.Drawing doc_node)
         {
+            if (dom.Root == null)
+            {
+                throw new System.ArgumentException("Dom must contain a root node");
+            }
+
             var root = dom.Root;
             root.AddFirst(doc_node.DocumentProperties.ToXml());
 

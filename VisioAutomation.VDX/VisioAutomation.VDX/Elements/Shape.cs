@@ -254,7 +254,7 @@ namespace VisioAutomation.VDX.Elements
                 {
                     var xlayermem = XMLUtil.CreateVisioSchema2003Element("LayerMem");
                     var xlayermember = XMLUtil.CreateVisioSchema2003Element("LayerMember");
-                    xlayermember.Value = string.Join(";", this.LayerMembership.Select(i => i.ToString()).ToArray());
+                    xlayermember.Value = string.Join(";", this.LayerMembership.Select(i => i.ToString(System.Globalization.CultureInfo.InvariantCulture)).ToArray());
                     xlayermem.Add(xlayermember);
                     xshape.Add(xlayermem);
                 }

@@ -172,7 +172,7 @@
     <Compile Include="Commands\Remove\Remove_VisioGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\Set\Set_VisioZoom.cs" />
-    <Compile Include="VIsioPSUtil.cs" />
+    <Compile Include="VisioPSUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
