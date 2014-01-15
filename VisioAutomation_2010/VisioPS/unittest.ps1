@@ -21,17 +21,17 @@ $modules =  Join-Path $wps "Modules"
 $visiopsfldr=  Join-Path $modules "VisioPS"
 
 
-Write-Host "-----------------" -ForegroundColor Gray
-Write-Host "VisioPS Unit Test" -ForegroundColor Gray
-Write-Host "-----------------" -ForegroundColor Gray
+Write-Host "-----------------" -ForegroundColor Magenta
+Write-Host "VisioPS Unit Test" -ForegroundColor Magenta
+Write-Host "-----------------" -ForegroundColor Magenta
 Write-Host
-Write-Host "VisioPS Location" $visiopsfldr -ForegroundColor Gray
+Write-Host "VisioPS Location" $visiopsfldr -ForegroundColor Magenta
 
 function Assert-PathExists($path)
 {
     if (!(test-path $path))
     {
-        Write-Host "ERROR: Path does not exist " + $path -ForegroundColor Gray
+        Write-Host "ERROR: Path does not exist " + $path -ForegroundColor Magenta
         exit
     }
 }
@@ -45,13 +45,13 @@ $visiopsfiles += "VisioAutomation.Scripting.dll"
 
 function Assert-VisioPSIsInstalled
 {
-    Write-Host Checking VisioPS is installed -ForegroundColor Gray
+    Write-Host Checking VisioPS is installed -ForegroundColor Magenta
     Assert-PathExists $visiopsfldr
     foreach ($file in $visiopsfiles)
     {
         Assert-PathExists (Join-Path $visiopsfldr $file)
     }
-    Write-Host Installation OK -ForegroundColor Gray
+    Write-Host Installation OK -ForegroundColor Magenta
 }
 
 function Load-VisioPSModule
@@ -131,7 +131,7 @@ function Assert-PageShapeCount( $desired )
 
     if ($actual -ne $desired)
     {
-        Write-Host ERROR: Expected $desired shapes on page, got $actual -ForegroundColor Gray
+        Write-Host ERROR: Expected $desired shapes on page, got $actual -ForegroundColor Magenta
         exit
     }
 }
