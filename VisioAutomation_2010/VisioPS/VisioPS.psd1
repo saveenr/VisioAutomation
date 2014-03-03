@@ -10,10 +10,11 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'VisioPS.dll'
+# RootModule = 'VisioPS.dll' - Commented this out because having RootModule defined causes the module to fail to load with PowerShell 2.0
+ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '1.1.25'
+ModuleVersion = '1.1.27'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
@@ -25,7 +26,7 @@ Author = 'Saveen Reddy'
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) 2013 Saveen Reddy'
+Copyright = '(c) 2014 Saveen Reddy'
 
 # Description of the functionality provided by this module
 # Description = ''
