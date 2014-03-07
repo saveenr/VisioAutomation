@@ -251,13 +251,16 @@ namespace VisioAutomationSamples
                         if (i < chunk.Count)
                         {
                             n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
+                            n1.Text.CharacterCells.Color = colors[j];
+
                         }
                         else
                         {
                             // empty
                         }
                         n1.CharFontName = fontnames[j];
-                        n1.Cells.CharColor = colors[j];
+    
+                        //n1.Cells.CharColor = "=RGB(255,0,0)";// colors[j];
                         n1.Cells.CharTransparency = 0.7;
                         n1.Cells.CharSize = "36pt";
                         n1.Cells.FillPattern = 0;
