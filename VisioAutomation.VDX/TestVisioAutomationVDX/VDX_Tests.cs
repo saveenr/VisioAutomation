@@ -60,6 +60,7 @@ namespace TestVisioAutomationVDX
             GetPage11_Add_color(doc);
             GetPage12_AdjustToTextSize(doc);
             GetPage13_MultipleConnectors(doc);
+            GetPage14_Hyperlinks(doc);
 
             var w1 = new VA.VDX.Elements.DocumentWindow();
             w1.ShowGrid = false;
@@ -526,7 +527,38 @@ namespace TestVisioAutomationVDX
 
             return page;
         }
-        
+
+        private VA.VDX.Elements.Page GetPage14_Hyperlinks(VA.VDX.Elements.Drawing doc)
+        {
+            var page = new VA.VDX.Elements.Page(8, 4);
+            doc.Pages.Add(page);
+
+            // find the id of the master for rounded rectangles
+            int rounded_rect_id = doc.GetMasterMetaData("Rounded REctAngle").ID;
+
+            var shape1 = new VA.VDX.Elements.Shape(rounded_rect_id, 1, 3);
+            shape1.Text.Add("No Hyperlinks");
+
+            var shape2 = new VA.VDX.Elements.Shape(rounded_rect_id, 5, 3);
+            shape2.Text.Add("1 Hyperlink");
+            shape2.Hyperlinks = new List<VA.VDX.Elements.Hyperlink>();
+            shape2.Hyperlinks.Add(new VA.VDX.Elements.Hyperlink("Google", "http://google.com"));
+
+            var shape3 = new VA.VDX.Elements.Shape(rounded_rect_id, 5, 3);
+            shape3.Text.Add("2 Hyperlinks");
+            shape3.Hyperlinks = new List<VA.VDX.Elements.Hyperlink>();
+            shape3.Hyperlinks.Add(new VA.VDX.Elements.Hyperlink("Google", "http://google.com"));
+            shape3.Hyperlinks.Add(new VA.VDX.Elements.Hyperlink("Microsoft", "http://microsoft.com"));
+
+            page.Shapes.Add(shape1);
+            page.Shapes.Add(shape2);
+            page.Shapes.Add(shape3);
+
+            page.ConnectShapesViaConnector(shape3, shape1, shape2);
+            return page;
+        }
+
+
         [TestMethod]
         public void VDX_CustomTemplate()
         {

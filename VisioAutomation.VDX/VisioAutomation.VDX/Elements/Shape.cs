@@ -22,6 +22,7 @@ namespace VisioAutomation.VDX.Elements
         public VA.VDX.Sections.Layout Layout;
         public List<VA.VDX.Sections.Char> CharFormats;
         public List<Sections.ParagraphFormat> ParaFormats;
+        public List<Hyperlink> Hyperlinks;
         public List<int> LayerMembership;
         public CustomProps CustomProps;
         public VA.VDX.Sections.Geom Geom;
@@ -105,6 +106,7 @@ namespace VisioAutomation.VDX.Elements
             WriteTextBlock(shape_el);
             WriteProtection(shape_el);
             WriteMisc(shape_el);
+            WriteHyperlinks(shape_el);
             WriteTextXForm(shape_el);
             WriteLayout(shape_el);
 
@@ -117,6 +119,50 @@ namespace VisioAutomation.VDX.Elements
 
 
             parent.Add(shape_el);
+        }
+
+        private void WriteHyperlinks(XElement shape_el)
+        {
+            if (this.Hyperlinks == null)
+            {
+                return;
+            }
+
+            int n = 1;
+            foreach (var hl in this.Hyperlinks)
+            {
+                var hyperlink_el = XMLUtil.CreateVisioSchema2003Element("Hyperlink");
+
+
+                hyperlink_el.SetAttributeValue("NameU", string.Format("Row_{0}",n));
+                hyperlink_el.SetAttributeValue("ID", string.Format("{0}", n));
+
+                if (hl.Description != null)
+                {
+                    var desc_el = XMLUtil.CreateVisioSchema2003Element("Description");
+                    desc_el.Value = hl.Description;
+                    hyperlink_el.Add(desc_el);
+                }
+
+                if (hl.Address != null)
+                {
+                    var address_el = XMLUtil.CreateVisioSchema2003Element("Address");
+                    address_el.Value = hl.Address;
+                    hyperlink_el.Add(address_el);
+                }
+
+                if (hl.SubAddress != null)
+                {
+                    var subaddress_el = XMLUtil.CreateVisioSchema2003Element("SubAddress");
+                    subaddress_el.Value = hl.SubAddress;
+                    hyperlink_el.Add(subaddress_el);
+                }
+
+                
+                shape_el.Add(hyperlink_el);
+
+                n++;
+            }
         }
 
         private void WriteLayout(XElement xshape)
