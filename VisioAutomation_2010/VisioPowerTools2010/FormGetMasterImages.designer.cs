@@ -67,7 +67,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(158, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Location of Stencils (*.VSS files)";
+            this.label1.Text = "Location of Stencils";
             // 
             // textBoxLog
             // 
