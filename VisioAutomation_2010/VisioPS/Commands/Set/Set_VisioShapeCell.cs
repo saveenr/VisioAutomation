@@ -341,7 +341,6 @@ namespace VisioPS.Commands
             this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
             this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerboseEx("Number of Total Updates: {0}", update.Count());
-            this.WriteVerboseEx("Number of Updates per Shape: {0}", update.Count() / target_shapes.Count());
 
             using (var undoscope = new VA.Application.UndoScope(this.ScriptingSession.VisioApplication, "SetShapeCells"))
             {

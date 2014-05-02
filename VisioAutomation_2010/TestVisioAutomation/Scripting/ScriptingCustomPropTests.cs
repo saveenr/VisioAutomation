@@ -1,7 +1,9 @@
+using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using VisioAutomation.Extensions;
 using VisioAutomation.Shapes.CustomProperties;
+using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -9,6 +11,23 @@ namespace TestVisioAutomation
     [TestClass]
     public class ScriptingCustomPropTests : VisioAutomationTest
     {
+        [TestMethod]
+        public void Scripting_ShapeSheet_SetNoShapes()
+        {
+            var ss = GetScriptingSession();
+            ss.Document.New();
+            ss.Page.New(new VA.Drawing.Size(4, 4), false);
+
+            var s1 = ss.Draw.Rectangle(1, 1, 1.25, 1.5);
+            var s2 = ss.Draw.Rectangle(2, 3, 2.5, 3.5);
+            var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
+
+            ss.Selection.None();
+
+            ss.ShapeSheet.SetFormula(null, new SRC[] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
+            ss.Document.Close(true);
+        }
+
         [TestMethod]
         public void Scripting_CustomProps_Scenarios()
         {
