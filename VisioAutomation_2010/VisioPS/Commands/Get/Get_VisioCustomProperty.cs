@@ -37,14 +37,14 @@ namespace VisioPS.Commands
                     cpf.ShapeID = shape.ID;
                     cpf.Name = propname;
                     cpf.Value = propcells.Value.Formula.Value;
-                    cpf.Value = propcells.Format.Formula.Value;
-                    cpf.Value = propcells.Invisible.Formula.Value;
-                    cpf.Value = propcells.Label.Formula.Value;
-                    cpf.Value = propcells.LangId.Formula.Value;
-                    cpf.Value =  propcells.Prompt.Formula.Value; 
-                    cpf.Value =  propcells.SortKey.Formula.Value;
-                    cpf.Value = propcells.Type.Formula.Value;
-                    cpf.Value = propcells.Verify.Formula.Value;
+                    cpf.Format = propcells.Format.Formula.Value;
+                    cpf.Invisible = propcells.Invisible.Formula.Value;
+                    cpf.Label= propcells.Label.Formula.Value;
+                    cpf.LangId= propcells.LangId.Formula.Value;
+                    cpf.Prompt =  propcells.Prompt.Formula.Value; 
+                    cpf.SortKey =  propcells.SortKey.Formula.Value;
+                    cpf.Type = propcells.Type.Formula.Value;
+                    cpf.Verify = propcells.Verify.Formula.Value;
 
                     this.WriteObject(cpf);
                 }
