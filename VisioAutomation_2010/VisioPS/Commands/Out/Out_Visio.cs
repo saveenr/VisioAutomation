@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using VA = VisioAutomation;
 using VAS = VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
@@ -10,37 +11,37 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsData.Out, "Visio")]
     public class Out_Visio : VisioPSCmdlet
     {
-        [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.OrgChart.OrgChartDocument OrgChart { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Grid.GridLayout GridLayout { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public List<VA.Models.DirectedGraph.Drawing> DirectedGraphs { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public System.Data.DataTable DataTable { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 1, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 1, Mandatory = true, ValueFromPipeline = true)]
         public double CellWidth { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 2, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 2, Mandatory = true, ValueFromPipeline = true)]
         public double CellHeight { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
         public double CellSpacing { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Charting.PieChart PieChart;
 
-        [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Charting.BarChart BarChart;
 
-        [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.Charting.AreaChart AreaChart;
 
-        [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true)]
+        [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public System.Xml.XmlDocument XmlDocument;
 
         protected override void ProcessRecord()
@@ -103,13 +104,17 @@ namespace VisioPS.Commands
 
         private void build_ch(System.Xml.XmlElement x, VA.Models.Tree.Node parent)
         {
-            foreach (System.Xml.XmlElement xchild in x.ChildNodes)
+            foreach (System.Xml.XmlNode xchild in x.ChildNodes)
             {
-                var nchild = new VA.Models.Tree.Node();
-                nchild.Text = new VA.Text.Markup.TextElement(xchild.Name);
+                if (xchild is System.Xml.XmlElement)
+                {
+                    var nchild = new VA.Models.Tree.Node();
+                    nchild.Text = new VA.Text.Markup.TextElement(xchild.Name);
 
-                parent.Children.Add(nchild);
-                build_ch(xchild,nchild);
+                    parent.Children.Add(nchild);
+                    build_ch( (System.Xml.XmlElement) xchild, nchild);
+                    
+                }
 
             }
         }
