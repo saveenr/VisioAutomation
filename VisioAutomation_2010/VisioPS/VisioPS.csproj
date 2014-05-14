@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
+    <Compile Include="Commands\Out\Out_Visio.cs" />
     <Compile Include="objects\DirectedEdge.cs" />
     <Compile Include="objects\CellMap.cs" />
     <Compile Include="Commands\Get\Get_VisioPageCell.cs" />
@@ -122,7 +123,6 @@
     <Compile Include="Commands\Select\Select_VisioShape.cs" />
     <Compile Include="Commands\Set\Set_VisioShapeSheet.cs" />
     <Compile Include="Commands\New\New_VisioBezier.cs" />
-    <Compile Include="Commands\Invoke\Invoke_VisioDraw.cs" />
     <Compile Include="Commands\New\New_VisioPieChart.cs" />
     <Compile Include="Commands\New\New_VisioPolyLine.cs" />
     <Compile Include="Commands\Export\Export_VisioPage.cs" />
