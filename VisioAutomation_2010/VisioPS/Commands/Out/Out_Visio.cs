@@ -40,6 +40,9 @@ namespace VisioPS.Commands
         [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true)]
         public VA.Models.Charting.AreaChart AreaChart;
 
+        [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true)]
+        public System.Xml.XmlDocument XmlDocument;
+
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
@@ -75,10 +78,41 @@ namespace VisioPS.Commands
             {
                 scriptingsession.Draw.AreaChart(this.AreaChart);
             }
+            else if (this.XmlDocument != null)
+            {
+                this.WriteVerboseEx("XmlDocument");
+                var tree_drawing = new VA.Models.Tree.Drawing();
+                build(this.XmlDocument, tree_drawing);
+
+                tree_drawing.Render(scriptingsession.Page.Get());
+            }
             else
             {
                 this.WriteVerboseEx("No object to draw");
             }
         }
+
+        private void build(System.Xml.XmlDocument xmlDocument, VA.Models.Tree.Drawing tree_drawing)
+        {
+            var n = new VA.Models.Tree.Node();
+            tree_drawing.Root = n;
+            n.Text = new VA.Text.Markup.TextElement(xmlDocument.Name);
+            this.build_ch(xmlDocument.DocumentElement,n);
+
+        }
+
+        private void build_ch(System.Xml.XmlElement x, VA.Models.Tree.Node parent)
+        {
+            foreach (System.Xml.XmlElement xchild in x.ChildNodes)
+            {
+                var nchild = new VA.Models.Tree.Node();
+                nchild.Text = new VA.Text.Markup.TextElement(xchild.Name);
+
+                parent.Children.Add(nchild);
+                build_ch(xchild,nchild);
+
+            }
+        }
+
     }
 }
