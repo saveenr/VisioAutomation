@@ -7,6 +7,7 @@ $ErrorActionPreference = "Stop"
 # The Most Common User Input settings
 #
 $productname = "Visio Powershell Module"
+$module_foldername = "Visio"
 $productshortname = "VisioPS"
 $manufacturer = "Saveen Reddy"
 $helplink = "http://visioautomation.codeplex.com"
@@ -125,7 +126,7 @@ $modules_xml = @"
             <Directory Id="PersonalFolder" Name="PersonalFolder">
                 <Directory Id="WindowsPowerShell" Name="WindowsPowerShell">
                     <Directory Id="INSTALLDIR" Name="Modules">
-                        <Directory Id="#productshortname" Name="#productshortname">
+                        <Directory Id="#productshortname" Name="#module_foldername">
                         </Directory>
                     </Directory>
                 </Directory>
@@ -144,7 +145,7 @@ $modules_xml = @"
 </Wix>
 "@
 
-
+$modules_xml = $modules_xml -replace "#module_foldername", $module_foldername
 $modules_xml = $modules_xml -replace "#productname", $productname
 $modules_xml = $modules_xml -replace "#productversion", $productversion
 $modules_xml = $modules_xml -replace "#manufacturer", $manufacturer

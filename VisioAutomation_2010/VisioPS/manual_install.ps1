@@ -53,7 +53,7 @@ function Test-Locked($filePath)
 
 # -------------------------------------------
 # User-supplied information about this module
-$module_foldername = "VisioPS"
+$module_foldername = "Visio"
 $release = "Debug"
 
 # -------------------
