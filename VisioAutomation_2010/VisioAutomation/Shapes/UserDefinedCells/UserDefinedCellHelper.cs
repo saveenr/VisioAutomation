@@ -35,42 +35,6 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             shape.DeleteRow(_userdefinedcell_section, row);
         }
 
-        public static void Update(IVisio.Shape shape, string name, string val)
-        {
-            if (shape == null)
-            {
-                throw new System.ArgumentNullException("shape");
-            }
-
-            CheckValidName(name);
-
-            if (val == null)
-            {
-                throw new System.ArgumentNullException("val");
-            }
-
-            if (!Contains(shape, name))
-            {
-                throw new AutomationException("user Property does not exist");
-            }
-
-            string full_prop_name = GetRowName(name);
-
-            var cell = shape.CellsU[full_prop_name];
-
-            if (cell == null)
-            {
-                string msg = string.Format("Could not retrieve cell for user property \"{0}\"", full_prop_name);
-                throw new AutomationException(msg);
-            }
-
-            var update = new VA.ShapeSheet.Update();
-            var src = new VA.ShapeSheet.SRC(_userdefinedcell_section, cell.Row, (short)IVisio.VisCellIndices.visUserValue);
-            update.SetFormula(src, val);
-
-            update.Execute(shape);
-        }
-
         public static void Set(IVisio.Shape shape, string name, VA.ShapeSheet.CellData<double> value, VA.ShapeSheet.CellData<double> prompt)
         {
             Set(shape, name, value.Formula.Value, prompt.Formula.Value);
@@ -87,7 +51,23 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             if (Contains(shape, name))
             {
-                Delete(shape, name);
+                string full_prop_name = GetRowName(name);
+
+                if (value != null)
+                {
+                    string value_cell_name = full_prop_name;
+                    var cell = shape.CellsU[value_cell_name];
+                    string value_formula = Convert.StringToFormulaString(value);
+                    cell.FormulaU = value_formula;                    
+                }
+
+                if (prompt != null)
+                {
+                    string prompt_cell_name = full_prop_name+".Prompt";
+                    var cell = shape.CellsU[prompt_cell_name];
+                    cell.FormulaU = prompt;                                        
+                }
+                return;
             }
 
             short row = shape.AddNamedRow(
