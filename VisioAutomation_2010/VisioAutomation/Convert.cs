@@ -46,6 +46,16 @@ namespace VisioAutomation
                 throw new System.ArgumentNullException("s");
             }
 
+            if (s.Length == 0)
+            {
+                return s;
+            }
+
+            if (s.StartsWith("="))
+            {
+                return s;
+            }
+
             string result = System.String.Format("\"{0}\"", s.Replace(quote, quotequote));
             return result;
         }

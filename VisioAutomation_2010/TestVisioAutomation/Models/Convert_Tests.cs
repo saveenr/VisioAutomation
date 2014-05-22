@@ -43,7 +43,7 @@ namespace TestVisioAutomation
                 Assert.Fail("Did not throw expected exception");
             }
             
-            Assert.AreEqual("\"\"", VisioAutomation.Convert.StringToFormulaString(string.Empty));
+            Assert.AreEqual("", VisioAutomation.Convert.StringToFormulaString(string.Empty));
             Assert.AreEqual("\" \"", VisioAutomation.Convert.StringToFormulaString(" "));
             Assert.AreEqual("\" \"\"foo\"\" \"", VisioAutomation.Convert.StringToFormulaString(" \"foo\" "));
         }
@@ -73,6 +73,11 @@ namespace TestVisioAutomation
             Assert.AreEqual("", VisioAutomation.Convert.FormulaStringToString("\"\""));
             Assert.AreEqual(" ", VisioAutomation.Convert.FormulaStringToString("\" \""));
             Assert.AreEqual(" \"foo\" ", VisioAutomation.Convert.FormulaStringToString("\" \"\"foo\"\" \""));
+
+            Assert.AreEqual("=", VisioAutomation.Convert.FormulaStringToString("="));
+            Assert.AreEqual("=1", VisioAutomation.Convert.FormulaStringToString("=1"));
+            Assert.AreEqual("=\"1\"", VisioAutomation.Convert.FormulaStringToString("=\"1\""));
+
         }
     }
 }
