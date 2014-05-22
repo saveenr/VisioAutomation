@@ -138,7 +138,6 @@
     <Compile Include="enums\SelectionOperation.cs" />
     <Compile Include="Commands\Open\Open_VisioDocument.cs" />
     <Compile Include="enums\PageOrientation.cs" />
-    <Compile Include="enums\ParagraphHorizontalAlignment.cs" />
     <Compile Include="Commands\Remove\Remove_VisioControl.cs" />
     <Compile Include="Commands\Set\Set_VisioUserDefinedCell.cs" />
     <Compile Include="enums\TextVerticalAlignment.cs" />

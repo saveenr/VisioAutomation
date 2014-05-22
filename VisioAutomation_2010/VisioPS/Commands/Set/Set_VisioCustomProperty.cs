@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -10,11 +7,6 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioCustomProperty")]
     public class Set_VisioCustomProperty : VisioPS.VisioPSCmdlet
     {
-        private int _LangID = -1;
-        private int _sortKey = -1;
-        private int _type = 0; // 0 = string
-        private int _verify = -1;
-
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
         public System.Collections.Hashtable HashTable{ get; set; }
         
@@ -31,60 +23,52 @@ namespace VisioPS.Commands
         public string Prompt { get; set; }
 
         [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int LangId
-        {
-            get { return _LangID; }
-            set { _LangID = value; }
-        }
+        public int LangId { get; set; }
 
         [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int SortKey
-        {
-            get { return _sortKey; }
-            set { _sortKey = value; }
-        }
+        public int SortKey { get; set; }
 
         [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int Type
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
+        public int Type { get; set; }
 
         [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int Verify
-        {
-            get { return _verify; }
-            set { _verify = value; }
-        }
+        public int Verify { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
+
+        public Set_VisioCustomProperty()
+        {
+            Verify = -1;
+            Type = 0;
+            SortKey = -1;
+            LangId = -1;
+        }
 
         protected override void ProcessRecord()
         {
             if (this.HashTable != null)
             {
-                PerformHashTable();
+                SetFromHashTable();
             }
             else
             {
-                PerformNonHashTable();
+                SetFromParameters();
             }
         }
 
-        private void PerformNonHashTable()
+        private void SetFromParameters()
         {
-            var cp = new CustomPropertyCells();
+            var cp = new VA.Shapes.CustomProperties.CustomPropertyCells();
             cp.Value = this.Value;
             if (this.Label != null)
             {
                 cp.Label = this.Label;
             }
 
-            if (this._LangID >= 0)
+            if (this.LangId >= 0)
             {
-                cp.LangId = this._LangID;
+                cp.LangId = this.LangId;
             }
 
             if (this.Prompt != null)
@@ -92,26 +76,26 @@ namespace VisioPS.Commands
                 cp.Prompt = this.Prompt;
             }
 
-            if (this._sortKey >= 0)
+            if (this.SortKey >= 0)
             {
-                cp.SortKey = this._sortKey;
+                cp.SortKey = this.SortKey;
             }
 
-            cp.Type = (int) this._type;
+            cp.Type = (int) this.Type;
 
 
             var scriptingsession = this.ScriptingSession;
             scriptingsession.CustomProp.Set(this.Shapes, this.Name, cp);
         }
 
-        private void PerformHashTable()
+        private void SetFromHashTable()
         {
             if (this.HashTable.Count < 1)
             {
                 return;
             }
 
-            foreach (object  key in this.HashTable.Keys)
+            foreach (object key in this.HashTable.Keys)
             {
                 if (!(key is string))
                 {
@@ -122,7 +106,7 @@ namespace VisioPS.Commands
                 string key_string = (string) key;
 
                 object value = this.HashTable[key];
-                var cp = CustomPropertyCells.FromValue(value);
+                var cp = VA.Shapes.CustomProperties.CustomPropertyCells.FromValue(value);
                 var scriptingsession = this.ScriptingSession;
                 scriptingsession.CustomProp.Set(this.Shapes, key_string, cp);
             }

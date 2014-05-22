@@ -1,9 +1,7 @@
-﻿using System;
-using System.Xml.Serialization;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using System.Linq;
-using VA=VisioAutomation;
+using VA = VisioAutomation;
 
 namespace VisioPS.Commands
 {

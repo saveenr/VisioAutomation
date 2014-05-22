@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using VA = VisioAutomation;
-using VAS = VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -83,7 +81,7 @@ namespace VisioPS.Commands
             {
                 this.WriteVerboseEx("XmlDocument");
                 var tree_drawing = new VA.Models.Tree.Drawing();
-                build(this.XmlDocument, tree_drawing);
+                build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(scriptingsession.Page.Get());
             }
@@ -93,16 +91,16 @@ namespace VisioPS.Commands
             }
         }
 
-        private void build(System.Xml.XmlDocument xmlDocument, VA.Models.Tree.Drawing tree_drawing)
+        private void build_from_xml_doc(System.Xml.XmlDocument xmlDocument, VA.Models.Tree.Drawing tree_drawing)
         {
             var n = new VA.Models.Tree.Node();
             tree_drawing.Root = n;
             n.Text = new VA.Text.Markup.TextElement(xmlDocument.Name);
-            this.build_ch(xmlDocument.DocumentElement,n);
+            this.build_from_xml_element(xmlDocument.DocumentElement,n);
 
         }
 
-        private void build_ch(System.Xml.XmlElement x, VA.Models.Tree.Node parent)
+        private void build_from_xml_element(System.Xml.XmlElement x, VA.Models.Tree.Node parent)
         {
             foreach (System.Xml.XmlNode xchild in x.ChildNodes)
             {
@@ -112,12 +110,9 @@ namespace VisioPS.Commands
                     nchild.Text = new VA.Text.Markup.TextElement(xchild.Name);
 
                     parent.Children.Add(nchild);
-                    build_ch( (System.Xml.XmlElement) xchild, nchild);
-                    
+                    build_from_xml_element( (System.Xml.XmlElement) xchild, nchild);
                 }
-
             }
         }
-
     }
 }
