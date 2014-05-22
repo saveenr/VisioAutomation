@@ -125,7 +125,6 @@
     <Compile Include="Commands\New\New_VisioPieChart.cs" />
     <Compile Include="Commands\New\New_VisioPolyLine.cs" />
     <Compile Include="Commands\Export\Export_VisioPage.cs" />
-    <Compile Include="enums\GetVisioShapeFlags.cs" />
     <Compile Include="Commands\Get\Get_VisioConnectionPoint.cs" />
     <Compile Include="Commands\Get\Get_VisioControl.cs" />
     <Compile Include="Commands\Get\Get_VisioDocument.cs" />
@@ -140,7 +139,6 @@
     <Compile Include="enums\PageOrientation.cs" />
     <Compile Include="Commands\Remove\Remove_VisioControl.cs" />
     <Compile Include="Commands\Set\Set_VisioUserDefinedCell.cs" />
-    <Compile Include="enums\TextVerticalAlignment.cs" />
     <Compile Include="Commands\Connect\Connect_VisioApplication.cs" />
     <Compile Include="Commands\New\New_VisioConnection.cs" />
     <Compile Include="Commands\Remove\Remove_VisioCustomProperty.cs" />
