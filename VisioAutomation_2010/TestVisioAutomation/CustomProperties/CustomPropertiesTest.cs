@@ -75,5 +75,87 @@ namespace TestVisioAutomation
                 VA.Documents.DocumentHelper.Close(doc, true);
             }
         }
+
+        [TestMethod]
+        public void CustomProps_GetSet2()
+        {
+            var page1 = GetNewPage();
+
+            var s1 = page1.DrawRectangle(0, 0, 1, 1);
+            s1.Text = "Checking for Custom Properties";
+
+
+            var cp1 = new VA.Shapes.CustomProperties.CustomPropertyCells();
+            cp1.Ask = "1";
+            cp1.Calendar = "0";
+            cp1.Format= "1";
+            cp1.Invisible = "0";
+            cp1.Label= "1";
+            cp1.LangId= "0";
+            cp1.Prompt= "1";
+            cp1.SortKey= "0";
+            cp1.Type= "0";
+            cp1.Value= "1";
+            cp1.Verify= "0";
+
+            CustomPropertyHelper.Set(s1, "PROP1", cp1);
+
+            var props1 = CustomPropertyHelper.Get(s1);
+
+            var cp2 = props1["PROP1"];
+            Assert.AreEqual("TRUE", cp2.Ask.Formula.Value);
+            Assert.AreEqual("0", cp2.Calendar.Formula.Value);
+            Assert.AreEqual("\"1\"", cp2.Format.Formula.Value);
+            Assert.AreEqual("FALSE", cp2.Invisible.Formula.Value);
+            Assert.AreEqual("\"1\"", cp2.Label.Formula.Value);
+
+            Assert.AreEqual("0", cp2.LangId.Formula.Value);
+            Assert.AreEqual("\"1\"", cp2.Prompt.Formula.Value);
+            Assert.AreEqual("0", cp2.SortKey.Formula.Value);
+            Assert.AreEqual("0", cp2.Type.Formula.Value);
+
+            Assert.AreEqual("\"1\"", cp2.Value.Formula.Value);
+            Assert.AreEqual(null, cp2.Verify.Formula.Value);
+
+            var cp3 = new VA.Shapes.CustomProperties.CustomPropertyCells();
+            cp3.Ask = "0";
+            cp3.Calendar = "2";
+            cp3.Format = "0";
+            cp3.Invisible = "TRUE";
+            cp3.Label = "3";
+            cp3.LangId = "2";
+            cp3.Prompt = "3";
+            cp3.SortKey = "2";
+            cp3.Type = "3";
+            cp3.Value = "2";
+            cp3.Verify = "3";
+
+            CustomPropertyHelper.Set(s1,"PROP1",cp3);
+            var props2 = CustomPropertyHelper.Get(s1);
+
+            var cp4 = props2["PROP1"];
+            Assert.AreEqual("FALSE", cp4.Ask.Formula.Value);
+            Assert.AreEqual("2", cp4.Calendar.Formula.Value);
+            Assert.AreEqual("\"0\"", cp4.Format.Formula.Value);
+            Assert.AreEqual("TRUE", cp4.Invisible.Formula.Value);
+            Assert.AreEqual("\"3\"", cp4.Label.Formula.Value);
+                                   
+            Assert.AreEqual("2", cp4.LangId.Formula.Value);
+            Assert.AreEqual("\"3\"", cp4.Prompt.Formula.Value);
+            Assert.AreEqual("2", cp4.SortKey.Formula.Value);
+            Assert.AreEqual("3", cp4.Type.Formula.Value);
+                                   
+            Assert.AreEqual("2", cp4.Value.Formula.Value);
+            Assert.AreEqual(null, cp4.Verify.Formula.Value);
+
+
+            var app = this.GetVisioApplication();
+            var doc = app.ActiveDocument;
+            if (doc != null)
+            {
+                VA.Documents.DocumentHelper.Close(doc, true);
+            }
+        }
+
     }
 }

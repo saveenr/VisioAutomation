@@ -17,6 +17,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         public VA.ShapeSheet.CellData<int> LangId { get; set; }
         public VA.ShapeSheet.CellData<int> Calendar { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }
+        public VA.ShapeSheet.CellData<bool> Ask { get; set; }
 
         public CustomPropertyCells()
         {
@@ -119,6 +120,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
+            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Ask, cp.Ask.Formula);
         }
 
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)
@@ -217,6 +219,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             cells.Prompt = row[Prompt.Ordinal];
             cells.SortKey = row[SortKey.Ordinal].ToInt();
             cells.Type = row[Type.Ordinal].ToInt();
+            cells.Ask = row[Ask.Ordinal].ToBool();
             return cells;
         }
     }
