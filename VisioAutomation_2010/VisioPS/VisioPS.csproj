@@ -104,7 +104,6 @@
     <Compile Include="Commands\Test\Test_VisioApplication.cs" />
     <Compile Include="Commands\Get\Get_VisioAutomationScriptingSession.cs" />
     <Compile Include="Commands\Get\Get_VisioAutomationAssembly.cs" />
-    <Compile Include="Commands\Import\Import_VisioOrgChart.cs" />
     <Compile Include="Commands\New\New_VisioNURBS.cs" />
     <Compile Include="Commands\New\New_VisioGridLayout.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />
@@ -130,7 +129,7 @@
     <Compile Include="Commands\Get\Get_VisioConnectionPoint.cs" />
     <Compile Include="Commands\Get\Get_VisioControl.cs" />
     <Compile Include="Commands\Get\Get_VisioDocument.cs" />
-    <Compile Include="Commands\Import\Import_VisioDirectedGraph.cs" />
+    <Compile Include="Commands\Import\Import_VisioModel.cs" />
     <Compile Include="Commands\Get\Get_VisioMaster.cs" />
     <Compile Include="Commands\Get\Get_VisioUserDefinedCell.cs" />
     <Compile Include="enums\HorizontalAlignment.cs" />
