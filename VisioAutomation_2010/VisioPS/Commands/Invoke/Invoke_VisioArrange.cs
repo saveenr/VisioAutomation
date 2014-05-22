@@ -21,10 +21,10 @@ namespace VisioPS.Commands
         public SMA.SwitchParameter DistributeVertical { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
-        public VerticalAlignment Vertical = VerticalAlignment.None;
+        public VerticalAlignment AlignVertical = VerticalAlignment.None;
 
         [SMA.Parameter(Mandatory = false)]
-        public HorizontalAlignment Horizontal = HorizontalAlignment.None;
+        public HorizontalAlignment AlignHorizontal = HorizontalAlignment.None;
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
@@ -47,14 +47,14 @@ namespace VisioPS.Commands
                 scriptingsession.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
             }
 
-            if (this.Vertical != VerticalAlignment.None)
+            if (this.AlignVertical != VerticalAlignment.None)
             {
-                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)Vertical);
+                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)AlignVertical);
             }
 
-            if (this.Horizontal != HorizontalAlignment.None)
+            if (this.AlignHorizontal != HorizontalAlignment.None)
             {
-                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)Horizontal);
+                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)AlignHorizontal);
             }
 
         }

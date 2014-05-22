@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Resize, "VisioPage")]
-    public class Invoke_VisioResizePageToFitContents : VisioPS.VisioPSCmdlet
+    public class Resize_VisioPage : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)] public double Width = -1;
 

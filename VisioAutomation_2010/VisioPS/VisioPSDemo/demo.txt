@@ -1,8 +1,8 @@
-# NOTE: Already installed VisioPS via MSI
-Import-Module VisioPS
+# NOTE: Already installed Visio PowerShell module via MSI
+Import-Module Visio
 
 # There are a lot of Visio cmdlets in the module
-Get-Command -Module VisioPS
+Get-Command -Module Visio
 
 # Launch a new instance of Visio
 New-VisioApplication | Out-Null
@@ -50,7 +50,7 @@ Set-VisioPageLayout –Orientation Landscape
 Set-VisioPageLayout –Orientation Portrait
 Set-VisioPageCell -PageWidth 1 -PageHeight 1
 $shapes = New-VisioShape $master 3,3, 5,5, 7,7
-Invoke-VisioResizePageToFitContents -BorderWidth 1.0 -BorderHeight 1.0
+Resize-VisioPage -FitContents -BorderWidth 1.0 -BorderHeight 1.0
 
 Remove-VisioPage
 Remove-VisioPage
@@ -67,15 +67,15 @@ Set-VisioShapeCell -Width 1.0
 
 # There are lots of cells you can set
 Get-Help Set-VisioShapeCell
-Set-VisioShapeCell -FillForegroundColor "rgb(255,0,0)" -CharColor "rgb(255,255,255)" -LineWeight 4pt -LinePattern 10 
+Set-VisioShapeCell -FillForegnd "rgb(255,0,0)" -CharColor "rgb(255,255,255)" -LineWeight 4pt -LinePattern 10 
 
 # It doesn't look so great - let's undo
 Undo-Visio
 
 # Layout Operations
-Invoke-VisioAlignShape –Horizontal Left
+Invoke-VisioArrange –AlignHorizontal Left
 Undo-Visio
-Invoke-VisioAlignShape –Vertical Bottom
+Invoke-VisioArrange –AlignVertical Bottom
 Undo-Visio
 
 # Grouping
@@ -83,7 +83,7 @@ New-VisioGroup
 Remove-VisioGroup
 
 # Connecting Shapes
-$shapes = Get-VisioShape Selected
+$shapes = Get-VisioShape -Flags Selected
 $dc = Get-VisioMaster "Dynamic Connector" $basic_u
 New-VisioConnection $shapes[0] $shapes[1] $dc | Out-Null
 Undo-Visio
@@ -100,16 +100,17 @@ Remove-VisioShape
 
 # Grids
 $grid= New-VisioGridLayout -Master $master -Columns 4 -Rows 6 -CellWidth 1.0 -CellHeight 0.5 
-Invoke-VisioDraw -GridLayout $grid
+$grid | Out-Visio
+
 Undo-Visio
 
 # Org Charts
 $orgchart= Import-VisioOrgChart (Join-Path (Get-Location) "orgchart1.xml")
-Invoke-VisioDraw -OrgChart $orgchart
+$orgchart | Out-Visio
 
 # Directed Graphs
 $dg1 = Import-VisioDirectedGraph (Join-Path (Get-Location) "directedgraph1.xml")
-Invoke-VisioDraw $dg1
+$dg1 | Out-Visio
 
 # Sometimes you accidentally close Visio
 Close-VisioApplication

@@ -6,6 +6,7 @@ cls
 
 
 
+
 function prompt
 {
     "VisiosPSUnitTest>"
@@ -21,11 +22,11 @@ $modules =  Join-Path $wps "Modules"
 $visiopsfldr=  Join-Path $modules "VisioPS"
 
 
-Write-Host "-----------------" -ForegroundColor Magenta
-Write-Host "VisioPS Unit Test" -ForegroundColor Magenta
-Write-Host "-----------------" -ForegroundColor Magenta
+Write-Host "---------------------------------" -ForegroundColor Magenta
+Write-Host "Visio PowerShell Module Unit Test" -ForegroundColor Magenta
+Write-Host "---------------------------------" -ForegroundColor Magenta
 Write-Host
-Write-Host "VisioPS Location" $visiopsfldr -ForegroundColor Magenta
+Write-Host "Visio PowerShell Module Location" $visiopsfldr -ForegroundColor Magenta
 
 function Assert-PathExists($path)
 {
@@ -64,7 +65,7 @@ function Load-VisioPSModule
     }
 
     Import-Module VisioPS
-    $visiopsmodule = Get-Module VisioPS
+    $visiopsmodule = Get-Module Visi
 
     if ($visiopsmodule -eq $null)
     {
