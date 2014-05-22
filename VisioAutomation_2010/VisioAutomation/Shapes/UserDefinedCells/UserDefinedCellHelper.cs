@@ -65,7 +65,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 {
                     string prompt_cell_name = full_prop_name+".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    cell.FormulaU = prompt;                                        
+                    var prompt_formula = Convert.StringToFormulaString(prompt);
+                    cell.FormulaU = prompt_formula;                                        
                 }
                 return;
             }

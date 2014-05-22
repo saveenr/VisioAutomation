@@ -12,7 +12,7 @@ namespace TestVisioAutomation
     public class UserDefinedCells_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void UserDefinedCells_Scenario1()
+        public void UserDefinedCells_GetSet()
         {
             var page1 = GetNewPage();
 
@@ -29,6 +29,36 @@ namespace TestVisioAutomation
 
             // Check that non-existent properties can't be found
             Assert.AreEqual(false, CustomPropertyHelper.Contains(s1, "FOOX"));
+
+            var udcs = UserDefinedCellsHelper.Get(s1);
+            Assert.AreEqual(1,udcs.Count);
+            Assert.AreEqual("FOO1",udcs[0].Name);
+            Assert.AreEqual("\"BAR\"", udcs[0].Value.Formula);
+            Assert.AreEqual("\"\"", udcs[0].Prompt.Formula);
+
+            // Verify that we can set the value without affecting the prompt
+            UserDefinedCellsHelper.Set(s1,"FOO1","BEER",null);
+            udcs = UserDefinedCellsHelper.Get(s1);
+            Assert.AreEqual(1, udcs.Count);
+            Assert.AreEqual("FOO1", udcs[0].Name);
+            Assert.AreEqual("\"BEER\"", udcs[0].Value.Formula);
+            Assert.AreEqual("\"\"", udcs[0].Prompt.Formula);
+
+            // Verify that we can set passing in nulls changes nothing
+            UserDefinedCellsHelper.Set(s1, "FOO1", null, null);
+            udcs = UserDefinedCellsHelper.Get(s1);
+            Assert.AreEqual(1, udcs.Count);
+            Assert.AreEqual("FOO1", udcs[0].Name);
+            Assert.AreEqual("\"BEER\"", udcs[0].Value.Formula);
+            Assert.AreEqual("\"\"", udcs[0].Prompt.Formula);
+
+            // Verify that we can set the prompt without affecting the value
+            UserDefinedCellsHelper.Set(s1, "FOO1", null, "Prompt1");
+            udcs = UserDefinedCellsHelper.Get(s1);
+            Assert.AreEqual(1, udcs.Count);
+            Assert.AreEqual("FOO1", udcs[0].Name);
+            Assert.AreEqual("\"BEER\"", udcs[0].Value.Formula);
+            Assert.AreEqual("\"Prompt1\"", udcs[0].Prompt.Formula);
 
             // Delete that custom property
             UserDefinedCellsHelper.Delete(s1, "FOO1");
