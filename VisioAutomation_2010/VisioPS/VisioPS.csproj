@@ -113,7 +113,7 @@
     <Compile Include="enums\ResultType.cs" />
     <Compile Include="Commands\New\New_VisioShape.cs" />
     <Compile Include="Commands\Copy\Copy_VisioShape.cs" />
-    <Compile Include="Commands\Export\Export_VisioSelectionAsXHTML.cs" />
+    <Compile Include="Commands\Export\Export_VisioSelection.cs" />
     <Compile Include="Commands\Redo\Redo_Visio.cs" />
     <Compile Include="Commands\Save\Save_VisioDocument.cs" />
     <Compile Include="Commands\Test\Test_VisioDocument.cs" />
