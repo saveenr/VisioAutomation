@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioDuplicateShape")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioShape")]
     public class Invoke_VisioDuplicateShape : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Mandatory = false)]public IVisio.Shape[] Shapes;

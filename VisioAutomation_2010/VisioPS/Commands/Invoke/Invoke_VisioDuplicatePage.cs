@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPS.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsLifecycle.Invoke, "VisioDuplicatePage")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioPage")]
     public class Invoke_VisioDuplicatePage : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
