@@ -112,7 +112,7 @@
     <Compile Include="objects\VisioPSSessionContext.cs" />
     <Compile Include="enums\ResultType.cs" />
     <Compile Include="Commands\New\New_VisioShape.cs" />
-    <Compile Include="Commands\Invoke\Copy_VisioShape.cs" />
+    <Compile Include="Commands\Copy\Copy_VisioShape.cs" />
     <Compile Include="Commands\Export\Export_VisioSelectionAsXHTML.cs" />
     <Compile Include="Commands\Redo\Redo_Visio.cs" />
     <Compile Include="Commands\Save\Save_VisioDocument.cs" />
@@ -149,7 +149,7 @@
     <Compile Include="Commands\New\New_VisioLine.cs" />
     <Compile Include="Commands\New\New_VisioOval.cs" />
     <Compile Include="Commands\New\New_VisioRectangle.cs" />
-    <Compile Include="Commands\Invoke\Copy_VisioPage.cs" />
+    <Compile Include="Commands\Copy\Copy_VisioPage.cs" />
     <Compile Include="Commands\Get\Get_VisioDirectedEdge.cs" />
     <Compile Include="Commands\Get\Get_VisioPage.cs" />
     <Compile Include="Commands\Get\Get_VisioCustomProperty.cs" />
@@ -159,7 +159,7 @@
     <Compile Include="Commands\New\New_VisioGroup.cs" />
     <Compile Include="Commands\New\New_VisioPage.cs" />
     <Compile Include="Commands\New\New_VisioApplication.cs" />
-    <Compile Include="Commands\Invoke\Format-VisioShape.cs" />
+    <Compile Include="Commands\Format\Format-VisioShape.cs" />
     <Compile Include="Commands\Resize\Resize_VisioPage.cs" />
     <Compile Include="Commands\Set\Set_VisioWindowSize.cs" />
     <Compile Include="enums\VerticalAlignment.cs" />

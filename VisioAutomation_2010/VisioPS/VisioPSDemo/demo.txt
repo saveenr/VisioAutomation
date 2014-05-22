@@ -73,9 +73,9 @@ Set-VisioShapeCell -FillForegnd "rgb(255,0,0)" -CharColor "rgb(255,255,255)" -Li
 Undo-Visio
 
 # Layout Operations
-Invoke-VisioArrange –AlignHorizontal Left
+Format-VisioShape –AlignHorizontal Left
 Undo-Visio
-Invoke-VisioArrange –AlignVertical Bottom
+Format-VisioShape –AlignVertical Bottom
 Undo-Visio
 
 # Grouping
