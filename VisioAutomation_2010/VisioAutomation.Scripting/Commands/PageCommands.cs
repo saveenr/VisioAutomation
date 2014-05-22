@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -494,18 +496,47 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> GetShapesByName(string[] shapenames)
         {
+            return this.GetShapesByName(shapenames, false);
+        }
+
+        public IList<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
+        {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
             var page = this.Session.Page.Get();
             var shapes = page.Shapes;
-            var shapes_list = new List<IVisio.Shape>(shapenames.Length);
-            foreach (string name in shapenames)
+
+            if (shapenames.Contains("*"))
             {
-                var shape = shapes.ItemU[name];
-                shapes_list.Add(shape);
+                var shapes_list = new List<IVisio.Shape>(shapenames.Length);
+                foreach (var shape in shapes.AsEnumerable())
+                {
+                    shapes_list.Add(shape);
+                }
+                return shapes_list;
             }
-            return shapes_list;
+            else
+            {
+                var shapes_list = new List<IVisio.Shape>(shapenames.Length);
+                foreach (string name in shapenames)
+                {
+                    try
+                    {
+                        var shape = shapes.ItemU[name];
+                        shapes_list.Add(shape);
+                    }
+                    catch (System.Runtime.InteropServices.COMException)
+                    {
+                        if (!ignore_bad_names)
+                        {
+                            throw;                            
+                        }
+                    }
+                }
+                return shapes_list;
+            }
+
         }
 
     }
