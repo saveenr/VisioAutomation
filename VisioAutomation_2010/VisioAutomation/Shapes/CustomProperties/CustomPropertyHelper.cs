@@ -1,4 +1,5 @@
 ﻿using System;
+using VisioAutomation.ShapeSheet;
 using VA=VisioAutomation;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,42 +10,6 @@ namespace VisioAutomation.Shapes.CustomProperties
 {
     public static class CustomPropertyHelper
     {
-        public static void Update(IVisio.Shape shape, string name, string val)
-        {
-            if (shape == null)
-            {
-                throw new ArgumentNullException("shape");
-            }
-
-            CheckValidCustomPropertyName(name);
-
-            if (val == null)
-            {
-                throw new ArgumentNullException("val");
-            }
-
-            if (!Contains(shape, name))
-            {
-                throw new AutomationException("Custom Property does not exist");
-            }
-
-            string full_prop_name = GetRowName(name);
-
-            var cell_propname = shape.CellsU[full_prop_name];
-
-            if (cell_propname == null)
-            {
-                string msg = String.Format("Could not retrieve cell for custom property \"{0}\"", full_prop_name);
-                throw new AutomationException(msg);
-            }
-
-            short row = cell_propname.Row;
-            var cell_propval =
-                shape.CellsSRC[(short)IVisio.VisSectionIndices.visSectionProp, row, (short)IVisio.VisCellIndices.visCustPropsValue];
-            cell_propval.FormulaU = val;
-        }
-
-
         public static void Set(
             IVisio.Shape shape,
             string name,
@@ -59,7 +24,21 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             if (Contains(shape, name))
             {
-                Delete(shape, name);
+                string full_prop_name = GetRowName(name);
+                var cell_propname = shape.CellsU[full_prop_name];
+
+                if (cell_propname == null)
+                {
+                    string msg = String.Format("Could not retrieve cell for custom property \"{0}\"", full_prop_name);
+                    throw new AutomationException(msg);
+                }
+
+                var update = new ShapeSheet.Update();
+                update.SetFormulas(cp, cell_propname.Row);
+                update.Execute(shape);
+
+                return;
+
             }
 
             short row = shape.AddNamedRow(
@@ -68,6 +47,21 @@ namespace VisioAutomation.Shapes.CustomProperties
                 (short)IVisio.VisRowIndices.visRowProp);
 
             Set(shape, row, cp);
+        }
+
+        private static void set_cp_props_on_update(CustomPropertyCells cp, Update update, short xrow)
+        {
+            //update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Ask.ForRow(xrow), cp.Ask.Formula); // Missing cp.Ask
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Calendar.ForRow(xrow), cp.Calendar.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Format.ForRow(xrow), cp.Format.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Invisible.ForRow(xrow), cp.Invisible.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(xrow), cp.Label.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_LangID.ForRow(xrow), cp.LangId.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Prompt.ForRow(xrow), cp.Prompt.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_SortKey.ForRow(xrow), cp.SortKey.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Type.ForRow(xrow), cp.Type.Formula);
+            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow(xrow), cp.Value.Formula);
+            //update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Verify.ForRow(xrow), cp.Verify.Formula); // Missing Prop_Verify
         }
 
         public static void Set(IVisio.Shape shape, short row, CustomPropertyCells cp)

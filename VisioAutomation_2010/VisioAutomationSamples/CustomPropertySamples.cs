@@ -25,7 +25,7 @@ namespace VisioAutomationSamples
 
             // Set the value of an existing properties
             string formula = VA.Convert.StringToFormulaString("BAR3updated");
-            CustomPropertyHelper.Update(s1, "FOO3", formula);
+            CustomPropertyHelper.Set(s1, "FOO3", formula);
 
             // retrieve all the properties
             var props = CustomPropertyHelper.Get(s1);

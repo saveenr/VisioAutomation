@@ -52,7 +52,7 @@ namespace TestVisioAutomation
             Assert.AreEqual("\"VAL 2\"", c2["PROP2"].Value.Formula);
 
             // Modify the value of the second property
-            CustomPropertyHelper.Update(s1, "PROP2", "\"VAL 2 MOD\"");
+            CustomPropertyHelper.Set(s1, "PROP2", "\"VAL 2 MOD\"");
             var c3 = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(2, c3.Count);
             Assert.IsTrue(c3.ContainsKey("PROP1"));
