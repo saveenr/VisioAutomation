@@ -13,7 +13,6 @@ namespace VisioAutomation.Shapes.CustomProperties
         public VA.ShapeSheet.CellData<double> Format { get; set; }
         public VA.ShapeSheet.CellData<int> SortKey { get; set; }
         public VA.ShapeSheet.CellData<int> Invisible { get; set; }
-        public VA.ShapeSheet.CellData<int> Verify { get; set; }
         public VA.ShapeSheet.CellData<int> LangId { get; set; }
         public VA.ShapeSheet.CellData<int> Calendar { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }

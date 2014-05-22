@@ -99,10 +99,6 @@ namespace VisioPS.Commands
 
             cp.Type = (int) this._type;
 
-            if (this._verify >= 0)
-            {
-                cp.Verify = this._verify;
-            }
 
             var scriptingsession = this.ScriptingSession;
             scriptingsession.CustomProp.Set(this.Shapes, this.Name, cp);

@@ -106,7 +106,6 @@ namespace TestVisioAutomation
             in_cp.Type = 0; // 0 = string. see: http://msdn.microsoft.com/en-us/library/aa200980(v=office.10).aspx
             in_cp.Calendar = (int) IVisio.VisCellVals.visCalWestern;
             in_cp.Invisible = 0;
-            in_cp.Verify = 0;
             CustomPropertyHelper.Set(s1, "foo", in_cp);
             var out_cp = CustomPropertyHelper.Get(s1);
             Assert.AreEqual(1, out_cp.Count);

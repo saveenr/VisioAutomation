@@ -96,7 +96,6 @@ namespace TestVisioAutomation
             cp1.SortKey= "0";
             cp1.Type= "0";
             cp1.Value= "1";
-            cp1.Verify= "0";
 
             CustomPropertyHelper.Set(s1, "PROP1", cp1);
 
@@ -115,7 +114,6 @@ namespace TestVisioAutomation
             Assert.AreEqual("0", cp2.Type.Formula.Value);
 
             Assert.AreEqual("\"1\"", cp2.Value.Formula.Value);
-            Assert.AreEqual(null, cp2.Verify.Formula.Value);
 
             var cp3 = new VA.Shapes.CustomProperties.CustomPropertyCells();
             cp3.Ask = "0";
@@ -128,7 +126,6 @@ namespace TestVisioAutomation
             cp3.SortKey = "2";
             cp3.Type = "3";
             cp3.Value = "2";
-            cp3.Verify = "3";
 
             CustomPropertyHelper.Set(s1,"PROP1",cp3);
             var props2 = CustomPropertyHelper.Get(s1);
@@ -146,8 +143,6 @@ namespace TestVisioAutomation
             Assert.AreEqual("3", cp4.Type.Formula.Value);
                                    
             Assert.AreEqual("2", cp4.Value.Formula.Value);
-            Assert.AreEqual(null, cp4.Verify.Formula.Value);
-
 
             var app = this.GetVisioApplication();
             var doc = app.ActiveDocument;
