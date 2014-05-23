@@ -2,6 +2,7 @@
 #
 # HISTORY
 # -------
+# 2014/05/23 Added additional metadata
 # 2014/05/14 Renamed module from "VisioPS" to "Visio"
 # 2013/08/06 Moved VisioPS.dll moved to RootModule
 # 2012/02/16 Updated PowerShellVersion and Copyright
