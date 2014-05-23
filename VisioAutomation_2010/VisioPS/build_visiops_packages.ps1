@@ -3,6 +3,7 @@ param()
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
+
 # ----------------------------------------
 # The Most Common User Input settings
 #
@@ -25,14 +26,14 @@ $KeepTempFolderOnExit = $false
 $Version = "UNKNOWN"
 
 # ----------------------------------------
+Write-Host "Loading Module Packager"
 
+$module_packager = Resolve-Path (Join-Path $scriptpath "PSModulePackager.psm1")
 
-function text_files_are_the_same( $left, $right )
-{
-    $left_text = Get-Content $left | Out-String
-    $right_text = Get-Content $right | Out-String
-    ($left_text -eq $right_text)
-}
+Import-Module .\PSModulePackager.psm1
+
+# ----------------------------------------
+
 
 function update_version_number($Version)
 {
@@ -40,7 +41,7 @@ function update_version_number($Version)
     $src_psd1_filename = Resolve-Path ( Join-Path $scriptpath $psdfilename )
     $dst_psd1_filename = Resolve-Path ( Join-Path $binpath $psdfilename )
 
-    if (!(text_files_are_the_same $src_psd1_filename $dst_psd1_filename))
+    if (!( Test-TextFilesAreEqual $src_psd1_filename $dst_psd1_filename))
     {
         Write-Error "PSD1 files are not the same. Rebuild the project"
         break
