@@ -1,4 +1,4 @@
-param([string]$Version="1.0.0")
+param([string]$Version="UNKNOWN")
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
@@ -17,6 +17,72 @@ $binpath = resolve-path $binpath
 $upgradecode = "EE659AB6-BE76-426E-B971-35DF3907F9D4"
 $output_msi_path = join-path ([Environment]::GetFolderPath("MyDocuments")) ($productname + " Distribution")
 $KeepTempFolderOnExit = $false
+
+#------------------------
+
+# MOD version number
+$psdfilename = "Visio.psd1"
+$src_psd1_filename = Resolve-Path ( Join-Path (Split-Path  $MyInvocation.MyCommand.Path) $psdfilename )
+$dst_psd1_filename = Resolve-Path ( Join-Path $binpath $psdfilename )
+
+
+$src_psd1_filename
+$dst_psd1_filename
+
+$psd1_src = Get-Content $src_psd1_filename | Out-String
+$psd1_dst = Get-Content $dst_psd1_filename | Out-String
+
+
+if ( $psd1_src -ne $psd1_dst )
+{
+    Write-Error "PSD1 files are not the same. Rebuild the project"
+    break
+}
+
+
+$psd1_src = Get-Content $src_psd1_filename 
+for ($i=0; $i -lt $psd1_src.Length ; $i++)
+{
+    $src_line = $psd1_src[$i]
+    if ($src_line.Trim().StartsWith("ModuleVersion"))
+    {
+        $tokens = $src_line -split "="
+        if ($tokens.Length -ne 2)
+        {
+            Write-Error "Unexpected number of tokens"
+        }
+
+        $tokens2 = $tokens[1].Replace("'","").Trim().Split(".")
+        if ($tokens2.Length -ne 3)
+        {
+            Write-Error "Unexpected number of tokens"
+        }
+
+        $lastnum = [int]$tokens2[2]
+        $new_lastnum = $lastnum + 1
+
+        $first_num = $tokens2[0]
+        $second_num = $tokens2[1]
+
+        $Version = "$first_num.$second_num.$new_lastnum"
+        $new_line = "ModuleVersion = '$Version'" 
+        Write-Host $new_line
+        $psd1_src[$i] = $new_line
+    }
+}
+
+if ($Version -eq "UNKNOWN")
+{
+    Write-Error "Version was never set"
+}
+
+Write-Host $Version
+
+Set-Content $src_psd1_filename $psd1_src
+Set-Content $dst_psd1_filename $psd1_src
+
+
+# ------------------------------------------
 
 # ----------------------------------------
 # Calculate various paths, names, etc baed on user input
@@ -64,65 +130,6 @@ if (test-path $licensertf)
 "@
 
 }
-
-# MOD version number
-$psdfilename = "Visio.psd1"
-$src_psd1_filename = Resolve-Path ( Join-Path (Split-Path  $MyInvocation.MyCommand.Path) $psdfilename )
-$dst_psd1_filename = Resolve-Path ( Join-Path $binpath $psdfilename )
-
-
-Write-Host 
-
-$src_psd1_filename
-$dst_psd1_filename
-
-$psd1_src = Get-Content $src_psd1_filename | Out-String
-$psd1_dst = Get-Content $dst_psd1_filename | Out-String
-
-Write-Host $psd1_src.CompareTo($psd1_dst)
-
-if ( $psd1_src -ne $psd1_dst )
-{
-    Write-Error "PSD1 files are not the same. Rebuild the project"
-    break
-}
-
-
-$psd1_src = Get-Content $src_psd1_filename 
-for ($i=0; $i -lt $psd1_src.Length ; $i++)
-{
-    $src_line = $psd1_src[$i]
-    if ($src_line.Trim().StartsWith("ModuleVersion"))
-    {
-        $tokens = $src_line -split "="
-        if ($tokens.Length -ne 2)
-        {
-            Write-Error "Unexpected number of tokens"
-        }
-
-        $tokens2 = $tokens[1].Replace("'","").Trim().Split(".")
-        if ($tokens2.Length -ne 3)
-        {
-            Write-Error "Unexpected number of tokens"
-        }
-
-        $lastnum = [int]$tokens2[2]
-        $new_lastnum = $lastnum + 1
-
-        $first_num = $tokens2[0]
-        $second_num = $tokens2[1]
-
-        $new_line = "ModuleVersion = '$first_num.$second_num.$new_lastnum'" 
-        Write-Host $new_line
-        $psd1_src[$i] = $new_line
-    }
-}
-
-
-Write-Host $psd1_src
-
-Set-Content $src_psd1_filename $psd1_src
-Set-Content $dst_psd1_filename $psd1_src
 
 
 # ----------------------------------------
