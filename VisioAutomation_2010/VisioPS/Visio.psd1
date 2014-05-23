@@ -1,4 +1,4 @@
-# Module manifest for module 'VisioPS'
+﻿# Module manifest for module 'Visio PowerShell Module (VisioPS)'
 #
 # HISTORY
 # -------
@@ -15,7 +15,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '1.2.8'
+ModuleVersion = '1.2.31'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
@@ -30,10 +30,10 @@ CompanyName = ''
 Copyright = '(c) 2014 Saveen Reddy'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'Automate Microsoft Visio 2010 or Visio 2013'
 
 # Minimum version of the Windows PowerShell engine required by this module
-# PowerShellVersion = '2.0'
+PowerShellVersion = '2.0'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''

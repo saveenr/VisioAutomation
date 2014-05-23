@@ -1,4 +1,4 @@
-param([string]$Version="UNKNOWN")
+param()
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
@@ -9,98 +9,111 @@ $ErrorActionPreference = "Stop"
 $productname = "Visio Powershell Module"
 $module_foldername = "Visio"
 $productshortname = "VisioPS"
+$psdfilename = "Visio.psd1"
 $manufacturer = "Saveen Reddy"
 $helplink = "http://visioautomation.codeplex.com"
 $aboutlink = "http://visioautomation.codeplex.com"
-$binpath = (join-path ( Split-Path  $MyInvocation.MyCommand.Path) "bin\Debug")
-$binpath = resolve-path $binpath
 $upgradecode = "EE659AB6-BE76-426E-B971-35DF3907F9D4"
-$output_msi_path = join-path ([Environment]::GetFolderPath("MyDocuments")) ($productname + " Distribution")
-$KeepTempFolderOnExit = $false
-
-#------------------------
-
-# MOD version number
-$psdfilename = "Visio.psd1"
-$src_psd1_filename = Resolve-Path ( Join-Path (Split-Path  $MyInvocation.MyCommand.Path) $psdfilename )
-$dst_psd1_filename = Resolve-Path ( Join-Path $binpath $psdfilename )
-
-
-$src_psd1_filename
-$dst_psd1_filename
-
-$psd1_src = Get-Content $src_psd1_filename | Out-String
-$psd1_dst = Get-Content $dst_psd1_filename | Out-String
-
-
-if ( $psd1_src -ne $psd1_dst )
-{
-    Write-Error "PSD1 files are not the same. Rebuild the project"
-    break
-}
-
-
-$psd1_src = Get-Content $src_psd1_filename 
-for ($i=0; $i -lt $psd1_src.Length ; $i++)
-{
-    $src_line = $psd1_src[$i]
-    if ($src_line.Trim().StartsWith("ModuleVersion"))
-    {
-        $tokens = $src_line -split "="
-        if ($tokens.Length -ne 2)
-        {
-            Write-Error "Unexpected number of tokens"
-        }
-
-        $tokens2 = $tokens[1].Replace("'","").Trim().Split(".")
-        if ($tokens2.Length -ne 3)
-        {
-            Write-Error "Unexpected number of tokens"
-        }
-
-        $lastnum = [int]$tokens2[2]
-        $new_lastnum = $lastnum + 1
-
-        $first_num = $tokens2[0]
-        $second_num = $tokens2[1]
-
-        $Version = "$first_num.$second_num.$new_lastnum"
-        $new_line = "ModuleVersion = '$Version'" 
-        Write-Host $new_line
-        $psd1_src[$i] = $new_line
-    }
-}
-
-if ($Version -eq "UNKNOWN")
-{
-    Write-Error "Version was never set"
-}
-
-Write-Host $Version
-
-Set-Content $src_psd1_filename $psd1_src
-Set-Content $dst_psd1_filename $psd1_src
-
-
-# ------------------------------------------
 
 # ----------------------------------------
-# Calculate various paths, names, etc baed on user input
-# 
+
+$mydocs = [Environment]::GetFolderPath("MyDocuments")
+$scriptpath = Split-Path  $MyInvocation.MyCommand.Path
+$binpath = Resolve-Path ( Join-Path $scriptpath "bin\Debug" )
+$output_msi_path = join-path $mydocs ($productname + " Distribution")
+$KeepTempFolderOnExit = $false
+$Version = "UNKNOWN"
+
+# ----------------------------------------
+
+
+function text_files_are_the_same( $left, $right )
+{
+    $left_text = Get-Content $left | Out-String
+    $right_text = Get-Content $right | Out-String
+    ($left_text -eq $right_text)
+}
+
+function update_version_number($Version)
+{
+
+    $src_psd1_filename = Resolve-Path ( Join-Path $scriptpath $psdfilename )
+    $dst_psd1_filename = Resolve-Path ( Join-Path $binpath $psdfilename )
+
+    if (!(text_files_are_the_same $src_psd1_filename $dst_psd1_filename))
+    {
+        Write-Error "PSD1 files are not the same. Rebuild the project"
+        break
+    }
+
+
+    $psd1_src = Get-Content $src_psd1_filename 
+    for ($i=0; $i -lt $psd1_src.Length ; $i++)
+    {
+        $src_line = $psd1_src[$i]
+        if ($src_line.Trim().StartsWith("ModuleVersion"))
+        {
+            $tokens = $src_line -split "="
+            if ($tokens.Length -ne 2)
+            {
+                Write-Error "Unexpected number of tokens"
+            }
+
+            $old_version = $tokens[1].Replace("'","").Trim()
+
+            Write-Host Old Version: $old_version
+            $tokens2 = $old_version.Split(".")
+            if ($tokens2.Length -ne 3)
+            {
+                Write-Error "Unexpected number of tokens"
+            }
+
+            $lastnum = [int]$tokens2[2]
+            $new_lastnum = $lastnum + 1
+
+            $first_num = $tokens2[0]
+            $second_num = $tokens2[1]
+
+            $Version = "$first_num.$second_num.$new_lastnum"
+            $new_line = "ModuleVersion = '$Version'" 
+            $psd1_src[$i] = $new_line
+        }
+    }
+
+    if ($Version -eq "UNKNOWN")
+    {
+        Write-Error "Version was never set"
+    }
+
+    Write-Host New Version: $Version
+
+    Set-Content $src_psd1_filename $psd1_src
+    Set-Content $dst_psd1_filename $psd1_src
+
+    $Version
+}
+
+
+
+Write-Host "----------------------------------------"
+Write-Host CREATING updated version number
+
+$Version = update_version_number
+
+Write-Host "----------------------------------------"
+Write-Host Calculating paths, etc.
+
 $baseversion = $Version
-$productversion = $baseversion + "." + (Get-Date -format yyyyMMdd)
+$productversion = $baseversion + ".0"
 $msibasename = $productshortname + "_" + $baseversion
 $output_msi_file = join-path $output_msi_path ($msibasename + ".msi")
 $temp_folder = join-path ([Environment]::GetFolderPath("MyDocuments")) ($productshortname  +"_" + (Get-Date -format yyyy_MM_dd))
 $cabfilename = $productshortname + ".cab"
 $scriptfilename = $MyInvocation.MyCommand.Path
-$scriptpath = Split-Path $scriptfilename
 $modules_wxs = join-path $temp_folder ( $productshortname + "_modules.wxs" )
 $product_wxs = join-path $temp_folder ( $productshortname + ".wxs" )
 $varname = "var." + $productshortname
-$wixbin = join-path $scriptpath "../../Build/wix36-binaries"
-Write-Host $wixbin
-$wixbin = resolve-path $wixbin
+$wixbin = resolve-path ( join-path $scriptpath "../../Build/wix36-binaries" )
 $heatexe = join-path $wixbin "heat.exe"
 $candleexe = join-path $wixbin "candle.exe"
 $lightexe = join-path $wixbin "light.exe"
@@ -113,12 +126,10 @@ $licensecmd = ""
 
 if (test-path $output_msi_path )
 {
-	Write-Verbose "Output Path Exists"
 }
 else
 {
 	Write-Verbose "Output Path Does not exists. Creating"
-	Write-Host $output_msi_path
 	New-Item -Path $output_msi_path -ItemType Directory | Out-Null
 }
 
@@ -132,13 +143,18 @@ if (test-path $licensertf)
 }
 
 
-# ----------------------------------------
-# CREATE THE TEMP FOLDER
+Write-Host "----------------------------------------"
+Write-Host CREATING Temp folder
+
 if (test-path $temp_folder)
 {
     # if it already exists, remote it for safety
     Remove-Item $temp_folder -Recurse
 }
+
+Write-Host "----------------------------------------"
+Write-Host CREATING buildinfo.txt
+
 New-Item $temp_folder -ItemType directory | Out-Null
 
 $build_file = join-path $binpath "buildinfo.txt"
@@ -147,11 +163,11 @@ $build_file_content = "Installer Built on: " + (get-date)
 
 Set-Content -Value $build_file_content  -Path $build_file
 
-# ----------------------------------------
-# DYNAMICALLY BUILD THE WXS FILE FOR THE MODULES
+
+Write-Host "----------------------------------------"
+Write-Host "Creating MSI file"
 
 # ----------------------------------------
-# DYNAMICALLY BUILD THE WXS FILE FOR THE MODULES
 # - The ProductID is set to zero* because it should be regenerated each time
 
 $modules_xml = @"
@@ -252,8 +268,8 @@ remove-item $product_wixobj
 remove-item $productpdb
 
 
-#
-# Now create the ZIP file
+Write-Host "----------------------------------------"
+Write-Host "Creating ZIP file"
 
 
 $asm = [Reflection.Assembly]::LoadWithPartialName( "System.IO.Compression.FileSystem" )
@@ -268,5 +284,7 @@ $compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal
 $includebasedir = $false
 [System.IO.Compression.ZipFile]::CreateFromDirectory($binpath ,$zipfile ,$compressionLevel, $includebasedir )
 
+Write-Host "----------------------------------------"
 Write-Host "Script Finished"
-Write-Host MSI and ZIP file stored at: $output_msi_path
+Write-Host
+Write-Host Files at: $output_msi_path
