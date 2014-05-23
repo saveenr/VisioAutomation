@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TextUtil.cs" />
     <Compile Include="Drawing\Margin.cs" />
     <Compile Include="Models\Charting\BarChart.cs" />
     <Compile Include="Models\Charting\AreaChart.cs" />

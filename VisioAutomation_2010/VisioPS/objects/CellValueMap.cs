@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace VisioPS
 {
@@ -102,11 +103,7 @@ namespace VisioPS
             if (cellname.Contains("*") || cellname.Contains("?"))
             {
                 this.CheckCellNameWildcard(cellname);
-                string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
-                    .Replace(@"\*", ".*").
-                    Replace(@"\?", ".") + "$";
-
-                var regex = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(cellname,true);
 
                 foreach (string k in this.CellNames)
                 {
