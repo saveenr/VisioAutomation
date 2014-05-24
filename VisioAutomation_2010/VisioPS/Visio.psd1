@@ -16,7 +16,7 @@
 ModuleToProcess = 'VisioPS.dll' # Use ModuleToProcess instead of RootModule because it works for both PowerShell 2.0 and 3.0
 
 # Version number of this module.
-ModuleVersion = '1.2.35'
+ModuleVersion = '1.2.36'
 
 # ID used to uniquely identify this module
 GUID = 'd2d6f65b-2eee-4397-98ee-94ff7930051c'
