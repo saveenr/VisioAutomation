@@ -33,68 +33,6 @@ $Version = "UNKNOWN"
 
 # ----------------------------------------
 
-function Update-Version($old_version, $index)
-{
-    $tokens2 = $old_version.Split(".")
-
-    $lastnum = [int]$tokens2[$index]
-    $new_lastnum = $lastnum + 1
-
-    $first_num = $tokens2[0]
-    $second_num = $tokens2[1]
-
-    $new_version = "$first_num.$second_num.$new_lastnum"
-    $new_version
-}
-
-
-function Update-PSD1Version($Version)
-{
-
-    $src_psd1_filename = JoinResolve-Path $scriptpath $psdfilename
-    $dst_psd1_filename = JoinResolve-Path $binpath $psdfilename
-
-    if (!( Test-TextFilesAreEqual $src_psd1_filename $dst_psd1_filename))
-    {
-        Write-Error "PSD1 files are not the same. Rebuild the project"
-        break
-    }
-
-
-    $psd1_src = Get-Content $src_psd1_filename 
-    for ($i=0; $i -lt $psd1_src.Length ; $i++)
-    {
-        $src_line = $psd1_src[$i]
-        if ($src_line.Trim().StartsWith("ModuleVersion"))
-        {
-            Write-Host $src_line
-            $tokens = $src_line -split "="
-            if ($tokens.Length -ne 2)
-            {
-                Write-Error "Unexpected number of tokens"
-            }
-
-            $old_version = $tokens[1].Replace("'","").Trim()
-            Write-Host Old Version: $old_version
-            $Version = Update-Version $old_version 2
-            $new_line = "ModuleVersion = '$Version'" 
-            $psd1_src[$i] = $new_line
-        }
-    }
-
-    if ($Version -eq "UNKNOWN")
-    {
-        Write-Error "Version was never set"
-    }
-
-    Write-Host New Version: $Version
-
-    Set-Content $src_psd1_filename $psd1_src
-    Set-Content $dst_psd1_filename $psd1_src
-
-    $Version
-}
-
 
 
 Write-Host "----------------------------------------"
@@ -115,25 +53,21 @@ $scriptfilename = $MyInvocation.MyCommand.Path
 $modules_wxs = join-path $temp_folder ( $productshortname + "_modules.wxs" )
 $product_wxs = join-path $temp_folder ( $productshortname + ".wxs" )
 $varname = "var." + $productshortname
-$wixbin = resolve-path ( join-path $scriptpath "../../Build/wix36-binaries" )
-$heatexe = join-path $wixbin "heat.exe"
-$candleexe = join-path $wixbin "candle.exe"
-$lightexe = join-path $wixbin "light.exe"
+$wixbin = JoinResolve-path $scriptpath "../../Build/wix36-binaries"
+$heatexe = JoinResolve-path $wixbin "heat.exe"
+$candleexe = JoinResolve-path $wixbin "candle.exe"
+$lightexe = JoinResolve-path $wixbin "light.exe"
 $modules_wixobj = join-path $scriptpath ( $productshortname  + "_modules.wixobj" )
 $product_wixobj = join-path $scriptpath ( $productshortname + ".wixobj")
 $directoryid = $productshortname
 $productpdb = join-path (Split-path $output_msi_file) ($msibasename  +".wixpdb")
 $licensertf = join-path $binpath "license.rtf"
 $licensecmd = ""
+$build_file = join-path $binpath "buildinfo.txt"
+$build_file_content = "Installer Built on: " + (get-date)
+$zipfile = join-path $output_msi_path ($msibasename + ".zip")
 
-if (test-path $output_msi_path )
-{
-}
-else
-{
-	Write-Verbose "Output Path Does not exists. Creating"
-	New-Item -Path $output_msi_path -ItemType Directory | Out-Null
-}
+
 
 
 if (test-path $licensertf)
@@ -146,22 +80,14 @@ if (test-path $licensertf)
 
 
 Write-Host "----------------------------------------"
-Write-Host CREATING Temp folder
+Write-Host CREATING Folders
 
-if (test-path $temp_folder)
-{
-    # if it already exists, remote it for safety
-    Remove-Item $temp_folder -Recurse
-}
+Remove-FolderIfExists $temp_folder "Temp Folder"
+New-Folder $temp_folder
+New-Folder $output_msi_path
 
 Write-Host "----------------------------------------"
 Write-Host CREATING buildinfo.txt
-
-New-Item $temp_folder -ItemType directory | Out-Null
-
-$build_file = join-path $binpath "buildinfo.txt"
-
-$build_file_content = "Installer Built on: " + (get-date)
 
 Set-Content -Value $build_file_content  -Path $build_file
 
@@ -258,33 +184,19 @@ $modules_xml.Save( $modules_wxs )
 # CLEANUP 
 if (!$KeepTempFolderOnExit)
 {
-    if (test-path $temp_folder)
-    {
-        Remove-Item $temp_folder -Recurse
-    }
+    Remove-FolderIfExists $temp_folder -Description "temp folder"
 }
 
 # These have to be manually removed because they don't go into the temp folder by default
-remove-item $modules_wixobj 
-remove-item $product_wixobj
-remove-item $productpdb
+Remove-FileIfExists $modules_wixobj "Temp installer file"
+Remove-FileIfExists $product_wixobj "Temp installer file"
+Remove-FileIfExists $productpdb "Temp installer file"
 
 
 Write-Host "----------------------------------------"
 Write-Host "Creating ZIP file"
 
-
-$asm = [Reflection.Assembly]::LoadWithPartialName( "System.IO.Compression.FileSystem" )
-$zipfile = join-path $output_msi_path ($msibasename + ".zip")
-
-if (test-path $zipfile)
-{
-	remove-item $zipfile
-}
-
-$compressionLevel = [System.IO.Compression.CompressionLevel]::Optimal
-$includebasedir = $false
-[System.IO.Compression.ZipFile]::CreateFromDirectory($binpath ,$zipfile ,$compressionLevel, $includebasedir )
+Export-ZIPFolder -InputFolder $binpath -OutputFile $zipfile -IncludeBaseDir $false
 
 Write-Host "----------------------------------------"
 Write-Host "Script Finished"

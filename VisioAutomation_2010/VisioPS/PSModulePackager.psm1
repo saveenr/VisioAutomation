@@ -34,6 +34,25 @@ function Test-TextFilesAreEqual( $left, $right )
     ($left_text -eq $right_text)
 }
 
+function New-Folder
+{
+	param
+	(
+		[parameter(Mandatory=$true)] [string] $Folder
+	)
+	process
+	{
+        if (test-path $Folder )
+        {
+        }
+        else
+        {
+	        New-Item -Path $Folder -ItemType Directory | Out-Null
+        }
+
+	}
+}
+
 function Remove-FolderIfExists
 {
 	param
@@ -67,6 +86,7 @@ function Remove-FileIfExists
 		}
 	}
 }
+
 
 function Copy-CodeFolder
 {
@@ -466,5 +486,67 @@ function Install-PSModuleFromFolder
         &robocopy $Folder $output_folder /MIR /A-:R /XF *.pdb /XF *.ignore 
 
     }
+}
+
+function Update-Version($old_version, $index)
+{
+    $tokens2 = $old_version.Split(".")
+
+    $lastnum = [int]$tokens2[$index]
+    $new_lastnum = $lastnum + 1
+
+    $first_num = $tokens2[0]
+    $second_num = $tokens2[1]
+
+    $new_version = "$first_num.$second_num.$new_lastnum"
+    $new_version
+}
+
+
+function Update-PSD1Version($Version)
+{
+
+    $src_psd1_filename = JoinResolve-Path $scriptpath $psdfilename
+    $dst_psd1_filename = JoinResolve-Path $binpath $psdfilename
+
+    if (!( Test-TextFilesAreEqual $src_psd1_filename $dst_psd1_filename))
+    {
+        Write-Error "PSD1 files are not the same. Rebuild the project"
+        break
+    }
+
+
+    $psd1_src = Get-Content $src_psd1_filename 
+    for ($i=0; $i -lt $psd1_src.Length ; $i++)
+    {
+        $src_line = $psd1_src[$i]
+        if ($src_line.Trim().StartsWith("ModuleVersion"))
+        {
+            Write-Host $src_line
+            $tokens = $src_line -split "="
+            if ($tokens.Length -ne 2)
+            {
+                Write-Error "Unexpected number of tokens"
+            }
+
+            $old_version = $tokens[1].Replace("'","").Trim()
+            Write-Host Old Version: $old_version
+            $Version = Update-Version $old_version 2
+            $new_line = "ModuleVersion = '$Version'" 
+            $psd1_src[$i] = $new_line
+        }
+    }
+
+    if ($Version -eq "UNKNOWN")
+    {
+        Write-Error "Version was never set"
+    }
+
+    Write-Host New Version: $Version
+
+    Set-Content $src_psd1_filename $psd1_src
+    Set-Content $dst_psd1_filename $psd1_src
+
+    $Version
 }
 
