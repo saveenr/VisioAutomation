@@ -121,7 +121,7 @@ function Copy-CodeFolder
 
 function AssertPathExists( $p )
 {
-    Write-Host "Checking path exists" $p
+    Write-Verbose "Checking path exists $p"
     if (Test-Path $p)
     {
     }
@@ -134,13 +134,13 @@ function AssertPathExists( $p )
 
 function AssertFileExists( $p )
 {
-    Write-Host "Checking file exists" $p
+    Write-Verbose "Checking file exists $p"
     if (Test-Path $p)
     {
     }
     else
     {
-        Write-Host "ERROR: File does not exist"
+        Write-Error "ERROR: File does not exist"
         Break    
     }
 }
@@ -177,22 +177,23 @@ function Export-PowerShellModuleInstaller
         [parameter(Mandatory=$true)] [string] $ProductNameShort,
         [parameter(Mandatory=$true)] [string] $ProductVersion,
         [parameter(Mandatory=$true)] [string] $Manufacturer,
+        [parameter(Mandatory=$true)] [string] $ModuleFolderName,
         [parameter(Mandatory=$true)]
 		[AllowEmptyString()]
 		[string] $ProgramFilesSubFolder,
         [parameter(Mandatory=$true)] [string] $HelpLink,
         [parameter(Mandatory=$true)] [string] $AboutLink,
-        [parameter(Mandatory=$true)] [string] $ProductID,
         [parameter(Mandatory=$true)] [string] $UpgradeCode,
-        [parameter(Mandatory=$true)] [string] $UpgradeID,	
         [parameter(Mandatory=$true)] 
 		[ValidateSet("Default","ProgramFiles","PowerShellUserModule")] 
-		[string] $InstallType,
+		[string] $InstallLocationType,
         [parameter(Mandatory=$false)] [bool] $KeepTemporaryFolder
 		
     )
     PROCESS 
     {
+        $ProductID = "*" # so it regenerate devery time
+        $UpgradeID = $UpgradeCode # so it regenerate devery time
         # ----------------------------------------
         # VERIFY USER INPUT
         Write-Host 
@@ -304,7 +305,7 @@ $powershell_user_module_installdir = @"
 <Directory Id="PersonalFolder" Name="PersonalFolder">
     <Directory Id="WindowsPowerShell" Name="WindowsPowerShell">
         <Directory Id="INSTALLDIR" Name="Modules">
-            <Directory Id="#productshortname" Name="#productshortname">
+            <Directory Id="#productshortname" Name="#modulefoldername">
             </Directory>
         </Directory>
     </Directory>
@@ -322,11 +323,11 @@ $program_files_installdir =@"
 "@
 
 		#this has to be done first
-		if ($InstallType -eq "PowerShellUserModule")
+		if ($InstallLocationType -eq "PowerShellUserModule")
 		{
 			$modules_xml = $modules_xml -replace "#installdir", $powershell_user_module_installdir
 		}
-		elseif( ($InstallType -eq "Default") -or ($InstallType -eq "ProgramFiles"))
+		elseif( ($InstallLocationType -eq "Default") -or ($InstallLocationType -eq "ProgramFiles"))
 		{
 			if ( ($ProgramFilesSubFolder -eq $null) -or ($ProgramFilesSubFolder -eq ""))
 			{
@@ -355,6 +356,7 @@ $program_files_installdir =@"
 	    $modules_xml = $modules_xml -replace "#aboutlink", $AboutLink
 	    $modules_xml = $modules_xml -replace "#licensecmd", $licensecmd
 		$modules_xml = $modules_xml -replace "#progfilessubfolder", $ProgramFilesSubFolder
+		$modules_xml = $modules_xml -replace "#modulefoldername", $ModuleFolderName
 
 	    $modules_xml = [xml] $modules_xml
 	    $modules_xml.Save( $modules_wxs )
@@ -397,6 +399,12 @@ $program_files_installdir =@"
         Remove-FileIfExists -Filename $modules_wixobj -Description "module wixobj" 
         Remove-FileIfExists -Filename  $product_wixobj -Description "product wixobj"
         Remove-FileIfExists -Filename $productpdb -Description "product pdb"
+
+        Write-Host "----------------------------------------"
+        Write-Host "Creating ZIP file"
+        $zipfile = join-path $output_msi_path ($msibasename + ".zip")
+        Export-ZIPFolder -InputFolder $binpath -OutputFile $zipfile -IncludeBaseDir $false
+
 
         # ----------------------------------------
         # FINAL MESSAGE
