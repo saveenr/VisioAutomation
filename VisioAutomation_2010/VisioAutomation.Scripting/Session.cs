@@ -172,7 +172,7 @@ namespace VisioAutomation.Scripting
                 //  verify there is an active page
                 if (app.ActivePage == null)
                 {
-                    this.WriteVerbose("HasActiveDocumentg: No Active Page");
+                    this.WriteVerbose("HasActiveDocument: No Active Page");
                     return false;
                 }
 
