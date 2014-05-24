@@ -15,6 +15,18 @@
 Set-StrictMode -Version 2 
 $ErrorActionPreference = "Stop"
 
+function Get-MyDocsPath()
+{
+    [Environment]::GetFolderPath("MyDocuments")
+}
+
+function JoinResolve-Path($a, $b)
+{
+    $p = Join-Path $a $b
+    Write-Host $p
+    Resolve-Path $p
+}
+
 function Test-TextFilesAreEqual( $left, $right )
 {
     $left_text = Get-Content $left | Out-String

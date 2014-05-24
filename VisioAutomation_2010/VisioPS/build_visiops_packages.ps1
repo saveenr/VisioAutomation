@@ -2,7 +2,7 @@ param()
 
 Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
-
+cls
 
 # ----------------------------------------
 # The Most Common User Input settings
@@ -17,29 +17,42 @@ $aboutlink = "http://visioautomation.codeplex.com"
 $upgradecode = "EE659AB6-BE76-426E-B971-35DF3907F9D4"
 
 # ----------------------------------------
-
-$mydocs = [Environment]::GetFolderPath("MyDocuments")
+Write-Host "Loading Module Packager"
 $scriptpath = Split-Path  $MyInvocation.MyCommand.Path
+$module_packager = Resolve-Path ( Join-Path $scriptpath "PSModulePackager.psm1" )
+
+Import-Module $module_packager
+
+# ----------------------------------------
+
+$mydocs = Get-MyDocsPath
 $binpath = Resolve-Path ( Join-Path $scriptpath "bin\Debug" )
 $output_msi_path = join-path $mydocs ($productname + " Distribution")
 $KeepTempFolderOnExit = $false
 $Version = "UNKNOWN"
 
 # ----------------------------------------
-Write-Host "Loading Module Packager"
 
-$module_packager = Resolve-Path (Join-Path $scriptpath "PSModulePackager.psm1")
+function Update-Version($old_version, $index)
+{
+    $tokens2 = $old_version.Split(".")
 
-Import-Module .\PSModulePackager.psm1
+    $lastnum = [int]$tokens2[$index]
+    $new_lastnum = $lastnum + 1
 
-# ----------------------------------------
+    $first_num = $tokens2[0]
+    $second_num = $tokens2[1]
+
+    $new_version = "$first_num.$second_num.$new_lastnum"
+    $new_version
+}
 
 
-function update_version_number($Version)
+function Update-PSD1Version($Version)
 {
 
-    $src_psd1_filename = Resolve-Path ( Join-Path $scriptpath $psdfilename )
-    $dst_psd1_filename = Resolve-Path ( Join-Path $binpath $psdfilename )
+    $src_psd1_filename = JoinResolve-Path $scriptpath $psdfilename
+    $dst_psd1_filename = JoinResolve-Path $binpath $psdfilename
 
     if (!( Test-TextFilesAreEqual $src_psd1_filename $dst_psd1_filename))
     {
@@ -54,6 +67,7 @@ function update_version_number($Version)
         $src_line = $psd1_src[$i]
         if ($src_line.Trim().StartsWith("ModuleVersion"))
         {
+            Write-Host $src_line
             $tokens = $src_line -split "="
             if ($tokens.Length -ne 2)
             {
@@ -61,21 +75,8 @@ function update_version_number($Version)
             }
 
             $old_version = $tokens[1].Replace("'","").Trim()
-
             Write-Host Old Version: $old_version
-            $tokens2 = $old_version.Split(".")
-            if ($tokens2.Length -ne 3)
-            {
-                Write-Error "Unexpected number of tokens"
-            }
-
-            $lastnum = [int]$tokens2[2]
-            $new_lastnum = $lastnum + 1
-
-            $first_num = $tokens2[0]
-            $second_num = $tokens2[1]
-
-            $Version = "$first_num.$second_num.$new_lastnum"
+            $Version = Update-Version $old_version 2
             $new_line = "ModuleVersion = '$Version'" 
             $psd1_src[$i] = $new_line
         }
@@ -99,7 +100,7 @@ function update_version_number($Version)
 Write-Host "----------------------------------------"
 Write-Host CREATING updated version number
 
-$Version = update_version_number
+$Version = Update-PSD1Version
 
 Write-Host "----------------------------------------"
 Write-Host Calculating paths, etc.
