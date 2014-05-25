@@ -7,10 +7,10 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioPage")]
     public class Get_VisioPage : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(ParameterSetName="named",Position=0, Mandatory = false)]
+        [SMA.Parameter(Position=0, Mandatory = false)]
         public string Name=null;
 
-        [SMA.Parameter(ParameterSetName = "active", Mandatory = true)] public SMA.SwitchParameter ActivePage;
+        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter ActivePage;
 
         protected override void ProcessRecord()
         {
@@ -36,8 +36,12 @@ namespace VisioPS.Commands
                 // return the named page
                 var active_document = application.ActiveDocument;
                 var pages = active_document.Pages;
-                var page = pages[Name];
-                this.WriteObject(page);
+
+                this.Name = this.Name.Trim();
+
+                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(this.Name, true);
+                var pages2 = pages.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
+                this.WriteObject(pages2, true);
             }
         }
     }

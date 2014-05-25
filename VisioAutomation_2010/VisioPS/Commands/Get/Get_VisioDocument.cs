@@ -38,10 +38,10 @@ namespace VisioPS.Commands
                 var documents = application.Documents;
 
                 this.Name = this.Name.Trim();
-                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(this.Name, true);
 
+                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(this.Name, true);
                 var docs2 = documents.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
-                this.WriteObject(docs2,false);
+                this.WriteObject(docs2,true);
             }
         }
     }

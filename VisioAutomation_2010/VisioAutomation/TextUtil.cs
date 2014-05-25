@@ -23,5 +23,10 @@ namespace VisioAutomation
                 return regex;
             }
         }
+
+        public static bool ContainWildcard(string s)
+        {
+            return (s.Contains("*") || s.Contains("?"));
+        }
     }
 }
