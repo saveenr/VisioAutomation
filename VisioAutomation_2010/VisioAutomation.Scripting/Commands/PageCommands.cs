@@ -536,8 +536,26 @@ namespace VisioAutomation.Scripting.Commands
                 }
                 return shapes_list;
             }
-
         }
 
+        public IList<IVisio.Page> GetPagesByName(string Name)
+        {
+            var active_document = this.Session.VisioApplication.ActiveDocument;
+            if (Name == null || Name == "*")
+            {
+                // return all pages
+                var pages = active_document.Pages.AsEnumerable().ToList();
+                return pages;
+            }
+            else
+            {
+                // return the named page
+                var pages = active_document.Pages;
+
+                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(Name, true);
+                var pages2 = pages.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
+                return pages2;
+            }
+        }
     }
 }

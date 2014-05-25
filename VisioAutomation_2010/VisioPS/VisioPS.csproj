@@ -86,8 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
-    <Compile Include="Commands\Get\ConnectionPointValues.cs" />
-    <Compile Include="Commands\Get\CustomPropertyValues.cs" />
+    <Compile Include="objects\UserDefinedCellvalues.cs" />
+    <Compile Include="objects\ConnectionPointValues.cs" />
+    <Compile Include="objects\CustomPropertyValues.cs" />
     <Compile Include="Commands\Out\Out_Visio.cs" />
     <Compile Include="objects\DirectedEdge.cs" />
     <Compile Include="objects\CellMap.cs" />

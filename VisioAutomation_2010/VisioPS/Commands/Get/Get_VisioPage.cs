@@ -24,25 +24,8 @@ namespace VisioPS.Commands
                 return;
             }
 
-            if (Name == null || Name=="*" )
-            {
-                // return all pages
-                var active_document = application.ActiveDocument;
-                var pages = active_document.Pages.AsEnumerable().ToList();
-                this.WriteObject(pages,false);
-            }
-            else
-            {
-                // return the named page
-                var active_document = application.ActiveDocument;
-                var pages = active_document.Pages;
-
-                this.Name = this.Name.Trim();
-
-                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(this.Name, true);
-                var pages2 = pages.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
-                this.WriteObject(pages2, true);
-            }
+            var pages = scriptingsession.Page.GetPagesByName(this.Name);
+            this.WriteObject(pages, true);
         }
     }
 }

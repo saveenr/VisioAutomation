@@ -29,7 +29,7 @@ namespace VisioPS.Commands
                 int shapeid = kv.Key.ID;
                 foreach (var udc in kv.Value)
                 {
-                    var rec = new UserDefinedCellRecord();
+                    var rec = new UserDefinedCellvalues();
                     rec.ShapeID = shapeid;
                     rec.Name = udc.Name;
                     rec.Value = udc.Value.Formula.Value;
@@ -38,13 +38,5 @@ namespace VisioPS.Commands
                 }
             }
         }
-    }
-
-    public class UserDefinedCellRecord
-    {
-        public int ShapeID;
-        public string Name { get; set; }
-        public string Value { get; set; }
-        public string Prompt { get; set; }
     }
 }
