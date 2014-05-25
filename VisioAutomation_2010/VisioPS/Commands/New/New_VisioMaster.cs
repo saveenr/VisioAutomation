@@ -19,5 +19,4 @@ namespace VisioPS.Commands
             this.WriteObject(master);
         }
     }
-
 }
