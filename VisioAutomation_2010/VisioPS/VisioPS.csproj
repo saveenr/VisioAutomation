@@ -102,8 +102,7 @@
     <Compile Include="Commands\Set\Set_VisioShapeCell.cs" />
     <Compile Include="Commands\Remove\Remove_VisioPage.cs" />
     <Compile Include="Commands\Test\Test_VisioApplication.cs" />
-    <Compile Include="Commands\Get\Get_VisioAutomationScriptingSession.cs" />
-    <Compile Include="Commands\Get\Get_VisioAutomationAssembly.cs" />
+    <Compile Include="Commands\Get\Get_VisioSession.cs" />
     <Compile Include="Commands\New\New_VisioNURBS.cs" />
     <Compile Include="Commands\New\New_VisioGridLayout.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />

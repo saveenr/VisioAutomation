@@ -37,6 +37,7 @@ namespace VisioAutomation.Scripting
         {
         }
 
+
         public Session(IVisio.Application app, SessionContext ctx)
         {
             if (ctx == null)
@@ -68,6 +69,20 @@ namespace VisioAutomation.Scripting
             this.Output = new VA.Scripting.Commands.OutputCommands(this);
         }
 
+        public System.Reflection.Assembly GetVisioAutomationAssembly()
+        {
+            var type = typeof(VA.ShapeSheet.SRC);
+            var asm = type.Assembly;
+            return asm;
+        }
+
+        public System.Reflection.Assembly GetVisioAssembly()
+        {
+            var type = typeof(IVisio.Application);
+            var asm = type.Assembly;
+            return asm;
+        }
+        
         public void WriteUser(string fmt, params object[] items)
         {
             string s = String.Format(fmt, items);
