@@ -21,7 +21,6 @@ $wps =  Join-Path $docfolder "WindowsPowerShell"
 $modules =  Join-Path $wps "Modules"
 $visiopsfldr=  Join-Path $modules "VisioPS"
 
-
 Write-Host "---------------------------------" -ForegroundColor Magenta
 Write-Host "Visio PowerShell Module Unit Test" -ForegroundColor Magenta
 Write-Host "---------------------------------" -ForegroundColor Magenta

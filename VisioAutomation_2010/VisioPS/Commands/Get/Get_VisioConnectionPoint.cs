@@ -34,9 +34,10 @@ namespace VisioPS.Commands
 
                 foreach (var point in points)
                 {
-                    var cp = new ConnectionPointFormulas();
+                    var cp = new ConnectionPointValues();
 
                     cp.ShapeID = shapeid;
+
                     cp.Type = point.Type.Formula.Value;
                     cp.X = point.X.Formula.Value;
                     cp.Y = point.Y.Formula.Value;
@@ -47,15 +48,5 @@ namespace VisioPS.Commands
                 }
             }
         }
-    }
-
-    public class ConnectionPointFormulas
-    {
-        public int ShapeID;
-        public string Type;
-        public string X;
-        public string Y;
-        public string DirX;
-        public string DirY;
     }
 }

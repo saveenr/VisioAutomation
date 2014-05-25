@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -206,6 +207,22 @@ namespace VisioAutomation.Scripting.Commands
             var documents = application.Documents;
             var doc = documents[name];
             return doc;
+        }
+
+        public List<IVisio.Document> GetDocumentsByName(string name)
+        {
+            var documents = this.Session.VisioApplication.Documents;
+            if (name == null || name == "*")
+            {
+                // return all pages
+                var docs1 = documents.AsEnumerable().ToList();
+                return docs1;
+            }
+
+            // get the named document
+            var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(name, true);
+            var docs2 = documents.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
+            return docs2;
         }
     }
 }

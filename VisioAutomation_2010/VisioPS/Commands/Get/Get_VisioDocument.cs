@@ -8,6 +8,7 @@ namespace VisioPS.Commands
     public class Get_VisioDocument : VisioPS.VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.ValidateNotNullOrEmpty]
         public string Name = null;
 
         [SMA.Parameter(Mandatory = false)]
@@ -25,24 +26,8 @@ namespace VisioPS.Commands
                 return;
             }
 
-            if (this.Name == null || this.Name == "*")
-            {
-                // return all pages
-                var documents = application.Documents;
-                var docs = documents.AsEnumerable().ToList();
-                this.WriteObject(docs,false);                
-            }
-            else 
-            {
-                // get the named document
-                var documents = application.Documents;
-
-                this.Name = this.Name.Trim();
-
-                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(this.Name, true);
-                var docs2 = documents.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
-                this.WriteObject(docs2,true);
-            }
+            var docs = scriptingsession.Document.GetDocumentsByName(this.Name);
+            this.WriteObject(docs, true);
         }
     }
 }

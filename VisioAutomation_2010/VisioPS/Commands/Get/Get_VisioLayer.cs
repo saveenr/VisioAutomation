@@ -11,7 +11,7 @@ namespace VisioPS.Commands
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
-            if (this.Name==null)
+            if (this.Name!=null || this.Name=="*")
             {
                 var layer = scriptingsession.Layer.Get(this.Name);
                 this.WriteObject(layer);
