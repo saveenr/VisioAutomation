@@ -4,9 +4,9 @@ namespace VisioAutomation
 {
     public static class TextUtil
     {
-        public static System.Text.RegularExpressions.Regex GetRegexForWildcardPattern(string cellname, bool ignorecase)
+        public static System.Text.RegularExpressions.Regex GetRegexForWildcardPattern(string wildcardpat, bool ignorecase)
         {
-            string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
+            string pat = "^" + System.Text.RegularExpressions.Regex.Escape(wildcardpat)
                 .Replace(@"\*", ".*").
                 Replace(@"\?", ".") + "$";
 

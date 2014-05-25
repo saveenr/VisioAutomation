@@ -7,10 +7,10 @@ namespace VisioPS.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDocument")]
     public class Get_VisioDocument : VisioPS.VisioPSCmdlet
     {
-        [SMA.Parameter(ParameterSetName="named",Position = 0, Mandatory = false)]
+        [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name = null;
 
-        [SMA.Parameter(ParameterSetName = "active", Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter ActiveDocument;
 
         protected override void ProcessRecord()
@@ -35,9 +35,13 @@ namespace VisioPS.Commands
             else 
             {
                 // get the named document
-                var docs = application.Documents;
-                var doc = docs[ Name ];
-                this.WriteObject(doc);
+                var documents = application.Documents;
+
+                this.Name = this.Name.Trim();
+                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(this.Name, true);
+
+                var docs2 = documents.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
+                this.WriteObject(docs2,false);
             }
         }
     }
