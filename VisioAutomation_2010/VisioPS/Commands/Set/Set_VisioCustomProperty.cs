@@ -20,30 +20,31 @@ namespace VisioPS.Commands
         public string Label { get; set; }
 
         [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
+        public string Format { get; set; }
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
         public string Prompt { get; set; }
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int LangId { get; set; }
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int LangId = -1;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int SortKey { get; set; }
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int SortKey = -1;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int Type { get; set; }
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int Type = 0;
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
-        public int Verify { get; set; }
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int Ask = -1;
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int Calendar = -1;
+
+        [SMA.Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        public int Invisible = -1;
 
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
-
-        public Set_VisioCustomProperty()
-        {
-            Verify = -1;
-            Type = 0;
-            SortKey = -1;
-            LangId = -1;
-        }
 
         protected override void ProcessRecord()
         {
@@ -60,10 +61,22 @@ namespace VisioPS.Commands
         private void SetFromParameters()
         {
             var cp = new VA.Shapes.CustomProperties.CustomPropertyCells();
+
             cp.Value = this.Value;
+
             if (this.Label != null)
             {
                 cp.Label = this.Label;
+            }
+
+            if (this.Format != null)
+            {
+                cp.Format = this.Format;
+            }
+
+            if (this.Prompt!= null)
+            {
+                cp.Prompt = this.Prompt;
             }
 
             if (this.LangId >= 0)
@@ -71,18 +84,30 @@ namespace VisioPS.Commands
                 cp.LangId = this.LangId;
             }
 
-            if (this.Prompt != null)
-            {
-                cp.Prompt = this.Prompt;
-            }
-
             if (this.SortKey >= 0)
             {
                 cp.SortKey = this.SortKey;
             }
 
-            cp.Type = (int) this.Type;
+            if (this.Type >= 0)
+            {
+                cp.Type = this.Type;
+            }
 
+            if (this.Ask>= 0)
+            {
+                cp.Ask = this.Ask;
+            }
+
+            if (this.Calendar >= 0)
+            {
+                cp.Calendar = this.Calendar;
+            }
+
+            if (this.Invisible >= 0)
+            {
+                cp.Invisible = this.Invisible;
+            }
 
             var scriptingsession = this.ScriptingSession;
             scriptingsession.CustomProp.Set(this.Shapes, this.Name, cp);
