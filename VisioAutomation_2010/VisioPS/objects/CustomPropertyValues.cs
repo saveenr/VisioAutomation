@@ -13,6 +13,7 @@ namespace VisioPS.Commands
         public string SortKey;
         public string Type;
         public string Verify;
+        public string Calendar;
 
         public CustomPropertyValues()
         {           

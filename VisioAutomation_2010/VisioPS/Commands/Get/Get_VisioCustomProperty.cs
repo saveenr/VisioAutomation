@@ -44,6 +44,7 @@ namespace VisioPS.Commands
                     cpf.Prompt =  propcells.Prompt.Formula.Value; 
                     cpf.SortKey =  propcells.SortKey.Formula.Value;
                     cpf.Type = propcells.Type.Formula.Value;
+                    cpf.Calendar = propcells.Calendar.Formula.Value;
 
                     this.WriteObject(cpf);
                 }
