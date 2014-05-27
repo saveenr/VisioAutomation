@@ -507,6 +507,7 @@ namespace VisioAutomation.Scripting.Commands
             var page = this.Session.Page.Get();
             var shapes = page.Shapes;
 
+            
             if (shapenames.Contains("*"))
             {
                 var shapes_list = new List<IVisio.Shape>(shapenames.Length);

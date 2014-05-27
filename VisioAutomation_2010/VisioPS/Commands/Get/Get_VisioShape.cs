@@ -39,7 +39,7 @@ namespace VisioPS.Commands
                     var shapes = scriptingsession.Selection.GetShapesRecursive();
                     this.WriteObject(shapes, false);
                 }
-                if (this.Recursive)
+                if (this.SubSelected)
                 {
                     this.WriteVerboseEx("Returning selected shapes (subselecte)");
                     var shapes = scriptingsession.Selection.GetSubSelectedShapes();
