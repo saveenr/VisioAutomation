@@ -507,36 +507,51 @@ namespace VisioAutomation.Scripting.Commands
             var page = this.Session.Page.Get();
             var shapes = page.Shapes;
 
+            var cached_shapes_list = new List<IVisio.Shape>(shapes.Count);
+            cached_shapes_list.AddRange(shapes.AsEnumerable());
             
             if (shapenames.Contains("*"))
             {
-                var shapes_list = new List<IVisio.Shape>(shapenames.Length);
-                foreach (var shape in shapes.AsEnumerable())
-                {
-                    shapes_list.Add(shape);
-                }
-                return shapes_list;
+                // if any of the shape names contains a simple wildcard then return all the shapes
+                return cached_shapes_list;
             }
-            else
+
+            // otherwise we start checking for each name
+            // NOTE: it is possible to see the same shape multiple times
+            // 
+            var shapes_list = new List<IVisio.Shape>(shapenames.Length);
+
+            foreach (string name in shapenames)
             {
-                var shapes_list = new List<IVisio.Shape>(shapenames.Length);
-                foreach (string name in shapenames)
+                if (name.Contains("?") || name.Contains("*"))
                 {
-                    try
+                    var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(name, true);
+                    shapes_list.AddRange(cached_shapes_list.Where(s => regex.IsMatch(s.Name)));
+                }
+                else
+                {
+                    var shape = this.TryGetShape(shapes, name);
+                    if (shape != null)
                     {
-                        var shape = shapes.ItemU[name];
                         shapes_list.Add(shape);
                     }
-                    catch (System.Runtime.InteropServices.COMException)
-                    {
-                        if (!ignore_bad_names)
-                        {
-                            throw;                            
-                        }
-                    }
                 }
-                return shapes_list;
             }
+            return shapes_list;
+        }
+
+        private IVisio.Shape TryGetShape(IVisio.Shapes shapes, string name)
+        {
+            IVisio.Shape shape = null;
+            try
+            {
+                shape = shapes.ItemU[name];
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+            }
+
+            return shape;
         }
 
         public IList<IVisio.Page> GetPagesByName(string Name)
