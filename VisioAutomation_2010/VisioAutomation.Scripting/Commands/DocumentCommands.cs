@@ -220,7 +220,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // get the named document
-            var docs2 = VA.TextUtil.FilterObjectsByNames(documents.AsEnumerable(), new[] {name}, d => d.Name, VA.TextUtil.FilterAction.Include).ToList();
+            var docs2 = VA.TextUtil.FilterObjectsByNames(documents.AsEnumerable(), new[] {name}, d => d.Name, true, VA.TextUtil.FilterAction.Include).ToList();
             return docs2;
         }
     }
