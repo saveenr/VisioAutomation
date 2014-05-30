@@ -517,26 +517,8 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // otherwise we start checking for each name
-            // NOTE: it is possible to see the same shape multiple times
-            // 
-            var shapes_list = new List<IVisio.Shape>(shapenames.Length);
+            var shapes_list = VA.TextUtil.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, VA.TextUtil.FilterAction.Include).ToList();
 
-            foreach (string name in shapenames)
-            {
-                if (name.Contains("?") || name.Contains("*"))
-                {
-                    var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(name, true);
-                    shapes_list.AddRange(cached_shapes_list.Where(s => regex.IsMatch(s.Name)));
-                }
-                else
-                {
-                    var shape = this.TryGetShape(shapes, name);
-                    if (shape != null)
-                    {
-                        shapes_list.Add(shape);
-                    }
-                }
-            }
             return shapes_list;
         }
 
@@ -566,10 +548,8 @@ namespace VisioAutomation.Scripting.Commands
             else
             {
                 // return the named page
-                var pages = active_document.Pages;
-
-                var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(Name, true);
-                var pages2 = pages.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
+                var pages = active_document.Pages.AsEnumerable();
+                var pages2= VA.TextUtil.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, VA.TextUtil.FilterAction.Include).ToList();
                 return pages2;
             }
         }

@@ -220,8 +220,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // get the named document
-            var regex = VisioAutomation.TextUtil.GetRegexForWildcardPattern(name, true);
-            var docs2 = documents.AsEnumerable().Where(d => regex.IsMatch(d.Name)).ToList();
+            var docs2 = VA.TextUtil.FilterObjectsByNames(documents.AsEnumerable(), new[] {name}, d => d.Name, VA.TextUtil.FilterAction.Include).ToList();
             return docs2;
         }
     }
