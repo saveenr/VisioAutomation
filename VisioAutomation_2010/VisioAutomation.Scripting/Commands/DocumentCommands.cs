@@ -214,7 +214,7 @@ namespace VisioAutomation.Scripting.Commands
             var documents = this.Session.VisioApplication.Documents;
             if (name == null || name == "*")
             {
-                // return all pages
+                // return all documents
                 var docs1 = documents.AsEnumerable().ToList();
                 return docs1;
             }
