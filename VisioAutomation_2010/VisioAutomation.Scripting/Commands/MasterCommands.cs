@@ -65,7 +65,7 @@ namespace VisioAutomation.Scripting.Commands
             return master;
         }
 
-        public IVisio.Master Get(string master, IVisio.Document stencil)
+        public IVisio.Master Get(string master, IVisio.Document doc)
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
@@ -75,19 +75,19 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("master");
             }
 
-            if (stencil == null)
+            if (doc == null)
             {
-                throw new System.ArgumentNullException("stencil");
+                throw new System.ArgumentNullException("doc");
             }
 
             var application = this.Session.VisioApplication;
             var documents = application.Documents;
 
-            var masters = stencil.Masters;
+            var masters = doc.Masters;
             IVisio.Master masterobj = this.TryGetMaster(masters, master);
             if (masterobj == null)
             {
-                string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, stencil);
+                string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, doc);
                 throw new VA.Scripting.ScriptingException(msg);
             }
 
