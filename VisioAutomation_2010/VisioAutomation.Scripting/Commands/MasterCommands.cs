@@ -94,7 +94,31 @@ namespace VisioAutomation.Scripting.Commands
             return masterobj;
         }
 
-        public IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
+        public List<IVisio.Master> GetMastersByName(string name, IVisio.Document doc)
+        {
+            if (name == null || name == "*")
+            {
+                // return all masters
+                var masters = doc.Masters.AsEnumerable().ToList();
+                return masters;
+            }
+            else
+            {
+                // return masters matching the name
+                var masters2 = doc.Masters.AsEnumerable();
+                var masters3 = VA.TextUtil.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VA.TextUtil.FilterAction.Include).ToList();
+                return masters3;
+            } 
+        }
+
+        public List<IVisio.Master> GetMastersByName(string name)
+        {
+            var application = this.Session.VisioApplication;
+            var doc = application.ActiveDocument;
+            return this.GetMastersByName(name, doc);
+        }
+
+        private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();

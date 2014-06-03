@@ -8,7 +8,7 @@ namespace VisioPS.Commands
     public class Get_VisioMaster : VisioPSCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
-        public string Master;
+        public string Name;
 
         [SMA.Parameter(Position = 1, Mandatory = false, ParameterSetName = "StencilDoc")]
         public IVisio.Document Document;
@@ -17,26 +17,28 @@ namespace VisioPS.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            bool master_specified = this.Master !=null;
+            bool master_specified = this.Name !=null;
             bool doc_specified = this.Document !=null;
 
             if (master_specified)
             {
+                // master name is specified
                 if (doc_specified)
                 {
                     this.WriteVerbose("Get master from specified document");
-                    var master = scriptingsession.Master.Get(this.Master, this.Document);
-                    this.WriteObject(master);
+                    var masters = scriptingsession.Master.GetMastersByName(this.Name, this.Document);
+                    this.WriteObject(masters,true);
                 }
                 else
                 {
                     this.WriteVerbose("Get master from active document");
-                    var master = scriptingsession.Master.Get(this.Master);
-                    this.WriteObject(master);
+                    var masters = scriptingsession.Master.GetMastersByName(this.Name);
+                    this.WriteObject(masters,true);
                 }
             }
             else
             {
+                // master name is not specified
                 if (doc_specified)
                 {
                     this.WriteVerbose("Get all masters from specified document");
