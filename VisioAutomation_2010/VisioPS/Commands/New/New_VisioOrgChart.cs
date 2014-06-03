@@ -1,4 +1,4 @@
- using VA = VisioAutomation;
+using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands

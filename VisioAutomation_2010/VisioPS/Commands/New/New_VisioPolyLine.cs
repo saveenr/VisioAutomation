@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;

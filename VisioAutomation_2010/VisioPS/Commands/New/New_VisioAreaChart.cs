@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.Models.Charting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
