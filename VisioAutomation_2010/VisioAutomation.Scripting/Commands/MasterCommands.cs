@@ -94,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
             return masterobj;
         }
 
-        private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
+        public IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();

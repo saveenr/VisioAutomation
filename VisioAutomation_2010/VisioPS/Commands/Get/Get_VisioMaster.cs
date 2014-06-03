@@ -11,21 +11,21 @@ namespace VisioPS.Commands
         public string Master;
 
         [SMA.Parameter(Position = 1, Mandatory = false, ParameterSetName = "StencilDoc")]
-        public IVisio.Document Stencil;
+        public IVisio.Document Document;
 
         protected override void ProcessRecord()
         {
             var scriptingsession = this.ScriptingSession;
 
             bool master_specified = this.Master !=null;
-            bool stencil_specified = this.Stencil !=null;
+            bool doc_specified = this.Document !=null;
 
             if (master_specified)
             {
-                if (stencil_specified)
+                if (doc_specified)
                 {
                     this.WriteVerbose("Get master from specified document");
-                    var master = scriptingsession.Master.Get(this.Master, this.Stencil);
+                    var master = scriptingsession.Master.Get(this.Master, this.Document);
                     this.WriteObject(master);
                 }
                 else
@@ -37,10 +37,10 @@ namespace VisioPS.Commands
             }
             else
             {
-                if (stencil_specified)
+                if (doc_specified)
                 {
                     this.WriteVerbose("Get all masters from specified document");
-                    var masters = scriptingsession.Master.Get(this.Stencil);
+                    var masters = scriptingsession.Master.Get(this.Document);
                     this.WriteObject(masters, false);                    
                 }
                 else
