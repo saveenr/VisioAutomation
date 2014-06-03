@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Globalization;
 using VA=VisioAutomation;
 using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;

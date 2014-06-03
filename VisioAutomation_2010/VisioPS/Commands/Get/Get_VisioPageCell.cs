@@ -1,9 +1,4 @@
-﻿using System;
-using System.Data.Odbc;
-using System.Drawing;
-using Microsoft.PowerShell.Commands;
-using VisioAutomation.ShapeSheet.Query;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using System.Linq;
 using VA = VisioAutomation;
@@ -239,7 +234,7 @@ namespace VisioPS.Commands
             this.WriteVerboseEx("End Query");
         }
 
-        public static void SetFromCellNames(CellQuery query, string[] Cells, CellMap dic)
+        public static void SetFromCellNames(VA.ShapeSheet.Query.CellQuery query, string[] Cells, CellMap dic)
         {
             if (Cells == null)
             {

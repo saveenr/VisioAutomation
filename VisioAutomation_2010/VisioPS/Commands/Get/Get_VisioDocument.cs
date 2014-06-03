@@ -1,5 +1,4 @@
 using System.Linq;
-using VisioAutomation.Extensions;
 using SMA = System.Management.Automation;
 
 namespace VisioPS.Commands
