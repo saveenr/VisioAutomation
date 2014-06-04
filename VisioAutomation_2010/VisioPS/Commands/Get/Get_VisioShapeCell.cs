@@ -335,7 +335,7 @@ namespace VisioPowerShell.Commands
 
             this.WriteVerboseEx("Start Query");
 
-            var dt = VisioPSUtil.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, page);
+            var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, page);
             this.WriteObject(dt);
 
             this.WriteVerboseEx("End Query");
