@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC3E2915-CC5F-416A-A21E-8D05A9C0FD58}"
 	ProjectSection(SolutionItems) = preProject
 		localtestrun.testrunconfig = localtestrun.testrunconfig
@@ -25,8 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VisioAutomation Components"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation", "VisioAutomation\VisioAutomation.csproj", "{920C7842-10E0-48C3-A439-C785FC2B234E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPS", "VisioPS\VisioPS.csproj", "{6DFB7C5E-7AC1-48EE-A065-2075921A7413}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation.Scripting", "VisioAutomation.Scripting\VisioAutomation.Scripting.csproj", "{17035996-44F8-4506-BAAB-EA121475B936}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomationSamples", "VisioAutomationSamples\VisioAutomationSamples.csproj", "{6E4E26FE-E903-474B-80F9-CF8ED12D34B3}"
@@ -44,9 +44,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVisioAutomationVDX", "..\VisioAutomation.VDX\TestVisioAutomationVDX\TestVisioAutomationVDX.csproj", "{0522B05C-4FF2-47A5-B6AB-D4379C907814}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = VisioAutomation.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -70,18 +67,6 @@ Global
 		{920C7842-10E0-48C3-A439-C785FC2B234E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{920C7842-10E0-48C3-A439-C785FC2B234E}.Release|Win32.ActiveCfg = Release|Any CPU
 		{920C7842-10E0-48C3-A439-C785FC2B234E}.Release|x86.ActiveCfg = Release|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|Win32.ActiveCfg = Release|Any CPU
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|x86.ActiveCfg = Release|Any CPU
 		{17035996-44F8-4506-BAAB-EA121475B936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{17035996-44F8-4506-BAAB-EA121475B936}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17035996-44F8-4506-BAAB-EA121475B936}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -183,16 +168,18 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6DFB7C5E-7AC1-48EE-A065-2075921A7413} = {047700E6-C918-4609-AD7A-6636CF6A07FA}
-		{6E4E26FE-E903-474B-80F9-CF8ED12D34B3} = {047700E6-C918-4609-AD7A-6636CF6A07FA}
-		{46B14CDD-204F-4BD4-A923-CD1D312C06D4} = {047700E6-C918-4609-AD7A-6636CF6A07FA}
-		{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6} = {6BFADD8A-BA37-4C6F-91CD-2157D1F5A3C6}
-		{F04E9277-48D2-4822-9AE6-E7E6ADB262C9} = {6BFADD8A-BA37-4C6F-91CD-2157D1F5A3C6}
-		{0522B05C-4FF2-47A5-B6AB-D4379C907814} = {6BFADD8A-BA37-4C6F-91CD-2157D1F5A3C6}
 		{920C7842-10E0-48C3-A439-C785FC2B234E} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
 		{17035996-44F8-4506-BAAB-EA121475B936} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
+		{6E4E26FE-E903-474B-80F9-CF8ED12D34B3} = {047700E6-C918-4609-AD7A-6636CF6A07FA}
 		{FB28507D-C378-42B4-9050-2FBED2CD68FE} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
+		{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6} = {6BFADD8A-BA37-4C6F-91CD-2157D1F5A3C6}
+		{F04E9277-48D2-4822-9AE6-E7E6ADB262C9} = {6BFADD8A-BA37-4C6F-91CD-2157D1F5A3C6}
+		{46B14CDD-204F-4BD4-A923-CD1D312C06D4} = {047700E6-C918-4609-AD7A-6636CF6A07FA}
 		{A2BD039F-38EB-4E19-A1A4-8E6730CBC4E9} = {63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}
+		{0522B05C-4FF2-47A5-B6AB-D4379C907814} = {6BFADD8A-BA37-4C6F-91CD-2157D1F5A3C6}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = VisioAutomation.vsmdi
 	EndGlobalSection
 	GlobalSection(TextTemplating) = postSolution
 		TextTemplating = 1
