@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioPage")]
-    public class Remove_VisioPage : VisioPS.VisioPSCmdlet
+    public class Remove_VisioPage : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page[] Pages;

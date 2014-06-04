@@ -7,7 +7,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Out, "Visio")]
-    public class Out_Visio : VisioPSCmdlet
+    public class Out_Visio : VisioCmdlet
     {
         [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
         public VA.Models.OrgChart.OrgChartDocument OrgChart { get; set; }

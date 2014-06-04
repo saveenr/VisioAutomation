@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioPage")]
-    public class Copy_VisioPage : VisioPS.VisioPSCmdlet
+    public class Copy_VisioPage : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name = null;

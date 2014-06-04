@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioUserDefinedCell")]
-    public class Remove_VisioUserDefinedCell : VisioPS.VisioPSCmdlet
+    public class Remove_VisioUserDefinedCell : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }

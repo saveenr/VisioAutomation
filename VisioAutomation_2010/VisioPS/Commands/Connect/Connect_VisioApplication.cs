@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommunications.Connect, "VisioApplication")]
-    public class Connect_VisioApplication : VisioPSCmdlet
+    public class Connect_VisioApplication : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

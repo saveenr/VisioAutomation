@@ -5,7 +5,7 @@ using VA=VisioAutomation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Close, "VisioDocument")]
-    public class Close_VisioDocument : VisioPS.VisioPSCmdlet
+    public class Close_VisioDocument : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document[] Documents;

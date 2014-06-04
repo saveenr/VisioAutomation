@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Export, "VisioPage")]
-    public class Export_VisioPage : VisioPS.VisioPSCmdlet
+    public class Export_VisioPage : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] 
         public string Filename;

@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Close, "VisioApplication")]
-    public class Close_VisioApplication : VisioPSCmdlet
+    public class Close_VisioApplication : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public SMA.SwitchParameter Force { get; set; }

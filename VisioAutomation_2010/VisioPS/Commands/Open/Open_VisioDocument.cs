@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Open, "VisioDocument")]
-    public class Open_VisioDocument : VisioPS.VisioPSCmdlet
+    public class Open_VisioDocument : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Filename { get; set; }

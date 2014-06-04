@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioCustomProperty")]
-    public class Get_VisioCustomProperty : VisioPS.VisioPSCmdlet
+    public class Get_VisioCustomProperty : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;

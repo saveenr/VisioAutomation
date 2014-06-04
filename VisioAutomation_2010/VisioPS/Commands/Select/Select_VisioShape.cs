@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Select, "VisioShape")]
-    public class Select_VisioShape : VisioPS.VisioPSCmdlet
+    public class Select_VisioShape : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
         public IVisio.Shape[] Shapes { get; set; }

@@ -5,7 +5,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioApplication")]
-    public class Get_VisioApplication : VisioPSCmdlet
+    public class Get_VisioApplication : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

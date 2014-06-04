@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioShape")]
-    public class Remove_VisioShape : VisioPS.VisioPSCmdlet
+    public class Remove_VisioShape : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;

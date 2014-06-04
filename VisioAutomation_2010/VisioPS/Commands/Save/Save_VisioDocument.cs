@@ -4,7 +4,7 @@ using SMA = System.Management.Automation;
 namespace VisioPS.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Save, "VisioDocument")]
-    public class Save_VisioDocument : VisioPS.VisioPSCmdlet
+    public class Save_VisioDocument : VisioPS.VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Filename;
