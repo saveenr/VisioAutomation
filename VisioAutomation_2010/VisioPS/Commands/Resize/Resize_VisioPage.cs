@@ -1,10 +1,10 @@
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Resize, "VisioPage")]
-    public class Resize_VisioPage : VisioPS.VisioCmdlet
+    public class Resize_VisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)] public double Width = -1;
 

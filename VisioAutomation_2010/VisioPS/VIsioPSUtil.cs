@@ -3,7 +3,7 @@ using System.Data;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS
+namespace VisioPowerShell
 {
     static class VisioPSUtil
     {

@@ -3,10 +3,10 @@ using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioUserDefinedCell")]
-    public class Set_VisioUserDefinedCell : VisioPS.VisioPSCmdlet
+    public class Set_VisioUserDefinedCell : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }

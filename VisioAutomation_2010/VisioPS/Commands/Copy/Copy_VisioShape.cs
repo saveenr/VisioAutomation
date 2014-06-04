@@ -2,10 +2,10 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioShape")]
-    public class Copy_VisioShape : VisioPS.VisioCmdlet
+    public class Copy_VisioShape : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]public IVisio.Shape[] Shapes;
 

@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioAreaChart")]
-    public class New_VisioAreaChart : VisioPS.VisioPSCmdlet
+    public class New_VisioAreaChart : VisioCmdlet
     {
         [System.Management.Automation.Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }

@@ -1,4 +1,4 @@
-namespace VisioPS
+namespace VisioPowerShell
 {
     public enum SelectionOperation
     {

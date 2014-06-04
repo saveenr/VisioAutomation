@@ -4,10 +4,10 @@ using SMA = System.Management.Automation;
 using System.Linq;
 using VA = VisioAutomation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioShapeCell")]
-    public class Get_VisioShapeCell : VisioPSCmdlet
+    public class Get_VisioShapeCell : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, Position = 0)]
         public string[] Cells { get; set; }

@@ -2,10 +2,10 @@ using System.Linq;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPolyLine")]
-    public class New_VisioPolyLine : VisioPS.VisioPSCmdlet
+    public class New_VisioPolyLine : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public double[] Doubles { get; set; }

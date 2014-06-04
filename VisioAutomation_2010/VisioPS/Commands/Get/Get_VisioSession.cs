@@ -3,10 +3,10 @@ using System.Linq;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioSession")]
-    public class Get_VisioSession : VisioPSCmdlet
+    public class Get_VisioSession : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

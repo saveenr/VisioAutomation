@@ -5,10 +5,10 @@ using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioShape")]
-    public class Get_VisioShape : VisioPS.VisioPSCmdlet
+    public class Get_VisioShape : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public object[] NameOrID;

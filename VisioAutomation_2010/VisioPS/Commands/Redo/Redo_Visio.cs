@@ -1,9 +1,9 @@
 ﻿using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Redo, "Visio")]
-    public class Redo_Visio : VisioPS.VisioCmdlet
+    public class Redo_Visio : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

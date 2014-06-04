@@ -2,10 +2,10 @@ using System.Linq;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioNURBS")]
-    public class New_VisioNURBS : VisioPS.VisioPSCmdlet
+    public class New_VisioNURBS : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public double[] ControlPoints { get; set; }

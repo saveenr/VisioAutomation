@@ -1,10 +1,10 @@
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPieChart")]
-    public class New_VisioPieChart : VisioPS.VisioPSCmdlet
+    public class New_VisioPieChart : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }

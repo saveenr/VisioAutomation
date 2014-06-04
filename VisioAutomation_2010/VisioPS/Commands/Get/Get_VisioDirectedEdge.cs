@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using VisioAutomation.Shapes.Connections;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
-    public class Get_VisioDirectedEdge : VisioPSCmdlet
+    public class Get_VisioDirectedEdge : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetShapeObjects { get; set; }

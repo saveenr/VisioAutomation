@@ -1,7 +1,7 @@
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS
+namespace VisioPowerShell
 {
     public class VisioPSSessionContext : VisioAutomation.Scripting.SessionContext
     {

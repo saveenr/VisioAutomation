@@ -2,10 +2,10 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioPage")]
-    public class Remove_VisioPage : VisioPS.VisioCmdlet
+    public class Remove_VisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Page[] Pages;

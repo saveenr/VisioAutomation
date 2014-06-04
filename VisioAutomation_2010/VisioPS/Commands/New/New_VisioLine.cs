@@ -1,10 +1,10 @@
 using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioLine")]
-    public class New_VisioLine : VisioPS.VisioPSCmdlet
+    public class New_VisioLine : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }

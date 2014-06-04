@@ -2,10 +2,10 @@ using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using SXL= System.Xml.Linq;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Import, "VisioModel")]
-    public class Import_VisioModel : VisioPS.VisioPSCmdlet
+    public class Import_VisioModel : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0)]
         public string Filename { get; set; }

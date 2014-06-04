@@ -1,10 +1,10 @@
 ﻿using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Select, "VisioShape")]
-    public class Select_VisioShape : VisioPS.VisioCmdlet
+    public class Select_VisioShape : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
         public IVisio.Shape[] Shapes { get; set; }
@@ -29,15 +29,15 @@ namespace VisioPS.Commands
             }
             else
             {
-                if (this.Operation == VisioPS.SelectionOperation.All)
+                if (this.Operation == SelectionOperation.All)
                 {
                     scriptingsession.Selection.All();
                 }
-                else if (this.Operation == VisioPS.SelectionOperation.None)
+                else if (this.Operation == SelectionOperation.None)
                 {
                     scriptingsession.Selection.None();
                 }
-                else if (this.Operation == VisioPS.SelectionOperation.Invert)
+                else if (this.Operation == SelectionOperation.Invert)
                 {
                     scriptingsession.Selection.Invert();
                 }

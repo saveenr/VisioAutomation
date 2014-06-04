@@ -1,9 +1,9 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Open, "VisioDocument")]
-    public class Open_VisioDocument : VisioPS.VisioCmdlet
+    public class Open_VisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Filename { get; set; }

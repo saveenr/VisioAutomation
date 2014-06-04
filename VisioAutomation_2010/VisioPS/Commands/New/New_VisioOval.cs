@@ -1,9 +1,9 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioOval")]
-    public class New_VisioOval : VisioPS.VisioPSCmdlet
+    public class New_VisioOval : VisioCmdlet
     {
         [System.Management.Automation.Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }

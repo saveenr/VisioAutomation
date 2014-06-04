@@ -1,6 +1,6 @@
 using VA = VisioAutomation;
 
-namespace VisioPS
+namespace VisioPowerShell
 {
     public enum PageOrientation
     {

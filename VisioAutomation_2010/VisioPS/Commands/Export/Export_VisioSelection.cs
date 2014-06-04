@@ -1,10 +1,10 @@
 ﻿using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Export, "VisioSelectionAsXHTML")]
-    public class Export_VisioSelectionAsXHTML : VisioPS.VisioCmdlet
+    public class Export_VisioSelectionAsXHTML : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         [SMA.ValidateNotNullOrEmpty]

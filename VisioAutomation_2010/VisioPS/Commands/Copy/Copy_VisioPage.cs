@@ -1,10 +1,10 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioPage")]
-    public class Copy_VisioPage : VisioPS.VisioCmdlet
+    public class Copy_VisioPage : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name = null;

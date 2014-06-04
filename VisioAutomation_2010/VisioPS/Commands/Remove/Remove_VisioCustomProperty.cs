@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioCustomProperty")]
-    public class Remove_VisioCustomProperty : VisioPS.VisioCmdlet
+    public class Remove_VisioCustomProperty : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public string Name { get; set; }

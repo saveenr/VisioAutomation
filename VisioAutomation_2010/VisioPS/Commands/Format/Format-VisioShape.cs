@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Format, "VisioShape")]
-    public class Format_VisioShape : VisioPSCmdlet
+    public class Format_VisioShape : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public double NudgeX { get; set; }

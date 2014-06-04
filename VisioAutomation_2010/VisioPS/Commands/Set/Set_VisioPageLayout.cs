@@ -1,10 +1,10 @@
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPageLayout")]
-    public class Set_VisioPageLayout : VisioPS.VisioPSCmdlet
+    public class Set_VisioPageLayout : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)] 
         public PageOrientation Orientation = PageOrientation.None;

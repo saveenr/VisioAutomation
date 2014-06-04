@@ -1,10 +1,10 @@
 using System.Linq;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDocument")]
-    public class Get_VisioDocument : VisioPS.VisioPSCmdlet
+    public class Get_VisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         [SMA.ValidateNotNullOrEmpty]

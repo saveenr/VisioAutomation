@@ -2,10 +2,10 @@ using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioCustomProperty")]
-    public class Set_VisioCustomProperty : VisioPS.VisioPSCmdlet
+    public class Set_VisioCustomProperty : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
         public System.Collections.Hashtable HashTable{ get; set; }

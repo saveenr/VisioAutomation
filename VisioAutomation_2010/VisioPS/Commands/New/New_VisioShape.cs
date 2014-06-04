@@ -3,10 +3,10 @@ using System.Linq;
 using VA=VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioShape")]
-    public class New_VisioShape : VisioPS.VisioPSCmdlet
+    public class New_VisioShape : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public IVisio.Master[] Masters { get; set; }

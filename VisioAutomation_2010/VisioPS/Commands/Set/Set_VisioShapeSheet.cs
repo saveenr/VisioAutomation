@@ -2,10 +2,10 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioShapeSheet")]
-    public class Set_VisioShapeSheet : VisioPSCmdlet
+    public class Set_VisioShapeSheet : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public VisioAutomation.ShapeSheet.SRC[] Cell { get; set; }

@@ -1,10 +1,10 @@
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioOrgChart")]
-    public class New_VisioOrgChart : VisioPS.VisioPSCmdlet
+    public class New_VisioOrgChart : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

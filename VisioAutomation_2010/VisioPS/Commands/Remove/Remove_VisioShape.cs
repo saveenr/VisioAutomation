@@ -2,10 +2,10 @@
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioShape")]
-    public class Remove_VisioShape : VisioPS.VisioCmdlet
+    public class Remove_VisioShape : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;

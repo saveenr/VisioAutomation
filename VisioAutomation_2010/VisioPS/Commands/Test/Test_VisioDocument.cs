@@ -1,10 +1,10 @@
 ﻿using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, "VisioDocument")]
-    public class Test_VisioDocument: VisioPS.VisioCmdlet
+    public class Test_VisioDocument: VisioCmdlet
     {
         // checks to see if we hae an active drawing open
         protected override void ProcessRecord()

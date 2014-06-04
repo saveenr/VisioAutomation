@@ -4,7 +4,7 @@ using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Out, "Visio")]
     public class Out_Visio : VisioCmdlet

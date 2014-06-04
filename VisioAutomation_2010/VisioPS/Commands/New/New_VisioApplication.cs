@@ -1,9 +1,9 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioApplication")]
-    public class New_VisioApplication : VisioPSCmdlet
+    public class New_VisioApplication : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

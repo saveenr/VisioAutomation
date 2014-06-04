@@ -2,10 +2,10 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Close, "VisioDocument")]
-    public class Close_VisioDocument : VisioPS.VisioCmdlet
+    public class Close_VisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Document[] Documents;

@@ -1,10 +1,10 @@
 using System.Linq;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioPage")]
-    public class Get_VisioPage : VisioPS.VisioPSCmdlet
+    public class Get_VisioPage : VisioCmdlet
     {
         [SMA.Parameter(Position=0, Mandatory = false)]
         public string Name=null;

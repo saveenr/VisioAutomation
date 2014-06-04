@@ -4,10 +4,10 @@ using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
-    public class Get_VisioConnectionPoint : VisioPS.VisioPSCmdlet
+    public class Get_VisioConnectionPoint : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]public IVisio.Shape[] Shapes;
 

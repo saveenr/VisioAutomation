@@ -3,10 +3,10 @@ using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioControl")]
-    public class New_VisioControl : VisioPSCmdlet
+    public class New_VisioControl : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string XDynamics { get; set; }

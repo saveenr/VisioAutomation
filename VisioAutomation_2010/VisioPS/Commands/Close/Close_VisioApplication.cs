@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Close, "VisioApplication")]
     public class Close_VisioApplication : VisioCmdlet

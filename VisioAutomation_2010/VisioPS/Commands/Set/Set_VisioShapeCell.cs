@@ -5,10 +5,10 @@ using System.Linq;
 using VA = VisioAutomation;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioShapeCell")]
-    public class Set_VisioShapeCell : VisioPSCmdlet
+    public class Set_VisioShapeCell : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false, Position = 0)]
         public System.Collections.Hashtable Hashtable { get; set; }

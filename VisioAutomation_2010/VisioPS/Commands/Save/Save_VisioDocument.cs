@@ -1,10 +1,10 @@
 ﻿using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Save, "VisioDocument")]
-    public class Save_VisioDocument : VisioPS.VisioCmdlet
+    public class Save_VisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Filename;

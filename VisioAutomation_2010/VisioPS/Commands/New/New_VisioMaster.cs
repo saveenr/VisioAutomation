@@ -2,10 +2,10 @@ using VAS=VisioAutomation.Scripting;
 using IVisio=Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioMaster")]
-    public class New_VisioMaster : VisioPS.VisioPSCmdlet
+    public class New_VisioMaster : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public IVisio.Document Stencil;

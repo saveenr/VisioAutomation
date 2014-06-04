@@ -3,10 +3,10 @@ using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using GRID = VisioAutomation.Models.Grid;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioGridLayout")]
-    public class New_VisioGridLayout : VisioPS.VisioPSCmdlet
+    public class New_VisioGridLayout : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public IVisio.Master Master { get; set; }

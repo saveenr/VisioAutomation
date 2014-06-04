@@ -1,7 +1,7 @@
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommunications.Connect, "VisioApplication")]
     public class Connect_VisioApplication : VisioCmdlet

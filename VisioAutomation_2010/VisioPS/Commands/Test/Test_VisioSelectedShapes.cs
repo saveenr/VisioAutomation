@@ -1,10 +1,10 @@
 ﻿using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, "VisioSelectedShapes")]
-    public class Test_VisioSelectedShapes: VisioPS.VisioCmdlet
+    public class Test_VisioSelectedShapes: VisioCmdlet
     {
         // checks to see if we have any selected shapes
         protected override void ProcessRecord()

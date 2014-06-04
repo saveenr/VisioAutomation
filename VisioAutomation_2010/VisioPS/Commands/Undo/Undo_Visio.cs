@@ -1,9 +1,9 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Undo, "Visio")]
-    public class Undo_Visio : VisioPS.VisioCmdlet
+    public class Undo_Visio : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

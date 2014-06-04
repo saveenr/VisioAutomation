@@ -2,10 +2,10 @@ using VA=VisioAutomation;
 using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPage")]
-    public class New_VisioPage : VisioPS.VisioPSCmdlet
+    public class New_VisioPage : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)] 
         public double Width = -1.0;

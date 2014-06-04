@@ -2,10 +2,10 @@ using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioMaster")]
-    public class Get_VisioMaster : VisioPSCmdlet
+    public class Get_VisioMaster : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name;

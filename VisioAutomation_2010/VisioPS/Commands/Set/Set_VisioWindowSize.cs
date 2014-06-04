@@ -1,10 +1,10 @@
 using VAS = VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioWindowSize")]
-    public class Set_VisioWindowSize : VisioPS.VisioPSCmdlet
+    public class Set_VisioWindowSize : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)]
         public int Width { get; set; }

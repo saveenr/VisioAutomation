@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 using System.Linq;
 using VA = VisioAutomation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPageCell")]
     public class Set_VisioPageCell: VisioCmdlet

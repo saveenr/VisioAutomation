@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioControl")]
-    public class Get_VisioControl : VisioPSCmdlet
+    public class Get_VisioControl : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;

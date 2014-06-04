@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioControl")]
     public class Remove_VisioControl : VisioCmdlet

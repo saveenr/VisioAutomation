@@ -1,10 +1,10 @@
 using VAS=VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsData.Export, "VisioPage")]
-    public class Export_VisioPage : VisioPS.VisioCmdlet
+    public class Export_VisioPage : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = true)] 
         public string Filename;

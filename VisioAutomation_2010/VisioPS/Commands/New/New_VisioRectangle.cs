@@ -1,10 +1,10 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioRectangle")]
-    public class New_VisioRectangle : VisioPS.VisioPSCmdlet
+    public class New_VisioRectangle : VisioCmdlet
     {
         [System.Management.Automation.Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }

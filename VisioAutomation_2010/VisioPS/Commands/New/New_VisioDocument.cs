@@ -2,10 +2,10 @@ using VAS=VisioAutomation.Scripting;
 using IVisio=Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
-namespace VisioPS.Commands
+namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioDocument")]
-    public class New_VisioDocument : VisioPS.VisioPSCmdlet
+    public class New_VisioDocument : VisioCmdlet
     {
         protected override void ProcessRecord()
         {

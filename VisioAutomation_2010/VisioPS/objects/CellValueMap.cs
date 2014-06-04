@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace VisioPS
+namespace VisioPowerShell
 {
     public class CellValueMap
     {
