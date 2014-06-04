@@ -28,25 +28,15 @@ namespace VisioAutomation.Scripting.Commands
 
             if (force)
             {
-                this.Session.Application.ForceClose();
+                // If you want to force the thing to close
+                // it will require closing all documents and then quiting
+                var documents = app.Documents;
+                VA.Documents.DocumentHelper.ForceCloseAll(documents);
+                app.Quit(true);
             }
             else
             {
                 app.Quit();
-                this.Session.VisioApplication = null;
-            }
-        }
-
-
-        public void ForceClose()
-        {
-            this.AssertApplicationAvailable();
-            if (this.Validate())
-            {
-                var application = this.Session.VisioApplication;
-                var documents = application.Documents;
-                VA.Documents.DocumentHelper.ForceCloseAll(documents);
-                application.Quit(true);
             }
             this.Session.VisioApplication = null;
         }
@@ -60,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (VisioAutomation.Scripting.UACHelper.IsProcessElevated)
             {
-                this.Session.WriteVerbose("Process is Elevated");
+                this.Session.WriteVerbose("Running in Elevated Process");
                 this.Session.WriteWarning("Having an Elevated Process with UAC Enabled will cause Running Applications to not be found");
             }
 
@@ -121,32 +111,22 @@ namespace VisioAutomation.Scripting.Commands
                 this.Session.WriteVerbose("Session's Application object is null");
                 return false;
             }
-            else
+
+            try
             {
-                this.Session.WriteVerbose("Session's Application object is not null");
-                try
-                {
-                    this.Session.WriteVerbose("Attempting to read Visio Application's Version property");
-                    // try to do something simple, read-only, and fast with the application object
-                    var app_version = app.Version;
-                    this.Session.WriteVerbose(
-                        "No COMException was thrown when reading Version property. This application instance seems valid");
-                    return true;
-                }
-                catch (System.Runtime.InteropServices.COMException)
-                {
-                    this.Session.WriteVerbose("COMException thrown");
-                    this.Session.WriteVerbose("This application instance is invalid");
-                    // If a COMException is thrown, this indicates that the
-                    // application object is invalid
-                    return false;
-                }
-                catch (System.Exception)
-                {
-                    this.Session.WriteVerbose("An exception besides COMException was thrown");
-                    // just re-raise it.
-                    throw;
-                }
+                // try to do something simple, read-only, and fast with the application object
+                //  if No COMException was thrown when reading Version property. This application instance is treated as valid
+
+                var app_version = app.Version;
+                this.Session.WriteVerbose("Application validated");
+                return true;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                this.Session.WriteVerbose("COMException thrown during validation. Treating as invalid application");
+                // If a COMException is thrown, this indicates that the
+                // application object is invalid
+                return false;
             }
         }
     }
