@@ -1,4 +1,4 @@
-namespace VisioPS.Commands
+namespace VisioPS
 {
     public class UserDefinedCellvalues
     {

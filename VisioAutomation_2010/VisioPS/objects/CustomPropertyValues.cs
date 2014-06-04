@@ -1,4 +1,4 @@
-namespace VisioPS.Commands
+namespace VisioPS
 {
     public class CustomPropertyValues
     {
@@ -14,9 +14,5 @@ namespace VisioPS.Commands
         public string Type;
         public string Verify;
         public string Calendar;
-
-        public CustomPropertyValues()
-        {           
-        }
     }
 }
