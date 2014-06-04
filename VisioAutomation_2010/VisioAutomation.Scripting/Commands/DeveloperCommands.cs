@@ -59,7 +59,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     sb.Length = 0;
                     var method_params = method.GetParameters();
-                    TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
+                    TextCommandsUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
 
                     if (method.ReturnType != typeof(void))
                     {
@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Commands
                 lines.Sort();
                 
                 helpstr.Length = 0;
-                TextUtil.Join(helpstr,"\r\n",lines);
+                TextCommandsUtil.Join(helpstr,"\r\n",lines);
 
                 var formpage = new VisioAutomation.Models.Forms.FormPage();
                 formpage.Title = cmdset_prop.Name + " commands";

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.DOM;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -51,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
             Invert(application.ActiveWindow);
         }
 
-        public static void Invert(IVisio.Window window)
+        private static void Invert(IVisio.Window window)
         {
             if (window == null)
             {
@@ -309,7 +308,6 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            this.Session.WriteVerbose("HasShapes: Checking for at least {0} selected shapes", min_items);
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException("min_items");
@@ -323,7 +321,6 @@ namespace VisioAutomation.Scripting.Commands
             var selection = active_window.Selection;
             int num_selected = selection.Count;
             bool v = num_selected >= min_items;
-            this.Session.WriteVerbose("HasShapes: {0}: Selection Has {1} shapes. Checking for Minimum of {2} shapes", v, num_selected, min_items);
             return v;
         }
     }
