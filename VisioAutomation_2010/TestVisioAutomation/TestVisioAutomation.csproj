@@ -128,9 +128,7 @@
     <Compile Include="Shapesheet\ShapeSheet_Update_Tests.cs" />
     <Compile Include="Extensions\Application_Tests.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Query_Tests.cs" />
-    <Compile Include="Other\ShapeEnumerationTests.cs" />
     <Compile Include="Extensions\Document_Tests.cs" />
-    <Compile Include="Documents\DocumentTests.cs" />
     <Compile Include="VisioAutomationTest.cs" />
     <Compile Include="Extensions\PageDraw_Tests.cs" />
     <Compile Include="Extensions\Pages_Tests.cs" />
@@ -140,7 +138,6 @@
     <Compile Include="Page\PageHelper_Tests.cs" />
     <Compile Include="Models\Convert_Tests.cs" />
     <Compile Include="Other\ShapeHelper_Tests.cs" />
-    <Compile Include="Models\StencilTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\CustomProps_Test.cs" />
   </ItemGroup>

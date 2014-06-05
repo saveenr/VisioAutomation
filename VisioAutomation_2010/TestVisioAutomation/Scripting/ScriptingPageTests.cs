@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -42,7 +43,7 @@ namespace TestVisioAutomation
             ss.Page.GoTo(VA.Scripting.PageDirection.Previous);
             Assert.AreEqual(page1, ss.Page.Get());
 
-            ss.Document.Close(true);
+            doc.Close(true);
         }
 
         [TestMethod]
@@ -53,6 +54,7 @@ namespace TestVisioAutomation
             var doc = ss.Document.New(page_size.Width, page_size.Height);
             ss.Draw.Rectangle(0, 0, 1, 1);
             ss.Page.Duplicate();
+            doc.Close(true);
         }
 
         [TestMethod]
@@ -72,7 +74,11 @@ namespace TestVisioAutomation
             VA.Documents.DocumentHelper.Activate(docfrom_2);
             ss.Draw.Rectangle(0, 0, 1, 1);
             ss.Page.Duplicate(docto_2);
-        }
 
+            docfrom_1.Close(true);
+            docfrom_2.Close(true);
+            docto_1.Close(true);
+            docto_2.Close(true);
+        }
     }
 }

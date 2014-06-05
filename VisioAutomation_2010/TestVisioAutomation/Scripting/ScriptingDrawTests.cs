@@ -183,7 +183,7 @@ namespace TestVisioAutomation
             ss.Draw.BarChart(chart3);
 
             ss.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0,1.0));
-            //ss.Document.Close(true);
+            ss.Document.Close(true);
         }
 
         [TestMethod]
@@ -218,7 +218,7 @@ namespace TestVisioAutomation
             ss.Draw.AreaChart(chart3);
 
             ss.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0));
-            //ss.Document.Close(true);
+            ss.Document.Close(true);
         }
 
         [TestMethod]

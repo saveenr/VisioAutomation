@@ -99,10 +99,8 @@ namespace TestVisioAutomation
             var s2 = ss.Draw.Rectangle(4, 4, 5, 5);
 
             ss.Connection.Connect(new[] {s1}, new[] {s2}, null);
-
-
-            //ss.Document.Close(true);
+            
+            ss.Document.Close(true);
         }
-
     }
 }

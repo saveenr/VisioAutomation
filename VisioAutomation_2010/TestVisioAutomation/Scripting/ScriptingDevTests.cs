@@ -11,6 +11,7 @@ namespace TestVisioAutomation
         {
             var ss = GetScriptingSession();
             ss.Developer.DrawScriptingDocumentation();
+            ss.Document.Close(true);
         }
     }
 }

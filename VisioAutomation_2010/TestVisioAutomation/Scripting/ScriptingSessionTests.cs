@@ -12,6 +12,7 @@ namespace TestVisioAutomation
         public void Scripting_DevDocumentationScenarios
             ()
         {
+            var ss = GetScriptingSession();
             this.DrawVAScriptingAPIDiagram();
             this.DrawVANamespaceDiagram();
         }
@@ -19,15 +20,15 @@ namespace TestVisioAutomation
         public void DrawVAScriptingAPIDiagram()
         {
             var ss = GetScriptingSession();
-            var doc= ss.Developer.DrawScriptingDocumentation();
-            doc.Close(true);
+            var doc = ss.Developer.DrawScriptingDocumentation();
+            ss.Document.Close(true);
         }
 
         public void DrawVANamespaceDiagram()
         {
             var ss = GetScriptingSession();
             var doc = ss.Developer.DrawNamespaces();
-            doc.Close(true);
+            ss.Document.Close(true);
         }
 
         [TestMethod]
@@ -59,7 +60,7 @@ namespace TestVisioAutomation
             Assert.IsTrue(ss.HasActiveDocument);
             Assert.IsFalse(ss.Selection.HasShapes());
 
-            ss.Document.CloseAllWithoutSaving();
+            ss.Document.Close(true);
         }
     }
 }

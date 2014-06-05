@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using VisioAutomation.Shapes.Connections;
-using ConnectionPointHelper = VisioAutomation.Shapes.Connections.ConnectionPointHelper;
 using VA = VisioAutomation;
+using VACXN = VisioAutomation.Shapes.Connections;
 
 namespace TestVisioAutomation
 {
@@ -16,27 +15,27 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            Assert.AreEqual(0, VACXN.ConnectionPointHelper.GetCount(s1));
 
-            var cp_type = ConnectionPointType.Inward;
+            var cp_type = VACXN.ConnectionPointType.Inward;
 
-            var cpd1 = new ConnectionPointCells();
+            var cpd1 = new VACXN.ConnectionPointCells();
             cpd1.X = "Width*0.25";
             cpd1.Y = "Height*0";
             cpd1.Type = (int) cp_type;
 
-            var cpd2 = new ConnectionPointCells();
+            var cpd2 = new VACXN.ConnectionPointCells();
             cpd2.X = "Width*0.75";
             cpd2.Y = "Height*0";
             cpd2.Type = (int) cp_type;
 
-            ConnectionPointHelper.Add(s1, cpd1);
-            Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
+            VACXN.ConnectionPointHelper.Add(s1, cpd1);
+            Assert.AreEqual(1, VACXN.ConnectionPointHelper.GetCount(s1));
 
-            ConnectionPointHelper.Add(s1, cpd2);
-            Assert.AreEqual(2, ConnectionPointHelper.GetCount(s1));
+            VACXN.ConnectionPointHelper.Add(s1, cpd2);
+            Assert.AreEqual(2, VACXN.ConnectionPointHelper.GetCount(s1));
 
-            var controlpoints = ConnectionPointCells.GetCells(s1);
+            var controlpoints = VACXN.ConnectionPointCells.GetCells(s1);
             Assert.AreEqual(2, controlpoints.Count);
             var cp_0 = controlpoints[0];
             AssertVA.AreEqual("0 in", 0, cp_0.DirX);
@@ -52,10 +51,10 @@ namespace TestVisioAutomation
             AssertVA.AreEqual("Width*0.75", 3, cp_1.X);
             AssertVA.AreEqual("Height*0", 0, cp_1.Y);
 
-            ConnectionPointHelper.Delete(s1, 1);
-            Assert.AreEqual(1, ConnectionPointHelper.GetCount(s1));
-            ConnectionPointHelper.Delete(s1, 0);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            VACXN.ConnectionPointHelper.Delete(s1, 1);
+            Assert.AreEqual(1, VACXN.ConnectionPointHelper.GetCount(s1));
+            VACXN.ConnectionPointHelper.Delete(s1, 0);
+            Assert.AreEqual(0, VACXN.ConnectionPointHelper.GetCount(s1));
 
             page1.Delete(0);
         }
@@ -66,30 +65,30 @@ namespace TestVisioAutomation
             var page1 = GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            Assert.AreEqual(0, VACXN.ConnectionPointHelper.GetCount(s1));
 
-            var cp_type = ConnectionPointType.Inward;
+            var cp_type = VACXN.ConnectionPointType.Inward;
 
             var xpositions = new[] {"Width*0.25", "Width*0.30", "Width*0.75", "Width*0.90"};
             var ypos = "Height*0";
 
             foreach (var xpos in xpositions)
             {
-                var cp = new ConnectionPointCells();
+                var cp = new VACXN.ConnectionPointCells();
                 cp.X = xpos;
                 cp.Y = ypos;
                 cp.DirX = 0;
                 cp.DirY = 0;
                 cp.Type = (int) cp_type;
 
-                ConnectionPointHelper.Add(s1, cp);
+                VACXN.ConnectionPointHelper.Add(s1, cp);
             }
 
-            Assert.AreEqual(4, ConnectionPointHelper.GetCount(s1));
+            Assert.AreEqual(4, VACXN.ConnectionPointHelper.GetCount(s1));
 
-            int num_deleted = ConnectionPointHelper.Delete(s1);
+            int num_deleted = VACXN.ConnectionPointHelper.Delete(s1);
             Assert.AreEqual(4, num_deleted);
-            Assert.AreEqual(0, ConnectionPointHelper.GetCount(s1));
+            Assert.AreEqual(0, VACXN.ConnectionPointHelper.GetCount(s1));
 
             page1.Delete(0);
         }

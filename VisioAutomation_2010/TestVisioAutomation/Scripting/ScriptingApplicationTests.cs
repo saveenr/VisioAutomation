@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -46,7 +47,7 @@ namespace TestVisioAutomation
             ss.Draw.Rectangle(1, 1, 2, 2);
             Assert.AreEqual(1, ss.Selection.Get().Count);
 
-            ss.Document.CloseAllWithoutSaving();
+            ss.Document.Close(true);
         }
 
         public void Scripting_Test_App_to_Front()

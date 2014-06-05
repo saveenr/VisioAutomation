@@ -2,6 +2,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -36,6 +37,8 @@ namespace TestVisioAutomation
             Assert.AreEqual("5.5 in", xfrms[0].PinY.Formula);
             Assert.AreEqual("4 in", xfrms[1].PinX.Formula);
             Assert.AreEqual("4.9330127018922 in", xfrms[1].PinY.Formula);
+
+            doc.Close(true);
         }
     }
 }
