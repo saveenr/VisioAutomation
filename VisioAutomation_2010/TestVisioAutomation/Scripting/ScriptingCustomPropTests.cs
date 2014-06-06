@@ -1,9 +1,6 @@
-using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using VisioAutomation.Extensions;
-using VisioAutomation.Shapes.CustomProperties;
-using VisioAutomation.ShapeSheet;
+using VACUSTOMPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -24,7 +21,7 @@ namespace TestVisioAutomation
 
             ss.Selection.None();
 
-            ss.ShapeSheet.SetFormula(null, new SRC[] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
+            ss.ShapeSheet.SetFormula(null, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
             ss.Document.Close(true);
         }
 
@@ -50,7 +47,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, prop_dic0[s2].Count);
             Assert.AreEqual(0, prop_dic0[s3].Count);
 
-            var cp = new CustomPropertyCells();
+            var cp = new VACUSTOMPROP.CustomPropertyCells();
             cp.Value = "BAR";
             ss.CustomProp.Set(null,"FOO",cp);
 

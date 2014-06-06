@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Extensions;
 using System.Linq;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VAUSERCELL = VisioAutomation.Shapes.UserDefinedCells;

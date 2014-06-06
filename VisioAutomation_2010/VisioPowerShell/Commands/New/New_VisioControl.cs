@@ -2,6 +2,7 @@ using VAS=VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VACONTROL = VisioAutomation.Shapes.Controls;
 
 namespace VisioPowerShell.Commands
 {
@@ -39,7 +40,7 @@ namespace VisioPowerShell.Commands
         {
             var scriptingsession = this.ScriptingSession;
 
-            var ctrl = new VA.Shapes.Controls.ControlCells();
+            var ctrl = new VACONTROL.ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;

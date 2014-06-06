@@ -2,6 +2,7 @@ using System;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using VACONTROL = VisioAutomation.Shapes.Controls;
 
 namespace VisioAutomation.Shapes.Controls
 {
@@ -14,14 +15,14 @@ namespace VisioAutomation.Shapes.Controls
                 throw new ArgumentNullException("shape");
             }
 
-            var ctrl = new ControlCells();
+            var ctrl = new VACONTROL.ControlCells();
 
             return Add(shape, ctrl);
         }
 
         public static int Add(
             IVisio.Shape shape,
-            ControlCells ctrl)
+            VACONTROL.ControlCells ctrl)
         {
             if (shape == null)
             {
@@ -40,7 +41,7 @@ namespace VisioAutomation.Shapes.Controls
         public static int Set(
             IVisio.Shape shape,
             short row,
-            ControlCells ctrl)
+            VACONTROL.ControlCells ctrl)
         {
             if (shape == null)
             {
