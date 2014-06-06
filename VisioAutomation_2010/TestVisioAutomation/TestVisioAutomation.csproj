@@ -96,7 +96,7 @@
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Models\BoxLayout_Tests.cs" />
     <Compile Include="Other\Geometry_Tests.cs" />
-    <Compile Include="Extensions\LayersExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions_Test.cs" />
     <Compile Include="Models\DrawingHelper.cs" />
     <Compile Include="Models\PieSliceTests.cs" />
     <Compile Include="Scripting\ScriptingApplicationTests.cs" />
