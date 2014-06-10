@@ -62,6 +62,8 @@ $result = Export-PowerShellModuleInstaller `
 
 Write-Host $result
 
+#http://www.topbug.net/blog/2012/07/02/a-simple-tutorial-create-and-publish-chocolatey-packages/
+
 $choc_filename = Join-Path $output_msi_path ($productshortname + ".nuspec" )
 $choc_tools = Join-Path $output_msi_path "tools"
 
