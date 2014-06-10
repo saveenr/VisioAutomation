@@ -411,6 +411,13 @@ $program_files_installdir =@"
         Write-Host 
         Write-Host "----------------------------------------"
         Write-Host SUCCESS: Installer file created here $output_msi_file 
+
+        $result = New-Object Object
+        $result | Add-Member NoteProperty MSIFile $output_msi_file  
+        $result | Add-Member NoteProperty ZipFile $zipfile 
+        $result | Add-Member NoteProperty ProductVersion $ProductVersion                 
+
+        return $result
     }
 
 }
