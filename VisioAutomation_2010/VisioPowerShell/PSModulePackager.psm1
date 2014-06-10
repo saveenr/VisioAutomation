@@ -187,7 +187,9 @@ function Export-PowerShellModuleInstaller
         [parameter(Mandatory=$true)] 
 		[ValidateSet("Default","ProgramFiles","PowerShellUserModule")] 
 		[string] $InstallLocationType,
-        [parameter(Mandatory=$false)] [bool] $KeepTemporaryFolder
+        [parameter(Mandatory=$false)] [bool] $KeepTemporaryFolder,
+        [parameter(Mandatory=$true)] [string] $Tags,
+        [parameter(Mandatory=$true)] [string] $IconURL
 		
     )
     PROCESS 
@@ -404,6 +406,64 @@ $program_files_installdir =@"
         Write-Host "Creating ZIP file"
         $zipfile = join-path $output_msi_path ($msibasename + ".zip")
         Export-ZIPFolder -InputFolder $binpath -OutputFile $zipfile -IncludeBaseDir $false
+        
+
+        # ---------------------------------------
+        # CHOCOLATEY
+        #http://www.topbug.net/blog/2012/07/02/a-simple-tutorial-create-and-publish-chocolatey-packages/
+        Write-Host "building Choc package"
+        $choc_filename = Join-Path $OutputFolder ($productshortname + ".nuspec" )
+        $choc_tools = Join-Path $OutputFolder "tools"
+
+        $choc_id = $ProductNameShort
+        $choc_title = $ProductNameLong
+        $choc_ver = $ProductVersion
+        $choc_authors = $Manufacturer
+        $choc_owners = $Manufacturer
+        $choc_summary = $ProductNameLong
+        $choc_description = $ProductNameLong
+        $choc_projecturl = $AboutLink
+        $choc_tags = $Tags
+        $choc_licenseurl = $AboutLink
+        $choc_licenseacceptance = "false"
+        $choc_iconurl = $IconURL
+
+        $choc_xml = @"
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>$choc_id</id>
+    <title>$choc_title</title>
+    <version>$choc_ver</version>
+    <authors>$choc_authors</authors>
+    <owners>$choc_owners</owners>
+    <summary>$choc_summary</summary>
+    <description>$choc_description</description>
+    <projectUrl>$choc_projecturl</projectUrl>
+    <tags>$choc_tags</tags>
+    <licenseUrl>$choc_licenseurl</licenseUrl>
+    <requireLicenseAcceptance>$choc_licenseacceptance</requireLicenseAcceptance>
+    <iconUrl>$choc_iconurl</iconUrl>
+  </metadata>
+</package>
+"@
+
+        $choc_xml = [xml] $choc_xml
+        $choc_xml.Save( $choc_filename )
+
+        if (Test-Path $choc_tools)
+        {
+            Remove-Item -Recurse -Force $choc_tools
+        }
+        mkdir $choc_tools 
+
+        Copy-Item $output_msi_file $choc_tools
+        Copy-Item "D:\saveenr\code\github\visioautomation\VisioAutomation_2010\VisioPowerShell\chocolateyInstall.ps1" $choc_tools
+        $old = Get-Location
+        cd $OutputFolder
+        cpack $choc_filename 
+        Remove-Item -Recurse -Force $choc_tools
+        cd $old
 
 
         # ----------------------------------------
@@ -421,6 +481,7 @@ $program_files_installdir =@"
     }
 
 }
+
 
 
 function Export-ZIPFolder
