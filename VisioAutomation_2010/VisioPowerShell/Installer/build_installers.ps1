@@ -64,7 +64,7 @@ $result = Export-PowerShellModuleInstaller `
     -IconURL "http://viziblr.com/storage/visioautomation/visioautomation-128x128.png" `
     -ChocolateyScriptsFolder (Join-Path $scriptpath "Chocolatey")
 
-$result = $result[ $result.Length-1 ] 
+$result = [PSCustomObject] $result[ $result.Length-1 ] 
 Write-Host $result 
 
 

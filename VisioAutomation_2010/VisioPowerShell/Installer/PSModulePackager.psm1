@@ -460,10 +460,8 @@ $program_files_installdir =@"
         Remove-Item -Recurse -Force $choc_tools
         cd $old
 
-        [PSCustomObject] @{ 
-            MSIFile = $output_msi_file ;
-            ZipFile = $zipfile;
-            ProductVersion = $ProductVersion }
+        $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
+        $result
     }
 
 }
