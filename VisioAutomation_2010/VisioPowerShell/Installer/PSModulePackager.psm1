@@ -536,7 +536,8 @@ function Install-PSModuleFromFolder
             }
         }
         else
-        {
+        {        [parameter(Mandatory=$true)] [string] $ScriptPath
+
             New-Item $output_folder -ItemType Directory
         }
 
@@ -562,50 +563,57 @@ function Update-Version($old_version, $index)
 }
 
 
-function Update-PSD1Version($Version)
+function Update-PSD1Version
 {
-
-    $src_psd1_filename = JoinResolve-Path $scriptpath $psdfilename
-    $dst_psd1_filename = JoinResolve-Path $binpath $psdfilename
-
-    if (!( Test-TextFilesAreEqual $src_psd1_filename $dst_psd1_filename))
+    param (
+        [parameter(Mandatory=$true)] [string] $Old,
+        [parameter(Mandatory=$true)] [string] $New
+    )
+    PROCESS 
     {
-        $exc = New-Object System.ArgumentException "PSD1 files are not the same. Rebuild the project"
-        Throw $exc
-    }
 
-    $psd1_src = Get-Content $src_psd1_filename 
-    for ($i=0; $i -lt $psd1_src.Length ; $i++)
-    {
-        $src_line = $psd1_src[$i]
-        if ($src_line.Trim().StartsWith("ModuleVersion"))
+        $src_psd1_filename = $Old
+        $dst_psd1_filename = $New
+
+        if (!( Test-TextFilesAreEqual $src_psd1_filename $dst_psd1_filename))
         {
-            $tokens = $src_line -split "="
-            if ($tokens.Length -ne 2)
-            {
-                $msg = "Unexpected number of tokens"
-                $exc = New-Object System.ArgumentException $msg
-                Throw $exc
-            }
-
-            $old_version = $tokens[1].Replace("'","").Trim()
-
-            $Version = Update-Version $old_version 2
-            $new_line = "ModuleVersion = '$Version'" 
-            $psd1_src[$i] = $new_line
+            $exc = New-Object System.ArgumentException "PSD1 files are not the same. Rebuild the project"
+            Throw $exc
         }
+
+        $psd1_src = Get-Content $src_psd1_filename 
+        for ($i=0; $i -lt $psd1_src.Length ; $i++)
+        {
+            $src_line = $psd1_src[$i]
+            if ($src_line.Trim().StartsWith("ModuleVersion"))
+            {
+                $tokens = $src_line -split "="
+                if ($tokens.Length -ne 2)
+                {
+                    $msg = "Unexpected number of tokens"
+                    $exc = New-Object System.ArgumentException $msg
+                    Throw $exc
+                }
+
+                $old_version = $tokens[1].Replace("'","").Trim()
+
+                $Version = Update-Version $old_version 2
+                $new_line = "ModuleVersion = '$Version'" 
+                $psd1_src[$i] = $new_line
+            }
+        }
+
+        if ($Version -eq "UNKNOWN")
+        {
+            $msg = Write-Error "Version was never set"
+            $exc = New-Object System.ArgumentException $msg
+            Throw $exc
+        }
+
+        Set-Content $src_psd1_filename $psd1_src
+        Set-Content $dst_psd1_filename $psd1_src
+
+        $Version
     }
-
-    if ($Version -eq "UNKNOWN")
-    {
-        $msg = Write-Error "Version was never set"
-        $exc = New-Object System.ArgumentException $msg
-        Throw $exc
-    }
-
-    Set-Content $src_psd1_filename $psd1_src
-    Set-Content $dst_psd1_filename $psd1_src
-
-    $Version
 }
 

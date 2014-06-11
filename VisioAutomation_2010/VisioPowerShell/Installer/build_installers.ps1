@@ -18,9 +18,9 @@ $manufacturer = "Saveen Reddy"
 $helplink = "http://visioautomation.codeplex.com"
 $aboutlink = "http://visioautomation.codeplex.com"
 $upgradecode = "EE659AB6-BE76-426E-B971-35DF3907F9D4"
-$wixbin = Join-path $scriptpath "../../WIX/wix38-binaries"
+$wixbin = Join-path $scriptpath "../../../WIX/wix38-binaries"
 $mydocs = [Environment]::GetFolderPath("MyDocuments")
-$binpath = Resolve-Path ( Join-Path $scriptpath "bin\Debug" )
+$binpath = Resolve-Path ( Join-Path $scriptpath "../bin/Debug" )
 $output_msi_path = join-path $mydocs ("VisioPSDistribution")
 $KeepTempFolderOnExit = $false
 
@@ -29,17 +29,19 @@ if (!(Test-Path $output_msi_path))
     mkdir $output_msi_path
 }
 
-Write-Host ----------------------------------------
+Resolve-Path $scriptpath
+Resolve-Path $binpath
 
-Write-Host "Loading Module Packager PSM1"
 $module_packager = Resolve-Path ( Join-Path $scriptpath "PSModulePackager.psm1" )
 Import-Module $module_packager
 
 
-Write-Host "----------------------------------------"
 Write-Host Revising PSD1 Version
 
-$Version = Update-PSD1Version
+$Old_PSD1 = Join-Path $scriptpath ("../" + $psdfilename )
+$New_PSD1 = Join-Path $binpath $psdfilename
+
+$Version = Update-PSD1Version -Old $Old_PSD1 -New $New_PSD1
 
 Write-Host Publishing module
 
