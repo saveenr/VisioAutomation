@@ -191,7 +191,8 @@ function Export-PowerShellModuleInstaller
 		[string] $InstallLocationType,
         [parameter(Mandatory=$false)] [bool] $KeepTemporaryFolder,
         [parameter(Mandatory=$true)] [string] $Tags,
-        [parameter(Mandatory=$true)] [string] $IconURL
+        [parameter(Mandatory=$true)] [string] $IconURL,
+        [parameter(Mandatory=$true)] [string] $ChocolateyScriptsFolder
 		
     )
     PROCESS 
@@ -449,8 +450,7 @@ $program_files_installdir =@"
         }
         mkdir $choc_tools 
 
-        $choc_scripts = "C:\Users\saveenr\Documents\GitHub\visioautomation\VisioAutomation_2010\VisioPowerShell\Installer"
-        $choc_install_script = Join-Path $choc_scripts "chocolateyInstall.ps1"
+        $choc_install_script = Join-Path $ChocolateyScriptsFolder "chocolateyInstall.ps1"
         Copy-Item $output_msi_file $choc_tools 
 
         Copy-Item $choc_install_script $choc_tools

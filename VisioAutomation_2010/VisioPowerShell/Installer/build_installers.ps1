@@ -61,7 +61,8 @@ $result = Export-PowerShellModuleInstaller `
     -InstallLocationType "PowerShellUserModule" `
     -KeepTemporaryFolder $false `
     -Tags "Visio PowerShell" `
-    -IconURL "http://viziblr.com/storage/visioautomation/visioautomation-128x128.png"
+    -IconURL "http://viziblr.com/storage/visioautomation/visioautomation-128x128.png" `
+    -ChocolateyScriptsFolder "C:\Users\saveenr\Documents\GitHub\visioautomation\VisioAutomation_2010\VisioPowerShell\Installer\Chocolatey"
 
 $result = $result[ $result.Length-1 ] 
 Write-Host $result 
