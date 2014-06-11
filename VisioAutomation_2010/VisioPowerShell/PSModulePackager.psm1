@@ -23,7 +23,6 @@ function Get-MyDocsPath()
 function JoinResolve-Path($a, $b)
 {
     $p = Join-Path $a $b
-    Write-Host $p
     Resolve-Path $p
 }
 
@@ -127,8 +126,9 @@ function AssertPathExists( $p )
     }
     else
     {
-        Write-Host "ERROR: Path does not exist"
-        Break    
+        $msg = "Path does not exist: $p"
+        $exc = New-Object System.ArgumentException $msg
+        Throw $exc
     }
 }
 
@@ -140,21 +140,23 @@ function AssertFileExists( $p )
     }
     else
     {
-        Write-Error "ERROR: File does not exist"
-        Break    
+        $msg = "File does not exist"
+        $exc = New-Object System.ArgumentException $msg
+        Throw $exc
     }
 }
 
 function AssertFileWasProduced( $p )
 {
-    Write-Host "Checking file was produced" $p
+    Write-Verbose "Checking file was produced $p"
     if (Test-Path $p)
     {
     }
     else
     {
-        Write-Host "ERROR: File was not produced"
-        Break    
+        $msg = "File was not produced"
+        $exc = New-Object System.ArgumentException $msg
+        Throw $exc
     }
 }
 
@@ -198,12 +200,9 @@ function Export-PowerShellModuleInstaller
         $UpgradeID = $UpgradeCode # so it regenerate devery time
         # ----------------------------------------
         # VERIFY USER INPUT
-        Write-Host 
-        Write-Host Veryify Paths
         AssertPathExists( $InputFolder )
         AssertPathExists( $WIXBinFolder )
         AssertPathExists( $OutputFolder )
-        Write-Host Finished Veryifying Paths
 
         # ----------------------------------------
         # CALCULATE VARIOUS PATHS, FILENAMES, IDS, BASED ON INPUT
@@ -232,11 +231,6 @@ function Export-PowerShellModuleInstaller
         {
             $licensecmd = ""
         }
-
-
-        Write-Host Source Folder to Package: $InputFolder
-        Write-Host MSI Will be placed here: $OutputFolder
-        Write-Host
 
         # ----------------------------------------
         # CREATE BEFORE WE BEGIN
@@ -333,15 +327,17 @@ $program_files_installdir =@"
 		{
 			if ( ($ProgramFilesSubFolder -eq $null) -or ($ProgramFilesSubFolder -eq ""))
 			{
-				Write-Host $ProgramFilesSubFolder is null
-				Break
+                $msg = "$ProgramFilesSubFolder is null"
+                $exc = New-Object System.ArgumentException $msg
+                Throw $exc
 			}
 			$modules_xml = $modules_xml -replace "#installdir", $program_files_installdir
 		}
 		else
 		{
-			Write-Host Unsupported InstallType
-			Break
+            $msg = "Unsupported InstallType $InstallLocationType "
+            $exc = New-Object System.ArgumentException $msg
+            Throw $exc
 		}
 
 
@@ -365,17 +361,14 @@ $program_files_installdir =@"
 		
         # ----------------------------------------
         # PRODUCE THE WXS FILE
-        Write-Host Writing the modules WXS file $modules_wxs
         $modules_xml.Save( $modules_wxs )
         AssertFileWasProduced( $modules_wxs )
 
-        Write-Host Using HEAT.EXE to create the product WXS file $product_wxs 
         &$heatexe dir $InputFolder -nologo -sfrag -suid -ag -srd -dir $directoryid  -out $product_wxs -cg $ProductNameShort  -dr $ProductNameShort
         AssertFileWasProduced( $product_wxs )
 
         # ----------------------------------------
         # PRODUCE THE WIXOBJ FILES VIA CANDLE
-        Write-Host Using CANDLE.EXE to create wixobj files
         &$candleexe $modules_wxs $product_wxs 
         AssertFileWasProduced( $modules_wixobj )
         AssertFileWasProduced( $product_wixobj )
@@ -402,16 +395,15 @@ $program_files_installdir =@"
         Remove-FileIfExists -Filename  $product_wixobj -Description "product wixobj"
         Remove-FileIfExists -Filename $productpdb -Description "product pdb"
 
-        Write-Host "----------------------------------------"
-        Write-Host "Creating ZIP file"
+        Write-Verbose "Creating ZIP file"
         $zipfile = join-path $output_msi_path ($msibasename + ".zip")
         Export-ZIPFolder -InputFolder $binpath -OutputFile $zipfile -IncludeBaseDir $false
         
 
         # ---------------------------------------
         # CHOCOLATEY
-        #http://www.topbug.net/blog/2012/07/02/a-simple-tutorial-create-and-publish-chocolatey-packages/
-        Write-Host "building Choc package"
+        # http://www.topbug.net/blog/2012/07/02/a-simple-tutorial-create-and-publish-chocolatey-packages/
+        Write-Verbose "Creating Chocolatey package"
         $choc_filename = Join-Path $OutputFolder ($productshortname + ".nuspec" )
         $choc_tools = Join-Path $OutputFolder "tools"
 
@@ -465,19 +457,10 @@ $program_files_installdir =@"
         Remove-Item -Recurse -Force $choc_tools
         cd $old
 
-
-        # ----------------------------------------
-        # FINAL MESSAGE
-        Write-Host 
-        Write-Host "----------------------------------------"
-        Write-Host SUCCESS: Installer file created here $output_msi_file 
-
-        $result = New-Object Object
-        $result | Add-Member NoteProperty MSIFile $output_msi_file  
-        $result | Add-Member NoteProperty ZipFile $zipfile 
-        $result | Add-Member NoteProperty ProductVersion $ProductVersion                 
-
-        return $result
+        [PSCustomObject] @{ 
+            MSIFile = $output_msi_file ;
+            ZipFile = $zipfile;
+            ProductVersion = $ProductVersion }
     }
 
 }
@@ -587,10 +570,9 @@ function Update-PSD1Version($Version)
 
     if (!( Test-TextFilesAreEqual $src_psd1_filename $dst_psd1_filename))
     {
-        Write-Error "PSD1 files are not the same. Rebuild the project"
-        break
+        $exc = New-Object System.ArgumentException "PSD1 files are not the same. Rebuild the project"
+        Throw $exc
     }
-
 
     $psd1_src = Get-Content $src_psd1_filename 
     for ($i=0; $i -lt $psd1_src.Length ; $i++)
@@ -598,15 +580,16 @@ function Update-PSD1Version($Version)
         $src_line = $psd1_src[$i]
         if ($src_line.Trim().StartsWith("ModuleVersion"))
         {
-            Write-Host $src_line
             $tokens = $src_line -split "="
             if ($tokens.Length -ne 2)
             {
-                Write-Error "Unexpected number of tokens"
+                $msg = "Unexpected number of tokens"
+                $exc = New-Object System.ArgumentException $msg
+                Throw $exc
             }
 
             $old_version = $tokens[1].Replace("'","").Trim()
-            Write-Host Old Version: $old_version
+
             $Version = Update-Version $old_version 2
             $new_line = "ModuleVersion = '$Version'" 
             $psd1_src[$i] = $new_line
@@ -615,10 +598,10 @@ function Update-PSD1Version($Version)
 
     if ($Version -eq "UNKNOWN")
     {
-        Write-Error "Version was never set"
+        $msg = Write-Error "Version was never set"
+        $exc = New-Object System.ArgumentException $msg
+        Throw $exc
     }
-
-    Write-Host New Version: $Version
 
     Set-Content $src_psd1_filename $psd1_src
     Set-Content $dst_psd1_filename $psd1_src

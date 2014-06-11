@@ -41,7 +41,6 @@ Write-Host Revising PSD1 Version
 
 $Version = Update-PSD1Version
 
-Write-Host "----------------------------------------"
 Write-Host Publishing module
 
 $result = Export-PowerShellModuleInstaller `
@@ -62,6 +61,7 @@ $result = Export-PowerShellModuleInstaller `
     -Tags "Visio PowerShell" `
     -IconURL "http://viziblr.com/storage/visioautomation/visioautomation-128x128.png"
 
+$result = $result[ $result.Length-1 ] 
+Write-Host $result 
 
-Write-Host "----------------------------------------"
-Write-Host Done
+
