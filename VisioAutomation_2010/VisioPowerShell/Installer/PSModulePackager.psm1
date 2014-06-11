@@ -449,8 +449,11 @@ $program_files_installdir =@"
         }
         mkdir $choc_tools 
 
-        Copy-Item $output_msi_file $choc_tools
-        Copy-Item "D:\saveenr\code\github\visioautomation\VisioAutomation_2010\VisioPowerShell\chocolateyInstall.ps1" $choc_tools
+        $choc_scripts = "C:\Users\saveenr\Documents\GitHub\visioautomation\VisioAutomation_2010\VisioPowerShell\Installer"
+        $choc_install_script = Join-Path $choc_scripts "chocolateyInstall.ps1"
+        Copy-Item $output_msi_file $choc_tools 
+
+        Copy-Item $choc_install_script $choc_tools
         $old = Get-Location
         cd $OutputFolder
         cpack $choc_filename 
