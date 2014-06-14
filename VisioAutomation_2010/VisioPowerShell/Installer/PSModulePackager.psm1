@@ -411,8 +411,6 @@ function Export-PowerShellModuleInstaller
 "@
 
 
-Write-Host $choc_xml
-
         $choc_xml = [xml] $choc_xml
         $choc_xml.Save( $choc_filename )
 
@@ -428,17 +426,29 @@ Write-Host $choc_xml
         Copy-Item $choc_install_script $choc_tools
 
         $old = Get-Location
+        Resolve-Path $OutputFolder
 
-        Write-Verbose "Changing location to $OutputFolder"
-        cd $OutputFolder
+        $choc_pkg = Join-Path $OutputFolder ($ProductNameShort + "." + $ProductVersion + ".nupkg")
+        Remove-File $choc_pkg
 
-        Write-Verbose "Cleaning Chocolately package"
-        $choc_results = cpack $choc_filename -Verbose
-        Write-Host $choc_results
+        try
+        {
+            Write-Verbose "Changing location to $OutputFolder"
+            Resolve-Path $OutputFolder
+            cd $OutputFolder
+
+            Write-Verbose "Cleaning Chocolately package"
+            $choc_results = cpack $choc_filename -Verbose
+        }
+        Finally
+        {
+            cd $old
+        }
+
+        AssertFileExists $choc_pkg
 
         Write-Verbose "Cleaning Chocolately Tools directory"
         Remove-Item -Recurse -Force $choc_tools
-        cd $old
 
         $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
         $result
@@ -504,9 +514,6 @@ function Install-PSModuleFromFolder
         $output_folder = Join-Path $mydocs "WindowsPowerShell\Modules"
         $output_folder = Join-Path $output_folder $Name
         
-        Write-Verbose $output_folder
-        Write-Host "copying"
-
         if (Test-Path $output_folder)
         {
             foreach ($i in Get-ChildItem $output_folder)
@@ -522,10 +529,7 @@ function Install-PSModuleFromFolder
             New-Item $output_folder -ItemType Directory
         }
 
-        Write-Host "copying"
-
         &robocopy $Folder $output_folder /MIR /A-:R /XF *.pdb /XF *.ignore 
-
     }
 }
 
