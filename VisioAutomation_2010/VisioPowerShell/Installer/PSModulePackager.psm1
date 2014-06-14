@@ -384,11 +384,11 @@ function Export-ChocolateyPackage
         [parameter(Mandatory=$true)] [string] $ID,
         [parameter(Mandatory=$true)] [string] $Summary,
         [parameter(Mandatory=$true)] [string] $Description,
-        [parameter(Mandatory=$true)] [string] $ProductNameShort,
+        [parameter(Mandatory=$true)] [string] $Authors,
+        [parameter(Mandatory=$true)] [string] $Owners,
         [parameter(Mandatory=$true)] [string] $ProductVersion,
-        [parameter(Mandatory=$true)] [string] $InputFolder,
-        [parameter(Mandatory=$true)] [string] $OutputFolder,
-        [parameter(Mandatory=$true)] [string] $Manufacturer,
+        [parameter(Mandatory=$true)] [string] $ProjectURL,
+        [parameter(Mandatory=$true)] [string] $LicenseURL,
         [parameter(Mandatory=$true)] [string] $AboutLink,
         [parameter(Mandatory=$true)] [string] $Tags,
         [parameter(Mandatory=$true)] [string] $IconURL,
@@ -399,25 +399,14 @@ function Export-ChocolateyPackage
     {
 
         $MSI = Resolve-Path $MSI
+        $OutputFolder = Resolve-Path (Split-Path $MSI)
 
-        # ---------------------------------------
-        # CHOCOLATEY
         # http://www.topbug.net/blog/2012/07/02/a-simple-tutorial-create-and-publish-chocolatey-packages/
-        # cinst .\VisioPS.N.N.N.nupkg -Source Get-Location
 
         Write-Verbose "Creating Chocolatey package"
-        $choc_filename = Join-Path $OutputFolder ($productshortname + ".nuspec" )
-
-        $choc_authors = $Manufacturer
-        $choc_owners = $Manufacturer
-        $choc_projecturl = $AboutLink
-        $choc_tags = $Tags
-        $choc_licenseurl = $AboutLink
+        $choc_filename = Join-Path $OutputFolder ($ID + ".nuspec" )
         $choc_licenseacceptance = "false"
-        $choc_iconurl = $IconURL
-
-
-        
+                
         $choc_msi_file = Split-Path $MSI -Leaf
 
         $choc_xml = @"
@@ -427,15 +416,15 @@ function Export-ChocolateyPackage
     <id>$ID</id>
     <title>$Title</title>
     <version>$ProductVersion</version>
-    <authors>$choc_authors</authors>
-    <owners>$choc_owners</owners>
+    <authors>$Authors</authors>
+    <owners>$Owners</owners>
     <summary>$Summary</summary>
     <description>$Description</description>
-    <projectUrl>$choc_projecturl</projectUrl>
-    <tags>$choc_tags</tags>
-    <licenseUrl>$choc_licenseurl</licenseUrl>
+    <projectUrl>$ProjectURL</projectUrl>
+    <tags>$Tags</tags>
+    <licenseUrl>$LicenseURL</licenseUrl>
     <requireLicenseAcceptance>$choc_licenseacceptance</requireLicenseAcceptance>
-    <iconUrl>$choc_iconurl</iconUrl>
+    <iconUrl>$IconURL</iconUrl>
   </metadata>
   <files>
     <file src="$choc_msi_file" target="tools" />
@@ -464,7 +453,7 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
         $old = Get-Location
         Resolve-Path $OutputFolder
 
-        $pkg_filename = $ProductNameShort + "." + $ProductVersion + ".nupkg"
+        $pkg_filename = $ID + "." + $ProductVersion + ".nupkg"
         $choc_pkg = Join-Path $OutputFolder $pkg_filename
         Remove-File $choc_pkg
 
@@ -484,10 +473,16 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
 
         AssertFileExists $choc_pkg
 
-        $choc_test_script= "cinst $ProductShortName -Source %cd%";
+        $choc_test_script= "cinst $ID -Source %cd%";
         $cmd = Join-Path  $OutputFolder "InstallChocolateyPackageLocal.cmd"
         $Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($False)
         [System.IO.File]::WriteAllLines($cmd , $choc_test_script, $Utf8NoBomEncoding)
+
+        $result = [PSCustomObject] @{ 
+            MSIFile = $MSI ; 
+            ChocolateyPackage = $choc_pkg; 
+            ProductVersion = $ProductVersion }
+        $result
 
     }
 }

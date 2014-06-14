@@ -54,7 +54,7 @@ $Version = Update-PSD1Version -Old $Old_PSD1 -New $New_PSD1
 # ----------------------------------------
 # Build the installers
 
-$result = Export-PowerShellModuleInstaller `
+$msi_result = Export-PowerShellModuleInstaller `
     -InputFolder $binpath `
     -ModuleFolderName $module_foldername `
     -OutputFolder $output_msi_path `
@@ -74,21 +74,25 @@ $result = Export-PowerShellModuleInstaller `
     -ChocolateyScriptsFolder (Join-Path $scriptpath "Chocolatey") `
     -Verbose 
 
-$result = [PSCustomObject] $result[ $result.Length-1 ] 
+$msi_result = [PSCustomObject] $msi_result[ $msi_result.Length-1 ] 
 
-$result2 = Export-ChocolateyPackage `
+$choc_result = Export-ChocolateyPackage `
     -Title $productname `
     -ID $productshortname `
     -Summary "PowerShell module for automation Microsoft Visio 2010 and Visio 2013" `
     -Description "No Description" `
-    -InputFolder $binpath `
-    -OutputFolder $output_msi_path `
-    -ProductNameShort $productshortname `
+    -Authors "Saveen Reddy" `
+    -Owners "Saveen Reddy" `
+    -ProjectURL $aboutlink `
+    -LicenseURL $aboutlink `
     -ProductVersion $Version `
-    -Manufacturer $manufacturer `
     -AboutLink $aboutlink `
     -Tags "Visio PowerShell" `
     -IconURL $IconURL `
     -Verbose `
-    -MSI $result.MSIFile `
+    -MSI $msi_result.MSIFile `
 
+$choc_result = [PSCustomObject] $choc_result[ $choc_result.Length-1 ] 
+
+$msi_result
+$choc_result
