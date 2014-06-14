@@ -372,6 +372,30 @@ function Export-PowerShellModuleInstaller
         Export-ZIPFolder -InputFolder $binpath -OutputFile $zipfile -IncludeBaseDir $false
         
 
+        $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
+        $result
+    }
+}
+
+function Export-ChocolateyPackage
+{
+    param (
+        [parameter(Mandatory=$true)] [string] $ProductNameLong,
+        [parameter(Mandatory=$true)] [string] $ProductNameShort,
+        [parameter(Mandatory=$true)] [string] $ProductVersion,
+        [parameter(Mandatory=$true)] [string] $InputFolder,
+        [parameter(Mandatory=$true)] [string] $OutputFolder,
+        [parameter(Mandatory=$true)] [string] $Manufacturer,
+        [parameter(Mandatory=$true)] [string] $AboutLink,
+        [parameter(Mandatory=$true)] [string] $Tags,
+        [parameter(Mandatory=$true)] [string] $IconURL,
+        [parameter(Mandatory=$true)] [string] $ChocolateyScriptsFolder,
+        [parameter(Mandatory=$true)] [string] $MSI
+		
+    )
+    PROCESS 
+    {
+
         # ---------------------------------------
         # CHOCOLATEY
         # http://www.topbug.net/blog/2012/07/02/a-simple-tutorial-create-and-publish-chocolatey-packages/
@@ -392,7 +416,9 @@ function Export-PowerShellModuleInstaller
         $choc_licenseurl = $AboutLink
         $choc_licenseacceptance = "false"
         $choc_iconurl = $IconURL
-        $choc_msi_file = $msifilename
+
+
+        $choc_msi_file = Split-Path $MSI -Leaf
 
         $choc_xml = @"
 <?xml version="1.0"?>
@@ -458,16 +484,12 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
 
         AssertFileExists $choc_pkg
 
-
         $choc_test_script= "cinst $ProductShortName -Source %cd%";
         $cmd = Join-Path  $OutputFolder "InstallChocolateyPackageLocal.cmd"
         $Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($False)
         [System.IO.File]::WriteAllLines($cmd , $choc_test_script, $Utf8NoBomEncoding)
 
-        $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
-        $result
     }
-
 }
 
 

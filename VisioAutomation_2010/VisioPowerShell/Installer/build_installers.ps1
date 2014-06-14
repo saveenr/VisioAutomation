@@ -75,4 +75,18 @@ $result = Export-PowerShellModuleInstaller `
     -Verbose 
 
 $result = [PSCustomObject] $result[ $result.Length-1 ] 
-$result 
+
+$result2 = Export-ChocolateyPackage `
+    -InputFolder $binpath `
+    -OutputFolder $output_msi_path `
+    -ProductNameLong $productname `
+    -ProductNameShort $productshortname `
+    -ProductVersion $Version `
+    -Manufacturer $manufacturer `
+    -AboutLink $aboutlink `
+    -Tags "Visio PowerShell" `
+    -IconURL $IconURL `
+    -ChocolateyScriptsFolder (Join-Path $scriptpath "Chocolatey") `
+    -Verbose `
+    -MSI $result.MSIFile
+
