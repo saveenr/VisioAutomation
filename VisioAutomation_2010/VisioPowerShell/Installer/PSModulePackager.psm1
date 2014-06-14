@@ -380,7 +380,10 @@ function Export-PowerShellModuleInstaller
 function Export-ChocolateyPackage
 {
     param (
-        [parameter(Mandatory=$true)] [string] $ProductNameLong,
+        [parameter(Mandatory=$true)] [string] $Title,
+        [parameter(Mandatory=$true)] [string] $ID,
+        [parameter(Mandatory=$true)] [string] $Summary,
+        [parameter(Mandatory=$true)] [string] $Description,
         [parameter(Mandatory=$true)] [string] $ProductNameShort,
         [parameter(Mandatory=$true)] [string] $ProductVersion,
         [parameter(Mandatory=$true)] [string] $InputFolder,
@@ -389,12 +392,13 @@ function Export-ChocolateyPackage
         [parameter(Mandatory=$true)] [string] $AboutLink,
         [parameter(Mandatory=$true)] [string] $Tags,
         [parameter(Mandatory=$true)] [string] $IconURL,
-        [parameter(Mandatory=$true)] [string] $ChocolateyScriptsFolder,
         [parameter(Mandatory=$true)] [string] $MSI
 		
     )
     PROCESS 
     {
+
+        $MSI = Resolve-Path $MSI
 
         # ---------------------------------------
         # CHOCOLATEY
@@ -404,13 +408,8 @@ function Export-ChocolateyPackage
         Write-Verbose "Creating Chocolatey package"
         $choc_filename = Join-Path $OutputFolder ($productshortname + ".nuspec" )
 
-        $choc_id = $ProductNameShort
-        $choc_title = $ProductNameLong
-        $choc_ver = $ProductVersion
         $choc_authors = $Manufacturer
         $choc_owners = $Manufacturer
-        $choc_summary = $ProductNameLong
-        $choc_description = $ProductNameLong
         $choc_projecturl = $AboutLink
         $choc_tags = $Tags
         $choc_licenseurl = $AboutLink
@@ -418,19 +417,20 @@ function Export-ChocolateyPackage
         $choc_iconurl = $IconURL
 
 
+        
         $choc_msi_file = Split-Path $MSI -Leaf
 
         $choc_xml = @"
 <?xml version="1.0"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
-    <id>$choc_id</id>
-    <title>$choc_title</title>
-    <version>$choc_ver</version>
+    <id>$ID</id>
+    <title>$Title</title>
+    <version>$ProductVersion</version>
     <authors>$choc_authors</authors>
     <owners>$choc_owners</owners>
-    <summary>$choc_summary</summary>
-    <description>$choc_description</description>
+    <summary>$Summary</summary>
+    <description>$Description</description>
     <projectUrl>$choc_projecturl</projectUrl>
     <tags>$choc_tags</tags>
     <licenseUrl>$choc_licenseurl</licenseUrl>
@@ -445,7 +445,7 @@ function Export-ChocolateyPackage
 "@
 
         $choc_installps1text= @"
-`$packageName = "$ProductNameLong"
+`$packageName = "$ID"
 `$installerType = 'MSI' 
 `$url = "$choc_msi_file" 
 `$silentArgs = '/quiet' 

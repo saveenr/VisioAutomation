@@ -77,16 +77,18 @@ $result = Export-PowerShellModuleInstaller `
 $result = [PSCustomObject] $result[ $result.Length-1 ] 
 
 $result2 = Export-ChocolateyPackage `
+    -Title $productname `
+    -ID $productshortname `
+    -Summary "PowerShell module for automation Microsoft Visio 2010 and Visio 2013" `
+    -Description "No Description" `
     -InputFolder $binpath `
     -OutputFolder $output_msi_path `
-    -ProductNameLong $productname `
     -ProductNameShort $productshortname `
     -ProductVersion $Version `
     -Manufacturer $manufacturer `
     -AboutLink $aboutlink `
     -Tags "Visio PowerShell" `
     -IconURL $IconURL `
-    -ChocolateyScriptsFolder (Join-Path $scriptpath "Chocolatey") `
     -Verbose `
-    -MSI $result.MSIFile
+    -MSI $result.MSIFile `
 
