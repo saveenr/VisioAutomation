@@ -305,7 +305,7 @@ $program_files_installdir =@"
 
 "@
 
-		#this has to be done first
+		# this has to be done first
 		if ($InstallLocationType -eq "PowerShellUserModule")
 		{
 			$modules_xml = $modules_xml -replace "#installdir", $powershell_user_module_installdir
@@ -314,7 +314,7 @@ $program_files_installdir =@"
 		{
 			if ( ($ProgramFilesSubFolder -eq $null) -or ($ProgramFilesSubFolder -eq ""))
 			{
-                $msg = "$ProgramFilesSubFolder is null"
+                $msg = "$ProgramFilesSubFolder is null or empty"
                 $exc = New-Object System.ArgumentException $msg
                 Throw $exc
 			}
@@ -368,11 +368,7 @@ $program_files_installdir =@"
 
         # ----------------------------------------
         # CLEANUP 
-        if ($KeepTemporaryFolder)
-		{
-			# Do nothing
-		}
-		else
+        if (!($KeepTemporaryFolder))
         {
 			Remove-Folder -Folder $temp_folder -Verbose
         }
