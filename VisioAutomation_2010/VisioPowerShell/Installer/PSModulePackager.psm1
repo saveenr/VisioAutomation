@@ -390,6 +390,8 @@ function Export-PowerShellModuleInstaller
         $choc_licenseacceptance = "false"
         $choc_iconurl = $IconURL
 
+        $choc_msi_file = ($msibasename + ".msi")
+
         $choc_xml = @"
 <?xml version="1.0"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -407,6 +409,9 @@ function Export-PowerShellModuleInstaller
     <requireLicenseAcceptance>$choc_licenseacceptance</requireLicenseAcceptance>
     <iconUrl>$choc_iconurl</iconUrl>
   </metadata>
+  <files>
+    <file src="$choc_msi_file" target="content" />
+  </files>
 </package>
 "@
 
