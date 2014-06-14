@@ -418,6 +418,15 @@ function Export-PowerShellModuleInstaller
 </package>
 "@
 
+        $choc_installps1text= @"
+`$packageName = "$ProductNameLong"
+`$installerType = 'MSI' 
+`$url = "$choc_msi_file" 
+`$silentArgs = '/quiet' 
+`$validExitCodes = @(0) 
+
+Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$url" -validExitCodes `$validExitCodes
+"@
 
         $choc_xml = [xml] $choc_xml
         $choc_xml.Save( $choc_filename )
@@ -431,7 +440,9 @@ function Export-PowerShellModuleInstaller
         mkdir $choc_tools 
         $choc_install_script = Join-Path $ChocolateyScriptsFolder "chocolateyInstall.ps1"
         Copy-Item $output_msi_file $choc_tools 
-        Copy-Item $choc_install_script $choc_tools
+        #Copy-Item $choc_install_script $choc_tools
+        $choc_installps1text | Out-File (Join-Path $choc_tools "chocolateyInstall.ps1")
+
 
         $old = Get-Location
         Resolve-Path $OutputFolder
@@ -456,7 +467,7 @@ function Export-PowerShellModuleInstaller
         AssertFileExists $choc_pkg
 
         Write-Verbose "Cleaning Chocolately Tools directory"
-        Remove-Item -Recurse -Force $choc_tools
+        #Remove-Item -Recurse -Force $choc_tools
 
         $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
         $result
