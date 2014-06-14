@@ -240,20 +240,66 @@ function Export-PowerShellModuleInstaller
 
 	    # ----------------------------------------
 	    # DYNAMICALLY BUILD THE WXS FILE FOR THE MODULES
+
+        $installdir = $null
+
+        $powershell_user_module_installdir = @"
+<Directory Id="PersonalFolder" Name="PersonalFolder">
+    <Directory Id="WindowsPowerShell" Name="WindowsPowerShell">
+        <Directory Id="INSTALLDIR" Name="Modules">
+            <Directory Id="$ProductNameShort" Name="$ModuleFolderName">
+            </Directory>
+        </Directory>
+    </Directory>
+</Directory>
+"@
+
+        $program_files_installdir = @"
+<Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLDIR" Name="$ProgramFilesSubFolder">
+            <Directory Id="$ProductNameShort" Name="$ProductNameShort">
+            </Directory>
+        </Directory>
+</Directory>
+"@
+
+		# this has to be done first
+		if ($InstallLocationType -eq "PowerShellUserModule")
+		{
+            $installdir = $powershell_user_module_installdir
+		}
+		elseif( ($InstallLocationType -eq "Default") -or ($InstallLocationType -eq "ProgramFiles"))
+		{
+			if ( ($ProgramFilesSubFolder -eq $null) -or ($ProgramFilesSubFolder -eq ""))
+			{
+                $msg = "$ProgramFilesSubFolder is null or empty"
+                $exc = New-Object System.ArgumentException $msg
+                Throw $exc
+			}
+             $installdir = $program_files_installdir
+		}
+		else
+		{
+            $msg = "Unsupported InstallType $InstallLocationType "
+            $exc = New-Object System.ArgumentException $msg
+            Throw $exc
+		}
+
+
 	    $modules_xml = @"
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'> 
-    <Product Id="#productid" 
+    <Product Id="$ProductID" 
 		Language="1033" 
-		Name="#productname" 
-		Version="#productversion"
-		Manufacturer="#manufacturer"
-		UpgradeCode="#upgradecode">
-        <Package Description="#productname Installer" 
-		InstallPrivileges="elevated" Comments="#productshortname Installer" 
+		Name="$ProductNameLong" 
+		Version="$ProductVersion"
+		Manufacturer="$Manufacturer"
+		UpgradeCode="$UpgradeCode">
+        <Package Description="$ProductNameLong Installer" 
+		InstallPrivileges="elevated" Comments="$ProductNameShort Installer" 
 		InstallerVersion="200" Compressed="yes">
 	</Package>
-        <Upgrade Id="#upgradeid">
+        <Upgrade Id="$UpgradeID">
             <UpgradeVersion 
 		        OnlyDetect="no" 
 		        Property="PREVIOUSFOUND" 
@@ -266,15 +312,15 @@ function Export-PowerShellModuleInstaller
         <InstallExecuteSequence>
             <RemoveExistingProducts After="InstallInitialize"></RemoveExistingProducts>
         </InstallExecuteSequence>
-        <Media Id="1" Cabinet="#cabfilename" EmbedCab="yes"></Media>
-        #licensecmd
+        <Media Id="1" Cabinet="$cabfilename" EmbedCab="yes"></Media>
+        $licensecmd
         <Directory Id="TARGETDIR" Name="SourceDir">
-		#installdir
+		$installdir
         </Directory>
-        <Property Id="ARPHELPLINK" Value="#helplink"></Property>
-        <Property Id="ARPURLINFOABOUT" Value="#aboutlink"></Property>
-        <Feature Id="#productshortname" Title="#productshortname" Level="1" ConfigurableDirectory="INSTALLDIR">
-            <ComponentGroupRef Id="#productshortname">
+        <Property Id="ARPHELPLINK" Value="$HelpLink"></Property>
+        <Property Id="ARPURLINFOABOUT" Value="$AboutLink"></Property>
+        <Feature Id="$ProductNameShort" Title="$ProductNameShort" Level="1" ConfigurableDirectory="INSTALLDIR">
+            <ComponentGroupRef Id="$ProductNameShort">
             </ComponentGroupRef>
         </Feature>
         <UI></UI>
@@ -283,65 +329,6 @@ function Export-PowerShellModuleInstaller
     </Product>
 </Wix>
 "@
-
-$powershell_user_module_installdir = @"
-<Directory Id="PersonalFolder" Name="PersonalFolder">
-    <Directory Id="WindowsPowerShell" Name="WindowsPowerShell">
-        <Directory Id="INSTALLDIR" Name="Modules">
-            <Directory Id="#productshortname" Name="#modulefoldername">
-            </Directory>
-        </Directory>
-    </Directory>
-</Directory>
-"@
-
-$program_files_installdir =@"
-<Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLDIR" Name="#progfilessubfolder">
-            <Directory Id="#productshortname" Name="#productshortname">
-            </Directory>
-        </Directory>
-</Directory>
-
-"@
-
-		# this has to be done first
-		if ($InstallLocationType -eq "PowerShellUserModule")
-		{
-			$modules_xml = $modules_xml -replace "#installdir", $powershell_user_module_installdir
-		}
-		elseif( ($InstallLocationType -eq "Default") -or ($InstallLocationType -eq "ProgramFiles"))
-		{
-			if ( ($ProgramFilesSubFolder -eq $null) -or ($ProgramFilesSubFolder -eq ""))
-			{
-                $msg = "$ProgramFilesSubFolder is null or empty"
-                $exc = New-Object System.ArgumentException $msg
-                Throw $exc
-			}
-			$modules_xml = $modules_xml -replace "#installdir", $program_files_installdir
-		}
-		else
-		{
-            $msg = "Unsupported InstallType $InstallLocationType "
-            $exc = New-Object System.ArgumentException $msg
-            Throw $exc
-		}
-
-
-		$modules_xml = $modules_xml -replace "#productid", $ProductID
-	    $modules_xml = $modules_xml -replace "#productname", $ProductNameLong
-	    $modules_xml = $modules_xml -replace "#productversion", $ProductVersion
-	    $modules_xml = $modules_xml -replace "#manufacturer", $Manufacturer
-	    $modules_xml = $modules_xml -replace "#upgradecode", $UpgradeCode
-	    $modules_xml = $modules_xml -replace "#productshortname", $ProductNameShort
-	    $modules_xml = $modules_xml -replace "#upgradeid", $UpgradeID
-	    $modules_xml = $modules_xml -replace "#cabfilename", $cabfilename
-	    $modules_xml = $modules_xml -replace "#licensecmd", $licensecmd
-	    $modules_xml = $modules_xml -replace "#helplink", $HelpLink
-	    $modules_xml = $modules_xml -replace "#aboutlink", $AboutLink
-	    $modules_xml = $modules_xml -replace "#licensecmd", $licensecmd
-		$modules_xml = $modules_xml -replace "#progfilessubfolder", $ProgramFilesSubFolder
-		$modules_xml = $modules_xml -replace "#modulefoldername", $ModuleFolderName
 
 	    $modules_xml = [xml] $modules_xml
 	    $modules_xml.Save( $modules_wxs )
@@ -423,6 +410,9 @@ $program_files_installdir =@"
 </package>
 "@
 
+
+Write-Host $choc_xml
+
         $choc_xml = [xml] $choc_xml
         $choc_xml.Save( $choc_filename )
 
@@ -430,15 +420,23 @@ $program_files_installdir =@"
         {
             Remove-Item -Recurse -Force $choc_tools
         }
-        mkdir $choc_tools 
 
+        Write-Verbose "Populating Chocolately Tools directory"
+        mkdir $choc_tools 
         $choc_install_script = Join-Path $ChocolateyScriptsFolder "chocolateyInstall.ps1"
         Copy-Item $output_msi_file $choc_tools 
-
         Copy-Item $choc_install_script $choc_tools
+
         $old = Get-Location
+
+        Write-Verbose "Changing location to $OutputFolder"
         cd $OutputFolder
-        cpack $choc_filename 
+
+        Write-Verbose "Cleaning Chocolately package"
+        $choc_results = cpack $choc_filename -Verbose
+        Write-Host $choc_results
+
+        Write-Verbose "Cleaning Chocolately Tools directory"
         Remove-Item -Recurse -Force $choc_tools
         cd $old
 

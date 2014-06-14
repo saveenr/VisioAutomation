@@ -70,8 +70,9 @@ $result = Export-PowerShellModuleInstaller `
     -InstallLocationType "PowerShellUserModule" `
     -KeepTemporaryFolder $false `
     -Tags "Visio PowerShell" `
-    -IconURL $Tags `
-    -ChocolateyScriptsFolder (Join-Path $scriptpath "Chocolatey")
+    -IconURL $IconURL `
+    -ChocolateyScriptsFolder (Join-Path $scriptpath "Chocolatey") `
+    -Verbose 
 
 $result = [PSCustomObject] $result[ $result.Length-1 ] 
 $result 
