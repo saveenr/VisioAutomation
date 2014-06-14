@@ -207,9 +207,11 @@ function Export-PowerShellModuleInstaller
         $product_wixobj = join-path (Get-Location) ( $ProductNameShort + ".wixobj")
         $directoryid = $ProductNameShort
         $msibasename = $ProductNameShort + "_" + $ProductVersion
-        $output_msi_file = join-path $OutputFolder ($msibasename + ".msi")
+        $msifilename =  $msibasename + ".msi"
+        $output_msi_file = join-path $OutputFolder $msifilename
         $productpdb = join-path (Split-path $output_msi_file) ($msibasename +".wixpdb")
         $licensertf = join-path $InputFolder "license.rtf"
+
         if (test-path $licensertf)
         {
             $licensecmd = "<WixVariable Id=`"WixUILicenseRtf`" Value=`"License.rtf`"></WixVariable>"
@@ -390,8 +392,7 @@ function Export-PowerShellModuleInstaller
         $choc_licenseurl = $AboutLink
         $choc_licenseacceptance = "false"
         $choc_iconurl = $IconURL
-
-        $choc_msi_file = ($msibasename + ".msi")
+        $choc_msi_file = $msifilename
 
         $choc_xml = @"
 <?xml version="1.0"?>
@@ -437,7 +438,8 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
         $old = Get-Location
         Resolve-Path $OutputFolder
 
-        $choc_pkg = Join-Path $OutputFolder ($ProductNameShort + "." + $ProductVersion + ".nupkg")
+        $pkg_filename = $ProductNameShort + "." + $ProductVersion + ".nupkg"
+        $choc_pkg = Join-Path $OutputFolder $pkg_filename
         Remove-File $choc_pkg
 
         Resolve-Path $OutputFolder
