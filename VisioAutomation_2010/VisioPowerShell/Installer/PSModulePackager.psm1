@@ -440,10 +440,10 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
         $choc_pkg = Join-Path $OutputFolder ($ProductNameShort + "." + $ProductVersion + ".nupkg")
         Remove-File $choc_pkg
 
+        Resolve-Path $OutputFolder
         try
         {
             Write-Verbose "Changing location to $OutputFolder"
-            Resolve-Path $OutputFolder
             cd $OutputFolder
 
             Write-Verbose "Cleaning Chocolately package"
@@ -455,6 +455,12 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
         }
 
         AssertFileExists $choc_pkg
+
+
+        $choc_test_script= "cinst $ProductShortName -Source %cd%";
+        $cmd = Join-Path  $OutputFolder "InstallChocolateyPackageLocal.cmd"
+        $Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($False)
+        [System.IO.File]::WriteAllLines($cmd , $choc_test_script, $Utf8NoBomEncoding)
 
         $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
         $result
