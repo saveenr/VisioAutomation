@@ -377,7 +377,6 @@ function Export-PowerShellModuleInstaller
 
         Write-Verbose "Creating Chocolatey package"
         $choc_filename = Join-Path $OutputFolder ($productshortname + ".nuspec" )
-        $choc_tools = Join-Path $OutputFolder "tools"
 
         $choc_id = $ProductNameShort
         $choc_title = $ProductNameLong
@@ -412,8 +411,8 @@ function Export-PowerShellModuleInstaller
     <iconUrl>$choc_iconurl</iconUrl>
   </metadata>
   <files>
-    <file src="$choc_msi_file" target="content" />
-    <file src="tools\chocolateyInstall.ps1" target="tools" />
+    <file src="$choc_msi_file" target="tools" />
+    <file src="chocolateyInstall.ps1" target="tools" />
   </files>
 </package>
 "@
@@ -431,18 +430,9 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
         $choc_xml = [xml] $choc_xml
         $choc_xml.Save( $choc_filename )
 
-        if (Test-Path $choc_tools)
-        {
-            Remove-Item -Recurse -Force $choc_tools
-        }
 
         Write-Verbose "Populating Chocolately Tools directory"
-        mkdir $choc_tools 
-        $choc_install_script = Join-Path $ChocolateyScriptsFolder "chocolateyInstall.ps1"
-        Copy-Item $output_msi_file $choc_tools 
-        #Copy-Item $choc_install_script $choc_tools
-        $choc_installps1text | Out-File (Join-Path $choc_tools "chocolateyInstall.ps1")
-
+        $choc_installps1text | Out-File (Join-Path $OutputFolder "chocolateyInstall.ps1")
 
         $old = Get-Location
         Resolve-Path $OutputFolder
@@ -465,9 +455,6 @@ Install-ChocolateyPackage "`$packageName" "`$installerType" "`$silentArgs" "`$ur
         }
 
         AssertFileExists $choc_pkg
-
-        Write-Verbose "Cleaning Chocolately Tools directory"
-        #Remove-Item -Recurse -Force $choc_tools
 
         $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
         $result
