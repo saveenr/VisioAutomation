@@ -1,7 +1,11 @@
 ﻿# CodePackage
 # Cmdlets to help distribute code
-
+#
 # HISTORY
+#
+# 2014-06-13 - Version 1.3
+# - Added Chocolatey integration
+#
 # 2013-03-11 - Version 1.2
 # - Added cmdlet to cleanly install a powershell module
 #
@@ -18,12 +22,6 @@ $ErrorActionPreference = "Stop"
 function Get-MyDocsPath()
 {
     [Environment]::GetFolderPath("MyDocuments")
-}
-
-function JoinResolve-Path($a, $b)
-{
-    $p = Join-Path $a $b
-    Resolve-Path $p
 }
 
 function Test-TextFilesAreEqual( $left, $right )
@@ -52,35 +50,31 @@ function New-Folder
 	}
 }
 
-function Remove-FolderIfExists
+function Remove-Folder
 {
 	param
 	(
-		[parameter(Mandatory=$true)] [string] $Folder , 
-		[parameter(Mandatory=$true)] [string] $Description 
+		[parameter(Mandatory=$true)] [string] $Folder
 	)
 	process
 	{
 		if ( test-path $Folder)
 		{
-			Write-Verbose $Description
     		Remove-Item $Folder -Recurse
 		}
 	}
 }
 
-function Remove-FileIfExists
+function Remove-File
 {
 	param
 	(
-		[parameter(Mandatory=$true)] [string] $Filename , 
-		[parameter(Mandatory=$true)] [string] $Description 
+		[parameter(Mandatory=$true)] [string] $Filename
 	)
 	process
 	{
 		if ( test-path $Filename)
 		{
-			Write-Verbose $Description
     		Remove-Item $Filename -Recurse
 		}
 	}
@@ -160,14 +154,6 @@ function AssertFileWasProduced( $p )
     }
 }
 
-function DeleteFileIfExists( $filename )
-{
-    if (test-path $filename )
-    {
-        Remove-Item $filename 
-    }
-}
-
 
 function Export-PowerShellModuleInstaller
 {
@@ -242,8 +228,8 @@ function Export-PowerShellModuleInstaller
         }
         New-Item $temp_folder -ItemType directory | Out-Null
 
-        DeleteFileIfExists($productpdb)
-        DeleteFileIfExists($output_msi_file)
+        Remove-File $productpdb
+        Remove-File $output_msi_file
 
         # --------------d:\--------------------------
         # VALIDATE THE BINARIES EXIST
@@ -388,13 +374,13 @@ $program_files_installdir =@"
 		}
 		else
         {
-			Remove-FolderIfExists -Folder $temp_folder -Description "Temp Folder" -Verbose
+			Remove-Folder -Folder $temp_folder -Verbose
         }
 
         # These have to be manually removed because they don't go into the temp folder by default
-        Remove-FileIfExists -Filename $modules_wixobj -Description "module wixobj" 
-        Remove-FileIfExists -Filename  $product_wixobj -Description "product wixobj"
-        Remove-FileIfExists -Filename $productpdb -Description "product pdb"
+        Remove-File $modules_wixobj 
+        Remove-File $product_wixobj 
+        Remove-File $productpdb 
 
         Write-Verbose "Creating ZIP file"
         $zipfile = join-path $output_msi_path ($msibasename + ".zip")

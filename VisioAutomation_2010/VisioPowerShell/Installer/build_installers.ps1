@@ -8,7 +8,6 @@ $scriptpath = Split-Path  $MyInvocation.MyCommand.Path
 
 # ----------------------------------------
 # The Most Common User Input settings
-#
 
 $productname = "Visio Powershell Module"
 $module_foldername = "Visio"
@@ -23,27 +22,37 @@ $mydocs = [Environment]::GetFolderPath("MyDocuments")
 $binpath = Resolve-Path ( Join-Path $scriptpath "../bin/Debug" )
 $output_msi_path = join-path $mydocs ("VisioPSDistribution")
 $KeepTempFolderOnExit = $false
+$IconURL = "http://viziblr.com/storage/visioautomation/visioautomation-128x128.png"
+$Tags = "Visio PowerShell"
+
+# ----------------------------------------
+# Verify Paths
+
+Resolve-Path $scriptpath
+Resolve-Path $binpath
 
 if (!(Test-Path $output_msi_path))
 {
     mkdir $output_msi_path
 }
 
-Resolve-Path $scriptpath
-Resolve-Path $binpath
+# ----------------------------------------
+# Load Helper Module
+
 
 $module_packager = Resolve-Path ( Join-Path $scriptpath "PSModulePackager.psm1" )
 Import-Module $module_packager
 
+# ----------------------------------------
+# Make sure the PSD1 has a new version number
 
-Write-Host Revising PSD1 Version
 
 $Old_PSD1 = Join-Path $scriptpath ("../" + $psdfilename )
 $New_PSD1 = Join-Path $binpath $psdfilename
-
 $Version = Update-PSD1Version -Old $Old_PSD1 -New $New_PSD1
 
-Write-Host Publishing module
+# ----------------------------------------
+# Build the installers
 
 $result = Export-PowerShellModuleInstaller `
     -InputFolder $binpath `
@@ -61,10 +70,8 @@ $result = Export-PowerShellModuleInstaller `
     -InstallLocationType "PowerShellUserModule" `
     -KeepTemporaryFolder $false `
     -Tags "Visio PowerShell" `
-    -IconURL "http://viziblr.com/storage/visioautomation/visioautomation-128x128.png" `
+    -IconURL $Tags `
     -ChocolateyScriptsFolder (Join-Path $scriptpath "Chocolatey")
 
 $result = [PSCustomObject] $result[ $result.Length-1 ] 
-Write-Host $result 
-
-
+$result 
