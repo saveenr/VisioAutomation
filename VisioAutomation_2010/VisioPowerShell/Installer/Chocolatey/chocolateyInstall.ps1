@@ -3,7 +3,6 @@
 
 $packageName = 'Visio PowerShell Module' # arbitrary name for the package, used in messages
 $installerType = 'MSI' #only one of these: exe, msi, msu
-$url = "VisioPS_1.2.62.msi" # download url
 $silentArgs = '/quiet' 
 $validExitCodes = @(0) 
 

@@ -373,6 +373,8 @@ function Export-PowerShellModuleInstaller
         # ---------------------------------------
         # CHOCOLATEY
         # http://www.topbug.net/blog/2012/07/02/a-simple-tutorial-create-and-publish-chocolatey-packages/
+        # cinst .\VisioPS.N.N.N.nupkg -Source Get-Location
+
         Write-Verbose "Creating Chocolatey package"
         $choc_filename = Join-Path $OutputFolder ($productshortname + ".nuspec" )
         $choc_tools = Join-Path $OutputFolder "tools"
@@ -411,6 +413,7 @@ function Export-PowerShellModuleInstaller
   </metadata>
   <files>
     <file src="$choc_msi_file" target="content" />
+    <file src="tools\chocolateyInstall.ps1" target="tools" />
   </files>
 </package>
 "@
