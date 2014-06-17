@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Shapes.Connections;
-using VisioAutomation.Shapes.CustomProperties;
+using VACXN = VisioAutomation.Shapes.Connections;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using SXL = System.Xml.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -157,7 +157,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 {
                     var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
                     dg_shape.URL = shape_info.URL;
-                    dg_shape.CustomProperties = new Dictionary<string, CustomPropertyCells>();
+                    dg_shape.CustomProperties = new Dictionary<string, VACUSTPROP.CustomPropertyCells>();
                     foreach (var kv in shape_info.custprops)
                     {
                         dg_shape.CustomProperties[kv.Key] = kv.Value;
@@ -167,7 +167,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 scriptingsession.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    var def_connector_type = ConnectorType.Curved;
+                    var def_connector_type = VACXN.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
                     var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);

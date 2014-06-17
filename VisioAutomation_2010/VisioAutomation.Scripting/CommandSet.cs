@@ -5,22 +5,6 @@ using System.Linq;
 
 namespace VisioAutomation.Scripting
 {
-    [System.Serializable]
-    public class ScriptingException : System.Exception
-    {
-        public ScriptingException() { }
-        public ScriptingException(string message) : base(message) { }
-        public ScriptingException(string message, System.Exception inner) : base(message, inner) { }
-    }
-
-    [System.Serializable]
-    public class VisioApplicationException : ScriptingException
-    {
-        public VisioApplicationException() { }
-        public VisioApplicationException(string message) : base(message) { }
-        public VisioApplicationException(string message, System.Exception inner) : base(message, inner) { }
-    }
-
     public class CommandSet
     {
         // Keep a reference back to the parent session. This gives access to all other commands
