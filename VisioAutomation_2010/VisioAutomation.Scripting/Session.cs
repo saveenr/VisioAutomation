@@ -209,11 +209,12 @@ namespace VisioAutomation.Scripting
 
         internal static List<System.Reflection.PropertyInfo> GetCommandSetProperties()
         {
-            var props = typeof(Scripting.Session).GetProperties()
-                .Where(
-                    p => typeof(Scripting.CommandSet).IsAssignableFrom(p.PropertyType))
+            var commandset_t = typeof (Scripting.CommandSet);
+            var all_props = typeof(Scripting.Session).GetProperties();
+            var command_props = all_props
+                .Where(p => commandset_t.IsAssignableFrom(p.PropertyType))
                 .ToList();
-            return props;
+            return command_props;
         }
     }
 }
