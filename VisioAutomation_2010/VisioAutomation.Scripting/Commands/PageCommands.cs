@@ -66,8 +66,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (pages == null)
             {
-                var application = this.Session.VisioApplication;
-                pages = new List<IVisio.Page> { application.ActivePage };
+                throw new System.ArgumentNullException("pages");
             }
 
             foreach (var page in pages)
@@ -76,6 +75,27 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        public void Delete(IList<string> names, bool renumber)
+        {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            if (names == null)
+            {
+                throw new System.ArgumentNullException("names");
+            }
+
+            foreach (var name in names)
+            {
+                var app = this.Session.VisioApplication;
+                var doc = app.ActiveDocument;
+                var pages = doc.Pages;
+
+                this.Session.WriteVerbose("Retrieving Page for name \"{0}\"",name);
+                var page = pages.ItemU[name];
+                page.Delete(renumber ? (short)1 : (short)0);
+            }
+        }
 
         public VA.Drawing.Size GetSize()
         {
