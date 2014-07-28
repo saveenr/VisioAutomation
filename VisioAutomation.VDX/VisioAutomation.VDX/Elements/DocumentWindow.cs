@@ -1,6 +1,7 @@
 using VA=VisioAutomation;
 using VisioAutomation.VDX.Internal.Extensions;
 using SXL = System.Xml.Linq;
+using System.Linq;
 
 namespace VisioAutomation.VDX.Elements
 {
@@ -39,15 +40,23 @@ namespace VisioAutomation.VDX.Elements
 
         internal void ValidatePage( VA.VDX.Elements.Drawing drawing )
         {
+            if (drawing==null)
+            {
+                throw new System.ArgumentException("drawing");
+            }
+
             if (this.Page < 0)
             {
                 throw new System.ArgumentException("Negative Page not Allowed in Document Window");
             }
-            if (this.Page >= drawing.Pages.Count)
-            {
-                throw new System.ArgumentException("Document Window pointing to Page that does not exist");
-            }
 
+            bool found = drawing.Pages.Items.Any(p => this.Page == p.ID);
+
+            if (!found)
+            {
+                string msg = string.Format("Document Window pointing to Page that does not exist");
+                throw new System.ArgumentException(msg);
+            }
         }
         public override void AddToElement(SXL.XElement parent)
         {

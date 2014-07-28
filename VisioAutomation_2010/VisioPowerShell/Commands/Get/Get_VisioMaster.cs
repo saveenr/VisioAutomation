@@ -10,7 +10,7 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(Position = 0, Mandatory = false)]
         public string Name;
 
-        [SMA.Parameter(Position = 1, Mandatory = false, ParameterSetName = "StencilDoc")]
+        [SMA.Parameter(Position = 1, Mandatory = false)]
         public IVisio.Document Document;
 
         protected override void ProcessRecord()
