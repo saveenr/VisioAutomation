@@ -640,7 +640,7 @@ namespace TestVisioAutomationVDX
             var doc = TryOpen(app.Documents, output_filename);
 
             var visio_version = app.Version;
-            var vermajor = int.Parse(visio_version.Split(new char[]{'.'})[0]);
+            var vermajor = int.Parse(visio_version.Split('.')[0]);
             
             // Prior to Visio 2013 the error log file exists only
             // if there is a problem loading the VDX file

@@ -207,7 +207,7 @@ namespace VisioAutomation.Scripting.Commands
             if (type.IsGenericType)
             {
                 var sb = new System.Text.StringBuilder();
-                var tokens = type.Name.Split(new[] { '`' });
+                var tokens = type.Name.Split('`');
 
                 sb.Append(tokens[0]);
                 var gas = type.GetGenericArguments();

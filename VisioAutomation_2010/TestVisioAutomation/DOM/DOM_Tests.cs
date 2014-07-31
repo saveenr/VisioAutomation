@@ -361,7 +361,7 @@ namespace TestVisioAutomation
             doc_node.Pages.Add(page_node);
 
             // Have to be smart about selecting the right master with Visio 2013
-            int vis_ver = int.Parse(app.Version.Split(new char[] { '.' })[0]);
+            int vis_ver = int.Parse(app.Version.Split('.')[0]);
             string position_master_name = vis_ver >= 15 ? "Position Belt" : "Position";
 
             var s1 = new VisioAutomation.DOM.Shape(position_master_name, null, new VA.Drawing.Point(3, 4));

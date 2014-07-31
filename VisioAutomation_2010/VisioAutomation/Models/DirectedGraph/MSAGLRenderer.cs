@@ -397,8 +397,7 @@ namespace VisioAutomation.Models.DirectedGraph
                     shape_node.Text = new VA.Text.Markup.TextElement();
 
                     // Split apart the string
-                    char[] lineseps = { '|' };
-                    var tokens = layout_shape.Label.Split(lineseps).Select(tok => tok.Trim()).ToArray();
+                    var tokens = layout_shape.Label.Split('|').Select(tok => tok.Trim()).ToArray();
                     // Add an text element for each piece
                     foreach (string token in tokens)
                     {
