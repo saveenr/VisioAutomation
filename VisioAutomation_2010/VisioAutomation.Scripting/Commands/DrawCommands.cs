@@ -139,9 +139,20 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Session.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Rectangle"))
             {
-                var active_page = application.ActivePage;
-                var shape = active_page.DrawRectangle(x0, y0, x1, y1);
-                return shape;
+                this.Session.WriteVerbose("SUBTYPE = {0}", application.ActiveWindow.SubType);
+                if (application.ActiveWindow.SubType == 64 )
+                {
+                    var master = (IVisio.Master) application.ActiveWindow.Master;
+                    var shape = master.DrawRectangle(x0, y0, x1, y1);
+                    return shape;                    
+                    
+                }
+                else
+                {
+                    var active_page = application.ActivePage;
+                    var shape = active_page.DrawRectangle(x0, y0, x1, y1);
+                    return shape;                    
+                }
             }
         }
 

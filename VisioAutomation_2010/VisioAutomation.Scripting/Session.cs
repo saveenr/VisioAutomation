@@ -173,22 +173,30 @@ namespace VisioAutomation.Scripting
                 // Check if the window type matches that of a document
                 short active_window_type = active_window.Type;
                 var vis_drawing = (int)IVisio.VisWinTypes.visDrawing;
+                var vis_master = (int)IVisio.VisWinTypes.visMasterWin;
                 var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
-                if (active_window_type != vis_drawing)
+               
+                if ( !(active_window_type == vis_drawing || active_window_type == vis_master))
                 {
-                    if (active_window_type == vis_sheet)
-                    {
-                        this.WriteVerbose("The Active Window is a ShapeSheet Window Type={0}", active_window_type);                        
-                    }
-                    this.WriteVerbose("HasActiveDocument: Not a Drawing Window");
+                    this.WriteVerbose("The Active Window is Window Type={0}", active_window_type);
+                    this.WriteVerbose("The Active Window is Window SybType={0}", active_window.SubType);
+                    this.WriteVerbose("HasActiveDocument: must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
                     return false;
                 }
 
                 //  verify there is an active page
                 if (app.ActivePage == null)
                 {
-                    this.WriteVerbose("HasActiveDocument: No Active Page");
-                    return false;
+                    if (active_window.SubType == 64)
+                    {
+                        // 64 means master is being edited
+                        
+                    }
+                    else
+                    {
+                        this.WriteVerbose("HasActiveDocument: Active Page is null");
+                        return false;                       
+                    }
                 }
 
                 this.WriteVerbose("HasActiveDocument: Verified a drawing is available for use");
