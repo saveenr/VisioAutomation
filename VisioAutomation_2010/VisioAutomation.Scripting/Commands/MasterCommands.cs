@@ -166,13 +166,25 @@ namespace VisioAutomation.Scripting.Commands
             return shapeids;
         }
 
-        public IVisio.Master New(IVisio.Document stencil, string name)
+        public IVisio.Master New(IVisio.Document document, string name)
         {
             this.AssertApplicationAvailable();
 
-            var masters = stencil.Masters;
+            if (document == null)
+            {
+                document = this.Session.VisioApplication.ActiveDocument;
+                if (document == null)
+                {
+                    throw new AutomationException("No Active Document");
+                }
+            }
+
+            var masters = document.Masters;
             var master = masters.AddEx(IVisio.VisMasterTypes.visTypeMaster);
-            master.Name = name;
+            if (name != null)
+            {
+                master.Name = name;
+            }
 
             return master;
         }
