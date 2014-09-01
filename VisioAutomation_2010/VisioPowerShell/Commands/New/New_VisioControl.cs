@@ -9,28 +9,28 @@ namespace VisioPowerShell.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioControl")]
     public class New_VisioControl : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string XDynamics { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string YDynamics { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string XBehavior { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string YBehavior { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string X { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string Y { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public bool CanGlue = false;
 
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public string Tip { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
