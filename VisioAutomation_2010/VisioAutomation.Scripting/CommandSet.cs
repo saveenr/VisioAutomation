@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting
 
         }
 
-        protected DrawingSurface GetDrawingSurfaceSafe()
+        protected VA.Drawing.DrawingSurface GetDrawingSurfaceSafe()
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
@@ -49,14 +49,14 @@ namespace VisioAutomation.Scripting
             if (surf_Window_subtype == 64)
             {
                 surf_Master = (IVisio.Master)surf_Window.Master;
-                var surface = new DrawingSurface(surf_Master);
+                var surface = new VA.Drawing.DrawingSurface(surf_Master);
                 return surface;
 
             }
             else
             {
                 surf_Page = surf_Application.ActivePage;
-                var surface = new DrawingSurface(surf_Page);
+                var surface = new VA.Drawing.DrawingSurface(surf_Page);
                 return surface;
             }
         }

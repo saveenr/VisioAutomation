@@ -3,7 +3,7 @@ using System.Linq;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioAutomation.Scripting
+namespace VisioAutomation.Drawing
 {
     public struct DrawingSurface
     {

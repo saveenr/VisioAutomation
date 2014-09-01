@@ -82,7 +82,6 @@
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
     <Compile Include="DefaultSessionContext.cs" />
-    <Compile Include="DrawingSurface.cs" />
     <Compile Include="FormatCategory.cs" />
     <Compile Include="FormatPaintCache.cs" />
     <Compile Include="FormatPaintCell.cs" />
