@@ -136,20 +136,8 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.GetDrawingSurfaceSafe();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Rectangle"))
             {
-                if (surface.Master!=null)
-                {
-                    var shape = surface.Master.DrawRectangle(x0, y0, x1, y1);
-                    return shape;                    
-                }
-                else if (surface.Page !=null)
-                {
-                    var shape = surface.Page.DrawRectangle(x0, y0, x1, y1);
-                    return shape;                    
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
+                var shape = surface.DrawRectangle(x0, y0, x1, y1);
+                return shape;
             }
         }
 
@@ -158,43 +146,19 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.GetDrawingSurfaceSafe();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Line"))
             {
-                if (surface.Master != null)
-                {
-                    var shape = surface.Master.DrawLine(x0, y0, x1, y1);
-                    return shape;
-                }
-                else if (surface.Page != null)
-                {
-                    var shape = surface.Page.DrawLine(x0, y0, x1, y1);
-
-                    return shape;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
+                var shape = surface.DrawLine(x0, y0, x1, y1);
+                return shape;
             }
         }
 
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
             var surface = this.GetDrawingSurfaceSafe();
+            var rect = new VA.Drawing.Rectangle(x0, y0, x1, y1);
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
-                if (surface.Master != null)
-                {
-                    var shape = surface.Master.DrawOval(x0, y0, x1, y1);
-                    return shape;
-                }
-                else if (surface.Page != null)
-                {
-                    var shape = surface.Page.DrawOval(x0, y0, x1, y1);
-                    return shape;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
+                var shape = surface.DrawOval(rect);
+                return shape;
             }
         }
 
@@ -203,24 +167,8 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.GetDrawingSurfaceSafe();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
-                var A = center.Add(-radius, -radius);
-                var B = center.Add(radius, radius);
-                var rect = new VA.Drawing.Rectangle(A, B);
-
-                if (surface.Master != null)
-                {
-                    var shape = surface.Master.DrawOval(rect);
-                    return shape;
-                }
-                else if (surface.Page != null)
-                {
-                    var shape = surface.Page.DrawOval(rect);
-                    return shape;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
+                var shape = surface.DrawOval(center, radius);
+                return shape;
             }
         }
 
@@ -229,21 +177,8 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.GetDrawingSurfaceSafe();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Bezier"))
             {
-
-                if (surface.Master != null)
-                {
-                    var shape = surface.Master.DrawBezier(points.ToList());
-                    return shape;
-                }
-                else if (surface.Page != null)
-                {
-                    var shape = surface.Page.DrawBezier(points.ToList());
-                    return shape;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
+                var shape = surface.DrawBezier(points.ToList());
+                return shape;
             }
         }
 
@@ -252,7 +187,7 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.GetDrawingSurfaceSafe();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw PolyLine"))
             {
-                var shape = surface.PolyLine(points);
+                var shape = surface.DrawPolyLine(points);
                 return shape;
             }
         }
