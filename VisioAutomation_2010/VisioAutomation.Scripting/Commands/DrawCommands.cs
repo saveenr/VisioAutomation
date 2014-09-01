@@ -133,8 +133,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
-            var surface = this.AssertDrawingSurfaceAvailable();
-            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Rectangle"))
+            var surface = this.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Rectangle"))
             {
                 if (surface.Master!=null)
                 {
@@ -155,8 +155,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
-            var surface = this.AssertDrawingSurfaceAvailable();
-            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Line"))
+            var surface = this.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Line"))
             {
                 if (surface.Master != null)
                 {
@@ -178,8 +178,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
-            var surface = this.AssertDrawingSurfaceAvailable();
-            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Oval"))
+            var surface = this.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
                 if (surface.Master != null)
                 {
@@ -200,8 +200,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(VA.Drawing.Point center, double radius)
         {
-            var surface = this.AssertDrawingSurfaceAvailable();
-            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Oval"))
+            var surface = this.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
             {
                 var A = center.Add(-radius, -radius);
                 var B = center.Add(radius, radius);
@@ -226,8 +226,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Bezier(IEnumerable<VA.Drawing.Point> points)
         {
-            var surface = this.AssertDrawingSurfaceAvailable();
-            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Bezier"))
+            var surface = this.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Bezier"))
             {
 
                 if (surface.Master != null)
@@ -249,23 +249,11 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape PolyLine(IList<VA.Drawing.Point> points)
         {
-            var surface = this.AssertDrawingSurfaceAvailable();
-            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw PolyLine"))
+            var surface = this.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw PolyLine"))
             {
-                if (surface.Master != null)
-                {
-                    var shape = surface.Master.DrawPolyline(points);
-                    return shape;
-                }
-                else if (surface.Page != null)
-                {
-                    var shape = surface.Page.DrawPolyline(points);
-                    return shape;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
+                var shape = surface.PolyLine(points);
+                return shape;
             }
         }
 
