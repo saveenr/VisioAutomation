@@ -133,99 +133,139 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Rectangle"))
+            var surface = this.AssertDrawingSurfaceAvailable();
+            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Rectangle"))
             {
-                this.Session.WriteVerbose("SUBTYPE = {0}", application.ActiveWindow.SubType);
-                if (application.ActiveWindow.SubType == 64 )
+                if (surface.Master!=null)
                 {
-                    var master = (IVisio.Master) application.ActiveWindow.Master;
-                    var shape = master.DrawRectangle(x0, y0, x1, y1);
+                    var shape = surface.Master.DrawRectangle(x0, y0, x1, y1);
                     return shape;                    
-                    
+                }
+                else if (surface.Page !=null)
+                {
+                    var shape = surface.Page.DrawRectangle(x0, y0, x1, y1);
+                    return shape;                    
                 }
                 else
                 {
-                    var active_page = application.ActivePage;
-                    var shape = active_page.DrawRectangle(x0, y0, x1, y1);
-                    return shape;                    
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
                 }
             }
         }
 
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Line"))
+            var surface = this.AssertDrawingSurfaceAvailable();
+            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Line"))
             {
-                var active_page = application.ActivePage;
-                var shape = active_page.DrawLine(x0, y0, x1, y1);
-                return shape;
+                if (surface.Master != null)
+                {
+                    var shape = surface.Master.DrawLine(x0, y0, x1, y1);
+                    return shape;
+                }
+                else if (surface.Page != null)
+                {
+                    var shape = surface.Page.DrawLine(x0, y0, x1, y1);
+
+                    return shape;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
             }
         }
 
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
+            var surface = this.AssertDrawingSurfaceAvailable();
+            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Oval"))
             {
-                var active_page = application.ActivePage;
-                var shape = active_page.DrawOval(x0, y0, x1, y1);
-                return shape;
+                if (surface.Master != null)
+                {
+                    var shape = surface.Master.DrawOval(x0, y0, x1, y1);
+                    return shape;
+                }
+                else if (surface.Page != null)
+                {
+                    var shape = surface.Page.DrawOval(x0, y0, x1, y1);
+                    return shape;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
             }
         }
 
         public IVisio.Shape Oval(VA.Drawing.Point center, double radius)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Oval"))
+            var surface = this.AssertDrawingSurfaceAvailable();
+            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Oval"))
             {
                 var A = center.Add(-radius, -radius);
                 var B = center.Add(radius, radius);
                 var rect = new VA.Drawing.Rectangle(A, B);
-                var active_page = application.ActivePage;
-                var shape = active_page.DrawOval(rect);
-                return shape;
+
+                if (surface.Master != null)
+                {
+                    var shape = surface.Master.DrawOval(rect);
+                    return shape;
+                }
+                else if (surface.Page != null)
+                {
+                    var shape = surface.Page.DrawOval(rect);
+                    return shape;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
             }
         }
 
         public IVisio.Shape Bezier(IEnumerable<VA.Drawing.Point> points)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw Bezier"))
+            var surface = this.AssertDrawingSurfaceAvailable();
+            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw Bezier"))
             {
-                var active_page = application.ActivePage;
-                var shape = active_page.DrawBezier(points.ToList());
-                return shape;
+
+                if (surface.Master != null)
+                {
+                    var shape = surface.Master.DrawBezier(points.ToList());
+                    return shape;
+                }
+                else if (surface.Page != null)
+                {
+                    var shape = surface.Page.DrawBezier(points.ToList());
+                    return shape;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
             }
         }
 
         public IVisio.Shape PolyLine(IList<VA.Drawing.Point> points)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Draw PolyLine"))
+            var surface = this.AssertDrawingSurfaceAvailable();
+            using (var undoscope = new VA.Application.UndoScope(surface.Application, "Draw PolyLine"))
             {
-                var active_page = application.ActivePage;
-                var shape = active_page.DrawPolyline(points);
-                return shape;
+                if (surface.Master != null)
+                {
+                    var shape = surface.Master.DrawPolyline(points);
+                    return shape;
+                }
+                else if (surface.Page != null)
+                {
+                    var shape = surface.Page.DrawPolyline(points);
+                    return shape;
+                }
+                else
+                {
+                    throw new System.ArgumentException("Unhandled Drawing Surface");
+                }
             }
         }
 

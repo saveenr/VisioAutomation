@@ -5,6 +5,17 @@ using System.Linq;
 
 namespace VisioAutomation.Scripting
 {
+    public class DrawingSurface
+    {
+        public IVisio.Application Application;
+        public IVisio.Document Document;
+        public IVisio.Window Window;
+        public short WindowSubType;
+
+        public IVisio.Page Page;
+        public IVisio.Master Master;
+    }
+
     public class CommandSet
     {
         // Keep a reference back to the parent session. This gives access to all other commands
@@ -32,6 +43,39 @@ namespace VisioAutomation.Scripting
                 throw new VA.Scripting.ScriptingException("No Drawing available");
             }
 
+        }
+
+        protected DrawingSurface AssertDrawingSurfaceAvailable()
+        {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var surf_Application = this.Session.VisioApplication;
+            var surf_Document = surf_Application.ActiveDocument;
+            var surf_Window = surf_Application.ActiveWindow;
+            var surf_Window_subtype = surf_Window.SubType;
+
+            IVisio.Master surf_Master = null;
+            IVisio.Page surf_Page = null;
+
+            if (surf_Window_subtype == 64)
+            {
+                surf_Master = (IVisio.Master)surf_Window.Master;
+            }
+            else
+            {
+                surf_Page = surf_Application.ActivePage;
+            }
+
+            var surface = new DrawingSurface();
+            surface.Application = surf_Application;
+            surface.Document = surf_Document;
+            surface.Window = surf_Window;
+            surface.WindowSubType = surf_Window_subtype;
+            surface.Master = surf_Master;
+            surface.Page = surf_Page;
+
+            return surface;
         }
 
         internal static IEnumerable<System.Reflection.MethodInfo> GetCommandMethods(System.Type mytype)
