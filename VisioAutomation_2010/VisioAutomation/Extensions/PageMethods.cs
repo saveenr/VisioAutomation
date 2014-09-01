@@ -24,12 +24,6 @@ namespace VisioAutomation.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawOval(this IVisio.Master master, VA.Drawing.Rectangle rect)
-        {
-            var shape = master.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
-            return shape;
-        }
-
         public static IVisio.Shape DrawRectangle(this IVisio.Page page, VA.Drawing.Rectangle rect)
         {
             var shape = page.DrawRectangle(rect.Left, rect.Bottom, rect.Right, rect.Top);
@@ -44,15 +38,6 @@ namespace VisioAutomation.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawBezier(this IVisio.Master master, IList<VA.Drawing.Point> points)
-        {
-            short degree = 3;
-            short flags = 0;
-            var shape = master.DrawBezier(points, degree, flags);
-            return shape;
-        }
-
-
         public static IVisio.Shape DrawBezier(this IVisio.Page page, IList<VA.Drawing.Point> points, short degree, short flags)
         {
             // DrawBezier method: http://msdn.microsoft.com/en-us/library/office/ff766273.aspx
@@ -61,29 +46,12 @@ namespace VisioAutomation.Extensions
             return shape;
         }
 
-        public static IVisio.Shape DrawBezier(this IVisio.Master master, IList<VA.Drawing.Point> points, short degree, short flags)
-        {
-            // DrawBezier method: http://msdn.microsoft.com/en-us/library/office/ff766273.aspx
-            var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
-            var shape = master.DrawBezier(doubles_array, degree, flags);
-            return shape;
-        }
-
-
         public static IVisio.Shape DrawPolyline(this IVisio.Page page, IList<VA.Drawing.Point> points)
         {
             var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
             var shape = page.DrawPolyline(doubles_array, 0);
             return shape;
         }
-
-        public static IVisio.Shape DrawPolyline(this IVisio.Master master, IList<VA.Drawing.Point> points)
-        {
-            var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
-            var shape = master.DrawPolyline(doubles_array, 0);
-            return shape;
-        }
-
 
         public static IVisio.Shape DrawNURBS(this IVisio.Page page, IList<VA.Drawing.Point> controlpoints,
                                              IList<double> knots,
