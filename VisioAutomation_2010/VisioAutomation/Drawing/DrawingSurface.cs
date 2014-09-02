@@ -308,9 +308,54 @@ namespace VisioAutomation.Drawing
             {
                 throw new System.ArgumentException("Unhandled Drawing Surface");
             }
-
-
         }
+
+        public IVisio.Shape DrawQuarterArc(VA.Drawing.Point p0, VA.Drawing.Point p1, IVisio.VisArcSweepFlags flags)
+        {
+            if (this.Master != null)
+            {
+                return this.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+            }
+            else if (this.Page != null)
+            {
+                return this.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+            }
+            else if (this.Shape != null)
+            {
+                return this.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");
+            }
+        }
+
+
+
+        public VA.Drawing.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)
+        {
+            double bbx0, bby0, bbx1, bby1;
+            if (this.Master != null)
+            {
+                this.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            }
+            else if (this.Page != null)
+            {
+                this.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            }
+            else if (this.Shape != null)
+            {
+                this.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");
+            }
+
+            var r = new VA.Drawing.Rectangle(bbx0, bby0, bbx1, bby1);
+            return r;
+        }
+
 
 
     }

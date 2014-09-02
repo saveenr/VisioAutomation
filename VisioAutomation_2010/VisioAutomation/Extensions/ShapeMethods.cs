@@ -8,23 +8,22 @@ namespace VisioAutomation.Extensions
     {
         public static IVisio.Shape DrawLine(this IVisio.Shape shape, VA.Drawing.Point p1, VA.Drawing.Point p2)
         {
-            // MSDN: http://msdn.microsoft.com/en-us/library/office/ff766239.aspx
-            var s = shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
+            var surface = new VA.Drawing.DrawingSurface(shape);
+            var s = surface.DrawLine(p1, p2);
             return s;
         }
 
         public static IVisio.Shape DrawQuarterArc(this IVisio.Shape shape, VA.Drawing.Point p0, VA.Drawing.Point p1, IVisio.VisArcSweepFlags flags)
         {
-            // MSDN: http://msdn.microsoft.com/en-us/library/office/ff767062(v=office.14).aspx
-            return shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+            var surface = new VA.Drawing.DrawingSurface(shape);
+            var s = surface.DrawQuarterArc(p0, p1, flags);
+            return s;
         }
 
         public static VA.Drawing.Rectangle GetBoundingBox(this IVisio.Shape shape, IVisio.VisBoundingBoxArgs args)
         {
-            // MSDN: http://msdn.microsoft.com/library/default.asp?url=/library/en-us/vissdk11/html/vimthBoundingBox_HV81900422.asp
-            double bbx0, bby0, bbx1, bby1;
-            shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new VA.Drawing.Rectangle(bbx0, bby0, bbx1, bby1);
+            var surface = new VA.Drawing.DrawingSurface(shape);
+            var r = surface.GetBoundingBox(args);
             return r;
         }
 
