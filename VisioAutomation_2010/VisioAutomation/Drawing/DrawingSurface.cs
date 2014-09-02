@@ -237,5 +237,81 @@ namespace VisioAutomation.Drawing
 
         }
 
+        public short[] DropManyU(
+            IList<IVisio.Master> masters,
+            IEnumerable<VA.Drawing.Point> points)
+        {
+            if (masters == null)
+            {
+                throw new System.ArgumentNullException("masters");
+            }
+
+            if (masters.Count < 1)
+            {
+                return new short[0];
+            }
+
+            if (points == null)
+            {
+                throw new System.ArgumentNullException("points");
+            }
+
+            // NOTE: DropMany will fail if you pass in zero items to drop
+            var masters_obj_array = masters.Cast<object>().ToArray();
+            var xy_array = VA.Drawing.Point.ToDoubles(points).ToArray();
+
+            System.Array outids_sa;
+
+            if (this.Master != null)
+            {
+                this.Master.DropManyU(masters_obj_array, xy_array, out outids_sa);
+            }
+            else if (this.Page != null)
+            {
+                this.Page.DropManyU(masters_obj_array, xy_array, out outids_sa);                
+            }
+            else if (this.Shape != null)
+            {
+                this.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa);
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");                
+            }
+
+            short[] outids = (short[])outids_sa;
+            return outids;
+        }
+
+        public IVisio.Shape Drop(
+            IVisio.Master master,
+            VA.Drawing.Point point)
+        {
+            if (master == null)
+            {
+                throw new System.ArgumentNullException("master");
+            }
+
+            if (this.Master != null)
+            {
+                return this.Master.Drop(master, point.X, point.Y);
+            }
+            else if (this.Page != null)
+            {
+                return this.Page.Drop(master, point.X, point.Y);
+            }
+            else if (this.Shape != null)
+            {
+                return this.Shape.Drop(master, point.X, point.Y);
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");
+            }
+
+
+        }
+
+
     }
 }

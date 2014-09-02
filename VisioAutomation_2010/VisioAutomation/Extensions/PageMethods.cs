@@ -68,12 +68,8 @@ namespace VisioAutomation.Extensions
             IVisio.Master master,
             VA.Drawing.Point point)
         {
-            if (master == null)
-            {
-                throw new System.ArgumentNullException("master");
-            }
-
-            return page.Drop(master, point.X, point.Y);
+            var surface = new VA.Drawing.DrawingSurface(page);
+            return surface.Drop(master, point);
         }
 
         public static short[] DropManyU(
@@ -81,7 +77,8 @@ namespace VisioAutomation.Extensions
             IList<IVisio.Master> masters,
             IEnumerable<VA.Drawing.Point> points)
         {
-            short[] shapeids = VA.Pages.PageHelper.DropManyU(page, masters, points);
+            var surface = new VA.Drawing.DrawingSurface(page);
+            short[] shapeids = surface.DropManyU(masters, points);
             return shapeids;
         }
 
