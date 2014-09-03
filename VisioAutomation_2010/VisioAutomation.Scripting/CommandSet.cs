@@ -48,6 +48,7 @@ namespace VisioAutomation.Scripting
 
             if (surf_Window_subtype == 64)
             {
+                this.Session.WriteVerbose("Window = Master Editing");
                 surf_Master = (IVisio.Master)surf_Window.Master;
                 var surface = new VA.Drawing.DrawingSurface(surf_Master);
                 return surface;
@@ -55,6 +56,7 @@ namespace VisioAutomation.Scripting
             }
             else
             {
+                this.Session.WriteVerbose("Window = Page ");
                 surf_Page = surf_Application.ActivePage;
                 var surface = new VA.Drawing.DrawingSurface(surf_Page);
                 return surface;

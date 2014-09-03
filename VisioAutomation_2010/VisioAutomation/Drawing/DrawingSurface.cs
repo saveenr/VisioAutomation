@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Extensions;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -356,6 +357,33 @@ namespace VisioAutomation.Drawing
             return r;
         }
 
+        public List<IVisio.Shape> GetAllShapes()
+        {
+            IVisio.Shapes shapes;
+
+            if (this.Master != null)
+            {
+
+                shapes = this.Master.Shapes;
+            }
+            else if (this.Page != null)
+            {
+                shapes = this.Page.Shapes;
+            }
+            else if (this.Shape != null)
+            {
+                shapes = this.Shape.Shapes;
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");
+            }
+            
+            var list = new List<IVisio.Shape>();
+            list.AddRange( shapes.AsEnumerable() );
+
+            return list;
+        }
 
 
     }

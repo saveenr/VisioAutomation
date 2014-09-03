@@ -408,5 +408,10 @@ namespace VisioAutomation.Scripting.Commands
             return duplicated_shapes;
         }
 
+        public List<IVisio.Shape> GetAllShapes()
+        {
+            var surface = this.GetDrawingSurfaceSafe();
+            return surface.GetAllShapes();
+        }
     }
 }

@@ -56,8 +56,7 @@ namespace VisioPowerShell.Commands
             {
                 if (this.NameOrID.Contains("*"))
                 {
-                    var page = scriptingsession.Page.Get();
-                    var shapes = page.Shapes.AsEnumerable().ToList();
+                    var shapes = scriptingsession.Draw.GetAllShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
