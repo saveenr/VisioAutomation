@@ -223,35 +223,39 @@ namespace VisioAutomation.ShapeSheet
         
         public void Execute(IVisio.Page page)
         {
-            this._Execute(page);
+            var surface = new VA.Drawing.DrawingSurface(page);
+            this._Execute(surface);
         }
 
         public void Execute(IVisio.Shape shape)
         {
-            this._Execute(shape);
+            var surface = new VA.Drawing.DrawingSurface(shape);
+            this._Execute(surface);
         }
 
-        private void _Execute(object visio_object)
+        private void _Execute(VA.Drawing.DrawingSurface surface)
         {
-            if (!(visio_object is IVisio.Page || visio_object is IVisio.Shape))
-            {
-                throw new VA.AutomationException("Internal error: Only Page and Shape objects supported in Execute()");
-            }
-
             // Do nothing if there aren't any updates
             if (this.updates.Count < 1)
             {
                 return;
             }
 
-            if (visio_object is IVisio.Shape)
+            if (surface.Shape != null )
             {
                 if (first_update.Value.StreamType == StreamType.SIDSRC)
                 {
                     throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
                 }
             }
-            else if (visio_object is IVisio.Page)
+            else if (surface.Master != null)
+            {
+                if (first_update.Value.StreamType == StreamType.SIDSRC)
+                {
+                    throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
+                }
+            }
+            else if (surface.Page != null)
             {
                 if (first_update.Value.StreamType == StreamType.SRC)
                 {
@@ -297,16 +301,7 @@ namespace VisioAutomation.ShapeSheet
                     flags |= IVisio.VisGetSetArgs.visGetStrings;
                 }
 
-                if (visio_object is IVisio.Shape)
-                {
-                    var shape = (IVisio.Shape)visio_object;
-                    int c = shape.SetResults(stream, unitcodes, results, (short)flags);                    
-                }
-                else if (visio_object is IVisio.Page)
-                {
-                    var page = (IVisio.Page)visio_object;
-                    int c = page.SetResults(stream, unitcodes, results, (short)flags);
-                }
+                surface.SetResults(stream, unitcodes, results, (short)flags);                    
             }
             else
             {
@@ -323,16 +318,7 @@ namespace VisioAutomation.ShapeSheet
 
                 var flags = this.FormulaFlags;
                 
-                if (visio_object is IVisio.Shape)
-                {
-                    var shape = (IVisio.Shape) visio_object;
-                    int c = shape.SetFormulas(stream, formulas, (short) flags);
-                }
-                else if (visio_object is IVisio.Page)
-                {
-                    var page = (IVisio.Page) visio_object;
-                    int c = page.SetFormulas(stream, formulas, (short) flags);
-                }
+                int c = surface.SetFormulas(stream, formulas, (short) flags);
             }
         }
         

@@ -629,5 +629,51 @@ namespace VisioAutomation.Drawing
                     || result_type == typeof(string));
         }
 
+        public int SetFormulas(short [] stream, object[] formulas, short flags)
+        {
+            int c;
+            if (this.Shape != null)
+            {
+                c = this.Shape.SetFormulas(stream, formulas, flags);
+            }
+            else if (this.Master != null)
+            {
+                c = this.Master.SetFormulas(stream, formulas, flags);
+            }
+            else if (this.Page != null)
+            {
+                c = this.Page.SetFormulas(stream, formulas, flags);
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");                
+            }
+
+            return c;
+        }
+
+        public int SetResults(short[] stream, object[] unitcodes, object[] results, short flags)
+        {
+            int c;
+            if (this.Shape != null)
+            {
+                c = this.Shape.SetResults(stream, unitcodes,results, flags);
+            }
+            else if (this.Master != null)
+            {
+                c = this.Master.SetResults(stream, unitcodes, results, flags);
+            }
+            else if (this.Page != null)
+            {
+                c = this.Page.SetResults(stream, unitcodes, results, flags);
+            }
+            else
+            {
+                throw new System.ArgumentException("Unhandled Drawing Surface");
+            }
+
+            return c;
+        }
+
     }
 }
