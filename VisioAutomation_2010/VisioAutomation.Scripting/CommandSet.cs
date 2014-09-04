@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting
 
         }
 
-        protected VA.Drawing.DrawingSurface GetDrawingSurfaceSafe()
+        public VA.Drawing.DrawingSurface GetDrawingSurfaceSafe()
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();

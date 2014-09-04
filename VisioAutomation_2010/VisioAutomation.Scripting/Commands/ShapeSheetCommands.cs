@@ -45,10 +45,8 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var app = this.Session.VisioApplication;
-            var page = app.ActivePage;
-            var active_window = app.ActiveWindow;
-            
+            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
+ 
             var query = new VA.ShapeSheet.Query.CellQuery();
 
             int ci = 0;
@@ -59,7 +57,7 @@ namespace VisioAutomation.Scripting.Commands
                 ci++;
             }
 
-            var formulas = query.GetFormulas(page, shapeids);
+            var formulas = query.GetFormulas(surface, shapeids);
 
             return formulas;
         }
