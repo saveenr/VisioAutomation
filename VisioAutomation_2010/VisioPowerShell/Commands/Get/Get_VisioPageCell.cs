@@ -221,14 +221,15 @@ namespace VisioPowerShell.Commands
             var dic = GetPageCellDictionary();
             SetFromCellNames(query, this.Cells, dic);
 
-            var page = scriptingsession.Page.Get();
-            var target_shapeids = new[] { page.ID };
+            var surface= new VA.Drawing.DrawingSurface(scriptingsession.Page.Get());
+            
+            var target_shapeids = new[] { surface.Page.ID };
 
             this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);
 
             this.WriteVerboseEx("Start Query");
 
-            var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, page);
+            var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
 
             this.WriteObject(dt);
             this.WriteVerboseEx("End Query");

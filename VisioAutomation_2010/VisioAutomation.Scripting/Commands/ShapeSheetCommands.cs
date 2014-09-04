@@ -19,9 +19,8 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
-            var app = this.Session.VisioApplication;
-            var page = app.ActivePage;
-            var shapeids = shapes.Select(s=>s.ID).ToList();
+            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
+            var shapeids = shapes.Select(s => s.ID).ToList();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
 
@@ -33,7 +32,7 @@ namespace VisioAutomation.Scripting.Commands
                 ci++;
             }
 
-            var results = query.GetResults<T>(page, shapeids);
+            var results = query.GetResults<T>(surface, shapeids);
             return results;
         }
 
@@ -71,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var app = this.Session.VisioApplication;
-            var page = app.ActivePage;
+            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
             var query = new VA.ShapeSheet.Query.CellQuery();
             var sec = query.Sections.Add(section);
 
@@ -83,7 +82,7 @@ namespace VisioAutomation.Scripting.Commands
                 ci++;
             }
 
-           var results = query.GetResults<T>(page, shapeids);
+           var results = query.GetResults<T>(surface, shapeids);
             return results;
         }
 
@@ -95,8 +94,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var app = this.Session.VisioApplication;
-            var page = app.ActivePage;
+            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
             var sec = query.Sections.Add(section);
@@ -109,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
                 ci++;
             }
 
-            var formulas = query.GetFormulas(page, shapeids);
+            var formulas = query.GetFormulas(surface, shapeids);
             return formulas;
         }
         
@@ -171,12 +169,10 @@ namespace VisioAutomation.Scripting.Commands
                 }
 
             }
-
-            var application = this.Session.VisioApplication;
+            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set ShapeSheet Formulas"))
             {
-                var active_page = application.ActivePage;
-                update.Execute(active_page);
+                update.Execute(surface);
             }
         }
 
@@ -236,11 +232,10 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Session.VisioApplication;
+            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Set ShapeSheet Result"))
             {
-                var active_page = application.ActivePage;
-                update.Execute(active_page);
+                update.Execute(surface);
             }
         }
         
@@ -250,16 +245,15 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertDocumentAvailable();
 
             this.Session.WriteVerbose( "Staring ShapeSheet Update");
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Update ShapeSheet Formulas"))
+            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Update ShapeSheet Formulas"))
             {
-                var active_page = application.ActivePage;
                 var internal_update = update.update;
                 internal_update.BlastGuards = blastguards;
                 internal_update.TestCircular = testcircular;
                 this.Session.WriteVerbose( "BlastGuards={0}", blastguards);
                 this.Session.WriteVerbose( "TestCircular={0}", testcircular);
-                internal_update.Execute(active_page);                
+                internal_update.Execute(surface);                
             }
             this.Session.WriteVerbose( "Ending ShapeSheet Update");
         }

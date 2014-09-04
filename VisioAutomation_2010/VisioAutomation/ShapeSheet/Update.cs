@@ -233,6 +233,11 @@ namespace VisioAutomation.ShapeSheet
             this._Execute(surface);
         }
 
+        public void Execute(VA.Drawing.DrawingSurface surface)
+        {
+            this._Execute(surface);
+        }
+
         private void _Execute(VA.Drawing.DrawingSurface surface)
         {
             // Do nothing if there aren't any updates

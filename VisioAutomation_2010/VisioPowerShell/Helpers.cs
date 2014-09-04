@@ -39,28 +39,28 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, IVisio.Page page)
+        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, VA.Drawing.DrawingSurface surface)
         {
             if (getresults)
             {
                 if (ResultType == ResultType.String)
                 {
-                    var output = cellQuery.GetResults<string>(page, shapeids);
+                    var output = cellQuery.GetResults<string>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Boolean)
                 {
-                    var output = cellQuery.GetResults<bool>(page, shapeids);
+                    var output = cellQuery.GetResults<bool>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Double)
                 {
-                    var output = cellQuery.GetResults<double>(page, shapeids);
+                    var output = cellQuery.GetResults<double>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Integer)
                 {
-                    var output = cellQuery.GetResults<int>(page, shapeids);
+                    var output = cellQuery.GetResults<int>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else
@@ -70,7 +70,7 @@ namespace VisioPowerShell
             }
             else
             {
-                var output = cellQuery.GetFormulas(page, shapeids);
+                var output = cellQuery.GetFormulas(surface, shapeids);
                 return Helpers.querytable_to_datatable(cellQuery, output);
             }
         }

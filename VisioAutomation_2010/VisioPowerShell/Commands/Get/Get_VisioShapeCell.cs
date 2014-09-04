@@ -328,14 +328,14 @@ namespace VisioPowerShell.Commands
             var dic = GetShapeCellDictionary();
             Get_VisioPageCell.SetFromCellNames(query, this.Cells, dic);
 
-            var page = scriptingsession.Page.Get();
+            var surface = scriptingsession.Draw.GetDrawingSurfaceSafe();
 
             this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);
 
             this.WriteVerboseEx("Start Query");
 
-            var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, page);
+            var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);
 
             this.WriteVerboseEx("End Query");
