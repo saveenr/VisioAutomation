@@ -335,7 +335,7 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            var page = scriptingsession.Page.Get();
+            var surface = scriptingsession.Draw.GetDrawingSurfaceSafe();
 
             this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
             this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
@@ -345,7 +345,7 @@ namespace VisioPowerShell.Commands
             using (var undoscope = new VA.Application.UndoScope(this.ScriptingSession.VisioApplication, "SetShapeCells"))
             {
                 this.WriteVerboseEx("Start Update");
-                update.Execute(page);
+                update.Execute(surface);
                 this.WriteVerboseEx("End Update");
             }
         }
