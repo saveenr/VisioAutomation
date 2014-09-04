@@ -37,7 +37,9 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
             var srcstream = BuildSRCStream(shape);
-            var values = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, srcstream);
+
+            var surface = new VA.Drawing.DrawingSurface(shape);
+            var values = surface.GetFormulasU_3(srcstream);
             var r = new QueryResult<string>(shape.ID);
             FillValuesForShape<string>(values, r, 0,0);
 
@@ -48,9 +50,12 @@ namespace VisioAutomation.ShapeSheet.Query
         public QueryResult<T> GetResults<T>(IVisio.Shape shape)
         {
             this.Freeze();
+
+            var surface = new VA.Drawing.DrawingSurface(shape);
+
             var srcstream = BuildSRCStream(shape);
             var unitcodes = this.BuildUnitCodeArray(1);
-            var values = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, srcstream,unitcodes);
+            var values = surface.GetResults_3<T>(srcstream,unitcodes);
             var r = new QueryResult<T>(shape.ID);
             FillValuesForShape<T>(values, r, 0,0);
             return r;
@@ -100,10 +105,12 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
 
+            var surface = new VA.Drawing.DrawingSurface(shape);
+
             var srcstream = BuildSRCStream(shape);
             var unitcodes = this.BuildUnitCodeArray(1);
-            var formulas = VA.ShapeSheet.ShapeSheetHelper.GetFormulasU(shape, srcstream);
-            var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<T>(shape, srcstream, unitcodes);
+            var formulas = surface.GetFormulasU_3(srcstream);
+            var results = surface.GetResults_3<T>(srcstream, unitcodes);
 
             var combineddata = new CellData<T>[results.Length];
             for (int i = 0; i < results.Length; i++)
