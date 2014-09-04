@@ -29,9 +29,7 @@ namespace VisioPowerShell.Commands
             {
                 // return selected shapes
 
-                this.WriteVerboseEx("NUll or *");
-                this.WriteVerboseEx("a {0}", this.NameOrID == null);
-                this.WriteVerboseEx("b {0}", this.NameOrID == null || this.NameOrID.Contains("*"));
+                this.WriteVerboseEx("NUll");
 
                 if (this.Recursive)
                 {

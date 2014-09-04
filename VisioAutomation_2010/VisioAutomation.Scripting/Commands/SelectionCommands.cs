@@ -188,7 +188,6 @@ namespace VisioAutomation.Scripting.Commands
         public IList<IVisio.Shape> GetShapes()
         {
             this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
 
             var selection = this.Session.Selection.Get();
             return VA.Selection.SelectionHelper.GetSelectedShapes(selection);
@@ -197,7 +196,6 @@ namespace VisioAutomation.Scripting.Commands
         public IList<IVisio.Shape> GetShapesRecursive()
         {
             this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
 
             var selection = this.Session.Selection.Get();
             return VA.Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
@@ -206,7 +204,6 @@ namespace VisioAutomation.Scripting.Commands
         public int Count()
         {
             this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
             
             var application = this.Session.VisioApplication;
             var active_window = application.ActiveWindow;

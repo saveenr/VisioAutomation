@@ -175,18 +175,19 @@ namespace VisioAutomation.Scripting
                 var vis_drawing = (int)IVisio.VisWinTypes.visDrawing;
                 var vis_master = (int)IVisio.VisWinTypes.visMasterWin;
                 var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
-               
-                if ( !(active_window_type == vis_drawing || active_window_type == vis_master))
+
+                this.WriteVerbose("The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
+                if (!(active_window_type == vis_drawing || active_window_type == vis_master))
                 {
-                    this.WriteVerbose("The Active Window is Window Type={0}", active_window_type);
-                    this.WriteVerbose("The Active Window is Window SybType={0}", active_window.SubType);
-                    this.WriteVerbose("HasActiveDocument: must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
+                    this.WriteVerbose("The Active Window Type must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
                     return false;
                 }
 
                 //  verify there is an active page
                 if (app.ActivePage == null)
                 {
+                    this.WriteVerbose("HasActiveDocument: Active Page is null");
+
                     if (active_window.SubType == 64)
                     {
                         // 64 means master is being edited

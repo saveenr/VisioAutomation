@@ -8,9 +8,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            // Edit the master by adding a shape
-            var mdraw_window = this.Master.OpenDrawWindow();
-            mdraw_window.Activate();
+            this.ScriptingSession.Master.OpenForEdit(this.Master);
         }
     }
 }

@@ -14,6 +14,26 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
+        public void OpenForEdit(IVisio.Master master)
+        {
+            var mdraw_window = master.OpenDrawWindow();
+            mdraw_window.Activate();
+        }
+
+        public void CloseMasterEditing()
+        {
+            var window = this.Session.VisioApplication.ActiveWindow;
+
+            var st = window.SubType;
+            if (st != 64)
+            {
+                throw new AutomationException("The active window is not a master window");
+            }
+
+            var master = (Microsoft.Office.Interop.Visio.Master)window.Master;
+            master.Close();
+        }
+
         public IList<IVisio.Master> Get()
         {
             this.AssertApplicationAvailable();
