@@ -36,9 +36,8 @@ namespace VisioAutomation.ShapeSheet.Query
         public QueryResult<string> GetFormulas(IVisio.Shape shape)
         {
             this.Freeze();
-            var srcstream = BuildSRCStream(shape);
-
             var surface = new VA.Drawing.DrawingSurface(shape);
+            var srcstream = BuildSRCStream(surface);
             var values = surface.GetFormulasU_3(srcstream);
             var r = new QueryResult<string>(shape.ID);
             FillValuesForShape<string>(values, r, 0,0);
@@ -53,7 +52,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var surface = new VA.Drawing.DrawingSurface(shape);
 
-            var srcstream = BuildSRCStream(shape);
+            var srcstream = BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = surface.GetResults_3<T>(srcstream,unitcodes);
             var r = new QueryResult<T>(shape.ID);
@@ -107,7 +106,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var surface = new VA.Drawing.DrawingSurface(shape);
 
-            var srcstream = BuildSRCStream(shape);
+            var srcstream = BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var formulas = surface.GetFormulasU_3(srcstream);
             var results = surface.GetResults_3<T>(srcstream, unitcodes);
@@ -238,8 +237,14 @@ namespace VisioAutomation.ShapeSheet.Query
             return start + cellcount;
         }
 
-        private short[] BuildSRCStream(IVisio.Shape shape)
+        private short[] BuildSRCStream(VA.Drawing.DrawingSurface surface)
         {
+            if (surface.Shape == null)
+            {
+                string msg = string.Format("Shape must be set in surface not page or master");
+                throw new VA.AutomationException(msg);
+            }
+
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
 
             if (this.Sections.Count>0)
@@ -248,8 +253,8 @@ namespace VisioAutomation.ShapeSheet.Query
                 foreach (var sec in this.Sections)
                 {
                     // Figure out which rows to query
-                    int num_rows = shape.RowCount[(short)sec.SectionIndex];
-                    var section_info = new SectionQueryInfo(sec, shape.ID16, num_rows);
+                    int num_rows = surface.Shape.RowCount[(short)sec.SectionIndex];
+                    var section_info = new SectionQueryInfo(sec, surface.Shape.ID16, num_rows);
                     section_infos.Add(section_info);
                 }
                 this.PerShapeSectionInfo.Add(section_infos);

@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Drawing\DrawingSurface.cs" />
+    <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
     <Compile Include="TextUtil.cs" />
     <Compile Include="Drawing\Margin.cs" />
     <Compile Include="Models\Charting\BarChart.cs" />
@@ -272,7 +273,6 @@
     <Compile Include="Text\Markup\TextRegion.cs" />
     <Compile Include="Shapesheet\Query\CellQuery.cs" />
     <Compile Include="Shapes\Connections\ConnectorHelper.cs" />
-    <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdge.cs" />

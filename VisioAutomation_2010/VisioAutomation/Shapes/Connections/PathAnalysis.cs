@@ -6,13 +6,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.Connections
 {
-    public enum ConnectorEdgeHandling
-    {
-        Arrow_ExcludeConnectorsWithoutArrows,
-        Arrow_TreatConnectorsWithoutArrowsAsBidirectional,
-        Raw,
-    }
-    
     public static class PathAnalysis
     {
         public static IList<ConnectorEdge> GetTransitiveClosure(
