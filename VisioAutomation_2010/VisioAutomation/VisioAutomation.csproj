@@ -167,7 +167,7 @@
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_QueryResults.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_QueryResultList.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_QueryResult.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_SectionQueryInfo.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_SectionQuery.cs" />

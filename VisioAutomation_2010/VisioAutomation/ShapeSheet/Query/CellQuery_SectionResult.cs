@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
        public class SectionResult<T> : IEnumerable<T[]>
        {
-           public VA.ShapeSheet.Query.CellQuery.SectionQuery Query { get; internal set; }
+           public SectionQuery Query { get; internal set; }
            private List<T[]> items;
 
            internal SectionResult(int capacity)

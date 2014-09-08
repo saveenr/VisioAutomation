@@ -10,8 +10,8 @@ namespace VisioAutomation.ShapeSheet.Query
        public class SectionQueryList : IEnumerable<SectionQuery>
        {
            private IList<SectionQuery> items { get; set; }
-           private CellQuery parent;
-           private Dictionary<IVisio.VisSectionIndices,SectionQuery> hs_section; 
+           private readonly CellQuery parent;
+           private readonly Dictionary<IVisio.VisSectionIndices,SectionQuery> hs_section; 
  
            internal SectionQueryList(CellQuery parent) :
                this(parent,0)
