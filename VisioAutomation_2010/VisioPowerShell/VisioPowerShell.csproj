@@ -87,6 +87,7 @@
   <ItemGroup>
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
     <Compile Include="Commands\Close\Close_VisioMaster.cs" />
+    <Compile Include="Commands\Format\Format-VisioText.cs" />
     <Compile Include="Commands\Open\Open_VisioMaster.cs" />
     <Compile Include="objects\UserDefinedCellvalues.cs" />
     <Compile Include="objects\ConnectionPointValues.cs" />

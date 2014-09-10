@@ -14,18 +14,16 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, string text)
+        public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts)
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
-            
-            this.Set(target_shapes, new[] { text });
-        }
 
-        public void Set(IList<IVisio.Shape> target_shapes, IEnumerable<string> texts)
-        {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            if (texts == null || texts.Count<1)
+            {
+                // do nothing
+                return;
+            }
             
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
@@ -35,12 +33,11 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Shape Text"))
             {
-                var values = texts.ToList();
-
+                int numtexts = texts.Count;
                 for (int i=0;i<shapes.Count;i++)
                 {
                     var shape = shapes[i];
-                    var text = values[i%values.Count];
+                    var text = texts[i % numtexts];
                     shape.Text = text;
                 }
             }
@@ -66,7 +63,8 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
             
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
+
             if (shapes.Count < 1)
             {
                 return;
@@ -115,7 +113,6 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        //TODO: Make this support an input list
         public void SetFont(IList<IVisio.Shape> target_shapes, string fontname)
         {
             this.AssertApplicationAvailable();
