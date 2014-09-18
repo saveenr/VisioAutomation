@@ -368,8 +368,8 @@ function Export-PowerShellModuleInstaller
         Remove-File $productpdb 
 
         Write-Verbose "Creating ZIP file"
-        $zipfile = join-path $output_msi_path ($msibasename + ".zip")
-        Export-ZIPFolder -InputFolder $binpath -OutputFile $zipfile -IncludeBaseDir $false
+        $zipfile = join-path $OutputFolder ($msibasename + ".zip")
+        Export-ZIPFolder -InputFolder $InputFolder -OutputFile $zipfile -IncludeBaseDir $false
         
 
         $result = [PSCustomObject] @{ MSIFile = $output_msi_file ; ZipFile = $zipfile; ProductVersion = $ProductVersion }
