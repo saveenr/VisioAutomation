@@ -1,5 +1,4 @@
-using VA=VisioAutomation;
-using VAS=VisioAutomation.Scripting;
+using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands

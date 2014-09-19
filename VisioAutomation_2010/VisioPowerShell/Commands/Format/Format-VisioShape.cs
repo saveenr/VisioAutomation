@@ -1,5 +1,4 @@
 using VA = VisioAutomation;
-using System.Collections.Generic;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 

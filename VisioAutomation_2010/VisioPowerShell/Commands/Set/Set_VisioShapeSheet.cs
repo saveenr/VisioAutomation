@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands

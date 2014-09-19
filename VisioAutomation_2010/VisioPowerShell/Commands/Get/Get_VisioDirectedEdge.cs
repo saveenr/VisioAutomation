@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using VisioAutomation.Shapes.Connections;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
+
 namespace VisioPowerShell.Commands
 {
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
@@ -34,7 +34,7 @@ namespace VisioPowerShell.Commands
                 
         }
 
-        private ConnectorEdgeHandling get_DirectedEdgeHandling()
+        private VA.Shapes.Connections.ConnectorEdgeHandling get_DirectedEdgeHandling()
         {
             var flag = VA.Shapes.Connections.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
 
@@ -56,7 +56,7 @@ namespace VisioPowerShell.Commands
             return flag;
         }
 
-        private void write_edges_with_shapeids(IList<ConnectorEdge> edges)
+        private void write_edges_with_shapeids(IList<VA.Shapes.Connections.ConnectorEdge> edges)
         {
             foreach (var edge in edges)
             {

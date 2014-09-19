@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
 

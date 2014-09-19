@@ -1,5 +1,4 @@
-using VAS=VisioAutomation.Scripting;
-using IVisio=Microsoft.Office.Interop.Visio;
+using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 

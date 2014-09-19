@@ -1,4 +1,3 @@
-using VisioAutomation.Models.Charting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -29,7 +28,7 @@ namespace VisioPowerShell.Commands
         {
             var rect = this.GetRectangle();
             var chart = new VA.Models.Charting.BarChart(rect);
-            chart.DataPoints = new DataPointList(this.Values, this.Labels);
+            chart.DataPoints = new VA.Models.Charting.DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
         }
 
