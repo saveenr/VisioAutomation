@@ -2,36 +2,36 @@
 {
     internal class ColorPickerUtil
     {
-        public static System.Drawing.Rectangle Rect(System.Drawing.RectangleF rf)
+        public static System.Drawing.Rectangle Rect(System.Drawing.RectangleF rect)
         {
-            var r = new System.Drawing.Rectangle();
-            r.X = (int) rf.X;
-            r.Y = (int) rf.Y;
-            r.Width = (int) rf.Width;
-            r.Height = (int) rf.Height;
-            return r;
+            var new_rect = new System.Drawing.Rectangle();
+            new_rect.X = (int) rect.X;
+            new_rect.Y = (int) rect.Y;
+            new_rect.Width = (int) rect.Width;
+            new_rect.Height = (int) rect.Height;
+            return new_rect;
         }
 
-        public static System.Drawing.RectangleF Rect(System.Drawing.Rectangle r)
+        public static System.Drawing.RectangleF Rect(System.Drawing.Rectangle rect)
         {
-            var rf = new System.Drawing.RectangleF();
-            rf.X = r.X;
-            rf.Y = r.Y;
-            rf.Width = r.Width;
-            rf.Height = r.Height;
-            return rf;
+            var new_rect = new System.Drawing.RectangleF();
+            new_rect.X = rect.X;
+            new_rect.Y = rect.Y;
+            new_rect.Width = rect.Width;
+            new_rect.Height = rect.Height;
+            return new_rect;
         }
 
-        public static System.Drawing.Point Point(System.Drawing.PointF pf)
+        public static System.Drawing.Point Point(System.Drawing.PointF point)
         {
-            return new System.Drawing.Point((int)pf.X, (int)pf.Y);
+            return new System.Drawing.Point((int)point.X, (int)point.Y);
         }
 
-        public static System.Drawing.PointF Center(System.Drawing.RectangleF r)
+        public static System.Drawing.PointF Center(System.Drawing.RectangleF rect)
         {
-            var center = r.Location;
-            center.X += r.Width/2;
-            center.Y += r.Height/2;
+            var center = rect.Location;
+            center.X += rect.Width/2;
+            center.Y += rect.Height/2;
             return center;
         }
 
@@ -103,11 +103,10 @@
                 using (System.Drawing.Drawing2D.LinearGradientBrush lb2 = new System.Drawing.Drawing2D.LinearGradientBrush(lr2, c1, c2, angle, false),  lb1 = new System.Drawing.Drawing2D.LinearGradientBrush(lr1, c2, c3, angle, false) )
                 {
                     dc.FillRectangle(lb1, lr1);
-                    dc.FillRectangle(lb2, lr2);
-                    
+                    dc.FillRectangle(lb2, lr2);                   
                 }
-
             }
+
             // with some sizes the first pixel in the gradient rectangle shows the opposite color
             // this is a workaround for that problem
             if (orientation == System.Windows.Forms.Orientation.Vertical)
@@ -116,7 +115,6 @@
                 {
                     dc.DrawLine(pc3, lr1.Left, lr1.Top, lr1.Right - 1, lr1.Top);
                     dc.DrawLine(pc2, lr2.Left, lr2.Top, lr2.Right - 1, lr2.Top);
-                    
                 }
             }
 
@@ -127,7 +125,6 @@
                     dc.DrawLine(pc1, lr2.Left, lr2.Top, lr2.Left, lr2.Bottom - 1);
                     dc.DrawLine(pc2, lr2.Right, lr2.Top, lr2.Right, lr2.Bottom - 1);
                     dc.DrawLine(pc3, lr1.Right, lr1.Top, lr1.Right, lr1.Bottom - 1);
-                    
                 }
             }
         }
