@@ -9,6 +9,106 @@ using SXL = System.Xml.Linq;
 
 namespace TestVisioAutomationVDX
 {
+
+
+    /*
+
+Fri Sep 19 04:08:51 2014 Begin Session
+
+[Warning] DataType: 
+Context: Line 101 --- <VisioDocument><Pages><Page><Connects><Connect>
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
+
+[Warning] DataType: 
+Context: Line 101 --- <VisioDocument><Pages><Page><Connects><Connect>
+Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
+
+
+
+Fri Sep 19 04:08:51 2014 End Session
+     * */
+
+    public class VisioLogRecord
+    {
+        public string Type;
+        public string SubType;
+        public string Context;
+        public string Description;
+    }
+    public class VisioLogSession
+    {
+        public string StartLine;
+        public string EndLine;
+
+        public List<VisioLogRecord> Records;
+
+        public VisioLogSession()
+        {
+            this.Records = new List<VisioLogRecord>();
+        }
+    }
+
+    public class VisioLogFile
+    {
+        public string Source;
+        public List<VisioLogSession> Sessions;
+
+        public VisioLogFile(string filename)
+        {
+            this.Sessions = new List<VisioLogSession>();
+
+            int state = 0;
+            var fp = System.IO.File.OpenText(filename);
+            string line;
+            while ((line = fp.ReadLine()) != null)
+            {
+                line = line.Trim();
+                if (line.Length == 0)
+                {
+                    continue;
+                }
+
+                if (line.StartsWith("Source:"))
+                {
+                    this.Source = line.Substring("Source:".Length).Trim();
+                }
+                else if (line.EndsWith("Begin Session"))
+                {
+                    if (state != 0)
+                    {
+                        throw new System.ArgumentException();
+                    }
+                    state = 1;
+
+                    var session = new VisioLogSession();
+                    session.StartLine = line;
+
+                    this.Sessions.Add(session);
+                }
+                else if (line.EndsWith("End Session"))
+                {
+                    if (state != 1)
+                    {
+                        throw new System.ArgumentException();
+                    }
+                    state = 0;
+
+                    var session = this.Sessions[ this.Sessions.Count - 1];
+                    session.EndLine = line;
+                }
+                else
+                {
+                    if (state == 1)
+                    {
+                        var session = this.Sessions[this.Sessions.Count - 1];
+                        
+                    }
+                }
+            }
+        }
+    }
+
+
     [TestClass]
     public class VDX_Tests
     {
@@ -33,7 +133,13 @@ namespace TestVisioAutomationVDX
 
             if (XmlErrorLogExists(app))
             {
-                Assert.Fail("XML Error Log Error Was Created when opening the VDX file");
+                string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
+                bool exists = System.IO.File.Exists(logfilename);
+
+                var log = new VisioLogFile(logfilename);
+
+                string msg = string.Format("XML Error Log {0} Was Created when opening the VDX file", logfilename);
+                Assert.Fail(msg);
             }
 
             VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
