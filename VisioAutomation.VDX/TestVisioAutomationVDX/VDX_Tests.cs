@@ -43,7 +43,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void VDX_MultiPageDocument()
         {
-            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
             var template = new VA.VDX.Template(); // the default template
             var doc = new VA.VDX.Elements.Drawing(template);
@@ -289,7 +289,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void VDX_CustomProperties()
         {
-            string filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
             var template = new VA.VDX.Template();
             var doc_node = new VA.VDX.Elements.Drawing(template);
@@ -562,7 +562,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void VDX_CustomTemplate()
         {
-            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
             var template = new VA.VDX.Template(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
             var doc = new VisioAutomation.VDX.Elements.Drawing(template);
@@ -626,7 +626,7 @@ namespace TestVisioAutomationVDX
         {
             // This test tends to fail with Visio 2013
 
-            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
 
             var app = new IVisio.Application();
@@ -683,7 +683,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void VDX_CheckErrorOnLoadLogFileExists()
         {
-            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.vdx_with_errors_1_vdx);
 
             var app = new IVisio.Application();

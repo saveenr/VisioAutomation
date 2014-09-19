@@ -23,7 +23,7 @@ namespace TestVisioAutomation
 
             ss.Selection.All();
 
-            string output_filename = TestCommon.Globals.Helper.GetTestMethodOutputFilename(".html");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".html");
 
             if (System.IO.File.Exists(output_filename))
             {

@@ -60,9 +60,9 @@
     <Compile Include="VDX_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\VisioAutomation_2010\TestCommon\TestCommon.csproj">
-      <Project>{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6}</Project>
-      <Name>TestCommon</Name>
+    <ProjectReference Include="..\..\VisioAutomation_2010\TestVisioAutomation\TestVisioAutomation.csproj">
+      <Project>{f04e9277-48d2-4822-9ae6-e7e6adb262c9}</Project>
+      <Name>TestVisioAutomation</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj">
       <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>

@@ -87,6 +87,8 @@
     <Compile Include="Connections\ConnectivityMap.cs" />
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Models\CointainerLayout_Tests.cs" />
     <Compile Include="Models\Chart_Tests.cs" />
     <Compile Include="Models\ResizePageTests.cs" />
@@ -143,10 +145,6 @@
     <Compile Include="Extensions\CustomProps_Test.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestCommon\TestCommon.csproj">
-      <Project>{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6}</Project>
-      <Name>TestCommon</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44f8-4506-baab-ea121475b936}</Project>
       <Name>VisioAutomation.Scripting</Name>
