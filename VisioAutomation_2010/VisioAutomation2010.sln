@@ -45,8 +45,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestVisioAutomationVDX", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioPowerShell", "VisioPowerShell\VisioPowerShell.csproj", "{6DFB7C5E-7AC1-48EE-A065-2075921A7413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{AFD0BCC0-E616-4C97-A127-75D801CE944F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -179,18 +177,6 @@ Global
 		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|Win32.ActiveCfg = Release|Any CPU
 		{6DFB7C5E-7AC1-48EE-A065-2075921A7413}.Release|x86.ActiveCfg = Release|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Release|Win32.ActiveCfg = Release|Any CPU
-		{AFD0BCC0-E616-4C97-A127-75D801CE944F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
