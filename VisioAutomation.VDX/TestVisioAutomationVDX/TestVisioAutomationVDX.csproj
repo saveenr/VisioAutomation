@@ -57,7 +57,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Logging.cs" />
     <Compile Include="VDX_Tests.cs" />
   </ItemGroup>
   <ItemGroup>

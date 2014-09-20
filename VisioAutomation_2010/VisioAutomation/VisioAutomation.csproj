@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Logging.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
     <Compile Include="TextUtil.cs" />
