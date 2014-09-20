@@ -7,28 +7,9 @@ using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 
-namespace TestVisioAutomationVDX
+namespace VisioAutomation.Application.Logging
 {
-
-
-    /*
-
-Fri Sep 19 04:08:51 2014 Begin Session
-
-[Warning] DataType: 
-Context: Line 101 --- <VisioDocument><Pages><Page><Connects><Connect>
-Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
-
-[Warning] DataType: 
-Context: Line 101 --- <VisioDocument><Pages><Page><Connects><Connect>
-Description: An attribute in this file contains data that is valid but inconsistent with the rest of the file. Visio has ignored the element that contains the attribute.
-
-
-
-Fri Sep 19 04:08:51 2014 End Session
-     * */
-
-    public class VisioLogRecord
+    public class LogRecord
     {
         public string Type;
         public string SubType;
@@ -40,32 +21,33 @@ Fri Sep 19 04:08:51 2014 End Session
             return string.Format("{0}:{1}", this.Type, this.SubType);
         }
     }
-    public class VisioLogSession
+
+    public class LogSession
     {
         public string StartLine;
         public string EndLine;
 
-        public List<VisioLogRecord> Records;
+        public List<LogRecord> Records;
 
-        public VisioLogSession()
+        public LogSession()
         {
-            this.Records = new List<VisioLogRecord>();
+            this.Records = new List<LogRecord>();
         }
     }
 
-    public enum LogState
+    enum LogState
     {
         Start, InSession, InRecord
     }
 
-    public class VisioLogFile
+    public class LogFile
     {
         public string Source;
-        public List<VisioLogSession> Sessions;
+        public List<LogSession> Sessions;
 
-        public VisioLogFile(string filename)
+        public LogFile(string filename)
         {
-            this.Sessions = new List<VisioLogSession>();
+            this.Sessions = new List<LogSession>();
 
             var state = LogState.Start;
             var fp = System.IO.File.OpenText(filename);
@@ -90,7 +72,7 @@ Fri Sep 19 04:08:51 2014 End Session
                     }
                     else if (line.EndsWith("Begin Session"))
                     {
-                        var session = new VisioLogSession();
+                        var session = new LogSession();
                         session.StartLine = line;
                         this.Sessions.Add(session);
                         state = LogState.InSession;
@@ -98,7 +80,7 @@ Fri Sep 19 04:08:51 2014 End Session
                     else
                     {
                         throw new System.ArgumentException();
-                    } 
+                    }
                 }
                 else if (state == LogState.InSession)
                 {
@@ -114,14 +96,14 @@ Fri Sep 19 04:08:51 2014 End Session
                     }
                     else if (line.StartsWith("["))
                     {
-                        var rec = new VisioLogRecord();
+                        var rec = new LogRecord();
                         int n = line.IndexOf(']');
                         if (n < 2)
                         {
-                            throw new System.ArgumentException();                            
+                            throw new System.ArgumentException();
                         }
-                        rec.Type = line.Substring(1, n-1);
-                        rec.SubType = line.Substring(n+2).Replace(":","");
+                        rec.Type = line.Substring(1, n - 1);
+                        rec.SubType = line.Substring(n + 2).Replace(":", "");
 
                         var session = this.Sessions[this.Sessions.Count - 1];
                         session.Records.Add(rec);
@@ -129,7 +111,7 @@ Fri Sep 19 04:08:51 2014 End Session
                     }
                     else
                     {
-                        throw new System.ArgumentException();                        
+                        throw new System.ArgumentException();
                     }
                 }
                 else if (state == LogState.InRecord)
@@ -152,15 +134,16 @@ Fri Sep 19 04:08:51 2014 End Session
                     }
                     else
                     {
-                        throw new System.ArgumentException();                                                
+                        throw new System.ArgumentException();
                     }
                 }
 
             }
         }
-    }
-
-
+    }    
+}
+namespace TestVisioAutomationVDX
+{
     [TestClass]
     public class VDX_Tests
     {
@@ -188,7 +171,7 @@ Fri Sep 19 04:08:51 2014 End Session
                 string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
                 bool exists = System.IO.File.Exists(logfilename);
 
-                var log = new VisioLogFile(logfilename);
+                var log = new VA.Application.Logging.LogFile(logfilename);
 
                 var session = log.Sessions[log.Sessions.Count - 1];
                 foreach (var rec in session.Records)
