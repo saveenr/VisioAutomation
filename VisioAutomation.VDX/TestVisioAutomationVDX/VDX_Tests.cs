@@ -34,6 +34,11 @@ Fri Sep 19 04:08:51 2014 End Session
         public string SubType;
         public string Context;
         public string Description;
+
+        public override string ToString()
+        {
+            return string.Format("{0}:{1}", this.Type, this.SubType);
+        }
     }
     public class VisioLogSession
     {
@@ -48,6 +53,11 @@ Fri Sep 19 04:08:51 2014 End Session
         }
     }
 
+    public enum LogState
+    {
+        Start, InSession, InRecord
+    }
+
     public class VisioLogFile
     {
         public string Source;
@@ -57,53 +67,95 @@ Fri Sep 19 04:08:51 2014 End Session
         {
             this.Sessions = new List<VisioLogSession>();
 
-            int state = 0;
+            var state = LogState.Start;
             var fp = System.IO.File.OpenText(filename);
-            string line;
-            while ((line = fp.ReadLine()) != null)
+            string rawline;
+            while ((rawline = fp.ReadLine()) != null)
             {
-                line = line.Trim();
-                if (line.Length == 0)
-                {
-                    continue;
-                }
+                string line = rawline.Trim();
 
-                if (line.StartsWith("Source:"))
+                if (state == LogState.Start)
                 {
-                    this.Source = line.Substring("Source:".Length).Trim();
-                }
-                else if (line.EndsWith("Begin Session"))
-                {
-                    if (state != 0)
+                    if (line.Length == 0)
+                    {
+                        continue;
+                    }
+                    else if (line.StartsWith("Open"))
+                    {
+                        // do something
+                    }
+                    else if (line.StartsWith("Source:"))
+                    {
+                        this.Source = line.Substring("Source:".Length).Trim();
+                    }
+                    else if (line.EndsWith("Begin Session"))
+                    {
+                        var session = new VisioLogSession();
+                        session.StartLine = line;
+                        this.Sessions.Add(session);
+                        state = LogState.InSession;
+                    }
+                    else
                     {
                         throw new System.ArgumentException();
-                    }
-                    state = 1;
-
-                    var session = new VisioLogSession();
-                    session.StartLine = line;
-
-                    this.Sessions.Add(session);
+                    } 
                 }
-                else if (line.EndsWith("End Session"))
+                else if (state == LogState.InSession)
                 {
-                    if (state != 1)
+                    if (line.Length == 0)
                     {
-                        throw new System.ArgumentException();
+                        continue;
                     }
-                    state = 0;
-
-                    var session = this.Sessions[ this.Sessions.Count - 1];
-                    session.EndLine = line;
-                }
-                else
-                {
-                    if (state == 1)
+                    else if (line.EndsWith("End Session"))
                     {
                         var session = this.Sessions[this.Sessions.Count - 1];
-                        
+                        session.EndLine = line;
+                        state = LogState.Start;
+                    }
+                    else if (line.StartsWith("["))
+                    {
+                        var rec = new VisioLogRecord();
+                        int n = line.IndexOf(']');
+                        if (n < 2)
+                        {
+                            throw new System.ArgumentException();                            
+                        }
+                        rec.Type = line.Substring(1, n-1);
+                        rec.SubType = line.Substring(n+2).Replace(":","");
+
+                        var session = this.Sessions[this.Sessions.Count - 1];
+                        session.Records.Add(rec);
+                        state = LogState.InRecord;
+                    }
+                    else
+                    {
+                        throw new System.ArgumentException();                        
                     }
                 }
+                else if (state == LogState.InRecord)
+                {
+                    if (line.Length == 0)
+                    {
+                        state = LogState.InSession;
+                    }
+                    else if (line.StartsWith("Context:"))
+                    {
+                        var session = this.Sessions[this.Sessions.Count - 1];
+                        var rec = session.Records[session.Records.Count - 1];
+                        rec.Context = line.Substring("Context:".Length);
+                    }
+                    else if (line.StartsWith("Description:"))
+                    {
+                        var session = this.Sessions[this.Sessions.Count - 1];
+                        var rec = session.Records[session.Records.Count - 1];
+                        rec.Description = line.Substring("Description:".Length);
+                    }
+                    else
+                    {
+                        throw new System.ArgumentException();                                                
+                    }
+                }
+
             }
         }
     }
@@ -138,8 +190,15 @@ Fri Sep 19 04:08:51 2014 End Session
 
                 var log = new VisioLogFile(logfilename);
 
-                string msg = string.Format("XML Error Log {0} Was Created when opening the VDX file", logfilename);
-                Assert.Fail(msg);
+                var session = log.Sessions[log.Sessions.Count - 1];
+                foreach (var rec in session.Records)
+                {
+                    if (rec.Type != "Warning")
+                    {
+                        string msg = string.Format("XML Error Log {0} Was Created when opening the VDX file", logfilename);
+                        Assert.Fail(msg);
+                    }                    
+                }
             }
 
             VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
