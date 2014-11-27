@@ -11,7 +11,7 @@ namespace TestVisioAutomation
         public void Scripting_Page_Navigation()
         {
             var page_size = new VA.Drawing.Size(8.5, 11);
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             var doc = ss.Document.New(page_size.Width, page_size.Height);
 
             var page1 = ss.Page.Get();
@@ -50,7 +50,7 @@ namespace TestVisioAutomation
         public void Scripting_Page_Duplication()
         {
             var page_size = new VA.Drawing.Size(8.5, 11);
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             var doc = ss.Document.New(page_size.Width, page_size.Height);
             ss.Draw.Rectangle(0, 0, 1, 1);
             ss.Page.Duplicate();
@@ -60,7 +60,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Page_DuplicationToDoc1()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
 
             // First case: the source document is already the active document
             var docto_1 = ss.Document.New();

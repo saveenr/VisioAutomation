@@ -14,8 +14,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            scriptingsession.UserDefinedCell.Delete(this.Shapes,Name);
+            this.client.UserDefinedCell.Delete(this.Shapes, Name);
         }
     }
 }

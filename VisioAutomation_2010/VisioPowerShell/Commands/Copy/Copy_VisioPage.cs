@@ -15,14 +15,13 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             IVisio.Page newpage;
-            var scriptingsession = this.ScriptingSession;
             if (this.ToDocument == null)
             {
-                newpage = scriptingsession.Page.Duplicate();
+                newpage = this.client.Page.Duplicate();
             }
             else
             {
-                newpage = scriptingsession.Page.Duplicate(this.ToDocument);
+                newpage = this.client.Page.Duplicate(this.ToDocument);
             }
 
             this.WriteObject(newpage);            

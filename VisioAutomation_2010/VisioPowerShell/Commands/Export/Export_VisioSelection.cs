@@ -28,18 +28,15 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            var scriptingsession = this.ScriptingSession;
-
             string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
 
             if (ext == ".html" || ext == ".xhtml" || ext == ".htm")
             {
-                scriptingsession.Export.SelectionToSVGXHTML(this.Filename);                
+                this.client.Export.SelectionToSVGXHTML(this.Filename);                
             }
             else
             {
-                scriptingsession.Export.SelectionToFile(this.Filename);
-               
+                this.client.Export.SelectionToFile(this.Filename);
             }
         }
     }

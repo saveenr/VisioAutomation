@@ -6,13 +6,13 @@ namespace VisioPowerShell
 {
     public class VisioCmdlet : SMA.Cmdlet
     {
-        // this static scripting_session variable is what allows
+        // this static _client variable is what allows
         // the various visiops cmdlets to share state (for example
         // to share which instance of Visio they are attached to)
         // 
         // To prevent confustion this should be the only static 
         // variable defined in VisioPS
-        private static VA.Scripting.Session scripting_session;
+        private static VA.Scripting.Client _client;
 
         // Attached Visio Application represents the Visio instance
         //
@@ -23,20 +23,20 @@ namespace VisioPowerShell
         // AttachedApplication != null && it is an unusable instance. For example
         //                     it might have been manually deleted
 
-        public VA.Scripting.Session ScriptingSession
+        public VA.Scripting.Client client
         {
             get
             {
-                // if a scripting session is not available create one and cache it
+                // if a scripting client is not available create one and cache it
                 // for the lifetime of this cmdlet
 
-                if (scripting_session==null)
+                if (_client==null)
                 {
-                    scripting_session = new VA.Scripting.Session(null);
+                    _client = new VA.Scripting.Client(null);
                 }
 
-                // Must always setup the session output
-                // if we try to do this only once per new session then we'll
+                // Must always setup the client output
+                // if we try to do this only once per new client then we'll
                 // get this message:
                 //
                 //    "The WriteObject and WriteError methods cannot be
@@ -44,8 +44,8 @@ namespace VisioPowerShell
                 //     ProcessRecord, and EndProcessing methods, and only
                 //     from that same thread."
 
-                scripting_session.Context = new VisioPSSessionContext(this);
-                return scripting_session;
+                _client.Context = new VisioPsClientContext(this);
+                return _client;
             }
         }
 

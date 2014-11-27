@@ -45,10 +45,10 @@ namespace VisioAutomation.Scripting.DirectedGraph
             }
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, string filename)
+        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
-            return LoadFromXML(scriptingsession, xmldoc);
+            return LoadFromXML(client, xmldoc);
         }
 
         private class PageData
@@ -60,7 +60,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             public List<BuilderError> Errors;
         }
 
-        private static List<PageData> LoadPageDataFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
+        private static List<PageData> LoadPageDataFromXML(VA.Scripting.Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = new List<PageData>();
             // LOAD and ANALYZE EACH PAGE
@@ -84,13 +84,13 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
-                pagedata.ShapeInfos = shape_els.Select(e => ShapeInfo.FromXml(scriptingsession, e)).ToList();
-                pagedata.ConnectorInfos = con_els.Select(e => ConnectorInfo.FromXml(scriptingsession, e)).ToList();
+                pagedata.ShapeInfos = shape_els.Select(e => ShapeInfo.FromXml(client, e)).ToList();
+                pagedata.ConnectorInfos = con_els.Select(e => ConnectorInfo.FromXml(client, e)).ToList();
 
-                scriptingsession.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
+                client.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
-                    scriptingsession.WriteVerbose( "shape {0}", shape_info.ID);
+                    client.WriteVerbose( "shape {0}", shape_info.ID);
 
                     if (node_ids.Contains(shape_info.ID))
                     {
@@ -102,10 +102,10 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     }
                 }
 
-                scriptingsession.WriteVerbose( "Analyzing connector data...");
+                client.WriteVerbose( "Analyzing connector data...");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    scriptingsession.WriteVerbose( "connector {0}", con_info.ID);
+                    client.WriteVerbose( "connector {0}", con_info.ID);
 
                     if (con_ids.Contains(con_info.ID))
                     {
@@ -131,9 +131,9 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return pagedatas;
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
+        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Client client, SXL.XDocument xmldoc)
         {
-            var pagedatas = LoadPageDataFromXML(scriptingsession, xmldoc);
+            var pagedatas = LoadPageDataFromXML(client, xmldoc);
 
             // STOP IF ANY ERRORS
             int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();
@@ -143,16 +143,16 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 {
                     foreach (var error in pagedata.Errors)
                     {
-                        scriptingsession.WriteVerbose( error.Text);
+                        client.WriteVerbose( error.Text);
                     }
-                    scriptingsession.WriteVerbose( "Errors encountered in shape data. Stopping.");
+                    client.WriteVerbose( "Errors encountered in shape data. Stopping.");
                 }
             }
 
             // DRAW EACH PAGE
             foreach (var pagedata in pagedatas)
             {
-                scriptingsession.WriteVerbose( "Creating shape AutoLayout nodes");
+                client.WriteVerbose( "Creating shape AutoLayout nodes");
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
                     var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
@@ -164,7 +164,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     }
                 }
 
-                scriptingsession.WriteVerbose( "Creating connector AutoLayout nodes");
+                client.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
                     var def_connector_type = VACXN.ConnectorType.Curved;
@@ -183,9 +183,9 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     dg_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
                     dg_connector.Cells.EndArrow = def_end_arrow;
                 }
-                scriptingsession.WriteVerbose( "Rendering AutoLayout...");
+                client.WriteVerbose( "Rendering AutoLayout...");
             }
-            scriptingsession.WriteVerbose( "Finished rendering AutoLayout");
+            client.WriteVerbose( "Finished rendering AutoLayout");
 
             var directedgraphs = pagedatas.Select(pagedata => pagedata.DirectedGraph).ToList();
             return directedgraphs;

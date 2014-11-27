@@ -7,9 +7,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
-            if (scriptingsession.VisioApplication  == null)
+            if (this.client.VisioApplication == null)
             {
                 this.WriteVerboseEx("A Visio Application Instance is NOT Attached");
                 this.WriteObject(null);
@@ -17,7 +15,7 @@ namespace VisioPowerShell.Commands
             else
             {
                 this.WriteVerboseEx("A Visio Application Instance is Attached");
-                this.WriteObject(scriptingsession.VisioApplication);
+                this.WriteObject(this.client.VisioApplication);
             }
         }
     }

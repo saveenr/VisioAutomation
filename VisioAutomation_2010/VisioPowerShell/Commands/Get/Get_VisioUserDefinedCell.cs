@@ -14,8 +14,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            var dic = scriptingsession.UserDefinedCell.Get(this.Shapes);
+            var dic = this.client.UserDefinedCell.Get(this.Shapes);
 
             if (this.GetCells)
             {

@@ -11,11 +11,11 @@ namespace VisioAutomation.Scripting.DirectedGraph
         public string To;
         public SXL.XElement Element;
 
-        public static ConnectorInfo FromXml(Session scriptingsession, SXL.XElement shape_el)
+        public static ConnectorInfo FromXml(Client client, SXL.XElement shape_el)
         {
             var info = new ConnectorInfo();
             info.ID = shape_el.Attribute("id").Value;
-            scriptingsession.WriteVerbose("Reading connector id={0}", info.ID);
+            client.WriteVerbose("Reading connector id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.From = shape_el.Attribute("from").Value;

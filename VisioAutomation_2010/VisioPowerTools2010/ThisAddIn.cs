@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Visio = Microsoft.Office.Interop.Visio;
-using Office = Microsoft.Office.Core;
+﻿using Office = Microsoft.Office.Core;
 
 namespace VisioPowerTools2010
 {
     public partial class ThisAddIn
     {
-        public VisioAutomation.Scripting.Session ScriptingSession;
+        public VisioAutomation.Scripting.Client Client;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            this.ScriptingSession = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
+            this.Client = new VisioAutomation.Scripting.Client(Globals.ThisAddIn.Application);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
-
-
 
         #region VSTO generated code
 

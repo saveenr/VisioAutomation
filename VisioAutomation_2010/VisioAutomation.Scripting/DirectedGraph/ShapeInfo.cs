@@ -16,11 +16,11 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         public Dictionary<string, VACUSTPROP.CustomPropertyCells> custprops;
 
-        public static ShapeInfo FromXml(Session scriptingsession, SXL.XElement shape_el)
+        public static ShapeInfo FromXml(Client client, SXL.XElement shape_el)
         {
             var info = new ShapeInfo();
             info.ID = shape_el.Attribute("id").Value;
-            scriptingsession.WriteVerbose( "Reading shape id={0}", info.ID);
+            client.WriteVerbose( "Reading shape id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.Stencil = shape_el.Attribute("stencil").Value;

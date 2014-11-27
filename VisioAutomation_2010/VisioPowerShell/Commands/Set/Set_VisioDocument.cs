@@ -19,11 +19,11 @@ namespace VisioPowerShell.Commands
         {
             if (this.Name != null)
             {
-                this.ScriptingSession.Document.Activate(this.Name);
+                this.client.Document.Activate(this.Name);
             }
             else if (this.Document != null)
             {
-                this.ScriptingSession.Document.Activate(this.Document);
+                this.client.Document.Activate(this.Document);
             }
         }
     }

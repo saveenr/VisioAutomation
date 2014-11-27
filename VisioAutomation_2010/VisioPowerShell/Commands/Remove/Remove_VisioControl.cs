@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            this.ScriptingSession.Control.Delete(this.Shapes,this.ControlIndex);
+            this.client.Control.Delete(this.Shapes,this.ControlIndex);
         }
     }
 }

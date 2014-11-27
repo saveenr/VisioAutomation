@@ -14,8 +14,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            var application = scriptingsession.VisioApplication;
+            var application = this.client.VisioApplication;
 
             if (this.ActiveDocument)
             {
@@ -24,7 +23,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            var docs = scriptingsession.Document.GetDocumentsByName(this.Name);
+            var docs = this.client.Document.GetDocumentsByName(this.Name);
             this.WriteObject(docs, true);
         }
     }

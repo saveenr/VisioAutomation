@@ -15,8 +15,6 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             bool master_specified = this.Name !=null;
             bool doc_specified = this.Document !=null;
 
@@ -26,13 +24,13 @@ namespace VisioPowerShell.Commands
                 if (doc_specified)
                 {
                     this.WriteVerbose("Get master from specified document");
-                    var masters = scriptingsession.Master.GetMastersByName(this.Name, this.Document);
+                    var masters = this.client.Master.GetMastersByName(this.Name, this.Document);
                     this.WriteObject(masters,true);
                 }
                 else
                 {
                     this.WriteVerbose("Get master from active document");
-                    var masters = scriptingsession.Master.GetMastersByName(this.Name);
+                    var masters = this.client.Master.GetMastersByName(this.Name);
                     this.WriteObject(masters,true);
                 }
             }
@@ -42,13 +40,13 @@ namespace VisioPowerShell.Commands
                 if (doc_specified)
                 {
                     this.WriteVerbose("Get all masters from specified document");
-                    var masters = scriptingsession.Master.Get(this.Document);
+                    var masters = this.client.Master.Get(this.Document);
                     this.WriteObject(masters, false);                    
                 }
                 else
                 {
                     this.WriteVerbose("Get all masters from active document");
-                    var masters = scriptingsession.Master.Get();
+                    var masters = this.client.Master.Get();
                     this.WriteObject(masters, false);                   
                 }
             }

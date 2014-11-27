@@ -27,8 +27,7 @@ namespace VisioPowerShell.Commands
                 userprop.Prompt = this.Prompt;
             }
 
-            var scriptingsession = this.ScriptingSession;
-            scriptingsession.UserDefinedCell.Set(this.Shapes,userprop);
+            this.client.UserDefinedCell.Set(this.Shapes, userprop);
         }
     }
 }

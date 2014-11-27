@@ -17,7 +17,7 @@ namespace TestVisioAutomation
 
         public void Scripting_Distribute()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
 
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
@@ -43,7 +43,7 @@ namespace TestVisioAutomation
 
         public void Scripting_Nudge()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 

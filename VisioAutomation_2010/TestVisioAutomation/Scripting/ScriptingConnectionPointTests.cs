@@ -10,7 +10,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_ConnectionPoints_Scenarios()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 

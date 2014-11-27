@@ -16,14 +16,12 @@ namespace VisioPowerShell.Commands
             if (!this.AllPages)
             {
                 // this means use the current page 
-                var scriptingsession = this.ScriptingSession;
-                scriptingsession.Export.PageToFile(this.Filename);
+                this.client.Export.PageToFile(this.Filename);
             }
             else
             {
                 // is -AllPages is set then export them all
-                var scriptingsession = this.ScriptingSession;
-                scriptingsession.Export.PagesToFiles(this.Filename);
+                this.client.Export.PagesToFiles(this.Filename);
             }
         }
     }

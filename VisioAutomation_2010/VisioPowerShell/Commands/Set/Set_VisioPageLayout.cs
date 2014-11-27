@@ -14,16 +14,14 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             if (this.Orientation != PageOrientation.None)
             {
-                scriptingsession.Page.SetOrientation((VA.Pages.PrintPageOrientation)Orientation);
+                this.client.Page.SetOrientation((VA.Pages.PrintPageOrientation)Orientation);
             }
 
             if (this.BackgroundPage != null)
             {
-                scriptingsession.Page.SetBackgroundPage(this.BackgroundPage);
+                this.client.Page.SetBackgroundPage(this.BackgroundPage);
             }
         }
     }

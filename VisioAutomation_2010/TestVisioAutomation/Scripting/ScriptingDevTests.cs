@@ -9,7 +9,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Dev_ScriptingDocumentation()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Developer.DrawScriptingDocumentation();
             ss.Document.Close(true);
         }

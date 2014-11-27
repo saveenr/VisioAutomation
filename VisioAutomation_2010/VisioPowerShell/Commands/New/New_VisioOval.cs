@@ -20,8 +20,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var rect = this.GetRectangle();
-            var scriptingsession = this.ScriptingSession;
-            var shape = scriptingsession.Draw.Oval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+            var shape = this.client.Draw.Oval(rect.Left, rect.Bottom, rect.Right, rect.Top);
             this.WriteObject(shape);
         }
 

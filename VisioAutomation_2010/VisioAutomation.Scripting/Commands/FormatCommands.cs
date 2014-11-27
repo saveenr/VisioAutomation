@@ -7,8 +7,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class FormatCommands : CommandSet
     {
-        public FormatCommands(Session session) :
-            base(session)
+        public FormatCommands(Client client) :
+            base(client)
         {
 
         }
@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormulas((short)shapeid, format);
             }
 
-            update.Execute(this.Session.VisioApplication.ActivePage);            
+            update.Execute(this.Client.VisioApplication.ActivePage);            
         }
 
         public IList<VA.Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = VA.Shapes.FormatCells.GetCells(this.Session.VisioApplication.ActivePage, shapeids);
+            var fmts = VA.Shapes.FormatCells.GetCells(this.Client.VisioApplication.ActivePage, shapeids);
             return fmts;
         }
 
@@ -64,12 +64,12 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
             
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Client.HasSelectedShapes())
             {
                 return;
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var shape = selection[1];
@@ -116,7 +116,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
             update.Execute(active_page);
         }
@@ -163,7 +163,7 @@ namespace VisioAutomation.Scripting.Commands
             }
  
             var shapeids = target_shapes.Select(s=>s.ID).ToList();
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
 
             this.cache.PasteFormat(active_page, shapeids, category, apply_formulas);

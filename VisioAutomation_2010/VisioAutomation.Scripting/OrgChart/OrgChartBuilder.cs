@@ -7,13 +7,13 @@ namespace VisioAutomation.Scripting.OrgChart
 {
     public class OrgChartBuilder
     {
-        public static OCMODEL.OrgChartDocument LoadFromXML(Session scriptingsession, string filename)
+        public static OCMODEL.OrgChartDocument LoadFromXML(Client client, string filename)
         {
             var xdoc = SXL.XDocument.Load(filename);
-            return LoadFromXML(scriptingsession, xdoc);
+            return LoadFromXML(client, xdoc);
         }
 
-        public static OCMODEL.OrgChartDocument LoadFromXML(Session scriptingsession,
+        public static OCMODEL.OrgChartDocument LoadFromXML(Client client,
                                                              SXL.XDocument xdoc)
         {
             var root = xdoc.Root;
@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.OrgChart
             var dic = new Dictionary<string, OCMODEL.Node>();
             OCMODEL.Node ocroot = null;
 
-            scriptingsession.WriteVerbose("Walking XML");
+            client.WriteVerbose("Walking XML");
 
             foreach (var ev in root.Elements())
             {
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.OrgChart
                     string parentid = VA.Scripting.XmlUtil.GetAttributeValue(ev, "parentid", null);
                     var name = ev.Attribute("name").Value;
 
-                    scriptingsession.WriteVerbose( "Loading shape: {0} {1} {2}", id, name, parentid);
+                    client.WriteVerbose( "Loading shape: {0} {1} {2}", id, name, parentid);
                     var new_ocnode = new OCMODEL.Node(name);
 
                     if (ocroot == null)
@@ -51,10 +51,10 @@ namespace VisioAutomation.Scripting.OrgChart
                     }
                 }
             }
-            scriptingsession.WriteVerbose( "Finished Walking XML");
+            client.WriteVerbose( "Finished Walking XML");
             var oc = new OCMODEL.OrgChartDocument();
             oc.OrgCharts.Add(ocroot);
-            scriptingsession.WriteVerbose( "Finished Creating OrgChart model");
+            client.WriteVerbose( "Finished Creating OrgChart model");
             return oc;
         }
     }

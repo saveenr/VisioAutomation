@@ -7,8 +7,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ShapeSheetCommands : CommandSet
     {
-        public ShapeSheetCommands(Session session) :
-            base(session)
+        public ShapeSheetCommands(Client client) :
+            base(client)
         {
 
         }
@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
-            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
  
             var query = new VA.ShapeSheet.Query.CellQuery();
 
@@ -69,8 +69,8 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var app = this.Session.VisioApplication;
-            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
+            var app = this.Client.VisioApplication;
+            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
             var query = new VA.ShapeSheet.Query.CellQuery();
             var sec = query.Sections.Add(section);
 
@@ -94,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
             var sec = query.Sections.Add(section);
@@ -123,7 +123,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
-                this.Session.WriteVerbose("SetFormula: Zero Shapes. Not performing Operation");
+                this.Client.WriteVerbose("SetFormula: Zero Shapes. Not performing Operation");
                 return;
             }
 
@@ -139,11 +139,11 @@ namespace VisioAutomation.Scripting.Commands
 
             if (formulas.Any( f => f == null))
             {
-                this.Session.WriteVerbose("SetFormula: One of the Input Formulas is a NULL value");
+                this.Client.WriteVerbose("SetFormula: One of the Input Formulas is a NULL value");
                 throw new System.ArgumentException("formulas contains a null value");
             }
 
-            this.Session.WriteVerbose("SetFormula: src count= {0} and formula count = {1}", srcs.Count, formulas.Count);
+            this.Client.WriteVerbose("SetFormula: src count= {0} and formula count = {1}", srcs.Count, formulas.Count);
 
             if (formulas.Count != srcs.Count)
             {
@@ -169,8 +169,8 @@ namespace VisioAutomation.Scripting.Commands
                 }
 
             }
-            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set ShapeSheet Formulas"))
+            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set ShapeSheet Formulas"))
             {
                 update.Execute(surface);
             }
@@ -187,7 +187,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
-                this.Session.WriteVerbose("SetResult: Zero Shapes. Not performing Operation");
+                this.Client.WriteVerbose("SetResult: Zero Shapes. Not performing Operation");
                 return;
             }
 
@@ -203,11 +203,11 @@ namespace VisioAutomation.Scripting.Commands
 
             if (results.Any(f => f == null))
             {
-                this.Session.WriteVerbose("SetResult: One of the Input Results is a NULL value");
+                this.Client.WriteVerbose("SetResult: One of the Input Results is a NULL value");
                 throw new System.ArgumentException("results contains a null value");
             }
 
-            this.Session.WriteVerbose("SetResult: src count= {0} and result count = {1}", srcs.Count, results.Count);
+            this.Client.WriteVerbose("SetResult: src count= {0} and result count = {1}", srcs.Count, results.Count);
 
             if (results.Count != srcs.Count)
             {
@@ -232,8 +232,8 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Set ShapeSheet Result"))
+            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set ShapeSheet Result"))
             {
                 update.Execute(surface);
             }
@@ -244,18 +244,18 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            this.Session.WriteVerbose( "Staring ShapeSheet Update");
-            var surface = this.Session.Draw.GetDrawingSurfaceSafe();
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Update ShapeSheet Formulas"))
+            this.Client.WriteVerbose( "Staring ShapeSheet Update");
+            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Update ShapeSheet Formulas"))
             {
                 var internal_update = update.update;
                 internal_update.BlastGuards = blastguards;
                 internal_update.TestCircular = testcircular;
-                this.Session.WriteVerbose( "BlastGuards={0}", blastguards);
-                this.Session.WriteVerbose( "TestCircular={0}", testcircular);
+                this.Client.WriteVerbose( "BlastGuards={0}", blastguards);
+                this.Client.WriteVerbose( "TestCircular={0}", testcircular);
                 internal_update.Execute(surface);                
             }
-            this.Session.WriteVerbose( "Ending ShapeSheet Update");
+            this.Client.WriteVerbose( "Ending ShapeSheet Update");
         }
     }
 }

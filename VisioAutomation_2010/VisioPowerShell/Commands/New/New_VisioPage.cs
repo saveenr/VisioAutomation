@@ -17,19 +17,18 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scripting_session = this.ScriptingSession;
-            var page = scripting_session.Page.New(null, false);
-            set_page_size(scripting_session, Width, Height);
+            var page = this.client.Page.New(null, false);
+            set_page_size(this.client, Width, Height);
             
             if (this.Name != null)
             {
-                scripting_session.Page.SetName(this.Name);
+                this.client.Page.SetName(this.Name);
             }
 
             this.WriteObject(page);
         }
 
-        public static void set_page_size(VA.Scripting.Session scriptingsession, double width, double height)
+        public static void set_page_size(VA.Scripting.Client client, double width, double height)
         {
             double? w = null;
             double? h = null;
@@ -46,7 +45,7 @@ namespace VisioPowerShell.Commands
 
             if (w.HasValue || h.HasValue)
             {
-                scriptingsession.Page.SetSize(w, h);
+                client.Page.SetSize(w, h);
             }
         }
     }

@@ -8,8 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class CustomPropCommands : CommandSet
     {
-        public CustomPropCommands(Session session) :
-            base(session)
+        public CustomPropCommands(Client client) :
+            base(client)
         {
 
         }
@@ -26,7 +26,7 @@ namespace VisioAutomation.Scripting.Commands
                 return prop_dic;
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
 
             var list_custom_props = CP.CustomPropertyHelper.Get(page, shapes);
@@ -54,7 +54,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<bool>();
             }
 
-            var results = this.Session.Selection.GetShapes().Select(s => CP.CustomPropertyHelper.Contains(s, name)).ToList();
+            var results = this.Client.Selection.GetShapes().Select(s => CP.CustomPropertyHelper.Contains(s, name)).ToList();
 
             return results;
         }
@@ -80,8 +80,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Custom Property"))
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Delete Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -106,8 +106,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Set Custom Property"))
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -128,8 +128,8 @@ namespace VisioAutomation.Scripting.Commands
 
             foreach (var shape in shapes)
             {
-                this.Session.Selection.None();
-                this.Session.Selection.Select(shape);
+                this.Client.Selection.None();
+                this.Client.Selection.Select(shape);
                 yield return shape;
             }
         }

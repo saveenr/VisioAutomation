@@ -17,29 +17,27 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             if ( Shapes !=null)
             {
-                scriptingsession.Selection.Select(Shapes);
+                this.client.Selection.Select(Shapes);
             }
             else if (ShapeIDs!=null)
             {
-                scriptingsession.Selection.Select(ShapeIDs);
+                this.client.Selection.Select(ShapeIDs);
             }
             else
             {
                 if (this.Operation == SelectionOperation.All)
                 {
-                    scriptingsession.Selection.All();
+                    this.client.Selection.All();
                 }
                 else if (this.Operation == SelectionOperation.None)
                 {
-                    scriptingsession.Selection.None();
+                    this.client.Selection.None();
                 }
                 else if (this.Operation == SelectionOperation.Invert)
                 {
-                    scriptingsession.Selection.Invert();
+                    this.client.Selection.Invert();
                 }
             }
         }

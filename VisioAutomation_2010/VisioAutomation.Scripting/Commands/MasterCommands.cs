@@ -8,8 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class MasterCommands : CommandSet
     {
-        public MasterCommands(Session session) :
-            base(session)
+        public MasterCommands(Client client) :
+            base(client)
         {
 
         }
@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseMasterEditing()
         {
-            var window = this.Session.VisioApplication.ActiveWindow;
+            var window = this.Client.VisioApplication.ActiveWindow;
 
             var st = window.SubType;
             if (st != 64)
@@ -39,7 +39,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
@@ -72,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
             IVisio.Master master;
             try
             {
-                var application = this.Session.VisioApplication;
+                var application = this.Client.VisioApplication;
                 var active_document = application.ActiveDocument;
                 var masters = active_document.Masters;
                 master = masters.ItemU[name];
@@ -100,7 +100,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("doc");
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
 
             var masters = doc.Masters;
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public List<IVisio.Master> GetMastersByName(string name)
         {
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
             return this.GetMastersByName(name, doc);
         }
@@ -159,7 +159,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             var shape = page.Drop(master, x, y);
             return shape;
@@ -180,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("points");
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;
@@ -192,7 +192,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (document == null)
             {
-                document = this.Session.VisioApplication.ActiveDocument;
+                document = this.Client.VisioApplication.ActiveDocument;
                 if (document == null)
                 {
                     throw new AutomationException("No Active Document");

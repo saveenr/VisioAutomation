@@ -44,38 +44,37 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             if (this.OrgChart != null)
             {
-                scriptingsession.Draw.OrgChart(this.OrgChart);
+                this.client.Draw.OrgChart(this.OrgChart);
             }
             else if (this.GridLayout != null)
             {
-                scriptingsession.Draw.Grid(this.GridLayout);
+                this.client.Draw.Grid(this.GridLayout);
             }
             else if (this.DirectedGraphs != null)
             {
-                scriptingsession.Draw.DirectedGraph(this.DirectedGraphs);
+                this.client.Draw.DirectedGraph(this.DirectedGraphs);
             }
             else if (this.DataTable != null)
             {
                 var widths = Enumerable.Repeat<double>(CellWidth, DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(CellHeight, DataTable.Rows.Count).ToList();
                 var spacing = new VA.Drawing.Size(CellSpacing, CellSpacing);
-                var shapes = scriptingsession.Draw.Table(DataTable, widths, heights, spacing);
+                var shapes = this.client.Draw.Table(DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
             else if (this.PieChart != null)
             {
-                scriptingsession.Draw.PieChart(this.PieChart);
+                this.client.Draw.PieChart(this.PieChart);
             }
             else if (this.BarChart != null)
             {
-                scriptingsession.Draw.BarChart(this.BarChart);
+                this.client.Draw.BarChart(this.BarChart);
             }
             else if (this.AreaChart != null)
             {
-                scriptingsession.Draw.AreaChart(this.AreaChart);
+                this.client.Draw.AreaChart(this.AreaChart);
             }
             else if (this.XmlDocument != null)
             {
@@ -83,7 +82,7 @@ namespace VisioPowerShell.Commands
                 var tree_drawing = new VA.Models.Tree.Drawing();
                 build_from_xml_doc(this.XmlDocument, tree_drawing);
 
-                tree_drawing.Render(scriptingsession.Page.Get());
+                tree_drawing.Render(this.client.Page.Get());
             }
             else
             {

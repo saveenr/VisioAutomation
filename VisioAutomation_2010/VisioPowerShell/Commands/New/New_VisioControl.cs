@@ -36,8 +36,6 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             var ctrl = new VA.Shapes.Controls.ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
@@ -48,7 +46,7 @@ namespace VisioPowerShell.Commands
                 ctrl.CanGlue = VA.Convert.BoolToFormula(this.CanGlue);
                 ctrl.Tip = this.Tip;
 
-                scriptingsession.Control.Add(this.Shapes,ctrl);
+                this.client.Control.Add(this.Shapes, ctrl);
         }
     }
 }

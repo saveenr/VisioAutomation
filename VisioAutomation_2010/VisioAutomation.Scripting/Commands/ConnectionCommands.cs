@@ -11,15 +11,14 @@ namespace VisioAutomation.Scripting.Commands
     {
         private const string undoname_connectShapes = "Connect Shapes";
 
-        public ConnectionCommands(Session session) :
-            base(session)
+        public ConnectionCommands(Client client) :
+            base(client)
         {
 
         }
         /// <summary>
         /// Returns all the connected pairs of shapes in the active page
         /// </summary>
-        /// <param name="scripting_session"></param>
         /// <param name="flag"></param>
         /// <returns></returns>
         public IList<ConnectorEdge> GetTransitiveClosure(ConnectorEdgeHandling flag)
@@ -27,7 +26,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var app = this.Session.VisioApplication;
+            var app = this.Client.VisioApplication;
             return PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
@@ -36,7 +35,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var directed_edges = PathAnalysis.GetDirectedEdges(this.Session.VisioApplication.ActivePage, flag);
+            var directed_edges = PathAnalysis.GetDirectedEdges(this.Client.VisioApplication.ActivePage, flag);
             return directed_edges;
         }
 
@@ -45,9 +44,9 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var active_page = this.Session.VisioApplication.ActivePage;
+            var active_page = this.Client.VisioApplication.ActivePage;
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, undoname_connectShapes))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, undoname_connectShapes))
             {
                 if (master == null)
                 {

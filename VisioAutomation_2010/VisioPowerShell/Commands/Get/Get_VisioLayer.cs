@@ -10,15 +10,14 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             if (this.Name!=null || this.Name=="*")
             {
-                var layer = scriptingsession.Layer.Get(this.Name);
+                var layer = this.client.Layer.Get(this.Name);
                 this.WriteObject(layer);
             }
             else
             {
-                var layers = scriptingsession.Layer.Get();
+                var layers = this.client.Layer.Get();
                 this.WriteObject(layers,false);
             }
         }

@@ -11,11 +11,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             if (this.Shapes == null)
             {
-                scriptingsession.Selection.Delete();                
+                this.client.Selection.Delete();                
             }
             else
             {

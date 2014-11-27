@@ -12,7 +12,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Connects_Scenario_0()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             var pagesize = new VA.Drawing.Size(4, 4);
             ss.Page.New(pagesize, false);
@@ -55,7 +55,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Connects_Scenario_1()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             var pagesize = new VA.Drawing.Size(4, 4);
             ss.Page.New(pagesize, false);
@@ -93,7 +93,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Connects_Scenario_3()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             var s1 = ss.Draw.Rectangle(1, 1, 2,2);
             var s2 = ss.Draw.Rectangle(4, 4, 5, 5);

@@ -9,8 +9,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class UserDefinedCellCommands : CommandSet
     {
-        public UserDefinedCellCommands(Session session) :
-            base(session)
+        public UserDefinedCellCommands(Client client) :
+            base(client)
         {
 
         }
@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.Commands
                 return prop_dic;
             } 
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             var list_user_props = UserDefinedCellsHelper.Get(page, shapes);
 
@@ -58,7 +58,7 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<bool>();
             }
 
-            var all_shapes = this.Session.Selection.GetShapes();
+            var all_shapes = this.Client.Selection.GetShapes();
             var results = all_shapes.Select(s => UserDefinedCellsHelper.Contains(s, name)).ToList();
 
             return results;
@@ -85,7 +85,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Delete User-Defined Cell"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Delete User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
@@ -110,8 +110,8 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("userdefinedcell");
             }
 
-            var application = this.Session.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set User-Defined Cell"))
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {

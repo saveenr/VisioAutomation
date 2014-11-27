@@ -23,20 +23,19 @@ namespace VisioPowerShell.Commands
         {
             if (this.Name != null)
             {
-                this.ScriptingSession.Page.Set(this.Name);
+                this.client.Page.Set(this.Name);
             }
             else if (this.Page != null)
             {
-                this.ScriptingSession.Page.Set(this.Page);
+                this.client.Page.Set(this.Page);
             }
             else if (this.PageNumber > 0)
             {
-                this.ScriptingSession.Page.Set(this.PageNumber);
+                this.client.Page.Set(this.PageNumber);
             }
             else
             {
-                var scriptingsession = this.ScriptingSession;
-                scriptingsession.Page.GoTo(this.Direction);                
+                this.client.Page.GoTo(this.Direction);                
             }
         }
     }

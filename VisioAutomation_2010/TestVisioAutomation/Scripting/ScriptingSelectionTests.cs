@@ -10,7 +10,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Selection_Scenarios()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
 
             var doc = ss.Document.New(10, 5);
 

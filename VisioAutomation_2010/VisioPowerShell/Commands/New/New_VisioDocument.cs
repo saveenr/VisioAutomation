@@ -8,18 +8,18 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            if (!this.ScriptingSession.HasApplication)
+            if (!this.client.HasApplication)
             {
-                this.ScriptingSession.Application.New();
+                this.client.Application.New();
             }
             else
             {
-                if (!this.ScriptingSession.Application.Validate())
+                if (!this.client.Application.Validate())
                 {
-                    this.ScriptingSession.Application.New();
+                    this.client.Application.New();
                 }
             }
-            var doc = this.ScriptingSession.Document.New();
+            var doc = this.client.Document.New();
             this.WriteObject(doc);
         }
     }

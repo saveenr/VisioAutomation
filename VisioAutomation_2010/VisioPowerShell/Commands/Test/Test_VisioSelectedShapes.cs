@@ -8,8 +8,7 @@ namespace VisioPowerShell.Commands
         // checks to see if we have any selected shapes
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            this.WriteObject(scriptingsession.Selection.HasShapes());
+            this.WriteObject(this.client.Selection.HasShapes());
         }
     }
 }

@@ -11,8 +11,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            scriptingsession.Arrange.Ungroup(this.Shapes);
+            this.client.Arrange.Ungroup(this.Shapes);
         }
     }
 }

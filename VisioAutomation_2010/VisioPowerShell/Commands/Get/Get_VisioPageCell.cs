@@ -147,10 +147,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             var query = new VA.ShapeSheet.Query.CellQuery();
-
 
             addcell(query, this.AvenueSizeX, "AvenueSizeX");
             addcell(query, this.AvenueSizeY, "AvenueSizeY");
@@ -220,7 +217,7 @@ namespace VisioPowerShell.Commands
             var dic = GetPageCellDictionary();
             SetFromCellNames(query, this.Cells, dic);
 
-            var surface= new VA.Drawing.DrawingSurface(scriptingsession.Page.Get());
+            var surface = new VA.Drawing.DrawingSurface(this.client.Page.Get());
             
             var target_shapeids = new[] { surface.Page.ID };
 

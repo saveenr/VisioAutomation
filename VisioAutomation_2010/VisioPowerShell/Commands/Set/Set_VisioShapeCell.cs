@@ -239,8 +239,6 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             var update = new VisioAutomation.ShapeSheet.Update();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular = this.TestCircular;
@@ -320,7 +318,7 @@ namespace VisioPowerShell.Commands
             valuemap.SetIf("TxtWidth", this.TxtWidth);
             valuemap.SetIf("Width", this.Width);
 
-            var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
+            var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
 
             foreach (var shape in target_shapes)
             {
@@ -334,14 +332,14 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            var surface = scriptingsession.Draw.GetDrawingSurfaceSafe();
+            var surface = this.client.Draw.GetDrawingSurfaceSafe();
 
             this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
             this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
             this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerboseEx("Number of Total Updates: {0}", update.Count());
 
-            using (var undoscope = new VA.Application.UndoScope(this.ScriptingSession.VisioApplication, "SetShapeCells"))
+            using (var undoscope = new VA.Application.UndoScope(this.client.VisioApplication, "SetShapeCells"))
             {
                 this.WriteVerboseEx("Start Update");
                 update.Execute(surface);

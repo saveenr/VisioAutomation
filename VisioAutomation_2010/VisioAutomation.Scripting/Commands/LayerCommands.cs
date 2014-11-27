@@ -8,8 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class LayerCommands : CommandSet
     {
-        public LayerCommands(Session session) :
-            base(session)
+        public LayerCommands(Client client) :
+            base(client)
         {
 
         }
@@ -29,12 +29,12 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("layername");
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             IVisio.Layer layer = null;
             try
             {
-                this.Session.WriteVerbose("Trying to find Layer named \"{0}\"",layername);
+                this.Client.WriteVerbose("Trying to find Layer named \"{0}\"",layername);
                 var layers = page.Layers;
                 layer = layers.ItemU[layername];
             }
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             return page.Layers.AsEnumerable().ToList();
         }

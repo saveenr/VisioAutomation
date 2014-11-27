@@ -8,8 +8,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            var app = scriptingsession.Application.Attach();
+            var app = this.client.Application.Attach();
 
             if (app == null)
             {

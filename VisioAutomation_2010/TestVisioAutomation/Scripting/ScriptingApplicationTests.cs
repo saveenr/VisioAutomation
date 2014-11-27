@@ -18,7 +18,7 @@ namespace TestVisioAutomation
 
         public void Scripting_Test_Resize_Application_Window1()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
 
             var old_size = ss.Application.Window.GetSize();
             var desired_size = new System.Drawing.Size(600, 800);
@@ -34,7 +34,7 @@ namespace TestVisioAutomation
 
         public void Scripting_Test_Resize_Application_Window2()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
 
             var doc = ss.Document.New(10, 5);
 
@@ -52,14 +52,14 @@ namespace TestVisioAutomation
 
         public void Scripting_Test_App_to_Front()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Application.Window.ToFront();
         }
 
         [TestMethod]
         public void Scripting_Undo_Scenarios()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             var drawing = ss.Document.New(8.5, 11);
             var page = ss.Page.New(new VA.Drawing.Size(8.5, 11), false);
             Assert.AreEqual(0, page.Shapes.Count);
@@ -73,7 +73,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_CloseDocument_Scenarios()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             var doc1 = ss.Document.New(10, 5);
             var doc2 = ss.Document.New(10, 5);
             var doc3 = ss.Document.New(10, 5);

@@ -2,11 +2,11 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell
 {
-    public class VisioPSSessionContext : VisioAutomation.Scripting.SessionContext
+    public class VisioPsClientContext : VisioAutomation.Scripting.ClientContext
     {
         private readonly SMA.Cmdlet cmdlet;
         
-        public VisioPSSessionContext(SMA.Cmdlet cmdlet)
+        public VisioPsClientContext(SMA.Cmdlet cmdlet)
         {
             this.cmdlet = cmdlet;
         }

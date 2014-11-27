@@ -10,14 +10,13 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             if (Filename!=null)
             {
-                scriptingsession.Document.SaveAs(this.Filename);
+                this.client.Document.SaveAs(this.Filename);
             }
             else
             {
-                scriptingsession.Document.Save();
+                this.client.Document.Save();
             }
         }
     }

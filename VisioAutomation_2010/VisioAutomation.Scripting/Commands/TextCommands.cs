@@ -8,8 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class TextCommands: CommandSet
     {
-        public TextCommands(Session session) :
-            base(session)
+        public TextCommands(Client client) :
+            base(client)
         {
 
         }
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Set Shape Text"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Shape Text"))
             {
                 int numtexts = texts.Count;
                 for (int i=0;i<shapes.Count;i++)
@@ -70,11 +70,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Toggle Shape Text Case"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Toggle Shape Text Case"))
             {
                 var shapeids = shapes.Select(s => s.ID).ToList();
 
-                var page = this.Session.VisioApplication.ActivePage;
+                var page = this.Client.VisioApplication.ActivePage;
                 // Store all the formatting
                 var formats = VA.Text.TextFormat.GetFormat(page, shapeids);
 
@@ -123,14 +123,14 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return;
             }
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
             IVisio.VisGetSetArgs flags=0;
             var srcs = new[] {VA.ShapeSheet.SRCConstants.CharFont};
             var formulas = new[] { font.ID.ToString() };
-            this.Session.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
+            this.Client.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
         }
 
         public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)
@@ -144,9 +144,9 @@ namespace VisioAutomation.Scripting.Commands
                 return new List<VA.Text.TextFormat>(0);
             }
 
-            var selection = this.Session.Selection.Get();
+            var selection = this.Client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var formats = VA.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
         }

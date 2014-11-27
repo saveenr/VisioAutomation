@@ -244,11 +244,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
 
-            var target_shapes = this.Shapes ?? scriptingsession.Selection.GetShapes();
+            var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
 
             addcell(query, this.Angle, "Angle");
@@ -327,7 +325,7 @@ namespace VisioPowerShell.Commands
             var dic = GetShapeCellDictionary();
             Get_VisioPageCell.SetFromCellNames(query, this.Cells, dic);
 
-            var surface = scriptingsession.Draw.GetDrawingSurfaceSafe();
+            var surface = this.client.Draw.GetDrawingSurfaceSafe();
 
             this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);

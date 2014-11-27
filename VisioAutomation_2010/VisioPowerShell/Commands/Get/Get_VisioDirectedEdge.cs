@@ -18,11 +18,8 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             var flag = get_DirectedEdgeHandling();
-
-            var edges = scriptingsession.Connection.GetDirectedEdges(flag);
+            var edges = this.client.Connection.GetDirectedEdges(flag);
 
             if (this.GetShapeObjects)
             {

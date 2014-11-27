@@ -126,7 +126,7 @@
     <Compile Include="Scripting\ScriptingCustomPropTests.cs" />
     <Compile Include="Scripting\ScriptingDrawTests.cs" />
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
-    <Compile Include="Scripting\ScriptingSessionTests.cs" />
+    <Compile Include="Scripting\ScriptingClientTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
     <Compile Include="Shapesheet\ShapeSheet_Update_Tests.cs" />
     <Compile Include="Extensions\Application_Tests.cs" />

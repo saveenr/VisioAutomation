@@ -38,15 +38,13 @@ namespace VisioPowerShell.Commands
                 flags = (short)(flags | (short)IVisio.VisGetSetArgs.visSetTestCircular);
             }
 
-            var scriptingsession = this.ScriptingSession;
-
             if (!this.SetResults)
             {
-                scriptingsession.ShapeSheet.SetFormula(this.Shapes, Cell , Value , (IVisio.VisGetSetArgs)flags);               
+                this.client.ShapeSheet.SetFormula(this.Shapes, Cell, Value, (IVisio.VisGetSetArgs)flags);               
             }
             else
             {
-                scriptingsession.ShapeSheet.SetResult(this.Shapes, Cell , Value, (IVisio.VisGetSetArgs)flags);                               
+                this.client.ShapeSheet.SetResult(this.Shapes, Cell, Value, (IVisio.VisGetSetArgs)flags);                               
             }
         }
     }

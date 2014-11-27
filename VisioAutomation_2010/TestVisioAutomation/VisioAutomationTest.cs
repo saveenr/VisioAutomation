@@ -72,11 +72,11 @@ namespace TestVisioAutomation
 
         }
 
-        public VA.Scripting.Session GetScriptingSession()
+        public VA.Scripting.Client GetScriptingClient()
         {
             var app = GetVisioApplication();
-            var scriptingsession = new VA.Scripting.Session(app);
-            return scriptingsession;
+            var client = new VA.Scripting.Client(app);
+            return client;
         }
 
         public static VA.Drawing.Size GetSize(IVisio.Shape shape)

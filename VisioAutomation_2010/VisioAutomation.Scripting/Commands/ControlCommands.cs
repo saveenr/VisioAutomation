@@ -7,8 +7,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ControlCommands : CommandSet
     {
-        public ControlCommands(Session session) :
-            base(session)
+        public ControlCommands(Client client) :
+            base(client)
         {
 
         }
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
             var control_indices = new List<int>();
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication,"Add Control"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Add Control"))
             {
                 foreach (var shape in shapes)
                 {
@@ -54,7 +54,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Control"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Delete Control"))
             {
                 foreach (var shape in shapes)
                 {

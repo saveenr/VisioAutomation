@@ -214,13 +214,11 @@ namespace VisioPowerShell.Commands
         
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             var update = new VisioAutomation.ShapeSheet.Update();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular= this.TestCircular;
 
-            var target_pages = this.Pages ?? new [] { scriptingsession.Page.Get() };
+            var target_pages = this.Pages ?? new[] { this.client.Page.Get() };
 
             var valuemap = new CellValueMap(Get_VisioPageCell.GetPageCellDictionary());
 
@@ -311,7 +309,7 @@ namespace VisioPowerShell.Commands
                 this.WriteVerboseEx("Number of Total Updates: {0}", update.Count());
                 this.WriteVerboseEx("Number of Updates per Shape: {0}", update.Count() / 1);
 
-                using (var undoscope = new VA.Application.UndoScope(this.ScriptingSession.VisioApplication, "SetPageCells"))
+                using (var undoscope = new VA.Application.UndoScope(this.client.VisioApplication, "SetPageCells"))
                 {
                     this.WriteVerboseEx("Start Update");
                     update.Execute(pagesheet);

@@ -12,9 +12,8 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.Point.FromDoubles(this.Doubles).ToList();
-            var shape = scriptingsession.Draw.Bezier(points);
+            var shape = this.client.Draw.Bezier(points);
             this.WriteObject(shape);
         }
     }

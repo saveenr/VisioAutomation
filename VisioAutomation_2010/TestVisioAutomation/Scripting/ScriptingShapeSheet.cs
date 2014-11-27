@@ -11,7 +11,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void QueryPage()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             var doc = ss.Document.New();
             ss.Draw.Rectangle(0, 0, 1, 1);
             ss.Draw.Rectangle(1, 1, 2, 2);

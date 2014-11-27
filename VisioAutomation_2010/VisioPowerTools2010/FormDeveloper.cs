@@ -18,26 +18,26 @@ namespace VisioPowerTools2010
 
         private void buttonHierarchy_Click(object sender, EventArgs e)
         {
-            var session = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
-            session.Developer.DrawNamespaces();
+            var client = new VisioAutomation.Scripting.Client(Globals.ThisAddIn.Application);
+            client.Developer.DrawNamespaces();
         }
 
         private void buttonDiagramWithClasses_Click(object sender, EventArgs e)
         {
-            var session = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
-            session.Developer.DrawNamespacesAndClasses();
+            var client = new VisioAutomation.Scripting.Client(Globals.ThisAddIn.Application);
+            client.Developer.DrawNamespacesAndClasses();
         }
 
         private void buttonClassDiagrams_Click(object sender, EventArgs e)
         {
-            var session = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
-            session.Developer.DrawScriptingDocumentation();
+            var client = new VisioAutomation.Scripting.Client(Globals.ThisAddIn.Application);
+            client.Developer.DrawScriptingDocumentation();
         }
 
         private void buttonEnums_Click(object sender, EventArgs e)
         {
-            var session = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
-            session.Developer.DrawInteropEnumDocumentation();
+            var client = new VisioAutomation.Scripting.Client(Globals.ThisAddIn.Application);
+            client.Developer.DrawInteropEnumDocumentation();
         }
     }
 }

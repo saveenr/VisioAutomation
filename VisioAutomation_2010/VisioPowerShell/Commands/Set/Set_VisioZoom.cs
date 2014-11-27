@@ -14,15 +14,13 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             if (this.Percent > 0)
             {
-                scriptingsession.View.ZoomToPercentage(this.Percent);
+                this.client.View.ZoomToPercentage(this.Percent);
             }
             else
             {
-                scriptingsession.View.Zoom(this.Level);       
+                this.client.View.Zoom(this.Level);       
             }
         }
     }

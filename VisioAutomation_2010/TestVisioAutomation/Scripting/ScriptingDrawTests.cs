@@ -12,23 +12,23 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_OrgChart()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             draw_org_chart(ss, TestVisioAutomation.Properties.Resources.sampleorgchart1);
             ss.Document.Close(true);
             VA.Documents.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
         }
 
-        private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)
+        private void draw_org_chart(VA.Scripting.Client client, string text)
         {
             var xmldoc = SXL.XDocument.Parse(text);
-            var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, xmldoc);
-            scriptingsession.Draw.OrgChart(orgchart);
+            var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(client, xmldoc);
+            client.Draw.OrgChart(orgchart);
         }
 
         [TestMethod]
         public void Scripting_Draw_DataTable()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -62,7 +62,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_Grid()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -85,7 +85,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_RectangleLineOval_0()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -100,7 +100,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_BezierPolyLine_0()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -120,7 +120,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_PieSlice()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -136,7 +136,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_PieChart()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -154,7 +154,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_BarChart()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -189,7 +189,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_AreaChart()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -224,7 +224,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_DirectedGraph1()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
             ss.Document.Close(true);
         }
@@ -232,7 +232,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_DirectedGraph2()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
             ss.Document.Close(true);
         }
@@ -240,7 +240,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_DirectedGraph3()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
             ss.Document.Close(true);
         }
@@ -248,22 +248,22 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_DirectedGraph4()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
             ss.Document.Close(true);
         }
 
-        private void draw_dg(VA.Scripting.Session scriptingsession, string dg_text)
+        private void draw_dg(VA.Scripting.Client client, string dg_text)
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);
-            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, dg_xml);
-            scriptingsession.Draw.DirectedGraph(dg_model);
+            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(client, dg_xml);
+            client.Draw.DirectedGraph(dg_model);
         }
         
         [TestMethod]
         public void Scripting_Drop_Master()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
             var basic_stencil = ss.Document.OpenStencil("Basic_U.VSS");
@@ -279,7 +279,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Drop_Many()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(10, 10), false);
             var basic_stencil = ss.Document.OpenStencil("Basic_U.VSS");

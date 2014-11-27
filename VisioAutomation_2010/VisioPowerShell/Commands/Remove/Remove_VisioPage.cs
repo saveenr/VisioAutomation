@@ -14,20 +14,19 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             if (this.Pages == null)
             {
                 this.WriteVerboseEx("No Page objects ");
                 this.WriteVerboseEx("Removing the Active Page");
-                var page = scriptingsession.VisioApplication.ActivePage;
-                scriptingsession.Page.Delete(new [] { page }, this.Renumber);
+                var page = this.client.VisioApplication.ActivePage;
+                this.client.Page.Delete(new[] { page }, this.Renumber);
                 return;
             }
 
             if (this.Pages != null)
             {
                 this.WriteVerboseEx("Removing the Page Objects");
-                scriptingsession.Page.Delete(this.Pages, this.Renumber);                
+                this.client.Page.Delete(this.Pages, this.Renumber);                
             }
         }
     }

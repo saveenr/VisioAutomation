@@ -30,30 +30,29 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
             if (this.NudgeX != 0.0 || this.NudgeY != 0.0)
             {
-                scriptingsession.Arrange.Nudge(this.Shapes, this.NudgeX, this.NudgeY);                
+                this.client.Arrange.Nudge(this.Shapes, this.NudgeX, this.NudgeY);                
             }
 
             if (this.DistributeHorizontal)
             {
-                scriptingsession.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);
+                this.client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                scriptingsession.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
+                this.client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
             }
 
             if (this.AlignVertical != VerticalAlignment.None)
             {
-                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)AlignVertical);
+                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)AlignVertical);
             }
 
             if (this.AlignHorizontal != HorizontalAlignment.None)
             {
-                scriptingsession.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)AlignHorizontal);
+                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)AlignHorizontal);
             }
 
         }

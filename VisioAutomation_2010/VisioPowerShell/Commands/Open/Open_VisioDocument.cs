@@ -10,17 +10,15 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             var ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
             if (ext == ".vss" || ext == ".vst" || ext == ".vssx" || ext == ".vstx")
             {
-                var doc = scriptingsession.Document.OpenStencil(this.Filename);
+                var doc = this.client.Document.OpenStencil(this.Filename);
                 this.WriteObject(doc);                
             }
             else
             {
-                var doc = scriptingsession.Document.Open(this.Filename);
+                var doc = this.client.Document.Open(this.Filename);
                 this.WriteObject(doc);                
             }
         }

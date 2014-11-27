@@ -9,8 +9,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class DeveloperCommands : CommandSet
     {
-        public DeveloperCommands(Session session) :
-            base(session)
+        public DeveloperCommands(Client client) :
+            base(client)
         {
 
         }
@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
             //docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
-            var cmdst_props = VA.Scripting.Session.GetCommandSetProperties().OrderBy(i=>i.Name).ToList();
+            var cmdst_props = VA.Scripting.Client.GetCommandSetProperties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 
@@ -91,7 +91,7 @@ namespace VisioAutomation.Scripting.Commands
 
             //hide_ui_stuff(docbuilder.VisioDocument);
 
-            var app = this.Session.VisioApplication;
+            var app = this.Client.VisioApplication;
             var doc = formdoc.Render(app);
             return doc;
         }
@@ -161,7 +161,7 @@ namespace VisioAutomation.Scripting.Commands
             //hide_ui_stuff(docbuilder.VisioDocument);
 
 
-            var doc = formdoc.Render(this.Session.VisioApplication);
+            var doc = formdoc.Render(this.Client.VisioApplication);
             return doc;
         }
 
@@ -227,7 +227,7 @@ namespace VisioAutomation.Scripting.Commands
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var doc = this.Session.Document.New(8.5,11,null);
+            var doc = this.Client.Document.New(8.5,11,null);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
             int fontid = font.ID16;
@@ -380,7 +380,7 @@ namespace VisioAutomation.Scripting.Commands
             string def_linecolor = "rgb(180,180,180)";
             string def_shape_fill = "rgb(245,245,245)";
 
-            var doc = this.Session.Document.New(8.5, 11,null);
+            var doc = this.Client.Document.New(8.5, 11,null);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
             var font_segoelight = fonts[segoeuilight_fontname];

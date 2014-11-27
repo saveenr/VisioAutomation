@@ -11,13 +11,13 @@ namespace VisioPowerTools2010
 {
     public partial class VPTRibbon
     {
-        private VisioAutomation.Scripting.Session scriptingsession;
+        private VisioAutomation.Scripting.Client client;
  
         private void VPTRibbon_Load(object sender, RibbonUIEventArgs e)
         {
             try
             {
-                this.scriptingsession = new VisioAutomation.Scripting.Session(Globals.ThisAddIn.Application);
+                this.client = new VisioAutomation.Scripting.Client(Globals.ThisAddIn.Application);
             }
             catch (System.Exception)
             {
@@ -130,14 +130,14 @@ namespace VisioPowerTools2010
 
         private void cmd_copy_text()
         {
-            var shape_text = this.scriptingsession.Text.Get(null);
+            var shape_text = this.client.Text.Get(null);
             var text = string.Join("\r\n", shape_text) + "\r\n";
             Clipboard.SetText(text);
         }
         
         private void cmd_toggle_text_case()
         {
-            this.scriptingsession.Text.ToogleCase(null);
+            this.client.Text.ToogleCase(null);
         }
 
         private void cmd_import_colors()
@@ -458,7 +458,7 @@ namespace VisioPowerTools2010
             {
                 return;
             }
-            this.scriptingsession.Page.ResetOrigin(null);
+            this.client.Page.ResetOrigin(null);
         }
 
         private void buttonResizePageToFit_Click(object sender, RibbonControlEventArgs e)

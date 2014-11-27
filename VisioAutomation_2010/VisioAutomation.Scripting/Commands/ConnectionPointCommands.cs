@@ -8,8 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ConnectionPointCommands : CommandSet
     {
-        public ConnectionPointCommands(Session session) :
-            base(session)
+        public ConnectionPointCommands(Client client) :
+            base(client)
         {
 
         }
@@ -55,7 +55,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var indices = new List<int>(shapes.Count);
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Add Connection Point"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Add Connection Point"))
             {
                 var cp = new CONS.ConnectionPointCells();
                 cp.X = fx;
@@ -98,7 +98,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var target_shapes = shapes.Where(shape => CONS.ConnectionPointHelper.GetCount(shape) > index);
 
-            using (var undoscope = new VA.Application.UndoScope(this.Session.VisioApplication, "Delete Connection Point"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Delete Connection Point"))
             {
                 foreach (var shape in target_shapes)
                 {

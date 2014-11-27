@@ -21,14 +21,13 @@ namespace VisioPowerShell.Commands
         {
             this.WriteVerboseEx("NoSelect: {0}", this.NoSelect);
 
-            var scriptingsession = this.ScriptingSession;
             var points = VA.Drawing.Point.FromDoubles(Points).ToList();
-            var shape_ids = scriptingsession.Master.Drop(Masters, points);
-            
-            var page = scriptingsession.Page.Get();
+            var shape_ids = this.client.Master.Drop(Masters, points);
+
+            var page = this.client.Page.Get();
             var shape_objects = VA.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
 
-            scriptingsession.Selection.None();
+            this.client.Selection.None();
 
             if (this.NoSelect)
             {
@@ -36,7 +35,7 @@ namespace VisioPowerShell.Commands
             else
             {
                 this.WriteVerbose("Selecting");
-                scriptingsession.Selection.Select(shape_objects);
+                this.client.Selection.Select(shape_objects);
             }
 
             this.WriteObject(shape_objects, false);

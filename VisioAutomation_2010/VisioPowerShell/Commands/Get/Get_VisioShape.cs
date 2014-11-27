@@ -20,9 +20,6 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
-
             if (this.NameOrID == null)
             {
                 // return selected shapes
@@ -32,19 +29,19 @@ namespace VisioPowerShell.Commands
                 if (this.Recursive)
                 {
                     this.WriteVerboseEx("Returning selected shapes (nested)");
-                    var shapes = scriptingsession.Selection.GetShapesRecursive();
+                    var shapes = this.client.Selection.GetShapesRecursive();
                     this.WriteObject(shapes, false);
                 }
                 if (this.SubSelected)
                 {
                     this.WriteVerboseEx("Returning selected shapes (subselecte)");
-                    var shapes = scriptingsession.Selection.GetSubSelectedShapes();
+                    var shapes = this.client.Selection.GetSubSelectedShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
                 {
                     this.WriteVerboseEx("Returning selected shapes ");
-                    var shapes = scriptingsession.Selection.GetShapes();
+                    var shapes = this.client.Selection.GetShapes();
                     this.WriteObject(shapes, false);
                 }                
             }
@@ -52,7 +49,7 @@ namespace VisioPowerShell.Commands
             {
                 if (this.NameOrID.Contains("*"))
                 {
-                    var shapes = scriptingsession.Draw.GetAllShapes();
+                    var shapes = this.client.Draw.GetAllShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
@@ -68,13 +65,13 @@ namespace VisioPowerShell.Commands
                     if (all_ints)
                     {
                         var ints = this.NameOrID.Where(i => i is int).Cast<int>().ToArray();
-                        var shapes = scriptingsession.Page.GetShapesByID(ints);
+                        var shapes = this.client.Page.GetShapesByID(ints);
                         this.WriteObject(shapes, false);
                     }
                     else if (all_strings)
                     {
                         var strings = this.NameOrID.Where(i => i is string).Cast<string>().ToArray();
-                        var shapes = scriptingsession.Page.GetShapesByName(strings);
+                        var shapes = this.client.Page.GetShapesByName(strings);
                         this.WriteObject(shapes, false);
                     }
                     else

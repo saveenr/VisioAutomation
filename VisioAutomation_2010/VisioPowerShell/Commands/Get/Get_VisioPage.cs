@@ -12,17 +12,16 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            var application = scriptingsession.VisioApplication;
+            var application = this.client.VisioApplication;
 
             if (this.ActivePage)
             {
-                var page = scriptingsession.Page.Get();
+                var page = this.client.Page.Get();
                 this.WriteObject(page);
                 return;
             }
 
-            var pages = scriptingsession.Page.GetPagesByName(this.Name);
+            var pages = this.client.Page.GetPagesByName(this.Name);
             this.WriteObject(pages, true);
         }
     }

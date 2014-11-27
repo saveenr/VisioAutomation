@@ -20,16 +20,14 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             if (this.Font != null)
             {
-                scriptingsession.Text.SetFont(this.Shapes, Font);                
+                this.client.Text.SetFont(this.Shapes, Font);                
             }
 
             if (this.Togglecase)
             {
-                scriptingsession.Text.ToogleCase(this.Shapes);
+                this.client.Text.ToogleCase(this.Shapes);
             }
         }
     }

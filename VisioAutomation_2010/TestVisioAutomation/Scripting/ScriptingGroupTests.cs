@@ -9,7 +9,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Grouping()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 

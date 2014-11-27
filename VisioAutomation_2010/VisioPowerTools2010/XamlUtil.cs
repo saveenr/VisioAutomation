@@ -7,20 +7,20 @@ namespace VisioPowerTools2010
     public static class ExportExtensions
     {
 
-        public static void ExportSelectionToXAML(VA.Scripting.Session session, string filename)
+        public static void ExportSelectionToXAML(VA.Scripting.Client client, string filename)
         {
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
             }
 
-            if (!session.Selection.HasShapes())
+            if (!client.Selection.HasShapes())
             {
                 return;
             }
 
-            var selection = session.Selection.Get();
-            ExportSelectionToXAML(selection, filename, s => session.Output.WriteVerbose(s));
+            var selection = client.Selection.Get();
+            ExportSelectionToXAML(selection, filename, s => client.Output.WriteVerbose(s));
         }
 
         public static void ExportSelectionToXAML(IVisio.Selection sel, string filename, System.Action<string> verboselog)

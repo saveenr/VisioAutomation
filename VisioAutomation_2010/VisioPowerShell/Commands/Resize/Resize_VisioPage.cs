@@ -21,17 +21,15 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             if (FitContents)
             {
                 var bordersize = new VA.Drawing.Size(BorderWidth, BorderWidth);
-                scriptingsession.Page.ResizeToFitContents(bordersize, true);                
+                this.client.Page.ResizeToFitContents(bordersize, true);                
             }
 
             if (Width > 0 || Height > 0)
             {
-                var page = scriptingsession.VisioApplication.ActivePage;
+                var page = this.client.VisioApplication.ActivePage;
                 var pagecells = VA.Pages.PageCells.GetCells(page.PageSheet);
 
                 var newpagecells = new VA.Pages.PageCells();

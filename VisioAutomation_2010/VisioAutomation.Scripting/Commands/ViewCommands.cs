@@ -6,8 +6,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ViewCommands : CommandSet
     {
-        public ViewCommands(Session session) :
-            base(session)
+        public ViewCommands(Client client) :
+            base(client)
         {
             
         }
@@ -16,7 +16,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.AssertApplicationAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             return active_window;
         }
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else if (zoom == Scripting.Zoom.ToSelection)
             {
-                if (!this.Session.HasSelectedShapes())
+                if (!this.Client.HasSelectedShapes())
                 {
                     return;
                 }

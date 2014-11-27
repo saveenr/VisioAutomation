@@ -9,7 +9,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Test_ExportSVGHTML()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
 
             var doc = ss.Document.New(10, 5);
 

@@ -15,11 +15,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-
             if (this.Documents== null)
             {
-                var app = scriptingsession.VisioApplication;
+                var app = this.client.VisioApplication;
                 var doc = app.ActiveDocument;
                 if (doc != null)
                 {
@@ -30,7 +28,7 @@ namespace VisioPowerShell.Commands
             {
                 foreach (var doc in this.Documents)
                 {
-                    this.ScriptingSession.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
+                    this.client.WriteVerbose("Closing doc with ID={0} Name={1}", doc.ID,doc.Name);
                     VA.Documents.DocumentHelper.Close(doc, this.Force);
                 }
             }

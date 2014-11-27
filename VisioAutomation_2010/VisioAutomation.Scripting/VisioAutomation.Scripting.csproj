@@ -81,7 +81,7 @@
     <Compile Include="Commands\ReflectionUtil.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
-    <Compile Include="DefaultSessionContext.cs" />
+    <Compile Include="DefaultClientContext.cs" />
     <Compile Include="FormatCategory.cs" />
     <Compile Include="FormatPaintCache.cs" />
     <Compile Include="FormatPaintCell.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="Commands\FormatCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
-    <Compile Include="SessionContext.cs" />
+    <Compile Include="ClientContext.cs" />
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
     <Compile Include="DirectedGraph\ConnectorInfo.cs" />
     <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Commands\ExportCommands.cs" />
     <Compile Include="Commands\PageCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs" />
+    <Compile Include="Client.cs" />
     <Compile Include="Commands\ShapeSheetCommands.cs" />
     <Compile Include="Commands\TextCommands.cs" />
     <Compile Include="TextCommandsUtil.cs" />

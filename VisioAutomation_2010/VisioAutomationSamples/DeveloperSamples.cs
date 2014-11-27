@@ -8,29 +8,29 @@ namespace VisioAutomationSamples
         public static void ScriptingDocumentation()
         {
             var app = SampleEnvironment.Application;
-            var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawScriptingDocumentation();
+            var client = new VisioAutomation.Scripting.Client(app);
+            var doc = client.Developer.DrawScriptingDocumentation();
         }
 
         public static void InteropEnumDocumentation()
         {
             var app = SampleEnvironment.Application;
-            var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawInteropEnumDocumentation();
+            var client = new VisioAutomation.Scripting.Client(app);
+            var doc = client.Developer.DrawInteropEnumDocumentation();
         }
 
         public static void VisioAutomationNamespaces()
         {
             var app = SampleEnvironment.Application;
-            var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawNamespaces();
+            var client = new VisioAutomation.Scripting.Client(app);
+            var doc = client.Developer.DrawNamespaces();
         }
 
         public static void VisioAutomationNamespacesAndClasses()
         {
             var app = SampleEnvironment.Application;
-            var ss = new VisioAutomation.Scripting.Session(app);
-            var doc = ss.Developer.DrawNamespacesAndClasses();
+            var client = new VisioAutomation.Scripting.Client(app);
+            var doc = client.Developer.DrawNamespacesAndClasses();
         }
     }
 }

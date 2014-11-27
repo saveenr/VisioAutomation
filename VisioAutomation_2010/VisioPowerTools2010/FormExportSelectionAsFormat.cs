@@ -17,7 +17,7 @@ namespace VisioPowerTools2010
         {
             InitializeComponent();
 
-            var ss = Globals.ThisAddIn.ScriptingSession;
+            var ss = Globals.ThisAddIn.Client;
 
             if (!ss.HasActiveDocument)
             {
@@ -70,7 +70,7 @@ namespace VisioPowerTools2010
                 MessageBox.Show("Output folder does not exist");
                 return;
             }
-            var ss = Globals.ThisAddIn.ScriptingSession;
+            var ss = Globals.ThisAddIn.Client;
             if (this.ExportFormat == enumExportFormat.ExportSVGXHTML)
             {
                 ss.Export.SelectionToSVGXHTML(filename);                

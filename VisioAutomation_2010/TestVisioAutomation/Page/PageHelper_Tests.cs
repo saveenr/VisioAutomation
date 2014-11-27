@@ -31,7 +31,7 @@ namespace TestVisioAutomation
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
 
-            var ss = this.GetScriptingSession();
+            var ss = this.GetScriptingClient();
 
             var or1 = ss.Page.GetOrientation();
             Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait, or1);

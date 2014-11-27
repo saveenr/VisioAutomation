@@ -10,19 +10,19 @@ namespace VisioAutomation.Scripting.Commands
     {
         public ApplicationWindowCommands Window { get; private set; }
 
-        public ApplicationCommands(Session session) :
-            base(session)
+        public ApplicationCommands(Client client) :
+            base(client)
         {
-            this.Window = new ApplicationWindowCommands(this.Session);
+            this.Window = new ApplicationWindowCommands(this.Client);
         }
 
         public void Close(bool force)
         {
-            var app = this.Session.VisioApplication;
+            var app = this.Client.VisioApplication;
 
             if (app == null)
             {
-                this.Session.WriteWarning("There is no Visio Application to stop");
+                this.Client.WriteWarning("There is no Visio Application to stop");
                 return;
             }
 
@@ -38,20 +38,20 @@ namespace VisioAutomation.Scripting.Commands
             {
                 app.Quit();
             }
-            this.Session.VisioApplication = null;
+            this.Client.VisioApplication = null;
         }
 
         public IVisio.Application FindRunning()
         {
             if (VisioAutomation.Scripting.UACHelper.IsUacEnabled)
             {
-                this.Session.WriteVerbose("UAC Enabled");
+                this.Client.WriteVerbose("UAC Enabled");
             }
 
             if (VisioAutomation.Scripting.UACHelper.IsProcessElevated)
             {
-                this.Session.WriteVerbose("Running in Elevated Process");
-                this.Session.WriteWarning("Having an Elevated Process with UAC Enabled will cause Running Applications to not be found");
+                this.Client.WriteVerbose("Running in Elevated Process");
+                this.Client.WriteWarning("Having an Elevated Process with UAC Enabled will cause Running Applications to not be found");
             }
 
             var app = VA.Application.ApplicationHelper.FindRunningApplication();
@@ -61,9 +61,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application Attach()
         {
-            if (this.Session.VisioApplication != null)
+            if (this.Client.VisioApplication != null)
             {
-                this.Session.WriteWarning("Already connected to an instance");
+                this.Client.WriteWarning("Already connected to an instance");
             }
 
             var app = this.FindRunning();
@@ -72,9 +72,9 @@ namespace VisioAutomation.Scripting.Commands
                 throw new VA.Scripting.VisioApplicationException("Did not find a running instance of Visio 2010 or above");
             }
 
-            this.Session.WriteVerbose("Attaching to an instance");
+            this.Client.WriteVerbose("Attaching to an instance");
 
-            this.Session.VisioApplication = app;
+            this.Client.VisioApplication = app;
 
             VA.Application.ApplicationHelper.BringWindowToTop(app);
 
@@ -83,32 +83,32 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application New()
         {
-            this.Session.WriteVerbose("Creating a new Instance of Visio");
+            this.Client.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
-            this.Session.WriteVerbose("Attaching that instance to current scipting session");
-            this.Session.VisioApplication = app;
+            this.Client.WriteVerbose("Attaching that instance to current scripting client");
+            this.Client.VisioApplication = app;
             return app;
         }
 
         public void Undo()
         {
             this.AssertApplicationAvailable();
-            this.Session.VisioApplication.Undo();
+            this.Client.VisioApplication.Undo();
         }
 
         public void Redo()
         {
             this.AssertApplicationAvailable();
-            this.Session.VisioApplication.Redo();
+            this.Client.VisioApplication.Redo();
         }
 
         public bool Validate()
         {
-            var app = this.Session.VisioApplication;
+            var app = this.Client.VisioApplication;
 
             if (app == null)
             {
-                this.Session.WriteVerbose("Session's Application object is null");
+                this.Client.WriteVerbose("Client's Application object is null");
                 return false;
             }
 
@@ -118,12 +118,12 @@ namespace VisioAutomation.Scripting.Commands
                 //  if No COMException was thrown when reading Version property. This application instance is treated as valid
 
                 var app_version = app.Version;
-                this.Session.WriteVerbose("Application validated");
+                this.Client.WriteVerbose("Application validated");
                 return true;
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                this.Session.WriteVerbose("COMException thrown during validation. Treating as invalid application");
+                this.Client.WriteVerbose("COMException thrown during validation. Treating as invalid application");
                 // If a COMException is thrown, this indicates that the
                 // application object is invalid
                 return false;

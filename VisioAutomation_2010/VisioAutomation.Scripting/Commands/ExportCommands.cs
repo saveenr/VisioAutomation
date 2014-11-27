@@ -8,8 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ExportCommands : CommandSet
     {
-        public ExportCommands(Session session) :
-            base(session)
+        public ExportCommands(Client client) :
+            base(client)
         {
 
         }
@@ -24,16 +24,16 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("filename");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Client.HasSelectedShapes())
             {
-                this.Session.WriteVerbose("No selected shapes. Not exporting.");
+                this.Client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var old_selection = this.Session.Selection.GetShapes();
+            var old_selection = this.Client.Selection.GetShapes();
 
-            this.Session.Selection.None();
-            var application = this.Session.VisioApplication;
+            this.Client.Selection.None();
+            var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
             active_page.Export(filename);
             var active_window = application.ActiveWindow;
@@ -50,13 +50,13 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("filename");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Client.HasSelectedShapes())
             {
-                this.Session.WriteVerbose("No selected shapes. Not exporting.");
+                this.Client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var selection = this.Session.Selection.Get();
+            var selection = this.Client.Selection.Get();
             selection.Export(filename);
         }
 
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("filename");
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var old_page = application.ActivePage;
             var active_document = application.ActiveDocument;
             var active_window = application.ActiveWindow;
@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!System.IO.Directory.Exists(pbase))
             {
-                this.Session.WriteError( " Folder {0} does not exist", pbase);
+                this.Client.WriteError( " Folder {0} does not exist", pbase);
                 return;
             }
             var ext = System.IO.Path.GetExtension(filename);
@@ -97,10 +97,10 @@ namespace VisioAutomation.Scripting.Commands
                     string page_filname = System.String.Format("{0}_{1}_{2}{3}{4}", fbase, page_index, page.Name,
                                                                bkgnd, ext);
 
-                    this.Session.WriteUser( "file {0}", page_filname);
+                    this.Client.WriteUser( "file {0}", page_filname);
                     page_filname = System.IO.Path.Combine(pbase, page_filname);
                     active_window.Page = page;
-                    this.Session.Selection.None();
+                    this.Client.Selection.None();
                     page.Export(page_filname);
                 }
             active_window.Page = old_page;
@@ -116,14 +116,14 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("filename");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Client.HasSelectedShapes())
             {
-                this.Session.WriteVerbose("No selected shapes. Not exporting.");
+                this.Client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var selection = this.Session.Selection.Get();
-            SelectionToSVGXHTML(this.Session.Selection.Get(), filename, s => this.Session.WriteVerbose( s));
+            var selection = this.Client.Selection.Get();
+            SelectionToSVGXHTML(this.Client.Selection.Get(), filename, s => this.Client.WriteVerbose( s));
         }
 
         private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)

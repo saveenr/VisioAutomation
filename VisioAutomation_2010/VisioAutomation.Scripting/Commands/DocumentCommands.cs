@@ -8,8 +8,8 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class DocumentCommands : CommandSet
     {
-        public DocumentCommands(Session session) :
-            base(session)
+        public DocumentCommands(Client client) :
+            base(client)
         {
 
         }
@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.AssertApplicationAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
             var doc = documents[name];
 
@@ -36,17 +36,17 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
 
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
-                this.Session.WriteVerbose("Not a Drawing Window", doc.Name);
+                this.Client.WriteVerbose("Not a Drawing Window", doc.Name);
                 throw new VA.AutomationException("Not a Drawing Window");
             }
 
-            this.Session.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-            this.Session.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+            this.Client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+            this.Client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
 
             if (force)
             {
@@ -64,7 +64,7 @@ namespace VisioAutomation.Scripting.Commands
         public void CloseAllWithoutSaving()
         {
             this.AssertApplicationAvailable();
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
@@ -72,8 +72,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 foreach (var doc in docs)
                 {
-                    this.Session.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
-                    this.Session.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
+                    this.Client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
+                    this.Client.WriteVerbose( "Closing Document FullName=\"{0}\"", doc.FullName);
                     doc.Close();
                 }
             }
@@ -88,8 +88,8 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.AssertApplicationAvailable();
 
-            this.Session.WriteVerbose("Creating Empty Drawing");
-            var application = this.Session.VisioApplication;
+            this.Client.WriteVerbose("Creating Empty Drawing");
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
             
             if (template == null)
@@ -114,7 +114,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
             
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
             doc.Save();
         }
@@ -124,7 +124,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
             doc.SaveAs(filename);
         }
@@ -140,7 +140,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var doc = this.New(template);
             var pagesize = new VA.Drawing.Size(w, h);
-            this.Session.Page.SetSize(pagesize);
+            this.Client.Page.SetSize(pagesize);
             return doc;
         }
 
@@ -158,13 +158,13 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            this.Session.WriteVerbose( "Loading stencil \"{0}\"", name);
+            this.Client.WriteVerbose( "Loading stencil \"{0}\"", name);
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
             var doc = documents.OpenStencil(name);
 
-            this.Session.WriteVerbose( "Finished loading stencil \"{0}\"", name);
+            this.Client.WriteVerbose( "Finished loading stencil \"{0}\"", name);
             return doc;
         }
 
@@ -184,15 +184,15 @@ namespace VisioAutomation.Scripting.Commands
 
             string abs_filename = System.IO.Path.GetFullPath(filename);
 
-            this.Session.WriteVerbose( "Input filename: {0}", filename);
-            this.Session.WriteVerbose( "Absolute filename: {0}", abs_filename);
+            this.Client.WriteVerbose( "Input filename: {0}", filename);
+            this.Client.WriteVerbose( "Absolute filename: {0}", abs_filename);
 
             if (!System.IO.File.Exists(abs_filename))
             {
                 throw new System.ArgumentException("File does not exist", "filename");
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
             var doc = documents.Add(filename);
             return doc;
@@ -203,7 +203,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.AssertApplicationAvailable();
             
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
             var doc = documents[name];
             return doc;
@@ -211,7 +211,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public List<IVisio.Document> GetDocumentsByName(string name)
         {
-            var documents = this.Session.VisioApplication.Documents;
+            var documents = this.Client.VisioApplication.Documents;
             if (name == null || name == "*")
             {
                 // return all documents

@@ -13,8 +13,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            var dic = scriptingsession.ConnectionPoint.Get(this.Shapes);
+            var dic = this.client.ConnectionPoint.Get(this.Shapes);
 
             if (this.GetCells)
             {

@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var master = this.ScriptingSession.Master.New(this.Document, this.Name);
+            var master = this.client.Master.New(this.Document, this.Name);
             this.WriteObject(master);
         }
     }

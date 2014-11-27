@@ -8,10 +8,9 @@ namespace VisioPowerShell.Commands
         // checks to see if we hae an active drawing open
         protected override void ProcessRecord()
         {
-            var scriptingsession = this.ScriptingSession;
-            var app = scriptingsession.VisioApplication;
+            var app = this.client.VisioApplication;
 
-            bool valid_app = scriptingsession.Application.Validate();
+            bool valid_app = this.client.Application.Validate();
             this.WriteObject(valid_app);
         }
     }
