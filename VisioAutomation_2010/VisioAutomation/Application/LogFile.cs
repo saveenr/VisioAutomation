@@ -1,39 +1,7 @@
 using System.Collections.Generic;
-using VA = VisioAutomation;
 
 namespace VisioAutomation.Application.Logging
 {
-    public class LogRecord
-    {
-        public string Type;
-        public string SubType;
-        public string Context;
-        public string Description;
-
-        public override string ToString()
-        {
-            return string.Format("{0}:{1}", this.Type, this.SubType);
-        }
-    }
-
-    public class LogSession
-    {
-        public string StartLine;
-        public string EndLine;
-
-        public List<LogRecord> Records;
-
-        public LogSession()
-        {
-            this.Records = new List<LogRecord>();
-        }
-    }
-
-    enum LogState
-    {
-        Start, InSession, InRecord
-    }
-
     public class LogFile
     {
         public string Source;
@@ -134,5 +102,5 @@ namespace VisioAutomation.Application.Logging
 
             }
         }
-    }    
+    }
 }

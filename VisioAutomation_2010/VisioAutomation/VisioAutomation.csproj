@@ -80,7 +80,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\Logging.cs" />
+    <Compile Include="Application\LogFile.cs" />
+    <Compile Include="Application\LogRecord.cs" />
+    <Compile Include="Application\LogSession.cs" />
+    <Compile Include="Application\LogState.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
     <Compile Include="TextUtil.cs" />
