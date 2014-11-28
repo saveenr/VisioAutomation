@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -9,7 +8,7 @@ namespace VisioAutomation.Scripting
     public class Client
     {
         public IVisio.Application VisioApplication { get; set; }
-        public Context Context { get; set; }
+        private Context _context;
 
         public VA.Scripting.Commands.ApplicationCommands Application { get; private set; }
         public VA.Scripting.Commands.ViewCommands View { get; private set; }
@@ -43,7 +42,7 @@ namespace VisioAutomation.Scripting
             {
                 throw new System.ArgumentNullException();
             }
-            this.Context = context;
+            this._context = context;
             this.VisioApplication = app;
 
             this.Application = new VA.Scripting.Commands.ApplicationCommands(this);
@@ -84,57 +83,57 @@ namespace VisioAutomation.Scripting
         
         public void WriteUser(string fmt, params object[] items)
         {
-            string s = String.Format(fmt, items);
-            this.Context.WriteUser(s);
+            string s = string.Format(fmt, items);
+            this._context.WriteUser(s);
         }
 
         public void WriteDebug(string fmt, params object[] items)
         {
-            string s = String.Format(fmt, items);
-            this.Context.WriteDebug(s);
+            string s = string.Format(fmt, items);
+            this._context.WriteDebug(s);
         }
 
         public void WriteVerbose(string fmt, params object[] items)
         {
-            string s = String.Format(fmt, items);
-            this.Context.WriteVerbose(s);
+            string s = string.Format(fmt, items);
+            this._context.WriteVerbose(s);
         }
 
         public void WriteWarning(string fmt, params object[] items)
         {
-            string s = String.Format(fmt, items);
-            this.Context.WriteWarning(s);
+            string s = string.Format(fmt, items);
+            this._context.WriteWarning(s);
         }
 
         public void WriteError(string fmt, params object[] items)
         {
-            string s = String.Format(fmt, items);
-            this.Context.WriteError(s);
+            string s = string.Format(fmt, items);
+            this._context.WriteError(s);
         }
 
         public void WriteUser(string s)
         {
-            this.Context.WriteUser(s);
+            this._context.WriteUser(s);
         }
 
         public void WriteDebug(string s)
         {
-            this.Context.WriteDebug(s);
+            this._context.WriteDebug(s);
         }
 
         public void WriteVerbose(string s)
         {
-            this.Context.WriteVerbose(s);
+            this._context.WriteVerbose(s);
         }
 
         public void WriteWarning(string s)
         {
-            this.Context.WriteWarning(s);
+            this._context.WriteWarning(s);
         }
         
         public void WriteError(string s)
         {
-            this.Context.WriteError(s);
+            this._context.WriteError(s);
         }
         
         internal bool HasSelectedShapes()
@@ -212,6 +211,20 @@ namespace VisioAutomation.Scripting
                 bool b = this.VisioApplication != null;
                 this.WriteVerbose("HasApplication: {0}", b);
                 return b;
+            }
+        }
+
+        public Context Context
+        {
+            get { return _context; }
+            set
+            {
+                if (value == null)
+                {
+                    string msg = "Context must be non-null";
+                    throw new System.ArgumentException(msg);
+                }
+                _context = value;
             }
         }
 
