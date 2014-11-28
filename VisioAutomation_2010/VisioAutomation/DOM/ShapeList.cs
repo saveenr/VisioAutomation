@@ -245,7 +245,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void UpdateCellsWithDropSizes(RenderContext ctx)
+        private void UpdateCellsWithDropSizes(RenderContext context)
         {
             var masters = this.shapes
                 .Where(shape => shape is Shape).Cast<Shape>();

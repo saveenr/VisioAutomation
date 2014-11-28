@@ -172,7 +172,7 @@ namespace VisioAutomation.Scripting
                 short active_window_type = active_window.Type;
                 var vis_drawing = (int)IVisio.VisWinTypes.visDrawing;
                 var vis_master = (int)IVisio.VisWinTypes.visMasterWin;
-                var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
+                // var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
 
                 this.WriteVerbose("The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
                 if (!(active_window_type == vis_drawing || active_window_type == vis_master))

@@ -30,7 +30,7 @@ namespace VisioPowerShell
             set
             {
                 this.CheckCellName(name);
-                if (!this.srcmap.HasCellName(name))
+                if (!this.srcmap.ContainsCell(name))
                 {
                     string msg = string.Format("Unknown Cell name \"{0}\"", name);
                     throw new System.ArgumentOutOfRangeException(msg);

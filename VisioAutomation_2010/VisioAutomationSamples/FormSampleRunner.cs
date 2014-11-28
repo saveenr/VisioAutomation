@@ -32,7 +32,7 @@ namespace VisioAutomationSamples
                 var methods = t.GetMethods()
                     .Where(m => m.IsPublic)
                     .Where(m => m.IsStatic)
-                    .Where(m => m.GetParameters().Count() == 0)
+                    .Where(m => !m.GetParameters().Any())
                     .OrderBy(m => m.Name);
 
                 foreach (var m in methods)

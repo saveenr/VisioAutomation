@@ -11,12 +11,6 @@ namespace VisioAutomation.Interop
         private static Dictionary<string, EnumType> g_name_to_enum;
         private static List<System.Type> g_types; 
 
-        private static List<System.Type> GetTypes()
-        {
-            init();
-            return g_types;
-        }
-
         public static void init()
         {
             if (!_initialized)

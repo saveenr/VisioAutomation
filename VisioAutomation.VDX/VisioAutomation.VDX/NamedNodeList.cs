@@ -38,7 +38,7 @@ namespace VisioAutomation.VDX
                 throw new System.ArgumentNullException("item");
             }
 
-            return (item.parent == this);
+            return (item._parent == this);
         }
 
         public virtual void Add(T item)
@@ -48,17 +48,17 @@ namespace VisioAutomation.VDX
                 throw new System.ArgumentNullException("item");
             }
 
-            if (item.parent == this)
+            if (item._parent == this)
             {
                 //throw new System.ArgumentException("item is already a member of this collection");
             }
 
-            if (item.parent != null)
+            if (item._parent != null)
             {
                 throw new System.ArgumentException("item is already a member of another collection");
             }
 
-            item.parent = this;
+            item._parent = this;
             string name = this.func_get_name(item);
 
             if (this.ContainsName(name))

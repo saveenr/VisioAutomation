@@ -542,20 +542,6 @@ namespace VisioAutomation.Scripting.Commands
             return shapes_list;
         }
 
-        private IVisio.Shape TryGetShape(IVisio.Shapes shapes, string name)
-        {
-            IVisio.Shape shape = null;
-            try
-            {
-                shape = shapes.ItemU[name];
-            }
-            catch (System.Runtime.InteropServices.COMException)
-            {
-            }
-
-            return shape;
-        }
-
         public IList<IVisio.Page> GetPagesByName(string Name)
         {
             var active_document = this.Client.VisioApplication.ActiveDocument;

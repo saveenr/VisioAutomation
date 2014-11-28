@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet;
+using VA=VisioAutomation;
 
 namespace VisioPowerShell
 {
     public class CellMap
     {
-        Dictionary<string, SRC> dic;
+        Dictionary<string, VA.ShapeSheet.SRC> dic;
 
         private System.Text.RegularExpressions.Regex regex_cellname;
         private System.Text.RegularExpressions.Regex regex_cellname_wildcard;
@@ -15,7 +15,7 @@ namespace VisioPowerShell
         {
             this.regex_cellname = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
             this.regex_cellname_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
-            this.dic = new Dictionary<string, SRC>(System.StringComparer.OrdinalIgnoreCase);
+            this.dic = new Dictionary<string, VA.ShapeSheet.SRC>(System.StringComparer.OrdinalIgnoreCase);
         }
 
         public VisioAutomation.ShapeSheet.SRC this[string name]
@@ -34,7 +34,7 @@ namespace VisioPowerShell
             }
         }
 
-        public Dictionary<string, SRC>.KeyCollection CellNames
+        public Dictionary<string, VA.ShapeSheet.SRC>.KeyCollection CellNames
         {
             get
             {
@@ -115,10 +115,10 @@ namespace VisioPowerShell
                 }
             }
 
-            List<KeyValuePair<string, SRC>> pairs = this.dic.ToList();
+            List<KeyValuePair<string, VA.ShapeSheet.SRC>> pairs = this.dic.ToList();
         }
 
-        public bool HasCellName(string name)
+        public bool ContainsCell(string name)
         {
             return this.dic.ContainsKey(name);
         }

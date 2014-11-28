@@ -78,7 +78,7 @@ namespace VisioPowerTools2010
             var app = VisioPowerTools2010.Globals.ThisAddIn.Application;
             string v = Globals.ThisAddIn.Application.Version;
 
-            var vertokens = v.Split(new char[] { '.' });
+            var vertokens = v.Split(new [] { '.' });
 
             this.log("Searching for Stencil files (VSS, VSSX)");
             var stencilfiles = System.IO.Directory.GetFiles(srcfolder, "*.vss").ToList();

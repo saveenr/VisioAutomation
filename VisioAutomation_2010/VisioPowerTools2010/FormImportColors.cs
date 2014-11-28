@@ -231,7 +231,6 @@ namespace VisioPowerTools2010
             {
                 string msg = "Unknown URL format";
                 MessageBox.Show(msg);
-                return;
             }
         }
 

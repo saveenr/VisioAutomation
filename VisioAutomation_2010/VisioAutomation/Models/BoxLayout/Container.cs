@@ -39,12 +39,10 @@ namespace VisioAutomation.Models.BoxLayout
             {
                 yield break;
             }
-            else
+
+            foreach (var c in this.m_children)
             {
-                foreach (var c in this.m_children)
-                {
-                    yield return c;
-                }
+                yield return c;
             }
         }
 

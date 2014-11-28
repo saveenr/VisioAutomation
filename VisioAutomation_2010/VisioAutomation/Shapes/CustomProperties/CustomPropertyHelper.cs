@@ -49,21 +49,6 @@ namespace VisioAutomation.Shapes.CustomProperties
             Set(shape, row, cp);
         }
 
-        private static void set_cp_props_on_update(CustomPropertyCells cp, Update update, short xrow)
-        {
-            //update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Ask.ForRow(xrow), cp.Ask.Formula); // Missing cp.Ask
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Calendar.ForRow(xrow), cp.Calendar.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Format.ForRow(xrow), cp.Format.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Invisible.ForRow(xrow), cp.Invisible.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Label.ForRow(xrow), cp.Label.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_LangID.ForRow(xrow), cp.LangId.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Prompt.ForRow(xrow), cp.Prompt.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_SortKey.ForRow(xrow), cp.SortKey.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Type.ForRow(xrow), cp.Type.Formula);
-            update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Value.ForRow(xrow), cp.Value.Formula);
-            //update.SetFormulaIgnoreNull(VA.ShapeSheet.SRCConstants.Prop_Verify.ForRow(xrow), cp.Verify.Formula); // Missing Prop_Verify
-        }
-
         public static void Set(IVisio.Shape shape, short row, CustomPropertyCells cp)
         {
             if (shape == null)
