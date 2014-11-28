@@ -74,7 +74,7 @@ namespace TestVisioAutomation
         {
             var page1 = this.GetNewPage(new VA.Drawing.Size(5, 5));
 
-            var impact = page1.Document.Fonts["Impact"];
+            var impact = page1.Document.Fonts["Arial"];
             var m = new VA.Text.Markup.TextElement("Normal Text in Impact Font");
             m.CharacterCells.Font = impact.ID;
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
@@ -96,7 +96,7 @@ namespace TestVisioAutomation
             var fonts = doc.Fonts;
 
             var segoeui = fonts["Segoe UI"];
-            var impact = fonts["Impact"];
+            var impact = fonts["Arial"];
             var couriernew = fonts["Courier New"];
             var georgia = fonts["Georgia"];
 
