@@ -37,13 +37,13 @@ namespace VisioAutomation.Scripting
         {
         }
         
-        public Client(IVisio.Application app, Context ctx)
+        public Client(IVisio.Application app, Context context)
         {
-            if (ctx == null)
+            if (context == null)
             {
                 throw new System.ArgumentNullException();
             }
-            this.Context = ctx;
+            this.Context = context;
             this.VisioApplication = app;
 
             this.Application = new VA.Scripting.Commands.ApplicationCommands(this);
