@@ -44,7 +44,7 @@ namespace VisioPowerShell
                 //     ProcessRecord, and EndProcessing methods, and only
                 //     from that same thread."
 
-                _client.Context = new VisioPsClientContext(this);
+                _client.Context = new VisioPsContext(this);
                 return _client;
             }
         }

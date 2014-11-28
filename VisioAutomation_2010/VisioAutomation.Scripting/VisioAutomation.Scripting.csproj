@@ -81,7 +81,7 @@
     <Compile Include="Commands\ReflectionUtil.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
-    <Compile Include="DefaultClientContext.cs" />
+    <Compile Include="DefaultContext.cs" />
     <Compile Include="FormatCategory.cs" />
     <Compile Include="FormatPaintCache.cs" />
     <Compile Include="FormatPaintCell.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="Commands\FormatCommands.cs" />
     <Compile Include="Commands\LayerCommands.cs" />
     <Compile Include="Commands\MasterCommands.cs" />
-    <Compile Include="ClientContext.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Commands\UserDefinedCellCommands.cs" />
     <Compile Include="DirectedGraph\ConnectorInfo.cs" />
     <Compile Include="DirectedGraph\DirectedGraphBuilder.cs" />

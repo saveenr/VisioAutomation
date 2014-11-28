@@ -113,7 +113,7 @@
     <Compile Include="Commands\New\New_VisioGridLayout.cs" />
     <Compile Include="Commands\New\New_VisioMaster.cs" />
     <Compile Include="Commands\Remove\Remove_VisioUserDefinedCell.cs" />
-    <Compile Include="objects\VisioPsClientContext.cs" />
+    <Compile Include="objects\VisioPsContext.cs" />
     <Compile Include="enums\ResultType.cs" />
     <Compile Include="Commands\New\New_VisioShape.cs" />
     <Compile Include="Commands\Copy\Copy_VisioShape.cs" />

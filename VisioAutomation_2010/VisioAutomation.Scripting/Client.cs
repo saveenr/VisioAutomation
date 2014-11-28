@@ -9,7 +9,7 @@ namespace VisioAutomation.Scripting
     public class Client
     {
         public IVisio.Application VisioApplication { get; set; }
-        public ClientContext Context { get; set; }
+        public Context Context { get; set; }
 
         public VA.Scripting.Commands.ApplicationCommands Application { get; private set; }
         public VA.Scripting.Commands.ViewCommands View { get; private set; }
@@ -33,12 +33,11 @@ namespace VisioAutomation.Scripting
         public VA.Scripting.Commands.OutputCommands Output { get; private set; }
 
         public Client(IVisio.Application app):
-            this(app,new DefaultClientContext())
+            this(app,new DefaultContext())
         {
         }
-
-
-        public Client(IVisio.Application app, ClientContext ctx)
+        
+        public Client(IVisio.Application app, Context ctx)
         {
             if (ctx == null)
             {

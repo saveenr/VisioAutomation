@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Scripting
 {
-    public abstract class ClientContext
+    public abstract class Context
     {
         // this class is for storing additional data
         // about a session and handling I/O

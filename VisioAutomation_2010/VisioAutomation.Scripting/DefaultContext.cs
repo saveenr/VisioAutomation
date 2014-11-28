@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.Scripting
 {
-    public class DefaultClientContext : ClientContext
+    public class DefaultContext : Context
     {
         public override void WriteDebug(string s)
         {
