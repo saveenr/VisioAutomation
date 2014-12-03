@@ -9,12 +9,12 @@ namespace VisioPowerShell.Commands
         {
             if (this.client.VisioApplication == null)
             {
-                this.WriteVerboseEx("A Visio Application Instance is NOT Attached");
+                this.WriteVerbose("A Visio Application Instance is NOT Attached");
                 this.WriteObject(null);
             }
             else
             {
-                this.WriteVerboseEx("A Visio Application Instance is Attached");
+                this.WriteVerbose("A Visio Application Instance is Attached");
                 this.WriteObject(this.client.VisioApplication);
             }
         }

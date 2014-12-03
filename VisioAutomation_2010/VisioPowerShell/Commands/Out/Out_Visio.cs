@@ -78,7 +78,7 @@ namespace VisioPowerShell.Commands
             }
             else if (this.XmlDocument != null)
             {
-                this.WriteVerboseEx("XmlDocument");
+                this.WriteVerbose("XmlDocument");
                 var tree_drawing = new VA.Models.Tree.Drawing();
                 build_from_xml_doc(this.XmlDocument, tree_drawing);
 
@@ -86,7 +86,7 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                this.WriteVerboseEx("No object to draw");
+                this.WriteVerbose("No object to draw");
             }
         }
 

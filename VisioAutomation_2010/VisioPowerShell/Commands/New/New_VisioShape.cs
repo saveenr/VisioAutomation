@@ -19,7 +19,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            this.WriteVerboseEx("NoSelect: {0}", this.NoSelect);
+            this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
             var points = VA.Drawing.Point.FromDoubles(Points).ToList();
             var shape_ids = this.client.Master.Drop(Masters, points);
@@ -34,7 +34,7 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                this.WriteVerbose("Selecting");
+                ((SMA.Cmdlet) this).WriteVerbose("Selecting");
                 this.client.Selection.Select(shape_objects);
             }
 

@@ -30,10 +30,9 @@ namespace VisioPowerShell
                 // if a scripting client is not available create one and cache it
                 // for the lifetime of this cmdlet
 
-                if (_client==null)
-                {
-                    _client = new VA.Scripting.Client(null);
-                }
+                _client = _client ?? new VA.Scripting.Client(null);
+                _client.Context = new VisioPsContext(this);
+                return _client;
 
                 // Must always setup the client output
                 // if we try to do this only once per new client then we'll
@@ -44,23 +43,21 @@ namespace VisioPowerShell
                 //     ProcessRecord, and EndProcessing methods, and only
                 //     from that same thread."
 
-                _client.Context = new VisioPsContext(this);
-                return _client;
             }
         }
 
-        public void WriteVerboseEx(string fmt, params object[] items)
+        public void WriteVerbose(string fmt, params object[] items)
         {
             string s = string.Format(fmt, items);
-            this.WriteVerbose(s);
+            base.WriteVerbose(s);
         }
         
         protected bool CheckFileExists(string file)
         {
             if (!System.IO.File.Exists(file))
             {
-                this.WriteVerboseEx("Filename: {0}",file);
-                this.WriteVerboseEx("Abs Filename: {0}", System.IO.Path.GetFullPath(file));
+                this.WriteVerbose("Filename: {0}",file);
+                this.WriteVerbose("Abs Filename: {0}", System.IO.Path.GetFullPath(file));
                 var exc = new System.IO.FileNotFoundException(file);
                 var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
                 this.WriteError(er);

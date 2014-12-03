@@ -23,13 +23,13 @@ namespace VisioPowerShell.Commands
                 // master name is specified
                 if (doc_specified)
                 {
-                    this.WriteVerbose("Get master from specified document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get master from specified document");
                     var masters = this.client.Master.GetMastersByName(this.Name, this.Document);
                     this.WriteObject(masters,true);
                 }
                 else
                 {
-                    this.WriteVerbose("Get master from active document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get master from active document");
                     var masters = this.client.Master.GetMastersByName(this.Name);
                     this.WriteObject(masters,true);
                 }
@@ -39,13 +39,13 @@ namespace VisioPowerShell.Commands
                 // master name is not specified
                 if (doc_specified)
                 {
-                    this.WriteVerbose("Get all masters from specified document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from specified document");
                     var masters = this.client.Master.Get(this.Document);
                     this.WriteObject(masters, false);                    
                 }
                 else
                 {
-                    this.WriteVerbose("Get all masters from active document");
+                    ((SMA.Cmdlet) this).WriteVerbose("Get all masters from active document");
                     var masters = this.client.Master.Get();
                     this.WriteObject(masters, false);                   
                 }

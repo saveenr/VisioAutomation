@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands
         {
             if (!System.IO.File.Exists(this.Filename))
             {
-                this.WriteVerboseEx("File already exists");
+                this.WriteVerbose("File already exists");
                 if (this.Overwrite)
                 {
                     System.IO.File.Delete(this.Filename);

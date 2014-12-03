@@ -334,16 +334,16 @@ namespace VisioPowerShell.Commands
 
             var surface = this.client.Draw.GetDrawingSurfaceSafe();
 
-            this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
-            this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
-            this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
-            this.WriteVerboseEx("Number of Total Updates: {0}", update.Count());
+            this.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
+            this.WriteVerbose("TestCircular: {0}", this.TestCircular);
+            this.WriteVerbose("Number of Shapes : {0}", target_shapes.Count);
+            this.WriteVerbose("Number of Total Updates: {0}", update.Count());
 
             using (var undoscope = new VA.Application.UndoScope(this.client.VisioApplication, "SetShapeCells"))
             {
-                this.WriteVerboseEx("Start Update");
+                this.WriteVerbose("Start Update");
                 update.Execute(surface);
-                this.WriteVerboseEx("End Update");
+                this.WriteVerbose("End Update");
             }
         }
     }

@@ -24,23 +24,23 @@ namespace VisioPowerShell.Commands
             {
                 // return selected shapes
 
-                this.WriteVerboseEx("NUll");
+                this.WriteVerbose("NUll");
 
                 if (this.Recursive)
                 {
-                    this.WriteVerboseEx("Returning selected shapes (nested)");
+                    this.WriteVerbose("Returning selected shapes (nested)");
                     var shapes = this.client.Selection.GetShapesRecursive();
                     this.WriteObject(shapes, false);
                 }
                 if (this.SubSelected)
                 {
-                    this.WriteVerboseEx("Returning selected shapes (subselecte)");
+                    this.WriteVerbose("Returning selected shapes (subselecte)");
                     var shapes = this.client.Selection.GetSubSelectedShapes();
                     this.WriteObject(shapes, false);
                 }
                 else
                 {
-                    this.WriteVerboseEx("Returning selected shapes ");
+                    this.WriteVerbose("Returning selected shapes ");
                     var shapes = this.client.Selection.GetShapes();
                     this.WriteObject(shapes, false);
                 }                

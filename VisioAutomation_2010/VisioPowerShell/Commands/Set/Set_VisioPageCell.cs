@@ -303,17 +303,17 @@ namespace VisioPowerShell.Commands
                     var cell_src = valuemap.GetSRC(cellname);
                     update.SetFormulaIgnoreNull( cell_src , cell_value);
                 }
-                this.WriteVerboseEx("BlastGuards: {0}", this.BlastGuards);
-                this.WriteVerboseEx("TestCircular: {0}", this.TestCircular);
-                this.WriteVerboseEx("Number of Shapes : {0}", 1);
-                this.WriteVerboseEx("Number of Total Updates: {0}", update.Count());
-                this.WriteVerboseEx("Number of Updates per Shape: {0}", update.Count() / 1);
+                this.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
+                this.WriteVerbose("TestCircular: {0}", this.TestCircular);
+                this.WriteVerbose("Number of Shapes : {0}", 1);
+                this.WriteVerbose("Number of Total Updates: {0}", update.Count());
+                this.WriteVerbose("Number of Updates per Shape: {0}", update.Count() / 1);
 
                 using (var undoscope = new VA.Application.UndoScope(this.client.VisioApplication, "SetPageCells"))
                 {
-                    this.WriteVerboseEx("Start Update");
+                    this.WriteVerbose("Start Update");
                     update.Execute(pagesheet);
-                    this.WriteVerboseEx("End Update");
+                    this.WriteVerbose("End Update");
                 }
             }
 

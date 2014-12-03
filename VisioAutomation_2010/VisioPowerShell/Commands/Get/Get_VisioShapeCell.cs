@@ -327,15 +327,15 @@ namespace VisioPowerShell.Commands
 
             var surface = this.client.Draw.GetDrawingSurfaceSafe();
 
-            this.WriteVerboseEx("Number of Shapes : {0}", target_shapes.Count);
-            this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);
+            this.WriteVerbose("Number of Shapes : {0}", target_shapes.Count);
+            this.WriteVerbose("Number of Cells: {0}", query.Columns.Count);
 
-            this.WriteVerboseEx("Start Query");
+            this.WriteVerbose("Start Query");
 
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);
 
-            this.WriteVerboseEx("End Query");
+            this.WriteVerbose("End Query");
         }
 
         private void addcell(VisioAutomation.ShapeSheet.Query.CellQuery q, bool b, string name)

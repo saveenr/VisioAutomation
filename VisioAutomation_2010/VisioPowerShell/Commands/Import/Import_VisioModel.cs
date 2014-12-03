@@ -17,14 +17,14 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            this.WriteVerboseEx("Loading {0} as xml", this.Filename);
+            this.WriteVerbose("Loading {0} as xml", this.Filename);
             var xmldoc = SXL.XDocument.Load(this.Filename);
 
             var root = xmldoc.Root;
-            this.WriteVerboseEx("Root element name ={0}", root.Name);
+            this.WriteVerbose("Root element name ={0}", root.Name);
             if (root.Name == "directedgraph")
             {
-                this.WriteVerboseEx("Loading as a Directed Graph");
+                this.WriteVerbose("Loading as a Directed Graph");
                 var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(
                     this.client,
                     xmldoc);
@@ -32,7 +32,7 @@ namespace VisioPowerShell.Commands
             }
             else if (root.Name == "orgchart")
             {
-                this.WriteVerboseEx("Loading as an Org Chart");
+                this.WriteVerbose("Loading as an Org Chart");
                 var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(this.client, xmldoc);
                 this.WriteObject(oc);
             }

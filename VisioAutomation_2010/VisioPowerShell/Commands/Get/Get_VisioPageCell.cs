@@ -221,14 +221,14 @@ namespace VisioPowerShell.Commands
             
             var target_shapeids = new[] { surface.Page.ID };
 
-            this.WriteVerboseEx("Number of Cells: {0}", query.Columns.Count);
+            this.WriteVerbose("Number of Cells: {0}", query.Columns.Count);
 
-            this.WriteVerboseEx("Start Query");
+            this.WriteVerbose("Start Query");
 
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
 
             this.WriteObject(dt);
-            this.WriteVerboseEx("End Query");
+            this.WriteVerbose("End Query");
         }
 
         public static void SetFromCellNames(VA.ShapeSheet.Query.CellQuery query, string[] Cells, CellMap dic)

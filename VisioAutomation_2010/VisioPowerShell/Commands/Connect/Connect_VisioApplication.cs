@@ -15,7 +15,7 @@ namespace VisioPowerShell.Commands
                 throw new VA.AutomationException("Could not find an instance of the Visio Application");
             }
 
-            this.WriteVerboseEx("Attaching to Visio Application");
+            this.WriteVerbose("Attaching to Visio Application");
             this.WriteObject(app);
         }
     }
