@@ -57,10 +57,11 @@ namespace VisioPowerShell.Commands
         {
             foreach (var edge in edges)
             {
-                var e = new DirectedEdge();
-                e.FromShapeID = edge.From.ID;
-                e.ToShapeID = edge.To.ID;
-                e.ConnectorID = edge.Connector.ID;
+                var e = new DirectedEdge(
+                    edge.From.ID,
+                    edge.To.ID,
+                    edge.Connector.ID
+                    );
                 this.WriteObject(e);
             }
         }
