@@ -2,9 +2,17 @@ namespace VisioPowerShell
 {
     public class UserDefinedCellvalues
     {
-        public int ShapeID;
-        public string Name { get; set; }
-        public string Value { get; set; }
-        public string Prompt { get; set; }
+        public readonly int ShapeID;
+        public readonly string Name;
+        public readonly string Value;
+        public readonly string Prompt;
+
+        public UserDefinedCellvalues(int id, string name, string value, string prompt)
+        {
+            this.ShapeID = id;
+            this.Name = name;
+            this.Value = value;
+            this.Prompt = prompt;
+        }
     }
 }
