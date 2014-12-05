@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace VisioPowerShell
 {
@@ -154,40 +155,43 @@ namespace VisioPowerShell
                         string message = "Null values not allowed for cellvalues";
                         throw new System.ArgumentOutOfRangeException(message);
                     }
-                    if (value_o is string)
-                    {
-                        string value_string = (string)value_o;
-                        this[key_string] = value_string;
-                    }
-                    else if (value_o is int)
-                    {
-                        int value_int = (int)value_o;
-                        var culture = System.Globalization.CultureInfo.InvariantCulture;
-                        string value_string = value_int.ToString(culture);
-                        this[key_string] = value_string;
-                    }
-                    else if (value_o is float)
-                    {
-                        float value_float = (float)value_o;
-                        var culture = System.Globalization.CultureInfo.InvariantCulture;
-                        string value_string = value_float.ToString(culture);
-                        this[key_string] = value_string;
-                    }
-                    else if (value_o is double)
-                    {
-                        double value_double = (double)value_o;
-                        var culture = System.Globalization.CultureInfo.InvariantCulture;
-                        string value_string = value_double.ToString(culture);
-                        this[key_string] = value_string;
-                    }
-                    else
-                    {
-                        string message = string.Format("Cell values cannot be of type {0} ", value_o.GetType().Name);
-                        throw new System.ArgumentOutOfRangeException(message);
-                    }
+
+                    var value_string = get_value_string(value_o);
+                    this[key_string] = value_string;
                 }
             }
         }
 
+        private static string get_value_string(object value_o)
+        {
+            var culture = System.Globalization.CultureInfo.InvariantCulture;
+
+            string value_string;
+            if (value_o is string)
+            {
+                value_string = (string) value_o;
+            }
+            else if (value_o is int)
+            {
+                int value_int = (int) value_o;
+                value_string = value_int.ToString(culture);
+            }
+            else if (value_o is float)
+            {
+                float value_float = (float) value_o;
+                value_string = value_float.ToString(culture);
+            }
+            else if (value_o is double)
+            {
+                double value_double = (double) value_o;
+                value_string = value_double.ToString(culture);
+            }
+            else
+            {
+                string message = string.Format("Cell values cannot be of type {0} ", value_o.GetType().Name);
+                throw new System.ArgumentOutOfRangeException(message);
+            }
+            return value_string;
+        }
     }
 }
