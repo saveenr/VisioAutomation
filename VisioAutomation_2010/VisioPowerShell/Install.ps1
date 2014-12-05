@@ -1,4 +1,9 @@
-﻿Set-StrictMode -Version 2
+﻿# Installs this module for the User
+# This is for when you want to quickly check that normal installed usage works
+# but don't want to go through the full process of generating the installer, etc.
+# NOTE: If another PS Session has the module loaded the binaries cannot be replaced
+
+Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
 function New-Folder($path)

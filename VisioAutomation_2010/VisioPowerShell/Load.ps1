@@ -1,4 +1,8 @@
-﻿Set-StrictMode -Version 2
+﻿# Loads the module fom bin debug.
+# For those cases where you need to check something quick
+# and don't want to overwrite the installed version
+
+Set-StrictMode -Version 2
 $ErrorActionPreference = "Stop"
 
 $script_path = $myinvocation.mycommand.path
