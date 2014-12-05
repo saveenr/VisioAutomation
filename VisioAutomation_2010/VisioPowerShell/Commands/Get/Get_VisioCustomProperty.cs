@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes.CustomProperties;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -26,24 +27,12 @@ namespace VisioPowerShell.Commands
             {
                 var shape = shape_propdic_pair.Key;
                 var propdic = shape_propdic_pair.Value;
+                int shape_id = shape.ID;
                 foreach (var propname_propcells_pair in propdic)
                 {
                     string propname = propname_propcells_pair.Key;
                     var propcells = propname_propcells_pair.Value;
-
-                    var cpf = new CustomPropertyValues();
-                    cpf.ShapeID = shape.ID;
-                    cpf.Name = propname;
-                    cpf.Value = propcells.Value.Formula.Value;
-                    cpf.Format = propcells.Format.Formula.Value;
-                    cpf.Invisible = propcells.Invisible.Formula.Value;
-                    cpf.Label= propcells.Label.Formula.Value;
-                    cpf.LangId= propcells.LangId.Formula.Value;
-                    cpf.Prompt =  propcells.Prompt.Formula.Value; 
-                    cpf.SortKey =  propcells.SortKey.Formula.Value;
-                    cpf.Type = propcells.Type.Formula.Value;
-                    cpf.Calendar = propcells.Calendar.Formula.Value;
-
+                    var cpf = new CustomPropertyValues(shape_id, propname, propcells);
                     this.WriteObject(cpf);
                 }
             }

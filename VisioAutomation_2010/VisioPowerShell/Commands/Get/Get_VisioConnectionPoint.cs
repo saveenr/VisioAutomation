@@ -25,23 +25,16 @@ namespace VisioPowerShell.Commands
             {
                 var shape = shape_points.Key;
                 var points = shape_points.Value;
+
                 int shapeid = shape.ID;
 
-                foreach (var point in points)
+                foreach (var point_cells in points)
                 {
-                    var cp = new ConnectionPointValues();
-
-                    cp.ShapeID = shapeid;
-
-                    cp.Type = point.Type.Formula.Value;
-                    cp.X = point.X.Formula.Value;
-                    cp.Y = point.Y.Formula.Value;
-                    cp.DirX = point.DirX.Formula.Value;
-                    cp.DirY = point.DirY.Formula.Value;
-
+                    var cp = new ConnectionPointValues(shapeid, point_cells);
                     this.WriteObject(cp);
                 }
             }
         }
+
     }
 }
