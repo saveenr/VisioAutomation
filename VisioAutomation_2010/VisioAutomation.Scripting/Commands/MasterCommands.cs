@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new AutomationException("The active window is not a master window");
             }
 
-            var master = (Microsoft.Office.Interop.Visio.Master)window.Master;
+            var master = (IVisio.Master)window.Master;
             master.Close();
         }
 

@@ -1,8 +1,8 @@
-using VisioAutomation;
+using SMA=System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Close, "VisioMaster")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Close, "VisioMaster")]
     public class Close_VisioMaster : VisioCmdlet
     {
         protected override void ProcessRecord()

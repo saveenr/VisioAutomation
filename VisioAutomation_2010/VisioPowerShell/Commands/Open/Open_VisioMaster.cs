@@ -1,10 +1,14 @@
+using SMA = System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
+
 namespace VisioPowerShell.Commands
 {
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Open, "VisioMaster")]
+    [SMA.Cmdlet(SMA.VerbsCommon.Open, "VisioMaster")]
     public class Open_VisioMaster : VisioCmdlet
     {
-        [System.Management.Automation.Parameter(Position = 0, Mandatory = true)]
-        public Microsoft.Office.Interop.Visio.Master Master;
+        [SMA.Parameter(Position = 0, Mandatory = true)]
+        [SMA.ValidateNotNull]
+        public IVisio.Master Master;
 
         protected override void ProcessRecord()
         {

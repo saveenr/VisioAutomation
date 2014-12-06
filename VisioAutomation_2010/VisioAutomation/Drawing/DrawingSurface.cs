@@ -8,9 +8,9 @@ namespace VisioAutomation.Drawing
 {
     public struct DrawingSurface
     {
-        public Microsoft.Office.Interop.Visio.Page Page;
-        public Microsoft.Office.Interop.Visio.Master Master;
-        public Microsoft.Office.Interop.Visio.Shape Shape;
+        public IVisio.Page Page;
+        public IVisio.Master Master;
+        public IVisio.Shape Shape;
 
         public DrawingSurface(IVisio.Page page)
         {
