@@ -6,10 +6,7 @@ namespace VisioPowerShell.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioPage")]
     public class Copy_VisioPage : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = false)]
-        public string Name = null;
-
-        [SMA.Parameter(Position = 1, Mandatory = false)]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Document ToDocument=null;
 
         protected override void ProcessRecord()
