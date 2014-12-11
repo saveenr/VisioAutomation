@@ -6,7 +6,8 @@ namespace VisioPowerShell.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioShape")]
     public class Copy_VisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]public IVisio.Shape[] Shapes;
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {

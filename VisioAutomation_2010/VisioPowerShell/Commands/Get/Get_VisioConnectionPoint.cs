@@ -6,7 +6,8 @@ namespace VisioPowerShell.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
     public class Get_VisioConnectionPoint : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]public IVisio.Shape[] Shapes;
+        [SMA.Parameter(Mandatory = false)]
+        public IVisio.Shape[] Shapes;
 
         [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetCells;

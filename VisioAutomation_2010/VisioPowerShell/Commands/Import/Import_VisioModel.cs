@@ -8,6 +8,7 @@ namespace VisioPowerShell.Commands
     public class Import_VisioModel : VisioCmdlet
     {
         [SMA.Parameter(Mandatory = true, Position = 0)]
+        [SMA.ValidateNotNullOrEmpty]
         public string Filename { get; set; }
 
         protected override void ProcessRecord()

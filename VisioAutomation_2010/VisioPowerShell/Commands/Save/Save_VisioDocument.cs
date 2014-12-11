@@ -6,6 +6,7 @@ namespace VisioPowerShell.Commands
     public class Save_VisioDocument : VisioCmdlet
     {
         [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.ValidateNotNullOrEmpty]
         public string Filename;
 
         protected override void ProcessRecord()
