@@ -54,6 +54,13 @@ namespace VisioExportPagesToDocs
                 var newdoc = docs.Add("");
                 var newpage = newdoc.Pages[1];
                 VA.Pages.PageHelper.DuplicateToDocument(page,newdoc,newpage,pagename,true);
+
+	        // Visio allows characters in page names that are not valid for file names. Replace them.   
+                foreach (var c in System.IO.Path.GetInvalidFileNameChars())   
+                {   
+                       pagename = pagename.Replace(c, '_');   
+                }  
+
                 string destname = System.IO.Path.Combine(destpath, basename + "_" + pageindex.ToString() + "_" + pagename + ext);
                 if (System.IO.File.Exists(destname))
                 {
