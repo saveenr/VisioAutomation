@@ -4,6 +4,17 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
+namespace VisioAutomation.Extensions
+{
+    public static class ColorMethods
+    {
+        public static VA.Drawing.ColorRGB ToColorRGB(this IVisio.Color color)
+        {
+            return new VA.Drawing.ColorRGB(color.Red, color.Green, color.Blue);
+        }
+    }
+}
+
 namespace VisioPowerTools
 {
     public partial class FormColorTool : Form
@@ -69,6 +80,7 @@ namespace VisioPowerTools
                 (System.Drawing.Color) doc_colors[rgbcolors.ShadowBackgroundColor.Result].ToColorRGB();
             this.colorSelectorSmallLine.Color =
                 (System.Drawing.Color) doc_colors[rgbcolors.LineColor.Result].ToColorRGB();
+
         }
 
         private void buttonApply_Click(object sender, System.EventArgs e)
