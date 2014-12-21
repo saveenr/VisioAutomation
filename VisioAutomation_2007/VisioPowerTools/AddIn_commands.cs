@@ -114,37 +114,43 @@ namespace VisioPowerTools
         public static void CmdAlignLeft()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.Align(VA.Drawing.AlignmentHorizontal.Left);
+            // TODO: fix
+            //ss.Layout.Align(VA.Drawing.AlignmentHorizontal.Left);
         }
 
         public static void CmdAlignCenter()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.Align(VA.Drawing.AlignmentHorizontal.Center);
+            // TODO: fix
+            //ss.Layout.Align(VA.Drawing.AlignmentHorizontal.Center);
         }
 
         public static void CmdAlignRight()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.Align(VA.Drawing.AlignmentHorizontal.Right);
+            // TODO: fix
+            //ss.Layout.Align(VA.Drawing.AlignmentHorizontal.Right);
         }
 
         public static void CmdAlignTop()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.Align(VA.Drawing.AlignmentVertical.Top);
+            // TODO: fix
+            //ss.Layout.Align(VA.Drawing.AlignmentVertical.Top);
         }
 
         public static void CmdAlignMiddle()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.Align(VA.Drawing.AlignmentVertical.Center);
+            // TODO: fix
+            //ss.Layout.Align(VA.Drawing.AlignmentVertical.Center);
         }
 
         public static void CmdAlignBottom()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.Align(VA.Drawing.AlignmentVertical.Bottom);
+            // TODO: fix
+            //ss.Layout.Align(VA.Drawing.AlignmentVertical.Bottom);
         }
 
         public static void CmdSnapPosition()
@@ -184,19 +190,25 @@ namespace VisioPowerTools
         public static void CmdPasteWidth()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Format.PasteSize(VA.Scripting.Commands.FormatCommands.SizeFlags.Width);
+            // TODO: fix
+
+            //ss.Format.PasteSize(VA.Scripting.Commands.FormatCommands.SizeFlags.Width);
         }
 
         public static void CmdPasteHeight()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Format.PasteSize(VA.Scripting.Commands.FormatCommands.SizeFlags.Height);
+            // TODO: fix
+
+            //ss.Format.PasteSize(VA.Scripting.Commands.FormatCommands.SizeFlags.Height);
         }
 
         public static void CmdSwitchCase()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Text.ToogleCase();
+            // TODO: fix
+
+            //ss.Text.ToogleCase();
         }
 
         public static void CmdSelectAll()
