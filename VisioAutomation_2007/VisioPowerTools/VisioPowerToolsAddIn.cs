@@ -44,7 +44,7 @@ namespace VisioPowerTools
 
                     var application = Globals.VisioPowerToolsAddIn.Application;
                     g_scripting_session = new VisioAutomation.Scripting.Client(application);
-                    g_scripting_session = g_session_options;
+                    g_scripting_session.Context = g_session_options;
                 }
                 else
                 {
