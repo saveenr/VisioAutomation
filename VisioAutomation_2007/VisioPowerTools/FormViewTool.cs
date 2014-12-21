@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Scripting;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerTools
@@ -12,15 +13,12 @@ namespace VisioPowerTools
 
         private void buttonPreviousPage_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
-
-            //VisioPowerToolsAddIn.ScriptingSession.Page.GoTo(VA.Pages.PageNavigation.PreviousPage);
+            VisioPowerToolsAddIn.Client.Page.GoTo(PageDirection.Previous);
         }
         
         private void buttonNextPage_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
-            //VisioPowerToolsAddIn.ScriptingSession.Page.GoTo(VA.Pages.PageNavigation.NextPage);
+            VisioPowerToolsAddIn.Client.Page.GoTo(PageDirection.Next);
         }
 
         private void buttonZoomToSelection_Click(object sender, System.EventArgs e)
@@ -45,16 +43,12 @@ namespace VisioPowerTools
 
         private void buttonFirstPage_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
-
-            //VisioPowerToolsAddIn.ScriptingSession.Page.GoTo(VA.Pages.PageNavigation.FirstPage);
+            VisioPowerToolsAddIn.Client.Page.GoTo(PageDirection.First);
         }
 
         private void buttonPageLast_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
-
-            //VisioPowerToolsAddIn.ScriptingSession.Page.GoTo(VA.Pages.PageNavigation.LastPage);
+            VisioPowerToolsAddIn.Client.Page.GoTo(PageDirection.Last);
         }
     }
 }
