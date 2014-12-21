@@ -146,6 +146,8 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+
+                
         public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
         {
             this.AssertApplicationAvailable();
@@ -169,6 +171,7 @@ namespace VisioAutomation.Scripting.Commands
                 SnapSize(active_page, shapeids, snapsize, minsize);
             }
         }
+
 
         private static void SnapSize(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, VA.Drawing.Size minsize)
         {

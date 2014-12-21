@@ -112,9 +112,7 @@ namespace VisioPowerTools
             var srcs = xcells.Select(i => i.SRC).ToList();
             var formulas = xcells.Select(i => i.Formula.Value).ToList();
 
-
-            // TODO: Fix
-            //scriptingsession.ShapeSheet.SetFormula(srcs,formulas, IVisio.VisGetSetArgs.visSetBlastGuards);
+            scriptingsession.ShapeSheet.SetFormula(null,srcs,formulas, IVisio.VisGetSetArgs.visSetBlastGuards);
         }
     }
 
