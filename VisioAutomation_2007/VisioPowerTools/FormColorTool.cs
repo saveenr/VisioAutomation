@@ -55,7 +55,7 @@ namespace VisioPowerTools
 
         private void buttonRead_Click(object sender, System.EventArgs e)
         {
-            var scriptingsession = VisioPowerToolsAddIn.ScriptingSession;
+            var scriptingsession = VisioPowerToolsAddIn.Client;
             if (!scriptingsession.Selection.HasShapes())
             {
                 return;
@@ -85,7 +85,7 @@ namespace VisioPowerTools
 
         private void buttonApply_Click(object sender, System.EventArgs e)
         {
-            var scriptingsession = VisioPowerToolsAddIn.ScriptingSession;
+            var scriptingsession = VisioPowerToolsAddIn.Client;
 
             this.Colors.FillForegroundColor.Formula =
                 VA.Convert.ColorToFormulaRGB(this.colorSelectorSmallFillFg.Color);

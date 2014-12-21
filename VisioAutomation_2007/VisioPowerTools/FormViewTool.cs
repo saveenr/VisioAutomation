@@ -30,17 +30,17 @@ namespace VisioPowerTools
 
         private void buttonZoomToPage_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.View.Zoom(VA.Scripting.Zoom.ToPage);
+            VisioPowerToolsAddIn.Client.View.Zoom(VA.Scripting.Zoom.ToPage);
         }
 
         private void buttonZoomIn_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.View.Zoom(VA.Scripting.Zoom.In);
+            VisioPowerToolsAddIn.Client.View.Zoom(VA.Scripting.Zoom.In);
         }
 
         private void buttonZoomOut_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.View.Zoom(VA.Scripting.Zoom.Out);
+            VisioPowerToolsAddIn.Client.View.Zoom(VA.Scripting.Zoom.Out);
         }
 
         private void buttonFirstPage_Click(object sender, System.EventArgs e)

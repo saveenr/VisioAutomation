@@ -46,7 +46,7 @@ namespace VisioPowerTools
                 return;
             }
 
-            var ss = VisioPowerToolsAddIn.ScriptingSession;
+            var ss = VisioPowerToolsAddIn.Client;
             System.Xml.Linq.XDocument xdoc;
             try
             {
@@ -63,9 +63,9 @@ namespace VisioPowerTools
             IList<VA.Models.DirectedGraph.Drawing> drawings;
             try
             {
-                VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;
+                VisioPowerToolsAddIn.g_clientcontext.OnWriteString += write_msg;
                 drawings = VisioAutomation.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(ss, xdoc);
-                VisioPowerToolsAddIn.g_session_options.OnWriteString -= write_msg;
+                VisioPowerToolsAddIn.g_clientcontext.OnWriteString -= write_msg;
             }
             catch (VisioAutomation.AutomationException)
             {
@@ -76,10 +76,10 @@ namespace VisioPowerTools
             bool close_form = false;
             try
             {
-                VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;
+                VisioPowerToolsAddIn.g_clientcontext.OnWriteString += write_msg;
                 // TODO: fix
                 //VisioAutomation.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(ss, drawings);
-                VisioPowerToolsAddIn.g_session_options.OnWriteString -= write_msg;
+                VisioPowerToolsAddIn.g_clientcontext.OnWriteString -= write_msg;
             }
             catch(VisioAutomation.AutomationException)
             {

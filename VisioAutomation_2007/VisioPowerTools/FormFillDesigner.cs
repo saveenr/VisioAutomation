@@ -17,7 +17,7 @@ namespace VisioPowerTools
 
         private void buttonSetFillGradient_Click(object sender, System.EventArgs e)
         {
-            var ss = VisioPowerToolsAddIn.ScriptingSession;
+            var ss = VisioPowerToolsAddIn.Client;
             var selection = ss.Selection.Get();
             if (selection.Count < 1)
             {
@@ -64,7 +64,7 @@ namespace VisioPowerTools
 
         private void update_from_selection()
         {
-            var app = VisioPowerToolsAddIn.ScriptingSession;
+            var app = VisioPowerToolsAddIn.Client;
 
             if (!app.Selection.HasShapes())
             {

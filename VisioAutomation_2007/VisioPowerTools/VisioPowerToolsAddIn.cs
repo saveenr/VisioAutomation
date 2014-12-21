@@ -7,8 +7,8 @@ namespace VisioPowerTools
 {
     public partial class VisioPowerToolsAddIn
     {
-        private static VisioAutomation.Scripting.Client g_scripting_session;
-        internal static VisioPowerTools.PowerToolsSessionOptions g_session_options;
+        private static VisioAutomation.Scripting.Client g_client;
+        internal static VisioPowerTools.PowerToolsClientContext g_clientcontext;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             try
@@ -31,31 +31,31 @@ namespace VisioPowerTools
         {           
         }
         
-        public static VisioAutomation.Scripting.Client ScriptingSession
+        public static VisioAutomation.Scripting.Client Client
         {
             get
             {
-                if (g_scripting_session == null)
+                if (g_client == null)
                 {
-                    if ( g_session_options == null )
+                    if ( g_clientcontext == null )
                     {
-                        g_session_options = new PowerToolsSessionOptions();
+                        g_clientcontext = new PowerToolsClientContext();
                     }
 
                     var application = Globals.VisioPowerToolsAddIn.Application;
-                    g_scripting_session = new VisioAutomation.Scripting.Client(application);
-                    g_scripting_session.Context = g_session_options;
+                    g_client = new VisioAutomation.Scripting.Client(application);
+                    g_client.Context = g_clientcontext;
                 }
                 else
                 {
                     // do nothing
                 }
 
-                if (g_scripting_session.VisioApplication == null)
+                if (g_client.VisioApplication == null)
                 {
                     throw new VisioAutomation.AutomationException("Internal Error: Unexpected null for visio application");
                 }
-                return g_scripting_session;
+                return g_client;
             }
         }
 
