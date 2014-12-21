@@ -1,9 +1,10 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Shapes.UserDefinedCells;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BOXMODEL = VisioAutomation.Layout.Models.BoxLayout;
+using BOXMODEL = VisioAutomation.Models.BoxLayout;
 
 namespace VisioAutomationSamples
 {
@@ -86,7 +87,7 @@ namespace VisioAutomationSamples
             int num_types = 10;
             int max_properties = 50;
 
-            var types = typeof (VA.UserDefinedCells.UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
+            var types = typeof (UserDefinedCell).Assembly.GetExportedTypes().Take(num_types).ToList();
 
             var data = new List<string[]>();
             foreach (var type in types)
@@ -94,7 +95,7 @@ namespace VisioAutomationSamples
                 var properties = type.GetProperties().Take(max_properties).ToList();
                 foreach (var property in properties)
                 {
-                    var item = new string[] {type.Name, property.Name[0].ToString().ToUpper(), property.Name};
+                    var item = new[] {type.Name, property.Name[0].ToString().ToUpper(), property.Name};
                     data.Add(item);
                 }
             }
@@ -139,7 +140,8 @@ namespace VisioAutomationSamples
             }
             domshapescol.Render(page);
 
-            page.ResizeToFitContents(0.5,0.5);
+            var bordersize = new VA.Drawing.Size(0.5, 0.5);
+            page.ResizeToFitContents(bordersize);
 
         }
 
@@ -189,7 +191,7 @@ namespace VisioAutomationSamples
                 var minorname = row[1];
                 var itemname = row[2];
 
-                BOXMODEL.Container majorcnt = null;
+                BOXMODEL.Container majorcnt;
                 if (name_to_major_group.ContainsKey(majorname))
                 {
                     majorcnt = name_to_major_group[majorname];
@@ -210,7 +212,7 @@ namespace VisioAutomationSamples
                     BOXMODEL.Box headerbox = majorcnt.AddBox(2, 0.25);
                 }
 
-                BOXMODEL.Container minorcnt = null;
+                BOXMODEL.Container minorcnt;
                 var minorkey = majorname + "___" + minorname;
                 if (name_to_minor_group.ContainsKey(minorkey))
                 {

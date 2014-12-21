@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VisioAutomation.Extensions;
+using VisioAutomation.Shapes.UserDefinedCells;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -8,24 +9,28 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class UserDefinedCellCommands : CommandSet
     {
-        public UserDefinedCellCommands(Session session) :
-            base(session)
+        public UserDefinedCellCommands(Client client) :
+            base(client)
         {
 
         }
-        
-        public IDictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>> GetUserDefinedCells()
+
+        public IDictionary<IVisio.Shape, IList<UserDefinedCell>> Get(IList<IVisio.Shape> target_shapes)
         {
-            var prop_dic = new Dictionary<IVisio.Shape, IList<VA.UserDefinedCells.UserDefinedCell>>();
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var prop_dic = new Dictionary<IVisio.Shape, IList<UserDefinedCell>>();
+
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return prop_dic;
-            }
+            } 
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
-            var list_user_props = VA.UserDefinedCells.UserDefinedCellsHelper.GetUserDefinedCells(page, shapes);
+            var list_user_props = UserDefinedCellsHelper.Get(page, shapes);
 
             for (int i = 0; i < shapes.Count; i++)
             {
@@ -37,31 +42,38 @@ namespace VisioAutomation.Scripting.Commands
             return prop_dic;
         }
 
-        public IList<bool> Contains(string name)
+        public IList<bool> Contains(IList<IVisio.Shape> target_shapes, string name)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new List<bool>();
             }
 
-            var results = (from s in this.Session.Selection.EnumShapes().ToList()
-                           select VA.UserDefinedCells.UserDefinedCellsHelper.HasUserDefinedCell(s, name))
-                .ToList();
+            var all_shapes = this.Client.Selection.GetShapes();
+            var results = all_shapes.Select(s => UserDefinedCellsHelper.Contains(s, name)).ToList();
 
             return results;
         }
-
-        public void Delete(string name)
+       
+        public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
-            }
+            } 
 
             if (name == null)
             {
@@ -73,41 +85,39 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name");
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Delete User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
-                    VA.UserDefinedCells.UserDefinedCellsHelper.DeleteUserDefinedCell(shape, name);
+                    UserDefinedCellsHelper.Delete(shape, name);
                 }
             }
         }
-
-        public void Set(VA.UserDefinedCells.UserDefinedCell userdefinedcell)
+      
+        public void Set(IList<IVisio.Shape> target_shapes, UserDefinedCell userdefinedcell)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
-            }
+            } 
 
             if (userdefinedcell == null)
             {
                 throw new System.ArgumentNullException("userdefinedcell");
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
-                    VA.UserDefinedCells.UserDefinedCellsHelper.SetUserDefinedCell(shape, userdefinedcell.Name, userdefinedcell.Value, userdefinedcell.Prompt);
+                    UserDefinedCellsHelper.Set(shape, userdefinedcell.Name, userdefinedcell.Value.Formula.Value, userdefinedcell.Prompt.Formula.Value);
                 }
             }
         }
-
     }
 }

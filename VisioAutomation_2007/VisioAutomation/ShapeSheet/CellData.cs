@@ -16,9 +16,8 @@ namespace VisioAutomation.ShapeSheet
 
         public override string ToString()
         {
-            var fs = (this.Formula.HasValue) ? string.Format("\"{0}\"", this.Formula.Value) : "null";
-            var rs = this.Result.ToString();
-            return string.Format("({0},{1})", fs, rs);
+            var fs = (this.Formula.HasValue) ? this.Formula.Value : "null";
+            return string.Format("(\"{0}\",{1})", fs, this.Result);
         }
 
         public static implicit operator CellData<TResult>(VA.ShapeSheet.FormulaLiteral formula)

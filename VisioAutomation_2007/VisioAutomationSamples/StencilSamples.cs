@@ -16,7 +16,7 @@ namespace VisioAutomationSamples
 
             // Resize the page to a sqaure
             var page_size = new VA.Drawing.Size(4, 4);
-            page.SetSize(page_size);
+            SampleEnvironment.SetPageSize(page,page_size);
 
             // Load the Stencil
             var application = page.Application;
@@ -44,7 +44,8 @@ namespace VisioAutomationSamples
             // Draw the masters
             var shapeids = page.DropManyU(masters, centerpoints);
 
-            page.ResizeToFitContents(1,1);
+            var bordersize = new VA.Drawing.Size(1,1);
+            page.ResizeToFitContents(bordersize);
         }
     }
 }

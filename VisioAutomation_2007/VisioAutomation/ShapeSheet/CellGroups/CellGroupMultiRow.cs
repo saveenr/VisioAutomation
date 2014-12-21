@@ -1,5 +1,7 @@
 using System.Linq;
-using VisioAutomation.Extensions;
+using System.Security.Authentication;
+using System.Xml.Serialization;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
@@ -8,49 +10,65 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupMultiRow : BaseCellGroup
     {
-        // This class is meant for those cell groups that appear as multiple rows in a section
-        // for example the character section or the paragraph section
-
-        // descendants must implement this method.
-        // the implementation should be this: run the "func" on each formula in the cell
-        // group (even in the formula is null) 
-        protected abstract void ApplyFormulas(ApplyFormula func, short row);
-
-        public void Apply(VA.ShapeSheet.Update update, short shapeid, short row)
+        private static void check_query(VA.ShapeSheet.Query.CellQuery query)
         {
-            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f), row);
-        }
-
-        public void Apply(VA.ShapeSheet.Update update, short row)
-        {
-            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f),row);
-        }
-
-        protected static IList<List<TObj>> CellsFromRowsGrouped<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
-        {
-            var table = query.GetFormulasAndResults<double>(page, shapeids);
-            var list_of_lists = new List<List<TObj>>(table.Groups.Count);
-
-            for (int group_index = 0; group_index < table.Groups.Count; group_index++)
+            if (query.Columns.Count != 0)
             {
-                var group = table.Groups[group_index];
-                var tablerows = group.RowIndices.Select(ri => table[ri]);
-                var cells_list = new List<TObj>(group.Count);
-                var cells = tablerows.Select(row => row_to_obj_func(query,row));
-                cells_list.AddRange(cells);
-                list_of_lists.Add(cells_list);
+                throw new VA.AutomationException("Query should not contain any Columns");
             }
 
-            return list_of_lists;
+            if (query.Sections.Count != 1)
+            {
+                throw new VA.AutomationException("Query should not contain contain exaxtly 1 section");
+            }
         }
 
-        protected static IList<TObj> CellsFromRows<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.SectionQuery
+
+        public static IList<List<T>> _GetCells<T, RT>(
+            IVisio.Page page,
+            IList<int> shapeids,
+            VA.ShapeSheet.Query.CellQuery query,
+            RowToObject<T, RT> row_to_object)
         {
-            var table = query.GetFormulasAndResults<double>(shape);
-            var cells = table.Select( row => row_to_obj_func(query, row) );
-            var cells_list = new List<TObj>(table.RowCount);
-            cells_list.AddRange(cells);
-            return cells_list;
+            check_query(query);
+
+            var list = new List<List<T>>(shapeids.Count);
+            var data_for_shapes = query.GetFormulasAndResults<RT>( new VA.Drawing.DrawingSurface(page), shapeids);
+
+            foreach (var data_for_shape in data_for_shapes)
+            {
+                var sec = data_for_shape.SectionCells[0];
+                var sec_objects = SectionToObjectList(sec, row_to_object);
+                list.Add(sec_objects);
+            }
+
+            return list;
+        }
+
+        public static IList<T> _GetCells<T, RT>(
+            IVisio.Shape shape,
+            VA.ShapeSheet.Query.CellQuery query,
+            RowToObject<T, RT> row_to_object)
+        {
+            check_query(query);
+
+            var data_for_shape = query.GetFormulasAndResults<RT>(shape);
+            var sec = data_for_shape.SectionCells[0];
+            var sec_objects = SectionToObjectList(sec, row_to_object);
+            
+            return sec_objects;
+        }
+
+        private static List<T> SectionToObjectList<T, RT>(CellQuery.SectionResult<CellData<RT>> sec, RowToObject<T, RT> row_to_object)
+        {
+            int num_rows = sec.Count;
+            var sec_objects = new List<T>(num_rows);
+            foreach (var row in sec)
+            {
+                var obj = row_to_object(row);
+                sec_objects.Add(obj);
+            }
+            return sec_objects;
         }
     }
 }

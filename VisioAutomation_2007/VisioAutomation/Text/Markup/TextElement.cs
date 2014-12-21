@@ -95,11 +95,7 @@ namespace VisioAutomation.Text.Markup
                         var f = (Field) walkevent.Node;
                         if (!string.IsNullOrEmpty(f.PlaceholderText))
                         {
-                            var field_region = new TextRegion();
-                            field_region.Field = f;
-                            field_region.Start = start_pos;
-                            field_region.Length = f.PlaceholderText.Length;
-
+                            var field_region = new TextRegion(start_pos,f);
                             markupinfo.FieldRegions.Add(field_region);
 
                             // Add text length to parent
@@ -158,7 +154,7 @@ namespace VisioAutomation.Text.Markup
 
             // Find all the regions needing formatting
             var markupinfo = this.GetMarkupInfo();
-            var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1);
+            var regions_to_format = markupinfo.FormatRegions.Where(region => region.Length >= 1).ToList();
 
             
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
@@ -176,7 +172,7 @@ namespace VisioAutomation.Text.Markup
                     var chars = shape.Characters;
                     chars.Begin = region.Start;
                     chars.End = region.End;
-                    chars.CharProps[VA.ShapeSheet.SRCConstants.Char_Color.Cell] = (short) 0;
+                    chars.CharProps[VA.ShapeSheet.SRCConstants.CharColor.Cell] = 0;
                     short rownum = chars.CharPropsRow[(short) default_chars_bias];
 
                     if (rownum < 0)
@@ -196,7 +192,7 @@ namespace VisioAutomation.Text.Markup
                     var chars = shape.Characters;
                     chars.Begin = region.Start;
                     chars.End = region.End;
-                    chars.ParaProps[VA.ShapeSheet.SRCConstants.Para_Bullet.Cell] = (short) 0;
+                    chars.ParaProps[VA.ShapeSheet.SRCConstants.Para_Bullet.Cell] = 0;
                     short rownum = chars.ParaPropsRow[(short) default_chars_bias];
 
                     if (rownum < 0)

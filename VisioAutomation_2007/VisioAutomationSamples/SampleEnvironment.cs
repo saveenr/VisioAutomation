@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VA=VisioAutomation;
 
 namespace VisioAutomationSamples
 {
@@ -46,6 +47,38 @@ namespace VisioAutomationSamples
             app = new IVisio.Application();
             var documents = app.Documents;
             documents.Add("");
+        }
+
+        public static void SetPageSize(IVisio.Page page, VA.Drawing.Size size)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException("page");
+            }
+
+            var page_sheet = page.PageSheet;
+
+            var update = new VA.ShapeSheet.Update(2);
+            update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, size.Width);
+            update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, size.Height);
+            update.Execute(page_sheet);
+        }
+
+        public static VA.Drawing.Size GetPageSize(IVisio.Page page)
+        {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException("page");
+            }
+
+            var query = new VA.ShapeSheet.Query.CellQuery();
+            var col_height = query.Columns.Add(VA.ShapeSheet.SRCConstants.PageHeight,"PageHeight");
+            var col_width = query.Columns.Add(VA.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
+            var results = query.GetResults<double>(page.PageSheet);
+            double height = results[col_height.Ordinal];
+            double width = results[col_width.Ordinal];
+            var s = new VA.Drawing.Size(width, height);
+            return s;
         }
     }
 }

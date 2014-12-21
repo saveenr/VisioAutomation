@@ -14,22 +14,30 @@
 
         private void buttonTextToBottom_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Text.MoveTextToBottom();
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Text.MoveTextToBottom();
         }
 
         private void buttonResizeToFitText_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Text.FitShapeToText();
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Text.FitShapeToText();
         }
 
         private void buttonEnableTextWrapping_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Text.SetTextWrapping(true);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Text.SetTextWrapping(true);
         }
 
         private void buttonDisableTextWrapping_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Text.SetTextWrapping(false);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Text.SetTextWrapping(false);
         }
     }
 }

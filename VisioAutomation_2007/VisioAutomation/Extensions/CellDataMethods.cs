@@ -3,7 +3,7 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Extensions
 {
-    public static class CellDataExtensions
+    public static class CellDataMethods
     {
         public static VA.ShapeSheet.CellData<int> ToInt(this VA.ShapeSheet.CellData<double> cd)
         {

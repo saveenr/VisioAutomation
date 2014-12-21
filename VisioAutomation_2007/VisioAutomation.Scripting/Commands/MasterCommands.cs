@@ -8,21 +8,38 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class MasterCommands : CommandSet
     {
-        public MasterCommands(Session session) :
-            base(session)
+        public MasterCommands(Client client) :
+            base(client)
         {
 
         }
 
-        public IList<IVisio.Master> Get()
+        public void OpenForEdit(IVisio.Master master)
         {
-            if (!this.Session.HasActiveDrawing)
+            var mdraw_window = master.OpenDrawWindow();
+            mdraw_window.Activate();
+        }
+
+        public void CloseMasterEditing()
+        {
+            var window = this.Client.VisioApplication.ActiveWindow;
+
+            var st = window.SubType;
+            if (st != 64)
             {
-                this.Session.Write(OutputStream.Verbose,"No Active Document - 0 Masters");
-                new List<IVisio.Master>(0);
+                throw new AutomationException("The active window is not a master window");
             }
 
-            var application = this.Session.VisioApplication;
+            var master = (IVisio.Master)window.Master;
+            master.Close();
+        }
+
+        public IList<IVisio.Master> Get()
+        {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
@@ -31,6 +48,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> Get(IVisio.Document doc)
         {
+            this.AssertApplicationAvailable();
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
             return masters;
@@ -38,6 +56,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master Get(string name)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (name == null)
             {
                 throw new System.ArgumentNullException("name");
@@ -47,12 +68,11 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentException("mastername");
             }
-
-
-            IVisio.Master master = null;
+            
+            IVisio.Master master;
             try
             {
-                var application = this.Session.VisioApplication;
+                var application = this.Client.VisioApplication;
                 var active_document = application.ActiveDocument;
                 var masters = active_document.Masters;
                 master = masters.ItemU[name];
@@ -60,46 +80,86 @@ namespace VisioAutomation.Scripting.Commands
             catch (System.Runtime.InteropServices.COMException)
             {
                 string msg = string.Format("No such master \"{0}\"", name);
-                throw new AutomationException(msg);
+                throw new VA.Scripting.ScriptingException(msg);
             }
             return master;
         }
 
-        public IVisio.Master Get(string master, string stencil)
+        public IVisio.Master Get(string master, IVisio.Document doc)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (master == null)
             {
                 throw new System.ArgumentNullException("master");
             }
 
-            if (stencil == null)
+            if (doc == null)
             {
-                throw new System.ArgumentNullException("stencil");
+                throw new System.ArgumentNullException("doc");
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var documents = application.Documents;
-            IVisio.Document stencil_doc = VA.DocumentHelper.TryGetDocument(documents,stencil);
-            if (stencil_doc==null)
-            {
-                string msg = string.Format("No such stencil \"{0}\"", stencil);
-                throw new AutomationException(msg);
-            }
 
-            var masters = stencil_doc.Masters;
-            IVisio.Master masterobj = VA.Masters.MasterHelper.TryGetMaster(masters,master);
-            if (masterobj==null)
+            var masters = doc.Masters;
+            IVisio.Master masterobj = this.TryGetMaster(masters, master);
+            if (masterobj == null)
             {
-                string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, stencil);
-                throw new AutomationException(msg);
+                string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, doc);
+                throw new VA.Scripting.ScriptingException(msg);
             }
 
             return masterobj;
         }
 
+        public List<IVisio.Master> GetMastersByName(string name, IVisio.Document doc)
+        {
+            if (name == null || name == "*")
+            {
+                // return all masters
+                var masters = doc.Masters.AsEnumerable().ToList();
+                return masters;
+            }
+            else
+            {
+                // return masters matching the name
+                var masters2 = doc.Masters.AsEnumerable();
+                var masters3 = VA.TextUtil.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VA.TextUtil.FilterAction.Include).ToList();
+                return masters3;
+            } 
+        }
+
+        public List<IVisio.Master> GetMastersByName(string name)
+        {
+            var application = this.Client.VisioApplication;
+            var doc = application.ActiveDocument;
+            return this.GetMastersByName(name, doc);
+        }
+
+        private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
+        {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            try
+            {
+                var masterobj = masters.ItemU[name];
+                return masterobj;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                return null;
+            }
+        }
+
         public IVisio.Shape Drop(IVisio.Master master, double x, double y)
         {
-            var application = this.Session.VisioApplication;
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             var shape = page.Drop(master, x, y);
             return shape;
@@ -107,6 +167,9 @@ namespace VisioAutomation.Scripting.Commands
 
         public short[] Drop(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (masters == null)
             {
                 throw new System.ArgumentNullException("points");
@@ -117,24 +180,31 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("points");
             }
 
-            if (!this.Session.HasActiveDrawing)
-            {
-                throw new AutomationException("No active page");
-            }
-
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             var shapeids = page.DropManyU(masters, points);
             return shapeids;
         }
 
-        public IVisio.Master New(IVisio.Document stencil, string name)
+        public IVisio.Master New(IVisio.Document document, string name)
         {
+            this.AssertApplicationAvailable();
 
-            var masters = stencil.Masters;
+            if (document == null)
+            {
+                document = this.Client.VisioApplication.ActiveDocument;
+                if (document == null)
+                {
+                    throw new AutomationException("No Active Document");
+                }
+            }
 
+            var masters = document.Masters;
             var master = masters.AddEx(IVisio.VisMasterTypes.visTypeMaster);
-            master.Name = name;
+            if (name != null)
+            {
+                master.Name = name;
+            }
 
             return master;
         }

@@ -32,7 +32,7 @@ namespace VisioPowerTools
             public ColorItem ShadowForegroundColor = new ColorItem("Shadow Foreground",
                                                                    VA.ShapeSheet.SRCConstants.ShdwForegnd);
 
-            public ColorItem Character = new ColorItem("Character", VA.ShapeSheet.SRCConstants.Char_Color);
+            public ColorItem Character = new ColorItem("Character", VA.ShapeSheet.SRCConstants.CharColor);
         }
 
         public ColorCells Colors = new ColorCells();

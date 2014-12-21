@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using VACXN = VisioAutomation.Shapes.Connections;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using SXL = System.Xml.Linq;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
+using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioAutomation.Scripting.DirectedGraph
 {
@@ -11,7 +13,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
     {
         private class BuilderError
         {
-            public string Text;
+            public readonly string Text;
 
             public BuilderError(string text)
             {
@@ -20,48 +22,45 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
             public static BuilderError ConnectorAlreadyDefined(int pagenum, string id)
             {
-                return new BuilderError(string.Format("Page {0} : Connector \"{1}\" is already defined", pagenum, id));
+                string msg = string.Format("Page {0} : Connector \"{1}\" is already defined", pagenum, id);
+                return new BuilderError(msg);
             }
 
             public static BuilderError NodeAlreadyDefined(int pagenum, string id)
             {
-                return new BuilderError(string.Format("Page {0} : Node \"{1}\" is already defined", pagenum, id));
+                string msg = string.Format("Page {0} : Node \"{1}\" is already defined", pagenum, id);
+                return new BuilderError(msg);
             }
 
             public static BuilderError InvalidFromNode(int pagenum, string conid, string fromid)
             {
-                return
-                    new BuilderError(
-                        string.Format("Page {0} : Connector \"{1}\" references a nonexistent FROM Node \"{2}\"",
-                                      pagenum, conid, fromid));
+                string msg = string.Format("Page {0} : Connector \"{1}\" references a nonexistent FROM Node \"{2}\"", pagenum, conid, fromid);
+                return new BuilderError( msg);
             }
 
             public static BuilderError InvalidToNode(int pagenum, string conid, string toid)
             {
-                return
-                    new BuilderError(
-                        string.Format("Page {0} : Connector \"{1}\" references a nonexistent TO Node \"{2}\"",
-                                      pagenum, conid, toid));
+                string msg = string.Format("Page {0} : Connector \"{1}\" references a nonexistent TO Node \"{2}\"", pagenum, conid, toid);
+                return new BuilderError(msg);
             }
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, string filename)
+        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
-            return LoadFromXML(scriptingsession, xmldoc);
+            return LoadFromXML(client, xmldoc);
         }
 
         private class PageData
         {
-            public int PageNumber;
-            public VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions LayoutOptions;
-            public DGMODEL.Drawing Drawing;
+            public VA.Models.DirectedGraph.MSAGLLayoutOptions LayoutOptions;
+            public DGMODEL.Drawing DirectedGraph;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
         }
 
-        private static List<PageData> LoadPageDataFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
+        private static List<PageData> LoadPageDataFromXML(VA.Scripting.Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = new List<PageData>();
             // LOAD and ANALYZE EACH PAGE
@@ -76,23 +75,22 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
                 var pagedata = new PageData();
                 pagedatas.Add(pagedata);
-                pagedata.PageNumber = pagenum++;
                 pagedata.Errors = new List<BuilderError>();
-                pagedata.LayoutOptions = new VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions();
+                pagedata.LayoutOptions = new VA.Models.DirectedGraph.MSAGLLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
 
-                pagedata.Drawing = new DGMODEL.Drawing();
+                pagedata.DirectedGraph = new DGMODEL.Drawing();
                 var shape_els = page_el.Element("shapes").Elements("shape");
                 var con_els = page_el.Element("connectors").Elements("connector");
 
-                pagedata.ShapeInfos = shape_els.Select(e => ShapeInfo.FromXml(scriptingsession, e)).ToList();
-                pagedata.ConnectorInfos = con_els.Select(e => ConnectorInfo.FromXml(scriptingsession, e)).ToList();
+                pagedata.ShapeInfos = shape_els.Select(e => ShapeInfo.FromXml(client, e)).ToList();
+                pagedata.ConnectorInfos = con_els.Select(e => ConnectorInfo.FromXml(client, e)).ToList();
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Analyzing shape data for page {0}", pagenum);
+                client.WriteVerbose( "Analyzing shape data for page {0}", pagenum);
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "shape {0}", shape_info.ID);
+                    client.WriteVerbose( "shape {0}", shape_info.ID);
 
                     if (node_ids.Contains(shape_info.ID))
                     {
@@ -104,10 +102,10 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     }
                 }
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Analyzing connector data...");
+                client.WriteVerbose( "Analyzing connector data...");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "connector {0}", con_info.ID);
+                    client.WriteVerbose( "connector {0}", con_info.ID);
 
                     if (con_ids.Contains(con_info.ID))
                     {
@@ -133,10 +131,9 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return pagedatas;
         }
 
-
-        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Session scriptingsession, SXL.XDocument xmldoc)
+        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Client client, SXL.XDocument xmldoc)
         {
-            var pagedatas = LoadPageDataFromXML(scriptingsession, xmldoc);
+            var pagedatas = LoadPageDataFromXML(client, xmldoc);
 
             // STOP IF ANY ERRORS
             int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();
@@ -146,124 +143,58 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 {
                     foreach (var error in pagedata.Errors)
                     {
-                        scriptingsession.Write(VA.Scripting.OutputStream.Verbose, error.Text);
+                        client.WriteVerbose( error.Text);
                     }
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Errors encountered in shape data. Stopping.");
+                    client.WriteVerbose( "Errors encountered in shape data. Stopping.");
                 }
             }
 
             // DRAW EACH PAGE
             foreach (var pagedata in pagedatas)
             {
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating shape AutoLayout nodes");
+                client.WriteVerbose( "Creating shape AutoLayout nodes");
                 foreach (var shape_info in pagedata.ShapeInfos)
                 {
-                    var al_shape = pagedata.Drawing.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil,
-                                                             shape_info.Master);
-                    al_shape.URL = shape_info.URL;
-                    al_shape.CustomProperties = new Dictionary<string, VA.CustomProperties.CustomPropertyCells>();
+                    var dg_shape = pagedata.DirectedGraph.AddShape(shape_info.ID, shape_info.Label, shape_info.Stencil, shape_info.Master);
+                    dg_shape.URL = shape_info.URL;
+                    dg_shape.CustomProperties = new Dictionary<string, VACUSTPROP.CustomPropertyCells>();
                     foreach (var kv in shape_info.custprops)
                     {
-                        al_shape.CustomProperties[kv.Key] = kv.Value;
+                        dg_shape.CustomProperties[kv.Key] = kv.Value;
                     }
                 }
 
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Creating connector AutoLayout nodes");
+                client.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    var def_connector_type = VA.Connections.ConnectorType.Curved;
+                    var def_connector_type = VACXN.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
-                    var from_shape = pagedata.Drawing.Shapes.Find(con_info.From);
-                    var to_shape = pagedata.Drawing.Shapes.Find(con_info.To);
+                    var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);
+                    var to_shape = pagedata.DirectedGraph.Shapes.Find(con_info.To);
 
                     var def_con_color = new VA.Drawing.ColorRGB(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
-                    var al_connector = pagedata.Drawing.Connect(con_info.ID, from_shape, to_shape, con_info.Label,
-                                                                connectory_type);
+                    var dg_connector = pagedata.DirectedGraph.Connect(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
 
-                    al_connector.Cells = new VA.DOM.ShapeCells();
-                    al_connector.Cells.LineColor =
-                        VA.Convert.ColorToFormulaRGB(con_info.Element.AttributeAsColor("color", def_con_color));
-                    al_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
-                    al_connector.Cells.EndArrow = def_end_arrow;
+                    dg_connector.Cells = new VA.DOM.ShapeCells();
+                    dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
+                    dg_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
+                    dg_connector.Cells.EndArrow = def_end_arrow;
                 }
-
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering AutoLayout...");
+                client.WriteVerbose( "Rendering AutoLayout...");
             }
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering AutoLayout");
+            client.WriteVerbose( "Finished rendering AutoLayout");
 
-            var drawings = pagedatas.Select(pagedata => pagedata.Drawing).ToList();
-            return drawings;
+            var directedgraphs = pagedatas.Select(pagedata => pagedata.DirectedGraph).ToList();
+            return directedgraphs;
         }
 
-        public static void RenderDiagrams(
-            VA.Scripting.Session scriptingsession,
-            IList<DGMODEL.Drawing> drawings)
+        private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Models.DirectedGraph.MSAGLLayoutOptions options)
         {
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Start Rendering FlowChart");
-            var app = scriptingsession.VisioApplication;
-
-
-            if (drawings.Count < 1)
-            {
-                return;
-            }
-
-            var doc = scriptingsession.Document.New();
-            int num_pages_created = 0;
-            var doc_pages = doc.Pages;
-
-            foreach (int i in Enumerable.Range(0, drawings.Count))
-            {
-                var directed_graph_drawing = drawings[i];
-
-
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Rendering page: {0}", i + 1);
-
-                var options = new DGMODEL.MSAGLLayoutOptions();
-                options.UseDynamicConnectors = false;
-
-                IVisio.Page page = null;
-
-                if (num_pages_created == 0)
-                {
-                    // if this is the first page to drawe
-                    // then reuse the initial empty page in the document
-                    page = app.ActivePage;
-                }
-                else
-                {
-                    // otherwise, create a new page.
-                    page = doc_pages.Add();
-                }
-
-                directed_graph_drawing.Render(page, options);
-
-                scriptingsession.Page.ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0), true);
-                scriptingsession.View.Zoom(VA.Scripting.Zoom.ToPage);
-
-                scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering page");
-
-                num_pages_created++;
-            }
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering pages");
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished rendering flowchart.");
-        }
-
-        private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Layout.Models.DirectedGraph.MSAGLLayoutOptions options)
-        {
-            System.Func<string, bool> bool_converter = s => bool.Parse(s);
-            System.Func<string, int> int_converter = s => int.Parse(s);
-            System.Func<string, double> double_converter = (s) => double.Parse(s);
-
-            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el,
-                                                                                                              "usedynamicconnectors",
-                                                                                                              bool_converter);
-            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el,
-                                                                                                       "scalingfactor",
-                                                                                                       double_converter);
+            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el, "usedynamicconnectors", bool.Parse);
+            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el, "scalingfactor", double.Parse);
         }
     }
 }

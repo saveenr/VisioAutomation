@@ -13,57 +13,79 @@ namespace VisioPowerTools
 
         private void buttonCopyFill_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Fill);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Fill);
         }
 
         private void buttonPasteFill_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Fill);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Fill);
         }
 
         private void buttonCopyLine_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Line);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Line);
         }
 
         private void buttonPasteLine_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Line);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Line);
         }
 
         private void buttonCopyShadow_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Shadow);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Shadow);
         }
 
         private void buttonPasteShadow_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Shadow);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Shadow);
         }
 
         private void buttonCopyText_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Character);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat(VA.Format.FormatCategory.Character);
         }
 
         private void buttonPasteText_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Character);
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat(VA.Format.FormatCategory.Character);
         }
 
         private void buttonClear_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.ClearFormatCache();
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.ClearFormatCache();
         }
 
         private void buttonCopyAll_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat();
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.CopyFormat();
         }
 
         private void buttonPasteAll_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat();
+            // TODO: fix
+
+            //VisioPowerToolsAddIn.ScriptingSession.Format.PasteFormat();
         }
     }
 }

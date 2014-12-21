@@ -2,7 +2,7 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
-using GRIDMODEL = VisioAutomation.Layout.Models.Grid;
+using GRIDMODEL = VisioAutomation.Models.Grid;
 
 namespace VisioAutomationSamples
 {
@@ -59,8 +59,8 @@ namespace VisioAutomationSamples
             var shapeids = shapes.Select(s => s.ID16).ToList();
 
             var update = new VA.ShapeSheet.Update();
-            var format = new VA.Format.ShapeFormatCells();
-            var xfrm = new VA.Layout.XFormCells();
+            var format = new VA.Shapes.FormatCells();
+            var xfrm = new VA.Shapes.XFormCells();
 
             foreach (int i in Enumerable.Range(0, shapeids.Count))
             {
@@ -72,8 +72,8 @@ namespace VisioAutomationSamples
                 format.LinePattern = 0;
                 format.FillForegndTrans = 0.5;
 
-                xfrm.Apply(update, shapeid);
-                format.Apply(update, shapeid);
+                update.SetFormulas(shapeid, xfrm);
+                update.SetFormulas(shapeid, format);
             }
 
             update.Execute(page);
@@ -92,10 +92,10 @@ namespace VisioAutomationSamples
             int num_rows = 7;
 
             var page_size = new VA.Drawing.Size(5, 5);
-            page.SetSize(page_size);
+            SampleEnvironment.SetPageSize(page,page_size);
 
             var lowerleft = new VA.Drawing.Point(0, 0);
-            var actual_page_size = page.GetSize();
+            var actual_page_size = SampleEnvironment.GetPageSize(page);
             var page_rect = new VA.Drawing.Rectangle(lowerleft, actual_page_size);
 
             var layout = new GRIDMODEL.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
@@ -119,7 +119,7 @@ namespace VisioAutomationSamples
             var color1 = new VA.Drawing.ColorRGB(0xffdddd);
             var color2 = new VA.Drawing.ColorRGB(0x00ffff);
 
-            var format = new VA.Format.ShapeFormatCells();
+            var format = new VA.Shapes.FormatCells();
 
             var update = new VA.ShapeSheet.Update();
 
@@ -138,13 +138,15 @@ namespace VisioAutomationSamples
                 format.FillBkgnd = color2_formula;
                 format.LinePattern = 0;
                 format.LineWeight = 0;
-                format.Apply(update, shapeid);
+                update.SetFormulas(shapeid, format);
 
                 n++;
             }
 
             update.Execute(page);
-            page.ResizeToFitContents(1, 1);
+
+            var bordersize = new VA.Drawing.Size(1, 1);
+            page.ResizeToFitContents(bordersize);
         }
     }
 }

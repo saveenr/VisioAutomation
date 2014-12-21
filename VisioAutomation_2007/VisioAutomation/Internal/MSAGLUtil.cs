@@ -30,7 +30,7 @@ namespace VisioAutomation.Internal
                     var bezier_seg = (MG.Splines.CubicBezierSegment) cur_seg;
 
                     var bez_points =
-                        new int[] { 0, 1, 2, 3 }
+                        new[] { 0, 1, 2, 3 }
                             .Select(bezier_seg.B)
                             .Select(ToVAPoint)
                             .ToArray();

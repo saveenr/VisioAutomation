@@ -63,9 +63,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
@@ -84,45 +81,41 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\ConnectivityMap.cs" />
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
-    <Compile Include="DOM\DOM_Text_tests.cs" />
-    <Compile Include="Layout\ContainerLayoutTests.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Models\CointainerLayout_Tests.cs" />
+    <Compile Include="Models\Chart_Tests.cs" />
+    <Compile Include="Models\ResizePageTests.cs" />
+    <Compile Include="Scripting\ScriptingDevTests.cs" />
+    <Compile Include="Scripting\ScriptingExportTests.cs" />
+    <Compile Include="Scripting\ScriptingShapeSheet.cs" />
+    <Compile Include="TestExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
-    <Compile Include="Layout\BoxLayoutTests.cs" />
-    <Compile Include="ShapeGeometryHelper_Tests.cs" />
-    <Compile Include="Drawing\SnappingGrid.cs" />
-    <Compile Include="Extensions\ColorsExtensions.cs" />
-    <Compile Include="Extensions\WindowsExtensions.cs" />
-    <Compile Include="Extensions\LayersExtensions.cs" />
-    <Compile Include="Extensions\DocumentsExtensions_Tests.cs" />
-    <Compile Include="Extensions\MastersExtensions_Tests.cs" />
-    <Compile Include="Extensions\SectionExtensions_Tests.cs" />
-    <Compile Include="Drawing\BezierTests.cs" />
-    <Compile Include="Layout\DrawingHelperTests.cs" />
-    <Compile Include="Layout\PieSliceTests.cs" />
-    <Compile Include="Layout\LayoutHelperTests.cs" />
-    <Compile Include="Scripting\ScriptingSessionTests.cs" />
-    <Compile Include="Scripting\ScriptingCellSRCTest.cs" />
+    <Compile Include="Models\BoxLayout_Tests.cs" />
+    <Compile Include="Other\Geometry_Tests.cs" />
+    <Compile Include="Extensions\EnumerableExtensions_Test.cs" />
+    <Compile Include="Models\DrawingHelper.cs" />
+    <Compile Include="Models\PieSliceTests.cs" />
+    <Compile Include="Scripting\ScriptingApplicationTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Scripting\ScriptingPageTests.cs" />
-    <Compile Include="Layout\MSAGLLayoutTests.cs" />
-    <Compile Include="Layout\TreeTests.cs" />
-    <Compile Include="DOM\DOM_Draw_tests.cs" />
-    <Compile Include="Layout\OrgChartTests.cs" />
-    <Compile Include="DOM\DOM_Basic_Tests.cs" />
+    <Compile Include="Models\DirectedGraph_Tests.cs" />
+    <Compile Include="Models\Tree_Tests.cs" />
+    <Compile Include="Models\OrgChart_Tests.cs" />
+    <Compile Include="DOM\DOM_Tests.cs" />
     <Compile Include="Text\TextFormat_Tests.cs" />
-    <Compile Include="Core\PerfTests.cs" />
-    <Compile Include="Core\CustomPropertiesTest.cs" />
-    <Compile Include="Extensions\SelectionExtensions.cs" />
-    <Compile Include="UtilTests\BitArray2D.cs" />
-    <Compile Include="Connections\TransitiveClosureTest.cs" />
-    <Compile Include="UtilTests\DrawingHelper_Tests.cs" />
-    <Compile Include="UserDefinedCells\UserDefinedCellHelper_Test.cs" />
+    <Compile Include="CustomProperties\CustomPropertiesTest.cs" />
+    <Compile Include="Extensions\Selection_Tests.cs" />
+    <Compile Include="Internal\Internal_Tests.cs" />
+    <Compile Include="Connections\Path_Test.cs" />
+    <Compile Include="UserDefinedCells\UserDefinedCells_Tests.cs" />
     <Compile Include="Scripting\ScriptingArrangeTests.cs" />
     <Compile Include="Scripting\ScriptingConnectionPointTests.cs" />
     <Compile Include="Scripting\ScriptingConnectTests.cs" />
@@ -130,40 +123,25 @@
     <Compile Include="Scripting\ScriptingCustomPropTests.cs" />
     <Compile Include="Scripting\ScriptingDrawTests.cs" />
     <Compile Include="Scripting\ScriptingGroupTests.cs" />
-    <Compile Include="Scripting\ScriptingAppTests.cs" />
-    <Compile Include="Scripting\ScriptingSessionTest.cs" />
+    <Compile Include="Scripting\ScriptingClientTests.cs" />
     <Compile Include="Scripting\ScriptingSelectionTests.cs" />
-    <Compile Include="Scripting\ScriptingTextTests.cs" />
-    <Compile Include="Core\Struct_Sizes.cs" />
-    <Compile Include="Shapesheet\ShapeSheet_Update.cs" />
-    <Compile Include="Core\ConnectionTests.cs" />
-    <Compile Include="Extensions\ApplicationExtensionsTests.cs" />
-    <Compile Include="Shapesheet\ShapeSheet_Query.cs" />
-    <Compile Include="Core\ShapeEnumerationTests.cs" />
-    <Compile Include="Extensions\ConnectsExtensionsTest.cs" />
-    <Compile Include="Extensions\DocumentExtensions_Tests.cs" />
-    <Compile Include="Core\DocumentTests.cs" />
-    <Compile Include="Extensions\FontsExtensions_Tests.cs" />
+    <Compile Include="Shapesheet\ShapeSheet_Update_Tests.cs" />
+    <Compile Include="Extensions\Application_Tests.cs" />
+    <Compile Include="Shapesheet\ShapeSheet_Query_Tests.cs" />
+    <Compile Include="Extensions\Document_Tests.cs" />
     <Compile Include="VisioAutomationTest.cs" />
-    <Compile Include="Extensions\PageDrawTests.cs" />
-    <Compile Include="Extensions\PagesExtensions_Tests.cs" />
-    <Compile Include="Text\TextMarkupTests.cs" />
-    <Compile Include="Connections\ConnectionPointHelper_Tests.cs" />
-    <Compile Include="Connections\Controls\ControlHelper_Tests.cs" />
-    <Compile Include="UtilTests\PageHelper_Tests.cs" />
-    <Compile Include="Convert_Tests.cs" />
-    <Compile Include="ShapeHelper_Tests.cs" />
-    <Compile Include="UtilTests\Stencil_Tests.cs" />
-    <Compile Include="Text\TextHelper_Tests.cs" />
+    <Compile Include="Extensions\PageDraw_Tests.cs" />
+    <Compile Include="Extensions\Pages_Tests.cs" />
+    <Compile Include="Text\TextMarkup_Tests.cs" />
+    <Compile Include="Connections\ConnectionPoint_Tests.cs" />
+    <Compile Include="Controls\Control_Tests.cs" />
+    <Compile Include="Page\PageHelper_Tests.cs" />
+    <Compile Include="Models\Convert_Tests.cs" />
+    <Compile Include="Other\ShapeHelper_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\CustomPropsTest.cs" />
-    <Compile Include="Text\CharacterFormatTest.cs" />
+    <Compile Include="Extensions\CustomProps_Test.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestCommon\TestCommon.csproj">
-      <Project>{C6FE9FEC-2E3D-46C3-9929-B690A0EB4DA6}</Project>
-      <Name>TestCommon</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
       <Project>{17035996-44f8-4506-baab-ea121475b936}</Project>
       <Name>VisioAutomation.Scripting</Name>
@@ -177,6 +155,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -211,12 +190,34 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\template_router _vdx.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\vdx_with_errors_1_vdx.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Visio">
+      <Guid>{00021A98-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>12</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole1">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

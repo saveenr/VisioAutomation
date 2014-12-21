@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using GRIDMODEL = VisioAutomation.Layout.Models.Grid;
+using GRIDMODEL = VisioAutomation.Models.Grid;
 
 namespace VisioAutomationSamples
 {
@@ -25,7 +25,7 @@ namespace VisioAutomationSamples
             var stencil = docs.OpenStencil("basic_U.vss");
             var master = stencil.Masters["Rectangle"];
 
-            page.SetSize(page_size);
+            SampleEnvironment.SetPageSize(page,page_size);
 
             var layout = new GRIDMODEL.GridLayout(num_cols, num_rows, new VA.Drawing.Size(6.0, 1.0), master);
             layout.RowDirection = GRIDMODEL.RowDirection.TopToBottom;

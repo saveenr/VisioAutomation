@@ -8,75 +8,73 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ApplicationCommands : CommandSet
     {
-        public ApplicationCommands(Session session) :
-            base(session)
-        {
+        public ApplicationWindowCommands Window { get; private set; }
 
+        public ApplicationCommands(Client client) :
+            base(client)
+        {
+            this.Window = new ApplicationWindowCommands(this.Client);
         }
 
-        public void WindowToFront()
+        public void Close(bool force)
         {
-            var app = this.Session.VisioApplication;
+            var app = this.Client.VisioApplication;
 
             if (app == null)
             {
+                this.Client.WriteWarning("There is no Visio Application to stop");
                 return;
             }
 
-            VA.Application.ApplicationHelper.BringWindowToTop(app);
-        }
-
-        public void ForceClose()
-        {
-            var application = this.Session.VisioApplication;
-            var documents = application.Documents;
-            VA.DocumentHelper.ForceCloseAll(documents);
-            application.Quit(true);
-            this.Session.VisioApplication = null;
-        }
-
-        public System.Drawing.Size GetWindowSize()
-        {
-            var rect = this.Session.VisioApplication.Window.GetWindowRect();
-            var size = new System.Drawing.Size(rect.Width, rect.Height);
-            return size;
-        }
-
-        /// <summary>
-        /// Sets the width and height (in pixels) of the attached Visio application window
-        /// </summary>
-        /// <param name="scripting_session"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        public void SetWindowSize(int width, int height)
-        {
-            if (width <= 0)
+            if (force)
             {
-                this.Session.Write(OutputStream.Error, "width must be positive");
-                return;
+                // If you want to force the thing to close
+                // it will require closing all documents and then quiting
+                var documents = app.Documents;
+                VA.Documents.DocumentHelper.ForceCloseAll(documents);
+                app.Quit(true);
             }
-
-            if (height <= 0)
+            else
             {
-                this.Session.Write(OutputStream.Error, "height must be positive");
-                return;
+                app.Quit();
+            }
+            this.Client.VisioApplication = null;
+        }
+
+        public IVisio.Application FindRunning()
+        {
+            if (VisioAutomation.Scripting.UACHelper.IsUacEnabled)
+            {
+                this.Client.WriteVerbose("UAC Enabled");
             }
 
-            var r = this.Session.VisioApplication.Window.GetWindowRect();
-            r.Width = width;
-            r.Height = height;
-            this.Session.VisioApplication.Window.SetWindowRect(r);
+            if (VisioAutomation.Scripting.UACHelper.IsProcessElevated)
+            {
+                this.Client.WriteVerbose("Running in Elevated Process");
+                this.Client.WriteWarning("Having an Elevated Process with UAC Enabled will cause Running Applications to not be found");
+            }
+
+            var app = VA.Application.ApplicationHelper.FindRunningApplication();
+            return app;
         }
+
 
         public IVisio.Application Attach()
         {
-            var app = VA.Application.ApplicationHelper.FindRunningApplication();
-            if (app == null)
+            if (this.Client.VisioApplication != null)
             {
-                throw new AutomationException("Did not find a running instance of Visio 2007");
+                this.Client.WriteWarning("Already connected to an instance");
             }
 
-            this.Session.VisioApplication = app;
+            var app = this.FindRunning();
+            if (app == null)
+            {
+                throw new VA.Scripting.VisioApplicationException("Did not find a running instance of Visio 2010 or above");
+            }
+
+            this.Client.WriteVerbose("Attaching to an instance");
+
+            this.Client.VisioApplication = app;
 
             VA.Application.ApplicationHelper.BringWindowToTop(app);
 
@@ -85,19 +83,51 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application New()
         {
+            this.Client.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
-            this.Session.VisioApplication = app;
+            this.Client.WriteVerbose("Attaching that instance to current scripting client");
+            this.Client.VisioApplication = app;
             return app;
         }
 
         public void Undo()
         {
-            this.Session.VisioApplication.Undo();
+            this.AssertApplicationAvailable();
+            this.Client.VisioApplication.Undo();
         }
 
         public void Redo()
         {
-            this.Session.VisioApplication.Redo();
+            this.AssertApplicationAvailable();
+            this.Client.VisioApplication.Redo();
+        }
+
+        public bool Validate()
+        {
+            var app = this.Client.VisioApplication;
+
+            if (app == null)
+            {
+                this.Client.WriteVerbose("Client's Application object is null");
+                return false;
+            }
+
+            try
+            {
+                // try to do something simple, read-only, and fast with the application object
+                //  if No COMException was thrown when reading Version property. This application instance is treated as valid
+
+                var app_version = app.Version;
+                this.Client.WriteVerbose("Application validated");
+                return true;
+            }
+            catch (System.Runtime.InteropServices.COMException)
+            {
+                this.Client.WriteVerbose("COMException thrown during validation. Treating as invalid application");
+                // If a COMException is thrown, this indicates that the
+                // application object is invalid
+                return false;
+            }
         }
     }
 }

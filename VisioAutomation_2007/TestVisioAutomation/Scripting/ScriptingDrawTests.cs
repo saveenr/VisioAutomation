@@ -1,6 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using VA = VisioAutomation;
+using SXL = System.Xml.Linq;
+using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -8,24 +10,40 @@ namespace TestVisioAutomation
     public class ScriptingDrawTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Draw_DataTable_0()
+        public void Scripting_Draw_OrgChart()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
+            draw_org_chart(ss, TestVisioAutomation.Properties.Resources.sampleorgchart1);
+            ss.Document.Close(true);
+            VA.Documents.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
+        }
+
+        private void draw_org_chart(VA.Scripting.Client client, string text)
+        {
+            var xmldoc = SXL.XDocument.Parse(text);
+            var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(client, xmldoc);
+            client.Draw.OrgChart(orgchart);
+        }
+
+        [TestMethod]
+        public void Scripting_Draw_DataTable()
+        {
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
             var items = new[]
-                            {
-                                new {Name = "X", Age = 28, Score = 16},
-                                new {Name = "Y", Age = 32, Score = 23},
-                                new {Name = "Z", Age = 45, Score = 12},
-                                new {Name = "U", Age = 48, Score = 10}
-                            };
+                {
+                    new {Name = "X", Age = 28, Score = 16},
+                    new {Name = "Y", Age = 32, Score = 23},
+                    new {Name = "Z", Age = 45, Score = 12},
+                    new {Name = "U", Age = 48, Score = 10}
+                };
 
             var dt = new System.Data.DataTable();
             dt.Columns.Add("X", typeof (string));
-            dt.Columns.Add("Age", typeof(int));
-            dt.Columns.Add("Score", typeof(int));
+            dt.Columns.Add("Age", typeof (int));
+            dt.Columns.Add("Score", typeof (int));
 
             foreach (var item in items)
             {
@@ -44,7 +62,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_Grid()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -55,9 +73,11 @@ namespace TestVisioAutomation
             ss.Document.OpenStencil("basic_u.vss");
             string stencil = "basic_u.vss";
             string mastername = "Rectangle";
-            var master = ss.Master.Get(mastername, stencil);
 
-            var grid = new VA.Layout.Models.Grid.GridLayout(cols, rows, cellsize, master);
+            var stencildoc = ss.Document.Get(stencil);
+            var master = ss.Master.Get(mastername, stencildoc);
+
+            var grid = new VA.Models.Grid.GridLayout(cols, rows, cellsize, master);
             grid.Origin = new VA.Drawing.Point(0, 4);
             ss.Document.Close(true);
         }
@@ -65,7 +85,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_RectangleLineOval_0()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -80,17 +100,17 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_BezierPolyLine_0()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
             var points = new[]
-                             {
-                                 new VA.Drawing.Point(0, 0),
-                                 new VA.Drawing.Point(2, 0.5),
-                                 new VA.Drawing.Point(2, 2),
-                                 new VA.Drawing.Point(3, 0.5),
-                             };
+                {
+                    new VA.Drawing.Point(0, 0),
+                    new VA.Drawing.Point(2, 0.5),
+                    new VA.Drawing.Point(2, 2),
+                    new VA.Drawing.Point(3, 0.5)
+                };
 
             var shape_bezier = ss.Draw.Bezier(points);
             var shape_polyline = ss.Draw.PolyLine(points);
@@ -100,7 +120,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_PieSlice()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -114,65 +134,140 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_Draw_PieSlices()
+        public void Scripting_Draw_PieChart()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
             var center = new VA.Drawing.Point(2, 2);
             double radius = 1.0;
-            double[] values = new[] {1.0, 2.0, 3.0, 4.0};
-            var shapes = ss.Draw.PieSlices(center, radius, values);
+            var chart = new VA.Models.Charting.PieChart(center,radius);
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.PieChart(chart);
             ss.Document.Close(true);
         }
 
         [TestMethod]
-        public void Scripting_DirectedGraph()
+        public void Scripting_Draw_BarChart()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
+            ss.Document.New();
+            ss.Page.New(new VA.Drawing.Size(4, 4), false);
+
+            var rect1 = new VA.Drawing.Rectangle(0, 0, 4, 4);
+            var chart1 = new VA.Models.Charting.BarChart(rect1);
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
+            chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.BarChart(chart1);
+
+            var rect2 = new VA.Drawing.Rectangle(5, 0, 9, 4);
+            var chart2= new VA.Models.Charting.BarChart(rect2);
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(-3.0));
+            chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+            ss.Draw.BarChart(chart2);
+
+            var rect3 = new VA.Drawing.Rectangle(10, 0, 14, 4);
+            var chart3 = new VA.Models.Charting.BarChart(rect3);
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-1.0));
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-2.0));
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-3.0));
+            chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-4.0));
+            ss.Draw.BarChart(chart3);
+
+            ss.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0,1.0));
+            ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_Draw_AreaChart()
+        {
+            var ss = GetScriptingClient();
+            ss.Document.New();
+            ss.Page.New(new VA.Drawing.Size(4, 4), false);
+
+            var rect1 = new VA.Drawing.Rectangle(0, 0, 4, 4);
+            var chart1 = new VA.Models.Charting.AreaChart(rect1);
+            chart1.DataPoints.Add(1.0);
+            chart1.DataPoints.Add(2.0);
+            chart1.DataPoints.Add(3.0);
+            chart1.DataPoints.Add(4.0);
+            ss.Draw.AreaChart(chart1);
+
+            var rect2 = new VA.Drawing.Rectangle(5, 0, 9, 4);
+            var chart2 = new VA.Models.Charting.AreaChart(rect2);
+            chart2.DataPoints.Add(1.0);
+            chart2.DataPoints.Add(2.0);
+            chart2.DataPoints.Add(-3.0);
+            chart2.DataPoints.Add(4.0);
+            ss.Draw.AreaChart(chart2);
+
+            var rect3 = new VA.Drawing.Rectangle(10, 0, 14, 4);
+            var chart3 = new VA.Models.Charting.AreaChart(rect3);
+            chart3.DataPoints.Add(-1.0);
+            chart3.DataPoints.Add(-2.0);
+            chart3.DataPoints.Add(-3.0);
+            chart3.DataPoints.Add(-4.0);
+            ss.Draw.AreaChart(chart3);
+
+            ss.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0));
+            ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_Draw_DirectedGraph1()
+        {
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart1);
             ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_Draw_DirectedGraph2()
+        {
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart2);
             ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_Draw_DirectedGraph3()
+        {
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart3);
             ss.Document.Close(true);
+        }
+
+        [TestMethod]
+        public void Scripting_Draw_DirectedGraph4()
+        {
+            var ss = GetScriptingClient();
             draw_dg(ss, TestVisioAutomation.Properties.Resources.sampleflowchart4);
             ss.Document.Close(true);
         }
 
-        private void draw_dg(VA.Scripting.Session scriptingsession, string dg_text)
+        private void draw_dg(VA.Scripting.Client client, string dg_text)
         {
-            var dg_xml = System.Xml.Linq.XDocument.Parse(dg_text);
-            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(scriptingsession, dg_xml);
-            VA.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(scriptingsession, dg_model);
+            var dg_xml = SXL.XDocument.Parse(dg_text);
+            var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(client, dg_xml);
+            client.Draw.DirectedGraph(dg_model);
         }
-
+        
         [TestMethod]
-        public void Scripting_Orgchart()
+        public void Scripting_Drop_Master()
         {
-            var ss = GetScriptingSession();
-            draw_org_chart(ss, TestVisioAutomation.Properties.Resources.sampleorgchart1);
-            ss.Document.Close(true);
-            VA.DocumentHelper.ForceCloseAll(ss.VisioApplication.Documents);
-        }
-
-        private void draw_org_chart(VA.Scripting.Session scriptingsession, string text)
-        {
-            var xmldoc = System.Xml.Linq.XDocument.Parse(text);
-            var orgchart = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(scriptingsession, xmldoc);
-            scriptingsession.Draw.OrgChart(orgchart);
-        }
-
-
-        [TestMethod]
-        public void Scripting_DropMaster()
-        {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
-            ss.Document.OpenStencil("Basic_U.VSS");
-            var master = ss.Master.Get("Rectangle", "Basic_U.VSS");
+            var basic_stencil = ss.Document.OpenStencil("Basic_U.VSS");
+            var master = ss.Master.Get("Rectangle", basic_stencil);
             ss.Master.Drop(master, 2, 2);
             var application = ss.VisioApplication;
             var active_page = application.ActivePage;
@@ -182,15 +277,15 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
-        public void Scripting_DropMany()
+        public void Scripting_Drop_Many()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(10, 10), false);
-            ss.Document.OpenStencil("Basic_U.VSS");
+            var basic_stencil = ss.Document.OpenStencil("Basic_U.VSS");
 
-            var m1 = ss.Master.Get("Rectangle", "Basic_U.VSS");
-            var m2 = ss.Master.Get("Ellipse", "Basic_U.VSS");
+            var m1 = ss.Master.Get("Rectangle", basic_stencil);
+            var m2 = ss.Master.Get("Ellipse", basic_stencil);
 
             var masters = new[] {m1, m2};
             var points = VA.Drawing.Point.FromDoubles(new[] { 1.0, 2.0, 3.0, 4.0, 1.5, 4.5, 5.7, 2.4 }).ToList();

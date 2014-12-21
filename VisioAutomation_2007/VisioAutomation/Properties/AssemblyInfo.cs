@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("VisioAutomation 2007")]
+[assembly: AssemblyTitle("VisioAutomation 2010")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VisioAutomation 2007")]
+[assembly: AssemblyProduct("VisioAutomation 2010")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("EA46FB00-FC87-4285-B3C2-9AF14A8FA469")]
+[assembly: Guid("FB9334A8-ED4F-4DF6-A53C-0F373EDBDDEF")]
 
 // Version information for an assembly consists of the following four values:
 //

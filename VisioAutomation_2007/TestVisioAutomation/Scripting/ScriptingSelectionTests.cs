@@ -8,9 +8,9 @@ namespace TestVisioAutomation
     public class ScriptingSelectionTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Test_Selection()
+        public void Scripting_Selection_Scenarios()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
 
             var doc = ss.Document.New(10, 5);
 
@@ -28,7 +28,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, x1.Count);
             Assert.IsTrue(x1.ContainsKey(s4));
 
-            ss.Selection.SelectInvert();
+            ss.Selection.Invert();
             var x2 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
             Assert.AreEqual(3, x2.Count);
             Assert.IsTrue(x2.ContainsKey(s1));

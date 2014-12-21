@@ -24,8 +24,8 @@ namespace VisioAutomation.DOM
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
+        IEnumerator IEnumerable.GetEnumerator()     
+        {                                           
             return GetEnumerator();
         }
 

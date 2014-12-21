@@ -7,7 +7,7 @@ namespace VisioPowerTools
 {
     public partial class VisioPowerToolsAddIn
     {
-        private static VisioAutomation.Scripting.Session g_scripting_session;
+        private static VisioAutomation.Scripting.Client g_scripting_session;
         internal static VisioPowerTools.PowerToolsSessionOptions g_session_options;
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -31,7 +31,7 @@ namespace VisioPowerTools
         {           
         }
         
-        public static VisioAutomation.Scripting.Session ScriptingSession
+        public static VisioAutomation.Scripting.Client ScriptingSession
         {
             get
             {
@@ -43,8 +43,8 @@ namespace VisioPowerTools
                     }
 
                     var application = Globals.VisioPowerToolsAddIn.Application;
-                    g_scripting_session = new VisioAutomation.Scripting.Session(application);
-                    g_scripting_session.Options = g_session_options;
+                    g_scripting_session = new VisioAutomation.Scripting.Client(application);
+                    g_scripting_session = g_session_options;
                 }
                 else
                 {

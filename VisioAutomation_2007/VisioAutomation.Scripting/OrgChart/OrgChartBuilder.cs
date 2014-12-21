@@ -1,26 +1,27 @@
 using System.Collections.Generic;
 using VA = VisioAutomation;
-using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
+using OCMODEL = VisioAutomation.Models.OrgChart;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.OrgChart
 {
     public class OrgChartBuilder
     {
-        public static OCMODEL.Drawing LoadFromXML(Session scriptingsession, string filename)
+        public static OCMODEL.OrgChartDocument LoadFromXML(Client client, string filename)
         {
-            var xdoc = System.Xml.Linq.XDocument.Load(filename);
-            return LoadFromXML(scriptingsession, xdoc);
+            var xdoc = SXL.XDocument.Load(filename);
+            return LoadFromXML(client, xdoc);
         }
 
-        public static OCMODEL.Drawing LoadFromXML(Session scriptingsession,
-                                                             System.Xml.Linq.XDocument xdoc)
+        public static OCMODEL.OrgChartDocument LoadFromXML(Client client,
+                                                             SXL.XDocument xdoc)
         {
             var root = xdoc.Root;
 
             var dic = new Dictionary<string, OCMODEL.Node>();
             OCMODEL.Node ocroot = null;
 
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Walking XML");
+            client.WriteVerbose("Walking XML");
 
             foreach (var ev in root.Elements())
             {
@@ -30,7 +31,7 @@ namespace VisioAutomation.Scripting.OrgChart
                     string parentid = VA.Scripting.XmlUtil.GetAttributeValue(ev, "parentid", null);
                     var name = ev.Attribute("name").Value;
 
-                    scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Loading shape: {0} {1} {2}", id, name, parentid);
+                    client.WriteVerbose( "Loading shape: {0} {1} {2}", id, name, parentid);
                     var new_ocnode = new OCMODEL.Node(name);
 
                     if (ocroot == null)
@@ -50,10 +51,10 @@ namespace VisioAutomation.Scripting.OrgChart
                     }
                 }
             }
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished Walking XML");
-            var oc = new OCMODEL.Drawing();
-            oc.Root = ocroot;
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose, "Finished Creating OrgChart model");
+            client.WriteVerbose( "Finished Walking XML");
+            var oc = new OCMODEL.OrgChartDocument();
+            oc.OrgCharts.Add(ocroot);
+            client.WriteVerbose( "Finished Creating OrgChart model");
             return oc;
         }
     }

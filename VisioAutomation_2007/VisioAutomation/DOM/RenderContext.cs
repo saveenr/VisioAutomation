@@ -5,8 +5,8 @@ namespace VisioAutomation.DOM
 {
     internal class RenderContext
     {
-        private Dictionary<short, IVisio.Shape> id_to_shape;
-        private IVisio.Shapes pageshapes;
+        private readonly Dictionary<short, IVisio.Shape> id_to_shape;
+        private readonly IVisio.Shapes pageshapes;
         public IVisio.Page VisioPage { get; private set; }
 
         public RenderContext(IVisio.Page visio_page)

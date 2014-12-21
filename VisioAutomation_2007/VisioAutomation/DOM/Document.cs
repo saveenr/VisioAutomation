@@ -6,41 +6,42 @@ namespace VisioAutomation.DOM
     public class Document
     {
         public PageList Pages;
-        private string vst ;
-        private IVisio.VisMeasurementSystem? measurementSystem;
+        private readonly string vst_template_file ;
+        private IVisio.VisMeasurementSystem measurementSystem;
         public IVisio.Document VisioDocument;
 
         public Document()
         {
             this.Pages = new PageList();
+            this.measurementSystem = IVisio.VisMeasurementSystem.visMSDefault;
         }
 
         public Document(string template, IVisio.VisMeasurementSystem ms) :
             this()
         {
-            this.vst = template;
+            this.vst_template_file = template;
             this.measurementSystem = ms;
         }
 
         public IVisio.Document Render(IVisio.Application app)
         {
             var appdocs = app.Documents;
-            IVisio.Document vdoc = null;
-            if (this.vst == null)
+            IVisio.Document doc = null;
+            if (this.vst_template_file == null)
             {
-                vdoc = appdocs.Add("");
+                doc = appdocs.Add("");
             }
             else
             {
-                int flags = 0;// (int)IVisio.VisOpenSaveArgs.visAddDocked;
-                int langid = 0;
-                vdoc = appdocs.AddEx(this.vst, this.measurementSystem.Value, flags, langid);
+                const int flags = 0; // (int)IVisio.VisOpenSaveArgs.visAddDocked;
+                const int langid = 0;
+                doc = appdocs.AddEx(this.vst_template_file, this.measurementSystem, flags, langid);
             }
-            this.VisioDocument = vdoc;
-            var docpages = vdoc.Pages;
-            var starpage = docpages[1];
-            this.Pages.Render(starpage);
-            return vdoc;
+            this.VisioDocument = doc;
+            var docpages = doc.Pages;
+            var startpage = docpages[1];
+            this.Pages.Render(startpage);
+            return doc;
         }
     }
 }

@@ -1,83 +1,56 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Linq;
-using VisioAutomation.Extensions;
 using System.Linq;
-using VisioAutomation.Format;
 using VA=VisioAutomation;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting.Commands
 {
     public class FormatCommands : CommandSet
     {
-        public FormatCommands(Session session) :
-            base(session)
+        public FormatCommands(Client client) :
+            base(client)
         {
 
         }
 
-        public void Set(VA.Format.ShapeFormatCells format)
+        public void Set(IList<IVisio.Shape> target_shapes, VA.Shapes.FormatCells format)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = this.GetTargetShapes(target_shapes);
+
+            if (shapes.Count<1)
             {
                 return;
             }
 
-
             var update = new VA.ShapeSheet.Update();
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
             {
-                format.Apply(update, (short) shapeid);
+                update.SetFormulas((short)shapeid, format);
             }
 
-            update.Execute(this.Session.VisioApplication.ActivePage);            
+            update.Execute(this.Client.VisioApplication.ActivePage);            
         }
 
-        public IList<VA.Format.ShapeFormatCells> Get()
+        public IList<VA.Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = this.GetTargetShapes(target_shapes);
+
+            if (shapes.Count < 1)
             {
-                return new List<ShapeFormatCells>(0);
+                return new List<VA.Shapes.FormatCells>(0);
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = VA.Format.FormatHelper.GetShapeFormat(this.Session.VisioApplication.ActivePage, shapeids);
+            var fmts = VA.Shapes.FormatCells.GetCells(this.Client.VisioApplication.ActivePage, shapeids);
             return fmts;
-        }
-
-        public void Duplicate(int n)
-        {
-            if (n < 1)
-            {
-                throw new System.ArgumentOutOfRangeException("n");
-            }
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            // TODO: Add ability to duplicate all the selected shapes, not just the first one
-            // this dupicates exactly 1 shape N - times what it
-            // it should do is duplicate all M selected shapes N times so that M*N shapes are created
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
-            {
-                var active_window = application.ActiveWindow;
-                var selection = active_window.Selection;
-                var active_page = application.ActivePage;
-                DrawCommandsUtil.CreateDuplicates(active_page, selection[1], n);
-            }
-        }
-
-        [System.Flags]
-        public enum SizeFlags
-        {
-            Width = 0x1,
-            Height = 0x02
         }
 
         private double? cached_size_width;
@@ -88,35 +61,36 @@ namespace VisioAutomation.Scripting.Commands
         /// </summary>
         public void CopySize()
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+            
+            if (!this.Client.HasSelectedShapes())
             {
                 return;
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var shape = selection[1];
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var width_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Width);
-            var height_col = query.AddColumn(VA.ShapeSheet.SRCConstants.Height);
+            var width_col = query.Columns.Add(VA.ShapeSheet.SRCConstants.Width, "Width");
+            var height_col = query.Columns.Add(VA.ShapeSheet.SRCConstants.Height, "Height");
             var queryresults = query.GetResults<double>(shape);
 
-            cached_size_width = queryresults[0, width_col];
-            cached_size_height = queryresults[0, height_col];
+            cached_size_width = queryresults[width_col.Ordinal];
+            cached_size_height = queryresults[height_col.Ordinal];
         }
 
-
-
-        /// <summary>
-        /// Applies the cached size to the currently selected shapes. If no shapes are selected then nothing happens.
-        /// If no size was cached then nothing happens.
-        /// </summary>
-        /// <param name="flags">Controls if either or both the width and height values are applied during the paste</param>
-        public void PasteSize(SizeFlags flags)
+        public void PasteSize(IList<IVisio.Shape> target_shapes, bool paste_width, bool paste_height)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+            
+            var shapes = this.GetTargetShapes(target_shapes);
+
+            if (shapes.Count < 1)
             {
                 return;
             }
@@ -127,46 +101,48 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var update = new VA.ShapeSheet.Update();
-
-            var shapes = this.Session.Selection.EnumShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
             {
-                if ((flags & SizeFlags.Width) > 0)
+                if (paste_width)
                 {
                     update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, cached_size_width.Value);
                 }
 
-                if ((flags & SizeFlags.Height) > 0)
+                if (paste_height)
                 {
                     update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, cached_size_height.Value);
                 }
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
             update.Execute(active_page);
         }
 
+        private readonly FormatPaintCache cache = new FormatPaintCache();
 
-        private VA.Format.FormatPaintCache cache = new VA.Format.FormatPaintCache();
-
-        public void CopyFormat()
+        public void Copy()
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             var allflags = this.cache.GetAllFormatPaintFlags();
-            this.CopyFormat(allflags);
+            this.Copy(null, allflags);
         }
 
-        public void CopyFormat(VA.Format.FormatCategory category)
+        public void Copy(IVisio.Shape target_shape, FormatCategory category)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shape = GetTargetShape(target_shape);
+            if (shape == null)
             {
                 return;
             }
 
-            var selection = this.Session.Selection.Get();
-            var shape = selection[1];
             this.cache.CopyFormat(shape, category);
         }
 
@@ -175,26 +151,22 @@ namespace VisioAutomation.Scripting.Commands
             this.cache.Clear();
         }
 
-        public void PasteFormat()
+        public void Paste(IList<IVisio.Shape> target_shapes, FormatCategory category, bool apply_formulas)
         {
-            var allflags = this.cache.GetAllFormatPaintFlags();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
-            this.PasteFormat(allflags);
-        }
-
-        public void PasteFormat(VA.Format.FormatCategory category)
-        {
-            if (!this.Session.HasSelectedShapes())
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
             }
-
-            var selection = this.Session.Selection.Get();
-            var shapeids = selection.GetIDs();
-            var application = this.Session.VisioApplication;
+ 
+            var shapeids = target_shapes.Select(s=>s.ID).ToList();
+            var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
 
-            this.cache.PasteFormat(active_page, shapeids, category);
+            this.cache.PasteFormat(active_page, shapeids, category, apply_formulas);
         }
     }
 }

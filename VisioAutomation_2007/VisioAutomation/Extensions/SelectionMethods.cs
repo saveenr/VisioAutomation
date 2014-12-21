@@ -6,14 +6,6 @@ namespace VisioAutomation.Extensions
 {
     public static class SelectionMethods
     {
-        public static VA.Drawing.Rectangle GetBoundingBox(this IVisio.Selection selection, IVisio.VisBoundingBoxArgs args)
-        {
-            double bbx0, bby0, bbx1, bby1;
-            selection.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new VA.Drawing.Rectangle(bbx0, bby0, bbx1, bby1);
-            return r;
-        }
-
         public static IEnumerable<IVisio.Shape> AsEnumerable(this IVisio.Selection selection)
         {
             short count16 = selection.Count16;
@@ -21,6 +13,14 @@ namespace VisioAutomation.Extensions
             {
                 yield return selection[i + 1];
             }
+        }
+        
+        public static VA.Drawing.Rectangle GetBoundingBox(this IVisio.Selection selection, IVisio.VisBoundingBoxArgs args)
+        {
+            double bbx0, bby0, bbx1, bby1;
+            selection.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
+            var r = new VA.Drawing.Rectangle(bbx0, bby0, bbx1, bby1);
+            return r;
         }
 
         public static int[] GetIDs(this IVisio.Selection selection)

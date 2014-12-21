@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using VisioAutomation.Shapes.Connections;
+using VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -9,7 +11,7 @@ namespace VisioAutomation.DOM
 {
     public class ShapeList : Node, IEnumerable<BaseShape>
     {
-        private NodeList<BaseShape> shapes;
+        private readonly NodeList<BaseShape> shapes;
 
         public ShapeList()
         {
@@ -34,8 +36,8 @@ namespace VisioAutomation.DOM
             get { return this.shapes.Count; }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
+        IEnumerator IEnumerable.GetEnumerator()    
+        {                                          
             return GetEnumerator();
         }
         
@@ -80,8 +82,8 @@ namespace VisioAutomation.DOM
                 foreach (var kv in shape.CustomProperties)
                 {
                     string cp_name = kv.Key;
-                    VA.CustomProperties.CustomPropertyCells cp_cells = kv.Value;
-                    VA.CustomProperties.CustomPropertyHelper.SetCustomProperty(vshape, cp_name, cp_cells);
+                    CustomPropertyCells cp_cells = kv.Value;
+                    CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
                 }
             }
         }
@@ -118,7 +120,7 @@ namespace VisioAutomation.DOM
         private void PerformDrawing(RenderContext ctx)
         {
             // Draw shapes
-            var non_connectors = this.shapes.Where(s => !(s is Connector));
+            var non_connectors = this.shapes.Where(s => !(s is Connector)).ToList();
             var non_connector_dropshapes = non_connectors.Where(s => s is Shape).Cast<Shape>().ToList();
             var non_connector_nondropshapes = non_connectors.Where(s => !(s is Shape)).ToList();
 
@@ -212,25 +214,25 @@ namespace VisioAutomation.DOM
         {
             // Find all the shapes that use masters and for which
             // a Visio master object has not been identifies yet
-            var dom_shapes = this.shapes
+            var shape_nodes = this.shapes
                 .Where(shape => shape is Shape)
                 .Cast<Shape>()
                 .Where(shape => shape.Master.VisioMaster == null).ToList();
 
-            var loader = new VA.Masters.MasterLoader();
-            foreach (var dom_shape in dom_shapes)
+            var loader = new VA.Internal.MasterLoader();
+            foreach (var shape_node in shape_nodes)
             {
-                loader.Add(dom_shape.Master.MasterName,dom_shape.Master.StencilName);
+                loader.Add(shape_node.Master.MasterName,shape_node.Master.StencilName);
             }
 
             var application = ctx.VisioPage.Application;
             var docs = application.Documents;
             loader.Resolve(docs);
 
-            foreach (var dom_shape in dom_shapes)
+            foreach (var shape_node in shape_nodes)
             {
-                var mref = loader.Get(dom_shape.Master.MasterName, dom_shape.Master.StencilName);
-                dom_shape.Master.VisioMaster = mref.VisioMaster;
+                var mref = loader.Get(shape_node.Master.MasterName, shape_node.Master.StencilName);
+                shape_node.Master.VisioMaster = mref.VisioMaster;
             }
 
             // Ensure that all shapes to drop are assigned a visio master object
@@ -243,7 +245,7 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void UpdateCellsWithDropSizes(RenderContext ctx)
+        private void UpdateCellsWithDropSizes(RenderContext context)
         {
             var masters = this.shapes
                 .Where(shape => shape is Shape).Cast<Shape>();
@@ -265,19 +267,19 @@ namespace VisioAutomation.DOM
             }
         }
 
-        private void drop_masters(RenderContext ctx, List<Shape> dom_shapes)
+        private void drop_masters(RenderContext ctx, List<Shape> shape_nodes)
         {
-            var masters = dom_shapes.Select(m => m.Master.VisioMaster).ToList();
+            var masters = shape_nodes.Select(m => m.Master.VisioMaster).ToList();
 
             var points = new List<VA.Drawing.Point>(masters.Count);
-            points.AddRange(dom_shapes.Select(s => s.DropPosition));
+            points.AddRange(shape_nodes.Select(s => s.DropPosition));
             var shapeids = ctx.VisioPage.DropManyU(masters, points);
             
-            for (int i = 0; i < dom_shapes.Count; i++)
+            for (int i = 0; i < shape_nodes.Count; i++)
             {
-                var dom_master = dom_shapes[i];
+                var master_node = shape_nodes[i];
                 short shapeid = shapeids[i];
-                dom_master.VisioShapeID = shapeid;
+                master_node.VisioShapeID = shapeid;
             }
         }
 
@@ -309,7 +311,7 @@ namespace VisioAutomation.DOM
                 else if (shape is Arc)
                 {
                     var ps = (Arc)shape;
-                    var vad_arcslice = new VA.Layout.Models.Radial.DoughnutSlice(ps.Center, ps.StartAngle,
+                    var vad_arcslice = new VA.Models.Charting.PieSlice(ps.Center, ps.StartAngle,
                                                               ps.EndAngle, ps.InnerRadius, ps.OuterRadius);
                     var ps_shape = vad_arcslice.Render(ctx.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
@@ -319,7 +321,7 @@ namespace VisioAutomation.DOM
                 {
                     var ps = (PieSlice)shape;
 
-                    var vad_ps = new VA.Layout.Models.Radial.PieSlice(ps.Center, ps.Start, ps.End, ps.Radius);
+                    var vad_ps = new VA.Models.Charting.PieSlice(ps.Center, ps.Start, ps.End, ps.Radius);
                     var ps_shape = vad_ps.Render(ctx.VisioPage);
                     ps.VisioShapeID = ps_shape.ID16;
                     ps.VisioShape = ps_shape;
@@ -353,18 +355,18 @@ namespace VisioAutomation.DOM
 
         private void _draw_connectors(RenderContext ctx)
         {
-            var dom_connectors = this.shapes.Where(s => s is Connector).Cast<Connector>().ToList();
+            var connector_nodes = this.shapes.Where(s => s is Connector).Cast<Connector>().ToList();
 
             // if no dynamic connectors then do nothing
-            if (dom_connectors.Count < 1)
+            if (connector_nodes.Count < 1)
             {
                 return;
             }
 
             // Drop the number of connectors needed somewhere on the page
-            var masters = dom_connectors.Select(i => i.Master.VisioMaster).ToArray();
+            var masters = connector_nodes.Select(i => i.Master.VisioMaster).ToArray();
             var origin = new VA.Drawing.Point(-2, -2);
-            var points = Enumerable.Range(0, dom_connectors.Count)
+            var points = Enumerable.Range(0, connector_nodes.Count)
                 .Select(i => origin + new VA.Drawing.Point(1.10, 0))
                 .ToList();
             var connector_shapeids = ctx.VisioPage.DropManyU(masters, points);
@@ -375,12 +377,12 @@ namespace VisioAutomation.DOM
             {
                 var connector_shapeid = connector_shapeids[i];
                 var vis_connector = page_shapes.ItemFromID[connector_shapeid];
-                var dyncon_shape = dom_connectors[i];
+                var dyncon_shape = connector_nodes[i];
 
                 var from_shape = ctx.GetShape(dyncon_shape.From.VisioShapeID);
                 var to_shape = ctx.GetShape(dyncon_shape.To.VisioShapeID);
- 
-                VA.Connections.ConnectorHelper.ConnectShapes(vis_connector, from_shape, to_shape);
+
+                ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
                 dyncon_shape.VisioShape = vis_connector;
                 dyncon_shape.VisioShapeID = connector_shapeids[i];
             }

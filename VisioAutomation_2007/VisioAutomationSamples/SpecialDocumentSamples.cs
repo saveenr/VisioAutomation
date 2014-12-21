@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using OCMODEL = VisioAutomation.Layout.Models.OrgChart;
+using OCMODEL = VisioAutomation.Models.OrgChart;
 
 namespace VisioAutomationSamples
 {
@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
         public static void OrgChart()
         {
             // This creates a new document
-            var orgchart = new OCMODEL.Drawing();
+            var orgchart = new OCMODEL.OrgChartDocument();
 
             var bob = new OCMODEL.Node("Bob");
             var ted = new OCMODEL.Node("Ted");
@@ -21,11 +21,12 @@ namespace VisioAutomationSamples
             bob.Children.Add(ted);
             bob.Children.Add(alice);
 
-            orgchart.Root = bob;
+            orgchart.OrgCharts.Add(bob);
 
             orgchart.Render(SampleEnvironment.Application);
 
-            SampleEnvironment.Application.ActivePage.ResizeToFitContents(1,1);
+            var bordersize = new VA.Drawing.Size(1,1);
+            SampleEnvironment.Application.ActivePage.ResizeToFitContents(bordersize);
         }
     }
 }

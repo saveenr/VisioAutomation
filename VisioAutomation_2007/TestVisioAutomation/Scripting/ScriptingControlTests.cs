@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using Microsoft.Office.Interop.Visio;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Controls;
+using VACONTROL=VisioAutomation.Shapes.Controls;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -10,9 +8,9 @@ namespace TestVisioAutomation
     public class ScriptingControlTests : VisioAutomationTest
     {
         [TestMethod]
-        public void Scripting_Controls_Scenario_0()
+        public void Scripting_Controls_Scenarios()
         {
-            var ss = GetScriptingSession();
+            var ss = GetScriptingClient();
             ss.Document.New();
             ss.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -22,31 +20,31 @@ namespace TestVisioAutomation
 
             var s3 = ss.Draw.Rectangle(1.5, 3.5, 2, 4.0);
 
-            ss.Selection.SelectNone();
+            ss.Selection.None();
             ss.Selection.Select(s1);
             ss.Selection.Select(s2);
             ss.Selection.Select(s3);
 
-            var controls0 = ss.Control.Get();
+            var controls0 = ss.Control.Get(null);
             int found_controls = controls0.Count;
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls0[s1].Count);
             Assert.AreEqual(0, controls0[s2].Count);
             Assert.AreEqual(0, controls0[s3].Count);
 
-            var ctrl = new VA.Controls.ControlCells();
+            var ctrl = new VACONTROL.ControlCells();
             ctrl.X = "Width*0.5";
             ctrl.Y = "0";
-            ss.Control.Add(ctrl);
+            ss.Control.Add(null,ctrl);
 
-            var controls1 = ss.Control.Get();
+            var controls1 = ss.Control.Get(null);
             Assert.AreEqual(3, controls1.Count);
             Assert.AreEqual(1, controls1[s1].Count);
             Assert.AreEqual(1, controls1[s2].Count);
             Assert.AreEqual(1, controls1[s3].Count);
 
-            ss.Control.Delete(0);
-            var controls2 = ss.Control.Get();
+            ss.Control.Delete(null,0);
+            var controls2 = ss.Control.Get(null);
             Assert.AreEqual(3, controls0.Count);
             Assert.AreEqual(0, controls2[s1].Count);
             Assert.AreEqual(0, controls2[s2].Count);

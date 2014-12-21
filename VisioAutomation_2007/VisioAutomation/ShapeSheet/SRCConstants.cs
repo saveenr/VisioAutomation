@@ -20,6 +20,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Actions_ReadOnly { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionReadOnly); } }
         public static SRC Actions_SortKey { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionSortKey); } }
         public static SRC Actions_TagName { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionTagName); } }
+        //public static SRC Actions_FlyoutChild { get { return new SRC(SEC.visSectionAction, ROW.visRowAction, CEL.visActionFlyoutChild); } } // new for visio 2010
 
         // Alignment
         public static SRC AlignBottom { get { return new SRC(SEC.visSectionObject, ROW.visRowAlign, CEL.visAlignBottom); } }
@@ -38,28 +39,28 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Annotation_Y { get { return new SRC(SEC.visSectionAnnotation, ROW.visRowAnnotation, CEL.visAnnotationY); } }
 
         // Character
-        public static SRC Char_AsianFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterAsianFont); } }
-        public static SRC Char_Case { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterCase); } }
-        public static SRC Char_Color { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColor); } }
-        public static SRC Char_ComplexScriptFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptFont); } }
-        public static SRC Char_ComplexScriptSize { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptSize); } }
-        public static SRC Char_DoubleStrikethrough { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDoubleStrikethrough); } }
-        public static SRC Char_DblUnderline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDblUnderline); } }
-        public static SRC Char_Font { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFont); } }
-        public static SRC Char_LangID { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLangID); } }
-        public static SRC Char_Locale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocale); } }
-        public static SRC Char_LocalizeFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocalizeFont); } }
-        public static SRC Char_Overline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterOverline); } }
-        public static SRC Char_Perpendicular { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPerpendicular); } }
-        public static SRC Char_Pos { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPos); } }
-        public static SRC Char_RTLText { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterRTLText); } }
-        public static SRC Char_FontScale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFontScale); } }
-        public static SRC Char_Size { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterSize); } }
-        public static SRC Char_Letterspace { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLetterspace); } }
-        public static SRC Char_Strikethru { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStrikethru); } }
-        public static SRC Char_Style { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStyle); } }
-        public static SRC Char_ColorTrans { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColorTrans); } }
-        public static SRC Char_UseVertical { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical); } }
+        public static SRC CharAsianFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterAsianFont); } }
+        public static SRC CharCase { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterCase); } }
+        public static SRC CharColor { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColor); } }
+        public static SRC CharComplexScriptFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptFont); } }
+        public static SRC CharComplexScriptSize { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterComplexScriptSize); } }
+        public static SRC CharDoubleStrikethrough { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDoubleStrikethrough); } }
+        public static SRC CharDblUnderline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterDblUnderline); } }
+        public static SRC CharFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFont); } }
+        public static SRC CharLangID { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLangID); } }
+        public static SRC CharLocale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocale); } }
+        public static SRC CharLocalizeFont { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLocalizeFont); } }
+        public static SRC CharOverline { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterOverline); } }
+        public static SRC CharPerpendicular { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPerpendicular); } }
+        public static SRC CharPos { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterPos); } }
+        public static SRC CharRTLText { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterRTLText); } }
+        public static SRC CharFontScale { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterFontScale); } }
+        public static SRC CharSize { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterSize); } }
+        public static SRC CharLetterspace { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterLetterspace); } }
+        public static SRC CharStrikethru { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStrikethru); } }
+        public static SRC CharStyle { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterStyle); } }
+        public static SRC CharColorTrans { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterColorTrans); } }
+        public static SRC CharUseVertical { get { return new SRC(SEC.visSectionCharacter, ROW.visRowCharacter, CEL.visCharacterUseVertical); } }
 
         // Connections
         public static SRC Connections_D { get { return new SRC(SEC.visSectionConnectionPts, ROW.visRowConnectionPts, CEL.visCnnctD); } }
@@ -113,6 +114,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC Geometry_NoLine { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoLine); } }
         public static SRC Geometry_NoShow { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoShow); } }
         public static SRC Geometry_NoSnap { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoSnap); } }
+        //public static SRC Geometry_NoQuickDrag { get { return new SRC(SEC.visSectionFirstComponent, ROW.visRowComponent, CEL.visCompNoQuickDrag); } }
 
         // Fill Format
         public static SRC FillBkgnd { get { return new SRC(SEC.visSectionObject, ROW.visRowFill, CEL.visFillBkgnd); } }
@@ -192,6 +194,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC NoObjHandles { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visNoObjHandles); } }
         public static SRC ObjType { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visLOFlags); } }
         public static SRC UpdateAlignBox { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visUpdateAlignBox); } }
+        public static SRC HideText { get { return new SRC(SEC.visSectionObject, ROW.visRowMisc, CEL.visHideText); } }
 
         // 1d endpoints
         public static SRC BeginX { get { return new SRC(SEC.visSectionObject, ROW.visRowXForm1D, CEL.vis1DBeginX); } }
@@ -228,6 +231,8 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ResizePage { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOResizePage); } }
         public static SRC RouteStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLORouteStyle); } }
 
+        //public static SRC AvoidPageBreaks { get { return new SRC(SEC.visSectionObject, ROW.visRowPageLayout, CEL.visPLOAvoidPageBreaks); } } // new in Visio 2010
+
         // print properties
         public static SRC PageLeftMargin { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesLeftMargin); } }
         public static SRC CenterX { get { return new SRC(SEC.visSectionObject, ROW.visRowPrintProperties, CEL.visPrintPropertiesCenterX); } }
@@ -259,6 +264,7 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ShdwScaleFactor { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwScaleFactor); } }
         public static SRC ShdwType { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageShdwType); } }
         public static SRC UIVisibility { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageUIVisibility); } }
+        //public static SRC DrawingResizeType { get { return new SRC(SEC.visSectionObject, ROW.visRowPage, CEL.visPageDrawResizeType); } } // new in Visio 2010
 
         // paragraph
         public static SRC Para_Bullet { get { return new SRC(SEC.visSectionParagraph, ROW.visRowParagraph, CEL.visBulletIndex); } }
@@ -398,7 +404,6 @@ namespace VisioAutomation.ShapeSheet
         public static SRC EnableFillProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesFill); } }
         public static SRC EnableLineProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesLine); } }
         public static SRC EnableTextProps { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleIncludesText); } }
-        public static SRC HideText { get { return new SRC(SEC.visSectionObject, ROW.visRowStyle, CEL.visStyleHidden); } }
 
         //tabs
         public static SRC Tabs_Alignment { get { return new SRC(SEC.visSectionTab, ROW.visRowTab, CEL.visTabAlign); } }
@@ -422,6 +427,8 @@ namespace VisioAutomation.ShapeSheet
         public static SRC ShapeRouteStyle { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORouteStyle); } }
         public static SRC ShapeSplit { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplit); } }
         public static SRC ShapeSplittable { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLOSplittable); } }
+        //public static SRC DisplayLevel { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLODisplayLevel); } } // new in Visio 2010
+        //public static SRC Relationships { get { return new SRC(SEC.visSectionObject, ROW.visRowShapeLayout, CEL.visSLORelationships); } } // new in Visio 2010
 
         public static Dictionary<string, SRC> GetSRCDictionary()
         {

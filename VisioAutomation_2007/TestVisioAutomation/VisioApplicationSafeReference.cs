@@ -1,8 +1,5 @@
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -16,17 +13,24 @@ namespace TestVisioAutomation
         {
             if (this.app == null)
             {
+                // obviously if the current app reference is empty
+                // then we must create a new once
                 this.app = new IVisio.Application();
             }
             else
             {
-                // we have an instance, but it may not be valid
+                // OK, we have an instance, but it may not be valid
+                // any longer because someome closed the app
                 try
                 {
+                    // Try doing *something* with the instance
                     string s = app.Name;
                 }
                 catch (System.Runtime.InteropServices.COMException)
                 {
+                    // This COMException is a hint something
+                    // is wrong with the instance. So, create a new
+                    // visio application
                     this.app = new IVisio.Application();
                 }
             }

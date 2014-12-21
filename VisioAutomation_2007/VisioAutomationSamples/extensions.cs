@@ -16,7 +16,7 @@ namespace VisioAutomationSamples
             }
             if (size.HasValue)
             {
-                el.CharacterCells.Size = VA.Convert.PointsToInches(size.Value);
+                el.CharacterCells.Size = string.Format("{0}pt",size.Value);
             }
             if (color.HasValue)
             {

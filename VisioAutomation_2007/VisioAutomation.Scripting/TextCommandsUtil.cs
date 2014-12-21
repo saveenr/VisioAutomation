@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -25,7 +27,7 @@ namespace VisioAutomation.Scripting
             }
             else if (input_string == t_lower)
             {
-                var cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                var cultureInfo = Thread.CurrentThread.CurrentCulture;
                 var textInfo = cultureInfo.TextInfo;
                 var t_case = textInfo.ToTitleCase(input_string);
 
@@ -46,14 +48,34 @@ namespace VisioAutomation.Scripting
             const string formula_wrap = "WIDTH*1";
             const string formula_no_wrap = "TEXTWIDTH(TheText)";
             string formula = wrap ? formula_wrap : formula_no_wrap;
-            var update = new VA.ShapeSheet.Update();
+            var update = new Update();
             
             foreach (int shapeid in shapeids)
             {
-                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.TxtWidth, formula);
+                update.SetFormula((short)shapeid, SRCConstants.TxtWidth, formula);
             }
 
             update.Execute(page);
+        }
+
+        public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)
+        {
+            int n = tokens.Count();
+            int c = tokens.Select(t => t.Length).Sum();
+            c += (n > 1) ? s.Length*n : 0;
+            c += sb.Length;
+            sb.EnsureCapacity(c);
+
+            int i = 0;
+            foreach (string t in tokens)
+            {
+                if (i > 0)
+                {
+                    sb.Append(s);
+                }
+                sb.Append(t);
+                i++;
+            }
         }
     }
 }

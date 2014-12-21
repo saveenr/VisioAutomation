@@ -6,25 +6,24 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ViewCommands : CommandSet
     {
-        public ViewCommands(Session session) :
-            base(session)
+        public ViewCommands(Client client) :
+            base(client)
         {
             
         }
 
         public IVisio.Window GetActiveWindow()
         {
-            var application = this.Session.VisioApplication;
+            this.AssertApplicationAvailable();
+
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             return active_window;
         }
 
         public double GetActiveZoom()
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                throw new AutomationException("Has no active drawing");
-            }
+            this.AssertApplicationAvailable();
 
             var active_window = GetActiveWindow();
             return active_window.Zoom;
@@ -57,10 +56,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ZoomToPercentage(double amount)
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;   
-            }
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (amount <= 0)
             {
@@ -73,10 +70,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Zoom(Zoom zoom)
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.AssertApplicationAvailable();
 
             if (zoom == Scripting.Zoom.Out)
             {
@@ -102,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else if (zoom == Scripting.Zoom.ToSelection)
             {
-                if (!this.Session.HasSelectedShapes())
+                if (!this.Client.HasSelectedShapes())
                 {
                     return;
                 }

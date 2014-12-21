@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VisioPowerTools
 {
-    public class PowerToolsSessionOptions : VisioAutomation.Scripting.SessionOptions
+    public class PowerToolsSessionOptions : VisioAutomation.Scripting.Context
     {
         public delegate void WriteString(string s);
 
@@ -28,6 +28,13 @@ namespace VisioPowerTools
             this.DefaultWriteString(msg);
         }
 
+        public override void WriteWarning(string s)
+        {
+            string msg = string.Format("Warning: {0}", s);
+            this.DefaultWriteString(msg);
+        }
+
+
         public override void WriteUser(string s)
         {
             this.DefaultWriteString(s);
@@ -38,7 +45,7 @@ namespace VisioPowerTools
            this.DefaultWriteString(s);
         }
 
-        public override void DefaultWriteString(string s)
+        public void DefaultWriteString(string s)
         {
             if (this.OnWriteString != null)
             {

@@ -7,66 +7,72 @@ namespace VisioAutomation.DOM
 {
     public class PageList : Node, IEnumerable<Page>
     {
-        private NodeList<Page> pages;
+        private readonly NodeList<Page> pagenodes;
 
         public PageList()
         {
-            this.pages = new NodeList<Page>(this);
+            this.pagenodes = new NodeList<Page>(this);
         }
 
         public IEnumerator<Page> GetEnumerator()
         {
-            foreach (var i in this.pages)
+            foreach (var i in this.pagenodes)
             {
                 yield return i;
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()     // Explicit implementation
-        {                                           // keeps it hidden.
+        IEnumerator IEnumerable.GetEnumerator()     
+        {                                           
             return GetEnumerator();
         }
 
         public void Add(Page page)
         {
-            this.pages.Add(page);
+            this.pagenodes.Add(page);
         }
 
         public int Count
         {
-            get { return this.pages.Count; }
+            get { return this.pagenodes.Count; }
         }
 
         public IList<IVisio.Page> Render(IVisio.Document doc)
         {
-            var vpages = new List<IVisio.Page>(this.Count);
-            foreach (var dompage in this.pages)
+            var pages = new List<IVisio.Page>(this.Count);
+            foreach (var pagenode in this.pagenodes)
             {
-                var vpage = dompage.Render(doc);
-                vpages.Add(vpage);
+                var page = pagenode.Render(doc);
+                pages.Add(page);
             }
-            return vpages;
+            return pages;
         }
 
         public IList<IVisio.Page> Render(IVisio.Page startpage)
         {
             var doc = startpage.Document;
             int count = 0;
-            var vpages = new List<IVisio.Page>(this.Count);
-            foreach (var dompage in this.pages)
+            var pages = new List<IVisio.Page>(this.Count);
+
+            var app = doc.Application;
+            var active_window = app.ActiveWindow;
+            foreach (var pagenode in this.pagenodes)
             {
                 if (count == 0)
                 {
-                    dompage.Render(startpage);
-                    vpages.Add(startpage);
+                    pagenode.Render(startpage);
+                    pages.Add(startpage);
                 }
                 else
                 {
-                    var vpage = dompage.Render(doc);
-                    vpages.Add(vpage);
+                    var rendered_page = pagenode.Render(doc);
+                    pages.Add(rendered_page);
                 }
+
+                active_window.ViewFit = 1; // 1==visFitPage - adjust the zoom
+                count++;
             }
-            return vpages;
+            return pages;
         }
 
     }
