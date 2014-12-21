@@ -60,7 +60,7 @@ namespace VisioPowerTools
                 return;
             }
 
-            IList<VA.Layout.Models.DirectedGraph.Drawing> drawings;
+            IList<VA.Models.DirectedGraph.Drawing> drawings;
             try
             {
                 VisioPowerToolsAddIn.g_session_options.OnWriteString += write_msg;

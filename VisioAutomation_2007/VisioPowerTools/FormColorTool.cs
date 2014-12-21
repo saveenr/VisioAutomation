@@ -114,7 +114,7 @@ namespace VisioPowerTools
                 throw new System.ArgumentNullException("shape");
             }
 
-            var format = VisioAutomation.Format.FormatHelper.GetShapeFormat(shape);
+            var format = VisioAutomation.Shapes.FormatCells.GetCells(shape);
             var shapecolors = new ShapeFormatHelper.ShapeColors();
 
             shapecolors.FillForegroundColor = format.FillForegnd;

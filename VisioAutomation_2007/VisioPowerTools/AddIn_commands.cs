@@ -152,7 +152,8 @@ namespace VisioPowerTools
             var addin = Globals.VisioPowerToolsAddIn;
             double d = addin.addinprefs.SnapUnit;
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapCorner(d, d, VA.Layout.SnapCornerPosition.LowerLeft);
+            // TODO: fix
+            //ss.Layout.SnapCorner(d, d, VA.Layout.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdSnapSize()
@@ -160,7 +161,8 @@ namespace VisioPowerTools
             var addin = Globals.VisioPowerToolsAddIn;
             double d = addin.addinprefs.SnapUnit;
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapSize(d, d);
+            // TODO: fix
+            //ss.Layout.SnapSize(d, d);
         }
 
         public static void CmdCopySize()
@@ -172,9 +174,11 @@ namespace VisioPowerTools
         public static void CmdPasteSize()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            var flags = VA.Scripting.Commands.FormatCommands.SizeFlags.Width |
-                            VA.Scripting.Commands.FormatCommands.SizeFlags.Height;
-            ss.Format.PasteSize(flags);
+            // TODO: fix
+
+            //var flags = VA.Scripting.Commands.FormatCommands.SizeFlags.Width |
+            //               VA.Scripting.Commands.FormatCommands.SizeFlags.Height;
+            //ss.Format.PasteSize(flags);
         }
 
         public static void CmdPasteWidth()
@@ -198,19 +202,19 @@ namespace VisioPowerTools
         public static void CmdSelectAll()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Selection.SelectAll();
+            ss.Selection.All();
         }
 
         public static void CmdSelectNone()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Selection.SelectNone();
+            ss.Selection.None();
         }
 
         public static void CmdInvertSelection()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Selection.SelectInvert();
+            ss.Selection.Invert();
         }
 
         public static void CmdDistribute(IVisio.VisDistributeTypes s, bool gtg)
@@ -252,7 +256,9 @@ namespace VisioPowerTools
         {
             double d = 0;
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.Distribute(axis, d);
+            // TODO: fix
+
+            //ss.Layout.Distribute(axis, d);
         }
 
         public static void CmdZoomOnSelection()
@@ -276,13 +282,13 @@ namespace VisioPowerTools
         public static void CmdPageResetOrigin()
         {
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Page.ResetOrigin();
+            ss.Page.ResetOrigin(ss.Page.Get());
         }
 
         public static void CmdExportAsSVGXHTML()
         {
             var ss = ScriptingSession;
-            if (!ss.HasActiveDrawing)
+            if (!ss.HasActiveDocument)
             {
                 System.Windows.Forms.MessageBox.Show("Open or create a new Drawing to export it.");
                 return;
@@ -295,7 +301,7 @@ namespace VisioPowerTools
         public static void CmdExportAsXAML()
         {
             var ss = ScriptingSession;
-            if (!ss.HasActiveDrawing)
+            if (!ss.HasActiveDocument)
             {
                 System.Windows.Forms.MessageBox.Show("Open or create a new Drawing to export it.");
                 return;
@@ -332,62 +338,82 @@ namespace VisioPowerTools
 
         public static void CmdShapeSnapPositionOneInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapCorner(one_inch, one_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            //ss.Layout.SnapCorner(one_inch, one_inch, VA.Layout.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionHalfInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapCorner(half_inch, half_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            //ss.Layout.SnapCorner(half_inch, half_inch, VA.Layout.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionQuarterInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapCorner(quarter_inch, quarter_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            //ss.Layout.SnapCorner(quarter_inch, quarter_inch, VA.Layout.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionEighthInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapCorner(eighth_inch, eighth_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            //ss.Layout.SnapCorner(eighth_inch, eighth_inch, VA.Layout.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionSixteenthInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapCorner(1.0 / 16.0, 1.0 / 16.0, VA.Layout.SnapCornerPosition.LowerLeft);
+            //ss.Layout.SnapCorner(1.0 / 16.0, 1.0 / 16.0, VA.Layout.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapSizeOneInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapSize(one_inch, one_inch);
+            //ss.Layout.SnapSize(one_inch, one_inch);
         }
 
         public static void CmdShapeSnapSizeHalfInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapSize(half_inch, half_inch);
+            //ss.Layout.SnapSize(half_inch, half_inch);
         }
 
         public static void CmdShapeSnapSizeQuarterInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapSize(quarter_inch, quarter_inch);
+            //ss.Layout.SnapSize(quarter_inch, quarter_inch);
         }
 
         public static void CmdShapeSnapSizeEighthInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapSize(eighth_inch, eighth_inch);
+            //ss.Layout.SnapSize(eighth_inch, eighth_inch);
         }
 
         public static void CmdShapeSnapSizeSixteenthInch()
         {
+            // TODO: fix
+
             var ss = VisioPowerToolsAddIn.ScriptingSession;
-            ss.Layout.SnapSize(sixteenth_inch, sixteenth_inch);
+            //ss.Layout.SnapSize(sixteenth_inch, sixteenth_inch);
         }
     }
 }
