@@ -6,7 +6,7 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Scripting.Commands
 {
-    public class TextCommands: CommandSet
+    public class TextCommands : CommandSet
     {
         public TextCommands(Client client) :
             base(client)
@@ -19,22 +19,22 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
 
-            if (texts == null || texts.Count<1)
+            if (texts == null || texts.Count < 1)
             {
                 // do nothing
                 return;
             }
-            
+
             var shapes = this.GetTargetShapes(target_shapes);
-            if (shapes.Count<1)
+            if (shapes.Count < 1)
             {
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Shape Text"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Shape Text"))
             {
                 int numtexts = texts.Count;
-                for (int i=0;i<shapes.Count;i++)
+                for (int i = 0; i < shapes.Count; i++)
                 {
                     var shape = shapes[i];
                     var text = texts[i % numtexts];
@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
-            
+
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
@@ -62,7 +62,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
-            
+
             var shapes = this.GetTargetShapes(target_shapes);
 
             if (shapes.Count < 1)
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Toggle Shape Text Case"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Toggle Shape Text Case"))
             {
                 var shapeids = shapes.Select(s => s.ID).ToList();
 
@@ -96,10 +96,10 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     var format = formats[i];
 
-                    if (format.CharacterFormats.Count>0)
+                    if (format.CharacterFormats.Count > 0)
                     {
                         var fmt = format.CharacterFormats[0];
-                        update.SetFormulas((short) shapeids[i], fmt, 0);
+                        update.SetFormulas((short)shapeids[i], fmt, 0);
                     }
 
                     if (format.ParagraphFormats.Count > 0)
@@ -127,8 +127,8 @@ namespace VisioAutomation.Scripting.Commands
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
-            IVisio.VisGetSetArgs flags=0;
-            var srcs = new[] {VA.ShapeSheet.SRCConstants.CharFont};
+            IVisio.VisGetSetArgs flags = 0;
+            var srcs = new[] { VA.ShapeSheet.SRCConstants.CharFont };
             var formulas = new[] { font.ID.ToString() };
             this.Client.ShapeSheet.SetFormula(target_shapes, srcs, formulas, flags);
         }
@@ -149,6 +149,78 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Client.VisioApplication;
             var formats = VA.Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
+        }
+
+        public void MoveTextToBottom(IList<IVisio.Shape> target_shapes)
+        {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return ;
+            }
+
+            var update = new VA.ShapeSheet.Update();
+            foreach (var shape in shapes)
+            {
+                if (0 ==
+                    shape.RowExists[
+                        (short) IVisio.VisSectionIndices.visSectionObject, (short) IVisio.VisRowIndices.visRowTextXForm,
+                        (short) IVisio.VisExistsFlags.visExistsAnywhere])
+                {
+                    shape.AddRow((short)IVisio.VisSectionIndices.visSectionObject, (short)IVisio.VisRowIndices.visRowTextXForm, (short)IVisio.VisRowTags.visTagDefault); 
+                    
+                }
+            }
+
+            var application = this.Client.VisioApplication;
+            var shapeids = shapes.Select(s=>s.ID);
+            foreach (int shapeid in shapeids)
+            {
+                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.TxtHeight, "Height*0"); 
+                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.TxtPinY, "Height*0"); 
+                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.VerticalAlign, "0");
+            } 
+            var active_page = application.ActivePage; 
+            update.Execute(active_page);
+        }
+
+        public void SetTextWrapping(bool p)
+        {
+            if (!this.Client.HasSelectedShapes())
+            {
+                return;
+            }
+
+            var selection = this.Client.Selection.Get();
+            var shapeids = selection.GetIDs();
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(application,"SetTextWrapping"))
+            {
+                var active_page = application.ActivePage;
+                // todo: fix
+                // TextCommands.set_text_wrapping(active_page, shapeids, wrap);
+            }
+        }
+
+        public void FitShapeToText()
+        {
+
+
+            if (!this.Client.HasSelectedShapes())
+            {
+                return;
+            }
+            var shapes_2d = this.Client.Selection.GetShapes();
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(application,"FitShapeToText"))
+            {
+                var active_page = application.ActivePage;
+                // todo: fix
+                //VA.Text.TextHelper.FitShapeToText(active_page, shapes_2d);
+            }
         }
     }
 }

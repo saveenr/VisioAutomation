@@ -24,17 +24,15 @@ namespace VisioPowerTools
                 return;
             }
 
-            // TODO: fix
-
             var format = new VA.Shapes.FormatCells();
             format.FillPattern = (int) this.fillGradient1.FillDef.FillPattern;
-            //format.FillForegnd= VA.Convert.ColorToFormulaRGB(this.fillGradient1.FillDef.ForegroundColor);
-            //format.FillBkgnd= VA.Convert.ColorToFormulaRGB(this.fillGradient1.FillDef.BackgroundColor);
+            format.FillForegnd= VA.Convert.ColorToFormulaRGB(this.fillGradient1.FillDef.ForegroundColor);
+            format.FillBkgnd= VA.Convert.ColorToFormulaRGB(this.fillGradient1.FillDef.BackgroundColor);
             format.FillForegndTrans= this.fillGradient1.FillDef.ForegroundTransparency/100.0;
             format.FillBkgndTrans= this.fillGradient1.FillDef.BackgroundTransparency / 100.0;
             format.ShdwPattern= (int) this.fillGradient1.ShadowDef.FillPattern;
-            //format.ShdwForegnd= VA.Convert.ColorToFormulaRGB(this.fillGradient1.ShadowDef.ForegroundColor);
-            //format.ShdwBkgnd = VA.Convert.ColorToFormulaRGB(this.fillGradient1.ShadowDef.BackgroundColor);
+            format.ShdwForegnd= VA.Convert.ColorToFormulaRGB(this.fillGradient1.ShadowDef.ForegroundColor);
+            format.ShdwBkgnd = VA.Convert.ColorToFormulaRGB(this.fillGradient1.ShadowDef.BackgroundColor);
             format.ShdwForegndTrans = this.fillGradient1.ShadowDef.ForegroundTransparency/100.0;
             format.ShdwBkgndTrans= this.fillGradient1.ShadowDef.BackgroundTransparency/100.0;
             format.ShapeShdwOffsetX = 0.0;

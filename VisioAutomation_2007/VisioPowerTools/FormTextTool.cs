@@ -16,28 +16,23 @@
         {
             // TODO: fix
 
-            //VisioPowerToolsAddIn.ScriptingSession.Text.MoveTextToBottom();
+            VisioPowerToolsAddIn.Client.Text.MoveTextToBottom(null);
         }
 
         private void buttonResizeToFitText_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
-
-            //VisioPowerToolsAddIn.ScriptingSession.Text.FitShapeToText();
+            VisioPowerToolsAddIn.Client.Text.FitShapeToText();
         }
 
         private void buttonEnableTextWrapping_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
 
-            //VisioPowerToolsAddIn.ScriptingSession.Text.SetTextWrapping(true);
+            VisioPowerToolsAddIn.Client.Text.SetTextWrapping(true);
         }
 
         private void buttonDisableTextWrapping_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
-
-            //VisioPowerToolsAddIn.ScriptingSession.Text.SetTextWrapping(false);
+            VisioPowerToolsAddIn.Client.Text.SetTextWrapping(false);
         }
     }
 }

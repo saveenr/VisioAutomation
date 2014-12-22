@@ -1,4 +1,5 @@
 using System.Linq;
+using VisioAutomation.Application;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
@@ -408,5 +409,69 @@ namespace VisioAutomation.Scripting.Commands
                 return bb.Rectangle;
             }
         }
+
+        public void Stack(Drawing.Axis axis, double space)
+        {
+
+
+            if (!this.Client.HasSelectedShapes(2))
+            {
+                return;
+            }
+            if (space < 0.0)
+            {
+                throw new System.ArgumentOutOfRangeException("space", "must be non-negative");
+            }
+
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new UndoScope(application,"Stack"))
+            {
+                if (axis == VA.Drawing.Axis.YAxis)
+                {
+                    Align(null,VA.Drawing.AlignmentHorizontal.Center);
+                }
+                else
+                {
+                    Align(null,VA.Drawing.AlignmentVertical.Center);
+                }
+                Distribute(axis, space);
+            }
+        }
+
+        public void Distribute(VA.Drawing.Axis axis, double d)
+        {
+            if (!this.Client.HasActiveDocument)
+            {
+                return;
+            }
+            var application = this.Client.VisioApplication;
+            var selection = this.Client.Selection.Get();
+            var shapeids = selection.GetIDs();
+            using (var undoscope = new UndoScope(application,"Distribute"))
+            {
+                // todo: fix
+                //VA.Layout.LayoutHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
+            }
+        }
+
+
+
+        public void SnapCorner(double w, double h, VA.Arrange.SnapCornerPosition corner)
+        {
+            if (!this.Client.HasSelectedShapes())
+            {
+                return;
+            }
+            var shapes_2d = Client.Selection.EnumShapes2D().ToList();
+            var shapeids = shapes_2d.Select(s => s.ID).ToList();
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new VA.Application.UndoScope(application,"SnapCorner"))
+            {
+                var active_page = application.ActivePage;
+                // todo: fix
+                //VA.Arrange.LayoutHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
+            }
+        }
     }
 }
+

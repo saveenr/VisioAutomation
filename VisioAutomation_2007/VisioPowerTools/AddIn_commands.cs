@@ -152,8 +152,7 @@ namespace VisioPowerTools
             var addin = Globals.VisioPowerToolsAddIn;
             double d = addin.addinprefs.SnapUnit;
             var ss = VisioPowerToolsAddIn.Client;
-            // TODO: fix
-            //ss.Arrange.SnapCorner(d, d, VA.Layout.SnapCornerPosition.LowerLeft);
+            ss.Arrange.SnapCorner(d, d, VA.Arrange.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdSnapSize()
@@ -325,42 +324,32 @@ namespace VisioPowerTools
 
         public static void CmdShapeSnapPositionOneInch()
         {
-            // TODO: fix
-
             var ss = VisioPowerToolsAddIn.Client;
-            //ss.Layout.SnapCorner(one_inch, one_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            ss.Arrange.SnapCorner(one_inch, one_inch, VA.Arrange.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionHalfInch()
         {
-            // TODO: fix
-
             var ss = VisioPowerToolsAddIn.Client;
-            //ss.Layout.SnapCorner(half_inch, half_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            ss.Arrange.SnapCorner(half_inch, half_inch, VA.Arrange.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionQuarterInch()
         {
-            // TODO: fix
-
             var ss = VisioPowerToolsAddIn.Client;
-            //ss.Layout.SnapCorner(quarter_inch, quarter_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            ss.Arrange.SnapCorner(quarter_inch, quarter_inch, VA.Arrange.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionEighthInch()
         {
-            // TODO: fix
-
             var ss = VisioPowerToolsAddIn.Client;
-            //ss.Layout.SnapCorner(eighth_inch, eighth_inch, VA.Layout.SnapCornerPosition.LowerLeft);
+            ss.Arrange.SnapCorner(eighth_inch, eighth_inch, VA.Arrange.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapPositionSixteenthInch()
         {
-            // TODO: fix
-
             var ss = VisioPowerToolsAddIn.Client;
-            //ss.Layout.SnapCorner(1.0 / 16.0, 1.0 / 16.0, VA.Layout.SnapCornerPosition.LowerLeft);
+            ss.Arrange.SnapCorner(1.0 / 16.0, 1.0 / 16.0, VA.Arrange.SnapCornerPosition.LowerLeft);
         }
 
         public static void CmdShapeSnapSizeOneInch()
