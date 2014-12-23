@@ -127,14 +127,16 @@ namespace VisioPowerTools
             }
 
             var format = VisioAutomation.Shapes.FormatCells.GetCells(shape);
-            var shapecolors = new ShapeFormatHelper.ShapeColors();
+            var cformat = VA.Text.CharacterCells.GetCells(shape);
 
+            var shapecolors = new ShapeFormatHelper.ShapeColors();
+            
             shapecolors.FillForegroundColor = format.FillForegnd;
             shapecolors.FillBackgroundColor = format.FillBkgnd;
             shapecolors.ShadowForegroundColor = format.ShdwForegnd;
             shapecolors.ShadowBackgroundColor = format.ShdwBkgnd;
             shapecolors.LineColor = format.LineColor;
-
+            shapecolors.CharacterColor = cformat[0].Color.Result;
             return shapecolors;
         }
 

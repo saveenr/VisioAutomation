@@ -77,7 +77,7 @@ namespace VisioPowerTools
             try
             {
                 VisioPowerToolsAddIn.g_clientcontext.OnWriteString += write_msg;
-                // TODO: fix
+                // TODO: fix refresh
                 //VisioAutomation.Scripting.DirectedGraph.DirectedGraphBuilder.RenderDiagrams(ss, drawings);
                 VisioPowerToolsAddIn.g_clientcontext.OnWriteString -= write_msg;
             }

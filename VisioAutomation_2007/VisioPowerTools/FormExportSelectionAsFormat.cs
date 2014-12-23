@@ -77,7 +77,7 @@ namespace VisioPowerTools
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {
-                // TODO: fix
+                // TODO: fix refresh
                 //ss.Export.ExportSelectionToXAML(filename);
             }
             else

@@ -41,7 +41,7 @@ namespace VisioAutomation.Scripting
             return output_string;
         }
 
-        internal static void set_text_wrapping(IVisio.Page page,
+        public static void set_text_wrapping(IVisio.Page page,
                                                IList<int> shapeids,
                                                bool wrap)
         {

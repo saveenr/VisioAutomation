@@ -3,7 +3,7 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    //TODO: Fix
+    //TODO: Fix refresh
     [SMA.Cmdlet("Resize", "VisioPage")]
     public class Resize_VisioPage : VisioCmdlet
     {
