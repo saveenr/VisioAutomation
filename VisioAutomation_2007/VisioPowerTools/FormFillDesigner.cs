@@ -47,9 +47,7 @@ namespace VisioPowerTools
 
             foreach (int shapeid in shapeids)
             {
-                // TODO: fix
-
-                //format.Apply(update, (short)shapeid);
+                update.SetFormulas((short)shapeid,format);
             }
 
             update.Execute(ss.VisioApplication.ActivePage);    

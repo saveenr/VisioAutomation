@@ -14,8 +14,6 @@
 
         private void buttonTextToBottom_Click(object sender, System.EventArgs e)
         {
-            // TODO: fix
-
             VisioPowerToolsAddIn.Client.Text.MoveTextToBottom(null);
         }
 
