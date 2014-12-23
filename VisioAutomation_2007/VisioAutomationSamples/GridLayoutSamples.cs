@@ -30,20 +30,22 @@ namespace VisioAutomationSamples
             const int num_rows = 5;
 
             var page = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            page.SetSize(10, 10);
+
+            var page_size = new VA.Drawing.Size(10, 10);
+            SampleEnvironment.SetPageSize(page,page_size);
 
             var stencil = SampleEnvironment.Application.Documents.OpenStencil("basic_u.vss");
             var master = stencil.Masters["Rectangle"];
 
-            var layout = new VA.Layout.Models.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
+            var layout = new VA.Models.Grid.GridLayout(num_cols, num_rows, new VA.Drawing.Size(1, 1), master);
             layout.Origin = new VA.Drawing.Point(0, 0);
             layout.CellSpacing = new VA.Drawing.Size(0, 0);
-            layout.RowDirection = VA.Layout.Models.Grid.RowDirection.BottomToTop;
+            layout.RowDirection = VA.Models.Grid.RowDirection.BottomToTop;
 
             layout.PerformLayout();
             layout.Render(page);
 
-            var fmtcells = new VA.Format.ShapeFormatCells();
+            var fmtcells = new VA.Shapes.FormatCells();
             int i = 0;
             var update = new VA.ShapeSheet.Update();
             foreach (var node in layout.Nodes)
@@ -54,12 +56,14 @@ namespace VisioAutomationSamples
                 fmtcells.FillForegnd = new VA.Drawing.ColorRGB(color).ToFormula();
                 fmtcells.LinePattern = 0;
                 fmtcells.LineWeight = 0;
-                fmtcells.Apply(update, shapeid);
+                update.SetFormulas(shapeid, fmtcells);
                 i++;
             }
 
             update.Execute(page);
-            page.ResizeToFitContents(1,1);
+
+            var bordersize = new VA.Drawing.Size(1,1);
+            page.ResizeToFitContents(bordersize);
         }
     }
 }

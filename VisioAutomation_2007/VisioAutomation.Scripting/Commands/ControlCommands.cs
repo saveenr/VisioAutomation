@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-using VisioAutomation.Extensions;
+using CTRLS=VisioAutomation.Shapes.Controls;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -8,45 +7,35 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ControlCommands : CommandSet
     {
-        public ControlCommands(Session session) :
-            base(session)
+        public ControlCommands(Client client) :
+            base(client)
         {
 
         }
 
-        public IList<int> Add()
+        public IList<int> Add(IList<IVisio.Shape> target_shapes, CTRLS.ControlCells ctrl)
         {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return null;
-            }
-
-            var ctrl = new VA.Controls.ControlCells();
-            var control_indices = Add(ctrl);
-
-            return control_indices;
-        }
-
-        public IList<int> Add(VA.Controls.ControlCells ctrl)
-        {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return null;
-            }
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (ctrl == null)
             {
                 throw new System.ArgumentNullException("ctrl");
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return new List<int>(0);
+            }
+
+
             var control_indices = new List<int>();
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Add Control"))
             {
                 foreach (var shape in shapes)
                 {
-                    int ci = VA.Controls.ControlHelper.AddControl(shape, ctrl);
+                    int ci = CTRLS.ControlHelper.Add(shape, ctrl);
                     control_indices.Add(ci);
                 }
             }
@@ -54,38 +43,41 @@ namespace VisioAutomation.Scripting.Commands
             return control_indices;
         }
 
-        public void Delete(int n)
+        public void Delete(IList<IVisio.Shape> target_shapes, int n)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Delete Control"))
             {
                 foreach (var shape in shapes)
                 {
-                    VA.Controls.ControlHelper.DeleteControl(shape, n);
+                    CTRLS.ControlHelper.Delete(shape, n);
                 }
             }
         }
 
-        public Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>> Get()
+        public Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+            
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
-                return new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>(0);
+                return new Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>>(0);
             }
 
-            var shapes = this.Session.Selection.EnumShapes().ToList();
-
-            var dic = new Dictionary<IVisio.Shape, IList<VA.Controls.ControlCells>>();
+            var dic = new Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>>();
             foreach (var shape in shapes)
             {
-                var controls = VA.Controls.ControlHelper.GetControls(shape);
+                var controls = CTRLS.ControlCells.GetCells(shape);
                 dic[shape] = controls;
             }
             return dic;

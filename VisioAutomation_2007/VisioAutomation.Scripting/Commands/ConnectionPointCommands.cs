@@ -1,58 +1,51 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
+using CONS = VisioAutomation.Shapes.Connections;
 
 namespace VisioAutomation.Scripting.Commands
 {
     public class ConnectionPointCommands : CommandSet
     {
-        public ConnectionPointCommands(Session session) :
-            base(session)
+        public ConnectionPointCommands(Client client) :
+            base(client)
         {
 
         }
-        /// <summary>
-        /// Retrieves the connection points for elected shapes
-        /// </summary>
-        /// <returns></returns>
-        public IDictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>> Get()
+
+        public IDictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            if (!this.Session.Selection.HasShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes(target_shapes);
+
+            if (shapes.Count<1)
             {
-                return new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
+                return new Dictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>>();
             }
 
-            var shapes = this.Session.Selection.GetShapes( VA.Selection.ShapesEnumeration.Flat);
-            var dic = new Dictionary<IVisio.Shape, IList<VA.Connections.ConnectionPointCells>>();
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            var dic = new Dictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>>();
+            foreach (var shape in shapes)
             {
-                foreach (var shape in shapes)
-                {
-                    var cp = VA.Connections.ConnectionPointHelper.GetConnectionPoints(shape);
-                    dic[shape] = cp;
-                }
+                var cp = CONS.ConnectionPointCells.GetCells(shape);
+                dic[shape] = cp;
             }
 
             return dic;
         }
 
-        /// <summary>
-        /// Adds a connection point to the selected shapes
-        /// </summary>
-        /// <param name="fx"></param>
-        /// <param name="fy"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public IList<int> Add(
+        public IList<int> Add( IList<IVisio.Shape> target_shapes, 
             string fx,
             string fy,
-            VA.Connections.ConnectionPointType type)
+            CONS.ConnectionPointType type)
         {
-            if (!this.Session.Selection.HasShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
             {
                 return new List<int>(0);
             }
@@ -60,24 +53,20 @@ namespace VisioAutomation.Scripting.Commands
             int dirx = 0;
             int diry = 0;
 
-            var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
-
             var indices = new List<int>(shapes.Count);
 
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Add Connection Point"))
             {
-                var cp = new VA.Connections.ConnectionPointCells();
+                var cp = new CONS.ConnectionPointCells();
                 cp.X = fx;
                 cp.Y = fy;
                 cp.DirX = dirx;
                 cp.DirY = diry;
-                cp.Type = (int) type;
+                cp.Type = (int)type;
 
                 foreach (var shape in shapes)
                 {
-
-                    int index = VA.Connections.ConnectionPointHelper.AddConnectionPoint(shape, cp);
+                    int index = CONS.ConnectionPointHelper.Add(shape, cp);
                     indices.Add(index);
                 }
             }
@@ -85,29 +74,35 @@ namespace VisioAutomation.Scripting.Commands
             return indices;
         }
 
-        /// <summary>
-        /// Deletes the connection point on the seleected shapes
-        /// </summary>
-        /// <param name="index"></param>
-        public void Delete(int index)
+
+        public IList<int> Add(
+            string fx,
+            string fy,
+            CONS.ConnectionPointType type)
         {
-            if (!this.Session.Selection.HasShapes())
+            this.AssertApplicationAvailable();
+
+            return this.Add(null, fx, fy, type);
+        }
+
+        public void Delete(List<IVisio.Shape> target_shapes0, int index)
+        {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes(target_shapes0);
+            if (shapes.Count < 1)
             {
                 return;
             }
 
-            var shapes = this.Session.Selection.GetShapes(VA.Selection.ShapesEnumeration.Flat);
+            var target_shapes = shapes.Where(shape => CONS.ConnectionPointHelper.GetCount(shape) > index);
 
-            var target_shapes = from shape in shapes
-                                where VA.Connections.ConnectionPointHelper.GetConnectionPointCount(shape) > index
-                                select shape;
-
-            var application = this.Session.VisioApplication;
-            using (var undoscope = application.CreateUndoScope())
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Delete Connection Point"))
             {
                 foreach (var shape in target_shapes)
                 {
-                    VA.Connections.ConnectionPointHelper.DeleteConnectionPoint(shape, index);
+                    CONS.ConnectionPointHelper.Delete(shape, index);
                 }
             }
         }

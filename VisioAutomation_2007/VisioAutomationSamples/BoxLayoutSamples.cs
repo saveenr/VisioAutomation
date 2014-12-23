@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
 using System.Collections.Generic;
-using BoxL = VisioAutomation.Layout.Models.BoxLayout;
+using BoxL = VisioAutomation.Models.BoxLayout;
 
 namespace VisioAutomationSamples
 {
@@ -42,7 +42,7 @@ namespace VisioAutomationSamples
 
             var sampletext = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" +
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
-            var samplechars = sampletext.Select(c => new string(new char[] {c})).ToList();
+            var samplechars = sampletext.Select(c => new string(new[] {c})).ToList();
 
             FontGlyphComparision(doc, fontnames, samplechars);
             FontGlyphComparision2(doc, fontnames, samplechars);
@@ -67,7 +67,7 @@ namespace VisioAutomationSamples
             fontname_cells.LinePattern = 0;
             fontname_cells.LineWeight = 0.0;
             fontname_cells.ParaHorizontalAlign = 0;
-            fontname_cells.CharSize = VA.Convert.PointsToInches(36.0);
+            fontname_cells.CharSize = "36pt";
 
             var charbox_cells = new VA.DOM.ShapeCells();
             charbox_cells.FillPattern = 0;
@@ -75,7 +75,7 @@ namespace VisioAutomationSamples
             charbox_cells.LineWeight = 0.0;
             charbox_cells.LineColor = "rgb(150,150,150)";
             charbox_cells.ParaHorizontalAlign = 1;
-            charbox_cells.CharSize = VA.Convert.PointsToInches(24.0);
+            charbox_cells.CharSize = "24pt";
 
             foreach (string fontname in fontnames)
             {
@@ -136,7 +136,7 @@ namespace VisioAutomationSamples
                     continue;
                 }
 
-                var dom_shape = domshapescol.Drop("Rectangle", "basic_u.vss", node.Rectangle);
+                var shape_node = domshapescol.Drop("Rectangle", "basic_u.vss", node.Rectangle);
        
                 var cells = node_data.Cells;
                 if (cells == null)
@@ -150,15 +150,17 @@ namespace VisioAutomationSamples
 
                 if (node_data.Font != null)
                 {
-                    dom_shape.CharFontName = node_data.Font;
+                    shape_node.CharFontName = node_data.Font;
                 }
 
-                dom_shape.Cells = cells;
-                dom_shape.Text = new VA.Text.Markup.TextElement( node_data.Text );
+                shape_node.Cells = cells;
+                shape_node.Text = new VA.Text.Markup.TextElement( node_data.Text );
             }
 
             domshapescol.Render(page);
-            page.ResizeToFitContents(0.5, 0.5);
+
+            var bordersize = new VA.Drawing.Size(0.5, 0.5);
+            page.ResizeToFitContents(bordersize);
         }
 
         public static void FontGlyphComparision2(IVisio.Document doc, string[] fontnames, List<string> samplechars)
@@ -185,7 +187,7 @@ namespace VisioAutomationSamples
                     n1.Cells.FillForegnd = "rgb(255,255,255)";
                     n1.Cells.LineWeight = 0.0;
                     n1.Cells.LinePattern = 0;
-                    n1.Cells.CharSize = VA.Convert.PointsToInches(16);
+                    n1.Cells.CharSize = "16pt";
                 }
 
 
@@ -207,7 +209,7 @@ namespace VisioAutomationSamples
                             // empty
                         }
                         n1.CharFontName = fontnames[j];
-                        n1.Cells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.Cells.CharSize = "36pt";
                         n1.Cells.FillForegnd = "rgb(255,255,255)";
                         n1.Cells.LineWeight = 0.0;
                         n1.Cells.LinePattern = 0;
@@ -216,7 +218,9 @@ namespace VisioAutomationSamples
 
                 var page = doc.Pages.Add();
                 domshapescol.Render(page);
-                page.ResizeToFitContents(0.5, 0.5);
+
+                var bordersize = new VA.Drawing.Size(0.5, 0.5);
+                page.ResizeToFitContents(bordersize);
             }
         }
 
@@ -247,15 +251,18 @@ namespace VisioAutomationSamples
                         if (i < chunk.Count)
                         {
                             n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
+                            n1.Text.CharacterCells.Color = colors[j];
+
                         }
                         else
                         {
                             // empty
                         }
                         n1.CharFontName = fontnames[j];
-                        n1.Cells.CharColor = colors[j];
+    
+                        //n1.Cells.CharColor = "=RGB(255,0,0)";// colors[j];
                         n1.Cells.CharTransparency = 0.7;
-                        n1.Cells.CharSize = VA.Convert.PointsToInches(36);
+                        n1.Cells.CharSize = "36pt";
                         n1.Cells.FillPattern = 0;
                         n1.Cells.LineWeight = 0.0;
                         n1.Cells.LinePattern = 0;
@@ -266,7 +273,8 @@ namespace VisioAutomationSamples
 
                 domshapescol.Render(page);
 
-                page.ResizeToFitContents(0.5, 0.5);
+                var bordersize = new VA.Drawing.Size(0.5, 0.5);
+                page.ResizeToFitContents(bordersize);
             }
         }
     }

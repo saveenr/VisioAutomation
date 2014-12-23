@@ -69,7 +69,7 @@ namespace VisioAutomation.Drawing
         {
             if (endangle < startangle)
             {
-                throw new System.ArgumentOutOfRangeException("endangle must be >= startangle");
+                throw new System.ArgumentOutOfRangeException("endangle", "endangle must be >= startangle");
             }
 
             double min_angle = 0;

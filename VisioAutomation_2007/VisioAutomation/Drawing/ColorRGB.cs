@@ -3,7 +3,6 @@ using VA = VisioAutomation;
 
 namespace VisioAutomation.Drawing
 {
-    [System.Diagnostics.DebuggerDisplay("rgb({_r},{_g},{_b})")]
     public struct ColorRGB
     {
         private readonly byte _r;
@@ -212,7 +211,7 @@ namespace VisioAutomation.Drawing
                 return null;
             }
 
-            int current_color = 0;
+            int current_color;
             bool result = System.Int32.TryParse(webcolor, System.Globalization.NumberStyles.HexNumber, null, out current_color);
 
             if (!result)
@@ -246,7 +245,8 @@ namespace VisioAutomation.Drawing
 
         public string ToFormula()
         {
-            return VisioAutomation.Convert.ColorToFormulaRGB(this);
-        }
+            string formula = System.String.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
+            return formula;
+        }        
     }
 }

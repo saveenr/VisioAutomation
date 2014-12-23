@@ -4,59 +4,39 @@ using VisioAutomation.Extensions;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-
 namespace VisioAutomation.Selection
 {
     public static class SelectionHelper
     {
-        /// <summary>
-        /// Selects a series of shapes and groups them into one shape
-        /// </summary>
-        /// <param name="window"></param>
-        /// <param name="shapes"></param>
-        /// <returns></returns>
-        public static IVisio.Shape SelectAndGroup(IVisio.Window window, IEnumerable<IVisio.Shape> shapes)
+        public static IList<IVisio.Shape> GetSelectedShapes(IVisio.Selection selection)
         {
-            if (window == null)
+            if (selection.Count < 1)
             {
-                throw new System.ArgumentNullException("window");
+                return new List<IVisio.Shape>(0);
             }
-
-            if (shapes == null)
-            {
-                throw new System.ArgumentNullException("shapes");
-            }
-
-            var selectargs = IVisio.VisSelectArgs.visSelect;
-            window.Select(shapes, selectargs);
-            var selection = window.Selection;
-            var group = selection.Group();
-            return group;
+            
+            var sel_shapes = selection.AsEnumerable();
+            var shapes = sel_shapes.ToList();
+            return shapes;
         }
 
-        public static IList<IVisio.Shape> GetSelectedShapes(IVisio.Selection selection, ShapesEnumeration enumerationtype)
+        public static IList<IVisio.Shape> GetSelectedShapesRecursive(IVisio.Selection selection)
         {
             if (selection.Count < 1)
             {
                 return new List<IVisio.Shape>(0);
             }
 
-            var shapes = selection.AsEnumerable();
-
-            if (enumerationtype == ShapesEnumeration.Flat)
+            var shapes = new List<IVisio.Shape>();
+            var sel_shapes = selection.AsEnumerable();
+            foreach (var shape in VA.Shapes.ShapeHelper.GetNestedShapes(sel_shapes))
             {
-                return shapes.ToList();
+                if (shape.Type != (short)IVisio.VisShapeTypes.visTypeGroup)
+                {
+                    shapes.Add(shape);
+                }
             }
-            
-            if (enumerationtype == ShapesEnumeration.ExpandGroups)
-            {
-                var shapes_in_groups = VA.ShapeHelper.GetNestedShapes(shapes)
-                    .Where(s => s.Type != (short) IVisio.VisShapeTypes.visTypeGroup)
-                    .ToList();
-                return shapes_in_groups;
-            }
-
-            throw new System.ArgumentOutOfRangeException("enumerationtype");
+            return shapes;
         }
 
         public static void SendShapes(IVisio.Selection selection, VA.Selection.ShapeSendDirection dir)

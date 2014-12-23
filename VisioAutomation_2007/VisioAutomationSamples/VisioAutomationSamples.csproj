@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="BoxLayoutShared.cs" />
     <Compile Include="BoxLayout2Samples.cs" />
+    <Compile Include="FormsSamples.cs" />
     <Compile Include="LinqUtil.cs" />
     <Compile Include="TreeLayoutSamples.cs" />
     <Compile Include="extensions.cs" />
@@ -184,7 +185,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet
     /// FormulaLiteral is used in those cases where you want a caller to provide an int, double, bool, or string value to be used as a formula
     /// In the case of string inputs, no special escaping of strings is performed. The caller must do any escaping.
     /// This struct allows you to have one method that takes multiple types as a parameter (via implicit conversion) and is
-    /// similar to the use of XName in System.Xml.Linq.
+    /// similar to the use of XName in SXL.
     /// 
     /// The value stored is always a string. Any input will be converted to a string.
     /// </summary>
@@ -55,15 +55,6 @@ namespace VisioAutomation.ShapeSheet
         public override string ToString()
         {
             return this.Value;
-        }
-
-        public string ToDisplayString()
-        {
-            if (this.HasValue)
-            {
-                return this.Value;
-            }
-            return "";
         }
 
         public string Encode()

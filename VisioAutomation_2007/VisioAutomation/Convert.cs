@@ -7,26 +7,6 @@ namespace VisioAutomation
         private const string quote = "\"";
         private const string quotequote = "\"\"";
 
-        public static double PointsToInches(double points)
-        {
-            return points / 72.0;
-        }
-
-        public static double InchestoPoints(double inches)
-        {
-            return inches * 72;
-        }
-
-        public static double DegreesToRadians(double degrees)
-        {
-            return (System.Math.PI / 180) * degrees;
-        }
-
-        public static double RadiansToDegrees(double radians)
-        {
-            return (180 / System.Math.PI) * radians;
-        }
-
         public static short BoolToShort(bool b)
         {
             return b ? ((short)1) : ((short)0);
@@ -66,6 +46,16 @@ namespace VisioAutomation
                 throw new System.ArgumentNullException("s");
             }
 
+            if (s.Length == 0)
+            {
+                return s;
+            }
+
+            if (s.StartsWith("="))
+            {
+                return s;
+            }
+
             string result = System.String.Format("\"{0}\"", s.Replace(quote, quotequote));
             return result;
         }
@@ -95,80 +85,12 @@ namespace VisioAutomation
             return output_string;
         }
 
-        public static string SmartStringToFormulaString(VA.ShapeSheet.FormulaLiteral formula)
+        public static ShapeSheet.FormulaLiteral ColorToFormulaRGB(System.Drawing.Color color)
         {
-            if (!formula.HasValue)
-            {
-                return null;
-            }
-
-            if (formula.Value.Length == 0)
-            {
-                return VA.Convert.StringToFormulaString(formula.Value);
-            }
-
-            if (formula.Value[0] != '\"')
-            {
-                return VA.Convert.StringToFormulaString(formula.Value);
-            }
-
-            return formula.Value;
-        }
-
-        public static string ColorToFormulaRGB(System.Drawing.Color color)
-        {
-            return ColorToFormulaRGB(color.R, color.G, color.B);
-        }
-
-        public static string ColorToFormulaRGB(VA.Drawing.ColorRGB color)
-        {
-            return ColorToFormulaRGB(color.R, color.G, color.B);
-        }
-
-        public static string ColorToFormulaRGB(int color)
-        {
-            var c = new VA.Drawing.ColorRGB(color);
-            return ColorToFormulaRGB(c);
-        }
-
-        public static string ColorToFormulaRGB(byte r, byte g, byte b)
-        {
-            string formula = System.String.Format("RGB({0},{1},{2})", r, g, b);
+            // TODO: Fix remove this
+            string formula = System.String.Format("RGB({0},{1},{2})", color.R, color.G, color.B);
             return formula;
-        }
-
-        public static string ColorToFormulaHSL(byte h, byte s, byte l)
-        {
-            string formula = System.String.Format("HSL({0},{1},{2})", h, s, l);
-            return formula;
-        }
-
-        internal static void CheckValidVisioHSL(byte h, byte s, byte l)
-        {
-            if (h < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("h", "h must be >=0");
-            }
-            if (s < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("s", "s must be >=0");
-            }
-            if (l < 0)
-            {
-                throw new System.ArgumentOutOfRangeException("l", "l must be >=0");
-            }
-            if (h > 255)
-            {
-                throw new System.ArgumentOutOfRangeException("h", "h must be <=255");
-            }
-            if (s > 240)
-            {
-                throw new System.ArgumentOutOfRangeException("s", "s must be <=240");
-            }
-            if (l > 240)
-            {
-                throw new System.ArgumentOutOfRangeException("l", "l must be <=240");
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

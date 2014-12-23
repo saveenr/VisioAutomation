@@ -1,6 +1,4 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -10,7 +8,7 @@ namespace TestVisioAutomation
     public class TextFormat_Tests : VisioAutomationTest
     {
         [TestMethod]
-        public void SetTabStops()
+        public void Text_TabStops_Set()
         {
             var no_tab_stops = new VA.Text.TabStop[] { };
             var tabstops = new[]

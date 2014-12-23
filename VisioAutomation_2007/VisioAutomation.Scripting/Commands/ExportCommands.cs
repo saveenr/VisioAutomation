@@ -8,66 +8,79 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ExportCommands : CommandSet
     {
-        public ExportCommands(Session session) :
-            base(session)
+        public ExportCommands(Client client) :
+            base(client)
         {
 
         }
 
-        public void ExportPageToFile(string filename)
+        public void PageToFile(string filename)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Client.HasSelectedShapes())
             {
+                this.Client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var old_selection = this.Session.Selection.EnumShapes().ToList();
+            var old_selection = this.Client.Selection.GetShapes();
 
-            this.Session.Selection.SelectNone();
-            var application = this.Session.VisioApplication;
+            this.Client.Selection.None();
+            var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
             active_page.Export(filename);
             var active_window = application.ActiveWindow;
             active_window.Select(old_selection, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void ExportSelectionToFile(string filename)
+        public void SelectionToFile(string filename)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Client.HasSelectedShapes())
             {
+                this.Client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var selection = this.Session.Selection.Get();
+            var selection = this.Client.Selection.Get();
             selection.Export(filename);
         }
 
-        public void ExportPagesToFiles(string filename)
+        public void PagesToFiles(string filename)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
             }
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var old_page = application.ActivePage;
             var active_document = application.ActiveDocument;
+            var active_window = application.ActiveWindow;
+
             var pages = active_document.Pages.AsEnumerable().ToList();
             var pbase = System.IO.Path.GetDirectoryName(filename);
 
             if (!System.IO.Directory.Exists(pbase))
             {
-                this.Session.Write(OutputStream.Error, " Folder {0} does not exist", pbase);
+                this.Client.WriteError( " Folder {0} does not exist", pbase);
                 return;
             }
             var ext = System.IO.Path.GetExtension(filename);
@@ -84,49 +97,40 @@ namespace VisioAutomation.Scripting.Commands
                     string page_filname = System.String.Format("{0}_{1}_{2}{3}{4}", fbase, page_index, page.Name,
                                                                bkgnd, ext);
 
-                    this.Session.Write(OutputStream.User, "file {0}", page_filname);
+                    this.Client.WriteUser( "file {0}", page_filname);
                     page_filname = System.IO.Path.Combine(pbase, page_filname);
-                    page.Activate();
-                    this.Session.Selection.SelectNone();
+                    active_window.Page = page;
+                    this.Client.Selection.None();
                     page.Export(page_filname);
                 }
-            old_page.Activate();
+            active_window.Page = old_page;
         }
 
-        public void ExportSelectionToXAML(string filename)
+        public void SelectionToSVGXHTML(string filename)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (filename == null)
             {
                 throw new System.ArgumentNullException("filename");
             }
 
-            if (!this.Session.HasSelectedShapes())
+            if (!this.Client.HasSelectedShapes())
             {
+                this.Client.WriteVerbose("No selected shapes. Not exporting.");
                 return;
             }
 
-            var selection = this.Session.Selection.Get();
-            ExportSelectionAsXAML2(this.Session.Selection.Get(), filename, s => this.Session.Output.Write(OutputStream.Verbose, s));
+            var selection = this.Client.Selection.Get();
+            SelectionToSVGXHTML(this.Client.Selection.Get(), filename, s => this.Client.WriteVerbose( s));
         }
 
-        public void ExportSelectionToSVGXHTML(string filename)
+        private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
         {
-            if (filename == null)
-            {
-                throw new System.ArgumentNullException("filename");
-            }
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
-            if (!this.Session.HasSelectedShapes())
-            {
-                return;
-            }
-
-            var selection = this.Session.Selection.Get();
-            ExportSelectionAsSVGXHTML2(this.Session.Selection.Get(), filename, s => this.Session.Write(OutputStream.Verbose, s));
-        }
-
-        public static void ExportSelectionAsSVGXHTML2(IVisio.Selection selection, string filename, System.Action<string> verboselog)
-        {
             // Save temp SVG
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
             selection.Export(svg_filename);
@@ -171,60 +175,143 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
+
+
+
+        public void ExportSelectionToXAML(string filename)
+        {
+
+            if (filename == null)
+            {
+
+                throw new System.ArgumentNullException("filename");
+
+            }
+
+
+
+            if (!this.Client.HasSelectedShapes())
+            {
+
+                return;
+
+            }
+
+
+
+            var selection = this.Client.Selection.Get();
+
+            ExportSelectionAsXAML2(this.Client.Selection.Get(), filename, s => this.Client.Output.WriteVerbose(s));
+
+        }
+
+
+
+
+
+
         public static void ExportSelectionAsXAML2(IVisio.Selection sel, string filename, System.Action<string> verboselog)
         {
+
             // Save temp SVG
+
             string svg_filename = System.IO.Path.GetTempFileName() + "_temp.svg";
+
             sel.Export(svg_filename);
 
+
+
             // Load temp SVG
+
             var load_svg_timer = new System.Diagnostics.Stopwatch();
+
             string input_svg_content = System.IO.File.ReadAllText(svg_filename);
+
             load_svg_timer.Stop();
+
             verboselog(string.Format("Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds));
 
+
+
             // Delete temp SVG
+
             if (System.IO.File.Exists(svg_filename))
             {
+
                 System.IO.File.Delete(svg_filename);
-            }
-            else
-            {
-                //TODO: Throw an Exception
+
             }
 
+            else
+            {
+
+                //TODO: Throw an Exception
+
+            }
+
+
+
             verboselog(string.Format("Creating XHTML with embedded SVG"));
+
             var s = svg_filename;
+
+
 
             if (System.IO.File.Exists(filename))
             {
+
                 verboselog(string.Format("Deleting \"{0}\"", filename));
+
                 System.IO.File.Delete(filename);
+
             }
+
+
 
             verboselog(string.Format("Converting to XAML ..."));
+
             var convert_timer = new System.Diagnostics.Stopwatch();
 
+
+
             string xaml;
+
             try
             {
+
                 xaml = XamlTuneConverter.Svg2Xaml.ConvertFromSVG(input_svg_content);
+
             }
+
             catch (System.Exception e)
             {
+
                 string msg = System.String.Format("Failed to convert to XAML \"{0}\"", e.Message + e.StackTrace);
+
                 verboselog(msg);
+
                 return;
+
             }
+
             convert_timer.Stop();
 
+
+
             verboselog(string.Format("Writing XAML File"));
+
             System.IO.File.WriteAllText(filename, xaml);
+
             verboselog(string.Format("Finished writing XAML File"));
 
+
+
             verboselog(string.Format("Finished XAML export ({0} seconds)", convert_timer.Elapsed.TotalSeconds));
+
         }
+
+ 
+
 
     }
 }
-

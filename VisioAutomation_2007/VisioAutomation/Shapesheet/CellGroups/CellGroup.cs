@@ -1,4 +1,3 @@
-using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
@@ -6,33 +5,47 @@ using System.Collections.Generic;
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
-    {       
-        protected abstract void ApplyFormulas(ApplyFormula func);
-
-        public void Apply(VA.ShapeSheet.Update update, short shapeid)
+    {
+        private static void check_query(VA.ShapeSheet.Query.CellQuery query)
         {
-            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(shapeid, src, f));
+            if (query.Columns.Count < 1)
+            {
+                throw new VA.AutomationException("Query must contain at least 1 Column");
+            }
+
+            if (query.Sections.Count != 0)
+            {
+                throw new VA.AutomationException("Query should not contain contain any sections");
+            }
         }
 
-        public void Apply(VA.ShapeSheet.Update update)
+        protected static IList<T> _GetCells<T, RT>(
+            IVisio.Page page, IList<int> shapeids,
+            VA.ShapeSheet.Query.CellQuery query,
+            RowToObject<T, RT> row_to_object)
         {
-            this.ApplyFormulas((src, f) => update.SetFormulaIgnoreNull(src, f));
+            check_query(query);
+
+            var data_for_shapes = query.GetFormulasAndResults<RT>( new VA.Drawing.DrawingSurface(page), shapeids);
+            var list = new List<T>(shapeids.Count);
+            foreach (var data_for_shape in data_for_shapes)
+            {
+                var cells = row_to_object(data_for_shape.Cells);
+                list.Add(cells);
+            }
+            return list;
         }
 
-        protected static IList<TObj> CellsFromRows<TQuery, TObj>(IVisio.Page page, IList<int> shapeids, TQuery query, RowToCells<TQuery, TObj> row_to_cells_func) where TQuery : VA.ShapeSheet.Query.CellQuery
+        protected static T _GetCells<T, RT>(
+            IVisio.Shape shape,
+            VA.ShapeSheet.Query.CellQuery query,
+            RowToObject<T, RT> row_to_object)
         {
-            var table = query.GetFormulasAndResults<double>(page, shapeids);
-            var cells = table.Select(r => row_to_cells_func(query, r));
-            var cells_list = new List<TObj>(table.RowCount);
-            cells_list.AddRange(cells);
-            return cells_list;
-        }
+            check_query(query);
 
-        protected static TObj CellsFromRow<TQuery, TObj>(IVisio.Shape shape, TQuery query, RowToCells<TQuery, TObj> row_to_obj_func) where TQuery : VA.ShapeSheet.Query.CellQuery
-        {
-            var table = query.GetFormulasAndResults<double>(shape);
-            var tablerow = table[0];
-            return row_to_obj_func(query, tablerow);
+            var data_for_shape = query.GetFormulasAndResults<RT>(shape);
+            var cells = row_to_object(data_for_shape.Cells);
+            return cells;
         }
     }
 }

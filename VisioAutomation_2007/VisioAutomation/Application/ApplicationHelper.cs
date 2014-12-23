@@ -1,3 +1,4 @@
+using System;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
@@ -15,7 +16,27 @@ namespace VisioAutomation.Application
         public static IVisio.Application FindRunningApplication()
         {
             const string progid = VA.Internal.Constants.VisioApplication_ProgID;
-            return VA.Internal.Interop.COMInterop.FindActiveObjectTyped<IVisio.Application>(progid);
+            object o = null;
+
+            try
+            {
+                o = System.Runtime.InteropServices.Marshal.GetActiveObject(progid);
+
+            }
+            catch (System.Runtime.InteropServices.COMException exc)
+            {
+                // if you are wondering why the conversion to uint is needed below
+                // http://stackoverflow.com/questions/1426147/catching-comexception-specific-error-code
+
+                const uint MK_E_UNAVAILABLE = 0x800401E3;
+                if (((uint)exc.ErrorCode) == MK_E_UNAVAILABLE) // MK_E_UNAVAILABLE
+                {
+                    return null;
+                }
+            }
+
+            var app = (IVisio.Application) o;
+            return app;
         }
 
         public static void Quit(IVisio.Application app, bool force_close)

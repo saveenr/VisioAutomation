@@ -2,49 +2,18 @@ using System;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 using System.Linq;
 
 namespace VisioAutomation.Text
 {
     public class TextFormat
     {
-        private IList<CharacterFormatCells> _characterFormats;
-        private IList<ParagraphFormatCells> _paragraphFormats;
-        private TextBlockFormatCells _textBlocks;
-        private IList<TextRun> _characterTextRuns;
-        private IList<TextRun> _paragraphTextRuns;
-        private IList<TabStop> _tabStops;
-
-        public IList<CharacterFormatCells> CharacterFormats
-        {
-            get { return _characterFormats; }
-        }
-
-        public IList<ParagraphFormatCells> ParagraphFormats
-        {
-            get { return _paragraphFormats; }
-        }
-
-        public TextBlockFormatCells TextBlocks
-        {
-            get { return _textBlocks; }
-        }
-
-        public IList<TextRun> CharacterTextRuns
-        {
-            get { return _characterTextRuns; }
-        }
-
-        public IList<TextRun> ParagraphTextRuns
-        {
-            get { return _paragraphTextRuns; }
-        }
-
-        public IList<TabStop> TabStops
-        {
-            get { return _tabStops; }
-        }
+        public IList<CharacterCells> CharacterFormats { get; private set; }
+        public IList<ParagraphCells> ParagraphFormats { get; private set; }
+        public TextCells TextBlock { get; private set; }
+        public IList<TextRun> CharacterTextRuns { get; private set; }
+        public IList<TextRun> ParagraphTextRuns { get; private set; }
+        public IList<TabStop> TabStops { get; private set; }
 
         private static IList<TextRun> GetTextRuns(
             IVisio.Shape shape,
@@ -62,7 +31,6 @@ namespace VisioAutomation.Text
             // Get the Characters object representing the shape text
             var chars = shape.Characters;
             int num_chars = chars.CharCount;
-            int run_begin = 0;
             int run_end = 1;
 
             int index = 0;
@@ -75,7 +43,7 @@ namespace VisioAutomation.Text
                 chars.End = c + 1;
 
                 // Get the beginning and end of this character run
-                run_begin = chars.RunBegin[(short)runtype];
+                int run_begin = chars.RunBegin[(short)runtype];
                 run_end = chars.RunEnd[(short)runtype];
 
                 // Set the begin and end of the Characters object to this run
@@ -100,7 +68,7 @@ namespace VisioAutomation.Text
         }
 
         private static readonly VA.ShapeSheet.SRC src_tabstopcount = VA.ShapeSheet.SRCConstants.Tabs_StopCount;
-        private static readonly short unitcode_nocast = (short)IVisio.VisUnitCodes.visNoCast;
+        private static readonly short unitcode_number = (short)IVisio.VisUnitCodes.visNumber;
         private const short tab_section = (short)IVisio.VisSectionIndices.visSectionTab;
 
         private static IList<TabStop> GetTabStops(IVisio.Shape shape)
@@ -134,9 +102,12 @@ namespace VisioAutomation.Text
                 srcs.Add(src_tabother);
             }
 
+            var surface = new VA.Drawing.DrawingSurface(shape);
+
+
             var stream = VA.ShapeSheet.SRC.ToStream(srcs);
-            var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNoCast).ToList();
-            var results = VA.ShapeSheet.ShapeSheetHelper.GetResults<double>(shape, stream, unitcodes);
+            var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
+            var results = surface.GetResults_3<double>(stream, unitcodes);
 
             var stops_list = new List<TabStop>(num_stops);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
@@ -234,9 +205,9 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException("shape");
             }
 
-            var tcell = shape.GetCell(src_tabstopcount);
+            var cell_tabstopcount = shape.CellsSRC[src_tabstopcount.Section, src_tabstopcount.Row, src_tabstopcount.Cell];
             const short rounding = 0;
-            return tcell.ResultInt[unitcode_nocast, rounding];
+            return cell_tabstopcount.ResultInt[unitcode_number, rounding];
         }
 
         /// <summary>
@@ -257,7 +228,7 @@ namespace VisioAutomation.Text
                 return;
             }
 
-            var cell_tabstopcount = shape.GetCell(src_tabstopcount);
+            var cell_tabstopcount = shape.CellsSRC[src_tabstopcount.Section, src_tabstopcount.Row, src_tabstopcount.Cell];
             cell_tabstopcount.FormulaForce = "0";
 
             const string formula = "0";
@@ -275,36 +246,36 @@ namespace VisioAutomation.Text
 
         public static TextFormat GetFormat(IVisio.Shape shape)
         {
-            var textfmt = new TextFormat();
-            textfmt._characterFormats = VA.Text.CharacterFormatCells.GetCells(shape);
-            textfmt._paragraphFormats = VA.Text.ParagraphFormatCells.GetCells(shape);
-            textfmt._textBlocks = VA.Text.TextBlockFormatCells.GetCells(shape);
-            textfmt._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            textfmt._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
-            textfmt._tabStops = VA.Text.TextFormat.GetTabStops(shape);
-            return textfmt;
+            var cells = new TextFormat();
+            cells.CharacterFormats = VA.Text.CharacterCells.GetCells(shape);
+            cells.ParagraphFormats = VA.Text.ParagraphCells.GetCells(shape);
+            cells.TextBlock = VA.Text.TextCells.GetCells(shape);
+            cells.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            cells.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            cells.TabStops = VA.Text.TextFormat.GetTabStops(shape);
+            return cells;
         }
 
         public static IList<TextFormat> GetFormat(IVisio.Page page, IList<int> shapeids)
         {
-            var charcells = VA.Text.CharacterFormatCells.GetCells(page, shapeids);
-            var paracells = VA.Text.ParagraphFormatCells.GetCells(page, shapeids);
-            var textblockcells = VA.Text.TextBlockFormatCells.GetCells(page, shapeids);
+            var charcells = VA.Text.CharacterCells.GetCells(page, shapeids);
+            var paracells = VA.Text.ParagraphCells.GetCells(page, shapeids);
+            var textblockcells = VA.Text.TextCells.GetCells(page, shapeids);
             var page_shapes = page.Shapes;
             var l = new List<TextFormat>(shapeids.Count);
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var t = new TextFormat();
-                t._characterFormats = charcells[i];
-                t._paragraphFormats = paracells[i];
-                t._textBlocks = textblockcells[i];
+                t.CharacterFormats = charcells[i];
+                t.ParagraphFormats = paracells[i];
+                t.TextBlock = textblockcells[i];
                 l.Add(t);
 
-                var shape = page_shapes.get_ItemFromID(shapeids[i]);
-                t._characterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-                t._paragraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+                var shape = page_shapes.ItemFromID[shapeids[i]];
+                t.CharacterTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                t.ParagraphTextRuns = VA.Text.TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
-                t._tabStops = VA.Text.TextFormat.GetTabStops(shape);
+                t.TabStops = VA.Text.TextFormat.GetTabStops(shape);
             }
 
             return l;

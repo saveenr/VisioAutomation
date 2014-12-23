@@ -1,4 +1,5 @@
 using VA=VisioAutomation;
+using SXL = System.Xml.Linq;
 
 namespace VisioAutomation.Scripting.DirectedGraph
 {
@@ -8,13 +9,13 @@ namespace VisioAutomation.Scripting.DirectedGraph
         public string Label;
         public string From;
         public string To;
-        public System.Xml.Linq.XElement Element;
+        public SXL.XElement Element;
 
-        public static ConnectorInfo FromXml(Session scriptingsession, System.Xml.Linq.XElement shape_el)
+        public static ConnectorInfo FromXml(Client client, SXL.XElement shape_el)
         {
             var info = new ConnectorInfo();
             info.ID = shape_el.Attribute("id").Value;
-            scriptingsession.Write(VA.Scripting.OutputStream.Verbose,"Reading connector id={0}", info.ID);
+            client.WriteVerbose("Reading connector id={0}", info.ID);
 
             info.Label = shape_el.Attribute("label").Value;
             info.From = shape_el.Attribute("from").Value;

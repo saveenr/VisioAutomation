@@ -31,29 +31,29 @@ namespace VisioAutomation.Text.Markup
 
         internal void ApplyFormulas(VA.ShapeSheet.Update update, short row)
         {
-            update.SetFormulaIgnoreNull(SRCCON.Char_Color.ForRow(row), this.Color);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Font.ForRow(row), this.Font);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Size.ForRow(row), this.Size);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Style.ForRow(row), this.Style);
-            update.SetFormulaIgnoreNull(SRCCON.Char_ColorTrans.ForRow(row), this.Transparency);
-            update.SetFormulaIgnoreNull(SRCCON.Char_AsianFont.ForRow(row), this.AsianFont);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Case.ForRow(row), this.Case);
-            update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptFont.ForRow(row), this.ComplexScriptFont);
-            update.SetFormulaIgnoreNull(SRCCON.Char_ComplexScriptSize.ForRow(row), this.ComplexScriptSize);
-            update.SetFormulaIgnoreNull(SRCCON.Char_DblUnderline.ForRow(row), this.DoubleUnderline);
-            update.SetFormulaIgnoreNull(SRCCON.Char_DoubleStrikethrough.ForRow(row), this.DoubleStrikeThrough);
-            update.SetFormulaIgnoreNull(SRCCON.Char_LangID.ForRow(row), this.LangID);
-            update.SetFormulaIgnoreNull(SRCCON.Char_FontScale.ForRow(row), this.FontScale);
-            update.SetFormulaIgnoreNull(SRCCON.Char_LangID.ForRow(row), this.LangID);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Letterspace.ForRow(row), this.Letterspace);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Locale.ForRow(row), this.Locale);
-            update.SetFormulaIgnoreNull(SRCCON.Char_LocalizeFont.ForRow(row), this.LocalizeFont);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Overline.ForRow(row), this.Overline);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Perpendicular.ForRow(row), this.Perpendicular);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Pos.ForRow(row), this.Pos);
-            update.SetFormulaIgnoreNull(SRCCON.Char_RTLText.ForRow(row), this.RTLText);
-            update.SetFormulaIgnoreNull(SRCCON.Char_Strikethru.ForRow(row), this.Strikethru);
-            update.SetFormulaIgnoreNull(SRCCON.Char_UseVertical.ForRow(row), this.UseVertical);
+            update.SetFormulaIgnoreNull(SRCCON.CharColor.ForRow(row), this.Color);
+            update.SetFormulaIgnoreNull(SRCCON.CharFont.ForRow(row), this.Font);
+            update.SetFormulaIgnoreNull(SRCCON.CharSize.ForRow(row), this.Size);
+            update.SetFormulaIgnoreNull(SRCCON.CharStyle.ForRow(row), this.Style);
+            update.SetFormulaIgnoreNull(SRCCON.CharColorTrans.ForRow(row), this.Transparency);
+            update.SetFormulaIgnoreNull(SRCCON.CharAsianFont.ForRow(row), this.AsianFont);
+            update.SetFormulaIgnoreNull(SRCCON.CharCase.ForRow(row), this.Case);
+            update.SetFormulaIgnoreNull(SRCCON.CharComplexScriptFont.ForRow(row), this.ComplexScriptFont);
+            update.SetFormulaIgnoreNull(SRCCON.CharComplexScriptSize.ForRow(row), this.ComplexScriptSize);
+            update.SetFormulaIgnoreNull(SRCCON.CharDblUnderline.ForRow(row), this.DoubleUnderline);
+            update.SetFormulaIgnoreNull(SRCCON.CharDoubleStrikethrough.ForRow(row), this.DoubleStrikeThrough);
+            update.SetFormulaIgnoreNull(SRCCON.CharLangID.ForRow(row), this.LangID);
+            update.SetFormulaIgnoreNull(SRCCON.CharFontScale.ForRow(row), this.FontScale);
+            update.SetFormulaIgnoreNull(SRCCON.CharLangID.ForRow(row), this.LangID);
+            update.SetFormulaIgnoreNull(SRCCON.CharLetterspace.ForRow(row), this.Letterspace);
+            update.SetFormulaIgnoreNull(SRCCON.CharLocale.ForRow(row), this.Locale);
+            update.SetFormulaIgnoreNull(SRCCON.CharLocalizeFont.ForRow(row), this.LocalizeFont);
+            update.SetFormulaIgnoreNull(SRCCON.CharOverline.ForRow(row), this.Overline);
+            update.SetFormulaIgnoreNull(SRCCON.CharPerpendicular.ForRow(row), this.Perpendicular);
+            update.SetFormulaIgnoreNull(SRCCON.CharPos.ForRow(row), this.Pos);
+            update.SetFormulaIgnoreNull(SRCCON.CharRTLText.ForRow(row), this.RTLText);
+            update.SetFormulaIgnoreNull(SRCCON.CharStrikethru.ForRow(row), this.Strikethru);
+            update.SetFormulaIgnoreNull(SRCCON.CharUseVertical.ForRow(row), this.UseVertical);
         }
 
         public void ApplyFormulasTo(CharacterCells other)

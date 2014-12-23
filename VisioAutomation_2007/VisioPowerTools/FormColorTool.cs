@@ -4,6 +4,17 @@ using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Linq;
 
+namespace VisioAutomation.Extensions
+{
+    public static class ColorMethods
+    {
+        public static VA.Drawing.ColorRGB ToColorRGB(this IVisio.Color color)
+        {
+            return new VA.Drawing.ColorRGB(color.Red, color.Green, color.Blue);
+        }
+    }
+}
+
 namespace VisioPowerTools
 {
     public partial class FormColorTool : Form
@@ -32,7 +43,7 @@ namespace VisioPowerTools
             public ColorItem ShadowForegroundColor = new ColorItem("Shadow Foreground",
                                                                    VA.ShapeSheet.SRCConstants.ShdwForegnd);
 
-            public ColorItem Character = new ColorItem("Character", VA.ShapeSheet.SRCConstants.Char_Color);
+            public ColorItem Character = new ColorItem("Character", VA.ShapeSheet.SRCConstants.CharColor);
         }
 
         public ColorCells Colors = new ColorCells();
@@ -44,7 +55,7 @@ namespace VisioPowerTools
 
         private void buttonRead_Click(object sender, System.EventArgs e)
         {
-            var scriptingsession = VisioPowerToolsAddIn.ScriptingSession;
+            var scriptingsession = VisioPowerToolsAddIn.Client;
             if (!scriptingsession.Selection.HasShapes())
             {
                 return;
@@ -69,11 +80,12 @@ namespace VisioPowerTools
                 (System.Drawing.Color) doc_colors[rgbcolors.ShadowBackgroundColor.Result].ToColorRGB();
             this.colorSelectorSmallLine.Color =
                 (System.Drawing.Color) doc_colors[rgbcolors.LineColor.Result].ToColorRGB();
+
         }
 
         private void buttonApply_Click(object sender, System.EventArgs e)
         {
-            var scriptingsession = VisioPowerToolsAddIn.ScriptingSession;
+            var scriptingsession = VisioPowerToolsAddIn.Client;
 
             this.Colors.FillForegroundColor.Formula =
                 VA.Convert.ColorToFormulaRGB(this.colorSelectorSmallFillFg.Color);
@@ -100,7 +112,7 @@ namespace VisioPowerTools
             var srcs = xcells.Select(i => i.SRC).ToList();
             var formulas = xcells.Select(i => i.Formula.Value).ToList();
 
-            scriptingsession.ShapeSheet.SetFormula(srcs,formulas, IVisio.VisGetSetArgs.visSetBlastGuards);
+            scriptingsession.ShapeSheet.SetFormula(null,srcs,formulas, IVisio.VisGetSetArgs.visSetBlastGuards);
         }
     }
 
@@ -114,15 +126,17 @@ namespace VisioPowerTools
                 throw new System.ArgumentNullException("shape");
             }
 
-            var format = VisioAutomation.Format.FormatHelper.GetShapeFormat(shape);
-            var shapecolors = new ShapeFormatHelper.ShapeColors();
+            var format = VisioAutomation.Shapes.FormatCells.GetCells(shape);
+            var cformat = VA.Text.CharacterCells.GetCells(shape);
 
+            var shapecolors = new ShapeFormatHelper.ShapeColors();
+            
             shapecolors.FillForegroundColor = format.FillForegnd;
             shapecolors.FillBackgroundColor = format.FillBkgnd;
             shapecolors.ShadowForegroundColor = format.ShdwForegnd;
             shapecolors.ShadowBackgroundColor = format.ShdwBkgnd;
             shapecolors.LineColor = format.LineColor;
-
+            shapecolors.CharacterColor = cformat[0].Color.Result;
             return shapecolors;
         }
 

@@ -1,6 +1,7 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Shapes.Connections;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using DGMODEL = VisioAutomation.Layout.Models.DirectedGraph;
+using DGMODEL = VisioAutomation.Models.DirectedGraph;
 using VisioAutomation.Extensions;
 
 namespace VisioAutomationSamples
@@ -39,12 +40,12 @@ namespace VisioAutomationSamples
 
             // Create the connectors to join the nodes
             // Note that Node 4 is deliberately not connected to any other node
-            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
-            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
-            var c2 = directed_graph_drawing.Connect("c2", n3, n4, "NO", VA.Connections.ConnectorType.Curved);
-            var c3 = directed_graph_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
-            var c4 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
-            var c5 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, ConnectorType.Curved);
+            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", ConnectorType.RightAngle);
+            var c2 = directed_graph_drawing.Connect("c2", n3, n4, "NO", ConnectorType.Curved);
+            var c3 = directed_graph_drawing.Connect("c3", n0, n2, null, ConnectorType.Straight);
+            var c4 = directed_graph_drawing.Connect("c4", n2, n3, null, ConnectorType.Curved);
+            var c5 = directed_graph_drawing.Connect("c5", n3, n0, null, ConnectorType.Curved);
 
             // Format connector 0 to point "back" 
             c0.Cells = new VA.DOM.ShapeCells();
@@ -101,12 +102,12 @@ namespace VisioAutomationSamples
 
             // Create the connectors to join the nodes
             // Note that Node 4 is deliberately not connected to any other node
-            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, VA.Connections.ConnectorType.Curved);
-            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", VA.Connections.ConnectorType.RightAngle);
-            var c2 = directed_graph_drawing.Connect("c2", n3, n4, "NO", VA.Connections.ConnectorType.Curved);
-            var c3 = directed_graph_drawing.Connect("c3", n0, n2, null, VA.Connections.ConnectorType.Straight);
-            var c4 = directed_graph_drawing.Connect("c4", n2, n3, null, VA.Connections.ConnectorType.Curved);
-            var c5 = directed_graph_drawing.Connect("c5", n3, n0, null, VA.Connections.ConnectorType.Curved);
+            var c0 = directed_graph_drawing.Connect("c0", n0, n1, null, ConnectorType.Curved);
+            var c1 = directed_graph_drawing.Connect("c1", n1, n2, "YES", ConnectorType.RightAngle);
+            var c2 = directed_graph_drawing.Connect("c2", n3, n4, "NO", ConnectorType.Curved);
+            var c3 = directed_graph_drawing.Connect("c3", n0, n2, null, ConnectorType.Straight);
+            var c4 = directed_graph_drawing.Connect("c4", n2, n3, null, ConnectorType.Curved);
+            var c5 = directed_graph_drawing.Connect("c5", n3, n0, null, ConnectorType.Curved);
 
             // Format connector 0 to point "back" 
             c0.Cells = new VA.DOM.ShapeCells();
@@ -130,11 +131,11 @@ namespace VisioAutomationSamples
 
             directed_graph_drawing.Render(page1);
 
-            var layout_config = new VA.Layout.PageLayout.HierarchyLayout();
-            layout_config.Direction = VA.Layout.PageLayout.Direction.BottomToTop;
-            layout_config.HorizontalAlignment = VA.Layout.PageLayout.HorizontalAlignment.Center;
+            var layout_config = new VA.Pages.PageLayout.HierarchyLayout();
+            layout_config.Direction = VA.Pages.PageLayout.Direction.BottomToTop;
+            layout_config.HorizontalAlignment = VA.Pages.PageLayout.HorizontalAlignment.Center;
             layout_config.AvenueSize = new VA.Drawing.Size(1, 1);
-            layout_config.ConnectorAppearance = VA.Layout.PageLayout.ConnectorAppearance.Curved;
+            layout_config.ConnectorAppearance = VA.Pages.PageLayout.ConnectorAppearance.Curved;
             layout_config.Apply(page1);
 
             page1.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));

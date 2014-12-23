@@ -28,19 +28,23 @@ namespace VisioAutomation.DOM
                 throw new System.ArgumentNullException("mastername");
             }
 
-            if (stencilname == null)
-            {
-                throw new System.ArgumentNullException("stencilname");
-            }
 
             if (mastername.ToLower().EndsWith(".vss"))
             {
                 throw new AutomationException("Master name ends with .VSS");
             }
 
-            if (!stencilname.ToLower().EndsWith(".vss"))
+            if (this.StencilName != null)
             {
-                throw new AutomationException("Stencil name does not end with .VSS");
+                if (!stencilname.ToLower().EndsWith(".vss"))
+                {
+                    throw new AutomationException("Stencil name does not end with .VSS");
+                }
+            }
+            else
+            {
+                // Stencil names are allowed to be null. In this case 
+                // it means look for the stencil in the active document
             }
 
             this.VisioMaster = null;

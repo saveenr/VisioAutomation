@@ -11,8 +11,8 @@ namespace VisioAutomationSamples
 {
     public partial class FormSampleRunner : Form
     {
-        private List<SampleMethod> samplemethods = new List<SampleMethod>();
-        private Dictionary<string, SampleMethod> dic = new Dictionary<string, SampleMethod>();
+        private readonly List<SampleMethod> samplemethods = new List<SampleMethod>();
+        private readonly Dictionary<string, SampleMethod> dic = new Dictionary<string, SampleMethod>();
 
         public FormSampleRunner()
         {
@@ -32,7 +32,7 @@ namespace VisioAutomationSamples
                 var methods = t.GetMethods()
                     .Where(m => m.IsPublic)
                     .Where(m => m.IsStatic)
-                    .Where(m => m.GetParameters().Count() == 0)
+                    .Where(m => !m.GetParameters().Any())
                     .OrderBy(m => m.Name);
 
                 foreach (var m in methods)
@@ -67,12 +67,8 @@ namespace VisioAutomationSamples
 
         private HashSet<string> GetPreviouslySelectedSamples()
         {
-            var prev_names_str = Properties.Settings.Default.SelectedSamples;
-            if (prev_names_str == null)
-            {
-                prev_names_str = "";
-            }
-            return new HashSet<string>(prev_names_str.Split(new char[] {'|'}));
+            var prev_names_str = Properties.Settings.Default.SelectedSamples ?? "";
+            return new HashSet<string>(prev_names_str.Split('|'));
         }
 
         private void SaveSelectedNames()

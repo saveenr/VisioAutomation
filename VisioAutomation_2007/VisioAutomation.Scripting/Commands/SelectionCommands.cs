@@ -8,55 +8,38 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class SelectionCommands : CommandSet
     {
-        public SelectionCommands(Session session) :
-            base(session)
+        public SelectionCommands(Client client) :
+            base(client)
         {
 
         }
         
-        public IEnumerable<IVisio.Shape> EnumShapes()
-        {
-            var app = this.Session.VisioApplication;
-            var activewin = app.ActiveWindow;
-            var sel = activewin.Selection;
-
-            var shapes = sel.AsEnumerable();
-            return shapes;
-        }
-
-        public IEnumerable<IVisio.Shape> EnumShapes2D()
-        {
-            var shapes = this.EnumShapes().Where(s => s.OneD == 0);
-            return shapes;
-        }
-
         public IVisio.Selection Get()
         {
-            var application = this.Session.VisioApplication;
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+            
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             return selection;
         }
 
-        public void SelectAll()
+        public void All()
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
-
-            var active_window = this.Session.View.GetActiveWindow();
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+            
+            var active_window = this.Client.View.GetActiveWindow();
             active_window.SelectAll();
         }
 
-        public void SelectInvert()
+        public void Invert()
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
-
-            var application = this.Session.VisioApplication;
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+            
+            var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             if (shapes.Count < 1)
@@ -67,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
             Invert(application.ActiveWindow);
         }
 
-        public static void Invert(IVisio.Window window)
+        private static void Invert(IVisio.Window window)
         {
             if (window == null)
             {
@@ -90,14 +73,12 @@ namespace VisioAutomation.Scripting.Commands
             window.Select(shapes_to_select, IVisio.VisSelectArgs.visSelect);
         }
 
-        public void SelectNone()
+        public void None()
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             active_window.DeselectAll();
@@ -105,51 +86,45 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Select(IVisio.Shape shape)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (shape == null)
             {
                 throw new System.ArgumentNullException("shape");
             }
 
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
-
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             active_window.Select(shape, (short) IVisio.VisSelectArgs.visSelect);
         }
 
         public void Select(IEnumerable<IVisio.Shape> shapes)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (shapes == null)
             {
                 throw new System.ArgumentNullException("shapes");
             }
 
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
-
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             active_window.Select(shapes, IVisio.VisSelectArgs.visSelect);
         }
 
         public void Select(IEnumerable<int> shapeids)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (shapeids == null)
             {
                 throw new System.ArgumentNullException("shapeids");
             }
 
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
-
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             var page = application.ActivePage;
             var page_shapes = page.Shapes;
@@ -159,27 +134,23 @@ namespace VisioAutomation.Scripting.Commands
         
         public void SubSelect(IList<IVisio.Shape> shapes)
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (shapes == null)
             {
                 throw new System.ArgumentNullException("shapes");
             }
-
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
-
-            this.Session.VisioApplication.ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
+            
+            this.Client.VisioApplication.ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
         }
 
         public void SelectByMaster(IVisio.Master master)
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
             // Get a selection of connectors, by master: 
             var selection = page.CreateSelection(
@@ -190,10 +161,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SelectByLayer(string layername)
         {
-            if (!this.Session.HasActiveDrawing)
-            {
-                return;
-            }
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
             if (layername == null)
             {
@@ -205,8 +174,8 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("layername");
             }
 
-            var layer = this.Session.Layer.GetLayer(layername);
-            var application = this.Session.VisioApplication;
+            var layer = this.Client.Layer.Get(layername);
+            var application = this.Client.VisioApplication;
             var page = application.ActivePage;
 
             // Get a selection of connectors, by layer: 
@@ -216,22 +185,41 @@ namespace VisioAutomation.Scripting.Commands
                 layer);
         }
 
-        public IList<IVisio.Shape> GetShapes( VA.Selection.ShapesEnumeration enumerationtype)
+        public IList<IVisio.Shape> GetShapes()
         {
-            if (!this.Session.HasSelectedShapes())
-            {
-                return new List<IVisio.Shape>(0);
-            }
+            this.AssertApplicationAvailable();
 
-            var selection = this.Session.Selection.Get();
-            return VA.Selection.SelectionHelper.GetSelectedShapes(selection, enumerationtype);
+            var selection = this.Client.Selection.Get();
+            return VA.Selection.SelectionHelper.GetSelectedShapes(selection);
+        }
+
+        public IList<IVisio.Shape> GetShapesRecursive()
+        {
+            this.AssertApplicationAvailable();
+
+            var selection = this.Client.Selection.Get();
+            return VA.Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
+        }
+
+        public int Count()
+        {
+            this.AssertApplicationAvailable();
+            
+            var application = this.Client.VisioApplication;
+            var active_window = application.ActiveWindow;
+            var selection = active_window.Selection;
+            int count = selection.Count;
+            return count;
         }
 
         public IList<IVisio.Shape> GetSubSelectedShapes()
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+            
             //http://www.visguy.com/2008/05/17/detect-sub-selected-shapes-programmatically/
             var shapes = new List<IVisio.Shape>(0);
-            var sel = this.Session.Selection.Get();
+            var sel = this.Client.Selection.Get();
             var original_itermode = sel.IterationMode;
 
             // normal selection
@@ -255,7 +243,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete()
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            if (!this.Client.HasSelectedShapes())
             {
                 return;
             }
@@ -266,7 +257,10 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Copy()
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            if (!this.Client.HasSelectedShapes())
             {
                 return;
             }
@@ -277,40 +271,61 @@ namespace VisioAutomation.Scripting.Commands
             selection.Copy(flags);
         }
 
-        public void Duplicate()
+        public void Duplicate( IList<IVisio.Shape> target_shapes )
         {
-            if (!this.Session.HasSelectedShapes())
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
+            int n = this.GetTargetSelection(target_shapes);
+
+            this.Client.WriteVerbose("Number of shapes to duplicate: {0}", n);
+
+            if (n<1)
             {
+                this.Client.WriteVerbose("Zero shapes to duplicate. No duplication operation performed");
                 return;
             }
-            var active_window = this.Session.View.GetActiveWindow();
+
+            var view = this.Client.View;
+            var active_window = view.GetActiveWindow();
             var selection = active_window.Selection;
             selection.Duplicate();
         }
 
         public bool HasShapes()
         {
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             return HasShapes(1);
         }
 
         public bool HasShapes(int min_items)
         {
-            // this.Session.Write(OutputStream.Verbose, "Checking for at least {0} selected shapes", min_items);
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
+
             if (min_items <= 0)
             {
                 throw new System.ArgumentOutOfRangeException("min_items");
             }
 
-            if (!this.Session.HasActiveDrawing)
-            {
-                return false;
-            }
+            this.AssertApplicationAvailable();
+            this.AssertDocumentAvailable();
 
-            var application = this.Session.VisioApplication;
+            var application = this.Client.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
-            bool v = selection.Count >= min_items;
+            int num_selected = selection.Count;
+            bool v = num_selected >= min_items;
             return v;
+        }
+
+        internal IEnumerable<IVisio.Shape> EnumShapes2D()
+        {
+
+            var shapes = this.GetShapes().Where(s => s.OneD == 0);
+            return shapes;
         }
     }
 }

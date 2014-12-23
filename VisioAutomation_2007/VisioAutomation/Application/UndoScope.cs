@@ -4,20 +4,20 @@ namespace VisioAutomation.Application
 {
     public class UndoScope : System.IDisposable
     {
-        private IVisio.Application Application;
+        private readonly IVisio.Application Application;
 
         public int ScopeID { get; private set; }
         public string Name { get; private set; }
         public bool Commit { get; set; }
 
-        internal UndoScope(IVisio.Application app, string name)
+        public UndoScope(IVisio.Application app, string name)
         {
             if (app == null)
             {
                 throw new System.ArgumentNullException("app");
             }
 
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 throw new System.ArgumentException("name");
             }

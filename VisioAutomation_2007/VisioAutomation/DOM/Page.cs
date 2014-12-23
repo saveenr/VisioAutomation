@@ -12,7 +12,7 @@ namespace VisioAutomation.DOM
         public VA.Drawing.Size? ResizeToFitMargin;
         public VA.Pages.PageCells PageCells;
         public string Name;
-        public VA.Layout.PageLayout.Layout Layout;
+        public VA.Pages.PageLayout.Layout Layout;
         public IVisio.Page VisioPage;
         public VA.Application.PerfSettings PerfSettings { get; private set; }
 
@@ -73,15 +73,16 @@ namespace VisioAutomation.DOM
 
             using (var perfscope = new VA.Application.PerfScope(app, PerfSettings))
             {
-                var update = new VA.ShapeSheet.Update();
-                this.PageCells.Apply(update, (short)page_sheet.ID);
-                update.Execute(page);
-
                 if (this.Size.HasValue)
                 {
-                    page.SetSize(this.Size.Value);
+                    this.PageCells.PageHeight = this.Size.Value.Height;
+                    this.PageCells.PageWidth = this.Size.Value.Width;
                 }
 
+                var update = new VA.ShapeSheet.Update();
+                update.SetFormulas((short)page_sheet.ID, this.PageCells);
+                update.Execute(page);
+                
                 // Then render the shapes
                 this.Shapes.Render(page);
 

@@ -17,9 +17,9 @@ namespace VisioPowerTools
         {
             InitializeComponent();
 
-            var ss = VisioPowerToolsAddIn.ScriptingSession;
+            var ss = VisioPowerToolsAddIn.Client;
 
-            if (!ss.HasActiveDrawing)
+            if (!ss.HasActiveDocument)
             {
                 MessageBox.Show("There is no drawing open to export");
             }
@@ -70,10 +70,10 @@ namespace VisioPowerTools
                 MessageBox.Show("Output folder does not exist");
                 return;
             }
-            var ss = VisioPowerToolsAddIn.ScriptingSession;
+            var ss = VisioPowerToolsAddIn.Client;
             if (this.ExportFormat == enumExportFormat.ExportSVGXHTML)
             {
-                ss.Export.ExportSelectionToSVGXHTML(filename);                
+                ss.Export.SelectionToSVGXHTML(filename);                
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {

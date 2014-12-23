@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Extensions;
+using System.Threading;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting
             }
             else if (input_string == t_lower)
             {
-                var cultureInfo = System.Threading.Thread.CurrentThread.CurrentCulture;
+                var cultureInfo = Thread.CurrentThread.CurrentCulture;
                 var textInfo = cultureInfo.TextInfo;
                 var t_case = textInfo.ToTitleCase(input_string);
 
@@ -39,7 +39,7 @@ namespace VisioAutomation.Scripting
             return output_string;
         }
 
-        internal static void set_text_wrapping(IVisio.Page page,
+        public static void set_text_wrapping(IVisio.Page page,
                                                IList<int> shapeids,
                                                bool wrap)
         {
@@ -54,6 +54,26 @@ namespace VisioAutomation.Scripting
             }
 
             update.Execute(page);
+        }
+
+        public static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)
+        {
+            int n = tokens.Count();
+            int c = tokens.Select(t => t.Length).Sum();
+            c += (n > 1) ? s.Length*n : 0;
+            c += sb.Length;
+            sb.EnsureCapacity(c);
+
+            int i = 0;
+            foreach (string t in tokens)
+            {
+                if (i > 0)
+                {
+                    sb.Append(s);
+                }
+                sb.Append(t);
+                i++;
+            }
         }
     }
 }

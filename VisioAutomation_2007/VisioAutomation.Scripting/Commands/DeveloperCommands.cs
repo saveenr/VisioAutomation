@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using TREEMODEL = VisioAutomation.Layout.Models.Tree;
+using TREEMODEL = VisioAutomation.Models.Tree;
 
 namespace VisioAutomation.Scripting.Commands
 {
     public class DeveloperCommands : CommandSet
     {
-        public DeveloperCommands(Session session) :
-            base(session)
+        public DeveloperCommands(Client client) :
+            base(client)
         {
 
         }
@@ -30,33 +31,23 @@ namespace VisioAutomation.Scripting.Commands
             return types;
         }       
 
-        public void HelloWorld()
-        {
-            if (this.Session.VisioApplication == null)
-            {
-                this.Session.Application.New();
-            }
-
-            var doc = this.Session.Document.New(8.5, 11);
-            var pages = doc.Pages;
-            var page = pages.Add();
-
-            var s0 = page.DrawRectangle(2, 2, 6, 6);
-            s0.Text = "Hello World";
-        }
-
         public IVisio.Document DrawScriptingDocumentation()
         {
-            var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
-            docbuilder.BodyParaSpacingAfter = 6.0;
+            this.AssertApplicationAvailable();
+
+            var formdoc = new VA.Models.Forms.FormDocument();
+            formdoc.Subject = "VisioAutomation.Scripting Documenation";
+            formdoc.Title = "VisioAutomation.Scripting Documenation";
+            formdoc.Creator = "";
+            formdoc.Company = "";
+
+            //docbuilder.BodyParaSpacingAfter = 6.0;
             var lines = new List<string>();
 
-            var cmdst_props = VA.Scripting.Session.GetCommandSetProperties().OrderBy(i=>i.Name).ToList();
+            var cmdst_props = VA.Scripting.Client.GetCommandSetProperties().OrderBy(i=>i.Name).ToList();
             var sb = new System.Text.StringBuilder();
             var helpstr = new System.Text.StringBuilder();
 
-            docbuilder.Start();
             foreach (var cmdset_prop in cmdst_props)
             {
                 var cmdset_type = cmdset_prop.PropertyType;
@@ -68,7 +59,7 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     sb.Length = 0;
                     var method_params = method.GetParameters();
-                    TextUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
+                    TextCommandsUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
 
                     if (method.ReturnType != typeof(void))
                     {
@@ -85,36 +76,36 @@ namespace VisioAutomation.Scripting.Commands
                 lines.Sort();
                 
                 helpstr.Length = 0;
-                TextUtil.Join(helpstr,"\r\n",lines);
+                TextCommandsUtil.Join(helpstr,"\r\n",lines);
 
-                var docpage = new VisioAutomation.Layout.Models.SimpleTextDoc.TextPage();
-                docpage.Title = cmdset_prop.Name + " commands";
-                docpage.Body = helpstr.ToString();
-                docpage.Name = cmdset_prop.Name + " commands";
+                var formpage = new VisioAutomation.Models.Forms.FormPage();
+                formpage.Title = cmdset_prop.Name + " commands";
+                formpage.Body = helpstr.ToString();
+                formpage.Name = cmdset_prop.Name + " commands";
+                formpage.Size = new VA.Drawing.Size(8.5, 11);
+                formpage.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
+                formdoc.Pages.Add(formpage);
 
-                docbuilder.Draw(docpage);
             }
 
-            docbuilder.Finish();
-            docbuilder.VisioDocument.Subject = "VisioAutomation.Scripting Documenation";
-            docbuilder.VisioDocument.Title = "VisioAutomation.Scripting Documenation";
-            docbuilder.VisioDocument.Creator = "";
-            docbuilder.VisioDocument.Company = "";
 
-            return docbuilder.VisioDocument;
+            //hide_ui_stuff(docbuilder.VisioDocument);
+
+            var app = this.Client.VisioApplication;
+            var doc = formdoc.Render(app);
+            return doc;
         }
 
         public IVisio.Document DrawInteropEnumDocumentation()
         {
-            var pagesize = new VA.Drawing.Size(8.5, 11);
-            var docbuilder = new VA.Layout.Models.SimpleTextDoc.TextDocumentBuilder(this.Session.VisioApplication, pagesize);
-            //docbuilder.BodyParaSpacingAfter = 2.0;
-            docbuilder.BodyTextSize = 8.0;
+            this.AssertApplicationAvailable();
+            
+            var formdoc = new VA.Models.Forms.FormDocument();
+
             var helpstr = new System.Text.StringBuilder();
             int chunksize = 70;
 
             var interop_enums = VA.Interop.InteropHelper.GetEnums();
-            docbuilder.Start();
             int pagecount = 0;
             foreach (var enum_ in interop_enums)
             {
@@ -129,47 +120,57 @@ namespace VisioAutomation.Scripting.Commands
                         helpstr.AppendFormat("0x{0}\t{1}\n", val.Value.ToString("x"),val.Name);
                     }
 
-                    var docpage = new VA.Layout.Models.SimpleTextDoc.TextPage();
-                    docpage.Title = enum_.Name;
-                    docpage.Body = helpstr.ToString();
+                    var formpage = new VA.Models.Forms.FormPage();
+                    formpage.Size = new VA.Drawing.Size(8.5, 11);
+                    formpage.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
+                    formpage.Title = enum_.Name;
+                    formpage.Body = helpstr.ToString();
                     if (chunkcount == 0)
                     {
-                        docpage.Name = string.Format("{0}", enum_.Name);
+                        formpage.Name = string.Format("{0}", enum_.Name);
                     }
                     else
                     {
-                        docpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
+                        formpage.Name = string.Format("{0} ({1})", enum_.Name, chunkcount + 1);
                     }
 
-                    docbuilder.Draw(docpage);
+                    //docbuilder.BodyParaSpacingAfter = 2.0;
+
+                    formpage.BodyTextSize = 8.0;
+
+                    formdoc.Pages.Add(formpage);
+            
 
                     var tabstops = new[]
                                  {
                                      new VA.Text.TabStop(1.5, VA.Text.TabStopAlignment.Left)
                                  };
 
-                    VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
+                    //VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
                     
                     chunkcount++;
                     pagecount++;
                 }
             }
 
-            docbuilder.Finish();
-            docbuilder.VisioDocument.Subject = "Visio Interop Enum Documenation";
-            docbuilder.VisioDocument.Title = "Visio Interop Enum Documenation";
-            docbuilder.VisioDocument.Creator = "";
-            docbuilder.VisioDocument.Company = "";
+            formdoc.Subject = "Visio Interop Enum Documenation";
+            formdoc.Title = "Visio Interop Enum Documenation";
+            formdoc.Creator = "";
+            formdoc.Company = "";
 
-            return docbuilder.VisioDocument;
+            //hide_ui_stuff(docbuilder.VisioDocument);
+
+
+            var doc = formdoc.Render(this.Client.VisioApplication);
+            return doc;
         }
 
         private class PathTreeBuilder
         {
-            public Dictionary<string, string> PathToParentPath;
-            public List<string> Roots;
-            public string Separator;
-            public string[] seps;
+            public readonly Dictionary<string, string> PathToParentPath;
+            public readonly List<string> Roots;
+            public readonly string Separator;
+            public readonly string[] seps;
             private System.StringSplitOptions options = System.StringSplitOptions.None;
 
             public PathTreeBuilder()
@@ -191,7 +192,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 if (tokens.Length == 0)
                 {
-                    throw new VA.AutomationException();
+                    throw new VA.Scripting.ScriptingException();
                 }
                 else if (tokens.Length == 1)
                 {
@@ -220,11 +221,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespaces(IList<System.Type> types)
         {
+            this.AssertApplicationAvailable();
+
             string def_linecolor = "rgb(140,140,140)";
             string def_fillcolor = "rgb(240,240,240)";
             string def_font = "Segoe UI";
 
-            var doc = this.Session.Document.New(8.5,11);
+            var doc = this.Client.Document.New(8.5,11,null);
             var fonts = doc.Fonts;
             var font = fonts[def_font];
             int fontid = font.ID16;
@@ -319,6 +322,8 @@ namespace VisioAutomation.Scripting.Commands
 
 
             tree_layout.Render(doc.Application.ActivePage);
+
+            hide_ui_stuff(doc);
             return doc;
         }
 
@@ -348,9 +353,9 @@ namespace VisioAutomation.Scripting.Commands
 
         private class TypeInfo
         {
-            public System.Type Type;
+            public readonly System.Type Type;
             public ReflectionUtil.TypeCategory TypeCategory ;
-            public string Label;
+            public readonly string Label;
 
             public TypeInfo(System.Type type)
             {
@@ -368,12 +373,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses(IList<System.Type> types_)
         {
+            this.AssertApplicationAvailable();
+
             string segoeui_fontname = "Segoe UI";
             string segoeuilight_fontname = "Segoe UI Light";
             string def_linecolor = "rgb(180,180,180)";
             string def_shape_fill = "rgb(245,245,245)";
 
-            var doc = this.Session.Document.New(8.5, 11);
+            var doc = this.Client.Document.New(8.5, 11,null);
             var fonts = doc.Fonts;
             var font_segoe = fonts[segoeui_fontname];
             var font_segoelight = fonts[segoeuilight_fontname];
@@ -406,7 +413,8 @@ namespace VisioAutomation.Scripting.Commands
                     label = ns.Substring(index_of_last_sep + 1);
                 }
 
-                var types_in_namespace = types.Where(t => t.Type.Namespace == ns)
+                string ns1 = ns;
+                var types_in_namespace = types.Where(t => t.Type.Namespace == ns1)
                     .OrderBy(t=>t.Type.Name)
                     .Select(t=> t.Label);
                 var node = new TREEMODEL.Node(ns);
@@ -417,7 +425,10 @@ namespace VisioAutomation.Scripting.Commands
                 var m1 = markup.AddElement(label+"\n");
                 m1.CharacterCells.Font = fontid_segoe;
                 m1.CharacterCells.Size = "12.0pt";
+                m1.CharacterCells.Style = "1"; // Bold
                 var m2 = markup.AddElement();
+                m2.CharacterCells.Font = fontid_segoe;
+                m2.CharacterCells.Size = "8.0pt";
                 m2.AddText(string.Join("\n", types_in_namespace));
 
                 node.Text = markup;
@@ -488,112 +499,18 @@ namespace VisioAutomation.Scripting.Commands
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
             tree_layout.Render(doc.Application.ActivePage);
 
+            hide_ui_stuff(doc);
+
             return doc;
         }
 
-        private static string get_nice_type_name(System.Type type)
+        private static void hide_ui_stuff(IVisio.Document doc)
         {
-            if (type.IsGenericType)
-            {
-                var sb = new System.Text.StringBuilder();
-                var tokens = type.Name.Split(new[] { '`' });
-
-                sb.Append(tokens[0]);
-                var gas = type.GetGenericArguments();
-                var ga_names = gas.Select(i => i.Name).ToList();
-
-                sb.Append("<");
-                sb.Append(string.Join(", ", ga_names));
-                sb.Append(">");
-                return sb.ToString();
-            }
-
-            return type.Name;
-        }
-
-        private static string get_type_kindname(TypeKind type)
-        {
-            if (type == TypeKind.StaticClass)
-            {
-                return "static class";
-            }
-            else if (type == TypeKind.AbstractClass)
-            {
-                return "abstract class";
-            }
-            else if (type == TypeKind.Class)
-            {
-                return "class";
-            }
-            else if (type == TypeKind.Enum)
-            {
-                return "enum";
-            }
-            else if (type == TypeKind.Interface)
-            {
-                return "interface";
-            }
-            else if (type == TypeKind.Struct)
-            {
-                return "struct";
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        private static TypeKind get_type_kindEx(System.Type type)
-        {
-            if (type.IsClass)
-            {
-                if (TypeIsStaticClass(type))
-                {
-                    return TypeKind.StaticClass;
-                }
-                else if (type.IsAbstract)
-                {
-                    return TypeKind.AbstractClass;
-                }
-                return TypeKind.Class;
-            }
-            else if (type.IsEnum)
-            {
-                return TypeKind.Enum;
-            }
-            else if (type.IsInterface)
-            {
-                return TypeKind.Interface;
-            }
-            else if (TypeIsStruct(type))
-            {
-                return TypeKind.Struct;
-            }
-            else
-            {
-                return TypeKind.Other;
-            }
-        }
-
-        private static bool TypeIsStruct(System.Type type)
-        {
-            return (type.IsValueType && !type.IsPrimitive && !type.Namespace.StartsWith("System") && !type.IsEnum);
-        }
-
-        private static bool TypeIsStaticClass(System.Type type)
-        {
-            return (type.IsAbstract && type.IsSealed);
-        }
-
-        private enum TypeKind
-        {
-            StaticClass,
-            Class,
-            AbstractClass,
-            Interface,
-            Struct,
-            Enum,
-            Other
+            var app = doc.Application;
+            var active_window = app.ActiveWindow;
+            active_window.ShowGrid = 0;
+            active_window.ShowPageBreaks = 0;
+            active_window.ShowGuides = 0;
         }
     }
 }

@@ -18,12 +18,12 @@ namespace VisioPowerTools
 
         public void buttonLayoutE2EH_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Layout.Stack(VA.Drawing.Axis.XAxis, Globals.VisioPowerToolsAddIn.addinprefs.SnapUnit);
+            VisioPowerToolsAddIn.Client.Arrange.Stack(VA.Drawing.Axis.XAxis, Globals.VisioPowerToolsAddIn.addinprefs.SnapUnit);
         }
 
         public void buttonLayoutE2eV_Click(object sender, System.EventArgs e)
         {
-            VisioPowerToolsAddIn.ScriptingSession.Layout.Stack(VA.Drawing.Axis.YAxis, Globals.VisioPowerToolsAddIn.addinprefs.SnapUnit);
+            VisioPowerToolsAddIn.Client.Arrange.Stack(VA.Drawing.Axis.YAxis, Globals.VisioPowerToolsAddIn.addinprefs.SnapUnit);
         }
 
         private void comboBoxSnapDelta_ValueMemberChanged(object sender, System.EventArgs e)

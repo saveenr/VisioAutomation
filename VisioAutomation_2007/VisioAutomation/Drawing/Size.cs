@@ -21,8 +21,7 @@ namespace VisioAutomation.Drawing
             Width = width;
             Height = height;
         }
-
-
+        
         public override string ToString()
         {
             string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####}, {1:0.#####})", Width, Height);

@@ -1,18 +1,30 @@
-using System.Linq;
+using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using System.Collections.Generic;
-using TABLEROW = VisioAutomation.ShapeSheet.Data.TableRow<VisioAutomation.ShapeSheet.CellData<double>>;
 
 namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class BaseCellGroup
     {
-        // Delegates
-        protected delegate void ApplyFormula(VA.ShapeSheet.SRC src, VA.ShapeSheet.FormulaLiteral formula);
+        public delegate T RowToObject<T,RT>(CellData<RT>[] data);
 
-        // Delegates
-        protected delegate TObj RowToCells<TQuery, TObj>(TQuery query, TABLEROW tablerow) where TQuery : VA.ShapeSheet.Query.QueryBase;
+        public struct SRCValuePair
+        {
+            public SRC SRC;
+            public FormulaLiteral Formula;
 
+            public SRCValuePair(SRC src, FormulaLiteral f)
+            {
+                this.SRC = src;
+                this.Formula = f;
+            }
+        }
+
+        protected SRCValuePair srcvaluepair(SRC src, FormulaLiteral f)
+        {
+            return new SRCValuePair(src, f);
+        }
+
+        public abstract IEnumerable<SRCValuePair> EnumPairs();
     }
 }

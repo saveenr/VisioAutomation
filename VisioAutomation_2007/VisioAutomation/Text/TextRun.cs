@@ -9,19 +9,13 @@ namespace VisioAutomation.Text
         public string Text { get; private set; }
         public int Index { get; private set; }
 
-        public TextRun(int index, int begin, int end, string text)
+        internal TextRun(int index, int begin, int end, string text)
             : this()
         {
             this.Index = index;
             this.Begin = begin;
             this.End = end;
             this.Text = text;
-        }
-        
-        public override string ToString()
-        {
-            var s = string.Format("(Begin={0},End={1})", this.Begin, this.End);
-            return s;
         }
     }
 }
