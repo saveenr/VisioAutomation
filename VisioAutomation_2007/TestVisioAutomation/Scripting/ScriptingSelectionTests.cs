@@ -10,9 +10,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Selection_Scenarios()
         {
-            var ss = GetScriptingClient();
+            var client = GetScriptingClient();
 
-            var doc = ss.Document.New(10, 5);
+            var doc = client.Document.New(10, 5);
 
             var page1 = doc.Pages[1];
             var app = page1.Application;
@@ -28,7 +28,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, x1.Count);
             Assert.IsTrue(x1.ContainsKey(s4));
 
-            ss.Selection.Invert();
+            client.Selection.Invert();
             var x2 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
             Assert.AreEqual(3, x2.Count);
             Assert.IsTrue(x2.ContainsKey(s1));
@@ -46,7 +46,7 @@ namespace TestVisioAutomation
             var x4 = active_window.Selection.AsEnumerable().ToDictionary(s => s);
             Assert.AreEqual(0, x4.Count);
 
-            ss.Document.Close(true);
+            client.Document.Close(true);
         }
     }
 }

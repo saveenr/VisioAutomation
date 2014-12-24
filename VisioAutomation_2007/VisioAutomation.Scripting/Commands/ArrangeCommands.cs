@@ -449,7 +449,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = selection.GetIDs();
             using (var undoscope = new UndoScope(application,"Distribute"))
             {
-                VA.Layout.LayoutHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
+                ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
             }
         }
 
@@ -467,7 +467,7 @@ namespace VisioAutomation.Scripting.Commands
             using (var undoscope = new VA.Application.UndoScope(application,"SnapCorner"))
             {
                 var active_page = application.ActivePage;
-                VA.Layout.LayoutHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
+                ArrangeHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
             }
         }
     }

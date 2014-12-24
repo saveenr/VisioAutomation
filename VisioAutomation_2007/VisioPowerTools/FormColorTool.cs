@@ -55,13 +55,13 @@ namespace VisioPowerTools
 
         private void buttonRead_Click(object sender, System.EventArgs e)
         {
-            var scriptingsession = VisioPowerToolsAddIn.Client;
-            if (!scriptingsession.Selection.HasShapes())
+            var client = VisioPowerToolsAddIn.Client;
+            if (!client.Selection.HasShapes())
             {
                 return;
             }
 
-            var application = scriptingsession.VisioApplication;
+            var application = client.VisioApplication;
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var s1 = selection[1];
@@ -85,7 +85,7 @@ namespace VisioPowerTools
 
         private void buttonApply_Click(object sender, System.EventArgs e)
         {
-            var scriptingsession = VisioPowerToolsAddIn.Client;
+            var client = VisioPowerToolsAddIn.Client;
 
             this.Colors.FillForegroundColor.Formula =
                 VA.Convert.ColorToFormulaRGB(this.colorSelectorSmallFillFg.Color);
@@ -112,7 +112,7 @@ namespace VisioPowerTools
             var srcs = xcells.Select(i => i.SRC).ToList();
             var formulas = xcells.Select(i => i.Formula.Value).ToList();
 
-            scriptingsession.ShapeSheet.SetFormula(null,srcs,formulas, IVisio.VisGetSetArgs.visSetBlastGuards);
+            client.ShapeSheet.SetFormula(null,srcs,formulas, IVisio.VisGetSetArgs.visSetBlastGuards);
         }
     }
 
