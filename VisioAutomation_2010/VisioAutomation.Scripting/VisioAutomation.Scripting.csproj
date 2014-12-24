@@ -88,7 +88,7 @@
     <Compile Include="FormatCategory.cs" />
     <Compile Include="FormatPaintCache.cs" />
     <Compile Include="FormatPaintCell.cs" />
-    <Compile Include="LayoutHelper.cs" />
+    <Compile Include="ArrangeHelper.cs" />
     <Compile Include="PageNavigation.cs" />
     <Compile Include="ScriptingException.cs" />
     <Compile Include="SnapCornerPosition.cs" />

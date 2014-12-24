@@ -11,37 +11,37 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_ShapeSheet_SetNoShapes()
         {
-            var ss = GetScriptingClient();
-            ss.Document.New();
-            ss.Page.New(new VA.Drawing.Size(4, 4), false);
+            var client = GetScriptingClient();
+            client.Document.New();
+            client.Page.New(new VA.Drawing.Size(4, 4), false);
 
-            var s1 = ss.Draw.Rectangle(1, 1, 1.25, 1.5);
-            var s2 = ss.Draw.Rectangle(2, 3, 2.5, 3.5);
-            var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
+            var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
+            var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
+            var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            ss.Selection.None();
+            client.Selection.None();
 
-            ss.ShapeSheet.SetFormula(null, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
-            ss.Document.Close(true);
+            client.ShapeSheet.SetFormula(null, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
+            client.Document.Close(true);
         }
 
         [TestMethod]
         public void Scripting_CustomProps_Scenarios()
         {
-            var ss = GetScriptingClient();
-            ss.Document.New();
-            ss.Page.New(new VA.Drawing.Size(4, 4), false);
+            var client = GetScriptingClient();
+            client.Document.New();
+            client.Page.New(new VA.Drawing.Size(4, 4), false);
 
-            var s1 = ss.Draw.Rectangle(1, 1, 1.25, 1.5);
-            var s2 = ss.Draw.Rectangle(2, 3, 2.5, 3.5);
-            var s3 = ss.Draw.Rectangle(4.5, 2.5, 6, 3.5);
+            var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
+            var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
+            var s3 = client.Draw.Rectangle(4.5, 2.5, 6, 3.5);
 
-            ss.Selection.None();
-            ss.Selection.Select(s1);
-            ss.Selection.Select(s2);
-            ss.Selection.Select(s3);
+            client.Selection.None();
+            client.Selection.Select(s1);
+            client.Selection.Select(s2);
+            client.Selection.Select(s3);
 
-            var prop_dic0 = ss.CustomProp.Get(null);
+            var prop_dic0 = client.CustomProp.Get(null);
             Assert.AreEqual(3, prop_dic0.Count);
             Assert.AreEqual(0, prop_dic0[s1].Count);
             Assert.AreEqual(0, prop_dic0[s2].Count);
@@ -49,9 +49,9 @@ namespace TestVisioAutomation
 
             var cp = new VACUSTOMPROP.CustomPropertyCells();
             cp.Value = "BAR";
-            ss.CustomProp.Set(null,"FOO",cp);
+            client.CustomProp.Set(null,"FOO",cp);
 
-            var prop_dic1 = ss.CustomProp.Get(null);
+            var prop_dic1 = client.CustomProp.Get(null);
             Assert.AreEqual(3, prop_dic1.Count);
             Assert.AreEqual(1, prop_dic1[s1].Count);
             Assert.AreEqual(1, prop_dic1[s2].Count);
@@ -64,21 +64,21 @@ namespace TestVisioAutomation
             Assert.AreEqual("\"BAR\"", cp2.Value.Formula);
             Assert.AreEqual("\"BAR\"", cp3.Value.Formula);
 
-            var hasprops0 = ss.CustomProp.Contains(null,"FOO");
+            var hasprops0 = client.CustomProp.Contains(null,"FOO");
             Assert.IsTrue(hasprops0.All(v => v == true));
 
-            ss.CustomProp.Delete(null,"FOO");
+            client.CustomProp.Delete(null,"FOO");
 
-            var prop_dic2 = ss.CustomProp.Get(null);
+            var prop_dic2 = client.CustomProp.Get(null);
             Assert.AreEqual(3, prop_dic2.Count);
             Assert.AreEqual(0, prop_dic2[s1].Count);
             Assert.AreEqual(0, prop_dic2[s2].Count);
             Assert.AreEqual(0, prop_dic2[s3].Count);
 
-            var hasprops1 = ss.CustomProp.Contains(null,"FOO");
+            var hasprops1 = client.CustomProp.Contains(null,"FOO");
             Assert.IsTrue(hasprops1.All(v => v == false));
 
-            ss.Document.Close(true);
+            client.Document.Close(true);
         }
     }
 }

@@ -12,55 +12,55 @@ namespace TestVisioAutomation
         public void Scripting_DevDocumentationScenarios
             ()
         {
-            var ss = GetScriptingClient();
+            var client = GetScriptingClient();
             this.DrawVAScriptingAPIDiagram();
             this.DrawVANamespaceDiagram();
         }
 
         public void DrawVAScriptingAPIDiagram()
         {
-            var ss = GetScriptingClient();
-            var doc = ss.Developer.DrawScriptingDocumentation();
-            ss.Document.Close(true);
+            var client = GetScriptingClient();
+            var doc = client.Developer.DrawScriptingDocumentation();
+            client.Document.Close(true);
         }
 
         public void DrawVANamespaceDiagram()
         {
-            var ss = GetScriptingClient();
-            var doc = ss.Developer.DrawNamespaces();
-            ss.Document.Close(true);
+            var client = GetScriptingClient();
+            var doc = client.Developer.DrawNamespaces();
+            client.Document.Close(true);
         }
 
         [TestMethod]
         public void Scripting_CanCloseUnsavedDrawings()
         {
-            var ss = GetScriptingClient();
-            ss.Document.CloseAllWithoutSaving();
+            var client = GetScriptingClient();
+            client.Document.CloseAllWithoutSaving();
 
-            Assert.IsFalse(ss.HasActiveDocument);
+            Assert.IsFalse(client.HasActiveDocument);
 
-            var doc1 = ss.Document.New();
-            Assert.IsTrue(ss.HasActiveDocument);
-            Assert.IsFalse(ss.Selection.HasShapes());
+            var doc1 = client.Document.New();
+            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsFalse(client.Selection.HasShapes());
 
-            ss.Draw.Rectangle(0, 0, 1, 1);
-            Assert.IsTrue(ss.HasActiveDocument);
-            Assert.IsTrue(ss.Selection.HasShapes());
-            Assert.IsTrue(ss.Selection.HasShapes(1));
-            Assert.IsFalse(ss.Selection.HasShapes(2));
+            client.Draw.Rectangle(0, 0, 1, 1);
+            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsTrue(client.Selection.HasShapes());
+            Assert.IsTrue(client.Selection.HasShapes(1));
+            Assert.IsFalse(client.Selection.HasShapes(2));
 
-            ss.Draw.Rectangle(2, 2, 3, 3);
-            ss.Selection.All();
-            Assert.IsTrue(ss.HasActiveDocument);
-            Assert.IsTrue(ss.Selection.HasShapes());
-            Assert.IsTrue(ss.Selection.HasShapes(1));
-            Assert.IsTrue(ss.Selection.HasShapes(2));
+            client.Draw.Rectangle(2, 2, 3, 3);
+            client.Selection.All();
+            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsTrue(client.Selection.HasShapes());
+            Assert.IsTrue(client.Selection.HasShapes(1));
+            Assert.IsTrue(client.Selection.HasShapes(2));
 
-            ss.Selection.None();
-            Assert.IsTrue(ss.HasActiveDocument);
-            Assert.IsFalse(ss.Selection.HasShapes());
+            client.Selection.None();
+            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsFalse(client.Selection.HasShapes());
 
-            ss.Document.Close(true);
+            client.Document.Close(true);
         }
     }
 }

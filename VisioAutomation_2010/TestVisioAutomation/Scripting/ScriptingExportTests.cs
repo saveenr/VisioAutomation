@@ -9,9 +9,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Test_ExportSVGHTML()
         {
-            var ss = GetScriptingClient();
+            var client = GetScriptingClient();
 
-            var doc = ss.Document.New(10, 5);
+            var doc = client.Document.New(10, 5);
 
             var page1 = doc.Pages[1];
             var app = page1.Application;
@@ -21,7 +21,7 @@ namespace TestVisioAutomation
             var s3 = page1.DrawRectangle(0, 1, 1, 2);
             var s4 = page1.DrawRectangle(1, 1, 2, 2);
 
-            ss.Selection.All();
+            client.Selection.All();
 
             string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".html");
 
@@ -29,10 +29,10 @@ namespace TestVisioAutomation
             {
                 System.IO.File.Delete(output_filename);
             }
-            ss.Export.SelectionToSVGXHTML(output_filename);
+            client.Export.SelectionToSVGXHTML(output_filename);
 
             Assert.IsTrue( System.IO.File.Exists(output_filename));
-            ss.Document.Close(true);
+            client.Document.Close(true);
         }
     }
 }

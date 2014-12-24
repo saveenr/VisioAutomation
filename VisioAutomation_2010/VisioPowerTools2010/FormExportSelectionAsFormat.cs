@@ -17,9 +17,9 @@ namespace VisioPowerTools2010
         {
             InitializeComponent();
 
-            var ss = Globals.ThisAddIn.Client;
+            var client = Globals.ThisAddIn.Client;
 
-            if (!ss.HasActiveDocument)
+            if (!client.HasActiveDocument)
             {
                 MessageBox.Show("There is no drawing open to export");
             }
@@ -48,7 +48,7 @@ namespace VisioPowerTools2010
                     }
             }
 
-            var application = ss.VisioApplication;
+            var application = client.VisioApplication;
             var doc = application.ActiveDocument;           
             var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
             var page = application.ActivePage;
@@ -70,14 +70,14 @@ namespace VisioPowerTools2010
                 MessageBox.Show("Output folder does not exist");
                 return;
             }
-            var ss = Globals.ThisAddIn.Client;
+            var client = Globals.ThisAddIn.Client;
             if (this.ExportFormat == enumExportFormat.ExportSVGXHTML)
             {
-                ss.Export.SelectionToSVGXHTML(filename);                
+                client.Export.SelectionToSVGXHTML(filename);                
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {
-                VisioPowerTools2010.ExportExtensions.ExportSelectionToXAML(ss, filename);
+                VisioPowerTools2010.ExportExtensions.ExportSelectionToXAML(client, filename);
             }
             else
             {
