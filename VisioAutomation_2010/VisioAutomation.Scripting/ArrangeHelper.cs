@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
 {
-    public static class LayoutHelper
+    public static class ArrangeHelper
     {
         private static VA.Drawing.Rectangle GetRectangle(VA.Shapes.XFormCells xform)
         {
@@ -64,7 +64,7 @@ namespace VisioAutomation.Scripting
             }
 
             // First get the transforms of the shapes on the given axis
-            var xforms = LayoutHelper.GetXForm(page, shapeids);
+            var xforms = ArrangeHelper.GetXForm(page, shapeids);
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
@@ -110,8 +110,8 @@ namespace VisioAutomation.Scripting
                 : new VA.Drawing.Size(0, spacing);
 
 
-            var sorted_shape_ids = LayoutHelper.SortShapesByPosition(page, shapeids, sortpos);
-            var input_xfrms = LayoutHelper.GetXForm(page, sorted_shape_ids); ;
+            var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(page, shapeids, sortpos);
+            var input_xfrms = ArrangeHelper.GetXForm(page, sorted_shape_ids); ;
             var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
             var bb = GetBoundingBox(input_xfrms);
             var cur_pos = new VA.Drawing.Point(bb.Left, bb.Bottom);
@@ -149,7 +149,7 @@ namespace VisioAutomation.Scripting
 
         public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Shapes.XFormCells> xfrms)
         {
-            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => LayoutHelper.GetRectangle(i)));
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => ArrangeHelper.GetRectangle(i)));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
@@ -164,12 +164,12 @@ namespace VisioAutomation.Scripting
         {
             // First caculate the new transforms
             var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
-            var input_xfrms = LayoutHelper.GetXForm(page, shapeids);
+            var input_xfrms = ArrangeHelper.GetXForm(page, shapeids);
             var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
 
             foreach (var input_xfrm in input_xfrms)
             {
-                var old_lower_left = LayoutHelper.GetRectangle(input_xfrm).LowerLeft;
+                var old_lower_left = ArrangeHelper.GetRectangle(input_xfrm).LowerLeft;
                 var new_lower_left = snap_grid.Snap(old_lower_left);
                 var output_xfrm = _SnapCorner(corner, new_lower_left, input_xfrm);
                 output_xfrms.Add(output_xfrm);
@@ -227,7 +227,7 @@ namespace VisioAutomation.Scripting
 
         public static void SnapSize(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, VA.Drawing.Size minsize)
         {
-            var input_xfrms = LayoutHelper.GetXForm(page, shapeids);
+            var input_xfrms = ArrangeHelper.GetXForm(page, shapeids);
             var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
 
             var grid = new VA.Drawing.SnappingGrid(snapsize);
