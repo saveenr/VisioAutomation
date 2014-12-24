@@ -17,8 +17,8 @@ namespace VisioPowerTools
 
         private void buttonSetFillGradient_Click(object sender, System.EventArgs e)
         {
-            var ss = VisioPowerToolsAddIn.Client;
-            var selection = ss.Selection.Get();
+            var client = VisioPowerToolsAddIn.Client;
+            var selection = client.Selection.Get();
             if (selection.Count < 1)
             {
                 return;
@@ -42,7 +42,7 @@ namespace VisioPowerTools
 
 
             var update = new VA.ShapeSheet.Update();
-            var shapes = ss.Selection.GetShapes().ToList();
+            var shapes = client.Selection.GetShapes().ToList();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -50,7 +50,7 @@ namespace VisioPowerTools
                 update.SetFormulas((short)shapeid,format);
             }
 
-            update.Execute(ss.VisioApplication.ActivePage);    
+            update.Execute(client.VisioApplication.ActivePage);    
         }
 
         private void buttonUpdateFill_Click(object sender, System.EventArgs e)

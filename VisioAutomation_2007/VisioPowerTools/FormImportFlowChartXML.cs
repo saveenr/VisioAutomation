@@ -46,7 +46,7 @@ namespace VisioPowerTools
                 return;
             }
 
-            var ss = VisioPowerToolsAddIn.Client;
+            var client = VisioPowerToolsAddIn.Client;
             System.Xml.Linq.XDocument xdoc;
             try
             {
@@ -64,7 +64,7 @@ namespace VisioPowerTools
             try
             {
                 VisioPowerToolsAddIn.g_clientcontext.OnWriteString += write_msg;
-                drawings = VisioAutomation.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(ss, xdoc);
+                drawings = VisioAutomation.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(client, xdoc);
                 VisioPowerToolsAddIn.g_clientcontext.OnWriteString -= write_msg;
             }
             catch (VisioAutomation.AutomationException)
@@ -79,7 +79,7 @@ namespace VisioPowerTools
                 VisioPowerToolsAddIn.g_clientcontext.OnWriteString += write_msg;
                 foreach (var d in drawings)
                 {
-                    var page = ss.Page.New(null, false);
+                    var page = client.Page.New(null, false);
                     d.Render(page);
                 }
                 VisioPowerToolsAddIn.g_clientcontext.OnWriteString -= write_msg;
