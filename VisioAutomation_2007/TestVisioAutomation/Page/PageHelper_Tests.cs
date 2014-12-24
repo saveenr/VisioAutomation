@@ -31,19 +31,19 @@ namespace TestVisioAutomation
         {
             var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
 
-            var ss = this.GetScriptingClient();
+            var client = this.GetScriptingClient();
 
-            var or1 = ss.Page.GetOrientation();
+            var or1 = client.Page.GetOrientation();
             Assert.AreEqual(VA.Pages.PrintPageOrientation.Portrait, or1);
 
-            var size1 = ss.Page.GetSize();
+            var size1 = client.Page.GetSize();
             Assert.AreEqual(new VA.Drawing.Size(4, 3), size1);
 
-            ss.Page.SetOrientation(VA.Pages.PrintPageOrientation.Landscape);
+            client.Page.SetOrientation(VA.Pages.PrintPageOrientation.Landscape);
 
-            var or2 = ss.Page.GetOrientation();
+            var or2 = client.Page.GetOrientation();
             Assert.AreEqual(VA.Pages.PrintPageOrientation.Landscape, or2);
-            var size2 = ss.Page.GetSize();
+            var size2 = client.Page.GetSize();
             Assert.AreEqual(new VA.Drawing.Size(3, 4), size2);
 
             page1.Delete(0);
