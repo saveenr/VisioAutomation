@@ -84,5 +84,13 @@ namespace VisioAutomation
 
             return output_string;
         }
+
+        public static ShapeSheet.FormulaLiteral ColorToFormulaRGB(System.Drawing.Color color)
+        {
+            // TODO: Fix remove this
+            string formula = System.String.Format("RGB({0},{1},{2})", color.R, color.G, color.B);
+            return formula;
+            throw new System.NotImplementedException();
+        }
     }
 }

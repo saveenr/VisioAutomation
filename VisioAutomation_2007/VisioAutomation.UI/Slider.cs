@@ -6,13 +6,13 @@ namespace VisioAutomation.UI.CommonControls
     public partial class Slider : UserControl
     {
         private System.Drawing.Rectangle slider_rect;
-        private System.Drawing.Rectangle slider_rect2;
+        private readonly System.Drawing.Rectangle slider_rect2;
         private int marker_radius = 4;
         private float _min = 0.0f;
         private float _max = 100.0f;
-        private System.Drawing.Point[] points;
-        private System.Drawing.Point[] groove_points;
-        private int groove_y;
+        private readonly System.Drawing.Point[] points;
+        private readonly System.Drawing.Point[] groove_points;
+        private readonly int groove_y;
 
         public Slider()
         {

@@ -76,18 +76,18 @@ namespace PascalGanaye.Popup
             public static bool mShowShadow;
             private bool mClosing;
             private const int BORDER_MARGIN = 1;
-            private Timer mTimer;
+            private readonly Timer mTimer;
             private Size mControlSize;
             private Size mWindowSize = new Size(0, 0);
             private Point mNormalPos;
             private Rectangle mCurrentBounds = new Rectangle(0, 0, 0, 0);
-            private Popup mPopup;
-            private ePlacement mPlacement;
-            private System.DateTimeOffset mTimerStarted;
+            private readonly Popup mPopup;
+            private readonly ePlacement mPlacement;
+            private readonly System.DateTimeOffset mTimerStarted;
             private double mProgress;
             private int mx, my;
             private bool mResizing;
-            public Panel mResizingPanel;
+            public readonly Panel mResizingPanel;
             private const int CS_DROPSHADOW = 0x20000;
             private static Image mBackgroundImage;
 

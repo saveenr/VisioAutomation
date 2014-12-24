@@ -9,9 +9,9 @@ namespace VisioAutomation.UI
     {
         public static void Normalize24BitRGB(byte r, byte g, byte b, out double R, out double G, out double B)
         {
-            R = ((double)r) / 255.0;
-            G = ((double)g) / 255.0;
-            B = ((double)b) / 255.0;
+            R = r / 255.0;
+            G = g / 255.0;
+            B = b / 255.0;
         }
 
         public static void DeNormalize24BitRGB(double R, double G, double B, out byte r, out byte g, out byte b)

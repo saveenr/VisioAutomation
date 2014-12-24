@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -41,18 +39,18 @@ namespace VisioAutomation.Scripting
             return output_string;
         }
 
-        internal static void set_text_wrapping(IVisio.Page page,
+        public static void set_text_wrapping(IVisio.Page page,
                                                IList<int> shapeids,
                                                bool wrap)
         {
             const string formula_wrap = "WIDTH*1";
             const string formula_no_wrap = "TEXTWIDTH(TheText)";
             string formula = wrap ? formula_wrap : formula_no_wrap;
-            var update = new Update();
+            var update = new VA.ShapeSheet.Update();
             
             foreach (int shapeid in shapeids)
             {
-                update.SetFormula((short)shapeid, SRCConstants.TxtWidth, formula);
+                update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.TxtWidth, formula);
             }
 
             update.Execute(page);
