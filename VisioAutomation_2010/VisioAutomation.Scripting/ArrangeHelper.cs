@@ -5,7 +5,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
 {
-    public static class ArrangeHelper
+    internal static class ArrangeHelper
     {
         private static VA.Drawing.Rectangle GetRectangle(VA.Shapes.XFormCells xform)
         {

@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Scripting
 {
-    static class XmlUtil
+    internal static class XmlUtil
     {
         public static string GetAttributeValue(SXL.XElement el, SXL.XName name, string defval)
         {
