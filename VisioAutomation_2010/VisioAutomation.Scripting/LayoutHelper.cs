@@ -7,40 +7,40 @@ namespace VisioAutomation.Scripting
 {
     public static class LayoutHelper
     {
-        private static VA.Drawing.Rectangle GetRectangle(VA.Shapes.XFormCells xFormCells)
+        private static VA.Drawing.Rectangle GetRectangle(VA.Shapes.XFormCells xform)
         {
-            var pin = new VA.Drawing.Point(xFormCells.PinX.Result, xFormCells.PinY.Result);
-            var locpin = new VA.Drawing.Point(xFormCells.LocPinX.Result, xFormCells.LocPinY.Result);
-            var size = new VA.Drawing.Size(xFormCells.Width.Result, xFormCells.Height.Result);
+            var pin = new VA.Drawing.Point(xform.PinX.Result, xform.PinY.Result);
+            var locpin = new VA.Drawing.Point(xform.LocPinX.Result, xform.LocPinY.Result);
+            var size = new VA.Drawing.Size(xform.Width.Result, xform.Height.Result);
             return new VA.Drawing.Rectangle(pin - locpin, size);
         }
 
-        private static double GetPosition(VA.Shapes.XFormCells xform, XFormPosition pos)
+        private static double GetPositionOnShape(VA.Shapes.XFormCells xform, PositionOnShape pos)
         {
-            if (pos == XFormPosition.PinY)
+            if (pos == PositionOnShape.PinY)
             {
                 return xform.PinY.Result;
             }
-            else if (pos == XFormPosition.PinX)
+            else if (pos == PositionOnShape.PinX)
             {
                 return xform.PinX.Result;
             }
             else
             {
                 var r = GetRectangle(xform);
-                if (pos == XFormPosition.Left)
+                if (pos == PositionOnShape.Left)
                 {
                     return r.Left;
                 }
-                else if (pos == XFormPosition.Right)
+                else if (pos == PositionOnShape.Right)
                 {
                     return r.Right;
                 }
-                else if (pos == XFormPosition.Top)
+                else if (pos == PositionOnShape.Top)
                 {
                     return r.Top;
                 }
-                else if (pos == XFormPosition.Right)
+                else if (pos == PositionOnShape.Right)
                 {
                     return r.Bottom;
                 }
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        public static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, XFormPosition pos)
+        public static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, PositionOnShape pos)
         {
             if (page == null)
             {
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting
 
 
             var sorted_shape_ids = Enumerable.Range(0, shapeids.Count)
-                .Select(i => new { index = i, shapeid = shapeids[i], pos = GetPosition(xforms[i], pos) })
+                .Select(i => new { index = i, shapeid = shapeids[i], pos = GetPositionOnShape(xforms[i], pos) })
                 .OrderBy(i => i.pos)
                 .Select(i => i.shapeid)
                 .ToList();
@@ -102,8 +102,8 @@ namespace VisioAutomation.Scripting
 
             // Calculate the new Xfrms
             var sortpos = axis == VA.Drawing.Axis.XAxis
-                ? XFormPosition.PinX
-                : XFormPosition.PinY;
+                ? PositionOnShape.PinX
+                : PositionOnShape.PinY;
 
             var delta = axis == VA.Drawing.Axis.XAxis
                 ? new VA.Drawing.Size(spacing, 0)
