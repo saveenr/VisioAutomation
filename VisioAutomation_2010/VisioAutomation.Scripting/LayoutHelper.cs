@@ -5,8 +5,6 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Scripting
 {
-    public enum XFormPosition { PinY, PinX, Left, Right, Top, Bottom }
-
     public static class LayoutHelper
     {
         private static VA.Drawing.Rectangle GetRectangle(VA.Shapes.XFormCells xFormCells)
