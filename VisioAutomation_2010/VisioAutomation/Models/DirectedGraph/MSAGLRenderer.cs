@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Shapes.Connections;
-using VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using MG = Microsoft.Msagl;
@@ -428,7 +426,7 @@ namespace VisioAutomation.Models.DirectedGraph
             // ADD CUSTOM PROPS
             if (layout_shape.CustomProperties != null)
             {
-                shape_node.CustomProperties = new Dictionary<string, CustomPropertyCells>();
+                shape_node.CustomProperties = new Dictionary<string, VA.Shapes.CustomProperties.CustomPropertyCells>();
                 foreach (var kv in layout_shape.CustomProperties)
                 {
                     shape_node.CustomProperties[kv.Key] = kv.Value;
@@ -453,19 +451,19 @@ namespace VisioAutomation.Models.DirectedGraph
             return bez_shape;
         }
 
-        private IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(ConnectorType ct)
+        private IVisio.VisCellVals ConnectorTypeToCellVal_Appearance(VA.Shapes.Connections.ConnectorType ct)
         {
             switch (ct)
             {
-                case (ConnectorType.Curved):
+                case (VA.Shapes.Connections.ConnectorType.Curved):
                     {
                         return IVisio.VisCellVals.visLORouteExtNURBS;
                     }
-                case (ConnectorType.Straight):
+                case (VA.Shapes.Connections.ConnectorType.Straight):
                     {
                         return IVisio.VisCellVals.visLORouteExtStraight;
                     }
-                case (ConnectorType.RightAngle):
+                case (VA.Shapes.Connections.ConnectorType.RightAngle):
                     {
                         return IVisio.VisCellVals.visLORouteExtDefault;
                     }
@@ -476,19 +474,19 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private IVisio.VisCellVals ConnectorTypeToCellVal_Style(ConnectorType ct)
+        private IVisio.VisCellVals ConnectorTypeToCellVal_Style(VA.Shapes.Connections.ConnectorType ct)
         {
             switch (ct)
             {
-                case (ConnectorType.Curved):
+                case (VA.Shapes.Connections.ConnectorType.Curved):
                     {
                         return IVisio.VisCellVals.visLORouteRightAngle;
                     }
-                case (ConnectorType.Straight):
+                case (VA.Shapes.Connections.ConnectorType.Straight):
                     {
                         return IVisio.VisCellVals.visLORouteCenterToCenter;
                     }
-                case (ConnectorType.RightAngle):
+                case (VA.Shapes.Connections.ConnectorType.RightAngle):
                     {
                         return IVisio.VisCellVals.visLORouteDefault;
                     }
