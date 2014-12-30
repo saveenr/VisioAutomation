@@ -1,8 +1,19 @@
+using VA=VisioAutomation;
+
 namespace VisioAutomation.Models.DirectedGraph
 {
     class VisioRenderer
     {
-        public static void Render(Microsoft.Office.Interop.Visio.Page page, VisioAutomation.Models.DirectedGraph.Drawing drawing, VisioLayoutOptions options)
+        public VA.Pages.PageLayout.Layout Layout;
+
+        public VisioRenderer()
+        {
+            var flowchart = new VA.Pages.PageLayout.FlowchartLayout();
+            flowchart.Direction = VA.Pages.PageLayout.Direction.TopToBottom;
+            this.Layout = flowchart;
+        }
+
+        public void Render(Microsoft.Office.Interop.Visio.Page page, VisioAutomation.Models.DirectedGraph.Drawing drawing, VisioLayoutOptions options)
         {
             // This is Visio-based render - it does NOT use MSAGL
             if (page == null)
@@ -33,9 +44,16 @@ namespace VisioAutomation.Models.DirectedGraph
                 connector.DOMNode = connector_node;
                 connector.DOMNode.Text = new VisioAutomation.Text.Markup.TextElement(connector.Label);
             }
+
             page_node.ResizeToFit = true;
             page_node.ResizeToFitMargin = new VisioAutomation.Drawing.Size(0.5, 0.5);
             page_node.Render(page);
+
+            // Perform final Visio page layout
+            if (this.Layout != null)
+            {
+                this.Layout.Apply(page);                
+            }
         }
     }
 }

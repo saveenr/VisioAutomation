@@ -47,7 +47,8 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public void Render(IVisio.Page page, VisioLayoutOptions options)
         {
-            VA.Models.DirectedGraph.VisioRenderer.Render(page, this, options);
+            var vr = new VisioRenderer();
+            vr.Render(page, this, options);
         }
 
         public void Render(IVisio.Page page, VA.Models.DirectedGraph.MSAGLLayoutOptions options)
