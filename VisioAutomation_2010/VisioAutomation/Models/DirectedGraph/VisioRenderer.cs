@@ -47,13 +47,11 @@ namespace VisioAutomation.Models.DirectedGraph
 
             page_node.ResizeToFit = true;
             page_node.ResizeToFitMargin = new VisioAutomation.Drawing.Size(0.5, 0.5);
-            page_node.Render(page);
-
-            // Perform final Visio page layout
             if (this.Layout != null)
             {
-                this.Layout.Apply(page);                
+                page_node.Layout = this.Layout;
             }
+            page_node.Render(page);
         }
     }
 }
