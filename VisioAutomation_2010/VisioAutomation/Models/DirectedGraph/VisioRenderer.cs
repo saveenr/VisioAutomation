@@ -10,6 +10,11 @@ namespace VisioAutomation.Models.DirectedGraph
                 throw new System.ArgumentNullException("page");
             }
 
+            if (options== null)
+            {
+                throw new System.ArgumentNullException("options");
+            }
+            
             var page_node = new VisioAutomation.DOM.Page();
             double x = 0;
             double y = 1;

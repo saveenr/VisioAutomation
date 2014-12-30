@@ -45,10 +45,8 @@ namespace VisioAutomation.Models.DirectedGraph
             this.Connectors = new ConnectorList();
         }
 
-        public void Render(IVisio.Page page)
+        public void Render(IVisio.Page page, VisioLayoutOptions options)
         {
-            // This is Visio-based render - it does NOT use MSAGL
-            var options = new VisioLayoutOptions();
             VA.Models.DirectedGraph.VisioRenderer.Render(page, this, options);
         }
 

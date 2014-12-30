@@ -501,6 +501,16 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public static void Render(IVisio.Page page, VisioAutomation.Models.DirectedGraph.Drawing drawing, DGMODEL.MSAGLLayoutOptions options)
         {
+            if (page == null)
+            {
+                throw new System.ArgumentNullException("page");
+            }
+
+            if (options == null)
+            {
+                throw new System.ArgumentNullException("options");
+            }
+
             var renderer = new VA.Models.DirectedGraph.MSAGLRenderer();
             renderer.LayoutOptions = options;
             renderer.Render(drawing,page);

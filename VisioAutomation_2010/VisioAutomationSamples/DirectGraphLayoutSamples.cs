@@ -126,10 +126,11 @@ namespace VisioAutomationSamples
             c2.Cells.LineWeight = 0.10;
 
             // Perform the rendering
-            var options = new DGMODEL.MSAGLLayoutOptions();
-            options.UseDynamicConnectors = false;
+            var msagl_options = new DGMODEL.MSAGLLayoutOptions();
+            msagl_options.UseDynamicConnectors = false;
 
-            directed_graph_drawing.Render(page1);
+            var visio_options = new DGMODEL.VisioLayoutOptions();
+            directed_graph_drawing.Render(page1,visio_options);
 
             var layout_config = new VA.Pages.PageLayout.HierarchyLayout();
             layout_config.Direction = VA.Pages.PageLayout.Direction.BottomToTop;

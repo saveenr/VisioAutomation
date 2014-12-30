@@ -6,6 +6,7 @@ using Microsoft.Office.Tools.Ribbon;
 using VisioAutomation.Extensions;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
+using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioPowerTools2010
 {
@@ -337,8 +338,9 @@ namespace VisioPowerTools2010
             {
                 page = doc.Pages.Add();                
             }
-    
-            model.Render(page);
+
+            var visio_options = new DGMODEL.VisioLayoutOptions();
+            model.Render(page,visio_options);
 
             var pl = new VA.Pages.PageLayout.FlowchartLayout();
             pl.ConnectorStyle = VisioAutomation.Pages.PageLayout.ConnectorStyle.Flowchart;
