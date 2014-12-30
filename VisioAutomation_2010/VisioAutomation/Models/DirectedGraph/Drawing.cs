@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using VisioAutomation.Shapes.Connections;
-using VA = VisioAutomation;
+﻿using VA = VisioAutomation;
 using IVisio=Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.DirectedGraph
@@ -25,7 +21,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public Connector Connect(string id, Shape from, Shape to)
         {
-            return Connect(id, from, to, id, ConnectorType.RightAngle);
+            return Connect(id, from, to, id, VA.Shapes.Connections.ConnectorType.RightAngle);
         }
 
         public Connector Connect(
@@ -33,7 +29,7 @@ namespace VisioAutomation.Models.DirectedGraph
             Shape from, 
             Shape to, 
             string label,
-             ConnectorType type)
+             VA.Shapes.Connections.ConnectorType type)
         {
             var new_connector = new Connector(from, to);
             new_connector.Label = label;
@@ -51,36 +47,14 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public void Render(IVisio.Page page)
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException("page");
-            }
-
-            var page_node = new VA.DOM.Page();
-            double x = 0;
-            double y = 1;
-            foreach (var shape in this.Shapes)
-            {
-                var shape_nodes = page_node.Shapes.Drop(shape.MasterName, shape.StencilName, x, y);
-                shape.DOMNode = shape_nodes;
-                shape.DOMNode.Text = new VA.Text.Markup.TextElement( shape.Label ) ;
-                x += 1.0;
-            }
-
-            foreach (var connector in this.Connectors)
-            {
-
-                var connector_node = page_node.Shapes.Connect("Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
-                connector.DOMNode = connector_node;
-                connector.DOMNode.Text = new VA.Text.Markup.TextElement( connector.Label );
-            }
-            page_node.ResizeToFit = true;
-            page_node.ResizeToFitMargin = new VA.Drawing.Size(0.5, 0.5);
-            page_node.Render(page);
+            // This is Visio-based render - it does NOT use MSAGL
+            var options = new VisioLayoutOptions();
+            VA.Models.DirectedGraph.VisioRenderer.Render(page, this, options);
         }
 
         public void Render(IVisio.Page page, VA.Models.DirectedGraph.MSAGLLayoutOptions options)
         {
+            // This is MSAGL-based render
             VA.Models.DirectedGraph.MSAGLRenderer.Render(page, this, options);
         }
     }

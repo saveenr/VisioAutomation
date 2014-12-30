@@ -85,6 +85,8 @@
     <Compile Include="Application\LogSession.cs" />
     <Compile Include="Application\LogState.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
+    <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
+    <Compile Include="Models\DirectedGraph\VisioRenderer.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
     <Compile Include="TextUtil.cs" />
     <Compile Include="Drawing\Margin.cs" />
