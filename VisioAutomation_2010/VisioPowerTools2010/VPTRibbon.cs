@@ -317,7 +317,7 @@ namespace VisioPowerTools2010
                         tonode = dic[to];
                     }
 
-                    model.Connect("C" + cn.ToString(), fromnode, tonode);
+                    model.AddConnection("C" + cn.ToString(), fromnode, tonode);
                     cn +=1;
 
                 }

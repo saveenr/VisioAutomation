@@ -176,7 +176,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     var def_con_color = new VA.Drawing.ColorRGB(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
-                    var dg_connector = pagedata.DirectedGraph.Connect(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
+                    var dg_connector = pagedata.DirectedGraph.AddConnection(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
 
                     dg_connector.Cells = new VA.DOM.ShapeCells();
                     dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();

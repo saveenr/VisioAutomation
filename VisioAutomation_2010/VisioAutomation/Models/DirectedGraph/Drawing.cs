@@ -8,6 +8,12 @@ namespace VisioAutomation.Models.DirectedGraph
         public ShapeList Shapes;
         public ConnectorList Connectors;
 
+        public Drawing()
+        {
+            this.Shapes = new ShapeList();
+            this.Connectors = new ConnectorList();
+        }
+
         public Shape AddShape(string id, string label, string stencil_name, string master_name)
         {
             var s0 = new Shape(id);
@@ -19,12 +25,12 @@ namespace VisioAutomation.Models.DirectedGraph
             return s0;
         }
 
-        public Connector Connect(string id, Shape from, Shape to)
+        public Connector AddConnection(string id, Shape from, Shape to)
         {
-            return Connect(id, from, to, id, VA.Shapes.Connections.ConnectorType.RightAngle);
+            return AddConnection(id, from, to, id, VA.Shapes.Connections.ConnectorType.RightAngle);
         }
 
-        public Connector Connect(
+        public Connector AddConnection(
             string id, 
             Shape from, 
             Shape to, 
@@ -39,13 +45,7 @@ namespace VisioAutomation.Models.DirectedGraph
             return new_connector;
         }
 
-        public Drawing()
-        {
-            this.Shapes = new ShapeList();
-            this.Connectors = new ConnectorList();
-        }
-
-        public void Render(IVisio.Page page, VisioLayoutOptions options)
+        public void Render(IVisio.Page page, VA.Models.DirectedGraph.VisioLayoutOptions options)
         {
             var vr = new VisioRenderer();
             vr.Render(page, this, options);
@@ -53,7 +53,6 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public void Render(IVisio.Page page, VA.Models.DirectedGraph.MSAGLLayoutOptions options)
         {
-            // This is MSAGL-based render
             VA.Models.DirectedGraph.MSAGLRenderer.Render(page, this, options);
         }
     }
