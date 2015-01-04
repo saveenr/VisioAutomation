@@ -14,9 +14,9 @@ namespace VisioAutomation.Models.DirectedGraph
             this.items = new Dictionary<string, T>();
         }
 
-        public void Add(string id, T g)
+        public void Add(string id, T item)
         {
-            this.items.Add(id, g);
+            this.items.Add(id, item);
         }
 
         public T this[string index]
@@ -42,7 +42,7 @@ namespace VisioAutomation.Models.DirectedGraph
             return GetEnumerator();
         }
 
-        public bool ContainsKey(string id)
+        public bool ContainsID(string id)
         {
             return this.items.ContainsKey(id);
         }
@@ -55,7 +55,6 @@ namespace VisioAutomation.Models.DirectedGraph
                 {
                     yield return id;
                 }
-
             }
         }
 
