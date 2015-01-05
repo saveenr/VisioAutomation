@@ -136,17 +136,19 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DOM_DrawOrgChart()
         {
+            var app = this.GetVisioApplication();
+            var vis_ver = System.Version.Parse(app.Version);
+
             // How to draw using a Template instead of a doc and a stencil
             const string orgchart_vst = "orgch_u.vst";
+            string basic_stencil = vis_ver.Major >= 15 ? "basic_u.vssx": "basic_u.vss";
+            string position_master_name = vis_ver.Major >= 15 ? "Position Belt" : "Position";
 
-            var app = this.GetVisioApplication();
             var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
             var page_node = new VA.DOM.Page();
             doc_node.Pages.Add(page_node);
 
             // Have to be smart about selecting the right master with Visio 2013
-            var vis_ver = System.Version.Parse(app.Version);
-            string position_master_name = vis_ver.Major >= 15 ? "Position Belt" : "Position";
 
             var s1 = new VisioAutomation.DOM.Shape(position_master_name, null, new VA.Drawing.Point(3, 8));
             page_node.Shapes.Add(s1);
@@ -157,8 +159,8 @@ namespace TestVisioAutomation
             var s3 = new VisioAutomation.DOM.Shape(position_master_name, null, new VA.Drawing.Point(6, 4));
             page_node.Shapes.Add(s3);
 
-            page_node.Shapes.Connect("Dynamic Connector", "basic_u.vss", s1, s2);
-            page_node.Shapes.Connect("Dynamic Connector", "basic_u.vss", s1, s3);
+            page_node.Shapes.Connect("Dynamic Connector", basic_stencil, s1, s2);
+            page_node.Shapes.Connect("Dynamic Connector", basic_stencil, s1, s3);
 
             var doc = doc_node.Render(app);
 

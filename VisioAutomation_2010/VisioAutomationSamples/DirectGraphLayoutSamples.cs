@@ -29,16 +29,21 @@ namespace VisioAutomationSamples
 
         private static DGMODEL.Drawing get_dg_drawing()
         {
+
+            var ver = System.Version.Parse(SampleEnvironment.Application.Version);
+            string server_stencil = (ver.Major >= 15) ? "server_u.vssx" : "server_u.vss";
+            string basflo_stencil = (ver.Major >= 15) ? "basflo_u.vssx" : "basflo_u.vss";
+
             var directed_graph_drawing = new DGMODEL.Drawing();
 
             // Create a Node 0
-            var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", "basflo_u.vss", "Decision");
+            var n0 = directed_graph_drawing.AddShape("n0", "N0 Untitled Node", basflo_stencil, "Decision");
 
             // Format Node 0
             n0.Size = new VA.Drawing.Size(3, 2);
 
             // Create Node 1
-            var n1 = directed_graph_drawing.AddShape("n1", "N1", "basflo_u.vss", "Decision");
+            var n1 = directed_graph_drawing.AddShape("n1", "N1", basflo_stencil, "Decision");
 
             // Format Node 1
             n1.Cells = new VA.DOM.ShapeCells();
@@ -47,14 +52,14 @@ namespace VisioAutomationSamples
             n1.Cells.FillPattern = 40;
 
             // Create Node 2
-            var n2 = directed_graph_drawing.AddShape("n2", "N2 MailServer", "server_u.vss", "Server");
+            var n2 = directed_graph_drawing.AddShape("n2", "N2 MailServer", server_stencil, "Server");
 
             // Create Node 3
 
-            var n3 = directed_graph_drawing.AddShape("n3", "N3", "basflo_u.vss", "Data");
+            var n3 = directed_graph_drawing.AddShape("n3", "N3", basflo_stencil, "Data");
 
             // Create Node 4
-            var n4 = directed_graph_drawing.AddShape("n4", "N4", "basflo_u.vss", "Data");
+            var n4 = directed_graph_drawing.AddShape("n4", "N4", basflo_stencil, "Data");
 
             // Create the connectors to join the nodes
             // Note that Node 4 is deliberately not connected to any other node
