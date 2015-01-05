@@ -157,6 +157,8 @@ namespace TestVisioAutomation
             var s3 = new VisioAutomation.DOM.Shape(position_master_name, null, new VA.Drawing.Point(6, 4));
             page_node.Shapes.Add(s3);
 
+            page_node.Shapes.Connect("Dynamic Connector", "basic_u.vss", s1, s2);
+            page_node.Shapes.Connect("Dynamic Connector", "basic_u.vss", s1, s3);
 
             var doc = doc_node.Render(app);
 
