@@ -160,7 +160,7 @@ namespace TestVisioAutomation
 
             var doc = doc_node.Render(app);
 
-            //doc.Close(true);
+            doc.Close(true);
         }
 
         [TestMethod]
