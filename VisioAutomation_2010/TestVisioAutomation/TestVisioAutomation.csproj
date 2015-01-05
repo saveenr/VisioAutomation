@@ -87,6 +87,7 @@
     <Compile Include="Connections\ConnectivityMap.cs" />
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
+    <Compile Include="DOM\DOM_Text.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Models\CointainerLayout_Tests.cs" />
