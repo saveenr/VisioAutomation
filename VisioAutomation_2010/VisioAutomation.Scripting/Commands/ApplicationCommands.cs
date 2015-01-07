@@ -129,5 +129,22 @@ namespace VisioAutomation.Scripting.Commands
                 return false;
             }
         }
+
+        private static System.Version visio_app_version;
+        public System.Version Version
+        {
+            get
+            {
+                if (visio_app_version == null)
+                {
+                    this.AssertApplicationAvailable();
+                    if (visio_app_version == null)
+                    {
+                        visio_app_version = System.Version.Parse(this.Client.VisioApplication.Version);
+                    }
+                }
+                return visio_app_version;
+            }            
+        }
     }
 }

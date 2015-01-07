@@ -142,6 +142,7 @@ namespace TestVisioAutomation
             // How to draw using a Template instead of a doc and a stencil
             const string orgchart_vst = "orgch_u.vst";
             string basic_stencil = vis_ver.Major >= 15 ? "basic_u.vssx": "basic_u.vss";
+            string connectors_stencil = vis_ver.Major >= 15 ? "connec_u.vssx" : "connec_u.vss";
             string position_master_name = vis_ver.Major >= 15 ? "Position Belt" : "Position";
 
             var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
@@ -159,12 +160,12 @@ namespace TestVisioAutomation
             var s3 = new VisioAutomation.DOM.Shape(position_master_name, null, new VA.Drawing.Point(6, 4));
             page_node.Shapes.Add(s3);
 
-            page_node.Shapes.Connect("Dynamic Connector", basic_stencil, s1, s2);
-            page_node.Shapes.Connect("Dynamic Connector", basic_stencil, s1, s3);
+            page_node.Shapes.Connect("Dynamic Connector", connectors_stencil, s1, s2);
+            page_node.Shapes.Connect("Dynamic Connector", connectors_stencil, s1, s3);
 
             var doc = doc_node.Render(app);
 
-            doc.Close(true);
+            //doc.Close(true);
         }
 
         [TestMethod]
@@ -268,10 +269,13 @@ namespace TestVisioAutomation
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var basic_stencil = doc.Application.Documents.OpenStencil("basic_u.vss");
-            var basic_masters = basic_stencil.Masters;
 
-            var connectors_stencil = doc.Application.Documents.OpenStencil("connec_u.vss");
+            string basic_u_filename = "basic_u.vss";
+            string connec_u_filename = "connec_u.vss";
+
+            var basic_stencil = doc.Application.Documents.OpenStencil(basic_u_filename);
+            var basic_masters = basic_stencil.Masters;
+            var connectors_stencil = doc.Application.Documents.OpenStencil(connec_u_filename);
             var connectors_masters = connectors_stencil.Masters;
 
             var master1 = basic_masters["Rectangle"];

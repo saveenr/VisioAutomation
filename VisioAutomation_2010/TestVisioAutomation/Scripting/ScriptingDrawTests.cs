@@ -3,6 +3,7 @@ using System.Linq;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
 using VisioAutomation.Extensions;
+using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace TestVisioAutomation
 {
@@ -257,6 +258,25 @@ namespace TestVisioAutomation
         {
             var dg_xml = SXL.XDocument.Parse(dg_text);
             var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(client, dg_xml);
+
+            // this is a temporary fix to handle the fact that server_u.vss in Visio 2013 doesn't result in server_u.vssx 
+            // gettign automatically loaded
+
+            var version = client.Application.Version;
+            if (version.Major >= 15)
+            {
+                foreach (var drawing in dg_model)
+                {
+                    foreach (var shape in drawing.Shapes)
+                    {
+                        if (shape.StencilName == "server_u.vss")
+                        {
+                            shape.StencilName = "server_u.vssx";
+                        }
+                    }
+                }
+            }
+            
             client.Draw.DirectedGraph(dg_model);
         }
         
@@ -266,7 +286,9 @@ namespace TestVisioAutomation
             var client = GetScriptingClient();
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
-            var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");
+
+            string basic_stencil_name = "Basic_U.VSS";
+            var basic_stencil = client.Document.OpenStencil(basic_stencil_name);
             var master = client.Master.Get("Rectangle", basic_stencil);
             client.Master.Drop(master, 2, 2);
             var application = client.VisioApplication;
