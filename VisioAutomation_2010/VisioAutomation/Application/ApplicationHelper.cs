@@ -94,5 +94,13 @@ namespace VisioAutomation.Application
             var visio_window_handle = new System.IntPtr(app.WindowHandle32);
             VA.Internal.Interop.NativeMethods.BringWindowToTop(visio_window_handle);
         }
+
+        public static System.Version GetApplicationVersion(IVisio.Application app)
+        {
+            var v = System.Version.Parse(app.Version);
+            return v;
+        }
+
+
     }
 }

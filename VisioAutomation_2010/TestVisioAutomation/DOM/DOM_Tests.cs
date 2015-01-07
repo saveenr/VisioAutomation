@@ -137,12 +137,11 @@ namespace TestVisioAutomation
         public void DOM_DrawOrgChart()
         {
             var app = this.GetVisioApplication();
-            var vis_ver = System.Version.Parse(app.Version);
+            var vis_ver = VA.Application.ApplicationHelper.GetApplicationVersion(app);
 
             // How to draw using a Template instead of a doc and a stencil
             const string orgchart_vst = "orgch_u.vst";
-            string basic_stencil = vis_ver.Major >= 15 ? "basic_u.vssx": "basic_u.vss";
-            string connectors_stencil = vis_ver.Major >= 15 ? "connec_u.vssx" : "connec_u.vss";
+            string connectors_stencil = "connec_u.vss";
             string position_master_name = vis_ver.Major >= 15 ? "Position Belt" : "Position";
 
             var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
@@ -354,9 +353,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void DOM_VerifyThatUnknownStencilsAreDetected()
         {
+            string non_existent_stencil = "foobar.vss";
+
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var master_node_0 = page_node.Shapes.Drop("Rectangle", "basic_uXXX.vss", 3, 3);
+            var master_node_0 = page_node.Shapes.Drop("Rectangle", non_existent_stencil, 3, 3);
 
             IVisio.Page page = null;
             bool caught = false;
