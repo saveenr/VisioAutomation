@@ -3,6 +3,8 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.DOM
 {
+    using System;
+
     public class MasterRef
     {
         public string MasterName { get; private set; }
@@ -29,15 +31,15 @@ namespace VisioAutomation.DOM
             }
 
 
-            if (mastername.ToLower().EndsWith(".vss"))
+            if (EndwithVSSorVSSX(mastername))
             {
-                throw new AutomationException("Master name ends with .VSS");
+                throw new AutomationException("Master name ends with .VSS or .VSSX");
             }
 
             if (this.StencilName != null)
             {
-                if (!stencilname.ToLower().EndsWith(".vss"))
-                {
+                if (!EndwithVSSorVSSX(stencilname))
+                {                    
                     throw new AutomationException("Stencil name does not end with .VSS");
                 }
             }
@@ -50,6 +52,11 @@ namespace VisioAutomation.DOM
             this.VisioMaster = null;
             this.MasterName = mastername;
             this.StencilName = stencilname;
+        }
+
+        private static bool EndwithVSSorVSSX(string s)
+        {
+            return s.EndsWith(".vss", StringComparison.InvariantCultureIgnoreCase) || s.EndsWith(".vssx", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
