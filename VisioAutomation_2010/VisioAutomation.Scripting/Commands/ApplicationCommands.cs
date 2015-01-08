@@ -90,6 +90,27 @@ namespace VisioAutomation.Scripting.Commands
             return app;
         }
 
+        public IVisio.Application SafeNew()
+        {
+            if (this.Client.HasApplication == false)
+            {
+                // no app - let's create one
+                return this.Client.Application.New();
+            }
+
+            if (this.Client.Application.Validate())
+            {
+                // the app instance is OK
+                return this.Client.VisioApplication;
+            }
+            else
+            {
+                // it's isn't good. Get a new one
+                this.Client.Application.New();
+                return this.Client.VisioApplication;
+            }
+        }
+
         public void Undo()
         {
             this.AssertApplicationAvailable();
