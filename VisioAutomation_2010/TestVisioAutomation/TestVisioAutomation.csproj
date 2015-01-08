@@ -97,6 +97,7 @@
     <Compile Include="Scripting\ScriptingDevTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="Scripting\ScriptingShapeSheet.cs" />
+    <Compile Include="ApplicationHelperTests.cs" />
     <Compile Include="TestExtensions.cs" />
     <Compile Include="VisioApplicationSafeReference.cs" />
     <Compile Include="Models\BoxLayout_Tests.cs" />
