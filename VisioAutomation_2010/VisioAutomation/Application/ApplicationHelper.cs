@@ -101,6 +101,28 @@ namespace VisioAutomation.Application
             return v;
         }
 
+        public static string GetContentLocation(IVisio.Application app)
+        {
+            var ver = VA.Application.ApplicationHelper.GetApplicationVersion(app);
+
+            if (ver.Major == 14)
+            {
+                string path = System.IO.Path.Combine(app.Path, "Visio Content");
+                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                return path;
+            }
+            else if (ver.Major == 15)
+            {
+                string path = System.IO.Path.Combine(app.Path, "Visio Content");
+                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                return path;
+
+            }
+            else
+            {
+                throw new System.ArgumentException("This version of visio not supported");
+            }
+        }
 
     }
 }
