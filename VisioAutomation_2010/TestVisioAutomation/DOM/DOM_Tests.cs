@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
-using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 
@@ -9,31 +8,59 @@ namespace TestVisioAutomation
 {
     public static class CommonStencils
     {
-        public static class Basic 
+        public class BaseStencil
         {
-            public static string Name = "basic_u.vss";
-            public static string Rectangle = "Rectangle";
+            public string Name;
+
+            public BaseStencil(string n)
+            {
+                this.Name = n;
+            }
         }
 
-        public static class Connectors
+        public class BasicDef : BaseStencil
         {
-            public static string Name = "connec_u.vss";
-            public static string Dynamic_Connector = "Dynamic Connector";
+            public BasicDef() : base("basic_u.vss")
+            {
+            }
+
+            public string Rectangle = "Rectangle";
         }
 
-        public static class OrgChart
+        public class ConnectorsDef : BaseStencil
         {
-            public static string Name = "orgch_u.vst";
-            public static string Position = "Position";
+            public ConnectorsDef()
+                : base("connec_u.vss")
+            {
+            }
+
+            public string Dynamic_Connector = "Dynamic Connector";
         }
 
-        public static class OrgChartTemplate
+        public class OrgChartDef : BaseStencil
         {
-            public static string Name = "orgch_u.vst";
-            public static string Position_Belt = "Position Belt";
+            public OrgChartDef()
+                : base("orgch_u.vst")
+            {
+            }
+            public string Position = "Position";
         }
-    
+
+        public class OrgChartBeltDef : BaseStencil
+        {
+            public OrgChartBeltDef()
+                : base("orgch_u.vst")
+            {
+            }
+            public string Position_Belt = "Position Belt";
+        }
+
+        public static BasicDef Basic = new BasicDef();
+        public static ConnectorsDef Connectors = new ConnectorsDef();
+        public static OrgChartDef OrgChart = new OrgChartDef();
+        public static OrgChartBeltDef OrgChartBelt = new OrgChartBeltDef();
     }
+
 
     [TestClass]
     public class DOM_Tests : VisioAutomationTest
@@ -168,8 +195,8 @@ namespace TestVisioAutomation
             var vis_ver = VA.Application.ApplicationHelper.GetApplicationVersion(app);
 
             // How to draw using a Template instead of a doc and a stencil
-            string orgchart_vst = vis_ver.Major >= 15 ? CommonStencils.OrgChartTemplate.Name : CommonStencils.OrgChart.Name;
-            string position_master_name = vis_ver.Major >= 15 ? CommonStencils.OrgChartTemplate.Position_Belt : CommonStencils.OrgChart.Position;
+            string orgchart_vst = vis_ver.Major >= 15 ? CommonStencils.OrgChartBelt.Name : CommonStencils.OrgChart.Name;
+            string position_master_name = vis_ver.Major >= 15 ? CommonStencils.OrgChartBelt.Position_Belt : CommonStencils.OrgChart.Position;
 
             var doc_node = new VA.DOM.Document(orgchart_vst, IVisio.VisMeasurementSystem.visMSUS);
             var page_node = new VA.DOM.Page();
