@@ -46,6 +46,7 @@ namespace VisioAutomation.VDX
 
             // important to use DisableFormatting - Visio is very sensitive to whitespace in the <Text> element when there is complex formatting
             var saveoptions = SXL.SaveOptions.DisableFormatting;
+
             dom.Save(output_filename, saveoptions);
         }
 

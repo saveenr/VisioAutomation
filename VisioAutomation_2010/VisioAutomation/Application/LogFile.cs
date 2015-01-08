@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using VisioAutomation.DOM;
 
 namespace VisioAutomation.Application.Logging
 {
@@ -11,10 +13,28 @@ namespace VisioAutomation.Application.Logging
         {
             this.Sessions = new List<LogSession>();
 
+            if (!System.IO.File.Exists(filename))
+            {
+                return;
+            }
+
             var state = LogState.Start;
-            var fp = System.IO.File.OpenText(filename);
-            string rawline;
-            while ((rawline = fp.ReadLine()) != null)
+
+            var lines = new List<string>();
+            using (var inStream = new System.IO.FileStream(filename, System.IO.FileMode.Open,
+                System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite))
+            {
+                using (var sr = new System.IO.StreamReader(inStream))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        lines.Add(line);
+                    }
+                }
+            }
+
+            foreach (var rawline in lines)
             {
                 string line = rawline.Trim();
 

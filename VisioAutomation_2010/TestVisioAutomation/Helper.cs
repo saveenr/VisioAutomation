@@ -21,7 +21,7 @@ namespace TestVisioAutomation.Common
         public string GetTestMethodOutputFilename(string ext)
         {
             string abs_path = this.OutputPath;
-            string abs_filename = System.IO.Path.Combine(abs_path, GetMethodName(2) + ext);
+            string abs_filename = System.IO.Path.Combine(abs_path, GetMethodName(2) + System.DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
             return abs_filename;
         }
 
