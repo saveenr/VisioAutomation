@@ -61,26 +61,26 @@ namespace TestVisioAutomationVDX
             var template = new VA.VDX.Template(); // the default template
             var doc = new VA.VDX.Elements.Drawing(template);
 
-            VDX_Files.GetPage01_Simple_Fill_Format(doc);
-            VDX_Files.GetPage02_Locking(doc);
-            VDX_Files.GetPage03_Text_Block(doc);
-            VDX_Files.GetPage04_Simple_Text(doc);
-            VDX_Files.GetPage05_Formatted_Text(doc);
-            VDX_Files.GetPage06_All_FillPatterns(doc);
-            VDX_Files.GetPage08_Connector_With_Geometry(doc);
-            VDX_Files.GetPage09_Layout(doc);
-            VDX_Files.GetPage10_layers(doc);
-            VDX_Files.GetPage11_Add_color(doc);
-            VDX_Files.GetPage12_AdjustToTextSize(doc);
-            VDX_Files.GetPage13_MultipleConnectors(doc);
-            VDX_Files.GetPage14_Hyperlinks(doc);
+            var Page01 = VDX_Files.GetPage01_Simple_Fill_Format(doc);
+            var Page02 = VDX_Files.GetPage02_Locking(doc);
+            var Page03 = VDX_Files.GetPage03_Text_Block(doc);
+            var Page04 = VDX_Files.GetPage04_Simple_Text(doc);
+            var Page05 = VDX_Files.GetPage05_Formatted_Text(doc);
+            var Page06 = VDX_Files.GetPage06_All_FillPatterns(doc);
+            var Page08 = VDX_Files.GetPage08_Connector_With_Geometry(doc);
+            var Page09 = VDX_Files.GetPage09_Layout(doc);
+            var Page10 = VDX_Files.GetPage10_layers(doc);
+            var Page11 = VDX_Files.GetPage11_Add_color(doc);
+            var Page12 = VDX_Files.GetPage12_AdjustToTextSize(doc);
+            var Page13 = VDX_Files.GetPage13_MultipleConnectors(doc);
+            var Page14 = VDX_Files.GetPage14_Hyperlinks(doc);
 
             var w1 = new VA.VDX.Elements.DocumentWindow();
             w1.ShowGrid = false;
             w1.ShowGuides = false;
             w1.ShowConnectionPoints = false;
             w1.ShowPageBreaks = false;
-            w1.Page = 0; // point to first pagees
+            w1.Page = Page01.ID; // point to first page we created
             
             doc.Windows.Add(w1);
 

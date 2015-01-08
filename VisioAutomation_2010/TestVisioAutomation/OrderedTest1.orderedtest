@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="orderedtest1" storage="e:\code\github\visioautomation\visioautomation_2010\testvisioautomation\orderedtest1.orderedtest" id="6dff50a9-095b-4e28-b1fd-9c1a63be6d34" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="d3bfad9d-25f4-8ca3-07fd-7e87fc6fda53" name="VDX_CustomProperties" storage="..\..\visioautomation.vdx\testvisioautomationvdx\bin\debug\testvisioautomationvdx.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="9a172cba-6255-e7e9-5c8c-edd6c06d37b8" name="VDX_MultiPageDocument" storage="..\..\visioautomation.vdx\testvisioautomationvdx\bin\debug\testvisioautomationvdx.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>
