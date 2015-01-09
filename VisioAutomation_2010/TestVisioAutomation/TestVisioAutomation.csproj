@@ -206,13 +206,13 @@
     <None Include="Resources\vdx_with_errors_1_vdx.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="datafiles\flowchart_1.xml">
+    <Content Include="datafiles\directed_graph_1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="datafiles\flowchart_2.xml">
+    <Content Include="datafiles\directed_graph_2.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="datafiles\flowchart_3.xml">
+    <Content Include="datafiles\directed_graph_3.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="datafiles\directed_graph_4.xml">
