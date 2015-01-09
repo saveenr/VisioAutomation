@@ -215,7 +215,7 @@
     <Content Include="datafiles\flowchart_3.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="datafiles\flowchart_4.txt">
+    <Content Include="datafiles\directed_graph_4.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="datafiles\orgchart_1.xml">

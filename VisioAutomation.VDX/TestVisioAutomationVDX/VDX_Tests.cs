@@ -155,11 +155,15 @@ namespace TestVisioAutomationVDX
         }
 
         [TestMethod]
+        [DeploymentItem(@"datafiles\template_router.vdx", "datafiles")]
         public void VDX_CustomTemplate()
         {
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string input = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
+            string output = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
 
-            var template = new VA.VDX.Template(TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
+            string xml = System.IO.File.ReadAllText(input);
+
+            var template = new VA.VDX.Template(xml);
             var doc = new VisioAutomation.VDX.Elements.Drawing(template);
             var page = new VA.VDX.Elements.Page(8, 4);
 
@@ -211,17 +215,24 @@ namespace TestVisioAutomationVDX
 
             // write document to disk as .vdx file
 
-            doc.Save(output_filename);
+            doc.Save(output);
 
-            VerifyDocCanBeLoaded(output_filename);
+            VerifyDocCanBeLoaded(output);
         }
 
         [TestMethod]
+        [DeploymentItem(@"datafiles\template_router.vdx", "datafiles")]
         public void VDX_CheckNoErrorOnLoad()
         {
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
-            System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.template_router__vdx);
-            VerifyDocCanBeLoaded(output_filename);
+
+            string filename = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
+            string xml = System.IO.File.ReadAllText(filename);
+
+
+            string output = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+
+            System.IO.File.WriteAllText(output, xml);
+            VerifyDocCanBeLoaded(output);
         }
 
 
