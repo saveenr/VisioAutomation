@@ -28,10 +28,9 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_DataTable()
         {
-            var client = GetScriptingClient();
-            client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
-
+            var widths = new[] { 2.0, 1.5, 1.0 };
+            double default_height = 0.25;
+            var cellspacing = new VA.Drawing.Size(0, 0);
             var items = new[]
                 {
                     new {Name = "X", Age = 28, Score = 16},
@@ -41,18 +40,21 @@ namespace TestVisioAutomation
                 };
 
             var dt = new System.Data.DataTable();
-            dt.Columns.Add("X", typeof (string));
-            dt.Columns.Add("Age", typeof (int));
-            dt.Columns.Add("Score", typeof (int));
+            dt.Columns.Add("X", typeof(string));
+            dt.Columns.Add("Age", typeof(int));
+            dt.Columns.Add("Score", typeof(int));
 
             foreach (var item in items)
             {
                 dt.Rows.Add(item.Name, item.Age, item.Score);
             }
 
-            var widths = new[] {2.0, 1.5, 1.0};
-            var heights = Enumerable.Repeat(0.25, items.Length).ToList();
-            var shapes = client.Draw.Table(dt, widths, heights, new VA.Drawing.Size(0, 0));
+            var client = GetScriptingClient();
+            client.Document.New();
+            client.Page.New(new VA.Drawing.Size(4, 4), false);
+
+            var heights = Enumerable.Repeat(default_height, items.Length).ToList();
+            var shapes = client.Draw.Table(dt, widths, heights, cellspacing);
 
             // Verify
             int num_shapes_expected = items.Length*dt.Columns.Count;
