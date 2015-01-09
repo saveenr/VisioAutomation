@@ -11,10 +11,14 @@ namespace TestVisioAutomation
     public class ScriptingDrawTests : VisioAutomationTest
     {
         [TestMethod]
+        [DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]
         public void Scripting_Draw_OrgChart()
         {
+            string inputfilename = System.IO.Path.GetFullPath(@"datafiles\orgchart_1.xml");
+            string xml = System.IO.File.ReadAllText(inputfilename);
+
             var client = GetScriptingClient();
-            draw_org_chart(client, TestVisioAutomation.Properties.Resources.sampleorgchart1);
+            draw_org_chart(client, xml);
             client.Document.Close(true);
             VA.Documents.DocumentHelper.ForceCloseAll(client.VisioApplication.Documents);
         }
@@ -223,34 +227,50 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        [DeploymentItem(@"datafiles\flowchart_1.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph1()
         {
+            string inputfilename = System.IO.Path.GetFullPath(@"datafiles\flowchart_1.xml");
+            string xml = System.IO.File.ReadAllText(inputfilename);
+
             var client = GetScriptingClient();
-            draw_dg(client, TestVisioAutomation.Properties.Resources.sampleflowchart1);
+            draw_dg(client, xml);
             client.Document.Close(true);
         }
 
         [TestMethod]
+        [DeploymentItem(@"datafiles\flowchart_2.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph2()
         {
+            string inputfilename = System.IO.Path.GetFullPath(@"datafiles\flowchart_2.xml");
+            string xml = System.IO.File.ReadAllText(inputfilename);
+
             var client = GetScriptingClient();
-            draw_dg(client, TestVisioAutomation.Properties.Resources.sampleflowchart2);
+            draw_dg(client, xml);
             client.Document.Close(true);
         }
 
         [TestMethod]
+        [DeploymentItem(@"datafiles\flowchart_3.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph3()
         {
+            string inputfilename = System.IO.Path.GetFullPath(@"datafiles\flowchart_3.xml");
+            string xml = System.IO.File.ReadAllText(inputfilename); 
+            
             var client = GetScriptingClient();
-            draw_dg(client, TestVisioAutomation.Properties.Resources.sampleflowchart3);
+            draw_dg(client, xml);
             client.Document.Close(true);
         }
 
         [TestMethod]
+        [DeploymentItem(@"datafiles\flowchart_4.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph4()
         {
+            string inputfilename = System.IO.Path.GetFullPath(@"datafiles\flowchart_4");
+            string xml = System.IO.File.ReadAllText(inputfilename);
+
             var client = GetScriptingClient();
-            draw_dg(client, TestVisioAutomation.Properties.Resources.sampleflowchart4);
+            draw_dg(client, xml);
             client.Document.Close(true);
         }
 
