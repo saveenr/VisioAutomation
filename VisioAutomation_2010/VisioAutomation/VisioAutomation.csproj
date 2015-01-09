@@ -80,7 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\LogFile.cs" />
+    <Compile Include="Application\XmlErrorLog.cs" />
     <Compile Include="Application\LogRecord.cs" />
     <Compile Include="Application\LogSession.cs" />
     <Compile Include="Application\LogState.cs" />

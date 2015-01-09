@@ -1,15 +1,13 @@
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using VisioAutomation.DOM;
 
 namespace VisioAutomation.Application.Logging
 {
-    public class LogFile
+    public class XmlErrorLog
     {
         public string Source;
         public List<LogSession> Sessions;
 
-        public LogFile(string filename)
+        public XmlErrorLog(string filename)
         {
             this.Sessions = new List<LogSession>();
 
@@ -20,19 +18,7 @@ namespace VisioAutomation.Application.Logging
 
             var state = LogState.Start;
 
-            var lines = new List<string>();
-            using (var inStream = new System.IO.FileStream(filename, System.IO.FileMode.Open,
-                System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite))
-            {
-                using (var sr = new System.IO.StreamReader(inStream))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string line = sr.ReadLine();
-                        lines.Add(line);
-                    }
-                }
-            }
+            var lines = GetLinesSharedRead(filename);
 
             foreach (var rawline in lines)
             {
@@ -52,6 +38,13 @@ namespace VisioAutomation.Application.Logging
                     {
                         this.Source = line.Substring("Source:".Length).Trim();
                     }
+                    else if (line.StartsWith("Insert"))
+                    {
+                        var session = new LogSession();
+                        session.StartLine = line;
+                        this.Sessions.Add(session);
+                        state = LogState.InSession;
+                    }
                     else if (line.EndsWith("Begin Session"))
                     {
                         var session = new LogSession();
@@ -70,7 +63,19 @@ namespace VisioAutomation.Application.Logging
                     {
                         continue;
                     }
-                    else if (line.EndsWith("End Session"))
+                    if (line.EndsWith("End Session"))
+                    {
+                        var session = this.Sessions[this.Sessions.Count - 1];
+                        session.EndLine = line;
+                        state = LogState.Start;
+                    }
+                    else if (line.StartsWith("Open"))
+                    {
+                        var session = this.Sessions[this.Sessions.Count - 1];
+                        session.EndLine = line;
+                        state = LogState.Start;
+                    }
+                    else if (line.StartsWith("Insert"))
                     {
                         var session = this.Sessions[this.Sessions.Count - 1];
                         session.EndLine = line;
@@ -119,8 +124,29 @@ namespace VisioAutomation.Application.Logging
                         throw new System.ArgumentException();
                     }
                 }
-
             }
+        }
+
+        private static List<string> GetLinesSharedRead(string filename)
+        {
+            var lines = new List<string>();
+            using (
+                var inStream = new System.IO.FileStream(
+                    filename,
+                    System.IO.FileMode.Open,
+                    System.IO.FileAccess.Read,
+                    System.IO.FileShare.ReadWrite))
+            {
+                using (var sr = new System.IO.StreamReader(inStream))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        lines.Add(line);
+                    }
+                }
+            }
+            return lines;
         }
     }
 }

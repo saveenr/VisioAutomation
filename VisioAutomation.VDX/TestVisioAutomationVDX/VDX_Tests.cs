@@ -27,7 +27,7 @@ namespace TestVisioAutomationVDX
 
             string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
             TryOpen(app.Documents, filename); // this causes the doc to load no matter what the error 
-            var log_after = new VA.Application.Logging.LogFile(logfilename);
+            var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
             
             if (log_after.Sessions.Count < 1)
             {
@@ -234,26 +234,18 @@ namespace TestVisioAutomationVDX
 
             string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
             var doc = TryOpen(app.Documents, output_filename);
-            var log_after = new VA.Application.Logging.LogFile(logfilename);
+            var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
 
             var last_session = log_after.Sessions[log_after.Sessions.Count - 1];
-            int found_issues = 0;
-            foreach (var rec in last_session.Records)
-            {
-                if (rec.Type == "Warning")
-                {
-                    found_issues += 1;
-                }
 
-                if (rec.Type == "Error")
-                {
-                    found_issues += 1;
-                }
-            }
 
-            if (found_issues < 1)
+            var warnings = last_session.Records.Where(r => r.Type == "Warning").ToList();
+            var errors = last_session.Records.Where(r => r.Type == "Error").ToList();
+
+
+            if (errors.Count < 1)
             {
-                Assert.Fail("Did not detect any issues");
+                Assert.Fail("Did not detect any errors");
             }
 
             Assert.AreEqual(1, app.Documents.Count);
