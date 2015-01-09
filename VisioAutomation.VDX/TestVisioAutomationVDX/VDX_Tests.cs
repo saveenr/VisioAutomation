@@ -224,11 +224,12 @@ namespace TestVisioAutomationVDX
             VerifyDocCanBeLoaded(output_filename);
         }
 
+
         [TestMethod]
+        [DeploymentItem(@"datafiles\vdx_with_warnings_1.vdx", "datafiles")]
         public void VDX_CheckWeCanDetectLoadingErrors()
         {
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
-            System.IO.File.WriteAllText(output_filename, TestVisioAutomationVDX.Properties.Resources.vdx_with_errors_1_vdx);
+            string output_filename = System.IO.Path.GetFullPath(@"datafiles\vdx_with_warnings_1.vdx");              
 
             var app = new IVisio.Application();
 
