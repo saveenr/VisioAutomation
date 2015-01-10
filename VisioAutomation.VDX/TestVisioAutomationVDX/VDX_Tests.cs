@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Shapes.CustomProperties;
@@ -237,12 +238,12 @@ namespace TestVisioAutomationVDX
         [DeploymentItem(@"datafiles\vdx_with_warnings_1.vdx", "datafiles")]
         public void VDX_DetectLoadWarnings()
         {
-            string output_filename = this.GetTestResultsOutPath(@"datafiles\vdx_with_warnings_1.vdx");              
-
+            string input_filename = this.GetTestResultsOutPath(@"datafiles\vdx_with_warnings_1.vdx");
+ 
             // Load the VDX
             var app = new IVisio.Application();
             string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
-            var doc = TryOpen(app.Documents, output_filename);
+            var doc = TryOpen(app.Documents, input_filename);
             
             // See what happened
             var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);

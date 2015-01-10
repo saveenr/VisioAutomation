@@ -81,7 +81,10 @@ namespace VisioAutomation.Application
             string internetcache = System.Environment.GetFolderPath(System.Environment.SpecialFolder.InternetCache);
             string folder = System.IO.Path.Combine(internetcache, @"Content.MSO\VisioLogFiles");
 
-            return System.IO.Path.Combine(folder, logfilename);
+            var s = System.IO.Path.Combine(folder, logfilename);
+            System.Diagnostics.Debug.WriteLine("XmlErrorLogFilename: " + s);
+
+            return s;
         }
 
         private static string GetHKCUApplicationPath(IVisio.Application app)
