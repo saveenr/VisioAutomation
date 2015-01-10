@@ -251,8 +251,22 @@ namespace TestVisioAutomationVDX
             var errors = last_session.Records.Where(r => r.Type == "Error").ToList();
 
             // Verify
-            Assert.AreEqual(0, errors.Count); // this VDX should not report any errors
-            Assert.AreEqual(2, warnings.Count); // this VDX should contain exactly two warnings
+            var version = VA.Application.ApplicationHelper.GetApplicationVersion(app);
+            if (version.Major == 14) // Visio 2010
+            {
+                Assert.AreEqual(0, errors.Count); // this VDX should not report any errors
+                Assert.AreEqual(2, warnings.Count); // this VDX should contain exactly two warnings                
+            }
+            else if (version.Major == 15) // Visio 2013
+            {
+                Assert.AreEqual(0, errors.Count); // this VDX should not report any errors
+                Assert.AreEqual(0, warnings.Count); // this VDX should contain exactly two warnings                                
+            }
+            else
+            {
+                Assert.Fail("This version of Visio ({0}) is not supported", version);
+                
+            }
             Assert.AreEqual(1, app.Documents.Count);
 
             // Cleanup

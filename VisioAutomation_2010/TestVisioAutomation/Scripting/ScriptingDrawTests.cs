@@ -314,7 +314,12 @@ namespace TestVisioAutomation
 
         public string get_datafile_content(string name)
         {
-            string inputfilename = System.IO.Path.GetFullPath( name );
+            string inputfilename = this.GetTestResultsOutPath( name );
+
+            if (!System.IO.File.Exists(inputfilename))
+            {
+                Assert.Fail("Could not locate " + inputfilename);
+            }
             string text = System.IO.File.ReadAllText(inputfilename);
             return text;
         }
