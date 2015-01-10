@@ -10,7 +10,7 @@ using SXL = System.Xml.Linq;
 namespace TestVisioAutomationVDX
 {
     [TestClass]
-    public class VDX_Tests
+    public class VDX_Tests : TestVisioAutomation.VisioAutomationTest
     {
         public IVisio.Document TryOpen(IVisio.Documents docs, string filename)
         {
@@ -158,7 +158,7 @@ namespace TestVisioAutomationVDX
         [DeploymentItem(@"datafiles\template_router.vdx", "datafiles")]
         public void VDX_CustomTemplate()
         {
-            string input_filename = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
+            string input_filename = this.GetTestResultsOutPath(@"datafiles\template_router.vdx");
             string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
             
             // Load the template
@@ -225,15 +225,19 @@ namespace TestVisioAutomationVDX
         [DeploymentItem(@"datafiles\template_router.vdx", "datafiles")]
         public void VDX_CheckNoErrorOnLoad()
         {
-            string input_filename = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
+            var folder = this.TestResultsOutFolder;
+            
+            string input_filename = this.GetTestResultsOutPath(@"datafiles\template_router.vdx");
+            
             VerifyDocCanBeLoaded(input_filename);
         }
+
 
         [TestMethod]
         [DeploymentItem(@"datafiles\vdx_with_warnings_1.vdx", "datafiles")]
         public void VDX_DetectLoadWarnings()
         {
-            string output_filename = System.IO.Path.GetFullPath(@"datafiles\vdx_with_warnings_1.vdx");              
+            string output_filename = this.GetTestResultsOutPath(@"datafiles\vdx_with_warnings_1.vdx");              
 
             // Load the VDX
             var app = new IVisio.Application();
@@ -247,8 +251,8 @@ namespace TestVisioAutomationVDX
             var errors = last_session.Records.Where(r => r.Type == "Error").ToList();
 
             // Verify
-            Assert.AreEqual(0,errors); // this VDX should not report any errors
-            Assert.AreEqual(2,warnings); // this VDX should contain exactly two warnings
+            Assert.AreEqual(0, errors.Count); // this VDX should not report any errors
+            Assert.AreEqual(2, warnings.Count); // this VDX should contain exactly two warnings
             Assert.AreEqual(1, app.Documents.Count);
 
             // Cleanup
