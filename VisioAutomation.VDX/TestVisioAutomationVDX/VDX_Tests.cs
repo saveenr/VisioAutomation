@@ -224,43 +224,33 @@ namespace TestVisioAutomationVDX
         [DeploymentItem(@"datafiles\template_router.vdx", "datafiles")]
         public void VDX_CheckNoErrorOnLoad()
         {
-
-            string filename = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
-            string xml = System.IO.File.ReadAllText(filename);
-
-
-            string output = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
-
-            System.IO.File.WriteAllText(output, xml);
-            VerifyDocCanBeLoaded(output);
+            string input_filename = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
+            VerifyDocCanBeLoaded(input_filename);
         }
-
 
         [TestMethod]
         [DeploymentItem(@"datafiles\vdx_with_warnings_1.vdx", "datafiles")]
-        public void VDX_CheckWeCanDetectLoadingErrors()
+        public void VDX_DetectLoadWarnings()
         {
             string output_filename = System.IO.Path.GetFullPath(@"datafiles\vdx_with_warnings_1.vdx");              
 
+            // Load the VDX
             var app = new IVisio.Application();
-
             string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
             var doc = TryOpen(app.Documents, output_filename);
+            
+            // See what happened
             var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
-
             var last_session = log_after.Sessions[log_after.Sessions.Count - 1];
-
-
             var warnings = last_session.Records.Where(r => r.Type == "Warning").ToList();
             var errors = last_session.Records.Where(r => r.Type == "Error").ToList();
 
-
-            if (errors.Count < 1)
-            {
-                Assert.Fail("Did not detect any errors");
-            }
-
+            // Verify
+            Assert.AreEqual(0,errors); // this VDX should not report any errors
+            Assert.AreEqual(2,warnings); // this VDX should contain exactly two warnings
             Assert.AreEqual(1, app.Documents.Count);
+
+            // Cleanup
             VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit(true);
         }
