@@ -158,12 +158,13 @@ namespace TestVisioAutomationVDX
         [DeploymentItem(@"datafiles\template_router.vdx", "datafiles")]
         public void VDX_CustomTemplate()
         {
-            string input = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
-            string output = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string input_filename = System.IO.Path.GetFullPath(@"datafiles\template_router.vdx");
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            
+            // Load the template
+            string template_xml = System.IO.File.ReadAllText(input_filename);
 
-            string xml = System.IO.File.ReadAllText(input);
-
-            var template = new VA.VDX.Template(xml);
+            var template = new VA.VDX.Template(template_xml);
             var doc = new VisioAutomation.VDX.Elements.Drawing(template);
             var page = new VA.VDX.Elements.Page(8, 4);
 
@@ -215,9 +216,9 @@ namespace TestVisioAutomationVDX
 
             // write document to disk as .vdx file
 
-            doc.Save(output);
+            doc.Save(output_filename);
 
-            VerifyDocCanBeLoaded(output);
+            VerifyDocCanBeLoaded(output_filename);
         }
 
         [TestMethod]
