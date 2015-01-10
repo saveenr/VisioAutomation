@@ -14,9 +14,8 @@ namespace TestVisioAutomation
         [DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]
         public void Scripting_Draw_OrgChart()
         {
-            string xml = this.get_datafile_content(@"datafiles\directed_graph_3.xml");
-
-
+            string xml = this.get_datafile_content(@"datafiles\orgchart_1.xml");
+            
             var client = GetScriptingClient();
             draw_org_chart(client, xml);
             

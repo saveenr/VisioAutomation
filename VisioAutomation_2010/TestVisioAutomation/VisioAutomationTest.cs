@@ -75,7 +75,10 @@ namespace TestVisioAutomation
         public VA.Scripting.Client GetScriptingClient()
         {
             var app = GetVisioApplication();
-            var client = new VA.Scripting.Client(app);
+            // this ensures that any debug, verbose, user , etc. messages are 
+            // sent to a useful place in the unit tests
+            var context = new VA.Scripting.DebugContext(); 
+            var client = new VA.Scripting.Client(app,context);
             return client;
         }
 
