@@ -30,14 +30,14 @@ namespace TestVisioAutomationVDX
             TryOpen(app.Documents, filename); // this causes the doc to load no matter what the error 
             var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
             
-            if (log_after.Sessions.Count < 1)
+            if (log_after.FileSessions.Count < 1)
             {
                 // nothing is int the log at all
                 // nothing could be bad
                 return;
             }
 
-            var most_recent_session = log_after.Sessions[0];
+            var most_recent_session = log_after.FileSessions[0];
             foreach (var rec in most_recent_session.Records)
             {
                 if (rec.Type == "Warning")
@@ -247,7 +247,7 @@ namespace TestVisioAutomationVDX
             
             // See what happened
             var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
-            var most_recent_session = log_after.Sessions[0];
+            var most_recent_session = log_after.FileSessions[0];
             var warnings = most_recent_session.Records.Where(r => r.Type == "Warning").ToList();
             var errors = most_recent_session.Records.Where(r => r.Type == "Error").ToList();
 

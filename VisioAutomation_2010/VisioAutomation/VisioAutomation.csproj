@@ -82,7 +82,7 @@
   <ItemGroup>
     <Compile Include="Application\XmlErrorLog.cs" />
     <Compile Include="Application\LogRecord.cs" />
-    <Compile Include="Application\LogSession.cs" />
+    <Compile Include="Application\FileSessions.cs" />
     <Compile Include="Application\LogState.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />

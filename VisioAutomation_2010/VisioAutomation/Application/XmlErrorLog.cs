@@ -1,15 +1,16 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VisioAutomation.Application.Logging
 {
     public class XmlErrorLog
     {
-        public string Source;
-        public List<LogSession> Sessions;
+        public List<FileSessions> FileSessions;
 
         public XmlErrorLog(string filename)
         {
-            this.Sessions = new List<LogSession>();
+            this.FileSessions = new List<FileSessions>();
 
             if (!System.IO.File.Exists(filename))
             {
@@ -18,10 +19,14 @@ namespace VisioAutomation.Application.Logging
 
             var state = LogState.Start;
 
-            var lines = GetLinesSharedRead(filename);
+            List<string> lines = GetLinesSharedRead(filename);
+            lines.Reverse();
 
-            foreach (var rawline in lines)
+            var q = new Stack<string>( lines);
+            
+            while (q.Count>0)
             {
+                string rawline = q.Pop();
                 string line = rawline.Trim();
 
                 if (state == LogState.Start)
@@ -30,71 +35,45 @@ namespace VisioAutomation.Application.Logging
                     {
                         continue;
                     }
-                    else if (line.StartsWith("Open"))
+
+                    if (line.StartsWith("Open"))
                     {
-                        // do something
-                    }
-                    else if (line.StartsWith("Source:"))
-                    {
-                        this.Source = line.Substring("Source:".Length).Trim();
-                    }
-                    else if (line.StartsWith("Insert"))
-                    {
-                        var session = new LogSession();
-                        session.StartLine = line;
-                        this.Sessions.Add(session);
-                        state = LogState.InSession;
-                    }
-                    else if (line.EndsWith("Begin Session"))
-                    {
-                        var session = new LogSession();
-                        session.StartLine = line;
-                        this.Sessions.Add(session);
-                        state = LogState.InSession;
+                        state = StartNewSession(line);
                     }
                     else
                     {
-                        throw new System.ArgumentException();
+                        throw new Exception();
                     }
                 }
-                else if (state == LogState.InSession)
+                else if (state == LogState.InFileSession)
                 {
                     if (line.Length == 0)
                     {
                         continue;
                     }
-                    if (line.EndsWith("End Session"))
+
+                    if (line.StartsWith("Source:"))
                     {
-                        var session = this.Sessions[this.Sessions.Count - 1];
-                        session.EndLine = line;
-                        state = LogState.Start;
+                        var cur_session = this.CurrentSession;
+                        cur_session.Source = line.Substring("Source:".Length).Trim();
+                    }
+                    else if (line.EndsWith("Begin Session"))
+                    {
+                        var tokens = line.Split();
+                        this.CurrentSession.StartTime = string.Join(" ", tokens.Take(5));
+                    }
+                    else if (line.EndsWith("End Session"))
+                    {
+                        state = TerminateCurrentSession(line);
                     }
                     else if (line.StartsWith("Open"))
                     {
-                        var session = this.Sessions[this.Sessions.Count - 1];
-                        session.EndLine = line;
-                        state = LogState.Start;
-                    }
-                    else if (line.StartsWith("Insert"))
-                    {
-                        var session = this.Sessions[this.Sessions.Count - 1];
-                        session.EndLine = line;
-                        state = LogState.Start;
+                        state = TerminateCurrentSession(line);
+                        q.Push(line);
                     }
                     else if (line.StartsWith("["))
                     {
-                        var rec = new LogRecord();
-                        int n = line.IndexOf(']');
-                        if (n < 2)
-                        {
-                            throw new System.ArgumentException();
-                        }
-                        rec.Type = line.Substring(1, n - 1);
-                        rec.SubType = line.Substring(n + 2).Replace(":", "");
-
-                        var session = this.Sessions[this.Sessions.Count - 1];
-                        session.Records.Add(rec);
-                        state = LogState.InRecord;
+                        state = StartRecord(line, state);
                     }
                     else
                     {
@@ -105,17 +84,17 @@ namespace VisioAutomation.Application.Logging
                 {
                     if (line.Length == 0)
                     {
-                        state = LogState.InSession;
+                        state = LogState.InFileSession;
                     }
                     else if (line.StartsWith("Context:"))
                     {
-                        var session = this.Sessions[this.Sessions.Count - 1];
+                        var session = this.CurrentSession;
                         var rec = session.Records[session.Records.Count - 1];
                         rec.Context = line.Substring("Context:".Length);
                     }
                     else if (line.StartsWith("Description:"))
                     {
-                        var session = this.Sessions[this.Sessions.Count - 1];
+                        var session = this.CurrentSession;
                         var rec = session.Records[session.Records.Count - 1];
                         rec.Description = line.Substring("Description:".Length);
                     }
@@ -124,7 +103,52 @@ namespace VisioAutomation.Application.Logging
                         throw new System.ArgumentException();
                     }
                 }
+                else
+                {
+                    throw new System.ArgumentException();                    
+                }
             }
+        }
+
+        private LogState StartRecord(string line, LogState state)
+        {
+            var rec = new LogRecord();
+            int n = line.IndexOf(']');
+            if (n < 2)
+            {
+                throw new System.ArgumentException();
+            }
+            rec.Type = line.Substring(1, n - 1);
+            rec.SubType = line.Substring(n + 2).Replace(":", "");
+
+            var session = this.FileSessions[this.FileSessions.Count - 1];
+            session.Records.Add(rec);
+            state = LogState.InRecord;
+            return state;
+        }
+
+        private LogState StartNewSession(string line )
+        {
+            var session = new FileSessions();
+            session.StartLine = line;
+            var tokens = line.Split();
+            session.FileType = tokens[1];
+
+            this.FileSessions.Add(session);
+
+            return LogState.InFileSession;
+        }
+
+        private LogState TerminateCurrentSession(string line)
+        {
+            var session = this.CurrentSession;
+            session.EndLine = line;
+            return LogState.Start;
+        }
+
+        private FileSessions CurrentSession
+        {
+            get { return this.FileSessions[this.FileSessions.Count - 1]; }
         }
 
         private static List<string> GetLinesSharedRead(string filename)

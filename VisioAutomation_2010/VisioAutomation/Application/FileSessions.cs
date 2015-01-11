@@ -2,14 +2,18 @@ using System.Collections.Generic;
 
 namespace VisioAutomation.Application.Logging
 {
-    public class LogSession
+    public class FileSessions
     {
         public string StartLine;
         public string EndLine;
+        public string FileType;
+        public string Source;
+
+        public string StartTime;
 
         public List<LogRecord> Records;
 
-        public LogSession()
+        public FileSessions()
         {
             this.Records = new List<LogRecord>();
         }

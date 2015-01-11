@@ -94,6 +94,7 @@
     <Compile Include="Models\CointainerLayout_Tests.cs" />
     <Compile Include="Models\Chart_Tests.cs" />
     <Compile Include="Models\ResizePageTests.cs" />
+    <Compile Include="Other\XmlErrorLog_Tests.cs" />
     <Compile Include="Scripting\ScriptingDevTests.cs" />
     <Compile Include="Scripting\ScriptingExportTests.cs" />
     <Compile Include="Scripting\ScriptingShapeSheet.cs" />
@@ -206,6 +207,9 @@
     <None Include="Resources\vdx_with_errors_1_vdx.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="datafiles\XMLErrorLog_Visio_2013_1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="datafiles\directed_graph_1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -219,6 +223,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="datafiles\orgchart_1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="datafiles\XMLErrorLog_Visio_2010_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="datafiles\template_router.vdx">
