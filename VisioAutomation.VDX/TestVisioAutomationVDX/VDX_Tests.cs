@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Application.Logging;
-using VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
@@ -67,7 +63,7 @@ namespace TestVisioAutomationVDX
             app.Quit();
         }
 
-        private static void VerifyNoErrorsInLog(XmlErrorLog log_after, string filename, string logfilename, System.Version version, System.DateTime opentime)
+        private static void VerifyNoErrorsInLog(VA.Application.Logging.XmlErrorLog log_after, string filename, string logfilename, System.Version version, System.DateTime opentime)
         {
             int duration = 2;
             var lower_time_bound = opentime;
@@ -186,7 +182,7 @@ namespace TestVisioAutomationVDX
             Assert.AreEqual(1,page.Shapes.Count);
 
             var shape = page.Shapes[1];
-            var customprops = CustomPropertyHelper.Get(shape);
+            var customprops = VA.Shapes.CustomProperties.CustomPropertyHelper.Get(shape);
 
             Assert.IsTrue(customprops.ContainsKey("PROP1"));
             Assert.AreEqual("\"VALUE1\"",customprops["PROP1"].Value.Formula);
