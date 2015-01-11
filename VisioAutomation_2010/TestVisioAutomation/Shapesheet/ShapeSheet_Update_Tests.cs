@@ -67,7 +67,7 @@ namespace TestVisioAutomation
             var col_linepat = query.Columns.Add(src_linepat,"LinePattern");
 
             // Retrieve the values
-            var data = query.GetFormulasAndResults<double>(shape1);
+            var data = query.GetCellData<double>(shape1);
 
             // Verify
             AssertVA.AreEqual("7", 7, data[col_linepat.Ordinal]);
@@ -90,7 +90,7 @@ namespace TestVisioAutomation
             var col_linepat = query.Columns.Add(src_linepat,"LinePattern");
 
             // Retrieve the values
-            var data = query.GetFormulasAndResults<double>(shape1);
+            var data = query.GetCellData<double>(shape1);
 
             // Verify
             AssertVA.AreEqual("7", 7, data[col_linepat.Ordinal]);
@@ -204,7 +204,7 @@ namespace TestVisioAutomation
             var col_pinx = query.Columns.Add(VA.ShapeSheet.SRCConstants.PinX,"PinX");
 
             // Retrieve the values
-            var data = query.GetFormulasAndResults<double>(shape1);
+            var data = query.GetCellData<double>(shape1);
 
             // Verify
             AssertVA.AreEqual("7", 7, data[col_linepat.Ordinal]);

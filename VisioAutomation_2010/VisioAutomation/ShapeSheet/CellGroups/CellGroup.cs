@@ -26,7 +26,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             check_query(query);
 
-            var data_for_shapes = query.GetFormulasAndResults<RT>( new VA.Drawing.DrawingSurface(page), shapeids);
+            var data_for_shapes = query.GetCellData<RT>( new VA.Drawing.DrawingSurface(page), shapeids);
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {
@@ -43,7 +43,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             check_query(query);
 
-            var data_for_shape = query.GetFormulasAndResults<RT>(shape);
+            var data_for_shape = query.GetCellData<RT>(shape);
             var cells = row_to_object(data_for_shape.Cells);
             return cells;
         }
