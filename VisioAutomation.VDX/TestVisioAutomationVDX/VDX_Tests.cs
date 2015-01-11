@@ -23,9 +23,9 @@ namespace TestVisioAutomationVDX
         public void VerifyDocCanBeLoaded(string filename)
         {
             var app = new IVisio.Application();
-            var version = VA.Application.ApplicationHelper.GetApplicationVersion(app);
-
-            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
+            var appinfo = VA.Application.ApplicationHelper.GetInformation(app);
+            var version = appinfo.Version;
+            string logfilename = appinfo.XMLErrorLogFilename;
 
             VA.Application.Logging.XmlErrorLog log_before=null;
             var old_fileinfo = new System.IO.FileInfo(logfilename);
@@ -286,7 +286,10 @@ namespace TestVisioAutomationVDX
  
             // Load the VDX
             var app = new IVisio.Application();
-            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
+            var appinfo = VA.Application.ApplicationHelper.GetInformation(app);
+            var version = appinfo.Version;
+            string logfilename = appinfo.XMLErrorLogFilename;
+
             var doc = TryOpen(app.Documents, input_filename);
             
             // See what happened
@@ -296,7 +299,6 @@ namespace TestVisioAutomationVDX
             var errors = most_recent_session.Records.Where(r => r.Type == "Error").ToList();
 
             // Verify
-            var version = VA.Application.ApplicationHelper.GetApplicationVersion(app);
             int expected_errors = 0;  // this VDX should not report any errors
             int expected_warnings = 4; // this VDX should contain four warnings for Visio2010 and two warnings for Visio 2013         
             if (version.Major >= 15)

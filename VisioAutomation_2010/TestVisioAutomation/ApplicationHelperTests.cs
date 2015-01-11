@@ -1,5 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VA=VisioAutomation;
 
 namespace TestVisioAutomation
 {
@@ -10,7 +11,8 @@ namespace TestVisioAutomation
         public void TestStencilLocation()
         {
             var app = this.GetVisioApplication();
-            string path = VisioAutomation.Application.ApplicationHelper.GetContentLocation(app);
+            var appinfo = VA.Application.ApplicationHelper.GetInformation(app);
+            string path = appinfo.ContentLocation;
 
             Assert.IsTrue(System.IO.Directory.Exists(path));
 

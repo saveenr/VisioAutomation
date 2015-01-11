@@ -144,7 +144,8 @@ namespace TestVisioAutomation
         public void DOM_DrawOrgChart()
         {
             var app = this.GetVisioApplication();
-            var vis_ver = VA.Application.ApplicationHelper.GetApplicationVersion(app);
+            var appinfo = VA.Application.ApplicationHelper.GetInformation(app);
+            var vis_ver = appinfo.Version;
 
             // How to draw using a Template instead of a doc and a stencil
             string orgchart_vst = "orgchart.vst";

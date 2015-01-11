@@ -1,4 +1,6 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.Win32;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
@@ -50,6 +52,54 @@ namespace VisioAutomation.Application
 
             app.Quit();
         }       
+        
+        public static void BringWindowToTop(IVisio.Application app)
+        {
+            var visio_window_handle = new System.IntPtr(app.WindowHandle32);
+            VA.Internal.Interop.NativeMethods.BringWindowToTop(visio_window_handle);
+        }
+
+        private static ApplicationInformation _app_info;
+
+        public static ApplicationInformation GetInformation(IVisio.Application app)
+        {
+            _app_info = _app_info ?? new ApplicationInformation(app);
+            return _app_info;
+        }
+    }
+
+    public class ApplicationInformation
+    {
+        public string ContentLocation { get; private set; }
+        public System.Version Version { get; private set; }
+        public string XMLErrorLogFilename { get; private set; }
+
+        public ApplicationInformation(IVisio.Application app)
+        {
+            this.Version = System.Version.Parse(app.Version);
+            this.ContentLocation = GetContentLocation(app,this.Version);
+            this.XMLErrorLogFilename = GetXMLErrorLogFilename(app);
+        }
+
+        private static string GetContentLocation(IVisio.Application app, System.Version ver)
+        {
+            if (ver.Major == 14)
+            {
+                string path = System.IO.Path.Combine(app.Path, "Visio Content");
+                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                return path;
+            }
+
+            if (ver.Major >= 15)
+            {
+                string path = System.IO.Path.Combine(app.Path, "Visio Content");
+                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                return path;
+
+            }
+
+            throw new System.ArgumentException("This version of visio not supported");
+        }
 
         public static string GetXMLErrorLogFilename(IVisio.Application app)
         {
@@ -58,23 +108,25 @@ namespace VisioAutomation.Application
             var hkcu = Microsoft.Win32.Registry.CurrentUser;
 
             // The reg path is specific to the version of visio being used
-            string path = GetHKCUApplicationPath(app);
+            string path = string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", app.Version);
 
-            var key_visio_application = hkcu.OpenSubKey(path);
-            if (key_visio_application == null)
+            string logfilename = null;
+            using (var key_visio_application = hkcu.OpenSubKey(path))
             {
-                // key doesn't exist - can't continue
-                throw new AutomationException("Could not find the key visio application key in hkcu");
-            }
+                if (key_visio_application == null)
+                {
+                    // key doesn't exist - can't continue
+                    throw new AutomationException("Could not find the key visio application key in hkcu");
+                }
 
-            var subkeynames = key_visio_application.GetValueNames();
-            if (!subkeynames.Contains("XMLErrorLogName"))
-            {
-                return null;
-            }
+                var subkeynames = key_visio_application.GetValueNames();
+                if (!subkeynames.Contains("XMLErrorLogName"))
+                {
+                    return null;
+                }
 
-            string logfilename = (string)key_visio_application.GetValue("XMLErrorLogName");
-            key_visio_application.Close();
+                logfilename = (string) key_visio_application.GetValue("XMLErrorLogName");
+            }
 
             // the folder that contains the file is located in the users internet cache
             // C:\Users\<your alias>\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.MSO\VisioLogFiles
@@ -86,46 +138,5 @@ namespace VisioAutomation.Application
 
             return s;
         }
-
-        private static string GetHKCUApplicationPath(IVisio.Application app)
-        {
-            return string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", app.Version);
-        }
-        
-        public static void BringWindowToTop(IVisio.Application app)
-        {
-            var visio_window_handle = new System.IntPtr(app.WindowHandle32);
-            VA.Internal.Interop.NativeMethods.BringWindowToTop(visio_window_handle);
-        }
-
-        public static System.Version GetApplicationVersion(IVisio.Application app)
-        {
-            var v = System.Version.Parse(app.Version);
-            return v;
-        }
-
-        public static string GetContentLocation(IVisio.Application app)
-        {
-            var ver = VA.Application.ApplicationHelper.GetApplicationVersion(app);
-
-            if (ver.Major == 14)
-            {
-                string path = System.IO.Path.Combine(app.Path, "Visio Content");
-                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
-                return path;
-            }
-            else if (ver.Major == 15)
-            {
-                string path = System.IO.Path.Combine(app.Path, "Visio Content");
-                path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
-                return path;
-
-            }
-            else
-            {
-                throw new System.ArgumentException("This version of visio not supported");
-            }
-        }
-
     }
 }
