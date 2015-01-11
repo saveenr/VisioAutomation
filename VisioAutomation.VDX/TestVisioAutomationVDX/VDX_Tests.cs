@@ -37,8 +37,8 @@ namespace TestVisioAutomationVDX
                 return;
             }
 
-            var last_session = log_after.Sessions[log_after.Sessions.Count - 1];
-            foreach (var rec in last_session.Records)
+            var most_recent_session = log_after.Sessions[0];
+            foreach (var rec in most_recent_session.Records)
             {
                 if (rec.Type == "Warning")
                 {
@@ -49,7 +49,7 @@ namespace TestVisioAutomationVDX
 
                 if (rec.Type == "Error")
                 {
-                    string msg = string.Format("XML Error Log {0} contains a warning", logfilename);
+                    string msg = string.Format("XML Error Log {0} contains an error", logfilename);
                     Assert.Fail(msg);
                 }                    
             }
@@ -247,27 +247,21 @@ namespace TestVisioAutomationVDX
             
             // See what happened
             var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
-            var last_session = log_after.Sessions[0];
-            var warnings = last_session.Records.Where(r => r.Type == "Warning").ToList();
-            var errors = last_session.Records.Where(r => r.Type == "Error").ToList();
+            var most_recent_session = log_after.Sessions[0];
+            var warnings = most_recent_session.Records.Where(r => r.Type == "Warning").ToList();
+            var errors = most_recent_session.Records.Where(r => r.Type == "Error").ToList();
 
             // Verify
             var version = VA.Application.ApplicationHelper.GetApplicationVersion(app);
-            if (version.Major == 14) // Visio 2010
+            int expected_errors = 0;  // this VDX should not report any errors
+            int expected_warnings = 4; // this VDX should contain four warnings for Visio2010 and two warnings for Visio 2013         
+            if (version.Major >= 15)
             {
-                Assert.AreEqual(0, errors.Count); // this VDX should not report any errors
-                Assert.AreEqual(2, warnings.Count); // this VDX should contain exactly two warnings                
+                expected_warnings = 2;
             }
-            else if (version.Major == 15) // Visio 2013
-            {
-                Assert.AreEqual(0, errors.Count); // this VDX should not report any errors
-                Assert.AreEqual(2, warnings.Count); // this VDX should contain exactly two warnings                                
-            }
-            else
-            {
-                Assert.Fail("This version of Visio ({0}) is not supported", version);
-                
-            }
+
+            Assert.AreEqual(expected_errors, errors.Count); // this VDX should not report any errors
+            Assert.AreEqual(expected_warnings, warnings.Count); // this VDX should contain exactly two warnings                                
             Assert.AreEqual(1, app.Documents.Count);
 
             // Cleanup
