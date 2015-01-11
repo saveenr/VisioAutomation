@@ -167,22 +167,22 @@ namespace TestVisioAutomation
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var table = query.GetFormulasAndResults<double>(
+            var data = query.GetFormulasAndResults<double>(
                 page1,
                 shapeids);
 
-            Assert.AreEqual(4, table.Count);
-            Assert.AreEqual(1, table[0].SectionCells[sec.Ordinal].Count);
-            Assert.AreEqual(2, table[1].SectionCells[sec.Ordinal].Count);
-            Assert.AreEqual(0, table[2].SectionCells[sec.Ordinal].Count);
-            Assert.AreEqual(3, table[3].SectionCells[sec.Ordinal].Count);
+            Assert.AreEqual(4, data.Count);
+            Assert.AreEqual(1, data[0].SectionCells[sec.Ordinal].Count);
+            Assert.AreEqual(2, data[1].SectionCells[sec.Ordinal].Count);
+            Assert.AreEqual(0, data[2].SectionCells[sec.Ordinal].Count);
+            Assert.AreEqual(3, data[3].SectionCells[sec.Ordinal].Count);
 
-            AssertVA.AreEqual("\"1\"", 1.0, table[0].SectionCells[sec.Ordinal][0][0]);
-            AssertVA.AreEqual("\"2\"", 2.0, table[1].SectionCells[sec.Ordinal][0][0]);
-            AssertVA.AreEqual("\"3\"", 3.0, table[1].SectionCells[sec.Ordinal][1][0]);
-            AssertVA.AreEqual("\"4\"", 4.0, table[3].SectionCells[sec.Ordinal][0][0]);
-            AssertVA.AreEqual("\"5\"", 5.0, table[3].SectionCells[sec.Ordinal][1][0]);
-            AssertVA.AreEqual("\"6\"", 6.0, table[3].SectionCells[sec.Ordinal][2][0]);
+            AssertVA.AreEqual("\"1\"", 1.0, data[0].SectionCells[sec.Ordinal][0][0]);
+            AssertVA.AreEqual("\"2\"", 2.0, data[1].SectionCells[sec.Ordinal][0][0]);
+            AssertVA.AreEqual("\"3\"", 3.0, data[1].SectionCells[sec.Ordinal][1][0]);
+            AssertVA.AreEqual("\"4\"", 4.0, data[3].SectionCells[sec.Ordinal][0][0]);
+            AssertVA.AreEqual("\"5\"", 5.0, data[3].SectionCells[sec.Ordinal][1][0]);
+            AssertVA.AreEqual("\"6\"", 6.0, data[3].SectionCells[sec.Ordinal][2][0]);
 
             page1.Delete(0);
         }

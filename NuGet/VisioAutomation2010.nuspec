@@ -1,7 +1,7 @@
 <package>
   <metadata>
     <id>VisioAutomation2010</id>
-    <version>1.5.3</version>
+    <version>1.5.4</version>
     <authors>saveenr</authors>
     <owners>saveenr</owners>
     <licenseUrl>http://visioautomation.codeplex.com</licenseUrl>
@@ -12,8 +12,7 @@
 It simplifies common tasks and makes it easier to build Visio add-ins and automation/scripting tools. 
 </description>
     <releaseNotes>
-       - Fixed how user-defined cells work for quoting values
-       - Removed invalid Cell on CustomPropertyCells
+       - Improved reliability of drawing directed graphs
     </releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>Visio</tags>
