@@ -14,8 +14,10 @@ namespace TestVisioAutomation
         [DeploymentItem(@"datafiles\orgchart_1.xml", "datafiles")]
         public void Scripting_Draw_OrgChart()
         {
+            // Load the chart
             string xml = this.get_datafile_content(@"datafiles\orgchart_1.xml");
             
+            // Draw the Chart
             var client = GetScriptingClient();
             draw_org_chart(client, xml);
             
@@ -27,9 +29,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_DataTable()
         {
+            var pagesize = new VA.Drawing.Size(4, 4);
             var widths = new[] { 2.0, 1.5, 1.0 };
             double default_height = 0.25;
             var cellspacing = new VA.Drawing.Size(0, 0);
+
             var items = new[]
                 {
                     new {Name = "X", Age = 28, Score = 16},
@@ -48,10 +52,12 @@ namespace TestVisioAutomation
                 dt.Rows.Add(item.Name, item.Age, item.Score);
             }
 
+            // Prepare the Page
             var client = GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
+            client.Page.New(pagesize, false);
 
+            // Draw the table
             var heights = Enumerable.Repeat(default_height, items.Length).ToList();
             var shapes = client.Draw.Table(dt, widths, heights, cellspacing);
 
@@ -66,6 +72,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_Grid()
         {
+            var origin = new VA.Drawing.Point(0, 4);
             var pagesize = new VA.Drawing.Size(4, 4);
             var cellsize = new VA.Drawing.Size(0.5, 0.25);
             int cols = 3;
@@ -80,10 +87,10 @@ namespace TestVisioAutomation
             var stencildoc = client.Document.OpenStencil("basic_u.vss");
             var master = client.Master.Get("Rectangle", stencildoc);
 
-            // Draw the fgrid
+            // Draw the grid
             var page = client.Page.Get();
             var grid = new VA.Models.Grid.GridLayout(cols, rows, cellsize, master);
-            grid.Origin = new VA.Drawing.Point(0, 4);
+            grid.Origin = origin;
             grid.Render(page);
 
             // Verify
@@ -164,6 +171,12 @@ namespace TestVisioAutomation
             var pagesize = new VA.Drawing.Size(4, 4);
             var center = new VA.Drawing.Point(2, 2);
             double radius = 1.0;
+            
+            var chart = new VA.Models.Charting.PieChart(center, radius);
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
+            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
 
             // Create the Page
             var client = GetScriptingClient();
@@ -171,11 +184,7 @@ namespace TestVisioAutomation
             client.Page.New(pagesize, false);
 
             // Draw the chart
-            var chart = new VA.Models.Charting.PieChart(center,radius);
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
-            chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
+
             client.Draw.PieChart(chart);
 
             // Cleanup
@@ -191,33 +200,33 @@ namespace TestVisioAutomation
             var rect3 = new VA.Drawing.Rectangle(10, 0, 14, 4);
             var bordersize = new VA.Drawing.Size(1.0, 1.0);
 
-            // Create the page
-            var client = GetScriptingClient();
-            client.Document.New();
-            client.Page.New(pagesize, false);
-
-            // Draw the Charts
             var chart1 = new VA.Models.Charting.BarChart(rect1);
             chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
             chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
             chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(3.0));
             chart1.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
-            client.Draw.BarChart(chart1);
 
-            var chart2= new VA.Models.Charting.BarChart(rect2);
+            var chart2 = new VA.Models.Charting.BarChart(rect2);
             chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(1.0));
             chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(2.0));
             chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(-3.0));
             chart2.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
-            client.Draw.BarChart(chart2);
 
             var chart3 = new VA.Models.Charting.BarChart(rect3);
             chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-1.0));
             chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-2.0));
             chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-3.0));
             chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-4.0));
-            client.Draw.BarChart(chart3);
+            
+            // Create the page
+            var client = GetScriptingClient();
+            client.Document.New();
+            client.Page.New(pagesize, false);
 
+            // Draw the Charts
+            client.Draw.BarChart(chart1);
+            client.Draw.BarChart(chart2);
+            client.Draw.BarChart(chart3);
             client.Page.ResizeToFitContents(bordersize,true);
 
             // Cleanup
@@ -231,33 +240,36 @@ namespace TestVisioAutomation
             var rect1 = new VA.Drawing.Rectangle(0, 0, 4, 4);
             var rect2 = new VA.Drawing.Rectangle(5, 0, 9, 4);
             var rect3 = new VA.Drawing.Rectangle(10, 0, 14, 4);
-
-            var client = GetScriptingClient();
-            client.Document.New();
-            client.Page.New(pagesize, false);
-
+            var padding = new VA.Drawing.Size(1.0, 1.0);
+            
             var chart1 = new VA.Models.Charting.AreaChart(rect1);
             chart1.DataPoints.Add(1.0);
             chart1.DataPoints.Add(2.0);
             chart1.DataPoints.Add(3.0);
             chart1.DataPoints.Add(4.0);
-            client.Draw.AreaChart(chart1);
 
             var chart2 = new VA.Models.Charting.AreaChart(rect2);
             chart2.DataPoints.Add(1.0);
             chart2.DataPoints.Add(2.0);
             chart2.DataPoints.Add(-3.0);
             chart2.DataPoints.Add(4.0);
-            client.Draw.AreaChart(chart2);
 
             var chart3 = new VA.Models.Charting.AreaChart(rect3);
             chart3.DataPoints.Add(-1.0);
             chart3.DataPoints.Add(-2.0);
             chart3.DataPoints.Add(-3.0);
             chart3.DataPoints.Add(-4.0);
-            client.Draw.AreaChart(chart3);
 
-            client.Page.Get().ResizeToFitContents(new VA.Drawing.Size(1.0, 1.0));
+            // Setup the Page
+            var client = GetScriptingClient();
+            client.Document.New();
+            client.Page.New(pagesize, false);
+
+            // Draw the Charts
+            client.Draw.AreaChart(chart1);
+            client.Draw.AreaChart(chart2);
+            client.Draw.AreaChart(chart3);
+            client.Page.Get().ResizeToFitContents(padding);
 
             // Cleanup
             client.Document.Close(true);
@@ -267,8 +279,10 @@ namespace TestVisioAutomation
         [DeploymentItem(@"datafiles\directed_graph_1.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph1()
         {
+            // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_1.xml");
 
+            // Draw the graph
             var client = GetScriptingClient();
             draw_directed_graph(client, xml);
 
@@ -280,8 +294,10 @@ namespace TestVisioAutomation
         [DeploymentItem(@"datafiles\directed_graph_2.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph2()
         {
+            // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_2.xml");
 
+            // Draw the graph
             var client = GetScriptingClient();
             draw_directed_graph(client, xml);
 
@@ -293,10 +309,14 @@ namespace TestVisioAutomation
         [DeploymentItem(@"datafiles\directed_graph_3.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph3()
         {
+            // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_3.xml");
-            
+
+            // Draw the graph
             var client = GetScriptingClient();
             draw_directed_graph(client, xml);
+
+            // Cleanup
             client.Document.Close(true);
         }
 
@@ -304,10 +324,14 @@ namespace TestVisioAutomation
         [DeploymentItem(@"datafiles\directed_graph_4.xml", "datafiles")]
         public void Scripting_Draw_DirectedGraph4()
         {
+            // Load the graph
             string xml = this.get_datafile_content(@"datafiles\directed_graph_4.xml");
 
+            // Draw the graph
             var client = GetScriptingClient();
             draw_directed_graph(client, xml);
+
+            // Cleanup
             client.Document.Close(true);
         }
 

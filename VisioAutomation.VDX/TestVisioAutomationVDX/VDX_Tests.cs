@@ -247,7 +247,7 @@ namespace TestVisioAutomationVDX
             
             // See what happened
             var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
-            var last_session = log_after.Sessions[log_after.Sessions.Count - 1];
+            var last_session = log_after.Sessions[0];
             var warnings = last_session.Records.Where(r => r.Type == "Warning").ToList();
             var errors = last_session.Records.Where(r => r.Type == "Error").ToList();
 
@@ -261,7 +261,7 @@ namespace TestVisioAutomationVDX
             else if (version.Major == 15) // Visio 2013
             {
                 Assert.AreEqual(0, errors.Count); // this VDX should not report any errors
-                Assert.AreEqual(0, warnings.Count); // this VDX should contain exactly two warnings                                
+                Assert.AreEqual(2, warnings.Count); // this VDX should contain exactly two warnings                                
             }
             else
             {
