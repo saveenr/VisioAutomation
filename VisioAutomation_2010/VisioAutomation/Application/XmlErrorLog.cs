@@ -14,7 +14,7 @@ namespace VisioAutomation.Application.Logging
 
             if (!System.IO.File.Exists(filename))
             {
-                return;
+                throw new System.ArgumentException("File does not exist");
             }
 
             var state = LogState.Start;
@@ -54,13 +54,13 @@ namespace VisioAutomation.Application.Logging
 
                     if (line.StartsWith("Source:"))
                     {
-                        var cur_session = this.GetCurrentSession();
+                        var cur_session = this.GetMostRecentSession();
                         cur_session.Source = line.Substring("Source:".Length).Trim();
                     }
                     else if (line.EndsWith("Begin Session"))
                     {
                         var tokens = line.Split();
-                        var cur_session = this.GetCurrentSession();
+                        var cur_session = this.GetMostRecentSession();
                         cur_session.StartTimeRaw = string.Join(" ", tokens.Take(5));
 
                         // Dates are in this format "Sat Jan 10 20:09:12 2015"
@@ -94,13 +94,13 @@ namespace VisioAutomation.Application.Logging
                     }
                     else if (line.StartsWith("Context:"))
                     {
-                        var session = this.GetCurrentSession();
+                        var session = this.GetMostRecentSession();
                         var rec = session.Records[session.Records.Count - 1];
                         rec.Context = line.Substring("Context:".Length);
                     }
                     else if (line.StartsWith("Description:"))
                     {
-                        var session = this.GetCurrentSession();
+                        var session = this.GetMostRecentSession();
                         var rec = session.Records[session.Records.Count - 1];
                         rec.Description = line.Substring("Description:".Length);
                     }
@@ -147,12 +147,12 @@ namespace VisioAutomation.Application.Logging
 
         private LogState TerminateCurrentSession(string line)
         {
-            var session = this.GetCurrentSession();
+            var session = this.GetMostRecentSession();
             session.EndLine = line;
             return LogState.Start;
         }
 
-        private FileSessions GetCurrentSession()
+        public FileSessions GetMostRecentSession()
         {
             return this.FileSessions[this.FileSessions.Count - 1];
         }

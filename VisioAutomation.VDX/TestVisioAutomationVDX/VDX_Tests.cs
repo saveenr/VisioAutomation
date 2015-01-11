@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Application.Logging;
 using VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -25,37 +27,120 @@ namespace TestVisioAutomationVDX
         public void VerifyDocCanBeLoaded(string filename)
         {
             var app = new IVisio.Application();
+            var version = VA.Application.ApplicationHelper.GetApplicationVersion(app);
 
             string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
-            TryOpen(app.Documents, filename); // this causes the doc to load no matter what the error 
-            var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
-            
-            if (log_after.FileSessions.Count < 1)
+
+            VA.Application.Logging.XmlErrorLog log_before=null;
+            var old_fileinfo = new System.IO.FileInfo(logfilename);
+
+            if (System.IO.File.Exists(logfilename))
             {
-                // nothing is int the log at all
-                // nothing could be bad
-                return;
+                log_before = new VA.Application.Logging.XmlErrorLog(logfilename);
             }
 
-            var most_recent_session = log_after.FileSessions[0];
-            foreach (var rec in most_recent_session.Records)
+            var time = System.DateTime.Now;
+            TryOpen(app.Documents, filename); // this causes the doc to load no matter what the error 
+
+            VA.Application.Logging.XmlErrorLog log_after = null;
+            if (System.IO.File.Exists(logfilename))
+            {
+                log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
+            }
+
+            if (log_before == null && log_after == null)
+            {
+                // Didn't exist before, didn't exist after - that's fine - the file loaded with no issues
+                return;
+            }
+            else if (log_before != null && log_after == null)
+            {
+                Assert.Fail("Invalid case for all visio versions - if it existed before it must exist after");                
+            }
+            else if (log_before == null && log_after != null)
+            {
+                // for Visio 2010, it means it reported something about the load, so there must be some records
+                // this is always going to be true for visio 2013 regardless whether there are any records for the file
+            }
+            else
+            {
+                // both logs exist
+                // For Visio 2013 it means that there is a record in the last log
+                // For Visio 2010, it is possible we may not find a record
+            }
+
+            if (log_after != null)
+            {
+                VerifyNoErrorsInLog(log_before, log_after, filename, logfilename, version, time);
+            }
+
+        VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
+            app.Quit();
+        }
+
+        private static void VerifyNoErrorsInLog(XmlErrorLog log_before, XmlErrorLog log_after, string filename, string logfilename, System.Version version, System.DateTime opentime)
+        {
+            if (log_after == null)
+            {
+                throw new ArgumentNullException("log_after cannot be null");
+            }
+
+            if (log_after.FileSessions.Count < 1)
+            {
+                Assert.Fail("There should be at least one document session in the log");
+            }
+
+            FileSessions target_session = null;
+            if (version.Major >= 15)
+            {
+                target_session = log_after.FileSessions[0];
+            }
+            else
+            {
+                var candidates = log_after.FileSessions.Where(s => s.Source == filename).ToList();
+                if (candidates.Count < 1)
+                {
+                    // There were no records for the filename so visio reporting nothing about the filename and everything is good
+                    return;
+                }
+                else
+                {
+                    var first_candidate = candidates.First();
+
+                    var max_time = opentime.AddSeconds(2);
+
+                    if (first_candidate.StartTime >= opentime && first_candidate.StartTime <= opentime)
+                    {
+                        // it's in the right time range (within two seconds of opening)
+                        target_session = first_candidate;
+                    }
+                    else
+                    {
+                        // We'll have to assume that the remaining ones don't represent opening the file we are looking for
+                        // So everything must have worked without a problem
+                        return;
+                    }
+                }
+            }
+
+            // verify the filenames match
+            if (filename != target_session.Source)
+            {
+                //Assert.Fail("The filenames do not match");                
+            }
+            foreach (var rec in target_session.Records)
             {
                 if (rec.Type == "Warning")
                 {
-                    string msg = string.Format("XML Error Log {0} contains a warning", logfilename);
-                    //Assert.Fail(msg);
-                    //We are OK with warnings
+                    // We are OK with warnings. Do Nothing
                 }
 
                 if (rec.Type == "Error")
                 {
                     string msg = string.Format("XML Error Log {0} contains an error", logfilename);
                     Assert.Fail(msg);
-                }                    
+                }
             }
-
-            VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
-            app.Quit();
         }
 
         [TestMethod]
