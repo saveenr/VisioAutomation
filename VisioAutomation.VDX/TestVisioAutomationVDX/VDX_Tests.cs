@@ -48,99 +48,62 @@ namespace TestVisioAutomationVDX
                 log_after = new VA.Application.Logging.XmlErrorLog(logfilename);
             }
 
+            if (log_before != null && log_after == null)
+            {
+                Assert.Fail("Invalid case for all visio versions - if it existed before it must exist after");
+                return;
+            }
+ 
             if (log_before == null && log_after == null)
             {
                 // Didn't exist before, didn't exist after - that's fine - the file loaded with no issues
                 return;
             }
-            else if (log_before != null && log_after == null)
-            {
-                Assert.Fail("Invalid case for all visio versions - if it existed before it must exist after");                
-            }
-            else if (log_before == null && log_after != null)
-            {
-                // for Visio 2010, it means it reported something about the load, so there must be some records
-                // this is always going to be true for visio 2013 regardless whether there are any records for the file
-            }
-            else
-            {
-                // both logs exist
-                // For Visio 2013 it means that there is a record in the last log
-                // For Visio 2010, it is possible we may not find a record
-            }
 
-            if (log_after != null)
-            {
-                VerifyNoErrorsInLog(log_before, log_after, filename, logfilename, version, time);
-            }
+            // log_after exists
+            VerifyNoErrorsInLog(log_after, filename, logfilename, version, time);
 
-        VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
+            VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();
         }
 
-        private static void VerifyNoErrorsInLog(XmlErrorLog log_before, XmlErrorLog log_after, string filename, string logfilename, System.Version version, System.DateTime opentime)
+        private static void VerifyNoErrorsInLog(XmlErrorLog log_after, string filename, string logfilename, System.Version version, System.DateTime opentime)
         {
-            if (log_after == null)
+            int duration = 2;
+            var lower_time_bound = opentime;
+            var upper_time_bound = opentime.AddSeconds(duration);
+
+            // First see of any sessions matching the source exist
+            // If not, then the load must have been successful
+            var all_sessions_from_source = log_after.FileSessions.Where(s => s.Source == filename).ToList();
+            if (all_sessions_from_source.Count < 1)
             {
-                throw new ArgumentNullException("log_after cannot be null");
+                return;
             }
 
-            if (log_after.FileSessions.Count < 1)
+            // From that set of sessions, find the one closest in time to when we
+            // asked Visio to open the file.
+            // If none could be found, then then we assume no error could be found
+            // NOTE: It would be better not to have to rely on a time duration.
+            var sessions_near_in_time =
+                all_sessions_from_source.Where(c => (lower_time_bound <= c.StartTime && c.StartTime <= upper_time_bound)).ToList();
+            if (sessions_near_in_time.Count < 1)
             {
-                Assert.Fail("There should be at least one document session in the log");
+                // couldn't find any in the time period. We'll have to assume no error could be found.
+                return;
             }
 
-            FileSessions target_session = null;
-            if (version.Major >= 15)
-            {
-                target_session = log_after.FileSessions[0];
-            }
-            else
-            {
-                var candidates = log_after.FileSessions.Where(s => s.Source == filename).ToList();
-                if (candidates.Count < 1)
-                {
-                    // There were no records for the filename so visio reporting nothing about the filename and everything is good
-                    return;
-                }
-                else
-                {
-                    var first_candidate = candidates.First();
+            var target_session = all_sessions_from_source[0];
 
-                    var max_time = opentime.AddSeconds(2);
+            var warnings = target_session.Records.Where(rec => rec.Type == "Warning").ToList();
+            var errors = target_session.Records.Where(rec => rec.Type == "Error").ToList();
 
-                    if (first_candidate.StartTime >= opentime && first_candidate.StartTime <= opentime)
-                    {
-                        // it's in the right time range (within two seconds of opening)
-                        target_session = first_candidate;
-                    }
-                    else
-                    {
-                        // We'll have to assume that the remaining ones don't represent opening the file we are looking for
-                        // So everything must have worked without a problem
-                        return;
-                    }
-                }
+            if (errors.Count > 0)
+            {                
+                string msg = string.Format("XML Error Log {0} contains an error", logfilename);
+                Assert.Fail(msg);
             }
 
-            // verify the filenames match
-            if (filename != target_session.Source)
-            {
-                //Assert.Fail("The filenames do not match");                
-            }
-            foreach (var rec in target_session.Records)
-            {
-                if (rec.Type == "Warning")
-                {
-                    // We are OK with warnings. Do Nothing
-                }
-
-                if (rec.Type == "Error")
-                {
-                    string msg = string.Format("XML Error Log {0} contains an error", logfilename);
-                    Assert.Fail(msg);
-                }
-            }
         }
 
         [TestMethod]
