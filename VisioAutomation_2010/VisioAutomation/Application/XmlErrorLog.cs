@@ -54,13 +54,19 @@ namespace VisioAutomation.Application.Logging
 
                     if (line.StartsWith("Source:"))
                     {
-                        var cur_session = this.CurrentSession;
+                        var cur_session = this.GetCurrentSession();
                         cur_session.Source = line.Substring("Source:".Length).Trim();
                     }
                     else if (line.EndsWith("Begin Session"))
                     {
                         var tokens = line.Split();
-                        this.CurrentSession.StartTime = string.Join(" ", tokens.Take(5));
+                        var cur_session = this.GetCurrentSession();
+                        cur_session.StartTimeRaw = string.Join(" ", tokens.Take(5));
+
+                        // Dates are in this format "Sat Jan 10 20:09:12 2015"
+
+                        cur_session.StartTime = DateTime.ParseExact(cur_session.StartTimeRaw, "ddd MMM dd HH:mm:ss yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
                     }
                     else if (line.EndsWith("End Session"))
                     {
@@ -88,13 +94,13 @@ namespace VisioAutomation.Application.Logging
                     }
                     else if (line.StartsWith("Context:"))
                     {
-                        var session = this.CurrentSession;
+                        var session = this.GetCurrentSession();
                         var rec = session.Records[session.Records.Count - 1];
                         rec.Context = line.Substring("Context:".Length);
                     }
                     else if (line.StartsWith("Description:"))
                     {
-                        var session = this.CurrentSession;
+                        var session = this.GetCurrentSession();
                         var rec = session.Records[session.Records.Count - 1];
                         rec.Description = line.Substring("Description:".Length);
                     }
@@ -141,14 +147,14 @@ namespace VisioAutomation.Application.Logging
 
         private LogState TerminateCurrentSession(string line)
         {
-            var session = this.CurrentSession;
+            var session = this.GetCurrentSession();
             session.EndLine = line;
             return LogState.Start;
         }
 
-        private FileSessions CurrentSession
+        private FileSessions GetCurrentSession()
         {
-            get { return this.FileSessions[this.FileSessions.Count - 1]; }
+            return this.FileSessions[this.FileSessions.Count - 1];
         }
 
         private static List<string> GetLinesSharedRead(string filename)

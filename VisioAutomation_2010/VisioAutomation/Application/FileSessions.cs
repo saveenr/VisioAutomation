@@ -9,7 +9,8 @@ namespace VisioAutomation.Application.Logging
         public string FileType;
         public string Source;
 
-        public string StartTime;
+        public string StartTimeRaw;
+        public System.DateTime StartTime;
 
         public List<LogRecord> Records;
 
