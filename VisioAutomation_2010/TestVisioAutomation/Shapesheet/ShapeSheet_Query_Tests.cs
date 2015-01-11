@@ -167,7 +167,7 @@ namespace TestVisioAutomation
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
-            var data = query.GetFormulasAndResults<double>(
+            var data = query.GetCellData<double>(
                 page1,
                 shapeids);
 

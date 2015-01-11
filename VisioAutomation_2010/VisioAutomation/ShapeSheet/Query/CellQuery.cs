@@ -100,7 +100,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return unitcodes;
         }
 
-        public QueryResult<CellData<T>> GetFormulasAndResults<T>(IVisio.Shape shape)
+        public QueryResult<CellData<T>> GetCellData<T>(IVisio.Shape shape)
         {
             this.Freeze();
 
@@ -154,13 +154,13 @@ namespace VisioAutomation.ShapeSheet.Query
             return list;
         }
 
-        public QueryResultList<CellData<T>> GetFormulasAndResults<T>(IVisio.Page page, IList<int> shapeids)
+        public QueryResultList<CellData<T>> GetCellData<T>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new VA.Drawing.DrawingSurface(page);
-            return GetFormulasAndResults<T>(surface, shapeids);
+            return GetCellData<T>(surface, shapeids);
         }
 
-        public QueryResultList<CellData<T>> GetFormulasAndResults<T>(VA.Drawing.DrawingSurface surface, IList<int> shapeids)
+        public QueryResultList<CellData<T>> GetCellData<T>(VA.Drawing.DrawingSurface surface, IList<int> shapeids)
         {
             this.Freeze();
 
