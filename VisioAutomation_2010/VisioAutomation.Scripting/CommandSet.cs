@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.Drawing;
+using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using System.Linq;
@@ -61,6 +63,27 @@ namespace VisioAutomation.Scripting
                 var surface = new VA.Drawing.DrawingSurface(surf_Page);
                 return surface;
             }
+        }
+
+        public ShapeSheetSurface GetShapeSheetSurface()
+        {
+            var ds = this.GetDrawingSurfaceSafe();
+            if (ds.Master != null)
+            {
+                return new ShapeSheetSurface(ds.Master);
+            }
+
+            if (ds.Page != null)
+            {
+                return new ShapeSheetSurface(ds.Page);
+            }
+
+            if (ds.Shape != null)
+            {
+                return new ShapeSheetSurface(ds.Shape);
+            }
+
+            throw new System.ArgumentException();
         }
 
         internal static IEnumerable<System.Reflection.MethodInfo> GetCommandMethods(System.Type mytype)

@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
-            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetShapeSheetSurface();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetShapeSheetSurface();
  
             var query = new VA.ShapeSheet.Query.CellQuery();
 
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var app = this.Client.VisioApplication;
-            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetShapeSheetSurface();
             var query = new VA.ShapeSheet.Query.CellQuery();
             var sec = query.Sections.Add(section);
 
@@ -94,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetShapeSheetSurface();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
             var sec = query.Sections.Add(section);
@@ -169,7 +169,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
 
             }
-            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetShapeSheetSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set ShapeSheet Formulas"))
             {
                 update.Execute(surface);
@@ -232,7 +232,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetShapeSheetSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set ShapeSheet Result"))
             {
                 update.Execute(surface);
@@ -245,7 +245,7 @@ namespace VisioAutomation.Scripting.Commands
             this.AssertDocumentAvailable();
 
             this.Client.WriteVerbose( "Staring ShapeSheet Update");
-            var surface = this.Client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.Client.Draw.GetShapeSheetSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Update ShapeSheet Formulas"))
             {
                 var internal_update = update.update;

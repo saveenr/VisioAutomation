@@ -332,7 +332,7 @@ namespace VisioPowerShell.Commands
                 }
             }
 
-            var surface = this.client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.client.Draw.GetShapeSheetSurface();
 
             this.WriteVerbose("BlastGuards: {0}", this.BlastGuards);
             this.WriteVerbose("TestCircular: {0}", this.TestCircular);

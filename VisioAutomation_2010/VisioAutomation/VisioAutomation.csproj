@@ -84,6 +84,7 @@
     <Compile Include="Application\LogRecord.cs" />
     <Compile Include="Application\FileSessions.cs" />
     <Compile Include="Application\LogState.cs" />
+    <Compile Include="Shapesheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Models\DirectedGraph\VisioRenderer.cs" />

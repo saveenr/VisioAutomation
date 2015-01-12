@@ -36,7 +36,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public QueryResult<string> GetFormulas(IVisio.Shape shape)
         {
             this.Freeze();
-            var surface = new VA.Drawing.DrawingSurface(shape);
+            var surface = new ShapeSheetSurface(shape);
             var srcstream = BuildSRCStream(surface);
             var values = surface.GetFormulasU_SRC(srcstream);
             var r = new QueryResult<string>(shape.ID);
@@ -50,7 +50,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
 
-            var surface = new VA.Drawing.DrawingSurface(shape);
+            var surface = new ShapeSheetSurface(shape);
 
             var srcstream = BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
@@ -104,7 +104,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
 
-            var surface = new VA.Drawing.DrawingSurface(shape);
+            var surface = new ShapeSheetSurface(shape);
 
             var srcstream = BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
@@ -124,11 +124,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public QueryResultList<string> GetFormulas(IVisio.Page page, IList<int>  shapeids)
         {
-            var surface = new VA.Drawing.DrawingSurface(page);
+            var surface = new ShapeSheetSurface(page);
             return this.GetFormulas(surface, shapeids);
         }
 
-        public QueryResultList<string> GetFormulas(VA.Drawing.DrawingSurface surface, IList<int> shapeids)
+        public QueryResultList<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(surface, shapeids);
@@ -140,11 +140,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public QueryResultList<T> GetResults<T>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new VA.Drawing.DrawingSurface(page);
+            var surface = new ShapeSheetSurface(page);
             return this.GetResults<T>(surface, shapeids);
         }
 
-        public QueryResultList<T> GetResults<T>(VA.Drawing.DrawingSurface surface, IList<int> shapeids)
+        public QueryResultList<T> GetResults<T>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(surface, shapeids);
@@ -156,11 +156,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public QueryResultList<CellData<T>> GetCellData<T>(IVisio.Page page, IList<int> shapeids)
         {
-            var surface = new VA.Drawing.DrawingSurface(page);
+            var surface = new ShapeSheetSurface(page);
             return GetCellData<T>(surface, shapeids);
         }
 
-        public QueryResultList<CellData<T>> GetCellData<T>(VA.Drawing.DrawingSurface surface, IList<int> shapeids)
+        public QueryResultList<CellData<T>> GetCellData<T>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
 
@@ -237,7 +237,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return start + cellcount;
         }
 
-        private short[] BuildSRCStream(VA.Drawing.DrawingSurface surface)
+        private short[] BuildSRCStream(ShapeSheetSurface surface)
         {
             if (surface.Shape == null)
             {
@@ -295,7 +295,7 @@ namespace VisioAutomation.ShapeSheet.Query
             return stream_builder.Stream;
         }
 
-        private short[] BuildSIDSRCStream(VA.Drawing.DrawingSurface surface, IList<int> shapeids)
+        private short[] BuildSIDSRCStream(ShapeSheetSurface surface, IList<int> shapeids)
         {
             CalculatePerShapeInfo(surface, shapeids);
 
@@ -344,7 +344,7 @@ namespace VisioAutomation.ShapeSheet.Query
         }
 
 
-        private void CalculatePerShapeInfo(VA.Drawing.DrawingSurface surface, IList<int> shapeids)
+        private void CalculatePerShapeInfo(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
 

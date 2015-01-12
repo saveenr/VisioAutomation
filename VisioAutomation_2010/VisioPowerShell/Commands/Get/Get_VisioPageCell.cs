@@ -1,4 +1,5 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 
@@ -217,7 +218,7 @@ namespace VisioPowerShell.Commands
             var dic = GetPageCellDictionary();
             SetFromCellNames(query, this.Cells, dic);
 
-            var surface = new VA.Drawing.DrawingSurface(this.client.Page.Get());
+            var surface = new ShapeSheetSurface(this.client.Page.Get());
             
             var target_shapeids = new[] { surface.Page.ID };
 

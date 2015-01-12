@@ -325,7 +325,7 @@ namespace VisioPowerShell.Commands
             var dic = GetShapeCellDictionary();
             Get_VisioPageCell.SetFromCellNames(query, this.Cells, dic);
 
-            var surface = this.client.Draw.GetDrawingSurfaceSafe();
+            var surface = this.client.Draw.GetShapeSheetSurface();
 
             this.WriteVerbose("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerbose("Number of Cells: {0}", query.Columns.Count);
