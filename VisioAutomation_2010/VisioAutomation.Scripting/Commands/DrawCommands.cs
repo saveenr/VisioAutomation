@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Rectangle(double x0, double y0, double x1, double y1)
         {
-            var surface = this.GetDrawingSurfaceSafe();
+            var surface = this.ToDrawingSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Draw Rectangle"))
             {
                 var shape = surface.DrawRectangle(x0, y0, x1, y1);
@@ -143,7 +143,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Line(double x0, double y0, double x1, double y1)
         {
-            var surface = this.GetDrawingSurfaceSafe();
+            var surface = this.ToDrawingSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Draw Line"))
             {
                 var shape = surface.DrawLine(x0, y0, x1, y1);
@@ -153,7 +153,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(double x0, double y0, double x1, double y1)
         {
-            var surface = this.GetDrawingSurfaceSafe();
+            var surface = this.ToDrawingSurface();
             var rect = new VA.Drawing.Rectangle(x0, y0, x1, y1);
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Draw Oval"))
             {
@@ -164,7 +164,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Oval(VA.Drawing.Point center, double radius)
         {
-            var surface = this.GetDrawingSurfaceSafe();
+            var surface = this.ToDrawingSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Draw Oval"))
             {
                 var shape = surface.DrawOval(center, radius);
@@ -174,7 +174,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Bezier(IEnumerable<VA.Drawing.Point> points)
         {
-            var surface = this.GetDrawingSurfaceSafe();
+            var surface = this.ToDrawingSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Draw Bezier"))
             {
                 var shape = surface.DrawBezier(points.ToList());
@@ -184,7 +184,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape PolyLine(IList<VA.Drawing.Point> points)
         {
-            var surface = this.GetDrawingSurfaceSafe();
+            var surface = this.ToDrawingSurface();
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Draw PolyLine"))
             {
                 var shape = surface.DrawPolyLine(points);
@@ -410,7 +410,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public List<IVisio.Shape> GetAllShapes()
         {
-            var surface = this.GetDrawingSurfaceSafe();
+            var surface = this.ToDrawingSurface();
             return surface.GetAllShapes();
         }
     }

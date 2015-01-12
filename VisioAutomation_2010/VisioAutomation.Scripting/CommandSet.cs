@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting
 
         }
 
-        public VA.Drawing.DrawingSurface GetDrawingSurfaceSafe()
+        public VA.Drawing.DrawingSurface ToDrawingSurface()
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
@@ -67,23 +67,9 @@ namespace VisioAutomation.Scripting
 
         public ShapeSheetSurface GetShapeSheetSurface()
         {
-            var ds = this.GetDrawingSurfaceSafe();
-            if (ds.Master != null)
-            {
-                return new ShapeSheetSurface(ds.Master);
-            }
-
-            if (ds.Page != null)
-            {
-                return new ShapeSheetSurface(ds.Page);
-            }
-
-            if (ds.Shape != null)
-            {
-                return new ShapeSheetSurface(ds.Shape);
-            }
-
-            throw new System.ArgumentException();
+            var ds = this.ToDrawingSurface();
+            var ss = ds.ToShapeSheetSurface();
+            return ss;
         }
 
         internal static IEnumerable<System.Reflection.MethodInfo> GetCommandMethods(System.Type mytype)

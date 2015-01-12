@@ -414,6 +414,25 @@ namespace VisioAutomation.Drawing
             return list;
         }
 
+        public VA.ShapeSheet.ShapeSheetSurface ToShapeSheetSurface()
+        {
+            if (this.Master != null)
+            {
+                return new VA.ShapeSheet.ShapeSheetSurface(this.Master);
+            }
+
+            if (this.Page != null)
+            {
+                return new VA.ShapeSheet.ShapeSheetSurface(this.Page);
+            }
+
+            if (this.Shape != null)
+            {
+                return new VA.ShapeSheet.ShapeSheetSurface(this.Shape);
+            }
+
+            throw new System.ArgumentException();
+        }
     }
 }
 
