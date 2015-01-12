@@ -89,7 +89,7 @@
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Models\DirectedGraph\VisioRenderer.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
-    <Compile Include="Stencils2\StencilHelper.cs" />
+    <Compile Include="Stencils\StencilHelper.cs" />
     <Compile Include="TextUtil.cs" />
     <Compile Include="Drawing\Margin.cs" />
     <Compile Include="Models\Charting\BarChart.cs" />
