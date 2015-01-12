@@ -38,7 +38,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Freeze();
             var surface = new VA.Drawing.DrawingSurface(shape);
             var srcstream = BuildSRCStream(surface);
-            var values = surface.GetFormulasU_3(srcstream);
+            var values = surface.GetFormulasU_SRC(srcstream);
             var r = new QueryResult<string>(shape.ID);
             FillValuesForShape<string>(values, r, 0,0);
 
@@ -54,7 +54,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
-            var values = surface.GetResults_3<T>(srcstream,unitcodes);
+            var values = surface.GetResults_SRC<T>(srcstream,unitcodes);
             var r = new QueryResult<T>(shape.ID);
             FillValuesForShape<T>(values, r, 0,0);
             return r;
@@ -108,8 +108,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
-            var formulas = surface.GetFormulasU_3(srcstream);
-            var results = surface.GetResults_3<T>(srcstream, unitcodes);
+            var formulas = surface.GetFormulasU_SRC(srcstream);
+            var results = surface.GetResults_SRC<T>(srcstream, unitcodes);
 
             var combineddata = new CellData<T>[results.Length];
             for (int i = 0; i < results.Length; i++)
@@ -132,7 +132,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
             var srcstream = BuildSIDSRCStream(surface, shapeids);
-            var values = surface.GetFormulasU_4(srcstream);
+            var values = surface.GetFormulasU_SIDSRC(srcstream);
             var list = FillValuesForMultipleShapes(shapeids, values);
             return list;
         }
@@ -149,7 +149,7 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Freeze();
             var srcstream = BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
-            var values = surface.GetResults_4<T>(srcstream, unitcodes);
+            var values = surface.GetResults_SIDSRC<T>(srcstream, unitcodes);
             var list = FillValuesForMultipleShapes(shapeids, values);
             return list;
         }
@@ -166,8 +166,8 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var srcstream = BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
-            T[] results = surface.GetResults_4<T>(srcstream, unitcodes);
-            string[] formulas  = surface.GetFormulasU_4(srcstream);
+            T[] results = surface.GetResults_SIDSRC<T>(srcstream, unitcodes);
+            string[] formulas  = surface.GetFormulasU_SIDSRC(srcstream);
 
             // Merge the results and formulas
             var combined_data = new CellData<T>[results.Length];

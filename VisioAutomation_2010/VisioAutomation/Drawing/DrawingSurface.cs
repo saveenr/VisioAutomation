@@ -432,7 +432,7 @@ namespace VisioAutomation.Drawing
             return stream.Length / chunksize;
         }
 
-        public string[] GetFormulasU_4(short[] stream)
+        public string[] GetFormulasU_SIDSRC(short[] stream)
         {
             int numitems = check_stream_size(stream, 4);
             if (numitems < 1)
@@ -463,7 +463,7 @@ namespace VisioAutomation.Drawing
             return formulas;
         }
 
-        public string[] GetFormulasU_3(short[] stream)
+        public string[] GetFormulasU_SRC(short[] stream)
         {
             int numitems = check_stream_size(stream, 3);
             if (numitems < 1)
@@ -512,7 +512,7 @@ namespace VisioAutomation.Drawing
             return formulas;
         }
 
-        public TResult[] GetResults_4<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
+        public TResult[] GetResults_SIDSRC<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
             EnforceValidResultType(typeof(TResult));
 
@@ -549,7 +549,7 @@ namespace VisioAutomation.Drawing
             return results;
         }
 
-        public TResult[] GetResults_3<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
+        public TResult[] GetResults_SRC<TResult>(short[] stream, IList<IVisio.VisUnitCodes> unitcodes)
         {
             EnforceValidResultType(typeof(TResult));
 
