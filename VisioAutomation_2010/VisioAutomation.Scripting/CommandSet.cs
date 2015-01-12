@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting
 
         }
 
-        public VA.Drawing.DrawingSurface ToDrawingSurface()
+        public VA.Drawing.DrawingSurface GetDrawingSurface()
         {
             this.AssertApplicationAvailable();
             this.AssertDocumentAvailable();
@@ -48,6 +48,7 @@ namespace VisioAutomation.Scripting
             IVisio.Master surf_Master = null;
             IVisio.Page surf_Page = null;
 
+            this.Client.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
             if (surf_Window_subtype == 64)
             {
                 this.Client.WriteVerbose("Window = Master Editing");
@@ -67,7 +68,7 @@ namespace VisioAutomation.Scripting
 
         public ShapeSheetSurface GetShapeSheetSurface()
         {
-            var ds = this.ToDrawingSurface();
+            var ds = this.GetDrawingSurface();
             var ss = ds.ToShapeSheetSurface();
             return ss;
         }
