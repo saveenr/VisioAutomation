@@ -44,15 +44,15 @@ namespace VisioAutomation.Scripting
             var surf_Application = this.Client.VisioApplication;
             var surf_Window = surf_Application.ActiveWindow;
             var surf_Window_subtype = surf_Window.SubType;
-
-            IVisio.Master surf_Master = null;
-            IVisio.Page surf_Page = null;
+            
+            // TODO: Revisit the logic here
+            // TODO: And what about a selected shape as a surface?
 
             this.Client.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
             if (surf_Window_subtype == 64)
             {
                 this.Client.WriteVerbose("Window = Master Editing");
-                surf_Master = (IVisio.Master)surf_Window.Master;
+                var surf_Master = (IVisio.Master)surf_Window.Master;
                 var surface = new VA.Drawing.DrawingSurface(surf_Master);
                 return surface;
 
@@ -60,7 +60,7 @@ namespace VisioAutomation.Scripting
             else
             {
                 this.Client.WriteVerbose("Window = Page ");
-                surf_Page = surf_Application.ActivePage;
+                var surf_Page = surf_Application.ActivePage;
                 var surface = new VA.Drawing.DrawingSurface(surf_Page);
                 return surface;
             }

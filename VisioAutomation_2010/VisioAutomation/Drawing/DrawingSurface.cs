@@ -3,35 +3,58 @@ using System.Linq;
 using VisioAutomation.Extensions;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
+using VisioAutomation.ShapeSheet;
 
 namespace VisioAutomation.Drawing
 {
+
     public struct DrawingSurface
     {
-        public IVisio.Page Page;
-        public IVisio.Master Master;
-        public IVisio.Shape Shape;
+        public readonly SurfaceTarget Target;
+
+        public DrawingSurface(SurfaceTarget k)
+        {
+            this.Target = k;
+        }
 
         public DrawingSurface(IVisio.Page page)
         {
-            this.Page = page;
-            this.Master = null;
-            this.Shape = null;
+         this.Target = new SurfaceTarget(page);
         }
 
         public DrawingSurface(IVisio.Master master)
         {
-            this.Page = null;
-            this.Master = master;
-            this.Shape = null;
+            this.Target = new SurfaceTarget(master);
         }
 
 
         public DrawingSurface(IVisio.Shape shape)
         {
-            this.Page = null;
-            this.Master = null;
-            this.Shape = shape;
+            this.Target = new SurfaceTarget(shape);
+        }
+
+        public IVisio.Master Master
+        {
+            get
+            {
+                return this.Target.Master;
+            }
+        }
+
+        public IVisio.Page Page
+        {
+            get
+            {
+                return this.Target.Page;
+            }
+        }
+
+        public IVisio.Shape Shape
+        {
+            get
+            {
+                return this.Target.Shape;
+            }
         }
 
         public IVisio.Shape DrawLine(VA.Drawing.Point p1, VA.Drawing.Point p2)
@@ -416,22 +439,7 @@ namespace VisioAutomation.Drawing
 
         public VA.ShapeSheet.ShapeSheetSurface ToShapeSheetSurface()
         {
-            if (this.Master != null)
-            {
-                return new VA.ShapeSheet.ShapeSheetSurface(this.Master);
-            }
-
-            if (this.Page != null)
-            {
-                return new VA.ShapeSheet.ShapeSheetSurface(this.Page);
-            }
-
-            if (this.Shape != null)
-            {
-                return new VA.ShapeSheet.ShapeSheetSurface(this.Shape);
-            }
-
-            throw new System.ArgumentException();
+            return new ShapeSheetSurface(this.Target);
         }
     }
 }
