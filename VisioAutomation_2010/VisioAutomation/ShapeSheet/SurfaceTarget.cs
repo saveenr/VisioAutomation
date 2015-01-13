@@ -10,6 +10,11 @@ namespace VisioAutomation.ShapeSheet
 
         public SurfaceTarget(IVisio.Page page)
         {
+            if (page == null)
+            {
+                throw new System.ArgumentException();
+            }
+
             this.Page = page;
             this.Master = null;
             this.Shape = null;
@@ -17,6 +22,11 @@ namespace VisioAutomation.ShapeSheet
 
         public SurfaceTarget(IVisio.Master master)
         {
+            if (master== null)
+            {
+                throw new System.ArgumentException();
+            }
+
             this.Page = null;
             this.Master = master;
             this.Shape = null;
@@ -24,6 +34,11 @@ namespace VisioAutomation.ShapeSheet
 
         public SurfaceTarget(IVisio.Shape shape)
         {
+            if (shape== null)
+            {
+                throw new System.ArgumentException();
+            }
+
             this.Page = null;
             this.Master = null;
             this.Shape = shape;
