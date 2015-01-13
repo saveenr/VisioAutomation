@@ -43,12 +43,5 @@ namespace VisioAutomation.ShapeSheet
             this.Master = null;
             this.Shape = shape;
         }
-
-        public SurfaceTarget(IVisio.Page page, IVisio.Master master, IVisio.Shape shape)
-        {
-            this.Page = page;
-            this.Master = master;
-            this.Shape = shape;
-        }
     }
 }
