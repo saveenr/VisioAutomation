@@ -29,30 +29,6 @@ namespace VisioAutomation.ShapeSheet
             this.Target = new SurfaceTarget(shape);
         }
 
-        public IVisio.Master Master
-        {
-            get
-            {
-                return this.Target.Master;
-            }
-        }
-
-        public IVisio.Page Page
-        {
-            get
-            {
-                return this.Target.Page;
-            }
-        }
-
-        public IVisio.Shape Shape
-        {
-            get
-            {
-                return this.Target.Shape;
-            }
-        }
-
         private static int check_stream_size(short[] stream, int chunksize)
         {
             if ((chunksize != 3) && (chunksize != 4))
@@ -81,17 +57,17 @@ namespace VisioAutomation.ShapeSheet
 
             System.Array formulas_sa = null;
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                this.Master.GetFormulasU(stream, out formulas_sa);
+                this.Target.Master.GetFormulasU(stream, out formulas_sa);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                this.Page.GetFormulasU(stream, out formulas_sa);
+                this.Target.Page.GetFormulasU(stream, out formulas_sa);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                this.Shape.GetFormulasU(stream, out formulas_sa);
+                this.Target.Shape.GetFormulasU(stream, out formulas_sa);
             }
             else
             {
@@ -112,17 +88,17 @@ namespace VisioAutomation.ShapeSheet
 
             System.Array formulas_sa = null;
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                this.Master.GetFormulasU(stream, out formulas_sa);
+                this.Target.Master.GetFormulasU(stream, out formulas_sa);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                this.Page.GetFormulasU(stream, out formulas_sa);
+                this.Target.Page.GetFormulasU(stream, out formulas_sa);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                this.Shape.GetFormulasU(stream, out formulas_sa);
+                this.Target.Shape.GetFormulasU(stream, out formulas_sa);
             }
             else
             {
@@ -167,17 +143,17 @@ namespace VisioAutomation.ShapeSheet
 
             System.Array results_sa = null;
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                this.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                this.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                this.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
             else
             {
@@ -204,17 +180,17 @@ namespace VisioAutomation.ShapeSheet
 
             System.Array results_sa = null;
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                this.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Master.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                this.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Page.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                this.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
+                this.Target.Shape.GetResults(stream, (short)flags, unitcodes_obj_array, out results_sa);
             }
             else
             {
@@ -300,17 +276,17 @@ namespace VisioAutomation.ShapeSheet
         public int SetFormulas(short[] stream, object[] formulas, short flags)
         {
             int c;
-            if (this.Shape != null)
+            if (this.Target.Shape != null)
             {
-                c = this.Shape.SetFormulas(stream, formulas, flags);
+                c = this.Target.Shape.SetFormulas(stream, formulas, flags);
             }
-            else if (this.Master != null)
+            else if (this.Target.Master != null)
             {
-                c = this.Master.SetFormulas(stream, formulas, flags);
+                c = this.Target.Master.SetFormulas(stream, formulas, flags);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                c = this.Page.SetFormulas(stream, formulas, flags);
+                c = this.Target.Page.SetFormulas(stream, formulas, flags);
             }
             else
             {
@@ -323,17 +299,17 @@ namespace VisioAutomation.ShapeSheet
         public int SetResults(short[] stream, object[] unitcodes, object[] results, short flags)
         {
             int c;
-            if (this.Shape != null)
+            if (this.Target.Shape != null)
             {
-                c = this.Shape.SetResults(stream, unitcodes, results, flags);
+                c = this.Target.Shape.SetResults(stream, unitcodes, results, flags);
             }
-            else if (this.Master != null)
+            else if (this.Target.Master != null)
             {
-                c = this.Master.SetResults(stream, unitcodes, results, flags);
+                c = this.Target.Master.SetResults(stream, unitcodes, results, flags);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                c = this.Page.SetResults(stream, unitcodes, results, flags);
+                c = this.Target.Page.SetResults(stream, unitcodes, results, flags);
             }
             else
             {

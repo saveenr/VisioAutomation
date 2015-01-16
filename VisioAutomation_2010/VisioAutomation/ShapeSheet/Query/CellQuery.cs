@@ -239,7 +239,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private short[] BuildSRCStream(ShapeSheetSurface surface)
         {
-            if (surface.Shape == null)
+            if (surface.Target.Shape == null)
             {
                 string msg = string.Format("Shape must be set in surface not page or master");
                 throw new VA.AutomationException(msg);
@@ -253,8 +253,8 @@ namespace VisioAutomation.ShapeSheet.Query
                 foreach (var sec in this.Sections)
                 {
                     // Figure out which rows to query
-                    int num_rows = surface.Shape.RowCount[(short)sec.SectionIndex];
-                    var section_info = new SectionQueryInfo(sec, surface.Shape.ID16, num_rows);
+                    int num_rows = surface.Target.Shape.RowCount[(short)sec.SectionIndex];
+                    var section_info = new SectionQueryInfo(sec, surface.Target.Shape.ID16, num_rows);
                     section_infos.Add(section_info);
                 }
                 this.PerShapeSectionInfo.Add(section_infos);

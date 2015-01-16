@@ -219,8 +219,8 @@ namespace VisioPowerShell.Commands
             SetFromCellNames(query, this.Cells, dic);
 
             var surface = new ShapeSheetSurface(this.client.Page.Get());
-            
-            var target_shapeids = new[] { surface.Page.ID };
+
+            var target_shapeids = new[] { surface.Target.Page.ID };
 
             this.WriteVerbose("Number of Cells: {0}", query.Columns.Count);
 

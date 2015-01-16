@@ -33,46 +33,22 @@ namespace VisioAutomation.Drawing
             this.Target = new SurfaceTarget(shape);
         }
 
-        public IVisio.Master Master
-        {
-            get
-            {
-                return this.Target.Master;
-            }
-        }
-
-        public IVisio.Page Page
-        {
-            get
-            {
-                return this.Target.Page;
-            }
-        }
-
-        public IVisio.Shape Shape
-        {
-            get
-            {
-                return this.Target.Shape;
-            }
-        }
-
         public IVisio.Shape DrawLine(VA.Drawing.Point p1, VA.Drawing.Point p2)
         {
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                var shape = this.Master.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
+                var shape = this.Target.Master.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
                 return shape;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                var shape = this.Page.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
+                var shape = this.Target.Page.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
                 return shape;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                var shape = this.Shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
+                var shape = this.Target.Shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
                 return shape;
             }
             else
@@ -86,19 +62,19 @@ namespace VisioAutomation.Drawing
         {
             var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                var shape = this.Master.DrawPolyline(doubles_array, 0);
+                var shape = this.Target.Master.DrawPolyline(doubles_array, 0);
                 return shape;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                var shape = this.Page.DrawPolyline(doubles_array, 0);
+                var shape = this.Target.Page.DrawPolyline(doubles_array, 0);
                 return shape;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                var shape = this.Shape.DrawPolyline(doubles_array, 0);
+                var shape = this.Target.Shape.DrawPolyline(doubles_array, 0);
                 return shape;
             }
             else
@@ -111,19 +87,19 @@ namespace VisioAutomation.Drawing
         {
             var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                var shape = this.Master.DrawBezier(doubles_array, degree, flags);
+                var shape = this.Target.Master.DrawBezier(doubles_array, degree, flags);
                 return shape;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                var shape = this.Page.DrawBezier(doubles_array, degree, flags);
+                var shape = this.Target.Page.DrawBezier(doubles_array, degree, flags);
                 return shape;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                var shape = this.Shape.DrawBezier(doubles_array, degree, flags);
+                var shape = this.Target.Shape.DrawBezier(doubles_array, degree, flags);
                 return shape;
             }
             else
@@ -142,19 +118,19 @@ namespace VisioAutomation.Drawing
 
         public IVisio.Shape DrawOval(VA.Drawing.Rectangle rect)
         {
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                var shape = this.Master.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                var shape = this.Target.Master.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
                 return shape;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                var shape = this.Page.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                var shape = this.Target.Page.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
                 return shape;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                var shape = this.Shape.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
+                var shape = this.Target.Shape.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
                 return shape;
             }
             else
@@ -180,19 +156,19 @@ namespace VisioAutomation.Drawing
 
         public IVisio.Shape DrawRectangle(double x0, double y0, double x1, double y1)
         {
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                var shape = this.Master.DrawRectangle(x0, y0, x1, y1);
+                var shape = this.Target.Master.DrawRectangle(x0, y0, x1, y1);
                 return shape;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                var shape = this.Page.DrawRectangle(x0, y0, x1, y1);
+                var shape = this.Target.Page.DrawRectangle(x0, y0, x1, y1);
                 return shape;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                var shape = this.Shape.DrawRectangle(x0, y0, x1, y1);
+                var shape = this.Target.Shape.DrawRectangle(x0, y0, x1, y1);
                 return shape;
             }
             else
@@ -203,20 +179,20 @@ namespace VisioAutomation.Drawing
 
         public IVisio.Shape DrawLine(double x0, double y0, double x1, double y1)
         {
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                var shape = this.Master.DrawLine(x0, y0, x1, y1);
+                var shape = this.Target.Master.DrawLine(x0, y0, x1, y1);
                 return shape;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                var shape = this.Page.DrawLine(x0, y0, x1, y1);
+                var shape = this.Target.Page.DrawLine(x0, y0, x1, y1);
 
                 return shape;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                var shape = this.Shape.DrawLine(x0, y0, x1, y1);
+                var shape = this.Target.Shape.DrawLine(x0, y0, x1, y1);
 
                 return shape;
             }
@@ -239,19 +215,19 @@ namespace VisioAutomation.Drawing
             double[] kts_dbl_a = knots.ToArray();
             double[] weights_dbl_a = weights.ToArray();
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                var shape = this.Master.DrawNURBS((short) degree, (short) flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
+                var shape = this.Target.Master.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
                 return shape;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                var shape = this.Page.DrawNURBS((short) degree, (short) flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
+                var shape = this.Target.Page.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
                 return shape;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                var shape = this.Shape.DrawNURBS((short) degree, (short) flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
+                var shape = this.Target.Shape.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
                 return shape;
             }
             else
@@ -286,17 +262,17 @@ namespace VisioAutomation.Drawing
 
             System.Array outids_sa;
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                this.Master.DropManyU(masters_obj_array, xy_array, out outids_sa);
+                this.Target.Master.DropManyU(masters_obj_array, xy_array, out outids_sa);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                this.Page.DropManyU(masters_obj_array, xy_array, out outids_sa);
+                this.Target.Page.DropManyU(masters_obj_array, xy_array, out outids_sa);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                this.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa);
+                this.Target.Shape.DropManyU(masters_obj_array, xy_array, out outids_sa);
             }
             else
             {
@@ -316,17 +292,17 @@ namespace VisioAutomation.Drawing
                 throw new System.ArgumentNullException("master");
             }
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                return this.Master.Drop(master, point.X, point.Y);
+                return this.Target.Master.Drop(master, point.X, point.Y);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                return this.Page.Drop(master, point.X, point.Y);
+                return this.Target.Page.Drop(master, point.X, point.Y);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                return this.Shape.Drop(master, point.X, point.Y);
+                return this.Target.Shape.Drop(master, point.X, point.Y);
             }
             else
             {
@@ -336,17 +312,17 @@ namespace VisioAutomation.Drawing
 
         public IVisio.Shape DrawQuarterArc(VA.Drawing.Point p0, VA.Drawing.Point p1, IVisio.VisArcSweepFlags flags)
         {
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                return this.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+                return this.Target.Master.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                return this.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+                return this.Target.Page.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                return this.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
+                return this.Target.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             }
             else
             {
@@ -354,22 +330,20 @@ namespace VisioAutomation.Drawing
             }
         }
 
-
-
         public VA.Drawing.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)
         {
             double bbx0, bby0, bbx1, bby1;
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
-                this.Master.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
+                this.Target.Master.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                this.Page.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
+                this.Target.Page.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                this.Shape.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
+                this.Target.Shape.BoundingBox((short)args, out bbx0, out bby0, out bbx1, out bby1);
             }
             else
             {
@@ -387,18 +361,18 @@ namespace VisioAutomation.Drawing
 
                 IVisio.Shapes shapes;
 
-                if (this.Master != null)
+                if (this.Target.Master != null)
                 {
 
-                    shapes = this.Master.Shapes;
+                    shapes = this.Target.Master.Shapes;
                 }
-                else if (this.Page != null)
+                else if (this.Target.Page != null)
                 {
-                    shapes = this.Page.Shapes;
+                    shapes = this.Target.Page.Shapes;
                 }
-                else if (this.Shape != null)
+                else if (this.Target.Shape != null)
                 {
-                    shapes = this.Shape.Shapes;
+                    shapes = this.Target.Shape.Shapes;
                 }
                 else
                 {
@@ -413,18 +387,18 @@ namespace VisioAutomation.Drawing
         {
             IVisio.Shapes shapes;
 
-            if (this.Master != null)
+            if (this.Target.Master != null)
             {
 
-                shapes = this.Master.Shapes;
+                shapes = this.Target.Master.Shapes;
             }
-            else if (this.Page != null)
+            else if (this.Target.Page != null)
             {
-                shapes = this.Page.Shapes;
+                shapes = this.Target.Page.Shapes;
             }
-            else if (this.Shape != null)
+            else if (this.Target.Shape != null)
             {
-                shapes = this.Shape.Shapes;
+                shapes = this.Target.Shape.Shapes;
             }
             else
             {

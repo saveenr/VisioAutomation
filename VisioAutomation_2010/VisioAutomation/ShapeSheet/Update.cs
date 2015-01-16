@@ -246,21 +246,21 @@ namespace VisioAutomation.ShapeSheet
                 return;
             }
 
-            if (surface.Shape != null )
+            if (surface.Target.Shape != null)
             {
                 if (first_update.Value.StreamType == StreamType.SIDSRC)
                 {
                     throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
                 }
             }
-            else if (surface.Master != null)
+            else if (surface.Target.Master != null)
             {
                 if (first_update.Value.StreamType == StreamType.SIDSRC)
                 {
                     throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
                 }
             }
-            else if (surface.Page != null)
+            else if (surface.Target.Page != null)
             {
                 if (first_update.Value.StreamType == StreamType.SRC)
                 {
