@@ -12,9 +12,9 @@ namespace VisioAutomation.Drawing
     {
         public readonly SurfaceTarget Target;
 
-        public DrawingSurface(SurfaceTarget k)
+        public DrawingSurface(SurfaceTarget target)
         {
-            this.Target = k;
+            this.Target = target;
         }
 
         public DrawingSurface(IVisio.Page page)

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.Extensions;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Drawing;
@@ -10,9 +9,9 @@ namespace VisioAutomation.ShapeSheet
     {
         public readonly SurfaceTarget Target;
 
-        public ShapeSheetSurface(SurfaceTarget k)
+        public ShapeSheetSurface(SurfaceTarget target)
         {
-            this.Target = k;
+            this.Target = target;
         }
 
         public ShapeSheetSurface(IVisio.Page page)

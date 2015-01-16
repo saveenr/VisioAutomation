@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.Drawing;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using System.Linq;
@@ -66,7 +64,7 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        public ShapeSheetSurface GetShapeSheetSurface()
+        public VA.ShapeSheet.ShapeSheetSurface GetShapeSheetSurface()
         {
             var ds = this.GetDrawingSurface();
             var ss = ds.ToShapeSheetSurface();
