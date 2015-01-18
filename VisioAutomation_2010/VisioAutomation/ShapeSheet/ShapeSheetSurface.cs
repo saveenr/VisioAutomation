@@ -323,7 +323,7 @@ namespace VisioAutomation.ShapeSheet
         {
             get
             {
-                var ds = this.ToDrawingSurface();
+                var ds = new DrawingSurface(this.Target);
                 return ds.Shapes;
             }
 
@@ -331,14 +331,8 @@ namespace VisioAutomation.ShapeSheet
 
         public List<IVisio.Shape> GetAllShapes()
         {
-            var ds = this.ToDrawingSurface();
+            var ds = new DrawingSurface(this.Target);
             return ds.GetAllShapes();
         }
-
-        public VA.Drawing.DrawingSurface ToDrawingSurface()
-        {
-            return new DrawingSurface(this.Target);
-        }
-
     }
 }
