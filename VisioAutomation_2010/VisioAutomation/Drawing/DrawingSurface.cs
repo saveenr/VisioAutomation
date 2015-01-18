@@ -354,62 +354,6 @@ namespace VisioAutomation.Drawing
             return r;
         }
 
-        public IVisio.Shapes Shapes
-        {
-            get
-            {
-
-                IVisio.Shapes shapes;
-
-                if (this.Target.Master != null)
-                {
-
-                    shapes = this.Target.Master.Shapes;
-                }
-                else if (this.Target.Page != null)
-                {
-                    shapes = this.Target.Page.Shapes;
-                }
-                else if (this.Target.Shape != null)
-                {
-                    shapes = this.Target.Shape.Shapes;
-                }
-                else
-                {
-                    throw new System.ArgumentException("Unhandled Drawing Surface");
-                }
-                return shapes;
-            }
-
-        }
-
-        public List<IVisio.Shape> GetAllShapes()
-        {
-            IVisio.Shapes shapes;
-
-            if (this.Target.Master != null)
-            {
-
-                shapes = this.Target.Master.Shapes;
-            }
-            else if (this.Target.Page != null)
-            {
-                shapes = this.Target.Page.Shapes;
-            }
-            else if (this.Target.Shape != null)
-            {
-                shapes = this.Target.Shape.Shapes;
-            }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
-
-            var list = new List<IVisio.Shape>();
-            list.AddRange(shapes.AsEnumerable());
-
-            return list;
-        }
     }
 }
 
