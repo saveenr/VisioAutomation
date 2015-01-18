@@ -4,9 +4,9 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct SurfaceTarget
     {
-        public IVisio.Page Page;
-        public IVisio.Master Master;
-        public IVisio.Shape Shape;
+        public readonly IVisio.Page Page;
+        public readonly IVisio.Master Master;
+        public readonly IVisio.Shape Shape;
 
         public SurfaceTarget(IVisio.Page page)
         {
