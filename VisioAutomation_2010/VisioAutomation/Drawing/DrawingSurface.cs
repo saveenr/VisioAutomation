@@ -410,11 +410,6 @@ namespace VisioAutomation.Drawing
 
             return list;
         }
-
-        public VA.ShapeSheet.ShapeSheetSurface ToShapeSheetSurface()
-        {
-            return new ShapeSheetSurface(this.Target);
-        }
     }
 }
 
