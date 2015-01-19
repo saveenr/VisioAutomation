@@ -150,7 +150,7 @@ namespace VisioAutomation.Scripting
             }
         }
 
-        internal static List<System.Reflection.PropertyInfo> GetCommandSetProperties()
+        internal static List<System.Reflection.PropertyInfo> GetProperties()
         {
             var commandset_t = typeof (Scripting.CommandSet);
             var all_props = typeof(Scripting.Client).GetProperties();
