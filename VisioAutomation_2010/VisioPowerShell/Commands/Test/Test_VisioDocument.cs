@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands
         // checks to see if we hae an active drawing open
         protected override void ProcessRecord()
         {
-            this.WriteObject(this.client.HasActiveDocument);
+            this.WriteObject(this.client.Document.HasActiveDocument);
         }
     }
 }

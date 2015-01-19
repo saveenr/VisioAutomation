@@ -8,7 +8,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            if (!this.client.HasApplication)
+            if (!this.client.Application.HasApplication)
             {
                 this.client.Application.New();
             }

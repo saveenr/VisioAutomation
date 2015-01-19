@@ -14,9 +14,67 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
+        public bool HasActiveDocument
+        {
+            get
+            {
+                var app = this.Client.VisioApplication;
+
+                // if there's no active document, then there can't be an active document
+                if (app.ActiveDocument == null)
+                {
+                    this.Client.WriteVerbose("HasActiveDocument: No Active Window");
+                    return false;
+                }
+
+                var active_window = app.ActiveWindow;
+
+                // If there's no active window there can't be an active document
+                if (active_window == null)
+                {
+                    this.Client.WriteVerbose("HasActiveDocument: No Active Document");
+                    return false;
+                }
+
+                // Check if the window type matches that of a document
+                short active_window_type = active_window.Type;
+                var vis_drawing = (int)IVisio.VisWinTypes.visDrawing;
+                var vis_master = (int)IVisio.VisWinTypes.visMasterWin;
+                // var vis_sheet = (short)IVisio.VisWinTypes.visSheet;
+
+                this.Client.WriteVerbose("The Active Window: Type={0} & SybType={1}", active_window_type, active_window.SubType);
+                if (!(active_window_type == vis_drawing || active_window_type == vis_master))
+                {
+                    this.Client.WriteVerbose("The Active Window Type must be one of {0} or {1}", IVisio.VisWinTypes.visDrawing, IVisio.VisWinTypes.visMasterWin);
+                    return false;
+                }
+
+                //  verify there is an active page
+                if (app.ActivePage == null)
+                {
+                    this.Client.WriteVerbose("HasActiveDocument: Active Page is null");
+
+                    if (active_window.SubType == 64)
+                    {
+                        // 64 means master is being edited
+
+                    }
+                    else
+                    {
+                        this.Client.WriteVerbose("HasActiveDocument: Active Page is null");
+                        return false;
+                    }
+                }
+
+                this.Client.WriteVerbose("HasActiveDocument: Verified a drawing is available for use");
+
+                return true;
+            }
+        }
+
         internal void AssertDocumentAvailable()
         {
-            if (!this.Client.HasActiveDocument)
+            if (!this.Client.Document.HasActiveDocument)
             {
                 throw new VA.Scripting.ScriptingException("No Drawing available");
             }

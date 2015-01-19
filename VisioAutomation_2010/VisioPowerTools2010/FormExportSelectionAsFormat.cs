@@ -19,7 +19,7 @@ namespace VisioPowerTools2010
 
             var client = Globals.ThisAddIn.Client;
 
-            if (!client.HasActiveDocument)
+            if (!client.Document.HasActiveDocument)
             {
                 MessageBox.Show("There is no drawing open to export");
             }

@@ -37,27 +37,27 @@ namespace TestVisioAutomation
             var client = GetScriptingClient();
             client.Document.CloseAllWithoutSaving();
 
-            Assert.IsFalse(client.HasActiveDocument);
+            Assert.IsFalse(client.Document.HasActiveDocument);
 
             var doc1 = client.Document.New();
-            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.HasShapes());
 
             client.Draw.Rectangle(0, 0, 1, 1);
-            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsTrue(client.Selection.HasShapes());
             Assert.IsTrue(client.Selection.HasShapes(1));
             Assert.IsFalse(client.Selection.HasShapes(2));
 
             client.Draw.Rectangle(2, 2, 3, 3);
             client.Selection.All();
-            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsTrue(client.Selection.HasShapes());
             Assert.IsTrue(client.Selection.HasShapes(1));
             Assert.IsTrue(client.Selection.HasShapes(2));
 
             client.Selection.None();
-            Assert.IsTrue(client.HasActiveDocument);
+            Assert.IsTrue(client.Document.HasActiveDocument);
             Assert.IsFalse(client.Selection.HasShapes());
 
             client.Document.Close(true);

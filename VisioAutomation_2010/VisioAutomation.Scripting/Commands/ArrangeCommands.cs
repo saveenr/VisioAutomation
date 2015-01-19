@@ -437,7 +437,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(VA.Drawing.Axis axis, double d)
         {
-            if (!this.Client.HasActiveDocument)
+            if (!this.Client.Document.HasActiveDocument)
             {
                 return;
             }

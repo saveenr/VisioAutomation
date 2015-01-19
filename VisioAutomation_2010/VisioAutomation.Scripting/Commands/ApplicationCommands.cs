@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -16,9 +14,19 @@ namespace VisioAutomation.Scripting.Commands
             this.Window = new ApplicationWindowCommands(this.Client);
         }
 
-        internal void AssertApplicationAvailable()
+        public bool HasApplication
         {
-            var has_app = this.Client.HasApplication;
+            get
+            {
+                bool b = this.Client.VisioApplication != null;
+                this.Client.WriteVerbose("HasApplication: {0}", b);
+                return b;
+            }
+        }
+
+        public void AssertApplicationAvailable()
+        {
+            var has_app = this.Client.Application.HasApplication;
             if (!has_app)
             {
                 throw new VisioApplicationException("No Visio Application available");
@@ -101,7 +109,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application SafeNew()
         {
-            if (this.Client.HasApplication == false)
+            if (this.Client.Application.HasApplication == false)
             {
                 // no app - let's create one
                 return this.Client.Application.New();
