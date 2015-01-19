@@ -246,7 +246,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            if (!this.Client.HasSelectedShapes())
+            if (!this.Client.Selection.HasShapes())
             {
                 return;
             }
@@ -260,7 +260,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            if (!this.Client.HasSelectedShapes())
+            if (!this.Client.Selection.HasShapes())
             {
                 return;
             }

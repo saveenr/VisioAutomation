@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else if (zoom == Scripting.Zoom.ToSelection)
             {
-                if (!this.Client.HasSelectedShapes())
+                if (!this.Client.Selection.HasShapes())
                 {
                     return;
                 }

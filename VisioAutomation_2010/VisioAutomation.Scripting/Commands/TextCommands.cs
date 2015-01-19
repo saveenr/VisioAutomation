@@ -189,7 +189,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetTextWrapping(bool wrap)
         {
-            if (!this.Client.HasSelectedShapes())
+            if (!this.Client.Selection.HasShapes())
             {
                 return;
             }
@@ -208,7 +208,7 @@ namespace VisioAutomation.Scripting.Commands
         {
 
 
-            if (!this.Client.HasSelectedShapes())
+            if (!this.Client.Selection.HasShapes())
             {
                 return;
             }

@@ -293,7 +293,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Document.AssertDocumentAvailable();
 
             // No shapes provided, use the active selection
-            if (!this.Client.HasSelectedShapes())
+            if (!this.Client.Selection.HasShapes())
             {
                 throw new ScriptingException("No Selected Shapes to Group");
             }
@@ -311,7 +311,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             if (target_shapes == null)
             {
-                if (this.Client.HasSelectedShapes())
+                if (this.Client.Selection.HasShapes())
                 {
                     this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
                 }
@@ -411,7 +411,7 @@ namespace VisioAutomation.Scripting.Commands
         {
 
 
-            if (!this.Client.HasSelectedShapes(2))
+            if (!this.Client.Selection.HasShapes(2))
             {
                 return;
             }
@@ -452,7 +452,7 @@ namespace VisioAutomation.Scripting.Commands
         
         public void SnapCorner(double w, double h, SnapCornerPosition corner)
         {
-            if (!this.Client.HasSelectedShapes())
+            if (!this.Client.Selection.HasShapes())
             {
                 return;
             }

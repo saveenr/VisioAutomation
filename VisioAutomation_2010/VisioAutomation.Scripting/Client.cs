@@ -135,17 +135,6 @@ namespace VisioAutomation.Scripting
         {
             this._context.WriteError(s);
         }
-        
-        internal bool HasSelectedShapes()
-        {
-            return this.Selection.HasShapes();
-        }
-
-        internal bool HasSelectedShapes(int min_items)
-        {
-            return this.Selection.HasShapes(min_items);
-        }
-
 
         public Context Context
         {

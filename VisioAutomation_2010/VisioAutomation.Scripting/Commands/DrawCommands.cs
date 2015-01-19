@@ -351,7 +351,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentOutOfRangeException("n");
             }
-            if (!this.Client.HasSelectedShapes())
+            if (!this.Client.Selection.HasShapes())
             {
                 return;
             }
