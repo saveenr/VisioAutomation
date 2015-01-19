@@ -69,8 +69,8 @@ namespace VisioAutomation.VDX.Elements
         private readonly List<Window> _windows;
         private readonly List<ColorEntry> _colors;
 
-        private readonly Dictionary<string, MasterMetdata> master_metadata =
-            new Dictionary<string, MasterMetdata>(System.StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, MasterMetadata> master_metadata =
+            new Dictionary<string, MasterMetadata>(System.StringComparer.OrdinalIgnoreCase);
 
         public VA.VDX.Sections.DocumentProperties DocumentProperties = new VA.VDX.Sections.DocumentProperties();
 
@@ -112,7 +112,7 @@ namespace VisioAutomation.VDX.Elements
 
                 bool master_is_group = count_groups > 0;
 
-                var md = new MasterMetdata();
+                var md = new MasterMetadata();
                 md.Name = name;
                 md.ID = id;
                 md.IsGroup = master_is_group;
@@ -170,7 +170,7 @@ namespace VisioAutomation.VDX.Elements
             return id;
         }
 
-        public MasterMetdata GetMasterMetData(int id)
+        public MasterMetadata GetMasterMetData(int id)
         {
             foreach (var m in this.master_metadata)
             {
@@ -183,7 +183,7 @@ namespace VisioAutomation.VDX.Elements
             throw new System.ArgumentException("no such master id");
         }
 
-        public MasterMetdata GetMasterMetaData(string name)
+        public MasterMetadata GetMasterMetaData(string name)
         {
             return this.master_metadata[name];
         }

@@ -1,6 +1,6 @@
 ﻿namespace VisioAutomation.VDX
 {
-    public class MasterMetdata
+    public class MasterMetadata
     {
         public string Name { get; set; }
         public int ID { get; set; }
