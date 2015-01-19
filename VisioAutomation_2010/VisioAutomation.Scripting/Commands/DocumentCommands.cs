@@ -14,9 +14,18 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
+        internal void AssertDocumentAvailable()
+        {
+            if (!this.Client.HasActiveDocument)
+            {
+                throw new VA.Scripting.ScriptingException("No Drawing available");
+            }
+        }
+
+
         public void Activate(string name)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             var application = this.Client.VisioApplication;
             var documents = application.Documents;
@@ -27,14 +36,14 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Activate(IVisio.Document doc)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             VA.Documents.DocumentHelper.Activate(doc);
         }
 
         public void Close(bool force)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
@@ -63,7 +72,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseAllWithoutSaving()
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             var application = this.Client.VisioApplication;
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
@@ -86,7 +95,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(string template)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             this.Client.WriteVerbose("Creating Empty Drawing");
             var application = this.Client.VisioApplication;
@@ -111,8 +120,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Save()
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
@@ -121,8 +130,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SaveAs(string filename)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
@@ -136,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document New(double w, double h,string template)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             var doc = this.New(template);
             var pagesize = new VA.Drawing.Size(w, h);
@@ -146,7 +155,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document OpenStencil(string name)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             
             if (name == null)
             {
@@ -170,7 +179,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Open(string filename)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             
             if (filename == null)
             {
@@ -201,7 +210,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document Get(string name)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             
             var application = this.Client.VisioApplication;
             var documents = application.Documents;

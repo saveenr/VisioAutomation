@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (texts == null || texts.Count<1)
             {
@@ -45,8 +45,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<string> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -60,8 +60,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ToogleCase(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             var shapes = this.GetTargetShapes(target_shapes);
 
@@ -115,8 +115,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetFont(IList<IVisio.Shape> target_shapes, string fontname)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -135,8 +135,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Text.TextFormat> GetFormat(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -153,8 +153,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void MoveTextToBottom(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)

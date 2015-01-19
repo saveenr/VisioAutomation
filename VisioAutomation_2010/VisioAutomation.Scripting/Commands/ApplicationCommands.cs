@@ -16,6 +16,15 @@ namespace VisioAutomation.Scripting.Commands
             this.Window = new ApplicationWindowCommands(this.Client);
         }
 
+        internal void AssertApplicationAvailable()
+        {
+            var has_app = this.Client.HasApplication;
+            if (!has_app)
+            {
+                throw new VisioApplicationException("No Visio Application available");
+            }
+        }
+
         public void Close(bool force)
         {
             var app = this.Client.VisioApplication;
@@ -113,13 +122,13 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Undo()
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             this.Client.VisioApplication.Undo();
         }
 
         public void Redo()
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             this.Client.VisioApplication.Redo();
         }
 
@@ -158,7 +167,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (visio_app_version == null)
                 {
-                    this.AssertApplicationAvailable();
+                    this.Client.Application.AssertApplicationAvailable();
                     if (visio_app_version == null)
                     {
                         visio_app_version = System.Version.Parse(this.Client.VisioApplication.Version);

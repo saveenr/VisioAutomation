@@ -71,8 +71,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal halign)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -87,8 +87,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical valign)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -103,8 +103,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -127,8 +127,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -149,8 +149,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SnapSize(IList<IVisio.Shape> target_shapes, double w, double h)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -213,8 +213,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 1)
@@ -228,8 +228,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal align)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
@@ -249,8 +249,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical align)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             int shape_count = this.GetTargetSelection(target_shapes);
             if (shape_count < 2)
@@ -272,8 +272,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<VA.Shapes.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
@@ -289,8 +289,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Group()
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             // No shapes provided, use the active selection
             if (!this.Client.HasSelectedShapes())
@@ -308,7 +308,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Ungroup(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             if (target_shapes == null)
             {
                 if (this.Client.HasSelectedShapes())
@@ -327,8 +327,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetLock(IList<IVisio.Shape> target_shapes, VA.Shapes.LockCells lockcells)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -355,8 +355,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(IList<IVisio.Shape> target_shapes, double? w, double? h)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)

@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, Dictionary<string,CP.CustomPropertyCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, CP.CustomPropertyCells>>();
             var shapes = GetTargetShapes(target_shapes);
@@ -61,8 +61,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Shape> target_shapes, string name)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             if (name == null)
             {
@@ -92,8 +92,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IList<IVisio.Shape> target_shapes, string name, CP.CustomPropertyCells customprop)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             if (customprop == null)
             {
@@ -118,8 +118,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IEnumerable<IVisio.Shape> EnumerateAndSelect(IEnumerable<IVisio.Shape> shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             if (shapes == null)
             {

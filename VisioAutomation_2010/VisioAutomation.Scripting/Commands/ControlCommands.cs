@@ -15,8 +15,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<int> Add(IList<IVisio.Shape> target_shapes, CTRLS.ControlCells ctrl)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (ctrl == null)
             {
@@ -45,8 +45,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Shape> target_shapes, int n)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -65,8 +65,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
             
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)

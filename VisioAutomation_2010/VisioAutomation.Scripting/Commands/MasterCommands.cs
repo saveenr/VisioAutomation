@@ -36,8 +36,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> Get()
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             var doc = application.ActiveDocument;
@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Master> Get(IVisio.Document doc)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             var doc_masters = doc.Masters;
             var masters = doc_masters.AsEnumerable().ToList();
             return masters;
@@ -56,8 +56,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master Get(string name)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (name == null)
             {
@@ -87,8 +87,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master Get(string master, IVisio.Document doc)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (master == null)
             {
@@ -140,8 +140,8 @@ namespace VisioAutomation.Scripting.Commands
 
         private IVisio.Master TryGetMaster(IVisio.Masters masters, string name)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             try
             {
@@ -156,8 +156,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Shape Drop(IVisio.Master master, double x, double y)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             var page = application.ActivePage;
@@ -167,8 +167,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public short[] Drop(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (masters == null)
             {
@@ -188,7 +188,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Master New(IVisio.Document document, string name)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             if (document == null)
             {

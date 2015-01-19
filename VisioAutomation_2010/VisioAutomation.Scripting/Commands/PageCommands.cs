@@ -17,8 +17,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(IVisio.Page page)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var app = this.Client.VisioApplication;
             this.Client.WriteVerbose("Setting Active Page to \"{0}\"", page.Name);
@@ -28,8 +28,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(string name)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var doc = this.Client.VisioApplication.ActiveDocument;
             this.Client.WriteVerbose("Retrieving Page \"{0}\"", name);
@@ -40,8 +40,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Set(int pagenumber)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var doc = this.Client.VisioApplication.ActiveDocument;
             this.Client.WriteVerbose("Retrieving Page Number \"{0}\"", pagenumber);
@@ -52,8 +52,8 @@ namespace VisioAutomation.Scripting.Commands
         
         public IVisio.Page Get()
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             return application.ActivePage;
@@ -61,8 +61,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<IVisio.Page> pages, bool renumber)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (pages == null)
             {
@@ -77,8 +77,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Delete(IList<string> names, bool renumber)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (names == null)
             {
@@ -99,8 +99,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Drawing.Size GetSize()
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
@@ -118,8 +118,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetName(string name)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (name == null)
             {
@@ -137,8 +137,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page New(VA.Drawing.Size? size, bool isbackgroundpage)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             var active_document = application.ActiveDocument;
@@ -164,8 +164,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetBackgroundPage(string background_page_name)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (background_page_name == null)
             {
@@ -208,8 +208,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Duplicate()
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Duplicate Page"))
@@ -229,8 +229,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Page Duplicate(IVisio.Document dest_doc)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (dest_doc==null)
             {
@@ -258,8 +258,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public VA.Pages.PrintPageOrientation GetOrientation()
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
@@ -282,8 +282,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetOrientation(VA.Pages.PrintPageOrientation orientation)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
 
@@ -322,8 +322,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ResizeToFitContents(VA.Drawing.Size bordersize, bool zoom_to_page)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Resize Page to Fit Contents"))
@@ -339,8 +339,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void ResetOrigin(IVisio.Page page)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             if (page == null)
@@ -363,8 +363,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(VA.Drawing.Size new_size)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Page Size"))
@@ -380,8 +380,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetSize(double? width, double? height)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             if (!width.HasValue && !height.HasValue)
             {
@@ -408,7 +408,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void GoTo(VA.Scripting.PageDirection flags)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             var application = this.Client.VisioApplication;
             var active_document = application.ActiveDocument;
@@ -424,7 +424,7 @@ namespace VisioAutomation.Scripting.Commands
 
         private void _GoTo(IVisio.Pages pages, PageDirection flags)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             if (pages == null)
             {
@@ -500,8 +500,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> GetShapesByID(int[] shapeids)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var page = this.Client.Page.Get();
             var shapes = page.Shapes;
@@ -521,8 +521,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> GetShapesByName(string[] shapenames, bool ignore_bad_names)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var page = this.Client.Page.Get();
             var shapes = page.Shapes;

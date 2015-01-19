@@ -17,60 +17,7 @@ namespace VisioAutomation.Scripting
             this.Client = client;
         }
 
-        protected void AssertApplicationAvailable()
-        {
-            var has_app = this.Client.HasApplication;
-            if (!has_app)
-            {
-                throw new VisioApplicationException("No Visio Application available");
-            }
-        }
 
-        protected void AssertDocumentAvailable()
-        {
-            if (!this.Client.HasActiveDocument)
-            {
-                throw new VA.Scripting.ScriptingException("No Drawing available");
-            }
-
-        }
-
-        public VA.Drawing.DrawingSurface GetDrawingSurface()
-        {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
-
-            var surf_Application = this.Client.VisioApplication;
-            var surf_Window = surf_Application.ActiveWindow;
-            var surf_Window_subtype = surf_Window.SubType;
-            
-            // TODO: Revisit the logic here
-            // TODO: And what about a selected shape as a surface?
-
-            this.Client.WriteVerbose("Window SubType: {0}", surf_Window_subtype);
-            if (surf_Window_subtype == 64)
-            {
-                this.Client.WriteVerbose("Window = Master Editing");
-                var surf_Master = (IVisio.Master)surf_Window.Master;
-                var surface = new VA.Drawing.DrawingSurface(surf_Master);
-                return surface;
-
-            }
-            else
-            {
-                this.Client.WriteVerbose("Window = Page ");
-                var surf_Page = surf_Application.ActivePage;
-                var surface = new VA.Drawing.DrawingSurface(surf_Page);
-                return surface;
-            }
-        }
-
-        public VA.ShapeSheet.ShapeSheetSurface GetShapeSheetSurface()
-        {
-            var ds = this.GetDrawingSurface();
-            var ss = new ShapeSheetSurface(ds.Target);
-            return ss;
-        }
 
         internal static IEnumerable<System.Reflection.MethodInfo> GetCommandMethods(System.Type mytype)
         {
@@ -96,7 +43,7 @@ namespace VisioAutomation.Scripting
 
         protected IList<IVisio.Shape> GetTargetShapes(IList<IVisio.Shape> shapes)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
             if (shapes == null)
             {
                 // If no collection of shapes were passed in then use the selection
@@ -112,7 +59,7 @@ namespace VisioAutomation.Scripting
 
         protected int GetTargetSelection(IList<IVisio.Shape> shapes)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             if (shapes == null)
             {
@@ -135,7 +82,7 @@ namespace VisioAutomation.Scripting
 
         protected IVisio.Shape GetTargetShape( IVisio.Shape shape)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             if (shape == null)
             {

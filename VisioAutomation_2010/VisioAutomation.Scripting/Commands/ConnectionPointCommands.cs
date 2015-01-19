@@ -16,8 +16,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IDictionary<IVisio.Shape, IList<CONS.ConnectionPointCells>> Get(IList<IVisio.Shape> target_shapes)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
 
@@ -41,8 +41,8 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             CONS.ConnectionPointType type)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
@@ -80,15 +80,15 @@ namespace VisioAutomation.Scripting.Commands
             string fy,
             CONS.ConnectionPointType type)
         {
-            this.AssertApplicationAvailable();
+            this.Client.Application.AssertApplicationAvailable();
 
             return this.Add(null, fx, fy, type);
         }
 
         public void Delete(List<IVisio.Shape> target_shapes0, int index)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var shapes = GetTargetShapes(target_shapes0);
             if (shapes.Count < 1)

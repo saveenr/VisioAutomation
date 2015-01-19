@@ -23,8 +23,8 @@ namespace VisioAutomation.Scripting.Commands
         /// <returns></returns>
         public IList<ConnectorEdge> GetTransitiveClosure(ConnectorEdgeHandling flag)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var app = this.Client.VisioApplication;
             return PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
@@ -32,8 +32,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<ConnectorEdge> GetDirectedEdges(ConnectorEdgeHandling flag)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var directed_edges = PathAnalysis.GetDirectedEdges(this.Client.VisioApplication.ActivePage, flag);
             return directed_edges;
@@ -41,8 +41,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public IList<IVisio.Shape> Connect(IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master master)
         {
-            this.AssertApplicationAvailable();
-            this.AssertDocumentAvailable();
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
             var active_page = this.Client.VisioApplication.ActivePage;
 
