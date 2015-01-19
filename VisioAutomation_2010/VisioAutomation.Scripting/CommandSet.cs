@@ -6,6 +6,16 @@ using System.Linq;
 
 namespace VisioAutomation.Scripting
 {
+    public class Command
+    {
+        public System.Reflection.MethodInfo MethodInfo;
+
+        public Command(System.Reflection.MethodInfo mi)
+        {
+            this.MethodInfo = mi;
+        }
+    }
+
     public class CommandSet
     {
         // Keep a reference back to the parent client. This gives access to all other commands
@@ -19,7 +29,7 @@ namespace VisioAutomation.Scripting
 
 
 
-        internal static IEnumerable<System.Reflection.MethodInfo> GetCommandMethods(System.Type mytype)
+        internal static IEnumerable<Command> GetCommands(System.Type mytype)
         {
             var cmdsettype = typeof(VA.Scripting.CommandSet);
 
@@ -37,7 +47,8 @@ namespace VisioAutomation.Scripting
                     continue;
                 }
 
-                yield return method;
+                var cmd = new Command(method);
+                yield return cmd;
             }
         }
 

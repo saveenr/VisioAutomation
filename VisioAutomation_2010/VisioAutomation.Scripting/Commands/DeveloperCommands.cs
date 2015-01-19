@@ -53,22 +53,22 @@ namespace VisioAutomation.Scripting.Commands
                 var cmdset_type = cmdset_prop.PropertyType;
 
                 // Calculate the text
-                var methods = CommandSet.GetCommandMethods(cmdset_type);
+                var commands = CommandSet.GetCommands(cmdset_type);
                 lines.Clear();
-                foreach (var method in methods)
+                foreach (var command in commands)
                 {
                     sb.Length = 0;
-                    var method_params = method.GetParameters();
+                    var method_params = command.MethodInfo.GetParameters();
                     TextCommandsUtil.Join(sb, ", ", method_params.Select(param => string.Format("{0} {1}", ReflectionUtil.GetNiceTypeName(param.ParameterType), param.Name)));
 
-                    if (method.ReturnType != typeof(void))
+                    if (command.MethodInfo.ReturnType != typeof(void))
                     {
-                        string line = string.Format("{0}({1}) -> {2}", method.Name, sb, ReflectionUtil.GetNiceTypeName(method.ReturnType));
+                        string line = string.Format("{0}({1}) -> {2}", command.MethodInfo.Name, sb, ReflectionUtil.GetNiceTypeName(command.MethodInfo.ReturnType));
                         lines.Add(line);
                     }
                     else
                     {
-                        string line = string.Format("{0}({1})", method.Name, sb);
+                        string line = string.Format("{0}({1})", command.MethodInfo.Name, sb);
                         lines.Add(line);
                     }
                 }
