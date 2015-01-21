@@ -6,10 +6,12 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ViewCommands : CommandSet
     {
+        private double ZoomIncrement;
+
         public ViewCommands(Client client) :
             base(client)
         {
-            
+            this.ZoomIncrement = 1.20;
         }
 
         public IVisio.Window GetActiveWindow()
@@ -72,26 +74,24 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Client.Application.AssertApplicationAvailable();
 
+            var active_window = GetActiveWindow();
+
             if (zoom == Scripting.Zoom.Out)
             {
-                var active_window = GetActiveWindow();
                 var cur = active_window.Zoom;
-                ZoomToPercentage(cur / 1.20);                
+                ZoomToPercentage(cur / this.ZoomIncrement);                
             }
             else if (zoom == Scripting.Zoom.In)
             {
-                var active_window = GetActiveWindow();
                 var cur = active_window.Zoom;
-                ZoomToPercentage(cur * 1.20);
+                ZoomToPercentage(cur * this.ZoomIncrement);
             }
             else if (zoom == Scripting.Zoom.ToPage)
             {
-                var active_window = GetActiveWindow();
                 active_window.ViewFit = (short)IVisio.VisWindowFit.visFitPage;
             }
             else if (zoom == Scripting.Zoom.ToWidth)
             {
-                var active_window = GetActiveWindow();
                 active_window.ViewFit = (short)IVisio.VisWindowFit.visFitWidth;
             }
             else if (zoom == Scripting.Zoom.ToSelection)
@@ -101,9 +101,8 @@ namespace VisioAutomation.Scripting.Commands
                     return;
                 }
 
-                var window = GetActiveWindow();
                 double padding_scale = 0.1;
-                SetViewRectToSelection(window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
+                SetViewRectToSelection(active_window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
 
             }
             else
