@@ -1,79 +1,44 @@
-﻿using System.Linq;
-using IVisio=Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
-using VA=VisioAutomation;
-
-namespace VisioExportPagesToDocs
+﻿namespace VisioExportPagesToDocs
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length < 1)
             {
-                System.Console.WriteLine("Syntax is: VisioExportPagesToDocs <filename.vsd>");
-                System.Environment.Exit(0);
-            }
-            string filename = args[0];
-            string absfilename = System.IO.Path.GetFullPath(filename);
-
-            if (!System.IO.File.Exists(absfilename))
-            {
-                System.Console.WriteLine("File does not exist: \"{0}\"",absfilename);
+                System.Console.WriteLine("Syntax is: VisioExportPagesToDocs <filename.vsd> [<outptufolder>]");
                 System.Environment.Exit(0);
             }
 
-            var visioapp = new IVisio.Application();
+            string input_filename = args[0];
+            input_filename = System.IO.Path.GetFullPath(input_filename);
+
+            var visioapp = new Microsoft.Office.Interop.Visio.Application();
             var docs = visioapp.Documents;
-            IVisio.Document doc=null;
+            Microsoft.Office.Interop.Visio.Document doc = null;
             try
             {
-                doc = docs.Open(absfilename);
+                doc = docs.Open(input_filename);
+
+                var settings = new ExporterSettings();
+                settings.InputDocument = doc;
+                if (args.Length >= 2)
+                {
+                    settings.DestinationPath = args[1];
+                }
+                else
+                {
+                    settings.DestinationPath = System.IO.Path.GetDirectoryName(input_filename);
+                }
+
+                var exporter = new Exporter(settings);
+                exporter.Run();
 
             }
             catch (System.Runtime.InteropServices.COMException comexc)
             {
-                System.Console.WriteLine("Failed to open file: {0}", comexc.Message);
-                System.Environment.Exit(0);
+                throw new System.ArgumentException(string.Format("Failed to open file: {0}", comexc.Message));
             }
-
-            var pages = doc.Pages;
-            var _pages = pages.AsEnumerable().ToList();
-
-            string destpath = System.IO.Path.GetDirectoryName(absfilename);
-            string basename = System.IO.Path.GetFileNameWithoutExtension(absfilename);
-            string ext = System.IO.Path.GetExtension(absfilename);
-
-            int pageindex = 1;
-            foreach (var page in _pages)
-            {
-                string pagename = page.Name;
-                var newdoc = docs.Add("");
-                var newpage = newdoc.Pages[1];
-                VA.Pages.PageHelper.DuplicateToDocument(page,newdoc,newpage,pagename,true);
-
- 	            // Visio allows characters in page names that are not valid for file names. Replace them.   
-                foreach (var c in System.IO.Path.GetInvalidFileNameChars())   
-                {   
-                       pagename = pagename.Replace(c, '_');   
-                }  
-
-                string destname = System.IO.Path.Combine(destpath, basename + "_" + pageindex.ToString() + "_" + pagename + ext);
-
-                if (System.IO.File.Exists(destname))
-                {
-                    System.Console.WriteLine("Output file already exists. Skipping. File = \"{0}\"",destname);
-                }
-
-                var activewindow = visioapp.ActiveWindow;
-                activewindow.ViewFit = (int) IVisio.VisWindowFit.visFitPage;
-
-                newdoc.SaveAs(destname);
-                newdoc.Close(true);
-                pageindex++;
-            }
-            doc.Close(true);
-            visioapp.Quit(true);
         }
     }
 }
