@@ -1,4 +1,6 @@
-﻿namespace VisioExportPagesToDocs
+﻿using System;
+
+namespace VisioExportPagesToDocs
 {
     internal class Program
     {
@@ -32,7 +34,15 @@
                 }
 
                 var exporter = new Exporter(settings);
-                exporter.Run();
+                foreach (var rec in exporter.Run())
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Page Index : {0}", rec.PageIndex);
+                    Console.WriteLine("Page Name : {0}", rec.PageName);
+                    Console.WriteLine("Output Document : {0}", rec.OutputFilename);
+                    Console.WriteLine("Output Document already existed : {0}", rec.OutputFileAlreadyExisted);
+                    Console.WriteLine("Wrote output file: {0}", rec.OutputFileWritten);
+                }
 
             }
             catch (System.Runtime.InteropServices.COMException comexc)

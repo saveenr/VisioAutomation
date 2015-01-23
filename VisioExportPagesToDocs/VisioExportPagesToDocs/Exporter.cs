@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using VisioAutomation.Extensions;
 
 namespace VisioExportPagesToDocs
@@ -6,6 +7,7 @@ namespace VisioExportPagesToDocs
     public class Exporter
     {
         public ExporterSettings Settings;
+        public List<LogRecord> Log;
 
         public Exporter(ExporterSettings settings)
         {
@@ -37,8 +39,8 @@ namespace VisioExportPagesToDocs
             this.Settings.InputExtension = System.IO.Path.GetExtension(input_filname);
         }
 
-        public void Run()
-        {            
+        public IEnumerable< LogRecord> Run()
+        {
             var pages = this.Settings.InputDocument.Pages;
             var app = this.Settings.InputDocument.Application;
             var docs = app.Documents;
@@ -59,19 +61,42 @@ namespace VisioExportPagesToDocs
                     pagename = pagename.Replace(c, '_');
                 }
 
-                string destname = System.IO.Path.Combine( this.Settings.DestinationPath,
-                    this.Settings.BaseName + "_" + pageindex.ToString() + "_" + pagename + this.Settings.InputExtension);
+                string basename = string.Format("{0}_{1}_{2}{3}", this.Settings.BaseName, pageindex.ToString(), pagename, this.Settings.InputExtension);
+                string destname = System.IO.Path.Combine( this.Settings.DestinationPath, basename);
 
-                if (System.IO.File.Exists(destname))
+                var rec = new LogRecord();
+                rec.OutputFileAlreadyExisted = System.IO.File.Exists(destname);
+                rec.OutputFilename = destname;
+                rec.Settings = this.Settings;
+                rec.PageIndex = pageindex;
+                rec.PageName = pagename;
+
+                bool perform_save = false;
+                if (this.Settings.Overwrite)
                 {
-                    System.Console.WriteLine("Output file already exists. Skipping. File = \"{0}\"", destname);
+                    perform_save = true;
+                    if (rec.OutputFileAlreadyExisted)
+                    {
+                        System.IO.File.Delete(destname);
+                    }                    
+                }
+                else
+                {
+                    perform_save = !rec.OutputFileAlreadyExisted;
                 }
 
-                var activewindow = app.ActiveWindow;
-                activewindow.ViewFit = (int)Microsoft.Office.Interop.Visio.VisWindowFit.visFitPage;
+                if (perform_save)
+                {
+                    var activewindow = app.ActiveWindow;
+                    activewindow.ViewFit = (int)Microsoft.Office.Interop.Visio.VisWindowFit.visFitPage;
+                    newdoc.SaveAs(destname);
+                    newdoc.Close(true);
+                    rec.OutputFileWritten = true;
+                }
 
-                newdoc.SaveAs(destname);
-                newdoc.Close(true);
+                this.Log.Add(rec);
+
+                yield return rec;
                 pageindex++;
             }
             this.Settings.InputDocument.Close(true);
