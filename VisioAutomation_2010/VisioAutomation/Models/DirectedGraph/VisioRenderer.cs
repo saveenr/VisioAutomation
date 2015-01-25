@@ -35,7 +35,7 @@ namespace VisioAutomation.Models.DirectedGraph
             foreach (var connector in drawing.Connectors)
             {
 
-                var connector_node = page_node.Shapes.Connect("Dynamic Connector", "basic_u.vss", connector.From.DOMNode, connector.To.DOMNode);
+                var connector_node = page_node.Shapes.Connect("Dynamic Connector", "connec_u.vss", connector.From.DOMNode, connector.To.DOMNode);
                 connector.DOMNode = connector_node;
                 connector.DOMNode.Text = new VA.Text.Markup.TextElement(connector.Label);
             }
