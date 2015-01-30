@@ -10,18 +10,16 @@ namespace VisioAutomation.ShapeSheet.Query
        public class SectionQueryList : IEnumerable<SectionQuery>
        {
            private IList<SectionQuery> items { get; set; }
-           private readonly CellQuery parent;
            private readonly Dictionary<IVisio.VisSectionIndices,SectionQuery> hs_section; 
  
-           internal SectionQueryList(CellQuery parent) :
-               this(parent,0)
+           internal SectionQueryList() :
+               this(0)
            {
            }
 
-           internal SectionQueryList(CellQuery parent,int capacity)
+           internal SectionQueryList(int capacity)
            {
                this.items = new List<SectionQuery>(capacity);
-               this.parent = parent;
                this.hs_section = new Dictionary<IVisio.VisSectionIndices, SectionQuery>(capacity);
            }
 
@@ -49,7 +47,7 @@ namespace VisioAutomation.ShapeSheet.Query
                }
 
                int ordinal = items.Count;
-               var section_query = new SectionQuery(this.parent, ordinal, section);
+               var section_query = new SectionQuery(ordinal, section);
                this.items.Add(section_query);
                this.hs_section[section] = section_query;
                return section_query;

@@ -16,7 +16,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public CellQuery()
         {
             this.Columns = new ColumnList(0);
-            this.Sections = new SectionQueryList(this,0);
+            this.Sections = new SectionQueryList(0);
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>(0);
         }
 
