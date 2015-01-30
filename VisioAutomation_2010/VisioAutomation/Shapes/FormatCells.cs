@@ -33,7 +33,7 @@ namespace VisioAutomation.Shapes
         public VA.ShapeSheet.CellData<double> LineWeight { get; set; }
         public VA.ShapeSheet.CellData<double> Rounding { get; set; }
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
+        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd.Formula);
             yield return srcvaluepair(ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans.Formula);

@@ -91,7 +91,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return formula.Value;
         }
 
-        public override IEnumerable<SRCValuePair> EnumPairs()
+        public override IEnumerable<SRCFormulaPair> Pairs()
         {
             var cp = this;
 

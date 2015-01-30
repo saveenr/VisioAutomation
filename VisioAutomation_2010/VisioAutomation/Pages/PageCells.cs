@@ -75,7 +75,7 @@ namespace VisioAutomation.Pages
         public VA.ShapeSheet.CellData<int> AvoidPageBreaks { get; set; } // new in visio 2010
         public VA.ShapeSheet.CellData<int> DrawingResizeType { get; set; } // new in visio 2010
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
+        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(ShapeSheet.SRCConstants.PageLeftMargin, this.PageLeftMargin.Formula);
             yield return srcvaluepair(ShapeSheet.SRCConstants.CenterX, this.CenterX.Formula);

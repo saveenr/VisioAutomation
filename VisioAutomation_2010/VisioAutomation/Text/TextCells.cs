@@ -24,7 +24,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<double> TxtLocPinX { get; set; }
         public VA.ShapeSheet.CellData<double> TxtLocPinY { get; set; }
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
+        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin.Formula);

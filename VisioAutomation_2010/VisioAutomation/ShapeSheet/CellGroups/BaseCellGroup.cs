@@ -8,23 +8,23 @@ namespace VisioAutomation.ShapeSheet.CellGroups
     {
         public delegate T RowToObject<T,RT>(CellData<RT>[] data);
 
-        public struct SRCValuePair
+        public struct SRCFormulaPair
         {
             public SRC SRC;
             public FormulaLiteral Formula;
 
-            public SRCValuePair(SRC src, FormulaLiteral formula)
+            public SRCFormulaPair(SRC src, FormulaLiteral formula)
             {
                 this.SRC = src;
                 this.Formula = formula;
             }
         }
 
-        protected SRCValuePair srcvaluepair(SRC src, FormulaLiteral f)
+        protected SRCFormulaPair srcvaluepair(SRC src, FormulaLiteral f)
         {
-            return new SRCValuePair(src, f);
+            return new SRCFormulaPair(src, f);
         }
 
-        public abstract IEnumerable<SRCValuePair> EnumPairs();
+        public abstract IEnumerable<SRCFormulaPair> Pairs();
     }
 }

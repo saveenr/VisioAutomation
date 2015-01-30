@@ -28,7 +28,7 @@ namespace VisioAutomation.Shapes
         public VA.ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
         public VA.ShapeSheet.CellData<bool> LockWidth { get; set; }
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCValuePair> EnumPairs()
+        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
             yield return srcvaluepair(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);

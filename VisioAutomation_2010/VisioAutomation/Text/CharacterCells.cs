@@ -31,7 +31,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<bool> Strikethru { get; set; }
         public VA.ShapeSheet.CellData<int> UseVertical { get; set; }
 
-        public override IEnumerable<SRCValuePair> EnumPairs()
+        public override IEnumerable<SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharColor, this.Color.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharFont, this.Font.Formula);

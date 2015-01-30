@@ -49,7 +49,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             this.Prompt = prompt;
         }
 
-        public override IEnumerable<SRCValuePair> EnumPairs()
+        public override IEnumerable<SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.User_Value, this.Value.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.User_Prompt, this.Prompt.Formula);

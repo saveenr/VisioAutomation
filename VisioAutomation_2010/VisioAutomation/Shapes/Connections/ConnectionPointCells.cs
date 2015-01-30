@@ -14,7 +14,7 @@ namespace VisioAutomation.Shapes.Connections
         public VA.ShapeSheet.CellData<int> DirY { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }
 
-        public override IEnumerable<SRCValuePair> EnumPairs()
+        public override IEnumerable<SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);

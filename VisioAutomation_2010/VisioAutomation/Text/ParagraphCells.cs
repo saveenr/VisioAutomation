@@ -23,7 +23,7 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<int> Flags { get; set; }
         public VA.ShapeSheet.CellData<string> BulletString { get; set; }
 
-        public override IEnumerable<SRCValuePair> EnumPairs()
+        public override IEnumerable<SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Para_IndLeft, this.IndentLeft.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Para_IndFirst, this.IndentFirst.Formula);

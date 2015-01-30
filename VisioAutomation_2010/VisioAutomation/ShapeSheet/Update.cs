@@ -191,7 +191,7 @@ namespace VisioAutomation.ShapeSheet
 
         public void SetFormulas(VA.ShapeSheet.CellGroups.CellGroup cg)
         {
-            foreach (var pair in cg.EnumPairs())
+            foreach (var pair in cg.Pairs())
             {
                 this.SetFormulaIgnoreNull(pair.SRC, pair.Formula);
             }
@@ -199,7 +199,7 @@ namespace VisioAutomation.ShapeSheet
 
         public void SetFormulas(short shapeid, VA.ShapeSheet.CellGroups.CellGroup cg)
         {
-            foreach (var pair in cg.EnumPairs())
+            foreach (var pair in cg.Pairs())
             {
                 this.SetFormulaIgnoreNull(shapeid, pair.SRC, pair.Formula);
             }
@@ -207,7 +207,7 @@ namespace VisioAutomation.ShapeSheet
 
         public void SetFormulas(short shapeid, VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
         {
-            foreach (var pair in cg.EnumPairs())
+            foreach (var pair in cg.Pairs())
             {
                 this.SetFormulaIgnoreNull(shapeid, pair.SRC.ForRow(row), pair.Formula);            
             }
@@ -215,7 +215,7 @@ namespace VisioAutomation.ShapeSheet
 
         public void SetFormulas(VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
         {
-            foreach (var pair in cg.EnumPairs())
+            foreach (var pair in cg.Pairs())
             {
                 this.SetFormulaIgnoreNull(pair.SRC.ForRow(row), pair.Formula);
             }

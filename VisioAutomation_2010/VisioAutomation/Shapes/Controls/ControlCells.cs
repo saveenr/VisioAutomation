@@ -17,7 +17,7 @@ namespace VisioAutomation.Shapes.Controls
         public VA.ShapeSheet.CellData<int> YDynamics { get; set; }
 
 
-        public override IEnumerable<SRCValuePair> EnumPairs()
+        public override IEnumerable<SRCFormulaPair> Pairs()
         {
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_CanGlue, this.CanGlue.Formula);
             yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_Tip, this.Tip.Formula);
