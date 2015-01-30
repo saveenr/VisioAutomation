@@ -26,28 +26,30 @@ namespace VisioAutomation.Shapes.Layout
         public VA.ShapeSheet.CellData<int> DisplayLevel { get; set; } // new in visio 2010
         public VA.ShapeSheet.CellData<int> Relationships { get; set; } // new in visio 2010
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCFormulaPair> Pairs()
+        public override IEnumerable<SRCFormulaPair> Pairs
         {
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.DisplayLevel, this.DisplayLevel.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
+            get
+            {
+                yield return newpair(ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.DisplayLevel, this.DisplayLevel.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.Relationships, this.Relationships.Formula);
+            }
         }
-
 
 
         public static IList<ShapeLayoutCells> GetCells(IVisio.Page page, IList<int> shapeids)

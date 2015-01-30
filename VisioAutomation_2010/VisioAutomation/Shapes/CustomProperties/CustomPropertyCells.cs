@@ -91,35 +91,38 @@ namespace VisioAutomation.Shapes.CustomProperties
             return formula.Value;
         }
 
-        public override IEnumerable<SRCFormulaPair> Pairs()
+        public override IEnumerable<SRCFormulaPair> Pairs
         {
-            var cp = this;
-
-            string str_label = this.SmartStringToFormulaString(cp.Label.Formula, false);
-            string str_value = null;
-            if (cp.Type.Formula.Value == "0" || cp.Type.Formula.Value == null)
+            get
             {
-                // if type has no value or is a "0" then it is a string
-                str_value = this.SmartStringToFormulaString(cp.Value.Formula, false);
-            }
-            else
-            {
-                // For non-stringd don't add any extra quotes
-                str_value = this.SmartStringToFormulaString(cp.Value.Formula, true);
-            }
-            string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
-            string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
+                var cp = this;
 
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Label, str_label);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Value, str_value);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Format, str_format);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Prop_Ask, cp.Ask.Formula);
+                string str_label = this.SmartStringToFormulaString(cp.Label.Formula, false);
+                string str_value = null;
+                if (cp.Type.Formula.Value == "0" || cp.Type.Formula.Value == null)
+                {
+                    // if type has no value or is a "0" then it is a string
+                    str_value = this.SmartStringToFormulaString(cp.Value.Formula, false);
+                }
+                else
+                {
+                    // For non-stringd don't add any extra quotes
+                    str_value = this.SmartStringToFormulaString(cp.Value.Formula, true);
+                }
+                string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
+                string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
+
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Label, str_label);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Value, str_value);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Format, str_format);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Ask, cp.Ask.Formula);
+            }
         }
 
         public static IList<List<CustomPropertyCells>> GetCells(IVisio.Page page, IList<int> shapeids)

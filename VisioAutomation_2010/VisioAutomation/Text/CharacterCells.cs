@@ -31,33 +31,34 @@ namespace VisioAutomation.Text
         public VA.ShapeSheet.CellData<bool> Strikethru { get; set; }
         public VA.ShapeSheet.CellData<int> UseVertical { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> Pairs()
+        public override IEnumerable<SRCFormulaPair> Pairs
         {
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharColor, this.Color.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharFont, this.Font.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharSize, this.Size.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharStyle, this.Style.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharColorTrans, this.Transparency.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharAsianFont, this.AsianFont.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharCase, this.Case.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharDblUnderline, this.DoubleUnderline.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, this.DoubleStrikeThrough.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharFontScale, this.FontScale.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharLetterspace, this.Letterspace.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharLocale, this.Locale.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharLocalizeFont, this.LocalizeFont.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharOverline, this.Overline.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharPerpendicular, this.Perpendicular.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharPos, this.Pos.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharRTLText, this.RTLText.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharStrikethru, this.Strikethru.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.CharUseVertical, this.UseVertical.Formula);
-
-
+            get
+            {
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharColor, this.Color.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharFont, this.Font.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharSize, this.Size.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharStyle, this.Style.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharColorTrans, this.Transparency.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharAsianFont, this.AsianFont.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharCase, this.Case.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharDblUnderline, this.DoubleUnderline.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, this.DoubleStrikeThrough.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharFontScale, this.FontScale.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharLetterspace, this.Letterspace.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharLocale, this.Locale.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharLocalizeFont, this.LocalizeFont.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharOverline, this.Overline.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharPerpendicular, this.Perpendicular.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharPos, this.Pos.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharRTLText, this.RTLText.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharStrikethru, this.Strikethru.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.CharUseVertical, this.UseVertical.Formula);
+            }
         }
 
         public static IList<List<CharacterCells>> GetCells(IVisio.Page page, IList<int> shapeids)

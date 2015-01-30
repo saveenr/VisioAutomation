@@ -28,28 +28,31 @@ namespace VisioAutomation.Shapes
         public VA.ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
         public VA.ShapeSheet.CellData<bool> LockWidth { get; set; }
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCFormulaPair> Pairs()
+        public override IEnumerable<SRCFormulaPair> Pairs
         {
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockCalcWH, this.LockCalcWH.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockCrop, this.LockCrop.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockCustProp, this.LockCustProp.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockDelete, this.LockDelete.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockEnd, this.LockEnd.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockFormat, this.LockFormat.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockFromGroupFormat, this.LockFromGroupFormat.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockGroup, this.LockGroup.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockHeight, this.LockHeight.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockMoveX, this.LockMoveX.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockMoveY, this.LockMoveY.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockRotate, this.LockRotate.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockSelect, this.LockSelect.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockTextEdit, this.LockTextEdit.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockThemeColors, this.LockThemeColors.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockThemeEffects, this.LockThemeEffects.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockVtxEdit, this.LockVtxEdit.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
+            get
+            {
+                yield return newpair(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockCalcWH, this.LockCalcWH.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockCrop, this.LockCrop.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockCustProp, this.LockCustProp.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockDelete, this.LockDelete.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockEnd, this.LockEnd.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockFormat, this.LockFormat.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockFromGroupFormat, this.LockFromGroupFormat.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockGroup, this.LockGroup.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockHeight, this.LockHeight.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockMoveX, this.LockMoveX.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockMoveY, this.LockMoveY.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockRotate, this.LockRotate.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockSelect, this.LockSelect.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockTextEdit, this.LockTextEdit.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockThemeColors, this.LockThemeColors.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockThemeEffects, this.LockThemeEffects.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockVtxEdit, this.LockVtxEdit.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
+            }
         }
 
 

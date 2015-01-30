@@ -17,16 +17,19 @@ namespace VisioAutomation.Shapes.Controls
         public VA.ShapeSheet.CellData<int> YDynamics { get; set; }
 
 
-        public override IEnumerable<SRCFormulaPair> Pairs()
+        public override IEnumerable<SRCFormulaPair> Pairs
         {
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_CanGlue, this.CanGlue.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_Tip, this.Tip.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_X, this.X.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_Y, this.Y.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_YCon, this.YBehavior.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_XCon, this.XBehavior.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_XDyn, this.XDynamics.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Controls_YDyn, this.YDynamics.Formula);
+            get
+            {
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_CanGlue, this.CanGlue.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_Tip, this.Tip.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_X, this.X.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_Y, this.Y.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_YCon, this.YBehavior.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_XCon, this.XBehavior.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_XDyn, this.XDynamics.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_YDyn, this.YDynamics.Formula);
+            }
         }
 
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)

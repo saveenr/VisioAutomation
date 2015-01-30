@@ -14,15 +14,18 @@ namespace VisioAutomation.Shapes.Connections
         public VA.ShapeSheet.CellData<int> DirY { get; set; }
         public VA.ShapeSheet.CellData<int> Type { get; set; }
 
-        public override IEnumerable<SRCFormulaPair> Pairs()
+        public override IEnumerable<SRCFormulaPair> Pairs
         {
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
-            yield return srcvaluepair(VA.ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
+            get
+            {
+                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
+                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
+            }
         }
-        
+
         public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = get_query();

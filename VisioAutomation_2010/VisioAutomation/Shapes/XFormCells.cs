@@ -17,15 +17,18 @@ namespace VisioAutomation.Shapes
         public VA.ShapeSheet.CellData<double> Height { get; set; }
         public VA.ShapeSheet.CellData<double> Angle { get; set; }
 
-        public override IEnumerable<VA.ShapeSheet.CellGroups.BaseCellGroup.SRCFormulaPair> Pairs()
+        public override IEnumerable<SRCFormulaPair> Pairs
         {
-            yield return srcvaluepair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
-            yield return srcvaluepair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
+            get
+            {
+                yield return newpair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
+                yield return newpair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
+            }
         }
 
         public static IList<XFormCells> GetCells(IVisio.Page page, IList<int> shapeids)

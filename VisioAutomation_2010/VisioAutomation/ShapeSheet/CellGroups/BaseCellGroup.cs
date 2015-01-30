@@ -20,11 +20,11 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             }
         }
 
-        protected SRCFormulaPair srcvaluepair(SRC src, FormulaLiteral f)
+        protected SRCFormulaPair newpair(SRC src, FormulaLiteral formula)
         {
-            return new SRCFormulaPair(src, f);
+            return new SRCFormulaPair(src, formula);
         }
 
-        public abstract IEnumerable<SRCFormulaPair> Pairs();
+        public abstract IEnumerable<SRCFormulaPair> Pairs { get; }
     }
 }
