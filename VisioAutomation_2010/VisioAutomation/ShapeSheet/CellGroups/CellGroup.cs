@@ -26,7 +26,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         {
             check_query(query);
 
-            var data_for_shapes = query.GetCellData<RT>( new ShapeSheetSurface(page), shapeids);
+            var surface = new ShapeSheetSurface(page);
+            var data_for_shapes = query.GetCellData<RT>( surface, shapeids);
             var list = new List<T>(shapeids.Count);
             foreach (var data_for_shape in data_for_shapes)
             {

@@ -33,7 +33,8 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             check_query(query);
 
             var list = new List<List<T>>(shapeids.Count);
-            var data_for_shapes = query.GetCellData<RT>(new ShapeSheetSurface(page), shapeids);
+            var surface = new ShapeSheetSurface(page);
+            var data_for_shapes = query.GetCellData<RT>(surface, shapeids);
 
             foreach (var data_for_shape in data_for_shapes)
             {
