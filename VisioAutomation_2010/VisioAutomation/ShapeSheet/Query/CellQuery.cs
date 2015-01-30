@@ -336,7 +336,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (stream_builder.ChunksWrittenCount != total)
             {
-                string msg = string.Format("Expected {0} Checks to be written. Actual = {1}", total, stream_builder.ChunksWrittenCount);
+                string msg = string.Format("Expected {0} Chunks to be written. Actual = {1}", total, stream_builder.ChunksWrittenCount);
                 throw new VA.AutomationException(msg);
             }
 
