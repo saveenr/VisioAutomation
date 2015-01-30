@@ -289,18 +289,12 @@ namespace VisioAutomation.Models.DirectedGraph
                 count++;
             }
 
-            var shape_pairs = from n in msagl_graph.NodeMap.Values
-                              let layout_shape = (DGMODEL.Shape)n.UserData
-                              select new
-                                  {
-                                      layout_shape,
-                                      shape_node = (VA.DOM.BaseShape)layout_shape.DOMNode
-                                  };
-
             // FORMAT EACH SHAPE
-            foreach (var i in shape_pairs)
+            foreach (var n in msagl_graph.NodeMap.Values)
             {
-                format_shape(i.layout_shape, i.shape_node);
+                var layout_shape = (DGMODEL.Shape) n.UserData;
+                var shape_node = (VA.DOM.BaseShape) layout_shape.DOMNode;
+                format_shape(layout_shape, shape_node);
             }
         }
 
@@ -315,31 +309,32 @@ namespace VisioAutomation.Models.DirectedGraph
                 domshapes.Add(vconnector);
             }
 
-            var edge_pairs = from n in msagl_graph.Edges
-                             let lc = (DGMODEL.Connector)n.UserData
-                             select new { msagl_edge = n, 
-                                 layout_connector = lc, 
-                                 bezier_node = (VA.DOM.BezierCurve)lc.DOMNode };
-
-            foreach (var i in edge_pairs)
+            foreach (var msagl_edge in msagl_graph.Edges)
             {
-                if (i.layout_connector.Cells != null)
+                var layout_connector = (DGMODEL.Connector)msagl_edge.UserData;
+
+                if (layout_connector.Cells != null)
                 {
-                    i.bezier_node.Cells = i.layout_connector.Cells.ShallowCopy();
+                    var bezier_node = (VA.DOM.BezierCurve)layout_connector.DOMNode;
+                    bezier_node.Cells = layout_connector.Cells.ShallowCopy();
                 }
             }
 
-            foreach (var i in edge_pairs.Where(item => !string.IsNullOrEmpty(item.layout_connector.Label)))
+            foreach (var msagl_edge in msagl_graph.Edges)
             {
-                // this is a bezier connector
-                // draw a manual box instead
-                var label_bb = ToDocumentCoordinates(VA.Internal.MSAGLUtil.ToVARectangle(i.msagl_edge.Label.BoundingBox));
-                var vshape = new VA.DOM.Rectangle(label_bb);
-                domshapes.Add(vshape);
+                var layout_connector = (DGMODEL.Connector) msagl_edge.UserData;
 
-                vshape.Cells = DefaultBezierConnectorShapeCells.ShallowCopy();
-                vshape.Text = new VA.Text.Markup.TextElement(i.layout_connector.Label);
+                if (!string.IsNullOrEmpty(layout_connector.Label))
+                {
+                    // this is a bezier connector
+                    // draw a manual box instead
+                    var label_bb = ToDocumentCoordinates(VA.Internal.MSAGLUtil.ToVARectangle(msagl_edge.Label.BoundingBox));
+                    var vshape = new VA.DOM.Rectangle(label_bb);
+                    domshapes.Add(vshape);
 
+                    vshape.Cells = DefaultBezierConnectorShapeCells.ShallowCopy();
+                    vshape.Text = new VA.Text.Markup.TextElement(layout_connector.Label);                    
+                }
             }
         }
 
@@ -348,33 +343,30 @@ namespace VisioAutomation.Models.DirectedGraph
             // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
             {
-                var layoutconnector = (DGMODEL.Connector)i.UserData;
+                var layout_connector = (DGMODEL.Connector)i.UserData;
                 var vconnector = new VA.DOM.Connector(
-                    layoutconnector.From.DOMNode,
-                    layoutconnector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
-                layoutconnector.DOMNode = vconnector;
+                    layout_connector.From.DOMNode,
+                    layout_connector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
+                layout_connector.DOMNode = vconnector;
                 shape_nodes.Add(vconnector);
             }
 
-            var edge_pairs = from n in msagl_graph.Edges
-                             let lc = (DGMODEL.Connector)n.UserData
-                             select
-                                 new { msagl_edge = n, layout_connector = lc, vconnector = (VA.DOM.Connector)lc.DOMNode };
-
-            foreach (var i in edge_pairs)
+            foreach (var msagle_edge in msagl_graph.Edges)
             {
-                int con_route_style = (int)  ConnectorTypeToCellVal_Appearance(i.layout_connector.ConnectorType);
-                int shape_route_style = (int) ConnectorTypeToCellVal_Style(i.layout_connector.ConnectorType);
+                var layoutconnector = (DGMODEL.Connector)msagle_edge.UserData;
+                var vconnector = (VA.DOM.Connector) layoutconnector.DOMNode;
 
-                i.vconnector.Text = new VA.Text.Markup.TextElement(i.layout_connector.Label);
+                int con_route_style = (int)  ConnectorTypeToCellVal_Appearance(layoutconnector.ConnectorType);
+                int shape_route_style = (int) ConnectorTypeToCellVal_Style(layoutconnector.ConnectorType);
 
-                i.vconnector.Cells = i.layout_connector.Cells != null ? 
-                    i.layout_connector.Cells.ShallowCopy()
+                vconnector.Text = new VA.Text.Markup.TextElement(layoutconnector.Label);
+
+                vconnector.Cells = layoutconnector.Cells != null ? 
+                    layoutconnector.Cells.ShallowCopy()
                     : new VA.DOM.ShapeCells();
 
-                i.vconnector.Cells.ConLineRouteExt = con_route_style;
-                i.vconnector.Cells.ShapeRouteStyle = shape_route_style;
-
+                vconnector.Cells.ConLineRouteExt = con_route_style;
+                vconnector.Cells.ShapeRouteStyle = shape_route_style;
             }
         }
 
