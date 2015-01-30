@@ -13,10 +13,10 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             public SRC SRC;
             public FormulaLiteral Formula;
 
-            public SRCValuePair(SRC src, FormulaLiteral f)
+            public SRCValuePair(SRC src, FormulaLiteral formula)
             {
                 this.SRC = src;
-                this.Formula = f;
+                this.Formula = formula;
             }
         }
 
