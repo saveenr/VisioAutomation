@@ -1,6 +1,3 @@
-using System.Linq;
-using System.Security.Authentication;
-using System.Xml.Serialization;
 using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
