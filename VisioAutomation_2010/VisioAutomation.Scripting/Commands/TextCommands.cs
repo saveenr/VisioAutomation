@@ -212,61 +212,45 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = GetTargetShapes(target_shapes).Where( s=>s.OneD==0).ToList();
             if (shapes.Count < 1)
             {
                 return;
             }
 
-            var shapeids = shapes.Where( s => s.OneD == 0).Select(s => s.ID).ToList();
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(application,"FitShapeToText"))
-            {
-                var active_page = application.ActivePage;
-                __FitShapeToText(active_page, shapes);
-            }
-        }
-
-        private static void __FitShapeToText(IVisio.Page page, IEnumerable<IVisio.Shape> shapes)
-        {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException("page");
-            }
-
-            if (shapes == null)
-            {
-                throw new System.ArgumentNullException("shapes");
-            }
-
+            var active_page = application.ActivePage;
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            // Calculate the new sizes for each shape
-            var new_sizes = new List<VA.Drawing.Size>(shapeids.Count);
-            foreach (var shape in shapes)
+            using (var undoscope = new VA.Application.UndoScope(application, "FitShapeToText"))
             {
-                var text_bounding_box = shape.GetBoundingBox(Microsoft.Office.Interop.Visio.VisBoundingBoxArgs.visBBoxUprightText).Size;
-                var wh_bounding_box = shape.GetBoundingBox(Microsoft.Office.Interop.Visio.VisBoundingBoxArgs.visBBoxUprightWH).Size;
+                // Calculate the new sizes for each shape
+                var new_sizes = new List<VA.Drawing.Size>(shapeids.Count);
+                foreach (var shape in shapes)
+                {
+                    var text_bounding_box = shape.GetBoundingBox(Microsoft.Office.Interop.Visio.VisBoundingBoxArgs.visBBoxUprightText).Size;
+                    var wh_bounding_box = shape.GetBoundingBox(Microsoft.Office.Interop.Visio.VisBoundingBoxArgs.visBBoxUprightWH).Size;
 
-                double max_w = System.Math.Max(text_bounding_box.Width, wh_bounding_box.Width);
-                double max_h = System.Math.Max(text_bounding_box.Height, wh_bounding_box.Height);
-                var max_size = new VisioAutomation.Drawing.Size(max_w, max_h);
-                new_sizes.Add(max_size);
+                    double max_w = System.Math.Max(text_bounding_box.Width, wh_bounding_box.Width);
+                    double max_h = System.Math.Max(text_bounding_box.Height, wh_bounding_box.Height);
+                    var max_size = new VisioAutomation.Drawing.Size(max_w, max_h);
+                    new_sizes.Add(max_size);
+                }
+
+                var src_width = VisioAutomation.ShapeSheet.SRCConstants.Width;
+                var src_height = VisioAutomation.ShapeSheet.SRCConstants.Height;
+
+                var update = new VisioAutomation.ShapeSheet.Update();
+                for (int i = 0; i < new_sizes.Count; i++)
+                {
+                    var shapeid = shapeids[i];
+                    var new_size = new_sizes[i];
+                    update.SetFormula((short)shapeid, src_width, new_size.Width);
+                    update.SetFormula((short)shapeid, src_height, new_size.Height);
+                }
+
+                update.Execute(active_page);
             }
-
-            var src_width = VisioAutomation.ShapeSheet.SRCConstants.Width;
-            var src_height = VisioAutomation.ShapeSheet.SRCConstants.Height;
-
-            var update = new VisioAutomation.ShapeSheet.Update();
-            for (int i = 0; i < new_sizes.Count; i++)
-            {
-                var shapeid = shapeids[i];
-                var new_size = new_sizes[i];
-                update.SetFormula((short)shapeid, src_width, new_size.Width);
-                update.SetFormula((short)shapeid, src_height, new_size.Height);
-            }
-
-            update.Execute(page);
         }
     }
 }
