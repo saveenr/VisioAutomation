@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
             catch (System.Runtime.InteropServices.COMException)
             {
                 string msg = string.Format("No such master \"{0}\"", name);
-                throw new VA.Scripting.ScriptingException(msg);
+                throw new VA.Scripting.VisioOperationException(msg);
             }
             return master;
         }
@@ -108,7 +108,7 @@ namespace VisioAutomation.Scripting.Commands
             if (masterobj == null)
             {
                 string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, doc);
-                throw new VA.Scripting.ScriptingException(msg);
+                throw new VA.Scripting.VisioOperationException(msg);
             }
 
             return masterobj;

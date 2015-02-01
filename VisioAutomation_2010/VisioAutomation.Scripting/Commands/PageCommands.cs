@@ -179,7 +179,7 @@ namespace VisioAutomation.Scripting.Commands
             if (!names.Contains(background_page_name))
             {
                 string msg = string.Format("Could not find page with name \"{0}\"", background_page_name);
-                throw new VA.Scripting.ScriptingException(msg);
+                throw new VA.Scripting.VisioOperationException(msg);
             }
 
             var bgpage = pages.ItemU[background_page_name];
@@ -190,14 +190,14 @@ namespace VisioAutomation.Scripting.Commands
             if (bgpage.Background == 0)
             {
                 string msg = string.Format("Page \"{0}\" is not a background page", bgpage.Name);
-                throw new ScriptingException(msg);
+                throw new VisioOperationException(msg);
             }
 
             // don't allow the page to be set as a background to itself
             if (fgpage == bgpage)
             {
                 string msg = string.Format("Cannot set page as its own background page");
-                throw new VA.Scripting.ScriptingException(msg);
+                throw new VA.Scripting.VisioOperationException(msg);
             }
 
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Background Page"))
@@ -241,7 +241,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (application.ActiveDocument == dest_doc)
             {
-                throw new VA.Scripting.ScriptingException("dest doc is same as active doc");
+                throw new VA.Scripting.VisioOperationException("dest doc is same as active doc");
             }
 
             var src_page = application.ActivePage;
@@ -435,12 +435,12 @@ namespace VisioAutomation.Scripting.Commands
             var active_document = app.ActiveDocument;
             if (pages.Document != active_document)
             {
-                throw new VA.Scripting.ScriptingException("Page.Document is not application's ActiveDocument");
+                throw new VA.Scripting.VisioOperationException("Page.Document is not application's ActiveDocument");
             }
 
             if (pages.Count < 2)
             {
-                throw new VA.Scripting.ScriptingException("Only 1 page available. Navigation not possible.");
+                throw new VA.Scripting.VisioOperationException("Only 1 page available. Navigation not possible.");
             }
 
             var activepage = app.ActivePage;

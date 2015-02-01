@@ -426,13 +426,13 @@ namespace VisioAutomation.Scripting.Commands
             {
                 string msg = string.Format("internal error: failed to create {0} shapes, instead created {1}", n,
                                            duplicated_shapes.Count);
-                throw new VA.Scripting.ScriptingException(msg);
+                throw new VA.Scripting.VisioOperationException(msg);
             }
 
             var selection2 = win.Selection;
             if (selection2.Count != n)
             {
-                throw new VA.Scripting.ScriptingException("internal error: failed to select the duplicated shapes");
+                throw new VA.Scripting.VisioOperationException("internal error: failed to select the duplicated shapes");
             }
 
             return duplicated_shapes;

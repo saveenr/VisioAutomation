@@ -90,7 +90,7 @@
     <Compile Include="FormatPaintCell.cs" />
     <Compile Include="ArrangeHelper.cs" />
     <Compile Include="PageNavigation.cs" />
-    <Compile Include="ScriptingException.cs" />
+    <Compile Include="VisioOperationException.cs" />
     <Compile Include="SnapCornerPosition.cs" />
     <Compile Include="UACHelper.cs" />
     <Compile Include="VisioApplicationException.cs" />

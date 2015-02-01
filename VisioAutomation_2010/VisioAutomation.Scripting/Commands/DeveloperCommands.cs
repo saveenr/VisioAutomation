@@ -192,7 +192,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 if (tokens.Length == 0)
                 {
-                    throw new VA.Scripting.ScriptingException();
+                    throw new VA.Scripting.VisioOperationException();
                 }
                 else if (tokens.Length == 1)
                 {

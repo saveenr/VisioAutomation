@@ -295,7 +295,7 @@ namespace VisioAutomation.Scripting.Commands
             // No shapes provided, use the active selection
             if (!this.Client.Selection.HasShapes())
             {
-                throw new ScriptingException("No Selected Shapes to Group");
+                throw new VisioOperationException("No Selected Shapes to Group");
             }
 
             // the other way of doing this: this.Client.VisioApplication.DoCmd((short)IVisio.VisUICmds.visCmdObjectGroup);

@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (!this.Client.Document.HasActiveDocument)
             {
-                throw new VA.Scripting.ScriptingException("No Drawing available");
+                throw new VA.Scripting.VisioOperationException("No Drawing available");
             }
         }
 

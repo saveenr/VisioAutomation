@@ -1,7 +1,7 @@
 ﻿namespace VisioAutomation.Scripting
 {
     [System.Serializable]
-    public class VisioApplicationException : ScriptingException
+    public class VisioApplicationException : VisioOperationException
     {
         public VisioApplicationException() { }
         public VisioApplicationException(string message) : base(message) { }
