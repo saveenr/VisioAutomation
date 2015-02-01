@@ -247,7 +247,11 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 return false;
             }
 
-            if (name.Contains(" ") || name.Contains("\t") || name.Contains("\r") || name.Contains("\n"))
+            const string space = " ";
+            const string tab = "\t";
+            const string carriage_return = "\r";
+            const string line_feed = "\n";
+            if (name.Contains(space) || name.Contains(tab) || name.Contains(carriage_return) || name.Contains(line_feed))
             {
                 return false;
             }
