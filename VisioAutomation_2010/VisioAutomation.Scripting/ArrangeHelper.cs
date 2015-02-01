@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting
             throw new System.ArgumentOutOfRangeException("pos");
         }
 
-        public static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, RelativePosition pos)
+        internal static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, RelativePosition pos)
         {
             if (page == null)
             {
@@ -59,7 +59,7 @@ namespace VisioAutomation.Scripting
             }
 
             // First get the transforms of the shapes on the given axis
-            var xforms = ArrangeHelper.GetXForm(page, shapeids);
+            var xforms = VA.Shapes.XFormCells.GetCells(page, shapeids);
 
             // Then, sort the shapeids pased on the corresponding value in the results
 
@@ -105,7 +105,7 @@ namespace VisioAutomation.Scripting
 
 
             var sorted_shape_ids = ArrangeHelper.SortShapesByPosition(page, shapeids, sortpos);
-            var input_xfrms = ArrangeHelper.GetXForm(page, sorted_shape_ids); ;
+            var input_xfrms = VA.Shapes.XFormCells.GetCells(page, sorted_shape_ids);
             var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
             var bb = GetBoundingBox(input_xfrms);
             var cur_pos = new VA.Drawing.Point(bb.Left, bb.Bottom);
@@ -143,7 +143,7 @@ namespace VisioAutomation.Scripting
 
         public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Shapes.XFormCells> xfrms)
         {
-            var bb = new VA.Drawing.BoundingBox(xfrms.Select(i => ArrangeHelper.GetRectangle(i)));
+            var bb = new VA.Drawing.BoundingBox(xfrms.Select(ArrangeHelper.GetRectangle));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
@@ -155,12 +155,13 @@ namespace VisioAutomation.Scripting
         {
             // First caculate the new transforms
             var snap_grid = new VA.Drawing.SnappingGrid(snapsize);
-            var input_xfrms = ArrangeHelper.GetXForm(page, shapeids);
+            var input_xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids);
             var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
 
             foreach (var input_xfrm in input_xfrms)
             {
-                var old_lower_left = ArrangeHelper.GetRectangle(input_xfrm).LowerLeft;
+                var old_rect = ArrangeHelper.GetRectangle(input_xfrm);
+                var old_lower_left = old_rect.LowerLeft;
                 var new_lower_left = snap_grid.Snap(old_lower_left);
                 var output_xfrm = _SnapCorner(corner, new_lower_left, input_xfrm);
                 output_xfrms.Add(output_xfrm);
@@ -218,7 +219,7 @@ namespace VisioAutomation.Scripting
 
         public static void SnapSize(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, VA.Drawing.Size minsize)
         {
-            var input_xfrms = ArrangeHelper.GetXForm(page, shapeids);
+            var input_xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids);
             var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
 
             var grid = new VA.Drawing.SnappingGrid(snapsize);
@@ -239,36 +240,6 @@ namespace VisioAutomation.Scripting
 
             // Now apply them
             update_xfrms(page, shapeids, output_xfrms);
-        }
-
-        public static VA.Shapes.XFormCells GetXForm(IVisio.Shape shape)
-        {
-            return VA.Shapes.XFormCells.GetCells(shape);
-        }
-
-        public static IList<VA.Shapes.XFormCells> GetXForm(IVisio.Page page, IList<int> shapeids)
-        {
-            return VA.Shapes.XFormCells.GetCells(page, shapeids);
-        }
-
-        public static VA.Shapes.LockCells GetLock(IVisio.Shape shape)
-        {
-            return VA.Shapes.LockCells.GetCells(shape);
-        }
-
-        public static IList<VA.Shapes.Layout.ShapeLayoutCells> GetShapeLayout(IVisio.Page page, IList<int> shapeids)
-        {
-            return VA.Shapes.Layout.ShapeLayoutCells.GetCells(page, shapeids);
-        }
-
-        public static VA.Shapes.Layout.ShapeLayoutCells GetShapeLayout(IVisio.Shape shape)
-        {
-            return VA.Shapes.Layout.ShapeLayoutCells.GetCells(shape);
-        }
-
-        public static IList<VA.Shapes.LockCells> GetLock(IVisio.Page page, IList<int> shapeids)
-        {
-            return VA.Shapes.LockCells.GetCells(page, shapeids);
         }
     }
 }
