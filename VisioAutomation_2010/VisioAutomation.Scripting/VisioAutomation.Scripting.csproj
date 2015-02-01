@@ -84,6 +84,7 @@
     <Compile Include="Commands\ReflectionUtil.cs" />
     <Compile Include="Commands\OutputCommands.cs" />
     <Compile Include="Commands\DeveloperCommands.cs" />
+    <Compile Include="Commands\TextHelper.cs" />
     <Compile Include="DefaultContext.cs" />
     <Compile Include="FormatCategory.cs" />
     <Compile Include="FormatPaintCache.cs" />
