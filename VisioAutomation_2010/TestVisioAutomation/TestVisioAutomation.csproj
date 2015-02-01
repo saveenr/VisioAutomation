@@ -87,6 +87,7 @@
     <Compile Include="Connections\ConnectivityMap.cs" />
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
+    <Compile Include="DiagnosticDebugContext.cs" />
     <Compile Include="DOM\DOM_Text.cs" />
     <Compile Include="DOM\StencilDef.cs" />
     <Compile Include="Globals.cs" />

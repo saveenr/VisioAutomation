@@ -1,8 +1,8 @@
-namespace VisioAutomation.Scripting
+﻿namespace TestVisioAutomation
 {
-    public class DebugContext : Context
+    public class DiagnosticDebugContext : VisioAutomation.Scripting.Context
     {
-        public DebugContext()
+        public DiagnosticDebugContext()
         {
         }
 
