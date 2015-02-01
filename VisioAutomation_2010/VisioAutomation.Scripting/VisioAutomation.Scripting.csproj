@@ -94,7 +94,7 @@
     <Compile Include="SnapCornerPosition.cs" />
     <Compile Include="UACHelper.cs" />
     <Compile Include="VisioApplicationException.cs" />
-    <Compile Include="PositionOnShape.cs" />
+    <Compile Include="RelativePosition.cs" />
     <Compile Include="XmlUtil.cs" />
     <Compile Include="ShapeSheetUpdate.cs" />
     <Compile Include="Commands\ApplicationCommands.cs" />

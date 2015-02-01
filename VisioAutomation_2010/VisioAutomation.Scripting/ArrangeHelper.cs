@@ -15,43 +15,38 @@ namespace VisioAutomation.Scripting
             return new VA.Drawing.Rectangle(pin - locpin, size);
         }
 
-        private static double GetPositionOnShape(VA.Shapes.XFormCells xform, PositionOnShape pos)
+        private static double GetPositionOnShape(VA.Shapes.XFormCells xform, RelativePosition pos)
         {
-            if (pos == PositionOnShape.PinY)
+            if (pos == RelativePosition.PinY)
             {
                 return xform.PinY.Result;
             }
-            else if (pos == PositionOnShape.PinX)
+            if (pos == RelativePosition.PinX)
             {
                 return xform.PinX.Result;
             }
-            else
+
+            var r = GetRectangle(xform);
+            if (pos == RelativePosition.Left)
             {
-                var r = GetRectangle(xform);
-                if (pos == PositionOnShape.Left)
-                {
-                    return r.Left;
-                }
-                else if (pos == PositionOnShape.Right)
-                {
-                    return r.Right;
-                }
-                else if (pos == PositionOnShape.Top)
-                {
-                    return r.Top;
-                }
-                else if (pos == PositionOnShape.Right)
-                {
-                    return r.Bottom;
-                }
-                else
-                {
-                    throw new System.ArgumentOutOfRangeException("pos");
-                }
+                return r.Left;
             }
+            if (pos == RelativePosition.Right)
+            {
+                return r.Right;
+            }
+            if (pos == RelativePosition.Top)
+            {
+                return r.Top;
+            }
+            if (pos == RelativePosition.Right)
+            {
+                return r.Bottom;
+            }
+            throw new System.ArgumentOutOfRangeException("pos");
         }
 
-        public static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, PositionOnShape pos)
+        public static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, RelativePosition pos)
         {
             if (page == null)
             {
@@ -67,7 +62,6 @@ namespace VisioAutomation.Scripting
             var xforms = ArrangeHelper.GetXForm(page, shapeids);
 
             // Then, sort the shapeids pased on the corresponding value in the results
-
 
             var sorted_shape_ids = Enumerable.Range(0, shapeids.Count)
                 .Select(i => new { index = i, shapeid = shapeids[i], pos = GetPositionOnShape(xforms[i], pos) })
@@ -102,8 +96,8 @@ namespace VisioAutomation.Scripting
 
             // Calculate the new Xfrms
             var sortpos = axis == VA.Drawing.Axis.XAxis
-                ? PositionOnShape.PinX
-                : PositionOnShape.PinY;
+                ? RelativePosition.PinX
+                : RelativePosition.PinY;
 
             var delta = axis == VA.Drawing.Axis.XAxis
                 ? new VA.Drawing.Size(spacing, 0)
@@ -154,10 +148,7 @@ namespace VisioAutomation.Scripting
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
             }
-            else
-            {
-                return bb.Rectangle;
-            }
+            return bb.Rectangle;
         }
 
         public static void SnapCorner(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, SnapCornerPosition corner)
@@ -203,25 +194,25 @@ namespace VisioAutomation.Scripting
             switch (corner)
             {
                 case SnapCornerPosition.LowerLeft:
-                {
-                    return new_lower_left.Add(locpin.X, locpin.Y);
-                }
+                    {
+                        return new_lower_left.Add(locpin.X, locpin.Y);
+                    }
                 case SnapCornerPosition.UpperRight:
-                {
-                    return new_lower_left.Subtract(size.Width, size.Height).Add(locpin.X, locpin.Y);
-                }
+                    {
+                        return new_lower_left.Subtract(size.Width, size.Height).Add(locpin.X, locpin.Y);
+                    }
                 case SnapCornerPosition.LowerRight:
-                {
-                    return new_lower_left.Subtract(size.Width, 0).Add(locpin.X, locpin.Y);
-                }
+                    {
+                        return new_lower_left.Subtract(size.Width, 0).Add(locpin.X, locpin.Y);
+                    }
                 case SnapCornerPosition.UpperLeft:
-                {
-                    return new_lower_left.Subtract(0, size.Height).Add(locpin.X, locpin.Y);
-                }
+                    {
+                        return new_lower_left.Subtract(0, size.Height).Add(locpin.X, locpin.Y);
+                    }
                 default:
-                {
-                    throw new System.ArgumentOutOfRangeException("corner", "Unsupported corner");
-                }
+                    {
+                        throw new System.ArgumentOutOfRangeException("corner", "Unsupported corner");
+                    }
             }
         }
 
