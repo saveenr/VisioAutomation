@@ -48,16 +48,6 @@ namespace VisioAutomation.Scripting
 
         internal static IList<int> SortShapesByPosition(IVisio.Page page, IList<int> shapeids, RelativePosition pos)
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException("page");
-            }
-
-            if (shapeids == null)
-            {
-                throw new System.ArgumentNullException("shapeids");
-            }
-
             // First get the transforms of the shapes on the given axis
             var xforms = VA.Shapes.XFormCells.GetCells(page, shapeids);
 
@@ -74,16 +64,6 @@ namespace VisioAutomation.Scripting
 
         public static void DistributeWithSpacing(IVisio.Page page, IList<int> shapeids, VA.Drawing.Axis axis, double spacing)
         {
-            if (page == null)
-            {
-                throw new System.ArgumentNullException("page");
-            }
-
-            if (shapeids == null)
-            {
-                throw new System.ArgumentNullException("shapeids");
-            }
-
             if (spacing < 0.0)
             {
                 throw new System.ArgumentOutOfRangeException("spacing");
