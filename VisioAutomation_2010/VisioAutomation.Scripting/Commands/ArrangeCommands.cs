@@ -152,14 +152,14 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
             
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             }
 
-            var shapes_2d = shapes.Where(s=>s.OneD==0).ToList();
-            var shapeids = shapes_2d.Select(s => s.ID).ToList();
+
+            var shapeids = shapes.Select(s => s.ID).ToList();
 
             var application = this.Client.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Snape Shape Sizes"))
@@ -450,14 +450,18 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
         
-        public void SnapCorner(double w, double h, SnapCornerPosition corner)
+        public void SnapCorner(IList<IVisio.Shape> target_shapes, double w, double h, SnapCornerPosition corner)
         {
-            if (!this.Client.Selection.HasShapes())
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
+
+            var shapes = GetTargetShapes2D(target_shapes);
+            if (shapes.Count < 1)
             {
                 return;
             }
-            var shapes_2d = Client.Selection.EnumShapes2D().ToList();
-            var shapeids = shapes_2d.Select(s => s.ID).ToList();
+
+            var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this.Client.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(application,"SnapCorner"))
             {

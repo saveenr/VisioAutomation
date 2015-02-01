@@ -52,6 +52,12 @@ namespace VisioAutomation.Scripting
             }
         }
 
+        protected IList<IVisio.Shape> GetTargetShapes2D(IList<IVisio.Shape> shapes)
+        {
+            var shapes_2d = GetTargetShapes(shapes).Where(s => s.OneD == 0).ToList();
+            return shapes_2d;
+        }
+
         protected IList<IVisio.Shape> GetTargetShapes(IList<IVisio.Shape> shapes)
         {
             this.Client.Application.AssertApplicationAvailable();

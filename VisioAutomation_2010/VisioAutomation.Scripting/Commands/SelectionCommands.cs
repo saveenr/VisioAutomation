@@ -320,12 +320,5 @@ namespace VisioAutomation.Scripting.Commands
             bool v = num_selected >= min_items;
             return v;
         }
-
-        internal IEnumerable<IVisio.Shape> EnumShapes2D()
-        {
-
-            var shapes = this.GetShapes().Where(s => s.OneD == 0);
-            return shapes;
-        }
     }
 }

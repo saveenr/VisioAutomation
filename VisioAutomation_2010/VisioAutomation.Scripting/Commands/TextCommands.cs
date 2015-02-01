@@ -192,13 +192,13 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             }
 
-            var shapeids = shapes.Where(s => s.OneD == 0).Select(s => s.ID).ToList();
+            var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this.Client.VisioApplication;
             using (var undoscope = new VA.Application.UndoScope(application,"SetTextWrapping"))
             {
@@ -212,7 +212,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes).Where( s=>s.OneD==0).ToList();
+            var shapes = GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
