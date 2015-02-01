@@ -214,7 +214,7 @@ namespace VisioAutomation.Scripting.Commands
                 var ga_names = gas.Select(i => GetNiceTypeName(i, options));
 
                 sb.Append("<");
-                Join(sb, ", ", ga_names);
+                sb.AppendJoin(", ", ga_names);
                 sb.Append(">");
                 return sb.ToString();
             }
@@ -226,27 +226,46 @@ namespace VisioAutomation.Scripting.Commands
         {
             return ((colType.IsGenericType) &&
                     (colType.GetGenericTypeDefinition() == typeof(System.Nullable<>)));
-        }
+        } 
+    }
 
-        private static void Join(System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)
+    internal static class StringBuilderExtensions
+    {
+        public static void AppendJoin(this System.Text.StringBuilder sb, string s, IEnumerable<string> tokens)
         {
-            int n = tokens.Count();
-            int c = tokens.Select(t => t.Length).Sum();
-            c += (n > 1) ? s.Length * n : 0;
-            c += sb.Length;
-            sb.EnsureCapacity(c);
+            // This works exactly like string.Join - except that it appends the results of the join into
+            // a StringBuilder object
 
+            // First, make sure the stringbuilder has enough capacity allocated 
+            int num_tokens = 0;
+            int tokens_length  = 0;
+
+            // use a foreach to minimize the times we have to go through the enumerable
+            foreach (string token in tokens)
+            {
+                num_tokens++;
+                tokens_length += token.Length;
+            }
+
+            // figure out how much space is needed for the separators
+            int num_seps = (num_tokens > 1) ? num_tokens - 1 : 0;
+            int separators_length = s.Length*num_seps;
+
+            int combined_length = tokens_length + separators_length;
+            int required_capacity = combined_length + sb.Length;
+            sb.EnsureCapacity(required_capacity);
+
+            // Now add the tokens and separators
             int i = 0;
-            foreach (string t in tokens)
+            foreach (string token in tokens)
             {
                 if (i > 0)
                 {
                     sb.Append(s);
                 }
-                sb.Append(t);
+                sb.Append(token);
                 i++;
             }
-        }   
-
+        }
     }
 }
