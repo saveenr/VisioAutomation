@@ -153,9 +153,9 @@ namespace VisioAutomation.Scripting.Commands
             try
             {
                 // try to do something simple, read-only, and fast with the application object
-                //  if No COMException was thrown when reading Version property. This application instance is treated as valid
+                //  if No COMException was thrown when reading ProductName property. This application instance is treated as valid
 
-                var app_version = app.Version;
+                var app_version = app.ProductName;
                 this.Client.WriteVerbose("Application validated");
                 return true;
             }
@@ -169,6 +169,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
         private static System.Version visio_app_version;
+
         public System.Version Version
         {
             get
@@ -176,10 +177,8 @@ namespace VisioAutomation.Scripting.Commands
                 if (visio_app_version == null)
                 {
                     this.Client.Application.AssertApplicationAvailable();
-                    if (visio_app_version == null)
-                    {
-                        visio_app_version = System.Version.Parse(this.Client.VisioApplication.Version);
-                    }
+                    var appinfo = VA.Application.ApplicationHelper.GetInformation(this.Client.VisioApplication);
+                    visio_app_version = appinfo.Version;
                 }
                 return visio_app_version;
             }            

@@ -51,8 +51,8 @@ namespace VisioAutomation.Models.OrgChart
                 }
             }
 
-            var ver = System.Version.Parse(app.Version);
-            int majorver = ver.Major;
+            var appinfo = VisioAutomation.Application.ApplicationHelper.GetInformation(app);
+            int majorver = appinfo.Version.Major;
             bool is_visio_2013 = majorver >= 15;
 
             const string orgchart_vst = "orgch_u.vst";

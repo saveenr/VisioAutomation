@@ -29,7 +29,7 @@ namespace VisioAutomationSamples
                     try
                     {
                         // try to do something simple, read-only, and fast with the application object
-                        var app_version = app.Version;
+                        var app_version = app.ProductName;
                     }
                     catch (System.Runtime.InteropServices.COMException)
                     {

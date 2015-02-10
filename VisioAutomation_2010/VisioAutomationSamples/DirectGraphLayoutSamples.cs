@@ -30,7 +30,8 @@ namespace VisioAutomationSamples
         private static DGMODEL.Drawing get_dg_drawing()
         {
 
-            var ver = System.Version.Parse(SampleEnvironment.Application.Version);
+            var appinfo = VA.Application.ApplicationHelper.GetInformation(SampleEnvironment.Application);
+            var ver = appinfo.Version;
             string server_stencil = (ver.Major >= 15) ? "server_u.vssx" : "server_u.vss";
             string basflo_stencil = (ver.Major >= 15) ? "basflo_u.vssx" : "basflo_u.vss";
 
