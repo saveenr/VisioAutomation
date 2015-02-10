@@ -177,8 +177,7 @@ namespace VisioAutomation.Scripting.Commands
                 if (visio_app_version == null)
                 {
                     this.Client.Application.AssertApplicationAvailable();
-                    var appinfo = VA.Application.ApplicationHelper.GetInformation(this.Client.VisioApplication);
-                    visio_app_version = appinfo.Version;
+                    visio_app_version = VA.Application.ApplicationHelper.GetVersion(this.Client.VisioApplication);
                 }
                 return visio_app_version;
             }            

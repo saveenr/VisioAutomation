@@ -11,8 +11,7 @@ namespace TestVisioAutomation
         public void TestStencilLocation()
         {
             var app = this.GetVisioApplication();
-            var appinfo = VA.Application.ApplicationHelper.GetInformation(app);
-            string path = appinfo.ContentLocation;
+            string path = VA.Application.ApplicationHelper.GetContentLocation(app);
 
             Assert.IsTrue(System.IO.Directory.Exists(path));
 

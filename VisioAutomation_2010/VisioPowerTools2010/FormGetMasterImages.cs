@@ -77,13 +77,13 @@ namespace VisioPowerTools2010
 
             var app = VisioPowerTools2010.Globals.ThisAddIn.Application;
 
-            var appinfo = VisioAutomation.Application.ApplicationHelper.GetInformation(app);
+            var ver = VisioAutomation.Application.ApplicationHelper.GetVersion(app);
 
             this.log("Searching for Stencil files (VSS, VSSX)");
             var stencilfiles = System.IO.Directory.GetFiles(srcfolder, "*.vss").ToList();
 
             // If Visio 2013 then check for VSSX files
-            if (appinfo.Version.Major == 15)
+            if (ver.Major == 15)
             {
                 var vssx_stencilfiles = System.IO.Directory.GetFiles(srcfolder, "*.vssx").ToList();
 

@@ -23,9 +23,8 @@ namespace TestVisioAutomationVDX
         public void VerifyDocCanBeLoaded(string filename)
         {
             var app = new IVisio.Application();
-            var appinfo = VA.Application.ApplicationHelper.GetInformation(app);
-            var version = appinfo.Version;
-            string logfilename = appinfo.XMLErrorLogFilename;
+            var version = VA.Application.ApplicationHelper.GetVersion(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             VA.Application.Logging.XmlErrorLog log_before=null;
             var old_fileinfo = new System.IO.FileInfo(logfilename);
@@ -286,9 +285,8 @@ namespace TestVisioAutomationVDX
  
             // Load the VDX
             var app = new IVisio.Application();
-            var appinfo = VA.Application.ApplicationHelper.GetInformation(app);
-            var version = appinfo.Version;
-            string logfilename = appinfo.XMLErrorLogFilename;
+            var version = VA.Application.ApplicationHelper.GetVersion(app);
+            string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
             var doc = TryOpen(app.Documents, input_filename);
             
