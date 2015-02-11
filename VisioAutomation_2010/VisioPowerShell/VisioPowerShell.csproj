@@ -144,7 +144,6 @@
     <Compile Include="Model\PageOrientation.cs" />
     <Compile Include="Commands\Remove\Remove_VisioControl.cs" />
     <Compile Include="Commands\Set\Set_VisioUserDefinedCell.cs" />
-    <Compile Include="Commands\Connect\Connect_VisioApplication.cs" />
     <Compile Include="Commands\New\New_VisioConnection.cs" />
     <Compile Include="Commands\Remove\Remove_VisioCustomProperty.cs" />
     <Compile Include="Commands\New\New_VisioLine.cs" />

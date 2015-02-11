@@ -79,39 +79,6 @@ namespace VisioAutomation.Application
             return s;
         }
 
-
-        /// <summary>
-        /// Finds running instances of Visio
-        /// </summary>
-        /// <remarks>
-        /// On occasion, despite an instance of visio running, this method will still return null.</remarks>
-        /// <returns>null if an instance cannot be found, otherwise returns the instance</returns>
-        public static IVisio.Application FindRunningApplication()
-        {
-            const string progid = VA.Internal.Constants.VisioApplication_ProgID;
-            object o = null;
-
-            try
-            {
-                o = System.Runtime.InteropServices.Marshal.GetActiveObject(progid);
-
-            }
-            catch (System.Runtime.InteropServices.COMException exc)
-            {
-                // if you are wondering why the conversion to uint is needed below
-                // http://stackoverflow.com/questions/1426147/catching-comexception-specific-error-code
-
-                const uint MK_E_UNAVAILABLE = 0x800401E3;
-                if (((uint)exc.ErrorCode) == MK_E_UNAVAILABLE) // MK_E_UNAVAILABLE
-                {
-                    return null;
-                }
-            }
-
-            var app = (IVisio.Application) o;
-            return app;
-        }
-
         public static void Quit(IVisio.Application app, bool force_close)
         {
             short old = app.AlertResponse;
