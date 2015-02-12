@@ -17,6 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 {
                     throw new System.ArgumentException("name");
                 }
+ 
                 this.Name = name;
                 this.Ordinal = ordinal;
             }
