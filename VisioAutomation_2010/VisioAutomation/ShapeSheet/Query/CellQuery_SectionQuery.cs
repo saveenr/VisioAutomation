@@ -24,11 +24,6 @@ namespace VisioAutomation.ShapeSheet.Query
                return col;
            }
 
-           public Column AddCell(short cell)
-           {
-               return this.AddCell(cell, null);
-           }
-
            public Column AddCell(short cell, string name)
            {
                var col = this.CellColumns.Add(cell, name);

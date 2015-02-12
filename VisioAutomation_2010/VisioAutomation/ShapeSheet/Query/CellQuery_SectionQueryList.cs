@@ -37,7 +37,7 @@ namespace VisioAutomation.ShapeSheet.Query
                get { return this.items[index]; }
            }
 
-           public SectionQuery Add(IVisio.VisSectionIndices section)
+           internal SectionQuery Add(IVisio.VisSectionIndices section)
            {
                if (this.hs_section.ContainsKey(section))
                {

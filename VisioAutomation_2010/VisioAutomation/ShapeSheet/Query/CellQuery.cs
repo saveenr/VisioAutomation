@@ -34,7 +34,13 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public Column AddCell(SRC src, string name)
         {
-            var col = this.AddCell(src, name);
+            var col = this.CellColumns.Add(src, name);
+            return col;
+        }
+
+        public SectionQuery AddSection(IVisio.VisSectionIndices section)
+        {
+            var col = this.SectionColumns.Add(section);
             return col;
         }
 

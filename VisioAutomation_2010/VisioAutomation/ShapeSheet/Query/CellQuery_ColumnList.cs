@@ -63,12 +63,12 @@ namespace VisioAutomation.ShapeSheet.Query
                 return this.dic_columns.ContainsKey(name);
             }
 
-            public Column Add(SRC src)
+            internal Column Add(SRC src)
             {
                 return this.Add(src, null);
             }
 
-            public Column Add(SRC src, string name)
+            internal Column Add(SRC src, string name)
             {
                 if (this.coltype == ColumnType.CellIndex)
                 {

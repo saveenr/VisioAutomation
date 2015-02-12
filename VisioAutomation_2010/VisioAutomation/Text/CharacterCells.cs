@@ -107,7 +107,7 @@ namespace VisioAutomation.Text
 
             public CharacterFormatCellQuery() 
             {
-                var sec = this.SectionColumns.Add(IVisio.VisSectionIndices.visSectionCharacter);
+                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
                 Color = sec.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "Color");
                 Trans = sec.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "Trans");
                 Font = sec.AddCell(VA.ShapeSheet.SRCConstants.CharFont, "Font");

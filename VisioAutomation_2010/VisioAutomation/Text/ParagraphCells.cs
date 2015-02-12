@@ -82,7 +82,7 @@ namespace VisioAutomation.Text
 
             public ParagraphFormatCellQuery() 
             {
-                var sec = this.SectionColumns.Add(IVisio.VisSectionIndices.visSectionParagraph);
+                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionParagraph);
                 Bullet = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
                 BulletFont = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_BulletFont, "BulletFont");
                 BulletFontSize = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, "BulletFontSize");

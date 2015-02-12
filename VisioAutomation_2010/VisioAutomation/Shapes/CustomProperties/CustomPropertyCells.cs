@@ -195,7 +195,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public CustomPropertyCellQuery() 
         {
-            var sec = this.SectionColumns.Add(IVisio.VisSectionIndices.visSectionProp);
+            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
 
             SortKey = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
             Ask = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");

@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
             var app = this.Client.VisioApplication;
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var sec = query.SectionColumns.Add(section);
+            var sec = query.AddSection(section);
 
             int ci = 0;
             foreach (var cell in cells)
@@ -105,7 +105,7 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var sec = query.SectionColumns.Add(section);
+            var sec = query.AddSection(section);
 
             int ci = 0;
             foreach (var cell in cells)
