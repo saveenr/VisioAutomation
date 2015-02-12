@@ -80,10 +80,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\XmlErrorLog.cs" />
-    <Compile Include="Application\LogRecord.cs" />
-    <Compile Include="Application\FileSessions.cs" />
-    <Compile Include="Application\LogState.cs" />
+    <Compile Include="Application\Logging\XmlErrorLog.cs" />
+    <Compile Include="Application\Logging\LogRecord.cs" />
+    <Compile Include="Application\Logging\FileSessions.cs" />
+    <Compile Include="Application\Logging\LogState.cs" />
     <Compile Include="Shapesheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
