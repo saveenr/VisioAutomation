@@ -9,6 +9,8 @@ using VA = VisioAutomation;
 
 namespace TestVisioAutomation
 {
+    using VisioAutomation.ShapeSheet.Query;
+
     [TestClass]
     public class ShapeSheet_Query_Tests : VisioAutomationTest
     {
@@ -389,7 +391,7 @@ namespace TestVisioAutomation
             var query = new VA.ShapeSheet.Query.CellQuery();
 
             var name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
-            var section_to_secquery = new Dictionary<short,VA.ShapeSheet.Query.CellQuery.SectionColumn>();
+            var section_to_secquery = new Dictionary<short,SectionColumn>();
 
             foreach (var kv in name_to_src)
             {
@@ -413,7 +415,7 @@ namespace TestVisioAutomation
                 }
                 else
                 {
-                    VA.ShapeSheet.Query.CellQuery.SectionColumn sec;
+                    SectionColumn sec;
                     if (!section_to_secquery.ContainsKey(src.Section))
                     {
                         sec = query.AddSection((IVisio.VisSectionIndices)src.Section);

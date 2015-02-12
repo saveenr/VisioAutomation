@@ -7,18 +7,11 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class CellColumnList : IEnumerable<CellColumn>
     {
-        private enum ColumnType
-        {
-            Unknown,
-            SRC,
-            CellIndex
-        }
-
         private IList<CellColumn> items { get; set; }
         private Dictionary<string, CellColumn> dic_columns;
         private HashSet<ShapeSheet.SRC> hs_src;
         private HashSet<short> hs_cellindex;
-        private ColumnType coltype;
+        private CellColumnType coltype;
 
         internal CellColumnList() :
             this(0)
@@ -29,7 +22,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.items = new List<CellColumn>(capacity);
             this.dic_columns = new Dictionary<string, CellColumn>(capacity);
-            this.coltype = ColumnType.Unknown;
+            this.coltype = CellColumnType.Unknown;
         }
 
         public IEnumerator<CellColumn> GetEnumerator()
@@ -64,11 +57,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
         internal CellColumn Add(SRC src, string name)
         {
-            if (this.coltype == ColumnType.CellIndex)
+            if (this.coltype == CellColumnType.CellIndex)
             {
                 throw new VA.AutomationException("Can't add an SRC if Columns contains CellIndexes");
             }
-            this.coltype = ColumnType.SRC;
+            this.coltype = CellColumnType.SRC;
 
             name = fixup_name(name);
 
@@ -104,12 +97,12 @@ namespace VisioAutomation.ShapeSheet.Query
 
         public CellColumn Add(short cell, string name)
         {
-            if (this.coltype == ColumnType.SRC)
+            if (this.coltype == CellColumnType.SRC)
             {
                 throw new VA.AutomationException("Can't add a CellIndex if Columns contains SRCs");
             }
 
-            this.coltype = ColumnType.CellIndex;
+            this.coltype = CellColumnType.CellIndex;
 
             if (this.hs_cellindex == null)
             {

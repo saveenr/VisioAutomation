@@ -9,6 +9,7 @@ namespace VisioAutomation.ShapeSheet.Query
         public string Name { get; private set; }
         public SRC SRC { get; protected set; }
         public IVisio.VisUnitCodes UnitCode { get; set; }
+        public int Ordinal { get; private set; }
             
         protected CellColumn(int ordinal, string name)
         {
@@ -20,8 +21,6 @@ namespace VisioAutomation.ShapeSheet.Query
             this.Name = name;
             this.Ordinal = ordinal;
         }
-
-        public int Ordinal { get; private set; }
 
         internal CellColumn(int ordinal, short cell, string name) :
             this(ordinal, name)

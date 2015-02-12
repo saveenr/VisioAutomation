@@ -5,18 +5,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionColumnList : IEnumerable<CellQuery.SectionColumn>
+    public class SectionColumnList : IEnumerable<SectionColumn>
     {
-        private IList<CellQuery.SectionColumn> items { get; set; }
-        private readonly Dictionary<IVisio.VisSectionIndices,CellQuery.SectionColumn> hs_section; 
+        private IList<SectionColumn> items { get; set; }
+        private readonly Dictionary<IVisio.VisSectionIndices,SectionColumn> hs_section; 
 
         internal SectionColumnList(int capacity)
         {
-            this.items = new List<CellQuery.SectionColumn>(capacity);
-            this.hs_section = new Dictionary<IVisio.VisSectionIndices, CellQuery.SectionColumn>(capacity);
+            this.items = new List<SectionColumn>(capacity);
+            this.hs_section = new Dictionary<IVisio.VisSectionIndices, SectionColumn>(capacity);
         }
 
-        public IEnumerator<CellQuery.SectionColumn> GetEnumerator()
+        public IEnumerator<SectionColumn> GetEnumerator()
         {
             return (this.items).GetEnumerator();
         }
@@ -26,12 +26,12 @@ namespace VisioAutomation.ShapeSheet.Query
             return GetEnumerator();
         }
 
-        public CellQuery.SectionColumn this[int index]
+        public SectionColumn this[int index]
         {
             get { return this.items[index]; }
         }
 
-        internal CellQuery.SectionColumn Add(IVisio.VisSectionIndices section)
+        internal SectionColumn Add(IVisio.VisSectionIndices section)
         {
             if (this.hs_section.ContainsKey(section))
             {
@@ -40,7 +40,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             int ordinal = items.Count;
-            var section_query = new CellQuery.SectionColumn(ordinal, section);
+            var section_query = new SectionColumn(ordinal, section);
             this.items.Add(section_query);
             this.hs_section[section] = section_query;
             return section_query;

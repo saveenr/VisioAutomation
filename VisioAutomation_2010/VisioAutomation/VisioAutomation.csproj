@@ -84,6 +84,7 @@
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
+    <Compile Include="Shapesheet\Query\CellColumnType.cs" />
     <Compile Include="Shapesheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
@@ -178,7 +179,7 @@
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
     <Compile Include="Shapesheet\Query\QueryResultList.cs" />
     <Compile Include="Shapesheet\Query\QueryResult.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_SectionColumnInfo.cs" />
+    <Compile Include="Shapesheet\Query\SectionColumnDetails.cs" />
     <Compile Include="Shapesheet\Query\SectionColumn.cs" />
     <Compile Include="Shapesheet\Query\SectionResult.cs" />
     <Compile Include="Shapesheet\Query\CellColumnList.cs" />
