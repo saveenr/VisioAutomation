@@ -6,17 +6,17 @@ namespace VisioAutomation.ShapeSheet.Query
 {
    public partial class CellQuery
     {
-       public class SectionQueryList : IEnumerable<SectionQuery>
+       public class SectionColumnList : IEnumerable<SectionQuery>
        {
            private IList<SectionQuery> items { get; set; }
            private readonly Dictionary<IVisio.VisSectionIndices,SectionQuery> hs_section; 
  
-           internal SectionQueryList() :
+           internal SectionColumnList() :
                this(0)
            {
            }
 
-           internal SectionQueryList(int capacity)
+           internal SectionColumnList(int capacity)
            {
                this.items = new List<SectionQuery>(capacity);
                this.hs_section = new Dictionary<IVisio.VisSectionIndices, SectionQuery>(capacity);

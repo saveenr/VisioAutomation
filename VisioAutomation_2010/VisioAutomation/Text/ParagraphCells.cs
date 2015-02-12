@@ -82,21 +82,21 @@ namespace VisioAutomation.Text
 
             public ParagraphFormatCellQuery() 
             {
-                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionParagraph);
-                Bullet = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
-                BulletFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_BulletFont, "BulletFont");
-                BulletFontSize = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, "BulletFontSize");
-                BulletString = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_BulletStr, "BulletString");
-                Flags = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_Flags, "Flags");
-                HorzAlign = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_HorzAlign, "HorzAlign");
-                IndentFirst = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_IndFirst, "IndentFirst");
-                IndentLeft = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_IndLeft, "IndentLeft");
-                IndentRight = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_IndRight, "IndentRight");
-                LocalizeBulletFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont, "LocalizeBulletFont");
-                SpaceAfter = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_SpAfter, "SpaceAfter");
-                SpaceBefore = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_SpBefore, "SpaceBefore");
-                SpaceLine = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_SpLine, "SpaceLine");
-                TextPosAfterBullet = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "TextPosAfterBullet");
+                var sec = this.SectionColumns.Add(IVisio.VisSectionIndices.visSectionParagraph);
+                Bullet = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_Bullet, "BulletIndex");
+                BulletFont = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_BulletFont, "BulletFont");
+                BulletFontSize = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_BulletFontSize, "BulletFontSize");
+                BulletString = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_BulletStr, "BulletString");
+                Flags = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_Flags, "Flags");
+                HorzAlign = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_HorzAlign, "HorzAlign");
+                IndentFirst = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_IndFirst, "IndentFirst");
+                IndentLeft = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_IndLeft, "IndentLeft");
+                IndentRight = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_IndRight, "IndentRight");
+                LocalizeBulletFont = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont, "LocalizeBulletFont");
+                SpaceAfter = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_SpAfter, "SpaceAfter");
+                SpaceBefore = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_SpBefore, "SpaceBefore");
+                SpaceLine = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_SpLine, "SpaceLine");
+                TextPosAfterBullet = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "TextPosAfterBullet");
             }
 
             public ParagraphCells GetCells(VA.ShapeSheet.CellData<double>[] row)

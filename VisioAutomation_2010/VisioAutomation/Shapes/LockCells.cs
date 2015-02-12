@@ -101,26 +101,26 @@ namespace VisioAutomation.Shapes
 
             public LockCellQuery() 
             {
-                this.LockAspect = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockAspect, "LockAspect");
-                this.LockBegin = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockBegin, "LockBegin");
-                this.LockCalcWH = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockCalcWH, "LockCalcWH");
-                this.LockCrop = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockCrop, "LockCrop");
-                this.LockCustProp = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockCustProp, "LockCustProp");
-                this.LockDelete = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockDelete, "LockDelete");
-                this.LockEnd = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockEnd, "LockEnd");
-                this.LockFormat = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockFormat, "LockFormat");
-                this.LockFromGroupFormat = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockFromGroupFormat, "LockFromGroupFormat");
-                this.LockGroup = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockGroup, "LockGroup");
-                this.LockHeight = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockHeight, "LockHeight");
-                this.LockMoveX = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockMoveX, "LockMoveX");
-                this.LockMoveY = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockMoveY, "LockMoveY");
-                this.LockRotate = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockRotate, "LockRotate");
-                this.LockSelect = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockSelect, "LockSelect");
-                this.LockTextEdit = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockTextEdit, "LockTextEdit");
-                this.LockThemeColors = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockThemeColors, "LockThemeColors");
-                this.LockThemeEffects = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockThemeEffects, "LockThemeEffects");
-                this.LockVtxEdit = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockVtxEdit, "LockVtxEdit");
-                this.LockWidth = this.Columns.Add(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth");
+                this.LockAspect = this.AddCell(VA.ShapeSheet.SRCConstants.LockAspect, "LockAspect");
+                this.LockBegin = this.AddCell(VA.ShapeSheet.SRCConstants.LockBegin, "LockBegin");
+                this.LockCalcWH = this.AddCell(VA.ShapeSheet.SRCConstants.LockCalcWH, "LockCalcWH");
+                this.LockCrop = this.AddCell(VA.ShapeSheet.SRCConstants.LockCrop, "LockCrop");
+                this.LockCustProp = this.AddCell(VA.ShapeSheet.SRCConstants.LockCustProp, "LockCustProp");
+                this.LockDelete = this.AddCell(VA.ShapeSheet.SRCConstants.LockDelete, "LockDelete");
+                this.LockEnd = this.AddCell(VA.ShapeSheet.SRCConstants.LockEnd, "LockEnd");
+                this.LockFormat = this.AddCell(VA.ShapeSheet.SRCConstants.LockFormat, "LockFormat");
+                this.LockFromGroupFormat = this.AddCell(VA.ShapeSheet.SRCConstants.LockFromGroupFormat, "LockFromGroupFormat");
+                this.LockGroup = this.AddCell(VA.ShapeSheet.SRCConstants.LockGroup, "LockGroup");
+                this.LockHeight = this.AddCell(VA.ShapeSheet.SRCConstants.LockHeight, "LockHeight");
+                this.LockMoveX = this.AddCell(VA.ShapeSheet.SRCConstants.LockMoveX, "LockMoveX");
+                this.LockMoveY = this.AddCell(VA.ShapeSheet.SRCConstants.LockMoveY, "LockMoveY");
+                this.LockRotate = this.AddCell(VA.ShapeSheet.SRCConstants.LockRotate, "LockRotate");
+                this.LockSelect = this.AddCell(VA.ShapeSheet.SRCConstants.LockSelect, "LockSelect");
+                this.LockTextEdit = this.AddCell(VA.ShapeSheet.SRCConstants.LockTextEdit, "LockTextEdit");
+                this.LockThemeColors = this.AddCell(VA.ShapeSheet.SRCConstants.LockThemeColors, "LockThemeColors");
+                this.LockThemeEffects = this.AddCell(VA.ShapeSheet.SRCConstants.LockThemeEffects, "LockThemeEffects");
+                this.LockVtxEdit = this.AddCell(VA.ShapeSheet.SRCConstants.LockVtxEdit, "LockVtxEdit");
+                this.LockWidth = this.AddCell(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth");
             }
 
             public LockCells GetCells(VA.ShapeSheet.CellData<double>[] row)

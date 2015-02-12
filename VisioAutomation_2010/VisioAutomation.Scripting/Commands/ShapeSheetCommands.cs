@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             foreach (var src in srcs)
             {
                 string colname = string.Format("Col{0}", ci);
-                query.Columns.Add(src,colname);
+                query.AddCell(src, colname);
                 ci++;
             }
 
@@ -60,7 +60,7 @@ namespace VisioAutomation.Scripting.Commands
             foreach (var src in srcs)
             {
                 string colname = string.Format("Col{0}", ci);
-                query.Columns.Add(src,colname);
+                query.AddCell(src, colname);
                 ci++;
             }
 
@@ -80,13 +80,13 @@ namespace VisioAutomation.Scripting.Commands
             var app = this.Client.VisioApplication;
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var sec = query.Sections.Add(section);
+            var sec = query.SectionColumns.Add(section);
 
             int ci = 0;
             foreach (var cell in cells)
             {
                 string name = string.Format("Cell{0}", ci);
-                sec.Columns.Add((short)cell, name);
+                sec.AddCell((short)cell, name);
                 ci++;
             }
 
@@ -105,13 +105,13 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var sec = query.Sections.Add(section);
+            var sec = query.SectionColumns.Add(section);
 
             int ci = 0;
             foreach (var cell in cells)
             {
                 string name = string.Format("Cell{0}", ci);
-                sec.Columns.Add((short)cell, name);
+                sec.AddCell((short)cell, name);
                 ci++;
             }
 

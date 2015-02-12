@@ -100,14 +100,14 @@ namespace VisioAutomation.Scripting
 
             foreach (var cell in desired_cells)
             {
-                query.Columns.Add(cell.SRC,null);
+                query.AddCell(cell.SRC, null);
             }
 
             // Retrieve the values for the cells
             var dataset = query.GetCellData<string>(shape);
 
             // Now store the values
-            for (int col = 0; col < query.Columns.Count; col++)
+            for (int col = 0; col < query.CellColumns.Count; col++)
             {
                 var cellrec = desired_cells[col];
 

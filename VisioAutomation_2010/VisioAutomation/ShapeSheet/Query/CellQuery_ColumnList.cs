@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public partial class CellQuery
     {
-        public class ColumnList : IEnumerable<Column>
+        public class CellColumnList : IEnumerable<Column>
         {
             private enum ColumnType
             {
@@ -21,12 +21,12 @@ namespace VisioAutomation.ShapeSheet.Query
             private HashSet<short> hs_cellindex;
             private ColumnType coltype;
 
-            internal ColumnList() :
+            internal CellColumnList() :
                 this(0)
             {
             }
 
-            internal ColumnList(int capacity)
+            internal CellColumnList(int capacity)
             {
                 this.items = new List<Column>(capacity);
                 this.dic_columns = new Dictionary<string, Column>(capacity);

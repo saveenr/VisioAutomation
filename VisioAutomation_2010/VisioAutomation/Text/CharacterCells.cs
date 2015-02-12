@@ -107,29 +107,29 @@ namespace VisioAutomation.Text
 
             public CharacterFormatCellQuery() 
             {
-                var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionCharacter);
-                Color = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharColor, "Color");
-                Trans = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharColorTrans, "Trans");
-                Font = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharFont, "Font");
-                Size = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharSize, "Size");
-                Style = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharStyle, "Style");
-                AsianFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharAsianFont, "AsianFont");
-                Case = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharCase, "Case");
-                ComplexScriptFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "ComplexScriptStyle");
-                ComplexScriptSize = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "ComplexScriptSize");
-                DoubleStrikethrough = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, "DoubleStrikethrough");
-                DoubleUnderline = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharDblUnderline, "DoubleUnderline");
-                LangID = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLangID, "LangID");
-                Locale = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLocale, "Locale");
-                LocalizeFont = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLocalizeFont, "LocalizeFont");
-                Overline = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharOverline, "Overline");
-                Perpendicular = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharPerpendicular, "Perpendicular");
-                Pos = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharPos, "Pos");
-                RTLText = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharRTLText, "RTLText");
-                FontScale = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharFontScale, "FontScale");
-                Letterspace = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharLetterspace, "Letterspace");
-                Strikethru = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharStrikethru, "Strikethru");
-                UseVertical = sec.Columns.Add(VA.ShapeSheet.SRCConstants.CharUseVertical, "UseVertical");
+                var sec = this.SectionColumns.Add(IVisio.VisSectionIndices.visSectionCharacter);
+                Color = sec.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "Color");
+                Trans = sec.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "Trans");
+                Font = sec.AddCell(VA.ShapeSheet.SRCConstants.CharFont, "Font");
+                Size = sec.AddCell(VA.ShapeSheet.SRCConstants.CharSize, "Size");
+                Style = sec.AddCell(VA.ShapeSheet.SRCConstants.CharStyle, "Style");
+                AsianFont = sec.AddCell(VA.ShapeSheet.SRCConstants.CharAsianFont, "AsianFont");
+                Case = sec.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "Case");
+                ComplexScriptFont = sec.AddCell(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "ComplexScriptStyle");
+                ComplexScriptSize = sec.AddCell(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "ComplexScriptSize");
+                DoubleStrikethrough = sec.AddCell(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, "DoubleStrikethrough");
+                DoubleUnderline = sec.AddCell(VA.ShapeSheet.SRCConstants.CharDblUnderline, "DoubleUnderline");
+                LangID = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLangID, "LangID");
+                Locale = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLocale, "Locale");
+                LocalizeFont = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLocalizeFont, "LocalizeFont");
+                Overline = sec.AddCell(VA.ShapeSheet.SRCConstants.CharOverline, "Overline");
+                Perpendicular = sec.AddCell(VA.ShapeSheet.SRCConstants.CharPerpendicular, "Perpendicular");
+                Pos = sec.AddCell(VA.ShapeSheet.SRCConstants.CharPos, "Pos");
+                RTLText = sec.AddCell(VA.ShapeSheet.SRCConstants.CharRTLText, "RTLText");
+                FontScale = sec.AddCell(VA.ShapeSheet.SRCConstants.CharFontScale, "FontScale");
+                Letterspace = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLetterspace, "Letterspace");
+                Strikethru = sec.AddCell(VA.ShapeSheet.SRCConstants.CharStrikethru, "Strikethru");
+                UseVertical = sec.AddCell(VA.ShapeSheet.SRCConstants.CharUseVertical, "UseVertical");
             }
 
             public CharacterCells GetCells(VA.ShapeSheet.CellData<double>[] row)

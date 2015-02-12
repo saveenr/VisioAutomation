@@ -328,7 +328,7 @@ namespace VisioPowerShell.Commands
             var surface = this.client.ShapeSheet.GetShapeSheetSurface();
 
             this.WriteVerbose("Number of Shapes : {0}", target_shapes.Count);
-            this.WriteVerbose("Number of Cells: {0}", query.Columns.Count);
+            this.WriteVerbose("Number of Cells: {0}", query.CellColumns.Count);
 
             this.WriteVerbose("Start Query");
 
@@ -343,7 +343,7 @@ namespace VisioPowerShell.Commands
             var dic = GetShapeCellDictionary();
             if (b)
             {
-                q.Columns.Add(dic[name], name);
+                q.AddCell(dic[name], name);
             }
         }
 

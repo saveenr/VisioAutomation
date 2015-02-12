@@ -222,7 +222,7 @@ namespace VisioPowerShell.Commands
 
             var target_shapeids = new[] { surface.Target.Page.ID };
 
-            this.WriteVerbose("Number of Cells: {0}", query.Columns.Count);
+            this.WriteVerbose("Number of Cells: {0}", query.CellColumns.Count);
 
             this.WriteVerbose("Start Query");
 
@@ -241,9 +241,9 @@ namespace VisioPowerShell.Commands
 
             foreach (string resolved_cellname in dic.ResolveNames(Cells))
             {
-                if (!query.Columns.Contains(resolved_cellname))
+                if (!query.CellColumns.Contains(resolved_cellname))
                 {
-                    query.Columns.Add(dic[resolved_cellname], resolved_cellname);
+                    query.AddCell(dic[resolved_cellname], resolved_cellname);
                 }
             }
         }
@@ -253,7 +253,7 @@ namespace VisioPowerShell.Commands
             var dic = Get_VisioPageCell.GetPageCellDictionary();
             if (switchpar)
             {
-                query.Columns.Add(dic[cellname], cellname);
+                query.AddCell(dic[cellname], cellname);
             }
         }
 

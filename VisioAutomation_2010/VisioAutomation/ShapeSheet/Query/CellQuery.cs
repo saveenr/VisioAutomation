@@ -6,16 +6,16 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public partial class CellQuery
     {
-        public ColumnList Columns { get; private set; }
-        public SectionQueryList Sections { get; private set; }
+        public CellColumnList CellColumns { get; private set; }
+        public SectionColumnList SectionColumns { get; private set; }
 
         private List<List<SectionQueryInfo>> PerShapeSectionInfo; 
         private bool IsFrozen;
 
         public CellQuery()
         {
-            this.Columns = new ColumnList(0);
-            this.Sections = new SectionQueryList(0);
+            this.CellColumns = new CellColumnList(0);
+            this.SectionColumns = new SectionColumnList(0);
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>(0);
         }
 
@@ -30,6 +30,12 @@ namespace VisioAutomation.ShapeSheet.Query
         private void Freeze()
         {
             this.IsFrozen = true;            
+        }
+
+        public Column AddCell(SRC src, string name)
+        {
+            var col = this.AddCell(src, name);
+            return col;
         }
 
         public QueryResult<string> GetFormulas(IVisio.Shape shape)
@@ -70,7 +76,7 @@ namespace VisioAutomation.ShapeSheet.Query
             var unitcodes = new List<IVisio.VisUnitCodes>(numcells);
             for (int i = 0; i < numshapes; i++)
             {
-                foreach (var col in this.Columns)
+                foreach (var col in this.CellColumns)
                 {
                     unitcodes.Add(col.UnitCode);                    
                 }
@@ -82,7 +88,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (var rowindex in sec.RowIndexes)
                         {
-                            foreach (var col in sec.SectionQuery.Columns)
+                            foreach (var col in sec.SectionQuery.CellColumns)
                             {
                                 unitcodes.Add(col.UnitCode);
                             }
@@ -198,8 +204,8 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             // First Copy the Cell Values over
             int cellcount = 0;
-            var cellarray = new T[this.Columns.Count];
-            for (cellcount = 0; cellcount < this.Columns.Count; cellcount++)
+            var cellarray = new T[this.CellColumns.Count];
+            for (cellcount = 0; cellcount < this.CellColumns.Count; cellcount++)
             {
                 cellarray[cellcount] = array[start+cellcount];
             }
@@ -220,7 +226,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
                     foreach (int row_index in section.RowIndexes)
                     {
-                        var row_values = new T[section.SectionQuery.Columns.Count];
+                        var row_values = new T[section.SectionQuery.CellColumns.Count];
                         int num_cols = row_values.Length;
                         for (int c = 0; c < num_cols; c++)
                         {
@@ -246,10 +252,10 @@ namespace VisioAutomation.ShapeSheet.Query
 
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
 
-            if (this.Sections.Count>0)
+            if (this.SectionColumns.Count>0)
             {
                 var section_infos = new List<SectionQueryInfo>();
-                foreach (var sec in this.Sections)
+                foreach (var sec in this.SectionColumns)
                 {
                     // Figure out which rows to query
                     int num_rows = surface.Target.Shape.RowCount[(short)sec.SectionIndex];
@@ -263,7 +269,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var stream_builder = new StreamBuilder(3, total);
             
-            foreach (var col in this.Columns)
+            foreach (var col in this.CellColumns)
             {
                 var src = col.SRC;
                 stream_builder.Add(src.Section,src.Row,src.Cell);
@@ -277,7 +283,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 {
                     foreach (int rowindex in section.RowIndexes)
                     {
-                        foreach (var col in section.SectionQuery.Columns)
+                        foreach (var col in section.SectionQuery.CellColumns)
                         {
                             stream_builder.Add((short)section.SectionQuery.SectionIndex, (short)rowindex, col.SRC.Cell);
                         }
@@ -306,7 +312,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 // For each shape add the cells to query
                 var shapeid = shapeids[i];
-                foreach (var col in this.Columns)
+                foreach (var col in this.CellColumns)
                 {
                     var src = col.SRC;
                     stream_builder.Add((short)shapeid, src.Section, src.Row, src.Cell);
@@ -320,7 +326,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     {
                         foreach (int rowindex in section.RowIndexes)
                         {
-                            foreach (var col in section.SectionQuery.Columns)
+                            foreach (var col in section.SectionQuery.CellColumns)
                             {
                                 stream_builder.Add(
                                     (short)shapeid,
@@ -347,7 +353,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
 
-            if (this.Sections.Count < 1)
+            if (this.SectionColumns.Count < 1)
             {
                 return;
             }
@@ -368,8 +374,8 @@ namespace VisioAutomation.ShapeSheet.Query
                 var shapeid = (short)shapeids[n];
                 var shape = shapes[n];
 
-                var section_infos = new List<SectionQueryInfo>(this.Sections.Count);
-                foreach (var sec in this.Sections)
+                var section_infos = new List<SectionQueryInfo>(this.SectionColumns.Count);
+                foreach (var sec in this.SectionColumns)
                 {
                     int num_rows = GetNumRowsForSection(shape, sec);
                     var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
@@ -401,7 +407,7 @@ namespace VisioAutomation.ShapeSheet.Query
         private int GetTotalCellCount(int numshapes)
         {
             // Count the cells not in sections
-            int total_cells_not_in_sections = this.Columns.Count * numshapes;
+            int total_cells_not_in_sections = this.CellColumns.Count * numshapes;
 
             // Count the Cells in the Sections
             int total_cells_from_sections = 0;
@@ -409,7 +415,7 @@ namespace VisioAutomation.ShapeSheet.Query
             {
                 foreach (var section_data in data_for_shape)
                 {
-                    int cells_in_section = section_data.RowCount * section_data.SectionQuery.Columns.Count;
+                    int cells_in_section = section_data.RowCount * section_data.SectionQuery.CellColumns.Count;
                     total_cells_from_sections += cells_in_section;
                 }
             }

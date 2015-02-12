@@ -195,18 +195,18 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public CustomPropertyCellQuery() 
         {
-            var sec = this.Sections.Add(IVisio.VisSectionIndices.visSectionProp);
+            var sec = this.SectionColumns.Add(IVisio.VisSectionIndices.visSectionProp);
 
-            SortKey = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
-            Ask = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
-            Calendar = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Calendar");
-            Format = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Format, "Format");
-            Invis = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Invis");
-            Label = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
-            LangID = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
-            Prompt = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
-            Type = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
-            Value = sec.Columns.Add(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
+            SortKey = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_SortKey, "SortKey");
+            Ask = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Ask, "Ask");
+            Calendar = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Calendar");
+            Format = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Format, "Format");
+            Invis = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Invis");
+            Label = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Label, "Label");
+            LangID = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_LangID, "LangID");
+            Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prompt");
+            Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Type, "Type");
+            Value = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
         }
 
         public CustomPropertyCells GetCells(VA.ShapeSheet.CellData<double>[] row)
