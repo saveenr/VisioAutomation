@@ -79,14 +79,14 @@ namespace VisioAutomation.Shapes.Controls
             public ControlCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ControlCells();
-                cells.CanGlue = row[CanGlue.Ordinal].ToInt();
-                cells.Tip = row[Tip.Ordinal].ToInt();
-                cells.X = row[X.Ordinal];
-                cells.Y = row[Y.Ordinal];
-                cells.YBehavior = row[YBehavior.Ordinal].ToInt();
-                cells.XBehavior = row[XBehavior.Ordinal].ToInt();
-                cells.XDynamics = row[XDynamics.Ordinal].ToInt();
-                cells.YDynamics = row[YDynamics.Ordinal].ToInt();
+                cells.CanGlue = row[CanGlue].ToInt();
+                cells.Tip = row[Tip].ToInt();
+                cells.X = row[X];
+                cells.Y = row[Y];
+                cells.YBehavior = row[YBehavior].ToInt();
+                cells.XBehavior = row[XBehavior].ToInt();
+                cells.XDynamics = row[XDynamics].ToInt();
+                cells.YDynamics = row[YDynamics].ToInt();
                 return cells;
             }
         }

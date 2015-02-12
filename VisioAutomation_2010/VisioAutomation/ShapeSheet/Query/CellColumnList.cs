@@ -47,11 +47,6 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return this.items[index]; }
         }
 
-        public CellColumn this[CellColumn index]
-        {
-            get { return this.items[index.Ordinal]; }
-        }
-
         public CellColumn this[string name]
         {
             get { return this.dic_columns[name]; }

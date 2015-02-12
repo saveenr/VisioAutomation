@@ -9,11 +9,6 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         private IList<CellQuery.SectionColumn> items { get; set; }
         private readonly Dictionary<IVisio.VisSectionIndices,CellQuery.SectionColumn> hs_section; 
- 
-        internal SectionColumnList() :
-            this(0)
-        {
-        }
 
         internal SectionColumnList(int capacity)
         {

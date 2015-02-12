@@ -147,31 +147,31 @@ namespace VisioAutomation.Shapes
             public FormatCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new FormatCells();
-                cells.FillBkgnd = row[ this.FillBkgnd.Ordinal].ToInt();
-                cells.FillBkgndTrans = row[ this.FillBkgndTrans.Ordinal];
-                cells.FillForegnd = row[ this.FillForegnd.Ordinal].ToInt();
-                cells.FillForegndTrans = row[ this.FillForegndTrans.Ordinal];
-                cells.FillPattern = row[ this.FillPattern.Ordinal].ToInt();
-                cells.ShapeShdwObliqueAngle = row[ this.ShapeShdwObliqueAngle.Ordinal];
-                cells.ShapeShdwOffsetX = row[ this.ShapeShdwOffsetX.Ordinal];
-                cells.ShapeShdwOffsetY = row[ this.ShapeShdwOffsetY.Ordinal];
-                cells.ShapeShdwScaleFactor = row[ this.ShapeShdwScaleFactor.Ordinal];
-                cells.ShapeShdwType = row[ this.ShapeShdwType.Ordinal].ToInt();
-                cells.ShdwBkgnd = row[ this.ShdwBkgnd.Ordinal].ToInt();
-                cells.ShdwBkgndTrans = row[ this.ShdwBkgndTrans.Ordinal];
-                cells.ShdwForegnd = row[ this.ShdwForegnd.Ordinal].ToInt();
-                cells.ShdwForegndTrans = row[ this.ShdwForegndTrans.Ordinal];
-                cells.ShdwPattern = row[ this.ShdwPattern.Ordinal].ToInt();
-                cells.BeginArrow = row[ this.BeginArrow.Ordinal].ToInt();
-                cells.BeginArrowSize = row[ this.BeginArrowSize.Ordinal];
-                cells.EndArrow = row[ this.EndArrow.Ordinal].ToInt();
-                cells.EndArrowSize = row[ this.EndArrowSize.Ordinal];
-                cells.LineCap = row[ this.LineCap.Ordinal].ToInt();
-                cells.LineColor = row[ this.LineColor.Ordinal].ToInt();
-                cells.LineColorTrans = row[ this.LineColorTrans.Ordinal];
-                cells.LinePattern = row[ this.LinePattern.Ordinal].ToInt();
-                cells.LineWeight = row[ this.LineWeight.Ordinal];
-                cells.Rounding = row[ this.Rounding.Ordinal];
+                cells.FillBkgnd = row[ this.FillBkgnd].ToInt();
+                cells.FillBkgndTrans = row[ this.FillBkgndTrans];
+                cells.FillForegnd = row[ this.FillForegnd].ToInt();
+                cells.FillForegndTrans = row[ this.FillForegndTrans];
+                cells.FillPattern = row[ this.FillPattern].ToInt();
+                cells.ShapeShdwObliqueAngle = row[ this.ShapeShdwObliqueAngle];
+                cells.ShapeShdwOffsetX = row[ this.ShapeShdwOffsetX];
+                cells.ShapeShdwOffsetY = row[ this.ShapeShdwOffsetY];
+                cells.ShapeShdwScaleFactor = row[ this.ShapeShdwScaleFactor];
+                cells.ShapeShdwType = row[ this.ShapeShdwType].ToInt();
+                cells.ShdwBkgnd = row[ this.ShdwBkgnd].ToInt();
+                cells.ShdwBkgndTrans = row[ this.ShdwBkgndTrans];
+                cells.ShdwForegnd = row[ this.ShdwForegnd].ToInt();
+                cells.ShdwForegndTrans = row[ this.ShdwForegndTrans];
+                cells.ShdwPattern = row[ this.ShdwPattern].ToInt();
+                cells.BeginArrow = row[ this.BeginArrow].ToInt();
+                cells.BeginArrowSize = row[ this.BeginArrowSize];
+                cells.EndArrow = row[ this.EndArrow].ToInt();
+                cells.EndArrowSize = row[ this.EndArrowSize];
+                cells.LineCap = row[ this.LineCap].ToInt();
+                cells.LineColor = row[ this.LineColor].ToInt();
+                cells.LineColorTrans = row[ this.LineColorTrans];
+                cells.LinePattern = row[ this.LinePattern].ToInt();
+                cells.LineWeight = row[ this.LineWeight];
+                cells.Rounding = row[ this.Rounding];
                 return cells;
             }
 

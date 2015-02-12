@@ -213,16 +213,16 @@ namespace VisioAutomation.Shapes.CustomProperties
         public CustomPropertyCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new CustomPropertyCells();
-            cells.Value = row[Value.Ordinal];
-            cells.Calendar = row[Calendar.Ordinal].ToInt();
-            cells.Format = row[Format.Ordinal];
-            cells.Invisible = row[Invis.Ordinal].ToInt();
-            cells.Label = row[Label.Ordinal];
-            cells.LangId = row[LangID.Ordinal].ToInt();
-            cells.Prompt = row[Prompt.Ordinal];
-            cells.SortKey = row[SortKey.Ordinal].ToInt();
-            cells.Type = row[Type.Ordinal].ToInt();
-            cells.Ask = row[Ask.Ordinal].ToBool();
+            cells.Value = row[Value];
+            cells.Calendar = row[Calendar].ToInt();
+            cells.Format = row[Format];
+            cells.Invisible = row[Invis].ToInt();
+            cells.Label = row[Label];
+            cells.LangId = row[LangID].ToInt();
+            cells.Prompt = row[Prompt];
+            cells.SortKey = row[SortKey].ToInt();
+            cells.Type = row[Type].ToInt();
+            cells.Ask = row[Ask].ToBool();
             return cells;
         }
     }

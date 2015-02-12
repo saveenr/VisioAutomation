@@ -73,13 +73,13 @@ namespace VisioAutomation.Shapes
             {
                 var cells = new XFormCells
                 {
-                    PinX = row[this.PinX.Ordinal],
-                    PinY = row[this.PinY.Ordinal],
-                    LocPinX = row[this.LocPinX.Ordinal],
-                    LocPinY = row[this.LocPinY.Ordinal],
-                    Width = row[this.Width.Ordinal],
-                    Height = row[this.Height.Ordinal],
-                    Angle = row[this.Angle.Ordinal]
+                    PinX = row[this.PinX],
+                    PinY = row[this.PinY],
+                    LocPinX = row[this.LocPinX],
+                    LocPinY = row[this.LocPinY],
+                    Width = row[this.Width],
+                    Height = row[this.Height],
+                    Angle = row[this.Angle]
                 };
                 return cells;
             }

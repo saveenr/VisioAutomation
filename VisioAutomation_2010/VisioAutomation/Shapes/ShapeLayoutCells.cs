@@ -119,24 +119,24 @@ namespace VisioAutomation.Shapes.Layout
             public ShapeLayoutCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ShapeLayoutCells();
-                cells.ConFixedCode = row[ConFixedCode.Ordinal].ToInt();
-                cells.ConLineJumpCode = row[ConLineJumpCode.Ordinal].ToInt();
-                cells.ConLineJumpDirX = row[ConLineJumpDirX.Ordinal].ToInt();
-                cells.ConLineJumpDirY = row[ConLineJumpDirY.Ordinal].ToInt();
-                cells.ConLineJumpStyle = row[ConLineJumpStyle.Ordinal].ToInt();
-                cells.ConLineRouteExt = row[ConLineRouteExt.Ordinal].ToInt();
-                cells.ShapeFixedCode = row[ShapeFixedCode.Ordinal].ToInt();
-                cells.ShapePermeablePlace = row[ShapePermeablePlace.Ordinal].ToInt();
-                cells.ShapePermeableX = row[ShapePermeableX.Ordinal].ToInt();
-                cells.ShapePermeableY = row[ShapePermeableY.Ordinal].ToInt();
-                cells.ShapePlaceFlip = row[ShapePlaceFlip.Ordinal].ToInt();
-                cells.ShapePlaceStyle = row[ShapePlaceStyle.Ordinal].ToInt();
-                cells.ShapePlowCode = row[ShapePlowCode.Ordinal].ToInt();
-                cells.ShapeRouteStyle = row[ShapeRouteStyle.Ordinal].ToInt();
-                cells.ShapeSplit = row[ShapeSplit.Ordinal].ToInt();
-                cells.ShapeSplittable = row[ShapeSplittable.Ordinal].ToInt();
-                cells.DisplayLevel = row[DisplayLevel.Ordinal].ToInt();
-                cells.Relationships = row[Relationships.Ordinal].ToInt();
+                cells.ConFixedCode = row[ConFixedCode].ToInt();
+                cells.ConLineJumpCode = row[ConLineJumpCode].ToInt();
+                cells.ConLineJumpDirX = row[ConLineJumpDirX].ToInt();
+                cells.ConLineJumpDirY = row[ConLineJumpDirY].ToInt();
+                cells.ConLineJumpStyle = row[ConLineJumpStyle].ToInt();
+                cells.ConLineRouteExt = row[ConLineRouteExt].ToInt();
+                cells.ShapeFixedCode = row[ShapeFixedCode].ToInt();
+                cells.ShapePermeablePlace = row[ShapePermeablePlace].ToInt();
+                cells.ShapePermeableX = row[ShapePermeableX].ToInt();
+                cells.ShapePermeableY = row[ShapePermeableY].ToInt();
+                cells.ShapePlaceFlip = row[ShapePlaceFlip].ToInt();
+                cells.ShapePlaceStyle = row[ShapePlaceStyle].ToInt();
+                cells.ShapePlowCode = row[ShapePlowCode].ToInt();
+                cells.ShapeRouteStyle = row[ShapeRouteStyle].ToInt();
+                cells.ShapeSplit = row[ShapeSplit].ToInt();
+                cells.ShapeSplittable = row[ShapeSplittable].ToInt();
+                cells.DisplayLevel = row[DisplayLevel].ToInt();
+                cells.Relationships = row[Relationships].ToInt();
                 return cells;
             }
         }

@@ -103,19 +103,19 @@ namespace VisioAutomation.Text
             public ParagraphCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ParagraphCells();
-                cells.IndentFirst = row[IndentFirst.Ordinal];
-                cells.IndentLeft = row[IndentLeft.Ordinal];
-                cells.IndentRight = row[IndentRight.Ordinal];
-                cells.SpacingAfter = row[SpaceAfter.Ordinal];
-                cells.SpacingBefore = row[SpaceBefore.Ordinal];
-                cells.SpacingLine = row[SpaceLine.Ordinal];
-                cells.HorizontalAlign = row[HorzAlign.Ordinal].ToInt();
-                cells.Bullet = row[Bullet.Ordinal].ToInt();
-                cells.BulletFont = row[BulletFont.Ordinal].ToInt();
-                cells.BulletFontSize = row[BulletFontSize.Ordinal].ToInt();
-                cells.LocBulletFont = row[LocalizeBulletFont.Ordinal].ToInt();
-                cells.TextPosAfterBullet = row[TextPosAfterBullet.Ordinal];
-                cells.Flags = row[Flags.Ordinal].ToInt();
+                cells.IndentFirst = row[IndentFirst];
+                cells.IndentLeft = row[IndentLeft];
+                cells.IndentRight = row[IndentRight];
+                cells.SpacingAfter = row[SpaceAfter];
+                cells.SpacingBefore = row[SpaceBefore];
+                cells.SpacingLine = row[SpaceLine];
+                cells.HorizontalAlign = row[HorzAlign].ToInt();
+                cells.Bullet = row[Bullet].ToInt();
+                cells.BulletFont = row[BulletFont].ToInt();
+                cells.BulletFontSize = row[BulletFontSize].ToInt();
+                cells.LocBulletFont = row[LocalizeBulletFont].ToInt();
+                cells.TextPosAfterBullet = row[TextPosAfterBullet];
+                cells.Flags = row[Flags].ToInt();
                 cells.BulletString = ""; // TODO: Figure out some way of getting this
 
                 return cells;

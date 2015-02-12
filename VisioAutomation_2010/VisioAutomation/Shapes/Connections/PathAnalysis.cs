@@ -67,8 +67,8 @@ namespace VisioAutomation.Shapes.Connections
             int connector_index = 0;
             foreach (var e in edges)
             {
-                int beginarrow = arrow_table[connector_index][col_beginarrow.Ordinal];
-                int endarrow = arrow_table[connector_index][col_endarrow.Ordinal];
+                int beginarrow = arrow_table[connector_index][col_beginarrow];
+                int endarrow = arrow_table[connector_index][col_endarrow];
 
                 if ((beginarrow < 1) && (endarrow < 1))
                 {

@@ -110,22 +110,22 @@ namespace VisioAutomation.Text
             public TextCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new TextCells();
-                cells.BottomMargin = row[BottomMargin.Ordinal];
-                cells.LeftMargin = row[LeftMargin.Ordinal];
-                cells.RightMargin = row[RightMargin.Ordinal];
-                cells.TopMargin = row[TopMargin.Ordinal];
-                cells.DefaultTabStop = row[DefaultTabStop.Ordinal];
-                cells.TextBkgnd = row[TextBkgnd.Ordinal].ToInt();
-                cells.TextBkgndTrans = row[TextBkgndTrans.Ordinal];
-                cells.TextDirection = row[TextDirection.Ordinal].ToInt();
-                cells.VerticalAlign = row[VerticalAlign.Ordinal].ToInt();
-                cells.TxtPinX = row[TxtPinX.Ordinal];
-                cells.TxtPinY = row[TxtPinY.Ordinal];
-                cells.TxtLocPinX = row[TxtLocPinX.Ordinal];
-                cells.TxtLocPinY = row[TxtLocPinY.Ordinal];
-                cells.TxtWidth = row[TxtWidth.Ordinal];
-                cells.TxtHeight = row[TxtHeight.Ordinal];
-                cells.TxtAngle = row[TxtAngle.Ordinal];
+                cells.BottomMargin = row[BottomMargin];
+                cells.LeftMargin = row[LeftMargin];
+                cells.RightMargin = row[RightMargin];
+                cells.TopMargin = row[TopMargin];
+                cells.DefaultTabStop = row[DefaultTabStop];
+                cells.TextBkgnd = row[TextBkgnd].ToInt();
+                cells.TextBkgndTrans = row[TextBkgndTrans];
+                cells.TextDirection = row[TextDirection].ToInt();
+                cells.VerticalAlign = row[VerticalAlign].ToInt();
+                cells.TxtPinX = row[TxtPinX];
+                cells.TxtPinY = row[TxtPinY];
+                cells.TxtLocPinX = row[TxtLocPinX];
+                cells.TxtLocPinY = row[TxtLocPinY];
+                cells.TxtWidth = row[TxtWidth];
+                cells.TxtHeight = row[TxtHeight];
+                cells.TxtAngle = row[TxtAngle];
                 return cells;
             }
         }

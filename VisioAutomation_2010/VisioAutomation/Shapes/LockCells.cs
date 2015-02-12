@@ -127,26 +127,26 @@ namespace VisioAutomation.Shapes
             public LockCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new LockCells();
-                cells.LockAspect = row[this.LockAspect.Ordinal].ToBool();
-                cells.LockBegin = row[this.LockBegin.Ordinal].ToBool();
-                cells.LockCalcWH = row[this.LockCalcWH.Ordinal].ToBool();
-                cells.LockCrop = row[this.LockCrop.Ordinal].ToBool();
-                cells.LockCustProp = row[this.LockCustProp.Ordinal].ToBool();
-                cells.LockDelete = row[this.LockDelete.Ordinal].ToBool();
-                cells.LockEnd = row[this.LockEnd.Ordinal].ToBool();
-                cells.LockFormat = row[this.LockFormat.Ordinal].ToBool();
-                cells.LockFromGroupFormat = row[this.LockFromGroupFormat.Ordinal].ToBool();
-                cells.LockGroup = row[this.LockGroup.Ordinal].ToBool();
-                cells.LockHeight = row[this.LockHeight.Ordinal].ToBool();
-                cells.LockMoveX = row[this.LockMoveX.Ordinal].ToBool();
-                cells.LockMoveY = row[this.LockMoveY.Ordinal].ToBool();
-                cells.LockRotate = row[this.LockRotate.Ordinal].ToBool();
-                cells.LockSelect = row[this.LockSelect.Ordinal].ToBool();
-                cells.LockTextEdit = row[this.LockTextEdit.Ordinal].ToBool();
-                cells.LockThemeColors = row[this.LockThemeColors.Ordinal].ToBool();
-                cells.LockThemeEffects = row[this.LockThemeEffects.Ordinal].ToBool();
-                cells.LockVtxEdit = row[this.LockVtxEdit.Ordinal].ToBool();
-                cells.LockWidth = row[this.LockWidth.Ordinal].ToBool();
+                cells.LockAspect = row[this.LockAspect].ToBool();
+                cells.LockBegin = row[this.LockBegin].ToBool();
+                cells.LockCalcWH = row[this.LockCalcWH].ToBool();
+                cells.LockCrop = row[this.LockCrop].ToBool();
+                cells.LockCustProp = row[this.LockCustProp].ToBool();
+                cells.LockDelete = row[this.LockDelete].ToBool();
+                cells.LockEnd = row[this.LockEnd].ToBool();
+                cells.LockFormat = row[this.LockFormat].ToBool();
+                cells.LockFromGroupFormat = row[this.LockFromGroupFormat].ToBool();
+                cells.LockGroup = row[this.LockGroup].ToBool();
+                cells.LockHeight = row[this.LockHeight].ToBool();
+                cells.LockMoveX = row[this.LockMoveX].ToBool();
+                cells.LockMoveY = row[this.LockMoveY].ToBool();
+                cells.LockRotate = row[this.LockRotate].ToBool();
+                cells.LockSelect = row[this.LockSelect].ToBool();
+                cells.LockTextEdit = row[this.LockTextEdit].ToBool();
+                cells.LockThemeColors = row[this.LockThemeColors].ToBool();
+                cells.LockThemeEffects = row[this.LockThemeEffects].ToBool();
+                cells.LockVtxEdit = row[this.LockVtxEdit].ToBool();
+                cells.LockWidth = row[this.LockWidth].ToBool();
                 return cells;
             }
         }

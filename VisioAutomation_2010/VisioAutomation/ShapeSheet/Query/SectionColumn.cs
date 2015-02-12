@@ -29,6 +29,11 @@ namespace VisioAutomation.ShapeSheet.Query
                var col = this.CellColumns.Add(cell, name);
                return col;
            }
+
+           static public implicit operator int(CellQuery.SectionColumn col)
+           {
+               return col.Ordinal;
+           }
        }
     }
 }

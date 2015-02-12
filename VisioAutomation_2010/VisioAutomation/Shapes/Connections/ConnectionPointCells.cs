@@ -67,11 +67,11 @@ namespace VisioAutomation.Shapes.Connections
             public ConnectionPointCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ConnectionPointCells();
-                cells.X = row[this.X.Ordinal];
-                cells.Y = row[this.Y.Ordinal];
-                cells.DirX = row[this.DirX.Ordinal].ToInt();
-                cells.DirY = row[this.DirY.Ordinal].ToInt();
-                cells.Type = row[this.Type.Ordinal].ToInt();
+                cells.X = row[this.X];
+                cells.Y = row[this.Y];
+                cells.DirX = row[this.DirX].ToInt();
+                cells.DirY = row[this.DirY].ToInt();
+                cells.Type = row[this.Type].ToInt();
 
                 return cells;
             }

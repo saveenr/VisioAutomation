@@ -100,8 +100,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             public UserDefinedCell GetCells(IList<VA.ShapeSheet.CellData<string>> row)
             {
                 var cells = new UserDefinedCell();
-                cells.Value = row[Value.Ordinal];
-                cells.Prompt = row[Prompt.Ordinal];
+                cells.Value = row[Value];
+                cells.Prompt = row[Prompt];
                 return cells;
             }
         }

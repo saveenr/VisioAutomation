@@ -136,29 +136,29 @@ namespace VisioAutomation.Text
             public CharacterCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new CharacterCells();
-                cells.Color = row[this.Color.Ordinal].ToInt();
-                cells.Transparency = row[this.Trans.Ordinal];
-                cells.Font = row[this.Font.Ordinal].ToInt();
-                cells.Size = row[this.Size.Ordinal];
-                cells.Style = row[this.Style.Ordinal].ToInt();
-                cells.AsianFont = row[this.AsianFont.Ordinal].ToInt();
-                cells.AsianFont = row[this.AsianFont.Ordinal].ToInt();
-                cells.Case = row[this.Case.Ordinal].ToInt();
-                cells.ComplexScriptFont = row[this.ComplexScriptFont.Ordinal].ToInt();
-                cells.ComplexScriptSize = row[this.ComplexScriptSize.Ordinal];
-                cells.DoubleStrikeThrough = row[this.DoubleStrikethrough.Ordinal].ToBool();
-                cells.DoubleUnderline = row[this.DoubleUnderline.Ordinal].ToBool();
-                cells.FontScale = row[this.FontScale.Ordinal];
-                cells.LangID = row[this.LangID.Ordinal].ToInt();
-                cells.Letterspace = row[this.Letterspace.Ordinal];
-                cells.Locale = row[this.Locale.Ordinal].ToInt();
-                cells.LocalizeFont = row[this.LocalizeFont.Ordinal].ToInt();
-                cells.Overline = row[this.Overline.Ordinal].ToBool();
-                cells.Perpendicular = row[this.Perpendicular.Ordinal].ToBool();
-                cells.Pos = row[this.Pos.Ordinal].ToInt();
-                cells.RTLText = row[this.RTLText.Ordinal].ToInt();
-                cells.Strikethru = row[this.Strikethru.Ordinal].ToBool();
-                cells.UseVertical = row[this.UseVertical.Ordinal].ToInt();
+                cells.Color = row[this.Color].ToInt();
+                cells.Transparency = row[this.Trans];
+                cells.Font = row[this.Font].ToInt();
+                cells.Size = row[this.Size];
+                cells.Style = row[this.Style].ToInt();
+                cells.AsianFont = row[this.AsianFont].ToInt();
+                cells.AsianFont = row[this.AsianFont].ToInt();
+                cells.Case = row[this.Case].ToInt();
+                cells.ComplexScriptFont = row[this.ComplexScriptFont].ToInt();
+                cells.ComplexScriptSize = row[this.ComplexScriptSize];
+                cells.DoubleStrikeThrough = row[this.DoubleStrikethrough].ToBool();
+                cells.DoubleUnderline = row[this.DoubleUnderline].ToBool();
+                cells.FontScale = row[this.FontScale];
+                cells.LangID = row[this.LangID].ToInt();
+                cells.Letterspace = row[this.Letterspace];
+                cells.Locale = row[this.Locale].ToInt();
+                cells.LocalizeFont = row[this.LocalizeFont].ToInt();
+                cells.Overline = row[this.Overline].ToBool();
+                cells.Perpendicular = row[this.Perpendicular].ToBool();
+                cells.Pos = row[this.Pos].ToInt();
+                cells.RTLText = row[this.RTLText].ToInt();
+                cells.Strikethru = row[this.Strikethru].ToBool();
+                cells.UseVertical = row[this.UseVertical].ToInt();
 
                 return cells;
             }

@@ -26,10 +26,6 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return this.Items[index]; }
         }
 
-        public SectionResult<T> this[CellQuery.SectionColumn col]
-        {
-            get { return this.Items[col.Ordinal]; }
-        }
 
         internal void Add(SectionResult<T> item)
         {
