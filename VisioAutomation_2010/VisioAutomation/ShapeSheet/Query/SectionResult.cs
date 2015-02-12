@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionResult<T> : IEnumerable<T[]>
     {
-        public CellQuery.SectionColumn column { get; internal set; }
+        public CellQuery.SectionColumn Column { get; internal set; }
         private List<T[]> items;
 
         internal SectionResult(int capacity)

@@ -221,13 +221,13 @@ namespace VisioAutomation.ShapeSheet.Query
             // Now copy the Section values over
             if (this.PerShapeSectionInfo.Count > 0)
             {
-                result.Sections = new SectionResultList<T>();
+                result.Sections = new List<SectionResult<T>>();
                 List<SectionColumnInfo> sections = this.PerShapeSectionInfo[shape_index];
 
                 foreach (var section in sections)
                 {
                     var section_result = new SectionResult<T>(section.RowCount);
-                    section_result.column = section.section_column;
+                    section_result.Column = section.section_column;
                     result.Sections.Add(section_result);
 
                     foreach (int row_index in section.RowIndexes)
