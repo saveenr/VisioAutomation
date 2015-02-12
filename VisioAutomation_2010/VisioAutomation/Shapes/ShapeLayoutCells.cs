@@ -116,7 +116,7 @@ namespace VisioAutomation.Shapes.Layout
                 this.Relationships = this.AddCell(VA.ShapeSheet.SRCConstants.Relationships, "Relationships");
             }
 
-            public ShapeLayoutCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public ShapeLayoutCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ShapeLayoutCells();
                 cells.ConFixedCode = row[ConFixedCode.Ordinal].ToInt();

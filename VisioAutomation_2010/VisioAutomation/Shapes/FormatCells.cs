@@ -144,7 +144,7 @@ namespace VisioAutomation.Shapes
                 this.Rounding = this.AddCell(VA.ShapeSheet.SRCConstants.Rounding, "Rounding");
             }
 
-            public FormatCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public FormatCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new FormatCells();
                 cells.FillBkgnd = row[ this.FillBkgnd.Ordinal].ToInt();

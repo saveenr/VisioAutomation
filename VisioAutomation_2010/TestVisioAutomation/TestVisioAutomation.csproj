@@ -208,6 +208,9 @@
     <None Include="Resources\vdx_with_errors_1_vdx.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="datafiles\VSDX_Log_Visio_2013.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="datafiles\XMLErrorLog_Visio_2013_1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

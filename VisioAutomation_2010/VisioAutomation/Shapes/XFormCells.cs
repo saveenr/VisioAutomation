@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes
                 Angle = this.AddCell(VA.ShapeSheet.SRCConstants.Angle, "Angle");
             }
 
-            public XFormCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public XFormCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new XFormCells
                 {

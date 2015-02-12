@@ -133,7 +133,7 @@ namespace VisioAutomation.Text
                 UseVertical = sec.AddCell(VA.ShapeSheet.SRCConstants.CharUseVertical, "UseVertical");
             }
 
-            public CharacterCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public CharacterCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new CharacterCells();
                 cells.Color = row[this.Color.Ordinal].ToInt();

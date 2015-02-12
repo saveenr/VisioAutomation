@@ -210,7 +210,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             Value = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
         }
 
-        public CustomPropertyCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+        public CustomPropertyCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
         {
             var cells = new CustomPropertyCells();
             cells.Value = row[Value.Ordinal];

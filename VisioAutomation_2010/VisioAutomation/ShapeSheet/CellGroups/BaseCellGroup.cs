@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class BaseCellGroup
     {
-        public delegate T RowToObject<T,RT>(CellData<RT>[] data);
+        public delegate T RowToObject<T,RT>(IList<CellData<RT>> data);
 
         public struct SRCFormulaPair
         {

@@ -124,7 +124,7 @@ namespace VisioAutomation.Shapes
                 this.LockWidth = this.AddCell(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth");
             }
 
-            public LockCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public LockCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new LockCells();
                 cells.LockAspect = row[this.LockAspect.Ordinal].ToBool();

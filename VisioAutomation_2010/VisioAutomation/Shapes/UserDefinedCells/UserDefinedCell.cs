@@ -97,7 +97,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Prompt, "Prompt");
             }
 
-            public UserDefinedCell GetCells(VA.ShapeSheet.CellData<string>[] row)
+            public UserDefinedCell GetCells(IList<VA.ShapeSheet.CellData<string>> row)
             {
                 var cells = new UserDefinedCell();
                 cells.Value = row[Value.Ordinal];

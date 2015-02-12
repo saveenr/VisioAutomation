@@ -100,7 +100,7 @@ namespace VisioAutomation.Text
                 TextPosAfterBullet = sec.AddCell(VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "TextPosAfterBullet");
             }
 
-            public ParagraphCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public ParagraphCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ParagraphCells();
                 cells.IndentFirst = row[IndentFirst.Ordinal];

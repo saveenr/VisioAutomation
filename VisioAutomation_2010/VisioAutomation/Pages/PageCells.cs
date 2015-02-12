@@ -305,7 +305,7 @@ namespace VisioAutomation.Pages
             }
 
 
-            public PageCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public PageCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
 
                 var cells = new PageCells();

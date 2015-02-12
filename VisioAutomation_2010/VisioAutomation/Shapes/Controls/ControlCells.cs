@@ -76,7 +76,7 @@ namespace VisioAutomation.Shapes.Controls
                 this.YDynamics = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_YDyn, "YDynamics");
             }
 
-            public ControlCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public ControlCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ControlCells();
                 cells.CanGlue = row[CanGlue.Ordinal].ToInt();

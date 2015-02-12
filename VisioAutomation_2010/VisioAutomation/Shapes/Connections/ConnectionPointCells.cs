@@ -64,7 +64,7 @@ namespace VisioAutomation.Shapes.Connections
                 Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Y, "Y");
             }
 
-            public ConnectionPointCells GetCells(VA.ShapeSheet.CellData<double>[] row)
+            public ConnectionPointCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
             {
                 var cells = new ConnectionPointCells();
                 cells.X = row[this.X.Ordinal];
