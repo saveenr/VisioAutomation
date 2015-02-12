@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
@@ -82,28 +83,28 @@ namespace VisioAutomation.Text
 
         class CharacterFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQuery.Column Font { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Style { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Color { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Size { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Trans { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column AsianFont { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Case { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column ComplexScriptFont { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column ComplexScriptSize { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column DoubleStrikethrough { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column DoubleUnderline { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column LangID { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Locale { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column LocalizeFont { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Overline { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Perpendicular { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Pos { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column RTLText { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column FontScale { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Letterspace { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Strikethru { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column UseVertical { get; set; }
+            public CellColumn Font { get; set; }
+            public CellColumn Style { get; set; }
+            public CellColumn Color { get; set; }
+            public CellColumn Size { get; set; }
+            public CellColumn Trans { get; set; }
+            public CellColumn AsianFont { get; set; }
+            public CellColumn Case { get; set; }
+            public CellColumn ComplexScriptFont { get; set; }
+            public CellColumn ComplexScriptSize { get; set; }
+            public CellColumn DoubleStrikethrough { get; set; }
+            public CellColumn DoubleUnderline { get; set; }
+            public CellColumn LangID { get; set; }
+            public CellColumn Locale { get; set; }
+            public CellColumn LocalizeFont { get; set; }
+            public CellColumn Overline { get; set; }
+            public CellColumn Perpendicular { get; set; }
+            public CellColumn Pos { get; set; }
+            public CellColumn RTLText { get; set; }
+            public CellColumn FontScale { get; set; }
+            public CellColumn Letterspace { get; set; }
+            public CellColumn Strikethru { get; set; }
+            public CellColumn UseVertical { get; set; }
 
             public CharacterFormatCellQuery() 
             {

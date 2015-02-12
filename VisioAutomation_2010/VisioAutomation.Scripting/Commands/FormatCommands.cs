@@ -79,8 +79,8 @@ namespace VisioAutomation.Scripting.Commands
             var height_col = query.AddCell(VA.ShapeSheet.SRCConstants.Height, "Height");
             var queryresults = query.GetResults<double>(shape);
 
-            cached_size_width = queryresults[width_col.Ordinal];
-            cached_size_height = queryresults[height_col.Ordinal];
+            cached_size_width = queryresults[width_col];
+            cached_size_height = queryresults[height_col];
         }
 
         public void PasteSize(IList<IVisio.Shape> target_shapes, bool paste_width, bool paste_height)

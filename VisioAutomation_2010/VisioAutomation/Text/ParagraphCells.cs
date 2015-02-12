@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
@@ -65,20 +66,20 @@ namespace VisioAutomation.Text
 
         class ParagraphFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQuery.Column Bullet { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column BulletFont { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column BulletFontSize { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column BulletString { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Flags { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column HorzAlign { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column IndentFirst { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column IndentLeft { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column IndentRight { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column LocalizeBulletFont { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column SpaceAfter { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column SpaceBefore { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column SpaceLine { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column TextPosAfterBullet { get; set; }
+            public CellColumn Bullet { get; set; }
+            public CellColumn BulletFont { get; set; }
+            public CellColumn BulletFontSize { get; set; }
+            public CellColumn BulletString { get; set; }
+            public CellColumn Flags { get; set; }
+            public CellColumn HorzAlign { get; set; }
+            public CellColumn IndentFirst { get; set; }
+            public CellColumn IndentLeft { get; set; }
+            public CellColumn IndentRight { get; set; }
+            public CellColumn LocalizeBulletFont { get; set; }
+            public CellColumn SpaceAfter { get; set; }
+            public CellColumn SpaceBefore { get; set; }
+            public CellColumn SpaceLine { get; set; }
+            public CellColumn TextPosAfterBullet { get; set; }
 
             public ParagraphFormatCellQuery() 
             {

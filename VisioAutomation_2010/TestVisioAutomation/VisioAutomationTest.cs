@@ -88,8 +88,8 @@ namespace TestVisioAutomation
             var col_h = query.AddCell(VA.ShapeSheet.SRCConstants.Height, "Height");
 
             var table = query.GetResults<double>(shape);
-            double w = table[col_w.Ordinal];
-            double h = table[col_h.Ordinal];
+            double w = table[col_w];
+            double h = table[col_h];
             var size = new VA.Drawing.Size(w, h);
             return size;
         }
@@ -158,8 +158,8 @@ namespace TestVisioAutomation
             var col_height = query.AddCell(VA.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
             var col_width = query.AddCell(VA.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
             var results = query.GetResults<double>(page.PageSheet);
-            double height = results[col_height.Ordinal];
-            double width = results[col_width.Ordinal];
+            double height = results[col_height];
+            double width = results[col_width];
             var s = new VA.Drawing.Size(width, height);
             return s;
         }

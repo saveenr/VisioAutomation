@@ -2,6 +2,7 @@ using VA=VisioAutomation;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Connections
 {
@@ -47,11 +48,11 @@ namespace VisioAutomation.Shapes.Connections
 
         class ConnectionPointCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQuery.Column DirX { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column DirY { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Type { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column X { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Y { get; set; }
+            public CellColumn DirX { get; set; }
+            public CellColumn DirY { get; set; }
+            public CellColumn Type { get; set; }
+            public CellColumn X { get; set; }
+            public CellColumn Y { get; set; }
             
             public ConnectionPointCellQuery()
             {

@@ -84,6 +84,7 @@
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
+    <Compile Include="Shapesheet\Query\SectionResultList.cs" />
     <Compile Include="Shapesheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
@@ -176,14 +177,14 @@
     <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
     <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_QueryResultList.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_QueryResult.cs" />
+    <Compile Include="Shapesheet\Query\QueryResultList.cs" />
+    <Compile Include="Shapesheet\Query\QueryResult.cs" />
     <Compile Include="Shapesheet\Query\CellQuery_SectionQueryInfo.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_SectionQuery.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_SectionResult.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_ColumnList.cs" />
+    <Compile Include="Shapesheet\Query\SectionColumn.cs" />
+    <Compile Include="Shapesheet\Query\SectionResult.cs" />
+    <Compile Include="Shapesheet\Query\CellColumnList.cs" />
     <Compile Include="Shapesheet\Query\StreamBuilder.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_SectionQueryList.cs" />
+    <Compile Include="Shapesheet\Query\SectionColumnList.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\Markup\CharacterCells.cs" />
     <Compile Include="Text\Markup\ParagraphCells.cs" />
@@ -232,7 +233,7 @@
     <Compile Include="Shapes\XFormCells.cs" />
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_Column.cs" />
+    <Compile Include="Shapesheet\Query\CellColumn.cs" />
     <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\ShapeList.cs" />
     <Compile Include="DOM\Node.cs" />

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
@@ -164,73 +165,73 @@ namespace VisioAutomation.Pages
 
         class PageCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public Column PageLeftMargin { get; set; }
-            public Column CenterX { get; set; }
-            public Column CenterY { get; set; }
-            public Column OnPage { get; set; }
-            public Column PageBottomMargin { get; set; }
-            public Column PageRightMargin { get; set; }
-            public Column PagesX { get; set; }
-            public Column PagesY { get; set; }
-            public Column PageTopMargin { get; set; }
-            public Column PaperKind { get; set; }
-            public Column PrintGrid { get; set; }
-            public Column PrintPageOrientation { get; set; }
-            public Column ScaleX { get; set; }
-            public Column ScaleY { get; set; }
-            public Column PaperSource { get; set; }
-            public Column DrawingScale { get; set; }
-            public Column DrawingScaleType { get; set; }
-            public Column DrawingSizeType { get; set; }
-            public Column InhibitSnap { get; set; }
-            public Column PageHeight { get; set; }
-            public Column PageScale { get; set; }
-            public Column PageWidth { get; set; }
-            public Column ShdwObliqueAngle { get; set; }
-            public Column ShdwOffsetX { get; set; }
-            public Column ShdwOffsetY { get; set; }
-            public Column ShdwScaleFactor { get; set; }
-            public Column ShdwType { get; set; }
-            public Column UIVisibility { get; set; }
-            public Column XGridDensity { get; set; }
-            public Column XGridOrigin { get; set; }
-            public Column XGridSpacing { get; set; }
-            public Column XRulerDensity { get; set; }
-            public Column XRulerOrigin { get; set; }
-            public Column YGridDensity { get; set; }
-            public Column YGridOrigin { get; set; }
-            public Column YGridSpacing { get; set; }
-            public Column YRulerDensity { get; set; }
-            public Column YRulerOrigin { get; set; }
-            public Column AvenueSizeX { get; set; }
-            public Column AvenueSizeY { get; set; }
-            public Column BlockSizeX { get; set; }
-            public Column BlockSizeY { get; set; }
-            public Column CtrlAsInput { get; set; }
-            public Column DynamicsOff { get; set; }
-            public Column EnableGrid { get; set; }
-            public Column LineAdjustFrom { get; set; }
-            public Column LineAdjustTo { get; set; }
-            public Column LineJumpCode { get; set; }
-            public Column LineJumpFactorX { get; set; }
-            public Column LineJumpFactorY { get; set; }
-            public Column LineJumpStyle { get; set; }
-            public Column LineRouteExt { get; set; }
-            public Column LineToLineX { get; set; }
-            public Column LineToLineY { get; set; }
-            public Column LineToNodeX { get; set; }
-            public Column LineToNodeY { get; set; }
-            public Column PageLineJumpDirX { get; set; }
-            public Column PageLineJumpDirY { get; set; }
-            public Column PageShapeSplit { get; set; }
-            public Column PlaceDepth { get; set; }
-            public Column PlaceFlip { get; set; }
-            public Column PlaceStyle { get; set; }
-            public Column PlowCode { get; set; }
-            public Column ResizePage { get; set; }
-            public Column RouteStyle { get; set; }
-            public Column AvoidPageBreaks { get; set; }
-            public Column DrawingResizeType { get; set; }
+            public CellColumn PageLeftMargin { get; set; }
+            public CellColumn CenterX { get; set; }
+            public CellColumn CenterY { get; set; }
+            public CellColumn OnPage { get; set; }
+            public CellColumn PageBottomMargin { get; set; }
+            public CellColumn PageRightMargin { get; set; }
+            public CellColumn PagesX { get; set; }
+            public CellColumn PagesY { get; set; }
+            public CellColumn PageTopMargin { get; set; }
+            public CellColumn PaperKind { get; set; }
+            public CellColumn PrintGrid { get; set; }
+            public CellColumn PrintPageOrientation { get; set; }
+            public CellColumn ScaleX { get; set; }
+            public CellColumn ScaleY { get; set; }
+            public CellColumn PaperSource { get; set; }
+            public CellColumn DrawingScale { get; set; }
+            public CellColumn DrawingScaleType { get; set; }
+            public CellColumn DrawingSizeType { get; set; }
+            public CellColumn InhibitSnap { get; set; }
+            public CellColumn PageHeight { get; set; }
+            public CellColumn PageScale { get; set; }
+            public CellColumn PageWidth { get; set; }
+            public CellColumn ShdwObliqueAngle { get; set; }
+            public CellColumn ShdwOffsetX { get; set; }
+            public CellColumn ShdwOffsetY { get; set; }
+            public CellColumn ShdwScaleFactor { get; set; }
+            public CellColumn ShdwType { get; set; }
+            public CellColumn UIVisibility { get; set; }
+            public CellColumn XGridDensity { get; set; }
+            public CellColumn XGridOrigin { get; set; }
+            public CellColumn XGridSpacing { get; set; }
+            public CellColumn XRulerDensity { get; set; }
+            public CellColumn XRulerOrigin { get; set; }
+            public CellColumn YGridDensity { get; set; }
+            public CellColumn YGridOrigin { get; set; }
+            public CellColumn YGridSpacing { get; set; }
+            public CellColumn YRulerDensity { get; set; }
+            public CellColumn YRulerOrigin { get; set; }
+            public CellColumn AvenueSizeX { get; set; }
+            public CellColumn AvenueSizeY { get; set; }
+            public CellColumn BlockSizeX { get; set; }
+            public CellColumn BlockSizeY { get; set; }
+            public CellColumn CtrlAsInput { get; set; }
+            public CellColumn DynamicsOff { get; set; }
+            public CellColumn EnableGrid { get; set; }
+            public CellColumn LineAdjustFrom { get; set; }
+            public CellColumn LineAdjustTo { get; set; }
+            public CellColumn LineJumpCode { get; set; }
+            public CellColumn LineJumpFactorX { get; set; }
+            public CellColumn LineJumpFactorY { get; set; }
+            public CellColumn LineJumpStyle { get; set; }
+            public CellColumn LineRouteExt { get; set; }
+            public CellColumn LineToLineX { get; set; }
+            public CellColumn LineToLineY { get; set; }
+            public CellColumn LineToNodeX { get; set; }
+            public CellColumn LineToNodeY { get; set; }
+            public CellColumn PageLineJumpDirX { get; set; }
+            public CellColumn PageLineJumpDirY { get; set; }
+            public CellColumn PageShapeSplit { get; set; }
+            public CellColumn PlaceDepth { get; set; }
+            public CellColumn PlaceFlip { get; set; }
+            public CellColumn PlaceStyle { get; set; }
+            public CellColumn PlowCode { get; set; }
+            public CellColumn ResizePage { get; set; }
+            public CellColumn RouteStyle { get; set; }
+            public CellColumn AvoidPageBreaks { get; set; }
+            public CellColumn DrawingResizeType { get; set; }
 
             public PageCellQuery() 
             {
@@ -306,6 +307,7 @@ namespace VisioAutomation.Pages
 
             public PageCells GetCells(VA.ShapeSheet.CellData<double>[] row)
             {
+
                 var cells = new PageCells();
                 cells.PageLeftMargin = row[PageLeftMargin.Ordinal];
                 cells.CenterX = row[CenterX.Ordinal];

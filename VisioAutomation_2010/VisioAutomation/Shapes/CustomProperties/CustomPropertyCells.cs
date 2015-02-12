@@ -1,6 +1,7 @@
 ﻿using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
@@ -182,16 +183,16 @@ namespace VisioAutomation.Shapes.CustomProperties
 
     class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery
     {
-        public VA.ShapeSheet.Query.CellQuery.Column SortKey { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Ask { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Calendar { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Format { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Invis { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Label { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column LangID { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Prompt { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Value { get; set; }
-        public VA.ShapeSheet.Query.CellQuery.Column Type { get; set; }
+        public CellColumn SortKey { get; set; }
+        public CellColumn Ask { get; set; }
+        public CellColumn Calendar { get; set; }
+        public CellColumn Format { get; set; }
+        public CellColumn Invis { get; set; }
+        public CellColumn Label { get; set; }
+        public CellColumn LangID { get; set; }
+        public CellColumn Prompt { get; set; }
+        public CellColumn Value { get; set; }
+        public CellColumn Type { get; set; }
 
         public CustomPropertyCellQuery() 
         {

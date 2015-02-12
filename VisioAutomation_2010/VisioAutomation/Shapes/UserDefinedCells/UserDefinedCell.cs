@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -86,8 +87,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
          class UserDefinedCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQuery.Column Value { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Prompt { get; set; }
+            public CellColumn Value { get; set; }
+            public CellColumn Prompt { get; set; }
 
             public UserDefinedCellQuery()
             {

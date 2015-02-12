@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Controls
 {
@@ -53,14 +54,14 @@ namespace VisioAutomation.Shapes.Controls
 
         class ControlCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public VA.ShapeSheet.Query.CellQuery.Column CanGlue { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Tip { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column X { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column Y { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column YBehavior { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column XBehavior { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column XDynamics { get; set; }
-            public VA.ShapeSheet.Query.CellQuery.Column YDynamics { get; set; }
+            public CellColumn CanGlue { get; set; }
+            public CellColumn Tip { get; set; }
+            public CellColumn X { get; set; }
+            public CellColumn Y { get; set; }
+            public CellColumn YBehavior { get; set; }
+            public CellColumn XBehavior { get; set; }
+            public CellColumn XDynamics { get; set; }
+            public CellColumn YDynamics { get; set; }
 
             public ControlCellQuery() 
             {

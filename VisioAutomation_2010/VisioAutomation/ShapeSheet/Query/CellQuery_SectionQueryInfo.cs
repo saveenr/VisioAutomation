@@ -9,13 +9,13 @@ namespace VisioAutomation.ShapeSheet.Query
     {
        public class SectionQueryInfo
        {
-           public SectionQuery SectionQuery { get; private set; }
+           public SectionColumn section_column { get; private set; }
            public short ShapeID { get; private set; }
            public int RowCount  { get; private set; }
 
-           internal SectionQueryInfo(SectionQuery sq, short shapeid, int numrows)
+           internal SectionQueryInfo(SectionColumn sq, short shapeid, int numrows)
            {
-               this.SectionQuery = sq;
+               this.section_column = sq;
                this.ShapeID = shapeid;
                this.RowCount = numrows;
            }

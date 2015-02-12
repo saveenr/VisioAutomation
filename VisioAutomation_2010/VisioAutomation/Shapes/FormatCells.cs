@@ -2,6 +2,7 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
@@ -87,31 +88,31 @@ namespace VisioAutomation.Shapes
 
         class ShapeFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public Column FillBkgnd { get; set; }
-            public Column FillBkgndTrans { get; set; }
-            public Column FillForegnd { get; set; }
-            public Column FillForegndTrans { get; set; }
-            public Column FillPattern { get; set; }
-            public Column ShapeShdwObliqueAngle { get; set; }
-            public Column ShapeShdwOffsetX { get; set; }
-            public Column ShapeShdwOffsetY { get; set; }
-            public Column ShapeShdwScaleFactor { get; set; }
-            public Column ShapeShdwType { get; set; }
-            public Column ShdwBkgnd { get; set; }
-            public Column ShdwBkgndTrans { get; set; }
-            public Column ShdwForegnd { get; set; }
-            public Column ShdwForegndTrans { get; set; }
-            public Column ShdwPattern { get; set; }
-            public Column BeginArrow { get; set; }
-            public Column BeginArrowSize { get; set; }
-            public Column EndArrow { get; set; }
-            public Column EndArrowSize { get; set; }
-            public Column LineColor { get; set; }
-            public Column LineCap { get; set; }
-            public Column LineColorTrans { get; set; }
-            public Column LinePattern { get; set; }
-            public Column LineWeight { get; set; }
-            public Column Rounding { get; set; }
+            public CellColumn FillBkgnd { get; set; }
+            public CellColumn FillBkgndTrans { get; set; }
+            public CellColumn FillForegnd { get; set; }
+            public CellColumn FillForegndTrans { get; set; }
+            public CellColumn FillPattern { get; set; }
+            public CellColumn ShapeShdwObliqueAngle { get; set; }
+            public CellColumn ShapeShdwOffsetX { get; set; }
+            public CellColumn ShapeShdwOffsetY { get; set; }
+            public CellColumn ShapeShdwScaleFactor { get; set; }
+            public CellColumn ShapeShdwType { get; set; }
+            public CellColumn ShdwBkgnd { get; set; }
+            public CellColumn ShdwBkgndTrans { get; set; }
+            public CellColumn ShdwForegnd { get; set; }
+            public CellColumn ShdwForegndTrans { get; set; }
+            public CellColumn ShdwPattern { get; set; }
+            public CellColumn BeginArrow { get; set; }
+            public CellColumn BeginArrowSize { get; set; }
+            public CellColumn EndArrow { get; set; }
+            public CellColumn EndArrowSize { get; set; }
+            public CellColumn LineColor { get; set; }
+            public CellColumn LineCap { get; set; }
+            public CellColumn LineColorTrans { get; set; }
+            public CellColumn LinePattern { get; set; }
+            public CellColumn LineWeight { get; set; }
+            public CellColumn Rounding { get; set; }
 
             public ShapeFormatCellQuery()
             {

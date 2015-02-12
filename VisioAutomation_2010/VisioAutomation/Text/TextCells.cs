@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
@@ -68,22 +69,22 @@ namespace VisioAutomation.Text
 
         private class TextBlockFormatCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public Column BottomMargin { get; set; }
-            public Column LeftMargin { get; set; }
-            public Column RightMargin { get; set; }
-            public Column TopMargin { get; set; }
-            public Column DefaultTabStop { get; set; }
-            public Column TextBkgnd { get; set; }
-            public Column TextBkgndTrans { get; set; }
-            public Column TextDirection { get; set; }
-            public Column VerticalAlign { get; set; }
-            public Column TxtWidth { get; set; }
-            public Column TxtHeight { get; set; }
-            public Column TxtPinX { get; set; }
-            public Column TxtPinY { get; set; }
-            public Column TxtLocPinX { get; set; }
-            public Column TxtLocPinY { get; set; }
-            public Column TxtAngle { get; set; }
+            public CellColumn BottomMargin { get; set; }
+            public CellColumn LeftMargin { get; set; }
+            public CellColumn RightMargin { get; set; }
+            public CellColumn TopMargin { get; set; }
+            public CellColumn DefaultTabStop { get; set; }
+            public CellColumn TextBkgnd { get; set; }
+            public CellColumn TextBkgndTrans { get; set; }
+            public CellColumn TextDirection { get; set; }
+            public CellColumn VerticalAlign { get; set; }
+            public CellColumn TxtWidth { get; set; }
+            public CellColumn TxtHeight { get; set; }
+            public CellColumn TxtPinX { get; set; }
+            public CellColumn TxtPinY { get; set; }
+            public CellColumn TxtLocPinX { get; set; }
+            public CellColumn TxtLocPinY { get; set; }
+            public CellColumn TxtAngle { get; set; }
 
             public TextBlockFormatCellQuery() :
                 base()

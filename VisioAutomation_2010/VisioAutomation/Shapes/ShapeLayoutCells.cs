@@ -2,6 +2,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Layout
 {
@@ -73,24 +74,24 @@ namespace VisioAutomation.Shapes.Layout
 
         class ShapeLayoutCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public Column ConFixedCode { get; set; }
-            public Column ConLineJumpCode { get; set; }
-            public Column ConLineJumpDirX { get; set; }
-            public Column ConLineJumpDirY { get; set; }
-            public Column ConLineJumpStyle { get; set; }
-            public Column ConLineRouteExt { get; set; }
-            public Column ShapeFixedCode { get; set; }
-            public Column ShapePermeablePlace { get; set; }
-            public Column ShapePermeableX { get; set; }
-            public Column ShapePermeableY { get; set; }
-            public Column ShapePlaceFlip { get; set; }
-            public Column ShapePlaceStyle { get; set; }
-            public Column ShapePlowCode { get; set; }
-            public Column ShapeRouteStyle { get; set; }
-            public Column ShapeSplit { get; set; }
-            public Column ShapeSplittable { get; set; }
-            public Column DisplayLevel { get; set; }
-            public Column Relationships { get; set; }
+            public CellColumn ConFixedCode { get; set; }
+            public CellColumn ConLineJumpCode { get; set; }
+            public CellColumn ConLineJumpDirX { get; set; }
+            public CellColumn ConLineJumpDirY { get; set; }
+            public CellColumn ConLineJumpStyle { get; set; }
+            public CellColumn ConLineRouteExt { get; set; }
+            public CellColumn ShapeFixedCode { get; set; }
+            public CellColumn ShapePermeablePlace { get; set; }
+            public CellColumn ShapePermeableX { get; set; }
+            public CellColumn ShapePermeableY { get; set; }
+            public CellColumn ShapePlaceFlip { get; set; }
+            public CellColumn ShapePlaceStyle { get; set; }
+            public CellColumn ShapePlowCode { get; set; }
+            public CellColumn ShapeRouteStyle { get; set; }
+            public CellColumn ShapeSplit { get; set; }
+            public CellColumn ShapeSplittable { get; set; }
+            public CellColumn DisplayLevel { get; set; }
+            public CellColumn Relationships { get; set; }
 
             public ShapeLayoutCellQuery() :
                 base()

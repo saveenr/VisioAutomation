@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -49,13 +50,13 @@ namespace VisioAutomation.Shapes
 
         class XFormCellQuery : VA.ShapeSheet.Query.CellQuery
         {
-            public Column Width { get; set; }
-            public Column Height { get; set; }
-            public Column PinX { get; set; }
-            public Column PinY { get; set; }
-            public Column LocPinX { get; set; }
-            public Column LocPinY { get; set; }
-            public Column Angle { get; set; }
+            public CellColumn Width { get; set; }
+            public CellColumn Height { get; set; }
+            public CellColumn PinX { get; set; }
+            public CellColumn PinY { get; set; }
+            public CellColumn LocPinX { get; set; }
+            public CellColumn LocPinY { get; set; }
+            public CellColumn Angle { get; set; }
 
             public XFormCellQuery()
             {

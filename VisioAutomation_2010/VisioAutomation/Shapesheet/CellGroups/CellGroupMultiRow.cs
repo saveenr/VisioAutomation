@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
             foreach (var data_for_shape in data_for_shapes)
             {
-                var sec = data_for_shape.SectionCells[0];
+                var sec = data_for_shape.Sections[0];
                 var sec_objects = SectionToObjectList(sec, row_to_object);
                 list.Add(sec_objects);
             }
@@ -51,13 +51,13 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             check_query(query);
 
             var data_for_shape = query.GetCellData<RT>(shape);
-            var sec = data_for_shape.SectionCells[0];
+            var sec = data_for_shape.Sections[0];
             var sec_objects = SectionToObjectList(sec, row_to_object);
             
             return sec_objects;
         }
 
-        private static List<T> SectionToObjectList<T, RT>(CellQuery.SectionResult<CellData<RT>> sec, RowToObject<T, RT> row_to_object)
+        private static List<T> SectionToObjectList<T, RT>(SectionResult<CellData<RT>> sec, RowToObject<T, RT> row_to_object)
         {
             int num_rows = sec.Count;
             var sec_objects = new List<T>(num_rows);
