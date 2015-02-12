@@ -30,15 +30,6 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return this.Cells[index]; }
         }
 
-        public T this[CellColumn col]
-        {
-            get
-            {
-                // TODO: Should checking be done on what kind of calolumn it is
-                return this.Cells[col.Ordinal];                    
-            }
-        }
-
         public int Count
         {
             get { return this.Cells.Length; }
