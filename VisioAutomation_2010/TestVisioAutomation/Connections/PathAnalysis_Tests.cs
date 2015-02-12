@@ -10,8 +10,6 @@ namespace TestVisioAutomation
     [TestClass]
     public class PathAnalysis_Tests : VisioAutomationTest
     {
-        private IVisio.VisAutoConnectDir connect_dir_none = IVisio.VisAutoConnectDir.visAutoConnectDirNone;
-
         private void connect(IVisio.Shape a, IVisio.Shape b, bool a_arrow, bool b_arrow)
         {
             var page = a.ContainingPage;
