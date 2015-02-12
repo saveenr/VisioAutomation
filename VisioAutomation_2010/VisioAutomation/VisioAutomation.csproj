@@ -252,7 +252,6 @@
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
     <Compile Include="Shapesheet\SIDSRC.cs" />
-    <Compile Include="Internal\QueryResults.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Shapes\Connections\DirectedEdge.cs" />
     <Compile Include="Convert.cs" />
