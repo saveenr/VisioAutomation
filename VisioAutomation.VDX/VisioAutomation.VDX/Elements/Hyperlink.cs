@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using VA=VisioAutomation;
 using SXL = System.Xml.Linq;
 

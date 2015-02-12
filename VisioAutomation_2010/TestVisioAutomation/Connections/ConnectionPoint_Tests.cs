@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using VA = VisioAutomation;
 using VACXN = VisioAutomation.Shapes.Connections;
 

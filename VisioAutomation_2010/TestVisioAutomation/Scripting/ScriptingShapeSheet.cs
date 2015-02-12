@@ -1,4 +1,3 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;

@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {

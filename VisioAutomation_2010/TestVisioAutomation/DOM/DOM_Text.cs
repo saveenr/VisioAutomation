@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
-using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {

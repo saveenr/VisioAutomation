@@ -2,7 +2,6 @@
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace VisioAutomationSamples
 {

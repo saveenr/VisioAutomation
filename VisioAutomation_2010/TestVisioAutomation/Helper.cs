@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace TestVisioAutomation.Common
+﻿namespace TestVisioAutomation.Common
 {
     public class Helper
     {

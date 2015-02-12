@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -259,7 +257,7 @@ namespace VisioPowerTools2010
         {
             stdole.IPicture master_icon_pic = (stdole.IPicture) master.Icon;
             IntPtr icon_handle = (IntPtr) master_icon_pic.Handle;
-            using (var icon = Icon.FromHandle(icon_handle).ToBitmap())
+            using (var icon = System.Drawing.Icon.FromHandle(icon_handle).ToBitmap())
             {
                 icon.Save(icon_filename);
             }

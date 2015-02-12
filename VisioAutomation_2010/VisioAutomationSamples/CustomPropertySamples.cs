@@ -1,8 +1,6 @@
 using VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VisioAutomation.Extensions;
-using System.Linq;
 
 namespace VisioAutomationSamples
 {

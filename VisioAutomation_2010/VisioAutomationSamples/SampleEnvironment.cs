@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
 namespace VisioAutomationSamples

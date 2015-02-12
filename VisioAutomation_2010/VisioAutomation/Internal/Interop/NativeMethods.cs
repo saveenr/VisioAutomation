@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using IVisio = Microsoft.Office.Interop.Visio;
-using System.Collections.Generic;
 
 namespace VisioAutomation.Internal.Interop
 {

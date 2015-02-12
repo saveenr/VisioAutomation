@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using TREEMODEL = VisioAutomation.Models.Tree;

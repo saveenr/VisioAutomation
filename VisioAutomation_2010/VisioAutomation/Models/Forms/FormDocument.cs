@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.Drawing;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Models.Forms
