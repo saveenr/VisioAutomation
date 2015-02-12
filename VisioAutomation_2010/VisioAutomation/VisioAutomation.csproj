@@ -179,7 +179,7 @@
     <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
     <Compile Include="Shapesheet\Query\QueryResultList.cs" />
     <Compile Include="Shapesheet\Query\QueryResult.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery_SectionQueryInfo.cs" />
+    <Compile Include="Shapesheet\Query\CellQuery_SectionColumnInfo.cs" />
     <Compile Include="Shapesheet\Query\SectionColumn.cs" />
     <Compile Include="Shapesheet\Query\SectionResult.cs" />
     <Compile Include="Shapesheet\Query\CellColumnList.cs" />

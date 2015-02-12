@@ -9,14 +9,14 @@ namespace VisioAutomation.ShapeSheet.Query
         public CellColumnList CellColumns { get; private set; }
         public SectionColumnList SectionColumns { get; private set; }
 
-        private List<List<SectionQueryInfo>> PerShapeSectionInfo; 
+        private List<List<SectionColumnInfo>> PerShapeSectionInfo; 
         private bool IsFrozen;
 
         public CellQuery()
         {
             this.CellColumns = new CellColumnList(0);
             this.SectionColumns = new SectionColumnList(0);
-            this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>(0);
+            this.PerShapeSectionInfo = new List<List<SectionColumnInfo>>(0);
         }
 
         internal void CheckNotFrozen()
@@ -222,7 +222,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.PerShapeSectionInfo.Count > 0)
             {
                 result.Sections = new SectionResultList<T>();
-                List<SectionQueryInfo> sections = this.PerShapeSectionInfo[shape_index];
+                List<SectionColumnInfo> sections = this.PerShapeSectionInfo[shape_index];
 
                 foreach (var section in sections)
                 {
@@ -256,16 +256,16 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new VA.AutomationException(msg);
             }
 
-            this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
+            this.PerShapeSectionInfo = new List<List<SectionColumnInfo>>();
 
             if (this.SectionColumns.Count>0)
             {
-                var section_infos = new List<SectionQueryInfo>();
+                var section_infos = new List<SectionColumnInfo>();
                 foreach (var sec in this.SectionColumns)
                 {
                     // Figure out which rows to query
                     int num_rows = surface.Target.Shape.RowCount[(short)sec.SectionIndex];
-                    var section_info = new SectionQueryInfo(sec, surface.Target.Shape.ID16, num_rows);
+                    var section_info = new SectionColumnInfo(sec, surface.Target.Shape.ID16, num_rows);
                     section_infos.Add(section_info);
                 }
                 this.PerShapeSectionInfo.Add(section_infos);
@@ -357,7 +357,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private void CalculatePerShapeInfo(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            this.PerShapeSectionInfo = new List<List<SectionQueryInfo>>();
+            this.PerShapeSectionInfo = new List<List<SectionColumnInfo>>();
 
             if (this.SectionColumns.Count < 1)
             {
@@ -380,11 +380,11 @@ namespace VisioAutomation.ShapeSheet.Query
                 var shapeid = (short)shapeids[n];
                 var shape = shapes[n];
 
-                var section_infos = new List<SectionQueryInfo>(this.SectionColumns.Count);
+                var section_infos = new List<SectionColumnInfo>(this.SectionColumns.Count);
                 foreach (var sec in this.SectionColumns)
                 {
                     int num_rows = GetNumRowsForSection(shape, sec);
-                    var section_info = new SectionQueryInfo(sec, shapeid, num_rows);
+                    var section_info = new SectionColumnInfo(sec, shapeid, num_rows);
                     section_infos.Add(section_info);
                 }
                 this.PerShapeSectionInfo.Add(section_infos);
