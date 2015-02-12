@@ -205,7 +205,6 @@
     <Compile Include="Shapes\Connections\ConnectorType.cs" />
     <Compile Include="DOM\Hyperlink.cs" />
     <Compile Include="Application\PerfScope.cs" />
-    <Compile Include="Internal\Interop\RunningObject.cs" />
     <Compile Include="Drawing\LineSegment.cs" />
     <Compile Include="Models\Grid\Column.cs" />
     <Compile Include="Models\Grid\ColumnDirection.cs" />
@@ -256,7 +255,6 @@
     <Compile Include="Internal\QueryResults.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Shapes\Connections\DirectedEdge.cs" />
-    <Compile Include="Internal\Interop\COMInterop.cs" />
     <Compile Include="Convert.cs" />
     <Compile Include="Extensions\LayersMethods.cs" />
     <Compile Include="Shapesheet\SRCConstants.cs" />
