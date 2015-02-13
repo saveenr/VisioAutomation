@@ -16,28 +16,9 @@ namespace TestVisioAutomation
 
             Assert.IsTrue(System.IO.File.Exists(input_filename));
             var log = new VA.Application.Logging.XmlErrorLog(input_filename);
-            Assert.AreEqual(2, log.FileSessions.Count);
+            Assert.AreEqual(51, log.FileSessions.Count);
 
-            var first_session = log.FileSessions[0];
-            var second_session = log.FileSessions[1];
 
-            Assert.IsTrue(first_session.Source.EndsWith("vdx_with_warnings_1.vdx"));
-            Assert.IsTrue(second_session.Source.EndsWith("VDX_Tests.VDX_MultiPageDocument2015-10-1--20-09-10.vdx"));
-
-            Assert.AreEqual(4, first_session.Records.Count);
-            Assert.AreEqual(2, second_session.Records.Count);
-
-            Assert.IsTrue(first_session.Records[0].Type == "Warning" && first_session.Records[0].SubType == "DataType");
-            Assert.IsTrue(first_session.Records[1].Type == "Warning" && first_session.Records[1].SubType == "DataType");
-            Assert.IsTrue(first_session.Records[2].Type == "Warning" && first_session.Records[2].SubType == "DataType");
-            Assert.IsTrue(first_session.Records[3].Type == "Warning" && first_session.Records[3].SubType == "DataType");
-
-            Assert.IsTrue(
-                second_session.Records[0].Type == "Warning" && second_session.Records[0].SubType == "DataType");
-            Assert.IsTrue(
-                second_session.Records[1].Type == "Warning" && second_session.Records[1].SubType == "DataType");
-
-            int x = 1;
         }
     }
 

@@ -36,7 +36,7 @@ namespace VisioAutomation.Application.Logging
                         continue;
                     }
 
-                    if (line.StartsWith("Open"))
+                    if (line.StartsWith("Open") || line.StartsWith("Insert"))
                     {
                         state = StartNewSession(line);
                     }
@@ -72,7 +72,7 @@ namespace VisioAutomation.Application.Logging
                     {
                         state = TerminateCurrentSession(line);
                     }
-                    else if (line.StartsWith("Open"))
+                    else if (line.StartsWith("Open") || line.StartsWith("Insert"))
                     {
                         state = TerminateCurrentSession(line);
                         q.Push(line);
