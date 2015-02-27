@@ -4,7 +4,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public partial class CellQuery
+    public class CellQuery
     {
         public CellColumnList CellColumns { get; private set; }
         public SectionColumnList SectionColumns { get; private set; }
