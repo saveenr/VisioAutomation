@@ -305,7 +305,6 @@
     <Compile Include="Extensions\PageMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\SelectionMethods.cs" />
-    <Compile Include="Internal\Constants.cs" />
     <Compile Include="Extensions\WindowMethods.cs" />
   </ItemGroup>
   <ItemGroup>
