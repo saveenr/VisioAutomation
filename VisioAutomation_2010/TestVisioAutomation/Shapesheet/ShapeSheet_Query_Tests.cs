@@ -17,7 +17,20 @@ namespace TestVisioAutomation
         public static VA.ShapeSheet.SRC cell_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
         public static VA.ShapeSheet.SRC cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
         public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
-        
+
+        [TestMethod]
+        public void ShapeSheet_Query_SectionCells_have_names()
+        {
+            var query = new VA.ShapeSheet.Query.CellQuery();
+
+            var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
+            Assert.AreEqual("Character", sec_char.Name);
+
+            var sec_obj = query.AddSection(IVisio.VisSectionIndices.visSectionObject);
+            Assert.AreEqual("Object", sec_obj.Name);
+
+        }
+
         [TestMethod]
         public void ShapeSheet_Query_GetResults_SingleShape()
         {
@@ -49,6 +62,7 @@ namespace TestVisioAutomation
             var col_bg = query.AddCell(src_bg, "Background");
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
+            Assert.AreEqual("Character",sec_char.Name);
             var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "Case");
             var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "Color");
             var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");

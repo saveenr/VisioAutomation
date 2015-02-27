@@ -85,6 +85,7 @@
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
     <Compile Include="Shapesheet\Query\CellColumnType.cs" />
+    <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
     <Compile Include="Shapesheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />

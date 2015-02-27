@@ -5,12 +5,14 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class SectionColumn
     {
+        public string Name { get; private set; }
         public IVisio.VisSectionIndices SectionIndex { get; private set; }
         public CellColumnList CellColumns { get; private set; }
         public int Ordinal { get; private set; }
 
         internal SectionColumn(int ordinal, IVisio.VisSectionIndices section)
         {
+            this.Name = VA.ShapeSheet.ShapeSheetHelper.GetSectionName(section);
             this.Ordinal = ordinal;
             this.SectionIndex = section;
             this.CellColumns = new CellColumnList();
