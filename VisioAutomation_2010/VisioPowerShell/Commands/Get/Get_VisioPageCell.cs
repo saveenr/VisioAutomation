@@ -19,23 +19,29 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
+            if (this.Cells == null)
+            {
+                throw new System.ArgumentException("Cells");
+            }
+
+            if (this.Cells.Length < 1)
+            {
+                string msg = "Must provide at least one cell name";
+                throw new System.ArgumentException(msg);
+            }
+            var target_page = this.client.Page.Get();
+
+            var cellmap = CellMap.GetPageCellDictionary();
+            // CheckForInvalidNames(cellmap);
+            
             var query = new VA.ShapeSheet.Query.CellQuery();
+            Get_VisioPageCell.SetFromCellNames(query, this.Cells, cellmap);
 
-            var dic = CellMap.GetPageCellDictionary();
-            SetFromCellNames(query, this.Cells, dic);
-
-            var surface = new ShapeSheetSurface(this.client.Page.Get());
-
+            // Perform Query
+            var surface = new ShapeSheetSurface(target_page);
             var target_shapeids = new[] { surface.Target.Page.ID };
-
-            this.WriteVerbose("Number of Cells: {0}", query.CellColumns.Count);
-
-            this.WriteVerbose("Start Query");
-
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
-
             this.WriteObject(dt);
-            this.WriteVerbose("End Query");
         }
 
         public static void SetFromCellNames(VA.ShapeSheet.Query.CellQuery query, string[] Cells, CellMap dic)
