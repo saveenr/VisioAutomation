@@ -59,16 +59,5 @@ namespace VisioPowerShell.Commands
                 }
             }
         }
-
-        private void addcell(VA.ShapeSheet.Query.CellQuery query, bool switchpar, string cellname)
-        {
-            var dic = CellMap.GetPageCellDictionary();
-            if (switchpar)
-            {
-                query.AddCell(dic[cellname], cellname);
-            }
-        }
-
-
     }
 }
