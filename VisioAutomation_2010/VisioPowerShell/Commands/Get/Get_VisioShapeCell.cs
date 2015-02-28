@@ -11,11 +11,8 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(Mandatory = true, Position = 0)]
         public string[] Cells { get; set; }
 
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "Shapes")]
+        [SMA.Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
-
-        [SMA.Parameter(Mandatory = false, ParameterSetName = "Page")]
-        public IVisio.Page Page { get; set; }
 
         [SMA.Parameter(Mandatory = false)] 
         public SMA.SwitchParameter GetResults;
