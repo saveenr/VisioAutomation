@@ -22,43 +22,16 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (this.Cells == null)
-            {
-                throw new System.ArgumentException("Cells");
-            }
-
-            if (this.Cells.Length < 1)
-            {
-                string msg = "Must provide at least one cell name";
-                throw new System.ArgumentException(msg);
-            }
-
+            Get_VisioPageCell.EnsureEnoughCellNames(this.Cells);
             var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
-
             var cellmap = CellMap.GetShapeCellDictionary();
-            CheckForInvalidNames(cellmap);
-
-            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
-            Get_VisioPageCell.SetFromCellNames(query, this.Cells, cellmap);
-
-            // Perform Query
+            this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
+            Get_VisioPageCell.CheckForInvalidNames(cellmap, this.Cells);
+            var query = Get_VisioPageCell.CreateQueryFromCellNames(this.Cells, cellmap);
             var surface = this.client.ShapeSheet.GetShapeSheetSurface();
             var target_shapeids = target_shapes.Select(s => s.ID).ToList();
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);
-        }
-
-        private void CheckForInvalidNames(CellMap cellmap)
-        {
-            var invalid_names = this.Cells.Where(cellname => !cellmap.ContainsCell(cellname)).ToList();
-            if (invalid_names.Count > 0)
-            {
-                var names = cellmap.GetNames();
-                string valid_names = string.Join(",", names);
-                this.WriteVerbose("Valid Names: " + valid_names);
-                string msg = "Invalid cell names: " + string.Join(",", invalid_names);
-                throw new System.ArgumentException(msg);
-            }
         }
     }
 }
