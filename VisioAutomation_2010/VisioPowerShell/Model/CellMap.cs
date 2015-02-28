@@ -127,6 +127,27 @@ namespace VisioPowerShell
             return this.dic.ContainsKey(name);
         }
 
+        public VisioAutomation.ShapeSheet.Query.CellQuery CreateQueryFromCellNames(string[] Cells)
+        {
+            var invalid_names = Cells.Where(cellname => !this.ContainsCell(cellname)).ToList();
+            if (invalid_names.Count > 0)
+            {
+                string msg = "Invalid cell names: " + string.Join(",", invalid_names);
+                throw new System.ArgumentException(msg);
+            }
+
+            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
+
+            foreach (string resolved_cellname in this.ResolveNames(Cells))
+            {
+                if (!query.CellColumns.Contains(resolved_cellname))
+                {
+                    query.AddCell(dic[resolved_cellname], resolved_cellname);
+                }
+            }
+            return query;
+        }
+
         private static List<VA.ShapeSheet.SRC> shape_cells;
         private static List<VA.ShapeSheet.SRC> page_cells;
 
