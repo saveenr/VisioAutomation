@@ -18,6 +18,11 @@ namespace VisioAutomation.ShapeSheet.Query
             this.CellColumns = new CellColumnList();
         }
 
+        public CellColumn AddCell(SRC src)
+        {
+            var col = this.CellColumns.Add(src, src.Name);
+            return col;
+        }
         public CellColumn AddCell(SRC src, string name)
         {
             var col = this.CellColumns.Add(src, name);

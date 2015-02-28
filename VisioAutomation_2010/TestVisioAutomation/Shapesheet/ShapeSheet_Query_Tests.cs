@@ -63,9 +63,9 @@ namespace TestVisioAutomation
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character",sec_char.Name);
-            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "Case");
-            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "Color");
-            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "ColorTrans");
+            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase);
+            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor);
+            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans);
 
             var shapeids = new[] {s1_id};
 
@@ -178,7 +178,7 @@ namespace TestVisioAutomation
             var query = new VA.ShapeSheet.Query.CellQuery();
 
             var prop_sec = query.AddSection(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value, "Value");
+            var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value);
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 

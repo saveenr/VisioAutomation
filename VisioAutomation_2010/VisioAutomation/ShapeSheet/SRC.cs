@@ -6,6 +6,7 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct SRC
     {
+        public string Name;
         public short Section { get; private set; }
         public short Row { get; private set; }
         public short Cell { get; private set; }
@@ -13,19 +14,40 @@ namespace VisioAutomation.ShapeSheet
         public SRC(
             IVisio.VisSectionIndices section,
             IVisio.VisRowIndices row,
-            IVisio.VisCellIndices cell) : this((short)section,(short)row,(short)cell)
+            IVisio.VisCellIndices cell) : this(section,row,cell,null)
         {
         }
 
         public SRC(
             short section,
             short row,
-            short cell) : this()
+            short cell)
+            : this(section, row, cell, null)
+        {
+        }
+
+        public SRC(
+            IVisio.VisSectionIndices section,
+            IVisio.VisRowIndices row,
+            IVisio.VisCellIndices cell,
+            string name) : this((short)section,(short)row,(short)cell,name)
+        {
+        }
+
+
+        public SRC(
+            short section,
+            short row,
+            short cell,
+            string name)
+            : this()
         {
             this.Section = section;
             this.Row = row;
             this.Cell = cell;
+            this.Name = name;
         }       
+
         
         public override string ToString()
         {
@@ -34,17 +56,17 @@ namespace VisioAutomation.ShapeSheet
 
         public SRC ForRow(short row)
         {
-            return new SRC(this.Section, row, this.Cell);
+            return new SRC(this.Section, row, this.Cell, this.Name);
         }
 
         public SRC ForSectionAndRow(short section, short row)
         {
-            return new SRC(section , row, this.Cell);
+            return new SRC(section , row, this.Cell, this.Name);
         }
 
         public bool AreEqual(SRC other)
         {
-            return ((this.Section == other.Section) && (this.Row == other.Row) && (this.Cell == other.Cell));
+            return ((this.Section == other.Section) && (this.Row == other.Row) && (this.Cell == other.Cell) && (this.Name == other.Name));
         }
 
         internal delegate VA.ShapeSheet.SRC SRCFromCellIndex(IVisio.VisCellIndices c);
