@@ -18,6 +18,11 @@ namespace VisioPowerShell
             this.dic = new Dictionary<string, VA.ShapeSheet.SRC>(System.StringComparer.OrdinalIgnoreCase);
         }
 
+        public List<string> GetNames()
+        {
+            return this.CellNames.ToList();
+        }
+
         public VisioAutomation.ShapeSheet.SRC this[string name]
         {
             get { return this.dic[name]; }
