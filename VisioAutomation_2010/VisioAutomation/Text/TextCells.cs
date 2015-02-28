@@ -89,22 +89,22 @@ namespace VisioAutomation.Text
             public TextBlockFormatCellQuery() :
                 base()
             {
-                BottomMargin = this.AddCell(VA.ShapeSheet.SRCConstants.BottomMargin, "BottomMargin");
-                LeftMargin = this.AddCell(VA.ShapeSheet.SRCConstants.LeftMargin, "LeftMargin");
-                RightMargin = this.AddCell(VA.ShapeSheet.SRCConstants.RightMargin, "RightMargin");
-                TopMargin = this.AddCell(VA.ShapeSheet.SRCConstants.TopMargin, "TopMargin");
-                DefaultTabStop = this.AddCell(VA.ShapeSheet.SRCConstants.DefaultTabStop, "DefaultTabStop");
-                TextBkgnd = this.AddCell(VA.ShapeSheet.SRCConstants.TextBkgnd, "TextBkgnd");
-                TextBkgndTrans = this.AddCell(VA.ShapeSheet.SRCConstants.TextBkgndTrans, "TextBkgndTrans");
-                TextDirection = this.AddCell(VA.ShapeSheet.SRCConstants.TextDirection, "TextDirection");
-                VerticalAlign = this.AddCell(VA.ShapeSheet.SRCConstants.VerticalAlign, "VerticalAlign");
-                TxtPinX = this.AddCell(VA.ShapeSheet.SRCConstants.TxtPinX, "TxtPinX");
-                TxtPinY = this.AddCell(VA.ShapeSheet.SRCConstants.TxtPinY, "TxtPinY");
-                TxtLocPinX = this.AddCell(VA.ShapeSheet.SRCConstants.TxtLocPinX, "TxtLocPinX");
-                TxtLocPinY = this.AddCell(VA.ShapeSheet.SRCConstants.TxtLocPinY, "TxtLocPinY");
-                TxtWidth = this.AddCell(VA.ShapeSheet.SRCConstants.TxtWidth, "TxtWidth");
-                TxtHeight = this.AddCell(VA.ShapeSheet.SRCConstants.TxtHeight, "TxtHeight");
-                TxtAngle = this.AddCell(VA.ShapeSheet.SRCConstants.TxtAngle, "TxtAngle");
+                BottomMargin = this.AddCell(VA.ShapeSheet.SRCConstants.BottomMargin);
+                LeftMargin = this.AddCell(VA.ShapeSheet.SRCConstants.LeftMargin);
+                RightMargin = this.AddCell(VA.ShapeSheet.SRCConstants.RightMargin);
+                TopMargin = this.AddCell(VA.ShapeSheet.SRCConstants.TopMargin);
+                DefaultTabStop = this.AddCell(VA.ShapeSheet.SRCConstants.DefaultTabStop);
+                TextBkgnd = this.AddCell(VA.ShapeSheet.SRCConstants.TextBkgnd);
+                TextBkgndTrans = this.AddCell(VA.ShapeSheet.SRCConstants.TextBkgndTrans);
+                TextDirection = this.AddCell(VA.ShapeSheet.SRCConstants.TextDirection);
+                VerticalAlign = this.AddCell(VA.ShapeSheet.SRCConstants.VerticalAlign);
+                TxtPinX = this.AddCell(VA.ShapeSheet.SRCConstants.TxtPinX);
+                TxtPinY = this.AddCell(VA.ShapeSheet.SRCConstants.TxtPinY);
+                TxtLocPinX = this.AddCell(VA.ShapeSheet.SRCConstants.TxtLocPinX);
+                TxtLocPinY = this.AddCell(VA.ShapeSheet.SRCConstants.TxtLocPinY);
+                TxtWidth = this.AddCell(VA.ShapeSheet.SRCConstants.TxtWidth);
+                TxtHeight = this.AddCell(VA.ShapeSheet.SRCConstants.TxtHeight);
+                TxtAngle = this.AddCell(VA.ShapeSheet.SRCConstants.TxtAngle);
             }
 
             public TextCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)

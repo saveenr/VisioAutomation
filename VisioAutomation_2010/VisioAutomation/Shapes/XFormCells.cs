@@ -60,13 +60,13 @@ namespace VisioAutomation.Shapes
 
             public XFormCellQuery()
             {
-                PinX = this.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-                PinY = this.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
-                LocPinX = this.AddCell(VA.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
-                LocPinY = this.AddCell(VA.ShapeSheet.SRCConstants.LocPinY, "LocPinY");
-                Width = this.AddCell(VA.ShapeSheet.SRCConstants.Width, "Width");
-                Height = this.AddCell(VA.ShapeSheet.SRCConstants.Height, "Height");
-                Angle = this.AddCell(VA.ShapeSheet.SRCConstants.Angle, "Angle");
+                PinX = this.AddCell(VA.ShapeSheet.SRCConstants.PinX);
+                PinY = this.AddCell(VA.ShapeSheet.SRCConstants.PinY);
+                LocPinX = this.AddCell(VA.ShapeSheet.SRCConstants.LocPinX);
+                LocPinY = this.AddCell(VA.ShapeSheet.SRCConstants.LocPinY);
+                Width = this.AddCell(VA.ShapeSheet.SRCConstants.Width);
+                Height = this.AddCell(VA.ShapeSheet.SRCConstants.Height);
+                Angle = this.AddCell(VA.ShapeSheet.SRCConstants.Angle);
             }
 
             public XFormCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
