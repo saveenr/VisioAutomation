@@ -13,6 +13,9 @@ namespace VisioPowerShell.Commands
         public string[] Cells { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
+        public IVisio.Page Page { get; set; }
+
+        [SMA.Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetResults;
 
         [SMA.Parameter(Mandatory = false)]
@@ -21,7 +24,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             EnsureEnoughCellNames(this.Cells);
-            var target_page = this.client.Page.Get();
+            var target_page = this.Page ?? this.client.Page.Get();
             var cellmap = CellMap.GetPageCellDictionary();
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
