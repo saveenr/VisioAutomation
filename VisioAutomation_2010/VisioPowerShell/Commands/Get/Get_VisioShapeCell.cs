@@ -347,89 +347,89 @@ namespace VisioPowerShell.Commands
             }
         }
 
-        private static CellMap callmap;
+        private static CellMap map_name_to_cell;
 
         public static CellMap GetShapeCellDictionary()
         {
-            if (callmap == null)
+            if (map_name_to_cell == null)
             {
-                callmap = new CellMap();
-                callmap["Angle"] = VA.ShapeSheet.SRCConstants.Angle;
-                callmap["BeginX"] = VA.ShapeSheet.SRCConstants.BeginX;
-                callmap["BeginY"] = VA.ShapeSheet.SRCConstants.BeginY;
-                callmap["CharCase"] = VA.ShapeSheet.SRCConstants.CharCase;
-                callmap["CharColor"] = VA.ShapeSheet.SRCConstants.CharColor;
-                callmap["CharColorTransparency"] = VA.ShapeSheet.SRCConstants.CharColorTrans;
-                callmap["CharFont"] = VA.ShapeSheet.SRCConstants.CharFont;
-                callmap["CharFontScale"] = VA.ShapeSheet.SRCConstants.CharFontScale;
-                callmap["CharLetterspace"] = VA.ShapeSheet.SRCConstants.CharLetterspace;
-                callmap["CharSize"] = VA.ShapeSheet.SRCConstants.CharSize;
-                callmap["CharStyle"] = VA.ShapeSheet.SRCConstants.CharStyle;
-                callmap["EndX"] = VA.ShapeSheet.SRCConstants.EndX;
-                callmap["EndY"] = VA.ShapeSheet.SRCConstants.EndY;
-                callmap["FillBkgnd"] = VA.ShapeSheet.SRCConstants.FillBkgnd;
-                callmap["FillBkgndTrans"] = VA.ShapeSheet.SRCConstants.FillBkgndTrans;
-                callmap["FillForegnd"] = VA.ShapeSheet.SRCConstants.FillForegnd;
-                callmap["FillForegndTrans"] = VA.ShapeSheet.SRCConstants.FillForegndTrans;
-                callmap["FillPattern"] = VA.ShapeSheet.SRCConstants.FillPattern;
-                callmap["Height"] = VA.ShapeSheet.SRCConstants.Height;
-                callmap["LineCap"] = VA.ShapeSheet.SRCConstants.LineCap;
-                callmap["LineColor"] = VA.ShapeSheet.SRCConstants.LineColor;
-                callmap["LinePattern"] = VA.ShapeSheet.SRCConstants.LinePattern;
-                callmap["LineWeight"] = VA.ShapeSheet.SRCConstants.LineWeight;
-                callmap["LockAspect"] = VA.ShapeSheet.SRCConstants.LockAspect;
-                callmap["LockBegin"] = VA.ShapeSheet.SRCConstants.LockBegin;
-                callmap["LockCalcWH"] = VA.ShapeSheet.SRCConstants.LockCalcWH;
-                callmap["LockCrop"] = VA.ShapeSheet.SRCConstants.LockCrop;
-                callmap["LockCustProp"] = VA.ShapeSheet.SRCConstants.LockCustProp;
-                callmap["LockDelete"] = VA.ShapeSheet.SRCConstants.LockDelete;
-                callmap["LockEnd"] = VA.ShapeSheet.SRCConstants.LockEnd;
-                callmap["LockFormat"] = VA.ShapeSheet.SRCConstants.LockFormat;
-                callmap["LockFromGroupFormat"] = VA.ShapeSheet.SRCConstants.LockFromGroupFormat;
-                callmap["LockGroup"] = VA.ShapeSheet.SRCConstants.LockGroup;
-                callmap["LockHeight"] = VA.ShapeSheet.SRCConstants.LockHeight;
-                callmap["LockMoveX"] = VA.ShapeSheet.SRCConstants.LockMoveX;
-                callmap["LockMoveY"] = VA.ShapeSheet.SRCConstants.LockMoveY;
-                callmap["LockRotate"] = VA.ShapeSheet.SRCConstants.LockRotate;
-                callmap["LockSelect"] = VA.ShapeSheet.SRCConstants.LockSelect;
-                callmap["LockTextEdit"] = VA.ShapeSheet.SRCConstants.LockTextEdit;
-                callmap["LockThemeColors"] = VA.ShapeSheet.SRCConstants.LockThemeColors;
-                callmap["LockThemeEffects"] = VA.ShapeSheet.SRCConstants.LockThemeEffects;
-                callmap["LockVtxEdit"] = VA.ShapeSheet.SRCConstants.LockVtxEdit;
-                callmap["LockWidth"] = VA.ShapeSheet.SRCConstants.LockWidth;
-                callmap["LocPinX"] = VA.ShapeSheet.SRCConstants.LocPinX;
-                callmap["LocPinY"] = VA.ShapeSheet.SRCConstants.LocPinY;
-                callmap["PinX"] = VA.ShapeSheet.SRCConstants.PinX;
-                callmap["PinY"] = VA.ShapeSheet.SRCConstants.PinY;
-                callmap["Rounding"] = VA.ShapeSheet.SRCConstants.Rounding;
-                callmap["SelectMode"] = VA.ShapeSheet.SRCConstants.SelectMode;
-                callmap["ShdwBkgnd"] = VA.ShapeSheet.SRCConstants.ShdwBkgnd;
-                callmap["ShdwBkgndTrans"] = VA.ShapeSheet.SRCConstants.ShdwBkgndTrans;
-                callmap["ShdwForegnd"] = VA.ShapeSheet.SRCConstants.ShdwForegnd;
-                callmap["ShdwForegndTrans"] = VA.ShapeSheet.SRCConstants.ShdwForegndTrans;
-                callmap["ShdwObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
-                callmap["ShdwOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
-                callmap["ShdwOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
-                callmap["ShdwPattern"] = VA.ShapeSheet.SRCConstants.ShdwPattern;
-                callmap["ShdwScaleFactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
-                callmap["ShdwType"] = VA.ShapeSheet.SRCConstants.ShdwType;
-                callmap["TxtAngle"] = VA.ShapeSheet.SRCConstants.TxtAngle;
-                callmap["TxtHeight"] = VA.ShapeSheet.SRCConstants.TxtHeight;
-                callmap["TxtLocPinX"] = VA.ShapeSheet.SRCConstants.TxtLocPinX;
-                callmap["TxtLocPinY"] = VA.ShapeSheet.SRCConstants.TxtLocPinY;
-                callmap["TxtPinX"] = VA.ShapeSheet.SRCConstants.TxtPinX;
-                callmap["TxtPinY"] = VA.ShapeSheet.SRCConstants.TxtPinY;
-                callmap["TxtWidth"] = VA.ShapeSheet.SRCConstants.TxtWidth;
-                callmap["Width"] = VA.ShapeSheet.SRCConstants.Width;
+                map_name_to_cell = new CellMap();
+                map_name_to_cell["Angle"] = VA.ShapeSheet.SRCConstants.Angle;
+                map_name_to_cell["BeginX"] = VA.ShapeSheet.SRCConstants.BeginX;
+                map_name_to_cell["BeginY"] = VA.ShapeSheet.SRCConstants.BeginY;
+                map_name_to_cell["CharCase"] = VA.ShapeSheet.SRCConstants.CharCase;
+                map_name_to_cell["CharColor"] = VA.ShapeSheet.SRCConstants.CharColor;
+                map_name_to_cell["CharColorTransparency"] = VA.ShapeSheet.SRCConstants.CharColorTrans;
+                map_name_to_cell["CharFont"] = VA.ShapeSheet.SRCConstants.CharFont;
+                map_name_to_cell["CharFontScale"] = VA.ShapeSheet.SRCConstants.CharFontScale;
+                map_name_to_cell["CharLetterspace"] = VA.ShapeSheet.SRCConstants.CharLetterspace;
+                map_name_to_cell["CharSize"] = VA.ShapeSheet.SRCConstants.CharSize;
+                map_name_to_cell["CharStyle"] = VA.ShapeSheet.SRCConstants.CharStyle;
+                map_name_to_cell["EndX"] = VA.ShapeSheet.SRCConstants.EndX;
+                map_name_to_cell["EndY"] = VA.ShapeSheet.SRCConstants.EndY;
+                map_name_to_cell["FillBkgnd"] = VA.ShapeSheet.SRCConstants.FillBkgnd;
+                map_name_to_cell["FillBkgndTrans"] = VA.ShapeSheet.SRCConstants.FillBkgndTrans;
+                map_name_to_cell["FillForegnd"] = VA.ShapeSheet.SRCConstants.FillForegnd;
+                map_name_to_cell["FillForegndTrans"] = VA.ShapeSheet.SRCConstants.FillForegndTrans;
+                map_name_to_cell["FillPattern"] = VA.ShapeSheet.SRCConstants.FillPattern;
+                map_name_to_cell["Height"] = VA.ShapeSheet.SRCConstants.Height;
+                map_name_to_cell["LineCap"] = VA.ShapeSheet.SRCConstants.LineCap;
+                map_name_to_cell["LineColor"] = VA.ShapeSheet.SRCConstants.LineColor;
+                map_name_to_cell["LinePattern"] = VA.ShapeSheet.SRCConstants.LinePattern;
+                map_name_to_cell["LineWeight"] = VA.ShapeSheet.SRCConstants.LineWeight;
+                map_name_to_cell["LockAspect"] = VA.ShapeSheet.SRCConstants.LockAspect;
+                map_name_to_cell["LockBegin"] = VA.ShapeSheet.SRCConstants.LockBegin;
+                map_name_to_cell["LockCalcWH"] = VA.ShapeSheet.SRCConstants.LockCalcWH;
+                map_name_to_cell["LockCrop"] = VA.ShapeSheet.SRCConstants.LockCrop;
+                map_name_to_cell["LockCustProp"] = VA.ShapeSheet.SRCConstants.LockCustProp;
+                map_name_to_cell["LockDelete"] = VA.ShapeSheet.SRCConstants.LockDelete;
+                map_name_to_cell["LockEnd"] = VA.ShapeSheet.SRCConstants.LockEnd;
+                map_name_to_cell["LockFormat"] = VA.ShapeSheet.SRCConstants.LockFormat;
+                map_name_to_cell["LockFromGroupFormat"] = VA.ShapeSheet.SRCConstants.LockFromGroupFormat;
+                map_name_to_cell["LockGroup"] = VA.ShapeSheet.SRCConstants.LockGroup;
+                map_name_to_cell["LockHeight"] = VA.ShapeSheet.SRCConstants.LockHeight;
+                map_name_to_cell["LockMoveX"] = VA.ShapeSheet.SRCConstants.LockMoveX;
+                map_name_to_cell["LockMoveY"] = VA.ShapeSheet.SRCConstants.LockMoveY;
+                map_name_to_cell["LockRotate"] = VA.ShapeSheet.SRCConstants.LockRotate;
+                map_name_to_cell["LockSelect"] = VA.ShapeSheet.SRCConstants.LockSelect;
+                map_name_to_cell["LockTextEdit"] = VA.ShapeSheet.SRCConstants.LockTextEdit;
+                map_name_to_cell["LockThemeColors"] = VA.ShapeSheet.SRCConstants.LockThemeColors;
+                map_name_to_cell["LockThemeEffects"] = VA.ShapeSheet.SRCConstants.LockThemeEffects;
+                map_name_to_cell["LockVtxEdit"] = VA.ShapeSheet.SRCConstants.LockVtxEdit;
+                map_name_to_cell["LockWidth"] = VA.ShapeSheet.SRCConstants.LockWidth;
+                map_name_to_cell["LocPinX"] = VA.ShapeSheet.SRCConstants.LocPinX;
+                map_name_to_cell["LocPinY"] = VA.ShapeSheet.SRCConstants.LocPinY;
+                map_name_to_cell["PinX"] = VA.ShapeSheet.SRCConstants.PinX;
+                map_name_to_cell["PinY"] = VA.ShapeSheet.SRCConstants.PinY;
+                map_name_to_cell["Rounding"] = VA.ShapeSheet.SRCConstants.Rounding;
+                map_name_to_cell["SelectMode"] = VA.ShapeSheet.SRCConstants.SelectMode;
+                map_name_to_cell["ShdwBkgnd"] = VA.ShapeSheet.SRCConstants.ShdwBkgnd;
+                map_name_to_cell["ShdwBkgndTrans"] = VA.ShapeSheet.SRCConstants.ShdwBkgndTrans;
+                map_name_to_cell["ShdwForegnd"] = VA.ShapeSheet.SRCConstants.ShdwForegnd;
+                map_name_to_cell["ShdwForegndTrans"] = VA.ShapeSheet.SRCConstants.ShdwForegndTrans;
+                map_name_to_cell["ShdwObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
+                map_name_to_cell["ShdwOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
+                map_name_to_cell["ShdwOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
+                map_name_to_cell["ShdwPattern"] = VA.ShapeSheet.SRCConstants.ShdwPattern;
+                map_name_to_cell["ShdwScaleFactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
+                map_name_to_cell["ShdwType"] = VA.ShapeSheet.SRCConstants.ShdwType;
+                map_name_to_cell["TxtAngle"] = VA.ShapeSheet.SRCConstants.TxtAngle;
+                map_name_to_cell["TxtHeight"] = VA.ShapeSheet.SRCConstants.TxtHeight;
+                map_name_to_cell["TxtLocPinX"] = VA.ShapeSheet.SRCConstants.TxtLocPinX;
+                map_name_to_cell["TxtLocPinY"] = VA.ShapeSheet.SRCConstants.TxtLocPinY;
+                map_name_to_cell["TxtPinX"] = VA.ShapeSheet.SRCConstants.TxtPinX;
+                map_name_to_cell["TxtPinY"] = VA.ShapeSheet.SRCConstants.TxtPinY;
+                map_name_to_cell["TxtWidth"] = VA.ShapeSheet.SRCConstants.TxtWidth;
+                map_name_to_cell["Width"] = VA.ShapeSheet.SRCConstants.Width;
 
-                callmap["BeginArrow"] = VA.ShapeSheet.SRCConstants.BeginArrow;
-                callmap["BeginArrowSize"] = VA.ShapeSheet.SRCConstants.BeginArrowSize;
-                callmap["EndArrow"] = VA.ShapeSheet.SRCConstants.EndArrow;
-                callmap["EndArrowSize"] = VA.ShapeSheet.SRCConstants.EndArrowSize;
+                map_name_to_cell["BeginArrow"] = VA.ShapeSheet.SRCConstants.BeginArrow;
+                map_name_to_cell["BeginArrowSize"] = VA.ShapeSheet.SRCConstants.BeginArrowSize;
+                map_name_to_cell["EndArrow"] = VA.ShapeSheet.SRCConstants.EndArrow;
+                map_name_to_cell["EndArrowSize"] = VA.ShapeSheet.SRCConstants.EndArrowSize;
 
-                callmap["HideText"] = VA.ShapeSheet.SRCConstants.HideText;
+                map_name_to_cell["HideText"] = VA.ShapeSheet.SRCConstants.HideText;
             }
-            return callmap;
+            return map_name_to_cell;
         }
     }
 
