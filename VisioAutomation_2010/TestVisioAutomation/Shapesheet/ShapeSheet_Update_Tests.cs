@@ -33,8 +33,8 @@ namespace TestVisioAutomation
 
             // Verify that the formulas were set
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddCell(src_pinx);
-            var col_piny = query.AddCell(src_piny);
+            var col_pinx = query.AddCell(src_pinx, "PinX");
+            var col_piny = query.AddCell(src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -64,7 +64,7 @@ namespace TestVisioAutomation
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddCell(src_linepat);
+            var col_linepat = query.AddCell(src_linepat,"LinePattern");
 
             // Retrieve the values
             var data = query.GetCellData<double>(shape1);
@@ -87,7 +87,7 @@ namespace TestVisioAutomation
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddCell(src_linepat);
+            var col_linepat = query.AddCell(src_linepat, "LinePattern");
 
             // Retrieve the values
             var data = query.GetCellData<double>(shape1);
@@ -119,8 +119,8 @@ namespace TestVisioAutomation
 
             // Verify that the formulas were set
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddCell(src_pinx);
-            var col_piny = query.AddCell(src_piny);
+            var col_pinx = query.AddCell(src_pinx,"PinX");
+            var col_piny = query.AddCell(src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -200,8 +200,8 @@ namespace TestVisioAutomation
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddCell(src_linepat);
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX);
+            var col_linepat = query.AddCell(src_linepat, "LinePattern");
+            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             // Retrieve the values
             var data = query.GetCellData<double>(shape1);

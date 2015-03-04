@@ -198,16 +198,17 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
 
-            SortKey = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_SortKey);
-            Ask = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Ask);
-            Calendar = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Calendar);
-            Format = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Format);
-            Invis = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Invisible);
-            Label = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Label);
-            LangID = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_LangID);
-            Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Prompt);
-            Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Type);
-            Value = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value);
+            SortKey = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_SortKey, "Prop_SortKey");
+            Ask = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Ask, "Prop_Ask");
+            Calendar = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Prop_Calendar");
+            Format = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Format, "Prop_Format");
+            Invis = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Prop_Invisible");
+            Label = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Label, "Prop_Label");
+            LangID = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_LangID, "Prop_LangID");
+            Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prop_Prompt");
+            Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Type, "Prop_Type");
+            Value = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value, "Prop_Value");
+
         }
 
         public CustomPropertyCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)

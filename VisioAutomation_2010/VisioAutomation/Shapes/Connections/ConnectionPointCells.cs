@@ -57,11 +57,11 @@ namespace VisioAutomation.Shapes.Connections
             public ConnectionPointCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionConnectionPts);
-                DirX = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_DirX);
-                DirY = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_DirY);
-                Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Type);
-                X = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_X);
-                Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Y);
+                DirX = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_DirX,"Connections_DirX");
+                DirY = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_DirY,"Connections_DirY");
+                Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Type,"Connections_Type");
+                X = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_X,"Connections_X");
+                Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Y,"Connections_Y");
             }
 
             public ConnectionPointCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)

@@ -66,14 +66,14 @@ namespace VisioAutomation.Shapes.Controls
             public ControlCellQuery() 
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionControls);
-                this.CanGlue = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_CanGlue);
-                this.Tip = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_Tip);
-                this.X = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_X);
-                this.Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_Y);
-                this.YBehavior = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_YCon);
-                this.XBehavior = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_XCon);
-                this.XDynamics = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_XDyn);
-                this.YDynamics = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_YDyn);
+                this.CanGlue = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_CanGlue, "Controls_CanGlue");
+                this.Tip = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_Tip, "Controls_Tip");
+                this.X = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_X, "Controls_X");
+                this.Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_Y, "Controls_Y");
+                this.YBehavior = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_YCon, "Controls_YCon");
+                this.XBehavior = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_XCon, "Controls_XCon");
+                this.XDynamics = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_XDyn, "Controls_XDyn");
+                this.YDynamics = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_YDyn, "Controls_YDyn");
             }
 
             public ControlCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)

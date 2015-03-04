@@ -32,16 +32,6 @@ namespace VisioAutomation.ShapeSheet.Query
             this.IsFrozen = true;            
         }
 
-        public CellColumn AddCell(SRC src)
-        {
-            if (src.Name == null)
-            {
-                throw new System.ArgumentException("must have a Name","src");                
-            }
-            var col = this.CellColumns.Add(src, src.Name);
-            return col;
-        }
-
         public CellColumn AddCell(SRC src, string name)
         {
             if (name == null)

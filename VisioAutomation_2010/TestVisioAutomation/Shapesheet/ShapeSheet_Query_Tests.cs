@@ -58,14 +58,14 @@ namespace TestVisioAutomation
             var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddCell(src_fg);
-            var col_bg = query.AddCell(src_bg);
-            var col_filpat = query.AddCell(src_filpat);
+            var col_fg = query.AddCell(src_fg, "FillForegnd");
+            var col_bg = query.AddCell(src_bg, "FillBkgnd");
+            var col_filpat = query.AddCell(src_filpat, "FillPattern");
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character",sec_char.Name);
-            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase);
-            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor);
-            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans);
+            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "CharCase");
+            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "CharColor");
+            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "CharColorTrans");
 
             var shapeids = new[] {s1_id};
 
@@ -122,9 +122,9 @@ namespace TestVisioAutomation
             // now retrieve the formulas with GetFormulas
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_fg = query.AddCell(src_fg);
-            var col_bg = query.AddCell(src_bg);
-            var col_filpat = query.AddCell(src_filpat);
+            var col_fg = query.AddCell(src_fg, "FillForegnd");
+            var col_bg = query.AddCell(src_bg, "FillBkgnd");
+            var col_filpat = query.AddCell(src_filpat, "FillPattern");
 
             var shapeids = new[] {s1_id};
 
@@ -178,7 +178,7 @@ namespace TestVisioAutomation
             var query = new VA.ShapeSheet.Query.CellQuery();
 
             var prop_sec = query.AddSection(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value);
+            var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value,"Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
@@ -218,8 +218,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX);
-            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY);
+            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
@@ -270,8 +270,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(5, page1.Shapes.Count);
 
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX);
-            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY);
+            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
 
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
@@ -454,12 +454,12 @@ namespace TestVisioAutomation
         {
             // Ensure that duplicate cells are caught
             var q1 = new VA.ShapeSheet.Query.CellQuery();
-            q1.AddCell(VA.ShapeSheet.SRCConstants.PinX);
+            q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             bool caught_exc1 = false;
             try
             {
-                q1.AddCell(VA.ShapeSheet.SRCConstants.PinX);
+                q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
             }
             catch (VA.AutomationException)
             {
