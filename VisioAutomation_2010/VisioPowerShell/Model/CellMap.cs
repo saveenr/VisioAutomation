@@ -118,8 +118,6 @@ namespace VisioPowerShell
                     yield return resolved_name;
                 }
             }
-
-            List<KeyValuePair<string, VA.ShapeSheet.SRC>> pairs = this.dic.ToList();
         }
 
         public bool ContainsCell(string name)
@@ -363,7 +361,7 @@ namespace VisioPowerShell
                 map_name_to_shape_cell["TxtPinX"] = VA.ShapeSheet.SRCConstants.TxtPinX;
                 map_name_to_shape_cell["TxtPinY"] = VA.ShapeSheet.SRCConstants.TxtPinY;
                 map_name_to_shape_cell["TxtWidth"] = VA.ShapeSheet.SRCConstants.TxtWidth;
-                map_name_to_shape_cell["Width"] = VA.ShapeSheet.SRCConstants.Width;  
+                map_name_to_shape_cell["Width"] = VA.ShapeSheet.SRCConstants.Width;
 
             }
             return map_name_to_shape_cell;
@@ -374,71 +372,71 @@ namespace VisioPowerShell
             if (map_name_to_page_cell == null)
             {
                 map_name_to_page_cell = new CellMap();
-                                    map_name_to_page_cell["PageBottomMargin"] = VA.ShapeSheet.SRCConstants.PageBottomMargin;   
-                    map_name_to_page_cell["PageHeight"] = VA.ShapeSheet.SRCConstants.PageHeight;   
-                    map_name_to_page_cell["PageLeftMargin"] = VA.ShapeSheet.SRCConstants.PageLeftMargin;   
-                    map_name_to_page_cell["PageLineJumpDirX"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirX;   
-                    map_name_to_page_cell["PageLineJumpDirY"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirY;   
+                map_name_to_page_cell["PageBottomMargin"] = VA.ShapeSheet.SRCConstants.PageBottomMargin;
+                map_name_to_page_cell["PageHeight"] = VA.ShapeSheet.SRCConstants.PageHeight;
+                map_name_to_page_cell["PageLeftMargin"] = VA.ShapeSheet.SRCConstants.PageLeftMargin;
+                map_name_to_page_cell["PageLineJumpDirX"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirX;
+                map_name_to_page_cell["PageLineJumpDirY"] = VA.ShapeSheet.SRCConstants.PageLineJumpDirY;
 
-                    map_name_to_page_cell["PageRightMargin"] = VA.ShapeSheet.SRCConstants.PageRightMargin;   
-                    map_name_to_page_cell["PageScale"] = VA.ShapeSheet.SRCConstants.PageScale;   
-                    map_name_to_page_cell["PageShapeSplit"] = VA.ShapeSheet.SRCConstants.PageShapeSplit;   
-                    map_name_to_page_cell["PageTopMargin"] = VA.ShapeSheet.SRCConstants.PageTopMargin;   
-                    map_name_to_page_cell["PageWidth"] = VA.ShapeSheet.SRCConstants.PageWidth;   
-                    map_name_to_page_cell["CenterX"] = VA.ShapeSheet.SRCConstants.CenterX;   
-                    map_name_to_page_cell["CenterY"] = VA.ShapeSheet.SRCConstants.CenterY;   
-                    map_name_to_page_cell["PaperKind"] = VA.ShapeSheet.SRCConstants.PaperKind;   
-                    map_name_to_page_cell["PrintGrid"] = VA.ShapeSheet.SRCConstants.PrintGrid;   
-                    map_name_to_page_cell["PrintPageOrientation"] = VA.ShapeSheet.SRCConstants.PrintPageOrientation;   
-                    map_name_to_page_cell["ScaleX"] = VA.ShapeSheet.SRCConstants.ScaleX;   
-                    map_name_to_page_cell["ScaleY"] = VA.ShapeSheet.SRCConstants.ScaleY;   
-                    map_name_to_page_cell["PaperSource"] = VA.ShapeSheet.SRCConstants.PaperSource;   
-                    map_name_to_page_cell["DrawingScale"] = VA.ShapeSheet.SRCConstants.DrawingScale;   
-                    map_name_to_page_cell["DrawingScaleType"] = VA.ShapeSheet.SRCConstants.DrawingScaleType;   
-                    map_name_to_page_cell["DrawingSizeType"] = VA.ShapeSheet.SRCConstants.DrawingSizeType;   
-                    map_name_to_page_cell["InhibitSnap"] = VA.ShapeSheet.SRCConstants.InhibitSnap;   
-                    map_name_to_page_cell["ShdwObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;   
-                    map_name_to_page_cell["ShdwOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;   
-                    map_name_to_page_cell["ShdwOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;   
-                    map_name_to_page_cell["ShdwScaleFactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;   
-                    map_name_to_page_cell["ShdwType"] = VA.ShapeSheet.SRCConstants.ShdwType;   
-                    map_name_to_page_cell["UIVisibility"] = VA.ShapeSheet.SRCConstants.UIVisibility;   
-                    map_name_to_page_cell["XGridDensity"] = VA.ShapeSheet.SRCConstants.XGridDensity;   
-                    map_name_to_page_cell["XGridOrigin"] = VA.ShapeSheet.SRCConstants.XGridOrigin;   
-                    map_name_to_page_cell["XGridSpacing"] = VA.ShapeSheet.SRCConstants.XGridSpacing;   
-                    map_name_to_page_cell["XRulerDensity"] = VA.ShapeSheet.SRCConstants.XRulerDensity;   
-                    map_name_to_page_cell["XRulerOrigin"] = VA.ShapeSheet.SRCConstants.XRulerOrigin;   
-                    map_name_to_page_cell["YGridDensity"] = VA.ShapeSheet.SRCConstants.YGridDensity;   
-                    map_name_to_page_cell["YGridOrigin"] = VA.ShapeSheet.SRCConstants.YGridOrigin;   
-                    map_name_to_page_cell["YGridSpacing"] = VA.ShapeSheet.SRCConstants.YGridSpacing;   
-                    map_name_to_page_cell["YRulerDensity"] = VA.ShapeSheet.SRCConstants.YRulerDensity;   
-                    map_name_to_page_cell["YRulerOrigin"] = VA.ShapeSheet.SRCConstants.YRulerOrigin;   
-                    map_name_to_page_cell["AvenueSizeX"] = VA.ShapeSheet.SRCConstants.AvenueSizeX;   
-                    map_name_to_page_cell["AvenueSizeY"] = VA.ShapeSheet.SRCConstants.AvenueSizeY;   
-                    map_name_to_page_cell["BlockSizeX"] = VA.ShapeSheet.SRCConstants.BlockSizeX;   
-                    map_name_to_page_cell["BlockSizeY"] = VA.ShapeSheet.SRCConstants.BlockSizeY;   
-                    map_name_to_page_cell["CtrlAsInput"] = VA.ShapeSheet.SRCConstants.CtrlAsInput;   
-                    map_name_to_page_cell["DynamicsOff"] = VA.ShapeSheet.SRCConstants.DynamicsOff;   
-                    map_name_to_page_cell["EnableGrid"] = VA.ShapeSheet.SRCConstants.EnableGrid;   
-                    map_name_to_page_cell["LineAdjustFrom"] = VA.ShapeSheet.SRCConstants.LineAdjustFrom;   
-                    map_name_to_page_cell["LineAdjustTo"] = VA.ShapeSheet.SRCConstants.LineAdjustTo;   
-                    map_name_to_page_cell["LineJumpCode"] = VA.ShapeSheet.SRCConstants.LineJumpCode;   
-                    map_name_to_page_cell["LineJumpFactorX"] = VA.ShapeSheet.SRCConstants.LineJumpFactorX;   
-                    map_name_to_page_cell["LineJumpFactorY"] = VA.ShapeSheet.SRCConstants.LineJumpFactorY;   
-                    map_name_to_page_cell["LineJumpStyle"] = VA.ShapeSheet.SRCConstants.LineJumpStyle;   
-                    map_name_to_page_cell["LineRouteExt"] = VA.ShapeSheet.SRCConstants.LineRouteExt;   
-                    map_name_to_page_cell["LineToLineX"] = VA.ShapeSheet.SRCConstants.LineToLineX;   
-                    map_name_to_page_cell["LineToLineY"] = VA.ShapeSheet.SRCConstants.LineToLineY;   
-                    map_name_to_page_cell["LineToNodeX"] = VA.ShapeSheet.SRCConstants.LineToNodeX;   
-                    map_name_to_page_cell["LineToNodeY"] = VA.ShapeSheet.SRCConstants.LineToNodeY;   
-                    map_name_to_page_cell["PlaceDepth"] = VA.ShapeSheet.SRCConstants.PlaceDepth;   
-                    map_name_to_page_cell["PlaceFlip"] = VA.ShapeSheet.SRCConstants.PlaceFlip;   
-                    map_name_to_page_cell["PlaceStyle"] = VA.ShapeSheet.SRCConstants.PlaceStyle;   
-                    map_name_to_page_cell["PlowCode"] = VA.ShapeSheet.SRCConstants.PlowCode;   
-                    map_name_to_page_cell["ResizePage"] = VA.ShapeSheet.SRCConstants.ResizePage;   
-                    map_name_to_page_cell["RouteStyle"] = VA.ShapeSheet.SRCConstants.RouteStyle;   
-                    map_name_to_page_cell["AvoidPageBreaks"] = VA.ShapeSheet.SRCConstants.AvoidPageBreaks;   
-                    map_name_to_page_cell["DrawingResizeType"] = VA.ShapeSheet.SRCConstants.DrawingResizeType;  
+                map_name_to_page_cell["PageRightMargin"] = VA.ShapeSheet.SRCConstants.PageRightMargin;
+                map_name_to_page_cell["PageScale"] = VA.ShapeSheet.SRCConstants.PageScale;
+                map_name_to_page_cell["PageShapeSplit"] = VA.ShapeSheet.SRCConstants.PageShapeSplit;
+                map_name_to_page_cell["PageTopMargin"] = VA.ShapeSheet.SRCConstants.PageTopMargin;
+                map_name_to_page_cell["PageWidth"] = VA.ShapeSheet.SRCConstants.PageWidth;
+                map_name_to_page_cell["CenterX"] = VA.ShapeSheet.SRCConstants.CenterX;
+                map_name_to_page_cell["CenterY"] = VA.ShapeSheet.SRCConstants.CenterY;
+                map_name_to_page_cell["PaperKind"] = VA.ShapeSheet.SRCConstants.PaperKind;
+                map_name_to_page_cell["PrintGrid"] = VA.ShapeSheet.SRCConstants.PrintGrid;
+                map_name_to_page_cell["PrintPageOrientation"] = VA.ShapeSheet.SRCConstants.PrintPageOrientation;
+                map_name_to_page_cell["ScaleX"] = VA.ShapeSheet.SRCConstants.ScaleX;
+                map_name_to_page_cell["ScaleY"] = VA.ShapeSheet.SRCConstants.ScaleY;
+                map_name_to_page_cell["PaperSource"] = VA.ShapeSheet.SRCConstants.PaperSource;
+                map_name_to_page_cell["DrawingScale"] = VA.ShapeSheet.SRCConstants.DrawingScale;
+                map_name_to_page_cell["DrawingScaleType"] = VA.ShapeSheet.SRCConstants.DrawingScaleType;
+                map_name_to_page_cell["DrawingSizeType"] = VA.ShapeSheet.SRCConstants.DrawingSizeType;
+                map_name_to_page_cell["InhibitSnap"] = VA.ShapeSheet.SRCConstants.InhibitSnap;
+                map_name_to_page_cell["ShdwObliqueAngle"] = VA.ShapeSheet.SRCConstants.ShdwObliqueAngle;
+                map_name_to_page_cell["ShdwOffsetX"] = VA.ShapeSheet.SRCConstants.ShdwOffsetX;
+                map_name_to_page_cell["ShdwOffsetY"] = VA.ShapeSheet.SRCConstants.ShdwOffsetY;
+                map_name_to_page_cell["ShdwScaleFactor"] = VA.ShapeSheet.SRCConstants.ShdwScaleFactor;
+                map_name_to_page_cell["ShdwType"] = VA.ShapeSheet.SRCConstants.ShdwType;
+                map_name_to_page_cell["UIVisibility"] = VA.ShapeSheet.SRCConstants.UIVisibility;
+                map_name_to_page_cell["XGridDensity"] = VA.ShapeSheet.SRCConstants.XGridDensity;
+                map_name_to_page_cell["XGridOrigin"] = VA.ShapeSheet.SRCConstants.XGridOrigin;
+                map_name_to_page_cell["XGridSpacing"] = VA.ShapeSheet.SRCConstants.XGridSpacing;
+                map_name_to_page_cell["XRulerDensity"] = VA.ShapeSheet.SRCConstants.XRulerDensity;
+                map_name_to_page_cell["XRulerOrigin"] = VA.ShapeSheet.SRCConstants.XRulerOrigin;
+                map_name_to_page_cell["YGridDensity"] = VA.ShapeSheet.SRCConstants.YGridDensity;
+                map_name_to_page_cell["YGridOrigin"] = VA.ShapeSheet.SRCConstants.YGridOrigin;
+                map_name_to_page_cell["YGridSpacing"] = VA.ShapeSheet.SRCConstants.YGridSpacing;
+                map_name_to_page_cell["YRulerDensity"] = VA.ShapeSheet.SRCConstants.YRulerDensity;
+                map_name_to_page_cell["YRulerOrigin"] = VA.ShapeSheet.SRCConstants.YRulerOrigin;
+                map_name_to_page_cell["AvenueSizeX"] = VA.ShapeSheet.SRCConstants.AvenueSizeX;
+                map_name_to_page_cell["AvenueSizeY"] = VA.ShapeSheet.SRCConstants.AvenueSizeY;
+                map_name_to_page_cell["BlockSizeX"] = VA.ShapeSheet.SRCConstants.BlockSizeX;
+                map_name_to_page_cell["BlockSizeY"] = VA.ShapeSheet.SRCConstants.BlockSizeY;
+                map_name_to_page_cell["CtrlAsInput"] = VA.ShapeSheet.SRCConstants.CtrlAsInput;
+                map_name_to_page_cell["DynamicsOff"] = VA.ShapeSheet.SRCConstants.DynamicsOff;
+                map_name_to_page_cell["EnableGrid"] = VA.ShapeSheet.SRCConstants.EnableGrid;
+                map_name_to_page_cell["LineAdjustFrom"] = VA.ShapeSheet.SRCConstants.LineAdjustFrom;
+                map_name_to_page_cell["LineAdjustTo"] = VA.ShapeSheet.SRCConstants.LineAdjustTo;
+                map_name_to_page_cell["LineJumpCode"] = VA.ShapeSheet.SRCConstants.LineJumpCode;
+                map_name_to_page_cell["LineJumpFactorX"] = VA.ShapeSheet.SRCConstants.LineJumpFactorX;
+                map_name_to_page_cell["LineJumpFactorY"] = VA.ShapeSheet.SRCConstants.LineJumpFactorY;
+                map_name_to_page_cell["LineJumpStyle"] = VA.ShapeSheet.SRCConstants.LineJumpStyle;
+                map_name_to_page_cell["LineRouteExt"] = VA.ShapeSheet.SRCConstants.LineRouteExt;
+                map_name_to_page_cell["LineToLineX"] = VA.ShapeSheet.SRCConstants.LineToLineX;
+                map_name_to_page_cell["LineToLineY"] = VA.ShapeSheet.SRCConstants.LineToLineY;
+                map_name_to_page_cell["LineToNodeX"] = VA.ShapeSheet.SRCConstants.LineToNodeX;
+                map_name_to_page_cell["LineToNodeY"] = VA.ShapeSheet.SRCConstants.LineToNodeY;
+                map_name_to_page_cell["PlaceDepth"] = VA.ShapeSheet.SRCConstants.PlaceDepth;
+                map_name_to_page_cell["PlaceFlip"] = VA.ShapeSheet.SRCConstants.PlaceFlip;
+                map_name_to_page_cell["PlaceStyle"] = VA.ShapeSheet.SRCConstants.PlaceStyle;
+                map_name_to_page_cell["PlowCode"] = VA.ShapeSheet.SRCConstants.PlowCode;
+                map_name_to_page_cell["ResizePage"] = VA.ShapeSheet.SRCConstants.ResizePage;
+                map_name_to_page_cell["RouteStyle"] = VA.ShapeSheet.SRCConstants.RouteStyle;
+                map_name_to_page_cell["AvoidPageBreaks"] = VA.ShapeSheet.SRCConstants.AvoidPageBreaks;
+                map_name_to_page_cell["DrawingResizeType"] = VA.ShapeSheet.SRCConstants.DrawingResizeType;
 
             }
             return map_name_to_page_cell;
