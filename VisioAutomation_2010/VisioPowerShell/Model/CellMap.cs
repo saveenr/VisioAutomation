@@ -280,7 +280,7 @@ namespace VisioPowerShell
             return map_name_to_page_cell;
         }
 
-        public VisioAutomation.ShapeSheet.Query.CellQuery CreateQueryFromCellNames(string[] Cells)
+        public VisioAutomation.ShapeSheet.Query.CellQuery CreateQueryFromCellNames(IList<string> Cells)
         {
             var invalid_names = Cells.Where(cellname => !this.ContainsCell(cellname)).ToList();
             if (invalid_names.Count > 0)
