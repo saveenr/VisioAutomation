@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             Set(shape, name, value.Formula.Value, prompt.Formula.Value);
         }
 
-        public static void Set(IVisio.Shape shape, string name, string value, string prompt)
+        public static void Set(IVisio.Shape shape, string name, VA.ShapeSheet.FormulaLiteral value, VA.ShapeSheet.FormulaLiteral prompt)
         {
             if (shape == null)
             {
@@ -53,20 +53,18 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             {
                 string full_prop_name = GetRowName(name);
 
-                if (value != null)
+                if (value.HasValue)
                 {
                     string value_cell_name = full_prop_name;
                     var cell = shape.CellsU[value_cell_name];
-                    string value_formula = Convert.StringToFormulaString(value);
-                    cell.FormulaU = value_formula;                    
+                    cell.FormulaU = value.Encode();                    
                 }
 
-                if (prompt != null)
+                if (prompt.HasValue)
                 {
                     string prompt_cell_name = full_prop_name+".Prompt";
                     var cell = shape.CellsU[prompt_cell_name];
-                    var prompt_formula = Convert.StringToFormulaString(prompt);
-                    cell.FormulaU = prompt_formula;                                        
+                    cell.FormulaU = prompt.Encode();                                        
                 }
                 return;
             }
@@ -78,18 +76,16 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             var update = new VA.ShapeSheet.Update();
 
-            if (value != null)
+            if (value.HasValue)
             {
-                string value_formula = Convert.StringToFormulaString(value);
                 var src = new VA.ShapeSheet.SRC(_userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
-                update.SetFormula(src, value_formula);
+                update.SetFormula(src, value.Encode());
             }
 
-            if (prompt != null)
+            if (prompt.HasValue)
             {
-                string prompt_formula = Convert.StringToFormulaString(prompt);
                 var src = new VA.ShapeSheet.SRC(_userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
-                update.SetFormula(src, prompt_formula);
+                update.SetFormula(src, prompt.Encode());
             }
 
             update.Execute(shape);

@@ -77,7 +77,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
             if (formula.Value.Length == 0)
             {
-                return VA.Convert.StringToFormulaString(formula.Value);
+                return formula.Encode();
             }
 
             if (formula.Value[0] != '\"')
@@ -86,7 +86,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 {
                     return formula.Value;
                 }
-                return VA.Convert.StringToFormulaString(formula.Value);
+                return formula.Encode();
             }
 
             return formula.Value;

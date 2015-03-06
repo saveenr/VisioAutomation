@@ -93,14 +93,14 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Internal_ShapeSheet_VerifySRCLayout()
         {
-            this.SRCSizeIs12Bytes();
+            this.SRCSizeIs6Bytes();
             this.Verify_Size_of_instance();
         }
 
-        public void SRCSizeIs12Bytes()
+        public void SRCSizeIs6Bytes()
         {
             var c1 = new VA.ShapeSheet.SRC();
-            Assert.AreEqual(12, System.Runtime.InteropServices.Marshal.SizeOf(c1));
+            Assert.AreEqual(6, System.Runtime.InteropServices.Marshal.SizeOf(c1));
         }
 
         public void Verify_Size_of_instance()
