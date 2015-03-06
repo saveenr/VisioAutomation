@@ -84,9 +84,9 @@
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
-    <Compile Include="Shapesheet\Query\CellColumnType.cs" />
-    <Compile Include="Shapesheet\ShapeSheetHelper.cs" />
-    <Compile Include="Shapesheet\ShapeSheetSurface.cs" />
+    <Compile Include="ShapeSheet\Query\CellColumnType.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
+    <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Models\DirectedGraph\VisioRenderer.cs" />
@@ -175,17 +175,17 @@
     <Compile Include="Shapes\Geometry\GeometrySection.cs" />
     <Compile Include="Shapes\Geometry\GeometryRow.cs" />
     <Compile Include="Shapes\Geometry\GeometryHelper.cs" />
-    <Compile Include="Shapesheet\CellGroups\CellGroup.cs" />
-    <Compile Include="Shapesheet\CellGroups\CellGroupMultiRow.cs" />
-    <Compile Include="Shapesheet\CellGroups\BaseCellGroup.cs" />
-    <Compile Include="Shapesheet\Query\QueryResultList.cs" />
-    <Compile Include="Shapesheet\Query\QueryResult.cs" />
-    <Compile Include="Shapesheet\Query\SectionColumnDetails.cs" />
-    <Compile Include="Shapesheet\Query\SectionColumn.cs" />
-    <Compile Include="Shapesheet\Query\SectionResult.cs" />
-    <Compile Include="Shapesheet\Query\CellColumnList.cs" />
-    <Compile Include="Shapesheet\Query\StreamBuilder.cs" />
-    <Compile Include="Shapesheet\Query\SectionColumnList.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellGroup.cs" />
+    <Compile Include="ShapeSheet\CellGroups\CellGroupMultiRow.cs" />
+    <Compile Include="ShapeSheet\CellGroups\BaseCellGroup.cs" />
+    <Compile Include="ShapeSheet\Query\QueryResultList.cs" />
+    <Compile Include="ShapeSheet\Query\QueryResult.cs" />
+    <Compile Include="ShapeSheet\Query\SectionColumnDetails.cs" />
+    <Compile Include="ShapeSheet\Query\SectionColumn.cs" />
+    <Compile Include="ShapeSheet\Query\SectionResult.cs" />
+    <Compile Include="ShapeSheet\Query\CellColumnList.cs" />
+    <Compile Include="ShapeSheet\Query\StreamBuilder.cs" />
+    <Compile Include="ShapeSheet\Query\SectionColumnList.cs" />
     <Compile Include="Text\CharStyle.cs" />
     <Compile Include="Text\Markup\CharacterCells.cs" />
     <Compile Include="Text\Markup\ParagraphCells.cs" />
@@ -234,7 +234,7 @@
     <Compile Include="Shapes\XFormCells.cs" />
     <Compile Include="Text\ParagraphCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyCells.cs" />
-    <Compile Include="Shapesheet\Query\CellColumn.cs" />
+    <Compile Include="ShapeSheet\Query\CellColumn.cs" />
     <Compile Include="DOM\BaseShape.cs" />
     <Compile Include="DOM\ShapeList.cs" />
     <Compile Include="DOM\Node.cs" />
@@ -242,8 +242,8 @@
     <Compile Include="DOM\RenderContext.cs" />
     <Compile Include="DOM\ShapeCells.cs" />
     <Compile Include="Internal\WalkEvent.cs" />
-    <Compile Include="Shapesheet\Update.cs" />
-    <Compile Include="Shapesheet\FormulaLiteral.cs" />
+    <Compile Include="ShapeSheet\Update.cs" />
+    <Compile Include="ShapeSheet\FormulaLiteral.cs" />
     <Compile Include="Internal\TreeOps.cs" />
     <Compile Include="Internal\ArcSegment.cs" />
     <Compile Include="Drawing\BezierCurve.cs" />
@@ -253,13 +253,13 @@
     <Compile Include="Drawing\SnappingGrid.cs" />
     <Compile Include="Drawing\Point.cs" />
     <Compile Include="Drawing\Rectangle.cs" />
-    <Compile Include="Shapesheet\SIDSRC.cs" />
+    <Compile Include="ShapeSheet\SIDSRC.cs" />
     <Compile Include="Drawing\Size.cs" />
     <Compile Include="Shapes\Connections\DirectedEdge.cs" />
     <Compile Include="Convert.cs" />
     <Compile Include="Extensions\LayersMethods.cs" />
-    <Compile Include="Shapesheet\SRCConstants.cs" />
-    <Compile Include="Shapesheet\SRC.cs" />
+    <Compile Include="ShapeSheet\SRCConstants.cs" />
+    <Compile Include="ShapeSheet\SRC.cs" />
     <Compile Include="Shapes\Connections\ConnectionPointCells.cs" />
     <Compile Include="Extensions\SectionMethods.cs" />
     <Compile Include="Shapes\UserDefinedCells\UserDefinedCellHelper.cs" />
@@ -269,7 +269,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Shapesheet\CellData.cs" />
+    <Compile Include="ShapeSheet\CellData.cs" />
     <Compile Include="Text\Markup\Field.cs" />
     <Compile Include="Text\Markup\FieldConstants.cs" />
     <Compile Include="Text\Markup\MarkupRegions.cs" />
@@ -279,7 +279,7 @@
     <Compile Include="Text\Markup\TextElement.cs" />
     <Compile Include="Text\Markup\Literal.cs" />
     <Compile Include="Text\Markup\TextRegion.cs" />
-    <Compile Include="Shapesheet\Query\CellQuery.cs" />
+    <Compile Include="ShapeSheet\Query\CellQuery.cs" />
     <Compile Include="Shapes\Connections\ConnectorHelper.cs" />
     <Compile Include="Documents\DocumentHelper.cs" />
     <Compile Include="Application\UserInterfaceHelper.cs" />
