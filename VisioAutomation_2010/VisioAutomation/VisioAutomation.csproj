@@ -84,6 +84,7 @@
     <Compile Include="Application\Logging\LogRecord.cs" />
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
+    <Compile Include="Models\DirectedGraph\NodeUserData.cs" />
     <Compile Include="ShapeSheet\Query\CellColumnType.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
@@ -347,7 +348,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="binaries\MSAGL\Microsoft.Msagl.dll" />
-    <Content Include="binaries\MSAGL\readme.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -38,6 +38,7 @@ namespace VisioAutomation.Models.DirectedGraph
              VA.Shapes.Connections.ConnectorType type)
         {
             var new_connector = new Connector(from, to);
+            new_connector.ID = id;
             new_connector.Label = label;
             new_connector.ConnectorType = type;
 
