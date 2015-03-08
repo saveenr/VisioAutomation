@@ -287,6 +287,8 @@ namespace TestVisioAutomation
             draw_directed_graph(client, xml);
 
             // Cleanup
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
 
@@ -302,6 +304,8 @@ namespace TestVisioAutomation
             draw_directed_graph(client, xml);
 
             // Cleanup
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
 
@@ -317,6 +321,8 @@ namespace TestVisioAutomation
             draw_directed_graph(client, xml);
 
             // Cleanup
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
 
@@ -332,6 +338,8 @@ namespace TestVisioAutomation
             draw_directed_graph(client, xml);
 
             // Cleanup
+            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
 
