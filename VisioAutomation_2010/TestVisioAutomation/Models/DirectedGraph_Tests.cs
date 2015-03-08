@@ -24,7 +24,7 @@ namespace TestVisioAutomation
             var doc = this.GetNewDoc();
             var page = visapp.ActivePage;
             directed_graph_drawing.Render(page,options);
-            doc.Close(true);
+            //doc.Close(true);
         }
 
         [TestMethod]

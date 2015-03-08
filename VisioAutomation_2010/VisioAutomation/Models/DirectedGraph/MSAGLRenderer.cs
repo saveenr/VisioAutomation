@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Msagl.Core.Geometry;
+using Microsoft.Msagl.Core.Geometry.Curves;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using MSAGL = Microsoft.Msagl;
@@ -118,9 +120,10 @@ namespace VisioAutomation.Models.DirectedGraph
             {
                 var nodesize = ToMSAGLCoordinates(layout_shape.Size ?? defsize);
 
-                var msagl_node = new MG.Core.Layout.Node(
-                                             MSAGL.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height,
-                                                                               new MG.Core.Geometry.Point()), new NodeUserData(layout_shape.ID, null,null));
+                var node_user_data = new NodeUserData(layout_shape.ID, layout_shape,null);
+                var center = new MG.Core.Geometry.Point();
+                var rectangle = MSAGL.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
+                var msagl_node = new MG.Core.Layout.Node( rectangle, node_user_data);
                 msagl_graph.Nodes.Add(msagl_node);
             }
 
@@ -258,6 +261,8 @@ namespace VisioAutomation.Models.DirectedGraph
 
             CreateDOMShapes(page_node.Shapes, msagl_graph, vis);
 
+
+
             if (this.LayoutOptions.UseDynamicConnectors)
             {
                 CreateDynamicConnectorEdges(page_node.Shapes, msagl_graph);
@@ -266,6 +271,7 @@ namespace VisioAutomation.Models.DirectedGraph
             {
                 CreateBezierEdges(page_node.Shapes, msagl_graph);
             }
+
 
             // Additional Page properties
             page_node.PageCells.PlaceStyle = 1;
@@ -290,8 +296,8 @@ namespace VisioAutomation.Models.DirectedGraph
             var shapes = uds.Where(ud => ud.Shape != null).Select(ud=>ud.Shape).ToList();
             var stencilnames0 = shapes.Select(s => s.StencilName).ToList();
             var stencil_names = stencilnames0.Distinct().ToList();
-            
-            var stencil_map = new Dictionary<string,IVisio.Document>();
+
+            var stencil_map = new Dictionary<string, IVisio.Document>(StringComparer.OrdinalIgnoreCase);
             foreach (var stencil_name in stencil_names)
             {
                 if (!stencil_map.ContainsKey(stencil_name))
@@ -301,13 +307,13 @@ namespace VisioAutomation.Models.DirectedGraph
                 }
             }
 
-            var master_map = new Dictionary<string,IVisio.Master>();
+            var master_map = new Dictionary<string, IVisio.Master>(StringComparer.OrdinalIgnoreCase);
             foreach (var nv in shapes)
             {
-                var key = nv.StencilName.ToLower() + "+" + nv.MasterName; 
+                var key = nv.StencilName + "+" + nv.MasterName; 
                 if (!master_map.ContainsKey(key))
                 {
-                    var stencil = stencil_map[nv.StencilName.ToUpper()];
+                    var stencil = stencil_map[nv.StencilName];
                     var masters = stencil.Masters;
                     var master = masters[nv.MasterName];
                     master_map[key] = master;
@@ -334,8 +340,7 @@ namespace VisioAutomation.Models.DirectedGraph
                 var layout_shape = ud.Shape;
                 if (layout_shape != null)
                 {
-                    var shape_node = layout_shape.DOMNode;
-                    format_shape(layout_shape, shape_node);                    
+                    format_shape(layout_shape, layout_shape.DOMNode);                    
                 }
             }
         }
