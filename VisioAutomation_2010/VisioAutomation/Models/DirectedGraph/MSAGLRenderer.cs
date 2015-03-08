@@ -1,13 +1,27 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
 using MSAGL = Microsoft.Msagl;
+using MG = Microsoft.Msagl;
 using VA = VisioAutomation;
 using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioAutomation.Models.DirectedGraph
 {
+        public class NodeUserData
+        {
+            public string ID;
+            public VA.Models.DirectedGraph.Shape Shape;
+            public VA.Models.DirectedGraph.Connector Connector;
+            public NodeUserData(string id, VA.Models.DirectedGraph.Shape shape, VA.Models.DirectedGraph.Connector con)
+            {
+                this.ID = id;
+                this.Shape = shape;
+                this.Connector = con;
+            }
+        }
     class MSAGLRenderer
     {
         private VA.Drawing.Rectangle msagl_bb;
@@ -75,9 +89,27 @@ namespace VisioAutomation.Models.DirectedGraph
             return success;
         }
 
-        private MSAGL.GeometryGraph CreateMSAGLGraph(DGMODEL.Drawing layout_diagram)
+
+
+        MG.Core.Layout.Node FindByUserDataID(IList<MG.Core.Layout.Node> nodes, string id)
         {
-            var msagl_graph = new MSAGL.GeometryGraph();
+            foreach (var n in nodes)
+            {
+                if (n.UserData != null)
+                {
+                    var ud = (NodeUserData) n.UserData;
+                    if (ud.ID == id)
+                    {
+                        return n;
+                    }
+                }
+            }
+            throw new Exception();
+        }
+
+        private MG.Core.Layout.GeometryGraph CreateMSAGLGraph(DGMODEL.Drawing layout_diagram)
+        {
+            var msagl_graph = new MG.Core.Layout.GeometryGraph();
             var defsize = new VA.Drawing.Size(this.LayoutOptions.DefaultShapeSize.Width,
                                                    this.LayoutOptions.DefaultShapeSize.Height);
 
@@ -85,11 +117,11 @@ namespace VisioAutomation.Models.DirectedGraph
             foreach (var layout_shape in layout_diagram.Shapes)
             {
                 var nodesize = ToMSAGLCoordinates(layout_shape.Size ?? defsize);
-                var msagl_node = new MSAGL.Node(layout_shape.ID,
-                                             MSAGL.Splines.CurveFactory.CreateBox(nodesize.Width, nodesize.Height,
-                                                                               new MSAGL.Point()));
-                msagl_graph.AddNode(msagl_node);
-                msagl_node.UserData = layout_shape;
+
+                var msagl_node = new MG.Core.Layout.Node(
+                                             MSAGL.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height,
+                                                                               new MG.Core.Geometry.Point()), new NodeUserData(layout_shape.ID, null,null));
+                msagl_graph.Nodes.Add(msagl_node);
             }
 
             bool connectors_ok = this.validate_connectors(layout_diagram);
@@ -110,18 +142,21 @@ namespace VisioAutomation.Models.DirectedGraph
                     throw new System.ArgumentException("Connector's To node is null");
                 }
 
-                var from_node = msagl_graph.NodeMap[layout_connector.From.ID];
-                var to_node = msagl_graph.NodeMap[layout_connector.To.ID];
+                var from_node = FindByUserDataID(msagl_graph.Nodes, layout_connector.From.ID);
+                var to_node = FindByUserDataID(msagl_graph.Nodes, layout_connector.To.ID);
 
-                var new_edge = new MSAGL.Edge(from_node, to_node);
-                new_edge.ArrowheadAtTarget = false;
-                new_edge.UserData = layout_connector;
-                msagl_graph.AddEdge(new_edge);
+                var new_edge = new MG.Core.Layout.Edge(from_node, to_node);
+                // TODO: MSAGL
+                //new_edge.ArrowheadAtTarget = false;
+                new_edge.UserData = new NodeUserData(layout_connector.ID,null,layout_connector);
+                msagl_graph.Edges.Add(new_edge);
 
-                new_edge.Label = new Microsoft.Msagl.Label(msagl_size.Width, msagl_size.Height, new_edge);
+                new_edge.Label = new MG.Core.Layout.Label(msagl_size.Width, msagl_size.Height, new_edge);
             }
 
-            msagl_graph.CalculateLayout();
+            var settings = new MG.Layout.Layered.SugiyamaLayoutSettings();
+            var layout = new Microsoft.Msagl.Layout.Layered.LayeredLayout(msagl_graph,settings);
+            layout.Run();
 
             this.msagl_bb = new VA.Drawing.Rectangle(
                 msagl_graph.BoundingBox.Left, 
@@ -136,9 +171,10 @@ namespace VisioAutomation.Models.DirectedGraph
         }
 
         // Given the MSAGL node, this function returns the Shape object
-        private static DGMODEL.Shape get_shape(MSAGL.Node msagl_node)
+        private static DGMODEL.Shape get_shape(MG.Core.Layout.Node msagl_node)
         {
-            var shape = (DGMODEL.Shape)msagl_node.UserData;
+            var ud = (NodeUserData) msagl_node.UserData; 
+            var shape = ud.Shape;
             return shape;
         }
 
@@ -242,16 +278,18 @@ namespace VisioAutomation.Models.DirectedGraph
             return page_node;
         }
 
-        private void CreateDOMShapes(VA.DOM.ShapeList domshapeslist, MSAGL.GeometryGraph msagl_graph, IVisio.Application app)
+        private void CreateDOMShapes(VA.DOM.ShapeList domshapeslist, MG.Core.Layout.GeometryGraph msagl_graph, IVisio.Application app)
         {
-            var node_centerpoints = msagl_graph.NodeMap.Values
+            var node_centerpoints = msagl_graph.Nodes
                     .Select(n => ToDocumentCoordinates(VA.Internal.MSAGLUtil.ToVAPoint(n.Center)))
                     .ToArray();
 
             // Load up all the stencil docs
             var app_documents = app.Documents;
-            var nodes = msagl_graph.NodeMap.Values.Select(get_shape);
-            var stencil_names = nodes.Select(s => s.StencilName.ToUpper()).Distinct().ToList();
+            var uds = msagl_graph.Nodes.Where(n => n.UserData != null).Select(n => (NodeUserData) n.UserData).ToList();
+            var shapes = uds.Where(ud => ud.Shape != null).Select(ud=>ud.Shape).ToList();
+            var stencilnames0 = shapes.Select(s => s.StencilName).ToList();
+            var stencil_names = stencilnames0.Distinct().ToList();
             
             var stencil_map = new Dictionary<string,IVisio.Document>();
             foreach (var stencil_name in stencil_names)
@@ -264,7 +302,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
 
             var master_map = new Dictionary<string,IVisio.Master>();
-            foreach (var nv in nodes)
+            foreach (var nv in shapes)
             {
                 var key = nv.StencilName.ToLower() + "+" + nv.MasterName; 
                 if (!master_map.ContainsKey(key))
@@ -279,7 +317,7 @@ namespace VisioAutomation.Models.DirectedGraph
             // Create DOM Shapes for each AutoLayoutShape
 
             int count = 0;
-            foreach (var layout_shape in nodes)
+            foreach (var layout_shape in shapes)
             {
                 var key = layout_shape.StencilName.ToLower() + "+" + layout_shape.MasterName;
                 var master = master_map[key];
@@ -290,20 +328,25 @@ namespace VisioAutomation.Models.DirectedGraph
             }
 
             // FORMAT EACH SHAPE
-            foreach (var n in msagl_graph.NodeMap.Values)
+            foreach (var n in msagl_graph.Nodes)
             {
-                var layout_shape = (DGMODEL.Shape) n.UserData;
-                var shape_node = (VA.DOM.BaseShape) layout_shape.DOMNode;
-                format_shape(layout_shape, shape_node);
+                var ud = (NodeUserData) n.UserData;
+                var layout_shape = ud.Shape;
+                if (layout_shape != null)
+                {
+                    var shape_node = layout_shape.DOMNode;
+                    format_shape(layout_shape, shape_node);                    
+                }
             }
         }
 
-        private void CreateBezierEdges(VA.DOM.ShapeList domshapes, MSAGL.GeometryGraph msagl_graph)
+        private void CreateBezierEdges(VA.DOM.ShapeList domshapes, MSAGL.Core.Layout.GeometryGraph msagl_graph)
         {
             // DRAW EDGES WITH BEZIERS 
             foreach (var msagl_edge in msagl_graph.Edges)
             {
-                var layoutconnector = (DGMODEL.Connector)msagl_edge.UserData;
+                var ud = (NodeUserData) msagl_edge.UserData;
+                var layoutconnector =  ud.Connector;
                 var vconnector = draw_edge_bezier(domshapes, layoutconnector, msagl_edge);
                 layoutconnector.DOMNode = vconnector;
                 domshapes.Add(vconnector);
@@ -311,7 +354,8 @@ namespace VisioAutomation.Models.DirectedGraph
 
             foreach (var msagl_edge in msagl_graph.Edges)
             {
-                var layout_connector = (DGMODEL.Connector)msagl_edge.UserData;
+                var ud = (NodeUserData)msagl_edge.UserData;
+                var layout_connector = ud.Connector;
 
                 if (layout_connector.Cells != null)
                 {
@@ -322,7 +366,8 @@ namespace VisioAutomation.Models.DirectedGraph
 
             foreach (var msagl_edge in msagl_graph.Edges)
             {
-                var layout_connector = (DGMODEL.Connector) msagl_edge.UserData;
+                var ud = (NodeUserData)msagl_edge.UserData;
+                var layout_connector = ud.Connector;
 
                 if (!string.IsNullOrEmpty(layout_connector.Label))
                 {
@@ -338,12 +383,14 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private void CreateDynamicConnectorEdges(VA.DOM.ShapeList shape_nodes, MSAGL.GeometryGraph msagl_graph)
+        private void CreateDynamicConnectorEdges(VA.DOM.ShapeList shape_nodes, MSAGL.Core.Layout.GeometryGraph msagl_graph)
         {
             // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
             {
-                var layout_connector = (DGMODEL.Connector)i.UserData;
+                var ud = (NodeUserData)i.UserData;
+                var layout_connector = ud.Connector;
+
                 var vconnector = new VA.DOM.Connector(
                     layout_connector.From.DOMNode,
                     layout_connector.To.DOMNode, "Dynamic Connector", "connec_u.vss");
@@ -353,7 +400,9 @@ namespace VisioAutomation.Models.DirectedGraph
 
             foreach (var msagle_edge in msagl_graph.Edges)
             {
-                var layoutconnector = (DGMODEL.Connector)msagle_edge.UserData;
+                var ud = (NodeUserData)msagle_edge.UserData;
+                var layoutconnector = ud.Connector;
+
                 var vconnector = (VA.DOM.Connector) layoutconnector.DOMNode;
 
                 int con_route_style = (int)  ConnectorTypeToCellVal_Appearance(layoutconnector.ConnectorType);
@@ -434,7 +483,7 @@ namespace VisioAutomation.Models.DirectedGraph
         private VA.DOM.BezierCurve draw_edge_bezier(
             VA.DOM.ShapeList page,
             DGMODEL.Connector connector,
-            MSAGL.Edge edge)
+            MSAGL.Core.Layout.Edge edge)
         {
             var final_bez_points =
                 VA.Internal.MSAGLUtil.ToVAPoints(edge).Select(p => ToDocumentCoordinates(p)).ToList();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MG = Microsoft.Msagl;
 using VA=VisioAutomation;
@@ -7,50 +8,67 @@ namespace VisioAutomation.Internal
 {
     static class MSAGLUtil
     {
-        public static VA.Drawing.Rectangle ToVARectangle(MG.Splines.Rectangle n)
+        public static VA.Drawing.Rectangle ToVARectangle(MG.Core.Geometry.Rectangle n)
         {
             return new VA.Drawing.Rectangle(n.Left, n.Bottom, n.Right, n.Top);
         }
 
-        public static VA.Drawing.Point ToVAPoint(MG.Point p)
+        public static VA.Drawing.Point ToVAPoint(MG.Core.Geometry.Point p)
         {
             return new VA.Drawing.Point(p.X, p.Y);
         }
 
-        public static IList<VA.Drawing.Point> ToVAPoints(MG.Edge edge)
+        public static IList<VA.Drawing.Point> ToVAPoints(MG.Core.Layout.Edge edge)
         {
-            var final_bez_points = new List<VA.Drawing.Point> { ToVAPoint(edge.Curve.Start) };
 
-            var curve = (MG.Splines.Curve) edge.Curve;
-
-            foreach (var cur_seg in curve.Segments)
+            if (edge.Curve is MG.Core.Geometry.Curves.Curve)
             {
-                if (cur_seg is MG.Splines.CubicBezierSegment)
-                {
-                    var bezier_seg = (MG.Splines.CubicBezierSegment) cur_seg;
+                var curve = (MG.Core.Geometry.Curves.Curve)edge.Curve;
 
-                    var bez_points =
-                        new[] { 0, 1, 2, 3 }
-                            .Select(bezier_seg.B)
-                            .Select(ToVAPoint)
-                            .ToArray();
+                var final_bez_points = new List<VA.Drawing.Point> { ToVAPoint(edge.Curve.Start) };
 
-                    final_bez_points.AddRange(bez_points.Skip(1));
-                }
-                else if (cur_seg is MG.Splines.LineSegment)
+                foreach (var cur_seg in curve.Segments)
                 {
-                    var line_seg = (MG.Splines.LineSegment) cur_seg;
-                    final_bez_points.Add(ToVAPoint(line_seg.Start));
-                    final_bez_points.Add(ToVAPoint(line_seg.End));
-                    final_bez_points.Add(ToVAPoint(line_seg.End));
+                    if (cur_seg is MG.Core.Geometry.Curves.CubicBezierSegment)
+                    {
+                        var bezier_seg = (MG.Core.Geometry.Curves.CubicBezierSegment)cur_seg;
+
+                        var bez_points =
+                            new[] { 0, 1, 2, 3 }
+                                .Select(bezier_seg.B)
+                                .Select(ToVAPoint)
+                                .ToArray();
+
+                        final_bez_points.AddRange(bez_points.Skip(1));
+                    }
+                    else if (cur_seg is MG.Core.Geometry.Curves.LineSegment)
+                    {
+                        var line_seg = (MG.Core.Geometry.Curves.LineSegment)cur_seg;
+                        final_bez_points.Add(ToVAPoint(line_seg.Start));
+                        final_bez_points.Add(ToVAPoint(line_seg.End));
+                        final_bez_points.Add(ToVAPoint(line_seg.End));
+                    }
+                    else
+                    {
+                        throw new System.InvalidOperationException("Unsupported Curve Segment type");
+                    }
                 }
-                else
-                {
-                    throw new System.InvalidOperationException("Unsupported Curve Segment type");
-                }
+
+                return final_bez_points;
+                
+            }
+            else if (edge.Curve is MG.Core.Geometry.Curves.LineSegment)
+            {
+                var final_bez_points = new List<VA.Drawing.Point> { ToVAPoint(edge.Curve.Start) };
+                var line_seg = (MG.Core.Geometry.Curves.LineSegment)edge.Curve;
+                final_bez_points.Add(ToVAPoint(line_seg.Start));
+                final_bez_points.Add(ToVAPoint(line_seg.End));
+                final_bez_points.Add(ToVAPoint(line_seg.End));
+                return final_bez_points;
+                
             }
 
-            return final_bez_points;
+            throw new Exception();
         }
     }
 }
