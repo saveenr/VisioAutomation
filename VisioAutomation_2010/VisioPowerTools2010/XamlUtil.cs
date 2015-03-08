@@ -41,7 +41,8 @@ namespace VisioPowerTools2010
             }
             else
             {
-                //TODO: Throw an Exception
+                string msg = string.Format("Temporary SVG file could not be found: \"{0}\"", svg_filename);
+                throw new VisioAutomation.Scripting.VisioOperationException(msg);
             }
 
             verboselog(string.Format("Creating XHTML with embedded SVG"));

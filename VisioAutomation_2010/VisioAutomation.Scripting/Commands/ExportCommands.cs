@@ -154,7 +154,6 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                // TODO: throw an exception
             }
 
             verboselog(string.Format("Creating XHTML with embedded SVG"));
@@ -223,10 +222,10 @@ namespace VisioAutomation.Scripting.Commands
             {
                 System.IO.File.Delete(svg_filename);
             }
-
             else
             {
-                //TODO: Throw an Exception
+                string msg = string.Format("Temporary SVG file could not be found: \"{0}\"", svg_filename);
+                throw new VisioOperationException(msg);
             }
 
             verboselog(string.Format("Creating XHTML with embedded SVG"));

@@ -105,8 +105,6 @@ namespace VisioAutomationSamples
 
             layout1.PerformLayout();
 
-            // TODO: Check that each data item has at least 3 values
-
             // Create a blank canvas in Visio 
             var app = SampleEnvironment.Application;
             var documents = app.Documents;
