@@ -92,7 +92,6 @@
     <Compile Include="PageNavigation.cs" />
     <Compile Include="VisioOperationException.cs" />
     <Compile Include="SnapCornerPosition.cs" />
-    <Compile Include="UACHelper.cs" />
     <Compile Include="VisioApplicationException.cs" />
     <Compile Include="RelativePosition.cs" />
     <Compile Include="XmlUtil.cs" />
