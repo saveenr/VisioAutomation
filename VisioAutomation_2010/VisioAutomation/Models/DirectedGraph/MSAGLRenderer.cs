@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Msagl.Core.Geometry;
-using Microsoft.Msagl.Core.Geometry.Curves;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using MSAGL = Microsoft.Msagl;
 using MG = Microsoft.Msagl;
 using VA = VisioAutomation;
 using DGMODEL = VisioAutomation.Models.DirectedGraph;
@@ -96,7 +93,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
                 var node_user_data = new NodeUserData(layout_shape.ID, layout_shape);
                 var center = new MG.Core.Geometry.Point();
-                var rectangle = MSAGL.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
+                var rectangle = MG.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
                 var msagl_node = new MG.Core.Layout.Node( rectangle, node_user_data);
                 msagl_graph.Nodes.Add(msagl_node);
             }
@@ -321,7 +318,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private void CreateBezierEdges(VA.DOM.ShapeList domshapes, MSAGL.Core.Layout.GeometryGraph msagl_graph)
+        private void CreateBezierEdges(VA.DOM.ShapeList domshapes, MG.Core.Layout.GeometryGraph msagl_graph)
         {
             // DRAW EDGES WITH BEZIERS 
             foreach (var msagl_edge in msagl_graph.Edges)
@@ -364,7 +361,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private void CreateDynamicConnectorEdges(VA.DOM.ShapeList shape_nodes, MSAGL.Core.Layout.GeometryGraph msagl_graph)
+        private void CreateDynamicConnectorEdges(VA.DOM.ShapeList shape_nodes, MG.Core.Layout.GeometryGraph msagl_graph)
         {
             // CREATE EDGES
             foreach (var i in msagl_graph.Edges)
@@ -464,7 +461,7 @@ namespace VisioAutomation.Models.DirectedGraph
         private VA.DOM.BezierCurve draw_edge_bezier(
             VA.DOM.ShapeList page,
             DGMODEL.Connector connector,
-            MSAGL.Core.Layout.Edge edge)
+            MG.Core.Layout.Edge edge)
         {
             var final_bez_points =
                 VA.Internal.MSAGLUtil.ToVAPoints(edge).Select(p => ToDocumentCoordinates(p)).ToList();
