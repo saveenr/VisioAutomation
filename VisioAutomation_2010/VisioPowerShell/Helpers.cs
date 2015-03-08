@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -8,7 +6,7 @@ namespace VisioPowerShell
 {
     static class Helpers
     {
-        private static System.Data.DataTable querytable_to_datatable<T>(VA.ShapeSheet.Query.CellQuery cellQuery, QueryResultList<T> query_output)
+        private static System.Data.DataTable querytable_to_datatable<T>(VA.ShapeSheet.Query.CellQuery cellQuery, VA.ShapeSheet.Query.QueryResultList<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new System.Data.DataTable();
@@ -40,7 +38,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
+        public static System.Data.DataTable QueryToDataTable(VA.ShapeSheet.Query.CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, VA.ShapeSheet.ShapeSheetSurface surface)
         {
             if (getresults)
             {

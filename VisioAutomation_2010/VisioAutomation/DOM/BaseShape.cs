@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.Shapes.CustomProperties;
+using CUSTPROP=VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -11,7 +11,7 @@ namespace VisioAutomation.DOM
         public short VisioShapeID { get; internal set; }
 
         public VA.Text.Markup.TextElement Text { get; set; }
-        public Dictionary<string, CustomPropertyCells> CustomProperties { get; set; }
+        public Dictionary<string, CUSTPROP.CustomPropertyCells> CustomProperties { get; set; }
         public List<Hyperlink> Hyperlinks { get; set; }
 
         // Be aware that if multiple nodes share the same Cells reference bad things can happen.

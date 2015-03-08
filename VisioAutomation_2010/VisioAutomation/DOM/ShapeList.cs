@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.Shapes.Connections;
-using VisioAutomation.Shapes.CustomProperties;
+using VACON=VisioAutomation.Shapes.Connections;
+using CUSTPROP=VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
@@ -82,8 +82,8 @@ namespace VisioAutomation.DOM
                 foreach (var kv in shape.CustomProperties)
                 {
                     string cp_name = kv.Key;
-                    CustomPropertyCells cp_cells = kv.Value;
-                    CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
+                    CUSTPROP.CustomPropertyCells cp_cells = kv.Value;
+                    CUSTPROP.CustomPropertyHelper.Set(vshape, cp_name, cp_cells);
                 }
             }
         }
@@ -382,7 +382,7 @@ namespace VisioAutomation.DOM
                 var from_shape = ctx.GetShape(dyncon_shape.From.VisioShapeID);
                 var to_shape = ctx.GetShape(dyncon_shape.To.VisioShapeID);
 
-                ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
+                VACON.ConnectorHelper.ConnectShapes(from_shape, to_shape, vis_connector);
                 dyncon_shape.VisioShape = vis_connector;
                 dyncon_shape.VisioShapeID = connector_shapeids[i];
             }

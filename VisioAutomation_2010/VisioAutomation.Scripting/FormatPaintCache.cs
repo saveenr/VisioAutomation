@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using SRCCON=VisioAutomation.ShapeSheet.SRCConstants;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -13,72 +14,72 @@ namespace VisioAutomation.Scripting
         {
             this.Cells = new List<FormatPaintCell>();
 
-            this.Add(FormatCategory.Fill, "FillBkgnd", VA.ShapeSheet.SRCConstants.FillBkgnd);
-            this.Add(FormatCategory.Fill, "FillBkgndTrans", VA.ShapeSheet.SRCConstants.FillBkgndTrans);
-            this.Add(FormatCategory.Fill, "FillForegnd", VA.ShapeSheet.SRCConstants.FillForegnd);
-            this.Add(FormatCategory.Fill, "FillForegndTrans", VA.ShapeSheet.SRCConstants.FillForegndTrans);
-            this.Add(FormatCategory.Fill, "FillPattern", VA.ShapeSheet.SRCConstants.FillPattern);
+            this.Add(SRCCON.FillBkgnd, FormatCategory.Fill, "FillBkgnd");
+            this.Add(SRCCON.FillBkgndTrans, FormatCategory.Fill, "FillBkgndTrans");
+            this.Add(SRCCON.FillForegnd, FormatCategory.Fill, "FillForegnd");
+            this.Add(SRCCON.FillForegndTrans, FormatCategory.Fill, "FillForegndTrans");
+            this.Add(SRCCON.FillPattern, FormatCategory.Fill, "FillPattern");
 
-            this.Add(FormatCategory.Shadow, "ShapeShdwObliqueAngle", VA.ShapeSheet.SRCConstants.ShapeShdwObliqueAngle);
-            this.Add(FormatCategory.Shadow, "ShapeShdwOffsetX", VA.ShapeSheet.SRCConstants.ShapeShdwOffsetX);
-            this.Add(FormatCategory.Shadow, "ShapeShdwOffsetY", VA.ShapeSheet.SRCConstants.ShapeShdwOffsetY);
-            this.Add(FormatCategory.Shadow, "ShapeShdwScaleFactor", VA.ShapeSheet.SRCConstants.ShapeShdwScaleFactor);
-            this.Add(FormatCategory.Shadow, "ShapeShdwType", VA.ShapeSheet.SRCConstants.ShapeShdwType);
-            this.Add(FormatCategory.Shadow, "ShdwBkgnd", VA.ShapeSheet.SRCConstants.ShdwBkgnd);
-            this.Add(FormatCategory.Shadow, "ShdwBkgndTrans", VA.ShapeSheet.SRCConstants.ShdwBkgndTrans);
-            this.Add(FormatCategory.Shadow, "ShdwForegnd", VA.ShapeSheet.SRCConstants.ShdwForegnd);
-            this.Add(FormatCategory.Shadow, "ShdwForegndTrans", VA.ShapeSheet.SRCConstants.ShdwForegndTrans);
-            this.Add(FormatCategory.Shadow, "ShdwPattern", VA.ShapeSheet.SRCConstants.ShdwPattern);
+            this.Add(SRCCON.ShapeShdwObliqueAngle, FormatCategory.Shadow, "ShapeShdwObliqueAngle");
+            this.Add(SRCCON.ShapeShdwOffsetX, FormatCategory.Shadow, "ShapeShdwOffsetX");
+            this.Add(SRCCON.ShapeShdwOffsetY, FormatCategory.Shadow, "ShapeShdwOffsetY");
+            this.Add(SRCCON.ShapeShdwScaleFactor, FormatCategory.Shadow, "ShapeShdwScaleFactor");
+            this.Add(SRCCON.ShapeShdwType, FormatCategory.Shadow, "ShapeShdwType");
+            this.Add(SRCCON.ShdwBkgnd, FormatCategory.Shadow, "ShdwBkgnd");
+            this.Add(SRCCON.ShdwBkgndTrans, FormatCategory.Shadow, "ShdwBkgndTrans");
+            this.Add(SRCCON.ShdwForegnd, FormatCategory.Shadow, "ShdwForegnd");
+            this.Add(SRCCON.ShdwForegndTrans, FormatCategory.Shadow, "ShdwForegndTrans");
+            this.Add(SRCCON.ShdwPattern, FormatCategory.Shadow, "ShdwPattern");
 
-            this.Add(FormatCategory.Line, "BeginArrow", VA.ShapeSheet.SRCConstants.BeginArrow);
-            this.Add(FormatCategory.Line, "BeginArrowSize", VA.ShapeSheet.SRCConstants.BeginArrowSize);
-            this.Add(FormatCategory.Line, "EndArrow", VA.ShapeSheet.SRCConstants.EndArrow);
-            this.Add(FormatCategory.Line, "EndArrowSize", VA.ShapeSheet.SRCConstants.EndArrowSize);
-            this.Add(FormatCategory.Line, "LineCap", VA.ShapeSheet.SRCConstants.LineCap);
-            this.Add(FormatCategory.Line, "LineColor", VA.ShapeSheet.SRCConstants.LineColor);
-            this.Add(FormatCategory.Line, "LineColorTrans", VA.ShapeSheet.SRCConstants.LineColorTrans);
-            this.Add(FormatCategory.Line, "LinePattern", VA.ShapeSheet.SRCConstants.LinePattern);
-            this.Add(FormatCategory.Line, "LineWeight", VA.ShapeSheet.SRCConstants.LineWeight);
-            this.Add(FormatCategory.Line, "Rounding", VA.ShapeSheet.SRCConstants.Rounding);
+            this.Add(SRCCON.BeginArrow, FormatCategory.Line, "BeginArrow");
+            this.Add(SRCCON.BeginArrowSize, FormatCategory.Line, "BeginArrowSize");
+            this.Add(SRCCON.EndArrow, FormatCategory.Line, "EndArrow");
+            this.Add(SRCCON.EndArrowSize, FormatCategory.Line, "EndArrowSize");
+            this.Add(SRCCON.LineCap, FormatCategory.Line, "LineCap");
+            this.Add(SRCCON.LineColor, FormatCategory.Line, "LineColor");
+            this.Add(SRCCON.LineColorTrans, FormatCategory.Line, "LineColorTrans");
+            this.Add(SRCCON.LinePattern, FormatCategory.Line, "LinePattern");
+            this.Add(SRCCON.LineWeight, FormatCategory.Line, "LineWeight");
+            this.Add(SRCCON.Rounding, FormatCategory.Line, "Rounding");
 
-            this.Add(FormatCategory.Character, "Char_Size", VA.ShapeSheet.SRCConstants.CharSize);
-            this.Add(FormatCategory.Character, "Char_Letterspace", VA.ShapeSheet.SRCConstants.CharLetterspace);
-            this.Add(FormatCategory.Character, "Char_FontScale", VA.ShapeSheet.SRCConstants.CharFontScale);
-            this.Add(FormatCategory.Character, "Char_Strikethru", VA.ShapeSheet.SRCConstants.CharStrikethru);
-            this.Add(FormatCategory.Character, "Char_Strikethru", VA.ShapeSheet.SRCConstants.CharStrikethru);
-            this.Add(FormatCategory.Character, "Char_Font", VA.ShapeSheet.SRCConstants.CharFont);
-            this.Add(FormatCategory.Character, "Char_ColorTrans", VA.ShapeSheet.SRCConstants.CharColorTrans);
-            this.Add(FormatCategory.Character, "Char_UseVertical", VA.ShapeSheet.SRCConstants.CharUseVertical);
-            this.Add(FormatCategory.Character, "Char_Case", VA.ShapeSheet.SRCConstants.CharCase);
-            this.Add(FormatCategory.Character, "Char_Color", VA.ShapeSheet.SRCConstants.CharColor);
-            this.Add(FormatCategory.Character, "Char_ComplexScriptFont", VA.ShapeSheet.SRCConstants.CharComplexScriptFont);
-            this.Add(FormatCategory.Character, "Char_ComplexScriptSize", VA.ShapeSheet.SRCConstants.CharComplexScriptSize);
-            this.Add(FormatCategory.Character, "Char_RTLText", VA.ShapeSheet.SRCConstants.CharRTLText);
-            this.Add(FormatCategory.Character, "Char_Perpendicular", VA.ShapeSheet.SRCConstants.CharPerpendicular);
-            this.Add(FormatCategory.Character, "Char_Overline", VA.ShapeSheet.SRCConstants.CharOverline);
-            this.Add(FormatCategory.Character, "Char_DoubleStrikethrough", VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough);
-            this.Add(FormatCategory.Character, "Char_DblUnderline", VA.ShapeSheet.SRCConstants.CharDblUnderline);
-            this.Add(FormatCategory.Character, "Char_LangID", VA.ShapeSheet.SRCConstants.CharLangID);
-            this.Add(FormatCategory.Character, "Char_Locale", VA.ShapeSheet.SRCConstants.CharLocale);
-            this.Add(FormatCategory.Character, "Char_LocalizeFont", VA.ShapeSheet.SRCConstants.CharLocalizeFont);
+            this.Add(SRCCON.CharSize, FormatCategory.Character, "Char_Size");
+            this.Add(SRCCON.CharLetterspace, FormatCategory.Character, "Char_Letterspace");
+            this.Add(SRCCON.CharFontScale, FormatCategory.Character, "Char_FontScale");
+            this.Add(SRCCON.CharStrikethru, FormatCategory.Character, "Char_Strikethru");
+            this.Add(SRCCON.CharStrikethru, FormatCategory.Character, "Char_Strikethru");
+            this.Add(SRCCON.CharFont, FormatCategory.Character, "Char_Font");
+            this.Add(SRCCON.CharColorTrans, FormatCategory.Character, "Char_ColorTrans");
+            this.Add(SRCCON.CharUseVertical, FormatCategory.Character, "Char_UseVertical");
+            this.Add(SRCCON.CharCase, FormatCategory.Character, "Char_Case");
+            this.Add(SRCCON.CharColor, FormatCategory.Character, "Char_Color");
+            this.Add(SRCCON.CharComplexScriptFont, FormatCategory.Character, "Char_ComplexScriptFont");
+            this.Add(SRCCON.CharComplexScriptSize, FormatCategory.Character, "Char_ComplexScriptSize");
+            this.Add(SRCCON.CharRTLText, FormatCategory.Character, "Char_RTLText");
+            this.Add(SRCCON.CharPerpendicular, FormatCategory.Character, "Char_Perpendicular");
+            this.Add(SRCCON.CharOverline, FormatCategory.Character, "Char_Overline");
+            this.Add(SRCCON.CharDoubleStrikethrough, FormatCategory.Character, "Char_DoubleStrikethrough");
+            this.Add(SRCCON.CharDblUnderline, FormatCategory.Character, "Char_DblUnderline");
+            this.Add(SRCCON.CharLangID, FormatCategory.Character, "Char_LangID");
+            this.Add(SRCCON.CharLocale, FormatCategory.Character, "Char_Locale");
+            this.Add(SRCCON.CharLocalizeFont, FormatCategory.Character, "Char_LocalizeFont");
 
-            this.Add(FormatCategory.Paragraph, "Para_Bullet", VA.ShapeSheet.SRCConstants.Para_Bullet);
-            this.Add(FormatCategory.Paragraph, "Para_BulletFont", VA.ShapeSheet.SRCConstants.Para_BulletFont);
-            this.Add(FormatCategory.Paragraph, "Para_BulletFontSize", VA.ShapeSheet.SRCConstants.Para_BulletFontSize);
-            this.Add(FormatCategory.Paragraph, "Para_BulletStr", VA.ShapeSheet.SRCConstants.Para_BulletStr);
-            this.Add(FormatCategory.Paragraph, "Para_Flags", VA.ShapeSheet.SRCConstants.Para_Flags);
-            this.Add(FormatCategory.Paragraph, "Para_HorzAlign", VA.ShapeSheet.SRCConstants.Para_HorzAlign);
-            this.Add(FormatCategory.Paragraph, "Para_IndFirst", VA.ShapeSheet.SRCConstants.Para_IndFirst);
-            this.Add(FormatCategory.Paragraph, "Para_IndLeft", VA.ShapeSheet.SRCConstants.Para_IndLeft);
-            this.Add(FormatCategory.Paragraph, "Para_IndRight", VA.ShapeSheet.SRCConstants.Para_IndRight);
-            this.Add(FormatCategory.Paragraph, "Para_LocalizeBulletFont", VA.ShapeSheet.SRCConstants.Para_LocalizeBulletFont);
-            this.Add(FormatCategory.Paragraph, "Para_SpAfter", VA.ShapeSheet.SRCConstants.Para_SpAfter);
-            this.Add(FormatCategory.Paragraph, "Para_SpBefore", VA.ShapeSheet.SRCConstants.Para_SpBefore);
-            this.Add(FormatCategory.Paragraph, "Para_SpLine", VA.ShapeSheet.SRCConstants.Para_SpLine);
-            this.Add(FormatCategory.Paragraph, "Para_TextPosAfterBullet", VA.ShapeSheet.SRCConstants.Para_TextPosAfterBullet);
+            this.Add(SRCCON.Para_Bullet, FormatCategory.Paragraph, "Para_Bullet");
+            this.Add(SRCCON.Para_BulletFont, FormatCategory.Paragraph, "Para_BulletFont");
+            this.Add(SRCCON.Para_BulletFontSize, FormatCategory.Paragraph, "Para_BulletFontSize");
+            this.Add(SRCCON.Para_BulletStr, FormatCategory.Paragraph, "Para_BulletStr");
+            this.Add(SRCCON.Para_Flags, FormatCategory.Paragraph, "Para_Flags");
+            this.Add(SRCCON.Para_HorzAlign, FormatCategory.Paragraph, "Para_HorzAlign");
+            this.Add(SRCCON.Para_IndFirst, FormatCategory.Paragraph, "Para_IndFirst");
+            this.Add(SRCCON.Para_IndLeft, FormatCategory.Paragraph, "Para_IndLeft");
+            this.Add(SRCCON.Para_IndRight, FormatCategory.Paragraph, "Para_IndRight");
+            this.Add(SRCCON.Para_LocalizeBulletFont, FormatCategory.Paragraph, "Para_LocalizeBulletFont");
+            this.Add(SRCCON.Para_SpAfter, FormatCategory.Paragraph, "Para_SpAfter");
+            this.Add(SRCCON.Para_SpBefore, FormatCategory.Paragraph, "Para_SpBefore");
+            this.Add(SRCCON.Para_SpLine, FormatCategory.Paragraph, "Para_SpLine");
+            this.Add(SRCCON.Para_TextPosAfterBullet, FormatCategory.Paragraph, "Para_TextPosAfterBullet");
         }
 
-        public void Add(FormatCategory category, string name, VA.ShapeSheet.SRC src)
+        public void Add(VA.ShapeSheet.SRC src, FormatCategory category, string name)
         {
             var format_cell = new FormatPaintCell(src, name, category);
             this.Cells.Add(format_cell);
