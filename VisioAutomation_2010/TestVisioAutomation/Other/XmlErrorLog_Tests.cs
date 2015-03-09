@@ -51,8 +51,6 @@ namespace TestVisioAutomation
 
             Assert.IsTrue(second_session.Records[0].Type == "Warning" && second_session.Records[0].SubType == "DataType");
             Assert.IsTrue(second_session.Records[1].Type == "Warning" && second_session.Records[1].SubType == "DataType");
-
-            int x = 1;
         }
 
         [TestMethod]
