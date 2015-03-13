@@ -83,14 +83,11 @@ namespace VisioAutomation.Models.DirectedGraph
         private MG.Core.Layout.GeometryGraph CreateMSAGLGraph(DGMODEL.Drawing layout_diagram)
         {
             var msagl_graph = new MG.Core.Layout.GeometryGraph();
-            var defsize = new VA.Drawing.Size(this.LayoutOptions.DefaultShapeSize.Width,
-                                                   this.LayoutOptions.DefaultShapeSize.Height);
 
             // Create the nodes in MSAGL
             foreach (var layout_shape in layout_diagram.Shapes)
             {
-                var nodesize = ToMSAGLCoordinates(layout_shape.Size ?? defsize);
-
+                var nodesize = ToMSAGLCoordinates(layout_shape.Size ?? this.LayoutOptions.DefaultShapeSize);
                 var node_user_data = new NodeUserData(layout_shape.ID, layout_shape);
                 var center = new MG.Core.Geometry.Point();
                 var rectangle = MG.Core.Geometry.Curves.CurveFactory.CreateRectangle(nodesize.Width, nodesize.Height, center);
