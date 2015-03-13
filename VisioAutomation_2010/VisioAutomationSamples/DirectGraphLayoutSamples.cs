@@ -1,4 +1,5 @@
-﻿using VA = VisioAutomation;
+﻿using VisioAutomation.Drawing;
+using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using DGMODEL = VisioAutomation.Models.DirectedGraph;
 using VisioAutomation.Extensions;
@@ -7,11 +8,11 @@ namespace VisioAutomationSamples
 {
     public static class DirectGraphLayoutSamples
     {
-        public static void DirectedGraphViaMSAGL()
+        public static void DirectedGraphViaMsagl()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
             var directed_graph_drawing = get_dg_drawing();
-            var options = new DGMODEL.MSAGLLayoutOptions();
+            var options = new DGMODEL.MsaglLayoutOptions();
             options.UseDynamicConnectors = false;
             directed_graph_drawing.Render(page1, options);
         }
@@ -24,7 +25,8 @@ namespace VisioAutomationSamples
             var visio_options = new DGMODEL.VisioLayoutOptions();
             directed_graph_drawing.Render(page1, visio_options);
 
-            page1.ResizeToFitContents(new VA.Drawing.Size(0.5, 0.5));
+            var padding = new VA.Drawing.Size(0.5, 0.5);
+            page1.ResizeToFitContents(padding);
         }
 
         private static DGMODEL.Drawing get_dg_drawing()

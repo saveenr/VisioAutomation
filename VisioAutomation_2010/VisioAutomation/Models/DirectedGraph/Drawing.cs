@@ -52,9 +52,9 @@ namespace VisioAutomation.Models.DirectedGraph
             vr.Render(page, this, options);
         }
 
-        public void Render(IVisio.Page page, VA.Models.DirectedGraph.MSAGLLayoutOptions options)
+        public void Render(IVisio.Page page, VA.Models.DirectedGraph.MsaglLayoutOptions options)
         {
-            VA.Models.DirectedGraph.MSAGLRenderer.Render(page, this, options);
+            VA.Models.DirectedGraph.MGRenderer.Render(page, this, options);
         }
     }
 }

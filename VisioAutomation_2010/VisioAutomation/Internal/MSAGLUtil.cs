@@ -6,7 +6,7 @@ using VA=VisioAutomation;
 
 namespace VisioAutomation.Internal
 {
-    static class MSAGLUtil
+    static class MsaglUtil
     {
         public static VA.Drawing.Rectangle ToVARectangle(MG.Core.Geometry.Rectangle n)
         {

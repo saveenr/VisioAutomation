@@ -321,7 +321,7 @@ namespace VisioAutomation.Scripting.Commands
                 var dg = directedgraphs[i];
 
                 
-                var options = new DGMODEL.MSAGLLayoutOptions();
+                var options = new DGMODEL.MsaglLayoutOptions();
                 options.UseDynamicConnectors = false;
 
                 // if this is the first page to drawe
