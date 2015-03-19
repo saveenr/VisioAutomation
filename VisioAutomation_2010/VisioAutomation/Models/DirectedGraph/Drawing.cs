@@ -54,7 +54,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public void Render(IVisio.Page page, VA.Models.DirectedGraph.MsaglLayoutOptions options)
         {
-            VA.Models.DirectedGraph.MGRenderer.Render(page, this, options);
+            VA.Models.DirectedGraph.MsaglRenderer.Render(page, this, options);
         }
     }
 }

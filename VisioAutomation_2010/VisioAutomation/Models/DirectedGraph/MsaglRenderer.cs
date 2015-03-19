@@ -9,7 +9,7 @@ using DGMODEL = VisioAutomation.Models.DirectedGraph;
 
 namespace VisioAutomation.Models.DirectedGraph
 {
-    class MGRenderer
+    class MsaglRenderer
     {
         private VA.Drawing.Rectangle mg_bb;
         private VA.Drawing.Rectangle layout_bb;
@@ -28,7 +28,7 @@ namespace VisioAutomation.Models.DirectedGraph
             get { return 1.0/this.LayoutOptions.ScalingFactor; }
         }
 
-        public MGRenderer()
+        public MsaglRenderer()
         {
             this.LayoutOptions = new DGMODEL.MsaglLayoutOptions();
 
@@ -525,7 +525,7 @@ namespace VisioAutomation.Models.DirectedGraph
                 throw new System.ArgumentNullException("options");
             }
 
-            var renderer = new VA.Models.DirectedGraph.MGRenderer();
+            var renderer = new VA.Models.DirectedGraph.MsaglRenderer();
             renderer.LayoutOptions = options;
             renderer.Render(drawing,page);
             page.ResizeToFitContents(renderer.LayoutOptions.ResizeBorderWidth);

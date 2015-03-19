@@ -150,7 +150,7 @@
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
     <Compile Include="Shapes\ShapeLayoutCells.cs" />
-    <Compile Include="Models\DirectedGraph\MGRenderer.cs" />
+    <Compile Include="Models\DirectedGraph\MsaglRenderer.cs" />
     <Compile Include="Internal\MsaglUtil.cs" />
     <Compile Include="Pages\PageCells.cs" />
     <Compile Include="Shapes\CustomProperties\CustomPropertyHelper.cs" />
