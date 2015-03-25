@@ -135,9 +135,21 @@ namespace VisioAutomation.Models.DirectedGraph
                 new_edge.Label = new MG.Core.Layout.Label(mg_coordinates.Width, mg_coordinates.Height, new_edge);
             }
 
+            var geomGraphComponents = MG.Core.Layout.GraphConnectedComponents.CreateComponents(mg_graph.Nodes, mg_graph.Edges);
             var settings = new MG.Layout.Layered.SugiyamaLayoutSettings();
-            var layout = new MG.Layout.Layered.LayeredLayout(mg_graph,settings);
-            layout.Run();
+
+            foreach (var subgraph in geomGraphComponents)
+            {
+                var layout = new Microsoft.Msagl.Layout.Layered.LayeredLayout(subgraph, settings);
+                subgraph.Margins = settings.NodeSeparation / 2;
+                layout.Run();
+            }
+
+            // Pack the graphs using Golden Aspect Ratio
+            MG.Layout.MDS.MdsGraphLayout.PackGraphs(geomGraphComponents, settings);
+
+            //Update the graphs bounding box
+            mg_graph.UpdateBoundingBox();
 
             this.mg_bb = new VA.Drawing.Rectangle(
                 mg_graph.BoundingBox.Left, 
@@ -481,7 +493,7 @@ namespace VisioAutomation.Models.DirectedGraph
                     }
                 case (VA.Shapes.Connections.ConnectorType.RightAngle):
                     {
-                        return IVisio.VisCellVals.visLORouteExtDefault;
+                        return IVisio.VisCellVals.visLORouteExtStraight;
                     }
                 default:
                     {
@@ -504,7 +516,7 @@ namespace VisioAutomation.Models.DirectedGraph
                     }
                 case (VA.Shapes.Connections.ConnectorType.RightAngle):
                     {
-                        return IVisio.VisCellVals.visLORouteDefault;
+                        return IVisio.VisCellVals.visLORouteFlowchartNS;
                     }
                 default:
                     {
