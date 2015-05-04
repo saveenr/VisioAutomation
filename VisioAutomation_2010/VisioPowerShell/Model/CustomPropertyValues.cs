@@ -7,7 +7,9 @@ namespace VisioPowerShell
     {
         public readonly int ShapeID;
         public readonly string Name;
-        public readonly string Value;
+
+        public readonly string Ask;
+        public readonly string Calendar;
         public readonly string Format;
         public readonly string Invisible;
         public readonly string Label;
@@ -15,8 +17,8 @@ namespace VisioPowerShell
         public readonly string Prompt;
         public readonly string SortKey;
         public readonly string Type;
-        public readonly string Verify;
-        public readonly string Calendar;
+        public readonly string Value;
+
 
         internal CustomPropertyValues(int id, string propname, VA.Shapes.CustomProperties.CustomPropertyCells propcells)
         {
@@ -30,6 +32,7 @@ namespace VisioPowerShell
             this.Prompt = propcells.Prompt.Formula.Value;
             this.SortKey = propcells.SortKey.Formula.Value;
             this.Type = propcells.Type.Formula.Value;
+            this.Ask = propcells.Ask.Formula.Value;
             this.Calendar = propcells.Calendar.Formula.Value;
         }
     }
