@@ -57,7 +57,7 @@ namespace VisioAutomation.Models.Charting
                 if (p.Value >= 0.0)
                 {
                     bar_p0 = new VA.Drawing.Point(cur_x, base_y);
-                    bar_p1 = new VA.Drawing.Point(cur_x + bar_width, base_y + value_height); ;
+                    bar_p1 = new VA.Drawing.Point(cur_x + bar_width, base_y + value_height);
                 }
                 else
                 {

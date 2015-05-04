@@ -14,7 +14,7 @@ namespace VisioAutomation.Models.Forms
 
         public IVisio.Fonts Fonts;
 
-        public FormRenderingContext(IVisio.Application app)
+        public FormRenderingContext()
         {
             this.NameToFontID = new Dictionary<string, int>(System.StringComparer.InvariantCultureIgnoreCase);
         }

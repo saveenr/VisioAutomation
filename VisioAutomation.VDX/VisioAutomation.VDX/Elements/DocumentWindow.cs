@@ -54,7 +54,7 @@ namespace VisioAutomation.VDX.Elements
 
             if (!found)
             {
-                string msg = string.Format("Document window pointing to page that does not exist");
+                string msg = "Document window pointing to page that does not exist";
                 throw new System.ArgumentException(msg);
             }
         }

@@ -8,16 +8,16 @@ namespace VisioAutomation.Shapes.CustomProperties
 {
     public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public VA.ShapeSheet.CellData<double> Value { get; set; }
-        public VA.ShapeSheet.CellData<double> Prompt { get; set; }
-        public VA.ShapeSheet.CellData<double> Label { get; set; }
-        public VA.ShapeSheet.CellData<double> Format { get; set; }
-        public VA.ShapeSheet.CellData<int> SortKey { get; set; }
-        public VA.ShapeSheet.CellData<int> Invisible { get; set; }
-        public VA.ShapeSheet.CellData<int> LangId { get; set; }
-        public VA.ShapeSheet.CellData<int> Calendar { get; set; }
-        public VA.ShapeSheet.CellData<int> Type { get; set; }
         public VA.ShapeSheet.CellData<bool> Ask { get; set; }
+        public VA.ShapeSheet.CellData<int> Calendar { get; set; }
+        public VA.ShapeSheet.CellData<double> Format { get; set; }
+        public VA.ShapeSheet.CellData<int> Invisible { get; set; }
+        public VA.ShapeSheet.CellData<double> Label { get; set; }
+        public VA.ShapeSheet.CellData<int> LangId { get; set; }
+        public VA.ShapeSheet.CellData<double> Prompt { get; set; }
+        public VA.ShapeSheet.CellData<int> SortKey { get; set; }
+        public VA.ShapeSheet.CellData<int> Type { get; set; }
+        public VA.ShapeSheet.CellData<double> Value { get; set; }
 
         public CustomPropertyCells()
         {
@@ -50,7 +50,7 @@ namespace VisioAutomation.Shapes.CustomProperties
 
         public CustomPropertyCells(bool value)
         {
-            this.Value = ((bool) value) ? "TRUE" : "FALSE";
+            this.Value = value ? "TRUE" : "FALSE";
             this.Type = 3;
         }
 

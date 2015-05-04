@@ -334,7 +334,7 @@ namespace VisioAutomation.Models.DirectedGraph
             {
                 var ud = (NodeUserData) mg_edge.UserData;
                 var layoutconnector =  ud.Connector;
-                var vconnector = draw_edge_bezier(domshapes, layoutconnector, mg_edge);
+                var vconnector = draw_edge_bezier(mg_edge);
                 layoutconnector.DOMNode = vconnector;
                 domshapes.Add(vconnector);
             }
@@ -467,10 +467,7 @@ namespace VisioAutomation.Models.DirectedGraph
             }
         }
 
-        private VA.DOM.BezierCurve draw_edge_bezier(
-            VA.DOM.ShapeList page,
-            DGMODEL.Connector connector,
-            MG.Core.Layout.Edge edge)
+        private VA.DOM.BezierCurve draw_edge_bezier(MG.Core.Layout.Edge edge)
         {
             var final_bez_points =
                 VA.Internal.MsaglUtil.ToVAPoints(edge).Select(p => ToDocumentCoordinates(p)).ToList();

@@ -260,7 +260,7 @@ namespace VisioAutomation.Models.Charting
         {
             if ((this.Angle <= 0.0) || (this.Angle > System.Math.PI * 2.0))
             {
-                string msg = string.Format("Angle of sector must be greater than zero and less than 2*PI");
+                string msg = "Angle of sector must be greater than zero and less than 2*PI";
                 throw new System.ArgumentException(msg);
             }
         }

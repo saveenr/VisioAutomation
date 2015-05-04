@@ -257,7 +257,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (surface.Target.Shape == null)
             {
-                string msg = string.Format("Shape must be set in surface not page or master");
+                string msg = "Shape must be set in surface not page or master";
                 throw new VA.AutomationException(msg);
             }
 

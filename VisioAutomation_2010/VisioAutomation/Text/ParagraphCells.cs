@@ -69,7 +69,7 @@ namespace VisioAutomation.Text
             public CellColumn Bullet { get; set; }
             public CellColumn BulletFont { get; set; }
             public CellColumn BulletFontSize { get; set; }
-            public CellColumn BulletString { get; set; }
+            public CellColumn BulletString { get; set; } // NOTE: This is never used
             public CellColumn Flags { get; set; }
             public CellColumn HorzAlign { get; set; }
             public CellColumn IndentFirst { get; set; }

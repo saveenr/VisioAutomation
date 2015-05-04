@@ -77,7 +77,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (this.hs_src.Contains(src))
             {
-                string msg = String.Format("Duplicate SRC");
+                string msg = "Duplicate SRC";
                 throw new VA.AutomationException(msg);
             }
 
@@ -111,7 +111,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             if (this.hs_cellindex.Contains(cell))
             {
-                string msg = String.Format("Duplicate Cell Index");
+                string msg = "Duplicate Cell Index";
                 throw new VA.AutomationException(msg);
             }
 

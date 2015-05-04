@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -248,7 +249,7 @@ namespace VisioAutomation.Scripting.Commands
             foreach (string ns in namespaces)
             {
                 string label = ns;
-                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator);
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, StringComparison.Ordinal);
                 if (index_of_last_sep > 0)
                 {
                     label = ns.Substring(index_of_last_sep+1);
@@ -406,7 +407,7 @@ namespace VisioAutomation.Scripting.Commands
             foreach (string ns in namespaces)
             {
                 string label = ns;
-                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator);
+                int index_of_last_sep = ns.LastIndexOf(pathbuilder.Separator, StringComparison.Ordinal);
                 if (index_of_last_sep > 0)
                 {
                     label = ns.Substring(index_of_last_sep + 1);

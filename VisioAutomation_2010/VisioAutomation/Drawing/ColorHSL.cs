@@ -64,7 +64,7 @@ namespace VisioAutomation.Drawing
 
         public override bool Equals(object other)
         {
-            return other is VA.Drawing.ColorRGB && Equals((VA.Drawing.ColorHSL)other);
+            return other is VA.Drawing.ColorHSL && Equals((VA.Drawing.ColorHSL)other);
         }
 
         public static bool operator ==(ColorHSL lhs, ColorHSL rhs)

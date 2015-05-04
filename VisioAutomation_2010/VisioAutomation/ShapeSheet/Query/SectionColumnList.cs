@@ -35,7 +35,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.hs_section.ContainsKey(section))
             {
-                string msg = String.Format("Duplicate Section");
+                string msg = "Duplicate Section";
                 throw new AutomationException(msg);
             }
 

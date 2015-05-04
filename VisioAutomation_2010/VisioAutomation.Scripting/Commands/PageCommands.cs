@@ -195,7 +195,7 @@ namespace VisioAutomation.Scripting.Commands
             // don't allow the page to be set as a background to itself
             if (fgpage == bgpage)
             {
-                string msg = string.Format("Cannot set page as its own background page");
+                string msg = "Cannot set page as its own background page";
                 throw new VA.Scripting.VisioOperationException(msg);
             }
 

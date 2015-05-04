@@ -23,7 +23,7 @@ namespace VisioAutomation.Models.Forms
             var docs = app.Documents;
             var doc = docs.Add("");
 
-            var ctx = new FormRenderingContext(app);
+            var ctx = new FormRenderingContext();
             ctx.Application = app;
             ctx.Document = doc;
             ctx.Pages = doc.Pages;

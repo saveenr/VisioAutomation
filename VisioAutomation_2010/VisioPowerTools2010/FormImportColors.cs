@@ -181,17 +181,7 @@ namespace VisioPowerTools2010
             {
                 var tokens = url.Fragment.ToLower().Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
-                bool incorrect_format = false;
-
-                if (tokens.Length < 2)
-                {
-                    incorrect_format = true;
-                }
-
-                if (tokens[0] != "#themeid")
-                {
-                    incorrect_format = true;
-                }
+                bool incorrect_format = tokens.Length < 2 || tokens[0] != "#themeid";
 
                 if (incorrect_format)
                 {

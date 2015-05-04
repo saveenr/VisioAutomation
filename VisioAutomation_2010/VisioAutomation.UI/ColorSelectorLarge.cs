@@ -110,7 +110,7 @@ namespace VisioAutomation.UI.CommonControls
 
                 this.hue_selection_point = new System.Drawing.Point((int)(_h * this.bmp_hue.Width), 0);
             }
-            float cpx = (float) this.hue_selection_point.Value.X;
+            float cpx = this.hue_selection_point.Value.X;
             float cpy = ((float) this.bmp_hue.Height-2)/2.0f - 0.5f;
             gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;           
             draw_cursor_ring(gfx, cpx, cpy);

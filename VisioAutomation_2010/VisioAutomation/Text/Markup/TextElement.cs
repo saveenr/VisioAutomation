@@ -128,7 +128,7 @@ namespace VisioAutomation.Text.Markup
                 else
                 {
                     // Unhandled Operation
-                    string msg = string.Format("internal error");
+                    string msg = "internal error";
                     throw new System.InvalidOperationException(msg);
                 }
             }

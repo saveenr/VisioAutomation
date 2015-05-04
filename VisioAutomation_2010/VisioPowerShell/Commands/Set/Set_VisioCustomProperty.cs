@@ -123,7 +123,7 @@ namespace VisioPowerShell.Commands
             {
                 if (!(key is string))
                 {
-                    string msg = string.Format("Property Names must be strings");
+                    string msg = "Property Names must be strings";
                     throw new System.ArgumentOutOfRangeException(msg);
                 }
 

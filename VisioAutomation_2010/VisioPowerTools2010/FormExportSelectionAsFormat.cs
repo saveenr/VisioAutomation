@@ -3,7 +3,7 @@ using VA = VisioAutomation;
 
 namespace VisioPowerTools2010
 {
-    public partial class FormExportSelectionAsFormat : Form
+    public partial class FormExportSelectionAsFormat
     {
         public enum enumExportFormat
         {

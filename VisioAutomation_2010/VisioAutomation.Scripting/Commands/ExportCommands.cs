@@ -156,7 +156,7 @@ namespace VisioAutomation.Scripting.Commands
             {
             }
 
-            verboselog(string.Format("Creating XHTML with embedded SVG"));
+            verboselog("Creating XHTML with embedded SVG");
             var s = svg_filename;
 
             if (System.IO.File.Exists(filename))
@@ -228,7 +228,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new VisioOperationException(msg);
             }
 
-            verboselog(string.Format("Creating XHTML with embedded SVG"));
+            verboselog("Creating XHTML with embedded SVG");
 
             var s = svg_filename;
 
@@ -239,7 +239,7 @@ namespace VisioAutomation.Scripting.Commands
                 System.IO.File.Delete(filename);
             }
 
-            verboselog(string.Format("Converting to XAML ..."));
+            verboselog("Converting to XAML ...");
 
             var convert_timer = new System.Diagnostics.Stopwatch();
 
@@ -261,11 +261,11 @@ namespace VisioAutomation.Scripting.Commands
 
             convert_timer.Stop();
 
-            verboselog(string.Format("Writing XAML File"));
+            verboselog("Writing XAML File");
 
             System.IO.File.WriteAllText(filename, xaml);
 
-            verboselog(string.Format("Finished writing XAML File"));
+            verboselog("Finished writing XAML File");
 
             verboselog(string.Format("Finished XAML export ({0} seconds)", convert_timer.Elapsed.TotalSeconds));
         }

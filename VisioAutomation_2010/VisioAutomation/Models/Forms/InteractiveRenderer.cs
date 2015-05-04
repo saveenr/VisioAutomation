@@ -100,8 +100,8 @@ namespace VisioAutomation.Models.Forms
             {
                 update.SetFormulas((short)block.VisioShapeID,block.FormatCells);
                 update.SetFormulas((short)block.VisioShapeID,block.Textcells);
-                update.SetFormulas((short)block.VisioShapeID,block.ParagraphCells, (short)0);
-                update.SetFormulas((short)block.VisioShapeID,block.CharacterCells, (short)0);
+                update.SetFormulas((short)block.VisioShapeID,block.ParagraphCells, 0);
+                update.SetFormulas((short)block.VisioShapeID,block.CharacterCells, 0);
             }
             update.Execute(this.page);
         }

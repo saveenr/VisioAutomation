@@ -53,11 +53,6 @@ namespace VisioAutomation.UI
             var v = (VA.UI.FillPattern)this.comboBoxPattern.SelectedValue;
         }
 
-        private void toolStripMenuItem1_Click(object sender, System.EventArgs e)
-        {
-            MessageBox.Show("!");
-        }
-
         private void linkLabelTools_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var form = new FormBasicFillTools();
