@@ -7,13 +7,13 @@ namespace VisioPowerShell
     public class CellNameDictionary<T>
     {
         private Dictionary<string, T> dic;
-        private System.Text.RegularExpressions.Regex regex_cellname;
-        private System.Text.RegularExpressions.Regex regex_cellname_wildcard;
+        private Regex regex_cellname;
+        private Regex regex_cellname_wildcard;
 
         public CellNameDictionary()
         {
-            this.regex_cellname = new System.Text.RegularExpressions.Regex("^[a-zA-Z]*$");
-            this.regex_cellname_wildcard = new System.Text.RegularExpressions.Regex("^[a-zA-Z\\*\\?]*$");
+            this.regex_cellname = new Regex("^[a-zA-Z]*$");
+            this.regex_cellname_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
             this.dic = new Dictionary<string, T>(System.StringComparer.OrdinalIgnoreCase);
         }
 
@@ -29,7 +29,7 @@ namespace VisioPowerShell
             {
                 this.CheckCellName(name);
 
-                if (dic.ContainsKey(name))
+                if (this.dic.ContainsKey(name))
                 {
                     string msg = string.Format("CellMap already contains a cell called \"{0}\"", name);
                     throw new System.ArgumentOutOfRangeException(msg);
@@ -111,12 +111,12 @@ namespace VisioPowerShell
 
         private static Regex GetRegexForWildCardPattern(string cellname)
         {
-            string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
+            string pat = "^" + Regex.Escape(cellname)
                 .Replace(@"\*", ".*").
                 Replace(@"\?", ".") + "$";
 
-            var regex = new System.Text.RegularExpressions.Regex(pat,
-                System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            var regex = new Regex(pat,
+                RegexOptions.IgnoreCase);
             return regex;
         }
 

@@ -11,7 +11,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_ShapeSheet_SetNoShapes()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -28,7 +28,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_CustomProps_Scenarios()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
 

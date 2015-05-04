@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Client.Application.AssertApplicationAvailable();
 
-            var active_window = GetActiveWindow();
+            var active_window = this.GetActiveWindow();
             return active_window.Zoom;
         }
 
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             var sel_bb = sel.GetBoundingBox(bbargs);
 
             var delta = sel_bb.Size*padding_scale;
-            var view_rect = new VA.Drawing.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
+            var view_rect = new Drawing.Rectangle(sel_bb.Left - delta.Width, sel_bb.Bottom - delta.Height,
                                                           sel_bb.Right + delta.Height, sel_bb.Top + delta.Height);
             window.SetViewRect(view_rect);
         }
@@ -66,7 +66,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var active_window = GetActiveWindow();
+            var active_window = this.GetActiveWindow();
             active_window.Zoom = amount;
         }
 
@@ -74,17 +74,17 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Client.Application.AssertApplicationAvailable();
 
-            var active_window = GetActiveWindow();
+            var active_window = this.GetActiveWindow();
 
             if (zoom == Scripting.Zoom.Out)
             {
                 var cur = active_window.Zoom;
-                ZoomToPercentage(cur / this.ZoomIncrement);                
+                this.ZoomToPercentage(cur / this.ZoomIncrement);                
             }
             else if (zoom == Scripting.Zoom.In)
             {
                 var cur = active_window.Zoom;
-                ZoomToPercentage(cur * this.ZoomIncrement);
+                this.ZoomToPercentage(cur * this.ZoomIncrement);
             }
             else if (zoom == Scripting.Zoom.ToPage)
             {

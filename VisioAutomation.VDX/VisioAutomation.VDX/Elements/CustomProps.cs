@@ -23,7 +23,7 @@ namespace VisioAutomation.VDX.Elements
 
         IEnumerator IEnumerable.GetEnumerator()     
         {                                           
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public int Count

@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
             catch (System.Runtime.InteropServices.COMException)
             {
                 string msg = string.Format("No such master \"{0}\"", name);
-                throw new VA.Scripting.VisioOperationException(msg);
+                throw new VisioOperationException(msg);
             }
             return master;
         }
@@ -108,7 +108,7 @@ namespace VisioAutomation.Scripting.Commands
             if (masterobj == null)
             {
                 string msg = string.Format("No such master \"{0}\" in \"{1}\"", master, doc);
-                throw new VA.Scripting.VisioOperationException(msg);
+                throw new VisioOperationException(msg);
             }
 
             return masterobj;
@@ -126,7 +126,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 // return masters matching the name
                 var masters2 = doc.Masters.AsEnumerable();
-                var masters3 = VA.TextUtil.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, VA.TextUtil.FilterAction.Include).ToList();
+                var masters3 = TextUtil.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, TextUtil.FilterAction.Include).ToList();
                 return masters3;
             } 
         }
@@ -165,7 +165,7 @@ namespace VisioAutomation.Scripting.Commands
             return shape;
         }
 
-        public short[] Drop(IList<IVisio.Master> masters, IList<VA.Drawing.Point> points)
+        public short[] Drop(IList<IVisio.Master> masters, IList<Drawing.Point> points)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();

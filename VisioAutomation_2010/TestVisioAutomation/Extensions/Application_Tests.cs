@@ -32,7 +32,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Application_UndoScope_Simple()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var app = page1.Application;
 
             Assert.AreEqual(0, page1.Shapes.Count);
@@ -60,7 +60,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Application_UndoScope_NestedInner()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var app = page1.Application;
 
             Assert.AreEqual(0, page1.Shapes.Count);
@@ -86,7 +86,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Application_UndoScope_NestedOuter()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var app = page1.Application;
 
             Assert.AreEqual(0, page1.Shapes.Count);
@@ -113,7 +113,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Application_UndoScope_Abort()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var app = page1.Application;
 
             Assert.AreEqual(0, page1.Shapes.Count);
@@ -139,7 +139,7 @@ namespace TestVisioAutomation
         public void Application_UndoScope_AbortNested()
         {
 
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var app = page1.Application;
 
             Assert.AreEqual(0, page1.Shapes.Count);
@@ -168,7 +168,7 @@ namespace TestVisioAutomation
         public void Application_UndoScope_AbortOuter()
         {
 
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var app = page1.Application;
 
             Assert.AreEqual(0, page1.Shapes.Count);

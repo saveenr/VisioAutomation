@@ -13,7 +13,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_GetSet()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
@@ -70,7 +70,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_GetFromMultipleShapes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var s2 = page1.DrawRectangle(1, 1, 2, 2);
@@ -88,7 +88,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_GetFromMultipleShapes_WithAdditionalProps()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var s2 = page1.DrawRectangle(1, 1, 2, 2);
@@ -110,7 +110,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_SetMultipleTimes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
@@ -164,7 +164,7 @@ namespace TestVisioAutomation
         public void UserDefinedCells_CheckInvalidNamesNotAllowed()
         {
             bool caught = false;
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             Assert.AreEqual(0, VAUSERCELL.UserDefinedCellsHelper.GetCount(s1));
             try
@@ -186,7 +186,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_SetAdditionalProperties()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             Assert.AreEqual(0, VAUSERCELL.UserDefinedCellsHelper.GetCount(s1));
 
@@ -200,7 +200,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_GetNames()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             Assert.AreEqual(0, VAUSERCELL.UserDefinedCellsHelper.GetCount(s1));
@@ -241,7 +241,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_SetForMultipleShapes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             var s2 = page1.DrawRectangle(0, 0, 2, 2);
             var s3 = page1.DrawRectangle(0, 0, 2, 2);
@@ -275,7 +275,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_ValueQuoting()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             var p1 = VAUSERCELL.UserDefinedCellsHelper.Get(s1);

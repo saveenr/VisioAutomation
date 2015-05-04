@@ -12,7 +12,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_Draw_Line()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var p0 = new VA.Drawing.Point(0, 0);
             var p1 = new VA.Drawing.Point(3, 2);
             var s0 = page1.DrawLine(p0, p1);
@@ -23,7 +23,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_Draw_Spline()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var points = new[]
                              {
                                  new VA.Drawing.Point(0, 0), 
@@ -40,7 +40,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_Draw_RoundedRectangle()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var rect = new VA.Drawing.Rectangle(1, 1, 3, 2);
             // draw an inital framing rectangle so the coordinates are easy to calculate
             var s0 = page1.DrawRectangle(rect);
@@ -132,7 +132,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_Drop_ManyU()
         {
-            var page1 = GetNewPage();            
+            var page1 = this.GetNewPage();            
             var stencil = "basic_u.vss";
 
             short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;

@@ -14,14 +14,14 @@ namespace VisioAutomation.Shapes.Controls
                 throw new ArgumentNullException("shape");
             }
 
-            var ctrl = new VACONTROL.ControlCells();
+            var ctrl = new ControlCells();
 
             return Add(shape, ctrl);
         }
 
         public static int Add(
             IVisio.Shape shape,
-            VACONTROL.ControlCells ctrl)
+            ControlCells ctrl)
         {
             if (shape == null)
             {
@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes.Controls
         public static int Set(
             IVisio.Shape shape,
             short row,
-            VACONTROL.ControlCells ctrl)
+            ControlCells ctrl)
         {
             if (shape == null)
             {
@@ -58,7 +58,7 @@ namespace VisioAutomation.Shapes.Controls
                 ctrl.YDynamics = String.Format("Controls.Row_{0}.Y", row + 1);
             }
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             update.SetFormulas(ctrl, row);
             update.Execute(shape);
 

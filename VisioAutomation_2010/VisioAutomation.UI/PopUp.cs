@@ -20,7 +20,7 @@ using System.Drawing;
 
 namespace PascalGanaye.Popup
 {
-    public class Popup : System.ComponentModel.Component
+    public class Popup : Component
     {
         public interface IPopupUserControl
         {
@@ -52,8 +52,8 @@ namespace PascalGanaye.Popup
 
         public Popup(Control UserControl, Control parent)
         {
-            mParent = parent;
-            mUserControl = UserControl;
+            this.mParent = parent;
+            this.mUserControl = UserControl;
         }
 
         public void Show()
@@ -62,12 +62,12 @@ namespace PascalGanaye.Popup
             // because the CreateParams is called from within the form constructor 
             // and we need a way to inform the form if a shadow is nescessary or not
             PopupForm.mShowShadow = this.mShowShadow;
-            if (mForm != null)
+            if (this.mForm != null)
             {
-                mForm.DoClose();
+                this.mForm.DoClose();
             }
-            mForm = new PopupForm(this);
-            OnDropDown(mParent, new System.EventArgs());
+            this.mForm = new PopupForm(this);
+            this.OnDropDown(this.mParent, new System.EventArgs());
         }
 
         // This internal class is a borderless form used to show the popup
@@ -96,148 +96,148 @@ namespace PascalGanaye.Popup
 
             public PopupForm(Popup popup)
             {
-                mPopup = popup;
-                SetStyle(ControlStyles.ResizeRedraw, true);
-                FormBorderStyle = FormBorderStyle.None;
-                StartPosition = FormStartPosition.Manual;
+                this.mPopup = popup;
+                this.SetStyle(ControlStyles.ResizeRedraw, true);
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.StartPosition = FormStartPosition.Manual;
                 this.ShowInTaskbar = false;
                 this.DockPadding.All = BORDER_MARGIN;
-                mControlSize = mPopup.mUserControl.Size;
-                mPopup.mUserControl.Dock = DockStyle.Fill;
-                Controls.Add(mPopup.mUserControl);
-                mWindowSize.Width = mControlSize.Width + 2*BORDER_MARGIN;
-                mWindowSize.Height = mControlSize.Height + 2*BORDER_MARGIN;
+                this.mControlSize = this.mPopup.mUserControl.Size;
+                this.mPopup.mUserControl.Dock = DockStyle.Fill;
+                this.Controls.Add(this.mPopup.mUserControl);
+                this.mWindowSize.Width = this.mControlSize.Width + 2*BORDER_MARGIN;
+                this.mWindowSize.Height = this.mControlSize.Height + 2*BORDER_MARGIN;
                 this.Opacity = popup.mOpacity;
 
                 //These are here to suppress warnings.
-                this.DropDown += new System.EventHandler(DoNothing);
-                this.DropDownClosed += new System.EventHandler(DoNothing);
+                this.DropDown += new System.EventHandler(this.DoNothing);
+                this.DropDownClosed += new System.EventHandler(this.DoNothing);
 
-                Form parentForm = mPopup.mParent.FindForm();
+                Form parentForm = this.mPopup.mParent.FindForm();
                 if (parentForm != null)
                 {
                     parentForm.AddOwnedForm(this);
                 }
 
-                if (mPopup.mResizable)
+                if (this.mPopup.mResizable)
                 {
-                    mResizingPanel = new Panel();
+                    this.mResizingPanel = new Panel();
                     if (mBackgroundImage == null)
                     {
                         var resources = new System.Resources.ResourceManager(typeof (Popup));
-                        mBackgroundImage = (System.Drawing.Image) resources.GetObject("CornerPicture.Image");
+                        mBackgroundImage = (Image) resources.GetObject("CornerPicture.Image");
                     }
-                    mResizingPanel.BackgroundImage = mBackgroundImage;
-                    mResizingPanel.Width = 12;
-                    mResizingPanel.Height = 12;
-                    mResizingPanel.BackColor = Color.Red;
-                    mResizingPanel.Left = mPopup.mUserControl.Width - 15;
-                    mResizingPanel.Top = mPopup.mUserControl.Height - 15;
-                    mResizingPanel.Cursor = Cursors.SizeNWSE;
-                    mResizingPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-                    mResizingPanel.Parent = this;
-                    mResizingPanel.BringToFront();
+                    this.mResizingPanel.BackgroundImage = mBackgroundImage;
+                    this.mResizingPanel.Width = 12;
+                    this.mResizingPanel.Height = 12;
+                    this.mResizingPanel.BackColor = Color.Red;
+                    this.mResizingPanel.Left = this.mPopup.mUserControl.Width - 15;
+                    this.mResizingPanel.Top = this.mPopup.mUserControl.Height - 15;
+                    this.mResizingPanel.Cursor = Cursors.SizeNWSE;
+                    this.mResizingPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+                    this.mResizingPanel.Parent = this;
+                    this.mResizingPanel.BringToFront();
 
-                    this.mResizingPanel.MouseUp += new MouseEventHandler(mResizingPanel_MouseUp);
-                    this.mResizingPanel.MouseDown += new MouseEventHandler(mResizingPanel_MouseDown);
-                    this.mResizingPanel.MouseMove += new MouseEventHandler(mResizingPanel_MouseMove);
+                    this.mResizingPanel.MouseUp += new MouseEventHandler(this.mResizingPanel_MouseUp);
+                    this.mResizingPanel.MouseDown += new MouseEventHandler(this.mResizingPanel_MouseDown);
+                    this.mResizingPanel.MouseMove += new MouseEventHandler(this.mResizingPanel_MouseMove);
                 }
-                mPlacement = mPopup.mPlacement;
+                this.mPlacement = this.mPopup.mPlacement;
 
                 // Try to place the popup at the asked location
-                ReLocate();
+                this.ReLocate();
 
                 // Check if the form is out of the screen
                 // And if yes try to adapt the placement
-                Rectangle workingArea = Screen.FromControl(mPopup.mParent).WorkingArea;
-                if (mNormalPos.X + this.Width > workingArea.Right)
+                Rectangle workingArea = Screen.FromControl(this.mPopup.mParent).WorkingArea;
+                if (this.mNormalPos.X + this.Width > workingArea.Right)
                 {
-                    if ((mPlacement & ePlacement.Right) != 0)
+                    if ((this.mPlacement & ePlacement.Right) != 0)
                     {
-                        mPlacement = (mPlacement & ~ePlacement.Right) | ePlacement.Left;
+                        this.mPlacement = (this.mPlacement & ~ePlacement.Right) | ePlacement.Left;
                     }
                 }
                 else
                 {
-                    if (mNormalPos.X < workingArea.Left)
+                    if (this.mNormalPos.X < workingArea.Left)
                     {
-                        if ((mPlacement & ePlacement.Left) != 0)
+                        if ((this.mPlacement & ePlacement.Left) != 0)
                         {
-                            mPlacement = (mPlacement & ~ePlacement.Left) | ePlacement.Right;
+                            this.mPlacement = (this.mPlacement & ~ePlacement.Left) | ePlacement.Right;
                         }
                     }
                 }
 
-                if (mNormalPos.Y + this.Height > workingArea.Bottom)
+                if (this.mNormalPos.Y + this.Height > workingArea.Bottom)
                 {
-                    if ((mPlacement & ePlacement.Bottom) != 0)
+                    if ((this.mPlacement & ePlacement.Bottom) != 0)
                     {
-                        mPlacement = (mPlacement & ~ePlacement.Bottom) | ePlacement.Top;
+                        this.mPlacement = (this.mPlacement & ~ePlacement.Bottom) | ePlacement.Top;
                     }
                 }
                 else
                 {
-                    if (mNormalPos.Y < workingArea.Top)
+                    if (this.mNormalPos.Y < workingArea.Top)
                     {
-                        if ((mPlacement & ePlacement.Top) != 0)
+                        if ((this.mPlacement & ePlacement.Top) != 0)
                         {
-                            mPlacement = (mPlacement & ~ePlacement.Top) | ePlacement.Bottom;
+                            this.mPlacement = (this.mPlacement & ~ePlacement.Top) | ePlacement.Bottom;
                         }
                     }
                 }
 
-                if (mPlacement != mPopup.mPlacement)
+                if (this.mPlacement != this.mPopup.mPlacement)
                 {
-                    ReLocate();
+                    this.ReLocate();
                 }
 
                 // Check if the form is still out of the screen
                 // If yes just move it back into the screen without changing Placement
-                if (mNormalPos.X + mWindowSize.Width > workingArea.Right)
+                if (this.mNormalPos.X + this.mWindowSize.Width > workingArea.Right)
                 {
-                    mNormalPos.X = workingArea.Right - mWindowSize.Width;
+                    this.mNormalPos.X = workingArea.Right - this.mWindowSize.Width;
                 }
                 else
                 {
-                    if (mNormalPos.X < workingArea.Left)
+                    if (this.mNormalPos.X < workingArea.Left)
                     {
-                        mNormalPos.X = workingArea.Left;
+                        this.mNormalPos.X = workingArea.Left;
                     }
                 }
 
-                if (mNormalPos.Y + mWindowSize.Height > workingArea.Bottom)
+                if (this.mNormalPos.Y + this.mWindowSize.Height > workingArea.Bottom)
                 {
-                    mNormalPos.Y = workingArea.Bottom - mWindowSize.Height;
+                    this.mNormalPos.Y = workingArea.Bottom - this.mWindowSize.Height;
                 }
                 else
                 {
-                    if (mNormalPos.Y < workingArea.Top)
+                    if (this.mNormalPos.Y < workingArea.Top)
                     {
-                        mNormalPos.Y = workingArea.Top;
+                        this.mNormalPos.Y = workingArea.Top;
                     }
                 }
 
                 // Initialize the animation
-                mProgress = 0;
-                if (mPopup.mAnimationSpeed > 0)
+                this.mProgress = 0;
+                if (this.mPopup.mAnimationSpeed > 0)
                 {
-                    mTimer = new Timer();
+                    this.mTimer = new Timer();
 
                     // I always aim 25 images per seconds.. seems to be a good value
                     // it looks smooth enough on fast computers and do not drain slower one
-                    mTimer.Interval = 1000/25;
-                    mTimerStarted = System.DateTimeOffset.Now;
-                    mTimer.Tick += new System.EventHandler(Showing);
-                    mTimer.Start();
-                    Showing(null, null);
+                    this.mTimer.Interval = 1000/25;
+                    this.mTimerStarted = System.DateTimeOffset.Now;
+                    this.mTimer.Tick += new System.EventHandler(this.Showing);
+                    this.mTimer.Start();
+                    this.Showing(null, null);
                 }
                 else
                 {
-                    SetFinalLocation();
+                    this.SetFinalLocation();
                 }
 
-                Show();
-                mPopup.OnDropDown(mPopup.mParent, new System.EventArgs());
+                this.Show();
+                this.mPopup.OnDropDown(this.mPopup.mParent, new System.EventArgs());
             }
 
             public static bool DropShadowSupported()
@@ -263,9 +263,9 @@ namespace PascalGanaye.Popup
             {
                 if (disposing)
                 {
-                    if (mTimer != null)
+                    if (this.mTimer != null)
                     {
-                        mTimer.Dispose();
+                        this.mTimer.Dispose();
                     }
                 }
                 base.Dispose(disposing);
@@ -273,61 +273,61 @@ namespace PascalGanaye.Popup
 
             private void ReLocate()
             {
-                int rW = mWindowSize.Width, rH = mWindowSize.Height;
+                int rW = this.mWindowSize.Width, rH = this.mWindowSize.Height;
 
-                mNormalPos = mPopup.mParent.PointToScreen(Point.Empty);
-                switch (mPlacement)
+                this.mNormalPos = this.mPopup.mParent.PointToScreen(Point.Empty);
+                switch (this.mPlacement)
                 {
                     case ePlacement.Top:
                     case ePlacement.TopLeft:
                     case ePlacement.TopRight:
-                        mNormalPos.Y -= rH;
+                        this.mNormalPos.Y -= rH;
                         break;
                     case ePlacement.Bottom:
                     case ePlacement.BottomLeft:
                     case ePlacement.BottomRight:
-                        mNormalPos.Y += mPopup.mParent.Height;
+                        this.mNormalPos.Y += this.mPopup.mParent.Height;
                         break;
                     case ePlacement.Left:
                     case ePlacement.Right:
-                        mNormalPos.Y += (mPopup.mParent.Height - rH)/2;
+                        this.mNormalPos.Y += (this.mPopup.mParent.Height - rH)/2;
                         break;
                 }
 
-                switch (mPlacement)
+                switch (this.mPlacement)
                 {
                     case ePlacement.Left:
-                        mNormalPos.X -= rW;
+                        this.mNormalPos.X -= rW;
                         break;
                     case ePlacement.TopRight:
                     case ePlacement.BottomRight:
                         break;
                     case ePlacement.Right:
-                        mNormalPos.X += mPopup.mParent.Width;
+                        this.mNormalPos.X += this.mPopup.mParent.Width;
                         break;
                     case ePlacement.TopLeft:
                     case ePlacement.BottomLeft:
-                        mNormalPos.X += mPopup.mParent.Width - rW;
+                        this.mNormalPos.X += this.mPopup.mParent.Width - rW;
                         break;
                     case ePlacement.Top:
                     case ePlacement.Bottom:
-                        mNormalPos.X += (mPopup.mParent.Width - rW)/2;
+                        this.mNormalPos.X += (this.mPopup.mParent.Width - rW)/2;
                         break;
                 }
             }
 
             private void Showing(object sender, System.EventArgs e)
             {
-                mProgress = System.DateTimeOffset.Now.Subtract(mTimerStarted).TotalMilliseconds / mPopup.mAnimationSpeed;
-                if (mProgress >= 1)
+                this.mProgress = System.DateTimeOffset.Now.Subtract(this.mTimerStarted).TotalMilliseconds /this.mPopup.mAnimationSpeed;
+                if (this.mProgress >= 1)
                 {
-                    mTimer.Stop();
-                    mTimer.Tick -= new System.EventHandler(Showing);
-                    AnimateForm(1);
+                    this.mTimer.Stop();
+                    this.mTimer.Tick -= new System.EventHandler(this.Showing);
+                    this.AnimateForm(1);
                 }
                 else
                 {
-                    AnimateForm(mProgress);
+                    this.AnimateForm(this.mProgress);
                 }
             }
 
@@ -335,34 +335,34 @@ namespace PascalGanaye.Popup
             {
                 base.OnDeactivate(e);
 
-                if (mClosing == false)
+                if (this.mClosing == false)
                 {
                     if (this.mPopup.mUserControl is IPopupUserControl)
                     {
-                        mClosing = ((IPopupUserControl) this.mPopup.mUserControl).AcceptPopupClosing();
+                        this.mClosing = ((IPopupUserControl) this.mPopup.mUserControl).AcceptPopupClosing();
                     }
                     else
                     {
-                        mClosing = true;
+                        this.mClosing = true;
                     }
 
-                    if (mClosing)
+                    if (this.mClosing)
                     {
-                        DoClose();
+                        this.DoClose();
                     }
                 }
             }
 
             protected override void OnPaintBackground(PaintEventArgs pevent)
             {
-                pevent.Graphics.DrawRectangle(new Pen(mPopup.mBorderColor), 0, 0, this.Width - 1, this.Height - 1);
+                pevent.Graphics.DrawRectangle(new Pen(this.mPopup.mBorderColor), 0, 0, this.Width - 1, this.Height - 1);
             }
 
             private void SetFinalLocation()
             {
-                mProgress = 1;
-                AnimateForm(1);
-                Invalidate();
+                this.mProgress = 1;
+                this.AnimateForm(1);
+                this.Invalidate();
             }
 
             private void AnimateForm(double Progress)
@@ -374,7 +374,7 @@ namespace PascalGanaye.Popup
                     Progress = 0.1;
                 }
 
-                switch (mPlacement)
+                switch (this.mPlacement)
                 {
                     case ePlacement.Top:
                     case ePlacement.TopLeft:
@@ -395,7 +395,7 @@ namespace PascalGanaye.Popup
                         break;
                 }
 
-                switch (mPlacement)
+                switch (this.mPlacement)
                 {
                     case ePlacement.TopRight:
                     case ePlacement.BottomRight:
@@ -416,58 +416,58 @@ namespace PascalGanaye.Popup
                         break;
                 }
 
-                mCurrentBounds.X = mNormalPos.X + (int) (x*mControlSize.Width);
-                mCurrentBounds.Y = mNormalPos.Y + (int) (y*mControlSize.Height);
-                mCurrentBounds.Width = (int) (w*mControlSize.Width) + 2*BORDER_MARGIN;
-                mCurrentBounds.Height = (int) (h*mControlSize.Height) + 2*BORDER_MARGIN;
-                this.Bounds = mCurrentBounds;
+                this.mCurrentBounds.X = this.mNormalPos.X + (int) (x*this.mControlSize.Width);
+                this.mCurrentBounds.Y = this.mNormalPos.Y + (int) (y*this.mControlSize.Height);
+                this.mCurrentBounds.Width = (int) (w*this.mControlSize.Width) + 2*BORDER_MARGIN;
+                this.mCurrentBounds.Height = (int) (h*this.mControlSize.Height) + 2*BORDER_MARGIN;
+                this.Bounds = this.mCurrentBounds;
             }
 
             public void DoClose()
             {
                 try
                 {
-                    mPopup.OnDropDownClosed(mPopup.mParent, System.EventArgs.Empty);
+                    this.mPopup.OnDropDownClosed(this.mPopup.mParent, System.EventArgs.Empty);
                 }
                 finally
                 {
-                    mPopup.mUserControl.Parent = null;
-                    mPopup.mUserControl.Size = mControlSize;
-                    mPopup.mForm = null;
-                    Form parentForm = mPopup.mParent.FindForm();
+                    this.mPopup.mUserControl.Parent = null;
+                    this.mPopup.mUserControl.Size = this.mControlSize;
+                    this.mPopup.mForm = null;
+                    Form parentForm = this.mPopup.mParent.FindForm();
                     if (parentForm != null)
                     {
                         parentForm.RemoveOwnedForm(this);
                     }
                     parentForm.Focus();
-                    Close();
+                    this.Close();
                 }
             }
 
-            private void mResizingPanel_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+            private void mResizingPanel_MouseUp(object sender, MouseEventArgs e)
             {
-                mResizing = false;
-                Invalidate();
+                this.mResizing = false;
+                this.Invalidate();
             }
 
-            private void mResizingPanel_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+            private void mResizingPanel_MouseMove(object sender, MouseEventArgs e)
             {
-                if (mResizing)
+                if (this.mResizing)
                 {
-                    Size s = Size;
-                    s.Width += (e.X - mx);
-                    s.Height += (e.Y - my);
+                    Size s = this.Size;
+                    s.Width += (e.X - this.mx);
+                    s.Height += (e.Y - this.my);
                     this.Size = s;
                 }
             }
 
-            private void mResizingPanel_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+            private void mResizingPanel_MouseDown(object sender, MouseEventArgs e)
             {
                 if (e.Button == MouseButtons.Left)
                 {
-                    mResizing = true;
-                    mx = e.X;
-                    my = e.Y;
+                    this.mResizing = true;
+                    this.mx = e.X;
+                    this.my = e.Y;
                 }
             }
 
@@ -475,7 +475,7 @@ namespace PascalGanaye.Popup
             {
                 base.OnLoad(e);
                 // for some reason setbounds do not work well in the constructor
-                this.Bounds = mCurrentBounds;
+                this.Bounds = this.mCurrentBounds;
             }
 
             private void DoNothing(object sender, System.EventArgs e)
@@ -485,17 +485,17 @@ namespace PascalGanaye.Popup
 
         protected virtual void OnDropDown(object sender, System.EventArgs e)
         {
-            if (DropDown != null)
+            if (this.DropDown != null)
             {
-                DropDown(sender, e);
+                this.DropDown(sender, e);
             }
         }
 
         protected virtual void OnDropDownClosed(object sender, System.EventArgs e)
         {
-            if (DropDownClosed != null)
+            if (this.DropDownClosed != null)
             {
-                DropDownClosed(sender, e);
+                this.DropDownClosed(sender, e);
             }
         }
 
@@ -507,73 +507,73 @@ namespace PascalGanaye.Popup
         [DefaultValue(false)]
         public bool Resizable
         {
-            get { return mResizable; }
-            set { mResizable = value; }
+            get { return this.mResizable; }
+            set { this.mResizable = value; }
         }
 
         [Browsable(false)]
         public Control UserControl
         {
-            get { return mUserControl; }
-            set { mUserControl = value; }
+            get { return this.mUserControl; }
+            set { this.mUserControl = value; }
         }
 
         [Browsable(false)]
         public Control Parent
         {
-            get { return mParent; }
-            set { mParent = value; }
+            get { return this.mParent; }
+            set { this.mParent = value; }
         }
 
         [DefaultValue(typeof (ePlacement), "BottomLeft")]
         public ePlacement HorizontalPlacement
         {
-            get { return mPlacement; }
-            set { mPlacement = value; }
+            get { return this.mPlacement; }
+            set { this.mPlacement = value; }
         }
 
         [DefaultValue(typeof (Color), "DarkGray")]
         public Color BorderColor
         {
-            get { return mBorderColor; }
-            set { mBorderColor = value; }
+            get { return this.mBorderColor; }
+            set { this.mBorderColor = value; }
         }
 
         [DefaultValue(true)]
         public bool ShowShadow
         {
-            get { return mShowShadow; }
-            set { mShowShadow = value; }
+            get { return this.mShowShadow; }
+            set { this.mShowShadow = value; }
         }
 
         [DefaultValue(150)]
         public int AnimationSpeed
         {
-            get { return mAnimationSpeed; }
-            set { mAnimationSpeed = value; }
+            get { return this.mAnimationSpeed; }
+            set { this.mAnimationSpeed = value; }
         }
 
         [DefaultValue(1d), TypeConverter(typeof (OpacityConverter))]
         public double Opacity
         {
-            get { return mOpacity; }
-            set { mOpacity = value; }
+            get { return this.mOpacity; }
+            set { this.mOpacity = value; }
         }
 
         #endregion
 
-        public System.Windows.Forms.PictureBox CornerPicture;
+        public PictureBox CornerPicture;
 
         // not called, just an easy way to embed the resizing corner bitmap for the PopupForm
         private void InitializeComponent()
         {
             System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof (Popup));
-            this.CornerPicture = new System.Windows.Forms.PictureBox();
+            this.CornerPicture = new PictureBox();
             // 
             // CornerPicture
             // 
-            this.CornerPicture.Image = ((System.Drawing.Image) (resources.GetObject("CornerPicture.Image")));
-            this.CornerPicture.Location = new System.Drawing.Point(17, 17);
+            this.CornerPicture.Image = ((Image) (resources.GetObject("CornerPicture.Image")));
+            this.CornerPicture.Location = new Point(17, 17);
             this.CornerPicture.Name = "CornerPicture";
             this.CornerPicture.TabIndex = 0;
             this.CornerPicture.TabStop = false;

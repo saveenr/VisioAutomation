@@ -13,22 +13,22 @@ namespace VisioAutomation.VDX.Elements
         private int? _del;
 
         public string Value { get; set; }
-        public VA.VDX.ShapeSheet.StringCell Prompt = new VA.VDX.ShapeSheet.StringCell();
-        public VA.VDX.ShapeSheet.StringCell Label = new VA.VDX.ShapeSheet.StringCell();
-        public VA.VDX.ShapeSheet.StringCell Format = new VA.VDX.ShapeSheet.StringCell();
-        public VA.VDX.ShapeSheet.IntCell SortKey = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.EnumCell<CustomPropType> Type = new VA.VDX.ShapeSheet.EnumCell<CustomPropType>(v => (int)v);
-        public VA.VDX.ShapeSheet.BoolCell Invisible = new VA.VDX.ShapeSheet.BoolCell();
-        public VA.VDX.ShapeSheet.BoolCell Verify = new VA.VDX.ShapeSheet.BoolCell();
-        public VA.VDX.ShapeSheet.IntCell LangID = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.EnumCell<CalendarType> Calendar = new VA.VDX.ShapeSheet.EnumCell<CalendarType>(v => (int)v);
+        public ShapeSheet.StringCell Prompt = new ShapeSheet.StringCell();
+        public ShapeSheet.StringCell Label = new ShapeSheet.StringCell();
+        public ShapeSheet.StringCell Format = new ShapeSheet.StringCell();
+        public ShapeSheet.IntCell SortKey = new ShapeSheet.IntCell();
+        public ShapeSheet.EnumCell<CustomPropType> Type = new ShapeSheet.EnumCell<CustomPropType>(v => (int)v);
+        public ShapeSheet.BoolCell Invisible = new ShapeSheet.BoolCell();
+        public ShapeSheet.BoolCell Verify = new ShapeSheet.BoolCell();
+        public ShapeSheet.IntCell LangID = new ShapeSheet.IntCell();
+        public ShapeSheet.EnumCell<CalendarType> Calendar = new ShapeSheet.EnumCell<CalendarType>(v => (int)v);
 
         public string Name { get; set; }
 
         public int? Del
         {
-            get { return _del; }
-            set { _del = value; }
+            get { return this._del; }
+            set { this._del = value; }
         }
 
         public int ID { get; internal set; }
@@ -47,7 +47,7 @@ namespace VisioAutomation.VDX.Elements
 
         public void AddToElement(SXL.XElement parent)
         {
-            var prop_el = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Prop");
+            var prop_el = Internal.XMLUtil.CreateVisioSchema2003Element("Prop");
             if (this.Name != null)
             {
                 prop_el.SetElementValue("Name", this.Name);
@@ -59,7 +59,7 @@ namespace VisioAutomation.VDX.Elements
 
             if (this.Value!=null)
             {
-                var val_el = new SXL.XElement(VA.VDX.Internal.Constants.VisioXmlNamespace2003 + "Value");
+                var val_el = new SXL.XElement(Internal.Constants.VisioXmlNamespace2003 + "Value");
                 prop_el.Add(val_el);
                 val_el.SetAttributeValue("Unit", "STR");
                 val_el.SetValue(this.Value);                

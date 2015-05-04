@@ -12,7 +12,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         internal SectionColumn(int ordinal, IVisio.VisSectionIndices section)
         {
-            this.Name = VA.ShapeSheet.ShapeSheetHelper.GetSectionName(section);
+            this.Name = ShapeSheetHelper.GetSectionName(section);
             this.Ordinal = ordinal;
             this.SectionIndex = section;
             this.CellColumns = new CellColumnList();

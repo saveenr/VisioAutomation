@@ -31,7 +31,7 @@ namespace TestVisioAutomation
             var method = frame.GetMethod();
             var type = method.DeclaringType;
             var name = method.Name;
-            var page = GetNewPage(StandardPageSize);
+            var page = this.GetNewPage(this.StandardPageSize);
             string pagename = string.Format("{0}{1}", name,suffix);
             page.NameU = pagename;
             return page;
@@ -39,7 +39,7 @@ namespace TestVisioAutomation
 
         public IVisio.Page GetNewPage(VA.Drawing.Size s)
         {
-            var app = GetVisioApplication();
+            var app = this.GetVisioApplication();
             var documents = app.Documents;
             if (documents.Count < 1)
             {
@@ -49,14 +49,14 @@ namespace TestVisioAutomation
             var pages = active_document.Pages;
             var page = pages.Add();
             page.Background = 0;
-            VisioAutomationTest.SetPageSize(page, s);
+            SetPageSize(page, s);
 
             return page;
         }
 
         public IVisio.Document GetNewDoc()
         {
-            var app = GetVisioApplication();
+            var app = this.GetVisioApplication();
             var documents = app.Documents;
             var doc = documents.Add("");
 
@@ -73,7 +73,7 @@ namespace TestVisioAutomation
 
         public VA.Scripting.Client GetScriptingClient()
         {
-            var app = GetVisioApplication();
+            var app = this.GetVisioApplication();
             // this ensures that any debug, verbose, user , etc. messages are 
             // sent to a useful place in the unit tests
             var context = new DiagnosticDebugContext(); 
@@ -98,7 +98,7 @@ namespace TestVisioAutomation
         {
             var pages = doc.Pages;
 
-            var target_pages = new System.Collections.Generic.List<IVisio.Page>(pages.Count);
+            var target_pages = new List<IVisio.Page>(pages.Count);
             foreach (IVisio.Page p in pages)
             {
                 target_pages.Add(p);

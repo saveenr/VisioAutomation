@@ -10,7 +10,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ConnectionPoints_AddRemove()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
             Assert.AreEqual(0, VACXN.ConnectionPointHelper.GetCount(s1));
@@ -60,7 +60,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ConnectionPoints_DeleteAll()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
             Assert.AreEqual(0, VACXN.ConnectionPointHelper.GetCount(s1));

@@ -6,23 +6,23 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Connections
 {
-    public class ConnectionPointCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class ConnectionPointCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public VA.ShapeSheet.CellData<double> X { get; set; }
-        public VA.ShapeSheet.CellData<double> Y { get; set; }
-        public VA.ShapeSheet.CellData<int> DirX { get; set; }
-        public VA.ShapeSheet.CellData<int> DirY { get; set; }
-        public VA.ShapeSheet.CellData<int> Type { get; set; }
+        public ShapeSheet.CellData<double> X { get; set; }
+        public ShapeSheet.CellData<double> Y { get; set; }
+        public ShapeSheet.CellData<int> DirX { get; set; }
+        public ShapeSheet.CellData<int> DirY { get; set; }
+        public ShapeSheet.CellData<int> Type { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
             get
             {
-                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Connections_X, this.X.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Connections_Y, this.Y.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Connections_DirX, this.DirX.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Connections_DirY, this.DirY.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Connections_Type, this.Type.Formula);
             }
         }
 
@@ -46,7 +46,7 @@ namespace VisioAutomation.Shapes.Connections
             return _mCellQuery;
         }
 
-        class ConnectionPointCellQuery : VA.ShapeSheet.Query.CellQuery
+        class ConnectionPointCellQuery : CellQuery
         {
             public CellColumn DirX { get; set; }
             public CellColumn DirY { get; set; }
@@ -57,14 +57,14 @@ namespace VisioAutomation.Shapes.Connections
             public ConnectionPointCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionConnectionPts);
-                DirX = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_DirX,"Connections_DirX");
-                DirY = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_DirY,"Connections_DirY");
-                Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Type,"Connections_Type");
-                X = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_X,"Connections_X");
-                Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Connections_Y,"Connections_Y");
+                this.DirX = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirX,"Connections_DirX");
+                this.DirY = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirY,"Connections_DirY");
+                this.Type = sec.AddCell(ShapeSheet.SRCConstants.Connections_Type,"Connections_Type");
+                this.X = sec.AddCell(ShapeSheet.SRCConstants.Connections_X,"Connections_X");
+                this.Y = sec.AddCell(ShapeSheet.SRCConstants.Connections_Y,"Connections_Y");
             }
 
-            public ConnectionPointCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
+            public ConnectionPointCells GetCells(IList<ShapeSheet.CellData<double>> row)
             {
                 var cells = new ConnectionPointCells();
                 cells.X = row[this.X];

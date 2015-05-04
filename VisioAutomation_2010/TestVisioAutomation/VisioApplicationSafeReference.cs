@@ -24,7 +24,7 @@ namespace TestVisioAutomation
                 try
                 {
                     // Try doing *something* with the instance
-                    string s = app.Name;
+                    string s = this.app.Name;
                 }
                 catch (System.Runtime.InteropServices.COMException)
                 {

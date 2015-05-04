@@ -7,14 +7,14 @@ namespace VisioAutomation.DOM
 {
     public class PolyLine : BaseShape
     {
-        public List<VA.Drawing.Point> Points { get; private set; }
+        public List<Drawing.Point> Points { get; private set; }
 
         public PolyLine(params double[] doubles)
         {
-            this.Points = VA.Drawing.Point.FromDoubles(doubles).ToList();
+            this.Points = Drawing.Point.FromDoubles(doubles).ToList();
         }
 
-        public PolyLine(IEnumerable<VA.Drawing.Point> pts)
+        public PolyLine(IEnumerable<Drawing.Point> pts)
         {
             this.Points = pts.ToList();
         }

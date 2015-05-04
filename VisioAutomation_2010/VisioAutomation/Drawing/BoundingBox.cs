@@ -12,7 +12,7 @@ namespace VisioAutomation.Drawing
         private double max_x;
         private double max_y;
 
-        public BoundingBox( IEnumerable<VA.Drawing.Point> points) :
+        public BoundingBox( IEnumerable<Point> points) :
             this()
         {
             foreach (var p in points)
@@ -21,7 +21,7 @@ namespace VisioAutomation.Drawing
             }
         }
 
-        public BoundingBox(IEnumerable<VA.Drawing.Rectangle> rects) :
+        public BoundingBox(IEnumerable<Rectangle> rects) :
             this()
         {
             foreach (var r in rects)
@@ -30,7 +30,7 @@ namespace VisioAutomation.Drawing
             }
         }
 
-        public void Add(VA.Drawing.Point p)
+        public void Add(Point p)
         {
             if (this.initialized)
             {
@@ -72,19 +72,19 @@ namespace VisioAutomation.Drawing
             }
         }
 
-        public void Add(VA.Drawing.Rectangle r)
+        public void Add(Rectangle r)
         {
             this.Add(r.LowerLeft);
             this.Add(r.UpperRight);
         }
 
-        public VA.Drawing.Rectangle Rectangle
+        public Rectangle Rectangle
         {
             get
             {
                 if (this.HasValue)
                 {
-                    return new VA.Drawing.Rectangle(this.min_x,this.min_y,this.max_x,this.max_y);
+                    return new Rectangle(this.min_x,this.min_y,this.max_x,this.max_y);
                 }
                 else
                 {

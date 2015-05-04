@@ -4,10 +4,10 @@ namespace VisioAutomation.ShapeSheet
 {
     public struct CellData<TResult>
     {
-        public VA.ShapeSheet.FormulaLiteral Formula { get; private set; }
+        public FormulaLiteral Formula { get; private set; }
         public TResult Result { get; private set; }
 
-        public CellData(VA.ShapeSheet.FormulaLiteral formula, TResult result)
+        public CellData(FormulaLiteral formula, TResult result)
             : this()
         {
             this.Formula = formula;
@@ -20,7 +20,7 @@ namespace VisioAutomation.ShapeSheet
             return string.Format("(\"{0}\",{1})", fs, this.Result);
         }
 
-        public static implicit operator CellData<TResult>(VA.ShapeSheet.FormulaLiteral formula)
+        public static implicit operator CellData<TResult>(FormulaLiteral formula)
         {
             return new CellData<TResult>(formula,default(TResult));
         }

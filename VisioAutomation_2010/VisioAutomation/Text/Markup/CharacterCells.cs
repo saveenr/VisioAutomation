@@ -6,30 +6,30 @@ namespace VisioAutomation.Text.Markup
 {
     public class CharacterCells
     {
-        public VA.ShapeSheet.FormulaLiteral AsianFont { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Case { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Color { get; set; }
-        public VA.ShapeSheet.FormulaLiteral ComplexScriptFont { get; set; }
-        public VA.ShapeSheet.FormulaLiteral ComplexScriptSize { get; set; }
-        public VA.ShapeSheet.FormulaLiteral DoubleStrikeThrough { get; set; }
-        public VA.ShapeSheet.FormulaLiteral DoubleUnderline { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Font { get; set; }
-        public VA.ShapeSheet.FormulaLiteral FontScale { get; set; }
-        public VA.ShapeSheet.FormulaLiteral LangID { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Letterspace { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Locale { get; set; }
-        public VA.ShapeSheet.FormulaLiteral LocalizeFont { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Overline { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Perpendicular { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Pos { get; set; }
-        public VA.ShapeSheet.FormulaLiteral RTLText { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Size { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Strikethru { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Style { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Transparency { get; set; }
-        public VA.ShapeSheet.FormulaLiteral UseVertical { get; set; }
+        public ShapeSheet.FormulaLiteral AsianFont { get; set; }
+        public ShapeSheet.FormulaLiteral Case { get; set; }
+        public ShapeSheet.FormulaLiteral Color { get; set; }
+        public ShapeSheet.FormulaLiteral ComplexScriptFont { get; set; }
+        public ShapeSheet.FormulaLiteral ComplexScriptSize { get; set; }
+        public ShapeSheet.FormulaLiteral DoubleStrikeThrough { get; set; }
+        public ShapeSheet.FormulaLiteral DoubleUnderline { get; set; }
+        public ShapeSheet.FormulaLiteral Font { get; set; }
+        public ShapeSheet.FormulaLiteral FontScale { get; set; }
+        public ShapeSheet.FormulaLiteral LangID { get; set; }
+        public ShapeSheet.FormulaLiteral Letterspace { get; set; }
+        public ShapeSheet.FormulaLiteral Locale { get; set; }
+        public ShapeSheet.FormulaLiteral LocalizeFont { get; set; }
+        public ShapeSheet.FormulaLiteral Overline { get; set; }
+        public ShapeSheet.FormulaLiteral Perpendicular { get; set; }
+        public ShapeSheet.FormulaLiteral Pos { get; set; }
+        public ShapeSheet.FormulaLiteral RTLText { get; set; }
+        public ShapeSheet.FormulaLiteral Size { get; set; }
+        public ShapeSheet.FormulaLiteral Strikethru { get; set; }
+        public ShapeSheet.FormulaLiteral Style { get; set; }
+        public ShapeSheet.FormulaLiteral Transparency { get; set; }
+        public ShapeSheet.FormulaLiteral UseVertical { get; set; }
 
-        internal void ApplyFormulas(VA.ShapeSheet.Update update, short row)
+        internal void ApplyFormulas(ShapeSheet.Update update, short row)
         {
             update.SetFormulaIgnoreNull(SRCCON.CharColor.ForRow(row), this.Color);
             update.SetFormulaIgnoreNull(SRCCON.CharFont.ForRow(row), this.Font);

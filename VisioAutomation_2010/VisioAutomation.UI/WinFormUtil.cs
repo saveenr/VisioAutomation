@@ -11,7 +11,7 @@ namespace VisioAutomation.UI
                 throw new System.ArgumentNullException("checkedlistbox");
             }
 
-            foreach (int index in System.Linq.Enumerable.Range(0, checkedlistbox.Items.Count))
+            foreach (int index in Enumerable.Range(0, checkedlistbox.Items.Count))
             {
                 checkedlistbox.SetItemChecked(index, check);
             }
@@ -33,7 +33,7 @@ namespace VisioAutomation.UI
                 double _sat = 1.0;
                 double _val = 1.0;
 
-                var colors = range_steps.Select(x => VisioAutomation.UI.ColorUtil.HSVToSystemDrawingColor(x, _sat, _val));
+                var colors = range_steps.Select(x => ColorUtil.HSVToSystemDrawingColor(x, _sat, _val));
                 var positions = range_steps.Select(x => (float) x);
 
                 EnumerableUtil.FillArray( colorblend.Colors, colors );
@@ -63,7 +63,7 @@ namespace VisioAutomation.UI
                     var h = x / (double)bitmap.Width;
                     double _sat = 1.0;
                     double _val = 1.0;
-                    var c0 = VisioAutomation.UI.ColorUtil.HSVToSystemDrawingColor(h, _sat, _val);
+                    var c0 = ColorUtil.HSVToSystemDrawingColor(h, _sat, _val);
                     uint rgb = (uint) (c0.R << 16 | c0.G << 8 | c0.B);
                     uint mask = 0xff000000;
                     var c2 = System.Drawing.Color.FromArgb((int)(mask | rgb));

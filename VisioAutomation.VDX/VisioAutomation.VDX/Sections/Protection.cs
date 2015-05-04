@@ -73,22 +73,22 @@ namespace VisioAutomation.VDX.Sections
 
         public void SetAll(bool v)
         {
-            Width.Result = v;
-            Height.Result = v;
-            MoveX.Result = v;
-            MoveY.Result = v;
-            Aspect.Result = v;
-            Delete.Result = v;
-            Begin.Result = v;
-            Rotate.Result = v;
-            Crop.Result = v;
-            VtxEdit.Result = v;
-            TextEdit.Result = v;
-            Format.Result = v;
-            Group.Result = v;
-            CalcWH.Result = v;
-            Select.Result = v;
-            CustProp.Result = v;
+            this.Width.Result = v;
+            this.Height.Result = v;
+            this.MoveX.Result = v;
+            this.MoveY.Result = v;
+            this.Aspect.Result = v;
+            this.Delete.Result = v;
+            this.Begin.Result = v;
+            this.Rotate.Result = v;
+            this.Crop.Result = v;
+            this.VtxEdit.Result = v;
+            this.TextEdit.Result = v;
+            this.Format.Result = v;
+            this.Group.Result = v;
+            this.CalcWH.Result = v;
+            this.Select.Result = v;
+            this.CustProp.Result = v;
         }
     }
 }

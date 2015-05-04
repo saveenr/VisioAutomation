@@ -20,7 +20,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public QueryResult<T> this[int index]

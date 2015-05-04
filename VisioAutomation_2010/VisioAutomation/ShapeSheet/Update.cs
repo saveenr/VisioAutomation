@@ -34,7 +34,7 @@ namespace VisioAutomation.ShapeSheet
         {
             get 
             { 
-                var flags = get_common_flags();
+                var flags = this.get_common_flags();
                 if ((flags & IVisio.VisGetSetArgs.visSetFormulas) > 0)
                 {
                     flags = (IVisio.VisGetSetArgs)((short)flags | (short)IVisio.VisGetSetArgs.visSetUniversalSyntax);
@@ -47,7 +47,7 @@ namespace VisioAutomation.ShapeSheet
         {
             get
             {
-                var common_flags = get_common_flags();
+                var common_flags = this.get_common_flags();
                 var formula_flags = (short) IVisio.VisGetSetArgs.visSetUniversalSyntax;
                 var combined_flags = (short) common_flags | formula_flags;
                 return (IVisio.VisGetSetArgs) combined_flags;
@@ -82,25 +82,25 @@ namespace VisioAutomation.ShapeSheet
             else
             {
                 // first validate the stream types
-                if (first_update.Value.StreamType != update.StreamType)
+                if (this.first_update.Value.StreamType != update.StreamType)
                 {
-                    throw new VA.AutomationException("Cannot contain both SRC and SIDSRC updates");
+                    throw new AutomationException("Cannot contain both SRC and SIDSRC updates");
                 }
 
                 // Now ensure that we aren't mixing formulas and results
                 // Keep in mind that we can mix differnt types of results (strings and numerics)
-                if (first_update.Value.UpdateType == UpdateType.Formula && update.UpdateType != UpdateType.Formula)
+                if (this.first_update.Value.UpdateType == UpdateType.Formula && update.UpdateType != UpdateType.Formula)
                 {
                     if (update.UpdateType != UpdateType.Formula)
                     {
-                        throw new VA.AutomationException("Cannot contain both Formula and Result updates");
+                        throw new AutomationException("Cannot contain both Formula and Result updates");
                     }
                 }
-                else if (first_update.Value.UpdateType == UpdateType.ResultNumeric || first_update.Value.UpdateType == UpdateType.ResultString)
+                else if (this.first_update.Value.UpdateType == UpdateType.ResultNumeric || this.first_update.Value.UpdateType == UpdateType.ResultString)
                 {
                     if (update.UpdateType == UpdateType.Formula)
                     {
-                        throw new VA.AutomationException("Cannot contain both Formula and Result updates");
+                        throw new AutomationException("Cannot contain both Formula and Result updates");
                     }
                 }
             }
@@ -116,7 +116,7 @@ namespace VisioAutomation.ShapeSheet
             this._add_update(rec);
         }
 
-        protected void _SetFormulaIgnoreNull(StreamType st, SIDSRC streamitem, ShapeSheet.FormulaLiteral formula)
+        protected void _SetFormulaIgnoreNull(StreamType st, SIDSRC streamitem, FormulaLiteral formula)
         {
             if (formula.HasValue)
             {
@@ -147,7 +147,7 @@ namespace VisioAutomation.ShapeSheet
         IEnumerator IEnumerable.GetEnumerator() 
         {
             // keeps it hidden.
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public void SetResult(short shapeid, SRC src, double value, IVisio.VisUnitCodes unitcode)
@@ -183,13 +183,13 @@ namespace VisioAutomation.ShapeSheet
             this._SetFormula(StreamType.SIDSRC, streamitem, formula);
         }
 
-        public void SetFormulaIgnoreNull(short id, ShapeSheet.SRC src, ShapeSheet.FormulaLiteral formula)
+        public void SetFormulaIgnoreNull(short id, SRC src, FormulaLiteral formula)
         {
-            var sidsrc = new VA.ShapeSheet.SIDSRC(id, src);
+            var sidsrc = new SIDSRC(id, src);
             this._SetFormulaIgnoreNull(StreamType.SIDSRC, sidsrc, formula);
         }
 
-        public void SetFormulas(VA.ShapeSheet.CellGroups.CellGroup cg)
+        public void SetFormulas(CellGroups.CellGroup cg)
         {
             foreach (var pair in cg.Pairs)
             {
@@ -197,7 +197,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        public void SetFormulas(short shapeid, VA.ShapeSheet.CellGroups.CellGroup cg)
+        public void SetFormulas(short shapeid, CellGroups.CellGroup cg)
         {
             foreach (var pair in cg.Pairs)
             {
@@ -205,7 +205,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        public void SetFormulas(short shapeid, VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
+        public void SetFormulas(short shapeid, CellGroups.CellGroupMultiRow cg, short row)
         {
             foreach (var pair in cg.Pairs)
             {
@@ -213,7 +213,7 @@ namespace VisioAutomation.ShapeSheet
             }
         }
 
-        public void SetFormulas(VA.ShapeSheet.CellGroups.CellGroupMultiRow cg, short row)
+        public void SetFormulas(CellGroups.CellGroupMultiRow cg, short row)
         {
             foreach (var pair in cg.Pairs)
             {
@@ -248,29 +248,29 @@ namespace VisioAutomation.ShapeSheet
 
             if (surface.Target.Shape != null)
             {
-                if (first_update.Value.StreamType == StreamType.SIDSRC)
+                if (this.first_update.Value.StreamType == StreamType.SIDSRC)
                 {
-                    throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
+                    throw new AutomationException("Contains a SIDSRC updates. Need SRC updates");
                 }
             }
             else if (surface.Target.Master != null)
             {
-                if (first_update.Value.StreamType == StreamType.SIDSRC)
+                if (this.first_update.Value.StreamType == StreamType.SIDSRC)
                 {
-                    throw new VA.AutomationException("Contains a SIDSRC updates. Need SRC updates");
+                    throw new AutomationException("Contains a SIDSRC updates. Need SRC updates");
                 }
             }
             else if (surface.Target.Page != null)
             {
-                if (first_update.Value.StreamType == StreamType.SRC)
+                if (this.first_update.Value.StreamType == StreamType.SRC)
                 {
-                    throw new VA.AutomationException("Contains a SRC updates. Need SIDSRC updates");
+                    throw new AutomationException("Contains a SRC updates. Need SIDSRC updates");
                 }
             }
 
             var stream = this.build_stream();
 
-            if (first_update.Value.UpdateType == UpdateType.ResultNumeric || first_update.Value.UpdateType==UpdateType.ResultString)
+            if (this.first_update.Value.UpdateType == UpdateType.ResultNumeric || this.first_update.Value.UpdateType==UpdateType.ResultString)
             {
                 // Set Results
 
@@ -298,10 +298,10 @@ namespace VisioAutomation.ShapeSheet
                 
                 var flags = this.ResultFlags;
 
-                if (first_update.Value.UpdateType == UpdateType.ResultNumeric)
+                if (this.first_update.Value.UpdateType == UpdateType.ResultNumeric)
                 {
                 }
-                else if (first_update.Value.UpdateType == UpdateType.ResultString)
+                else if (this.first_update.Value.UpdateType == UpdateType.ResultString)
                 {
                     flags |= IVisio.VisGetSetArgs.visGetStrings;
                 }
@@ -351,7 +351,7 @@ namespace VisioAutomation.ShapeSheet
             this._SetFormula(StreamType.SRC, new SIDSRC(-1, streamitem), formula);
         }
 
-        public void SetFormulaIgnoreNull(SRC streamitem, ShapeSheet.FormulaLiteral formula)
+        public void SetFormulaIgnoreNull(SRC streamitem, FormulaLiteral formula)
         {
             this._SetFormulaIgnoreNull(StreamType.SRC, new SIDSRC(-1, streamitem), formula);
         }

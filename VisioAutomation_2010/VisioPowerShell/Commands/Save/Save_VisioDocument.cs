@@ -11,7 +11,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if (Filename!=null)
+            if (this.Filename!=null)
             {
                 this.client.Document.SaveAs(this.Filename);
             }

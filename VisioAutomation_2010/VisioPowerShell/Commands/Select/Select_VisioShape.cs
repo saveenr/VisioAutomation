@@ -17,13 +17,13 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            if ( Shapes !=null)
+            if (this.Shapes !=null)
             {
-                this.client.Selection.Select(Shapes);
+                this.client.Selection.Select(this.Shapes);
             }
-            else if (ShapeIDs!=null)
+            else if (this.ShapeIDs!=null)
             {
-                this.client.Selection.Select(ShapeIDs);
+                this.client.Selection.Select(this.ShapeIDs);
             }
             else
             {

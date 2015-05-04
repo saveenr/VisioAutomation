@@ -22,7 +22,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Font != null)
             {
-                this.client.Text.SetFont(this.Shapes, Font);                
+                this.client.Text.SetFont(this.Shapes, this.Font);                
             }
 
             if (this.Togglecase)

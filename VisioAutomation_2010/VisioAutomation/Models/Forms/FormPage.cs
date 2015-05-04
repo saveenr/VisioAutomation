@@ -6,8 +6,8 @@ namespace VisioAutomation.Models.Forms
     public class FormPage
     {
         public string Name;
-        public VA.Drawing.Size Size;
-        public VA.Drawing.Margin Margin;
+        public Drawing.Size Size;
+        public Drawing.Margin Margin;
         public IVisio.Page VisioPage;
 
         public double TitleTextSize { get; set; }
@@ -19,23 +19,23 @@ namespace VisioAutomation.Models.Forms
 
         public FormPage()
         {
-            this.Size = new VA.Drawing.Size(8.5, 11);
-            this.Margin = new VA.Drawing.Margin(0.5, 0.5, 0.5, 0.5);
-            DefaultFont = "Segoe UI";
-            BodyTextSize = 8.0;
-            BodyParaSpacingAfter = 0.0;
-            TitleTextSize = 15.0;
+            this.Size = new Drawing.Size(8.5, 11);
+            this.Margin = new Drawing.Margin(0.5, 0.5, 0.5, 0.5);
+            this.DefaultFont = "Segoe UI";
+            this.BodyTextSize = 8.0;
+            this.BodyParaSpacingAfter = 0.0;
+            this.TitleTextSize = 15.0;
 
         }
 
         internal IVisio.Page Draw(FormRenderingContext ctx)
         {
             var r = new InteractiveRenderer(ctx.Document);
-            var page_cells = new VA.Pages.PageCells();
+            var page_cells = new Pages.PageCells();
             this.VisioPage = r.CreatePage(this);
             ctx.Page = this.VisioPage;
 
-            var titleblock = new TextBlock(new VA.Drawing.Size(7.5, 0.5), this.Title);
+            var titleblock = new TextBlock(new Drawing.Size(7.5, 0.5), this.Title);
 
             int _fontid = ctx.GetFontID(this.DefaultFont);
             titleblock.Textcells.VerticalAlign = 0;
@@ -43,7 +43,7 @@ namespace VisioAutomation.Models.Forms
             titleblock.FormatCells.LineWeight = 0;
             titleblock.FormatCells.LinePattern = 0;
             titleblock.CharacterCells.Font = _fontid;
-            titleblock.CharacterCells.Size = get_pt_string(TitleTextSize);
+            titleblock.CharacterCells.Size = this.get_pt_string(this.TitleTextSize);
 
 
 
@@ -52,11 +52,11 @@ namespace VisioAutomation.Models.Forms
             r.Linefeed();
 
             double body_height = r.GetDistanceToBottomMargin();
-            var bodyblock = new TextBlock(new VA.Drawing.Size(7.5, body_height), this.Body);
+            var bodyblock = new TextBlock(new Drawing.Size(7.5, body_height), this.Body);
             bodyblock.ParagraphCells.HorizontalAlign = 0;
-            bodyblock.ParagraphCells.SpacingAfter = get_pt_string(BodyParaSpacingAfter);
+            bodyblock.ParagraphCells.SpacingAfter = this.get_pt_string(this.BodyParaSpacingAfter);
             bodyblock.CharacterCells.Font = _fontid;
-            bodyblock.CharacterCells.Size = get_pt_string(BodyTextSize);
+            bodyblock.CharacterCells.Size = this.get_pt_string(this.BodyTextSize);
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
             bodyblock.Textcells.VerticalAlign = 0;

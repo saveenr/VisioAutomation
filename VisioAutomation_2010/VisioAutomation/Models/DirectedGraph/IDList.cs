@@ -39,7 +39,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public bool ContainsID(string id)

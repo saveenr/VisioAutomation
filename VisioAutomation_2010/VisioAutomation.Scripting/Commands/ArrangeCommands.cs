@@ -15,61 +15,61 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        private static IVisio.VisUICmds _map_halign_to_uicmd(VA.Drawing.AlignmentHorizontal v)
+        private static IVisio.VisUICmds _map_halign_to_uicmd(Drawing.AlignmentHorizontal v)
             {
                 switch (v)
                 {
-                    case VA.Drawing.AlignmentHorizontal.Left: return IVisio.VisUICmds.visCmdDistributeLeft;
-                    case VA.Drawing.AlignmentHorizontal.Center: return IVisio.VisUICmds.visCmdDistributeCenter;
-                    case VA.Drawing.AlignmentHorizontal.Right: return IVisio.VisUICmds.visCmdDistributeRight;
+                    case Drawing.AlignmentHorizontal.Left: return IVisio.VisUICmds.visCmdDistributeLeft;
+                    case Drawing.AlignmentHorizontal.Center: return IVisio.VisUICmds.visCmdDistributeCenter;
+                    case Drawing.AlignmentHorizontal.Right: return IVisio.VisUICmds.visCmdDistributeRight;
                     default: throw new System.ArgumentOutOfRangeException();
                 }
             }
 
-        private static IVisio.VisUICmds _map_valign_to_uicmd(VA.Drawing.AlignmentVertical v)
+        private static IVisio.VisUICmds _map_valign_to_uicmd(Drawing.AlignmentVertical v)
         {
             switch (v)
             {
-                case VA.Drawing.AlignmentVertical.Top: return IVisio.VisUICmds.visCmdDistributeTop;
-                case VA.Drawing.AlignmentVertical.Center: return IVisio.VisUICmds.visCmdDistributeMiddle;
-                case VA.Drawing.AlignmentVertical.Bottom: return IVisio.VisUICmds.visCmdDistributeBottom;
+                case Drawing.AlignmentVertical.Top: return IVisio.VisUICmds.visCmdDistributeTop;
+                case Drawing.AlignmentVertical.Center: return IVisio.VisUICmds.visCmdDistributeMiddle;
+                case Drawing.AlignmentVertical.Bottom: return IVisio.VisUICmds.visCmdDistributeBottom;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        private static IVisio.VisUICmds _map_axis_to_uicmd(VA.Drawing.Axis v)
+        private static IVisio.VisUICmds _map_axis_to_uicmd(Drawing.Axis v)
         {
             switch (v)
             {
-                case VA.Drawing.Axis.XAxis: return IVisio.VisUICmds.visCmdDistributeHSpace;
-                case VA.Drawing.Axis.YAxis: return IVisio.VisUICmds.visCmdDistributeVSpace;
+                case Drawing.Axis.XAxis: return IVisio.VisUICmds.visCmdDistributeHSpace;
+                case Drawing.Axis.YAxis: return IVisio.VisUICmds.visCmdDistributeVSpace;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        private static IVisio.VisVerticalAlignTypes _map_isd_valign_to_visio_valign(VA.Drawing.AlignmentVertical v)
+        private static IVisio.VisVerticalAlignTypes _map_isd_valign_to_visio_valign(Drawing.AlignmentVertical v)
         {
             switch (v)
             {
-                case VA.Drawing.AlignmentVertical.Top: return IVisio.VisVerticalAlignTypes.visVertAlignTop;
-                case VA.Drawing.AlignmentVertical.Center: return IVisio.VisVerticalAlignTypes.visVertAlignMiddle;
-                case VA.Drawing.AlignmentVertical.Bottom: return IVisio.VisVerticalAlignTypes.visVertAlignBottom;
+                case Drawing.AlignmentVertical.Top: return IVisio.VisVerticalAlignTypes.visVertAlignTop;
+                case Drawing.AlignmentVertical.Center: return IVisio.VisVerticalAlignTypes.visVertAlignMiddle;
+                case Drawing.AlignmentVertical.Bottom: return IVisio.VisVerticalAlignTypes.visVertAlignBottom;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        private static IVisio.VisHorizontalAlignTypes _map_isd_halign_to_visio_halign(VA.Drawing.AlignmentHorizontal v)
+        private static IVisio.VisHorizontalAlignTypes _map_isd_halign_to_visio_halign(Drawing.AlignmentHorizontal v)
         {
             switch (v)
             {
-                case VA.Drawing.AlignmentHorizontal.Left: return IVisio.VisHorizontalAlignTypes.visHorzAlignLeft;
-                case VA.Drawing.AlignmentHorizontal.Center: return IVisio.VisHorizontalAlignTypes.visHorzAlignCenter;
-                case VA.Drawing.AlignmentHorizontal.Right: return IVisio.VisHorizontalAlignTypes.visHorzAlignRight;
+                case Drawing.AlignmentHorizontal.Left: return IVisio.VisHorizontalAlignTypes.visHorzAlignLeft;
+                case Drawing.AlignmentHorizontal.Center: return IVisio.VisHorizontalAlignTypes.visHorzAlignCenter;
+                case Drawing.AlignmentHorizontal.Right: return IVisio.VisHorizontalAlignTypes.visHorzAlignRight;
                 default: throw new System.ArgumentOutOfRangeException();
             }
         }
 
-        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal halign)
+        public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.AlignmentHorizontal halign)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -85,7 +85,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.VisioApplication.DoCmd((short)cmd);
         }
 
-        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical valign)
+        public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.AlignmentVertical valign)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -101,7 +101,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.VisioApplication.DoCmd((short)cmd); 
         }
 
-        public void Distribute(IList<IVisio.Shape> target_shapes, VA.Drawing.Axis axis)
+        public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.Axis axis)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -114,7 +114,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = _map_axis_to_uicmd(axis);
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Distribute Shapes"))
+            using (var undoscope = new UndoScope(this.Client.VisioApplication,"Distribute Shapes"))
             {
                 this.Client.VisioApplication.DoCmd((short)cmd);
             }
@@ -137,7 +137,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Nudge Shapes"))
+            using (var undoscope = new UndoScope(this.Client.VisioApplication,"Nudge Shapes"))
             {
                 var selection = this.Client.Selection.Get();
                 var unitcode = IVisio.VisUnitCodes.visInches;
@@ -152,7 +152,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
             
-            var shapes = GetTargetShapes2D(target_shapes);
+            var shapes = this.GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -162,30 +162,30 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Snape Shape Sizes"))
+            using (var undoscope = new UndoScope(this.Client.VisioApplication,"Snape Shape Sizes"))
             {
                 var active_page = application.ActivePage;
-                var snapsize = new VA.Drawing.Size(w, h);
-                var minsize = new VA.Drawing.Size(w, h);
+                var snapsize = new Drawing.Size(w, h);
+                var minsize = new Drawing.Size(w, h);
                 SnapSize(active_page, shapeids, snapsize, minsize);
             }
         }
 
-        private static void SnapSize(IVisio.Page page, IList<int> shapeids, VA.Drawing.Size snapsize, VA.Drawing.Size minsize)
+        private static void SnapSize(IVisio.Page page, IList<int> shapeids, Drawing.Size snapsize, Drawing.Size minsize)
         {
-            var input_xfrms = VA.Shapes.XFormCells.GetCells(page, shapeids);
-            var output_xfrms = new List<VA.Shapes.XFormCells>(input_xfrms.Count);
+            var input_xfrms = Shapes.XFormCells.GetCells(page, shapeids);
+            var output_xfrms = new List<Shapes.XFormCells>(input_xfrms.Count);
 
-            var grid = new VA.Drawing.SnappingGrid(snapsize);
+            var grid = new Drawing.SnappingGrid(snapsize);
             foreach (var input_xfrm in input_xfrms)
             {
-                var inut_size = new VA.Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);
+                var inut_size = new Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);
                 var snapped_size = grid.Snap(inut_size);
                 double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
                 double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
-                var new_size = new VA.Drawing.Size(max_w, max_h);
+                var new_size = new Drawing.Size(max_w, max_h);
 
-                var output_xfrm = new VA.Shapes.XFormCells();
+                var output_xfrm = new Shapes.XFormCells();
                 output_xfrm.Width = new_size.Width;
                 output_xfrm.Height = new_size.Height;
 
@@ -196,10 +196,10 @@ namespace VisioAutomation.Scripting.Commands
             update_xfrms(page, shapeids, output_xfrms);
         }
 
-        private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<VA.Shapes.XFormCells> xfrms)
+        private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
         {
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             for (int i = 0; i < shapeids.Count; i++)
             {
                 var shape_id = shapeids[i];
@@ -211,7 +211,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
 
-        public void Send(IList<IVisio.Shape> target_shapes, VA.Selection.ShapeSendDirection dir)
+        public void Send(IList<IVisio.Shape> target_shapes, Selection.ShapeSendDirection dir)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -222,11 +222,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var selection = Client.Selection.Get();
-            VA.Selection.SelectionHelper.SendShapes(selection, dir);
+            var selection = this.Client.Selection.Get();
+            Selection.SelectionHelper.SendShapes(selection, dir);
         }
 
-        public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentHorizontal align)
+        public void Align(IList<IVisio.Shape> target_shapes, Drawing.AlignmentHorizontal align)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -237,17 +237,17 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Align Shapes"))
+            using (var undoscope = new UndoScope(this.Client.VisioApplication,"Align Shapes"))
             {
                 bool glue_to_guide = false;
-                var selection = Client.Selection.Get();
+                var selection = this.Client.Selection.Get();
                 var halign = _map_isd_halign_to_visio_halign(align);
                 var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
                 selection.Align(halign, valign, glue_to_guide);
             }
         }
 
-        public void Align(IList<IVisio.Shape> target_shapes, VA.Drawing.AlignmentVertical align)
+        public void Align(IList<IVisio.Shape> target_shapes, Drawing.AlignmentVertical align)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -258,10 +258,10 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Align Shapes"))
+            using (var undoscope = new UndoScope(this.Client.VisioApplication,"Align Shapes"))
             {
                 bool glue_to_guide = false;
-                var selection = Client.Selection.Get();
+                var selection = this.Client.Selection.Get();
                 var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
 
                 var valign = _map_isd_valign_to_visio_valign(align);
@@ -270,7 +270,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public IList<VA.Shapes.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
+        public IList<Shapes.XFormCells> GetXForm(IList<IVisio.Shape> target_shapes)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -278,12 +278,12 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count<1)
             {
-                return new List<VA.Shapes.XFormCells>(0);
+                return new List<Shapes.XFormCells>(0);
             }
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
             var page = this.Client.VisioApplication.ActivePage;
-            var data = VA.Shapes.XFormCells.GetCells(page, shapeids);
+            var data = Shapes.XFormCells.GetCells(page, shapeids);
             return data;
         }
 
@@ -325,12 +325,12 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public void SetLock(IList<IVisio.Shape> target_shapes, VA.Shapes.LockCells lockcells)
+        public void SetLock(IList<IVisio.Shape> target_shapes, Shapes.LockCells lockcells)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -338,7 +338,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this.Client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
 
             foreach (int shapeid in shapeids)
             {
@@ -346,7 +346,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Shape Lock Properties"))
+            using (var undoscope = new UndoScope(this.Client.VisioApplication,"Set Shape Lock Properties"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -358,45 +358,45 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             } 
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             foreach (int shapeid in shapeids)
             {
                 if (w.HasValue && w.Value>=0)
                 {
-                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, w.Value);
+                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, w.Value);
                 }
                 if (h.HasValue && h.Value >= 0)
                 {
-                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, h.Value);                    
+                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, h.Value);                    
                 }
             }
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Shape Size"))
+            using (var undoscope = new UndoScope(this.Client.VisioApplication,"Set Shape Size"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
             }
         }
 
-        private static VA.Drawing.Rectangle GetRectangle(VA.Shapes.XFormCells xFormCells)
+        private static Drawing.Rectangle GetRectangle(Shapes.XFormCells xFormCells)
         {
-            var pin = new VA.Drawing.Point(xFormCells.PinX.Result, xFormCells.PinY.Result);
-            var locpin = new VA.Drawing.Point(xFormCells.LocPinX.Result, xFormCells.LocPinY.Result);
-            var size = new VA.Drawing.Size(xFormCells.Width.Result, xFormCells.Height.Result);
-            return new VA.Drawing.Rectangle(pin - locpin, size);
+            var pin = new Drawing.Point(xFormCells.PinX.Result, xFormCells.PinY.Result);
+            var locpin = new Drawing.Point(xFormCells.LocPinX.Result, xFormCells.LocPinY.Result);
+            var size = new Drawing.Size(xFormCells.Width.Result, xFormCells.Height.Result);
+            return new Drawing.Rectangle(pin - locpin, size);
         }
 
-        public static VA.Drawing.Rectangle GetBoundingBox(IEnumerable<VA.Shapes.XFormCells> xfrms)
+        public static Drawing.Rectangle GetBoundingBox(IEnumerable<Shapes.XFormCells> xfrms)
         {
-            var bb = new VA.Drawing.BoundingBox(xfrms.Select(GetRectangle));
+            var bb = new Drawing.BoundingBox(xfrms.Select(GetRectangle));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");
@@ -423,19 +423,19 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Client.VisioApplication;
             using (var undoscope = new UndoScope(application,"Stack"))
             {
-                if (axis == VA.Drawing.Axis.YAxis)
+                if (axis == Drawing.Axis.YAxis)
                 {
-                    Align(null,VA.Drawing.AlignmentHorizontal.Center);
+                    this.Align(null,Drawing.AlignmentHorizontal.Center);
                 }
                 else
                 {
-                    Align(null,VA.Drawing.AlignmentVertical.Center);
+                    this.Align(null,Drawing.AlignmentVertical.Center);
                 }
-                Distribute(axis, space);
+                this.Distribute(axis, space);
             }
         }
 
-        public void Distribute(VA.Drawing.Axis axis, double d)
+        public void Distribute(Drawing.Axis axis, double d)
         {
             if (!this.Client.Document.HasActiveDocument)
             {
@@ -455,7 +455,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes2D(target_shapes);
+            var shapes = this.GetTargetShapes2D(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -463,10 +463,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(application,"SnapCorner"))
+            using (var undoscope = new UndoScope(application,"SnapCorner"))
             {
                 var active_page = application.ActivePage;
-                ArrangeHelper.SnapCorner(active_page, shapeids, new VA.Drawing.Size(w, h), corner);
+                ArrangeHelper.SnapCorner(active_page, shapeids, new Drawing.Size(w, h), corner);
             }
         }
     }

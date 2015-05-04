@@ -11,7 +11,7 @@ namespace VisioAutomation.VDX
         {
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument dom)
+        public void CreateVDX(Elements.Drawing vdoc, SXL.XDocument dom)
         {
             if (vdoc == null)
             {
@@ -23,10 +23,10 @@ namespace VisioAutomation.VDX
                 throw new System.ArgumentNullException("dom");
             }
 
-            _ModifyTemplate(dom, vdoc);
+            this._ModifyTemplate(dom, vdoc);
         }
 
-        public void CreateVDX(VA.VDX.Elements.Drawing vdoc, SXL.XDocument dom, string output_filename)
+        public void CreateVDX(Elements.Drawing vdoc, SXL.XDocument dom, string output_filename)
         {
             if (output_filename == null)
             {
@@ -36,9 +36,9 @@ namespace VisioAutomation.VDX
             // Validate that all Document windows refer to an existing page
             foreach (var window in vdoc.Windows)
             {
-                if (window is VA.VDX.Elements.DocumentWindow)
+                if (window is Elements.DocumentWindow)
                 {
-                    var docwind = (VA.VDX.Elements.DocumentWindow) window;
+                    var docwind = (Elements.DocumentWindow) window;
                     docwind.ValidatePage(vdoc);
                 }
             }
@@ -86,7 +86,7 @@ namespace VisioAutomation.VDX
 
             if (doc_node.Windows != null && doc_node.Windows.Count > 0)
             {
-                var xwindows = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Windows");
+                var xwindows = Internal.XMLUtil.CreateVisioSchema2003Element("Windows");
                 root.Add(xwindows);
 
                 foreach (var window in doc_node.Windows)

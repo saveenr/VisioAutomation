@@ -6,7 +6,7 @@ namespace VisioAutomation.UI
     {
         public FormBasicFillTools()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public System.Drawing.Color ForegroundColor

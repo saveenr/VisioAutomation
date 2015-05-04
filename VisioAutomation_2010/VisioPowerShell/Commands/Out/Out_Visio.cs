@@ -58,10 +58,10 @@ namespace VisioPowerShell.Commands
             }
             else if (this.DataTable != null)
             {
-                var widths = Enumerable.Repeat<double>(CellWidth, DataTable.Columns.Count).ToList();
-                var heights = Enumerable.Repeat<double>(CellHeight, DataTable.Rows.Count).ToList();
-                var spacing = new VA.Drawing.Size(CellSpacing, CellSpacing);
-                var shapes = this.client.Draw.Table(DataTable, widths, heights, spacing);
+                var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
+                var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
+                var spacing = new VA.Drawing.Size(this.CellSpacing, this.CellSpacing);
+                var shapes = this.client.Draw.Table(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
             else if (this.PieChart != null)
@@ -80,7 +80,7 @@ namespace VisioPowerShell.Commands
             {
                 this.WriteVerbose("XmlDocument");
                 var tree_drawing = new VA.Models.Tree.Drawing();
-                build_from_xml_doc(this.XmlDocument, tree_drawing);
+                this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(this.client.Page.Get());
             }
@@ -109,7 +109,7 @@ namespace VisioPowerShell.Commands
                     nchild.Text = new VA.Text.Markup.TextElement(xchild.Name);
 
                     parent.Children.Add(nchild);
-                    build_from_xml_element( (System.Xml.XmlElement) xchild, nchild);
+                    this.build_from_xml_element( (System.Xml.XmlElement) xchild, nchild);
                 }
             }
         }

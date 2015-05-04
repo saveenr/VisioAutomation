@@ -5,11 +5,11 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.UserDefinedCells
 {
-    public class UserDefinedCell : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class UserDefinedCell : ShapeSheet.CellGroups.CellGroupMultiRow
     {
         public string Name { get; set; }
-        public VA.ShapeSheet.CellData<string> Value { get; set; }
-        public VA.ShapeSheet.CellData<string> Prompt { get; set; }
+        public ShapeSheet.CellData<string> Value { get; set; }
+        public ShapeSheet.CellData<string> Prompt { get; set; }
 
         public UserDefinedCell()
         {
@@ -52,8 +52,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             get
             {
-                yield return newpair(VA.ShapeSheet.SRCConstants.User_Value, this.Value.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.User_Prompt, this.Prompt.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.User_Value, this.Value.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.User_Prompt, this.Prompt.Formula);
             }
         }
 
@@ -85,7 +85,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return _mCellQuery;
         }
 
-         class UserDefinedCellQuery : VA.ShapeSheet.Query.CellQuery
+         class UserDefinedCellQuery : CellQuery
         {
             public CellColumn Value { get; set; }
             public CellColumn Prompt { get; set; }
@@ -93,15 +93,15 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             public UserDefinedCellQuery()
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionUser);
-                Value = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Value,"User");
-                Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.User_Prompt,"Prompt");
+                this.Value = sec.AddCell(ShapeSheet.SRCConstants.User_Value,"User");
+                this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.User_Prompt,"Prompt");
             }
 
-            public UserDefinedCell GetCells(IList<VA.ShapeSheet.CellData<string>> row)
+            public UserDefinedCell GetCells(IList<ShapeSheet.CellData<string>> row)
             {
                 var cells = new UserDefinedCell();
-                cells.Value = row[Value];
-                cells.Prompt = row[Prompt];
+                cells.Value = row[this.Value];
+                cells.Prompt = row[this.Prompt];
                 return cells;
             }
         }

@@ -48,7 +48,7 @@ namespace VisioAutomation.Models.BoxLayout
 
         IEnumerator IEnumerable.GetEnumerator()     
         {                                           
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public Box AddBox(double w, double h)
@@ -75,7 +75,7 @@ namespace VisioAutomation.Models.BoxLayout
         {
             if (n.Parent != null)
             {
-                throw new VA.AutomationException("This item already has a parent");                
+                throw new AutomationException("This item already has a parent");                
             }
 
             if (this.m_children == null)
@@ -111,7 +111,7 @@ namespace VisioAutomation.Models.BoxLayout
             return (this.Direction == Direction.TopToBottom) || (this.Direction == Direction.BottomToTop);
         }
 
-        public override VA.Drawing.Size  CalculateSize()
+        public override Drawing.Size  CalculateSize()
         {
             double w = this.MinWidth;
             double h = this.MinHeight;
@@ -152,13 +152,13 @@ namespace VisioAutomation.Models.BoxLayout
             w += total_sepx;
             h += total_sepy;
 
-            this.Size = new VA.Drawing.Size(w, h);
+            this.Size = new Drawing.Size(w, h);
             return this.Size;
         }
 
-        public override void _place(VA.Drawing.Point origin)
+        public override void _place(Drawing.Point origin)
         {
-            this.Rectangle = new VA.Drawing.Rectangle(origin, this.Size);
+            this.Rectangle = new Drawing.Rectangle(origin, this.Size);
 
             double x;
             double y;
@@ -197,15 +197,15 @@ namespace VisioAutomation.Models.BoxLayout
                     if (excess_width>0)
                     {
 
-                        if (c.HAlignToParent == VA.Models.BoxLayout.AlignmentHorizontal.Left)
+                        if (c.HAlignToParent == AlignmentHorizontal.Left)
                         {
                             align_delta_x = 0;
                         }
-                        else if (c.HAlignToParent == VA.Models.BoxLayout.AlignmentHorizontal.Right)
+                        else if (c.HAlignToParent == AlignmentHorizontal.Right)
                         {
                             align_delta_x = excess_width;
                         }
-                        else if (c.HAlignToParent == VA.Models.BoxLayout.AlignmentHorizontal.Center)
+                        else if (c.HAlignToParent == AlignmentHorizontal.Center)
                         {
                             align_delta_x = excess_width / 2;
                         }
@@ -215,9 +215,9 @@ namespace VisioAutomation.Models.BoxLayout
                     if (this.Direction == Direction.BottomToTop)
                     {
                         // BOTTOM TO TOP
-                        c.ReservedRectangle = new VA.Drawing.Rectangle(x, y, x + reserved_width, y + c.Size.Height);
+                        c.ReservedRectangle = new Drawing.Rectangle(x, y, x + reserved_width, y + c.Size.Height);
 
-                        c._place(new VA.Drawing.Point(x+align_delta_x, y));
+                        c._place(new Drawing.Point(x+align_delta_x, y));
                         y += c.Size.Height;
                         y += this.ChildSpacing;
 
@@ -225,9 +225,9 @@ namespace VisioAutomation.Models.BoxLayout
                     else
                     {
                         // TOP TO BOTTOM
-                        c.ReservedRectangle = new VA.Drawing.Rectangle(x, y - c.Size.Height, x + reserved_width, y);
+                        c.ReservedRectangle = new Drawing.Rectangle(x, y - c.Size.Height, x + reserved_width, y);
 
-                        c._place(new VA.Drawing.Point(x+align_delta_x, y - c.Size.Height));
+                        c._place(new Drawing.Point(x+align_delta_x, y - c.Size.Height));
                         y -= c.Size.Height;
                         y -= this.ChildSpacing;
 
@@ -241,15 +241,15 @@ namespace VisioAutomation.Models.BoxLayout
                     // for any alignment
                     if (excess_height > 0)
                     {
-                        if (c.VAlignToParent == VA.Models.BoxLayout.AlignmentVertical.Bottom)
+                        if (c.VAlignToParent == AlignmentVertical.Bottom)
                         {
                             align_delta_y = 0;
                         }
-                        else if (c.VAlignToParent == VA.Models.BoxLayout.AlignmentVertical.Top)
+                        else if (c.VAlignToParent == AlignmentVertical.Top)
                         {
                             align_delta_y = excess_height;
                         }
-                        else if (c.VAlignToParent == VA.Models.BoxLayout.AlignmentVertical.Center)
+                        else if (c.VAlignToParent == AlignmentVertical.Center)
                         {
                             align_delta_y = excess_height / 2;
                         }
@@ -258,9 +258,9 @@ namespace VisioAutomation.Models.BoxLayout
                     if (this.Direction == Direction.LeftToRight)
                     {
                         // LEFT TO RIGHT
-                        c.ReservedRectangle = new VA.Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
+                        c.ReservedRectangle = new Drawing.Rectangle(x, y, x + c.Size.Width, y + reserved_height);
 
-                        c._place(new VA.Drawing.Point(x, y+align_delta_y));
+                        c._place(new Drawing.Point(x, y+align_delta_y));
                         x += c.Size.Width;
                         x += this.ChildSpacing;
 
@@ -268,9 +268,9 @@ namespace VisioAutomation.Models.BoxLayout
                     else 
                     {
                         // RIGHT TO LEFT
-                        c.ReservedRectangle = new VA.Drawing.Rectangle(x - c.Size.Width, y, x, y + reserved_height);
+                        c.ReservedRectangle = new Drawing.Rectangle(x - c.Size.Width, y, x, y + reserved_height);
 
-                        c._place(new VA.Drawing.Point(x - c.Size.Width, y+align_delta_y));
+                        c._place(new Drawing.Point(x - c.Size.Width, y+align_delta_y));
                         x -= c.Size.Width;
                         x -= this.ChildSpacing;
 

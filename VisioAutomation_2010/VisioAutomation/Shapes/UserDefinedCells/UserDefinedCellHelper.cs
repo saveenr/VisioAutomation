@@ -8,7 +8,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 {
     public static class UserDefinedCellsHelper
     {
-        private static short _userdefinedcell_section = VA.ShapeSheet.SRCConstants.User_Prompt.Section;
+        private static short _userdefinedcell_section = ShapeSheet.SRCConstants.User_Prompt.Section;
 
         private static string GetRowName(string name)
         {
@@ -35,12 +35,12 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             shape.DeleteRow(_userdefinedcell_section, row);
         }
 
-        public static void Set(IVisio.Shape shape, string name, VA.ShapeSheet.CellData<double> value, VA.ShapeSheet.CellData<double> prompt)
+        public static void Set(IVisio.Shape shape, string name, ShapeSheet.CellData<double> value, ShapeSheet.CellData<double> prompt)
         {
             Set(shape, name, value.Formula.Value, prompt.Formula.Value);
         }
 
-        public static void Set(IVisio.Shape shape, string name, VA.ShapeSheet.FormulaLiteral value, VA.ShapeSheet.FormulaLiteral prompt)
+        public static void Set(IVisio.Shape shape, string name, ShapeSheet.FormulaLiteral value, ShapeSheet.FormulaLiteral prompt)
         {
             if (shape == null)
             {
@@ -74,17 +74,17 @@ namespace VisioAutomation.Shapes.UserDefinedCells
                 name,
                 (short)IVisio.VisRowIndices.visRowUser);
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
 
             if (value.HasValue)
             {
-                var src = new VA.ShapeSheet.SRC(_userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
+                var src = new ShapeSheet.SRC(_userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserValue);
                 update.SetFormula(src, value.Encode());
             }
 
             if (prompt.HasValue)
             {
-                var src = new VA.ShapeSheet.SRC(_userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
+                var src = new ShapeSheet.SRC(_userdefinedcell_section, row, (short)IVisio.VisCellIndices.visUserPrompt);
                 update.SetFormula(src, prompt.Encode());
             }
 
@@ -260,7 +260,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             if (!IsValidName(name))
             {
                 string msg = string.Format("Invalid Name for User-Defined Cell: \"{0}\"", name);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
         }
 

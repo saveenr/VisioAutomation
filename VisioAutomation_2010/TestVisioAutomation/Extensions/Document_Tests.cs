@@ -10,7 +10,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Document_Activation()
         {
-            var app = GetVisioApplication();
+            var app = this.GetVisioApplication();
             var documents = app.Documents;
             var doc1 = documents.Add(string.Empty);
             var doc2 = documents.Add(string.Empty);
@@ -33,7 +33,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Document_ForceClose()
         {
-            var app = GetVisioApplication();
+            var app = this.GetVisioApplication();
             var documents = app.Documents;
             int old_count = documents.Count;
             var doc1 = documents.Add(string.Empty);

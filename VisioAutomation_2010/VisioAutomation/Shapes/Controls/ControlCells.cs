@@ -6,30 +6,30 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Controls
 {
-    public class ControlCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class ControlCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public VA.ShapeSheet.CellData<int> CanGlue { get; set; }
-        public VA.ShapeSheet.CellData<int> Tip { get; set; }
-        public VA.ShapeSheet.CellData<double> X { get; set; }
-        public VA.ShapeSheet.CellData<double> Y { get; set; }
-        public VA.ShapeSheet.CellData<int> YBehavior { get; set; }
-        public VA.ShapeSheet.CellData<int> XBehavior { get; set; }
-        public VA.ShapeSheet.CellData<int> XDynamics { get; set; }
-        public VA.ShapeSheet.CellData<int> YDynamics { get; set; }
+        public ShapeSheet.CellData<int> CanGlue { get; set; }
+        public ShapeSheet.CellData<int> Tip { get; set; }
+        public ShapeSheet.CellData<double> X { get; set; }
+        public ShapeSheet.CellData<double> Y { get; set; }
+        public ShapeSheet.CellData<int> YBehavior { get; set; }
+        public ShapeSheet.CellData<int> XBehavior { get; set; }
+        public ShapeSheet.CellData<int> XDynamics { get; set; }
+        public ShapeSheet.CellData<int> YDynamics { get; set; }
 
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
             get
             {
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_CanGlue, this.CanGlue.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_Tip, this.Tip.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_X, this.X.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_Y, this.Y.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_YCon, this.YBehavior.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_XCon, this.XBehavior.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_XDyn, this.XDynamics.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Controls_YDyn, this.YDynamics.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_CanGlue, this.CanGlue.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_Tip, this.Tip.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_X, this.X.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_Y, this.Y.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_YCon, this.YBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_XCon, this.XBehavior.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_XDyn, this.XDynamics.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Controls_YDyn, this.YDynamics.Formula);
             }
         }
 
@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes.Controls
             return _mCellQuery;
         }
 
-        class ControlCellQuery : VA.ShapeSheet.Query.CellQuery
+        class ControlCellQuery : CellQuery
         {
             public CellColumn CanGlue { get; set; }
             public CellColumn Tip { get; set; }
@@ -66,27 +66,27 @@ namespace VisioAutomation.Shapes.Controls
             public ControlCellQuery() 
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionControls);
-                this.CanGlue = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_CanGlue, "Controls_CanGlue");
-                this.Tip = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_Tip, "Controls_Tip");
-                this.X = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_X, "Controls_X");
-                this.Y = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_Y, "Controls_Y");
-                this.YBehavior = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_YCon, "Controls_YCon");
-                this.XBehavior = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_XCon, "Controls_XCon");
-                this.XDynamics = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_XDyn, "Controls_XDyn");
-                this.YDynamics = sec.AddCell(VA.ShapeSheet.SRCConstants.Controls_YDyn, "Controls_YDyn");
+                this.CanGlue = sec.AddCell(ShapeSheet.SRCConstants.Controls_CanGlue, "Controls_CanGlue");
+                this.Tip = sec.AddCell(ShapeSheet.SRCConstants.Controls_Tip, "Controls_Tip");
+                this.X = sec.AddCell(ShapeSheet.SRCConstants.Controls_X, "Controls_X");
+                this.Y = sec.AddCell(ShapeSheet.SRCConstants.Controls_Y, "Controls_Y");
+                this.YBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_YCon, "Controls_YCon");
+                this.XBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_XCon, "Controls_XCon");
+                this.XDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_XDyn, "Controls_XDyn");
+                this.YDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_YDyn, "Controls_YDyn");
             }
 
-            public ControlCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
+            public ControlCells GetCells(IList<ShapeSheet.CellData<double>> row)
             {
                 var cells = new ControlCells();
-                cells.CanGlue = row[CanGlue].ToInt();
-                cells.Tip = row[Tip].ToInt();
-                cells.X = row[X];
-                cells.Y = row[Y];
-                cells.YBehavior = row[YBehavior].ToInt();
-                cells.XBehavior = row[XBehavior].ToInt();
-                cells.XDynamics = row[XDynamics].ToInt();
-                cells.YDynamics = row[YDynamics].ToInt();
+                cells.CanGlue = row[this.CanGlue].ToInt();
+                cells.Tip = row[this.Tip].ToInt();
+                cells.X = row[this.X];
+                cells.Y = row[this.Y];
+                cells.YBehavior = row[this.YBehavior].ToInt();
+                cells.XBehavior = row[this.XBehavior].ToInt();
+                cells.XDynamics = row[this.XDynamics].ToInt();
+                cells.YDynamics = row[this.YDynamics].ToInt();
                 return cells;
             }
         }

@@ -7,7 +7,7 @@ namespace VisioPowerTools2010
     {
         public FormDeveloper()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void buttonHierarchy_Click(object sender, EventArgs e)

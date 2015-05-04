@@ -45,7 +45,7 @@ namespace VisioAutomation.Models.Forms
             if (pages.Count > 0)
             {
                 // Delete the empty first page
-                var first_page = VisioDocument.Pages[1];
+                var first_page = this.VisioDocument.Pages[1];
                 first_page.Delete(1);
                 first_page = pages[1];
                 var active_window = app.ActiveWindow;

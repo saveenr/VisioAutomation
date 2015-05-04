@@ -18,7 +18,7 @@ namespace VisioAutomation.Shapes.Geometry
 
             if (actual_sec_index != new_sec_index)
             {
-                throw new VA.AutomationException("Internal Error");
+                throw new AutomationException("Internal Error");
             }
             short row_index = shape.AddRow(new_sec_index, (short)IVisio.VisRowIndices.visRowComponent, (short)IVisio.VisRowTags.visTagComponent);
 
@@ -37,7 +37,7 @@ namespace VisioAutomation.Shapes.Geometry
             int num = shape.GeometryCount;
             for (int i = num-1; i >=0; i--)
             {
-                GeometryHelper.DeleteSection(shape, (short)i);                
+                DeleteSection(shape, (short)i);                
             }
         }
 

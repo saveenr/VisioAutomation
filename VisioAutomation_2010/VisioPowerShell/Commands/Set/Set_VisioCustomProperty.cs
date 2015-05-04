@@ -50,11 +50,11 @@ namespace VisioPowerShell.Commands
         {
             if (this.HashTable != null)
             {
-                SetFromHashTable();
+                this.SetFromHashTable();
             }
             else
             {
-                SetFromParameters();
+                this.SetFromParameters();
             }
         }
 

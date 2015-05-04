@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var flag = get_DirectedEdgeHandling();
+            var flag = this.get_DirectedEdgeHandling();
             var edges = this.client.Connection.GetDirectedEdges(flag);
 
             if (this.GetShapeObjects)
@@ -27,7 +27,7 @@ namespace VisioPowerShell.Commands
                 return;
             }
 
-            write_edges_with_shapeids(edges);
+            this.write_edges_with_shapeids(edges);
                 
         }
 

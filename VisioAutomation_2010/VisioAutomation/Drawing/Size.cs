@@ -18,29 +18,29 @@ namespace VisioAutomation.Drawing
             {
                 throw new System.ArgumentOutOfRangeException("height");
             }
-            Width = width;
-            Height = height;
+            this.Width = width;
+            this.Height = height;
         }
         
         public override string ToString()
         {
-            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####}, {1:0.#####})", Width, Height);
+            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####}, {1:0.#####})", this.Width, this.Height);
             return s;
         }
 
         public Size Multiply(double amount)
         {
-            return new Size(Width*amount, Height*amount);
+            return new Size(this.Width*amount, this.Height*amount);
         }
 
         public Size Multiply(double width, double height)
         {
-            return new Size(Width*width, Height*height);
+            return new Size(this.Width*width, this.Height*height);
         }
 
         public Size Divide(double amount)
         {
-            return new Size(Width/amount, Height/amount);
+            return new Size(this.Width/amount, this.Height/amount);
         }
 
         public static Size operator *(Size left_size, double right_size)
@@ -53,22 +53,22 @@ namespace VisioAutomation.Drawing
             return left_size.Divide(right_size);
         }
 
-        public Size Add(VA.Drawing.Point point)
+        public Size Add(Point point)
         {
-            return new Size(Width + point.X, Height + point.Y);
+            return new Size(this.Width + point.X, this.Height + point.Y);
         }
 
         public Size Add(Size size)
         {
-            return new Size(Width + size.Width, Height + size.Height);
+            return new Size(this.Width + size.Width, this.Height + size.Height);
         }
 
         public Size Add(double width, double height)
         {
-            return new Size(Width + width, Height + height);
+            return new Size(this.Width + width, this.Height + height);
         }
 
-        public static Size operator +(Size size, VA.Drawing.Point point)
+        public static Size operator +(Size size, Point point)
         {
             return size.Add(point);
         }

@@ -24,7 +24,7 @@ namespace TestVisioAutomation
 
             var page2 = doc1.Pages.Add();
             page2.Background = 0;
-            VisioAutomationTest.SetPageSize(page2, this.StandardPageSize);
+            SetPageSize(page2, this.StandardPageSize);
 
             var active_window = app.ActiveWindow;
             Assert.AreEqual(app.ActivePage, page2);

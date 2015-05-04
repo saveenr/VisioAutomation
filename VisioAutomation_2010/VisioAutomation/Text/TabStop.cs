@@ -8,7 +8,7 @@ namespace VisioAutomation.Text
         public double Position { get; private set; }
         public TabStopAlignment Alignment { get; private set; }
 
-        public TabStop(double pos, VA.Text.TabStopAlignment align) : this()
+        public TabStop(double pos, TabStopAlignment align) : this()
         {
             this.Position = pos;
             this.Alignment = align;

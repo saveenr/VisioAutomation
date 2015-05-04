@@ -40,11 +40,11 @@ namespace VisioPowerShell.Commands
 
             if (!this.SetResults)
             {
-                this.client.ShapeSheet.SetFormula(this.Shapes, Cell, Value, (IVisio.VisGetSetArgs)flags);               
+                this.client.ShapeSheet.SetFormula(this.Shapes, this.Cell, this.Value, (IVisio.VisGetSetArgs)flags);               
             }
             else
             {
-                this.client.ShapeSheet.SetResult(this.Shapes, Cell, Value, (IVisio.VisGetSetArgs)flags);                               
+                this.client.ShapeSheet.SetResult(this.Shapes, this.Cell, this.Value, (IVisio.VisGetSetArgs)flags);                               
             }
         }
     }

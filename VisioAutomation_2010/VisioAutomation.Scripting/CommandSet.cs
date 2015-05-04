@@ -30,7 +30,7 @@ namespace VisioAutomation.Scripting
 
         internal static IEnumerable<Command> GetCommands(System.Type mytype)
         {
-            var cmdsettype = typeof(VA.Scripting.CommandSet);
+            var cmdsettype = typeof(CommandSet);
 
             if (!cmdsettype.IsAssignableFrom(mytype))
             {
@@ -53,7 +53,7 @@ namespace VisioAutomation.Scripting
 
         protected IList<IVisio.Shape> GetTargetShapes2D(IList<IVisio.Shape> shapes)
         {
-            var shapes_2d = GetTargetShapes(shapes).Where(s => s.OneD == 0).ToList();
+            var shapes_2d = this.GetTargetShapes(shapes).Where(s => s.OneD == 0).ToList();
             return shapes_2d;
         }
 

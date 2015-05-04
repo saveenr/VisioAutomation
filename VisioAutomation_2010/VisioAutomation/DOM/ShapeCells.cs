@@ -122,106 +122,106 @@ namespace VisioAutomation.DOM
         public ShapeSheet.FormulaLiteral ShapeSplittable { get; set; }
 
 
-        public void Apply(VA.ShapeSheet.Update update, short id)
+        public void Apply(ShapeSheet.Update update, short id)
         {
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Width, Width);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Height, Height);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.PinX, PinX);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.PinY, PinY);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LocPinX, LocPinX);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LocPinY, LocPinY);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Angle, Angle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.BeginArrow, BeginArrow);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.BeginArrowSize, BeginArrowSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Width, this.Width);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Height, this.Height);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.PinX, this.PinX);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.PinY, this.PinY);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LocPinX, this.LocPinX);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LocPinY, this.LocPinY);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Angle, this.Angle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.BeginArrow, this.BeginArrow);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.BeginArrowSize, this.BeginArrowSize);
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillBkgnd, FillBkgnd);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillBkgndTrans, FillBkgndTrans);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillForegnd, FillForegnd);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillForegndTrans, FillForegndTrans);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillPattern, FillPattern);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillBkgnd, this.FillBkgnd);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillBkgndTrans, this.FillBkgndTrans);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillForegnd, this.FillForegnd);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillForegndTrans, this.FillForegndTrans);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.FillPattern, this.FillPattern);
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, ShapeShdwObliqueAngle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwOffsetX, ShapeShdwOffsetX);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwOffsetY, ShapeShdwOffsetY);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwScaleFactor, ShapeShdwScaleFactor);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwType, ShapeShdwType);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwBkgnd, ShdwBkgnd);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwBkgndTrans, ShdwBkgndTrans);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwForegnd, ShdwForegnd);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwForegndTrans, ShdwForegndTrans);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwPattern, ShdwPattern);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwObliqueAngle, this.ShapeShdwObliqueAngle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwOffsetX, this.ShapeShdwOffsetX);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwOffsetY, this.ShapeShdwOffsetY);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwScaleFactor, this.ShapeShdwScaleFactor);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeShdwType, this.ShapeShdwType);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwBkgnd, this.ShdwBkgnd);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwBkgndTrans, this.ShdwBkgndTrans);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwForegnd, this.ShdwForegnd);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwForegndTrans, this.ShdwForegndTrans);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShdwPattern, this.ShdwPattern);
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharCase, CharCase);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharFont, CharFont);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharColor, CharColor);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharSize, CharSize);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharLetterspace, CharLetterspace);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharStyle, CharStyle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharColorTrans, CharTransparency);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharCase, this.CharCase);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharFont, this.CharFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharColor, this.CharColor);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharSize, this.CharSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharLetterspace, this.CharLetterspace);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharStyle, this.CharStyle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.CharColorTrans, this.CharTransparency);
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.EndArrow, EndArrow);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.EndArrowSize, EndArrowSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.EndArrow, this.EndArrow);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.EndArrowSize, this.EndArrowSize);
 
             // Line
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LineColor, LineColor);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LineColorTrans, LineColorTrans);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LinePattern, LinePattern);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LineWeight, LineWeight);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LineColor, this.LineColor);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LineColorTrans, this.LineColorTrans);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LinePattern, this.LinePattern);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LineWeight, this.LineWeight);
 
             // Text
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.BottomMargin, BottomMargin);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.DefaultTabStop, DefaultTabstop);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LeftMargin, LeftMargin);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.RightMargin, RightMargin);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TextBkgnd, TextBkgnd);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TextBkgndTrans, TextBkgndTrans);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TextDirection, TextDirection);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TopMargin, TopMargin);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.VerticalAlign, VerticalAlign);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.BottomMargin, this.BottomMargin);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.DefaultTabStop, this.DefaultTabstop);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.LeftMargin, this.LeftMargin);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.RightMargin, this.RightMargin);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TextBkgnd, this.TextBkgnd);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TextBkgndTrans, this.TextBkgndTrans);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TextDirection, this.TextDirection);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TopMargin, this.TopMargin);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.VerticalAlign, this.VerticalAlign);
 
             // Paragraph
 
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Bullet, ParaBullet);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, ParaBulletFont);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFontSize, ParaBulletFontSize);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletStr, ParaBulletString);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, ParaFlags);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HorzAlign, ParaHorizontalAlign);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndFirst, ParaIndentFirst);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndLeft, ParaIndentLeft);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndRight, ParaIndentRight);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_LocalizeBulletFont, ParaLocBulletFont);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpAfter, ParaSpacingAfter);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpBefore, ParaSpacingBefore);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpLine, ParaSpacingLine);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_TextPosAfterBullet, ParaTextPosAfterBullet);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Bullet, this.ParaBullet);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFont, this.ParaBulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletFontSize, this.ParaBulletFontSize);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_BulletStr, this.ParaBulletString);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_Flags, this.ParaFlags);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_HorzAlign, this.ParaHorizontalAlign);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndFirst, this.ParaIndentFirst);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndLeft, this.ParaIndentLeft);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_IndRight, this.ParaIndentRight);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_LocalizeBulletFont, this.ParaLocBulletFont);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpAfter, this.ParaSpacingAfter);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpBefore, this.ParaSpacingBefore);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_SpLine, this.ParaSpacingLine);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.Para_TextPosAfterBullet, this.ParaTextPosAfterBullet);
 
             // TextXForm
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtAngle, TxtAngle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtHeight, TxtHeight);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtLocPinX, TxtLocPinX);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtLocPinY, TxtLocPinY);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtPinX, TxtPinX);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtPinY, TxtPinY);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtWidth, TxtWidth);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtAngle, this.TxtAngle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtHeight, this.TxtHeight);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtLocPinX, this.TxtLocPinX);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtLocPinY, this.TxtLocPinY);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtPinX, this.TxtPinX);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtPinY, this.TxtPinY);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.TxtWidth, this.TxtWidth);
 
             // ShapeLayout
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConFixedCode, ConFixedCode);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpCode, ConLineJumpCode);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpDirX, ConLineJumpDirX);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpDirY, ConLineJumpDirY);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpStyle, ConLineJumpStyle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineRouteExt, ConLineRouteExt);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeFixedCode, ShapeFixedCode);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePermeablePlace, ShapePermeablePlace);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePermeableX, ShapePermeableX);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePermeableY, ShapePermeableY);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePlaceFlip, ShapePlaceFlip);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePlaceStyle, ShapePlaceStyle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePlowCode, ShapePlowCode);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeRouteStyle, ShapeRouteStyle);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeSplit, ShapeSplit);
-            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeSplittable, ShapeSplittable);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConFixedCode, this.ConFixedCode);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpCode, this.ConLineJumpCode);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpDirX, this.ConLineJumpDirX);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpDirY, this.ConLineJumpDirY);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineJumpStyle, this.ConLineJumpStyle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ConLineRouteExt, this.ConLineRouteExt);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeFixedCode, this.ShapeFixedCode);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePermeablePlace, this.ShapePermeablePlace);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePermeableX, this.ShapePermeableX);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePermeableY, this.ShapePermeableY);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePlaceFlip, this.ShapePlaceFlip);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePlaceStyle, this.ShapePlaceStyle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapePlowCode, this.ShapePlowCode);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeRouteStyle, this.ShapeRouteStyle);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeSplit, this.ShapeSplit);
+            update.SetFormulaIgnoreNull(id, ShapeSheet.SRCConstants.ShapeSplittable, this.ShapeSplittable);
         }
 
         public ShapeCells ShallowCopy()

@@ -23,8 +23,8 @@ namespace VisioPowerTools2010
         /// </summary>
         private void InternalStartup()
         {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
+            this.Startup += new System.EventHandler(this.ThisAddIn_Startup);
+            this.Shutdown += new System.EventHandler(this.ThisAddIn_Shutdown);
         }
         
         #endregion

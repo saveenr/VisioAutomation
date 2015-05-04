@@ -24,7 +24,7 @@ namespace VisioAutomation.Text.Markup
 
         IEnumerator IEnumerable.GetEnumerator()     
         {                                           
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public void Add(T item)

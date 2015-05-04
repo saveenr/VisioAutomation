@@ -44,8 +44,8 @@ namespace VisioAutomation.Shapes.Connections
                     throw new System.ArgumentException("connector cannot be null when specifying manual connection");                    
                 }
 
-                var src_beginx = VA.ShapeSheet.SRCConstants.BeginX;
-                var src_endx = VA.ShapeSheet.SRCConstants.EndX;
+                var src_beginx = ShapeSheet.SRCConstants.BeginX;
+                var src_endx = ShapeSheet.SRCConstants.EndX;
                 var connector_beginx = connector_shape.CellsSRC[src_beginx.Section, src_beginx.Row, src_beginx.Cell];
                 var connector_endx = connector_shape.CellsSRC[src_endx.Section, src_endx.Row, src_endx.Cell];
                 var from_cell = from_shape.CellsSRC[1, 1, 0];
@@ -108,7 +108,7 @@ namespace VisioAutomation.Shapes.Connections
             int num_connectors = fromshapes.Count;
             var connectors = new List<IVisio.Shape>(num_connectors);
 
-            var points = Enumerable.Range(0, num_connectors).Select(i => new VA.Drawing.Point(i*2.0, -2)).ToList();
+            var points = Enumerable.Range(0, num_connectors).Select(i => new Drawing.Point(i*2.0, -2)).ToList();
             IList<IVisio.Shape> con_shapes = null;
             if (connector_master != null)
             {
@@ -118,7 +118,7 @@ namespace VisioAutomation.Shapes.Connections
             }
             else
             {
-                short[] con_shapeids = VA.Pages.PageHelper.DropManyAutoConnectors(page, points);
+                short[] con_shapeids = Pages.PageHelper.DropManyAutoConnectors(page, points);
                 con_shapes = page.Shapes.GetShapesFromIDs(con_shapeids);
             }
 

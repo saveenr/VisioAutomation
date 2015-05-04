@@ -13,7 +13,7 @@ namespace VisioPowerTools2010
 
         public FormImportColors()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.Colors = new List<System.Drawing.Color>();
         }
 
@@ -40,10 +40,10 @@ namespace VisioPowerTools2010
                     }
                     else
                     {
-                        var tokens = line.Split(seps, System.StringSplitOptions.RemoveEmptyEntries);
+                        var tokens = line.Split(seps, StringSplitOptions.RemoveEmptyEntries);
                         if (tokens.Length >= 3)
                         {
-                            var components = tokens.Select(getcomp).ToArray();
+                            var components = tokens.Select(this.getcomp).ToArray();
 
                             bool has_alpha = components.Length > 3;
                             int i = has_alpha ? 1 : 0;
@@ -128,7 +128,7 @@ namespace VisioPowerTools2010
         {
             this.Colors.Clear();
 
-            var url = new System.Uri(this.GetURL());
+            var url = new Uri(this.GetURL());
 
             string authority = url.Authority.ToLower();
             if (authority == "colourlovers.com" || authority == "www.colourlovers.com")
@@ -157,7 +157,7 @@ namespace VisioPowerTools2010
                 string palette_id = tokens[1];
 
                 var palette_api_url = "http://www.colourlovers.com/api/palette/" + palette_id;
-                var xdoc = download_xml(palette_api_url);
+                var xdoc = this.download_xml(palette_api_url);
 
                 if (xdoc == null)
                 {
@@ -193,7 +193,7 @@ namespace VisioPowerTools2010
                 string theme_id = tokens[1];
  
                 var theme_api_url = "http://kuler.adobe.com/kuler/API/rss/search.cfm?searchQuery=themeid:" + theme_id + "&key=85387E02911F6599FB93A8EFF7173821";
-                var xdoc = download_xml(theme_api_url);
+                var xdoc = this.download_xml(theme_api_url);
 
                 if (xdoc == null)
                 {
@@ -260,7 +260,7 @@ namespace VisioPowerTools2010
 
             int ri;
             int.TryParse(rs, out ri);
-            ri = System.Math.Max(0, System.Math.Min(255, ri));
+            ri = Math.Max(0, Math.Min(255, ri));
             return (byte) ri;
         }
     }

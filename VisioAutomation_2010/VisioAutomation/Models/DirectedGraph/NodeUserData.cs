@@ -3,10 +3,10 @@ namespace VisioAutomation.Models.DirectedGraph
     public class NodeUserData
     {
         public string ID;
-        public VisioAutomation.Models.DirectedGraph.Shape Shape;
-        public VisioAutomation.Models.DirectedGraph.Connector Connector;
+        public Shape Shape;
+        public Connector Connector;
 
-        public NodeUserData(string id, VisioAutomation.Models.DirectedGraph.Shape shape)
+        public NodeUserData(string id, Shape shape)
         {
             if (id == null)
             {
@@ -22,7 +22,7 @@ namespace VisioAutomation.Models.DirectedGraph
             this.Shape = shape;
         }
 
-        public NodeUserData(string id, VisioAutomation.Models.DirectedGraph.Connector con)
+        public NodeUserData(string id, Connector con)
         {
             if (id == null)
             {

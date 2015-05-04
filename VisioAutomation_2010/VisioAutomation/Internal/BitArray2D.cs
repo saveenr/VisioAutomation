@@ -53,7 +53,7 @@ namespace VisioAutomation.Internal
                 throw new System.ArgumentOutOfRangeException("row");
             }
 
-            int pos = (row * Width) + col;
+            int pos = (row *this.Width) + col;
             this.BitArray[pos] = b;
         }
 
@@ -79,7 +79,7 @@ namespace VisioAutomation.Internal
                 throw new System.ArgumentOutOfRangeException("row");
             }
 
-            int pos = (row * Width) + col;
+            int pos = (row *this.Width) + col;
             return this.BitArray[pos];
         }
 

@@ -63,7 +63,7 @@ namespace VisioAutomation.ShapeSheet
             {
                 throw new AutomationException("No Value to Encode");
             }
-            return VA.Convert.StringToFormulaString(this.Value);
+            return Convert.StringToFormulaString(this.Value);
         }
     }
 }

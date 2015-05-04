@@ -15,14 +15,14 @@ namespace VisioAutomation.Models.Tree
 
         public NodeList Children
         {
-            get { return _children; }
+            get { return this._children; }
         }
 
-        public VA.Text.Markup.TextElement Text { get; set;}
+        public Text.Markup.TextElement Text { get; set;}
         public IVisio.Shape VisioShape { get; set; }
-        public VA.DOM.Node DOMNode { get; set; }
+        public DOM.Node DOMNode { get; set; }
         public VA.Drawing.Size? Size { get; set; }
-        public VA.DOM.ShapeCells Cells { get; set; }
+        public DOM.ShapeCells Cells { get; set; }
 
         public Node()
         {
@@ -32,7 +32,7 @@ namespace VisioAutomation.Models.Tree
         public Node(string name)
             : this()
         {
-            this.Text = new VA.Text.Markup.TextElement(name);
+            this.Text = new Text.Markup.TextElement(name);
         }
     }
 }

@@ -16,16 +16,16 @@ namespace VisioAutomation.UI.CommonControls
 
         public Slider()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.points = new System.Drawing.Point[4];
             int horizontal_padding = 4;
-            slider_rect = new System.Drawing.Rectangle(horizontal_padding, 0, this.Width - (2 * horizontal_padding) - 1, this.Height - 1);
-            slider_rect2 = new System.Drawing.Rectangle(0, 0, this.Width - 1, this.Height - 1);
-            groove_y = slider_rect.Top + (int) (slider_rect.Height/2.0);
-            groove_points = new[]
+            this.slider_rect = new System.Drawing.Rectangle(horizontal_padding, 0, this.Width - (2 * horizontal_padding) - 1, this.Height - 1);
+            this.slider_rect2 = new System.Drawing.Rectangle(0, 0, this.Width - 1, this.Height - 1);
+            this.groove_y = this.slider_rect.Top + (int) (this.slider_rect.Height/2.0);
+            this.groove_points = new[]
                                 {
-                                    new System.Drawing.Point(slider_rect.Left, groove_y),
-                                    new System.Drawing.Point(slider_rect.Right, groove_y)
+                                    new System.Drawing.Point(this.slider_rect.Left, this.groove_y),
+                                    new System.Drawing.Point(this.slider_rect.Right, this.groove_y)
                                 };
         }
 
@@ -83,25 +83,25 @@ namespace VisioAutomation.UI.CommonControls
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
             //e.Graphics.DrawRectangle(rect_pen, slider_rect);
-            e.Graphics.DrawRectangle(rect_pen, slider_rect2);
-            e.Graphics.DrawLine(groove_pen, groove_points[0], groove_points[1]);
+            e.Graphics.DrawRectangle(rect_pen, this.slider_rect2);
+            e.Graphics.DrawLine(groove_pen, this.groove_points[0], this.groove_points[1]);
 
-            float scale = slider_rect.Width/(this.Max - this.Min);
+            float scale = this.slider_rect.Width/(this.Max - this.Min);
 
             int cx = this.slider_rect.Left + (int) (this.Value*scale);
             int cy = (int) (this.slider_rect.Height/2.0) + 1;
-            points[0] = new System.Drawing.Point(cx, cy);
-            points[1] = new System.Drawing.Point(cx + marker_radius, cy + marker_radius);
-            points[2] = new System.Drawing.Point(cx - marker_radius, cy + marker_radius);
-            points[3] = new System.Drawing.Point(cx, cy);
+            this.points[0] = new System.Drawing.Point(cx, cy);
+            this.points[1] = new System.Drawing.Point(cx + this.marker_radius, cy + this.marker_radius);
+            this.points[2] = new System.Drawing.Point(cx - this.marker_radius, cy + this.marker_radius);
+            this.points[3] = new System.Drawing.Point(cx, cy);
 
-            e.Graphics.FillPolygon(value_brush, points);
+            e.Graphics.FillPolygon(value_brush, this.points);
         }
 
         private void handle_mouse(int X)
         {
             int new_point = X - this.slider_rect.Left;
-            float scale = slider_rect.Width/(this.Max - this.Min);
+            float scale = this.slider_rect.Width/(this.Max - this.Min);
 
             float new_value = new_point/scale;
             new_value = System.Math.Max(this.Min, new_value);

@@ -21,7 +21,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var prop_dic = new Dictionary<IVisio.Shape, IList<VA_UDC.UserDefinedCell>>();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return prop_dic;
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("name");
             }
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<bool>();
@@ -68,7 +68,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
@@ -84,7 +84,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name cannot be empty", "name");
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Delete User-Defined Cell"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Delete User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
@@ -98,14 +98,14 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             } 
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set User-Defined Cell"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {

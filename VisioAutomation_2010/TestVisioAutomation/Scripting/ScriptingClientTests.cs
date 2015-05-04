@@ -11,21 +11,21 @@ namespace TestVisioAutomation
         public void Scripting_DevDocumentationScenarios
             ()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             this.DrawVAScriptingAPIDiagram();
             this.DrawVANamespaceDiagram();
         }
 
         public void DrawVAScriptingAPIDiagram()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             var doc = client.Developer.DrawScriptingDocumentation();
             client.Document.Close(true);
         }
 
         public void DrawVANamespaceDiagram()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             var doc = client.Developer.DrawNamespaces();
             client.Document.Close(true);
         }
@@ -33,7 +33,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_CanCloseUnsavedDrawings()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.CloseAllWithoutSaving();
 
             Assert.IsFalse(client.Document.HasActiveDocument);

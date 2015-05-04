@@ -10,8 +10,8 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public LayoutOptions()
         {
-            ResizeBorderWidth = new VA.Drawing.Size(0.5, 0.5);
-            DefaultShapeSize = new VA.Drawing.Size(1.0, 0.75);
+            this.ResizeBorderWidth = new VA.Drawing.Size(0.5, 0.5);
+            this.DefaultShapeSize = new VA.Drawing.Size(1.0, 0.75);
             this.LayoutDirection = LayoutDirection.TopToBottom;
         }        
     }

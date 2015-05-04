@@ -66,7 +66,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapes = page.Shapes;
             var all_shapes = shapes.AsEnumerable();
             var selection = window.Selection;
-            var selected_set = new System.Collections.Generic.HashSet<IVisio.Shape>(selection.AsEnumerable());
+            var selected_set = new HashSet<IVisio.Shape>(selection.AsEnumerable());
             var shapes_to_select = all_shapes.Where(shape => !selected_set.Contains(shape)).ToList();
 
             window.DeselectAll();
@@ -190,7 +190,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
 
             var selection = this.Client.Selection.Get();
-            return VA.Selection.SelectionHelper.GetSelectedShapes(selection);
+            return Selection.SelectionHelper.GetSelectedShapes(selection);
         }
 
         public IList<IVisio.Shape> GetShapesRecursive()
@@ -198,7 +198,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
 
             var selection = this.Client.Selection.Get();
-            return VA.Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
+            return Selection.SelectionHelper.GetSelectedShapesRecursive(selection);
         }
 
         public int Count()
@@ -297,7 +297,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            return HasShapes(1);
+            return this.HasShapes(1);
         }
 
         public bool HasShapes(int min_items)

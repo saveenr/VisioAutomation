@@ -9,24 +9,24 @@ namespace VisioAutomation.UI.CommonControls
 
         public ColorSelectorSmall()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-            colorform = new ColorSelectorLarge();
-            colorform.Color = this.Color;
-            var popup = new PascalGanaye.Popup.Popup(colorform, this);
+            this.colorform = new ColorSelectorLarge();
+            this.colorform.Color = this.Color;
+            var popup = new PascalGanaye.Popup.Popup(this.colorform, this);
             popup.AnimationSpeed = 0;
-            popup.DropDownClosed += new System.EventHandler(popup_DropDownClosed);
+            popup.DropDownClosed += new System.EventHandler(this.popup_DropDownClosed);
             popup.Show();
         }
 
         private void popup_DropDownClosed(object sender, System.EventArgs e)
         {
-            if (colorform.ColorSelected)
+            if (this.colorform.ColorSelected)
             {
-                this.Color = colorform.Color;
+                this.Color = this.colorform.Color;
                 if (this.ColorChanged !=null)
                 {
                     this.ColorChanged(sender, this.Color);

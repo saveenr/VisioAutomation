@@ -53,10 +53,10 @@ namespace VisioAutomation.Shapes.Connections
             var connnector_ids = edges.Select(e => e.Connector.ID).ToList();
 
             // Get the arrows for each connector
-            var src_beginarrow = VA.ShapeSheet.SRCConstants.BeginArrow;
-            var src_endarrow = VA.ShapeSheet.SRCConstants.EndArrow;
+            var src_beginarrow = ShapeSheet.SRCConstants.BeginArrow;
+            var src_endarrow = ShapeSheet.SRCConstants.EndArrow;
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new ShapeSheet.Query.CellQuery();
             var col_beginarrow = query.AddCell(src_beginarrow, "BeginArrow");
             var col_endarrow = query.AddCell(src_endarrow, "EndArrow");
 
@@ -160,7 +160,7 @@ namespace VisioAutomation.Shapes.Connections
             return edges;
         }
 
-        internal static void PerformWarshall(VA.Internal.BitArray2D adj_matrix)
+        internal static void PerformWarshall(Internal.BitArray2D adj_matrix)
         {
             if (adj_matrix == null)
             {
@@ -231,7 +231,7 @@ namespace VisioAutomation.Shapes.Connections
             }
 
             int num_vertices = object_to_id.Count;
-            var adj_matrix = new VA.Internal.BitArray2D(num_vertices, num_vertices);
+            var adj_matrix = new Internal.BitArray2D(num_vertices, num_vertices);
             foreach (var iedge in internal_edges)
             {
                 adj_matrix[iedge.From, iedge.To] = true;

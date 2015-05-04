@@ -8,8 +8,8 @@ namespace VisioAutomation.UI.CommonControls
     {
         public ColorSelectorMedium()
         {
-            InitializeComponent();
-            this.colorSelectorSmall1.ColorChanged += colorSelectorSmall1_ColorChanged;
+            this.InitializeComponent();
+            this.colorSelectorSmall1.ColorChanged += this.colorSelectorSmall1_ColorChanged;
         }
 
         void colorSelectorSmall1_ColorChanged(object sender, Color c)
@@ -21,7 +21,7 @@ namespace VisioAutomation.UI.CommonControls
         }
 
         [Browsable(true)]
-        public System.Drawing.Color Color
+        public Color Color
         {
             get { return this.smallColorPicker1.Color; }
             set { this.smallColorPicker1.Color = value; }

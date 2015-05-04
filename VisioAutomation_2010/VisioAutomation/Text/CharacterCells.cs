@@ -6,58 +6,58 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
-    public class CharacterCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class CharacterCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public VA.ShapeSheet.CellData<int> Color { get; set; }
-        public VA.ShapeSheet.CellData<int> Font { get; set; }
-        public VA.ShapeSheet.CellData<double> Size { get; set; }
-        public VA.ShapeSheet.CellData<int> Style { get; set; }
-        public VA.ShapeSheet.CellData<double> Transparency { get; set; }
-        public VA.ShapeSheet.CellData<int> AsianFont { get; set; }
-        public VA.ShapeSheet.CellData<int> Case { get; set; }
-        public VA.ShapeSheet.CellData<int> ComplexScriptFont { get; set; }
-        public VA.ShapeSheet.CellData<double> ComplexScriptSize { get; set; }
-        public VA.ShapeSheet.CellData<bool> DoubleStrikeThrough { get; set; }
-        public VA.ShapeSheet.CellData<bool> DoubleUnderline { get; set; }
-        public VA.ShapeSheet.CellData<int> LangID { get; set; }
-        public VA.ShapeSheet.CellData<int> Locale { get; set; }
-        public VA.ShapeSheet.CellData<int> LocalizeFont { get; set; }
-        public VA.ShapeSheet.CellData<bool> Overline { get; set; }
-        public VA.ShapeSheet.CellData<bool> Perpendicular { get; set; }
-        public VA.ShapeSheet.CellData<int> Pos { get; set; }
-        public VA.ShapeSheet.CellData<int> RTLText { get; set; }
-        public VA.ShapeSheet.CellData<double> FontScale { get; set; }
-        public VA.ShapeSheet.CellData<double> Letterspace { get; set; }
-        public VA.ShapeSheet.CellData<bool> Strikethru { get; set; }
-        public VA.ShapeSheet.CellData<int> UseVertical { get; set; }
+        public ShapeSheet.CellData<int> Color { get; set; }
+        public ShapeSheet.CellData<int> Font { get; set; }
+        public ShapeSheet.CellData<double> Size { get; set; }
+        public ShapeSheet.CellData<int> Style { get; set; }
+        public ShapeSheet.CellData<double> Transparency { get; set; }
+        public ShapeSheet.CellData<int> AsianFont { get; set; }
+        public ShapeSheet.CellData<int> Case { get; set; }
+        public ShapeSheet.CellData<int> ComplexScriptFont { get; set; }
+        public ShapeSheet.CellData<double> ComplexScriptSize { get; set; }
+        public ShapeSheet.CellData<bool> DoubleStrikeThrough { get; set; }
+        public ShapeSheet.CellData<bool> DoubleUnderline { get; set; }
+        public ShapeSheet.CellData<int> LangID { get; set; }
+        public ShapeSheet.CellData<int> Locale { get; set; }
+        public ShapeSheet.CellData<int> LocalizeFont { get; set; }
+        public ShapeSheet.CellData<bool> Overline { get; set; }
+        public ShapeSheet.CellData<bool> Perpendicular { get; set; }
+        public ShapeSheet.CellData<int> Pos { get; set; }
+        public ShapeSheet.CellData<int> RTLText { get; set; }
+        public ShapeSheet.CellData<double> FontScale { get; set; }
+        public ShapeSheet.CellData<double> Letterspace { get; set; }
+        public ShapeSheet.CellData<bool> Strikethru { get; set; }
+        public ShapeSheet.CellData<int> UseVertical { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
             get
             {
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharColor, this.Color.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharFont, this.Font.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharSize, this.Size.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharStyle, this.Style.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharColorTrans, this.Transparency.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharAsianFont, this.AsianFont.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharCase, this.Case.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharDblUnderline, this.DoubleUnderline.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, this.DoubleStrikeThrough.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharFontScale, this.FontScale.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharLetterspace, this.Letterspace.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharLocale, this.Locale.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharLocalizeFont, this.LocalizeFont.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharOverline, this.Overline.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharPerpendicular, this.Perpendicular.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharPos, this.Pos.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharRTLText, this.RTLText.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharStrikethru, this.Strikethru.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.CharUseVertical, this.UseVertical.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharColor, this.Color.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharFont, this.Font.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharSize, this.Size.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharStyle, this.Style.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharColorTrans, this.Transparency.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharAsianFont, this.AsianFont.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharCase, this.Case.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharComplexScriptFont, this.ComplexScriptFont.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharComplexScriptSize, this.ComplexScriptSize.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharDblUnderline, this.DoubleUnderline.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharDoubleStrikethrough, this.DoubleStrikeThrough.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharFontScale, this.FontScale.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharLangID, this.LangID.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharLetterspace, this.Letterspace.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharLocale, this.Locale.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharLocalizeFont, this.LocalizeFont.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharOverline, this.Overline.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharPerpendicular, this.Perpendicular.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharPos, this.Pos.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharRTLText, this.RTLText.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharStrikethru, this.Strikethru.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.CharUseVertical, this.UseVertical.Formula);
             }
         }
 
@@ -81,7 +81,7 @@ namespace VisioAutomation.Text
             return _mCellQuery;
         }
 
-        class CharacterFormatCellQuery : VA.ShapeSheet.Query.CellQuery
+        class CharacterFormatCellQuery : CellQuery
         {
             public CellColumn Font { get; set; }
             public CellColumn Style { get; set; }
@@ -109,31 +109,31 @@ namespace VisioAutomation.Text
             public CharacterFormatCellQuery() 
             {
                 var sec = this.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
-                Color = sec.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "CharColor");
-                Trans = sec.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "CharColorTrans");
-                Font = sec.AddCell(VA.ShapeSheet.SRCConstants.CharFont, "CharFont");
-                Size = sec.AddCell(VA.ShapeSheet.SRCConstants.CharSize, "CharSize");
-                Style = sec.AddCell(VA.ShapeSheet.SRCConstants.CharStyle, "CharStyle");
-                AsianFont = sec.AddCell(VA.ShapeSheet.SRCConstants.CharAsianFont, "CharAsianFont");
-                Case = sec.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "CharCase");
-                ComplexScriptFont = sec.AddCell(VA.ShapeSheet.SRCConstants.CharComplexScriptFont, "CharComplexScriptFont");
-                ComplexScriptSize = sec.AddCell(VA.ShapeSheet.SRCConstants.CharComplexScriptSize, "CharComplexScriptSize");
-                DoubleStrikethrough = sec.AddCell(VA.ShapeSheet.SRCConstants.CharDoubleStrikethrough, "CharDoubleStrikethrough");
-                DoubleUnderline = sec.AddCell(VA.ShapeSheet.SRCConstants.CharDblUnderline, "CharDblUnderline");
-                LangID = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLangID, "CharLangID");
-                Locale = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLocale, "CharLocale");
-                LocalizeFont = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLocalizeFont, "CharLocalizeFont");
-                Overline = sec.AddCell(VA.ShapeSheet.SRCConstants.CharOverline, "CharOverline");
-                Perpendicular = sec.AddCell(VA.ShapeSheet.SRCConstants.CharPerpendicular, "CharPerpendicular");
-                Pos = sec.AddCell(VA.ShapeSheet.SRCConstants.CharPos, "CharPos");
-                RTLText = sec.AddCell(VA.ShapeSheet.SRCConstants.CharRTLText, "CharRTLText");
-                FontScale = sec.AddCell(VA.ShapeSheet.SRCConstants.CharFontScale, "CharFontScale");
-                Letterspace = sec.AddCell(VA.ShapeSheet.SRCConstants.CharLetterspace, "CharLetterspace");
-                Strikethru = sec.AddCell(VA.ShapeSheet.SRCConstants.CharStrikethru, "CharStrikethru");
-                UseVertical = sec.AddCell(VA.ShapeSheet.SRCConstants.CharUseVertical, "CharUseVertical");
+                this.Color = sec.AddCell(ShapeSheet.SRCConstants.CharColor, "CharColor");
+                this.Trans = sec.AddCell(ShapeSheet.SRCConstants.CharColorTrans, "CharColorTrans");
+                this.Font = sec.AddCell(ShapeSheet.SRCConstants.CharFont, "CharFont");
+                this.Size = sec.AddCell(ShapeSheet.SRCConstants.CharSize, "CharSize");
+                this.Style = sec.AddCell(ShapeSheet.SRCConstants.CharStyle, "CharStyle");
+                this.AsianFont = sec.AddCell(ShapeSheet.SRCConstants.CharAsianFont, "CharAsianFont");
+                this.Case = sec.AddCell(ShapeSheet.SRCConstants.CharCase, "CharCase");
+                this.ComplexScriptFont = sec.AddCell(ShapeSheet.SRCConstants.CharComplexScriptFont, "CharComplexScriptFont");
+                this.ComplexScriptSize = sec.AddCell(ShapeSheet.SRCConstants.CharComplexScriptSize, "CharComplexScriptSize");
+                this.DoubleStrikethrough = sec.AddCell(ShapeSheet.SRCConstants.CharDoubleStrikethrough, "CharDoubleStrikethrough");
+                this.DoubleUnderline = sec.AddCell(ShapeSheet.SRCConstants.CharDblUnderline, "CharDblUnderline");
+                this.LangID = sec.AddCell(ShapeSheet.SRCConstants.CharLangID, "CharLangID");
+                this.Locale = sec.AddCell(ShapeSheet.SRCConstants.CharLocale, "CharLocale");
+                this.LocalizeFont = sec.AddCell(ShapeSheet.SRCConstants.CharLocalizeFont, "CharLocalizeFont");
+                this.Overline = sec.AddCell(ShapeSheet.SRCConstants.CharOverline, "CharOverline");
+                this.Perpendicular = sec.AddCell(ShapeSheet.SRCConstants.CharPerpendicular, "CharPerpendicular");
+                this.Pos = sec.AddCell(ShapeSheet.SRCConstants.CharPos, "CharPos");
+                this.RTLText = sec.AddCell(ShapeSheet.SRCConstants.CharRTLText, "CharRTLText");
+                this.FontScale = sec.AddCell(ShapeSheet.SRCConstants.CharFontScale, "CharFontScale");
+                this.Letterspace = sec.AddCell(ShapeSheet.SRCConstants.CharLetterspace, "CharLetterspace");
+                this.Strikethru = sec.AddCell(ShapeSheet.SRCConstants.CharStrikethru, "CharStrikethru");
+                this.UseVertical = sec.AddCell(ShapeSheet.SRCConstants.CharUseVertical, "CharUseVertical");
             }
 
-            public CharacterCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
+            public CharacterCells GetCells(IList<ShapeSheet.CellData<double>> row)
             {
                 var cells = new CharacterCells();
                 cells.Color = row[this.Color].ToInt();

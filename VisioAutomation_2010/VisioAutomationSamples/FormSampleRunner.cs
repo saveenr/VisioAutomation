@@ -12,7 +12,7 @@ namespace VisioAutomationSamples
 
         public FormSampleRunner()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             var all_types = typeof (Program).Assembly.GetExportedTypes();
             var public_sample_classes = all_types
@@ -40,13 +40,13 @@ namespace VisioAutomationSamples
                     item.Name = name;
                     item.Method = m;
 
-                    samplemethods.Add(item);
+                    this.samplemethods.Add(item);
 
-                    dic[name] = item;
+                    this.dic[name] = item;
                 }
             }
 
-            var prev_names = GetPreviouslySelectedSamples();
+            var prev_names = this.GetPreviouslySelectedSamples();
 
             foreach (var name in names)
             {
@@ -69,23 +69,23 @@ namespace VisioAutomationSamples
 
         private void SaveSelectedNames()
         {
-            var selected_names = GetSelectedNames();
+            var selected_names = this.GetSelectedNames();
             Properties.Settings.Default.SelectedSamples = string.Join("|", selected_names);
             Properties.Settings.Default.Save();
         }
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
-            RunSelectedSamples();
+            this.RunSelectedSamples();
         }
 
         private void RunSelectedSamples()
         {
-            var selected_names = GetSelectedNames();
+            var selected_names = this.GetSelectedNames();
 
             this.SaveSelectedNames();
 
-            var selected_methods = selected_names.Select(n => dic[n]).ToList();
+            var selected_methods = selected_names.Select(n => this.dic[n]).ToList();
 
             foreach (var selectedMethod in selected_methods)
             {

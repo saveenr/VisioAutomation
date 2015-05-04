@@ -52,13 +52,13 @@ namespace VisioPowerTools2010
 
         public void End(string s)
         {
-            if (stack.Count < 1)
+            if (this.stack.Count < 1)
             {
                 string msg = string.Format("No matching starting element for <{0}>", s);
                 throw new System.ArgumentException(msg, "s");
             }
 
-            string ontop = stack.Pop();
+            string ontop = this.stack.Pop();
             if (ontop != s)
             {
                 string msg = string.Format("Cannot end element <{0}>, expected to end <{1}>", s, ontop);

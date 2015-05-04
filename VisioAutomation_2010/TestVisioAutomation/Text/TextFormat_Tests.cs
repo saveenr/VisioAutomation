@@ -19,7 +19,7 @@ namespace TestVisioAutomation
                                    new VA.Text.TabStop(4.0, VA.Text.TabStopAlignment.Decimal)
                                };
 
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 4);
 

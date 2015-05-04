@@ -15,7 +15,7 @@ namespace VisioAutomation.Application.Logging
             if (!System.IO.File.Exists(filename))
             {
                 string msg = string.Format("File \"{0}\"does not exist", filename);
-                throw new System.ArgumentException(msg);
+                throw new ArgumentException(msg);
             }
 
             var state = LogState.Start;
@@ -39,7 +39,7 @@ namespace VisioAutomation.Application.Logging
 
                     if (line.StartsWith("Open") || line.StartsWith("Insert"))
                     {
-                        state = StartNewSession(line);
+                        state = this.StartNewSession(line);
                     }
                     else
                     {
@@ -71,20 +71,20 @@ namespace VisioAutomation.Application.Logging
                     }
                     else if (line.EndsWith("End Session"))
                     {
-                        state = TerminateCurrentSession(line);
+                        state = this.TerminateCurrentSession(line);
                     }
                     else if (line.StartsWith("Open") || line.StartsWith("Insert"))
                     {
-                        state = TerminateCurrentSession(line);
+                        state = this.TerminateCurrentSession(line);
                         q.Push(line);
                     }
                     else if (line.StartsWith("["))
                     {
-                        state = StartRecord(line, state);
+                        state = this.StartRecord(line, state);
                     }
                     else
                     {
-                        throw new System.ArgumentException();
+                        throw new ArgumentException();
                     }
                 }
                 else if (state == LogState.InRecord)
@@ -107,12 +107,12 @@ namespace VisioAutomation.Application.Logging
                     }
                     else
                     {
-                        throw new System.ArgumentException();
+                        throw new ArgumentException();
                     }
                 }
                 else
                 {
-                    throw new System.ArgumentException();                    
+                    throw new ArgumentException();                    
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace VisioAutomation.Application.Logging
             int n = line.IndexOf(']');
             if (n < 2)
             {
-                throw new System.ArgumentException();
+                throw new ArgumentException();
             }
             rec.Type = line.Substring(1, n - 1);
             rec.SubType = line.Substring(n + 2).Replace(":", "");

@@ -7,21 +7,21 @@ namespace VisioAutomation.DOM
     public class Page : Node
     {
         public ShapeList Shapes { get; private set; }
-        public VA.Drawing.Size? Size;
+        public Drawing.Size? Size;
         public bool ResizeToFit;
-        public VA.Drawing.Size? ResizeToFitMargin;
-        public VA.Pages.PageCells PageCells;
+        public Drawing.Size? ResizeToFitMargin;
+        public Pages.PageCells PageCells;
         public string Name;
-        public VA.Pages.PageLayout.Layout Layout;
+        public Pages.PageLayout.Layout Layout;
         public IVisio.Page VisioPage;
-        public VA.Application.PerfSettings PerfSettings { get; private set; }
+        public Application.PerfSettings PerfSettings { get; private set; }
 
         public Page()
         {
             this.Shapes = new ShapeList();
-            this.PageCells = new VA.Pages.PageCells();
+            this.PageCells = new Pages.PageCells();
 
-            this.PerfSettings = new VA.Application.PerfSettings();
+            this.PerfSettings = new Application.PerfSettings();
             this.PerfSettings.DeferRecalc = 0;
             
             
@@ -71,7 +71,7 @@ namespace VisioAutomation.DOM
             var app = page.Application;
 
 
-            using (var perfscope = new VA.Application.PerfScope(app, PerfSettings))
+            using (var perfscope = new Application.PerfScope(app, this.PerfSettings))
             {
                 if (this.Size.HasValue)
                 {
@@ -79,7 +79,7 @@ namespace VisioAutomation.DOM
                     this.PageCells.PageWidth = this.Size.Value.Width;
                 }
 
-                var update = new VA.ShapeSheet.Update();
+                var update = new ShapeSheet.Update();
                 update.SetFormulas((short)page_sheet.ID, this.PageCells);
                 update.Execute(page);
                 

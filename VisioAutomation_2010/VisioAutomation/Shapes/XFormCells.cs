@@ -5,27 +5,27 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes
 {
-    public class XFormCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class XFormCells : ShapeSheet.CellGroups.CellGroup
     {
-        public VA.ShapeSheet.CellData<double> PinX { get; set; }
-        public VA.ShapeSheet.CellData<double> PinY { get; set; }
-        public VA.ShapeSheet.CellData<double> LocPinX { get; set; }
-        public VA.ShapeSheet.CellData<double> LocPinY { get; set; }
-        public VA.ShapeSheet.CellData<double> Width { get; set; }
-        public VA.ShapeSheet.CellData<double> Height { get; set; }
-        public VA.ShapeSheet.CellData<double> Angle { get; set; }
+        public ShapeSheet.CellData<double> PinX { get; set; }
+        public ShapeSheet.CellData<double> PinY { get; set; }
+        public ShapeSheet.CellData<double> LocPinX { get; set; }
+        public ShapeSheet.CellData<double> LocPinY { get; set; }
+        public ShapeSheet.CellData<double> Width { get; set; }
+        public ShapeSheet.CellData<double> Height { get; set; }
+        public ShapeSheet.CellData<double> Angle { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
             get
             {
-                yield return newpair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.PinX, this.PinX.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.PinY, this.PinY.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LocPinX, this.LocPinX.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LocPinY, this.LocPinY.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Width, this.Width.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Height, this.Height.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Angle, this.Angle.Formula);
             }
         }
 
@@ -48,7 +48,7 @@ namespace VisioAutomation.Shapes
             return _mCellQuery;
         }
 
-        class XFormCellQuery : VA.ShapeSheet.Query.CellQuery
+        class XFormCellQuery : CellQuery
         {
             public CellColumn Width { get; set; }
             public CellColumn Height { get; set; }
@@ -60,16 +60,16 @@ namespace VisioAutomation.Shapes
 
             public XFormCellQuery()
             {
-                PinX = this.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-                PinY = this.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
-                LocPinX = this.AddCell(VA.ShapeSheet.SRCConstants.LocPinX, "LocPinX");
-                LocPinY = this.AddCell(VA.ShapeSheet.SRCConstants.LocPinY, "LocPinY");
-                Width = this.AddCell(VA.ShapeSheet.SRCConstants.Width, "Width");
-                Height = this.AddCell(VA.ShapeSheet.SRCConstants.Height, "Height");
-                Angle = this.AddCell(VA.ShapeSheet.SRCConstants.Angle, "Angle");
+                this.PinX = this.AddCell(ShapeSheet.SRCConstants.PinX, "PinX");
+                this.PinY = this.AddCell(ShapeSheet.SRCConstants.PinY, "PinY");
+                this.LocPinX = this.AddCell(ShapeSheet.SRCConstants.LocPinX, "LocPinX");
+                this.LocPinY = this.AddCell(ShapeSheet.SRCConstants.LocPinY, "LocPinY");
+                this.Width = this.AddCell(ShapeSheet.SRCConstants.Width, "Width");
+                this.Height = this.AddCell(ShapeSheet.SRCConstants.Height, "Height");
+                this.Angle = this.AddCell(ShapeSheet.SRCConstants.Angle, "Angle");
             }
 
-            public XFormCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
+            public XFormCells GetCells(IList<ShapeSheet.CellData<double>> row)
             {
                 var cells = new XFormCells
                 {

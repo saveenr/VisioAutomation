@@ -10,9 +10,9 @@ namespace VisioAutomation.Models.OrgChart
 
         public string Text { get; set; }
         public IVisio.Shape VisioShape { get; set; }
-        public VA.DOM.Node DOMNode { get; set; }
+        public DOM.Node DOMNode { get; set; }
         public string URL { get; set; }
-        public VA.Drawing.Size? Size { get; set; }
+        public Drawing.Size? Size { get; set; }
 
         public Node()
         {
@@ -27,7 +27,7 @@ namespace VisioAutomation.Models.OrgChart
 
         public NodeList Children
         {
-            get { return _children; }
+            get { return this._children; }
         }
 
         public Node Parent

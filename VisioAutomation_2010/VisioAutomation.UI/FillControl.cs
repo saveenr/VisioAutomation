@@ -16,7 +16,7 @@ namespace VisioAutomation.UI
 
         public FillControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
     }

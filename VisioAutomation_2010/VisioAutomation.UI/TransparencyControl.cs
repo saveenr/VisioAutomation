@@ -18,7 +18,7 @@ namespace VisioAutomation.UI
 
         public TransparencyControl()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
 
@@ -31,7 +31,7 @@ namespace VisioAutomation.UI
 
         private void ucSlider1_ValueChanged(object sender, System.EventArgs e)
         {
-            int n = (int) slider1.Value;
+            int n = (int) this.slider1.Value;
             this.numericUpDown1.Value = n;
         }
     }

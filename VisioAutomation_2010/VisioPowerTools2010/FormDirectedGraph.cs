@@ -6,7 +6,7 @@ namespace VisioPowerTools2010
     {
         public FormDirectedGraph()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public string GraphText

@@ -6,22 +6,22 @@ namespace VisioAutomation.Text.Markup
 {
     public class ParagraphCells 
     {
-        public VA.ShapeSheet.FormulaLiteral Bullet { get; set; }
-        public VA.ShapeSheet.FormulaLiteral BulletFont { get; set; }
-        public VA.ShapeSheet.FormulaLiteral BulletFontSize { get; set; }
-        public VA.ShapeSheet.FormulaLiteral BulletString { get; set; }
-        public VA.ShapeSheet.FormulaLiteral Flags { get; set; }
-        public VA.ShapeSheet.FormulaLiteral HorizontalAlign { get; set; }
-        public VA.ShapeSheet.FormulaLiteral IndentFirst { get; set; }
-        public VA.ShapeSheet.FormulaLiteral IndentLeft { get; set; }
-        public VA.ShapeSheet.FormulaLiteral IndentRight { get; set; }
-        public VA.ShapeSheet.FormulaLiteral LocBulletFont { get; set; }
-        public VA.ShapeSheet.FormulaLiteral SpacingAfter { get; set; }
-        public VA.ShapeSheet.FormulaLiteral SpacingBefore { get; set; }
-        public VA.ShapeSheet.FormulaLiteral SpacingLine { get; set; }
-        public VA.ShapeSheet.FormulaLiteral TextPosAfterBullet { get; set; }
+        public ShapeSheet.FormulaLiteral Bullet { get; set; }
+        public ShapeSheet.FormulaLiteral BulletFont { get; set; }
+        public ShapeSheet.FormulaLiteral BulletFontSize { get; set; }
+        public ShapeSheet.FormulaLiteral BulletString { get; set; }
+        public ShapeSheet.FormulaLiteral Flags { get; set; }
+        public ShapeSheet.FormulaLiteral HorizontalAlign { get; set; }
+        public ShapeSheet.FormulaLiteral IndentFirst { get; set; }
+        public ShapeSheet.FormulaLiteral IndentLeft { get; set; }
+        public ShapeSheet.FormulaLiteral IndentRight { get; set; }
+        public ShapeSheet.FormulaLiteral LocBulletFont { get; set; }
+        public ShapeSheet.FormulaLiteral SpacingAfter { get; set; }
+        public ShapeSheet.FormulaLiteral SpacingBefore { get; set; }
+        public ShapeSheet.FormulaLiteral SpacingLine { get; set; }
+        public ShapeSheet.FormulaLiteral TextPosAfterBullet { get; set; }
         
-        internal void ApplyFormulas(VA.ShapeSheet.Update update, short row)
+        internal void ApplyFormulas(ShapeSheet.Update update, short row)
         {
             update.SetFormulaIgnoreNull(SRCCON.Para_IndLeft.ForRow(row), this.IndentLeft);
             update.SetFormulaIgnoreNull(SRCCON.Para_IndFirst.ForRow(row), this.IndentFirst);

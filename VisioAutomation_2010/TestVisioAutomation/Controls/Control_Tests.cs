@@ -10,7 +10,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Controls_AddRemove()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 4, 1);
 

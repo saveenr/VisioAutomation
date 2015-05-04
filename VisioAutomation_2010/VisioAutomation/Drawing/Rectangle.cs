@@ -22,13 +22,13 @@ namespace VisioAutomation.Drawing
                 throw new System.ArgumentException("bottom must be <= top");
             }
 
-            Left = left;
-            Bottom = bottom;
-            Right = right;
-            Top = top;
+            this.Left = left;
+            this.Bottom = bottom;
+            this.Right = right;
+            this.Top = top;
         }
 
-        public Rectangle(VA.Drawing.Point lowerleft, Drawing.Point upperright)
+        public Rectangle(Point lowerleft, Point upperright)
             : this()
         {
             if (upperright.X < lowerleft.X)
@@ -41,13 +41,13 @@ namespace VisioAutomation.Drawing
                 throw new System.ArgumentException("bottom must be <= top");
             }
 
-            Left = lowerleft.X;
-            Bottom = lowerleft.Y;
-            Right = upperright.X;
-            Top = upperright.Y;
+            this.Left = lowerleft.X;
+            this.Bottom = lowerleft.Y;
+            this.Right = upperright.X;
+            this.Top = upperright.Y;
         }
 
-        public Rectangle(VA.Drawing.Point lowerleft, VA.Drawing.Size s)
+        public Rectangle(Point lowerleft, Size s)
             : this()
         {
             if (s.Width < 0)
@@ -60,10 +60,10 @@ namespace VisioAutomation.Drawing
                 throw new System.ArgumentOutOfRangeException("s", "height must be non-negative");
             }
 
-            Left = lowerleft.X;
-            Bottom = lowerleft.Y;
-            Right = lowerleft.X + s.Width;
-            Top = lowerleft.Y + s.Height;
+            this.Left = lowerleft.X;
+            this.Bottom = lowerleft.Y;
+            this.Right = lowerleft.X + s.Width;
+            this.Top = lowerleft.Y + s.Height;
         }
 
         public static Rectangle FromCenterPoint(double x, double y, double w, double h)
@@ -84,64 +84,63 @@ namespace VisioAutomation.Drawing
             return r;
         }
 
-        public static Rectangle FromCenterPoint(VA.Drawing.Point p, double width, double height)
+        public static Rectangle FromCenterPoint(Point p, double width, double height)
         {
             return FromCenterPoint(p.X, p.Y, width, height);
         }
 
         public override string ToString()
         {
-            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####},{1:0.#####},{2:0.#####},{3:0.#####})",
-                                     Left, Bottom, Right, Top);
+            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####},{1:0.#####},{2:0.#####},{3:0.#####})", this.Left, this.Bottom, this.Right, this.Top);
             return s;
         }
 
-        public VA.Drawing.Point LowerLeft
+        public Point LowerLeft
         {
-            get { return new Drawing.Point(Left, Bottom); }
+            get { return new Point(this.Left, this.Bottom); }
         }
 
-        public VA.Drawing.Point LowerRight
+        public Point LowerRight
         {
-            get { return new Drawing.Point(Right, Bottom); }
+            get { return new Point(this.Right, this.Bottom); }
         }
 
-        public VA.Drawing.Point UpperLeft
+        public Point UpperLeft
         {
-            get { return new VA.Drawing.Point(Left, Top); }
+            get { return new Point(this.Left, this.Top); }
         }
 
-        public VA.Drawing.Point UpperRight
+        public Point UpperRight
         {
-            get { return new VA.Drawing.Point(Right, Top); }
+            get { return new Point(this.Right, this.Top); }
         }
 
-        public VA.Drawing.Size Size
+        public Size Size
         {
-            get { return new VA.Drawing.Size(Width, Height); }
+            get { return new Size(this.Width, this.Height); }
         }
 
         public double Width
         {
-            get { return Right - Left; }
+            get { return this.Right - this.Left; }
         }
 
         public double Height
         {
-            get { return Top - Bottom; }
+            get { return this.Top - this.Bottom; }
         }
 
-        public VA.Drawing.Point Center
+        public Point Center
         {
-            get { return new Drawing.Point((Left + Right)/2.0, (Bottom + Top)/2.0); }
+            get { return new Point((this.Left + this.Right)/2.0, (this.Bottom + this.Top)/2.0); }
         }
 
-        public static Rectangle operator +(Rectangle r, VA.Drawing.Point p)
+        public static Rectangle operator +(Rectangle r, Point p)
         {
             return r.Add(p.X, p.Y);
         }
 
-        public static Rectangle operator -(Rectangle r, VA.Drawing.Point p)
+        public static Rectangle operator -(Rectangle r, Point p)
         {
             return r.Subtract(p.X, p.Y);
         }
@@ -153,45 +152,45 @@ namespace VisioAutomation.Drawing
 
         public Rectangle Add(double dx, double dy)
         {
-            var r2 = new Rectangle(Left + dx, Bottom + dy, Right + dx, Top + dy);
+            var r2 = new Rectangle(this.Left + dx, this.Bottom + dy, this.Right + dx, this.Top + dy);
             return r2;
         }
 
         public Rectangle Add(Size s)
         {
-            var r2 = new Rectangle(Left + s.Width, Bottom + s.Height, Right + s.Width, Top + s.Height);
+            var r2 = new Rectangle(this.Left + s.Width, this.Bottom + s.Height, this.Right + s.Width, this.Top + s.Height);
             return r2;
         }
 
         public Rectangle Add(Point s)
         {
-            var r2 = new Rectangle(Left + s.X, Bottom + s.Y, Right + s.X, Top + s.Y);
+            var r2 = new Rectangle(this.Left + s.X, this.Bottom + s.Y, this.Right + s.X, this.Top + s.Y);
             return r2;
         }
 
 
         public Rectangle Subtract(double dx, double dy)
         {
-            var r2 = new Rectangle(Left - dx, Bottom - dy, Right - dx, Top - dy);
+            var r2 = new Rectangle(this.Left - dx, this.Bottom - dy, this.Right - dx, this.Top - dy);
             return r2;
         }
 
         public Rectangle Subtract(Size s)
         {
-            var r2 = new Rectangle(Left - s.Width, Bottom - s.Height, Right - s.Width, Top - s.Height);
+            var r2 = new Rectangle(this.Left - s.Width, this.Bottom - s.Height, this.Right - s.Width, this.Top - s.Height);
             return r2;
         }
 
         public Rectangle Subtract(Point s)
         {
-            var r2 = new Rectangle(Left - s.X, Bottom - s.Y, Right - s.X, Top - s.Y);
+            var r2 = new Rectangle(this.Left - s.X, this.Bottom - s.Y, this.Right - s.X, this.Top - s.Y);
             return r2;
         }
 
 
         public Rectangle Multiply(double sx, double sy)
         {
-            var r2 = new Rectangle(Left*sx, Bottom*sy, Right*sx, Top*sy);
+            var r2 = new Rectangle(this.Left*sx, this.Bottom*sy, this.Right*sx, this.Top*sy);
             return r2;
         }
     }

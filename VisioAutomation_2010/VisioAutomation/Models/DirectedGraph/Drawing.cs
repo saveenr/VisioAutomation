@@ -27,7 +27,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public Connector AddConnection(string id, Shape from, Shape to)
         {
-            return AddConnection(id, from, to, id, VA.Shapes.Connections.ConnectorType.RightAngle);
+            return this.AddConnection(id, from, to, id, VA.Shapes.Connections.ConnectorType.RightAngle);
         }
 
         public Connector AddConnection(
@@ -35,7 +35,7 @@ namespace VisioAutomation.Models.DirectedGraph
             Shape from, 
             Shape to, 
             string label,
-             VA.Shapes.Connections.ConnectorType type)
+             Shapes.Connections.ConnectorType type)
         {
             var new_connector = new Connector(from, to);
             new_connector.ID = id;
@@ -46,15 +46,15 @@ namespace VisioAutomation.Models.DirectedGraph
             return new_connector;
         }
 
-        public void Render(IVisio.Page page, VA.Models.DirectedGraph.VisioLayoutOptions options)
+        public void Render(IVisio.Page page, VisioLayoutOptions options)
         {
             var vr = new VisioRenderer();
             vr.Render(page, this, options);
         }
 
-        public void Render(IVisio.Page page, VA.Models.DirectedGraph.MsaglLayoutOptions options)
+        public void Render(IVisio.Page page, MsaglLayoutOptions options)
         {
-            VA.Models.DirectedGraph.MsaglRenderer.Render(page, this, options);
+            MsaglRenderer.Render(page, this, options);
         }
     }
 }

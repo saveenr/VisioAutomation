@@ -11,15 +11,15 @@ namespace VisioAutomation.DOM
         public Connector(BaseShape from, BaseShape to, IVisio.Master master) :
             base(master,-3,-3)
         {
-            this.Master = new VA.DOM.MasterRef(master);
+            this.Master = new MasterRef(master);
             this.From = from;
             this.To = to;
         }
 
         public Connector(BaseShape from, BaseShape to, string mastername, string stencilname) :
-            base(mastername,stencilname, new VA.Drawing.Point(-3,-3) )
+            base(mastername,stencilname, new Drawing.Point(-3,-3) )
         {
-            this.Master = new VA.DOM.MasterRef(mastername, stencilname);
+            this.Master = new MasterRef(mastername, stencilname);
             this.From = from;
             this.To = to;
         }

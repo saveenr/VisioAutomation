@@ -21,8 +21,8 @@ namespace VisioPowerShell.Commands
         {
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
-            var points = VA.Drawing.Point.FromDoubles(Points).ToList();
-            var shape_ids = this.client.Master.Drop(Masters, points);
+            var points = VA.Drawing.Point.FromDoubles(this.Points).ToList();
+            var shape_ids = this.client.Master.Drop(this.Masters, points);
 
             var page = this.client.Page.Get();
             var shape_objects = VA.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);

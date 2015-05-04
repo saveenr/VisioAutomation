@@ -67,7 +67,7 @@ namespace VisioAutomation
                 HashSet<string> nonregexes;
                 if (ignorecase)
                 {
-                    nonregexes = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
+                    nonregexes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 }
                 else
                 {
@@ -76,10 +76,10 @@ namespace VisioAutomation
 
                 foreach (var pattern in patterns)
                 {
-                    if (TextUtil.ContainsWildcard(pattern))
+                    if (ContainsWildcard(pattern))
                     {
                         // If it contains a wildcard transform it into a regex
-                        var regex = TextUtil.GetRegexForWildcardPattern(pattern, ignorecase);
+                        var regex = GetRegexForWildcardPattern(pattern, ignorecase);
                         regexes.Add(regex);
                     }
                     else

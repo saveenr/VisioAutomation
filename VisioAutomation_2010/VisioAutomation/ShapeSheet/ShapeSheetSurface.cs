@@ -33,7 +33,7 @@ namespace VisioAutomation.ShapeSheet
         {
             if ((chunksize != 3) && (chunksize != 4))
             {
-                throw new VA.AutomationException("Chunksize must be 3 or 4");
+                throw new AutomationException("Chunksize must be 3 or 4");
             }
 
             int remainder = stream.Length % chunksize;
@@ -41,7 +41,7 @@ namespace VisioAutomation.ShapeSheet
             if (remainder != 0)
             {
                 string msg = string.Format("stream must have a multiple of {0} elements", chunksize);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
             return stream.Length / chunksize;
@@ -237,7 +237,7 @@ namespace VisioAutomation.ShapeSheet
             else
             {
                 string msg = string.Format("Internal error: Unsupported Result Type: {0}", type.Name);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
             return flags;
         }
@@ -262,7 +262,7 @@ namespace VisioAutomation.ShapeSheet
             if (!IsValidResultType(result_type))
             {
                 string msg = string.Format("Unsupported Result Type: {0}", result_type.Name);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
         }
 

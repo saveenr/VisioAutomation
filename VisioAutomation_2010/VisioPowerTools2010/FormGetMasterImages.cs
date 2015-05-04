@@ -11,15 +11,15 @@ namespace VisioPowerTools2010
     {
         private string output_basename = "Catalog.htm";
 
-        [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         extern static bool DestroyIcon(IntPtr handle);
 
-        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        [DllImport("gdi32.dll")]
         static extern bool DeleteEnhMetaFile(IntPtr hemf);
 
         public FormGetMasterImages()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private void log(string fmt, params object[] tokens)
@@ -31,12 +31,12 @@ namespace VisioPowerTools2010
 
         private string get_src_folder()
         {
-            return normalize_path(textBoxStencilFolder.Text);
+            return this.normalize_path(this.textBoxStencilFolder.Text);
         }
 
         private string get_dest_folder()
         {
-            return normalize_path( this.textBoxOutputFolder.Text );
+            return this.normalize_path( this.textBoxOutputFolder.Text );
         }
 
         private string normalize_path(string s)
@@ -73,7 +73,7 @@ namespace VisioPowerTools2010
                 return;
             }
 
-            var app = VisioPowerTools2010.Globals.ThisAddIn.Application;
+            var app = Globals.ThisAddIn.Application;
 
             var ver = VisioAutomation.Application.ApplicationHelper.GetVersion(app);
 
@@ -95,7 +95,7 @@ namespace VisioPowerTools2010
 
             try
             {
-                create_folder_safe(destfolder);
+                this.create_folder_safe(destfolder);
             }
             catch (Exception)
             {
@@ -107,7 +107,7 @@ namespace VisioPowerTools2010
                 return;
             }
 
-            string html_filename = System.IO.Path.Combine(this.get_dest_folder(), output_basename);
+            string html_filename = System.IO.Path.Combine(this.get_dest_folder(), this.output_basename);
 
 
             SimpleHTML5Writer writer;
@@ -159,7 +159,7 @@ namespace VisioPowerTools2010
 
                 try
                 {
-                    create_folder_safe(cur_destfolder);
+                    this.create_folder_safe(cur_destfolder);
                 }
                 catch (Exception)
                 {
@@ -180,8 +180,8 @@ namespace VisioPowerTools2010
                     string picture_dir = System.IO.Path.Combine(cur_destfolder, "pictures");
                     string icon_dir = System.IO.Path.Combine(cur_destfolder, "icons");
 
-                    create_folder_safe(picture_dir);
-                    create_folder_safe(icon_dir);
+                    this.create_folder_safe(picture_dir);
+                    this.create_folder_safe(icon_dir);
 
                     string picture_filename = System.IO.Path.Combine(picture_dir, mastername_safe + ".png");
                     string icon_filename = System.IO.Path.Combine(icon_dir, mastername_safe + ".png");
@@ -292,14 +292,14 @@ namespace VisioPowerTools2010
 
         private void FormGetMasterImages_Load(object sender, EventArgs e)
         {
-            this.textBoxStencilFolder.Text = VisioPowerTools2010.Properties.Settings.Default.StencilCatalogInputFolder;
-            this.textBoxOutputFolder.Text  = VisioPowerTools2010.Properties.Settings.Default.StencilCatalogOutputFolder;
+            this.textBoxStencilFolder.Text = Properties.Settings.Default.StencilCatalogInputFolder;
+            this.textBoxOutputFolder.Text  = Properties.Settings.Default.StencilCatalogOutputFolder;
 
         }
 
         private void linkLabelOpenOutput_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string html_filename = System.IO.Path.Combine(this.get_dest_folder(), output_basename);
+            string html_filename = System.IO.Path.Combine(this.get_dest_folder(), this.output_basename);
 
             if (System.IO.File.Exists(html_filename))
             {
@@ -316,13 +316,13 @@ namespace VisioPowerTools2010
         {
             this.Close();
 
-            SaveSettings();
+            this.SaveSettings();
         }
 
         private void SaveSettings()
         {
-            VisioPowerTools2010.Properties.Settings.Default.StencilCatalogInputFolder = this.textBoxStencilFolder.Text;
-            VisioPowerTools2010.Properties.Settings.Default.StencilCatalogOutputFolder = this.textBoxOutputFolder.Text;
+            Properties.Settings.Default.StencilCatalogInputFolder = this.textBoxStencilFolder.Text;
+            Properties.Settings.Default.StencilCatalogOutputFolder = this.textBoxOutputFolder.Text;
         }
 
         private void FormGetMasterImages_FormClosing(object sender, FormClosingEventArgs e)

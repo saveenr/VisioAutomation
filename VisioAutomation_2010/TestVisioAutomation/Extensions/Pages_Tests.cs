@@ -11,7 +11,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_CreatePage()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var doc1 = page1.Document;
 
             int old_page_count = doc1.Pages.Count;

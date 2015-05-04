@@ -2,7 +2,7 @@
 
 namespace VisioAutomation.Models.DirectedGraph
 {
-    public class MsaglLayoutOptions : VA.Models.DirectedGraph.LayoutOptions
+    public class MsaglLayoutOptions : LayoutOptions
     {
         public double ScalingFactor { get; set; }
         public bool UseDynamicConnectors { get; set; }
@@ -10,8 +10,8 @@ namespace VisioAutomation.Models.DirectedGraph
         public MsaglLayoutOptions() :
             base()
         {
-            UseDynamicConnectors = true;
-            ScalingFactor = 14;
+            this.UseDynamicConnectors = true;
+            this.ScalingFactor = 14;
         }
     }
 }

@@ -6,16 +6,16 @@ namespace VisioAutomation.VDX.Elements
 {
     public class Line
     {
-        public VA.VDX.ShapeSheet.PointCell Weight = new VA.VDX.ShapeSheet.PointCell();
-        public VA.VDX.ShapeSheet.ColorCell Color = new VA.VDX.ShapeSheet.ColorCell();
-        public VA.VDX.ShapeSheet.IntCell Pattern = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.DoubleCell Rounding = new VA.VDX.ShapeSheet.DoubleCell();
-        public VA.VDX.ShapeSheet.IntCell EndArrowSize = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.IntCell BeginArrowSize = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.IntCell EndArrow = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.IntCell BeginArrow = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.IntCell Cap = new VA.VDX.ShapeSheet.IntCell();
-        public VA.VDX.ShapeSheet.TransparencyCell Transparency = new VA.VDX.ShapeSheet.TransparencyCell();
+        public ShapeSheet.PointCell Weight = new ShapeSheet.PointCell();
+        public ShapeSheet.ColorCell Color = new ShapeSheet.ColorCell();
+        public ShapeSheet.IntCell Pattern = new ShapeSheet.IntCell();
+        public ShapeSheet.DoubleCell Rounding = new ShapeSheet.DoubleCell();
+        public ShapeSheet.IntCell EndArrowSize = new ShapeSheet.IntCell();
+        public ShapeSheet.IntCell BeginArrowSize = new ShapeSheet.IntCell();
+        public ShapeSheet.IntCell EndArrow = new ShapeSheet.IntCell();
+        public ShapeSheet.IntCell BeginArrow = new ShapeSheet.IntCell();
+        public ShapeSheet.IntCell Cap = new ShapeSheet.IntCell();
+        public ShapeSheet.TransparencyCell Transparency = new ShapeSheet.TransparencyCell();
 
         public void AddToElement(SXL.XElement parent)
         {

@@ -9,14 +9,14 @@ namespace VisioAutomation.Models.Grid
 
         public double Height
         {
-            get { return _height; }
+            get { return this._height; }
             set
             {
                 if (value <= 0)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                _height = value;
+                this._height = value;
             }
         }
     }

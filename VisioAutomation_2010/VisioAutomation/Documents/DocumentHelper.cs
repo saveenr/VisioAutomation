@@ -32,7 +32,7 @@ namespace VisioAutomation.Documents
             if (stencil == null)
             {
                 string msg = string.Format("Could not open stencil \"{0}\"",filename);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
             return stencil;
         }
@@ -83,17 +83,17 @@ namespace VisioAutomation.Documents
             }
 
             // If we get here, we couldn't find any matching window
-            throw new VA.AutomationException("could not find window for document");
+            throw new AutomationException("could not find window for document");
         }
 
         public static void Close(IVisio.Document doc, bool force_close)
         {
             if (force_close)
             {
-                var new_alert_response = VA.Application.AlertResponseCode.No;
+                var new_alert_response = Application.AlertResponseCode.No;
                 var app = doc.Application;
 
-                using (var alertresponse = new VA.Application.AlertResponseScope(app,new_alert_response))
+                using (var alertresponse = new Application.AlertResponseScope(app,new_alert_response))
                 {
                     doc.Close();
                 }

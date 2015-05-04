@@ -42,38 +42,38 @@ namespace VisioPowerTools2010
 
         private void buttonHelp_Click_1(object sender, RibbonControlEventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("Hello World");
+            MessageBox.Show("Hello World");
 
         }
 
         private void buttonImportColors_Click(object sender, RibbonControlEventArgs e)
         {
-            this.execute_cmd( cmd_import_colors );
+            this.execute_cmd(this.cmd_import_colors );
         }
 
         private void buttonCreateStencilCatalog_Click(object sender, RibbonControlEventArgs e)
         {
-            execute_cmd(cmd_create_stencil_catalog);
+            this.execute_cmd(this.cmd_create_stencil_catalog);
         }
 
         private void buttonCreateStyle_Click(object sender, RibbonControlEventArgs e)
         {
-            execute_cmd(cmd_create_style);
+            this.execute_cmd(this.cmd_create_style);
         }
 
         private void buttonImportOnlineCOlors_Click(object sender, RibbonControlEventArgs e)
         {
-            execute_cmd(cmd_import_colors);
+            this.execute_cmd(this.cmd_import_colors);
         }
 
         private void buttonToggleTextCase_Click(object sender, RibbonControlEventArgs e)
         {
-            execute_cmd(cmd_toggle_text_case);
+            this.execute_cmd(this.cmd_toggle_text_case);
         }
 
         private void buttonCopyText_Click(object sender, RibbonControlEventArgs e)
         {
-            execute_cmd(cmd_copy_text);
+            this.execute_cmd(this.cmd_copy_text);
         }
 
         // -----------------------------------------------------------------------------------------------'
@@ -181,7 +181,7 @@ namespace VisioPowerTools2010
             double cellwidth = 1.0;
             double col2_x = col1_x + cellwidth + sep;
             double col3_x = col2_x + cellwidth + sep;
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             foreach (var color in colors)
             {
                 var shape0 = page_node.Shapes.DrawRectangle(col0_x, y, col0_x + col0_w, y + cellwidth);
@@ -380,7 +380,7 @@ namespace VisioPowerTools2010
             }
 
             var activewindow = app.ActiveWindow;
-            var sb = new System.Text.StringBuilder();
+            var sb = new StringBuilder();
             var pages = doc.Pages.AsEnumerable().ToList();
 
             using (var scope = new VA.Application.UndoScope(app, "Scramble Text"))

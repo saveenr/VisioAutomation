@@ -7,7 +7,7 @@ namespace VisioPowerTools2010
     {
         public FormCreateStyle()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public string StyleName

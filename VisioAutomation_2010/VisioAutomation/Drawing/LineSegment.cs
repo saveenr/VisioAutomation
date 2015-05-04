@@ -4,23 +4,23 @@ namespace VisioAutomation.Drawing
 {
     public struct LineSegment
     {
-        private readonly VA.Drawing.Point _start;
-        private readonly VA.Drawing.Point _end;
+        private readonly Point _start;
+        private readonly Point _end;
 
-        public LineSegment(VA.Drawing.Point start, VA.Drawing.Point end)
+        public LineSegment(Point start, Point end)
         {
             this._start = start;
             this._end = end;
         }
 
-        public VA.Drawing.Point Start
+        public Point Start
         {
-            get { return _start; }
+            get { return this._start; }
         }
 
-        public VA.Drawing.Point End
+        public Point End
         {
-            get { return _end; }
+            get { return this._end; }
         }
     }
 }

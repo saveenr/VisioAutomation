@@ -9,15 +9,15 @@ namespace TestVisioAutomation
 
         public ConnectivityMap(IList<VACXN.ConnectorEdge> edges)
         {
-            dic = new Dictionary<string, List<string>>();
+            this.dic = new Dictionary<string, List<string>>();
             foreach (var e in edges)
             {
                 string fromtext = e.From.Text;
-                if (!dic.ContainsKey(fromtext))
+                if (!this.dic.ContainsKey(fromtext))
                 {
-                    dic[fromtext] = new List<string>();
+                    this.dic[fromtext] = new List<string>();
                 }
-                var list = dic[fromtext];
+                var list = this.dic[fromtext];
                 list.Add(e.To.Text);
             }
         }

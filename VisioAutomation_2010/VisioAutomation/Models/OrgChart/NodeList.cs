@@ -24,7 +24,7 @@ namespace VisioAutomation.Models.OrgChart
 
         IEnumerator IEnumerable.GetEnumerator()     
         {                                           
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public void Add(Node item)

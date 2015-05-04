@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (chunksize != 3 && chunksize != 4)
             {
                 string msg = "chunksize must be 3 or 4";
-                throw new VA.AutomationException(msg);                    
+                throw new AutomationException(msg);                    
             }
 
             this.Capacity = capacity;
@@ -32,20 +32,20 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.ChunkSize != 4)
             {
                 string msg = "Only ChunkSize 4 supported";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
             if (this.ChunksWrittenCount >= this.Capacity)
             {
                 string msg = "Exceeded Capacity";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
-            Stream[ShortsWrittenCount++] = id;
-            Stream[ShortsWrittenCount++] = sec;
-            Stream[ShortsWrittenCount++] = row;
-            Stream[ShortsWrittenCount++] = cell;
-            ChunksWrittenCount++;
+            this.Stream[this.ShortsWrittenCount++] = id;
+            this.Stream[this.ShortsWrittenCount++] = sec;
+            this.Stream[this.ShortsWrittenCount++] = row;
+            this.Stream[this.ShortsWrittenCount++] = cell;
+            this.ChunksWrittenCount++;
         }
 
         public void Add(short sec, short row, short cell)
@@ -53,19 +53,19 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.ChunkSize != 3)
             {
                 string msg = "Only ChunkSize 3 supported";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
             if (this.ChunksWrittenCount >= this.Capacity)
             {
                 string msg = "Exceeded Capacity";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
-            Stream[ShortsWrittenCount++] = sec;
-            Stream[ShortsWrittenCount++] = row;
-            Stream[ShortsWrittenCount++] = cell;
-            ChunksWrittenCount++;
+            this.Stream[this.ShortsWrittenCount++] = sec;
+            this.Stream[this.ShortsWrittenCount++] = row;
+            this.Stream[this.ShortsWrittenCount++] = cell;
+            this.ChunksWrittenCount++;
         }
     }
 }

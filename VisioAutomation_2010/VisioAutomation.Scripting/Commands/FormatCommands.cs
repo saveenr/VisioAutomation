@@ -13,7 +13,7 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, VA.Shapes.FormatCells format)
+        public void Set(IList<IVisio.Shape> target_shapes, Shapes.FormatCells format)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -25,7 +25,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (int shapeid in shapeids)
@@ -36,7 +36,7 @@ namespace VisioAutomation.Scripting.Commands
             update.Execute(this.Client.VisioApplication.ActivePage);            
         }
 
-        public IList<VA.Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
+        public IList<Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -45,11 +45,11 @@ namespace VisioAutomation.Scripting.Commands
 
             if (shapes.Count < 1)
             {
-                return new List<VA.Shapes.FormatCells>(0);
+                return new List<Shapes.FormatCells>(0);
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = VA.Shapes.FormatCells.GetCells(this.Client.VisioApplication.ActivePage, shapeids);
+            var fmts = Shapes.FormatCells.GetCells(this.Client.VisioApplication.ActivePage, shapeids);
             return fmts;
         }
 
@@ -74,13 +74,13 @@ namespace VisioAutomation.Scripting.Commands
             var selection = active_window.Selection;
             var shape = selection[1];
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var width_col = query.AddCell(VA.ShapeSheet.SRCConstants.Width, "Width");
-            var height_col = query.AddCell(VA.ShapeSheet.SRCConstants.Height, "Height");
+            var query = new ShapeSheet.Query.CellQuery();
+            var width_col = query.AddCell(ShapeSheet.SRCConstants.Width, "Width");
+            var height_col = query.AddCell(ShapeSheet.SRCConstants.Height, "Height");
             var queryresults = query.GetResults<double>(shape);
 
-            cached_size_width = queryresults[width_col];
-            cached_size_height = queryresults[height_col];
+            this.cached_size_width = queryresults[width_col];
+            this.cached_size_height = queryresults[height_col];
         }
 
         public void PasteSize(IList<IVisio.Shape> target_shapes, bool paste_width, bool paste_height)
@@ -95,24 +95,24 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            if ((!cached_size_width.HasValue) && (!cached_size_height.HasValue))
+            if ((!this.cached_size_width.HasValue) && (!this.cached_size_height.HasValue))
             {
                 return;
             }
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             foreach (var shapeid in shapeids)
             {
                 if (paste_width)
                 {
-                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Width, cached_size_width.Value);
+                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Width, this.cached_size_width.Value);
                 }
 
                 if (paste_height)
                 {
-                    update.SetFormula((short)shapeid, VA.ShapeSheet.SRCConstants.Height, cached_size_height.Value);
+                    update.SetFormula((short)shapeid, ShapeSheet.SRCConstants.Height, this.cached_size_height.Value);
                 }
             }
 
@@ -137,7 +137,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shape = GetTargetShape(target_shape);
+            var shape = this.GetTargetShape(target_shape);
             if (shape == null)
             {
                 return;
@@ -156,7 +156,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;

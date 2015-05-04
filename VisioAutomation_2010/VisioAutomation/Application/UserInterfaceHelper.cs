@@ -30,12 +30,12 @@ namespace VisioAutomation.Application
             var hwnd_as_intptr = new System.IntPtr(hwnd);
 
             // Set the window properties to make it a visible child window.
-            const int window_prop_index = VA.Internal.Interop.NativeMethods.GWL_STYLE;
-            const int window_prop_value = VA.Internal.Interop.NativeMethods.WS_CHILD | VA.Internal.Interop.NativeMethods.WS_VISIBLE;
-            VA.Internal.Interop.NativeMethods.SetWindowLong(hwnd_as_intptr, window_prop_index, window_prop_value);
+            const int window_prop_index = Internal.Interop.NativeMethods.GWL_STYLE;
+            const int window_prop_value = Internal.Interop.NativeMethods.WS_CHILD | Internal.Interop.NativeMethods.WS_VISIBLE;
+            Internal.Interop.NativeMethods.SetWindowLong(hwnd_as_intptr, window_prop_index, window_prop_value);
 
             // Set the anchor bar window as the parent of the form.
-            VA.Internal.Interop.NativeMethods.SetParent(hwnd, anchor_window.WindowHandle32);
+            Internal.Interop.NativeMethods.SetParent(hwnd, anchor_window.WindowHandle32);
 
             // Force a resize of the anchor bar so it will refresh.
             int left, top, width, height;

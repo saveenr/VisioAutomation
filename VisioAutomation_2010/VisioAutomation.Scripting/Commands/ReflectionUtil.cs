@@ -5,29 +5,29 @@ namespace VisioAutomation.Scripting.Commands
 {
     internal class ReflectionUtil
     {
-        public static string GetTypeCategoryDisplayString(ReflectionUtil.TypeCategory type)
+        public static string GetTypeCategoryDisplayString(TypeCategory type)
         {
-            if (type == ReflectionUtil.TypeCategory.StaticClass)
+            if (type == TypeCategory.StaticClass)
             {
                 return "static class";
             }
-            else if (type == ReflectionUtil.TypeCategory.AbstractClass)
+            else if (type == TypeCategory.AbstractClass)
             {
                 return "abstract class";
             }
-            else if (type == ReflectionUtil.TypeCategory.Class)
+            else if (type == TypeCategory.Class)
             {
                 return "class";
             }
-            else if (type == ReflectionUtil.TypeCategory.Enum)
+            else if (type == TypeCategory.Enum)
             {
                 return "enum";
             }
-            else if (type == ReflectionUtil.TypeCategory.Interface)
+            else if (type == TypeCategory.Interface)
             {
                 return "interface";
             }
-            else if (type == ReflectionUtil.TypeCategory.Struct)
+            else if (type == TypeCategory.Struct)
             {
                 return "struct";
             }

@@ -15,7 +15,7 @@ namespace VisioAutomation.Pages.PageLayout
             this.Direction = CompactTreeDirection.DownThenRight;
         }
 
-        protected override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
+        protected override void SetPageCells(PageCells pagecells)
         {
             base.SetPageCells(pagecells);
             pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction);
@@ -58,7 +58,7 @@ namespace VisioAutomation.Pages.PageLayout
             else
             {
                 string msg = "Unsupported direction";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
         }
     }

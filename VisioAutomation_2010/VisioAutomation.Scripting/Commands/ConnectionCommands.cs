@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = this.Client.VisioApplication.ActivePage;
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, undoname_connectShapes))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, undoname_connectShapes))
             {
                 if (master == null)
                 {

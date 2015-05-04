@@ -33,7 +33,7 @@ namespace VisioAutomation.Text.Markup
             return text_node;
         }
 
-        public Field AddField(VA.Text.Markup.Field field)
+        public Field AddField(Field field)
         {
             this.Add(field);
             return field;
@@ -65,7 +65,7 @@ namespace VisioAutomation.Text.Markup
             int start_pos = 0;
             var region_stack = new Stack<TextRegion>();
 
-            foreach (var walkevent in Walk())
+            foreach (var walkevent in this.Walk())
             {
                 if (walkevent.HasEnteredNode)
                 {
@@ -160,7 +160,7 @@ namespace VisioAutomation.Text.Markup
             var default_chars_bias = IVisio.VisCharsBias.visBiasLeft;
 
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
 
             foreach (var region in regions_to_format)
             {
@@ -172,12 +172,12 @@ namespace VisioAutomation.Text.Markup
                     var chars = shape.Characters;
                     chars.Begin = region.Start;
                     chars.End = region.End;
-                    chars.CharProps[VA.ShapeSheet.SRCConstants.CharColor.Cell] = 0;
+                    chars.CharProps[ShapeSheet.SRCConstants.CharColor.Cell] = 0;
                     short rownum = chars.CharPropsRow[(short) default_chars_bias];
 
                     if (rownum < 0)
                     {
-                        throw new VA.AutomationException("Could not create Character row");
+                        throw new AutomationException("Could not create Character row");
                     }
 
                     update.Clear();
@@ -192,12 +192,12 @@ namespace VisioAutomation.Text.Markup
                     var chars = shape.Characters;
                     chars.Begin = region.Start;
                     chars.End = region.End;
-                    chars.ParaProps[VA.ShapeSheet.SRCConstants.Para_Bullet.Cell] = 0;
+                    chars.ParaProps[ShapeSheet.SRCConstants.Para_Bullet.Cell] = 0;
                     short rownum = chars.ParaPropsRow[(short) default_chars_bias];
 
                     if (rownum < 0)
                     {
-                        throw new VA.AutomationException("Could not create Paragraph row");
+                        throw new AutomationException("Could not create Paragraph row");
                     }
 
                     update.Clear();

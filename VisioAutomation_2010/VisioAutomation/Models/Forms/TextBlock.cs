@@ -5,28 +5,28 @@ namespace VisioAutomation.Models.Forms
 {
     public class TextBlock
     {
-        public VA.Drawing.Size Size;
+        public Drawing.Size Size;
         public string Font = "SegoeUI";
-        public VA.Text.TextCells Textcells;
-        public VA.Text.ParagraphCells ParagraphCells;
-        public VA.Shapes.FormatCells FormatCells;
-        public VA.Text.CharacterCells CharacterCells;
+        public Text.TextCells Textcells;
+        public Text.ParagraphCells ParagraphCells;
+        public Shapes.FormatCells FormatCells;
+        public Text.CharacterCells CharacterCells;
         public string Text;
         public IVisio.Shape VisioShape;
         public int VisioShapeID;
-        public VA.Drawing.Rectangle Rectangle;
+        public Drawing.Rectangle Rectangle;
 
-        public TextBlock(VA.Drawing.Size size, string text)
+        public TextBlock(Drawing.Size size, string text)
         {
             this.Text = text;
             this.Size = size;
-            this.Textcells = new VA.Text.TextCells();
-            this.ParagraphCells = new VA.Text.ParagraphCells();
-            this.FormatCells = new VA.Shapes.FormatCells();
-            this.CharacterCells = new VA.Text.CharacterCells();
+            this.Textcells = new Text.TextCells();
+            this.ParagraphCells = new Text.ParagraphCells();
+            this.FormatCells = new Shapes.FormatCells();
+            this.CharacterCells = new Text.CharacterCells();
         }
 
-        public void ApplyFormus(VA.ShapeSheet.Update update)
+        public void ApplyFormus(ShapeSheet.Update update)
         {
             short titleshape_id = this.VisioShape.ID16;
             update.SetFormulas(titleshape_id, this.Textcells);

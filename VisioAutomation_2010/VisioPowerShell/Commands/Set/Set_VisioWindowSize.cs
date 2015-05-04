@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var w = this.client.Application.Window;
-            w.SetSize(Width, Height);
+            w.SetSize(this.Width, this.Height);
         }
     }
 }

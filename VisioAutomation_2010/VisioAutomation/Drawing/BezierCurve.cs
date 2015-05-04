@@ -5,10 +5,10 @@ namespace VisioAutomation.Drawing
 {
     public class BezierCurve
     {
-        public VA.Drawing.Point[] ControlPoints { get; private set; }
+        public Point[] ControlPoints { get; private set; }
         public int Degree { get; set; }
 
-        public BezierCurve(VA.Drawing.Point[] controlpoints, int degree)
+        public BezierCurve(Point[] controlpoints, int degree)
         {
             if (controlpoints== null)
             {
@@ -24,12 +24,12 @@ namespace VisioAutomation.Drawing
             this.Degree = degree;
         }
 
-        public static BezierCurve FromEllipse(VA.Drawing.Point center, VA.Drawing.Size radius)
+        public static BezierCurve FromEllipse(Point center, Size radius)
         {
-            var pt1 = new VA.Drawing.Point(0, radius.Height); // top
-            var pt2 = new VA.Drawing.Point(radius.Width, 0); // right
-            var pt3 = new VA.Drawing.Point(0, -radius.Height); // bottom
-            var pt4 = new VA.Drawing.Point(-radius.Width, 0); // left
+            var pt1 = new Point(0, radius.Height); // top
+            var pt2 = new Point(radius.Width, 0); // right
+            var pt3 = new Point(0, -radius.Height); // bottom
+            var pt4 = new Point(-radius.Width, 0); // left
 
             double dx = radius.Width * 4.0 * (System.Math.Sqrt(2) - 1) / 3;
             double dy = radius.Height * 4.0 * (System.Math.Sqrt(2) - 1) / 3;

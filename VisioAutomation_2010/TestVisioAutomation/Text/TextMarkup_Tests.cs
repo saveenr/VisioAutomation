@@ -16,22 +16,22 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Text_Case1()
         {
-            Assert.IsTrue( Match("*","") );
-            Assert.IsTrue(Match("*", "AbC"));
+            Assert.IsTrue(this.Match("*","") );
+            Assert.IsTrue(this.Match("*", "AbC"));
 
-            Assert.IsTrue(Match("A*", "Abc"));
-            Assert.IsFalse(Match("A*", "bcA"));
+            Assert.IsTrue(this.Match("A*", "Abc"));
+            Assert.IsFalse(this.Match("A*", "bcA"));
 
-            Assert.IsTrue(Match("*C", "Abc"));
-            Assert.IsFalse(Match("*C", "bcA"));
+            Assert.IsTrue(this.Match("*C", "Abc"));
+            Assert.IsFalse(this.Match("*C", "bcA"));
 
-            Assert.IsTrue(Match("A*C", "AbC"));
-            Assert.IsFalse(Match("A*C", "AbA"));
+            Assert.IsTrue(this.Match("A*C", "AbC"));
+            Assert.IsFalse(this.Match("A*C", "AbA"));
 
-            Assert.IsTrue(Match("A*B*C", "A---b---C"));
-            Assert.IsFalse(Match("A*B*C", "A---b---A"));
+            Assert.IsTrue(this.Match("A*B*C", "A---b---C"));
+            Assert.IsFalse(this.Match("A*B*C", "A---b---A"));
 
-            Assert.IsTrue(Match("A*B?C", "A---bXC"));
+            Assert.IsTrue(this.Match("A*B?C", "A---bXC"));
 
         }
     }

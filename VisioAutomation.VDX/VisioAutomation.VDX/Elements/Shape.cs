@@ -10,22 +10,22 @@ namespace VisioAutomation.VDX.Elements
 {
     public class Shape : Node
     {
-        public VA.VDX.Sections.XForm XForm = new VA.VDX.Sections.XForm();
-        public VA.VDX.Sections.XForm1D XForm1D;
-        public VA.VDX.Sections.Protection Protection;
-        public VA.VDX.Sections.Fill Fill;
+        public Sections.XForm XForm = new Sections.XForm();
+        public Sections.XForm1D XForm1D;
+        public Sections.Protection Protection;
+        public Sections.Fill Fill;
         public Line Line;
-        public VA.VDX.Sections.TextXForm TextXForm;
-        public VA.VDX.Sections.Misc Misc;
-        public VA.VDX.Sections.Event Event;
-        public VA.VDX.Sections.TextBlock TextBlock;
-        public VA.VDX.Sections.Layout Layout;
-        public List<VA.VDX.Sections.Char> CharFormats;
+        public Sections.TextXForm TextXForm;
+        public Sections.Misc Misc;
+        public Sections.Event Event;
+        public Sections.TextBlock TextBlock;
+        public Sections.Layout Layout;
+        public List<Sections.Char> CharFormats;
         public List<Sections.ParagraphFormat> ParaFormats;
         public List<Hyperlink> Hyperlinks;
         public List<int> LayerMembership;
         public CustomProps CustomProps;
-        public VA.VDX.Sections.Geom Geom;
+        public Sections.Geom Geom;
 
         internal int _id;
         private readonly bool _isGroup;
@@ -80,10 +80,10 @@ namespace VisioAutomation.VDX.Elements
 
         public int ID
         {
-            get { return _id; }
+            get { return this._id; }
         }
 
-        public void AddToElement(SXL.XElement parent)
+        public void AddToElement(XElement parent)
         {
             var shape_el = XMLUtil.CreateVisioSchema2003Element("Shape");
             shape_el.SetAttributeValueInt("ID", this._id);
@@ -97,25 +97,25 @@ namespace VisioAutomation.VDX.Elements
 
             shape_el.SetAttributeValue("Master", this.Master);
 
-            WriteTransform(shape_el);
-            WriteTransform1D(shape_el);
-            WriteFill(shape_el);
-            WriteLine(shape_el);
-            WriteEvent(shape_el);
-            WriteLayerMembership(shape_el);
-            WriteTextBlock(shape_el);
-            WriteProtection(shape_el);
-            WriteMisc(shape_el);
-            WriteHyperlinks(shape_el);
-            WriteTextXForm(shape_el);
-            WriteLayout(shape_el);
+            this.WriteTransform(shape_el);
+            this.WriteTransform1D(shape_el);
+            this.WriteFill(shape_el);
+            this.WriteLine(shape_el);
+            this.WriteEvent(shape_el);
+            this.WriteLayerMembership(shape_el);
+            this.WriteTextBlock(shape_el);
+            this.WriteProtection(shape_el);
+            this.WriteMisc(shape_el);
+            this.WriteHyperlinks(shape_el);
+            this.WriteTextXForm(shape_el);
+            this.WriteLayout(shape_el);
 
-            WriteCharFormats(shape_el);
-            WriteParaFormats(shape_el);
+            this.WriteCharFormats(shape_el);
+            this.WriteParaFormats(shape_el);
             // TODO: Add support for Tab Stops in VDX
-            WriteProps(shape_el);
-            WriteGeom(shape_el);
-            WriteText(shape_el);
+            this.WriteProps(shape_el);
+            this.WriteGeom(shape_el);
+            this.WriteText(shape_el);
 
 
             parent.Add(shape_el);
@@ -312,7 +312,7 @@ namespace VisioAutomation.VDX.Elements
         {
             int dynamic_connector_id = doc.GetMasterMetaData("Dynamic Connector").ID;
             var shape_el = new Shape(dynamic_connector_id , false, 0, 0);
-            shape_el.XForm1D = new VA.VDX.Sections.XForm1D();
+            shape_el.XForm1D = new Sections.XForm1D();
             shape_el.XForm1D.BeginX.Formula = "_WALKGLUE(BegTrigger,EndTrigger,WalkPreference)";
             shape_el.XForm1D.BeginX.Result = 0;
             shape_el.XForm1D.BeginY.Formula = "_WALKGLUE(BegTrigger,EndTrigger,WalkPreference)";

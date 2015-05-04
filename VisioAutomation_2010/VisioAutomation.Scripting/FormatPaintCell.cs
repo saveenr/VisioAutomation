@@ -5,13 +5,13 @@ namespace VisioAutomation.Scripting
     public class FormatPaintCell
     {
         public FormatCategory Category { get; private set; }
-        public VA.ShapeSheet.SRC SRC { get; private set; }
+        public ShapeSheet.SRC SRC { get; private set; }
         public string Name;
 
         public string Result { get; set; }
         public string Formula { get; set; }
 
-        public FormatPaintCell(VA.ShapeSheet.SRC src, string name, FormatCategory category)
+        public FormatPaintCell(ShapeSheet.SRC src, string name, FormatCategory category)
         {
             this.Category = category;
             this.Name = name;

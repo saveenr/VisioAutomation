@@ -28,17 +28,17 @@ namespace VisioAutomation.VDX.Elements
 
         public bool? ShowConnectionPoints { get; set; }
 
-        public VA.VDX.Enums.GlueType? GlueSettings { get; set; }
+        public Enums.GlueType? GlueSettings { get; set; }
 
         public SnapType? SnapSettings { get; set; }
 
-        public VA.VDX.Enums.SnapExtensionsType? SnapExtensions { get; set; }
+        public Enums.SnapExtensionsType? SnapExtensions { get; set; }
 
         public int DynamicGridEnabled { get; set; }
 
         public double? TabSplitterPos { get; set; }
 
-        internal void ValidatePage( VA.VDX.Elements.Drawing drawing )
+        internal void ValidatePage( Drawing drawing )
         {
             if (drawing==null)
             {
@@ -60,9 +60,9 @@ namespace VisioAutomation.VDX.Elements
         }
         public override void AddToElement(SXL.XElement parent)
         {
-            string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;
+            string ns_2003 = Internal.Constants.VisioXmlNamespace2003;
 
-            var window_el = VA.VDX.Internal.XMLUtil.CreateVisioSchema2003Element("Window");
+            var window_el = Internal.XMLUtil.CreateVisioSchema2003Element("Window");
             window_el.SetAttributeValue("ID", this.ID);
             window_el.SetAttributeValue("WindowType", "Drawing");
             window_el.SetAttributeValue("ContainerType", "Page");

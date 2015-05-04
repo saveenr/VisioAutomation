@@ -29,7 +29,7 @@ namespace VisioAutomation.Selection
 
             var shapes = new List<IVisio.Shape>();
             var sel_shapes = selection.AsEnumerable();
-            foreach (var shape in VA.Shapes.ShapeHelper.GetNestedShapes(sel_shapes))
+            foreach (var shape in Shapes.ShapeHelper.GetNestedShapes(sel_shapes))
             {
                 if (shape.Type != (short)IVisio.VisShapeTypes.visTypeGroup)
                 {
@@ -39,22 +39,22 @@ namespace VisioAutomation.Selection
             return shapes;
         }
 
-        public static void SendShapes(IVisio.Selection selection, VA.Selection.ShapeSendDirection dir)
+        public static void SendShapes(IVisio.Selection selection, ShapeSendDirection dir)
         {
 
-            if (dir == VA.Selection.ShapeSendDirection.ToBack)
+            if (dir == ShapeSendDirection.ToBack)
             {
                 selection.SendToBack();
             }
-            else if (dir == VA.Selection.ShapeSendDirection.Backward)
+            else if (dir == ShapeSendDirection.Backward)
             {
                 selection.SendBackward();
             }
-            else if (dir == VA.Selection.ShapeSendDirection.Forward)
+            else if (dir == ShapeSendDirection.Forward)
             {
                 selection.BringForward();
             }
-            else if (dir == VA.Selection.ShapeSendDirection.ToFront)
+            else if (dir == ShapeSendDirection.ToFront)
             {
                 selection.BringToFront();
             }

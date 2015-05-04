@@ -26,7 +26,7 @@ namespace VisioAutomation.DOM
 
         IEnumerator IEnumerable.GetEnumerator()     
         {                                           
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         private IEnumerable<T> GetItems()

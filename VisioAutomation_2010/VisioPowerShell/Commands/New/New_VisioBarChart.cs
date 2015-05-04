@@ -34,7 +34,7 @@ namespace VisioPowerShell.Commands
 
         protected VisioAutomation.Drawing.Rectangle GetRectangle()
         {
-            return new VisioAutomation.Drawing.Rectangle(X0, Y0, X1, Y1);
+            return new VisioAutomation.Drawing.Rectangle(this.X0, this.Y0, this.X1, this.Y1);
         }
     }
 }

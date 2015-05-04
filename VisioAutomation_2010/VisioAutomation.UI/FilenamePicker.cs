@@ -11,7 +11,7 @@ namespace VisioAutomation.UI.CommonControls
 
         public FilenamePicker()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         public OpenFileDialog OpenFileDialog
@@ -82,10 +82,10 @@ namespace VisioAutomation.UI.CommonControls
         private void buttonBrowse_Click(object sender, System.EventArgs e)
         {
 
-            var result = openfiledialog.ShowDialog();
+            var result = this.openfiledialog.ShowDialog();
             if (result == DialogResult.OK)
             {
-                this.Filename = openfiledialog.FileName;
+                this.Filename = this.openfiledialog.FileName;
             }
 
         }

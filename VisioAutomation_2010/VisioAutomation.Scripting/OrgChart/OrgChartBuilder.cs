@@ -28,7 +28,7 @@ namespace VisioAutomation.Scripting.OrgChart
                 if (ev.Name == "shape")
                 {
                     string id = ev.Attribute("id").Value;
-                    string parentid = VA.Scripting.XmlUtil.GetAttributeValue(ev, "parentid", null);
+                    string parentid = XmlUtil.GetAttributeValue(ev, "parentid", null);
                     var name = ev.Attribute("name").Value;
 
                     client.WriteVerbose( "Loading shape: {0} {1} {2}", id, name, parentid);

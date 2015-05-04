@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
-        public VA.Drawing.Size GetSize()
+        public Drawing.Size GetSize()
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -105,13 +105,13 @@ namespace VisioAutomation.Scripting.Commands
             var active_page = application.ActivePage;
 
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_height = query.AddCell(VA.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
-            var col_width = query.AddCell(VA.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
+            var query = new ShapeSheet.Query.CellQuery();
+            var col_height = query.AddCell(ShapeSheet.SRCConstants.PageHeight, "PageHeight");
+            var col_width = query.AddCell(ShapeSheet.SRCConstants.PageWidth, "PageWidth");
             var results = query.GetResults<double>(active_page.PageSheet);
             double height = results[col_height];
             double width = results[col_width];
-            var s = new VA.Drawing.Size(width, height);
+            var s = new Drawing.Size(width, height);
             return s;
         }
 
@@ -130,11 +130,11 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name cannot be empty","name");
             }
 
-            var page = Get();
+            var page = this.Get();
             page.NameU = name;
         }
 
-        public IVisio.Page New(VA.Drawing.Size? size, bool isbackgroundpage)
+        public IVisio.Page New(Drawing.Size? size, bool isbackgroundpage)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -144,7 +144,7 @@ namespace VisioAutomation.Scripting.Commands
             var pages = active_document.Pages;
             IVisio.Page page = pages.Add();
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"New Page"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"New Page"))
             {
                 if (size.HasValue)
                 {
@@ -178,7 +178,7 @@ namespace VisioAutomation.Scripting.Commands
             if (!names.Contains(background_page_name))
             {
                 string msg = string.Format("Could not find page with name \"{0}\"", background_page_name);
-                throw new VA.Scripting.VisioOperationException(msg);
+                throw new VisioOperationException(msg);
             }
 
             var bgpage = pages.ItemU[background_page_name];
@@ -196,10 +196,10 @@ namespace VisioAutomation.Scripting.Commands
             if (fgpage == bgpage)
             {
                 string msg = "Cannot set page as its own background page";
-                throw new VA.Scripting.VisioOperationException(msg);
+                throw new VisioOperationException(msg);
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Background Page"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set Background Page"))
             {
                 fgpage.BackPage = bgpage;
             }
@@ -211,7 +211,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Duplicate Page"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Duplicate Page"))
             {
                 var doc = application.ActiveDocument;
                 var pages = doc.Pages;
@@ -220,7 +220,7 @@ namespace VisioAutomation.Scripting.Commands
 
                 var win = application.ActiveWindow;
                 win.Page = src_page;
-                VA.Pages.PageHelper.Duplicate(src_page, new_page);
+                Pages.PageHelper.Duplicate(src_page, new_page);
                 win.Page = new_page;
                 return new_page;
             }
@@ -240,13 +240,13 @@ namespace VisioAutomation.Scripting.Commands
 
             if (application.ActiveDocument == dest_doc)
             {
-                throw new VA.Scripting.VisioOperationException("dest doc is same as active doc");
+                throw new VisioOperationException("dest doc is same as active doc");
             }
 
             var src_page = application.ActivePage;
             var dest_pages = dest_doc.Pages;
             var dest_page = dest_pages[1];
-            VA.Pages.PageHelper.Duplicate(src_page, dest_page);
+            Pages.PageHelper.Duplicate(src_page, dest_page);
 
             // the active window will be to the new document
             var active_window = application.ActiveWindow;
@@ -255,7 +255,7 @@ namespace VisioAutomation.Scripting.Commands
             return dest_page;
         }
 
-        public VA.Pages.PrintPageOrientation GetOrientation()
+        public Pages.PrintPageOrientation GetOrientation()
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -265,7 +265,7 @@ namespace VisioAutomation.Scripting.Commands
             return GetOrientation(active_page);
         }
 
-        private static VA.Pages.PrintPageOrientation GetOrientation(IVisio.Page page)
+        private static Pages.PrintPageOrientation GetOrientation(IVisio.Page page)
         {
             if (page == null)
             {
@@ -273,13 +273,13 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var page_sheet = page.PageSheet;
-            var src = VA.ShapeSheet.SRCConstants.PrintPageOrientation;
+            var src = ShapeSheet.SRCConstants.PrintPageOrientation;
             var orientationcell = page_sheet.CellsSRC[src.Section, src.Row, src.Cell];
             int value = orientationcell.ResultInt[IVisio.VisUnitCodes.visNumber, 0];
-            return (VA.Pages.PrintPageOrientation)value;
+            return (Pages.PrintPageOrientation)value;
         }
 
-        public void SetOrientation(VA.Pages.PrintPageOrientation orientation)
+        public void SetOrientation(Pages.PrintPageOrientation orientation)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -288,7 +288,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = application.ActivePage;
 
-            if (orientation != VA.Pages.PrintPageOrientation.Landscape && orientation != VA.Pages.PrintPageOrientation.Portrait)
+            if (orientation != Pages.PrintPageOrientation.Landscape && orientation != Pages.PrintPageOrientation.Portrait)
             {
                 throw new System.ArgumentOutOfRangeException("orientation", "must be either Portrait or Landscape");
             }
@@ -306,12 +306,12 @@ namespace VisioAutomation.Scripting.Commands
             double new_height = old_size.Width;
             double new_width = old_size.Height;
 
-            var update = new VA.ShapeSheet.Update(3);
-            update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, new_width);
-            update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, new_height);
-            update.SetFormula(VA.ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
+            var update = new ShapeSheet.Update(3);
+            update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_width);
+            update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_height);
+            update.SetFormula(ShapeSheet.SRCConstants.PrintPageOrientation, (int)orientation);
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Page Orientation"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set Page Orientation"))
             {
                 update.Execute(active_page.PageSheet);
             }
@@ -319,19 +319,19 @@ namespace VisioAutomation.Scripting.Commands
 
 
 
-        public void ResizeToFitContents(VA.Drawing.Size bordersize, bool zoom_to_page)
+        public void ResizeToFitContents(Drawing.Size bordersize, bool zoom_to_page)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Resize Page to Fit Contents"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Resize Page to Fit Contents"))
             {
                 var active_page = application.ActivePage;
                 active_page.ResizeToFitContents(bordersize);
                 if (zoom_to_page)
                 {
-                    this.Client.View.Zoom(VA.Scripting.Zoom.ToPage);
+                    this.Client.View.Zoom(Zoom.ToPage);
                 }
             }
         }
@@ -347,32 +347,32 @@ namespace VisioAutomation.Scripting.Commands
                 page = application.ActivePage;
             }
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
 
-            update.SetFormula(VA.ShapeSheet.SRCConstants.XGridOrigin, "0.0");
-            update.SetFormula(VA.ShapeSheet.SRCConstants.YGridOrigin, "0.0");
-            update.SetFormula(VA.ShapeSheet.SRCConstants.XRulerOrigin, "0.0");
-            update.SetFormula(VA.ShapeSheet.SRCConstants.YRulerOrigin, "0.0");
+            update.SetFormula(ShapeSheet.SRCConstants.XGridOrigin, "0.0");
+            update.SetFormula(ShapeSheet.SRCConstants.YGridOrigin, "0.0");
+            update.SetFormula(ShapeSheet.SRCConstants.XRulerOrigin, "0.0");
+            update.SetFormula(ShapeSheet.SRCConstants.YRulerOrigin, "0.0");
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Reset Page Origin"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Reset Page Origin"))
             {
                 update.Execute(page.PageSheet);
             }
         }
 
-        public void SetSize(VA.Drawing.Size new_size)
+        public void SetSize(Drawing.Size new_size)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set Page Size"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set Page Size"))
             {
                 var active_page = application.ActivePage;
                 var page_sheet = active_page.PageSheet;
-                var update = new VA.ShapeSheet.Update(2);
-                update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, new_size.Width);
-                update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, new_size.Height);
+                var update = new ShapeSheet.Update(2);
+                update.SetFormula(ShapeSheet.SRCConstants.PageWidth, new_size.Width);
+                update.SetFormula(ShapeSheet.SRCConstants.PageHeight, new_size.Height);
                 update.Execute(page_sheet);
             }
         }
@@ -391,21 +391,21 @@ namespace VisioAutomation.Scripting.Commands
             var old_size = this.GetSize();
             var w = width.GetValueOrDefault(old_size.Width);
             var h = height.GetValueOrDefault(old_size.Height);
-            var new_size = new VA.Drawing.Size(w, h);
-            SetSize(new_size);
+            var new_size = new Drawing.Size(w, h);
+            this.SetSize(new_size);
         }
 
         public void SetHeight(double height)
         {
-            SetSize(null, height);
+            this.SetSize(null, height);
         }
 
         public void SetWidth(double width)
         {
-            SetSize(width, null);
+            this.SetSize(width, null);
         }
 
-        public void GoTo(VA.Scripting.PageDirection flags)
+        public void GoTo(PageDirection flags)
         {
             this.Client.Application.AssertApplicationAvailable();
 
@@ -434,12 +434,12 @@ namespace VisioAutomation.Scripting.Commands
             var active_document = app.ActiveDocument;
             if (pages.Document != active_document)
             {
-                throw new VA.Scripting.VisioOperationException("Page.Document is not application's ActiveDocument");
+                throw new VisioOperationException("Page.Document is not application's ActiveDocument");
             }
 
             if (pages.Count < 2)
             {
-                throw new VA.Scripting.VisioOperationException("Only 1 page available. Navigation not possible.");
+                throw new VisioOperationException("Only 1 page available. Navigation not possible.");
             }
 
             var activepage = app.ActivePage;
@@ -536,7 +536,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // otherwise we start checking for each name
-            var shapes_list = VA.TextUtil.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, VA.TextUtil.FilterAction.Include).ToList();
+            var shapes_list = TextUtil.FilterObjectsByNames(cached_shapes_list, shapenames, s => s.Name, true, TextUtil.FilterAction.Include).ToList();
 
             return shapes_list;
         }
@@ -554,7 +554,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 // return the named page
                 var pages = active_document.Pages.AsEnumerable();
-                var pages2= VA.TextUtil.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, VA.TextUtil.FilterAction.Include).ToList();
+                var pages2= TextUtil.FilterObjectsByNames(pages, new[] { Name }, p => p.Name, true, TextUtil.FilterAction.Include).ToList();
                 return pages2;
             }
         }

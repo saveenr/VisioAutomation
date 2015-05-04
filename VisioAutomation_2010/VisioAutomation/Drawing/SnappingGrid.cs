@@ -4,38 +4,38 @@ namespace VisioAutomation.Drawing
 {
     public class SnappingGrid
     {
-        public VA.Drawing.Size SnapSize { get; private set; }
+        public Size SnapSize { get; private set; }
         
         public SnappingGrid(double w, double h)
         {
-            this.SnapSize = new VA.Drawing.Size(w, h);
+            this.SnapSize = new Size(w, h);
         }
 
-        public SnappingGrid( VA.Drawing.Size size)
+        public SnappingGrid( Size size)
         {
             this.SnapSize = size;
         }
 
-        public VA.Drawing.Size Snap(VA.Drawing.Size size)
+        public Size Snap(Size size)
         {
             double x;
             double y;
             this.SnapXY(size.Width,size.Height,out x, out y);
-            return new VA.Drawing.Size(x, y);            
+            return new Size(x, y);            
         }
 
-        public VA.Drawing.Point Snap(VA.Drawing.Point point)
+        public Point Snap(Point point)
         {
             double x;
             double y;
             this.SnapXY(point.X,point.Y,out x, out y);
-            return new VA.Drawing.Point(x, y);
+            return new Point(x, y);
         }
 
-        public VA.Drawing.Point Snap(double x, double y)
+        public Point Snap(double x, double y)
         {
             this.SnapXY(x, y, out x, out y);
-            return new VA.Drawing.Point(x, y);
+            return new Point(x, y);
         }
 
         private void SnapXY(double x, double y, out double sx, out double sy)
@@ -46,7 +46,7 @@ namespace VisioAutomation.Drawing
 
         private double Round(double val, double snap_val)
         {
-            return Round(val, System.MidpointRounding.AwayFromZero, snap_val);
+            return this.Round(val, System.MidpointRounding.AwayFromZero, snap_val);
         }
 
         /// <summary>

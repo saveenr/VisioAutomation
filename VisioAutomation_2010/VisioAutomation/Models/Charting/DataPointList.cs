@@ -46,7 +46,7 @@ namespace VisioAutomation.Models.Charting
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public DataPoint this[int index]

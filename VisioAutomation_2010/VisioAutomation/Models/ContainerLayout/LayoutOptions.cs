@@ -19,12 +19,12 @@
 
         public LayoutOptions()
         {
-            ContainerHeaderHeight = 0.25;
-            Padding = 0.125;
-            ItemVerticalSpacing = 0.125;
-            ItemHeight = 0.25;
-            ContainerHorizontalDistance = 1.0;
-            ItemWidth = 2.0;
+            this.ContainerHeaderHeight = 0.25;
+            this.Padding = 0.125;
+            this.ItemVerticalSpacing = 0.125;
+            this.ItemHeight = 0.25;
+            this.ContainerHorizontalDistance = 1.0;
+            this.ItemWidth = 2.0;
             this.ContainerFormatting = new Formatting();
             this.ContainerItemFormatting = new Formatting();
             this.ContainerFormatting.TextCells.VerticalAlign = "0";

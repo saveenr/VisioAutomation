@@ -1,6 +1,6 @@
 namespace VisioAutomation
 {
-    [global::System.Serializable]
+    [System.Serializable]
     public class AutomationException : System.Exception
     {
         // For guidelines regarding the creation of new exception types, see

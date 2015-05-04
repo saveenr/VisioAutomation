@@ -35,7 +35,7 @@ namespace TestVisioAutomationVDX
             }
 
             var time = System.DateTime.Now;
-            TryOpen(app.Documents, filename); // this causes the doc to load no matter what the error 
+            this.TryOpen(app.Documents, filename); // this causes the doc to load no matter what the error 
 
             VA.Application.Logging.XmlErrorLog log_after = null;
             if (System.IO.File.Exists(logfilename))
@@ -135,7 +135,7 @@ namespace TestVisioAutomationVDX
             doc.Save(output_filename);
             
             // Verify this file can be loaded
-            VerifyDocCanBeLoaded(output_filename);
+            this.VerifyDocCanBeLoaded(output_filename);
         }
 
         [TestMethod]
@@ -262,7 +262,7 @@ namespace TestVisioAutomationVDX
 
             doc.Save(output_filename);
 
-            VerifyDocCanBeLoaded(output_filename);
+            this.VerifyDocCanBeLoaded(output_filename);
         }
 
         [TestMethod]
@@ -272,8 +272,8 @@ namespace TestVisioAutomationVDX
             var folder = this.TestResultsOutFolder;
             
             string input_filename = this.GetTestResultsOutPath(@"datafiles\template_router.vdx");
-            
-            VerifyDocCanBeLoaded(input_filename);
+
+            this.VerifyDocCanBeLoaded(input_filename);
         }
 
 
@@ -288,7 +288,7 @@ namespace TestVisioAutomationVDX
             var version = VA.Application.ApplicationHelper.GetVersion(app);
             string logfilename = VA.Application.ApplicationHelper.GetXMLErrorLogFilename(app);
 
-            var doc = TryOpen(app.Documents, input_filename);
+            var doc = this.TryOpen(app.Documents, input_filename);
             
             // See what happened
             var log_after = new VA.Application.Logging.XmlErrorLog(logfilename);

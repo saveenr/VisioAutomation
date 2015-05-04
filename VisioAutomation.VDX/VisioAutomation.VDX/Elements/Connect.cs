@@ -17,10 +17,10 @@ namespace VisioAutomation.VDX.Elements
                 throw new System.ArgumentException("from_cell cannot be null or empty", "from_cell");
             }
 
-            FromSheet = from_shape.ID;
-            FromCell = from_cell;
-            ToSheet = to_shape.ID;
-            ToCell = to_cell;
+            this.FromSheet = from_shape.ID;
+            this.FromCell = from_cell;
+            this.ToSheet = to_shape.ID;
+            this.ToCell = to_cell;
         }
 
         public int FromSheet { get; set; }
@@ -33,28 +33,28 @@ namespace VisioAutomation.VDX.Elements
         public void AddToElement(SXL.XElement parent)
         {
             var connect_el = XMLUtil.CreateVisioSchema2003Element("Connect");
-            connect_el.SetAttributeValue("FromSheet", FromSheet);
+            connect_el.SetAttributeValue("FromSheet", this.FromSheet);
 
             if (this.FromCell != null)
             {
-                connect_el.SetAttributeValue("FromCell", FromCell);
+                connect_el.SetAttributeValue("FromCell", this.FromCell);
             }
 
             if (this.FromPart.HasValue)
             {
-                connect_el.SetAttributeValue("FromPart", FromPart.Value);
+                connect_el.SetAttributeValue("FromPart", this.FromPart.Value);
             }
 
-            connect_el.SetAttributeValue("ToSheet", ToSheet);
+            connect_el.SetAttributeValue("ToSheet", this.ToSheet);
 
             if (this.ToCell != null)
             {
-                connect_el.SetAttributeValue("ToCell", ToCell);
+                connect_el.SetAttributeValue("ToCell", this.ToCell);
             }
 
             if (this.ToPart.HasValue)
             {
-                connect_el.SetAttributeValue("ToPart", ToPart.Value);
+                connect_el.SetAttributeValue("ToPart", this.ToPart.Value);
             }
 
             parent.Add(connect_el);

@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            this.client.Text.Set(this.Shapes, Text);
+            this.client.Text.Set(this.Shapes, this.Text);
         }
     }
 }

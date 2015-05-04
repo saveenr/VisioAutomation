@@ -12,7 +12,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_SetCustomProps1()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
@@ -42,7 +42,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_SetSamePropMultipleTimes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
@@ -73,7 +73,7 @@ namespace TestVisioAutomation
         public void CustomProps_InvalidPropName()
         {
             bool caught = false;
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             Assert.AreEqual(0, VACUSTPROP.CustomPropertyHelper.Get(s1).Count);
             try
@@ -95,7 +95,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_VerifyCustomPropAttributes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             var in_cp = new VACUSTPROP.CustomPropertyCells();
@@ -115,7 +115,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_PropertyNames()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 
             Assert.AreEqual(0, VACUSTPROP.CustomPropertyHelper.GetCount(s1));
@@ -155,7 +155,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_GetFromMultipleShapes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
             var s2 = page1.DrawRectangle(0, 0, 2, 2);
             var s3 = page1.DrawRectangle(0, 0, 2, 2);
@@ -190,7 +190,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_TryAllTypes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
 

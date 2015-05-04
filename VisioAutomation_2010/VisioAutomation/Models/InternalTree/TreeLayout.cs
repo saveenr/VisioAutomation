@@ -32,7 +32,7 @@ namespace VisioAutomation.Models.InternalTree
         private Dictionary<int, double> max_level_height;
         private Dictionary<int, double> max_level_width;
         private Dictionary<int, Node<T>> previous_level_node;
-        private VA.Drawing.Point root_offset;
+        private Drawing.Point root_offset;
         private readonly Node<T> root;
 
         public TreeLayoutOptions Options { get; set; }
@@ -45,7 +45,7 @@ namespace VisioAutomation.Models.InternalTree
         public TreeLayout()
         {
             this.Options = new TreeLayoutOptions();
-            root = new Node<T>(-1, null, this.Options.DefaultNodeSize);
+            this.root = new Node<T>(-1, null, this.Options.DefaultNodeSize);
         }
 
         public IEnumerable<Node<T>> Nodes
@@ -56,29 +56,29 @@ namespace VisioAutomation.Models.InternalTree
 
         private void set_level_height(Node<T> node, int level)
         {
-            max_level_height[level] = System.Math.Max(DictionaryUtil.GetValue(max_level_height, level, 0),
+            this.max_level_height[level] = System.Math.Max(DictionaryUtil.GetValue(this.max_level_height, level, 0),
                                                       node.Size.Height);
         }
 
         private void set_level_width(Node<T> node, int level)
         {
-            max_level_width[level] = System.Math.Max(DictionaryUtil.GetValue(max_level_width, level, 0), node.Size.Width);
+            this.max_level_width[level] = System.Math.Max(DictionaryUtil.GetValue(this.max_level_width, level, 0), node.Size.Width);
         }
 
         private void set_neighbors(Node<T> node, int level)
         {
-            node.left_neighbor = DictionaryUtil.GetValue(previous_level_node, level, null);
+            node.left_neighbor = DictionaryUtil.GetValue(this.previous_level_node, level, null);
             if (node.left_neighbor != null)
             {
-                node.left_neighbor = previous_level_node[level];
+                node.left_neighbor = this.previous_level_node[level];
                 node.left_neighbor.right_neighbor = node;
             }
-            previous_level_node[level] = node;
+            this.previous_level_node[level] = node;
         }
 
         public double GetNodeSize(Node<T> node)
         {
-            switch (Options.Direction)
+            switch (this.Options.Direction)
             {
                 case LayoutDirection.Up:
                     return node.Size.Width;
@@ -167,7 +167,7 @@ namespace VisioAutomation.Models.InternalTree
             }
         }
 
-        public VA.Drawing.Rectangle GetBoundingBoxOfTree()
+        public Drawing.Rectangle GetBoundingBoxOfTree()
         {
             if (this.Root.ChildCount < 1)
             {
@@ -175,7 +175,7 @@ namespace VisioAutomation.Models.InternalTree
             }
             var nodes = this.Nodes.ToList();
 
-            var bb = new VA.Drawing.BoundingBox(nodes.Select(n => n.Rect));
+            var bb = new Drawing.BoundingBox(nodes.Select(n => n.Rect));
             if (!bb.HasValue)
             {
                 throw new System.InvalidOperationException("Internal Error: Could not compute bounding box");
@@ -212,7 +212,7 @@ namespace VisioAutomation.Models.InternalTree
         //Layout algorithm
         private void first_walk(Node<T> node, int level)
         {
-            node.Position = new VA.Drawing.Point(0, 0);
+            node.Position = new Drawing.Point(0, 0);
             node.prelim_x = 0;
             node.modifier = 0;
             node.left_neighbor = null;
@@ -249,7 +249,7 @@ namespace VisioAutomation.Models.InternalTree
 
                 foreach (var child  in node.EnumChildren())
                 {
-                    first_walk(child, level + 1);
+                    this.first_walk(child, level + 1);
                 }
 
                 /* Calculate the preliminary value between   */
@@ -263,7 +263,7 @@ namespace VisioAutomation.Models.InternalTree
                                     this.GetNodeSize(node.LeftSibling) +
                                     this.Options.SiblingSeparation;
                     node.modifier = node.prelim_x - midPoint;
-                    apportion(node, level);
+                    this.apportion(node, level);
                 }
                 else
                 {
@@ -272,7 +272,7 @@ namespace VisioAutomation.Models.InternalTree
             }
         }
 
-        private void second_walk(Node<T> node, int level, VA.Drawing.Point p)
+        private void second_walk(Node<T> node, int level, Drawing.Point p)
         {
             /*------------------------------------------------------
                 * During a second pre-order walk, each node is given a
@@ -311,15 +311,15 @@ namespace VisioAutomation.Models.InternalTree
             }
             switch (this.Options.Alignment)
             {
-                case VA.Drawing.AlignmentVertical.Top:
+                case Drawing.AlignmentVertical.Top:
                     node.Position = temp_point;
                     break;
 
-                case VA.Drawing.AlignmentVertical.Center:
+                case Drawing.AlignmentVertical.Center:
                     node.Position = temp_point.Add(0, (maxsizeTmp - nodesizeTmp)/2.0);
                     break;
 
-                case VA.Drawing.AlignmentVertical.Bottom:
+                case Drawing.AlignmentVertical.Bottom:
                     node.Position = temp_point.Add(0, maxsizeTmp - nodesizeTmp);
                     break;
             }
@@ -327,19 +327,19 @@ namespace VisioAutomation.Models.InternalTree
             if (flag)
             {
                 // QUESTION: Why is this step performed?
-                node.Position = new VA.Drawing.Point(node.Position.Y, node.Position.X);
+                node.Position = new Drawing.Point(node.Position.Y, node.Position.X);
             }
 
             switch (this.Options.Direction)
             {
                 case LayoutDirection.Down:
                     {
-                        node.Position = new VA.Drawing.Point(node.Position.X, -node.Position.Y - nodesizeTmp);
+                        node.Position = new Drawing.Point(node.Position.X, -node.Position.Y - nodesizeTmp);
                         break;
                     }
                 case LayoutDirection.Left:
                     {
-                        node.Position = new VA.Drawing.Point(-node.Position.X - nodesizeTmp, node.Position.Y);
+                        node.Position = new Drawing.Point(-node.Position.X - nodesizeTmp, node.Position.Y);
                         break;
                     }
             }
@@ -350,12 +350,12 @@ namespace VisioAutomation.Models.InternalTree
                 /* node to all its offspring.             */
 
                 var np = p.Add(node.modifier, maxsizeTmp + this.Options.LevelSeparation);
-                second_walk(node.FirstChild, level + 1, np);
+                this.second_walk(node.FirstChild, level + 1, np);
             }
 
             if (node.RightSibling != null)
             {
-                second_walk(node.RightSibling, level, p);
+                this.second_walk(node.RightSibling, level, p);
             }
         }
 
@@ -370,23 +370,23 @@ namespace VisioAutomation.Models.InternalTree
              * Returns: TRUE if no errors, otherwise returns FALSE.
              *----------------------------------------------------*/
 
-            max_level_height = new Dictionary<int, double>();
-            max_level_width = new Dictionary<int, double>();
-            previous_level_node = new Dictionary<int, Node<T>>();
+            this.max_level_height = new Dictionary<int, double>();
+            this.max_level_width = new Dictionary<int, double>();
+            this.previous_level_node = new Dictionary<int, Node<T>>();
 
-            first_walk(root, 0);
+            this.first_walk(this.root, 0);
 
             //adjust the root_offset
             // NOTE: in the original code this was a case statement on Options.Direction that did the same thing for each direction 
-            root_offset = Options.TopAdjustment + root.Position;
+            this.root_offset = this.Options.TopAdjustment + this.root.Position;
 
-            second_walk(root, 0, new VA.Drawing.Point(0, 0));
+            this.second_walk(this.root, 0, new Drawing.Point(0, 0));
 
-            max_level_height = null;
-            max_level_width = null;
-            previous_level_node = null;
+            this.max_level_height = null;
+            this.max_level_width = null;
+            this.previous_level_node = null;
 
-            correct_tree_bounding_box();
+            this.correct_tree_bounding_box();
         }
 
         private void correct_tree_bounding_box()
@@ -424,7 +424,7 @@ namespace VisioAutomation.Models.InternalTree
             }
         }
 
-        private static double GetSide(VA.Drawing.Rectangle r, LayoutDirection direction)
+        private static double GetSide(Drawing.Rectangle r, LayoutDirection direction)
         {
             switch (direction)
             {
@@ -478,7 +478,7 @@ namespace VisioAutomation.Models.InternalTree
             }
         }
 
-        public VA.Drawing.LineSegment GetConnectionLine(ParentChildConnection<Node<T>> connection)
+        public Drawing.LineSegment GetConnectionLine(ParentChildConnection<Node<T>> connection)
         {
             var parent_rect = connection.Parent.Rect;
             var child_rect = connection.Child.Rect;
@@ -506,10 +506,10 @@ namespace VisioAutomation.Models.InternalTree
                 child_y = child_rect.Center.Y;
             }
 
-            var parent_attach_point = new VA.Drawing.Point(parent_x, parent_y);
-            var child_attach_point = new VA.Drawing.Point(child_x, child_y);
+            var parent_attach_point = new Drawing.Point(parent_x, parent_y);
+            var child_attach_point = new Drawing.Point(child_x, child_y);
 
-            return new VA.Drawing.LineSegment(parent_attach_point, child_attach_point);
+            return new Drawing.LineSegment(parent_attach_point, child_attach_point);
         }
 
         public static bool IsVertical(LayoutDirection direction)
@@ -517,14 +517,14 @@ namespace VisioAutomation.Models.InternalTree
             return (direction == LayoutDirection.Up || direction == LayoutDirection.Down);
         }
 
-        public VA.Drawing.Point[] GetConnectionPolyline(ParentChildConnection<Node<T>> connection)
+        public Drawing.Point[] GetConnectionPolyline(ParentChildConnection<Node<T>> connection)
         {
             var lineseg = this.GetConnectionLine(connection);
-            VA.Drawing.Point m0, m1;
+            Drawing.Point m0, m1;
 
-            VA.Drawing.Point parent_attach_point = lineseg.Start;
-            VA.Drawing.Point child_attach_point = lineseg.End;
-            VA.Drawing.Point dif = lineseg.End - lineseg.Start;
+            Drawing.Point parent_attach_point = lineseg.Start;
+            Drawing.Point child_attach_point = lineseg.End;
+            Drawing.Point dif = lineseg.End - lineseg.Start;
             double a = (this.Options.LevelSeparation/2.0);
             double b = (this.Options.LevelSeparation/2.0);
             if (IsVertical(this.Options.Direction))
@@ -533,8 +533,8 @@ namespace VisioAutomation.Models.InternalTree
                 {
                     b = -b;
                 }
-                m0 = new VA.Drawing.Point(lineseg.Start.X, lineseg.End.Y + b);
-                m1 = new VA.Drawing.Point(lineseg.End.X, lineseg.End.Y + b);
+                m0 = new Drawing.Point(lineseg.Start.X, lineseg.End.Y + b);
+                m1 = new Drawing.Point(lineseg.End.X, lineseg.End.Y + b);
             }
             else
             {
@@ -542,30 +542,30 @@ namespace VisioAutomation.Models.InternalTree
                 {
                     a = -a;
                 }
-                m0 = new VA.Drawing.Point(lineseg.End.X - a, lineseg.Start.Y);
-                m1 = new VA.Drawing.Point(lineseg.End.X - a, lineseg.End.Y);
+                m0 = new Drawing.Point(lineseg.End.X - a, lineseg.Start.Y);
+                m1 = new Drawing.Point(lineseg.End.X - a, lineseg.End.Y);
             }
 
             return new[] {lineseg.Start, m0, m1, lineseg.End};
         }
 
-        public VA.Drawing.Point[] GetConnectionBezier(ParentChildConnection<Node<T>> connection)
+        public Drawing.Point[] GetConnectionBezier(ParentChildConnection<Node<T>> connection)
         {
             var lineseg = this.GetConnectionLine(connection);
 
-            VA.Drawing.Point parent_attach_point = lineseg.Start;
-            VA.Drawing.Point child_attach_point = lineseg.End;
+            Drawing.Point parent_attach_point = lineseg.Start;
+            Drawing.Point child_attach_point = lineseg.End;
 
             double scale = this.Options.LevelSeparation/2.0;
             var dif = child_attach_point.Subtract(parent_attach_point).Multiply(scale);
 
 
             var handle_displacement = IsVertical(this.Options.Direction)
-                                          ? new VA.Drawing.Point(0, dif.Y)
-                                          : new VA.Drawing.Point(dif.X, 0);
+                                          ? new Drawing.Point(0, dif.Y)
+                                          : new Drawing.Point(dif.X, 0);
 
-            VA.Drawing.Point h1 = parent_attach_point.Add(handle_displacement);
-            VA.Drawing.Point h2 = child_attach_point.Add(handle_displacement * (-1));
+            Drawing.Point h1 = parent_attach_point.Add(handle_displacement);
+            Drawing.Point h2 = child_attach_point.Add(handle_displacement * (-1));
 
             return new[] {parent_attach_point, h1, h2, child_attach_point};
         }
@@ -574,22 +574,22 @@ namespace VisioAutomation.Models.InternalTree
             TA root,
             System.Func<TA, IEnumerable<TA>> enum_children,
             System.Func<TA, T> func_get_data,
-            System.Func<TA, VA.Drawing.Size> func_get_size)
+            System.Func<TA, Drawing.Size> func_get_size)
         {
-            var walkevents = VA.Internal.TreeOps.Walk<TA>(root, n => enum_children(n));
+            var walkevents = Internal.TreeOps.Walk<TA>(root, n => enum_children(n));
             return CreateLayoutTree(walkevents, func_get_data, func_get_size);
         }
 
         private static Node<T> CreateLayoutTree<TA>(
-            IEnumerable<VA.Internal.WalkEvent<TA>> walkevents,
+            IEnumerable<Internal.WalkEvent<TA>> walkevents,
             System.Func<TA, T> func_get_data,
-            System.Func<TA, VA.Drawing.Size> func_get_size)
+            System.Func<TA, Drawing.Size> func_get_size)
         {
             var stack = new Stack<Node<T>>();
             Node<T> layout_root = null;
             foreach (var walkevent in walkevents)
             {
-                if (walkevent.Type == VA.Internal.WalkEvent<TA>.WalkEventType.Enter)
+                if (walkevent.Type == Internal.WalkEvent<TA>.WalkEventType.Enter)
                 {
                     Node<T> parent = null;
                     if (stack.Count > 0)
@@ -612,7 +612,7 @@ namespace VisioAutomation.Models.InternalTree
                         layout_root = layout_node;
                     }
                 }
-                else if (walkevent.Type == VA.Internal.WalkEvent<TA>.WalkEventType.Exit)
+                else if (walkevent.Type == Internal.WalkEvent<TA>.WalkEventType.Exit)
                 {
                     var layout_node = stack.Pop();
                 }

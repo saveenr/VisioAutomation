@@ -13,7 +13,7 @@ namespace VisioAutomation.Models.Forms
         private FormPage FormPage;
 
         public List<TextBlock> Blocks;
-        public VA.Drawing.Point InsertionPoint;
+        public Drawing.Point InsertionPoint;
 
         public InteractiveRenderer(IVisio.Document doc)
         {
@@ -29,10 +29,10 @@ namespace VisioAutomation.Models.Forms
             this.page.Name = formpage.Name;
 
             // Update the Page Cells
-            var pagesheet = page.PageSheet;
-            var pageupdate = new VA.ShapeSheet.Update();
+            var pagesheet = this.page.PageSheet;
+            var pageupdate = new ShapeSheet.Update();
 
-            var pagecells = new VA.Pages.PageCells();
+            var pagecells = new Pages.PageCells();
             pagecells.PageWidth = formpage.Size.Width;
             pagecells.PageHeight = formpage.Size.Height;
             pagecells.PageLeftMargin = formpage.Margin.Left;
@@ -50,18 +50,18 @@ namespace VisioAutomation.Models.Forms
         public void Reset()
         {
             this.Blocks = new List<TextBlock>();
-            ResetInsertionPoint();
+            this.ResetInsertionPoint();
         }
 
         private void ResetInsertionPoint()
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left,
+            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left,
                 this.FormPage.Size.Height - this.FormPage.Margin.Top);
         }
 
         public TextBlock AddShape(double w, double h, string text)
         {
-            var tb = new TextBlock(new VA.Drawing.Size(w, h), text);
+            var tb = new TextBlock(new Drawing.Size(w, h), text);
             this.AddShape(tb);
             return tb;
         }
@@ -72,9 +72,9 @@ namespace VisioAutomation.Models.Forms
             this.Blocks.Add(block);
 
             // Calculate the Correct Full Rectangle
-            var ll = new VA.Drawing.Point(this.InsertionPoint.X, this.InsertionPoint.Y - block.Size.Height);
-            var tr = new VA.Drawing.Point(this.InsertionPoint.X + block.Size.Width, this.InsertionPoint.Y);
-            var rect = new VA.Drawing.Rectangle(ll, tr);
+            var ll = new Drawing.Point(this.InsertionPoint.X, this.InsertionPoint.Y - block.Size.Height);
+            var tr = new Drawing.Point(this.InsertionPoint.X + block.Size.Width, this.InsertionPoint.Y);
+            var rect = new Drawing.Rectangle(ll, tr);
 
             // Draw the Shape
             var newshape = this.page.DrawRectangle(rect);
@@ -95,7 +95,7 @@ namespace VisioAutomation.Models.Forms
 
         public void Finish()
         {
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             foreach (var block in this.Blocks)
             {
                 update.SetFormulas((short)block.VisioShapeID,block.FormatCells);
@@ -106,7 +106,7 @@ namespace VisioAutomation.Models.Forms
             update.Execute(this.page);
         }
 
-        private void AdjustInsertionPoint(VA.Drawing.Size size)
+        private void AdjustInsertionPoint(Drawing.Size size)
         {
             this.InsertionPoint = this.InsertionPoint.Add(size.Width, 0);
             this.CurrentLineHeight = System.Math.Max(this.CurrentLineHeight, size.Height);
@@ -114,26 +114,26 @@ namespace VisioAutomation.Models.Forms
 
         public void Linefeed()
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight);
+            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight);
             this.CurrentLineHeight = 0;
         }
 
         public void Linefeed(double advance)
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight - advance);
+            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y - this.CurrentLineHeight - advance);
             this.CurrentLineHeight = 0;
         }
 
         public void MoveRight(double advance)
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.InsertionPoint.X + advance, this.InsertionPoint.Y);
+            this.InsertionPoint = new Drawing.Point(this.InsertionPoint.X + advance, this.InsertionPoint.Y);
             
         }
 
 
         public void CarriageReturn()
         {
-            this.InsertionPoint = new VA.Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y);
+            this.InsertionPoint = new Drawing.Point(this.FormPage.Margin.Left, this.InsertionPoint.Y);
         }
 
         public double GetDistanceToBottomMargin()

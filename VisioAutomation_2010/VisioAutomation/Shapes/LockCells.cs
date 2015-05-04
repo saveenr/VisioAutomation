@@ -6,53 +6,53 @@ using VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
-    public class LockCells : VA.ShapeSheet.CellGroups.CellGroup
+    public class LockCells : ShapeSheet.CellGroups.CellGroup
     {
-        public VA.ShapeSheet.CellData<bool> LockAspect { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockBegin { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockCalcWH { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockCrop { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockCustProp { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockDelete { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockEnd { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockFormat { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockFromGroupFormat { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockGroup { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockHeight { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockMoveX { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockMoveY { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockRotate { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockSelect { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockTextEdit { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockThemeColors { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockThemeEffects { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
-        public VA.ShapeSheet.CellData<bool> LockWidth { get; set; }
+        public ShapeSheet.CellData<bool> LockAspect { get; set; }
+        public ShapeSheet.CellData<bool> LockBegin { get; set; }
+        public ShapeSheet.CellData<bool> LockCalcWH { get; set; }
+        public ShapeSheet.CellData<bool> LockCrop { get; set; }
+        public ShapeSheet.CellData<bool> LockCustProp { get; set; }
+        public ShapeSheet.CellData<bool> LockDelete { get; set; }
+        public ShapeSheet.CellData<bool> LockEnd { get; set; }
+        public ShapeSheet.CellData<bool> LockFormat { get; set; }
+        public ShapeSheet.CellData<bool> LockFromGroupFormat { get; set; }
+        public ShapeSheet.CellData<bool> LockGroup { get; set; }
+        public ShapeSheet.CellData<bool> LockHeight { get; set; }
+        public ShapeSheet.CellData<bool> LockMoveX { get; set; }
+        public ShapeSheet.CellData<bool> LockMoveY { get; set; }
+        public ShapeSheet.CellData<bool> LockRotate { get; set; }
+        public ShapeSheet.CellData<bool> LockSelect { get; set; }
+        public ShapeSheet.CellData<bool> LockTextEdit { get; set; }
+        public ShapeSheet.CellData<bool> LockThemeColors { get; set; }
+        public ShapeSheet.CellData<bool> LockThemeEffects { get; set; }
+        public ShapeSheet.CellData<bool> LockVtxEdit { get; set; }
+        public ShapeSheet.CellData<bool> LockWidth { get; set; }
 
         public override IEnumerable<SRCFormulaPair> Pairs
         {
             get
             {
-                yield return newpair(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockCalcWH, this.LockCalcWH.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockCrop, this.LockCrop.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockCustProp, this.LockCustProp.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockDelete, this.LockDelete.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockEnd, this.LockEnd.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockFormat, this.LockFormat.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockFromGroupFormat, this.LockFromGroupFormat.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockGroup, this.LockGroup.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockHeight, this.LockHeight.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockMoveX, this.LockMoveX.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockMoveY, this.LockMoveY.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockRotate, this.LockRotate.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockSelect, this.LockSelect.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockTextEdit, this.LockTextEdit.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockThemeColors, this.LockThemeColors.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockThemeEffects, this.LockThemeEffects.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockVtxEdit, this.LockVtxEdit.Formula);
-                yield return newpair(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockAspect, this.LockAspect.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockBegin, this.LockBegin.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockCalcWH, this.LockCalcWH.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockCrop, this.LockCrop.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockCustProp, this.LockCustProp.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockDelete, this.LockDelete.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockEnd, this.LockEnd.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockFormat, this.LockFormat.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockFromGroupFormat, this.LockFromGroupFormat.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockGroup, this.LockGroup.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockHeight, this.LockHeight.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockMoveX, this.LockMoveX.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockMoveY, this.LockMoveY.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockRotate, this.LockRotate.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockSelect, this.LockSelect.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockTextEdit, this.LockTextEdit.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockThemeColors, this.LockThemeColors.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockThemeEffects, this.LockThemeEffects.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockVtxEdit, this.LockVtxEdit.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.LockWidth, this.LockWidth.Formula);
             }
         }
 
@@ -77,7 +77,7 @@ namespace VisioAutomation.Shapes
             return _mCellQuery;
         }
 
-        class LockCellQuery : VA.ShapeSheet.Query.CellQuery
+        class LockCellQuery : CellQuery
         {
             public CellColumn LockAspect { get; set; }
             public CellColumn LockBegin { get; set; }
@@ -102,30 +102,30 @@ namespace VisioAutomation.Shapes
 
             public LockCellQuery() 
             {
-                this.LockAspect = this.AddCell(VA.ShapeSheet.SRCConstants.LockAspect, "LockAspect");
-                this.LockBegin = this.AddCell(VA.ShapeSheet.SRCConstants.LockBegin, "LockBegin");
-                this.LockCalcWH = this.AddCell(VA.ShapeSheet.SRCConstants.LockCalcWH, "LockCalcWH");
-                this.LockCrop = this.AddCell(VA.ShapeSheet.SRCConstants.LockCrop, "LockCrop");
-                this.LockCustProp = this.AddCell(VA.ShapeSheet.SRCConstants.LockCustProp, "LockCustProp");
-                this.LockDelete = this.AddCell(VA.ShapeSheet.SRCConstants.LockDelete, "LockDelete");
-                this.LockEnd = this.AddCell(VA.ShapeSheet.SRCConstants.LockEnd, "LockEnd");
-                this.LockFormat = this.AddCell(VA.ShapeSheet.SRCConstants.LockFormat, "LockFormat");
-                this.LockFromGroupFormat = this.AddCell(VA.ShapeSheet.SRCConstants.LockFromGroupFormat, "LockFromGroupFormat");
-                this.LockGroup = this.AddCell(VA.ShapeSheet.SRCConstants.LockGroup, "LockGroup");
-                this.LockHeight = this.AddCell(VA.ShapeSheet.SRCConstants.LockHeight, "LockHeight");
-                this.LockMoveX = this.AddCell(VA.ShapeSheet.SRCConstants.LockMoveX, "LockMoveX");
-                this.LockMoveY = this.AddCell(VA.ShapeSheet.SRCConstants.LockMoveY, "LockMoveY");
-                this.LockRotate = this.AddCell(VA.ShapeSheet.SRCConstants.LockRotate, "LockRotate");
-                this.LockSelect = this.AddCell(VA.ShapeSheet.SRCConstants.LockSelect, "LockSelect");
-                this.LockTextEdit = this.AddCell(VA.ShapeSheet.SRCConstants.LockTextEdit, "LockTextEdit");
-                this.LockThemeColors = this.AddCell(VA.ShapeSheet.SRCConstants.LockThemeColors, "LockThemeColors");
-                this.LockThemeEffects = this.AddCell(VA.ShapeSheet.SRCConstants.LockThemeEffects, "LockThemeEffects");
-                this.LockVtxEdit = this.AddCell(VA.ShapeSheet.SRCConstants.LockVtxEdit, "LockVtxEdit");
-                this.LockWidth = this.AddCell(VA.ShapeSheet.SRCConstants.LockWidth, "LockWidth");
+                this.LockAspect = this.AddCell(ShapeSheet.SRCConstants.LockAspect, "LockAspect");
+                this.LockBegin = this.AddCell(ShapeSheet.SRCConstants.LockBegin, "LockBegin");
+                this.LockCalcWH = this.AddCell(ShapeSheet.SRCConstants.LockCalcWH, "LockCalcWH");
+                this.LockCrop = this.AddCell(ShapeSheet.SRCConstants.LockCrop, "LockCrop");
+                this.LockCustProp = this.AddCell(ShapeSheet.SRCConstants.LockCustProp, "LockCustProp");
+                this.LockDelete = this.AddCell(ShapeSheet.SRCConstants.LockDelete, "LockDelete");
+                this.LockEnd = this.AddCell(ShapeSheet.SRCConstants.LockEnd, "LockEnd");
+                this.LockFormat = this.AddCell(ShapeSheet.SRCConstants.LockFormat, "LockFormat");
+                this.LockFromGroupFormat = this.AddCell(ShapeSheet.SRCConstants.LockFromGroupFormat, "LockFromGroupFormat");
+                this.LockGroup = this.AddCell(ShapeSheet.SRCConstants.LockGroup, "LockGroup");
+                this.LockHeight = this.AddCell(ShapeSheet.SRCConstants.LockHeight, "LockHeight");
+                this.LockMoveX = this.AddCell(ShapeSheet.SRCConstants.LockMoveX, "LockMoveX");
+                this.LockMoveY = this.AddCell(ShapeSheet.SRCConstants.LockMoveY, "LockMoveY");
+                this.LockRotate = this.AddCell(ShapeSheet.SRCConstants.LockRotate, "LockRotate");
+                this.LockSelect = this.AddCell(ShapeSheet.SRCConstants.LockSelect, "LockSelect");
+                this.LockTextEdit = this.AddCell(ShapeSheet.SRCConstants.LockTextEdit, "LockTextEdit");
+                this.LockThemeColors = this.AddCell(ShapeSheet.SRCConstants.LockThemeColors, "LockThemeColors");
+                this.LockThemeEffects = this.AddCell(ShapeSheet.SRCConstants.LockThemeEffects, "LockThemeEffects");
+                this.LockVtxEdit = this.AddCell(ShapeSheet.SRCConstants.LockVtxEdit, "LockVtxEdit");
+                this.LockWidth = this.AddCell(ShapeSheet.SRCConstants.LockWidth, "LockWidth");
 
             }
 
-            public LockCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
+            public LockCells GetCells(IList<ShapeSheet.CellData<double>> row)
             {
                 var cells = new LockCells();
                 cells.LockAspect = row[this.LockAspect].ToBool();

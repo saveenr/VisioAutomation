@@ -18,50 +18,50 @@ namespace VisioAutomation.Models.InternalTree
 
         public int Id { get; set; }
 
-        public VA.Drawing.Size Size { get; set; }
+        public Drawing.Size Size { get; set; }
 
-        public VA.Drawing.Rectangle Rect
+        public Drawing.Rectangle Rect
         {
-            get { return new VA.Drawing.Rectangle(this.Position, this.Size); }
+            get { return new Drawing.Rectangle(this.Position, this.Size); }
         }
 
-        internal void init(int id, Node<T> parent, VA.Drawing.Size size, T data)
+        internal void init(int id, Node<T> parent, Drawing.Size size, T data)
         {
             this.Id = id;
             this.Size = size;
             this.Data = data;
             this.Parent = parent;
 
-            child_list = new List<Node<T>>();
-            left_neighbor = null;
-            right_neighbor = null;
-            Position = new VA.Drawing.Point(0, 0);
-            is_collapsed = false;
+            this.child_list = new List<Node<T>>();
+            this.left_neighbor = null;
+            this.right_neighbor = null;
+            this.Position = new Drawing.Point(0, 0);
+            this.is_collapsed = false;
         }
 
-        internal Node(int id, Node<T> parent, VA.Drawing.Size size)
+        internal Node(int id, Node<T> parent, Drawing.Size size)
         {
-            init(id, parent, size, default(T));
+            this.init(id, parent, size, default(T));
         }
 
-        public Node(VA.Drawing.Size size, T data)
+        public Node(Drawing.Size size, T data)
         {
-            init(node_seq_num++, null, size, data);
+            this.init(node_seq_num++, null, size, data);
         }
 
         public int ChildCount
         {
             get
             {
-                if (is_collapsed)
+                if (this.is_collapsed)
                 {
                     return 0;
                 }
-                if (child_list == null)
+                if (this.child_list == null)
                 {
                     return 0;
                 }
-                return child_list.Count;
+                return this.child_list.Count;
             }
         }
 
@@ -69,9 +69,9 @@ namespace VisioAutomation.Models.InternalTree
         {
             get
             {
-                if (left_neighbor != null && left_neighbor.Parent == Parent)
+                if (this.left_neighbor != null && this.left_neighbor.Parent == this.Parent)
                 {
-                    return left_neighbor;
+                    return this.left_neighbor;
                 }
                 return null;
             }
@@ -81,9 +81,9 @@ namespace VisioAutomation.Models.InternalTree
         {
             get
             {
-                if (right_neighbor != null && right_neighbor.Parent == Parent)
+                if (this.right_neighbor != null && this.right_neighbor.Parent == this.Parent)
                 {
-                    return right_neighbor;
+                    return this.right_neighbor;
                 }
                 return null;
             }
@@ -91,12 +91,12 @@ namespace VisioAutomation.Models.InternalTree
 
         public Node<T> FirstChild
         {
-            get { return GetChildAt(0); }
+            get { return this.GetChildAt(0); }
         }
 
         public Node<T> LastChild
         {
-            get { return GetChildAt(ChildCount - 1); }
+            get { return this.GetChildAt(this.ChildCount - 1); }
         }
 
         private void add_child(Node<T> nn)
@@ -111,7 +111,7 @@ namespace VisioAutomation.Models.InternalTree
             return child;
         }
 
-        public Node<T> AddNewChild(VA.Drawing.Size size)
+        public Node<T> AddNewChild(Drawing.Size size)
         {
             var new_child = new Node<T>(node_seq_num++, null, size);
             this.add_child(new_child);
@@ -122,11 +122,11 @@ namespace VisioAutomation.Models.InternalTree
         {
             get
             {
-                if (Parent.Id == -1)
+                if (this.Parent.Id == -1)
                 {
                     return 0;
                 }
-                return Parent.Level + 1;
+                return this.Parent.Level + 1;
             }
         }
 
@@ -134,36 +134,36 @@ namespace VisioAutomation.Models.InternalTree
 
         public T Data { get; set; }
 
-        public VA.Drawing.Point Position { get; set; }
+        public Drawing.Point Position { get; set; }
 
         public bool GetIsAncestorCollapsed()
         {
-            if (Parent.is_collapsed)
+            if (this.Parent.is_collapsed)
             {
                 return true;
             }
-            if (Parent.Id == -1)
+            if (this.Parent.Id == -1)
             {
                 return false;
             }
-            return Parent.GetIsAncestorCollapsed();
+            return this.Parent.GetIsAncestorCollapsed();
         }
 
         public Node<T> GetChildAt(int index)
         {
-            return child_list[index];
+            return this.child_list[index];
         }
 
         public double GetChildrenCenter(TreeLayout<T> treeLayoutEngine)
         {
-            var node0 = FirstChild;
-            var node1 = LastChild;
+            var node0 = this.FirstChild;
+            var node1 = this.LastChild;
             return node0.prelim_x + ((node1.prelim_x - node0.prelim_x) + treeLayoutEngine.GetNodeSize(node1))/2;
         }
 
         public IEnumerable<Node<T>> EnumChildren()
         {
-            foreach (var c in child_list)
+            foreach (var c in this.child_list)
             {
                 yield return c;
             }
@@ -171,7 +171,7 @@ namespace VisioAutomation.Models.InternalTree
 
         public IEnumerable<Node<T>> EnumRecursive()
         {
-            var iter = VA.Internal.TreeOps.Walk<Node<T>>(this, n => n.EnumChildren());
+            var iter = Internal.TreeOps.Walk<Node<T>>(this, n => n.EnumChildren());
             var iter2 = iter.Where(i => i.HasEnteredNode).Select(i => i.Node);
             return iter2;
         }

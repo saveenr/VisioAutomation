@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (String.IsNullOrEmpty(name))
             {
-                throw new System.ArgumentException("name");
+                throw new ArgumentException("name");
             }
  
             this.Name = name;
@@ -27,7 +27,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             const short sec = -1;
             const short row = -1;
-            this.SRC = new ShapeSheet.SRC(sec, row, cell);
+            this.SRC = new SRC(sec, row, cell);
         }
 
         internal CellColumn(int ordinal, SRC src, string name) :

@@ -20,7 +20,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Document.AssertDocumentAvailable();
 
             var prop_dic = new Dictionary<IVisio.Shape, Dictionary<string, CP.CustomPropertyCells>>();
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return prop_dic;
@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("name");
             }
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<bool>();
@@ -74,14 +74,14 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name cannot be empty", "name");
             }
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             }
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Delete Custom Property"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Delete Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -100,14 +100,14 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("customprop");
             }
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             }
 
             var application = this.Client.VisioApplication;
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Custom Property"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Set Custom Property"))
             {
                 foreach (var shape in shapes)
                 {

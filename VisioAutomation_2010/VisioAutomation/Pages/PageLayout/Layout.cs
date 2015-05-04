@@ -8,14 +8,14 @@ namespace VisioAutomation.Pages.PageLayout
         public LayoutStyle LayoutStyle { get; set; }
         public ConnectorStyle ConnectorStyle { get; set; }
         public ConnectorAppearance ConnectorAppearance { get; set; }
-        public VA.Drawing.Size AvenueSize { get; set; }
+        public Drawing.Size AvenueSize { get; set; }
 
         protected Layout()
         {
-            this.AvenueSize = new VA.Drawing.Size(0.375, 0.375);
+            this.AvenueSize = new Drawing.Size(0.375, 0.375);
         }
 
-        protected virtual void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
+        protected virtual void SetPageCells(PageCells pagecells)
         {
             pagecells.AvenueSizeX = this.AvenueSize.Width;
             pagecells.AvenueSizeY = this.AvenueSize.Height;
@@ -30,41 +30,41 @@ namespace VisioAutomation.Pages.PageLayout
 
         private static IVisio.VisCellVals ConnectorAppearanceToLineRouteExt(ConnectorAppearance ca)
         {
-            if (ca == VA.Pages.PageLayout.ConnectorAppearance.Default)
+            if (ca == ConnectorAppearance.Default)
             {
                 return IVisio.VisCellVals.visLORouteExtDefault;
             }
-            else if (ca == VA.Pages.PageLayout.ConnectorAppearance.Straight)
+            else if (ca == ConnectorAppearance.Straight)
             {
                 return IVisio.VisCellVals.visLORouteExtStraight;
             }
-            else if (ca == VA.Pages.PageLayout.ConnectorAppearance.Curved)
+            else if (ca == ConnectorAppearance.Curved)
             {
                 return IVisio.VisCellVals.visLORouteExtNURBS;
             }
             else
             {
                 string msg = "Unsupported connector appearance";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
         }
 
         protected virtual IVisio.VisCellVals? ConnectorsStyleToRouteStyle()
         {
             var cs = this.ConnectorStyle;
-            if (cs == VA.Pages.PageLayout.ConnectorStyle.RightAngle)
+            if (cs == ConnectorStyle.RightAngle)
             {
                 return IVisio.VisCellVals.visLORouteRightAngle;
             }
-            else if (cs == VA.Pages.PageLayout.ConnectorStyle.Straight)
+            else if (cs == ConnectorStyle.Straight)
             {
                 return IVisio.VisCellVals.visLORouteStraight;
             }
-            else if (cs == VA.Pages.PageLayout.ConnectorStyle.CenterToCenter)
+            else if (cs == ConnectorStyle.CenterToCenter)
             {
                 return IVisio.VisCellVals.visLORouteCenterToCenter;
             }
-            else if (cs == VA.Pages.PageLayout.ConnectorStyle.Network)
+            else if (cs == ConnectorStyle.Network)
             {
                 return IVisio.VisCellVals.visLORouteNetwork;
             }
@@ -76,7 +76,7 @@ namespace VisioAutomation.Pages.PageLayout
 
         protected IVisio.VisCellVals ConnectorsStyleAndDirectionToRouteStyle(ConnectorStyle cs, Direction dir)
         {
-            if (cs == VA.Pages.PageLayout.ConnectorStyle.Flowchart)
+            if (cs == ConnectorStyle.Flowchart)
             {
                 if (dir == Direction.BottomToTop)
                 {
@@ -95,7 +95,7 @@ namespace VisioAutomation.Pages.PageLayout
                     return IVisio.VisCellVals.visLORouteFlowchartEW;
                 }
             }
-            else if (cs == VA.Pages.PageLayout.ConnectorStyle.OrganizationChart)
+            else if (cs == ConnectorStyle.OrganizationChart)
             {
                 if (dir == Direction.BottomToTop)
                 {
@@ -114,7 +114,7 @@ namespace VisioAutomation.Pages.PageLayout
                     return IVisio.VisCellVals.visLORouteOrgChartEW;
                 }
             }
-            else if (cs == VA.Pages.PageLayout.ConnectorStyle.Simple)
+            else if (cs == ConnectorStyle.Simple)
             {
                 if (dir == Direction.BottomToTop)
                 {
@@ -134,15 +134,15 @@ namespace VisioAutomation.Pages.PageLayout
                 }
             }
             string msg = "Unsupported connector style";
-            throw new VA.AutomationException(msg);
+            throw new AutomationException(msg);
         }
 
         public void Apply(IVisio.Page page)
         {
-            var pagecells = new VA.Pages.PageCells();
+            var pagecells = new PageCells();
             this.SetPageCells(pagecells);
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             update.SetFormulas(pagecells);
             var pagesheet = page.PageSheet;
             update.Execute(pagesheet);

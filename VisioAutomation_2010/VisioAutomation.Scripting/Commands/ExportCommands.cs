@@ -129,7 +129,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Client.Selection.Get();
-            SelectionToSVGXHTML(this.Client.Selection.Get(), filename, s => this.Client.WriteVerbose(s));
+            this.SelectionToSVGXHTML(this.Client.Selection.Get(), filename, s => this.Client.WriteVerbose(s));
         }
 
         private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)

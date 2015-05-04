@@ -23,7 +23,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("ctrl");
             }
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new List<int>(0);
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
 
 
             var control_indices = new List<int>();
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Add Control"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Add Control"))
             {
                 foreach (var shape in shapes)
                 {
@@ -48,13 +48,13 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Delete Control"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Delete Control"))
             {
                 foreach (var shape in shapes)
                 {
@@ -68,7 +68,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
             
-            var shapes = GetTargetShapes(target_shapes);
+            var shapes = this.GetTargetShapes(target_shapes);
             if (shapes.Count < 1)
             {
                 return new Dictionary<IVisio.Shape, IList<CTRLS.ControlCells>>(0);

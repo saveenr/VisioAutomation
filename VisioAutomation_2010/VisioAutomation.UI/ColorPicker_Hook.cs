@@ -8,7 +8,7 @@ namespace VisioAutomation.UI
     /// http://www.codeproject.com/KB/cs/globalhook.aspx
     public class Hook
     {
-        public delegate void KeyboardDelegate(System.Windows.Forms.KeyEventArgs e);
+        public delegate void KeyboardDelegate(KeyEventArgs e);
 
         public KeyboardDelegate OnKeyDown;
         private int m_hHook = 0;
@@ -16,27 +16,27 @@ namespace VisioAutomation.UI
 
         public void SetHook(bool enable)
         {
-            if (enable && m_hHook == 0)
+            if (enable && this.m_hHook == 0)
             {
-                m_HookCallback = new ColorPicker_NativeMethods.HookProc(HookCallbackProc);
+                this.m_HookCallback = new ColorPicker_NativeMethods.HookProc(this.HookCallbackProc);
                 System.Reflection.Module module = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0];
-                m_hHook = ColorPicker_NativeMethods.SetWindowsHookEx(WinUtil.WH_KEYBOARD_LL, m_HookCallback,
+                this.m_hHook = ColorPicker_NativeMethods.SetWindowsHookEx(WinUtil.WH_KEYBOARD_LL, this.m_HookCallback,
                                                                      System.Runtime.InteropServices.Marshal.GetHINSTANCE
                                                                          (module),
                                                                      0);
-                if (m_hHook == 0)
+                if (this.m_hHook == 0)
                 {
-                    System.Windows.Forms.MessageBox.Show(
+                    MessageBox.Show(
                         "SetHook Failed. Please make sure the 'Visual Studio Host Process' on the debug setting page is disabled");
                     return;
                 }
                 return;
             }
 
-            if (enable == false && m_hHook != 0)
+            if (enable == false && this.m_hHook != 0)
             {
-                ColorPicker_NativeMethods.UnhookWindowsHookEx(m_hHook);
-                m_hHook = 0;
+                ColorPicker_NativeMethods.UnhookWindowsHookEx(this.m_hHook);
+                this.m_hHook = 0;
             }
         }
 
@@ -44,7 +44,7 @@ namespace VisioAutomation.UI
         {
             if (nCode < 0)
             {
-                return ColorPicker_NativeMethods.CallNextHookEx(m_hHook, nCode, wParam, lParam);
+                return ColorPicker_NativeMethods.CallNextHookEx(this.m_hHook, nCode, wParam, lParam);
             }
             else
             {
@@ -53,12 +53,12 @@ namespace VisioAutomation.UI
                     (WinUtil.KeyboardHookStruct)
                     System.Runtime.InteropServices.Marshal.PtrToStructure(lParam, typeof(WinUtil.KeyboardHookStruct));
 
-                if (OnKeyDown != null && wParam.ToInt32() == WinUtil.WM_KEYDOWN)
+                if (this.OnKeyDown != null && wParam.ToInt32() == WinUtil.WM_KEYDOWN)
                 {
-                    var key = (System.Windows.Forms.Keys) hookstruct.vkCode;
-                    const Keys shift = System.Windows.Forms.Keys.Shift;
-                    const Keys control = System.Windows.Forms.Keys.Control;
-                    Keys modkeys = System.Windows.Forms.Control.ModifierKeys;
+                    var key = (Keys) hookstruct.vkCode;
+                    const Keys shift = Keys.Shift;
+                    const Keys control = Keys.Control;
+                    Keys modkeys = Control.ModifierKeys;
 
                     if ((modkeys & shift) == shift)
                     {
@@ -70,9 +70,9 @@ namespace VisioAutomation.UI
                         key |= control;
                     }
 
-                    var e = new System.Windows.Forms.KeyEventArgs(key);
+                    var e = new KeyEventArgs(key);
                     e.Handled = false;
-                    OnKeyDown(e);
+                    this.OnKeyDown(e);
 
                     if (e.Handled)
                     {
@@ -81,9 +81,9 @@ namespace VisioAutomation.UI
                 }
 
                 int result = 0;
-                if (m_hHook != 0)
+                if (this.m_hHook != 0)
                 {
-                    result = ColorPicker_NativeMethods.CallNextHookEx(m_hHook, nCode, wParam, lParam);
+                    result = ColorPicker_NativeMethods.CallNextHookEx(this.m_hHook, nCode, wParam, lParam);
                 }
 
                 return result;

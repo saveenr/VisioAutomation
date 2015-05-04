@@ -24,7 +24,7 @@ namespace TestVisioAutomation
 
         public void EnumerateShapes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var app = page1.Application;
 
             // -------------------------------
@@ -58,7 +58,7 @@ namespace TestVisioAutomation
             var active_window = app.ActiveWindow;
             var selection = active_window.Selection;
             selection.DeselectAll();
-            var g1 = VisioAutomationTest.SelectAndGroup(active_window, new[] { s2, s3 });
+            var g1 = SelectAndGroup(active_window, new[] { s2, s3 });
 
             var d1 = page1.Shapes.AsEnumerable().ToList();
             Assert.AreEqual(2, d1.Count);
@@ -94,7 +94,7 @@ namespace TestVisioAutomation
 
         public void Fonts()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var doc1 = page1.Document;
             var fonts = doc1.Fonts;
 
@@ -131,7 +131,7 @@ namespace TestVisioAutomation
 
         public void Windows()
         {
-            var doc1 = GetNewDoc();
+            var doc1 = this.GetNewDoc();
             var app = doc1.Application;
             var windows = app.Windows;
             var actual = windows.AsEnumerable().ToList();
@@ -146,7 +146,7 @@ namespace TestVisioAutomation
 
         public void Documents()
         {
-            var app = GetVisioApplication();
+            var app = this.GetVisioApplication();
             var documents = app.Documents;
             var doc1 = documents.Add(string.Empty);
             var doc2 = documents.Add(string.Empty);
@@ -169,7 +169,7 @@ namespace TestVisioAutomation
 
         public void Layers()
         {
-            var doc1 = GetNewDoc();
+            var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
 
             var layers = page1.Layers;
@@ -189,7 +189,7 @@ namespace TestVisioAutomation
 
         public void Colors()
         {
-            var doc1 = GetNewDoc();
+            var doc1 = this.GetNewDoc();
             var colors = doc1.Colors;
             var actual = colors.AsEnumerable().ToList();
             for (int i = 0; i < colors.Count; i++)

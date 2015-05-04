@@ -6,18 +6,18 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
 {
-    public class CustomPropertyCells : VA.ShapeSheet.CellGroups.CellGroupMultiRow
+    public class CustomPropertyCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        public VA.ShapeSheet.CellData<bool> Ask { get; set; }
-        public VA.ShapeSheet.CellData<int> Calendar { get; set; }
-        public VA.ShapeSheet.CellData<double> Format { get; set; }
-        public VA.ShapeSheet.CellData<int> Invisible { get; set; }
-        public VA.ShapeSheet.CellData<double> Label { get; set; }
-        public VA.ShapeSheet.CellData<int> LangId { get; set; }
-        public VA.ShapeSheet.CellData<double> Prompt { get; set; }
-        public VA.ShapeSheet.CellData<int> SortKey { get; set; }
-        public VA.ShapeSheet.CellData<int> Type { get; set; }
-        public VA.ShapeSheet.CellData<double> Value { get; set; }
+        public ShapeSheet.CellData<bool> Ask { get; set; }
+        public ShapeSheet.CellData<int> Calendar { get; set; }
+        public ShapeSheet.CellData<double> Format { get; set; }
+        public ShapeSheet.CellData<int> Invisible { get; set; }
+        public ShapeSheet.CellData<double> Label { get; set; }
+        public ShapeSheet.CellData<int> LangId { get; set; }
+        public ShapeSheet.CellData<double> Prompt { get; set; }
+        public ShapeSheet.CellData<int> SortKey { get; set; }
+        public ShapeSheet.CellData<int> Type { get; set; }
+        public ShapeSheet.CellData<double> Value { get; set; }
 
         public CustomPropertyCells()
         {
@@ -62,13 +62,13 @@ namespace VisioAutomation.Shapes.CustomProperties
             this.Type = 5;
         }
 
-        public CustomPropertyCells(VA.ShapeSheet.FormulaLiteral value)
+        public CustomPropertyCells(ShapeSheet.FormulaLiteral value)
         {
             this.Value = value;
             this.Type = 2;
         }
 
-        private string SmartStringToFormulaString(VA.ShapeSheet.FormulaLiteral formula, bool force_no_quoting)
+        private string SmartStringToFormulaString(ShapeSheet.FormulaLiteral formula, bool force_no_quoting)
         {
             if (!formula.HasValue)
             {
@@ -113,16 +113,16 @@ namespace VisioAutomation.Shapes.CustomProperties
                 string str_format = this.SmartStringToFormulaString(cp.Format.Formula, false);
                 string str_prompt = this.SmartStringToFormulaString(cp.Prompt.Formula, false);
 
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Label, str_label);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Value, str_value);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Format, str_format);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
-                yield return newpair(VA.ShapeSheet.SRCConstants.Prop_Ask, cp.Ask.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Label, str_label);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Value, str_value);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Format, str_format);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Prompt, str_prompt);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Calendar, cp.Calendar.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_LangID, cp.LangId.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_SortKey, cp.SortKey.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Invisible, cp.Invisible.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Type, cp.Type.Formula);
+                yield return this.newpair(ShapeSheet.SRCConstants.Prop_Ask, cp.Ask.Formula);
             }
         }
 
@@ -181,7 +181,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         }
     }
 
-    class CustomPropertyCellQuery : VA.ShapeSheet.Query.CellQuery
+    class CustomPropertyCellQuery : CellQuery
     {
         public CellColumn SortKey { get; set; }
         public CellColumn Ask { get; set; }
@@ -198,32 +198,32 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
 
-            SortKey = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_SortKey, "Prop_SortKey");
-            Ask = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Ask, "Prop_Ask");
-            Calendar = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Calendar, "Prop_Calendar");
-            Format = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Format, "Prop_Format");
-            Invis = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Invisible, "Prop_Invisible");
-            Label = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Label, "Prop_Label");
-            LangID = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_LangID, "Prop_LangID");
-            Prompt = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Prompt, "Prop_Prompt");
-            Type = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Type, "Prop_Type");
-            Value = sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value, "Prop_Value");
+            this.SortKey = sec.AddCell(ShapeSheet.SRCConstants.Prop_SortKey, "Prop_SortKey");
+            this.Ask = sec.AddCell(ShapeSheet.SRCConstants.Prop_Ask, "Prop_Ask");
+            this.Calendar = sec.AddCell(ShapeSheet.SRCConstants.Prop_Calendar, "Prop_Calendar");
+            this.Format = sec.AddCell(ShapeSheet.SRCConstants.Prop_Format, "Prop_Format");
+            this.Invis = sec.AddCell(ShapeSheet.SRCConstants.Prop_Invisible, "Prop_Invisible");
+            this.Label = sec.AddCell(ShapeSheet.SRCConstants.Prop_Label, "Prop_Label");
+            this.LangID = sec.AddCell(ShapeSheet.SRCConstants.Prop_LangID, "Prop_LangID");
+            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.Prop_Prompt, "Prop_Prompt");
+            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Prop_Type, "Prop_Type");
+            this.Value = sec.AddCell(ShapeSheet.SRCConstants.Prop_Value, "Prop_Value");
 
         }
 
-        public CustomPropertyCells GetCells(IList<VA.ShapeSheet.CellData<double>> row)
+        public CustomPropertyCells GetCells(IList<ShapeSheet.CellData<double>> row)
         {
             var cells = new CustomPropertyCells();
-            cells.Value = row[Value];
-            cells.Calendar = row[Calendar].ToInt();
-            cells.Format = row[Format];
-            cells.Invisible = row[Invis].ToInt();
-            cells.Label = row[Label];
-            cells.LangId = row[LangID].ToInt();
-            cells.Prompt = row[Prompt];
-            cells.SortKey = row[SortKey].ToInt();
-            cells.Type = row[Type].ToInt();
-            cells.Ask = row[Ask].ToBool();
+            cells.Value = row[this.Value];
+            cells.Calendar = row[this.Calendar].ToInt();
+            cells.Format = row[this.Format];
+            cells.Invisible = row[this.Invis].ToInt();
+            cells.Label = row[this.Label];
+            cells.LangId = row[this.LangID].ToInt();
+            cells.Prompt = row[this.Prompt];
+            cells.SortKey = row[this.SortKey].ToInt();
+            cells.Type = row[this.Type].ToInt();
+            cells.Ask = row[this.Ask].ToBool();
             return cells;
         }
     }

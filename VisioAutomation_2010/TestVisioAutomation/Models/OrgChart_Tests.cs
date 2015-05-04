@@ -16,7 +16,7 @@ namespace TestVisioAutomation
             // Before an Org Chart is rendered it must have at least one node
             bool caught = false;
             var orgcgart = new OCMODEL.OrgChartDocument();
-            var page1 = GetNewPage(StandardPageSize);
+            var page1 = this.GetNewPage(this.StandardPageSize);
             try
             {
                 var application = page1.Application;
@@ -100,8 +100,8 @@ namespace TestVisioAutomation
             Assert.AreEqual("D", n_d.VisioShape.Text.Trim());
             Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
-            Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
+            Assert.AreEqual(new VA.Drawing.Size(4, 2), GetSize(n_a.VisioShape));
+            Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  GetSize(n_b.VisioShape));
 
             app.Quit(true);
         }

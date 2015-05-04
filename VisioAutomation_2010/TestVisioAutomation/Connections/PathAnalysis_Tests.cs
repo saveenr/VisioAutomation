@@ -41,11 +41,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Connects_EnumerableExtensionMethod()
         {
-            var page1 = GetNewPage();
-            var shapes = draw_standard_shapes(page1);
+            var page1 = this.GetNewPage();
+            var shapes = this.draw_standard_shapes(page1);
 
-            connect(shapes[0], shapes[1], false, false);
-            connect(shapes[1], shapes[2], false, false);
+            this.connect(shapes[0], shapes[1], false, false);
+            this.connect(shapes[1], shapes[2], false, false);
 
             var cons = page1.Connects.AsEnumerable().ToList();
             Assert.AreEqual(4, cons.Count);
@@ -55,11 +55,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void PathAnalysis_GetDirectEdgesRaw()
         {
-            var page1 = GetNewPage();
-            var shapes = draw_standard_shapes(page1);
+            var page1 = this.GetNewPage();
+            var shapes = this.draw_standard_shapes(page1);
 
-            connect(shapes[0], shapes[1], false, false);
-            connect(shapes[1], shapes[2], false, false);
+            this.connect(shapes[0], shapes[1], false, false);
+            this.connect(shapes[1], shapes[2], false, false);
 
             var edges = VACXN.PathAnalysis.GetDirectedEdges(page1, VACXN.ConnectorEdgeHandling.Raw);
             var map = new ConnectivityMap(edges);
@@ -74,11 +74,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreBidirectional()
         {
-            var page1 = GetNewPage();
-            var shapes = draw_standard_shapes(page1);
+            var page1 = this.GetNewPage();
+            var shapes = this.draw_standard_shapes(page1);
 
-            connect(shapes[0], shapes[1], false, false);
-            connect(shapes[1], shapes[2], false, false);
+            this.connect(shapes[0], shapes[1], false, false);
+            this.connect(shapes[1], shapes[2], false, false);
 
             var edges1 = VACXN.PathAnalysis.GetDirectedEdges(page1, VACXN.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional);
             var map1 = new ConnectivityMap(edges1);
@@ -113,11 +113,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreExcluded()
         {
-            var page1 = GetNewPage();
-            var shapes = draw_standard_shapes(page1);
+            var page1 = this.GetNewPage();
+            var shapes = this.draw_standard_shapes(page1);
 
-            connect(shapes[0], shapes[1], false, false);
-            connect(shapes[1], shapes[2], false, false);
+            this.connect(shapes[0], shapes[1], false, false);
+            this.connect(shapes[1], shapes[2], false, false);
 
             var edges1 = VACXN.PathAnalysis.GetDirectedEdges(page1, VACXN.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows);
             var map1 = new ConnectivityMap(edges1);
@@ -133,11 +133,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreExcluded_withArrowHeads1()
         {
-            var page1 = GetNewPage();
-            var shapes = draw_standard_shapes(page1);
+            var page1 = this.GetNewPage();
+            var shapes = this.draw_standard_shapes(page1);
 
-            connect(shapes[0], shapes[1], true, false);
-            connect(shapes[1], shapes[2], true, false);
+            this.connect(shapes[0], shapes[1], true, false);
+            this.connect(shapes[1], shapes[2], true, false);
 
             var edges1 = VACXN.PathAnalysis.GetDirectedEdges(page1, VACXN.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows);
             var map1 = new ConnectivityMap(edges1);
@@ -163,11 +163,11 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Connects_GetDirectedEdges_EdgesWithoutArrowsAreExcluded_withArrowHeads2()
         {
-            var page1 = GetNewPage();
-            var shapes = draw_standard_shapes(page1);
+            var page1 = this.GetNewPage();
+            var shapes = this.draw_standard_shapes(page1);
 
-            connect(shapes[0], shapes[1], true, true);
-            connect(shapes[1], shapes[2], true, true);
+            this.connect(shapes[0], shapes[1], true, true);
+            this.connect(shapes[1], shapes[2], true, true);
 
             var edges1 = VACXN.PathAnalysis.GetDirectedEdges(page1, VACXN.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows);
             var map1 = new ConnectivityMap(edges1);

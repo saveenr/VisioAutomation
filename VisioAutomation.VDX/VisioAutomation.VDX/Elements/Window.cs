@@ -18,7 +18,7 @@ namespace VisioAutomation.VDX.Elements
 
         public int ID
         {
-            get { return _id; }
+            get { return this._id; }
         }
 
         public virtual void AddToElement(SXL.XElement parent)

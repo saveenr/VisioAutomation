@@ -24,7 +24,7 @@ namespace VisioAutomation.DOM
 
         IEnumerator IEnumerable.GetEnumerator()     
         {                                           
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public void Add(Page page)

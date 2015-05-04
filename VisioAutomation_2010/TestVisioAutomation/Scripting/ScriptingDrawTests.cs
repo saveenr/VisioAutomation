@@ -18,8 +18,8 @@ namespace TestVisioAutomation
             string xml = this.get_datafile_content(@"datafiles\orgchart_1.xml");
             
             // Draw the Chart
-            var client = GetScriptingClient();
-            draw_org_chart(client, xml);
+            var client = this.GetScriptingClient();
+            this.draw_org_chart(client, xml);
             
             // Cleanup
             client.Document.Close(true);
@@ -53,7 +53,7 @@ namespace TestVisioAutomation
             }
 
             // Prepare the Page
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(pagesize, false);
 
@@ -79,7 +79,7 @@ namespace TestVisioAutomation
             int rows = 6;
 
             // Create the Page
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(pagesize, false);
 
@@ -106,7 +106,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Draw_RectangleLineOval_0()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
 
@@ -132,7 +132,7 @@ namespace TestVisioAutomation
             var pagesize = new VA.Drawing.Size(4, 4);
 
             // Create the Page
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(pagesize, false);
             
@@ -154,7 +154,7 @@ namespace TestVisioAutomation
             double end_angle = System.Math.PI;
 
             // Create the page
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(pagesize, false);
 
@@ -179,7 +179,7 @@ namespace TestVisioAutomation
             chart.DataPoints.Add(new VA.Models.Charting.DataPoint(4.0));
 
             // Create the Page
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(pagesize, false);
 
@@ -219,7 +219,7 @@ namespace TestVisioAutomation
             chart3.DataPoints.Add(new VA.Models.Charting.DataPoint(-4.0));
             
             // Create the page
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(pagesize, false);
 
@@ -261,7 +261,7 @@ namespace TestVisioAutomation
             chart3.DataPoints.Add(-4.0);
 
             // Setup the Page
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(pagesize, false);
 
@@ -283,11 +283,11 @@ namespace TestVisioAutomation
             string xml = this.get_datafile_content(@"datafiles\directed_graph_1.xml");
 
             // Draw the graph
-            var client = GetScriptingClient();
-            draw_directed_graph(client, xml);
+            var client = this.GetScriptingClient();
+            this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
@@ -300,11 +300,11 @@ namespace TestVisioAutomation
             string xml = this.get_datafile_content(@"datafiles\directed_graph_2.xml");
 
             // Draw the graph
-            var client = GetScriptingClient();
-            draw_directed_graph(client, xml);
+            var client = this.GetScriptingClient();
+            this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
@@ -317,11 +317,11 @@ namespace TestVisioAutomation
             string xml = this.get_datafile_content(@"datafiles\directed_graph_3.xml");
 
             // Draw the graph
-            var client = GetScriptingClient();
-            draw_directed_graph(client, xml);
+            var client = this.GetScriptingClient();
+            this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
@@ -334,11 +334,11 @@ namespace TestVisioAutomation
             string xml = this.get_datafile_content(@"datafiles\directed_graph_4.xml");
 
             // Draw the graph
-            var client = GetScriptingClient();
-            draw_directed_graph(client, xml);
+            var client = this.GetScriptingClient();
+            this.draw_directed_graph(client, xml);
 
             // Cleanup
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
             client.Document.SaveAs(output_filename);
             client.Document.Close(true);
         }
@@ -386,7 +386,7 @@ namespace TestVisioAutomation
         public void Scripting_Drop_Master()
         {
             var pagesize = new VA.Drawing.Size(4, 4);
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             
             // Create the page
             client.Document.New();
@@ -412,7 +412,7 @@ namespace TestVisioAutomation
         public void Scripting_Drop_Many()
         {
             var pagesize = new VA.Drawing.Size(10, 10);
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
 
             // Create the Page
             client.Document.New();

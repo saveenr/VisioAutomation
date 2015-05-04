@@ -72,7 +72,7 @@ namespace TestVisioAutomation
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            VisioAutomationTest.SetPageSize(app.ActivePage, new VA.Drawing.Size(10, 10));
+            SetPageSize(app.ActivePage, new VA.Drawing.Size(10, 10));
             var page = page_node.Render(app.ActiveDocument);
 
             // Verify
@@ -88,8 +88,8 @@ namespace TestVisioAutomation
             // Render it
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
-            var stencil = app.Documents.OpenStencil(basic_u_vss);
-            var rectmaster = stencil.Masters[rectangle];
+            var stencil = app.Documents.OpenStencil(this.basic_u_vss);
+            var rectmaster = stencil.Masters[this.rectangle];
 
 
             // Create the doc
@@ -165,8 +165,8 @@ namespace TestVisioAutomation
             var s3 = new VisioAutomation.DOM.Shape(position_master_name, null, new VA.Drawing.Point(6, 4));
             page_node.Shapes.Add(s3);
 
-            page_node.Shapes.Connect(dynamicconnector, connec_u_vss, s1, s2);
-            page_node.Shapes.Connect(dynamicconnector, connec_u_vss, s1, s3);
+            page_node.Shapes.Connect(this.dynamicconnector, this.connec_u_vss, s1, s2);
+            page_node.Shapes.Connect(this.dynamicconnector, this.connec_u_vss, s1, s3);
 
             var doc = doc_node.Render(app);
 
@@ -183,7 +183,7 @@ namespace TestVisioAutomation
             var page = page_node.Render(doc);
 
             Assert.AreEqual(0, page.Shapes.Count);
-            Assert.AreEqual(new VA.Drawing.Size(5, 5), VisioAutomationTest.GetPageSize(page));
+            Assert.AreEqual(new VA.Drawing.Size(5, 5), GetPageSize(page));
 
             page.Delete(0);
             doc.Close(true);
@@ -228,11 +228,11 @@ namespace TestVisioAutomation
 
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var stencil = doc.Application.Documents.OpenStencil(basic_u_vss);
-            var master1 = stencil.Masters[rectangle];
+            var stencil = doc.Application.Documents.OpenStencil(this.basic_u_vss);
+            var master1 = stencil.Masters[this.rectangle];
 
             var master_node_0 = page_node.Shapes.Drop(master1, 3, 3);
-            var master_node_1 = page_node.Shapes.Drop(rectangle, basic_u_vss, 5, 5);
+            var master_node_1 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, 5, 5);
 
             var page = page_node.Render(doc);
 
@@ -252,8 +252,8 @@ namespace TestVisioAutomation
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var stencil = doc.Application.Documents.OpenStencil(basic_u_vss);
-            var master1 = stencil.Masters[rectangle];
+            var stencil = doc.Application.Documents.OpenStencil(this.basic_u_vss);
+            var master1 = stencil.Masters[this.rectangle];
 
             var master_node_0 = page_node.Shapes.Drop(master1, 3, 3);
             var bez_node_0 = page_node.Shapes.DrawBezier(new double[] { 1, 2, 3, 3, 6, 3, 3, 4 });
@@ -276,13 +276,13 @@ namespace TestVisioAutomation
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
 
-            var basic_stencil = doc.Application.Documents.OpenStencil(basic_u_vss);
+            var basic_stencil = doc.Application.Documents.OpenStencil(this.basic_u_vss);
             var basic_masters = basic_stencil.Masters;
-            var connectors_stencil = doc.Application.Documents.OpenStencil(connec_u_vss);
+            var connectors_stencil = doc.Application.Documents.OpenStencil(this.connec_u_vss);
             var connectors_masters = connectors_stencil.Masters;
 
-            var master1 = basic_masters[rectangle];
-            var master2 = connectors_masters[dynamicconnector];
+            var master1 = basic_masters[this.rectangle];
+            var master2 = connectors_masters[this.dynamicconnector];
 
             var master_node_0 = page_node.Shapes.Drop(master1, 3, 3);
             var master_node_1 = page_node.Shapes.Drop(master1, 6, 5);
@@ -304,9 +304,9 @@ namespace TestVisioAutomation
 
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var master_node_0 = page_node.Shapes.Drop(rectangle, basic_u_vss, 3, 3);
-            var master_node_1 = page_node.Shapes.Drop(rectangle, basic_u_vss, 6, 5);
-            var dc = page_node.Shapes.Connect(dynamicconnector, connec_u_vss, master_node_0, master_node_1);
+            var master_node_0 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, 3, 3);
+            var master_node_1 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, 6, 5);
+            var dc = page_node.Shapes.Connect(this.dynamicconnector, this.connec_u_vss, master_node_0, master_node_1);
             var page = page_node.Render(doc);
 
             Assert.AreEqual(3, page.Shapes.Count);
@@ -320,7 +320,7 @@ namespace TestVisioAutomation
         {
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var master_node_0 = page_node.Shapes.Drop("XXX", basic_u_vss, 3, 3);
+            var master_node_0 = page_node.Shapes.Drop("XXX", this.basic_u_vss, 3, 3);
 
             IVisio.Page page=null;
             bool caught = false;
@@ -352,7 +352,7 @@ namespace TestVisioAutomation
 
             var doc = this.GetNewDoc();
             var page_node = new VA.DOM.Page();
-            var master_node_0 = page_node.Shapes.Drop(rectangle, non_existent_stencil, 3, 3);
+            var master_node_0 = page_node.Shapes.Drop(this.rectangle, non_existent_stencil, 3, 3);
 
             IVisio.Page page = null;
             bool caught = false;
@@ -385,10 +385,10 @@ namespace TestVisioAutomation
 
             var rect0 = new VA.Drawing.Rectangle(3, 4, 7, 8);
             var rect1 = new VA.Drawing.Rectangle(8, 1, 9, 5);
-            var dropped_shape0 = page_node.Shapes.Drop(rectangle, basic_u_vss, rect0);
+            var dropped_shape0 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, rect0);
             var drawn_shape0 = page_node.Shapes.DrawRectangle(rect0);
 
-            var dropped_shape1 = page_node.Shapes.Drop(rectangle, basic_u_vss, rect1);
+            var dropped_shape1 = page_node.Shapes.Drop(this.rectangle, this.basic_u_vss, rect1);
             var drawn_shape1 = page_node.Shapes.DrawRectangle(rect1);
 
             var page = page_node.Render(doc);

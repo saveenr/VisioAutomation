@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public SectionColumn this[int index]
@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 throw new AutomationException(msg);
             }
 
-            int ordinal = items.Count;
+            int ordinal = this.items.Count;
             var section_query = new SectionColumn(ordinal, section);
             this.items.Add(section_query);
             this.hs_section[section] = section_query;

@@ -15,16 +15,16 @@ namespace VisioAutomation.UI.CommonControls
 
         public ColorSelectorLarge()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.ColorSelected = false;
             
             // Setup the HUE bitmap
-            bmp_hue = bmp_hue ?? VisioAutomation.UI.WinFormUtil.create_hue_bitmap2(this.pictureBoxHue.Width, this.pictureBoxHue.Height);
-            this.pictureBoxHue.Image = bmp_hue;
+            this.bmp_hue = this.bmp_hue ?? WinFormUtil.create_hue_bitmap2(this.pictureBoxHue.Width, this.pictureBoxHue.Height);
+            this.pictureBoxHue.Image = this.bmp_hue;
             
             // Setup the GRADIENT BITMAP
-            bmp_gradient = new System.Drawing.Bitmap(this.pictureBoxGradient.Width, this.pictureBoxGradient.Height);
-            this.pictureBoxGradient.Image = bmp_gradient;
+            this.bmp_gradient = new System.Drawing.Bitmap(this.pictureBoxGradient.Width, this.pictureBoxGradient.Height);
+            this.pictureBoxGradient.Image = this.bmp_gradient;
         }
 
         [Browsable(true)]
@@ -60,7 +60,7 @@ namespace VisioAutomation.UI.CommonControls
 
         private System.Drawing.Point clamp(System.Drawing.Point p, System.Drawing.Point min, System.Drawing.Point max)
         {
-            var cp = new System.Drawing.Point( clamp(p.X, min.X, max.X ), clamp(p.Y,min.Y, max.Y ) );
+            var cp = new System.Drawing.Point(this.clamp(p.X, min.X, max.X ), this.clamp(p.Y,min.Y, max.Y ) );
             return cp;
         }
 
@@ -68,11 +68,11 @@ namespace VisioAutomation.UI.CommonControls
         {
             // Calculate point in hue bitmap
             var min_point = new System.Drawing.Point(0, 0);
-            var max_point = new System.Drawing.Point(bmp_hue.Width - 2, bmp_hue.Height - 2);
-            this.hue_selection_point = clamp(hue_click, min_point, max_point);
+            var max_point = new System.Drawing.Point(this.bmp_hue.Width - 2, this.bmp_hue.Height - 2);
+            this.hue_selection_point = this.clamp(hue_click, min_point, max_point);
 
             // Retrieve the color
-            var color_from_hue_slider = bmp_hue.GetPixel(this.hue_selection_point.Value.X, this.hue_selection_point.Value.Y);
+            var color_from_hue_slider = this.bmp_hue.GetPixel(this.hue_selection_point.Value.X, this.hue_selection_point.Value.Y);
 
             this.Color = color_from_hue_slider;
 
@@ -80,12 +80,12 @@ namespace VisioAutomation.UI.CommonControls
             double _s;
             double _v;
 
-            VisioAutomation.UI.ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
+            ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
             this.gradient_hue = _h;
             this.pictureBoxHue.Invalidate();
 
 
-            SetColorFromGradientPoint();
+            this.SetColorFromGradientPoint();
             this.pictureBoxGradient.Invalidate();
         }
         
@@ -106,14 +106,14 @@ namespace VisioAutomation.UI.CommonControls
                 double _s;
                 double _v;
 
-                VisioAutomation.UI.ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
+                ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
 
                 this.hue_selection_point = new System.Drawing.Point((int)(_h * this.bmp_hue.Width), 0);
             }
             float cpx = this.hue_selection_point.Value.X;
             float cpy = ((float) this.bmp_hue.Height-2)/2.0f - 0.5f;
-            gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;           
-            draw_cursor_ring(gfx, cpx, cpy);
+            gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            this.draw_cursor_ring(gfx, cpx, cpy);
         }
 
         private void draw_cursor_ring(System.Drawing.Graphics gfx, float cpx, float cpy)
@@ -138,9 +138,9 @@ namespace VisioAutomation.UI.CommonControls
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
 
 
@@ -181,7 +181,7 @@ namespace VisioAutomation.UI.CommonControls
         private System.Drawing.Drawing2D.LinearGradientBrush GetHueBrush()
         {
             // Aquire a Hue
-            if (!gradient_hue.HasValue)
+            if (!this.gradient_hue.HasValue)
             {
                 // set initial  hue
 
@@ -189,16 +189,16 @@ namespace VisioAutomation.UI.CommonControls
                 double _s;
                 double _v;
 
-                VisioAutomation.UI.ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
-                gradient_hue = _h;
+                ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
+                this.gradient_hue = _h;
             }
 
             // Setup the colors & dimensions of the brush
-            var _hue = gradient_hue.Value;
+            var _hue = this.gradient_hue.Value;
             var _sat = 1.0;
             var _val = 1.0;
             var left_color = System.Drawing.Color.Transparent;
-            var right_color = VisioAutomation.UI.ColorUtil.HSVToSystemDrawingColor(_hue, _sat, _val);
+            var right_color = ColorUtil.HSVToSystemDrawingColor(_hue, _sat, _val);
             var rect = this.GetGradientRect();
 
             // Create the brush object
@@ -215,13 +215,13 @@ namespace VisioAutomation.UI.CommonControls
         {
             using (var gfx = System.Drawing.Graphics.FromImage(this.bmp_gradient))
             {
-                Gradient_Paint(gfx);
+                this.Gradient_Paint(gfx);
             }
         }
 
         private void Gradient_Paint(System.Drawing.Graphics gfx)
         {
-            var gradient_rect = GetGradientRect();
+            var gradient_rect = this.GetGradientRect();
 
             using (var luminance_brush = this.GetLuminanceBrush())
             using (var hue_brush = this.GetHueBrush())
@@ -236,7 +236,7 @@ namespace VisioAutomation.UI.CommonControls
                     double _s;
                     double _v;
 
-                    VisioAutomation.UI.ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
+                    ColorUtil.RGBToHSV(this.Color, out _h, out _s, out _v);
                     
                     int x = (int)(_s * (this.bmp_gradient.Width - 1));
                     int y = (int)( (1.0 - _v) * (this.bmp_gradient.Height - 1));
@@ -245,8 +245,8 @@ namespace VisioAutomation.UI.CommonControls
 
                 // draw the cursor
                 gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                var p = gradient_selection_point.Value;
-                draw_cursor_ring(gfx, p.X , p.Y);
+                var p = this.gradient_selection_point.Value;
+                this.draw_cursor_ring(gfx, p.X , p.Y);
 
             }
         }
@@ -276,10 +276,10 @@ namespace VisioAutomation.UI.CommonControls
         public void handle_gradient_click(System.Drawing.Point p)
         {
             var min_point = new System.Drawing.Point(0, 0);
-            var max_point = new System.Drawing.Point(bmp_gradient.Width - 3, bmp_gradient.Height - 3);
-            this.gradient_selection_point = clamp(p, min_point, max_point);
+            var max_point = new System.Drawing.Point(this.bmp_gradient.Width - 3, this.bmp_gradient.Height - 3);
+            this.gradient_selection_point = this.clamp(p, min_point, max_point);
 
-            SetColorFromGradientPoint();
+            this.SetColorFromGradientPoint();
 
             this.pictureBoxGradient.Invalidate();
         }
@@ -301,13 +301,13 @@ namespace VisioAutomation.UI.CommonControls
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            if (!bmp_gradient_init)
+            if (!this.bmp_gradient_init)
             {
-                using (var gfx = System.Drawing.Graphics.FromImage(bmp_gradient))
+                using (var gfx = System.Drawing.Graphics.FromImage(this.bmp_gradient))
                 {
-                    Gradient_Paint(gfx);
+                    this.Gradient_Paint(gfx);
                 }
-                bmp_gradient_init = true;
+                this.bmp_gradient_init = true;
             }
 
         }

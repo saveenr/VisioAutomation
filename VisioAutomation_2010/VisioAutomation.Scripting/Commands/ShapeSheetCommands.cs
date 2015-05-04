@@ -14,15 +14,15 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public VA.ShapeSheet.ShapeSheetSurface GetShapeSheetSurface()
+        public ShapeSheet.ShapeSheetSurface GetShapeSheetSurface()
         {
             var ds = this.Client.Draw.GetDrawingSurface();
-            var ss = new VA.ShapeSheet.ShapeSheetSurface(ds.Target);
+            var ss = new ShapeSheet.ShapeSheetSurface(ds.Target);
             return ss;
         }
 
 
-        public QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new CellQuery();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<VA.ShapeSheet.SRC> srcs)
+        public QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -55,7 +55,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
  
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new CellQuery();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -79,7 +79,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
             var app = this.Client.VisioApplication;
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new CellQuery();
             var sec = query.AddSection(section);
 
             int ci = 0;
@@ -104,7 +104,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
+            var query = new CellQuery();
             var sec = query.AddSection(section);
 
             int ci = 0;
@@ -121,7 +121,7 @@ namespace VisioAutomation.Scripting.Commands
         
         public void SetFormula(
             IList<IVisio.Shape> target_shapes, 
-            IList<VA.ShapeSheet.SRC> srcs, 
+            IList<ShapeSheet.SRC> srcs, 
             IList<string> formulas,
             IVisio.VisGetSetArgs flags)
         {
@@ -163,7 +163,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s=>s.ID).ToList();
             int num_formulas = formulas.Count;
 
-            var update = new VA.ShapeSheet.Update(shapes.Count*num_formulas);
+            var update = new ShapeSheet.Update(shapes.Count*num_formulas);
             update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 
@@ -178,7 +178,7 @@ namespace VisioAutomation.Scripting.Commands
 
             }
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Set ShapeSheet Formulas"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set ShapeSheet Formulas"))
             {
                 update.Execute(surface);
             }
@@ -186,7 +186,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void SetResult(
                 IList<IVisio.Shape> target_shapes, 
-                IList<VA.ShapeSheet.SRC> srcs,
+                IList<ShapeSheet.SRC> srcs,
                 IList<string> results, IVisio.VisGetSetArgs flags)
         {
             this.Client.Application.AssertApplicationAvailable();
@@ -226,7 +226,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             int num_results = results.Count;
-            var update = new VA.ShapeSheet.Update(shapes.Count * num_results);
+            var update = new ShapeSheet.Update(shapes.Count * num_results);
             update.BlastGuards = ((short)flags & (short)IVisio.VisGetSetArgs.visSetBlastGuards) != 0;
             update.TestCircular = ((short)flags & (short)IVisio.VisGetSetArgs.visSetTestCircular) != 0;
 
@@ -241,7 +241,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set ShapeSheet Result"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Set ShapeSheet Result"))
             {
                 update.Execute(surface);
             }
@@ -254,7 +254,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Client.WriteVerbose( "Staring ShapeSheet Update");
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Update ShapeSheet Formulas"))
+            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Update ShapeSheet Formulas"))
             {
                 var internal_update = update.update;
                 internal_update.BlastGuards = blastguards;

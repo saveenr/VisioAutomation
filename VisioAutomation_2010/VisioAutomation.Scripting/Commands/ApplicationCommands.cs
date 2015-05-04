@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
                 // If you want to force the thing to close
                 // it will require closing all documents and then quiting
                 var documents = app.Documents;
-                VA.Documents.DocumentHelper.ForceCloseAll(documents);
+                Documents.DocumentHelper.ForceCloseAll(documents);
                 app.Quit(true);
             }
             else
@@ -137,7 +137,7 @@ namespace VisioAutomation.Scripting.Commands
                 if (visio_app_version == null)
                 {
                     this.Client.Application.AssertApplicationAvailable();
-                    visio_app_version = VA.Application.ApplicationHelper.GetVersion(this.Client.VisioApplication);
+                    visio_app_version = Application.ApplicationHelper.GetVersion(this.Client.VisioApplication);
                 }
                 return visio_app_version;
             }            

@@ -11,7 +11,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Selection_GetShapeIDs()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var s2 = page1.DrawRectangle(0, 1, 1, 2);
             var s3 = page1.DrawRectangle(1, 0, 2, 1);
@@ -38,7 +38,7 @@ namespace TestVisioAutomation
             // Selection Object: http://msdn.microsoft.com/en-us/library/ms408990(v=office.12).aspx
             // this is a 1-based collection
 
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             var s2 = page1.DrawRectangle(0, 1, 1, 2);
             var s3 = page1.DrawRectangle(1, 0, 2, 1);

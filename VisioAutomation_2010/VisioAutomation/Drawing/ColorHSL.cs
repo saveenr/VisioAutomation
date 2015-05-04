@@ -15,9 +15,9 @@ namespace VisioAutomation.Drawing
 
         public ColorHSL(byte h, byte s, byte l)
         {
-            _h = h;
-            _s = s;
-            _l = l;
+            this._h = h;
+            this._s = s;
+            this._l = l;
         }
 
         private void CheckValidVisioHSL()
@@ -43,17 +43,17 @@ namespace VisioAutomation.Drawing
 
         public byte H
         {
-            get { return _h; }
+            get { return this._h; }
         }
 
         public byte S
         {
-            get { return _s; }
+            get { return this._s; }
         }
 
         public byte L
         {
-            get { return _l; }
+            get { return this._l; }
         }
 
         public override string ToString()
@@ -64,7 +64,7 @@ namespace VisioAutomation.Drawing
 
         public override bool Equals(object other)
         {
-            return other is VA.Drawing.ColorHSL && Equals((VA.Drawing.ColorHSL)other);
+            return other is ColorHSL && this.Equals((ColorHSL)other);
         }
 
         public static bool operator ==(ColorHSL lhs, ColorHSL rhs)
@@ -84,7 +84,7 @@ namespace VisioAutomation.Drawing
 
         public override int GetHashCode()
         {
-            return ToHSLBytes();
+            return this.ToHSLBytes();
         }
 
         /// <summary>

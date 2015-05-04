@@ -26,8 +26,8 @@ namespace VisioAutomation.UI
              * The HSV<->RGB Conversion code based on this source code: http://www.cs.rit.edu/~ncs/color/t_convert.html
              * from Eugene Vishnevsky*/
 
-            double _max = System.Math.Max(R, System.Math.Max(G, B));
-            double _min = System.Math.Min(R, System.Math.Min(G, B));
+            double _max = Math.Max(R, Math.Max(G, B));
+            double _min = Math.Min(R, Math.Min(G, B));
 
             double the_h = 0.0;
             double the_s = 0.0;
@@ -105,7 +105,7 @@ namespace VisioAutomation.UI
             double step = 1.0 / 6.0;
             double vh = H / step;
 
-            int i = (int)System.Math.Floor(vh);
+            int i = (int)Math.Floor(vh);
 
             double f = vh - i;
             double p = V * (1.0 - S);

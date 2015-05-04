@@ -15,7 +15,7 @@ namespace VisioPowerTools2010
 
         public FormExportSelectionAsFormat( enumExportFormat f)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             var client = Globals.ThisAddIn.Client;
 
@@ -77,7 +77,7 @@ namespace VisioPowerTools2010
             }
             else if (this.ExportFormat == enumExportFormat.ExportXAML)
             {
-                VisioPowerTools2010.ExportExtensions.ExportSelectionToXAML(client, filename);
+                ExportExtensions.ExportSelectionToXAML(client, filename);
             }
             else
             {

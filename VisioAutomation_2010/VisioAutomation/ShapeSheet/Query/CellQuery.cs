@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.IsFrozen)
             {
-                throw new VA.AutomationException("Further Modifications to this Query are not allowed");
+                throw new AutomationException("Further Modifications to this Query are not allowed");
             }
         }
 
@@ -53,10 +53,10 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             this.Freeze();
             var surface = new ShapeSheetSurface(shape);
-            var srcstream = BuildSRCStream(surface);
+            var srcstream = this.BuildSRCStream(surface);
             var values = surface.GetFormulasU_SRC(srcstream);
             var r = new QueryResult<string>(shape.ID);
-            FillValuesForShape<string>(values, r, 0,0);
+            this.FillValuesForShape<string>(values, r, 0,0);
 
             return r;
         }
@@ -68,11 +68,11 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var surface = new ShapeSheetSurface(shape);
 
-            var srcstream = BuildSRCStream(surface);
+            var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var values = surface.GetResults_SRC<T>(srcstream,unitcodes);
             var r = new QueryResult<T>(shape.ID);
-            FillValuesForShape<T>(values, r, 0,0);
+            this.FillValuesForShape<T>(values, r, 0,0);
             return r;
         }
 
@@ -122,7 +122,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
             var surface = new ShapeSheetSurface(shape);
 
-            var srcstream = BuildSRCStream(surface);
+            var srcstream = this.BuildSRCStream(surface);
             var unitcodes = this.BuildUnitCodeArray(1);
             var formulas = surface.GetFormulasU_SRC(srcstream);
             var results = surface.GetResults_SRC<T>(srcstream, unitcodes);
@@ -134,7 +134,7 @@ namespace VisioAutomation.ShapeSheet.Query
             }
 
             var r = new QueryResult<CellData<T>>(shape.ID16);
-            FillValuesForShape<CellData<T>>(combineddata, r, 0, 0);
+            this.FillValuesForShape<CellData<T>>(combineddata, r, 0, 0);
             return r;
         }
 
@@ -147,9 +147,9 @@ namespace VisioAutomation.ShapeSheet.Query
         public QueryResultList<string> GetFormulas(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
-            var srcstream = BuildSIDSRCStream(surface, shapeids);
+            var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var values = surface.GetFormulasU_SIDSRC(srcstream);
-            var list = FillValuesForMultipleShapes(shapeids, values);
+            var list = this.FillValuesForMultipleShapes(shapeids, values);
             return list;
         }
 
@@ -163,24 +163,24 @@ namespace VisioAutomation.ShapeSheet.Query
         public QueryResultList<T> GetResults<T>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
-            var srcstream = BuildSIDSRCStream(surface, shapeids);
+            var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
             var values = surface.GetResults_SIDSRC<T>(srcstream, unitcodes);
-            var list = FillValuesForMultipleShapes(shapeids, values);
+            var list = this.FillValuesForMultipleShapes(shapeids, values);
             return list;
         }
 
         public QueryResultList<CellData<T>> GetCellData<T>(IVisio.Page page, IList<int> shapeids)
         {
             var surface = new ShapeSheetSurface(page);
-            return GetCellData<T>(surface, shapeids);
+            return this.GetCellData<T>(surface, shapeids);
         }
 
         public QueryResultList<CellData<T>> GetCellData<T>(ShapeSheetSurface surface, IList<int> shapeids)
         {
             this.Freeze();
 
-            var srcstream = BuildSIDSRCStream(surface, shapeids);
+            var srcstream = this.BuildSIDSRCStream(surface, shapeids);
             var unitcodes = this.BuildUnitCodeArray(shapeids.Count);
             T[] results = surface.GetResults_SIDSRC<T>(srcstream, unitcodes);
             string[] formulas  = surface.GetFormulasU_SIDSRC(srcstream);
@@ -192,7 +192,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 combined_data[i] = new CellData<T>(formulas[i], results[i]);
             }
 
-            var r = FillValuesForMultipleShapes(shapeids, combined_data);
+            var r = this.FillValuesForMultipleShapes(shapeids, combined_data);
             return r;
         }
 
@@ -258,7 +258,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (surface.Target.Shape == null)
             {
                 string msg = "Shape must be set in surface not page or master";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
             this.PerShapeSectionInfo = new List<List<SectionColumnDetails>>();
@@ -305,7 +305,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (stream_builder.ChunksWrittenCount != total)
             {
                 string msg = string.Format("Expected {0} Checks to be written. Actual = {1}", total, stream_builder.ChunksWrittenCount);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
             return stream_builder.Stream;
@@ -313,7 +313,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private short[] BuildSIDSRCStream(ShapeSheetSurface surface, IList<int> shapeids)
         {
-            CalculatePerShapeInfo(surface, shapeids);
+            this.CalculatePerShapeInfo(surface, shapeids);
 
             int total = this.GetTotalCellCount(shapeids.Count);
 
@@ -353,7 +353,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (stream_builder.ChunksWrittenCount != total)
             {
                 string msg = string.Format("Expected {0} Chunks to be written. Actual = {1}", total, stream_builder.ChunksWrittenCount);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
             return stream_builder.Stream;
@@ -398,7 +398,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (shapeids.Count != this.PerShapeSectionInfo.Count)
             {
                 string msg = string.Format("Expected {0} PerShape structs. Actual = {1}", shapeids.Count, this.PerShapeSectionInfo.Count);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
         }
 

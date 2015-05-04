@@ -14,7 +14,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ShapeSheet_Update_Formulas_MultipleShapes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var shape1 = page1.DrawRectangle(-1, -1, 0, 0);
             var shape2 = page1.DrawRectangle(-1, -1, 0, 0);
@@ -54,7 +54,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ShapeSheet_Update_ResultsInt_SingleShape()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
@@ -77,7 +77,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ShapeSheet_Update_ResultsString_SingleShape()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
@@ -100,7 +100,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ShapeSheet_Update_ResultsDouble_MultipleShapes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var shape1 = page1.DrawRectangle(-1, -1, 0, 0);
             var shape2 = page1.DrawRectangle(-1, -1, 0, 0);
@@ -189,7 +189,7 @@ namespace TestVisioAutomation
 
         public void CheckHomogenousUpdates_ResultTypes()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values

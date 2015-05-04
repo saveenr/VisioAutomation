@@ -47,12 +47,12 @@ namespace VisioPowerShell.Commands
 
             if (this.AlignVertical != VerticalAlignment.None)
             {
-                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)AlignVertical);
+                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical) this.AlignVertical);
             }
 
             if (this.AlignHorizontal != HorizontalAlignment.None)
             {
-                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)AlignHorizontal);
+                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal) this.AlignHorizontal);
             }
 
         }

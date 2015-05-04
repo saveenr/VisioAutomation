@@ -12,7 +12,7 @@ namespace VisioAutomation.Models.DirectedGraph
 
         public Connector(Shape from, Shape to)
         {
-            ConnectorType = VACON.ConnectorType.Curved;
+            this.ConnectorType = VACON.ConnectorType.Curved;
             this.From = from;
             this.To = to;
         }

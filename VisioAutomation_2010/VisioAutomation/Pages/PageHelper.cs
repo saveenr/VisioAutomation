@@ -27,13 +27,13 @@ namespace VisioAutomation.Pages
 
             if (dest_page == src_page)
             {
-                throw new VA.AutomationException("Destination Page cannot be Source Page");
+                throw new AutomationException("Destination Page cannot be Source Page");
             }
 
 
             if (src_page != app.ActivePage)
             {
-                throw new VA.AutomationException("Source page must be active page.");
+                throw new AutomationException("Source page must be active page.");
             }
 
             var src_page_shapes = src_page.Shapes;
@@ -49,14 +49,14 @@ namespace VisioAutomation.Pages
             }
 
             var src_pagesheet = src_page.PageSheet;
-            var pagecells = VA.Pages.PageCells.GetCells(src_pagesheet);
+            var pagecells = PageCells.GetCells(src_pagesheet);
 
 
             // handle the dest page
 
             // first update all the page cells
             var dest_pagesheet = dest_page.PageSheet;
-            var update = new VisioAutomation.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
             update.SetFormulas(pagecells);
             update.Execute(dest_pagesheet);
 
@@ -70,29 +70,29 @@ namespace VisioAutomation.Pages
             }
         }
 
-        private static VA.Drawing.Size GetSize(IVisio.Page page)
+        private static Drawing.Size GetSize(IVisio.Page page)
         {
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_height = query.AddCell(VA.ShapeSheet.SRCConstants.PageHeight,"PageHeight");
-            var col_width = query.AddCell(VA.ShapeSheet.SRCConstants.PageWidth,"PageWidth");
+            var query = new ShapeSheet.Query.CellQuery();
+            var col_height = query.AddCell(ShapeSheet.SRCConstants.PageHeight,"PageHeight");
+            var col_width = query.AddCell(ShapeSheet.SRCConstants.PageWidth,"PageWidth");
             var results = query.GetResults<double>(page.PageSheet);
             double height = results[col_height];
             double width = results[col_width];
-            var s = new VA.Drawing.Size(width, height);
+            var s = new Drawing.Size(width, height);
             return s;
         }
 
-        private static void SetSize(IVisio.Page page, VA.Drawing.Size size)
+        private static void SetSize(IVisio.Page page, Drawing.Size size)
         {
-            var page_cells = new VA.Pages.PageCells();
+            var page_cells = new PageCells();
             page_cells.PageHeight = size.Height;
             page_cells.PageWidth = size.Width;
-            var pageupdate = new VA.ShapeSheet.Update();
+            var pageupdate = new ShapeSheet.Update();
             pageupdate.SetFormulas(page_cells);
             pageupdate.Execute(page.PageSheet);
         }
         
-        public static void ResizeToFitContents(IVisio.Page page, VA.Drawing.Size padding)
+        public static void ResizeToFitContents(IVisio.Page page, Drawing.Size padding)
         {
             // first perform the native resizetofit
             page.ResizeToFitContents();
@@ -105,7 +105,7 @@ namespace VisioAutomation.Pages
                 // first determine the desired page size including the padding
                 // and set the new size
 
-                var old_size = VA.Pages.PageHelper.GetSize(page);
+                var old_size = GetSize(page);
                 var new_size = old_size + padding.Multiply(2, 2);
                 SetSize(page,new_size);
 
@@ -118,7 +118,7 @@ namespace VisioAutomation.Pages
         public static short[] DropManyU(
             IVisio.Page page,
             IList<IVisio.Master> masters,
-            IEnumerable<VA.Drawing.Point> points)
+            IEnumerable<Drawing.Point> points)
         {
             if (masters == null)
             {
@@ -137,7 +137,7 @@ namespace VisioAutomation.Pages
 
             // NOTE: DropMany will fail if you pass in zero items to drop
             var masters_obj_array = masters.Cast<object>().ToArray();
-            var xy_array = VA.Drawing.Point.ToDoubles(points).ToArray();
+            var xy_array = Drawing.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 
@@ -149,7 +149,7 @@ namespace VisioAutomation.Pages
 
         public static short[] DropManyAutoConnectors(
             IVisio.Page page,
-            IEnumerable<VA.Drawing.Point> points)
+            IEnumerable<Drawing.Point> points)
         {
 
             if (points == null)
@@ -163,7 +163,7 @@ namespace VisioAutomation.Pages
             var thing = app.ConnectorToolDataObject;
             int num_points = points.Count();
             var masters_obj_array = Enumerable.Repeat(thing, num_points).ToArray();
-            var xy_array = VA.Drawing.Point.ToDoubles(points).ToArray();
+            var xy_array = Drawing.Point.ToDoubles(points).ToArray();
 
             System.Array outids_sa;
 

@@ -24,7 +24,7 @@ namespace TestVisioAutomation
             var page = visapp.ActivePage;
             directed_graph_drawing.Render(page,options);
 
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -43,7 +43,7 @@ namespace TestVisioAutomation
             
             directed_graph_drawing.Render(page1,options);
 
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -79,7 +79,7 @@ namespace TestVisioAutomation
 
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 
-            string output_filename = TestVisioAutomation.Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }

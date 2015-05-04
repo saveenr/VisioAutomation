@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             if (!this.Client.Document.HasActiveDocument)
             {
-                throw new VA.Scripting.VisioOperationException("No Drawing available");
+                throw new VisioOperationException("No Drawing available");
             }
         }
 
@@ -95,7 +95,7 @@ namespace VisioAutomation.Scripting.Commands
         public void Activate(IVisio.Document doc)
         {
             this.Client.Application.AssertApplicationAvailable();
-            VA.Documents.DocumentHelper.Activate(doc);
+            Documents.DocumentHelper.Activate(doc);
         }
 
         public void Close(bool force)
@@ -109,7 +109,7 @@ namespace VisioAutomation.Scripting.Commands
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
             {
                 this.Client.WriteVerbose("Not a Drawing Window", doc.Name);
-                throw new VA.AutomationException("Not a Drawing Window");
+                throw new AutomationException("Not a Drawing Window");
             }
 
             this.Client.WriteVerbose( "Closing Document Name=\"{0}\"", doc.Name);
@@ -117,7 +117,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (force)
             {
-                using (var alert = new VA.Application.AlertResponseScope(application, VA.Application.AlertResponseCode.No))
+                using (var alert = new Application.AlertResponseScope(application, Application.AlertResponseCode.No))
                 {
                     doc.Close();
                 }
@@ -135,7 +135,7 @@ namespace VisioAutomation.Scripting.Commands
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
-            using (var alert = new VA.Application.AlertResponseScope(application, VA.Application.AlertResponseCode.No))
+            using (var alert = new Application.AlertResponseScope(application, Application.AlertResponseCode.No))
             {
                 foreach (var doc in docs)
                 {
@@ -206,7 +206,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
 
             var doc = this.New(template);
-            var pagesize = new VA.Drawing.Size(w, h);
+            var pagesize = new Drawing.Size(w, h);
             this.Client.Page.SetSize(pagesize);
             return doc;
         }
@@ -288,7 +288,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // get the named document
-            var docs2 = VA.TextUtil.FilterObjectsByNames(documents.AsEnumerable(), new[] {name}, d => d.Name, true, VA.TextUtil.FilterAction.Include).ToList();
+            var docs2 = TextUtil.FilterObjectsByNames(documents.AsEnumerable(), new[] {name}, d => d.Name, true, TextUtil.FilterAction.Include).ToList();
             return docs2;
         }
     }

@@ -16,7 +16,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Orientation != PageOrientation.None)
             {
-                this.client.Page.SetOrientation((VA.Pages.PrintPageOrientation)Orientation);
+                this.client.Page.SetOrientation((VA.Pages.PrintPageOrientation) this.Orientation);
             }
 
             if (this.BackgroundPage != null)

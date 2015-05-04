@@ -22,7 +22,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_GetSet()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0,0,1,1);
             s1.Text = "Checking for Custom Properties";
@@ -76,7 +76,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void CustomProps_GetSet2()
         {
-            var page1 = GetNewPage();
+            var page1 = this.GetNewPage();
 
             var s1 = page1.DrawRectangle(0, 0, 1, 1);
             s1.Text = "Checking for Custom Properties";

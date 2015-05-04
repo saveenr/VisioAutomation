@@ -11,9 +11,9 @@ namespace VisioAutomation.Drawing
 
         public ColorRGB(byte r, byte g, byte b)
         {
-            _r = r;
-            _g = g;
-            _b = b;
+            this._r = r;
+            this._g = g;
+            this._b = b;
         }
 
         public ColorRGB(short r, short g, short b) :
@@ -23,12 +23,12 @@ namespace VisioAutomation.Drawing
 
         public ColorRGB(int rgb)
         {
-            GetRGBBytes((uint) rgb, out _r, out _g, out _b);
+            GetRGBBytes((uint) rgb, out this._r, out this._g, out this._b);
         }
 
         public ColorRGB(uint rgb)
         {
-            GetRGBBytes(rgb, out _r, out _g, out _b);
+            GetRGBBytes(rgb, out this._r, out this._g, out this._b);
         }
 
 
@@ -41,22 +41,22 @@ namespace VisioAutomation.Drawing
 
         public byte R
         {
-            get { return _r; }
+            get { return this._r; }
         }
 
         public byte G
         {
-            get { return _g; }
+            get { return this._g; }
         }
 
         public byte B
         {
-            get { return _b; }
+            get { return this._b; }
         }
 
         public override string ToString()
         {
-            var s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "RGB({0},{1},{2})", this._r, this._g, this._b);
+            var s = string.Format(CultureInfo.InvariantCulture, "RGB({0},{1},{2})", this._r, this._g, this._b);
             return s;
         }
 
@@ -65,7 +65,7 @@ namespace VisioAutomation.Drawing
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public static explicit operator System.Drawing.Color(VA.Drawing.ColorRGB color)
+        public static explicit operator System.Drawing.Color(ColorRGB color)
         {
             return System.Drawing.Color.FromArgb(color._r, color._g, color._b);
         }
@@ -75,7 +75,7 @@ namespace VisioAutomation.Drawing
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public static explicit operator int(VA.Drawing.ColorRGB color)
+        public static explicit operator int(ColorRGB color)
         {
             return color.ToRGB();
         }
@@ -97,7 +97,7 @@ namespace VisioAutomation.Drawing
 
         public override bool Equals(object other)
         {
-            return other is ColorRGB && Equals((ColorRGB) other);
+            return other is ColorRGB && this.Equals((ColorRGB) other);
         }
 
         public static bool operator ==(ColorRGB lhs, ColorRGB rhs)
@@ -117,7 +117,7 @@ namespace VisioAutomation.Drawing
 
         public override int GetHashCode()
         {
-            return ToRGB();
+            return this.ToRGB();
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace VisioAutomation.Drawing
             if (!c.HasValue)
             {
                 string s = string.Format("Failed to parse color string \"{0}\"", webcolor);
-                throw new VA.AutomationException(s);
+                throw new AutomationException(s);
             }
 
             return c.Value;
@@ -212,7 +212,7 @@ namespace VisioAutomation.Drawing
             }
 
             int current_color;
-            bool result = System.Int32.TryParse(webcolor, System.Globalization.NumberStyles.HexNumber, null, out current_color);
+            bool result = System.Int32.TryParse(webcolor, NumberStyles.HexNumber, null, out current_color);
 
             if (!result)
             {
@@ -238,7 +238,7 @@ namespace VisioAutomation.Drawing
         private static string ToWebColorString(byte r, byte g, byte b)
         {
             const string format_string = "#{0:x2}{1:x2}{2:x2}";
-            CultureInfo invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
+            CultureInfo invariant_culture = CultureInfo.InvariantCulture;
             string color_string = string.Format(invariant_culture, format_string, r, g, b);
             return color_string;
         }

@@ -13,7 +13,7 @@
 
             this.OutputPath = GetOutputPathEx(name);
 
-            PrepareOutputPath();
+            this.PrepareOutputPath();
         }
 
         public string GetTestMethodOutputFilename(string ext)

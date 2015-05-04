@@ -10,7 +10,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Scripting_Controls_Scenarios()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
 

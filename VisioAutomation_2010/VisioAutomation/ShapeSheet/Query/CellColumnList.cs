@@ -9,7 +9,7 @@ namespace VisioAutomation.ShapeSheet.Query
     {
         private IList<CellColumn> items { get; set; }
         private Dictionary<string, CellColumn> dic_columns;
-        private HashSet<ShapeSheet.SRC> hs_src;
+        private HashSet<SRC> hs_src;
         private HashSet<short> hs_cellindex;
         private CellColumnType coltype;
 
@@ -32,7 +32,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public CellColumn this[int index]
@@ -59,15 +59,15 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.coltype == CellColumnType.CellIndex)
             {
-                throw new VA.AutomationException("Can't add an SRC if Columns contains CellIndexes");
+                throw new AutomationException("Can't add an SRC if Columns contains CellIndexes");
             }
             this.coltype = CellColumnType.SRC;
 
-            name = fixup_name(name);
+            name = this.fixup_name(name);
 
             if (this.dic_columns.ContainsKey(name))
             {
-                throw new VA.AutomationException("Duplicate Column Name");
+                throw new AutomationException("Duplicate Column Name");
             }
 
             if (this.hs_src == null)
@@ -78,7 +78,7 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.hs_src.Contains(src))
             {
                 string msg = "Duplicate SRC";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
             int ordinal = this.items.Count;
@@ -99,7 +99,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (this.coltype == CellColumnType.SRC)
             {
-                throw new VA.AutomationException("Can't add a CellIndex if Columns contains SRCs");
+                throw new AutomationException("Can't add a CellIndex if Columns contains SRCs");
             }
 
             this.coltype = CellColumnType.CellIndex;
@@ -112,10 +112,10 @@ namespace VisioAutomation.ShapeSheet.Query
             if (this.hs_cellindex.Contains(cell))
             {
                 string msg = "Duplicate Cell Index";
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
 
-            name = fixup_name(name);
+            name = this.fixup_name(name);
             int ordinal = this.items.Count;
             var col = new CellColumn(ordinal, cell, name);
             this.items.Add(col);

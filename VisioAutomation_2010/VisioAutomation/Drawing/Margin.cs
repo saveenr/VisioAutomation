@@ -22,27 +22,26 @@ namespace VisioAutomation.Drawing
                 throw new System.ArgumentException("bottom must be <= top");
             }
 
-            Left = left;
-            Bottom = bottom;
-            Right = right;
-            Top = top;
+            this.Left = left;
+            this.Bottom = bottom;
+            this.Right = right;
+            this.Top = top;
         }
 
         public override string ToString()
         {
-            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####},{1:0.#####},{2:0.#####},{3:0.#####})",
-                                     Left, Bottom, Right, Top);
+            string s = string.Format(System.Globalization.CultureInfo.InvariantCulture, "({0:0.#####},{1:0.#####},{2:0.#####},{3:0.#####})", this.Left, this.Bottom, this.Right, this.Top);
             return s;
         }
 
         public double TotalWidth
         {
-            get { return Right + Left; }
+            get { return this.Right + this.Left; }
         }
 
         public double TotalHeight
         {
-            get { return Top + Bottom; }
+            get { return this.Top + this.Bottom; }
         }
 
     }

@@ -18,7 +18,7 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var page = this.client.Page.New(null, false);
-            set_page_size(this.client, Width, Height);
+            set_page_size(this.client, this.Width, this.Height);
             
             if (this.Name != null)
             {

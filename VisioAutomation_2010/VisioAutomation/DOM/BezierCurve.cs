@@ -7,19 +7,19 @@ namespace VisioAutomation.DOM
 {
     public class BezierCurve : BaseShape
     {
-        public List<VA.Drawing.Point> ControlPoints { get; private set; }
+        public List<Drawing.Point> ControlPoints { get; private set; }
         public int Degree { get; private set; }
 
-        public BezierCurve(IEnumerable<VA.Drawing.Point> pts)
+        public BezierCurve(IEnumerable<Drawing.Point> pts)
         {
-            Degree = 3;
+            this.Degree = 3;
             this.ControlPoints = pts.ToList();
         }
 
         public BezierCurve(IEnumerable<double> pts)
         {
-            Degree = 3;
-            this.ControlPoints = VA.Drawing.Point.FromDoubles(pts).ToList();
+            this.Degree = 3;
+            this.ControlPoints = Drawing.Point.FromDoubles(pts).ToList();
         }
     }
 }

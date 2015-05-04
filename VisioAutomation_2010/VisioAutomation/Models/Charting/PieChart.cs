@@ -9,17 +9,17 @@ namespace VisioAutomation.Models.Charting
     {
         public double Radius= 1;
         public double InnerRadius = -1;
-        public VA.Drawing.Point Center;
+        public Drawing.Point Center;
         public DataPointList DataPoints;
  
-        public PieChart(VA.Drawing.Point center, double radius)
+        public PieChart(Drawing.Point center, double radius)
         {
             this.DataPoints = new DataPointList();
             this.Center = center;
             this.Radius = radius;
         }
 
-        public PieChart(VA.Drawing.Rectangle rect)
+        public PieChart(Drawing.Rectangle rect)
         {
             var center = rect.Center;
             var radius = System.Math.Min(rect.Width,rect.Height)/2.0;
@@ -34,7 +34,7 @@ namespace VisioAutomation.Models.Charting
             var shapes = new List<IVisio.Shape>(values.Count);
             if (this.InnerRadius <= 0)
             {
-                var slices = VA.Models.Charting.PieSlice.GetSlicesFromValues(this.Center, this.Radius, values);
+                var slices = PieSlice.GetSlicesFromValues(this.Center, this.Radius, values);
                 foreach (var slice in slices)
                 {
                     shapes.Add(slice.Render(page));
@@ -42,7 +42,7 @@ namespace VisioAutomation.Models.Charting
             }
             else
             {
-                var slices = VA.Models.Charting.PieSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
+                var slices = PieSlice.GetSlicesFromValues(this.Center, this.InnerRadius, this.Radius, values);
                 foreach (var slice in slices)
                 {
                     shapes.Add(slice.Render(page));

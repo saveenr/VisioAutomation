@@ -12,7 +12,7 @@ namespace VisioAutomation.Pages.PageLayout
             this.ConnectorStyle = ConnectorStyle.RightAngle;
         }
 
-        protected override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
+        protected override void SetPageCells(PageCells pagecells)
         {
             base.SetPageCells(pagecells);
             pagecells.PlaceStyle = (int) IVisio.VisCellVals.visPLOPlaceDefault;

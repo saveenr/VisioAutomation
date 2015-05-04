@@ -15,11 +15,11 @@ namespace VisioAutomation.Extensions
             }
         }
         
-        public static VA.Drawing.Rectangle GetBoundingBox(this IVisio.Selection selection, IVisio.VisBoundingBoxArgs args)
+        public static Drawing.Rectangle GetBoundingBox(this IVisio.Selection selection, IVisio.VisBoundingBoxArgs args)
         {
             double bbx0, bby0, bbx1, bby1;
             selection.BoundingBox((short) args, out bbx0, out bby0, out bbx1, out bby1);
-            var r = new VA.Drawing.Rectangle(bbx0, bby0, bbx1, bby1);
+            var r = new Drawing.Rectangle(bbx0, bby0, bbx1, bby1);
             return r;
         }
 

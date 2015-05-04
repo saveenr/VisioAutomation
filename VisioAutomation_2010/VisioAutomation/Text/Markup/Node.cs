@@ -30,7 +30,7 @@ namespace VisioAutomation.Text.Markup
                 var t = (Field)this;
                 return t.PlaceholderText;
             }
-            else if (this.NodeType == VA.Text.Markup.NodeType.Element)
+            else if (this.NodeType == NodeType.Element)
             {
                 var sb = new System.Text.StringBuilder();
 
@@ -58,9 +58,9 @@ namespace VisioAutomation.Text.Markup
             }
         }
 
-        internal IEnumerable<VA.Internal.WalkEvent<Node>> Walk()
+        internal IEnumerable<Internal.WalkEvent<Node>> Walk()
         {
-            return VA.Internal.TreeOps.Walk<Node>(this, get_children_for_walk);
+            return Internal.TreeOps.Walk<Node>(this, this.get_children_for_walk);
         }
 
         IEnumerable<Node> get_children_for_walk(Node n)
@@ -76,7 +76,7 @@ namespace VisioAutomation.Text.Markup
         
         private IEnumerable<Node> WalkNodes()
         {
-            return VA.Internal.TreeOps.PreOrder<Node>(this,n=>n.Children);
+            return Internal.TreeOps.PreOrder<Node>(this,n=>n.Children);
         }
 
         public void Add(Node n)

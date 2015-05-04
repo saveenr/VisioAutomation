@@ -11,15 +11,15 @@ namespace VisioAutomation.Drawing
         public Point(double x, double y)
             : this()
         {
-            X = x;
-            Y = y;
+            this.X = x;
+            this.Y = y;
         }
 
 
         public override string ToString()
         {
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
-            string s = string.Format(invariant_culture, "Point({0:0.#####}, {1:0.#####})", X, Y);
+            string s = string.Format(invariant_culture, "Point({0:0.#####}, {1:0.#####})", this.X, this.Y);
             return s;
         }
 
@@ -41,7 +41,7 @@ namespace VisioAutomation.Drawing
             return result;
         }
 
-        public static Point operator *(Point pa, VA.Drawing.Size s)
+        public static Point operator *(Point pa, Size s)
         {
             var result = new Point(pa.X*s.Width, pa.Y*s.Height);
             return result;
@@ -49,37 +49,37 @@ namespace VisioAutomation.Drawing
 
         public Point Add(double dx, double dy)
         {
-            var new_point = new Point(X + dx, Y + dy);
+            var new_point = new Point(this.X + dx, this.Y + dy);
             return new_point;
         }
 
         public Point Subtract(double dx, double dy)
         {
-            var new_point = new Point(X - dx, Y - dy);
+            var new_point = new Point(this.X - dx, this.Y - dy);
             return new_point;
         }
 
         public Point Add(Point p)
         {
-            var new_point = new Point(X + p.X, Y + p.Y);
+            var new_point = new Point(this.X + p.X, this.Y + p.Y);
             return new_point;
         }
 
         public Point Subtract(Point p)
         {
-            var new_point = new Point(X - p.X, Y - p.Y);
+            var new_point = new Point(this.X - p.X, this.Y - p.Y);
             return new_point;
         }
 
-        public Point Add(VA.Drawing.Size s)
+        public Point Add(Size s)
         {
-            var new_point = new Point(X + s.Width, Y + s.Height);
+            var new_point = new Point(this.X + s.Width, this.Y + s.Height);
             return new_point;
         }
 
-        public Point Subtract(VA.Drawing.Size s)
+        public Point Subtract(Size s)
         {
-            var new_point = new Point(X - s.Width, Y - s.Height);
+            var new_point = new Point(this.X - s.Width, this.Y - s.Height);
             return new_point;
         }
 
@@ -90,33 +90,33 @@ namespace VisioAutomation.Drawing
 
         public Point Multiply(double s)
         {
-            return Multiply(s, s);
+            return this.Multiply(s, s);
         }
 
         public Point Multiply(double sx, double sy)
         {
-            var new_point = new Point(X*sx, Y*sy);
+            var new_point = new Point(this.X*sx, this.Y*sy);
             return new_point;
         }
 
-        public Point Multiply(VA.Drawing.Size s)
+        public Point Multiply(Size s)
         {
-            var new_point = new Point(X*s.Width, Y*s.Height);
+            var new_point = new Point(this.X*s.Width, this.Y*s.Height);
             return new_point;
         }
 
         public Point Divide(double sx, double sy)
         {
-            var new_point = new Point(X/sx, Y/sy);
+            var new_point = new Point(this.X/sx, this.Y/sy);
             return new_point;
         }
 
         public Point Divide(double s)
         {
-            return Divide(s, s);
+            return this.Divide(s, s);
         }
 
-        public static IEnumerable<Drawing.Point> FromDoubles(IEnumerable<double> doubles)
+        public static IEnumerable<Point> FromDoubles(IEnumerable<double> doubles)
         {
             if (doubles == null)
             {
@@ -133,13 +133,13 @@ namespace VisioAutomation.Drawing
                 }
                 else
                 {
-                    yield return new Drawing.Point(even_value, value);
+                    yield return new Point(even_value, value);
                 }
                 count++;
             }
         }
 
-        public static IEnumerable<double> ToDoubles(IEnumerable<Drawing.Point> points)
+        public static IEnumerable<double> ToDoubles(IEnumerable<Point> points)
         {
             foreach (var p in points)
             {

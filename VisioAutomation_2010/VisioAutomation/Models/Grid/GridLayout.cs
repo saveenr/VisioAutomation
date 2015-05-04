@@ -10,8 +10,8 @@ namespace VisioAutomation.Models.Grid
     {
         public int ColumnCount { get; private set; }
         public int RowCount { get; private set; }
-        public VA.Drawing.Point Origin { get;  set; }
-        public VA.Drawing.Size CellSpacing { get; set; }
+        public Drawing.Point Origin { get;  set; }
+        public Drawing.Size CellSpacing { get; set; }
         public RowDirection RowDirection { get; set; }
         public ColumnDirection ColumnDirection { get; set; }
 
@@ -35,11 +35,11 @@ namespace VisioAutomation.Models.Grid
             }
         }
 
-        public GridLayout(int cols, int rows, VA.Drawing.Size cellsize, IVisio.Master master)
+        public GridLayout(int cols, int rows, Drawing.Size cellsize, IVisio.Master master)
         {
-            ColumnDirection = ColumnDirection.LeftToRight;
-            RowDirection = RowDirection.BottomToTop;
-            CellSpacing = new VA.Drawing.Size(0.5, 0.25);
+            this.ColumnDirection = ColumnDirection.LeftToRight;
+            this.RowDirection = RowDirection.BottomToTop;
+            this.CellSpacing = new Drawing.Size(0.5, 0.25);
             this.ColumnCount = cols;
             this.RowCount = rows;
 
@@ -96,7 +96,7 @@ namespace VisioAutomation.Models.Grid
                     double final_top;
                     double final_bottom;
 
-                    if (ColumnDirection == ColumnDirection.LeftToRight)
+                    if (this.ColumnDirection == ColumnDirection.LeftToRight)
                     {
                         final_left = this.Origin.X + dx;
                         final_right = final_left + this.Columns[col].Width;                       
@@ -107,7 +107,7 @@ namespace VisioAutomation.Models.Grid
                         final_left = final_right - this.Columns[col].Width;
                     }
 
-                    if (RowDirection==RowDirection.BottomToTop)
+                    if (this.RowDirection==RowDirection.BottomToTop)
                     {
                         final_bottom = this.Origin.Y + dy;
                         final_top = final_bottom + this.Rows[row].Height;
@@ -119,7 +119,7 @@ namespace VisioAutomation.Models.Grid
                     }
 
                     var node = this.GetNode(col, row);
-                    node.Rectangle = new VA.Drawing.Rectangle(final_left, final_bottom, final_right, final_top);
+                    node.Rectangle = new Drawing.Rectangle(final_left, final_bottom, final_right, final_top);
 
                     dx += this.Columns[col].Width;
                     dx += this.CellSpacing.Width;
@@ -139,9 +139,9 @@ namespace VisioAutomation.Models.Grid
 
             var nodes_to_draw = this.Nodes.Where(n => n.Draw).ToList();
 
-            var page_node = new VA.DOM.Page();
+            var page_node = new DOM.Page();
 
-            var shape_nodes = new List<VA.DOM.Shape>(nodes_to_draw.Count);
+            var shape_nodes = new List<DOM.Shape>(nodes_to_draw.Count);
             foreach (var node in nodes_to_draw)
             {
                 var shape_node = page_node.Shapes.Drop(node.Master, node.Rectangle.Center);
@@ -156,7 +156,7 @@ namespace VisioAutomation.Models.Grid
 
                 if (!string.IsNullOrEmpty(node.Text))
                 {
-                    shape_node.Text = new VA.Text.Markup.TextElement( node.Text );
+                    shape_node.Text = new Text.Markup.TextElement( node.Text );
                 }
 
                 shape_nodes.Add(shape_node);

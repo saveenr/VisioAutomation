@@ -6,22 +6,22 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroup : BaseCellGroup
     {
-        private static void check_query(VA.ShapeSheet.Query.CellQuery query)
+        private static void check_query(Query.CellQuery query)
         {
             if (query.CellColumns.Count < 1)
             {
-                throw new VA.AutomationException("Query must contain at least 1 Column");
+                throw new AutomationException("Query must contain at least 1 Column");
             }
 
             if (query.SectionColumns.Count != 0)
             {
-                throw new VA.AutomationException("Query should not contain contain any sections");
+                throw new AutomationException("Query should not contain contain any sections");
             }
         }
 
         protected static IList<T> _GetCells<T, RT>(
             IVisio.Page page, IList<int> shapeids,
-            VA.ShapeSheet.Query.CellQuery query,
+            Query.CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             check_query(query);
@@ -39,7 +39,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         protected static T _GetCells<T, RT>(
             IVisio.Shape shape,
-            VA.ShapeSheet.Query.CellQuery query,
+            Query.CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             check_query(query);

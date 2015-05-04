@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             }
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Client client, string filename)
+        public static IList<DGMODEL.Drawing> LoadFromXML(Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
             return LoadFromXML(client, xmldoc);
@@ -53,14 +53,14 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         private class PageData
         {
-            public VA.Models.DirectedGraph.MsaglLayoutOptions LayoutOptions;
+            public Models.DirectedGraph.MsaglLayoutOptions LayoutOptions;
             public DGMODEL.Drawing DirectedGraph;
             public List<ShapeInfo> ShapeInfos;
             public List<ConnectorInfo> ConnectorInfos;
             public List<BuilderError> Errors;
         }
 
-        private static List<PageData> LoadPageDataFromXML(VA.Scripting.Client client, SXL.XDocument xmldoc)
+        private static List<PageData> LoadPageDataFromXML(Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = new List<PageData>();
             // LOAD and ANALYZE EACH PAGE
@@ -76,7 +76,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 var pagedata = new PageData();
                 pagedatas.Add(pagedata);
                 pagedata.Errors = new List<BuilderError>();
-                pagedata.LayoutOptions = new VA.Models.DirectedGraph.MsaglLayoutOptions();
+                pagedata.LayoutOptions = new Models.DirectedGraph.MsaglLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
                 GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
 
@@ -131,7 +131,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return pagedatas;
         }
 
-        public static IList<DGMODEL.Drawing> LoadFromXML(VA.Scripting.Client client, SXL.XDocument xmldoc)
+        public static IList<DGMODEL.Drawing> LoadFromXML(Client client, SXL.XDocument xmldoc)
         {
             var pagedatas = LoadPageDataFromXML(client, xmldoc);
 
@@ -173,12 +173,12 @@ namespace VisioAutomation.Scripting.DirectedGraph
                     var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);
                     var to_shape = pagedata.DirectedGraph.Shapes.Find(con_info.To);
 
-                    var def_con_color = new VA.Drawing.ColorRGB(0x000000);
+                    var def_con_color = new Drawing.ColorRGB(0x000000);
                     var def_con_weight = 1.0/72.0;
                     var def_end_arrow = 2;
                     var dg_connector = pagedata.DirectedGraph.AddConnection(con_info.ID, from_shape, to_shape, con_info.Label, connectory_type);
 
-                    dg_connector.Cells = new VA.DOM.ShapeCells();
+                    dg_connector.Cells = new DOM.ShapeCells();
                     dg_connector.Cells.LineColor = con_info.Element.AttributeAsColor("color", def_con_color).ToFormula();
                     dg_connector.Cells.LineWeight = con_info.Element.AttributeAsInches("weight", def_con_weight);
                     dg_connector.Cells.EndArrow = def_end_arrow;
@@ -191,10 +191,10 @@ namespace VisioAutomation.Scripting.DirectedGraph
             return directedgraphs;
         }
 
-        private static void GetRenderOptionsFromXml(SXL.XElement el, VA.Models.DirectedGraph.MsaglLayoutOptions options)
+        private static void GetRenderOptionsFromXml(SXL.XElement el, Models.DirectedGraph.MsaglLayoutOptions options)
         {
-            options.UseDynamicConnectors = VA.Scripting.XmlUtil.GetAttributeValue(el, "usedynamicconnectors", bool.Parse);
-            options.ScalingFactor = VA.Scripting.XmlUtil.GetAttributeValue(el, "scalingfactor", double.Parse);
+            options.UseDynamicConnectors = XmlUtil.GetAttributeValue(el, "usedynamicconnectors", bool.Parse);
+            options.ScalingFactor = XmlUtil.GetAttributeValue(el, "scalingfactor", double.Parse);
         }
     }
 }

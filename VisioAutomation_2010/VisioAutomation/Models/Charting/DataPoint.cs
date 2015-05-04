@@ -18,11 +18,11 @@ namespace VisioAutomation.Models.Charting
 
         public static List<DataPoint> DoublesToDataPoints(double[] Values, string[] Labels)
         {
-            var datapoints = new List<VA.Models.Charting.DataPoint>();
+            var datapoints = new List<DataPoint>();
 
             for (int i = 0; i < Values.Length; i++)
             {
-                var dp = new VA.Models.Charting.DataPoint(Values[i]);
+                var dp = new DataPoint(Values[i]);
                 if (Labels != null && i < Labels.Length)
                 {
                     dp.Label = Labels[i];

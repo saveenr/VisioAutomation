@@ -35,15 +35,15 @@ namespace VisioAutomation.VDX.Elements
         
         public Layer(string name, int index)
         {
-            ColorTrans = new TransparencyCell();
-            Glue = new BoolCell();
-            Snap = new BoolCell();
-            Lock = new BoolCell();
-            Active = new BoolCell();
-            Print = new BoolCell();
-            Visible = new BoolCell();
-            Status = new IntCell();
-            Color = new IntCell();
+            this.ColorTrans = new TransparencyCell();
+            this.Glue = new BoolCell();
+            this.Snap = new BoolCell();
+            this.Lock = new BoolCell();
+            this.Active = new BoolCell();
+            this.Print = new BoolCell();
+            this.Visible = new BoolCell();
+            this.Status = new IntCell();
+            this.Color = new IntCell();
             this.Name = name;
             this.NameUniv = name;
             this.Index = index;

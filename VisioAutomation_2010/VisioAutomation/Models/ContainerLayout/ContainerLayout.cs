@@ -64,7 +64,7 @@ namespace VisioAutomation.Models.ContainerLayout
                     double top = row_tops[ri];
                     double bottom = row_bottoms[ri];
 
-                    var rect = new VA.Drawing.Rectangle(left, bottom, right, top);
+                    var rect = new Drawing.Rectangle(left, bottom, right, top);
 
                     var item = ct.ContainerItems[ri];
                     item.Rectangle = rect;
@@ -78,7 +78,7 @@ namespace VisioAutomation.Models.ContainerLayout
                 {
                     double top = this.LayoutOptions.Padding + this.LayoutOptions.ContainerHeaderHeight;
                     double bottom = top - this.LayoutOptions.ContainerHeaderHeight - this.LayoutOptions.Padding;
-                    ct.Rectangle = new VA.Drawing.Rectangle(col_lefts[ctn], bottom, col_rights[ctn], top);
+                    ct.Rectangle = new Drawing.Rectangle(col_lefts[ctn], bottom, col_rights[ctn], top);
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace VisioAutomation.Models.ContainerLayout
                     min_left -= this.LayoutOptions.Padding;
                     min_bottom -= this.LayoutOptions.Padding;
 
-                    ct.Rectangle = new VA.Drawing.Rectangle(min_left, min_bottom, max_right, max_top);                    
+                    ct.Rectangle = new Drawing.Rectangle(min_left, min_bottom, max_right, max_top);                    
                 }
 
 
@@ -108,7 +108,7 @@ namespace VisioAutomation.Models.ContainerLayout
             {
                 string msg = string.Format("{0} usage error. Call PerformLayout() before calling Render().",
                                            typeof (ContainerLayout).Name);
-                throw new VA.AutomationException(msg);
+                throw new AutomationException(msg);
             }
             // create a new drawing
             var app = doc.Application;
@@ -169,7 +169,7 @@ namespace VisioAutomation.Models.ContainerLayout
 
             var window = app.ActiveWindow;
 
-            var update = new VA.ShapeSheet.Update();
+            var update = new ShapeSheet.Update();
 
             // Format the containers and shapes
 
@@ -204,14 +204,14 @@ namespace VisioAutomation.Models.ContainerLayout
         private static short[] DropManyU(
             IVisio.Page page,
             IList<IVisio.Master> masters,
-            IList<VA.Drawing.Rectangle> rects)
+            IList<Drawing.Rectangle> rects)
         {
             var points = rects.Select(r => r.Center).ToList();
-            var shapeids = VA.Pages.PageHelper.DropManyU(page, masters, points);
+            var shapeids = Pages.PageHelper.DropManyU(page, masters, points);
 
-            var xfrm = new VA.Shapes.XFormCells();
+            var xfrm = new Shapes.XFormCells();
 
-            var update = new VA.ShapeSheet.Update(points.Count*2);
+            var update = new ShapeSheet.Update(points.Count*2);
             for (int i = 0; i < rects.Count(); i++)
             {
                 xfrm.Width = rects[i].Width;

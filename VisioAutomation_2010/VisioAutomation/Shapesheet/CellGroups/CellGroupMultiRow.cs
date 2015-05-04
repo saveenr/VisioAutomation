@@ -7,16 +7,16 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 {
     public abstract class CellGroupMultiRow : BaseCellGroup
     {
-        private static void check_query(VA.ShapeSheet.Query.CellQuery query)
+        private static void check_query(CellQuery query)
         {
             if (query.CellColumns.Count != 0)
             {
-                throw new VA.AutomationException("Query should not contain any Columns");
+                throw new AutomationException("Query should not contain any Columns");
             }
 
             if (query.SectionColumns.Count != 1)
             {
-                throw new VA.AutomationException("Query should not contain contain exaxtly 1 section");
+                throw new AutomationException("Query should not contain contain exaxtly 1 section");
             }
         }
 
@@ -24,7 +24,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
         public static IList<List<T>> _GetCells<T, RT>(
             IVisio.Page page,
             IList<int> shapeids,
-            VA.ShapeSheet.Query.CellQuery query,
+            CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             check_query(query);
@@ -45,7 +45,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
 
         public static IList<T> _GetCells<T, RT>(
             IVisio.Shape shape,
-            VA.ShapeSheet.Query.CellQuery query,
+            CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
             check_query(query);

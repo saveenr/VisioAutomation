@@ -18,7 +18,7 @@ namespace VisioAutomation.Pages.PageLayout
             this.VerticalAlignment = VerticalAlignment.Middle;
         }
 
-        protected override void SetPageCells(VisioAutomation.Pages.PageCells pagecells)
+        protected override void SetPageCells(PageCells pagecells)
         {
             base.SetPageCells(pagecells);
             pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);
@@ -88,11 +88,11 @@ namespace VisioAutomation.Pages.PageLayout
                 else
                 {
                     string msg = "Unsupported vertical alignment";
-                    throw new VA.AutomationException(msg);
+                    throw new AutomationException(msg);
                 }
             }
             string msg2 = "Unsupported direction";
-            throw new VA.AutomationException(msg2);
+            throw new AutomationException(msg2);
         }
 
         protected override IVisio.VisCellVals? ConnectorsStyleToRouteStyle()

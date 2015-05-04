@@ -7,7 +7,7 @@ namespace VisioAutomation.Models.Tree
     public class Drawing
     {
         public Node Root { get; set; }
-        public VA.Models.Tree.LayoutOptions LayoutOptions;
+        public LayoutOptions LayoutOptions;
         
         public Drawing()
         {
@@ -26,7 +26,7 @@ namespace VisioAutomation.Models.Tree
         
         public IEnumerable<Node> Nodes
         {
-            get { return VA.Internal.TreeOps.PreOrder(this.Root, n => n.Children); }
+            get { return Internal.TreeOps.PreOrder(this.Root, n => n.Children); }
         }
     }
 }

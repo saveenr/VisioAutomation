@@ -6,12 +6,12 @@ namespace VisioAutomation.Drawing
 {
     public struct BezierSegment
     {
-        public VA.Drawing.Point Start { get; private set; }
-        public VA.Drawing.Point Handle1 { get; private set; }
-        public VA.Drawing.Point Handle2 { get; private set; }
-        public VA.Drawing.Point End { get; private set; }
+        public Point Start { get; private set; }
+        public Point Handle1 { get; private set; }
+        public Point Handle2 { get; private set; }
+        public Point End { get; private set; }
 
-        public BezierSegment(VA.Drawing.Point start, VA.Drawing.Point handle1, VA.Drawing.Point handle2, VA.Drawing.Point end)
+        public BezierSegment(Point start, Point handle1, Point handle2, Point end)
             : this()
         {
             this.Start = start;
@@ -20,7 +20,7 @@ namespace VisioAutomation.Drawing
             this.End = end;
         }
 
-        public BezierSegment(IList<VA.Drawing.Point> points)
+        public BezierSegment(IList<Point> points)
             : this()
         {
             if (points == null)
@@ -40,14 +40,14 @@ namespace VisioAutomation.Drawing
             this.End = points[3];
         }
 
-        public static IList<VA.Drawing.Point> Merge(IList<BezierSegment> segments, out int degree)
+        public static IList<Point> Merge(IList<BezierSegment> segments, out int degree)
         {
             if (segments == null)
             {
                 throw new System.ArgumentNullException("segments");
             }
 
-            var points = new List<VA.Drawing.Point>(segments.Count * 4);
+            var points = new List<Point>(segments.Count * 4);
             int n = 0;
             foreach (var seg in segments)
             {
@@ -82,7 +82,7 @@ namespace VisioAutomation.Drawing
                 var arr = new BezierSegment[1];
                 double cos_theta = System.Math.Cos(startangle);
                 double sin_theta = System.Math.Sin(startangle);
-                var p0 = new VA.Drawing.Point(cos_theta, -sin_theta);
+                var p0 = new Point(cos_theta, -sin_theta);
                 var p1 = RotateAroundOrigin( p0, startangle);
                 arr[0] = new BezierSegment(p1,p1,p1,p1);
             }
@@ -99,7 +99,7 @@ namespace VisioAutomation.Drawing
             return bez_arr;
         }
 
-        private static IEnumerable<VA.Internal.ArcSegment> subdivide_arc_nicely(double start_angle, double end_angle)
+        private static IEnumerable<Internal.ArcSegment> subdivide_arc_nicely(double start_angle, double end_angle)
         {
             // TODO: Should calculate number of subarcs without resorting to an enumeration
 
@@ -114,7 +114,7 @@ namespace VisioAutomation.Drawing
 
             double right_angle = System.Math.PI/2;
 
-            var cur = new VA.Internal.ArcSegment(start_angle, end_angle);
+            var cur = new Internal.ArcSegment(start_angle, end_angle);
             while (true)
             {
                 double temp = System.Math.Floor(cur.begin/right_angle);
@@ -122,8 +122,8 @@ namespace VisioAutomation.Drawing
 
                 if ((cur.begin < cut_angle) && (cut_angle < cur.end))
                 {
-                    yield return (new VA.Internal.ArcSegment(cur.begin, cut_angle));
-                    cur = new VA.Internal.ArcSegment(cut_angle, cur.end);
+                    yield return (new Internal.ArcSegment(cur.begin, cut_angle));
+                    cur = new Internal.ArcSegment(cut_angle, cur.end);
                 }
                 else
                 {
@@ -148,10 +148,10 @@ namespace VisioAutomation.Drawing
             double cos_theta = System.Math.Cos(theta);
             double sin_theta = System.Math.Sin(theta);
 
-            var p0 = new VA.Drawing.Point(cos_theta, -sin_theta);
-            var p1 = new VA.Drawing.Point((4 - cos_theta) / 3.0, ((1 - cos_theta) * (cos_theta - 3.0)) / (3 * sin_theta));
-            var p2 = new VA.Drawing.Point(p1.X, -p1.Y);
-            var p3 = new VA.Drawing.Point(p0.X, -p0.Y);
+            var p0 = new Point(cos_theta, -sin_theta);
+            var p1 = new Point((4 - cos_theta) / 3.0, ((1 - cos_theta) * (cos_theta - 3.0)) / (3 * sin_theta));
+            var p2 = new Point(p1.X, -p1.Y);
+            var p3 = new Point(p0.X, -p0.Y);
 
             var arc_bezier = new[] {p0, p1, p2, p3}
                 .Select(p => RotateAroundOrigin(p, theta + start_angle))
@@ -160,11 +160,11 @@ namespace VisioAutomation.Drawing
             return new BezierSegment(arc_bezier);
         }
 
-        private static Drawing.Point RotateAroundOrigin(Drawing.Point p1, double theta)
+        private static Point RotateAroundOrigin(Point p1, double theta)
         {
             double nx = (System.Math.Cos(theta)*p1.X) - (System.Math.Sin(theta)*p1.Y);
             double ny = (System.Math.Sin(theta)*p1.X) + (System.Math.Cos(theta)*p1.Y);
-            return new Drawing.Point(nx, ny);
+            return new Point(nx, ny);
         }
     }
 }

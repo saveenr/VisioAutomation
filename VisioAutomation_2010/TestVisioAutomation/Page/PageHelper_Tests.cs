@@ -9,7 +9,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_Query()
         {
-            var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
+            var page1 = this.GetNewPage(new VA.Drawing.Size(4, 3));
             var pagecells = VA.Pages.PageCells.GetCells(page1.PageSheet);
             Assert.AreEqual(new VA.Drawing.Size(4, 3), new VA.Drawing.Size(pagecells.PageWidth.Result,pagecells.PageHeight.Result));
 
@@ -29,7 +29,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_Orientation()
         {
-            var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
+            var page1 = this.GetNewPage(new VA.Drawing.Size(4, 3));
 
             var client = this.GetScriptingClient();
 
@@ -52,7 +52,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void Page_Duplicate()
         {
-            var page1 = GetNewPage(new VA.Drawing.Size(4, 3));
+            var page1 = this.GetNewPage(new VA.Drawing.Size(4, 3));
             var s1 = page1.DrawRectangle(1, 1, 3, 3);
 
             var doc = page1.Document;
@@ -67,7 +67,7 @@ namespace TestVisioAutomation
 
             VA.Pages.PageHelper.Duplicate(page1, page2);
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 3), VisioAutomationTest.GetPageSize(page2));
+            Assert.AreEqual(new VA.Drawing.Size(4, 3), GetPageSize(page2));
             Assert.AreEqual(1, page2.Shapes.Count);
 
             page2.Delete(0);

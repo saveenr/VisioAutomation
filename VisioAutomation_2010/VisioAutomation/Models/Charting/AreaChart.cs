@@ -8,13 +8,13 @@ namespace VisioAutomation.Models.Charting
 {
     public class AreaChart
     {
-        public VA.Drawing.Rectangle Rectangle;
+        public Drawing.Rectangle Rectangle;
         public DataPointList DataPoints;
         public double TotalBarWidth;
         public double TotalMarginWidth;
         public double TotalBarSpacingWidth;
  
-        public AreaChart(VA.Drawing.Rectangle rect)
+        public AreaChart(Drawing.Rectangle rect)
         {
             this.Rectangle = rect;
             this.DataPoints = new DataPointList();
@@ -44,18 +44,18 @@ namespace VisioAutomation.Models.Charting
                 base_y += System.Math.Abs(this.Rectangle.Height * (min / range));
             }
 
-            var category_axis_start_point = new VA.Drawing.Point(this.Rectangle.Left, base_y);
-            var category_axis_end_point = new VA.Drawing.Point(this.Rectangle.Right, base_y);
+            var category_axis_start_point = new Drawing.Point(this.Rectangle.Left, base_y);
+            var category_axis_end_point = new Drawing.Point(this.Rectangle.Right, base_y);
             var category_axis_shape = page.DrawLine(category_axis_start_point, category_axis_end_point);
 
             double cur_x = base_x;
 
-            var points = new List<VA.Drawing.Point>();
+            var points = new List<Drawing.Point>();
             for (int i = 0; i < this.DataPoints.Count; i++)
             {
                 if (i == 0)
                 {
-                    points.Add( new VA.Drawing.Point(cur_x,base_y));
+                    points.Add( new Drawing.Point(cur_x,base_y));
                 }
 
                 var p = this.DataPoints[i];
@@ -64,23 +64,23 @@ namespace VisioAutomation.Models.Charting
 
                 if (p.Value >= 0.0)
                 {
-                    points.Add(new VA.Drawing.Point(cur_x, base_y+value_height));
+                    points.Add(new Drawing.Point(cur_x, base_y+value_height));
                 }
                 else
                 {
-                    points.Add(new VA.Drawing.Point(cur_x , base_y - value_height));
+                    points.Add(new Drawing.Point(cur_x , base_y - value_height));
 
                 }
 
                 if (i == this.DataPoints.Count - 1)
                 {
-                    points.Add(new VA.Drawing.Point(cur_x, base_y));
+                    points.Add(new Drawing.Point(cur_x, base_y));
                 }
 
                 cur_x += bar_spacing;
             }
 
-            points.Add(new VA.Drawing.Point(base_x, base_y));
+            points.Add(new Drawing.Point(base_x, base_y));
 
 
             var area_shape = page.DrawPolyline(points);

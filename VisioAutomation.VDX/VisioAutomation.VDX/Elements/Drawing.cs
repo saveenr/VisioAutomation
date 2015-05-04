@@ -13,7 +13,7 @@ namespace VisioAutomation.VDX
 
         public Template()
         {
-            this.xml = VA.VDX.Elements.Drawing.DefaultTemplateXML;
+            this.xml = Elements.Drawing.DefaultTemplateXML;
         }
 
         public Template(string xml)
@@ -32,7 +32,7 @@ namespace VisioAutomation.VDX
         {
             var root = vdx_xml_doc.Root;
 
-            string ns_2003 = VA.VDX.Internal.Constants.VisioXmlNamespace2003;
+            string ns_2003 = Internal.Constants.VisioXmlNamespace2003;
 
             // set document properties
             var docprops = root.ElementVisioSchema2003("DocumentProperties");
@@ -72,7 +72,7 @@ namespace VisioAutomation.VDX.Elements
         private readonly Dictionary<string, MasterMetadata> master_metadata =
             new Dictionary<string, MasterMetadata>(System.StringComparer.OrdinalIgnoreCase);
 
-        public VA.VDX.Sections.DocumentProperties DocumentProperties = new VA.VDX.Sections.DocumentProperties();
+        public Sections.DocumentProperties DocumentProperties = new Sections.DocumentProperties();
 
         internal int CurrentShapeID = -100;
 
@@ -92,7 +92,7 @@ namespace VisioAutomation.VDX.Elements
             this._windows = new List<Window>();
             this._colors = new List<ColorEntry>();
 
-            var masters_el = dom.Root.ElementVisioSchema2003("Masters");
+            var masters_el = this.dom.Root.ElementVisioSchema2003("Masters");
             if (masters_el == null)
             {
                 throw new System.InvalidOperationException();
@@ -123,7 +123,7 @@ namespace VisioAutomation.VDX.Elements
                 this.CurrentShapeID = 1;
             }
 
-            var facenames_el = dom.Root.ElementVisioSchema2003("FaceNames");
+            var facenames_el = this.dom.Root.ElementVisioSchema2003("FaceNames");
             foreach (var face_el in facenames_el.ElementsVisioSchema2003("FaceName"))
             {
                 var id = int.Parse(face_el.Attribute("ID").Value);
@@ -132,7 +132,7 @@ namespace VisioAutomation.VDX.Elements
                 this._faces.Add(face);
             }
 
-            var colors_el = dom.Root.ElementVisioSchema2003("Colors");
+            var colors_el = this.dom.Root.ElementVisioSchema2003("Colors");
             foreach (var color_el in colors_el.ElementsVisioSchema2003("ColorEntry"))
             {
                 var rgb_s = color_el.Attribute("RGB").Value;
@@ -145,22 +145,22 @@ namespace VisioAutomation.VDX.Elements
 
         public NamedNodeList<Page> Pages
         {
-            get { return _pages; }
+            get { return this._pages; }
         }
 
         public NamedNodeList<Face> Faces
         {
-            get { return _faces; }
+            get { return this._faces; }
         }
 
         public List<Window> Windows
         {
-            get { return _windows; }
+            get { return this._windows; }
         }
 
         public List<ColorEntry> Colors
         {
-            get { return _colors; }
+            get { return this._colors; }
         }
 
         internal int GetNextShapeID()
@@ -204,12 +204,12 @@ namespace VisioAutomation.VDX.Elements
 
         public static string DefaultTemplateXML
         {
-            get { return VA.VDX.Properties.Resources.DefaultVDXTemplate; }
+            get { return Properties.Resources.DefaultVDXTemplate; }
         }
 
         public void Save(string filename)
         {
-            var vdxWriter = new VA.VDX.VDXWriter();
+            var vdxWriter = new VDXWriter();
             vdxWriter.CreateVDX(this, this.dom, filename);
         }
 

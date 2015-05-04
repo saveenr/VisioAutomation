@@ -15,7 +15,7 @@ namespace TestVisioAutomation
 
         public void Scripting_Distribute()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
 
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
@@ -41,7 +41,7 @@ namespace TestVisioAutomation
 
         public void Scripting_Nudge()
         {
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
             client.Document.New();
             client.Page.New(new VA.Drawing.Size(4, 4), false);
 

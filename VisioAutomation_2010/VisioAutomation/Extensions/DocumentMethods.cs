@@ -8,7 +8,7 @@ namespace VisioAutomation.Extensions
     {
         public static void Close(this IVisio.Document doc, bool force_close)
         {
-            VA.Documents.DocumentHelper.Close(doc, force_close);
+            Documents.DocumentHelper.Close(doc, force_close);
         }
 
         public static IEnumerable<IVisio.Document> AsEnumerable(this IVisio.Documents docs)
@@ -22,7 +22,7 @@ namespace VisioAutomation.Extensions
 
         public static IVisio.Document OpenStencil(this IVisio.Documents docs, string filename)
         {
-            return VA.Documents.DocumentHelper.OpenStencil(docs, filename);
+            return Documents.DocumentHelper.OpenStencil(docs, filename);
         }
 
     }

@@ -10,7 +10,7 @@ namespace VisioAutomation.DOM
         public IVisio.Shape VisioShape { get; set; }
         public short VisioShapeID { get; internal set; }
 
-        public VA.Text.Markup.TextElement Text { get; set; }
+        public Text.Markup.TextElement Text { get; set; }
         public Dictionary<string, CUSTPROP.CustomPropertyCells> CustomProperties { get; set; }
         public List<Hyperlink> Hyperlinks { get; set; }
 
@@ -19,7 +19,7 @@ namespace VisioAutomation.DOM
         // or always assign using ShallowCopy() a ShapeCells() object
         public ShapeCells Cells { get; set; }
         
-        public List<VA.Text.TabStop> TabStops { get; set; }
+        public List<Text.TabStop> TabStops { get; set; }
         public string CharFontName { get; set; }
         
         protected BaseShape()
