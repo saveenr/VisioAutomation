@@ -2,10 +2,10 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioLayer")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioLayer")]
     public class Get_VisioLayer : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.ParameterAttribute(Position = 0, Mandatory = false)]
         public string Name;
 
         protected override void ProcessRecord()

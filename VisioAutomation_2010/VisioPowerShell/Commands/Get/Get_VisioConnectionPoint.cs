@@ -3,13 +3,13 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
     public class Get_VisioConnectionPoint : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter GetCells;
 
         protected override void ProcessRecord()

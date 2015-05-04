@@ -1,35 +1,37 @@
-﻿using SMA = System.Management.Automation;
+﻿using System;
+using System.IO;
+using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Export, "VisioSelectionAsXHTML")]
+    [SMA.CmdletAttribute(SMA.VerbsData.Export, "VisioSelectionAsXHTML")]
     public class Export_VisioSelectionAsXHTML : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = true)]
-        [SMA.ValidateNotNullOrEmpty]
+        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [SMA.ValidateNotNullOrEmptyAttribute]
         public string Filename;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
         protected override void ProcessRecord()
         {
-            if (!System.IO.File.Exists(this.Filename))
+            if (!File.Exists(this.Filename))
             {
                 this.WriteVerbose("File already exists");
                 if (this.Overwrite)
                 {
-                    System.IO.File.Delete(this.Filename);
+                    File.Delete(this.Filename);
                 }
                 else
                 {
                     string msg = string.Format("File \"{0}\" already exists", this.Filename);
-                    var exc = new System.ArgumentException(msg);
+                    var exc = new ArgumentException(msg);
                     throw exc;
                 }
             }
 
-            string ext = System.IO.Path.GetExtension(this.Filename).ToLowerInvariant();
+            string ext = Path.GetExtension(this.Filename).ToLowerInvariant();
 
             if (ext == ".html" || ext == ".xhtml" || ext == ".htm")
             {

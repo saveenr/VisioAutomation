@@ -1,3 +1,4 @@
+using VisioAutomation.Pages;
 using VA = VisioAutomation;
 
 namespace VisioPowerShell
@@ -5,8 +6,8 @@ namespace VisioPowerShell
     public enum PageOrientation
     {
         None = -1,
-        Portrait = VA.Pages.PrintPageOrientation.Portrait,
-        Landscape = VA.Pages.PrintPageOrientation.Landscape,
-        SameAsPrinter = VA.Pages.PrintPageOrientation.SameAsPrinter
+        Portrait = PrintPageOrientation.Portrait,
+        Landscape = PrintPageOrientation.Landscape,
+        SameAsPrinter = PrintPageOrientation.SameAsPrinter
     }
 }

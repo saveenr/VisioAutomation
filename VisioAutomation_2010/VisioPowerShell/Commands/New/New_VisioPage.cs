@@ -1,18 +1,19 @@
+using VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioPage")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioPage")]
     public class New_VisioPage : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] 
+        [SMA.ParameterAttribute(Mandatory = false)] 
         public double Width = -1.0;
         
-        [SMA.Parameter(Mandatory = false)] 
+        [SMA.ParameterAttribute(Mandatory = false)] 
         public double Height = -1.0;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string Name { get; set; }
 
         protected override void ProcessRecord()
@@ -28,7 +29,7 @@ namespace VisioPowerShell.Commands
             this.WriteObject(page);
         }
 
-        public static void set_page_size(VA.Scripting.Client client, double width, double height)
+        public static void set_page_size(Client client, double width, double height)
         {
             double? w = null;
             double? h = null;

@@ -1,7 +1,10 @@
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Extensions;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Drawing;
+using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using VACONT = VisioAutomation.Shapes.Controls;
 using VACUSTOMPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -9,14 +12,12 @@ using VA = VisioAutomation;
 
 namespace TestVisioAutomation
 {
-    using VisioAutomation.ShapeSheet.Query;
-
     [TestClass]
     public class ShapeSheet_Query_Tests : VisioAutomationTest
     {
-        public static VA.ShapeSheet.SRC cell_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-        public static VA.ShapeSheet.SRC cell_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-        public static VA.ShapeSheet.SRC cell_pat = VA.ShapeSheet.SRCConstants.FillPattern;
+        public static SRC cell_fg = SRCConstants.FillForegnd;
+        public static SRC cell_bg = SRCConstants.FillBkgnd;
+        public static SRC cell_pat = SRCConstants.FillPattern;
 
         [TestMethod]
         public void ShapeSheet_Query_SectionCells_have_names()
@@ -53,9 +54,9 @@ namespace TestVisioAutomation
 
             // now retrieve the formulas with GetFormulas
 
-            var src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-            var src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-            var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
+            var src_fg = SRCConstants.FillForegnd;
+            var src_bg = SRCConstants.FillBkgnd;
+            var src_filpat = SRCConstants.FillPattern;
 
             var query = new CellQuery();
             var col_fg = query.AddCell(src_fg, "FillForegnd");
@@ -63,9 +64,9 @@ namespace TestVisioAutomation
             var col_filpat = query.AddCell(src_filpat, "FillPattern");
             var sec_char = query.AddSection(IVisio.VisSectionIndices.visSectionCharacter);
             Assert.AreEqual("Character",sec_char.Name);
-            var col_charcase = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharCase, "CharCase");
-            var col_charcolor = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColor, "CharColor");
-            var col_chartrans = sec_char.AddCell(VA.ShapeSheet.SRCConstants.CharColorTrans, "CharColorTrans");
+            var col_charcase = sec_char.AddCell(SRCConstants.CharCase, "CharCase");
+            var col_charcolor = sec_char.AddCell(SRCConstants.CharColor, "CharColor");
+            var col_chartrans = sec_char.AddCell(SRCConstants.CharColorTrans, "CharColorTrans");
 
             var shapeids = new[] {s1_id};
 
@@ -115,9 +116,9 @@ namespace TestVisioAutomation
             bg_cell.ResultIU = 3.0; //green
             pat_cell.ResultIU = 40.0;
 
-            var src_fg = VA.ShapeSheet.SRCConstants.FillForegnd;
-            var src_bg = VA.ShapeSheet.SRCConstants.FillBkgnd;
-            var src_filpat = VA.ShapeSheet.SRCConstants.FillPattern;
+            var src_fg = SRCConstants.FillForegnd;
+            var src_bg = SRCConstants.FillBkgnd;
+            var src_filpat = SRCConstants.FillPattern;
 
             // now retrieve the formulas with GetFormulas
 
@@ -178,7 +179,7 @@ namespace TestVisioAutomation
             var query = new CellQuery();
 
             var prop_sec = query.AddSection(IVisio.VisSectionIndices.visSectionProp);
-            var value_col = prop_sec.AddCell(VA.ShapeSheet.SRCConstants.Prop_Value,"Value");
+            var value_col = prop_sec.AddCell(SRCConstants.Prop_Value,"Value");
 
             var shapeids = new[] { s1.ID, s2.ID, s3.ID, s4.ID };
 
@@ -206,7 +207,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes()
         {
-            var page1 = this.GetNewPage(new VA.Drawing.Size(10, 10));
+            var page1 = this.GetNewPage(new Size(10, 10));
 
             // draw a simple shape
             var s1 = page1.DrawRectangle(0, 0, 2, 2);
@@ -218,8 +219,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(3, page1.Shapes.Count);
 
             var query = new CellQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
+            var col_pinx = query.AddCell(SRCConstants.PinX, "PinX");
+            var col_piny = query.AddCell(SRCConstants.PinY, "PinY");
 
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
@@ -254,7 +255,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void ShapeSheet_Query_Demo_MultipleShapes_Verify_Out_Of_order()
         {
-            var page1 = this.GetNewPage(new VA.Drawing.Size(10, 10));
+            var page1 = this.GetNewPage(new Size(10, 10));
 
             // draw a simple shape
             var sa = page1.DrawRectangle(-1, -1, 0, 0);
@@ -270,8 +271,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(5, page1.Shapes.Count);
 
             var query = new CellQuery();
-            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
-            var col_piny = query.AddCell(VA.ShapeSheet.SRCConstants.PinY, "PinY");
+            var col_pinx = query.AddCell(SRCConstants.PinX, "PinX");
+            var col_piny = query.AddCell(SRCConstants.PinY, "PinY");
 
             var rf = query.GetFormulas(page1, shapeids);
             var rr = query.GetResults<double>(page1, shapeids);
@@ -404,7 +405,7 @@ namespace TestVisioAutomation
 
             var query = new CellQuery();
 
-            var name_to_src = VA.ShapeSheet.SRCConstants.GetSRCDictionary();
+            var name_to_src = SRCConstants.GetSRCDictionary();
             var section_to_secquery = new Dictionary<short,SectionColumn>();
 
             foreach (var kv in name_to_src)
@@ -454,12 +455,12 @@ namespace TestVisioAutomation
         {
             // Ensure that duplicate cells are caught
             var q1 = new CellQuery();
-            q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+            q1.AddCell(SRCConstants.PinX, "PinX");
 
             bool caught_exc1 = false;
             try
             {
-                q1.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
+                q1.AddCell(SRCConstants.PinX, "PinX");
             }
             catch (VA.AutomationException)
             {
@@ -488,11 +489,11 @@ namespace TestVisioAutomation
             // Ensure that Duplicates in Section Queries Are caught - 
             var q3 = new CellQuery();
             var sec = q3.AddSection(IVisio.VisSectionIndices.visSectionObject);
-            sec.AddCell(VA.ShapeSheet.SRCConstants.PinX.Cell,"PinX");
+            sec.AddCell(SRCConstants.PinX.Cell,"PinX");
             bool caught_exc3 = false;
             try
             {
-                sec.AddCell(VA.ShapeSheet.SRCConstants.PinX.Cell, "PinX");
+                sec.AddCell(SRCConstants.PinX.Cell, "PinX");
             }
             catch (VA.AutomationException)
             {

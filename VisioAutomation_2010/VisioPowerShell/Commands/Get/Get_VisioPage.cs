@@ -2,13 +2,13 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioPage")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioPage")]
     public class Get_VisioPage : VisioCmdlet
     {
-        [SMA.Parameter(Position=0, Mandatory = false)]
+        [SMA.ParameterAttribute(Position=0, Mandatory = false)]
         public string Name=null;
 
-        [SMA.Parameter(Mandatory = false)] public SMA.SwitchParameter ActivePage;
+        [SMA.ParameterAttribute(Mandatory = false)] public SMA.SwitchParameter ActivePage;
 
         protected override void ProcessRecord()
         {

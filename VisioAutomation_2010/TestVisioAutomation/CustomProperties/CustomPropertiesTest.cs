@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Documents;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
@@ -69,7 +70,7 @@ namespace TestVisioAutomation
             var doc = app.ActiveDocument;
             if (doc != null)
             {
-                VA.Documents.DocumentHelper.Close(doc, true);
+                DocumentHelper.Close(doc, true);
             }
         }
 
@@ -145,7 +146,7 @@ namespace TestVisioAutomation
             var doc = app.ActiveDocument;
             if (doc != null)
             {
-                VA.Documents.DocumentHelper.Close(doc, true);
+                DocumentHelper.Close(doc, true);
             }
         }
 

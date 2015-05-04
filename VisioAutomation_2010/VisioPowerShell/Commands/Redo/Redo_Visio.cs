@@ -2,7 +2,7 @@
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Redo, "Visio")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Redo, "Visio")]
     public class Redo_Visio : VisioCmdlet
     {
         protected override void ProcessRecord()

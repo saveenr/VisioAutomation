@@ -1,46 +1,54 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Xml;
+using VisioAutomation.Drawing;
+using VisioAutomation.Models.Charting;
+using VisioAutomation.Models.DirectedGraph;
+using VisioAutomation.Models.Grid;
+using VisioAutomation.Models.OrgChart;
+using VisioAutomation.Text.Markup;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Out, "Visio")]
+    [SMA.CmdletAttribute(SMA.VerbsData.Out, "Visio")]
     public class Out_Visio : VisioCmdlet
     {
-        [SMA.Parameter(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.OrgChart.OrgChartDocument OrgChart { get; set; }
+        [SMA.ParameterAttribute(ParameterSetName = "orgchcart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public OrgChartDocument OrgChart { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Grid.GridLayout GridLayout { get; set; }
+        [SMA.ParameterAttribute(ParameterSetName = "grid", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public GridLayout GridLayout { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public List<VA.Models.DirectedGraph.Drawing> DirectedGraphs { get; set; }
+        [SMA.ParameterAttribute(ParameterSetName = "directedgraph", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public List<Drawing> DirectedGraphs { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public System.Data.DataTable DataTable { get; set; }
+        [SMA.ParameterAttribute(ParameterSetName = "datatable", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public DataTable DataTable { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 1, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.ParameterAttribute(ParameterSetName = "datatable", Position = 1, Mandatory = true, ValueFromPipeline = true)]
         public double CellWidth { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 2, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.ParameterAttribute(ParameterSetName = "datatable", Position = 2, Mandatory = true, ValueFromPipeline = true)]
         public double CellHeight { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
+        [SMA.ParameterAttribute(ParameterSetName = "datatable", Position = 3, Mandatory = true, ValueFromPipeline = true)]
         public double CellSpacing { get; set; }
 
-        [SMA.Parameter(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Charting.PieChart PieChart;
+        [SMA.ParameterAttribute(ParameterSetName = "piechart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public PieChart PieChart;
 
-        [SMA.Parameter(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Charting.BarChart BarChart;
+        [SMA.ParameterAttribute(ParameterSetName = "barchart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public BarChart BarChart;
 
-        [SMA.Parameter(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public VA.Models.Charting.AreaChart AreaChart;
+        [SMA.ParameterAttribute(ParameterSetName = "areachart", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public AreaChart AreaChart;
 
-        [SMA.Parameter(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
-        public System.Xml.XmlDocument XmlDocument;
+        [SMA.ParameterAttribute(ParameterSetName = "systemxmldoc", Position = 0, Mandatory = true, ValueFromPipeline = true)]
+        public XmlDocument XmlDocument;
 
         protected override void ProcessRecord()
         {
@@ -60,7 +68,7 @@ namespace VisioPowerShell.Commands
             {
                 var widths = Enumerable.Repeat<double>(this.CellWidth, this.DataTable.Columns.Count).ToList();
                 var heights = Enumerable.Repeat<double>(this.CellHeight, this.DataTable.Rows.Count).ToList();
-                var spacing = new VA.Drawing.Size(this.CellSpacing, this.CellSpacing);
+                var spacing = new Size(this.CellSpacing, this.CellSpacing);
                 var shapes = this.client.Draw.Table(this.DataTable, widths, heights, spacing);
                 this.WriteObject(shapes);
             }
@@ -79,7 +87,7 @@ namespace VisioPowerShell.Commands
             else if (this.XmlDocument != null)
             {
                 this.WriteVerbose("XmlDocument");
-                var tree_drawing = new VA.Models.Tree.Drawing();
+                var tree_drawing = new VisioAutomation.Models.Tree.Drawing();
                 this.build_from_xml_doc(this.XmlDocument, tree_drawing);
 
                 tree_drawing.Render(this.client.Page.Get());
@@ -90,26 +98,26 @@ namespace VisioPowerShell.Commands
             }
         }
 
-        private void build_from_xml_doc(System.Xml.XmlDocument xmlDocument, VA.Models.Tree.Drawing tree_drawing)
+        private void build_from_xml_doc(XmlDocument xmlDocument, VisioAutomation.Models.Tree.Drawing tree_drawing)
         {
-            var n = new VA.Models.Tree.Node();
+            var n = new VisioAutomation.Models.Tree.Node();
             tree_drawing.Root = n;
-            n.Text = new VA.Text.Markup.TextElement(xmlDocument.Name);
+            n.Text = new TextElement(xmlDocument.Name);
             this.build_from_xml_element(xmlDocument.DocumentElement,n);
 
         }
 
-        private void build_from_xml_element(System.Xml.XmlElement x, VA.Models.Tree.Node parent)
+        private void build_from_xml_element(XmlElement x, VisioAutomation.Models.Tree.Node parent)
         {
-            foreach (System.Xml.XmlNode xchild in x.ChildNodes)
+            foreach (XmlNode xchild in x.ChildNodes)
             {
-                if (xchild is System.Xml.XmlElement)
+                if (xchild is XmlElement)
                 {
-                    var nchild = new VA.Models.Tree.Node();
-                    nchild.Text = new VA.Text.Markup.TextElement(xchild.Name);
+                    var nchild = new VisioAutomation.Models.Tree.Node();
+                    nchild.Text = new TextElement(xchild.Name);
 
                     parent.Children.Add(nchild);
-                    this.build_from_xml_element( (System.Xml.XmlElement) xchild, nchild);
+                    this.build_from_xml_element( (XmlElement) xchild, nchild);
                 }
             }
         }

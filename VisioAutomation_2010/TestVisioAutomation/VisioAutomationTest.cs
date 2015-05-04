@@ -1,8 +1,16 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Drawing;
+using VisioAutomation.Extensions;
+using VisioAutomation.Scripting;
+using VisioAutomation.ShapeSheet;
+using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 
 namespace TestVisioAutomation
 {
@@ -10,8 +18,8 @@ namespace TestVisioAutomation
     public class VisioAutomationTest
     {
         private static readonly VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();
-        public readonly VA.Drawing.Size StandardPageSize = new VA.Drawing.Size(8.5, 11);
-        public readonly VA.Drawing.Rectangle StandardPageSizeRect = new VA.Drawing.Rectangle(new VA.Drawing.Point(0, 0), new VA.Drawing.Size(8.5, 11));
+        public readonly Size StandardPageSize = new Size(8.5, 11);
+        public readonly Rectangle StandardPageSizeRect = new Rectangle(new Point(0, 0), new Size(8.5, 11));
 
         public IVisio.Application GetVisioApplication()
         {
@@ -27,7 +35,7 @@ namespace TestVisioAutomation
         public IVisio.Page GetNewPage(string suffix)
         {
 
-            var frame = new System.Diagnostics.StackFrame(2);
+            var frame = new StackFrame(2);
             var method = frame.GetMethod();
             var type = method.DeclaringType;
             var name = method.Name;
@@ -37,7 +45,7 @@ namespace TestVisioAutomation
             return page;
         }
 
-        public IVisio.Page GetNewPage(VA.Drawing.Size s)
+        public IVisio.Page GetNewPage(Size s)
         {
             var app = this.GetVisioApplication();
             var documents = app.Documents;
@@ -60,7 +68,7 @@ namespace TestVisioAutomation
             var documents = app.Documents;
             var doc = documents.Add("");
 
-            var frame = new System.Diagnostics.StackFrame(1);
+            var frame = new StackFrame(1);
             var method = frame.GetMethod();
             var type = method.DeclaringType;
             var name = method.Name;
@@ -71,26 +79,26 @@ namespace TestVisioAutomation
 
         }
 
-        public VA.Scripting.Client GetScriptingClient()
+        public Client GetScriptingClient()
         {
             var app = this.GetVisioApplication();
             // this ensures that any debug, verbose, user , etc. messages are 
             // sent to a useful place in the unit tests
             var context = new DiagnosticDebugContext(); 
-            var client = new VA.Scripting.Client(app,context);
+            var client = new Client(app,context);
             return client;
         }
 
-        public static VA.Drawing.Size GetSize(IVisio.Shape shape)
+        public static Size GetSize(IVisio.Shape shape)
         {
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_w = query.AddCell(VA.ShapeSheet.SRCConstants.Width,"Width");
-            var col_h = query.AddCell(VA.ShapeSheet.SRCConstants.Height,"Height");
+            var query = new CellQuery();
+            var col_w = query.AddCell(SRCConstants.Width,"Width");
+            var col_h = query.AddCell(SRCConstants.Height,"Height");
 
             var table = query.GetResults<double>(shape);
             double w = table[col_w];
             double h = table[col_h];
-            var size = new VA.Drawing.Size(w, h);
+            var size = new Size(w, h);
             return size;
         }
 
@@ -117,12 +125,12 @@ namespace TestVisioAutomation
         {
             if (window == null)
             {
-                throw new System.ArgumentNullException("window");
+                throw new ArgumentNullException("window");
             }
 
             if (shapes == null)
             {
-                throw new System.ArgumentNullException("shapes");
+                throw new ArgumentNullException("shapes");
             }
 
             var selectargs = IVisio.VisSelectArgs.visSelect;
@@ -132,41 +140,41 @@ namespace TestVisioAutomation
             return group;
         }
 
-        public static void SetPageSize(IVisio.Page page, VA.Drawing.Size size)
+        public static void SetPageSize(IVisio.Page page, Size size)
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new ArgumentNullException("page");
             }
 
             var page_sheet = page.PageSheet;
 
-            var update = new VA.ShapeSheet.Update(2);
-            update.SetFormula(VA.ShapeSheet.SRCConstants.PageWidth, size.Width);
-            update.SetFormula(VA.ShapeSheet.SRCConstants.PageHeight, size.Height);
+            var update = new Update(2);
+            update.SetFormula(SRCConstants.PageWidth, size.Width);
+            update.SetFormula(SRCConstants.PageHeight, size.Height);
             update.Execute(page_sheet);
         }
 
-        public static VA.Drawing.Size GetPageSize(IVisio.Page page)
+        public static Size GetPageSize(IVisio.Page page)
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new ArgumentNullException("page");
             }
 
-            var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_height = query.AddCell(VA.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
-            var col_width = query.AddCell(VA.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
+            var query = new CellQuery();
+            var col_height = query.AddCell(SRCConstants.PageHeight, "PageHeight");
+            var col_width = query.AddCell(SRCConstants.PageWidth, "PageWidth");
             var results = query.GetResults<double>(page.PageSheet);
             double height = results[col_height];
             double width = results[col_width];
-            var s = new VA.Drawing.Size(width, height);
+            var s = new Size(width, height);
             return s;
         }
 
         protected string GetTestResultsOutPath(string path)
         {
-            return System.IO.Path.Combine(this.TestResultsOutFolder, path);
+            return Path.Combine(this.TestResultsOutFolder, path);
         }
 
         private static string tr_out_folder;
@@ -177,8 +185,8 @@ namespace TestVisioAutomation
             {
                 if (VisioAutomationTest.tr_out_folder == null)
                 {
-                    var asm = System.Reflection.Assembly.GetExecutingAssembly();
-                    VisioAutomationTest.tr_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
+                    var asm = Assembly.GetExecutingAssembly();
+                    VisioAutomationTest.tr_out_folder = Path.GetDirectoryName(asm.Location);
                 }
                 return VisioAutomationTest.tr_out_folder;
             }

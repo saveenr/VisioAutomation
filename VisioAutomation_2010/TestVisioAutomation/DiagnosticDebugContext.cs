@@ -1,6 +1,9 @@
-﻿namespace TestVisioAutomation
+﻿using System.Diagnostics;
+using VisioAutomation.Scripting;
+
+namespace TestVisioAutomation
 {
-    public class DiagnosticDebugContext : VisioAutomation.Scripting.Context
+    public class DiagnosticDebugContext : Context
     {
         public DiagnosticDebugContext()
         {
@@ -38,7 +41,7 @@
 
         private void writeline(string s)
         {
-            System.Diagnostics.Debug.WriteLine(s);
+            Debug.WriteLine(s);
         }
     }
 }

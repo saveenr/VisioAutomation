@@ -1,11 +1,14 @@
-﻿namespace VisioPowerTools2010
+﻿using System.ComponentModel;
+using Microsoft.Office.Tools.Ribbon;
+
+namespace VisioPowerTools2010
 {
-    partial class VPTRibbon : Microsoft.Office.Tools.Ribbon.RibbonBase
+    partial class VPTRibbon : RibbonBase
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         public VPTRibbon()
             : base(Globals.Factory.GetRibbonFactory())
@@ -230,27 +233,27 @@
 
         #endregion
 
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
-        private Microsoft.Office.Tools.Ribbon.RibbonTab tab2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonHelp;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonImportColors;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCreateStencilCatalog;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCreateStyle;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupText;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonToggleTextCase;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonCopyText;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonDeveloper;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupDraw;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonGraph;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupExport;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonExportSelection;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonSelectionXHTML;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupDev;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonScrambleText;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttomResetPageOrigin;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup groupPage;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton buttonResizePageToFit;
+        internal RibbonTab tab1;
+        private RibbonTab tab2;
+        internal RibbonGroup group1;
+        internal RibbonButton buttonHelp;
+        internal RibbonButton buttonImportColors;
+        internal RibbonButton buttonCreateStencilCatalog;
+        internal RibbonButton buttonCreateStyle;
+        internal RibbonGroup groupText;
+        internal RibbonButton buttonToggleTextCase;
+        internal RibbonButton buttonCopyText;
+        internal RibbonButton buttonDeveloper;
+        internal RibbonGroup groupDraw;
+        internal RibbonButton buttonGraph;
+        internal RibbonGroup groupExport;
+        internal RibbonButton buttonExportSelection;
+        internal RibbonButton buttonSelectionXHTML;
+        internal RibbonGroup groupDev;
+        internal RibbonButton buttonScrambleText;
+        internal RibbonButton buttomResetPageOrigin;
+        internal RibbonGroup groupPage;
+        internal RibbonButton buttonResizePageToFit;
     }
 
     partial class ThisRibbonCollection

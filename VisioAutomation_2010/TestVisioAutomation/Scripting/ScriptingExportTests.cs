@@ -1,4 +1,6 @@
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestVisioAutomation.Common;
 using VA=VisioAutomation;
 
 namespace TestVisioAutomation
@@ -23,15 +25,15 @@ namespace TestVisioAutomation
 
             client.Selection.All();
 
-            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".html");
+            string output_filename = Globals.Helper.GetTestMethodOutputFilename(".html");
 
-            if (System.IO.File.Exists(output_filename))
+            if (File.Exists(output_filename))
             {
-                System.IO.File.Delete(output_filename);
+                File.Delete(output_filename);
             }
             client.Export.SelectionToSVGXHTML(output_filename);
 
-            Assert.IsTrue( System.IO.File.Exists(output_filename));
+            Assert.IsTrue( File.Exists(output_filename));
             client.Document.Close(true);
         }
     }

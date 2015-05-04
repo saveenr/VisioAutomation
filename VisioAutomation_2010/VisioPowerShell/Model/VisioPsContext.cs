@@ -1,8 +1,9 @@
+using VisioAutomation.Scripting;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell
 {
-    public class VisioPsContext : VisioAutomation.Scripting.Context
+    public class VisioPsContext : Context
     {
         private readonly SMA.Cmdlet cmdlet;
         

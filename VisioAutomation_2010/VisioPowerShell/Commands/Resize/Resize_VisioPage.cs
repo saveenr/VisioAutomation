@@ -1,38 +1,41 @@
+using VisioAutomation.Drawing;
+using VisioAutomation.Pages;
+using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Resize, "VisioPage")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Resize, "VisioPage")]
     public class Resize_VisioPage : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)] public double Width = -1;
+        [SMA.ParameterAttribute(Mandatory = false)] public double Width = -1;
 
-        [SMA.Parameter(Mandatory = false)] public double Height = -1;
+        [SMA.ParameterAttribute(Mandatory = false)] public double Height = -1;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter FitContents;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public double BorderWidth { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public double BorderHeight { get; set; }
 
         protected override void ProcessRecord()
         {
             if (this.FitContents)
             {
-                var bordersize = new VA.Drawing.Size(this.BorderWidth, this.BorderWidth);
+                var bordersize = new Size(this.BorderWidth, this.BorderWidth);
                 this.client.Page.ResizeToFitContents(bordersize, true);                
             }
 
             if (this.Width > 0 || this.Height > 0)
             {
                 var page = this.client.VisioApplication.ActivePage;
-                var pagecells = VA.Pages.PageCells.GetCells(page.PageSheet);
+                var pagecells = PageCells.GetCells(page.PageSheet);
 
-                var newpagecells = new VA.Pages.PageCells();
+                var newpagecells = new PageCells();
                 
                 if (this.Width > 0)
                 {
@@ -44,7 +47,7 @@ namespace VisioPowerShell.Commands
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var update = new VA.ShapeSheet.Update();
+                var update = new Update();
                 update.SetFormulas(newpagecells);
                 update.BlastGuards = true;
                 update.Execute(page);

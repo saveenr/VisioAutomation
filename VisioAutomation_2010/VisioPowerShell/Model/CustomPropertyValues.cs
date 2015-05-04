@@ -1,3 +1,4 @@
+using VisioAutomation.Shapes.CustomProperties;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -20,7 +21,7 @@ namespace VisioPowerShell
         public readonly string Value;
 
 
-        internal CustomPropertyValues(int id, string propname, VA.Shapes.CustomProperties.CustomPropertyCells propcells)
+        internal CustomPropertyValues(int id, string propname, CustomPropertyCells propcells)
         {
             this.ShapeID = id;
             this.Name = propname;

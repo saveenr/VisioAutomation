@@ -3,10 +3,10 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Remove, "VisioGroup")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Remove, "VisioGroup")]
     public class Remove_VisioGroup : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

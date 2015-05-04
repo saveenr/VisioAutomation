@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
@@ -6,19 +7,19 @@ using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioPageCell")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioPageCell")]
     public class Get_VisioPageCell : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false, Position = 0)]
+        [SMA.ParameterAttribute(Mandatory = false, Position = 0)]
         public string[] Cells { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Page Page { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter GetResults;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public ResultType ResultType = ResultType.String;
 
         protected override void ProcessRecord()
@@ -38,13 +39,13 @@ namespace VisioPowerShell.Commands
         {
             if (Cells == null)
             {
-                throw new System.ArgumentNullException("Cells");
+                throw new ArgumentNullException("Cells");
             }
 
             if (Cells.Count< 1)
             {
                 string msg = "Must provide at least one cell name";
-                throw new System.ArgumentException(msg,"Cells");
+                throw new ArgumentException(msg,"Cells");
             }
         }
     }

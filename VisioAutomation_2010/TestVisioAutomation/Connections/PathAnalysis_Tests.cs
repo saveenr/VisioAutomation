@@ -1,8 +1,10 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Drawing;
+using VisioAutomation.Extensions;
+using VisioAutomation.ShapeSheet;
 using VACXN = VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
-using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace TestVisioAutomation
@@ -18,21 +20,21 @@ namespace TestVisioAutomation
 
             var dcm = connectors_masters["Dynamic Connector"];
 
-            var c1 = page.Drop(dcm, new VA.Drawing.Point(-2, -2));
+            var c1 = page.Drop(dcm, new Point(-2, -2));
             VACXN.ConnectorHelper.ConnectShapes(a, b, c1);
 
             //a.AutoConnect(b, connect_dir_none, null);
 
             if (a_arrow || b_arrow)
             {
-                var update = new VA.ShapeSheet.Update();
+                var update = new Update();
                 if (a_arrow)
                 {
-                    update.SetFormula(c1.ID16, VA.ShapeSheet.SRCConstants.BeginArrow, "13");                    
+                    update.SetFormula(c1.ID16, SRCConstants.BeginArrow, "13");                    
                 }
                 if (b_arrow)
                 {
-                    update.SetFormula(c1.ID16, VA.ShapeSheet.SRCConstants.EndArrow, "13");
+                    update.SetFormula(c1.ID16, SRCConstants.EndArrow, "13");
                 }
                 update.Execute(page);
             }

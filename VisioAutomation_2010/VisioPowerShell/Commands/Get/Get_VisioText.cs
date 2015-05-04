@@ -3,10 +3,10 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioText")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioText")]
     public class Get_VisioText : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

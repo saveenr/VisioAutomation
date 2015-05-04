@@ -1,14 +1,17 @@
+using System;
+using VisioAutomation.Scripting.DirectedGraph;
+using VisioAutomation.Scripting.OrgChart;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using SXL= System.Xml.Linq;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsData.Import, "VisioModel")]
+    [SMA.CmdletAttribute(SMA.VerbsData.Import, "VisioModel")]
     public class Import_VisioModel : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = true, Position = 0)]
-        [SMA.ValidateNotNullOrEmpty]
+        [SMA.ParameterAttribute(Mandatory = true, Position = 0)]
+        [SMA.ValidateNotNullOrEmptyAttribute]
         public string Filename { get; set; }
 
         protected override void ProcessRecord()
@@ -26,7 +29,7 @@ namespace VisioPowerShell.Commands
             if (root.Name == "directedgraph")
             {
                 this.WriteVerbose("Loading as a Directed Graph");
-                var dg_model = VA.Scripting.DirectedGraph.DirectedGraphBuilder.LoadFromXML(
+                var dg_model = DirectedGraphBuilder.LoadFromXML(
                     this.client,
                     xmldoc);
                 this.WriteObject(dg_model);               
@@ -34,12 +37,12 @@ namespace VisioPowerShell.Commands
             else if (root.Name == "orgchart")
             {
                 this.WriteVerbose("Loading as an Org Chart");
-                var oc = VA.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(this.client, xmldoc);
+                var oc = OrgChartBuilder.LoadFromXML(this.client, xmldoc);
                 this.WriteObject(oc);
             }
             else
             {
-                var exc = new System.ArgumentException("Unknown root element for XML");
+                var exc = new ArgumentException("Unknown root element for XML");
                 throw exc;
             }
         }

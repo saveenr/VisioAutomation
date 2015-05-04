@@ -1,5 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Drawing;
+using VisioAutomation.ShapeSheet;
 using VACUSTOMPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
@@ -13,7 +15,7 @@ namespace TestVisioAutomation
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
+            client.Page.New(new Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);
@@ -21,7 +23,7 @@ namespace TestVisioAutomation
 
             client.Selection.None();
 
-            client.ShapeSheet.SetFormula(null, new [] {VA.ShapeSheet.SRCConstants.PinX}, new []{"1.0"}, 0 );
+            client.ShapeSheet.SetFormula(null, new [] {SRCConstants.PinX}, new []{"1.0"}, 0 );
             client.Document.Close(true);
         }
 
@@ -30,7 +32,7 @@ namespace TestVisioAutomation
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new VA.Drawing.Size(4, 4), false);
+            client.Page.New(new Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
             var s2 = client.Draw.Rectangle(2, 3, 2.5, 3.5);

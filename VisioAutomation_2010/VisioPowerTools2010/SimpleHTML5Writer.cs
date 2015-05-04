@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -6,20 +8,20 @@ namespace VisioPowerTools2010
 {
     public class SimpleHTML5Writer
     {
-        protected System.Xml.XmlWriter _xw;
+        protected XmlWriter _xw;
         private readonly Stack<string> stack;
 
-        protected System.Xml.XmlWriter xmlwriter
+        protected XmlWriter xmlwriter
         {
             get { return this._xw; }
         }
 
-        public SimpleHTML5Writer(System.Xml.XmlWriter xmlwriter)
+        public SimpleHTML5Writer(XmlWriter xmlwriter)
         {
             this.stack = new Stack<string>();
             if (xmlwriter == null)
             {
-                throw new System.ArgumentNullException("xmlwriter");
+                throw new ArgumentNullException("xmlwriter");
             }
 
             this._xw = xmlwriter;
@@ -30,13 +32,13 @@ namespace VisioPowerTools2010
             this.stack = new Stack<string>();
             if (filename == null)
             {
-                throw new System.ArgumentNullException("filename");
+                throw new ArgumentNullException("filename");
             }
 
-            var settings = new System.Xml.XmlWriterSettings();
+            var settings = new XmlWriterSettings();
             settings.Indent = true;
             settings.OmitXmlDeclaration = true;
-            this._xw = System.Xml.XmlWriter.Create(filename, settings);
+            this._xw = XmlWriter.Create(filename, settings);
         }
 
         public void DocType(string s)
@@ -55,14 +57,14 @@ namespace VisioPowerTools2010
             if (this.stack.Count < 1)
             {
                 string msg = string.Format("No matching starting element for <{0}>", s);
-                throw new System.ArgumentException(msg, "s");
+                throw new ArgumentException(msg, "s");
             }
 
             string ontop = this.stack.Pop();
             if (ontop != s)
             {
                 string msg = string.Format("Cannot end element <{0}>, expected to end <{1}>", s, ontop);
-                throw new System.ArgumentException(msg);
+                throw new ArgumentException(msg);
             }
 
             this.xmlwriter.WriteEndElement();

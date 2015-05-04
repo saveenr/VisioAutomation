@@ -1,31 +1,32 @@
+using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Format, "VisioShape")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Format, "VisioShape")]
     public class Format_VisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public double NudgeX { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public double NudgeY { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter DistributeHorizontal { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter DistributeVertical { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public VerticalAlignment AlignVertical = VerticalAlignment.None;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public HorizontalAlignment AlignHorizontal = HorizontalAlignment.None;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
@@ -37,22 +38,22 @@ namespace VisioPowerShell.Commands
 
             if (this.DistributeHorizontal)
             {
-                this.client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.XAxis);
+                this.client.Arrange.Distribute(this.Shapes, Axis.XAxis);
             }
 
             if (this.DistributeVertical)
             {
-                this.client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
+                this.client.Arrange.Distribute(this.Shapes, Axis.YAxis);
             }
 
             if (this.AlignVertical != VerticalAlignment.None)
             {
-                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical) this.AlignVertical);
+                this.client.Arrange.Align(this.Shapes, (AlignmentVertical) this.AlignVertical);
             }
 
             if (this.AlignHorizontal != HorizontalAlignment.None)
             {
-                this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal) this.AlignHorizontal);
+                this.client.Arrange.Align(this.Shapes, (AlignmentHorizontal) this.AlignHorizontal);
             }
 
         }

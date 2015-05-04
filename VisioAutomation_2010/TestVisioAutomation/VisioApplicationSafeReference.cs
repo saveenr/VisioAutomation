@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -26,7 +27,7 @@ namespace TestVisioAutomation
                     // Try doing *something* with the instance
                     string s = this.app.Name;
                 }
-                catch (System.Runtime.InteropServices.COMException)
+                catch (COMException)
                 {
                     // This COMException is a hint something
                     // is wrong with the instance. So, create a new

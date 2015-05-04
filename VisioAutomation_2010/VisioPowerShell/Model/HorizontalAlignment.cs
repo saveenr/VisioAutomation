@@ -1,3 +1,4 @@
+using VisioAutomation.Drawing;
 using VA=VisioAutomation;
 
 namespace VisioPowerShell
@@ -5,8 +6,8 @@ namespace VisioPowerShell
     public enum HorizontalAlignment
     {
         None = -1,
-        Left = VA.Drawing.AlignmentHorizontal.Left,
-        Center = VA.Drawing.AlignmentHorizontal.Center,
-        Right = VA.Drawing.AlignmentHorizontal.Right
+        Left = AlignmentHorizontal.Left,
+        Center = AlignmentHorizontal.Center,
+        Right = AlignmentHorizontal.Right
     }
 }

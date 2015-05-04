@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace VisioPowerShell
         {
             this.regex_cellname = new Regex("^[a-zA-Z]*$");
             this.regex_cellname_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
-            this.dic = new Dictionary<string, T>(System.StringComparer.OrdinalIgnoreCase);
+            this.dic = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
         }
 
         public List<string> GetNames()
@@ -32,7 +33,7 @@ namespace VisioPowerShell
                 if (this.dic.ContainsKey(name))
                 {
                     string msg = string.Format("CellMap already contains a cell called \"{0}\"", name);
-                    throw new System.ArgumentOutOfRangeException(msg);
+                    throw new ArgumentOutOfRangeException(msg);
                 }
 
                 this.dic[name] = value;
@@ -63,7 +64,7 @@ namespace VisioPowerShell
             }
 
             string msg = string.Format("Cell name \"{0}\" is not valid", name);
-            throw new System.ArgumentOutOfRangeException(msg);
+            throw new ArgumentOutOfRangeException(msg);
         }
 
         public void CheckCellNameWildcard(string name)
@@ -74,7 +75,7 @@ namespace VisioPowerShell
             }
 
             string msg = string.Format("Cell name wildcard pattern \"{0}\" is not valid", name);
-            throw new System.ArgumentException(msg, "name");
+            throw new ArgumentException(msg, "name");
         }
 
         public IEnumerable<string> ResolveName(string cellname)

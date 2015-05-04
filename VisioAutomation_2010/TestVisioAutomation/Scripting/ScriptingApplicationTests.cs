@@ -1,3 +1,4 @@
+using System.Drawing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -20,7 +21,7 @@ namespace TestVisioAutomation
             var client = this.GetScriptingClient();
 
             var old_size = client.Application.Window.GetSize();
-            var desired_size = new System.Drawing.Size(600, 800);
+            var desired_size = new Size(600, 800);
 
             client.Application.Window.SetSize(desired_size.Width, desired_size.Height);
 
@@ -60,7 +61,7 @@ namespace TestVisioAutomation
         {
             var client = this.GetScriptingClient();
             var drawing = client.Document.New(8.5, 11);
-            var page = client.Page.New(new VA.Drawing.Size(8.5, 11), false);
+            var page = client.Page.New(new VisioAutomation.Drawing.Size(8.5, 11), false);
             Assert.AreEqual(0, page.Shapes.Count);
             page.DrawRectangle(1, 1, 3, 3);
             Assert.AreEqual(1, page.Shapes.Count);

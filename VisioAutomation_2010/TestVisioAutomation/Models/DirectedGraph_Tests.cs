@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestVisioAutomation.Common;
+using VisioAutomation.Drawing;
 using VisioAutomation.Shapes.Connections;
 using CUSTOMPROP=VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -24,7 +26,7 @@ namespace TestVisioAutomation
             var page = visapp.ActivePage;
             directed_graph_drawing.Render(page,options);
 
-            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Globals.Helper.GetTestMethodOutputFilename(".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -34,7 +36,7 @@ namespace TestVisioAutomation
         {
             var directed_graph_drawing = this.create_sample_graph();
 
-            var options = new VA.Models.DirectedGraph.MsaglLayoutOptions();
+            var options = new DG.MsaglLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
@@ -43,7 +45,7 @@ namespace TestVisioAutomation
             
             directed_graph_drawing.Render(page1,options);
 
-            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Globals.Helper.GetTestMethodOutputFilename(".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -51,17 +53,17 @@ namespace TestVisioAutomation
         [TestMethod]
         public void RenderDirectedGraphWithCustomProps()
         {
-            var d = new VA.Models.DirectedGraph.Drawing();
+            var d = new DG.Drawing();
 
             var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
-            n0.Size = new VA.Drawing.Size(3, 2);
+            n0.Size = new Size(3, 2);
             n0.CustomProperties = new Dictionary<string, CUSTOMPROP.CustomPropertyCells>();
             n0.CustomProperties["p1"] = new CUSTOMPROP.CustomPropertyCells("v1");
             n0.CustomProperties["p2"] = new CUSTOMPROP.CustomPropertyCells("v2");
             n0.CustomProperties["p3"] = new CUSTOMPROP.CustomPropertyCells("v3");
 
-            var options = new VA.Models.DirectedGraph.MsaglLayoutOptions();
+            var options = new DG.MsaglLayoutOptions();
             options.UseDynamicConnectors = true;
 
             var visapp = this.GetVisioApplication();
@@ -79,7 +81,7 @@ namespace TestVisioAutomation
 
             page1.Application.ActiveWindow.ViewFit = (short) IVisio.VisWindowFit.visFitPage;
 
-            string output_filename = Common.Globals.Helper.GetTestMethodOutputFilename(".vsd");
+            string output_filename = Globals.Helper.GetTestMethodOutputFilename(".vsd");
             doc.SaveAs(output_filename);
             doc.Close();
         }
@@ -90,7 +92,7 @@ namespace TestVisioAutomation
 
             var basic_stencil = "basic_u.vss";
             var n0 = d.AddShape("n0", "Node 0", basic_stencil, "Rectangle");
-            n0.Size = new VA.Drawing.Size(3, 2);
+            n0.Size = new Size(3, 2);
             var n1 = d.AddShape("n1", "Node 1", basic_stencil, "Rectangle");
             var n2 = d.AddShape("n2", "Node 2", basic_stencil, "Rectangle");
             var n3 = d.AddShape("n3", "Node 3", basic_stencil, "Rectangle");

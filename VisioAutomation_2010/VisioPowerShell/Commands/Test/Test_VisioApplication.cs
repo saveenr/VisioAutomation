@@ -2,7 +2,7 @@
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsDiagnostic.Test, "VisioApplication")]
+    [SMA.CmdletAttribute(SMA.VerbsDiagnostic.Test, "VisioApplication")]
     public class Test_VisioApplication: VisioCmdlet
     {
         // checks to see if we hae an active drawing open

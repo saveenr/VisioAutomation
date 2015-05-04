@@ -3,10 +3,10 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Copy, "VisioShape")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Copy, "VisioShape")]
     public class Copy_VisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

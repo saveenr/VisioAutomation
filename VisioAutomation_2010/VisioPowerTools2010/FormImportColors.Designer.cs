@@ -1,11 +1,14 @@
-﻿namespace VisioPowerTools2010
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace VisioPowerTools2010
 {
     partial class FormImportColors
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -179,15 +182,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonOK;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPageFromText;
-        private System.Windows.Forms.TabPage tabPageFromOnline;
-        private System.Windows.Forms.TextBox textBoxURL;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label labelExamples;
-        private System.Windows.Forms.Label labelURL;
+        private TextBox textBox1;
+        private Button buttonCancel;
+        private Button buttonOK;
+        private TabControl tabControl1;
+        private TabPage tabPageFromText;
+        private TabPage tabPageFromOnline;
+        private TextBox textBoxURL;
+        private TextBox textBox2;
+        private Label labelExamples;
+        private Label labelURL;
     }
 }

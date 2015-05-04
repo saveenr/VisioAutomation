@@ -1,29 +1,32 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-using SMA = System.Management.Automation;
+﻿using System.Collections;
 using System.Linq;
+using VisioAutomation.Application;
+using VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
+using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioShapeCell")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioShapeCell")]
     public class Set_VisioShapeCell : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false, Position = 0)]
-        public System.Collections.Hashtable Hashtable { get; set; }
+        [SMA.ParameterAttribute(Mandatory = false, Position = 0)]
+        public Hashtable Hashtable { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
 
         protected override void ProcessRecord()
         {
-            var update = new VisioAutomation.ShapeSheet.Update();
+            var update = new Update();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular = this.TestCircular;
 
@@ -52,7 +55,7 @@ namespace VisioPowerShell.Commands
             this.WriteVerbose("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerbose("Number of Total Updates: {0}", update.Count());
 
-            using (var undoscope = new VA.Application.UndoScope(this.client.VisioApplication, "SetShapeCells"))
+            using (var undoscope = new UndoScope(this.client.VisioApplication, "SetShapeCells"))
             {
                 this.WriteVerbose("Start Update");
                 update.Execute(surface);

@@ -3,7 +3,7 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioGroup")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioGroup")]
     public class New_VisioGroup : VisioCmdlet
     {
         protected override void ProcessRecord()

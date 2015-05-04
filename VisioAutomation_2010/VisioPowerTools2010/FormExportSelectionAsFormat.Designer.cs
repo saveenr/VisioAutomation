@@ -1,11 +1,15 @@
-﻿namespace VisioPowerTools2010
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using VisioAutomation.UI.CommonControls;
+
+namespace VisioPowerTools2010
 {
-    partial class FormExportSelectionAsFormat : System.Windows.Forms.Form
+    partial class FormExportSelectionAsFormat : Form
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -162,15 +166,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelDoc;
-        private System.Windows.Forms.Label labelPage;
-        private System.Windows.Forms.Label labelDocumentName;
-        private System.Windows.Forms.Label labelPageName;
-        private System.Windows.Forms.Label labelOutputFile;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonOK;
-        private VisioAutomation.UI.CommonControls.FilenamePicker filenamePicker1;
-        private System.Windows.Forms.Label labelFormat;
-        private System.Windows.Forms.Label labelFormatChoice;
+        private Label labelDoc;
+        private Label labelPage;
+        private Label labelDocumentName;
+        private Label labelPageName;
+        private Label labelOutputFile;
+        private Button buttonCancel;
+        private Button buttonOK;
+        private FilenamePicker filenamePicker1;
+        private Label labelFormat;
+        private Label labelFormatChoice;
     }
 }

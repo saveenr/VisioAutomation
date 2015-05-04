@@ -1,11 +1,14 @@
-﻿namespace VisioPowerTools2010
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace VisioPowerTools2010
 {
     partial class FormGetMasterImages
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -168,15 +171,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonRun;
-        private System.Windows.Forms.TextBox textBoxStencilFolder;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxLog;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxOutputFolder;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.LinkLabel linkLabelOpenOutput;
-        private System.Windows.Forms.Button buttonClose;
+        private Button buttonRun;
+        private TextBox textBoxStencilFolder;
+        private Label label1;
+        private TextBox textBoxLog;
+        private Label label2;
+        private Label label3;
+        private TextBox textBoxOutputFolder;
+        private Label label4;
+        private LinkLabel linkLabelOpenOutput;
+        private Button buttonClose;
     }
 }

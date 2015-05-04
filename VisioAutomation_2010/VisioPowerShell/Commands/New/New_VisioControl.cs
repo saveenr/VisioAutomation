@@ -1,42 +1,43 @@
+using VisioAutomation.Shapes.Controls;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioControl")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioControl")]
     public class New_VisioControl : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string XDynamics { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string YDynamics { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string XBehavior { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string YBehavior { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string X { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string Y { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public bool CanGlue = false;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string Tip { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
         {
-            var ctrl = new VA.Shapes.Controls.ControlCells();
+            var ctrl = new ControlCells();
                 ctrl.XDynamics = this.XDynamics;
                 ctrl.YDynamics = this.YDynamics;
                 ctrl.XBehavior = this.XBehavior;

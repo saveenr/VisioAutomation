@@ -3,11 +3,11 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Open, "VisioMaster")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Open, "VisioMaster")]
     public class Open_VisioMaster : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = true)]
-        [SMA.ValidateNotNull]
+        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [SMA.ValidateNotNullAttribute]
         public IVisio.Master Master;
 
         protected override void ProcessRecord()

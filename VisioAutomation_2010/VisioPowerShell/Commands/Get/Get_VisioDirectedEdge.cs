@@ -1,19 +1,20 @@
 using System.Collections.Generic;
+using VisioAutomation.Shapes.Connections;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
     public class Get_VisioDirectedEdge : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter GetShapeObjects { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter Raw { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter TreatUndirectedAsBidirectional { get; set; }
 
         protected override void ProcessRecord()
@@ -31,29 +32,29 @@ namespace VisioPowerShell.Commands
                 
         }
 
-        private VA.Shapes.Connections.ConnectorEdgeHandling get_DirectedEdgeHandling()
+        private ConnectorEdgeHandling get_DirectedEdgeHandling()
         {
-            var flag = VA.Shapes.Connections.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
+            var flag = ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
 
             if (this.Raw)
             {
-                flag = VA.Shapes.Connections.ConnectorEdgeHandling.Raw;
+                flag = ConnectorEdgeHandling.Raw;
             }
             else
             {
                 if (this.TreatUndirectedAsBidirectional)
                 {
-                    flag = VA.Shapes.Connections.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
+                    flag = ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
                 }
                 else
                 {
-                    flag = VA.Shapes.Connections.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
+                    flag = ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
                 }
             }
             return flag;
         }
 
-        private void write_edges_with_shapeids(IList<VA.Shapes.Connections.ConnectorEdge> edges)
+        private void write_edges_with_shapeids(IList<ConnectorEdge> edges)
         {
             foreach (var edge in edges)
             {

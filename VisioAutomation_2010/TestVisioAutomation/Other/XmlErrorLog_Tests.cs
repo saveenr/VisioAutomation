@@ -1,4 +1,6 @@
+using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Application.Logging;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -14,8 +16,8 @@ namespace TestVisioAutomation
         {
             string input_filename = this.GetTestResultsOutPath(@"datafiles\VSDX_Log_Visio_2013.txt");
 
-            Assert.IsTrue(System.IO.File.Exists(input_filename));
-            var log = new VA.Application.Logging.XmlErrorLog(input_filename);
+            Assert.IsTrue(File.Exists(input_filename));
+            var log = new XmlErrorLog(input_filename);
             Assert.AreEqual(51, log.FileSessions.Count);
 
 
@@ -31,8 +33,8 @@ namespace TestVisioAutomation
         {
             string input_filename = this.GetTestResultsOutPath(@"datafiles\XMLErrorLog_Visio_2010_1.txt");
 
-            Assert.IsTrue(System.IO.File.Exists(input_filename));
-            var log = new VA.Application.Logging.XmlErrorLog(input_filename);
+            Assert.IsTrue(File.Exists(input_filename));
+            var log = new XmlErrorLog(input_filename);
             Assert.AreEqual(2,log.FileSessions.Count);
 
             var first_session = log.FileSessions[0];
@@ -59,8 +61,8 @@ namespace TestVisioAutomation
         {
             string input_filename = this.GetTestResultsOutPath(@"datafiles\XMLErrorLog_Visio_2013_1.txt");
 
-            Assert.IsTrue(System.IO.File.Exists(input_filename));
-            var log = new VA.Application.Logging.XmlErrorLog(input_filename);
+            Assert.IsTrue(File.Exists(input_filename));
+            var log = new XmlErrorLog(input_filename);
             Assert.AreEqual(4, log.FileSessions.Count);
 
             var first_session = log.FileSessions[0];

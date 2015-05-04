@@ -3,13 +3,13 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioMaster")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioMaster")]
     public class New_VisioMaster : VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public string Name;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Document Document;
 
         protected override void ProcessRecord()

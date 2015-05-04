@@ -4,15 +4,15 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioDocument")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioDocument")]
     public class Set_VisioDocument : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Name")]
-        [SMA.ValidateNotNullOrEmpty]
+        [SMA.ParameterAttribute(Position = 0, Mandatory = true, ParameterSetName = "Name")]
+        [SMA.ValidateNotNullOrEmptyAttribute]
         public string Name { get; set; }
 
-        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "Doc")]
-        [SMA.ValidateNotNull]
+        [SMA.ParameterAttribute(Position = 0, Mandatory = true, ParameterSetName = "Doc")]
+        [SMA.ValidateNotNullAttribute]
         public IVisio.Document Document  { get; set; }
         
         protected override void ProcessRecord()

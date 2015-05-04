@@ -1,3 +1,4 @@
+using VisioAutomation.Drawing;
 using VA=VisioAutomation;
 
 namespace VisioPowerShell
@@ -5,8 +6,8 @@ namespace VisioPowerShell
     public enum VerticalAlignment
     {
         None = -1,
-        Bottom = VA.Drawing.AlignmentVertical.Bottom,
-        Center = VA.Drawing.AlignmentVertical.Center,
-        Top = VA.Drawing.AlignmentVertical.Top
+        Bottom = AlignmentVertical.Bottom,
+        Center = AlignmentVertical.Center,
+        Top = AlignmentVertical.Top
     }
 }

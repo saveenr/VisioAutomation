@@ -2,14 +2,14 @@ using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioDocument")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioDocument")]
     public class Get_VisioDocument : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = false)]
-        [SMA.ValidateNotNullOrEmpty]
+        [SMA.ParameterAttribute(Position = 0, Mandatory = false)]
+        [SMA.ValidateNotNullOrEmptyAttribute]
         public string Name = null;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter ActiveDocument;
 
         protected override void ProcessRecord()

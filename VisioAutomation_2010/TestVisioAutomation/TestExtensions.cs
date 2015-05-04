@@ -1,10 +1,13 @@
+using VisioAutomation.Drawing;
+using VisioAutomation.Shapes;
+
 namespace TestVisioAutomation
 {
     public static class TestExtensions
     {
-        public static VisioAutomation.Drawing.Point Pin(this VisioAutomation.Shapes.XFormCells xform)
+        public static Point Pin(this XFormCells xform)
         {
-            return new VisioAutomation.Drawing.Point(xform.PinX.Result, xform.PinY.Result);
+            return new Point(xform.PinX.Result, xform.PinY.Result);
         }
     }
 }

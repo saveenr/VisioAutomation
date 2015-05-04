@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Documents;
 using VisioAutomation.Extensions;
 using VA=VisioAutomation;
 
@@ -16,13 +17,13 @@ namespace TestVisioAutomation
             var doc2 = documents.Add(string.Empty);
             var doc3 = documents.Add(string.Empty);
 
-            VA.Documents.DocumentHelper.Activate(doc1);
+            DocumentHelper.Activate(doc1);
             Assert.AreEqual(doc1, app.ActiveDocument);
-            VA.Documents.DocumentHelper.Activate(doc2);
+            DocumentHelper.Activate(doc2);
             Assert.AreEqual(doc2, app.ActiveDocument);
-            VA.Documents.DocumentHelper.Activate(doc3);
+            DocumentHelper.Activate(doc3);
             Assert.AreEqual(doc3, app.ActiveDocument);
-            VA.Documents.DocumentHelper.Activate(doc1);
+            DocumentHelper.Activate(doc1);
             Assert.AreEqual(doc1, app.ActiveDocument);
 
             doc1.Close(true);

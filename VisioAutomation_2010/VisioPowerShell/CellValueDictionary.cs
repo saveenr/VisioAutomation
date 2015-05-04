@@ -1,4 +1,9 @@
 ﻿
+using System;
+using System.Collections;
+using System.Globalization;
+using VisioAutomation.ShapeSheet;
+
 namespace VisioPowerShell
 {
     public class CellValueDictionary : CellNameDictionary<string>
@@ -10,12 +15,12 @@ namespace VisioPowerShell
             this.srcmap = src_src_dictionary;
         }
 
-        public VisioAutomation.ShapeSheet.SRC GetSRC(string name)
+        public SRC GetSRC(string name)
         {
             return this.srcmap[name];
         }
 
-        public void UpdateValueMap(System.Collections.Hashtable Hashtable)
+        public void UpdateValueMap(Hashtable Hashtable)
         {
             if (Hashtable != null)
             {
@@ -24,7 +29,7 @@ namespace VisioPowerShell
                     if (!(key_o is string))
                     {
                         string message = "Only string values can be keys in the hashtable";
-                        throw new System.ArgumentOutOfRangeException(message);
+                        throw new ArgumentOutOfRangeException(message);
                     }
                     string key_string = (string)key_o;
 
@@ -32,7 +37,7 @@ namespace VisioPowerShell
                     if (value_o == null)
                     {
                         string message = "Null values not allowed for cellvalues";
-                        throw new System.ArgumentOutOfRangeException(message);
+                        throw new ArgumentOutOfRangeException(message);
                     }
 
                     var value_string = CellValueDictionary.get_value_string(value_o);
@@ -43,7 +48,7 @@ namespace VisioPowerShell
 
         private static string get_value_string(object value_o)
         {
-            var culture = System.Globalization.CultureInfo.InvariantCulture;
+            var culture = CultureInfo.InvariantCulture;
 
             string value_string;
             if (value_o is string)
@@ -68,7 +73,7 @@ namespace VisioPowerShell
             else
             {
                 string message = string.Format("Cell values cannot be of type {0} ", value_o.GetType().Name);
-                throw new System.ArgumentOutOfRangeException(message);
+                throw new ArgumentOutOfRangeException(message);
             }
             return value_string;
         }

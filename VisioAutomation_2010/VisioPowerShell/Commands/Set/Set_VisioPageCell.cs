@@ -1,28 +1,31 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
-using SMA = System.Management.Automation;
+﻿using System.Collections;
 using System.Linq;
+using VisioAutomation.Application;
+using VisioAutomation.ShapeSheet;
+using IVisio = Microsoft.Office.Interop.Visio;
+using SMA = System.Management.Automation;
 using VA = VisioAutomation;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Set, "VisioPageCell")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioPageCell")]
     public class Set_VisioPageCell: VisioCmdlet
     {
-        [SMA.Parameter(Mandatory = true,Position=0)] 
-        public System.Collections.Hashtable Hashtable  { get; set; }
+        [SMA.ParameterAttribute(Mandatory = true,Position=0)] 
+        public Hashtable Hashtable  { get; set; }
  
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public IVisio.Page[] Pages { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
         
         protected override void ProcessRecord()
         {
-            var update = new VisioAutomation.ShapeSheet.Update();
+            var update = new Update();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular= this.TestCircular;
 
@@ -49,7 +52,7 @@ namespace VisioPowerShell.Commands
                 this.WriteVerbose("Number of Total Updates: {0}", update.Count());
                 this.WriteVerbose("Number of Updates per Shape: {0}", update.Count() / 1);
 
-                using (var undoscope = new VA.Application.UndoScope(this.client.VisioApplication, "SetPageCells"))
+                using (var undoscope = new UndoScope(this.client.VisioApplication, "SetPageCells"))
                 {
                     this.WriteVerbose("Start Update");
                     update.Execute(pagesheet);

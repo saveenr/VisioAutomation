@@ -4,7 +4,7 @@ using VA=VisioAutomation;
 namespace VisioPowerShell.Commands
 {
 
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioClient")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioClient")]
     public class Get_VisioClient : VisioCmdlet
     {
         protected override void ProcessRecord()

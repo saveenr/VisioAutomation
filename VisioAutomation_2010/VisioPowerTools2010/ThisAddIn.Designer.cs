@@ -8,38 +8,48 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+using System.CodeDom.Compiler;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Security.Permissions;
+using Microsoft.Office.Interop.Visio;
+using Microsoft.Office.Tools;
+using Microsoft.Office.Tools.Ribbon;
+using Microsoft.VisualStudio.Tools.Applications.Runtime;
+
 #pragma warning disable 414
 namespace VisioPowerTools2010 {
     
     
     /// 
-    [Microsoft.VisualStudio.Tools.Applications.Runtime.StartupObjectAttribute(0)]
-    [global::System.Security.Permissions.PermissionSetAttribute(global::System.Security.Permissions.SecurityAction.Demand, Name="FullTrust")]
-    public sealed partial class ThisAddIn : Microsoft.Office.Tools.AddInBase {
+    [StartupObject(0)]
+    [PermissionSet(SecurityAction.Demand, Name="FullTrust")]
+    public sealed partial class ThisAddIn : AddInBase {
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        private global::System.Object missing = global::System.Type.Missing;
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        private Object missing = Type.Missing;
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        internal Microsoft.Office.Interop.Visio.Application Application;
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        internal Application Application;
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public ThisAddIn(global::Microsoft.Office.Tools.Factory factory, global::System.IServiceProvider serviceProvider) : 
+        [DebuggerNonUserCode()]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public ThisAddIn(Factory factory, IServiceProvider serviceProvider) : 
                 base(factory, serviceProvider, "AddIn", "ThisAddIn") {
             Globals.Factory = factory;
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         protected override void Initialize() {
             base.Initialize();
-            this.Application = this.GetHostItem<Microsoft.Office.Interop.Visio.Application>(typeof(Microsoft.Office.Interop.Visio.Application), "Application");
+            this.Application = this.GetHostItem<Application>(typeof(Application), "Application");
             Globals.ThisAddIn = this;
-            global::System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.EnableVisualStyles();
             this.InitializeCachedData();
             this.InitializeControls();
             this.InitializeComponents();
@@ -47,18 +57,18 @@ namespace VisioPowerTools2010 {
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         protected override void FinishInitialization() {
             this.InternalStartup();
             this.OnStartup();
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         protected override void InitializeDataBindings() {
             this.BeginInitialization();
             this.BindToData();
@@ -66,9 +76,9 @@ namespace VisioPowerTools2010 {
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         private void InitializeCachedData() {
             if ((this.DataHost == null)) {
                 return;
@@ -79,81 +89,81 @@ namespace VisioPowerTools2010 {
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         private void InitializeData() {
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         private void BindToData() {
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        [DebuggerNonUserCode()]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         private void StartCaching(string MemberName) {
             this.DataHost.StartCaching(this, MemberName);
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        [DebuggerNonUserCode()]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         private void StopCaching(string MemberName) {
             this.DataHost.StopCaching(this, MemberName);
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        [DebuggerNonUserCode()]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         private bool IsCached(string MemberName) {
             return this.DataHost.IsCached(this, MemberName);
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         private void BeginInitialization() {
             this.BeginInit();
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         private void EndInitialization() {
             this.EndInit();
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         private void InitializeControls() {
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        [DebuggerNonUserCode()]
+        [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         private void InitializeComponents() {
         }
         
         /// 
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        [DebuggerNonUserCode()]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         private bool NeedsFill(string MemberName) {
             return this.DataHost.NeedsFill(this, MemberName);
         }
     }
     
     /// 
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+    [DebuggerNonUserCode()]
+    [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
     internal sealed partial class Globals {
         
         /// 
@@ -162,55 +172,55 @@ namespace VisioPowerTools2010 {
         
         private static ThisAddIn _ThisAddIn;
         
-        private static global::Microsoft.Office.Tools.Factory _factory;
+        private static Factory _factory;
         
         private static ThisRibbonCollection _ThisRibbonCollection;
         
         internal static ThisAddIn ThisAddIn {
             get {
-                return _ThisAddIn;
+                return Globals._ThisAddIn;
             }
             set {
-                if ((_ThisAddIn == null)) {
-                    _ThisAddIn = value;
+                if ((Globals._ThisAddIn == null)) {
+                    Globals._ThisAddIn = value;
                 }
                 else {
-                    throw new System.NotSupportedException();
+                    throw new NotSupportedException();
                 }
             }
         }
         
-        internal static global::Microsoft.Office.Tools.Factory Factory {
+        internal static Factory Factory {
             get {
-                return _factory;
+                return Globals._factory;
             }
             set {
-                if ((_factory == null)) {
-                    _factory = value;
+                if ((Globals._factory == null)) {
+                    Globals._factory = value;
                 }
                 else {
-                    throw new System.NotSupportedException();
+                    throw new NotSupportedException();
                 }
             }
         }
         
         internal static ThisRibbonCollection Ribbons {
             get {
-                if ((_ThisRibbonCollection == null)) {
-                    _ThisRibbonCollection = new ThisRibbonCollection(_factory.GetRibbonFactory());
+                if ((Globals._ThisRibbonCollection == null)) {
+                    Globals._ThisRibbonCollection = new ThisRibbonCollection(Globals._factory.GetRibbonFactory());
                 }
-                return _ThisRibbonCollection;
+                return Globals._ThisRibbonCollection;
             }
         }
     }
     
     /// 
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
-    internal sealed partial class ThisRibbonCollection : Microsoft.Office.Tools.Ribbon.RibbonCollectionBase {
+    [DebuggerNonUserCode()]
+    [GeneratedCode("Microsoft.VisualStudio.Tools.Office.ProgrammingModel.dll", "11.0.0.0")]
+    internal sealed partial class ThisRibbonCollection : RibbonCollectionBase {
         
         /// 
-        internal ThisRibbonCollection(global::Microsoft.Office.Tools.Ribbon.RibbonFactory factory) : 
+        internal ThisRibbonCollection(RibbonFactory factory) : 
                 base(factory) {
         }
     }

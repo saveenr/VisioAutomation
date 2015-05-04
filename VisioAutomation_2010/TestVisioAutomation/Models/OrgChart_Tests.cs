@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VisioAutomation.Drawing;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -22,7 +24,7 @@ namespace TestVisioAutomation
                 var application = page1.Application;
                 orgcgart.Render(application);
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 page1.Delete(0);
                 caught = true;
@@ -40,7 +42,7 @@ namespace TestVisioAutomation
             var orgchart = new OCMODEL.OrgChartDocument();
 
             var n_a = new OCMODEL.Node("A");
-            n_a.Size = new VA.Drawing.Size(4, 2);
+            n_a.Size = new Size(4, 2);
             orgchart.OrgCharts.Add(n_a);
 
             var app = new IVisio.Application();
@@ -71,7 +73,7 @@ namespace TestVisioAutomation
             n_c.Children.Add(n_d);
             n_c.Children.Add(n_e);
 
-            n_a.Size = new VA.Drawing.Size(4, 2);
+            n_a.Size = new Size(4, 2);
 
             orgchart_doc.OrgCharts.Add(n_a);
 
@@ -100,7 +102,7 @@ namespace TestVisioAutomation
             Assert.AreEqual("D", n_d.VisioShape.Text.Trim());
             Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
+            Assert.AreEqual(new Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
             Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
@@ -125,7 +127,7 @@ namespace TestVisioAutomation
             n_c.Children.Add(n_d);
             n_c.Children.Add(n_e);
 
-            n_a.Size = new VA.Drawing.Size(4, 2);
+            n_a.Size = new Size(4, 2);
 
             orgchart.OrgCharts.Add(n_a);
             orgchart.OrgCharts.Add(n_a);

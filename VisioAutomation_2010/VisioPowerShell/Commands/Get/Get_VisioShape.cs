@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
@@ -5,17 +6,17 @@ using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioPowerShell.Commands
 {
-    [SMA.Cmdlet(SMA.VerbsCommon.Get, "VisioShape")]
+    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioShape")]
     public class Get_VisioShape : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = false)]
+        [SMA.ParameterAttribute(Position = 0, Mandatory = false)]
         public object[] NameOrID;
 
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter Recursive;
 
-        [SMA.Parameter(Mandatory = false)]
+        [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter SubSelected;
 
         protected override void ProcessRecord()
@@ -59,7 +60,7 @@ namespace VisioPowerShell.Commands
 
                     if (!all_ints && !all_strings)
                     {
-                        throw new System.ArgumentOutOfRangeException("must be array of only ints or only strings");
+                        throw new ArgumentOutOfRangeException("must be array of only ints or only strings");
                     }
 
                     if (all_ints)
@@ -76,7 +77,7 @@ namespace VisioPowerShell.Commands
                     }
                     else
                     {
-                        throw new System.ArgumentOutOfRangeException("Should never get here");
+                        throw new ArgumentOutOfRangeException("Should never get here");
                     }                    
                 }
             }
