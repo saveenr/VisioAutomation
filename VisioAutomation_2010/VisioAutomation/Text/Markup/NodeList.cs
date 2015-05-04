@@ -54,7 +54,7 @@ namespace VisioAutomation.Text.Markup
 
             if (item.Parent != this.parent)
             {
-                throw new System.ArgumentException("a child of a different parent");
+                throw new System.ArgumentException("already a child of a different parent");
             }
 
             this.items.Remove(item);

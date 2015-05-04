@@ -63,7 +63,7 @@ namespace VisioAutomation.VDX
 
             if (this.ContainsName(name))
             {
-                throw new System.ArgumentException("already has one with that name");
+                throw new System.ArgumentException("Already contains an item with that name", "item");
             }
             else
             {

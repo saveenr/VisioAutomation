@@ -71,7 +71,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name");
+                throw new System.ArgumentException("name cannot be empty", "name");
             }
 
             var shapes = GetTargetShapes(target_shapes);

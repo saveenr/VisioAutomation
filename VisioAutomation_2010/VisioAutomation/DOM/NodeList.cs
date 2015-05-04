@@ -61,7 +61,7 @@ namespace VisioAutomation.DOM
 
             if (node_to_add.Parent != null)
             {
-                throw new System.ArgumentException("already a child of a node");
+                throw new System.ArgumentException("Node is already a child of a node");
             }
 
             this.items = this.items ?? new List<T>();

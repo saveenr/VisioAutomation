@@ -180,7 +180,7 @@ namespace VisioAutomation.VDX.Elements
                 }
             }
 
-            throw new System.ArgumentException("no such master id");
+            throw new System.ArgumentException("no such master id", "id");
         }
 
         public MasterMetadata GetMasterMetaData(string name)

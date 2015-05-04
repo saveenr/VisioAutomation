@@ -47,7 +47,7 @@ namespace VisioAutomation.Models.OrgChart
             {
                 if (root == null)
                 {
-                    throw new System.ArgumentException("Org chart has root node set to null", "orgchartdrawing");
+                    throw new System.ArgumentException("Org chart has root node set to null");
                 }
             }
 

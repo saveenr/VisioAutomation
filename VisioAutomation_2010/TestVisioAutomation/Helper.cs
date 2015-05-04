@@ -8,7 +8,7 @@
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new System.ArgumentException("name");
+                throw new System.ArgumentException("name is null or empty","name");
             }
 
             this.OutputPath = GetOutputPathEx(name);

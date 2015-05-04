@@ -76,12 +76,12 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException("name cannot be null","name");
             }
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name");
+                throw new System.ArgumentException("name cannot be empty", "name");
             }
 
             using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication,"Delete User-Defined Cell"))

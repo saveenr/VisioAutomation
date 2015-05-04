@@ -31,7 +31,6 @@ namespace VisioAutomation.Application
                 string path = System.IO.Path.Combine(app.Path, "Visio Content");
                 path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
                 return path;
-                s
             }
 
             string msg = string.Format("VisioAutomation does not support Visio version {0}", ver.Major);

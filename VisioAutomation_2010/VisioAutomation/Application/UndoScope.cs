@@ -19,7 +19,8 @@ namespace VisioAutomation.Application
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new System.ArgumentException("name");
+                string msg = string.Format("{0} cannot be null or empty", "name");
+                throw new System.ArgumentException(msg,"name");
             }
 
             this.Application = app;

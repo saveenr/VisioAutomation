@@ -7,24 +7,14 @@ namespace VisioAutomation.VDX.Elements
     {
         public Connect(Shape from_shape, string from_cell, Shape to_shape, string to_cell)
         {
-            if (to_shape == null)
-            {
-                throw new System.ArgumentNullException("to_shape");
-            }
-
-            if (from_shape == null)
-            {
-                throw new System.ArgumentNullException("from_shape");
-            }
-
             if (string.IsNullOrEmpty(to_cell))
             {
-                throw new System.ArgumentException("to_cell");
+                throw new System.ArgumentException("to_cell cannot be null or empty", "to_cell");
             }
 
             if (string.IsNullOrEmpty(from_cell))
             {
-                throw new System.ArgumentException("from_cell");
+                throw new System.ArgumentException("from_cell cannot be null or empty", "from_cell");
             }
 
             FromSheet = from_shape.ID;

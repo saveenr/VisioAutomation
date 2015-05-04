@@ -246,7 +246,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (filename.Length == 0)
             {
-                throw new System.ArgumentException(filename);
+                throw new System.ArgumentException("filename cannot be empty", filename);
             }
 
             string abs_filename = System.IO.Path.GetFullPath(filename);
@@ -256,7 +256,8 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!System.IO.File.Exists(abs_filename))
             {
-                throw new System.ArgumentException("File does not exist", "filename");
+                string msg = string.Format("File \"{0}\"does not exist", abs_filename);
+                throw new System.ArgumentException(msg, "filename");
             }
 
             var application = this.Client.VisioApplication;

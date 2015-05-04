@@ -14,7 +14,7 @@ namespace VisioAutomation.Drawing
         {
             if (right < left)
             {
-                throw new System.ArgumentException("left must be <=right");
+                throw new System.ArgumentException("left must be <= right");
             }
 
             if (top < bottom)

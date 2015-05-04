@@ -42,19 +42,19 @@ namespace VisioAutomation.VDX.Elements
         {
             if (drawing==null)
             {
-                throw new System.ArgumentException("drawing");
+                throw new System.ArgumentNullException("drawing");
             }
 
             if (this.Page < 0)
             {
-                throw new System.ArgumentException("Negative Page not Allowed in Document Window");
+                throw new System.ArgumentException("Negative page not allowed in document window");
             }
 
             bool found = drawing.Pages.Items.Any(p => this.Page == p.ID);
 
             if (!found)
             {
-                string msg = string.Format("Document Window pointing to Page that does not exist");
+                string msg = string.Format("Document window pointing to page that does not exist");
                 throw new System.ArgumentException(msg);
             }
         }

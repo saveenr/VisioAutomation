@@ -49,10 +49,8 @@ namespace VisioAutomation.Drawing
                 var shape = this.Target.Shape.DrawLine(p1.X, p1.Y, p2.X, p2.Y);
                 return shape;
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
 
         }
 
@@ -75,10 +73,8 @@ namespace VisioAutomation.Drawing
                 var shape = this.Target.Shape.DrawPolyline(doubles_array, 0);
                 return shape;
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
         }
 
         public IVisio.Shape DrawBezier(IList<VA.Drawing.Point> points, short degree, short flags)
@@ -100,10 +96,9 @@ namespace VisioAutomation.Drawing
                 var shape = this.Target.Shape.DrawBezier(doubles_array, degree, flags);
                 return shape;
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
+
         }
 
         public IVisio.Shape DrawBezier(IList<VA.Drawing.Point> points)
@@ -131,10 +126,8 @@ namespace VisioAutomation.Drawing
                 var shape = this.Target.Shape.DrawOval(rect.Left, rect.Bottom, rect.Right, rect.Top);
                 return shape;
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
         }
 
         public IVisio.Shape DrawOval(VA.Drawing.Point center, double radius)
@@ -169,10 +162,9 @@ namespace VisioAutomation.Drawing
                 var shape = this.Target.Shape.DrawRectangle(x0, y0, x1, y1);
                 return shape;
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
+            
         }
 
         public IVisio.Shape DrawLine(double x0, double y0, double x1, double y1)
@@ -194,10 +186,9 @@ namespace VisioAutomation.Drawing
 
                 return shape;
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
+            
         }
 
         public IVisio.Shape DrawNURBS(IList<VA.Drawing.Point> controlpoints,
@@ -228,10 +219,8 @@ namespace VisioAutomation.Drawing
                 var shape = this.Target.Shape.DrawNURBS((short)degree, (short)flags, pts_dbl_a, kts_dbl_a, weights_dbl_a);
                 return shape;
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
 
         }
 
@@ -302,10 +291,9 @@ namespace VisioAutomation.Drawing
             {
                 return this.Target.Shape.Drop(master, point.X, point.Y);
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
+            
         }
 
         public IVisio.Shape DrawQuarterArc(VA.Drawing.Point p0, VA.Drawing.Point p1, IVisio.VisArcSweepFlags flags)
@@ -322,10 +310,9 @@ namespace VisioAutomation.Drawing
             {
                 return this.Target.Shape.DrawQuarterArc(p0.X, p0.Y, p1.X, p1.Y, flags);
             }
-            else
-            {
-                throw new System.ArgumentException("Unhandled Drawing Surface");
-            }
+
+            throw new System.ArgumentException("Unhandled Drawing Surface");
+            
         }
 
         public VA.Drawing.Rectangle GetBoundingBox(IVisio.VisBoundingBoxArgs args)

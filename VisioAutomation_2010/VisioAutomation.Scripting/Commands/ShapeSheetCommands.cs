@@ -148,7 +148,7 @@ namespace VisioAutomation.Scripting.Commands
             if (formulas.Any( f => f == null))
             {
                 this.Client.WriteVerbose("SetFormula: One of the Input Formulas is a NULL value");
-                throw new System.ArgumentException("formulas contains a null value");
+                throw new System.ArgumentException("Formulas contains a null value");
             }
 
             this.Client.WriteVerbose("SetFormula: src count= {0} and formula count = {1}", srcs.Count, formulas.Count);
@@ -156,7 +156,7 @@ namespace VisioAutomation.Scripting.Commands
             if (formulas.Count != srcs.Count)
             {
                 string msg = string.Format("SetFormula: Must have the same number of srcs ({0}) and formulas ({1})", srcs.Count,formulas.Count);
-                throw new System.ArgumentException(msg);
+                throw new System.ArgumentException(msg, "formulas");
             }
 
 
@@ -212,7 +212,7 @@ namespace VisioAutomation.Scripting.Commands
             if (results.Any(f => f == null))
             {
                 this.Client.WriteVerbose("SetResult: One of the Input Results is a NULL value");
-                throw new System.ArgumentException("results contains a null value");
+                throw new System.ArgumentException("results contains a null value","results");
             }
 
             this.Client.WriteVerbose("SetResult: src count= {0} and result count = {1}", srcs.Count, results.Count);
@@ -220,7 +220,7 @@ namespace VisioAutomation.Scripting.Commands
             if (results.Count != srcs.Count)
             {
                 string msg = string.Format("Must have the same number of srcs ({0}) and results ({1})", srcs.Count, results.Count);
-                throw new System.ArgumentException(msg);
+                throw new System.ArgumentException(msg,"results");
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();

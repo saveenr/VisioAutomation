@@ -54,7 +54,7 @@ namespace VisioAutomation.VDX
         {
             if (dom.Root == null)
             {
-                throw new System.ArgumentException("Dom must contain a root node");
+                throw new System.ArgumentException("DOM must have a root node");
             }
 
             var root = dom.Root;

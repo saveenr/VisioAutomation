@@ -56,7 +56,7 @@ namespace VisioAutomation.VDX.ShapeSheet
         {
             if (elname.StartsWith("{"))
             {
-                throw new System.ArgumentException();
+                throw new System.ArgumentException("elname");
             }
 
             var fullname = string.Format("{0}{1}",Constants.VisioXmlNamespace2003, elname);
@@ -67,7 +67,7 @@ namespace VisioAutomation.VDX.ShapeSheet
         {
             if (elname.StartsWith("{"))
             {
-                throw new System.ArgumentException();
+                throw new System.ArgumentException("elname");
             }
             var fullname = string.Format("{0}{1}", Constants.VisioXmlNamespace2006, elname);
             return this._ToXml(fullname);

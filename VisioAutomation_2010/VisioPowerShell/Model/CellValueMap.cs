@@ -108,7 +108,7 @@ namespace VisioPowerShell
                 this.CheckCellName(cellname);
                 if (!this.dic.ContainsKey(cellname))
                 {
-                    throw new System.ArgumentException("cellname not defined in map");
+                    throw new System.ArgumentException("cellname not defined in map","cellname");
                 }
                 yield return cellname;
             }

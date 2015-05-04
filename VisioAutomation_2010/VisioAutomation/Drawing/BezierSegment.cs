@@ -30,7 +30,8 @@ namespace VisioAutomation.Drawing
 
             if (points.Count != 4)
             {
-                throw new System.ArgumentException("Must have exactly 4 points");
+                string msg = string.Format("A {0} must have exactly 4 points", typeof (BezierSegment));
+                throw new System.ArgumentException(msg, "points");
             }
 
             this.Start = points[0];
@@ -104,7 +105,7 @@ namespace VisioAutomation.Drawing
 
             if (start_angle > end_angle)
             {
-                throw new System.ArgumentException("end_angle must be less than start angle", "end_angle");
+                throw new System.ArgumentException("end_angle must be < than start angle", "end_angle");
             }
 
             // the original purpose of this method is to break apart arcs > 90 degrees into smaller sub-arcs of 90 or less

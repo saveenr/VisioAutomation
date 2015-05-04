@@ -38,13 +38,13 @@ namespace VisioPowerShell.Commands
         {
             if (Cells == null)
             {
-                throw new System.ArgumentException("Cells");
+                throw new System.ArgumentNullException("Cells");
             }
 
             if (Cells.Count< 1)
             {
                 string msg = "Must provide at least one cell name";
-                throw new System.ArgumentException(msg);
+                throw new System.ArgumentException(msg,"Cells");
             }
         }
     }

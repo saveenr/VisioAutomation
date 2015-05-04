@@ -127,7 +127,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (name.Length < 1)
             {
-                throw new System.ArgumentException("name must have at least one character");
+                throw new System.ArgumentException("name cannot be empty","name");
             }
 
             var page = Get();
