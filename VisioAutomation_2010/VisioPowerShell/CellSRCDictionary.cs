@@ -24,7 +24,7 @@ namespace VisioPowerShell
                 shape_cellmap["BeginY"] = VA.ShapeSheet.SRCConstants.BeginY;
                 shape_cellmap["CharCase"] = VA.ShapeSheet.SRCConstants.CharCase;
                 shape_cellmap["CharColor"] = VA.ShapeSheet.SRCConstants.CharColor;
-                shape_cellmap["CharColorTransparency"] = VA.ShapeSheet.SRCConstants.CharColorTrans;
+                shape_cellmap["CharColorTrans"] = VA.ShapeSheet.SRCConstants.CharColorTrans;
                 shape_cellmap["CharFont"] = VA.ShapeSheet.SRCConstants.CharFont;
                 shape_cellmap["CharFontScale"] = VA.ShapeSheet.SRCConstants.CharFontScale;
                 shape_cellmap["CharLetterspace"] = VA.ShapeSheet.SRCConstants.CharLetterspace;
