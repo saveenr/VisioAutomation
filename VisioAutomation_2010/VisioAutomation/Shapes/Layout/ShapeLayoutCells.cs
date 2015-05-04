@@ -54,13 +54,13 @@ namespace VisioAutomation.Shapes.Layout
         public static IList<ShapeLayoutCells> GetCells(Microsoft.Office.Interop.Visio.Page page, IList<int> shapeids)
         {
             var query = ShapeLayoutCells.get_query();
-            return CellGroup._GetCells<ShapeLayoutCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroup._GetCells<ShapeLayoutCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static ShapeLayoutCells GetCells(Microsoft.Office.Interop.Visio.Shape shape)
         {
             var query = ShapeLayoutCells.get_query();
-            return CellGroup._GetCells<ShapeLayoutCells, double>(shape, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroup._GetCells<ShapeLayoutCells, double>(shape, query, query.GetCells);
         }
 
         private static ShapeLayoutCellQuery _mCellQuery;

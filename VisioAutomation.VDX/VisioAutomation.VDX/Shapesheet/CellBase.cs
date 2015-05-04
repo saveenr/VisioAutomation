@@ -12,12 +12,12 @@ namespace VisioAutomation.VDX.ShapeSheet
         public abstract string GetResultString();
         public abstract bool HasResult { get; }
 
-        public CellBase()
+        protected CellBase()
         {
             this.Unit = CellUnit.None;
         }
 
-        public CellBase(CellUnit unit)
+        protected CellBase(CellUnit unit)
         {
             this.Unit = unit;
         }

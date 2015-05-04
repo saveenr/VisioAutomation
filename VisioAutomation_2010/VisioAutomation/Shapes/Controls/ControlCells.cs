@@ -36,13 +36,13 @@ namespace VisioAutomation.Shapes.Controls
         public static IList<List<ControlCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = ControlCells.get_query();
-            return CellGroupMultiRow._GetCells<ControlCells,double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ControlCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ControlCells> GetCells(IVisio.Shape shape)
         {
             var query = ControlCells.get_query();
-            return CellGroupMultiRow._GetCells<ControlCells,double>(shape, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ControlCells, double>(shape, query, query.GetCells);
         }
 
         private static ControlCellQuery _mCellQuery;

@@ -70,13 +70,13 @@ namespace VisioAutomation.Shapes
         public static IList<FormatCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = FormatCells.get_query();
-            return CellGroup._GetCells<FormatCells,double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroup._GetCells<FormatCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static FormatCells GetCells(IVisio.Shape shape)
         {
             var query = FormatCells.get_query();
-            return CellGroup._GetCells<FormatCells, double>(shape, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroup._GetCells<FormatCells, double>(shape, query, query.GetCells);
         }
 
         private static ShapeFormatCellQuery _mCellQuery;

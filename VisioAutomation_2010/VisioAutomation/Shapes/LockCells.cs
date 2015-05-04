@@ -60,13 +60,13 @@ namespace VisioAutomation.Shapes
         public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
             var query = LockCells.get_query();
-            return CellGroup._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroup._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static LockCells GetCells(IVisio.Shape shape)
         {
             var query = LockCells.get_query();
-            return CellGroup._GetCells<LockCells, double>(shape, query, query.GetCells);
+            return ShapeSheet.CellGroups.CellGroup._GetCells<LockCells, double>(shape, query, query.GetCells);
         }
 
 
