@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace VisioPowerShell
 {
@@ -82,12 +83,7 @@ namespace VisioPowerShell
             {
                 this.CheckCellNameWildcard(cellname);
 
-                string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
-                    .Replace(@"\*", ".*").
-                    Replace(@"\?", ".") + "$";
-
-                var regex = new System.Text.RegularExpressions.Regex(pat,
-                    System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                var regex = GetRegexForWildCardPattern(cellname);
 
                 foreach (string k in this.CellNames)
                 {
@@ -111,6 +107,17 @@ namespace VisioPowerShell
                     yield break;
                 }
             }
+        }
+
+        private static Regex GetRegexForWildCardPattern(string cellname)
+        {
+            string pat = "^" + System.Text.RegularExpressions.Regex.Escape(cellname)
+                .Replace(@"\*", ".*").
+                Replace(@"\?", ".") + "$";
+
+            var regex = new System.Text.RegularExpressions.Regex(pat,
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            return regex;
         }
 
         public IEnumerable<string> ResolveNames(IEnumerable<string> cellnames)
