@@ -31,10 +31,11 @@ namespace VisioAutomation.Application
                 string path = System.IO.Path.Combine(app.Path, "Visio Content");
                 path = System.IO.Path.Combine(path, app.Language.ToString(System.Globalization.CultureInfo.InvariantCulture));
                 return path;
-
+                s
             }
 
-            throw new System.ArgumentException("This version of visio not supported");
+            string msg = string.Format("VisioAutomation does not support Visio version {0}", ver.Major);
+            throw new System.ArgumentException(msg);
         }
 
         public static string GetXMLErrorLogFilename(Microsoft.Office.Interop.Visio.Application app)
