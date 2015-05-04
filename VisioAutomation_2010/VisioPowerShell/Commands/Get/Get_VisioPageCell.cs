@@ -25,7 +25,7 @@ namespace VisioPowerShell.Commands
         {
             EnsureEnoughCellNames(this.Cells);
             var target_page = this.Page ?? this.client.Page.Get();
-            var cellmap = CellMap.GetCellMapForPages();
+            var cellmap = CellSRCDictionary.GetCellMapForPages();
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
             var surface = new ShapeSheetSurface(target_page);

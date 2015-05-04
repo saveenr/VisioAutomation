@@ -28,8 +28,8 @@ namespace VisioPowerShell.Commands
 
             var target_pages = this.Pages ?? new[] { this.client.Page.Get() };
 
-            var dic = CellMap.GetCellMapForPages();
-            var valuemap = new CellValueMap(dic);
+            var dic = CellSRCDictionary.GetCellMapForPages();
+            var valuemap = new CellValueDictionary(dic);
 
             valuemap.UpdateValueMap(this.Hashtable);
 

@@ -27,8 +27,8 @@ namespace VisioPowerShell.Commands
             update.BlastGuards = this.BlastGuards;
             update.TestCircular = this.TestCircular;
 
-            var cellmap = CellMap.GetCellMapForShapes();
-            var valuemap = new CellValueMap(cellmap);
+            var cellmap = CellSRCDictionary.GetCellMapForShapes();
+            var valuemap = new CellValueDictionary(cellmap);
             valuemap.UpdateValueMap(this.Hashtable);
 
             var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
