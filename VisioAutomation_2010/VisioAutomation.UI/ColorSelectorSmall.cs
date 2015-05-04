@@ -18,7 +18,7 @@ namespace VisioAutomation.UI.CommonControls
             this.colorform.Color = this.Color;
             var popup = new PascalGanaye.Popup.Popup(this.colorform, this);
             popup.AnimationSpeed = 0;
-            popup.DropDownClosed += new System.EventHandler(this.popup_DropDownClosed);
+            popup.DropDownClosed += this.popup_DropDownClosed;
             popup.Show();
         }
 

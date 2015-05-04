@@ -18,7 +18,7 @@ namespace VisioAutomation.UI
         {
             if (enable && this.m_hHook == 0)
             {
-                this.m_HookCallback = new ColorPicker_NativeMethods.HookProc(this.HookCallbackProc);
+                this.m_HookCallback = this.HookCallbackProc;
                 System.Reflection.Module module = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0];
                 this.m_hHook = ColorPicker_NativeMethods.SetWindowsHookEx(WinUtil.WH_KEYBOARD_LL, this.m_HookCallback,
                                                                      System.Runtime.InteropServices.Marshal.GetHINSTANCE

@@ -110,8 +110,8 @@ namespace PascalGanaye.Popup
                 this.Opacity = popup.mOpacity;
 
                 //These are here to suppress warnings.
-                this.DropDown += new System.EventHandler(this.DoNothing);
-                this.DropDownClosed += new System.EventHandler(this.DoNothing);
+                this.DropDown += this.DoNothing;
+                this.DropDownClosed += this.DoNothing;
 
                 Form parentForm = this.mPopup.mParent.FindForm();
                 if (parentForm != null)
@@ -138,9 +138,9 @@ namespace PascalGanaye.Popup
                     this.mResizingPanel.Parent = this;
                     this.mResizingPanel.BringToFront();
 
-                    this.mResizingPanel.MouseUp += new MouseEventHandler(this.mResizingPanel_MouseUp);
-                    this.mResizingPanel.MouseDown += new MouseEventHandler(this.mResizingPanel_MouseDown);
-                    this.mResizingPanel.MouseMove += new MouseEventHandler(this.mResizingPanel_MouseMove);
+                    this.mResizingPanel.MouseUp += this.mResizingPanel_MouseUp;
+                    this.mResizingPanel.MouseDown += this.mResizingPanel_MouseDown;
+                    this.mResizingPanel.MouseMove += this.mResizingPanel_MouseMove;
                 }
                 this.mPlacement = this.mPopup.mPlacement;
 
@@ -227,7 +227,7 @@ namespace PascalGanaye.Popup
                     // it looks smooth enough on fast computers and do not drain slower one
                     this.mTimer.Interval = 1000/25;
                     this.mTimerStarted = System.DateTimeOffset.Now;
-                    this.mTimer.Tick += new System.EventHandler(this.Showing);
+                    this.mTimer.Tick += this.Showing;
                     this.mTimer.Start();
                     this.Showing(null, null);
                 }
@@ -322,7 +322,7 @@ namespace PascalGanaye.Popup
                 if (this.mProgress >= 1)
                 {
                     this.mTimer.Stop();
-                    this.mTimer.Tick -= new System.EventHandler(this.Showing);
+                    this.mTimer.Tick -= this.Showing;
                     this.AnimateForm(1);
                 }
                 else
