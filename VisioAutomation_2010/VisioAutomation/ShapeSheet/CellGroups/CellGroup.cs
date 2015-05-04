@@ -24,7 +24,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             Query.CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
-            check_query(query);
+            CellGroup.check_query(query);
 
             var surface = new ShapeSheetSurface(page);
             var data_for_shapes = query.GetCellData<RT>( surface, shapeids);
@@ -42,7 +42,7 @@ namespace VisioAutomation.ShapeSheet.CellGroups
             Query.CellQuery query,
             RowToObject<T, RT> row_to_object)
         {
-            check_query(query);
+            CellGroup.check_query(query);
 
             var data_for_shape = query.GetCellData<RT>(shape);
             var cells = row_to_object(data_for_shape.Cells);

@@ -129,7 +129,7 @@ namespace VisioAutomation.Models.ContainerLayout
             var ct_items = this.Containers.ToList();
             var ct_rects = ct_items.Select(item => item.Rectangle).ToList();
             var masters = ct_items.Select(i => plain_container_master).ToList();
-            short[] ct_shapeids = DropManyU(page, masters, ct_rects);
+            short[] ct_shapeids = ContainerLayout.DropManyU(page, masters, ct_rects);
 
             // associate each container with the corresponding shape oject and shape id
             for (int i = 0; i < ct_items.Count; i++)
@@ -146,7 +146,7 @@ namespace VisioAutomation.Models.ContainerLayout
             var items = this.ContainerItems.ToList();
             var item_rects = items.Select(item => item.Rectangle).ToList();
             var item_masters = items.Select(i => item_master).ToList();
-            short[] shapeids = DropManyU(page, item_masters, item_rects);
+            short[] shapeids = ContainerLayout.DropManyU(page, item_masters, item_rects);
 
             // Associate each item with the corresponding shape object and shape id
             for (int i = 0; i < items.Count; i++)

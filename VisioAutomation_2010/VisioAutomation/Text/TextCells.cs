@@ -50,21 +50,21 @@ namespace VisioAutomation.Text
 
         public static IList<TextCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = get_query();
-            return _GetCells<TextCells, double>(page, shapeids, query, query.GetCells);
+            var query = TextCells.get_query();
+            return CellGroup._GetCells<TextCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static TextCells GetCells(IVisio.Shape shape)
         {
-            var query = get_query();
-            return _GetCells<TextCells, double>(shape, query, query.GetCells);
+            var query = TextCells.get_query();
+            return CellGroup._GetCells<TextCells, double>(shape, query, query.GetCells);
         }
 
         private static TextBlockFormatCellQuery _mCellQuery;
         private static TextBlockFormatCellQuery get_query()
         {
-            _mCellQuery= _mCellQuery ?? new TextBlockFormatCellQuery();
-            return _mCellQuery;
+            TextCells._mCellQuery= TextCells._mCellQuery ?? new TextBlockFormatCellQuery();
+            return TextCells._mCellQuery;
         }
 
         private class TextBlockFormatCellQuery : CellQuery

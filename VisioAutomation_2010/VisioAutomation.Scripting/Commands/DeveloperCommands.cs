@@ -53,7 +53,7 @@ namespace VisioAutomation.Scripting.Commands
                 var cmdset_type = cmdset_prop.PropertyType;
 
                 // Calculate the text
-                var commands = GetCommands(cmdset_type);
+                var commands = CommandSet.GetCommands(cmdset_type);
                 lines.Clear();
                 foreach (var command in commands)
                 {
@@ -112,7 +112,7 @@ namespace VisioAutomation.Scripting.Commands
                 int chunkcount = 0;
 
                 var values = enum_.Values.OrderBy(i => i.Name).ToList();
-                foreach (var chunk in Chunk(values, chunksize))
+                foreach (var chunk in DeveloperCommands.Chunk(values, chunksize))
                 {
                     helpstr.Length = 0;
                     foreach (var val in chunk)
@@ -216,7 +216,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespaces()
         {
-            return this.DrawNamespaces(GetTypes());
+            return this.DrawNamespaces(DeveloperCommands.GetTypes());
         }
 
         public IVisio.Document DrawNamespaces(IList<Type> types)
@@ -323,7 +323,7 @@ namespace VisioAutomation.Scripting.Commands
 
             tree_layout.Render(doc.Application.ActivePage);
 
-            hide_ui_stuff(doc);
+            DeveloperCommands.hide_ui_stuff(doc);
             return doc;
         }
 
@@ -368,7 +368,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Document DrawNamespacesAndClasses()
         {
-            return this.DrawNamespacesAndClasses(GetTypes());
+            return this.DrawNamespacesAndClasses(DeveloperCommands.GetTypes());
         }
 
         public IVisio.Document DrawNamespacesAndClasses(IList<Type> types_)
@@ -499,7 +499,7 @@ namespace VisioAutomation.Scripting.Commands
             tree_layout.LayoutOptions.ConnectorCells = cxn_cells;
             tree_layout.Render(doc.Application.ActivePage);
 
-            hide_ui_stuff(doc);
+            DeveloperCommands.hide_ui_stuff(doc);
 
             return doc;
         }

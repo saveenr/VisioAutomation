@@ -105,9 +105,9 @@ namespace VisioAutomation.Pages
                 // first determine the desired page size including the padding
                 // and set the new size
 
-                var old_size = GetSize(page);
+                var old_size = PageHelper.GetSize(page);
                 var new_size = old_size + padding.Multiply(2, 2);
-                SetSize(page,new_size);
+                PageHelper.SetSize(page,new_size);
 
                 // The page has the correct size, but
                 // the contents will be offset from the correct location

@@ -40,7 +40,7 @@
             var pen = new System.Drawing.Pen(color);
             if (cornerRadius <= 0)
             {
-                dc.DrawRectangle(pen, Rect(r));
+                dc.DrawRectangle(pen, ColorPickerUtil.Rect(r));
                 return;
             }
             cornerRadius = (float)System.Math.Min(cornerRadius, System.Math.Floor(r.Width) - 2);

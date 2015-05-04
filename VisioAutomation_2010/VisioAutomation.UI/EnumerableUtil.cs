@@ -59,7 +59,7 @@
                 throw new System.ArgumentNullException("items");
             }
 
-            _FillArray(array, items, () => { throw new System.ArgumentException("Not enough items to fill array", "items"); });
+            EnumerableUtil._FillArray(array, items, () => { throw new System.ArgumentException("Not enough items to fill array", "items"); });
         }
 
         /// <summary>
@@ -81,7 +81,7 @@
                 throw new System.ArgumentNullException("items");
             }
 
-            _FillArray(array, items, () => default_value);
+            EnumerableUtil._FillArray(array, items, () => default_value);
         }
 
         private static void _FillArray<T>(T[] array, System.Collections.Generic.IEnumerable<T> items, System.Func<T> func_default)

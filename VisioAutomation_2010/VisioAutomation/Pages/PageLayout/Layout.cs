@@ -19,7 +19,7 @@ namespace VisioAutomation.Pages.PageLayout
         {
             pagecells.AvenueSizeX = this.AvenueSize.Width;
             pagecells.AvenueSizeY = this.AvenueSize.Height;
-            pagecells.LineRouteExt = (int) ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
+            pagecells.LineRouteExt = (int) Layout.ConnectorAppearanceToLineRouteExt(this.ConnectorAppearance);
 
             var rs = this.ConnectorsStyleToRouteStyle();
             if (rs.HasValue)

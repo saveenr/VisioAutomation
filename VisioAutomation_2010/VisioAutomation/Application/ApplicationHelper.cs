@@ -17,7 +17,7 @@ namespace VisioAutomation.Application
 
         public static string GetContentLocation(Microsoft.Office.Interop.Visio.Application app)
         {
-            var ver = GetVersion(app);
+            var ver = ApplicationHelper.GetVersion(app);
 
             if (ver.Major == 14)
             {

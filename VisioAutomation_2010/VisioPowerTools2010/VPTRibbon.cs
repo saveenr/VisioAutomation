@@ -148,7 +148,7 @@ namespace VisioPowerTools2010
             if (result == DialogResult.OK)
             {
                 var colors = form.Colors;
-                draw_colors(colors);
+                VPTRibbon.draw_colors(colors);
             }
 
         }
@@ -386,27 +386,27 @@ namespace VisioPowerTools2010
             using (var scope = new VA.Application.UndoScope(app, "Scramble Text"))
             {
                 // Begin Undo Scope
-                doc.Company = Scramble(sb, doc.Company);
-                doc.Category = Scramble(sb,doc.Category);
-                doc.Title = Scramble(sb, doc.Title);
-                doc.Subject = Scramble(sb, doc.Subject);
-                doc.Creator = Scramble(sb, doc.Creator);
-                doc.Manager = Scramble(sb, doc.Manager);
-                doc.Keywords = Scramble(sb, doc.Keywords);
+                doc.Company = VPTRibbon.Scramble(sb, doc.Company);
+                doc.Category = VPTRibbon.Scramble(sb,doc.Category);
+                doc.Title = VPTRibbon.Scramble(sb, doc.Title);
+                doc.Subject = VPTRibbon.Scramble(sb, doc.Subject);
+                doc.Creator = VPTRibbon.Scramble(sb, doc.Creator);
+                doc.Manager = VPTRibbon.Scramble(sb, doc.Manager);
+                doc.Keywords = VPTRibbon.Scramble(sb, doc.Keywords);
                 foreach (var page in pages)
                 {
                     activewindow.Page = page;
                     var shapes = page.Shapes.AsEnumerable().ToList();
                     foreach (var shape in shapes)
                     {
-                        Scramble(sb, shape);
+                        VPTRibbon.Scramble(sb, shape);
 
                         var shape_shapes = shape.Shapes;
                         if (shape_shapes!=null && shape_shapes.Count>0)
                         {
                             foreach (var nested_shape in VA.Shapes.ShapeHelper.GetNestedShapes(shape))
                             {
-                                Scramble(sb,nested_shape);                                
+                                VPTRibbon.Scramble(sb,nested_shape);                                
                             }
                         }
                     }
@@ -422,7 +422,7 @@ namespace VisioPowerTools2010
             string text_trimmed = text.Trim();
             if (text_trimmed.Length >= 1)
             {
-                shape.Text = Scramble(sb,shape.Text);
+                shape.Text = VPTRibbon.Scramble(sb,shape.Text);
             }
         }
 

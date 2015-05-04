@@ -47,7 +47,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            Invert(application.ActiveWindow);
+            SelectionCommands.Invert(application.ActiveWindow);
         }
 
         private static void Invert(IVisio.Window window)

@@ -56,7 +56,7 @@ namespace VisioAutomation
                 return s;
             }
 
-            string result = System.String.Format("\"{0}\"", s.Replace(quote, quotequote));
+            string result = System.String.Format("\"{0}\"", s.Replace(Convert.quote, Convert.quotequote));
             return result;
         }
 
@@ -72,14 +72,14 @@ namespace VisioAutomation
 
             // Check if this formula value is a quoted string.
             // If it is, remove extra quote characters.
-            if (output_string.StartsWith(quote) &&
-                output_string.EndsWith(quote))
+            if (output_string.StartsWith(Convert.quote) &&
+                output_string.EndsWith(Convert.quote))
             {
 
                 // Remove the wrapping quote characters as well as any
                 // extra quote marks in the body of the string.
                 output_string = output_string.Substring(1, (output_string.Length - 2));
-                output_string = output_string.Replace(quotequote, quote);
+                output_string = output_string.Replace(Convert.quotequote, Convert.quote);
             }
 
             return output_string;

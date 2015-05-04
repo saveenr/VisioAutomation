@@ -33,7 +33,7 @@ namespace VisioAutomationSamples
             layout.CellSpacing = new VA.Drawing.Size(0.1, 0.1);
             layout.PerformLayout();
 
-            double[] trans = RangeSteps(0.0, 1.0, num_rows).ToArray();
+            double[] trans = EffectsSamples.RangeSteps(0.0, 1.0, num_rows).ToArray();
 
             int i = 0;
             foreach (var node in layout.Nodes)

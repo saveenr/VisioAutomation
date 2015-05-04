@@ -21,7 +21,7 @@ namespace VisioAutomation.Pages.PageLayout
         protected override void SetPageCells(PageCells pagecells)
         {
             base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);
+            pagecells.PlaceStyle = (int) HierarchyLayout.GetPlaceStyle(this.Direction, this.HorizontalAlignment, this.VerticalAlignment);
         }
 
         private static IVisio.VisCellVals GetPlaceStyle(Direction dir, HorizontalAlignment halign, VerticalAlignment valign)

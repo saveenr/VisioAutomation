@@ -63,7 +63,7 @@ namespace VisioAutomation.UI.CommonControls
 
         private void textBoxFilename_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (this.textBoxFilename.Lines.Length >= MAX_LINES && e.KeyChar == '\r')
+            if (this.textBoxFilename.Lines.Length >= FilenamePicker.MAX_LINES && e.KeyChar == '\r')
             {
                 e.Handled = true;
             } 

@@ -80,7 +80,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var cmd = _map_halign_to_uicmd(halign);
+            var cmd = ArrangeCommands._map_halign_to_uicmd(halign);
 
             this.Client.VisioApplication.DoCmd((short)cmd);
         }
@@ -96,7 +96,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var cmd = _map_valign_to_uicmd(valign);
+            var cmd = ArrangeCommands._map_valign_to_uicmd(valign);
 
             this.Client.VisioApplication.DoCmd((short)cmd); 
         }
@@ -112,7 +112,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var cmd = _map_axis_to_uicmd(axis);
+            var cmd = ArrangeCommands._map_axis_to_uicmd(axis);
 
             using (var undoscope = new UndoScope(this.Client.VisioApplication,"Distribute Shapes"))
             {
@@ -167,7 +167,7 @@ namespace VisioAutomation.Scripting.Commands
                 var active_page = application.ActivePage;
                 var snapsize = new Drawing.Size(w, h);
                 var minsize = new Drawing.Size(w, h);
-                SnapSize(active_page, shapeids, snapsize, minsize);
+                ArrangeCommands.SnapSize(active_page, shapeids, snapsize, minsize);
             }
         }
 
@@ -193,7 +193,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             // Now apply them
-            update_xfrms(page, shapeids, output_xfrms);
+            ArrangeCommands.update_xfrms(page, shapeids, output_xfrms);
         }
 
         private static void update_xfrms(IVisio.Page page, IList<int> shapeids, IList<Shapes.XFormCells> xfrms)
@@ -241,7 +241,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 bool glue_to_guide = false;
                 var selection = this.Client.Selection.Get();
-                var halign = _map_isd_halign_to_visio_halign(align);
+                var halign = ArrangeCommands._map_isd_halign_to_visio_halign(align);
                 var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;
                 selection.Align(halign, valign, glue_to_guide);
             }
@@ -264,7 +264,7 @@ namespace VisioAutomation.Scripting.Commands
                 var selection = this.Client.Selection.Get();
                 var halign = IVisio.VisHorizontalAlignTypes.visHorzAlignNone;
 
-                var valign = _map_isd_valign_to_visio_valign(align);
+                var valign = ArrangeCommands._map_isd_valign_to_visio_valign(align);
 
                 selection.Align(halign, valign, glue_to_guide);
             }
@@ -396,7 +396,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public static Drawing.Rectangle GetBoundingBox(IEnumerable<Shapes.XFormCells> xfrms)
         {
-            var bb = new Drawing.BoundingBox(xfrms.Select(GetRectangle));
+            var bb = new Drawing.BoundingBox(xfrms.Select(ArrangeCommands.GetRectangle));
             if (!bb.HasValue)
             {
                 throw new System.ArgumentException("Could not calculate bounding box");

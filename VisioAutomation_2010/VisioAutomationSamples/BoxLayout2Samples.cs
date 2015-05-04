@@ -100,7 +100,7 @@ namespace VisioAutomationSamples
                 }
             }
 
-            var layout1 = CreateTwoLevelLayout(data);
+            var layout1 = BoxLayout2Samples.CreateTwoLevelLayout(data);
 
 
             layout1.PerformLayout();

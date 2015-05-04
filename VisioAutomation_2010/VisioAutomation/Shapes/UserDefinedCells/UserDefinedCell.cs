@@ -68,21 +68,21 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
         public static IList<List<UserDefinedCell>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = get_query();
-            return _GetCells<UserDefinedCell,string>(page, shapeids, query, query.GetCells);
+            var query = UserDefinedCell.get_query();
+            return CellGroupMultiRow._GetCells<UserDefinedCell,string>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<UserDefinedCell> GetCells(IVisio.Shape shape)
         {
-            var query = get_query();
-            return _GetCells <UserDefinedCell,string>(shape, query, query.GetCells);
+            var query = UserDefinedCell.get_query();
+            return CellGroupMultiRow._GetCells<UserDefinedCell,string>(shape, query, query.GetCells);
         }
 
         private static UserDefinedCellQuery _mCellQuery;
         private static UserDefinedCellQuery get_query()
         {
-            _mCellQuery = _mCellQuery ?? new UserDefinedCellQuery();
-            return _mCellQuery;
+            UserDefinedCell._mCellQuery = UserDefinedCell._mCellQuery ?? new UserDefinedCellQuery();
+            return UserDefinedCell._mCellQuery;
         }
 
          class UserDefinedCellQuery : CellQuery

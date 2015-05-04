@@ -33,10 +33,10 @@ namespace PascalGanaye.Popup
             Right = 2,
             Top = 4,
             Bottom = 8,
-            TopLeft = Top | Left,
-            TopRight = Top | Right,
-            BottomLeft = Bottom | Left,
-            BottomRight = Bottom | Right
+            TopLeft = ePlacement.Top | ePlacement.Left,
+            TopRight = ePlacement.Top | ePlacement.Right,
+            BottomLeft = ePlacement.Bottom | ePlacement.Left,
+            BottomRight = ePlacement.Bottom | ePlacement.Right
         }
 
         private bool mResizable = false;
@@ -101,12 +101,12 @@ namespace PascalGanaye.Popup
                 this.FormBorderStyle = FormBorderStyle.None;
                 this.StartPosition = FormStartPosition.Manual;
                 this.ShowInTaskbar = false;
-                this.DockPadding.All = BORDER_MARGIN;
+                this.DockPadding.All = PopupForm.BORDER_MARGIN;
                 this.mControlSize = this.mPopup.mUserControl.Size;
                 this.mPopup.mUserControl.Dock = DockStyle.Fill;
                 this.Controls.Add(this.mPopup.mUserControl);
-                this.mWindowSize.Width = this.mControlSize.Width + 2*BORDER_MARGIN;
-                this.mWindowSize.Height = this.mControlSize.Height + 2*BORDER_MARGIN;
+                this.mWindowSize.Width = this.mControlSize.Width + 2*PopupForm.BORDER_MARGIN;
+                this.mWindowSize.Height = this.mControlSize.Height + 2*PopupForm.BORDER_MARGIN;
                 this.Opacity = popup.mOpacity;
 
                 //These are here to suppress warnings.
@@ -122,12 +122,12 @@ namespace PascalGanaye.Popup
                 if (this.mPopup.mResizable)
                 {
                     this.mResizingPanel = new Panel();
-                    if (mBackgroundImage == null)
+                    if (PopupForm.mBackgroundImage == null)
                     {
                         var resources = new System.Resources.ResourceManager(typeof (Popup));
-                        mBackgroundImage = (Image) resources.GetObject("CornerPicture.Image");
+                        PopupForm.mBackgroundImage = (Image) resources.GetObject("CornerPicture.Image");
                     }
-                    this.mResizingPanel.BackgroundImage = mBackgroundImage;
+                    this.mResizingPanel.BackgroundImage = PopupForm.mBackgroundImage;
                     this.mResizingPanel.Width = 12;
                     this.mResizingPanel.Height = 12;
                     this.mResizingPanel.BackColor = Color.Red;
@@ -251,9 +251,9 @@ namespace PascalGanaye.Popup
                 get
                 {
                     CreateParams parameters = base.CreateParams;
-                    if (mShowShadow && DropShadowSupported())
+                    if (PopupForm.mShowShadow && PopupForm.DropShadowSupported())
                     {
-                        parameters.ClassStyle = parameters.ClassStyle | CS_DROPSHADOW;
+                        parameters.ClassStyle = parameters.ClassStyle | PopupForm.CS_DROPSHADOW;
                     }
                     return parameters;
                 }
@@ -418,8 +418,8 @@ namespace PascalGanaye.Popup
 
                 this.mCurrentBounds.X = this.mNormalPos.X + (int) (x*this.mControlSize.Width);
                 this.mCurrentBounds.Y = this.mNormalPos.Y + (int) (y*this.mControlSize.Height);
-                this.mCurrentBounds.Width = (int) (w*this.mControlSize.Width) + 2*BORDER_MARGIN;
-                this.mCurrentBounds.Height = (int) (h*this.mControlSize.Height) + 2*BORDER_MARGIN;
+                this.mCurrentBounds.Width = (int) (w*this.mControlSize.Width) + 2*PopupForm.BORDER_MARGIN;
+                this.mCurrentBounds.Height = (int) (h*this.mControlSize.Height) + 2*PopupForm.BORDER_MARGIN;
                 this.Bounds = this.mCurrentBounds;
             }
 

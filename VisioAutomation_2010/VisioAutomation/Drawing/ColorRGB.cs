@@ -23,12 +23,12 @@ namespace VisioAutomation.Drawing
 
         public ColorRGB(int rgb)
         {
-            GetRGBBytes((uint) rgb, out this._r, out this._g, out this._b);
+            ColorRGB.GetRGBBytes((uint) rgb, out this._r, out this._g, out this._b);
         }
 
         public ColorRGB(uint rgb)
         {
-            GetRGBBytes(rgb, out this._r, out this._g, out this._b);
+            ColorRGB.GetRGBBytes(rgb, out this._r, out this._g, out this._b);
         }
 
 
@@ -92,7 +92,7 @@ namespace VisioAutomation.Drawing
 
         public string ToWebColorString()
         {
-            return ToWebColorString(this._r, this._g, this._b);
+            return ColorRGB.ToWebColorString(this._r, this._g, this._b);
         }
 
         public override bool Equals(object other)
@@ -136,7 +136,7 @@ namespace VisioAutomation.Drawing
         /// <returns></returns>
         public static ColorRGB ParseWebColor(string webcolor)
         {
-            var c = TryParseWebColor(webcolor);
+            var c = ColorRGB.TryParseWebColor(webcolor);
             if (!c.HasValue)
             {
                 string s = string.Format("Failed to parse color string \"{0}\"", webcolor);

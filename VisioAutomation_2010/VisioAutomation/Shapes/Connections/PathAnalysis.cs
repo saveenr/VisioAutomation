@@ -17,10 +17,10 @@ namespace VisioAutomation.Shapes.Connections
                 throw new System.ArgumentNullException("page");
             }
 
-            var directed_edges = GetDirectedEdges(page, flag)
+            var directed_edges = PathAnalysis.GetDirectedEdges(page, flag)
                 .Select(e => new DirectedEdge<IVisio.Shape, IVisio.Shape>(e.From, e.To, e.Connector));
 
-            var closure = GetClosureFromEdges(directed_edges)
+            var closure = PathAnalysis.GetClosureFromEdges(directed_edges)
                 .Select(x => new ConnectorEdge(null, x.From, x.To)).ToList();
 
             return closure;
@@ -41,7 +41,7 @@ namespace VisioAutomation.Shapes.Connections
                 throw new System.ArgumentNullException("page");
             }
 
-            var edges = GetDirectedEdgesRaw(page);
+            var edges = PathAnalysis.GetDirectedEdgesRaw(page);
 
             if (flag == ConnectorEdgeHandling.Raw)
             {
@@ -239,7 +239,7 @@ namespace VisioAutomation.Shapes.Connections
 
             var warshall_result = adj_matrix.Clone();
 
-            PerformWarshall(warshall_result);
+            PathAnalysis.PerformWarshall(warshall_result);
 
             for (int row = 0; row < adj_matrix.Width; row++)
             {

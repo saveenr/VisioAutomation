@@ -78,7 +78,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException("shape");
             }
 
-            int num_stops = GetTabStopCount(shape);
+            int num_stops = TextFormat.GetTabStopCount(shape);
 
             if (num_stops < 1)
             {
@@ -93,9 +93,9 @@ namespace VisioAutomation.Text
             {
                 int i = stop_index * 3;
                 
-                var src_tabpos = new SRC(tab_section, row, (short)(i + 1));
-                var src_tabalign = new SRC(tab_section, row, (short)(i + 2));
-                var src_tabother = new SRC(tab_section, row, (short)(i + 3));
+                var src_tabpos = new SRC(TextFormat.tab_section, row, (short)(i + 1));
+                var src_tabalign = new SRC(TextFormat.tab_section, row, (short)(i + 2));
+                var src_tabother = new SRC(TextFormat.tab_section, row, (short)(i + 3));
 
                 srcs.Add(src_tabpos);
                 srcs.Add(src_tabalign );
@@ -133,7 +133,7 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException("stops");
             }
 
-            ClearTabStops(shape);
+            TextFormat.ClearTabStops(shape);
             if (stops.Count < 1)
             {
                 return;
@@ -142,12 +142,12 @@ namespace VisioAutomation.Text
             const short row = 0;
             var invariant_culture = System.Globalization.CultureInfo.InvariantCulture;
             var vis_tab_stop_count = (short)IVisio.VisCellIndices.visTabStopCount;
-            var tabstopcountcell = shape.CellsSRC[tab_section, row, vis_tab_stop_count];
+            var tabstopcountcell = shape.CellsSRC[TextFormat.tab_section, row, vis_tab_stop_count];
             tabstopcountcell.FormulaU = stops.Count.ToString(invariant_culture);
 
             // set the number of tab stobs allowed for the shape
-            var tagtab = GetTabTagForStops(stops.Count);
-            shape.RowType[tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
+            var tagtab = TextFormat.GetTabTagForStops(stops.Count);
+            shape.RowType[TextFormat.tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
             var update = new Update();
@@ -158,9 +158,9 @@ namespace VisioAutomation.Text
                 var alignment = ((int)stops[stop_index].Alignment).ToString(invariant_culture);
                 var position = ((int)stops[stop_index].Position).ToString(invariant_culture);
 
-                var src_tabpos = new SRC(tab_section, row, (short)(i + 1));
-                var src_tabalign = new SRC(tab_section, row, (short)(i + 2));
-                var src_tabother = new SRC(tab_section, row, (short)(i + 3));
+                var src_tabpos = new SRC(TextFormat.tab_section, row, (short)(i + 1));
+                var src_tabalign = new SRC(TextFormat.tab_section, row, (short)(i + 2));
+                var src_tabother = new SRC(TextFormat.tab_section, row, (short)(i + 3));
 
                 update.SetFormula(src_tabpos, position); // tab position
                 update.SetFormula(src_tabalign, alignment); // tab alignment
@@ -205,9 +205,9 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException("shape");
             }
 
-            var cell_tabstopcount = shape.CellsSRC[src_tabstopcount.Section, src_tabstopcount.Row, src_tabstopcount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[TextFormat.src_tabstopcount.Section, TextFormat.src_tabstopcount.Row, TextFormat.src_tabstopcount.Cell];
             const short rounding = 0;
-            return cell_tabstopcount.ResultInt[unitcode_number, rounding];
+            return cell_tabstopcount.ResultInt[TextFormat.unitcode_number, rounding];
         }
 
         /// <summary>
@@ -221,14 +221,14 @@ namespace VisioAutomation.Text
                 throw new System.ArgumentNullException("shape");
             }
 
-            int num_existing_tabstops = GetTabStopCount(shape);
+            int num_existing_tabstops = TextFormat.GetTabStopCount(shape);
 
             if (num_existing_tabstops < 1)
             {
                 return;
             }
 
-            var cell_tabstopcount = shape.CellsSRC[src_tabstopcount.Section, src_tabstopcount.Row, src_tabstopcount.Cell];
+            var cell_tabstopcount = shape.CellsSRC[TextFormat.src_tabstopcount.Section, TextFormat.src_tabstopcount.Row, TextFormat.src_tabstopcount.Cell];
             cell_tabstopcount.FormulaForce = "0";
 
             const string formula = "0";
@@ -236,7 +236,7 @@ namespace VisioAutomation.Text
             var update = new Update();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
-                var src = new SRC(tab_section, (short)IVisio.VisRowIndices.visRowTab,
+                var src = new SRC(TextFormat.tab_section, (short)IVisio.VisRowIndices.visRowTab,
                                                 (short)i);
                 update.SetFormula(src, formula);
             }
@@ -250,9 +250,9 @@ namespace VisioAutomation.Text
             cells.CharacterFormats = CharacterCells.GetCells(shape);
             cells.ParagraphFormats = ParagraphCells.GetCells(shape);
             cells.TextBlock = TextCells.GetCells(shape);
-            cells.CharacterTextRuns = GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-            cells.ParagraphTextRuns = GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
-            cells.TabStops = GetTabStops(shape);
+            cells.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+            cells.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+            cells.TabStops = TextFormat.GetTabStops(shape);
             return cells;
         }
 
@@ -272,10 +272,10 @@ namespace VisioAutomation.Text
                 l.Add(t);
 
                 var shape = page_shapes.ItemFromID[shapeids[i]];
-                t.CharacterTextRuns = GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
-                t.ParagraphTextRuns = GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
+                t.CharacterTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visCharPropRow, true);
+                t.ParagraphTextRuns = TextFormat.GetTextRuns(shape, IVisio.VisRunTypes.visParaPropRow, true);
 
-                t.TabStops = GetTabStops(shape);
+                t.TabStops = TextFormat.GetTabStops(shape);
             }
 
             return l;

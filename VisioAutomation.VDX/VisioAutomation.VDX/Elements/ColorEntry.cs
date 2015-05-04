@@ -23,7 +23,7 @@ namespace VisioAutomation.VDX.Elements
             byte rbyte;
             byte gbyte;
             byte bbyte;
-            GetRGBBytes(this.RGB, out rbyte, out gbyte, out bbyte);
+            ColorEntry.GetRGBBytes(this.RGB, out rbyte, out gbyte, out bbyte);
             const string format_string = "#{0:x2}{1:x2}{2:x2}";
             string color_string = string.Format(System.Globalization.CultureInfo.InvariantCulture, format_string, rbyte, gbyte, bbyte);
 

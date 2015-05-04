@@ -11,11 +11,11 @@ namespace VisioAutomationSamples
         {
             get
             {
-                if (app== null)
+                if (SampleEnvironment.app== null)
                 {
                     // there is no application object associated with
                     // this session, so create one
-                    create_new_app_instance();
+                    SampleEnvironment.create_new_app_instance();
                 }
                 else
                 {
@@ -28,23 +28,23 @@ namespace VisioAutomationSamples
                     try
                     {
                         // try to do something simple, read-only, and fast with the application object
-                        var app_version = app.ProductName;
+                        var app_version = SampleEnvironment.app.ProductName;
                     }
                     catch (System.Runtime.InteropServices.COMException)
                     {
                         // If a COMException is thrown, this indicates that the
                         // application object is invalid, so create a new one
-                        create_new_app_instance();
+                        SampleEnvironment.create_new_app_instance();
                     }                   
                 }
-                return app;
+                return SampleEnvironment.app;
             }
         }
 
         private static void create_new_app_instance()
         {
-            app = new IVisio.Application();
-            var documents = app.Documents;
+            SampleEnvironment.app = new IVisio.Application();
+            var documents = SampleEnvironment.app.Documents;
             documents.Add("");
         }
 

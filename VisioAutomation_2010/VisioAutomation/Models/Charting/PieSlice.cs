@@ -219,7 +219,7 @@ namespace VisioAutomation.Models.Charting
 
         public static List<PieSlice> GetSlicesFromValues(Drawing.Point center, double inner_radius, double outer_radius, IList<double> values)
         {
-            var slices = GetSlicesFromValues(center, outer_radius, values);
+            var slices = PieSlice.GetSlicesFromValues(center, outer_radius, values);
             foreach (var slice in slices)
             {
                 slice.InnerRadius = inner_radius;

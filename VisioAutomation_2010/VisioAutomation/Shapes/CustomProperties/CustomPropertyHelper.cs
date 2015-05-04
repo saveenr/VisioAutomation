@@ -19,11 +19,11 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException("shape");
             }
 
-            CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
-            if (Contains(shape, name))
+            if (CustomPropertyHelper.Contains(shape, name))
             {
-                string full_prop_name = GetRowName(name);
+                string full_prop_name = CustomPropertyHelper.GetRowName(name);
                 var cell_propname = shape.CellsU[full_prop_name];
 
                 if (cell_propname == null)
@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 name,
                 (short)IVisio.VisRowIndices.visRowProp);
 
-            Set(shape, row, cp);
+            CustomPropertyHelper.Set(shape, row, cp);
         }
 
         public static void Set(IVisio.Shape shape, short row, CustomPropertyCells cp)
@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         /// <returns>A list of custom properties</returns>
         public static IDictionary<string, CustomPropertyCells> Get(IVisio.Shape shape)
         {
-            var prop_names = GetNames(shape);
+            var prop_names = CustomPropertyHelper.GetNames(shape);
             var dic = new Dictionary<string, CustomPropertyCells>(prop_names.Count);
             var cells = CustomPropertyCells.GetCells(shape);
 
@@ -107,7 +107,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             {
                 var shape = shapes[shape_index];
                 var customprops_for_shape = customprops_per_shape[shape_index];
-                var prop_names = GetNames(shape);
+                var prop_names = CustomPropertyHelper.GetNames(shape);
 
                 if (customprops_for_shape.Count != prop_names.Count)
                 {
@@ -160,7 +160,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException("shape");
             }
 
-            int custom_prop_row_count = GetCount(shape);
+            int custom_prop_row_count = CustomPropertyHelper.GetCount(shape);
 
             if (custom_prop_row_count < 1)
             {
@@ -213,13 +213,13 @@ namespace VisioAutomation.Shapes.CustomProperties
         public static bool IsValidName(string name)
         {
             string errmsg;
-            return IsValidName(name, out errmsg);
+            return CustomPropertyHelper.IsValidName(name, out errmsg);
         }
 
         internal static void CheckValidCustomPropertyName(string name)
         {
             string errmsg;
-            if (!IsValidName(name, out errmsg))
+            if (!CustomPropertyHelper.IsValidName(name, out errmsg))
             {
                 string msg = String.Format("Invalid Property Name: \"{0}\". {1}", name,errmsg);
                 throw new AutomationException(msg);
@@ -238,9 +238,9 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException("name");
             }
 
-            CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
-            string full_prop_name = GetRowName(name);
+            string full_prop_name = CustomPropertyHelper.GetRowName(name);
 
             var exists = (short)IVisio.VisExistsFlags.visExistsAnywhere;
             return 0 != (shape.CellExistsU[full_prop_name, exists]);
@@ -263,9 +263,9 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException("name");
             }
 
-            CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
-            string full_prop_name = GetRowName(name);
+            string full_prop_name = CustomPropertyHelper.GetRowName(name);
 
             short row = shape.CellsU[full_prop_name].Row;
             shape.DeleteRow((short)IVisio.VisSectionIndices.visSectionProp, row);
@@ -278,7 +278,7 @@ namespace VisioAutomation.Shapes.CustomProperties
                 throw new ArgumentNullException("shape");
             }
 
-            CheckValidCustomPropertyName(name);
+            CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
             if (val == null)
             {
@@ -290,7 +290,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             cp.Value = val;
             cp.Type = 0; // 0 = string
 
-            Set(shape, name, cp);
+            CustomPropertyHelper.Set(shape, name, cp);
         }
     }
 }

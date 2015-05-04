@@ -28,7 +28,7 @@ namespace VisioAutomation.Documents
 
         public static IVisio.Document OpenStencil(IVisio.Documents docs, string filename)
         {
-            var stencil = TryOpenStencil(docs, filename);
+            var stencil = DocumentHelper.TryOpenStencil(docs, filename);
             if (stencil == null)
             {
                 string msg = string.Format("Could not open stencil \"{0}\"",filename);

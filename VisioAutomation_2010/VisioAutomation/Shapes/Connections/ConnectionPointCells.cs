@@ -28,22 +28,22 @@ namespace VisioAutomation.Shapes.Connections
 
         public static IList<List<ConnectionPointCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = get_query();
-            return _GetCells<ConnectionPointCells,double>(page, shapeids, query, query.GetCells);
+            var query = ConnectionPointCells.get_query();
+            return CellGroupMultiRow._GetCells<ConnectionPointCells,double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ConnectionPointCells> GetCells(IVisio.Shape shape)
         {
-            var query = get_query();
-            return _GetCells<ConnectionPointCells,double>(shape, query, query.GetCells);
+            var query = ConnectionPointCells.get_query();
+            return CellGroupMultiRow._GetCells<ConnectionPointCells,double>(shape, query, query.GetCells);
         }
 
         private static ConnectionPointCellQuery _mCellQuery;
 
         private static ConnectionPointCellQuery get_query()
         {
-            _mCellQuery =  _mCellQuery ?? new ConnectionPointCellQuery();
-            return _mCellQuery;
+            ConnectionPointCells._mCellQuery =  ConnectionPointCells._mCellQuery ?? new ConnectionPointCellQuery();
+            return ConnectionPointCells._mCellQuery;
         }
 
         class ConnectionPointCellQuery : CellQuery

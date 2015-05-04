@@ -20,7 +20,7 @@ namespace VisioAutomation.Application.Logging
 
             var state = LogState.Start;
 
-            List<string> lines = GetLinesSharedRead(filename);
+            List<string> lines = XmlErrorLog.GetLinesSharedRead(filename);
             lines.Reverse();
 
             var q = new Stack<string>( lines);

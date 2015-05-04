@@ -262,7 +262,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var application = this.Client.VisioApplication;
             var active_page = application.ActivePage;
-            return GetOrientation(active_page);
+            return PageCommands.GetOrientation(active_page);
         }
 
         private static Pages.PrintPageOrientation GetOrientation(IVisio.Page page)
@@ -293,7 +293,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentOutOfRangeException("orientation", "must be either Portrait or Landscape");
             }
 
-            var old_orientation = GetOrientation(active_page);
+            var old_orientation = PageCommands.GetOrientation(active_page);
 
             if (old_orientation == orientation)
             {
@@ -447,7 +447,7 @@ namespace VisioAutomation.Scripting.Commands
             int cur_index = activepage.Index;
             const int min_index = 1;
             int max_index = pages.Count;
-            int new_index = move_in_range(cur_index, min_index, max_index, flags);
+            int new_index = PageCommands.move_in_range(cur_index, min_index, max_index, flags);
             if (cur_index != new_index)
             {
                 var doc_pages = active_document.Pages;

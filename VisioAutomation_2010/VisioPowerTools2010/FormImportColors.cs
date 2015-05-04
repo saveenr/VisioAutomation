@@ -202,7 +202,7 @@ namespace VisioPowerTools2010
 
                 var root = xdoc.Root;
                 
-                strip_namespaces(root);
+                FormImportColors.strip_namespaces(root);
                 
                 var palette_el = root.Element("channel").Element("item").Element("themeItem");
                 var colors_el = palette_el.Element("themeSwatches");

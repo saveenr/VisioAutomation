@@ -24,7 +24,7 @@ namespace VisioAutomation.VDX
         internal SXL.XDocument LoadCleanDOM()
         {
             var dom = SXL.XDocument.Parse(this.xml);
-            CleanUpTemplate(dom);
+            Template.CleanUpTemplate(dom);
             return dom;                
         }
 

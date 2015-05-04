@@ -68,8 +68,8 @@ namespace VisioAutomation.Models.Tree
 
             var app = page.Application;
             var documents = app.Documents;
-            var basic_stencil = documents.OpenStencil(basic_stencil_name);
-            var connectors_stencil = documents.OpenStencil(connectors_stencil_name);
+            var basic_stencil = documents.OpenStencil(TreeLayout.basic_stencil_name);
+            var connectors_stencil = documents.OpenStencil(TreeLayout.connectors_stencil_name);
             var basic_masters = basic_stencil.Masters;
             var connectors_masters = connectors_stencil.Masters;
 

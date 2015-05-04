@@ -22,7 +22,7 @@
         public static extern bool SetWindowPos(System.IntPtr hWnd, System.IntPtr hWndInsertAfter, int x, int y, int cx, int cy,
                                                int flags);
 
-        public const uint WS_OVERLAPPED = WS_BORDER | WS_CAPTION;
+        public const uint WS_OVERLAPPED = WinUtil.WS_BORDER | WinUtil.WS_CAPTION;
         public const uint WS_CLIPSIBLINGS = 0x04000000;
         public const uint WS_CLIPCHILDREN = 0x02000000;
         public const uint WS_CAPTION = 0x00C00000; /* WS_BORDER | WS_DLGFRAME  */
@@ -34,7 +34,7 @@
         public const uint WS_THICKFRAME = 0x00040000;
         public const uint WS_MAXIMIZEBOX = 0x00020000;
         public const uint WS_MINIMIZEBOX = 0x00010000;
-        public const uint WS_SIZEBOX = WS_THICKFRAME;
+        public const uint WS_SIZEBOX = WinUtil.WS_THICKFRAME;
         public const uint WS_POPUP = 0x80000000;
         public const uint WS_CHILD = 0x40000000;
         public const uint WS_VISIBLE = 0x10000000;
@@ -48,7 +48,7 @@
 
         public const uint WS_EX_CONTEXTHELP = 0x00000400;
         public const uint WS_EX_STATICEDGE = 0x00020000;
-        public const uint WS_EX_OVERLAPPEDWINDOW = (WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE);
+        public const uint WS_EX_OVERLAPPEDWINDOW = (WinUtil.WS_EX_WINDOWEDGE | WinUtil.WS_EX_CLIENTEDGE);
 
         public const int GWL_STYLE = (-16);
         public const int GWL_EXSTYLE = (-20);

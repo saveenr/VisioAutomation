@@ -31,14 +31,14 @@ namespace VisioAutomation.DOM
             }
 
 
-            if (EndwithVSSorVSSX(mastername))
+            if (MasterRef.EndwithVSSorVSSX(mastername))
             {
                 throw new AutomationException("Master name ends with .VSS or .VSSX");
             }
 
             if (this.StencilName != null)
             {
-                if (!EndwithVSSorVSSX(stencilname))
+                if (!MasterRef.EndwithVSSorVSSX(stencilname))
                 {                    
                     throw new AutomationException("Stencil name does not end with .VSS");
                 }

@@ -13,7 +13,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         public static double AttributeAsInches(this SXL.XElement el, string name, double def)
         {
-            return XmlUtil.GetAttributeValue(el, name, def, s => PointsToInches(double.Parse(s)));
+            return XmlUtil.GetAttributeValue(el, name, def, s => XmlExtensions.PointsToInches(double.Parse(s)));
         }
 
         private static double PointsToInches(double points)

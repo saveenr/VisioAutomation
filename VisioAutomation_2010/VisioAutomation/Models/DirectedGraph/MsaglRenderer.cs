@@ -223,7 +223,7 @@ namespace VisioAutomation.Models.DirectedGraph
             foreach (var layoutshape in layoutshapes_without_size_info)
             {
                 var master = loader.Get(layoutshape.MasterName,layoutshape.StencilName);
-                var size = TryGetValue(master_to_size,master.VisioMaster);
+                var size = MsaglRenderer.TryGetValue(master_to_size,master.VisioMaster);
                 if (!size.HasValue)
                 {
                     var master_bb = master.VisioMaster.GetBoundingBox(IVisio.VisBoundingBoxArgs.visBBoxUprightWH);
@@ -237,7 +237,7 @@ namespace VisioAutomation.Models.DirectedGraph
         public DOM.Page CreateDOMPage(Drawing layout_diagram, IVisio.Application vis)
         {
             var page_node = new DOM.Page();
-            ResolveMasters(layout_diagram, vis);
+            MsaglRenderer.ResolveMasters(layout_diagram, vis);
 
             var mg_graph = this.CreateMGGraph(layout_diagram);
 

@@ -44,9 +44,9 @@ namespace VisioAutomationSamples
                              "<>[](),./|\\:;\'\"1234567890!@#$%^&*()`~";
             var samplechars = sampletext.Select(c => new string(new[] {c})).ToList();
 
-            FontGlyphComparision(doc, fontnames, samplechars);
-            FontGlyphComparision2(doc, fontnames, samplechars);
-            FontGlyphComparision3(doc, fontnames, samplechars);
+            BoxLayoutSamples.FontGlyphComparision(doc, fontnames, samplechars);
+            BoxLayoutSamples.FontGlyphComparision2(doc, fontnames, samplechars);
+            BoxLayoutSamples.FontGlyphComparision3(doc, fontnames, samplechars);
         }
 
         public static void FontGlyphComparision(IVisio.Document doc, string[] fontnames, List<string> samplechars)

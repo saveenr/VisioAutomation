@@ -45,22 +45,22 @@ namespace VisioPowerShell
                 if (ResultType == ResultType.String)
                 {
                     var output = cellQuery.GetResults<string>(surface, shapeids);
-                    return querytable_to_datatable(cellQuery, output);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Boolean)
                 {
                     var output = cellQuery.GetResults<bool>(surface, shapeids);
-                    return querytable_to_datatable(cellQuery, output);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Double)
                 {
                     var output = cellQuery.GetResults<double>(surface, shapeids);
-                    return querytable_to_datatable(cellQuery, output);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else if (ResultType == ResultType.Integer)
                 {
                     var output = cellQuery.GetResults<int>(surface, shapeids);
-                    return querytable_to_datatable(cellQuery, output);
+                    return Helpers.querytable_to_datatable(cellQuery, output);
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace VisioPowerShell
             else
             {
                 var output = cellQuery.GetFormulas(surface, shapeids);
-                return querytable_to_datatable(cellQuery, output);
+                return Helpers.querytable_to_datatable(cellQuery, output);
             }
         }
     }

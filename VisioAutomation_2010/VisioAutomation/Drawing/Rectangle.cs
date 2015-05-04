@@ -86,7 +86,7 @@ namespace VisioAutomation.Drawing
 
         public static Rectangle FromCenterPoint(Point p, double width, double height)
         {
-            return FromCenterPoint(p.X, p.Y, width, height);
+            return Rectangle.FromCenterPoint(p.X, p.Y, width, height);
         }
 
         public override string ToString()

@@ -17,7 +17,7 @@ namespace VisioAutomation.Text.Markup
         {
             get
             {
-                return placeholder_string;
+                return FieldBase.placeholder_string;
             }
         }
     }

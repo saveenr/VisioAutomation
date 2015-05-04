@@ -18,7 +18,7 @@ namespace VisioAutomation.Pages.PageLayout
         protected override void SetPageCells(PageCells pagecells)
         {
             base.SetPageCells(pagecells);
-            pagecells.PlaceStyle = (int) GetPlaceStyle(this.Direction);
+            pagecells.PlaceStyle = (int) FlowchartLayout.GetPlaceStyle(this.Direction);
         }
 
         private static IVisio.VisCellVals GetPlaceStyle(Direction dir)

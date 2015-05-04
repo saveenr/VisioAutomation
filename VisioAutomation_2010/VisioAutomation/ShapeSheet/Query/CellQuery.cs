@@ -388,7 +388,7 @@ namespace VisioAutomation.ShapeSheet.Query
                 var section_infos = new List<SectionColumnDetails>(this.SectionColumns.Count);
                 foreach (var sec in this.SectionColumns)
                 {
-                    int num_rows = GetNumRowsForSection(shape, sec);
+                    int num_rows = CellQuery.GetNumRowsForSection(shape, sec);
                     var section_info = new SectionColumnDetails(sec, shapeid, num_rows);
                     section_infos.Add(section_info);
                 }

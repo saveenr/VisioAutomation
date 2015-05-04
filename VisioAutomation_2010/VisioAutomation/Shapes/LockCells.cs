@@ -59,22 +59,22 @@ namespace VisioAutomation.Shapes
 
         public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = get_query();
-            return _GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
+            var query = LockCells.get_query();
+            return CellGroup._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static LockCells GetCells(IVisio.Shape shape)
         {
-            var query = get_query();
-            return _GetCells<LockCells, double>(shape, query, query.GetCells);
+            var query = LockCells.get_query();
+            return CellGroup._GetCells<LockCells, double>(shape, query, query.GetCells);
         }
 
 
         private static LockCellQuery _mCellQuery;
         private static LockCellQuery get_query()
         {
-            _mCellQuery = _mCellQuery ?? new LockCellQuery();
-            return _mCellQuery;
+            LockCells._mCellQuery = LockCells._mCellQuery ?? new LockCellQuery();
+            return LockCells._mCellQuery;
         }
 
         class LockCellQuery : CellQuery

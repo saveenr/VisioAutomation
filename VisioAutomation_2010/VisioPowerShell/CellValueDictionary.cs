@@ -35,7 +35,7 @@ namespace VisioPowerShell
                         throw new System.ArgumentOutOfRangeException(message);
                     }
 
-                    var value_string = get_value_string(value_o);
+                    var value_string = CellValueDictionary.get_value_string(value_o);
                     this[key_string] = value_string;
                 }
             }

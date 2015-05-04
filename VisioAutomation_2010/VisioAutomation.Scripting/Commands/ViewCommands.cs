@@ -102,7 +102,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
 
                 double padding_scale = 0.1;
-                SetViewRectToSelection(active_window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
+                ViewCommands.SetViewRectToSelection(active_window, IVisio.VisBoundingBoxArgs.visBBoxExtents, padding_scale);
 
             }
             else

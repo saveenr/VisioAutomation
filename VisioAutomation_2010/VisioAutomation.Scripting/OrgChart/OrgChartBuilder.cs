@@ -10,7 +10,7 @@ namespace VisioAutomation.Scripting.OrgChart
         public static OCMODEL.OrgChartDocument LoadFromXML(Client client, string filename)
         {
             var xdoc = SXL.XDocument.Load(filename);
-            return LoadFromXML(client, xdoc);
+            return OrgChartBuilder.LoadFromXML(client, xdoc);
         }
 
         public static OCMODEL.OrgChartDocument LoadFromXML(Client client,

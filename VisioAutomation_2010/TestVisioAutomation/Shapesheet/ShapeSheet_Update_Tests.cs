@@ -23,18 +23,18 @@ namespace TestVisioAutomation
 
             // Set the formulas
             var update = new VA.ShapeSheet.Update();
-            update.SetFormula(shape1.ID16, src_pinx, 0.5);
-            update.SetFormula(shape1.ID16, src_piny, 0.5);
-            update.SetFormula(shape2.ID16, src_pinx, 1.5);
-            update.SetFormula(shape2.ID16, src_piny, 1.5);
-            update.SetFormula(shape3.ID16, src_pinx, 2.5);
-            update.SetFormula(shape3.ID16, src_piny, 2.5);
+            update.SetFormula(shape1.ID16, ShapeSheet_Update_Tests.src_pinx, 0.5);
+            update.SetFormula(shape1.ID16, ShapeSheet_Update_Tests.src_piny, 0.5);
+            update.SetFormula(shape2.ID16, ShapeSheet_Update_Tests.src_pinx, 1.5);
+            update.SetFormula(shape2.ID16, ShapeSheet_Update_Tests.src_piny, 1.5);
+            update.SetFormula(shape3.ID16, ShapeSheet_Update_Tests.src_pinx, 2.5);
+            update.SetFormula(shape3.ID16, ShapeSheet_Update_Tests.src_piny, 2.5);
             update.Execute(page1);
 
             // Verify that the formulas were set
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddCell(src_pinx, "PinX");
-            var col_piny = query.AddCell(src_piny, "PinY");
+            var col_pinx = query.AddCell(ShapeSheet_Update_Tests.src_pinx, "PinX");
+            var col_piny = query.AddCell(ShapeSheet_Update_Tests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -59,12 +59,12 @@ namespace TestVisioAutomation
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(src_linepat, 7, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(ShapeSheet_Update_Tests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddCell(src_linepat,"LinePattern");
+            var col_linepat = query.AddCell(ShapeSheet_Update_Tests.src_linepat,"LinePattern");
 
             // Retrieve the values
             var data = query.GetCellData<double>(shape1);
@@ -82,12 +82,12 @@ namespace TestVisioAutomation
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNumber);
+            update.SetResult(ShapeSheet_Update_Tests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddCell(src_linepat, "LinePattern");
+            var col_linepat = query.AddCell(ShapeSheet_Update_Tests.src_linepat, "LinePattern");
 
             // Retrieve the values
             var data = query.GetCellData<double>(shape1);
@@ -109,18 +109,18 @@ namespace TestVisioAutomation
 
             // Set the formulas
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(shape1.ID16, src_pinx, 0.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape1.ID16, src_piny, 0.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape2.ID16, src_pinx, 1.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape2.ID16, src_piny, 1.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape3.ID16, src_pinx, 2.5, IVisio.VisUnitCodes.visNumber);
-            update.SetResult(shape3.ID16, src_piny, 2.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape1.ID16, ShapeSheet_Update_Tests.src_pinx, 0.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape1.ID16, ShapeSheet_Update_Tests.src_piny, 0.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape2.ID16, ShapeSheet_Update_Tests.src_pinx, 1.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape2.ID16, ShapeSheet_Update_Tests.src_piny, 1.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape3.ID16, ShapeSheet_Update_Tests.src_pinx, 2.5, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(shape3.ID16, ShapeSheet_Update_Tests.src_piny, 2.5, IVisio.VisUnitCodes.visNumber);
             update.Execute(page1);
 
             // Verify that the formulas were set
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_pinx = query.AddCell(src_pinx,"PinX");
-            var col_piny = query.AddCell(src_piny, "PinY");
+            var col_pinx = query.AddCell(ShapeSheet_Update_Tests.src_pinx,"PinX");
+            var col_piny = query.AddCell(ShapeSheet_Update_Tests.src_piny, "PinY");
 
             var shapeids = new[] { shape1.ID, shape2.ID, shape3.ID };
 
@@ -148,11 +148,11 @@ namespace TestVisioAutomation
         public void CheckHomogenousUpdates_FormulasResults()
         {
             var update1 = new VA.ShapeSheet.Update();
-            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
+            update1.SetResult(ShapeSheet_Update_Tests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
             bool caught1 = false;
             try
             {
-                update1.SetFormula(src_pinx, "5.0");
+                update1.SetFormula(ShapeSheet_Update_Tests.src_pinx, "5.0");
 
             }
             catch (VA.AutomationException)
@@ -169,11 +169,11 @@ namespace TestVisioAutomation
         public void CheckHomogenousUpdates_Streams()
         {
             var update1 = new VA.ShapeSheet.Update();
-            update1.SetResult(src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
+            update1.SetResult(ShapeSheet_Update_Tests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
             bool caught1 = false;
             try
             {
-                update1.SetResult(1, src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
+                update1.SetResult(1, ShapeSheet_Update_Tests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
 
             }
             catch (VA.AutomationException)
@@ -194,13 +194,13 @@ namespace TestVisioAutomation
 
             // Setup the modifications to the cell values
             var update = new VA.ShapeSheet.Update();
-            update.SetResult(src_linepat, "7", IVisio.VisUnitCodes.visNumber);
+            update.SetResult(ShapeSheet_Update_Tests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
             var query = new VA.ShapeSheet.Query.CellQuery();
-            var col_linepat = query.AddCell(src_linepat, "LinePattern");
+            var col_linepat = query.AddCell(ShapeSheet_Update_Tests.src_linepat, "LinePattern");
             var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             // Retrieve the values

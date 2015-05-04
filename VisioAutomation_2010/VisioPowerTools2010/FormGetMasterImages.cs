@@ -154,7 +154,7 @@ namespace VisioPowerTools2010
                 this.log("Loading \"{0}\"", stencilfilename_basename);
                 var doc = docs.Add(stencilfilename);
 
-                string stencilname_safe = MakeSafeFilename(stencilfilename_basename_wo_ext, '_');
+                string stencilname_safe = FormGetMasterImages.MakeSafeFilename(stencilfilename_basename_wo_ext, '_');
                 string cur_destfolder = System.IO.Path.Combine(destfolder, stencilname_safe);
 
                 try
@@ -175,7 +175,7 @@ namespace VisioPowerTools2010
                     writer.Attribute("style","vertical-align:top");
                     var master = masters[i];
                     this.log("    master {0}", master.Name);
-                    string mastername_safe = MakeSafeFilename(master.Name, '_');
+                    string mastername_safe = FormGetMasterImages.MakeSafeFilename(master.Name, '_');
 
                     string picture_dir = System.IO.Path.Combine(cur_destfolder, "pictures");
                     string icon_dir = System.IO.Path.Combine(cur_destfolder, "icons");
@@ -188,7 +188,7 @@ namespace VisioPowerTools2010
 
                     if (!System.IO.File.Exists(icon_filename))
                     {
-                        SaveMasterIcon(icon_filename, master);
+                        FormGetMasterImages.SaveMasterIcon(icon_filename, master);
                     }
                     else
                     {
@@ -197,7 +197,7 @@ namespace VisioPowerTools2010
 
                     if (!System.IO.File.Exists(picture_filename))
                     {
-                        SaveMasterPicture(picture_filename, master);
+                        FormGetMasterImages.SaveMasterPicture(picture_filename, master);
                     }
                     else
                     {
@@ -250,7 +250,7 @@ namespace VisioPowerTools2010
             {
                 metafile.Save(picture_filename);
             }
-            DeleteEnhMetaFile(metafile_handle);
+            FormGetMasterImages.DeleteEnhMetaFile(metafile_handle);
         }
 
         private static void SaveMasterIcon(string icon_filename, Master master)
@@ -261,7 +261,7 @@ namespace VisioPowerTools2010
             {
                 icon.Save(icon_filename);
             }
-            DestroyIcon(icon_handle);
+            FormGetMasterImages.DestroyIcon(icon_handle);
         }
 
         private void create_folder_safe(string cur_destfolder)

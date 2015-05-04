@@ -47,21 +47,21 @@ namespace VisioAutomation.Text
 
         public static IList<List<ParagraphCells>> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = get_query();
-            return _GetCells<ParagraphCells,double>(page, shapeids, query, query.GetCells);
+            var query = ParagraphCells.get_query();
+            return CellGroupMultiRow._GetCells<ParagraphCells,double>(page, shapeids, query, query.GetCells);
         }
 
         public static IList<ParagraphCells> GetCells(IVisio.Shape shape)
         {
-            var query = get_query();
-            return _GetCells<ParagraphCells,double>(shape, query, query.GetCells);
+            var query = ParagraphCells.get_query();
+            return CellGroupMultiRow._GetCells<ParagraphCells,double>(shape, query, query.GetCells);
         }
 
         private static ParagraphFormatCellQuery _mCellQuery;
         private static ParagraphFormatCellQuery get_query()
         {
-            _mCellQuery = _mCellQuery ?? new ParagraphFormatCellQuery();
-            return _mCellQuery;
+            ParagraphCells._mCellQuery = ParagraphCells._mCellQuery ?? new ParagraphFormatCellQuery();
+            return ParagraphCells._mCellQuery;
         }
 
         class ParagraphFormatCellQuery : CellQuery

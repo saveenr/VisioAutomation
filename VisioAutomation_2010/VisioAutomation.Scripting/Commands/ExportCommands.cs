@@ -192,7 +192,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Client.Selection.Get();
-            ExportSelectionAsXAML2(this.Client.Selection.Get(), filename, s => this.Client.Output.WriteVerbose(s));
+            ExportCommands.ExportSelectionAsXAML2(this.Client.Selection.Get(), filename, s => this.Client.Output.WriteVerbose(s));
         }
 
         public static void ExportSelectionAsXAML2(

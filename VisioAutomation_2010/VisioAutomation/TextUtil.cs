@@ -35,12 +35,12 @@ namespace VisioAutomation
 
         public static IEnumerable<string> IncludeByName(IEnumerable<string> items, IList<string> patterns, bool ignorecase)
         {
-            return FilterObjectsByNames(items, patterns, System.IO.Path.GetFileName, ignorecase, FilterAction.Include);
+            return TextUtil.FilterObjectsByNames(items, patterns, System.IO.Path.GetFileName, ignorecase, FilterAction.Include);
         }
 
         public static IEnumerable<string> ExcludeByName(IEnumerable<string> items, IList<string> pattens, bool ignorecase)
         {
-            return FilterObjectsByNames(items, pattens, System.IO.Path.GetFileName, ignorecase, FilterAction.Exclude);
+            return TextUtil.FilterObjectsByNames(items, pattens, System.IO.Path.GetFileName, ignorecase, FilterAction.Exclude);
         }
 
         public enum FilterAction
@@ -76,10 +76,10 @@ namespace VisioAutomation
 
                 foreach (var pattern in patterns)
                 {
-                    if (ContainsWildcard(pattern))
+                    if (TextUtil.ContainsWildcard(pattern))
                     {
                         // If it contains a wildcard transform it into a regex
-                        var regex = GetRegexForWildcardPattern(pattern, ignorecase);
+                        var regex = TextUtil.GetRegexForWildcardPattern(pattern, ignorecase);
                         regexes.Add(regex);
                     }
                     else

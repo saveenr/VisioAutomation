@@ -255,20 +255,20 @@ namespace VisioAutomation.UI.CommonControls
         private void pictureBoxGradient_MouseDown(object sender, MouseEventArgs e)
         {
             this.is_selecting_gradient = true;
-            this.handle_gradient_click(point(e));
+            this.handle_gradient_click(ColorSelectorLarge.point(e));
         }
 
         private void pictureBoxGradient_MouseMove(object sender, MouseEventArgs e)
         {
             if (this.is_selecting_gradient)
             {
-                this.handle_gradient_click(point(e));
+                this.handle_gradient_click(ColorSelectorLarge.point(e));
             }
         }
 
         private void pictureBoxGradient_MouseUp(object sender, MouseEventArgs e)
         {
-            this.handle_gradient_click( point(e));
+            this.handle_gradient_click( ColorSelectorLarge.point(e));
             this.is_selecting_gradient = false;
 
         }

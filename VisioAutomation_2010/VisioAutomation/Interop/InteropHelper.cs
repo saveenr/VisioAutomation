@@ -13,37 +13,37 @@ namespace VisioAutomation.Interop
 
         public static void init()
         {
-            if (!_initialized)
+            if (!InteropHelper._initialized)
             {
-                g_types = typeof(IVisio.Application).Assembly.GetExportedTypes()
+                InteropHelper.g_types = typeof(IVisio.Application).Assembly.GetExportedTypes()
                     .Where(t => t.IsPublic)
                     .Where(t => !t.Name.StartsWith("tag"))
                     .OrderBy(t=>t.Name)
                     .ToList();
-                g_name_to_enum = g_types
+                InteropHelper.g_name_to_enum = InteropHelper.g_types
                     .Where(t => t.IsEnum)
                     .Select(i => new EnumType(i))
                     .ToDictionary(i => i.Name, i => i);
-                _initialized = true;
+                InteropHelper._initialized = true;
             }
         }
 
         public static List<EnumType> GetEnums()
         {
-            init();
-            return g_name_to_enum.Values.ToList();
+            InteropHelper.init();
+            return InteropHelper.g_name_to_enum.Values.ToList();
         }
 
         public static EnumType GetEnum(string name)
         {
-            init();
-            return g_name_to_enum[name];
+            InteropHelper.init();
+            return InteropHelper.g_name_to_enum[name];
         }
 
         public static EnumType GetEnum(System.Type t)
         {
-            init();
-            return g_name_to_enum[t.Name];
+            InteropHelper.init();
+            return InteropHelper.g_name_to_enum[t.Name];
         }
     }
 }

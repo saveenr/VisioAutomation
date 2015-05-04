@@ -366,7 +366,7 @@ namespace VisioAutomation.Scripting.Commands
                 var active_window = application.ActiveWindow;
                 var selection = active_window.Selection;
                 var active_page = application.ActivePage;
-                CreateDuplicates(active_page, selection[1], n);
+                DrawCommands.CreateDuplicates(active_page, selection[1], n);
             }
         }
 

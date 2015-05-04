@@ -13,7 +13,7 @@
             if (System.Enum.IsDefined(typeof(Microsoft.Office.Interop.Visio.VisSectionIndices), value))
             {
                 var a = (Microsoft.Office.Interop.Visio.VisSectionIndices)value;
-                return GetSectionName(a);
+                return ShapeSheetHelper.GetSectionName(a);
             }
             return defaultname;
         }

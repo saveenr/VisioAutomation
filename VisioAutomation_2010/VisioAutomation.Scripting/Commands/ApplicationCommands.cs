@@ -134,12 +134,12 @@ namespace VisioAutomation.Scripting.Commands
         {
             get
             {
-                if (visio_app_version == null)
+                if (ApplicationCommands.visio_app_version == null)
                 {
                     this.Client.Application.AssertApplicationAvailable();
-                    visio_app_version = Application.ApplicationHelper.GetVersion(this.Client.VisioApplication);
+                    ApplicationCommands.visio_app_version = Application.ApplicationHelper.GetVersion(this.Client.VisioApplication);
                 }
-                return visio_app_version;
+                return ApplicationCommands.visio_app_version;
             }            
         }
     }

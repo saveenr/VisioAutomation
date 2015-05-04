@@ -68,10 +68,10 @@ namespace VisioAutomation.Shapes.Connections
                 throw new System.ArgumentNullException("shape");
             }
 
-            int n = GetCount(shape);
+            int n = ConnectionPointHelper.GetCount(shape);
             for (int i = n - 1; i >= 0; i--)
             {
-                Delete(shape, i);
+                ConnectionPointHelper.Delete(shape, i);
             }
 
             return n;

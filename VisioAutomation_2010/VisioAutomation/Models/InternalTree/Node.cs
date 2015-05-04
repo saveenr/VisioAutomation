@@ -46,7 +46,7 @@ namespace VisioAutomation.Models.InternalTree
 
         public Node(Drawing.Size size, T data)
         {
-            this.init(node_seq_num++, null, size, data);
+            this.init(Node<T>.node_seq_num++, null, size, data);
         }
 
         public int ChildCount
@@ -113,7 +113,7 @@ namespace VisioAutomation.Models.InternalTree
 
         public Node<T> AddNewChild(Drawing.Size size)
         {
-            var new_child = new Node<T>(node_seq_num++, null, size);
+            var new_child = new Node<T>(Node<T>.node_seq_num++, null, size);
             this.add_child(new_child);
             return new_child;
         }

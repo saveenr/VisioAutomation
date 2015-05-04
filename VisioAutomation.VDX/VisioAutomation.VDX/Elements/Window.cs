@@ -13,7 +13,7 @@ namespace VisioAutomation.VDX.Elements
 
         protected Window()
         {
-            this._id = idgen.GetNextID();
+            this._id = Window.idgen.GetNextID();
         }
 
         public int ID

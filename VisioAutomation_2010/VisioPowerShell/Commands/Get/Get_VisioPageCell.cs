@@ -23,7 +23,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            EnsureEnoughCellNames(this.Cells);
+            Get_VisioPageCell.EnsureEnoughCellNames(this.Cells);
             var target_page = this.Page ?? this.client.Page.Get();
             var cellmap = CellSRCDictionary.GetCellMapForPages();
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));

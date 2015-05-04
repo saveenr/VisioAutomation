@@ -16,7 +16,7 @@ namespace VisioAutomation.Shapes.Controls
 
             var ctrl = new ControlCells();
 
-            return Add(shape, ctrl);
+            return ControlHelper.Add(shape, ctrl);
         }
 
         public static int Add(
@@ -32,7 +32,7 @@ namespace VisioAutomation.Shapes.Controls
                                      (short)IVisio.VisRowIndices.visRowLast,
                                      (short)IVisio.VisRowTags.visTagDefault);
 
-            Set(shape, row, ctrl);
+            ControlHelper.Set(shape, row, ctrl);
 
             return row;
         }

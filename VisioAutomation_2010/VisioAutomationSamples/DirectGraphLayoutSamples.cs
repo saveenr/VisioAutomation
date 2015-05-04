@@ -10,7 +10,7 @@ namespace VisioAutomationSamples
         public static void DirectedGraphViaMsagl()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = get_dg_drawing();
+            var directed_graph_drawing = DirectGraphLayoutSamples.get_dg_drawing();
             var options = new DGMODEL.MsaglLayoutOptions();
             options.UseDynamicConnectors = false;
             directed_graph_drawing.Render(page1, options);
@@ -19,7 +19,7 @@ namespace VisioAutomationSamples
         public static void DirectedGraphViaVisio()
         {
             var page1 = SampleEnvironment.Application.ActiveDocument.Pages.Add();
-            var directed_graph_drawing = get_dg_drawing();
+            var directed_graph_drawing = DirectGraphLayoutSamples.get_dg_drawing();
 
             var visio_options = new DGMODEL.VisioLayoutOptions();
             directed_graph_drawing.Render(page1, visio_options);

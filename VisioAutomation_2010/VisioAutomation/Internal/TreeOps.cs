@@ -51,7 +51,7 @@ namespace VisioAutomation.Internal
                     cur_item.Entered = true;
                     stack.Push(cur_item);
 
-                    foreach (var child in efficient_reverse(enum_children(cur_item.Node)))
+                    foreach (var child in TreeOps.efficient_reverse(enum_children(cur_item.Node)))
                     {
                         stack.Push(new WalkState<T>(child));
                     }
@@ -66,7 +66,7 @@ namespace VisioAutomation.Internal
 
         public static IEnumerable<T> PreOrder<T>(T root, EnumerateChildren<T> enum_children)
         {
-            return Walk(root, enum_children).Where(ev => ev.HasEnteredNode).Select(ev => ev.Node);
+            return TreeOps.Walk(root, enum_children).Where(ev => ev.HasEnteredNode).Select(ev => ev.Node);
         }
 
         internal static IEnumerable<T> efficient_reverse<T>(IEnumerable<T> items)
@@ -97,7 +97,7 @@ namespace VisioAutomation.Internal
             var stack = new Stack<TDest>();
             var dest_nodes = new List<TDest>();
 
-            var walkevents = Walk<TSrc>(src_root_node, input_node => enum_src_children(input_node));
+            var walkevents = TreeOps.Walk<TSrc>(src_root_node, input_node => enum_src_children(input_node));
             foreach (var ev in walkevents)
             {
                 if (ev.HasEnteredNode)

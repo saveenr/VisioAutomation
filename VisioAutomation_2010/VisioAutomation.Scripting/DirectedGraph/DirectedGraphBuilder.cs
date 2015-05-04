@@ -48,7 +48,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
         public static IList<DGMODEL.Drawing> LoadFromXML(Client client, string filename)
         {
             var xmldoc = SXL.XDocument.Load(filename);
-            return LoadFromXML(client, xmldoc);
+            return DirectedGraphBuilder.LoadFromXML(client, xmldoc);
         }
 
         private class PageData
@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 pagedata.Errors = new List<BuilderError>();
                 pagedata.LayoutOptions = new Models.DirectedGraph.MsaglLayoutOptions();
                 var renderoptions_el = page_el.Element("renderoptions");
-                GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
+                DirectedGraphBuilder.GetRenderOptionsFromXml(renderoptions_el, pagedata.LayoutOptions);
 
                 pagedata.DirectedGraph = new DGMODEL.Drawing();
                 var shape_els = page_el.Element("shapes").Elements("shape");
@@ -133,7 +133,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
 
         public static IList<DGMODEL.Drawing> LoadFromXML(Client client, SXL.XDocument xmldoc)
         {
-            var pagedatas = LoadPageDataFromXML(client, xmldoc);
+            var pagedatas = DirectedGraphBuilder.LoadPageDataFromXML(client, xmldoc);
 
             // STOP IF ANY ERRORS
             int num_errors = pagedatas.Select(pagedata => pagedata.Errors.Count).Sum();

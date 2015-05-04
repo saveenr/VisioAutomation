@@ -89,9 +89,9 @@ namespace VisioAutomation.UI
             double g;
             double b;
 
-            Normalize24BitRGB(rgb.R, rgb.G, rgb.B, out r, out g, out b);
+            ColorUtil.Normalize24BitRGB(rgb.R, rgb.G, rgb.B, out r, out g, out b);
 
-            RGBToHSV(r, g, b, out H, out S, out V);
+            ColorUtil.RGBToHSV(r, g, b, out H, out S, out V);
         }
 
 
@@ -168,11 +168,11 @@ namespace VisioAutomation.UI
             double R;
             double G;
             double B;
-            HSVToRGB(H, S, V, out R, out G, out B);
+            ColorUtil.HSVToRGB(H, S, V, out R, out G, out B);
             byte r;
             byte g;
             byte b;
-            DeNormalize24BitRGB(R, G, B, out r, out g, out b);
+            ColorUtil.DeNormalize24BitRGB(R, G, B, out r, out g, out b);
             return System.Drawing.Color.FromArgb(r, g, b);
         }
     }

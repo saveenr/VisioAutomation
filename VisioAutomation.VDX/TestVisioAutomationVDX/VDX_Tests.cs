@@ -56,7 +56,7 @@ namespace TestVisioAutomationVDX
             }
 
             // log_after exists
-            VerifyNoErrorsInLog(log_after, filename, logfilename, version, time);
+            VDX_Tests.VerifyNoErrorsInLog(log_after, filename, logfilename, version, time);
 
             VA.Documents.DocumentHelper.ForceCloseAll(app.Documents);
             app.Quit();

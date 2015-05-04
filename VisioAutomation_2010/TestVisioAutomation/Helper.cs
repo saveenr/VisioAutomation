@@ -11,7 +11,7 @@
                 throw new System.ArgumentException("name is null or empty","name");
             }
 
-            this.OutputPath = GetOutputPathEx(name);
+            this.OutputPath = Helper.GetOutputPathEx(name);
 
             this.PrepareOutputPath();
         }
@@ -19,14 +19,14 @@
         public string GetTestMethodOutputFilename(string ext)
         {
             string abs_path = this.OutputPath;
-            string abs_filename = System.IO.Path.Combine(abs_path, GetMethodName(2) + System.DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
+            string abs_filename = System.IO.Path.Combine(abs_path, Helper.GetMethodName(2) + System.DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
             return abs_filename;
         }
 
         public string GetTestMethodOutputFilename()
         {
             string abs_path = this.OutputPath;
-            string abs_filename = System.IO.Path.Combine(abs_path, GetMethodName(2));
+            string abs_filename = System.IO.Path.Combine(abs_path, Helper.GetMethodName(2));
             return abs_filename;
         }
 

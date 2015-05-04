@@ -83,7 +83,7 @@ namespace VisioPowerShell
             {
                 this.CheckCellNameWildcard(cellname);
 
-                var regex = GetRegexForWildCardPattern(cellname);
+                var regex = CellNameDictionary<T>.GetRegexForWildCardPattern(cellname);
 
                 foreach (string k in this.CellNames)
                 {

@@ -153,7 +153,7 @@ namespace VisioAutomation.Models.InternalTree
 
                 if (firstChild.ChildCount == 0)
                 {
-                    firstChild = get_leftmost(node, 0, j);
+                    firstChild = TreeLayout<T>.get_leftmost(node, 0, j);
                 }
                 else
                 {
@@ -199,7 +199,7 @@ namespace VisioAutomation.Models.InternalTree
 
             foreach (var child in node.EnumChildren())
             {
-                var leftmostDescendant = get_leftmost(child, level + 1, maxlevel);
+                var leftmostDescendant = TreeLayout<T>.get_leftmost(child, level + 1, maxlevel);
                 if (leftmostDescendant != null)
                 {
                     return leftmostDescendant;
@@ -486,21 +486,21 @@ namespace VisioAutomation.Models.InternalTree
             double parent_x, parent_y;
             double child_x, child_y;
 
-            if (IsVertical(this.Options.Direction))
+            if (TreeLayout<T>.IsVertical(this.Options.Direction))
             {
                 parent_x = parent_rect.Center.X;
                 child_x = child_rect.Center.X;
 
-                parent_y = GetSide(parent_rect, this.Options.Direction);
-                child_y = GetSide(child_rect, GetOpposite(this.Options.Direction));
+                parent_y = TreeLayout<T>.GetSide(parent_rect, this.Options.Direction);
+                child_y = TreeLayout<T>.GetSide(child_rect, TreeLayout<T>.GetOpposite(this.Options.Direction));
             }
             else
             {
                 var parent_dir = this.Options.Direction;
-                var child_dir = GetOpposite(parent_dir);
+                var child_dir = TreeLayout<T>.GetOpposite(parent_dir);
 
-                parent_x = GetSide(parent_rect, parent_dir);
-                child_x = GetSide(child_rect, child_dir);
+                parent_x = TreeLayout<T>.GetSide(parent_rect, parent_dir);
+                child_x = TreeLayout<T>.GetSide(child_rect, child_dir);
 
                 parent_y = parent_rect.Center.Y;
                 child_y = child_rect.Center.Y;
@@ -527,7 +527,7 @@ namespace VisioAutomation.Models.InternalTree
             Drawing.Point dif = lineseg.End - lineseg.Start;
             double a = (this.Options.LevelSeparation/2.0);
             double b = (this.Options.LevelSeparation/2.0);
-            if (IsVertical(this.Options.Direction))
+            if (TreeLayout<T>.IsVertical(this.Options.Direction))
             {
                 if (this.Options.Direction == LayoutDirection.Up)
                 {
@@ -560,7 +560,7 @@ namespace VisioAutomation.Models.InternalTree
             var dif = child_attach_point.Subtract(parent_attach_point).Multiply(scale);
 
 
-            var handle_displacement = IsVertical(this.Options.Direction)
+            var handle_displacement = TreeLayout<T>.IsVertical(this.Options.Direction)
                                           ? new Drawing.Point(0, dif.Y)
                                           : new Drawing.Point(dif.X, 0);
 
@@ -577,7 +577,7 @@ namespace VisioAutomation.Models.InternalTree
             System.Func<TA, Drawing.Size> func_get_size)
         {
             var walkevents = Internal.TreeOps.Walk<TA>(root, n => enum_children(n));
-            return CreateLayoutTree(walkevents, func_get_data, func_get_size);
+            return TreeLayout<T>.CreateLayoutTree(walkevents, func_get_data, func_get_size);
         }
 
         private static Node<T> CreateLayoutTree<TA>(

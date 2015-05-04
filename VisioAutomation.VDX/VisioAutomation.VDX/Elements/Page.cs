@@ -38,7 +38,7 @@ namespace VisioAutomation.VDX.Elements
             this.PageProperties.PageHeight.Result = height;
             this.PrintProperties = new Sections.PrintProperties();
             this.PageLayout = new Sections.PageLayout();
-            this._id = idgen.GetNextID();
+            this._id = Page.idgen.GetNextID();
             var culture = System.Globalization.CultureInfo.InvariantCulture;
             this.Name = string.Format(culture, "Page-{0}", this._id + 1);
             this.Layers = new LayerList();
