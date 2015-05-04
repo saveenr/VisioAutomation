@@ -39,14 +39,6 @@ namespace VisioPowerShell
             }
         }
 
-        public void SetIf(int id, string name, string value)
-        {
-            if (value != null)
-            {
-                this.dic[name] = value;
-            }
-        }
-
         public Dictionary<string, string>.KeyCollection CellNames
         {
             get
@@ -64,7 +56,6 @@ namespace VisioPowerShell
         {
             return this.regex_cellname_wildcard.IsMatch(name);
         }
-
 
         public void CheckCellName(string name)
         {
