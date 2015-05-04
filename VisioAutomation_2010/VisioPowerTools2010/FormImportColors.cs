@@ -43,14 +43,14 @@ namespace VisioPowerTools2010
                         var tokens = line.Split(seps, StringSplitOptions.RemoveEmptyEntries);
                         if (tokens.Length >= 3)
                         {
-                            var components = tokens.Select(this.getcomp).ToArray();
+                            var color_components = tokens.Select(this.getcomp).ToArray();
 
-                            bool has_alpha = components.Length > 3;
+                            bool has_alpha = color_components.Length > 3;
                             int i = has_alpha ? 1 : 0;
-                            var a = components[0];
-                            var r = components[i + 0];
-                            var g = components[i + 1];
-                            var b = components[i + 2];
+                            var a = color_components[0];
+                            var r = color_components[i + 0];
+                            var g = color_components[i + 1];
+                            var b = color_components[i + 2];
 
                             if (has_alpha)
                             {
