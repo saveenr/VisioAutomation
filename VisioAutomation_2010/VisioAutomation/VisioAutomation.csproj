@@ -91,6 +91,7 @@
     <Compile Include="Drawing\DrawingSurface.cs" />
     <Compile Include="Models\DirectedGraph\VisioLayoutOptions.cs" />
     <Compile Include="Models\DirectedGraph\VisioRenderer.cs" />
+    <Compile Include="Shapes\Layout\ShapeLayoutCells.cs" />
     <Compile Include="SurfaceTarget.cs" />
     <Compile Include="Shapes\Connections\ConnectorEdgeHandling.cs" />
     <Compile Include="Stencils\StencilHelper.cs" />
@@ -149,7 +150,6 @@
     <Compile Include="DOM\PageCells.cs" />
     <Compile Include="Extensions\StylesMethods.cs" />
     <Compile Include="Interop\InteropHelper.cs" />
-    <Compile Include="Shapes\ShapeLayoutCells.cs" />
     <Compile Include="Models\DirectedGraph\MsaglRenderer.cs" />
     <Compile Include="Internal\MsaglUtil.cs" />
     <Compile Include="Pages\PageCells.cs" />
