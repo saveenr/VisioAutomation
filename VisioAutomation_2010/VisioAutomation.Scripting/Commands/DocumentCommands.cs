@@ -241,12 +241,12 @@ namespace VisioAutomation.Scripting.Commands
             
             if (filename == null)
             {
-                throw new System.ArgumentNullException(filename);
+                throw new System.ArgumentNullException("filename");
             }
 
             if (filename.Length == 0)
             {
-                throw new System.ArgumentException("filename cannot be empty", filename);
+                throw new System.ArgumentException("filename cannot be empty", "filename");
             }
 
             string abs_filename = System.IO.Path.GetFullPath(filename);
