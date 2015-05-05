@@ -3,7 +3,7 @@ using VSCXN = VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Scripting
 {
     [TestClass]
     public class ScriptingConnectTests : VisioAutomationTest

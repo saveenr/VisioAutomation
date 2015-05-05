@@ -1,10 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using TREEMODEL = VisioAutomation.Models.Tree;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Models
 {
     [TestClass]
     public class Tree_Tests : VisioAutomationTest

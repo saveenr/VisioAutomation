@@ -1,4 +1,4 @@
-﻿namespace TestVisioAutomation.Common
+﻿namespace TestVisioAutomation
 {
     public static class Globals
     {

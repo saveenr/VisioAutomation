@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using VACXN = VisioAutomation.Shapes.Connections;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Connections
 {
     public class ConnectivityMap
     {

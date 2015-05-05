@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Shapesheet
 {
     [TestClass]
     public class ShapeSheet_Update_Tests : VisioAutomationTest

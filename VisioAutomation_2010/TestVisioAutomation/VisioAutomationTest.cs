@@ -1,12 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using VisioAutomation.Extensions;
-
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -123,12 +118,12 @@ namespace TestVisioAutomation
         {
             if (window == null)
             {
-                throw new ArgumentNullException("window");
+                throw new System.ArgumentNullException("window");
             }
 
             if (shapes == null)
             {
-                throw new ArgumentNullException("shapes");
+                throw new System.ArgumentNullException("shapes");
             }
 
             var selectargs = IVisio.VisSelectArgs.visSelect;
@@ -142,7 +137,7 @@ namespace TestVisioAutomation
         {
             if (page == null)
             {
-                throw new ArgumentNullException("page");
+                throw new System.ArgumentNullException("page");
             }
 
             var page_sheet = page.PageSheet;
@@ -157,7 +152,7 @@ namespace TestVisioAutomation
         {
             if (page == null)
             {
-                throw new ArgumentNullException("page");
+                throw new System.ArgumentNullException("page");
             }
 
             var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
@@ -172,7 +167,7 @@ namespace TestVisioAutomation
 
         protected string GetTestResultsOutPath(string path)
         {
-            return Path.Combine(this.TestResultsOutFolder, path);
+            return System.IO.Path.Combine(this.TestResultsOutFolder, path);
         }
 
         private static string tr_out_folder;
@@ -183,8 +178,8 @@ namespace TestVisioAutomation
             {
                 if (VisioAutomationTest.tr_out_folder == null)
                 {
-                    var asm = Assembly.GetExecutingAssembly();
-                    VisioAutomationTest.tr_out_folder = Path.GetDirectoryName(asm.Location);
+                    var asm = System.Reflection.Assembly.GetExecutingAssembly();
+                    VisioAutomationTest.tr_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
                 }
                 return VisioAutomationTest.tr_out_folder;
             }

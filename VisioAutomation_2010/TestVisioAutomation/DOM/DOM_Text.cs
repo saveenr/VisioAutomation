@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA = VisioAutomation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.DOM
 {
     [TestClass]
     public class DOM_Text : VisioAutomationTest

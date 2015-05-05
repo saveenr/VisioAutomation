@@ -1,9 +1,8 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Models
 {
     [TestClass]
     public class Convert_Tests : VisioAutomationTest

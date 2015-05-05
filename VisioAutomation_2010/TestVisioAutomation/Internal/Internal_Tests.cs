@@ -2,10 +2,9 @@ using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Internal
 {
     [TestClass]
     public class Internal_Tests

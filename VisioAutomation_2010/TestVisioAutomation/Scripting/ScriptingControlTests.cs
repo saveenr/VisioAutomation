@@ -1,8 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACONTROL=VisioAutomation.Shapes.Controls;
-using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Scripting
 {
     [TestClass]
     public class ScriptingControlTests : VisioAutomationTest

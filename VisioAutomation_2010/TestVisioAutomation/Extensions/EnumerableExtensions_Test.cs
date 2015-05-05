@@ -4,7 +4,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Extensions
 {
     [TestClass]
     public class EnumerableExtensions : VisioAutomationTest

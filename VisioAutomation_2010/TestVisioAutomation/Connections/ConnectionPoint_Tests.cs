@@ -1,8 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VA = VisioAutomation;
 using VACXN = VisioAutomation.Shapes.Connections;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Connections
 {
     [TestClass]
     public class ConnectionPoint_Tests : VisioAutomationTest

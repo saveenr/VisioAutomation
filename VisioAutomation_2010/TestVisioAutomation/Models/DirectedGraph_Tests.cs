@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestVisioAutomation.Common;
 using VACONNECT = VisioAutomation.Shapes.Connections;
 using CUSTOMPROP=VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using DG = VisioAutomation.Models.DirectedGraph;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Models
 {
     [TestClass]
     public class DirectedGraph_Tests : VisioAutomationTest

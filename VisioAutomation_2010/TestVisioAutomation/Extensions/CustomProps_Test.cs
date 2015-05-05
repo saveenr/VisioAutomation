@@ -3,7 +3,7 @@ using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Extensions
 {
     [TestClass]
     public class CustomProps_Test : VisioAutomationTest

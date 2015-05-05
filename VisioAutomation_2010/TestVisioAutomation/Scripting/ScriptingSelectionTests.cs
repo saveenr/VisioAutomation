@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Scripting
 {
     [TestClass]
     public class ScriptingSelectionTests : VisioAutomationTest

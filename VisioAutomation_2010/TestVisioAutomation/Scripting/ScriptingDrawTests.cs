@@ -3,13 +3,11 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestVisioAutomation.Common;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
-using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Scripting
 {
     [TestClass]
     public class ScriptingDrawTests : VisioAutomationTest

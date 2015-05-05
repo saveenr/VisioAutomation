@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Extensions
 {
     [TestClass]
     public class Selection_Tests : VisioAutomationTest

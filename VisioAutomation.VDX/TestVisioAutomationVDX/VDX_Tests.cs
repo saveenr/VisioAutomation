@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestVisioAutomation;
-using TestVisioAutomation.Common;
 using VisioAutomation.Application;
 using VisioAutomation.Application.Logging;
 using VisioAutomation.Documents;

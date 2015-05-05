@@ -6,10 +6,10 @@ using VACHART=VisioAutomation.Models.Charting;
 using IVisio= Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Extensions
 {
     [TestClass]
-    public class PageDraw_Tests : VisioAutomationTest
+    public class PageDrawTests : VisioAutomationTest
     {
         [TestMethod]
         public void Page_Draw_Line()

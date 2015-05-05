@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACXN = VisioAutomation.Shapes.Connections;
-using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Connections
 {
     [TestClass]
     public class Path_Test

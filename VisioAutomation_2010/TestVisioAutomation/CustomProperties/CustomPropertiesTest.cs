@@ -2,7 +2,7 @@
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.CustomProperties
 {
     [TestClass]
     public class CustomPropertiesTest : VisioAutomationTest

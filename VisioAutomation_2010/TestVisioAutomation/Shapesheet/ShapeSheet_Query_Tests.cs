@@ -7,7 +7,7 @@ using VACUSTOMPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
-namespace TestVisioAutomation
+namespace TestVisioAutomation.Shapesheet
 {
     [TestClass]
     public class ShapeSheet_Query_Tests : VisioAutomationTest
