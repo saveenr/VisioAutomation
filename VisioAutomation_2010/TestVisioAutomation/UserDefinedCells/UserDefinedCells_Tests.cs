@@ -139,22 +139,22 @@ namespace TestVisioAutomation
         [TestMethod]
         public void UserDefinedCells_InvalidNames()
         {
-            if (VAUSERCELL.UserDefinedCellsHelper.IsValidName("A") == false)
+            if (!VAUSERCELL.UserDefinedCellsHelper.IsValidName("A"))
             {
                 Assert.Fail();
             }
 
-            if (VAUSERCELL.UserDefinedCellsHelper.IsValidName("A.B") == false)
+            if (!VAUSERCELL.UserDefinedCellsHelper.IsValidName("A.B"))
             {
                 Assert.Fail();
             }
 
-            if (VAUSERCELL.UserDefinedCellsHelper.IsValidName("A B") == true)
+            if (VAUSERCELL.UserDefinedCellsHelper.IsValidName("A B") )
             {
                 Assert.Fail();
             }
 
-            if (VAUSERCELL.UserDefinedCellsHelper.IsValidName(" ") == true)
+            if (VAUSERCELL.UserDefinedCellsHelper.IsValidName(" ") )
             {
                 Assert.Fail();
             }

@@ -61,11 +61,6 @@ namespace VisioPowerTools2010
             this.execute_cmd(this.cmd_create_style);
         }
 
-        private void buttonImportOnlineCOlors_Click(object sender, RibbonControlEventArgs e)
-        {
-            this.execute_cmd(this.cmd_import_colors);
-        }
-
         private void buttonToggleTextCase_Click(object sender, RibbonControlEventArgs e)
         {
             this.execute_cmd(this.cmd_toggle_text_case);
@@ -264,7 +259,7 @@ namespace VisioPowerTools2010
             }
 
             var text = form.GraphText.Trim();
-            var lines = text.Split(new[] {'\n'}).Select(s => s.Trim()).Where( s=>s.Length>0).ToList();
+            var lines = text.Split('\n').Select(s => s.Trim()).Where( s=>s.Length>0).ToList();
 
             var model = new VA.Models.DirectedGraph.Drawing();
 

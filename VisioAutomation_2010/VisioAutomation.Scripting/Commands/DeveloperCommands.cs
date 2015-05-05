@@ -106,7 +106,7 @@ namespace VisioAutomation.Scripting.Commands
             int chunksize = 70;
 
             var interop_enums = Interop.InteropHelper.GetEnums();
-            int pagecount = 0;
+
             foreach (var enum_ in interop_enums)
             {
                 int chunkcount = 0;
@@ -137,10 +137,8 @@ namespace VisioAutomation.Scripting.Commands
                     //docbuilder.BodyParaSpacingAfter = 2.0;
 
                     formpage.BodyTextSize = 8.0;
-
                     formdoc.Pages.Add(formpage);
             
-
                     var tabstops = new[]
                                  {
                                      new Text.TabStop(1.5, Text.TabStopAlignment.Left)
@@ -149,7 +147,6 @@ namespace VisioAutomation.Scripting.Commands
                     //VA.Text.TextFormat.SetTabStops(docpage.VisioBodyShape, tabstops);
                     
                     chunkcount++;
-                    pagecount++;
                 }
             }
 

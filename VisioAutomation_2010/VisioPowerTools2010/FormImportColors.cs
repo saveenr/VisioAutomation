@@ -22,7 +22,7 @@ namespace VisioPowerTools2010
             this.Colors.Clear();
 
             var seps = new[] {',', ' '};
-            int linenum = 1;
+
             foreach (string rawline in this.textBox1.Lines)
             {
                 var line = rawline.Trim();
@@ -65,8 +65,6 @@ namespace VisioPowerTools2010
                         }
                     }
                 }
-
-                linenum++;
             }
         }
 
@@ -135,7 +133,7 @@ namespace VisioPowerTools2010
             {
                 var tokens = url.AbsolutePath.ToLower().Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
 
-                bool incorrect_format = tokens.Length < 2 || tokens[0] != "palette";
+                bool incorrect_format = (tokens.Length < 2) || (tokens[0] != "palette");
 
                 if (incorrect_format)
                 {

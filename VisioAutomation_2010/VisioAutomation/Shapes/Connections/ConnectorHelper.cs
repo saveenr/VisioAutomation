@@ -76,7 +76,7 @@ namespace VisioAutomation.Shapes.Connections
 
         public static IList<IVisio.Shape> ConnectShapes(IVisio.Page page, IList<IVisio.Shape> fromshapes, IList<IVisio.Shape> toshapes, IVisio.Master connector_master, bool force_manual)
         {
-            if (connector_master == null && force_manual == true)
+            if (connector_master == null && force_manual )
             {
                 throw new System.ArgumentNullException("if the connector object is null then force manual must be false");                
             }

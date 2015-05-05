@@ -53,7 +53,7 @@ namespace VisioAutomation.ShapeSheet
 
         internal static SRCFromCellIndex GetSRCFactory(IVisio.VisSectionIndices sec, IVisio.VisRowIndices row)
         {
-            SRCFromCellIndex new_func = (IVisio.VisCellIndices cell) => new SRC(sec, row, cell);
+            SRCFromCellIndex new_func = cell => new SRC(sec, row, cell);
             return new_func;
         }
 

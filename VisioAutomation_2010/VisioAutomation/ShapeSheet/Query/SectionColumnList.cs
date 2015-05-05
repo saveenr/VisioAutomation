@@ -1,22 +1,20 @@
-﻿using System;
-using VA = VisioAutomation;
-using System.Collections.Generic;
+﻿using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.ShapeSheet.Query
 {
-    public class SectionColumnList : IEnumerable<SectionColumn>
+    public class SectionColumnList : System.Collections.Generic.IEnumerable<SectionColumn>
     {
-        private IList<SectionColumn> items { get; set; }
-        private readonly Dictionary<IVisio.VisSectionIndices,SectionColumn> hs_section; 
+        private System.Collections.Generic.IList<SectionColumn> items { get; set; }
+        private readonly System.Collections.Generic.Dictionary<Microsoft.Office.Interop.Visio.VisSectionIndices,SectionColumn> hs_section; 
 
         internal SectionColumnList(int capacity)
         {
-            this.items = new List<SectionColumn>(capacity);
-            this.hs_section = new Dictionary<IVisio.VisSectionIndices, SectionColumn>(capacity);
+            this.items = new System.Collections.Generic.List<SectionColumn>(capacity);
+            this.hs_section = new System.Collections.Generic.Dictionary<Microsoft.Office.Interop.Visio.VisSectionIndices, SectionColumn>(capacity);
         }
 
-        public IEnumerator<SectionColumn> GetEnumerator()
+        public System.Collections.Generic.IEnumerator<SectionColumn> GetEnumerator()
         {
             return (this.items).GetEnumerator();
         }
@@ -31,7 +29,7 @@ namespace VisioAutomation.ShapeSheet.Query
             get { return this.items[index]; }
         }
 
-        internal SectionColumn Add(IVisio.VisSectionIndices section)
+        internal SectionColumn Add(Microsoft.Office.Interop.Visio.VisSectionIndices section)
         {
             if (this.hs_section.ContainsKey(section))
             {
