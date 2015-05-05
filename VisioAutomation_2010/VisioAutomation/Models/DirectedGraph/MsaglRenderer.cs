@@ -56,9 +56,8 @@ namespace VisioAutomation.Models.DirectedGraph
             return s.Multiply(this.ScaleToMsagl, this.ScaleToMsagl);
         }
 
-        private bool validate_connectors(Drawing layout_diagram)
+        private void validate_connectors(Drawing layout_diagram)
         {
-            bool success = true;
             foreach (var layout_connector in layout_diagram.Connectors)
             {
                 if (layout_connector.ID == null)
@@ -76,8 +75,6 @@ namespace VisioAutomation.Models.DirectedGraph
                     throw new AutomationException("Connector's From node is null");
                 }
             }
-
-            return success;
         }
 
         private MG.Core.Layout.GeometryGraph CreateMGGraph(Drawing layout_diagram)
@@ -95,9 +92,8 @@ namespace VisioAutomation.Models.DirectedGraph
                 mg_graph.Nodes.Add(mg_node);
             }
 
-            bool connectors_ok = this.validate_connectors(layout_diagram);
-            // TODO: What to do if connectors_ok is false?
-
+            this.validate_connectors(layout_diagram);
+            
             var mg_coordinates = this.ToMGCoordinates(this.DefaultBezierConnectorLabelBoxSize);
 
             var map_id_to_ud = new Dictionary<string, MG.Core.Layout.Node>();
