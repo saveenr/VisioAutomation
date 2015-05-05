@@ -70,7 +70,7 @@ namespace VisioAutomation.VDX.Elements
         private readonly List<ColorEntry> _colors;
 
         private readonly Dictionary<string, MasterMetadata> master_metadata =
-            new Dictionary<string, MasterMetadata>(System.StringComparer.OrdinalIgnoreCase);
+            new Dictionary<string, MasterMetadata>(System.StringComparer.InvariantCultureIgnoreCase);
 
         public Sections.DocumentProperties DocumentProperties = new Sections.DocumentProperties();
 

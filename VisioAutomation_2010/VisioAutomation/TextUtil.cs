@@ -64,15 +64,8 @@ namespace VisioAutomation
                 // Create the caches for fast matches of regexes
                 var regexes = new List<System.Text.RegularExpressions.Regex>();
 
-                HashSet<string> nonregexes;
-                if (ignorecase)
-                {
-                    nonregexes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                }
-                else
-                {
-                    nonregexes = new HashSet<string>();
-                }
+                var compare = ignorecase ? StringComparer.InvariantCultureIgnoreCase : StringComparer.InvariantCulture;
+                var nonregexes = new HashSet<string>(compare);
 
                 foreach (var pattern in patterns)
                 {

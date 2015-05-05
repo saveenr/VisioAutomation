@@ -279,7 +279,9 @@ namespace VisioAutomation.Models.DirectedGraph
             var stencilnames0 = shapes.Select(s => s.StencilName).ToList();
             var stencil_names = stencilnames0.Distinct().ToList();
 
-            var stencil_map = new Dictionary<string, IVisio.Document>(StringComparer.OrdinalIgnoreCase);
+            var compare = StringComparer.InvariantCultureIgnoreCase;
+
+            var stencil_map = new Dictionary<string, IVisio.Document>(compare);
             foreach (var stencil_name in stencil_names)
             {
                 if (!stencil_map.ContainsKey(stencil_name))
@@ -289,7 +291,7 @@ namespace VisioAutomation.Models.DirectedGraph
                 }
             }
 
-            var master_map = new Dictionary<string, IVisio.Master>(StringComparer.OrdinalIgnoreCase);
+            var master_map = new Dictionary<string, IVisio.Master>(compare);
             foreach (var nv in shapes)
             {
                 var key = nv.StencilName + "+" + nv.MasterName; 

@@ -17,7 +17,8 @@ namespace VisioAutomation.VDX
             }
 
             this.items = new List<T>();
-            this.dic = new Dictionary<string, T>(System.StringComparer.OrdinalIgnoreCase);
+            var compare = System.StringComparer.InvariantCultureIgnoreCase;
+            this.dic = new Dictionary<string, T>(compare);
             this.func_get_name = func_get_name;
         }
 

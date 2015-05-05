@@ -15,7 +15,8 @@ namespace VisioPowerShell
         {
             this.regex_cellname = new Regex("^[a-zA-Z]*$");
             this.regex_cellname_wildcard = new Regex("^[a-zA-Z\\*\\?]*$");
-            this.dic = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
+            var compare = StringComparer.InvariantCultureIgnoreCase;
+            this.dic = new Dictionary<string, T>(compare);
         }
 
         public List<string> GetNames()

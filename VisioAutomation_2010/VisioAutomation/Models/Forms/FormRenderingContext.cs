@@ -16,7 +16,8 @@ namespace VisioAutomation.Models.Forms
 
         public FormRenderingContext()
         {
-            this.NameToFontID = new Dictionary<string, int>(System.StringComparer.InvariantCultureIgnoreCase);
+            var compare = System.StringComparer.InvariantCultureIgnoreCase;
+            this.NameToFontID = new Dictionary<string, int>(compare);
         }
 
         public int GetFontID(string name)
