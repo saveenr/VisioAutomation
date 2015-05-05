@@ -7,7 +7,7 @@ namespace VisioAutomation.Models.Forms
 {
     public class InteractiveRenderer
     {
-        private IVisio.Pages VisioPages;
+        private readonly IVisio.Pages VisioPages;
         private double CurrentLineHeight;
         private IVisio.Page page;
         private FormPage FormPage;

@@ -239,7 +239,7 @@ namespace VisioAutomation.Scripting.Commands
 
             using (var undoscope = new UndoScope(this.Client.VisioApplication,"Align Shapes"))
             {
-                bool glue_to_guide = false;
+                const bool glue_to_guide = false;
                 var selection = this.Client.Selection.Get();
                 var halign = ArrangeCommands._map_isd_halign_to_visio_halign(align);
                 var valign = IVisio.VisVerticalAlignTypes.visVertAlignNone;

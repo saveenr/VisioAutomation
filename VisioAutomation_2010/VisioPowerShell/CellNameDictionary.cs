@@ -7,9 +7,9 @@ namespace VisioPowerShell
 {
     public class CellNameDictionary<T>
     {
-        private Dictionary<string, T> dic;
-        private Regex regex_cellname;
-        private Regex regex_cellname_wildcard;
+        private readonly Dictionary<string, T> dic;
+        private readonly Regex regex_cellname;
+        private readonly Regex regex_cellname_wildcard;
 
         public CellNameDictionary()
         {

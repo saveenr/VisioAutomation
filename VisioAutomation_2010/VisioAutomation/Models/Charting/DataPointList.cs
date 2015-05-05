@@ -6,7 +6,7 @@ namespace VisioAutomation.Models.Charting
 {
     public class DataPointList : IEnumerable<DataPoint>
     {
-        private List<DataPoint> items;
+        private readonly List<DataPoint> items;
 
         public DataPointList()
         {

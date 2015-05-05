@@ -7,7 +7,7 @@ namespace VisioAutomation.DOM
     {
         public PageList Pages;
         private readonly string vst_template_file ;
-        private IVisio.VisMeasurementSystem measurementSystem;
+        private readonly IVisio.VisMeasurementSystem measurementSystem;
         public IVisio.Document VisioDocument;
 
         public Document()

@@ -76,7 +76,7 @@ namespace VisioAutomation.VDX.Elements
 
         internal int CurrentShapeID = -100;
 
-        private SXL.XDocument dom;
+        private readonly SXL.XDocument dom;
 
         public Drawing(Template template)
         {

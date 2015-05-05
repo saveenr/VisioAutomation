@@ -6,7 +6,7 @@ namespace VisioAutomation.ShapeSheet.Query
 {
     public class QueryResultList<T> : IEnumerable<QueryResult<T>>
     {
-        List<QueryResult<T>> Items;
+        private readonly List<QueryResult<T>> Items;
 
         internal QueryResultList()
         {

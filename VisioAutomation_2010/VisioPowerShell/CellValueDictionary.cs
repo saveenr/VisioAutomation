@@ -8,7 +8,7 @@ namespace VisioPowerShell
 {
     public class CellValueDictionary : CellNameDictionary<string>
     {
-        private CellSRCDictionary srcmap;
+        private readonly CellSRCDictionary srcmap;
 
         public CellValueDictionary( CellSRCDictionary src_src_dictionary) : base()
         {

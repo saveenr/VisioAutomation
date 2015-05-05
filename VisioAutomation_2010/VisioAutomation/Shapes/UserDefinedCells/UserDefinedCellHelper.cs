@@ -8,7 +8,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 {
     public static class UserDefinedCellsHelper
     {
-        private static short _userdefinedcell_section = ShapeSheet.SRCConstants.User_Prompt.Section;
+        private static readonly short _userdefinedcell_section = ShapeSheet.SRCConstants.User_Prompt.Section;
 
         private static string GetRowName(string name)
         {

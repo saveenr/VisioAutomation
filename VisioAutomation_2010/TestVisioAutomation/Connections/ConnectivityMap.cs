@@ -5,7 +5,7 @@ namespace TestVisioAutomation
 {
     public class ConnectivityMap
     {
-        private Dictionary<string, List<string>> dic;
+        private readonly Dictionary<string, List<string>> dic;
 
         public ConnectivityMap(IList<VACXN.ConnectorEdge> edges)
         {

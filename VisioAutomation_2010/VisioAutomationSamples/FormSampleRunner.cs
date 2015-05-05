@@ -54,7 +54,7 @@ namespace VisioAutomationSamples
                 this.checkedListBox1.Items.Add(name, ischecked);
             }
 
-            bool autorun = false;
+            const bool autorun = false;
             if (autorun)
             {
                 this.RunSelectedSamples();

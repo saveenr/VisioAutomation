@@ -6,7 +6,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ViewCommands : CommandSet
     {
-        private double ZoomIncrement;
+        private readonly double ZoomIncrement;
 
         public ViewCommands(Client client) :
             base(client)
