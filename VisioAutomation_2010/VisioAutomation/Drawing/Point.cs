@@ -147,6 +147,5 @@ namespace VisioAutomation.Drawing
                 yield return p.Y;
             }
         }
-
     }
 }

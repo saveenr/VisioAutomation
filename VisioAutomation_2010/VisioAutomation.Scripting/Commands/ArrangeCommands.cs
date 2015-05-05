@@ -469,5 +469,25 @@ namespace VisioAutomation.Scripting.Commands
                 ArrangeHelper.SnapCorner(active_page, shapeids, new Drawing.Size(w, h), corner);
             }
         }
+
+        public void SnapSize(IList<IVisio.Shape> target_shapes, Drawing.Size snapsize, Drawing.Size minsize)
+        {
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
+
+            var shapes = this.GetTargetShapes2D(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return;
+            }
+
+            var shapeids = shapes.Select(s => s.ID).ToList();
+            var application = this.Client.VisioApplication;
+            using (var undoscope = new UndoScope(application, "SnapSize"))
+            {
+                var active_page = application.ActivePage;
+                ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);
+            }
+        }
     }
 }

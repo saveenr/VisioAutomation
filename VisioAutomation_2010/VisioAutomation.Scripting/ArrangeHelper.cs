@@ -205,20 +205,37 @@ namespace VisioAutomation.Scripting
             var grid = new Drawing.SnappingGrid(snapsize);
             foreach (var input_xfrm in input_xfrms)
             {
-                var inut_size = new Drawing.Size(input_xfrm.Width.Result, input_xfrm.Height.Result);
-                var snapped_size = grid.Snap(inut_size);
-                double max_w = System.Math.Max(snapped_size.Width, minsize.Width);
-                double max_h = System.Math.Max(snapped_size.Height, minsize.Height);
-                var new_size = new Drawing.Size(max_w, max_h);
+                // First snap the size to the grid
+                double old_w = input_xfrm.Width.Result;
+                double old_h = input_xfrm.Height.Result;
+                var input_size = new Drawing.Size(old_w, old_h);
+                var snapped_size = grid.Snap(input_size);
 
-                var output_xfrm = new Shapes.XFormCells();
-                output_xfrm.Width = new_size.Width;
-                output_xfrm.Height = new_size.Height;
-
-                output_xfrms.Add(output_xfrm);
+                // then account for any minum size requirements
+                double new_w = System.Math.Max(snapped_size.Width, minsize.Width);
+                double new_h = System.Math.Max(snapped_size.Height, minsize.Height);
+                var output_size = new Drawing.Size(new_w, new_h);
+                VA.Drawing.Size ccc;
+                
+                // Output the new size for the shape if the size of the shape changed
+                bool different_widths = (old_w != new_w);
+                bool different_heights = (old_h != new_h);
+                if (different_widths || different_heights)
+                {
+                    var output_xfrm = new Shapes.XFormCells();
+                    if (different_widths) 
+                    {
+                        output_xfrm.Width = output_size.Width;                    
+                    }
+                    if (different_heights)
+                    {
+                        output_xfrm.Height = output_size.Height;
+                    }
+                    output_xfrms.Add(output_xfrm);
+                }
             }
 
-            // Now apply them
+            // Now apply the updates to the sizes
             ArrangeHelper.update_xfrms(page, shapeids, output_xfrms);
         }
     }
