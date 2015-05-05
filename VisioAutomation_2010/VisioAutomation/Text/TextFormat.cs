@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Linq;
@@ -67,7 +66,7 @@ namespace VisioAutomation.Text
             return runs;
         }
 
-        private static readonly SRC src_tabstopcount = SRCConstants.Tabs_StopCount;
+        private static readonly VA.ShapeSheet.SRC src_tabstopcount = ShapeSheet.SRCConstants.Tabs_StopCount;
         private static readonly short unitcode_number = (short)IVisio.VisUnitCodes.visNumber;
         private const short tab_section = (short)IVisio.VisSectionIndices.visSectionTab;
 
@@ -88,24 +87,24 @@ namespace VisioAutomation.Text
             const short row = 0;
 
 
-            var srcs = new List<SRC>(num_stops*3);
+            var srcs = new List<ShapeSheet.SRC>(num_stops*3);
             for (int stop_index = 0; stop_index < num_stops; stop_index++)
             {
                 int i = stop_index * 3;
                 
-                var src_tabpos = new SRC(TextFormat.tab_section, row, (short)(i + 1));
-                var src_tabalign = new SRC(TextFormat.tab_section, row, (short)(i + 2));
-                var src_tabother = new SRC(TextFormat.tab_section, row, (short)(i + 3));
+                var src_tabpos = new ShapeSheet.SRC(TextFormat.tab_section, row, (short)(i + 1));
+                var src_tabalign = new ShapeSheet.SRC(TextFormat.tab_section, row, (short)(i + 2));
+                var src_tabother = new ShapeSheet.SRC(TextFormat.tab_section, row, (short)(i + 3));
 
                 srcs.Add(src_tabpos);
                 srcs.Add(src_tabalign );
                 srcs.Add(src_tabother);
             }
 
-            var surface = new ShapeSheetSurface(shape);
+            var surface = new ShapeSheet.ShapeSheetSurface(shape);
 
 
-            var stream = SRC.ToStream(srcs);
+            var stream = ShapeSheet.SRC.ToStream(srcs);
             var unitcodes = srcs.Select(i => IVisio.VisUnitCodes.visNumber).ToList();
             var results = surface.GetResults_SRC<double>(stream, unitcodes);
 
@@ -150,7 +149,7 @@ namespace VisioAutomation.Text
             shape.RowType[TextFormat.tab_section, (short)IVisio.VisRowIndices.visRowTab] = (short)tagtab;
 
             // add tab properties for each stop
-            var update = new Update();
+            var update = new ShapeSheet.Update();
             for (int stop_index = 0; stop_index < stops.Count; stop_index++)
             {
                 int i = stop_index * 3;
@@ -158,9 +157,9 @@ namespace VisioAutomation.Text
                 var alignment = ((int)stops[stop_index].Alignment).ToString(invariant_culture);
                 var position = ((int)stops[stop_index].Position).ToString(invariant_culture);
 
-                var src_tabpos = new SRC(TextFormat.tab_section, row, (short)(i + 1));
-                var src_tabalign = new SRC(TextFormat.tab_section, row, (short)(i + 2));
-                var src_tabother = new SRC(TextFormat.tab_section, row, (short)(i + 3));
+                var src_tabpos = new ShapeSheet.SRC(TextFormat.tab_section, row, (short)(i + 1));
+                var src_tabalign = new ShapeSheet.SRC(TextFormat.tab_section, row, (short)(i + 2));
+                var src_tabother = new ShapeSheet.SRC(TextFormat.tab_section, row, (short)(i + 3));
 
                 update.SetFormula(src_tabpos, position); // tab position
                 update.SetFormula(src_tabalign, alignment); // tab alignment
@@ -233,10 +232,10 @@ namespace VisioAutomation.Text
 
             const string formula = "0";
 
-            var update = new Update();
+            var update = new ShapeSheet.Update();
             for (int i = 1; i < num_existing_tabstops * 3; i++)
             {
-                var src = new SRC(TextFormat.tab_section, (short)IVisio.VisRowIndices.visRowTab,
+                var src = new ShapeSheet.SRC(TextFormat.tab_section, (short)IVisio.VisRowIndices.visRowTab,
                                                 (short)i);
                 update.SetFormula(src, formula);
             }

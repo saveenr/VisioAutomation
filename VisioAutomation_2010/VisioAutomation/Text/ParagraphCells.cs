@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
@@ -64,22 +64,22 @@ namespace VisioAutomation.Text
             return ParagraphCells._mCellQuery;
         }
 
-        class ParagraphFormatCellQuery : CellQuery
+        class ParagraphFormatCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn Bullet { get; set; }
-            public CellColumn BulletFont { get; set; }
-            public CellColumn BulletFontSize { get; set; }
-            public CellColumn BulletString { get; set; } // NOTE: This is never used
-            public CellColumn Flags { get; set; }
-            public CellColumn HorzAlign { get; set; }
-            public CellColumn IndentFirst { get; set; }
-            public CellColumn IndentLeft { get; set; }
-            public CellColumn IndentRight { get; set; }
-            public CellColumn LocalizeBulletFont { get; set; }
-            public CellColumn SpaceAfter { get; set; }
-            public CellColumn SpaceBefore { get; set; }
-            public CellColumn SpaceLine { get; set; }
-            public CellColumn TextPosAfterBullet { get; set; }
+            public VAQUERY.CellColumn Bullet { get; set; }
+            public VAQUERY.CellColumn BulletFont { get; set; }
+            public VAQUERY.CellColumn BulletFontSize { get; set; }
+            public VAQUERY.CellColumn BulletString { get; set; } // NOTE: This is never used
+            public VAQUERY.CellColumn Flags { get; set; }
+            public VAQUERY.CellColumn HorzAlign { get; set; }
+            public VAQUERY.CellColumn IndentFirst { get; set; }
+            public VAQUERY.CellColumn IndentLeft { get; set; }
+            public VAQUERY.CellColumn IndentRight { get; set; }
+            public VAQUERY.CellColumn LocalizeBulletFont { get; set; }
+            public VAQUERY.CellColumn SpaceAfter { get; set; }
+            public VAQUERY.CellColumn SpaceBefore { get; set; }
+            public VAQUERY.CellColumn SpaceLine { get; set; }
+            public VAQUERY.CellColumn TextPosAfterBullet { get; set; }
 
             public ParagraphFormatCellQuery() 
             {

@@ -2,7 +2,7 @@ using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes
 {
@@ -77,28 +77,28 @@ namespace VisioAutomation.Shapes
             return LockCells._mCellQuery;
         }
 
-        class LockCellQuery : CellQuery
+        class LockCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn LockAspect { get; set; }
-            public CellColumn LockBegin { get; set; }
-            public CellColumn LockCalcWH { get; set; }
-            public CellColumn LockCrop { get; set; }
-            public CellColumn LockCustProp { get; set; }
-            public CellColumn LockDelete { get; set; }
-            public CellColumn LockEnd { get; set; }
-            public CellColumn LockFormat { get; set; }
-            public CellColumn LockFromGroupFormat { get; set; }
-            public CellColumn LockGroup { get; set; }
-            public CellColumn LockHeight { get; set; }
-            public CellColumn LockMoveX { get; set; }
-            public CellColumn LockMoveY { get; set; }
-            public CellColumn LockRotate { get; set; }
-            public CellColumn LockSelect { get; set; }
-            public CellColumn LockTextEdit { get; set; }
-            public CellColumn LockThemeColors { get; set; }
-            public CellColumn LockThemeEffects { get; set; }
-            public CellColumn LockVtxEdit { get; set; }
-            public CellColumn LockWidth { get; set; }
+            public VAQUERY.CellColumn LockAspect { get; set; }
+            public VAQUERY.CellColumn LockBegin { get; set; }
+            public VAQUERY.CellColumn LockCalcWH { get; set; }
+            public VAQUERY.CellColumn LockCrop { get; set; }
+            public VAQUERY.CellColumn LockCustProp { get; set; }
+            public VAQUERY.CellColumn LockDelete { get; set; }
+            public VAQUERY.CellColumn LockEnd { get; set; }
+            public VAQUERY.CellColumn LockFormat { get; set; }
+            public VAQUERY.CellColumn LockFromGroupFormat { get; set; }
+            public VAQUERY.CellColumn LockGroup { get; set; }
+            public VAQUERY.CellColumn LockHeight { get; set; }
+            public VAQUERY.CellColumn LockMoveX { get; set; }
+            public VAQUERY.CellColumn LockMoveY { get; set; }
+            public VAQUERY.CellColumn LockRotate { get; set; }
+            public VAQUERY.CellColumn LockSelect { get; set; }
+            public VAQUERY.CellColumn LockTextEdit { get; set; }
+            public VAQUERY.CellColumn LockThemeColors { get; set; }
+            public VAQUERY.CellColumn LockThemeEffects { get; set; }
+            public VAQUERY.CellColumn LockVtxEdit { get; set; }
+            public VAQUERY.CellColumn LockWidth { get; set; }
 
             public LockCellQuery() 
             {

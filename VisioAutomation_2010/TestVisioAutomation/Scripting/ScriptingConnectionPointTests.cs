@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
 using VACXN = VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 
@@ -13,7 +12,7 @@ namespace TestVisioAutomation
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            client.Page.New(new Size(4, 4), false);
+            client.Page.New(new VisioAutomation.Drawing.Size(4, 4), false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
 

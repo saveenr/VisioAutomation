@@ -1,6 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -16,11 +15,11 @@ namespace TestVisioAutomation
             client.Draw.Rectangle(0, 0, 1, 1);
             client.Draw.Rectangle(1, 1, 2, 2);
 
-            var formulas = client.ShapeSheet.QueryFormulas(null, new[] {SRCConstants.PinX});
+            var formulas = client.ShapeSheet.QueryFormulas(null, new[] {VisioAutomation.ShapeSheet.SRCConstants.PinX});
             Assert.AreEqual("1.5 in", formulas[0][0]);
 
             client.Selection.All();
-            formulas = client.ShapeSheet.QueryFormulas(null, new[] { SRCConstants.PinX });
+            formulas = client.ShapeSheet.QueryFormulas(null, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
             Assert.AreEqual("1.5 in", formulas[0][0]);
             Assert.AreEqual("0.5 in", formulas[1][0]);
 
@@ -37,7 +36,7 @@ namespace TestVisioAutomation
 
                 client.Selection.All();
 
-                formulas = client.ShapeSheet.QueryFormulas(null, new[] { SRCConstants.PinX });
+                formulas = client.ShapeSheet.QueryFormulas(null, new[] { VisioAutomation.ShapeSheet.SRCConstants.PinX });
                 //Assert.AreEqual("1.5 in", formulas[0][0]);
                 //Assert.AreEqual("0.5 in", formulas[1][0]);
 

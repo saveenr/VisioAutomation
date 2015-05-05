@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -85,10 +85,10 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return UserDefinedCell._mCellQuery;
         }
 
-         class UserDefinedCellQuery : CellQuery
+        class UserDefinedCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn Value { get; set; }
-            public CellColumn Prompt { get; set; }
+            public VAQUERY.CellColumn Value { get; set; }
+            public VAQUERY.CellColumn Prompt { get; set; }
 
             public UserDefinedCellQuery()
             {

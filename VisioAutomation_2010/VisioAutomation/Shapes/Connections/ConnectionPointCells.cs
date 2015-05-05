@@ -2,7 +2,7 @@ using VA=VisioAutomation;
 using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY = VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Connections
 {
@@ -46,13 +46,13 @@ namespace VisioAutomation.Shapes.Connections
             return ConnectionPointCells._mCellQuery;
         }
 
-        class ConnectionPointCellQuery : CellQuery
+        class ConnectionPointCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn DirX { get; set; }
-            public CellColumn DirY { get; set; }
-            public CellColumn Type { get; set; }
-            public CellColumn X { get; set; }
-            public CellColumn Y { get; set; }
+            public VAQUERY.CellColumn DirX { get; set; }
+            public VAQUERY.CellColumn DirY { get; set; }
+            public VAQUERY.CellColumn Type { get; set; }
+            public VAQUERY.CellColumn X { get; set; }
+            public VAQUERY.CellColumn Y { get; set; }
             
             public ConnectionPointCellQuery()
             {

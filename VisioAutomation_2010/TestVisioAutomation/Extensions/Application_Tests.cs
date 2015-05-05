@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Application;
+
 using VA=VisioAutomation;
 
 namespace TestVisioAutomation
@@ -39,7 +39,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, page1.Shapes.Count);
 
             // create a shape without undoing it
-            using (var undoscope0 = new UndoScope(app, "UndoScope1"))
+            using (var undoscope0 = new VA.Application.UndoScope(app, "UndoScope1"))
             {
                 var s1 = page1.DrawRectangle(0, 0, 2, 2);
                 Assert.AreEqual(1, page1.Shapes.Count);
@@ -47,7 +47,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(1, page1.Shapes.Count);
 
             // create a shape and undo it
-            using (var undoscope1 = new UndoScope(app, "UndoScope2"))
+            using (var undoscope1 = new VA.Application.UndoScope(app, "UndoScope2"))
             {
                 var s1 = page1.DrawRectangle(1, 1, 3, 3);
                 Assert.AreEqual(2, page1.Shapes.Count);
@@ -67,13 +67,13 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, page1.Shapes.Count);
 
             // Test that inner undo doesn't affect outer
-            using (var undoscope0 = new UndoScope(app, "UndoScope1"))
+            using (var undoscope0 = new VA.Application.UndoScope(app, "UndoScope1"))
             {
                 var s1 = page1.DrawRectangle(0, 0, 2, 2);
                 Assert.AreEqual(1, page1.Shapes.Count);
 
                 // create a shape and undo it
-                using (var undoscope1 = new UndoScope(app, "UndoScope2"))
+                using (var undoscope1 = new VA.Application.UndoScope(app, "UndoScope2"))
                 {
                     var s2 = page1.DrawRectangle(1, 1, 3, 3);
                     Assert.AreEqual(2, page1.Shapes.Count);
@@ -93,13 +93,13 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, page1.Shapes.Count);
 
             // Test that outter does affect inner
-            using (var undoscope0 = new UndoScope(app, "UndoScope1"))
+            using (var undoscope0 = new VA.Application.UndoScope(app, "UndoScope1"))
             {
                 var s1 = page1.DrawRectangle(0, 0, 2, 2);
                 Assert.AreEqual(1, page1.Shapes.Count);
 
                 // create a shape and undo it
-                using (var undoscope1 = new UndoScope(app, "UndoScope2"))
+                using (var undoscope1 = new VA.Application.UndoScope(app, "UndoScope2"))
                 {
                     var s2 = page1.DrawRectangle(1, 1, 3, 3);
                     Assert.AreEqual(2, page1.Shapes.Count);
@@ -120,7 +120,7 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, page1.Shapes.Count);
 
             // create a shape without undoing it
-            using (var undoscope0 = new UndoScope(app, "UndoScope1"))
+            using (var undoscope0 = new VA.Application.UndoScope(app, "UndoScope1"))
             {
                 var s1 = page1.DrawRectangle(0, 0, 1, 1);
                 var s2 = page1.DrawRectangle(1, 1, 2, 2);
@@ -146,11 +146,11 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, page1.Shapes.Count);
 
             // create a shape without undoing it
-            using (var undoscope0 = new UndoScope(app, "UndoScope1"))
+            using (var undoscope0 = new VA.Application.UndoScope(app, "UndoScope1"))
             {
                 var s1 = page1.DrawRectangle(0, 0, 1, 1);
                 Assert.AreEqual(1, page1.Shapes.Count);
-                using (var undoscope1 = new UndoScope(app, "UndoScope2"))
+                using (var undoscope1 = new VA.Application.UndoScope(app, "UndoScope2"))
                 {
                     var s2 = page1.DrawRectangle(1, 1, 2, 2);
                     var s3 = page1.DrawRectangle(2, 2, 3, 3);
@@ -175,11 +175,11 @@ namespace TestVisioAutomation
             Assert.AreEqual(0, page1.Shapes.Count);
 
             // create a shape without undoing it
-            using (var undoscope0 = new UndoScope(app, "UndoScope1"))
+            using (var undoscope0 = new VA.Application.UndoScope(app, "UndoScope1"))
             {
                 var s1 = page1.DrawRectangle(0, 0, 1, 1);
                 Assert.AreEqual(1, page1.Shapes.Count);
-                using (var undoscope1 = new UndoScope(app, "UndoScope2"))
+                using (var undoscope1 = new VA.Application.UndoScope(app, "UndoScope2"))
                 {
                     var s2 = page1.DrawRectangle(1, 1, 2, 2);
                     var s3 = page1.DrawRectangle(2, 2, 3, 3);

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using VA=VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Controls
 {
@@ -52,16 +52,16 @@ namespace VisioAutomation.Shapes.Controls
             return ControlCells._mCellQuery;
         }
 
-        class ControlCellQuery : CellQuery
+        class ControlCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn CanGlue { get; set; }
-            public CellColumn Tip { get; set; }
-            public CellColumn X { get; set; }
-            public CellColumn Y { get; set; }
-            public CellColumn YBehavior { get; set; }
-            public CellColumn XBehavior { get; set; }
-            public CellColumn XDynamics { get; set; }
-            public CellColumn YDynamics { get; set; }
+            public VAQUERY.CellColumn CanGlue { get; set; }
+            public VAQUERY.CellColumn Tip { get; set; }
+            public VAQUERY.CellColumn X { get; set; }
+            public VAQUERY.CellColumn Y { get; set; }
+            public VAQUERY.CellColumn YBehavior { get; set; }
+            public VAQUERY.CellColumn XBehavior { get; set; }
+            public VAQUERY.CellColumn XDynamics { get; set; }
+            public VAQUERY.CellColumn YDynamics { get; set; }
 
             public ControlCellQuery() 
             {

@@ -1,7 +1,7 @@
 ﻿using VA=VisioAutomation;
 using VisioAutomation.Extensions;
 using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 
 namespace VisioAutomation.Shapes.CustomProperties
@@ -181,18 +181,18 @@ namespace VisioAutomation.Shapes.CustomProperties
         }
     }
 
-    class CustomPropertyCellQuery : CellQuery
+    class CustomPropertyCellQuery : VAQUERY.CellQuery
     {
-        public CellColumn SortKey { get; set; }
-        public CellColumn Ask { get; set; }
-        public CellColumn Calendar { get; set; }
-        public CellColumn Format { get; set; }
-        public CellColumn Invis { get; set; }
-        public CellColumn Label { get; set; }
-        public CellColumn LangID { get; set; }
-        public CellColumn Prompt { get; set; }
-        public CellColumn Value { get; set; }
-        public CellColumn Type { get; set; }
+        public VAQUERY.CellColumn SortKey { get; set; }
+        public VAQUERY.CellColumn Ask { get; set; }
+        public VAQUERY.CellColumn Calendar { get; set; }
+        public VAQUERY.CellColumn Format { get; set; }
+        public VAQUERY.CellColumn Invis { get; set; }
+        public VAQUERY.CellColumn Label { get; set; }
+        public VAQUERY.CellColumn LangID { get; set; }
+        public VAQUERY.CellColumn Prompt { get; set; }
+        public VAQUERY.CellColumn Value { get; set; }
+        public VAQUERY.CellColumn Type { get; set; }
 
         public CustomPropertyCellQuery() 
         {

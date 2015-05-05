@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
@@ -81,30 +81,30 @@ namespace VisioAutomation.Text
             return CharacterCells._mCellQuery;
         }
 
-        class CharacterFormatCellQuery : CellQuery
+        class CharacterFormatCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn Font { get; set; }
-            public CellColumn Style { get; set; }
-            public CellColumn Color { get; set; }
-            public CellColumn Size { get; set; }
-            public CellColumn Trans { get; set; }
-            public CellColumn AsianFont { get; set; }
-            public CellColumn Case { get; set; }
-            public CellColumn ComplexScriptFont { get; set; }
-            public CellColumn ComplexScriptSize { get; set; }
-            public CellColumn DoubleStrikethrough { get; set; }
-            public CellColumn DoubleUnderline { get; set; }
-            public CellColumn LangID { get; set; }
-            public CellColumn Locale { get; set; }
-            public CellColumn LocalizeFont { get; set; }
-            public CellColumn Overline { get; set; }
-            public CellColumn Perpendicular { get; set; }
-            public CellColumn Pos { get; set; }
-            public CellColumn RTLText { get; set; }
-            public CellColumn FontScale { get; set; }
-            public CellColumn Letterspace { get; set; }
-            public CellColumn Strikethru { get; set; }
-            public CellColumn UseVertical { get; set; }
+            public VAQUERY.CellColumn Font { get; set; }
+            public VAQUERY.CellColumn Style { get; set; }
+            public VAQUERY.CellColumn Color { get; set; }
+            public VAQUERY.CellColumn Size { get; set; }
+            public VAQUERY.CellColumn Trans { get; set; }
+            public VAQUERY.CellColumn AsianFont { get; set; }
+            public VAQUERY.CellColumn Case { get; set; }
+            public VAQUERY.CellColumn ComplexScriptFont { get; set; }
+            public VAQUERY.CellColumn ComplexScriptSize { get; set; }
+            public VAQUERY.CellColumn DoubleStrikethrough { get; set; }
+            public VAQUERY.CellColumn DoubleUnderline { get; set; }
+            public VAQUERY.CellColumn LangID { get; set; }
+            public VAQUERY.CellColumn Locale { get; set; }
+            public VAQUERY.CellColumn LocalizeFont { get; set; }
+            public VAQUERY.CellColumn Overline { get; set; }
+            public VAQUERY.CellColumn Perpendicular { get; set; }
+            public VAQUERY.CellColumn Pos { get; set; }
+            public VAQUERY.CellColumn RTLText { get; set; }
+            public VAQUERY.CellColumn FontScale { get; set; }
+            public VAQUERY.CellColumn Letterspace { get; set; }
+            public VAQUERY.CellColumn Strikethru { get; set; }
+            public VAQUERY.CellColumn UseVertical { get; set; }
 
             public CharacterFormatCellQuery() 
             {

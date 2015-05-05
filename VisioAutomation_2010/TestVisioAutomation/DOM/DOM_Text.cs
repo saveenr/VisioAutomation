@@ -1,7 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
-using VisioAutomation.Text;
-using VisioAutomation.Text.Markup;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -26,12 +23,12 @@ namespace TestVisioAutomation
 
         public void MarkupCharacterPlain()
         {
-            var m = new TextElement("{Normal}");
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var m = new VisioAutomation.Text.Markup.TextElement("{Normal}");
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
 
@@ -40,47 +37,47 @@ namespace TestVisioAutomation
 
         public void MarkupCharacterBold()
         {
-            var m = new TextElement("{Bold}");
-            m.CharacterCells.Style = (int)CharStyle.Bold;
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var m = new VisioAutomation.Text.Markup.TextElement("{Bold}");
+            m.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Bold;
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual((int)CharStyle.Bold, charfmt[0].Style.Result);
+            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Bold, charfmt[0].Style.Result);
 
             page1.Delete(0);
         }
 
         public void MarkupCharacterItalic()
         {
-            var m = new TextElement("{Italic}");
-            m.CharacterCells.Style = (int)CharStyle.Italic;
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var m = new VisioAutomation.Text.Markup.TextElement("{Italic}");
+            m.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Italic;
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
-            Assert.AreEqual((int)CharStyle.Italic, charfmt[0].Style.Result);
+            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Italic, charfmt[0].Style.Result);
 
             page1.Delete(0);
         }
 
         public void MarkupCharacterFont()
         {
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
 
             var impact = page1.Document.Fonts["Arial"];
-            var m = new TextElement("Normal Text in Impact Font");
+            var m = new VisioAutomation.Text.Markup.TextElement("Normal Text in Impact Font");
             m.CharacterCells.Font = impact.ID;
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
             Assert.AreEqual(1, charfmt.Count);
             Assert.AreEqual(0, charfmt[0].Style.Result);
@@ -91,7 +88,7 @@ namespace TestVisioAutomation
 
         public void MarkupCharacterComplex()
         {
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var doc = page1.Document;
             var fonts = doc.Fonts;
 
@@ -100,25 +97,25 @@ namespace TestVisioAutomation
             var couriernew = fonts["Courier New"];
             var georgia = fonts["Georgia"];
 
-            var t1 = new TextElement("{Normal}");
+            var t1 = new VisioAutomation.Text.Markup.TextElement("{Normal}");
             t1.CharacterCells.Font = segoeui.ID;
 
             var t2 = t1.AddElement("{Italic}");
-            t2.CharacterCells.Style = (int)CharStyle.Italic;
+            t2.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Italic;
             t2.CharacterCells.Font = impact.ID;
 
             var t3 = t2.AddElement("{Bold}");
-            t3.CharacterCells.Style = (int)CharStyle.Bold;
+            t3.CharacterCells.Style = (int)VisioAutomation.Text.CharStyle.Bold;
             t3.CharacterCells.Font = couriernew.ID;
 
             var t4 = t2.AddElement("{Bold Italic}");
-            t4.CharacterCells.Style = (int)(CharStyle.Bold | CharStyle.Italic);
+            t4.CharacterCells.Style = (int)(VisioAutomation.Text.CharStyle.Bold | VisioAutomation.Text.CharStyle.Italic);
             t4.CharacterCells.Font = georgia.ID;
 
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             t1.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var charfmt = textfmt.CharacterFormats;
 
             // check the number of character regions
@@ -133,11 +130,11 @@ namespace TestVisioAutomation
 
 
             // check the styles
-            Assert.AreEqual((int)CharStyle.None, charfmt[0].Style.Result);
-            Assert.AreEqual((int)CharStyle.Italic, charfmt[1].Style.Result);
-            Assert.AreEqual((int)CharStyle.Bold, charfmt[2].Style.Result);
-            Assert.AreEqual((int)(CharStyle.Italic | CharStyle.Bold), charfmt[3].Style.Result);
-            Assert.AreEqual((int)(CharStyle.None), charfmt[4].Style.Result);
+            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.None, charfmt[0].Style.Result);
+            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Italic, charfmt[1].Style.Result);
+            Assert.AreEqual((int)VisioAutomation.Text.CharStyle.Bold, charfmt[2].Style.Result);
+            Assert.AreEqual((int)(VisioAutomation.Text.CharStyle.Italic | VisioAutomation.Text.CharStyle.Bold), charfmt[3].Style.Result);
+            Assert.AreEqual((int)(VisioAutomation.Text.CharStyle.None), charfmt[4].Style.Result);
 
             // check the text run content
             var charruns = textfmt.CharacterTextRuns;
@@ -153,12 +150,12 @@ namespace TestVisioAutomation
 
         public void MarkupParagraphDefault()
         {
-            var m = new TextElement("{DefaultPara}");
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var m = new VisioAutomation.Text.Markup.TextElement("{DefaultPara}");
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
@@ -167,51 +164,51 @@ namespace TestVisioAutomation
 
         public void MarkupParagraphLeft()
         {
-            var m = new TextElement("{LeftHAlign}");
-            m.ParagraphCells.HorizontalAlign = (int)AlignmentHorizontal.Left;
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var m = new VisioAutomation.Text.Markup.TextElement("{LeftHAlign}");
+            m.ParagraphCells.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Left;
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual((int)AlignmentHorizontal.Left, parafmt[0].HorizontalAlign.Result);
+            Assert.AreEqual((int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Left, parafmt[0].HorizontalAlign.Result);
 
             page1.Delete(0);
         }
 
         public void MarkupParagraphCenter()
         {
-            var m = new TextElement("{CenterHAlign}");
-            m.ParagraphCells.HorizontalAlign = (int)AlignmentHorizontal.Center;
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var m = new VisioAutomation.Text.Markup.TextElement("{CenterHAlign}");
+            m.ParagraphCells.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Center;
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual((int)AlignmentHorizontal.Center, parafmt[0].HorizontalAlign.Result);
+            Assert.AreEqual((int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Center, parafmt[0].HorizontalAlign.Result);
 
             page1.Delete(0);
         }
 
         public void MarkupParagraphRight()
         {
-            var m = new TextElement("{RightHAlign}");
-            m.ParagraphCells.HorizontalAlign = (int)AlignmentHorizontal.Right;
-            var page1 = this.GetNewPage(new Size(5, 5));
+            var m = new VisioAutomation.Text.Markup.TextElement("{RightHAlign}");
+            m.ParagraphCells.HorizontalAlign = (int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Right;
+            var page1 = this.GetNewPage(new VisioAutomation.Drawing.Size(5, 5));
             var s0 = page1.DrawRectangle(0, 0, 4, 4);
             m.SetText(s0);
 
-            var textfmt = TextFormat.GetFormat(s0);
+            var textfmt = VisioAutomation.Text.TextFormat.GetFormat(s0);
             var parafmt = textfmt.ParagraphFormats;
             Assert.AreEqual(1, parafmt.Count);
 
-            Assert.AreEqual((int)AlignmentHorizontal.Right, parafmt[0].HorizontalAlign.Result);
+            Assert.AreEqual((int)VisioAutomation.Models.BoxLayout.AlignmentHorizontal.Right, parafmt[0].HorizontalAlign.Result);
 
             page1.Delete(0);
         }

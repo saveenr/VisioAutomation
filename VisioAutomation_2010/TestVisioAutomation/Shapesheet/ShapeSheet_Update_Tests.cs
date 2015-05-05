@@ -1,6 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -9,9 +7,9 @@ namespace TestVisioAutomation
     [TestClass]
     public class ShapeSheet_Update_Tests : VisioAutomationTest
     {
-        private static readonly SRC src_pinx = SRCConstants.PinX;
-        private static readonly SRC src_piny = SRCConstants.PinY;
-        private static readonly SRC src_linepat = SRCConstants.LinePattern;
+        private static readonly VA.ShapeSheet.SRC src_pinx = VA.ShapeSheet.SRCConstants.PinX;
+        private static readonly VA.ShapeSheet.SRC src_piny = VA.ShapeSheet.SRCConstants.PinY;
+        private static readonly VA.ShapeSheet.SRC src_linepat = VA.ShapeSheet.SRCConstants.LinePattern;
 
         [TestMethod]
         public void ShapeSheet_Update_Formulas_MultipleShapes()
@@ -24,7 +22,7 @@ namespace TestVisioAutomation
 
 
             // Set the formulas
-            var update = new Update();
+            var update = new VA.ShapeSheet.Update();
             update.SetFormula(shape1.ID16, ShapeSheet_Update_Tests.src_pinx, 0.5);
             update.SetFormula(shape1.ID16, ShapeSheet_Update_Tests.src_piny, 0.5);
             update.SetFormula(shape2.ID16, ShapeSheet_Update_Tests.src_pinx, 1.5);
@@ -34,7 +32,7 @@ namespace TestVisioAutomation
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new CellQuery();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_pinx = query.AddCell(ShapeSheet_Update_Tests.src_pinx, "PinX");
             var col_piny = query.AddCell(ShapeSheet_Update_Tests.src_piny, "PinY");
 
@@ -60,12 +58,12 @@ namespace TestVisioAutomation
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new Update();
+            var update = new VA.ShapeSheet.Update();
             update.SetResult(ShapeSheet_Update_Tests.src_linepat, 7, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
-            var query = new CellQuery();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_linepat = query.AddCell(ShapeSheet_Update_Tests.src_linepat,"LinePattern");
 
             // Retrieve the values
@@ -83,12 +81,12 @@ namespace TestVisioAutomation
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new Update();
+            var update = new VA.ShapeSheet.Update();
             update.SetResult(ShapeSheet_Update_Tests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
-            var query = new CellQuery();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_linepat = query.AddCell(ShapeSheet_Update_Tests.src_linepat, "LinePattern");
 
             // Retrieve the values
@@ -110,7 +108,7 @@ namespace TestVisioAutomation
 
 
             // Set the formulas
-            var update = new Update();
+            var update = new VA.ShapeSheet.Update();
             update.SetResult(shape1.ID16, ShapeSheet_Update_Tests.src_pinx, 0.5, IVisio.VisUnitCodes.visNumber);
             update.SetResult(shape1.ID16, ShapeSheet_Update_Tests.src_piny, 0.5, IVisio.VisUnitCodes.visNumber);
             update.SetResult(shape2.ID16, ShapeSheet_Update_Tests.src_pinx, 1.5, IVisio.VisUnitCodes.visNumber);
@@ -120,7 +118,7 @@ namespace TestVisioAutomation
             update.Execute(page1);
 
             // Verify that the formulas were set
-            var query = new CellQuery();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_pinx = query.AddCell(ShapeSheet_Update_Tests.src_pinx,"PinX");
             var col_piny = query.AddCell(ShapeSheet_Update_Tests.src_piny, "PinY");
 
@@ -149,7 +147,7 @@ namespace TestVisioAutomation
 
         public void CheckHomogenousUpdates_FormulasResults()
         {
-            var update1 = new Update();
+            var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(ShapeSheet_Update_Tests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
             bool caught1 = false;
             try
@@ -170,7 +168,7 @@ namespace TestVisioAutomation
         
         public void CheckHomogenousUpdates_Streams()
         {
-            var update1 = new Update();
+            var update1 = new VA.ShapeSheet.Update();
             update1.SetResult(ShapeSheet_Update_Tests.src_pinx, 5.0, IVisio.VisUnitCodes.visNumber);
             bool caught1 = false;
             try
@@ -195,15 +193,15 @@ namespace TestVisioAutomation
             var shape1 = page1.DrawRectangle(0, 0, 1, 1);
 
             // Setup the modifications to the cell values
-            var update = new Update();
+            var update = new VA.ShapeSheet.Update();
             update.SetResult(ShapeSheet_Update_Tests.src_linepat, "7", IVisio.VisUnitCodes.visNumber);
-            update.SetResult(SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
+            update.SetResult(VA.ShapeSheet.SRCConstants.PinX, 2, IVisio.VisUnitCodes.visNumber);
             update.Execute(shape1);
 
             // Build the query
-            var query = new CellQuery();
+            var query = new VA.ShapeSheet.Query.CellQuery();
             var col_linepat = query.AddCell(ShapeSheet_Update_Tests.src_linepat, "LinePattern");
-            var col_pinx = query.AddCell(SRCConstants.PinX, "PinX");
+            var col_pinx = query.AddCell(VA.ShapeSheet.SRCConstants.PinX, "PinX");
 
             // Retrieve the values
             var data = query.GetCellData<double>(shape1);

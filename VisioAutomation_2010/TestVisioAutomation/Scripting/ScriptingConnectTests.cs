@@ -1,6 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
-using VisioAutomation.ShapeSheet;
 using VSCXN = VisioAutomation.Shapes.Connections;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -15,7 +13,7 @@ namespace TestVisioAutomation
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            var pagesize = new Size(4, 4);
+            var pagesize = new VA.Drawing.Size(4, 4);
             client.Page.New(pagesize, false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);
@@ -39,7 +37,7 @@ namespace TestVisioAutomation
             client.Selection.Select(directed_connectors);
 
             IVisio.VisGetSetArgs flags = 0;
-            client.ShapeSheet.SetFormula(null,new[] { SRCConstants.EndArrow }, new [] {"13"}, flags);
+            client.ShapeSheet.SetFormula(null,new[] { VA.ShapeSheet.SRCConstants.EndArrow }, new [] {"13"}, flags);
 
             var undirected_edges0 = client.Connection.GetDirectedEdges(VSCXN.ConnectorEdgeHandling.Raw);
             Assert.AreEqual(2, undirected_edges0.Count);
@@ -58,7 +56,7 @@ namespace TestVisioAutomation
         {
             var client = this.GetScriptingClient();
             client.Document.New();
-            var pagesize = new Size(4, 4);
+            var pagesize = new VA.Drawing.Size(4, 4);
             client.Page.New(pagesize, false);
 
             var s1 = client.Draw.Rectangle(1, 1, 1.25, 1.5);

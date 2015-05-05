@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -15,7 +14,7 @@ namespace TestVisioAutomation
             var page = this.GetNewPage();
             var shape0 = page.DrawRectangle(1, 1, 3, 3);
 
-            var shapes = ShapeHelper.GetNestedShapes(shape0);
+            var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(shape0);
 
             Assert.AreEqual(1,shapes.Count);
             Assert.IsTrue(shapes.Contains(shape0));
@@ -32,7 +31,7 @@ namespace TestVisioAutomation
 
             var active_window = page.Application.ActiveWindow;
             var group = VisioAutomationTest.SelectAndGroup(active_window, new[] { shape0, shape1 });
-            var shapes = ShapeHelper.GetNestedShapes(group);
+            var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(group);
 
             Assert.AreEqual(3, shapes.Count);
             Assert.IsTrue(shapes.Contains(shape0));
@@ -63,7 +62,7 @@ namespace TestVisioAutomation
             var group2 = VisioAutomationTest.SelectAndGroup(active_window, new[] { group0, group1 });
             page.Application.ActiveWindow.Selection.DeselectAll();
 
-            var shapes = ShapeHelper.GetNestedShapes(group2);
+            var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(group2);
 
             Assert.AreEqual(7, shapes.Count);
             Assert.IsTrue(shapes.Contains(shape0));

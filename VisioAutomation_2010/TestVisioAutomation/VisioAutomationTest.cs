@@ -4,11 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
+
 using VisioAutomation.Extensions;
-using VisioAutomation.Scripting;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
+
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -18,8 +16,8 @@ namespace TestVisioAutomation
     public class VisioAutomationTest
     {
         private static readonly VisioApplicationSafeReference app_ref = new VisioApplicationSafeReference();
-        public readonly Size StandardPageSize = new Size(8.5, 11);
-        public readonly Rectangle StandardPageSizeRect = new Rectangle(new Point(0, 0), new Size(8.5, 11));
+        public readonly VisioAutomation.Drawing.Size StandardPageSize = new VisioAutomation.Drawing.Size(8.5, 11);
+        public readonly VisioAutomation.Drawing.Rectangle StandardPageSizeRect = new VisioAutomation.Drawing.Rectangle(new VisioAutomation.Drawing.Point(0, 0), new VisioAutomation.Drawing.Size(8.5, 11));
 
         public IVisio.Application GetVisioApplication()
         {
@@ -45,7 +43,7 @@ namespace TestVisioAutomation
             return page;
         }
 
-        public IVisio.Page GetNewPage(Size s)
+        public IVisio.Page GetNewPage(VisioAutomation.Drawing.Size s)
         {
             var app = this.GetVisioApplication();
             var documents = app.Documents;
@@ -79,26 +77,26 @@ namespace TestVisioAutomation
 
         }
 
-        public Client GetScriptingClient()
+        public VisioAutomation.Scripting.Client GetScriptingClient()
         {
             var app = this.GetVisioApplication();
             // this ensures that any debug, verbose, user , etc. messages are 
             // sent to a useful place in the unit tests
             var context = new DiagnosticDebugContext(); 
-            var client = new Client(app,context);
+            var client = new VisioAutomation.Scripting.Client(app,context);
             return client;
         }
 
-        public static Size GetSize(IVisio.Shape shape)
+        public static VisioAutomation.Drawing.Size GetSize(IVisio.Shape shape)
         {
-            var query = new CellQuery();
-            var col_w = query.AddCell(SRCConstants.Width,"Width");
-            var col_h = query.AddCell(SRCConstants.Height,"Height");
+            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
+            var col_w = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Width,"Width");
+            var col_h = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.Height,"Height");
 
             var table = query.GetResults<double>(shape);
             double w = table[col_w];
             double h = table[col_h];
-            var size = new Size(w, h);
+            var size = new VisioAutomation.Drawing.Size(w, h);
             return size;
         }
 
@@ -140,7 +138,7 @@ namespace TestVisioAutomation
             return group;
         }
 
-        public static void SetPageSize(IVisio.Page page, Size size)
+        public static void SetPageSize(IVisio.Page page, VisioAutomation.Drawing.Size size)
         {
             if (page == null)
             {
@@ -149,26 +147,26 @@ namespace TestVisioAutomation
 
             var page_sheet = page.PageSheet;
 
-            var update = new Update(2);
-            update.SetFormula(SRCConstants.PageWidth, size.Width);
-            update.SetFormula(SRCConstants.PageHeight, size.Height);
+            var update = new VisioAutomation.ShapeSheet.Update(2);
+            update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, size.Width);
+            update.SetFormula(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, size.Height);
             update.Execute(page_sheet);
         }
 
-        public static Size GetPageSize(IVisio.Page page)
+        public static VisioAutomation.Drawing.Size GetPageSize(IVisio.Page page)
         {
             if (page == null)
             {
                 throw new ArgumentNullException("page");
             }
 
-            var query = new CellQuery();
-            var col_height = query.AddCell(SRCConstants.PageHeight, "PageHeight");
-            var col_width = query.AddCell(SRCConstants.PageWidth, "PageWidth");
+            var query = new VisioAutomation.ShapeSheet.Query.CellQuery();
+            var col_height = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageHeight, "PageHeight");
+            var col_width = query.AddCell(VisioAutomation.ShapeSheet.SRCConstants.PageWidth, "PageWidth");
             var results = query.GetResults<double>(page.PageSheet);
             double height = results[col_height];
             double width = results[col_width];
-            var s = new Size(width, height);
+            var s = new VisioAutomation.Drawing.Size(width, height);
             return s;
         }
 

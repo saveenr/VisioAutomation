@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Shapes.Layout
 {
@@ -70,26 +70,26 @@ namespace VisioAutomation.Shapes.Layout
             return ShapeLayoutCells._mCellQuery;
         }
 
-        class ShapeLayoutCellQuery : CellQuery
+        class ShapeLayoutCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn ConFixedCode { get; set; }
-            public CellColumn ConLineJumpCode { get; set; }
-            public CellColumn ConLineJumpDirX { get; set; }
-            public CellColumn ConLineJumpDirY { get; set; }
-            public CellColumn ConLineJumpStyle { get; set; }
-            public CellColumn ConLineRouteExt { get; set; }
-            public CellColumn ShapeFixedCode { get; set; }
-            public CellColumn ShapePermeablePlace { get; set; }
-            public CellColumn ShapePermeableX { get; set; }
-            public CellColumn ShapePermeableY { get; set; }
-            public CellColumn ShapePlaceFlip { get; set; }
-            public CellColumn ShapePlaceStyle { get; set; }
-            public CellColumn ShapePlowCode { get; set; }
-            public CellColumn ShapeRouteStyle { get; set; }
-            public CellColumn ShapeSplit { get; set; }
-            public CellColumn ShapeSplittable { get; set; }
-            public CellColumn DisplayLevel { get; set; }
-            public CellColumn Relationships { get; set; }
+            public VAQUERY.CellColumn ConFixedCode { get; set; }
+            public VAQUERY.CellColumn ConLineJumpCode { get; set; }
+            public VAQUERY.CellColumn ConLineJumpDirX { get; set; }
+            public VAQUERY.CellColumn ConLineJumpDirY { get; set; }
+            public VAQUERY.CellColumn ConLineJumpStyle { get; set; }
+            public VAQUERY.CellColumn ConLineRouteExt { get; set; }
+            public VAQUERY.CellColumn ShapeFixedCode { get; set; }
+            public VAQUERY.CellColumn ShapePermeablePlace { get; set; }
+            public VAQUERY.CellColumn ShapePermeableX { get; set; }
+            public VAQUERY.CellColumn ShapePermeableY { get; set; }
+            public VAQUERY.CellColumn ShapePlaceFlip { get; set; }
+            public VAQUERY.CellColumn ShapePlaceStyle { get; set; }
+            public VAQUERY.CellColumn ShapePlowCode { get; set; }
+            public VAQUERY.CellColumn ShapeRouteStyle { get; set; }
+            public VAQUERY.CellColumn ShapeSplit { get; set; }
+            public VAQUERY.CellColumn ShapeSplittable { get; set; }
+            public VAQUERY.CellColumn DisplayLevel { get; set; }
+            public VAQUERY.CellColumn Relationships { get; set; }
 
             public ShapeLayoutCellQuery() :
                 base()

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY = VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Pages
 {
@@ -163,75 +163,75 @@ namespace VisioAutomation.Pages
             return PageCells._mCellQuery;
         }
 
-        class PageCellQuery : CellQuery
+        class PageCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn PageLeftMargin { get; set; }
-            public CellColumn CenterX { get; set; }
-            public CellColumn CenterY { get; set; }
-            public CellColumn OnPage { get; set; }
-            public CellColumn PageBottomMargin { get; set; }
-            public CellColumn PageRightMargin { get; set; }
-            public CellColumn PagesX { get; set; }
-            public CellColumn PagesY { get; set; }
-            public CellColumn PageTopMargin { get; set; }
-            public CellColumn PaperKind { get; set; }
-            public CellColumn PrintGrid { get; set; }
-            public CellColumn PrintPageOrientation { get; set; }
-            public CellColumn ScaleX { get; set; }
-            public CellColumn ScaleY { get; set; }
-            public CellColumn PaperSource { get; set; }
-            public CellColumn DrawingScale { get; set; }
-            public CellColumn DrawingScaleType { get; set; }
-            public CellColumn DrawingSizeType { get; set; }
-            public CellColumn InhibitSnap { get; set; }
-            public CellColumn PageHeight { get; set; }
-            public CellColumn PageScale { get; set; }
-            public CellColumn PageWidth { get; set; }
-            public CellColumn ShdwObliqueAngle { get; set; }
-            public CellColumn ShdwOffsetX { get; set; }
-            public CellColumn ShdwOffsetY { get; set; }
-            public CellColumn ShdwScaleFactor { get; set; }
-            public CellColumn ShdwType { get; set; }
-            public CellColumn UIVisibility { get; set; }
-            public CellColumn XGridDensity { get; set; }
-            public CellColumn XGridOrigin { get; set; }
-            public CellColumn XGridSpacing { get; set; }
-            public CellColumn XRulerDensity { get; set; }
-            public CellColumn XRulerOrigin { get; set; }
-            public CellColumn YGridDensity { get; set; }
-            public CellColumn YGridOrigin { get; set; }
-            public CellColumn YGridSpacing { get; set; }
-            public CellColumn YRulerDensity { get; set; }
-            public CellColumn YRulerOrigin { get; set; }
-            public CellColumn AvenueSizeX { get; set; }
-            public CellColumn AvenueSizeY { get; set; }
-            public CellColumn BlockSizeX { get; set; }
-            public CellColumn BlockSizeY { get; set; }
-            public CellColumn CtrlAsInput { get; set; }
-            public CellColumn DynamicsOff { get; set; }
-            public CellColumn EnableGrid { get; set; }
-            public CellColumn LineAdjustFrom { get; set; }
-            public CellColumn LineAdjustTo { get; set; }
-            public CellColumn LineJumpCode { get; set; }
-            public CellColumn LineJumpFactorX { get; set; }
-            public CellColumn LineJumpFactorY { get; set; }
-            public CellColumn LineJumpStyle { get; set; }
-            public CellColumn LineRouteExt { get; set; }
-            public CellColumn LineToLineX { get; set; }
-            public CellColumn LineToLineY { get; set; }
-            public CellColumn LineToNodeX { get; set; }
-            public CellColumn LineToNodeY { get; set; }
-            public CellColumn PageLineJumpDirX { get; set; }
-            public CellColumn PageLineJumpDirY { get; set; }
-            public CellColumn PageShapeSplit { get; set; }
-            public CellColumn PlaceDepth { get; set; }
-            public CellColumn PlaceFlip { get; set; }
-            public CellColumn PlaceStyle { get; set; }
-            public CellColumn PlowCode { get; set; }
-            public CellColumn ResizePage { get; set; }
-            public CellColumn RouteStyle { get; set; }
-            public CellColumn AvoidPageBreaks { get; set; }
-            public CellColumn DrawingResizeType { get; set; }
+            public VAQUERY.CellColumn PageLeftMargin { get; set; }
+            public VAQUERY.CellColumn CenterX { get; set; }
+            public VAQUERY.CellColumn CenterY { get; set; }
+            public VAQUERY.CellColumn OnPage { get; set; }
+            public VAQUERY.CellColumn PageBottomMargin { get; set; }
+            public VAQUERY.CellColumn PageRightMargin { get; set; }
+            public VAQUERY.CellColumn PagesX { get; set; }
+            public VAQUERY.CellColumn PagesY { get; set; }
+            public VAQUERY.CellColumn PageTopMargin { get; set; }
+            public VAQUERY.CellColumn PaperKind { get; set; }
+            public VAQUERY.CellColumn PrintGrid { get; set; }
+            public VAQUERY.CellColumn PrintPageOrientation { get; set; }
+            public VAQUERY.CellColumn ScaleX { get; set; }
+            public VAQUERY.CellColumn ScaleY { get; set; }
+            public VAQUERY.CellColumn PaperSource { get; set; }
+            public VAQUERY.CellColumn DrawingScale { get; set; }
+            public VAQUERY.CellColumn DrawingScaleType { get; set; }
+            public VAQUERY.CellColumn DrawingSizeType { get; set; }
+            public VAQUERY.CellColumn InhibitSnap { get; set; }
+            public VAQUERY.CellColumn PageHeight { get; set; }
+            public VAQUERY.CellColumn PageScale { get; set; }
+            public VAQUERY.CellColumn PageWidth { get; set; }
+            public VAQUERY.CellColumn ShdwObliqueAngle { get; set; }
+            public VAQUERY.CellColumn ShdwOffsetX { get; set; }
+            public VAQUERY.CellColumn ShdwOffsetY { get; set; }
+            public VAQUERY.CellColumn ShdwScaleFactor { get; set; }
+            public VAQUERY.CellColumn ShdwType { get; set; }
+            public VAQUERY.CellColumn UIVisibility { get; set; }
+            public VAQUERY.CellColumn XGridDensity { get; set; }
+            public VAQUERY.CellColumn XGridOrigin { get; set; }
+            public VAQUERY.CellColumn XGridSpacing { get; set; }
+            public VAQUERY.CellColumn XRulerDensity { get; set; }
+            public VAQUERY.CellColumn XRulerOrigin { get; set; }
+            public VAQUERY.CellColumn YGridDensity { get; set; }
+            public VAQUERY.CellColumn YGridOrigin { get; set; }
+            public VAQUERY.CellColumn YGridSpacing { get; set; }
+            public VAQUERY.CellColumn YRulerDensity { get; set; }
+            public VAQUERY.CellColumn YRulerOrigin { get; set; }
+            public VAQUERY.CellColumn AvenueSizeX { get; set; }
+            public VAQUERY.CellColumn AvenueSizeY { get; set; }
+            public VAQUERY.CellColumn BlockSizeX { get; set; }
+            public VAQUERY.CellColumn BlockSizeY { get; set; }
+            public VAQUERY.CellColumn CtrlAsInput { get; set; }
+            public VAQUERY.CellColumn DynamicsOff { get; set; }
+            public VAQUERY.CellColumn EnableGrid { get; set; }
+            public VAQUERY.CellColumn LineAdjustFrom { get; set; }
+            public VAQUERY.CellColumn LineAdjustTo { get; set; }
+            public VAQUERY.CellColumn LineJumpCode { get; set; }
+            public VAQUERY.CellColumn LineJumpFactorX { get; set; }
+            public VAQUERY.CellColumn LineJumpFactorY { get; set; }
+            public VAQUERY.CellColumn LineJumpStyle { get; set; }
+            public VAQUERY.CellColumn LineRouteExt { get; set; }
+            public VAQUERY.CellColumn LineToLineX { get; set; }
+            public VAQUERY.CellColumn LineToLineY { get; set; }
+            public VAQUERY.CellColumn LineToNodeX { get; set; }
+            public VAQUERY.CellColumn LineToNodeY { get; set; }
+            public VAQUERY.CellColumn PageLineJumpDirX { get; set; }
+            public VAQUERY.CellColumn PageLineJumpDirY { get; set; }
+            public VAQUERY.CellColumn PageShapeSplit { get; set; }
+            public VAQUERY.CellColumn PlaceDepth { get; set; }
+            public VAQUERY.CellColumn PlaceFlip { get; set; }
+            public VAQUERY.CellColumn PlaceStyle { get; set; }
+            public VAQUERY.CellColumn PlowCode { get; set; }
+            public VAQUERY.CellColumn ResizePage { get; set; }
+            public VAQUERY.CellColumn RouteStyle { get; set; }
+            public VAQUERY.CellColumn AvoidPageBreaks { get; set; }
+            public VAQUERY.CellColumn DrawingResizeType { get; set; }
 
             public PageCellQuery() 
             {

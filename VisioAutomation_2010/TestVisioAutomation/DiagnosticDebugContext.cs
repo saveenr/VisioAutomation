@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
-using VisioAutomation.Scripting;
+using VASCRIPT=VisioAutomation.Scripting;
 
 namespace TestVisioAutomation
 {
-    public class DiagnosticDebugContext : Context
+    public class DiagnosticDebugContext : VASCRIPT.Context
     {
         public DiagnosticDebugContext()
         {

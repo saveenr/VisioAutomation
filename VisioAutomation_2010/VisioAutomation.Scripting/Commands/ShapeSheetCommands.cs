@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
         }
 
 
-        public QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
+        public VAQUERY.QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            var query = new CellQuery();
+            var query = new VAQUERY.CellQuery();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
+        public VAQUERY.QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IList<ShapeSheet.SRC> srcs)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -54,8 +54,8 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
- 
-            var query = new CellQuery();
+
+            var query = new VAQUERY.CellQuery();
 
             int ci = 0;
             foreach (var src in srcs)
@@ -70,7 +70,7 @@ namespace VisioAutomation.Scripting.Commands
             return formulas;
         }
 
-        public QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VAQUERY.QueryResultList<T> QueryResults<T>(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -79,7 +79,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
             var app = this.Client.VisioApplication;
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            var query = new CellQuery();
+            var query = new VAQUERY.CellQuery();
             var sec = query.AddSection(section);
 
             int ci = 0;
@@ -94,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
             return results;
         }
 
-        public QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
+        public VAQUERY.QueryResultList<string> QueryFormulas(IList<IVisio.Shape> target_shapes, IVisio.VisSectionIndices section, IList<IVisio.VisCellIndices> cells)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
@@ -104,7 +104,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
 
-            var query = new CellQuery();
+            var query = new VAQUERY.CellQuery();
             var sec = query.AddSection(section);
 
             int ci = 0;

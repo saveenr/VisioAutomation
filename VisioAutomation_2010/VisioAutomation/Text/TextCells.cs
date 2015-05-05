@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using VisioAutomation.Extensions;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 
 namespace VisioAutomation.Text
 {
@@ -67,24 +67,24 @@ namespace VisioAutomation.Text
             return TextCells._mCellQuery;
         }
 
-        private class TextBlockFormatCellQuery : CellQuery
+        private class TextBlockFormatCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn BottomMargin { get; set; }
-            public CellColumn LeftMargin { get; set; }
-            public CellColumn RightMargin { get; set; }
-            public CellColumn TopMargin { get; set; }
-            public CellColumn DefaultTabStop { get; set; }
-            public CellColumn TextBkgnd { get; set; }
-            public CellColumn TextBkgndTrans { get; set; }
-            public CellColumn TextDirection { get; set; }
-            public CellColumn VerticalAlign { get; set; }
-            public CellColumn TxtWidth { get; set; }
-            public CellColumn TxtHeight { get; set; }
-            public CellColumn TxtPinX { get; set; }
-            public CellColumn TxtPinY { get; set; }
-            public CellColumn TxtLocPinX { get; set; }
-            public CellColumn TxtLocPinY { get; set; }
-            public CellColumn TxtAngle { get; set; }
+            public VAQUERY.CellColumn BottomMargin { get; set; }
+            public VAQUERY.CellColumn LeftMargin { get; set; }
+            public VAQUERY.CellColumn RightMargin { get; set; }
+            public VAQUERY.CellColumn TopMargin { get; set; }
+            public VAQUERY.CellColumn DefaultTabStop { get; set; }
+            public VAQUERY.CellColumn TextBkgnd { get; set; }
+            public VAQUERY.CellColumn TextBkgndTrans { get; set; }
+            public VAQUERY.CellColumn TextDirection { get; set; }
+            public VAQUERY.CellColumn VerticalAlign { get; set; }
+            public VAQUERY.CellColumn TxtWidth { get; set; }
+            public VAQUERY.CellColumn TxtHeight { get; set; }
+            public VAQUERY.CellColumn TxtPinX { get; set; }
+            public VAQUERY.CellColumn TxtPinY { get; set; }
+            public VAQUERY.CellColumn TxtLocPinX { get; set; }
+            public VAQUERY.CellColumn TxtLocPinY { get; set; }
+            public VAQUERY.CellColumn TxtAngle { get; set; }
 
             public TextBlockFormatCellQuery() :
                 base()

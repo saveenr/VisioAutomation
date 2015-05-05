@@ -2,9 +2,7 @@ using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
-using VisioAutomation.Internal;
-using VisioAutomation.ShapeSheet;
+
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation
@@ -17,7 +15,7 @@ namespace TestVisioAutomation
         {
             double delta = 0.000000001;
 
-            var g1 = new SnappingGrid(1.0, 1.0);
+            var g1 = new VA.Drawing.SnappingGrid(1.0, 1.0);
 
             AssertVA.AssertSnap(0.0, 0.0, g1, 0.0, 0.0, delta);
             AssertVA.AssertSnap(0.0, 0.0, g1, 0.3, 0.3, delta);
@@ -30,7 +28,7 @@ namespace TestVisioAutomation
             AssertVA.AssertSnap(2.0, 2.0, g1, 1.5, 1.5, delta);
             AssertVA.AssertSnap(2.0, 2.0, g1, 1.500001, 1.500001, delta);
 
-            var g2 = new SnappingGrid(1.0, 0.3);
+            var g2 = new VA.Drawing.SnappingGrid(1.0, 0.3);
 
             AssertVA.AssertSnap(0.0, 0.0, g2, 0.0, 0.0, delta);
             AssertVA.AssertSnap(0.0, 0.0, g2, 0.3, 0.1, delta);
@@ -51,46 +49,46 @@ namespace TestVisioAutomation
             public void Internal_TestBezierFromArcs()
             {
                 // 0 width slice - 0 degrees
-                var s1 = BezierSegment.FromArc(0.0, 0.0);
+                var s1 = VA.Drawing.BezierSegment.FromArc(0.0, 0.0);
                 Assert.AreEqual(1, s1.Count());
                 AssertVA.AreEqual(s1[0].Start, s1[s1.Length - 1].End, this.delta);
 
                 // 0 width slice - 45 degrees
-                var s1x = BezierSegment.FromArc(this.piquarter, this.piquarter);
+                var s1x = VA.Drawing.BezierSegment.FromArc(this.piquarter, this.piquarter);
                 Assert.AreEqual(1, s1x.Count());
                 AssertVA.AreEqual(s1x[0].Start, s1x[s1.Length - 1].End, this.delta);
 
                 // a circle
-                var s2 = BezierSegment.FromArc(0.0, this.pi2);
+                var s2 = VA.Drawing.BezierSegment.FromArc(0.0, this.pi2);
                 Assert.AreEqual(4, s2.Count());
                 AssertVA.AreEqual(s2[0].Start, s2[s2.Length - 1].End, this.delta);
 
                 // angles within first quadrant
-                var s3 = BezierSegment.FromArc(this.piquarter - 0.1, this.piquarter + 0.2);
+                var s3 = VA.Drawing.BezierSegment.FromArc(this.piquarter - 0.1, this.piquarter + 0.2);
                 Assert.AreEqual(1, s3.Count());
 
                 // angles from first to 2nd quadrant
-                var s4 = BezierSegment.FromArc(this.piquarter - 0.1, this.pihalf + this.piquarter);
+                var s4 = VA.Drawing.BezierSegment.FromArc(this.piquarter - 0.1, this.pihalf + this.piquarter);
                 Assert.AreEqual(2, s4.Count());
 
                 // half circle - top
-                var s5 = BezierSegment.FromArc(0.0, Math.PI);
+                var s5 = VA.Drawing.BezierSegment.FromArc(0.0, Math.PI);
                 Assert.AreEqual(2, s5.Count());
 
                 // half circle - bottom
-                var s6 = BezierSegment.FromArc(Math.PI, this.pi2);
+                var s6 = VA.Drawing.BezierSegment.FromArc(Math.PI, this.pi2);
                 Assert.AreEqual(2, s6.Count());
 
                 // half circle - bottom
-                var s7 = BezierSegment.FromArc(this.pihalf, Math.PI + this.pihalf);
+                var s7 = VA.Drawing.BezierSegment.FromArc(this.pihalf, Math.PI + this.pihalf);
                 Assert.AreEqual(2, s7.Count());
 
                 // partial all quadrants
-                var s8 = BezierSegment.FromArc(this.piquarter, this.pi2 - this.piquarter);
+                var s8 = VA.Drawing.BezierSegment.FromArc(this.piquarter, this.pi2 - this.piquarter);
                 Assert.AreEqual(4, s8.Count());
 
                 // full circle
-                var s9 = BezierSegment.FromArc(this.piquarter, this.pi2 * 10 + this.piquarter);
+                var s9 = VA.Drawing.BezierSegment.FromArc(this.piquarter, this.pi2 * 10 + this.piquarter);
                 Assert.AreEqual(4, s8.Count());
             }
         }
@@ -104,13 +102,13 @@ namespace TestVisioAutomation
 
         public void SRCSizeIs6Bytes()
         {
-            var c1 = new SRC();
+            var c1 = new VA.ShapeSheet.SRC();
             Assert.AreEqual(6, Marshal.SizeOf(c1));
         }
 
         public void Verify_Size_of_instance()
         {
-            var instance = new FormulaLiteral();
+            var instance = new VA.ShapeSheet.FormulaLiteral();
             Assert.AreEqual(4, Marshal.SizeOf(instance));
         }
 
@@ -121,7 +119,7 @@ namespace TestVisioAutomation
             bool caught = false;
             try
             {
-                var ba = new BitArray2D(0, 1);
+                var ba = new VA.Internal.BitArray2D(0, 1);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -136,7 +134,7 @@ namespace TestVisioAutomation
             caught = false;
             try
             {
-                var ba = new BitArray2D(1, 0);
+                var ba = new VA.Internal.BitArray2D(1, 0);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -149,7 +147,7 @@ namespace TestVisioAutomation
             }
 
             // Create a 1x1 BitArray
-            var ba2 = new BitArray2D(1, 1);
+            var ba2 = new VA.Internal.BitArray2D(1, 1);
             Assert.AreEqual(false, ba2[0, 0]);
             ba2[0, 0] = true;
             Assert.AreEqual(true, ba2[0, 0]);

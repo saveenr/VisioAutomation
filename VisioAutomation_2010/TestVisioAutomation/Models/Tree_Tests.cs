@@ -1,5 +1,4 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
 using VisioAutomation.Extensions;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
@@ -56,7 +55,7 @@ namespace TestVisioAutomation
             nb.Children.Add(nb1);
             nb1.Children.Add(nb2);
 
-            t.LayoutOptions.DefaultNodeSize = new Size(1, 1);
+            t.LayoutOptions.DefaultNodeSize = new VA.Drawing.Size(1, 1);
 
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();

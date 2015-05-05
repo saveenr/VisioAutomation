@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisioAutomation.Drawing;
 using VisioAutomation.Extensions;
-using VisioAutomation.Models.Charting;
+using VACHART=VisioAutomation.Models.Charting;
 using IVisio= Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 
@@ -16,8 +15,8 @@ namespace TestVisioAutomation
         public void Page_Draw_Line()
         {
             var page1 = this.GetNewPage();
-            var p0 = new Point(0, 0);
-            var p1 = new Point(3, 2);
+            var p0 = new VA.Drawing.Point(0, 0);
+            var p1 = new VA.Drawing.Point(3, 2);
             var s0 = page1.DrawLine(p0, p1);
             page1.Delete(0);
         }
@@ -29,12 +28,12 @@ namespace TestVisioAutomation
             var page1 = this.GetNewPage();
             var points = new[]
                              {
-                                 new Point(0, 0), 
-                                 new Point(3, 3),
-                                 new Point(2, 0)
+                                 new VA.Drawing.Point(0, 0), 
+                                 new VA.Drawing.Point(3, 3),
+                                 new VA.Drawing.Point(2, 0)
                              };
 
-            var doubles_array = Point.ToDoubles(points).ToArray();
+            var doubles_array = VA.Drawing.Point.ToDoubles(points).ToArray();
             var s0 = page1.DrawSpline(doubles_array, 0, 0);
 
             page1.Delete(0);
@@ -44,23 +43,23 @@ namespace TestVisioAutomation
         public void Page_Draw_RoundedRectangle()
         {
             var page1 = this.GetNewPage();
-            var rect = new Rectangle(1, 1, 3, 2);
+            var rect = new VA.Drawing.Rectangle(1, 1, 3, 2);
             // draw an inital framing rectangle so the coordinates are easy to calculate
             var s0 = page1.DrawRectangle(rect);
             double width = rect.Width;
             double height = rect.Height;
             double delta = 1.0/8.0;
 
-            var o = new Point(0, 0);
+            var o = new VA.Drawing.Point(0, 0);
 
-            var a = new Point(o.X + delta, o.Y);
-            var b = new Point(o.X, o.Y + delta);
-            var c = new Point(o.X, o.Y + height - delta);
-            var d = new Point(o.X + delta, o.Y + height);
-            var e = new Point(o.X + width - delta, o.Y + height);
-            var f = new Point(o.X + width, o.Y + height - delta);
-            var g = new Point(o.X + width, o.Y + delta);
-            var h = new Point(o.X + width - delta, o.Y);
+            var a = new VA.Drawing.Point(o.X + delta, o.Y);
+            var b = new VA.Drawing.Point(o.X, o.Y + delta);
+            var c = new VA.Drawing.Point(o.X, o.Y + height - delta);
+            var d = new VA.Drawing.Point(o.X + delta, o.Y + height);
+            var e = new VA.Drawing.Point(o.X + width - delta, o.Y + height);
+            var f = new VA.Drawing.Point(o.X + width, o.Y + height - delta);
+            var g = new VA.Drawing.Point(o.X + width, o.Y + delta);
+            var h = new VA.Drawing.Point(o.X + width - delta, o.Y);
 
             var bottom_left_curve = s0.DrawQuarterArc(a, b, IVisio.VisArcSweepFlags.visArcSweepFlagConcave);
             var left_side = s0.DrawLine(b, c);
@@ -93,13 +92,13 @@ namespace TestVisioAutomation
 
             foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
             {
-                var center = new Point(cx, cy);
-                var ps = new PieSlice(center, radius, start_angle, end_angle);
+                var center = new VA.Drawing.Point(cx, cy);
+                var ps = new VACHART.PieSlice(center, radius, start_angle, end_angle);
                 ps.Render(page);
                 cx += 2.5;
             }
 
-            var bordersize = new Size(1, 1);
+            var bordersize = new VA.Drawing.Size(1, 1);
             page.ResizeToFitContents(bordersize);
 
             doc.Close(true);
@@ -121,13 +120,13 @@ namespace TestVisioAutomation
 
             foreach (double end_angle in Enumerable.Range(0, n).Select(i => i * angle_step))
             {
-                var center = new Point(cx, cy);
-                var slice = new PieSlice(center, start_angle, end_angle, radius - 0.2, radius);
+                var center = new VA.Drawing.Point(cx, cy);
+                var slice = new VACHART.PieSlice(center, start_angle, end_angle, radius - 0.2, radius);
                 slice.Render(page);
                 cx += 2.5;
             }
 
-            var bordersize = new Size(1, 1);
+            var bordersize = new VA.Drawing.Size(1, 1);
             page.ResizeToFitContents(bordersize);
             doc.Close(true);
         }
@@ -145,7 +144,7 @@ namespace TestVisioAutomation
 
             var masters1 = stencil_doc.Masters;
             var masters = new [] {masters1["Rounded Rectangle"], masters1["Ellipse"]};
-            var points = new [] {new Point(1, 2), new Point(3, 4)};
+            var points = new [] {new VA.Drawing.Point(1, 2), new VA.Drawing.Point(3, 4)};
             Assert.AreEqual(0, page1.Shapes.Count);
             var shapeids = page1.DropManyU(masters, points);
             Assert.AreEqual(2, page1.Shapes.Count);

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using VisioAutomation.ShapeSheet.Query;
+using VAQUERY=VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -48,15 +48,15 @@ namespace VisioAutomation.Shapes
             return XFormCells._mCellQuery;
         }
 
-        class XFormCellQuery : CellQuery
+        class XFormCellQuery : VAQUERY.CellQuery
         {
-            public CellColumn Width { get; set; }
-            public CellColumn Height { get; set; }
-            public CellColumn PinX { get; set; }
-            public CellColumn PinY { get; set; }
-            public CellColumn LocPinX { get; set; }
-            public CellColumn LocPinY { get; set; }
-            public CellColumn Angle { get; set; }
+            public VAQUERY.CellColumn Width { get; set; }
+            public VAQUERY.CellColumn Height { get; set; }
+            public VAQUERY.CellColumn PinX { get; set; }
+            public VAQUERY.CellColumn PinY { get; set; }
+            public VAQUERY.CellColumn LocPinX { get; set; }
+            public VAQUERY.CellColumn LocPinY { get; set; }
+            public VAQUERY.CellColumn Angle { get; set; }
 
             public XFormCellQuery()
             {
