@@ -32,7 +32,7 @@ namespace VisioPowerShell.Commands
 
             var cellmap = CellSRCDictionary.GetCellMapForShapes();
             var valuemap = new CellValueDictionary(cellmap);
-            valuemap.UpdateValueMap(this.Hashtable);
+            valuemap.UpdateValueMap(this.Hashtable, cellmap);
 
             var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
 

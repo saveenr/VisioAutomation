@@ -20,11 +20,16 @@ namespace VisioPowerShell
             return this.srcmap[name];
         }
 
-        public void UpdateValueMap(Hashtable ht)
+        public void UpdateValueMap(Hashtable ht, CellSRCDictionary cellmap)
         {
-            if (ht != null)
+            if (ht == null)
             {
                 throw new System.ArgumentNullException("ht");
+            }
+
+            if (cellmap == null)
+            {
+                throw new System.ArgumentNullException("cellmap");
             }
 
             // Validate that all the keys are strings
@@ -50,9 +55,17 @@ namespace VisioPowerShell
             // We are certain all the keys are strings and all the values are not null
             foreach (object key_o in ht.Keys)
             {
-                string key_string = (string)key_o;
-                var value_string = get_value_string(ht[key_o]);
-                       }
+                string key_string = (string) key_o;
+
+                if (!cellmap.ContainsCell(key_string))
+                {
+                    string message = string.Format("Cell \"{0}\" is not supported", key_string);
+                    throw new System.ArgumentOutOfRangeException("ht", message);                    
+                }
+                var value_o = ht[key_o];
+                var value_string = get_value_string(value_o);
+            }
+        }
 
         private static string get_value_string(object value_o)
         {

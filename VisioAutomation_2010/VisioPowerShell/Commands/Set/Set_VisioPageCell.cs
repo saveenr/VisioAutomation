@@ -33,8 +33,7 @@ namespace VisioPowerShell.Commands
 
             var cellmap = CellSRCDictionary.GetCellMapForPages();
             var valuemap = new CellValueDictionary(cellmap);
-
-            valuemap.UpdateValueMap(this.Hashtable);
+            valuemap.UpdateValueMap(this.Hashtable,cellmap);
 
             foreach (var page in target_pages)
             {
