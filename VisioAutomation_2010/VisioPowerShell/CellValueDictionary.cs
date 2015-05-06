@@ -37,37 +37,35 @@ namespace VisioPowerShell
             {
                 if (!(key_o is string))
                 {
-                    string message = "Only string values can be keys in the hashtable";
+                    string message = string.Format("Only string values can be keys in the hashtable. Encountered a key of type {0}", key_o.GetType().FullName);
                     throw new System.ArgumentOutOfRangeException("ht", message);
                 }
             }
 
-            // Validate that all the keys are strings
-            foreach (object values_o in ht.Values)
-            {
-                if (values_o == null)
-                {
-                    string message = "Null values not allowed for cellvalues";
-                    throw new System.ArgumentOutOfRangeException("ht", message);
-                }
-            }
 
-            // We are certain all the keys are strings and all the values are not null
+            // We are certain all the keys are strings
             foreach (object key_o in ht.Keys)
             {
-                string key_string = (string) key_o;
+                string cellname = (string) key_o;
 
-                if (!cellmap.ContainsCell(key_string))
+                if (!cellmap.ContainsCell(cellname))
                 {
-                    string message = string.Format("Cell \"{0}\" is not supported", key_string);
+                    string message = string.Format("Cell \"{0}\" is not supported", cellname);
                     throw new System.ArgumentOutOfRangeException("ht", message);                    
                 }
-                var value_o = ht[key_o];
-                var value_string = get_value_string(value_o);
+                var cell_value_o = ht[key_o];
+
+                if (cell_value_o == null)
+                {
+                    string message = string.Format("Cell {0} has a null value. Use a non-null value", cellname);
+                    throw new System.ArgumentOutOfRangeException("ht", message);
+                }
+
+                var cell_value_string = get_value_string(cell_value_o, cellname);
             }
         }
 
-        private static string get_value_string(object value_o)
+        private static string get_value_string(object value_o, string cellname)
         {
             var culture = CultureInfo.InvariantCulture;
 
@@ -93,7 +91,8 @@ namespace VisioPowerShell
             }
             else
             {
-                string message = string.Format("Cell values cannot be of type {0} ", value_o.GetType().Name);
+                var value_type_name = value_o.GetType().FullName;
+                string message = string.Format("Cell {0} has an unsupported type {1} ", cellname, value_type_name);
                 throw new ArgumentOutOfRangeException(message);
             }
             return value_string;
