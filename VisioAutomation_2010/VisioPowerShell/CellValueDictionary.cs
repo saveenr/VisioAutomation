@@ -20,31 +20,39 @@ namespace VisioPowerShell
             return this.srcmap[name];
         }
 
-        public void UpdateValueMap(Hashtable Hashtable)
+        public void UpdateValueMap(Hashtable ht)
         {
-            if (Hashtable != null)
+            if (ht != null)
             {
-                foreach (object key_o in Hashtable.Keys)
+                throw new System.ArgumentNullException("ht");
+            }
+
+            // Validate that all the keys are strings
+            foreach (object key_o in ht.Keys)
+            {
+                if (!(key_o is string))
                 {
-                    if (!(key_o is string))
-                    {
-                        string message = "Only string values can be keys in the hashtable";
-                        throw new ArgumentOutOfRangeException(message);
-                    }
-                    string key_string = (string)key_o;
-
-                    object value_o = Hashtable[key_o];
-                    if (value_o == null)
-                    {
-                        string message = "Null values not allowed for cellvalues";
-                        throw new ArgumentOutOfRangeException(message);
-                    }
-
-                    var value_string = CellValueDictionary.get_value_string(value_o);
-                    this[key_string] = value_string;
+                    string message = "Only string values can be keys in the hashtable";
+                    throw new System.ArgumentOutOfRangeException("ht", message);
                 }
             }
-        }
+
+            // Validate that all the keys are strings
+            foreach (object values_o in ht.Values)
+            {
+                if (values_o == null)
+                {
+                    string message = "Null values not allowed for cellvalues";
+                    throw new System.ArgumentOutOfRangeException("ht", message);
+                }
+            }
+
+            // We are certain all the keys are strings and all the values are not null
+            foreach (object key_o in ht.Keys)
+            {
+                string key_string = (string)key_o;
+                var value_string = get_value_string(ht[key_o]);
+                       }
 
         private static string get_value_string(object value_o)
         {
