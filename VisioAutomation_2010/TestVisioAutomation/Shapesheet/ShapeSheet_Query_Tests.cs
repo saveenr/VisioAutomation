@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VACONT = VisioAutomation.Shapes.Controls;
-using VACUSTOMPROP = VisioAutomation.Shapes.CustomProperties;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -165,13 +165,13 @@ namespace TestVisioAutomation.Shapesheet
             var s3 = page1.DrawRectangle(3, 1, 4, 2);
             var s4 = page1.DrawRectangle(4, -1, 5, 1);
 
-            VACUSTOMPROP.CustomPropertyHelper.Set(s1, "S1P1", "1");
-            VACUSTOMPROP.CustomPropertyHelper.Set(s2, "S2P1", "2");
-            VACUSTOMPROP.CustomPropertyHelper.Set(s2, "S2P2", "3");
+            VACUSTPROP.CustomPropertyHelper.Set(s1, "S1P1", "1");
+            VACUSTPROP.CustomPropertyHelper.Set(s2, "S2P1", "2");
+            VACUSTPROP.CustomPropertyHelper.Set(s2, "S2P2", "3");
             //set nothing for s3
-            VACUSTOMPROP.CustomPropertyHelper.Set(s4, "S3P1", "4");
-            VACUSTOMPROP.CustomPropertyHelper.Set(s4, "S3P2", "5");
-            VACUSTOMPROP.CustomPropertyHelper.Set(s4, "S3P3", "6");
+            VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P1", "4");
+            VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P2", "5");
+            VACUSTPROP.CustomPropertyHelper.Set(s4, "S3P3", "6");
 
             var query = new VA.ShapeSheet.Query.CellQuery();
 

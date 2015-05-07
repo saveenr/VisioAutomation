@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VA_CXN=VisioAutomation.Shapes.Connections;
+using VACONNECT=VisioAutomation.Shapes.Connections;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 
@@ -19,21 +19,21 @@ namespace VisioAutomation.Scripting.Commands
         /// </summary>
         /// <param name="flag"></param>
         /// <returns></returns>
-        public IList<VA_CXN.ConnectorEdge> GetTransitiveClosure(VA_CXN.ConnectorEdgeHandling flag)
+        public IList<VACONNECT.ConnectorEdge> GetTransitiveClosure(VACONNECT.ConnectorEdgeHandling flag)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
             var app = this.Client.VisioApplication;
-            return VA_CXN.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
+            return VACONNECT.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
-        public IList<VA_CXN.ConnectorEdge> GetDirectedEdges(VA_CXN.ConnectorEdgeHandling flag)
+        public IList<VACONNECT.ConnectorEdge> GetDirectedEdges(VACONNECT.ConnectorEdgeHandling flag)
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var directed_edges = VA_CXN.PathAnalysis.GetDirectedEdges(this.Client.VisioApplication.ActivePage, flag);
+            var directed_edges = VACONNECT.PathAnalysis.GetDirectedEdges(this.Client.VisioApplication.ActivePage, flag);
             return directed_edges;
         }
 
@@ -48,12 +48,12 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (master == null)
                 {
-                    var connectors = VA_CXN.ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
+                    var connectors = VACONNECT.ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, null, false);
                     return connectors;                    
                 }
                 else
                 {
-                    var connectors = VA_CXN.ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
+                    var connectors = VACONNECT.ConnectorHelper.ConnectShapes(active_page, fromshapes, toshapes, master);
                     return connectors;
                 }
             }

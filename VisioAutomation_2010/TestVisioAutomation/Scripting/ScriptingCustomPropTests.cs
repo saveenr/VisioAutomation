@@ -1,6 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VACUSTOMPROP = VisioAutomation.Shapes.CustomProperties;
+using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 
 namespace TestVisioAutomation.Scripting
@@ -47,7 +47,7 @@ namespace TestVisioAutomation.Scripting
             Assert.AreEqual(0, prop_dic0[s2].Count);
             Assert.AreEqual(0, prop_dic0[s3].Count);
 
-            var cp = new VACUSTOMPROP.CustomPropertyCells();
+            var cp = new VACUSTPROP.CustomPropertyCells();
             cp.Value = "BAR";
             client.CustomProp.Set(null,"FOO",cp);
 

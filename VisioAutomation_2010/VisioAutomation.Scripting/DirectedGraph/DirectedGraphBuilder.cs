@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using VACXN = VisioAutomation.Shapes.Connections;
+using VACONNECT = VisioAutomation.Shapes.Connections;
 using VACUSTPROP = VisioAutomation.Shapes.CustomProperties;
 using SXL = System.Xml.Linq;
 using VA = VisioAutomation;
@@ -167,7 +167,7 @@ namespace VisioAutomation.Scripting.DirectedGraph
                 client.WriteVerbose( "Creating connector AutoLayout nodes");
                 foreach (var con_info in pagedata.ConnectorInfos)
                 {
-                    var def_connector_type = VACXN.ConnectorType.Curved;
+                    var def_connector_type = VACONNECT.ConnectorType.Curved;
                     var connectory_type = def_connector_type;
 
                     var from_shape = pagedata.DirectedGraph.Shapes.Find(con_info.From);

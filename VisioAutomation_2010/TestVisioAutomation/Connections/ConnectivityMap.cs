@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VACXN = VisioAutomation.Shapes.Connections;
+using VACONNECT = VisioAutomation.Shapes.Connections;
 
 namespace TestVisioAutomation.Connections
 {
@@ -7,7 +7,7 @@ namespace TestVisioAutomation.Connections
     {
         private readonly Dictionary<string, List<string>> dic;
 
-        public ConnectivityMap(IList<VACXN.ConnectorEdge> edges)
+        public ConnectivityMap(IList<VACONNECT.ConnectorEdge> edges)
         {
             this.dic = new Dictionary<string, List<string>>();
             foreach (var e in edges)

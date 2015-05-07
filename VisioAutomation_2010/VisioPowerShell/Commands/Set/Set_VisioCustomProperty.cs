@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using VisioAutomation.Shapes.CustomProperties;
+using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -63,7 +63,7 @@ namespace VisioPowerShell.Commands
 
         private void SetFromParameters()
         {
-            var cp = new CustomPropertyCells();
+            var cp = new VACUSTPROP.CustomPropertyCells();
 
             cp.Value = this.Value;
 
@@ -133,7 +133,7 @@ namespace VisioPowerShell.Commands
                 string key_string = (string) key;
 
                 object value = this.HashTable[key];
-                var cp = CustomPropertyCells.FromValue(value);
+                var cp = VACUSTPROP.CustomPropertyCells.FromValue(value);
                 this.client.CustomProp.Set(this.Shapes, key_string, cp);
             }
         }

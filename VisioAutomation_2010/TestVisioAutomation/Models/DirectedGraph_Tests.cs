@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VACONNECT = VisioAutomation.Shapes.Connections;
-using CUSTOMPROP=VisioAutomation.Shapes.CustomProperties;
+using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using DG = VisioAutomation.Models.DirectedGraph;
@@ -56,10 +56,10 @@ namespace TestVisioAutomation.Models
             var n0 = d.AddShape("n0", "Untitled Node", "basflo_u.vss",
                                    "Decision");
             n0.Size = new VA.Drawing.Size(3, 2);
-            n0.CustomProperties = new Dictionary<string, CUSTOMPROP.CustomPropertyCells>();
-            n0.CustomProperties["p1"] = new CUSTOMPROP.CustomPropertyCells("v1");
-            n0.CustomProperties["p2"] = new CUSTOMPROP.CustomPropertyCells("v2");
-            n0.CustomProperties["p3"] = new CUSTOMPROP.CustomPropertyCells("v3");
+            n0.CustomProperties = new Dictionary<string, VACUSTPROP.CustomPropertyCells>();
+            n0.CustomProperties["p1"] = new VACUSTPROP.CustomPropertyCells("v1");
+            n0.CustomProperties["p2"] = new VACUSTPROP.CustomPropertyCells("v2");
+            n0.CustomProperties["p3"] = new VACUSTPROP.CustomPropertyCells("v3");
 
             var options = new DG.MsaglLayoutOptions();
             options.UseDynamicConnectors = true;
@@ -71,7 +71,7 @@ namespace TestVisioAutomation.Models
             d.Render(page1, options);
             
             Assert.IsNotNull(n0.VisioShape);
-            var props_dic = CUSTOMPROP.CustomPropertyHelper.Get(n0.VisioShape);
+            var props_dic = VACUSTPROP.CustomPropertyHelper.Get(n0.VisioShape);
             Assert.IsTrue(props_dic.Count>=3);
             Assert.AreEqual("\"v1\"",props_dic["p1"].Value.Formula);
             Assert.AreEqual("\"v2\"", props_dic["p2"].Value.Formula);
