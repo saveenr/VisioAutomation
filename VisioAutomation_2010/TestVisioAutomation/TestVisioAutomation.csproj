@@ -95,6 +95,7 @@
     <Compile Include="DOM\DOM_Text.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Internal\TypeTests.cs" />
     <Compile Include="Models\CointainerLayout_Tests.cs" />
     <Compile Include="Models\Chart_Tests.cs" />
     <Compile Include="Models\ResizePageTests.cs" />

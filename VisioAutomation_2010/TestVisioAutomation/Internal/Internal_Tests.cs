@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VA = VisioAutomation;
 
@@ -40,12 +39,12 @@ namespace TestVisioAutomation.Internal
         public class BezierTests : VisioAutomationTest
         {
             private double delta = 0.00000000001;
-            private double pi2 = Math.PI * 2;
-            private double pihalf = Math.PI / 2;
-            private double piquarter = Math.PI / 4;
+            private double pi2 = Math.PI*2;
+            private double pihalf = Math.PI/2;
+            private double piquarter = Math.PI/4;
 
             [TestMethod]
-            public void Internal_TestBezierFromArcs()
+            public void TestBezierFromArcs()
             {
                 // 0 width slice - 0 degrees
                 var s1 = VA.Drawing.BezierSegment.FromArc(0.0, 0.0);
@@ -87,71 +86,9 @@ namespace TestVisioAutomation.Internal
                 Assert.AreEqual(4, s8.Count());
 
                 // full circle
-                var s9 = VA.Drawing.BezierSegment.FromArc(this.piquarter, this.pi2 * 10 + this.piquarter);
+                var s9 = VA.Drawing.BezierSegment.FromArc(this.piquarter, this.pi2*10 + this.piquarter);
                 Assert.AreEqual(4, s8.Count());
             }
-        }
-
-        [TestMethod]
-        public void Internal_ShapeSheet_VerifySRCLayout()
-        {
-            this.SRCSizeIs6Bytes();
-            this.Verify_Size_of_instance();
-        }
-
-        public void SRCSizeIs6Bytes()
-        {
-            var c1 = new VA.ShapeSheet.SRC();
-            Assert.AreEqual(6, Marshal.SizeOf(c1));
-        }
-
-        public void Verify_Size_of_instance()
-        {
-            var instance = new VA.ShapeSheet.FormulaLiteral();
-            Assert.AreEqual(4, Marshal.SizeOf(instance));
-        }
-
-        [TestMethod]
-        public void Internal_Construct2DBitArray()
-        {
-            // check that cols and rows must be > 0
-            bool caught = false;
-            try
-            {
-                var ba = new VA.Internal.BitArray2D(0, 1);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                caught = true;
-            }
-
-            if (caught == false)
-            {
-                Assert.Fail("Did not catch expected exception");
-            }
-
-            caught = false;
-            try
-            {
-                var ba = new VA.Internal.BitArray2D(1, 0);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                caught = true;
-            }
-
-            if (caught == false)
-            {
-                Assert.Fail("Did not catch expected exception");
-            }
-
-            // Create a 1x1 BitArray
-            var ba2 = new VA.Internal.BitArray2D(1, 1);
-            Assert.AreEqual(false, ba2[0, 0]);
-            ba2[0, 0] = true;
-            Assert.AreEqual(true, ba2[0, 0]);
-            ba2[0, 0] = false;
-            Assert.AreEqual(false, ba2[0, 0]);
         }
     }
 }
