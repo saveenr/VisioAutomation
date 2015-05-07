@@ -1,4 +1,3 @@
-using VisioAutomation.Scripting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -29,7 +28,7 @@ namespace VisioPowerShell.Commands
             this.WriteObject(page);
         }
 
-        public static void set_page_size(Client client, double width, double height)
+        public static void set_page_size(VA.Scripting.Client client, double width, double height)
         {
             double? w = null;
             double? h = null;

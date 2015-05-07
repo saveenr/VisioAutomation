@@ -1,5 +1,4 @@
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -22,7 +21,7 @@ namespace VisioPowerShell.Commands
         
         protected override void ProcessRecord()
         {
-            var points = Point.FromDoubles(this.ControlPoints).ToList();
+            var points = VA.Drawing.Point.FromDoubles(this.ControlPoints).ToList();
             var shape = this.client.Draw.NURBSCurve(points, this.Knots, this.Weights, this.Degree);
             this.WriteObject(shape);
         }

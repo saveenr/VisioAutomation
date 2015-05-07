@@ -1,4 +1,3 @@
-using VisioAutomation.Drawing;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
@@ -26,9 +25,9 @@ namespace VisioPowerShell.Commands
             this.WriteObject(shape);
         }
 
-        protected Rectangle GetRectangle()
+        protected VisioAutomation.Drawing.Rectangle GetRectangle()
         {
-            return new Rectangle(this.X0, this.Y0, this.X1, this.Y1);
+            return new VisioAutomation.Drawing.Rectangle(this.X0, this.Y0, this.X1, this.Y1);
         }
     }
 }

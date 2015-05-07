@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using VisioAutomation.Scripting;
-using VisioAutomation.ShapeSheet;
-using VisioAutomation.ShapeSheet.Query;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
@@ -10,7 +7,7 @@ namespace VisioPowerShell
 {
     static class Helpers
     {
-        private static DataTable querytable_to_datatable<T>(CellQuery cellQuery, QueryResultList<T> query_output)
+        private static DataTable querytable_to_datatable<T>(VisioAutomation.ShapeSheet.Query.CellQuery cellQuery, VisioAutomation.ShapeSheet.Query.QueryResultList<T> query_output)
         {
             // First Construct a Datatable with a compatible schema
             var dt = new DataTable();
@@ -42,7 +39,7 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheet.Query.CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
             if (getresults)
             {
@@ -68,7 +65,7 @@ namespace VisioPowerShell
                 }
                 else
                 {
-                    throw new VisioApplicationException("Unsupported Result type");
+                    throw new VisioAutomation.Scripting.VisioApplicationException("Unsupported Result type");
                 }
             }
             else

@@ -1,5 +1,4 @@
-﻿using VisioAutomation.ShapeSheet;
-using IVisio = Microsoft.Office.Interop.Visio;
+﻿using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
 namespace VisioPowerShell.Commands
@@ -8,7 +7,7 @@ namespace VisioPowerShell.Commands
     public class Set_VisioShapeSheet : VisioCmdlet
     {
         [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
-        public SRC[] Cell { get; set; }
+        public VisioAutomation.ShapeSheet.SRC[] Cell { get; set; }
 
         [SMA.ParameterAttribute(Position = 1, Mandatory = true)]
         public string[] Value { get; set; }

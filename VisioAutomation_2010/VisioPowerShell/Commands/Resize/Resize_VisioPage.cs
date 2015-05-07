@@ -1,6 +1,3 @@
-using VisioAutomation.Drawing;
-using VisioAutomation.Pages;
-using VisioAutomation.ShapeSheet;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -26,16 +23,16 @@ namespace VisioPowerShell.Commands
         {
             if (this.FitContents)
             {
-                var bordersize = new Size(this.BorderWidth, this.BorderWidth);
+                var bordersize = new VisioAutomation.Drawing.Size(this.BorderWidth, this.BorderWidth);
                 this.client.Page.ResizeToFitContents(bordersize, true);                
             }
 
             if (this.Width > 0 || this.Height > 0)
             {
                 var page = this.client.VisioApplication.ActivePage;
-                var pagecells = PageCells.GetCells(page.PageSheet);
+                var pagecells = VisioAutomation.Pages.PageCells.GetCells(page.PageSheet);
 
-                var newpagecells = new PageCells();
+                var newpagecells = new VisioAutomation.Pages.PageCells();
                 
                 if (this.Width > 0)
                 {
@@ -47,7 +44,7 @@ namespace VisioPowerShell.Commands
                     newpagecells.PageHeight = this.Height;
                 }
 
-                var update = new Update();
+                var update = new VisioAutomation.ShapeSheet.Update();
                 update.SetFormulas(newpagecells);
                 update.BlastGuards = true;
                 update.Execute(page);

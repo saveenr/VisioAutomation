@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using VisioAutomation.Drawing;
-using VisioAutomation.Shapes;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA=VisioAutomation;
 using SMA = System.Management.Automation;
@@ -23,11 +21,11 @@ namespace VisioPowerShell.Commands
         {
             this.WriteVerbose("NoSelect: {0}", this.NoSelect);
 
-            var points = Point.FromDoubles(this.Points).ToList();
+            var points = VisioAutomation.Drawing.Point.FromDoubles(this.Points).ToList();
             var shape_ids = this.client.Master.Drop(this.Masters, points);
 
             var page = this.client.Page.Get();
-            var shape_objects = ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
+            var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
 
             this.client.Selection.None();
 

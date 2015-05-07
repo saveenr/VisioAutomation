@@ -1,5 +1,4 @@
 using System.IO;
-using VisioAutomation.Scripting;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
@@ -14,7 +13,7 @@ namespace VisioPowerShell
         // 
         // To prevent confustion this should be the only static 
         // variable defined in VisioPS
-        private static Client _client;
+        private static VisioAutomation.Scripting.Client _client;
 
         // Attached Visio Application represents the Visio instance
         //
@@ -25,14 +24,14 @@ namespace VisioPowerShell
         // AttachedApplication != null && it is an unusable instance. For example
         //                     it might have been manually deleted
 
-        public Client client
+        public VisioAutomation.Scripting.Client client
         {
             get
             {
                 // if a scripting client is not available create one and cache it
                 // for the lifetime of this cmdlet
 
-                VisioCmdlet._client = VisioCmdlet._client ?? new Client(null);
+                VisioCmdlet._client = VisioCmdlet._client ?? new VisioAutomation.Scripting.Client(null);
                 VisioCmdlet._client.Context = new VisioPsContext(this);
                 return VisioCmdlet._client;
 

@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Linq;
-using VisioAutomation.Application;
-using VisioAutomation.ShapeSheet;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using VA = VisioAutomation;
@@ -25,7 +23,7 @@ namespace VisioPowerShell.Commands
         
         protected override void ProcessRecord()
         {
-            var update = new Update();
+            var update = new VisioAutomation.ShapeSheet.Update();
             update.BlastGuards = this.BlastGuards;
             update.TestCircular= this.TestCircular;
 
@@ -51,7 +49,7 @@ namespace VisioPowerShell.Commands
                 this.WriteVerbose("Number of Total Updates: {0}", update.Count());
                 this.WriteVerbose("Number of Updates per Shape: {0}", update.Count() / 1);
 
-                using (var undoscope = new UndoScope(this.client.VisioApplication, "SetPageCells"))
+                using (var undoscope = new VisioAutomation.Application.UndoScope(this.client.VisioApplication, "SetPageCells"))
                 {
                     this.WriteVerbose("Start Update");
                     update.Execute(pagesheet);

@@ -1,5 +1,3 @@
-using VisioAutomation.Drawing;
-using VisioAutomation.Models.Charting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -28,10 +26,10 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var center = new Point(this.X0, this.Y0);
-            var chart = new PieChart(center,this.Radius);
+            var center = new VisioAutomation.Drawing.Point(this.X0, this.Y0);
+            var chart = new VisioAutomation.Models.Charting.PieChart(center,this.Radius);
             chart.InnerRadius = this.InnerRadius;
-            chart.DataPoints = new DataPointList(this.Values, this.Labels);
+            chart.DataPoints = new VisioAutomation.Models.Charting.DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
         }
     }

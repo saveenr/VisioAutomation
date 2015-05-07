@@ -1,5 +1,4 @@
-﻿using VisioAutomation.Drawing;
-using IVisio=Microsoft.Office.Interop.Visio;
+﻿using IVisio=Microsoft.Office.Interop.Visio;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using GRID = VisioAutomation.Models.Grid;
@@ -38,9 +37,9 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var cellsize = new Size(this.CellWidth, this.CellHeight);
+            var cellsize = new VA.Drawing.Size(this.CellWidth, this.CellHeight);
             var layout = new GRID.GridLayout(this.Columns, this.Rows, cellsize, this.Master);
-            layout.CellSpacing = new Size(this.CellHorizontalSpacing, this.CellVerticalSpacing);
+            layout.CellSpacing = new VA.Drawing.Size(this.CellHorizontalSpacing, this.CellVerticalSpacing);
             layout.RowDirection = this.RowDirection;
             layout.ColumnDirection = this.ColumnDirection;
             this.WriteObject(layout);

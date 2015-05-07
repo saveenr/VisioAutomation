@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using VisioAutomation.Shapes.Connections;
+using VACONNECT=VisioAutomation.Shapes.Connections;
 using SMA = System.Management.Automation;
 using VA=VisioAutomation;
 
@@ -32,29 +32,29 @@ namespace VisioPowerShell.Commands
                 
         }
 
-        private ConnectorEdgeHandling get_DirectedEdgeHandling()
+        private VACONNECT.ConnectorEdgeHandling get_DirectedEdgeHandling()
         {
-            var flag = ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
+            var flag = VACONNECT.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
 
             if (this.Raw)
             {
-                flag = ConnectorEdgeHandling.Raw;
+                flag = VACONNECT.ConnectorEdgeHandling.Raw;
             }
             else
             {
                 if (this.TreatUndirectedAsBidirectional)
                 {
-                    flag = ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
+                    flag = VACONNECT.ConnectorEdgeHandling.Arrow_TreatConnectorsWithoutArrowsAsBidirectional;
                 }
                 else
                 {
-                    flag = ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
+                    flag = VACONNECT.ConnectorEdgeHandling.Arrow_ExcludeConnectorsWithoutArrows;
                 }
             }
             return flag;
         }
 
-        private void write_edges_with_shapeids(IList<ConnectorEdge> edges)
+        private void write_edges_with_shapeids(IList<VACONNECT.ConnectorEdge> edges)
         {
             foreach (var edge in edges)
             {

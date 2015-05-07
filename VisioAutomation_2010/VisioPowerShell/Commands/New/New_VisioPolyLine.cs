@@ -1,5 +1,4 @@
 using System.Linq;
-using VisioAutomation.Drawing;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -13,7 +12,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var points = Point.FromDoubles(this.Doubles).ToList();
+            var points = VisioAutomation.Drawing.Point.FromDoubles(this.Doubles).ToList();
             var shape = this.client.Draw.PolyLine(points);
             this.WriteObject(shape);
         }

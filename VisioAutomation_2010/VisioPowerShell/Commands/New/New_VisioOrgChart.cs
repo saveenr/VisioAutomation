@@ -1,4 +1,3 @@
-using VisioAutomation.Models.OrgChart;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -9,7 +8,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            var orgchart = new OrgChartDocument();
+            var orgchart = new VA.Models.OrgChart.OrgChartDocument();
             this.WriteObject(orgchart);
         }
     }

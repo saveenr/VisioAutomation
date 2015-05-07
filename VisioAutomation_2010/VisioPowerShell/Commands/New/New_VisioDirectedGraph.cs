@@ -1,4 +1,3 @@
-using VisioAutomation.Models.DirectedGraph;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -9,7 +8,7 @@ namespace VisioPowerShell.Commands
     {
         protected override void ProcessRecord()
         {
-            var dg_model = new Drawing();
+            var dg_model = new VA.Models.DirectedGraph.Drawing();
             this.WriteObject(dg_model);
         }
     }

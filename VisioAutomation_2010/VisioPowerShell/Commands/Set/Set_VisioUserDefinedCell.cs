@@ -1,4 +1,3 @@
-using VisioAutomation.Shapes.UserDefinedCells;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -22,7 +21,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var userprop = new UserDefinedCell(this.Name, this.Value);
+            var userprop = new VisioAutomation.Shapes.UserDefinedCells.UserDefinedCell(this.Name, this.Value);
             if (this.Prompt != null)
             {
                 userprop.Prompt = this.Prompt;

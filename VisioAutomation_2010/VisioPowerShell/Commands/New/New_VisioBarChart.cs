@@ -1,5 +1,3 @@
-using VisioAutomation.Drawing;
-using VisioAutomation.Models.Charting;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -29,14 +27,14 @@ namespace VisioPowerShell.Commands
         protected override void ProcessRecord()
         {
             var rect = this.GetRectangle();
-            var chart = new BarChart(rect);
-            chart.DataPoints = new DataPointList(this.Values, this.Labels);
+            var chart = new VA.Models.Charting.BarChart(rect);
+            chart.DataPoints = new VA.Models.Charting.DataPointList(this.Values, this.Labels);
             this.WriteObject(chart);
         }
 
-        protected Rectangle GetRectangle()
+        protected VA.Drawing.Rectangle GetRectangle()
         {
-            return new Rectangle(this.X0, this.Y0, this.X1, this.Y1);
+            return new VA.Drawing.Rectangle(this.X0, this.Y0, this.X1, this.Y1);
         }
     }
 }

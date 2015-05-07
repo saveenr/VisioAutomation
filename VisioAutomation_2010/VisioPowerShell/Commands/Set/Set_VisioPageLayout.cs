@@ -1,4 +1,3 @@
-using VisioAutomation.Pages;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
@@ -17,7 +16,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Orientation != PageOrientation.None)
             {
-                this.client.Page.SetOrientation((PrintPageOrientation) this.Orientation);
+                this.client.Page.SetOrientation((VisioAutomation.Pages.PrintPageOrientation) this.Orientation);
             }
 
             if (this.BackgroundPage != null)
