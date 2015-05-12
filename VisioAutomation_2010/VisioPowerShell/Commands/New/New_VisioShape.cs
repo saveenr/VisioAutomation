@@ -39,7 +39,8 @@ namespace VisioPowerShell.Commands
                      string cur_name = this.Names[i];
                      if (cur_name != null)
                      {
-                         shape_objects[i].NameU = cur_name;                         
+                         var cur_shape = shape_objects[i];
+                         cur_shape.NameU = cur_name;                         
                      }
                  }
              }
