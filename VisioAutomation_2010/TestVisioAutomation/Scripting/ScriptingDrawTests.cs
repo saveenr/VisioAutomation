@@ -471,11 +471,12 @@ namespace TestVisioAutomation.Scripting
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var app = active_page.Application;
-            var vis_built_in_stencil_containers = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
-            var vis_measurement_system = IVisio.VisMeasurementSystem.visMSUS;
-            var built_in_stencil_file = app.GetBuiltInStencilFile(vis_built_in_stencil_containers, vis_measurement_system);
-            var containers = app.Documents.OpenStencil(built_in_stencil_file);
-            var masters = containers.Masters;
+
+            var stencil_type = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
+            var measurement_system = IVisio.VisMeasurementSystem.visMSUS;
+            var containers_file = app.GetBuiltInStencilFile(stencil_type, measurement_system);
+            var containers_doc = app.Documents.OpenStencil(containers_file);
+            var masters = containers_doc.Masters;
             var master1 = masters.ItemU[1];
             var droppedContainer = client.Master.DropContainer(master1);
 
@@ -486,13 +487,13 @@ namespace TestVisioAutomation.Scripting
 
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
-                VAUSERCELL.UserDefinedCellsHelper.Get(droppedContainer)
-                    .Where(s => s.Name == "msvStructureType")
-                    .First()
+                VAUSERCELL.UserDefinedCellsHelper
+                    .Get(droppedContainer)
+                    .First(s => s.Name == "msvStructureType")
                     .Value.Result);
 
             // cleanup
-            client.Document.Close(true);
+            //client.Document.Close(true);
         }
     }
 }

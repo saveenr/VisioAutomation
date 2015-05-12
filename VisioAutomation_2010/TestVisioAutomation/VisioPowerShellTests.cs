@@ -134,7 +134,7 @@ namespace TestVisioAutomation
           
           // Drop a container on the page... the rectangle we created above should be selected by default. 
           // Since it is selected it will be added as a member to the container.
-          var container = VisioPowerShellTests.invoker.Invoke("New-VisioContainer -Masters (Get-VisioMaster \"Container 1\" (Open-VisioDocument \"SDCONT_U.VSS\"))");
+          var container = VisioPowerShellTests.invoker.Invoke("New-VisioContainer -Masters (Get-VisioMaster \"Container 1\" (Open-VisioDocument \"SDCONT_U.VSSX\"))");
 
           Assert.IsNotNull(container);
           

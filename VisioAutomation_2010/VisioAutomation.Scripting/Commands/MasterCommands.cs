@@ -68,7 +68,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentException("mastername");
             }
-            
+
             IVisio.Master master;
             try
             {
@@ -128,7 +128,7 @@ namespace VisioAutomation.Scripting.Commands
                 var masters2 = doc.Masters.AsEnumerable();
                 var masters3 = TextUtil.FilterObjectsByNames(masters2, new[] { name }, p => p.Name, true, TextUtil.FilterAction.Include).ToList();
                 return masters3;
-            } 
+            }
         }
 
         public List<IVisio.Master> GetMastersByName(string name)
@@ -211,18 +211,18 @@ namespace VisioAutomation.Scripting.Commands
 
         // http://blogs.msdn.com/b/visio/archive/2010/01/27/container-list-and-callout-api-in-visio-2010.aspx
         // https://msdn.microsoft.com/en-us/library/office/ff768907(v=office.14).aspx
-          public IVisio.Shape DropContainer(IVisio.Master master)
-       {
-           this.Client.Application.AssertApplicationAvailable();
-           this.Client.Document.AssertDocumentAvailable();
+        public IVisio.Shape DropContainer(IVisio.Master master)
+        {
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
 
-           var application = this.Client.VisioApplication;
-           var page = application.ActivePage;
-           var selectedShapes = this.Client.Selection.Get();
+            var application = this.Client.VisioApplication;
+            var page = application.ActivePage;
+            var selectedShapes = this.Client.Selection.Get();
 
-           var shape = page.DropContainer(master, selectedShapes);
-           return shape;
-       }
+            var shape = page.DropContainer(master, selectedShapes);
+            return shape;
+        }
 
     }
 }
