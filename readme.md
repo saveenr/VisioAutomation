@@ -7,7 +7,7 @@ Git Clone url: https://github.com/saveenr/VisioAutomation/
 
 ## Tools
 
-Download the tools here: https://visioautomation.codeplex.com/releases
+Download the tools here: https://onedrive.live.com/?cid=1ff099edb1c7ebfa&id=1FF099EDB1C7EBFA%21172641
 
 ## Visio Power Tools
 Power Tools for Visio 2007 - stable but in maintenance mode
