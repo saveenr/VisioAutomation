@@ -33,22 +33,26 @@ namespace VisioPowerShell.Commands
           // If Names is not empty... assign it to the shape
              if (this.Names != null)
              {
-                 for (int i = 0; i < shape_objects.Count; i++)
+                 int up_to = System.Math.Min(shape_objects.Count, this.Names.Length);
+                 for (int i = 0; i < up_to; i++)
                  {
-                     shape_objects[i].NameU = this.Names[i];
+                     string cur_name = this.Names[i];
+                     if (cur_name != null)
+                     {
+                         shape_objects[i].NameU = this.Names[i];                         
+                     }
                  }
              }
 
             this.client.Selection.None();
 
-            if (this.NoSelect)
+            if (!this.NoSelect)
             {
-            }
-            else
-            {
+                // Select the Shapes
                 ((SMA.Cmdlet) this).WriteVerbose("Selecting");
                 this.client.Selection.Select(shape_objects);
             }
+
 
             this.WriteObject(shape_objects, false);
         }
