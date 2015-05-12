@@ -134,7 +134,10 @@ namespace TestVisioAutomation
           
           // Drop a container on the page... the rectangle we created above should be selected by default. 
           // Since it is selected it will be added as a member to the container.
-          var container = invoker.Invoke("New-VisioContainer -Master (Get-VisioMaster \"Container 1\" (Open-VisioDocument \"SDCONT_U.VSSX\"))");
+          var cont_doc = "SDCONT_U.VSSX";
+          var cont_master_name = "Plain";
+          var format = string.Format("New-VisioContainer -Master (Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", cont_master_name, cont_doc);
+          var container = invoker.Invoke(format);
 
           Assert.IsNotNull(container);
           

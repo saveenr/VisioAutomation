@@ -24,8 +24,11 @@ namespace VisioPowerShell.Commands
                 var shape = this.client.Master.DropContainer(this.Master);
                 this.WriteObject(shape);
             }
-
-            throw new System.ArgumentOutOfRangeException();
+            else
+            {
+                throw new System.ArgumentOutOfRangeException();
+                
+            }
         }
     }
 }
