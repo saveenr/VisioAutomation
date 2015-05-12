@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 using VA = VisioAutomation;
@@ -23,9 +24,13 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
+            var cellmap = CellSRCDictionary.GetCellMapForPages();
+            if (this.Cells == null || this.Cells.Length < 1 || this.Cells.Contains("*"))
+            {
+                this.Cells = cellmap.GetNames().ToArray();
+            }
             Get_VisioPageCell.EnsureEnoughCellNames(this.Cells);
             var target_page = this.Page ?? this.client.Page.Get();
-            var cellmap = CellSRCDictionary.GetCellMapForPages();
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
             var surface = new VA.ShapeSheet.ShapeSheetSurface(target_page);
