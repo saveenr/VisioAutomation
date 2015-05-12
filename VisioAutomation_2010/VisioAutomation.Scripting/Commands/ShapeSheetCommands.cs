@@ -14,6 +14,43 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
+        public void SetName(IList<IVisio.Shape> target_shapes, IList<string> names)
+        {
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
+
+            if (names == null || names.Count < 1)
+            {
+                // do nothing
+                return;
+            }
+
+            var shapes = this.GetTargetShapes(target_shapes);
+            if (shapes.Count < 1)
+            {
+                return;
+            }
+
+            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Shape Text"))
+            {
+                int numnames = names.Count;
+
+                int up_to = System.Math.Min(numnames, shapes.Count);
+
+                for (int i = 0; i < up_to; i++)
+                {
+                    var new_name = names[i];
+
+                    if (new_name != null)
+                    {
+                        var shape = shapes[i];
+                        shape.Name = new_name;
+                    }
+                }
+            }
+        }
+
+
         public ShapeSheet.ShapeSheetSurface GetShapeSheetSurface()
         {
             var ds = this.Client.Draw.GetDrawingSurface();

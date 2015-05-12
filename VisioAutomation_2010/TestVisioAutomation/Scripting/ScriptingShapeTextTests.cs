@@ -32,8 +32,9 @@ using VisioAutomation.Scripting.Commands;
 	            
 	            var shapes = page1.Shapes.GetShapesFromIDs(shapeids);
 	            var client = this.GetScriptingClient();
-	            var txtCmd = new TextCommands(client);
-	            string[] names = { "TestName", "TestName2" };
+	            var names = new [] { "TestName", "TestName2" };
+                client.Text.Set(shapes,names);
+                client.ShapeSheet.SetName(shapes,names);
 	            //txtCmd.Set(shapes, names, true);
 	 
 	            //page1.Shapes[shapeids[0]].Text = "My Rounded Rec";
