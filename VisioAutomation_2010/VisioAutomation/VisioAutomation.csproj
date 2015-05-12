@@ -349,7 +349,9 @@
   <ItemGroup>
     <Content Include="binaries\MSAGL\Microsoft.Msagl.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

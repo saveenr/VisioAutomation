@@ -29,7 +29,7 @@ namespace VisioPowerShell.Commands
             this.WriteVerbose("Valid Names: " + string.Join(",", cellmap.GetNames()));
             var query = cellmap.CreateQueryFromCellNames(this.Cells);
             var surface = new VA.ShapeSheet.ShapeSheetSurface(target_page);
-            var target_shapeids = new[] { surface.Target.Page.ID };
+            var target_shapeids = new[] { surface.Target.Page.PageSheet.ID };
             var dt = Helpers.QueryToDataTable(query, this.GetResults, this.ResultType, target_shapeids, surface);
             this.WriteObject(dt);
         }

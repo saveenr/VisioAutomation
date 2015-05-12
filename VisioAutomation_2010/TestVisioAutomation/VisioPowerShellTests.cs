@@ -107,6 +107,7 @@ namespace TestVisioAutomation
             VisioPowerShellTests.invoker.Invoke("Close-VisioApplication -Force");
         }
 
+
       [TestMethod]
       public void NewVisioContainer()
       {

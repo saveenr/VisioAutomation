@@ -77,7 +77,8 @@ Assert-Path $docfolder
 # ------------------------------
 # Verify that the binaries exist
 $dlls = Get-ChildItem (Join-Path $bin_folder "*.dll")
-if ( $dlls.Length -lt 1 )
+
+if ( ( $dlls -eq $null) -or ( $dlls.Length -lt 1 ) )
 {
 	$msg = "There are no DLLs in " + $bin_folder
 	Write-Error $msg
