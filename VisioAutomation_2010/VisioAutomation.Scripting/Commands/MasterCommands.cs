@@ -209,6 +209,8 @@ namespace VisioAutomation.Scripting.Commands
             return master;
         }
 
+        // http://blogs.msdn.com/b/visio/archive/2010/01/27/container-list-and-callout-api-in-visio-2010.aspx
+        // https://msdn.microsoft.com/en-us/library/office/ff768907(v=office.14).aspx
           public IVisio.Shape DropContainer(IVisio.Master master)
        {
            this.Client.Application.AssertApplicationAvailable();

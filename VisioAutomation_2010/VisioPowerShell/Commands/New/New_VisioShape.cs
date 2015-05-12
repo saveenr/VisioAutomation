@@ -14,6 +14,9 @@ namespace VisioPowerShell.Commands
         [SMA.ParameterAttribute(Position = 1, Mandatory = true)]
         public double [] Points { get; set; }
 
+        [SMA.Parameter(Mandatory = false)]
+        public string[] Names { get; set; }
+
         [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter NoSelect=false;
 
@@ -26,6 +29,15 @@ namespace VisioPowerShell.Commands
 
             var page = this.client.Page.Get();
             var shape_objects = VisioAutomation.Shapes.ShapeHelper.GetShapesFromIDs(page.Shapes, shape_ids);
+
+          // If Names is not empty... assign it to the shape
+             if (this.Names != null)
+             {
+                 for (int i = 0; i < shape_objects.Count; i++)
+                 {
+                     shape_objects[i].NameU = this.Names[i];
+                 }
+             }
 
             this.client.Selection.None();
 
