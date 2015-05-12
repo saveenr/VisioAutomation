@@ -27,7 +27,7 @@ namespace TestVisioAutomation
         {
             var test = new VisioPowerShell.Commands.New_VisioApplication().Invoke();
 
-            sessionState = InitialSessionState.CreateDefault();
+            VisioPowerShellTests.sessionState = InitialSessionState.CreateDefault();
 
             
             // Get path of where everything is executing so we can find the VisioPS.dll assembly
@@ -36,12 +36,12 @@ namespace TestVisioAutomation
             var uri = new Uri(path);
             var visioPS = uri.LocalPath + "\\VisioPS.dll";
             // Import the latest VisioPS module into the PowerShell session
-            sessionState.ImportPSModule(new []{visioPS});
-            runSpace = RunspaceFactory.CreateRunspace(sessionState);
-            runSpace.Open();
-            powerShell = PowerShell.Create();
-            powerShell.Runspace = runSpace;
-            invoker = new RunspaceInvoke(runSpace);
+            VisioPowerShellTests.sessionState.ImportPSModule(new []{visioPS});
+            VisioPowerShellTests.runSpace = RunspaceFactory.CreateRunspace(VisioPowerShellTests.sessionState);
+            VisioPowerShellTests.runSpace.Open();
+            VisioPowerShellTests.powerShell = PowerShell.Create();
+            VisioPowerShellTests.powerShell.Runspace = VisioPowerShellTests.runSpace;
+            VisioPowerShellTests.invoker = new RunspaceInvoke(VisioPowerShellTests.runSpace);
         }
  
         [TestCleanup]
@@ -54,21 +54,21 @@ namespace TestVisioAutomation
         public static void PSTestVisioPowerShellClassCleanup()
         {
             // Make sure we cleanup everything
-            powerShell.Dispose();
-            invoker.Dispose();
-            runSpace.Close();
+            VisioPowerShellTests.powerShell.Dispose();
+            VisioPowerShellTests.invoker.Dispose();
+            VisioPowerShellTests.runSpace.Close();
  
-            invoker = null;
-            runSpace = null;
-            sessionState = null;
-            powerShell = null;
+            VisioPowerShellTests.invoker = null;
+            VisioPowerShellTests.runSpace = null;
+            VisioPowerShellTests.sessionState = null;
+            VisioPowerShellTests.powerShell = null;
         }
  
         [TestMethod]
         public void PSTestNewVisioDocument()
         {
            // Send the command to the PowerShell session
-            var visDoc = invoker.Invoke("New-VisioDocument");
+            var visDoc = VisioPowerShellTests.invoker.Invoke("New-VisioDocument");
  
             // Verify results
             Assert.IsNotNull(visDoc);
@@ -77,49 +77,50 @@ namespace TestVisioAutomation
             Assert.IsFalse(String.IsNullOrEmpty(visDoc[0].Properties["Name"].Value.ToString()));
  
             // Close Visio Application that was created when "New-VisioDocument" was invoked
-            invoker.Invoke("Close-VisioApplication");
+            VisioPowerShellTests.invoker.Invoke("Close-VisioApplication");
         }
  
         [TestMethod]
         public void PSTestGetVisioPageCell()
-        {
-            var visDoc = invoker.Invoke("New-VisioDocument");
-            var visGetPageCell = invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
-            DataRow results = ((DataRowCollection)visGetPageCell[0].Properties["Rows"].Value)[0];
-           powerShell = PowerShell.Create(); ;
-            Assert.IsNotNull(visGetPageCell);
+        {            
+            var visDoc = VisioPowerShellTests.invoker.Invoke("New-VisioDocument");
+            var cells1 = VisioPowerShellTests.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
+            var data_row_collection1 = (DataRowCollection)cells1[0].Properties["Rows"].Value;
+            var results = data_row_collection1[0];
+            Assert.IsNotNull(cells1);
             Assert.AreEqual(8.5, results["PageWidth"]);
             Assert.AreEqual(11.0, results["PageHeight"]);
             
             //Now lets add another page and get it's width and height
-            var page2 = invoker.Invoke("New-VisioPage");
-            var visGetPageCell2 = invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
-            DataRow results2 = ((DataRowCollection)visGetPageCell2[0].Properties["Rows"].Value)[0];
+            var page2 = VisioPowerShellTests.invoker.Invoke("New-VisioPage");
+            var cells2 = VisioPowerShellTests.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
+            var data_row_collection2 = (DataRowCollection)cells2[0].Properties["Rows"].Value;
+            var results2 = data_row_collection2[0];
  
-            Assert.IsNotNull(visGetPageCell2);
+            Assert.IsNotNull(cells2);
  	        Assert.AreEqual(8.5, results2["PageWidth"]);
 	        Assert.AreEqual(11.0, results2["PageHeight"]);
 
             // Close Visio Application that was created when "New-VisioDocument" was invoked
-            invoker.Invoke("Close-VisioApplication -Force");
+            VisioPowerShellTests.invoker.Invoke("Close-VisioApplication -Force");
         }
 
       [TestMethod]
       public void NewVisioContainer()
       {
-          var visDoc = invoker.Invoke("New-VisioDocument");
+          var visDoc = VisioPowerShellTests.invoker.Invoke("New-VisioDocument");
 
-          var rect = invoker.Invoke("(Get-VisioMaster \"Rectangle\" (Open-VisioDocument \"BASIC_U.VSS\"))");
+          var rect = VisioPowerShellTests.invoker.Invoke("(Get-VisioMaster \"Rectangle\" (Open-VisioDocument \"BASIC_U.VSS\"))");
 
           // Another way to send a command...
-          Pipeline pipeline = runSpace.CreatePipeline();
+          var pipeline = VisioPowerShellTests.runSpace.CreatePipeline();
           
-          Command myCmd = new Command(@"New-VisioShape");
-          CommandParameter myCmd1 = new CommandParameter("Masters", rect);
+          var myCmd = new Command(@"New-VisioShape");
+          var myCmd1 = new CommandParameter("Masters", rect);
           myCmd.Parameters.Add(myCmd1);
           
           double[] points = { 1, 1 };
-          CommandParameter myCmd2 = new CommandParameter("Points", points);
+          var myCmd2 = new CommandParameter("Points", points);
           myCmd.Parameters.Add(myCmd2);
 
           pipeline.Commands.Add(myCmd);
@@ -130,12 +131,12 @@ namespace TestVisioAutomation
           
           // Drop a container on the page... the rectangle we created above should be selected by default. 
           // Since it is selected it will be added as a member to the container.
-          var container = invoker.Invoke("New-VisioContainer -Masters (Get-VisioMaster \"Container 1\" (Open-VisioDocument \"SDCONT_U.VSS\"))");
+          var container = VisioPowerShellTests.invoker.Invoke("New-VisioContainer -Masters (Get-VisioMaster \"Container 1\" (Open-VisioDocument \"SDCONT_U.VSS\"))");
 
           Assert.IsNotNull(container);
           
           // Cleanup
-          invoker.Invoke("Close-VisioApplication -Force");
+          VisioPowerShellTests.invoker.Invoke("Close-VisioApplication -Force");
       }
     }
 }
