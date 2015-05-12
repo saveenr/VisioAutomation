@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class LayerCommands : CommandSet
     {
-        public LayerCommands(Client client) :
+        internal LayerCommands(Client client) :
             base(client)
         {
 

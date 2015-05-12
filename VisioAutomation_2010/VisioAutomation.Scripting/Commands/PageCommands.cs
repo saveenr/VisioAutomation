@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class PageCommands : CommandSet
     {
-        public PageCommands(Client client) :
+        internal PageCommands(Client client) :
             base(client)
         {
 

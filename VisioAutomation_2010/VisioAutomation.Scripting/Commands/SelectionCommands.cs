@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class SelectionCommands : CommandSet
     {
-        public SelectionCommands(Client client) :
+        internal SelectionCommands(Client client) :
             base(client)
         {
 

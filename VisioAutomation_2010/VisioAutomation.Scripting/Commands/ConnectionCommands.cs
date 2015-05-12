@@ -9,7 +9,7 @@ namespace VisioAutomation.Scripting.Commands
     {
         private const string undoname_connectShapes = "Connect Shapes";
 
-        public ConnectionCommands(Client client) :
+        internal ConnectionCommands(Client client) :
             base(client)
         {
 

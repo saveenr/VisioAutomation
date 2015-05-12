@@ -10,7 +10,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ExportCommands : CommandSet
     {
-        public ExportCommands(Client client)
+        internal ExportCommands(Client client)
             : base(client)
         {
         }

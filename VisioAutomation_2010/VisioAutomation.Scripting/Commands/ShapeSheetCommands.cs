@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ShapeSheetCommands : CommandSet
     {
-        public ShapeSheetCommands(Client client) :
+        internal ShapeSheetCommands(Client client) :
             base(client)
         {
 

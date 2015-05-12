@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class MasterCommands : CommandSet
     {
-        public MasterCommands(Client client) :
+        internal MasterCommands(Client client) :
             base(client)
         {
 

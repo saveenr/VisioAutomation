@@ -5,7 +5,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class OutputCommands : CommandSet
     {
-        public OutputCommands(Client client) :
+        internal OutputCommands(Client client) :
             base(client)
         {
 

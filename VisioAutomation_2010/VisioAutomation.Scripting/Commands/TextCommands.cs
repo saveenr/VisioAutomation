@@ -8,18 +8,13 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class TextCommands: CommandSet
     {
-        public TextCommands(Client client) :
+        internal TextCommands(Client client) :
             base(client)
         {
 
         }
 
        public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts)
-       {
-           Set(target_shapes, texts, false);
-       }
-
-        public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts, bool set_Name)
        {
            this.Client.Application.AssertApplicationAvailable();
            this.Client.Document.AssertDocumentAvailable();
@@ -39,14 +34,16 @@ namespace VisioAutomation.Scripting.Commands
            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Shape Text"))
            {
                int numtexts = texts.Count;
-               for (int i = 0; i < shapes.Count; i++)
+
+               int up_to = System.Math.Min(numtexts, shapes.Count);
+
+               for (int i = 0; i < up_to; i++)
                {
-                   var shape = shapes[i];
                    var text = texts[i % numtexts];
-                   shape.Text = text;
-                   if (set_Name)
+                   if (text != null)
                    {
-                       shape.Name = text;
+                       var shape = shapes[i];
+                       shape.Text = text;
                    }
                }
            }

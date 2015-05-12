@@ -9,7 +9,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class DeveloperCommands : CommandSet
     {
-        public DeveloperCommands(Client client) :
+        internal DeveloperCommands(Client client) :
             base(client)
         {
 

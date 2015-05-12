@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class UserDefinedCellCommands : CommandSet
     {
-        public UserDefinedCellCommands(Client client) :
+        internal UserDefinedCellCommands(Client client) :
             base(client)
         {
 

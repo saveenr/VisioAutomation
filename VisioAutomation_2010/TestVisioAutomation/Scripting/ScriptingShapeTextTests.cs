@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using VisioAutomation.Extensions;
-	using VisioAutomation.Scripting.Commands;
+using VisioAutomation.Scripting;
+using VisioAutomation.Scripting.Commands;
 	using IVisio = Microsoft.Office.Interop.Visio;
 	using VA = VisioAutomation;
 	 
@@ -30,9 +31,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 	            Assert.AreEqual(2, shapeids.Length);
 	            
 	            var shapes = page1.Shapes.GetShapesFromIDs(shapeids);
-	            var txtCmd = new TextCommands(this.GetScriptingClient());
+	            var client = this.GetScriptingClient();
+	            var txtCmd = new TextCommands(client);
 	            string[] names = { "TestName", "TestName2" };
-	            txtCmd.Set(shapes, names, true);
+	            //txtCmd.Set(shapes, names, true);
 	 
 	            //page1.Shapes[shapeids[0]].Text = "My Rounded Rec";
 	 

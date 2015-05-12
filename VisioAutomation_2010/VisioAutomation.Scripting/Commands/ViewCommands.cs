@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
     {
         private readonly double ZoomIncrement;
 
-        public ViewCommands(Client client) :
+        internal ViewCommands(Client client) :
             base(client)
         {
             this.ZoomIncrement = 1.20;

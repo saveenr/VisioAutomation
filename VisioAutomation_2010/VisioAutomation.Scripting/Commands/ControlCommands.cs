@@ -7,7 +7,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ControlCommands : CommandSet
     {
-        public ControlCommands(Client client) :
+        internal ControlCommands(Client client) :
             base(client)
         {
 

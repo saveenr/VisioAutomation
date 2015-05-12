@@ -9,7 +9,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ArrangeCommands : CommandSet
     {
-        public ArrangeCommands(Client client) :
+        internal ArrangeCommands(Client client) :
             base(client)
         {
 

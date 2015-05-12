@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
     {
         public ApplicationWindowCommands Window { get; private set; }
 
-        public ApplicationCommands(Client client) :
+        internal ApplicationCommands(Client client) :
             base(client)
         {
             this.Window = new ApplicationWindowCommands(this.Client);

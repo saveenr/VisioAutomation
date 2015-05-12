@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ConnectionPointCommands : CommandSet
     {
-        public ConnectionPointCommands(Client client) :
+        internal ConnectionPointCommands(Client client) :
             base(client)
         {
 

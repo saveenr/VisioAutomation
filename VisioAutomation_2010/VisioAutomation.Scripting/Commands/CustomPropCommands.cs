@@ -8,7 +8,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class CustomPropCommands : CommandSet
     {
-        public CustomPropCommands(Client client) :
+        internal CustomPropCommands(Client client) :
             base(client)
         {
 

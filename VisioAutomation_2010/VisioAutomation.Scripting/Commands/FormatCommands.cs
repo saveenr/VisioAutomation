@@ -7,7 +7,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class FormatCommands : CommandSet
     {
-        public FormatCommands(Client client) :
+        internal FormatCommands(Client client) :
             base(client)
         {
 

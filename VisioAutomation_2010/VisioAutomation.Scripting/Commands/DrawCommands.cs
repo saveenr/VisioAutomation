@@ -12,7 +12,7 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class DrawCommands : CommandSet
     {
-        public DrawCommands(Client client) :
+        internal DrawCommands(Client client) :
             base(client)
         {
 
