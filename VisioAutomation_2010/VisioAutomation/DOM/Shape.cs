@@ -8,12 +8,21 @@ namespace VisioAutomation.DOM
         public MasterRef Master { get; protected set; }
         public Drawing.Point DropPosition { get; private set; }
         public Drawing.Size? DropSize { get; private set; }
+        public string Name { get; set; }
 
         public Shape(IVisio.Master master, Drawing.Point pos)
         {
             this.Master = new MasterRef(master);
             this.DropPosition = pos;
         }
+
+	        public Shape(IVisio.Master master, VA.Drawing.Point pos, string name)
+   {
+       this.Master = new VA.DOM.MasterRef(master);
+       this.DropPosition = pos;
+       this.VisioShape.NameU = name;
+   }
+
         
         public Shape(IVisio.Master master, Drawing.Rectangle rect) 
         {

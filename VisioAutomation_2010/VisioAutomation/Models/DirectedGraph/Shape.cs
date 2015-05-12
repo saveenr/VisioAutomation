@@ -14,5 +14,6 @@ namespace VisioAutomation.Models.DirectedGraph
         public string MasterName { get; set; }
         public string URL { get; set; }
         public VA.Drawing.Size? Size { get; set; }
+        public System.Collections.Generic.List<DOM.Hyperlink> Hyperlinks { get; set; }
     }
 }

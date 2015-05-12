@@ -66,9 +66,17 @@ namespace VisioAutomation.DOM
                 var vshape = ctx.GetShape(shape.VisioShapeID);
                 foreach (var hyperlink in shape.Hyperlinks)
                 {
-                    var h = vshape.Hyperlinks.Add();
-                    h.Name = hyperlink.Name; // Name of Hyperlink
-                    h.Address = hyperlink.Address; // Address of Hyperlink
+	                    var h = vshape.Hyperlinks.Add();
+                h.Name = hyperlink.Name; // Name of Hyperlink
+                h.Description = hyperlink.Description;
+                h.Address = hyperlink.Address; // Address of Hyperlink
+                h.SubAddress = hyperlink.SubAddress;
+                h.ExtraInfo = hyperlink.ExtraInfo;
+                h.Frame = hyperlink.Frame;
+                //h.SortKey = hyperlink.SortKey;
+                //h.NewWindow = hyperlink.NewWindow;
+                //h.IsDefaultLink = hyperlink.Default;
+                //h.Invisible = hyperlink.Invisible;
                 }
             }
         }

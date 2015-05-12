@@ -4,6 +4,7 @@
     {
         RightAngle,
         Curved,
-        Straight
+        Straight,
+        Default
     }
 }

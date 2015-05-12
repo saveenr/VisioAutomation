@@ -1,14 +1,37 @@
 namespace VisioAutomation.DOM
 {
-    public class Hyperlink
-    {
-        public string Name { get; set; }
-        public string Address { get; set; }
+	    public class Hyperlink
+	    {
+	        public string Name { get; set; }
+	        public string Description { get; set; }
+	        public string Address { get; set; }
+	        public string SubAddress { get; set; }
+	        public string ExtraInfo { get; set; }
+	        public string Frame { get; set; }
+	        public string SortKey { get; set; }
+	        public bool NewWindow { get; set; }
+	        public bool Default { get; set; }
+	        public bool Invisible { get; set; }
+	 
+	 
+	        public Hyperlink(string name, string address)
+	        {
+	            this.Name = name;
+	            this.Address = address;
+	        }
+	 
+	        public Hyperlink(string name, string address, bool subAddress)
+	        {
+	            this.Name = name;
+	            if (subAddress)
+	            {
+	                this.SubAddress = address;
+	            }
+	            else
+	            {
+	                this.Address = address;
+	            }
+	        }
+	    }
 
-        public Hyperlink(string name, string address)
-        {
-            this.Name = name;
-            this.Address = address;
-        }
-    }
 }

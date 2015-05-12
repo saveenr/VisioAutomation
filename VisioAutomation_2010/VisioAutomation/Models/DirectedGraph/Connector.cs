@@ -9,6 +9,10 @@ namespace VisioAutomation.Models.DirectedGraph
         public Shape To { get; set; }
 
         public VACONNECT.ConnectorType ConnectorType { get; set; }
+	 
+        public System.Collections.Generic.List<DOM.Hyperlink> Hyperlinks { get; set; }
+        public string StencilName { get; set; }
+        public string MasterName { get; set; }
 
         public Connector(Shape from, Shape to)
         {
