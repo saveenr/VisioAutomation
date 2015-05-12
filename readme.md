@@ -20,6 +20,9 @@ Documentation here: http://sdrv.ms/11AWkp7
 
 
 ## Get the VisioAutomation via NuGet Packages
+* Visio Automation 2007 http://www.nuget.org/packages/VisioAutomation2007/
+* Visio Automation 2010 http://www.nuget.org/packages/VisioAutomation2010/
+* Visio Automariton VDX http://www.nuget.org/packages/VisioAutomation.VDX/
 
 ## Documentation
 
