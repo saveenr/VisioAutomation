@@ -1,12 +1,11 @@
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data;
-using System.Management.Automation;
-using System.Management.Automation.Runspaces;
+using SMA=System.Management.Automation;
  
 namespace TestVisioAutomation
 {
+
     [TestClass]
     public class VisioPowerShellTests
     {
@@ -17,33 +16,13 @@ namespace TestVisioAutomation
         // https://connect.microsoft.com/VisualStudio/feedback/details/771138/vs2012-referenced-assemblies-in-unit-test-are-not-copied-to-the-unit-test-out-f
         VisioPowerShell.Commands.New_VisioApplication visioApp = null;
 	 
-        private static PowerShell powerShell;
-        private static InitialSessionState sessionState;
-        private static Runspace runSpace;
-        private static RunspaceInvoke invoker;
+        private static PSCTX pstcx = new PSCTX();
+
  
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)
         {
             var visio_app = new VisioPowerShell.Commands.New_VisioApplication().Invoke();
-
-            sessionState = InitialSessionState.CreateDefault();
-
-            
-            // Get path of where everything is executing so we can find the VisioPS.dll assembly
-            var executing_assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var asm_path = System.IO.Path.GetDirectoryName(executing_assembly.GetName().CodeBase);
-            var uri = new Uri(asm_path);
-            var visioPS = System.IO.Path.Combine(uri.LocalPath ,"VisioPS.dll");
-            var modules = new []{visioPS};
-            
-            // Import the latest VisioPS module into the PowerShell session
-            sessionState.ImportPSModule(modules);
-            runSpace = RunspaceFactory.CreateRunspace(sessionState);
-            runSpace.Open();
-            powerShell = PowerShell.Create();
-            powerShell.Runspace = runSpace;
-            invoker = new RunspaceInvoke(runSpace);
         }
  
         [TestCleanup]
@@ -55,22 +34,14 @@ namespace TestVisioAutomation
         [ClassCleanup]
         public static void PSTestVisioPowerShellClassCleanup()
         {
-            // Make sure we cleanup everything
-            powerShell.Dispose();
-            invoker.Dispose();
-            runSpace.Close();
- 
-            invoker = null;
-            runSpace = null;
-            sessionState = null;
-            powerShell = null;
+            pstcx.cleanup();
         }
  
         [TestMethod]
         public void PSTestNewVisioDocument()
         {
            // Send the command to the PowerShell session
-            var visDoc = invoker.Invoke("New-VisioDocument");
+            var visDoc = pstcx.invoker.Invoke("New-VisioDocument");
  
             // Verify results
             Assert.IsNotNull(visDoc);
@@ -79,14 +50,14 @@ namespace TestVisioAutomation
             Assert.IsFalse(String.IsNullOrEmpty(visDoc[0].Properties["Name"].Value.ToString()));
  
             // Close Visio Application that was created when "New-VisioDocument" was invoked
-            invoker.Invoke("Close-VisioApplication");
+            pstcx.invoker.Invoke("Close-VisioApplication");
         }
  
         [TestMethod]
         public void PSTestGetVisioPageCell()
-        {            
-            var visDoc = invoker.Invoke("New-VisioDocument");
-            var cells1 = invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
+        {
+            var visDoc = pstcx.invoker.Invoke("New-VisioDocument");
+            var cells1 = pstcx.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
             var data_row_collection1 = (DataRowCollection)cells1[0].Properties["Rows"].Value;
             var results = data_row_collection1[0];
             Assert.IsNotNull(cells1);
@@ -94,8 +65,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(11.0, results["PageHeight"]);
             
             //Now lets add another page and get it's width and height
-            var page2 = invoker.Invoke("New-VisioPage");
-            var cells2 = invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
+            var page2 = pstcx.invoker.Invoke("New-VisioPage");
+            var cells2 = pstcx.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
             var data_row_collection2 = (DataRowCollection)cells2[0].Properties["Rows"].Value;
             var results2 = data_row_collection2[0];
  
@@ -104,29 +75,30 @@ namespace TestVisioAutomation
 	        Assert.AreEqual(11.0, results2["PageHeight"]);
 
             // Close Visio Application that was created when "New-VisioDocument" was invoked
-            invoker.Invoke("Close-VisioApplication -Force");
+            pstcx.invoker.Invoke("Close-VisioApplication -Force");
         }
 
 
       [TestMethod]
-      public void NewVisioContainer()
+      public void PSNewVisioContainer()
       {
-          var visDoc = invoker.Invoke("New-VisioDocument");
+          var cont_doc = "SDCONT_U.VSSX";
+          var cont_master_name = "Plain";
+          var rectangle = "Rectangle";
+          var basic_u_vss = "BASIC_U.VSS";
 
-          var rect = invoker.Invoke("(Get-VisioMaster \"Rectangle\" (Open-VisioDocument \"BASIC_U.VSS\"))");
+          var visDoc = pstcx.invoker.Invoke("New-VisioDocument");
+
+          var line1 = string.Format("(Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", rectangle, basic_u_vss);
+          var rect = pstcx.invoker.Invoke(line1);
 
           // Another way to send a command...
-          var pipeline = runSpace.CreatePipeline();
-          
-          var myCmd = new Command(@"New-VisioShape");
-          var myCmd1 = new CommandParameter("Master", rect);
-          myCmd.Parameters.Add(myCmd1);
-          
-          double[] points = { 1, 1 };
-          var myCmd2 = new CommandParameter("Points", points);
-          myCmd.Parameters.Add(myCmd2);
+          var pipeline = pstcx.runSpace.CreatePipeline();
 
-          pipeline.Commands.Add(myCmd);
+          var cmd_1 = new SMA.Runspaces.Command(@"New-VisioShape");
+          cmd_1.AddParameter("Master", rect);
+          cmd_1.AddParameter("Points", new[] { 1.0, 1.0 });
+          pipeline.Commands.Add(cmd_1);
           pipeline.Invoke();
 
           // Everything above (to the new "pipeline" variable) can be done with this one line...
@@ -134,16 +106,24 @@ namespace TestVisioAutomation
           
           // Drop a container on the page... the rectangle we created above should be selected by default. 
           // Since it is selected it will be added as a member to the container.
-          var cont_doc = "SDCONT_U.VSSX";
-          var cont_master_name = "Plain";
-          var format = string.Format("New-VisioContainer -Master (Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", cont_master_name, cont_doc);
-          var container = invoker.Invoke(format);
+
+          var line2 = string.Format("New-VisioContainer -Master (Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", cont_master_name, cont_doc);
+          var container = pstcx.invoker.Invoke(line2);
 
           Assert.IsNotNull(container);
           
           // Cleanup
-          invoker.Invoke("Close-VisioApplication -Force");
+          pstcx.invoker.Invoke("Close-VisioApplication -Force");
       }
+    }
+
+    public static class SMA_Extensions
+    {
+        public static void AddParameter(this SMA.Runspaces.Command cmd, string name, object value)
+        {
+            var parameter= new SMA.Runspaces.CommandParameter(name, value);
+            cmd.Parameters.Add(parameter);            
+        }    
     }
 }
 	 

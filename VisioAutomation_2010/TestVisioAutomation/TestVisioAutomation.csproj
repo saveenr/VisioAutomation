@@ -91,6 +91,7 @@
     <Compile Include="Connections\ConnectivityMap.cs" />
     <Compile Include="Connections\PathAnalysis_Tests.cs" />
     <Compile Include="AssertVA.cs" />
+    <Compile Include="PSCTX.cs" />
     <Compile Include="Scripting\ScriptingShapeTextTests.cs" />
     <Compile Include="VisioPowerShellTests.cs" />
     <Compile Include="DiagnosticDebugContext.cs" />
