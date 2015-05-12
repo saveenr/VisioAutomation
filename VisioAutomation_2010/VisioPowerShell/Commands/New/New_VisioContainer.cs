@@ -12,9 +12,6 @@ namespace VisioPowerShell.Commands
         [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "MasterName")]
         public string MasterName { get; set; }
 
-        [SMA.Parameter(Position = 1, Mandatory = false)]
-        public double[] Points { get; set; }
-
         protected override void ProcessRecord()
         {
             if (this.Master != null)
