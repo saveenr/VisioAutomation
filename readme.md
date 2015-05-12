@@ -9,12 +9,9 @@ Git Clone url: https://github.com/saveenr/VisioAutomation/
 
 Download the tools here: https://onedrive.live.com/?cid=1ff099edb1c7ebfa&id=1FF099EDB1C7EBFA%21172641
 
-## Visio Power Tools
-Power Tools for Visio 2007 - stable but in maintenance mode
-Power Tools for Visio 2010 - beta but in active development
-
-## Visio PowerShell (VisioPS)
-This is a PowerShell module for Automating Visio 2010.
+* Visio PowerShell (VisioPS) - This is a PowerShell module for Automating Visio 2010.
+* Power Tools for Visio 2007 - stable but in maintenance mode
+* Power Tools for Visio 2010 - beta but in active development
 
 Documentation here: http://sdrv.ms/11AWkp7
 
