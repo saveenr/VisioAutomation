@@ -493,7 +493,7 @@ namespace TestVisioAutomation.Scripting
                     .Value.Result);
 
             // cleanup
-            //client.Document.Close(true);
+            client.Document.Close(true);
         }
 
         [TestMethod]
@@ -536,7 +536,7 @@ namespace TestVisioAutomation.Scripting
                     .Value.Result);
 
             // cleanup
-            //client.Document.Close(true);
+            client.Document.Close(true);
         }
 
     }
