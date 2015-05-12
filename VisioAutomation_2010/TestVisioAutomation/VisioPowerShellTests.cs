@@ -119,7 +119,7 @@ namespace TestVisioAutomation
           var pipeline = runSpace.CreatePipeline();
           
           var myCmd = new Command(@"New-VisioShape");
-          var myCmd1 = new CommandParameter("Masters", rect);
+          var myCmd1 = new CommandParameter("Master", rect);
           myCmd.Parameters.Add(myCmd1);
           
           double[] points = { 1, 1 };
@@ -130,11 +130,11 @@ namespace TestVisioAutomation
           pipeline.Invoke();
 
           // Everything above (to the new "pipeline" variable) can be done with this one line...
-          //var shape = invoker.Invoke("New-VisioShape -Masters (Get-VisioMaster \"Rectangle\" (Open-VisioDocument \"BASIC_U.VSS\")) -Points 1,1");
+          //var shape = invoker.Invoke("New-VisioShape -Master (Get-VisioMaster \"Rectangle\" (Open-VisioDocument \"BASIC_U.VSS\")) -Points 1,1");
           
           // Drop a container on the page... the rectangle we created above should be selected by default. 
           // Since it is selected it will be added as a member to the container.
-          var container = invoker.Invoke("New-VisioContainer -Masters (Get-VisioMaster \"Container 1\" (Open-VisioDocument \"SDCONT_U.VSSX\"))");
+          var container = invoker.Invoke("New-VisioContainer -Master (Get-VisioMaster \"Container 1\" (Open-VisioDocument \"SDCONT_U.VSSX\"))");
 
           Assert.IsNotNull(container);
           

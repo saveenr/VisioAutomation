@@ -211,6 +211,7 @@ namespace VisioAutomation.Scripting.Commands
 
         // http://blogs.msdn.com/b/visio/archive/2010/01/27/container-list-and-callout-api-in-visio-2010.aspx
         // https://msdn.microsoft.com/en-us/library/office/ff768907(v=office.14).aspx
+
         public IVisio.Shape DropContainer(IVisio.Master master)
         {
             this.Client.Application.AssertApplicationAvailable();
@@ -221,6 +222,26 @@ namespace VisioAutomation.Scripting.Commands
             var selectedShapes = this.Client.Selection.Get();
 
             var shape = page.DropContainer(master, selectedShapes);
+            return shape;
+        }
+
+        public IVisio.Shape DropContainer(string master)
+        {
+            this.Client.Application.AssertApplicationAvailable();
+            this.Client.Document.AssertDocumentAvailable();
+
+            var application = this.Client.VisioApplication;
+            var page = application.ActivePage;
+            var selectedShapes = this.Client.Selection.Get();
+
+            var stencil_type = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
+            var measurement_system = IVisio.VisMeasurementSystem.visMSUS;
+            var containers_file = application.GetBuiltInStencilFile(stencil_type, measurement_system);
+            var containers_doc = application.Documents.OpenStencil(containers_file);
+            var masters = containers_doc.Masters;
+            var container_master = masters.ItemU[master];
+            var shape = page.DropContainer(container_master,selectedShapes);
+
             return shape;
         }
 

@@ -6,16 +6,29 @@ namespace VisioPowerShell.Commands
     [SMA.Cmdlet(SMA.VerbsCommon.New, "VisioContainer")]
     public class New_VisioContainer : VisioCmdlet
     {
-        [SMA.Parameter(Position = 0, Mandatory = true)]
-        public IVisio.Master Masters { get; set; }
+        [SMA.Parameter(Position = 0, Mandatory = true,ParameterSetName="MasterObject")]
+        public IVisio.Master Master { get; set; }
+
+        [SMA.Parameter(Position = 0, Mandatory = true, ParameterSetName = "MasterName")]
+        public string MasterName { get; set; }
 
         [SMA.Parameter(Position = 1, Mandatory = false)]
         public double[] Points { get; set; }
 
         protected override void ProcessRecord()
         {
-            var shape = this.client.Master.DropContainer(Masters);
-            this.WriteObject(shape);
+            if (this.Master != null)
+            {
+                var shape = this.client.Master.DropContainer(this.Master);
+                this.WriteObject(shape);
+            }
+            else if (this.MasterName != null)
+            {
+                var shape = this.client.Master.DropContainer(this.Master);
+                this.WriteObject(shape);
+            }
+
+            throw new System.ArgumentOutOfRangeException();
         }
     }
 }
