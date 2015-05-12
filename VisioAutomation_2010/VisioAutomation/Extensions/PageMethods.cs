@@ -81,6 +81,25 @@ namespace VisioAutomation.Extensions
             return shapeids;
         }
 
+   	    public static short[] DropManyU(this IVisio.Page page, IList<IVisio.Master> masters, IEnumerable<VA.Drawing.Point> points, IList<string> names)
+        {
+            var surface = new VA.Drawing.DrawingSurface(page);
+            short[] shapeids = surface.DropManyU(masters, points);
+
+            if (names != null)
+            {
+                var page_shapes = page.Shapes;
+                //ShapeIDs should come back in the same order... if Names for the masters are passed in, assign the Name. Makes it easier to find later
+                for (int i = 0; i < shapeids.Length; i++)
+                {
+                    var shapeid = shapeids[i];
+                    var cur_shape = page_shapes[shapeid];
+                    cur_shape.Name = names[i];
+                }
+            }
+            return shapeids;
+        }
+
         public static IEnumerable<IVisio.Page> AsEnumerable(this IVisio.Pages pages)
         {
             short count = pages.Count;

@@ -208,5 +208,19 @@ namespace VisioAutomation.Scripting.Commands
 
             return master;
         }
+
+          public IVisio.Shape DropContainer(IVisio.Master master)
+       {
+           this.Client.Application.AssertApplicationAvailable();
+           this.Client.Document.AssertDocumentAvailable();
+
+           var application = this.Client.VisioApplication;
+           var page = application.ActivePage;
+           var selectedShapes = this.Client.Selection.Get();
+
+           var shape = page.DropContainer(master, selectedShapes);
+           return shape;
+       }
+
     }
 }

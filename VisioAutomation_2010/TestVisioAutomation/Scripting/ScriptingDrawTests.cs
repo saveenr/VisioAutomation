@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisioAutomation.Extensions;
 using VA = VisioAutomation;
 using SXL = System.Xml.Linq;
+using IVisio = Microsoft.Office.Interop.Visio;
+using VAUSERCELL = VisioAutomation.Shapes.UserDefinedCells;
 
 namespace TestVisioAutomation.Scripting
 {
@@ -443,6 +445,54 @@ namespace TestVisioAutomation.Scripting
             var xmldoc = SXL.XDocument.Parse(text);
             var orgchart = VisioAutomation.Scripting.OrgChart.OrgChartBuilder.LoadFromXML(client, xmldoc);
             client.Draw.OrgChart(orgchart);
+        }
+
+        [TestMethod]
+        public void Scripting_Drop_Container()
+        {
+            var pagesize = new VA.Drawing.Size(4, 4);
+            var client = GetScriptingClient();
+
+            // Create the page
+            client.Document.New();
+            client.Page.New(pagesize, false);
+
+            var active_page = client.VisioApplication.ActivePage;
+
+            // Load the stencils and find the masters
+            var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");
+            var master = client.Master.Get("Rectangle", basic_stencil);
+
+            // Drop the rectangle
+            client.Master.Drop(master, 2, 2);
+
+            // Select the rectangle... it should already be selected, but just make sure
+            client.Selection.All();
+
+            // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
+            var app = active_page.Application;
+            var vis_built_in_stencil_containers = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
+            var vis_measurement_system = IVisio.VisMeasurementSystem.visMSUS;
+            var built_in_stencil_file = app.GetBuiltInStencilFile(vis_built_in_stencil_containers, vis_measurement_system);
+            var containers = app.Documents.OpenStencil(built_in_stencil_file);
+            var masters = containers.Masters;
+            var master1 = masters.ItemU[1];
+            var droppedContainer = client.Master.DropContainer(master1);
+
+            // Verify
+            var shapes = active_page.Shapes;
+            // There should be two shapes... the rectangle and the container
+            Assert.AreEqual(2, shapes.Count);
+
+            // Verify that we did indeed drop a container
+            Assert.AreEqual("Container",
+                VAUSERCELL.UserDefinedCellsHelper.Get(droppedContainer)
+                    .Where(s => s.Name == "msvStructureType")
+                    .First()
+                    .Value.Result);
+
+            // cleanup
+            client.Document.Close(true);
         }
     }
 }

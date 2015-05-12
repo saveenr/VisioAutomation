@@ -16,32 +16,35 @@ namespace TestVisioAutomation
         private static RunspaceInvoke invoker;
  
         [ClassInitialize]
-        public static void TestFixtureSetup(TestContext context)
+        public static void PSTestFixtureSetup(TestContext context)
         {
             powerShell = PowerShell.Create(); ;
             sessionState = InitialSessionState.CreateDefault();
             runSpace = RunspaceFactory.CreateRunspace(sessionState);
             invoker = new RunspaceInvoke(runSpace);
- 
+
+            invoker.Invoke("Set-ExecutionPolicy Unrestricted");
             //string[] modules = { "Visio" };
             //sessionState.ImportPSModule(modules);
             
             // Get path of where everything is executing so we can find the VisioPS.dll assembly
-            var path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            var visioPS = ((new Uri(path)).LocalPath) + "\\VisioPS.dll";
+            var executing_assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var path = System.IO.Path.GetDirectoryName(executing_assembly.GetName().CodeBase);
+            var uri = new Uri(path);
+            var visioPS = uri.LocalPath + "\\VisioPS.dll";
             // Import the latest VisioPS module into the PowerShell session
             sessionState.ImportPSModulesFromPath(visioPS);
             runSpace.Open();
         }
  
         [TestCleanup]
-        public void TestFixtureTeardown()
+        public void PSTestFixtureTeardown()
         {
            
         }
  
         [ClassCleanup]
-        public static void TestVisioPowerShellClassCleanup()
+        public static void PSTestVisioPowerShellClassCleanup()
         {
             // Make sure we cleanup everything
             powerShell.Dispose();
@@ -55,7 +58,7 @@ namespace TestVisioAutomation
         }
  
         [TestMethod]
-        public void TestNewVisioDocument()
+        public void PSTestNewVisioDocument()
         {
            // Send the command to the PowerShell session
             var visDoc = invoker.Invoke("New-VisioDocument");
@@ -71,7 +74,7 @@ namespace TestVisioAutomation
         }
  
         [TestMethod]
-        public void TestGetVisioPageCell()
+        public void PSTestGetVisioPageCell()
         {
             var visDoc = invoker.Invoke("New-VisioDocument");
             var visGetPageCell = invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");

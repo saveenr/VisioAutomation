@@ -14,34 +14,43 @@ namespace VisioAutomation.Scripting.Commands
 
         }
 
-        public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts)
-        {
-            this.Client.Application.AssertApplicationAvailable();
-            this.Client.Document.AssertDocumentAvailable();
+       public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts)
+       {
+           Set(target_shapes, texts, false);
+       }
 
-            if (texts == null || texts.Count<1)
-            {
-                // do nothing
-                return;
-            }
-            
-            var shapes = this.GetTargetShapes(target_shapes);
-            if (shapes.Count<1)
-            {
-                return;
-            }
+        public void Set(IList<IVisio.Shape> target_shapes, IList<string> texts, bool set_Name)
+       {
+           this.Client.Application.AssertApplicationAvailable();
+           this.Client.Document.AssertDocumentAvailable();
 
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set Shape Text"))
-            {
-                int numtexts = texts.Count;
-                for (int i=0;i<shapes.Count;i++)
-                {
-                    var shape = shapes[i];
-                    var text = texts[i % numtexts];
-                    shape.Text = text;
-                }
-            }
-        }
+           if (texts == null || texts.Count < 1)
+           {
+               // do nothing
+               return;
+           }
+
+           var shapes = this.GetTargetShapes(target_shapes);
+           if (shapes.Count < 1)
+           {
+               return;
+           }
+
+           using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Shape Text"))
+           {
+               int numtexts = texts.Count;
+               for (int i = 0; i < shapes.Count; i++)
+               {
+                   var shape = shapes[i];
+                   var text = texts[i % numtexts];
+                   shape.Text = text;
+                   if (set_Name)
+                   {
+                       shape.Name = text;
+                   }
+               }
+           }
+       }
 
         public IList<string> Get(IList<IVisio.Shape> target_shapes)
         {
