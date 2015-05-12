@@ -164,7 +164,7 @@ namespace TestVisioAutomation.Extensions
   	        [TestMethod]
       public void Page_Drop_ManyU_WithNames()
       {
-          var page1 = GetNewPage();
+          var page1 = this.GetNewPage();
           var stencil = "basic_u.vss";
 
           short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;

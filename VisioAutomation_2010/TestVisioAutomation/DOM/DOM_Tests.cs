@@ -72,7 +72,7 @@ namespace TestVisioAutomation.DOM
             var app = this.GetVisioApplication();
             var doc = this.GetNewDoc();
             this.pagesize = new VA.Drawing.Size(10, 10);
-            VisioAutomationTest.SetPageSize(app.ActivePage, this.pagesize);
+            SetPageSize(app.ActivePage, this.pagesize);
             var page = page_node.Render(app.ActiveDocument);
 
             // Verify
@@ -183,7 +183,7 @@ namespace TestVisioAutomation.DOM
             var page = page_node.Render(doc);
 
             Assert.AreEqual(0, page.Shapes.Count);
-            Assert.AreEqual(new VA.Drawing.Size(5, 5), VisioAutomationTest.GetPageSize(page));
+            Assert.AreEqual(new VA.Drawing.Size(5, 5), GetPageSize(page));
 
             page.Delete(0);
             doc.Close(true);

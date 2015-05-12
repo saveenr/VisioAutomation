@@ -15,7 +15,7 @@ namespace TestVisioAutomation
                 throw new ArgumentException("name is null or empty","name");
             }
 
-            this.OutputPath = Helper.GetOutputPathEx(name);
+            this.OutputPath = GetOutputPathEx(name);
 
             this.PrepareOutputPath();
         }
@@ -23,14 +23,14 @@ namespace TestVisioAutomation
         public string GetTestMethodOutputFilename(string ext)
         {
             string abs_path = this.OutputPath;
-            string abs_filename = Path.Combine(abs_path, Helper.GetMethodName(2) + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
+            string abs_filename = Path.Combine(abs_path, GetMethodName(2) + DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") + ext);
             return abs_filename;
         }
 
         public string GetTestMethodOutputFilename()
         {
             string abs_path = this.OutputPath;
-            string abs_filename = Path.Combine(abs_path, Helper.GetMethodName(2));
+            string abs_filename = Path.Combine(abs_path, GetMethodName(2));
             return abs_filename;
         }
 

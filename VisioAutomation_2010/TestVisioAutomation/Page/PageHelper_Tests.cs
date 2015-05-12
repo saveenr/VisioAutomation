@@ -67,7 +67,7 @@ namespace TestVisioAutomation.Page
 
             VA.Pages.PageHelper.Duplicate(page1, page2);
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 3), VisioAutomationTest.GetPageSize(page2));
+            Assert.AreEqual(new VA.Drawing.Size(4, 3), GetPageSize(page2));
             Assert.AreEqual(1, page2.Shapes.Count);
 
             page2.Delete(0);

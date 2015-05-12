@@ -16,7 +16,7 @@ namespace TestVisioAutomation
 
         public IVisio.Application GetVisioApplication()
         {
-            var app = VisioAutomationTest.app_ref.GetVisioApplication();
+            var app = app_ref.GetVisioApplication();
             return app;
         }
 
@@ -50,7 +50,7 @@ namespace TestVisioAutomation
             var pages = active_document.Pages;
             var page = pages.Add();
             page.Background = 0;
-            VisioAutomationTest.SetPageSize(page, s);
+            SetPageSize(page, s);
 
             return page;
         }
@@ -176,12 +176,12 @@ namespace TestVisioAutomation
         {
             get
             {
-                if (VisioAutomationTest.tr_out_folder == null)
+                if (tr_out_folder == null)
                 {
                     var asm = System.Reflection.Assembly.GetExecutingAssembly();
-                    VisioAutomationTest.tr_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
+                    tr_out_folder = System.IO.Path.GetDirectoryName(asm.Location);
                 }
-                return VisioAutomationTest.tr_out_folder;
+                return tr_out_folder;
             }
         }
 

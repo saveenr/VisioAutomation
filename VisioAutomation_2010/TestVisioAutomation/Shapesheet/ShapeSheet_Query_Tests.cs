@@ -34,7 +34,7 @@ namespace TestVisioAutomation.Shapesheet
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
+            SetPageSize(page1, this.StandardPageSize);
 
             // draw a simple shape
             var s1 = page1.DrawRectangle(this.StandardPageSizeRect);
@@ -393,7 +393,7 @@ namespace TestVisioAutomation.Shapesheet
         {
             var doc1 = this.GetNewDoc();
             var page1 = doc1.Pages[1];
-            VisioAutomationTest.SetPageSize(page1, this.StandardPageSize);
+            SetPageSize(page1, this.StandardPageSize);
 
             // draw simple shapes
             var s1 = page1.DrawRectangle(0,0,1,1);

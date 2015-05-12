@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 	using VisioAutomation.Extensions;
 using VisioAutomation.Scripting;
@@ -13,7 +14,7 @@ using VisioAutomation.Scripting.Commands;
 	        [TestMethod]
 	        public void Scripting_Shape_Text_Set()
 	        {
-	            var page1 = GetNewPage();
+	            var page1 = this.GetNewPage();
 	            var stencil = "basic_u.vss";
 	 
 	            short flags = (short)IVisio.VisOpenSaveArgs.visOpenRO | (short)IVisio.VisOpenSaveArgs.visOpenDocked;
@@ -33,16 +34,19 @@ using VisioAutomation.Scripting.Commands;
 	            var shapes = page1.Shapes.GetShapesFromIDs(shapeids);
 	            var client = this.GetScriptingClient();
 	            var names = new [] { "TestName", "TestName2" };
-                client.Text.Set(shapes,names);
+                var texts = names.ToArray();
+
+                client.Text.Set(shapes, texts);
                 client.ShapeSheet.SetName(shapes,names);
-	            //txtCmd.Set(shapes, names, true);
-	 
-	            //page1.Shapes[shapeids[0]].Text = "My Rounded Rec";
 	 
 	            for (int i = 0; i < page1.Shapes.Count; i++)
 	            {
-	                Assert.AreEqual(page1.Shapes[shapeids[i]].Name, names[i]);
-	            }
+	                var shape = shapes[i];
+	                var name = names[i];
+                    var text = texts[i];
+                    Assert.AreEqual(name, shape.Name);
+                    Assert.AreEqual(text, shape.Text);
+                }
 	 
 	            page1.Delete(0);
 	        }

@@ -451,7 +451,7 @@ namespace TestVisioAutomation.Scripting
         public void Scripting_Drop_Container()
         {
             var pagesize = new VA.Drawing.Size(4, 4);
-            var client = GetScriptingClient();
+            var client = this.GetScriptingClient();
 
             // Create the page
             client.Document.New();
@@ -477,8 +477,8 @@ namespace TestVisioAutomation.Scripting
             var containers_file = app.GetBuiltInStencilFile(stencil_type, measurement_system);
             var containers_doc = app.Documents.OpenStencil(containers_file);
             var masters = containers_doc.Masters;
-            var master1 = masters.ItemU[1];
-            var droppedContainer = client.Master.DropContainer(master1);
+            var first_master = masters.ItemU[1];
+            var dropped_container = client.Master.DropContainer(first_master);
 
             // Verify
             var shapes = active_page.Shapes;
@@ -488,7 +488,7 @@ namespace TestVisioAutomation.Scripting
             // Verify that we did indeed drop a container
             Assert.AreEqual("Container",
                 VAUSERCELL.UserDefinedCellsHelper
-                    .Get(droppedContainer)
+                    .Get(dropped_container)
                     .First(s => s.Name == "msvStructureType")
                     .Value.Result);
 
