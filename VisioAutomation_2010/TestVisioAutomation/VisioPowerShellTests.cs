@@ -25,18 +25,20 @@ namespace TestVisioAutomation
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)
         {
-            var test = new VisioPowerShell.Commands.New_VisioApplication().Invoke();
+            var visio_app = new VisioPowerShell.Commands.New_VisioApplication().Invoke();
 
             VisioPowerShellTests.sessionState = InitialSessionState.CreateDefault();
 
             
             // Get path of where everything is executing so we can find the VisioPS.dll assembly
             var executing_assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var path = System.IO.Path.GetDirectoryName(executing_assembly.GetName().CodeBase);
-            var uri = new Uri(path);
-            var visioPS = uri.LocalPath + "\\VisioPS.dll";
+            var asm_path = System.IO.Path.GetDirectoryName(executing_assembly.GetName().CodeBase);
+            var uri = new Uri(asm_path);
+            var visioPS = System.IO.Path.Combine(uri.LocalPath ,"VisioPS.dll");
+            var modules = new []{visioPS};
+            
             // Import the latest VisioPS module into the PowerShell session
-            VisioPowerShellTests.sessionState.ImportPSModule(new []{visioPS});
+            VisioPowerShellTests.sessionState.ImportPSModule(modules);
             VisioPowerShellTests.runSpace = RunspaceFactory.CreateRunspace(VisioPowerShellTests.sessionState);
             VisioPowerShellTests.runSpace.Open();
             VisioPowerShellTests.powerShell = PowerShell.Create();
