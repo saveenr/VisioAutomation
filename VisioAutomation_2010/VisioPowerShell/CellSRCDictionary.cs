@@ -25,6 +25,8 @@ namespace VisioPowerShell
                 CellSRCDictionary.shape_cellmap["Angle"] = SRCConstants.Angle;
                 CellSRCDictionary.shape_cellmap["BeginX"] = SRCConstants.BeginX;
                 CellSRCDictionary.shape_cellmap["BeginY"] = SRCConstants.BeginY;
+                CellSRCDictionary.shape_cellmap["BeginArrow"] = SRCConstants.BeginArrow;
+                CellSRCDictionary.shape_cellmap["BeginArrowSize"] = SRCConstants.BeginArrowSize;
                 CellSRCDictionary.shape_cellmap["CharCase"] = SRCConstants.CharCase;
                 CellSRCDictionary.shape_cellmap["CharColor"] = SRCConstants.CharColor;
                 CellSRCDictionary.shape_cellmap["CharColorTrans"] = SRCConstants.CharColorTrans;
@@ -35,6 +37,8 @@ namespace VisioPowerShell
                 CellSRCDictionary.shape_cellmap["CharStyle"] = SRCConstants.CharStyle;
                 CellSRCDictionary.shape_cellmap["EndX"] = SRCConstants.EndX;
                 CellSRCDictionary.shape_cellmap["EndY"] = SRCConstants.EndY;
+                CellSRCDictionary.shape_cellmap["EndArrow"] = SRCConstants.EndArrow;
+                CellSRCDictionary.shape_cellmap["EndArrowSize"] = SRCConstants.EndArrowSize;
                 CellSRCDictionary.shape_cellmap["FillBkgnd"] = SRCConstants.FillBkgnd;
                 CellSRCDictionary.shape_cellmap["FillBkgndTrans"] = SRCConstants.FillBkgndTrans;
                 CellSRCDictionary.shape_cellmap["FillForegnd"] = SRCConstants.FillForegnd;
