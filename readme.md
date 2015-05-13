@@ -18,6 +18,9 @@ Documentation here: http://sdrv.ms/11AWkp7
 
 ## Libraries
 * Visio Automation 2007 [NuGet package](http://www.nuget.org/packages/VisioAutomation2007/) | [Docs](https://onedrive.live.com/?cid=1ff099edb1c7ebfa&id=1FF099EDB1C7EBFA%2137994&authkey=!AHhZWdAlU7LwJ6Y)
-* Visio Automation 2010 [NuGet package](http://www.nuget.org/packages/VisioAutomation2010/) | [Docs](https://onedrive.live.com/?cid=1ff099edb1c7ebfa&id=1FF099EDB1C7EBFA%211817)
-* Visio Automariton VDX [NuGet package](http://www.nuget.org/packages/VisioAutomation.VDX/) | [Docs](http://1drv.ms/18lQ7o5)
+* Visio Automation 2010 [NuGet package](http://www.nuget.org/packages/VisioAutomation2010/) | 
+
+## Related Projects
+* (VisioAutomation.VDX)[https://github.com/saveenr/VisioAutomation.VDX]
+
 
