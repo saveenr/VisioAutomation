@@ -23,7 +23,7 @@ namespace TestVisioAutomation.Scripting
 
             client.Selection.All();
 
-            string output_filename = Globals.Helper.GetTestMethodOutputFilename(".html");
+            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".html");
 
             if (File.Exists(output_filename))
             {

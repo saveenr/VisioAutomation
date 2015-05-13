@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestVisioAutomation;
 using VisioAutomation.Extensions;
 using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
 using IVisio = Microsoft.Office.Interop.Visio;
@@ -13,7 +12,7 @@ using SXL = System.Xml.Linq;
 namespace TestVisioAutomationVDX
 {
     [TestClass]
-    public class VDX_Tests : VisioAutomationTest
+    public class VDX_Tests : BaseVDXTest
     {
         public IVisio.Document TryOpen(IVisio.Documents docs, string filename)
         {
@@ -108,7 +107,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void VDX_MultiPageDocument()
         {
-            string output_filename = Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vdx");
 
             var template = new VisioAutomation.VDX.Template(); // the default template
             var doc = new VisioAutomation.VDX.Elements.Drawing(template);
@@ -145,7 +144,7 @@ namespace TestVisioAutomationVDX
         [TestMethod]
         public void VDX_CustomProperties()
         {
-            string filename = Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vdx");
 
             var template = new VisioAutomation.VDX.Template();
             var doc_node = new VisioAutomation.VDX.Elements.Drawing(template);
@@ -207,7 +206,7 @@ namespace TestVisioAutomationVDX
         public void VDX_CustomTemplate()
         {
             string input_filename = this.GetTestResultsOutPath(@"datafiles\template_router.vdx");
-            string output_filename = Globals.Helper.GetTestMethodOutputFilename(".vdx");
+            string output_filename = TestGlobals.TestHelper.GetTestMethodOutputFilename(".vdx");
             
             // Load the template
             string template_xml = File.ReadAllText(input_filename);

@@ -96,8 +96,8 @@
     <Compile Include="VisioPowerShellTests.cs" />
     <Compile Include="DiagnosticDebugContext.cs" />
     <Compile Include="DOM\DOM_Text.cs" />
-    <Compile Include="Globals.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="TestGlobals.cs" />
+    <Compile Include="TestHelper.cs" />
     <Compile Include="Internal\BezierTests.cs" />
     <Compile Include="Internal\TypeTests.cs" />
     <Compile Include="Models\CointainerLayout_Tests.cs" />

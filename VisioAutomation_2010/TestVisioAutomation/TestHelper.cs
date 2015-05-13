@@ -4,11 +4,11 @@ using System.IO;
 
 namespace TestVisioAutomation
 {
-    public class Helper
+    public class TestHelper
     {
         private readonly string OutputPath;
 
-        public Helper(string name)
+        public TestHelper(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
