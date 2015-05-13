@@ -1,5 +1,5 @@
 ## Introduction
-VisioAutomation makes it easier for developers to control Visio from .NET languages. In addition to simplifying common taskhttps://github.com/saveenr/VisioAutomation/edit/master/readme.md#fullscreens, it makes it easier to build your own Visio add-ins and automation/scripting tools. Finally, it enables you to generate simple Visio XML (VDX) files without even having Visio installed.
+VisioAutomation makes it easier for developers to control Visio from .NET languages. In addition to simplifying common tasks, it makes it easier to build your own Visio add-ins and automation/scripting tools. Finally, it enables you to generate simple Visio XML (VDX) files without even having Visio installed.
 Source
 
 ## Cloning
