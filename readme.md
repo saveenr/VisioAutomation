@@ -16,7 +16,7 @@ Download the tools here: https://onedrive.live.com/?cid=1ff099edb1c7ebfa&id=1FF0
 Documentation here: http://sdrv.ms/11AWkp7
 
 
-## Get the VisioAutomation via NuGet Packages
+## NuGet Packages
 * Visio Automation 2007 http://www.nuget.org/packages/VisioAutomation2007/
 * Visio Automation 2010 http://www.nuget.org/packages/VisioAutomation2010/
 * Visio Automariton VDX http://www.nuget.org/packages/VisioAutomation.VDX/
