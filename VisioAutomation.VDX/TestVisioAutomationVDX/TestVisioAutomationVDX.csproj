@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Msagl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=640c57aa40e7ae7d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\VisioAutomation_2010\packages\VisioAutomation2010.1.5.6\lib\net40\Microsoft.Msagl.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Visio, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -44,6 +48,10 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="VisioAutomation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\VisioAutomation_2010\packages\VisioAutomation2010.1.5.6\lib\net40\VisioAutomation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -64,10 +72,6 @@
     <Compile Include="VDX_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\VisioAutomation_2010\VisioAutomation\VisioAutomation.csproj">
-      <Project>{920c7842-10e0-48c3-a439-c785fc2b234e}</Project>
-      <Name>VisioAutomation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.VDX\VisioAutomation.VDX.csproj">
       <Project>{A2BD039F-38EB-4E19-A1A4-8E6730CBC4E9}</Project>
       <Name>VisioAutomation.VDX</Name>
@@ -81,6 +85,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\sampleflowchart1.txt" />
   </ItemGroup>
   <ItemGroup>
