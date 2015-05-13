@@ -166,6 +166,10 @@
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VisioPowerShell\VisioPowerShell.csproj">
+      <Project>{6dfb7c5e-7ac1-48ee-a065-2075921a7413}</Project>
+      <Name>VisioPowerShell</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
