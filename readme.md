@@ -21,6 +21,6 @@ Documentation here: http://sdrv.ms/11AWkp7
 * Visio Automation 2010 [NuGet package](http://www.nuget.org/packages/VisioAutomation2010/) | 
 
 ## Related Projects
-* (VisioAutomation.VDX)[https://github.com/saveenr/VisioAutomation.VDX] - to generate simple Visio XML (VDX) files without even having Visio installed.
+* [VisioAutomation.VDX](https://github.com/saveenr/VisioAutomation.VDX) - to generate simple Visio XML (VDX) files without even having Visio installed.
 
 
