@@ -13,11 +13,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{047700E6-C918-4609-AD7A-6636CF6A07FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{63AC84CF-6EB1-49D5-A790-78C16AAAAEE8}"
-	ProjectSection(SolutionItems) = preProject
-		VisioPowerTools2010\FormScrambleText.cs = VisioPowerTools2010\FormScrambleText.cs
-		VisioPowerTools2010\FormScrambleText.Designer.cs = VisioPowerTools2010\FormScrambleText.Designer.cs
-		VisioPowerTools2010\FormScrambleText.resx = VisioPowerTools2010\FormScrambleText.resx
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioAutomation", "VisioAutomation\VisioAutomation.csproj", "{920C7842-10E0-48C3-A439-C785FC2B234E}"
 EndProject
