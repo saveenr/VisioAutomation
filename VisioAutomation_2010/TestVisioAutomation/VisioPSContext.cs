@@ -13,32 +13,46 @@ namespace TestVisioAutomation
         }
         public IVisio.ShapeClass New_Visio_Container(string cont_master_name, string cont_doc)
         {
-            var cmd = string.Format("New-VisioContainer -Master (Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", cont_master_name, cont_doc);
-            var results = this.Invoker.Invoke(cmd);
-            var shape = (IVisio.ShapeClass)results[0].BaseObject;
-            return shape;
+            var xdoc = this.Open_Visio_Document(cont_doc);
+            var xmaster = this.Get_Visio_Master(cont_master_name,cont_doc);
+
+            var cmd = new VisioPowerShell.Commands.New_VisioContainer();
+            cmd.Master = xmaster;
+            var results = cmd.Invoke<IVisio.ShapeClass>();
+            var shape = results.First();
+            return shape ;
         }
 
         public List<IVisio.Shape> New_VisioShape(IVisio.MasterClass master, double[] points)
         {
-            var pipeline = this.RunSpace.CreatePipeline();
-            var cmd = new SMA.Runspaces.Command(@"New-VisioShape");
-            cmd.AddParameter("Master", master);
-            cmd.AddParameter("Points", points);
-            pipeline.Commands.Add(cmd);
-            var results = pipeline.Invoke();
-            var shapes = (List<IVisio.Shape>)results[0].BaseObject;
-            return shapes;
+            var cmd = new VisioPowerShell.Commands.New_VisioShape();
+            cmd.Masters = new IVisio.Master[]{ master };
+            cmd.Points= points;
+            var results = cmd.Invoke<List<IVisio.Shape>>();
+            var shape_list = results.First();
+            return shape_list;
         }
 
         public IVisio.MasterClass Get_Visio_Master(string rectangle, string basic_u_vss)
         {
-            var cmd = string.Format("(Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", rectangle, basic_u_vss);
-            var results = this.Invoker.Invoke(cmd);
-            var master = (IVisio.MasterClass)results[0].BaseObject;
+            var doc = this.Open_Visio_Document(basic_u_vss);
+
+            var cmd = new VisioPowerShell.Commands.Get_VisioMaster();
+            cmd.Name = rectangle;
+            cmd.Document = doc;
+            var results = cmd.Invoke<IVisio.MasterClass>();
+            var master = results.First();
             return master;
         }
 
+        public IVisio.DocumentClass Open_Visio_Document(string filename)
+        {
+            var cmd = new VisioPowerShell.Commands.Open_VisioDocument();
+            cmd.Filename = filename;
+            var results = cmd.Invoke<IVisio.DocumentClass>();
+            var doc = results.First();
+            return doc;
+        }
 
         public IVisio.DocumentClass New_Visio_Document()
         {
