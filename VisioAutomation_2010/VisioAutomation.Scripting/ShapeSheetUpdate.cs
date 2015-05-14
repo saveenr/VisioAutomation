@@ -11,9 +11,9 @@ namespace VisioAutomation.Scripting
         public bool BlastGuards;
         public bool TestCircular;
 
-        public ShapeSheetUpdate(Client ss,IVisio.Page page)
+        public ShapeSheetUpdate(Client client, IVisio.Page page)
         {
-            this.Client = ss;
+            this.Client = client;
             this.TargetPage = page;
             this.update = new ShapeSheet.Update();
         }
