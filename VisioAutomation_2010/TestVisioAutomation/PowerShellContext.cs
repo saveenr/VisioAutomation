@@ -1,6 +1,4 @@
 using System;
-using System.Data;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SMA=System.Management.Automation;
 
 namespace TestVisioAutomation
@@ -34,7 +32,7 @@ namespace TestVisioAutomation
             this.Invoker = new SMA.RunspaceInvoke(this.RunSpace);
         }
 
-        public void cleanup()
+        public void CleanUp()
         {
             // Make sure we cleanup everything
             this.PowerShell.Dispose();
