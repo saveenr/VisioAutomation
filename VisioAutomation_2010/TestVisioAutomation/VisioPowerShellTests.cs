@@ -1,23 +1,21 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
 using SMA=System.Management.Automation;
 using IVisio=Microsoft.Office.Interop.Visio;
-using System.Collections.Generic;
 
 namespace TestVisioAutomation
 {
     [TestClass]
     public class VisioPowerShellTests
     {
-        private static PowerShellContext ps_context = new PowerShellContext();
+        private static VisioPSContext visiops_session = new VisioPSContext();
 
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)
         {
-            var visio_app = new VisioPowerShell.Commands.New_VisioApplication().Invoke();
+            var new_visio_application = new VisioPowerShell.Commands.New_VisioApplication();
+            var visio_app = new_visio_application.Invoke();
         }
- 
+
         [TestCleanup]
         public void PSTestFixtureTeardown()
         {
@@ -25,42 +23,47 @@ namespace TestVisioAutomation
         }
  
         [ClassCleanup]
-        public static void PSTestVisioPowerShellClassCleanup()
+        public static void CleanUp()
         {
-            VisioPowerShellTests.ps_context.CleanUp();
+            VisioPowerShellTests.visiops_session.CleanUp();
         }
  
         [TestMethod]
-        public void PSTestNewVisioDocument()
+        public void VisioPS_New_Visio_Document()
         {
-            var doc = ps_context.New_Visio_Document();
+            var doc = VisioPowerShellTests.visiops_session.New_Visio_Document();
             Assert.IsNotNull(doc);
             VisioPowerShellTests.Close_Visio_Application();
         }
 
         private static void Close_Visio_Application()
         {
-            VisioPowerShellTests.ps_context.Close_Visio_Application();
+            VisioPowerShellTests.visiops_session.Close_Visio_Application();
         }
 
         [TestMethod]
-        public void PSTestGetVisioPageCell()
+        public void VisioPS_Get_Visio_Page_Cell()
         {
-            var doc = ps_context.New_Visio_Document();
-            var datatable1 = ps_context.Get_Visio_Page_Cell(new[] { "PageWidth", "PageHeight" }, true, "Double");
-            var results = datatable1.Rows[0];
+            var cells = new[] { "PageWidth", "PageHeight" };
+            var result_type = "Double";
+            var get_results = true;
+
+            // Handle the page that gets created when a document is created
+
+            var doc = VisioPowerShellTests.visiops_session.New_Visio_Document();
+            var datatable1 = VisioPowerShellTests.visiops_session.Get_Visio_Page_Cell(cells, get_results, result_type);
+
             Assert.IsNotNull(datatable1);
-            Assert.AreEqual(8.5, results["PageWidth"]);
-            Assert.AreEqual(11.0, results["PageHeight"]);
+            Assert.AreEqual(8.5, datatable1.Rows[0]["PageWidth"]);
+            Assert.AreEqual(11.0, datatable1.Rows[0]["PageHeight"]);
             
             //Now lets add another page and get it's width and height
-            var page2 = VisioPowerShellTests.ps_context.New_Visio_Page();
-            var datatable2 = ps_context.Get_Visio_Page_Cell(new[] { "PageWidth", "PageHeight" }, true, "Double");
-            var results2 = datatable1.Rows[0];
+            var page2 = VisioPowerShellTests.visiops_session.New_Visio_Page();
+            var datatable2 = VisioPowerShellTests.visiops_session.Get_Visio_Page_Cell(cells, get_results, result_type);
  
             Assert.IsNotNull(datatable2);
- 	        Assert.AreEqual(8.5, results2["PageWidth"]);
-	        Assert.AreEqual(11.0, results2["PageHeight"]);
+            Assert.AreEqual(8.5, datatable2.Rows[0]["PageWidth"]);
+            Assert.AreEqual(11.0, datatable2.Rows[0]["PageHeight"]);
 
             VisioPowerShellTests.Close_Visio_Application();
         }
@@ -69,8 +72,8 @@ namespace TestVisioAutomation
       [TestMethod]
       public void PSNewVisioContainer()
       {
-          var doc = ps_context.New_Visio_Document();
-          var app = ps_context.Get_Visio_Application();
+          var doc = VisioPowerShellTests.visiops_session.New_Visio_Document();
+          var app = VisioPowerShellTests.visiops_session.Get_Visio_Application();
 
           var ver = VisioAutomation.Application.ApplicationHelper.GetVersion(app);
 
@@ -79,14 +82,14 @@ namespace TestVisioAutomation
           var rectangle = "Rectangle";
           var basic_u_vss = "BASIC_U.VSS";
 
-          var rect = ps_context.Get_Visio_Master(rectangle, basic_u_vss);
+          var rect = VisioPowerShellTests.visiops_session.Get_Visio_Master(rectangle, basic_u_vss);
 
-          ps_context.New_VisioShape(rect, new[] { 1.0, 1.0 });
+          VisioPowerShellTests.visiops_session.New_VisioShape(rect, new[] { 1.0, 1.0 });
 
           // Drop a container on the page... the rectangle we created above should be selected by default. 
           // Since it is selected it will be added as a member to the container.
 
-          var container = ps_context.New_Visio_Container(cont_master_name, cont_doc);
+          var container = VisioPowerShellTests.visiops_session.New_Visio_Container(cont_master_name, cont_doc);
 
           Assert.IsNotNull(container);
 

@@ -35,7 +35,7 @@ namespace TestVisioAutomation
 
         public static void AssertSnap(double ex, double ey, VADRAW.SnappingGrid g1, double ix, double iy, double delta)
         {
-            AreEqual(ex, ey, g1.Snap(ix, iy), delta);
+            AssertVA.AreEqual(ex, ey, g1.Snap(ix, iy), delta);
         }
 
         public static void AreEqual<T>(string formula, T result, VASS.CellData<T> cd)

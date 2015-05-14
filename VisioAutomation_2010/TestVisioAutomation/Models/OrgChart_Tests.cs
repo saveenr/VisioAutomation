@@ -101,8 +101,8 @@ namespace TestVisioAutomation.Models
             Assert.AreEqual("D", n_d.VisioShape.Text.Trim());
             Assert.AreEqual("E", n_e.VisioShape.Text.Trim());
 
-            Assert.AreEqual(new VA.Drawing.Size(4, 2), GetSize(n_a.VisioShape));
-            Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  GetSize(n_b.VisioShape));
+            Assert.AreEqual(new VA.Drawing.Size(4, 2), VisioAutomationTest.GetSize(n_a.VisioShape));
+            Assert.AreEqual(orgchart_doc.LayoutOptions.DefaultNodeSize,  VisioAutomationTest.GetSize(n_b.VisioShape));
 
             app.Quit(true);
         }

@@ -28,7 +28,7 @@ namespace TestVisioAutomation.Shapes
             var shape1 = page.DrawRectangle(2, 0, 3, 1);
 
             var active_window = page.Application.ActiveWindow;
-            var group = SelectAndGroup(active_window, new[] { shape0, shape1 });
+            var group = VisioAutomationTest.SelectAndGroup(active_window, new[] { shape0, shape1 });
             var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(group);
 
             Assert.AreEqual(3, shapes.Count);
@@ -48,16 +48,16 @@ namespace TestVisioAutomation.Shapes
             var shape0 = page.DrawRectangle(0, 0, 1, 1);
             var shape1 = page.DrawRectangle(2, 0, 3, 1);
 
-            var group0 = SelectAndGroup(active_window, new[] { shape0, shape1 });
+            var group0 = VisioAutomationTest.SelectAndGroup(active_window, new[] { shape0, shape1 });
             page.Application.ActiveWindow.DeselectAll();
 
             var shape2 = page.DrawRectangle(0, 3, 1, 4);
             var shape3 = page.DrawRectangle(2, 0, 5, 6);
             
-            var group1 = SelectAndGroup(active_window, new[] { shape2, shape3 });
+            var group1 = VisioAutomationTest.SelectAndGroup(active_window, new[] { shape2, shape3 });
             page.Application.ActiveWindow.Selection.DeselectAll();
             
-            var group2 = SelectAndGroup(active_window, new[] { group0, group1 });
+            var group2 = VisioAutomationTest.SelectAndGroup(active_window, new[] { group0, group1 });
             page.Application.ActiveWindow.Selection.DeselectAll();
 
             var shapes = VisioAutomation.Shapes.ShapeHelper.GetNestedShapes(group2);
