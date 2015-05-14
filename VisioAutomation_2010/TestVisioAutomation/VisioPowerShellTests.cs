@@ -16,7 +16,7 @@ namespace TestVisioAutomation
         // https://connect.microsoft.com/VisualStudio/feedback/details/771138/vs2012-referenced-assemblies-in-unit-test-are-not-copied-to-the-unit-test-out-f
         VisioPowerShell.Commands.New_VisioApplication visioApp = null;
 	 
-        private static PSCTX pstcx = new PSCTX();
+        private static PowerShellContext pstcx = new PowerShellContext();
 
  
         [ClassInitialize]
@@ -41,7 +41,7 @@ namespace TestVisioAutomation
         public void PSTestNewVisioDocument()
         {
            // Send the command to the PowerShell session
-            var visDoc = pstcx.invoker.Invoke("New-VisioDocument");
+            var visDoc = pstcx.Invoker.Invoke("New-VisioDocument");
  
             // Verify results
             Assert.IsNotNull(visDoc);
@@ -50,14 +50,14 @@ namespace TestVisioAutomation
             Assert.IsFalse(String.IsNullOrEmpty(visDoc[0].Properties["Name"].Value.ToString()));
  
             // Close Visio Application that was created when "New-VisioDocument" was invoked
-            pstcx.invoker.Invoke("Close-VisioApplication");
+            pstcx.Invoker.Invoke("Close-VisioApplication");
         }
  
         [TestMethod]
         public void PSTestGetVisioPageCell()
         {
-            var visDoc = pstcx.invoker.Invoke("New-VisioDocument");
-            var cells1 = pstcx.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
+            var visDoc = pstcx.Invoker.Invoke("New-VisioDocument");
+            var cells1 = pstcx.Invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
             var data_row_collection1 = (DataRowCollection)cells1[0].Properties["Rows"].Value;
             var results = data_row_collection1[0];
             Assert.IsNotNull(cells1);
@@ -65,8 +65,8 @@ namespace TestVisioAutomation
             Assert.AreEqual(11.0, results["PageHeight"]);
             
             //Now lets add another page and get it's width and height
-            var page2 = pstcx.invoker.Invoke("New-VisioPage");
-            var cells2 = pstcx.invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
+            var page2 = pstcx.Invoker.Invoke("New-VisioPage");
+            var cells2 = pstcx.Invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
             var data_row_collection2 = (DataRowCollection)cells2[0].Properties["Rows"].Value;
             var results2 = data_row_collection2[0];
  
@@ -75,7 +75,7 @@ namespace TestVisioAutomation
 	        Assert.AreEqual(11.0, results2["PageHeight"]);
 
             // Close Visio Application that was created when "New-VisioDocument" was invoked
-            pstcx.invoker.Invoke("Close-VisioApplication -Force");
+            pstcx.Invoker.Invoke("Close-VisioApplication -Force");
         }
 
 
@@ -87,13 +87,13 @@ namespace TestVisioAutomation
           var rectangle = "Rectangle";
           var basic_u_vss = "BASIC_U.VSS";
 
-          var visDoc = pstcx.invoker.Invoke("New-VisioDocument");
+          var visDoc = pstcx.Invoker.Invoke("New-VisioDocument");
 
           var line1 = string.Format("(Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", rectangle, basic_u_vss);
-          var rect = pstcx.invoker.Invoke(line1);
+          var rect = pstcx.Invoker.Invoke(line1);
 
           // Another way to send a command...
-          var pipeline = pstcx.runSpace.CreatePipeline();
+          var pipeline = pstcx.RunSpace.CreatePipeline();
 
           var cmd_1 = new SMA.Runspaces.Command(@"New-VisioShape");
           cmd_1.AddParameter("Master", rect);
@@ -108,12 +108,12 @@ namespace TestVisioAutomation
           // Since it is selected it will be added as a member to the container.
 
           var line2 = string.Format("New-VisioContainer -Master (Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", cont_master_name, cont_doc);
-          var container = pstcx.invoker.Invoke(line2);
+          var container = pstcx.Invoker.Invoke(line2);
 
           Assert.IsNotNull(container);
           
           // Cleanup
-          pstcx.invoker.Invoke("Close-VisioApplication -Force");
+          pstcx.Invoker.Invoke("Close-VisioApplication -Force");
       }
     }
 
