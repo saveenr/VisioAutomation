@@ -31,8 +31,7 @@ namespace TestVisioAutomation
         [TestMethod]
         public void PSTestNewVisioDocument()
         {
-           // Send the command to the PowerShell session
-            var doc = VisioPowerShellTests.ps_context.Invoker.Invoke("New-VisioDocument");
+            var doc = VisioPowerShellTests.New_Visio_Document();
  
             // Verify results
             Assert.IsNotNull(doc);
@@ -42,13 +41,18 @@ namespace TestVisioAutomation
             Assert.IsFalse(String.IsNullOrEmpty(ps_object.Properties["Name"].Value.ToString()));
  
             // Close Visio Application that was created when "New-VisioDocument" was invoked
-            VisioPowerShellTests.ps_context.Invoker.Invoke("Close-VisioApplication");
+            VisioPowerShellTests.Close_Visio_Application();
         }
- 
+
+        private static void Close_Visio_Application()
+        {
+            VisioPowerShellTests.ps_context.Invoker.Invoke("Close-VisioApplication -Force");
+        }
+
         [TestMethod]
         public void PSTestGetVisioPageCell()
         {
-            var doc = VisioPowerShellTests.ps_context.Invoker.Invoke("New-VisioDocument");
+            var doc = VisioPowerShellTests.New_Visio_Document();
             var cells1 = VisioPowerShellTests.ps_context.Invoker.Invoke("Get-VisioPageCell -Cells PageWidth,PageHeight -Page (Get-VisioPage -ActivePage) -GetResults -ResultType Double");
             var data_row_collection1 = (System.Data.DataRowCollection)cells1[0].Properties["Rows"].Value;
             var results = data_row_collection1[0];
@@ -66,19 +70,16 @@ namespace TestVisioAutomation
  	        Assert.AreEqual(8.5, results2["PageWidth"]);
 	        Assert.AreEqual(11.0, results2["PageHeight"]);
 
-            // Close Visio Application that was created when "New-VisioDocument" was invoked
-            VisioPowerShellTests.ps_context.Invoker.Invoke("Close-VisioApplication -Force");
+            VisioPowerShellTests.Close_Visio_Application();
         }
 
 
       [TestMethod]
       public void PSNewVisioContainer()
       {
-          var doc = VisioPowerShellTests.ps_context.Invoker.Invoke("New-VisioDocument");
+          var doc = VisioPowerShellTests.New_Visio_Document();
+          var app = VisioPowerShellTests.Get_Visio_Application();
 
-
-          var app_0 = VisioPowerShellTests.ps_context.Invoker.Invoke("Get-VisioApplication");
-          var app = (IVisio.ApplicationClass) app_0[0].BaseObject;
           var ver = VisioAutomation.Application.ApplicationHelper.GetVersion(app);
 
           var cont_doc = "SDCONT_U.VSSX";
@@ -92,9 +93,7 @@ namespace TestVisioAutomation
               cont_master_name = "Container 1";
           }
 
-
-          var line1 = string.Format("(Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", rectangle, basic_u_vss);
-          var rect = VisioPowerShellTests.ps_context.Invoker.Invoke(line1);
+          var rect = VisioPowerShellTests.Get_Visio_Master(rectangle, basic_u_vss);
 
           // Another way to send a command...
           var pipeline = VisioPowerShellTests.ps_context.RunSpace.CreatePipeline();
@@ -115,10 +114,29 @@ namespace TestVisioAutomation
           var container = VisioPowerShellTests.ps_context.Invoker.Invoke(line2);
 
           Assert.IsNotNull(container);
-          
-          // Cleanup
-          VisioPowerShellTests.ps_context.Invoker.Invoke("Close-VisioApplication -Force");
+
+          VisioPowerShellTests.Close_Visio_Application();
       }
+
+        private static System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> Get_Visio_Master(string rectangle, string basic_u_vss)
+        {
+            var line1 = string.Format("(Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", rectangle, basic_u_vss);
+            var rect = VisioPowerShellTests.ps_context.Invoker.Invoke(line1);
+            return rect;
+        }
+
+        private static System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> New_Visio_Document()
+        {
+            var doc = VisioPowerShellTests.ps_context.Invoker.Invoke("New-VisioDocument");
+            return doc;
+        }
+
+        private static Microsoft.Office.Interop.Visio.ApplicationClass Get_Visio_Application()
+        {
+            var app_0 = VisioPowerShellTests.ps_context.Invoker.Invoke("Get-VisioApplication");
+            var app = (IVisio.ApplicationClass) app_0[0].BaseObject;
+            return app;
+        }
     }
 
     public static class SMA_Extensions
