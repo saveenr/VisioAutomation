@@ -1,7 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
 using SMA=System.Management.Automation;
 using IVisio=Microsoft.Office.Interop.Visio;
+using System.Collections.Generic;
 
 namespace TestVisioAutomation
 {
@@ -82,47 +84,51 @@ namespace TestVisioAutomation
 
           var ver = VisioAutomation.Application.ApplicationHelper.GetVersion(app);
 
-          var cont_doc = "SDCONT_U.VSSX";
-          var cont_master_name = "Plain";
+          var cont_doc = ver.Major >= 15 ? "SDCONT_U.VSSX" : "SDCONT_U.VSS";
+          var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
           var rectangle = "Rectangle";
           var basic_u_vss = "BASIC_U.VSS";
 
-          if (ver.Major == 14)
-          {
-              cont_doc = "SDCONT_U.VSS";
-              cont_master_name = "Container 1";
-          }
-
           var rect = VisioPowerShellTests.Get_Visio_Master(rectangle, basic_u_vss);
 
-          // Another way to send a command...
-          var pipeline = VisioPowerShellTests.ps_context.RunSpace.CreatePipeline();
+          VisioPowerShellTests.New_VisioShape(rect, new[] {1.0, 1.0});
 
-          var cmd_1 = new SMA.Runspaces.Command(@"New-VisioShape");
-          cmd_1.AddParameter("Master", rect);
-          cmd_1.AddParameter("Points", new[] { 1.0, 1.0 });
-          pipeline.Commands.Add(cmd_1);
-          pipeline.Invoke();
-
-          // Everything above (to the new "pipeline" variable) can be done with this one line...
-          //var shape = invoker.Invoke("New-VisioShape -Master (Get-VisioMaster \"Rectangle\" (Open-VisioDocument \"BASIC_U.VSS\")) -Points 1,1");
-          
           // Drop a container on the page... the rectangle we created above should be selected by default. 
           // Since it is selected it will be added as a member to the container.
 
-          var line2 = string.Format("New-VisioContainer -Master (Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", cont_master_name, cont_doc);
-          var container = VisioPowerShellTests.ps_context.Invoker.Invoke(line2);
+          var container = VisioPowerShellTests.New_Visio_Container(cont_master_name, cont_doc);
 
           Assert.IsNotNull(container);
 
           VisioPowerShellTests.Close_Visio_Application();
       }
 
-        private static System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> Get_Visio_Master(string rectangle, string basic_u_vss)
+        private static IVisio.ShapeClass New_Visio_Container(string cont_master_name, string cont_doc)
         {
-            var line1 = string.Format("(Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", rectangle, basic_u_vss);
-            var rect = VisioPowerShellTests.ps_context.Invoker.Invoke(line1);
-            return rect;
+            var cmd = string.Format("New-VisioContainer -Master (Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", cont_master_name, cont_doc);
+            var results = VisioPowerShellTests.ps_context.Invoker.Invoke(cmd);
+            var shape = (IVisio.ShapeClass)results[0].BaseObject;
+            return shape;
+        }
+
+        private static List<IVisio.Shape> New_VisioShape(IVisio.MasterClass master, double[] points)
+        {
+            var pipeline = VisioPowerShellTests.ps_context.RunSpace.CreatePipeline();
+            var cmd = new SMA.Runspaces.Command(@"New-VisioShape");
+            cmd.AddParameter("Master", master);
+            cmd.AddParameter("Points", points);
+            pipeline.Commands.Add(cmd);
+            var results = pipeline.Invoke();
+            var shapes = (List<IVisio.Shape>)results[0].BaseObject;
+            return shapes;
+        }
+
+        private static IVisio.MasterClass Get_Visio_Master(string rectangle, string basic_u_vss)
+        {
+            var cmd = string.Format("(Get-VisioMaster \"{0}\" (Open-VisioDocument \"{1}\"))", rectangle, basic_u_vss);
+            var results = VisioPowerShellTests.ps_context.Invoker.Invoke(cmd);
+            var master = (IVisio.MasterClass)results[0].BaseObject;
+            return master;
         }
 
         private static System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> New_Visio_Document()
