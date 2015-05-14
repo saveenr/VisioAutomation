@@ -1,6 +1,7 @@
 using SMA=System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestVisioAutomation
 {
@@ -38,44 +39,48 @@ namespace TestVisioAutomation
             return master;
         }
 
+
         public IVisio.DocumentClass New_Visio_Document()
         {
-            var results = this.Invoker.Invoke("New-VisioDocument");
-            var doc = (IVisio.DocumentClass)results[0].BaseObject;
+            var cmd = new VisioPowerShell.Commands.New_VisioDocument();
+            var results = cmd.Invoke<IVisio.DocumentClass>();
+            var doc = results.First();
             return doc;
         }
 
         public IVisio.PageClass New_Visio_Page()
         {
-            var results = this.Invoker.Invoke("New-VisioPage");
-            var page = (IVisio.PageClass)results[0].BaseObject;
+            var cmd = new VisioPowerShell.Commands.New_VisioPage();
+            var results = cmd.Invoke<IVisio.PageClass>();
+            var page  = results.First();
             return page;
         }
 
 
         public IVisio.ApplicationClass Get_Visio_Application()
         {
-            var app_0 = this.Invoker.Invoke("Get-VisioApplication");
-            var app = (IVisio.ApplicationClass)app_0[0].BaseObject;
+            var cmd = new VisioPowerShell.Commands.Get_VisioApplication();
+            var results = cmd.Invoke<IVisio.ApplicationClass>();
+            var app = results.First();
             return app;
         }
 
         public System.Data.DataTable Get_Visio_Page_Cell( string [] Cells, bool GetResults, string ResultType)
         {
-            var pipeline = this.RunSpace.CreatePipeline();
-            var cmd = new SMA.Runspaces.Command(@"Get-VisioPageCell");
-            cmd.AddParameter("Cells", Cells);
-            cmd.AddParameter("GetResults", GetResults);
-            cmd.AddParameter("ResultType", ResultType);
-            pipeline.Commands.Add(cmd);
-            var results = pipeline.Invoke();
-            var dt = (System.Data.DataTable)results[0].BaseObject;
+            var cmd = new VisioPowerShell.Commands.Get_VisioPageCell();
+            cmd.Cells = Cells;
+            cmd.GetResults = GetResults;
+            cmd.ResultType = VisioPowerShell.ResultType.Double;
+            var results = cmd.Invoke <System.Data.DataTable>();
+            var dt = results.First();
             return dt;
         }
 
         public void Close_Visio_Application()
         {
-            this.Invoker.Invoke("Close-VisioApplication -Force");
+            var cmd = new VisioPowerShell.Commands.Close_VisioApplication();
+            cmd.Force = true;
+            var results = cmd.Invoke();
         }
 
     }
