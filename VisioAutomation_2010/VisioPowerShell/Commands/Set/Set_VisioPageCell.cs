@@ -33,6 +33,9 @@ namespace VisioPowerShell.Commands
             var valuemap = new CellValueDictionary(cellmap);
             valuemap.UpdateValueMap(this.Hashtable,cellmap);
 
+
+            this.Dump(valuemap);
+
             foreach (var page in target_pages)
             {
                 var pagesheet = page.PageSheet;

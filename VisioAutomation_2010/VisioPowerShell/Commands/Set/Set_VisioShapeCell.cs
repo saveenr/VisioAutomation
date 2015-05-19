@@ -34,6 +34,8 @@ namespace VisioPowerShell.Commands
 
             var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
 
+            this.Dump(valuemap);
+
             foreach (var shape in target_shapes)
             {
                 var id = shape.ID16;
@@ -60,5 +62,7 @@ namespace VisioPowerShell.Commands
                 this.WriteVerbose("End Update");
             }
         }
+
+
     }
 }

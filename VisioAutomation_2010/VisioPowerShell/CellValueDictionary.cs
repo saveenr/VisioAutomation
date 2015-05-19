@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Globalization;
 using VisioAutomation.ShapeSheet;
 
@@ -61,7 +59,9 @@ namespace VisioPowerShell
                     throw new System.ArgumentOutOfRangeException("ht", message);
                 }
 
-                var cell_value_string = get_value_string(cell_value_o, cellname);
+                var cell_value_string = CellValueDictionary.get_value_string(cell_value_o, cellname);
+
+                this[cellname] = cell_value_string;
             }
         }
 
@@ -93,7 +93,7 @@ namespace VisioPowerShell
             {
                 var value_type_name = value_o.GetType().FullName;
                 string message = string.Format("Cell {0} has an unsupported type {1} ", cellname, value_type_name);
-                throw new ArgumentOutOfRangeException(message);
+                throw new System.ArgumentOutOfRangeException(message);
             }
             return value_string;
         }

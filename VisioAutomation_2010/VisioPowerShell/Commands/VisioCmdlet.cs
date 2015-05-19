@@ -66,5 +66,14 @@ namespace VisioPowerShell
             }
             return true;
         }
+
+        protected void Dump(CellValueDictionary valuemap)
+        {
+            foreach (var cellname in valuemap.CellNames)
+            {
+                string cell_value = valuemap[cellname];
+                this.WriteVerbose("{0} = {1}", cellname, cell_value);
+            }
+        }
     }
 }
