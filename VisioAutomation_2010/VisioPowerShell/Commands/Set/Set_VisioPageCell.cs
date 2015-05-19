@@ -49,7 +49,6 @@ namespace VisioPowerShell.Commands
                 this.WriteVerbose("TestCircular: {0}", this.TestCircular);
                 this.WriteVerbose("Number of Shapes : {0}", 1);
                 this.WriteVerbose("Number of Total Updates: {0}", update.Count());
-                this.WriteVerbose("Number of Updates per Shape: {0}", update.Count() / 1);
 
                 using (var undoscope = new VisioAutomation.Application.UndoScope(this.client.VisioApplication, "SetPageCells"))
                 {
