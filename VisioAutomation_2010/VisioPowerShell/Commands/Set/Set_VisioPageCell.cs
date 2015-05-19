@@ -11,16 +11,16 @@ namespace VisioPowerShell.Commands
     {
         [SMA.ParameterAttribute(Mandatory = true,Position=0)] 
         public Hashtable Hashtable  { get; set; }
- 
-        [SMA.ParameterAttribute(Mandatory = false)]
-        public IVisio.Page[] Pages { get; set; }
 
         [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
         [SMA.ParameterAttribute(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
-        
+
+        [SMA.ParameterAttribute(Mandatory = false)]
+        public IVisio.Page[] Pages { get; set; }
+
         protected override void ProcessRecord()
         {
             var update = new VisioAutomation.ShapeSheet.Update();
