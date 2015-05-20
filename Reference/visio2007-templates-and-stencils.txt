@@ -1,0 +1,328 @@
+Visio2007|INTANN_U.VSS||Initiation and Annunciation
+Visio2007|NETSYM_U.VSS||Network Symbols
+Visio2007|PTSCLD_M.VSS||Custom Patterns-Scaled
+Visio2007|SDL_U.VSS|SDL_U.VST|SDL Diagram Shapes
+Visio2007|DRAWTL_M.VSS||Drawing Tool Shapes
+Visio2007|PEPIPE_M.VSS|PEPIPE_M.VST|Pipelines
+Visio2007|UMLSEQ_U.VSS||UML Sequence
+Visio2007|UMLACT_M.VSS||UML Activity
+Visio2007|NETRM_M.VSS||Network Room Elements
+Visio2007|DATFLO_U.VSS|DATFLO_U.VST|Data Flow Diagram Shapes
+Visio2007|ELETEL_M.VSS|ELETEL_M.VST|Electrical and Telecom
+Visio2007|EMBELL_M.VSS||Embellishments
+Visio2007|EXCOBJ_U.VSS||Exchange Objects
+Visio2007|GARDEN_U.VSS||Garden Accessories
+Visio2007|NETLOC_M.VSS||Network Locations
+Visio2007|PEINST_M.VSS||Instruments
+Visio2007|PLUMB_M.VSS||Plumbing
+Visio2007|WADOWI_U.VSS||Walls, Doors and Windows
+Visio2007|DRILLD_M.VSS|DRILLD_M.VST|PivotDiagram Shapes
+Visio2007|FLOSHP_U.VSS||Miscellaneous Flowchart Shapes
+Visio2007|BORDER_M.VSS||Borders and Titles
+Visio2007|COMPS_M.VSS||Computers and Monitors
+Visio2007|PLUMB_U.VSS||Plumbing
+Visio2007|PTUSCL_M.VSS||Custom Patterns-Unscaled
+Visio2007|BTHKT_M.VSS||Bath and Kitchen Plan
+Visio2007|AUDIT_M.VSS|AUDIT_M.VST|Audit Diagram Shapes
+Visio2007|ITIL_M.VSS|ITIL_M.VST|ITIL Shapes
+Visio2007|FASTN1_M.VSS||Fasteners 1
+Visio2007|BLOCK_M.VSS|BLOCK_M.VST|Blocks
+Visio2007|UMLSTA_M.VSS||UML Statechart
+Visio2007|SHPMCH_U.VSS||Shop Floor-Machines and Equipment
+Visio2007|VALVE2_M.VSS||Pipes and Valves-Valves 2
+Visio2007|IDEF0_M.VSS|IDEF0_M.VST|IDEF0 Diagram Shapes
+Visio2007|RECSHP_U.VSS||Recreation Shapes
+Visio2007|LANGLV_U.VSS||Language Level Shapes
+Visio2007|APPL_M.VSS||Appliances
+Visio2007|EESWCH_U.VSS||Switches and Relays
+Visio2007|FAULT_M.VSS|FAULT_M.VST|Fault Tree Analysis Shapes
+Visio2007|EECHIP_M.VSS|EECHIP_M.VST|Integrated Circuit Components
+Visio2007|HVACD_M.VSS||HVAC Ductwork
+Visio2007|OFFEQP_U.VSS||Office Equipment
+Visio2007|DVCALL_U.VSS||Data Graphics
+Visio2007|HVACC_M.VSS||HVAC Controls
+Visio2007|FAULT_U.VSS|FAULT_U.VST|Fault Tree Analysis Shapes
+Visio2007|PERIPH_M.VSS||Networks and Peripherals
+Visio2007|RCKSVR_U.VSS||Rack Mounted Servers (US Units)
+Visio2007|SERVER_U.VSS||Servers
+Visio2007|MAP3D_M.VSS|MAP3D_M.VST|Directional Map Shapes 3D
+Visio2007|VIDSUR_M.VSS||Video Surveillance
+Visio2007|DRAWTL_U.VSS||Drawing Tool Shapes
+Visio2007|ADO_U.VSS||Active Directory Objects
+Visio2007|DIMENG_M.VSS||Dimensioning-Engineering
+Visio2007|PTSINT_U.VSS||Points of Interest
+Visio2007|MAP3D_U.VSS|MAP3D_U.VST|Directional Map Shapes 3D
+Visio2007|TIMELN_M.VSS|TIMELN_M.VST|Timeline Shapes
+Visio2007|UIMENU_M.VSS||Toolbars and Menus
+Visio2007|WADOWI_M.VSS||Walls, Doors and Windows
+Visio2007|WFDEP_U.VSS||Departments (US Units)
+Visio2007|ADO_M.VSS||Active Directory Objects
+Visio2007|EECOMP_U.VSS||Composite Assemblies
+Visio2007|GARDEN_M.VSS||Garden Accessories
+Visio2007|LNDMRK_M.VSS||Landmark Shapes
+Visio2007|NETLOC_U.VSS||Network Locations
+Visio2007|PEEQP_M.VSS||Equipment-General
+Visio2007|RCKEQP_U.VSS||Rack-mounted Equipment
+Visio2007|UMLSTR_U.VSS||UML Static Structure
+Visio2007|EEFUND_U.VSS||Fundamental Items
+Visio2007|ALARM_U.VSS||Alarm and Access Control
+Visio2007|EETERM_U.VSS||Terminals and Connectors
+Visio2007|FASTN2_M.VSS||Fasteners 2
+Visio2007|SHPREC_M.VSS||Warehouse-Shipping and Receiving
+Visio2007|UICTRL_U.VSS||Common Controls
+Visio2007|BASFLO_M.VSS|BASFLO_M.VST|Basic Flowchart Shapes
+Visio2007|VALVE1_U.VSS||Pipes and Valves-Valves 1
+Visio2007|HVACCE_U.VSS||HVAC Controls Equipment
+Visio2007|ARROWS_M.VSS||Arrows
+Visio2007|COMPS_U.VSS||Computers and Monitors
+Visio2007|LGND_M.VSS||Legend
+Visio2007|ELETEL_U.VSS|ELETEL_U.VST|Electrical and Telecom
+Visio2007|OFFEQP_M.VSS||Office Equipment
+Visio2007|DVCALL_M.VSS||Data Graphics
+Visio2007|EEMAPS_U.VSS||Maps and Charts
+Visio2007|UMLUSE_M.VSS||UML Use Case
+Visio2007|PEHEAT_M.VSS||Equipment-Heat Exchangers
+Visio2007|BACKGR_U.VSS||Backgrounds
+Visio2007|ORGCH_M.VSS|ORGCH_M.VST|Organization Chart Shapes
+Visio2007|PEANNT_M.VSS||Process Annotations
+Visio2007|TITLE_M.VSS||Title Blocks
+Visio2007|PTUSCL_U.VSS||Custom Patterns-Unscaled
+Visio2007|WEBMAP_U.VSS|WEBMAP_U.VST|Web Site Map Shapes (US units)
+Visio2007|XFUNCV_U.VSS||Cross-Functional Flowchart Shapes Vertical
+Visio2007|OFFFRN_U.VSS||Office Furniture
+Visio2007|BLOCKP_M.VSS|BLOCKP_M.VST|Blocks with Perspective
+Visio2007|FASTN1_U.VSS||Fasteners 1
+Visio2007|EETRAN_M.VSS||Transformers and Windings
+Visio2007|CALNDR_M.VSS|CALNDR_M.VST|Calendar
+Visio2007|PEVESS_M.VSS||Equipment-Vessels
+Visio2007|UMLSTA_U.VSS||UML Statechart
+Visio2007|LINPAT_M.VSS||Custom Line Patterns
+Visio2007|LOGIC_U.VSS||Analog and Digital Logic
+Visio2007|VALVE2_U.VSS||Pipes and Valves-Valves 2
+Visio2007|LANGLV_M.VSS||Language Level Shapes
+Visio2007|PERT_M.VSS|PERT_M.VST|PERT Chart Shapes
+Visio2007|PRKRD_M.VSS||Parking and Roads
+Visio2007|WRKFLO_U.VSS|WRKFLO_U.VST|Work Flow Diagram Shapes
+Visio2007|DGICON_U.VSS||Icon Sets
+Visio2007|UIWZRD_U.VSS||Wizards
+Visio2007|HVACCE_M.VSS||HVAC Controls Equipment
+Visio2007|WFDEP_M.VSS||Departments
+Visio2007|VIDSUR_U.VSS||Video Surveillance
+Visio2007|WFSTEP_M.VSS||Work Flow Steps
+Visio2007|TRANSP_U.VSS||Transportation Shapes
+Visio2007|ALARM_M.VSS||Alarm and Access Control
+Visio2007|PROPRPT.VSS||Property Reporter
+Visio2007|UMLDEP_U.VSS||UML Deployment
+Visio2007|WELD_M.VSS||Welding Symbols
+Visio2007|FASTN2_U.VSS||Fasteners 2
+Visio2007|MRKTDG_U.VSS|MRKTDG_U.VST|Marketing Diagrams
+Visio2007|SHPREC_U.VSS||Warehouse-Shipping and Receiving
+Visio2007|BASIC_M.VSS||Basic Shapes
+Visio2007|UIICON_U.VSS||Icons
+Visio2007|PEVALV_M.VSS||Valves and Fittings
+Visio2007|UMLCOL_M.VSS||UML Collaboration
+Visio2007|BLOCK_U.VSS|BLOCK_U.VST|Blocks
+Visio2007|MRKTNG_U.VSS||Marketing Shapes
+Visio2007|OFFACC_U.VSS||Office Accessories
+Visio2007|DIMARC_U.VSS||Dimensioning-Architectural
+Visio2007|FPVALV_M.VSS||Fluid Power-Valves
+Visio2007|PERT_U.VSS|PERT_U.VST|PERT Chart Shapes
+Visio2007|CUBICL_U.VSS||Cubicles
+Visio2007|PIPE1_U.VSS||Pipes and Valves-Pipes 1
+Visio2007|PIPE2_U.VSS||Pipes and Valves-Pipes 2
+Visio2007|SITACC_M.VSS||Site Accessories
+Visio2007|SPRBR_M.VSS||Springs and Bearings
+Visio2007|EPC_U.VSS|EPC_U.VST|EPC Diagram Shapes
+Visio2007|CAUSEF_M.VSS|CAUSEF_M.VST|Cause and Effect Diagram Shapes
+Visio2007|IRRIG_U.VSS||Irrigation
+Visio2007|METRO_M.VSS||Metro Shapes
+Visio2007|GANESA_U.VSS||Gane-Sarson
+Visio2007|SPRBR_U.VSS||Springs and Bearings
+Visio2007|EXPRG_M.VSS|EXPRG_M.VST|Express-G
+Visio2007|UMLUSE_U.VSS||UML Use Case
+Visio2007|EPC_M.VSS|EPC_M.VST|EPC Diagram Shapes
+Visio2007|LDAPOB_U.VSS||LDAP Objects
+Visio2007|PLANT_U.VSS||Planting
+Visio2007|EXPRG_U.VSS|EXPRG_U.VST|Express-G
+Visio2007|ROAD_M.VSS||Road Shapes
+Visio2007|PEPUMP_M.VSS||Equipment-Pumps
+Visio2007|EETRAN_U.VSS||Transformers and Windings
+Visio2007|PRKRD_U.VSS||Parking and Roads
+Visio2007|VEHICL_U.VSS||Vehicles
+Visio2007|XFUNCH_M.VSS||Cross-Functional Flowchart Shapes Horizontal
+Visio2007|LINPAT_U.VSS||Custom Line Patterns
+Visio2007|JACKSN_U.VSS|JACKSN_U.VST|Jackson
+Visio2007|WELD_U.VSS||Welding Symbols
+Visio2007|BPRES_U.VSS||Resources
+Visio2007|UMLCOM_U.VSS||UML Component
+Visio2007|CABNT_U.VSS||Cabinets
+Visio2007|EESEMI_U.VSS||Semiconductors and Electron Tubes
+Visio2007|UIWZRD_M.VSS||Wizards
+Visio2007|FLOSHP_M.VSS||Miscellaneous Flowchart Shapes
+Visio2007|EEMECH_U.VSS||Rotating Equip and Mech Functions
+Visio2007|OFFACC_M.VSS||Office Accessories
+Visio2007|WFSTEP_U.VSS||Work Flow Steps
+Visio2007|NETRM_U.VSS||Network Room Elements
+Visio2007|PTSCLD_U.VSS||Custom Patterns-Scaled
+Visio2007|EEMAIN_M.VSS||Maintenance Symbols
+Visio2007|BLOCK3_M.VSS||Blocks Raised
+Visio2007|CALOUT_M.VSS||Callouts
+Visio2007|ENTAPP_M.VSS|ENTAPP_M.VST|Enterprise Application
+Visio2007|GANESA_M.VSS||Gane-Sarson
+Visio2007|LGND_U.VSS||Legend
+Visio2007|ROAD_U.VSS||Road Shapes
+Visio2007|ROOM_M.VSS|ROOM_M.VST|ROOM
+Visio2007|EMBELL_U.VSS||Embellishments
+Visio2007|SYMBOL_M.VSS||Symbols
+Visio2007|UMLACT_U.VSS||UML Activity
+Visio2007|CONNEC_U.VSS||Connectors
+Visio2007|HVACEQ_U.VSS||HVAC Equipment
+Visio2007|EEQUAL_M.VSS||Qualifying Symbols
+Visio2007|INTANN_M.VSS||Initiation and Annunciation
+Visio2007|DTLNET_U.VSS|DTLNET_U.VST|Detailed Network
+Visio2007|SHPMCH_M.VSS||Shop Floor-Machines and Equipment
+Visio2007|MEMOBJ_U.VSS||Memory Objects
+Visio2007|CAUSEF_U.VSS|CAUSEF_U.VST|Cause and Effect Diagram Shapes
+Visio2007|PLANT_M.VSS||Planting
+Visio2007|PEPIPE_U.VSS|PEPIPE_U.VST|Pipelines
+Visio2007|EESWCH_M.VSS||Switches and Relays
+Visio2007|DATFLO_M.VSS|DATFLO_M.VST|Data Flow Diagram Shapes
+Visio2007|EXCOBJ_M.VSS||Exchange Objects
+Visio2007|WEBSIT_M.VSS|WEBSIT_M.VST|Conceptual Web Site Shapes
+Visio2007|PEINST_U.VSS||Instruments
+Visio2007|PEPUMP_U.VSS||Equipment-Pumps
+Visio2007|BSTORM_U.VSS|BSTORM_U.VST|Brainstorming
+Visio2007|DRILLD_U.VSS|DRILLD_U.VST|PivotDiagram Shapes
+Visio2007|CABNT_M.VSS||Cabinets
+Visio2007|PTSINT_M.VSS||Points of Interest
+Visio2007|DIMENG_U.VSS||Dimensioning-Engineering
+Visio2007|ROOM_U.VSS|ROOM_U.VST|ROOM
+Visio2007|TIMELN_U.VSS|TIMELN_U.VST|Timeline Shapes
+Visio2007|UIMENU_U.VSS||Toolbars and Menus
+Visio2007|TQM_M.VSS|TQM_M.VST|TQM Diagram Shapes
+Visio2007|HVACEQ_M.VSS||HVAC Equipment
+Visio2007|EECHIP_U.VSS|EECHIP_U.VST|Integrated Circuit Components
+Visio2007|BASFLO_U.VSS|BASFLO_U.VST|Basic Flowchart Shapes
+Visio2007|FREEQP_U.VSS||Free-standing Rack Equipment
+Visio2007|PERIPH_U.VSS||Networks and Peripherals
+Visio2007|MEMOBJ_M.VSS||Memory Objects
+Visio2007|RECRT_U.VSS||Sport Fields and Recreation
+Visio2007|ARROWS_U.VSS||Arrows
+Visio2007|EEVHF_M.VSS||VHF-UHF-SHF
+Visio2007|FPEQP_U.VSS||Fluid Power-Equipment
+Visio2007|TQM_U.VSS|TQM_U.VST|TQM Diagram Shapes
+Visio2007|TITLE_U.VSS||Title Blocks
+Visio2007|LNDMRK_U.VSS||Landmark Shapes
+Visio2007|EECOMP_M.VSS||Composite Assemblies
+Visio2007|PEHEAT_U.VSS||Equipment-Heat Exchangers
+Visio2007|BSTORM_M.VSS|BSTORM_M.VST|Brainstorming
+Visio2007|RCKEQP_M.VSS||Rack-mounted Equipment
+Visio2007|BACKGR_M.VSS||Backgrounds
+Visio2007|REGSTR_M.VSS||Registers, Grilles and Diffusers
+Visio2007|WEBMAP_M.VSS|WEBMAP_M.VST|Web Site Map Shapes
+Visio2007|EETERM_M.VSS||Terminals and Connectors
+Visio2007|LOGIC_M.VSS||Analog and Digital Logic
+Visio2007|XFUNCV_M.VSS||Cross-Functional Flowchart Shapes Vertical
+Visio2007|BLOCKP_U.VSS|BLOCKP_U.VST|Blocks with Perspective
+Visio2007|COMOLE_U.VSS|COMOLE_U.VST|COM and OLE
+Visio2007|EEQUAL_U.VSS||Qualifying Symbols
+Visio2007|PEVESS_U.VSS||Equipment-Vessels
+Visio2007|FURN_U.VSS||Furniture
+Visio2007|EETCOM_U.VSS||Telecom Switch and Peripheral Equip
+Visio2007|MRKTDG_M.VSS|MRKTDG_M.VST|Marketing Diagrams
+Visio2007|OBJREL_M.VSS||Object Relational
+Visio2007|FREEQP_M.VSS||Free-standing Rack Equipment
+Visio2007|ANNOT_U.VSS||Annotations
+Visio2007|EEMAPS_M.VSS||Maps and Charts
+Visio2007|SHPSTR_M.VSS||Shop Floor-Storage and Distribution
+Visio2007|WEBSIT_U.VSS|WEBSIT_U.VST|Conceptual Web Site Shapes
+Visio2007|ENTITY_M.VSS||Entity Relationship
+Visio2007|MRKTNG_M.VSS||Marketing Shapes
+Visio2007|PEANNT_U.VSS||Process Annotations
+Visio2007|OFFFRN_M.VSS||Office Furniture
+Visio2007|TRANSP_M.VSS||Transportation Shapes
+Visio2007|BLDCOR_U.VSS||Building Core
+Visio2007|CALNDR_U.VSS|CALNDR_U.VST|Calendar
+Visio2007|ITIL_U.VSS|ITIL_U.VST|ITIL Shapes
+Visio2007|ORGCH_U.VSS|ORGCH_U.VST|Organization Chart Shapes
+Visio2007|BTHKT_U.VSS||Bath and Kitchen Plan
+Visio2007|BASIC_U.VSS||Basic Shapes
+Visio2007|VSM_M.VSS|VSM_M.VST|Value Stream Map Shapes
+Visio2007|VSM_U.VSS|VSM_U.VST|Value Stream Map Shapes
+Visio2007|LDAPOB_M.VSS||LDAP Objects
+Visio2007|APPL_U.VSS||Appliances
+Visio2007|CHART_U.VSS|CHART_U.VST|Charting Shapes
+Visio2007|EEVHF_U.VSS||VHF-UHF-SHF
+Visio2007|COMOLE_M.VSS|COMOLE_M.VST|COM and OLE
+Visio2007|DGICON_M.VSS||Icon Sets
+Visio2007|FPEQP_M.VSS||Fluid Power-Equipment
+Visio2007|PEVALV_U.VSS||Valves and Fittings
+Visio2007|RECRT_M.VSS||Sport Fields and Recreation
+Visio2007|UIDLGS_M.VSS||Windows and Dialogs
+Visio2007|UMLCOL_U.VSS||UML Collaboration
+Visio2007|WFOBJ_U.VSS||Work Flow Objects (US units)
+Visio2007|WRKFLO_M.VSS|WRKFLO_M.VST|Work Flow Diagram Shapes
+Visio2007|FPVALV_U.VSS||Fluid Power-Valves
+Visio2007|METRO_U.VSS||Metro Shapes
+Visio2007|CUBICL_M.VSS||Cubicles
+Visio2007|SITACC_U.VSS||Site Accessories
+Visio2007|NETSYM_M.VSS||Network Symbols
+Visio2007|EETCOM_M.VSS||Telecom Switch and Peripheral Equip
+Visio2007|FPASSM_M.VSS||Fluid Power-Valve Assembly
+Visio2007|EEPATH_U.VSS||Transmission Paths
+Visio2007|ENTITY_U.VSS||Entity Relationship
+Visio2007|UMLDEP_M.VSS||UML Deployment
+Visio2007|GANTT_U.VSS|GANTT_U.VST|Gantt Chart Shapes
+Visio2007|REGSTR_U.VSS||Registers, Grilles and Diffusers
+Visio2007|UMLSEQ_M.VSS||UML Sequence
+Visio2007|WALL_M.VSS||Walls, Shell and Structure
+Visio2007|GDT_U.VSS||Geometric Dimensioning and Tolerancing
+Visio2007|UIICON_M.VSS||Icons
+Visio2007|BLDCOR_M.VSS||Building Core
+Visio2007|VEHICL_M.VSS||Vehicles
+Visio2007|JACKSN_M.VSS|JACKSN_M.VST|Jackson
+Visio2007|ANNOT_M.VSS||Annotations
+Visio2007|OBJREL_U.VSS||Object Relational
+Visio2007|PIPE1_M.VSS||Pipes and Valves-Pipes 1
+Visio2007|GDT_M.VSS||Geometric Dimensioning and Tolerancing
+Visio2007|PIPE2_M.VSS||Pipes and Valves-Pipes 2
+Visio2007|AUDIT_U.VSS|AUDIT_U.VST|Audit Diagram Shapes
+Visio2007|ADS_U.VSS||Active Directory Sites and Services
+Visio2007|RECSHP_M.VSS||Recreation Shapes
+Visio2007|SHPSTR_U.VSS||Shop Floor-Storage and Distribution
+Visio2007|UIDLGS_U.VSS||Windows and Dialogs
+Visio2007|ADS_M.VSS||Active Directory Sites and Services
+Visio2007|IDEF0_U.VSS|IDEF0_U.VST|IDEF0 Diagram Shapes
+Visio2007|IRRIG_M.VSS||Irrigation
+Visio2007|ORM_U.VSS|ORM_U.VST|ORM Diagram
+Visio2007|RCKSVR_M.VSS||Rack Mounted Servers
+Visio2007|SERVER_M.VSS||Servers
+Visio2007|EEMAIN_U.VSS||Maintenance Symbols
+Visio2007|ORM_M.VSS|ORM_M.VST|ORM Diagram
+Visio2007|EEPATH_M.VSS||Transmission Paths
+Visio2007|CHART_M.VSS|CHART_M.VST|Charting Shapes
+Visio2007|BORDER_U.VSS||Borders and Titles
+Visio2007|BLOCK3_U.VSS||Blocks Raised
+Visio2007|CALOUT_U.VSS||Callouts
+Visio2007|ENTAPP_U.VSS|ENTAPP_U.VST|Enterprise Application
+Visio2007|HVACC_U.VSS||HVAC Controls
+Visio2007|HVACD_U.VSS||HVAC Ductwork
+Visio2007|WALL_U.VSS||Walls, Shell and Structure
+Visio2007|WFOBJ_M.VSS||Work Flow Objects
+Visio2007|SYMBOL_U.VSS||Symbols
+Visio2007|UMLCOM_M.VSS||UML Component
+Visio2007|SDL_M.VSS|SDL_M.VST|SDL Diagram Shapes
+Visio2007|CONNEC_M.VSS||Connectors
+Visio2007|UMLSTR_M.VSS||UML Static Structure
+Visio2007|XFUNCH_U.VSS||Cross-Functional Flowchart Shapes Horizontal
+Visio2007|EESEMI_M.VSS||Semiconductors and Electron Tubes
+Visio2007|EEMECH_M.VSS||Rotating Equip and Mech Functions
+Visio2007|EEFUND_M.VSS||Fundamental Items
+Visio2007|BPRES_M.VSS||Resources
+Visio2007|UICTRL_M.VSS||Common Controls
+Visio2007|VALVE1_M.VSS||Pipes and Valves-Valves 1
+Visio2007|PEEQP_U.VSS||Equipment-General
+Visio2007|GANTT_M.VSS|GANTT_M.VST|Gantt Chart Shapes
+Visio2007|FURN_M.VSS||Furniture
+Visio2007|DTLNET_M.VSS|DTLNET_M.VST|Detailed Network
+Visio2007|FPASSM_U.VSS||Fluid Power-Valve Assembly

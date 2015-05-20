@@ -1,0 +1,345 @@
+Visio2010|INTANN_U.VSS||Initiation and Annunciation
+Visio2010|NETSYM_U.VSS||Network Symbols
+Visio2010|PTSCLD_M.VSS||Custom Patterns-Scaled
+Visio2010|SDL_U.VSS|SDL_U.VST|SDL Diagram Shapes
+Visio2010|DRAWTL_M.VSS||Drawing Tool Shapes
+Visio2010|SSFLOW_U.VSS||Six Sigma Flowchart Shapes
+Visio2010|PEPIPE_M.VSS|PEPIPE_M.VST|Pipelines
+Visio2010|SSHOQ_U.VSS||Six Sigma House of Quality Shapes
+Visio2010|UMLACT_M.VSS||UML Activity
+Visio2010|NETRM_M.VSS||Network Room Elements
+Visio2010|DATFLO_U.VSS|DATFLO_U.VST|Data Flow Diagram Shapes
+Visio2010|ELETEL_M.VSS|ELETEL_M.VST|Electrical and Telecom
+Visio2010|EMBELL_M.VSS||Embellishments
+Visio2010|EXCOBJ_U.VSS||Exchange Objects
+Visio2010|GARDEN_U.VSS||Garden Accessories
+Visio2010|NETLOC_M.VSS||Network Locations
+Visio2010|BPMNC_M.VSS||BPMN Connecting Objects (Metric)
+Visio2010|PEINST_M.VSS||Instruments
+Visio2010|BPMNA_M.VSS||BPMN Activities (Metric)
+Visio2010|DRILLD_M.VSS|DRILLD_M.VST|PivotDiagram Shapes
+Visio2010|BPMNG_M.VSS||BPMN Gateways (Metric)
+Visio2010|COMPS_M.VSS||Computers and Monitors
+Visio2010|BPMNE_M.VSS||BPMN Event Shapes (Metric)
+Visio2010|FLOSHP_U.VSS||Miscellaneous Flowchart Shapes
+Visio2010|PLUMB_M.VSS||Plumbing
+Visio2010|PLUMB_U.VSS||Plumbing
+Visio2010|BTHKT_M.VSS||Bath and Kitchen Plan
+Visio2010|AUDIT_M.VSS|AUDIT_M.VST|Audit Diagram Shapes
+Visio2010|COMPLN_M.VSS||Compliance Shapes
+Visio2010|FASTN1_M.VSS||Fasteners 1
+Visio2010|BLOCK_M.VSS|BLOCK_M.VST|Blocks
+Visio2010|ITIL_M.VSS|ITIL_M.VST|ITIL Shapes
+Visio2010|PTUSCL_M.VSS||Custom Patterns-Unscaled
+Visio2010|SPWT_M.VSS||SharePoint Workflow Terminators
+Visio2010|SHPMCH_U.VSS||Shop Floor-Machines and Equipment
+Visio2010|UMLSEQ_U.VSS||UML Sequence
+Visio2010|IDEF0_M.VSS|IDEF0_M.VST|IDEF0 Diagram Shapes
+Visio2010|UMLSTA_M.VSS||UML Statechart
+Visio2010|VALVE2_M.VSS||Pipes and Valves-Valves 2
+Visio2010|RECSHP_U.VSS||Recreation Shapes
+Visio2010|LANGLV_U.VSS||Language Level Shapes
+Visio2010|APPL_M.VSS||Appliances
+Visio2010|WADOWI_U.VSS||Walls, Doors and Windows
+Visio2010|EESWCH_U.VSS||Switches and Relays
+Visio2010|FAULT_M.VSS|FAULT_M.VST|Fault Tree Analysis Shapes
+Visio2010|EECHIP_M.VSS|EECHIP_M.VST|Integrated Circuit Components
+Visio2010|HVACD_M.VSS||HVAC Ductwork
+Visio2010|OFFEQP_U.VSS||Office Equipment
+Visio2010|WFTLBR_M.VSS||Toolbars and Menus
+Visio2010|DVCALL_U.VSS||Data Graphics
+Visio2010|HVACC_M.VSS||HVAC Controls
+Visio2010|FAULT_U.VSS|FAULT_U.VST|Fault Tree Analysis Shapes
+Visio2010|PERIPH_M.VSS||Networks and Peripherals
+Visio2010|RCKSVR_U.VSS||Rack Mounted Servers (US Units)
+Visio2010|SERVER_U.VSS||Servers
+Visio2010|MAP3D_M.VSS|MAP3D_M.VST|Directional Map Shapes 3D
+Visio2010|VIDSUR_M.VSS||Video Surveillance
+Visio2010|WFWICN_M.VSS||Web and Media Icons
+Visio2010|DRAWTL_U.VSS||Drawing Tool Shapes
+Visio2010|ADO_U.VSS||Active Directory Objects
+Visio2010|DIMENG_M.VSS||Dimensioning-Engineering
+Visio2010|PTSINT_U.VSS||Points of Interest
+Visio2010|MAP3D_U.VSS|MAP3D_U.VST|Directional Map Shapes 3D
+Visio2010|TIMELN_M.VSS|TIMELN_M.VST|Timeline Shapes
+Visio2010|WFDEP_U.VSS||Workflow Departments
+Visio2010|WADOWI_M.VSS||Walls, Doors and Windows
+Visio2010|ADO_M.VSS||Active Directory Objects
+Visio2010|EECOMP_U.VSS||Composite Assemblies
+Visio2010|GARDEN_M.VSS||Garden Accessories
+Visio2010|LNDMRK_M.VSS||Landmark Shapes
+Visio2010|NETLOC_U.VSS||Network Locations
+Visio2010|PEEQP_M.VSS||Equipment-General
+Visio2010|RCKEQP_U.VSS||Rack-mounted Equipment
+Visio2010|UMLSTR_U.VSS||UML Static Structure
+Visio2010|WFWICN_U.VSS||Web and Media Icons
+Visio2010|EEFUND_U.VSS||Fundamental Items
+Visio2010|ALARM_U.VSS||Alarm and Access Control
+Visio2010|EETERM_U.VSS||Terminals and Connectors
+Visio2010|FASTN2_M.VSS||Fasteners 2
+Visio2010|SHPREC_M.VSS||Warehouse-Shipping and Receiving
+Visio2010|SPWC_M.VSS||SharePoint Workflow Conditions
+Visio2010|BASFLO_M.VSS|BASFLO_M.VST|Basic Flowchart Shapes
+Visio2010|VALVE1_U.VSS||Pipes and Valves-Valves 1
+Visio2010|WFTLBR_U.VSS||Toolbars and Menus
+Visio2010|HVACCE_U.VSS||HVAC Controls Equipment
+Visio2010|ARROWS_M.VSS||Arrows
+Visio2010|BPMNC_U.VSS||BPMN Connecting Objects (US units)
+Visio2010|BPMNA_U.VSS||BPMN Activities (US units)
+Visio2010|BPMNG_U.VSS||BPMN Gateways (US units)
+Visio2010|COMPS_U.VSS||Computers and Monitors
+Visio2010|BPMNE_U.VSS||BPMN Event Shapes (US units)
+Visio2010|ELETEL_U.VSS|ELETEL_U.VST|Electrical and Telecom
+Visio2010|LGND_M.VSS||Legend
+Visio2010|DVCALL_M.VSS||Data Graphics
+Visio2010|EEMAPS_U.VSS||Maps and Charts
+Visio2010|OFFEQP_M.VSS||Office Equipment
+Visio2010|UMLUSE_M.VSS||UML Use Case
+Visio2010|PEHEAT_M.VSS||Equipment-Heat Exchangers
+Visio2010|ORGCH_M.VSS|ORGCH_M.VST|Organization Chart Shapes
+Visio2010|PEANNT_M.VSS||Process Annotations
+Visio2010|WEBMAP_U.VSS|WEBMAP_U.VST|Web Site Map Shapes (US units)
+Visio2010|TITLE_M.VSS||Title Blocks
+Visio2010|PTUSCL_U.VSS||Custom Patterns-Unscaled
+Visio2010|OFFFRN_U.VSS||Office Furniture
+Visio2010|BLOCKP_M.VSS|BLOCKP_M.VST|Blocks with Perspective
+Visio2010|COMPLN_U.VSS||Compliance Shapes
+Visio2010|EETRAN_M.VSS||Transformers and Windings
+Visio2010|CALNDR_M.VSS|CALNDR_M.VST|Calendar Shapes
+Visio2010|FASTN1_U.VSS||Fasteners 1
+Visio2010|PEVESS_M.VSS||Equipment-Vessels
+Visio2010|UMLSTA_U.VSS||UML Statechart
+Visio2010|LINPAT_M.VSS||Custom Line Patterns
+Visio2010|LOGIC_U.VSS||Analog and Digital Logic
+Visio2010|VALVE2_U.VSS||Pipes and Valves-Valves 2
+Visio2010|LANGLV_M.VSS||Language Level Shapes
+Visio2010|PERT_M.VSS|PERT_M.VST|PERT Chart Shapes
+Visio2010|PRKRD_M.VSS||Parking and Roads
+Visio2010|WRKFLO_U.VSS|WRKFLO_U.VST|Work Flow Diagram Shapes
+Visio2010|DGICON_U.VSS||Icon Sets
+Visio2010|HVACCE_M.VSS||HVAC Controls Equipment
+Visio2010|WFDEP_M.VSS||Workflow Departments
+Visio2010|VIDSUR_U.VSS||Video Surveillance
+Visio2010|WFDLGS_M.VSS||Forms and Dialogs
+Visio2010|WFSTEP_M.VSS||Workflow Steps
+Visio2010|TRANSP_U.VSS||Transportation Shapes
+Visio2010|ALARM_M.VSS||Alarm and Access Control
+Visio2010|BPMN_U.VSS|BPMN_U.VST|BPMN Basic Shapes (US units)
+Visio2010|UMLDEP_U.VSS||UML Deployment
+Visio2010|WELD_M.VSS||Welding Symbols
+Visio2010|FASTN2_U.VSS||Fasteners 2
+Visio2010|MRKTDG_U.VSS|MRKTDG_U.VST|Marketing Diagrams
+Visio2010|SHPREC_U.VSS||Warehouse-Shipping and Receiving
+Visio2010|BASIC_M.VSS||Basic Shapes
+Visio2010|UMLCOL_M.VSS||UML Collaboration
+Visio2010|PEVALV_M.VSS||Valves and Fittings
+Visio2010|BLOCK_U.VSS|BLOCK_U.VST|Blocks
+Visio2010|PIPE1_U.VSS||Pipes and Valves-Pipes 1
+Visio2010|OFFACC_U.VSS||Office Accessories
+Visio2010|DIMARC_U.VSS||Dimensioning-Architectural
+Visio2010|FPVALV_M.VSS||Fluid Power-Valves
+Visio2010|PERT_U.VSS|PERT_U.VST|PERT Chart Shapes
+Visio2010|CUBICL_U.VSS||Cubicles
+Visio2010|PIPE2_U.VSS||Pipes and Valves-Pipes 2
+Visio2010|SITACC_M.VSS||Site Accessories
+Visio2010|SPRBR_M.VSS||Springs and Bearings
+Visio2010|EPC_U.VSS|EPC_U.VST|EPC Diagram Shapes
+Visio2010|CAUSEF_M.VSS|CAUSEF_M.VST|Cause and Effect Diagram Shapes
+Visio2010|IRRIG_U.VSS||Irrigation
+Visio2010|METRO_M.VSS||Metro Shapes
+Visio2010|GANESA_U.VSS||Gane-Sarson
+Visio2010|SPRBR_U.VSS||Springs and Bearings
+Visio2010|UMLUSE_U.VSS||UML Use Case
+Visio2010|LEGEND_M.VSS||Legend
+Visio2010|EPC_M.VSS|EPC_M.VST|EPC Diagram Shapes
+Visio2010|WFDLGS_U.VSS||Forms and Dialogs
+Visio2010|LDAPOB_U.VSS||LDAP Objects
+Visio2010|PLANT_U.VSS||Planting
+Visio2010|ROAD_M.VSS||Road Shapes
+Visio2010|SPWA_U.VSS||SharePoint Workflow Actions
+Visio2010|PEPUMP_M.VSS||Equipment-Pumps
+Visio2010|EETRAN_U.VSS||Transformers and Windings
+Visio2010|PRKRD_U.VSS||Parking and Roads
+Visio2010|VEHICL_U.VSS||Vehicles
+Visio2010|LINPAT_U.VSS||Custom Line Patterns
+Visio2010|WELD_U.VSS||Welding Symbols
+Visio2010|BPRES_U.VSS||Resources
+Visio2010|UMLCOM_U.VSS||UML Component
+Visio2010|CABNT_U.VSS||Cabinets
+Visio2010|EESEMI_U.VSS||Semiconductors and Electron Tubes
+Visio2010|FLOSHP_M.VSS||Miscellaneous Flowchart Shapes
+Visio2010|EEMECH_U.VSS||Rotating Equip and Mech Functions
+Visio2010|OFFACC_M.VSS||Office Accessories
+Visio2010|WFSTEP_U.VSS||Workflow Steps
+Visio2010|WFCTRL_M.VSS||Controls
+Visio2010|NETRM_U.VSS||Network Room Elements
+Visio2010|PTSCLD_U.VSS||Custom Patterns-Scaled
+Visio2010|EEMAIN_M.VSS||Maintenance Symbols
+Visio2010|BLOCK3_M.VSS||Blocks Raised
+Visio2010|CALOUT_M.VSS||Callouts
+Visio2010|ENTAPP_M.VSS|ENTAPP_M.VST|Enterprise Application
+Visio2010|GANESA_M.VSS||Gane-Sarson
+Visio2010|LGND_U.VSS||Legend
+Visio2010|ROAD_U.VSS||Road Shapes
+Visio2010|SSFLOW_M.VSS||Six Sigma Flowchart Shapes
+Visio2010|EMBELL_U.VSS||Embellishments
+Visio2010|SDCONT_M.VSS||Containers
+Visio2010|SYMBOL_M.VSS||Symbols
+Visio2010|CONNEC_U.VSS||Connectors
+Visio2010|UMLACT_U.VSS||UML Activity
+Visio2010|HVACEQ_U.VSS||HVAC Equipment
+Visio2010|EEQUAL_M.VSS||Qualifying Symbols
+Visio2010|INTANN_M.VSS||Initiation and Annunciation
+Visio2010|DTLNET_U.VSS|DTLNET_U.VST|Detailed Network
+Visio2010|SHPMCH_M.VSS||Shop Floor-Machines and Equipment
+Visio2010|BORDRS_U.VSS||Borders & Titles Gallery
+Visio2010|CAUSEF_U.VSS|CAUSEF_U.VST|Cause and Effect Diagram Shapes
+Visio2010|MEMOBJ_U.VSS||Memory Objects
+Visio2010|PLANT_M.VSS||Planting
+Visio2010|PEPIPE_U.VSS|PEPIPE_U.VST|Pipelines
+Visio2010|EESWCH_M.VSS||Switches and Relays
+Visio2010|DATFLO_M.VSS|DATFLO_M.VST|Data Flow Diagram Shapes
+Visio2010|EXCOBJ_M.VSS||Exchange Objects
+Visio2010|WEBSIT_M.VSS|WEBSIT_M.VST|Conceptual Web Site Shapes
+Visio2010|PEINST_U.VSS||Instruments
+Visio2010|PEPUMP_U.VSS||Equipment-Pumps
+Visio2010|BSTORM_U.VSS|BSTORM_U.VST|Brainstorming
+Visio2010|DRILLD_U.VSS|DRILLD_U.VST|PivotDiagram Shapes
+Visio2010|CABNT_M.VSS||Cabinets
+Visio2010|PTSINT_M.VSS||Points of Interest
+Visio2010|DIMENG_U.VSS||Dimensioning-Engineering
+Visio2010|TIMELN_U.VSS|TIMELN_U.VST|Timeline Shapes (US units)
+Visio2010|BPMN_M.VSS|BPMN_M.VST|BPMN Basic Shapes (Metric)
+Visio2010|TQM_M.VSS|TQM_M.VST|TQM Diagram Shapes
+Visio2010|HVACEQ_M.VSS||HVAC Equipment
+Visio2010|EECHIP_U.VSS|EECHIP_U.VST|Integrated Circuit Components
+Visio2010|BASFLO_U.VSS|BASFLO_U.VST|Basic Flowchart Shapes
+Visio2010|FREEQP_U.VSS||Free-standing Rack Equipment
+Visio2010|WFCTRL_U.VSS||Controls
+Visio2010|PERIPH_U.VSS||Networks and Peripherals
+Visio2010|BORDRS_M.VSS||Borders & Titles Gallery
+Visio2010|BCKGRN_U.VSS||Backgrounds Gallery
+Visio2010|ARROWS_U.VSS||Arrows
+Visio2010|EEVHF_M.VSS||VHF-UHF-SHF
+Visio2010|FPEQP_U.VSS||Fluid Power-Equipment
+Visio2010|MEMOBJ_M.VSS||Memory Objects
+Visio2010|RECRT_U.VSS||Sport Fields and Recreation
+Visio2010|TQM_U.VSS|TQM_U.VST|TQM Diagram Shapes
+Visio2010|TITLE_U.VSS||Title Blocks
+Visio2010|LNDMRK_U.VSS||Landmark Shapes
+Visio2010|EECOMP_M.VSS||Composite Assemblies
+Visio2010|PEHEAT_U.VSS||Equipment-Heat Exchangers
+Visio2010|BSTORM_M.VSS|BSTORM_M.VST|Brainstorming
+Visio2010|RCKEQP_M.VSS||Rack-mounted Equipment
+Visio2010|REGSTR_M.VSS||Registers, Grilles and Diffusers
+Visio2010|SPWA_M.VSS||SharePoint Workflow Actions
+Visio2010|WEBMAP_M.VSS|WEBMAP_M.VST|Web Site Map Shapes
+Visio2010|EETERM_M.VSS||Terminals and Connectors
+Visio2010|LOGIC_M.VSS||Analog and Digital Logic
+Visio2010|BLOCKP_U.VSS|BLOCKP_U.VST|Blocks with Perspective
+Visio2010|COMOLE_U.VSS|COMOLE_U.VST|COM and OLE
+Visio2010|EEQUAL_U.VSS||Qualifying Symbols
+Visio2010|PEVESS_U.VSS||Equipment-Vessels
+Visio2010|FURN_U.VSS||Furniture
+Visio2010|EETCOM_U.VSS||Telecom Switch and Peripheral Equip
+Visio2010|MRKTDG_M.VSS|MRKTDG_M.VST|Marketing Diagrams
+Visio2010|OBJREL_M.VSS||Object Relational
+Visio2010|FREEQP_M.VSS||Free-standing Rack Equipment
+Visio2010|ANNOT_U.VSS||Annotations
+Visio2010|EEMAPS_M.VSS||Maps and Charts
+Visio2010|SHPSTR_M.VSS||Shop Floor-Storage and Distribution
+Visio2010|SPWT_U.VSS||SharePoint Workflow Terminators
+Visio2010|ENTITY_M.VSS||Entity Relationship
+Visio2010|WEBSIT_U.VSS|WEBSIT_U.VST|Conceptual Web Site Shapes
+Visio2010|PEANNT_U.VSS||Process Annotations
+Visio2010|SDCALL_U.VSS||Callouts
+Visio2010|OFFFRN_M.VSS||Office Furniture
+Visio2010|TRANSP_M.VSS||Transportation Shapes
+Visio2010|BLDCOR_U.VSS||Building Core
+Visio2010|XFUNC_M.VSS|XFUNC_M.VST|Cross-Functional Flowchart Shapes
+Visio2010|CALNDR_U.VSS|CALNDR_U.VST|Calendar Shapes (US units)
+Visio2010|ITIL_U.VSS|ITIL_U.VST|ITIL Shapes
+Visio2010|ORGCH_U.VSS|ORGCH_U.VST|Organization Chart Shapes
+Visio2010|BTHKT_U.VSS||Bath and Kitchen Plan
+Visio2010|BASIC_U.VSS||Basic Shapes
+Visio2010|VSM_M.VSS|VSM_M.VST|Value Stream Map Shapes
+Visio2010|XFUNC_U.VSS|XFUNC_U.VST|Cross-Functional Flowchart Shapes
+Visio2010|VSM_U.VSS|VSM_U.VST|Value Stream Map Shapes
+Visio2010|LDAPOB_M.VSS||LDAP Objects
+Visio2010|APPL_U.VSS||Appliances
+Visio2010|CHART_U.VSS|CHART_U.VST|Charting Shapes
+Visio2010|EEVHF_U.VSS||VHF-UHF-SHF
+Visio2010|COMOLE_M.VSS|COMOLE_M.VST|COM and OLE
+Visio2010|DGICON_M.VSS||Icon Sets
+Visio2010|FPEQP_M.VSS||Fluid Power-Equipment
+Visio2010|PEVALV_U.VSS||Valves and Fittings
+Visio2010|RECRT_M.VSS||Sport Fields and Recreation
+Visio2010|UMLCOL_U.VSS||UML Collaboration
+Visio2010|WFOBJ_U.VSS||Workflow Objects
+Visio2010|WRKFLO_M.VSS|WRKFLO_M.VST|Work Flow Diagram Shapes
+Visio2010|BCKGRN_M.VSS||Backgrounds Gallery
+Visio2010|FPVALV_U.VSS||Fluid Power-Valves
+Visio2010|METRO_U.VSS||Metro Shapes
+Visio2010|CUBICL_M.VSS||Cubicles
+Visio2010|SITACC_U.VSS||Site Accessories
+Visio2010|NETSYM_M.VSS||Network Symbols
+Visio2010|EETCOM_M.VSS||Telecom Switch and Peripheral Equip
+Visio2010|WFCICN_M.VSS||Common Icons
+Visio2010|FPASSM_M.VSS||Fluid Power-Valve Assembly
+Visio2010|EEPATH_U.VSS||Transmission Paths
+Visio2010|WFCRS_U.VSS||Cursors
+Visio2010|ENTITY_U.VSS||Entity Relationship
+Visio2010|UMLDEP_M.VSS||UML Deployment
+Visio2010|GANTT_U.VSS|GANTT_U.VST|Gantt Chart Shapes
+Visio2010|LEGEND_U.VSS||Legend
+Visio2010|REGSTR_U.VSS||Registers, Grilles and Diffusers
+Visio2010|SDCALL_M.VSS||Callouts
+Visio2010|UMLSEQ_M.VSS||UML Sequence
+Visio2010|WALL_M.VSS||Walls, Shell and Structure
+Visio2010|GDT_U.VSS||Geometric Dimensioning and Tolerancing
+Visio2010|SPWC_U.VSS||SharePoint Workflow Conditions
+Visio2010|BLDCOR_M.VSS||Building Core
+Visio2010|SSHOQ_M.VSS||Six Sigma House of Quality Shapes
+Visio2010|VEHICL_M.VSS||Vehicles
+Visio2010|ANNOT_M.VSS||Annotations
+Visio2010|OBJREL_U.VSS||Object Relational
+Visio2010|PIPE1_M.VSS||Pipes and Valves-Pipes 1
+Visio2010|GDT_M.VSS||Geometric Dimensioning and Tolerancing
+Visio2010|PIPE2_M.VSS||Pipes and Valves-Pipes 2
+Visio2010|AUDIT_U.VSS|AUDIT_U.VST|Audit Diagram Shapes
+Visio2010|ADS_U.VSS||Active Directory Sites and Services
+Visio2010|RECSHP_M.VSS||Recreation Shapes
+Visio2010|SHPSTR_U.VSS||Shop Floor-Storage and Distribution
+Visio2010|ADS_M.VSS||Active Directory Sites and Services
+Visio2010|IDEF0_U.VSS|IDEF0_U.VST|IDEF0 Diagram Shapes
+Visio2010|IRRIG_M.VSS||Irrigation
+Visio2010|RCKSVR_M.VSS||Rack Mounted Servers
+Visio2010|SERVER_M.VSS||Servers
+Visio2010|WFCICN_U.VSS||Common Icons
+Visio2010|EEMAIN_U.VSS||Maintenance Symbols
+Visio2010|EEPATH_M.VSS||Transmission Paths
+Visio2010|CHART_M.VSS|CHART_M.VST|Charting Shapes
+Visio2010|HVACD_U.VSS||HVAC Ductwork
+Visio2010|BLOCK3_U.VSS||Blocks Raised
+Visio2010|CALOUT_U.VSS||Callouts
+Visio2010|ENTAPP_U.VSS|ENTAPP_U.VST|Enterprise Application
+Visio2010|HVACC_U.VSS||HVAC Controls
+Visio2010|WALL_U.VSS||Walls, Shell and Structure
+Visio2010|WFOBJ_M.VSS||Workflow Objects
+Visio2010|SYMBOL_U.VSS||Symbols
+Visio2010|SDCONT_U.VSS||Containers
+Visio2010|SDL_M.VSS|SDL_M.VST|SDL Diagram Shapes
+Visio2010|CONNEC_M.VSS||Connectors
+Visio2010|UMLCOM_M.VSS||UML Component
+Visio2010|UMLSTR_M.VSS||UML Static Structure
+Visio2010|EESEMI_M.VSS||Semiconductors and Electron Tubes
+Visio2010|EEFUND_M.VSS||Fundamental Items
+Visio2010|BPRES_M.VSS||Resources
+Visio2010|EEMECH_M.VSS||Rotating Equip and Mech Functions
+Visio2010|VALVE1_M.VSS||Pipes and Valves-Valves 1
+Visio2010|WFCRS_M.VSS||Cursors
+Visio2010|PEEQP_U.VSS||Equipment-General
+Visio2010|GANTT_M.VSS|GANTT_M.VST|Gantt Chart Shapes
+Visio2010|FURN_M.VSS||Furniture
+Visio2010|DTLNET_M.VSS|DTLNET_M.VST|Detailed Network
+Visio2010|FPASSM_U.VSS||Fluid Power-Valve Assembly
