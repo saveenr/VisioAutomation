@@ -67,7 +67,7 @@ namespace VisioPowerShell
             return true;
         }
 
-        protected void Dump(CellValueDictionary valuemap)
+        protected void DumpValues(CellValueDictionary valuemap)
         {
             foreach (var cellname in valuemap.CellNames)
             {

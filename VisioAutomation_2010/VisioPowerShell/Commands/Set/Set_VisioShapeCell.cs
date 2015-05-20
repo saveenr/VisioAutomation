@@ -29,12 +29,11 @@ namespace VisioPowerShell.Commands
             update.TestCircular = this.TestCircular;
 
             var cellmap = CellSRCDictionary.GetCellMapForShapes();
-            var valuemap = new CellValueDictionary(cellmap);
-            valuemap.UpdateValueMap(this.Hashtable, cellmap);
+            var valuemap = new CellValueDictionary(cellmap, this.Hashtable);
 
             var target_shapes = this.Shapes ?? this.client.Selection.GetShapes();
 
-            this.Dump(valuemap);
+            this.DumpValues(valuemap);
 
             foreach (var shape in target_shapes)
             {

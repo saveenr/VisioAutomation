@@ -8,26 +8,34 @@ namespace VisioPowerShell
     {
         private readonly CellSRCDictionary srcmap;
 
-        public CellValueDictionary( CellSRCDictionary src_src_dictionary) : base()
+        public CellValueDictionary(CellSRCDictionary srcmap) : base()
         {
-            this.srcmap = src_src_dictionary;
+            if (this.srcmap == null)
+            {
+                throw new System.ArgumentNullException("srcmap");
+            }
+
+            this.srcmap = srcmap;
         }
+
+        public CellValueDictionary(CellSRCDictionary srcmap, Hashtable ht)
+            : this(srcmap)
+        {
+
+            this.UpdateValueMap(ht);
+        }
+
 
         public SRC GetSRC(string name)
         {
             return this.srcmap[name];
         }
 
-        public void UpdateValueMap(Hashtable ht, CellSRCDictionary cellmap)
+        public void UpdateValueMap(Hashtable ht)
         {
             if (ht == null)
             {
                 throw new System.ArgumentNullException("ht");
-            }
-
-            if (cellmap == null)
-            {
-                throw new System.ArgumentNullException("cellmap");
             }
 
             // Validate that all the keys are strings
@@ -46,7 +54,7 @@ namespace VisioPowerShell
             {
                 string cellname = (string) key_o;
 
-                if (!cellmap.ContainsCell(cellname))
+                if (!srcmap.ContainsCell(cellname))
                 {
                     string message = string.Format("Cell \"{0}\" is not supported", cellname);
                     throw new System.ArgumentOutOfRangeException("ht", message);                    
