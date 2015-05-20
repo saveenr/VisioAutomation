@@ -1,1 +1,0 @@
-<Playlist Version="1.0"><Add Test="TestVisioAutomationVDX.VDX_Tests.VDX_CheckErrorOnLoadLogFileExists" /><Add Test="TestVisioAutomationVDX.VDX_Tests.VDX_CheckNoErrorOnLoad" /><Add Test="TestVisioAutomationVDX.VDX_Tests.VDX_CustomTemplate" /><Add Test="TestVisioAutomation.Pages_Tests.Page_CreatePage" /></Playlist>
