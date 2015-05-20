@@ -1,4 +1,0 @@
-class VisioPyError(Exception):
-    pass
-
-

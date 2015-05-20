@@ -1,6 +1,0 @@
-Sub CapitalizeSelectedShapeText()
-    Dim s As Shape
-    For Each s In Application.ActiveWindow.Selection
-        s.Text = UCase(s.Text)
-    Next s
-End Sub

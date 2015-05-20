@@ -1,9 +1,0 @@
-Sub ResizeEachPage()
-    Dim p As Page
-    Dim ps As Shape
-    For Each p In Application.ActiveDocument.Pages
-        Set ps = p.PageSheet
-        ps.CellsU("Width").FormulaU = "36 in"
-        ps.CellsU("Height").FormulaU = "24 in"
-    Next p
-End Sub
