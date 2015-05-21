@@ -51,7 +51,7 @@ namespace VisioAutomationSamples
             
             foreach (var e in normal_edges)
             {
-                string s = string.Format("{0} - {1}", e.From.Text, e.To.Text);
+                string s = $"{e.From.Text} - {e.To.Text}";
                 sb0.AppendLine(s);
             }
 
@@ -63,7 +63,7 @@ namespace VisioAutomationSamples
             
             foreach (var e in tc_edges_1)
             {
-                string s = string.Format("{0} -> {1}", e.From.Text, e.To.Text);
+                string s = $"{e.From.Text} -> {e.To.Text}";
                 sb1.AppendLine(s);
             }
 

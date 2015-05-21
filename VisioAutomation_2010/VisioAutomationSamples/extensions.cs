@@ -16,7 +16,7 @@ namespace VisioAutomationSamples
             }
             if (size.HasValue)
             {
-                el.CharacterCells.Size = string.Format("{0}pt",size.Value);
+                el.CharacterCells.Size = $"{size.Value}pt";
             }
             if (color.HasValue)
             {

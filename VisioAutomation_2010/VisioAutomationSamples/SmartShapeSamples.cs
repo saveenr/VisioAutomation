@@ -31,9 +31,9 @@ namespace VisioAutomationSamples
             string bkname = background.NameID;
             var xform = new VA.Shapes.XFormCells();
             xform.PinX = string.Format("GUARD({0}!PinX-{0}!LocPinX+LocPinX)", bkname);
-            xform.PinY = string.Format("GUARD({0}!PinY)", bkname);
-            xform.Width = string.Format("GUARD({0}!Width*(PAGENUMBER()/PAGECOUNT()))", bkname);
-            xform.Height = string.Format("GUARD({0}!Height)", bkname); 
+            xform.PinY = $"GUARD({bkname}!PinY)";
+            xform.Width = $"GUARD({bkname}!Width*(PAGENUMBER()/PAGECOUNT()))";
+            xform.Height = $"GUARD({bkname}!Height)"; 
 
             var update = new VA.ShapeSheet.Update();
             update.SetFormulas(progress.ID16, xform);

@@ -50,7 +50,7 @@ namespace VisioAutomationSamples
                 fmt.FillBkgndTrans = transparency;
                 fmt.LinePattern = 0;
 
-                node.Text = string.Format("bg trans = {0}%", transparency);
+                node.Text = $"bg trans = {transparency}%";
                 i++;
             }
 
