@@ -30,17 +30,17 @@ namespace VisioAutomation.Models.Tree
         {
             if (drawing == null)
             {
-                throw new System.ArgumentNullException("drawing");
+                throw new System.ArgumentNullException(nameof(drawing));
             }
 
             if (page== null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             if (drawing.Root == null)
             {
-                throw new System.ArgumentException("Tree has root node set to null", "drawing");
+                throw new System.ArgumentException("Tree has root node set to null", nameof(drawing));
             }
 
             const double border_width = 0.5;

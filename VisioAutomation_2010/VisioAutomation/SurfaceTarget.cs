@@ -12,7 +12,7 @@ namespace VisioAutomation
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             this.Page = page;
@@ -24,7 +24,7 @@ namespace VisioAutomation
         {
             if (master== null)
             {
-                throw new System.ArgumentNullException("master");
+                throw new System.ArgumentNullException(nameof(master));
             }
 
             this.Page = null;
@@ -36,7 +36,7 @@ namespace VisioAutomation
         {
             if (shape== null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             this.Page = null;

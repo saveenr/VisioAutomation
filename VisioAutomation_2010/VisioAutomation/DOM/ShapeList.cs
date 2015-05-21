@@ -45,7 +45,7 @@ namespace VisioAutomation.DOM
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             var ctx = new RenderContext(page);

@@ -19,12 +19,12 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             UserDefinedCellsHelper.CheckValidName(name);
@@ -44,7 +44,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             UserDefinedCellsHelper.CheckValidName(name);
@@ -102,7 +102,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var prop_count = UserDefinedCellsHelper.GetCount(shape);
@@ -133,12 +133,12 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             if (shapes == null)
             {
-                throw new System.ArgumentNullException("shapes");
+                throw new System.ArgumentNullException(nameof(shapes));
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
@@ -174,7 +174,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             // If the User Property section does not exist then return zero immediately
@@ -208,7 +208,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             int user_prop_row_count = UserDefinedCellsHelper.GetCount(shape);
@@ -268,12 +268,12 @@ namespace VisioAutomation.Shapes.UserDefinedCells
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             UserDefinedCellsHelper.CheckValidName(name);

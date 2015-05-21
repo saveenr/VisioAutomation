@@ -21,7 +21,7 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var runs = new List<TextRun>();
@@ -74,7 +74,7 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             int num_stops = TextFormat.GetTabStopCount(shape);
@@ -124,12 +124,12 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             if (stops == null)
             {
-                throw new System.ArgumentNullException("stops");
+                throw new System.ArgumentNullException(nameof(stops));
             }
 
             TextFormat.ClearTabStops(shape);
@@ -173,7 +173,7 @@ namespace VisioAutomation.Text
         {
             if (stops < 0)
             {
-                throw new System.ArgumentOutOfRangeException("stops");
+                throw new System.ArgumentOutOfRangeException(nameof(stops));
             }
 
             var tagtab = IVisio.VisRowTags.visTagTab0;
@@ -191,7 +191,7 @@ namespace VisioAutomation.Text
             }
             else
             {
-                throw new System.ArgumentOutOfRangeException("stops", "unsupported number of tabs");
+                throw new System.ArgumentOutOfRangeException(nameof(stops), "unsupported number of tabs");
             }
 
             return tagtab;
@@ -201,7 +201,7 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             var cell_tabstopcount = shape.CellsSRC[TextFormat.src_tabstopcount.Section, TextFormat.src_tabstopcount.Row, TextFormat.src_tabstopcount.Cell];
@@ -217,7 +217,7 @@ namespace VisioAutomation.Text
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException("shape");
+                throw new System.ArgumentNullException(nameof(shape));
             }
 
             int num_existing_tabstops = TextFormat.GetTabStopCount(shape);

@@ -13,7 +13,7 @@ namespace VisioAutomation.Extensions
         {
             if (shapes == null)
             {
-                throw new System.ArgumentNullException("shapes");
+                throw new System.ArgumentNullException(nameof(shapes));
             }
 
             foreach (var shape in shapes)

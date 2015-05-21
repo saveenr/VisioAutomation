@@ -38,7 +38,7 @@ namespace VisioAutomation.DOM
         {
             if (doc== null)
             {
-                throw new System.ArgumentNullException("doc");
+                throw new System.ArgumentNullException(nameof(doc));
             }
 
             var pages = doc.Pages;
@@ -54,7 +54,7 @@ namespace VisioAutomation.DOM
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
 

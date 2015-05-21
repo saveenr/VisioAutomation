@@ -25,7 +25,7 @@ namespace VisioAutomation.Models.Charting
 
             if (end < start)
             {
-                throw new System.ArgumentException("end angle must be greater than or equal to start angle","end");
+                throw new System.ArgumentException("end angle must be greater than or equal to start angle",nameof(end));
             }
 
             this.SectorStartAngle = start;
@@ -37,7 +37,7 @@ namespace VisioAutomation.Models.Charting
         {
             if (radius < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException("radius","must be non-negative");
+                throw new System.ArgumentOutOfRangeException(nameof(radius),"must be non-negative");
             }
 
             this.Radius = radius;
@@ -48,7 +48,7 @@ namespace VisioAutomation.Models.Charting
         {
             if (inner_radius < 0.0)
             {
-                throw new System.ArgumentException("must be non-negative", "inner_radius");
+                throw new System.ArgumentException("must be non-negative", nameof(inner_radius));
             }
 
             if (radius < 0.0)
@@ -58,7 +58,7 @@ namespace VisioAutomation.Models.Charting
 
             if (inner_radius > radius)
             {
-                throw new System.ArgumentException( "must be less than or equal to outer_radius","inner_radius");                
+                throw new System.ArgumentException( "must be less than or equal to outer_radius",nameof(inner_radius));                
             }
 
             this.InnerRadius = inner_radius;

@@ -230,7 +230,7 @@ namespace VisioAutomation.Drawing
         {
             if (masters == null)
             {
-                throw new System.ArgumentNullException("masters");
+                throw new System.ArgumentNullException(nameof(masters));
             }
 
             if (masters.Count < 1)
@@ -240,7 +240,7 @@ namespace VisioAutomation.Drawing
 
             if (points == null)
             {
-                throw new System.ArgumentNullException("points");
+                throw new System.ArgumentNullException(nameof(points));
             }
 
             // NOTE: DropMany will fail if you pass in zero items to drop
@@ -276,7 +276,7 @@ namespace VisioAutomation.Drawing
         {
             if (master == null)
             {
-                throw new System.ArgumentNullException("master");
+                throw new System.ArgumentNullException(nameof(master));
             }
 
             if (this.Target.Master != null)

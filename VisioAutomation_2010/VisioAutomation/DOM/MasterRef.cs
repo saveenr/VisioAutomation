@@ -15,7 +15,7 @@ namespace VisioAutomation.DOM
         {
             if (master == null)
             {
-                throw new ArgumentNullException("master");
+                throw new ArgumentNullException(nameof(master));
             }
 
             this.VisioMaster = master;
@@ -27,7 +27,7 @@ namespace VisioAutomation.DOM
         {
             if (mastername == null)
             {
-                throw new ArgumentNullException("mastername");
+                throw new ArgumentNullException(nameof(mastername));
             }
 
 

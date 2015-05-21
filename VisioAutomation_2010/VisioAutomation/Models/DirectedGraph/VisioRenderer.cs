@@ -13,12 +13,12 @@ namespace VisioAutomation.Models.DirectedGraph
             // This is Visio-based render - it does NOT use MSAGL
             if (page == null)
             {
-                throw new System.ArgumentNullException("page");
+                throw new System.ArgumentNullException(nameof(page));
             }
 
             if (options== null)
             {
-                throw new System.ArgumentNullException("options");
+                throw new System.ArgumentNullException(nameof(options));
             }
 
             var page_node = new DOM.Page();
