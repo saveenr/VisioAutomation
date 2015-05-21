@@ -16,9 +16,7 @@ namespace VisioAutomation.Text
 
         public override string ToString()
         {
-            string s = string.Format("(Position={0},Alignment={1})",
-                                     this.Position,
-                                     this.Alignment);
+            string s = $"(Position={this.Position},Alignment={this.Alignment})";
             return s;
         }
     }

@@ -25,7 +25,7 @@ namespace VisioPowerShell.Commands
                 }
                 else
                 {
-                    string msg = string.Format("File \"{0}\" already exists", this.Filename);
+                    string msg = $"File \"{this.Filename}\" already exists";
                     var exc = new ArgumentException(msg);
                     throw exc;
                 }

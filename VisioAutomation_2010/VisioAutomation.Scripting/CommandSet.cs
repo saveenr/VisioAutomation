@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting
 
             if (!cmdsettype.IsAssignableFrom(mytype))
             {
-                string msg = string.Format("{0} must derive from {1}", mytype.Name, cmdsettype.Name);
+                string msg = $"{mytype.Name} must derive from {cmdsettype.Name}";
             }
 
             var methods = mytype.GetMethods().Where(m => m.IsPublic && !m.IsStatic);

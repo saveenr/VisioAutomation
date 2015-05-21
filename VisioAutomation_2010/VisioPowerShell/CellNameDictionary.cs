@@ -33,7 +33,7 @@ namespace VisioPowerShell
 
                 if (this.dic.ContainsKey(name))
                 {
-                    string msg = string.Format("CellMap already contains a cell called \"{0}\"", name);
+                    string msg = $"CellMap already contains a cell called \"{name}\"";
                     throw new ArgumentOutOfRangeException(msg);
                 }
 
@@ -64,7 +64,7 @@ namespace VisioPowerShell
                 return;
             }
 
-            string msg = string.Format("Cell name \"{0}\" is not valid", name);
+            string msg = $"Cell name \"{name}\" is not valid";
             throw new ArgumentOutOfRangeException(msg);
         }
 
@@ -75,7 +75,7 @@ namespace VisioPowerShell
                 return;
             }
 
-            string msg = string.Format("Cell name wildcard pattern \"{0}\" is not valid", name);
+            string msg = $"Cell name wildcard pattern \"{name}\" is not valid";
             throw new ArgumentException(msg, "name");
         }
 

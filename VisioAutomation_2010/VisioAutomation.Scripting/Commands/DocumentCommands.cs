@@ -256,7 +256,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (!System.IO.File.Exists(abs_filename))
             {
-                string msg = string.Format("File \"{0}\"does not exist", abs_filename);
+                string msg = $"File \"{abs_filename}\"does not exist";
                 throw new System.ArgumentException(msg, "filename");
             }
 

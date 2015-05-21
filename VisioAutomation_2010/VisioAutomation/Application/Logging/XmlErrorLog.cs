@@ -14,7 +14,7 @@ namespace VisioAutomation.Application.Logging
 
             if (!System.IO.File.Exists(filename))
             {
-                string msg = string.Format("File \"{0}\"does not exist", filename);
+                string msg = $"File \"{filename}\"does not exist";
                 throw new ArgumentException(msg);
             }
 

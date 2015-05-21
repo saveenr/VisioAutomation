@@ -33,7 +33,7 @@ namespace TestVisioAutomation
             var type = method.DeclaringType;
             var name = method.Name;
             var page = this.GetNewPage(this.StandardPageSize);
-            string pagename = string.Format("{0}{1}", name,suffix);
+            string pagename = $"{name}{suffix}";
             page.NameU = pagename;
             return page;
         }
@@ -65,7 +65,7 @@ namespace TestVisioAutomation
             var method = frame.GetMethod();
             var type = method.DeclaringType;
             var name = method.Name;
-            string pagename = string.Format("{0}{1}", name, "_doc");
+            string pagename = $"{name}{"_doc"}";
 
             doc.Subject = pagename;
             return doc;

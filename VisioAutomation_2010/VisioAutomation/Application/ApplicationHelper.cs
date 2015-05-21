@@ -33,7 +33,7 @@ namespace VisioAutomation.Application
                 return path;
             }
 
-            string msg = string.Format("VisioAutomation does not support Visio version {0}", ver.Major);
+            string msg = $"VisioAutomation does not support Visio version {ver.Major}";
             throw new System.ArgumentException(msg);
         }
 
@@ -48,7 +48,7 @@ namespace VisioAutomation.Application
             string ver = app.Version;
             string ver_normalized = ver.Replace(",", ".");
 
-            string path = string.Format(@"Software\Microsoft\Office\{0}\Visio\Application", ver_normalized);
+            string path = $@"Software\Microsoft\Office\{ver_normalized}\Visio\Application";
 
             string logfilename = null;
             using (var key_visio_application = hkcu.OpenSubKey(path))
