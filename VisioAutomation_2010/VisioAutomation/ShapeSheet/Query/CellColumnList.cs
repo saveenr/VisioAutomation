@@ -125,7 +125,7 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private string fixup_name(string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (String.IsNullOrEmpty(name))
             {
                 name = $"Col{this.items.Count}";
             }

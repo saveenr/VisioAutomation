@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Query
             
         protected CellColumn(int ordinal, string name)
         {
-            if (string.IsNullOrEmpty(name))
+            if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("name");
             }

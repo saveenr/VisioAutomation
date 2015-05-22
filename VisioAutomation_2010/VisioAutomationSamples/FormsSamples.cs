@@ -99,7 +99,7 @@ namespace VisioAutomationSamples
                     double w = resolution.Width / 400.0;
                     double h = resolution.Height / 400.0;
 
-                    string label = $"{resolution.Name}\n{resolution.Width}x{resolution.Height}";
+                    string label = string.Format("{0}\n{1}x{2}", resolution.Name, resolution.Width, resolution.Height);
                     var res_title = renderer.AddShape(w, h, label);
                     res_title.CharacterCells.Font = segoe_ui_font_id;
                     res_title.CharacterCells.Size = "25pt";

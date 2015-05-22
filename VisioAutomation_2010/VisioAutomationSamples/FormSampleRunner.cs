@@ -33,7 +33,7 @@ namespace VisioAutomationSamples
 
                 foreach (var m in methods)
                 {
-                    string name = $"{t.Name} / {m.Name}";
+                    string name = string.Format("{0} / {1}", t.Name, m.Name);
                     names.Add(name);
 
                     var item = new SampleMethod();
