@@ -215,6 +215,7 @@ namespace VisioAutomation.Scripting
                 double new_w = System.Math.Max(snapped_size.Width, minsize.Width);
                 double new_h = System.Math.Max(snapped_size.Height, minsize.Height);
                 var output_size = new Drawing.Size(new_w, new_h);
+                VA.Drawing.Size ccc;
                 
                 // Output the new size for the shape if the size of the shape changed
                 bool different_widths = (old_w != new_w);
