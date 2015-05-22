@@ -125,9 +125,9 @@ namespace VisioAutomation.ShapeSheet.Query
 
         private string fixup_name(string name)
         {
-            if (String.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
-                name = String.Format("Col{0}", this.items.Count);
+                name = string.Format("Col{0}", this.items.Count);
             }
             return name;
         }

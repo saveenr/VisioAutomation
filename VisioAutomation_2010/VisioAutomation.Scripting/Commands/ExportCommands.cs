@@ -129,7 +129,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Client.Selection.Get();
-            this.SelectionToSVGXHTML(this.Client.Selection.Get(), filename, s => this.Client.WriteVerbose(s));
+            this.SelectionToSVGXHTML(selection, filename, s => this.Client.WriteVerbose(s));
         }
 
         private void SelectionToSVGXHTML(IVisio.Selection selection, string filename, System.Action<string> verboselog)
@@ -152,12 +152,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 System.IO.File.Delete(svg_filename);
             }
-            else
-            {
-            }
 
             verboselog("Creating XHTML with embedded SVG");
-            var s = svg_filename;
 
             if (System.IO.File.Exists(filename))
             {
@@ -192,7 +188,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var selection = this.Client.Selection.Get();
-            ExportCommands.ExportSelectionAsXAML2(this.Client.Selection.Get(), filename, s => this.Client.Output.WriteVerbose(s));
+            ExportCommands.ExportSelectionAsXAML2(selection, filename, s => this.Client.Output.WriteVerbose(s));
         }
 
         public static void ExportSelectionAsXAML2(
@@ -229,8 +225,6 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             verboselog("Creating XHTML with embedded SVG");
-
-            var s = svg_filename;
 
             if (System.IO.File.Exists(filename))
             {

@@ -88,16 +88,8 @@ namespace VisioAutomation.Models.BoxLayout
 
         public int Count
         {
-            get
-            {
-                if (this.m_children == null)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return this.m_children.Count;
-                }
+            get {
+                return this.m_children == null ? 0 : this.m_children.Count;
             }
         }
 

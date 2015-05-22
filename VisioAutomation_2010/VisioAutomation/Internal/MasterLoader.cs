@@ -32,24 +32,24 @@ namespace VisioAutomation.Internal
         public void Add(string mastername, string stencilname)
         {
             var item = new MasterRef(mastername,stencilname);
-            string key = this.getkey(mastername, stencilname);
+            string key = getkey(mastername, stencilname);
             this.master_ref_dic[key] = item;
         }
 
-        private string getkey(string mastername, string stencilname)
+        private static string getkey(string mastername, string stencilname)
         {
             return mastername + "+" + stencilname;
         }
 
         public MasterRef Get(string mastername, string stencilname)
         {
-            string key = this.getkey(mastername, stencilname);
+            string key = getkey(mastername, stencilname);
             return this.master_ref_dic[key];
         }
 
         public bool Contains(string mastername, string stencilname)
         {
-            string key = this.getkey(mastername, stencilname);
+            string key = getkey(mastername, stencilname);
             return this.master_ref_dic.ContainsKey(key);
         }
 

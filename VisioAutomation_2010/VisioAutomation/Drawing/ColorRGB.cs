@@ -212,7 +212,7 @@ namespace VisioAutomation.Drawing
             }
 
             int current_color;
-            bool result = System.Int32.TryParse(webcolor, NumberStyles.HexNumber, null, out current_color);
+            bool result = int.TryParse(webcolor, NumberStyles.HexNumber, null, out current_color);
 
             if (!result)
             {
@@ -245,7 +245,7 @@ namespace VisioAutomation.Drawing
 
         public string ToFormula()
         {
-            string formula = System.String.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
+            string formula = string.Format("RGB({0},{1},{2})", this.R, this.G, this.B);
             return formula;
         }        
     }

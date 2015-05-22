@@ -39,21 +39,20 @@ namespace PascalGanaye.Popup
             BottomRight = ePlacement.Bottom | ePlacement.Right
         }
 
-        private bool mResizable = false;
-        private Control mUserControl;
         private Control mParent;
-        private ePlacement mPlacement = ePlacement.BottomLeft;
-        private Color mBorderColor = Color.DarkGray;
-        private int mAnimationSpeed = 150;
-        private bool mShowShadow = true;
-        protected double mOpacity = 1;
 
         private PopupForm mForm;
 
         public Popup(Control UserControl, Control parent)
         {
+            this.Opacity = 1;
+            this.AnimationSpeed = 150;
+            this.ShowShadow = true;
+            this.BorderColor = Color.DarkGray;
+            this.HorizontalPlacement = ePlacement.BottomLeft;
+            this.Resizable = false;
             this.mParent = parent;
-            this.mUserControl = UserControl;
+            this.UserControl = UserControl;
         }
 
         public void Show()
@@ -61,7 +60,7 @@ namespace PascalGanaye.Popup
             // I use a shared variable in PopupForm class level for this ShowShadow
             // because the CreateParams is called from within the form constructor 
             // and we need a way to inform the form if a shadow is nescessary or not
-            PopupForm.mShowShadow = this.mShowShadow;
+            PopupForm.mShowShadow = this.ShowShadow;
             if (this.mForm != null)
             {
                 this.mForm.DoClose();
@@ -102,12 +101,12 @@ namespace PascalGanaye.Popup
                 this.StartPosition = FormStartPosition.Manual;
                 this.ShowInTaskbar = false;
                 this.DockPadding.All = PopupForm.BORDER_MARGIN;
-                this.mControlSize = this.mPopup.mUserControl.Size;
-                this.mPopup.mUserControl.Dock = DockStyle.Fill;
-                this.Controls.Add(this.mPopup.mUserControl);
+                this.mControlSize = this.mPopup.UserControl.Size;
+                this.mPopup.UserControl.Dock = DockStyle.Fill;
+                this.Controls.Add(this.mPopup.UserControl);
                 this.mWindowSize.Width = this.mControlSize.Width + 2*PopupForm.BORDER_MARGIN;
                 this.mWindowSize.Height = this.mControlSize.Height + 2*PopupForm.BORDER_MARGIN;
-                this.Opacity = popup.mOpacity;
+                this.Opacity = popup.Opacity;
 
                 //These are here to suppress warnings.
                 this.DropDown += this.DoNothing;
@@ -119,7 +118,7 @@ namespace PascalGanaye.Popup
                     parentForm.AddOwnedForm(this);
                 }
 
-                if (this.mPopup.mResizable)
+                if (this.mPopup.Resizable)
                 {
                     this.mResizingPanel = new Panel();
                     if (PopupForm.mBackgroundImage == null)
@@ -131,8 +130,8 @@ namespace PascalGanaye.Popup
                     this.mResizingPanel.Width = 12;
                     this.mResizingPanel.Height = 12;
                     this.mResizingPanel.BackColor = Color.Red;
-                    this.mResizingPanel.Left = this.mPopup.mUserControl.Width - 15;
-                    this.mResizingPanel.Top = this.mPopup.mUserControl.Height - 15;
+                    this.mResizingPanel.Left = this.mPopup.UserControl.Width - 15;
+                    this.mResizingPanel.Top = this.mPopup.UserControl.Height - 15;
                     this.mResizingPanel.Cursor = Cursors.SizeNWSE;
                     this.mResizingPanel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
                     this.mResizingPanel.Parent = this;
@@ -142,7 +141,7 @@ namespace PascalGanaye.Popup
                     this.mResizingPanel.MouseDown += this.mResizingPanel_MouseDown;
                     this.mResizingPanel.MouseMove += this.mResizingPanel_MouseMove;
                 }
-                this.mPlacement = this.mPopup.mPlacement;
+                this.mPlacement = this.mPopup.HorizontalPlacement;
 
                 // Try to place the popup at the asked location
                 this.ReLocate();
@@ -186,7 +185,7 @@ namespace PascalGanaye.Popup
                     }
                 }
 
-                if (this.mPlacement != this.mPopup.mPlacement)
+                if (this.mPlacement != this.mPopup.HorizontalPlacement)
                 {
                     this.ReLocate();
                 }
@@ -219,7 +218,7 @@ namespace PascalGanaye.Popup
 
                 // Initialize the animation
                 this.mProgress = 0;
-                if (this.mPopup.mAnimationSpeed > 0)
+                if (this.mPopup.AnimationSpeed > 0)
                 {
                     this.mTimer = new Timer();
 
@@ -318,7 +317,7 @@ namespace PascalGanaye.Popup
 
             private void Showing(object sender, System.EventArgs e)
             {
-                this.mProgress = System.DateTimeOffset.Now.Subtract(this.mTimerStarted).TotalMilliseconds /this.mPopup.mAnimationSpeed;
+                this.mProgress = System.DateTimeOffset.Now.Subtract(this.mTimerStarted).TotalMilliseconds /this.mPopup.AnimationSpeed;
                 if (this.mProgress >= 1)
                 {
                     this.mTimer.Stop();
@@ -337,9 +336,9 @@ namespace PascalGanaye.Popup
 
                 if (this.mClosing == false)
                 {
-                    if (this.mPopup.mUserControl is IPopupUserControl)
+                    if (this.mPopup.UserControl is IPopupUserControl)
                     {
-                        this.mClosing = ((IPopupUserControl) this.mPopup.mUserControl).AcceptPopupClosing();
+                        this.mClosing = ((IPopupUserControl) this.mPopup.UserControl).AcceptPopupClosing();
                     }
                     else
                     {
@@ -355,7 +354,7 @@ namespace PascalGanaye.Popup
 
             protected override void OnPaintBackground(PaintEventArgs pevent)
             {
-                pevent.Graphics.DrawRectangle(new Pen(this.mPopup.mBorderColor), 0, 0, this.Width - 1, this.Height - 1);
+                pevent.Graphics.DrawRectangle(new Pen(this.mPopup.BorderColor), 0, 0, this.Width - 1, this.Height - 1);
             }
 
             private void SetFinalLocation()
@@ -431,8 +430,8 @@ namespace PascalGanaye.Popup
                 }
                 finally
                 {
-                    this.mPopup.mUserControl.Parent = null;
-                    this.mPopup.mUserControl.Size = this.mControlSize;
+                    this.mPopup.UserControl.Parent = null;
+                    this.mPopup.UserControl.Size = this.mControlSize;
                     this.mPopup.mForm = null;
                     Form parentForm = this.mPopup.mParent.FindForm();
                     if (parentForm != null)
@@ -505,18 +504,10 @@ namespace PascalGanaye.Popup
         public event System.EventHandler DropDownClosed;
 
         [DefaultValue(false)]
-        public bool Resizable
-        {
-            get { return this.mResizable; }
-            set { this.mResizable = value; }
-        }
+        public bool Resizable { get; set; }
 
         [Browsable(false)]
-        public Control UserControl
-        {
-            get { return this.mUserControl; }
-            set { this.mUserControl = value; }
-        }
+        public Control UserControl { get; set; }
 
         [Browsable(false)]
         public Control Parent
@@ -526,39 +517,19 @@ namespace PascalGanaye.Popup
         }
 
         [DefaultValue(typeof (ePlacement), "BottomLeft")]
-        public ePlacement HorizontalPlacement
-        {
-            get { return this.mPlacement; }
-            set { this.mPlacement = value; }
-        }
+        public ePlacement HorizontalPlacement { get; set; }
 
         [DefaultValue(typeof (Color), "DarkGray")]
-        public Color BorderColor
-        {
-            get { return this.mBorderColor; }
-            set { this.mBorderColor = value; }
-        }
+        public Color BorderColor { get; set; }
 
         [DefaultValue(true)]
-        public bool ShowShadow
-        {
-            get { return this.mShowShadow; }
-            set { this.mShowShadow = value; }
-        }
+        public bool ShowShadow { get; set; }
 
         [DefaultValue(150)]
-        public int AnimationSpeed
-        {
-            get { return this.mAnimationSpeed; }
-            set { this.mAnimationSpeed = value; }
-        }
+        public int AnimationSpeed { get; set; }
 
         [DefaultValue(1d), TypeConverter(typeof (OpacityConverter))]
-        public double Opacity
-        {
-            get { return this.mOpacity; }
-            set { this.mOpacity = value; }
-        }
+        public double Opacity { get; set; }
 
         #endregion
 
@@ -572,7 +543,7 @@ namespace PascalGanaye.Popup
             // 
             // CornerPicture
             // 
-            this.CornerPicture.Image = ((Image) (resources.GetObject("CornerPicture.Image")));
+            //this.CornerPicture.Image = ((Image) (resources.GetObject("CornerPicture.Image")));
             this.CornerPicture.Location = new Point(17, 17);
             this.CornerPicture.Name = "CornerPicture";
             this.CornerPicture.TabIndex = 0;

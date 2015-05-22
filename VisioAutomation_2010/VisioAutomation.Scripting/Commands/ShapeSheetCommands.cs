@@ -114,7 +114,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapes = this.GetTargetShapes(target_shapes);
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var app = this.Client.VisioApplication;
+
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
             var query = new VAQUERY.CellQuery();
             var sec = query.AddSection(section);

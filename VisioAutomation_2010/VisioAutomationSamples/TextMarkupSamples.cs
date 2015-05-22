@@ -79,7 +79,6 @@ namespace VisioAutomationSamples
 
             // Create the Shapes that will hold the text
             var s1 = page.DrawRectangle(0, 0, 8.5, 11);
-            var tnr = page.Document.Fonts["Times New Roman"];
 
             var e1 = new VA.Text.Markup.TextElement();
             e1.ParagraphCells.HorizontalAlign = 0;

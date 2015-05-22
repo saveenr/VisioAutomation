@@ -204,10 +204,6 @@ namespace VisioAutomationSamples
                         {
                             n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
                         }
-                        else
-                        {
-                            // empty
-                        }
                         n1.CharFontName = fontnames[j];
                         n1.Cells.CharSize = "36pt";
                         n1.Cells.FillForegnd = "rgb(255,255,255)";
@@ -253,10 +249,6 @@ namespace VisioAutomationSamples
                             n1.Text = new VA.Text.Markup.TextElement(chunk[i]);
                             n1.Text.CharacterCells.Color = colors[j];
 
-                        }
-                        else
-                        {
-                            // empty
                         }
                         n1.CharFontName = fontnames[j];
     

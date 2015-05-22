@@ -32,8 +32,8 @@ namespace VisioAutomation.UI
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.basicFillControlFill = new BasicFillControl();
-            this.basicFillControlShadow = new BasicFillControl();
+            this.FillDef = new BasicFillControl();
+            this.ShadowDef = new BasicFillControl();
             this.SuspendLayout();
             // 
             // label1
@@ -58,35 +58,35 @@ namespace VisioAutomation.UI
             // 
             // basicFillControlFill
             // 
-            this.basicFillControlFill.BackgroundColor = System.Drawing.Color.Black;
-            this.basicFillControlFill.BackgroundTransparency = 0;
-            this.basicFillControlFill.FillPattern = VA.UI.FillPattern.None;
-            this.basicFillControlFill.ForegroundColor = System.Drawing.Color.Red;
-            this.basicFillControlFill.ForegroundTransparency = 0;
-            this.basicFillControlFill.Location = new System.Drawing.Point(3, 27);
-            this.basicFillControlFill.Name = "basicFillControlFill";
-            this.basicFillControlFill.Size = new System.Drawing.Size(330, 87);
-            this.basicFillControlFill.TabIndex = 10;
+            this.FillDef.BackgroundColor = System.Drawing.Color.Black;
+            this.FillDef.BackgroundTransparency = 0;
+            this.FillDef.FillPattern = VA.UI.FillPattern.None;
+            this.FillDef.ForegroundColor = System.Drawing.Color.Red;
+            this.FillDef.ForegroundTransparency = 0;
+            this.FillDef.Location = new System.Drawing.Point(3, 27);
+            this.FillDef.Name = "FillDef";
+            this.FillDef.Size = new System.Drawing.Size(330, 87);
+            this.FillDef.TabIndex = 10;
             // 
             // basicFillControlShadow
             // 
-            this.basicFillControlShadow.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.basicFillControlShadow.BackgroundTransparency = 0;
-            this.basicFillControlShadow.FillPattern = VA.UI.FillPattern.None;
-            this.basicFillControlShadow.ForegroundColor = System.Drawing.Color.Blue;
-            this.basicFillControlShadow.ForegroundTransparency = 0;
-            this.basicFillControlShadow.Location = new System.Drawing.Point(3, 145);
-            this.basicFillControlShadow.Name = "basicFillControlShadow";
-            this.basicFillControlShadow.Size = new System.Drawing.Size(330, 88);
-            this.basicFillControlShadow.TabIndex = 9;
+            this.ShadowDef.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.ShadowDef.BackgroundTransparency = 0;
+            this.ShadowDef.FillPattern = VA.UI.FillPattern.None;
+            this.ShadowDef.ForegroundColor = System.Drawing.Color.Blue;
+            this.ShadowDef.ForegroundTransparency = 0;
+            this.ShadowDef.Location = new System.Drawing.Point(3, 145);
+            this.ShadowDef.Name = "ShadowDef";
+            this.ShadowDef.Size = new System.Drawing.Size(330, 88);
+            this.ShadowDef.TabIndex = 9;
             // 
             // FillControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.basicFillControlFill);
-            this.Controls.Add(this.basicFillControlShadow);
+            this.Controls.Add(this.FillDef);
+            this.Controls.Add(this.ShadowDef);
             this.Controls.Add(this.label1);
             this.Name = "FillControl";
             this.Size = new System.Drawing.Size(336, 240);
@@ -98,8 +98,6 @@ namespace VisioAutomation.UI
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private BasicFillControl basicFillControlShadow;
-        private BasicFillControl basicFillControlFill;
         private System.Windows.Forms.Label label2;
     }
 }

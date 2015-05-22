@@ -1,3 +1,4 @@
+using System.Globalization;
 using VA = VisioAutomation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using VisioAutomation.Extensions;
@@ -52,7 +53,7 @@ namespace VisioAutomationSamples
             var angles = Enumerable.Range(0, numpoints).Select(i => i*angle_step).ToList();
             var centers = angles.Select(a => PlaygroundSamples.GetPointAtRadius(origin, a, radius)).ToList();
             var shapes = centers.Select(p => PlaygroundSamples.draw_leaf(page, p)).ToList();
-            var angles_as_formulas = angles.Select(a => a.ToString()).ToList();
+            var angles_as_formulas = angles.Select(a => a.ToString(CultureInfo.InvariantCulture)).ToList();
 
             var color_formulas = colors.Select(x => new VA.Drawing.ColorRGB(x).ToFormula()).ToList();
 

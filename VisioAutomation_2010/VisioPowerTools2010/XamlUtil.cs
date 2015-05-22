@@ -46,7 +46,6 @@ namespace VisioPowerTools2010
             }
 
             verboselog("Creating XHTML with embedded SVG");
-            var s = svg_filename;
 
             if (System.IO.File.Exists(filename))
             {
@@ -64,7 +63,7 @@ namespace VisioPowerTools2010
             }
             catch (System.Exception e)
             {
-                string msg = System.String.Format("Failed to convert to XAML \"{0}\"", e.Message + e.StackTrace);
+                string msg = string.Format("Failed to convert to XAML \"{0}\"", e.Message + e.StackTrace);
                 verboselog(msg);
                 return;
             }

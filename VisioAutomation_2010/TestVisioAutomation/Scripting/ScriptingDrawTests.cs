@@ -519,8 +519,6 @@ namespace TestVisioAutomation.Scripting
             client.Selection.All();
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
-            var app = active_page.Application;
-
             var dropped_container = client.Master.DropContainer("Plain");
 
             // Verify

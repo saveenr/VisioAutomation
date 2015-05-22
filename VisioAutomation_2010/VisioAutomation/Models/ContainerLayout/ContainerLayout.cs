@@ -167,8 +167,6 @@ namespace VisioAutomation.Models.ContainerLayout
                 item.VisioShape.Text = item.Text;
             }
 
-            var window = app.ActiveWindow;
-
             var update = new ShapeSheet.Update();
 
             // Format the containers and shapes

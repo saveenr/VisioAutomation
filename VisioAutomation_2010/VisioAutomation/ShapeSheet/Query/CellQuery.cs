@@ -97,7 +97,7 @@ namespace VisioAutomation.ShapeSheet.Query
                     var per_shape_data = this.PerShapeSectionInfo[i];
                     foreach (var sec in per_shape_data)
                     {
-                        foreach (var rowindex in sec.RowIndexes)
+                        foreach (var row_index in sec.RowIndexes)
                         {
                             foreach (var col in sec.section_column.CellColumns)
                             {

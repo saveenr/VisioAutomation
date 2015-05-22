@@ -43,7 +43,7 @@ namespace VisioAutomation.Models.Forms
             titleblock.FormatCells.LineWeight = 0;
             titleblock.FormatCells.LinePattern = 0;
             titleblock.CharacterCells.Font = _fontid;
-            titleblock.CharacterCells.Size = this.get_pt_string(this.TitleTextSize);
+            titleblock.CharacterCells.Size = get_pt_string(this.TitleTextSize);
 
 
 
@@ -54,9 +54,9 @@ namespace VisioAutomation.Models.Forms
             double body_height = r.GetDistanceToBottomMargin();
             var bodyblock = new TextBlock(new Drawing.Size(7.5, body_height), this.Body);
             bodyblock.ParagraphCells.HorizontalAlign = 0;
-            bodyblock.ParagraphCells.SpacingAfter = this.get_pt_string(this.BodyParaSpacingAfter);
+            bodyblock.ParagraphCells.SpacingAfter = get_pt_string(this.BodyParaSpacingAfter);
             bodyblock.CharacterCells.Font = _fontid;
-            bodyblock.CharacterCells.Size = this.get_pt_string(this.BodyTextSize);
+            bodyblock.CharacterCells.Size = get_pt_string(this.BodyTextSize);
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
             bodyblock.Textcells.VerticalAlign = 0;
@@ -70,7 +70,7 @@ namespace VisioAutomation.Models.Forms
             return this.VisioPage;
         }
 
-        private string get_pt_string(double size)
+        private static string get_pt_string(double size)
         {
             return string.Format("{0}pt", size);
         }

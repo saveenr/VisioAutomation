@@ -50,12 +50,12 @@ namespace VisioAutomation.Shapes.Controls
 
             if (!ctrl.XDynamics.Formula.HasValue)
             {
-                ctrl.XDynamics = String.Format("Controls.Row_{0}", row + 1);
+                ctrl.XDynamics = string.Format("Controls.Row_{0}", row + 1);
             }
 
             if (!ctrl.YDynamics.Formula.HasValue)
             {
-                ctrl.YDynamics = String.Format("Controls.Row_{0}.Y", row + 1);
+                ctrl.YDynamics = string.Format("Controls.Row_{0}.Y", row + 1);
             }
 
             var update = new ShapeSheet.Update();

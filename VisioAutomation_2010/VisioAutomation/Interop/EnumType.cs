@@ -25,7 +25,6 @@ namespace VisioAutomation.Interop
             for (int i = 0; i < avalues.Length; i++)
             {
                 object o = avalues.GetValue(i);
-                System.Type t = o.GetType();
                 var item = new EnumValue(names[i],(int) o);
                 yield return item;
             }
