@@ -27,7 +27,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             if (value == null)
             {
-                throw new System.ArgumentNullException(nameof(value));
+                throw new System.ArgumentNullException("value");
             }
 
             this.Name = name;
@@ -40,7 +40,7 @@ namespace VisioAutomation.Shapes.UserDefinedCells
 
             if (value == null)
             {
-                throw new System.ArgumentNullException(nameof(value));
+                throw new System.ArgumentNullException("value");
             }
             
             this.Name = name;

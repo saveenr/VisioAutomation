@@ -12,11 +12,11 @@ namespace VisioAutomation.Drawing
         {
             if (width < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(width));
+                throw new System.ArgumentOutOfRangeException("width");
             }
             if (height < 0.0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(height));
+                throw new System.ArgumentOutOfRangeException("height");
             }
             this.Width = width;
             this.Height = height;

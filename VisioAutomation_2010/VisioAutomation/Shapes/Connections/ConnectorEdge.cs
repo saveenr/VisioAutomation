@@ -12,12 +12,12 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (fromshape == null)
             {
-                throw new System.ArgumentNullException(nameof(fromshape));
+                throw new System.ArgumentNullException("fromshape");
             }
 
             if (toshape == null)
             {
-                throw new System.ArgumentNullException(nameof(toshape));
+                throw new System.ArgumentNullException("toshape");
             }
 
             this.Connector = connectingshape;

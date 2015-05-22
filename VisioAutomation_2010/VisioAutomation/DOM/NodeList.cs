@@ -51,7 +51,7 @@ namespace VisioAutomation.DOM
         {
             if (node_to_add == null)
             {
-                throw new System.ArgumentNullException(nameof(node_to_add));
+                throw new System.ArgumentNullException("node_to_add");
             }
 
             if (node_to_add == this.Parent)
@@ -79,7 +79,7 @@ namespace VisioAutomation.DOM
         {
             if (nodes == null)
             {
-                throw new System.ArgumentNullException(nameof(nodes));
+                throw new System.ArgumentNullException("nodes");
             }
 
             foreach (T i in nodes)

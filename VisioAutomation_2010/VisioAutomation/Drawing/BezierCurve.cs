@@ -12,12 +12,12 @@ namespace VisioAutomation.Drawing
         {
             if (controlpoints== null)
             {
-                throw new System.ArgumentNullException(nameof(controlpoints));
+                throw new System.ArgumentNullException("controlpoints");
             }
 
             if (degree < 1)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(degree));                
+                throw new System.ArgumentOutOfRangeException("degree");                
             }
 
             this.ControlPoints = controlpoints;

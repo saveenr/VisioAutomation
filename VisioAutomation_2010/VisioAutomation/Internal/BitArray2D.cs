@@ -12,12 +12,12 @@ namespace VisioAutomation.Internal
         {
             if (cols <= 0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(cols));
+                throw new System.ArgumentOutOfRangeException("cols");
             }
 
             if (rows <= 0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(rows));
+                throw new System.ArgumentOutOfRangeException("rows");
             }
 
             this.Width = cols;
@@ -35,22 +35,22 @@ namespace VisioAutomation.Internal
         {
             if (col < 0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
+                throw new System.ArgumentOutOfRangeException("col");
             }
 
             if (col >= this.Width)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
+                throw new System.ArgumentOutOfRangeException("col");
             }
 
             if (row < 0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
+                throw new System.ArgumentOutOfRangeException("row");
             }
 
             if (row >= this.Height)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
+                throw new System.ArgumentOutOfRangeException("row");
             }
 
             int pos = (row *this.Width) + col;
@@ -61,22 +61,22 @@ namespace VisioAutomation.Internal
         {
             if (col < 0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
+                throw new System.ArgumentOutOfRangeException("col");
             }
 
             if (col >= this.Width)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(col));
+                throw new System.ArgumentOutOfRangeException("col");
             }
 
             if (row < 0)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
+                throw new System.ArgumentOutOfRangeException("row");
             }
 
             if (row >= this.Height)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(row));
+                throw new System.ArgumentOutOfRangeException("row");
             }
 
             int pos = (row *this.Width) + col;

@@ -17,12 +17,12 @@ namespace VisioAutomation.Pages
             // handle the source page
             if (src_page == null)
             {
-                throw new System.ArgumentNullException(nameof(src_page));
+                throw new System.ArgumentNullException("src_page");
             }
 
             if (dest_page == null)
             {
-                throw new System.ArgumentNullException(nameof(dest_page));
+                throw new System.ArgumentNullException("dest_page");
             }
 
             if (dest_page == src_page)
@@ -122,7 +122,7 @@ namespace VisioAutomation.Pages
         {
             if (masters == null)
             {
-                throw new System.ArgumentNullException(nameof(masters));
+                throw new System.ArgumentNullException("masters");
             }
 
             if (masters.Count < 1)
@@ -132,7 +132,7 @@ namespace VisioAutomation.Pages
 
             if (points == null)
             {
-                throw new System.ArgumentNullException(nameof(points));
+                throw new System.ArgumentNullException("points");
             }
 
             // NOTE: DropMany will fail if you pass in zero items to drop
@@ -154,7 +154,7 @@ namespace VisioAutomation.Pages
 
             if (points == null)
             {
-                throw new System.ArgumentNullException(nameof(points));
+                throw new System.ArgumentNullException("points");
             }
 
             // NOTE: DropMany will fail if you pass in zero items to drop

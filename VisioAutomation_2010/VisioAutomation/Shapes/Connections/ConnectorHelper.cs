@@ -18,12 +18,12 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (from_shape == null)
             {
-                throw new System.ArgumentNullException(nameof(from_shape));
+                throw new System.ArgumentNullException("from_shape");
             }
 
             if (to_shape == null)
             {
-                throw new System.ArgumentNullException(nameof(to_shape));
+                throw new System.ArgumentNullException("to_shape");
             }
 
             if (connector_shape == from_shape)
@@ -87,12 +87,12 @@ namespace VisioAutomation.Shapes.Connections
 
             if (fromshapes == null)
             {
-                throw new System.ArgumentNullException(nameof(fromshapes));
+                throw new System.ArgumentNullException("fromshapes");
             }
 
             if (toshapes == null)
             {
-                throw new System.ArgumentNullException(nameof(toshapes));
+                throw new System.ArgumentNullException("toshapes");
             }
 
             if (fromshapes.Count != toshapes.Count)

@@ -120,7 +120,7 @@ namespace VisioAutomation.Drawing
         {
             if (doubles == null)
             {
-                throw new System.ArgumentNullException(nameof(doubles));
+                throw new System.ArgumentNullException("doubles");
             }
 
             int count = 0;

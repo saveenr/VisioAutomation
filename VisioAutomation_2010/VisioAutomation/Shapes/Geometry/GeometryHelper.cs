@@ -9,7 +9,7 @@ namespace VisioAutomation.Shapes.Geometry
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException("shape");
             }
 
             int num_geometry_sections = shape.GeometryCount;
@@ -45,7 +45,7 @@ namespace VisioAutomation.Shapes.Geometry
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException("shape");
             }
 
             short target_section_index = GeometryHelper.GetGeometrySectionIndex(index);

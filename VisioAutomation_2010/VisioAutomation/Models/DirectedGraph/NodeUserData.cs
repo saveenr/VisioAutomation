@@ -10,12 +10,12 @@ namespace VisioAutomation.Models.DirectedGraph
         {
             if (id == null)
             {
-                throw new System.ArgumentNullException(nameof(id));
+                throw new System.ArgumentNullException("id");
             }
 
             if (shape == null)
             {
-                throw new System.ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException("shape");
             }
 
             this.ID = id;
@@ -26,12 +26,12 @@ namespace VisioAutomation.Models.DirectedGraph
         {
             if (id == null)
             {
-                throw new System.ArgumentNullException(nameof(id));
+                throw new System.ArgumentNullException("id");
             }
 
             if (con == null)
             {
-                throw new System.ArgumentNullException(nameof(con));
+                throw new System.ArgumentNullException("con");
             }
 
             this.ID = id;

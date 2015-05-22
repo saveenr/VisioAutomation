@@ -14,7 +14,7 @@ namespace VisioAutomation.Documents
         {
             if (docs == null)
             {
-                throw new System.ArgumentNullException(nameof(docs));
+                throw new System.ArgumentNullException("docs");
             }
 
             var application = docs.Application;

@@ -16,7 +16,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
@@ -52,7 +52,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             var update = new ShapeSheet.Update();
@@ -86,12 +86,12 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (page == null)
             {
-                throw new ArgumentNullException(nameof(page));
+                throw new ArgumentNullException("page");
             }
 
             if (shapes == null)
             {
-                throw new ArgumentNullException(nameof(shapes));
+                throw new ArgumentNullException("shapes");
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
@@ -132,7 +132,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             // If the Custom Property section does not exist then return zero immediately
@@ -157,7 +157,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             int custom_prop_row_count = CustomPropertyHelper.GetCount(shape);
@@ -230,12 +230,12 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             if (name == null)
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException("name");
             }
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
@@ -255,12 +255,12 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             if (name == null)
             {
-                throw new ArgumentNullException(nameof(name));
+                throw new ArgumentNullException("name");
             }
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
@@ -275,14 +275,14 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             CustomPropertyHelper.CheckValidCustomPropertyName(name);
 
             if (val == null)
             {
-                throw new ArgumentNullException(nameof(val));
+                throw new ArgumentNullException("val");
             }
 
             // create a new property

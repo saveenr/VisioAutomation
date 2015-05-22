@@ -35,7 +35,7 @@ namespace VisioAutomation.Models.OrgChart
 
             if (app == null)
             {
-                throw new System.ArgumentNullException(nameof(app));
+                throw new System.ArgumentNullException("app");
             }
 
             if (orgchartdrawing.OrgCharts.Count < 1)

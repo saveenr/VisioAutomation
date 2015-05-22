@@ -14,7 +14,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException(nameof(page));
+                throw new System.ArgumentNullException("page");
             }
 
             var directed_edges = PathAnalysis.GetDirectedEdges(page, flag)
@@ -38,7 +38,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException(nameof(page));
+                throw new System.ArgumentNullException("page");
             }
 
             var edges = PathAnalysis.GetDirectedEdgesRaw(page);
@@ -124,7 +124,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (page == null)
             {
-                throw new System.ArgumentNullException(nameof(page));
+                throw new System.ArgumentNullException("page");
             }
 
             var page_connects = page.Connects;
@@ -164,7 +164,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (adj_matrix == null)
             {
-                throw new System.ArgumentNullException(nameof(adj_matrix));
+                throw new System.ArgumentNullException("adj_matrix");
             }
 
             if (adj_matrix.Width != adj_matrix.Height)
@@ -191,7 +191,7 @@ namespace VisioAutomation.Shapes.Connections
         {
             if (edges == null)
             {
-                throw new System.ArgumentNullException(nameof(edges));
+                throw new System.ArgumentNullException("edges");
             }
 
             var object_to_id = new Dictionary<A, int>();

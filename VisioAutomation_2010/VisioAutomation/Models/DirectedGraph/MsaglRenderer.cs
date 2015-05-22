@@ -540,12 +540,12 @@ namespace VisioAutomation.Models.DirectedGraph
         {
             if (page == null)
             {
-                throw new ArgumentNullException(nameof(page));
+                throw new ArgumentNullException("page");
             }
 
             if (options == null)
             {
-                throw new ArgumentNullException(nameof(options));
+                throw new ArgumentNullException("options");
             }
 
             var renderer = new MsaglRenderer();

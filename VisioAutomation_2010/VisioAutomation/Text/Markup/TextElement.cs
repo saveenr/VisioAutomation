@@ -145,7 +145,7 @@ namespace VisioAutomation.Text.Markup
         {
             if (shape == null)
             {
-                throw new System.ArgumentNullException(nameof(shape));
+                throw new System.ArgumentNullException("shape");
             }
 
             // First just set all the text

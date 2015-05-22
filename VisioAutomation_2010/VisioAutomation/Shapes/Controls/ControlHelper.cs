@@ -11,7 +11,7 @@ namespace VisioAutomation.Shapes.Controls
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             var ctrl = new ControlCells();
@@ -25,7 +25,7 @@ namespace VisioAutomation.Shapes.Controls
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             short row = shape.AddRow((short)IVisio.VisSectionIndices.visSectionControls,
@@ -44,7 +44,7 @@ namespace VisioAutomation.Shapes.Controls
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
 
@@ -69,12 +69,12 @@ namespace VisioAutomation.Shapes.Controls
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index));
+                throw new ArgumentOutOfRangeException("index");
             }
 
             var row = (IVisio.VisRowIndices)index;
@@ -85,7 +85,7 @@ namespace VisioAutomation.Shapes.Controls
         {
             if (shape == null)
             {
-                throw new ArgumentNullException(nameof(shape));
+                throw new ArgumentNullException("shape");
             }
 
             return shape.RowCount[(short)IVisio.VisSectionIndices.visSectionControls];

@@ -43,7 +43,7 @@ namespace VisioAutomation
         {
             if (s == null)
             {
-                throw new System.ArgumentNullException(nameof(s));
+                throw new System.ArgumentNullException("s");
             }
 
             if (s.Length == 0)
@@ -64,7 +64,7 @@ namespace VisioAutomation
         {
             if (formula == null)
             {
-                throw new System.ArgumentNullException(nameof(formula));
+                throw new System.ArgumentNullException("formula");
             }
 
             // Initialize the converted formula from the value passed in.
