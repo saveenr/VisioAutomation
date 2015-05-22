@@ -355,7 +355,7 @@ namespace VisioAutomation.DOM
 
                 else
                 {
-                    string msg = $"Internal Error: Unhandled DOM node type: {shape.GetType()}";
+                    string msg = string.Format("Internal Error: Unhandled DOM node type: {0}", shape.GetType());
                     throw new AutomationException(msg);
                 }
             }

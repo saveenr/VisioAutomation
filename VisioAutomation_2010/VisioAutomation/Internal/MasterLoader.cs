@@ -71,7 +71,7 @@ namespace VisioAutomation.Internal
                 var stencil_doc = docs.OpenStencil(stencil);
                 if (stencil_doc == null)
                 {
-                    string msg = $"Failed to open stencil \"{stencil}\"";
+                    string msg = string.Format("Failed to open stencil \"{0}\"", stencil);
                     throw new AutomationException(msg);
                 }
 
@@ -92,8 +92,8 @@ namespace VisioAutomation.Internal
                         var master_object = this.TryGetMaster(stencilmasters, master_ref.MasterName);
                         if (master_object == null)
                         {
-                            string msg =
-                                $"No such master \"{master_ref.MasterName}\" in stencil \"{master_ref.StencilName}\"";
+                            string msg = string.Format("No such master \"{0}\" in stencil \"{1}\"",
+                                                       master_ref.MasterName, master_ref.StencilName);
                             throw new AutomationException(msg);
                         }
                         master_ref.VisioMaster = master_object;                        
@@ -108,8 +108,8 @@ namespace VisioAutomation.Internal
                         var master_object = this.TryGetMaster(stencilmasters, master_ref.MasterName);
                         if (master_object == null)
                         {
-                            string msg =
-                                $"No such master \"{master_ref.MasterName}\" in Active Document \"{stencildoc.Name}\"";
+                            string msg = string.Format("No such master \"{0}\" in Active Document \"{1}\"",
+                                                       master_ref.MasterName, stencildoc.Name);
                             throw new AutomationException(msg);
                         }
                         master_ref.VisioMaster = master_object;

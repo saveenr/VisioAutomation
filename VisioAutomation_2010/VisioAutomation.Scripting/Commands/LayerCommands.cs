@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             catch (System.Runtime.InteropServices.COMException)
             {
-                string msg = $"No such layer \"{layername}\"";
+                string msg = string.Format("No such layer \"{0}\"", layername);
                 throw new VisioOperationException(msg);
             }
             return layer;

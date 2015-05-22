@@ -72,7 +72,7 @@ namespace VisioAutomation.Models.Forms
 
         private string get_pt_string(double size)
         {
-            return $"{size}pt";
+            return string.Format("{0}pt", size);
         }
     }
 }

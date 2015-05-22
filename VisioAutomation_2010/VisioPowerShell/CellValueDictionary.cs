@@ -43,8 +43,7 @@ namespace VisioPowerShell
             {
                 if (!(key_o is string))
                 {
-                    string message =
-                        $"Only string values can be keys in the hashtable. Encountered a key of type {key_o.GetType().FullName}";
+                    string message = string.Format("Only string values can be keys in the hashtable. Encountered a key of type {0}", key_o.GetType().FullName);
                     throw new System.ArgumentOutOfRangeException("ht", message);
                 }
             }
@@ -57,14 +56,14 @@ namespace VisioPowerShell
 
                 if (!srcmap.ContainsCell(cellname))
                 {
-                    string message = $"Cell \"{cellname}\" is not supported";
+                    string message = string.Format("Cell \"{0}\" is not supported", cellname);
                     throw new System.ArgumentOutOfRangeException("ht", message);                    
                 }
                 var cell_value_o = ht[key_o];
 
                 if (cell_value_o == null)
                 {
-                    string message = $"Cell {cellname} has a null value. Use a non-null value";
+                    string message = string.Format("Cell {0} has a null value. Use a non-null value", cellname);
                     throw new System.ArgumentOutOfRangeException("ht", message);
                 }
 
@@ -101,7 +100,7 @@ namespace VisioPowerShell
             else
             {
                 var value_type_name = value_o.GetType().FullName;
-                string message = $"Cell {cellname} has an unsupported type {value_type_name} ";
+                string message = string.Format("Cell {0} has an unsupported type {1} ", cellname, value_type_name);
                 throw new System.ArgumentOutOfRangeException(message);
             }
             return value_string;

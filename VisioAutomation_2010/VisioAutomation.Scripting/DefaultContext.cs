@@ -4,7 +4,7 @@
     {
         public override void WriteDebug(string s)
         {
-            string msg = $"DEBUG: {s}";
+            string msg = string.Format("DEBUG: {0}", s);
             this.DefaultWriteString(msg);
         }
 
@@ -15,19 +15,19 @@
 
         public override void WriteError(string s)
         {
-            string msg = $"ERROR: {s}";
+            string msg = string.Format("ERROR: {0}", s);
             this.DefaultWriteString(msg);
         }
 
         public override void WriteVerbose(string s)
         {
-            string msg = $"VERBOSE: {s}";
+            string msg = string.Format("VERBOSE: {0}", s);
             this.DefaultWriteString(msg);
         }
 
         public override void WriteWarning(string s)
         {
-            string msg = $"WARNING: {s}";
+            string msg = string.Format("WARNING: {0}", s);
             this.DefaultWriteString(msg);
         }
 

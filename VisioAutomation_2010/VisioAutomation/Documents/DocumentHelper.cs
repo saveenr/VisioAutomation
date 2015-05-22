@@ -31,7 +31,7 @@ namespace VisioAutomation.Documents
             var stencil = DocumentHelper.TryOpenStencil(docs, filename);
             if (stencil == null)
             {
-                string msg = $"Could not open stencil \"{filename}\"";
+                string msg = string.Format("Could not open stencil \"{0}\"",filename);
                 throw new AutomationException(msg);
             }
             return stencil;

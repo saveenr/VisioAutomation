@@ -58,7 +58,7 @@ namespace VisioAutomation.Shapes.CustomProperties
         {
             var current_culture = System.Globalization.CultureInfo.CurrentCulture;
             string formatted_dt = value.ToString(current_culture);
-            this.Value = $"DATETIME(\"{formatted_dt}\")";
+            this.Value = string.Format("DATETIME(\"{0}\")", formatted_dt);
             this.Type = 5;
         }
 
@@ -175,7 +175,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             }
             else
             {
-                string msg = $"Unsupported type for value \"{value}\" \"{value.GetType()}\"";
+                string msg = string.Format("Unsupported type for value \"{0}\" \"{1}\"", value, value.GetType());
                 throw new System.ArgumentOutOfRangeException(msg);
             }
         }

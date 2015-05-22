@@ -95,7 +95,13 @@ namespace VisioAutomation.Scripting.Commands
                 {
                     bkgnd = "(Background)";
                 }
-                string page_filname = $"{fbase}_{page_index}_{page.Name}{bkgnd}{ext}";
+                string page_filname = System.String.Format(
+                    "{0}_{1}_{2}{3}{4}",
+                    fbase,
+                    page_index,
+                    page.Name,
+                    bkgnd,
+                    ext);
 
                 this.Client.WriteUser("file {0}", page_filname);
                 page_filname = System.IO.Path.Combine(pbase, page_filname);
@@ -139,7 +145,7 @@ namespace VisioAutomation.Scripting.Commands
             var load_svg_timer = new System.Diagnostics.Stopwatch();
             var svg_doc = SXL.XDocument.Load(svg_filename);
             load_svg_timer.Stop();
-            verboselog($"Finished SVG Loading ({load_svg_timer.Elapsed.TotalSeconds} seconds)");
+            verboselog(string.Format("Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds));
 
             // Delete temp SVG
             if (System.IO.File.Exists(svg_filename))
@@ -155,7 +161,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (System.IO.File.Exists(filename))
             {
-                verboselog($"Deleting \"{filename}\"");
+                verboselog(string.Format("Deleting \"{0}\"", filename));
                 System.IO.File.Delete(filename);
             }
 
@@ -170,7 +176,7 @@ namespace VisioAutomation.Scripting.Commands
             body.Add(svg_node);
 
             xhtml_doc.Save(filename);
-            verboselog($"Done writing XHTML file \"{filename}\"");
+            verboselog(string.Format("Done writing XHTML file \"{0}\"", filename));
         }
 
         public void ExportSelectionToXAML(string filename)
@@ -208,7 +214,7 @@ namespace VisioAutomation.Scripting.Commands
 
             load_svg_timer.Stop();
 
-            verboselog($"Finished SVG Loading ({load_svg_timer.Elapsed.TotalSeconds} seconds)");
+            verboselog(string.Format("Finished SVG Loading ({0} seconds)", load_svg_timer.Elapsed.TotalSeconds));
 
             // Delete temp SVG
 
@@ -218,7 +224,7 @@ namespace VisioAutomation.Scripting.Commands
             }
             else
             {
-                string msg = $"Temporary SVG file could not be found: \"{svg_filename}\"";
+                string msg = string.Format("Temporary SVG file could not be found: \"{0}\"", svg_filename);
                 throw new VisioOperationException(msg);
             }
 
@@ -228,7 +234,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (System.IO.File.Exists(filename))
             {
-                verboselog($"Deleting \"{filename}\"");
+                verboselog(string.Format("Deleting \"{0}\"", filename));
 
                 System.IO.File.Delete(filename);
             }
@@ -246,7 +252,7 @@ namespace VisioAutomation.Scripting.Commands
 
             catch (System.Exception e)
             {
-                string msg = $"Failed to convert to XAML \"{e.Message + e.StackTrace}\"";
+                string msg = System.String.Format("Failed to convert to XAML \"{0}\"", e.Message + e.StackTrace);
 
                 verboselog(msg);
 
@@ -261,7 +267,7 @@ namespace VisioAutomation.Scripting.Commands
 
             verboselog("Finished writing XAML File");
 
-            verboselog($"Finished XAML export ({convert_timer.Elapsed.TotalSeconds} seconds)");
+            verboselog(string.Format("Finished XAML export ({0} seconds)", convert_timer.Elapsed.TotalSeconds));
         }
     }
 }

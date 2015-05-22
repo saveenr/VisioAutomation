@@ -30,7 +30,7 @@ namespace VisioAutomation.Drawing
 
             if (points.Count != 4)
             {
-                string msg = $"A {typeof (BezierSegment)} must have exactly 4 points";
+                string msg = string.Format("A {0} must have exactly 4 points", typeof (BezierSegment));
                 throw new System.ArgumentException(msg, "points");
             }
 
