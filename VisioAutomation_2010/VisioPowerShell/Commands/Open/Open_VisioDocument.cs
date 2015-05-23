@@ -13,7 +13,11 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            this.client.Application.SafeNew();
+            if (this.client.Application.HasApplication == false)
+            {
+                // no app - let's create one
+                this.client.Application.New();
+            }
 
             if (this.filename_is_stencil(this.Filename))
             {
