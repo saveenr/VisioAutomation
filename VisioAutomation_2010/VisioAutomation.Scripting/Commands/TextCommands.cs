@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
                return;
            }
 
-           using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Shape Text"))
+           using (var undoscope = new VA.Application.UndoScope(this.Client.Application.Get(), "Set Shape Text"))
            {
                int numtexts = texts.Count;
 
@@ -76,11 +76,11 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Toggle Shape Text Case"))
+            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Toggle Shape Text Case"))
             {
                 var shapeids = shapes.Select(s => s.ID).ToList();
 
-                var page = this.Client.VisioApplication.ActivePage;
+                var page = this.Client.Application.Get().ActivePage;
                 // Store all the formatting
                 var formats = Text.TextFormat.GetFormat(page, shapeids);
 
@@ -129,7 +129,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 return;
             }
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_document = application.ActiveDocument;
             var active_doc_fonts = active_document.Fonts;
             var font = active_doc_fonts[fontname];
@@ -152,7 +152,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var selection = this.Client.Selection.Get();
             var shapeids = selection.GetIDs();
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var formats = Text.TextFormat.GetFormat(application.ActivePage, shapeids);
             return formats;
         }
@@ -181,7 +181,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var shapeids = shapes.Select(s=>s.ID);
             foreach (int shapeid in shapeids)
             {
@@ -205,7 +205,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             using (var undoscope = new Application.UndoScope(application,"SetTextWrapping"))
             {
                 var active_page = application.ActivePage;
@@ -224,7 +224,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_page = application.ActivePage;
             var shapeids = shapes.Select(s => s.ID).ToList();
 

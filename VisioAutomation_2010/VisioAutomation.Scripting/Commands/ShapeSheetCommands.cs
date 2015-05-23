@@ -31,7 +31,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new VA.Application.UndoScope(this.Client.VisioApplication, "Set Shape Text"))
+            using (var undoscope = new VA.Application.UndoScope(this.Client.Application.Get(), "Set Shape Text"))
             {
                 int numnames = names.Count;
 
@@ -215,7 +215,7 @@ namespace VisioAutomation.Scripting.Commands
 
             }
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set ShapeSheet Formulas"))
+            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Set ShapeSheet Formulas"))
             {
                 update.Execute(surface);
             }
@@ -278,7 +278,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Set ShapeSheet Result"))
+            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Set ShapeSheet Result"))
             {
                 update.Execute(surface);
             }
@@ -291,7 +291,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Client.WriteVerbose( "Staring ShapeSheet Update");
             var surface = this.Client.ShapeSheet.GetShapeSheetSurface();
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Update ShapeSheet Formulas"))
+            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Update ShapeSheet Formulas"))
             {
                 var internal_update = update.update;
                 internal_update.BlastGuards = blastguards;

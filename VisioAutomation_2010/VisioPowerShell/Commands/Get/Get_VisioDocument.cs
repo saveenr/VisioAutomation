@@ -14,7 +14,7 @@ namespace VisioPowerShell.Commands
 
         protected override void ProcessRecord()
         {
-            var application = this.client.VisioApplication;
+            var application = this.client.Application.Get();
 
             if (this.ActiveDocument)
             {

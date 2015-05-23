@@ -29,7 +29,7 @@ namespace VisioPowerShell.Commands
 
             if (this.Width > 0 || this.Height > 0)
             {
-                var page = this.client.VisioApplication.ActivePage;
+                var page = this.client.Application.Get().ActivePage;
                 var pagecells = VisioAutomation.Pages.PageCells.GetCells(page.PageSheet);
 
                 var newpagecells = new VisioAutomation.Pages.PageCells();

@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Client.Application.AssertApplicationAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             return active_window;
         }

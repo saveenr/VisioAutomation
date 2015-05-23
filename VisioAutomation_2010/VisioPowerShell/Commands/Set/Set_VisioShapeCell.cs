@@ -54,7 +54,7 @@ namespace VisioPowerShell.Commands
             this.WriteVerbose("Number of Shapes : {0}", target_shapes.Count);
             this.WriteVerbose("Number of Total Updates: {0}", update.Count());
 
-            using (var undoscope = new VisioAutomation.Application.UndoScope(this.client.VisioApplication, "SetShapeCells"))
+            using (var undoscope = new VisioAutomation.Application.UndoScope(this.client.Application.Get(), "SetShapeCells"))
             {
                 this.WriteVerbose("Start Update");
                 update.Execute(surface);

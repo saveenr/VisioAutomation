@@ -17,7 +17,7 @@ namespace VisioPowerShell.Commands
         {
             if (this.Documents== null)
             {
-                var app = this.client.VisioApplication;
+                var app = this.client.Application.Get();
                 var doc = app.ActiveDocument;
                 if (doc != null)
                 {

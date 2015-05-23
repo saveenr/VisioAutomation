@@ -48,7 +48,7 @@ namespace VisioPowerTools2010
                     }
             }
 
-            var application = client.VisioApplication;
+            var application = client.Application.Get();
             var doc = application.ActiveDocument;           
             var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
             var page = application.ActivePage;

@@ -45,7 +45,7 @@ namespace VisioAutomation.Scripting
         public void Update()
         {
             this.Client.WriteVerbose("Staring ShapeSheet Update");
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             using (var undoscope = new Application.UndoScope(application, "Update ShapeSheet Formulas"))
             {
                 this.update.BlastGuards = this.BlastGuards;

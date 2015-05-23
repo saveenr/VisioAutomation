@@ -25,9 +25,9 @@ namespace VisioAutomation.Scripting.Commands
             if (shapes.Count < 1)
             {
                 return prop_dic;
-            } 
+            }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
             var list_user_props = VA_UDC.UserDefinedCellsHelper.Get(page, shapes);
 
@@ -84,7 +84,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("name cannot be empty", "name");
             }
 
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Delete User-Defined Cell"))
+            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Delete User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
@@ -102,10 +102,10 @@ namespace VisioAutomation.Scripting.Commands
             if (shapes.Count < 1)
             {
                 return;
-            } 
+            }
 
-            var application = this.Client.VisioApplication;
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication,"Set User-Defined Cell"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = new Application.UndoScope(application,"Set User-Defined Cell"))
             {
                 foreach (var shape in shapes)
                 {
