@@ -19,7 +19,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
             
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             return selection;
@@ -38,8 +38,8 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
-            
-            var application = this.Client.VisioApplication;
+
+            var application = this.Client.Application.Get();
             var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             if (shapes.Count < 1)
@@ -78,7 +78,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             active_window.DeselectAll();
             active_window.DeselectAll();
@@ -94,7 +94,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("shape");
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             active_window.Select(shape, (short) IVisio.VisSelectArgs.visSelect);
         }
@@ -109,7 +109,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("shapes");
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             active_window.Select(shapes, IVisio.VisSelectArgs.visSelect);
         }
@@ -124,7 +124,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("shapeids");
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             var page = application.ActivePage;
             var page_shapes = page.Shapes;
@@ -141,8 +141,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 throw new System.ArgumentNullException("shapes");
             }
-            
-            this.Client.VisioApplication.ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
+
+            this.Client.Application.Get().ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
         }
 
         public void SelectByMaster(IVisio.Master master)
@@ -150,7 +150,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
             // Get a selection of connectors, by master: 
             var selection = page.CreateSelection(
@@ -175,7 +175,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var layer = this.Client.Layer.Get(layername);
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
 
             // Get a selection of connectors, by layer: 
@@ -204,8 +204,8 @@ namespace VisioAutomation.Scripting.Commands
         public int Count()
         {
             this.Client.Application.AssertApplicationAvailable();
-            
-            var application = this.Client.VisioApplication;
+
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             int count = selection.Count;
@@ -313,7 +313,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             int num_selected = selection.Count;
