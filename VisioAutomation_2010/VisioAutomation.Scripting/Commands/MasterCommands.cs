@@ -22,7 +22,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseMasterEditing()
         {
-            var window = this.Client.VisioApplication.ActiveWindow;
+            var window = this.Client.Application.Get().ActiveWindow;
 
             var st = window.SubType;
             if (st != 64)

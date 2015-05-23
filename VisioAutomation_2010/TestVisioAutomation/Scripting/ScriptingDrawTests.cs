@@ -404,7 +404,7 @@ namespace TestVisioAutomation.Scripting
             client.Master.Drop(master, 2, 2);
 
             // Verify
-            var active_page = client.VisioApplication.ActivePage;
+            var active_page = client.Application.Get().ActivePage;
             var shapes = active_page.Shapes;
             Assert.AreEqual(1, shapes.Count);
 
@@ -434,7 +434,7 @@ namespace TestVisioAutomation.Scripting
             client.Master.Drop(masters, points);
 
             // Verify
-            Assert.AreEqual(4, client.VisioApplication.ActivePage.Shapes.Count);
+            Assert.AreEqual(4, client.Application.Get().ActivePage.Shapes.Count);
 
             // Cleanup
             client.Document.Close(true);
@@ -457,7 +457,7 @@ namespace TestVisioAutomation.Scripting
             client.Document.New();
             client.Page.New(pagesize, false);
 
-            var active_page = client.VisioApplication.ActivePage;
+            var active_page = client.Application.Get().ActivePage;
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");
@@ -506,7 +506,7 @@ namespace TestVisioAutomation.Scripting
             client.Document.New();
             client.Page.New(pagesize, false);
 
-            var active_page = client.VisioApplication.ActivePage;
+            var active_page = client.Application.Get().ActivePage;
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");

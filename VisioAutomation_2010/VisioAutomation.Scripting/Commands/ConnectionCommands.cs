@@ -24,7 +24,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var app = this.Client.VisioApplication;
+            var app = this.Client.Application.Get();
             return VACONNECT.PathAnalysis.GetTransitiveClosure(app.ActivePage, flag);
         }
 
@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var directed_edges = VACONNECT.PathAnalysis.GetDirectedEdges(this.Client.VisioApplication.ActivePage, flag);
+            var directed_edges = VACONNECT.PathAnalysis.GetDirectedEdges(this.Client.Application.Get().ActivePage, flag);
             return directed_edges;
         }
 
@@ -44,7 +44,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var active_page = this.Client.VisioApplication.ActivePage;
 
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, ConnectionCommands.undoname_connectShapes))
+            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), ConnectionCommands.undoname_connectShapes))
             {
                 if (master == null)
                 {

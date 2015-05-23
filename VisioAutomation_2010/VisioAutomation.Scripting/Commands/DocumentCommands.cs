@@ -85,7 +85,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Client.Application.AssertApplicationAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var documents = application.Documents;
             var doc = documents[name];
 
@@ -103,7 +103,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var doc = application.ActiveDocument;
 
             if (doc.Type != IVisio.VisDocumentTypes.visTypeDrawing)
@@ -131,7 +131,7 @@ namespace VisioAutomation.Scripting.Commands
         public void CloseAllWithoutSaving()
         {
             this.Client.Application.AssertApplicationAvailable();
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var documents = application.Documents;
             var docs = documents.AsEnumerable().Where(doc => doc.Type == IVisio.VisDocumentTypes.visTypeDrawing).ToList();
 
@@ -180,8 +180,8 @@ namespace VisioAutomation.Scripting.Commands
         {
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
-            
-            var application = this.Client.VisioApplication;
+
+            var application = this.Client.Application.Get();
             var doc = application.ActiveDocument;
             doc.Save();
         }
@@ -191,7 +191,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var doc = application.ActiveDocument;
             doc.SaveAs(filename);
         }
@@ -227,7 +227,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Client.WriteVerbose( "Loading stencil \"{0}\"", name);
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var documents = application.Documents;
             var doc = documents.OpenStencil(name);
 
@@ -260,7 +260,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException(msg, "filename");
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var documents = application.Documents;
             var doc = documents.Add(filename);
             return doc;
@@ -270,8 +270,8 @@ namespace VisioAutomation.Scripting.Commands
         public IVisio.Document Get(string name)
         {
             this.Client.Application.AssertApplicationAvailable();
-            
-            var application = this.Client.VisioApplication;
+
+            var application = this.Client.Application.Get();
             var documents = application.Documents;
             var doc = documents[name];
             return doc;
@@ -279,7 +279,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public List<IVisio.Document> GetDocumentsByName(string name)
         {
-            var documents = this.Client.VisioApplication.Documents;
+            var documents = this.Client.Application.Get().Documents;
             if (name == null || name == "*")
             {
                 // return all documents

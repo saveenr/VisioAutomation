@@ -24,6 +24,11 @@ namespace VisioAutomation.Scripting.Commands
             }
         }
 
+        public IVisio.Application Get()
+        {
+            return this.Client.VisioApplication;
+        }
+
         public void AssertApplicationAvailable()
         {
             var has_app = this.Client.Application.HasApplication;
@@ -116,7 +121,7 @@ namespace VisioAutomation.Scripting.Commands
                 if (ApplicationCommands.visio_app_version == null)
                 {
                     this.Client.Application.AssertApplicationAvailable();
-                    ApplicationCommands.visio_app_version = Application.ApplicationHelper.GetVersion(this.Client.VisioApplication);
+                    ApplicationCommands.visio_app_version = Application.ApplicationHelper.GetVersion(this.Client.Application.Get());
                 }
                 return ApplicationCommands.visio_app_version;
             }            

@@ -91,7 +91,7 @@ namespace VisioAutomation.Scripting.Commands
 
             //hide_ui_stuff(docbuilder.VisioDocument);
 
-            var app = this.Client.VisioApplication;
+            var app = this.Client.Application.Get();
             var doc = formdoc.Render(app);
             return doc;
         }
@@ -158,7 +158,7 @@ namespace VisioAutomation.Scripting.Commands
             //hide_ui_stuff(docbuilder.VisioDocument);
 
 
-            var doc = formdoc.Render(this.Client.VisioApplication);
+            var doc = formdoc.Render(this.Client.Application.Get());
             return doc;
         }
 

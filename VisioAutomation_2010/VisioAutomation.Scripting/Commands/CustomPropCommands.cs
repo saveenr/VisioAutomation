@@ -26,7 +26,7 @@ namespace VisioAutomation.Scripting.Commands
                 return prop_dic;
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
 
             var list_custom_props = VACUSTPROP.CustomPropertyHelper.Get(page, shapes);
@@ -80,8 +80,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.VisioApplication;
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Delete Custom Property"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Delete Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -106,8 +106,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.VisioApplication;
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Set Custom Property"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = new Application.UndoScope(application, "Set Custom Property"))
             {
                 foreach (var shape in shapes)
                 {

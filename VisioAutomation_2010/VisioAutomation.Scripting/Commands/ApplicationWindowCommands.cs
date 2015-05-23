@@ -14,7 +14,7 @@ namespace VisioAutomation.Scripting.Commands
         public void ToFront()
         {
             this.Client.Application.AssertApplicationAvailable();
-            var app = this.Client.VisioApplication;
+            var app = this.Client.Application.Get();
 
             if (app == null)
             {
@@ -27,7 +27,7 @@ namespace VisioAutomation.Scripting.Commands
         public System.Drawing.Size GetSize()
         {
             this.Client.Application.AssertApplicationAvailable();
-            var app = this.Client.VisioApplication;
+            var app = this.Client.Application.Get();
             var appwindow = app.Window;
             var rect = appwindow.GetWindowRect();
             var size = new System.Drawing.Size(rect.Width, rect.Height);
@@ -50,7 +50,7 @@ namespace VisioAutomation.Scripting.Commands
 
             this.Client.Application.AssertApplicationAvailable();
 
-            var app = this.Client.VisioApplication;
+            var app = this.Client.Application.Get();
             var appwindow = app.Window;
             var r = appwindow.GetWindowRect();
             r.Width = width;

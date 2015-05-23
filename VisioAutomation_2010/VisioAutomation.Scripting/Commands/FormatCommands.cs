@@ -33,7 +33,7 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormulas((short)shapeid, format);
             }
 
-            update.Execute(this.Client.VisioApplication.ActivePage);            
+            update.Execute(this.Client.Application.Get().ActivePage);            
         }
 
         public IList<Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
@@ -49,7 +49,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = Shapes.FormatCells.GetCells(this.Client.VisioApplication.ActivePage, shapeids);
+            var fmts = Shapes.FormatCells.GetCells(this.Client.Application.Get().ActivePage, shapeids);
             return fmts;
         }
 
@@ -69,7 +69,7 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_window = application.ActiveWindow;
             var selection = active_window.Selection;
             var shape = selection[1];
@@ -116,7 +116,7 @@ namespace VisioAutomation.Scripting.Commands
                 }
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_page = application.ActivePage;
             update.Execute(active_page);
         }
@@ -163,7 +163,7 @@ namespace VisioAutomation.Scripting.Commands
             }
  
             var shapeids = target_shapes.Select(s=>s.ID).ToList();
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_page = application.ActivePage;
 
             this.cache.PasteFormat(active_page, shapeids, category, apply_formulas);

@@ -29,7 +29,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentException("Layer name cannot be empty", "layername");
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
             IVisio.Layer layer = null;
             try
@@ -51,7 +51,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
             return page.Layers.AsEnumerable().ToList();
         }

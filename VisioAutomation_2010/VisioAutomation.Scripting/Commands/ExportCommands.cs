@@ -34,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
             var old_selection = this.Client.Selection.GetShapes();
 
             this.Client.Selection.None();
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var active_page = application.ActivePage;
             active_page.Export(filename);
             var active_window = application.ActiveWindow;
@@ -71,7 +71,7 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("filename");
             }
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var old_page = application.ActivePage;
             var active_document = application.ActiveDocument;
             var active_window = application.ActiveWindow;
