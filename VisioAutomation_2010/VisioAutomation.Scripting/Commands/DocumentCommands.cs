@@ -18,7 +18,7 @@ namespace VisioAutomation.Scripting.Commands
         {
             get
             {
-                var app = this.Client.VisioApplication;
+                var app = this.Client.Application.Get();
 
                 // if there's no active document, then there can't be an active document
                 if (app.ActiveDocument == null)
@@ -156,7 +156,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
 
             this.Client.WriteVerbose("Creating Empty Drawing");
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var documents = application.Documents;
             
             if (template == null)

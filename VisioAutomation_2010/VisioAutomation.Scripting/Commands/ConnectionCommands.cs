@@ -42,7 +42,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var active_page = this.Client.VisioApplication.ActivePage;
+            var active_page = this.Client.Application.Get().ActivePage;
 
             using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), ConnectionCommands.undoname_connectShapes))
             {

@@ -151,7 +151,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             using (var undoscope = new Application.UndoScope(application, "Draw NURBS Curve"))
             {
 
@@ -230,7 +230,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
@@ -248,8 +248,8 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
-            using (var undoscope = new Application.UndoScope(this.Client.VisioApplication, "Draw Pie Slice"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = new Application.UndoScope(application, "Draw Pie Slice"))
             {
                 var active_page = application.ActivePage;
                 var slice = new Models.Charting.PieSlice(center, inner_radius, outer_radius, start_angle, end_angle);
@@ -263,7 +263,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
             chart.Render(page);
         }
@@ -273,7 +273,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
             chart.Render(page);
         }
@@ -283,7 +283,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             var page = application.ActivePage;
             chart.Render(page);
         }
@@ -295,7 +295,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.WriteVerbose("Start OrgChart Rendering");
             this.Client.Application.AssertApplicationAvailable();
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             orgChartDocument.Render(application);
             var active_page = application.ActivePage;
             active_page.ResizeToFitContents();
@@ -307,7 +307,7 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
 
             this.Client.WriteVerbose("Start rendering directed graph");
-            var app = this.Client.VisioApplication;
+            var app = this.Client.Application.Get();
 
 
             this.Client.WriteVerbose("Creating a New Document For the Directed Graphs");
@@ -360,7 +360,7 @@ namespace VisioAutomation.Scripting.Commands
             // this dupicates exactly 1 shape N - times what it
             // it should do is duplicate all M selected shapes N times so that M*N shapes are created
 
-            var application = this.Client.VisioApplication;
+            var application = this.Client.Application.Get();
             using (var undoscope = new Application.UndoScope(application, string.Format("Duplicate Shape {0} Times", n)))
             {
                 var active_window = application.ActiveWindow;
