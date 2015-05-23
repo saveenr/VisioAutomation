@@ -80,7 +80,7 @@ namespace TestVisioAutomation.Models
             var shape = page.DrawRectangle(5, 5, 5 + shape_size.Width, 5+shape_size.Height);
             page.ResizeToFitContents(padding_size);
             var xform = VA.Shapes.XFormCells.GetCells(shape);
-            AssertVA.AreEqual(expected_pinx, expected_piny, xform.Pin(), 0.1);
+            AssertVA.AreEqual(expected_pinx, expected_piny, xform.GetPinPosResult(), 0.1);
             page.Delete(0);
         }
     }

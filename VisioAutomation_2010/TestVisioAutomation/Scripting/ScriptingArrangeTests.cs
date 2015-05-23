@@ -32,9 +32,9 @@ namespace TestVisioAutomation.Scripting
             client.Arrange.Distribute(null,VA.Drawing.AlignmentHorizontal.Center);
 
             var xforms = client.Arrange.GetXForm(null);
-            Assert.AreEqual(new VA.Drawing.Point(1.125, 1.25), xforms[0].Pin());
-            Assert.AreEqual(new VA.Drawing.Point(3.1875, 3.25), xforms[1].Pin());
-            Assert.AreEqual(new VA.Drawing.Point(5.25, 3), xforms[2].Pin());
+            AssertVA.AreEqual(1.125, 1.25, xforms[0].GetPinPosResult(),0.00001);
+            AssertVA.AreEqual(3.1875, 3.25, xforms[1].GetPinPosResult(), 0.00001);
+            AssertVA.AreEqual(5.25, 3, xforms[2].GetPinPosResult(), 0.00001);
 
             client.Document.Close(true);
         }
@@ -57,9 +57,9 @@ namespace TestVisioAutomation.Scripting
             client.Arrange.Nudge(null,1, -1);
 
             var xforms = client.Arrange.GetXForm(null);
-            Assert.AreEqual(new VA.Drawing.Point(2.125, 0.25), xforms[0].Pin());
-            Assert.AreEqual(new VA.Drawing.Point(3.25, 2.25), xforms[1].Pin());
-            Assert.AreEqual(new VA.Drawing.Point(6.25, 2), xforms[2].Pin());
+            AssertVA.AreEqual(2.125, 0.25, xforms[0].GetPinPosResult(), 0.00001);
+            AssertVA.AreEqual(3.25, 2.25, xforms[1].GetPinPosResult(), 0.00001);
+            AssertVA.AreEqual(6.25, 2, xforms[2].GetPinPosResult(), 0.00001);
             client.Document.Close(true);
         }
     }

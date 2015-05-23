@@ -70,7 +70,7 @@ namespace TestVisioAutomation
 
 
       [TestMethod]
-      public void PSNewVisioContainer()
+      public void VisioPS_NewVisioContainer()
       {
           var doc = VisioPowerShellTests.visiops_session.New_Visio_Document();
           var app = VisioPowerShellTests.visiops_session.Get_Visio_Application();
