@@ -187,9 +187,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="XamlTuneConverter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>xamltune\XamlTuneConverter.dll</HintPath>
+    <Reference Include="XamlTuneMerged, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XamlTune.0.3.0\lib\net40\XamlTuneMerged.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +286,7 @@
     <EmbeddedResource Include="VPTRibbon.resx">
       <DependentUpon>VPTRibbon.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -320,18 +321,6 @@
       <Project>{920C7842-10E0-48C3-A439-C785FC2B234E}</Project>
       <Name>VisioAutomation</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="xamltune\AEdit.dll" />
-    <None Include="xamltune\AEdit.DomCore.dll" />
-    <None Include="xamltune\ICSharpCode.SharpZipLib.dll" />
-    <None Include="xamltune\SharpVectorCss.dll" />
-    <None Include="xamltune\SharpVectorObjectModel.dll" />
-    <None Include="xamltune\SharpVectorScripting.dll" />
-    <None Include="xamltune\SharpVectorXamlRenderingEngine.dll" />
-    <None Include="xamltune\SharpVectorXml.dll" />
-    <None Include="xamltune\XamlTune.exe" />
-    <None Include="xamltune\XamlTuneConverter.dll" />
   </ItemGroup>
   <!-- Include the build rules for a C# project. -->
   <PropertyGroup>
