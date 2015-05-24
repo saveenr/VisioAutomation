@@ -22,7 +22,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public void CloseMasterEditing()
         {
-            var window = this.Client.Application.Get().ActiveWindow;
+            var application = this.Client.Application.Get();
+            var window = application.ActiveWindow;
 
             var st = window.SubType;
             if (st != 64)
@@ -192,7 +193,8 @@ namespace VisioAutomation.Scripting.Commands
 
             if (document == null)
             {
-                document = this.Client.Application.Get().ActiveDocument;
+                var application = this.Client.Application.Get();
+                document = application.ActiveDocument;
                 if (document == null)
                 {
                     throw new AutomationException("No Active Document");

@@ -81,7 +81,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Client.Application.Get();
-            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Delete Custom Property"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Delete Custom Property"))
             {
                 foreach (var shape in shapes)
                 {
@@ -107,7 +107,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Client.Application.Get();
-            using (var undoscope = new Application.UndoScope(application, "Set Custom Property"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Set Custom Property"))
             {
                 foreach (var shape in shapes)
                 {

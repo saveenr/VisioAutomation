@@ -279,7 +279,8 @@ namespace VisioAutomation.Scripting.Commands
 
         public List<IVisio.Document> GetDocumentsByName(string name)
         {
-            var documents = this.Client.Application.Get().Documents;
+            var application = this.Client.Application.Get();
+            var documents = application.Documents;
             if (name == null || name == "*")
             {
                 // return all documents

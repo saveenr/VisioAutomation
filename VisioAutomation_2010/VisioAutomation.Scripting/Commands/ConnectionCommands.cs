@@ -33,7 +33,8 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var directed_edges = VACONNECT.PathAnalysis.GetDirectedEdges(this.Client.Application.Get().ActivePage, flag);
+            var application = this.Client.Application.Get();
+            var directed_edges = VACONNECT.PathAnalysis.GetDirectedEdges(application.ActivePage, flag);
             return directed_edges;
         }
 
@@ -42,9 +43,10 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.Application.AssertApplicationAvailable();
             this.Client.Document.AssertDocumentAvailable();
 
-            var active_page = this.Client.Application.Get().ActivePage;
+            var application = this.Client.Application.Get();
+            var active_page = application.ActivePage;
 
-            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), ConnectionCommands.undoname_connectShapes))
+            using (var undoscope = this.Client.Application.NewUndoScope(ConnectionCommands.undoname_connectShapes))
             {
                 if (master == null)
                 {

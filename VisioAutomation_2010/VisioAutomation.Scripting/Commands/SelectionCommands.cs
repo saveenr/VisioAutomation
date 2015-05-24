@@ -142,7 +142,9 @@ namespace VisioAutomation.Scripting.Commands
                 throw new System.ArgumentNullException("shapes");
             }
 
-            this.Client.Application.Get().ActiveWindow.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
+            var application = this.Client.Application.Get();
+            var active_window = application.ActiveWindow;
+            active_window.Select(shapes, IVisio.VisSelectArgs.visSubSelect);
         }
 
         public void SelectByMaster(IVisio.Master master)

@@ -31,7 +31,8 @@ namespace VisioAutomation.Scripting.Commands
                return;
            }
 
-           using (var undoscope = new VA.Application.UndoScope(this.Client.Application.Get(), "Set Shape Text"))
+           var application = this.Client.Application.Get();
+           using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Text"))
            {
                int numtexts = texts.Count;
 
@@ -76,11 +77,12 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Toggle Shape Text Case"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = this.Client.Application.NewUndoScope("Toggle Shape Text Case"))
             {
                 var shapeids = shapes.Select(s => s.ID).ToList();
 
-                var page = this.Client.Application.Get().ActivePage;
+                var page = application.ActivePage;
                 // Store all the formatting
                 var formats = Text.TextFormat.GetFormat(page, shapeids);
 
@@ -206,7 +208,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this.Client.Application.Get();
-            using (var undoscope = new Application.UndoScope(application,"SetTextWrapping"))
+            using (var undoscope = this.Client.Application.NewUndoScope("SetTextWrapping"))
             {
                 var active_page = application.ActivePage;
                 TextCommandsUtil.set_text_wrapping(active_page, shapeids, wrap);
@@ -228,7 +230,7 @@ namespace VisioAutomation.Scripting.Commands
             var active_page = application.ActivePage;
             var shapeids = shapes.Select(s => s.ID).ToList();
 
-            using (var undoscope = new Application.UndoScope(application, "FitShapeToText"))
+            using (var undoscope = this.Client.Application.NewUndoScope("FitShapeToText"))
             {
                 // Calculate the new sizes for each shape
                 var new_sizes = new List<Drawing.Size>(shapeids.Count);

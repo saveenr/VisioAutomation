@@ -82,7 +82,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = ArrangeCommands._map_halign_to_uicmd(halign);
 
-            this.Client.Application.Get().DoCmd((short)cmd);
+            var application = this.Client.Application.Get();
+            application.DoCmd((short)cmd);
         }
 
         public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.AlignmentVertical valign)
@@ -98,7 +99,8 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = ArrangeCommands._map_valign_to_uicmd(valign);
 
-            this.Client.Application.Get().DoCmd((short)cmd); 
+            var application = this.Client.Application.Get();
+            application.DoCmd((short)cmd); 
         }
 
         public void Distribute(IList<IVisio.Shape> target_shapes, Drawing.Axis axis)
@@ -114,9 +116,10 @@ namespace VisioAutomation.Scripting.Commands
 
             var cmd = ArrangeCommands._map_axis_to_uicmd(axis);
 
-            using (var undoscope = new UndoScope(this.Client.Application.Get(), "Distribute Shapes"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = this.Client.Application.NewUndoScope("Distribute Shapes"))
             {
-                this.Client.Application.Get().DoCmd((short)cmd);
+                application.DoCmd((short)cmd);
             }
         }
 
@@ -136,7 +139,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new UndoScope(this.Client.Application.Get(), "Nudge Shapes"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = this.Client.Application.NewUndoScope("Nudge Shapes"))
             {
                 var selection = this.Client.Selection.Get();
                 var unitcode = IVisio.VisUnitCodes.visInches;
@@ -161,7 +165,7 @@ namespace VisioAutomation.Scripting.Commands
             var shapeids = shapes.Select(s => s.ID).ToList();
 
             var application = this.Client.Application.Get();
-            using (var undoscope = new UndoScope(this.Client.Application.Get(), "Snape Shape Sizes"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Snape Shape Sizes"))
             {
                 var active_page = application.ActivePage;
                 var snapsize = new Drawing.Size(w, h);
@@ -236,7 +240,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new UndoScope(this.Client.Application.Get(), "Align Shapes"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = this.Client.Application.NewUndoScope("Align Shapes"))
             {
                 const bool glue_to_guide = false;
                 var selection = this.Client.Selection.Get();
@@ -257,7 +262,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new UndoScope(this.Client.Application.Get(), "Align Shapes"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = this.Client.Application.NewUndoScope("Align Shapes"))
             {
                 bool glue_to_guide = false;
                 var selection = this.Client.Selection.Get();
@@ -281,7 +287,8 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s=>s.ID).ToList();
-            var page = this.Client.Application.Get().ActivePage;
+            var application = this.Client.Application.Get();
+            var page = application.ActivePage;
             var data = Shapes.XFormCells.GetCells(page, shapeids);
             return data;
         }
@@ -312,7 +319,8 @@ namespace VisioAutomation.Scripting.Commands
             {
                 if (this.Client.Selection.HasShapes())
                 {
-                    this.Client.Application.Get().DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
+                    var application = this.Client.Application.Get();
+                    application.DoCmd((short)IVisio.VisUICmds.visCmdObjectUngroup);
                 }
             }
             else
@@ -345,7 +353,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Client.Application.Get();
-            using (var undoscope = new UndoScope(application,"Set Shape Lock Properties"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Lock Properties"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -378,7 +386,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Client.Application.Get();
-            using (var undoscope = new UndoScope(application,"Set Shape Size"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Set Shape Size"))
             {
                 var active_page = application.ActivePage;
                 update.Execute(active_page);
@@ -420,7 +428,7 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var application = this.Client.Application.Get();
-            using (var undoscope = new UndoScope(application,"Stack"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Stack"))
             {
                 if (axis == Drawing.Axis.YAxis)
                 {
@@ -443,7 +451,7 @@ namespace VisioAutomation.Scripting.Commands
             var application = this.Client.Application.Get();
             var selection = this.Client.Selection.Get();
             var shapeids = selection.GetIDs();
-            using (var undoscope = new UndoScope(application,"Distribute"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Distribute"))
             {
                 ArrangeHelper.DistributeWithSpacing(application.ActivePage, shapeids, axis, d);
             }
@@ -462,7 +470,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this.Client.Application.Get();
-            using (var undoscope = new UndoScope(application,"SnapCorner"))
+            using (var undoscope = this.Client.Application.NewUndoScope("SnapCorner"))
             {
                 var active_page = application.ActivePage;
                 ArrangeHelper.SnapCorner(active_page, shapeids, new Drawing.Size(w, h), corner);
@@ -482,7 +490,7 @@ namespace VisioAutomation.Scripting.Commands
 
             var shapeids = shapes.Select(s => s.ID).ToList();
             var application = this.Client.Application.Get();
-            using (var undoscope = new UndoScope(application, "SnapSize"))
+            using (var undoscope = this.Client.Application.NewUndoScope("SnapSize"))
             {
                 var active_page = application.ActivePage;
                 ArrangeHelper.SnapSize(active_page, shapeids, snapsize, minsize);

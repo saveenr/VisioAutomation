@@ -33,7 +33,8 @@ namespace VisioAutomation.Scripting.Commands
                 update.SetFormulas((short)shapeid, format);
             }
 
-            update.Execute(this.Client.Application.Get().ActivePage);            
+            var application = this.Client.Application.Get();
+            update.Execute(application.ActivePage);            
         }
 
         public IList<Shapes.FormatCells> Get(IList<IVisio.Shape> target_shapes)
@@ -49,7 +50,8 @@ namespace VisioAutomation.Scripting.Commands
             }
 
             var shapeids = shapes.Select(s => s.ID).ToList();
-            var fmts = Shapes.FormatCells.GetCells(this.Client.Application.Get().ActivePage, shapeids);
+            var application = this.Client.Application.Get();
+            var fmts = Shapes.FormatCells.GetCells(application.ActivePage, shapeids);
             return fmts;
         }
 

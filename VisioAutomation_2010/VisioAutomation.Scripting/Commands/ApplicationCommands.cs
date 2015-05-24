@@ -6,19 +6,27 @@ namespace VisioAutomation.Scripting.Commands
 {
     public class ApplicationCommands : CommandSet
     {
+        public IVisio.Application VisioApplication { get; set; }
+
         public ApplicationWindowCommands Window { get; private set; }
 
         internal ApplicationCommands(Client client) :
+            this(client, null)
+        {
+        }
+
+        internal ApplicationCommands(Client client, IVisio.Application application) :
             base(client)
         {
             this.Window = new ApplicationWindowCommands(this.Client);
+            this.VisioApplication = application;
         }
 
         public bool HasApplication
         {
             get
             {
-                bool b = this.Client.VisioApplication != null;
+                bool b = this.VisioApplication != null;
                 this.Client.WriteVerbose("HasApplication: {0}", b);
                 return b;
             }
@@ -26,7 +34,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public IVisio.Application Get()
         {
-            return this.Client.VisioApplication;
+            return this.VisioApplication;
         }
 
         public void AssertApplicationAvailable()
@@ -40,7 +48,7 @@ namespace VisioAutomation.Scripting.Commands
 
         public void Close(bool force)
         {
-            var app = this.Client.VisioApplication;
+            var app = this.Client.Application.Get();
 
             if (app == null)
             {
@@ -60,7 +68,7 @@ namespace VisioAutomation.Scripting.Commands
             {
                 app.Quit();
             }
-            this.Client.VisioApplication = null;
+            this.VisioApplication = null;
         }
 
         public IVisio.Application New()
@@ -68,27 +76,25 @@ namespace VisioAutomation.Scripting.Commands
             this.Client.WriteVerbose("Creating a new Instance of Visio");
             var app = new IVisio.Application();
             this.Client.WriteVerbose("Attaching that instance to current scripting client");
-            this.Client.VisioApplication = app;
+            this.VisioApplication = app;
             return app;
         }
 
         public void Undo()
         {
             this.Client.Application.AssertApplicationAvailable();
-            this.Client.VisioApplication.Undo();
+            this.VisioApplication.Undo();
         }
 
         public void Redo()
         {
             this.Client.Application.AssertApplicationAvailable();
-            this.Client.VisioApplication.Redo();
+            this.VisioApplication.Redo();
         }
 
         public bool Validate()
         {
-            var app = this.Client.VisioApplication;
-
-            if (app == null)
+            if (this.VisioApplication == null)
             {
                 this.Client.WriteVerbose("Client's Application object is null");
                 return false;
@@ -99,7 +105,7 @@ namespace VisioAutomation.Scripting.Commands
                 // try to do something simple, read-only, and fast with the application object
                 //  if No COMException was thrown when reading ProductName property. This application instance is treated as valid
 
-                var app_version = app.ProductName;
+                var app_version = this.VisioApplication.ProductName;
                 this.Client.WriteVerbose("Application validated");
                 return true;
             }
@@ -121,10 +127,21 @@ namespace VisioAutomation.Scripting.Commands
                 if (ApplicationCommands.visio_app_version == null)
                 {
                     this.Client.Application.AssertApplicationAvailable();
-                    ApplicationCommands.visio_app_version = Application.ApplicationHelper.GetVersion(this.Client.Application.Get());
+                    var application = this.Client.Application.Get();
+                    ApplicationCommands.visio_app_version = Application.ApplicationHelper.GetVersion(application);
                 }
                 return ApplicationCommands.visio_app_version;
             }            
+        }
+
+        public VA.Application.UndoScope NewUndoScope(string name)
+        {
+            if (this.VisioApplication == null)
+            {
+                throw new VisioApplicationException("Cant create UndoScope. There is no visio application attached.");
+            }
+
+            return new VA.Application.UndoScope(this.VisioApplication, name);
         }
     }
 }

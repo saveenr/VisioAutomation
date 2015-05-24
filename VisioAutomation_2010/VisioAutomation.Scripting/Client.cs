@@ -7,7 +7,7 @@ namespace VisioAutomation.Scripting
 {
     public class Client
     {
-        public IVisio.Application VisioApplication { get; set; }
+
         private Context _context;
 
         public Commands.ApplicationCommands Application { get; private set; }
@@ -43,9 +43,8 @@ namespace VisioAutomation.Scripting
                 throw new System.ArgumentNullException();
             }
             this._context = context;
-            this.VisioApplication = app;
 
-            this.Application = new Commands.ApplicationCommands(this);
+            this.Application = new Commands.ApplicationCommands(this,app);
             this.View = new Commands.ViewCommands(this);
             this.Format = new Commands.FormatCommands(this);
             this.Layer = new Commands.LayerCommands(this);

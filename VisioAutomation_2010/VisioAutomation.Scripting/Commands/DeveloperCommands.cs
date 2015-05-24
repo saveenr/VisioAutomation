@@ -158,7 +158,8 @@ namespace VisioAutomation.Scripting.Commands
             //hide_ui_stuff(docbuilder.VisioDocument);
 
 
-            var doc = formdoc.Render(this.Client.Application.Get());
+            var application = this.Client.Application.Get();
+            var doc = formdoc.Render(application);
             return doc;
         }
 

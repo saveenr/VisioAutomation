@@ -46,7 +46,7 @@ namespace VisioAutomation.Scripting
         {
             this.Client.WriteVerbose("Staring ShapeSheet Update");
             var application = this.Client.Application.Get();
-            using (var undoscope = new Application.UndoScope(application, "Update ShapeSheet Formulas"))
+            using (var undoscope = this.Client.Application.NewUndoScope("Update ShapeSheet Formulas"))
             {
                 this.update.BlastGuards = this.BlastGuards;
                 this.update.TestCircular = this.TestCircular;

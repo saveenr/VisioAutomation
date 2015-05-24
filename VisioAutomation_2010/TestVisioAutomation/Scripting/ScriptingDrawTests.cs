@@ -27,7 +27,8 @@ namespace TestVisioAutomation.Scripting
             
             // Cleanup
             client.Document.Close(true);
-            VisioAutomation.Documents.DocumentHelper.ForceCloseAll(client.VisioApplication.Documents);
+            var application = client.Application.Get();
+            VisioAutomation.Documents.DocumentHelper.ForceCloseAll(application.Documents);
         }
 
         [TestMethod]
@@ -404,7 +405,8 @@ namespace TestVisioAutomation.Scripting
             client.Master.Drop(master, 2, 2);
 
             // Verify
-            var active_page = client.Application.Get().ActivePage;
+            var application = client.Application.Get();
+            var active_page = application.ActivePage;
             var shapes = active_page.Shapes;
             Assert.AreEqual(1, shapes.Count);
 
@@ -434,7 +436,8 @@ namespace TestVisioAutomation.Scripting
             client.Master.Drop(masters, points);
 
             // Verify
-            Assert.AreEqual(4, client.Application.Get().ActivePage.Shapes.Count);
+            var application = client.Application.Get();
+            Assert.AreEqual(4, application.ActivePage.Shapes.Count);
 
             // Cleanup
             client.Document.Close(true);
@@ -457,7 +460,8 @@ namespace TestVisioAutomation.Scripting
             client.Document.New();
             client.Page.New(pagesize, false);
 
-            var active_page = client.Application.Get().ActivePage;
+            var application = client.Application.Get();
+            var active_page = application.ActivePage;
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");
@@ -506,7 +510,8 @@ namespace TestVisioAutomation.Scripting
             client.Document.New();
             client.Page.New(pagesize, false);
 
-            var active_page = client.Application.Get().ActivePage;
+            var application = client.Application.Get();
+            var active_page = application.ActivePage;
 
             // Load the stencils and find the masters
             var basic_stencil = client.Document.OpenStencil("Basic_U.VSS");

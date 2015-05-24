@@ -57,7 +57,7 @@ namespace VisioAutomationSamples
             const bool autorun = false;
             if (autorun)
             {
-                this.RunSelectedSamples();
+            // this.RunSelectedSamples();
             }
         }
 

@@ -31,7 +31,8 @@ namespace VisioAutomation.Scripting.Commands
 
 
             var control_indices = new List<int>();
-            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Add Control"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = this.Client.Application.NewUndoScope("Add Control"))
             {
                 foreach (var shape in shapes)
                 {
@@ -54,7 +55,8 @@ namespace VisioAutomation.Scripting.Commands
                 return;
             }
 
-            using (var undoscope = new Application.UndoScope(this.Client.Application.Get(), "Delete Control"))
+            var application = this.Client.Application.Get();
+            using (var undoscope = this.Client.Application.NewUndoScope("Delete Control"))
             {
                 foreach (var shape in shapes)
                 {
