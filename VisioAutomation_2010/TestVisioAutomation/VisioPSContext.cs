@@ -54,6 +54,17 @@ namespace TestVisioAutomation
             return doc;
         }
 
+        public void Set_Visio_PageCells(Dictionary<string,object> dic)
+        {
+            var cmd = new VisioPowerShell.Commands.Set.Set_VisioShapeCell();
+            cmd.Hashtable = new System.Collections.Hashtable();
+            foreach (var kv in dic)
+            {
+                cmd.Hashtable[kv.Key] = kv.Value;
+            }
+            var results = cmd.Invoke();
+        }
+
         public IVisio.DocumentClass New_Visio_Document()
         {
             var cmd = new VisioPowerShell.Commands.New.New_VisioDocument();

@@ -42,6 +42,24 @@ namespace TestVisioAutomation
         }
 
         [TestMethod]
+        public void VisioPS_Set_Visio_Page_Cell()
+        {
+
+            // Handle the page that gets created when a document is created
+
+            var doc = VisioPowerShellTests.visiops_session.New_Visio_Document();
+            var dic = new System.Collections.Generic.Dictionary<string, object>
+            {
+                {"PageWidth", 3},
+                {"PageHeight", 5}
+            };
+
+            VisioPowerShellTests.visiops_session.Set_Visio_PageCells(dic);
+
+            //VisioPowerShellTests.Close_Visio_Application();
+        }
+
+        [TestMethod]
         public void VisioPS_Get_Visio_Page_Cell()
         {
             var cells = new[] { "PageWidth", "PageHeight" };

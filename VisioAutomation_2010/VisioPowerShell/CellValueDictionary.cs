@@ -8,19 +8,14 @@ namespace VisioPowerShell
     {
         private readonly CellSRCDictionary srcmap;
 
-        public CellValueDictionary(CellSRCDictionary srcmap) : base()
+        public CellValueDictionary(CellSRCDictionary srcmap, Hashtable ht)
         {
-            if (this.srcmap == null)
+            if (srcmap == null)
             {
-                throw new System.ArgumentNullException("srcmap");
+                throw new System.ArgumentNullException("srcmapx");
             }
 
             this.srcmap = srcmap;
-        }
-
-        public CellValueDictionary(CellSRCDictionary srcmap, Hashtable ht)
-            : this(srcmap)
-        {
 
             this.UpdateValueMap(ht);
         }
