@@ -1,23 +1,23 @@
 ﻿using System.Linq;
+using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.New
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioShape")]
+    [Cmdlet(SMA.VerbsCommon.New, "VisioShape")]
     public class New_VisioShape : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [Parameter(Position = 0, Mandatory = true)]
         public IVisio.Master[] Masters { get; set; }
 
-        [SMA.ParameterAttribute(Position = 1, Mandatory = true)]
+        [Parameter(Position = 1, Mandatory = true)]
         public double [] Points { get; set; }
 
         [SMA.Parameter(Mandatory = false)]
         public string[] Names { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter NoSelect=false;
 
         protected override void ProcessRecord()

@@ -1,15 +1,16 @@
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioText")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioText")]
     public class Set_VisioText : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [Parameter(Position = 0, Mandatory = true)]
         public string[] Text { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

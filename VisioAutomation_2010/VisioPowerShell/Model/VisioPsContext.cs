@@ -1,6 +1,6 @@
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell
+namespace VisioPowerShell.Model
 {
     public class VisioPsContext : VisioAutomation.Scripting.Context
     {

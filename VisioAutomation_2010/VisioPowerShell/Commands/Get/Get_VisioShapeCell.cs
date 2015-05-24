@@ -1,24 +1,24 @@
 ﻿using System.Linq;
+using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
-using VA = VisioAutomation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioShapeCell")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioShapeCell")]
     public class Get_VisioShapeCell : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false, Position = 0)]
+        [Parameter(Mandatory = false, Position = 0)]
         public string[] Cells { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)] 
+        [Parameter(Mandatory = false)] 
         public SMA.SwitchParameter GetResults;
 
-        [SMA.ParameterAttribute(Mandatory = false)] 
-        public ResultType ResultType = ResultType.String;
+        [Parameter(Mandatory = false)] 
+        public Model.ResultType ResultType = Model.ResultType.String;
 
         protected override void ProcessRecord()
         {

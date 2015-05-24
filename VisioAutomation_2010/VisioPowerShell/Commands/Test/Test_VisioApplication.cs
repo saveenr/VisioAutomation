@@ -1,8 +1,9 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Management.Automation;
+using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Test
 {
-    [SMA.CmdletAttribute(SMA.VerbsDiagnostic.Test, "VisioApplication")]
+    [Cmdlet(SMA.VerbsDiagnostic.Test, "VisioApplication")]
     public class Test_VisioApplication: VisioCmdlet
     {
         // checks to see if we hae an active drawing open

@@ -1,8 +1,9 @@
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioApplication")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioApplication")]
     public class Get_VisioApplication : VisioCmdlet
     {
         protected override void ProcessRecord()

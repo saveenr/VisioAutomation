@@ -1,16 +1,16 @@
+using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioMaster")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioMaster")]
     public class Get_VisioMaster : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = false)]
+        [Parameter(Position = 0, Mandatory = false)]
         public string Name;
 
-        [SMA.ParameterAttribute(Position = 1, Mandatory = false)]
+        [Parameter(Position = 1, Mandatory = false)]
         public IVisio.Document Document;
 
         protected override void ProcessRecord()

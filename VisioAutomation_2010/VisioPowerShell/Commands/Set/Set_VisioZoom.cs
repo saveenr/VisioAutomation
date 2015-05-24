@@ -1,15 +1,15 @@
-using VA = VisioAutomation;
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioZoom")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioZoom")]
     public class Set_VisioZoom : VisioCmdlet
     {
-        [SMA.ParameterAttribute(ParameterSetName = "level", Position = 0, Mandatory = true)] 
+        [Parameter(ParameterSetName = "level", Position = 0, Mandatory = true)] 
         public VisioAutomation.Scripting.Zoom Level = VisioAutomation.Scripting.Zoom.In;
 
-        [SMA.ParameterAttribute(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
+        [Parameter(ParameterSetName = "percent", Position = 0, Mandatory = true)] 
         public double Percent = 0;
 
         protected override void ProcessRecord()

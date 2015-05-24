@@ -39,26 +39,26 @@ namespace VisioPowerShell
             return dt;
         }
 
-        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheet.Query.CellQuery cellQuery, bool getresults, ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
+        public static DataTable QueryToDataTable(VisioAutomation.ShapeSheet.Query.CellQuery cellQuery, bool getresults, Model.ResultType ResultType, IList<int> shapeids, VisioAutomation.ShapeSheet.ShapeSheetSurface surface)
         {
             if (getresults)
             {
-                if (ResultType == ResultType.String)
+                if (ResultType == Model.ResultType.String)
                 {
                     var output = cellQuery.GetResults<string>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
-                else if (ResultType == ResultType.Boolean)
+                else if (ResultType == Model.ResultType.Boolean)
                 {
                     var output = cellQuery.GetResults<bool>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
-                else if (ResultType == ResultType.Double)
+                else if (ResultType == Model.ResultType.Double)
                 {
                     var output = cellQuery.GetResults<double>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);
                 }
-                else if (ResultType == ResultType.Integer)
+                else if (ResultType == Model.ResultType.Integer)
                 {
                     var output = cellQuery.GetResults<int>(surface, shapeids);
                     return Helpers.querytable_to_datatable(cellQuery, output);

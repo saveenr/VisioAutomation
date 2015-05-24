@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.slider1 = new VisioAutomation.UI.CommonControls.Slider();
+            this.slider1 = new Slider();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +51,7 @@
             this.slider1.Size = new System.Drawing.Size(150, 20);
             this.slider1.TabIndex = 2;
             this.slider1.Value = 0F;
-            this.slider1.ValueChanged += new VisioAutomation.UI.CommonControls.Slider.ValueChangedEventHandler(this.ucSlider1_ValueChanged);
+            this.slider1.ValueChanged += new Slider.ValueChangedEventHandler(this.ucSlider1_ValueChanged);
             // 
             // TransparencyControl
             // 
@@ -71,7 +71,7 @@
         #endregion
 
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private VisioAutomation.UI.CommonControls.Slider slider1;
+        private Slider slider1;
 
     }
 }

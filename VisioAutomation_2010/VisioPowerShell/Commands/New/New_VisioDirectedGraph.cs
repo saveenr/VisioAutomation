@@ -1,9 +1,10 @@
+using System.Management.Automation;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.New
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioDirectedGraph")]
+    [Cmdlet(SMA.VerbsCommon.New, "VisioDirectedGraph")]
     public class New_VisioDirectedGraph : VisioCmdlet
     {
         protected override void ProcessRecord()

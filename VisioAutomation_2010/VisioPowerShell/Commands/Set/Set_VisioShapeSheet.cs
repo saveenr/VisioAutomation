@@ -1,27 +1,28 @@
-﻿using IVisio = Microsoft.Office.Interop.Visio;
+﻿using System.Management.Automation;
+using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioShapeSheet")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioShapeSheet")]
     public class Set_VisioShapeSheet : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [Parameter(Position = 0, Mandatory = true)]
         public VisioAutomation.ShapeSheet.SRC[] Cell { get; set; }
 
-        [SMA.ParameterAttribute(Position = 1, Mandatory = true)]
+        [Parameter(Position = 1, Mandatory = true)]
         public string[] Value { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter SetResults;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

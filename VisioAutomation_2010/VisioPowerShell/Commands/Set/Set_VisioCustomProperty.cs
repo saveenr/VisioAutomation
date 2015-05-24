@@ -1,52 +1,52 @@
 using System;
 using System.Collections;
+using System.Management.Automation;
 using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
-using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioCustomProperty")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioCustomProperty")]
     public class Set_VisioCustomProperty : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "HashTable")]
         public Hashtable HashTable{ get; set; }
         
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true, ParameterSetName = "NonHashTable")]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "NonHashTable")]
         public string Name { get; set; }
 
-        [SMA.ParameterAttribute(Position = 1, Mandatory = true, ParameterSetName = "NonHashTable")]
+        [Parameter(Position = 1, Mandatory = true, ParameterSetName = "NonHashTable")]
         public string Value { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")]
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
         public string Label { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")]
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
         public string Format { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")]
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")]
         public string Prompt { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int LangId = -1;
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int SortKey = -1;
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int Type = 0;
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int Ask = -1;
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int Calendar = -1;
 
-        [SMA.ParameterAttribute(Mandatory = false, ParameterSetName = "NonHashTable")] 
+        [Parameter(Mandatory = false, ParameterSetName = "NonHashTable")] 
         public int Invisible = -1;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

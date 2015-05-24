@@ -1,8 +1,6 @@
 using VACUSTPROP=VisioAutomation.Shapes.CustomProperties;
-using IVisio=Microsoft.Office.Interop.Visio;
-using VA=VisioAutomation;
 
-namespace VisioPowerShell
+namespace VisioPowerShell.Model
 {
     public class CustomPropertyValues
     {

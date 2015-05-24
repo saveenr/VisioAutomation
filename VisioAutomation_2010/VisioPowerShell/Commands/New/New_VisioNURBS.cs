@@ -1,22 +1,23 @@
 using System.Linq;
+using System.Management.Automation;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.New
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioNURBS")]
+    [Cmdlet(SMA.VerbsCommon.New, "VisioNURBS")]
     public class New_VisioNURBS : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [Parameter(Position = 0, Mandatory = true)]
         public double[] ControlPoints { get; set; }
 
-        [SMA.ParameterAttribute(Position = 1, Mandatory = true)]
+        [Parameter(Position = 1, Mandatory = true)]
         public double[] Knots { get; set; }
 
-        [SMA.ParameterAttribute(Position = 2, Mandatory = true)]
+        [Parameter(Position = 2, Mandatory = true)]
         public double[] Weights { get; set; }
 
-        [SMA.ParameterAttribute(Position = 3, Mandatory = true)]
+        [Parameter(Position = 3, Mandatory = true)]
         public int Degree { get; set; }
         
         protected override void ProcessRecord()

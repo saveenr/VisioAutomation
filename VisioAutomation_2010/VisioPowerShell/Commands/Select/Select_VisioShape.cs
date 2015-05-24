@@ -1,19 +1,20 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Management.Automation;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Select
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Select, "VisioShape")]
+    [Cmdlet(SMA.VerbsCommon.Select, "VisioShape")]
     public class Select_VisioShape : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapes")]
         public IVisio.Shape[] Shapes { get; set; }
         
-        [SMA.ParameterAttribute(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapeIDs")]
+        [Parameter(Mandatory = true, Position = 0, ParameterSetName = "SelectByShapeIDs")]
         public int[] ShapeIDs { get; set; }
         
-        [SMA.ParameterAttribute(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
-        public SelectionOperation Operation { get; set; }
+        [Parameter(Mandatory = true, Position=0, ParameterSetName = "SelectByOperation")] 
+        public Model.SelectionOperation Operation { get; set; }
 
         protected override void ProcessRecord()
         {
@@ -27,15 +28,15 @@ namespace VisioPowerShell.Commands
             }
             else
             {
-                if (this.Operation == SelectionOperation.All)
+                if (this.Operation == Model.SelectionOperation.All)
                 {
                     this.client.Selection.All();
                 }
-                else if (this.Operation == SelectionOperation.None)
+                else if (this.Operation == Model.SelectionOperation.None)
                 {
                     this.client.Selection.None();
                 }
-                else if (this.Operation == SelectionOperation.Invert)
+                else if (this.Operation == Model.SelectionOperation.Invert)
                 {
                     this.client.Selection.Invert();
                 }

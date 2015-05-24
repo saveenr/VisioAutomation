@@ -1,21 +1,21 @@
-using VA = VisioAutomation;
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Format
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Format, "VisioText")]
+    [Cmdlet(SMA.VerbsCommon.Format, "VisioText")]
     public class Format_VisioText : VisioCmdlet
     {
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
-        [SMA.ValidateNotNullOrEmptyAttribute]
+        [Parameter(Mandatory = false)]
+        [ValidateNotNullOrEmpty]
         public string  Font { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter Togglecase { get; set; }
 
         protected override void ProcessRecord()

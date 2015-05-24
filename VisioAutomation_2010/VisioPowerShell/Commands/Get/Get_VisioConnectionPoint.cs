@@ -1,15 +1,16 @@
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioConnectionPoint")]
     public class Get_VisioConnectionPoint : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetCells;
 
         protected override void ProcessRecord()
@@ -31,7 +32,7 @@ namespace VisioPowerShell.Commands
 
                 foreach (var point_cells in points)
                 {
-                    var cp = new ConnectionPointValues(shapeid, point_cells);
+                    var cp = new Model.ConnectionPointValues(shapeid, point_cells);
                     this.WriteObject(cp);
                 }
             }

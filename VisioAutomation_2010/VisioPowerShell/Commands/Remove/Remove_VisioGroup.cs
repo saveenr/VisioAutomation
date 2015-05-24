@@ -1,12 +1,13 @@
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Remove
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Remove, "VisioGroup")]
+    [Cmdlet(SMA.VerbsCommon.Remove, "VisioGroup")]
     public class Remove_VisioGroup : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()

@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.UI.CommonControls
+﻿namespace VisioAutomation.UI
 {
     partial class ColorSelectorLarge
     {

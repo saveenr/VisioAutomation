@@ -32,8 +32,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.colorPickerBackground = new VisioAutomation.UI.CommonControls.ColorSelectorSmall();
-            this.colorPickerForeground = new VisioAutomation.UI.CommonControls.ColorSelectorSmall();
+            this.colorPickerBackground = new ColorSelectorSmall();
+            this.colorPickerForeground = new ColorSelectorSmall();
             this.linkLabelTools = new System.Windows.Forms.LinkLabel();
             this.ucTransparency2 = new VisioAutomation.UI.TransparencyControl();
             this.ucTransparency1 = new VisioAutomation.UI.TransparencyControl();
@@ -146,9 +146,9 @@
 
         #endregion
 
-        private VisioAutomation.UI.CommonControls.ColorSelectorSmall colorPickerForeground;
+        private ColorSelectorSmall colorPickerForeground;
         private TransparencyControl ucTransparency1;
-        private VisioAutomation.UI.CommonControls.ColorSelectorSmall colorPickerBackground;
+        private ColorSelectorSmall colorPickerBackground;
         private TransparencyControl ucTransparency2;
         private System.Windows.Forms.ComboBox comboBoxPattern;
         private System.Windows.Forms.Label label1;

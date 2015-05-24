@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
-using VA=VisioAutomation;
 
-namespace VisioAutomation.UI.CommonControls
+namespace VisioAutomation.UI
 {
     public partial class ColorSelectorLarge : UserControl
     {

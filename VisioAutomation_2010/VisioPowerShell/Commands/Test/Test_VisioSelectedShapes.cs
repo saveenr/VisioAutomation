@@ -1,8 +1,9 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Management.Automation;
+using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Test
 {
-    [SMA.CmdletAttribute(SMA.VerbsDiagnostic.Test, "VisioSelectedShapes")]
+    [Cmdlet(SMA.VerbsDiagnostic.Test, "VisioSelectedShapes")]
     public class Test_VisioSelectedShapes: VisioCmdlet
     {
         // checks to see if we have any selected shapes

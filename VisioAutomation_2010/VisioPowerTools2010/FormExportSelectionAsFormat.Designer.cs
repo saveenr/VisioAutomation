@@ -38,7 +38,7 @@ namespace VisioPowerTools2010
             this.labelOutputFile = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.filenamePicker1 = new VisioAutomation.UI.CommonControls.FilenamePicker();
+            this.filenamePicker1 = new VisioAutomation.UI.FilenamePicker();
             this.labelFormat = new System.Windows.Forms.Label();
             this.labelFormatChoice = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -172,7 +172,7 @@ namespace VisioPowerTools2010
         private Label labelOutputFile;
         private Button buttonCancel;
         private Button buttonOK;
-        private VisioAutomation.UI.CommonControls.FilenamePicker filenamePicker1;
+        private VisioAutomation.UI.FilenamePicker filenamePicker1;
         private Label labelFormat;
         private Label labelFormatChoice;
     }

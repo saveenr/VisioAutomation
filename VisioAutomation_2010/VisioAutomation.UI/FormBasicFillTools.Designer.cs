@@ -31,8 +31,8 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonSwapColors = new System.Windows.Forms.Button();
-            this.colorSelectorSmallForeground = new VisioAutomation.UI.CommonControls.ColorSelectorSmall();
-            this.colorSelectorSmallBackground = new VisioAutomation.UI.CommonControls.ColorSelectorSmall();
+            this.colorSelectorSmallForeground = new ColorSelectorSmall();
+            this.colorSelectorSmallBackground = new ColorSelectorSmall();
             this.buttonCopyFgtoBg = new System.Windows.Forms.Button();
             this.buttonCopyBgToFg = new System.Windows.Forms.Button();
             this.labelfg = new System.Windows.Forms.Label();
@@ -155,8 +155,8 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonSwapColors;
-        private VisioAutomation.UI.CommonControls.ColorSelectorSmall colorSelectorSmallForeground;
-        private VisioAutomation.UI.CommonControls.ColorSelectorSmall colorSelectorSmallBackground;
+        private ColorSelectorSmall colorSelectorSmallForeground;
+        private ColorSelectorSmall colorSelectorSmallBackground;
         private System.Windows.Forms.Button buttonCopyFgtoBg;
         private System.Windows.Forms.Button buttonCopyBgToFg;
         private System.Windows.Forms.Label labelfg;

@@ -1,31 +1,32 @@
+using System.Management.Automation;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Format
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Format, "VisioShape")]
+    [Cmdlet(SMA.VerbsCommon.Format, "VisioShape")]
     public class Format_VisioShape : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public double NudgeX { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public double NudgeY { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter DistributeHorizontal { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter DistributeVertical { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
-        public VerticalAlignment AlignVertical = VerticalAlignment.None;
+        [Parameter(Mandatory = false)]
+        public Model.VerticalAlignment AlignVertical = Model.VerticalAlignment.None;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
-        public HorizontalAlignment AlignHorizontal = HorizontalAlignment.None;
+        [Parameter(Mandatory = false)]
+        public Model.HorizontalAlignment AlignHorizontal = Model.HorizontalAlignment.None;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
         protected override void ProcessRecord()
@@ -45,12 +46,12 @@ namespace VisioPowerShell.Commands
                 this.client.Arrange.Distribute(this.Shapes, VA.Drawing.Axis.YAxis);
             }
 
-            if (this.AlignVertical != VerticalAlignment.None)
+            if (this.AlignVertical != Model.VerticalAlignment.None)
             {
                 this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentVertical)this.AlignVertical);
             }
 
-            if (this.AlignHorizontal != HorizontalAlignment.None)
+            if (this.AlignHorizontal != Model.HorizontalAlignment.None)
             {
                 this.client.Arrange.Align(this.Shapes, (VA.Drawing.AlignmentHorizontal)this.AlignHorizontal);
             }

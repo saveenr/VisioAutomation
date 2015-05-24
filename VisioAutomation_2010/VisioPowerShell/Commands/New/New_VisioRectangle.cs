@@ -1,21 +1,21 @@
-using IVisio = Microsoft.Office.Interop.Visio;
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.New
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioRectangle")]
+    [Cmdlet(SMA.VerbsCommon.New, "VisioRectangle")]
     public class New_VisioRectangle : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }
 
-        [SMA.ParameterAttribute(Position = 1, Mandatory = true)]
+        [Parameter(Position = 1, Mandatory = true)]
         public double Y0 { get; set; }
 
-        [SMA.ParameterAttribute(Position = 2, Mandatory = true)]
+        [Parameter(Position = 2, Mandatory = true)]
         public double X1 { get; set; }
 
-        [SMA.ParameterAttribute(Position = 3, Mandatory = true)]
+        [Parameter(Position = 3, Mandatory = true)]
         public double Y1 { get; set; }
 
         protected override void ProcessRecord()

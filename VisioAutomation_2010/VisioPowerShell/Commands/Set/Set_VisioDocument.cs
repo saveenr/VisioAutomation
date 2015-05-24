@@ -1,18 +1,18 @@
-using VA = VisioAutomation;
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioDocument")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioDocument")]
     public class Set_VisioDocument : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true, ParameterSetName = "Name")]
-        [SMA.ValidateNotNullOrEmptyAttribute]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Name")]
+        [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true, ParameterSetName = "Doc")]
-        [SMA.ValidateNotNullAttribute]
+        [Parameter(Position = 0, Mandatory = true, ParameterSetName = "Doc")]
+        [ValidateNotNull]
         public IVisio.Document Document  { get; set; }
         
         protected override void ProcessRecord()

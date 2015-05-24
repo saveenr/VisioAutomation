@@ -1,20 +1,20 @@
 using System.Collections.Generic;
+using System.Management.Automation;
 using VACONNECT=VisioAutomation.Shapes.Connections;
 using SMA = System.Management.Automation;
-using VA=VisioAutomation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioDirectedEdge")]
     public class Get_VisioDirectedEdge : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetShapeObjects { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter Raw { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter TreatUndirectedAsBidirectional { get; set; }
 
         protected override void ProcessRecord()
@@ -58,7 +58,7 @@ namespace VisioPowerShell.Commands
         {
             foreach (var edge in edges)
             {
-                var e = new DirectedEdge(
+                var e = new Model.DirectedEdge(
                     edge.From.ID,
                     edge.To.ID,
                     edge.Connector.ID

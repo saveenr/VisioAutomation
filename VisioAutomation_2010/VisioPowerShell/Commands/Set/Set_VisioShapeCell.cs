@@ -1,25 +1,24 @@
 ﻿using System.Collections;
 using System.Linq;
+using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
-using VA = VisioAutomation;
-using SRCCON = VisioAutomation.ShapeSheet.SRCConstants;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioShapeCell")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioShapeCell")]
     public class Set_VisioShapeCell : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false, Position = 0)]
+        [Parameter(Mandatory = false, Position = 0)]
         public Hashtable Hashtable { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes { get; set; }
 
         protected override void ProcessRecord()

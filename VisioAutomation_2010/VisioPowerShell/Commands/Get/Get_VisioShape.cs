@@ -1,22 +1,21 @@
 using System;
 using System.Linq;
-using VA = VisioAutomation;
+using System.Management.Automation;
 using SMA = System.Management.Automation;
-using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioShape")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioShape")]
     public class Get_VisioShape : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = false)]
+        [Parameter(Position = 0, Mandatory = false)]
         public object[] NameOrID;
 
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter Recursive;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter SubSelected;
 
         protected override void ProcessRecord()

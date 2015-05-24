@@ -1,4 +1,4 @@
-namespace VisioPowerShell
+namespace VisioPowerShell.Model
 {
     public class UserDefinedCellvalues
     {

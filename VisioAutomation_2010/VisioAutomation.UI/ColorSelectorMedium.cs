@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace VisioAutomation.UI.CommonControls
+namespace VisioAutomation.UI
 {
     public partial class ColorSelectorMedium : UserControl
     {

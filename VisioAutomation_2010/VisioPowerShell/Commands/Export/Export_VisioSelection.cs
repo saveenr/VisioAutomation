@@ -1,17 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Export
 {
-    [SMA.CmdletAttribute(SMA.VerbsData.Export, "VisioSelectionAsXHTML")]
+    [Cmdlet(SMA.VerbsData.Export, "VisioSelectionAsXHTML")]
     public class Export_VisioSelectionAsXHTML : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
-        [SMA.ValidateNotNullOrEmptyAttribute]
+        [Parameter(Position = 0, Mandatory = true)]
+        [ValidateNotNullOrEmpty]
         public string Filename;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter Overwrite;
 
         protected override void ProcessRecord()

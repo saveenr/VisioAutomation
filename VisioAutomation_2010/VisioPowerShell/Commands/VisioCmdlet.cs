@@ -1,9 +1,7 @@
 using System.IO;
-using IVisio = Microsoft.Office.Interop.Visio;
-using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell
+namespace VisioPowerShell.Commands
 {
     public class VisioCmdlet : SMA.Cmdlet
     {
@@ -32,7 +30,7 @@ namespace VisioPowerShell
                 // for the lifetime of this cmdlet
 
                 VisioCmdlet._client = VisioCmdlet._client ?? new VisioAutomation.Scripting.Client(null);
-                VisioCmdlet._client.Context = new VisioPsContext(this);
+                VisioCmdlet._client.Context = new Model.VisioPsContext(this);
                 return VisioCmdlet._client;
 
                 // Must always setup the client output
@@ -58,7 +56,7 @@ namespace VisioPowerShell
             if (!File.Exists(file))
             {
                 this.WriteVerbose("Filename: {0}",file);
-                this.WriteVerbose("Abs Filename: {0}", Path.GetFullPath(file));
+                this.WriteVerbose("Abs Filename: {0}", System.IO.Path.GetFullPath(file));
                 var exc = new FileNotFoundException(file);
                 var er = new SMA.ErrorRecord(exc, "FILE_NOT_FOUND", SMA.ErrorCategory.ResourceUnavailable, null);
                 this.WriteError(er);

@@ -1,20 +1,20 @@
-using VA = VisioAutomation;
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioPageLayout")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioPageLayout")]
     public class Set_VisioPageLayout : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false)] 
-        public PageOrientation Orientation = PageOrientation.None;
+        [Parameter(Mandatory = false)] 
+        public Model.PageOrientation Orientation = Model.PageOrientation.None;
         
-        [SMA.ParameterAttribute(Mandatory = false)] 
+        [Parameter(Mandatory = false)] 
         public string BackgroundPage = null;
 
         protected override void ProcessRecord()
         {
-            if (this.Orientation != PageOrientation.None)
+            if (this.Orientation != Model.PageOrientation.None)
             {
                 this.client.Page.SetOrientation((VisioAutomation.Pages.PrintPageOrientation) this.Orientation);
             }

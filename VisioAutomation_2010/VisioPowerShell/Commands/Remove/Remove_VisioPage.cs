@@ -1,15 +1,16 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Management.Automation;
+using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Remove
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Remove, "VisioPage")]
+    [Cmdlet(SMA.VerbsCommon.Remove, "VisioPage")]
     public class Remove_VisioPage : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false, Position=0, ValueFromPipeline = true)]
+        [Parameter(Mandatory = false, Position=0, ValueFromPipeline = true)]
         public IVisio.Page[] Pages;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter Renumber;
 
         protected override void ProcessRecord()

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace VisioAutomation.UI.CommonControls
+namespace VisioAutomation.UI
 {
     public partial class Slider : UserControl
     {

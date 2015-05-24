@@ -1,15 +1,16 @@
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioCustomProperty")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioCustomProperty")]
     public class Get_VisioCustomProperty : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetCells;
 
         protected override void ProcessRecord()
@@ -31,7 +32,7 @@ namespace VisioPowerShell.Commands
                 {
                     string propname = propname_propcells_pair.Key;
                     var propcells = propname_propcells_pair.Value;
-                    var cpf = new CustomPropertyValues(shape_id, propname, propcells);
+                    var cpf = new Model.CustomPropertyValues(shape_id, propname, propcells);
                     this.WriteObject(cpf);
                 }
             }

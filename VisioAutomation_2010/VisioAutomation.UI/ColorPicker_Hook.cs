@@ -6,21 +6,22 @@ namespace VisioAutomation.UI
     /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
     /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookstructures/cwpstruct.asp
     /// http://www.codeproject.com/KB/cs/globalhook.aspx
+    
     public class Hook
     {
         public delegate void KeyboardDelegate(KeyEventArgs e);
 
         public KeyboardDelegate OnKeyDown;
         private int m_hHook = 0;
-        private ColorPicker_NativeMethods.HookProc m_HookCallback;
+        private NativeMethods.HookProc m_HookCallback;
 
         public void SetHook(bool enable)
         {
             if (enable && this.m_hHook == 0)
             {
                 this.m_HookCallback = this.HookCallbackProc;
-                System.Reflection.Module module = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0];
-                this.m_hHook = ColorPicker_NativeMethods.SetWindowsHookEx(WinUtil.WH_KEYBOARD_LL, this.m_HookCallback,
+                var module = System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0];
+                this.m_hHook = NativeMethods.SetWindowsHookEx(WinUtil.WH_KEYBOARD_LL, this.m_HookCallback,
                                                                      System.Runtime.InteropServices.Marshal.GetHINSTANCE
                                                                          (module),
                                                                      0);
@@ -35,7 +36,7 @@ namespace VisioAutomation.UI
 
             if (enable == false && this.m_hHook != 0)
             {
-                ColorPicker_NativeMethods.UnhookWindowsHookEx(this.m_hHook);
+                NativeMethods.UnhookWindowsHookEx(this.m_hHook);
                 this.m_hHook = 0;
             }
         }
@@ -44,14 +45,12 @@ namespace VisioAutomation.UI
         {
             if (nCode < 0)
             {
-                return ColorPicker_NativeMethods.CallNextHookEx(this.m_hHook, nCode, wParam, lParam);
+                return NativeMethods.CallNextHookEx(this.m_hHook, nCode, wParam, lParam);
             }
             else
             {
                 //Marshall the data from the callback.
-                WinUtil.KeyboardHookStruct hookstruct =
-                    (WinUtil.KeyboardHookStruct)
-                    System.Runtime.InteropServices.Marshal.PtrToStructure(lParam, typeof(WinUtil.KeyboardHookStruct));
+                var hookstruct = (WinUtil.KeyboardHookStruct) System.Runtime.InteropServices.Marshal.PtrToStructure(lParam, typeof(WinUtil.KeyboardHookStruct));
 
                 if (this.OnKeyDown != null && wParam.ToInt32() == WinUtil.WM_KEYDOWN)
                 {
@@ -83,7 +82,7 @@ namespace VisioAutomation.UI
                 int result = 0;
                 if (this.m_hHook != 0)
                 {
-                    result = ColorPicker_NativeMethods.CallNextHookEx(this.m_hHook, nCode, wParam, lParam);
+                    result = NativeMethods.CallNextHookEx(this.m_hHook, nCode, wParam, lParam);
                 }
 
                 return result;

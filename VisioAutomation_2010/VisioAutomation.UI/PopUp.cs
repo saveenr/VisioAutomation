@@ -15,10 +15,10 @@
  */
 
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
-namespace PascalGanaye.Popup
+namespace VisioAutomation.UI
 {
     public class Popup : Component
     {

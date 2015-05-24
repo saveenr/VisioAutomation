@@ -1,15 +1,16 @@
+using System.Management.Automation;
 using SMA = System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Get
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Get, "VisioUserDefinedCell")]
+    [Cmdlet(SMA.VerbsCommon.Get, "VisioUserDefinedCell")]
     public class Get_VisioUserDefinedCell : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Shape[] Shapes;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter GetCells;
 
         protected override void ProcessRecord()
@@ -27,7 +28,7 @@ namespace VisioPowerShell.Commands
                 int shapeid = kv.Key.ID;
                 foreach (var udc in kv.Value)
                 {
-                    var udcell_vals = new UserDefinedCellvalues(shapeid, udc.Name, udc.Value.Formula.Value,udc.Prompt.Formula.Value);
+                    var udcell_vals = new Model.UserDefinedCellvalues(shapeid, udc.Name, udc.Value.Formula.Value,udc.Prompt.Formula.Value);
                     this.WriteObject(udcell_vals);
                 }
             }

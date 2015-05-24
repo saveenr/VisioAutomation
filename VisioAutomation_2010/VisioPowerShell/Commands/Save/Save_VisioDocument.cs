@@ -1,12 +1,13 @@
-﻿using SMA = System.Management.Automation;
+﻿using System.Management.Automation;
+using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Save
 {
-    [SMA.CmdletAttribute(SMA.VerbsData.Save, "VisioDocument")]
+    [Cmdlet(SMA.VerbsData.Save, "VisioDocument")]
     public class Save_VisioDocument : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = false)]
-        [SMA.ValidateNotNullOrEmptyAttribute]
+        [Parameter(Position = 0, Mandatory = false)]
+        [ValidateNotNullOrEmpty]
         public string Filename;
 
         protected override void ProcessRecord()

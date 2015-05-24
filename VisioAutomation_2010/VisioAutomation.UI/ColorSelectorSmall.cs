@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace VisioAutomation.UI.CommonControls
+namespace VisioAutomation.UI
 {
     public partial class ColorSelectorSmall : UserControl
     {
@@ -16,7 +16,7 @@ namespace VisioAutomation.UI.CommonControls
         {
             this.colorform = new ColorSelectorLarge();
             this.colorform.Color = this.Color;
-            var popup = new PascalGanaye.Popup.Popup(this.colorform, this);
+            var popup = new Popup(this.colorform, this);
             popup.AnimationSpeed = 0;
             popup.DropDownClosed += this.popup_DropDownClosed;
             popup.Show();

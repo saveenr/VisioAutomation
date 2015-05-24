@@ -1,6 +1,4 @@
-using VA=VisioAutomation;
-
-namespace VisioPowerShell
+namespace VisioPowerShell.Model
 {
     public enum VerticalAlignment
     {

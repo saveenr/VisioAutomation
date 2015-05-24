@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 using System.Linq;
+using System.Management.Automation;
 using IVisio = Microsoft.Office.Interop.Visio;
 using SMA = System.Management.Automation;
-using VA = VisioAutomation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.Set
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.Set, "VisioPageCell")]
+    [Cmdlet(SMA.VerbsCommon.Set, "VisioPageCell")]
     public class Set_VisioPageCell: VisioCmdlet
     {
-        [SMA.ParameterAttribute(Mandatory = true,Position=0)] 
+        [Parameter(Mandatory = true,Position=0)] 
         public Hashtable Hashtable  { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter BlastGuards { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public SMA.SwitchParameter TestCircular { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public IVisio.Page[] Pages { get; set; }
 
         protected override void ProcessRecord()

@@ -79,7 +79,7 @@
     </Compile>
     <Compile Include="ColorPickerUtil.cs" />
     <Compile Include="ColorPicker_Hook.cs" />
-    <Compile Include="ColorPicker_NativeMethods.cs" />
+    <Compile Include="NativeMethods.cs" />
     <Compile Include="ColorPicker_WinUtil.cs" />
     <Compile Include="ColorUtil.cs" />
     <Compile Include="DirectionRelative.cs" />

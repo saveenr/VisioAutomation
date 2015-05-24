@@ -7,12 +7,12 @@ namespace TestVisioAutomation
     [TestClass]
     public class VisioPowerShellTests
     {
-        private static VisioPSContext visiops_session = new VisioPSContext();
+        private static readonly VisioPSContext visiops_session = new VisioPSContext();
 
         [ClassInitialize]
         public static void PSTestFixtureSetup(TestContext context)
         {
-            var new_visio_application = new VisioPowerShell.Commands.New_VisioApplication();
+            var new_visio_application = new VisioPowerShell.Commands.New.New_VisioApplication();
             var visio_app = new_visio_application.Invoke();
         }
 

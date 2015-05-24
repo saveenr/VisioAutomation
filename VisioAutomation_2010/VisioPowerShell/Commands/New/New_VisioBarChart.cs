@@ -1,27 +1,28 @@
+using System.Management.Automation;
 using VA = VisioAutomation;
 using SMA = System.Management.Automation;
 
-namespace VisioPowerShell.Commands
+namespace VisioPowerShell.Commands.New
 {
-    [SMA.CmdletAttribute(SMA.VerbsCommon.New, "VisioBarChart")]
+    [Cmdlet(SMA.VerbsCommon.New, "VisioBarChart")]
     public class New_VisioBarChart : VisioCmdlet
     {
-        [SMA.ParameterAttribute(Position = 0, Mandatory = true)]
+        [Parameter(Position = 0, Mandatory = true)]
         public double X0 { get; set; }
 
-        [SMA.ParameterAttribute(Position = 1, Mandatory = true)]
+        [Parameter(Position = 1, Mandatory = true)]
         public double Y0 { get; set; }
 
-        [SMA.ParameterAttribute(Position = 2, Mandatory = true)]
+        [Parameter(Position = 2, Mandatory = true)]
         public double X1 { get; set; }
 
-        [SMA.ParameterAttribute(Position = 3, Mandatory = true)]
+        [Parameter(Position = 3, Mandatory = true)]
         public double Y1 { get; set; }
 
-        [SMA.ParameterAttribute(Mandatory = true)]
+        [Parameter(Mandatory = true)]
         public double[] Values;
 
-        [SMA.ParameterAttribute(Mandatory = false)]
+        [Parameter(Mandatory = false)]
         public string[] Labels;
 
         protected override void ProcessRecord()

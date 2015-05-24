@@ -1,4 +1,4 @@
-﻿namespace VisioAutomation.UI.CommonControls
+﻿namespace VisioAutomation.UI
 {
     partial class ColorSelectorMedium
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.smallColorPicker1 = new VisioAutomation.UI.CommonControls.ColorSelectorSmall();
-            this.colorSelectorSmall1 = new VisioAutomation.UI.CommonControls.ColorSelectorSmall();
+            this.smallColorPicker1 = new ColorSelectorSmall();
+            this.colorSelectorSmall1 = new ColorSelectorSmall();
             this.SuspendLayout();
             // 
             // smallColorPicker1
