@@ -109,12 +109,127 @@ namespace VisioPowerTools2010
 
             string html_filename = System.IO.Path.Combine(this.get_dest_folder(), this.output_basename);
 
-
-            SimpleHTML5Writer writer;
-
             try
             {
-                writer = new SimpleHTML5Writer(html_filename);
+                using (var writer = new SimpleHtml5Writer(html_filename))
+                {
+                    writer.DocType("HTML5");
+                    writer.Start("html");
+
+                    writer.Start("head");
+                    writer.Start("style");
+                    writer.Text(".stencilname { font-family: \"Segoe UI Light\"; font-size:30pt}");
+                    writer.Text(".mastername { font-family: \"Segoe UI\"; font-size:10pt}");
+                    writer.Text("td { padding-bottom: 50pt;");
+                    writer.End("style");
+                    writer.End("head");
+
+                    writer.Start("body");
+
+
+                    foreach (var stencilfilename in stencilfiles)
+                    {
+                        writer.Start("table");
+                        var stencilfilename_basename = System.IO.Path.GetFileName(stencilfilename);
+
+                        writer.Start("tr");
+                        writer.Start("td");
+                        writer.Attribute("colspan", "3");
+                        writer.Attribute("class", "stencilname");
+                        writer.Text(stencilfilename_basename);
+                        writer.End("td");
+                        writer.End("tr");
+
+                        var stencilfilename_basename_wo_ext = System.IO.Path.GetFileNameWithoutExtension(stencilfilename);
+                        this.log("Loading \"{0}\"", stencilfilename_basename);
+                        var doc = docs.Add(stencilfilename);
+
+                        string stencilname_safe = FormGetMasterImages.MakeSafeFilename(stencilfilename_basename_wo_ext, '_');
+                        string cur_destfolder = System.IO.Path.Combine(destfolder, stencilname_safe);
+
+                        try
+                        {
+                            this.create_folder_safe(cur_destfolder);
+                        }
+                        catch (Exception)
+                        {
+                            return;
+                        }
+
+                        var masters = doc.Masters;
+                        int num_masters = masters.Count;
+
+                        for (int i = 1; i <= num_masters; i++)
+                        {
+                            writer.Start("tr");
+                            writer.Attribute("style", "vertical-align:top");
+                            var master = masters[i];
+                            this.log("    master {0}", master.Name);
+                            string mastername_safe = FormGetMasterImages.MakeSafeFilename(master.Name, '_');
+
+                            string picture_dir = System.IO.Path.Combine(cur_destfolder, "pictures");
+                            string icon_dir = System.IO.Path.Combine(cur_destfolder, "icons");
+
+                            this.create_folder_safe(picture_dir);
+                            this.create_folder_safe(icon_dir);
+
+                            string picture_filename = System.IO.Path.Combine(picture_dir, mastername_safe + ".png");
+                            string icon_filename = System.IO.Path.Combine(icon_dir, mastername_safe + ".png");
+
+                            if (!System.IO.File.Exists(icon_filename))
+                            {
+                                FormGetMasterImages.SaveMasterIcon(icon_filename, master);
+                            }
+                            else
+                            {
+                                this.log("        icon PNG already exists. Skipping.");
+                            }
+
+                            if (!System.IO.File.Exists(picture_filename))
+                            {
+                                FormGetMasterImages.SaveMasterPicture(picture_filename, master);
+                            }
+                            else
+                            {
+                                this.log("        picture PNG already exists. Skipping.");
+                            }
+
+                            writer.Start("td");
+                            writer.Attribute("width", "200");
+                            writer.Attribute("class", "mastername");
+                            writer.Text(master.NameU);
+                            writer.End("td");
+
+                            writer.Start("td");
+                            writer.Attribute("width", "150");
+                            writer.Start("img");
+                            string icon_src = icon_filename.Substring(destfolder.Length + 1);
+                            writer.Attribute("src", icon_src);
+                            writer.End("img");
+                            writer.End("td");
+
+                            writer.Start("td");
+                            writer.Attribute("width", "250");
+                            writer.Start("img");
+                            string picture_src = picture_filename.Substring(destfolder.Length + 1);
+                            writer.Attribute("src", picture_src);
+                            writer.End("img");
+                            writer.End("td");
+
+                            writer.End("tr");
+                        }
+
+                        this.log("Closing stencil doc");
+                        doc.Close();
+                        writer.End("table");
+
+                    }
+
+                    this.log("Finished.");
+
+                    writer.End("body");
+                    writer.End("html");                    
+                }
 
             }
             catch (Exception)
@@ -123,123 +238,6 @@ namespace VisioPowerTools2010
                 return;
             }
 
-            writer.DocType("HTML5");
-            writer.Start("html");
-
-            writer.Start("head");
-            writer.Start("style");
-            writer.Text(".stencilname { font-family: \"Segoe UI Light\"; font-size:30pt}");
-            writer.Text(".mastername { font-family: \"Segoe UI\"; font-size:10pt}");
-            writer.Text("td { padding-bottom: 50pt;");
-            writer.End("style");
-            writer.End("head");
-
-            writer.Start("body");
-
-
-            foreach (var stencilfilename in stencilfiles)
-            {
-                writer.Start("table");
-                var stencilfilename_basename = System.IO.Path.GetFileName(stencilfilename);
-
-                writer.Start("tr");
-                writer.Start("td");
-                writer.Attribute("colspan","3");
-                writer.Attribute("class", "stencilname");
-                writer.Text(stencilfilename_basename);
-                writer.End("td");
-                writer.End("tr");
-                
-                var stencilfilename_basename_wo_ext = System.IO.Path.GetFileNameWithoutExtension(stencilfilename);
-                this.log("Loading \"{0}\"", stencilfilename_basename);
-                var doc = docs.Add(stencilfilename);
-
-                string stencilname_safe = FormGetMasterImages.MakeSafeFilename(stencilfilename_basename_wo_ext, '_');
-                string cur_destfolder = System.IO.Path.Combine(destfolder, stencilname_safe);
-
-                try
-                {
-                    this.create_folder_safe(cur_destfolder);
-                }
-                catch (Exception)
-                {
-                    return;
-                }
-
-                var masters = doc.Masters;
-                int num_masters = masters.Count;
-
-                for (int i = 1; i <= num_masters; i++)
-                {
-                    writer.Start("tr");
-                    writer.Attribute("style","vertical-align:top");
-                    var master = masters[i];
-                    this.log("    master {0}", master.Name);
-                    string mastername_safe = FormGetMasterImages.MakeSafeFilename(master.Name, '_');
-
-                    string picture_dir = System.IO.Path.Combine(cur_destfolder, "pictures");
-                    string icon_dir = System.IO.Path.Combine(cur_destfolder, "icons");
-
-                    this.create_folder_safe(picture_dir);
-                    this.create_folder_safe(icon_dir);
-
-                    string picture_filename = System.IO.Path.Combine(picture_dir, mastername_safe + ".png");
-                    string icon_filename = System.IO.Path.Combine(icon_dir, mastername_safe + ".png");
-
-                    if (!System.IO.File.Exists(icon_filename))
-                    {
-                        FormGetMasterImages.SaveMasterIcon(icon_filename, master);
-                    }
-                    else
-                    {
-                        this.log("        icon PNG already exists. Skipping.");
-                    }
-
-                    if (!System.IO.File.Exists(picture_filename))
-                    {
-                        FormGetMasterImages.SaveMasterPicture(picture_filename, master);
-                    }
-                    else
-                    {
-                        this.log("        picture PNG already exists. Skipping.");                        
-                    }
-
-                    writer.Start("td");
-                    writer.Attribute("width", "200");
-                    writer.Attribute("class", "mastername");
-                    writer.Text(master.NameU);
-                    writer.End("td");
-
-                    writer.Start("td");
-                    writer.Attribute("width", "150");
-                    writer.Start("img");
-                    string icon_src = icon_filename.Substring(destfolder.Length+1);
-                    writer.Attribute("src", icon_src);                    
-                    writer.End("img");
-                    writer.End("td");
-
-                    writer.Start("td");
-                    writer.Attribute("width", "250");
-                    writer.Start("img");
-                    string picture_src = picture_filename.Substring(destfolder.Length + 1);
-                    writer.Attribute("src", picture_src);
-                    writer.End("img");
-                    writer.End("td");
-
-                    writer.End("tr");
-                }
-
-                this.log("Closing stencil doc");
-                doc.Close();
-                writer.End("table");
-
-            }
-
-            this.log("Finished.");
-
-            writer.End("body");
-            writer.End("html");
-            writer.Close();
         }
 
         private static void SaveMasterPicture(string picture_filename, Master master)
