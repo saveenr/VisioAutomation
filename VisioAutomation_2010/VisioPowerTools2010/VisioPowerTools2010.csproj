@@ -309,6 +309,10 @@
     <None Include="VisioPowerTools2010_100years_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VisioAutomation.Scripting\VisioAutomation.Scripting.csproj">
+      <Project>{17035996-44F8-4506-BAAB-EA121475B936}</Project>
+      <Name>VisioAutomation.Scripting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VisioAutomation.UI\VisioAutomation.UI.csproj">
       <Project>{fb28507d-c378-42b4-9050-2fbed2cd68fe}</Project>
       <Name>VisioAutomation.UI</Name>
