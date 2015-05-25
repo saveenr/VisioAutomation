@@ -78,27 +78,8 @@ namespace VisioAutomation.Shapes.UserDefinedCells
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<UserDefinedCell, string>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<UserDefinedCellQuery> lazy_query = new System.Lazy<UserDefinedCellQuery>();
+        private static System.Lazy<VA.ShapeSheet.Common.UserDefinedCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.UserDefinedCellQuery>();
 
-        class UserDefinedCellQuery : VAQUERY.CellQuery
-        {
-            public VAQUERY.CellColumn Value { get; set; }
-            public VAQUERY.CellColumn Prompt { get; set; }
 
-            public UserDefinedCellQuery()
-            {
-                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionUser);
-                this.Value = sec.AddCell(ShapeSheet.SRCConstants.User_Value,"User");
-                this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.User_Prompt,"Prompt");
-            }
-
-            public UserDefinedCell GetCells(IList<ShapeSheet.CellData<string>> row)
-            {
-                var cells = new UserDefinedCell();
-                cells.Value = row[this.Value];
-                cells.Prompt = row[this.Prompt];
-                return cells;
-            }
-        }
     }
 }

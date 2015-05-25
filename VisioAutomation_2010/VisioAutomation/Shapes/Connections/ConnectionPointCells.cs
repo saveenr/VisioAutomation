@@ -38,37 +38,8 @@ namespace VisioAutomation.Shapes.Connections
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ConnectionPointCellQuery> lazy_query = new System.Lazy<ConnectionPointCellQuery>();
+        private static System.Lazy<VA.ShapeSheet.Common.ConnectionPointCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.ConnectionPointCellQuery>();
 
-        class ConnectionPointCellQuery : VAQUERY.CellQuery
-        {
-            public VAQUERY.CellColumn DirX { get; set; }
-            public VAQUERY.CellColumn DirY { get; set; }
-            public VAQUERY.CellColumn Type { get; set; }
-            public VAQUERY.CellColumn X { get; set; }
-            public VAQUERY.CellColumn Y { get; set; }
-            
-            public ConnectionPointCellQuery()
-            {
-                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionConnectionPts);
-                this.DirX = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirX,"Connections_DirX");
-                this.DirY = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirY,"Connections_DirY");
-                this.Type = sec.AddCell(ShapeSheet.SRCConstants.Connections_Type,"Connections_Type");
-                this.X = sec.AddCell(ShapeSheet.SRCConstants.Connections_X,"Connections_X");
-                this.Y = sec.AddCell(ShapeSheet.SRCConstants.Connections_Y,"Connections_Y");
-            }
 
-            public ConnectionPointCells GetCells(IList<ShapeSheet.CellData<double>> row)
-            {
-                var cells = new ConnectionPointCells();
-                cells.X = row[this.X];
-                cells.Y = row[this.Y];
-                cells.DirX = row[this.DirX].ToInt();
-                cells.DirY = row[this.DirY].ToInt();
-                cells.Type = row[this.Type].ToInt();
-
-                return cells;
-            }
-        }
     }
 }

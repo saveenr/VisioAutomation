@@ -56,64 +56,6 @@ namespace VisioAutomation.Text
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ParagraphCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ParagraphFormatCellQuery>  lazy_query = new System.Lazy<ParagraphFormatCellQuery>();
-
-        class ParagraphFormatCellQuery : VAQUERY.CellQuery
-        {
-            public VAQUERY.CellColumn Bullet { get; set; }
-            public VAQUERY.CellColumn BulletFont { get; set; }
-            public VAQUERY.CellColumn BulletFontSize { get; set; }
-            public VAQUERY.CellColumn BulletString { get; set; } // NOTE: This is never used
-            public VAQUERY.CellColumn Flags { get; set; }
-            public VAQUERY.CellColumn HorzAlign { get; set; }
-            public VAQUERY.CellColumn IndentFirst { get; set; }
-            public VAQUERY.CellColumn IndentLeft { get; set; }
-            public VAQUERY.CellColumn IndentRight { get; set; }
-            public VAQUERY.CellColumn LocalizeBulletFont { get; set; }
-            public VAQUERY.CellColumn SpaceAfter { get; set; }
-            public VAQUERY.CellColumn SpaceBefore { get; set; }
-            public VAQUERY.CellColumn SpaceLine { get; set; }
-            public VAQUERY.CellColumn TextPosAfterBullet { get; set; }
-
-            public ParagraphFormatCellQuery() 
-            {
-                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionParagraph);
-                this.Bullet = sec.AddCell(ShapeSheet.SRCConstants.Para_Bullet, "Para_Bullet");
-                this.BulletFont = sec.AddCell(ShapeSheet.SRCConstants.Para_BulletFont, "Para_BulletFont");
-                this.BulletFontSize = sec.AddCell(ShapeSheet.SRCConstants.Para_BulletFontSize, "Para_BulletFontSize");
-                this.BulletString = sec.AddCell(ShapeSheet.SRCConstants.Para_BulletStr, "Para_BulletStr");
-                this.Flags = sec.AddCell(ShapeSheet.SRCConstants.Para_Flags, "Para_Flags");
-                this.HorzAlign = sec.AddCell(ShapeSheet.SRCConstants.Para_HorzAlign, "Para_HorzAlign");
-                this.IndentFirst = sec.AddCell(ShapeSheet.SRCConstants.Para_IndFirst, "Para_IndFirst");
-                this.IndentLeft = sec.AddCell(ShapeSheet.SRCConstants.Para_IndLeft, "Para_IndLeft");
-                this.IndentRight = sec.AddCell(ShapeSheet.SRCConstants.Para_IndRight, "Para_IndRight");
-                this.LocalizeBulletFont = sec.AddCell(ShapeSheet.SRCConstants.Para_LocalizeBulletFont, "Para_LocalizeBulletFont");
-                this.SpaceAfter = sec.AddCell(ShapeSheet.SRCConstants.Para_SpAfter, "Para_SpAfter");
-                this.SpaceBefore = sec.AddCell(ShapeSheet.SRCConstants.Para_SpBefore, "Para_SpBefore");
-                this.SpaceLine = sec.AddCell(ShapeSheet.SRCConstants.Para_SpLine, "Para_SpLine");
-                this.TextPosAfterBullet = sec.AddCell(ShapeSheet.SRCConstants.Para_TextPosAfterBullet, "Para_TextPosAfterBullet");
-            }
-
-            public ParagraphCells GetCells(IList<ShapeSheet.CellData<double>> row)
-            {
-                var cells = new ParagraphCells();
-                cells.IndentFirst = row[this.IndentFirst];
-                cells.IndentLeft = row[this.IndentLeft];
-                cells.IndentRight = row[this.IndentRight];
-                cells.SpacingAfter = row[this.SpaceAfter];
-                cells.SpacingBefore = row[this.SpaceBefore];
-                cells.SpacingLine = row[this.SpaceLine];
-                cells.HorizontalAlign = row[this.HorzAlign].ToInt();
-                cells.Bullet = row[this.Bullet].ToInt();
-                cells.BulletFont = row[this.BulletFont].ToInt();
-                cells.BulletFontSize = row[this.BulletFontSize].ToInt();
-                cells.LocBulletFont = row[this.LocalizeBulletFont].ToInt();
-                cells.TextPosAfterBullet = row[this.TextPosAfterBullet];
-                cells.Flags = row[this.Flags].ToInt();
-                cells.BulletString = ""; // TODO: Figure out some way of getting this
-
-                return cells;
-            }
-        }
+        private static System.Lazy<VA.ShapeSheet.Common.ParagraphFormatCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.ParagraphFormatCellQuery>();
     }
 } 

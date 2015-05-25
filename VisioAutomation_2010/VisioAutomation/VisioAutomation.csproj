@@ -131,6 +131,7 @@
     <Compile Include="Scripting\XmlUtil.cs" />
     <Compile Include="Scripting\Zoom.cs" />
     <Compile Include="ShapeSheet\Query\CellColumnType.cs" />
+    <Compile Include="ShapeSheet\Query\Common\CommonQueries.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
     <Compile Include="Drawing\DrawingSurface.cs" />

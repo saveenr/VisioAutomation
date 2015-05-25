@@ -45,45 +45,6 @@ namespace VisioAutomation.Shapes.Controls
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ControlCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ControlCellQuery> lazy_query = new System.Lazy<ControlCellQuery>();
-
-        class ControlCellQuery : VAQUERY.CellQuery
-        {
-            public VAQUERY.CellColumn CanGlue { get; set; }
-            public VAQUERY.CellColumn Tip { get; set; }
-            public VAQUERY.CellColumn X { get; set; }
-            public VAQUERY.CellColumn Y { get; set; }
-            public VAQUERY.CellColumn YBehavior { get; set; }
-            public VAQUERY.CellColumn XBehavior { get; set; }
-            public VAQUERY.CellColumn XDynamics { get; set; }
-            public VAQUERY.CellColumn YDynamics { get; set; }
-
-            public ControlCellQuery() 
-            {
-                var sec = this.AddSection(IVisio.VisSectionIndices.visSectionControls);
-                this.CanGlue = sec.AddCell(ShapeSheet.SRCConstants.Controls_CanGlue, "Controls_CanGlue");
-                this.Tip = sec.AddCell(ShapeSheet.SRCConstants.Controls_Tip, "Controls_Tip");
-                this.X = sec.AddCell(ShapeSheet.SRCConstants.Controls_X, "Controls_X");
-                this.Y = sec.AddCell(ShapeSheet.SRCConstants.Controls_Y, "Controls_Y");
-                this.YBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_YCon, "Controls_YCon");
-                this.XBehavior = sec.AddCell(ShapeSheet.SRCConstants.Controls_XCon, "Controls_XCon");
-                this.XDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_XDyn, "Controls_XDyn");
-                this.YDynamics = sec.AddCell(ShapeSheet.SRCConstants.Controls_YDyn, "Controls_YDyn");
-            }
-
-            public ControlCells GetCells(IList<ShapeSheet.CellData<double>> row)
-            {
-                var cells = new ControlCells();
-                cells.CanGlue = row[this.CanGlue].ToInt();
-                cells.Tip = row[this.Tip].ToInt();
-                cells.X = row[this.X];
-                cells.Y = row[this.Y];
-                cells.YBehavior = row[this.YBehavior].ToInt();
-                cells.XBehavior = row[this.XBehavior].ToInt();
-                cells.XDynamics = row[this.XDynamics].ToInt();
-                cells.YDynamics = row[this.YDynamics].ToInt();
-                return cells;
-            }
-        }
+        private static System.Lazy<VA.ShapeSheet.Common.ControlCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.ControlCellQuery>();
     }
 }

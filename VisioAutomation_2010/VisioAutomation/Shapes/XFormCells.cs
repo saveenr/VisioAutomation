@@ -41,43 +41,7 @@ namespace VisioAutomation.Shapes
             return ShapeSheet.CellGroups.CellGroup._GetCells<XFormCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<XFormCellQuery> lazy_query = new System.Lazy<XFormCellQuery>();
+        private static System.Lazy<VA.ShapeSheet.Common.XFormCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.XFormCellQuery>();
 
-        class XFormCellQuery : VAQUERY.CellQuery
-        {
-            public VAQUERY.CellColumn Width { get; set; }
-            public VAQUERY.CellColumn Height { get; set; }
-            public VAQUERY.CellColumn PinX { get; set; }
-            public VAQUERY.CellColumn PinY { get; set; }
-            public VAQUERY.CellColumn LocPinX { get; set; }
-            public VAQUERY.CellColumn LocPinY { get; set; }
-            public VAQUERY.CellColumn Angle { get; set; }
-
-            public XFormCellQuery()
-            {
-                this.PinX = this.AddCell(ShapeSheet.SRCConstants.PinX, "PinX");
-                this.PinY = this.AddCell(ShapeSheet.SRCConstants.PinY, "PinY");
-                this.LocPinX = this.AddCell(ShapeSheet.SRCConstants.LocPinX, "LocPinX");
-                this.LocPinY = this.AddCell(ShapeSheet.SRCConstants.LocPinY, "LocPinY");
-                this.Width = this.AddCell(ShapeSheet.SRCConstants.Width, "Width");
-                this.Height = this.AddCell(ShapeSheet.SRCConstants.Height, "Height");
-                this.Angle = this.AddCell(ShapeSheet.SRCConstants.Angle, "Angle");
-            }
-
-            public XFormCells GetCells(IList<ShapeSheet.CellData<double>> row)
-            {
-                var cells = new XFormCells
-                {
-                    PinX = row[this.PinX],
-                    PinY = row[this.PinY],
-                    LocPinX = row[this.LocPinX],
-                    LocPinY = row[this.LocPinY],
-                    Width = row[this.Width],
-                    Height = row[this.Height],
-                    Angle = row[this.Angle]
-                };
-                return cells;
-            }
-        }
     }
 }

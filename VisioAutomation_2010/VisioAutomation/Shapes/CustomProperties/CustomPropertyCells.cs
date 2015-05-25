@@ -138,7 +138,7 @@ namespace VisioAutomation.Shapes.CustomProperties
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<CustomPropertyCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<CustomPropertyCellQuery> lazy_query = new System.Lazy<CustomPropertyCellQuery>();
+        private static System.Lazy<VA.ShapeSheet.Common.CustomPropertyCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.CustomPropertyCellQuery>();
 
         public static CustomPropertyCells FromValue(object value)
         {
@@ -174,51 +174,5 @@ namespace VisioAutomation.Shapes.CustomProperties
         }
     }
 
-    class CustomPropertyCellQuery : VAQUERY.CellQuery
-    {
-        public VAQUERY.CellColumn SortKey { get; set; }
-        public VAQUERY.CellColumn Ask { get; set; }
-        public VAQUERY.CellColumn Calendar { get; set; }
-        public VAQUERY.CellColumn Format { get; set; }
-        public VAQUERY.CellColumn Invis { get; set; }
-        public VAQUERY.CellColumn Label { get; set; }
-        public VAQUERY.CellColumn LangID { get; set; }
-        public VAQUERY.CellColumn Prompt { get; set; }
-        public VAQUERY.CellColumn Value { get; set; }
-        public VAQUERY.CellColumn Type { get; set; }
-
-        public CustomPropertyCellQuery() 
-        {
-            var sec = this.AddSection(IVisio.VisSectionIndices.visSectionProp);
-
-            this.SortKey = sec.AddCell(ShapeSheet.SRCConstants.Prop_SortKey, "Prop_SortKey");
-            this.Ask = sec.AddCell(ShapeSheet.SRCConstants.Prop_Ask, "Prop_Ask");
-            this.Calendar = sec.AddCell(ShapeSheet.SRCConstants.Prop_Calendar, "Prop_Calendar");
-            this.Format = sec.AddCell(ShapeSheet.SRCConstants.Prop_Format, "Prop_Format");
-            this.Invis = sec.AddCell(ShapeSheet.SRCConstants.Prop_Invisible, "Prop_Invisible");
-            this.Label = sec.AddCell(ShapeSheet.SRCConstants.Prop_Label, "Prop_Label");
-            this.LangID = sec.AddCell(ShapeSheet.SRCConstants.Prop_LangID, "Prop_LangID");
-            this.Prompt = sec.AddCell(ShapeSheet.SRCConstants.Prop_Prompt, "Prop_Prompt");
-            this.Type = sec.AddCell(ShapeSheet.SRCConstants.Prop_Type, "Prop_Type");
-            this.Value = sec.AddCell(ShapeSheet.SRCConstants.Prop_Value, "Prop_Value");
-
-        }
-
-        public CustomPropertyCells GetCells(IList<ShapeSheet.CellData<double>> row)
-        {
-            var cells = new CustomPropertyCells();
-            cells.Value = row[this.Value];
-            cells.Calendar = row[this.Calendar].ToInt();
-            cells.Format = row[this.Format];
-            cells.Invisible = row[this.Invis].ToInt();
-            cells.Label = row[this.Label];
-            cells.LangId = row[this.LangID].ToInt();
-            cells.Prompt = row[this.Prompt];
-            cells.SortKey = row[this.SortKey].ToInt();
-            cells.Type = row[this.Type].ToInt();
-            cells.Ask = row[this.Ask].ToBool();
-            return cells;
-        }
-    }
 
 }
