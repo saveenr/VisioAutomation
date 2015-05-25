@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class TextBlockCellQuery : CellQuery
+    class TextBlockCellsQuery : CellQuery
     {
         public Query.CellColumn BottomMargin { get; set; }
         public Query.CellColumn LeftMargin { get; set; }
@@ -19,7 +19,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn TxtLocPinY { get; set; }
         public Query.CellColumn TxtAngle { get; set; }
 
-        public TextBlockCellQuery() :
+        public TextBlockCellsQuery() :
             base()
         {
             this.BottomMargin = this.AddCell(ShapeSheet.SRCConstants.BottomMargin, "BottomMargin");

@@ -41,7 +41,7 @@ namespace VisioAutomation.Shapes
             return ShapeSheet.CellGroups.CellGroup._GetCells<XFormCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Query.Common.XFormCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.XFormCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.XFormCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.XFormCellsQuery>();
 
     }
 }

@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class ShapeFormatCellQuery : CellQuery
+    class ShapeFormatCellsQuery : CellQuery
     {
         public Query.CellColumn FillBkgnd { get; set; }
         public Query.CellColumn FillBkgndTrans { get; set; }
@@ -28,7 +28,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn LineWeight { get; set; }
         public Query.CellColumn Rounding { get; set; }
 
-        public ShapeFormatCellQuery()
+        public ShapeFormatCellsQuery()
         {
             this.FillBkgnd = this.AddCell(ShapeSheet.SRCConstants.FillBkgnd, "FillBkgnd");
             this.FillBkgndTrans = this.AddCell(ShapeSheet.SRCConstants.FillBkgndTrans, "FillBkgndTrans");
@@ -61,7 +61,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
 
         public VisioAutomation.Shapes.FormatCells GetCells(System.Collections.Generic.IList<ShapeSheet.CellData<double>> row)
         {
-            var cells = new VisioAutomation.Shapes.FormatCells();
+            var cells = new Shapes.FormatCells();
             cells.FillBkgnd = Extensions.CellDataMethods.ToInt(row[this.FillBkgnd]);
             cells.FillBkgndTrans = row[this.FillBkgndTrans];
             cells.FillForegnd = Extensions.CellDataMethods.ToInt(row[this.FillForegnd]);

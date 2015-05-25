@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class ControlCellQuery : CellQuery
+    class ControlCellsQuery : CellQuery
     {
         public Query.CellColumn CanGlue { get; set; }
         public Query.CellColumn Tip { get; set; }
@@ -11,7 +11,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn XDynamics { get; set; }
         public Query.CellColumn YDynamics { get; set; }
 
-        public ControlCellQuery()
+        public ControlCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionControls);
             this.CanGlue = sec.AddCell(ShapeSheet.SRCConstants.Controls_CanGlue, "Controls_CanGlue");

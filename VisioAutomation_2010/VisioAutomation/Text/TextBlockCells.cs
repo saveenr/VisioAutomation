@@ -59,6 +59,6 @@ namespace VisioAutomation.Text
             return ShapeSheet.CellGroups.CellGroup._GetCells<TextBlockCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<ShapeSheet.Query.Common.TextBlockCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.TextBlockCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.TextBlockCellsQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.TextBlockCellsQuery>();
     }
 }

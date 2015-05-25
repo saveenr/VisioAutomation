@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class ShapeLayoutCellQuery : CellQuery
+    class ShapeLayoutCellsQuery : CellQuery
     {
         public Query.CellColumn ConFixedCode { get; set; }
         public Query.CellColumn ConLineJumpCode { get; set; }
@@ -21,7 +21,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn DisplayLevel { get; set; }
         public Query.CellColumn Relationships { get; set; }
 
-        public ShapeLayoutCellQuery() :
+        public ShapeLayoutCellsQuery() :
             base()
         {
             this.ConFixedCode = this.AddCell(ShapeSheet.SRCConstants.ConFixedCode, "ConFixedCode");

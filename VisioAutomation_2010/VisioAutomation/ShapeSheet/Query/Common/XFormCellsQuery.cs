@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class XFormCellQuery : CellQuery
+    class XFormCellsQuery : CellQuery
     {
         public Query.CellColumn Width { get; set; }
         public Query.CellColumn Height { get; set; }
@@ -10,7 +10,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn LocPinY { get; set; }
         public Query.CellColumn Angle { get; set; }
 
-        public XFormCellQuery()
+        public XFormCellsQuery()
         {
             this.PinX = this.AddCell(ShapeSheet.SRCConstants.PinX, "PinX");
             this.PinY = this.AddCell(ShapeSheet.SRCConstants.PinY, "PinY");

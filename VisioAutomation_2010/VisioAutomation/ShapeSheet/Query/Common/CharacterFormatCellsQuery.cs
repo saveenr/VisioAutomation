@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class CharacterFormatCellQuery : CellQuery
+    class CharacterFormatCellsQuery : CellQuery
     {
         public Query.CellColumn Font { get; set; }
         public Query.CellColumn Style { get; set; }
@@ -25,7 +25,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn Strikethru { get; set; }
         public Query.CellColumn UseVertical { get; set; }
 
-        public CharacterFormatCellQuery()
+        public CharacterFormatCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionCharacter);
             this.Color = sec.AddCell(ShapeSheet.SRCConstants.CharColor, "CharColor");

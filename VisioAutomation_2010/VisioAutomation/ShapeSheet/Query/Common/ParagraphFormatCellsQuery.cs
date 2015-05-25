@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class ParagraphFormatCellQuery : CellQuery
+    class ParagraphFormatCellsQuery : CellQuery
     {
         public Query.CellColumn Bullet { get; set; }
         public Query.CellColumn BulletFont { get; set; }
@@ -17,7 +17,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn SpaceLine { get; set; }
         public Query.CellColumn TextPosAfterBullet { get; set; }
 
-        public ParagraphFormatCellQuery()
+        public ParagraphFormatCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionParagraph);
             this.Bullet = sec.AddCell(ShapeSheet.SRCConstants.Para_Bullet, "Para_Bullet");

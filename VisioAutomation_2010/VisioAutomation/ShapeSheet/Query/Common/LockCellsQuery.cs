@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class LockCellQuery : CellQuery
+    class LockCellsQuery : CellQuery
     {
         public Query.CellColumn LockAspect { get; set; }
         public Query.CellColumn LockBegin { get; set; }
@@ -23,7 +23,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn LockVtxEdit { get; set; }
         public Query.CellColumn LockWidth { get; set; }
 
-        public LockCellQuery()
+        public LockCellsQuery()
         {
             this.LockAspect = this.AddCell(ShapeSheet.SRCConstants.LockAspect, "LockAspect");
             this.LockBegin = this.AddCell(ShapeSheet.SRCConstants.LockBegin, "LockBegin");

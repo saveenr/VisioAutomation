@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class ConnectionPointCellQuery : CellQuery
+    class ConnectionPointCellsQuery : CellQuery
     {
         public Query.CellColumn DirX { get; set; }
         public Query.CellColumn DirY { get; set; }
@@ -8,7 +8,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn X { get; set; }
         public Query.CellColumn Y { get; set; }
 
-        public ConnectionPointCellQuery()
+        public ConnectionPointCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionConnectionPts);
             this.DirX = sec.AddCell(ShapeSheet.SRCConstants.Connections_DirX, "Connections_DirX");

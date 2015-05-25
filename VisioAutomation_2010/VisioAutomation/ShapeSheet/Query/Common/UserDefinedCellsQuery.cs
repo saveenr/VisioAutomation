@@ -1,11 +1,11 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class UserDefinedCellQuery : CellQuery
+    class UserDefinedCellsQuery : CellQuery
     {
         public Query.CellColumn Value { get; set; }
         public Query.CellColumn Prompt { get; set; }
 
-        public UserDefinedCellQuery()
+        public UserDefinedCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionUser);
             this.Value = sec.AddCell(ShapeSheet.SRCConstants.User_Value, "User");

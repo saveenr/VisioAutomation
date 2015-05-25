@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class PageCellQuery : CellQuery
+    class PageCellsQuery : CellQuery
     {
         public Query.CellColumn PageLeftMargin { get; set; }
         public Query.CellColumn CenterX { get; set; }
@@ -70,7 +70,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn AvoidPageBreaks { get; set; }
         public Query.CellColumn DrawingResizeType { get; set; }
 
-        public PageCellQuery()
+        public PageCellsQuery()
         {
             this.PageLeftMargin = this.AddCell(ShapeSheet.SRCConstants.PageLeftMargin, "PageLeftMargin");
             this.CenterX = this.AddCell(ShapeSheet.SRCConstants.CenterX, "CenterX");

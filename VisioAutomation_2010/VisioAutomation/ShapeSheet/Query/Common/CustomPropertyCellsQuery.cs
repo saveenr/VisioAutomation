@@ -1,6 +1,6 @@
 namespace VisioAutomation.ShapeSheet.Query.Common
 {
-    class CustomPropertyCellQuery : CellQuery
+    class CustomPropertyCellsQuery : CellQuery
     {
         public Query.CellColumn SortKey { get; set; }
         public Query.CellColumn Ask { get; set; }
@@ -13,7 +13,7 @@ namespace VisioAutomation.ShapeSheet.Query.Common
         public Query.CellColumn Value { get; set; }
         public Query.CellColumn Type { get; set; }
 
-        public CustomPropertyCellQuery()
+        public CustomPropertyCellsQuery()
         {
             var sec = this.AddSection(Microsoft.Office.Interop.Visio.VisSectionIndices.visSectionProp);
 
