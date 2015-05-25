@@ -87,7 +87,7 @@
   <ItemGroup>
     <Compile Include="Commands\Close\Close_VisioDocument.cs" />
     <Compile Include="Commands\Close\Close_VisioMaster.cs" />
-    <Compile Include="Commands\Format\Format-VisioText.cs" />
+    <Compile Include="Commands\Format\Format_VisioText.cs" />
     <Compile Include="Commands\New\New_VisioContainer.cs" />
     <Compile Include="Commands\Open\Open_VisioMaster.cs" />
     <Compile Include="CellNameDictionary.cs" />
@@ -161,7 +161,7 @@
     <Compile Include="Commands\New\New_VisioGroup.cs" />
     <Compile Include="Commands\New\New_VisioPage.cs" />
     <Compile Include="Commands\New\New_VisioApplication.cs" />
-    <Compile Include="Commands\Format\Format-VisioShape.cs" />
+    <Compile Include="Commands\Format\Format_VisioShape.cs" />
     <Compile Include="Commands\Resize\Resize_VisioPage.cs" />
     <Compile Include="Commands\Set\Set_VisioWindowSize.cs" />
     <Compile Include="Model\VerticalAlignment.cs" />
