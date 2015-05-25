@@ -156,7 +156,7 @@ namespace VisioAutomation.Pages
             return ShapeSheet.CellGroups.CellGroup._GetCells<PageCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VA.ShapeSheet.Common.PageCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.PageCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.PageCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.PageCellQuery>();
 
 
     }

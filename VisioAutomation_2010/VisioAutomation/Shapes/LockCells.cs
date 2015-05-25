@@ -69,7 +69,7 @@ namespace VisioAutomation.Shapes
             return ShapeSheet.CellGroups.CellGroup._GetCells<LockCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VA.ShapeSheet.Common.LockCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.LockCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.LockCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.LockCellQuery>();
 
 
     }

@@ -38,7 +38,7 @@ namespace VisioAutomation.Shapes.Connections
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ConnectionPointCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VA.ShapeSheet.Common.ConnectionPointCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.ConnectionPointCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.ConnectionPointCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.ConnectionPointCellQuery>();
 
 
     }

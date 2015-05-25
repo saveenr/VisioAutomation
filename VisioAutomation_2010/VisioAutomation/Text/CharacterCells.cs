@@ -73,7 +73,7 @@ namespace VisioAutomation.Text
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<CharacterCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VA.ShapeSheet.Common.CharacterFormatCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.CharacterFormatCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.CharacterFormatCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.CharacterFormatCellQuery>();
 
 
     }

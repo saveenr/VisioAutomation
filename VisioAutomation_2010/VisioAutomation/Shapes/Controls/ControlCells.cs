@@ -45,6 +45,6 @@ namespace VisioAutomation.Shapes.Controls
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ControlCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VA.ShapeSheet.Common.ControlCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.ControlCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.ControlCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.ControlCellQuery>();
     }
 }

@@ -56,6 +56,6 @@ namespace VisioAutomation.Text
             return ShapeSheet.CellGroups.CellGroupMultiRow._GetCells<ParagraphCells, double>(shape, query, query.GetCells);
         }
 
-        private static System.Lazy<VA.ShapeSheet.Common.ParagraphFormatCellQuery> lazy_query = new System.Lazy<VA.ShapeSheet.Common.ParagraphFormatCellQuery>();
+        private static System.Lazy<ShapeSheet.Query.Common.ParagraphFormatCellQuery> lazy_query = new System.Lazy<ShapeSheet.Query.Common.ParagraphFormatCellQuery>();
     }
 } 
