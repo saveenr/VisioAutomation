@@ -175,23 +175,7 @@ namespace VisioAutomation.Scripting.Commands
             verboselog(string.Format("Done writing XHTML file \"{0}\"", filename));
         }
 
-        public void ExportSelectionToXAML(string filename)
-        {
-            if (filename == null)
-            {
-                throw new System.ArgumentNullException("filename");
-            }
-
-            if (!this.Client.Selection.HasShapes())
-            {
-                return;
-            }
-
-            var selection = this.Client.Selection.Get();
-            ExportCommands.ExportSelectionAsXAML2(selection, filename, s => this.Client.Output.WriteVerbose(s));
-        }
-
-        public static void ExportSelectionAsXAML2(
+        public static void ExportSelectionAsXAML(
             IVisio.Selection sel,
             string filename,
             System.Action<string> verboselog)
