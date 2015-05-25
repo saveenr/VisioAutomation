@@ -8,7 +8,6 @@ namespace VisioAutomation.Text
 {
     public class ParagraphCells : ShapeSheet.CellGroups.CellGroupMultiRow
     {
-        ////public string BulletString;
         public ShapeSheet.CellData<double> IndentFirst { get; set; }
         public ShapeSheet.CellData<double> IndentRight { get; set; }
         public ShapeSheet.CellData<double> IndentLeft { get; set; }
