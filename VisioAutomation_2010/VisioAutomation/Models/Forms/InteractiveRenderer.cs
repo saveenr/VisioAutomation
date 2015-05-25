@@ -99,7 +99,7 @@ namespace VisioAutomation.Models.Forms
             foreach (var block in this.Blocks)
             {
                 update.SetFormulas((short)block.VisioShapeID,block.FormatCells);
-                update.SetFormulas((short)block.VisioShapeID,block.Textcells);
+                update.SetFormulas((short)block.VisioShapeID,block.TextBlockCells);
                 update.SetFormulas((short)block.VisioShapeID,block.ParagraphCells, 0);
                 update.SetFormulas((short)block.VisioShapeID,block.CharacterCells, 0);
             }

@@ -27,7 +27,7 @@
             this.ItemWidth = 2.0;
             this.ContainerFormatting = new Formatting();
             this.ContainerItemFormatting = new Formatting();
-            this.ContainerFormatting.TextCells.VerticalAlign = "0";
+            this.ContainerFormatting.TextBlockCells.VerticalAlign = "0";
         }
     }
 }

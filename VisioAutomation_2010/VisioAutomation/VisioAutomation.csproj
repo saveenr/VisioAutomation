@@ -140,7 +140,7 @@
     <Compile Include="ShapeSheet\Query\Common\ParagraphFormatCellQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\ShapeFormatCellQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\ShapeLayoutCellQuery.cs" />
-    <Compile Include="ShapeSheet\Query\Common\TextBlockFormatCellQuery.cs" />
+    <Compile Include="ShapeSheet\Query\Common\TextBlockCellQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\UserDefinedCellQuery.cs" />
     <Compile Include="ShapeSheet\Query\Common\XFormCellQuery.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
@@ -250,7 +250,7 @@
     <Compile Include="Text\Markup\CustomField.cs" />
     <Compile Include="Text\Markup\FieldBase.cs" />
     <Compile Include="Text\TextFormat.cs" />
-    <Compile Include="Text\TextCells.cs" />
+    <Compile Include="Text\TextBlockCells.cs" />
     <Compile Include="Text\TabStopAlignment.cs" />
     <Compile Include="Application\AlertResponseCode.cs" />
     <Compile Include="Drawing\Axis.cs" />

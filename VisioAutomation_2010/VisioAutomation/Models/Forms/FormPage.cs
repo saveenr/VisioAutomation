@@ -38,7 +38,7 @@ namespace VisioAutomation.Models.Forms
             var titleblock = new TextBlock(new Drawing.Size(7.5, 0.5), this.Title);
 
             int _fontid = ctx.GetFontID(this.DefaultFont);
-            titleblock.Textcells.VerticalAlign = 0;
+            titleblock.TextBlockCells.VerticalAlign = 0;
             titleblock.ParagraphCells.HorizontalAlign = 0;
             titleblock.FormatCells.LineWeight = 0;
             titleblock.FormatCells.LinePattern = 0;
@@ -59,7 +59,7 @@ namespace VisioAutomation.Models.Forms
             bodyblock.CharacterCells.Size = get_pt_string(this.BodyTextSize);
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
-            bodyblock.Textcells.VerticalAlign = 0;
+            bodyblock.TextBlockCells.VerticalAlign = 0;
             bodyblock.FormatCells.LineWeight = 0;
             bodyblock.FormatCells.LinePattern = 0;
 
