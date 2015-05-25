@@ -59,23 +59,18 @@ namespace VisioAutomation.Shapes
 
         public static IList<LockCells> GetCells(IVisio.Page page, IList<int> shapeids)
         {
-            var query = LockCells.get_query();
+            var query = LockCells.lazy_query.Value;
             return ShapeSheet.CellGroups.CellGroup._GetCells<LockCells, double>(page, shapeids, query, query.GetCells);
         }
 
         public static LockCells GetCells(IVisio.Shape shape)
         {
-            var query = LockCells.get_query();
+            var query = LockCells.lazy_query.Value;
             return ShapeSheet.CellGroups.CellGroup._GetCells<LockCells, double>(shape, query, query.GetCells);
         }
 
+        private static System.Lazy<LockCellQuery> lazy_query = new System.Lazy<LockCellQuery>();
 
-        private static LockCellQuery _mCellQuery;
-        private static LockCellQuery get_query()
-        {
-            LockCells._mCellQuery = LockCells._mCellQuery ?? new LockCellQuery();
-            return LockCells._mCellQuery;
-        }
 
         class LockCellQuery : VAQUERY.CellQuery
         {

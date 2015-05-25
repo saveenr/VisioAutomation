@@ -152,16 +152,11 @@ namespace VisioAutomation.Pages
 
         public static PageCells GetCells(IVisio.Shape shape)
         {
-            var query = PageCells.get_query();
+            var query = PageCells.lazy_query.Value;
             return ShapeSheet.CellGroups.CellGroup._GetCells<PageCells, double>(shape, query, query.GetCells);
         }
 
-        private static PageCellQuery _mCellQuery;
-        private static PageCellQuery get_query()
-        {
-            PageCells._mCellQuery = PageCells._mCellQuery ?? new PageCellQuery();
-            return PageCells._mCellQuery;
-        }
+        private static System.Lazy<PageCellQuery> lazy_query = new System.Lazy<PageCellQuery>();
 
         class PageCellQuery : VAQUERY.CellQuery
         {
