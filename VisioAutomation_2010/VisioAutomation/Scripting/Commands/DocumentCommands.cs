@@ -217,12 +217,12 @@ namespace VisioAutomation.Scripting.Commands
             
             if (name == null)
             {
-                throw new System.ArgumentNullException("name");
+                throw new System.ArgumentNullException(nameof(name));
             }
 
             if (name.Length == 0)
             {
-                throw new System.ArgumentException("name");
+                throw new System.ArgumentException(nameof(name));
             }
 
             this.Client.WriteVerbose( "Loading stencil \"{0}\"", name);

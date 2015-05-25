@@ -40,7 +40,7 @@ namespace VisioAutomation.Scripting
         {
             if (context == null)
             {
-                throw new System.ArgumentNullException();
+                throw new System.ArgumentNullException(nameof(context));
             }
             this._context = context;
 

@@ -15,7 +15,7 @@ namespace VisioAutomation.ShapeSheet.Query
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("name");
+                throw new ArgumentException(nameof(name));
             }
  
             this.Name = name;

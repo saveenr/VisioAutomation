@@ -180,7 +180,7 @@ namespace VisioAutomation.Scripting.Commands
 
             if (formulas == null)
             {
-                throw new System.ArgumentNullException("formulas");
+                throw new System.ArgumentNullException(nameof(formulas));
             }
 
             if (formulas.Any( f => f == null))
