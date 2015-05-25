@@ -72,11 +72,16 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="XamlTuneMerged, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\XamlTune.0.3.0\lib\net40\XamlTuneMerged.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +90,50 @@
     <Compile Include="Application\Logging\FileSessions.cs" />
     <Compile Include="Application\Logging\LogState.cs" />
     <Compile Include="Models\DirectedGraph\NodeUserData.cs" />
+    <Compile Include="Scripting\ArrangeHelper.cs" />
+    <Compile Include="Scripting\Client.cs" />
+    <Compile Include="Scripting\CommandSet.cs" />
+    <Compile Include="Scripting\Commands\ApplicationCommands.cs" />
+    <Compile Include="Scripting\Commands\ApplicationWindowCommands.cs" />
+    <Compile Include="Scripting\Commands\ArrangeCommands.cs" />
+    <Compile Include="Scripting\Commands\ConnectionCommands.cs" />
+    <Compile Include="Scripting\Commands\ConnectionPointCommands.cs" />
+    <Compile Include="Scripting\Commands\ControlCommands.cs" />
+    <Compile Include="Scripting\Commands\CustomPropCommands.cs" />
+    <Compile Include="Scripting\Commands\DeveloperCommands.cs" />
+    <Compile Include="Scripting\Commands\DocumentCommands.cs" />
+    <Compile Include="Scripting\Commands\DrawCommands.cs" />
+    <Compile Include="Scripting\Commands\ExportCommands.cs" />
+    <Compile Include="Scripting\Commands\FormatCommands.cs" />
+    <Compile Include="Scripting\Commands\LayerCommands.cs" />
+    <Compile Include="Scripting\Commands\MasterCommands.cs" />
+    <Compile Include="Scripting\Commands\OutputCommands.cs" />
+    <Compile Include="Scripting\Commands\PageCommands.cs" />
+    <Compile Include="Scripting\Commands\ReflectionUtil.cs" />
+    <Compile Include="Scripting\Commands\SelectionCommands.cs" />
+    <Compile Include="Scripting\Commands\ShapeSheetCommands.cs" />
+    <Compile Include="Scripting\Commands\TextCommands.cs" />
+    <Compile Include="Scripting\Commands\UserDefinedCellCommands.cs" />
+    <Compile Include="Scripting\Commands\ViewCommands.cs" />
+    <Compile Include="Scripting\Context.cs" />
+    <Compile Include="Scripting\DefaultContext.cs" />
+    <Compile Include="Scripting\DirectedGraph\ConnectorInfo.cs" />
+    <Compile Include="Scripting\DirectedGraph\DirectedGraphBuilder.cs" />
+    <Compile Include="Scripting\DirectedGraph\ShapeInfo.cs" />
+    <Compile Include="Scripting\DirectedGraph\XmlExtensions.cs" />
+    <Compile Include="Scripting\FormatCategory.cs" />
+    <Compile Include="Scripting\FormatPaintCache.cs" />
+    <Compile Include="Scripting\FormatPaintCell.cs" />
+    <Compile Include="Scripting\OrgChart\OrgChartBuilder.cs" />
+    <Compile Include="Scripting\PageNavigation.cs" />
+    <Compile Include="Scripting\RelativePosition.cs" />
+    <Compile Include="Scripting\ShapeSheetUpdate.cs" />
+    <Compile Include="Scripting\SnapCornerPosition.cs" />
+    <Compile Include="Scripting\TextCommandsUtil.cs" />
+    <Compile Include="Scripting\VisioApplicationException.cs" />
+    <Compile Include="Scripting\VisioOperationException.cs" />
+    <Compile Include="Scripting\XmlUtil.cs" />
+    <Compile Include="Scripting\Zoom.cs" />
     <Compile Include="ShapeSheet\Query\CellColumnType.cs" />
     <Compile Include="ShapeSheet\ShapeSheetHelper.cs" />
     <Compile Include="ShapeSheet\ShapeSheetSurface.cs" />
