@@ -476,12 +476,15 @@ namespace TestVisioAutomation.Scripting
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
             var app = active_page.Application;
 
+            var ver = client.Application.Version;
+            var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
+
             var stencil_type = IVisio.VisBuiltInStencilTypes.visBuiltInStencilContainers;
             var measurement_system = IVisio.VisMeasurementSystem.visMSUS;
             var containers_file = app.GetBuiltInStencilFile(stencil_type, measurement_system);
             var containers_doc = app.Documents.OpenStencil(containers_file);
             var masters = containers_doc.Masters;
-            var container_master = masters.ItemU["Plain"];
+            var container_master = masters.ItemU[cont_master_name];
             var dropped_container = client.Master.DropContainer(container_master);
 
             // Verify
@@ -524,7 +527,9 @@ namespace TestVisioAutomation.Scripting
             client.Selection.All();
 
             // Drop the container... since the rectangle is selected... it will automatically make it a member of the container
-            var dropped_container = client.Master.DropContainer("Plain");
+            var ver = client.Application.Version;
+            var cont_master_name = ver.Major >= 15 ? "Plain" : "Container 1";
+            var dropped_container = client.Master.DropContainer(cont_master_name);
 
             // Verify
             var shapes = active_page.Shapes;
